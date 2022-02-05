@@ -35,11 +35,13 @@ public class BindPropertyIntegrationTest
             BindingInfo = BindingInfo.GetBindingInfo(new[] { new BindPropertyAttribute() }),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.Method = "POST";
-            request.QueryString = new QueryString("?parameter.Name=Joey");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.Method = "POST";
+                request.QueryString = new QueryString("?parameter.Name=Joey");
+            }
+        );
 
         // Act
         var result = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -59,14 +61,18 @@ public class BindPropertyIntegrationTest
         {
             Name = "parameter",
             ParameterType = typeof(Person),
-            BindingInfo = BindingInfo.GetBindingInfo(new[] { new BindPropertyAttribute() { SupportsGet = true } }),
+            BindingInfo = BindingInfo.GetBindingInfo(
+                new[] { new BindPropertyAttribute() { SupportsGet = true } }
+            ),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.Method = "GET";
-            request.QueryString = new QueryString("?parameter.Name=Joey");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.Method = "GET";
+                request.QueryString = new QueryString("?parameter.Name=Joey");
+            }
+        );
 
         // Act
         var result = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -89,11 +95,13 @@ public class BindPropertyIntegrationTest
             BindingInfo = BindingInfo.GetBindingInfo(new[] { new BindPropertyAttribute() }),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.Method = "GET";
-            request.QueryString = new QueryString("?parameter.Name=Joey");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.Method = "GET";
+                request.QueryString = new QueryString("?parameter.Name=Joey");
+            }
+        );
 
         // Act
         var result = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -114,22 +122,27 @@ public class BindPropertyIntegrationTest
             BindingInfo = BindingInfo.GetBindingInfo(new[] { new BindPropertyAttribute() }),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.Method = "POST";
-            request.QueryString = new QueryString($"?{parameter.Name}=Joey");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.Method = "POST";
+                request.QueryString = new QueryString($"?{parameter.Name}=Joey");
+            }
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForProperty(typeof(TestController), parameter.Name);
+        var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
+            typeof(TestController),
+            parameter.Name
+        );
 
         // Act
         var result = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.False(result.IsModelSet);
@@ -150,26 +163,31 @@ public class BindPropertyIntegrationTest
             BindingInfo = BindingInfo.GetBindingInfo(new[] { new BindPropertyAttribute() }),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.Method = "POST";
-
-            if (input.HasValue)
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
             {
-                request.QueryString = new QueryString($"?{parameter.Name}={input.Value}");
+                request.Method = "POST";
+
+                if (input.HasValue)
+                {
+                    request.QueryString = new QueryString($"?{parameter.Name}={input.Value}");
+                }
             }
-        });
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForProperty(typeof(TestController), parameter.Name);
+        var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
+            typeof(TestController),
+            parameter.Name
+        );
 
         // Act
         var result = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.Equal(input.HasValue, result.IsModelSet);
@@ -183,16 +201,18 @@ public class BindPropertyIntegrationTest
     [Theory]
     [InlineData(null, false)]
     [InlineData(123, true)]
-    public async Task BindModelAsync_WithBindPageProperty_EnforcesBindRequired(int? input, bool isValid)
+    public async Task BindModelAsync_WithBindPageProperty_EnforcesBindRequired(
+        int? input,
+        bool isValid
+    )
     {
         // Arrange
         var propertyInfo = typeof(TestPage).GetProperty(nameof(TestPage.BindRequiredProperty));
         var propertyDescriptor = new PageBoundPropertyDescriptor
         {
-            BindingInfo = BindingInfo.GetBindingInfo(new[]
-            {
-                    new FromQueryAttribute { Name = propertyInfo.Name },
-                }),
+            BindingInfo = BindingInfo.GetBindingInfo(
+                new[] { new FromQueryAttribute { Name = propertyInfo.Name }, }
+            ),
             Name = propertyInfo.Name,
             ParameterType = propertyInfo.PropertyType,
             Property = propertyInfo,
@@ -207,26 +227,35 @@ public class BindPropertyIntegrationTest
             PageTypeInfo = typeInfo,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.Method = "POST";
-            if (input.HasValue)
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
             {
-                request.QueryString = new QueryString($"?{propertyDescriptor.Name}={input.Value}");
+                request.Method = "POST";
+                if (input.HasValue)
+                {
+                    request.QueryString = new QueryString(
+                        $"?{propertyDescriptor.Name}={input.Value}"
+                    );
+                }
             }
-        });
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(modelMetadataProvider);
-        var modelBinderFactory = ModelBindingTestHelper.GetModelBinderFactory(modelMetadataProvider);
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForProperty(typeof(TestPage), propertyDescriptor.Name);
+        var modelBinderFactory = ModelBindingTestHelper.GetModelBinderFactory(
+            modelMetadataProvider
+        );
+        var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
+            typeof(TestPage),
+            propertyDescriptor.Name
+        );
 
         var pageBinder = PageBinderFactory.CreatePropertyBinder(
             parameterBinder,
             modelMetadataProvider,
             modelBinderFactory,
-            actionDescriptor);
+            actionDescriptor
+        );
         var pageContext = new PageContext
         {
             ActionDescriptor = actionDescriptor,
@@ -258,7 +287,11 @@ public class BindPropertyIntegrationTest
     [InlineData("DisplayNameStringLengthProp", "abc", true)]
     [InlineData("DisplayNameStringLengthProp", "abcTooLong", false, "My Display Name")]
     public async Task BindModelAsync_WithBindProperty_EnforcesDataAnnotationsAttributes(
-        string propertyName, string input, bool isValid, string displayName = null)
+        string propertyName,
+        string input,
+        bool isValid,
+        string displayName = null
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -269,26 +302,31 @@ public class BindPropertyIntegrationTest
             BindingInfo = BindingInfo.GetBindingInfo(new[] { new BindPropertyAttribute() }),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.Method = "POST";
-
-            if (input != null)
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
             {
-                request.QueryString = new QueryString($"?{parameter.Name}={input}");
+                request.Method = "POST";
+
+                if (input != null)
+                {
+                    request.QueryString = new QueryString($"?{parameter.Name}={input}");
+                }
             }
-        });
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForProperty(typeof(TestController), parameter.Name);
+        var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
+            typeof(TestController),
+            parameter.Name
+        );
 
         // Act
         var result = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.Equal(input != null, result.IsModelSet);
@@ -302,10 +340,17 @@ public class BindPropertyIntegrationTest
 
     private class TestController
     {
-        [BindNever] public string BindNeverProp { get; set; }
-        [BindRequired] public int BindRequiredProp { get; set; }
-        [Required, StringLength(3)] public string RequiredAndStringLengthProp { get; set; }
-        [DisplayName("My Display Name"), StringLength(3)] public string DisplayNameStringLengthProp { get; set; }
+        [BindNever]
+        public string BindNeverProp { get; set; }
+
+        [BindRequired]
+        public int BindRequiredProp { get; set; }
+
+        [Required, StringLength(3)]
+        public string RequiredAndStringLengthProp { get; set; }
+
+        [DisplayName("My Display Name"), StringLength(3)]
+        public string DisplayNameStringLengthProp { get; set; }
     }
 
     private class TestPage : PageModel

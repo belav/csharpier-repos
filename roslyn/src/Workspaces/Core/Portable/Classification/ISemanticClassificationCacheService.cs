@@ -27,7 +27,10 @@ namespace Microsoft.CodeAnalysis.Classification
         /// were cached classifications, but none that intersected the provided <paramref name="textSpan"/>.
         /// </summary>
         Task<ImmutableArray<ClassifiedSpan>> GetCachedSemanticClassificationsAsync(
-            Document document, TextSpan textSpan, CancellationToken cancellationToken);
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
     }
 
     [ExportWorkspaceService(typeof(ISemanticClassificationCacheService)), Shared]
@@ -35,11 +38,12 @@ namespace Microsoft.CodeAnalysis.Classification
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSemanticClassificationCacheService()
-        {
-        }
+        public DefaultSemanticClassificationCacheService() { }
 
-        public Task<ImmutableArray<ClassifiedSpan>> GetCachedSemanticClassificationsAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken)
-            => SpecializedTasks.Default<ImmutableArray<ClassifiedSpan>>();
+        public Task<ImmutableArray<ClassifiedSpan>> GetCachedSemanticClassificationsAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.Default<ImmutableArray<ClassifiedSpan>>();
     }
 }

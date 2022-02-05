@@ -16,10 +16,7 @@ namespace System.Speech.Synthesis
         #region public Properties
         public VoiceInfo Voice
         {
-            get
-            {
-                return _voice;
-            }
+            get { return _voice; }
         }
 
         #endregion

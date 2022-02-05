@@ -52,13 +52,20 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer
-                {
-                    Id = 1,
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
-                });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Items = new[]
+                        {
+                            new Item { Code = 1 },
+                            new Item { Code = 3 },
+                            new Item { Code = 5 }
+                        }
+                    }
+                );
 
                 base.Seed(context);
             }
@@ -69,11 +76,14 @@ namespace AutoMapper.IntegrationTests
             public IEnumerable<int> ItemCodes { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Customer, CustomerViewModel>();
-                cfg.CreateProjection<Item, ItemModel>();
-            });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerViewModel>();
+                    cfg.CreateProjection<Item, ItemModel>();
+                }
+            );
 
         [Fact]
         public void Can_map_to_ienumerable()

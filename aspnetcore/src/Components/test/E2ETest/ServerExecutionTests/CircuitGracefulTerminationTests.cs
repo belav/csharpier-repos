@@ -18,19 +18,23 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-public class CircuitGracefulTerminationTests : ServerTestBase<BasicTestAppServerSiteFixture<ServerStartup>>, IDisposable
+public class CircuitGracefulTerminationTests
+    : ServerTestBase<BasicTestAppServerSiteFixture<ServerStartup>>,
+      IDisposable
 {
     public CircuitGracefulTerminationTests(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture, output) { }
 
     public TaskCompletionSource<object> GracefulDisconnectCompletionSource { get; private set; }
     public TestSink Sink { get; private set; }
-    public List<(Extensions.Logging.LogLevel level, string eventIdName)> Messages { get; private set; }
+    public List<(Extensions.Logging.LogLevel level, string eventIdName)> Messages
+    {
+        get;
+        private set;
+    }
 
     public override async Task InitializeAsync()
     {
@@ -47,7 +51,9 @@ public class CircuitGracefulTerminationTests : ServerTestBase<BasicTestAppServer
         Browser.MountTestComponent<GracefulTermination>();
         Browser.Equal("Graceful Termination", () => Browser.Exists(By.TagName("h1")).Text);
 
-        GracefulDisconnectCompletionSource = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+        GracefulDisconnectCompletionSource = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         Sink = _serverFixture.Host.Services.GetRequiredService<TestSink>();
         Messages = new List<(Extensions.Logging.LogLevel level, string eventIdName)>();
         Sink.MessageLogged += Log;
@@ -61,8 +67,14 @@ public class CircuitGracefulTerminationTests : ServerTestBase<BasicTestAppServer
         await Task.WhenAny(Task.Delay(10000), GracefulDisconnectCompletionSource.Task);
 
         // Assert
-        Assert.Contains((Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"), Messages.ToArray());
-        Assert.Contains((Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"), Messages.ToArray());
+        Assert.Contains(
+            (Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"),
+            Messages.ToArray()
+        );
+        Assert.Contains(
+            (Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"),
+            Messages.ToArray()
+        );
     }
 
     [Fact]
@@ -74,8 +86,14 @@ public class CircuitGracefulTerminationTests : ServerTestBase<BasicTestAppServer
 
         // Assert
         Assert.True(GracefulDisconnectCompletionSource.Task.IsCompletedSuccessfully);
-        Assert.Contains((Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"), Messages.ToArray());
-        Assert.Contains((Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"), Messages.ToArray());
+        Assert.Contains(
+            (Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"),
+            Messages.ToArray()
+        );
+        Assert.Contains(
+            (Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"),
+            Messages.ToArray()
+        );
     }
 
     [Fact]
@@ -87,8 +105,14 @@ public class CircuitGracefulTerminationTests : ServerTestBase<BasicTestAppServer
 
         // Assert
         Assert.Equal(GracefulDisconnectCompletionSource.Task, task);
-        Assert.Contains((Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"), Messages.ToArray());
-        Assert.Contains((Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"), Messages.ToArray());
+        Assert.Contains(
+            (Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"),
+            Messages.ToArray()
+        );
+        Assert.Contains(
+            (Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"),
+            Messages.ToArray()
+        );
     }
 
     [Fact]
@@ -100,8 +124,14 @@ public class CircuitGracefulTerminationTests : ServerTestBase<BasicTestAppServer
         await Task.WhenAny(Task.Delay(10000), GracefulDisconnectCompletionSource.Task);
 
         // Assert
-        Assert.DoesNotContain((Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"), Messages.ToArray());
-        Assert.DoesNotContain((Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"), Messages.ToArray());
+        Assert.DoesNotContain(
+            (Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"),
+            Messages.ToArray()
+        );
+        Assert.DoesNotContain(
+            (Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"),
+            Messages.ToArray()
+        );
     }
 
     [Fact]
@@ -113,8 +143,14 @@ public class CircuitGracefulTerminationTests : ServerTestBase<BasicTestAppServer
         await Task.WhenAny(Task.Delay(10000), GracefulDisconnectCompletionSource.Task);
 
         // Assert
-        Assert.DoesNotContain((Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"), Messages.ToArray());
-        Assert.DoesNotContain((Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"), Messages.ToArray());
+        Assert.DoesNotContain(
+            (Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"),
+            Messages.ToArray()
+        );
+        Assert.DoesNotContain(
+            (Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"),
+            Messages.ToArray()
+        );
     }
 
     [Fact]
@@ -126,13 +162,22 @@ public class CircuitGracefulTerminationTests : ServerTestBase<BasicTestAppServer
         await Task.WhenAny(Task.Delay(10000), GracefulDisconnectCompletionSource.Task);
 
         // Assert
-        Assert.DoesNotContain((Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"), Messages.ToArray());
-        Assert.DoesNotContain((Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"), Messages.ToArray());
+        Assert.DoesNotContain(
+            (Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully"),
+            Messages.ToArray()
+        );
+        Assert.DoesNotContain(
+            (Extensions.Logging.LogLevel.Debug, "CircuitDisconnectedPermanently"),
+            Messages.ToArray()
+        );
     }
 
     private void Log(WriteContext wc)
     {
-        if ((Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully") == (wc.LogLevel, wc.EventId.Name))
+        if (
+            (Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully")
+            == (wc.LogLevel, wc.EventId.Name)
+        )
         {
             GracefulDisconnectCompletionSource.TrySetResult(null);
         }

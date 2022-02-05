@@ -7,29 +7,29 @@ using System.Linq.Expressions;
 
 namespace Moq.Matchers
 {
-	internal class LazyEvalMatcher : IMatcher
-	{
-		private Expression expression;
+    internal class LazyEvalMatcher : IMatcher
+    {
+        private Expression expression;
 
-		public LazyEvalMatcher(Expression expression)
-		{
-			this.expression = expression;
-		}
+        public LazyEvalMatcher(Expression expression)
+        {
+            this.expression = expression;
+        }
 
-		public bool Matches(object argument, Type parameterType)
-		{
-			var eval = Evaluator.PartialEval(this.expression);
-			if (eval.NodeType == ExpressionType.Constant)
-			{
-				return object.Equals(((ConstantExpression)eval).Value, argument);
-			}
+        public bool Matches(object argument, Type parameterType)
+        {
+            var eval = Evaluator.PartialEval(this.expression);
+            if (eval.NodeType == ExpressionType.Constant)
+            {
+                return object.Equals(((ConstantExpression)eval).Value, argument);
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		public void SetupEvaluatedSuccessfully(object argument, Type parameterType)
-		{
-			Debug.Assert(this.Matches(argument, parameterType));
-		}
-	}
+        public void SetupEvaluatedSuccessfully(object argument, Type parameterType)
+        {
+            Debug.Assert(this.Matches(argument, parameterType));
+        }
+    }
 }

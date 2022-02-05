@@ -16,11 +16,7 @@ public class DefaultCodeTargetBuilderTest
 
         var builder = new DefaultCodeTargetBuilder(codeDocument, options);
 
-        var extensions = new ICodeTargetExtension[]
-        {
-                new MyExtension1(),
-                new MyExtension2(),
-        };
+        var extensions = new ICodeTargetExtension[] { new MyExtension1(), new MyExtension2(), };
 
         for (var i = 0; i < extensions.Length; i++)
         {
@@ -35,11 +31,7 @@ public class DefaultCodeTargetBuilderTest
         Assert.Equal(extensions, target.Extensions);
     }
 
-    private class MyExtension1 : ICodeTargetExtension
-    {
-    }
+    private class MyExtension1 : ICodeTargetExtension { }
 
-    private class MyExtension2 : ICodeTargetExtension
-    {
-    }
+    private class MyExtension2 : ICodeTargetExtension { }
 }

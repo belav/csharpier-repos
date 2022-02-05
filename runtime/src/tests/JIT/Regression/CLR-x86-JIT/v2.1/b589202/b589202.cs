@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 class Program
 {
     static int Main()
@@ -18,8 +19,7 @@ class Program
     {
         for (int i = 0; i < 10; ++i)
         {
-            if (String.IsNullOrEmpty(x))
-            { }
+            if (String.IsNullOrEmpty(x)) { }
         }
     }
 }

@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
 
         public bool Succeeded { get; set; } = true;
 
@@ -58,20 +59,28 @@ namespace JIT.HardwareIntrinsics.General
 
             UInt16 value = TestLibrary.Generator.GetUInt16();
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.CreateScalar), new Type[] { typeof(UInt16) })
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.CreateScalar), new Type[] { typeof(UInt16) })
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector128<UInt16>)(result), value);
         }
 
-        private void ValidateResult(Vector128<UInt16> result, UInt16 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<UInt16> result,
+            UInt16 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt16[] resultElements = new UInt16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(UInt16[] resultElements, UInt16 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt16[] resultElements,
+            UInt16 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -93,9 +102,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.CreateScalar(UInt16): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.CreateScalar(UInt16): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

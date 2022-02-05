@@ -6,14 +6,13 @@ using System.Collections.Generic;
 
 //Try to allocate in such a way that card marking path is hit often
 //That happens when Gen2 objects reference objects in Gen0 or Gen1
-//This test exercises gc_heap::mark_through_cards_for_segments 
+//This test exercises gc_heap::mark_through_cards_for_segments
 namespace List_CrdMrk
 {
     class Node
     {
         public Node next = null;
         public Object oRef = null;
-
     }
 
     class List_CrdMrk
@@ -22,7 +21,8 @@ namespace List_CrdMrk
         public static int ITERATIONS = 20;
         public static int STEP = 10;
         public static int SEED = 1234;
-        public static Node root=null;
+        public static Node root = null;
+
         static void Main(string[] args)
         {
             ParseArgs(args);
@@ -32,7 +32,7 @@ namespace List_CrdMrk
 
             Node current = root;
             //create LISTSIZE nodes
-            for (int i = 0; i < LISTSIZE-1; i++)
+            for (int i = 0; i < LISTSIZE - 1; i++)
             {
                 current.next = new Node();
                 current = current.next;
@@ -41,12 +41,12 @@ namespace List_CrdMrk
             //Make sure nodes get in gen2
             GC.Collect();
             GC.Collect();
-            
+
             Random Rand = new Random(SEED);
             //Allocate oRef for some of the nodes
             current = root;
-        
-            for (int i = 0; i < LISTSIZE/STEP; i++)
+
+            for (int i = 0; i < LISTSIZE / STEP; i++)
             {
                 int pos = Rand.Next(0, STEP);
                 AdvanceCurrent(ref current, pos);
@@ -55,14 +55,14 @@ namespace List_CrdMrk
                 current.oRef = bArr;
                 AdvanceCurrent(ref current, STEP - pos);
             }
-         
+
             Console.WriteLine("Done initial allocation");
-            
+
             //iterate deleting the old refs and allocating new ones
             Node current2;
             for (int k = 0; k < ITERATIONS; k++)
             {
-                current = root;             
+                current = root;
                 for (int i = 0; i < LISTSIZE / STEP; i++)
                 {
                     //delete the old ref for this section
@@ -84,7 +84,7 @@ namespace List_CrdMrk
                     current.oRef = bArr;
                     AdvanceCurrent(ref current, STEP - pos);
                 }
-             
+
                 Console.WriteLine("Done iter " + k);
             }
             GC.KeepAlive(root);
@@ -93,19 +93,25 @@ namespace List_CrdMrk
         //advance the current pointer
         static void AdvanceCurrent(ref Node cur, int count)
         {
-           // Console.WriteLine("advancing" + count);
+            // Console.WriteLine("advancing" + count);
             for (int i = 0; i < count; i++)
             {
                 cur = cur.next;
             }
         }
+
         static void ParseArgs(string[] args)
         {
             if (args.Length > 0)
             {
                 if (args[0].CompareTo("/?") == 0)
                 {
-                    Console.WriteLine("Usage: [ArraySize(default {0})] [Iterations(default {1})] [Step(default {2})] [RandomSeed]", LISTSIZE, ITERATIONS, STEP);
+                    Console.WriteLine(
+                        "Usage: [ArraySize(default {0})] [Iterations(default {1})] [Step(default {2})] [RandomSeed]",
+                        LISTSIZE,
+                        ITERATIONS,
+                        STEP
+                    );
                     System.Environment.Exit(0);
                 }
                 else

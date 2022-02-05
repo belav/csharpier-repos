@@ -22,8 +22,14 @@ public class ListenOptions : IConnectionBuilder, IMultiplexedConnectionBuilder
 {
     internal const HttpProtocols DefaultHttpProtocols = HttpProtocols.Http1AndHttp2;
 
-    internal readonly List<Func<ConnectionDelegate, ConnectionDelegate>> _middleware = new List<Func<ConnectionDelegate, ConnectionDelegate>>();
-    internal readonly List<Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>> _multiplexedMiddleware = new List<Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>>();
+    internal readonly List<Func<ConnectionDelegate, ConnectionDelegate>> _middleware = new List<
+        Func<ConnectionDelegate, ConnectionDelegate>
+    >();
+    internal readonly List<
+        Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>
+    > _multiplexedMiddleware = new List<
+        Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>
+    >();
 
     internal ListenOptions(EndPoint endPoint)
     {
@@ -35,10 +41,7 @@ public class ListenOptions : IConnectionBuilder, IMultiplexedConnectionBuilder
         EndPoint = new UnixDomainSocketEndPoint(socketPath);
     }
 
-    internal ListenOptions(ulong fileHandle)
-        : this(fileHandle, FileHandleType.Auto)
-    {
-    }
+    internal ListenOptions(ulong fileHandle) : this(fileHandle, FileHandleType.Auto) { }
 
     internal ListenOptions(ulong fileHandle, FileHandleType handleType)
     {
@@ -105,10 +108,7 @@ public class ListenOptions : IConnectionBuilder, IMultiplexedConnectionBuilder
 
     internal string Scheme
     {
-        get
-        {
-            return IsTls ? HttpProtocol.SchemeHttps : HttpProtocol.SchemeHttp;
-        }
+        get { return IsTls ? HttpProtocol.SchemeHttps : HttpProtocol.SchemeHttp; }
     }
 
     internal bool IsTls { get; set; }
@@ -148,7 +148,9 @@ public class ListenOptions : IConnectionBuilder, IMultiplexedConnectionBuilder
         return this;
     }
 
-    IMultiplexedConnectionBuilder IMultiplexedConnectionBuilder.Use(Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware)
+    IMultiplexedConnectionBuilder IMultiplexedConnectionBuilder.Use(
+        Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware
+    )
     {
         _multiplexedMiddleware.Add(middleware);
         return this;
@@ -190,9 +192,14 @@ public class ListenOptions : IConnectionBuilder, IMultiplexedConnectionBuilder
         return app;
     }
 
-    internal virtual async Task BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+    internal virtual async Task BindAsync(
+        AddressBindContext context,
+        CancellationToken cancellationToken
+    )
     {
-        await AddressBinder.BindEndpointAsync(this, context, cancellationToken).ConfigureAwait(false);
+        await AddressBinder
+            .BindEndpointAsync(this, context, cancellationToken)
+            .ConfigureAwait(false);
         context.Addresses.Add(GetDisplayName());
     }
 }

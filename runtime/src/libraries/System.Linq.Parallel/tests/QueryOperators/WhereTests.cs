@@ -32,7 +32,11 @@ namespace System.Linq.Parallel.Tests
         }
 
         [Theory]
-        [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 15, 16 }, MemberType = typeof(Sources))]
+        [MemberData(
+            nameof(Sources.Ranges),
+            new[] { 0, 1, 2, 15, 16 },
+            MemberType = typeof(Sources)
+        )]
         public static void Where(Labeled<ParallelQuery<int>> labeled, int count)
         {
             ParallelQuery<int> query = labeled.Item;
@@ -62,7 +66,10 @@ namespace System.Linq.Parallel.Tests
         public static void Where_Unordered_NotPipelined(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, (count + 1) / 2);
-            Assert.All(UnorderedSources.Default(count).Where(x => x % 2 == 0).ToList(), x => seen.Add(x / 2));
+            Assert.All(
+                UnorderedSources.Default(count).Where(x => x % 2 == 0).ToList(),
+                x => seen.Add(x / 2)
+            );
             seen.AssertComplete();
         }
 
@@ -74,19 +81,33 @@ namespace System.Linq.Parallel.Tests
         }
 
         [Theory]
-        [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 15, 16 }, MemberType = typeof(Sources))]
+        [MemberData(
+            nameof(Sources.Ranges),
+            new[] { 0, 1, 2, 15, 16 },
+            MemberType = typeof(Sources)
+        )]
         public static void Where_NotPipelined(Labeled<ParallelQuery<int>> labeled, int count)
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(query.Where(x => x % 2 == 0).ToList(), x => { Assert.Equal(seen, x); seen += 2; });
+            Assert.All(
+                query.Where(x => x % 2 == 0).ToList(),
+                x =>
+                {
+                    Assert.Equal(seen, x);
+                    seen += 2;
+                }
+            );
             Assert.Equal(count + (count % 2), seen);
         }
 
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void Where_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void Where_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             Where_NotPipelined(labeled, count);
         }
@@ -119,7 +140,11 @@ namespace System.Linq.Parallel.Tests
         }
 
         [Theory]
-        [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 15, 16 }, MemberType = typeof(Sources))]
+        [MemberData(
+            nameof(Sources.Ranges),
+            new[] { 0, 1, 2, 15, 16 },
+            MemberType = typeof(Sources)
+        )]
         public static void Where_Indexed(Labeled<ParallelQuery<int>> labeled, int count)
         {
             ParallelQuery<int> query = labeled.Item;
@@ -148,7 +173,10 @@ namespace System.Linq.Parallel.Tests
         public static void Where_Indexed_Unordered_NotPipelined(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.All(UnorderedSources.Default(count).Where((x, index) => x == index).ToList(), x => seen.Add(x));
+            Assert.All(
+                UnorderedSources.Default(count).Where((x, index) => x == index).ToList(),
+                x => seen.Add(x)
+            );
             seen.AssertComplete();
         }
 
@@ -160,19 +188,32 @@ namespace System.Linq.Parallel.Tests
         }
 
         [Theory]
-        [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 15, 16 }, MemberType = typeof(Sources))]
-        public static void Where_Indexed_NotPipelined(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(Sources.Ranges),
+            new[] { 0, 1, 2, 15, 16 },
+            MemberType = typeof(Sources)
+        )]
+        public static void Where_Indexed_NotPipelined(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(query.Where((x, index) => x == index).ToList(), x => Assert.Equal(seen++, x));
+            Assert.All(
+                query.Where((x, index) => x == index).ToList(),
+                x => Assert.Equal(seen++, x)
+            );
             Assert.Equal(count, seen);
         }
 
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void Where_Indexed_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void Where_Indexed_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             Where_Indexed_NotPipelined(labeled, count);
         }
@@ -180,10 +221,22 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Where_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).Where(x => x));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).Where((x, index) => x));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<bool>().Where((Func<bool, bool>)null));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<bool>().Where((Func<bool, int, bool>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).Where(x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).Where((x, index) => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<bool>().Where((Func<bool, bool>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<bool>().Where((Func<bool, int, bool>)null)
+            );
         }
     }
 }

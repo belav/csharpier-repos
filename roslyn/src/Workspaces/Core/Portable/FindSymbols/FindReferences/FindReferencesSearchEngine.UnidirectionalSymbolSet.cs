@@ -32,8 +32,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             /// </summary>
             private readonly ImmutableHashSet<ISymbol> _upSymbols;
 
-            public UnidirectionalSymbolSet(FindReferencesSearchEngine engine, MetadataUnifyingSymbolHashSet initialSymbols, HashSet<ISymbol> upSymbols)
-                : base(engine)
+            public UnidirectionalSymbolSet(
+                FindReferencesSearchEngine engine,
+                MetadataUnifyingSymbolHashSet initialSymbols,
+                HashSet<ISymbol> upSymbols
+            ) : base(engine)
             {
                 _initialAndDownSymbols = initialSymbols;
                 _upSymbols = upSymbols.ToImmutableHashSet();
@@ -41,14 +44,20 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             public override ImmutableArray<ISymbol> GetAllSymbols()
             {
-                using var _ = ArrayBuilder<ISymbol>.GetInstance(_upSymbols.Count + _initialAndDownSymbols.Count, out var result);
+                using var _ = ArrayBuilder<ISymbol>.GetInstance(
+                    _upSymbols.Count + _initialAndDownSymbols.Count,
+                    out var result
+                );
                 result.AddRange(_upSymbols);
                 result.AddRange(_initialAndDownSymbols);
                 result.RemoveDuplicates();
                 return result.ToImmutable();
             }
 
-            public override async Task InheritanceCascadeAsync(Project project, CancellationToken cancellationToken)
+            public override async Task InheritanceCascadeAsync(
+                Project project,
+                CancellationToken cancellationToken
+            )
             {
                 // Start searching using the existing set of symbols found at the start (or anything found below that).
                 var workQueue = new Stack<ISymbol>();
@@ -61,7 +70,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     var current = workQueue.Pop();
 
                     // Keep adding symbols downwards in this project as long as we keep finding new symbols.
-                    await AddDownSymbolsAsync(this.Engine, current, _initialAndDownSymbols, workQueue, projects, cancellationToken).ConfigureAwait(false);
+                    await AddDownSymbolsAsync(
+                            this.Engine,
+                            current,
+                            _initialAndDownSymbols,
+                            workQueue,
+                            projects,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
         }

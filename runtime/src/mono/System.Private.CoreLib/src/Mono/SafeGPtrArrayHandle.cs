@@ -30,10 +30,7 @@ namespace Mono
 
         internal int Length
         {
-            get
-            {
-                return handle.Length;
-            }
+            get { return handle.Length; }
         }
 
         internal IntPtr this[int i] => handle[i];

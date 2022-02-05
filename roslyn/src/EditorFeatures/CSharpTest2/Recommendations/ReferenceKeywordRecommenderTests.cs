@@ -15,122 +15,127 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(
-@"$$");
+            await VerifyAbsenceAsync(@"$$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterClass_Interactive()
         {
             await VerifyAbsenceAsync(
-@"class C { }
-$$");
+                @"class C { }
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
             await VerifyAbsenceAsync(
-@"System.Console.WriteLine();
-$$");
+                @"System.Console.WriteLine();
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
             await VerifyAbsenceAsync(
-@"int i = 0;
-$$");
+                @"int i = 0;
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterHash()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Regular,
-@"#$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Regular, @"#$$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterHash_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"#$$");
+            await VerifyKeywordAsync(SourceCodeKind.Script, @"#$$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterHashAndSpace()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Regular,
-@"# $$");
+            await VerifyAbsenceAsync(SourceCodeKind.Regular, @"# $$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterHashAndSpace_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"# $$");
+            await VerifyKeywordAsync(SourceCodeKind.Script, @"# $$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNestedPreprocessor()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"#if true
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"#if true
     #$$
-#endif");
+#endif"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestBeforeUsing()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"#$$
-using System;");
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"#$$
+using System;"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestBeforeGlobalUsing()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"#$$
-global using System;");
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"#$$
+global using System;"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterUsing()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"using System;
-#$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"using System;
+#$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterGlobalUsing()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"global using System;
-#$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"global using System;
+#$$"
+            );
         }
     }
 }

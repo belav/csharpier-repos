@@ -12,11 +12,11 @@ public class ServicesModelBinderProviderTest
         get
         {
             return new TheoryData<BindingSource>()
-                {
-                    BindingSource.Header,
-                    BindingSource.Form,
-                    null,
-                };
+            {
+                BindingSource.Header,
+                BindingSource.Form,
+                null,
+            };
         }
     }
 
@@ -53,7 +53,5 @@ public class ServicesModelBinderProviderTest
         Assert.IsType<ServicesModelBinder>(result);
     }
 
-    private class IPersonService
-    {
-    }
+    private class IPersonService { }
 }

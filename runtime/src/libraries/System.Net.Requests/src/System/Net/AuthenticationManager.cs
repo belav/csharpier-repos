@@ -14,13 +14,26 @@ namespace System.Net
 
         public static StringDictionary CustomTargetNameDictionary { get; } = new StringDictionary();
 
-        [Obsolete(Obsoletions.AuthenticationManagerMessage, DiagnosticId = Obsoletions.AuthenticationManagerDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static Authorization? Authenticate(string challenge, WebRequest request, ICredentials credentials) =>
-            throw new PlatformNotSupportedException();
+        [Obsolete(
+            Obsoletions.AuthenticationManagerMessage,
+            DiagnosticId = Obsoletions.AuthenticationManagerDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static Authorization? Authenticate(
+            string challenge,
+            WebRequest request,
+            ICredentials credentials
+        ) => throw new PlatformNotSupportedException();
 
-        [Obsolete(Obsoletions.AuthenticationManagerMessage, DiagnosticId = Obsoletions.AuthenticationManagerDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static Authorization? PreAuthenticate(WebRequest request, ICredentials credentials) =>
-            throw new PlatformNotSupportedException();
+        [Obsolete(
+            Obsoletions.AuthenticationManagerMessage,
+            DiagnosticId = Obsoletions.AuthenticationManagerDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static Authorization? PreAuthenticate(
+            WebRequest request,
+            ICredentials credentials
+        ) => throw new PlatformNotSupportedException();
 
         public static void Register(IAuthenticationModule authenticationModule)
         {
@@ -46,6 +59,7 @@ namespace System.Net
             }
         }
 
-        public static IEnumerator RegisteredModules => Array.Empty<IAuthenticationModule>().GetEnumerator();
+        public static IEnumerator RegisteredModules =>
+            Array.Empty<IAuthenticationModule>().GetEnumerator();
     }
 }

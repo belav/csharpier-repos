@@ -90,7 +90,13 @@ internal class OpaqueStream : Stream
         return _requestStream.ReadByte();
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return _requestStream.BeginRead(buffer, offset, count, callback, state);
     }
@@ -100,12 +106,21 @@ internal class OpaqueStream : Stream
         return _requestStream.EndRead(asyncResult);
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _requestStream.ReadAsync(buffer, offset, count, cancellationToken);
     }
 
-    public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+    public override Task CopyToAsync(
+        Stream destination,
+        int bufferSize,
+        CancellationToken cancellationToken
+    )
     {
         return _requestStream.CopyToAsync(destination, bufferSize, cancellationToken);
     }
@@ -124,7 +139,13 @@ internal class OpaqueStream : Stream
         _responseStream.WriteByte(value);
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return _responseStream.BeginWrite(buffer, offset, count, callback, state);
     }
@@ -134,7 +155,12 @@ internal class OpaqueStream : Stream
         _responseStream.EndWrite(asyncResult);
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _responseStream.WriteAsync(buffer, offset, count, cancellationToken);
     }

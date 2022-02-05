@@ -13,10 +13,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
     {
-        protected ConnectionInterceptionTestBase(InterceptionFixtureBase fixture)
-            : base(fixture)
-        {
-        }
+        protected ConnectionInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture)
+        { }
 
         [ConditionalTheory]
         [InlineData(false)]
@@ -133,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore
             var interceptor4 = new ConnectionOverridingInterceptor();
             using var context = CreateContext(
                 new IInterceptor[] { new NoOpConnectionInterceptor(), interceptor1, interceptor2 },
-                new IInterceptor[] { interceptor3, interceptor4, new NoOpConnectionInterceptor() });
+                new IInterceptor[] { interceptor3, interceptor4, new NoOpConnectionInterceptor() }
+            );
             // Test infrastructure uses an open connection, so close it first.
             var connection = context.Database.GetDbConnection();
             var startedOpen = connection.State == ConnectionState.Open;
@@ -193,7 +192,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             var interceptor = new ConnectionInterceptor();
 
-            using var context = CreateBadUniverse(new DbContextOptionsBuilder().AddInterceptors(interceptor));
+            using var context = CreateBadUniverse(
+                new DbContextOptionsBuilder().AddInterceptors(interceptor)
+            );
             try
             {
                 if (async)
@@ -215,26 +216,24 @@ namespace Microsoft.EntityFrameworkCore
             AssertErrorOnOpen(context, interceptor, async);
         }
 
-        protected abstract BadUniverseContext CreateBadUniverse(DbContextOptionsBuilder optionsBuilder);
+        protected abstract BadUniverseContext CreateBadUniverse(
+            DbContextOptionsBuilder optionsBuilder
+        );
 
         protected class BadUniverseContext : UniverseContext
         {
-            public BadUniverseContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public BadUniverseContext(DbContextOptions options) : base(options) { }
         }
 
-        protected class NoOpConnectionInterceptor : DbConnectionInterceptor
-        {
-        }
+        protected class NoOpConnectionInterceptor : DbConnectionInterceptor { }
 
         protected class ConnectionOverridingInterceptor : ConnectionInterceptor
         {
             public override InterceptionResult ConnectionOpening(
                 DbConnection connection,
                 ConnectionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 base.ConnectionOpening(connection, eventData, result);
 
@@ -250,7 +249,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 await base.ConnectionOpeningAsync(connection, eventData, result, cancellationToken);
 
@@ -295,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual InterceptionResult ConnectionOpening(
                 DbConnection connection,
                 ConnectionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
@@ -308,7 +309,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
@@ -319,7 +321,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public virtual void ConnectionOpened(
                 DbConnection connection,
-                ConnectionEndEventData eventData)
+                ConnectionEndEventData eventData
+            )
             {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
@@ -329,7 +332,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual Task ConnectionOpenedAsync(
                 DbConnection connection,
                 ConnectionEndEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
@@ -341,7 +345,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual InterceptionResult ConnectionClosing(
                 DbConnection connection,
                 ConnectionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
@@ -353,7 +358,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual ValueTask<InterceptionResult> ConnectionClosingAsync(
                 DbConnection connection,
                 ConnectionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
@@ -364,7 +370,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public virtual void ConnectionClosed(
                 DbConnection connection,
-                ConnectionEndEventData eventData)
+                ConnectionEndEventData eventData
+            )
             {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
@@ -373,7 +380,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public virtual Task ConnectionClosedAsync(
                 DbConnection connection,
-                ConnectionEndEventData eventData)
+                ConnectionEndEventData eventData
+            )
             {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
@@ -384,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public virtual void ConnectionFailed(
                 DbConnection connection,
-                ConnectionErrorEventData eventData)
+                ConnectionErrorEventData eventData
+            )
             {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
@@ -394,7 +403,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual Task ConnectionFailedAsync(
                 DbConnection connection,
                 ConnectionErrorEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
@@ -457,7 +467,11 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private static void AssertNormalOpen(DbContext context, ConnectionInterceptor interceptor, bool async)
+        private static void AssertNormalOpen(
+            DbContext context,
+            ConnectionInterceptor interceptor,
+            bool async
+        )
         {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
@@ -470,7 +484,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(context, interceptor.Context);
         }
 
-        private static void AssertNormalClose(DbContext context, ConnectionInterceptor interceptor, bool async)
+        private static void AssertNormalClose(
+            DbContext context,
+            ConnectionInterceptor interceptor,
+            bool async
+        )
         {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
@@ -483,7 +501,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(context, interceptor.Context);
         }
 
-        private static void AssertErrorOnOpen(DbContext context, ConnectionInterceptor interceptor, bool async)
+        private static void AssertErrorOnOpen(
+            DbContext context,
+            ConnectionInterceptor interceptor,
+            bool async
+        )
         {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
@@ -496,11 +518,12 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(context, interceptor.Context);
         }
 
-        private static void AsertOpenCloseEvents(ITestDiagnosticListener listener)
-            => listener.AssertEventsInOrder(
+        private static void AsertOpenCloseEvents(ITestDiagnosticListener listener) =>
+            listener.AssertEventsInOrder(
                 RelationalEventId.ConnectionOpening.Name,
                 RelationalEventId.ConnectionOpened.Name,
                 RelationalEventId.ConnectionClosing.Name,
-                RelationalEventId.ConnectionClosed.Name);
+                RelationalEventId.ConnectionClosed.Name
+            );
     }
 }

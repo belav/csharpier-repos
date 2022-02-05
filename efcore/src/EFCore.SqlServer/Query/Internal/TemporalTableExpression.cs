@@ -13,7 +13,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public abstract class TemporalTableExpression : TableExpressionBase, IClonableTableExpressionBase
+    public abstract class TemporalTableExpression
+        : TableExpressionBase,
+          IClonableTableExpressionBase
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,8 +36,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected TemporalTableExpression(string name, string? schema, string? alias)
-            : base(alias)
+        protected TemporalTableExpression(string name, string? schema, string? alias) : base(alias)
         {
             Name = name;
             Schema = schema;
@@ -60,11 +61,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// <inheritdoc />
         public override bool Equals(object? obj)
             // This should be reference equal only.
-            => obj != null && ReferenceEquals(this, obj);
+            =>
+            obj != null && ReferenceEquals(this, obj);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Name, Schema);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Name, Schema);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

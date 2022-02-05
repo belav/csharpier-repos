@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-internal class TestInputHostComponent<TValue, TComponent> : AutoRenderComponent where TComponent : InputBase<TValue>
+internal class TestInputHostComponent<TValue, TComponent> : AutoRenderComponent
+    where TComponent : InputBase<TValue>
 {
     public Dictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -25,16 +26,25 @@ internal class TestInputHostComponent<TValue, TComponent> : AutoRenderComponent 
     {
         builder.OpenComponent<CascadingValue<EditContext>>(0);
         builder.AddAttribute(1, "Value", EditContext);
-        builder.AddAttribute(2, "ChildContent", new RenderFragment(childBuilder =>
-        {
-            childBuilder.OpenComponent<TComponent>(0);
-            childBuilder.AddAttribute(0, "Value", Value);
-            childBuilder.AddAttribute(1, "ValueChanged",
-                EventCallback.Factory.Create(this, ValueChanged));
-            childBuilder.AddAttribute(2, "ValueExpression", ValueExpression);
-            childBuilder.AddMultipleAttributes(3, AdditionalAttributes);
-            childBuilder.CloseComponent();
-        }));
+        builder.AddAttribute(
+            2,
+            "ChildContent",
+            new RenderFragment(
+                childBuilder =>
+                {
+                    childBuilder.OpenComponent<TComponent>(0);
+                    childBuilder.AddAttribute(0, "Value", Value);
+                    childBuilder.AddAttribute(
+                        1,
+                        "ValueChanged",
+                        EventCallback.Factory.Create(this, ValueChanged)
+                    );
+                    childBuilder.AddAttribute(2, "ValueExpression", ValueExpression);
+                    childBuilder.AddMultipleAttributes(3, AdditionalAttributes);
+                    childBuilder.CloseComponent();
+                }
+            )
+        );
         builder.CloseComponent();
     }
 }

@@ -19,8 +19,12 @@ namespace System.Xml.Xsl.Xslt
         // }
         // mode -> FocusFlags; Used to generate and call apply-imports/apply-template functions
         public Dictionary<QilName, XslFlags> ModeFlags = new Dictionary<QilName, XslFlags>();
+
         // mode -> xsl:apply-import functions for that mode
-        public Dictionary<QilName, List<QilFunction>> ApplyFunctions = new Dictionary<QilName, List<QilFunction>>();
+        public Dictionary<QilName, List<QilFunction>> ApplyFunctions = new Dictionary<
+            QilName,
+            List<QilFunction>
+        >();
     }
 
     internal sealed class Stylesheet : StylesheetLevel
@@ -30,7 +34,10 @@ namespace System.Xml.Xsl.Xslt
         public List<XslNode>? GlobalVarPars = new List<XslNode>();
 
         // xsl:attribute-set/@name -> AttributeSet
-        public Dictionary<QilName, AttributeSet>? AttributeSets = new Dictionary<QilName, AttributeSet>();
+        public Dictionary<QilName, AttributeSet>? AttributeSets = new Dictionary<
+            QilName,
+            AttributeSet
+        >();
 
         private readonly int _importPrecedence;
         private int _orderNumber;
@@ -39,12 +46,16 @@ namespace System.Xml.Xsl.Xslt
             WhitespaceRules[0] - rules with default priority  0
             WhitespaceRules[1] - rules with default priority -0.25
             WhitespaceRules[2] - rules with default priority -0.5
-        */
+            */
         public List<WhitespaceRule>[]? WhitespaceRules = new List<WhitespaceRule>[3];
 
-        public List<Template> Templates = new List<Template>();  // Templates defined on this level. Empty for RootLevel.
+        public List<Template> Templates = new List<Template>(); // Templates defined on this level. Empty for RootLevel.
+
         // xsl:template/@mode -> list of @match'es
-        public Dictionary<QilName, List<TemplateMatch>> TemplateMatches = new Dictionary<QilName, List<TemplateMatch>>();
+        public Dictionary<QilName, List<TemplateMatch>> TemplateMatches = new Dictionary<
+            QilName,
+            List<TemplateMatch>
+        >();
 
         public void AddTemplateMatch(Template template, QilLoop filter)
         {
@@ -74,7 +85,10 @@ namespace System.Xml.Xsl.Xslt
             WhitespaceRules![2] = new List<WhitespaceRule>();
         }
 
-        public int ImportPrecedence { get { return _importPrecedence; } }
+        public int ImportPrecedence
+        {
+            get { return _importPrecedence; }
+        }
 
         public void AddWhitespaceRule(int index, WhitespaceRule rule)
         {
@@ -117,7 +131,10 @@ namespace System.Xml.Xsl.Xslt
                 }
                 else
                 {
-                    Debug.Assert(template.ImportPrecedence <= old.ImportPrecedence, "Global objects are processed in order of decreasing import precedence");
+                    Debug.Assert(
+                        template.ImportPrecedence <= old.ImportPrecedence,
+                        "Global objects are processed in order of decreasing import precedence"
+                    );
                     if (old.ImportPrecedence == template.ImportPrecedence)
                     {
                         return false;

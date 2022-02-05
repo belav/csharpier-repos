@@ -17,25 +17,35 @@ namespace Microsoft.CodeAnalysis.Rename
     public static partial class Renamer
     {
         /// <summary>
-        /// Action that will rename a type to match the current document name. Works by finding a type matching the origanl name of the document (case insensitive) 
+        /// Action that will rename a type to match the current document name. Works by finding a type matching the origanl name of the document (case insensitive)
         /// and updating that type.
         /// </summary>
-        //  https://github.com/dotnet/roslyn/issues/43461 tracks adding more complicated heuristics to matching type and file name. 
+        //  https://github.com/dotnet/roslyn/issues/43461 tracks adding more complicated heuristics to matching type and file name.
         internal sealed class RenameSymbolDocumentAction : RenameDocumentAction
         {
             private readonly AnalysisResult _analysis;
 
-            private RenameSymbolDocumentAction(
-                AnalysisResult analysis)
+            private RenameSymbolDocumentAction(AnalysisResult analysis)
                 : base(ImmutableArray<ErrorResource>.Empty)
             {
                 _analysis = analysis;
             }
 
-            public override string GetDescription(CultureInfo? culture)
-                => string.Format(WorkspacesResources.ResourceManager.GetString("Rename_0_to_1", culture ?? WorkspacesResources.Culture)!, _analysis.OriginalDocumentName, _analysis.NewDocumentName);
+            public override string GetDescription(CultureInfo? culture) =>
+                string.Format(
+                    WorkspacesResources.ResourceManager.GetString(
+                        "Rename_0_to_1",
+                        culture ?? WorkspacesResources.Culture
+                    )!,
+                    _analysis.OriginalDocumentName,
+                    _analysis.NewDocumentName
+                );
 
-            internal override async Task<Solution> GetModifiedSolutionAsync(Document document, OptionSet optionSet, CancellationToken cancellationToken)
+            internal override async Task<Solution> GetModifiedSolutionAsync(
+                Document document,
+                OptionSet optionSet,
+                CancellationToken cancellationToken
+            )
             {
                 var solution = document.Project.Solution;
 
@@ -44,15 +54,29 @@ namespace Microsoft.CodeAnalysis.Rename
                 // even if the document name changed, we're updating the types
                 // that are the same name as the analysis
                 var matchingTypeDeclaration = await GetMatchingTypeDeclarationAsync(
-                    document.WithName(_analysis.OriginalDocumentName),
-                    cancellationToken).ConfigureAwait(false);
+                        document.WithName(_analysis.OriginalDocumentName),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (matchingTypeDeclaration is object)
                 {
-                    var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                    var symbol = semanticModel.GetRequiredDeclaredSymbol(matchingTypeDeclaration, cancellationToken);
+                    var semanticModel = await document
+                        .GetRequiredSemanticModelAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    var symbol = semanticModel.GetRequiredDeclaredSymbol(
+                        matchingTypeDeclaration,
+                        cancellationToken
+                    );
 
-                    solution = await RenameSymbolAsync(solution, symbol, _analysis.NewSymbolName, optionSet, cancellationToken).ConfigureAwait(false);
+                    solution = await RenameSymbolAsync(
+                            solution,
+                            symbol,
+                            _analysis.NewSymbolName,
+                            optionSet,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
 
                 return solution;
@@ -62,56 +86,88 @@ namespace Microsoft.CodeAnalysis.Rename
             /// Finds a matching type such that the display name of the type matches the name passed in, ignoring case. Case isn't used because
             /// documents with name "Foo.cs" and "foo.cs" should still have the same type name
             /// </summary>
-            private static async Task<SyntaxNode?> GetMatchingTypeDeclarationAsync(Document document, CancellationToken cancellationToken)
+            private static async Task<SyntaxNode?> GetMatchingTypeDeclarationAsync(
+                Document document,
+                CancellationToken cancellationToken
+            )
             {
-                var syntaxRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var syntaxRoot = await document
+                    .GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-                var typeDeclarations = syntaxRoot.DescendantNodesAndSelf(n => !syntaxFacts.IsMethodBody(n)).Where(syntaxFacts.IsTypeDeclaration);
-                return typeDeclarations.FirstOrDefault(d => WorkspacePathUtilities.TypeNameMatchesDocumentName(document, d, syntaxFacts));
+                var typeDeclarations = syntaxRoot
+                    .DescendantNodesAndSelf(n => !syntaxFacts.IsMethodBody(n))
+                    .Where(syntaxFacts.IsTypeDeclaration);
+                return typeDeclarations.FirstOrDefault(
+                    d =>
+                        WorkspacePathUtilities.TypeNameMatchesDocumentName(document, d, syntaxFacts)
+                );
             }
 
-            public static async Task<RenameSymbolDocumentAction?> TryCreateAsync(Document document, string newName, CancellationToken cancellationToken)
+            public static async Task<RenameSymbolDocumentAction?> TryCreateAsync(
+                Document document,
+                string newName,
+                CancellationToken cancellationToken
+            )
             {
-                var analysis = await AnalyzeAsync(document, newName, cancellationToken).ConfigureAwait(false);
+                var analysis = await AnalyzeAsync(document, newName, cancellationToken)
+                    .ConfigureAwait(false);
 
-                return analysis.HasValue
-                    ? new RenameSymbolDocumentAction(analysis.Value)
-                    : null;
+                return analysis.HasValue ? new RenameSymbolDocumentAction(analysis.Value) : null;
             }
 
-            private static async Task<AnalysisResult?> AnalyzeAsync(Document document, string newDocumentName, CancellationToken cancellationToken)
+            private static async Task<AnalysisResult?> AnalyzeAsync(
+                Document document,
+                string newDocumentName,
+                CancellationToken cancellationToken
+            )
             {
                 // TODO: Detect naming conflicts ahead of time
                 var documentWithNewName = document.WithName(newDocumentName);
-                var originalSymbolName = WorkspacePathUtilities.GetTypeNameFromDocumentName(document);
-                var newTypeName = WorkspacePathUtilities.GetTypeNameFromDocumentName(documentWithNewName);
+                var originalSymbolName = WorkspacePathUtilities.GetTypeNameFromDocumentName(
+                    document
+                );
+                var newTypeName = WorkspacePathUtilities.GetTypeNameFromDocumentName(
+                    documentWithNewName
+                );
 
                 if (originalSymbolName is null || newTypeName is null)
                 {
                     return null;
                 }
 
-                var matchingDeclaration = await GetMatchingTypeDeclarationAsync(document, cancellationToken).ConfigureAwait(false);
+                var matchingDeclaration = await GetMatchingTypeDeclarationAsync(
+                        document,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (matchingDeclaration is null)
                 {
                     return null;
                 }
 
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var symbol = semanticModel.GetDeclaredSymbol(matchingDeclaration, cancellationToken);
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var symbol = semanticModel.GetDeclaredSymbol(
+                    matchingDeclaration,
+                    cancellationToken
+                );
 
-                if (symbol is null || WorkspacePathUtilities.TypeNameMatchesDocumentName(documentWithNewName, symbol.Name))
+                if (
+                    symbol is null
+                    || WorkspacePathUtilities.TypeNameMatchesDocumentName(
+                        documentWithNewName,
+                        symbol.Name
+                    )
+                )
                 {
                     return null;
                 }
 
-                return new AnalysisResult(
-                    document,
-                    newDocumentName,
-                    newTypeName,
-                    symbol.Name);
+                return new AnalysisResult(document, newDocumentName, newTypeName, symbol.Name);
             }
 
             private readonly struct AnalysisResult
@@ -140,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Rename
                     Document document,
                     string newDocumentName,
                     string newSymbolName,
-                    string originalSymbolName)
+                    string originalSymbolName
+                )
                 {
                     OriginalDocumentName = document.Name;
                     NewDocumentName = newDocumentName;

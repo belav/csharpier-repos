@@ -8,14 +8,23 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal static class RequestContextLog
 {
-    private static readonly Action<ILogger, Exception?> _requestError =
-        LoggerMessage.Define(LogLevel.Error, LoggerEventIds.RequestError, "ProcessRequestAsync");
+    private static readonly Action<ILogger, Exception?> _requestError = LoggerMessage.Define(
+        LogLevel.Error,
+        LoggerEventIds.RequestError,
+        "ProcessRequestAsync"
+    );
 
-    private static readonly Action<ILogger, Exception?> _requestProcessError =
-        LoggerMessage.Define(LogLevel.Error, LoggerEventIds.RequestProcessError, "ProcessRequestAsync");
+    private static readonly Action<ILogger, Exception?> _requestProcessError = LoggerMessage.Define(
+        LogLevel.Error,
+        LoggerEventIds.RequestProcessError,
+        "ProcessRequestAsync"
+    );
 
-    private static readonly Action<ILogger, Exception?> _requestsDrained =
-        LoggerMessage.Define(LogLevel.Information, LoggerEventIds.RequestsDrained, "All requests drained.");
+    private static readonly Action<ILogger, Exception?> _requestsDrained = LoggerMessage.Define(
+        LogLevel.Information,
+        LoggerEventIds.RequestsDrained,
+        "All requests drained."
+    );
 
     public static void RequestError(ILogger logger, Exception exception)
     {

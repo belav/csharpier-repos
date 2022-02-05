@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TodoComment
         protected override TestWorkspace CreateWorkspace(string codeWithMarker)
         {
             var workspace = TestWorkspace.CreateCSharp(codeWithMarker);
-            workspace.SetOptions(workspace.Options.WithChangedOption(TodoCommentOptions.TokenList, DefaultTokenList));
+            workspace.SetOptions(
+                workspace.Options.WithChangedOption(TodoCommentOptions.TokenList, DefaultTokenList)
+            );
             return workspace;
         }
 
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TodoComment
         [Fact]
         public async Task MultilineTodoComment_Multiline()
         {
-            var code = @"
+            var code =
+                @"
 /* [|TODO: hello    |]
         [|TODO: hello    |]
 [|TODO: hello    |]
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TodoComment
         [Fact]
         public async Task MultilineTodoComment_Multiline_DocComment()
         {
-            var code = @"
+            var code =
+                @"
 /** [|TODO: hello    |]
         [|TODO: hello    |]
 [|TODO: hello    |]
@@ -164,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TodoComment
         [Fact]
         public async Task SinglelineDocumentComment_Multiline()
         {
-            var code = @"
+            var code =
+                @"
         /// <summary>
         /// [|TODO : test       |]
         /// </summary>

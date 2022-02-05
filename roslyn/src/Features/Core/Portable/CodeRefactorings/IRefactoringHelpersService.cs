@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// True if the user is on a blank line where a member could go inside a type declaration.
         /// This will be between members and not ever inside a member.
         /// </summary>
-        bool IsBetweenTypeMembers(SourceText sourceText, SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? typeDeclaration);
+        bool IsBetweenTypeMembers(
+            SourceText sourceText,
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? typeDeclaration
+        );
 
         /// <summary>
         /// <para>
@@ -45,9 +50,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// <para>
         /// Note: this function trims all whitespace from both the beginning and the end of given <paramref name="selection"/>.
         /// The trimmed version is then used to determine relevant <see cref="SyntaxNode"/>. It also handles incomplete selections
-        /// of tokens gracefully. Over-selection containing leading comments is also handled correctly. 
+        /// of tokens gracefully. Over-selection containing leading comments is also handled correctly.
         /// </para>
         /// </summary>
-        Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(Document document, TextSpan selection, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode;
+        Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
+            Document document,
+            TextSpan selection,
+            CancellationToken cancellationToken
+        ) where TSyntaxNode : SyntaxNode;
     }
 }

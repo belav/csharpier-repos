@@ -14,17 +14,20 @@ public class WebHostConfigurationTests
     public void ReadsParametersCorrectly()
     {
         var parameters = new Dictionary<string, string>()
-            {
-                { WebHostDefaults.WebRootKey, "wwwroot"},
-                { WebHostDefaults.ApplicationKey, "MyProjectReference"},
-                { WebHostDefaults.StartupAssemblyKey, "MyProjectReference" },
-                { WebHostDefaults.EnvironmentKey, Environments.Development},
-                { WebHostDefaults.DetailedErrorsKey, "true"},
-                { WebHostDefaults.CaptureStartupErrorsKey, "true" },
-                { WebHostDefaults.SuppressStatusMessagesKey, "true" }
-            };
+        {
+            { WebHostDefaults.WebRootKey, "wwwroot" },
+            { WebHostDefaults.ApplicationKey, "MyProjectReference" },
+            { WebHostDefaults.StartupAssemblyKey, "MyProjectReference" },
+            { WebHostDefaults.EnvironmentKey, Environments.Development },
+            { WebHostDefaults.DetailedErrorsKey, "true" },
+            { WebHostDefaults.CaptureStartupErrorsKey, "true" },
+            { WebHostDefaults.SuppressStatusMessagesKey, "true" }
+        };
 
-        var config = new WebHostOptions(new ConfigurationBuilder().AddInMemoryCollection(parameters).Build(), applicationNameFallback: null);
+        var config = new WebHostOptions(
+            new ConfigurationBuilder().AddInMemoryCollection(parameters).Build(),
+            applicationNameFallback: null
+        );
 
         Assert.Equal("wwwroot", config.WebRoot);
         Assert.Equal("MyProjectReference", config.ApplicationName);
@@ -38,8 +41,14 @@ public class WebHostConfigurationTests
     [Fact]
     public void ReadsOldEnvKey()
     {
-        var parameters = new Dictionary<string, string>() { { "ENVIRONMENT", Environments.Development } };
-        var config = new WebHostOptions(new ConfigurationBuilder().AddInMemoryCollection(parameters).Build(), applicationNameFallback: null);
+        var parameters = new Dictionary<string, string>()
+        {
+            { "ENVIRONMENT", Environments.Development }
+        };
+        var config = new WebHostOptions(
+            new ConfigurationBuilder().AddInMemoryCollection(parameters).Build(),
+            applicationNameFallback: null
+        );
 
         Assert.Equal(Environments.Development, config.Environment);
     }
@@ -50,7 +59,10 @@ public class WebHostConfigurationTests
     public void AllowsNumberForDetailedErrors(string value, bool expected)
     {
         var parameters = new Dictionary<string, string>() { { "detailedErrors", value } };
-        var config = new WebHostOptions(new ConfigurationBuilder().AddInMemoryCollection(parameters).Build(), applicationNameFallback: null);
+        var config = new WebHostOptions(
+            new ConfigurationBuilder().AddInMemoryCollection(parameters).Build(),
+            applicationNameFallback: null
+        );
 
         Assert.Equal(expected, config.DetailedErrors);
     }

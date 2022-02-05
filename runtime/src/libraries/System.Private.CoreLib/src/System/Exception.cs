@@ -9,7 +9,9 @@ using System.Text;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class Exception : ISerializable
     {
         private protected const string InnerExceptionPrefix = " ---> ";
@@ -19,8 +21,7 @@ namespace System
             _HResult = HResults.COR_E_EXCEPTION;
         }
 
-        public Exception(string? message)
-            : this()
+        public Exception(string? message) : this()
         {
             _message = message;
         }
@@ -30,8 +31,7 @@ namespace System
         // Note: the stack trace is not started until the exception
         // is thrown
         //
-        public Exception(string? message, Exception? innerException)
-            : this()
+        public Exception(string? message, Exception? innerException) : this()
         {
             _message = message;
             _innerException = innerException;
@@ -54,7 +54,8 @@ namespace System
             RestoreRemoteStackTrace(info, context);
         }
 
-        public virtual string Message => _message ?? SR.Format(SR.Exception_WasThrown, GetClassName());
+        public virtual string Message =>
+            _message ?? SR.Format(SR.Exception_WasThrown, GetClassName());
 
         public virtual IDictionary Data => _data ??= CreateDataContainer();
 
@@ -137,7 +138,13 @@ namespace System
                 }
                 if (_innerException != null)
                 {
-                    length += Environment.NewLineConst.Length + InnerExceptionPrefix.Length + innerExceptionString.Length + Environment.NewLineConst.Length + 3 + endOfInnerExceptionResource.Length;
+                    length +=
+                        Environment.NewLineConst.Length
+                        + InnerExceptionPrefix.Length
+                        + innerExceptionString.Length
+                        + Environment.NewLineConst.Length
+                        + 3
+                        + endOfInnerExceptionResource.Length;
                 }
                 if (stackTrace != null)
                 {
@@ -182,11 +189,25 @@ namespace System
             }
         }
 
-        [Obsolete(Obsoletions.BinaryFormatterMessage, DiagnosticId = Obsoletions.BinaryFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.BinaryFormatterMessage,
+            DiagnosticId = Obsoletions.BinaryFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         protected event EventHandler<SafeSerializationEventArgs>? SerializeObjectState
         {
-            add { throw new PlatformNotSupportedException(SR.PlatformNotSupported_SecureBinarySerialization); }
-            remove { throw new PlatformNotSupportedException(SR.PlatformNotSupported_SecureBinarySerialization); }
+            add
+            {
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_SecureBinarySerialization
+                );
+            }
+            remove
+            {
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_SecureBinarySerialization
+                );
+            }
         }
 
         public int HResult
@@ -227,7 +248,9 @@ namespace System
         private string GetStackTrace()
         {
             // Do not include a trailing newline for backwards compatibility
-            return new StackTrace(this, fNeedFileInfo: true).ToString(System.Diagnostics.StackTrace.TraceFormat.Normal);
+            return new StackTrace(this, fNeedFileInfo: true).ToString(
+                System.Diagnostics.StackTrace.TraceFormat.Normal
+            );
         }
 
         [StackTraceHidden]
@@ -242,7 +265,10 @@ namespace System
             // remoting of exceptions cross app-domain boundaries, and is thus concatenated into Exception.StackTrace
             // when it's retrieved.
             var sb = new StringBuilder(256);
-            new StackTrace(fNeedFileInfo: true).ToString(System.Diagnostics.StackTrace.TraceFormat.TrailingNewLine, sb);
+            new StackTrace(fNeedFileInfo: true).ToString(
+                System.Diagnostics.StackTrace.TraceFormat.TrailingNewLine,
+                sb
+            );
             sb.AppendLine(SR.Exception_EndStackTraceFromPreviousThrow);
             _remoteStackTraceString = sb.ToString();
         }
@@ -256,7 +282,11 @@ namespace System
 
             // Store the provided text into the "remote" stack trace, following the same format SetCurrentStackTrace
             // would have generated.
-            _remoteStackTraceString = stackTrace + Environment.NewLineConst + SR.Exception_EndStackTraceFromPreviousThrow + Environment.NewLineConst;
+            _remoteStackTraceString =
+                stackTrace
+                + Environment.NewLineConst
+                + SR.Exception_EndStackTraceFromPreviousThrow
+                + Environment.NewLineConst;
         }
 
         private string? SerializationStackTraceString

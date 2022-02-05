@@ -11,7 +11,10 @@ internal class ComponentCodeTarget : CodeTarget
 {
     private readonly RazorCodeGenerationOptions _options;
 
-    public ComponentCodeTarget(RazorCodeGenerationOptions options, IEnumerable<ICodeTargetExtension> extensions)
+    public ComponentCodeTarget(
+        RazorCodeGenerationOptions options,
+        IEnumerable<ICodeTargetExtension> extensions
+    )
     {
         _options = options;
 
@@ -24,7 +27,9 @@ internal class ComponentCodeTarget : CodeTarget
 
     public override IntermediateNodeWriter CreateNodeWriter()
     {
-        return _options.DesignTime ? (IntermediateNodeWriter)new ComponentDesignTimeNodeWriter() : new ComponentRuntimeNodeWriter();
+        return _options.DesignTime
+          ? (IntermediateNodeWriter)new ComponentDesignTimeNodeWriter()
+          : new ComponentRuntimeNodeWriter();
     }
 
     public override TExtension GetExtension<TExtension>()

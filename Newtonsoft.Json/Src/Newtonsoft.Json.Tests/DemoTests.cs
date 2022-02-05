@@ -72,28 +72,34 @@ namespace Newtonsoft.Json.Tests
                 Blue = 0
             };
 
-            string json = JsonConvert.SerializeObject(red, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            });
+            string json = JsonConvert.SerializeObject(
+                red,
+                new JsonSerializerSettings { Formatting = Formatting.Indented }
+            );
             // {
             //   "Red": 255,
             //   "Green": 0,
             //   "Blue": 0
             // }
 
-            json = JsonConvert.SerializeObject(red, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                Converters = { new HtmlColorConverter() }
-            });
+            json = JsonConvert.SerializeObject(
+                red,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    Converters = { new HtmlColorConverter() }
+                }
+            );
             // "#FF0000"
 
-            HtmlColor r2 = JsonConvert.DeserializeObject<HtmlColor>(json, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                Converters = { new HtmlColorConverter() }
-            });
+            HtmlColor r2 = JsonConvert.DeserializeObject<HtmlColor>(
+                json,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    Converters = { new HtmlColorConverter() }
+                }
+            );
             Assert.AreEqual(255, r2.Red);
             Assert.AreEqual(0, r2.Green);
             Assert.AreEqual(0, r2.Blue);
@@ -116,13 +122,18 @@ namespace Newtonsoft.Json.Tests
 
         public class HtmlColorConverter : JsonConverter
         {
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            )
             {
                 // create hex string from value
                 HtmlColor color = (HtmlColor)value;
-                string hexString = color.Red.ToString("X2")
-                                   + color.Green.ToString("X2")
-                                   + color.Blue.ToString("X2");
+                string hexString =
+                    color.Red.ToString("X2")
+                    + color.Green.ToString("X2")
+                    + color.Blue.ToString("X2");
 
                 // write value to json
                 writer.WriteValue("#" + hexString);
@@ -134,8 +145,12 @@ namespace Newtonsoft.Json.Tests
             //    throw new NotImplementedException();
             //}
 
-            public override object ReadJson(JsonReader reader, Type objectType,
-                object existingValue, JsonSerializer serializer)
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            )
             {
                 // get hex string
                 string hexString = (string)reader.Value;
@@ -159,11 +174,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void SerializationGuide()
         {
-            IList<string> roles = new List<string>
-            {
-                "User",
-                "Admin"
-            };
+            IList<string> roles = new List<string> { "User", "Admin" };
 
             string roleJson = JsonConvert.SerializeObject(roles, Formatting.Indented);
             // [
@@ -195,24 +206,23 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void SerializationBasics()
         {
-            IList<string> roles = new List<string>
-            {
-                "User",
-                "Admin"
-            };
+            IList<string> roles = new List<string> { "User", "Admin" };
 
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
 
-            string j = JsonConvert.SerializeObject(roles, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                TraceWriter = traceWriter
-            });
+            string j = JsonConvert.SerializeObject(
+                roles,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    TraceWriter = traceWriter
+                }
+            );
 
             string trace = traceWriter.ToString();
             // Started serializing System.Collections.Generic.List`1[System.String].
             // Finished serializing System.Collections.Generic.List`1[System.String].
-            // Verbose Serialized JSON: 
+            // Verbose Serialized JSON:
             // [
             //   "User",
             //   "Admin"
@@ -228,36 +238,43 @@ namespace Newtonsoft.Json.Tests
                 Date = new DateTime(2014, 6, 4, 0, 0, 0, DateTimeKind.Utc)
             };
 
-            string j = JsonConvert.SerializeObject(s, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                Converters = { new JavaScriptDateTimeConverter() }
-            });
+            string j = JsonConvert.SerializeObject(
+                s,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    Converters = { new JavaScriptDateTimeConverter() }
+                }
+            );
             // {
             //   "Name": "Serialize All The Things",
             //   "Date": new Date(1401796800000)
             // }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Serialize All The Things"",
   ""Date"": new Date(
     1401840000000
   )
-}", j);
+}",
+                j
+            );
         }
 
         [Test]
         public void DeserializationBasics1()
         {
-            string j = @"{
+            string j =
+                @"{
               'Name': 'Serialize All The Things',
               'Date': new Date(1401796800000)
             }";
 
-            var s = JsonConvert.DeserializeObject<Session>(j, new JsonSerializerSettings
-            {
-                Converters = { new JavaScriptDateTimeConverter() }
-            });
+            var s = JsonConvert.DeserializeObject<Session>(
+                j,
+                new JsonSerializerSettings { Converters = { new JavaScriptDateTimeConverter() } }
+            );
             // Name = Serialize All The Things
             // Date = Tuesday, 3 June 2014
 
@@ -270,7 +287,8 @@ namespace Newtonsoft.Json.Tests
             Session s = new Session();
             s.Date = new DateTime(2014, 6, 4);
 
-            string j = @"{
+            string j =
+                @"{
               'Name': 'Serialize All The Things'
             }";
 
@@ -308,7 +326,7 @@ namespace Newtonsoft.Json.Tests
             string json = JsonConvert.SerializeObject(mike, Formatting.Indented);
             // {
             //   "Reportees": [
-            //     { 
+            //     {
             //       "Name": "Arnie Admin"
             //     },
             //     {
@@ -323,7 +341,8 @@ namespace Newtonsoft.Json.Tests
             //   "Name": "Mike Manager"
             // }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Reportees"": [
     {
       ""Name"": ""Arnie Admin""
@@ -338,7 +357,9 @@ namespace Newtonsoft.Json.Tests
     }
   ],
   ""Name"": ""Mike Manager""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -351,12 +372,15 @@ namespace Newtonsoft.Json.Tests
             mike.Reportees = new[] { arnie, susan };
             susan.Reportees = new[] { arnie };
 
-            string json = JsonConvert.SerializeObject(mike, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                TypeNameHandling = TypeNameHandling.Objects,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            });
+            string json = JsonConvert.SerializeObject(
+                mike,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    TypeNameHandling = TypeNameHandling.Objects,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                }
+            );
             // {
             //   "$id": "1",
             //   "$type": "YourNamespace.Manager, YourAssembly",
@@ -380,7 +404,8 @@ namespace Newtonsoft.Json.Tests
             //   ]
             // }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""$type"": ""Newtonsoft.Json.Tests.DemoTests+Manager, Newtonsoft.Json.Tests"",
   ""Reportees"": [
@@ -401,13 +426,16 @@ namespace Newtonsoft.Json.Tests
     }
   ],
   ""Name"": ""Mike Manager""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void RoundtripTypesAndReferences()
         {
-            string json = @"{
+            string json =
+                @"{
   '$id': '1',
   '$type': 'Newtonsoft.Json.Tests.DemoTests+Manager, Newtonsoft.Json.Tests',
   'Reportees': [
@@ -430,11 +458,14 @@ namespace Newtonsoft.Json.Tests
   'Name': 'Mike Manager'
 }";
 
-            var e = JsonConvert.DeserializeObject<Employee>(json, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Objects,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            });
+            var e = JsonConvert.DeserializeObject<Employee>(
+                json,
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Objects,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                }
+            );
             // Name = Mike Manager
             // Reportees = Arnie Admin, Susan Supervisor
 
@@ -557,22 +588,29 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void MergeJson()
         {
-            JObject o1 = JObject.Parse(@"{
+            JObject o1 = JObject.Parse(
+                @"{
               'FirstName': 'John',
               'LastName': 'Smith',
               'Enabled': false,
               'Roles': [ 'User' ]
-            }");
-            JObject o2 = JObject.Parse(@"{
+            }"
+            );
+            JObject o2 = JObject.Parse(
+                @"{
               'Enabled': true,
               'Roles': [ 'User', 'Admin' ]
-            }");
+            }"
+            );
 
-            o1.Merge(o2, new JsonMergeSettings
-            {
-                // union arrays together to avoid duplicates
-                MergeArrayHandling = MergeArrayHandling.Union
-            });
+            o1.Merge(
+                o2,
+                new JsonMergeSettings
+                {
+                    // union arrays together to avoid duplicates
+                    MergeArrayHandling = MergeArrayHandling.Union
+                }
+            );
 
             string json = o1.ToString();
             // {
@@ -585,7 +623,8 @@ namespace Newtonsoft.Json.Tests
             //   ]
             // }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""FirstName"": ""John"",
   ""LastName"": ""Smith"",
   ""Enabled"": true,
@@ -593,7 +632,9 @@ namespace Newtonsoft.Json.Tests
     ""User"",
     ""Admin""
   ]
-}", json);
+}",
+                json
+            );
         }
 
 #if !(NET20 || NET35 || NET40 || PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0
@@ -642,7 +683,8 @@ namespace Newtonsoft.Json.Tests
             //   }
             // ]
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""PackageId"": ""Newtonsoft.Json"",
     ""Version"": ""11.0.1"",
@@ -653,14 +695,17 @@ namespace Newtonsoft.Json.Tests
     ""Version"": ""10.0.3"",
     ""ReleaseDate"": ""2017-06-18T00:00:00""
   }
-]", json);
+]",
+                json
+            );
         }
 #endif
 
         [Test]
         public void JsonPathRegex()
         {
-            JArray packages = JArray.Parse(@"[
+            JArray packages = JArray.Parse(
+                @"[
               {
                 ""PackageId"": ""Newtonsoft.Json"",
                 ""Version"": ""11.0.1"",
@@ -671,9 +716,12 @@ namespace Newtonsoft.Json.Tests
                 ""Version"": ""3.9.0"",
                 ""ReleaseDate"": ""2017-11-10T00:00:00""
               }
-            ]");
+            ]"
+            );
 
-            List<JToken> newtonsoftPackages = packages.SelectTokens(@"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]").ToList();
+            List<JToken> newtonsoftPackages = packages
+                .SelectTokens(@"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]")
+                .ToList();
 
             Console.WriteLine(newtonsoftPackages.Count);
             // 1
@@ -688,7 +736,18 @@ namespace Newtonsoft.Json.Tests
             JArray largeJson;
 
             // read asynchronously from a file
-            using (TextReader textReader = new StreamReader(new FileStream(ResolvePath(@"large.json"), FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true)))
+            using (
+                TextReader textReader = new StreamReader(
+                    new FileStream(
+                        ResolvePath(@"large.json"),
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        4096,
+                        true
+                    )
+                )
+            )
             {
                 largeJson = await JArray.LoadAsync(new JsonTextReader(textReader));
             }
@@ -697,7 +756,18 @@ namespace Newtonsoft.Json.Tests
             user["isActive"] = false;
 
             // write asynchronously to a file
-            using (TextWriter textWriter = new StreamWriter(new FileStream(ResolvePath(@"large.json"), FileMode.Open, FileAccess.Write, FileShare.Write, 4096, true)))
+            using (
+                TextWriter textWriter = new StreamWriter(
+                    new FileStream(
+                        ResolvePath(@"large.json"),
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Write,
+                        4096,
+                        true
+                    )
+                )
+            )
             {
                 await largeJson.WriteToAsync(new JsonTextWriter(textWriter));
             }

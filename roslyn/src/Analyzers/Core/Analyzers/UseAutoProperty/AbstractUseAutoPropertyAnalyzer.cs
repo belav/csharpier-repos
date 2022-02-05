@@ -16,38 +16,66 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
         TPropertyDeclaration,
         TFieldDeclaration,
         TVariableDeclarator,
-        TExpression> : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TExpression
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TPropertyDeclaration : SyntaxNode
         where TFieldDeclaration : SyntaxNode
         where TVariableDeclarator : SyntaxNode
         where TExpression : SyntaxNode
     {
-        private static readonly LocalizableString s_title =
-            new LocalizableResourceString(nameof(AnalyzersResources.Use_auto_property),
-                AnalyzersResources.ResourceManager, typeof(AnalyzersResources));
+        private static readonly LocalizableString s_title = new LocalizableResourceString(
+            nameof(AnalyzersResources.Use_auto_property),
+            AnalyzersResources.ResourceManager,
+            typeof(AnalyzersResources)
+        );
 
         protected AbstractUseAutoPropertyAnalyzer()
-            : base(IDEDiagnosticIds.UseAutoPropertyDiagnosticId, EnforceOnBuildValues.UseAutoProperty, CodeStyleOptions2.PreferAutoProperties, s_title, s_title)
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseAutoPropertyDiagnosticId,
+                EnforceOnBuildValues.UseAutoProperty,
+                CodeStyleOptions2.PreferAutoProperties,
+                s_title,
+                s_title
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected abstract void AnalyzeCompilationUnit(SemanticModelAnalysisContext context, SyntaxNode root, List<AnalysisResult> analysisResults);
+        protected abstract void AnalyzeCompilationUnit(
+            SemanticModelAnalysisContext context,
+            SyntaxNode root,
+            List<AnalysisResult> analysisResults
+        );
         protected abstract bool SupportsReadOnlyProperties(Compilation compilation);
         protected abstract bool SupportsPropertyInitializer(Compilation compilation);
         protected abstract bool CanExplicitInterfaceImplementationsBeFixed();
-        protected abstract TExpression? GetFieldInitializer(TVariableDeclarator variable, CancellationToken cancellationToken);
-        protected abstract TExpression? GetGetterExpression(IMethodSymbol getMethod, CancellationToken cancellationToken);
-        protected abstract TExpression? GetSetterExpression(IMethodSymbol setMethod, SemanticModel semanticModel, CancellationToken cancellationToken);
-        protected abstract SyntaxNode GetFieldNode(TFieldDeclaration fieldDeclaration, TVariableDeclarator variableDeclarator);
+        protected abstract TExpression? GetFieldInitializer(
+            TVariableDeclarator variable,
+            CancellationToken cancellationToken
+        );
+        protected abstract TExpression? GetGetterExpression(
+            IMethodSymbol getMethod,
+            CancellationToken cancellationToken
+        );
+        protected abstract TExpression? GetSetterExpression(
+            IMethodSymbol setMethod,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        );
+        protected abstract SyntaxNode GetFieldNode(
+            TFieldDeclaration fieldDeclaration,
+            TVariableDeclarator variableDeclarator
+        );
 
         protected abstract void RegisterIneligibleFieldsAction(
-            List<AnalysisResult> analysisResults, HashSet<IFieldSymbol> ineligibleFields,
-            Compilation compilation, CancellationToken cancellationToken);
+            List<AnalysisResult> analysisResults,
+            HashSet<IFieldSymbol> ineligibleFields,
+            Compilation compilation,
+            CancellationToken cancellationToken
+        );
 
-        protected sealed override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSemanticModelAction(AnalyzeSemanticModel);
+        protected sealed override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSemanticModelAction(AnalyzeSemanticModel);
 
         private void AnalyzeSemanticModel(SemanticModelAnalysisContext context)
         {
@@ -55,7 +83,10 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             var semanticModel = context.SemanticModel;
 
             // Don't even bother doing the analysis if the user doesn't even want auto-props.
-            var option = context.GetOption(CodeStyleOptions2.PreferAutoProperties, semanticModel.Language);
+            var option = context.GetOption(
+                CodeStyleOptions2.PreferAutoProperties,
+                semanticModel.Language
+            );
             if (!option.Value)
             {
                 return;
@@ -68,18 +99,27 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             AnalyzeCompilationUnit(context, root, analysisResults);
 
             RegisterIneligibleFieldsAction(
-                analysisResults, ineligibleFields,
-                semanticModel.Compilation, cancellationToken);
+                analysisResults,
+                ineligibleFields,
+                semanticModel.Compilation,
+                cancellationToken
+            );
             Process(analysisResults, ineligibleFields, context);
         }
 
         protected void AnalyzeProperty(
-            SemanticModelAnalysisContext context, TPropertyDeclaration propertyDeclaration, List<AnalysisResult> analysisResults)
+            SemanticModelAnalysisContext context,
+            TPropertyDeclaration propertyDeclaration,
+            List<AnalysisResult> analysisResults
+        )
         {
             var cancellationToken = context.CancellationToken;
             var semanticModel = context.SemanticModel;
 
-            if (semanticModel.GetDeclaredSymbol(propertyDeclaration, cancellationToken) is not IPropertySymbol property)
+            if (
+                semanticModel.GetDeclaredSymbol(propertyDeclaration, cancellationToken)
+                is not IPropertySymbol property
+            )
             {
                 return;
             }
@@ -89,7 +129,7 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 return;
             }
 
-            // The property can't be virtual.  We don't know if it is overridden somewhere.  If it 
+            // The property can't be virtual.  We don't know if it is overridden somewhere.  If it
             // is, then calls to it may not actually assign to the field.
             if (property.IsVirtual || property.IsOverride || property.IsSealed)
             {
@@ -112,7 +152,10 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 return;
             }
 
-            if (!CanExplicitInterfaceImplementationsBeFixed() && property.ExplicitInterfaceImplementations.Length != 0)
+            if (
+                !CanExplicitInterfaceImplementationsBeFixed()
+                && property.ExplicitInterfaceImplementations.Length != 0
+            )
             {
                 return;
             }
@@ -198,14 +241,17 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 var setterField = GetSetterField(semanticModel, setMethod, cancellationToken);
                 if (setterField != getterField)
                 {
-                    // If there is a getter and a setter, they both need to agree on which field they are 
+                    // If there is a getter and a setter, they both need to agree on which field they are
                     // writing to.
                     return;
                 }
             }
 
             var fieldReference = getterField.DeclaringSyntaxReferences[0];
-            if (fieldReference.GetSyntax(cancellationToken) is not TVariableDeclarator variableDeclarator)
+            if (
+                fieldReference.GetSyntax(cancellationToken)
+                is not TVariableDeclarator variableDeclarator
+            )
             {
                 return;
             }
@@ -223,7 +269,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
 
             // Can't remove the field if it has attributes on it.
             var attributes = getterField.GetAttributes();
-            var suppressMessageAttributeType = semanticModel.Compilation.SuppressMessageAttributeType();
+            var suppressMessageAttributeType =
+                semanticModel.Compilation.SuppressMessageAttributeType();
             foreach (var attribute in attributes)
             {
                 if (attribute.AttributeClass != suppressMessageAttributeType)
@@ -238,27 +285,49 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             }
 
             // Looks like a viable property/field to convert into an auto property.
-            analysisResults.Add(new AnalysisResult(
-                property, getterField, propertyDeclaration, fieldDeclaration, variableDeclarator, semanticModel,
-                property.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)));
+            analysisResults.Add(
+                new AnalysisResult(
+                    property,
+                    getterField,
+                    propertyDeclaration,
+                    fieldDeclaration,
+                    variableDeclarator,
+                    semanticModel,
+                    property.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                )
+            );
         }
 
-        protected virtual bool CanConvert(IPropertySymbol property)
-            => true;
+        protected virtual bool CanConvert(IPropertySymbol property) => true;
 
         private IFieldSymbol? GetSetterField(
-            SemanticModel semanticModel, IMethodSymbol setMethod, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            IMethodSymbol setMethod,
+            CancellationToken cancellationToken
+        )
         {
-            return CheckFieldAccessExpression(semanticModel, GetSetterExpression(setMethod, semanticModel, cancellationToken));
+            return CheckFieldAccessExpression(
+                semanticModel,
+                GetSetterExpression(setMethod, semanticModel, cancellationToken)
+            );
         }
 
         private IFieldSymbol? GetGetterField(
-            SemanticModel semanticModel, IMethodSymbol getMethod, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            IMethodSymbol getMethod,
+            CancellationToken cancellationToken
+        )
         {
-            return CheckFieldAccessExpression(semanticModel, GetGetterExpression(getMethod, cancellationToken));
+            return CheckFieldAccessExpression(
+                semanticModel,
+                GetGetterExpression(getMethod, cancellationToken)
+            );
         }
 
-        private static IFieldSymbol? CheckFieldAccessExpression(SemanticModel semanticModel, TExpression? expression)
+        private static IFieldSymbol? CheckFieldAccessExpression(
+            SemanticModel semanticModel,
+            TExpression? expression
+        )
         {
             if (expression == null)
             {
@@ -283,7 +352,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
         private void Process(
             List<AnalysisResult> analysisResults,
             HashSet<IFieldSymbol> ineligibleFields,
-            SemanticModelAnalysisContext context)
+            SemanticModelAnalysisContext context
+        )
         {
             var ineligibleFieldsSet = new HashSet<IFieldSymbol>(ineligibleFields);
             foreach (var result in analysisResults)
@@ -300,13 +370,21 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
 
         private void Process(AnalysisResult result, SemanticModelAnalysisContext context)
         {
-            // Check if there are additional reasons we think this field might be ineligible for 
+            // Check if there are additional reasons we think this field might be ineligible for
             // replacing with an auto prop.
             var cancellationToken = context.CancellationToken;
             var semanticModel = context.SemanticModel;
             var compilation = semanticModel.Compilation;
 
-            if (!IsEligibleHeuristic(result.Field, result.PropertyDeclaration, result.SemanticModel, compilation, cancellationToken))
+            if (
+                !IsEligibleHeuristic(
+                    result.Field,
+                    result.PropertyDeclaration,
+                    result.SemanticModel,
+                    compilation,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
@@ -315,14 +393,18 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             var variableDeclarator = result.VariableDeclarator;
             var fieldNode = GetFieldNode(result.FieldDeclaration, variableDeclarator);
 
-            // Now add diagnostics to both the field and the property saying we can convert it to 
+            // Now add diagnostics to both the field and the property saying we can convert it to
             // an auto property.  For each diagnostic store both location so we can easily retrieve
             // them when performing the code fix.
             var additionalLocations = ImmutableArray.Create(
                 propertyDeclaration.GetLocation(),
-                variableDeclarator.GetLocation());
+                variableDeclarator.GetLocation()
+            );
 
-            var option = context.GetOption(CodeStyleOptions2.PreferAutoProperties, propertyDeclaration.Language);
+            var option = context.GetOption(
+                CodeStyleOptions2.PreferAutoProperties,
+                propertyDeclaration.Language
+            );
             if (option.Notification.Severity == ReportDiagnostic.Suppress)
             {
                 // Avoid reporting diagnostics when the feature is disabled. This primarily avoids reporting the hidden
@@ -336,21 +418,28 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 fieldNode.GetLocation(),
                 option.Notification.Severity,
                 additionalLocations: additionalLocations,
-                properties: null);
+                properties: null
+            );
 
             // Also, place a hidden marker on the property.  If they bring up a lightbulb
             // there, they'll be able to see that they can convert it to an auto-prop.
             var diagnostic2 = Diagnostic.Create(
-                Descriptor, propertyDeclaration.GetLocation(),
-                additionalLocations: additionalLocations);
+                Descriptor,
+                propertyDeclaration.GetLocation(),
+                additionalLocations: additionalLocations
+            );
 
             context.ReportDiagnostic(diagnostic1);
             context.ReportDiagnostic(diagnostic2);
         }
 
         protected virtual bool IsEligibleHeuristic(
-            IFieldSymbol field, TPropertyDeclaration propertyDeclaration,
-            SemanticModel semanticModel, Compilation compilation, CancellationToken cancellationToken)
+            IFieldSymbol field,
+            TPropertyDeclaration propertyDeclaration,
+            SemanticModel semanticModel,
+            Compilation compilation,
+            CancellationToken cancellationToken
+        )
         {
             return true;
         }
@@ -372,7 +461,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 TFieldDeclaration fieldDeclaration,
                 TVariableDeclarator variableDeclarator,
                 SemanticModel semanticModel,
-                string symbolEquivalenceKey)
+                string symbolEquivalenceKey
+            )
             {
                 Property = property;
                 Field = field;

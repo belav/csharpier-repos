@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Checksum checksum,
             StorageDatabase database,
             string filePath,
-            ImmutableArray<Node> sortedNodes)
+            ImmutableArray<Node> sortedNodes
+        )
         {
             var result = TryLoadOrCreateAsync(
                 services,
@@ -46,8 +47,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 createAsync: () => CreateSpellCheckerAsync(checksum, sortedNodes),
                 keySuffix: "_SpellChecker_" + filePath,
                 tryReadObject: SpellChecker.TryReadFrom,
-                cancellationToken: CancellationToken.None);
-            Contract.ThrowIfNull(result, "Result should never be null as we passed 'loadOnly: false'.");
+                cancellationToken: CancellationToken.None
+            );
+            Contract.ThrowIfNull(
+                result,
+                "Result should never be null as we passed 'loadOnly: false'."
+            );
             return result;
         }
 
@@ -64,7 +69,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Func<Task<T>> createAsync,
             string keySuffix,
             Func<ObjectReader, T> tryReadObject,
-            CancellationToken cancellationToken) where T : class, IObjectWritable, IChecksummedObject
+            CancellationToken cancellationToken
+        ) where T : class, IObjectWritable, IChecksummedObject
         {
             using (Logger.LogBlock(FunctionId.SymbolTreeInfo_TryLoadOrCreate, cancellationToken))
             {
@@ -76,17 +82,28 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // Ok, we can use persistence.  First try to load from the persistence service.
                 var persistentStorageService = services.GetPersistentStorageService(database);
 
-                var storage = await persistentStorageService.GetStorageAsync(solutionKey, cancellationToken).ConfigureAwait(false);
+                var storage = await persistentStorageService
+                    .GetStorageAsync(solutionKey, cancellationToken)
+                    .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
 
                 // Get the unique key to identify our data.
                 var key = PrefixMetadataSymbolTreeInfo + keySuffix;
-                using (var stream = await storage.ReadStreamAsync(key, checksum, cancellationToken).ConfigureAwait(false))
-                using (var reader = ObjectReader.TryGetReader(stream, cancellationToken: cancellationToken))
+                using (
+                    var stream = await storage
+                        .ReadStreamAsync(key, checksum, cancellationToken)
+                        .ConfigureAwait(false)
+                )
+                using (
+                    var reader = ObjectReader.TryGetReader(
+                        stream,
+                        cancellationToken: cancellationToken
+                    )
+                )
                 {
                     if (reader != null)
                     {
-                        // We have some previously persisted data.  Attempt to read it back.  
+                        // We have some previously persisted data.  Attempt to read it back.
                         // If we're able to, and the version of the persisted data matches
                         // our version, then we can reuse this instance.
                         var read = tryReadObject(reader);
@@ -116,14 +133,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 using (var stream = SerializableBytes.CreateWritableStream())
                 {
-                    using (var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken))
+                    using (
+                        var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken)
+                    )
                     {
                         result.WriteTo(writer);
                     }
 
                     stream.Position = 0;
 
-                    await storage.WriteStreamAsync(key, stream, checksum, cancellationToken).ConfigureAwait(false);
+                    await storage
+                        .WriteStreamAsync(key, stream, checksum, cancellationToken)
+                        .ConfigureAwait(false);
                 }
 
                 return result;
@@ -214,7 +235,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static SymbolTreeInfo TryReadSymbolTreeInfo(
             ObjectReader reader,
             Checksum checksum,
-            Func<ImmutableArray<Node>, Task<SpellChecker>> createSpellCheckerTask)
+            Func<ImmutableArray<Node>, Task<SpellChecker>> createSpellCheckerTask
+        )
         {
             try
             {
@@ -254,7 +276,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 }
                 else
                 {
-                    receiverTypeNameToExtensionMethodMap = new MultiDictionary<string, ExtensionMethodInfo>();
+                    receiverTypeNameToExtensionMethodMap = new MultiDictionary<
+                        string,
+                        ExtensionMethodInfo
+                    >();
 
                     for (var i = 0; i < keyCount; i++)
                     {
@@ -266,7 +291,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             var containerName = reader.ReadString();
                             var name = reader.ReadString();
 
-                            receiverTypeNameToExtensionMethodMap.Add(typeName, new ExtensionMethodInfo(containerName, name));
+                            receiverTypeNameToExtensionMethodMap.Add(
+                                typeName,
+                                new ExtensionMethodInfo(containerName, name)
+                            );
                         }
                     }
                 }
@@ -274,8 +302,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 var nodeArray = nodes.ToImmutableAndFree();
                 var spellCheckerTask = createSpellCheckerTask(nodeArray);
                 return new SymbolTreeInfo(
-                    checksum, nodeArray, spellCheckerTask, inheritanceMap,
-                    receiverTypeNameToExtensionMethodMap);
+                    checksum,
+                    nodeArray,
+                    spellCheckerTask,
+                    inheritanceMap,
+                    receiverTypeNameToExtensionMethodMap
+                );
             }
             catch
             {
@@ -288,10 +320,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         internal readonly partial struct TestAccessor
         {
             internal static SymbolTreeInfo ReadSymbolTreeInfo(
-                ObjectReader reader, Checksum checksum)
+                ObjectReader reader,
+                Checksum checksum
+            )
             {
-                return TryReadSymbolTreeInfo(reader, checksum,
-                    nodes => Task.FromResult(new SpellChecker(checksum, nodes.Select(n => n.Name.AsMemory()))));
+                return TryReadSymbolTreeInfo(
+                    reader,
+                    checksum,
+                    nodes =>
+                        Task.FromResult(
+                            new SpellChecker(checksum, nodes.Select(n => n.Name.AsMemory()))
+                        )
+                );
             }
         }
     }

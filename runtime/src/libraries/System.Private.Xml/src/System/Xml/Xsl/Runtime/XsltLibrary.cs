@@ -18,61 +18,126 @@ namespace System.Xml.Xsl.Runtime
     internal static class XsltMethods
     {
         // Formatting error messages
-        public static readonly MethodInfo FormatMessage = typeof(XsltLibrary).GetMethod("FormatMessage");
+        public static readonly MethodInfo FormatMessage = typeof(XsltLibrary).GetMethod(
+            "FormatMessage"
+        );
 
         // Runtime type checks and casts
-        public static readonly MethodInfo EnsureNodeSet = typeof(XsltConvert).GetMethod("EnsureNodeSet", new[] { typeof(IList<XPathItem>) });
+        public static readonly MethodInfo EnsureNodeSet = typeof(XsltConvert).GetMethod(
+            "EnsureNodeSet",
+            new[] { typeof(IList<XPathItem>) }
+        );
 
         // Comparisons
-        public static readonly MethodInfo EqualityOperator = typeof(XsltLibrary).GetMethod("EqualityOperator");
-        public static readonly MethodInfo RelationalOperator = typeof(XsltLibrary).GetMethod("RelationalOperator");
+        public static readonly MethodInfo EqualityOperator = typeof(XsltLibrary).GetMethod(
+            "EqualityOperator"
+        );
+        public static readonly MethodInfo RelationalOperator = typeof(XsltLibrary).GetMethod(
+            "RelationalOperator"
+        );
 
         // XPath functions
-        public static readonly MethodInfo StartsWith = typeof(XsltFunctions).GetMethod("StartsWith");
+        public static readonly MethodInfo StartsWith = typeof(XsltFunctions).GetMethod(
+            "StartsWith"
+        );
         public static readonly MethodInfo Contains = typeof(XsltFunctions).GetMethod("Contains");
-        public static readonly MethodInfo SubstringBefore = typeof(XsltFunctions).GetMethod("SubstringBefore");
-        public static readonly MethodInfo SubstringAfter = typeof(XsltFunctions).GetMethod("SubstringAfter");
-        public static readonly MethodInfo Substring2 = typeof(XsltFunctions).GetMethod("Substring", new[] { typeof(string), typeof(double) });
-        public static readonly MethodInfo Substring3 = typeof(XsltFunctions).GetMethod("Substring", new[] { typeof(string), typeof(double), typeof(double) });
-        public static readonly MethodInfo NormalizeSpace = typeof(XsltFunctions).GetMethod("NormalizeSpace");
+        public static readonly MethodInfo SubstringBefore = typeof(XsltFunctions).GetMethod(
+            "SubstringBefore"
+        );
+        public static readonly MethodInfo SubstringAfter = typeof(XsltFunctions).GetMethod(
+            "SubstringAfter"
+        );
+        public static readonly MethodInfo Substring2 = typeof(XsltFunctions).GetMethod(
+            "Substring",
+            new[] { typeof(string), typeof(double) }
+        );
+        public static readonly MethodInfo Substring3 = typeof(XsltFunctions).GetMethod(
+            "Substring",
+            new[] { typeof(string), typeof(double), typeof(double) }
+        );
+        public static readonly MethodInfo NormalizeSpace = typeof(XsltFunctions).GetMethod(
+            "NormalizeSpace"
+        );
         public static readonly MethodInfo Translate = typeof(XsltFunctions).GetMethod("Translate");
         public static readonly MethodInfo Lang = typeof(XsltFunctions).GetMethod("Lang");
-        public static readonly MethodInfo Floor = typeof(Math).GetMethod("Floor", new[] { typeof(double) });
-        public static readonly MethodInfo Ceiling = typeof(Math).GetMethod("Ceiling", new[] { typeof(double) });
+        public static readonly MethodInfo Floor = typeof(Math).GetMethod(
+            "Floor",
+            new[] { typeof(double) }
+        );
+        public static readonly MethodInfo Ceiling = typeof(Math).GetMethod(
+            "Ceiling",
+            new[] { typeof(double) }
+        );
         public static readonly MethodInfo Round = typeof(XsltFunctions).GetMethod("Round");
 
         // XSLT functions and helper methods (static)
-        public static readonly MethodInfo SystemProperty = typeof(XsltFunctions).GetMethod("SystemProperty");
+        public static readonly MethodInfo SystemProperty = typeof(XsltFunctions).GetMethod(
+            "SystemProperty"
+        );
         public static readonly MethodInfo BaseUri = typeof(XsltFunctions).GetMethod("BaseUri");
         public static readonly MethodInfo OuterXml = typeof(XsltFunctions).GetMethod("OuterXml");
-        public static readonly MethodInfo OnCurrentNodeChanged = typeof(XmlQueryRuntime).GetMethod("OnCurrentNodeChanged");
+        public static readonly MethodInfo OnCurrentNodeChanged = typeof(XmlQueryRuntime).GetMethod(
+            "OnCurrentNodeChanged"
+        );
 
         // MSXML extension functions
-        public static readonly MethodInfo MSFormatDateTime = typeof(XsltFunctions).GetMethod("MSFormatDateTime");
-        public static readonly MethodInfo MSStringCompare = typeof(XsltFunctions).GetMethod("MSStringCompare");
+        public static readonly MethodInfo MSFormatDateTime = typeof(XsltFunctions).GetMethod(
+            "MSFormatDateTime"
+        );
+        public static readonly MethodInfo MSStringCompare = typeof(XsltFunctions).GetMethod(
+            "MSStringCompare"
+        );
         public static readonly MethodInfo MSUtc = typeof(XsltFunctions).GetMethod("MSUtc");
         public static readonly MethodInfo MSNumber = typeof(XsltFunctions).GetMethod("MSNumber");
-        public static readonly MethodInfo MSLocalName = typeof(XsltFunctions).GetMethod("MSLocalName");
-        public static readonly MethodInfo MSNamespaceUri = typeof(XsltFunctions).GetMethod("MSNamespaceUri");
+        public static readonly MethodInfo MSLocalName = typeof(XsltFunctions).GetMethod(
+            "MSLocalName"
+        );
+        public static readonly MethodInfo MSNamespaceUri = typeof(XsltFunctions).GetMethod(
+            "MSNamespaceUri"
+        );
 
         // EXSLT functions
-        public static readonly MethodInfo EXslObjectType = typeof(XsltFunctions).GetMethod("EXslObjectType");
+        public static readonly MethodInfo EXslObjectType = typeof(XsltFunctions).GetMethod(
+            "EXslObjectType"
+        );
 
         // XSLT functions and helper methods (non-static)
-        public static readonly MethodInfo CheckScriptNamespace = typeof(XsltLibrary).GetMethod("CheckScriptNamespace");
+        public static readonly MethodInfo CheckScriptNamespace = typeof(XsltLibrary).GetMethod(
+            "CheckScriptNamespace"
+        );
         public static readonly MethodInfo FunctionAvailable = GetFunctionAvailableMethod();
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Supressing warning about not having the RequiresUnreferencedCode attribute since this code path " +
-            "will only be emitting IL that will later be called by Transform() method which is already annotated as RequiresUnreferencedCode")]
-        private static MethodInfo GetFunctionAvailableMethod() => typeof(XsltLibrary).GetMethod("FunctionAvailable");
-        public static readonly MethodInfo ElementAvailable = typeof(XsltLibrary).GetMethod("ElementAvailable");
-        public static readonly MethodInfo RegisterDecimalFormat = typeof(XsltLibrary).GetMethod("RegisterDecimalFormat");
-        public static readonly MethodInfo RegisterDecimalFormatter = typeof(XsltLibrary).GetMethod("RegisterDecimalFormatter");
-        public static readonly MethodInfo FormatNumberStatic = typeof(XsltLibrary).GetMethod("FormatNumberStatic");
-        public static readonly MethodInfo FormatNumberDynamic = typeof(XsltLibrary).GetMethod("FormatNumberDynamic");
-        public static readonly MethodInfo IsSameNodeSort = typeof(XsltLibrary).GetMethod("IsSameNodeSort");
+
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Supressing warning about not having the RequiresUnreferencedCode attribute since this code path "
+                + "will only be emitting IL that will later be called by Transform() method which is already annotated as RequiresUnreferencedCode"
+        )]
+        private static MethodInfo GetFunctionAvailableMethod() =>
+            typeof(XsltLibrary).GetMethod("FunctionAvailable");
+
+        public static readonly MethodInfo ElementAvailable = typeof(XsltLibrary).GetMethod(
+            "ElementAvailable"
+        );
+        public static readonly MethodInfo RegisterDecimalFormat = typeof(XsltLibrary).GetMethod(
+            "RegisterDecimalFormat"
+        );
+        public static readonly MethodInfo RegisterDecimalFormatter = typeof(XsltLibrary).GetMethod(
+            "RegisterDecimalFormatter"
+        );
+        public static readonly MethodInfo FormatNumberStatic = typeof(XsltLibrary).GetMethod(
+            "FormatNumberStatic"
+        );
+        public static readonly MethodInfo FormatNumberDynamic = typeof(XsltLibrary).GetMethod(
+            "FormatNumberDynamic"
+        );
+        public static readonly MethodInfo IsSameNodeSort = typeof(XsltLibrary).GetMethod(
+            "IsSameNodeSort"
+        );
         public static readonly MethodInfo LangToLcid = typeof(XsltLibrary).GetMethod("LangToLcid");
-        public static readonly MethodInfo NumberFormat = typeof(XsltLibrary).GetMethod("NumberFormat");
+        public static readonly MethodInfo NumberFormat = typeof(XsltLibrary).GetMethod(
+            "NumberFormat"
+        );
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -105,7 +170,7 @@ namespace System.Xml.Xsl.Runtime
             {
                 throw new XslTransformException(SR.Xslt_ScriptAndExtensionClash, nsUri);
             }
-            return 0;   // have to return something
+            return 0; // have to return something
         }
 
         // Spec: http://www.w3.org/TR/xslt#function-element-available
@@ -161,17 +226,26 @@ namespace System.Xml.Xsl.Runtime
             return _runtime.EarlyBoundFunctionExists(name.Name, name.Namespace);
         }
 
-        public int RegisterDecimalFormat(XmlQualifiedName name, string infinitySymbol, string nanSymbol, string characters)
+        public int RegisterDecimalFormat(
+            XmlQualifiedName name,
+            string infinitySymbol,
+            string nanSymbol,
+            string characters
+        )
         {
             if (_decimalFormats == null)
             {
                 _decimalFormats = new Dictionary<XmlQualifiedName, DecimalFormat>();
             }
             _decimalFormats.Add(name, CreateDecimalFormat(infinitySymbol, nanSymbol, characters));
-            return 0;   // have to return something
+            return 0; // have to return something
         }
 
-        private DecimalFormat CreateDecimalFormat(string infinitySymbol, string nanSymbol, string characters)
+        private DecimalFormat CreateDecimalFormat(
+            string infinitySymbol,
+            string nanSymbol,
+            string characters
+        )
         {
             // BUGBUG: Fallback to the old XSLT implementation
             NumberFormatInfo info = new NumberFormatInfo();
@@ -187,27 +261,48 @@ namespace System.Xml.Xsl.Runtime
             return new DecimalFormat(info, characters[5], characters[4], characters[6]);
         }
 
-        public double RegisterDecimalFormatter(string formatPicture, string infinitySymbol, string nanSymbol, string characters)
+        public double RegisterDecimalFormatter(
+            string formatPicture,
+            string infinitySymbol,
+            string nanSymbol,
+            string characters
+        )
         {
             if (_decimalFormatters == null)
             {
                 _decimalFormatters = new List<DecimalFormatter>();
             }
-            _decimalFormatters.Add(new DecimalFormatter(formatPicture, CreateDecimalFormat(infinitySymbol, nanSymbol, characters)));
+            _decimalFormatters.Add(
+                new DecimalFormatter(
+                    formatPicture,
+                    CreateDecimalFormat(infinitySymbol, nanSymbol, characters)
+                )
+            );
             return _decimalFormatters.Count - 1;
         }
 
         public string FormatNumberStatic(double value, double decimalFormatterIndex)
         {
             int idx = (int)decimalFormatterIndex;
-            Debug.Assert(0 <= idx && idx < _decimalFormatters.Count, "Value of decimalFormatterIndex is out of range");
+            Debug.Assert(
+                0 <= idx && idx < _decimalFormatters.Count,
+                "Value of decimalFormatterIndex is out of range"
+            );
             return _decimalFormatters[idx].Format(value);
         }
 
-        public string FormatNumberDynamic(double value, string formatPicture, XmlQualifiedName decimalFormatName, string errorMessageName)
+        public string FormatNumberDynamic(
+            double value,
+            string formatPicture,
+            XmlQualifiedName decimalFormatName,
+            string errorMessageName
+        )
         {
             DecimalFormat format;
-            if (_decimalFormats == null || !_decimalFormats.TryGetValue(decimalFormatName, out format))
+            if (
+                _decimalFormats == null
+                || !_decimalFormats.TryGetValue(decimalFormatName, out format)
+            )
             {
                 throw new XslTransformException(SR.Xslt_NoDecimalFormat, errorMessageName);
             }
@@ -216,12 +311,24 @@ namespace System.Xml.Xsl.Runtime
             return formatter.Format(value);
         }
 
-        public string NumberFormat(IList<XPathItem> value, string formatString,
-            double lang, string letterValue, string groupingSeparator, double groupingSize)
+        public string NumberFormat(
+            IList<XPathItem> value,
+            string formatString,
+            double lang,
+            string letterValue,
+            string groupingSeparator,
+            double groupingSize
+        )
         {
             // REVIEW: For each execution of xsl:number new Format() object is created.
             // Then there is no AVTs we can build this object once and reuse it later to improve performance.
-            NumberFormatter formatter = new NumberFormatter(formatString, (int)lang, letterValue, groupingSeparator, (int)groupingSize);
+            NumberFormatter formatter = new NumberFormatter(
+                formatString,
+                (int)lang,
+                letterValue,
+                groupingSeparator,
+                (int)groupingSize
+            );
             return formatter.FormatSequence(value);
         }
 
@@ -232,7 +339,11 @@ namespace System.Xml.Xsl.Runtime
             return LangToLcidInternal(lang, forwardCompatibility, null);
         }
 
-        internal static int LangToLcidInternal(string lang, bool forwardCompatibility, IErrorHelper errorHelper)
+        internal static int LangToLcidInternal(
+            string lang,
+            bool forwardCompatibility,
+            IErrorHelper errorHelper
+        )
         {
             int lcid = InvariantCultureLcid;
 
@@ -249,7 +360,11 @@ namespace System.Xml.Xsl.Runtime
                         }
                         else
                         {
-                            throw new XslTransformException(SR.Xslt_InvalidAttrValue, nameof(lang), lang);
+                            throw new XslTransformException(
+                                SR.Xslt_InvalidAttrValue,
+                                nameof(lang),
+                                lang
+                            );
                         }
                     }
                 }
@@ -281,7 +396,11 @@ namespace System.Xml.Xsl.Runtime
 
         internal const string InvariantCultureName = "";
 
-        internal static string LangToNameInternal(string lang, bool forwardCompatibility, IErrorHelper errorHelper)
+        internal static string LangToNameInternal(
+            string lang,
+            bool forwardCompatibility,
+            IErrorHelper errorHelper
+        )
         {
             string cultName = InvariantCultureName;
 
@@ -294,11 +413,19 @@ namespace System.Xml.Xsl.Runtime
                     {
                         if (errorHelper != null)
                         {
-                            errorHelper.ReportError(/*[XT_032]*/SR.Xslt_InvalidAttrValue, nameof(lang), lang);
+                            errorHelper.ReportError( /*[XT_032]*/
+                                SR.Xslt_InvalidAttrValue,
+                                nameof(lang),
+                                lang
+                            );
                         }
                         else
                         {
-                            throw new XslTransformException(SR.Xslt_InvalidAttrValue, nameof(lang), lang);
+                            throw new XslTransformException(
+                                SR.Xslt_InvalidAttrValue,
+                                nameof(lang),
+                                lang
+                            );
                         }
                     }
                 }
@@ -315,7 +442,10 @@ namespace System.Xml.Xsl.Runtime
                         {
                             if (errorHelper != null)
                             {
-                                errorHelper.ReportError(/*[XT_033]*/SR.Xslt_InvalidLanguage, lang);
+                                errorHelper.ReportError( /*[XT_033]*/
+                                    SR.Xslt_InvalidLanguage,
+                                    lang
+                                );
                             }
                             else
                             {
@@ -332,9 +462,13 @@ namespace System.Xml.Xsl.Runtime
         internal enum ComparisonOperator
         {
             /*Equality  */
-            Eq, Ne,
+            Eq,
+            Ne,
             /*Relational*/
-            Lt, Le, Gt, Ge,
+            Lt,
+            Le,
+            Gt,
+            Ge,
         }
 
         // Returns TypeCode of the given atomic value
@@ -353,7 +487,10 @@ namespace System.Xml.Xsl.Runtime
             }
             else
             {
-                Debug.Assert(itemType == XsltConvert.BooleanType, $"Unexpected type of atomic value {itemType}");
+                Debug.Assert(
+                    itemType == XsltConvert.BooleanType,
+                    $"Unexpected type of atomic value {itemType}"
+                );
                 return TypeCode.Boolean;
             }
         }
@@ -361,7 +498,10 @@ namespace System.Xml.Xsl.Runtime
         // Returns weakest of the two given TypeCodes, String > Double > Boolean
         private static TypeCode WeakestTypeCode(TypeCode typeCode1, TypeCode typeCode2)
         {
-            Debug.Assert(TypeCode.Boolean < TypeCode.Double && TypeCode.Double < TypeCode.String, "Cannot use the smallest TypeCode as a weakest one");
+            Debug.Assert(
+                TypeCode.Boolean < TypeCode.Double && TypeCode.Double < TypeCode.String,
+                "Cannot use the smallest TypeCode as a weakest one"
+            );
             return typeCode1 < typeCode2 ? typeCode1 : typeCode2;
         }
 
@@ -376,7 +516,12 @@ namespace System.Xml.Xsl.Runtime
                 _ => left >= right,
             };
 
-        private static bool CompareValues(ComparisonOperator op, XPathItem left, XPathItem right, TypeCode compType)
+        private static bool CompareValues(
+            ComparisonOperator op,
+            XPathItem left,
+            XPathItem right,
+            TypeCode compType
+        )
         {
             if (compType == TypeCode.Double)
             {
@@ -387,23 +532,38 @@ namespace System.Xml.Xsl.Runtime
                 Debug.Assert(op == ComparisonOperator.Eq || op == ComparisonOperator.Ne);
                 if (compType == TypeCode.String)
                 {
-                    return (XsltConvert.ToString(left) == XsltConvert.ToString(right)) == (op == ComparisonOperator.Eq);
+                    return (XsltConvert.ToString(left) == XsltConvert.ToString(right))
+                        == (op == ComparisonOperator.Eq);
                 }
                 else
                 {
                     Debug.Assert(compType == TypeCode.Boolean);
-                    return (XsltConvert.ToBoolean(left) == XsltConvert.ToBoolean(right)) == (op == ComparisonOperator.Eq);
+                    return (XsltConvert.ToBoolean(left) == XsltConvert.ToBoolean(right))
+                        == (op == ComparisonOperator.Eq);
                 }
             }
         }
 
-        private static bool CompareNodeSetAndValue(ComparisonOperator op, IList<XPathNavigator> nodeset, XPathItem val, TypeCode compType)
+        private static bool CompareNodeSetAndValue(
+            ComparisonOperator op,
+            IList<XPathNavigator> nodeset,
+            XPathItem val,
+            TypeCode compType
+        )
         {
-            Debug.Assert(compType == TypeCode.Boolean || compType == TypeCode.Double || compType == TypeCode.String);
+            Debug.Assert(
+                compType == TypeCode.Boolean
+                    || compType == TypeCode.Double
+                    || compType == TypeCode.String
+            );
             if (compType == TypeCode.Boolean)
             {
                 // Cast nodeset to boolean type, then take its ordinal number
-                return CompareNumbers(op, (nodeset.Count != 0) ? 1 : 0, XsltConvert.ToBoolean(val) ? 1 : 0);
+                return CompareNumbers(
+                    op,
+                    (nodeset.Count != 0) ? 1 : 0,
+                    XsltConvert.ToBoolean(val) ? 1 : 0
+                );
             }
             else
             {
@@ -419,7 +579,12 @@ namespace System.Xml.Xsl.Runtime
             }
         }
 
-        private static bool CompareNodeSetAndNodeSet(ComparisonOperator op, IList<XPathNavigator> left, IList<XPathNavigator> right, TypeCode compType)
+        private static bool CompareNodeSetAndNodeSet(
+            ComparisonOperator op,
+            IList<XPathNavigator> left,
+            IList<XPathNavigator> right,
+            TypeCode compType
+        )
         {
             int leftLen = left.Count;
             int rightLen = right.Count;
@@ -448,13 +613,23 @@ namespace System.Xml.Xsl.Runtime
                 if (IsNodeSetOrRtf(right))
                 {
                     // Both left and right are node-sets
-                    return CompareNodeSetAndNodeSet(op, ToNodeSetOrRtf(left), ToNodeSetOrRtf(right), TypeCode.String);
+                    return CompareNodeSetAndNodeSet(
+                        op,
+                        ToNodeSetOrRtf(left),
+                        ToNodeSetOrRtf(right),
+                        TypeCode.String
+                    );
                 }
                 else
                 {
                     // left is a node-set, right is an atomic value
                     XPathItem rightItem = right[0];
-                    return CompareNodeSetAndValue(op, ToNodeSetOrRtf(left), rightItem, GetTypeCode(rightItem));
+                    return CompareNodeSetAndValue(
+                        op,
+                        ToNodeSetOrRtf(left),
+                        rightItem,
+                        GetTypeCode(rightItem)
+                    );
                 }
             }
             else if (IsNodeSetOrRtf(right))
@@ -462,14 +637,24 @@ namespace System.Xml.Xsl.Runtime
                 // left is an atomic value, right is a node-set
                 XPathItem leftItem = left[0];
                 // Swap operands:  left op right  ->  right op left
-                return CompareNodeSetAndValue(op, ToNodeSetOrRtf(right), leftItem, GetTypeCode(leftItem));
+                return CompareNodeSetAndValue(
+                    op,
+                    ToNodeSetOrRtf(right),
+                    leftItem,
+                    GetTypeCode(leftItem)
+                );
             }
             else
             {
                 // Both left and right are atomic values
                 XPathItem leftItem = left[0];
                 XPathItem rightItem = right[0];
-                return CompareValues(op, leftItem, rightItem, WeakestTypeCode(GetTypeCode(leftItem), GetTypeCode(rightItem)));
+                return CompareValues(
+                    op,
+                    leftItem,
+                    rightItem,
+                    WeakestTypeCode(GetTypeCode(leftItem), GetTypeCode(rightItem))
+                );
             }
         }
 
@@ -496,13 +681,23 @@ namespace System.Xml.Xsl.Runtime
                 if (IsNodeSetOrRtf(right))
                 {
                     // Both left and right are node-sets
-                    return CompareNodeSetAndNodeSet(op, ToNodeSetOrRtf(left), ToNodeSetOrRtf(right), TypeCode.Double);
+                    return CompareNodeSetAndNodeSet(
+                        op,
+                        ToNodeSetOrRtf(left),
+                        ToNodeSetOrRtf(right),
+                        TypeCode.Double
+                    );
                 }
                 else
                 {
                     // left is a node-set, right is an atomic value
                     XPathItem rightItem = right[0];
-                    return CompareNodeSetAndValue(op, ToNodeSetOrRtf(left), rightItem, WeakestTypeCode(GetTypeCode(rightItem), TypeCode.Double));
+                    return CompareNodeSetAndValue(
+                        op,
+                        ToNodeSetOrRtf(left),
+                        rightItem,
+                        WeakestTypeCode(GetTypeCode(rightItem), TypeCode.Double)
+                    );
                 }
             }
             else if (IsNodeSetOrRtf(right))
@@ -511,7 +706,12 @@ namespace System.Xml.Xsl.Runtime
                 XPathItem leftItem = left[0];
                 // Swap operands:  left op right  ->  right InvertOperator(op) left
                 op = InvertOperator(op);
-                return CompareNodeSetAndValue(op, ToNodeSetOrRtf(right), leftItem, WeakestTypeCode(GetTypeCode(leftItem), TypeCode.Double));
+                return CompareNodeSetAndValue(
+                    op,
+                    ToNodeSetOrRtf(right),
+                    leftItem,
+                    WeakestTypeCode(GetTypeCode(leftItem), TypeCode.Double)
+                );
             }
             else
             {
@@ -539,10 +739,14 @@ namespace System.Xml.Xsl.Runtime
             }
 
             // Otherwise nodes must have the same node kind, the same local name, and the same namespace URI
-            Debug.Assert((object)nav1.NameTable == (object)nav2.NameTable, "Ref.Equal cannot be used if navigators have different name tables");
-            return nt1 == nt2 && Ref.Equal(nav1.LocalName, nav2.LocalName) && Ref.Equal(nav1.NamespaceURI, nav2.NamespaceURI);
+            Debug.Assert(
+                (object)nav1.NameTable == (object)nav2.NameTable,
+                "Ref.Equal cannot be used if navigators have different name tables"
+            );
+            return nt1 == nt2
+                && Ref.Equal(nav1.LocalName, nav2.LocalName)
+                && Ref.Equal(nav1.NamespaceURI, nav2.NamespaceURI);
         }
-
 
         //------------------------------------------------
         // Helper methods

@@ -35,39 +35,56 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureLogging(builder =>
-            {
-                builder.AddConsole(loggerOptions =>
+            .ConfigureLogging(
+                builder =>
                 {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        loggerOptions.DisableColors = true;
-#pragma warning restore CS0618 // Type or member is obsolete
-                    });
-                builder.SetMinimumLevel(LogLevel.Trace);
-            })
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.ConfigureKestrel((context, options) =>
-                {
-                        // Support --port and --use_tls cmdline arguments normally supported
-                        // by gRPC interop servers.
-                        var useTls = context.Configuration.GetValue("use_tls", false);
-
-                    options.Limits.MinRequestBodyDataRate = null;
-                    options.ListenAnyIP(0, listenOptions =>
-                    {
-                        Console.WriteLine($"Enabling connection encryption: {useTls}");
-
-                        if (useTls)
+                    builder.AddConsole(
+                        loggerOptions =>
                         {
-                            var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
-                            var certPath = Path.Combine(basePath!, "Certs", "server1.pfx");
-
-                            listenOptions.UseHttps(certPath, "1111");
+#pragma warning disable CS0618 // Type or member is obsolete
+                            loggerOptions.DisableColors = true;
+#pragma warning restore CS0618 // Type or member is obsolete
                         }
-                        listenOptions.Protocols = HttpProtocols.Http2;
-                    });
-                });
-                webBuilder.UseStartup<Startup>();
-            });
+                    );
+                    builder.SetMinimumLevel(LogLevel.Trace);
+                }
+            )
+            .ConfigureWebHostDefaults(
+                webBuilder =>
+                {
+                    webBuilder.ConfigureKestrel(
+                        (context, options) =>
+                        {
+                            // Support --port and --use_tls cmdline arguments normally supported
+                            // by gRPC interop servers.
+                            var useTls = context.Configuration.GetValue("use_tls", false);
+
+                            options.Limits.MinRequestBodyDataRate = null;
+                            options.ListenAnyIP(
+                                0,
+                                listenOptions =>
+                                {
+                                    Console.WriteLine($"Enabling connection encryption: {useTls}");
+
+                                    if (useTls)
+                                    {
+                                        var basePath = Path.GetDirectoryName(
+                                            typeof(Program).Assembly.Location
+                                        );
+                                        var certPath = Path.Combine(
+                                            basePath!,
+                                            "Certs",
+                                            "server1.pfx"
+                                        );
+
+                                        listenOptions.UseHttps(certPath, "1111");
+                                    }
+                                    listenOptions.Protocols = HttpProtocols.Http2;
+                                }
+                            );
+                        }
+                    );
+                    webBuilder.UseStartup<Startup>();
+                }
+            );
 }

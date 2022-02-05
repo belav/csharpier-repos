@@ -21,8 +21,8 @@ public class CertificateChallengeContext : PropertiesContext<CertificateAuthenti
         HttpContext context,
         AuthenticationScheme scheme,
         CertificateAuthenticationOptions options,
-        AuthenticationProperties properties)
-        : base(context, scheme, options, properties) { }
+        AuthenticationProperties properties
+    ) : base(context, scheme, options, properties) { }
 
     /// <summary>
     /// If true, will skip any default logic for this challenge.

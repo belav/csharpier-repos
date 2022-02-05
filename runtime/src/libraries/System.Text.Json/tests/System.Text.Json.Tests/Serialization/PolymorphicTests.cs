@@ -21,32 +21,38 @@ namespace System.Text.Json.Serialization.Tests
 
     public class PolymorphicTests_AsyncStream : PolymorphicTests
     {
-        public PolymorphicTests_AsyncStream() : base(JsonSerializerWrapperForString.AsyncStreamSerializer) { }
+        public PolymorphicTests_AsyncStream()
+            : base(JsonSerializerWrapperForString.AsyncStreamSerializer) { }
     }
 
     public class PolymorphicTests_AsyncStreamWithSmallBuffer : PolymorphicTests
     {
-        public PolymorphicTests_AsyncStreamWithSmallBuffer() : base(JsonSerializerWrapperForString.AsyncStreamSerializerWithSmallBuffer) { }
+        public PolymorphicTests_AsyncStreamWithSmallBuffer()
+            : base(JsonSerializerWrapperForString.AsyncStreamSerializerWithSmallBuffer) { }
     }
 
     public class PolymorphicTests_SyncStream : PolymorphicTests
     {
-        public PolymorphicTests_SyncStream() : base(JsonSerializerWrapperForString.SyncStreamSerializer) { }
+        public PolymorphicTests_SyncStream()
+            : base(JsonSerializerWrapperForString.SyncStreamSerializer) { }
     }
 
     public class PolymorphicTests_Writer : PolymorphicTests
     {
-        public PolymorphicTests_Writer() : base(JsonSerializerWrapperForString.ReaderWriterSerializer) { }
+        public PolymorphicTests_Writer()
+            : base(JsonSerializerWrapperForString.ReaderWriterSerializer) { }
     }
 
     public class PolymorphicTests_Document : PolymorphicTests
     {
-        public PolymorphicTests_Document() : base(JsonSerializerWrapperForString.DocumentSerializer) { }
+        public PolymorphicTests_Document() : base(JsonSerializerWrapperForString.DocumentSerializer)
+        { }
     }
 
     public class PolymorphicTests_Element : PolymorphicTests
     {
-        public PolymorphicTests_Element() : base(JsonSerializerWrapperForString.ElementSerializer) { }
+        public PolymorphicTests_Element() : base(JsonSerializerWrapperForString.ElementSerializer)
+        { }
     }
 
     public class PolymorphicTests_Node : PolymorphicTests
@@ -128,7 +134,14 @@ namespace System.Text.Json.Serialization.Tests
             const string ExpectedJson = @"[1,true,{""City"":""MyCity""},null,""foo""]";
             const string ReversedExpectedJson = @"[""foo"",null,{""City"":""MyCity""},true,1]";
 
-            string[] expectedObjects = { @"""foo""", @"null", @"{""City"":""MyCity""}", @"true", @"1" };
+            string[] expectedObjects =
+            {
+                @"""foo""",
+                @"null",
+                @"{""City"":""MyCity""}",
+                @"true",
+                @"1"
+            };
 
             var address = new Address();
             address.Initialize();
@@ -173,7 +186,14 @@ namespace System.Text.Json.Serialization.Tests
             json = await Serializer.SerializeWrapper<object>(icollection);
             Assert.Equal(ExpectedJson, json);
 
-            IEnumerable<object> genericIEnumerable = new List<object> { 1, true, address, null, "foo" };
+            IEnumerable<object> genericIEnumerable = new List<object>
+            {
+                1,
+                true,
+                address,
+                null,
+                "foo"
+            };
             json = await Serializer.SerializeWrapper(genericIEnumerable);
             Assert.Equal(ExpectedJson, json);
 
@@ -187,21 +207,42 @@ namespace System.Text.Json.Serialization.Tests
             json = await Serializer.SerializeWrapper<object>(genericIList);
             Assert.Equal(ExpectedJson, json);
 
-            ICollection<object> genericICollection = new List<object> { 1, true, address, null, "foo" };
+            ICollection<object> genericICollection = new List<object>
+            {
+                1,
+                true,
+                address,
+                null,
+                "foo"
+            };
             json = await Serializer.SerializeWrapper(genericICollection);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(genericICollection);
             Assert.Equal(ExpectedJson, json);
 
-            IReadOnlyCollection<object> genericIReadOnlyCollection = new List<object> { 1, true, address, null, "foo" };
+            IReadOnlyCollection<object> genericIReadOnlyCollection = new List<object>
+            {
+                1,
+                true,
+                address,
+                null,
+                "foo"
+            };
             json = await Serializer.SerializeWrapper(genericIReadOnlyCollection);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(genericIReadOnlyCollection);
             Assert.Equal(ExpectedJson, json);
 
-            IReadOnlyList<object> genericIReadonlyList = new List<object> { 1, true, address, null, "foo" };
+            IReadOnlyList<object> genericIReadonlyList = new List<object>
+            {
+                1,
+                true,
+                address,
+                null,
+                "foo"
+            };
             json = await Serializer.SerializeWrapper(genericIReadonlyList);
             Assert.Equal(ExpectedJson, json);
 
@@ -215,63 +256,81 @@ namespace System.Text.Json.Serialization.Tests
             json = await Serializer.SerializeWrapper<object>(iset);
             Assert.Equal(ExpectedJson, json);
 
-            Stack<object> stack = new Stack<object>(new List<object> { 1, true, address, null, "foo" });
+            Stack<object> stack = new Stack<object>(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(stack);
             Assert.Equal(ReversedExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(stack);
             Assert.Equal(ReversedExpectedJson, json);
 
-            Queue<object> queue = new Queue<object>(new List<object> { 1, true, address, null, "foo" });
+            Queue<object> queue = new Queue<object>(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(queue);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(queue);
             Assert.Equal(ExpectedJson, json);
 
-            HashSet<object> hashset = new HashSet<object>(new List<object> { 1, true, address, null, "foo" });
+            HashSet<object> hashset = new HashSet<object>(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(hashset);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(hashset);
             Assert.Equal(ExpectedJson, json);
 
-            LinkedList<object> linkedlist = new LinkedList<object>(new List<object> { 1, true, address, null, "foo" });
+            LinkedList<object> linkedlist = new LinkedList<object>(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(linkedlist);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(linkedlist);
             Assert.Equal(ExpectedJson, json);
 
-            ImmutableArray<object> immutablearray = ImmutableArray.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            ImmutableArray<object> immutablearray = ImmutableArray.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(immutablearray);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(immutablearray);
             Assert.Equal(ExpectedJson, json);
 
-            IImmutableList<object> iimmutablelist = ImmutableList.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            IImmutableList<object> iimmutablelist = ImmutableList.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(iimmutablelist);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(iimmutablelist);
             Assert.Equal(ExpectedJson, json);
 
-            IImmutableStack<object> iimmutablestack = ImmutableStack.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            IImmutableStack<object> iimmutablestack = ImmutableStack.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(iimmutablestack);
             Assert.Equal(ReversedExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(iimmutablestack);
             Assert.Equal(ReversedExpectedJson, json);
 
-            IImmutableQueue<object> iimmutablequeue = ImmutableQueue.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            IImmutableQueue<object> iimmutablequeue = ImmutableQueue.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(iimmutablequeue);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(iimmutablequeue);
             Assert.Equal(ExpectedJson, json);
 
-            IImmutableSet<object> iimmutableset = ImmutableHashSet.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            IImmutableSet<object> iimmutableset = ImmutableHashSet.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(iimmutableset);
             foreach (string obj in expectedObjects)
             {
@@ -284,7 +343,9 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Contains(obj, json);
             }
 
-            ImmutableHashSet<object> immutablehashset = ImmutableHashSet.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            ImmutableHashSet<object> immutablehashset = ImmutableHashSet.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(immutablehashset);
             foreach (string obj in expectedObjects)
             {
@@ -297,21 +358,27 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Contains(obj, json);
             }
 
-            ImmutableList<object> immutablelist = ImmutableList.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            ImmutableList<object> immutablelist = ImmutableList.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(immutablelist);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(immutablelist);
             Assert.Equal(ExpectedJson, json);
 
-            ImmutableStack<object> immutablestack = ImmutableStack.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            ImmutableStack<object> immutablestack = ImmutableStack.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(immutablestack);
             Assert.Equal(ReversedExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(immutablestack);
             Assert.Equal(ReversedExpectedJson, json);
 
-            ImmutableQueue<object> immutablequeue = ImmutableQueue.CreateRange(new List<object> { 1, true, address, null, "foo" });
+            ImmutableQueue<object> immutablequeue = ImmutableQueue.CreateRange(
+                new List<object> { 1, true, address, null, "foo" }
+            );
             json = await Serializer.SerializeWrapper(immutablequeue);
             Assert.Equal(ExpectedJson, json);
 
@@ -323,9 +390,18 @@ namespace System.Text.Json.Serialization.Tests
         public async Task SimpleTestClassAsRootObject()
         {
             // Sanity checks on test type.
-            Assert.Equal(typeof(object), typeof(SimpleTestClassWithObject).GetProperty("MyInt16").PropertyType);
-            Assert.Equal(typeof(object), typeof(SimpleTestClassWithObject).GetProperty("MyBooleanTrue").PropertyType);
-            Assert.Equal(typeof(object), typeof(SimpleTestClassWithObject).GetProperty("MyInt16Array").PropertyType);
+            Assert.Equal(
+                typeof(object),
+                typeof(SimpleTestClassWithObject).GetProperty("MyInt16").PropertyType
+            );
+            Assert.Equal(
+                typeof(object),
+                typeof(SimpleTestClassWithObject).GetProperty("MyBooleanTrue").PropertyType
+            );
+            Assert.Equal(
+                typeof(object),
+                typeof(SimpleTestClassWithObject).GetProperty("MyInt16Array").PropertyType
+            );
 
             var obj = new SimpleTestClassWithObject();
             obj.Initialize();
@@ -369,8 +445,14 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Contains(@"""IImmutableListT"":[""Hello"",""World""]", json);
                 Assert.Contains(@"""IImmutableStackT"":[""World"",""Hello""]", json);
                 Assert.Contains(@"""IImmutableQueueT"":[""Hello"",""World""]", json);
-                Assert.True(json.Contains(@"""IImmutableSetT"":[""Hello"",""World""]") || json.Contains(@"""IImmutableSetT"":[""World"",""Hello""]"));
-                Assert.True(json.Contains(@"""ImmutableHashSetT"":[""Hello"",""World""]") || json.Contains(@"""ImmutableHashSetT"":[""World"",""Hello""]"));
+                Assert.True(
+                    json.Contains(@"""IImmutableSetT"":[""Hello"",""World""]")
+                        || json.Contains(@"""IImmutableSetT"":[""World"",""Hello""]")
+                );
+                Assert.True(
+                    json.Contains(@"""ImmutableHashSetT"":[""Hello"",""World""]")
+                        || json.Contains(@"""ImmutableHashSetT"":[""World"",""Hello""]")
+                );
                 Assert.Contains(@"""ImmutableListT"":[""Hello"",""World""]", json);
                 Assert.Contains(@"""ImmutableStackT"":[""World"",""Hello""]", json);
                 Assert.Contains(@"""ImmutableQueueT"":[""Hello"",""World""]", json);
@@ -381,11 +463,26 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             // Sanity checks on test type.
-            Assert.Equal(typeof(object), typeof(ObjectWithObjectProperties).GetProperty("Address").PropertyType);
-            Assert.Equal(typeof(object), typeof(ObjectWithObjectProperties).GetProperty("List").PropertyType);
-            Assert.Equal(typeof(object), typeof(ObjectWithObjectProperties).GetProperty("Array").PropertyType);
-            Assert.Equal(typeof(object), typeof(ObjectWithObjectProperties).GetProperty("NullableInt").PropertyType);
-            Assert.Equal(typeof(object), typeof(ObjectWithObjectProperties).GetProperty("NullableIntArray").PropertyType);
+            Assert.Equal(
+                typeof(object),
+                typeof(ObjectWithObjectProperties).GetProperty("Address").PropertyType
+            );
+            Assert.Equal(
+                typeof(object),
+                typeof(ObjectWithObjectProperties).GetProperty("List").PropertyType
+            );
+            Assert.Equal(
+                typeof(object),
+                typeof(ObjectWithObjectProperties).GetProperty("Array").PropertyType
+            );
+            Assert.Equal(
+                typeof(object),
+                typeof(ObjectWithObjectProperties).GetProperty("NullableInt").PropertyType
+            );
+            Assert.Equal(
+                typeof(object),
+                typeof(ObjectWithObjectProperties).GetProperty("NullableIntArray").PropertyType
+            );
 
             var obj = new ObjectWithObjectProperties();
 
@@ -488,32 +585,45 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public void PolymorphicInterface_NotSupported()
         {
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<MyClass>(@"{ ""Value"": ""A value"", ""Thing"": { ""Number"": 123 } }"));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<MyClass>(
+                        @"{ ""Value"": ""A value"", ""Thing"": { ""Number"": 123 } }"
+                    )
+            );
         }
 
         [Fact]
         public void GenericListOfInterface_WithInvalidJson_ThrowsJsonException()
         {
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<MyThingCollection>("false"));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<MyThingCollection>("false")
+            );
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<MyThingCollection>("{}"));
         }
 
         [Fact]
         public void GenericListOfInterface_WithValidJson_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<MyThingCollection>("[{}]"));
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<MyThingCollection>("[{}]")
+            );
         }
 
         [Fact]
         public void GenericDictionaryOfInterface_WithInvalidJson_ThrowsJsonException()
         {
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<MyThingDictionary>(@"{"""":1}"));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<MyThingDictionary>(@"{"""":1}")
+            );
         }
 
         [Fact]
         public void GenericDictionaryOfInterface_WithValidJson_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<MyThingDictionary>(@"{"""":{}}"));
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<MyThingDictionary>(@"{"""":{}}")
+            );
         }
 
         [Fact]

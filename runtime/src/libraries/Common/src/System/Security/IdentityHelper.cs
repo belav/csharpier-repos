@@ -19,10 +19,38 @@ namespace System.Security
     {
         private static readonly char[] s_base32Char =
         {
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-            'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-            'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-            'y', 'z', '0', '1', '2', '3', '4', '5'
+            'a',
+            'b',
+            'c',
+            'd',
+            'e',
+            'f',
+            'g',
+            'h',
+            'i',
+            'j',
+            'k',
+            'l',
+            'm',
+            'n',
+            'o',
+            'p',
+            'q',
+            'r',
+            's',
+            't',
+            'u',
+            'v',
+            'w',
+            'x',
+            'y',
+            'z',
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5'
         };
 
         /// <summary>
@@ -72,7 +100,11 @@ namespace System.Security
             }
         }
 
-        [Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "Compat: Used to generate an 8.3 filename.")]
+        [Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "Compat: Used to generate an 8.3 filename."
+        )]
         internal static string GetStrongHashSuitableForObjectName(Stream stream)
         {
             using (SHA1 sha1 = SHA1.Create())
@@ -89,7 +121,8 @@ namespace System.Security
             Debug.Assert(((buff.Length % 5) == 0), "Unexpected hash length");
 
             StringBuilder sb = new StringBuilder();
-            int l, i;
+            int l,
+                i;
 
             l = buff.Length;
             i = 0;
@@ -113,13 +146,9 @@ namespace System.Security
                 sb.Append(s_base32Char[b4 & 0x1F]);
 
                 // Consume 3 MSB of b0, b1, MSB bits 6, 7 of b3, b4
-                sb.Append(s_base32Char[(
-                        ((b0 & 0xE0) >> 5) |
-                        ((b3 & 0x60) >> 2))]);
+                sb.Append(s_base32Char[(((b0 & 0xE0) >> 5) | ((b3 & 0x60) >> 2))]);
 
-                sb.Append(s_base32Char[(
-                        ((b1 & 0xE0) >> 5) |
-                        ((b4 & 0x60) >> 2))]);
+                sb.Append(s_base32Char[(((b1 & 0xE0) >> 5) | ((b4 & 0x60) >> 2))]);
 
                 // Consume 3 MSB bits of b2, 1 MSB bit of b3, b4
 
@@ -133,7 +162,6 @@ namespace System.Security
                     b2 |= 0x10;
 
                 sb.Append(s_base32Char[b2]);
-
             } while (i < l);
 
             return sb.ToString();

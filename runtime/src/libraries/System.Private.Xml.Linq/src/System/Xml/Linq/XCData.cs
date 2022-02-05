@@ -33,10 +33,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.CDATA;
-            }
+            get { return XmlNodeType.CDATA; }
         }
 
         /// <summary>
@@ -47,7 +44,8 @@ namespace System.Xml.Linq
         /// </param>
         public override void WriteTo(XmlWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException(nameof(writer));
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
             writer.WriteCData(text);
         }
 

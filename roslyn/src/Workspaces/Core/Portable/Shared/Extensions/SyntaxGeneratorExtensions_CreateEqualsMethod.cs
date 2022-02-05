@@ -28,16 +28,29 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             INamedTypeSymbol containingType,
             ImmutableArray<ISymbol> symbols,
             string localNameOpt,
-            SyntaxAnnotation statementAnnotation)
+            SyntaxAnnotation statementAnnotation
+        )
         {
             var statements = CreateEqualsMethodStatements(
-                factory, generatorInternal, compilation, parseOptions, containingType, symbols, localNameOpt);
-            statements = statements.SelectAsArray(s => s.WithAdditionalAnnotations(statementAnnotation));
+                factory,
+                generatorInternal,
+                compilation,
+                parseOptions,
+                containingType,
+                symbols,
+                localNameOpt
+            );
+            statements = statements.SelectAsArray(
+                s => s.WithAdditionalAnnotations(statementAnnotation)
+            );
 
             return CreateEqualsMethod(compilation, statements);
         }
 
-        public static IMethodSymbol CreateEqualsMethod(this Compilation compilation, ImmutableArray<SyntaxNode> statements)
+        public static IMethodSymbol CreateEqualsMethod(
+            this Compilation compilation,
+            ImmutableArray<SyntaxNode> statements
+        )
         {
             return CodeGenerationSymbolFactory.CreateMethodSymbol(
                 attributes: default,
@@ -48,8 +61,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 explicitInterfaceImplementations: default,
                 name: EqualsName,
                 typeParameters: default,
-                parameters: ImmutableArray.Create(CodeGenerationSymbolFactory.CreateParameterSymbol(compilation.GetSpecialType(SpecialType.System_Object).WithNullableAnnotation(NullableAnnotation.Annotated), ObjName)),
-                statements: statements);
+                parameters: ImmutableArray.Create(
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        compilation
+                            .GetSpecialType(SpecialType.System_Object)
+                            .WithNullableAnnotation(NullableAnnotation.Annotated),
+                        ObjName
+                    )
+                ),
+                statements: statements
+            );
         }
 
         public static IMethodSymbol CreateIEquatableEqualsMethod(
@@ -59,11 +80,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             INamedTypeSymbol containingType,
             ImmutableArray<ISymbol> symbols,
             INamedTypeSymbol constructedEquatableType,
-            SyntaxAnnotation statementAnnotation)
+            SyntaxAnnotation statementAnnotation
+        )
         {
             var statements = CreateIEquatableEqualsMethodStatements(
-                factory, generatorInternal, semanticModel.Compilation, containingType, symbols);
-            statements = statements.SelectAsArray(s => s.WithAdditionalAnnotations(statementAnnotation));
+                factory,
+                generatorInternal,
+                semanticModel.Compilation,
+                containingType,
+                symbols
+            );
+            statements = statements.SelectAsArray(
+                s => s.WithAdditionalAnnotations(statementAnnotation)
+            );
 
             var methodSymbol = constructedEquatableType
                 .GetMembers(EqualsName)
@@ -73,10 +102,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var originalParameter = methodSymbol.Parameters.First();
 
             // Replace `[AllowNull] Foo` with `Foo` or `Foo?` (no longer needed after https://github.com/dotnet/roslyn/issues/39256?)
-            var parameters = ImmutableArray.Create(CodeGenerationSymbolFactory.CreateParameterSymbol(
-                originalParameter,
-                type: constructedEquatableType.GetTypeArguments()[0],
-                attributes: ImmutableArray<AttributeData>.Empty));
+            var parameters = ImmutableArray.Create(
+                CodeGenerationSymbolFactory.CreateParameterSymbol(
+                    originalParameter,
+                    type: constructedEquatableType.GetTypeArguments()[0],
+                    attributes: ImmutableArray<AttributeData>.Empty
+                )
+            );
 
             if (factory.RequiresExplicitImplementationForInterfaceMembers)
             {
@@ -85,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     modifiers: new DeclarationModifiers(),
                     explicitInterfaceImplementations: ImmutableArray.Create(methodSymbol),
                     parameters: parameters,
-                    statements: statements);
+                    statements: statements
+                );
             }
             else
             {
@@ -93,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     methodSymbol,
                     modifiers: new DeclarationModifiers(),
                     parameters: parameters,
-                    statements: statements);
+                    statements: statements
+                );
             }
         }
 
@@ -104,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ParseOptions parseOptions,
             INamedTypeSymbol containingType,
             ImmutableArray<ISymbol> members,
-            string localNameOpt)
+            string localNameOpt
+        )
         {
             using var _1 = ArrayBuilder<SyntaxNode>.GetInstance(out var statements);
 
@@ -135,8 +170,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 // If we support patterns then we can do "return obj is MyType myType && ..."
                 expressions.Add(
-                    factory.SyntaxGeneratorInternal.IsPatternExpression(objNameExpression,
-                        factory.SyntaxGeneratorInternal.DeclarationPattern(containingType, localName)));
+                    factory.SyntaxGeneratorInternal.IsPatternExpression(
+                        objNameExpression,
+                        factory.SyntaxGeneratorInternal.DeclarationPattern(
+                            containingType,
+                            localName
+                        )
+                    )
+                );
             }
             else if (containingType.IsValueType)
             {
@@ -149,17 +190,21 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 //      }
                 var ifStatement = factory.IfStatement(
                     factory.LogicalNotExpression(
-                        factory.IsTypeExpression(
-                            objNameExpression,
-                            containingType)),
-                    new[] { factory.ReturnStatement(factory.FalseLiteralExpression()) });
+                        factory.IsTypeExpression(objNameExpression, containingType)
+                    ),
+                    new[] { factory.ReturnStatement(factory.FalseLiteralExpression()) }
+                );
 
                 // Next, we cast the argument to our type:
                 //
                 //      var myType = (MyType)obj;
 
-                var localDeclaration = factory.SimpleLocalDeclarationStatement(factory.SyntaxGeneratorInternal,
-                    containingType, localName, factory.CastExpression(containingType, objNameExpression));
+                var localDeclaration = factory.SimpleLocalDeclarationStatement(
+                    factory.SyntaxGeneratorInternal,
+                    containingType,
+                    localName,
+                    factory.CastExpression(containingType, objNameExpression)
+                );
 
                 statements.Add(ifStatement);
                 statements.Add(localDeclaration);
@@ -170,8 +215,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 //
                 //      var myType = obj as MyType;
 
-                var localDeclaration = factory.SimpleLocalDeclarationStatement(factory.SyntaxGeneratorInternal,
-                    containingType, localName, factory.TryCastExpression(objNameExpression, containingType));
+                var localDeclaration = factory.SimpleLocalDeclarationStatement(
+                    factory.SyntaxGeneratorInternal,
+                    containingType,
+                    localName,
+                    factory.TryCastExpression(objNameExpression, containingType)
+                );
 
                 statements.Add(localDeclaration);
 
@@ -179,7 +228,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // succeeded):
                 //
                 //      myType != null
-                expressions.Add(factory.ReferenceNotEqualsExpression(localNameExpression, factory.NullLiteralExpression()));
+                expressions.Add(
+                    factory.ReferenceNotEqualsExpression(
+                        localNameExpression,
+                        factory.NullLiteralExpression()
+                    )
+                );
             }
 
             if (!containingType.IsValueType && HasExistingBaseEqualsMethod(containingType))
@@ -188,30 +242,46 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // then ensure the base type thinks it is equals as well.
                 //
                 //      base.Equals(obj)
-                expressions.Add(factory.InvocationExpression(
-                    factory.MemberAccessExpression(
-                        factory.BaseExpression(),
-                        factory.IdentifierName(EqualsName)),
-                    objNameExpression));
+                expressions.Add(
+                    factory.InvocationExpression(
+                        factory.MemberAccessExpression(
+                            factory.BaseExpression(),
+                            factory.IdentifierName(EqualsName)
+                        ),
+                        objNameExpression
+                    )
+                );
             }
 
-            AddMemberChecks(factory, generatorInternal, compilation, members, localNameExpression, expressions);
+            AddMemberChecks(
+                factory,
+                generatorInternal,
+                compilation,
+                members,
+                localNameExpression,
+                expressions
+            );
 
             // Now combine all the comparison expressions together into one final statement like:
             //
             //      return myType != null &&
             //             base.Equals(obj) &&
             //             this.S1 == myType.S1;
-            statements.Add(factory.ReturnStatement(
-                expressions.Aggregate(factory.LogicalAndExpression)));
+            statements.Add(
+                factory.ReturnStatement(expressions.Aggregate(factory.LogicalAndExpression))
+            );
 
             return statements.ToImmutable();
         }
 
         private static void AddMemberChecks(
-            SyntaxGenerator factory, SyntaxGeneratorInternal generatorInternal, Compilation compilation,
-            ImmutableArray<ISymbol> members, SyntaxNode localNameExpression,
-            ArrayBuilder<SyntaxNode> expressions)
+            SyntaxGenerator factory,
+            SyntaxGeneratorInternal generatorInternal,
+            Compilation compilation,
+            ImmutableArray<ISymbol> members,
+            SyntaxNode localNameExpression,
+            ArrayBuilder<SyntaxNode> expressions
+        )
         {
             var iequatableType = compilation.GetTypeByMetadataName(typeof(IEquatable<>).FullName);
 
@@ -222,9 +292,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             foreach (var member in members)
             {
                 var symbolNameExpression = factory.IdentifierName(member.Name);
-                var thisSymbol = factory.MemberAccessExpression(factory.ThisExpression(), symbolNameExpression)
-                                        .WithAdditionalAnnotations(Simplification.Simplifier.Annotation);
-                var otherSymbol = factory.MemberAccessExpression(localNameExpression, symbolNameExpression);
+                var thisSymbol = factory
+                    .MemberAccessExpression(factory.ThisExpression(), symbolNameExpression)
+                    .WithAdditionalAnnotations(Simplification.Simplifier.Annotation);
+                var otherSymbol = factory.MemberAccessExpression(
+                    localNameExpression,
+                    symbolNameExpression
+                );
 
                 var memberType = member.GetSymbolType();
 
@@ -234,7 +308,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     continue;
                 }
 
-                var valueIEquatable = memberType?.IsValueType == true && ImplementsIEquatable(memberType, iequatableType);
+                var valueIEquatable =
+                    memberType?.IsValueType == true
+                    && ImplementsIEquatable(memberType, iequatableType);
                 if (valueIEquatable || memberType?.IsTupleType == true)
                 {
                     // If it's a value type and implements IEquatable<T>, Or if it's a tuple, then
@@ -242,9 +318,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     // unnecessary null check.
                     //
                     //      this.a.Equals(other.a)
-                    expressions.Add(factory.InvocationExpression(
-                        factory.MemberAccessExpression(thisSymbol, nameof(object.Equals)),
-                        otherSymbol));
+                    expressions.Add(
+                        factory.InvocationExpression(
+                            factory.MemberAccessExpression(thisSymbol, nameof(object.Equals)),
+                            otherSymbol
+                        )
+                    );
                     continue;
                 }
 
@@ -252,12 +331,21 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // This will do the appropriate null checks as well as calling directly
                 // into IEquatable<T>.Equals implementations if available.
 
-                expressions.Add(factory.InvocationExpression(
+                expressions.Add(
+                    factory.InvocationExpression(
                         factory.MemberAccessExpression(
-                            GetDefaultEqualityComparer(factory, generatorInternal, compilation, GetType(compilation, member)),
-                            factory.IdentifierName(EqualsName)),
+                            GetDefaultEqualityComparer(
+                                factory,
+                                generatorInternal,
+                                compilation,
+                                GetType(compilation, member)
+                            ),
+                            factory.IdentifierName(EqualsName)
+                        ),
                         thisSymbol,
-                        otherSymbol));
+                        otherSymbol
+                    )
+                );
             }
         }
 
@@ -266,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxGeneratorInternal generatorInternal,
             Compilation compilation,
             INamedTypeSymbol containingType,
-            ImmutableArray<ISymbol> members)
+            ImmutableArray<ISymbol> members
+        )
         {
             var statements = ArrayBuilder<SyntaxNode>.GetInstance();
 
@@ -281,30 +370,47 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // It's not a value type. Ensure that the parameter we got was not null.
                 //
                 //      other != null
-                expressions.Add(factory.ReferenceNotEqualsExpression(otherNameExpression, factory.NullLiteralExpression()));
+                expressions.Add(
+                    factory.ReferenceNotEqualsExpression(
+                        otherNameExpression,
+                        factory.NullLiteralExpression()
+                    )
+                );
                 if (HasExistingBaseEqualsMethod(containingType))
                 {
                     // If we're overriding something that also provided an overridden 'Equals',
                     // then ensure the base type thinks it is equals as well.
                     //
                     //      base.Equals(obj)
-                    expressions.Add(factory.InvocationExpression(
-                        factory.MemberAccessExpression(
-                            factory.BaseExpression(),
-                            factory.IdentifierName(EqualsName)),
-                        otherNameExpression));
+                    expressions.Add(
+                        factory.InvocationExpression(
+                            factory.MemberAccessExpression(
+                                factory.BaseExpression(),
+                                factory.IdentifierName(EqualsName)
+                            ),
+                            otherNameExpression
+                        )
+                    );
                 }
             }
 
-            AddMemberChecks(factory, generatorInternal, compilation, members, otherNameExpression, expressions);
+            AddMemberChecks(
+                factory,
+                generatorInternal,
+                compilation,
+                members,
+                otherNameExpression,
+                expressions
+            );
 
             // Now combine all the comparison expressions together into one final statement like:
             //
             //      return other != null &&
             //             base.Equals(other) &&
             //             this.S1 == other.S1;
-            statements.Add(factory.ReturnStatement(
-                expressions.Aggregate(factory.LogicalAndExpression)));
+            statements.Add(
+                factory.ReturnStatement(expressions.Aggregate(factory.LogicalAndExpression))
+            );
 
             return statements.ToImmutableAndFree();
         }
@@ -329,14 +435,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return "v";
         }
 
-        private static bool ImplementsIEquatable(ITypeSymbol memberType, INamedTypeSymbol iequatableType)
+        private static bool ImplementsIEquatable(
+            ITypeSymbol memberType,
+            INamedTypeSymbol iequatableType
+        )
         {
             if (iequatableType != null)
             {
                 // We compare ignoring nested nullability here, as it's possible the underlying object could have implemented IEquatable<Type>
                 // or IEquatable<Type?>. From the perspective of this, either is allowable.
                 var constructed = iequatableType.Construct(memberType);
-                return memberType.AllInterfaces.Contains(constructed, equalityComparer: SymbolEqualityComparer.Default);
+                return memberType.AllInterfaces.Contains(
+                    constructed,
+                    equalityComparer: SymbolEqualityComparer.Default
+                );
             }
 
             return false;
@@ -386,13 +498,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var existingMethods =
                 from baseType in containingType.GetBaseTypes()
                 from method in baseType.GetMembers(EqualsName).OfType<IMethodSymbol>()
-                where method.IsOverride &&
-                      method.DeclaredAccessibility == Accessibility.Public &&
-                      !method.IsStatic &&
-                      method.Parameters.Length == 1 &&
-                      method.ReturnType.SpecialType == SpecialType.System_Boolean &&
-                      method.Parameters[0].Type.SpecialType == SpecialType.System_Object &&
-                      !method.IsAbstract
+                where
+                    method.IsOverride
+                    && method.DeclaredAccessibility == Accessibility.Public
+                    && !method.IsStatic
+                    && method.Parameters.Length == 1
+                    && method.ReturnType.SpecialType == SpecialType.System_Boolean
+                    && method.Parameters[0].Type.SpecialType == SpecialType.System_Object
+                    && !method.IsAbstract
                 select method;
 
             return existingMethods.Any();

@@ -7,44 +7,40 @@ using System;
 public struct VT
 {
     public int[,] int2darr;
-    public int[, ,] int3darr;
+    public int[,,] int3darr;
     public int[,] int2darr_b;
-    public int[, ,] int3darr_b;
+    public int[,,] int3darr_b;
     public int[,] int2darr_c;
-    public int[, ,] int3darr_c;
+    public int[,,] int3darr_c;
 }
 
 public class CL
 {
     public int[,] int2darr = { { 0, -1 }, { 0, 0 } };
-    public int[, ,] int3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    public int[,,] int3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     public int[,] int2darr_b = { { 0, 1 }, { 0, 0 } };
-    public int[, ,] int3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public int[,,] int3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     public int[,] int2darr_c = { { 0, 49 }, { 0, 0 } };
-    public int[, ,] int3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public int[,,] int3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 }
 
 public class intMDArrTest
 {
-
     static int[,] int2darr = { { 0, -1 }, { 0, 0 } };
-    static int[, ,] int3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    static int[,,] int3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     static int[][,] ja1 = new int[2][,];
-    static int[][, ,] ja2 = new int[2][, ,];
+    static int[][,,] ja2 = new int[2][,,];
     static int[,] int2darr_b = { { 0, 1 }, { 0, 0 } };
-    static int[, ,] int3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static int[,,] int3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     static int[][,] ja1_b = new int[2][,];
-    static int[][, ,] ja2_b = new int[2][, ,];
+    static int[][,,] ja2_b = new int[2][,,];
     static int[,] int2darr_c = { { 0, 49 }, { 0, 0 } };
-    static int[, ,] int3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static int[,,] int3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
     static int[][,] ja1_c = new int[2][,];
-    static int[][, ,] ja2_c = new int[2][, ,];
-
-
+    static int[][,,] ja2_c = new int[2][,,];
 
     public static int Main()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -1181,5 +1177,4 @@ public class intMDArrTest
 
 
     }
-
 };

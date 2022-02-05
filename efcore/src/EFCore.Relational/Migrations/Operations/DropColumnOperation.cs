@@ -18,8 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         ///     Creates a new instance of the <see cref="DropColumnOperation" />.
         /// </summary>
         // ReSharper disable once VirtualMemberCallInConstructor
-        public DropColumnOperation()
-            => IsDestructiveChange = true;
+        public DropColumnOperation() => IsDestructiveChange = true;
 
         /// <summary>
         ///     The name of the column.

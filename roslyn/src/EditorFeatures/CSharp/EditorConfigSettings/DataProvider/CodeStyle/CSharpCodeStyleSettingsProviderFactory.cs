@@ -9,13 +9,19 @@ using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.DataProvider.CodeStyle
 {
-    internal class CSharpCodeStyleSettingsProviderFactory : ILanguageSettingsProviderFactory<CodeStyleSetting>
+    internal class CSharpCodeStyleSettingsProviderFactory
+        : ILanguageSettingsProviderFactory<CodeStyleSetting>
     {
         private readonly Workspace _workspace;
 
-        public CSharpCodeStyleSettingsProviderFactory(Workspace workspace) => _workspace = workspace;
+        public CSharpCodeStyleSettingsProviderFactory(Workspace workspace) =>
+            _workspace = workspace;
 
-        public ISettingsProvider<CodeStyleSetting> GetForFile(string filePath)
-            => new CSharpCodeStyleSettingsProvider(filePath, new OptionUpdater(_workspace, filePath), _workspace);
+        public ISettingsProvider<CodeStyleSetting> GetForFile(string filePath) =>
+            new CSharpCodeStyleSettingsProvider(
+                filePath,
+                new OptionUpdater(_workspace, filePath),
+                _workspace
+            );
     }
 }

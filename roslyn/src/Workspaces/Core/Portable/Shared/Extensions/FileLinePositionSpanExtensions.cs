@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <summary>
         /// Get mapped file path if exist, otherwise return null.
         /// </summary>
-        public static string? GetMappedFilePathIfExist(this FileLinePositionSpan fileLinePositionSpan)
-            => fileLinePositionSpan.HasMappedPath ? fileLinePositionSpan.Path : null;
+        public static string? GetMappedFilePathIfExist(
+            this FileLinePositionSpan fileLinePositionSpan
+        ) => fileLinePositionSpan.HasMappedPath ? fileLinePositionSpan.Path : null;
     }
 }

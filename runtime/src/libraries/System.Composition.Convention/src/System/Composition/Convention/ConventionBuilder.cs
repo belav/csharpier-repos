@@ -13,18 +13,25 @@ namespace System.Composition.Convention
     /// </summary>
     public class ConventionBuilder : AttributedModelProvider
     {
-        private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
-        private readonly List<PartConventionBuilder> _conventions = new List<PartConventionBuilder>();
+        private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(
+            LockRecursionPolicy.NoRecursion
+        );
+        private readonly List<PartConventionBuilder> _conventions =
+            new List<PartConventionBuilder>();
 
-        private readonly Dictionary<MemberInfo, List<Attribute>> _memberInfos = new Dictionary<MemberInfo, List<Attribute>>();
-        private readonly Dictionary<ParameterInfo, List<Attribute>> _parameters = new Dictionary<ParameterInfo, List<Attribute>>();
+        private readonly Dictionary<MemberInfo, List<Attribute>> _memberInfos = new Dictionary<
+            MemberInfo,
+            List<Attribute>
+        >();
+        private readonly Dictionary<ParameterInfo, List<Attribute>> _parameters = new Dictionary<
+            ParameterInfo,
+            List<Attribute>
+        >();
 
         /// <summary>
         /// Construct a new <see cref="ConventionBuilder"/>.
         /// </summary>
-        public ConventionBuilder()
-        {
-        }
+        public ConventionBuilder() { }
 
         /// <summary>
         /// Define a rule that will apply to all types that
@@ -123,7 +130,9 @@ namespace System.Composition.Convention
             return partBuilder;
         }
 
-        private IEnumerable<Tuple<object, List<Attribute>>> EvaluateThisTypeInfoAgainstTheConvention(TypeInfo typeInfo)
+        private IEnumerable<
+            Tuple<object, List<Attribute>>
+        > EvaluateThisTypeInfoAgainstTheConvention(TypeInfo typeInfo)
         {
             List<Attribute> attributes = new List<Attribute>();
             var configuredMembers = new List<Tuple<object, List<Attribute>>>();
@@ -135,7 +144,10 @@ namespace System.Composition.Convention
             {
                 attributes.AddRange(builder.BuildTypeAttributes(type));
 
-                specifiedConstructor |= builder.BuildConstructorAttributes(type, ref configuredMembers);
+                specifiedConstructor |= builder.BuildConstructorAttributes(
+                    type,
+                    ref configuredMembers
+                );
                 builder.BuildPropertyAttributes(type, ref configuredMembers);
                 builder.BuildOnImportsSatisfiedNotification(type, ref configuredMembers);
 
@@ -144,7 +156,10 @@ namespace System.Composition.Convention
             if (matchedConvention && !specifiedConstructor)
             {
                 // DefaultConstructor
-                PartConventionBuilder.BuildDefaultConstructorAttributes(type, ref configuredMembers);
+                PartConventionBuilder.BuildDefaultConstructorAttributes(
+                    type,
+                    ref configuredMembers
+                );
             }
             configuredMembers.Add(Tuple.Create((object)type.GetTypeInfo(), attributes));
             return configuredMembers;
@@ -156,7 +171,10 @@ namespace System.Composition.Convention
         /// <param name="reflectedType">The reflectedType the type used to retrieve the memberInfo.</param>
         /// <param name="member">The member to supply attributes for.</param>
         /// <returns>The list of applied attributes.</returns>
-        public override IEnumerable<Attribute> GetCustomAttributes(Type reflectedType, System.Reflection.MemberInfo member)
+        public override IEnumerable<Attribute> GetCustomAttributes(
+            Type reflectedType,
+            System.Reflection.MemberInfo member
+        )
         {
             if (member == null)
             {
@@ -187,7 +205,12 @@ namespace System.Composition.Convention
                         if (!_memberInfos.TryGetValue(memberInfo, out cachedAttributes))
                         {
                             List<Attribute> attributeList;
-                            foreach (Tuple<object, List<Attribute>> element in EvaluateThisTypeInfoAgainstTheConvention(typeInfo))
+                            foreach (
+                                Tuple<
+                                    object,
+                                    List<Attribute>
+                                > element in EvaluateThisTypeInfoAgainstTheConvention(typeInfo)
+                            )
                             {
                                 attributeList = element.Item2;
                                 if (attributeList != null)
@@ -195,9 +218,22 @@ namespace System.Composition.Convention
                                     var mi = element.Item1 as MemberInfo;
                                     if (mi != null)
                                     {
-                                        if (mi != null && (mi is ConstructorInfo || mi is TypeInfo || mi is PropertyInfo || mi is MethodInfo))
+                                        if (
+                                            mi != null
+                                            && (
+                                                mi is ConstructorInfo
+                                                || mi is TypeInfo
+                                                || mi is PropertyInfo
+                                                || mi is MethodInfo
+                                            )
+                                        )
                                         {
-                                            if (!_memberInfos.TryGetValue(mi, out List<Attribute> memberAttributes))
+                                            if (
+                                                !_memberInfos.TryGetValue(
+                                                    mi,
+                                                    out List<Attribute> memberAttributes
+                                                )
+                                            )
                                             {
                                                 _memberInfos.Add(mi, element.Item2);
                                             }
@@ -208,11 +244,18 @@ namespace System.Composition.Convention
                                         var pi = element.Item1 as ParameterInfo;
                                         if (pi == null)
                                         {
-                                            throw new Exception(SR.Diagnostic_InternalExceptionMessage);
+                                            throw new Exception(
+                                                SR.Diagnostic_InternalExceptionMessage
+                                            );
                                         }
 
                                         // Item contains as Constructor parameter to configure
-                                        if (!_parameters.TryGetValue(pi, out List<Attribute> parameterAttributes))
+                                        if (
+                                            !_parameters.TryGetValue(
+                                                pi,
+                                                out List<Attribute> parameterAttributes
+                                            )
+                                        )
                                         {
                                             _parameters.Add(pi, element.Item2);
                                         }
@@ -241,10 +284,15 @@ namespace System.Composition.Convention
             else
                 appliedAttributes = member.GetCustomAttributes<Attribute>(false);
 
-            return cachedAttributes == null ? appliedAttributes : appliedAttributes.Concat(cachedAttributes);
+            return cachedAttributes == null
+              ? appliedAttributes
+              : appliedAttributes.Concat(cachedAttributes);
         }
 
-        private List<Attribute> ReadMemberCustomAttributes(Type reflectedType, System.Reflection.MemberInfo member)
+        private List<Attribute> ReadMemberCustomAttributes(
+            Type reflectedType,
+            System.Reflection.MemberInfo member
+        )
         {
             List<Attribute> cachedAttributes = null;
             bool getMemberAttributes = false;
@@ -256,8 +304,13 @@ namespace System.Composition.Convention
                 if (!_memberInfos.TryGetValue(member, out cachedAttributes))
                 {
                     // If there is nothing for this member Cache any attributes for the DeclaringType
-                    if (reflectedType != null
-                        && !_memberInfos.TryGetValue(member.DeclaringType.GetTypeInfo() as MemberInfo, out cachedAttributes))
+                    if (
+                        reflectedType != null
+                        && !_memberInfos.TryGetValue(
+                            member.DeclaringType.GetTypeInfo() as MemberInfo,
+                            out cachedAttributes
+                        )
+                    )
                     {
                         // If there is nothing for this parameter look to see if the declaring Member has been cached yet?
                         // need to do it outside of the lock, so set the flag we'll check it in a bit
@@ -296,7 +349,10 @@ namespace System.Composition.Convention
         /// <param name="reflectedType">The reflectedType the type used to retrieve the parameterInfo.</param>
         /// <param name="parameter">The parameter to supply attributes for.</param>
         /// <returns>The list of applied attributes.</returns>
-        public override IEnumerable<Attribute> GetCustomAttributes(Type reflectedType, System.Reflection.ParameterInfo parameter)
+        public override IEnumerable<Attribute> GetCustomAttributes(
+            Type reflectedType,
+            System.Reflection.ParameterInfo parameter
+        )
         {
             if (parameter == null)
             {
@@ -304,11 +360,17 @@ namespace System.Composition.Convention
             }
 
             IEnumerable<Attribute> attributes = parameter.GetCustomAttributes<Attribute>(false);
-            List<Attribute> cachedAttributes = ReadParameterCustomAttributes(reflectedType, parameter);
+            List<Attribute> cachedAttributes = ReadParameterCustomAttributes(
+                reflectedType,
+                parameter
+            );
             return cachedAttributes == null ? attributes : attributes.Concat(cachedAttributes);
         }
 
-        private List<Attribute> ReadParameterCustomAttributes(Type reflectedType, System.Reflection.ParameterInfo parameter)
+        private List<Attribute> ReadParameterCustomAttributes(
+            Type reflectedType,
+            System.Reflection.ParameterInfo parameter
+        )
         {
             List<Attribute> cachedAttributes = null;
             bool getMemberAttributes = false;
@@ -320,8 +382,13 @@ namespace System.Composition.Convention
                 if (!_parameters.TryGetValue(parameter, out cachedAttributes))
                 {
                     // If there is nothing for this parameter Cache any attributes for the DeclaringType
-                    if (reflectedType != null
-                     && !_memberInfos.TryGetValue(reflectedType.GetTypeInfo() as MemberInfo, out cachedAttributes))
+                    if (
+                        reflectedType != null
+                        && !_memberInfos.TryGetValue(
+                            reflectedType.GetTypeInfo() as MemberInfo,
+                            out cachedAttributes
+                        )
+                    )
                     {
                         // If there is nothing for this parameter look to see if the declaring Member has been cached yet?
                         // need to do it outside of the lock, so set the flag we'll check it in a bit
@@ -364,8 +431,10 @@ namespace System.Composition.Convention
 
             foreach (Type iface in derivedType.ImplementedInterfaces)
             {
-                if (iface.IsConstructedGenericType &&
-                    iface.GetGenericTypeDefinition() == baseType.AsType())
+                if (
+                    iface.IsConstructedGenericType
+                    && iface.GetGenericTypeDefinition() == baseType.AsType()
+                )
                     return true;
             }
 

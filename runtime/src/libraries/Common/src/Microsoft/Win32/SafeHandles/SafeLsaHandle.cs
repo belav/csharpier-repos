@@ -9,10 +9,7 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeLsaHandle : SafeHandle
     {
-        public SafeLsaHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+        public SafeLsaHandle() : base(IntPtr.Zero, true) { }
 
         protected sealed override bool ReleaseHandle()
         {
@@ -22,10 +19,7 @@ namespace Microsoft.Win32.SafeHandles
 
         public sealed override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero;
-            }
+            get { return handle == IntPtr.Zero; }
         }
     }
 }

@@ -13,15 +13,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         {
             var modelBuilder = CreateConventionModelBuilder();
 
-            modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Geometry)
-                .HasSrid(1);
+            modelBuilder.Entity<Customer>().Property(e => e.Geometry).HasSrid(1);
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Geometry)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Geometry).Metadata;
 
             Assert.Equal(1, property.GetSrid());
         }
@@ -31,15 +25,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         {
             var modelBuilder = CreateConventionModelBuilder();
 
-            modelBuilder
-                .Entity<Customer>()
-                .Property<string>("Geometry")
-                .HasSrid(1);
+            modelBuilder.Entity<Customer>().Property<string>("Geometry").HasSrid(1);
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property<string>("Geometry")
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property<string>("Geometry").Metadata;
 
             Assert.Equal(1, property.GetSrid());
         }
@@ -49,21 +37,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         {
             var modelBuilder = ((IConventionModel)CreateConventionModelBuilder().Model).Builder;
 
-            modelBuilder
-                .Entity(typeof(Customer))
-                .Property(typeof(string), "Geometry")
-                .HasSrid(1);
+            modelBuilder.Entity(typeof(Customer)).Property(typeof(string), "Geometry").HasSrid(1);
 
-            var property = modelBuilder
-                .Entity(typeof(Customer))
-                .Property(typeof(string), "Geometry")
-                .Metadata;
+            var property =
+                modelBuilder.Entity(typeof(Customer)).Property(typeof(string), "Geometry").Metadata;
 
             Assert.Equal(1, property.GetSrid());
         }
 
-        protected virtual ModelBuilder CreateConventionModelBuilder()
-            => SqliteTestHelpers.Instance.CreateConventionBuilder();
+        protected virtual ModelBuilder CreateConventionModelBuilder() =>
+            SqliteTestHelpers.Instance.CreateConventionBuilder();
 
         private class Customer
         {

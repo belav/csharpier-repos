@@ -13,11 +13,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal partial class
 #if DEBUG
-        EventSymbolAdapter : SymbolAdapter,
+    EventSymbolAdapter
+        : SymbolAdapter,
 #else
-        EventSymbol :
-#endif 
-        Cci.IEventDefinition
+    EventSymbol
+        :
+#endif
+          Cci.IEventDefinition
     {
         #region IEventDefinition Members
 
@@ -91,7 +93,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         Cci.ITypeReference Cci.IEventDefinition.GetType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(AdaptedEventSymbol.Type, syntaxNodeOpt: (CSharpSyntaxNode?)context.SyntaxNode, diagnostics: context.Diagnostics);
+            return ((PEModuleBuilder)context.Module).Translate(
+                AdaptedEventSymbol.Type,
+                syntaxNodeOpt: (CSharpSyntaxNode?)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
         }
 
         #endregion
@@ -169,7 +175,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyAdapter is null)
             {
-                return InterlockedOperations.Initialize(ref _lazyAdapter, new EventSymbolAdapter(this));
+                return InterlockedOperations.Initialize(
+                    ref _lazyAdapter,
+                    new EventSymbolAdapter(this)
+                );
             }
 
             return _lazyAdapter;

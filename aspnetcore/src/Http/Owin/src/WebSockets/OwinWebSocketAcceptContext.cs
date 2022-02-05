@@ -16,9 +16,7 @@ public class OwinWebSocketAcceptContext : WebSocketAcceptContext
     /// <summary>
     /// Initializes a new instance of <see cref="OwinWebSocketAcceptContext"/>.
     /// </summary>
-    public OwinWebSocketAcceptContext() : this(new Dictionary<string, object>(1))
-    {
-    }
+    public OwinWebSocketAcceptContext() : this(new Dictionary<string, object>(1)) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OwinWebSocketAcceptContext"/>.
@@ -35,7 +33,10 @@ public class OwinWebSocketAcceptContext : WebSocketAcceptContext
         get
         {
             object obj;
-            if (_options != null && _options.TryGetValue(OwinConstants.WebSocket.SubProtocol, out obj))
+            if (
+                _options != null
+                && _options.TryGetValue(OwinConstants.WebSocket.SubProtocol, out obj)
+            )
             {
                 return (string)obj;
             }

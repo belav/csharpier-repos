@@ -24,15 +24,18 @@ public class TagHelperOutputTest
         var expectedGetChildContentContent = "Initial get child content content";
         var initialGetChildContent = new DefaultTagHelperContent();
         initialGetChildContent.SetContent(expectedGetChildContentContent);
-        Func<bool, HtmlEncoder, Task<TagHelperContent>> initialGetChildContentAsync =
-            (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(initialGetChildContent);
+        Func<bool, HtmlEncoder, Task<TagHelperContent>> initialGetChildContentAsync = (
+            useCachedResult,
+            encoder
+        ) => Task.FromResult<TagHelperContent>(initialGetChildContent);
         var initialTagMode = TagMode.StartTagOnly;
-        var initialAttributes = new TagHelperAttributeList
-            {
-                { "name", "value" }
-            };
+        var initialAttributes = new TagHelperAttributeList { { "name", "value" } };
         var initialTagName = "initialTagName";
-        var output = new TagHelperOutput(initialTagName, initialAttributes, initialGetChildContentAsync)
+        var output = new TagHelperOutput(
+            initialTagName,
+            initialAttributes,
+            initialGetChildContentAsync
+        )
         {
             TagMode = initialTagMode,
             Content = initialOutputChildContent,
@@ -79,7 +82,8 @@ public class TagHelperOutputTest
                 passedUseCacheResult = useCachedResult;
                 passedEncoder = encoder;
                 return Task.FromResult<TagHelperContent>(content);
-            });
+            }
+        );
 
         // Act
         var result = await output.GetChildContentAsync();
@@ -96,12 +100,12 @@ public class TagHelperOutputTest
         get
         {
             return new TheoryData<HtmlEncoder>
-                {
-                    null,
-                    HtmlEncoder.Default,
-                    NullHtmlEncoder.Default,
-                    new HtmlTestEncoder(),
-                };
+            {
+                null,
+                HtmlEncoder.Default,
+                NullHtmlEncoder.Default,
+                new HtmlTestEncoder(),
+            };
         }
     }
 
@@ -121,7 +125,8 @@ public class TagHelperOutputTest
                 passedUseCacheResult = useCachedResult;
                 passedEncoder = encoderArgument;
                 return Task.FromResult<TagHelperContent>(content);
-            });
+            }
+        );
 
         // Act
         var result = await output.GetChildContentAsync(encoder);
@@ -136,7 +141,9 @@ public class TagHelperOutputTest
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async Task GetChildContentAsync_CallsGetChildContentAsyncWithCachedResult(bool useCachedResult)
+    public async Task GetChildContentAsync_CallsGetChildContentAsyncWithCachedResult(
+        bool useCachedResult
+    )
     {
         // Arrange
         bool? passedUseCacheResult = null;
@@ -150,7 +157,8 @@ public class TagHelperOutputTest
                 passedUseCacheResult = useCachedResultArgument;
                 passedEncoder = encoder;
                 return Task.FromResult<TagHelperContent>(content);
-            });
+            }
+        );
 
         // Act
         var result = await output.GetChildContentAsync(useCachedResult);
@@ -182,7 +190,10 @@ public class TagHelperOutputTest
 
     [Theory]
     [MemberData(nameof(UseCachedResultAndHtmlEncoderData))]
-    public async Task GetChildContentAsync_CallsGetChildContentAsyncWithCacheAndEncoder(bool useCachedResult, HtmlEncoder encoder)
+    public async Task GetChildContentAsync_CallsGetChildContentAsyncWithCacheAndEncoder(
+        bool useCachedResult,
+        HtmlEncoder encoder
+    )
     {
         // Arrange
         bool? passedUseCacheResult = null;
@@ -196,7 +207,8 @@ public class TagHelperOutputTest
                 passedUseCacheResult = useCachedResultArgument;
                 passedEncoder = encoderArgument;
                 return Task.FromResult<TagHelperContent>(content);
-            });
+            }
+        );
 
         // Act
         var result = await output.GetChildContentAsync(useCachedResult, encoder);
@@ -223,7 +235,8 @@ public class TagHelperOutputTest
         Assert.NotNull(tagHelperOutput.PostElement);
         Assert.Equal(
             "HtmlEncode[[Hello World]]",
-            tagHelperOutput.PreElement.GetContent(new HtmlTestEncoder()));
+            tagHelperOutput.PreElement.GetContent(new HtmlTestEncoder())
+        );
     }
 
     [Fact]
@@ -241,7 +254,8 @@ public class TagHelperOutputTest
         Assert.NotNull(tagHelperOutput.PostElement);
         Assert.Equal(
             "HtmlEncode[[Hello World]]",
-            tagHelperOutput.PostElement.GetContent(new HtmlTestEncoder()));
+            tagHelperOutput.PostElement.GetContent(new HtmlTestEncoder())
+        );
     }
 
     [Fact]
@@ -258,10 +272,7 @@ public class TagHelperOutputTest
     public void TagName_CanSetToNull()
     {
         // Arrange & Act
-        var tagHelperOutput = new TagHelperOutput("p")
-        {
-            TagName = null
-        };
+        var tagHelperOutput = new TagHelperOutput("p") { TagName = null };
 
         // Assert
         Assert.Null(tagHelperOutput.TagName);
@@ -282,7 +293,8 @@ public class TagHelperOutputTest
         Assert.NotNull(tagHelperOutput.PostElement);
         Assert.Equal(
             "HtmlEncode[[Hello World]]",
-            tagHelperOutput.PreContent.GetContent(new HtmlTestEncoder()));
+            tagHelperOutput.PreContent.GetContent(new HtmlTestEncoder())
+        );
     }
 
     [Fact]
@@ -300,7 +312,8 @@ public class TagHelperOutputTest
         Assert.NotNull(tagHelperOutput.PostElement);
         Assert.Equal(
             "HtmlEncode[[Hello World]]",
-            tagHelperOutput.Content.GetContent(new HtmlTestEncoder()));
+            tagHelperOutput.Content.GetContent(new HtmlTestEncoder())
+        );
     }
 
     [Fact]
@@ -318,7 +331,8 @@ public class TagHelperOutputTest
         Assert.NotNull(tagHelperOutput.PostElement);
         Assert.Equal(
             "HtmlEncode[[Hello World]]",
-            tagHelperOutput.PostContent.GetContent(new HtmlTestEncoder()));
+            tagHelperOutput.PostContent.GetContent(new HtmlTestEncoder())
+        );
     }
 
     [Fact]
@@ -353,12 +367,10 @@ public class TagHelperOutputTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             "p",
-            new TagHelperAttributeList
-            {
-                    { "class", "btn" },
-                    { "something", "   spaced    " }
-            },
-            (cachedResult, encoder) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+            new TagHelperAttributeList { { "class", "btn" }, { "something", "   spaced    " } },
+            (cachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         tagHelperOutput.PreContent.Append("Pre Content");
         tagHelperOutput.Content.Append("Content");
         tagHelperOutput.PostContent.Append("Post Content");
@@ -388,11 +400,10 @@ public class TagHelperOutputTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             "p",
-            new TagHelperAttributeList
-            {
-                    { originalName, "btn" },
-            },
-            (cachedResult, encoder) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+            new TagHelperAttributeList { { originalName, "btn" }, },
+            (cachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         // Act
         tagHelperOutput.Attributes.SetAttribute(updateName, "super button");
@@ -402,7 +413,8 @@ public class TagHelperOutputTest
         Assert.Equal(
             new TagHelperAttribute(updateName, "super button"),
             attribute,
-            CaseSensitiveTagHelperAttributeComparer.Default);
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
     }
 
     public static TheoryData<TagHelperOutput, string> WriteTagHelper_InputData
@@ -411,622 +423,698 @@ public class TagHelperOutputTest
         {
             // parameters: TagHelperOutput, expectedOutput
             return new TheoryData<TagHelperOutput, string>
+            {
                 {
-                    {
-                        // parameters: TagName, Attributes, SelfClosing, PreContent, Content, PostContent
-                        GetTagHelperOutput(
-                            tagName:     "div",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<div>Hello World!</div>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "Hello World!"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "  ",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "Hello World!"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList() { { "test", "testVal" } },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test=\"HtmlEncode[[testVal]]\">Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
+                    // parameters: TagName, Attributes, SelfClosing, PreContent, Content, PostContent
+                    GetTagHelperOutput(
+                        tagName: "div",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<div>Hello World!</div>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Hello World!"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "  ",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Hello World!"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList() { { "test", "testVal" } },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test=\"HtmlEncode[[testVal]]\">Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
+                            { "test", "testVal" },
+                            { "something", "  spaced  " }
+                        },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test=\"HtmlEncode[[testVal]]\" something=\"HtmlEncode[[  spaced  ]]\">Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
                             {
-                                { "test", "testVal" },
-                                { "something", "  spaced  " }
+                                new TagHelperAttribute(
+                                    "test",
+                                    "testVal",
+                                    HtmlAttributeValueStyle.NoQuotes
+                                )
                             },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test=\"HtmlEncode[[testVal]]\" something=\"HtmlEncode[[  spaced  ]]\">Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
                             {
-                                { new TagHelperAttribute("test", "testVal", HtmlAttributeValueStyle.NoQuotes) },
-                                { new TagHelperAttribute("something", "  spaced  ", HtmlAttributeValueStyle.SingleQuotes) },
+                                new TagHelperAttribute(
+                                    "something",
+                                    "  spaced  ",
+                                    HtmlAttributeValueStyle.SingleQuotes
+                                )
                             },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test=HtmlEncode[[testVal]] something='HtmlEncode[[  spaced  ]]'>Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
+                        },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test=HtmlEncode[[testVal]] something='HtmlEncode[[  spaced  ]]'>Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
+                            new TagHelperAttribute("test"),
+                        },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test>Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
+                            new TagHelperAttribute("test"),
+                            new TagHelperAttribute("test2"),
+                        },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test test2>Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
+                            new TagHelperAttribute("first", "unminimized"),
+                            new TagHelperAttribute("test"),
+                        },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p first=\"HtmlEncode[[unminimized]]\" test>Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
+                            new TagHelperAttribute("test"),
+                            new TagHelperAttribute(
+                                "last",
+                                "unminimized",
+                                HtmlAttributeValueStyle.NoQuotes
+                            ),
+                        },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test last=HtmlEncode[[unminimized]]>Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList() { { "test", "testVal" } },
+                        tagMode: TagMode.SelfClosing,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test=\"HtmlEncode[[testVal]]\" />"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
+                            { "test", "testVal" },
+                            { "something", "  spaced  " }
+                        },
+                        tagMode: TagMode.SelfClosing,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test=\"HtmlEncode[[testVal]]\" something=\"HtmlEncode[[  spaced  ]]\" />"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
                             {
-                                new TagHelperAttribute("test"),
-                            },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test>Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
+                                new TagHelperAttribute(
+                                    "test",
+                                    "testVal",
+                                    HtmlAttributeValueStyle.SingleQuotes
+                                )
+                            }
+                        },
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test='HtmlEncode[[testVal]]'>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList()
+                        {
+                            { "test", "testVal" },
+                            { "something", "  spaced  " }
+                        },
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p test=\"HtmlEncode[[testVal]]\" something=\"HtmlEncode[[  spaced  ]]\">"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: "Hello World!",
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p>Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: "Hello World!",
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "<p>Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: "Hello World!",
+                        postElement: null
+                    ),
+                    "<p>Hello World!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: null
+                    ),
+                    "<p>HelloTestWorld!</p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.SelfClosing,
+                        preElement: null,
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: null
+                    ),
+                    "<p />"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "p",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: null,
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: null
+                    ),
+                    "<p>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: null
+                    ),
+                    "<custom>HelloTestWorld!</custom>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "random",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.SelfClosing,
+                        preElement: null,
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: null
+                    ),
+                    "<random />"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "random",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: null,
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: null
+                    ),
+                    "<random>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before<custom></custom>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.SelfClosing,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.SelfClosing,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before<custom test=\"HtmlEncode[[testVal]]\" />"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.SelfClosing,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before<custom />"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList
+                        {
                             {
-                                new TagHelperAttribute("test"),
-                                new TagHelperAttribute("test2"),
-                            },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test test2>Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
-                            {
-                                new TagHelperAttribute("first", "unminimized"),
-                                new TagHelperAttribute("test"),
-                            },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p first=\"HtmlEncode[[unminimized]]\" test>Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
-                            {
-                                new TagHelperAttribute("test"),
-                                new TagHelperAttribute("last", "unminimized", HtmlAttributeValueStyle.NoQuotes),
-                            },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test last=HtmlEncode[[unminimized]]>Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList() { { "test", "testVal" } },
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test=\"HtmlEncode[[testVal]]\" />"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
-                            {
-                                { "test", "testVal" },
-                                { "something", "  spaced  " }
-                            },
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test=\"HtmlEncode[[testVal]]\" something=\"HtmlEncode[[  spaced  ]]\" />"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
-                            {
-                                { new TagHelperAttribute("test", "testVal", HtmlAttributeValueStyle.SingleQuotes) }
-                            },
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test='HtmlEncode[[testVal]]'>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList()
-                            {
-                                { "test", "testVal" },
-                                { "something", "  spaced  " }
-                            },
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p test=\"HtmlEncode[[testVal]]\" something=\"HtmlEncode[[  spaced  ]]\">"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  "Hello World!",
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "<p>Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     "Hello World!",
-                            postContent: null,
-                            postElement: null),
-                        "<p>Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: "Hello World!",
-                            postElement: null),
-                        "<p>Hello World!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: null),
-                        "<p>HelloTestWorld!</p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  null,
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: null),
-                        "<p />"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "p",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  null,
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: null),
-                        "<p>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: null),
-                        "<custom>HelloTestWorld!</custom>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "random",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  null,
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: null),
-                        "<random />"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "random",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  null,
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: null),
-                        "<random>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before<custom></custom>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before<custom test=\"HtmlEncode[[testVal]]\" />"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before<custom />"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList
-                            {
-                                { new TagHelperAttribute("test", "testVal", HtmlAttributeValueStyle.SingleQuotes) }
-                            },
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before<custom test=\"HtmlEncode[[testVal]]\">"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  "Before",
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: null),
-                        "Before<custom>"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: "After"),
-                        "<custom></custom>After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: "After"),
-                        "After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: "After"),
-                        "After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: "After"),
-                        "<custom test=\"HtmlEncode[[testVal]]\" />After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: "After"),
-                        "<custom />After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: "After"),
-                        "After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: "After"),
-                        "<custom test=\"HtmlEncode[[testVal]]\">After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  null,
-                            preContent:  null,
-                            content:     null,
-                            postContent: null,
-                            postElement: "After"),
-                        "<custom>After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  "Before",
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: "After"),
-                        "Before<custom>HelloTestWorld!</custom>After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  "Before",
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: "After"),
-                        "Before<custom test=\"HtmlEncode[[testVal]]\">HelloTestWorld!</custom>After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  "Before",
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: "After"),
-                        "Before<custom />After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.SelfClosing,
-                            preElement:  "Before",
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: "After"),
-                        "BeforeHelloTestWorld!After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     "custom",
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  "Before",
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: "After"),
-                        "Before<custom>After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagOnly,
-                            preElement:  "Before",
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: "After"),
-                        "BeforeHelloTestWorld!After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList(),
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  "Before",
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: "After"),
-                        "BeforeHelloTestWorld!After"
-                    },
-                    {
-                        GetTagHelperOutput(
-                            tagName:     string.Empty,
-                            attributes:  new TagHelperAttributeList { { "test", "testVal" } },
-                            tagMode: TagMode.StartTagAndEndTag,
-                            preElement:  "Before",
-                            preContent:  "Hello",
-                            content:     "Test",
-                            postContent: "World!",
-                            postElement: "After"),
-                        "BeforeHelloTestWorld!After"
-                    },
-                };
+                                new TagHelperAttribute(
+                                    "test",
+                                    "testVal",
+                                    HtmlAttributeValueStyle.SingleQuotes
+                                )
+                            }
+                        },
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before<custom test=\"HtmlEncode[[testVal]]\">"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: "Before",
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: null
+                    ),
+                    "Before<custom>"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: "After"
+                    ),
+                    "<custom></custom>After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: "After"
+                    ),
+                    "After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.SelfClosing,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: "After"
+                    ),
+                    "After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.SelfClosing,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: "After"
+                    ),
+                    "<custom test=\"HtmlEncode[[testVal]]\" />After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.SelfClosing,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: "After"
+                    ),
+                    "<custom />After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: "After"
+                    ),
+                    "After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: "After"
+                    ),
+                    "<custom test=\"HtmlEncode[[testVal]]\">After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: null,
+                        preContent: null,
+                        content: null,
+                        postContent: null,
+                        postElement: "After"
+                    ),
+                    "<custom>After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: "Before",
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: "After"
+                    ),
+                    "Before<custom>HelloTestWorld!</custom>After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: "Before",
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: "After"
+                    ),
+                    "Before<custom test=\"HtmlEncode[[testVal]]\">HelloTestWorld!</custom>After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.SelfClosing,
+                        preElement: "Before",
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: "After"
+                    ),
+                    "Before<custom />After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.SelfClosing,
+                        preElement: "Before",
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: "After"
+                    ),
+                    "BeforeHelloTestWorld!After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: "custom",
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: "Before",
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: "After"
+                    ),
+                    "Before<custom>After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagOnly,
+                        preElement: "Before",
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: "After"
+                    ),
+                    "BeforeHelloTestWorld!After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList(),
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: "Before",
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: "After"
+                    ),
+                    "BeforeHelloTestWorld!After"
+                },
+                {
+                    GetTagHelperOutput(
+                        tagName: string.Empty,
+                        attributes: new TagHelperAttributeList { { "test", "testVal" } },
+                        tagMode: TagMode.StartTagAndEndTag,
+                        preElement: "Before",
+                        preContent: "Hello",
+                        content: "Test",
+                        postContent: "World!",
+                        postElement: "After"
+                    ),
+                    "BeforeHelloTestWorld!After"
+                },
+            };
         }
     }
 
@@ -1101,13 +1189,15 @@ public class TagHelperOutputTest
         string preContent,
         string content,
         string postContent,
-        string postElement)
+        string postElement
+    )
     {
         var output = new TagHelperOutput(
             tagName,
             attributes,
-            getChildContentAsync: (useCachedContent, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedContent, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = tagMode
         };

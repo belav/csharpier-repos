@@ -6,11 +6,13 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-internal class DefaultOidcOptionsConfiguration : IPostConfigureOptions<RemoteAuthenticationOptions<OidcProviderOptions>>
+internal class DefaultOidcOptionsConfiguration
+    : IPostConfigureOptions<RemoteAuthenticationOptions<OidcProviderOptions>>
 {
     private readonly NavigationManager _navigationManager;
 
-    public DefaultOidcOptionsConfiguration(NavigationManager navigationManager) => _navigationManager = navigationManager;
+    public DefaultOidcOptionsConfiguration(NavigationManager navigationManager) =>
+        _navigationManager = navigationManager;
 
     public void Configure(RemoteAuthenticationOptions<OidcProviderOptions> options)
     {
@@ -20,16 +22,16 @@ internal class DefaultOidcOptionsConfiguration : IPostConfigureOptions<RemoteAut
         if (redirectUri == null || !Uri.TryCreate(redirectUri, UriKind.Absolute, out _))
         {
             redirectUri ??= "authentication/login-callback";
-            options.ProviderOptions.RedirectUri = _navigationManager
-                .ToAbsoluteUri(redirectUri).AbsoluteUri;
+            options.ProviderOptions.RedirectUri =
+                _navigationManager.ToAbsoluteUri(redirectUri).AbsoluteUri;
         }
 
         var logoutUri = options.ProviderOptions.PostLogoutRedirectUri;
         if (logoutUri == null || !Uri.TryCreate(logoutUri, UriKind.Absolute, out _))
         {
             logoutUri ??= "authentication/logout-callback";
-            options.ProviderOptions.PostLogoutRedirectUri = _navigationManager
-                .ToAbsoluteUri(logoutUri).AbsoluteUri;
+            options.ProviderOptions.PostLogoutRedirectUri =
+                _navigationManager.ToAbsoluteUri(logoutUri).AbsoluteUri;
         }
     }
 

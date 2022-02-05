@@ -82,7 +82,10 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(GCHandleType.Pinned + 1)]
         public void Alloc_InvalidGCHandleType_ThrowsArgumentOutOfRangeException(GCHandleType type)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("type", () => GCHandle.Alloc(new object(), type));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "type",
+                () => GCHandle.Alloc(new object(), type)
+            );
         }
 
         [Fact]
@@ -123,7 +126,12 @@ namespace System.Runtime.InteropServices.Tests
         {
             GCHandle handle = GCHandle.Alloc(new object());
             yield return new object[] { handle, handle, true };
-            yield return new object[] { GCHandle.Alloc(new object()), GCHandle.Alloc(new object()), false };
+            yield return new object[]
+            {
+                GCHandle.Alloc(new object()),
+                GCHandle.Alloc(new object()),
+                false
+            };
 
             yield return new object[] { GCHandle.Alloc(new object()), new object(), false };
             yield return new object[] { GCHandle.Alloc(new object()), null, false };
@@ -174,7 +182,6 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.NotEqual(IntPtr.Zero, handle.AddrOfPinnedObject());
                     }
                 }
-
             }
             finally
             {

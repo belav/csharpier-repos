@@ -30,17 +30,36 @@ namespace System.Linq.Expressions.Tests
                     dm = obj as DynamicMethod;
                 }
 
-                return new ILReader(new DynamicMethodILProvider(dm), new DynamicScopeTokenResolver(dm));
+                return new ILReader(
+                    new DynamicMethodILProvider(dm),
+                    new DynamicScopeTokenResolver(dm)
+                );
             }
 
-            throw new NotSupportedException($"Reading IL from type '{type}' is currently not supported.");
+            throw new NotSupportedException(
+                $"Reading IL from type '{type}' is currently not supported."
+            );
         }
 
-        private static readonly Type s_dynamicMethodType = Type.GetType("System.Reflection.Emit.DynamicMethod", throwOnError: true);
-        private static readonly Type s_runtimeMethodInfoType = Type.GetType("System.Reflection.RuntimeMethodInfo", throwOnError: true);
-        private static readonly Type s_runtimeConstructorInfoType = Type.GetType("System.Reflection.RuntimeConstructorInfo", throwOnError: true);
+        private static readonly Type s_dynamicMethodType = Type.GetType(
+            "System.Reflection.Emit.DynamicMethod",
+            throwOnError: true
+        );
+        private static readonly Type s_runtimeMethodInfoType = Type.GetType(
+            "System.Reflection.RuntimeMethodInfo",
+            throwOnError: true
+        );
+        private static readonly Type s_runtimeConstructorInfoType = Type.GetType(
+            "System.Reflection.RuntimeConstructorInfo",
+            throwOnError: true
+        );
 
-        private static readonly Type s_rtDynamicMethodType = Type.GetType("System.Reflection.Emit.DynamicMethod+RTDynamicMethod", throwOnError: true);
-        private static readonly FieldInfo s_fiOwner = s_rtDynamicMethodType.GetFieldAssert("m_owner");
+        private static readonly Type s_rtDynamicMethodType = Type.GetType(
+            "System.Reflection.Emit.DynamicMethod+RTDynamicMethod",
+            throwOnError: true
+        );
+        private static readonly FieldInfo s_fiOwner = s_rtDynamicMethodType.GetFieldAssert(
+            "m_owner"
+        );
     }
 }

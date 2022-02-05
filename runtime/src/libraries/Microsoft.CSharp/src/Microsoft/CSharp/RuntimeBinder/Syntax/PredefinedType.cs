@@ -29,7 +29,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         FirstNonSimpleType,
         PT_INTPTR = FirstNonSimpleType,
         PT_UINTPTR,
-
         PT_OBJECT,
 
         // THE ORDER ABOVE HERE IS IMPORTANT!!!  It is used in tables in both fncbind and ilgen
@@ -71,13 +70,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PT_CONSTRUCTORINFO,
         PT_PROPERTYINFO,
         PT_MISSING,
-
         PT_G_IREADONLYLIST,
         PT_G_IREADONLYCOLLECTION,
         PT_FUNC,
         PT_COUNT,
-        PT_VOID,             // (special case)
-
+        PT_VOID, // (special case)
         PT_UNDEFINEDINDEX = 0xffffffff,
     }
 }

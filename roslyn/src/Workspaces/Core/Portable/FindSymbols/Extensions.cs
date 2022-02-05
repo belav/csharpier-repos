@@ -16,12 +16,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal static partial class Extensions
     {
         public const string ComplexReceiverTypeName = "";
+
         // Although they have same value, one constant here is used for the entire name
         // and the other is just a suffix. Defining separate constants for clarity.
         public const string ComplexArrayReceiverTypeName = "[]";
         public const string ArrayReceiverTypeNameSuffix = "[]";
 
-        public static async Task<IEnumerable<SyntaxToken>> GetConstructorInitializerTokensAsync(this Document document, SemanticModel model, CancellationToken cancellationToken)
+        public static async Task<IEnumerable<SyntaxToken>> GetConstructorInitializerTokensAsync(
+            this Document document,
+            SemanticModel model,
+            CancellationToken cancellationToken
+        )
         {
             var root = await model.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
 
@@ -31,10 +36,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 return SpecializedCollections.EmptyEnumerable<SyntaxToken>();
             }
 
-            return FindReferenceCache.GetConstructorInitializerTokens(syntaxFacts, model, root, cancellationToken);
+            return FindReferenceCache.GetConstructorInitializerTokens(
+                syntaxFacts,
+                model,
+                root,
+                cancellationToken
+            );
         }
 
-        internal static bool TextMatch(this ISyntaxFactsService syntaxFacts, string text1, string text2)
-            => syntaxFacts.StringComparer.Equals(text1, text2);
+        internal static bool TextMatch(
+            this ISyntaxFactsService syntaxFacts,
+            string text1,
+            string text2
+        ) => syntaxFacts.StringComparer.Equals(text1, text2);
     }
 }

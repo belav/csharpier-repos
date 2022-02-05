@@ -17,12 +17,19 @@ public static class InjectDirective
         builder =>
         {
             builder
-                .AddTypeToken(RazorExtensionsResources.InjectDirective_TypeToken_Name, RazorExtensionsResources.InjectDirective_TypeToken_Description)
-                .AddMemberToken(RazorExtensionsResources.InjectDirective_MemberToken_Name, RazorExtensionsResources.InjectDirective_MemberToken_Description);
+                .AddTypeToken(
+                    RazorExtensionsResources.InjectDirective_TypeToken_Name,
+                    RazorExtensionsResources.InjectDirective_TypeToken_Description
+                )
+                .AddMemberToken(
+                    RazorExtensionsResources.InjectDirective_MemberToken_Name,
+                    RazorExtensionsResources.InjectDirective_MemberToken_Description
+                );
 
             builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
             builder.Description = RazorExtensionsResources.InjectDirective_Description;
-        });
+        }
+    );
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
@@ -42,10 +49,15 @@ public static class InjectDirective
         // Runs after the @model and @namespace directives
         public override int Order => 10;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
-            if (documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind &&
-               documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind)
+            if (
+                documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind
+                && documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind
+            )
             {
                 // Not a MVC file. Skip.
                 return;
@@ -91,7 +103,8 @@ public static class InjectDirective
     {
         public ClassDeclarationIntermediateNode Class { get; private set; }
 
-        public IList<DirectiveIntermediateNode> Directives { get; } = new List<DirectiveIntermediateNode>();
+        public IList<DirectiveIntermediateNode> Directives { get; } =
+            new List<DirectiveIntermediateNode>();
 
         public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
         {

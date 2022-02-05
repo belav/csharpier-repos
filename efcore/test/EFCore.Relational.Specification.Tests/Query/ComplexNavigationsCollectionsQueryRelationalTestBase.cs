@@ -3,12 +3,11 @@
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class ComplexNavigationsCollectionsQueryRelationalTestBase<TFixture> : ComplexNavigationsCollectionsQueryTestBase<TFixture>
+    public abstract class ComplexNavigationsCollectionsQueryRelationalTestBase<TFixture>
+        : ComplexNavigationsCollectionsQueryTestBase<TFixture>
         where TFixture : ComplexNavigationsQueryFixtureBase, new()
     {
         protected ComplexNavigationsCollectionsQueryRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
     }
 }

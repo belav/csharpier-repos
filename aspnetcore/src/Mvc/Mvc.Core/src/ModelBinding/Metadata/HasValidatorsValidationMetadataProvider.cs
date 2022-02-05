@@ -15,12 +15,19 @@ internal class HasValidatorsValidationMetadataProvider : IValidationMetadataProv
     private readonly bool _hasOnlyMetadataBasedValidators;
     private readonly IMetadataBasedModelValidatorProvider[]? _validatorProviders;
 
-    public HasValidatorsValidationMetadataProvider(IList<IModelValidatorProvider> modelValidatorProviders)
+    public HasValidatorsValidationMetadataProvider(
+        IList<IModelValidatorProvider> modelValidatorProviders
+    )
     {
-        if (modelValidatorProviders.Count > 0 && modelValidatorProviders.All(p => p is IMetadataBasedModelValidatorProvider))
+        if (
+            modelValidatorProviders.Count > 0
+            && modelValidatorProviders.All(p => p is IMetadataBasedModelValidatorProvider)
+        )
         {
             _hasOnlyMetadataBasedValidators = true;
-            _validatorProviders = modelValidatorProviders.Cast<IMetadataBasedModelValidatorProvider>().ToArray();
+            _validatorProviders = modelValidatorProviders
+                .Cast<IMetadataBasedModelValidatorProvider>()
+                .ToArray();
         }
     }
 
@@ -39,7 +46,12 @@ internal class HasValidatorsValidationMetadataProvider : IValidationMetadataProv
         for (var i = 0; i < _validatorProviders!.Length; i++)
         {
             var provider = _validatorProviders[i];
-            if (provider.HasValidators(context.Key.ModelType, context.ValidationMetadata.ValidatorMetadata))
+            if (
+                provider.HasValidators(
+                    context.Key.ModelType,
+                    context.ValidationMetadata.ValidatorMetadata
+                )
+            )
             {
                 context.ValidationMetadata.HasValidators = true;
 

@@ -36,25 +36,23 @@ namespace System.Net.Http.Formatting.Internal
 #endif
     {
 #if NETFX_CORE
-        internal readonly HashSet<string> Names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        internal readonly List<KeyValuePair<string, string>> List = new List<KeyValuePair<string, string>>();
+        internal readonly HashSet<string> Names = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
+        internal readonly List<KeyValuePair<string, string>> List = new List<
+            KeyValuePair<string, string>
+        >();
 
         /// <summary>
-        /// Creates a new <see cref="System.Net.Http.Formatting.HttpValueCollection"/> instance 
+        /// Creates a new <see cref="System.Net.Http.Formatting.HttpValueCollection"/> instance
         /// </summary>
-        public HttpValueCollection()
-        {
-        }
+        public HttpValueCollection() { }
 #else
         protected HttpValueCollection(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
-        private HttpValueCollection()
-            : base(StringComparer.OrdinalIgnoreCase) // case-insensitive keys
-        {
-        }
+        private HttpValueCollection() : base(StringComparer.OrdinalIgnoreCase) // case-insensitive keys
+        { }
 #endif
         // Use a builder function instead of a ctor to avoid virtual calls from the ctor.
         // The above condition is only important in the Full .NET fx implementation.
@@ -88,9 +86,9 @@ namespace System.Net.Http.Formatting.Internal
         /// <param name="value">The value to be added.</param>
         public
 #if !NETFX_CORE
-            override
+        override
 #endif
- void Add(string name, string value)
+        void Add(string name, string value)
         {
             ThrowIfMaxHttpCollectionKeysExceeded(Count);
 
@@ -118,7 +116,11 @@ namespace System.Net.Http.Formatting.Internal
         {
             if (count >= MediaTypeFormatter.MaxHttpCollectionKeys)
             {
-                throw Error.InvalidOperation(System.Net.Http.Properties.Resources.MaxHttpCollectionKeyLimitReached, MediaTypeFormatter.MaxHttpCollectionKeys, typeof(MediaTypeFormatter));
+                throw Error.InvalidOperation(
+                    System.Net.Http.Properties.Resources.MaxHttpCollectionKeyLimitReached,
+                    MediaTypeFormatter.MaxHttpCollectionKeys,
+                    typeof(MediaTypeFormatter)
+                );
             }
         }
 
@@ -154,13 +156,23 @@ namespace System.Net.Http.Formatting.Internal
             return builder.ToString();
         }
 
-        private static bool AppendNameValuePair(StringBuilder builder, bool first, bool urlEncode, string name, string value)
+        private static bool AppendNameValuePair(
+            StringBuilder builder,
+            bool first,
+            bool urlEncode,
+            string name,
+            string value
+        )
         {
             string effectiveName = name ?? String.Empty;
-            string encodedName = urlEncode ? UriQueryUtility.UrlEncode(effectiveName) : effectiveName;
+            string encodedName = urlEncode
+                ? UriQueryUtility.UrlEncode(effectiveName)
+                : effectiveName;
 
             string effectiveValue = value ?? String.Empty;
-            string encodedValue = urlEncode ? UriQueryUtility.UrlEncode(effectiveValue) : effectiveValue;
+            string encodedValue = urlEncode
+                ? UriQueryUtility.UrlEncode(effectiveValue)
+                : effectiveValue;
 
             if (first)
             {
@@ -190,10 +202,7 @@ namespace System.Net.Http.Formatting.Internal
         /// with the specified name if found; otherwise, null. The values are Url encoded.</returns>
         public string this[string name]
         {
-            get
-            {
-                return Get(name);
-            }
+            get { return Get(name); }
         }
 
         /// <summary>
@@ -201,10 +210,7 @@ namespace System.Net.Http.Formatting.Internal
         /// </summary>
         public int Count
         {
-            get
-            {
-                return Names.Count;
-            }
+            get { return Names.Count; }
         }
 
         /// <summary>

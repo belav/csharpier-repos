@@ -23,13 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         public StringUriConverter(
             Expression<Func<TModel, TProvider>> convertToProviderExpression,
             Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-            ConverterMappingHints? mappingHints = null)
-            : base(
-                convertToProviderExpression,
-                convertFromProviderExpression,
-                mappingHints)
-        {
-        }
+            ConverterMappingHints? mappingHints = null
+        ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,8 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected new static Expression<Func<Uri?, string?>> ToString()
-            => v => v!.ToString();
+        protected new static Expression<Func<Uri?, string?>> ToString() => v => v!.ToString();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,7 +40,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected static Expression<Func<string?, Uri?>> ToUri()
-            => v => new Uri(v!, UriKind.RelativeOrAbsolute);
+        protected static Expression<Func<string?, Uri?>> ToUri() =>
+            v => new Uri(v!, UriKind.RelativeOrAbsolute);
     }
 }

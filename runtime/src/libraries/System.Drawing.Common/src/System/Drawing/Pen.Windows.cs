@@ -17,7 +17,10 @@ namespace System.Drawing
             get
             {
                 IntPtr lineCap = IntPtr.Zero;
-                int status = Gdip.GdipGetPenCustomStartCap(new HandleRef(this, NativePen), out lineCap);
+                int status = Gdip.GdipGetPenCustomStartCap(
+                    new HandleRef(this, NativePen),
+                    out lineCap
+                );
                 Gdip.CheckStatus(status);
 
                 return CustomLineCap.CreateCustomLineCapObject(lineCap);
@@ -26,11 +29,15 @@ namespace System.Drawing
             {
                 if (_immutable)
                 {
-                    throw new ArgumentException(SR.Format(SR.CantChangeImmutableObjects, nameof(Pen)));
+                    throw new ArgumentException(
+                        SR.Format(SR.CantChangeImmutableObjects, nameof(Pen))
+                    );
                 }
 
-                int status = Gdip.GdipSetPenCustomStartCap(new HandleRef(this, NativePen),
-                                                              new HandleRef(value, (value == null) ? IntPtr.Zero : value.nativeCap));
+                int status = Gdip.GdipSetPenCustomStartCap(
+                    new HandleRef(this, NativePen),
+                    new HandleRef(value, (value == null) ? IntPtr.Zero : value.nativeCap)
+                );
                 Gdip.CheckStatus(status);
             }
         }
@@ -43,7 +50,10 @@ namespace System.Drawing
             get
             {
                 IntPtr lineCap = IntPtr.Zero;
-                int status = Gdip.GdipGetPenCustomEndCap(new HandleRef(this, NativePen), out lineCap);
+                int status = Gdip.GdipGetPenCustomEndCap(
+                    new HandleRef(this, NativePen),
+                    out lineCap
+                );
                 Gdip.CheckStatus(status);
                 return CustomLineCap.CreateCustomLineCapObject(lineCap);
             }
@@ -51,12 +61,15 @@ namespace System.Drawing
             {
                 if (_immutable)
                 {
-                    throw new ArgumentException(SR.Format(SR.CantChangeImmutableObjects, nameof(Pen)));
+                    throw new ArgumentException(
+                        SR.Format(SR.CantChangeImmutableObjects, nameof(Pen))
+                    );
                 }
 
                 int status = Gdip.GdipSetPenCustomEndCap(
                     new HandleRef(this, NativePen),
-                    new HandleRef(value, (value == null) ? IntPtr.Zero : value.nativeCap));
+                    new HandleRef(value, (value == null) ? IntPtr.Zero : value.nativeCap)
+                );
                 Gdip.CheckStatus(status);
             }
         }

@@ -9,10 +9,7 @@ namespace Internal.IL.Stubs
     {
         public override string DiagnosticName
         {
-            get
-            {
-                return _declMethod.DiagnosticName;
-            }
+            get { return _declMethod.DiagnosticName; }
         }
     }
 }

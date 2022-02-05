@@ -10,8 +10,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
     ///     and it is not designed to be directly constructed in your application code.
     /// </summary>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
-    public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
-        where TEntity : class
+    public class TemporalTableBuilder<TEntity> : TemporalTableBuilder where TEntity : class
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -20,10 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public TemporalTableBuilder(IMutableEntityType entityType)
-            : base(entityType)
-        {
-        }
+        public TemporalTableBuilder(IMutableEntityType entityType) : base(entityType) { }
 
         /// <summary>
         ///     Configures a history table for the entity mapped to a temporal table.
@@ -35,7 +31,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="name">The name of the history table.</param>
         /// <param name="schema">The schema of the history table.</param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-        public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name, string? schema = null)
-            => (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name, schema);
+        public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(
+            string name,
+            string? schema = null
+        ) => (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name, schema);
     }
 }

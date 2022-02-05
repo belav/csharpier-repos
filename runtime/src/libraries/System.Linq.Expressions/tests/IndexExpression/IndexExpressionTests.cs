@@ -13,7 +13,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void UpdateSameTest()
         {
-            SampleClassWithProperties instance = new SampleClassWithProperties { DefaultProperty = new List<int> { 100, 101 } };
+            SampleClassWithProperties instance = new SampleClassWithProperties
+            {
+                DefaultProperty = new List<int> { 100, 101 }
+            };
             IndexExpression expr = instance.DefaultIndexExpression;
 
             IndexExpression exprUpdated = expr.Update(expr.Object, instance.DefaultArguments);
@@ -29,28 +32,46 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void UpdateDoesntRepeatEnumeration()
         {
-            SampleClassWithProperties instance = new SampleClassWithProperties { DefaultProperty = new List<int> { 100, 101 } };
+            SampleClassWithProperties instance = new SampleClassWithProperties
+            {
+                DefaultProperty = new List<int> { 100, 101 }
+            };
             IndexExpression expr = instance.DefaultIndexExpression;
 
-            Assert.Same(expr, expr.Update(expr.Object, new RunOnceEnumerable<Expression>(instance.DefaultArguments)));
+            Assert.Same(
+                expr,
+                expr.Update(
+                    expr.Object,
+                    new RunOnceEnumerable<Expression>(instance.DefaultArguments)
+                )
+            );
         }
 
         [Fact]
         public void UpdateDifferentObjectTest()
         {
-            SampleClassWithProperties instance = new SampleClassWithProperties { DefaultProperty = new List<int> { 100, 101 } };
+            SampleClassWithProperties instance = new SampleClassWithProperties
+            {
+                DefaultProperty = new List<int> { 100, 101 }
+            };
             IndexExpression expr = instance.DefaultIndexExpression;
 
-            Assert.NotSame(expr, expr.Update(instance.DefaultPropertyExpression, instance.DefaultArguments));
+            Assert.NotSame(
+                expr,
+                expr.Update(instance.DefaultPropertyExpression, instance.DefaultArguments)
+            );
         }
 
         [Fact]
         public void UpdateDifferentArgumentsTest()
         {
-            SampleClassWithProperties instance = new SampleClassWithProperties { DefaultProperty = new List<int> { 100, 101 } };
+            SampleClassWithProperties instance = new SampleClassWithProperties
+            {
+                DefaultProperty = new List<int> { 100, 101 }
+            };
             IndexExpression expr = instance.DefaultIndexExpression;
 
-            Assert.NotSame(expr, expr.Update(expr.Object, new [] { Expression.Constant(0)}));
+            Assert.NotSame(expr, expr.Update(expr.Object, new[] { Expression.Constant(0) }));
         }
 
         [Fact]
@@ -63,16 +84,19 @@ namespace System.Linq.Expressions.Tests
             };
 
             IndexExpression expr = instance.DefaultIndexExpression;
-            MemberExpression newProperty = Expression.Property(Expression.Constant(instance),
-                typeof(SampleClassWithProperties).GetProperty(nameof(instance.AlternativeProperty)));
-            ConstantExpression[] newArguments = {Expression.Constant(1)};
+            MemberExpression newProperty = Expression.Property(
+                Expression.Constant(instance),
+                typeof(SampleClassWithProperties).GetProperty(nameof(instance.AlternativeProperty))
+            );
+            ConstantExpression[] newArguments = { Expression.Constant(1) };
 
             IndexExpression exprUpdated = expr.Update(newProperty, newArguments);
 
             // Replace Object and Arguments of IndexExpression.
             IndexExpressionHelpers.AssertEqual(
                 exprUpdated,
-                Expression.MakeIndex(newProperty, instance.DefaultIndexer, newArguments));
+                Expression.MakeIndex(newProperty, instance.DefaultIndexer, newArguments)
+            );
 
             // Invoke to check expression.
             IndexExpressionHelpers.AssertInvokeCorrect(100, expr);
@@ -82,19 +106,39 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ToStringTest()
         {
-            IndexExpression e1 = Expression.MakeIndex(Expression.Parameter(typeof(Vector1), "v"), typeof(Vector1).GetProperty("Item"), new[] { Expression.Parameter(typeof(int), "i") });
+            IndexExpression e1 = Expression.MakeIndex(
+                Expression.Parameter(typeof(Vector1), "v"),
+                typeof(Vector1).GetProperty("Item"),
+                new[] { Expression.Parameter(typeof(int), "i") }
+            );
             Assert.Equal("v.Item[i]", e1.ToString());
 
-            IndexExpression e2 = Expression.MakeIndex(Expression.Parameter(typeof(Vector2), "v"), typeof(Vector2).GetProperty("Item"), new[] { Expression.Parameter(typeof(int), "i"), Expression.Parameter(typeof(int), "j") });
+            IndexExpression e2 = Expression.MakeIndex(
+                Expression.Parameter(typeof(Vector2), "v"),
+                typeof(Vector2).GetProperty("Item"),
+                new[]
+                {
+                    Expression.Parameter(typeof(int), "i"),
+                    Expression.Parameter(typeof(int), "j")
+                }
+            );
             Assert.Equal("v.Item[i, j]", e2.ToString());
 
-            IndexExpression e3 = Expression.ArrayAccess(Expression.Parameter(typeof(int[,]), "xs"), Expression.Parameter(typeof(int), "i"), Expression.Parameter(typeof(int), "j"));
+            IndexExpression e3 = Expression.ArrayAccess(
+                Expression.Parameter(typeof(int[,]), "xs"),
+                Expression.Parameter(typeof(int), "i"),
+                Expression.Parameter(typeof(int), "j")
+            );
             Assert.Equal("xs[i, j]", e3.ToString());
         }
 
 #if FEATURE_COMPILE
         private static TypeBuilder GetTestTypeBuilder() =>
-            AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("TestAssembly"), AssemblyBuilderAccess.RunAndCollect)
+            AssemblyBuilder
+                .DefineDynamicAssembly(
+                    new AssemblyName("TestAssembly"),
+                    AssemblyBuilderAccess.RunAndCollect
+                )
                 .DefineDynamicModule("TestModule")
                 .DefineType("TestType");
 
@@ -104,31 +148,53 @@ namespace System.Linq.Expressions.Tests
         {
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
-            typeBuild.DefineProperty("Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+            typeBuild.DefineProperty(
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             TypeInfo info = typeBuild.CreateTypeInfo();
             Type type = info;
             PropertyInfo prop = info.DeclaredProperties.First();
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
         public void ByRefIndexedProperty()
         {
             TypeBuilder typeBuild = GetTestTypeBuilder();
-            FieldBuilder field = typeBuild.DefineField("_value", typeof(int), FieldAttributes.Private);
+            FieldBuilder field = typeBuild.DefineField(
+                "_value",
+                typeof(int),
+                FieldAttributes.Private
+            );
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int).MakeByRefType(), new[] {typeof(int)});
+                "Item",
+                PropertyAttributes.None,
+                typeof(int).MakeByRefType(),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(int).MakeByRefType(),
-                new[] {typeof(int)});
+                new[] { typeof(int) }
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ldarg_0);
@@ -141,8 +207,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -151,14 +223,21 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(void), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(void),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(void),
-                new[] { typeof(int) });
+                new[] { typeof(int) }
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ret);
@@ -169,8 +248,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -180,14 +265,21 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(long),
-                new[] { typeof(int) });
+                new[] { typeof(int) }
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ret);
@@ -198,8 +290,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -208,14 +306,21 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder setter = typeBuild.DefineMethod(
                 "set_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(void),
-                Type.EmptyTypes);
+                Type.EmptyTypes
+            );
 
             ILGenerator ilGen = setter.GetILGenerator();
             ilGen.Emit(OpCodes.Ret);
@@ -226,8 +331,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -236,14 +347,21 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder setter = typeBuild.DefineMethod(
                 "set_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(void),
-                new [] {typeof(int), typeof(int).MakeByRefType()});
+                new[] { typeof(int), typeof(int).MakeByRefType() }
+            );
 
             ILGenerator ilGen = setter.GetILGenerator();
             ilGen.Emit(OpCodes.Ret);
@@ -254,8 +372,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -264,14 +388,21 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder setter = typeBuild.DefineMethod(
                 "set_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(int),
-                new[] { typeof(int), typeof(int) });
+                new[] { typeof(int), typeof(int) }
+            );
 
             ILGenerator ilGen = setter.GetILGenerator();
             ilGen.Emit(OpCodes.Ret);
@@ -282,8 +413,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -292,21 +429,32 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(int),
-                new[] { typeof(int) });
+                new[] { typeof(int) }
+            );
 
             MethodBuilder setter = typeBuild.DefineMethod(
                 "set_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig | MethodAttributes.Static
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.Static
+                    | MethodAttributes.PrivateScope,
                 typeof(void),
-                new[] { typeof(int), typeof(int) });
+                new[] { typeof(int), typeof(int) }
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ldc_I4_0);
@@ -322,8 +470,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -333,14 +487,21 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder setter = typeBuild.DefineMethod(
                 "set_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(void),
-                new[] { typeof(int), typeof(long) });
+                new[] { typeof(int), typeof(long) }
+            );
 
             ILGenerator ilGen = setter.GetILGenerator();
             ilGen.Emit(OpCodes.Ret);
@@ -351,8 +512,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -361,21 +528,31 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(int),
-                new[] { typeof(int) });
+                new[] { typeof(int) }
+            );
 
             MethodBuilder setter = typeBuild.DefineMethod(
                 "set_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(void),
-                new[] { typeof(int), typeof(int), typeof(int) });
+                new[] { typeof(int), typeof(int), typeof(int) }
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ldc_I4_0);
@@ -391,8 +568,14 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -401,21 +584,31 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int), typeof(int), typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int), typeof(int), typeof(int) }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(int),
-                new[] { typeof(int), typeof(int), typeof(int) });
+                new[] { typeof(int), typeof(int), typeof(int) }
+            );
 
             MethodBuilder setter = typeBuild.DefineMethod(
                 "set_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(void),
-                new[] { typeof(int), typeof(int), typeof(long), typeof(int) });
+                new[] { typeof(int), typeof(int), typeof(long), typeof(int) }
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ldc_I4_0);
@@ -431,8 +624,28 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0), Expression.Constant(0), Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0), Expression.Constant(0), Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () =>
+                    Expression.Property(
+                        instance,
+                        prop,
+                        Expression.Constant(0),
+                        Expression.Constant(0),
+                        Expression.Constant(0)
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () =>
+                    Expression.Property(
+                        instance,
+                        "Item",
+                        Expression.Constant(0),
+                        Expression.Constant(0),
+                        Expression.Constant(0)
+                    )
+            );
         }
 
         [Fact]
@@ -441,15 +654,22 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 CallingConventions.VarArgs,
                 typeof(int),
-                Type.EmptyTypes);
+                Type.EmptyTypes
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ldc_I4_0);
@@ -461,8 +681,28 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, Expression.Constant(0), Expression.Constant(0), Expression.Constant(0)));
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", Expression.Constant(0), Expression.Constant(0), Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () =>
+                    Expression.Property(
+                        instance,
+                        prop,
+                        Expression.Constant(0),
+                        Expression.Constant(0),
+                        Expression.Constant(0)
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () =>
+                    Expression.Property(
+                        instance,
+                        "Item",
+                        Expression.Constant(0),
+                        Expression.Constant(0),
+                        Expression.Constant(0)
+                    )
+            );
         }
 
         [Fact]
@@ -470,7 +710,10 @@ namespace System.Linq.Expressions.Tests
         {
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
             ConstantExpression index = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentException>("instance", () => Expression.Property(null, prop, index));
+            AssertExtensions.Throws<ArgumentException>(
+                "instance",
+                () => Expression.Property(null, prop, index)
+            );
         }
 
         [Fact]
@@ -479,14 +722,22 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig | MethodAttributes.Static
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.Static
+                    | MethodAttributes.PrivateScope,
                 typeof(int),
-                new[] { typeof(int) });
+                new[] { typeof(int) }
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ldc_I4_0);
@@ -498,7 +749,10 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("instance", () => Expression.Property(instance, prop, Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "instance",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
         }
 
         [Fact]
@@ -507,14 +761,21 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder typeBuild = GetTestTypeBuilder();
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "Item", PropertyAttributes.None, typeof(int), new[] { typeof(int).MakeByRefType() });
+                "Item",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int).MakeByRefType() }
+            );
 
             MethodBuilder getter = typeBuild.DefineMethod(
                 "get_Item",
-                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                | MethodAttributes.PrivateScope,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.PrivateScope,
                 typeof(int),
-                new[] { typeof(int).MakeByRefType() });
+                new[] { typeof(int).MakeByRefType() }
+            );
 
             ILGenerator ilGen = getter.GetILGenerator();
             ilGen.Emit(OpCodes.Ldc_I4_0);
@@ -526,10 +787,12 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>("indexes[0]", () => Expression.Property(instance, prop, Expression.Constant(0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexes[0]",
+                () => Expression.Property(instance, prop, Expression.Constant(0))
+            );
         }
-
-// FEATURE_COMPILE
+        // FEATURE_COMPILE
 #endif
 
         [Fact]
@@ -537,7 +800,10 @@ namespace System.Linq.Expressions.Tests
         {
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
             DefaultExpression dict = Expression.Default(typeof(Dictionary<int, int>));
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(dict, prop, Array.Empty<Expression>()));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(dict, prop, Array.Empty<Expression>())
+            );
         }
 
         [Fact]
@@ -546,7 +812,10 @@ namespace System.Linq.Expressions.Tests
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
             DefaultExpression dict = Expression.Default(typeof(Dictionary<int, int>));
             ConstantExpression index = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(dict, prop, index, index));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(dict, prop, index, index)
+            );
         }
 
         [Fact]
@@ -555,7 +824,10 @@ namespace System.Linq.Expressions.Tests
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
             DefaultExpression dict = Expression.Default(typeof(Dictionary<int, int>));
             ConstantExpression index = Expression.Constant(0L);
-            AssertExtensions.Throws<ArgumentException>("arguments[0]", () => Expression.Property(dict, prop, index));
+            AssertExtensions.Throws<ArgumentException>(
+                "arguments[0]",
+                () => Expression.Property(dict, prop, index)
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -565,8 +837,12 @@ namespace System.Linq.Expressions.Tests
             // can be automatically quoted.
             PropertyInfo prop = typeof(Dictionary<Expression<Func<int>>, int>).GetProperty("Item");
             Expression<Func<int>> index = () => 2;
-            ConstantExpression dict = Expression.Constant(new Dictionary<Expression<Func<int>>, int>{{index, 9}});
-            Func<int> f = Expression.Lambda<Func<int>>(Expression.Property(dict, prop, index)).Compile(useInterpreter);
+            ConstantExpression dict = Expression.Constant(
+                new Dictionary<Expression<Func<int>>, int> { { index, 9 } }
+            );
+            Func<int> f = Expression
+                .Lambda<Func<int>>(Expression.Property(dict, prop, index))
+                .Compile(useInterpreter);
             Assert.Equal(9, f());
         }
 
@@ -577,7 +853,9 @@ namespace System.Linq.Expressions.Tests
             ConstantExpression instance = Expression.Constant(new IntAndExpressionIndexed());
             Expression<Action> index = Expression.Lambda<Action>(Expression.Empty());
             ConstantExpression intIdx = Expression.Constant(0);
-            Func<bool> f = Expression.Lambda<Func<bool>>(Expression.Property(instance, prop, intIdx, index)).Compile(useInterpreter);
+            Func<bool> f = Expression
+                .Lambda<Func<bool>>(Expression.Property(instance, prop, intIdx, index))
+                .Compile(useInterpreter);
             Assert.True(f());
         }
 
@@ -587,7 +865,10 @@ namespace System.Linq.Expressions.Tests
             ConstantExpression instance = Expression.Constant("");
             PropertyInfo prop = typeof(string).GetProperty(nameof(string.Length));
             ConstantExpression index = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentException>("indexer", () => Expression.Property(instance, prop, index));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexer",
+                () => Expression.Property(instance, prop, index)
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -595,7 +876,9 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(new OverloadedIndexers());
             ConstantExpression index = Expression.Constant("");
-            Expression<Func<int>> exp = Expression.Lambda<Func<int>>(Expression.Property(instance, "Item", index));
+            Expression<Func<int>> exp = Expression.Lambda<Func<int>>(
+                Expression.Property(instance, "Item", index)
+            );
             Func<int> f = exp.Compile(useInterpreter);
             Assert.Equal(2, f());
         }
@@ -603,17 +886,27 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void OverloadedIndexerBothMatch()
         {
-            ConstantExpression instance = Expression.Constant(new OverloadedIndexersBothMatchString());
+            ConstantExpression instance = Expression.Constant(
+                new OverloadedIndexersBothMatchString()
+            );
             ConstantExpression index = Expression.Constant("");
-            Assert.Throws<InvalidOperationException>(() => Expression.Property(instance, "Item", index));
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Property(instance, "Item", index)
+            );
         }
 
         [Fact]
         public void NoSuchPropertyExplicitlyNoIndices()
         {
             ConstantExpression instance = Expression.Constant("");
-            AssertExtensions.Throws<ArgumentException>(null, () => Expression.Property(instance, "ThisDoesNotExist", Array.Empty<Expression>()));
-            AssertExtensions.Throws<ArgumentException>(null, () => Expression.Property(instance, "ThisDoesNotExist", null));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Expression.Property(instance, "ThisDoesNotExist", Array.Empty<Expression>())
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Expression.Property(instance, "ThisDoesNotExist", null)
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -630,7 +923,10 @@ namespace System.Linq.Expressions.Tests
         public void FindNothingForNullArgument()
         {
             ConstantExpression instance = Expression.Constant("123");
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Length", new Expression[] {null}));
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Length", new Expression[] { null })
+            );
         }
 
         [Fact]
@@ -638,8 +934,14 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(new Dictionary<int, int>());
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
-            AssertExtensions.Throws<ArgumentException>("propertyName", () => Expression.Property(instance, "Item", new Expression[] {null}));
-            AssertExtensions.Throws<ArgumentNullException>("arguments[0]", () => Expression.Property(instance, prop, new Expression[] {null}));
+            AssertExtensions.Throws<ArgumentException>(
+                "propertyName",
+                () => Expression.Property(instance, "Item", new Expression[] { null })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "arguments[0]",
+                () => Expression.Property(instance, prop, new Expression[] { null })
+            );
         }
 
         [Fact]
@@ -647,11 +949,19 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(new Dictionary<int, int>());
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
-            MemberExpression index = Expression.Property(null, typeof(Unreadable<int>).GetProperty(nameof(Unreadable<int>.WriteOnly)));
-            AssertExtensions.Throws<ArgumentException>("arguments[0]", () => Expression.Property(instance, "Item", index));
-            AssertExtensions.Throws<ArgumentException>("arguments[0]", () => Expression.Property(instance, prop, index));
+            MemberExpression index = Expression.Property(
+                null,
+                typeof(Unreadable<int>).GetProperty(nameof(Unreadable<int>.WriteOnly))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "arguments[0]",
+                () => Expression.Property(instance, "Item", index)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "arguments[0]",
+                () => Expression.Property(instance, prop, index)
+            );
         }
-
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConstrainedVirtualCall(bool useInterpreter)
@@ -660,13 +970,10 @@ namespace System.Linq.Expressions.Tests
             ConstantExpression instance = Expression.Constant(new InterfaceIndexableValueType());
             PropertyInfo prop = typeof(IIndexable).GetProperty("Item");
             IndexExpression index = Expression.Property(instance, prop, Expression.Constant(4));
-            Expression<Func<int>> lambda = Expression.Lambda<Func<int>>(
-                index
-            );
+            Expression<Func<int>> lambda = Expression.Lambda<Func<int>>(index);
             Func<int> func = lambda.Compile(useInterpreter);
             Assert.Equal(8, func());
         }
-
 
         private interface IIndexable
         {

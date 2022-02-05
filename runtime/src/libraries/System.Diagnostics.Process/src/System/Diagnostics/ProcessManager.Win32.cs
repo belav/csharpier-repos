@@ -42,7 +42,8 @@ namespace System.Diagnostics
 
         private static bool IsMainWindow(IntPtr handle)
         {
-            return (Interop.User32.GetWindow(handle, GW_OWNER) == IntPtr.Zero) && Interop.User32.IsWindowVisible(handle) != Interop.BOOL.FALSE;
+            return (Interop.User32.GetWindow(handle, GW_OWNER) == IntPtr.Zero)
+                && Interop.User32.IsWindowVisible(handle) != Interop.BOOL.FALSE;
         }
 
         [UnmanagedCallersOnly]
@@ -76,9 +77,19 @@ namespace System.Diagnostics
             SafeProcessHandle processHandle = SafeProcessHandle.InvalidHandle;
             try
             {
-                processHandle = ProcessManager.OpenProcess(processId, Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION | Interop.Advapi32.ProcessOptions.PROCESS_VM_READ, true);
+                processHandle = ProcessManager.OpenProcess(
+                    processId,
+                    Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
+                        | Interop.Advapi32.ProcessOptions.PROCESS_VM_READ,
+                    true
+                );
 
-                bool succeeded = Interop.Kernel32.EnumProcessModules(processHandle, null, 0, out int needed);
+                bool succeeded = Interop.Kernel32.EnumProcessModules(
+                    processHandle,
+                    null,
+                    0,
+                    out int needed
+                );
 
                 // The API we need to use to enumerate process modules differs on two factors:
                 //   1) If our process is running in WOW64.
@@ -92,12 +103,22 @@ namespace System.Diagnostics
                 // do the enumeration at all.  So we'll detect this case and bail out.
                 if (!succeeded)
                 {
-                    if (!Interop.Kernel32.IsWow64Process(Interop.Kernel32.GetCurrentProcess(), out bool sourceProcessIsWow64))
+                    if (
+                        !Interop.Kernel32.IsWow64Process(
+                            Interop.Kernel32.GetCurrentProcess(),
+                            out bool sourceProcessIsWow64
+                        )
+                    )
                     {
                         throw new Win32Exception();
                     }
 
-                    if (!Interop.Kernel32.IsWow64Process(processHandle, out bool targetProcessIsWow64))
+                    if (
+                        !Interop.Kernel32.IsWow64Process(
+                            processHandle,
+                            out bool targetProcessIsWow64
+                        )
+                    )
                     {
                         throw new Win32Exception();
                     }
@@ -105,7 +126,10 @@ namespace System.Diagnostics
                     if (sourceProcessIsWow64 && !targetProcessIsWow64)
                     {
                         // Wow64 isn't going to allow this to happen, the best we can do is give a descriptive error to the user.
-                        throw new Win32Exception(Interop.Errors.ERROR_PARTIAL_COPY, SR.EnumProcessModuleFailedDueToWow);
+                        throw new Win32Exception(
+                            Interop.Errors.ERROR_PARTIAL_COPY,
+                            SR.EnumProcessModuleFailedDueToWow
+                        );
                     }
 
                     EnumProcessModulesUntilSuccess(processHandle, null, 0, out needed);
@@ -155,7 +179,13 @@ namespace System.Diagnostics
 
                         IntPtr moduleHandle = moduleHandles[i];
                         Interop.Kernel32.NtModuleInfo ntModuleInfo;
-                        if (!Interop.Kernel32.GetModuleInformation(processHandle, moduleHandle, out ntModuleInfo))
+                        if (
+                            !Interop.Kernel32.GetModuleInformation(
+                                processHandle,
+                                moduleHandle,
+                                out ntModuleInfo
+                            )
+                        )
                         {
                             HandleLastWin32Error();
                             continue;
@@ -169,7 +199,16 @@ namespace System.Diagnostics
                         };
 
                         int length = 0;
-                        while ((length = Interop.Kernel32.GetModuleBaseName(processHandle, moduleHandle, chars, chars.Length)) == chars.Length)
+                        while (
+                            (
+                                length = Interop.Kernel32.GetModuleBaseName(
+                                    processHandle,
+                                    moduleHandle,
+                                    chars,
+                                    chars.Length
+                                )
+                            ) == chars.Length
+                        )
                         {
                             char[] toReturn = chars;
                             chars = ArrayPool<char>.Shared.Rent(length * 2);
@@ -185,7 +224,16 @@ namespace System.Diagnostics
 
                         module.ModuleName = new string(chars, 0, length);
 
-                        while ((length = Interop.Kernel32.GetModuleFileNameEx(processHandle, moduleHandle, chars, chars.Length)) == chars.Length)
+                        while (
+                            (
+                                length = Interop.Kernel32.GetModuleFileNameEx(
+                                    processHandle,
+                                    moduleHandle,
+                                    chars,
+                                    chars.Length
+                                )
+                            ) == chars.Length
+                        )
                         {
                             char[] toReturn = chars;
                             chars = ArrayPool<char>.Shared.Rent(length * 2);
@@ -226,7 +274,12 @@ namespace System.Diagnostics
             }
         }
 
-        private static void EnumProcessModulesUntilSuccess(SafeProcessHandle processHandle, IntPtr[]? modules, int size, out int needed)
+        private static void EnumProcessModulesUntilSuccess(
+            SafeProcessHandle processHandle,
+            IntPtr[]? modules,
+            int size,
+            out int needed
+        )
         {
             // When called on a running process, EnumProcessModules may fail with ERROR_PARTIAL_COPY
             // if the target process is not yet initialized or if the module list changes during the function call.
@@ -268,7 +321,9 @@ namespace System.Diagnostics
     internal static class NtProcessInfoHelper
     {
         // Use a smaller buffer size on debug to ensure we hit the retry path.
-        private const uint DefaultCachedBufferSize = 1024 *
+        private const uint DefaultCachedBufferSize =
+            1024
+            *
 #if DEBUG
             8;
 #else
@@ -292,23 +347,36 @@ namespace System.Diagnostics
                         Interop.NtDll.SystemProcessInformation,
                         bufferPtr,
                         bufferSize,
-                        &actualSize);
+                        &actualSize
+                    );
 
                     if (status != Interop.NtDll.STATUS_INFO_LENGTH_MISMATCH)
                     {
                         // see definition of NT_SUCCESS(Status) in SDK
                         if ((int)status < 0)
                         {
-                            throw new InvalidOperationException(SR.CouldntGetProcessInfos, new Win32Exception((int)status));
+                            throw new InvalidOperationException(
+                                SR.CouldntGetProcessInfos,
+                                new Win32Exception((int)status)
+                            );
                         }
 
-                        Debug.Assert(actualSize > 0 && actualSize <= bufferSize, $"Actual size reported by NtQuerySystemInformation was {actualSize} for a buffer of size={bufferSize}.");
+                        Debug.Assert(
+                            actualSize > 0 && actualSize <= bufferSize,
+                            $"Actual size reported by NtQuerySystemInformation was {actualSize} for a buffer of size={bufferSize}."
+                        );
                         MostRecentSize = GetEstimatedBufferSize(actualSize);
                         // Parse the data block to get process information
-                        return GetProcessInfos(new ReadOnlySpan<byte>(bufferPtr, (int)actualSize), processIdFilter);
+                        return GetProcessInfos(
+                            new ReadOnlySpan<byte>(bufferPtr, (int)actualSize),
+                            processIdFilter
+                        );
                     }
 
-                    Debug.Assert(actualSize > bufferSize, $"Actual size reported by NtQuerySystemInformation was {actualSize} for a buffer of size={bufferSize}.");
+                    Debug.Assert(
+                        actualSize > bufferSize,
+                        $"Actual size reported by NtQuerySystemInformation was {actualSize} for a buffer of size={bufferSize}."
+                    );
                     bufferSize = GetEstimatedBufferSize(actualSize);
                 }
                 finally
@@ -322,7 +390,10 @@ namespace System.Diagnostics
         // kicked in since new call to NtQuerySystemInformation
         private static uint GetEstimatedBufferSize(uint actualSize) => actualSize + 1024 * 10;
 
-        private static unsafe ProcessInfo[] GetProcessInfos(ReadOnlySpan<byte> data, int? processIdFilter)
+        private static unsafe ProcessInfo[] GetProcessInfos(
+            ReadOnlySpan<byte> data,
+            int? processIdFilter
+        )
         {
             // Use a dictionary to avoid duplicate entries if any
             // 60 is a reasonable number for processes on a normal machine.
@@ -332,11 +403,17 @@ namespace System.Diagnostics
 
             while (true)
             {
-                ref readonly SYSTEM_PROCESS_INFORMATION pi = ref MemoryMarshal.AsRef<SYSTEM_PROCESS_INFORMATION>(data.Slice(processInformationOffset));
+                ref readonly SYSTEM_PROCESS_INFORMATION pi =
+                    ref MemoryMarshal.AsRef<SYSTEM_PROCESS_INFORMATION>(
+                        data.Slice(processInformationOffset)
+                    );
 
                 // Process ID shouldn't overflow. OS API GetCurrentProcessID returns DWORD.
                 int processInfoProcessId = pi.UniqueProcessId.ToInt32();
-                if (processIdFilter == null || processIdFilter.GetValueOrDefault() == processInfoProcessId)
+                if (
+                    processIdFilter == null
+                    || processIdFilter.GetValueOrDefault() == processInfoProcessId
+                )
                 {
                     // get information for a process
                     ProcessInfo processInfo = new ProcessInfo((int)pi.NumberOfThreads)
@@ -369,22 +446,33 @@ namespace System.Diagnostics
                         else
                         {
                             // for normal process without name, using the process ID.
-                            processInfo.ProcessName = processInfo.ProcessId.ToString(CultureInfo.InvariantCulture);
+                            processInfo.ProcessName = processInfo.ProcessId.ToString(
+                                CultureInfo.InvariantCulture
+                            );
                         }
                     }
                     else
                     {
-                        string processName = GetProcessShortName(new ReadOnlySpan<char>(pi.ImageName.Buffer.ToPointer(), pi.ImageName.Length / sizeof(char)));
+                        string processName = GetProcessShortName(
+                            new ReadOnlySpan<char>(
+                                pi.ImageName.Buffer.ToPointer(),
+                                pi.ImageName.Length / sizeof(char)
+                            )
+                        );
                         processInfo.ProcessName = processName;
                     }
 
                     // get the threads for current process
                     processInfos[processInfo.ProcessId] = processInfo;
 
-                    int threadInformationOffset = processInformationOffset + sizeof(SYSTEM_PROCESS_INFORMATION);
+                    int threadInformationOffset =
+                        processInformationOffset + sizeof(SYSTEM_PROCESS_INFORMATION);
                     for (int i = 0; i < pi.NumberOfThreads; i++)
                     {
-                        ref readonly SYSTEM_THREAD_INFORMATION ti = ref MemoryMarshal.AsRef<SYSTEM_THREAD_INFORMATION>(data.Slice(threadInformationOffset));
+                        ref readonly SYSTEM_THREAD_INFORMATION ti =
+                            ref MemoryMarshal.AsRef<SYSTEM_THREAD_INFORMATION>(
+                                data.Slice(threadInformationOffset)
+                            );
 
                         ThreadInfo threadInfo = new ThreadInfo
                         {
@@ -394,7 +482,9 @@ namespace System.Diagnostics
                             _currentPriority = ti.Priority,
                             _startAddress = ti.StartAddress,
                             _threadState = (ThreadState)ti.ThreadState,
-                            _threadWaitReason = NtProcessManager.GetThreadWaitReason((int)ti.WaitReason),
+                            _threadWaitReason = NtProcessManager.GetThreadWaitReason(
+                                (int)ti.WaitReason
+                            ),
                         };
 
                         processInfo._threadInfoList.Add(threadInfo);
@@ -447,15 +537,15 @@ namespace System.Diagnostics
                 ReadOnlySpan<char> extension = name.Slice(period);
 
                 if (extension.Equals(".exe", StringComparison.OrdinalIgnoreCase))
-                    period--;                 // point to character before period
+                    period--; // point to character before period
                 else
                     period = name.Length - 1; // set to end of string
             }
 
             if (slash == -1)
-                slash = 0;     // set to start of string
+                slash = 0; // set to start of string
             else
-                slash++;       // point to character next to slash
+                slash++; // point to character next to slash
 
             // copy characters between period (or end of string) and
             // slash (or start of string) to make image name

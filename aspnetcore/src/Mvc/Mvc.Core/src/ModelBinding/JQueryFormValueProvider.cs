@@ -23,8 +23,6 @@ public class JQueryFormValueProvider : JQueryValueProvider
     public JQueryFormValueProvider(
         BindingSource bindingSource,
         IDictionary<string, StringValues> values,
-        CultureInfo? culture)
-        : base(bindingSource, values, culture)
-    {
-    }
+        CultureInfo? culture
+    ) : base(bindingSource, values, culture) { }
 }

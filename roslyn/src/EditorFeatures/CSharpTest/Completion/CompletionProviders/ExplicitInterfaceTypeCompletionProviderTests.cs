@@ -13,15 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
-    public class ExplicitInterfaceTypeCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class ExplicitInterfaceTypeCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ExplicitInterfaceTypeCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ExplicitInterfaceTypeCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestAtStartOfClass()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -41,7 +43,8 @@ class C : IList
         [InlineData("record struct")]
         public async Task TestAtStartOfRecord(string record)
         {
-            var markup = $@"
+            var markup =
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""Preview"">
         <Document>
@@ -62,10 +65,14 @@ using System.Collections;
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
-        [WorkItem(459044, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=459044")]
+        [WorkItem(
+            459044,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=459044"
+        )]
         public async Task TestInMisplacedUsing()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     using ($$)
@@ -77,7 +84,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestAtStartOfStruct()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 struct C : IList
@@ -95,7 +103,8 @@ struct C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestAfterField()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -114,7 +123,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestAfterMethod_01()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -133,7 +143,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestAfterMethod_02()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 interface C : IList
@@ -152,7 +163,8 @@ interface C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestAfterExpressionBody()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -171,7 +183,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestWithAttributeFollowing()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -193,7 +206,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestWithModifierFollowing()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -214,7 +228,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestWithTypeFollowing()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -235,7 +250,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestWithTypeFollowing2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -256,7 +272,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInMember()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -274,7 +291,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotWithAccessibility()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -289,7 +307,8 @@ class C : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestInInterface()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 interface I : IList
@@ -307,7 +326,8 @@ interface I : IList
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestImplementedAsAsync()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     Task Goo();

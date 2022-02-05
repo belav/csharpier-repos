@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="relationalDependencies">The relational-specific dependencies to use.</param>
         public RelationalEvaluatableExpressionFilter(
             EvaluatableExpressionFilterDependencies dependencies,
-            RelationalEvaluatableExpressionFilterDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalEvaluatableExpressionFilterDependencies relationalDependencies
+        ) : base(dependencies)
         {
             RelationalDependencies = relationalDependencies;
         }

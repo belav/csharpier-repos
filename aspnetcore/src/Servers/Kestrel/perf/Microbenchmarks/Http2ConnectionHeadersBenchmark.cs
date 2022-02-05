@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             for (var i = 0; i < HeadersCount; i++)
             {
                 var headerName = _headerNames[_headerIndex % HeadersCount];
-                httpContext.Response.Headers[headerName] = "The quick brown fox jumps over the lazy dog.";
+                httpContext.Response.Headers[headerName] =
+                    "The quick brown fox jumps over the lazy dog.";
                 if (HeadersChange)
                 {
                     _headerIndex++;

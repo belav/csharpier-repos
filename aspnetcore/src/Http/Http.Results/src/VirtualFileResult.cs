@@ -24,8 +24,7 @@ internal sealed class VirtualFileResult : FileResult, IResult
     /// </summary>
     /// <param name="fileName">The path to the file. The path must be relative/virtual.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
-    public VirtualFileResult(string fileName, string? contentType)
-        : base(contentType)
+    public VirtualFileResult(string fileName, string? contentType) : base(contentType)
     {
         FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
     }
@@ -43,7 +42,8 @@ internal sealed class VirtualFileResult : FileResult, IResult
     /// <inheritdoc/>
     public Task ExecuteAsync(HttpContext httpContext)
     {
-        var hostingEnvironment = httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+        var hostingEnvironment =
+            httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
         var logger = httpContext.RequestServices.GetRequiredService<ILogger<VirtualFileResult>>();
 
         var fileInfo = GetFileInformation(hostingEnvironment.WebRootFileProvider);
@@ -71,7 +71,8 @@ internal sealed class VirtualFileResult : FileResult, IResult
             EnableRangeProcessing,
             lastModified,
             EntityTag,
-            logger);
+            logger
+        );
 
         if (!serveBody)
         {
@@ -92,10 +93,7 @@ internal sealed class VirtualFileResult : FileResult, IResult
             count = rangeLength;
         }
 
-        return response.SendFileAsync(
-            fileInfo,
-            offset,
-            count);
+        return response.SendFileAsync(fileInfo, offset, count);
     }
 
     internal IFileInfo GetFileInformation(IFileProvider fileProvider)

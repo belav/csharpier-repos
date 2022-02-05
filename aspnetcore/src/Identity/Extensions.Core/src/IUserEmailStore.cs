@@ -77,5 +77,9 @@ public interface IUserEmailStore<TUser> : IUserStore<TUser> where TUser : class
     /// <param name="normalizedEmail">The normalized email to set for the specified <paramref name="user"/>.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    Task SetNormalizedEmailAsync(TUser user, string normalizedEmail, CancellationToken cancellationToken);
+    Task SetNormalizedEmailAsync(
+        TUser user,
+        string normalizedEmail,
+        CancellationToken cancellationToken
+    );
 }

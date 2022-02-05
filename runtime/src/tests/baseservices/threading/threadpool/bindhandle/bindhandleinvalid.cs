@@ -36,5 +36,5 @@ class BindHandleInvalid
         return (99);
     }
 
-    
+
 }

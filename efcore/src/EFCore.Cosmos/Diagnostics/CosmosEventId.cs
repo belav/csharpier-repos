@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             ExecutedDeleteItem
         }
 
-        private static readonly string _commandPrefix = DbLoggerCategory.Database.Command.Name + ".";
+        private static readonly string _commandPrefix =
+            DbLoggerCategory.Database.Command.Name + ".";
 
         /// <summary>
         ///     A SQL query is going to be executed.
@@ -52,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="CosmosQueryEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </remarks>
-        public static readonly EventId ExecutingSqlQuery
-            = new((int)Id.ExecutingSqlQuery, _commandPrefix + Id.ExecutingSqlQuery);
+        public static readonly EventId ExecutingSqlQuery =
+            new((int)Id.ExecutingSqlQuery, _commandPrefix + Id.ExecutingSqlQuery);
 
         /// <summary>
         ///     ReadItem is going to be executed.
@@ -66,8 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="CosmosReadItemEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </remarks>
-        public static readonly EventId ExecutingReadItem
-            = new((int)Id.ExecutingReadItem, _commandPrefix + Id.ExecutingReadItem);
+        public static readonly EventId ExecutingReadItem =
+            new((int)Id.ExecutingReadItem, _commandPrefix + Id.ExecutingReadItem);
 
         /// <summary>
         ///     ReadNext was executed.
@@ -80,8 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="CosmosQueryExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </remarks>
-        public static readonly EventId ExecutedReadNext
-            = new((int)Id.ExecutedReadNext, _commandPrefix + Id.ExecutedReadNext);
+        public static readonly EventId ExecutedReadNext =
+            new((int)Id.ExecutedReadNext, _commandPrefix + Id.ExecutedReadNext);
 
         /// <summary>
         ///     ReadItem was executed.
@@ -94,8 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </remarks>
-        public static readonly EventId ExecutedReadItem
-            = new((int)Id.ExecutedReadItem, _commandPrefix + Id.ExecutedReadItem);
+        public static readonly EventId ExecutedReadItem =
+            new((int)Id.ExecutedReadItem, _commandPrefix + Id.ExecutedReadItem);
 
         /// <summary>
         ///     CreateItem was executed.
@@ -108,8 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </remarks>
-        public static readonly EventId ExecutedCreateItem
-            = new((int)Id.ExecutedCreateItem, _commandPrefix + Id.ExecutedCreateItem);
+        public static readonly EventId ExecutedCreateItem =
+            new((int)Id.ExecutedCreateItem, _commandPrefix + Id.ExecutedCreateItem);
 
         /// <summary>
         ///     ReplaceItem was executed.
@@ -122,8 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </remarks>
-        public static readonly EventId ExecutedReplaceItem
-            = new((int)Id.ExecutedReplaceItem, _commandPrefix + Id.ExecutedReplaceItem);
+        public static readonly EventId ExecutedReplaceItem =
+            new((int)Id.ExecutedReplaceItem, _commandPrefix + Id.ExecutedReplaceItem);
 
         /// <summary>
         ///     DeleteItem was executed.
@@ -136,7 +137,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </remarks>
-        public static readonly EventId ExecutedDeleteItem
-            = new((int)Id.ExecutedDeleteItem, _commandPrefix + Id.ExecutedDeleteItem);
+        public static readonly EventId ExecutedDeleteItem =
+            new((int)Id.ExecutedDeleteItem, _commandPrefix + Id.ExecutedDeleteItem);
     }
 }

@@ -44,7 +44,11 @@ namespace Microsoft.CodeAnalysis
             return new DocumentId(projectId, Guid.NewGuid(), debugName);
         }
 
-        public static DocumentId CreateFromSerialized(ProjectId projectId, Guid id, string? debugName = null)
+        public static DocumentId CreateFromSerialized(
+            ProjectId projectId,
+            Guid id,
+            string? debugName = null
+        )
         {
             if (projectId == null)
             {
@@ -61,32 +65,25 @@ namespace Microsoft.CodeAnalysis
 
         internal string? DebugName => _debugName;
 
-        internal string GetDebuggerDisplay()
-            => string.Format("({0}, #{1} - {2})", this.GetType().Name, this.Id, _debugName);
+        internal string GetDebuggerDisplay() =>
+            string.Format("({0}, #{1} - {2})", this.GetType().Name, this.Id, _debugName);
 
-        public override string ToString()
-            => GetDebuggerDisplay();
+        public override string ToString() => GetDebuggerDisplay();
 
-        public override bool Equals(object? obj)
-            => this.Equals(obj as DocumentId);
+        public override bool Equals(object? obj) => this.Equals(obj as DocumentId);
 
         public bool Equals(DocumentId? other)
         {
             // Technically, we don't need to check project id.
-            return
-                other is object &&
-                this.Id == other.Id &&
-                this.ProjectId == other.ProjectId;
+            return other is object && this.Id == other.Id && this.ProjectId == other.ProjectId;
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(this.ProjectId, this.Id.GetHashCode());
+        public override int GetHashCode() => Hash.Combine(this.ProjectId, this.Id.GetHashCode());
 
-        public static bool operator ==(DocumentId? left, DocumentId? right)
-            => EqualityComparer<DocumentId?>.Default.Equals(left, right);
+        public static bool operator ==(DocumentId? left, DocumentId? right) =>
+            EqualityComparer<DocumentId?>.Default.Equals(left, right);
 
-        public static bool operator !=(DocumentId? left, DocumentId? right)
-            => !(left == right);
+        public static bool operator !=(DocumentId? left, DocumentId? right) => !(left == right);
 
         bool IObjectWritable.ShouldReuseInSerialization => true;
 

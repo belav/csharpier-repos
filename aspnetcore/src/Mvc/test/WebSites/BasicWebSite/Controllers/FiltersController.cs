@@ -14,8 +14,9 @@ public class FiltersController : Controller
     [HttpPost]
     [Consumes("application/yaml")]
     [UnprocessableResultFilter]
-    public IActionResult AlwaysRunResultFiltersCanRunWhenResourceFilterShortCircuit([FromBody] Product product) =>
-        throw new Exception("Shouldn't be executed");
+    public IActionResult AlwaysRunResultFiltersCanRunWhenResourceFilterShortCircuit(
+        [FromBody] Product product
+    ) => throw new Exception("Shouldn't be executed");
 
     [ServiceFilter(typeof(ServiceActionFilter))]
     public IActionResult ServiceFilterTest() => Content("Service filter content");
@@ -27,6 +28,8 @@ public class FiltersController : Controller
     [MiddlewareFilter(typeof(LocalizationPipeline))]
     public IActionResult MiddlewareFilterTest()
     {
-        return Content($"CurrentCulture:{CultureInfo.CurrentCulture.Name},CurrentUICulture:{CultureInfo.CurrentUICulture.Name}");
+        return Content(
+            $"CurrentCulture:{CultureInfo.CurrentCulture.Name},CurrentUICulture:{CultureInfo.CurrentUICulture.Name}"
+        );
     }
 }

@@ -18,6 +18,7 @@ public struct Tuple<T0, T1>
 {
     public readonly T0 Field0;
     public readonly T1 Field1;
+
     public Tuple(T0 Field0, T1 Field1)
     {
         this.Field0 = Field0;

@@ -58,7 +58,7 @@ namespace JitBench
 
         public string GetFrameworkDownloadLink()
         {
-            if(FrameworkVersion == null)
+            if (FrameworkVersion == null)
             {
                 return null;
             }
@@ -70,7 +70,7 @@ namespace JitBench
 
         public string GetSDKDownloadLink()
         {
-            if(SdkVersion == null)
+            if (SdkVersion == null)
             {
                 return null;
             }
@@ -85,19 +85,27 @@ namespace JitBench
             using (var acquireOutput = new IndentedTestOutputHelper("Acquiring DotNet", output))
             {
                 string remoteSdkPath = GetSDKDownloadLink();
-                if(remoteSdkPath != null)
+                if (remoteSdkPath != null)
                 {
                     await FileTasks.DownloadAndUnzip(remoteSdkPath, DotNetDirPath, acquireOutput);
                 }
                 string remoteRuntimePath = GetFrameworkDownloadLink();
-                if(remoteRuntimePath != null)
+                if (remoteRuntimePath != null)
                 {
-                    await FileTasks.DownloadAndUnzip(remoteRuntimePath, DotNetDirPath, acquireOutput);
+                    await FileTasks.DownloadAndUnzip(
+                        remoteRuntimePath,
+                        DotNetDirPath,
+                        acquireOutput
+                    );
 
                     // the SDK may have included another runtime version, but to help prevent mistakes
                     // where a test might run against a different version than we intended all other
                     // versions will be deleted.
-                    string mnappDirPath = Path.Combine(DotNetDirPath, "shared", "Microsoft.NETCore.App");
+                    string mnappDirPath = Path.Combine(
+                        DotNetDirPath,
+                        "shared",
+                        "Microsoft.NETCore.App"
+                    );
                     foreach (string dir in Directory.GetDirectories(mnappDirPath))
                     {
                         string versionDir = Path.GetFileName(dir);
@@ -111,15 +119,23 @@ namespace JitBench
                 if (actualFrameworkVersion == null)
                 {
                     //if Framework version is being infered from an SDK then snoop the filesystem to see what got installed
-                    foreach (string dirPath in Directory.EnumerateDirectories(Path.Combine(DotNetDirPath, "shared", "Microsoft.NETCore.App")))
+                    foreach (
+                        string dirPath in Directory.EnumerateDirectories(
+                            Path.Combine(DotNetDirPath, "shared", "Microsoft.NETCore.App")
+                        )
+                    )
                     {
                         actualFrameworkVersion = Path.GetFileName(dirPath);
                         break;
                     }
                 }
 
-
-                DotNetInstallation result = new DotNetInstallation(DotNetDirPath, actualFrameworkVersion, SdkVersion, Architecture);
+                DotNetInstallation result = new DotNetInstallation(
+                    DotNetDirPath,
+                    actualFrameworkVersion,
+                    SdkVersion,
+                    Architecture
+                );
                 acquireOutput.WriteLine("Dotnet path: " + result.DotNetExe);
                 if (!File.Exists(result.DotNetExe))
                 {
@@ -129,14 +145,18 @@ namespace JitBench
                 {
                     if (!Directory.Exists(result.SdkDir))
                     {
-                        throw new DirectoryNotFoundException("Sdk directory " + result.SdkDir + " not found");
+                        throw new DirectoryNotFoundException(
+                            "Sdk directory " + result.SdkDir + " not found"
+                        );
                     }
                 }
                 if (result.FrameworkVersion != null)
                 {
                     if (!Directory.Exists(result.FrameworkDir))
                     {
-                        throw new DirectoryNotFoundException("Framework directory " + result.FrameworkDir + " not found");
+                        throw new DirectoryNotFoundException(
+                            "Framework directory " + result.FrameworkDir + " not found"
+                        );
                     }
 
                     //overlay private binaries if needed
@@ -144,16 +164,24 @@ namespace JitBench
                     {
                         foreach (string fileName in GetPrivateRuntimeOverlayBinaryNames(OS))
                         {
-                            string backupPath = Path.Combine(result.FrameworkDir, fileName + ".original");
+                            string backupPath = Path.Combine(
+                                result.FrameworkDir,
+                                fileName + ".original"
+                            );
                             string overwritePath = Path.Combine(result.FrameworkDir, fileName);
-                            string privateBinPath = Path.Combine(PrivateRuntimeBinaryDirPath, fileName);
+                            string privateBinPath = Path.Combine(
+                                PrivateRuntimeBinaryDirPath,
+                                fileName
+                            );
                             if (!File.Exists(backupPath))
                             {
                                 File.Copy(overwritePath, backupPath);
                             }
                             if (!File.Exists(privateBinPath))
                             {
-                                throw new FileNotFoundException("Private binary " + privateBinPath + " not found");
+                                throw new FileNotFoundException(
+                                    "Private binary " + privateBinPath + " not found"
+                                );
                             }
                             File.Copy(privateBinPath, overwritePath, true);
                         }
@@ -163,9 +191,15 @@ namespace JitBench
             }
         }
 
-        public static string DefaultFrameworkVersion {  get { return "2.0.0"; } }
+        public static string DefaultFrameworkVersion
+        {
+            get { return "2.0.0"; }
+        }
 
-        public static string DefaultAzureFeed { get { return "https://dotnetcli.azureedge.net/dotnet"; } }
+        public static string DefaultAzureFeed
+        {
+            get { return "https://dotnetcli.azureedge.net/dotnet"; }
+        }
 
         public static OSPlatform DefaultOSPlatform
         {
@@ -197,7 +231,11 @@ namespace JitBench
             }
             else
             {
-                throw new Exception("OS " + os + " wasn't recognized. No normalized name for dotnet download is available");
+                throw new Exception(
+                    "OS "
+                        + os
+                        + " wasn't recognized. No normalized name for dotnet download is available"
+                );
             }
         }
 
@@ -206,14 +244,36 @@ namespace JitBench
             return GetFrameworkDownloadLink(DefaultAzureFeed, version, DefaultOSPlatform, arch);
         }
 
-        public static string GetFrameworkDownloadLink(string azureFeed, string version, OSPlatform os, Architecture arch)
+        public static string GetFrameworkDownloadLink(
+            string azureFeed,
+            string version,
+            OSPlatform os,
+            Architecture arch
+        )
         {
-            return GetRuntimeDownloadLink(azureFeed, version, GetNormalizedOSName(os), DotNetInstallation.GetNormalizedArchitectureName(arch));
+            return GetRuntimeDownloadLink(
+                azureFeed,
+                version,
+                GetNormalizedOSName(os),
+                DotNetInstallation.GetNormalizedArchitectureName(arch)
+            );
         }
 
-        public static string GetRuntimeDownloadLink(string azureFeed, string version, string os, string arch)
+        public static string GetRuntimeDownloadLink(
+            string azureFeed,
+            string version,
+            string os,
+            string arch
+        )
         {
-            return string.Format("{0}/Runtime/{1}/dotnet-runtime-{1}-{2}-{3}.{4}", azureFeed, version, os, arch, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "zip" : "tar.gz");
+            return string.Format(
+                "{0}/Runtime/{1}/dotnet-runtime-{1}-{2}-{3}.{4}",
+                azureFeed,
+                version,
+                os,
+                arch,
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "zip" : "tar.gz"
+            );
         }
 
         public static string GetSDKDownloadLink(string version, Architecture arch)
@@ -221,14 +281,36 @@ namespace JitBench
             return GetSDKDownloadLink(DefaultAzureFeed, version, DefaultOSPlatform, arch);
         }
 
-        public static string GetSDKDownloadLink(string azureFeed, string version, OSPlatform os, Architecture arch)
+        public static string GetSDKDownloadLink(
+            string azureFeed,
+            string version,
+            OSPlatform os,
+            Architecture arch
+        )
         {
-            return GetSDKDownloadLink(azureFeed, version, GetNormalizedOSName(os), DotNetInstallation.GetNormalizedArchitectureName(arch));
+            return GetSDKDownloadLink(
+                azureFeed,
+                version,
+                GetNormalizedOSName(os),
+                DotNetInstallation.GetNormalizedArchitectureName(arch)
+            );
         }
 
-        public static string GetSDKDownloadLink(string azureFeed, string version, string os, string arch)
+        public static string GetSDKDownloadLink(
+            string azureFeed,
+            string version,
+            string os,
+            string arch
+        )
         {
-            return string.Format("{0}/Sdk/{1}/dotnet-sdk-{1}-{2}-{3}.{4}", azureFeed, version, os, arch, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "zip" : "tar.gz");
+            return string.Format(
+                "{0}/Sdk/{1}/dotnet-sdk-{1}-{2}-{3}.{4}",
+                azureFeed,
+                version,
+                os,
+                arch,
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "zip" : "tar.gz"
+            );
         }
 
         public static string GetTargetFrameworkMonikerForFrameworkVersion(string runtimeVersion)
@@ -255,17 +337,22 @@ namespace JitBench
             }
             else
             {
-                throw new NotSupportedException("Version " + runtimeVersion + " doesn't have a known TFM");
+                throw new NotSupportedException(
+                    "Version " + runtimeVersion + " doesn't have a known TFM"
+                );
             }
         }
 
         public static string GetCompatibleDefaultSDKVersionForRuntimeVersion(string runtimeVersion)
         {
             return GetCompatibleDefaultSDKVersionForRuntimeTFM(
-                GetTargetFrameworkMonikerForFrameworkVersion(runtimeVersion));
+                GetTargetFrameworkMonikerForFrameworkVersion(runtimeVersion)
+            );
         }
 
-        public static string GetCompatibleDefaultSDKVersionForRuntimeTFM(string targetFrameworkMoniker)
+        public static string GetCompatibleDefaultSDKVersionForRuntimeTFM(
+            string targetFrameworkMoniker
+        )
         {
             if (targetFrameworkMoniker == "netcoreapp3.0")
             {
@@ -285,7 +372,10 @@ namespace JitBench
             }
             else
             {
-                throw new Exception("No compatible SDK version has been designated for TFM: " + targetFrameworkMoniker);
+                throw new Exception(
+                    "No compatible SDK version has been designated for TFM: "
+                        + targetFrameworkMoniker
+                );
             }
         }
 
@@ -307,7 +397,7 @@ namespace JitBench
 
         private static string GetNativeDllNameConvention(string baseName, OSPlatform os)
         {
-            if(os == OSPlatform.Windows)
+            if (os == OSPlatform.Windows)
             {
                 return baseName + ".dll";
             }
@@ -322,18 +412,26 @@ namespace JitBench
 
     public class DotNetInstallation
     {
-        public DotNetInstallation(string dotNetDir, string frameworkVersion, string sdkVersion, Architecture architecture)
+        public DotNetInstallation(
+            string dotNetDir,
+            string frameworkVersion,
+            string sdkVersion,
+            Architecture architecture
+        )
         {
             DotNetDir = dotNetDir;
             FrameworkVersion = frameworkVersion;
             SdkVersion = sdkVersion;
             Architecture = GetNormalizedArchitectureName(architecture);
-            DotNetExe = Path.Combine(DotNetDir, "dotnet" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : ""));
-            if(frameworkVersion != null)
+            DotNetExe = Path.Combine(
+                DotNetDir,
+                "dotnet" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : "")
+            );
+            if (frameworkVersion != null)
             {
                 FrameworkDir = GetFrameworkDir(dotNetDir, frameworkVersion);
             }
-            if(sdkVersion != null)
+            if (sdkVersion != null)
             {
                 SdkDir = GetSDKDir(dotNetDir, sdkVersion);
             }
@@ -374,9 +472,12 @@ namespace JitBench
             }
             else
             {
-                throw new Exception("Architecture " + arch + " wasn't recognized. No normalized name for dotnet download is available");
+                throw new Exception(
+                    "Architecture "
+                        + arch
+                        + " wasn't recognized. No normalized name for dotnet download is available"
+                );
             }
         }
     }
-
 }

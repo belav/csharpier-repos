@@ -13,14 +13,19 @@ namespace Microsoft.CodeAnalysis.Host.Mef
     {
         public IEnumerable<string> Languages { get; }
 
-        public CodeChangeProviderMetadata(IDictionary<string, object> data)
-            : base(data)
+        public CodeChangeProviderMetadata(IDictionary<string, object> data) : base(data)
         {
-            this.Languages = ((IReadOnlyDictionary<string, object>)data).GetEnumerableMetadata<string>("Languages");
+            this.Languages = (
+                (IReadOnlyDictionary<string, object>)data
+            ).GetEnumerableMetadata<string>("Languages");
         }
 
-        public CodeChangeProviderMetadata(string name, IEnumerable<string> after = null, IEnumerable<string> before = null, params string[] languages)
-            : base(name, after, before)
+        public CodeChangeProviderMetadata(
+            string name,
+            IEnumerable<string> after = null,
+            IEnumerable<string> before = null,
+            params string[] languages
+        ) : base(name, after, before)
         {
             this.Languages = languages;
         }

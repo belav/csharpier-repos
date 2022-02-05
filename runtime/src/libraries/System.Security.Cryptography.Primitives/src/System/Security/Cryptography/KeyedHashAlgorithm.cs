@@ -10,7 +10,11 @@ namespace System.Security.Cryptography
     {
         protected KeyedHashAlgorithm() { }
 
-        [Obsolete(Obsoletions.DefaultCryptoAlgorithmsMessage, DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.DefaultCryptoAlgorithmsMessage,
+            DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static new KeyedHashAlgorithm Create() =>
             throw new PlatformNotSupportedException(SR.Cryptography_DefaultAlgorithm_NotSupported);
 
@@ -20,15 +24,8 @@ namespace System.Security.Cryptography
 
         public virtual byte[] Key
         {
-            get
-            {
-                return KeyValue.CloneByteArray();
-            }
-
-            set
-            {
-                KeyValue = value.CloneByteArray();
-            }
+            get { return KeyValue.CloneByteArray(); }
+            set { KeyValue = value.CloneByteArray(); }
         }
 
         protected override void Dispose(bool disposing)

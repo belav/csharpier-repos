@@ -10,17 +10,15 @@ namespace System.Collections.Generic
     [DebuggerStepThrough]
     internal static class EnumerableExtensions
     {
-        public static string Join(this IEnumerable<object> source, string separator = ", ")
-            => string.Join(separator, source);
+        public static string Join(this IEnumerable<object> source, string separator = ", ") =>
+            string.Join(separator, source);
 
         public static IEnumerable<T> Distinct<T>(
             this IEnumerable<T> source,
-            Func<T?, T?, bool> comparer)
-            where T : class
-            => source.Distinct(new DynamicEqualityComparer<T>(comparer));
+            Func<T?, T?, bool> comparer
+        ) where T : class => source.Distinct(new DynamicEqualityComparer<T>(comparer));
 
-        private sealed class DynamicEqualityComparer<T> : IEqualityComparer<T>
-            where T : class
+        private sealed class DynamicEqualityComparer<T> : IEqualityComparer<T> where T : class
         {
             private readonly Func<T?, T?, bool> _func;
 
@@ -29,11 +27,9 @@ namespace System.Collections.Generic
                 _func = func;
             }
 
-            public bool Equals(T? x, T? y)
-                => _func(x, y);
+            public bool Equals(T? x, T? y) => _func(x, y);
 
-            public int GetHashCode(T obj)
-                => 0; // force Equals
+            public int GetHashCode(T obj) => 0; // force Equals
         }
     }
 }

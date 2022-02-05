@@ -13,7 +13,8 @@
 /*              FieldInfo.Ispublic()
 /**************************************************************/
 
-namespace App {
+namespace App
+{
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -25,14 +26,15 @@ namespace App {
         Object obj;
         public static int icCreat = 0;
         public static int icFinal = 0;
-        public static List<object> al = new List<object>( );
+        public static List<object> al = new List<object>();
+
         public ReflectObj()
         {
             obj = new long[1000];
             icCreat++;
         }
 
-        public ReflectObj( int l )
+        public ReflectObj(int l)
         {
             obj = new long[l];
             icCreat++;
@@ -45,11 +47,11 @@ namespace App {
 
         ~ReflectObj()
         {
-            al.Add( GetObj() );
+            al.Add(GetObj());
             icFinal++;
         }
 
-        public static int Main( String [] str )
+        public static int Main(String[] str)
         {
             Console.WriteLine("Test should return with ExitCode 100 ...");
             CreateObj temp = new CreateObj();
@@ -65,19 +67,20 @@ namespace App {
         class CreateObj
         {
             private Object[] v;
+
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             private Type myClass;
-            private Type [] rtype;
+            private Type[] rtype;
             private ConstructorInfo CInfo;
 
             public CreateObj()
             {
-                myClass = Type.GetType( "App.ReflectObj" );
+                myClass = Type.GetType("App.ReflectObj");
                 v = new Object[1];
-                for( int i=0; i< 2000; i++ )
+                for (int i = 0; i < 2000; i++)
                 {
                     v[0] = i;
-                    Activator.CreateInstance(myClass, v );
+                    Activator.CreateInstance(myClass, v);
                 }
             }
 
@@ -88,16 +91,16 @@ namespace App {
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
 
-                Console.WriteLine("Created Objects: {0} Finalized objects: {1}",icCreat, icFinal );
-                if ( icFinal != icCreat )
+                Console.WriteLine("Created Objects: {0} Finalized objects: {1}", icCreat, icFinal);
+                if (icFinal != icCreat)
                 {
                     return false;
                 }
 
-                FieldInfo fInfo = myClass.GetField( "icCreat", BindingFlags.IgnoreCase);
-                fInfo = myClass.GetField( "icFinal", BindingFlags.IgnoreCase);
+                FieldInfo fInfo = myClass.GetField("icCreat", BindingFlags.IgnoreCase);
+                fInfo = myClass.GetField("icFinal", BindingFlags.IgnoreCase);
 
-                Console.WriteLine( "Fieldinfo done" ); //debug;
+                Console.WriteLine("Fieldinfo done"); //debug;
 
                 CreateMoreObj();
 
@@ -105,24 +108,23 @@ namespace App {
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
 
-                retVal = (icFinal == icCreat );
+                retVal = (icFinal == icCreat);
 
-                Console.WriteLine("Living objects: "+ ReflectObj.al.Count );
+                Console.WriteLine("Living objects: " + ReflectObj.al.Count);
                 ReflectObj.al = null;
 
                 return retVal;
-
             }
 
             [MethodImplAttribute(MethodImplOptions.NoInlining)]
             public void CreateMoreObj()
             {
                 rtype = new Type[0];
-                CInfo = myClass.GetConstructor(rtype );
+                CInfo = myClass.GetConstructor(rtype);
 
-                for( int i=0; i< 2000; i++ )
+                for (int i = 0; i < 2000; i++)
                 {
-                    CInfo.Invoke((Object[])null );
+                    CInfo.Invoke((Object[])null);
                 }
             }
 
@@ -131,5 +133,4 @@ namespace App {
 
 
     }
-
 }

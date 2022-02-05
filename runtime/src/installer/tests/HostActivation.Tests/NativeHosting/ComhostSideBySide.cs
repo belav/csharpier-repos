@@ -26,38 +26,32 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         [PlatformSpecific(TestPlatforms.Windows)] // COM activation is only supported on Windows
         public void ActivateClass()
         {
-            string [] args = {
-                "activation",
-                sharedState.ClsidString
-            };
+            string[] args = { "activation", sharedState.ClsidString };
 
-            CommandResult result = Command.Create(sharedState.ComSxsPath, args)
+            CommandResult result = Command
+                .Create(sharedState.ComSxsPath, args)
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(sharedState.ComLibraryFixture.BuiltDotnet.BinPath)
                 .MultilevelLookup(false)
                 .Execute();
 
-            result.Should().Pass()
-                .And.HaveStdOutContaining("New instance of Server created");
+            result.Should().Pass().And.HaveStdOutContaining("New instance of Server created");
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // COM activation is only supported on Windows
         public void LocateEmbeddedTlb()
         {
-            string [] args = {
-                "typelib_lookup",
-                sharedState.TypeLibId
-            };
+            string[] args = { "typelib_lookup", sharedState.TypeLibId };
 
-            CommandResult result = Command.Create(sharedState.ComSxsPath, args)
+            CommandResult result = Command
+                .Create(sharedState.ComSxsPath, args)
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(sharedState.ComLibraryFixture.BuiltDotnet.BinPath)
                 .MultilevelLookup(false)
                 .Execute();
 
-            result.Should().Pass()
-                .And.HaveStdOutContaining("Located type library by typeid.");
+            result.Should().Pass().And.HaveStdOutContaining("Located type library by typeid.");
         }
 
         public class SharedTestState : Comhost.SharedTestState
@@ -74,12 +68,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     return;
                 }
 
-                using (var assemblyStream = new FileStream(ComLibraryFixture.TestProject.AppDll, FileMode.Open, FileAccess.Read, FileShare.Delete | FileShare.Read))
-                using (var peReader = new System.Reflection.PortableExecutable.PEReader(assemblyStream))
+                using (
+                    var assemblyStream = new FileStream(
+                        ComLibraryFixture.TestProject.AppDll,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Delete | FileShare.Read
+                    )
+                )
+                using (
+                    var peReader = new System.Reflection.PortableExecutable.PEReader(assemblyStream)
+                )
                 {
                     if (peReader.HasMetadata)
                     {
-                        string regFreeManifestPath = Path.Combine(BaseDirectory, $"{ ComLibraryFixture.TestProject.AssemblyName }.X.manifest");
+                        string regFreeManifestPath = Path.Combine(
+                            BaseDirectory,
+                            $"{ComLibraryFixture.TestProject.AssemblyName}.X.manifest"
+                        );
 
                         MetadataReader reader = peReader.GetMetadataReader();
                         RegFreeComManifest.CreateManifestFromClsidmap(
@@ -94,23 +100,39 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 }
 
                 string testDirectoryPath = Path.GetDirectoryName(NativeHostPath);
-                string comsxsName = RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("comsxs");
+                string comsxsName = RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform(
+                    "comsxs"
+                );
                 ComSxsPath = Path.Combine(testDirectoryPath, comsxsName);
                 File.Copy(
                     Path.Combine(RepoDirectories.Artifacts, "corehost_test", comsxsName),
-                    ComSxsPath);
+                    ComSxsPath
+                );
                 File.Copy(
                     ComHostPath,
-                    Path.Combine(testDirectoryPath, Path.GetFileName(ComHostPath)));
+                    Path.Combine(testDirectoryPath, Path.GetFileName(ComHostPath))
+                );
                 File.Copy(
                     ComLibraryFixture.TestProject.AppDll,
-                    Path.Combine(testDirectoryPath, Path.GetFileName(ComLibraryFixture.TestProject.AppDll)));
+                    Path.Combine(
+                        testDirectoryPath,
+                        Path.GetFileName(ComLibraryFixture.TestProject.AppDll)
+                    )
+                );
                 File.Copy(
                     ComLibraryFixture.TestProject.DepsJson,
-                    Path.Combine(testDirectoryPath, Path.GetFileName(ComLibraryFixture.TestProject.DepsJson)));
+                    Path.Combine(
+                        testDirectoryPath,
+                        Path.GetFileName(ComLibraryFixture.TestProject.DepsJson)
+                    )
+                );
                 File.Copy(
                     ComLibraryFixture.TestProject.RuntimeConfigJson,
-                    Path.Combine(testDirectoryPath, Path.GetFileName(ComLibraryFixture.TestProject.RuntimeConfigJson)));
+                    Path.Combine(
+                        testDirectoryPath,
+                        Path.GetFileName(ComLibraryFixture.TestProject.RuntimeConfigJson)
+                    )
+                );
             }
         }
     }

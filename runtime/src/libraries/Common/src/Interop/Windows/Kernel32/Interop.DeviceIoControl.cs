@@ -12,7 +12,13 @@ internal static partial class Interop
         // https://docs.microsoft.com/windows/win32/api/winioctl/ni-winioctl-fsctl_get_reparse_point
         internal const int FSCTL_GET_REPARSE_POINT = 0x000900a8;
 
-        [DllImport(Libraries.Kernel32, EntryPoint = "DeviceIoControl", SetLastError = true, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        [DllImport(
+            Libraries.Kernel32,
+            EntryPoint = "DeviceIoControl",
+            SetLastError = true,
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true
+        )]
         internal static extern bool DeviceIoControl(
             SafeHandle hDevice,
             uint dwIoControlCode,
@@ -21,6 +27,7 @@ internal static partial class Interop
             byte[] lpOutBuffer,
             uint nOutBufferSize,
             out uint lpBytesReturned,
-            IntPtr lpOverlapped);
+            IntPtr lpOverlapped
+        );
     }
 }

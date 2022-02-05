@@ -12,8 +12,8 @@ public class B
 
 public class Test
 {
-	public static int Main()
-	{
+    public static int Main()
+    {
         try
         {
             B obj = new B();
@@ -34,5 +34,5 @@ public class Test
             Console.WriteLine("Caught unexpected exception: " + e);
             return 102;
         }
-	}
+    }
 }

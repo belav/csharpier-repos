@@ -38,20 +38,24 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         public SqliteRelationalConnection(
             RelationalConnectionDependencies dependencies,
             IRawSqlCommandBuilder rawSqlCommandBuilder,
-            IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger)
-            : base(dependencies)
+            IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
+        ) : base(dependencies)
         {
             Check.NotNull(rawSqlCommandBuilder, nameof(rawSqlCommandBuilder));
 
             _rawSqlCommandBuilder = rawSqlCommandBuilder;
             _logger = logger;
 
-            var optionsExtension = dependencies.ContextOptions.Extensions.OfType<SqliteOptionsExtension>().FirstOrDefault();
+            var optionsExtension = dependencies.ContextOptions.Extensions
+                .OfType<SqliteOptionsExtension>()
+                .FirstOrDefault();
             if (optionsExtension != null)
             {
                 _loadSpatialite = optionsExtension.LoadSpatialite;
 
-                var relationalOptions = RelationalOptionsExtension.Extract(dependencies.ContextOptions);
+                var relationalOptions = RelationalOptionsExtension.Extract(
+                    dependencies.ContextOptions
+                );
                 _commandTimeout = relationalOptions.CommandTimeout;
 
                 if (relationalOptions.Connection != null)
@@ -83,14 +87,25 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         /// </summary>
         public virtual ISqliteRelationalConnection CreateReadOnlyConnection()
         {
-            var connectionStringBuilder = new SqliteConnectionStringBuilder(GetValidatedConnectionString())
+            var connectionStringBuilder = new SqliteConnectionStringBuilder(
+                GetValidatedConnectionString()
+            )
             {
-                Mode = SqliteOpenMode.ReadOnly, Pooling = false
+                Mode = SqliteOpenMode.ReadOnly,
+                Pooling = false
             };
 
-            var contextOptions = new DbContextOptionsBuilder().UseSqlite(connectionStringBuilder.ToString()).Options;
+            var contextOptions =
+                new DbContextOptionsBuilder().UseSqlite(connectionStringBuilder.ToString()).Options;
 
-            return new SqliteRelationalConnection(Dependencies with { ContextOptions = contextOptions }, _rawSqlCommandBuilder, _logger);
+            return new SqliteRelationalConnection(
+                Dependencies with
+                {
+                    ContextOptions = contextOptions
+                },
+                _rawSqlCommandBuilder,
+                _logger
+            );
         }
 
         private void InitializeDbConnection(DbConnection connection)
@@ -111,22 +126,21 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                     "regexp",
                     (pattern, input) =>
                     {
-                        if (input == null
-                            || pattern == null)
+                        if (input == null || pattern == null)
                         {
                             return null;
                         }
 
                         return Regex.IsMatch(input, pattern);
                     },
-                    isDeterministic: true);
+                    isDeterministic: true
+                );
 
                 sqliteConnection.CreateFunction<object, object, object?>(
                     "ef_mod",
                     (dividend, divisor) =>
                     {
-                        if (dividend == null
-                            || divisor == null)
+                        if (dividend == null || divisor == null)
                         {
                             return null;
                         }
@@ -140,34 +154,41 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                         return Convert.ToDouble(dividend, CultureInfo.InvariantCulture)
                             % Convert.ToDouble(divisor, CultureInfo.InvariantCulture);
                     },
-                    isDeterministic: true);
+                    isDeterministic: true
+                );
 
                 sqliteConnection.CreateFunction(
                     name: "ef_add",
                     (decimal? left, decimal? right) => left + right,
-                    isDeterministic: true);
+                    isDeterministic: true
+                );
 
                 sqliteConnection.CreateFunction(
                     name: "ef_divide",
                     (decimal? dividend, decimal? divisor) => dividend / divisor,
-                    isDeterministic: true);
+                    isDeterministic: true
+                );
 
                 sqliteConnection.CreateFunction(
                     name: "ef_compare",
-                    (decimal? left, decimal? right) => left.HasValue && right.HasValue
-                        ? decimal.Compare(left.Value, right.Value)
-                        : default(int?),
-                    isDeterministic: true);
+                    (decimal? left, decimal? right) =>
+                        left.HasValue && right.HasValue
+                            ? decimal.Compare(left.Value, right.Value)
+                            : default(int?),
+                    isDeterministic: true
+                );
 
                 sqliteConnection.CreateFunction(
                     name: "ef_multiply",
                     (decimal? left, decimal? right) => left * right,
-                    isDeterministic: true);
+                    isDeterministic: true
+                );
 
                 sqliteConnection.CreateFunction(
                     name: "ef_negate",
                     (decimal? m) => -m,
-                    isDeterministic: true);
+                    isDeterministic: true
+                );
             }
             else
             {

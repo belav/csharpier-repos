@@ -20,10 +20,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         // TODO: revisit this cache. The assumption that the dictionary doesn't change in the exact instance is terribly fragile,
         // and with the new .editorconfig support won't hold as well as we'd like: a single tree will have a stable instance but
         // that won't necessarily be the same across files and projects.
-        private static readonly ConditionalWeakTable<IReadOnlyDictionary<string, string?>, NamingStylePreferences> _cache = new();
+        private static readonly ConditionalWeakTable<
+            IReadOnlyDictionary<string, string?>,
+            NamingStylePreferences
+        > _cache = new();
         private static readonly object _cacheLock = new();
 
-        public static NamingStylePreferences GetNamingStylesFromDictionary(IReadOnlyDictionary<string, string?> rawOptions)
+        public static NamingStylePreferences GetNamingStylesFromDictionary(
+            IReadOnlyDictionary<string, string?> rawOptions
+        )
         {
             if (_cache.TryGetValue(rawOptions, out var value))
             {
@@ -42,37 +47,64 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             }
         }
 
-        public static NamingStylePreferences ParseDictionary(IReadOnlyDictionary<string, string?> allRawConventions)
+        public static NamingStylePreferences ParseDictionary(
+            IReadOnlyDictionary<string, string?> allRawConventions
+        )
         {
             var symbolSpecifications = ArrayBuilder<SymbolSpecification>.GetInstance();
             var namingStyles = ArrayBuilder<NamingStyle>.GetInstance();
             var namingRules = ArrayBuilder<SerializableNamingRule>.GetInstance();
-            var ruleNames = new Dictionary<(Guid symbolSpecificationID, Guid namingStyleID, ReportDiagnostic enforcementLevel), string>();
+            var ruleNames = new Dictionary<
+                (Guid symbolSpecificationID, Guid namingStyleID, ReportDiagnostic enforcementLevel),
+                string
+            >();
 
             var trimmedDictionary = TrimDictionary(allRawConventions);
 
             foreach (var namingRuleTitle in GetRuleTitles(trimmedDictionary))
             {
-                if (TryGetSymbolSpec(namingRuleTitle, trimmedDictionary, out var symbolSpec) &&
-                    TryGetNamingStyleData(namingRuleTitle, trimmedDictionary, out var namingStyle) &&
-                    TryGetSerializableNamingRule(namingRuleTitle, symbolSpec, namingStyle, trimmedDictionary, out var serializableNamingRule))
+                if (
+                    TryGetSymbolSpec(namingRuleTitle, trimmedDictionary, out var symbolSpec)
+                    && TryGetNamingStyleData(
+                        namingRuleTitle,
+                        trimmedDictionary,
+                        out var namingStyle
+                    )
+                    && TryGetSerializableNamingRule(
+                        namingRuleTitle,
+                        symbolSpec,
+                        namingStyle,
+                        trimmedDictionary,
+                        out var serializableNamingRule
+                    )
+                )
                 {
                     symbolSpecifications.Add(symbolSpec);
                     namingStyles.Add(namingStyle);
                     namingRules.Add(serializableNamingRule);
 
-                    var ruleKey = (serializableNamingRule.SymbolSpecificationID, serializableNamingRule.NamingStyleID, serializableNamingRule.EnforcementLevel);
+                    var ruleKey = (
+                        serializableNamingRule.SymbolSpecificationID,
+                        serializableNamingRule.NamingStyleID,
+                        serializableNamingRule.EnforcementLevel
+                    );
                     if (ruleNames.TryGetValue(ruleKey, out var existingName))
                     {
                         // For duplicated rules, only preserve the one with a name that would sort first
-                        var ordinalIgnoreCaseOrdering = StringComparer.OrdinalIgnoreCase.Compare(namingRuleTitle, existingName);
+                        var ordinalIgnoreCaseOrdering = StringComparer.OrdinalIgnoreCase.Compare(
+                            namingRuleTitle,
+                            existingName
+                        );
                         if (ordinalIgnoreCaseOrdering > 0)
                         {
                             continue;
                         }
                         else if (ordinalIgnoreCaseOrdering == 0)
                         {
-                            var ordinalOrdering = StringComparer.Ordinal.Compare(namingRuleTitle, existingName);
+                            var ordinalOrdering = StringComparer.Ordinal.Compare(
+                                namingRuleTitle,
+                                existingName
+                            );
                             if (ordinalOrdering > 0)
                             {
                                 continue;
@@ -87,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             var preferences = new NamingStylePreferences(
                 symbolSpecifications.ToImmutableAndFree(),
                 namingStyles.ToImmutableAndFree(),
-                namingRules.ToImmutableAndFree());
+                namingRules.ToImmutableAndFree()
+            );
 
             // Deterministically order the naming style rules according to the symbols matched by the rule. The rules
             // are applied in order; later rules are only relevant if earlier rules fail to specify an order.
@@ -112,29 +145,57 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 .OrderBy(rule => rule, NamingRuleModifierListComparer.Instance)
                 .ThenBy(rule => rule, NamingRuleAccessibilityListComparer.Instance)
                 .ThenBy(rule => rule, NamingRuleSymbolListComparer.Instance)
-                .ThenBy(rule => ruleNames[(rule.SymbolSpecification.ID, rule.NamingStyle.ID, rule.EnforcementLevel)], StringComparer.OrdinalIgnoreCase)
-                .ThenBy(rule => ruleNames[(rule.SymbolSpecification.ID, rule.NamingStyle.ID, rule.EnforcementLevel)], StringComparer.Ordinal);
+                .ThenBy(
+                    rule =>
+                        ruleNames[
+                            (
+                                rule.SymbolSpecification.ID,
+                                rule.NamingStyle.ID,
+                                rule.EnforcementLevel
+                            )
+                        ],
+                    StringComparer.OrdinalIgnoreCase
+                )
+                .ThenBy(
+                    rule =>
+                        ruleNames[
+                            (
+                                rule.SymbolSpecification.ID,
+                                rule.NamingStyle.ID,
+                                rule.EnforcementLevel
+                            )
+                        ],
+                    StringComparer.Ordinal
+                );
 
             return new NamingStylePreferences(
                 preferences.SymbolSpecifications,
                 preferences.NamingStyles,
                 orderedRules.SelectAsArray(
-                    rule => new SerializableNamingRule
-                    {
-                        SymbolSpecificationID = rule.SymbolSpecification.ID,
-                        NamingStyleID = rule.NamingStyle.ID,
-                        EnforcementLevel = rule.EnforcementLevel,
-                    }));
+                    rule =>
+                        new SerializableNamingRule
+                        {
+                            SymbolSpecificationID = rule.SymbolSpecification.ID,
+                            NamingStyleID = rule.NamingStyle.ID,
+                            EnforcementLevel = rule.EnforcementLevel,
+                        }
+                )
+            );
         }
 
-        private static Dictionary<string, string?> TrimDictionary(IReadOnlyDictionary<string, string?> allRawConventions)
+        private static Dictionary<string, string?> TrimDictionary(
+            IReadOnlyDictionary<string, string?> allRawConventions
+        )
         {
             // Keys have been lowercased, but values have not. Because values here reference key
             // names we need any comparisons to ignore case.
             // For example, to make a naming style called "Pascal_Case_style" match up correctly
             // with the key "dotnet_naming_style.pascal_case_style.capitalization", we have to
             // ignore casing for that lookup.
-            var trimmedDictionary = new Dictionary<string, string?>(allRawConventions.Count, AnalyzerConfigOptions.KeyComparer);
+            var trimmedDictionary = new Dictionary<string, string?>(
+                allRawConventions.Count,
+                AnalyzerConfigOptions.KeyComparer
+            );
             foreach (var item in allRawConventions)
             {
                 var key = item.Key.Trim();
@@ -145,19 +206,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             return trimmedDictionary;
         }
 
-        private static IEnumerable<string> GetRuleTitles(IReadOnlyDictionary<string, string?> allRawConventions)
-            => (from kvp in allRawConventions
+        private static IEnumerable<string> GetRuleTitles(
+            IReadOnlyDictionary<string, string?> allRawConventions
+        ) =>
+            (
+                from kvp in allRawConventions
                 where kvp.Key.Trim().StartsWith("dotnet_naming_rule.", StringComparison.Ordinal)
                 let nameSplit = kvp.Key.Split('.')
                 where nameSplit.Length == 3
-                select nameSplit[1])
-                .Distinct();
+                select nameSplit[1]
+            ).Distinct();
 
         private abstract class NamingRuleSubsetComparer : IComparer<NamingRule>
         {
-            protected NamingRuleSubsetComparer()
-            {
-            }
+            protected NamingRuleSubsetComparer() { }
 
             public int Compare(NamingRule x, NamingRule y)
             {
@@ -189,9 +251,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         {
             internal static readonly NamingRuleAccessibilityListComparer Instance = new();
 
-            private NamingRuleAccessibilityListComparer()
-            {
-            }
+            private NamingRuleAccessibilityListComparer() { }
 
             protected override bool FirstIsSubset(in NamingRule x, in NamingRule y)
             {
@@ -211,19 +271,26 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         {
             internal static readonly NamingRuleModifierListComparer Instance = new();
 
-            private NamingRuleModifierListComparer()
-            {
-            }
+            private NamingRuleModifierListComparer() { }
 
             protected override bool FirstIsSubset(in NamingRule x, in NamingRule y)
             {
                 // Since modifiers are "match all", a subset of symbols is matched by a superset of modifiers
                 foreach (var modifier in y.SymbolSpecification.RequiredModifierList)
                 {
-                    if (modifier.ModifierKindWrapper is SymbolSpecification.ModifierKindEnum.IsStatic
-                        or SymbolSpecification.ModifierKindEnum.IsReadOnly)
+                    if (
+                        modifier.ModifierKindWrapper
+                        is SymbolSpecification.ModifierKindEnum.IsStatic
+                            or SymbolSpecification.ModifierKindEnum.IsReadOnly
+                    )
                     {
-                        if (x.SymbolSpecification.RequiredModifierList.Any(x => x.ModifierKindWrapper == SymbolSpecification.ModifierKindEnum.IsConst))
+                        if (
+                            x.SymbolSpecification.RequiredModifierList.Any(
+                                x =>
+                                    x.ModifierKindWrapper
+                                    == SymbolSpecification.ModifierKindEnum.IsConst
+                            )
+                        )
                         {
                             // 'const' implies both 'readonly' and 'static'
                             continue;
@@ -244,9 +311,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         {
             internal static readonly NamingRuleSymbolListComparer Instance = new();
 
-            private NamingRuleSymbolListComparer()
-            {
-            }
+            private NamingRuleSymbolListComparer() { }
 
             protected override bool FirstIsSubset(in NamingRule x, in NamingRule y)
             {

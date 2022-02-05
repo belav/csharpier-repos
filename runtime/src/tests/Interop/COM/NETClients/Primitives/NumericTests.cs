@@ -18,7 +18,8 @@ namespace NetClient
             Console.WriteLine($"Numeric RNG seed: {this.seed}");
 
             this.rng = new Random(this.seed);
-            this.server = (Server.Contract.Servers.NumericTesting)new Server.Contract.Servers.NumericTestingClass();
+            this.server =
+                (Server.Contract.Servers.NumericTesting)new Server.Contract.Servers.NumericTestingClass();
         }
 
         public void Run()
@@ -164,7 +165,10 @@ namespace NetClient
         {
             var expected = a + b;
             Console.WriteLine($"{expected.GetType().Name} test invariant: {a} + {b} = {expected}");
-            Assert.True(EqualByBound(expected, this.server.Add_Float(a, b)), $"Add_Float: {this.server.Add_Float(a, b)}");
+            Assert.True(
+                EqualByBound(expected, this.server.Add_Float(a, b)),
+                $"Add_Float: {this.server.Add_Float(a, b)}"
+            );
 
             var c = float.MaxValue;
             this.server.Add_Float_Ref(a, b, ref c);
@@ -193,11 +197,17 @@ namespace NetClient
         private void Marshal_ManyInts()
         {
             var expected = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11;
-            Console.WriteLine($"{expected.GetType().Name} 11 test invariant: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 = {expected}");
+            Console.WriteLine(
+                $"{expected.GetType().Name} 11 test invariant: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 = {expected}"
+            );
             Assert.True(expected == this.server.Add_ManyInts11(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11));
             expected = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12;
-            Console.WriteLine($"{expected.GetType().Name} 12 test invariant: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 = {expected}");
-            Assert.True(expected == this.server.Add_ManyInts12(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
+            Console.WriteLine(
+                $"{expected.GetType().Name} 12 test invariant: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 = {expected}"
+            );
+            Assert.True(
+                expected == this.server.Add_ManyInts12(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+            );
         }
     }
 }

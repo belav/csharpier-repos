@@ -20,9 +20,7 @@ public class VirtualPathData
     /// <param name="router">The object that is used to generate the URL.</param>
     /// <param name="virtualPath">The generated URL.</param>
     public VirtualPathData(IRouter router, string virtualPath)
-        : this(router, virtualPath, dataTokens: null)
-    {
-    }
+        : this(router, virtualPath, dataTokens: null) { }
 
     /// <summary>
     ///  Initializes a new instance of the <see cref="VirtualPathData"/> class.
@@ -30,10 +28,7 @@ public class VirtualPathData
     /// <param name="router">The object that is used to generate the URL.</param>
     /// <param name="virtualPath">The generated URL.</param>
     /// <param name="dataTokens">The collection of custom values.</param>
-    public VirtualPathData(
-        IRouter router,
-        string virtualPath,
-        RouteValueDictionary dataTokens)
+    public VirtualPathData(IRouter router, string virtualPath, RouteValueDictionary dataTokens)
     {
         if (router == null)
         {
@@ -71,14 +66,8 @@ public class VirtualPathData
     /// </summary>
     public string VirtualPath
     {
-        get
-        {
-            return _virtualPath;
-        }
-        set
-        {
-            _virtualPath = NormalizePath(value);
-        }
+        get { return _virtualPath; }
+        set { _virtualPath = NormalizePath(value); }
     }
 
     private static string NormalizePath(string path)

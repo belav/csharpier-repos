@@ -28,12 +28,8 @@ public class ViewDataAvailableAfterHandlerExecutedModel : PageModel
             }
         }
 
-        public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
-        {
-        }
+        public void OnPageHandlerExecuting(PageHandlerExecutingContext context) { }
 
-        public void OnPageHandlerSelected(PageHandlerSelectedContext context)
-        {
-        }
+        public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
     }
 }

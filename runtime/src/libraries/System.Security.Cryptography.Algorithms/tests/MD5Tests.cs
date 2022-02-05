@@ -13,7 +13,11 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return MD5.Create();
         }
 
-        protected override bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        protected override bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             return MD5.TryHashData(source, destination, out bytesWritten);
         }
@@ -52,7 +56,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
                 "a",
                 "bc",
                 "900150983cd24fb0d6963f7d28e17f72",
-                "d41d8cd98f00b204e9800998ecf8427e");
+                "d41d8cd98f00b204e9800998ecf8427e"
+            );
         }
 
         [Fact]
@@ -70,13 +75,19 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         [Fact]
         public void MD5_Rfc1321_6()
         {
-            Verify("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", "d174ab98d277d9f5a5611c2c9f419d9f");
+            Verify(
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+                "d174ab98d277d9f5a5611c2c9f419d9f"
+            );
         }
 
         [Fact]
         public void MD5_Rfc1321_7()
         {
-            Verify("12345678901234567890123456789012345678901234567890123456789012345678901234567890", "57edf4a22be3c955ac49da2e2107b67a");
+            Verify(
+                "12345678901234567890123456789012345678901234567890123456789012345678901234567890",
+                "57edf4a22be3c955ac49da2e2107b67a"
+            );
         }
 
         [Fact]

@@ -17,47 +17,36 @@ public class ValidationAttributeAdapterProviderTest
         get
         {
             return new TheoryData<ValidationAttribute, Type>
+            {
                 {
-                    {
-                        new RegularExpressionAttribute("abc"),
-                        typeof(RegularExpressionAttributeAdapter)
-                    },
-                    {
-                        new MaxLengthAttribute(),
-                        typeof(MaxLengthAttributeAdapter)
-                    },
-                    {
-                        new MinLengthAttribute(1),
-                        typeof(MinLengthAttributeAdapter)
-                    },
-                    {
-                        new RangeAttribute(1, 100),
-                        typeof(RangeAttributeAdapter)
-                    },
-                    {
-                        new StringLengthAttribute(6),
-                        typeof(StringLengthAttributeAdapter)
-                    },
-                    {
-                        new RequiredAttribute(),
-                        typeof(RequiredAttributeAdapter)
-                    },
-                    {
-                        new CustomRegularExpressionAttribute("abc"),
-                        typeof(RegularExpressionAttributeAdapter)
-                    }
-                };
+                    new RegularExpressionAttribute("abc"),
+                    typeof(RegularExpressionAttributeAdapter)
+                },
+                { new MaxLengthAttribute(), typeof(MaxLengthAttributeAdapter) },
+                { new MinLengthAttribute(1), typeof(MinLengthAttributeAdapter) },
+                { new RangeAttribute(1, 100), typeof(RangeAttributeAdapter) },
+                { new StringLengthAttribute(6), typeof(StringLengthAttributeAdapter) },
+                { new RequiredAttribute(), typeof(RequiredAttributeAdapter) },
+                {
+                    new CustomRegularExpressionAttribute("abc"),
+                    typeof(RegularExpressionAttributeAdapter)
+                }
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(DataAnnotationAdapters))]
     public void AdapterFactory_RegistersAdapters_ForDataAnnotationAttributes(
-           ValidationAttribute attribute,
-           Type expectedAdapterType)
+        ValidationAttribute attribute,
+        Type expectedAdapterType
+    )
     {
         // Arrange and Act
-        var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(attribute, stringLocalizer: null);
+        var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(
+            attribute,
+            stringLocalizer: null
+        );
 
         // Assert
         Assert.IsType(expectedAdapterType, adapter);
@@ -67,12 +56,13 @@ public class ValidationAttributeAdapterProviderTest
     {
         get
         {
-            return new TheoryData<ValidationAttribute, string> {
-                    { new UrlAttribute(), "data-val-url" },
-                    { new CreditCardAttribute(), "data-val-creditcard" },
-                    { new EmailAddressAttribute(), "data-val-email" },
-                    { new PhoneAttribute(), "data-val-phone" }
-                };
+            return new TheoryData<ValidationAttribute, string>
+            {
+                { new UrlAttribute(), "data-val-url" },
+                { new CreditCardAttribute(), "data-val-creditcard" },
+                { new EmailAddressAttribute(), "data-val-email" },
+                { new PhoneAttribute(), "data-val-phone" }
+            };
         }
     }
 
@@ -80,10 +70,14 @@ public class ValidationAttributeAdapterProviderTest
     [MemberData(nameof(DataTypeAdapters))]
     public void AdapterFactory_RegistersAdapters_ForDataTypeAttributes(
         ValidationAttribute attribute,
-        string expectedRuleName)
+        string expectedRuleName
+    )
     {
         // Arrange & Act
-        var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(attribute, stringLocalizer: null);
+        var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(
+            attribute,
+            stringLocalizer: null
+        );
 
         // Assert
         var dataTypeAdapter = Assert.IsType<DataTypeAttributeAdapter>(adapter);

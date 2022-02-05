@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ManyToManyHeterogeneousQuerySqliteTest : ManyToManyHeterogeneousQueryRelationalTestBase
+    public class ManyToManyHeterogeneousQuerySqliteTest
+        : ManyToManyHeterogeneousQueryRelationalTestBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

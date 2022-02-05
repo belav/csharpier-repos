@@ -14,12 +14,20 @@ namespace Microsoft.CodeAnalysis
     internal sealed class SyntaxInputNode<T> : IIncrementalGeneratorNode<T>, ISyntaxInputNode
     {
         private readonly Func<GeneratorSyntaxContext, CancellationToken, T> _transformFunc;
-        private readonly Action<ISyntaxInputNode, IIncrementalGeneratorOutputNode> _registerOutputAndNode;
+        private readonly Action<
+            ISyntaxInputNode,
+            IIncrementalGeneratorOutputNode
+        > _registerOutputAndNode;
         private readonly Func<SyntaxNode, CancellationToken, bool> _filterFunc;
         private readonly IEqualityComparer<T> _comparer;
         private readonly object _filterKey = new object();
 
-        internal SyntaxInputNode(Func<SyntaxNode, CancellationToken, bool> filterFunc, Func<GeneratorSyntaxContext, CancellationToken, T> transformFunc, Action<ISyntaxInputNode, IIncrementalGeneratorOutputNode> registerOutputAndNode, IEqualityComparer<T>? comparer = null)
+        internal SyntaxInputNode(
+            Func<SyntaxNode, CancellationToken, bool> filterFunc,
+            Func<GeneratorSyntaxContext, CancellationToken, T> transformFunc,
+            Action<ISyntaxInputNode, IIncrementalGeneratorOutputNode> registerOutputAndNode,
+            IEqualityComparer<T>? comparer = null
+        )
         {
             _transformFunc = transformFunc;
             _registerOutputAndNode = registerOutputAndNode;
@@ -27,16 +35,22 @@ namespace Microsoft.CodeAnalysis
             _comparer = comparer ?? EqualityComparer<T>.Default;
         }
 
-        public NodeStateTable<T> UpdateStateTable(DriverStateTable.Builder graphState, NodeStateTable<T> previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<T> UpdateStateTable(
+            DriverStateTable.Builder graphState,
+            NodeStateTable<T> previousTable,
+            CancellationToken cancellationToken
+        )
         {
             return (NodeStateTable<T>)graphState.GetSyntaxInputTable(this);
         }
 
-        public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) => new SyntaxInputNode<T>(_filterFunc, _transformFunc, _registerOutputAndNode, comparer);
+        public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) =>
+            new SyntaxInputNode<T>(_filterFunc, _transformFunc, _registerOutputAndNode, comparer);
 
         public ISyntaxInputBuilder GetBuilder(DriverStateTable table) => new Builder(this, table);
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _registerOutputAndNode(this, output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _registerOutputAndNode(this, output);
 
         private sealed class Builder : ISyntaxInputBuilder
         {
@@ -49,19 +63,31 @@ namespace Microsoft.CodeAnalysis
             public Builder(SyntaxInputNode<T> owner, DriverStateTable table)
             {
                 _owner = owner;
-                _filterTable = table.GetStateTableOrEmpty<SyntaxNode>(_owner._filterKey).ToBuilder();
+                _filterTable = table
+                    .GetStateTableOrEmpty<SyntaxNode>(_owner._filterKey)
+                    .ToBuilder();
                 _transformTable = table.GetStateTableOrEmpty<T>(_owner).ToBuilder();
             }
 
-            public ISyntaxInputNode SyntaxInputNode { get => _owner; }
+            public ISyntaxInputNode SyntaxInputNode
+            {
+                get => _owner;
+            }
 
-            public void SaveStateAndFree(ImmutableSegmentedDictionary<object, IStateTable>.Builder tables)
+            public void SaveStateAndFree(
+                ImmutableSegmentedDictionary<object, IStateTable>.Builder tables
+            )
             {
                 tables[_owner._filterKey] = _filterTable.ToImmutableAndFree();
                 tables[_owner] = _transformTable.ToImmutableAndFree();
             }
 
-            public void VisitTree(Lazy<SyntaxNode> root, EntryState state, SemanticModel? model, CancellationToken cancellationToken)
+            public void VisitTree(
+                Lazy<SyntaxNode> root,
+                EntryState state,
+                SemanticModel? model,
+                CancellationToken cancellationToken
+            )
             {
                 if (state == EntryState.Removed)
                 {
@@ -77,7 +103,11 @@ namespace Microsoft.CodeAnalysis
                     ImmutableArray<SyntaxNode> nodes;
                     if (state != EntryState.Cached || !_filterTable.TryUseCachedEntries(out nodes))
                     {
-                        nodes = IncrementalGeneratorSyntaxWalker.GetFilteredNodes(root.Value, _owner._filterFunc, cancellationToken);
+                        nodes = IncrementalGeneratorSyntaxWalker.GetFilteredNodes(
+                            root.Value,
+                            _owner._filterFunc,
+                            cancellationToken
+                        );
                         _filterTable.AddEntries(nodes, EntryState.Added);
                     }
 
@@ -87,7 +117,10 @@ namespace Microsoft.CodeAnalysis
                         var value = new GeneratorSyntaxContext(node, model);
                         var transformed = _owner._transformFunc(value, cancellationToken);
 
-                        if (state == EntryState.Added || !_transformTable.TryModifyEntry(transformed, _owner._comparer))
+                        if (
+                            state == EntryState.Added
+                            || !_transformTable.TryModifyEntry(transformed, _owner._comparer)
+                        )
                         {
                             _transformTable.AddEntry(transformed, EntryState.Added);
                         }

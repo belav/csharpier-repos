@@ -19,7 +19,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
     [UseExportProvider]
     public class LocationInfoGetterTests
     {
-        private static async Task TestAsync(string markup, string expectedName, int expectedLineOffset, CSharpParseOptions parseOptions = null)
+        private static async Task TestAsync(
+            string markup,
+            string expectedName,
+            int expectedLineOffset,
+            CSharpParseOptions parseOptions = null
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(markup, parseOptions);
 
@@ -28,28 +33,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             var locationInfo = await LocationInfoGetter.GetInfoAsync(
                 workspace.CurrentSolution.Projects.Single().Documents.Single(),
                 position,
-                CancellationToken.None);
+                CancellationToken.None
+            );
 
             Assert.Equal(expectedName, locationInfo.Name);
             Assert.Equal(expectedLineOffset, locationInfo.LineOffset);
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
-        public async Task TestClass()
-            => await TestAsync("class G$$oo { }", "Goo", 0);
+        public async Task TestClass() => await TestAsync("class G$$oo { }", "Goo", 0);
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
-        [WorkItem(527668, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668"), WorkItem(538415, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538415")]
+        [
+            WorkItem(527668, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668"),
+            WorkItem(538415, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538415")
+        ]
         public async Task TestMethod()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     public static void Meth$$od()
     {
     }
 }
-", "Class.Method()", 0);
+",
+                "Class.Method()",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -57,7 +68,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         public async Task TestNamespace()
         {
             await TestAsync(
-@"namespace Namespace
+                @"namespace Namespace
 {
     class Class
     {
@@ -65,7 +76,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
         }$$
     }
-}", "Namespace.Class.Method()", 2);
+}",
+                "Namespace.Class.Method()",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -75,7 +89,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             // This test behavior is incorrect. This should be Namespace.Class.Method.
             // See the associated WorkItem for details.
             await TestAsync(
-@"namespace Namespace;
+                @"namespace Namespace;
 
 class Class
 {
@@ -83,7 +97,10 @@ class Class
     {
     }$$
 }
-", "Namespace.Class.Method()", 2);
+",
+                "Namespace.Class.Method()",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -91,7 +108,7 @@ class Class
         public async Task TestDottedNamespace()
         {
             await TestAsync(
-@"namespace Namespace.Another
+                @"namespace Namespace.Another
 {
     class Class
     {
@@ -99,14 +116,17 @@ class Class
         {
         }$$
     }
-}", "Namespace.Another.Class.Method()", 2);
+}",
+                "Namespace.Another.Class.Method()",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestNestedNamespace()
         {
             await TestAsync(
-@"namespace Namespace
+                @"namespace Namespace
 {
     namespace Another
     {
@@ -117,7 +137,10 @@ class Class
             }$$
         }
     }
-}", "Namespace.Another.Class.Method()", 2);
+}",
+                "Namespace.Another.Class.Method()",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -125,7 +148,7 @@ class Class
         public async Task TestNestedType()
         {
             await TestAsync(
-@"class Outer
+                @"class Outer
 {
     class Inner
     {
@@ -133,7 +156,10 @@ class Class
         {$$
         }
     }
-}", "Outer.Inner.Quux()", 1);
+}",
+                "Outer.Inner.Quux()",
+                1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -141,7 +167,7 @@ class Class
         public async Task TestPropertyGetter()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     string Property
     {
@@ -150,7 +176,10 @@ class Class
             return null;$$
         }
     }
-}", "Class.Property", 4);
+}",
+                "Class.Property",
+                4
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -158,7 +187,7 @@ class Class
         public async Task TestPropertySetter()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     string Property
     {
@@ -172,7 +201,10 @@ class Class
             string s = $$value;
         }
     }
-}", "Class.Property", 9);
+}",
+                "Class.Property",
+                9
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -180,10 +212,13 @@ class Class
         public async Task TestField()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     int fi$$eld;
-}", "Class.field", 0);
+}",
+                "Class.field",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -191,10 +226,13 @@ class Class
         public async Task TestLambdaInFieldInitializer()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     Action<int> a = b => { in$$t c; };
-}", "Class.a", 0);
+}",
+                "Class.a",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
@@ -202,44 +240,53 @@ class Class
         public async Task TestMultipleFields()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     int a1, a$$2;
-}", "Class.a2", 0);
+}",
+                "Class.a2",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestConstructor()
         {
             await TestAsync(
-@"class C1
+                @"class C1
 {
     C1()
     {
 
     $$}
 }
-", "C1.C1()", 3);
+",
+                "C1.C1()",
+                3
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestDestructor()
         {
             await TestAsync(
-@"class C1
+                @"class C1
 {
     ~C1()
     {
     $$}
 }
-", "C1.~C1()", 2);
+",
+                "C1.~C1()",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestOperator()
         {
             await TestAsync(
-@"namespace N1
+                @"namespace N1
 {
     class C1
     {
@@ -249,14 +296,17 @@ class Class
         }
     }
 }
-", "N1.C1.+(C1 x, C1 y)", 2); // Old implementation reports "operator +" (rather than "+")...
+",
+                "N1.C1.+(C1 x, C1 y)",
+                2
+            ); // Old implementation reports "operator +" (rather than "+")...
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestConversionOperator()
         {
             await TestAsync(
-@"namespace N1
+                @"namespace N1
 {
     class C1
     {
@@ -269,26 +319,32 @@ class Class
     {
     }
 }
-", "N1.C1.N1.C2(N1.C1 x)", 2); // Old implementation reports "explicit operator N1.C2" (rather than "N1.C2")...
+",
+                "N1.C1.N1.C2(N1.C1 x)",
+                2
+            ); // Old implementation reports "explicit operator N1.C2" (rather than "N1.C2")...
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestEvent()
         {
             await TestAsync(
-@"class C1
+                @"class C1
 {
     delegate void D1();
     event D1 e1$$;
 }
-", "C1.e1", 0);
+",
+                "C1.e1",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TextExplicitInterfaceImplementation()
         {
             await TestAsync(
-@"interface I1
+                @"interface I1
 {
     void M1();
 }
@@ -298,14 +354,17 @@ class C1
     {
     $$}
 }
-", "C1.M1()", 2);
+",
+                "C1.M1()",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TextIndexer()
         {
             await TestAsync(
-@"class C1
+                @"class C1
 {
     C1 this[int x]
     {
@@ -315,122 +374,152 @@ class C1
         }
     }
 }
-", "C1.this[int x]", 4);
+",
+                "C1.this[int x]",
+                4
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestParamsParameter()
         {
             await TestAsync(
-@"class C1
+                @"class C1
 {
     void M1(params int[] x) { $$ }
 }
-", "C1.M1(params int[] x)", 0);
+",
+                "C1.M1(params int[] x)",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestArglistParameter()
         {
             await TestAsync(
-@"class C1
+                @"class C1
 {
     void M1(__arglist) { $$ }
 }
-", "C1.M1(__arglist)", 0); // Old implementation does not show "__arglist"...
+",
+                "C1.M1(__arglist)",
+                0
+            ); // Old implementation does not show "__arglist"...
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestRefAndOutParameters()
         {
             await TestAsync(
-@"class C1
+                @"class C1
 {
     void M1( ref int x, out int y )
     {
         $$y = x;
     }
 }
-", "C1.M1( ref int x, out int y )", 2); // Old implementation did not show extra spaces around the parameters...
+",
+                "C1.M1( ref int x, out int y )",
+                2
+            ); // Old implementation did not show extra spaces around the parameters...
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestOptionalParameters()
         {
             await TestAsync(
-@"class C1
+                @"class C1
 {
     void M1(int x =1)
     {
         $$y = x;
     }
 }
-", "C1.M1(int x =1)", 2);
+",
+                "C1.M1(int x =1)",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestExtensionMethod()
         {
             await TestAsync(
-@"static class C1
+                @"static class C1
 {
     static void M1(this int x)
     {
     }$$
 }
-", "C1.M1(this int x)", 2);
+",
+                "C1.M1(this int x)",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestGenericType()
         {
             await TestAsync(
-@"class C1<T, U>
+                @"class C1<T, U>
 {
     static void M1() { $$ }
 }
-", "C1.M1()", 0);
+",
+                "C1.M1()",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestGenericMethod()
         {
             await TestAsync(
-@"class C1<T, U>
+                @"class C1<T, U>
 {
     static void M1<V>() { $$ }
 }
-", "C1.M1()", 0);
+",
+                "C1.M1()",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestGenericParameters()
         {
             await TestAsync(
-@"class C1<T, U>
+                @"class C1<T, U>
 {
     static void M1<V>(C1<int, V> x, V y) { $$ }
 }
-", "C1.M1(C1<int, V> x, V y)", 0);
+",
+                "C1.M1(C1<int, V> x, V y)",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestMissingNamespace()
         {
             await TestAsync(
-@"{
+                @"{
     class Class
     {
         int a1, a$$2;
     }
-}", "Class.a2", 0);
+}",
+                "Class.a2",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestMissingNamespaceName()
         {
             await TestAsync(
-@"namespace
+                @"namespace
 {
     class C1
     {
@@ -438,28 +527,34 @@ class C1
         $${
         }
     }
-}", "?.C1.M1()", 1);
+}",
+                "?.C1.M1()",
+                1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestMissingClassName()
         {
             await TestAsync(
-@"namespace N1
+                @"namespace N1
     class 
     {
         int M1()
         $${
         }
     }
-}", "N1.M1()", 1); // Old implementation displayed "N1.?.M1", but we don't see a class declaration in the syntax tree...
+}",
+                "N1.M1()",
+                1
+            ); // Old implementation displayed "N1.?.M1", but we don't see a class declaration in the syntax tree...
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestMissingMethodName()
         {
             await TestAsync(
-@"namespace N1
+                @"namespace N1
 {
     class C1
     {
@@ -467,14 +562,17 @@ class C1
         {
         $$}
     }
-}", "N1.C1", 4);
+}",
+                "N1.C1",
+                4
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TestMissingParameterList()
         {
             await TestAsync(
-@"namespace N1
+                @"namespace N1
 {
     class C1
     {
@@ -482,35 +580,50 @@ class C1
         {
         $$}
     }
-}", "N1.C1.M1", 2);
+}",
+                "N1.C1.M1",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TopLevelField()
         {
             await TestAsync(
-@"$$int f1;
-", "f1", 0, new CSharpParseOptions(kind: SourceCodeKind.Script));
+                @"$$int f1;
+",
+                "f1",
+                0,
+                new CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TopLevelMethod()
         {
             await TestAsync(
-@"int M1(int x)
+                @"int M1(int x)
 {
 $$}
-", "M1(int x)", 2, new CSharpParseOptions(kind: SourceCodeKind.Script));
+",
+                "M1(int x)",
+                2,
+                new CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
         public async Task TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 
 $$System.Console.WriteLine(""Hello"")
-", null, 0, new CSharpParseOptions(kind: SourceCodeKind.Script));
+",
+                null,
+                0,
+                new CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
         }
     }
 }

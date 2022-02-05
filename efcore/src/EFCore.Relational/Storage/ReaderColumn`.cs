@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool nullable,
             string? name,
             IPropertyBase? property,
-            Func<DbDataReader, int[], T> getFieldValue)
-            : base(typeof(T), nullable, name, property)
+            Func<DbDataReader, int[], T> getFieldValue
+        ) : base(typeof(T), nullable, name, property)
         {
             GetFieldValue = getFieldValue;
         }

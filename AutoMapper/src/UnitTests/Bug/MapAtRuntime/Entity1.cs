@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OmmitedDatabaseModel3
-{   
+{
     public class Entity1 : BaseEntity
     {
         public Entity1()
         {
             this.Entities2 = new Entity2();
         }
+
         public Guid Entity17Id { get; set; }
         public Entity17 Entity17 { get; set; }
         public Guid? Entity22Id { get; set; }

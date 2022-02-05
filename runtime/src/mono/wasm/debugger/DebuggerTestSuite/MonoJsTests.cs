@@ -18,22 +18,20 @@ namespace DebuggerTests
         {
             var bad_expressions = new[]
             {
-                    "INTERNAL.mono_wasm_raise_debug_event('')",
-                    "INTERNAL.mono_wasm_raise_debug_event(undefined)",
-                    "INTERNAL.mono_wasm_raise_debug_event({})",
-
-                    "INTERNAL.mono_wasm_raise_debug_event({eventName:'foo'}, '')",
-                    "INTERNAL.mono_wasm_raise_debug_event({eventName:'foo'}, 12)"
-                };
+                "INTERNAL.mono_wasm_raise_debug_event('')",
+                "INTERNAL.mono_wasm_raise_debug_event(undefined)",
+                "INTERNAL.mono_wasm_raise_debug_event({})",
+                "INTERNAL.mono_wasm_raise_debug_event({eventName:'foo'}, '')",
+                "INTERNAL.mono_wasm_raise_debug_event({eventName:'foo'}, 12)"
+            };
 
             foreach (var expression in bad_expressions)
             {
-                var res = await cli.SendCommand($"Runtime.evaluate",
-                            JObject.FromObject(new
-                            {
-                                expression,
-                                returnByValue = true
-                            }), token);
+                var res = await cli.SendCommand(
+                    $"Runtime.evaluate",
+                    JObject.FromObject(new { expression, returnByValue = true }),
+                    token
+                );
                 Assert.False(res.IsOk, $"Expected to fail for {expression}");
             }
         }
@@ -45,21 +43,33 @@ namespace DebuggerTests
         public async Task RaiseDebugEventTraceTest(bool? trace)
         {
             var tcs = new TaskCompletionSource<bool>();
-            insp.On("Runtime.consoleAPICalled", async (args, token) =>
-            {
-                if (args?["type"]?.Value<string>() == "debug" &&
-                   args?["args"]?.Type == JTokenType.Array &&
-                   args?["args"]?[0]?["value"]?.Value<string>()?.StartsWith("mono_wasm_debug_event_raised:") == true)
+            insp.On(
+                "Runtime.consoleAPICalled",
+                async (args, token) =>
                 {
-                    tcs.SetResult(true);
-                }
+                    if (
+                        args?["type"]?.Value<string>() == "debug"
+                        && args?["args"]?.Type == JTokenType.Array
+                        && args?["args"]?[0]?["value"]?.Value<string>()?.StartsWith(
+                            "mono_wasm_debug_event_raised:"
+                        ) == true
+                    )
+                    {
+                        tcs.SetResult(true);
+                    }
 
-                await Task.CompletedTask;
-            });
+                    await Task.CompletedTask;
+                }
+            );
 
             var trace_str = trace.HasValue ? $"trace: {trace.ToString().ToLower()}" : String.Empty;
-            var expression = $"INTERNAL.mono_wasm_raise_debug_event({{ eventName:'qwe' }}, {{ {trace_str} }})";
-            var res = await cli.SendCommand($"Runtime.evaluate", JObject.FromObject(new { expression }), token);
+            var expression =
+                $"INTERNAL.mono_wasm_raise_debug_event({{ eventName:'qwe' }}, {{ {trace_str} }})";
+            var res = await cli.SendCommand(
+                $"Runtime.evaluate",
+                JObject.FromObject(new { expression }),
+                token
+            );
             Assert.True(res.IsOk, $"Expected to pass for {expression}");
 
             var t = await Task.WhenAny(tcs.Task, Task.Delay(2000));
@@ -73,8 +83,11 @@ namespace DebuggerTests
         [Theory]
         [InlineData(true, 1)]
         [InlineData(false, 0)]
-        public async Task DuplicateAssemblyLoadedEventNotLoadedFromBundle(bool load_pdb, int expected_count)
-            => await AssemblyLoadedEventTest(
+        public async Task DuplicateAssemblyLoadedEventNotLoadedFromBundle(
+            bool load_pdb,
+            int expected_count
+        ) =>
+            await AssemblyLoadedEventTest(
                 "lazy-debugger-test",
                 Path.Combine(DebuggerTestAppPath, "lazy-debugger-test.dll"),
                 load_pdb ? Path.Combine(DebuggerTestAppPath, "lazy-debugger-test.pdb") : null,
@@ -85,8 +98,11 @@ namespace DebuggerTests
         [Theory]
         [InlineData(true, 1)]
         [InlineData(false, 1)] // Since it's being loaded from the bundle, it will have the pdb even if we don't provide one
-        public async Task DuplicateAssemblyLoadedEventForAssemblyFromBundle(bool load_pdb, int expected_count)
-            => await AssemblyLoadedEventTest(
+        public async Task DuplicateAssemblyLoadedEventForAssemblyFromBundle(
+            bool load_pdb,
+            int expected_count
+        ) =>
+            await AssemblyLoadedEventTest(
                 "debugger-test",
                 Path.Combine(DebuggerTestAppPath, "managed/debugger-test.dll"),
                 load_pdb ? Path.Combine(DebuggerTestAppPath, "managed/debugger-test.pdb") : null,
@@ -95,8 +111,8 @@ namespace DebuggerTests
             );
 
         [Fact]
-        public async Task DuplicateAssemblyLoadedEventWithEmbeddedPdbNotLoadedFromBundle()
-            => await AssemblyLoadedEventTest(
+        public async Task DuplicateAssemblyLoadedEventWithEmbeddedPdbNotLoadedFromBundle() =>
+            await AssemblyLoadedEventTest(
                 "lazy-debugger-test-embedded",
                 Path.Combine(DebuggerTestAppPath, "lazy-debugger-test-embedded.dll"),
                 null,
@@ -104,30 +120,38 @@ namespace DebuggerTests
                 expected_count: 1
             );
 
-        async Task AssemblyLoadedEventTest(string asm_name, string asm_path, string pdb_path, string source_file, int expected_count)
+        async Task AssemblyLoadedEventTest(
+            string asm_name,
+            string asm_path,
+            string pdb_path,
+            string source_file,
+            int expected_count
+        )
         {
-
             int event_count = 0;
             var tcs = new TaskCompletionSource<bool>();
-            insp.On("Debugger.scriptParsed", async (args, c) =>
-            {
-                try
+            insp.On(
+                "Debugger.scriptParsed",
+                async (args, c) =>
                 {
-                    var url = args["url"]?.Value<string>();
-                    if (url?.EndsWith(source_file) == true)
+                    try
                     {
-                        event_count++;
-                        if (event_count > expected_count)
-                            tcs.SetResult(false);
+                        var url = args["url"]?.Value<string>();
+                        if (url?.EndsWith(source_file) == true)
+                        {
+                            event_count++;
+                            if (event_count > expected_count)
+                                tcs.SetResult(false);
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    tcs.SetException(ex);
-                }
+                    catch (Exception ex)
+                    {
+                        tcs.SetException(ex);
+                    }
 
-                await Task.CompletedTask;
-            });
+                    await Task.CompletedTask;
+                }
+            );
 
             byte[] bytes = File.ReadAllBytes(asm_path);
             string asm_base64 = Convert.ToBase64String(bytes);
@@ -139,24 +163,36 @@ namespace DebuggerTests
                 pdb_base64 = Convert.ToBase64String(bytes);
             }
 
-            var expression = $@"INTERNAL.mono_wasm_raise_debug_event({{
+            var expression =
+                $@"INTERNAL.mono_wasm_raise_debug_event({{
                     eventName: 'AssemblyLoaded',
                     assembly_name: '{asm_name}',
                     assembly_b64: '{asm_base64}',
                     pdb_b64: '{pdb_base64}'
                 }});";
 
-            var res = await cli.SendCommand($"Runtime.evaluate", JObject.FromObject(new { expression }), token);
+            var res = await cli.SendCommand(
+                $"Runtime.evaluate",
+                JObject.FromObject(new { expression }),
+                token
+            );
             Assert.True(res.IsOk, $"Expected to pass for {expression}");
 
-            res = await cli.SendCommand($"Runtime.evaluate", JObject.FromObject(new { expression }), token);
+            res = await cli.SendCommand(
+                $"Runtime.evaluate",
+                JObject.FromObject(new { expression }),
+                token
+            );
             Assert.True(res.IsOk, $"Expected to pass for {expression}");
 
             var t = await Task.WhenAny(tcs.Task, Task.Delay(2000));
             if (t.IsFaulted)
                 throw t.Exception;
 
-            Assert.True(event_count <= expected_count, $"number of scriptParsed events received. Expected: {expected_count}, Actual: {event_count}");
+            Assert.True(
+                event_count <= expected_count,
+                $"number of scriptParsed events received. Expected: {expected_count}, Actual: {event_count}"
+            );
         }
     }
 }

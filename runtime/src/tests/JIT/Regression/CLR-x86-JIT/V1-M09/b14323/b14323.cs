@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace DefaultNamespace
 {
     internal class AppStarter
@@ -18,4 +17,3 @@ namespace DefaultNamespace
         }
     };
 }
-

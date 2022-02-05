@@ -6,7 +6,6 @@ using System;
 
 namespace hello
 {
-
     class Class1
     {
         private static TestUtil.TestLog testLog;
@@ -31,6 +30,7 @@ namespace hello
         {
             Console.WriteLine("in Try catch");
         }
+
         static public void inTry2()
         {
             Console.WriteLine("in Try finally");
@@ -40,10 +40,12 @@ namespace hello
         {
             Console.WriteLine("in Catch");
         }
+
         static public void inFinally()
         {
             Console.WriteLine("in Finally");
         }
+
         static public int Main(string[] args)
         {
             //Start recording

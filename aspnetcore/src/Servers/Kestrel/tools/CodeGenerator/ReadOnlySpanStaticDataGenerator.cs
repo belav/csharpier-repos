@@ -11,15 +11,18 @@ namespace CodeGenerator;
 
 public static class ReadOnlySpanStaticDataGenerator
 {
-    public static string GenerateFile(string namespaceName, string className, IEnumerable<(string Name, string Value)> allProperties)
+    public static string GenerateFile(
+        string namespaceName,
+        string className,
+        IEnumerable<(string Name, string Value)> allProperties
+    )
     {
-        var properties = allProperties.Select((p, index) => new Property
-        {
-            Data = p,
-            Index = index
-        });
+        var properties = allProperties.Select(
+            (p, index) => new Property { Data = p, Index = index }
+        );
 
-        var s = $@"// Licensed to the .NET Foundation under one or more agreements.
+        var s =
+            $@"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;

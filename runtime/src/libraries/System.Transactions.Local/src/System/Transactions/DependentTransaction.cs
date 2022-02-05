@@ -11,8 +11,11 @@ namespace System.Transactions
 
         // Create a transaction with the given settings
         //
-        internal DependentTransaction(IsolationLevel isoLevel, InternalTransaction internalTransaction, bool blocking) :
-            base(isoLevel, internalTransaction)
+        internal DependentTransaction(
+            IsolationLevel isoLevel,
+            InternalTransaction internalTransaction,
+            bool blocking
+        ) : base(isoLevel, internalTransaction)
         {
             _blocking = blocking;
             lock (_internalTransaction)

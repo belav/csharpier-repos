@@ -22,18 +22,26 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UsePatternMatchingIsAndCastCheckWithoutName), Shared]
-    internal partial class CSharpIsAndCastCheckWithoutNameCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UsePatternMatchingIsAndCastCheckWithoutName
+        ),
+        Shared
+    ]
+    internal partial class CSharpIsAndCastCheckWithoutNameCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpIsAndCastCheckWithoutNameCodeFixProvider()
-            : base(supportsFixAll: false)
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpIsAndCastCheckWithoutNameCodeFixProvider() : base(supportsFixAll: false) { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.InlineIsTypeWithoutNameCheckDiagnosticsId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.InlineIsTypeWithoutNameCheckDiagnosticsId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
@@ -41,25 +49,43 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         {
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(diagnostics.Length == 1);
             var location = diagnostics[0].Location;
             var isExpression = (BinaryExpressionSyntax)location.FindNode(
-                getInnermostNodeForTie: true, cancellationToken: cancellationToken);
+                getInnermostNodeForTie: true,
+                cancellationToken: cancellationToken
+            );
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var (matches, localName) = CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer.Instance.AnalyzeExpression(
-                semanticModel, isExpression, cancellationToken);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var (matches, localName) =
+                CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer.Instance.AnalyzeExpression(
+                    semanticModel,
+                    isExpression,
+                    cancellationToken
+                );
 
-            var updatedSemanticModel = CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer.ReplaceMatches(
-                semanticModel, isExpression, localName, matches, cancellationToken);
+            var updatedSemanticModel =
+                CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer.ReplaceMatches(
+                    semanticModel,
+                    isExpression,
+                    localName,
+                    matches,
+                    cancellationToken
+                );
 
             var updatedRoot = updatedSemanticModel.SyntaxTree.GetRoot(cancellationToken);
             editor.ReplaceNode(editor.OriginalRoot, updatedRoot);
@@ -68,9 +94,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument, nameof(CSharpIsAndCastCheckWithoutNameCodeFixProvider))
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Use_pattern_matching,
+                    createChangedDocument,
+                    nameof(CSharpIsAndCastCheckWithoutNameCodeFixProvider)
+                ) { }
 
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
         }

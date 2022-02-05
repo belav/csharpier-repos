@@ -32,7 +32,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.Equal(new RuntimeBinderException().Message, rbe.Message);
         }
 
-
         [Fact]
         public void InnerExceptionCtor()
         {
@@ -43,66 +42,114 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void InstanceArgumentInsteadOfTypeForStaticCall()
         {
-            CallSite<Func<CallSite, object, object, object, object>> site =
-                CallSite<Func<CallSite, object, object, object, object>>.Create(
-                    Binder.InvokeMember(
-                        CSharpBinderFlags.None, "Equals", null, GetType(),
-                        new[]
-                        {
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                        }));
+            CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
+                Func<CallSite, object, object, object, object>
+            >.Create(
+                Binder.InvokeMember(
+                    CSharpBinderFlags.None,
+                    "Equals",
+                    null,
+                    GetType(),
+                    new[]
+                    {
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    }
+                )
+            );
             Func<CallSite, object, object, object, object> target = site.Target;
-            Assert.Throws<ArgumentException>(null, () => target.Invoke(site, "Ceci n'est pas un type", 2, 2));
+            Assert.Throws<ArgumentException>(
+                null,
+                () => target.Invoke(site, "Ceci n'est pas un type", 2, 2)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void InstanceArgumentInsteadOfTypeForStaticCallNamedArgument()
         {
-            CallSite<Func<CallSite, object, object, object, object>> site =
-                CallSite<Func<CallSite, object, object, object, object>>.Create(
-                    Binder.InvokeMember(
-                        CSharpBinderFlags.None, "Equals", null, GetType(),
-                        new[]
-                        {
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, "Type Argument"),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                        }));
+            CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
+                Func<CallSite, object, object, object, object>
+            >.Create(
+                Binder.InvokeMember(
+                    CSharpBinderFlags.None,
+                    "Equals",
+                    null,
+                    GetType(),
+                    new[]
+                    {
+                        CSharpArgumentInfo.Create(
+                            CSharpArgumentInfoFlags.IsStaticType,
+                            "Type Argument"
+                        ),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    }
+                )
+            );
             Func<CallSite, object, object, object, object> target = site.Target;
-            Assert.Throws<ArgumentException>("Type Argument", () => target.Invoke(site, "Ceci n'est pas un type", 2, 2));
+            Assert.Throws<ArgumentException>(
+                "Type Argument",
+                () => target.Invoke(site, "Ceci n'est pas un type", 2, 2)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void NullArgumentInsteadOfTypeForStaticCallNamedArgument()
         {
-            CallSite<Func<CallSite, object, object, object, object>> site =
-                CallSite<Func<CallSite, object, object, object, object>>.Create(
-                    Binder.InvokeMember(
-                        CSharpBinderFlags.None, "Equals", null, GetType(),
-                        new[]
-                        {
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, "Type Argument"),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                        }));
+            CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
+                Func<CallSite, object, object, object, object>
+            >.Create(
+                Binder.InvokeMember(
+                    CSharpBinderFlags.None,
+                    "Equals",
+                    null,
+                    GetType(),
+                    new[]
+                    {
+                        CSharpArgumentInfo.Create(
+                            CSharpArgumentInfoFlags.IsStaticType,
+                            "Type Argument"
+                        ),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    }
+                )
+            );
             Func<CallSite, object, object, object, object> target = site.Target;
-            AssertExtensions.Throws<ArgumentException>("Type Argument", () => target.Invoke(site, null, 2, 2));
+            AssertExtensions.Throws<ArgumentException>(
+                "Type Argument",
+                () => target.Invoke(site, null, 2, 2)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void NonTypeToCtor()
         {
-            CallSite<Func<CallSite, object, object>> site = CallSite<Func<CallSite, object, object>>.Create(
+            CallSite<Func<CallSite, object, object>> site = CallSite<
+                Func<CallSite, object, object>
+            >.Create(
                 Binder.InvokeConstructor(
-                    CSharpBinderFlags.None, GetType(),
+                    CSharpBinderFlags.None,
+                    GetType(),
                     new[]
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "Type Argument")
@@ -110,7 +157,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object> targ = site.Target;
-            AssertExtensions.Throws<ArgumentException>("Type Argument", () => targ.Invoke(site, 23));
+            AssertExtensions.Throws<ArgumentException>(
+                "Type Argument",
+                () => targ.Invoke(site, 23)
+            );
         }
     }
 }

@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             DbContext context,
-            Exception exception)
-            : base(eventDefinition, messageGenerator, context)
+            Exception exception
+        ) : base(eventDefinition, messageGenerator, context)
         {
             Exception = exception;
         }

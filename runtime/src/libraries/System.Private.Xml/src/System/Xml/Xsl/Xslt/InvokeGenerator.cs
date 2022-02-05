@@ -12,12 +12,12 @@ namespace System.Xml.Xsl.Xslt
     /**
     InvokeGenerator is one of the trickiest peaces here.
     ARGS:
-         QilFunction func      -- Functions which should be invoked. Arguments of this function (formalArgs) are Let nodes
-                                  annotated with names and default values.
-                                  Problem 1 is that default values can contain references to previous args of this function.
-                                  Problem 2 is that default values shouldn't contain fix-up nodes.
-         ArrayList actualArgs  -- Array of QilNodes annotated with names. When name of formalArg match name actualArg last one
-                                  is used as invokeArg, otherwise formalArg's default value is cloned and used.
+    QilFunction func      -- Functions which should be invoked. Arguments of this function (formalArgs) are Let nodes
+    annotated with names and default values.
+    Problem 1 is that default values can contain references to previous args of this function.
+    Problem 2 is that default values shouldn't contain fix-up nodes.
+    ArrayList actualArgs  -- Array of QilNodes annotated with names. When name of formalArg match name actualArg last one
+    is used as invokeArg, otherwise formalArg's default value is cloned and used.
     **/
 
     internal sealed class InvokeGenerator : QilCloneVisitor
@@ -27,7 +27,7 @@ namespace System.Xml.Xsl.Xslt
 
         private QilList? _formalArgs;
         private QilList? _invokeArgs;
-        private int _curArg;     // this.Clone() depends on this value
+        private int _curArg; // this.Clone() depends on this value
 
         private readonly XsltQilFactory _fac;
 
@@ -58,8 +58,14 @@ namespace System.Xml.Xsl.Xslt
                     {
                         if (formalArg.Name!.NamespaceUri == XmlReservedNs.NsXslDebug)
                         {
-                            Debug.Assert(formalArg.Name.LocalName == "namespaces", "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs()");
-                            Debug.Assert(formalArg.DefaultValue != null, "PrecompileProtoTemplatesHeaders() set it");
+                            Debug.Assert(
+                                formalArg.Name.LocalName == "namespaces",
+                                "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs()"
+                            );
+                            Debug.Assert(
+                                formalArg.DefaultValue != null,
+                                "PrecompileProtoTemplatesHeaders() set it"
+                            );
                             invokeArg = Clone(formalArg.DefaultValue);
                         }
                         else
@@ -69,7 +75,10 @@ namespace System.Xml.Xsl.Xslt
                     }
                     else
                     {
-                        Debug.Assert(formalArg.Name!.NamespaceUri != XmlReservedNs.NsXslDebug, "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs(). We don't have $namespaces in !debug.");
+                        Debug.Assert(
+                            formalArg.Name!.NamespaceUri != XmlReservedNs.NsXslDebug,
+                            "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs(). We don't have $namespaces in !debug."
+                        );
                         invokeArg = Clone(formalArg.DefaultValue!);
                     }
                 }
@@ -84,7 +93,10 @@ namespace System.Xml.Xsl.Xslt
                 if (!invokeType.IsSubtypeOf(formalType))
                 {
                     // This may occur only if inferred type of invokeArg is XslFlags.None
-                    Debug.Assert(invokeType == T.ItemS, "Actual argument type is not a subtype of formal argument type");
+                    Debug.Assert(
+                        invokeType == T.ItemS,
+                        "Actual argument type is not a subtype of formal argument type"
+                    );
                     invokeArg = _fac.TypeAssert(invokeArg, formalType);
                 }
 

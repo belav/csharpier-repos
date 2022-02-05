@@ -13,13 +13,19 @@ namespace System.Net.Tests
         public void Ctor_ExpectedPropertyValues()
         {
             Assert.Equal(RequestCacheLevel.Default, new RequestCachePolicy().Level);
-            Assert.Equal(RequestCacheLevel.NoCacheNoStore, new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore).Level);
+            Assert.Equal(
+                RequestCacheLevel.NoCacheNoStore,
+                new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore).Level
+            );
         }
 
         [Fact]
         public void Ctor_InvalidArg_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("level", () => new RequestCachePolicy((RequestCacheLevel)42));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "level",
+                () => new RequestCachePolicy((RequestCacheLevel)42)
+            );
         }
 
         [Fact]

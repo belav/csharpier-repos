@@ -13,14 +13,18 @@ namespace Microsoft.AspNetCore.HttpLogging;
 internal static class MediaTypeHelpers
 {
     private static readonly List<Encoding> SupportedEncodings = new List<Encoding>()
-        {
-            Encoding.UTF8,
-            Encoding.Unicode,
-            Encoding.ASCII,
-            Encoding.Latin1 // TODO allowed by default? Make this configurable?
-        };
+    {
+        Encoding.UTF8,
+        Encoding.Unicode,
+        Encoding.ASCII,
+        Encoding.Latin1 // TODO allowed by default? Make this configurable?
+    };
 
-    public static bool TryGetEncodingForMediaType(string? contentType, List<MediaTypeState> mediaTypeList, [NotNullWhen(true)] out Encoding? encoding)
+    public static bool TryGetEncodingForMediaType(
+        string? contentType,
+        List<MediaTypeState> mediaTypeList,
+        [NotNullWhen(true)] out Encoding? encoding
+    )
     {
         encoding = null;
         if (mediaTypeList == null || mediaTypeList.Count == 0 || string.IsNullOrEmpty(contentType))
@@ -42,9 +46,13 @@ internal static class MediaTypeHelpers
             {
                 for (var i = 0; i < SupportedEncodings.Count; i++)
                 {
-                    if (string.Equals(requestEncoding.WebName,
-                        SupportedEncodings[i].WebName,
-                        StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            requestEncoding.WebName,
+                            SupportedEncodings[i].WebName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         encoding = SupportedEncodings[i];
                         return true;

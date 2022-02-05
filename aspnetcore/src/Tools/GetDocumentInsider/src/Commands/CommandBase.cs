@@ -36,13 +36,14 @@ internal abstract class CommandBase
                 IsVerbose = verbose.HasValue() || CliContext.IsGlobalVerbose();
                 ReporterExtensions.PrefixOutput = prefixOutput.HasValue();
 
-                    // Update the reporter now that we know the option values.
-                    Reporter = new ConsoleReporter(_console, IsVerbose, IsQuiet);
+                // Update the reporter now that we know the option values.
+                Reporter = new ConsoleReporter(_console, IsVerbose, IsQuiet);
 
                 Validate();
 
                 return Execute();
-            });
+            }
+        );
     }
 
     protected virtual void Validate()

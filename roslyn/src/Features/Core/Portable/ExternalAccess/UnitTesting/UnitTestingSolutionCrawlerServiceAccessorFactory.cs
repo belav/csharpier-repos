@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
     [Obsolete]
     [ExportWorkspaceServiceFactory(typeof(IUnitTestingSolutionCrawlerServiceAccessor))]
     [Shared]
-    internal sealed class UnitTestingSolutionCrawlerServiceAccessorFactory : IWorkspaceServiceFactory
+    internal sealed class UnitTestingSolutionCrawlerServiceAccessorFactory
+        : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -25,9 +26,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
-            var solutionCrawlerRegistrationService = workspaceServices.GetRequiredService<ISolutionCrawlerRegistrationService>();
-            var solutionCrawlerService = workspaceServices.GetRequiredService<ISolutionCrawlerService>();
-            return new UnitTestingSolutionCrawlerServiceAccessor(solutionCrawlerRegistrationService, solutionCrawlerService);
+            var solutionCrawlerRegistrationService =
+                workspaceServices.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var solutionCrawlerService =
+                workspaceServices.GetRequiredService<ISolutionCrawlerService>();
+            return new UnitTestingSolutionCrawlerServiceAccessor(
+                solutionCrawlerRegistrationService,
+                solutionCrawlerService
+            );
         }
     }
 }

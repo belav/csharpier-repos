@@ -3,7 +3,13 @@
 
 namespace System.Diagnostics
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Method
+            | AttributeTargets.Constructor,
+        Inherited = false
+    )]
     public sealed class DebuggerStepThroughAttribute : Attribute
     {
         public DebuggerStepThroughAttribute() { }

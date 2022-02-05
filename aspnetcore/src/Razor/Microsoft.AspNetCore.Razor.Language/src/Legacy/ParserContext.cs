@@ -49,7 +49,8 @@ internal partial class ParserContext
 
     public bool StartOfLine { get; set; } = true;
 
-    public AcceptedCharactersInternal LastAcceptedCharacters { get; set; } = AcceptedCharactersInternal.None;
+    public AcceptedCharactersInternal LastAcceptedCharacters { get; set; } =
+        AcceptedCharactersInternal.None;
 
     public bool EndOfFile
     {
@@ -89,7 +90,9 @@ internal partial class ParserContext
                 _infiniteLoopGuardCount++;
                 if (_infiniteLoopGuardCount > InfiniteLoopCountThreshold)
                 {
-                    Debug.Fail("An internal parser error is causing an infinite loop at this location.");
+                    Debug.Fail(
+                        "An internal parser error is causing an infinite loop at this location."
+                    );
 
                     return true;
                 }

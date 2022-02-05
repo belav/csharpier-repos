@@ -140,7 +140,6 @@ namespace System.Drawing.Internal
             {
                 cbSize = (ulong)_dataStream.Length,
                 type = Interop.Ole32.STGTY.STGTY_STREAM,
-
                 // Default read/write access is STGM_READ, which == 0
                 grfMode = _dataStream.CanWrite
                     ? _dataStream.CanRead
@@ -152,7 +151,9 @@ namespace System.Drawing.Internal
             if (grfStatFlag == Interop.Ole32.STATFLAG.STATFLAG_DEFAULT)
             {
                 // Caller wants a name
-                pstatstg->AllocName(_dataStream is FileStream fs ? fs.Name : _dataStream.ToString());
+                pstatstg->AllocName(
+                    _dataStream is FileStream fs ? fs.Name : _dataStream.ToString()
+                );
             }
         }
 

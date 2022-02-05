@@ -10,9 +10,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
         private readonly ILazyLoader _loader;
         private SponsorDetails _details;
 
-        public TitleSponsor()
-        {
-        }
+        public TitleSponsor() { }
 
         private TitleSponsor(ILazyLoader loader)
         {

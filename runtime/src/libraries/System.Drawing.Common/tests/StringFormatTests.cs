@@ -46,7 +46,10 @@ namespace System.Drawing.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [InlineData(StringFormatFlags.DirectionRightToLeft | StringFormatFlags.DirectionVertical, RandomLanguageCode)]
+        [InlineData(
+            StringFormatFlags.DirectionRightToLeft | StringFormatFlags.DirectionVertical,
+            RandomLanguageCode
+        )]
         [InlineData(StringFormatFlags.NoClip, EnglishLanguageCode)]
         [InlineData((StringFormatFlags)(-1), -1)]
         public void Ctor_Options_Language(StringFormatFlags options, int language)
@@ -141,7 +144,11 @@ namespace System.Drawing.Tests
         [InlineData(EnglishLanguageCode, StringDigitSubstitute.Traditional, EnglishLanguageCode)]
         [InlineData(int.MaxValue, StringDigitSubstitute.Traditional + 1, 65535)]
         [InlineData(-1, StringDigitSubstitute.User - 1, 65535)]
-        public void SetDigitSubstitution_Invoke_SetsProperties(int language, StringDigitSubstitute substitute, int expectedLanguage)
+        public void SetDigitSubstitution_Invoke_SetsProperties(
+            int language,
+            StringDigitSubstitute substitute,
+            int expectedLanguage
+        )
         {
             using (var format = new StringFormat())
             {
@@ -157,7 +164,10 @@ namespace System.Drawing.Tests
             var format = new StringFormat();
             format.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => format.SetDigitSubstitution(0, StringDigitSubstitute.None));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.SetDigitSubstitution(0, StringDigitSubstitute.None)
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -188,7 +198,10 @@ namespace System.Drawing.Tests
         {
             using (var format = new StringFormat())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => format.SetTabStops(-1, new float[0]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => format.SetTabStops(-1, new float[0])
+                );
             }
         }
 
@@ -197,7 +210,9 @@ namespace System.Drawing.Tests
         {
             using (var format = new StringFormat())
             {
-                Assert.Throws<NotImplementedException>(() => format.SetTabStops(0, new float[] { float.NegativeInfinity }));
+                Assert.Throws<NotImplementedException>(
+                    () => format.SetTabStops(0, new float[] { float.NegativeInfinity })
+                );
             }
         }
 
@@ -207,7 +222,10 @@ namespace System.Drawing.Tests
             var format = new StringFormat();
             format.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => format.SetTabStops(0, new float[0]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.SetTabStops(0, new float[0])
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -216,7 +234,10 @@ namespace System.Drawing.Tests
             var format = new StringFormat();
             format.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => format.GetTabStops(out float firstTabOffset));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.GetTabStops(out float firstTabOffset)
+            );
         }
 
         public static IEnumerable<object[]> SetMeasurableCharacterRanges_TestData()
@@ -242,7 +263,9 @@ namespace System.Drawing.Tests
         {
             using (var format = new StringFormat())
             {
-                Assert.Throws<NullReferenceException>(() => format.SetMeasurableCharacterRanges(null));
+                Assert.Throws<NullReferenceException>(
+                    () => format.SetMeasurableCharacterRanges(null)
+                );
             }
         }
 
@@ -251,7 +274,9 @@ namespace System.Drawing.Tests
         {
             using (var format = new StringFormat())
             {
-                Assert.Throws<OverflowException>(() => format.SetMeasurableCharacterRanges(new CharacterRange[33]));
+                Assert.Throws<OverflowException>(
+                    () => format.SetMeasurableCharacterRanges(new CharacterRange[33])
+                );
             }
         }
 
@@ -261,7 +286,10 @@ namespace System.Drawing.Tests
             var format = new StringFormat();
             format.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => format.SetMeasurableCharacterRanges(new CharacterRange[0]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.SetMeasurableCharacterRanges(new CharacterRange[0])
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -279,7 +307,9 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(StringAlignment.Near - 1)]
         [InlineData(StringAlignment.Far + 1)]
-        public void Alignment_SetInvalid_ThrowsInvalidEnumArgumentException(StringAlignment alignment)
+        public void Alignment_SetInvalid_ThrowsInvalidEnumArgumentException(
+            StringAlignment alignment
+        )
         {
             using (var format = new StringFormat())
             {
@@ -294,7 +324,10 @@ namespace System.Drawing.Tests
             format.Dispose();
 
             AssertExtensions.Throws<ArgumentException>(null, () => format.Alignment);
-            AssertExtensions.Throws<ArgumentException>(null, () => format.Alignment = StringAlignment.Center);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.Alignment = StringAlignment.Center
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -312,7 +345,10 @@ namespace System.Drawing.Tests
             var format = new StringFormat();
             format.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => format.DigitSubstitutionLanguage);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.DigitSubstitutionLanguage
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -334,7 +370,10 @@ namespace System.Drawing.Tests
             format.Dispose();
 
             AssertExtensions.Throws<ArgumentException>(null, () => format.FormatFlags);
-            AssertExtensions.Throws<ArgumentException>(null, () => format.FormatFlags = StringFormatFlags.NoClip);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.FormatFlags = StringFormatFlags.NoClip
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -352,7 +391,9 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(StringAlignment.Near - 1)]
         [InlineData(StringAlignment.Far + 1)]
-        public void LineAlignment_SetInvalid_ThrowsInvalidEnumArgumentException(StringAlignment alignment)
+        public void LineAlignment_SetInvalid_ThrowsInvalidEnumArgumentException(
+            StringAlignment alignment
+        )
         {
             using (var format = new StringFormat())
             {
@@ -367,7 +408,10 @@ namespace System.Drawing.Tests
             format.Dispose();
 
             AssertExtensions.Throws<ArgumentException>(null, () => format.LineAlignment);
-            AssertExtensions.Throws<ArgumentException>(null, () => format.LineAlignment = StringAlignment.Center);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.LineAlignment = StringAlignment.Center
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -400,7 +444,10 @@ namespace System.Drawing.Tests
             format.Dispose();
 
             AssertExtensions.Throws<ArgumentException>(null, () => format.HotkeyPrefix);
-            AssertExtensions.Throws<ArgumentException>(null, () => format.HotkeyPrefix = HotkeyPrefix.Hide);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.HotkeyPrefix = HotkeyPrefix.Hide
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -430,9 +477,11 @@ namespace System.Drawing.Tests
             var format = new StringFormat();
             format.Dispose();
 
-
             AssertExtensions.Throws<ArgumentException>(null, () => format.Trimming);
-            AssertExtensions.Throws<ArgumentException>(null, () => format.Trimming = StringTrimming.Word);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => format.Trimming = StringTrimming.Word
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -459,7 +508,12 @@ namespace System.Drawing.Tests
             Assert.Equal(StringAlignment.Near, format.Alignment);
             Assert.Equal(0, format.DigitSubstitutionLanguage);
             Assert.Equal(StringDigitSubstitute.User, format.DigitSubstitutionMethod);
-            Assert.Equal(StringFormatFlags.FitBlackBox | StringFormatFlags.LineLimit | StringFormatFlags.NoClip, format.FormatFlags);
+            Assert.Equal(
+                StringFormatFlags.FitBlackBox
+                    | StringFormatFlags.LineLimit
+                    | StringFormatFlags.NoClip,
+                format.FormatFlags
+            );
             Assert.Equal(HotkeyPrefix.None, format.HotkeyPrefix);
             Assert.Equal(StringAlignment.Near, format.LineAlignment);
             Assert.Equal(StringTrimming.None, format.Trimming);

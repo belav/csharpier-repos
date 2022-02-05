@@ -17,7 +17,10 @@ namespace System.Security.Cryptography
     {
         public sealed partial class RSASecurityTransforms : RSA
         {
-            private static RSAParameters ExportParametersFromLegacyKey(SecKeyPair keys, bool includePrivateParameters)
+            private static RSAParameters ExportParametersFromLegacyKey(
+                SecKeyPair keys,
+                bool includePrivateParameters
+            )
             {
                 // Apple requires all private keys to be exported encrypted, but since we're trying to export
                 // as parsed structures we will need to decrypt it for the user.
@@ -26,7 +29,8 @@ namespace System.Security.Cryptography
                 byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
                     includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
                     exportPrivate: includePrivateParameters,
-                    password: ExportPassword);
+                    password: ExportPassword
+                );
 
                 try
                 {
@@ -52,7 +56,8 @@ namespace System.Security.Cryptography
                             RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                                 keyBlob,
                                 out int localRead,
-                                out key);
+                                out key
+                            );
                             Debug.Assert(localRead == keyBlob.Length);
                         }
                         return key;
@@ -63,7 +68,8 @@ namespace System.Security.Cryptography
                             keyBlob,
                             ExportPassword,
                             out int localRead,
-                            out RSAParameters key);
+                            out RSAParameters key
+                        );
                         return key;
                     }
                 }
@@ -73,12 +79,14 @@ namespace System.Security.Cryptography
                 }
             }
 
-            private static bool HasWorkingPKCS1Padding { get; } = OperatingSystem.IsMacOSVersionAtLeast(10, 15);
+            private static bool HasWorkingPKCS1Padding { get; } =
+                OperatingSystem.IsMacOSVersionAtLeast(10, 15);
 
             private static void ImportPrivateKey(
                 RSAParameters rsaParameters,
                 out SafeSecKeyRefHandle privateKey,
-                out SafeSecKeyRefHandle publicKey)
+                out SafeSecKeyRefHandle publicKey
+            )
             {
                 // macOS 10.14 and older have broken PKCS#1 depadding for decryption
                 // of empty data. The bug doesn't affect the legacy CSSM keys so we

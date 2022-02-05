@@ -15,18 +15,23 @@ namespace System.Text.Json.Serialization.Converters
         : LargeObjectWithParameterizedConstructorConverter<T> where T : notnull
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
-        public LargeObjectWithParameterizedConstructorConverterWithReflection()
-        {
-        }
+        public LargeObjectWithParameterizedConstructorConverterWithReflection() { }
 
         internal override bool RequiresDynamicMemberAccessors => true;
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
-        internal override void Initialize(JsonSerializerOptions options, JsonTypeInfo? jsonTypeInfo = null)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
+        internal override void Initialize(
+            JsonSerializerOptions options,
+            JsonTypeInfo? jsonTypeInfo = null
+        )
         {
             Debug.Assert(jsonTypeInfo != null);
-            jsonTypeInfo.CreateObjectWithArgs = options.MemberAccessorStrategy.CreateParameterizedConstructor<T>(ConstructorInfo!);
+            jsonTypeInfo.CreateObjectWithArgs =
+                options.MemberAccessorStrategy.CreateParameterizedConstructor<T>(ConstructorInfo!);
         }
     }
 }

@@ -22,9 +22,7 @@
             public Booking Booking { get; set; }
         }
 
-        public class Restaurant
-        {
-        }
+        public class Restaurant { }
 
         public class Booking
         {
@@ -48,13 +46,23 @@
 
         public void Should_map_successfully()
         {
-            var mapperConfiguration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Result, ResultDto>();
-                cfg.CreateMap<Booking, BookingDto>()
-                    .ForMember(d => d.Total,
-                        o => o.MapFrom(b => b.CalculateTotal(_dateProvider.CurrentRestaurantTime(b.Restaurant))));
-            });
+            var mapperConfiguration = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Result, ResultDto>();
+                    cfg.CreateMap<Booking, BookingDto>()
+                        .ForMember(
+                            d => d.Total,
+                            o =>
+                                o.MapFrom(
+                                    b =>
+                                        b.CalculateTotal(
+                                            _dateProvider.CurrentRestaurantTime(b.Restaurant)
+                                        )
+                                )
+                        );
+                }
+            );
 
             var mapper = mapperConfiguration.CreateMapper();
 
@@ -66,6 +74,5 @@
             // Assert
             dto.ShouldNotBeNull();
         }
-
     }
 }

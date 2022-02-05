@@ -16,18 +16,19 @@ namespace Sample
         static List<string> ProcessArguments(string[] args)
         {
             var help = false;
-            var options = new OptionSet {
+            var options = new OptionSet
+            {
                 "Simple mono wasm benchmark",
                 "",
                 "Copyright 2021 Microsoft Corporation",
                 "",
                 "Options:",
-                { "h|help|?",
-                    "Show this message and exit",
-                    v => help = v != null },
-                { "t|tasks=",
+                { "h|help|?", "Show this message and exit", v => help = v != null },
+                {
+                    "t|tasks=",
                     "Filter comma separated tasks and its measurements matching, TASK[:REGEX][,TASK[:REGEX],...]. Example: -t Json:non,Exceptions:Inline",
-                    v => tasksArg = v },
+                    v => tasksArg = v
+                },
             };
 
             var remaining = options.Parse(args);

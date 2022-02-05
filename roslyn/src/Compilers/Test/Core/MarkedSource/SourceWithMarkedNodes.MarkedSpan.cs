@@ -19,7 +19,14 @@ namespace Roslyn.Test.Utilities
             public readonly int Id;
             public readonly int ParentId;
 
-            public MarkedSpan(TextSpan markedSyntax, TextSpan matchedSpan, string tagName, int syntaxKind, int id, int parentId)
+            public MarkedSpan(
+                TextSpan markedSyntax,
+                TextSpan matchedSpan,
+                string tagName,
+                int syntaxKind,
+                int id,
+                int parentId
+            )
             {
                 MarkedSyntax = markedSyntax;
                 MatchedSpan = matchedSpan;

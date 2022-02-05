@@ -22,7 +22,8 @@ public class ListAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var list = (IList)target;
 
@@ -31,12 +32,29 @@ public class ListAdapter : IAdapter
             return false;
         }
 
-        if (!TryGetPositionInfo(list, segment, OperationType.Add, out var positionInfo, out errorMessage))
+        if (
+            !TryGetPositionInfo(
+                list,
+                segment,
+                OperationType.Add,
+                out var positionInfo,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
 
-        if (!TryConvertValue(value, typeArgument, segment, contractResolver, out var convertedValue, out errorMessage))
+        if (
+            !TryConvertValue(
+                value,
+                typeArgument,
+                segment,
+                contractResolver,
+                out var convertedValue,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
@@ -59,7 +77,8 @@ public class ListAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var list = (IList)target;
 
@@ -69,7 +88,15 @@ public class ListAdapter : IAdapter
             return false;
         }
 
-        if (!TryGetPositionInfo(list, segment, OperationType.Get, out var positionInfo, out errorMessage))
+        if (
+            !TryGetPositionInfo(
+                list,
+                segment,
+                OperationType.Get,
+                out var positionInfo,
+                out errorMessage
+            )
+        )
         {
             value = null;
             return false;
@@ -92,7 +119,8 @@ public class ListAdapter : IAdapter
         object target,
         string segment,
         IContractResolver contractResolver,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var list = (IList)target;
 
@@ -101,7 +129,15 @@ public class ListAdapter : IAdapter
             return false;
         }
 
-        if (!TryGetPositionInfo(list, segment, OperationType.Remove, out var positionInfo, out errorMessage))
+        if (
+            !TryGetPositionInfo(
+                list,
+                segment,
+                OperationType.Remove,
+                out var positionInfo,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
@@ -124,7 +160,8 @@ public class ListAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var list = (IList)target;
 
@@ -133,12 +170,29 @@ public class ListAdapter : IAdapter
             return false;
         }
 
-        if (!TryGetPositionInfo(list, segment, OperationType.Replace, out var positionInfo, out errorMessage))
+        if (
+            !TryGetPositionInfo(
+                list,
+                segment,
+                OperationType.Replace,
+                out var positionInfo,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
 
-        if (!TryConvertValue(value, typeArgument, segment, contractResolver, out var convertedValue, out errorMessage))
+        if (
+            !TryConvertValue(
+                value,
+                typeArgument,
+                segment,
+                contractResolver,
+                out var convertedValue,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
@@ -161,7 +215,8 @@ public class ListAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var list = (IList)target;
 
@@ -170,20 +225,46 @@ public class ListAdapter : IAdapter
             return false;
         }
 
-        if (!TryGetPositionInfo(list, segment, OperationType.Replace, out var positionInfo, out errorMessage))
+        if (
+            !TryGetPositionInfo(
+                list,
+                segment,
+                OperationType.Replace,
+                out var positionInfo,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
 
-        if (!TryConvertValue(value, typeArgument, segment, contractResolver, out var convertedValue, out errorMessage))
+        if (
+            !TryConvertValue(
+                value,
+                typeArgument,
+                segment,
+                contractResolver,
+                out var convertedValue,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
 
         var currentValue = list[positionInfo.Index];
-        if (!JToken.DeepEquals(JsonConvert.SerializeObject(currentValue), JsonConvert.SerializeObject(convertedValue)))
+        if (
+            !JToken.DeepEquals(
+                JsonConvert.SerializeObject(currentValue),
+                JsonConvert.SerializeObject(convertedValue)
+            )
+        )
         {
-            errorMessage = Resources.FormatValueAtListPositionNotEqualToTestValue(currentValue, value, positionInfo.Index);
+            errorMessage = Resources.FormatValueAtListPositionNotEqualToTestValue(
+                currentValue,
+                value,
+                positionInfo.Index
+            );
             return false;
         }
         else
@@ -198,7 +279,8 @@ public class ListAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var list = target as IList;
         if (list == null)
@@ -233,7 +315,8 @@ public class ListAdapter : IAdapter
         Type listTypeArgument,
         string segment,
         out object convertedValue,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         return TryConvertValue(
             originalValue,
@@ -241,7 +324,8 @@ public class ListAdapter : IAdapter
             segment,
             null,
             out convertedValue,
-            out errorMessage);
+            out errorMessage
+        );
     }
 
     protected virtual bool TryConvertValue(
@@ -250,9 +334,14 @@ public class ListAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object convertedValue,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        var conversionResult = ConversionResultProvider.ConvertTo(originalValue, listTypeArgument, contractResolver);
+        var conversionResult = ConversionResultProvider.ConvertTo(
+            originalValue,
+            listTypeArgument,
+            contractResolver
+        );
         if (!conversionResult.CanBeConverted)
         {
             convertedValue = null;
@@ -265,7 +354,11 @@ public class ListAdapter : IAdapter
         return true;
     }
 
-    protected virtual bool TryGetListTypeArgument(IList list, out Type listTypeArgument, out string errorMessage)
+    protected virtual bool TryGetListTypeArgument(
+        IList list,
+        out Type listTypeArgument,
+        out string errorMessage
+    )
     {
         // Arrays are not supported as they have fixed size and operations like Add, Insert do not make sense
         var listType = list.GetType();
@@ -277,10 +370,15 @@ public class ListAdapter : IAdapter
         }
         else
         {
-            var genericList = ClosedGenericMatcher.ExtractGenericInterface(listType, typeof(IList<>));
+            var genericList = ClosedGenericMatcher.ExtractGenericInterface(
+                listType,
+                typeof(IList<>)
+            );
             if (genericList == null)
             {
-                errorMessage = Resources.FormatPatchNotSupportedForNonGenericLists(listType.FullName);
+                errorMessage = Resources.FormatPatchNotSupportedForNonGenericLists(
+                    listType.FullName
+                );
                 listTypeArgument = null;
                 return false;
             }
@@ -298,7 +396,8 @@ public class ListAdapter : IAdapter
         string segment,
         OperationType operationType,
         out PositionInfo positionInfo,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         if (segment == "-")
         {

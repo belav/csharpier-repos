@@ -12,8 +12,8 @@ namespace Internal.Cryptography.Pal.Windows
         private DecryptorPalWindows(
             SafeCryptMsgHandle hCryptMsg,
             RecipientInfoCollection recipientInfos,
-            AlgorithmIdentifierAsn contentEncryptionAlgorithm)
-            : base(recipientInfos)
+            AlgorithmIdentifierAsn contentEncryptionAlgorithm
+        ) : base(recipientInfos)
         {
             _hCryptMsg = hCryptMsg;
             _contentEncryptionAlgorithm = contentEncryptionAlgorithm;

@@ -52,25 +52,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => _values[index];
-
             set => _values[index] = value;
         }
 
-        internal static readonly MethodInfo GetValueMethod
-            = typeof(ValueBuffer).GetRuntimeProperties().Single(p => p.GetIndexParameters().Length > 0).GetMethod!;
+        internal static readonly MethodInfo GetValueMethod = typeof(ValueBuffer)
+            .GetRuntimeProperties()
+            .Single(p => p.GetIndexParameters().Length > 0).GetMethod!;
 
         /// <summary>
         ///     Gets the number of values in this buffer.
         /// </summary>
-        public int Count
-            => _values.Length;
+        public int Count => _values.Length;
 
         /// <summary>
         ///     Gets a value indicating whether the value buffer is empty.
         /// </summary>
         public bool IsEmpty
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            => _values == null;
+            =>
+            _values == null;
 
         /// <summary>
         ///     Determines if this value buffer is equivalent to a given object (i.e. if they are both value buffers and contain the same values).
@@ -81,10 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>
         ///     <see langword="true" /> if the object is a <see cref="ValueBuffer" /> and contains the same values, otherwise <see langword="false" />.
         /// </returns>
-        public override bool Equals(object? obj)
-            => !(obj is null)
-                && obj is ValueBuffer buffer
-                && Equals(buffer);
+        public override bool Equals(object? obj) =>
+            !(obj is null) && obj is ValueBuffer buffer && Equals(buffer);
 
         /// <summary>
         ///     Indicates whether the current object is equal to another object of the same type.

@@ -21,8 +21,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
             bool isPrerequisite,
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata,
-            ICompositionElement? origin)
-            : base(contractName, requiredTypeIdentity, requiredMetadata, cardinality, isRecomposable, isPrerequisite, requiredCreationPolicy, metadata, origin)
+            ICompositionElement? origin
+        )
+            : base(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                isRecomposable,
+                isPrerequisite,
+                requiredCreationPolicy,
+                metadata,
+                origin
+            )
         {
             if (contractName == null)
             {
@@ -35,7 +46,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public override ImportingItem ToImportingItem()
         {
             ReflectionWritableMember member = ImportingLazyMember.ToReflectionWriteableMember();
-            return new ImportingMember(this, member, new ImportType(member.ReturnType, Cardinality));
+            return new ImportingMember(
+                this,
+                member,
+                new ImportType(member.ReturnType, Cardinality)
+            );
         }
 
         public LazyMemberInfo ImportingLazyMember
@@ -44,6 +59,6 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
 
         protected override string GetDisplayName() =>
-            $"{ImportingLazyMember.ToReflectionMember().GetDisplayName()} (ContractName=\"{ContractName}\")";    // NOLOC
+            $"{ImportingLazyMember.ToReflectionMember().GetDisplayName()} (ContractName=\"{ContractName}\")"; // NOLOC
     }
 }

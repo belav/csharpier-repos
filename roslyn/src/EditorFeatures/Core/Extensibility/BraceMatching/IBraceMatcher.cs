@@ -9,6 +9,11 @@ namespace Microsoft.CodeAnalysis.Editor
 {
     internal interface IBraceMatcher
     {
-        Task<BraceMatchingResult?> FindBracesAsync(Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken);
+        Task<BraceMatchingResult?> FindBracesAsync(
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

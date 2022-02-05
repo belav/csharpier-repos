@@ -28,7 +28,8 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Equal("15", actual.GetParameter("a").Default);
@@ -37,9 +38,22 @@ public class RoutePatternFactoryTest
 
         Assert.Collection(
             actual.Defaults.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("a", kvp.Key); Assert.Equal("15", kvp.Value); },
-            kvp => { Assert.Equal("b", kvp.Key); Assert.Equal(17, kvp.Value); },
-            kvp => { Assert.Equal("c", kvp.Key); Assert.Equal("19", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("a", kvp.Key);
+                Assert.Equal("15", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("b", kvp.Key);
+                Assert.Equal(17, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("c", kvp.Key);
+                Assert.Equal("19", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -57,13 +71,23 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Collection(
             actual.Defaults.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("d", kvp.Key); Assert.Equal("15", kvp.Value); },
-            kvp => { Assert.Equal("e", kvp.Key); Assert.Equal(17, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("d", kvp.Key);
+                Assert.Equal("15", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("e", kvp.Key);
+                Assert.Equal(17, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -77,18 +101,23 @@ public class RoutePatternFactoryTest
         var original = RoutePatternFactory.Parse(template);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => RoutePatternFactory.Pattern(
-            original.RawText,
-            defaults,
-            constraints,
-            original.PathSegments));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                RoutePatternFactory.Pattern(
+                    original.RawText,
+                    defaults,
+                    constraints,
+                    original.PathSegments
+                )
+        );
 
         // Assert
         Assert.Equal(
-            "The route parameter 'a' has both an inline default value and an explicit default " +
-            "value specified. A route parameter cannot contain an inline default value when a " +
-            "default value is specified explicitly. Consider removing one of them.",
-            ex.Message);
+            "The route parameter 'a' has both an inline default value and an explicit default "
+                + "value specified. A route parameter cannot contain an inline default value when a "
+                + "default value is specified explicitly. Consider removing one of them.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -106,12 +135,18 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Collection(
             actual.Defaults,
-            kvp => { Assert.Equal("a", kvp.Key); Assert.Equal("13", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("a", kvp.Key);
+                Assert.Equal("13", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -125,16 +160,18 @@ public class RoutePatternFactoryTest
         var original = RoutePatternFactory.Parse(template);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => RoutePatternFactory.Pattern(
-            original.RawText,
-            defaults,
-            constraints,
-            original.PathSegments));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                RoutePatternFactory.Pattern(
+                    original.RawText,
+                    defaults,
+                    constraints,
+                    original.PathSegments
+                )
+        );
 
         // Assert
-        Assert.Equal(
-            "An optional parameter cannot have default value.",
-            ex.Message);
+        Assert.Equal("An optional parameter cannot have default value.", ex.Message);
     }
 
     [Fact]
@@ -143,7 +180,11 @@ public class RoutePatternFactoryTest
         // Arrange
         var template = "{a:int}/{b}/{c}";
         var defaults = new { };
-        var constraints = new { a = new RegexRouteConstraint("foo"), b = new RegexRouteConstraint("bar") };
+        var constraints = new
+        {
+            a = new RegexRouteConstraint("foo"),
+            b = new RegexRouteConstraint("bar")
+        };
 
         var original = RoutePatternFactory.Parse(template);
 
@@ -152,16 +193,19 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Collection(
             actual.GetParameter("a").ParameterPolicies,
             c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy),
-            c => Assert.Equal("int", c.Content));
+            c => Assert.Equal("int", c.Content)
+        );
         Assert.Collection(
             actual.GetParameter("b").ParameterPolicies,
-            c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy));
+            c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy)
+        );
 
         Assert.Collection(
             actual.ParameterPolicies.OrderBy(kvp => kvp.Key),
@@ -171,15 +215,18 @@ public class RoutePatternFactoryTest
                 Assert.Collection(
                     kvp.Value,
                     c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy),
-                    c => Assert.Equal("int", c.Content));
+                    c => Assert.Equal("int", c.Content)
+                );
             },
             kvp =>
             {
                 Assert.Equal("b", kvp.Key);
                 Assert.Collection(
                     kvp.Value,
-                    c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy));
-            });
+                    c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                );
+            }
+        );
     }
 
     [Fact]
@@ -188,7 +235,11 @@ public class RoutePatternFactoryTest
         // Arrange
         var template = "{a}/{b}/{c}";
         var defaults = new { };
-        var constraints = new { d = new RegexRouteConstraint("foo"), e = new RegexRouteConstraint("bar") };
+        var constraints = new
+        {
+            d = new RegexRouteConstraint("foo"),
+            e = new RegexRouteConstraint("bar")
+        };
 
         var original = RoutePatternFactory.Parse(template);
 
@@ -197,7 +248,8 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Collection(
@@ -207,15 +259,18 @@ public class RoutePatternFactoryTest
                 Assert.Equal("d", kvp.Key);
                 Assert.Collection(
                     kvp.Value,
-                    c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy));
+                    c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                );
             },
             kvp =>
             {
                 Assert.Equal("e", kvp.Key);
                 Assert.Collection(
                     kvp.Value,
-                    c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy));
-            });
+                    c => Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                );
+            }
+        );
     }
 
     [Fact]
@@ -224,7 +279,15 @@ public class RoutePatternFactoryTest
         // Arrange
         var template = "{a}/{b}/{c}";
         var defaults = new { };
-        var constraints = new { d = new object[] { new RegexRouteConstraint("foo"), new RegexRouteConstraint("bar"), "baz" } };
+        var constraints = new
+        {
+            d = new object[]
+            {
+                new RegexRouteConstraint("foo"),
+                new RegexRouteConstraint("bar"),
+                "baz"
+            }
+        };
 
         var original = RoutePatternFactory.Parse(template);
 
@@ -233,7 +296,8 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Collection(
@@ -243,10 +307,30 @@ public class RoutePatternFactoryTest
                 Assert.Equal("d", kvp.Key);
                 Assert.Collection(
                     kvp.Value,
-                    c => Assert.Equal("foo", Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy).Constraint.ToString()),
-                    c => Assert.Equal("bar", Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy).Constraint.ToString()),
-                    c => Assert.Equal("^(baz)$", Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy).Constraint.ToString()));
-            });
+                    c =>
+                        Assert.Equal(
+                            "foo",
+                            Assert
+                                .IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                                .Constraint.ToString()
+                        ),
+                    c =>
+                        Assert.Equal(
+                            "bar",
+                            Assert
+                                .IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                                .Constraint.ToString()
+                        ),
+                    c =>
+                        Assert.Equal(
+                            "^(baz)$",
+                            Assert
+                                .IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                                .Constraint.ToString()
+                        )
+                );
+            }
+        );
     }
 
     [Fact]
@@ -255,7 +339,16 @@ public class RoutePatternFactoryTest
         // Arrange
         var template = "{a:int}/{b}/{c:int}";
         var defaults = new { };
-        var constraints = new { b = "fizz", c = new object[] { new RegexRouteConstraint("foo"), new RegexRouteConstraint("bar"), "baz" } };
+        var constraints = new
+        {
+            b = "fizz",
+            c = new object[]
+            {
+                new RegexRouteConstraint("foo"),
+                new RegexRouteConstraint("bar"),
+                "baz"
+            }
+        };
 
         var original = RoutePatternFactory.Parse(template);
 
@@ -264,7 +357,8 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Collection(
@@ -272,27 +366,52 @@ public class RoutePatternFactoryTest
             kvp =>
             {
                 Assert.Equal("a", kvp.Key);
-                Assert.Collection(
-                    kvp.Value,
-                    c => Assert.Equal("int", c.Content));
+                Assert.Collection(kvp.Value, c => Assert.Equal("int", c.Content));
             },
             kvp =>
             {
                 Assert.Equal("b", kvp.Key);
                 Assert.Collection(
                     kvp.Value,
-                    c => Assert.Equal("^(fizz)$", Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy).Constraint.ToString()));
+                    c =>
+                        Assert.Equal(
+                            "^(fizz)$",
+                            Assert
+                                .IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                                .Constraint.ToString()
+                        )
+                );
             },
             kvp =>
             {
                 Assert.Equal("c", kvp.Key);
                 Assert.Collection(
                     kvp.Value,
-                    c => Assert.Equal("foo", Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy).Constraint.ToString()),
-                    c => Assert.Equal("bar", Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy).Constraint.ToString()),
-                    c => Assert.Equal("^(baz)$", Assert.IsType<RegexRouteConstraint>(c.ParameterPolicy).Constraint.ToString()),
-                    c => Assert.Equal("int", c.Content));
-            });
+                    c =>
+                        Assert.Equal(
+                            "foo",
+                            Assert
+                                .IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                                .Constraint.ToString()
+                        ),
+                    c =>
+                        Assert.Equal(
+                            "bar",
+                            Assert
+                                .IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                                .Constraint.ToString()
+                        ),
+                    c =>
+                        Assert.Equal(
+                            "^(baz)$",
+                            Assert
+                                .IsType<RegexRouteConstraint>(c.ParameterPolicy)
+                                .Constraint.ToString()
+                        ),
+                    c => Assert.Equal("int", c.Content)
+                );
+            }
+        );
     }
 
     [Fact]
@@ -306,14 +425,17 @@ public class RoutePatternFactoryTest
         var original = RoutePatternFactory.Parse(template);
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            RoutePatternFactory.Pattern(
-                original.RawText,
-                defaults,
-                constraints,
-                original.PathSegments);
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                RoutePatternFactory.Pattern(
+                    original.RawText,
+                    defaults,
+                    constraints,
+                    original.PathSegments
+                );
+            }
+        );
     }
 
     [Fact]
@@ -331,7 +453,8 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Collection(
@@ -339,17 +462,14 @@ public class RoutePatternFactoryTest
             kvp =>
             {
                 Assert.Equal("d", kvp.Key);
-                Assert.Collection(
-                    kvp.Value,
-                    c => Assert.NotNull(c.ParameterPolicy));
+                Assert.Collection(kvp.Value, c => Assert.NotNull(c.ParameterPolicy));
             },
             kvp =>
             {
                 Assert.Equal("e", kvp.Key);
-                Assert.Collection(
-                    kvp.Value,
-                    c => Assert.NotNull(c.ParameterPolicy));
-            });
+                Assert.Collection(kvp.Value, c => Assert.NotNull(c.ParameterPolicy));
+            }
+        );
     }
 
     [Fact]
@@ -367,7 +487,8 @@ public class RoutePatternFactoryTest
             original.RawText,
             defaults,
             constraints,
-            original.PathSegments);
+            original.PathSegments
+        );
 
         // Assert
         Assert.Collection(
@@ -375,9 +496,12 @@ public class RoutePatternFactoryTest
             kvp =>
             {
                 Assert.Equal("d", kvp.Key);
-                var regex = Assert.IsType<RegexRouteConstraint>(Assert.Single(kvp.Value).ParameterPolicy);
+                var regex = Assert.IsType<RegexRouteConstraint>(
+                    Assert.Single(kvp.Value).ParameterPolicy
+                );
                 Assert.Equal("^(foo)$", regex.Constraint.ToString());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -391,16 +515,21 @@ public class RoutePatternFactoryTest
         var original = RoutePatternFactory.Parse(template);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => RoutePatternFactory.Pattern(
-            original.RawText,
-            defaults,
-            constraints,
-            original.PathSegments));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                RoutePatternFactory.Pattern(
+                    original.RawText,
+                    defaults,
+                    constraints,
+                    original.PathSegments
+                )
+        );
 
         // Assert
         Assert.Equal(
             $"Invalid constraint '17'. A constraint must be of type 'string' or '{typeof(IRouteConstraint)}'.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Fact]
@@ -412,12 +541,12 @@ public class RoutePatternFactoryTest
         var paramPartC = RoutePatternFactory.ParameterPart("C");
         var paramPartD = RoutePatternFactory.ParameterPart("D");
         var segments = new[]
-            {
-                    RoutePatternFactory.Segment(literalPartA, paramPartB),
-                    RoutePatternFactory.Segment(paramPartC, literalPartA),
-                    RoutePatternFactory.Segment(paramPartD),
-                    RoutePatternFactory.Segment(literalPartA)
-                };
+        {
+            RoutePatternFactory.Segment(literalPartA, paramPartB),
+            RoutePatternFactory.Segment(paramPartC, literalPartA),
+            RoutePatternFactory.Segment(paramPartD),
+            RoutePatternFactory.Segment(literalPartA)
+        };
 
         // Act
         var actual = RoutePatternFactory.Pattern(segments);
@@ -441,12 +570,12 @@ public class RoutePatternFactoryTest
         var paramPartC = RoutePatternFactory.ParameterPart("C");
         var paramPartD = RoutePatternFactory.ParameterPart("D");
         var segments = new[]
-            {
-                    RoutePatternFactory.Segment(literalPartA, paramPartB),
-                    RoutePatternFactory.Segment(paramPartC, literalPartA),
-                    RoutePatternFactory.Segment(paramPartD),
-                    RoutePatternFactory.Segment(literalPartA)
-                };
+        {
+            RoutePatternFactory.Segment(literalPartA, paramPartB),
+            RoutePatternFactory.Segment(paramPartC, literalPartA),
+            RoutePatternFactory.Segment(paramPartD),
+            RoutePatternFactory.Segment(literalPartA)
+        };
 
         // Act
         var actual = RoutePatternFactory.Pattern(rawText, segments);
@@ -471,12 +600,12 @@ public class RoutePatternFactoryTest
         var paramPartC = RoutePatternFactory.ParameterPart("C");
         var paramPartD = RoutePatternFactory.ParameterPart("D");
         var segments = new[]
-            {
-                    RoutePatternFactory.Segment(literalPartA, paramPartB),
-                    RoutePatternFactory.Segment(paramPartC, literalPartA),
-                    RoutePatternFactory.Segment(paramPartD),
-                    RoutePatternFactory.Segment(literalPartA)
-                };
+        {
+            RoutePatternFactory.Segment(literalPartA, paramPartB),
+            RoutePatternFactory.Segment(paramPartC, literalPartA),
+            RoutePatternFactory.Segment(paramPartD),
+            RoutePatternFactory.Segment(literalPartA)
+        };
 
         // Act
         var actual = RoutePatternFactory.Pattern(defaults, parameterPolicies, segments);
@@ -511,12 +640,12 @@ public class RoutePatternFactoryTest
         var paramPartC = RoutePatternFactory.ParameterPart("C");
         var paramPartD = RoutePatternFactory.ParameterPart("D");
         var segments = new[]
-            {
-                    RoutePatternFactory.Segment(literalPartA, paramPartB),
-                    RoutePatternFactory.Segment(paramPartC, literalPartA),
-                    RoutePatternFactory.Segment(paramPartD),
-                    RoutePatternFactory.Segment(literalPartA)
-                };
+        {
+            RoutePatternFactory.Segment(literalPartA, paramPartB),
+            RoutePatternFactory.Segment(paramPartC, literalPartA),
+            RoutePatternFactory.Segment(paramPartD),
+            RoutePatternFactory.Segment(literalPartA)
+        };
 
         // Act
         var actual = RoutePatternFactory.Pattern(rawText, defaults, parameterPolicies, segments);
@@ -554,9 +683,22 @@ public class RoutePatternFactoryTest
         // Assert
         Assert.Collection(
             action.RequiredValues.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("action", kvp.Key); Assert.Equal("Index", kvp.Value); },
-            kvp => { Assert.Equal("area", kvp.Key); Assert.Equal("Admin", kvp.Value); },
-            kvp => { Assert.Equal("controller", kvp.Key); Assert.Equal("Store", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("action", kvp.Key);
+                Assert.Equal("Index", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("area", kvp.Key);
+                Assert.Equal("Admin", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("controller", kvp.Key);
+                Assert.Equal("Store", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -574,9 +716,22 @@ public class RoutePatternFactoryTest
         // Assert
         Assert.Collection(
             action.RequiredValues.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("action", kvp.Key); Assert.Equal("Index", kvp.Value); },
-            kvp => { Assert.Equal("area", kvp.Key); Assert.Null(kvp.Value); },
-            kvp => { Assert.Equal("controller", kvp.Key); Assert.Equal("Store", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("action", kvp.Key);
+                Assert.Equal("Index", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("area", kvp.Key);
+                Assert.Null(kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("controller", kvp.Key);
+                Assert.Equal("Store", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -594,9 +749,22 @@ public class RoutePatternFactoryTest
         // Assert
         Assert.Collection(
             action.RequiredValues.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("action", kvp.Key); Assert.Equal("Index", kvp.Value); },
-            kvp => { Assert.Equal("area", kvp.Key); Assert.Equal("", kvp.Value); },
-            kvp => { Assert.Equal("controller", kvp.Key); Assert.Equal("Store", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("action", kvp.Key);
+                Assert.Equal("Index", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("area", kvp.Key);
+                Assert.Equal("", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("controller", kvp.Key);
+                Assert.Equal("Store", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -609,17 +777,25 @@ public class RoutePatternFactoryTest
         var requiredValues = new { area = "Admin", controller = "Store", action = "Index", };
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-        {
-            var action = RoutePatternFactory.Parse(template, defaults, policies, requiredValues);
-        });
+        var exception = Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                var action = RoutePatternFactory.Parse(
+                    template,
+                    defaults,
+                    policies,
+                    requiredValues
+                );
+            }
+        );
 
         // Assert
         Assert.Equal(
-            "No corresponding parameter or default value could be found for the required value " +
-            "'area=Admin'. A non-null required value must correspond to a route parameter or the " +
-            "route pattern must have a matching default value.",
-            exception.Message);
+            "No corresponding parameter or default value could be found for the required value "
+                + "'area=Admin'. A non-null required value must correspond to a route parameter or the "
+                + "route pattern must have a matching default value.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -633,11 +809,17 @@ public class RoutePatternFactoryTest
         var z = new InlineConstraint("z");
         var constraints = new[] { x, y, z };
         var templatePart = TemplatePart.CreateParameter("t", false, false, null, constraints);
-        var routePatternParameterPart = (RoutePatternParameterPart)templatePart.ToRoutePatternPart();
+        var routePatternParameterPart =
+            (RoutePatternParameterPart)templatePart.ToRoutePatternPart();
         var policies = routePatternParameterPart.ParameterPolicies.ToArray();
 
         // Act
-        var parameterPart = RoutePatternFactory.ParameterPart(name, defaults, RoutePatternParameterKind.Standard, policies);
+        var parameterPart = RoutePatternFactory.ParameterPart(
+            name,
+            defaults,
+            RoutePatternParameterKind.Standard,
+            policies
+        );
         policies[0] = null;
         Array.Resize(ref policies, 2);
 
@@ -660,11 +842,17 @@ public class RoutePatternFactoryTest
         var z = new InlineConstraint("z");
         var constraints = new[] { x, y, z };
         var templatePart = TemplatePart.CreateParameter("t", false, false, null, constraints);
-        var routePatternParameterPart = (RoutePatternParameterPart)templatePart.ToRoutePatternPart();
+        var routePatternParameterPart =
+            (RoutePatternParameterPart)templatePart.ToRoutePatternPart();
         var policies = routePatternParameterPart.ParameterPolicies.ToList();
 
         // Act
-        var parameterPart = RoutePatternFactory.ParameterPart(name, defaults, RoutePatternParameterKind.Standard, policies);
+        var parameterPart = RoutePatternFactory.ParameterPart(
+            name,
+            defaults,
+            RoutePatternParameterKind.Standard,
+            policies
+        );
         policies[0] = null;
         policies.RemoveAt(1);
 

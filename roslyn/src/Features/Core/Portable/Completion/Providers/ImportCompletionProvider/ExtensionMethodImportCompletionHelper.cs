@@ -24,31 +24,49 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static readonly object s_gate = new();
         private static Task s_indexingTask = Task.CompletedTask;
 
-        public static async Task WarmUpCacheAsync(Document document, CancellationToken cancellationToken)
+        public static async Task WarmUpCacheAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var project = document.Project;
-            var client = await RemoteHostClient.TryGetClientAsync(project, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(project, cancellationToken)
+                .ConfigureAwait(false);
             if (client != null)
             {
-                var result = await client.TryInvokeAsync<IRemoteExtensionMethodImportCompletionService>(
-                    project,
-                    (service, solutionInfo, cancellationToken) => service.WarmUpCacheAsync(
-                        solutionInfo, document.Id, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                var result = await client
+                    .TryInvokeAsync<IRemoteExtensionMethodImportCompletionService>(
+                        project,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.WarmUpCacheAsync(solutionInfo, document.Id, cancellationToken),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {
-                await WarmUpCacheInCurrentProcessAsync(document, cancellationToken).ConfigureAwait(false);
+                await WarmUpCacheInCurrentProcessAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public static Task WarmUpCacheInCurrentProcessAsync(Document document, CancellationToken cancellationToken)
+        public static Task WarmUpCacheInCurrentProcessAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var cacheService = GetCacheService(document.Project.Solution.Workspace);
-            return ExtensionMethodSymbolComputer.PopulateIndicesAsync(document.Project, cacheService, cancellationToken);
+            return ExtensionMethodSymbolComputer.PopulateIndicesAsync(
+                document.Project,
+                cacheService,
+                cancellationToken
+            );
         }
 
-        public static async Task<ImmutableArray<SerializableImportCompletionItem>> GetUnimportedExtensionMethodsAsync(
+        public static async Task<
+            ImmutableArray<SerializableImportCompletionItem>
+        > GetUnimportedExtensionMethodsAsync(
             Document document,
             int position,
             ITypeSymbol receiverTypeSymbol,
@@ -56,27 +74,50 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<ITypeSymbol> targetTypesSymbols,
             bool forceIndexCreation,
             bool hideAdvancedMembers,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             SerializableUnimportedExtensionMethods items;
 
             var ticks = Environment.TickCount;
 
             var project = document.Project;
-            var client = await RemoteHostClient.TryGetClientAsync(project, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(project, cancellationToken)
+                .ConfigureAwait(false);
             if (client != null)
             {
-                var receiverTypeSymbolKeyData = SymbolKey.CreateString(receiverTypeSymbol, cancellationToken);
-                var targetTypesSymbolKeyData = targetTypesSymbols.SelectAsArray(s => SymbolKey.CreateString(s, cancellationToken));
+                var receiverTypeSymbolKeyData = SymbolKey.CreateString(
+                    receiverTypeSymbol,
+                    cancellationToken
+                );
+                var targetTypesSymbolKeyData = targetTypesSymbols.SelectAsArray(
+                    s => SymbolKey.CreateString(s, cancellationToken)
+                );
 
                 // Call the project overload.  Add-import-for-extension-method doesn't search outside of the current
                 // project cone.
-                var result = await client.TryInvokeAsync<IRemoteExtensionMethodImportCompletionService, SerializableUnimportedExtensionMethods>(
-                    project,
-                    (service, solutionInfo, cancellationToken) => service.GetUnimportedExtensionMethodsAsync(
-                        solutionInfo, document.Id, position, receiverTypeSymbolKeyData, namespaceInScope.ToImmutableArray(),
-                        targetTypesSymbolKeyData, forceIndexCreation, hideAdvancedMembers, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                var result = await client
+                    .TryInvokeAsync<
+                        IRemoteExtensionMethodImportCompletionService,
+                        SerializableUnimportedExtensionMethods
+                    >(
+                        project,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.GetUnimportedExtensionMethodsAsync(
+                                solutionInfo,
+                                document.Id,
+                                position,
+                                receiverTypeSymbolKeyData,
+                                namespaceInScope.ToImmutableArray(),
+                                targetTypesSymbolKeyData,
+                                forceIndexCreation,
+                                hideAdvancedMembers,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (!result.HasValue)
                 {
@@ -88,7 +129,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             else
             {
                 items = await GetUnimportedExtensionMethodsInCurrentProcessAsync(
-                    document, position, receiverTypeSymbol, namespaceInScope, targetTypesSymbols, forceIndexCreation, hideAdvancedMembers, cancellationToken)
+                        document,
+                        position,
+                        receiverTypeSymbol,
+                        namespaceInScope,
+                        targetTypesSymbols,
+                        forceIndexCreation,
+                        hideAdvancedMembers,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
             }
 
@@ -96,9 +145,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var totalTicks = Environment.TickCount - ticks;
 
             CompletionProvidersLogger.LogExtensionMethodCompletionTicksDataPoint(totalTicks);
-            CompletionProvidersLogger.LogExtensionMethodCompletionMethodsProvidedDataPoint(items.CompletionItems.Length);
-            CompletionProvidersLogger.LogExtensionMethodCompletionGetSymbolsTicksDataPoint(items.GetSymbolsTicks);
-            CompletionProvidersLogger.LogExtensionMethodCompletionCreateItemsTicksDataPoint(items.CreateItemsTicks);
+            CompletionProvidersLogger.LogExtensionMethodCompletionMethodsProvidedDataPoint(
+                items.CompletionItems.Length
+            );
+            CompletionProvidersLogger.LogExtensionMethodCompletionGetSymbolsTicksDataPoint(
+                items.GetSymbolsTicks
+            );
+            CompletionProvidersLogger.LogExtensionMethodCompletionCreateItemsTicksDataPoint(
+                items.CreateItemsTicks
+            );
 
             if (items.IsPartialResult)
             {
@@ -116,21 +171,42 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<ITypeSymbol> targetTypes,
             bool forceIndexCreation,
             bool hideAdvancedMembers,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var ticks = Environment.TickCount;
 
             // First find symbols of all applicable extension methods.
             // Workspace's syntax/symbol index is used to avoid iterating every method symbols in the solution.
-            var symbolComputer = await ExtensionMethodSymbolComputer.CreateAsync(
-                document, position, receiverTypeSymbol, namespaceInScope, cancellationToken).ConfigureAwait(false);
-            var (extentsionMethodSymbols, isPartialResult) = await symbolComputer.GetExtensionMethodSymbolsAsync(forceIndexCreation, hideAdvancedMembers, cancellationToken).ConfigureAwait(false);
+            var symbolComputer = await ExtensionMethodSymbolComputer
+                .CreateAsync(
+                    document,
+                    position,
+                    receiverTypeSymbol,
+                    namespaceInScope,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var (extentsionMethodSymbols, isPartialResult) = await symbolComputer
+                .GetExtensionMethodSymbolsAsync(
+                    forceIndexCreation,
+                    hideAdvancedMembers,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var getSymbolsTicks = Environment.TickCount - ticks;
             ticks = Environment.TickCount;
 
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var items = ConvertSymbolsToCompletionItems(compilation, extentsionMethodSymbols, targetTypes, cancellationToken);
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var items = ConvertSymbolsToCompletionItems(
+                compilation,
+                extentsionMethodSymbols,
+                targetTypes,
+                cancellationToken
+            );
 
             // If we don't have all the indices available already, queue a backgrounds task to create them.
             if (isPartialResult)
@@ -146,40 +222,78 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         // When building cache in the background, make sure we always use latest snapshot with full semantic
                         var id = document.Id;
                         var workspace = document.Project.Solution.Workspace;
-                        s_indexingTask = Task.Run(() => symbolComputer.PopulateIndicesAsync(workspace.CurrentSolution.GetDocument(id)?.Project, CancellationToken.None), CancellationToken.None);
+                        s_indexingTask = Task.Run(
+                            () =>
+                                symbolComputer.PopulateIndicesAsync(
+                                    workspace.CurrentSolution.GetDocument(id)?.Project,
+                                    CancellationToken.None
+                                ),
+                            CancellationToken.None
+                        );
                     }
                 }
             }
 
             var createItemsTicks = Environment.TickCount - ticks;
 
-            return new SerializableUnimportedExtensionMethods(items, isPartialResult, getSymbolsTicks, createItemsTicks);
+            return new SerializableUnimportedExtensionMethods(
+                items,
+                isPartialResult,
+                getSymbolsTicks,
+                createItemsTicks
+            );
         }
 
         private static ImmutableArray<SerializableImportCompletionItem> ConvertSymbolsToCompletionItems(
-            Compilation compilation, ImmutableArray<IMethodSymbol> extentsionMethodSymbols, ImmutableArray<ITypeSymbol> targetTypeSymbols, CancellationToken cancellationToken)
+            Compilation compilation,
+            ImmutableArray<IMethodSymbol> extentsionMethodSymbols,
+            ImmutableArray<ITypeSymbol> targetTypeSymbols,
+            CancellationToken cancellationToken
+        )
         {
             Dictionary<ITypeSymbol, bool> typeConvertibilityCache = new();
-            using var _1 = PooledDictionary<INamespaceSymbol, string>.GetInstance(out var namespaceNameCache);
-            using var _2 = PooledDictionary<(string containingNamespace, string methodName, bool isGeneric), (IMethodSymbol bestSymbol, int overloadCount, bool includeInTargetTypedCompletion)>
-                .GetInstance(out var overloadMap);
+            using var _1 = PooledDictionary<INamespaceSymbol, string>.GetInstance(
+                out var namespaceNameCache
+            );
+            using var _2 = PooledDictionary<
+                (string containingNamespace, string methodName, bool isGeneric),
+                (IMethodSymbol bestSymbol, int overloadCount, bool includeInTargetTypedCompletion)
+            >.GetInstance(out var overloadMap);
 
             // Aggregate overloads
             foreach (var symbol in extentsionMethodSymbols)
             {
                 IMethodSymbol bestSymbol;
                 int overloadCount;
-                var includeInTargetTypedCompletion = ShouldIncludeInTargetTypedCompletion(compilation, symbol, targetTypeSymbols, typeConvertibilityCache);
+                var includeInTargetTypedCompletion = ShouldIncludeInTargetTypedCompletion(
+                    compilation,
+                    symbol,
+                    targetTypeSymbols,
+                    typeConvertibilityCache
+                );
 
-                var containingNamespacename = GetFullyQualifiedNamespaceName(symbol.ContainingNamespace, namespaceNameCache);
-                var overloadKey = (containingNamespacename, symbol.Name, isGeneric: symbol.Arity > 0);
+                var containingNamespacename = GetFullyQualifiedNamespaceName(
+                    symbol.ContainingNamespace,
+                    namespaceNameCache
+                );
+                var overloadKey = (
+                    containingNamespacename,
+                    symbol.Name,
+                    isGeneric: symbol.Arity > 0
+                );
 
                 // Select the overload convertable to any targeted type (if any) and with minimum number of parameters to display
                 if (overloadMap.TryGetValue(overloadKey, out var currentValue))
                 {
-                    if (currentValue.includeInTargetTypedCompletion == includeInTargetTypedCompletion)
+                    if (
+                        currentValue.includeInTargetTypedCompletion
+                        == includeInTargetTypedCompletion
+                    )
                     {
-                        bestSymbol = currentValue.bestSymbol.Parameters.Length > symbol.Parameters.Length ? symbol : currentValue.bestSymbol;
+                        bestSymbol =
+                            currentValue.bestSymbol.Parameters.Length > symbol.Parameters.Length
+                                ? symbol
+                                : currentValue.bestSymbol;
                     }
                     else if (currentValue.includeInTargetTypedCompletion)
                     {
@@ -191,7 +305,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     }
 
                     overloadCount = currentValue.overloadCount + 1;
-                    includeInTargetTypedCompletion = includeInTargetTypedCompletion || currentValue.includeInTargetTypedCompletion;
+                    includeInTargetTypedCompletion =
+                        includeInTargetTypedCompletion
+                        || currentValue.includeInTargetTypedCompletion;
                 }
                 else
                 {
@@ -199,13 +315,24 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     overloadCount = 1;
                 }
 
-                overloadMap[overloadKey] = (bestSymbol, overloadCount, includeInTargetTypedCompletion);
+                overloadMap[overloadKey] = (
+                    bestSymbol,
+                    overloadCount,
+                    includeInTargetTypedCompletion
+                );
             }
 
             // Then convert symbols into completion items
-            using var _3 = ArrayBuilder<SerializableImportCompletionItem>.GetInstance(out var itemsBuilder);
+            using var _3 = ArrayBuilder<SerializableImportCompletionItem>.GetInstance(
+                out var itemsBuilder
+            );
 
-            foreach (var ((containingNamespace, _, _), (bestSymbol, overloadCount, includeInTargetTypedCompletion)) in overloadMap)
+            foreach (
+                var (
+                    (containingNamespace, _, _),
+                    (bestSymbol, overloadCount, includeInTargetTypedCompletion)
+                ) in overloadMap
+            )
             {
                 // To display the count of of additional overloads, we need to substract total by 1.
                 var item = new SerializableImportCompletionItem(
@@ -215,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     bestSymbol.GetGlyph(),
                     containingNamespace,
                     additionalOverloadCount: overloadCount - 1,
-                    includeInTargetTypedCompletion);
+                    includeInTargetTypedCompletion
+                );
 
                 itemsBuilder.Add(item);
             }
@@ -224,10 +352,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         }
 
         private static bool ShouldIncludeInTargetTypedCompletion(
-            Compilation compilation, IMethodSymbol methodSymbol, ImmutableArray<ITypeSymbol> targetTypeSymbols,
-            Dictionary<ITypeSymbol, bool> typeConvertibilityCache)
+            Compilation compilation,
+            IMethodSymbol methodSymbol,
+            ImmutableArray<ITypeSymbol> targetTypeSymbols,
+            Dictionary<ITypeSymbol, bool> typeConvertibilityCache
+        )
         {
-            if (methodSymbol.ReturnsVoid || methodSymbol.ReturnType == null || targetTypeSymbols.IsEmpty)
+            if (
+                methodSymbol.ReturnsVoid
+                || methodSymbol.ReturnType == null
+                || targetTypeSymbols.IsEmpty
+            )
             {
                 return false;
             }
@@ -237,13 +372,20 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 return isConvertible;
             }
 
-            isConvertible = CompletionUtilities.IsTypeImplicitlyConvertible(compilation, methodSymbol.ReturnType, targetTypeSymbols);
+            isConvertible = CompletionUtilities.IsTypeImplicitlyConvertible(
+                compilation,
+                methodSymbol.ReturnType,
+                targetTypeSymbols
+            );
             typeConvertibilityCache[methodSymbol.ReturnType] = isConvertible;
 
             return isConvertible;
         }
 
-        private static string GetFullyQualifiedNamespaceName(INamespaceSymbol symbol, Dictionary<INamespaceSymbol, string> stringCache)
+        private static string GetFullyQualifiedNamespaceName(
+            INamespaceSymbol symbol,
+            Dictionary<INamespaceSymbol, string> stringCache
+        )
         {
             if (symbol.ContainingNamespace == null || symbol.ContainingNamespace.IsGlobalNamespace)
             {
@@ -255,7 +397,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 return name;
             }
 
-            name = GetFullyQualifiedNamespaceName(symbol.ContainingNamespace, stringCache) + "." + symbol.Name;
+            name =
+                GetFullyQualifiedNamespaceName(symbol.ContainingNamespace, stringCache)
+                + "."
+                + symbol.Name;
             stringCache[symbol] = name;
             return name;
         }

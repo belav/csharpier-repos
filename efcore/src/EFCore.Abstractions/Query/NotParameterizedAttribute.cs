@@ -12,7 +12,5 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///     See <see href="https://aka.ms/efcore-docs-query">Querying data with EF Core</see> for more information.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class NotParameterizedAttribute : Attribute
-    {
-    }
+    public sealed class NotParameterizedAttribute : Attribute { }
 }

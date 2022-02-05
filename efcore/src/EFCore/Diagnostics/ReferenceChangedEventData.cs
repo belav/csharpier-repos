@@ -32,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EntityEntry entityEntry,
             INavigation navigation,
             object? oldReferencedEntity,
-            object? newReferencedEntity)
-            : base(eventDefinition, messageGenerator, navigation)
+            object? newReferencedEntity
+        ) : base(eventDefinition, messageGenerator, navigation)
         {
             EntityEntry = entityEntry;
             OldReferencedEntity = oldReferencedEntity;
@@ -48,8 +48,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     The navigation.
         /// </summary>
-        public new virtual INavigation Navigation
-            => (INavigation)base.Navigation;
+        public new virtual INavigation Navigation => (INavigation)base.Navigation;
 
         /// <summary>
         ///     The old referenced entity.

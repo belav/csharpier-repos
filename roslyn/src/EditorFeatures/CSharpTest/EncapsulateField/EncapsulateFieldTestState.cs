@@ -28,29 +28,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public EncapsulateFieldTestState(TestWorkspace workspace)
         {
             Workspace = workspace;
-            _testDocument = Workspace.Documents.Single(d => d.CursorPosition.HasValue || d.SelectedSpans.Any());
+            _testDocument = Workspace.Documents.Single(
+                d => d.CursorPosition.HasValue || d.SelectedSpans.Any()
+            );
             TargetDocument = Workspace.CurrentSolution.GetDocument(_testDocument.Id);
 
-            var notificationService = Workspace.Services.GetService<INotificationService>() as INotificationServiceCallback;
-            var callback = new Action<string, string, NotificationSeverity>((message, title, severity) => NotificationMessage = message);
+            var notificationService =
+                Workspace.Services.GetService<INotificationService>()
+                as INotificationServiceCallback;
+            var callback = new Action<string, string, NotificationSeverity>(
+                (message, title, severity) => NotificationMessage = message
+            );
             notificationService.NotificationCallback = callback;
         }
 
         public static EncapsulateFieldTestState Create(string markup)
         {
-            var workspace = TestWorkspace.CreateCSharp(markup, composition: EditorTestCompositions.EditorFeatures);
+            var workspace = TestWorkspace.CreateCSharp(
+                markup,
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(workspace.Options
-                .WithChangedOption(CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement)
-                .WithChangedOption(CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement)));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options
+                        .WithChangedOption(
+                            CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                            CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                        )
+                        .WithChangedOption(
+                            CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                            CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                        )
+                )
+            );
 
             return new EncapsulateFieldTestState(workspace);
         }
 
         public void Encapsulate()
         {
-            var args = new EncapsulateFieldCommandArgs(_testDocument.GetTextView(), _testDocument.GetTextBuffer());
-            var commandHandler = Workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(PredefinedCommandHandlerNames.EncapsulateField, ContentTypeNames.CSharpContentType);
+            var args = new EncapsulateFieldCommandArgs(
+                _testDocument.GetTextView(),
+                _testDocument.GetTextBuffer()
+            );
+            var commandHandler =
+                Workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(
+                    PredefinedCommandHandlerNames.EncapsulateField,
+                    ContentTypeNames.CSharpContentType
+                );
             commandHandler.ExecuteCommand(args, TestCommandExecutionContext.Create());
         }
 
@@ -65,7 +91,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public void AssertEncapsulateAs(string expected)
         {
             Encapsulate();
-            Assert.Equal(expected, _testDocument.GetTextBuffer().CurrentSnapshot.GetText().ToString());
+            Assert.Equal(
+                expected,
+                _testDocument.GetTextBuffer().CurrentSnapshot.GetText().ToString()
+            );
         }
 
         public void AssertError()

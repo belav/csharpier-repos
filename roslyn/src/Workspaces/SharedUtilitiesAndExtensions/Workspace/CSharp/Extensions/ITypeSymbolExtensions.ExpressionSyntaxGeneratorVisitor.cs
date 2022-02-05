@@ -14,17 +14,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             public static readonly ExpressionSyntaxGeneratorVisitor Instance = new();
 
-            private ExpressionSyntaxGeneratorVisitor()
-            {
-            }
+            private ExpressionSyntaxGeneratorVisitor() { }
 
-            public override ExpressionSyntax DefaultVisit(ISymbol symbol)
-                => symbol.Accept(TypeSyntaxGeneratorVisitor.Create())!;
+            public override ExpressionSyntax DefaultVisit(ISymbol symbol) =>
+                symbol.Accept(TypeSyntaxGeneratorVisitor.Create())!;
 
-            private static TExpressionSyntax AddInformationTo<TExpressionSyntax>(TExpressionSyntax syntax, ISymbol symbol)
-                where TExpressionSyntax : ExpressionSyntax
+            private static TExpressionSyntax AddInformationTo<TExpressionSyntax>(
+                TExpressionSyntax syntax,
+                ISymbol symbol
+            ) where TExpressionSyntax : ExpressionSyntax
             {
-                syntax = syntax.WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker).WithAppendedTrailingTrivia(SyntaxFactory.ElasticMarker);
+                syntax = syntax
+                    .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
+                    .WithAppendedTrailingTrivia(SyntaxFactory.ElasticMarker);
                 syntax = syntax.WithAdditionalAnnotations(SymbolAnnotation.Create(symbol));
 
                 return syntax;
@@ -32,7 +34,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             public override ExpressionSyntax VisitNamedType(INamedTypeSymbol symbol)
             {
-                if (TypeSyntaxGeneratorVisitor.TryCreateNativeIntegerType(symbol, out var typeSyntax))
+                if (
+                    TypeSyntaxGeneratorVisitor.TryCreateNativeIntegerType(
+                        symbol,
+                        out var typeSyntax
+                    )
+                )
                     return typeSyntax;
 
                 typeSyntax = TypeSyntaxGeneratorVisitor.Create().CreateSimpleTypeSyntax(symbol);
@@ -60,8 +67,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         {
                             return AddInformationTo(
                                 SyntaxFactory.AliasQualifiedName(
-                                    SyntaxFactory.IdentifierName(SyntaxFactory.Token(SyntaxKind.GlobalKeyword)),
-                                    simpleNameSyntax), symbol);
+                                    SyntaxFactory.IdentifierName(
+                                        SyntaxFactory.Token(SyntaxKind.GlobalKeyword)
+                                    ),
+                                    simpleNameSyntax
+                                ),
+                                symbol
+                            );
                         }
                     }
                     else
@@ -86,8 +98,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 {
                     return AddInformationTo(
                         SyntaxFactory.AliasQualifiedName(
-                            SyntaxFactory.IdentifierName(SyntaxFactory.Token(SyntaxKind.GlobalKeyword)),
-                            syntax), symbol);
+                            SyntaxFactory.IdentifierName(
+                                SyntaxFactory.Token(SyntaxKind.GlobalKeyword)
+                            ),
+                            syntax
+                        ),
+                        symbol
+                    );
                 }
                 else
                 {
@@ -97,11 +114,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             private static ExpressionSyntax CreateMemberAccessExpression(
-                ISymbol symbol, ExpressionSyntax container, SimpleNameSyntax syntax)
+                ISymbol symbol,
+                ExpressionSyntax container,
+                SimpleNameSyntax syntax
+            )
             {
-                return AddInformationTo(SyntaxFactory.MemberAccessExpression(
-                    SyntaxKind.SimpleMemberAccessExpression,
-                    container, syntax), symbol);
+                return AddInformationTo(
+                    SyntaxFactory.MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        container,
+                        syntax
+                    ),
+                    symbol
+                );
             }
         }
     }

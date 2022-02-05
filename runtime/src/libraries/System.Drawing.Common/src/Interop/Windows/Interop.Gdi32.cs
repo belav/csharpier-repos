@@ -16,57 +16,139 @@ internal static partial class Interop
         internal static extern IntPtr CreateCompatibleBitmap(HandleRef hDC, int width, int height);
 
         [DllImport(Libraries.Gdi32)]
-        internal static extern int GetDIBits(HandleRef hdc, HandleRef hbm, int arg1, int arg2, IntPtr arg3, ref BITMAPINFO_FLAT bmi, int arg5);
+        internal static extern int GetDIBits(
+            HandleRef hdc,
+            HandleRef hbm,
+            int arg1,
+            int arg2,
+            IntPtr arg3,
+            ref BITMAPINFO_FLAT bmi,
+            int arg5
+        );
 
         [DllImport(Libraries.Gdi32)]
-        internal static extern uint GetPaletteEntries(HandleRef hpal, int iStartIndex, int nEntries, byte[] lppe);
+        internal static extern uint GetPaletteEntries(
+            HandleRef hpal,
+            int iStartIndex,
+            int nEntries,
+            byte[] lppe
+        );
 
         [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true)]
-        internal static extern IntPtr CreateDIBSection(HandleRef hdc, ref BITMAPINFO_FLAT bmi, int iUsage, ref IntPtr ppvBits, IntPtr hSection, int dwOffset);
+        internal static extern IntPtr CreateDIBSection(
+            HandleRef hdc,
+            ref BITMAPINFO_FLAT bmi,
+            int iUsage,
+            ref IntPtr ppvBits,
+            IntPtr hSection,
+            int dwOffset
+        );
 
         [DllImport(Libraries.Gdi32, SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern int StartDoc(HandleRef hDC, DOCINFO lpDocInfo);
 
-        [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
+        [DllImport(
+            Libraries.Gdi32,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Auto
+        )]
         internal static extern int StartPage(HandleRef hDC);
 
-        [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
+        [DllImport(
+            Libraries.Gdi32,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Auto
+        )]
         internal static extern int EndPage(HandleRef hDC);
 
-        [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
+        [DllImport(
+            Libraries.Gdi32,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Auto
+        )]
         internal static extern int AbortDoc(HandleRef hDC);
 
-        [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
+        [DllImport(
+            Libraries.Gdi32,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Auto
+        )]
         internal static extern int EndDoc(HandleRef hDC);
 
         [DllImport(Libraries.Gdi32, SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern IntPtr /*HDC*/ ResetDC(HandleRef hDC, HandleRef /*DEVMODE*/ lpDevMode);
+        internal static extern IntPtr /*HDC*/
+        ResetDC(
+            HandleRef hDC,
+            HandleRef /*DEVMODE*/
+            lpDevMode
+        );
 
         [DllImport(Libraries.Gdi32, SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern int AddFontResourceEx(string lpszFilename, int fl, IntPtr pdv);
 
         internal static int AddFontFile(string fileName)
         {
-            return AddFontResourceEx(fileName, /*FR_PRIVATE*/ 0x10, IntPtr.Zero);
+            return AddFontResourceEx(
+                fileName, /*FR_PRIVATE*/
+                0x10,
+                IntPtr.Zero
+            );
         }
 
-        [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
-        internal static extern int ExtEscape(HandleRef hDC, int nEscape, int cbInput, ref int inData, int cbOutput, [Out] out int outData);
+        [DllImport(
+            Libraries.Gdi32,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Auto
+        )]
+        internal static extern int ExtEscape(
+            HandleRef hDC,
+            int nEscape,
+            int cbInput,
+            ref int inData,
+            int cbOutput,
+            [Out] out int outData
+        );
 
-        [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
-        internal static extern int ExtEscape(HandleRef hDC, int nEscape, int cbInput, byte[] inData, int cbOutput, [Out] out int outData);
+        [DllImport(
+            Libraries.Gdi32,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Auto
+        )]
+        internal static extern int ExtEscape(
+            HandleRef hDC,
+            int nEscape,
+            int cbInput,
+            byte[] inData,
+            int cbOutput,
+            [Out] out int outData
+        );
 
-        [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
+        [DllImport(
+            Libraries.Gdi32,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Auto
+        )]
         internal static extern int IntersectClipRect(HandleRef hDC, int x1, int y1, int x2, int y2);
 
         [DllImport(Libraries.Gdi32, SetLastError = true)]
         internal static extern int GetObject(HandleRef hObject, int nSize, ref BITMAP bm);
 
         [DllImport(Libraries.Gdi32, SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern int GetObject(HandleRef hObject, int nSize, ref Interop.User32.LOGFONT lf);
+        internal static extern int GetObject(
+            HandleRef hObject,
+            int nSize,
+            ref Interop.User32.LOGFONT lf
+        );
 
-        internal static unsafe int GetObject(HandleRef hObject, ref Interop.User32.LOGFONT lp)
-            => GetObject(hObject, sizeof(Interop.User32.LOGFONT), ref lp);
+        internal static unsafe int GetObject(HandleRef hObject, ref Interop.User32.LOGFONT lp) =>
+            GetObject(hObject, sizeof(Interop.User32.LOGFONT), ref lp);
 
         [StructLayout(LayoutKind.Sequential)]
         public struct BITMAP
@@ -133,6 +215,7 @@ internal static partial class Interop
             public short dmYResolution;
             public short dmTTOption;
             public short dmCollate;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             public string? dmFormName;
             public short dmLogPixels;
@@ -150,45 +233,78 @@ internal static partial class Interop
             public int dmPanningWidth;
             public int dmPanningHeight;
 
-
             public override string ToString()
             {
                 return "[DEVMODE: "
-                + "dmDeviceName=" + dmDeviceName
-                + ", dmSpecVersion=" + dmSpecVersion
-                + ", dmDriverVersion=" + dmDriverVersion
-                + ", dmSize=" + dmSize
-                + ", dmDriverExtra=" + dmDriverExtra
-                + ", dmFields=" + dmFields
-                + ", dmOrientation=" + dmOrientation
-                + ", dmPaperSize=" + dmPaperSize
-                + ", dmPaperLength=" + dmPaperLength
-                + ", dmPaperWidth=" + dmPaperWidth
-                + ", dmScale=" + dmScale
-                + ", dmCopies=" + dmCopies
-                + ", dmDefaultSource=" + dmDefaultSource
-                + ", dmPrintQuality=" + dmPrintQuality
-                + ", dmColor=" + dmColor
-                + ", dmDuplex=" + dmDuplex
-                + ", dmYResolution=" + dmYResolution
-                + ", dmTTOption=" + dmTTOption
-                + ", dmCollate=" + dmCollate
-                + ", dmFormName=" + dmFormName
-                + ", dmLogPixels=" + dmLogPixels
-                + ", dmBitsPerPel=" + dmBitsPerPel
-                + ", dmPelsWidth=" + dmPelsWidth
-                + ", dmPelsHeight=" + dmPelsHeight
-                + ", dmDisplayFlags=" + dmDisplayFlags
-                + ", dmDisplayFrequency=" + dmDisplayFrequency
-                + ", dmICMMethod=" + dmICMMethod
-                + ", dmICMIntent=" + dmICMIntent
-                + ", dmMediaType=" + dmMediaType
-                + ", dmDitherType=" + dmDitherType
-                + ", dmICCManufacturer=" + dmICCManufacturer
-                + ", dmICCModel=" + dmICCModel
-                + ", dmPanningWidth=" + dmPanningWidth
-                + ", dmPanningHeight=" + dmPanningHeight
-                + "]";
+                    + "dmDeviceName="
+                    + dmDeviceName
+                    + ", dmSpecVersion="
+                    + dmSpecVersion
+                    + ", dmDriverVersion="
+                    + dmDriverVersion
+                    + ", dmSize="
+                    + dmSize
+                    + ", dmDriverExtra="
+                    + dmDriverExtra
+                    + ", dmFields="
+                    + dmFields
+                    + ", dmOrientation="
+                    + dmOrientation
+                    + ", dmPaperSize="
+                    + dmPaperSize
+                    + ", dmPaperLength="
+                    + dmPaperLength
+                    + ", dmPaperWidth="
+                    + dmPaperWidth
+                    + ", dmScale="
+                    + dmScale
+                    + ", dmCopies="
+                    + dmCopies
+                    + ", dmDefaultSource="
+                    + dmDefaultSource
+                    + ", dmPrintQuality="
+                    + dmPrintQuality
+                    + ", dmColor="
+                    + dmColor
+                    + ", dmDuplex="
+                    + dmDuplex
+                    + ", dmYResolution="
+                    + dmYResolution
+                    + ", dmTTOption="
+                    + dmTTOption
+                    + ", dmCollate="
+                    + dmCollate
+                    + ", dmFormName="
+                    + dmFormName
+                    + ", dmLogPixels="
+                    + dmLogPixels
+                    + ", dmBitsPerPel="
+                    + dmBitsPerPel
+                    + ", dmPelsWidth="
+                    + dmPelsWidth
+                    + ", dmPelsHeight="
+                    + dmPelsHeight
+                    + ", dmDisplayFlags="
+                    + dmDisplayFlags
+                    + ", dmDisplayFrequency="
+                    + dmDisplayFrequency
+                    + ", dmICMMethod="
+                    + dmICMMethod
+                    + ", dmICMIntent="
+                    + dmICMIntent
+                    + ", dmMediaType="
+                    + dmMediaType
+                    + ", dmDitherType="
+                    + dmDitherType
+                    + ", dmICCManufacturer="
+                    + dmICCManufacturer
+                    + ", dmICCModel="
+                    + dmICCModel
+                    + ", dmPanningWidth="
+                    + dmPanningWidth
+                    + ", dmPanningHeight="
+                    + dmPanningHeight
+                    + "]";
             }
         }
     }

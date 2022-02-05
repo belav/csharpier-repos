@@ -18,7 +18,10 @@ public class ApplicationDeployerFactory
     /// <param name="deploymentParameters"></param>
     /// <param name="loggerFactory"></param>
     /// <returns></returns>
-    public static ApplicationDeployer Create(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
+    public static ApplicationDeployer Create(
+        DeploymentParameters deploymentParameters,
+        ILoggerFactory loggerFactory
+    )
     {
         if (deploymentParameters == null)
         {
@@ -34,7 +37,9 @@ public class ApplicationDeployerFactory
         {
             case ServerType.IISExpress:
             case ServerType.IIS:
-                throw new NotSupportedException("Use Microsoft.AspNetCore.Server.IntegrationTesting.IIS package and IISApplicationDeployerFactory for IIS support.");
+                throw new NotSupportedException(
+                    "Use Microsoft.AspNetCore.Server.IntegrationTesting.IIS package and IISApplicationDeployerFactory for IIS support."
+                );
             case ServerType.HttpSys:
             case ServerType.Kestrel:
                 return new SelfHostDeployer(deploymentParameters, loggerFactory);
@@ -45,8 +50,9 @@ public class ApplicationDeployerFactory
                     string.Format(
                         CultureInfo.CurrentCulture,
                         "Found no deployers suitable for server type '{0}' with the current runtime.",
-                        deploymentParameters.ServerType)
-                    );
+                        deploymentParameters.ServerType
+                    )
+                );
         }
     }
 }

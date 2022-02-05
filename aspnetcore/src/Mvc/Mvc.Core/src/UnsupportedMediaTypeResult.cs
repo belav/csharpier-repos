@@ -18,7 +18,5 @@ public class UnsupportedMediaTypeResult : StatusCodeResult
     /// <summary>
     /// Creates a new instance of <see cref="UnsupportedMediaTypeResult"/>.
     /// </summary>
-    public UnsupportedMediaTypeResult() : base(DefaultStatusCode)
-    {
-    }
+    public UnsupportedMediaTypeResult() : base(DefaultStatusCode) { }
 }

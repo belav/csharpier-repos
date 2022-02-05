@@ -3,9 +3,9 @@
 
 /*
 Spilling volatile objects opposed to spilling only
-  the exception objects. The equivalence of GTF_OTHER_SIDEEFF and
-  GT_CATCH_ARG is altered by impGetByRefResultType.
-  
+the exception objects. The equivalence of GTF_OTHER_SIDEEFF and
+GT_CATCH_ARG is altered by impGetByRefResultType.
+
 Actual Results:
 System.StackOverflowException during JIT of function
 
@@ -17,12 +17,9 @@ public class Form1
 {
     public static volatile bool RunsInWebServer = false;
 
-
     public Form1()
     {
-        try
-        {
-        }
+        try { }
         catch
         {
             string lT = string.Format("{0}", RunsInWebServer);
@@ -35,4 +32,3 @@ public class Form1
         return 100;
     }
 }
-

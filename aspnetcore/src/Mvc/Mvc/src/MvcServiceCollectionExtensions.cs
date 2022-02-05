@@ -45,7 +45,10 @@ public static class MvcServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="setupAction">An <see cref="Action{MvcOptions}"/> to configure the provided <see cref="MvcOptions"/>.</param>
     /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
-    public static IMvcBuilder AddMvc(this IServiceCollection services, Action<MvcOptions> setupAction)
+    public static IMvcBuilder AddMvc(
+        this IServiceCollection services,
+        Action<MvcOptions> setupAction
+    )
     {
         if (services == null)
         {
@@ -125,7 +128,10 @@ public static class MvcServiceCollectionExtensions
     /// on the resulting builder.
     /// </para>
     /// </remarks>
-    public static IMvcBuilder AddControllers(this IServiceCollection services, Action<MvcOptions>? configure)
+    public static IMvcBuilder AddControllers(
+        this IServiceCollection services,
+        Action<MvcOptions>? configure
+    )
     {
         if (services == null)
         {
@@ -156,7 +162,8 @@ public static class MvcServiceCollectionExtensions
         if (MetadataUpdater.IsSupported)
         {
             services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<IActionDescriptorChangeProvider, HotReloadService>());
+                ServiceDescriptor.Singleton<IActionDescriptorChangeProvider, HotReloadService>()
+            );
         }
 
         return builder;
@@ -220,7 +227,10 @@ public static class MvcServiceCollectionExtensions
     /// To add services for pages call <see cref="AddRazorPages(IServiceCollection)"/>.
     /// </para>
     /// </remarks>
-    public static IMvcBuilder AddControllersWithViews(this IServiceCollection services, Action<MvcOptions>? configure)
+    public static IMvcBuilder AddControllersWithViews(
+        this IServiceCollection services,
+        Action<MvcOptions>? configure
+    )
     {
         if (services == null)
         {
@@ -303,7 +313,10 @@ public static class MvcServiceCollectionExtensions
     /// To add services for controllers with views call <see cref="AddControllersWithViews(IServiceCollection)"/>.
     /// </para>
     /// </remarks>
-    public static IMvcBuilder AddRazorPages(this IServiceCollection services, Action<RazorPagesOptions>? configure)
+    public static IMvcBuilder AddRazorPages(
+        this IServiceCollection services,
+        Action<RazorPagesOptions>? configure
+    )
     {
         if (services == null)
         {
@@ -335,7 +348,8 @@ public static class MvcServiceCollectionExtensions
         if (MetadataUpdater.IsSupported)
         {
             services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<IActionDescriptorChangeProvider, HotReloadService>());
+                ServiceDescriptor.Singleton<IActionDescriptorChangeProvider, HotReloadService>()
+            );
         }
 
         return builder;
@@ -344,13 +358,21 @@ public static class MvcServiceCollectionExtensions
     internal static void AddTagHelpersFrameworkParts(ApplicationPartManager partManager)
     {
         var mvcTagHelpersAssembly = typeof(InputTagHelper).Assembly;
-        if (!partManager.ApplicationParts.OfType<AssemblyPart>().Any(p => p.Assembly == mvcTagHelpersAssembly))
+        if (
+            !partManager.ApplicationParts
+                .OfType<AssemblyPart>()
+                .Any(p => p.Assembly == mvcTagHelpersAssembly)
+        )
         {
             partManager.ApplicationParts.Add(new FrameworkAssemblyPart(mvcTagHelpersAssembly));
         }
 
         var mvcRazorAssembly = typeof(UrlResolutionTagHelper).Assembly;
-        if (!partManager.ApplicationParts.OfType<AssemblyPart>().Any(p => p.Assembly == mvcRazorAssembly))
+        if (
+            !partManager.ApplicationParts
+                .OfType<AssemblyPart>()
+                .Any(p => p.Assembly == mvcRazorAssembly)
+        )
         {
             partManager.ApplicationParts.Add(new FrameworkAssemblyPart(mvcRazorAssembly));
         }
@@ -359,11 +381,9 @@ public static class MvcServiceCollectionExtensions
     [DebuggerDisplay("{Name}")]
     private class FrameworkAssemblyPart : AssemblyPart, ICompilationReferencesProvider
     {
-        public FrameworkAssemblyPart(Assembly assembly)
-            : base(assembly)
-        {
-        }
+        public FrameworkAssemblyPart(Assembly assembly) : base(assembly) { }
 
-        IEnumerable<string> ICompilationReferencesProvider.GetReferencePaths() => Enumerable.Empty<string>();
+        IEnumerable<string> ICompilationReferencesProvider.GetReferencePaths() =>
+            Enumerable.Empty<string>();
     }
 }

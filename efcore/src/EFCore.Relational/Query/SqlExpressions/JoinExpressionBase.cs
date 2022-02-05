@@ -20,8 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new instance of the <see cref="JoinExpressionBase" /> class.
         /// </summary>
         /// <param name="table">A table source to join with.</param>
-        protected JoinExpressionBase(TableExpressionBase table)
-            : base(null)
+        protected JoinExpressionBase(TableExpressionBase table) : base(null)
         {
             Table = table;
         }
@@ -32,18 +31,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual TableExpressionBase Table { get; }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is JoinExpressionBase joinExpressionBase
-                    && Equals(joinExpressionBase));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is JoinExpressionBase joinExpressionBase && Equals(joinExpressionBase)
+            );
 
-        private bool Equals(JoinExpressionBase joinExpressionBase)
-            => base.Equals(joinExpressionBase)
-                && Table.Equals(joinExpressionBase.Table);
+        private bool Equals(JoinExpressionBase joinExpressionBase) =>
+            base.Equals(joinExpressionBase) && Table.Equals(joinExpressionBase.Table);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Table);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Table);
     }
 }

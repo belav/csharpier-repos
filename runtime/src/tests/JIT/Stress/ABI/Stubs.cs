@@ -16,7 +16,8 @@ namespace ABIStress
         private const int DefaultSeed = 20010415;
         private static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+              => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
@@ -34,6 +35,7 @@ namespace ABIStress
                 throw new Exception($"Type handle isn't object for scenario {scenario}");
             }
         }
+
         public static void IsTypeHandleInt(RuntimeTypeHandle rth, string scenario)
         {
             if (Type.GetTypeFromHandle(rth) != typeof(int))
@@ -42,17 +44,27 @@ namespace ABIStress
             }
         }
     }
+
     internal partial class Program
     {
-        private static Dictionary<int, Callee> s_instantiatingStubCallees = new Dictionary<int, Callee>();
+        private static Dictionary<int, Callee> s_instantiatingStubCallees = new Dictionary<
+            int,
+            Callee
+        >();
         private static volatile ModuleBuilder s_stubTypesModule = null;
         private static int s_stubTypesCreated = 0;
 
         private static MethodInfo s_gcHandleFromIntPtr = typeof(GCHandle).GetMethod("FromIntPtr");
         private static MethodInfo s_gcHandle_getTarget = typeof(GCHandle).GetMethod("get_Target");
-        private static MethodInfo s_compareNumbers = typeof(StubsTestHelpers).GetMethod("CompareNumbers");
-        private static MethodInfo s_isTypeHandleObject = typeof(StubsTestHelpers).GetMethod("IsTypeHandleObject");
-        private static MethodInfo s_isTypeHandleInt = typeof(StubsTestHelpers).GetMethod("IsTypeHandleInt");
+        private static MethodInfo s_compareNumbers = typeof(StubsTestHelpers).GetMethod(
+            "CompareNumbers"
+        );
+        private static MethodInfo s_isTypeHandleObject = typeof(StubsTestHelpers).GetMethod(
+            "IsTypeHandleObject"
+        );
+        private static MethodInfo s_isTypeHandleInt = typeof(StubsTestHelpers).GetMethod(
+            "IsTypeHandleInt"
+        );
 
         enum GenericShape
         {
@@ -61,7 +73,12 @@ namespace ABIStress
             GenericOverValueType
         }
 
-        private static void EmitTypeHandleCheck(ILGenerator g, GenericShape genericShape, GenericTypeParameterBuilder[] typeParamArr, string scenario)
+        private static void EmitTypeHandleCheck(
+            ILGenerator g,
+            GenericShape genericShape,
+            GenericTypeParameterBuilder[] typeParamArr,
+            string scenario
+        )
         {
             if (genericShape == GenericShape.NotGeneric)
                 return;
@@ -118,10 +135,21 @@ namespace ABIStress
             }
         }
 
-        private static bool DoStubCall(int callerIndex, bool staticMethod, bool onValueType, GenericShape typeGenericShape, GenericShape methodGenericShape)
+        private static bool DoStubCall(
+            int callerIndex,
+            bool staticMethod,
+            bool onValueType,
+            GenericShape typeGenericShape,
+            GenericShape methodGenericShape
+        )
         {
             string callerNameSeed = Config.InstantiatingStubPrefix + "Caller" + callerIndex; // Use a consistent seed value here so that the various various of unboxing/instantiating stubs are generated with the same arg shape
-            string callerName = callerNameSeed + (staticMethod ? "Static" : "Instance") + (onValueType ? "Class" : "ValueType") + typeGenericShape.ToString() + methodGenericShape.ToString();
+            string callerName =
+                callerNameSeed
+                + (staticMethod ? "Static" : "Instance")
+                + (onValueType ? "Class" : "ValueType")
+                + typeGenericShape.ToString()
+                + methodGenericShape.ToString();
             Random rand = new Random(Seed);
             List<TypeEx> pms;
             do
@@ -131,7 +159,7 @@ namespace ABIStress
 
             Type delegateType = GetDelegateType(pms, typeof(int));
 
-            Callee callee = new Callee(callerName+"Callee", pms);// CreateCallee(Config.PInvokeePrefix + calleeIndex, s_allTypes);
+            Callee callee = new Callee(callerName + "Callee", pms); // CreateCallee(Config.PInvokeePrefix + calleeIndex, s_allTypes);
             callee.Emit();
 
             Delegate calleeDelegate = callee.Method.CreateDelegate(delegateType);
@@ -139,21 +167,33 @@ namespace ABIStress
             int newStubCount = Interlocked.Increment(ref s_stubTypesCreated);
             if ((s_stubTypesModule == null) || (newStubCount % 1000) == 0)
             {
-                AssemblyBuilder stubsAssembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("ABIStress_Stubs" + newStubCount), AssemblyBuilderAccess.RunAndCollect);
-                s_stubTypesModule = stubsAssembly.DefineDynamicModule("ABIStress_Stubs" + newStubCount);
+                AssemblyBuilder stubsAssembly = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("ABIStress_Stubs" + newStubCount),
+                    AssemblyBuilderAccess.RunAndCollect
+                );
+                s_stubTypesModule = stubsAssembly.DefineDynamicModule(
+                    "ABIStress_Stubs" + newStubCount
+                );
             }
 
             // This code is based on DelegateHelpers.cs in System.Linq.Expressions.Compiler
-            TypeBuilder tb =
-                s_stubTypesModule.DefineType(
-                        $"{callerName}_GenericTarget",
-                        TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.AutoClass,
-                        onValueType ? typeof(object) : typeof(ValueType));
+            TypeBuilder tb = s_stubTypesModule.DefineType(
+                $"{callerName}_GenericTarget",
+                TypeAttributes.Class
+                    | TypeAttributes.Public
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.AutoClass,
+                onValueType ? typeof(object) : typeof(ValueType)
+            );
             GenericTypeParameterBuilder[] typeParamsType = null;
             if (typeGenericShape != GenericShape.NotGeneric)
                 typeParamsType = tb.DefineGenericParameters(new string[] { "T" });
 
-            FieldInfo fieldDeclaration = tb.DefineField("MagicValue", typeof(int), FieldAttributes.Public);
+            FieldInfo fieldDeclaration = tb.DefineField(
+                "MagicValue",
+                typeof(int),
+                FieldAttributes.Public
+            );
 
             Type typeofInstantiatedType;
             FieldInfo fieldInfoMagicValueField;
@@ -165,13 +205,19 @@ namespace ABIStress
             else
             {
                 typeofInstantiatedType = tb.MakeGenericType(typeParamsType[0]);
-                fieldInfoMagicValueField = TypeBuilder.GetField(typeofInstantiatedType, fieldDeclaration);
+                fieldInfoMagicValueField = TypeBuilder.GetField(
+                    typeofInstantiatedType,
+                    fieldDeclaration
+                );
             }
 
             ConstructorBuilder cb = tb.DefineConstructor(
-                MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.RTSpecialName,
+                MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.RTSpecialName,
                 CallingConventions.Standard,
-                new Type[] { typeof(int) });
+                new Type[] { typeof(int) }
+            );
             cb.SetImplementationFlags(MethodImplAttributes.Managed);
 
             ILGenerator g = cb.GetILGenerator();
@@ -182,7 +228,8 @@ namespace ABIStress
             g.Emit(OpCodes.Stfld, fieldInfoMagicValueField);
             g.Emit(OpCodes.Ret);
 
-            MethodAttributes methodAttributes = MethodAttributes.Public | MethodAttributes.HideBySig;
+            MethodAttributes methodAttributes =
+                MethodAttributes.Public | MethodAttributes.HideBySig;
 
             if (staticMethod)
                 methodAttributes |= MethodAttributes.Static;
@@ -191,7 +238,8 @@ namespace ABIStress
                 "Method",
                 methodAttributes,
                 callee.Method.ReturnType,
-                callee.Parameters.Select(t => t.Type).ToArray());
+                callee.Parameters.Select(t => t.Type).ToArray()
+            );
 
             GenericTypeParameterBuilder[] typeParamsMethod = null;
             if (methodGenericShape != GenericShape.NotGeneric)
@@ -244,7 +292,7 @@ namespace ABIStress
             g.Emit(OpCodes.Ret);
             Type calleeTypeOpen = tb.CreateType();
             Type calleeType;
-            switch(typeGenericShape)
+            switch (typeGenericShape)
             {
                 case GenericShape.NotGeneric:
                     calleeType = calleeTypeOpen;
@@ -285,14 +333,21 @@ namespace ABIStress
             }
             else
             {
-                targetMethodToCallDel = targetMethod.CreateDelegate(delegateType, Activator.CreateInstance(calleeType, magicNumberEmbeddedInObject));
+                targetMethodToCallDel = targetMethod.CreateDelegate(
+                    delegateType,
+                    Activator.CreateInstance(calleeType, magicNumberEmbeddedInObject)
+                );
             }
 
             GCHandle gchTargetMethod = GCHandle.Alloc(targetMethodToCallDel);
 
             // CALLER Dynamic method
             DynamicMethod caller = new DynamicMethod(
-            callerName, typeof(int), pms.Select(t => t.Type).ToArray(), typeof(Program).Module);
+                callerName,
+                typeof(int),
+                pms.Select(t => t.Type).ToArray(),
+                typeof(Program).Module
+            );
 
             g = caller.GetILGenerator();
 
@@ -300,7 +355,11 @@ namespace ABIStress
             List<Value> args = GenCallerToCalleeArgs(pms, callee.Parameters, rand);
 
             if (Config.Verbose)
-                EmitDumpValues("Caller's incoming args", g, pms.Select((p, i) => new ArgValue(p, i)));
+                EmitDumpValues(
+                    "Caller's incoming args",
+                    g,
+                    pms.Select((p, i) => new ArgValue(p, i))
+                );
 
             if (Config.Verbose)
                 EmitDumpValues($"Caller's args to {callerName} call", g, args);
@@ -324,19 +383,28 @@ namespace ABIStress
             // ret
             g.Emit(OpCodes.Ret);
 
-            (object callerResult, object calleeResult) = InvokeCallerCallee(caller, pms, callee.Method, args, rand);
+            (object callerResult, object calleeResult) = InvokeCallerCallee(
+                caller,
+                pms,
+                callee.Method,
+                args,
+                rand
+            );
 
             gchCallee.Free();
             gchTargetMethod.Free();
             if (callerResult.Equals(calleeResult))
                 return true;
 
-            Console.WriteLine("Mismatch in stub call: expected {0}, got {1}", calleeResult, callerResult);
+            Console.WriteLine(
+                "Mismatch in stub call: expected {0}, got {1}",
+                calleeResult,
+                callerResult
+            );
             Console.WriteLine(callerName);
             WriteSignature(caller);
             WriteSignature(callee.Method);
             return false;
-
         }
     }
 }

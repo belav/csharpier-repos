@@ -11,15 +11,16 @@ using Microsoft.CodeAnalysis.UseObjectInitializer;
 namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseObjectInitializerDiagnosticAnalyzer :
-        AbstractUseObjectInitializerDiagnosticAnalyzer<
-            SyntaxKind,
-            ExpressionSyntax,
-            StatementSyntax,
-            ObjectCreationExpressionSyntax,
-            MemberAccessExpressionSyntax,
-            ExpressionStatementSyntax,
-            VariableDeclaratorSyntax>
+    internal class CSharpUseObjectInitializerDiagnosticAnalyzer
+        : AbstractUseObjectInitializerDiagnosticAnalyzer<
+              SyntaxKind,
+              ExpressionSyntax,
+              StatementSyntax,
+              ObjectCreationExpressionSyntax,
+              MemberAccessExpressionSyntax,
+              ExpressionStatementSyntax,
+              VariableDeclaratorSyntax
+          >
     {
         protected override bool FadeOutOperatorToken => true;
 
@@ -36,7 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
         {
             // We don't want to offer this for using declarations because the way they are lifted means all
             // initialization is done before entering try block. For example
-            // 
+            //
             // using var c = new Disposable() { Goo = 2 };
             //
             // is lowered to:
@@ -57,8 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
             //
             // As can be seen, if initializing throws any kind of exception, the newly created instance will not
             // be disposed properly.
-            return node is not LocalDeclarationStatementSyntax localDecl ||
-                localDecl.UsingKeyword == default;
+            return node is not LocalDeclarationStatementSyntax localDecl
+                || localDecl.UsingKeyword == default;
         }
     }
 }

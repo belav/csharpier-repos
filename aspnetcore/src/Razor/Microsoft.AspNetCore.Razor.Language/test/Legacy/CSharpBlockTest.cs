@@ -12,7 +12,7 @@ public class CSharpBlockTest : ParserTestBase
     public void CSharpBlock_SingleLineControlFlowStatement_Error()
     {
         ParseDocumentTest(
-@"@{
+            @"@{
     var time = DateTime.Now;
     if (time.ToBinary() % 2 == 0) <p>The time: @time</p>
 
@@ -24,37 +24,40 @@ public class CSharpBlockTest : ParserTestBase
         @: <p>The time: @time</p>
 
     if (time.ToBinary() % 5 == 0) @@SomeGitHubUserName <strong>Hi!</strong>
-}");
+}"
+        );
     }
 
     [Fact]
     public void CSharpBlock_SingleLineControlFlowStatement()
     {
         ParseDocumentTest(
-@"@{
+            @"@{
     var time = DateTime.Now;
     if (time.ToBinary() % 2 == 0) @time
-}");
+}"
+        );
     }
 
     [Fact]
     public void LocalFunctionsWithRazor()
     {
         ParseDocumentTest(
-@"@{
+            @"@{
     void Foo() 
     {
         var time = DateTime.Now
         <strong>Hello the time is @time</strong>
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public void LocalFunctionsWithGenerics()
     {
         ParseDocumentTest(
-@"@{
+            @"@{
     void Foo()
     {
         <strong>Hello the time is @{ DisplayCount(new List<string>()); }</strong>
@@ -64,7 +67,8 @@ public class CSharpBlockTest : ParserTestBase
     {
         <text>The count is something.Count</text>
     }
-}");
+}"
+        );
     }
 
     [Fact]
@@ -83,10 +87,12 @@ public class CSharpBlockTest : ParserTestBase
     public void BalancingBracketsIgnoresStringLiteralCharactersAndBrackets()
     {
         // BalancingBracketsIgnoresStringLiteralCharactersAndBracketsInsideSingleLineComments
-        ParseDocumentTest(@"@if(foo) {
+        ParseDocumentTest(
+            @"@if(foo) {
     // bar } "" baz '
     zoop();
-}");
+}"
+        );
     }
 
     [Fact]
@@ -102,7 +108,8 @@ public class CSharpBlockTest : ParserTestBase
             @"@if(foo) {
     /* bar } "" */ ' baz } '
     zoop();
-}");
+}"
+        );
     }
 
     [Fact]
@@ -110,7 +117,8 @@ public class CSharpBlockTest : ParserTestBase
     {
         // ParseBlockSkipsParenthesisedExpressionAndThenBalancesBracesIfFirstIdentifierIsForKeyword
         ParseDocumentTest(
-            "@for(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }");
+            "@for(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }"
+        );
     }
 
     [Fact]
@@ -118,7 +126,8 @@ public class CSharpBlockTest : ParserTestBase
     {
         // ParseBlockSkipsParenthesisedExpressionAndThenBalancesBracesIfFirstIdentifierIsForeachKeyword
         ParseDocumentTest(
-            "@foreach(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }");
+            "@foreach(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }"
+        );
     }
 
     [Fact]
@@ -126,7 +135,8 @@ public class CSharpBlockTest : ParserTestBase
     {
         // ParseBlockSkipsParenthesisedExpressionAndThenBalancesBracesIfFirstIdentifierIsWhileKeyword
         ParseDocumentTest(
-            "@while(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }");
+            "@while(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }"
+        );
     }
 
     [Fact]
@@ -134,14 +144,16 @@ public class CSharpBlockTest : ParserTestBase
     {
         // ParseBlockSkipsParenthesisedExpressionAndThenBalancesBracesIfFirstIdentifierIsUsingKeywordFollowedByParen
         ParseDocumentTest(
-            "@using(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }");
+            "@using(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }"
+        );
     }
 
     [Fact]
     public void SupportsUsingsNestedWithinOtherBlocks()
     {
         ParseDocumentTest(
-            "@if(foo) { using(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); } }");
+            "@if(foo) { using(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); } }"
+        );
     }
 
     [Fact]
@@ -149,7 +161,8 @@ public class CSharpBlockTest : ParserTestBase
     {
         // ParseBlockSkipsParenthesisedExpressionAndThenBalancesBracesIfFirstIdentifierIsIfKeywordWithNoElseBranches
         ParseDocumentTest(
-            "@if(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }");
+            "@if(int i = 0; i < 10; new Foo { Bar = \"baz\" }) { Debug.WriteLine(@\"foo } bar\"); }"
+        );
     }
 
     [Fact]
@@ -167,36 +180,36 @@ public class CSharpBlockTest : ParserTestBase
     [Fact]
     public void SupportsBlockCommentBetweenIfAndElseClause()
     {
-        ParseDocumentTest(
-            "@if(foo) { bar(); } /* Foo */ /* Bar */ else { baz(); }");
+        ParseDocumentTest("@if(foo) { bar(); } /* Foo */ /* Bar */ else { baz(); }");
     }
 
     [Fact]
     public void SupportsRazorCommentBetweenIfAndElseClause()
     {
-        RunRazorCommentBetweenClausesTest(
-            "@if(foo) { bar(); } ", " else { baz(); }");
+        RunRazorCommentBetweenClausesTest("@if(foo) { bar(); } ", " else { baz(); }");
     }
 
     [Fact]
     public void SupportsBlockCommentBetweenElseIfAndElseClause()
     {
         ParseDocumentTest(
-            "@if(foo) { bar(); } else if(bar) { baz(); } /* Foo */ /* Bar */ else { biz(); }");
+            "@if(foo) { bar(); } else if(bar) { baz(); } /* Foo */ /* Bar */ else { biz(); }"
+        );
     }
 
     [Fact]
     public void SupportsRazorCommentBetweenElseIfAndElseClause()
     {
         RunRazorCommentBetweenClausesTest(
-            "@if(foo) { bar(); } else if(bar) { baz(); } ", " else { baz(); }");
+            "@if(foo) { bar(); } else if(bar) { baz(); } ",
+            " else { baz(); }"
+        );
     }
 
     [Fact]
     public void SupportsBlockCommentBetweenIfAndElseIfClause()
     {
-        ParseDocumentTest(
-            "if(foo) { bar(); } /* Foo */ /* Bar */ else if(bar) { baz(); }");
+        ParseDocumentTest("if(foo) { bar(); } /* Foo */ /* Bar */ else if(bar) { baz(); }");
     }
 
     [Fact]
@@ -208,37 +221,45 @@ public class CSharpBlockTest : ParserTestBase
     [Fact]
     public void SupportsLineCommentBetweenIfAndElseClause()
     {
-        ParseDocumentTest(@"@if(foo) { bar(); }
+        ParseDocumentTest(
+            @"@if(foo) { bar(); }
 // Foo
 // Bar
-else { baz(); }");
+else { baz(); }"
+        );
     }
 
     [Fact]
     public void SupportsLineCommentBetweenElseIfAndElseClause()
     {
-        ParseDocumentTest(@"@if(foo) { bar(); } else if(bar) { baz(); }
+        ParseDocumentTest(
+            @"@if(foo) { bar(); } else if(bar) { baz(); }
 // Foo
 // Bar
-else { biz(); }");
+else { biz(); }"
+        );
     }
 
     [Fact]
     public void SupportsLineCommentBetweenIfAndElseIfClause()
     {
-        ParseDocumentTest(@"@if(foo) { bar(); }
+        ParseDocumentTest(
+            @"@if(foo) { bar(); }
 // Foo
 // Bar
-else if(bar) { baz(); }");
+else if(bar) { baz(); }"
+        );
     }
 
     [Fact]
     public void ParsesElseIfBranchesOfIfStatement()
     {
-        const string ifStatement = @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string ifStatement =
+            @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""foo } bar"");
 }";
-        const string elseIfBranch = @" else if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string elseIfBranch =
+            @" else if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""bar } baz"");
 }";
         const string document = ifStatement + elseIfBranch;
@@ -249,23 +270,28 @@ else if(bar) { baz(); }");
     [Fact]
     public void ParsesMultipleElseIfBranchesOfIfStatement()
     {
-        const string ifStatement = @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string ifStatement =
+            @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""foo } bar"");
 }";
-        const string elseIfBranch = @" else if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string elseIfBranch =
+            @" else if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""bar } baz"");
 }";
-        const string document = ifStatement + elseIfBranch + elseIfBranch + elseIfBranch + elseIfBranch;
+        const string document =
+            ifStatement + elseIfBranch + elseIfBranch + elseIfBranch + elseIfBranch;
         ParseDocumentTest(document);
     }
 
     [Fact]
     public void ParsesMultipleElseIfBranchesOfIfStatementFollowedByOneElseBranch()
     {
-        const string ifStatement = @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string ifStatement =
+            @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""foo } bar"");
 }";
-        const string elseIfBranch = @" else if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string elseIfBranch =
+            @" else if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""bar } baz"");
 }";
         const string elseBranch = @" else { Debug.WriteLine(@""bar } baz""); }";
@@ -277,10 +303,12 @@ else if(bar) { baz(); }");
     [Fact]
     public void StopsParsingCodeAfterElseBranch()
     {
-        const string ifStatement = @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string ifStatement =
+            @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""foo } bar"");
 }";
-        const string elseIfBranch = @" else if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string elseIfBranch =
+            @" else if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""bar } baz"");
 }";
         const string elseBranch = @" else { Debug.WriteLine(@""bar } baz""); }";
@@ -292,7 +320,8 @@ else if(bar) { baz(); }");
     [Fact]
     public void StopsParsingIfIfStatementNotFollowedByElse()
     {
-        const string document = @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string document =
+            @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""foo } bar"");
 }";
 
@@ -304,7 +333,8 @@ else if(bar) { baz(); }");
     {
         // We don't want to be a full C# parser - If the else if is missing it's condition, the C# compiler
         // can handle that, we have all the info we need to keep parsing
-        const string ifBranch = @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
+        const string ifBranch =
+            @"@if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""foo } bar"");
 }";
         const string elseIfBranch = @" else if { foo(); }";
@@ -316,8 +346,7 @@ else if(bar) { baz(); }");
     [Fact]
     public void CorrectlyParsesDoWhileBlock()
     {
-        ParseDocumentTest(
-            "@do { var foo = bar; } while(foo != bar);");
+        ParseDocumentTest("@do { var foo = bar; } while(foo != bar);");
     }
 
     [Fact]
@@ -335,8 +364,7 @@ else if(bar) { baz(); }");
     [Fact]
     public void CorrectlyParsesDoWhileBlockMissingWhileConditionWithSemicolon()
     {
-        ParseDocumentTest(
-            "@do { var foo = bar; } while;");
+        ParseDocumentTest("@do { var foo = bar; } while;");
     }
 
     [Fact]
@@ -348,24 +376,24 @@ else if(bar) { baz(); }");
     [Fact]
     public void SupportsBlockCommentBetweenDoAndWhileClause()
     {
-        ParseDocumentTest(
-            "@do { var foo = bar; } /* Foo */ /* Bar */ while(true);");
+        ParseDocumentTest("@do { var foo = bar; } /* Foo */ /* Bar */ while(true);");
     }
 
     [Fact]
     public void SupportsLineCommentBetweenDoAndWhileClause()
     {
-        ParseDocumentTest(@"@do { var foo = bar; }
+        ParseDocumentTest(
+            @"@do { var foo = bar; }
 // Foo
 // Bar
-while(true);");
+while(true);"
+        );
     }
 
     [Fact]
     public void SupportsRazorCommentBetweenDoAndWhileClause()
     {
-        RunRazorCommentBetweenClausesTest(
-            "@do { var foo = bar; } ", " while(true);");
+        RunRazorCommentBetweenClausesTest("@do { var foo = bar; } ", " while(true);");
     }
 
     [Fact]
@@ -378,7 +406,8 @@ while(true);");
     public void SkipsExprThenBalancesBracesIfFirstIdentifierIsSwitchKeyword()
     {
         // ParseBlockSkipsParenthesisedExpressionAndThenBalancesBracesIfFirstIdentifierIsSwitchKeyword
-        ParseDocumentTest(@"@switch(foo) {
+        ParseDocumentTest(
+            @"@switch(foo) {
     case 0:
         break;
     case 1:
@@ -389,36 +418,33 @@ while(true);");
         return;
     default:
         return;
-}");
+}"
+        );
     }
 
     [Fact]
     public void ThenBalancesBracesIfFirstIdentifierIsLockKeyword()
     {
         // ParseBlockSkipsParenthesisedExpressionAndThenBalancesBracesIfFirstIdentifierIsLockKeyword
-        ParseDocumentTest(
-            "@lock(foo) { Debug.WriteLine(@\"foo } bar\"); }");
+        ParseDocumentTest("@lock(foo) { Debug.WriteLine(@\"foo } bar\"); }");
     }
 
     [Fact]
     public void HasErrorsIfNamespaceImportMissingSemicolon()
     {
-        ParseDocumentTest(
-            "@using Foo.Bar.Baz");
+        ParseDocumentTest("@using Foo.Bar.Baz");
     }
 
     [Fact]
     public void HasErrorsIfNamespaceAliasMissingSemicolon()
     {
-        ParseDocumentTest(
-            "@using Foo.Bar.Baz = FooBarBaz");
+        ParseDocumentTest("@using Foo.Bar.Baz = FooBarBaz");
     }
 
     [Fact]
     public void ParsesNamespaceImportWithSemicolonForUsingKeywordIfIsInValidFormat()
     {
-        ParseDocumentTest(
-            "@using Foo.Bar.Baz;");
+        ParseDocumentTest("@using Foo.Bar.Baz;");
     }
 
     [Fact]
@@ -436,8 +462,7 @@ while(true);");
     [Fact]
     public void ParsesNamespaceAliasWithSemicolonForUsingKeywordIfIsInValidFormat()
     {
-        ParseDocumentTest(
-            "@using FooBarBaz = FooBarBaz;");
+        ParseDocumentTest("@using FooBarBaz = FooBarBaz;");
     }
 
     [Fact]
@@ -483,14 +508,17 @@ while(true);");
     public void SupportsBlockCommentBetweenCatchAndFinallyClause()
     {
         ParseDocumentTest(
-            "@try { bar(); } catch(bar) { baz(); } /* Foo */ /* Bar */ finally { biz(); }");
+            "@try { bar(); } catch(bar) { baz(); } /* Foo */ /* Bar */ finally { biz(); }"
+        );
     }
 
     [Fact]
     public void SupportsRazorCommentBetweenCatchAndFinallyClause()
     {
         RunRazorCommentBetweenClausesTest(
-            "@try { bar(); } catch(bar) { baz(); } ", " finally { biz(); }");
+            "@try { bar(); } catch(bar) { baz(); } ",
+            " finally { biz(); }"
+        );
     }
 
     [Fact]
@@ -508,28 +536,34 @@ while(true);");
     [Fact]
     public void SupportsLineCommentBetweenTryAndFinallyClause()
     {
-        ParseDocumentTest(@"@try { bar(); }
+        ParseDocumentTest(
+            @"@try { bar(); }
 // Foo
 // Bar
-finally { baz(); }");
+finally { baz(); }"
+        );
     }
 
     [Fact]
     public void SupportsLineCommentBetweenCatchAndFinallyClause()
     {
-        ParseDocumentTest(@"@try { bar(); } catch(bar) { baz(); }
+        ParseDocumentTest(
+            @"@try { bar(); } catch(bar) { baz(); }
 // Foo
 // Bar
-finally { biz(); }");
+finally { biz(); }"
+        );
     }
 
     [Fact]
     public void SupportsLineCommentBetweenTryAndCatchClause()
     {
-        ParseDocumentTest(@"@try { bar(); }
+        ParseDocumentTest(
+            @"@try { bar(); }
 // Foo
 // Bar
-catch(bar) { baz(); }");
+catch(bar) { baz(); }"
+        );
     }
 
     [Fact]
@@ -541,10 +575,7 @@ catch(bar) { baz(); }");
     [Fact]
     public void SupportsMarkupWithinTryClause()
     {
-        RunSimpleWrappedMarkupTest(
-            prefix: "@try {",
-            markup: " <p>Foo</p> ",
-            suffix: "}");
+        RunSimpleWrappedMarkupTest(prefix: "@try {", markup: " <p>Foo</p> ", suffix: "}");
     }
 
     [Fact]
@@ -559,15 +590,17 @@ catch(bar) { baz(); }");
         RunSimpleWrappedMarkupTest(
             prefix: "@try { var foo = new { } } catch(Foo Bar Baz) {",
             markup: " <p>Foo</p> ",
-            suffix: "}");
+            suffix: "}"
+        );
     }
 
     [Fact]
     public void SupportsTryStatementWithMultipleCatchClause()
     {
         ParseDocumentTest(
-            "@try { var foo = new { } } catch(Foo Bar Baz) { var foo = new { } } catch(Foo Bar Baz) " +
-            "{ var foo = new { } } catch(Foo Bar Baz) { var foo = new { } }");
+            "@try { var foo = new { } } catch(Foo Bar Baz) { var foo = new { } } catch(Foo Bar Baz) "
+                + "{ var foo = new { } } catch(Foo Bar Baz) { var foo = new { } }"
+        );
     }
 
     [Fact]
@@ -580,10 +613,11 @@ catch(bar) { baz(); }");
     public void SupportsMarkupWithinAdditionalCatchClauses()
     {
         RunSimpleWrappedMarkupTest(
-            prefix: "@try { var foo = new { } } catch(Foo Bar Baz) { var foo = new { } } catch(Foo Bar Baz) " +
-            "{ var foo = new { } } catch(Foo Bar Baz) {",
+            prefix: "@try { var foo = new { } } catch(Foo Bar Baz) { var foo = new { } } catch(Foo Bar Baz) "
+                + "{ var foo = new { } } catch(Foo Bar Baz) {",
             markup: " <p>Foo</p> ",
-            suffix: "}");
+            suffix: "}"
+        );
     }
 
     [Fact]
@@ -598,7 +632,8 @@ catch(bar) { baz(); }");
         RunSimpleWrappedMarkupTest(
             prefix: "@try { var foo = new { } } finally {",
             markup: " <p>Foo</p> ",
-            suffix: "}");
+            suffix: "}"
+        );
     }
 
     [Fact]
@@ -662,16 +697,27 @@ catch(bar) { baz(); }");
     public void ParsersCanNestRecursively()
     {
         // Arrange
-        ParseDocumentTest("@foreach(var c in db.Categories) {" + Environment.NewLine
-                     + "            <div>" + Environment.NewLine
-                     + "                <h1>@c.Name</h1>" + Environment.NewLine
-                     + "                <ul>" + Environment.NewLine
-                     + "                    @foreach(var p in c.Products) {" + Environment.NewLine
-                     + "                        <li><a href=\"@Html.ActionUrl(\"Products\", \"Detail\", new { id = p.Id })\">@p.Name</a></li>" + Environment.NewLine
-                     + "                    }" + Environment.NewLine
-                     + "                </ul>" + Environment.NewLine
-                     + "            </div>" + Environment.NewLine
-                     + "        }");
+        ParseDocumentTest(
+            "@foreach(var c in db.Categories) {"
+                + Environment.NewLine
+                + "            <div>"
+                + Environment.NewLine
+                + "                <h1>@c.Name</h1>"
+                + Environment.NewLine
+                + "                <ul>"
+                + Environment.NewLine
+                + "                    @foreach(var p in c.Products) {"
+                + Environment.NewLine
+                + "                        <li><a href=\"@Html.ActionUrl(\"Products\", \"Detail\", new { id = p.Id })\">@p.Name</a></li>"
+                + Environment.NewLine
+                + "                    }"
+                + Environment.NewLine
+                + "                </ul>"
+                + Environment.NewLine
+                + "            </div>"
+                + Environment.NewLine
+                + "        }"
+        );
     }
 
     [Fact]
@@ -705,7 +751,8 @@ catch(bar) { baz(); }");
     [Fact]
     public void WithDoubleTransitionWithExpressionBlock_DoesNotThrow()
     {
-        var input = "@{<span foo='@@@(2+3)' bar='@(2+3)@@@DateTime.Now' baz='@DateTime.Now@@' bat='@DateTime.Now @@' zoo='@@@DateTime.Now' />}";
+        var input =
+            "@{<span foo='@@@(2+3)' bar='@(2+3)@@@DateTime.Now' baz='@DateTime.Now@@' bat='@DateTime.Now @@' zoo='@@@DateTime.Now' />}";
         ParseDocumentTest(input);
     }
 
@@ -719,7 +766,8 @@ catch(bar) { baz(); }");
     [Fact]
     public void WithDoubleTransitionInRegex_DoesNotThrow()
     {
-        var input = @"@{<span foo=""/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@@[a-z0-9]([a-z0-9-]*[a-z0-9])?\.([a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i"" />}";
+        var input =
+            @"@{<span foo=""/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@@[a-z0-9]([a-z0-9-]*[a-z0-9])?\.([a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i"" />}";
         ParseDocumentTest(input);
     }
 
@@ -735,7 +783,11 @@ catch(bar) { baz(); }");
         ParseDocumentTest("@{<span foo='@ @' />}");
     }
 
-    private void RunRazorCommentBetweenClausesTest(string preComment, string postComment, AcceptedCharactersInternal acceptedCharacters = AcceptedCharactersInternal.Any)
+    private void RunRazorCommentBetweenClausesTest(
+        string preComment,
+        string postComment,
+        AcceptedCharactersInternal acceptedCharacters = AcceptedCharactersInternal.Any
+    )
     {
         ParseDocumentTest(preComment + "@* Foo *@ @* Bar *@" + postComment);
     }

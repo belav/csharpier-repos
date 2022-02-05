@@ -98,7 +98,9 @@ namespace System.Net.Tests
         {
             WebHeaderCollection w = new WebHeaderCollection();
             w[HttpRequestHeader.Accept] = "text/json";
-            Assert.Throws<InvalidOperationException>(() => w[HttpResponseHeader.ContentLength] = "123");
+            Assert.Throws<InvalidOperationException>(
+                () => w[HttpResponseHeader.ContentLength] = "123"
+            );
         }
 
         [Fact]
@@ -106,7 +108,9 @@ namespace System.Net.Tests
         {
             WebHeaderCollection w = new WebHeaderCollection();
             w[HttpResponseHeader.ContentLength] = "123";
-            Assert.Throws<InvalidOperationException>(() => w[HttpRequestHeader.Accept] = "text/json");
+            Assert.Throws<InvalidOperationException>(
+                () => w[HttpRequestHeader.Accept] = "text/json"
+            );
         }
 
         [Fact]
@@ -141,7 +145,8 @@ namespace System.Net.Tests
             AssertExtensions.Throws<ArgumentNullException>("name", () => w[name] = "test");
         }
 
-        public static object[][] InvalidNames = {
+        public static object[][] InvalidNames =
+        {
             new object[] { "(" },
             new object[] { "\u1234" },
             new object[] { "\u0019" }
@@ -154,7 +159,8 @@ namespace System.Net.Tests
             AssertExtensions.Throws<ArgumentException>("name", () => w[name] = "test");
         }
 
-        public static object[][] InvalidValues = {
+        public static object[][] InvalidValues =
+        {
             new object[] { "value1\rvalue2\r" },
             new object[] { "value1\nvalue2\r" },
             new object[] { "value1\u007fvalue2" },
@@ -169,7 +175,8 @@ namespace System.Net.Tests
             AssertExtensions.Throws<ArgumentException>("value", () => w["custom"] = value);
         }
 
-        public static object[][] ValidValues = {
+        public static object[][] ValidValues =
+        {
             new object[] { null },
             new object[] { "" },
             new object[] { "value1\r\n" },
@@ -207,10 +214,7 @@ namespace System.Net.Tests
         [InlineData("nAMe")]
         public void Remove_HeaderExists_RemovesFromCollection(string name)
         {
-            var headers = new WebHeaderCollection()
-            {
-                { "name", "value" }
-            };
+            var headers = new WebHeaderCollection() { { "name", "value" } };
             headers.Remove(name);
             Assert.Empty(headers);
 
@@ -310,7 +314,12 @@ namespace System.Net.Tests
         public void Getter_Success()
         {
             string[] keys = { "Accept", "uPgRaDe", "Custom" };
-            string[] values = { "text/plain, text/html", " HTTP/2.0 , SHTTP/1.3,  , RTA/x11 ", "\"xyzzy\", \"r2d2xxxx\", \"c3piozzzz\"" };
+            string[] values =
+            {
+                "text/plain, text/html",
+                " HTTP/2.0 , SHTTP/1.3,  , RTA/x11 ",
+                "\"xyzzy\", \"r2d2xxxx\", \"c3piozzzz\""
+            };
             WebHeaderCollection w = new WebHeaderCollection();
 
             for (int i = 0; i < keys.Length; ++i)
@@ -353,9 +362,7 @@ namespace System.Net.Tests
             WebHeaderCollection w = new WebHeaderCollection();
             w["Accept"] = "text/plain";
             w["Content-Length"] = "123";
-            Assert.Equal(
-                "Accept: text/plain\r\nContent-Length: 123\r\n\r\n",
-                w.ToString());
+            Assert.Equal("Accept: text/plain\r\nContent-Length: 123\r\n\r\n", w.ToString());
         }
 
         [Fact]
@@ -443,10 +450,7 @@ namespace System.Net.Tests
         [MemberData(nameof(Add_Value_TestData))]
         public void Add_ValidValue_Success(string value, string expectedValue)
         {
-            var headers = new WebHeaderCollection
-            {
-                { "name", value }
-            };
+            var headers = new WebHeaderCollection { { "name", value } };
 
             Assert.Equal(expectedValue, headers["name"]);
         }
@@ -469,7 +473,10 @@ namespace System.Net.Tests
         public void Add_NullName_ThrowsArgumentNullException()
         {
             var headers = new WebHeaderCollection();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => headers.Add(null, "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => headers.Add(null, "value")
+            );
         }
 
         [Theory]
@@ -528,9 +535,12 @@ namespace System.Net.Tests
 
         private const string HeaderType = "Set-Cookie";
         private const string Cookie1 = "locale=en; path=/; expires=Fri, 05 Oct 2018 06:28:57 -0000";
-        private const string Cookie2 = "uuid=123abc; path=/; expires=Fri, 05 Oct 2018 06:28:57 -0000; secure; HttpOnly";
-        private const string Cookie3 = "country=US; path=/; expires=Fri, 05 Oct 2018 06:28:57 -0000";
-        private const string Cookie4 = "m_session=session1; path=/; expires=Sun, 08 Oct 2017 00:28:57 -0000; secure; HttpOnly";
+        private const string Cookie2 =
+            "uuid=123abc; path=/; expires=Fri, 05 Oct 2018 06:28:57 -0000; secure; HttpOnly";
+        private const string Cookie3 =
+            "country=US; path=/; expires=Fri, 05 Oct 2018 06:28:57 -0000";
+        private const string Cookie4 =
+            "m_session=session1; path=/; expires=Sun, 08 Oct 2017 00:28:57 -0000; secure; HttpOnly";
 
         private const string Cookie1NoAttribute = "locale=en";
         private const string Cookie2NoAttribute = "uuid=123abc";
@@ -591,7 +601,16 @@ namespace System.Net.Tests
         public void GetValues_SingleSetCookieHeaderWithMultipleCookiesWithNoAttribute_Success()
         {
             WebHeaderCollection w = new WebHeaderCollection();
-            w.Add(HeaderType, Cookie1NoAttribute + "," + Cookie2NoAttribute + "," + Cookie3NoAttribute + "," + Cookie4NoAttribute);
+            w.Add(
+                HeaderType,
+                Cookie1NoAttribute
+                    + ","
+                    + Cookie2NoAttribute
+                    + ","
+                    + Cookie3NoAttribute
+                    + ","
+                    + Cookie4NoAttribute
+            );
 
             string[] values = w.GetValues(HeaderType);
             Assert.Equal(4, values.Length);
@@ -699,7 +718,7 @@ namespace System.Net.Tests
             WebHeaderCollection w = new WebHeaderCollection();
             w.Add(HttpRequestHeader.ContentLength, "10");
             w.Add(HttpRequestHeader.ContentType, "text/html");
-            Assert.Equal(2,w.Count);
+            Assert.Equal(2, w.Count);
         }
 
         [Fact]
@@ -717,8 +736,14 @@ namespace System.Net.Tests
             WebHeaderCollection w = new WebHeaderCollection();
             char[] arr = new char[ushort.MaxValue + 1];
             string maxStr = new string(arr);
-            AssertExtensions.Throws<ArgumentException>("value", () => w.Add(HttpRequestHeader.ContentLength,maxStr));
-            AssertExtensions.Throws<ArgumentException>("value", () => w.Add("ContentLength", maxStr));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => w.Add(HttpRequestHeader.ContentLength, maxStr)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => w.Add("ContentLength", maxStr)
+            );
         }
 
         [Fact]

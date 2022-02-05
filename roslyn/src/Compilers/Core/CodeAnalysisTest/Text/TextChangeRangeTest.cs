@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Ctor1()
         {
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => { var notUsed = new TextChangeRange(new TextSpan(), -1); });
+                () =>
+                {
+                    var notUsed = new TextChangeRange(new TextSpan(), -1);
+                }
+            );
         }
 
         [Fact]
@@ -36,9 +40,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (left, right) => left == right,
                 (left, right) => left != right,
                 EqualityUnit.Create(new TextChangeRange()).WithEqualValues(new TextChangeRange()),
-                EqualityUnit.Create(new TextChangeRange(new TextSpan(42, 2), 13)).WithEqualValues(new TextChangeRange(new TextSpan(42, 2), 13)),
-                EqualityUnit.Create(new TextChangeRange(new TextSpan(42, 2), 13)).WithNotEqualValues(new TextChangeRange(new TextSpan(42, 2), 5)),
-                EqualityUnit.Create(new TextChangeRange(new TextSpan(42, 2), 13)).WithNotEqualValues(new TextChangeRange(new TextSpan(42, 4), 13)));
+                EqualityUnit
+                    .Create(new TextChangeRange(new TextSpan(42, 2), 13))
+                    .WithEqualValues(new TextChangeRange(new TextSpan(42, 2), 13)),
+                EqualityUnit
+                    .Create(new TextChangeRange(new TextSpan(42, 2), 13))
+                    .WithNotEqualValues(new TextChangeRange(new TextSpan(42, 2), 5)),
+                EqualityUnit
+                    .Create(new TextChangeRange(new TextSpan(42, 2), 13))
+                    .WithNotEqualValues(new TextChangeRange(new TextSpan(42, 4), 13))
+            );
         }
     }
 }

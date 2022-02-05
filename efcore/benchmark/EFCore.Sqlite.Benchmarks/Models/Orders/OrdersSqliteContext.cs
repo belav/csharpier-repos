@@ -10,8 +10,11 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
         private readonly string _connectionString;
         private readonly bool _disableBatching;
 
-        public OrdersSqliteContext(string connectionString, IServiceProvider serviceProvider = null, bool disableBatching = false)
-            : base(serviceProvider)
+        public OrdersSqliteContext(
+            string connectionString,
+            IServiceProvider serviceProvider = null,
+            bool disableBatching = false
+        ) : base(serviceProvider)
         {
             _connectionString = connectionString;
             _disableBatching = disableBatching;
@@ -20,10 +23,15 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
         protected override void ConfigureProvider(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(
-                _connectionString, b =>
+                _connectionString,
+                b =>
                 {
-                    if (_disableBatching) { b.MaxBatchSize(1); }
-                });
+                    if (_disableBatching)
+                    {
+                        b.MaxBatchSize(1);
+                    }
+                }
+            );
         }
     }
 }

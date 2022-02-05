@@ -17,7 +17,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_deleted()
         {
-            return TrackEntitiesTest((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+            return TrackEntitiesTest(
+                (c, e) => c.Remove(e),
+                (c, e) => c.Remove(e),
+                EntityState.Deleted
+            );
         }
 
         [ConditionalFact]
@@ -29,36 +33,53 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_new_entities_to_context_with_graph_method_async()
         {
-            return TrackEntitiesTest((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+            return TrackEntitiesTest(
+                (c, e) => c.AddAsync(e),
+                (c, e) => c.AddAsync(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_attached_with_graph_method()
         {
-            return TrackEntitiesTest((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Unchanged);
+            return TrackEntitiesTest(
+                (c, e) => c.Attach(e),
+                (c, e) => c.Attach(e),
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_updated_with_graph_method()
         {
-            return TrackEntitiesTest((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Modified);
+            return TrackEntitiesTest(
+                (c, e) => c.Update(e),
+                (c, e) => c.Update(e),
+                EntityState.Modified
+            );
         }
 
         private static Task TrackEntitiesTest(
             Func<DbContext, Category, EntityEntry<Category>> categoryAdder,
             Func<DbContext, Product, EntityEntry<Product>> productAdder,
-            EntityState expectedState)
-            => TrackEntitiesTest(
+            EntityState expectedState
+        ) =>
+            TrackEntitiesTest(
                 (c, e) => new ValueTask<EntityEntry<Category>>(categoryAdder(c, e)),
                 (c, e) => new ValueTask<EntityEntry<Product>>(productAdder(c, e)),
-                expectedState);
+                expectedState
+            );
 
         private static async Task TrackEntitiesTest(
             Func<DbContext, Category, ValueTask<EntityEntry<Category>>> categoryAdder,
             Func<DbContext, Product, ValueTask<EntityEntry<Product>>> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var relatedDependent = new Product
             {
                 Id = 1,
@@ -95,17 +116,32 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(principal, principalEntry.Entity);
             Assert.Equal(expectedState, principalEntry.State);
             Assert.Same(relatedPrincipal, relatedPrincipalEntry.Entity);
-            Assert.Equal(expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState, relatedPrincipalEntry.State);
+            Assert.Equal(
+                expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState,
+                relatedPrincipalEntry.State
+            );
 
             Assert.Same(relatedDependent, relatedDependentEntry.Entity);
             Assert.Equal(expectedState, relatedDependentEntry.State);
             Assert.Same(dependent, dependentEntry.Entity);
             Assert.Equal(expectedState, dependentEntry.State);
 
-            Assert.Same(principalEntry.GetInfrastructure(), context.Entry(principal).GetInfrastructure());
-            Assert.Same(relatedPrincipalEntry.GetInfrastructure(), context.Entry(relatedPrincipal).GetInfrastructure());
-            Assert.Same(relatedDependentEntry.GetInfrastructure(), context.Entry(relatedDependent).GetInfrastructure());
-            Assert.Same(dependentEntry.GetInfrastructure(), context.Entry(dependent).GetInfrastructure());
+            Assert.Same(
+                principalEntry.GetInfrastructure(),
+                context.Entry(principal).GetInfrastructure()
+            );
+            Assert.Same(
+                relatedPrincipalEntry.GetInfrastructure(),
+                context.Entry(relatedPrincipal).GetInfrastructure()
+            );
+            Assert.Same(
+                relatedDependentEntry.GetInfrastructure(),
+                context.Entry(relatedDependent).GetInfrastructure()
+            );
+            Assert.Same(
+                dependentEntry.GetInfrastructure(),
+                context.Entry(dependent).GetInfrastructure()
+            );
         }
 
         [ConditionalFact]
@@ -117,43 +153,60 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_multiple_new_entities_to_context_async()
         {
-            return TrackMultipleEntitiesTest((c, e) => c.AddRangeAsync(e[0], e[1]), EntityState.Added);
+            return TrackMultipleEntitiesTest(
+                (c, e) => c.AddRangeAsync(e[0], e[1]),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_to_context_to_be_attached()
         {
-            return TrackMultipleEntitiesTest((c, e) => c.AttachRange(e[0], e[1]), EntityState.Unchanged);
+            return TrackMultipleEntitiesTest(
+                (c, e) => c.AttachRange(e[0], e[1]),
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_to_context_to_be_updated()
         {
-            return TrackMultipleEntitiesTest((c, e) => c.UpdateRange(e[0], e[1]), EntityState.Modified);
+            return TrackMultipleEntitiesTest(
+                (c, e) => c.UpdateRange(e[0], e[1]),
+                EntityState.Modified
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_to_context_to_be_deleted()
         {
-            return TrackMultipleEntitiesTest((c, e) => c.RemoveRange(e[0], e[1]), EntityState.Deleted);
+            return TrackMultipleEntitiesTest(
+                (c, e) => c.RemoveRange(e[0], e[1]),
+                EntityState.Deleted
+            );
         }
 
         private static Task TrackMultipleEntitiesTest(
             Action<DbContext, object[]> adder,
-            EntityState expectedState)
-            => TrackMultipleEntitiesTest(
+            EntityState expectedState
+        ) =>
+            TrackMultipleEntitiesTest(
                 (c, e) =>
                 {
                     adder(c, e);
                     return Task.FromResult(0);
                 },
-                expectedState);
+                expectedState
+            );
 
         private static async Task TrackMultipleEntitiesTest(
             Func<DbContext, object[], Task> adder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var relatedDependent = new Product
             {
                 Id = 1,
@@ -187,7 +240,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(expectedState, context.Entry(principal).State);
             Assert.Same(relatedPrincipal, context.Entry(relatedPrincipal).Entity);
             Assert.Equal(
-                expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState, context.Entry(relatedPrincipal).State);
+                expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState,
+                context.Entry(relatedPrincipal).State
+            );
 
             Assert.Same(relatedDependent, context.Entry(relatedDependent).Entity);
             Assert.Equal(expectedState, context.Entry(relatedDependent).State);
@@ -198,49 +253,74 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_existing_entities_with_default_value_to_context_to_be_deleted()
         {
-            return TrackEntitiesDefaultValueTest((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+            return TrackEntitiesDefaultValueTest(
+                (c, e) => c.Remove(e),
+                (c, e) => c.Remove(e),
+                EntityState.Deleted
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_new_entities_with_default_value_to_context_with_graph_method()
         {
-            return TrackEntitiesDefaultValueTest((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
+            return TrackEntitiesDefaultValueTest(
+                (c, e) => c.Add(e),
+                (c, e) => c.Add(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_new_entities_with_default_value_to_context_with_graph_method_async()
         {
-            return TrackEntitiesDefaultValueTest((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+            return TrackEntitiesDefaultValueTest(
+                (c, e) => c.AddAsync(e),
+                (c, e) => c.AddAsync(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_with_default_value_to_context_to_be_attached_with_graph_method()
         {
-            return TrackEntitiesDefaultValueTest((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Added);
+            return TrackEntitiesDefaultValueTest(
+                (c, e) => c.Attach(e),
+                (c, e) => c.Attach(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_with_default_value_to_context_to_be_updated_with_graph_method()
         {
-            return TrackEntitiesDefaultValueTest((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Added);
+            return TrackEntitiesDefaultValueTest(
+                (c, e) => c.Update(e),
+                (c, e) => c.Update(e),
+                EntityState.Added
+            );
         }
 
         private static Task TrackEntitiesDefaultValueTest(
             Func<DbContext, Category, EntityEntry<Category>> categoryAdder,
             Func<DbContext, Product, EntityEntry<Product>> productAdder,
-            EntityState expectedState)
-            => TrackEntitiesDefaultValueTest(
+            EntityState expectedState
+        ) =>
+            TrackEntitiesDefaultValueTest(
                 (c, e) => new ValueTask<EntityEntry<Category>>(categoryAdder(c, e)),
                 (c, e) => new ValueTask<EntityEntry<Product>>(productAdder(c, e)),
-                expectedState);
+                expectedState
+            );
 
         // Issue #3890
         private static async Task TrackEntitiesDefaultValueTest(
             Func<DbContext, Category, ValueTask<EntityEntry<Category>>> categoryAdder,
             Func<DbContext, Product, ValueTask<EntityEntry<Product>>> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category1 = new Category { Id = 0, Name = "Beverages" };
             var product1 = new Product
             {
@@ -261,47 +341,72 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(product1, productEntry1.Entity);
             Assert.Equal(expectedState, productEntry1.State);
 
-            Assert.Same(categoryEntry1.GetInfrastructure(), context.Entry(category1).GetInfrastructure());
-            Assert.Same(productEntry1.GetInfrastructure(), context.Entry(product1).GetInfrastructure());
+            Assert.Same(
+                categoryEntry1.GetInfrastructure(),
+                context.Entry(category1).GetInfrastructure()
+            );
+            Assert.Same(
+                productEntry1.GetInfrastructure(),
+                context.Entry(product1).GetInfrastructure()
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_new_entities_with_default_values_to_context()
         {
-            return TrackMultipleEntitiesDefaultValuesTest((c, e) => c.AddRange(e[0]), (c, e) => c.AddRange(e[0]), EntityState.Added);
+            return TrackMultipleEntitiesDefaultValuesTest(
+                (c, e) => c.AddRange(e[0]),
+                (c, e) => c.AddRange(e[0]),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_new_entities_with_default_values_to_context_async()
         {
             return TrackMultipleEntitiesDefaultValuesTest(
-                (c, e) => c.AddRangeAsync(e[0]), (c, e) => c.AddRangeAsync(e[0]), EntityState.Added);
+                (c, e) => c.AddRangeAsync(e[0]),
+                (c, e) => c.AddRangeAsync(e[0]),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_attached()
         {
-            return TrackMultipleEntitiesDefaultValuesTest((c, e) => c.AttachRange(e[0]), (c, e) => c.AttachRange(e[0]), EntityState.Added);
+            return TrackMultipleEntitiesDefaultValuesTest(
+                (c, e) => c.AttachRange(e[0]),
+                (c, e) => c.AttachRange(e[0]),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_updated()
         {
-            return TrackMultipleEntitiesDefaultValuesTest((c, e) => c.UpdateRange(e[0]), (c, e) => c.UpdateRange(e[0]), EntityState.Added);
+            return TrackMultipleEntitiesDefaultValuesTest(
+                (c, e) => c.UpdateRange(e[0]),
+                (c, e) => c.UpdateRange(e[0]),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_deleted()
         {
             return TrackMultipleEntitiesDefaultValuesTest(
-                (c, e) => c.RemoveRange(e[0]), (c, e) => c.RemoveRange(e[0]), EntityState.Deleted);
+                (c, e) => c.RemoveRange(e[0]),
+                (c, e) => c.RemoveRange(e[0]),
+                EntityState.Deleted
+            );
         }
 
         private static Task TrackMultipleEntitiesDefaultValuesTest(
             Action<DbContext, object[]> categoryAdder,
             Action<DbContext, object[]> productAdder,
-            EntityState expectedState)
-            => TrackMultipleEntitiesDefaultValuesTest(
+            EntityState expectedState
+        ) =>
+            TrackMultipleEntitiesDefaultValuesTest(
                 (c, e) =>
                 {
                     categoryAdder(c, e);
@@ -312,15 +417,19 @@ namespace Microsoft.EntityFrameworkCore
                     productAdder(c, e);
                     return Task.FromResult(0);
                 },
-                expectedState);
+                expectedState
+            );
 
         // Issue #3890
         private static async Task TrackMultipleEntitiesDefaultValuesTest(
             Func<DbContext, object[], Task> categoryAdder,
             Func<DbContext, object[], Task> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category1 = new Category { Id = 0, Name = "Beverages" };
             var product1 = new Product
             {
@@ -351,7 +460,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_add_no_new_entities_to_context_async()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             await context.AddRangeAsync();
             await context.AddRangeAsync();
             Assert.Empty(context.ChangeTracker.Entries());
@@ -375,9 +486,14 @@ namespace Microsoft.EntityFrameworkCore
             TrackNoEntitiesTest(c => c.RemoveRange(), c => c.RemoveRange());
         }
 
-        private static void TrackNoEntitiesTest(Action<DbContext> categoryAdder, Action<DbContext> productAdder)
+        private static void TrackNoEntitiesTest(
+            Action<DbContext> categoryAdder,
+            Action<DbContext> productAdder
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             categoryAdder(context);
             productAdder(context);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -386,48 +502,73 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_deleted_non_generic()
         {
-            return TrackEntitiesTestNonGeneric((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+            return TrackEntitiesTestNonGeneric(
+                (c, e) => c.Remove(e),
+                (c, e) => c.Remove(e),
+                EntityState.Deleted
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_new_entities_to_context_non_generic_graph()
         {
-            return TrackEntitiesTestNonGeneric((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+            return TrackEntitiesTestNonGeneric(
+                (c, e) => c.AddAsync(e),
+                (c, e) => c.AddAsync(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_new_entities_to_context_non_generic_graph_async()
         {
-            return TrackEntitiesTestNonGeneric((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
+            return TrackEntitiesTestNonGeneric(
+                (c, e) => c.Add(e),
+                (c, e) => c.Add(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_attached_non_generic_graph()
         {
-            return TrackEntitiesTestNonGeneric((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Unchanged);
+            return TrackEntitiesTestNonGeneric(
+                (c, e) => c.Attach(e),
+                (c, e) => c.Attach(e),
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_updated_non_generic_graph()
         {
-            return TrackEntitiesTestNonGeneric((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Modified);
+            return TrackEntitiesTestNonGeneric(
+                (c, e) => c.Update(e),
+                (c, e) => c.Update(e),
+                EntityState.Modified
+            );
         }
 
         private static Task TrackEntitiesTestNonGeneric(
             Func<DbContext, object, EntityEntry> categoryAdder,
             Func<DbContext, object, EntityEntry> productAdder,
-            EntityState expectedState)
-            => TrackEntitiesTestNonGeneric(
+            EntityState expectedState
+        ) =>
+            TrackEntitiesTestNonGeneric(
                 (c, e) => new ValueTask<EntityEntry>(categoryAdder(c, e)),
                 (c, e) => new ValueTask<EntityEntry>(productAdder(c, e)),
-                expectedState);
+                expectedState
+            );
 
         private static async Task TrackEntitiesTestNonGeneric(
             Func<DbContext, object, ValueTask<EntityEntry>> categoryAdder,
             Func<DbContext, object, ValueTask<EntityEntry>> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var relatedDependent = new Product
             {
                 Id = 1,
@@ -464,23 +605,41 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(principal, principalEntry.Entity);
             Assert.Equal(expectedState, principalEntry.State);
             Assert.Same(relatedPrincipal, relatedPrincipalEntry.Entity);
-            Assert.Equal(expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState, relatedPrincipalEntry.State);
+            Assert.Equal(
+                expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState,
+                relatedPrincipalEntry.State
+            );
 
             Assert.Same(relatedDependent, relatedDependentEntry.Entity);
             Assert.Equal(expectedState, relatedDependentEntry.State);
             Assert.Same(dependent, dependentEntry.Entity);
             Assert.Equal(expectedState, dependentEntry.State);
 
-            Assert.Same(principalEntry.GetInfrastructure(), context.Entry(principal).GetInfrastructure());
-            Assert.Same(relatedPrincipalEntry.GetInfrastructure(), context.Entry(relatedPrincipal).GetInfrastructure());
-            Assert.Same(relatedDependentEntry.GetInfrastructure(), context.Entry(relatedDependent).GetInfrastructure());
-            Assert.Same(dependentEntry.GetInfrastructure(), context.Entry(dependent).GetInfrastructure());
+            Assert.Same(
+                principalEntry.GetInfrastructure(),
+                context.Entry(principal).GetInfrastructure()
+            );
+            Assert.Same(
+                relatedPrincipalEntry.GetInfrastructure(),
+                context.Entry(relatedPrincipal).GetInfrastructure()
+            );
+            Assert.Same(
+                relatedDependentEntry.GetInfrastructure(),
+                context.Entry(relatedDependent).GetInfrastructure()
+            );
+            Assert.Same(
+                dependentEntry.GetInfrastructure(),
+                context.Entry(dependent).GetInfrastructure()
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_to_context_to_be_deleted_Enumerable()
         {
-            return TrackMultipleEntitiesTestEnumerable((c, e) => c.RemoveRange(e), EntityState.Deleted);
+            return TrackMultipleEntitiesTestEnumerable(
+                (c, e) => c.RemoveRange(e),
+                EntityState.Deleted
+            );
         }
 
         [ConditionalFact]
@@ -492,37 +651,51 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_multiple_new_entities_to_context_Enumerable_graph_async()
         {
-            return TrackMultipleEntitiesTestEnumerable((c, e) => c.AddRangeAsync(e), EntityState.Added);
+            return TrackMultipleEntitiesTestEnumerable(
+                (c, e) => c.AddRangeAsync(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_to_context_to_be_attached_Enumerable_graph()
         {
-            return TrackMultipleEntitiesTestEnumerable((c, e) => c.AttachRange(e), EntityState.Unchanged);
+            return TrackMultipleEntitiesTestEnumerable(
+                (c, e) => c.AttachRange(e),
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_to_context_to_be_updated_Enumerable_graph()
         {
-            return TrackMultipleEntitiesTestEnumerable((c, e) => c.UpdateRange(e), EntityState.Modified);
+            return TrackMultipleEntitiesTestEnumerable(
+                (c, e) => c.UpdateRange(e),
+                EntityState.Modified
+            );
         }
 
         private static Task TrackMultipleEntitiesTestEnumerable(
             Action<DbContext, IEnumerable<object>> adder,
-            EntityState expectedState)
-            => TrackMultipleEntitiesTestEnumerable(
+            EntityState expectedState
+        ) =>
+            TrackMultipleEntitiesTestEnumerable(
                 (c, e) =>
                 {
                     adder(c, e);
                     return Task.FromResult(0);
                 },
-                expectedState);
+                expectedState
+            );
 
         private static async Task TrackMultipleEntitiesTestEnumerable(
             Func<DbContext, IEnumerable<object>, Task> adder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var relatedDependent = new Product
             {
                 Id = 1,
@@ -556,7 +729,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(expectedState, context.Entry(principal).State);
             Assert.Same(relatedPrincipal, context.Entry(relatedPrincipal).Entity);
             Assert.Equal(
-                expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState, context.Entry(relatedPrincipal).State);
+                expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState,
+                context.Entry(relatedPrincipal).State
+            );
 
             Assert.Same(relatedDependent, context.Entry(relatedDependent).Entity);
             Assert.Equal(expectedState, context.Entry(relatedDependent).State);
@@ -567,49 +742,74 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_existing_entities_with_default_value_to_context_to_be_deleted_non_generic()
         {
-            return TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+            return TrackEntitiesDefaultValuesTestNonGeneric(
+                (c, e) => c.Remove(e),
+                (c, e) => c.Remove(e),
+                EntityState.Deleted
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_new_entities_with_default_value_to_context_non_generic_graph()
         {
-            return TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
+            return TrackEntitiesDefaultValuesTestNonGeneric(
+                (c, e) => c.Add(e),
+                (c, e) => c.Add(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_new_entities_with_default_value_to_context_non_generic_graph_async()
         {
-            return TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+            return TrackEntitiesDefaultValuesTestNonGeneric(
+                (c, e) => c.AddAsync(e),
+                (c, e) => c.AddAsync(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_with_default_value_to_context_to_be_attached_non_generic_graph()
         {
-            return TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Added);
+            return TrackEntitiesDefaultValuesTestNonGeneric(
+                (c, e) => c.Attach(e),
+                (c, e) => c.Attach(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_with_default_value_to_context_to_be_updated_non_generic_graph()
         {
-            return TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Added);
+            return TrackEntitiesDefaultValuesTestNonGeneric(
+                (c, e) => c.Update(e),
+                (c, e) => c.Update(e),
+                EntityState.Added
+            );
         }
 
         private static Task TrackEntitiesDefaultValuesTestNonGeneric(
             Func<DbContext, object, EntityEntry> categoryAdder,
             Func<DbContext, object, EntityEntry> productAdder,
-            EntityState expectedState)
-            => TrackEntitiesDefaultValuesTestNonGeneric(
+            EntityState expectedState
+        ) =>
+            TrackEntitiesDefaultValuesTestNonGeneric(
                 (c, e) => new ValueTask<EntityEntry>(categoryAdder(c, e)),
                 (c, e) => new ValueTask<EntityEntry>(productAdder(c, e)),
-                expectedState);
+                expectedState
+            );
 
         // Issue #3890
         private static async Task TrackEntitiesDefaultValuesTestNonGeneric(
             Func<DbContext, object, ValueTask<EntityEntry>> categoryAdder,
             Func<DbContext, object, ValueTask<EntityEntry>> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category1 = new Category { Id = 0, Name = "Beverages" };
             var product1 = new Product
             {
@@ -630,49 +830,72 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(product1, productEntry1.Entity);
             Assert.Equal(expectedState, productEntry1.State);
 
-            Assert.Same(categoryEntry1.GetInfrastructure(), context.Entry(category1).GetInfrastructure());
-            Assert.Same(productEntry1.GetInfrastructure(), context.Entry(product1).GetInfrastructure());
+            Assert.Same(
+                categoryEntry1.GetInfrastructure(),
+                context.Entry(category1).GetInfrastructure()
+            );
+            Assert.Same(
+                productEntry1.GetInfrastructure(),
+                context.Entry(product1).GetInfrastructure()
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_deleted_Enumerable()
         {
             return TrackMultipleEntitiesDefaultValueTestEnumerable(
-                (c, e) => c.RemoveRange(e), (c, e) => c.RemoveRange(e), EntityState.Deleted);
+                (c, e) => c.RemoveRange(e),
+                (c, e) => c.RemoveRange(e),
+                EntityState.Deleted
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_new_entities_with_default_values_to_context_Enumerable_graph()
         {
-            return TrackMultipleEntitiesDefaultValueTestEnumerable((c, e) => c.AddRange(e), (c, e) => c.AddRange(e), EntityState.Added);
+            return TrackMultipleEntitiesDefaultValueTestEnumerable(
+                (c, e) => c.AddRange(e),
+                (c, e) => c.AddRange(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_new_entities_with_default_values_to_context_Enumerable_graph_async()
         {
             return TrackMultipleEntitiesDefaultValueTestEnumerable(
-                (c, e) => c.AddRangeAsync(e), (c, e) => c.AddRangeAsync(e), EntityState.Added);
+                (c, e) => c.AddRangeAsync(e),
+                (c, e) => c.AddRangeAsync(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_attached_Enumerable_graph()
         {
             return TrackMultipleEntitiesDefaultValueTestEnumerable(
-                (c, e) => c.AttachRange(e), (c, e) => c.AttachRange(e), EntityState.Added);
+                (c, e) => c.AttachRange(e),
+                (c, e) => c.AttachRange(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_updated_Enumerable_graph()
         {
             return TrackMultipleEntitiesDefaultValueTestEnumerable(
-                (c, e) => c.UpdateRange(e), (c, e) => c.UpdateRange(e), EntityState.Added);
+                (c, e) => c.UpdateRange(e),
+                (c, e) => c.UpdateRange(e),
+                EntityState.Added
+            );
         }
 
         private static Task TrackMultipleEntitiesDefaultValueTestEnumerable(
             Action<DbContext, IEnumerable<object>> categoryAdder,
             Action<DbContext, IEnumerable<object>> productAdder,
-            EntityState expectedState)
-            => TrackMultipleEntitiesDefaultValueTestEnumerable(
+            EntityState expectedState
+        ) =>
+            TrackMultipleEntitiesDefaultValueTestEnumerable(
                 (c, e) =>
                 {
                     categoryAdder(c, e);
@@ -683,15 +906,19 @@ namespace Microsoft.EntityFrameworkCore
                     productAdder(c, e);
                     return Task.FromResult(0);
                 },
-                expectedState);
+                expectedState
+            );
 
         // Issue #3890
         private static async Task TrackMultipleEntitiesDefaultValueTestEnumerable(
             Func<DbContext, IEnumerable<object>, Task> categoryAdder,
             Func<DbContext, IEnumerable<object>, Task> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category1 = new Category { Id = 0, Name = "Beverages" };
             var product1 = new Product
             {
@@ -700,10 +927,8 @@ namespace Microsoft.EntityFrameworkCore
                 Price = 7.99m
             };
 
-            await categoryAdder(
-                context, new List<Category> { category1 });
-            await productAdder(
-                context, new List<Product> { product1 });
+            await categoryAdder(context, new List<Category> { category1 });
+            await productAdder(context, new List<Product> { product1 });
 
             Assert.Same(category1, context.Entry(category1).Entity);
             Assert.Same(product1, context.Entry(product1).Entity);
@@ -730,7 +955,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_add_no_new_entities_to_context_Enumerable_graph_async()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             await context.AddRangeAsync(new HashSet<Category>());
             await context.AddRangeAsync(new HashSet<Product>());
             Assert.Empty(context.ChangeTracker.Entries());
@@ -750,9 +977,12 @@ namespace Microsoft.EntityFrameworkCore
 
         private static void TrackNoEntitiesTestEnumerable(
             Action<DbContext, IEnumerable<object>> categoryAdder,
-            Action<DbContext, IEnumerable<object>> productAdder)
+            Action<DbContext, IEnumerable<object>> productAdder
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             categoryAdder(context, new HashSet<Category>());
             productAdder(context, new HashSet<Product>());
             Assert.Empty(context.ChangeTracker.Entries());
@@ -765,9 +995,15 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, false, true)]
         [InlineData(true, false, false)]
         [InlineData(true, true, false)]
-        public async Task Can_add_new_entities_to_context_with_key_generation_graph(bool attachFirst, bool useEntry, bool async)
+        public async Task Can_add_new_entities_to_context_with_key_generation_graph(
+            bool attachFirst,
+            bool useEntry,
+            bool async
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var gu1 = new TheGu { ShirtColor = "Red" };
             var gu2 = new TheGu { ShirtColor = "Still Red" };
 
@@ -813,72 +1049,169 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_Remove_to_change_entity_state()
         {
-            await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Detached, EntityState.Deleted);
-            await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Unchanged, EntityState.Deleted);
-            await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Deleted, EntityState.Deleted);
-            await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Modified, EntityState.Deleted);
-            await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Added, EntityState.Detached);
+            await ChangeStateWithMethod(
+                (c, e) => c.Remove(e),
+                EntityState.Detached,
+                EntityState.Deleted
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Remove(e),
+                EntityState.Unchanged,
+                EntityState.Deleted
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Remove(e),
+                EntityState.Deleted,
+                EntityState.Deleted
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Remove(e),
+                EntityState.Modified,
+                EntityState.Deleted
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Remove(e),
+                EntityState.Added,
+                EntityState.Detached
+            );
         }
 
         [ConditionalFact]
         public async Task Can_use_graph_Add_to_change_entity_state()
         {
-            await ChangeStateWithMethod((c, e) => c.Add(e), EntityState.Detached, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Add(e), EntityState.Unchanged, EntityState.Added);
+            await ChangeStateWithMethod(
+                (c, e) => c.Add(e),
+                EntityState.Detached,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Add(e),
+                EntityState.Unchanged,
+                EntityState.Added
+            );
             await ChangeStateWithMethod((c, e) => c.Add(e), EntityState.Deleted, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Add(e), EntityState.Modified, EntityState.Added);
+            await ChangeStateWithMethod(
+                (c, e) => c.Add(e),
+                EntityState.Modified,
+                EntityState.Added
+            );
             await ChangeStateWithMethod((c, e) => c.Add(e), EntityState.Added, EntityState.Added);
         }
 
         [ConditionalFact]
         public async Task Can_use_graph_Add_to_change_entity_state_async()
         {
-            await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Detached, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Unchanged, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Deleted, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Modified, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Added, EntityState.Added);
+            await ChangeStateWithMethod(
+                (c, e) => c.AddAsync(e),
+                EntityState.Detached,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.AddAsync(e),
+                EntityState.Unchanged,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.AddAsync(e),
+                EntityState.Deleted,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.AddAsync(e),
+                EntityState.Modified,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.AddAsync(e),
+                EntityState.Added,
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public async Task Can_use_graph_Attach_to_change_entity_state()
         {
-            await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Detached, EntityState.Unchanged);
-            await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Unchanged, EntityState.Unchanged);
-            await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Deleted, EntityState.Unchanged);
-            await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Modified, EntityState.Unchanged);
-            await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Added, EntityState.Unchanged);
+            await ChangeStateWithMethod(
+                (c, e) => c.Attach(e),
+                EntityState.Detached,
+                EntityState.Unchanged
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Attach(e),
+                EntityState.Unchanged,
+                EntityState.Unchanged
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Attach(e),
+                EntityState.Deleted,
+                EntityState.Unchanged
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Attach(e),
+                EntityState.Modified,
+                EntityState.Unchanged
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Attach(e),
+                EntityState.Added,
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
         public async Task Can_use_graph_Update_to_change_entity_state()
         {
-            await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Detached, EntityState.Modified);
-            await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Unchanged, EntityState.Modified);
-            await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Deleted, EntityState.Modified);
-            await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Modified, EntityState.Modified);
-            await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Added, EntityState.Modified);
+            await ChangeStateWithMethod(
+                (c, e) => c.Update(e),
+                EntityState.Detached,
+                EntityState.Modified
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Update(e),
+                EntityState.Unchanged,
+                EntityState.Modified
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Update(e),
+                EntityState.Deleted,
+                EntityState.Modified
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Update(e),
+                EntityState.Modified,
+                EntityState.Modified
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Update(e),
+                EntityState.Added,
+                EntityState.Modified
+            );
         }
 
         private Task ChangeStateWithMethod(
             Action<DbContext, object> action,
             EntityState initialState,
-            EntityState expectedState)
-            => ChangeStateWithMethod(
+            EntityState expectedState
+        ) =>
+            ChangeStateWithMethod(
                 (c, e) =>
                 {
                     action(c, e);
                     return new ValueTask<EntityEntry>();
                 },
                 initialState,
-                expectedState);
+                expectedState
+            );
 
         private async Task ChangeStateWithMethod(
             Func<DbContext, object, ValueTask<EntityEntry>> action,
             EntityState initialState,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var entity = new Category { Id = 1, Name = "Beverages" };
             var entry = context.Entry(entity);
 
@@ -892,7 +1225,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_principal_first_fully_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -925,7 +1260,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_dependent_first_fully_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -956,7 +1293,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_principal_first_collection_not_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -987,7 +1326,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_dependent_first_collection_not_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1018,7 +1359,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_principal_first_reference_not_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1048,7 +1391,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_dependent_first_reference_not_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1078,7 +1423,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_fully_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1111,7 +1458,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_fully_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1142,7 +1491,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_collection_not_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1173,7 +1524,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_collection_not_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1204,7 +1557,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_reference_not_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1234,7 +1589,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_reference_not_fixed_up()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
             {
@@ -1264,9 +1621,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_principal_first_fully_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1301,9 +1660,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_dependent_first_fully_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1341,9 +1702,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_principal_first_collection_not_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1381,9 +1744,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_dependent_first_collection_not_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1421,9 +1786,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_principal_first_reference_not_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1456,9 +1823,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_attach_with_inconsistent_FK_dependent_first_reference_not_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1490,9 +1859,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_fully_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1526,9 +1897,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_fully_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1566,9 +1939,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_collection_not_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1603,9 +1978,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_collection_not_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1643,9 +2020,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_reference_not_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1678,9 +2057,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #1246
         public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_reference_not_fixed_up_with_tracked_FK_match()
         {
-            using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-            var category7 = context.Attach(
-                new Category { Id = 7, Products = new List<Product>() }).Entity;
+            using var context = new EarlyLearningCenter(
+                InMemoryTestHelpers.Instance.CreateServiceProvider()
+            );
+            var category7 =
+                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1793,8 +2174,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private class Parent77Context : DbContext
         {
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseInMemoryDatabase(nameof(Parent77Context));
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) => optionsBuilder.UseInMemoryDatabase(nameof(Parent77Context));
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1803,7 +2185,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         b.HasMany<Optional77>().WithOne(e => e.Parent77);
                         b.HasMany<Required77>().WithOne(e => e.Parent77);
-                    });
+                    }
+                );
             }
         }
 

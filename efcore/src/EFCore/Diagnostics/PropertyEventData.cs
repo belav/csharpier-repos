@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public PropertyEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            IReadOnlyProperty property)
-            : base(eventDefinition, messageGenerator)
+            IReadOnlyProperty property
+        ) : base(eventDefinition, messageGenerator)
         {
             Property = property;
         }

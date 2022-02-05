@@ -16,11 +16,9 @@ namespace Roslyn.Utilities
         private readonly T _value;
         private Task<T>? _task;
 
-        public ConstantValueSource(T value)
-            => _value = value;
+        public ConstantValueSource(T value) => _value = value;
 
-        public override T GetValue(CancellationToken cancellationToken = default)
-            => _value;
+        public override T GetValue(CancellationToken cancellationToken = default) => _value;
 
         public override bool TryGetValue([MaybeNullWhen(false)] out T value)
         {

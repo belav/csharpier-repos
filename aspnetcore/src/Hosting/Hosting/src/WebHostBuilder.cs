@@ -42,27 +42,28 @@ public class WebHostBuilder : IWebHostBuilder
     {
         _hostingEnvironment = new HostingEnvironment();
 
-        _config = new ConfigurationBuilder()
-            .AddEnvironmentVariables(prefix: "ASPNETCORE_")
-            .Build();
+        _config = new ConfigurationBuilder().AddEnvironmentVariables(prefix: "ASPNETCORE_").Build();
 
         if (string.IsNullOrEmpty(GetSetting(WebHostDefaults.EnvironmentKey)))
         {
             // Try adding legacy environment keys, never remove these.
-            UseSetting(WebHostDefaults.EnvironmentKey, Environment.GetEnvironmentVariable("Hosting:Environment")
-                ?? Environment.GetEnvironmentVariable("ASPNET_ENV"));
+            UseSetting(
+                WebHostDefaults.EnvironmentKey,
+                Environment.GetEnvironmentVariable("Hosting:Environment")
+                    ?? Environment.GetEnvironmentVariable("ASPNET_ENV")
+            );
         }
 
         if (string.IsNullOrEmpty(GetSetting(WebHostDefaults.ServerUrlsKey)))
         {
             // Try adding legacy url key, never remove this.
-            UseSetting(WebHostDefaults.ServerUrlsKey, Environment.GetEnvironmentVariable("ASPNETCORE_SERVER.URLS"));
+            UseSetting(
+                WebHostDefaults.ServerUrlsKey,
+                Environment.GetEnvironmentVariable("ASPNETCORE_SERVER.URLS")
+            );
         }
 
-        _context = new WebHostBuilderContext
-        {
-            Configuration = _config
-        };
+        _context = new WebHostBuilderContext { Configuration = _config };
     }
 
     /// <summary>
@@ -109,7 +110,9 @@ public class WebHostBuilder : IWebHostBuilder
     /// </summary>
     /// <param name="configureServices">A delegate for configuring the <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    public IWebHostBuilder ConfigureServices(Action<WebHostBuilderContext, IServiceCollection> configureServices)
+    public IWebHostBuilder ConfigureServices(
+        Action<WebHostBuilderContext, IServiceCollection> configureServices
+    )
     {
         _configureServices += configureServices;
         return this;
@@ -124,7 +127,9 @@ public class WebHostBuilder : IWebHostBuilder
     /// The <see cref="IConfiguration"/> and <see cref="ILoggerFactory"/> on the <see cref="WebHostBuilderContext"/> are uninitialized at this stage.
     /// The <see cref="IConfigurationBuilder"/> is pre-populated with the settings of the <see cref="IWebHostBuilder"/>.
     /// </remarks>
-    public IWebHostBuilder ConfigureAppConfiguration(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate)
+    public IWebHostBuilder ConfigureAppConfiguration(
+        Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
+    )
     {
         _configureAppConfigurationBuilder += configureDelegate;
         return this;
@@ -150,17 +155,23 @@ public class WebHostBuilder : IWebHostBuilder
             // Warn about deprecated environment variables
             if (Environment.GetEnvironmentVariable("Hosting:Environment") != null)
             {
-                Console.WriteLine("The environment variable 'Hosting:Environment' is obsolete and has been replaced with 'ASPNETCORE_ENVIRONMENT'");
+                Console.WriteLine(
+                    "The environment variable 'Hosting:Environment' is obsolete and has been replaced with 'ASPNETCORE_ENVIRONMENT'"
+                );
             }
 
             if (Environment.GetEnvironmentVariable("ASPNET_ENV") != null)
             {
-                Console.WriteLine("The environment variable 'ASPNET_ENV' is obsolete and has been replaced with 'ASPNETCORE_ENVIRONMENT'");
+                Console.WriteLine(
+                    "The environment variable 'ASPNET_ENV' is obsolete and has been replaced with 'ASPNETCORE_ENVIRONMENT'"
+                );
             }
 
             if (Environment.GetEnvironmentVariable("ASPNETCORE_SERVER.URLS") != null)
             {
-                Console.WriteLine("The environment variable 'ASPNETCORE_SERVER.URLS' is obsolete and has been replaced with 'ASPNETCORE_URLS'");
+                Console.WriteLine(
+                    "The environment variable 'ASPNETCORE_SERVER.URLS' is obsolete and has been replaced with 'ASPNETCORE_URLS'"
+                );
             }
         }
 
@@ -171,7 +182,8 @@ public class WebHostBuilder : IWebHostBuilder
             hostingServiceProvider,
             _options,
             _config,
-            hostingStartupErrors);
+            hostingStartupErrors
+        );
         try
         {
             host.Initialize();
@@ -188,7 +200,9 @@ public class WebHostBuilder : IWebHostBuilder
             {
                 if (!assemblyNames.Add(assemblyName))
                 {
-                    logger.LogWarning($"The assembly {assemblyName} was specified multiple times. Hosting startup assemblies should only be specified once.");
+                    logger.LogWarning(
+                        $"The assembly {assemblyName} was specified multiple times. Hosting startup assemblies should only be specified once."
+                    );
                 }
             }
 
@@ -224,7 +238,10 @@ public class WebHostBuilder : IWebHostBuilder
     {
         hostingStartupErrors = null;
 
-        _options = new WebHostOptions(_config, Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty);
+        _options = new WebHostOptions(
+            _config,
+            Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty
+        );
 
         if (!_options.PreventHostingStartup)
         {
@@ -244,16 +261,25 @@ public class WebHostBuilder : IWebHostBuilder
                         continue;
                     }
 
-                    foreach (var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>())
+                    foreach (
+                        var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>()
+                    )
                     {
-                        var hostingStartup = (IHostingStartup)Activator.CreateInstance(attribute.HostingStartupType)!;
+                        var hostingStartup = (IHostingStartup)Activator.CreateInstance(
+                            attribute.HostingStartupType
+                        )!;
                         hostingStartup.Configure(this);
                     }
                 }
                 catch (Exception ex)
                 {
                     // Capture any errors that happen during startup
-                    exceptions.Add(new InvalidOperationException($"Startup assembly {assemblyName} failed to execute. See the inner exception for more details.", ex));
+                    exceptions.Add(
+                        new InvalidOperationException(
+                            $"Startup assembly {assemblyName} failed to execute. See the inner exception for more details.",
+                            ex
+                        )
+                    );
                 }
             }
 
@@ -263,7 +289,10 @@ public class WebHostBuilder : IWebHostBuilder
             }
         }
 
-        var contentRootPath = ResolveContentRootPath(_options.ContentRootPath, AppContext.BaseDirectory);
+        var contentRootPath = ResolveContentRootPath(
+            _options.ContentRootPath,
+            AppContext.BaseDirectory
+        );
 
         // Initialize the hosting environment
         ((IWebHostEnvironment)_hostingEnvironment).Initialize(contentRootPath, _options);
@@ -291,7 +320,9 @@ public class WebHostBuilder : IWebHostBuilder
         _context.Configuration = configuration;
 
         services.TryAddSingleton(sp => new DiagnosticListener("Microsoft.AspNetCore"));
-        services.TryAddSingleton<DiagnosticSource>(sp => sp.GetRequiredService<DiagnosticListener>());
+        services.TryAddSingleton<DiagnosticSource>(
+            sp => sp.GetRequiredService<DiagnosticListener>()
+        );
         services.TryAddSingleton(sp => new ActivitySource("Microsoft.AspNetCore"));
         services.TryAddSingleton(DistributedContextPropagator.Current);
 
@@ -301,13 +332,19 @@ public class WebHostBuilder : IWebHostBuilder
         services.AddOptions();
         services.AddLogging();
 
-        services.AddTransient<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        services.AddTransient<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
 
         if (!string.IsNullOrEmpty(_options.StartupAssembly))
         {
             try
             {
-                var startupType = StartupLoader.FindStartupType(_options.StartupAssembly, _hostingEnvironment.EnvironmentName);
+                var startupType = StartupLoader.FindStartupType(
+                    _options.StartupAssembly,
+                    _hostingEnvironment.EnvironmentName
+                );
 
                 if (typeof(IStartup).IsAssignableFrom(startupType))
                 {
@@ -315,22 +352,31 @@ public class WebHostBuilder : IWebHostBuilder
                 }
                 else
                 {
-                    services.AddSingleton(typeof(IStartup), sp =>
-                    {
-                        var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
-                        var methods = StartupLoader.LoadMethods(sp, startupType, hostingEnvironment.EnvironmentName);
-                        return new ConventionBasedStartup(methods);
-                    });
+                    services.AddSingleton(
+                        typeof(IStartup),
+                        sp =>
+                        {
+                            var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
+                            var methods = StartupLoader.LoadMethods(
+                                sp,
+                                startupType,
+                                hostingEnvironment.EnvironmentName
+                            );
+                            return new ConventionBasedStartup(methods);
+                        }
+                    );
                 }
             }
             catch (Exception ex)
             {
                 var capture = ExceptionDispatchInfo.Capture(ex);
-                services.AddSingleton<IStartup>(_ =>
-                {
-                    capture.Throw();
-                    return null;
-                });
+                services.AddSingleton<IStartup>(
+                    _ =>
+                    {
+                        capture.Throw();
+                        return null;
+                    }
+                );
             }
         }
 
@@ -339,7 +385,10 @@ public class WebHostBuilder : IWebHostBuilder
         return services;
     }
 
-    private static void AddApplicationServices(IServiceCollection services, IServiceProvider hostingServiceProvider)
+    private static void AddApplicationServices(
+        IServiceCollection services,
+        IServiceProvider hostingServiceProvider
+    )
     {
         // We are forwarding services from hosting container so hosting container
         // can still manage their lifetime (disposal) shared instances with application services.

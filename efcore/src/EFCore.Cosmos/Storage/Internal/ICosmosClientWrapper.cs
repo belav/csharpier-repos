@@ -32,7 +32,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        Task<bool> CreateDatabaseIfNotExistsAsync(ThroughputProperties? throughput, CancellationToken cancellationToken = default);
+        Task<bool> CreateDatabaseIfNotExistsAsync(
+            ThroughputProperties? throughput,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,7 +51,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        Task<bool> CreateContainerIfNotExistsAsync(ContainerProperties properties, CancellationToken cancellationToken = default);
+        Task<bool> CreateContainerIfNotExistsAsync(
+            ContainerProperties properties,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string collectionId,
             string documentId,
             JObject document,
-            IUpdateEntry entry);
+            IUpdateEntry entry
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -92,10 +99,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        bool DeleteItem(
-            string containerId,
-            string documentId,
-            IUpdateEntry entry);
+        bool DeleteItem(string containerId, string documentId, IUpdateEntry entry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -107,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string containerId,
             JToken document,
             IUpdateEntry updateEntry,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -120,7 +125,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string documentId,
             JObject document,
             IUpdateEntry updateEntry,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -132,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string containerId,
             string documentId,
             IUpdateEntry entry,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -148,10 +155,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        JObject? ExecuteReadItem(
-            string containerId,
-            string? partitionKey,
-            string resourceId);
+        JObject? ExecuteReadItem(string containerId, string? partitionKey, string resourceId);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -163,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string containerId,
             string? partitionKey,
             string resourceId,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -174,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         IEnumerable<JObject> ExecuteSqlQuery(
             string containerId,
             string? partitionKey,
-            CosmosSqlQuery query);
+            CosmosSqlQuery query
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -185,6 +191,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         IAsyncEnumerable<JObject> ExecuteSqlQueryAsync(
             string containerId,
             string? partitionKey,
-            CosmosSqlQuery query);
+            CosmosSqlQuery query
+        );
     }
 }

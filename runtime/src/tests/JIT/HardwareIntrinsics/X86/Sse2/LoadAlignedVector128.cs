@@ -21,12 +21,23 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse2.IsSupported)
             {
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[2] { 1, -5 }, new double[2]))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[2] { 1, -5 },
+                        new double[2]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((double*)(doubleTable.inArrayPtr));
                     Unsafe.Write(doubleTable.outArrayPtr, vf);
 
-                    if (!doubleTable.CheckResult((x, y) => BitConverter.DoubleToInt64Bits(x) == BitConverter.DoubleToInt64Bits(y)))
+                    if (
+                        !doubleTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.DoubleToInt64Bits(x)
+                                == BitConverter.DoubleToInt64Bits(y)
+                        )
+                    )
                     {
                         Console.WriteLine("Sse2 LoadAlignedVector128 failed on double:");
                         foreach (var item in doubleTable.outArray)
@@ -38,7 +49,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<int> intTable = new TestTable<int>(new int[4] { 1, -5, 100, 0 }, new int[4]))
+                using (
+                    TestTable<int> intTable = new TestTable<int>(
+                        new int[4] { 1, -5, 100, 0 },
+                        new int[4]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((int*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -55,7 +71,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<long> longTable = new TestTable<long>(new long[2] { 1, -5 }, new long[2]))
+                using (
+                    TestTable<long> longTable = new TestTable<long>(
+                        new long[2] { 1, -5 },
+                        new long[2]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((long*)(longTable.inArrayPtr));
                     Unsafe.Write(longTable.outArrayPtr, vf);
@@ -72,7 +93,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<uint> uintTable = new TestTable<uint>(new uint[4] { 1, 5, 100, 0 }, new uint[4]))
+                using (
+                    TestTable<uint> uintTable = new TestTable<uint>(
+                        new uint[4] { 1, 5, 100, 0 },
+                        new uint[4]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((uint*)(uintTable.inArrayPtr));
                     Unsafe.Write(uintTable.outArrayPtr, vf);
@@ -89,7 +115,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ulong> ulongTable = new TestTable<ulong>(new ulong[2] { 1, 5 }, new ulong[2]))
+                using (
+                    TestTable<ulong> ulongTable = new TestTable<ulong>(
+                        new ulong[2] { 1, 5 },
+                        new ulong[2]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((ulong*)(ulongTable.inArrayPtr));
                     Unsafe.Write(ulongTable.outArrayPtr, vf);
@@ -106,7 +137,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<short> shortTable = new TestTable<short>(new short[8] { 1, -5, 100, 0, 1, -5, 100, 0 }, new short[8]))
+                using (
+                    TestTable<short> shortTable = new TestTable<short>(
+                        new short[8] { 1, -5, 100, 0, 1, -5, 100, 0 },
+                        new short[8]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((short*)(shortTable.inArrayPtr));
                     Unsafe.Write(shortTable.outArrayPtr, vf);
@@ -123,7 +159,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ushort> ushortTable = new TestTable<ushort>(new ushort[8] { 1, 5, 100, 0, 1, 5, 100, 0 }, new ushort[8]))
+                using (
+                    TestTable<ushort> ushortTable = new TestTable<ushort>(
+                        new ushort[8] { 1, 5, 100, 0, 1, 5, 100, 0 },
+                        new ushort[8]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((ushort*)(ushortTable.inArrayPtr));
                     Unsafe.Write(ushortTable.outArrayPtr, vf);
@@ -140,7 +181,30 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<sbyte> sbyteTable = new TestTable<sbyte>(new sbyte[16] { 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0 }, new sbyte[16]))
+                using (
+                    TestTable<sbyte> sbyteTable = new TestTable<sbyte>(
+                        new sbyte[16]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0
+                        },
+                        new sbyte[16]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((sbyte*)(sbyteTable.inArrayPtr));
                     Unsafe.Write(sbyteTable.outArrayPtr, vf);
@@ -157,7 +221,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<byte> byteTable = new TestTable<byte>(new byte[16] { 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0 }, new byte[16]))
+                using (
+                    TestTable<byte> byteTable = new TestTable<byte>(
+                        new byte[16] { 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0 },
+                        new byte[16]
+                    )
+                )
                 {
                     var vf = Sse2.LoadAlignedVector128((byte*)(byteTable.inArrayPtr));
                     Unsafe.Write(byteTable.outArrayPtr, vf);
@@ -198,10 +267,15 @@ namespace IntelHardwareIntrinsicTest
 
                 this.simdSize = 16;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArrayPtr), ref Unsafe.As<T, byte>(ref a[0]), this.simdSize);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArrayPtr),
+                    ref Unsafe.As<T, byte>(ref a[0]),
+                    this.simdSize
+                );
             }
 
-            public void* inArrayPtr => Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), simdSize);
+            public void* inArrayPtr =>
+                Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), simdSize);
             public void* outArrayPtr => outHandle.AddrOfPinnedObject().ToPointer();
 
             public bool CheckResult(Func<T, T, bool> check)

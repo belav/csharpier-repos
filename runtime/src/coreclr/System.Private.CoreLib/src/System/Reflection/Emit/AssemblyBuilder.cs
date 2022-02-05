@@ -107,7 +107,8 @@ namespace System.Reflection.Emit
         public override string Location => string.Empty;
 
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
-        public override string? CodeBase => throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
+        public override string? CodeBase =>
+            throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
 
         [RequiresUnreferencedCode("Types might be removed")]
         public override Type[] GetExportedTypes()
@@ -115,7 +116,8 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
         }
 
-        public override string ImageRuntimeVersion => Assembly.GetExecutingAssembly().ImageRuntimeVersion;
+        public override string ImageRuntimeVersion =>
+            Assembly.GetExecutingAssembly().ImageRuntimeVersion;
 
         #endregion
     }
@@ -131,6 +133,7 @@ namespace System.Reflection.Emit
         internal AssemblyBuilderData _assemblyData;
         private readonly InternalAssemblyBuilder _internalAssemblyBuilder;
         private ModuleBuilder _manifestModuleBuilder;
+
         // Set to true if the manifest module was returned by code:DefineDynamicModule to the user
         private bool _isManifestModuleUsedAsDefinedModule;
 
@@ -161,19 +164,26 @@ namespace System.Reflection.Emit
 
         #region Constructor
 
-        internal AssemblyBuilder(AssemblyName name,
-                                 AssemblyBuilderAccess access,
-                                 ref StackCrawlMark stackMark,
-                                 AssemblyLoadContext? assemblyLoadContext,
-                                 IEnumerable<CustomAttributeBuilder>? unsafeAssemblyAttributes)
+        internal AssemblyBuilder(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            ref StackCrawlMark stackMark,
+            AssemblyLoadContext? assemblyLoadContext,
+            IEnumerable<CustomAttributeBuilder>? unsafeAssemblyAttributes
+        )
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            if (access != AssemblyBuilderAccess.Run && access != AssemblyBuilderAccess.RunAndCollect)
+            if (
+                access != AssemblyBuilderAccess.Run && access != AssemblyBuilderAccess.RunAndCollect
+            )
             {
-                throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, (int)access), nameof(access));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, (int)access),
+                    nameof(access)
+                );
             }
 
             // Clone the name in case the caller modifies it underneath us.
@@ -191,11 +201,13 @@ namespace System.Reflection.Emit
             }
 
             Assembly? retAssembly = null;
-            CreateDynamicAssembly(ObjectHandleOnStack.Create(ref name),
-                                  new StackCrawlMarkHandle(ref stackMark),
-                                  (int)access,
-                                  ObjectHandleOnStack.Create(ref assemblyLoadContext),
-                                  ObjectHandleOnStack.Create(ref retAssembly));
+            CreateDynamicAssembly(
+                ObjectHandleOnStack.Create(ref name),
+                new StackCrawlMarkHandle(ref stackMark),
+                (int)access,
+                ObjectHandleOnStack.Create(ref assemblyLoadContext),
+                ObjectHandleOnStack.Create(ref retAssembly)
+            );
             _internalAssemblyBuilder = (InternalAssemblyBuilder)retAssembly!;
 
             _assemblyData = new AssemblyBuilderData(access);
@@ -216,7 +228,9 @@ namespace System.Reflection.Emit
         [MemberNotNull(nameof(_manifestModuleBuilder))]
         private void InitManifestModule()
         {
-            InternalModuleBuilder modBuilder = (InternalModuleBuilder)GetInMemoryAssemblyModule(InternalAssembly);
+            InternalModuleBuilder modBuilder = (InternalModuleBuilder)GetInMemoryAssemblyModule(
+                InternalAssembly
+            );
 
             // Note that this ModuleBuilder cannot be used for RefEmit yet
             // because it hasn't been initialized.
@@ -244,36 +258,46 @@ namespace System.Reflection.Emit
         /// is saved.
         /// </summary>
         [DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod.
-        public static AssemblyBuilder DefineDynamicAssembly(AssemblyName name, AssemblyBuilderAccess access)
+        public static AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access
+        )
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name,
-                                                 access,
-                                                 ref stackMark,
-                                                 AssemblyLoadContext.CurrentContextualReflectionContext,
-                                                 null);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                ref stackMark,
+                AssemblyLoadContext.CurrentContextualReflectionContext,
+                null
+            );
         }
 
         [DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod.
         public static AssemblyBuilder DefineDynamicAssembly(
             AssemblyName name,
             AssemblyBuilderAccess access,
-            IEnumerable<CustomAttributeBuilder>? assemblyAttributes)
+            IEnumerable<CustomAttributeBuilder>? assemblyAttributes
+        )
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name,
-                                                 access,
-                                                 ref stackMark,
-                                                 AssemblyLoadContext.CurrentContextualReflectionContext,
-                                                 assemblyAttributes);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                ref stackMark,
+                AssemblyLoadContext.CurrentContextualReflectionContext,
+                assemblyAttributes
+            );
         }
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "AppDomain_CreateDynamicAssembly")]
-        private static extern void CreateDynamicAssembly(ObjectHandleOnStack name,
-                                                         StackCrawlMarkHandle stackMark,
-                                                         int access,
-                                                         ObjectHandleOnStack assemblyLoadContext,
-                                                         ObjectHandleOnStack retAssembly);
+        private static extern void CreateDynamicAssembly(
+            ObjectHandleOnStack name,
+            StackCrawlMarkHandle stackMark,
+            int access,
+            ObjectHandleOnStack assemblyLoadContext,
+            ObjectHandleOnStack retAssembly
+        );
 
         private static readonly object s_assemblyBuilderLock = new object();
 
@@ -282,16 +306,19 @@ namespace System.Reflection.Emit
             AssemblyBuilderAccess access,
             ref StackCrawlMark stackMark,
             AssemblyLoadContext? assemblyLoadContext,
-            IEnumerable<CustomAttributeBuilder>? unsafeAssemblyAttributes)
+            IEnumerable<CustomAttributeBuilder>? unsafeAssemblyAttributes
+        )
         {
             lock (s_assemblyBuilderLock)
             {
                 // We can only create dynamic assemblies in the current domain
-                return new AssemblyBuilder(name,
-                                           access,
-                                           ref stackMark,
-                                           assemblyLoadContext,
-                                           unsafeAssemblyAttributes);
+                return new AssemblyBuilder(
+                    name,
+                    access,
+                    ref stackMark,
+                    assemblyLoadContext,
+                    unsafeAssemblyAttributes
+                );
             }
         }
         #endregion
@@ -333,7 +360,10 @@ namespace System.Reflection.Emit
                 throw new InvalidOperationException(SR.InvalidOperation_NoMultiModuleAssembly);
             }
 
-            Debug.Assert(_assemblyData != null, "_assemblyData is null in DefineDynamicModuleInternal");
+            Debug.Assert(
+                _assemblyData != null,
+                "_assemblyData is null in DefineDynamicModuleInternal"
+            );
 
             // Init(...) has already been called on _manifestModuleBuilder in InitManifestModule()
             ModuleBuilder dynModule = _manifestModuleBuilder;
@@ -415,7 +445,8 @@ namespace System.Reflection.Emit
 
         #region Assembly overrides
 
-        public override AssemblyName GetName(bool copiedName) => InternalAssembly.GetName(copiedName);
+        public override AssemblyName GetName(bool copiedName) =>
+            InternalAssembly.GetName(copiedName);
 
         public override string? FullName => InternalAssembly.FullName;
 
@@ -504,10 +535,11 @@ namespace System.Reflection.Emit
             lock (SyncRoot)
             {
                 TypeBuilder.DefineCustomAttribute(
-                    _manifestModuleBuilder,     // pass in the in-memory assembly module
+                    _manifestModuleBuilder, // pass in the in-memory assembly module
                     AssemblyBuilderData.AssemblyDefToken,
                     _manifestModuleBuilder.GetConstructorToken(con),
-                    binaryAttribute);
+                    binaryAttribute
+                );
             }
         }
 
@@ -523,7 +555,10 @@ namespace System.Reflection.Emit
 
             lock (SyncRoot)
             {
-                customBuilder.CreateCustomAttribute(_manifestModuleBuilder, AssemblyBuilderData.AssemblyDefToken);
+                customBuilder.CreateCustomAttribute(
+                    _manifestModuleBuilder,
+                    AssemblyBuilderData.AssemblyDefToken
+                );
             }
         }
     }

@@ -26,9 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ChangeTracking.Internal
             : base(
                 (a, b) => Compare(a, b, (ValueComparer<TElement>)elementComparer),
                 o => GetHashCode(o, (ValueComparer<TElement>)elementComparer),
-                source => Snapshot(source, (ValueComparer<TElement>)elementComparer, readOnly))
-        {
-        }
+                source => Snapshot(source, (ValueComparer<TElement>)elementComparer, readOnly)
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,10 +35,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Type Type
-            => typeof(TCollection);
+        public override Type Type => typeof(TCollection);
 
-        private static bool Compare(TCollection? a, TCollection? b, ValueComparer<TElement> elementComparer)
+        private static bool Compare(
+            TCollection? a,
+            TCollection? b,
+            ValueComparer<TElement> elementComparer
+        )
         {
             if (a is not IReadOnlyList<TElement> aList)
             {
@@ -78,7 +80,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ChangeTracking.Internal
             return hash.ToHashCode();
         }
 
-        private static TCollection Snapshot(TCollection source, ValueComparer<TElement> elementComparer, bool readOnly)
+        private static TCollection Snapshot(
+            TCollection source,
+            ValueComparer<TElement> elementComparer,
+            bool readOnly
+        )
         {
             if (readOnly)
             {

@@ -25,10 +25,7 @@ public class ProblemDetailsWrapper : IXmlSerializable, IUnwrappable
     /// <summary>
     /// Initializes a new instance of <see cref="ProblemDetailsWrapper"/>.
     /// </summary>
-    public ProblemDetailsWrapper()
-        : this(new ProblemDetails())
-    {
-    }
+    public ProblemDetailsWrapper() : this(new ProblemDetails()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ProblemDetailsWrapper"/>.
@@ -94,9 +91,9 @@ public class ProblemDetailsWrapper : IXmlSerializable, IUnwrappable
                 break;
 
             case "status":
-                ProblemDetails.Status = string.IsNullOrEmpty(value) ?
-                    (int?)null :
-                    int.Parse(value, CultureInfo.InvariantCulture);
+                ProblemDetails.Status = string.IsNullOrEmpty(value)
+                  ? (int?)null
+                  : int.Parse(value, CultureInfo.InvariantCulture);
                 break;
 
             case "title":
@@ -123,16 +120,15 @@ public class ProblemDetailsWrapper : IXmlSerializable, IUnwrappable
     {
         if (!string.IsNullOrEmpty(ProblemDetails.Detail))
         {
-            writer.WriteElementString(
-                XmlConvert.EncodeLocalName("detail"),
-                ProblemDetails.Detail);
+            writer.WriteElementString(XmlConvert.EncodeLocalName("detail"), ProblemDetails.Detail);
         }
 
         if (!string.IsNullOrEmpty(ProblemDetails.Instance))
         {
             writer.WriteElementString(
                 XmlConvert.EncodeLocalName("instance"),
-                ProblemDetails.Instance);
+                ProblemDetails.Instance
+            );
         }
 
         if (ProblemDetails.Status.HasValue)
@@ -144,16 +140,12 @@ public class ProblemDetailsWrapper : IXmlSerializable, IUnwrappable
 
         if (!string.IsNullOrEmpty(ProblemDetails.Title))
         {
-            writer.WriteElementString(
-                XmlConvert.EncodeLocalName("title"),
-                ProblemDetails.Title);
+            writer.WriteElementString(XmlConvert.EncodeLocalName("title"), ProblemDetails.Title);
         }
 
         if (!string.IsNullOrEmpty(ProblemDetails.Type))
         {
-            writer.WriteElementString(
-                XmlConvert.EncodeLocalName("type"),
-                ProblemDetails.Type);
+            writer.WriteElementString(XmlConvert.EncodeLocalName("type"), ProblemDetails.Type);
         }
 
         foreach (var keyValuePair in ProblemDetails.Extensions)

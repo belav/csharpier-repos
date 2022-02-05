@@ -9,24 +9,38 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_Stat", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Stat",
+            SetLastError = true
+        )]
         internal static partial int Stat(ref byte path, out FileStatus output);
 
         internal static int Stat(ReadOnlySpan<char> path, out FileStatus output)
         {
             var converter = new ValueUtf8Converter(stackalloc byte[DefaultPathBufferSize]);
-            int result = Stat(ref MemoryMarshal.GetReference(converter.ConvertAndTerminateString(path)), out output);
+            int result = Stat(
+                ref MemoryMarshal.GetReference(converter.ConvertAndTerminateString(path)),
+                out output
+            );
             converter.Dispose();
             return result;
         }
 
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_LStat", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_LStat",
+            SetLastError = true
+        )]
         internal static partial int LStat(ref byte path, out FileStatus output);
 
         internal static int LStat(ReadOnlySpan<char> path, out FileStatus output)
         {
             var converter = new ValueUtf8Converter(stackalloc byte[DefaultPathBufferSize]);
-            int result = LStat(ref MemoryMarshal.GetReference(converter.ConvertAndTerminateString(path)), out output);
+            int result = LStat(
+                ref MemoryMarshal.GetReference(converter.ConvertAndTerminateString(path)),
+                out output
+            );
             converter.Dispose();
             return result;
         }

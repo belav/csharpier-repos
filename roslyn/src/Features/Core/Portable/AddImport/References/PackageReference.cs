@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SearchResult searchResult,
                 string source,
                 string packageName,
-                string versionOpt)
-                : base(provider, searchResult)
+                string versionOpt
+            ) : base(provider, searchResult)
             {
                 _source = source;
                 _packageName = packageName;
@@ -32,27 +32,39 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             public override async Task<AddImportFixData> TryGetFixDataAsync(
-                Document document, SyntaxNode node, bool allowInHiddenRegions, CancellationToken cancellationToken)
+                Document document,
+                SyntaxNode node,
+                bool allowInHiddenRegions,
+                CancellationToken cancellationToken
+            )
             {
                 var textChanges = await GetTextChangesAsync(
-                    document, node, allowInHiddenRegions, cancellationToken).ConfigureAwait(false);
+                        document,
+                        node,
+                        allowInHiddenRegions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return AddImportFixData.CreateForPackageSymbol(
-                    textChanges, _source, _packageName, _versionOpt);
+                    textChanges,
+                    _source,
+                    _packageName,
+                    _versionOpt
+                );
             }
 
             public override bool Equals(object obj)
             {
                 var reference = obj as PackageReference;
-                return base.Equals(obj) &&
-                    _packageName == reference._packageName &&
-                    _versionOpt == reference._versionOpt;
+                return base.Equals(obj)
+                    && _packageName == reference._packageName
+                    && _versionOpt == reference._versionOpt;
             }
 
             public override int GetHashCode()
             {
-                return Hash.Combine(_versionOpt,
-                    Hash.Combine(_packageName, base.GetHashCode()));
+                return Hash.Combine(_versionOpt, Hash.Combine(_packageName, base.GetHashCode()));
             }
         }
     }

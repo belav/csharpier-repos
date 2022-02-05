@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         protected SelectionValidator(
             SemanticDocument document,
             TextSpan textSpan,
-            OptionSet options)
+            OptionSet options
+        )
         {
             Contract.ThrowIfNull(document);
 
@@ -40,23 +41,39 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
         public bool ContainsValidSelection
         {
-            get
-            {
-                return !OriginalSpan.IsEmpty;
-            }
+            get { return !OriginalSpan.IsEmpty; }
         }
 
-        public abstract Task<SelectionResult> GetValidSelectionAsync(CancellationToken cancellationToken);
-        public abstract IEnumerable<SyntaxNode> GetOuterReturnStatements(SyntaxNode commonRoot, IEnumerable<SyntaxNode> jumpsOutOfRegion);
-        public abstract bool IsFinalSpanSemanticallyValidSpan(SyntaxNode node, TextSpan textSpan, IEnumerable<SyntaxNode> returnStatements, CancellationToken cancellationToken);
-        public abstract bool ContainsNonReturnExitPointsStatements(IEnumerable<SyntaxNode> jumpsOutOfRegion);
+        public abstract Task<SelectionResult> GetValidSelectionAsync(
+            CancellationToken cancellationToken
+        );
+        public abstract IEnumerable<SyntaxNode> GetOuterReturnStatements(
+            SyntaxNode commonRoot,
+            IEnumerable<SyntaxNode> jumpsOutOfRegion
+        );
+        public abstract bool IsFinalSpanSemanticallyValidSpan(
+            SyntaxNode node,
+            TextSpan textSpan,
+            IEnumerable<SyntaxNode> returnStatements,
+            CancellationToken cancellationToken
+        );
+        public abstract bool ContainsNonReturnExitPointsStatements(
+            IEnumerable<SyntaxNode> jumpsOutOfRegion
+        );
 
         protected bool IsFinalSpanSemanticallyValidSpan(
-            SemanticModel semanticModel, TextSpan textSpan, Tuple<SyntaxNode, SyntaxNode> range, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            TextSpan textSpan,
+            Tuple<SyntaxNode, SyntaxNode> range,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(range);
 
-            var controlFlowAnalysisData = semanticModel.AnalyzeControlFlow(range.Item1, range.Item2);
+            var controlFlowAnalysisData = semanticModel.AnalyzeControlFlow(
+                range.Item1,
+                range.Item2
+            );
 
             // there must be no control in and out of given span
             if (controlFlowAnalysisData.EntryPoints.Any())
@@ -71,7 +88,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             }
 
             // okay, there is no branch out, check whether next statement can be executed normally
-            var returnStatements = GetOuterReturnStatements(range.Item1.GetCommonRoot(range.Item2), controlFlowAnalysisData.ExitPoints);
+            var returnStatements = GetOuterReturnStatements(
+                range.Item1.GetCommonRoot(range.Item2),
+                controlFlowAnalysisData.ExitPoints
+            );
             if (!returnStatements.Any())
             {
                 if (!controlFlowAnalysisData.EndPointIsReachable)
@@ -95,12 +115,20 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             }
 
             // there is a return statement, and current position is reachable. let's check whether this is a case where that is okay
-            return IsFinalSpanSemanticallyValidSpan(semanticModel.SyntaxTree.GetRoot(cancellationToken), textSpan, returnStatements, cancellationToken);
+            return IsFinalSpanSemanticallyValidSpan(
+                semanticModel.SyntaxTree.GetRoot(cancellationToken),
+                textSpan,
+                returnStatements,
+                cancellationToken
+            );
         }
 
         protected static Tuple<SyntaxNode, SyntaxNode> GetStatementRangeContainingSpan<T>(
             ISyntaxFacts syntaxFacts,
-            SyntaxNode root, TextSpan textSpan, CancellationToken cancellationToken) where T : SyntaxNode
+            SyntaxNode root,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        ) where T : SyntaxNode
         {
             // use top-down approach to find smallest statement range that contains given span.
             // this approach is more expansive than bottom-up approach I used before but way simpler and easy to understand
@@ -138,10 +166,15 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     spine.Add(stmt);
                 }
 
-                if (textSpan.End <= stmt.Span.End && spine.Any(s => CanMergeExistingSpineWithCurrent(syntaxFacts, s, stmt)))
+                if (
+                    textSpan.End <= stmt.Span.End
+                    && spine.Any(s => CanMergeExistingSpineWithCurrent(syntaxFacts, s, stmt))
+                )
                 {
                     // malformed code or selection can make spine to have more than an elements
-                    firstStatement = spine.First(s => CanMergeExistingSpineWithCurrent(syntaxFacts, s, stmt));
+                    firstStatement = spine.First(
+                        s => CanMergeExistingSpineWithCurrent(syntaxFacts, s, stmt)
+                    );
                     lastStatement = stmt;
 
                     spine.Clear();
@@ -155,12 +188,18 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             return new Tuple<SyntaxNode, SyntaxNode>(firstStatement, lastStatement);
 
-            static bool CanMergeExistingSpineWithCurrent(ISyntaxFacts syntaxFacts, T existing, T current)
-                => syntaxFacts.AreStatementsInSameContainer(existing, current);
+            static bool CanMergeExistingSpineWithCurrent(
+                ISyntaxFacts syntaxFacts,
+                T existing,
+                T current
+            ) => syntaxFacts.AreStatementsInSameContainer(existing, current);
         }
 
         protected static Tuple<SyntaxNode, SyntaxNode> GetStatementRangeContainedInSpan<T>(
-            SyntaxNode root, TextSpan textSpan, CancellationToken cancellationToken) where T : SyntaxNode
+            SyntaxNode root,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        ) where T : SyntaxNode
         {
             // use top-down approach to find largest statement range contained in the given span
             // this method is a bit more expensive than bottom-up approach, but way more simpler than the other approach.
@@ -181,7 +220,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     firstStatement = stmt;
                 }
 
-                if (firstStatement != null && stmt.Span.End <= textSpan.End && stmt.Parent == firstStatement.Parent)
+                if (
+                    firstStatement != null
+                    && stmt.Span.End <= textSpan.End
+                    && stmt.Parent == firstStatement.Parent
+                )
                 {
                     lastStatement = stmt;
                 }

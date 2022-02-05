@@ -26,8 +26,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
 
             public class Context : DbContext
             {
-                public Context()
-                    : base()
+                public Context() : base()
                 {
                     Database.SetInitializer<Context>(new DatabaseInitializer());
                 }
@@ -45,11 +44,14 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                 }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Source, Dest>();
-                cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateProjection<Source, Dest>();
+                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    }
+                );
 
             [Fact]
             public async Task Should_transform_value()
@@ -79,8 +81,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
 
             public class Context : DbContext
             {
-                public Context()
-                    : base()
+                public Context() : base()
                 {
                     Database.SetInitializer<Context>(new DatabaseInitializer());
                 }
@@ -98,12 +99,15 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                 }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Source, Dest>();
-                cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateProjection<Source, Dest>();
+                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    }
+                );
 
             [Fact]
             public async Task Should_stack_transformers_in_order()
@@ -131,17 +135,22 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                 public string Value { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Source, Dest>();
-                cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                cfg.CreateProfile("Other", p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!"));
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateProjection<Source, Dest>();
+                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        cfg.CreateProfile(
+                            "Other",
+                            p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!")
+                        );
+                    }
+                );
 
             public class Context : DbContext
             {
-                public Context()
-                    : base()
+                public Context() : base()
                 {
                     Database.SetInitializer<Context>(new DatabaseInitializer());
                 }
@@ -187,8 +196,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
 
             public class Context : DbContext
             {
-                public Context()
-                    : base()
+                public Context() : base()
                 {
                     Database.SetInitializer<Context>(new DatabaseInitializer());
                 }
@@ -205,15 +213,24 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                     base.Seed(context);
                 }
             }
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                cfg.CreateProfile("Other", p =>
-                {
-                    p.CreateProjection<Source, Dest>();
-                    p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                });
-            });
+
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                        cfg.CreateProfile(
+                            "Other",
+                            p =>
+                            {
+                                p.CreateProjection<Source, Dest>();
+                                p.ValueTransformers.Add<string>(
+                                    dest => dest + " is straight up dope"
+                                );
+                            }
+                        );
+                    }
+                );
 
             [Fact]
             public async Task ShouldApplyProfileFirstThenRoot()
@@ -243,8 +260,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
 
             public class Context : DbContext
             {
-                public Context()
-                    : base()
+                public Context() : base()
                 {
                     Database.SetInitializer<Context>(new DatabaseInitializer());
                 }
@@ -261,15 +277,22 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                     base.Seed(context);
                 }
             }
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.ValueTransformers.Add<int>(dest => dest * 2);
-                cfg.CreateProfile("Other", p =>
-                {
-                    p.CreateProjection<Source, Dest>();
-                    p.ValueTransformers.Add<int>(dest => dest + 3);
-                });
-            });
+
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.ValueTransformers.Add<int>(dest => dest * 2);
+                        cfg.CreateProfile(
+                            "Other",
+                            p =>
+                            {
+                                p.CreateProjection<Source, Dest>();
+                                p.ValueTransformers.Add<int>(dest => dest + 3);
+                            }
+                        );
+                    }
+                );
 
             [Fact]
             public async Task ShouldApplyProfileFirstThenRoot()
@@ -299,8 +322,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
 
             public class Context : DbContext
             {
-                public Context()
-                    : base()
+                public Context() : base()
                 {
                     Database.SetInitializer<Context>(new DatabaseInitializer());
                 }
@@ -318,16 +340,24 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                 }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                cfg.CreateProfile("Other", p =>
-                {
-                    p.CreateProjection<Source, Dest>()
-                        .ValueTransformers.Add<string>(dest => dest + ", for real,");
-                    p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                });
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                        cfg.CreateProfile(
+                            "Other",
+                            p =>
+                            {
+                                p.CreateProjection<Source, Dest>()
+                                    .ValueTransformers.Add<string>(dest => dest + ", for real,");
+                                p.ValueTransformers.Add<string>(
+                                    dest => dest + " is straight up dope"
+                                );
+                            }
+                        );
+                    }
+                );
 
             [Fact]
             public async Task ShouldApplyTypeMapThenProfileThenRoot()
@@ -357,8 +387,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
 
             public class Context : DbContext
             {
-                public Context()
-                    : base()
+                public Context() : base()
                 {
                     Database.SetInitializer<Context>(new DatabaseInitializer());
                 }
@@ -375,17 +404,29 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                     base.Seed(context);
                 }
             }
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                cfg.CreateProfile("Other", p =>
-                {
-                    p.CreateProjection<Source, Dest>()
-                        .AddTransform<string>(dest => dest + ", for real,")
-                        .ForMember(d => d.Value, opt => opt.AddTransform(d => d + ", seriously"));
-                    p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                });
-            });
+
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                        cfg.CreateProfile(
+                            "Other",
+                            p =>
+                            {
+                                p.CreateProjection<Source, Dest>()
+                                    .AddTransform<string>(dest => dest + ", for real,")
+                                    .ForMember(
+                                        d => d.Value,
+                                        opt => opt.AddTransform(d => d + ", seriously")
+                                    );
+                                p.ValueTransformers.Add<string>(
+                                    dest => dest + " is straight up dope"
+                                );
+                            }
+                        );
+                    }
+                );
 
             [Fact]
             public async Task ShouldApplyTypeMapThenProfileThenRoot()
@@ -394,7 +435,9 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                 {
                     var dest = await ProjectTo<Dest>(context.Sources).SingleAsync();
 
-                    dest.Value.ShouldBe("Jimmy, seriously, for real, is straight up dope! No joke!");
+                    dest.Value.ShouldBe(
+                        "Jimmy, seriously, for real, is straight up dope! No joke!"
+                    );
                 }
             }
         }

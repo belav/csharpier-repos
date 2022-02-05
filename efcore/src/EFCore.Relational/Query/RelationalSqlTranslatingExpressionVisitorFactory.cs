@@ -14,14 +14,16 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///     The implementation may depend on other services registered with any lifetime.
     ///     The implementation does not need to be thread-safe.
     /// </remarks>
-    public class RelationalSqlTranslatingExpressionVisitorFactory : IRelationalSqlTranslatingExpressionVisitorFactory
+    public class RelationalSqlTranslatingExpressionVisitorFactory
+        : IRelationalSqlTranslatingExpressionVisitorFactory
     {
         /// <summary>
         ///     Creates an instance of the <see cref="RelationalSqlTranslatingExpressionVisitorFactory"/>.
         /// </summary>
         /// <param name="dependencies">The service dependencies.</param>
         public RelationalSqlTranslatingExpressionVisitorFactory(
-            RelationalSqlTranslatingExpressionVisitorDependencies dependencies)
+            RelationalSqlTranslatingExpressionVisitorDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -39,10 +41,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <returns>A relational sql translating expression visitor.</returns>
         public virtual RelationalSqlTranslatingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext,
-            QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor)
-            => new RelationalSqlTranslatingExpressionVisitor(
+            QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
+        ) =>
+            new RelationalSqlTranslatingExpressionVisitor(
                 Dependencies,
                 queryCompilationContext,
-                queryableMethodTranslatingExpressionVisitor);
+                queryableMethodTranslatingExpressionVisitor
+            );
     }
 }

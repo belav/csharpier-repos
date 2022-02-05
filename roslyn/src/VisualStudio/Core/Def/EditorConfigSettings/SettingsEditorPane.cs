@@ -30,7 +30,11 @@ using static Microsoft.VisualStudio.VSConstants;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 {
-    internal sealed partial class SettingsEditorPane : WindowPane, IOleComponent, IVsDeferredDocView, IVsLinkedUndoClient
+    internal sealed partial class SettingsEditorPane
+        : WindowPane,
+          IOleComponent,
+          IVsDeferredDocView,
+          IVsLinkedUndoClient
     {
         private readonly IVsEditorAdaptersFactoryService _vsEditorAdaptersFactoryService;
         private readonly IThreadingContext _threadingContext;
@@ -44,15 +48,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
         private IOleUndoManager? _undoManager;
         private SettingsEditorControl? _control;
 
-        public SettingsEditorPane(IVsEditorAdaptersFactoryService vsEditorAdaptersFactoryService,
-                                  IThreadingContext threadingContext,
-                                  ISettingsAggregator settingsDataProviderService,
-                                  IWpfTableControlProvider controlProvider,
-                                  ITableManagerProvider tableMangerProvider,
-                                  string fileName,
-                                  IVsTextLines textBuffer,
-                                  Workspace workspace)
-            : base(null)
+        public SettingsEditorPane(
+            IVsEditorAdaptersFactoryService vsEditorAdaptersFactoryService,
+            IThreadingContext threadingContext,
+            ISettingsAggregator settingsDataProviderService,
+            IWpfTableControlProvider controlProvider,
+            ITableManagerProvider tableMangerProvider,
+            string fileName,
+            IVsTextLines textBuffer,
+            Workspace workspace
+        ) : base(null)
         {
             _vsEditorAdaptersFactoryService = vsEditorAdaptersFactoryService;
             _threadingContext = threadingContext;
@@ -69,20 +74,34 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             base.Initialize();
 
             // Create and initialize the editor
-            if (_componentId == default && this.TryGetService<SOleComponentManager, IOleComponentManager>(out var componentManager))
+            if (
+                _componentId == default
+                && this.TryGetService<SOleComponentManager, IOleComponentManager>(
+                    out var componentManager
+                )
+            )
             {
                 var componentRegistrationInfo = new[]
                 {
                     new OLECRINFO
                     {
                         cbSize = (uint)Marshal.SizeOf(typeof(OLECRINFO)),
-                        grfcrf = (uint)_OLECRF.olecrfNeedIdleTime | (uint)_OLECRF.olecrfNeedPeriodicIdleTime,
-                        grfcadvf = (uint)_OLECADVF.olecadvfModal | (uint)_OLECADVF.olecadvfRedrawOff | (uint)_OLECADVF.olecadvfWarningsOff,
+                        grfcrf =
+                            (uint)_OLECRF.olecrfNeedIdleTime
+                            | (uint)_OLECRF.olecrfNeedPeriodicIdleTime,
+                        grfcadvf =
+                            (uint)_OLECADVF.olecadvfModal
+                            | (uint)_OLECADVF.olecadvfRedrawOff
+                            | (uint)_OLECADVF.olecadvfWarningsOff,
                         uIdleTimeInterval = 100
                     }
                 };
 
-                var hr = componentManager.FRegisterComponent(this, componentRegistrationInfo, out _componentId);
+                var hr = componentManager.FRegisterComponent(
+                    this,
+                    componentRegistrationInfo,
+                    out _componentId
+                );
                 _ = ErrorHandler.Succeeded(hr);
             }
 
@@ -99,13 +118,21 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             if (statusService is not null)
             {
                 // This will show the 'Waiting for Intellisense to initalize' message until the workspace is loaded.
-                _threadingContext.JoinableTaskFactory.Run(async () =>
-                {
-                    if (!await statusService.IsFullyLoadedAsync(CancellationToken.None).ConfigureAwait(false))
+                _threadingContext.JoinableTaskFactory.Run(
+                    async () =>
                     {
-                        await statusService.WaitUntilFullyLoadedAsync(CancellationToken.None).ConfigureAwait(false);
+                        if (
+                            !await statusService
+                                .IsFullyLoadedAsync(CancellationToken.None)
+                                .ConfigureAwait(false)
+                        )
+                        {
+                            await statusService
+                                .WaitUntilFullyLoadedAsync(CancellationToken.None)
+                                .ConfigureAwait(false);
+                        }
                     }
-                });
+                );
             }
 
             var whitespaceView = GetWhitespaceView();
@@ -113,14 +140,15 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             var analyzerView = GetAnalyzerView();
 
             _control = new SettingsEditorControl(
-                 whitespaceView,
-                 codeStyleView,
-                 analyzerView,
-                 _workspace,
-                 _fileName,
-                 _threadingContext,
-                 _vsEditorAdaptersFactoryService,
-                 _textBuffer);
+                whitespaceView,
+                codeStyleView,
+                analyzerView,
+                _workspace,
+                _fileName,
+                _threadingContext,
+                _vsEditorAdaptersFactoryService,
+                _textBuffer
+            );
 
             RegisterForSearch(_control);
 
@@ -129,10 +157,20 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             RegisterIndependentView(true);
             if (this.TryGetService<IMenuCommandService>(out var menuCommandService))
             {
-                AddCommand(menuCommandService, GUID_VSStandardCommandSet97, (int)VSStd97CmdID.NewWindow,
-                                new EventHandler(OnNewWindow), new EventHandler(OnQueryNewWindow));
-                AddCommand(menuCommandService, GUID_VSStandardCommandSet97, (int)VSStd97CmdID.ViewCode,
-                                new EventHandler(OnViewCode), new EventHandler(OnQueryViewCode));
+                AddCommand(
+                    menuCommandService,
+                    GUID_VSStandardCommandSet97,
+                    (int)VSStd97CmdID.NewWindow,
+                    new EventHandler(OnNewWindow),
+                    new EventHandler(OnQueryNewWindow)
+                );
+                AddCommand(
+                    menuCommandService,
+                    GUID_VSStandardCommandSet97,
+                    (int)VSStd97CmdID.ViewCode,
+                    new EventHandler(OnViewCode),
+                    new EventHandler(OnQueryViewCode)
+                );
             }
 
             return;
@@ -140,47 +178,82 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             ISettingsEditorView GetWhitespaceView()
             {
                 return GetView<WhitespaceSetting>(
-                    static (dataProvider, controlProvider, tableMangerProvider) => new WhitespaceViewModel(dataProvider, controlProvider, tableMangerProvider),
-                    static viewModel => new WhitespaceSettingsView(viewModel));
+                    static (dataProvider, controlProvider, tableMangerProvider) =>
+                        new WhitespaceViewModel(dataProvider, controlProvider, tableMangerProvider),
+                    static viewModel => new WhitespaceSettingsView(viewModel)
+                );
             }
 
             ISettingsEditorView GetCodeStyleView()
             {
                 return GetView<CodeStyleSetting>(
-                    static (dataProvider, controlProvider, tableMangerProvider) => new CodeStyleSettingsViewModel(dataProvider, controlProvider, tableMangerProvider),
-                    static viewModel => new CodeStyleSettingsView(viewModel));
+                    static (dataProvider, controlProvider, tableMangerProvider) =>
+                        new CodeStyleSettingsViewModel(
+                            dataProvider,
+                            controlProvider,
+                            tableMangerProvider
+                        ),
+                    static viewModel => new CodeStyleSettingsView(viewModel)
+                );
             }
 
             ISettingsEditorView GetAnalyzerView()
             {
                 return GetView<AnalyzerSetting>(
-                    static (dataProvider, controlProvider, tableMangerProvider) => new AnalyzerSettingsViewModel(dataProvider, controlProvider, tableMangerProvider),
-                    static viewModel => new AnalyzerSettingsView(viewModel));
+                    static (dataProvider, controlProvider, tableMangerProvider) =>
+                        new AnalyzerSettingsViewModel(
+                            dataProvider,
+                            controlProvider,
+                            tableMangerProvider
+                        ),
+                    static viewModel => new AnalyzerSettingsView(viewModel)
+                );
             }
 
             ISettingsEditorView GetView<TData>(
-                Func<ISettingsProvider<TData>, IWpfTableControlProvider, ITableManagerProvider, IWpfSettingsEditorViewModel> createViewModel,
-                Func<IWpfSettingsEditorViewModel, ISettingsEditorView> createView)
+                Func<
+                    ISettingsProvider<TData>,
+                    IWpfTableControlProvider,
+                    ITableManagerProvider,
+                    IWpfSettingsEditorViewModel
+                > createViewModel,
+                Func<IWpfSettingsEditorViewModel, ISettingsEditorView> createView
+            )
             {
                 var dataProvider = GetDataProvider<TData>();
                 Assumes.NotNull(dataProvider);
-                var viewModel = createViewModel(dataProvider, _controlProvider, _tableMangerProvider);
+                var viewModel = createViewModel(
+                    dataProvider,
+                    _controlProvider,
+                    _tableMangerProvider
+                );
                 var view = createView(viewModel);
                 return view;
             }
 
             void RegisterForSearch(SettingsEditorControl control)
             {
-                var windowSearchHostFactory = this.GetService<SVsWindowSearchHostFactory, IVsWindowSearchHostFactory>();
+                var windowSearchHostFactory = this.GetService<
+                    SVsWindowSearchHostFactory,
+                    IVsWindowSearchHostFactory
+                >();
                 var minWidth = (int)control.SearchControlParent.MinWidth;
                 var maxWidth = (int)control.SearchControlParent.MaxWidth;
-                var searchHandler = new SearchHandler(_threadingContext, minWidth, maxWidth, control.GetTableControls());
-                var windowSearchHost = windowSearchHostFactory.CreateWindowSearchHost(control.SearchControlParent);
+                var searchHandler = new SearchHandler(
+                    _threadingContext,
+                    minWidth,
+                    maxWidth,
+                    control.GetTableControls()
+                );
+                var windowSearchHost = windowSearchHostFactory.CreateWindowSearchHost(
+                    control.SearchControlParent
+                );
                 windowSearchHost.SetupSearch(searchHandler);
                 windowSearchHost.IsVisible = true;
             }
 
-            ISettingsProvider<TData>? GetDataProvider<TData>() => _settingsDataProviderService.GetSettingsProvider<TData>(_fileName);
+            ISettingsProvider<TData>? GetDataProvider<TData>() =>
+                _settingsDataProviderService.GetSettingsProvider<TData>(_fileName);
         }
 
         private void OnQueryNewWindow(object sender, EventArgs e)
@@ -207,11 +280,18 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
         private void NewWindow()
         {
-            if (this.TryGetService<SVsUIShellOpenDocument, IVsUIShellOpenDocument>(out var uishellOpenDocument) &&
-                this.TryGetService<SVsWindowFrame, IVsWindowFrame>(out var windowFrameOrig))
+            if (
+                this.TryGetService<SVsUIShellOpenDocument, IVsUIShellOpenDocument>(
+                    out var uishellOpenDocument
+                ) && this.TryGetService<SVsWindowFrame, IVsWindowFrame>(out var windowFrameOrig)
+            )
             {
                 var logicalView = Guid.Empty;
-                var hr = uishellOpenDocument.OpenCopyOfStandardEditor(windowFrameOrig, ref logicalView, out var windowFrameNew);
+                var hr = uishellOpenDocument.OpenCopyOfStandardEditor(
+                    windowFrameOrig,
+                    ref logicalView,
+                    out var windowFrameNew
+                );
                 if (windowFrameNew != null)
                 {
                     hr = windowFrameNew.Show();
@@ -226,8 +306,15 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             var sourceCodeTextEditorGuid = VsEditorFactoryGuid.TextEditor_guid;
 
             // Open the referenced document using our editor.
-            VsShellUtilities.OpenDocumentWithSpecificEditor(this, _fileName,
-                sourceCodeTextEditorGuid, LOGVIEWID_Primary, out _, out _, out var frame);
+            VsShellUtilities.OpenDocumentWithSpecificEditor(
+                this,
+                _fileName,
+                sourceCodeTextEditorGuid,
+                LOGVIEWID_Primary,
+                out _,
+                out _,
+                out var frame
+            );
             _ = ErrorHandler.ThrowOnFailure(frame.Show());
         }
 
@@ -247,15 +334,19 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 // This is done by calling IVsLifetimeControlledObject.SeverReferencesToOwner on the undoManager.
                 // This call will clear the undo and redo stacks. This is particularly important to do if
                 // your undo units hold references back to your object. It is also important if you use
-                // "mdtStrict" linked undo transactions as this sample does (see IVsLinkedUndoTransactionManager). 
-                // When one object involved in linked undo transactions clears its undo/redo stacks, then 
-                // the stacks of the other documents involved in the linked transaction will also be cleared. 
+                // "mdtStrict" linked undo transactions as this sample does (see IVsLinkedUndoTransactionManager).
+                // When one object involved in linked undo transactions clears its undo/redo stacks, then
+                // the stacks of the other documents involved in the linked transaction will also be cleared.
                 var lco = (IVsLifetimeControlledObject)_undoManager;
                 _ = lco.SeverReferencesToOwner();
                 _undoManager = null;
             }
 
-            if (this.TryGetService<SOleComponentManager, IOleComponentManager>(out var componentManager))
+            if (
+                this.TryGetService<SOleComponentManager, IOleComponentManager>(
+                    out var componentManager
+                )
+            )
             {
                 _ = componentManager.FRevokeComponent(_componentId);
             }
@@ -303,11 +394,13 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
         /// <param name="commandEvent"> An EventHandler which will be called whenever the command is invoked.</param>
         /// <param name="queryEvent"> An EventHandler which will be called whenever we want to query the status of
         /// the command.  If null is passed in here then no EventHandler will be added.</param>
-        private static void AddCommand(IMenuCommandService menuCommandService,
-                                       Guid menuGroup,
-                                       int cmdID,
-                                       EventHandler commandEvent,
-                                       EventHandler queryEvent)
+        private static void AddCommand(
+            IMenuCommandService menuCommandService,
+            Guid menuGroup,
+            int cmdID,
+            EventHandler commandEvent,
+            EventHandler queryEvent
+        )
         {
             // Create the OleMenuCommand from the menu group, command ID, and command event
             var menuCommandID = new CommandID(menuGroup, cmdID);
@@ -336,15 +429,32 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
         }
 
         public int FReserved1(uint dwReserved, uint message, IntPtr wParam, IntPtr lParam) => S_OK;
+
         public int FPreTranslateMessage(MSG[] pMsg) => S_OK;
+
         public void OnEnterState(uint uStateID, int fEnter) { }
+
         public void OnAppActivate(int fActive, uint dwOtherThreadID) { }
+
         public void OnLoseActivation() { }
-        public void OnActivationChange(IOleComponent pic, int fSameComponent, OLECRINFO[] pcrinfo, int fHostIsActivating, OLECHOSTINFO[] pchostinfo, uint dwReserved) { }
+
+        public void OnActivationChange(
+            IOleComponent pic,
+            int fSameComponent,
+            OLECRINFO[] pcrinfo,
+            int fHostIsActivating,
+            OLECHOSTINFO[] pchostinfo,
+            uint dwReserved
+        ) { }
+
         public int FContinueMessageLoop(uint uReason, IntPtr pvLoopData, MSG[] pMsgPeeked) => S_OK;
+
         public int FQueryTerminate(int fPromptUser) => 1; //true
+
         public void Terminate() { }
+
         public IntPtr HwndGetWindow(uint dwWhich, uint dwReserved) => IntPtr.Zero;
+
         public int OnInterveningUnitBlockingLinkedUndo() => E_FAIL;
     }
 }

@@ -4,23 +4,22 @@
 
 /*
     csc /o+ InlineRecursion.cs
-
+    
     Expected:
-
-        Caught DivideByZeroException: System.DivideByZeroException: Attempted to divide by zero.
-           at MainApp.Foo()
-           at MainApp.Main()
-        Passed!
-
-    Any other outcome is a bug.        
-*/
+    
+    Caught DivideByZeroException: System.DivideByZeroException: Attempted to divide by zero.
+    at MainApp.Foo()
+    at MainApp.Main()
+    Passed!
+    
+    Any other outcome is a bug.
+    */
 
 using System;
 using System.Runtime.CompilerServices;
 
 class MainApp
 {
-
     static int one = 1;
     static int zero = 0;
     static int result;
@@ -55,9 +54,5 @@ class MainApp
             Console.WriteLine("Failed.");
             return 101;
         }
-
     }
-
 }
-
-

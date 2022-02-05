@@ -61,7 +61,11 @@ namespace System.Data.OleDb
             }
 
             UnsafeNativeMethods.ISQLErrorInfo sqlErrorInfo;
-            hr = errorRecords.GetCustomErrorObject(index, ref ODB.IID_ISQLErrorInfo, out sqlErrorInfo);
+            hr = errorRecords.GetCustomErrorObject(
+                index,
+                ref ODB.IID_ISQLErrorInfo,
+                out sqlErrorInfo
+            );
 
             if (null != sqlErrorInfo)
             {
@@ -81,10 +85,7 @@ namespace System.Data.OleDb
 
         public int NativeError
         {
-            get
-            {
-                return this.nativeError;
-            }
+            get { return this.nativeError; }
         }
 
         public string Source

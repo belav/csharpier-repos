@@ -9,8 +9,10 @@ namespace JitTest
     {
         private static int Main()
         {
-            long L1, L2;
-            ulong U1, U2;
+            long L1,
+                L2;
+            ulong U1,
+                U2;
             try
             {
                 L1 = 0x7000123480001234;
@@ -40,7 +42,7 @@ namespace JitTest
             }
             Console.WriteLine("Passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Failed");
             return 1;
         }

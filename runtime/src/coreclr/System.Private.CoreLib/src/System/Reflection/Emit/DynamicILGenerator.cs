@@ -23,11 +23,13 @@ namespace System.Reflection.Emit
 
         internal void GetCallableMethod(RuntimeModule module, DynamicMethod dm)
         {
-            dm.m_methodHandle = ModuleHandle.GetDynamicMethod(dm,
-                                          module,
-                                          m_methodBuilder.Name,
-                                          (byte[])m_scope[m_methodSigToken]!,
-                                          new DynamicResolver(this));
+            dm.m_methodHandle = ModuleHandle.GetDynamicMethod(
+                dm,
+                module,
+                m_methodBuilder.Name,
+                (byte[])m_scope[m_methodSigToken]!,
+                new DynamicResolver(this)
+            );
         }
 
         // *** ILGenerator api ***
@@ -78,7 +80,11 @@ namespace System.Reflection.Emit
             else
             {
                 // rule out not allowed operations on DynamicMethods
-                if (opcode.Equals(OpCodes.Ldtoken) || opcode.Equals(OpCodes.Ldftn) || opcode.Equals(OpCodes.Ldvirtftn))
+                if (
+                    opcode.Equals(OpCodes.Ldtoken)
+                    || opcode.Equals(OpCodes.Ldftn)
+                    || opcode.Equals(OpCodes.Ldvirtftn)
+                )
                 {
                     throw new ArgumentException(SR.Argument_InvalidOpCodeOnDynamicMethod);
                 }
@@ -88,8 +94,10 @@ namespace System.Reflection.Emit
             EnsureCapacity(7);
             InternalEmit(opcode);
 
-            if (opcode.StackBehaviourPush == StackBehaviour.Varpush
-                && meth.ReturnType != typeof(void))
+            if (
+                opcode.StackBehaviourPush == StackBehaviour.Varpush
+                && meth.ReturnType != typeof(void)
+            )
             {
                 stackchange++;
             }
@@ -99,8 +107,14 @@ namespace System.Reflection.Emit
             }
             // Pop the "this" parameter if the method is non-static,
             //  and the instruction is not newobj/ldtoken/ldftn.
-            if (!meth.IsStatic &&
-                !(opcode.Equals(OpCodes.Newobj) || opcode.Equals(OpCodes.Ldtoken) || opcode.Equals(OpCodes.Ldftn)))
+            if (
+                !meth.IsStatic
+                && !(
+                    opcode.Equals(OpCodes.Newobj)
+                    || opcode.Equals(OpCodes.Ldtoken)
+                    || opcode.Equals(OpCodes.Ldftn)
+                )
+            )
             {
                 stackchange--;
             }
@@ -189,22 +203,28 @@ namespace System.Reflection.Emit
         // Signature related calls (vararg, calli)
         //
         //
-        public override void EmitCalli(OpCode opcode,
-                                       CallingConventions callingConvention,
-                                       Type? returnType,
-                                       Type[]? parameterTypes,
-                                       Type[]? optionalParameterTypes)
+        public override void EmitCalli(
+            OpCode opcode,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type[]? optionalParameterTypes
+        )
         {
             int stackchange = 0;
             SignatureHelper sig;
             if (optionalParameterTypes != null)
                 if ((callingConvention & CallingConventions.VarArgs) == 0)
-                    throw new InvalidOperationException(SR.InvalidOperation_NotAVarArgCallingConvention);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_NotAVarArgCallingConvention
+                    );
 
-            sig = GetMemberRefSignature(callingConvention,
-                                        returnType,
-                                        parameterTypes,
-                                        optionalParameterTypes);
+            sig = GetMemberRefSignature(
+                callingConvention,
+                returnType,
+                parameterTypes,
+                optionalParameterTypes
+            );
 
             EnsureCapacity(7);
             Emit(OpCodes.Calli);
@@ -229,7 +249,12 @@ namespace System.Reflection.Emit
             PutInteger4(token);
         }
 
-        public override void EmitCalli(OpCode opcode, CallingConvention unmanagedCallConv, Type? returnType, Type[]? parameterTypes)
+        public override void EmitCalli(
+            OpCode opcode,
+            CallingConvention unmanagedCallConv,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
             int stackchange = 0;
             int cParams = 0;
@@ -264,18 +289,31 @@ namespace System.Reflection.Emit
             PutInteger4(token);
         }
 
-        public override void EmitCall(OpCode opcode, MethodInfo methodInfo, Type[]? optionalParameterTypes)
+        public override void EmitCall(
+            OpCode opcode,
+            MethodInfo methodInfo,
+            Type[]? optionalParameterTypes
+        )
         {
             if (methodInfo == null)
                 throw new ArgumentNullException(nameof(methodInfo));
 
-            if (!(opcode.Equals(OpCodes.Call) || opcode.Equals(OpCodes.Callvirt) || opcode.Equals(OpCodes.Newobj)))
+            if (
+                !(
+                    opcode.Equals(OpCodes.Call)
+                    || opcode.Equals(OpCodes.Callvirt)
+                    || opcode.Equals(OpCodes.Newobj)
+                )
+            )
                 throw new ArgumentException(SR.Argument_NotMethodCallOpcode, nameof(opcode));
 
             if (methodInfo.ContainsGenericParameters)
                 throw new ArgumentException(SR.Argument_GenericsInvalid, nameof(methodInfo));
 
-            if (methodInfo.DeclaringType != null && methodInfo.DeclaringType.ContainsGenericParameters)
+            if (
+                methodInfo.DeclaringType != null
+                && methodInfo.DeclaringType.ContainsGenericParameters
+            )
                 throw new ArgumentException(SR.Argument_GenericsInvalid, nameof(methodInfo));
 
             int tk;
@@ -293,7 +331,11 @@ namespace System.Reflection.Emit
             stackchange -= methodInfo.GetParameterTypes().Length;
             // Pop the this parameter if the method is non-static and the
             // instruction is not newobj.
-            if (!(methodInfo is SymbolMethod) && !methodInfo.IsStatic && !opcode.Equals(OpCodes.Newobj))
+            if (
+                !(methodInfo is SymbolMethod)
+                && !methodInfo.IsStatic
+                && !opcode.Equals(OpCodes.Newobj)
+            )
                 stackchange--;
             // Pop the optional parameters off the stack.
             if (optionalParameterTypes != null)
@@ -319,8 +361,10 @@ namespace System.Reflection.Emit
             // SignatureHelper.
             if (opcode.StackBehaviourPop == StackBehaviour.Varpop)
             {
-                Debug.Assert(opcode.Equals(OpCodes.Calli),
-                                "Unexpected opcode encountered for StackBehaviour VarPop.");
+                Debug.Assert(
+                    opcode.Equals(OpCodes.Calli),
+                    "Unexpected opcode encountered for StackBehaviour VarPop."
+                );
                 // Pop the arguments..
                 stackchange -= signature.ArgumentCount;
                 // Pop native function pointer off the stack.
@@ -422,14 +466,22 @@ namespace System.Reflection.Emit
             Type[][]? requiredCustomModifiers;
             Type[][]? optionalCustomModifiers;
 
-            if (optionalParameterTypes != null && (methodInfo.CallingConvention & CallingConventions.VarArgs) == 0)
-                throw new InvalidOperationException(SR.InvalidOperation_NotAVarArgCallingConvention);
+            if (
+                optionalParameterTypes != null
+                && (methodInfo.CallingConvention & CallingConventions.VarArgs) == 0
+            )
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_NotAVarArgCallingConvention
+                );
 
             RuntimeMethodInfo? rtMeth = methodInfo as RuntimeMethodInfo;
             DynamicMethod? dm = methodInfo as DynamicMethod;
 
             if (rtMeth == null && dm == null)
-                throw new ArgumentException(SR.Argument_MustBeRuntimeMethodInfo, nameof(methodInfo));
+                throw new ArgumentException(
+                    SR.Argument_MustBeRuntimeMethodInfo,
+                    nameof(methodInfo)
+                );
 
             ParameterInfo[] paramInfo = methodInfo.GetParametersNoCopy();
             if (paramInfo != null && paramInfo.Length != 0)
@@ -452,12 +504,14 @@ namespace System.Reflection.Emit
                 optionalCustomModifiers = null;
             }
 
-            SignatureHelper sig = GetMemberRefSignature(methodInfo.CallingConvention,
-                                                     MethodBuilder.GetMethodBaseReturnType(methodInfo),
-                                                     parameterTypes,
-                                                     requiredCustomModifiers,
-                                                     optionalCustomModifiers,
-                                                     optionalParameterTypes);
+            SignatureHelper sig = GetMemberRefSignature(
+                methodInfo.CallingConvention,
+                MethodBuilder.GetMethodBaseReturnType(methodInfo),
+                parameterTypes,
+                requiredCustomModifiers,
+                optionalCustomModifiers,
+                optionalParameterTypes
+            );
 
             if (rtMeth != null)
                 return GetTokenForVarArgMethod(rtMeth, sig);
@@ -466,14 +520,24 @@ namespace System.Reflection.Emit
         }
 
         internal override SignatureHelper GetMemberRefSignature(
-                                                CallingConventions call,
-                                                Type? returnType,
-                                                Type[]? parameterTypes,
-                                                Type[][]? requiredCustomModifiers,
-                                                Type[][]? optionalCustomModifiers,
-                                                Type[]? optionalParameterTypes)
+            CallingConventions call,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type[][]? requiredCustomModifiers,
+            Type[][]? optionalCustomModifiers,
+            Type[]? optionalParameterTypes
+        )
         {
-            SignatureHelper sig = SignatureHelper.GetMethodSigHelper(null, call, returnType, null, null, parameterTypes, requiredCustomModifiers, optionalCustomModifiers);
+            SignatureHelper sig = SignatureHelper.GetMethodSigHelper(
+                null,
+                call,
+                returnType,
+                null,
+                null,
+                parameterTypes,
+                requiredCustomModifiers,
+                optionalCustomModifiers
+            );
 
             if (optionalParameterTypes != null && optionalParameterTypes.Length != 0)
             {
@@ -695,8 +759,7 @@ namespace System.Reflection.Emit
             return num;
         }
 
-        internal override byte[] GetCodeInfo(
-            out int stackSize, out int initLocals, out int EHCount)
+        internal override byte[] GetCodeInfo(out int stackSize, out int initLocals, out int EHCount)
         {
             stackSize = m_stackSize;
             if (m_exceptionHeader != null && m_exceptionHeader.Length != 0)
@@ -750,22 +813,36 @@ namespace System.Reflection.Emit
                     exception->Flags = m_exceptions[i].GetExceptionTypes()[excNumber];
                     exception->TryOffset = m_exceptions[i].GetStartAddress();
                     if ((exception->Flags & __ExceptionInfo.Finally) != __ExceptionInfo.Finally)
-                        exception->TryLength = m_exceptions[i].GetEndAddress() - exception->TryOffset;
+                        exception->TryLength =
+                            m_exceptions[i].GetEndAddress() - exception->TryOffset;
                     else
-                        exception->TryLength = m_exceptions[i].GetFinallyEndAddress() - exception->TryOffset;
+                        exception->TryLength =
+                            m_exceptions[i].GetFinallyEndAddress() - exception->TryOffset;
                     exception->HandlerOffset = m_exceptions[i].GetCatchAddresses()[excNumber];
-                    exception->HandlerLength = m_exceptions[i].GetCatchEndAddresses()[excNumber] - exception->HandlerOffset;
+                    exception->HandlerLength =
+                        m_exceptions[i].GetCatchEndAddresses()[excNumber]
+                        - exception->HandlerOffset;
                     // this is cheating because the filter address is the token of the class only for light code gen
-                    exception->ClassTokenOrFilterOffset = m_exceptions[i].GetFilterAddresses()[excNumber];
+                    exception->ClassTokenOrFilterOffset = m_exceptions[i].GetFilterAddresses()[
+                        excNumber
+                    ];
                     break;
                 }
                 excNumber -= excCount;
             }
         }
 
-        internal override string? GetStringLiteral(int token) { return m_scope.GetString(token); }
+        internal override string? GetStringLiteral(int token)
+        {
+            return m_scope.GetString(token);
+        }
 
-        internal override void ResolveToken(int token, out IntPtr typeHandle, out IntPtr methodHandle, out IntPtr fieldHandle)
+        internal override void ResolveToken(
+            int token,
+            out IntPtr typeHandle,
+            out IntPtr methodHandle,
+            out IntPtr fieldHandle
+        )
         {
             typeHandle = default;
             methodHandle = default;
@@ -870,11 +947,17 @@ namespace System.Reflection.Emit
         #region Internal Methods
         internal void GetCallableMethod(RuntimeModule module, DynamicMethod dm)
         {
-            dm.m_methodHandle = ModuleHandle.GetDynamicMethod(dm,
-                module, m_method.Name, (byte[])m_scope[m_methodSignature]!, new DynamicResolver(this));
+            dm.m_methodHandle = ModuleHandle.GetDynamicMethod(
+                dm,
+                module,
+                m_method.Name,
+                (byte[])m_scope[m_methodSignature]!,
+                new DynamicResolver(this)
+            );
         }
 
-        internal byte[] LocalSignature => m_localSignature ??= SignatureHelper.GetLocalVarSigHelper().InternalGetSignatureArray();
+        internal byte[] LocalSignature =>
+            m_localSignature ??= SignatureHelper.GetLocalVarSigHelper().InternalGetSignatureArray();
         internal byte[] Exceptions => m_exceptions;
         internal byte[] Code => m_code;
         internal int MaxStackSize => m_maxStackSize;
@@ -894,7 +977,10 @@ namespace System.Reflection.Emit
         public unsafe void SetCode(byte* code, int codeSize, int maxStackSize)
         {
             if (codeSize < 0)
-                throw new ArgumentOutOfRangeException(nameof(codeSize), SR.ArgumentOutOfRange_GenericPositive);
+                throw new ArgumentOutOfRangeException(
+                    nameof(codeSize),
+                    SR.ArgumentOutOfRange_GenericPositive
+                );
             if (codeSize > 0 && code == null)
                 throw new ArgumentNullException(nameof(code));
 
@@ -911,7 +997,10 @@ namespace System.Reflection.Emit
         public unsafe void SetExceptions(byte* exceptions, int exceptionsSize)
         {
             if (exceptionsSize < 0)
-                throw new ArgumentOutOfRangeException(nameof(exceptionsSize), SR.ArgumentOutOfRange_GenericPositive);
+                throw new ArgumentOutOfRangeException(
+                    nameof(exceptionsSize),
+                    SR.ArgumentOutOfRange_GenericPositive
+                );
 
             if (exceptionsSize > 0 && exceptions == null)
                 throw new ArgumentNullException(nameof(exceptions));
@@ -921,14 +1010,18 @@ namespace System.Reflection.Emit
 
         public void SetLocalSignature(byte[]? localSignature)
         {
-            m_localSignature = (localSignature != null) ? (byte[])localSignature.Clone() : Array.Empty<byte>();
+            m_localSignature =
+                (localSignature != null) ? (byte[])localSignature.Clone() : Array.Empty<byte>();
         }
 
         [CLSCompliant(false)]
         public unsafe void SetLocalSignature(byte* localSignature, int signatureSize)
         {
             if (signatureSize < 0)
-                throw new ArgumentOutOfRangeException(nameof(signatureSize), SR.ArgumentOutOfRange_GenericPositive);
+                throw new ArgumentOutOfRangeException(
+                    nameof(signatureSize),
+                    SR.ArgumentOutOfRange_GenericPositive
+                );
 
             if (signatureSize > 0 && localSignature == null)
                 throw new ArgumentNullException(nameof(localSignature));
@@ -942,30 +1035,37 @@ namespace System.Reflection.Emit
         {
             return DynamicScope.GetTokenFor(method);
         }
+
         public int GetTokenFor(DynamicMethod method)
         {
             return DynamicScope.GetTokenFor(method);
         }
+
         public int GetTokenFor(RuntimeMethodHandle method, RuntimeTypeHandle contextType)
         {
             return DynamicScope.GetTokenFor(method, contextType);
         }
+
         public int GetTokenFor(RuntimeFieldHandle field)
         {
             return DynamicScope.GetTokenFor(field);
         }
+
         public int GetTokenFor(RuntimeFieldHandle field, RuntimeTypeHandle contextType)
         {
             return DynamicScope.GetTokenFor(field, contextType);
         }
+
         public int GetTokenFor(RuntimeTypeHandle type)
         {
             return DynamicScope.GetTokenFor(type);
         }
+
         public int GetTokenFor(string literal)
         {
             return DynamicScope.GetTokenFor(literal);
         }
+
         public int GetTokenFor(byte[] signature)
         {
             return DynamicScope.GetTokenFor(signature);
@@ -998,7 +1098,11 @@ namespace System.Reflection.Emit
             m_tokens.Add(varArgMethod);
             return m_tokens.Count - 1 | (int)MetadataTokenType.MemberRef;
         }
-        internal string? GetString(int token) { return this[token] as string; }
+
+        internal string? GetString(int token)
+        {
+            return this[token] as string;
+        }
 
         internal byte[]? ResolveSignature(int token, int fromMethod)
         {
@@ -1028,7 +1132,9 @@ namespace System.Reflection.Emit
                         MethodBase m = RuntimeType.GetMethodBase(methodReal)!;
                         Type t = m.DeclaringType!.GetGenericTypeDefinition();
 
-                        throw new ArgumentException(SR.Format(SR.Argument_MethodDeclaringTypeGenericLcg, m, t));
+                        throw new ArgumentException(
+                            SR.Format(SR.Argument_MethodDeclaringTypeGenericLcg, m, t)
+                        );
                     }
                 }
             }
@@ -1036,36 +1142,43 @@ namespace System.Reflection.Emit
             m_tokens.Add(method);
             return m_tokens.Count - 1 | (int)MetadataTokenType.MethodDef;
         }
+
         public int GetTokenFor(RuntimeMethodHandle method, RuntimeTypeHandle typeContext)
         {
             m_tokens.Add(new GenericMethodInfo(method, typeContext));
             return m_tokens.Count - 1 | (int)MetadataTokenType.MethodDef;
         }
+
         public int GetTokenFor(DynamicMethod method)
         {
             m_tokens.Add(method);
             return m_tokens.Count - 1 | (int)MetadataTokenType.MethodDef;
         }
+
         public int GetTokenFor(RuntimeFieldHandle field)
         {
             m_tokens.Add(field);
             return m_tokens.Count - 1 | (int)MetadataTokenType.FieldDef;
         }
+
         public int GetTokenFor(RuntimeFieldHandle field, RuntimeTypeHandle typeContext)
         {
             m_tokens.Add(new GenericFieldInfo(field, typeContext));
             return m_tokens.Count - 1 | (int)MetadataTokenType.FieldDef;
         }
+
         public int GetTokenFor(RuntimeTypeHandle type)
         {
             m_tokens.Add(type);
             return m_tokens.Count - 1 | (int)MetadataTokenType.TypeDef;
         }
+
         public int GetTokenFor(string literal)
         {
             m_tokens.Add(literal);
             return m_tokens.Count - 1 | (int)MetadataTokenType.String;
         }
+
         public int GetTokenFor(byte[] signature)
         {
             m_tokens.Add(signature);

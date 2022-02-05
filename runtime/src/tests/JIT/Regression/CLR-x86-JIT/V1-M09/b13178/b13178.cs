@@ -34,7 +34,6 @@ namespace DefaultNamespace
             oo = (m_rr != -1) ? m_rr : ((uu + m_cc - 1) / m_cc);
             Console.WriteLine("Ternary Logic A1: == " + oo);
 
-
             if (m_rr != -1)
             {
                 pp = m_rr;
@@ -44,7 +43,6 @@ namespace DefaultNamespace
                 pp = ((uu + m_cc - 1) / m_cc);
             }
             Console.WriteLine("IfElse Logic A1: == " + pp);
-
 
             if (oo == pp)
             {
@@ -59,28 +57,28 @@ namespace DefaultNamespace
 
 
     /**  RESULTS PASTED IN FROM CMD.EXE SCREEN... Show error only when JIT ON...
-
+    
     C:\Junk> jvc.exe -C Ternary3b.java
     Microsoft (R) Visual J++ Compiler Version 7.00.8474
     Copyright (C) Microsoft Corp 1996-1998. All rights reserved.
-
-
+    
+    
     C:\Junk> echo JIT is ON
     JIT is ON
-
+    
     C:\Junk> Ternary3b.exe
     Ternary Logic A1: == 0
     IfElse Logic A1: == 10
     FAIL!, 2738hub
-
+    
     C:\Junk> echo Now JIT is OFF
     Now JIT is OFF
-
+    
     C:\Junk> Ternary3b.exe
     Ternary Logic A1: == 10
     IfElse Logic A1: == 10
     Good, 1738huy
-
+    
     C:\Junk>
     **/
 }

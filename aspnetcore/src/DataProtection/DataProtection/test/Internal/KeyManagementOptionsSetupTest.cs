@@ -23,10 +23,7 @@ public class KeyManagementOptionsSetupTest
     {
         // Arrange
         var setup = new KeyManagementOptionsSetup(NullLoggerFactory.Instance);
-        var options = new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = null
-        };
+        var options = new KeyManagementOptions() { AuthenticatedEncryptorConfiguration = null };
 
         // Act
         setup.Configure(options);
@@ -34,13 +31,16 @@ public class KeyManagementOptionsSetupTest
         // Assert
         Assert.Empty(options.KeyEscrowSinks);
         Assert.NotNull(options.AuthenticatedEncryptorConfiguration);
-        Assert.IsType<AuthenticatedEncryptorConfiguration>(options.AuthenticatedEncryptorConfiguration);
+        Assert.IsType<AuthenticatedEncryptorConfiguration>(
+            options.AuthenticatedEncryptorConfiguration
+        );
         Assert.Collection(
             options.AuthenticatedEncryptorFactories,
             f => Assert.IsType<CngGcmAuthenticatedEncryptorFactory>(f),
             f => Assert.IsType<CngCbcAuthenticatedEncryptorFactory>(f),
             f => Assert.IsType<ManagedAuthenticatedEncryptorFactory>(f),
-            f => Assert.IsType<AuthenticatedEncryptorFactory>(f));
+            f => Assert.IsType<AuthenticatedEncryptorFactory>(f)
+        );
     }
 
     [ConditionalFact]
@@ -50,14 +50,16 @@ public class KeyManagementOptionsSetupTest
         // Arrange
         var registryEntries = new Dictionary<string, object>()
         {
-            ["KeyEscrowSinks"] = String.Join(" ;; ; ", new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(t => t.AssemblyQualifiedName)),
+            ["KeyEscrowSinks"] = String.Join(
+                " ;; ; ",
+                new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(
+                    t => t.AssemblyQualifiedName
+                )
+            ),
             ["EncryptionType"] = "managed",
             ["DefaultKeyLifetime"] = 1024 // days
         };
-        var options = new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = null
-        };
+        var options = new KeyManagementOptions() { AuthenticatedEncryptorConfiguration = null };
 
         // Act
         RunTest(registryEntries, options);
@@ -66,35 +68,45 @@ public class KeyManagementOptionsSetupTest
         Assert.Collection(
             options.KeyEscrowSinks,
             k => Assert.IsType<MyKeyEscrowSink1>(k),
-            k => Assert.IsType<MyKeyEscrowSink2>(k));
+            k => Assert.IsType<MyKeyEscrowSink2>(k)
+        );
         Assert.Equal(TimeSpan.FromDays(1024), options.NewKeyLifetime);
         Assert.NotNull(options.AuthenticatedEncryptorConfiguration);
-        Assert.IsType<ManagedAuthenticatedEncryptorConfiguration>(options.AuthenticatedEncryptorConfiguration);
+        Assert.IsType<ManagedAuthenticatedEncryptorConfiguration>(
+            options.AuthenticatedEncryptorConfiguration
+        );
         Assert.Collection(
             options.AuthenticatedEncryptorFactories,
             f => Assert.IsType<CngGcmAuthenticatedEncryptorFactory>(f),
             f => Assert.IsType<CngCbcAuthenticatedEncryptorFactory>(f),
             f => Assert.IsType<ManagedAuthenticatedEncryptorFactory>(f),
-            f => Assert.IsType<AuthenticatedEncryptorFactory>(f));
+            f => Assert.IsType<AuthenticatedEncryptorFactory>(f)
+        );
     }
 
     private static void RunTest(Dictionary<string, object> regValues, KeyManagementOptions options)
     {
-        WithUniqueTempRegKey(registryKey =>
-        {
-            foreach (var entry in regValues)
+        WithUniqueTempRegKey(
+            registryKey =>
             {
-                registryKey.SetValue(entry.Key, entry.Value);
+                foreach (var entry in regValues)
+                {
+                    registryKey.SetValue(entry.Key, entry.Value);
+                }
+
+                var policyResolver = new RegistryPolicyResolver(
+                    registryKey,
+                    activator: SimpleActivator.DefaultWithoutServices
+                );
+
+                var setup = new KeyManagementOptionsSetup(
+                    NullLoggerFactory.Instance,
+                    policyResolver
+                );
+
+                setup.Configure(options);
             }
-
-            var policyResolver = new RegistryPolicyResolver(
-                registryKey,
-                activator: SimpleActivator.DefaultWithoutServices);
-
-            var setup = new KeyManagementOptionsSetup(NullLoggerFactory.Instance, policyResolver);
-
-            setup.Configure(options);
-        });
+        );
     }
 
     /// <summary>
@@ -115,22 +127,25 @@ public class KeyManagementOptionsSetupTest
         }
     }
 
-    private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(() =>
-    {
-        try
+    private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(
+        () =>
         {
-            return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
-        }
-        catch
-        {
+            try
+            {
+                return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
+            }
+            catch
+            {
                 // swallow all failures
                 return null;
+            }
         }
-    });
+    );
 
     private class ConditionalRunTestOnlyIfHkcuRegistryAvailable : Attribute, ITestCondition
     {
-        public bool IsMet => (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LazyHkcuTempKey.Value != null);
+        public bool IsMet =>
+            (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LazyHkcuTempKey.Value != null);
 
         public string SkipReason { get; } = "HKCU registry couldn't be opened.";
     }

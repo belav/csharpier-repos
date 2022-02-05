@@ -10,7 +10,7 @@ class ThreadStartFloat
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartFloat <float>|min|max\n");
             return -1;
@@ -18,10 +18,10 @@ class ThreadStartFloat
 
         float f = 0F;
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             f = Single.MaxValue;
-        else if(args[0].ToLower() == "min")
-            f = Single.MinValue;       
+        else if (args[0].ToLower() == "min")
+            f = Single.MinValue;
         else
             f = Convert.ToSingle(args[0]);
         ThreadStartFloat tsf = new ThreadStartFloat();

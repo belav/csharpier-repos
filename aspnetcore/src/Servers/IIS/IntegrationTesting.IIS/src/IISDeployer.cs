@@ -35,14 +35,10 @@ public class IISDeployer : IISDeployerBase
     public Process HostProcess { get; set; }
 
     public IISDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-        : base(new IISDeploymentParameters(deploymentParameters), loggerFactory)
-    {
-    }
+        : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
 
     public IISDeployer(IISDeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-        : base(deploymentParameters, loggerFactory)
-    {
-    }
+        : base(deploymentParameters, loggerFactory) { }
 
     public override void Dispose()
     {
@@ -85,16 +81,25 @@ public class IISDeployer : IISDeployerBase
             // For now, only support using published output
             DeploymentParameters.PublishApplicationBeforeDeployment = true;
             // Move ASPNETCORE_DETAILEDERRORS to web config env variables
-            if (IISDeploymentParameters.EnvironmentVariables.ContainsKey(DetailedErrorsEnvironmentVariable))
+            if (
+                IISDeploymentParameters.EnvironmentVariables.ContainsKey(
+                    DetailedErrorsEnvironmentVariable
+                )
+            )
             {
-                IISDeploymentParameters.WebConfigBasedEnvironmentVariables[DetailedErrorsEnvironmentVariable] =
-                    IISDeploymentParameters.EnvironmentVariables[DetailedErrorsEnvironmentVariable];
+                IISDeploymentParameters.WebConfigBasedEnvironmentVariables[
+                    DetailedErrorsEnvironmentVariable
+                ] = IISDeploymentParameters.EnvironmentVariables[DetailedErrorsEnvironmentVariable];
 
-                IISDeploymentParameters.EnvironmentVariables.Remove(DetailedErrorsEnvironmentVariable);
+                IISDeploymentParameters.EnvironmentVariables.Remove(
+                    DetailedErrorsEnvironmentVariable
+                );
             }
             // Do not override settings set on parameters
-            if (!IISDeploymentParameters.HandlerSettings.ContainsKey("debugLevel") &&
-                !IISDeploymentParameters.HandlerSettings.ContainsKey("debugFile"))
+            if (
+                !IISDeploymentParameters.HandlerSettings.ContainsKey("debugLevel")
+                && !IISDeploymentParameters.HandlerSettings.ContainsKey("debugFile")
+            )
             {
                 _debugLogFile = Path.GetTempFileName();
                 IISDeploymentParameters.HandlerSettings["debugLevel"] = "file";
@@ -106,19 +111,24 @@ public class IISDeployer : IISDeployerBase
 
             RunWebConfigActions(contentRoot);
 
-            var uri = TestUriHelper.BuildTestUri(ServerType.IIS, DeploymentParameters.ApplicationBaseUriHint);
+            var uri = TestUriHelper.BuildTestUri(
+                ServerType.IIS,
+                DeploymentParameters.ApplicationBaseUriHint
+            );
             StartIIS(uri, contentRoot);
 
             // Warm up time for IIS setup.
             Logger.LogInformation("Successfully finished IIS application directory setup.");
-            return Task.FromResult<DeploymentResult>(new IISDeploymentResult(
-                LoggerFactory,
-                IISDeploymentParameters,
-                applicationBaseUri: uri.ToString(),
-                contentRoot: contentRoot,
-                hostShutdownToken: _hostShutdownToken.Token,
-                hostProcess: HostProcess
-            ));
+            return Task.FromResult<DeploymentResult>(
+                new IISDeploymentResult(
+                    LoggerFactory,
+                    IISDeploymentParameters,
+                    applicationBaseUri: uri.ToString(),
+                    contentRoot: contentRoot,
+                    hostShutdownToken: _hostShutdownToken.Token,
+                    hostProcess: HostProcess
+                )
+            );
         }
     }
 
@@ -126,7 +136,8 @@ public class IISDeployer : IISDeployerBase
     {
         yield return WebConfigHelpers.AddOrModifyAspNetCoreSection(
             key: "hostingModel",
-            value: DeploymentParameters.HostingModel.ToString());
+            value: DeploymentParameters.HostingModel.ToString()
+        );
 
         yield return (element, _) =>
         {
@@ -136,15 +147,24 @@ public class IISDeployer : IISDeployerBase
                 .GetOrAdd("aspNetCore");
 
             // Expand path to dotnet because IIS process would not inherit PATH variable
-            if (aspNetCore.Attribute("processPath")?.Value.StartsWith("dotnet", StringComparison.Ordinal) == true)
+            if (
+                aspNetCore.Attribute("processPath")?.Value.StartsWith(
+                    "dotnet",
+                    StringComparison.Ordinal
+                ) == true
+            )
             {
-                aspNetCore.SetAttributeValue("processPath", DotNetCommands.GetDotNetExecutable(DeploymentParameters.RuntimeArchitecture));
+                aspNetCore.SetAttributeValue(
+                    "processPath",
+                    DotNetCommands.GetDotNetExecutable(DeploymentParameters.RuntimeArchitecture)
+                );
             }
         };
 
         yield return WebConfigHelpers.AddOrModifyHandlerSection(
             key: "modules",
-            value: AspNetCoreModuleV2ModuleName);
+            value: AspNetCoreModuleV2ModuleName
+        );
 
         foreach (var action in base.GetWebConfigActions())
         {
@@ -163,9 +183,15 @@ public class IISDeployer : IISDeployerBase
                 debugLogLocations.Add(IISDeploymentParameters.HandlerSettings["debugFile"]);
             }
 
-            if (DeploymentParameters.EnvironmentVariables.ContainsKey("ASPNETCORE_MODULE_DEBUG_FILE"))
+            if (
+                DeploymentParameters.EnvironmentVariables.ContainsKey(
+                    "ASPNETCORE_MODULE_DEBUG_FILE"
+                )
+            )
             {
-                debugLogLocations.Add(DeploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG_FILE"]);
+                debugLogLocations.Add(
+                    DeploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG_FILE"]
+                );
             }
 
             // default debug file name
@@ -178,7 +204,10 @@ public class IISDeployer : IISDeployerBase
                     continue;
                 }
 
-                var file = Path.Combine(DeploymentParameters.PublishedApplicationRootPath, debugLogLocation);
+                var file = Path.Combine(
+                    DeploymentParameters.PublishedApplicationRootPath,
+                    debugLogLocation
+                );
                 if (File.Exists(file))
                 {
                     var lines = File.ReadAllLines(file);
@@ -227,8 +256,10 @@ public class IISDeployer : IISDeployerBase
         ServiceController serviceController = new ServiceController("w3svc");
         Logger.LogInformation("W3SVC status " + serviceController.Status);
 
-        if (serviceController.Status != ServiceControllerStatus.Running &&
-            serviceController.Status != ServiceControllerStatus.StartPending)
+        if (
+            serviceController.Status != ServiceControllerStatus.Running
+            && serviceController.Status != ServiceControllerStatus.StartPending
+        )
         {
             Logger.LogInformation("Starting W3SVC");
 
@@ -236,41 +267,47 @@ public class IISDeployer : IISDeployerBase
             serviceController.WaitForStatus(ServiceControllerStatus.Running, _timeout);
         }
 
-        RetryServerManagerAction(serverManager =>
-        {
-            var site = serverManager.Sites.Single();
-            var appPool = serverManager.ApplicationPools.Single();
-
-            var actualPath = site.Applications.FirstOrDefault().VirtualDirectories.Single().PhysicalPath;
-            if (actualPath != contentRoot)
+        RetryServerManagerAction(
+            serverManager =>
             {
-                throw new InvalidOperationException($"Wrong physical path. Expected: {contentRoot} Actual: {actualPath}");
-            }
+                var site = serverManager.Sites.Single();
+                var appPool = serverManager.ApplicationPools.Single();
 
-            if (appPool.State != ObjectState.Started && appPool.State != ObjectState.Starting)
-            {
-                var state = appPool.Start();
-                Logger.LogInformation($"Starting pool, state: {state.ToString()}");
-            }
+                var actualPath =
+                    site.Applications.FirstOrDefault().VirtualDirectories.Single().PhysicalPath;
+                if (actualPath != contentRoot)
+                {
+                    throw new InvalidOperationException(
+                        $"Wrong physical path. Expected: {contentRoot} Actual: {actualPath}"
+                    );
+                }
 
-            if (site.State != ObjectState.Started && site.State != ObjectState.Starting)
-            {
-                var state = site.Start();
-                Logger.LogInformation($"Starting site, state: {state.ToString()}");
-            }
+                if (appPool.State != ObjectState.Started && appPool.State != ObjectState.Starting)
+                {
+                    var state = appPool.Start();
+                    Logger.LogInformation($"Starting pool, state: {state.ToString()}");
+                }
 
-            if (site.State != ObjectState.Started)
-            {
-                throw new InvalidOperationException("Site not started yet");
-            }
+                if (site.State != ObjectState.Started && site.State != ObjectState.Starting)
+                {
+                    var state = site.Start();
+                    Logger.LogInformation($"Starting site, state: {state.ToString()}");
+                }
 
-            var workerProcess = appPool.WorkerProcesses.SingleOrDefault();
-            if (workerProcess == null)
-            {
-                throw new InvalidOperationException("Site is started but no worked process found");
-            }
+                if (site.State != ObjectState.Started)
+                {
+                    throw new InvalidOperationException("Site not started yet");
+                }
 
-            HostProcess = Process.GetProcessById(workerProcess.ProcessId);
+                var workerProcess = appPool.WorkerProcesses.SingleOrDefault();
+                if (workerProcess == null)
+                {
+                    throw new InvalidOperationException(
+                        "Site is started but no worked process found"
+                    );
+                }
+
+                HostProcess = Process.GetProcessById(workerProcess.ProcessId);
 
                 // Ensure w3wp.exe is killed if test process termination is non-graceful.
                 // Prevents locked files when stop debugging unit test.
@@ -279,8 +316,9 @@ public class IISDeployer : IISDeployerBase
                 // cache the process start time for verifying log file name.
                 var _ = HostProcess.StartTime;
 
-            Logger.LogInformation("Site has started.");
-        });
+                Logger.LogInformation("Site has started.");
+            }
+        );
     }
 
     private void AddTemporaryAppHostConfig(string contentRoot, int port)
@@ -288,37 +326,45 @@ public class IISDeployer : IISDeployerBase
         _configPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("D"));
         var appHostConfigPath = Path.Combine(_configPath, "applicationHost.config");
         Directory.CreateDirectory(_configPath);
-        var config = XDocument.Parse(DeploymentParameters.ServerConfigTemplateContent ?? File.ReadAllText("IIS.config"));
+        var config = XDocument.Parse(
+            DeploymentParameters.ServerConfigTemplateContent ?? File.ReadAllText("IIS.config")
+        );
 
         ConfigureAppHostConfig(config.Root, contentRoot, port);
 
         config.Save(appHostConfigPath);
 
-        RetryServerManagerAction(serverManager =>
-        {
-            var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
-            var redirectionSection = redirectionConfiguration.GetSection("configurationRedirection");
-
-            if ((bool)redirectionSection.Attributes["enabled"].Value)
+        RetryServerManagerAction(
+            serverManager =>
             {
+                var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
+                var redirectionSection = redirectionConfiguration.GetSection(
+                    "configurationRedirection"
+                );
+
+                if ((bool)redirectionSection.Attributes["enabled"].Value)
+                {
                     // redirection wasn't removed before starting another site.
                     redirectionSection.Attributes["enabled"].Value = false;
-                var redirectedFilePath = (string)redirectionSection.Attributes["path"].Value;
-                Logger.LogWarning($"Name of redirected file: {redirectedFilePath}");
+                    var redirectedFilePath = (string)redirectionSection.Attributes["path"].Value;
+                    Logger.LogWarning($"Name of redirected file: {redirectedFilePath}");
+
+                    serverManager.CommitChanges();
+
+                    throw new InvalidOperationException(
+                        "Redirection is enabled between test runs."
+                    );
+                }
+
+                redirectionSection.Attributes["path"].Value = _configPath;
+
+                redirectionSection.Attributes["enabled"].Value = true;
+
+                Logger.LogInformation("applicationhost.config path {configPath}", _configPath);
 
                 serverManager.CommitChanges();
-
-                throw new InvalidOperationException("Redirection is enabled between test runs.");
             }
-
-            redirectionSection.Attributes["path"].Value = _configPath;
-
-            redirectionSection.Attributes["enabled"].Value = true;
-
-            Logger.LogInformation("applicationhost.config path {configPath}", _configPath);
-
-            serverManager.CommitChanges();
-        });
+        );
     }
 
     private void ConfigureAppHostConfig(XElement config, string contentRoot, int port)
@@ -338,8 +384,7 @@ public class IISDeployer : IISDeployerBase
 
         if (DeploymentParameters.EnvironmentVariables.Any())
         {
-            var environmentVariables = pool
-                .GetOrAdd("environmentVariables");
+            var environmentVariables = pool.GetOrAdd("environmentVariables");
 
             foreach (var tuple in DeploymentParameters.EnvironmentVariables)
             {
@@ -347,7 +392,6 @@ public class IISDeployer : IISDeployerBase
                     .GetOrAdd("add", "name", tuple.Key)
                     .SetAttributeValue("value", tuple.Value);
             }
-
         }
 
         if (DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86)
@@ -362,84 +406,98 @@ public class IISDeployer : IISDeployerBase
     {
         try
         {
-            RetryServerManagerAction(serverManager =>
-            {
-                var site = serverManager.Sites.SingleOrDefault();
-                if (site == null)
+            RetryServerManagerAction(
+                serverManager =>
                 {
-                    throw new InvalidOperationException("Site not found");
-                }
-
-                if (site.State != ObjectState.Stopped && site.State != ObjectState.Stopping)
-                {
-                    var state = site.Stop();
-                    Logger.LogInformation($"Stopping site, state: {state.ToString()}");
-                }
-
-                var appPool = serverManager.ApplicationPools.SingleOrDefault();
-                if (appPool == null)
-                {
-                    throw new InvalidOperationException("Application pool not found");
-                }
-
-                if (appPool.State != ObjectState.Stopped && appPool.State != ObjectState.Stopping)
-                {
-                    var state = appPool.Stop();
-                    Logger.LogInformation($"Stopping pool, state: {state.ToString()}");
-                }
-
-                if (site.State != ObjectState.Stopped)
-                {
-                    throw new InvalidOperationException("Site not stopped yet");
-                }
-
-                try
-                {
-                    if (appPool.WorkerProcesses != null &&
-                        appPool.WorkerProcesses.Any(wp =>
-                            wp.State == WorkerProcessState.Running ||
-                            wp.State == WorkerProcessState.Stopping))
+                    var site = serverManager.Sites.SingleOrDefault();
+                    if (site == null)
                     {
-                        throw new InvalidOperationException("WorkerProcess not stopped yet");
+                        throw new InvalidOperationException("Site not found");
                     }
 
-                }
+                    if (site.State != ObjectState.Stopped && site.State != ObjectState.Stopping)
+                    {
+                        var state = site.Stop();
+                        Logger.LogInformation($"Stopping site, state: {state.ToString()}");
+                    }
+
+                    var appPool = serverManager.ApplicationPools.SingleOrDefault();
+                    if (appPool == null)
+                    {
+                        throw new InvalidOperationException("Application pool not found");
+                    }
+
+                    if (
+                        appPool.State != ObjectState.Stopped
+                        && appPool.State != ObjectState.Stopping
+                    )
+                    {
+                        var state = appPool.Stop();
+                        Logger.LogInformation($"Stopping pool, state: {state.ToString()}");
+                    }
+
+                    if (site.State != ObjectState.Stopped)
+                    {
+                        throw new InvalidOperationException("Site not stopped yet");
+                    }
+
+                    try
+                    {
+                        if (
+                            appPool.WorkerProcesses != null
+                            && appPool.WorkerProcesses.Any(
+                                wp =>
+                                    wp.State == WorkerProcessState.Running
+                                    || wp.State == WorkerProcessState.Stopping
+                            )
+                        )
+                        {
+                            throw new InvalidOperationException("WorkerProcess not stopped yet");
+                        }
+                    }
                     // If WAS was stopped for some reason appPool.WorkerProcesses
                     // would throw UnauthorizedAccessException.
                     // check if it's the case and continue shutting down deployer
                     catch (UnauthorizedAccessException)
-                {
-                    var serviceController = new ServiceController("was");
-                    if (serviceController.Status != ServiceControllerStatus.Stopped)
                     {
-                        throw;
+                        var serviceController = new ServiceController("was");
+                        if (serviceController.Status != ServiceControllerStatus.Stopped)
+                        {
+                            throw;
+                        }
                     }
-                }
 
-                if (!HostProcess.HasExited)
-                {
-                    throw new InvalidOperationException("Site is stopped but host process is not");
-                }
+                    if (!HostProcess.HasExited)
+                    {
+                        throw new InvalidOperationException(
+                            "Site is stopped but host process is not"
+                        );
+                    }
 
-                Logger.LogInformation($"Site has stopped successfully.");
-            });
+                    Logger.LogInformation($"Site has stopped successfully.");
+                }
+            );
         }
         finally
         {
             // Undo redirection.config changes unconditionally
-            RetryServerManagerAction(serverManager =>
-            {
-                var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
-                var redirectionSection = redirectionConfiguration.GetSection("configurationRedirection");
-
-                redirectionSection.Attributes["enabled"].Value = false;
-
-                serverManager.CommitChanges();
-                if (Directory.Exists(_configPath))
+            RetryServerManagerAction(
+                serverManager =>
                 {
-                    Directory.Delete(_configPath, true);
+                    var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
+                    var redirectionSection = redirectionConfiguration.GetSection(
+                        "configurationRedirection"
+                    );
+
+                    redirectionSection.Attributes["enabled"].Value = false;
+
+                    serverManager.CommitChanges();
+                    if (Directory.Exists(_configPath))
+                    {
+                        Directory.Delete(_configPath, true);
+                    }
                 }
-            });
+            );
         }
     }
 
@@ -476,6 +534,9 @@ public class IISDeployer : IISDeployerBase
             delay *= 1.5;
         }
 
-        throw new AggregateException($"Operation did not succeed after {retryCount} retries", exceptions.ToArray());
+        throw new AggregateException(
+            $"Operation did not succeed after {retryCount} retries",
+            exceptions.ToArray()
+        );
     }
 }

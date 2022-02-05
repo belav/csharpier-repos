@@ -25,24 +25,41 @@ namespace System.Reflection.Metadata
         /// <exception cref="ArgumentNullException">The assembly argument is null.</exception>
         /// <exception cref="InvalidOperationException">The assembly is not editable.</exception>
         /// <exception cref="NotSupportedException">The update could not be applied.</exception>
-        public static void ApplyUpdate(Assembly assembly, ReadOnlySpan<byte> metadataDelta, ReadOnlySpan<byte> ilDelta, ReadOnlySpan<byte> pdbDelta)
+        public static void ApplyUpdate(
+            Assembly assembly,
+            ReadOnlySpan<byte> metadataDelta,
+            ReadOnlySpan<byte> ilDelta,
+            ReadOnlySpan<byte> pdbDelta
+        )
         {
             if (assembly is not RuntimeAssembly runtimeAssembly)
             {
-                if (assembly is null) throw new ArgumentNullException(nameof(assembly));
+                if (assembly is null)
+                    throw new ArgumentNullException(nameof(assembly));
                 throw new ArgumentException(SR.Argument_MustBeRuntimeAssembly);
             }
 
             // System.Private.CoreLib is not editable
             if (runtimeAssembly == typeof(AssemblyExtensions).Assembly)
-                throw new InvalidOperationException (SR.InvalidOperation_AssemblyNotEditable);
-
+                throw new InvalidOperationException(SR.InvalidOperation_AssemblyNotEditable);
             unsafe
             {
-                IntPtr monoAssembly = runtimeAssembly.GetUnderlyingNativeHandle ();
-                fixed (byte* metadataDeltaPtr = metadataDelta, ilDeltaPtr = ilDelta, pdbDeltaPtr = pdbDelta)
+                IntPtr monoAssembly = runtimeAssembly.GetUnderlyingNativeHandle();
+                fixed (
+                    byte* metadataDeltaPtr = metadataDelta,
+                        ilDeltaPtr = ilDelta,
+                        pdbDeltaPtr = pdbDelta
+                )
                 {
-                    ApplyUpdate_internal(monoAssembly, metadataDeltaPtr, metadataDelta.Length, ilDeltaPtr, ilDelta.Length, pdbDeltaPtr, pdbDelta.Length);
+                    ApplyUpdate_internal(
+                        monoAssembly,
+                        metadataDeltaPtr,
+                        metadataDelta.Length,
+                        ilDeltaPtr,
+                        ilDelta.Length,
+                        pdbDeltaPtr,
+                        pdbDelta.Length
+                    );
                 }
             }
         }
@@ -51,17 +68,27 @@ namespace System.Reflection.Metadata
 
         public static bool IsSupported { get; } = ApplyUpdateEnabled(justComponentCheck: 0) != 0;
 
-        private static Lazy<string> s_ApplyUpdateCapabilities = new Lazy<string>(() => InitializeApplyUpdateCapabilities());
+        private static Lazy<string> s_ApplyUpdateCapabilities = new Lazy<string>(
+            () => InitializeApplyUpdateCapabilities()
+        );
 
         private static string InitializeApplyUpdateCapabilities()
         {
-            return ApplyUpdateEnabled(justComponentCheck: 1) != 0 ? "Baseline" : string.Empty ;
+            return ApplyUpdateEnabled(justComponentCheck: 1) != 0 ? "Baseline" : string.Empty;
         }
 
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        private static extern int ApplyUpdateEnabled (int justComponentCheck);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        private static extern int ApplyUpdateEnabled(int justComponentCheck);
 
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        private static unsafe extern void ApplyUpdate_internal (IntPtr base_assm, byte* dmeta_bytes, int dmeta_length, byte *dil_bytes, int dil_length, byte *dpdb_bytes, int dpdb_length);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        private static unsafe extern void ApplyUpdate_internal(
+            IntPtr base_assm,
+            byte* dmeta_bytes,
+            int dmeta_length,
+            byte* dil_bytes,
+            int dil_length,
+            byte* dpdb_bytes,
+            int dpdb_length
+        );
     }
 }

@@ -16,10 +16,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
     // Called by P/Invoke when returning SafeHandles
-    private SafeLibraryHandle()
-        : base(ownsHandle: true)
-    {
-    }
+    private SafeLibraryHandle() : base(ownsHandle: true) { }
 
     /// <summary>
     /// Returns a value stating whether the library exports a given proc.
@@ -33,7 +30,8 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
     /// <summary>
     /// Gets a delegate pointing to a given export from this library.
     /// </summary>
-    public TDelegate? GetProcAddress<TDelegate>(string lpProcName, bool throwIfNotFound = true) where TDelegate : class
+    public TDelegate? GetProcAddress<TDelegate>(string lpProcName, bool throwIfNotFound = true)
+        where TDelegate : class
     {
         IntPtr pfnProc = UnsafeNativeMethods.GetProcAddress(this, lpProcName);
         if (pfnProc == IntPtr.Zero)
@@ -58,7 +56,11 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
     {
         const uint LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800U; // from libloaderapi.h
 
-        SafeLibraryHandle handle = UnsafeNativeMethods.LoadLibraryEx(filename, IntPtr.Zero, LOAD_LIBRARY_SEARCH_SYSTEM32);
+        SafeLibraryHandle handle = UnsafeNativeMethods.LoadLibraryEx(
+            filename,
+            IntPtr.Zero,
+            LOAD_LIBRARY_SEARCH_SYSTEM32
+        );
         if (handle == null || handle.IsInvalid)
         {
             UnsafeNativeMethods.ThrowExceptionForLastWin32Error();
@@ -77,21 +79,36 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
     {
         // http://msdn.microsoft.com/en-us/library/ms683152(v=vs.85).aspx
         [return: MarshalAs(UnmanagedType.Bool)]
-        [DllImport("kernel32.dll", CallingConvention = CallingConvention.Winapi, CharSet = CharSet.Unicode)]
+        [DllImport(
+            "kernel32.dll",
+            CallingConvention = CallingConvention.Winapi,
+            CharSet = CharSet.Unicode
+        )]
         internal static extern bool FreeLibrary(IntPtr hModule);
 
         // http://msdn.microsoft.com/en-us/library/ms683212(v=vs.85).aspx
-        [DllImport("kernel32.dll", CallingConvention = CallingConvention.Winapi, SetLastError = true)]
+        [DllImport(
+            "kernel32.dll",
+            CallingConvention = CallingConvention.Winapi,
+            SetLastError = true
+        )]
         internal static extern IntPtr GetProcAddress(
             [In] SafeLibraryHandle hModule,
-            [In, MarshalAs(UnmanagedType.LPStr)] string lpProcName);
+            [In, MarshalAs(UnmanagedType.LPStr)] string lpProcName
+        );
 
         // http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
-        [DllImport("kernel32.dll", EntryPoint = "LoadLibraryExW", CallingConvention = CallingConvention.Winapi, SetLastError = true)]
+        [DllImport(
+            "kernel32.dll",
+            EntryPoint = "LoadLibraryExW",
+            CallingConvention = CallingConvention.Winapi,
+            SetLastError = true
+        )]
         internal static extern SafeLibraryHandle LoadLibraryEx(
             [In, MarshalAs(UnmanagedType.LPWStr)] string lpFileName,
             [In] IntPtr hFile,
-            [In] uint dwFlags);
+            [In] uint dwFlags
+        );
 
         internal static void ThrowExceptionForLastWin32Error()
         {

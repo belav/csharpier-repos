@@ -39,7 +39,11 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
     public async Task Match_HttpMethod_CORS()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", httpMethods: new string[] { "GET", }, acceptCorsPreflight: true);
+        var endpoint = CreateEndpoint(
+            "/hello",
+            httpMethods: new string[] { "GET", },
+            acceptCorsPreflight: true
+        );
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "GET");
@@ -55,7 +59,11 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
     public async Task Match_HttpMethod_CORS_Preflight()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", httpMethods: new string[] { "GET", }, acceptCorsPreflight: true);
+        var endpoint = CreateEndpoint(
+            "/hello",
+            httpMethods: new string[] { "GET", },
+            acceptCorsPreflight: true
+        );
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "GET", corsPreflight: true);
@@ -67,12 +75,15 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
         MatcherAssert.AssertMatch(httpContext, endpoint);
     }
 
-
     [Fact] // Nothing here supports OPTIONS, so it goes to a 405.
     public async Task NotMatch_HttpMethod_CORS_Preflight()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", httpMethods: new string[] { "GET", }, acceptCorsPreflight: false);
+        var endpoint = CreateEndpoint(
+            "/hello",
+            httpMethods: new string[] { "GET", },
+            acceptCorsPreflight: false
+        );
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "GET", corsPreflight: true);
@@ -82,7 +93,10 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
 
         // Assert
         Assert.NotSame(endpoint, httpContext.GetEndpoint());
-        Assert.Same(HttpMethodMatcherPolicy.Http405EndpointDisplayName, httpContext.GetEndpoint().DisplayName);
+        Assert.Same(
+            HttpMethodMatcherPolicy.Http405EndpointDisplayName,
+            httpContext.GetEndpoint().DisplayName
+        );
     }
 
     [Theory]
@@ -106,10 +120,17 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
     [Theory]
     [InlineData("GeT", "GET")]
     [InlineData("unKNOWN", "UNKNOWN")]
-    public async Task Match_HttpMethod_CaseInsensitive_CORS_Preflight(string endpointMethod, string requestMethod)
+    public async Task Match_HttpMethod_CaseInsensitive_CORS_Preflight(
+        string endpointMethod,
+        string requestMethod
+    )
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", httpMethods: new string[] { endpointMethod, }, acceptCorsPreflight: true);
+        var endpoint = CreateEndpoint(
+            "/hello",
+            httpMethods: new string[] { endpointMethod, },
+            acceptCorsPreflight: true
+        );
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", requestMethod, corsPreflight: true);
@@ -202,7 +223,10 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
         Assert.NotSame(endpoint1, httpContext.GetEndpoint());
         Assert.NotSame(endpoint2, httpContext.GetEndpoint());
 
-        Assert.Same(HttpMethodMatcherPolicy.Http405EndpointDisplayName, httpContext.GetEndpoint().DisplayName);
+        Assert.Same(
+            HttpMethodMatcherPolicy.Http405EndpointDisplayName,
+            httpContext.GetEndpoint().DisplayName
+        );
 
         // Invoke the endpoint
         await httpContext.GetEndpoint().RequestDelegate(httpContext);
@@ -214,7 +238,11 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
     public async Task NotMatch_HttpMethod_CORS_DoesNotReturn405()
     {
         // Arrange
-        var endpoint1 = CreateEndpoint("/hello", httpMethods: new string[] { "GET", "PUT" }, acceptCorsPreflight: true);
+        var endpoint1 = CreateEndpoint(
+            "/hello",
+            httpMethods: new string[] { "GET", "PUT" },
+            acceptCorsPreflight: true
+        );
         var endpoint2 = CreateEndpoint("/hello", httpMethods: new string[] { "DELETE" });
 
         var matcher = CreateMatcher(endpoint1, endpoint2);
@@ -232,7 +260,10 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
     {
         // Arrange
         var endpoint1 = CreateEndpoint("/{x:int}", httpMethods: new string[] { });
-        var endpoint2 = CreateEndpoint("/{hello:regex(hello)}", httpMethods: new string[] { "DELETE" });
+        var endpoint2 = CreateEndpoint(
+            "/{hello:regex(hello)}",
+            httpMethods: new string[] { "DELETE" }
+        );
 
         var matcher = CreateMatcher(endpoint1, endpoint2);
         var httpContext = CreateContext("/hello", "POST");
@@ -312,7 +343,10 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
         Assert.NotSame(endpoint1, httpContext.GetEndpoint());
         Assert.NotSame(endpoint2, httpContext.GetEndpoint());
 
-        Assert.Same(HttpMethodMatcherPolicy.Http405EndpointDisplayName, httpContext.GetEndpoint().DisplayName);
+        Assert.Same(
+            HttpMethodMatcherPolicy.Http405EndpointDisplayName,
+            httpContext.GetEndpoint().DisplayName
+        );
 
         // Invoke the endpoint
         await httpContext.GetEndpoint().RequestDelegate(httpContext);
@@ -345,7 +379,8 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
     internal static HttpContext CreateContext(
         string path,
         string httpMethod,
-        bool corsPreflight = false)
+        bool corsPreflight = false
+    )
     {
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Method = corsPreflight ? PreflightHttpMethod : httpMethod;
@@ -366,12 +401,15 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
         object constraints = null,
         int order = 0,
         string[] httpMethods = null,
-        bool acceptCorsPreflight = false)
+        bool acceptCorsPreflight = false
+    )
     {
         var metadata = new List<object>();
         if (httpMethods != null)
         {
-            metadata.Add(new HttpMethodMetadata(httpMethods ?? Array.Empty<string>(), acceptCorsPreflight));
+            metadata.Add(
+                new HttpMethodMetadata(httpMethods ?? Array.Empty<string>(), acceptCorsPreflight)
+            );
         }
 
         if (HasDynamicMetadata)
@@ -379,13 +417,15 @@ public abstract class HttpMethodMatcherPolicyIntegrationTestBase
             metadata.Add(new DynamicEndpointMetadata());
         }
 
-        var displayName = "endpoint: " + template + " " + string.Join(", ", httpMethods ?? new[] { "(any)" });
+        var displayName =
+            "endpoint: " + template + " " + string.Join(", ", httpMethods ?? new[] { "(any)" });
         return new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse(template, defaults, constraints),
             order,
             new EndpointMetadataCollection(metadata),
-            displayName);
+            displayName
+        );
     }
 
     internal (Matcher matcher, RouteEndpoint endpoint) CreateMatcher(string template)

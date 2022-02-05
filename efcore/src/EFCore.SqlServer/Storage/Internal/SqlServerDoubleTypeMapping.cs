@@ -18,8 +18,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
     /// </summary>
     public class SqlServerDoubleTypeMapping : DoubleTypeMapping
     {
-        private static readonly MethodInfo _getFloatMethod
-            = typeof(DbDataReader).GetRuntimeMethod(nameof(DbDataReader.GetFloat), new[] { typeof(int) })!;
+        private static readonly MethodInfo _getFloatMethod = typeof(DbDataReader).GetRuntimeMethod(
+            nameof(DbDataReader.GetFloat),
+            new[] { typeof(int) }
+        )!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,15 +32,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         public SqlServerDoubleTypeMapping(
             string storeType,
             DbType? dbType = System.Data.DbType.Double,
-            StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+            StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+        )
             : base(
                 new RelationalTypeMappingParameters(
                     new CoreTypeMappingParameters(typeof(double)),
                     storeType,
                     storeTypePostfix,
-                    dbType))
-        {
-        }
+                    dbType
+                )
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,17 +50,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected SqlServerDoubleTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters">The parameters for this mapping.</param>
         /// <returns>The newly created mapping.</returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new SqlServerDoubleTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new SqlServerDoubleTypeMapping(parameters);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -70,12 +72,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             var literal = base.GenerateNonNullSqlLiteral(value);
 
             var doubleValue = Convert.ToDouble(value);
-            return !literal.Contains("E")
+            return
+                !literal.Contains("E")
                 && !literal.Contains("e")
                 && !double.IsNaN(doubleValue)
                 && !double.IsInfinity(doubleValue)
-                    ? literal + "E0"
-                    : literal;
+              ? literal + "E0"
+              : literal;
         }
 
         /// <summary>
@@ -83,8 +86,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     on <see cref="DbDataReader" /> or one of its subclasses.
         /// </summary>
         /// <returns>The method to use to read the value.</returns>
-        public override MethodInfo GetDataReaderMethod()
-            => Precision is <= 24 ? _getFloatMethod : base.GetDataReaderMethod();
+        public override MethodInfo GetDataReaderMethod() =>
+            Precision is <= 24 ? _getFloatMethod : base.GetDataReaderMethod();
 
         /// <summary>
         ///     Gets a custom expression tree for reading the value from the input data reader
@@ -112,8 +115,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         {
             base.ConfigureParameter(parameter);
 
-            if (Precision.HasValue
-                && Precision.Value != -1)
+            if (Precision.HasValue && Precision.Value != -1)
             {
                 // SqlClient wants this set as "size"
                 parameter.Size = Precision.Value;

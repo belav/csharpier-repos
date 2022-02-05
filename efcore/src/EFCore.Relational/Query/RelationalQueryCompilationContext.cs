@@ -25,11 +25,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalQueryCompilationContext(
             QueryCompilationContextDependencies dependencies,
             RelationalQueryCompilationContextDependencies relationalDependencies,
-            bool async)
-            : base(dependencies, async)
+            bool async
+        ) : base(dependencies, async)
         {
             RelationalDependencies = relationalDependencies;
-            QuerySplittingBehavior = RelationalOptionsExtension.Extract(ContextOptions).QuerySplittingBehavior;
+            QuerySplittingBehavior =
+                RelationalOptionsExtension.Extract(ContextOptions).QuerySplittingBehavior;
         }
 
         /// <summary>

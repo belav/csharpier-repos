@@ -58,8 +58,8 @@ public static class EntityFrameworkCoreHealthChecksBuilderExtensions
         string? name = null,
         HealthStatus? failureStatus = default,
         IEnumerable<string>? tags = default,
-        Func<TContext, CancellationToken, Task<bool>>? customTestQuery = default)
-        where TContext : DbContext
+        Func<TContext, CancellationToken, Task<bool>>? customTestQuery = default
+    ) where TContext : DbContext
     {
         if (builder == null)
         {
@@ -73,9 +73,16 @@ public static class EntityFrameworkCoreHealthChecksBuilderExtensions
 
         if (customTestQuery != null)
         {
-            builder.Services.Configure<DbContextHealthCheckOptions<TContext>>(name, options => options.CustomTestQuery = customTestQuery);
+            builder.Services.Configure<DbContextHealthCheckOptions<TContext>>(
+                name,
+                options => options.CustomTestQuery = customTestQuery
+            );
         }
 
-        return builder.AddCheck<DbContextHealthCheck<TContext>>(name, failureStatus, tags ?? Enumerable.Empty<string>());
+        return builder.AddCheck<DbContextHealthCheck<TContext>>(
+            name,
+            failureStatus,
+            tags ?? Enumerable.Empty<string>()
+        );
     }
 }

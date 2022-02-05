@@ -46,8 +46,13 @@ namespace System.Reflection
 
         #region Constructor
         internal RuntimeMethodInfo(
-            RuntimeMethodHandleInternal handle, RuntimeType declaringType,
-            RuntimeTypeCache reflectedTypeCache, MethodAttributes methodAttributes, BindingFlags bindingFlags, object? keepalive)
+            RuntimeMethodHandleInternal handle,
+            RuntimeType declaringType,
+            RuntimeTypeCache reflectedTypeCache,
+            MethodAttributes methodAttributes,
+            BindingFlags bindingFlags,
+            object? keepalive
+        )
         {
             Debug.Assert(!handle.IsNullHandle());
             Debug.Assert(methodAttributes == RuntimeMethodHandle.GetAttributes(handle));
@@ -62,7 +67,8 @@ namespace System.Reflection
         #endregion
 
         #region Private Methods
-        RuntimeMethodHandleInternal IRuntimeMethodInfo.Value => new RuntimeMethodHandleInternal(m_handle);
+        RuntimeMethodHandleInternal IRuntimeMethodInfo.Value =>
+            new RuntimeMethodHandleInternal(m_handle);
 
         private RuntimeType ReflectedTypeInternal => m_reflectedTypeCache.GetRuntimeType();
 
@@ -111,7 +117,10 @@ namespace System.Reflection
             if (RuntimeTypeHandle.GetNumVirtuals(parent) <= slot)
                 return null;
 
-            return (RuntimeMethodInfo?)RuntimeType.GetMethodBase(parent, RuntimeTypeHandle.GetMethodAt(parent, slot));
+            return (RuntimeMethodInfo?)RuntimeType.GetMethodBase(
+                parent,
+                RuntimeTypeHandle.GetMethodAt(parent, slot)
+            );
         }
 
         // Unlike DeclaringType, this will return a valid type even for global methods
@@ -120,7 +129,8 @@ namespace System.Reflection
             return m_declaringType;
         }
 
-        internal sealed override int GenericParameterCount => RuntimeMethodHandle.GetGenericParameterCount(this);
+        internal sealed override int GenericParameterCount =>
+            RuntimeMethodHandle.GetGenericParameterCount(this);
         #endregion
 
         #region Object Overrides
@@ -135,7 +145,12 @@ namespace System.Reflection
                 sbName.Append(Name);
 
                 if (IsGenericMethod)
-                    sbName.Append(RuntimeMethodHandle.ConstructInstantiation(this, TypeNameFormatFlags.FormatBasic));
+                    sbName.Append(
+                        RuntimeMethodHandle.ConstructInstantiation(
+                            this,
+                            TypeNameFormatFlags.FormatBasic
+                        )
+                    );
 
                 sbName.Append('(');
                 AppendParameters(ref sbName, GetParameterTypes(), CallingConvention);
@@ -202,7 +217,11 @@ namespace System.Reflection
         #region ICustomAttributeProvider
         public override object[] GetCustomAttributes(bool inherit)
         {
-            return CustomAttribute.GetCustomAttributes(this, (typeof(object) as RuntimeType)!, inherit);
+            return CustomAttribute.GetCustomAttributes(
+                this,
+                (typeof(object) as RuntimeType)!,
+                inherit
+            );
         }
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
@@ -247,7 +266,8 @@ namespace System.Reflection
             }
         }
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeMethodInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeMethodInfo>(other);
 
         public override Type? ReflectedType
         {
@@ -263,9 +283,21 @@ namespace System.Reflection
         public override MemberTypes MemberType => MemberTypes.Method;
         public override int MetadataToken => RuntimeMethodHandle.GetMethodDef(this);
         public override Module Module => GetRuntimeModule();
-        internal RuntimeType GetRuntimeType() { return m_declaringType; }
-        internal RuntimeModule GetRuntimeModule() { return m_declaringType.GetRuntimeModule(); }
-        internal RuntimeAssembly GetRuntimeAssembly() { return GetRuntimeModule().GetRuntimeAssembly(); }
+
+        internal RuntimeType GetRuntimeType()
+        {
+            return m_declaringType;
+        }
+
+        internal RuntimeModule GetRuntimeModule()
+        {
+            return m_declaringType.GetRuntimeModule();
+        }
+
+        internal RuntimeAssembly GetRuntimeAssembly()
+        {
+            return GetRuntimeModule().GetRuntimeAssembly();
+        }
 
         public override bool IsSecurityCritical => true;
         public override bool IsSecuritySafeCritical => false;
@@ -273,8 +305,7 @@ namespace System.Reflection
         #endregion
 
         #region MethodBase Overrides
-        internal override ParameterInfo[] GetParametersNoCopy() =>
-            FetchNonReturnParameters();
+        internal override ParameterInfo[] GetParametersNoCopy() => FetchNonReturnParameters();
 
         public override ParameterInfo[] GetParameters()
         {
@@ -303,7 +334,9 @@ namespace System.Reflection
 
         private RuntimeType[] ArgumentTypes => Signature.Arguments;
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         public override MethodBody? GetMethodBody()
         {
             RuntimeMethodBody? mb = RuntimeMethodHandle.GetMethodBody(this, ReflectedTypeInternal);
@@ -319,17 +352,34 @@ namespace System.Reflection
         private object? InvokeWorker(object? obj, BindingFlags invokeAttr, Span<object?> arguments)
         {
             bool wrapExceptions = (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
-            return RuntimeMethodHandle.InvokeMethod(obj, in arguments, Signature, false, wrapExceptions);
+            return RuntimeMethodHandle.InvokeMethod(
+                obj,
+                in arguments,
+                Signature,
+                false,
+                wrapExceptions
+            );
         }
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
-        internal object? InvokeOneParameter(object? obj, BindingFlags invokeAttr, Binder? binder, object? parameter, CultureInfo? culture)
+        internal object? InvokeOneParameter(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object? parameter,
+            CultureInfo? culture
+        )
         {
             // ContainsStackPointers means that the struct (either the declaring type or the return type)
             // contains pointers that point to the stack. This is either a ByRef or a TypedReference. These structs cannot
             // be boxed and thus cannot be invoked through reflection which only deals with boxed value type objects.
-            if ((InvocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)) != 0)
+            if (
+                (
+                    InvocationFlags
+                    & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)
+                ) != 0
+            )
             {
                 ThrowNoInvokeException();
             }
@@ -344,10 +394,23 @@ namespace System.Reflection
             }
 
             StackAllocedArguments stackArgs = default;
-            Span<object?> arguments = CheckArguments(ref stackArgs, new ReadOnlySpan<object?>(ref parameter, 1), binder, invokeAttr, culture, sig.Arguments);
+            Span<object?> arguments = CheckArguments(
+                ref stackArgs,
+                new ReadOnlySpan<object?>(ref parameter, 1),
+                binder,
+                invokeAttr,
+                culture,
+                sig.Arguments
+            );
 
             bool wrapExceptions = (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
-            return RuntimeMethodHandle.InvokeMethod(obj, arguments, Signature, constructor: false, wrapExceptions);
+            return RuntimeMethodHandle.InvokeMethod(
+                obj,
+                arguments,
+                Signature,
+                constructor: false,
+                wrapExceptions
+            );
         }
 
         #endregion
@@ -360,7 +423,9 @@ namespace System.Reflection
 
         public override ParameterInfo ReturnParameter => FetchReturnParameter();
 
-        public override bool IsCollectible => RuntimeMethodHandle.GetIsCollectible(new RuntimeMethodHandleInternal(m_handle)) != Interop.BOOL.FALSE;
+        public override bool IsCollectible =>
+            RuntimeMethodHandle.GetIsCollectible(new RuntimeMethodHandleInternal(m_handle))
+            != Interop.BOOL.FALSE;
 
         public override MethodInfo GetBaseDefinition()
         {
@@ -401,7 +466,8 @@ namespace System.Reflection
             return CreateDelegateInternal(
                 delegateType,
                 null,
-                DelegateBindingFlags.OpenDelegateOnly | DelegateBindingFlags.RelaxedSignature);
+                DelegateBindingFlags.OpenDelegateOnly | DelegateBindingFlags.RelaxedSignature
+            );
         }
 
         public override Delegate CreateDelegate(Type delegateType, object? target)
@@ -414,10 +480,15 @@ namespace System.Reflection
             return CreateDelegateInternal(
                 delegateType,
                 target,
-                DelegateBindingFlags.RelaxedSignature);
+                DelegateBindingFlags.RelaxedSignature
+            );
         }
 
-        private Delegate CreateDelegateInternal(Type delegateType, object? firstArgument, DelegateBindingFlags bindingFlags)
+        private Delegate CreateDelegateInternal(
+            Type delegateType,
+            object? firstArgument,
+            DelegateBindingFlags bindingFlags
+        )
         {
             // Validate the parameters.
             if (delegateType == null)
@@ -430,7 +501,12 @@ namespace System.Reflection
             if (!rtType.IsDelegate())
                 throw new ArgumentException(SR.Arg_MustBeDelegate, nameof(delegateType));
 
-            Delegate? d = Delegate.CreateDelegateInternal(rtType, this, firstArgument, bindingFlags);
+            Delegate? d = Delegate.CreateDelegateInternal(
+                rtType,
+                this,
+                firstArgument,
+                bindingFlags
+            );
             if (d == null)
             {
                 throw new ArgumentException(SR.Arg_DlgtTargMeth);
@@ -442,7 +518,9 @@ namespace System.Reflection
         #endregion
 
         #region Generics
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] methodInstantiation)
         {
             if (methodInstantiation == null)
@@ -452,7 +530,8 @@ namespace System.Reflection
 
             if (!IsGenericMethodDefinition)
                 throw new InvalidOperationException(
-                    SR.Format(SR.Arg_NotGenericMethodDefinition, this));
+                    SR.Format(SR.Arg_NotGenericMethodDefinition, this)
+                );
 
             for (int i = 0; i < methodInstantiation.Length; i++)
             {
@@ -469,7 +548,10 @@ namespace System.Reflection
                     for (int iCopy = 0; iCopy < methodInstantiation.Length; iCopy++)
                         methodInstantiationCopy[iCopy] = methodInstantiation[iCopy];
                     methodInstantiation = methodInstantiationCopy;
-                    return System.Reflection.Emit.MethodBuilderInstantiation.MakeGenericMethod(this, methodInstantiation);
+                    return System.Reflection.Emit.MethodBuilderInstantiation.MakeGenericMethod(
+                        this,
+                        methodInstantiation
+                    );
                 }
 
                 methodInstantionRuntimeType[i] = rtMethodInstantiationElem;
@@ -483,8 +565,15 @@ namespace System.Reflection
 
             try
             {
-                ret = RuntimeType.GetMethodBase(ReflectedTypeInternal,
-                    RuntimeMethodHandle.GetStubIfNeeded(new RuntimeMethodHandleInternal(m_handle), m_declaringType, methodInstantionRuntimeType)) as MethodInfo;
+                ret =
+                    RuntimeType.GetMethodBase(
+                        ReflectedTypeInternal,
+                        RuntimeMethodHandle.GetStubIfNeeded(
+                            new RuntimeMethodHandleInternal(m_handle),
+                            m_declaringType,
+                            methodInstantionRuntimeType
+                        )
+                    ) as MethodInfo;
             }
             catch (VerificationException e)
             {
@@ -506,12 +595,18 @@ namespace System.Reflection
             if (!IsGenericMethod)
                 throw new InvalidOperationException();
 
-            return (RuntimeType.GetMethodBase(m_declaringType, RuntimeMethodHandle.StripMethodInstantiation(this)) as MethodInfo)!;
+            return (
+                RuntimeType.GetMethodBase(
+                    m_declaringType,
+                    RuntimeMethodHandle.StripMethodInstantiation(this)
+                ) as MethodInfo
+            )!;
         }
 
         public override bool IsGenericMethod => RuntimeMethodHandle.HasMethodInstantiation(this);
 
-        public override bool IsGenericMethodDefinition => RuntimeMethodHandle.IsGenericMethodDefinition(this);
+        public override bool IsGenericMethodDefinition =>
+            RuntimeMethodHandle.IsGenericMethodDefinition(this);
 
         public override bool ContainsGenericParameters
         {

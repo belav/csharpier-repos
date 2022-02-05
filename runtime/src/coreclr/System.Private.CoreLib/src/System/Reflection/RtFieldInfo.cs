@@ -14,6 +14,7 @@ namespace System.Reflection
         // aggressive caching
         private IntPtr m_fieldHandle;
         private FieldAttributes m_fieldAttributes;
+
         // lazy caching
         private string? m_name;
         private RuntimeType? m_fieldType;
@@ -22,8 +23,10 @@ namespace System.Reflection
         internal InvocationFlags InvocationFlags
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (m_invocationFlags & InvocationFlags.Initialized) != 0 ?
-                    m_invocationFlags : InitializeInvocationFlags();
+            get =>
+                (m_invocationFlags & InvocationFlags.Initialized) != 0
+                    ? m_invocationFlags
+                    : InitializeInvocationFlags();
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -62,8 +65,11 @@ namespace System.Reflection
 
         #region Constructor
         internal RtFieldInfo(
-            RuntimeFieldHandleInternal handle, RuntimeType declaringType, RuntimeTypeCache reflectedTypeCache, BindingFlags bindingFlags)
-            : base(reflectedTypeCache, declaringType, bindingFlags)
+            RuntimeFieldHandleInternal handle,
+            RuntimeType declaringType,
+            RuntimeTypeCache reflectedTypeCache,
+            BindingFlags bindingFlags
+        ) : base(reflectedTypeCache, declaringType, bindingFlags)
         {
             m_fieldHandle = handle.Value;
             m_fieldAttributes = RuntimeFieldHandle.GetAttributes(handle);
@@ -71,7 +77,8 @@ namespace System.Reflection
         #endregion
 
         #region Private Members
-        RuntimeFieldHandleInternal IRuntimeFieldInfo.Value => new RuntimeFieldHandleInternal(m_fieldHandle);
+        RuntimeFieldHandleInternal IRuntimeFieldInfo.Value =>
+            new RuntimeFieldHandleInternal(m_fieldHandle);
 
         #endregion
 
@@ -91,8 +98,13 @@ namespace System.Reflection
                     else
                     {
                         throw new ArgumentException(
-                            SR.Format(SR.Arg_FieldDeclTarget,
-                                Name, m_declaringType, target.GetType()));
+                            SR.Format(
+                                SR.Arg_FieldDeclTarget,
+                                Name,
+                                m_declaringType,
+                                target.GetType()
+                            )
+                        );
                     }
                 }
             }
@@ -142,18 +154,33 @@ namespace System.Reflection
             bool domainInitialized = false;
             if (declaringType == null)
             {
-                return RuntimeFieldHandle.GetValue(this, obj, fieldType, null, ref domainInitialized);
+                return RuntimeFieldHandle.GetValue(
+                    this,
+                    obj,
+                    fieldType,
+                    null,
+                    ref domainInitialized
+                );
             }
             else
             {
                 domainInitialized = declaringType.DomainInitialized;
-                object? retVal = RuntimeFieldHandle.GetValue(this, obj, fieldType, declaringType, ref domainInitialized);
+                object? retVal = RuntimeFieldHandle.GetValue(
+                    this,
+                    obj,
+                    fieldType,
+                    declaringType,
+                    ref domainInitialized
+                );
                 declaringType.DomainInitialized = domainInitialized;
                 return retVal;
             }
         }
 
-        public override object GetRawConstantValue() { throw new InvalidOperationException(); }
+        public override object GetRawConstantValue()
+        {
+            throw new InvalidOperationException();
+        }
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
@@ -163,12 +190,23 @@ namespace System.Reflection
                 throw new ArgumentException(SR.Arg_TypedReference_Null);
 
             // Passing TypedReference by reference is easier to make correct in native code
-            return RuntimeFieldHandle.GetValueDirect(this, (RuntimeType)FieldType, &obj, (RuntimeType?)DeclaringType);
+            return RuntimeFieldHandle.GetValueDirect(
+                this,
+                (RuntimeType)FieldType,
+                &obj,
+                (RuntimeType?)DeclaringType
+            );
         }
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             InvocationFlags invocationFlags = InvocationFlags;
             RuntimeType? declaringType = DeclaringType as RuntimeType;
@@ -189,12 +227,28 @@ namespace System.Reflection
             bool domainInitialized = false;
             if (declaringType == null)
             {
-                RuntimeFieldHandle.SetValue(this, obj, value, fieldType, m_fieldAttributes, null, ref domainInitialized);
+                RuntimeFieldHandle.SetValue(
+                    this,
+                    obj,
+                    value,
+                    fieldType,
+                    m_fieldAttributes,
+                    null,
+                    ref domainInitialized
+                );
             }
             else
             {
                 domainInitialized = declaringType.DomainInitialized;
-                RuntimeFieldHandle.SetValue(this, obj, value, fieldType, m_fieldAttributes, declaringType, ref domainInitialized);
+                RuntimeFieldHandle.SetValue(
+                    this,
+                    obj,
+                    value,
+                    fieldType,
+                    m_fieldAttributes,
+                    declaringType,
+                    ref domainInitialized
+                );
                 declaringType.DomainInitialized = domainInitialized;
             }
         }
@@ -207,7 +261,13 @@ namespace System.Reflection
                 throw new ArgumentException(SR.Arg_TypedReference_Null);
 
             // Passing TypedReference by reference is easier to make correct in native code
-            RuntimeFieldHandle.SetValueDirect(this, (RuntimeType)FieldType, &obj, value, (RuntimeType?)DeclaringType);
+            RuntimeFieldHandle.SetValueDirect(
+                this,
+                (RuntimeType)FieldType,
+                &obj,
+                value,
+                (RuntimeType?)DeclaringType
+            );
         }
 
         public override RuntimeFieldHandle FieldHandle => new RuntimeFieldHandle(this);

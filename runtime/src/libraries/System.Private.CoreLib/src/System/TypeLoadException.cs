@@ -6,23 +6,22 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class TypeLoadException : SystemException, ISerializable
     {
-        public TypeLoadException()
-            : base(SR.Arg_TypeLoadException)
+        public TypeLoadException() : base(SR.Arg_TypeLoadException)
         {
             HResult = HResults.COR_E_TYPELOAD;
         }
 
-        public TypeLoadException(string? message)
-            : base(message)
+        public TypeLoadException(string? message) : base(message)
         {
             HResult = HResults.COR_E_TYPELOAD;
         }
 
-        public TypeLoadException(string? message, Exception? inner)
-            : base(message, inner)
+        public TypeLoadException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.COR_E_TYPELOAD;
         }
@@ -38,7 +37,8 @@ namespace System
 
         public string TypeName => _className ?? string.Empty;
 
-        protected TypeLoadException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected TypeLoadException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _className = info.GetString("TypeLoadClassName");
             _assemblyName = info.GetString("TypeLoadAssemblyName");

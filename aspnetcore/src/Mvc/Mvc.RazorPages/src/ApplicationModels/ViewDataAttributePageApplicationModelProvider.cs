@@ -14,9 +14,7 @@ internal class ViewDataAttributePageApplicationModelProvider : IPageApplicationM
     public int Order => -1000 + 10;
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(PageApplicationModelProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
 
     /// <inheritdoc />
     public void OnProvidersExecuting(PageApplicationModelProviderContext context)
@@ -28,7 +26,9 @@ internal class ViewDataAttributePageApplicationModelProvider : IPageApplicationM
 
         var handlerType = context.PageApplicationModel.HandlerType.AsType();
 
-        var viewDataProperties = ViewDataAttributePropertyProvider.GetViewDataProperties(handlerType);
+        var viewDataProperties = ViewDataAttributePropertyProvider.GetViewDataProperties(
+            handlerType
+        );
         if (viewDataProperties == null)
         {
             return;

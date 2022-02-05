@@ -10,8 +10,7 @@ namespace Roslyn.Utilities
     {
         private partial class ReadOnly
         {
-            internal class Enumerable<TUnderlying> : IEnumerable
-                where TUnderlying : IEnumerable
+            internal class Enumerable<TUnderlying> : IEnumerable where TUnderlying : IEnumerable
             {
                 protected readonly TUnderlying Underlying;
 

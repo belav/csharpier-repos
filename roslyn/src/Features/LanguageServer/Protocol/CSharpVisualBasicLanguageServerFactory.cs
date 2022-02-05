@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             RequestDispatcherFactory dispatcherFactory,
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _dispatcherFactory = dispatcherFactory;
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         public ILanguageServerTarget Create(
             JsonRpc jsonRpc,
             ICapabilitiesProvider capabilitiesProvider,
-            ILspLogger logger)
+            ILspLogger logger
+        )
         {
             var lspMiscellaneousFilesWorkspace = new LspMiscellaneousFilesWorkspace(logger);
 
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 ProtocolConstants.RoslynLspLanguages,
                 clientName: null,
                 userVisibleServerName: UserVisibleName,
-                telemetryServerTypeName: this.GetType().Name);
+                telemetryServerTypeName: this.GetType().Name
+            );
         }
     }
 }

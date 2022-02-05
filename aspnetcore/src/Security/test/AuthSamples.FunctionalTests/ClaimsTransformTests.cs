@@ -38,6 +38,9 @@ public class ClaimsTransformTests : IClassFixture<WebApplicationFactory<ClaimsTr
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("http://localhost/account/login?ReturnUrl=%2FHome%2FMyClaims", response.Headers.Location.ToString());
+        Assert.Equal(
+            "http://localhost/account/login?ReturnUrl=%2FHome%2FMyClaims",
+            response.Headers.Location.ToString()
+        );
     }
 }

@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> validationLogger,
             IDbSetFinder setFinder,
             ICurrentDbContext currentContext,
-            IModelValidator validator)
+            IModelValidator validator
+        )
         {
             TypeMappingSource = typeMappingSource;
             ConstructorBindingFactory = constructorBindingFactory;
@@ -123,8 +124,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
         /// <summary>
         ///     The current context instance.
         /// </summary>
-        public Type ContextType
-            => _currentContext.Context.GetType();
+        public Type ContextType => _currentContext.Context.GetType();
 
         /// <summary>
         ///     The model validator.
@@ -139,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
         /// <returns>A new parameter object with the given service replaced.</returns>
         public ProviderConventionSetBuilderDependencies With(ICurrentDbContext currentContext)
 #pragma warning disable CS0618 // Type or member is obsolete
-            => new(
+            =>
+            new(
                 TypeMappingSource,
                 ConstructorBindingFactory,
                 ParameterBindingFactories,
@@ -148,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
                 ValidationLogger,
                 SetFinder,
                 currentContext,
-                ModelValidator);
+                ModelValidator
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
     }
 }

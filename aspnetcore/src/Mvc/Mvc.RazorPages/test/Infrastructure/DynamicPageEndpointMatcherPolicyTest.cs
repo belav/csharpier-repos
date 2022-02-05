@@ -22,38 +22,49 @@ public class DynamicPageEndpointMatcherPolicyTest
     {
         var actions = new ActionDescriptor[]
         {
-                new PageActionDescriptor()
+            new PageActionDescriptor()
+            {
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        ["page"] = "/Index",
-                    },
-                    DisplayName = "/Index",
+                    ["page"] = "/Index",
                 },
-                new PageActionDescriptor()
+                DisplayName = "/Index",
+            },
+            new PageActionDescriptor()
+            {
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        ["page"] = "/About",
-                    },
-                    DisplayName = "/About"
+                    ["page"] = "/About",
                 },
+                DisplayName = "/About"
+            },
         };
 
         PageEndpoints = new[]
         {
-                new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(actions[0]), "Test1"),
-                new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(actions[1]), "Test2"),
-            };
+            new Endpoint(
+                _ => Task.CompletedTask,
+                new EndpointMetadataCollection(actions[0]),
+                "Test1"
+            ),
+            new Endpoint(
+                _ => Task.CompletedTask,
+                new EndpointMetadataCollection(actions[1]),
+                "Test2"
+            ),
+        };
 
         DynamicEndpoint = new Endpoint(
             _ => Task.CompletedTask,
-            new EndpointMetadataCollection(new object[]
-            {
+            new EndpointMetadataCollection(
+                new object[]
+                {
                     new DynamicPageRouteValueTransformerMetadata(typeof(CustomTransformer), State),
                     new PageEndpointDataSourceIdMetadata(1),
-            }),
-            "dynamic");
+                }
+            ),
+            "dynamic"
+        );
 
         DataSource = new DefaultEndpointDataSource(PageEndpoints);
 
@@ -61,37 +72,58 @@ public class DynamicPageEndpointMatcherPolicyTest
 
         var services = new ServiceCollection();
         services.AddRouting();
-        services.AddTransient<CustomTransformer>(s =>
-        {
-            var transformer = new CustomTransformer();
-            transformer.Transform = (c, values, state) => Transform(c, values, state);
-            transformer.Filter = (c, values, state, endpoints) => Filter(c, values, state, endpoints);
-            return transformer;
-        });
+        services.AddTransient<CustomTransformer>(
+            s =>
+            {
+                var transformer = new CustomTransformer();
+                transformer.Transform = (c, values, state) => Transform(c, values, state);
+                transformer.Filter = (c, values, state, endpoints) =>
+                    Filter(c, values, state, endpoints);
+                return transformer;
+            }
+        );
         Services = services.BuildServiceProvider();
 
         Comparer = Services.GetRequiredService<EndpointMetadataComparer>();
 
         LoadedEndpoints = new[]
         {
-                new Endpoint(_ => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test1"),
-                new Endpoint(_ => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test2"),
-                new Endpoint(_ => Task.CompletedTask, EndpointMetadataCollection.Empty, "ReplacedLoaded")
-            };
+            new Endpoint(_ => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test1"),
+            new Endpoint(_ => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test2"),
+            new Endpoint(
+                _ => Task.CompletedTask,
+                EndpointMetadataCollection.Empty,
+                "ReplacedLoaded"
+            )
+        };
 
         var loader = new Mock<PageLoader>();
         loader
-            .Setup(l => l.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()))
-            .Returns((PageActionDescriptor descriptor, EndpointMetadataCollection endpoint) => Task.FromResult(new CompiledPageActionDescriptor
-            {
-                Endpoint = descriptor.DisplayName switch
-                {
-                    "/Index" => LoadedEndpoints[0],
-                    "/About" => LoadedEndpoints[1],
-                    "/ReplacedEndpoint" => LoadedEndpoints[2],
-                    _ => throw new InvalidOperationException($"Invalid endpoint '{descriptor.DisplayName}'.")
-                }
-            }));
+            .Setup(
+                l =>
+                    l.LoadAsync(
+                        It.IsAny<PageActionDescriptor>(),
+                        It.IsAny<EndpointMetadataCollection>()
+                    )
+            )
+            .Returns(
+                (PageActionDescriptor descriptor, EndpointMetadataCollection endpoint) =>
+                    Task.FromResult(
+                        new CompiledPageActionDescriptor
+                        {
+                            Endpoint = descriptor.DisplayName switch
+                            {
+                                "/Index" => LoadedEndpoints[0],
+                                "/About" => LoadedEndpoints[1],
+                                "/ReplacedEndpoint" => LoadedEndpoints[2],
+                                _
+                                  => throw new InvalidOperationException(
+                                      $"Invalid endpoint '{descriptor.DisplayName}'."
+                                  )
+                            }
+                        }
+                    )
+            );
         Loader = loader.Object;
     }
 
@@ -113,9 +145,20 @@ public class DynamicPageEndpointMatcherPolicyTest
 
     private IServiceProvider Services { get; }
 
-    private Func<HttpContext, RouteValueDictionary, object, ValueTask<RouteValueDictionary>> Transform { get; set; }
+    private Func<
+        HttpContext,
+        RouteValueDictionary,
+        object,
+        ValueTask<RouteValueDictionary>
+    > Transform { get; set; }
 
-    private Func<HttpContext, RouteValueDictionary, object, IReadOnlyList<Endpoint>, ValueTask<IReadOnlyList<Endpoint>>> Filter { get; set; } = (_, __, ___, e) => new ValueTask<IReadOnlyList<Endpoint>>(e);
+    private Func<
+        HttpContext,
+        RouteValueDictionary,
+        object,
+        IReadOnlyList<Endpoint>,
+        ValueTask<IReadOnlyList<Endpoint>>
+    > Filter { get; set; } = (_, __, ___, e) => new ValueTask<IReadOnlyList<Endpoint>>(e);
 
     [Fact]
     public async Task ApplyAsync_NoMatch()
@@ -135,10 +178,7 @@ public class DynamicPageEndpointMatcherPolicyTest
             throw new InvalidOperationException();
         };
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = Services,
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -164,10 +204,7 @@ public class DynamicPageEndpointMatcherPolicyTest
             return new ValueTask<RouteValueDictionary>(new RouteValueDictionary());
         };
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = Services,
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -192,16 +229,12 @@ public class DynamicPageEndpointMatcherPolicyTest
 
         Transform = (c, values, state) =>
         {
-            return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-            {
-                page = "/Index",
-            }));
+            return new ValueTask<RouteValueDictionary>(
+                new RouteValueDictionary(new { page = "/Index", })
+            );
         };
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = Services,
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -214,7 +247,8 @@ public class DynamicPageEndpointMatcherPolicyTest
             {
                 Assert.Equal("page", kvp.Key);
                 Assert.Equal("/Index", kvp.Value);
-            });
+            }
+        );
         Assert.True(candidates.IsValidCandidate(0));
     }
 
@@ -225,24 +259,22 @@ public class DynamicPageEndpointMatcherPolicyTest
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
         var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+        var values = new RouteValueDictionary[]
+        {
+            new RouteValueDictionary(new { slug = "test", }),
+        };
         var scores = new[] { 0, };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
         Transform = (c, values, state) =>
         {
-            return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-            {
-                page = "/Index",
-                state
-            }));
+            return new ValueTask<RouteValueDictionary>(
+                new RouteValueDictionary(new { page = "/Index", state })
+            );
         };
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = Services,
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -265,7 +297,8 @@ public class DynamicPageEndpointMatcherPolicyTest
             {
                 Assert.Equal("state", kvp.Key);
                 Assert.Same(State, kvp.Value);
-            });
+            }
+        );
         Assert.True(candidates.IsValidCandidate(0));
     }
 
@@ -276,27 +309,32 @@ public class DynamicPageEndpointMatcherPolicyTest
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
         var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+        var values = new RouteValueDictionary[]
+        {
+            new RouteValueDictionary(new { slug = "test", }),
+        };
         var scores = new[] { 0, };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
         Transform = (c, values, state) =>
         {
-            return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-            {
-                page = "/Index",
-                state
-            }));
+            return new ValueTask<RouteValueDictionary>(
+                new RouteValueDictionary(new { page = "/Index", state })
+            );
         };
 
         var httpContext = new DefaultHttpContext()
         {
-            RequestServices = new ServiceCollection().AddScoped(sp => new CustomTransformer() { State = "Invalid" }).BuildServiceProvider()
+            RequestServices = new ServiceCollection()
+                .AddScoped(sp => new CustomTransformer() { State = "Invalid" })
+                .BuildServiceProvider()
         };
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() => policy.ApplyAsync(httpContext, candidates));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => policy.ApplyAsync(httpContext, candidates)
+        );
     }
 
     [Fact]
@@ -306,18 +344,19 @@ public class DynamicPageEndpointMatcherPolicyTest
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
         var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+        var values = new RouteValueDictionary[]
+        {
+            new RouteValueDictionary(new { slug = "test", }),
+        };
         var scores = new[] { 0, };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
         Transform = (c, values, state) =>
         {
-            return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-            {
-                page = "/Index",
-                state
-            }));
+            return new ValueTask<RouteValueDictionary>(
+                new RouteValueDictionary(new { page = "/Index", state })
+            );
         };
 
         Filter = (c, values, state, endpoints) =>
@@ -325,10 +364,7 @@ public class DynamicPageEndpointMatcherPolicyTest
             return new ValueTask<IReadOnlyList<Endpoint>>(Array.Empty<Endpoint>());
         };
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = Services,
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -344,32 +380,36 @@ public class DynamicPageEndpointMatcherPolicyTest
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
         var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+        var values = new RouteValueDictionary[]
+        {
+            new RouteValueDictionary(new { slug = "test", }),
+        };
         var scores = new[] { 0, };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
         Transform = (c, values, state) =>
         {
-            return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-            {
-                page = "/Index",
-                state
-            }));
+            return new ValueTask<RouteValueDictionary>(
+                new RouteValueDictionary(new { page = "/Index", state })
+            );
         };
 
-        Filter = (c, values, state, endpoints) => new ValueTask<IReadOnlyList<Endpoint>>(new[]
-        {
-                new Endpoint((ctx) => Task.CompletedTask, new EndpointMetadataCollection(new PageActionDescriptor()
+        Filter = (c, values, state, endpoints) =>
+            new ValueTask<IReadOnlyList<Endpoint>>(
+                new[]
                 {
-                    DisplayName = "/ReplacedEndpoint",
-                }), "ReplacedEndpoint")
-            });
+                    new Endpoint(
+                        (ctx) => Task.CompletedTask,
+                        new EndpointMetadataCollection(
+                            new PageActionDescriptor() { DisplayName = "/ReplacedEndpoint", }
+                        ),
+                        "ReplacedEndpoint"
+                    )
+                }
+            );
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = Services,
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -392,7 +432,8 @@ public class DynamicPageEndpointMatcherPolicyTest
             {
                 Assert.Equal("state", kvp.Key);
                 Assert.Same(State, kvp.Value);
-            });
+            }
+        );
         Assert.Equal("ReplacedLoaded", candidates[0].Endpoint.DisplayName);
         Assert.True(candidates.IsValidCandidate(0));
     }
@@ -404,29 +445,25 @@ public class DynamicPageEndpointMatcherPolicyTest
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
         var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+        var values = new RouteValueDictionary[]
+        {
+            new RouteValueDictionary(new { slug = "test", }),
+        };
         var scores = new[] { 0, };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
         Transform = (c, values, state) =>
         {
-            return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-            {
-                page = "/Index",
-                state
-            }));
+            return new ValueTask<RouteValueDictionary>(
+                new RouteValueDictionary(new { page = "/Index", state })
+            );
         };
 
-        Filter = (c, values, state, endpoints) => new ValueTask<IReadOnlyList<Endpoint>>(new[]
-        {
-                PageEndpoints[0], PageEndpoints[1]
-            });
+        Filter = (c, values, state, endpoints) =>
+            new ValueTask<IReadOnlyList<Endpoint>>(new[] { PageEndpoints[0], PageEndpoints[1] });
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = Services,
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -449,16 +486,34 @@ public class DynamicPageEndpointMatcherPolicyTest
 
     private class CustomTransformer : DynamicRouteValueTransformer
     {
-        public Func<HttpContext, RouteValueDictionary, object, ValueTask<RouteValueDictionary>> Transform { get; set; }
+        public Func<
+            HttpContext,
+            RouteValueDictionary,
+            object,
+            ValueTask<RouteValueDictionary>
+        > Transform { get; set; }
 
-        public Func<HttpContext, RouteValueDictionary, object, IReadOnlyList<Endpoint>, ValueTask<IReadOnlyList<Endpoint>>> Filter { get; set; }
+        public Func<
+            HttpContext,
+            RouteValueDictionary,
+            object,
+            IReadOnlyList<Endpoint>,
+            ValueTask<IReadOnlyList<Endpoint>>
+        > Filter { get; set; }
 
-        public override ValueTask<IReadOnlyList<Endpoint>> FilterAsync(HttpContext httpContext, RouteValueDictionary values, IReadOnlyList<Endpoint> endpoints)
+        public override ValueTask<IReadOnlyList<Endpoint>> FilterAsync(
+            HttpContext httpContext,
+            RouteValueDictionary values,
+            IReadOnlyList<Endpoint> endpoints
+        )
         {
             return Filter(httpContext, values, State, endpoints);
         }
 
-        public override ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
+        public override ValueTask<RouteValueDictionary> TransformAsync(
+            HttpContext httpContext,
+            RouteValueDictionary values
+        )
         {
             return Transform(httpContext, values, State);
         }

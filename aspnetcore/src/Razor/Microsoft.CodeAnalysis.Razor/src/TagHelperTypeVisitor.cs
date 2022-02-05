@@ -40,11 +40,10 @@ internal class TagHelperTypeVisitor : SymbolVisitor
             return false;
         }
 
-        return
-            symbol.TypeKind != TypeKind.Error &&
-            symbol.DeclaredAccessibility == Accessibility.Public &&
-            !symbol.IsAbstract &&
-            !symbol.IsGenericType &&
-            symbol.AllInterfaces.Contains(_interface);
+        return symbol.TypeKind != TypeKind.Error
+            && symbol.DeclaredAccessibility == Accessibility.Public
+            && !symbol.IsAbstract
+            && !symbol.IsGenericType
+            && symbol.AllInterfaces.Contains(_interface);
     }
 }

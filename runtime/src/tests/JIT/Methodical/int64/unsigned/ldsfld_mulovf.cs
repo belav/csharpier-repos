@@ -7,7 +7,8 @@ namespace JitTest
 {
     internal class Test
     {
-        private static ulong s_op1,s_op2;
+        private static ulong s_op1,
+            s_op2;
 
         private static bool check(ulong product, bool overflow)
         {
@@ -55,7 +56,7 @@ namespace JitTest
 
             Console.WriteLine("Test passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Test failed");
             return 1;
         }

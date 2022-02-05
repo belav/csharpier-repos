@@ -35,7 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns the configuration source for <see cref="NavigationExtensions.IsEagerLoaded" />.
         /// </summary>
         /// <returns>The configuration source for <see cref="NavigationExtensions.IsEagerLoaded" />.</returns>
-        ConfigurationSource? GetIsEagerLoadedConfigurationSource()
-            => FindAnnotation(CoreAnnotationNames.EagerLoaded)?.GetConfigurationSource();
+        ConfigurationSource? GetIsEagerLoadedConfigurationSource() =>
+            FindAnnotation(CoreAnnotationNames.EagerLoaded)?.GetConfigurationSource();
     }
 }

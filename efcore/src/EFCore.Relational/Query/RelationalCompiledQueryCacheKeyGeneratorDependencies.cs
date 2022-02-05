@@ -48,7 +48,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public RelationalCompiledQueryCacheKeyGeneratorDependencies(IDbContextOptions contextOptions)
+        public RelationalCompiledQueryCacheKeyGeneratorDependencies(
+            IDbContextOptions contextOptions
+        )
         {
             ContextOptions = contextOptions;
         }

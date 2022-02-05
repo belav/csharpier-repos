@@ -46,10 +46,15 @@ public class ControllerActionDescriptorProviderTests
 
         // Act
         var descriptors = provider.GetDescriptors();
-        var descriptor = descriptors.Single(ad => ad.ActionName == nameof(PersonController.GetPerson));
+        var descriptor = descriptors.Single(
+            ad => ad.ActionName == nameof(PersonController.GetPerson)
+        );
 
         // Assert
-        Assert.Equal($"{controllerTypeInfo.FullName}.{nameof(PersonController.GetPerson)} ({controllerTypeInfo.Assembly.GetName().Name})", descriptor.DisplayName);
+        Assert.Equal(
+            $"{controllerTypeInfo.FullName}.{nameof(PersonController.GetPerson)} ({controllerTypeInfo.Assembly.GetName().Name})",
+            descriptor.DisplayName
+        );
     }
 
     [Fact]
@@ -57,10 +62,10 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var globalFilter = new MyFilterAttribute(1);
-        var provider = GetProvider(typeof(FiltersController).GetTypeInfo(), new IFilterMetadata[]
-        {
-                globalFilter,
-        });
+        var provider = GetProvider(
+            typeof(FiltersController).GetTypeInfo(),
+            new IFilterMetadata[] { globalFilter, }
+        );
 
         // Act
         var descriptors = provider.GetDescriptors();
@@ -95,7 +100,9 @@ public class ControllerActionDescriptorProviderTests
         // Assert
         Assert.Equal("OnlyPost", descriptor.ActionName);
 
-        var constraint = Assert.IsType<HttpMethodActionConstraint>(Assert.Single(descriptor.ActionConstraints));
+        var constraint = Assert.IsType<HttpMethodActionConstraint>(
+            Assert.Single(descriptor.ActionConstraints)
+        );
         Assert.Equal(new string[] { "POST" }, constraint.HttpMethods);
     }
 
@@ -112,7 +119,9 @@ public class ControllerActionDescriptorProviderTests
         // Assert
         Assert.Equal("Items", descriptor.AttributeRouteInfo.Template);
 
-        var constraint = Assert.IsType<HttpMethodActionConstraint>(Assert.Single(descriptor.ActionConstraints));
+        var constraint = Assert.IsType<HttpMethodActionConstraint>(
+            Assert.Single(descriptor.ActionConstraints)
+        );
         Assert.Equal(new string[] { "PUT", "PATCH" }, constraint.HttpMethods);
     }
 
@@ -120,12 +129,13 @@ public class ControllerActionDescriptorProviderTests
     public void GetDescriptors_AddsParameters_ToActionDescriptor()
     {
         // Arrange & Act
-        var descriptors = GetDescriptors(
-            typeof(ActionParametersController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var main = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(nameof(ActionParametersController.RequiredInt)));
+        var main = Assert.Single(
+            descriptors.Cast<ControllerActionDescriptor>(),
+            d => d.ActionName.Equals(nameof(ActionParametersController.RequiredInt))
+        );
 
         Assert.NotNull(main.Parameters);
         var id = Assert.Single(main.Parameters);
@@ -139,12 +149,13 @@ public class ControllerActionDescriptorProviderTests
     public void GetDescriptors_AddsMultipleParameters_ToActionDescriptor()
     {
         // Arrange & Act
-        var descriptors = GetDescriptors(
-            typeof(ActionParametersController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var main = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(nameof(ActionParametersController.MultipleParameters)));
+        var main = Assert.Single(
+            descriptors.Cast<ControllerActionDescriptor>(),
+            d => d.ActionName.Equals(nameof(ActionParametersController.MultipleParameters))
+        );
 
         Assert.NotNull(main.Parameters);
         var id = Assert.Single(main.Parameters, p => p.Name == "id");
@@ -164,12 +175,13 @@ public class ControllerActionDescriptorProviderTests
     public void GetDescriptors_AddsMultipleParametersWithDifferentCasing_ToActionDescriptor()
     {
         // Arrange & Act
-        var descriptors = GetDescriptors(
-            typeof(ActionParametersController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var main = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(nameof(ActionParametersController.DifferentCasing)));
+        var main = Assert.Single(
+            descriptors.Cast<ControllerActionDescriptor>(),
+            d => d.ActionName.Equals(nameof(ActionParametersController.DifferentCasing))
+        );
 
         Assert.NotNull(main.Parameters);
         var id = Assert.Single(main.Parameters, p => p.Name == "id");
@@ -197,12 +209,13 @@ public class ControllerActionDescriptorProviderTests
         // Arrange & Act
         var actionName = nameof(ActionParametersController.FromBodyParameter);
 
-        var descriptors = GetDescriptors(
-            typeof(ActionParametersController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var fromBody = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(actionName));
+        var fromBody = Assert.Single(
+            descriptors.Cast<ControllerActionDescriptor>(),
+            d => d.ActionName.Equals(actionName)
+        );
 
         Assert.NotNull(fromBody.Parameters);
         var entity = Assert.Single(fromBody.Parameters);
@@ -218,12 +231,13 @@ public class ControllerActionDescriptorProviderTests
         // Arrange & Act
         var actionName = nameof(ActionParametersController.NotFromBodyParameter);
 
-        var descriptors = GetDescriptors(
-            typeof(ActionParametersController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var notFromBody = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(actionName));
+        var notFromBody = Assert.Single(
+            descriptors.Cast<ControllerActionDescriptor>(),
+            d => d.ActionName.Equals(actionName)
+        );
 
         Assert.NotNull(notFromBody.Parameters);
         var entity = Assert.Single(notFromBody.Parameters);
@@ -237,8 +251,7 @@ public class ControllerActionDescriptorProviderTests
     public void GetDescriptors_AddsControllerAndActionConstraints_ToConventionallyRoutedActions()
     {
         // Arrange & Act
-        var descriptors = GetDescriptors(
-            typeof(ConventionallyRoutedController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(ConventionallyRoutedController).GetTypeInfo());
 
         // Assert
         var action = Assert.Single(descriptors);
@@ -249,49 +262,66 @@ public class ControllerActionDescriptorProviderTests
         Assert.Equal("ConventionallyRouted", controller.Value);
 
         var actionConstraint = Assert.Single(action.RouteValues, kvp => kvp.Key.Equals("action"));
-        Assert.Equal(nameof(ConventionallyRoutedController.ConventionalAction), actionConstraint.Value);
+        Assert.Equal(
+            nameof(ConventionallyRoutedController.ConventionalAction),
+            actionConstraint.Value
+        );
     }
 
     [Fact]
     public void GetDescriptors_EndpointMetadata_ContainsAttributesFromActionAndController()
     {
         // Arrange & Act
-        var descriptors = GetDescriptors(
-            typeof(AuthorizeController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(AuthorizeController).GetTypeInfo());
 
         // Assert
         Assert.Equal(2, descriptors.Count());
 
-        var anonymousAction = Assert.Single(descriptors, a => a.RouteValues["action"] == "AllowAnonymousAction");
+        var anonymousAction = Assert.Single(
+            descriptors,
+            a => a.RouteValues["action"] == "AllowAnonymousAction"
+        );
 
         Assert.NotNull(anonymousAction.EndpointMetadata);
 
-        Assert.Collection(anonymousAction.EndpointMetadata,
+        Assert.Collection(
+            anonymousAction.EndpointMetadata,
             metadata => Assert.IsType<AuthorizeAttribute>(metadata),
-            metadata => Assert.IsType<AllowAnonymousAttribute>(metadata));
+            metadata => Assert.IsType<AllowAnonymousAttribute>(metadata)
+        );
 
-        var authorizeAction = Assert.Single(descriptors, a => a.RouteValues["action"] == "AuthorizeAction");
+        var authorizeAction = Assert.Single(
+            descriptors,
+            a => a.RouteValues["action"] == "AuthorizeAction"
+        );
 
         Assert.NotNull(authorizeAction.EndpointMetadata);
 
-        Assert.Collection(authorizeAction.EndpointMetadata,
-            metadata => Assert.Equal("ControllerPolicy", Assert.IsType<AuthorizeAttribute>(metadata).Policy),
-            metadata => Assert.Equal("ActionPolicy", Assert.IsType<AuthorizeAttribute>(metadata).Policy));
+        Assert.Collection(
+            authorizeAction.EndpointMetadata,
+            metadata =>
+                Assert.Equal(
+                    "ControllerPolicy",
+                    Assert.IsType<AuthorizeAttribute>(metadata).Policy
+                ),
+            metadata =>
+                Assert.Equal("ActionPolicy", Assert.IsType<AuthorizeAttribute>(metadata).Policy)
+        );
     }
 
     [Fact]
     public void GetDescriptors_ActionWithHttpMethods_AddedToEndpointMetadata()
     {
         // Arrange & Act
-        var descriptors = GetDescriptors(
-            typeof(AttributeRoutedController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(AttributeRoutedController).GetTypeInfo());
 
         // Assert
         var action = Assert.Single(descriptors);
 
         Assert.NotNull(action.EndpointMetadata);
 
-        Assert.Collection(action.EndpointMetadata,
+        Assert.Collection(
+            action.EndpointMetadata,
             metadata => Assert.IsType<RouteAttribute>(metadata),
             metadata => Assert.IsType<HttpGetAttribute>(metadata),
             metadata =>
@@ -300,7 +330,8 @@ public class ControllerActionDescriptorProviderTests
 
                 Assert.False(httpMethodMetadata.AcceptCorsPreflight);
                 Assert.Equal("GET", Assert.Single(httpMethodMetadata.HttpMethods));
-            });
+            }
+        );
     }
 
     [Fact]
@@ -308,29 +339,48 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange & Act
         var descriptors = GetDescriptors(
-            typeof(NonDuplicatedAttributeRouteController).GetTypeInfo());
+            typeof(NonDuplicatedAttributeRouteController).GetTypeInfo()
+        );
 
         // Assert
         var actions = descriptors
             .OfType<ControllerActionDescriptor>()
-            .Where(d => d.ActionName == nameof(NonDuplicatedAttributeRouteController.DifferentHttpMethods));
+            .Where(
+                d =>
+                    d.ActionName
+                    == nameof(NonDuplicatedAttributeRouteController.DifferentHttpMethods)
+            );
 
-        Assert.Collection(actions,
+        Assert.Collection(
+            actions,
             InspectElement("GET"),
             InspectElement("POST"),
             InspectElement("PUT"),
             InspectElement("PATCH"),
-            InspectElement("DELETE"));
+            InspectElement("DELETE")
+        );
 
         Action<ControllerActionDescriptor> InspectElement(string httpMethod)
         {
             return (descriptor) =>
             {
-                var httpMethodAttribute = Assert.Single(descriptor.EndpointMetadata.OfType<HttpMethodAttribute>());
-                Assert.Equal(httpMethod, httpMethodAttribute.HttpMethods.Single(), ignoreCase: true);
+                var httpMethodAttribute = Assert.Single(
+                    descriptor.EndpointMetadata.OfType<HttpMethodAttribute>()
+                );
+                Assert.Equal(
+                    httpMethod,
+                    httpMethodAttribute.HttpMethods.Single(),
+                    ignoreCase: true
+                );
 
-                var lastHttpMethodMetadata = descriptor.EndpointMetadata.OfType<IHttpMethodMetadata>().Last();
-                Assert.Equal(httpMethod, lastHttpMethodMetadata.HttpMethods.Single(), ignoreCase: true);
+                var lastHttpMethodMetadata = descriptor.EndpointMetadata
+                    .OfType<IHttpMethodMetadata>()
+                    .Last();
+                Assert.Equal(
+                    httpMethod,
+                    lastHttpMethodMetadata.HttpMethods.Single(),
+                    ignoreCase: true
+                );
                 Assert.False(lastHttpMethodMetadata.AcceptCorsPreflight);
             };
         }
@@ -340,8 +390,7 @@ public class ControllerActionDescriptorProviderTests
     public void GetDescriptors_AddsControllerAndActionDefaults_ToAttributeRoutedActions()
     {
         // Arrange & Act
-        var descriptors = GetDescriptors(
-            typeof(AttributeRoutedController).GetTypeInfo());
+        var descriptors = GetDescriptors(typeof(AttributeRoutedController).GetTypeInfo());
 
         // Assert
         var action = Assert.Single(descriptors);
@@ -350,7 +399,10 @@ public class ControllerActionDescriptorProviderTests
         Assert.Equal("AttributeRouted", controller.Value);
 
         var actionConstraint = Assert.Single(action.RouteValues, kvp => kvp.Key.Equals("action"));
-        Assert.Equal(nameof(AttributeRoutedController.AttributeRoutedAction), actionConstraint.Value);
+        Assert.Equal(
+            nameof(AttributeRoutedController.AttributeRoutedAction),
+            actionConstraint.Value
+        );
     }
 
     [Fact]
@@ -358,16 +410,20 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange & Act
         var descriptors = GetDescriptors(
-            typeof(HttpMethodController).GetTypeInfo(),
-            typeof(RouteValueController).GetTypeInfo()).ToArray();
+                typeof(HttpMethodController).GetTypeInfo(),
+                typeof(RouteValueController).GetTypeInfo()
+            )
+            .ToArray();
 
         var descriptorWithoutValue = Assert.Single(
             descriptors,
-            ad => !ad.RouteValues.ContainsKey("key"));
+            ad => !ad.RouteValues.ContainsKey("key")
+        );
 
         var descriptorWithValue = Assert.Single(
             descriptors,
-            ad => ad.RouteValues.ContainsKey("key"));
+            ad => ad.RouteValues.ContainsKey("key")
+        );
 
         // Assert
         Assert.Equal(2, descriptors.Length);
@@ -375,31 +431,20 @@ public class ControllerActionDescriptorProviderTests
         Assert.Equal(3, descriptorWithValue.RouteValues.Count);
         Assert.Single(
             descriptorWithValue.RouteValues,
-            c =>
-                c.Key == "controller" &&
-                c.Value == "RouteValue");
-        Assert.Single(
-            descriptorWithValue.RouteValues,
-            c =>
-                c.Key == "action" &&
-                c.Value == "Edit");
-        Assert.Single(
-            descriptorWithValue.RouteValues,
-            c =>
-                c.Key == "key" &&
-                c.Value == "value");
+            c => c.Key == "controller" && c.Value == "RouteValue"
+        );
+        Assert.Single(descriptorWithValue.RouteValues, c => c.Key == "action" && c.Value == "Edit");
+        Assert.Single(descriptorWithValue.RouteValues, c => c.Key == "key" && c.Value == "value");
 
         Assert.Equal(2, descriptorWithoutValue.RouteValues.Count);
         Assert.Single(
             descriptorWithoutValue.RouteValues,
-            c =>
-                c.Key == "controller" &&
-                c.Value == "HttpMethod");
+            c => c.Key == "controller" && c.Value == "HttpMethod"
+        );
         Assert.Single(
             descriptorWithoutValue.RouteValues,
-            c =>
-                c.Key == "action" &&
-                c.Value == "OnlyPost");
+            c => c.Key == "action" && c.Value == "OnlyPost"
+        );
     }
 
     [Fact]
@@ -413,7 +458,10 @@ public class ControllerActionDescriptorProviderTests
 
         // Assert
         var action = Assert.Single(actions);
-        Assert.Equal("api/Token/value/TokenReplacement/stub/ThisIsAnAction", action.AttributeRouteInfo.Template);
+        Assert.Equal(
+            "api/Token/value/TokenReplacement/stub/ThisIsAnAction",
+            action.AttributeRouteInfo.Template
+        );
     }
 
     [Fact]
@@ -425,20 +473,31 @@ public class ControllerActionDescriptorProviderTests
         var provider = GetProvider(controllerTypeInfo);
 
         var expectedMessage =
-            "The following errors occurred with attribute routing information:" + Environment.NewLine +
-            Environment.NewLine +
-            "Error 1:" + Environment.NewLine +
-            $"For action: '{controllerTypeInfo.FullName}.Unknown ({assemblyName})'" + Environment.NewLine +
-            "Error: While processing template 'stub/[action]/[unknown]', a replacement value for the token 'unknown' " +
-            "could not be found. Available tokens: 'action, controller'. To use a '[' or ']' as a literal string in" +
-            " a route or within a constraint, use '[[' or ']]' instead." + Environment.NewLine +
-            Environment.NewLine +
-            "Error 2:" + Environment.NewLine +
-            $"For action: '{controllerTypeInfo.FullName}.Invalid ({assemblyName})'" + Environment.NewLine +
-            "Error: The route template '[invalid/syntax' has invalid syntax. A replacement token is not closed.";
+            "The following errors occurred with attribute routing information:"
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Error 1:"
+            + Environment.NewLine
+            + $"For action: '{controllerTypeInfo.FullName}.Unknown ({assemblyName})'"
+            + Environment.NewLine
+            + "Error: While processing template 'stub/[action]/[unknown]', a replacement value for the token 'unknown' "
+            + "could not be found. Available tokens: 'action, controller'. To use a '[' or ']' as a literal string in"
+            + " a route or within a constraint, use '[[' or ']]' instead."
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Error 2:"
+            + Environment.NewLine
+            + $"For action: '{controllerTypeInfo.FullName}.Invalid ({assemblyName})'"
+            + Environment.NewLine
+            + "Error: The route template '[invalid/syntax' has invalid syntax. A replacement token is not closed.";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => { provider.GetDescriptors(); });
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                provider.GetDescriptors();
+            }
+        );
 
         // Assert
         VerifyMultiLineError(expectedMessage, ex.Message, unorderedStart: 2, unorderedLineCount: 6);
@@ -479,7 +538,9 @@ public class ControllerActionDescriptorProviderTests
         var descriptors = provider.GetDescriptors();
 
         // Assert
-        var actions = descriptors.Where(d => d.ActionName == nameof(MultiRouteAttributesController.AcceptVerbs));
+        var actions = descriptors.Where(
+            d => d.ActionName == nameof(MultiRouteAttributesController.AcceptVerbs)
+        );
         Assert.Equal(2, actions.Count());
 
         foreach (var action in actions)
@@ -487,7 +548,9 @@ public class ControllerActionDescriptorProviderTests
             Assert.Equal("MultiRouteAttributes", action.ControllerName);
 
             Assert.NotNull(action.ActionConstraints);
-            var methodConstraint = Assert.IsType<HttpMethodActionConstraint>(Assert.Single(action.ActionConstraints));
+            var methodConstraint = Assert.IsType<HttpMethodActionConstraint>(
+                Assert.Single(action.ActionConstraints)
+            );
 
             Assert.NotNull(methodConstraint.HttpMethods);
             Assert.Equal(new[] { "POST" }, methodConstraint.HttpMethods);
@@ -512,7 +575,9 @@ public class ControllerActionDescriptorProviderTests
         Assert.Equal("MultiRouteAttributes", action.ControllerName);
 
         Assert.NotNull(action.ActionConstraints);
-        var methodConstraint = Assert.IsType<HttpMethodActionConstraint>(Assert.Single(action.ActionConstraints));
+        var methodConstraint = Assert.IsType<HttpMethodActionConstraint>(
+            Assert.Single(action.ActionConstraints)
+        );
 
         Assert.NotNull(methodConstraint.HttpMethods);
         Assert.Equal(new[] { "PUT" }, methodConstraint.HttpMethods);
@@ -547,14 +612,24 @@ public class ControllerActionDescriptorProviderTests
 
         // Actions generated by PutAttribute
         var putActions = constrainedActions.Where(
-            a => a.ActionConstraints.OfType<HttpMethodActionConstraint>().Single().HttpMethods.Single() == "PUT");
+            a =>
+                a.ActionConstraints
+                    .OfType<HttpMethodActionConstraint>()
+                    .Single()
+                    .HttpMethods.Single() == "PUT"
+        );
         Assert.Equal(2, putActions.Count());
         Assert.Single(putActions, a => a.AttributeRouteInfo.Template.Equals("v1/All"));
         Assert.Single(putActions, a => a.AttributeRouteInfo.Template.Equals("v2/All"));
 
         // Actions generated by RouteAttribute
         var routeActions = actions.Where(
-            a => a.ActionConstraints.OfType<HttpMethodActionConstraint>().Single().HttpMethods.Single() == "POST");
+            a =>
+                a.ActionConstraints
+                    .OfType<HttpMethodActionConstraint>()
+                    .Single()
+                    .HttpMethods.Single() == "POST"
+        );
         Assert.Equal(2, routeActions.Count());
         Assert.Single(routeActions, a => a.AttributeRouteInfo.Template.Equals("v1/List"));
         Assert.Single(routeActions, a => a.AttributeRouteInfo.Template.Equals("v2/List"));
@@ -570,7 +645,9 @@ public class ControllerActionDescriptorProviderTests
         var descriptors = provider.GetDescriptors();
 
         // Assert
-        var actions = descriptors.Where(d => d.ActionName == "AcceptVerbsRouteAttributeWithTemplateAndHttpPut");
+        var actions = descriptors.Where(
+            d => d.ActionName == "AcceptVerbsRouteAttributeWithTemplateAndHttpPut"
+        );
         Assert.Equal(6, actions.Count());
 
         foreach (var action in actions)
@@ -586,14 +663,24 @@ public class ControllerActionDescriptorProviderTests
 
         // Actions generated by AcceptVerbs
         var postActions = constrainedActions.Where(
-            a => a.ActionConstraints.OfType<HttpMethodActionConstraint>().Single().HttpMethods.Single() == "POST");
+            a =>
+                a.ActionConstraints
+                    .OfType<HttpMethodActionConstraint>()
+                    .Single()
+                    .HttpMethods.Single() == "POST"
+        );
         Assert.Equal(2, postActions.Count());
         Assert.Single(postActions, a => a.AttributeRouteInfo.Template.Equals("v1"));
         Assert.Single(postActions, a => a.AttributeRouteInfo.Template.Equals("v2"));
 
         // Actions generated by PutAttribute
         var putActions = constrainedActions.Where(
-            a => a.ActionConstraints.OfType<HttpMethodActionConstraint>().Single().HttpMethods.Single() == "PUT");
+            a =>
+                a.ActionConstraints
+                    .OfType<HttpMethodActionConstraint>()
+                    .Single()
+                    .HttpMethods.Single() == "PUT"
+        );
         Assert.Equal(2, putActions.Count());
         Assert.Single(putActions, a => a.AttributeRouteInfo.Template.Equals("v1/All"));
         Assert.Single(putActions, a => a.AttributeRouteInfo.Template.Equals("v2/All"));
@@ -620,13 +707,17 @@ public class ControllerActionDescriptorProviderTests
         var controllerAndAction = Assert.Single(actions, a => a.ActionName.Equals(firstActionName));
         Assert.NotNull(controllerAndAction.AttributeRouteInfo);
 
-        var controllerActionAndOverride = Assert.Single(actions, a => a.ActionName.Equals(secondActionName));
+        var controllerActionAndOverride = Assert.Single(
+            actions,
+            a => a.ActionName.Equals(secondActionName)
+        );
         Assert.NotNull(controllerActionAndOverride.AttributeRouteInfo);
 
         Assert.Equal(
             controllerAndAction.AttributeRouteInfo.Template,
             controllerActionAndOverride.AttributeRouteInfo.Template,
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     [Fact]
@@ -647,10 +738,12 @@ public class ControllerActionDescriptorProviderTests
         {
             var action = Assert.Single(
                 actions,
-                a => a.ActionConstraints
-                    .OfType<HttpMethodActionConstraint>()
-                    .SelectMany(c => c.HttpMethods)
-                    .Contains(method));
+                a =>
+                    a.ActionConstraints
+                        .OfType<HttpMethodActionConstraint>()
+                        .SelectMany(c => c.HttpMethods)
+                        .Contains(method)
+            );
 
             Assert.NotNull(action.AttributeRouteInfo);
             Assert.Equal("Products/list", action.AttributeRouteInfo.Template);
@@ -661,23 +754,29 @@ public class ControllerActionDescriptorProviderTests
     public void AttributeRouting_ThrowsIfAttributeRoutedAndNonAttributedActions_OnTheSameMethod()
     {
         // Arrange
-        var controllerTypeInfo = typeof(AttributeAndNonAttributeRoutedActionsOnSameMethodController).GetTypeInfo();
+        var controllerTypeInfo =
+            typeof(AttributeAndNonAttributeRoutedActionsOnSameMethodController).GetTypeInfo();
         var assemblyName = controllerTypeInfo.Assembly.GetName().Name;
 
         var expectedMessage =
-            "The following errors occurred with attribute routing information:" + Environment.NewLine +
-            Environment.NewLine +
-            "Error 1:" + Environment.NewLine +
-            $"A method '{controllerTypeInfo.FullName}.Method ({assemblyName})'" +
-            " must not define attribute routed actions and non attribute routed actions at the same time:" + Environment.NewLine +
-            $"Action: '{controllerTypeInfo.FullName}.Method ({assemblyName})' " +
-            "- Route Template: 'AttributeRouted' - " +
-            "HTTP Verbs: 'GET'" + Environment.NewLine +
-            $"Action: '{controllerTypeInfo.FullName}.Method ({assemblyName})' - " +
-            "Route Template: '(none)' - HTTP Verbs: 'DELETE, PATCH, POST, PUT'" + Environment.NewLine +
-            Environment.NewLine +
-            "Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a " +
-            "route, or set a route template in all attributes that constrain HTTP verbs.";
+            "The following errors occurred with attribute routing information:"
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Error 1:"
+            + Environment.NewLine
+            + $"A method '{controllerTypeInfo.FullName}.Method ({assemblyName})'"
+            + " must not define attribute routed actions and non attribute routed actions at the same time:"
+            + Environment.NewLine
+            + $"Action: '{controllerTypeInfo.FullName}.Method ({assemblyName})' "
+            + "- Route Template: 'AttributeRouted' - "
+            + "HTTP Verbs: 'GET'"
+            + Environment.NewLine
+            + $"Action: '{controllerTypeInfo.FullName}.Method ({assemblyName})' - "
+            + "Route Template: '(none)' - HTTP Verbs: 'DELETE, PATCH, POST, PUT'"
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a "
+            + "route, or set a route template in all attributes that constrain HTTP verbs.";
 
         var provider = GetProvider(controllerTypeInfo);
 
@@ -685,7 +784,12 @@ public class ControllerActionDescriptorProviderTests
         var exception = Assert.Throws<InvalidOperationException>(() => provider.GetDescriptors());
 
         // Assert
-        VerifyMultiLineError(expectedMessage, exception.Message, unorderedStart: 1, unorderedLineCount: 2);
+        VerifyMultiLineError(
+            expectedMessage,
+            exception.Message,
+            unorderedStart: 1,
+            unorderedLineCount: 2
+        );
     }
 
     // Verify that the expected exception and error message is thrown even when the user builds the model
@@ -699,10 +803,14 @@ public class ControllerActionDescriptorProviderTests
 
         var options = Options.Create(new MvcOptions());
 
-        var modelProvider = new DefaultApplicationModelProvider(options, new EmptyModelMetadataProvider());
+        var modelProvider = new DefaultApplicationModelProvider(
+            options,
+            new EmptyModelMetadataProvider()
+        );
         var provider = new ControllerActionDescriptorProvider(
             manager,
-            new ApplicationModelFactory(new[] { modelProvider }, options));
+            new ApplicationModelFactory(new[] { modelProvider }, options)
+        );
 
         var assemblyName = controllerTypeInfo.Assembly.GetName().Name;
         var expectedMessage =
@@ -711,25 +819,31 @@ public class ControllerActionDescriptorProviderTests
             + Environment.NewLine
             + "Error 1:"
             + Environment.NewLine
-            + $"A method '{controllerTypeInfo.FullName}.GetUser ({assemblyName})'" +
-            " must not define attribute routed actions and non attribute routed actions at the same time:"
-            + Environment.NewLine +
-            $"Action: '{controllerTypeInfo.FullName}.GetUser ({assemblyName})' " +
-            "- Route Template: '(none)' - " +
-            "HTTP Verbs: ''"
+            + $"A method '{controllerTypeInfo.FullName}.GetUser ({assemblyName})'"
+            + " must not define attribute routed actions and non attribute routed actions at the same time:"
             + Environment.NewLine
-            + $"Action: '{controllerTypeInfo.FullName}.GetUser ({assemblyName})' " +
-            "- Route Template: '!!!' - " +
-            "HTTP Verbs: ''" + Environment.NewLine +
-            Environment.NewLine +
-            "Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a " +
-            "route, or set a route template in all attributes that constrain HTTP verbs.";
+            + $"Action: '{controllerTypeInfo.FullName}.GetUser ({assemblyName})' "
+            + "- Route Template: '(none)' - "
+            + "HTTP Verbs: ''"
+            + Environment.NewLine
+            + $"Action: '{controllerTypeInfo.FullName}.GetUser ({assemblyName})' "
+            + "- Route Template: '!!!' - "
+            + "HTTP Verbs: ''"
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a "
+            + "route, or set a route template in all attributes that constrain HTTP verbs.";
 
         // Act
         var exception = Assert.Throws<InvalidOperationException>(() => provider.GetDescriptors());
 
         // Assert
-        VerifyMultiLineError(expectedMessage, exception.Message, unorderedStart: 1, unorderedLineCount: 2);
+        VerifyMultiLineError(
+            expectedMessage,
+            exception.Message,
+            unorderedStart: 1,
+            unorderedLineCount: 2
+        );
     }
 
     [Fact]
@@ -763,35 +877,44 @@ public class ControllerActionDescriptorProviderTests
         var assemblyName = sameNameType.Assembly.GetName().Name;
         var expectedMessage =
             "The following errors occurred with attribute routing information:"
-            + Environment.NewLine + Environment.NewLine +
-            "Error 1:" + Environment.NewLine +
-            "Attribute routes with the same name 'Products' must have the same template:"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.Get ({assemblyName})' - Template: 'Products'"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.Get ({assemblyName})' - Template: 'Products/{{id}}'"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.Put ({assemblyName})' - Template: 'Products/{{id}}'"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.Post ({assemblyName})' - Template: 'Products'"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.Delete ({assemblyName})' - Template: 'Products/{{id}}'"
-            + Environment.NewLine + Environment.NewLine +
-            "Error 2:" + Environment.NewLine +
-            "Attribute routes with the same name 'Items' must have the same template:"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.GetItems ({assemblyName})' - Template: 'Items/{{id}}'"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.PostItems ({assemblyName})' - Template: 'Items'"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.PutItems ({assemblyName})' - Template: 'Items/{{id}}'"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.DeleteItems ({assemblyName})' - Template: 'Items/{{id}}'"
-            + Environment.NewLine +
-            $"Action: '{sameNameType.FullName}.PatchItems ({assemblyName})' - Template: 'Items'";
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Error 1:"
+            + Environment.NewLine
+            + "Attribute routes with the same name 'Products' must have the same template:"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.Get ({assemblyName})' - Template: 'Products'"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.Get ({assemblyName})' - Template: 'Products/{{id}}'"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.Put ({assemblyName})' - Template: 'Products/{{id}}'"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.Post ({assemblyName})' - Template: 'Products'"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.Delete ({assemblyName})' - Template: 'Products/{{id}}'"
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Error 2:"
+            + Environment.NewLine
+            + "Attribute routes with the same name 'Items' must have the same template:"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.GetItems ({assemblyName})' - Template: 'Items/{{id}}'"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.PostItems ({assemblyName})' - Template: 'Items'"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.PutItems ({assemblyName})' - Template: 'Items/{{id}}'"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.DeleteItems ({assemblyName})' - Template: 'Items/{{id}}'"
+            + Environment.NewLine
+            + $"Action: '{sameNameType.FullName}.PatchItems ({assemblyName})' - Template: 'Items'";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => { provider.GetDescriptors(); });
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                provider.GetDescriptors();
+            }
+        );
 
         // Assert
         Assert.Equal(expectedMessage, ex.Message);
@@ -801,7 +924,9 @@ public class ControllerActionDescriptorProviderTests
     public void AttributeRouting_Name_AllowsMultipleAttributeRoutesInDifferentActions_WithTheSameNameAndTemplate()
     {
         // Arrange
-        var provider = GetProvider(typeof(DifferentCasingsAttributeRouteNamesController).GetTypeInfo());
+        var provider = GetProvider(
+            typeof(DifferentCasingsAttributeRouteNamesController).GetTypeInfo()
+        );
 
         // Act
         var descriptors = provider.GetDescriptors();
@@ -810,8 +935,16 @@ public class ControllerActionDescriptorProviderTests
         foreach (var descriptor in descriptors)
         {
             Assert.NotNull(descriptor.AttributeRouteInfo);
-            Assert.Equal("{id}", descriptor.AttributeRouteInfo.Template, StringComparer.OrdinalIgnoreCase);
-            Assert.Equal("Products", descriptor.AttributeRouteInfo.Name, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                "{id}",
+                descriptor.AttributeRouteInfo.Template,
+                StringComparer.OrdinalIgnoreCase
+            );
+            Assert.Equal(
+                "Products",
+                descriptor.AttributeRouteInfo.Name,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 
@@ -833,21 +966,39 @@ public class ControllerActionDescriptorProviderTests
         foreach (var getAction in getActions)
         {
             Assert.NotNull(getAction.AttributeRouteInfo);
-            Assert.Equal("Products/Get", getAction.AttributeRouteInfo.Template, StringComparer.OrdinalIgnoreCase);
-            Assert.Equal("Products_Get", getAction.AttributeRouteInfo.Name, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                "Products/Get",
+                getAction.AttributeRouteInfo.Template,
+                StringComparer.OrdinalIgnoreCase
+            );
+            Assert.Equal(
+                "Products_Get",
+                getAction.AttributeRouteInfo.Name,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         var editAction = Assert.Single(actions, a => a.ActionName.Equals(editActionName));
         Assert.NotNull(editAction.AttributeRouteInfo);
-        Assert.Equal("Products/Edit", editAction.AttributeRouteInfo.Template, StringComparer.OrdinalIgnoreCase);
-        Assert.Equal("Products_Edit", editAction.AttributeRouteInfo.Name, StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(
+            "Products/Edit",
+            editAction.AttributeRouteInfo.Template,
+            StringComparer.OrdinalIgnoreCase
+        );
+        Assert.Equal(
+            "Products_Edit",
+            editAction.AttributeRouteInfo.Name,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     [Fact]
     public void AttributeRouting_RouteNameTokenReplace_AreaControllerActionTokensInRoute()
     {
         // Arrange
-        var provider = GetProvider(typeof(ControllerActionRouteNameTemplatesController).GetTypeInfo());
+        var provider = GetProvider(
+            typeof(ControllerActionRouteNameTemplatesController).GetTypeInfo()
+        );
         var editActionName = nameof(ControllerActionRouteNameTemplatesController.Edit);
         var getActionName = nameof(ControllerActionRouteNameTemplatesController.Get);
 
@@ -863,20 +1014,28 @@ public class ControllerActionDescriptorProviderTests
             Assert.NotNull(getAction.AttributeRouteInfo);
             Assert.Equal(
                 "ControllerActionRouteNameTemplates/Get",
-                getAction.AttributeRouteInfo.Template, StringComparer.OrdinalIgnoreCase);
+                getAction.AttributeRouteInfo.Template,
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Equal(
                 "Products_ControllerActionRouteNameTemplates_Get",
-                getAction.AttributeRouteInfo.Name, StringComparer.OrdinalIgnoreCase);
+                getAction.AttributeRouteInfo.Name,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         var editAction = Assert.Single(actions, a => a.ActionName.Equals(editActionName));
         Assert.NotNull(editAction.AttributeRouteInfo);
         Assert.Equal(
             "ControllerActionRouteNameTemplates/Edit",
-            editAction.AttributeRouteInfo.Template, StringComparer.OrdinalIgnoreCase);
+            editAction.AttributeRouteInfo.Template,
+            StringComparer.OrdinalIgnoreCase
+        );
         Assert.Equal(
             "Products_ControllerActionRouteNameTemplates_Edit",
-            editAction.AttributeRouteInfo.Name, StringComparer.OrdinalIgnoreCase);
+            editAction.AttributeRouteInfo.Name,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     [Fact]
@@ -889,16 +1048,24 @@ public class ControllerActionDescriptorProviderTests
         var provider = GetProvider(controllerTypeInfo);
 
         var expectedMessage =
-            "The following errors occurred with attribute routing information:" + Environment.NewLine +
-            Environment.NewLine +
-            "Error 1:" + Environment.NewLine +
-            $"For action: '{controllerTypeInfo.FullName}.Get ({assemblyName})'" + Environment.NewLine +
-            "Error: While processing template 'Products_[unknown]', a replacement value for the token 'unknown' " +
-            "could not be found. Available tokens: 'action, controller'. To use a '[' or ']' as a literal string" +
-            " in a route or within a constraint, use '[[' or ']]' instead.";
+            "The following errors occurred with attribute routing information:"
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Error 1:"
+            + Environment.NewLine
+            + $"For action: '{controllerTypeInfo.FullName}.Get ({assemblyName})'"
+            + Environment.NewLine
+            + "Error: While processing template 'Products_[unknown]', a replacement value for the token 'unknown' "
+            + "could not be found. Available tokens: 'action, controller'. To use a '[' or ']' as a literal string"
+            + " in a route or within a constraint, use '[[' or ']]' instead.";
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => { provider.GetDescriptors(); });
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                provider.GetDescriptors();
+            }
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -908,7 +1075,8 @@ public class ControllerActionDescriptorProviderTests
         // Arrange
         var provider = GetProvider(
             typeof(ConventionalAndAttributeRoutedActionsWithAreaController).GetTypeInfo(),
-            typeof(ConstrainedController).GetTypeInfo());
+            typeof(ConstrainedController).GetTypeInfo()
+        );
 
         // Act
         var actionDescriptors = provider.GetDescriptors();
@@ -921,13 +1089,22 @@ public class ControllerActionDescriptorProviderTests
 
         Assert.Equal(3, indexAction.RouteValues.Count);
 
-        var controllerDefault = Assert.Single(indexAction.RouteValues, rd => rd.Key.Equals("controller", StringComparison.OrdinalIgnoreCase));
+        var controllerDefault = Assert.Single(
+            indexAction.RouteValues,
+            rd => rd.Key.Equals("controller", StringComparison.OrdinalIgnoreCase)
+        );
         Assert.Equal("ConventionalAndAttributeRoutedActionsWithArea", controllerDefault.Value);
 
-        var actionDefault = Assert.Single(indexAction.RouteValues, rd => rd.Key.Equals("action", StringComparison.OrdinalIgnoreCase));
+        var actionDefault = Assert.Single(
+            indexAction.RouteValues,
+            rd => rd.Key.Equals("action", StringComparison.OrdinalIgnoreCase)
+        );
         Assert.Equal("Index", actionDefault.Value);
 
-        var areaDefault = Assert.Single(indexAction.RouteValues, rd => rd.Key.Equals("area", StringComparison.OrdinalIgnoreCase));
+        var areaDefault = Assert.Single(
+            indexAction.RouteValues,
+            rd => rd.Key.Equals("area", StringComparison.OrdinalIgnoreCase)
+        );
         Assert.Equal("Home", areaDefault.Value);
     }
 
@@ -1078,7 +1255,10 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var convention = new ApiExplorerIsVisibleConvention(isVisible: true);
-        var provider = GetProvider(typeof(ApiExplorerExplicitlyNotVisibleController).GetTypeInfo(), convention);
+        var provider = GetProvider(
+            typeof(ApiExplorerExplicitlyNotVisibleController).GetTypeInfo(),
+            convention
+        );
 
         // Act
         var actions = provider.GetDescriptors();
@@ -1095,7 +1275,8 @@ public class ControllerActionDescriptorProviderTests
         var convention = new ApiExplorerIsVisibleConvention(isVisible: true);
         var provider = GetProvider(
             typeof(ApiExplorerExplicitlyNotVisibleOnActionController).GetTypeInfo(),
-            convention);
+            convention
+        );
 
         // Act
         var actions = provider.GetDescriptors();
@@ -1112,8 +1293,9 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var assemblyName = type.GetTypeInfo().Assembly.GetName().Name;
-        var expected = $"The action '{type.FullName}.{actionName} ({assemblyName})' has ApiExplorer enabled, but is using conventional routing. " +
-            "Only actions which use attribute routing support ApiExplorer.";
+        var expected =
+            $"The action '{type.FullName}.{actionName} ({assemblyName})' has ApiExplorer enabled, but is using conventional routing. "
+            + "Only actions which use attribute routing support ApiExplorer.";
 
         var provider = GetProvider(type.GetTypeInfo());
 
@@ -1129,7 +1311,8 @@ public class ControllerActionDescriptorProviderTests
         var convention = new ApiExplorerIsVisibleConvention(isVisible: true);
         var provider = GetProvider(
             typeof(ConventionallyRoutedController).GetTypeInfo(),
-            convention);
+            convention
+        );
 
         // Act
         var actions = provider.GetDescriptors();
@@ -1149,41 +1332,68 @@ public class ControllerActionDescriptorProviderTests
         var applicationConvention = new Mock<IApplicationModelConvention>();
         applicationConvention
             .Setup(c => c.Apply(It.IsAny<ApplicationModel>()))
-            .Callback(() => { Assert.Equal(0, sequence++); });
+            .Callback(
+                () =>
+                {
+                    Assert.Equal(0, sequence++);
+                }
+            );
 
         var controllerConvention = new Mock<IControllerModelConvention>();
         controllerConvention
             .Setup(c => c.Apply(It.IsAny<ControllerModel>()))
-            .Callback(() => { Assert.Equal(1, sequence++); });
+            .Callback(
+                () =>
+                {
+                    Assert.Equal(1, sequence++);
+                }
+            );
 
         var actionConvention = new Mock<IActionModelConvention>();
         actionConvention
             .Setup(c => c.Apply(It.IsAny<ActionModel>()))
-            .Callback(() => { Assert.Equal(2, sequence++); });
+            .Callback(
+                () =>
+                {
+                    Assert.Equal(2, sequence++);
+                }
+            );
 
         var parameterConvention = new Mock<IParameterModelConvention>();
         parameterConvention
             .Setup(c => c.Apply(It.IsAny<ParameterModel>()))
-            .Callback(() => { Assert.Equal(3, sequence++); });
+            .Callback(
+                () =>
+                {
+                    Assert.Equal(3, sequence++);
+                }
+            );
 
         var options = Options.Create(new MvcOptions());
         options.Value.Conventions.Add(applicationConvention.Object);
 
         var applicationModel = new ApplicationModel();
 
-        var controller = new ControllerModel(typeof(ConventionsController).GetTypeInfo(),
-                                             new List<object>() { controllerConvention.Object });
+        var controller = new ControllerModel(
+            typeof(ConventionsController).GetTypeInfo(),
+            new List<object>() { controllerConvention.Object }
+        );
         controller.Application = applicationModel;
         applicationModel.Controllers.Add(controller);
 
         var methodInfo = typeof(ConventionsController).GetMethod("Create");
-        var actionModel = new ActionModel(methodInfo, new List<object>() { actionConvention.Object });
+        var actionModel = new ActionModel(
+            methodInfo,
+            new List<object>() { actionConvention.Object }
+        );
         actionModel.Controller = controller;
         controller.Actions.Add(actionModel);
 
         var parameterInfo = actionModel.ActionMethod.GetParameters().Single();
-        var parameterModel = new ParameterModel(parameterInfo,
-                                       new List<object>() { parameterConvention.Object });
+        var parameterModel = new ParameterModel(
+            parameterInfo,
+            new List<object>() { parameterConvention.Object }
+        );
         parameterModel.Action = actionModel;
         actionModel.Parameters.Add(parameterModel);
 
@@ -1224,7 +1434,9 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var actionName = nameof(MultipleRouteProviderOnActionAndControllerController.Edit);
-        var provider = GetProvider(typeof(MultipleRouteProviderOnActionAndControllerController).GetTypeInfo());
+        var provider = GetProvider(
+            typeof(MultipleRouteProviderOnActionAndControllerController).GetTypeInfo()
+        );
 
         // Act
         var actions = provider.GetDescriptors().Where(a => a.ActionName == actionName);
@@ -1234,14 +1446,26 @@ public class ControllerActionDescriptorProviderTests
 
         var action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C1/A1");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "C1");
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "A1");
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "C1"
+        );
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "A1"
+        );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
 
         action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C2/A1");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "C2");
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "A1");
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "C2"
+        );
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "A1"
+        );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
     }
 
@@ -1251,7 +1475,9 @@ public class ControllerActionDescriptorProviderTests
         // Arrange
         var actionName = nameof(MultipleRouteProviderOnActionAndControllerController.Delete);
 
-        var provider = GetProvider(typeof(MultipleRouteProviderOnActionAndControllerController).GetTypeInfo());
+        var provider = GetProvider(
+            typeof(MultipleRouteProviderOnActionAndControllerController).GetTypeInfo()
+        );
 
         // Act
         var actions = provider.GetDescriptors().Where(a => a.ActionName == actionName);
@@ -1261,26 +1487,50 @@ public class ControllerActionDescriptorProviderTests
 
         var action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C1/A3");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "C1");
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "A3");
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "C1"
+        );
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "A3"
+        );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
 
         action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C2/A3");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "C2");
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "A3");
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "C2"
+        );
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "A3"
+        );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
 
         action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C1/A4");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "C1");
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "A4");
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "C1"
+        );
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "A4"
+        );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
 
         action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C2/A4");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "C2");
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "A4");
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "C2"
+        );
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "A4"
+        );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
     }
 
@@ -1290,7 +1540,9 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var actionName = nameof(MultipleRouteProviderOnActionAndControllerController.Create);
-        var provider = GetProvider(typeof(MultipleRouteProviderOnActionAndControllerController).GetTypeInfo());
+        var provider = GetProvider(
+            typeof(MultipleRouteProviderOnActionAndControllerController).GetTypeInfo()
+        );
 
         // Act
         var actions = provider.GetDescriptors().Where(a => a.ActionName == actionName);
@@ -1300,7 +1552,10 @@ public class ControllerActionDescriptorProviderTests
 
         var action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "A2");
         Assert.Equal(2, action.ActionConstraints.Count);
-        Assert.Single(action.ActionConstraints, a => (a as RouteAndConstraintAttribute)?.Template == "~/A2");
+        Assert.Single(
+            action.ActionConstraints,
+            a => (a as RouteAndConstraintAttribute)?.Template == "~/A2"
+        );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
     }
 
@@ -1309,21 +1564,22 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var context = new ActionDescriptorProviderContext();
-        context.Results.Add(new ActionDescriptor()
-        {
-            RouteValues = new Dictionary<string, string>()
+        context.Results.Add(
+            new ActionDescriptor()
+            {
+                RouteValues = new Dictionary<string, string>()
                 {
                     { "controller", "Home" },
                     { "action", "Index" },
                 }
-        });
-        context.Results.Add(new ActionDescriptor()
-        {
-            RouteValues = new Dictionary<string, string>()
-                {
-                    { "page", "/Some/Page" }
-                }
-        });
+            }
+        );
+        context.Results.Add(
+            new ActionDescriptor()
+            {
+                RouteValues = new Dictionary<string, string>() { { "page", "/Some/Page" } }
+            }
+        );
 
         var provider = GetProvider();
 
@@ -1342,7 +1598,8 @@ public class ControllerActionDescriptorProviderTests
 
     private ControllerActionDescriptorProvider GetProvider(
         TypeInfo controllerTypeInfo,
-        IEnumerable<IFilterMetadata> filters = null)
+        IEnumerable<IFilterMetadata> filters = null
+    )
     {
         var options = Options.Create(new MvcOptions());
         if (filters != null)
@@ -1355,49 +1612,63 @@ public class ControllerActionDescriptorProviderTests
 
         var manager = GetApplicationManager(new[] { controllerTypeInfo });
 
-        var modelProvider = new DefaultApplicationModelProvider(options, new EmptyModelMetadataProvider());
+        var modelProvider = new DefaultApplicationModelProvider(
+            options,
+            new EmptyModelMetadataProvider()
+        );
 
         var provider = new ControllerActionDescriptorProvider(
             manager,
-            new ApplicationModelFactory(new[] { modelProvider }, options));
+            new ApplicationModelFactory(new[] { modelProvider }, options)
+        );
 
         return provider;
     }
 
-    private ControllerActionDescriptorProvider GetProvider(
-        params TypeInfo[] controllerTypeInfos)
+    private ControllerActionDescriptorProvider GetProvider(params TypeInfo[] controllerTypeInfos)
     {
         var options = Options.Create(new MvcOptions());
 
         var manager = GetApplicationManager(controllerTypeInfos);
-        var modelProvider = new DefaultApplicationModelProvider(options, new EmptyModelMetadataProvider());
+        var modelProvider = new DefaultApplicationModelProvider(
+            options,
+            new EmptyModelMetadataProvider()
+        );
 
         var provider = new ControllerActionDescriptorProvider(
             manager,
-            new ApplicationModelFactory(new[] { modelProvider }, options));
+            new ApplicationModelFactory(new[] { modelProvider }, options)
+        );
 
         return provider;
     }
 
     private ControllerActionDescriptorProvider GetProvider(
         TypeInfo controllerTypeInfo,
-        IApplicationModelConvention convention)
+        IApplicationModelConvention convention
+    )
     {
         var options = Options.Create(new MvcOptions());
         options.Value.Conventions.Add(convention);
 
         var manager = GetApplicationManager(new[] { controllerTypeInfo });
 
-        var modelProvider = new DefaultApplicationModelProvider(options, new EmptyModelMetadataProvider());
+        var modelProvider = new DefaultApplicationModelProvider(
+            options,
+            new EmptyModelMetadataProvider()
+        );
 
         var provider = new ControllerActionDescriptorProvider(
             manager,
-            new ApplicationModelFactory(new[] { modelProvider }, options));
+            new ApplicationModelFactory(new[] { modelProvider }, options)
+        );
 
         return provider;
     }
 
-    private static ApplicationPartManager GetApplicationManager(IEnumerable<TypeInfo> controllerTypes)
+    private static ApplicationPartManager GetApplicationManager(
+        IEnumerable<TypeInfo> controllerTypes
+    )
     {
         var manager = new ApplicationPartManager();
         manager.ApplicationParts.Add(new TestApplicationPart(controllerTypes));
@@ -1415,7 +1686,8 @@ public class ControllerActionDescriptorProviderTests
         string expectedMessage,
         string actualMessage,
         int unorderedStart,
-        int unorderedLineCount)
+        int unorderedLineCount
+    )
     {
         var expectedLines = expectedMessage
             .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
@@ -1458,9 +1730,7 @@ public class ControllerActionDescriptorProviderTests
     private class HttpMethodController
     {
         [HttpPost]
-        public void OnlyPost()
-        {
-        }
+        public void OnlyPost() { }
     }
 
     [Route("Items")]
@@ -1472,40 +1742,29 @@ public class ControllerActionDescriptorProviderTests
 
     private class PersonController
     {
-        public void GetPerson()
-        { }
+        public void GetPerson() { }
 
         [ActionName("ShowPeople")]
-        public void ListPeople()
-        { }
+        public void ListPeople() { }
 
         [NonAction]
-        public void NotAnAction()
-        { }
+        public void NotAnAction() { }
     }
 
     private class MyRouteValueAttribute : RouteValueAttribute
     {
-        public MyRouteValueAttribute()
-            : base("key", "value")
-        {
-        }
+        public MyRouteValueAttribute() : base("key", "value") { }
     }
 
     private class MySecondRouteValueAttribute : RouteValueAttribute
     {
-        public MySecondRouteValueAttribute()
-            : base("second", "value")
-        {
-        }
+        public MySecondRouteValueAttribute() : base("second", "value") { }
     }
 
     [MyRouteValue]
     private class RouteValueController
     {
-        public void Edit()
-        {
-        }
+        public void Edit() { }
     }
 
     private class MyFilterAttribute : Attribute, IFilterMetadata
@@ -1522,9 +1781,7 @@ public class ControllerActionDescriptorProviderTests
     private class FiltersController
     {
         [MyFilter(3)]
-        public void FilterAction()
-        {
-        }
+        public void FilterAction() { }
     }
 
     [Route("api/Token/[key]/[controller]")]
@@ -1773,9 +2030,7 @@ public class ControllerActionDescriptorProviderTests
         public void AuthorizeAction() { }
     }
 
-    private class EmptyController
-    {
-    }
+    private class EmptyController { }
 
     private class NonActionAttributeController
     {
@@ -1794,10 +2049,7 @@ public class ControllerActionDescriptorProviderTests
 
         public IEnumerable<string> HttpMethods
         {
-            get
-            {
-                return _methods;
-            }
+            get { return _methods; }
         }
     }
 
@@ -1805,10 +2057,7 @@ public class ControllerActionDescriptorProviderTests
     {
         private static readonly string[] _httpMethods = new string[] { "PUT", "PATCH" };
 
-        public PutOrPatchAttribute(string template)
-            : base(_httpMethods, template)
-        {
-        }
+        public PutOrPatchAttribute(string template) : base(_httpMethods, template) { }
     }
 
     private class TestActionParameter
@@ -1914,8 +2163,15 @@ public class ControllerActionDescriptorProviderTests
         public void Delete() { }
     }
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-    private class RouteAndConstraintAttribute : Attribute, IActionConstraintMetadata, IRouteTemplateProvider
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
+    private class RouteAndConstraintAttribute
+        : Attribute,
+          IActionConstraintMetadata,
+          IRouteTemplateProvider
     {
         public RouteAndConstraintAttribute(string template)
         {
@@ -1929,26 +2185,24 @@ public class ControllerActionDescriptorProviderTests
         public string Template { get; private set; }
     }
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-    private class ConstraintAttribute : Attribute, IActionConstraintMetadata
-    {
-    }
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
+    private class ConstraintAttribute : Attribute, IActionConstraintMetadata { }
 
     [ApiExplorerSettings(GroupName = "Default")]
     private class ApiExplorerEnabledConventionalRoutedController
     {
-        public void A()
-        {
-        }
+        public void A() { }
     }
 
     [ApiExplorerSettings(IgnoreApi = true)]
     private class ApiExplorerEnabledActionConventionalRoutedController
     {
         [ApiExplorerSettings(GroupName = "Default")]
-        public void A()
-        {
-        }
+        public void A() { }
     }
 
     private class ApiExplorerIsVisibleConvention : IApplicationModelConvention
@@ -1970,13 +2224,12 @@ public class ControllerActionDescriptorProviderTests
     {
         public void Apply(ActionModel action)
         {
-            action.Selectors.Add(new SelectorModel()
-            {
-                AttributeRouteModel = new AttributeRouteModel()
+            action.Selectors.Add(
+                new SelectorModel()
                 {
-                    Template = "/!!!",
+                    AttributeRouteModel = new AttributeRouteModel() { Template = "/!!!", }
                 }
-            });
+            );
         }
     }
 
@@ -1985,7 +2238,11 @@ public class ControllerActionDescriptorProviderTests
         [MixedRoutingConvention]
         public string GetUser(int id)
         {
-            return string.Format(CultureInfo.InvariantCulture, "User {0} retrieved successfully", id);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "User {0} retrieved successfully",
+                id
+            );
         }
     }
 }

@@ -15,8 +15,8 @@ public class ControllerViewDataAttributeFilterFactoryTest
         // Arrange
         var properties = new LifecycleProperty[]
         {
-                new LifecycleProperty(),
-                new LifecycleProperty(),
+            new LifecycleProperty(),
+            new LifecycleProperty(),
         };
         var filterFactory = new ControllerViewDataAttributeFilterFactory(properties);
 

@@ -24,13 +24,14 @@ namespace System.CommandLine.Tests
         {
             var symbol = CreateSymbol("x");
 
-            Func<ParseResult> parse = () => symbol switch
-            {
-                Argument argument => argument.Parse(""),
-                Command command => command.Parse(""),
-                Option option => option.Parse(""),
-                _ => throw new ArgumentOutOfRangeException(nameof(symbol))
-            };
+            Func<ParseResult> parse = () =>
+                symbol switch
+                {
+                    Argument argument => argument.Parse(""),
+                    Command command => command.Parse(""),
+                    Option option => option.Parse(""),
+                    _ => throw new ArgumentOutOfRangeException(nameof(symbol))
+                };
 
             var parser1 = parse().Parser;
             var parser2 = parse().Parser;

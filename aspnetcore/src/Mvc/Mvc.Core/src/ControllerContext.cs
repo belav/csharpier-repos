@@ -22,22 +22,22 @@ public class ControllerContext : ActionContext
     /// <remarks>
     /// The default constructor is provided for unit test purposes only.
     /// </remarks>
-    public ControllerContext()
-    {
-    }
+    public ControllerContext() { }
 
     /// <summary>
     /// Creates a new <see cref="ControllerContext"/>.
     /// </summary>
     /// <param name="context">The <see cref="ActionContext"/> associated with the current request.</param>
-    public ControllerContext(ActionContext context)
-        : base(context)
+    public ControllerContext(ActionContext context) : base(context)
     {
         if (!(context.ActionDescriptor is ControllerActionDescriptor))
         {
-            throw new ArgumentException(Resources.FormatActionDescriptorMustBeBasedOnControllerAction(
-                typeof(ControllerActionDescriptor)),
-                nameof(context));
+            throw new ArgumentException(
+                Resources.FormatActionDescriptorMustBeBasedOnControllerAction(
+                    typeof(ControllerActionDescriptor)
+                ),
+                nameof(context)
+            );
         }
     }
 

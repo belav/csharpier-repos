@@ -10,6 +10,7 @@ namespace MS.Internal.Xml.XPath
     internal sealed class IDQuery : CacheOutputQuery
     {
         public IDQuery(Query arg) : base(arg) { }
+
         private IDQuery(IDQuery other) : base(other) { }
 
         public override object Evaluate(XPathNodeIterator context)
@@ -57,7 +58,12 @@ namespace MS.Internal.Xml.XPath
 
         public override XPathNavigator? MatchNode(XPathNavigator? context)
         {
-            Evaluate(new XPathSingletonIterator(context!, /*moved:*/true));
+            Evaluate(
+                new XPathSingletonIterator(
+                    context!, /*moved:*/
+                    true
+                )
+            );
             XPathNavigator? result;
             while ((result = Advance()) != null)
             {
@@ -69,6 +75,9 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathNodeIterator Clone() { return new IDQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new IDQuery(this);
+        }
     }
 }

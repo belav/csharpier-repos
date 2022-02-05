@@ -32,7 +32,11 @@ public class CompiledPageActionDescriptorBuilderTest
             ViewEnginePath = "/Pages/Foo",
         };
         var handlerTypeInfo = typeof(object).GetTypeInfo();
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, handlerTypeInfo, new object[0]);
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            handlerTypeInfo,
+            new object[0]
+        );
         var globalFilters = new FilterCollection();
 
         // Act
@@ -60,26 +64,33 @@ public class CompiledPageActionDescriptorBuilderTest
             ViewEnginePath = "/Pages/Foo",
         };
         var handlerTypeInfo = typeof(TestModel).GetTypeInfo();
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, typeof(TestModel).GetTypeInfo(), handlerTypeInfo, new object[0])
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            typeof(TestModel).GetTypeInfo(),
+            handlerTypeInfo,
+            new object[0]
+        )
         {
             PageType = typeof(TestPage).GetTypeInfo(),
             ModelType = typeof(TestModel).GetTypeInfo(),
-            Filters =
-                {
-                    Mock.Of<IFilterMetadata>(),
-                    Mock.Of<IFilterMetadata>(),
-                },
+            Filters = { Mock.Of<IFilterMetadata>(), Mock.Of<IFilterMetadata>(), },
             HandlerMethods =
-                {
-                    new PageHandlerModel(handlerTypeInfo.GetMethod(nameof(TestModel.OnGet)), new object[0]),
-                },
+            {
+                new PageHandlerModel(
+                    handlerTypeInfo.GetMethod(nameof(TestModel.OnGet)),
+                    new object[0]
+                ),
+            },
             HandlerProperties =
+            {
+                new PagePropertyModel(
+                    handlerTypeInfo.GetProperty(nameof(TestModel.Property)),
+                    new object[0]
+                )
                 {
-                    new PagePropertyModel(handlerTypeInfo.GetProperty(nameof(TestModel.Property)), new object[0])
-                    {
-                        BindingInfo = new BindingInfo(),
-                    },
-                }
+                    BindingInfo = new BindingInfo(),
+                },
+            }
         };
         var globalFilters = new FilterCollection();
 
@@ -93,8 +104,14 @@ public class CompiledPageActionDescriptorBuilderTest
         Assert.Same(pageApplicationModel.HandlerType, actual.HandlerTypeInfo);
         Assert.Same(pageApplicationModel.Properties, actual.Properties);
         Assert.Equal(pageApplicationModel.Filters, actual.FilterDescriptors.Select(f => f.Filter));
-        Assert.Equal(pageApplicationModel.HandlerMethods.Select(p => p.MethodInfo), actual.HandlerMethods.Select(p => p.MethodInfo));
-        Assert.Equal(pageApplicationModel.HandlerProperties.Select(p => p.PropertyName), actual.BoundProperties.Select(p => p.Name));
+        Assert.Equal(
+            pageApplicationModel.HandlerMethods.Select(p => p.MethodInfo),
+            actual.HandlerMethods.Select(p => p.MethodInfo)
+        );
+        Assert.Equal(
+            pageApplicationModel.HandlerProperties.Select(p => p.PropertyName),
+            actual.BoundProperties.Select(p => p.Name)
+        );
     }
 
     [Fact]
@@ -111,32 +128,40 @@ public class CompiledPageActionDescriptorBuilderTest
             ViewEnginePath = "/Pages/Foo",
         };
         var handlerTypeInfo = typeof(TestModel).GetTypeInfo();
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, typeof(TestModel).GetTypeInfo(), handlerTypeInfo, new object[0])
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            typeof(TestModel).GetTypeInfo(),
+            handlerTypeInfo,
+            new object[0]
+        )
         {
             PageType = typeof(TestPage).GetTypeInfo(),
             ModelType = typeof(string).GetTypeInfo(),
-            Filters =
-                {
-                    Mock.Of<IFilterMetadata>(),
-                    Mock.Of<IFilterMetadata>(),
-                },
+            Filters = { Mock.Of<IFilterMetadata>(), Mock.Of<IFilterMetadata>(), },
             HandlerMethods =
-                {
-                    new PageHandlerModel(handlerTypeInfo.GetMethod(nameof(TestModel.OnGet)), new object[0]),
-                },
+            {
+                new PageHandlerModel(
+                    handlerTypeInfo.GetMethod(nameof(TestModel.OnGet)),
+                    new object[0]
+                ),
+            },
             HandlerProperties =
+            {
+                new PagePropertyModel(
+                    handlerTypeInfo.GetProperty(nameof(TestModel.Property)),
+                    new object[0]
+                )
                 {
-                    new PagePropertyModel(handlerTypeInfo.GetProperty(nameof(TestModel.Property)), new object[0])
-                    {
-                        BindingInfo = new BindingInfo(),
-                    },
-                }
+                    BindingInfo = new BindingInfo(),
+                },
+            }
         };
         var globalFilters = new FilterCollection();
 
         // Act & Assert
-        var actual = Assert.Throws<InvalidOperationException>(() =>
-            CompiledPageActionDescriptorBuilder.Build(pageApplicationModel, globalFilters));
+        var actual = Assert.Throws<InvalidOperationException>(
+            () => CompiledPageActionDescriptorBuilder.Build(pageApplicationModel, globalFilters)
+        );
     }
 
     [Fact]
@@ -153,22 +178,23 @@ public class CompiledPageActionDescriptorBuilderTest
             ViewEnginePath = "/Pages/Foo",
         };
         var handlerTypeInfo = typeof(TestModel).GetTypeInfo();
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, handlerTypeInfo, new object[0])
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            handlerTypeInfo,
+            new object[0]
+        )
         {
             PageType = typeof(TestPage).GetTypeInfo(),
             ModelType = typeof(TestModel).GetTypeInfo(),
-            Filters =
-                {
-                    Mock.Of<IFilterMetadata>(),
-                },
+            Filters = { Mock.Of<IFilterMetadata>(), },
         };
-        var globalFilters = new FilterCollection
-            {
-                Mock.Of<IFilterMetadata>(),
-            };
+        var globalFilters = new FilterCollection { Mock.Of<IFilterMetadata>(), };
 
         // Act
-        var compiledPageActionDescriptor = CompiledPageActionDescriptorBuilder.Build(pageApplicationModel, globalFilters);
+        var compiledPageActionDescriptor = CompiledPageActionDescriptorBuilder.Build(
+            pageApplicationModel,
+            globalFilters
+        );
 
         // Assert
         Assert.Collection(
@@ -182,7 +208,8 @@ public class CompiledPageActionDescriptorBuilderTest
             {
                 Assert.Same(pageApplicationModel.Filters[0], filterDescriptor.Filter);
                 Assert.Equal(FilterScope.Action, filterDescriptor.Scope);
-            });
+            }
+        );
     }
 
     private class TestPage
@@ -192,10 +219,7 @@ public class CompiledPageActionDescriptorBuilderTest
         [BindProperty]
         public string Property { get; set; }
 
-        public void OnGet()
-        {
-
-        }
+        public void OnGet() { }
     }
 
     private class TestModel
@@ -203,10 +227,7 @@ public class CompiledPageActionDescriptorBuilderTest
         [BindProperty]
         public string Property { get; set; }
 
-        public void OnGet()
-        {
-
-        }
+        public void OnGet() { }
     }
 
     [Fact]
@@ -215,21 +236,27 @@ public class CompiledPageActionDescriptorBuilderTest
         // Arrange
         var actionDescriptor = new PageActionDescriptor();
         var handlerTypeInfo = typeof(ModelWithHandler).GetTypeInfo();
-        var handlerModel = new PageHandlerModel(handlerTypeInfo.GetMethod(nameof(ModelWithHandler.OnGetCustomerAsync)), new object[0])
+        var handlerModel = new PageHandlerModel(
+            handlerTypeInfo.GetMethod(nameof(ModelWithHandler.OnGetCustomerAsync)),
+            new object[0]
+        )
         {
             HttpMethod = "GET",
             HandlerName = "Customer",
         };
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, handlerTypeInfo, new object[0])
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            handlerTypeInfo,
+            new object[0]
+        )
         {
-            HandlerMethods =
-                {
-                    handlerModel,
-                }
+            HandlerMethods = { handlerModel, }
         };
 
         // Act
-        var handlerDescriptors = CompiledPageActionDescriptorBuilder.CreateHandlerMethods(pageApplicationModel);
+        var handlerDescriptors = CompiledPageActionDescriptorBuilder.CreateHandlerMethods(
+            pageApplicationModel
+        );
 
         // Assert
         Assert.Collection(
@@ -239,14 +266,13 @@ public class CompiledPageActionDescriptorBuilderTest
                 Assert.Equal(handlerModel.MethodInfo, d.MethodInfo);
                 Assert.Equal(handlerModel.HttpMethod, d.HttpMethod);
                 Assert.Equal(handlerModel.HandlerName, d.Name);
-            });
+            }
+        );
     }
 
     private class ModelWithHandler
     {
-        public void OnGetCustomerAsync()
-        {
-        }
+        public void OnGetCustomerAsync() { }
     }
 
     [Fact]
@@ -267,22 +293,21 @@ public class CompiledPageActionDescriptorBuilderTest
         };
         var handlerModel = new PageHandlerModel(handlerMethod, new object[0])
         {
-            Parameters =
-                {
-                    parameterModel1,
-                    parameterModel2,
-                }
+            Parameters = { parameterModel1, parameterModel2, }
         };
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, handlerTypeInfo, new object[0])
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            handlerTypeInfo,
+            new object[0]
+        )
         {
-            HandlerMethods =
-                {
-                    handlerModel,
-                }
+            HandlerMethods = { handlerModel, }
         };
 
         // Act
-        var handlerDescriptors = CompiledPageActionDescriptorBuilder.CreateHandlerMethods(pageApplicationModel);
+        var handlerDescriptors = CompiledPageActionDescriptorBuilder.CreateHandlerMethods(
+            pageApplicationModel
+        );
 
         // Assert
         Assert.Collection(
@@ -298,14 +323,13 @@ public class CompiledPageActionDescriptorBuilderTest
                 Assert.Equal(parameters[1], p.ParameterInfo);
                 Assert.Equal(typeof(int), p.ParameterType);
                 Assert.Same(parameterModel2.BindingInfo, p.BindingInfo);
-            });
+            }
+        );
     }
 
     private class HandlerWithParameters
     {
-        public void OnPost(string param1, [FromRoute(Name = "id")] int param2)
-        {
-        }
+        public void OnPost(string param1, [FromRoute(Name = "id")] int param2) { }
     }
 
     [Fact]
@@ -316,21 +340,25 @@ public class CompiledPageActionDescriptorBuilderTest
         var handlerTypeInfo = typeof(HandlerWithProperty).GetTypeInfo();
         var propertyModel = new PagePropertyModel(
             handlerTypeInfo.GetProperty(nameof(HandlerWithProperty.Property)),
-            new object[0])
+            new object[0]
+        )
         {
             PropertyName = nameof(HandlerWithProperty.Property),
             BindingInfo = new BindingInfo(),
         };
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, handlerTypeInfo, new object[0])
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            handlerTypeInfo,
+            new object[0]
+        )
         {
-            HandlerProperties =
-                {
-                    propertyModel,
-                }
+            HandlerProperties = { propertyModel, }
         };
 
         // Act
-        var propertyDescriptors = CompiledPageActionDescriptorBuilder.CreateBoundProperties(pageApplicationModel);
+        var propertyDescriptors = CompiledPageActionDescriptorBuilder.CreateBoundProperties(
+            pageApplicationModel
+        );
 
         // Assert
         Assert.Collection(
@@ -341,7 +369,8 @@ public class CompiledPageActionDescriptorBuilderTest
                 Assert.Same(typeof(int), p.ParameterType);
                 Assert.Same(propertyModel.PropertyInfo, p.Property);
                 Assert.Same(propertyModel.BindingInfo, p.BindingInfo);
-            });
+            }
+        );
     }
 
     private class HandlerWithProperty
@@ -358,28 +387,32 @@ public class CompiledPageActionDescriptorBuilderTest
         var handlerTypeInfo = typeof(HandlerWithIgnoredProperties).GetTypeInfo();
         var propertyModel1 = new PagePropertyModel(
             handlerTypeInfo.GetProperty(nameof(HandlerWithIgnoredProperties.Property)),
-            new object[0])
+            new object[0]
+        )
         {
             PropertyName = nameof(HandlerWithIgnoredProperties.Property),
             BindingInfo = new BindingInfo(),
         };
         var propertyModel2 = new PagePropertyModel(
             handlerTypeInfo.GetProperty(nameof(HandlerWithIgnoredProperties.IgnoreMe)),
-            new object[0])
+            new object[0]
+        )
         {
             PropertyName = nameof(HandlerWithIgnoredProperties.IgnoreMe),
         };
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, handlerTypeInfo, new object[0])
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            handlerTypeInfo,
+            new object[0]
+        )
         {
-            HandlerProperties =
-                {
-                    propertyModel1,
-                    propertyModel2,
-                }
+            HandlerProperties = { propertyModel1, propertyModel2, }
         };
 
         // Act
-        var propertyDescriptors = CompiledPageActionDescriptorBuilder.CreateBoundProperties(pageApplicationModel);
+        var propertyDescriptors = CompiledPageActionDescriptorBuilder.CreateBoundProperties(
+            pageApplicationModel
+        );
 
         // Assert
         Assert.Collection(
@@ -390,7 +423,8 @@ public class CompiledPageActionDescriptorBuilderTest
                 Assert.Same(typeof(int), p.ParameterType);
                 Assert.Same(propertyModel1.PropertyInfo, p.Property);
                 Assert.Same(propertyModel1.BindingInfo, p.BindingInfo);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -415,7 +449,11 @@ public class CompiledPageActionDescriptorBuilderTest
             ViewEnginePath = "/Pages/Foo",
         };
         var handlerTypeInfo = typeof(object).GetTypeInfo();
-        var pageApplicationModel = new PageApplicationModel(actionDescriptor, handlerTypeInfo, new[] { metadata1, metadata2, });
+        var pageApplicationModel = new PageApplicationModel(
+            actionDescriptor,
+            handlerTypeInfo,
+            new[] { metadata1, metadata2, }
+        );
         pageApplicationModel.EndpointMetadata.Add(metadata5);
         pageApplicationModel.EndpointMetadata.Add(metadata6);
         var globalFilters = new FilterCollection();
@@ -424,7 +462,10 @@ public class CompiledPageActionDescriptorBuilderTest
         var actual = CompiledPageActionDescriptorBuilder.Build(pageApplicationModel, globalFilters);
 
         // Assert
-        Assert.Equal(new[] { metadata1, metadata2, metadata3, metadata4, metadata5, metadata6 }, actual.EndpointMetadata);
+        Assert.Equal(
+            new[] { metadata1, metadata2, metadata3, metadata4, metadata5, metadata6 },
+            actual.EndpointMetadata
+        );
     }
 
     private class HandlerWithIgnoredProperties

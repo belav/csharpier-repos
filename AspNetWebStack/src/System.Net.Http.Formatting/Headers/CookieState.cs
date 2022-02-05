@@ -13,10 +13,7 @@ namespace System.Net.Http.Headers
         private string _name;
         private NameValueCollection _values = HttpValueCollection.Create();
 
-        public CookieState(string name)
-            : this(name, String.Empty)
-        {
-        }
+        public CookieState(string name) : this(name, String.Empty) { }
 
         public CookieState(string name, string value)
         {
@@ -66,11 +63,7 @@ namespace System.Net.Http.Headers
         /// </summary>
         public string Value
         {
-            get
-            {
-                return Values.Count > 0 ? Values.AllKeys[0] : String.Empty;
-            }
-
+            get { return Values.Count > 0 ? Values.AllKeys[0] : String.Empty; }
             set
             {
                 CheckValueFormat(value, "value");

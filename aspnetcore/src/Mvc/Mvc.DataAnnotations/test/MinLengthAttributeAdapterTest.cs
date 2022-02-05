@@ -29,13 +29,22 @@ public class MinLengthAttributeAdapterTest
         var expectedMessage = "Property must be at least '6' characters long.";
 
         var stringLocalizer = new Mock<IStringLocalizer>();
-        stringLocalizer.Setup(s => s[attribute.ErrorMessage, expectedProperties])
+        stringLocalizer
+            .Setup(s => s[attribute.ErrorMessage, expectedProperties])
             .Returns(new LocalizedString(attribute.ErrorMessage, expectedMessage));
 
-        var adapter = new MinLengthAttributeAdapter(attribute, stringLocalizer: stringLocalizer.Object);
+        var adapter = new MinLengthAttributeAdapter(
+            attribute,
+            stringLocalizer: stringLocalizer.Object
+        );
 
         var actionContext = new ActionContext();
-        var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+        var context = new ClientModelValidationContext(
+            actionContext,
+            metadata,
+            provider,
+            new Dictionary<string, string>()
+        );
 
         // Act
         adapter.AddValidation(context);
@@ -43,9 +52,22 @@ public class MinLengthAttributeAdapterTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-            kvp => { Assert.Equal("data-val-minlength", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
-            kvp => { Assert.Equal("data-val-minlength-min", kvp.Key); Assert.Equal("6", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-minlength", kvp.Key);
+                Assert.Equal(expectedMessage, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-minlength-min", kvp.Key);
+                Assert.Equal("6", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -62,7 +84,12 @@ public class MinLengthAttributeAdapterTest
         var expectedMessage = attribute.FormatErrorMessage("Length");
 
         var actionContext = new ActionContext();
-        var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+        var context = new ClientModelValidationContext(
+            actionContext,
+            metadata,
+            provider,
+            new Dictionary<string, string>()
+        );
 
         // Act
         adapter.AddValidation(context);
@@ -70,9 +97,22 @@ public class MinLengthAttributeAdapterTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-            kvp => { Assert.Equal("data-val-minlength", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
-            kvp => { Assert.Equal("data-val-minlength-min", kvp.Key); Assert.Equal("6", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-minlength", kvp.Key);
+                Assert.Equal(expectedMessage, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-minlength-min", kvp.Key);
+                Assert.Equal("6", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -84,13 +124,21 @@ public class MinLengthAttributeAdapterTest
         var provider = TestModelMetadataProvider.CreateDefaultProvider();
         var metadata = provider.GetMetadataForProperty(typeof(string), propertyName);
 
-        var attribute = new MinLengthAttribute(2) { ErrorMessage = "Array must have at least {1} items." };
+        var attribute = new MinLengthAttribute(2)
+        {
+            ErrorMessage = "Array must have at least {1} items."
+        };
         var adapter = new MinLengthAttributeAdapter(attribute, stringLocalizer: null);
 
         var expectedMessage = "Array must have at least 2 items.";
 
         var actionContext = new ActionContext();
-        var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+        var context = new ClientModelValidationContext(
+            actionContext,
+            metadata,
+            provider,
+            new Dictionary<string, string>()
+        );
 
         // Act
         adapter.AddValidation(context);
@@ -98,9 +146,22 @@ public class MinLengthAttributeAdapterTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-            kvp => { Assert.Equal("data-val-minlength", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
-            kvp => { Assert.Equal("data-val-minlength-min", kvp.Key); Assert.Equal("2", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-minlength", kvp.Key);
+                Assert.Equal(expectedMessage, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-minlength-min", kvp.Key);
+                Assert.Equal("2", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -112,11 +173,19 @@ public class MinLengthAttributeAdapterTest
         var provider = TestModelMetadataProvider.CreateDefaultProvider();
         var metadata = provider.GetMetadataForProperty(typeof(string), propertyName);
 
-        var attribute = new MinLengthAttribute(2) { ErrorMessage = "Array must have at least {1} items." };
+        var attribute = new MinLengthAttribute(2)
+        {
+            ErrorMessage = "Array must have at least {1} items."
+        };
         var adapter = new MinLengthAttributeAdapter(attribute, stringLocalizer: null);
 
         var actionContext = new ActionContext();
-        var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+        var context = new ClientModelValidationContext(
+            actionContext,
+            metadata,
+            provider,
+            new Dictionary<string, string>()
+        );
 
         context.Attributes.Add("data-val", "original");
         context.Attributes.Add("data-val-minlength", "original");
@@ -128,8 +197,21 @@ public class MinLengthAttributeAdapterTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("original", kvp.Value); },
-            kvp => { Assert.Equal("data-val-minlength", kvp.Key); Assert.Equal("original", kvp.Value); },
-            kvp => { Assert.Equal("data-val-minlength-min", kvp.Key); Assert.Equal("original", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-minlength", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-minlength-min", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            }
+        );
     }
 }

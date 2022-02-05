@@ -38,7 +38,10 @@ internal sealed class HotReloadAgent : IDisposable
             return;
         }
 
-        if (_deltas.TryGetValue(moduleId.Value, out var updateDeltas) && _appliedAssemblies.TryAdd(loadedAssembly, loadedAssembly))
+        if (
+            _deltas.TryGetValue(moduleId.Value, out var updateDeltas)
+            && _appliedAssemblies.TryAdd(loadedAssembly, loadedAssembly)
+        )
         {
             // A delta for this specific Module exists and we haven't called ApplyUpdate on this instance of Assembly as yet.
             ApplyDeltas(loadedAssembly, updateDeltas);
@@ -66,14 +69,16 @@ internal sealed class HotReloadAgent : IDisposable
             {
                 // Look up the attribute by name rather than by type. This would allow netstandard targeting libraries to
                 // define their own copy without having to cross-compile.
-                if (attr.AttributeType.FullName != "System.Reflection.Metadata.MetadataUpdateHandlerAttribute")
+                if (
+                    attr.AttributeType.FullName
+                    != "System.Reflection.Metadata.MetadataUpdateHandlerAttribute"
+                )
                 {
                     continue;
                 }
 
                 IList<CustomAttributeTypedArgument> ctorArgs = attr.ConstructorArguments;
-                if (ctorArgs.Count != 1 ||
-                    ctorArgs[0].Value is not Type handlerType)
+                if (ctorArgs.Count != 1 || ctorArgs[0].Value is not Type handlerType)
                 {
                     _log($"'{attr}' found with invalid arguments.");
                     continue;
@@ -104,8 +109,10 @@ internal sealed class HotReloadAgent : IDisposable
 
         if (!methodFound)
         {
-            _log($"No invokable methods found on metadata handler type '{handlerType}'. " +
-                $"Allowed methods are ClearCache, UpdateApplication");
+            _log(
+                $"No invokable methods found on metadata handler type '{handlerType}'. "
+                    + $"Allowed methods are ClearCache, UpdateApplication"
+            );
         }
 
         Action<Type[]?> CreateAction(MethodInfo update)
@@ -126,17 +133,33 @@ internal sealed class HotReloadAgent : IDisposable
 
         MethodInfo? GetUpdateMethod(Type handlerType, string name)
         {
-            if (handlerType.GetMethod(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static, new[] { typeof(Type[]) }) is MethodInfo updateMethod &&
-                updateMethod.ReturnType == typeof(void))
+            if (
+                handlerType.GetMethod(
+                    name,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static,
+                    new[] { typeof(Type[]) }
+                )
+                    is MethodInfo updateMethod
+                && updateMethod.ReturnType == typeof(void)
+            )
             {
                 return updateMethod;
             }
 
-            foreach (MethodInfo method in handlerType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
+            foreach (
+                MethodInfo method in handlerType.GetMethods(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Static
+                        | BindingFlags.Instance
+                )
+            )
             {
                 if (method.Name == name)
                 {
-                    _log($"Type '{handlerType}' has method '{method}' that does not match the required signature.");
+                    _log(
+                        $"Type '{handlerType}' has method '{method}' that does not match the required signature."
+                    );
                     break;
                 }
             }
@@ -156,7 +179,12 @@ internal sealed class HotReloadAgent : IDisposable
             Visit(assemblies, assembly, sortedAssemblies, visited);
         }
 
-        static void Visit(Assembly[] assemblies, Assembly assembly, List<Assembly> sortedAssemblies, HashSet<string> visited)
+        static void Visit(
+            Assembly[] assemblies,
+            Assembly assembly,
+            List<Assembly> sortedAssemblies,
+            HashSet<string> visited
+        )
         {
             var assemblyIdentifier = assembly.GetName().Name!;
             if (!visited.Add(assemblyIdentifier))
@@ -166,7 +194,10 @@ internal sealed class HotReloadAgent : IDisposable
 
             foreach (var dependencyName in assembly.GetReferencedAssemblies())
             {
-                var dependency = Array.Find(assemblies, a => a.GetName().Name == dependencyName.Name);
+                var dependency = Array.Find(
+                    assemblies,
+                    a => a.GetName().Name == dependencyName.Name
+                );
                 if (dependency is not null)
                 {
                     Visit(assemblies, dependency, sortedAssemblies, visited);
@@ -188,7 +219,12 @@ internal sealed class HotReloadAgent : IDisposable
             {
                 if (TryGetModuleId(assembly) is Guid moduleId && moduleId == item.ModuleId)
                 {
-                    MetadataUpdater.ApplyUpdate(assembly, item.MetadataDelta, item.ILDelta, ReadOnlySpan<byte>.Empty);
+                    MetadataUpdater.ApplyUpdate(
+                        assembly,
+                        item.MetadataDelta,
+                        item.ILDelta,
+                        ReadOnlySpan<byte>.Empty
+                    );
                 }
             }
 
@@ -223,7 +259,12 @@ internal sealed class HotReloadAgent : IDisposable
 
         foreach (var delta in deltas)
         {
-            var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => TryGetModuleId(assembly) is Guid moduleId && moduleId == delta.ModuleId);
+            var assembly = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .FirstOrDefault(
+                    assembly =>
+                        TryGetModuleId(assembly) is Guid moduleId && moduleId == delta.ModuleId
+                );
             if (assembly is null)
             {
                 continue;
@@ -251,7 +292,12 @@ internal sealed class HotReloadAgent : IDisposable
         {
             foreach (var item in deltas)
             {
-                MetadataUpdater.ApplyUpdate(assembly, item.MetadataDelta, item.ILDelta, ReadOnlySpan<byte>.Empty);
+                MetadataUpdater.ApplyUpdate(
+                    assembly,
+                    item.MetadataDelta,
+                    item.ILDelta,
+                    ReadOnlySpan<byte>.Empty
+                );
             }
 
             _log("Deltas applied.");
