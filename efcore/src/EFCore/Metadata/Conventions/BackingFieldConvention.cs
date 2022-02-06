@@ -31,11 +31,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     ///     </para>
     /// </remarks>
-    public class BackingFieldConvention :
-        IPropertyAddedConvention,
-        INavigationAddedConvention,
-        ISkipNavigationAddedConvention,
-        IModelFinalizingConvention
+    public class BackingFieldConvention
+        : IPropertyAddedConvention,
+          INavigationAddedConvention,
+          ISkipNavigationAddedConvention,
+          IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="BackingFieldConvention" />.
@@ -58,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<IConventionPropertyBuilder> context)
+            IConventionContext<IConventionPropertyBuilder> context
+        )
         {
             DiscoverField(propertyBuilder);
         }
@@ -66,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
-            IConventionContext<IConventionNavigationBuilder> context)
+            IConventionContext<IConventionNavigationBuilder> context
+        )
         {
             DiscoverField(navigationBuilder);
         }
@@ -74,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessSkipNavigationAdded(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
-            IConventionContext<IConventionSkipNavigationBuilder> context)
+            IConventionContext<IConventionSkipNavigationBuilder> context
+        )
         {
             DiscoverField(skipNavigationBuilder);
         }
@@ -82,13 +85,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 foreach (var property in entityType.GetDeclaredProperties())
                 {
-                    var ambiguousField = property.FindAnnotation(CoreAnnotationNames.AmbiguousField);
+                    var ambiguousField = property.FindAnnotation(
+                        CoreAnnotationNames.AmbiguousField
+                    );
                     if (ambiguousField != null)
                     {
                         if (property.GetFieldName() == null)
@@ -104,7 +110,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private void DiscoverField(IConventionPropertyBaseBuilder conventionPropertyBaseBuilder)
         {
-            if (ConfigurationSource.Convention.Overrides(conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()))
+            if (
+                ConfigurationSource.Convention.Overrides(
+                    conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()
+                )
+            )
             {
                 var field = GetFieldToSet(conventionPropertyBaseBuilder.Metadata);
                 if (field != null)
@@ -116,10 +126,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private FieldInfo? GetFieldToSet(IConventionPropertyBase? propertyBase)
         {
-            if (propertyBase == null
-                || !ConfigurationSource.Convention.Overrides(propertyBase.GetFieldInfoConfigurationSource())
+            if (
+                propertyBase == null
+                || !ConfigurationSource.Convention.Overrides(
+                    propertyBase.GetFieldInfoConfigurationSource()
+                )
                 || propertyBase.IsIndexerProperty()
-                || propertyBase.IsShadowProperty())
+                || propertyBase.IsShadowProperty()
+            )
             {
                 return null;
             }
@@ -130,8 +144,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             while (type != null)
             {
                 var fieldInfo = TryMatchFieldName(propertyBase, entityType, type);
-                if (fieldInfo != null
-                    && (propertyBase.PropertyInfo != null || propertyBase.Name == fieldInfo.GetSimpleMemberName()))
+                if (
+                    fieldInfo != null
+                    && (
+                        propertyBase.PropertyInfo != null
+                        || propertyBase.Name == fieldInfo.GetSimpleMemberName()
+                    )
+                )
                 {
                     return fieldInfo;
                 }
@@ -146,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private static FieldInfo? TryMatchFieldName(
             IConventionPropertyBase propertyBase,
             IConventionEntityType? entityType,
-            Type entityClrType)
+            Type entityClrType
+        )
         {
             var propertyName = propertyBase.Name;
 
@@ -156,8 +176,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 var newFields = new Dictionary<string, FieldInfo>(StringComparer.Ordinal);
                 foreach (var field in entityClrType.GetRuntimeFields())
                 {
-                    if (!field.IsStatic
-                        && !newFields.ContainsKey(field.Name))
+                    if (!field.IsStatic && !newFields.ContainsKey(field.Name))
                     {
                         newFields[field.Name] = field;
                     }
@@ -172,20 +191,92 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var sortedFields = fields.OrderBy(p => p.Key, StringComparer.Ordinal).ToArray();
 
-            var match = TryMatch(sortedFields, "<", propertyName, ">k__BackingField", null, null, entityClrType, propertyName);
+            var match = TryMatch(
+                sortedFields,
+                "<",
+                propertyName,
+                ">k__BackingField",
+                null,
+                null,
+                entityClrType,
+                propertyName
+            );
             if (match == null)
             {
-                match = TryMatch(sortedFields, propertyName, "", "", propertyBase, null, entityClrType, propertyName);
+                match = TryMatch(
+                    sortedFields,
+                    propertyName,
+                    "",
+                    "",
+                    propertyBase,
+                    null,
+                    entityClrType,
+                    propertyName
+                );
 
                 var camelPrefix = char.ToLowerInvariant(propertyName[0]).ToString();
                 var camelizedSuffix = propertyName.Substring(1);
 
-                match = TryMatch(sortedFields, camelPrefix, camelizedSuffix, "", propertyBase, match, entityClrType, propertyName);
-                match = TryMatch(sortedFields, "_", camelPrefix, camelizedSuffix, propertyBase, match, entityClrType, propertyName);
-                match = TryMatch(sortedFields, "_", "", propertyName, propertyBase, match, entityClrType, propertyName);
-                match = TryMatch(sortedFields, "m_", camelPrefix, camelizedSuffix, propertyBase, match, entityClrType, propertyName);
-                match = TryMatch(sortedFields, "m_", "", propertyName, propertyBase, match, entityClrType, propertyName);
-                match = TryMatch(sortedFields, "", camelPrefix + camelizedSuffix, "_", propertyBase, match, entityClrType, propertyName);
+                match = TryMatch(
+                    sortedFields,
+                    camelPrefix,
+                    camelizedSuffix,
+                    "",
+                    propertyBase,
+                    match,
+                    entityClrType,
+                    propertyName
+                );
+                match = TryMatch(
+                    sortedFields,
+                    "_",
+                    camelPrefix,
+                    camelizedSuffix,
+                    propertyBase,
+                    match,
+                    entityClrType,
+                    propertyName
+                );
+                match = TryMatch(
+                    sortedFields,
+                    "_",
+                    "",
+                    propertyName,
+                    propertyBase,
+                    match,
+                    entityClrType,
+                    propertyName
+                );
+                match = TryMatch(
+                    sortedFields,
+                    "m_",
+                    camelPrefix,
+                    camelizedSuffix,
+                    propertyBase,
+                    match,
+                    entityClrType,
+                    propertyName
+                );
+                match = TryMatch(
+                    sortedFields,
+                    "m_",
+                    "",
+                    propertyName,
+                    propertyBase,
+                    match,
+                    entityClrType,
+                    propertyName
+                );
+                match = TryMatch(
+                    sortedFields,
+                    "",
+                    camelPrefix + camelizedSuffix,
+                    "_",
+                    propertyBase,
+                    match,
+                    entityClrType,
+                    propertyName
+                );
             }
 
             return match;
@@ -199,7 +290,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBase? propertyBase,
             FieldInfo? existingMatch,
             Type entityClrType,
-            string propertyName)
+            string propertyName
+        )
         {
             var index = PrefixBinarySearch(array, prefix, 0, array.Length - 1);
             if (index == -1)
@@ -212,25 +304,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var currentValue = array[index];
             while (true)
             {
-                if (currentValue.Key.Length == length
+                if (
+                    currentValue.Key.Length == length
                     && currentValue.Key.EndsWith(suffix, StringComparison.Ordinal)
-                    && currentValue.Key.IndexOf(middle, prefix.Length, StringComparison.Ordinal) == prefix.Length)
+                    && currentValue.Key.IndexOf(middle, prefix.Length, StringComparison.Ordinal)
+                        == prefix.Length
+                )
                 {
-                    var newMatch = typeInfo == null
-                        ? currentValue.Value
-                        : (typeInfo.IsCompatibleWith(currentValue.Value.FieldType)
+                    var newMatch =
+                        typeInfo == null
                             ? currentValue.Value
-                            : null);
+                            : (
+                                  typeInfo.IsCompatibleWith(currentValue.Value.FieldType)
+                                    ? currentValue.Value
+                                    : null
+                              );
 
                     if (newMatch != null)
                     {
-                        if (existingMatch != null
-                            && newMatch != existingMatch)
+                        if (existingMatch != null && newMatch != existingMatch)
                         {
                             propertyBase!.SetOrRemoveAnnotation(
                                 CoreAnnotationNames.AmbiguousField,
                                 CoreStrings.ConflictingBackingFields(
-                                    propertyName, entityClrType.ShortDisplayName(), existingMatch.Name, newMatch.Name));
+                                    propertyName,
+                                    entityClrType.ShortDisplayName(),
+                                    existingMatch.Name,
+                                    newMatch.Name
+                                )
+                            );
                             return null;
                         }
 
@@ -253,7 +355,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
         }
 
-        private static int PrefixBinarySearch<T>(KeyValuePair<string, T>[] array, string prefix, int left, int right)
+        private static int PrefixBinarySearch<T>(
+            KeyValuePair<string, T>[] array,
+            string prefix,
+            int left,
+            int right
+        )
         {
             var found = -1;
             while (true)

@@ -64,7 +64,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>True if the specified name is the same as the current environment, otherwise false.</returns>
         public static bool IsEnvironment(
             this IHostingEnvironment hostingEnvironment,
-            string environmentName)
+            string environmentName
+        )
         {
             if (hostingEnvironment == null)
             {
@@ -74,7 +75,8 @@ namespace Microsoft.Extensions.Hosting
             return string.Equals(
                 hostingEnvironment.EnvironmentName,
                 environmentName,
-                StringComparison.OrdinalIgnoreCase);
+                StringComparison.OrdinalIgnoreCase
+            );
         }
     }
 }

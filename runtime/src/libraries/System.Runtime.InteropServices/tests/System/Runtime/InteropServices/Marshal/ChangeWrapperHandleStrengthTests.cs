@@ -28,7 +28,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new int[][] { new int[] { 10 } } };
             yield return new object[] { new int[,] { { 10 } } };
 
-            MethodInfo method = typeof(ChangeWrapperHandleStrengthTests).GetMethod(nameof(NonGenericMethod), BindingFlags.Static | BindingFlags.NonPublic);
+            MethodInfo method = typeof(ChangeWrapperHandleStrengthTests).GetMethod(
+                nameof(NonGenericMethod),
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return new object[] { d };
         }
@@ -46,21 +49,36 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void ChangeWrapperHandleStrength_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("otp", () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: true));
-            AssertExtensions.Throws<ArgumentNullException>("otp", () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: false));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "otp",
+                () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: true)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "otp",
+                () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: false)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void ChangeWrapperHandleStrength_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: true));
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: false));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: true)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: false)
+            );
         }
 
         private static void NonGenericMethod(int i) { }
+
         private delegate void NonGenericDelegate(int i);
 
-        internal enum Int32Enum : int { Value1, Value2 }
+        internal enum Int32Enum : int
+        {
+            Value1,
+            Value2
+        }
     }
 }

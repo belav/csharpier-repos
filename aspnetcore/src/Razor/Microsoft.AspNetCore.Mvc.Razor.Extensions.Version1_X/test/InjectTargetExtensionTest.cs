@@ -29,9 +29,12 @@ public class InjectTargetExtensionTest
 
         // Assert
         Assert.Equal(
-            "[global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]" + Environment.NewLine +
-            "public PropertyType PropertyName { get; private set; }" + Environment.NewLine,
-            context.CodeWriter.GenerateCode());
+            "[global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]"
+                + Environment.NewLine
+                + "public PropertyType PropertyName { get; private set; }"
+                + Environment.NewLine,
+            context.CodeWriter.GenerateCode()
+        );
     }
 
     [Fact]
@@ -49,21 +52,32 @@ public class InjectTargetExtensionTest
                 absoluteIndex: 0,
                 lineIndex: 1,
                 characterIndex: 1,
-                length: 10)
+                length: 10
+            )
         };
 
         // Act
         target.WriteInjectProperty(context, node);
 
         // Assert
-        Assert.Equal(Environment.NewLine +
-            "#nullable restore" + Environment.NewLine +
-            "#line 2 \"test-path\"" + Environment.NewLine +
-            "[global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]" + Environment.NewLine +
-            "public PropertyType<ModelType> PropertyName { get; private set; }" + Environment.NewLine + Environment.NewLine +
-            "#line default" + Environment.NewLine +
-            "#line hidden" + Environment.NewLine +
-            "#nullable disable" + Environment.NewLine,
-            context.CodeWriter.GenerateCode());
+        Assert.Equal(
+            Environment.NewLine
+                + "#nullable restore"
+                + Environment.NewLine
+                + "#line 2 \"test-path\""
+                + Environment.NewLine
+                + "[global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]"
+                + Environment.NewLine
+                + "public PropertyType<ModelType> PropertyName { get; private set; }"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "#line default"
+                + Environment.NewLine
+                + "#line hidden"
+                + Environment.NewLine
+                + "#nullable disable"
+                + Environment.NewLine,
+            context.CodeWriter.GenerateCode()
+        );
     }
 }

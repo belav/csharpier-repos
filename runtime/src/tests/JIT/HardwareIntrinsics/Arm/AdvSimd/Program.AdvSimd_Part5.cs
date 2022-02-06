@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["FusedAddHalving.Vector64.Int16"] = FusedAddHalving_Vector64_Int16,
                 ["FusedAddHalving.Vector64.Int32"] = FusedAddHalving_Vector64_Int32,
                 ["FusedAddHalving.Vector64.SByte"] = FusedAddHalving_Vector64_SByte,
@@ -32,20 +33,28 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["FusedAddRoundedHalving.Vector128.Int16"] = FusedAddRoundedHalving_Vector128_Int16,
                 ["FusedAddRoundedHalving.Vector128.Int32"] = FusedAddRoundedHalving_Vector128_Int32,
                 ["FusedAddRoundedHalving.Vector128.SByte"] = FusedAddRoundedHalving_Vector128_SByte,
-                ["FusedAddRoundedHalving.Vector128.UInt16"] = FusedAddRoundedHalving_Vector128_UInt16,
-                ["FusedAddRoundedHalving.Vector128.UInt32"] = FusedAddRoundedHalving_Vector128_UInt32,
+                ["FusedAddRoundedHalving.Vector128.UInt16"] =
+                    FusedAddRoundedHalving_Vector128_UInt16,
+                ["FusedAddRoundedHalving.Vector128.UInt32"] =
+                    FusedAddRoundedHalving_Vector128_UInt32,
                 ["FusedMultiplyAdd.Vector64.Single"] = FusedMultiplyAdd_Vector64_Single,
                 ["FusedMultiplyAdd.Vector128.Single"] = FusedMultiplyAdd_Vector128_Single,
                 ["FusedMultiplyAddScalar.Vector64.Double"] = FusedMultiplyAddScalar_Vector64_Double,
                 ["FusedMultiplyAddScalar.Vector64.Single"] = FusedMultiplyAddScalar_Vector64_Single,
-                ["FusedMultiplyAddNegatedScalar.Vector64.Double"] = FusedMultiplyAddNegatedScalar_Vector64_Double,
-                ["FusedMultiplyAddNegatedScalar.Vector64.Single"] = FusedMultiplyAddNegatedScalar_Vector64_Single,
+                ["FusedMultiplyAddNegatedScalar.Vector64.Double"] =
+                    FusedMultiplyAddNegatedScalar_Vector64_Double,
+                ["FusedMultiplyAddNegatedScalar.Vector64.Single"] =
+                    FusedMultiplyAddNegatedScalar_Vector64_Single,
                 ["FusedMultiplySubtract.Vector64.Single"] = FusedMultiplySubtract_Vector64_Single,
                 ["FusedMultiplySubtract.Vector128.Single"] = FusedMultiplySubtract_Vector128_Single,
-                ["FusedMultiplySubtractScalar.Vector64.Double"] = FusedMultiplySubtractScalar_Vector64_Double,
-                ["FusedMultiplySubtractScalar.Vector64.Single"] = FusedMultiplySubtractScalar_Vector64_Single,
-                ["FusedMultiplySubtractNegatedScalar.Vector64.Double"] = FusedMultiplySubtractNegatedScalar_Vector64_Double,
-                ["FusedMultiplySubtractNegatedScalar.Vector64.Single"] = FusedMultiplySubtractNegatedScalar_Vector64_Single,
+                ["FusedMultiplySubtractScalar.Vector64.Double"] =
+                    FusedMultiplySubtractScalar_Vector64_Double,
+                ["FusedMultiplySubtractScalar.Vector64.Single"] =
+                    FusedMultiplySubtractScalar_Vector64_Single,
+                ["FusedMultiplySubtractNegatedScalar.Vector64.Double"] =
+                    FusedMultiplySubtractNegatedScalar_Vector64_Double,
+                ["FusedMultiplySubtractNegatedScalar.Vector64.Single"] =
+                    FusedMultiplySubtractNegatedScalar_Vector64_Single,
                 ["FusedSubtractHalving.Vector64.Byte"] = FusedSubtractHalving_Vector64_Byte,
                 ["FusedSubtractHalving.Vector64.Int16"] = FusedSubtractHalving_Vector64_Int16,
                 ["FusedSubtractHalving.Vector64.Int32"] = FusedSubtractHalving_Vector64_Int32,

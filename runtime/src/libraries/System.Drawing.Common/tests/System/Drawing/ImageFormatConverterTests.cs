@@ -38,7 +38,10 @@ namespace System.ComponentModel.TypeConverterTests
 
             Assert.True(_imgFmtConvFrmTD.CanConvertFrom(typeof(string)), "TD string (no context)");
             Assert.True(_imgFmtConvFrmTD.CanConvertFrom(null, typeof(string)), "TD string");
-            Assert.False(_imgFmtConvFrmTD.CanConvertFrom(null, typeof(ImageFormat)), "TD ImageFormat");
+            Assert.False(
+                _imgFmtConvFrmTD.CanConvertFrom(null, typeof(ImageFormat)),
+                "TD ImageFormat"
+            );
             Assert.False(_imgFmtConvFrmTD.CanConvertFrom(null, typeof(Guid)), "TD Guid");
             Assert.False(_imgFmtConvFrmTD.CanConvertFrom(null, typeof(object)), "TD object");
             Assert.False(_imgFmtConvFrmTD.CanConvertFrom(null, typeof(int)), "TD int");
@@ -56,7 +59,10 @@ namespace System.ComponentModel.TypeConverterTests
 
             Assert.True(_imgFmtConvFrmTD.CanConvertTo(typeof(string)), "TD string (no context)");
             Assert.True(_imgFmtConvFrmTD.CanConvertTo(null, typeof(string)), "TD string");
-            Assert.False(_imgFmtConvFrmTD.CanConvertTo(null, typeof(ImageFormat)), "TD ImageFormat");
+            Assert.False(
+                _imgFmtConvFrmTD.CanConvertTo(null, typeof(ImageFormat)),
+                "TD ImageFormat"
+            );
             Assert.False(_imgFmtConvFrmTD.CanConvertTo(null, typeof(Guid)), "TD Guid");
             Assert.False(_imgFmtConvFrmTD.CanConvertTo(null, typeof(object)), "TD object");
             Assert.False(_imgFmtConvFrmTD.CanConvertTo(null, typeof(int)), "TD int");
@@ -65,27 +71,76 @@ namespace System.ComponentModel.TypeConverterTests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void TestConvertFrom_ImageFormatToString()
         {
-            Assert.Equal(_imageFmt, (ImageFormat)_imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, ImageFormat.Bmp.ToString()));
-            Assert.Equal(_imageFmt, (ImageFormat)_imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, ImageFormat.Bmp.ToString()));
+            Assert.Equal(
+                _imageFmt,
+                (ImageFormat)_imgFmtConv.ConvertFrom(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    ImageFormat.Bmp.ToString()
+                )
+            );
+            Assert.Equal(
+                _imageFmt,
+                (ImageFormat)_imgFmtConvFrmTD.ConvertFrom(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    ImageFormat.Bmp.ToString()
+                )
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void TestConvertFrom_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(() => _imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, ImageFormat.Bmp));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, ImageFormat.Bmp.Guid));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, new object()));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, 10));
+            Assert.Throws<NotSupportedException>(
+                () => _imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, ImageFormat.Bmp)
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConv.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        ImageFormat.Bmp.Guid
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, new object())
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, 10)
+            );
 
-            Assert.Throws<NotSupportedException>(() => _imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, ImageFormat.Bmp));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, ImageFormat.Bmp.Guid));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new object()));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, 10));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConvFrmTD.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        ImageFormat.Bmp
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConvFrmTD.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        ImageFormat.Bmp.Guid
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new object())
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, 10)
+            );
         }
 
         private ImageFormat ConvertFromName(string imgFormatName)
         {
-            return (ImageFormat)_imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, imgFormatName);
+            return (ImageFormat)_imgFmtConvFrmTD.ConvertFrom(
+                null,
+                CultureInfo.InvariantCulture,
+                imgFormatName
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -104,7 +159,10 @@ namespace System.ComponentModel.TypeConverterTests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Support to convert image format from long name was added to .NET Core directly.")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Support to convert image format from long name was added to .NET Core directly."
+        )]
         public void ConvertFrom_LongName()
         {
             Guid testGuid = Guid.NewGuid();
@@ -113,53 +171,181 @@ namespace System.ComponentModel.TypeConverterTests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Support to convert image format from long name was added to .NET Core directly.")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Support to convert image format from long name was added to .NET Core directly."
+        )]
         public void ConvertFrom_ThrowsFormatExceptionOnInvalidFormatString()
         {
             Assert.Throws<FormatException>(() => _imgFmtConv.ConvertFrom("System.Drawing.String"));
-            Assert.Throws<FormatException>(() => _imgFmtConv.ConvertFrom(null, CultureInfo.InvariantCulture, "System.Drawing.String"));
-            Assert.Throws<FormatException>(() => _imgFmtConv.ConvertFrom("[ImageFormat: abcdefgh-ijkl-mnop-qrst-uvwxyz012345]"));
+            Assert.Throws<FormatException>(
+                () =>
+                    _imgFmtConv.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        "System.Drawing.String"
+                    )
+            );
+            Assert.Throws<FormatException>(
+                () => _imgFmtConv.ConvertFrom("[ImageFormat: abcdefgh-ijkl-mnop-qrst-uvwxyz012345]")
+            );
 
-            Assert.Throws<FormatException>(() => _imgFmtConvFrmTD.ConvertFrom("System.Drawing.String"));
-            Assert.Throws<FormatException>(() => _imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, "System.Drawing.String"));
-            Assert.Throws<FormatException>(() => _imgFmtConvFrmTD.ConvertFrom("[ImageFormat: abcdefgh-ijkl-mnop-qrst-uvwxyz012345]"));
+            Assert.Throws<FormatException>(
+                () => _imgFmtConvFrmTD.ConvertFrom("System.Drawing.String")
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                    _imgFmtConvFrmTD.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        "System.Drawing.String"
+                    )
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                    _imgFmtConvFrmTD.ConvertFrom(
+                        "[ImageFormat: abcdefgh-ijkl-mnop-qrst-uvwxyz012345]"
+                    )
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void TestConvertTo_String()
         {
-            Assert.Equal(_imageFmtStr, (string)_imgFmtConv.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(string)));
+            Assert.Equal(
+                _imageFmtStr,
+                (string)_imgFmtConv.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    _imageFmt,
+                    typeof(string)
+                )
+            );
             Assert.Equal(_imageFmtStr, (string)_imgFmtConv.ConvertTo(_imageFmt, typeof(string)));
 
-            Assert.Equal(_imageFmtStr, (string)_imgFmtConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(string)));
-            Assert.Equal(_imageFmtStr, (string)_imgFmtConvFrmTD.ConvertTo(_imageFmt, typeof(string)));
+            Assert.Equal(
+                _imageFmtStr,
+                (string)_imgFmtConvFrmTD.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    _imageFmt,
+                    typeof(string)
+                )
+            );
+            Assert.Equal(
+                _imageFmtStr,
+                (string)_imgFmtConvFrmTD.ConvertTo(_imageFmt, typeof(string))
+            );
 
             Assert.Equal(string.Empty, (string)_imgFmtConv.ConvertTo(null, typeof(string)));
-            Assert.Equal(string.Empty, (string)_imgFmtConv.ConvertTo(null, CultureInfo.CreateSpecificCulture("ru-RU"), null, typeof(string)));
+            Assert.Equal(
+                string.Empty,
+                (string)_imgFmtConv.ConvertTo(
+                    null,
+                    CultureInfo.CreateSpecificCulture("ru-RU"),
+                    null,
+                    typeof(string)
+                )
+            );
 
             Assert.Equal(string.Empty, (string)_imgFmtConvFrmTD.ConvertTo(null, typeof(string)));
-            Assert.Equal(string.Empty, (string)_imgFmtConvFrmTD.ConvertTo(null, CultureInfo.CreateSpecificCulture("de-DE"), null, typeof(string)));
+            Assert.Equal(
+                string.Empty,
+                (string)_imgFmtConvFrmTD.ConvertTo(
+                    null,
+                    CultureInfo.CreateSpecificCulture("de-DE"),
+                    null,
+                    typeof(string)
+                )
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void TestConvertTo_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(() => _imgFmtConv.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(ImageFormat)));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConv.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(Guid)));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConv.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(object)));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConv.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(int)));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConv.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(ImageFormat)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConv.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(Guid)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConv.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(object)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConv.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(int)
+                    )
+            );
 
-            Assert.Throws<NotSupportedException>(() => _imgFmtConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(ImageFormat)));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(Guid)));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(object)));
-            Assert.Throws<NotSupportedException>(() => _imgFmtConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _imageFmt, typeof(int)));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(ImageFormat)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(Guid)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(object)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgFmtConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(int)
+                    )
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void GetStandardValuesSupported()
         {
             Assert.True(_imgFmtConv.GetStandardValuesSupported(), "GetStandardValuesSupported()");
-            Assert.True(_imgFmtConv.GetStandardValuesSupported(null), "GetStandardValuesSupported(null)");
+            Assert.True(
+                _imgFmtConv.GetStandardValuesSupported(null),
+                "GetStandardValuesSupported(null)"
+            );
         }
 
         private void CheckStandardValues(ICollection values)

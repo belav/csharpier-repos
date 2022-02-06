@@ -249,14 +249,22 @@ namespace MonoTests.System.Drawing.Imaging
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void Bitmap24bitData()
         {
             string sInFile = Helpers.GetTestBitmapPath("almogaver24bits.bmp");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 Assert.Equal(-3355456, bmp.GetPixel(163, 1).ToArgb());
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -264,7 +272,6 @@ namespace MonoTests.System.Drawing.Imaging
                     Assert.Equal(PixelFormat.Format24bppRgb, data.PixelFormat);
                     Assert.Equal(520, data.Stride);
                     Assert.Equal(183, data.Height);
-
                     unsafe
                     {
                         byte* scan = (byte*)data.Scan0;
@@ -480,9 +487,7 @@ namespace MonoTests.System.Drawing.Imaging
                 {
                     File.Delete(sOutFile);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 

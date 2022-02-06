@@ -18,7 +18,8 @@ public class FileStreamResultTest : FileStreamResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         var fileStreamResult = new FileStreamResult(stream, contentType)
         {
@@ -81,5 +82,4 @@ public class FileStreamResultTest : FileStreamResultTestBase
         Assert.Equal(entityTag, result.EntityTag);
         Assert.Equal(expectedMediaType, result.ContentType);
     }
-
 }

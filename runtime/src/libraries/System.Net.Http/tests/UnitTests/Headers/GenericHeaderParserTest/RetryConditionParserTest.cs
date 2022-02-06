@@ -24,9 +24,20 @@ namespace System.Net.Http.Tests
         [Fact]
         public void TryParse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            CheckValidParsedValue("X  123456789 ", 1, new RetryConditionHeaderValue(new TimeSpan(0, 0, 123456789)), 13);
-            CheckValidParsedValue("  Sun, 06 Nov 1994 08:49:37 GMT ", 0,
-                new RetryConditionHeaderValue(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)), 32);
+            CheckValidParsedValue(
+                "X  123456789 ",
+                1,
+                new RetryConditionHeaderValue(new TimeSpan(0, 0, 123456789)),
+                13
+            );
+            CheckValidParsedValue(
+                "  Sun, 06 Nov 1994 08:49:37 GMT ",
+                0,
+                new RetryConditionHeaderValue(
+                    new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                ),
+                32
+            );
         }
 
         [Fact]
@@ -42,13 +53,19 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, RetryConditionHeaderValue expectedResult,
-            int expectedIndex)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            RetryConditionHeaderValue expectedResult,
+            int expectedIndex
+        )
         {
             HttpHeaderParser parser = GenericHeaderParser.RetryConditionParser;
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false. Input: '{0}'", input));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format("TryParse returned false. Input: '{0}'", input)
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(expectedResult, result);
         }
@@ -58,8 +75,10 @@ namespace System.Net.Http.Tests
             HttpHeaderParser parser = GenericHeaderParser.RetryConditionParser;
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true. Input: '{0}'", input));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true. Input: '{0}'", input)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

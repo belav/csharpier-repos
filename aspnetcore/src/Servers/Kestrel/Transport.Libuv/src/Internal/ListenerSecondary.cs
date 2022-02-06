@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             string pipeName,
             byte[] pipeMessage,
             EndPoint endPoint,
-            LibuvThread thread)
+            LibuvThread thread
+        )
         {
             _pipeName = pipeName;
             _pipeMessage = pipeMessage;
@@ -46,7 +47,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             Thread = thread;
             DispatchPipe = new UvPipeHandle(Log);
 
-            var tcs = new TaskCompletionSource<int>(this, TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<int>(
+                this,
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             Thread.Post(StartCallback, tcs);
             return tcs.Task;
         }
@@ -67,8 +71,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 connect.Connect(
                     DispatchPipe,
                     _pipeName,
-                    (connect2, status, error, state) => ConnectCallback(connect2, status, error, (TaskCompletionSource<int>)state),
-                    tcs);
+                    (connect2, status, error, state) =>
+                        ConnectCallback(connect2, status, error, (TaskCompletionSource<int>)state),
+                    tcs
+                );
             }
             catch (Exception ex)
             {
@@ -78,13 +84,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             }
         }
 
-        private static void ConnectCallback(UvConnectRequest connect, int status, UvException error, TaskCompletionSource<int> tcs)
+        private static void ConnectCallback(
+            UvConnectRequest connect,
+            int status,
+            UvException error,
+            TaskCompletionSource<int> tcs
+        )
         {
             var listener = (ListenerSecondary)tcs.Task.AsyncState;
             _ = listener.ConnectedCallback(connect, status, error, tcs);
         }
 
-        private async Task ConnectedCallback(UvConnectRequest connect, int status, UvException error, TaskCompletionSource<int> tcs)
+        private async Task ConnectedCallback(
+            UvConnectRequest connect,
+            int status,
+            UvException error,
+            TaskCompletionSource<int> tcs
+        )
         {
             connect.Dispose();
             if (error != null)
@@ -99,13 +115,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             {
                 DispatchPipe.ReadStart(
                     (handle, status2, state) => ((ListenerSecondary)state)._buf,
-                    (handle, status2, state) => ((ListenerSecondary)state).ReadStartCallback(handle, status2),
-                    this);
+                    (handle, status2, state) =>
+                        ((ListenerSecondary)state).ReadStartCallback(handle, status2),
+                    this
+                );
 
                 writeReq.Init(Thread);
                 var result = await writeReq.WriteAsync(
-                     DispatchPipe,
-                     new ArraySegment<ArraySegment<byte>>(new[] { new ArraySegment<byte>(_pipeMessage) }));
+                    DispatchPipe,
+                    new ArraySegment<ArraySegment<byte>>(
+                        new[] { new ArraySegment<byte>(_pipeMessage) }
+                    )
+                );
 
                 if (result.Error != null)
                 {
@@ -183,16 +204,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             // the exception that stopped the event loop will never be surfaced.
             if (Thread.FatalError == null)
             {
-                await Thread.PostAsync(listener =>
-                {
-                    listener.DispatchPipe.Dispose();
-                    listener.FreeBuffer();
+                await Thread
+                    .PostAsync(
+                        listener =>
+                        {
+                            listener.DispatchPipe.Dispose();
+                            listener.FreeBuffer();
 
-                    listener._closed = true;
+                            listener._closed = true;
 
-                    listener.StopAcceptingConnections();
-
-                }, this).ConfigureAwait(false);
+                            listener.StopAcceptingConnections();
+                        },
+                        this
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {

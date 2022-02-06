@@ -36,7 +36,8 @@ public class TreeRouterTest
     [InlineData("template/{*parameter:int}", "template/{*parameter}")]
     public async Task TreeRouter_RouteAsync_RespectsPrecedence(
         string firstTemplate,
-        string secondTemplate)
+        string secondTemplate
+    )
     {
         // Arrange
         var expectedRouteGroup = CreateRouteGroup(0, firstTemplate);
@@ -64,39 +65,58 @@ public class TreeRouterTest
     [InlineData("/Literal1", "Literal1")]
     [InlineData("/Literal1/Literal2", "Literal1/Literal2")]
     [InlineData("/Literal1/Literal2/Literal3", "Literal1/Literal2/Literal3")]
-    [InlineData("/Literal1/Literal2/Literal3/4", "Literal1/Literal2/Literal3/{*constrainedCatchAll:int}")]
+    [InlineData(
+        "/Literal1/Literal2/Literal3/4",
+        "Literal1/Literal2/Literal3/{*constrainedCatchAll:int}"
+    )]
     [InlineData("/Literal1/Literal2/Literal3/Literal4", "Literal1/Literal2/Literal3/{*catchAll}")]
     [InlineData("/1", "{constrained1:int}")]
     [InlineData("/1/2", "{constrained1:int}/{constrained2:int}")]
     [InlineData("/1/2/3", "{constrained1:int}/{constrained2:int}/{constrained3:int}")]
-    [InlineData("/1/2/3/4", "{constrained1:int}/{constrained2:int}/{constrained3:int}/{*constrainedCatchAll:int}")]
-    [InlineData("/1/2/3/CatchAll4", "{constrained1:int}/{constrained2:int}/{constrained3:int}/{*catchAll}")]
+    [InlineData(
+        "/1/2/3/4",
+        "{constrained1:int}/{constrained2:int}/{constrained3:int}/{*constrainedCatchAll:int}"
+    )]
+    [InlineData(
+        "/1/2/3/CatchAll4",
+        "{constrained1:int}/{constrained2:int}/{constrained3:int}/{*catchAll}"
+    )]
     [InlineData("/parameter1", "{parameter1}")]
     [InlineData("/parameter1/parameter2", "{parameter1}/{parameter2}")]
     [InlineData("/parameter1/parameter2/parameter3", "{parameter1}/{parameter2}/{parameter3}")]
-    [InlineData("/parameter1/parameter2/parameter3/4", "{parameter1}/{parameter2}/{parameter3}/{*constrainedCatchAll:int}")]
-    [InlineData("/parameter1/parameter2/parameter3/CatchAll4", "{parameter1}/{parameter2}/{parameter3}/{*catchAll}")]
-    public async Task TreeRouter_RouteAsync_MatchesRouteWithTheRightLength(string url, string expected)
+    [InlineData(
+        "/parameter1/parameter2/parameter3/4",
+        "{parameter1}/{parameter2}/{parameter3}/{*constrainedCatchAll:int}"
+    )]
+    [InlineData(
+        "/parameter1/parameter2/parameter3/CatchAll4",
+        "{parameter1}/{parameter2}/{parameter3}/{*catchAll}"
+    )]
+    public async Task TreeRouter_RouteAsync_MatchesRouteWithTheRightLength(
+        string url,
+        string expected
+    )
     {
         // Arrange
-        var routes = new[] {
-                "",
-                "Literal1",
-                "Literal1/Literal2",
-                "Literal1/Literal2/Literal3",
-                "Literal1/Literal2/Literal3/{*constrainedCatchAll:int}",
-                "Literal1/Literal2/Literal3/{*catchAll}",
-                "{constrained1:int}",
-                "{constrained1:int}/{constrained2:int}",
-                "{constrained1:int}/{constrained2:int}/{constrained3:int}",
-                "{constrained1:int}/{constrained2:int}/{constrained3:int}/{*constrainedCatchAll:int}",
-                "{constrained1:int}/{constrained2:int}/{constrained3:int}/{*catchAll}",
-                "{parameter1}",
-                "{parameter1}/{parameter2}",
-                "{parameter1}/{parameter2}/{parameter3}",
-                "{parameter1}/{parameter2}/{parameter3}/{*constrainedCatchAll:int}",
-                "{parameter1}/{parameter2}/{parameter3}/{*catchAll}",
-            };
+        var routes = new[]
+        {
+            "",
+            "Literal1",
+            "Literal1/Literal2",
+            "Literal1/Literal2/Literal3",
+            "Literal1/Literal2/Literal3/{*constrainedCatchAll:int}",
+            "Literal1/Literal2/Literal3/{*catchAll}",
+            "{constrained1:int}",
+            "{constrained1:int}/{constrained2:int}",
+            "{constrained1:int}/{constrained2:int}/{constrained3:int}",
+            "{constrained1:int}/{constrained2:int}/{constrained3:int}/{*constrainedCatchAll:int}",
+            "{constrained1:int}/{constrained2:int}/{constrained3:int}/{*catchAll}",
+            "{parameter1}",
+            "{parameter1}/{parameter2}",
+            "{parameter1}/{parameter2}/{parameter3}",
+            "{parameter1}/{parameter2}/{parameter3}/{*constrainedCatchAll:int}",
+            "{parameter1}/{parameter2}/{parameter3}/{*catchAll}",
+        };
 
         var expectedRouteGroup = CreateRouteGroup(0, expected);
 
@@ -123,23 +143,27 @@ public class TreeRouterTest
     public static TheoryData<string, object[]> MatchesRoutesWithDefaultsData =>
         new TheoryData<string, object[]>
         {
-                { "/", new object[] { "1", "2", "3", "4" } },
-                { "/a", new object[] { "a", "2", "3", "4" } },
-                { "/a/b", new object[] { "a", "b", "3", "4" } },
-                { "/a/b/c", new object[] { "a", "b", "c", "4" } },
-                { "/a/b/c/d", new object[] { "a", "b", "c", "d" } }
+            { "/", new object[] { "1", "2", "3", "4" } },
+            { "/a", new object[] { "a", "2", "3", "4" } },
+            { "/a/b", new object[] { "a", "b", "3", "4" } },
+            { "/a/b/c", new object[] { "a", "b", "c", "4" } },
+            { "/a/b/c/d", new object[] { "a", "b", "c", "d" } }
         };
 
     [Theory]
     [MemberData(nameof(MatchesRoutesWithDefaultsData))]
-    public async Task TreeRouter_RouteAsync_MatchesRoutesWithDefaults(string url, object[] routeValues)
+    public async Task TreeRouter_RouteAsync_MatchesRoutesWithDefaults(
+        string url,
+        object[] routeValues
+    )
     {
         // Arrange
-        var routes = new[] {
-                "{parameter1=1}/{parameter2=2}/{parameter3=3}/{parameter4=4}",
-            };
+        var routes = new[] { "{parameter1=1}/{parameter2=2}/{parameter3=3}/{parameter4=4}", };
 
-        var expectedRouteGroup = CreateRouteGroup(0, "{parameter1=1}/{parameter2=2}/{parameter3=3}/{parameter4=4}");
+        var expectedRouteGroup = CreateRouteGroup(
+            0,
+            "{parameter1=1}/{parameter2=2}/{parameter3=3}/{parameter4=4}"
+        );
         var routeValueKeys = new[] { "parameter1", "parameter2", "parameter3", "parameter4" };
         var expectedRouteValues = new RouteValueDictionary();
         for (var i = 0; i < routeValueKeys.Length; i++)
@@ -175,23 +199,30 @@ public class TreeRouterTest
     public static TheoryData<string, object[]> MatchesConstrainedRoutesWithDefaultsData =>
         new TheoryData<string, object[]>
         {
-                { "/", new object[] { "1", "2", "3", "4" } },
-                { "/10", new object[] { "10", "2", "3", "4" } },
-                { "/10/11", new object[] { "10", "11", "3", "4" } },
-                { "/10/11/12", new object[] { "10", "11", "12", "4" } },
-                { "/10/11/12/13", new object[] { "10", "11", "12", "13" } }
+            { "/", new object[] { "1", "2", "3", "4" } },
+            { "/10", new object[] { "10", "2", "3", "4" } },
+            { "/10/11", new object[] { "10", "11", "3", "4" } },
+            { "/10/11/12", new object[] { "10", "11", "12", "4" } },
+            { "/10/11/12/13", new object[] { "10", "11", "12", "13" } }
         };
 
     [Theory]
     [MemberData(nameof(MatchesConstrainedRoutesWithDefaultsData))]
-    public async Task TreeRouter_RouteAsync_MatchesConstrainedRoutesWithDefaults(string url, object[] routeValues)
+    public async Task TreeRouter_RouteAsync_MatchesConstrainedRoutesWithDefaults(
+        string url,
+        object[] routeValues
+    )
     {
         // Arrange
-        var routes = new[] {
-                "{parameter1:int=1}/{parameter2:int=2}/{parameter3:int=3}/{parameter4:int=4}",
-            };
+        var routes = new[]
+        {
+            "{parameter1:int=1}/{parameter2:int=2}/{parameter3:int=3}/{parameter4:int=4}",
+        };
 
-        var expectedRouteGroup = CreateRouteGroup(0, "{parameter1:int=1}/{parameter2:int=2}/{parameter3:int=3}/{parameter4:int=4}");
+        var expectedRouteGroup = CreateRouteGroup(
+            0,
+            "{parameter1:int=1}/{parameter2:int=2}/{parameter3:int=3}/{parameter4:int=4}"
+        );
         var routeValueKeys = new[] { "parameter1", "parameter2", "parameter3", "parameter4" };
         var expectedRouteValues = new RouteValueDictionary();
         for (var i = 0; i < routeValueKeys.Length; i++)
@@ -228,13 +259,14 @@ public class TreeRouterTest
     public async Task TreeRouter_RouteAsync_MatchesCatchAllRoutesWithDefaults()
     {
         // Arrange
-        var routes = new[] {
-                "{parameter1=1}/{parameter2=2}/{parameter3=3}/{*parameter4=4}",
-            };
+        var routes = new[] { "{parameter1=1}/{parameter2=2}/{parameter3=3}/{*parameter4=4}", };
         var url = "/a/b/c";
         var routeValues = new[] { "a", "b", "c", "4" };
 
-        var expectedRouteGroup = CreateRouteGroup(0, "{parameter1=1}/{parameter2=2}/{parameter3=3}/{*parameter4=4}");
+        var expectedRouteGroup = CreateRouteGroup(
+            0,
+            "{parameter1=1}/{parameter2=2}/{parameter3=3}/{*parameter4=4}"
+        );
         var routeValueKeys = new[] { "parameter1", "parameter2", "parameter3", "parameter4" };
         var expectedRouteValues = new RouteValueDictionary();
         for (var i = 0; i < routeValueKeys.Length; i++)
@@ -293,7 +325,10 @@ public class TreeRouterTest
     [InlineData("a/{b=3}/c/{d?}/e/{*f}", "/a/b")]
     [InlineData("a/{b=3}/c/{d?}/e/{*f}", "/a/b/c")]
     [InlineData("a/{b=3}/c/{d?}/e/{*f}", "/a/b/c/d")]
-    public async Task TreeRouter_RouteAsync_DoesNotMatchRoutesWithMultipleIntermediateDefaultOrOptionalRouteValues(string template, string url)
+    public async Task TreeRouter_RouteAsync_DoesNotMatchRoutesWithMultipleIntermediateDefaultOrOptionalRouteValues(
+        string template,
+        string url
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -314,7 +349,10 @@ public class TreeRouterTest
     [Theory]
     [InlineData("a/{b=3}/c/{d?}/e/{*f}", "/a/b/c/d/e")]
     [InlineData("a/{b=3}/c/{d?}/e/{*f}", "/a/b/c/d/e/f")]
-    public async Task RouteAsync_MatchRoutesWithMultipleIntermediateDefaultOrOptionalRouteValues_WhenAllIntermediateValuesAreProvided(string template, string url)
+    public async Task RouteAsync_MatchRoutesWithMultipleIntermediateDefaultOrOptionalRouteValues_WhenAllIntermediateValuesAreProvided(
+        string template,
+        string url
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -336,9 +374,7 @@ public class TreeRouterTest
     public async Task TreeRouter_RouteAsync_DoesNotMatchShorterUrl()
     {
         // Arrange
-        var routes = new[] {
-                "Literal1/Literal2/Literal3",
-            };
+        var routes = new[] { "Literal1/Literal2/Literal3", };
 
         var builder = CreateBuilder();
 
@@ -373,7 +409,8 @@ public class TreeRouterTest
     [InlineData("template/{*parameter:int}", "template/{*parameter}")]
     public async Task TreeRouter_RouteAsync_RespectsOrderOverPrecedence(
         string firstTemplate,
-        string secondTemplate)
+        string secondTemplate
+    )
     {
         // Arrange
         var expectedRouteGroup = CreateRouteGroup(0, secondTemplate);
@@ -404,7 +441,9 @@ public class TreeRouterTest
     [InlineData("//b//")]
     [InlineData("///c")]
     [InlineData("///c/")]
-    public async Task TryMatch_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(string url)
+    public async Task TryMatch_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(
+        string url
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -527,7 +566,8 @@ public class TreeRouterTest
     public async Task TreeRouter_RouteAsync_MatchesWildCard_ForLargerPathSegments(
         string template,
         string requestPath,
-        string expectedResult)
+        string expectedResult
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -549,7 +589,8 @@ public class TreeRouterTest
     [InlineData("a/{*path}", "/a/")]
     public async Task TreeRouter_RouteAsync_MatchesCatchAll_NullValue(
         string template,
-        string requestPath)
+        string requestPath
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -571,7 +612,8 @@ public class TreeRouterTest
     [InlineData("a/{*path}", "/a/")]
     public async Task TreeRouter_RouteAsync_MatchesCatchAll_NullValue_DoesNotReplaceExistingValue(
         string template,
-        string requestPath)
+        string requestPath
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -594,7 +636,8 @@ public class TreeRouterTest
     [InlineData("a/{*path=default}", "/a/")]
     public async Task TreeRouter_RouteAsync_MatchesCatchAll_UsesDefaultValue(
         string template,
-        string requestPath)
+        string requestPath
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -677,7 +720,8 @@ public class TreeRouterTest
     public async Task TreeRouter_WithOptionalInlineConstraint(
         string template,
         string request,
-        bool expectedResult)
+        bool expectedResult
+    )
     {
         // Arrange
         var expectedRouteGroup = CreateRouteGroup(0, template);
@@ -727,7 +771,8 @@ public class TreeRouterTest
         string request,
         string p1,
         string p2,
-        string p3)
+        string p3
+    )
     {
         // Arrange
         var expectedRouteGroup = CreateRouteGroup(0, template);
@@ -772,7 +817,8 @@ public class TreeRouterTest
     [InlineData("{p1}.{p2}/{p3}", "/.foo/bar")]
     public async Task TreeRouter_WithOptionalCompositeParameter_Invalid(
         string template,
-        string request)
+        string request
+    )
     {
         // Arrange
         var expectedRouteGroup = CreateRouteGroup(0, template);
@@ -800,20 +846,22 @@ public class TreeRouterTest
     [InlineData("template/api/{*url}", "template/api", "/template/api/dingo?id=5")]
     [InlineData("template/api", "template/{*url}", "/template/api?url=dingo&id=5")]
     [InlineData("template/api", "template/api{id}location", "/template/api?url=dingo&id=5")]
-    [InlineData("template/api{id}location", "template/{id:int}", "/template/api5location?url=dingo")]
-    public void TreeRouter_GenerateLink(string firstTemplate, string secondTemplate, string expectedPath)
+    [InlineData(
+        "template/api{id}location",
+        "template/{id:int}",
+        "/template/api5location?url=dingo"
+    )]
+    public void TreeRouter_GenerateLink(
+        string firstTemplate,
+        string secondTemplate,
+        string expectedPath
+    )
     {
         // Arrange
-        var values = new Dictionary<string, object>
-            {
-                {"url", "dingo" },
-                {"id", 5 }
-            };
+        var values = new Dictionary<string, object> { { "url", "dingo" }, { "id", 5 } };
 
         var route = CreateTreeRouter(firstTemplate, secondTemplate);
-        var context = CreateVirtualPathContext(
-            values: values,
-            ambientValues: null);
+        var context = CreateVirtualPathContext(values: values, ambientValues: null);
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -833,9 +881,7 @@ public class TreeRouterTest
         var secondTemplate = "template/{parameter:int=1003}";
 
         var route = CreateTreeRouter(firstTemplate, secondTemplate);
-        var context = CreateVirtualPathContext(
-            values: null,
-            ambientValues: null);
+        var context = CreateVirtualPathContext(values: null, ambientValues: null);
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -855,20 +901,19 @@ public class TreeRouterTest
     public void TreeRouter_GenerateLink_OrderingAgnostic(
         string firstTemplate,
         string secondTemplate,
-        string expectedPath)
+        string expectedPath
+    )
     {
         // Arrange
         var route = CreateTreeRouter(firstTemplate, secondTemplate);
         var parameter = 5;
         var id = 1234;
         var values = new Dictionary<string, object>
-            {
-                { nameof(parameter) , parameter},
-                { nameof(id), id }
-            };
-        var context = CreateVirtualPathContext(
-            values: null,
-            ambientValues: values);
+        {
+            { nameof(parameter), parameter },
+            { nameof(id), id }
+        };
+        var context = CreateVirtualPathContext(values: null, ambientValues: values);
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -887,20 +932,19 @@ public class TreeRouterTest
     public void TreeRouter_GenerateLink_UseAvailableVariables(
         string firstTemplate,
         string secondTemplate,
-        string expectedPath)
+        string expectedPath
+    )
     {
         // Arrange
         var route = CreateTreeRouter(firstTemplate, secondTemplate);
         var parameter = 5;
         var id = 1234;
         var values = new Dictionary<string, object>
-            {
-                { nameof(parameter) , parameter},
-                { nameof(id), id }
-            };
-        var context = CreateVirtualPathContext(
-            values: null,
-            ambientValues: values);
+        {
+            { nameof(parameter), parameter },
+            { nameof(id), id }
+        };
+        var context = CreateVirtualPathContext(values: null, ambientValues: values);
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -923,7 +967,10 @@ public class TreeRouterTest
     [InlineData("template/{parameter}", "template/{*parameter:int}")]
     [InlineData("template/{parameter}", "template/{*parameter}")]
     [InlineData("template/{*parameter:int}", "template/{*parameter}")]
-    public void TreeRouter_GenerateLink_RespectsPrecedence(string firstTemplate, string secondTemplate)
+    public void TreeRouter_GenerateLink_RespectsPrecedence(
+        string firstTemplate,
+        string secondTemplate
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -960,7 +1007,8 @@ public class TreeRouterTest
     public void TreeRouter_GenerateLink_OptionalInlineParameter(
         string template,
         string expectedPath,
-        object parameter)
+        object parameter
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -970,7 +1018,10 @@ public class TreeRouterTest
         VirtualPathContext context;
         if (parameter != null)
         {
-            context = CreateVirtualPathContext(values: null, ambientValues: new { parameter = parameter });
+            context = CreateVirtualPathContext(
+                values: null,
+                ambientValues: new { parameter = parameter }
+            );
         }
         else
         {
@@ -1005,7 +1056,10 @@ public class TreeRouterTest
     [InlineData("template/{parameter}", "template/{*parameter:int}")]
     [InlineData("template/{parameter}", "template/{*parameter}")]
     [InlineData("template/{*parameter:int}", "template/{*parameter}")]
-    public void TreeRouter_GenerateLink_RespectsOrderOverPrecedence(string firstTemplate, string secondTemplate)
+    public void TreeRouter_GenerateLink_RespectsOrderOverPrecedence(
+        string firstTemplate,
+        string secondTemplate
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -1048,7 +1102,10 @@ public class TreeRouterTest
 
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(values: null, ambientValues: new { first = 5, second = 5 });
+        var context = CreateVirtualPathContext(
+            values: null,
+            ambientValues: new { first = 5, second = 5 }
+        );
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -1066,7 +1123,10 @@ public class TreeRouterTest
     [InlineData("first/{first}", "second/{second}")]
     [InlineData("first/{*first:int}", "second/{*second:int}")]
     [InlineData("first/{*first}", "second/{*second}")]
-    public void TreeRouter_GenerateLink_EnsuresStableOrder(string firstTemplate, string secondTemplate)
+    public void TreeRouter_GenerateLink_EnsuresStableOrder(
+        string firstTemplate,
+        string secondTemplate
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -1078,7 +1138,10 @@ public class TreeRouterTest
 
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(values: null, ambientValues: new { first = 5, second = 5 });
+        var context = CreateVirtualPathContext(
+            values: null,
+            ambientValues: new { first = 5, second = 5 }
+        );
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -1110,7 +1173,6 @@ public class TreeRouterTest
         Assert.Equal("/a/b/3/d", result.VirtualPath);
     }
 
-
     [Fact]
     public void TreeRouter_GeneratesLink_ForMultipleNamedEntriesWithTheSameTemplate()
     {
@@ -1137,7 +1199,11 @@ public class TreeRouterTest
 
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(values: null, ambientValues: null, name: "NamedRoute");
+        var context = CreateVirtualPathContext(
+            values: null,
+            ambientValues: null,
+            name: "NamedRoute"
+        );
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -1164,7 +1230,11 @@ public class TreeRouterTest
 
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(values: null, ambientValues: null, name: "NonExistingNamedRoute");
+        var context = CreateVirtualPathContext(
+            values: null,
+            ambientValues: null,
+            name: "NonExistingNamedRoute"
+        );
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -1179,7 +1249,10 @@ public class TreeRouterTest
     [InlineData("template/{parameter}", null)]
     [InlineData("template/{*parameter:int}", null)]
     [InlineData("template/{*parameter:int}", "NaN")]
-    public void TreeRouter_DoesNotGenerateLink_IfValuesDoNotMatchNamedEntry(string template, string value)
+    public void TreeRouter_DoesNotGenerateLink_IfValuesDoNotMatchNamedEntry(
+        string template,
+        string value
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -1194,7 +1267,11 @@ public class TreeRouterTest
         var route = builder.Build();
 
         var ambientValues = value == null ? null : new { parameter = value };
-        var context = CreateVirtualPathContext(values: null, ambientValues: ambientValues, name: "NamedRoute");
+        var context = CreateVirtualPathContext(
+            values: null,
+            ambientValues: ambientValues,
+            name: "NamedRoute"
+        );
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -1223,7 +1300,11 @@ public class TreeRouterTest
         var route = builder.Build();
 
         var ambientValues = value == null ? null : new { parameter = value };
-        var context = CreateVirtualPathContext(values: null, ambientValues: ambientValues, name: "NamedRoute");
+        var context = CreateVirtualPathContext(
+            values: null,
+            ambientValues: ambientValues,
+            name: "NamedRoute"
+        );
 
         // Act
         var result = route.GetVirtualPath(context);
@@ -1300,7 +1381,10 @@ public class TreeRouterTest
         MapOutboundEntry(builder, "api/Store", new { action = "Index", controller = "Store" });
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(new { }, new { action = "Index", controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { },
+            new { action = "Index", controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1317,10 +1401,17 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        MapOutboundEntry(builder, "Customers/SeparatePageModels/{handler?}/{id?}", new { page = "/Customers/SeparatePageModels/Index" });
+        MapOutboundEntry(
+            builder,
+            "Customers/SeparatePageModels/{handler?}/{id?}",
+            new { page = "/Customers/SeparatePageModels/Index" }
+        );
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(new { page = "/Customers/SeparatePageModels/Index" }, new { page = "/Customers/SeparatePageModels/Edit", id = "17" });
+        var context = CreateVirtualPathContext(
+            new { page = "/Customers/SeparatePageModels/Index" },
+            new { page = "/Customers/SeparatePageModels/Edit", id = "17" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1337,7 +1428,11 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        MapOutboundEntry(builder, "api/Store/{action}", new { action = "Index", controller = "Store" });
+        MapOutboundEntry(
+            builder,
+            "api/Store/{action}",
+            new { action = "Index", controller = "Store" }
+        );
         var route = builder.Build();
 
         var context = CreateVirtualPathContext(new { action = "Index", controller = "Store" });
@@ -1357,15 +1452,18 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        MapOutboundEntry(builder,
+        MapOutboundEntry(
+            builder,
             "api/{area}/dosomething/{controller}/{action}",
-            new { action = "Index", controller = "Store", area = "AwesomeCo" });
+            new { action = "Index", controller = "Store", area = "AwesomeCo" }
+        );
 
         var route = builder.Build();
 
         var context = CreateVirtualPathContext(
             new { action = "Index", controller = "Store" },
-            new { area = "AwesomeCo" });
+            new { area = "AwesomeCo" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1382,7 +1480,11 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        MapOutboundEntry(builder, "api/Store/{action=Index}", new { action = "Index", controller = "Store" });
+        MapOutboundEntry(
+            builder,
+            "api/Store/{action=Index}",
+            new { action = "Index", controller = "Store" }
+        );
         var route = builder.Build();
 
         var context = CreateVirtualPathContext(new { action = "Index", controller = "Store" });
@@ -1402,11 +1504,17 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        MapOutboundEntry(builder, "api/Store/{action}/{id:int}", new { action = "Index", controller = "Store" });
+        MapOutboundEntry(
+            builder,
+            "api/Store/{action}/{id:int}",
+            new { action = "Index", controller = "Store" }
+        );
 
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(new { action = "Index", controller = "Store", id = 5 });
+        var context = CreateVirtualPathContext(
+            new { action = "Index", controller = "Store", id = 5 }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1423,11 +1531,17 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        MapOutboundEntry(builder, "api/Store/{action}/{id:int}", new { action = "Index", controller = "Store" });
+        MapOutboundEntry(
+            builder,
+            "api/Store/{action}/{id:int}",
+            new { action = "Index", controller = "Store" }
+        );
         var route = builder.Build();
 
         var next = new StubRouter();
-        var context = CreateVirtualPathContext(new { action = "Index", controller = "Store", id = "heyyyy" });
+        var context = CreateVirtualPathContext(
+            new { action = "Index", controller = "Store", id = "heyyyy" }
+        );
 
         // Act
         var path = route.GetVirtualPath(context);
@@ -1444,7 +1558,10 @@ public class TreeRouterTest
         MapOutboundEntry(builder, "api/Store", new { action = "Index", controller = "Store" });
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(new { action = "Index" }, new { controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { action = "Index" },
+            new { controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1464,7 +1581,10 @@ public class TreeRouterTest
         MapOutboundEntry(builder, "api/Store", new { action = "Index", controller = "Store" });
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(new { action = "Index", id = 5 }, new { controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { action = "Index", id = 5 },
+            new { controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1482,7 +1602,11 @@ public class TreeRouterTest
         // Arrange
         var builder = CreateBuilder();
         MapOutboundEntry(builder, "api/Store", new { action = "Index", controller = "Store" });
-        MapOutboundEntry(builder, "api2/{controller}", new { action = "Index", controller = "Blog" });
+        MapOutboundEntry(
+            builder,
+            "api2/{controller}",
+            new { action = "Index", controller = "Blog" }
+        );
 
         var route = builder.Build();
 
@@ -1503,15 +1627,25 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        var entry1 = MapOutboundEntry(builder, "Help/Store", new { area = "Help", action = "Edit", controller = "Store" });
+        var entry1 = MapOutboundEntry(
+            builder,
+            "Help/Store",
+            new { area = "Help", action = "Edit", controller = "Store" }
+        );
         entry1.Precedence = 2;
 
-        var entry2 = MapOutboundEntry(builder, "Store", new { area = (string)null, action = "Edit", controller = "Store" });
+        var entry2 = MapOutboundEntry(
+            builder,
+            "Store",
+            new { area = (string)null, action = "Edit", controller = "Store" }
+        );
         entry2.Precedence = 1;
 
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(new { area = "Help", action = "Edit", controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { area = "Help", action = "Edit", controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1528,15 +1662,25 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        var entry1 = MapOutboundEntry(builder, "Help/Store", new { area = "Help", action = "Edit", controller = "Store" });
+        var entry1 = MapOutboundEntry(
+            builder,
+            "Help/Store",
+            new { area = "Help", action = "Edit", controller = "Store" }
+        );
         entry1.Precedence = 1;
 
-        var entry2 = MapOutboundEntry(builder, "Store", new { area = (string)null, action = "Edit", controller = "Store" });
+        var entry2 = MapOutboundEntry(
+            builder,
+            "Store",
+            new { area = (string)null, action = "Edit", controller = "Store" }
+        );
         entry2.Precedence = 2;
 
         var route = builder.Build();
 
-        var context = CreateVirtualPathContext(new { area = "Help", action = "Edit", controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { area = "Help", action = "Edit", controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1553,17 +1697,26 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        var entry1 = MapOutboundEntry(builder, "Help/Store", new { area = "Help", action = "Edit", controller = "Store" });
+        var entry1 = MapOutboundEntry(
+            builder,
+            "Help/Store",
+            new { area = "Help", action = "Edit", controller = "Store" }
+        );
         entry1.Precedence = 2;
 
-        var entry2 = MapOutboundEntry(builder, "Store", new { area = (string)null, action = "Edit", controller = "Store" });
+        var entry2 = MapOutboundEntry(
+            builder,
+            "Store",
+            new { area = (string)null, action = "Edit", controller = "Store" }
+        );
         entry2.Precedence = 1;
 
         var route = builder.Build();
 
         var context = CreateVirtualPathContext(
             values: new { action = "Edit", controller = "Store" },
-            ambientValues: new { area = "Help" });
+            ambientValues: new { area = "Help" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1580,17 +1733,26 @@ public class TreeRouterTest
     {
         // Arrange
         var builder = CreateBuilder();
-        var entry1 = MapOutboundEntry(builder, "Help/Store", new { area = "Help", action = "Edit", controller = "Store" });
+        var entry1 = MapOutboundEntry(
+            builder,
+            "Help/Store",
+            new { area = "Help", action = "Edit", controller = "Store" }
+        );
         entry1.Precedence = 2;
 
-        var entry2 = MapOutboundEntry(builder, "Store", new { area = (string)null, action = "Edit", controller = "Store" });
+        var entry2 = MapOutboundEntry(
+            builder,
+            "Store",
+            new { area = (string)null, action = "Edit", controller = "Store" }
+        );
         entry2.Precedence = 1;
 
         var route = builder.Build();
 
         var context = CreateVirtualPathContext(
             values: new { action = "Edit", controller = "Store" },
-            ambientValues: new { area = "Blog" });
+            ambientValues: new { area = "Blog" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1608,65 +1770,59 @@ public class TreeRouterTest
         {
             return new object[][]
             {
-                    // defaults
-                    // ambient values
-                    // values
-                    new object[]
-                    {
-                        "Test/{val1}/{val2}.{val3?}",
-                        new {val1 = "someval1", val2 = "someval2", val3 = "someval3a"},
-                        new {val3 = "someval3v"},
-                        "/Test/someval1/someval2.someval3v",
-                    },
-                    new object[]
-                    {
-                        "Test/{val1}/{val2}.{val3?}",
-                        new {val3 = "someval3a"},
-                        new {val1 = "someval1", val2 = "someval2", val3 = "someval3v" },
-                        "/Test/someval1/someval2.someval3v",
-                    },
-                    new object[]
-                    {
-                        "Test/{val1}/{val2}.{val3?}",
-                        null,
-                        new {val1 = "someval1", val2 = "someval2" },
-                        "/Test/someval1/someval2",
-                    },
-                    new object[]
-                    {
-                        "Test/{val1}.{val2}.{val3}.{val4?}",
-                        new {val1 = "someval1", val2 = "someval2" },
-                        new {val4 = "someval4", val3 = "someval3" },
-                        "/Test/someval1.someval2.someval3.someval4",
-                    },
-                    new object[]
-                    {
-                        "Test/{val1}.{val2}.{val3}.{val4?}",
-                        new {val1 = "someval1", val2 = "someval2" },
-                        new {val3 = "someval3" },
-                        "/Test/someval1.someval2.someval3",
-                    },
-                    new object[]
-                    {
-                        "Test/.{val2?}",
-                        null,
-                        new {val2 = "someval2" },
-                        "/Test/.someval2",
-                    },
-                    new object[]
-                    {
-                        "Test/.{val2?}",
-                        null,
-                        null,
-                        "/Test/",
-                    },
-                    new object[]
-                    {
-                        "Test/{val1}.{val2}",
-                        new {val1 = "someval1", val2 = "someval2" },
-                        new {val3 = "someval3" },
-                        "/Test/someval1.someval2?val3=someval3",
-                    },
+                // defaults
+                // ambient values
+                // values
+                new object[]
+                {
+                    "Test/{val1}/{val2}.{val3?}",
+                    new { val1 = "someval1", val2 = "someval2", val3 = "someval3a" },
+                    new { val3 = "someval3v" },
+                    "/Test/someval1/someval2.someval3v",
+                },
+                new object[]
+                {
+                    "Test/{val1}/{val2}.{val3?}",
+                    new { val3 = "someval3a" },
+                    new { val1 = "someval1", val2 = "someval2", val3 = "someval3v" },
+                    "/Test/someval1/someval2.someval3v",
+                },
+                new object[]
+                {
+                    "Test/{val1}/{val2}.{val3?}",
+                    null,
+                    new { val1 = "someval1", val2 = "someval2" },
+                    "/Test/someval1/someval2",
+                },
+                new object[]
+                {
+                    "Test/{val1}.{val2}.{val3}.{val4?}",
+                    new { val1 = "someval1", val2 = "someval2" },
+                    new { val4 = "someval4", val3 = "someval3" },
+                    "/Test/someval1.someval2.someval3.someval4",
+                },
+                new object[]
+                {
+                    "Test/{val1}.{val2}.{val3}.{val4?}",
+                    new { val1 = "someval1", val2 = "someval2" },
+                    new { val3 = "someval3" },
+                    "/Test/someval1.someval2.someval3",
+                },
+                new object[]
+                {
+                    "Test/.{val2?}",
+                    null,
+                    new { val2 = "someval2" },
+                    "/Test/.someval2",
+                },
+                new object[] { "Test/.{val2?}", null, null, "/Test/", },
+                new object[]
+                {
+                    "Test/{val1}.{val2}",
+                    new { val1 = "someval1", val2 = "someval2" },
+                    new { val3 = "someval3" },
+                    "/Test/someval1.someval2?val3=someval3",
+                },
             };
         }
     }
@@ -1677,7 +1833,8 @@ public class TreeRouterTest
         string template,
         object ambientValues,
         object values,
-        string expected)
+        string expected
+    )
     {
         // Arrange
         var builder = CreateBuilder();
@@ -1744,14 +1901,15 @@ public class TreeRouterTest
         List<IRouter> nestedRouters = null;
 
         var next = new Mock<IRouter>();
-        next
-            .Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(c =>
-            {
-                nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                c.Handler = null; // Not a match
-                })
+        next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
+            .Callback<RouteContext>(
+                c =>
+                {
+                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                    c.Handler = null; // Not a match
+                }
+            )
             .Returns(Task.CompletedTask);
 
         var builder = CreateBuilder();
@@ -1781,14 +1939,15 @@ public class TreeRouterTest
         List<IRouter> nestedRouters = null;
 
         var next = new Mock<IRouter>();
-        next
-            .Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(c =>
-            {
-                nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                c.Handler = null; // Not a match
-                })
+        next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
+            .Callback<RouteContext>(
+                c =>
+                {
+                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                    c.Handler = null; // Not a match
+                }
+            )
             .Returns(Task.CompletedTask);
 
         var builder = CreateBuilder();
@@ -1825,14 +1984,15 @@ public class TreeRouterTest
         List<IRouter> nestedRouters = null;
 
         var next = new Mock<IRouter>();
-        next
-            .Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(c =>
-            {
-                nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                throw new Exception();
-            })
+        next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
+            .Callback<RouteContext>(
+                c =>
+                {
+                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                    throw new Exception();
+                }
+            )
             .Returns(Task.CompletedTask);
 
         var builder = CreateBuilder();
@@ -1871,13 +2031,14 @@ public class TreeRouterTest
         // Arrange
         RouteValueDictionary nestedValues = null;
         var next = new Mock<IRouter>();
-        next
-            .Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(c =>
-            {
-                nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                c.Handler = NullHandler;
-            })
+        next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
+            .Callback<RouteContext>(
+                c =>
+                {
+                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                    c.Handler = NullHandler;
+                }
+            )
             .Returns(Task.CompletedTask);
 
         var builder = CreateBuilder();
@@ -1905,9 +2066,12 @@ public class TreeRouterTest
         var entry = MapOutboundEntry(
             builder,
             "Help/Store",
-            requiredValues: new { area = (string)null, action = "Edit", controller = "Store" });
+            requiredValues: new { area = (string)null, action = "Edit", controller = "Store" }
+        );
         var route = builder.Build();
-        var context = CreateVirtualPathContext(new { area = (string)null, action = "Edit", controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { area = (string)null, action = "Edit", controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1927,9 +2091,12 @@ public class TreeRouterTest
         var entry = MapOutboundEntry(
             builder,
             "Help/Store",
-            requiredValues: new { area = (string)null, action = "Edit", controller = "Store" });
+            requiredValues: new { area = (string)null, action = "Edit", controller = "Store" }
+        );
         var route = builder.Build();
-        var context = CreateVirtualPathContext(new { area = "", action = "Edit", controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { area = "", action = "Edit", controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1949,9 +2116,12 @@ public class TreeRouterTest
         var entry = MapOutboundEntry(
             builder,
             "Help/Store",
-            requiredValues: new { foo = "", action = "Edit", controller = "Store" });
+            requiredValues: new { foo = "", action = "Edit", controller = "Store" }
+        );
         var route = builder.Build();
-        var context = CreateVirtualPathContext(new { foo = (string)null, action = "Edit", controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { foo = (string)null, action = "Edit", controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1971,9 +2141,12 @@ public class TreeRouterTest
         var entry = MapOutboundEntry(
             builder,
             "Help/Store",
-            requiredValues: new { foo = "", action = "Edit", controller = "Store" });
+            requiredValues: new { foo = "", action = "Edit", controller = "Store" }
+        );
         var route = builder.Build();
-        var context = CreateVirtualPathContext(new { foo = "", action = "Edit", controller = "Store" });
+        var context = CreateVirtualPathContext(
+            new { foo = "", action = "Edit", controller = "Store" }
+        );
 
         // Act
         var pathData = route.GetVirtualPath(context);
@@ -1991,7 +2164,8 @@ public class TreeRouterTest
         request.SetupGet(r => r.Path).Returns(new PathString(requestPath));
 
         var context = new Mock<HttpContext>(MockBehavior.Strict);
-        context.Setup(m => m.RequestServices.GetService(typeof(ILoggerFactory)))
+        context
+            .Setup(m => m.RequestServices.GetService(typeof(ILoggerFactory)))
             .Returns(NullLoggerFactory.Instance);
 
         context.SetupGet(c => c.Request).Returns(request.Object);
@@ -2002,30 +2176,35 @@ public class TreeRouterTest
     private static VirtualPathContext CreateVirtualPathContext(
         object values,
         object ambientValues = null,
-        string name = null)
+        string name = null
+    )
     {
         var mockHttpContext = new Mock<HttpContext>();
-        mockHttpContext.Setup(h => h.RequestServices.GetService(typeof(ILoggerFactory)))
+        mockHttpContext
+            .Setup(h => h.RequestServices.GetService(typeof(ILoggerFactory)))
             .Returns(NullLoggerFactory.Instance);
 
         return new VirtualPathContext(
             mockHttpContext.Object,
             new RouteValueDictionary(ambientValues),
             new RouteValueDictionary(values),
-            name);
+            name
+        );
     }
 
     private static InboundRouteEntry MapInboundEntry(
         TreeRouteBuilder builder,
         string template,
         int order = 0,
-        IRouter handler = null)
+        IRouter handler = null
+    )
     {
         var entry = builder.MapInbound(
             handler ?? new StubRouter(),
             TemplateParser.Parse(template),
             routeName: null,
-            order: order);
+            order: order
+        );
 
         // Add a generated 'route group' so we can identify later which entry matched.
         entry.Defaults["test_route_group"] = CreateRouteGroup(order, template);
@@ -2039,21 +2218,22 @@ public class TreeRouterTest
         object requiredValues = null,
         int order = 0,
         string name = null,
-        IRouter handler = null)
+        IRouter handler = null
+    )
     {
         var entry = builder.MapOutbound(
             handler ?? new StubRouter(),
             TemplateParser.Parse(template),
             requiredLinkValues: new RouteValueDictionary(requiredValues),
             routeName: name,
-            order: order);
+            order: order
+        );
 
         // Add a generated 'route group' so we can identify later which entry matched.
         entry.Defaults["test_route_group"] = CreateRouteGroup(order, template);
 
         return entry;
     }
-
 
     private static string CreateRouteGroup(int order, string template)
     {
@@ -2079,13 +2259,12 @@ public class TreeRouterTest
         var builder = new TreeRouteBuilder(
             NullLoggerFactory.Instance,
             objectPool,
-            constraintResolver);
+            constraintResolver
+        );
         return builder;
     }
 
-    private static TreeRouter CreateTreeRouter(
-        string firstTemplate,
-        string secondTemplate)
+    private static TreeRouter CreateTreeRouter(string firstTemplate, string secondTemplate)
     {
         var builder = CreateBuilder();
         MapOutboundEntry(builder, firstTemplate);

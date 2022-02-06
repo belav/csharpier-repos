@@ -21,19 +21,26 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseNullCheckOverTypeCheck), Shared]
-    internal sealed class CSharpUseNullCheckOverTypeCheckCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseNullCheckOverTypeCheck
+        ),
+        Shared
+    ]
+    internal sealed class CSharpUseNullCheckOverTypeCheckCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
-        private static readonly ConstantPatternSyntax s_nullConstantPattern = ConstantPattern(LiteralExpression(SyntaxKind.NullLiteralExpression));
+        private static readonly ConstantPatternSyntax s_nullConstantPattern = ConstantPattern(
+            LiteralExpression(SyntaxKind.NullLiteralExpression)
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpUseNullCheckOverTypeCheckCodeFixProvider()
-        {
-        }
+        public CSharpUseNullCheckOverTypeCheckCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseNullCheckOverTypeCheckDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseNullCheckOverTypeCheckDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
@@ -42,27 +49,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             var diagnostic = context.Diagnostics.First();
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, diagnostic, c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
-                var node = diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken: cancellationToken);
+                var node = diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken: cancellationToken
+                );
                 SyntaxNode replacement = node switch
                 {
                     // Replace 'x is object' with 'x is not null'
-                    BinaryExpressionSyntax binary =>
-                        IsPatternExpression(
-                            expression: binary.Left,
-                            pattern: UnaryPattern(s_nullConstantPattern)),
-                    UnaryPatternSyntax =>
-                        s_nullConstantPattern,
+                    BinaryExpressionSyntax binary
+                      => IsPatternExpression(
+                          expression: binary.Left,
+                          pattern: UnaryPattern(s_nullConstantPattern)
+                      ),
+                    UnaryPatternSyntax => s_nullConstantPattern,
                     // The analyzer reports diagnostic only on BinaryExpressionSyntax and UnaryPatternSyntax.
                     _ => throw ExceptionUtilities.Unreachable
                 };
@@ -76,9 +90,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Prefer_null_check_over_type_check, createChangedDocument, nameof(CSharpAnalyzersResources.Prefer_null_check_over_type_check))
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Prefer_null_check_over_type_check,
+                    createChangedDocument,
+                    nameof(CSharpAnalyzersResources.Prefer_null_check_over_type_check)
+                ) { }
         }
     }
 }

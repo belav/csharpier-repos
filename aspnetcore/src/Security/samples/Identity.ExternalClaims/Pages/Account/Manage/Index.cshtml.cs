@@ -24,7 +24,8 @@ public partial class IndexModel : PageModel
     public IndexModel(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        IEmailSender emailSender)
+        IEmailSender emailSender
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -57,16 +58,14 @@ public partial class IndexModel : PageModel
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
         {
-            throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            throw new ApplicationException(
+                $"Unable to load user with ID '{_userManager.GetUserId(User)}'."
+            );
         }
 
         Username = user.UserName;
 
-        Input = new InputModel
-        {
-            Email = user.Email,
-            PhoneNumber = user.PhoneNumber
-        };
+        Input = new InputModel { Email = user.Email, PhoneNumber = user.PhoneNumber };
 
         IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
 
@@ -83,7 +82,9 @@ public partial class IndexModel : PageModel
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
         {
-            throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            throw new ApplicationException(
+                $"Unable to load user with ID '{_userManager.GetUserId(User)}'."
+            );
         }
 
         if (Input.Email != user.Email)
@@ -91,7 +92,9 @@ public partial class IndexModel : PageModel
             var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
             if (!setEmailResult.Succeeded)
             {
-                throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                throw new ApplicationException(
+                    $"Unexpected error occurred setting email for user with ID '{user.Id}'."
+                );
             }
         }
 
@@ -100,13 +103,16 @@ public partial class IndexModel : PageModel
             var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
             if (!setPhoneResult.Succeeded)
             {
-                throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                throw new ApplicationException(
+                    $"Unexpected error occurred setting phone number for user with ID '{user.Id}'."
+                );
             }
         }
 
         StatusMessage = "Your profile has been updated";
         return RedirectToPage();
     }
+
     public async Task<IActionResult> OnPostSendVerificationEmailAsync()
     {
         if (!ModelState.IsValid)
@@ -117,7 +123,9 @@ public partial class IndexModel : PageModel
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
         {
-            throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            throw new ApplicationException(
+                $"Unable to load user with ID '{_userManager.GetUserId(User)}'."
+            );
         }
 
         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

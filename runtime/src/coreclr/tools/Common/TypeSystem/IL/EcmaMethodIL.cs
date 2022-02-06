@@ -27,7 +27,8 @@ namespace Internal.IL
 
         public static EcmaMethodIL Create(EcmaMethod method)
         {
-            var rva = method.MetadataReader.GetMethodDefinition(method.Handle).RelativeVirtualAddress;
+            var rva =
+                method.MetadataReader.GetMethodDefinition(method.Handle).RelativeVirtualAddress;
             if (rva == 0)
                 return null;
             return new EcmaMethodIL(method, rva);
@@ -42,18 +43,12 @@ namespace Internal.IL
 
         public EcmaModule Module
         {
-            get
-            {
-                return _module;
-            }
+            get { return _module; }
         }
 
         public override MethodDesc OwningMethod
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         }
 
         public override byte[] GetILBytes()
@@ -67,18 +62,12 @@ namespace Internal.IL
 
         public override bool IsInitLocals
         {
-            get
-            {
-                return _methodBody.LocalVariablesInitialized;
-            }
+            get { return _methodBody.LocalVariablesInitialized; }
         }
 
         public override int MaxStack
         {
-            get
-            {
-                return _methodBody.MaxStack;
-            }
+            get { return _methodBody.MaxStack; }
         }
 
         public override LocalVariableDefinition[] GetLocals()
@@ -90,9 +79,15 @@ namespace Internal.IL
             var localSignature = _methodBody.LocalSignature;
             if (localSignature.IsNil)
                 return Array.Empty<LocalVariableDefinition>();
-            BlobReader signatureReader = metadataReader.GetBlobReader(metadataReader.GetStandaloneSignature(localSignature).Signature);
+            BlobReader signatureReader = metadataReader.GetBlobReader(
+                metadataReader.GetStandaloneSignature(localSignature).Signature
+            );
 
-            EcmaSignatureParser parser = new EcmaSignatureParser(_module, signatureReader, NotFoundBehavior.Throw);
+            EcmaSignatureParser parser = new EcmaSignatureParser(
+                _module,
+                signatureReader,
+                NotFoundBehavior.Throw
+            );
             LocalVariableDefinition[] locals = parser.ParseLocalsSignature();
 
             Interlocked.CompareExchange(ref _locals, locals, null);
@@ -126,7 +121,8 @@ namespace Internal.IL
                         exceptionRegion.HandlerOffset,
                         exceptionRegion.HandlerLength,
                         MetadataTokens.GetToken(exceptionRegion.CatchType),
-                        exceptionRegion.FilterOffset);
+                        exceptionRegion.FilterOffset
+                    );
                 }
             }
 
@@ -134,7 +130,10 @@ namespace Internal.IL
             return _ilExceptionRegions;
         }
 
-        public override object GetObject(int token, NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw)
+        public override object GetObject(
+            int token,
+            NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
+        )
         {
             // UserStrings cannot be wrapped in EntityHandle
             if ((token & 0xFF000000) == 0x70000000)
@@ -162,21 +161,18 @@ namespace Internal.IL
 
         public EcmaModule Module
         {
-            get
-            {
-                return _module;
-            }
+            get { return _module; }
         }
 
         public override MethodDesc OwningMethod
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         }
 
-        public override object GetObject(int token, NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw)
+        public override object GetObject(
+            int token,
+            NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
+        )
         {
             // UserStrings cannot be wrapped in EntityHandle
             if ((token & 0xFF000000) == 0x70000000)

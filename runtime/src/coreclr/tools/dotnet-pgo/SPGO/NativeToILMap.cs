@@ -15,6 +15,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
     {
         // Native offsets in order
         private uint[] _nativeOffsets;
+
         // Map from native offset to IL offset
         private int[] _ilOffsets;
 
@@ -38,8 +39,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         }
 
         /// <summary>Look up IL offset associated with block that contains RVA.</summary>
-        public int Lookup(uint rva)
-            => LookupIndex(rva) switch
+        public int Lookup(uint rva) =>
+            LookupIndex(rva) switch
             {
                 -1 => -1,
                 int index => _ilOffsets[index]
@@ -63,18 +64,26 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             List<DebugInfoBoundsEntry> sorted = boundsList.OrderBy(e => e.NativeOffset).ToList();
 
-            return new NativeToILMap(sorted.Select(e => e.NativeOffset).ToArray(), sorted.Select(e => (int)e.ILOffset).ToArray());
+            return new NativeToILMap(
+                sorted.Select(e => e.NativeOffset).ToArray(),
+                sorted.Select(e => (int)e.ILOffset).ToArray()
+            );
         }
 
         internal static NativeToILMap FromEvent(MethodILToNativeMapTraceData ev)
         {
-            List<(uint rva, int ilOffset)> pairs = new List<(uint rva, int ilOffset)>(ev.CountOfMapEntries);
+            List<(uint rva, int ilOffset)> pairs = new List<(uint rva, int ilOffset)>(
+                ev.CountOfMapEntries
+            );
             for (int i = 0; i < ev.CountOfMapEntries; i++)
                 pairs.Add(((uint)ev.NativeOffset(i), ev.ILOffset(i)));
 
             pairs.RemoveAll(p => p.ilOffset < 0);
             pairs.Sort((p1, p2) => p1.rva.CompareTo(p2.rva));
-            return new NativeToILMap(pairs.Select(p => p.rva).ToArray(), pairs.Select(p => p.ilOffset).ToArray());
+            return new NativeToILMap(
+                pairs.Select(p => p.rva).ToArray(),
+                pairs.Select(p => p.ilOffset).ToArray()
+            );
         }
     }
 }

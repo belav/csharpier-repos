@@ -9,14 +9,19 @@ internal static partial class Interop
     internal static partial class Normaliz
     {
         [DllImport("Normaliz.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern unsafe BOOL IsNormalizedString(NormalizationForm normForm, char* source, int length);
+        internal static extern unsafe BOOL IsNormalizedString(
+            NormalizationForm normForm,
+            char* source,
+            int length
+        );
 
         [DllImport("Normaliz.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern unsafe int NormalizeString(
-                                        NormalizationForm normForm,
-                                        char* source,
-                                        int sourceLength,
-                                        char* destination,
-                                        int destinationLength);
+            NormalizationForm normForm,
+            char* source,
+            int sourceLength,
+            char* destination,
+            int destinationLength
+        );
     }
 }

@@ -18,7 +18,10 @@ namespace System.Text.Unicode
         public static Stream OpenResource(string resourceName)
         {
             return typeof(Resources).Assembly.GetManifestResourceStream(resourceName)
-                ?? throw new ArgumentException(message: $"Resource {resourceName} not found.", paramName: nameof(resourceName));
+                ?? throw new ArgumentException(
+                    message: $"Resource {resourceName} not found.",
+                    paramName: nameof(resourceName)
+                );
         }
     }
 }

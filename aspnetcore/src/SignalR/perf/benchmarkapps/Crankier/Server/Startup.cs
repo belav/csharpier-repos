@@ -13,10 +13,13 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Server
     {
         private readonly IConfiguration _config;
         private readonly string _azureSignalrConnectionString;
+
         public Startup(IConfiguration configuration)
         {
             _config = configuration;
-            _azureSignalrConnectionString = configuration.GetSection("Azure:SignalR").GetValue<string>("ConnectionString", null);
+            _azureSignalrConnectionString = configuration
+                .GetSection("Azure:SignalR")
+                .GetValue<string>("ConnectionString", null);
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -41,16 +44,21 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Server
 
             if (_azureSignalrConnectionString != null)
             {
-                app.UseAzureSignalR(routes => {
-                    routes.MapHub<EchoHub>("/echo");
-                });
+                app.UseAzureSignalR(
+                    routes =>
+                    {
+                        routes.MapHub<EchoHub>("/echo");
+                    }
+                );
             }
             else
             {
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapHub<EchoHub>("/echo");
-                });
+                app.UseEndpoints(
+                    endpoints =>
+                    {
+                        endpoints.MapHub<EchoHub>("/echo");
+                    }
+                );
             }
         }
     }

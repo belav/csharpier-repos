@@ -21,19 +21,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     using Workspace = Microsoft.CodeAnalysis.Workspace;
 
     [Export(typeof(IRefactorNotifyService))]
-    internal sealed class VsRefactorNotifyService : ForegroundThreadAffinitizedObject, IRefactorNotifyService
+    internal sealed class VsRefactorNotifyService
+        : ForegroundThreadAffinitizedObject,
+          IRefactorNotifyService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VsRefactorNotifyService(IThreadingContext threadingContext)
-            : base(threadingContext)
-        {
-        }
+        public VsRefactorNotifyService(IThreadingContext threadingContext) : base(threadingContext)
+        { }
 
-        public bool TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, ISymbol symbol, string newName, bool throwOnFailure)
+        public bool TryOnBeforeGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            ISymbol symbol,
+            string newName,
+            bool throwOnFailure
+        )
         {
             AssertIsForeground();
-            if (TryGetRenameAPIRequiredArguments(workspace, changedDocumentIDs, symbol, out var hierarchyToItemIDsMap, out var rqnames))
+            if (
+                TryGetRenameAPIRequiredArguments(
+                    workspace,
+                    changedDocumentIDs,
+                    symbol,
+                    out var hierarchyToItemIDsMap,
+                    out var rqnames
+                )
+            )
             {
                 foreach (var hierarchy in hierarchyToItemIDsMap.Keys)
                 {
@@ -47,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             (uint)rqnames.Length,
                             rqnames,
                             newName,
-                            promptContinueOnFail: 1);
+                            promptContinueOnFail: 1
+                        );
 
                         if (hresult < 0)
                         {
@@ -67,10 +82,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return true;
         }
 
-        public bool TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, ISymbol symbol, string newName, bool throwOnFailure)
+        public bool TryOnAfterGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            ISymbol symbol,
+            string newName,
+            bool throwOnFailure
+        )
         {
             AssertIsForeground();
-            if (TryGetRenameAPIRequiredArguments(workspace, changedDocumentIDs, symbol, out var hierarchyToItemIDsMap, out var rqnames))
+            if (
+                TryGetRenameAPIRequiredArguments(
+                    workspace,
+                    changedDocumentIDs,
+                    symbol,
+                    out var hierarchyToItemIDsMap,
+                    out var rqnames
+                )
+            )
             {
                 foreach (var hierarchy in hierarchyToItemIDsMap.Keys)
                 {
@@ -83,7 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             itemIDs.ToArray(),
                             (uint)rqnames.Length,
                             rqnames,
-                            newName);
+                            newName
+                        );
 
                         if (hresult < 0)
                         {
@@ -108,12 +138,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IEnumerable<DocumentId> changedDocumentIDs,
             ISymbol symbol,
             out Dictionary<IVsHierarchy, List<uint>> hierarchyToItemIDsMap,
-            out string[] rqnames)
+            out string[] rqnames
+        )
         {
             AssertIsForeground();
 
             rqnames = null;
-            if (!TryGetItemIDsAndRQName(workspace, changedDocumentIDs, symbol, out hierarchyToItemIDsMap, out var rqname))
+            if (
+                !TryGetItemIDsAndRQName(
+                    workspace,
+                    changedDocumentIDs,
+                    symbol,
+                    out hierarchyToItemIDsMap,
+                    out var rqname
+                )
+            )
             {
                 return false;
             }
@@ -127,7 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IEnumerable<DocumentId> changedDocumentIDs,
             ISymbol symbol,
             out Dictionary<IVsHierarchy, List<uint>> hierarchyToItemIDsMap,
-            out string rqname)
+            out string rqname
+        )
         {
             AssertIsForeground();
 
@@ -149,7 +189,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 return false;
             }
 
-            hierarchyToItemIDsMap = GetHierarchiesAndItemIDsFromDocumentIDs(visualStudioWorkspace, changedDocumentIDs);
+            hierarchyToItemIDsMap = GetHierarchiesAndItemIDsFromDocumentIDs(
+                visualStudioWorkspace,
+                changedDocumentIDs
+            );
             return true;
         }
 
@@ -159,8 +202,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 var methodSymbol = symbol as IMethodSymbol;
 
-                if (methodSymbol.MethodKind is MethodKind.Constructor or
-                    MethodKind.Destructor)
+                if (methodSymbol.MethodKind is MethodKind.Constructor or MethodKind.Destructor)
                 {
                     symbol = symbol.ContainingType;
                 }
@@ -170,7 +212,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return rqname != null;
         }
 
-        private Dictionary<IVsHierarchy, List<uint>> GetHierarchiesAndItemIDsFromDocumentIDs(VisualStudioWorkspace visualStudioWorkspace, IEnumerable<DocumentId> changedDocumentIDs)
+        private Dictionary<IVsHierarchy, List<uint>> GetHierarchiesAndItemIDsFromDocumentIDs(
+            VisualStudioWorkspace visualStudioWorkspace,
+            IEnumerable<DocumentId> changedDocumentIDs
+        )
         {
             AssertIsForeground();
 
@@ -193,7 +238,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     continue;
                 }
 
-                if (!hierarchyToItemIDsMap.TryGetValue(hierarchy, out var itemIDsForCurrentHierarchy))
+                if (
+                    !hierarchyToItemIDsMap.TryGetValue(
+                        hierarchy,
+                        out var itemIDsForCurrentHierarchy
+                    )
+                )
                 {
                     itemIDsForCurrentHierarchy = new List<uint>();
                     hierarchyToItemIDsMap.Add(hierarchy, itemIDsForCurrentHierarchy);

@@ -50,8 +50,14 @@ namespace System.MemoryTests
         {
             ReadOnlyMemory<char> readonlyMemory = input.AsMemory();
             Memory<char> m = MemoryMarshal.AsMemory(readonlyMemory);
-            Assert.Equal(input.Substring(offset, count), new string(m.Slice(offset, count).ToArray()));
-            Assert.Equal(input.Substring(offset, count), new string(m.Slice(offset, count).Span.ToArray()));
+            Assert.Equal(
+                input.Substring(offset, count),
+                new string(m.Slice(offset, count).ToArray())
+            );
+            Assert.Equal(
+                input.Substring(offset, count),
+                new string(m.Slice(offset, count).Span.ToArray())
+            );
             Assert.Equal(input.Substring(offset), new string(m.Slice(offset).ToArray()));
         }
 

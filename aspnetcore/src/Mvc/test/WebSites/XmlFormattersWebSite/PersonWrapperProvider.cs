@@ -23,9 +23,6 @@ public class PersonWrapperProvider : IWrapperProvider
 
     public Type WrappingType
     {
-        get
-        {
-            return typeof(PersonWrapper);
-        }
+        get { return typeof(PersonWrapper); }
     }
 }

@@ -5,10 +5,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ComplexNavigationsCollectionsQueryInMemoryTest : ComplexNavigationsCollectionsQueryTestBase<ComplexNavigationsQueryInMemoryFixture>
+    public class ComplexNavigationsCollectionsQueryInMemoryTest
+        : ComplexNavigationsCollectionsQueryTestBase<ComplexNavigationsQueryInMemoryFixture>
     {
-        public ComplexNavigationsCollectionsQueryInMemoryTest(ComplexNavigationsQueryInMemoryFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public ComplexNavigationsCollectionsQueryInMemoryTest(
+            ComplexNavigationsQueryInMemoryFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             //TestLoggerFactory.TestOutputHelper = testOutputHelper;
         }

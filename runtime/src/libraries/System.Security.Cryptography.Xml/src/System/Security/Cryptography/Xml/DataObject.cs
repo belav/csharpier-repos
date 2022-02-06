@@ -90,10 +90,7 @@ namespace System.Security.Cryptography.Xml
 
         private bool CacheValid
         {
-            get
-            {
-                return (_cachedXml != null);
-            }
+            get { return (_cachedXml != null); }
         }
 
         //
@@ -102,7 +99,8 @@ namespace System.Security.Cryptography.Xml
 
         public XmlElement GetXml()
         {
-            if (CacheValid) return (_cachedXml);
+            if (CacheValid)
+                return (_cachedXml);
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -111,7 +109,10 @@ namespace System.Security.Cryptography.Xml
 
         internal XmlElement GetXml(XmlDocument document)
         {
-            XmlElement objectElement = document.CreateElement("Object", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement objectElement = document.CreateElement(
+                "Object",
+                SignedXml.XmlDsigNamespaceUrl
+            );
 
             if (!string.IsNullOrEmpty(_id))
                 objectElement.SetAttribute("Id", _id);

@@ -59,6 +59,7 @@ namespace Internal.IL
         public readonly int Offset;
         public readonly string Document;
         public readonly int LineNumber;
+
         // TODO: The remaining info
 
         public ILSequencePoint(int offset, string document, int lineNumber)

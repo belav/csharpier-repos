@@ -14,7 +14,8 @@ internal class IdentityServerJwtPolicySchemeForwardSelector
 
     public IdentityServerJwtPolicySchemeForwardSelector(
         string identityPath,
-        string IdentityServerJwtScheme)
+        string IdentityServerJwtScheme
+    )
     {
         _identityPath = identityPath;
         _IdentityServerJwtScheme = IdentityServerJwtScheme;

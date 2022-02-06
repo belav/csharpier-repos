@@ -16,10 +16,8 @@ public class JsInitializersTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public JsInitializersTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -37,6 +35,9 @@ public class JsInitializersTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public void CanLoadJsModulePackagesFromLibrary()
     {
         Browser.MountTestComponent<ExternalContentPackage>();
-        Browser.Equal<string>("Hello from module", () => Browser.Exists(By.CssSelector(".js-module-message > p")).Text);
+        Browser.Equal<string>(
+            "Hello from module",
+            () => Browser.Exists(By.CssSelector(".js-module-message > p")).Text
+        );
     }
 }

@@ -18,7 +18,10 @@ namespace System.IO.IsolatedStorage
                 isf.Remove();
                 Assert.False(Directory.Exists(root), "store root folder should not exist");
                 string parent = Path.GetDirectoryName(root.TrimEnd(Path.DirectorySeparatorChar));
-                Assert.False(Directory.Exists(parent), $"identity folder {parent} should not exist");
+                Assert.False(
+                    Directory.Exists(parent),
+                    $"identity folder {parent} should not exist"
+                );
             }
         }
 
@@ -62,7 +65,8 @@ namespace System.IO.IsolatedStorage
             using (var isf = GetPresetScope(scope))
             {
                 isf.CreateDirectory("RemoveStoreWithContent_Dir");
-                using (isf.CreateFile("RemoveStoreWithContent_File")) { };
+                using (isf.CreateFile("RemoveStoreWithContent_File")) { }
+                ;
                 string root = isf.GetUserRootDirectory();
                 isf.Remove();
                 Assert.False(Directory.Exists(root));

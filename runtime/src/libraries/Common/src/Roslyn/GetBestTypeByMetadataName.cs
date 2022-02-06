@@ -33,7 +33,10 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
         /// <param name="compilation">The <see cref="Compilation"/> to consider for analysis.</param>
         /// <param name="fullyQualifiedMetadataName">The fully-qualified metadata type name to find.</param>
         /// <returns>The symbol to use for code analysis; otherwise, <see langword="null"/>.</returns>
-        public static INamedTypeSymbol? GetBestTypeByMetadataName(this Compilation compilation, string fullyQualifiedMetadataName)
+        public static INamedTypeSymbol? GetBestTypeByMetadataName(
+            this Compilation compilation,
+            string fullyQualifiedMetadataName
+        )
         {
             // Try to get the unique type with this name, ignoring accessibility
             var type = compilation.GetTypeByMetadataName(fullyQualifiedMetadataName);
@@ -48,14 +51,17 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
                 {
                     foreach (var referencedAssembly in module.ReferencedAssemblySymbols)
                     {
-                        var currentType = referencedAssembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
+                        var currentType = referencedAssembly.GetTypeByMetadataName(
+                            fullyQualifiedMetadataName
+                        );
                         if (currentType is null)
                             continue;
 
                         switch (currentType.GetResultantVisibility())
                         {
                             case SymbolVisibility.Public:
-                            case SymbolVisibility.Internal when referencedAssembly.GivesAccessTo(compilation.Assembly):
+                            case SymbolVisibility.Internal
+                                  when referencedAssembly.GivesAccessTo(compilation.Assembly):
                                 break;
 
                             default:
@@ -114,8 +120,8 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
                         visibility = SymbolVisibility.Internal;
                         break;
 
-                        // For anything else (Public, Protected, ProtectedOrInternal), the
-                        // symbol stays at the level we've gotten so far.
+                    // For anything else (Public, Protected, ProtectedOrInternal), the
+                    // symbol stays at the level we've gotten so far.
                 }
 
                 symbol = symbol.ContainingSymbol;

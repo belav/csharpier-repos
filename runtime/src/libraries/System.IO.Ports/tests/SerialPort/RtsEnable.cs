@@ -14,14 +14,21 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void RtsEnable_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default RtsEnable");
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 com1.Open();
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
@@ -37,7 +44,6 @@ namespace System.IO.Ports.Tests
             VerifyRtsEnableBeforeOpen(true);
         }
 
-
         [ConditionalFact(nameof(HasNullModem))]
         public void RtsEnable_false_BeforeOpen()
         {
@@ -45,11 +51,14 @@ namespace System.IO.Ports.Tests
             VerifyRtsEnableBeforeOpen(false);
         }
 
-
         [ConditionalFact(nameof(HasNullModem))]
         public void RtsEnable_true_false_BeforeOpen()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -58,7 +67,10 @@ namespace System.IO.Ports.Tests
                 com1.RtsEnable = true;
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.SetProperty("RtsEnable", false);
                 com1.RtsEnable = false;
 
@@ -90,7 +102,6 @@ namespace System.IO.Ports.Tests
         {
             Debug.WriteLine("Verifying true RtsEnable after setting Handshake to XOnXOff");
 
-
             VerifyRtsEnableWithHandshake(true, Handshake.XOnXOff);
         }
 
@@ -99,7 +110,6 @@ namespace System.IO.Ports.Tests
         public void RtsEnable_false_Handshake_XOnXOff()
         {
             Debug.WriteLine("Verifying false RtsEnable after setting Handshake to XOnXOff");
-
 
             VerifyRtsEnableWithHandshake(false, Handshake.XOnXOff);
         }
@@ -122,7 +132,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void RtsEnable_true_Handshake_RequestToSendXOnXOff()
         {
-            Debug.WriteLine("Verifying true RtsEnable after setting Handshake to RequestToSendXOnXOff");
+            Debug.WriteLine(
+                "Verifying true RtsEnable after setting Handshake to RequestToSendXOnXOff"
+            );
             VerifyRtsEnableWithHandshake(true, Handshake.RequestToSendXOnXOff);
         }
 
@@ -130,14 +142,20 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void RtsEnable_false_Handshake_RequestToSendXOnXOff()
         {
-            Debug.WriteLine("Verifying false RtsEnable after setting Handshake to RequestToSendXOnXOff");
+            Debug.WriteLine(
+                "Verifying false RtsEnable after setting Handshake to RequestToSendXOnXOff"
+            );
             VerifyRtsEnableWithHandshake(false, Handshake.RequestToSendXOnXOff);
         }
 
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void RtsEnable_true_false_AfterOpen()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -146,7 +164,10 @@ namespace System.IO.Ports.Tests
                 com1.RtsEnable = true;
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.SetProperty("RtsEnable", false);
                 com1.RtsEnable = false;
 
@@ -161,7 +182,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void RtsEnable_Get_Handshake_None()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -171,7 +196,10 @@ namespace System.IO.Ports.Tests
                 com1.Handshake = Handshake.None;
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.SetProperty("Handshake", Handshake.None);
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
@@ -181,17 +209,23 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void RtsEnable_Get_Handshake_RequestToSend()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying getting RtsEnable with Handshake set to RequestToSend");
 
                 com1.Open();
                 com1.Handshake = Handshake.RequestToSend;
 
-                Assert.Throws<InvalidOperationException>(() =>
-                {
-                    _ = com1.RtsEnable;
-                });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        _ = com1.RtsEnable;
+                    }
+                );
             }
         }
 
@@ -199,17 +233,25 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void RtsEnable_Get_Handshake_RequestToSendXOnXOff()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
-                Debug.WriteLine("Verifying getting RtsEnable with Handshake set to RequestToSendXOnXOff");
+                Debug.WriteLine(
+                    "Verifying getting RtsEnable with Handshake set to RequestToSendXOnXOff"
+                );
 
                 com1.Open();
                 com1.Handshake = Handshake.RequestToSendXOnXOff;
 
-                Assert.Throws<InvalidOperationException>(() =>
-                {
-                    _ = com1.RtsEnable;
-                });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        _ = com1.RtsEnable;
+                    }
+                );
             }
         }
 
@@ -217,7 +259,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void RtsEnable_Get_Handshake_XOnXOff()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -227,7 +273,10 @@ namespace System.IO.Ports.Tests
                 com1.Handshake = Handshake.XOnXOff;
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.SetProperty("Handshake", Handshake.XOnXOff);
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
@@ -238,12 +287,19 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyRtsEnableBeforeOpen(bool rtsEnable)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.RtsEnable = rtsEnable;
                 com1.Open();
@@ -255,15 +311,21 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void VerifyRtsEnableAfterOpen(bool rtsEnable)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Open();
                 com1.RtsEnable = rtsEnable;
@@ -277,14 +339,21 @@ namespace System.IO.Ports.Tests
 
         private void VerifyRtsEnableWithHandshake(bool rtsEnable, Handshake handshake)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
                 Handshake originalHandshake;
                 bool expetectedRtsEnable;
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.RtsEnable = rtsEnable;
                 com1.Open();
@@ -311,7 +380,10 @@ namespace System.IO.Ports.Tests
                     com1.RtsEnable = rtsEnable;
                 }
 
-                expetectedRtsEnable = handshake == Handshake.RequestToSend || handshake == Handshake.RequestToSendXOnXOff || rtsEnable;
+                expetectedRtsEnable =
+                    handshake == Handshake.RequestToSend
+                    || handshake == Handshake.RequestToSendXOnXOff
+                    || rtsEnable;
 
                 VerifyRtsEnable(com1, expetectedRtsEnable);
 
@@ -332,7 +404,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyRtsEnable(SerialPort com1, bool expectedRtsEnable)
         {
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 com2.Open();
 
@@ -344,7 +420,8 @@ namespace System.IO.Ports.Tests
 
         private bool IsRequestToSend(SerialPort com)
         {
-            return com.Handshake == Handshake.RequestToSend || com.Handshake == Handshake.RequestToSendXOnXOff;
+            return com.Handshake == Handshake.RequestToSend
+                || com.Handshake == Handshake.RequestToSendXOnXOff;
         }
 
         #endregion

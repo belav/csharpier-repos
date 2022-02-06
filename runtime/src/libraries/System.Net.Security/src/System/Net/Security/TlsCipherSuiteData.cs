@@ -10,6 +10,7 @@ namespace System.Net.Security
     internal partial struct TlsCipherSuiteData
     {
         internal ExchangeAlgorithmType KeyExchangeAlgorithm;
+
         // The Key Exchange size isn't part of the CipherSuite
         internal CipherAlgorithmType CipherAlgorithm;
         internal int CipherAlgorithmStrength;
@@ -21,12 +22,16 @@ namespace System.Net.Security
         {
             Debug.Assert(
                 s_tlsLookup.Count == LookupCount,
-                $"Lookup dictionary was of size {s_tlsLookup.Count} instead of {LookupCount}");
+                $"Lookup dictionary was of size {s_tlsLookup.Count} instead of {LookupCount}"
+            );
 
             foreach (object? value in Enum.GetValues(typeof(TlsCipherSuite)))
             {
                 TlsCipherSuite val = (TlsCipherSuite)value!;
-                Debug.Assert(s_tlsLookup.ContainsKey(val), $"No mapping found for {val} ({(int)val})");
+                Debug.Assert(
+                    s_tlsLookup.ContainsKey(val),
+                    $"No mapping found for {val} ({(int)val})"
+                );
             }
         }
 
@@ -52,7 +57,7 @@ namespace System.Net.Security
             switch (hash)
             {
                 case HashAlgorithmType.None:
-                     return 0;
+                    return 0;
                 case HashAlgorithmType.Md5:
                     return 128;
                 case HashAlgorithmType.Sha1:

@@ -16,30 +16,34 @@ namespace AutoMapper.UnitTests
 
             public class Customer
             {
-                public string Æøå { get; set; }
+                public string Aoa { get; set; }
             }
 
             public class OrderDto
             {
-                public string CustomerÆøå { get; set; }
+                public string CustomerAoa { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Order, OrderDto>();
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<Order, OrderDto>();
+                    }
+                );
 
             protected override void Because_of()
             {
-                _result = Mapper.Map<Order, OrderDto>(new Order {Customer = new Customer {Æøå = "Bob"}});
+                _result = Mapper.Map<Order, OrderDto>(
+                    new Order { Customer = new Customer { Aoa = "Bob" } }
+                );
             }
 
             [Fact]
             public void Should_match_to_identical_property_name_on_destination()
             {
-                _result.CustomerÆøå.ShouldBe("Bob");
+                _result.CustomerAoa.ShouldBe("Bob");
             }
         }
-
     }
 }

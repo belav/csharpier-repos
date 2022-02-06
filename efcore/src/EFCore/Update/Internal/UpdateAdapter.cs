@@ -72,8 +72,10 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IUpdateEntry? FindPrincipal(IUpdateEntry dependentEntry, IForeignKey foreignKey)
-            => _stateManager.FindPrincipal((InternalEntityEntry)dependentEntry, foreignKey);
+        public virtual IUpdateEntry? FindPrincipal(
+            IUpdateEntry dependentEntry,
+            IForeignKey foreignKey
+        ) => _stateManager.FindPrincipal((InternalEntityEntry)dependentEntry, foreignKey);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,8 +83,10 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IEnumerable<IUpdateEntry> GetDependents(IUpdateEntry principalEntry, IForeignKey foreignKey)
-            => _stateManager.GetDependents((InternalEntityEntry)principalEntry, foreignKey);
+        public virtual IEnumerable<IUpdateEntry> GetDependents(
+            IUpdateEntry principalEntry,
+            IForeignKey foreignKey
+        ) => _stateManager.GetDependents((InternalEntityEntry)principalEntry, foreignKey);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,8 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IUpdateEntry? TryGetEntry(IKey key, object?[] keyValues)
-            => _stateManager.TryGetEntry(key, keyValues);
+        public virtual IUpdateEntry? TryGetEntry(IKey key, object?[] keyValues) =>
+            _stateManager.TryGetEntry(key, keyValues);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -99,8 +103,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IEnumerable<IUpdateEntry> Entries
-            => _stateManager.Entries;
+        public virtual IEnumerable<IUpdateEntry> Entries => _stateManager.Entries;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -122,8 +125,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void CascadeChanges()
-            => _stateManager.CascadeChanges(force: true);
+        public virtual void CascadeChanges() => _stateManager.CascadeChanges(force: true);
 
         /// <summary>
         ///     Forces immediate cascading deletion of child/dependent entities when they are either
@@ -132,8 +134,10 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         /// </summary>
         /// <param name="entry">The entry.</param>
         /// <param name="foreignKeys">The foreign keys to consider when cascading.</param>
-        public virtual void CascadeDelete(IUpdateEntry entry, IEnumerable<IForeignKey>? foreignKeys = null)
-            => _stateManager.CascadeDelete((InternalEntityEntry)entry, force: true, foreignKeys);
+        public virtual void CascadeDelete(
+            IUpdateEntry entry,
+            IEnumerable<IForeignKey>? foreignKeys = null
+        ) => _stateManager.CascadeDelete((InternalEntityEntry)entry, force: true, foreignKeys);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -141,8 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IList<IUpdateEntry> GetEntriesToSave()
-            => _stateManager.GetEntriesToSave(cascadeChanges: false);
+        public virtual IList<IUpdateEntry> GetEntriesToSave() =>
+            _stateManager.GetEntriesToSave(cascadeChanges: false);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -152,8 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         /// </summary>
         public virtual IUpdateEntry CreateEntry(
             IDictionary<string, object?> values,
-            IEntityType entityType)
-            => _stateManager.CreateEntry(values, entityType);
+            IEntityType entityType
+        ) => _stateManager.CreateEntry(values, entityType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -161,7 +165,6 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IModel Model
-            => _stateManager.Model;
+        public virtual IModel Model => _stateManager.Model;
     }
 }

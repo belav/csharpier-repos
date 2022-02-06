@@ -45,7 +45,10 @@ public class Program
             }
         }
 
-        var reader = XmlReader.Create(inputFile, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit });
+        var reader = XmlReader.Create(
+            inputFile,
+            new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
+        );
         var serializer = new XmlSerializer(typeof(Tree));
         var tree = (Tree)serializer.Deserialize(reader);
 
@@ -60,7 +63,10 @@ public class Program
                 var outputPath = outputFile.Trim('"');
                 var prefix = Path.GetFileName(inputFile);
                 var outputMainFile = Path.Combine(outputPath, $"{prefix}.Main.Generated.cs");
-                var outputInternalFile = Path.Combine(outputPath, $"{prefix}.Internal.Generated.cs");
+                var outputInternalFile = Path.Combine(
+                    outputPath,
+                    $"{prefix}.Internal.Generated.cs"
+                );
                 var outputSyntaxFile = Path.Combine(outputPath, $"{prefix}.Syntax.Generated.cs");
 
                 WriteToFile(tree, SourceWriter.WriteMain, outputMainFile);
@@ -79,10 +85,16 @@ public class Program
     private static void WriteUsage()
     {
         Console.WriteLine("Invalid usage");
-        Console.WriteLine(typeof(Program).Assembly.ManifestModule.Name + " input-file output-file [/write-test]");
+        Console.WriteLine(
+            typeof(Program).Assembly.ManifestModule.Name + " input-file output-file [/write-test]"
+        );
     }
 
-    private static void WriteToFile(Tree tree, Action<TextWriter, Tree> writeAction, string outputFile)
+    private static void WriteToFile(
+        Tree tree,
+        Action<TextWriter, Tree> writeAction,
+        string outputFile
+    )
     {
         var stringBuilder = new StringBuilder();
         var writer = new StringWriter(stringBuilder);
@@ -98,7 +110,12 @@ public class Program
 
         try
         {
-            using (var outFile = new StreamWriter(File.Open(outputFile, FileMode.Create), Encoding.UTF8))
+            using (
+                var outFile = new StreamWriter(
+                    File.Open(outputFile, FileMode.Create),
+                    Encoding.UTF8
+                )
+            )
             {
                 outFile.Write(text);
             }

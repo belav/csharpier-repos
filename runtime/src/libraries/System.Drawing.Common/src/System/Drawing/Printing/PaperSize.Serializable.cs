@@ -6,7 +6,5 @@
 namespace System.Drawing.Printing
 {
     [Serializable]
-    partial class PaperSize
-    {
-    }
+    partial class PaperSize { }
 }

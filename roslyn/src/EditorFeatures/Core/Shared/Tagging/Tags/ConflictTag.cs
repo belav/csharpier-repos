@@ -12,9 +12,6 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 
         public static readonly ConflictTag Instance = new();
 
-        private ConflictTag()
-            : base(TagId)
-        {
-        }
+        private ConflictTag() : base(TagId) { }
     }
 }

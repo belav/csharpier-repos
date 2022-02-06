@@ -40,14 +40,14 @@ namespace System.Net.Http.Internal
                 {
                     new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string,string>(null, null),
-                        new KeyValuePair<string,string>("n0", ""),
-                        new KeyValuePair<string,string>("n1", "v1"),
-                        new KeyValuePair<string,string>("n@2", "v@2"),
-                        new KeyValuePair<string,string>("n 3", "v 3"),
-                        new KeyValuePair<string,string>("n+4", "v+4"),
-                        new KeyValuePair<string,string>("n;5", "v;5"),
-                        new KeyValuePair<string,string>("n=5", "v=5"),
+                        new KeyValuePair<string, string>(null, null),
+                        new KeyValuePair<string, string>("n0", ""),
+                        new KeyValuePair<string, string>("n1", "v1"),
+                        new KeyValuePair<string, string>("n@2", "v@2"),
+                        new KeyValuePair<string, string>("n 3", "v 3"),
+                        new KeyValuePair<string, string>("n+4", "v+4"),
+                        new KeyValuePair<string, string>("n;5", "v;5"),
+                        new KeyValuePair<string, string>("n=5", "v=5"),
                     }
                 };
             }
@@ -59,7 +59,8 @@ namespace System.Net.Http.Internal
             {
                 get
                 {
-                    TheoryDataSet<HttpValueCollection, string> dataSet = new TheoryDataSet<HttpValueCollection, string>();
+                    TheoryDataSet<HttpValueCollection, string> dataSet =
+                        new TheoryDataSet<HttpValueCollection, string>();
 
                     var hvc1 = CreateInstance();
                     hvc1.Add(null, null);
@@ -170,14 +171,19 @@ namespace System.Net.Http.Internal
             }
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => HttpValueCollection.Create(list), TooManyKeysError);
+            Assert.Throws<InvalidOperationException>(
+                () => HttpValueCollection.Create(list),
+                TooManyKeysError
+            );
         }
 
         private static string TooManyKeysError
         {
             get
             {
-                return "The number of keys in a NameValueCollection has exceeded the limit of '" + _maxCollectionKeys + "'. You can adjust it by modifying the MaxHttpCollectionKeys property on the 'System.Net.Http.Formatting.MediaTypeFormatter' class.";
+                return "The number of keys in a NameValueCollection has exceeded the limit of '"
+                    + _maxCollectionKeys
+                    + "'. You can adjust it by modifying the MaxHttpCollectionKeys property on the 'System.Net.Http.Formatting.MediaTypeFormatter' class.";
             }
         }
 
@@ -222,7 +228,8 @@ namespace System.Net.Http.Internal
             // Act && Assert
             Assert.Throws<InvalidOperationException>(
                 () => collection.Add(_maxCollectionKeys.ToString(), _maxCollectionKeys.ToString()),
-                TooManyKeysError);
+                TooManyKeysError
+            );
         }
 
         [Fact]
@@ -239,13 +246,15 @@ namespace System.Net.Http.Internal
             HttpValueCollection collection = CreateInstance();
 
             // Act && Assert
-            Assert.DoesNotThrow(() =>
-            {
-                for (int i = 0; i < 1001; i++)
+            Assert.DoesNotThrow(
+                () =>
                 {
-                    collection.Add("key", i.ToString());
+                    for (int i = 0; i < 1001; i++)
+                    {
+                        collection.Add("key", i.ToString());
+                    }
                 }
-            });
+            );
         }
 #endif
 
@@ -283,7 +292,9 @@ namespace System.Net.Http.Internal
 
         [Theory]
         [PropertyData("KeyValuePairs")]
-        public void GetIsEquivalentToIndexerProperty(IEnumerable<KeyValuePair<string, string>> input)
+        public void GetIsEquivalentToIndexerProperty(
+            IEnumerable<KeyValuePair<string, string>> input
+        )
         {
             var nvc = HttpValueCollection.Create(input);
 
@@ -299,7 +310,10 @@ namespace System.Net.Http.Internal
 
         [Theory]
         [PropertyData("ToStringTestData", PropertyType = typeof(TestPropertyHolder))]
-        internal void ToString_GeneratesCorrectOutput(HttpValueCollection input, string expectedOutput)
+        internal void ToString_GeneratesCorrectOutput(
+            HttpValueCollection input,
+            string expectedOutput
+        )
         {
             string actualOutput = input.ToString();
             Assert.Equal(expectedOutput, actualOutput);

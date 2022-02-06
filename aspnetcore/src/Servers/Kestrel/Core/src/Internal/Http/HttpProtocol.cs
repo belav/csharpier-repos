@@ -30,10 +30,18 @@ using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestExceptio
 
 internal abstract partial class HttpProtocol : IHttpResponseControl
 {
-    private static readonly byte[] _bytesConnectionClose = Encoding.ASCII.GetBytes("\r\nConnection: close");
-    private static readonly byte[] _bytesConnectionKeepAlive = Encoding.ASCII.GetBytes("\r\nConnection: keep-alive");
-    private static readonly byte[] _bytesTransferEncodingChunked = Encoding.ASCII.GetBytes("\r\nTransfer-Encoding: chunked");
-    private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes("\r\nServer: " + Constants.ServerName);
+    private static readonly byte[] _bytesConnectionClose = Encoding.ASCII.GetBytes(
+        "\r\nConnection: close"
+    );
+    private static readonly byte[] _bytesConnectionKeepAlive = Encoding.ASCII.GetBytes(
+        "\r\nConnection: keep-alive"
+    );
+    private static readonly byte[] _bytesTransferEncodingChunked = Encoding.ASCII.GetBytes(
+        "\r\nTransfer-Encoding: chunked"
+    );
+    private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes(
+        "\r\nServer: " + Constants.ServerName
+    );
     internal const string SchemeHttp = "http";
     internal const string SchemeHttps = "https";
 
@@ -52,6 +60,7 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     // Keep-alive is default for HTTP/1.1 and HTTP/2; parsing and errors will change its value
     // volatile, see: https://msdn.microsoft.com/en-us/library/x13ttww7.aspx
     protected volatile bool _keepAlive = true;
+
     // _canWriteResponseBody is set in CreateResponseHeaders.
     // If we are writing with GetMemory/Advance before calling StartAsync, assume we can write and throw away contents if we can't.
     private bool _canWriteResponseBody = true;
@@ -62,6 +71,7 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     private BadHttpRequestException? _requestRejectedException;
 
     protected HttpVersion _httpVersion;
+
     // This should only be used by the application, not the server. This is settable on HttpRequest but we don't want that to affect
     // how Kestrel processes requests/responses.
     private string? _httpProtocol;
@@ -103,6 +113,7 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
     protected KestrelTrace Log => ServiceContext.Log;
     private DateHeaderValueManager DateHeaderValueManager => ServiceContext.DateHeaderValueManager;
+
     // Hold direct reference to ServerOptions since this is used very often in the request processing path
     protected KestrelServerOptions ServerOptions { get; set; } = default!;
     protected string ConnectionId => _context.ConnectionId;
@@ -168,7 +179,6 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
             return string.Empty;
         }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         set
         {
@@ -249,7 +259,6 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     public string? ReasonPhrase
     {
         get => _reasonPhrase;
-
         set
         {
             if (HasResponseStarted)
@@ -303,11 +312,14 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         }
     }
 
-    public bool HasResponseStarted => _requestProcessingStatus >= RequestProcessingStatus.HeadersCommitted;
+    public bool HasResponseStarted =>
+        _requestProcessingStatus >= RequestProcessingStatus.HeadersCommitted;
 
-    public bool HasFlushedHeaders => _requestProcessingStatus >= RequestProcessingStatus.HeadersFlushed;
+    public bool HasFlushedHeaders =>
+        _requestProcessingStatus >= RequestProcessingStatus.HeadersFlushed;
 
-    public bool HasResponseCompleted => _requestProcessingStatus == RequestProcessingStatus.ResponseCompleted;
+    public bool HasResponseCompleted =>
+        _requestProcessingStatus == RequestProcessingStatus.ResponseCompleted;
 
     protected HttpRequestHeaders HttpRequestHeaders { get; set; } = new HttpRequestHeaders();
 
@@ -320,7 +332,8 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             _bodyControl = new BodyControl(bodyControl: this, this);
         }
 
-        (RequestBody, ResponseBody, RequestBodyPipeReader, ResponseBodyPipeWriter) = _bodyControl.Start(messageBody);
+        (RequestBody, ResponseBody, RequestBodyPipeReader, ResponseBodyPipeWriter) =
+            _bodyControl.Start(messageBody);
         _requestStreamInternal = RequestBody;
         _responseStreamInternal = ResponseBody;
     }
@@ -423,21 +436,13 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
     protected abstract void ApplicationAbort();
 
-    protected virtual void OnRequestProcessingEnding()
-    {
-    }
+    protected virtual void OnRequestProcessingEnding() { }
 
-    protected virtual void OnRequestProcessingEnded()
-    {
-    }
+    protected virtual void OnRequestProcessingEnded() { }
 
-    protected virtual void BeginRequestProcessing()
-    {
-    }
+    protected virtual void BeginRequestProcessing() { }
 
-    protected virtual void OnErrorAfterResponseStarted()
-    {
-    }
+    protected virtual void OnErrorAfterResponseStarted() { }
 
     protected virtual bool BeginRead(out ValueTask<ReadResult> awaitable)
     {
@@ -494,7 +499,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         if (shouldScheduleCancellation)
         {
             // Potentially calling user code. CancelRequestAbortedToken logs any exceptions.
-            ServiceContext.Scheduler.Schedule(state => ((HttpProtocol)state!).CancelRequestAbortedTokenCallback(), this);
+            ServiceContext.Scheduler.Schedule(
+                state => ((HttpProtocol)state!).CancelRequestAbortedTokenCallback(),
+                this
+            );
         }
     }
 
@@ -517,14 +525,23 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         }
     }
 
-    public virtual void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value, bool checkForNewlineChars)
+    public virtual void OnHeader(
+        ReadOnlySpan<byte> name,
+        ReadOnlySpan<byte> value,
+        bool checkForNewlineChars
+    )
     {
         IncrementRequestHeadersCount();
 
         HttpRequestHeaders.Append(name, value, checkForNewlineChars);
     }
 
-    public virtual void OnHeader(int index, bool indexOnly, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    public virtual void OnHeader(
+        int index,
+        bool indexOnly,
+        ReadOnlySpan<byte> name,
+        ReadOnlySpan<byte> value
+    )
     {
         IncrementRequestHeadersCount();
 
@@ -537,7 +554,11 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         IncrementRequestHeadersCount();
 
         string key = name.GetHeaderName();
-        var valueStr = value.GetRequestHeaderString(key, HttpRequestHeaders.EncodingSelector, checkForNewlineChars: false);
+        var valueStr = value.GetRequestHeaderString(
+            key,
+            HttpRequestHeaders.EncodingSelector,
+            checkForNewlineChars: false
+        );
         RequestTrailers.Append(key, valueStr);
     }
 
@@ -560,7 +581,8 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         RequestTrailersAvailable = true;
     }
 
-    public async Task ProcessRequestsAsync<TContext>(IHttpApplication<TContext> application) where TContext : notnull
+    public async Task ProcessRequestsAsync<TContext>(IHttpApplication<TContext> application)
+        where TContext : notnull
     {
         try
         {
@@ -611,7 +633,8 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         }
     }
 
-    private async Task ProcessRequests<TContext>(IHttpApplication<TContext> application) where TContext : notnull
+    private async Task ProcessRequests<TContext>(IHttpApplication<TContext> application)
+        where TContext : notnull
     {
         while (_keepAlive)
         {
@@ -655,7 +678,6 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             IsUpgradableRequest = messageBody.RequestUpgrade;
 
             InitializeBodyControl(messageBody);
-
 
             var context = application.CreateContext(this);
 
@@ -790,7 +812,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
         return Task.CompletedTask;
 
-        static async Task ProcessEvents(HttpProtocol protocol, Stack<KeyValuePair<Func<object, Task>, object>> events)
+        static async Task ProcessEvents(
+            HttpProtocol protocol,
+            Stack<KeyValuePair<Func<object, Task>, object>> events
+        )
         {
             // Try/Catch is outside the loop as any error that occurs is before the request starts.
             // So we want to report it as an ApplicationError to fail the request and not process more events.
@@ -818,7 +843,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
         return Task.CompletedTask;
 
-        static async Task ProcessEvents(HttpProtocol protocol, Stack<KeyValuePair<Func<object, Task>, object>> events)
+        static async Task ProcessEvents(
+            HttpProtocol protocol,
+            Stack<KeyValuePair<Func<object, Task>, object>> events
+        )
         {
             // Try/Catch is inside the loop as any error that occurs is after the request has finished.
             // So we will just log it and keep processing the events, as the completion has already happened.
@@ -830,7 +858,11 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
                 }
                 catch (Exception ex)
                 {
-                    protocol.Log.ApplicationError(protocol.ConnectionId, protocol.TraceIdentifier, ex);
+                    protocol.Log.ApplicationError(
+                        protocol.ConnectionId,
+                        protocol.TraceIdentifier,
+                        ex
+                    );
                 }
             }
         }
@@ -840,10 +872,12 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     {
         var responseHeaders = HttpResponseHeaders;
 
-        if (responseHeaders != null &&
-            !responseHeaders.HasTransferEncoding &&
-            responseHeaders.ContentLength.HasValue &&
-            _responseBytesWritten + count > responseHeaders.ContentLength.Value)
+        if (
+            responseHeaders != null
+            && !responseHeaders.HasTransferEncoding
+            && responseHeaders.ContentLength.HasValue
+            && _responseBytesWritten + count > responseHeaders.ContentLength.Value
+        )
         {
             _keepAlive = false;
             ThrowTooManyBytesWritten(count);
@@ -863,7 +897,11 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     {
         var responseHeaders = HttpResponseHeaders;
         return new InvalidOperationException(
-            CoreStrings.FormatTooManyBytesWritten(_responseBytesWritten + count, responseHeaders.ContentLength!.Value));
+            CoreStrings.FormatTooManyBytesWritten(
+                _responseBytesWritten + count,
+                responseHeaders.ContentLength!.Value
+            )
+        );
     }
 
     private void CheckLastWrite()
@@ -875,10 +913,12 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         // the final bytes of the response and gracefully closes the connection.
         //
         // Called after VerifyAndUpdateWrite(), so _responseBytesWritten has already been updated.
-        if (responseHeaders != null &&
-            !responseHeaders.HasTransferEncoding &&
-            responseHeaders.ContentLength.HasValue &&
-            _responseBytesWritten == responseHeaders.ContentLength.Value)
+        if (
+            responseHeaders != null
+            && !responseHeaders.HasTransferEncoding
+            && responseHeaders.ContentLength.HasValue
+            && _responseBytesWritten == responseHeaders.ContentLength.Value
+        )
         {
             PreventRequestAbortedCancellation();
         }
@@ -888,11 +928,13 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     {
         var responseHeaders = HttpResponseHeaders;
 
-        if (Method != HttpMethod.Head &&
-            StatusCode != StatusCodes.Status304NotModified &&
-            !responseHeaders.HasTransferEncoding &&
-            responseHeaders.ContentLength.HasValue &&
-            _responseBytesWritten < responseHeaders.ContentLength.Value)
+        if (
+            Method != HttpMethod.Head
+            && StatusCode != StatusCodes.Status304NotModified
+            && !responseHeaders.HasTransferEncoding
+            && responseHeaders.ContentLength.HasValue
+            && _responseBytesWritten < responseHeaders.ContentLength.Value
+        )
         {
             // We need to close the connection if any bytes were written since the client
             // cannot be certain of how many bytes it will receive.
@@ -902,7 +944,11 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             }
 
             ex = new InvalidOperationException(
-                CoreStrings.FormatTooFewBytesWritten(_responseBytesWritten, responseHeaders.ContentLength.Value));
+                CoreStrings.FormatTooFewBytesWritten(
+                    _responseBytesWritten,
+                    responseHeaders.ContentLength.Value
+                )
+            );
             return false;
         }
 
@@ -917,9 +963,17 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             return default;
         }
 
-        if (_httpVersion != Http.HttpVersion.Http10 &&
-            ((IHeaderDictionary)HttpRequestHeaders).TryGetValue(HeaderNames.Expect, out var expect) &&
-            (expect.FirstOrDefault() ?? "").Equals("100-continue", StringComparison.OrdinalIgnoreCase))
+        if (
+            _httpVersion != Http.HttpVersion.Http10
+            && ((IHeaderDictionary)HttpRequestHeaders).TryGetValue(
+                HeaderNames.Expect,
+                out var expect
+            )
+            && (expect.FirstOrDefault() ?? "").Equals(
+                "100-continue",
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             return Output.Write100ContinueAsync();
         }
@@ -977,7 +1031,13 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
         var responseHeaders = CreateResponseHeaders(appCompleted);
 
-        Output.WriteResponseHeaders(StatusCode, ReasonPhrase, responseHeaders, _autoChunk, appCompleted);
+        Output.WriteResponseHeaders(
+            StatusCode,
+            ReasonPhrase,
+            responseHeaders,
+            _autoChunk,
+            appCompleted
+        );
     }
 
     private void VerifyInitializeState(int firstWriteByteCount)
@@ -1118,9 +1178,11 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             Log.InvalidResponseHeaderRemoved();
         }
 
-        if (_keepAlive &&
-            hasConnection &&
-            (HttpHeaders.ParseConnection(responseHeaders) & ConnectionOptions.KeepAlive) == 0)
+        if (
+            _keepAlive
+            && hasConnection
+            && (HttpHeaders.ParseConnection(responseHeaders) & ConnectionOptions.KeepAlive) == 0
+        )
         {
             _keepAlive = false;
         }
@@ -1130,8 +1192,11 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         // chunked is applied to a response payload body, the sender MUST either
         // apply chunked as the final transfer coding or terminate the message
         // by closing the connection.
-        if (hasTransferEncoding &&
-            HttpHeaders.GetFinalTransferCoding(responseHeaders.HeaderTransferEncoding) != TransferCoding.Chunked)
+        if (
+            hasTransferEncoding
+            && HttpHeaders.GetFinalTransferCoding(responseHeaders.HeaderTransferEncoding)
+                != TransferCoding.Chunked
+        )
         {
             _keepAlive = false;
         }
@@ -1196,7 +1261,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
         if (_context.AltSvcHeader != null && !responseHeaders.HasAltSvc)
         {
-            responseHeaders.SetRawAltSvc(_context.AltSvcHeader.Value, _context.AltSvcHeader.RawBytes);
+            responseHeaders.SetRawAltSvc(
+                _context.AltSvcHeader.Value,
+                _context.AltSvcHeader.RawBytes
+            );
         }
 
         if (ServerOptions.AddServerHeader && !responseHeaders.HasServer)
@@ -1216,27 +1284,31 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     private bool CanWriteResponseBody()
     {
         // List of status codes taken from Microsoft.Net.Http.Server.Response
-        return Method != HttpMethod.Head &&
-               StatusCode != StatusCodes.Status204NoContent &&
-               StatusCode != StatusCodes.Status205ResetContent &&
-               StatusCode != StatusCodes.Status304NotModified;
+        return Method != HttpMethod.Head
+            && StatusCode != StatusCodes.Status204NoContent
+            && StatusCode != StatusCodes.Status205ResetContent
+            && StatusCode != StatusCodes.Status304NotModified;
     }
 
     private bool CanAutoSetContentLengthZeroResponseHeader()
     {
-        return Method != HttpMethod.Head &&
-               StatusCode != StatusCodes.Status204NoContent &&
-               StatusCode != StatusCodes.Status304NotModified;
+        return Method != HttpMethod.Head
+            && StatusCode != StatusCodes.Status204NoContent
+            && StatusCode != StatusCodes.Status304NotModified;
     }
 
     private static void ThrowResponseAlreadyStartedException(string value)
     {
-        throw new InvalidOperationException(CoreStrings.FormatParameterReadOnlyAfterResponseStarted(value));
+        throw new InvalidOperationException(
+            CoreStrings.FormatParameterReadOnlyAfterResponseStarted(value)
+        );
     }
 
     private void RejectNonBodyTransferEncodingResponse(bool appCompleted)
     {
-        var ex = new InvalidOperationException(CoreStrings.FormatHeaderNotAllowedOnResponse("Transfer-Encoding", StatusCode));
+        var ex = new InvalidOperationException(
+            CoreStrings.FormatHeaderNotAllowedOnResponse("Transfer-Encoding", StatusCode)
+        );
         if (!appCompleted)
         {
             // Back out of header creation surface exception in user code
@@ -1257,7 +1329,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         SetErrorResponseHeaders(ex.StatusCode);
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        if (ex is Microsoft.AspNetCore.Server.Kestrel.Core.BadHttpRequestException kestrelEx && !StringValues.IsNullOrEmpty(kestrelEx.AllowedHeader))
+        if (
+            ex is Microsoft.AspNetCore.Server.Kestrel.Core.BadHttpRequestException kestrelEx
+            && !StringValues.IsNullOrEmpty(kestrelEx.AllowedHeader)
+        )
 #pragma warning restore CS0618 // Type or member is obsolete
         {
             HttpResponseHeaders.HeaderAllow = kestrelEx.AllowedHeader;
@@ -1266,7 +1341,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
     private void SetErrorResponseHeaders(int statusCode)
     {
-        Debug.Assert(!HasResponseStarted, $"{nameof(SetErrorResponseHeaders)} called after response had already started.");
+        Debug.Assert(
+            !HasResponseStarted,
+            $"{nameof(SetErrorResponseHeaders)} called after response had already started."
+        );
 
         StatusCode = statusCode;
         ReasonPhrase = null;
@@ -1299,27 +1377,33 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     private void ThrowWritingToResponseBodyNotSupported()
     {
         // Throw Exception for 204, 205, 304 responses.
-        throw new InvalidOperationException(CoreStrings.FormatWritingToResponseBodyNotSupported(StatusCode));
+        throw new InvalidOperationException(
+            CoreStrings.FormatWritingToResponseBodyNotSupported(StatusCode)
+        );
     }
 
     [StackTraceHidden]
     private void ThrowResponseAbortedException()
     {
-        throw new ObjectDisposedException(CoreStrings.UnhandledApplicationException, _applicationException);
+        throw new ObjectDisposedException(
+            CoreStrings.UnhandledApplicationException,
+            _applicationException
+        );
     }
 
     [StackTraceHidden]
     [DoesNotReturn]
-    public void ThrowRequestTargetRejected(Span<byte> target)
-        => throw GetInvalidRequestTargetException(target);
+    public void ThrowRequestTargetRejected(Span<byte> target) =>
+        throw GetInvalidRequestTargetException(target);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private BadHttpRequestException GetInvalidRequestTargetException(ReadOnlySpan<byte> target)
-        => KestrelBadHttpRequestException.GetException(
+    private BadHttpRequestException GetInvalidRequestTargetException(ReadOnlySpan<byte> target) =>
+        KestrelBadHttpRequestException.GetException(
             RequestRejectionReason.InvalidRequestTarget,
             Log.IsEnabled(LogLevel.Information)
-                ? target.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
-                : string.Empty);
+              ? target.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
+              : string.Empty
+        );
 
     public void SetBadRequestState(BadHttpRequestException ex)
     {
@@ -1377,7 +1461,9 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
         if (_isLeasedMemoryInvalid)
         {
-            throw new InvalidOperationException("Invalid ordering of calling StartAsync or CompleteAsync and Advance.");
+            throw new InvalidOperationException(
+                "Invalid ordering of calling StartAsync or CompleteAsync and Advance."
+            );
         }
 
         if (_canWriteResponseBody)
@@ -1429,7 +1515,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     {
         if (exception != null)
         {
-            var wrappedException = new ConnectionAbortedException("The BodyPipe was completed with an exception.", exception);
+            var wrappedException = new ConnectionAbortedException(
+                "The BodyPipe was completed with an exception.",
+                exception
+            );
             ReportApplicationError(wrappedException);
 
             if (HasResponseStarted)
@@ -1487,7 +1576,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         throw exception;
     }
 
-    public ValueTask<FlushResult> WritePipeAsync(ReadOnlyMemory<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> WritePipeAsync(
+        ReadOnlyMemory<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         // For the first write, ensure headers are flushed if WriteDataAsync isn't called.
         if (!HasResponseStarted)
@@ -1523,7 +1615,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         }
     }
 
-    private ValueTask<FlushResult> FirstWriteAsync(ReadOnlyMemory<byte> data, CancellationToken cancellationToken)
+    private ValueTask<FlushResult> FirstWriteAsync(
+        ReadOnlyMemory<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         Debug.Assert(!HasResponseStarted);
 
@@ -1536,14 +1631,21 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         return FirstWriteAsyncInternal(data, cancellationToken);
     }
 
-    private async ValueTask<FlushResult> FirstWriteAsyncAwaited(Task initializeTask, ReadOnlyMemory<byte> data, CancellationToken cancellationToken)
+    private async ValueTask<FlushResult> FirstWriteAsyncAwaited(
+        Task initializeTask,
+        ReadOnlyMemory<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         await initializeTask;
 
         return await FirstWriteAsyncInternal(data, cancellationToken);
     }
 
-    private ValueTask<FlushResult> FirstWriteAsyncInternal(ReadOnlyMemory<byte> data, CancellationToken cancellationToken)
+    private ValueTask<FlushResult> FirstWriteAsyncInternal(
+        ReadOnlyMemory<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         var responseHeaders = InitializeResponseFirstWrite(data.Length);
 
@@ -1553,21 +1655,47 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             {
                 if (data.Length == 0)
                 {
-                    Output.WriteResponseHeaders(StatusCode, ReasonPhrase, responseHeaders, _autoChunk, appCompleted: false);
+                    Output.WriteResponseHeaders(
+                        StatusCode,
+                        ReasonPhrase,
+                        responseHeaders,
+                        _autoChunk,
+                        appCompleted: false
+                    );
                     return Output.FlushAsync(cancellationToken);
                 }
 
-                return Output.FirstWriteChunkedAsync(StatusCode, ReasonPhrase, responseHeaders, _autoChunk, data.Span, cancellationToken);
+                return Output.FirstWriteChunkedAsync(
+                    StatusCode,
+                    ReasonPhrase,
+                    responseHeaders,
+                    _autoChunk,
+                    data.Span,
+                    cancellationToken
+                );
             }
             else
             {
                 CheckLastWrite();
-                return Output.FirstWriteAsync(StatusCode, ReasonPhrase, responseHeaders, _autoChunk, data.Span, cancellationToken);
+                return Output.FirstWriteAsync(
+                    StatusCode,
+                    ReasonPhrase,
+                    responseHeaders,
+                    _autoChunk,
+                    data.Span,
+                    cancellationToken
+                );
             }
         }
         else
         {
-            Output.WriteResponseHeaders(StatusCode, ReasonPhrase, responseHeaders, _autoChunk, appCompleted: false);
+            Output.WriteResponseHeaders(
+                StatusCode,
+                ReasonPhrase,
+                responseHeaders,
+                _autoChunk,
+                appCompleted: false
+            );
             HandleNonBodyResponseWrite();
             return Output.FlushAsync(cancellationToken);
         }
@@ -1579,7 +1707,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private async ValueTask<FlushResult> FlushAsyncAwaited(Task initializeTask, CancellationToken cancellationToken)
+    private async ValueTask<FlushResult> FlushAsyncAwaited(
+        Task initializeTask,
+        CancellationToken cancellationToken
+    )
     {
         await initializeTask;
         return await Output.FlushAsync(cancellationToken);
@@ -1590,7 +1721,11 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         return WritePipeAsync(data, cancellationToken).GetAsTask();
     }
 
-    public async ValueTask<FlushResult> WriteAsyncAwaited(Task initializeTask, ReadOnlyMemory<byte> data, CancellationToken cancellationToken)
+    public async ValueTask<FlushResult> WriteAsyncAwaited(
+        Task initializeTask,
+        ReadOnlyMemory<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         await initializeTask;
 
@@ -1610,7 +1745,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             else
             {
                 CheckLastWrite();
-                return await Output.WriteDataToPipeAsync(data.Span, cancellationToken: cancellationToken);
+                return await Output.WriteDataToPipeAsync(
+                    data.Span,
+                    cancellationToken: cancellationToken
+                );
             }
         }
         else

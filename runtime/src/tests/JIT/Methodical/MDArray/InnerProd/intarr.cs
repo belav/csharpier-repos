@@ -11,7 +11,9 @@ public class intmm
 
     public static void Init2DMatrix(out int[,] m, out int[][] refm)
     {
-        int i, j, temp;
+        int i,
+            j,
+            temp;
         i = 0;
 
         m = new int[size, size];
@@ -46,7 +48,13 @@ public class intmm
         }
     }
 
-    public static void InnerProduct2DRef(out int res, ref int[][] a, ref int[][] b, int row, int col)
+    public static void InnerProduct2DRef(
+        out int res,
+        ref int[][] a,
+        ref int[][] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -60,7 +68,9 @@ public class intmm
 
     public static void Init3DMatrix(int[,,] m, int[][] refm)
     {
-        int i, j, temp;
+        int i,
+            j,
+            temp;
         i = 0;
 
         while (i < size)
@@ -107,7 +117,8 @@ public class intmm
 
         int seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+              => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
@@ -117,7 +128,10 @@ public class intmm
 
         Console.WriteLine();
         Console.WriteLine("2D Array");
-        Console.WriteLine("Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce", seed);
+        Console.WriteLine(
+            "Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce",
+            seed
+        );
         Console.WriteLine("Testing inner product of {0} by {0} matrices", size);
         Console.WriteLine("Matrix element stores random integer");
         Console.WriteLine("array set/get, ref/out param are used");
@@ -156,7 +170,13 @@ public class intmm
             for (int j = 0; j < size; j++)
                 if (imr2d[i, j] != refr2d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr2d[i,j] {2}!=refr2d[i][j] {3}", i, j, imr2d[i, j], refr2d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr2d[i,j] {2}!=refr2d[i][j] {3}",
+                        i,
+                        j,
+                        imr2d[i, j],
+                        refr2d[i][j]
+                    );
                     pass = false;
                 }
         }
@@ -208,7 +228,13 @@ public class intmm
             for (int j = 0; j < size; j++)
                 if (imr3d[i, j, 0] != refr3d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr3d[i,j,0] {2}!=refr3d[i][j] {3}", i, j, imr3d[i, j, 0], refr3d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr3d[i,j,0] {2}!=refr3d[i][j] {3}",
+                        i,
+                        j,
+                        imr3d[i, j, 0],
+                        refr3d[i][j]
+                    );
                     pass = false;
                 }
         }

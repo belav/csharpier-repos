@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Logging
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
-            string switchName)
+            string switchName
+        )
         {
             if (builder == null)
             {
@@ -46,7 +47,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
             string switchName,
-            TraceListener listener)
+            TraceListener listener
+        )
         {
             if (builder == null)
             {
@@ -74,7 +76,8 @@ namespace Microsoft.Extensions.Logging
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
-            SourceSwitch sourceSwitch)
+            SourceSwitch sourceSwitch
+        )
         {
             if (builder == null)
             {
@@ -86,7 +89,9 @@ namespace Microsoft.Extensions.Logging
                 throw new ArgumentNullException(nameof(sourceSwitch));
             }
 
-            builder.Services.AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(sourceSwitch));
+            builder.Services.AddSingleton<ILoggerProvider>(
+                _ => new TraceSourceLoggerProvider(sourceSwitch)
+            );
 
             return builder;
         }
@@ -101,7 +106,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
             SourceSwitch sourceSwitch,
-            TraceListener listener)
+            TraceListener listener
+        )
         {
             if (builder == null)
             {
@@ -118,7 +124,9 @@ namespace Microsoft.Extensions.Logging
                 throw new ArgumentNullException(nameof(listener));
             }
 
-            builder.Services.AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(sourceSwitch, listener));
+            builder.Services.AddSingleton<ILoggerProvider>(
+                _ => new TraceSourceLoggerProvider(sourceSwitch, listener)
+            );
 
             return builder;
         }

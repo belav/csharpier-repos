@@ -7,9 +7,7 @@ namespace Microsoft.AspNetCore.Testing
 {
     internal class TestKestrelTrace : KestrelTrace
     {
-        public TestKestrelTrace() : this(new TestApplicationErrorLogger())
-        {
-        }
+        public TestKestrelTrace() : this(new TestApplicationErrorLogger()) { }
 
         public TestKestrelTrace(TestApplicationErrorLogger testLogger) : base(testLogger)
         {

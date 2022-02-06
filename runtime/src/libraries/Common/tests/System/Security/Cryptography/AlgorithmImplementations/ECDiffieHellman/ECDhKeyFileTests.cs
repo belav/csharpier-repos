@@ -19,12 +19,20 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             return key.ExportECPrivateKey();
         }
 
-        protected override bool TryExportECPrivateKey(ECDiffieHellman key, Span<byte> destination, out int bytesWritten)
+        protected override bool TryExportECPrivateKey(
+            ECDiffieHellman key,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             return key.TryExportECPrivateKey(destination, out bytesWritten);
         }
 
-        protected override void ImportECPrivateKey(ECDiffieHellman key, ReadOnlySpan<byte> source, out int bytesRead)
+        protected override void ImportECPrivateKey(
+            ECDiffieHellman key,
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        )
         {
             key.ImportECPrivateKey(source, out bytesRead);
         }

@@ -22,13 +22,19 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_NullBoundary_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartFormDataContent(null));
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartFormDataContent(null)
+            );
         }
 
         [Fact]
         public void Ctor_EmptyBoundary_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartFormDataContent(string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartFormDataContent(string.Empty)
+            );
         }
 
         [Fact]
@@ -42,28 +48,40 @@ namespace System.Net.Http.Functional.Tests
         public void Add_NullName_ThrowsArgumentException()
         {
             var content = new MultipartFormDataContent();
-            AssertExtensions.Throws<ArgumentException>("name", () => content.Add(new StringContent("Hello world"), null));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => content.Add(new StringContent("Hello world"), null)
+            );
         }
 
         [Fact]
         public void Add_EmptyName_ThrowsArgumentException()
         {
             var content = new MultipartFormDataContent();
-            AssertExtensions.Throws<ArgumentException>("name", () => content.Add(new StringContent("Hello world"), string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => content.Add(new StringContent("Hello world"), string.Empty)
+            );
         }
 
         [Fact]
         public void Add_NullFileName_ThrowsArgumentException()
         {
             var content = new MultipartFormDataContent();
-            AssertExtensions.Throws<ArgumentException>("fileName", () => content.Add(new StringContent("Hello world"), "name", null));
+            AssertExtensions.Throws<ArgumentException>(
+                "fileName",
+                () => content.Add(new StringContent("Hello world"), "name", null)
+            );
         }
 
         [Fact]
         public void Add_EmptyFileName_ThrowsArgumentException()
         {
             var content = new MultipartFormDataContent();
-            AssertExtensions.Throws<ArgumentException>("fileName", () => content.Add(new StringContent("Hello world"), "name", string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "fileName",
+                () => content.Add(new StringContent("Hello world"), "name", string.Empty)
+            );
         }
 
         [Fact]
@@ -93,8 +111,9 @@ namespace System.Net.Http.Functional.Tests
 
             Assert.Equal(
                 "--test_boundary\r\nContent-Type: text/plain; charset=utf-8\r\n"
-                + "Content-Disposition: form-data\r\n\r\nHello World\r\n--test_boundary--\r\n",
-                result);
+                    + "Content-Disposition: form-data\r\n\r\nHello World\r\n--test_boundary--\r\n",
+                result
+            );
         }
 
         [Fact]
@@ -111,8 +130,9 @@ namespace System.Net.Http.Functional.Tests
 
             Assert.Equal(
                 "--test_boundary\r\nContent-Type: text/plain; charset=utf-8\r\n"
-                + "Content-Disposition: form-data; name=test_name\r\n\r\nHello World\r\n--test_boundary--\r\n",
-                result);
+                    + "Content-Disposition: form-data; name=test_name\r\n\r\nHello World\r\n--test_boundary--\r\n",
+                result
+            );
         }
 
         [Fact]
@@ -129,10 +149,11 @@ namespace System.Net.Http.Functional.Tests
 
             Assert.Equal(
                 "--test_boundary\r\nContent-Type: text/plain; charset=utf-8\r\n"
-                + "Content-Disposition: form-data; name=test_name; "
-                + "filename=test_file_name; filename*=utf-8\'\'test_file_name\r\n\r\n"
-                + "Hello World\r\n--test_boundary--\r\n",
-                result);
+                    + "Content-Disposition: form-data; name=test_name; "
+                    + "filename=test_file_name; filename*=utf-8\'\'test_file_name\r\n\r\n"
+                    + "Hello World\r\n--test_boundary--\r\n",
+                result
+            );
         }
 
         [Fact]
@@ -149,8 +170,9 @@ namespace System.Net.Http.Functional.Tests
 
             Assert.Equal(
                 "--test_boundary\r\nContent-Type: text/plain; charset=utf-8\r\n"
-                + "Content-Disposition: form-data; name=\"test name\"\r\n\r\nHello World\r\n--test_boundary--\r\n",
-                result);
+                    + "Content-Disposition: form-data; name=\"test name\"\r\n\r\nHello World\r\n--test_boundary--\r\n",
+                result
+            );
         }
 
         [Fact]
@@ -167,9 +189,10 @@ namespace System.Net.Http.Functional.Tests
 
             Assert.Equal(
                 "--test_boundary\r\nContent-Type: text/plain; charset=utf-8\r\n"
-                + "Content-Disposition: form-data; name=\"=?utf-8?B?dGVzdOOCrw0KIG5hbcOp?=\""
-                + "\r\n\r\nHello World\r\n--test_boundary--\r\n",
-                result);
+                    + "Content-Disposition: form-data; name=\"=?utf-8?B?dGVzdOOCrw0KIG5hbcOp?=\""
+                    + "\r\n\r\nHello World\r\n--test_boundary--\r\n",
+                result
+            );
         }
 
         [Fact]
@@ -186,16 +209,21 @@ namespace System.Net.Http.Functional.Tests
 
             Assert.Equal(
                 "--test_boundary\r\nContent-Type: text/plain; charset=utf-8\r\n"
-                + "Content-Disposition: form-data; name=\"=?utf-8?B?dGVzdOOCrw0KIG5hbcOp?=\""
-                + "\r\n\r\nHello World\r\n--test_boundary--\r\n",
-                result);
+                    + "Content-Disposition: form-data; name=\"=?utf-8?B?dGVzdOOCrw0KIG5hbcOp?=\""
+                    + "\r\n\r\nHello World\r\n--test_boundary--\r\n",
+                result
+            );
         }
 
         [Fact]
         public async Task Serialize_InvalidNamedFileName_Encoded()
         {
             var content = new MultipartFormDataContent("test_boundary");
-            content.Add(new StringContent("Hello World"), "test\u30AF\r\n nam\u00E9", "file\u30AF\r\n nam\u00E9");
+            content.Add(
+                new StringContent("Hello World"),
+                "test\u30AF\r\n nam\u00E9",
+                "file\u30AF\r\n nam\u00E9"
+            );
 
             MemoryStream output = new MemoryStream();
             await content.CopyToAsync(output);
@@ -205,10 +233,11 @@ namespace System.Net.Http.Functional.Tests
 
             Assert.Equal(
                 "--test_boundary\r\nContent-Type: text/plain; charset=utf-8\r\n"
-                + "Content-Disposition: form-data; name=\"=?utf-8?B?dGVzdOOCrw0KIG5hbcOp?=\";"
-                + " filename=\"=?utf-8?B?ZmlsZeOCrw0KIG5hbcOp?=\"; filename*=utf-8\'\'file%E3%82%AF%0D%0A%20nam%C3%A9"
-                + "\r\n\r\nHello World\r\n--test_boundary--\r\n",
-                result);
+                    + "Content-Disposition: form-data; name=\"=?utf-8?B?dGVzdOOCrw0KIG5hbcOp?=\";"
+                    + " filename=\"=?utf-8?B?ZmlsZeOCrw0KIG5hbcOp?=\"; filename*=utf-8\'\'file%E3%82%AF%0D%0A%20nam%C3%A9"
+                    + "\r\n\r\nHello World\r\n--test_boundary--\r\n",
+                result
+            );
         }
     }
 }

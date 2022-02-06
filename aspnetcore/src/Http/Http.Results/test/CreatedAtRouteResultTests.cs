@@ -21,17 +21,13 @@ public partial class CreatedAtRouteResultTests
         get
         {
             yield return new object[] { null };
-            yield return
-                new object[] {
-                        new Dictionary<string, string>() { { "hello", "world" } }
-                };
-            yield return
-                new object[] {
-                        new RouteValueDictionary(new Dictionary<string, string>() {
-                            { "test", "case" },
-                            { "sample", "route" }
-                        })
-                };
+            yield return new object[] { new Dictionary<string, string>() { { "hello", "world" } } };
+            yield return new object[]
+            {
+                new RouteValueDictionary(
+                    new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+                )
+            };
         }
     }
 
@@ -61,12 +57,14 @@ public partial class CreatedAtRouteResultTests
         var result = new CreatedAtRouteResult(
             routeName: null,
             routeValues: new Dictionary<string, object>(),
-            value: null);
+            value: null
+        );
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             async () => await result.ExecuteAsync(httpContext),
-        "No route matches the supplied values.");
+            "No route matches the supplied values."
+        );
     }
 
     private static HttpContext GetHttpContext(string expectedUrl)
@@ -82,10 +80,7 @@ public partial class CreatedAtRouteResultTests
     {
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory, NullLoggerFactory>();
-        services.AddSingleton<LinkGenerator>(new TestLinkGenerator
-        {
-            Url = expectedUrl
-        });
+        services.AddSingleton<LinkGenerator>(new TestLinkGenerator { Url = expectedUrl });
 
         return services.BuildServiceProvider();
     }

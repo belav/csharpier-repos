@@ -122,15 +122,15 @@ public class ViewDataDictionaryTest
         {
             // Small "anything but TestModel" grab bag of instances and expected types.
             return new TheoryData<object, Type>
-                {
-                    { true, typeof(bool) },
-                    { 23, typeof(int) },
-                    { 43.78, typeof(double) },
-                    { "test string", typeof(string) },
-                    { new List<int>(), typeof(List<int>) },
-                    { new List<string>(), typeof(List<string>) },
-                    { new List<TestModel>(), typeof(List<TestModel>) },
-                };
+            {
+                { true, typeof(bool) },
+                { 23, typeof(int) },
+                { 43.78, typeof(double) },
+                { "test string", typeof(string) },
+                { new List<int>(), typeof(List<int>) },
+                { new List<string>(), typeof(List<string>) },
+                { new List<TestModel>(), typeof(List<TestModel>) },
+            };
         }
     }
 
@@ -139,35 +139,37 @@ public class ViewDataDictionaryTest
     public void SetModel_Throws_IfModelIncompatibleWithDeclaredType(object model, Type expectedType)
     {
         // Arrange
-        var viewData = new TestViewDataDictionary(new EmptyModelMetadataProvider(), typeof(TestModel));
+        var viewData = new TestViewDataDictionary(
+            new EmptyModelMetadataProvider(),
+            typeof(TestModel)
+        );
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => viewData.SetModelPublic(model));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => viewData.SetModelPublic(model)
+        );
         Assert.Equal(
-            $"The model item passed into the ViewDataDictionary is of type '{ model.GetType() }', but this " +
-            $"ViewDataDictionary instance requires a model item of type '{ typeof(TestModel) }'.",
-            exception.Message);
+            $"The model item passed into the ViewDataDictionary is of type '{model.GetType()}', but this "
+                + $"ViewDataDictionary instance requires a model item of type '{typeof(TestModel)}'.",
+            exception.Message
+        );
     }
 
     public static TheoryData<object> EnumerableModelData
     {
         get
         {
-            var model = new List<TestModel>()
-                {
-                    new TestModel(),
-                    new TestModel()
-                };
+            var model = new List<TestModel>() { new TestModel(), new TestModel() };
 
             return new TheoryData<object>
-                {
-                    { model.Select(t => t) },
-                    { model.Where(t => t != null) },
-                    { model.SelectMany(t => t.ToString()) },
-                    { model.Take(2) },
-                    { model.TakeWhile(t => t != null) },
-                    { model.Union(model) }
-                };
+            {
+                { model.Select(t => t) },
+                { model.Where(t => t != null) },
+                { model.SelectMany(t => t.ToString()) },
+                { model.Take(2) },
+                { model.TakeWhile(t => t != null) },
+                { model.Union(model) }
+            };
         }
     }
 
@@ -222,16 +224,16 @@ public class ViewDataDictionaryTest
             // Instances in this data set must have exactly the same type as the corresponding Type or be null.
             // Otherwise the copy constructor ignores the source ModelMetadata.
             return new TheoryData<Type, object>
-                {
-                    { typeof(int), 23 },
-                    { typeof(ulong?), 24ul },
-                    { typeof(ushort?), null },
-                    { typeof(string), "hello" },
-                    { typeof(string), null },
-                    { typeof(List<string>), new List<string>() },
-                    { typeof(string[]), new string[0] },
-                    { typeof(Dictionary<string, object>), new Dictionary<string, object>() },
-                };
+            {
+                { typeof(int), 23 },
+                { typeof(ulong?), 24ul },
+                { typeof(ushort?), null },
+                { typeof(string), "hello" },
+                { typeof(string), null },
+                { typeof(List<string>), new List<string>() },
+                { typeof(string[]), new string[0] },
+                { typeof(Dictionary<string, object>), new Dictionary<string, object>() },
+            };
         }
     }
 
@@ -241,10 +243,7 @@ public class ViewDataDictionaryTest
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var source = new ViewDataDictionary(metadataProvider)
-        {
-            Model = instance,
-        };
+        var source = new ViewDataDictionary(metadataProvider) { Model = instance, };
 
         // Act
         var viewData = new ViewDataDictionary(source);
@@ -276,7 +275,8 @@ public class ViewDataDictionaryTest
     public void ModelSetter_UpdatesModelMetadata_IfModelIncompatibleWithSourceMetadata(
         Type sourceType,
         object model,
-        Type expectedType)
+        Type expectedType
+    )
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
@@ -323,10 +323,7 @@ public class ViewDataDictionaryTest
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var viewData = new ViewDataDictionary(metadataProvider)
-        {
-            Model = 3,
-        };
+        var viewData = new ViewDataDictionary(metadataProvider) { Model = 3, };
 
         var originalMetadata = viewData.ModelMetadata;
         var originalExplorer = viewData.ModelExplorer;
@@ -352,10 +349,7 @@ public class ViewDataDictionaryTest
         var metadataProvider = new EmptyModelMetadataProvider();
         var metadata = metadataProvider.GetMetadataForType(originalMetadataType);
         var explorer = new ModelExplorer(metadataProvider, metadata, model: null);
-        var viewData = new TestViewDataDictionary(metadataProvider)
-        {
-            ModelExplorer = explorer,
-        };
+        var viewData = new TestViewDataDictionary(metadataProvider) { ModelExplorer = explorer, };
 
         // Act
         viewData.Model = true;
@@ -377,10 +371,7 @@ public class ViewDataDictionaryTest
         var metadataProvider = new EmptyModelMetadataProvider();
         var metadata = metadataProvider.GetMetadataForType(typeof(bool?));
         var explorer = new ModelExplorer(metadataProvider, metadata, model: null);
-        var viewData = new ViewDataDictionary(metadataProvider)
-        {
-            ModelExplorer = explorer,
-        };
+        var viewData = new ViewDataDictionary(metadataProvider) { ModelExplorer = explorer, };
 
         // Act
         viewData.Model = true;
@@ -403,11 +394,14 @@ public class ViewDataDictionaryTest
         var viewData = new TestViewDataDictionary(new EmptyModelMetadataProvider(), typeof(int));
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => viewData.SetModelPublic(value: null));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => viewData.SetModelPublic(value: null)
+        );
         Assert.Equal(
-            "The model item passed is null, but this ViewDataDictionary instance requires a non-null model item " +
-            $"of type '{ typeof(int) }'.",
-            exception.Message);
+            "The model item passed is null, but this ViewDataDictionary instance requires a non-null model item "
+                + $"of type '{typeof(int)}'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -415,10 +409,7 @@ public class ViewDataDictionaryTest
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var viewData = new ViewDataDictionary(metadataProvider)
-        {
-            Model = 3,
-        };
+        var viewData = new ViewDataDictionary(metadataProvider) { Model = 3, };
 
         var originalMetadata = viewData.ModelMetadata;
         var originalExplorer = viewData.ModelExplorer;
@@ -442,10 +433,7 @@ public class ViewDataDictionaryTest
         var model = "Hello";
 
         var metadataProvider = new EmptyModelMetadataProvider();
-        var viewData = new ViewDataDictionary(metadataProvider)
-        {
-            Model = model,
-        };
+        var viewData = new ViewDataDictionary(metadataProvider) { Model = model, };
 
         var originalMetadata = viewData.ModelMetadata;
         var originalExplorer = viewData.ModelExplorer;
@@ -465,23 +453,15 @@ public class ViewDataDictionaryTest
         get
         {
             return new TheoryData<object, string, object>
+            {
+                { new { Foo = "Bar" }, "Foo", "Bar" },
                 {
-                    {
-                        new { Foo = "Bar" },
-                        "Foo",
-                        "Bar"
-                    },
-                    {
-                        new { Foo = new Dictionary<string, object> { { "Bar", "Baz" } } },
-                        "Foo.Bar",
-                        "Baz"
-                    },
-                    {
-                        new { Foo = new { Bar = "Baz" } },
-                        "Foo.Bar",
-                        "Baz"
-                    }
-                };
+                    new { Foo = new Dictionary<string, object> { { "Bar", "Baz" } } },
+                    "Foo.Bar",
+                    "Baz"
+                },
+                { new { Foo = new { Bar = "Baz" } }, "Foo.Bar", "Baz" }
+            };
         }
     }
 
@@ -604,10 +584,10 @@ public class ViewDataDictionaryTest
     {
         // Arrange
         var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider())
-            {
-                {  "Foo", new { Bar = "Not Baz" } },
-                { "Foo.Bar", "Baz" }
-            };
+        {
+            { "Foo", new { Bar = "Not Baz" } },
+            { "Foo.Bar", "Baz" }
+        };
 
         // Act
         var result = viewData.Eval("Foo.Bar");
@@ -622,10 +602,10 @@ public class ViewDataDictionaryTest
     {
         // Arrange
         var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider())
-            {
-                { "Foo", new { Bar = new { Baz = "Not Quux" } } },
-                { "Foo.Bar", new { Baz = "Quux" } }
-            };
+        {
+            { "Foo", new { Bar = new { Baz = "Not Quux" } } },
+            { "Foo.Bar", new { Baz = "Quux" } }
+        };
 
         // Act
         var result = viewData.Eval("Foo.Bar.Baz");
@@ -640,10 +620,10 @@ public class ViewDataDictionaryTest
     {
         // Arrange
         var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider())
-            {
-                { "Foo", new Person() },
-                { "Foo.Bar", new { Baz = "Quux" } }
-            };
+        {
+            { "Foo", new Person() },
+            { "Foo.Bar", new { Baz = "Quux" } }
+        };
 
         // Act
         var result = viewData.Eval("Foo.Bar.Baz");
@@ -704,10 +684,7 @@ public class ViewDataDictionaryTest
         var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
         var value = new Dictionary<string, object>
         {
-            ["Bar"] = new Dictionary<string, string>
-                {
-                    { "Baz", "Quux" }
-                }
+            ["Bar"] = new Dictionary<string, string> { { "Baz", "Quux" } }
         };
         viewData.Add("Foo", value);
 
@@ -803,15 +780,10 @@ public class ViewDataDictionaryTest
 
     private static ViewDataDictionary GetViewDataDictionary(object model)
     {
-        return new ViewDataDictionary(new EmptyModelMetadataProvider())
-        {
-            Model = model
-        };
+        return new ViewDataDictionary(new EmptyModelMetadataProvider()) { Model = model };
     }
 
-    private class TestModel
-    {
-    }
+    private class TestModel { }
 
     private class Person
     {
@@ -821,14 +793,12 @@ public class ViewDataDictionaryTest
     private class TestViewDataDictionary : ViewDataDictionary
     {
         public TestViewDataDictionary(IModelMetadataProvider metadataProvider)
-            : base(metadataProvider)
-        {
-        }
+            : base(metadataProvider) { }
 
-        public TestViewDataDictionary(IModelMetadataProvider metadataProvider, Type declaredModelType)
-            : base(metadataProvider, declaredModelType)
-        {
-        }
+        public TestViewDataDictionary(
+            IModelMetadataProvider metadataProvider,
+            Type declaredModelType
+        ) : base(metadataProvider, declaredModelType) { }
 
         public void SetModelPublic(object value)
         {

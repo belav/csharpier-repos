@@ -14,18 +14,22 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithmName,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             Debug.Assert(!destination.IsEmpty);
             Debug.Assert(hashAlgorithmName.Name is not null);
             // Fall back to managed implementation since Android doesn't support the full Pbkdf2 APIs
             // until API level 26.
-            using (Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
-                password.ToArray(),
-                salt.ToArray(),
-                iterations,
-                hashAlgorithmName,
-                clearPassword: true))
+            using (
+                Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
+                    password.ToArray(),
+                    salt.ToArray(),
+                    iterations,
+                    hashAlgorithmName,
+                    clearPassword: true
+                )
+            )
             {
                 byte[] result = deriveBytes.GetBytes(destination.Length);
                 result.AsSpan().CopyTo(destination);

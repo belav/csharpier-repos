@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public CompiledQueryCacheKeyGeneratorDependencies(
             IModel model,
             ICurrentDbContext currentContext,
-            IExecutionStrategy executionStrategy)
+            IExecutionStrategy executionStrategy
+        )
         {
             Model = model;
             CurrentContext = currentContext;

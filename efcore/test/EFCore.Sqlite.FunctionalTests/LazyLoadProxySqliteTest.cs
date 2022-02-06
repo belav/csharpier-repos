@@ -10,12 +10,10 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class LazyLoadProxySqliteTest : LazyLoadProxyTestBase<LazyLoadProxySqliteTest.LoadSqliteFixture>
+    public class LazyLoadProxySqliteTest
+        : LazyLoadProxyTestBase<LazyLoadProxySqliteTest.LoadSqliteFixture>
     {
-        public LazyLoadProxySqliteTest(LoadSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public LazyLoadProxySqliteTest(LoadSqliteFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         public void IsLoaded_is_not_set_if_loading_principal_collection_fails()
@@ -119,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore
             public override InterceptionResult<DbDataReader> ReaderExecuting(
                 DbCommand command,
                 CommandEventData eventData,
-                InterceptionResult<DbDataReader> result)
+                InterceptionResult<DbDataReader> result
+            )
             {
                 if (Throw)
                 {
@@ -134,11 +133,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             public ThrowingInterceptor Interceptor { get; } = new();
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base.AddOptions(builder.UseLazyLoadingProxies().AddInterceptors(Interceptor));
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder.UseLazyLoadingProxies().AddInterceptors(Interceptor));
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
         }
     }
 }

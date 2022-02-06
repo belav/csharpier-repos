@@ -16,7 +16,12 @@ namespace Microsoft.Interop
         private readonly bool _enablePinning;
         private readonly InteropGenerationOptions _options;
 
-        public ArrayMarshaller(IMarshallingGenerator manualMarshallingGenerator, TypeSyntax elementType, bool enablePinning, InteropGenerationOptions options)
+        public ArrayMarshaller(
+            IMarshallingGenerator manualMarshallingGenerator,
+            TypeSyntax elementType,
+            bool enablePinning,
+            InteropGenerationOptions options
+        )
         {
             _manualMarshallingGenerator = manualMarshallingGenerator;
             _elementType = elementType;
@@ -58,7 +63,10 @@ namespace Microsoft.Interop
             return _manualMarshallingGenerator.Generate(info, context);
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context)
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        )
         {
             if (context.SingleFrameSpansNativeContext && _enablePinning)
             {
@@ -78,10 +86,16 @@ namespace Microsoft.Interop
 
         private bool IsPinningPathSupported(TypePositionInfo info, StubCodeContext context)
         {
-            return context.SingleFrameSpansNativeContext && _enablePinning && !info.IsByRef && !info.IsManagedReturnPosition;
+            return context.SingleFrameSpansNativeContext
+                && _enablePinning
+                && !info.IsByRef
+                && !info.IsManagedReturnPosition;
         }
 
-        private IEnumerable<StatementSyntax> GeneratePinningPath(TypePositionInfo info, StubCodeContext context)
+        private IEnumerable<StatementSyntax> GeneratePinningPath(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             (string managedIdentifer, string nativeIdentifier) = context.GetIdentifiers(info);
             string byRefIdentifier = $"__byref_{managedIdentifer}";
@@ -97,55 +111,89 @@ namespace Microsoft.Interop
                 // for single-dimensional zero-based arrays.
 
                 // ref <elementType> <byRefIdentifier> = <managedIdentifer> == null ? ref *(<elementType*)0 : ref MemoryMarshal.GetArrayDataReference(<managedIdentifer>);
-                PrefixUnaryExpressionSyntax nullRef =
-                    PrefixUnaryExpression(SyntaxKind.PointerIndirectionExpression,
-                        CastExpression(
-                            PointerType(arrayElementType),
-                            LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(0))));
+                PrefixUnaryExpressionSyntax nullRef = PrefixUnaryExpression(
+                    SyntaxKind.PointerIndirectionExpression,
+                    CastExpression(
+                        PointerType(arrayElementType),
+                        LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(0))
+                    )
+                );
 
-                InvocationExpressionSyntax getArrayDataReference =
-                    InvocationExpression(
-                        MemberAccessExpression(
-                            SyntaxKind.SimpleMemberAccessExpression,
-                            ParseTypeName(TypeNames.System_Runtime_InteropServices_MemoryMarshal),
-                            IdentifierName("GetArrayDataReference")),
-                        ArgumentList(SingletonSeparatedList(
-                            Argument(IdentifierName(managedIdentifer)))));
+                InvocationExpressionSyntax getArrayDataReference = InvocationExpression(
+                    MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        ParseTypeName(TypeNames.System_Runtime_InteropServices_MemoryMarshal),
+                        IdentifierName("GetArrayDataReference")
+                    ),
+                    ArgumentList(SingletonSeparatedList(Argument(IdentifierName(managedIdentifer))))
+                );
 
                 yield return LocalDeclarationStatement(
-                    VariableDeclaration(
-                        RefType(arrayElementType))
-                    .WithVariables(SingletonSeparatedList(
-                        VariableDeclarator(Identifier(byRefIdentifier))
-                        .WithInitializer(EqualsValueClause(
-                            RefExpression(ParenthesizedExpression(
-                                ConditionalExpression(
-                                    BinaryExpression(
-                                        SyntaxKind.EqualsExpression,
-                                        IdentifierName(managedIdentifer),
-                                        LiteralExpression(
-                                            SyntaxKind.NullLiteralExpression)),
-                                    RefExpression(nullRef),
-                                    RefExpression(getArrayDataReference)))))))));
+                    VariableDeclaration(RefType(arrayElementType))
+                        .WithVariables(
+                            SingletonSeparatedList(
+                                VariableDeclarator(Identifier(byRefIdentifier))
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            RefExpression(
+                                                ParenthesizedExpression(
+                                                    ConditionalExpression(
+                                                        BinaryExpression(
+                                                            SyntaxKind.EqualsExpression,
+                                                            IdentifierName(managedIdentifer),
+                                                            LiteralExpression(
+                                                                SyntaxKind.NullLiteralExpression
+                                                            )
+                                                        ),
+                                                        RefExpression(nullRef),
+                                                        RefExpression(getArrayDataReference)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                            )
+                        )
+                );
             }
             if (context.CurrentStage == StubCodeContext.Stage.Pin)
             {
                 // fixed (<nativeType> <nativeIdentifier> = &Unsafe.As<elementType, byte>(ref <byrefIdentifier>))
                 yield return FixedStatement(
-                    VariableDeclaration(AsNativeType(info), SingletonSeparatedList(
-                        VariableDeclarator(nativeIdentifier)
-                            .WithInitializer(EqualsValueClause(
-                                PrefixUnaryExpression(SyntaxKind.AddressOfExpression,
-                                InvocationExpression(
-                                    MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                                        ParseTypeName(TypeNames.Unsafe(_options)),
-                                        GenericName("As").AddTypeArgumentListArguments(
-                                            arrayElementType,
-                                            PredefinedType(Token(SyntaxKind.ByteKeyword)))))
-                                .AddArgumentListArguments(
-                                    Argument(IdentifierName(byRefIdentifier))
-                                        .WithRefKindKeyword(Token(SyntaxKind.RefKeyword)))))))),
-                    EmptyStatement());
+                    VariableDeclaration(
+                        AsNativeType(info),
+                        SingletonSeparatedList(
+                            VariableDeclarator(nativeIdentifier)
+                                .WithInitializer(
+                                    EqualsValueClause(
+                                        PrefixUnaryExpression(
+                                            SyntaxKind.AddressOfExpression,
+                                            InvocationExpression(
+                                                    MemberAccessExpression(
+                                                        SyntaxKind.SimpleMemberAccessExpression,
+                                                        ParseTypeName(TypeNames.Unsafe(_options)),
+                                                        GenericName("As")
+                                                            .AddTypeArgumentListArguments(
+                                                                arrayElementType,
+                                                                PredefinedType(
+                                                                    Token(SyntaxKind.ByteKeyword)
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                                .AddArgumentListArguments(
+                                                    Argument(IdentifierName(byRefIdentifier))
+                                                        .WithRefKindKeyword(
+                                                            Token(SyntaxKind.RefKeyword)
+                                                        )
+                                                )
+                                        )
+                                    )
+                                )
+                        )
+                    ),
+                    EmptyStatement()
+                );
             }
         }
     }

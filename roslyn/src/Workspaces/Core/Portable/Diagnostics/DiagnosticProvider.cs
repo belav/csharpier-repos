@@ -30,12 +30,24 @@ namespace Microsoft.CodeAnalysis
             service.Unregister(workspace);
         }
 
-        private static CodeAnalysis.Options.OptionSet GetOptions(Workspace workspace, Options options)
+        private static CodeAnalysis.Options.OptionSet GetOptions(
+            Workspace workspace,
+            Options options
+        )
         {
             return workspace.Options
-                            .WithChangedOption(InternalRuntimeDiagnosticOptions.Syntax, (options & Options.Syntax) == Options.Syntax)
-                            .WithChangedOption(InternalRuntimeDiagnosticOptions.Semantic, (options & Options.Semantic) == Options.Semantic)
-                            .WithChangedOption(InternalRuntimeDiagnosticOptions.ScriptSemantic, (options & Options.ScriptSemantic) == Options.ScriptSemantic);
+                .WithChangedOption(
+                    InternalRuntimeDiagnosticOptions.Syntax,
+                    (options & Options.Syntax) == Options.Syntax
+                )
+                .WithChangedOption(
+                    InternalRuntimeDiagnosticOptions.Semantic,
+                    (options & Options.Semantic) == Options.Semantic
+                )
+                .WithChangedOption(
+                    InternalRuntimeDiagnosticOptions.ScriptSemantic,
+                    (options & Options.ScriptSemantic) == Options.ScriptSemantic
+                );
         }
 
         [Flags]

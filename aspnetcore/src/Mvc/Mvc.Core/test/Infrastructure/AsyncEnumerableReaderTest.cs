@@ -177,15 +177,18 @@ public class AsyncEnumerableReaderTest
     {
         // Arrange
         var enumerable = TestEnumerable(11);
-        var expected = $"'AsyncEnumerableReader' reached the configured maximum size of the buffer when enumerating a value of type '{enumerable.GetType()}'. " +
-            "This limit is in place to prevent infinite streams of 'IAsyncEnumerable<>' from continuing indefinitely. If this is not a programming mistake, " +
-            $"consider ways to reduce the collection size, or consider manually converting '{enumerable.GetType()}' into a list rather than increasing the limit.";
+        var expected =
+            $"'AsyncEnumerableReader' reached the configured maximum size of the buffer when enumerating a value of type '{enumerable.GetType()}'. "
+            + "This limit is in place to prevent infinite streams of 'IAsyncEnumerable<>' from continuing indefinitely. If this is not a programming mistake, "
+            + $"consider ways to reduce the collection size, or consider manually converting '{enumerable.GetType()}' into a list rather than increasing the limit.";
         var options = new MvcOptions { MaxIAsyncEnumerableBufferLimit = 10 };
         var readerFactory = new AsyncEnumerableReader(options);
 
         // Act
         Assert.True(readerFactory.TryGetReader(enumerable.GetType(), out var reader));
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => reader(enumerable, default));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => reader(enumerable, default)
+        );
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -221,7 +224,9 @@ public class AsyncEnumerableReaderTest
         cts.Cancel();
         Assert.Equal(cts.Token, token);
 
-        async IAsyncEnumerable<string> AsyncEnumerable([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<string> AsyncEnumerable(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             token = cancellationToken;
             await Task.Yield();
@@ -256,13 +261,16 @@ public class AsyncEnumerableReaderTest
 
     public class MultiAsyncEnumerable : IAsyncEnumerable<object>, IAsyncEnumerable<string>
     {
-        public IAsyncEnumerator<string> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+        public IAsyncEnumerator<string> GetAsyncEnumerator(
+            CancellationToken cancellationToken = default
+        )
         {
             return TestEnumerable().GetAsyncEnumerator(cancellationToken);
         }
 
-        IAsyncEnumerator<object> IAsyncEnumerable<object>.GetAsyncEnumerator(CancellationToken cancellationToken)
-            => GetAsyncEnumerator(cancellationToken);
+        IAsyncEnumerator<object> IAsyncEnumerable<object>.GetAsyncEnumerator(
+            CancellationToken cancellationToken
+        ) => GetAsyncEnumerator(cancellationToken);
     }
 
     private static async IAsyncEnumerable<string> ThrowingAsyncEnumerable()

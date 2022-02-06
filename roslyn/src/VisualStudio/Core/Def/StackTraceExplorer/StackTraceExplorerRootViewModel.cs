@@ -20,7 +20,13 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         private readonly IThreadingContext _threadingContext;
         private readonly IStreamingFindUsagesPresenter _streamingFindUsagesPresenter;
 
-        public StackTraceExplorerRootViewModel(IThreadingContext threadingContext, VisualStudioWorkspace workspace, IClassificationFormatMap formatMap, ClassificationTypeMap typeMap, IStreamingFindUsagesPresenter streamingFindUsagesPresenter)
+        public StackTraceExplorerRootViewModel(
+            IThreadingContext threadingContext,
+            VisualStudioWorkspace workspace,
+            IClassificationFormatMap formatMap,
+            ClassificationTypeMap typeMap,
+            IStreamingFindUsagesPresenter streamingFindUsagesPresenter
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
@@ -41,11 +47,16 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         public void AddNewTab(bool triggerPaste)
         {
             // Name will always have an index. Use the highest index opened + 1.
-            var highestIndex = Tabs.Count == 0
-                ? 0
-                : Tabs.Max(t => t.NameIndex);
+            var highestIndex = Tabs.Count == 0 ? 0 : Tabs.Max(t => t.NameIndex);
 
-            var newTab = new StackTraceExplorerTab(_threadingContext, _workspace, _formatMap, _typeMap, _streamingFindUsagesPresenter, highestIndex + 1);
+            var newTab = new StackTraceExplorerTab(
+                _threadingContext,
+                _workspace,
+                _formatMap,
+                _typeMap,
+                _streamingFindUsagesPresenter,
+                highestIndex + 1
+            );
             Tabs.Add(newTab);
 
             SelectedTab = newTab;

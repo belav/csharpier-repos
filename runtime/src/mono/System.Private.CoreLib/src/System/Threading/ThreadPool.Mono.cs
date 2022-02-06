@@ -8,9 +8,7 @@ namespace System.Threading
 {
     public static partial class ThreadPool
     {
-        internal static void ReportThreadStatus(bool isWorking)
-        {
-        }
+        internal static void ReportThreadStatus(bool isWorking) { }
 
         private static unsafe void NativeOverlappedCallback(object? obj)
         {
@@ -28,7 +26,10 @@ namespace System.Threading
             return UnsafeQueueUserWorkItem(NativeOverlappedCallback, (IntPtr)overlapped);
         }
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.", false)]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.",
+            false
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle)
         {

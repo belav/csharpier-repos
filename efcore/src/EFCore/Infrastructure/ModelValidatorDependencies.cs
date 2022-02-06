@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [EntityFrameworkInternal]
         public ModelValidatorDependencies(
             ITypeMappingSource typeMappingSource,
-            IMemberClassifier memberClassifier)
+            IMemberClassifier memberClassifier
+        )
         {
 #pragma warning disable CS0618 // Type or member is obsolete
             TypeMappingSource = typeMappingSource;

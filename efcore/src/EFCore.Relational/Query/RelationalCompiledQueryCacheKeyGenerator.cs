@@ -34,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
         public RelationalCompiledQueryCacheKeyGenerator(
             CompiledQueryCacheKeyGeneratorDependencies dependencies,
-            RelationalCompiledQueryCacheKeyGeneratorDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalCompiledQueryCacheKeyGeneratorDependencies relationalDependencies
+        ) : base(dependencies)
         {
             RelationalDependencies = relationalDependencies;
         }
@@ -51,8 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="query">The query to get the cache key for.</param>
         /// <param name="async">A value indicating whether the query will be executed asynchronously.</param>
         /// <returns>The cache key.</returns>
-        public override object GenerateCacheKey(Expression query, bool async)
-            => GenerateCacheKeyCore(query, async);
+        public override object GenerateCacheKey(Expression query, bool async) =>
+            GenerateCacheKeyCore(query, async);
 
         /// <summary>
         ///     Generates the cache key for the given query.
@@ -60,16 +60,22 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="query">The query to get the cache key for.</param>
         /// <param name="async">A value indicating whether the query will be executed asynchronously.</param>
         /// <returns>The cache key.</returns>
-        protected new RelationalCompiledQueryCacheKey
-            GenerateCacheKeyCore(Expression query, bool async) // Intentionally non-virtual
+        protected new RelationalCompiledQueryCacheKey GenerateCacheKeyCore(
+            Expression query,
+            bool async
+        ) // Intentionally non-virtual
         {
-            var relationalOptions = RelationalOptionsExtension.Extract(RelationalDependencies.ContextOptions);
+            var relationalOptions = RelationalOptionsExtension.Extract(
+                RelationalDependencies.ContextOptions
+            );
 
             return new RelationalCompiledQueryCacheKey(
                 base.GenerateCacheKeyCore(query, async),
                 relationalOptions.UseRelationalNulls,
                 relationalOptions.QuerySplittingBehavior,
-                shouldBuffer: ExecutionStrategy.Current?.RetriesOnFailure ?? Dependencies.IsRetryingExecutionStrategy);
+                shouldBuffer: ExecutionStrategy.Current?.RetriesOnFailure
+                    ?? Dependencies.IsRetryingExecutionStrategy
+            );
         }
 
         /// <summary>
@@ -82,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        protected readonly struct RelationalCompiledQueryCacheKey : IEquatable<RelationalCompiledQueryCacheKey>
+        protected readonly struct RelationalCompiledQueryCacheKey
+            : IEquatable<RelationalCompiledQueryCacheKey>
         {
             private readonly CompiledQueryCacheKey _compiledQueryCacheKey;
             private readonly bool _useRelationalNulls;
@@ -100,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 CompiledQueryCacheKey compiledQueryCacheKey,
                 bool useRelationalNulls,
                 QuerySplittingBehavior? querySplittingBehavior,
-                bool shouldBuffer)
+                bool shouldBuffer
+            )
             {
                 _compiledQueryCacheKey = compiledQueryCacheKey;
                 _useRelationalNulls = useRelationalNulls;
@@ -118,9 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             ///     <see langword="true" /> if the object is a <see cref="RelationalCompiledQueryCacheKey" /> and is for the same query,
             ///     otherwise <see langword="false" />.
             /// </returns>
-            public override bool Equals(object? obj)
-                => obj is RelationalCompiledQueryCacheKey key
-                    && Equals(key);
+            public override bool Equals(object? obj) =>
+                obj is RelationalCompiledQueryCacheKey key && Equals(key);
 
             /// <summary>
             ///     Indicates whether the current object is equal to another object of the same type.
@@ -131,11 +138,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             /// <returns>
             ///     <see langword="true" /> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <see langword="false" />.
             /// </returns>
-            public bool Equals(RelationalCompiledQueryCacheKey other)
-                => _compiledQueryCacheKey.Equals(other._compiledQueryCacheKey)
-                    && _useRelationalNulls == other._useRelationalNulls
-                    && _querySplittingBehavior == other._querySplittingBehavior
-                    && _shouldBuffer == other._shouldBuffer;
+            public bool Equals(RelationalCompiledQueryCacheKey other) =>
+                _compiledQueryCacheKey.Equals(other._compiledQueryCacheKey)
+                && _useRelationalNulls == other._useRelationalNulls
+                && _querySplittingBehavior == other._querySplittingBehavior
+                && _shouldBuffer == other._shouldBuffer;
 
             /// <summary>
             ///     Gets the hash code for the key.
@@ -143,9 +150,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             /// <returns>
             ///     The hash code for the key.
             /// </returns>
-            public override int GetHashCode()
-                => HashCode.Combine(
-                    _compiledQueryCacheKey, _useRelationalNulls, _querySplittingBehavior, _shouldBuffer);
+            public override int GetHashCode() =>
+                HashCode.Combine(
+                    _compiledQueryCacheKey,
+                    _useRelationalNulls,
+                    _querySplittingBehavior,
+                    _shouldBuffer
+                );
         }
     }
 }

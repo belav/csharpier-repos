@@ -11,8 +11,12 @@ namespace System.Web.Mvc.Razor
     {
         private const string DefaultModelTypeName = "dynamic";
 
-        public MvcCSharpRazorCodeGenerator(string className, string rootNamespaceName, string sourceFileName, RazorEngineHost host)
-            : base(className, rootNamespaceName, sourceFileName, host)
+        public MvcCSharpRazorCodeGenerator(
+            string className,
+            string rootNamespaceName,
+            string sourceFileName,
+            RazorEngineHost host
+        ) : base(className, rootNamespaceName, sourceFileName, host)
         {
             var mvcHost = host as MvcWebPageRazorHost;
             if (mvcHost != null && !mvcHost.IsSpecialPage)
@@ -25,7 +29,9 @@ namespace System.Web.Mvc.Razor
 
         private void SetBaseType(string modelTypeName)
         {
-            var baseType = new CodeTypeReference(Context.Host.DefaultBaseClass + "<" + modelTypeName + ">");
+            var baseType = new CodeTypeReference(
+                Context.Host.DefaultBaseClass + "<" + modelTypeName + ">"
+            );
             Context.GeneratedClass.BaseTypes.Clear();
             Context.GeneratedClass.BaseTypes.Add(baseType);
         }

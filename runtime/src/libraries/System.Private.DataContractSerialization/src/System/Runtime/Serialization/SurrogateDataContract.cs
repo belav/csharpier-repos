@@ -26,17 +26,29 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override void WriteXmlValue(XmlWriterDelegator xmlWriter, object obj, XmlObjectSerializerWriteContext? context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator xmlWriter,
+            object obj,
+            XmlObjectSerializerWriteContext? context
+        )
         {
             Debug.Assert(context != null);
 
-            SerializationInfo serInfo = new SerializationInfo(UnderlyingType, XmlObjectSerializer.FormatterConverter, !context.UnsafeTypeForwardingEnabled);
+            SerializationInfo serInfo = new SerializationInfo(
+                UnderlyingType,
+                XmlObjectSerializer.FormatterConverter,
+                !context.UnsafeTypeForwardingEnabled
+            );
             SerializationSurrogateGetObjectData(obj, serInfo, context.GetStreamingContext());
             context.WriteSerializationInfo(xmlWriter, UnderlyingType, serInfo);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private object? SerializationSurrogateSetObjectData(object obj, SerializationInfo serInfo, StreamingContext context)
+        private object? SerializationSurrogateSetObjectData(
+            object obj,
+            SerializationInfo serInfo,
+            StreamingContext context
+        )
         {
             return SerializationSurrogate.SetObjectData(obj, serInfo, context, null);
         }
@@ -54,23 +66,36 @@ namespace System.Runtime.Serialization
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private void SerializationSurrogateGetObjectData(object obj, SerializationInfo serInfo, StreamingContext context)
+        private void SerializationSurrogateGetObjectData(
+            object obj,
+            SerializationInfo serInfo,
+            StreamingContext context
+        )
         {
             SerializationSurrogate.GetObjectData(obj, serInfo, context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override object? ReadXmlValue(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext? context)
+        public override object? ReadXmlValue(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext? context
+        )
         {
             Debug.Assert(context != null);
 
             xmlReader.Read();
             Type objType = UnderlyingType;
-            object obj = objType.IsArray ? Array.CreateInstance(objType.GetElementType()!, 0) : GetUninitializedObject(objType);
+            object obj = objType.IsArray
+                ? Array.CreateInstance(objType.GetElementType()!, 0)
+                : GetUninitializedObject(objType);
             context.AddNewObject(obj);
             string objectId = context.GetObjectId();
             SerializationInfo serInfo = context.ReadSerializationInfo(xmlReader, objType);
-            object? newObj = SerializationSurrogateSetObjectData(obj, serInfo, context.GetStreamingContext());
+            object? newObj = SerializationSurrogateSetObjectData(
+                obj,
+                serInfo,
+                context.GetStreamingContext()
+            );
             if (newObj == null)
                 newObj = obj;
             if (newObj is IDeserializationCallback)
@@ -82,20 +107,26 @@ namespace System.Runtime.Serialization
             return newObj;
         }
 
-        private sealed class SurrogateDataContractCriticalHelper : DataContract.DataContractCriticalHelper
+        private sealed class SurrogateDataContractCriticalHelper
+            : DataContract.DataContractCriticalHelper
         {
             private readonly ISerializationSurrogate serializationSurrogate;
 
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             internal SurrogateDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
-                Type type,
-                ISerializationSurrogate serializationSurrogate)
-                : base(type)
+                    Type type,
+                ISerializationSurrogate serializationSurrogate
+            ) : base(type)
             {
                 this.serializationSurrogate = serializationSurrogate;
-                string name, ns;
-                DataContract.GetDefaultStableName(DataContract.GetClrTypeFullName(type), out name, out ns);
+                string name,
+                    ns;
+                DataContract.GetDefaultStableName(
+                    DataContract.GetClrTypeFullName(type),
+                    out name,
+                    out ns
+                );
                 SetDataContractName(CreateQualifiedName(name, ns));
             }
 

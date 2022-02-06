@@ -10,11 +10,11 @@ namespace System
     public ref struct TypedReference
     {
         #region sync with object-internals.h
-        #pragma warning disable CA1823 // used by runtime
+#pragma warning disable CA1823 // used by runtime
         private RuntimeTypeHandle type;
         private IntPtr Value;
         private IntPtr Type;
-        #pragma warning restore CA1823
+#pragma warning restore CA1823
         #endregion
 
         public static TypedReference MakeTypedReference(object target, FieldInfo[] flds)
@@ -36,7 +36,10 @@ namespace System
                 if (field.IsStatic)
                     throw new ArgumentException(SR.Argument_TypedReferenceInvalidField);
 
-                if (targetType != field.GetDeclaringTypeInternal() && !targetType.IsSubclassOf(field.GetDeclaringTypeInternal()))
+                if (
+                    targetType != field.GetDeclaringTypeInternal()
+                    && !targetType.IsSubclassOf(field.GetDeclaringTypeInternal())
+                )
                     throw new MissingMemberException(SR.MissingMemberTypeRef);
 
                 var fieldType = (RuntimeType)field.FieldType;
@@ -50,7 +53,6 @@ namespace System
             }
 
             var result = default(TypedReference);
-
             unsafe
             {
                 InternalMakeTypedReference(&result, target, fields, targetType);
@@ -59,7 +61,12 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern unsafe void InternalMakeTypedReference(void* result, object target, IntPtr[] flds, RuntimeType lastFieldType);
+        private static extern unsafe void InternalMakeTypedReference(
+            void* result,
+            object target,
+            IntPtr[] flds,
+            RuntimeType lastFieldType
+        );
 
         public override int GetHashCode()
         {
@@ -84,10 +91,7 @@ namespace System
 
         internal bool IsNull
         {
-            get
-            {
-                return Value == IntPtr.Zero && Type == IntPtr.Zero;
-            }
+            get { return Value == IntPtr.Zero && Type == IntPtr.Zero; }
         }
 
         public static Type GetTargetType(TypedReference value)

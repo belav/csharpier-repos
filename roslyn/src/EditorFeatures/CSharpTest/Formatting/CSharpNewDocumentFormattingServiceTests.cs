@@ -17,37 +17,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
     public class CSharpNewDocumentFormattingServiceTests : AbstractNewDocumentFormattingServiceTests
     {
         protected override string Language => LanguageNames.CSharp;
-        protected override TestWorkspace CreateTestWorkspace(string testCode, ParseOptions? parseOptions)
-            => TestWorkspace.CreateCSharp(testCode, parseOptions);
+
+        protected override TestWorkspace CreateTestWorkspace(
+            string testCode,
+            ParseOptions? parseOptions
+        ) => TestWorkspace.CreateCSharp(testCode, parseOptions);
 
         [Fact]
         public async Task TestFileScopedNamespaces()
         {
-            await TestAsync(testCode: @"
+            await TestAsync(
+                testCode: @"
 namespace Goo
 {
     internal class C
     {
     }
 }",
-            expected: @"
+                expected: @"
 namespace Goo;
 
 internal class C
 {
 }
 ",
-            options: new[]
-            {
-                (CSharpCodeStyleOptions.NamespaceDeclarations, new CodeStyleOption2<NamespaceDeclarationPreference>(NamespaceDeclarationPreference.FileScoped, NotificationOption2.Error))
-            },
-            parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10));
+                options: new[]
+                {
+                    (
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        new CodeStyleOption2<NamespaceDeclarationPreference>(
+                            NamespaceDeclarationPreference.FileScoped,
+                            NotificationOption2.Error
+                        )
+                    )
+                },
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10)
+            );
         }
 
         [Fact]
         public async Task TestFileScopedNamespaces_Invalid_MultipleNamespaces()
         {
-            var testCode = @"
+            var testCode =
+                @"
 namespace Goo
 {
 }
@@ -61,15 +73,23 @@ namespace Bar
                 expected: testCode,
                 options: new[]
                 {
-                    (CSharpCodeStyleOptions.NamespaceDeclarations, new CodeStyleOption2<NamespaceDeclarationPreference>(NamespaceDeclarationPreference.FileScoped, NotificationOption2.Error))
+                    (
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        new CodeStyleOption2<NamespaceDeclarationPreference>(
+                            NamespaceDeclarationPreference.FileScoped,
+                            NotificationOption2.Error
+                        )
+                    )
                 },
-                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10));
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10)
+            );
         }
 
         [Fact]
         public async Task TestFileScopedNamespaces_Invalid_WrongLanguageVersion()
         {
-            var testCode = @"
+            var testCode =
+                @"
 namespace Goo
 {
     internal class C
@@ -82,38 +102,54 @@ namespace Goo
                 expected: testCode,
                 options: new[]
                 {
-                    (CSharpCodeStyleOptions.NamespaceDeclarations, new CodeStyleOption2<NamespaceDeclarationPreference>(NamespaceDeclarationPreference.FileScoped, NotificationOption2.Error))
+                    (
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        new CodeStyleOption2<NamespaceDeclarationPreference>(
+                            NamespaceDeclarationPreference.FileScoped,
+                            NotificationOption2.Error
+                        )
+                    )
                 },
-                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp9));
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact]
         public async Task TestBlockScopedNamespaces()
         {
-            await TestAsync(testCode: @"
+            await TestAsync(
+                testCode: @"
 namespace Goo;
 
 internal class C
 {
 }
 ",
-            expected: @"
+                expected: @"
 namespace Goo
 {
     internal class C
     {
     }
 }",
-            options: new[]
-            {
-                (CSharpCodeStyleOptions.NamespaceDeclarations, new CodeStyleOption2<NamespaceDeclarationPreference>(NamespaceDeclarationPreference.BlockScoped, NotificationOption2.Error))
-            });
+                options: new[]
+                {
+                    (
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        new CodeStyleOption2<NamespaceDeclarationPreference>(
+                            NamespaceDeclarationPreference.BlockScoped,
+                            NotificationOption2.Error
+                        )
+                    )
+                }
+            );
         }
 
         [Fact]
         public async Task TestOrganizeUsingsWithNoUsings()
         {
-            var testCode = @"namespace Goo
+            var testCode =
+                @"namespace Goo
 {
 }";
             await TestAsync(
@@ -121,35 +157,42 @@ namespace Goo
                 expected: testCode,
                 options: new[]
                 {
-                    (CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.OutsideNamespace, NotificationOption2.Error))
-                });
+                    (
+                        CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                        new CodeStyleOption2<AddImportPlacement>(
+                            AddImportPlacement.OutsideNamespace,
+                            NotificationOption2.Error
+                        )
+                    )
+                }
+            );
         }
 
         [Fact]
         public async Task TestFileBanners()
         {
-            await TestAsync(testCode: @"using System;
+            await TestAsync(
+                testCode: @"using System;
 
 namespace Goo
 {
 }",
-            expected: @"// This is a banner.
+                expected: @"// This is a banner.
 
 using System;
 
 namespace Goo
 {
 }",
-            options: new[]
-            {
-                (CodeStyleOptions2.FileHeaderTemplate, "This is a banner.")
-            });
+                options: new[] { (CodeStyleOptions2.FileHeaderTemplate, "This is a banner.") }
+            );
         }
 
         [Fact]
         public async Task TestAccessibilityModifiers()
         {
-            await TestAsync(testCode: @"using System;
+            await TestAsync(
+                testCode: @"using System;
 
 namespace Goo
 {
@@ -157,7 +200,7 @@ namespace Goo
     {
     }
 }",
-            expected: @"using System;
+                expected: @"using System;
 
 namespace Goo
 {
@@ -165,10 +208,17 @@ namespace Goo
     {
     }
 }",
-            options: new[]
-            {
-                (CodeStyleOptions2.RequireAccessibilityModifiers, new CodeStyleOption2<AccessibilityModifiersRequired>(AccessibilityModifiersRequired.Always, NotificationOption2.Error))
-            });
+                options: new[]
+                {
+                    (
+                        CodeStyleOptions2.RequireAccessibilityModifiers,
+                        new CodeStyleOption2<AccessibilityModifiersRequired>(
+                            AccessibilityModifiersRequired.Always,
+                            NotificationOption2.Error
+                        )
+                    )
+                }
+            );
         }
 
         [Fact]
@@ -210,26 +260,41 @@ namespace Goo
 }",
                 options: new[]
                 {
-                    (CodeStyleOptions2.RequireAccessibilityModifiers, new CodeStyleOption2<AccessibilityModifiersRequired>(AccessibilityModifiersRequired.Always, NotificationOption2.Error))
-                });
+                    (
+                        CodeStyleOptions2.RequireAccessibilityModifiers,
+                        new CodeStyleOption2<AccessibilityModifiersRequired>(
+                            AccessibilityModifiersRequired.Always,
+                            NotificationOption2.Error
+                        )
+                    )
+                }
+            );
         }
 
         [Fact]
         public async Task TestUsingDirectivePlacement()
         {
-            await TestAsync(testCode: @"using System;
+            await TestAsync(
+                testCode: @"using System;
 
 namespace Goo
 {
 }",
-            expected: @"namespace Goo
+                expected: @"namespace Goo
 {
     using System;
 }",
-            options: new[]
-            {
-                (CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.InsideNamespace, NotificationOption2.Error))
-            });
+                options: new[]
+                {
+                    (
+                        CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                        new CodeStyleOption2<AddImportPlacement>(
+                            AddImportPlacement.InsideNamespace,
+                            NotificationOption2.Error
+                        )
+                    )
+                }
+            );
         }
     }
 }

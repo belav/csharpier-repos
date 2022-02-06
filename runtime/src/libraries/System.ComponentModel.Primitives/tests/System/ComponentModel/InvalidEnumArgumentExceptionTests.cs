@@ -68,7 +68,11 @@ namespace System.ComponentModel.Tests
         [InlineData(null, 0, typeof(int))]
         [InlineData("", 1, typeof(int))]
         [InlineData("argumentName", int.MaxValue, typeof(int))]
-        public void Ctor_ArgumentName_InvalidValue_EnumClass(string argumentName, int invalidValue, Type enumClass)
+        public void Ctor_ArgumentName_InvalidValue_EnumClass(
+            string argumentName,
+            int invalidValue,
+            Type enumClass
+        )
         {
             var exception = new InvalidEnumArgumentException(argumentName, invalidValue, enumClass);
             if (argumentName != null)
@@ -84,10 +88,16 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullEnumClass_ThrowsArgumentNulException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("enumClass", () => new InvalidEnumArgumentException("argumentName", 1, null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "enumClass",
+                () => new InvalidEnumArgumentException("argumentName", 1, null)
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void Ctor_SerializationInfo_StreamingContext()
         {
             using (var stream = new MemoryStream())

@@ -21,8 +21,7 @@ namespace Microsoft.EntityFrameworkCore
         protected static readonly Guid Guid77 = new("{DE390D36-DAAC-4C8B-91F7-E9F5DAA7EF01}");
         protected static readonly Guid Guid78 = new("{4C80406F-49AF-4D85-AFFB-75C146A98A70}");
 
-        protected StoreGeneratedFixupTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected StoreGeneratedFixupTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
@@ -49,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -97,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -122,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -147,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -166,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -189,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -215,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -239,7 +246,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -263,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -288,7 +297,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -313,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -332,7 +343,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -355,7 +367,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         private void AssertFixupAndSave(DbContext context, Category principal, Product dependent)
@@ -370,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                     Assert.Equal(EntityState.Added, context.Entry(principal).State);
                     Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -384,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                     Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -408,7 +423,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -432,7 +448,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -457,7 +474,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -476,7 +494,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -501,7 +520,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -520,10 +540,15 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
-        private void AssertFixupAndSave(DbContext context, CategoryPN principal, ProductPN dependent)
+        private void AssertFixupAndSave(
+            DbContext context,
+            CategoryPN principal,
+            ProductPN dependent
+        )
         {
             AssertFixup(
                 context,
@@ -534,7 +559,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                     Assert.Equal(EntityState.Added, context.Entry(principal).State);
                     Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -547,7 +573,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                     Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -571,7 +598,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -596,7 +624,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -619,7 +648,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -643,7 +673,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -668,7 +699,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -691,10 +723,15 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
-        private void AssertFixupAndSave(DbContext context, CategoryDN principal, ProductDN dependent)
+        private void AssertFixupAndSave(
+            DbContext context,
+            CategoryDN principal,
+            ProductDN dependent
+        )
         {
             AssertFixup(
                 context,
@@ -705,7 +742,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(principal, dependent.Category);
                     Assert.Equal(EntityState.Added, context.Entry(principal).State);
                     Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -718,7 +756,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(principal, dependent.Category);
                     Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -742,7 +781,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -766,10 +806,15 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
-        private void AssertFixupAndSave(DbContext context, CategoryNN principal, ProductNN dependent)
+        private void AssertFixupAndSave(
+            DbContext context,
+            CategoryNN principal,
+            ProductNN dependent
+        )
         {
             AssertFixup(
                 context,
@@ -779,7 +824,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(principal.Id2, dependent.CategoryId2);
                     Assert.Equal(EntityState.Added, context.Entry(principal).State);
                     Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -791,7 +837,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(principal.Id2, dependent.CategoryId2);
                     Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -817,7 +864,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -841,7 +889,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -865,7 +914,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -890,7 +940,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -915,7 +966,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -934,7 +986,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -957,7 +1010,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -983,7 +1037,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1007,7 +1062,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1031,7 +1087,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1056,7 +1113,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1081,7 +1139,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1100,7 +1159,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1123,7 +1183,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         private void AssertFixupAndSave(DbContext context, Parent principal, Child dependent)
@@ -1138,7 +1199,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(dependent, principal.Child);
                     Assert.Equal(EntityState.Added, context.Entry(principal).State);
                     Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -1152,7 +1214,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(dependent, principal.Child);
                     Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1176,7 +1239,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1200,7 +1264,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1225,7 +1290,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1244,7 +1310,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1269,7 +1336,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1288,7 +1356,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         private void AssertFixupAndSave(DbContext context, ParentPN principal, ChildPN dependent)
@@ -1302,7 +1371,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(dependent, principal.Child);
                     Assert.Equal(EntityState.Added, context.Entry(principal).State);
                     Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -1315,7 +1385,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(dependent, principal.Child);
                     Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1339,7 +1410,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1364,7 +1436,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1387,7 +1460,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1411,7 +1485,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1436,7 +1511,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1459,7 +1535,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         private void AssertFixupAndSave(DbContext context, ParentDN principal, ChildDN dependent)
@@ -1473,7 +1550,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(principal, dependent.Parent);
                     Assert.Equal(EntityState.Added, context.Entry(principal).State);
                     Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -1486,7 +1564,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(principal, dependent.Parent);
                     Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1510,7 +1589,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(principal);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1534,7 +1614,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(dependent);
 
                     AssertFixupAndSave(context, principal, dependent);
-                });
+                }
+            );
         }
 
         private void AssertFixupAndSave(DbContext context, ParentNN principal, ChildNN dependent)
@@ -1547,7 +1628,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(principal.Id2, dependent.ParentId2);
                     Assert.Equal(EntityState.Added, context.Entry(principal).State);
                     Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -1559,7 +1641,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(principal.Id2, dependent.ParentId2);
                     Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1592,7 +1675,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -1606,8 +1690,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1638,7 +1724,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -1652,8 +1739,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1684,7 +1773,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -1704,9 +1794,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Category);
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1738,7 +1833,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -1758,9 +1854,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Category);
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1792,7 +1893,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -1806,8 +1908,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1836,7 +1940,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -1855,9 +1960,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Category);
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1887,7 +1997,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -1901,8 +2012,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1935,7 +2048,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -1949,8 +2063,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1981,7 +2097,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -1995,8 +2112,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2027,7 +2146,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2039,8 +2159,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2072,7 +2194,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2086,8 +2209,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2119,7 +2244,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2131,8 +2257,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2164,7 +2292,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2178,8 +2307,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2208,7 +2339,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2221,8 +2353,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2252,7 +2386,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -2271,9 +2406,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.CategoryId2);
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2303,7 +2443,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2314,8 +2455,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Empty(principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2346,7 +2489,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -2365,9 +2509,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.CategoryId2);
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2395,7 +2544,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -2413,9 +2563,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(0, dependent.CategoryId1);
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2446,7 +2601,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2459,8 +2615,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2489,7 +2647,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2502,8 +2661,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2533,7 +2694,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Category);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -2552,9 +2714,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.CategoryId2);
                             Assert.Null(dependent.Category);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2585,7 +2752,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Category);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2598,8 +2766,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Category);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2628,7 +2798,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Category);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2641,8 +2812,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Category);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2672,7 +2845,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Category);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2683,8 +2857,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Category);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2715,7 +2891,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Category);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2726,8 +2903,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Category);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2755,7 +2934,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Category);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2767,8 +2947,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Category);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2797,7 +2979,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.CategoryId2);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -2815,9 +2998,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id1, dependent.CategoryId1);
                             Assert.Equal(principal.Id2, dependent.CategoryId2);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2846,7 +3034,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.CategoryId2);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2856,8 +3045,10 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2890,7 +3081,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2904,8 +3096,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2936,7 +3130,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -2950,8 +3145,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -2982,7 +3179,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -3002,9 +3200,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Parent);
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3036,7 +3239,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -3056,9 +3260,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Parent);
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3090,7 +3299,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3104,8 +3314,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3134,7 +3346,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -3153,9 +3366,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Parent);
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3185,7 +3403,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3199,8 +3418,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3233,7 +3454,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3247,8 +3469,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3279,7 +3503,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3293,8 +3518,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3325,7 +3552,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3337,8 +3565,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3370,7 +3600,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3384,8 +3615,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3417,7 +3650,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3429,8 +3663,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3460,7 +3696,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3474,8 +3711,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3504,7 +3743,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3517,8 +3757,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3548,7 +3790,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -3567,9 +3810,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.ParentId2);
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3599,7 +3847,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3610,8 +3859,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3642,7 +3893,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -3661,9 +3913,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.ParentId2);
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3691,7 +3948,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -3709,9 +3967,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(0, dependent.ParentId1);
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3742,7 +4005,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3755,8 +4019,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3785,7 +4051,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3798,8 +4065,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(dependent, principal.Child);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3829,7 +4098,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Parent);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -3848,9 +4118,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.ParentId2);
                             Assert.Null(dependent.Parent);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3881,7 +4156,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Parent);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3894,8 +4170,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Parent);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3924,7 +4202,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Parent);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3937,8 +4216,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Parent);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -3968,7 +4249,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Parent);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -3979,8 +4261,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Null(dependent.Parent);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4011,7 +4295,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Parent);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -4022,8 +4307,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Parent);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4051,7 +4338,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Parent);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -4063,8 +4351,10 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Same(principal, dependent.Parent);
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4093,7 +4383,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.ParentId2);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                             Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     if (EnforcesFKs)
                     {
@@ -4111,9 +4402,14 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id1, dependent.ParentId1);
                             Assert.Equal(principal.Id2, dependent.ParentId2);
                             Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                            Assert.Equal(EnforcesFKs ? EntityState.Added : EntityState.Unchanged, context.Entry(dependent).State);
-                        });
-                });
+                            Assert.Equal(
+                                EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                                context.Entry(dependent).State
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4142,7 +4438,8 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(principal.Id2, dependent.ParentId2);
                             Assert.Equal(EntityState.Added, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
 
@@ -4152,8 +4449,10 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
                             Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4172,7 +4471,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(level);
 
                     AssertFixupAndSave(context, game, level, item);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4192,7 +4492,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(game);
 
                     AssertFixupAndSave(context, game, level, item);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4210,7 +4511,8 @@ namespace Microsoft.EntityFrameworkCore
                     context.Add(item);
 
                     AssertFixupAndSave(context, game, level, item);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4248,7 +4550,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(EntityState.Added, context.Entry(game).State);
                     Assert.Equal(EntityState.Added, context.Entry(level).State);
                     Assert.Equal(EntityState.Added, context.Entry(item).State);
-                });
+                }
+            );
 
             context.SaveChanges();
 
@@ -4271,7 +4574,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(EntityState.Unchanged, context.Entry(game).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(level).State);
                     Assert.Equal(EntityState.Unchanged, context.Entry(item).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -4306,7 +4610,9 @@ namespace Microsoft.EntityFrameworkCore
                     AddData(firstLevel);
 
                     var originalSecondLevels = firstLevel.SecondLevels.ToArray();
-                    var originalThirdLevels = originalSecondLevels.SelectMany(e => e.ThirdLevels).ToArray();
+                    var originalThirdLevels = originalSecondLevels
+                        .SelectMany(e => e.ThirdLevels)
+                        .ToArray();
 
                     context.ChangeTracker.DetectChanges();
 
@@ -4328,16 +4634,19 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.All(
                         originalSecondLevels.Select(l => context.Entry(l).State),
-                        s => Assert.Equal(EntityState.Detached, s));
+                        s => Assert.Equal(EntityState.Detached, s)
+                    );
 
                     Assert.All(
                         originalThirdLevels.Select(l => context.Entry(l).State),
-                        s => Assert.Equal(EntityState.Detached, s));
+                        s => Assert.Equal(EntityState.Detached, s)
+                    );
 
                     context.SaveChanges();
 
                     AssertValidFks(context, firstLevel, tempKeys: false);
-                });
+                }
+            );
         }
 
         private static void AssertValidFks(DbContext context, FirstLevel firstLevel, bool tempKeys)
@@ -4351,40 +4660,60 @@ namespace Microsoft.EntityFrameworkCore
 
             var expectedState = tempKeys ? EntityState.Added : EntityState.Unchanged;
 
-            if (context.Database.ProviderName.EndsWith("InMemory", StringComparison.OrdinalIgnoreCase))
+            if (
+                context.Database.ProviderName.EndsWith(
+                    "InMemory",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 tempKeys = false;
             }
 
             Assert.All(
                 secondLevels.Select(l => context.Entry(l).State),
-                s => Assert.Equal(expectedState, s));
+                s => Assert.Equal(expectedState, s)
+            );
 
             Assert.All(
                 thirdLevels.Select(l => context.Entry(l).State),
-                s => Assert.Equal(expectedState, s));
+                s => Assert.Equal(expectedState, s)
+            );
 
             Assert.Equal(1, context.Entry(firstLevel).Property(e => e.Id).CurrentValue);
 
             Assert.All(
                 secondLevels.Select(l => context.Entry(l).Property(e => e.Id).CurrentValue),
-                s => Assert.True(tempKeys ? s < 0 : s > 0));
+                s => Assert.True(tempKeys ? s < 0 : s > 0)
+            );
 
             Assert.All(
                 thirdLevels.Select(l => context.Entry(l).Property(e => e.Id).CurrentValue),
-                s => Assert.True(tempKeys ? s < 0 : s > 0));
+                s => Assert.True(tempKeys ? s < 0 : s > 0)
+            );
 
             Assert.All(
-                secondLevels.Select(l => context.Entry(l).Property(e => e.FirstLevelId).CurrentValue),
-                s => Assert.Equal(1, s));
+                secondLevels.Select(
+                    l => context.Entry(l).Property(e => e.FirstLevelId).CurrentValue
+                ),
+                s => Assert.Equal(1, s)
+            );
 
             Assert.All(
-                thirdLevels0.Select(l => context.Entry(l).Property(e => e.SecondLevelId).CurrentValue),
-                s => Assert.Equal(context.Entry(secondLevels[0]).Property(e => e.Id).CurrentValue, s));
+                thirdLevels0.Select(
+                    l => context.Entry(l).Property(e => e.SecondLevelId).CurrentValue
+                ),
+                s =>
+                    Assert.Equal(context.Entry(secondLevels[0]).Property(e => e.Id).CurrentValue, s)
+            );
 
             Assert.All(
-                thirdLevels1.Select(l => context.Entry(l).Property(e => e.SecondLevelId).CurrentValue),
-                s => Assert.Equal(context.Entry(secondLevels[1]).Property(e => e.Id).CurrentValue, s));
+                thirdLevels1.Select(
+                    l => context.Entry(l).Property(e => e.SecondLevelId).CurrentValue
+                ),
+                s =>
+                    Assert.Equal(context.Entry(secondLevels[1]).Property(e => e.Id).CurrentValue, s)
+            );
         }
 
         protected class FirstLevel
@@ -4397,8 +4726,14 @@ namespace Microsoft.EntityFrameworkCore
         {
             first.SecondLevels = new List<SecondLevel>
             {
-                new() { ThirdLevels = new List<ThirdLevel> { new(), new() } },
-                new() { ThirdLevels = new List<ThirdLevel> { new(), new() } }
+                new()
+                {
+                    ThirdLevels = new List<ThirdLevel> { new(), new() }
+                },
+                new()
+                {
+                    ThirdLevels = new List<ThirdLevel> { new(), new() }
+                }
             };
         }
 
@@ -4586,13 +4921,9 @@ namespace Microsoft.EntityFrameworkCore
             public Level Level { get; set; }
         }
 
-        protected class Item : GameEntity
-        {
-        }
+        protected class Item : GameEntity { }
 
-        protected class Actor : GameEntity
-        {
-        }
+        protected class Actor : GameEntity { }
 
         protected class Game
         {
@@ -4624,25 +4955,35 @@ namespace Microsoft.EntityFrameworkCore
 
         protected abstract bool EnforcesFKs { get; }
 
-        protected virtual void MarkIdsTemporary(DbContext context, object dependent, object principal)
-        {
-        }
+        protected virtual void MarkIdsTemporary(
+            DbContext context,
+            object dependent,
+            object principal
+        ) { }
 
-        protected virtual void MarkIdsTemporary(DbContext context, object game, object level, object item)
-        {
-        }
+        protected virtual void MarkIdsTemporary(
+            DbContext context,
+            object game,
+            object level,
+            object item
+        ) { }
 
-        protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        {
-        }
+        protected virtual void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) { }
 
-        protected virtual void ExecuteWithStrategyInTransaction(Action<DbContext> testOperation)
-            => TestHelpers.ExecuteWithStrategyInTransaction(CreateContext, UseTransaction, testOperation);
+        protected virtual void ExecuteWithStrategyInTransaction(Action<DbContext> testOperation) =>
+            TestHelpers.ExecuteWithStrategyInTransaction(
+                CreateContext,
+                UseTransaction,
+                testOperation
+            );
 
-        protected DbContext CreateContext()
-            => Fixture.CreateContext();
+        protected DbContext CreateContext() => Fixture.CreateContext();
 
-        public abstract class StoreGeneratedFixupFixtureBase : SharedStoreFixtureBase<PoolableDbContext>
+        public abstract class StoreGeneratedFixupFixtureBase
+            : SharedStoreFixtureBase<PoolableDbContext>
         {
             protected override string StoreName { get; } = "StoreGeneratedFixup";
 
@@ -4657,7 +4998,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.HasOne(e => e.Child)
                             .WithOne(e => e.Parent)
                             .HasForeignKey<Child>(e => new { e.ParentId1, e.ParentId2 });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<Child>(b => b.HasKey(e => new { e.Id1, e.Id2 }));
 
@@ -4668,7 +5010,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.HasOne(e => e.Child)
                             .WithOne()
                             .HasForeignKey<ChildPN>(e => new { e.ParentId1, e.ParentId2 });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<ChildPN>(b => b.HasKey(e => new { e.Id1, e.Id2 }));
 
@@ -4679,7 +5022,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.HasOne<ChildDN>()
                             .WithOne(e => e.Parent)
                             .HasForeignKey<ChildDN>(e => new { e.ParentId1, e.ParentId2 });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<ChildDN>(b => b.HasKey(e => new { e.Id1, e.Id2 }));
 
@@ -4690,7 +5034,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.HasOne<ChildNN>()
                             .WithOne()
                             .HasForeignKey<ChildNN>(e => new { e.ParentId1, e.ParentId2 });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<ChildNN>(b => b.HasKey(e => new { e.Id1, e.Id2 }));
 
@@ -4701,7 +5046,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.HasMany<ProductDN>()
                             .WithOne(e => e.Category)
                             .HasForeignKey(e => new { e.CategoryId1, e.CategoryId2 });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<ProductDN>(b => b.HasKey(e => new { e.Id1, e.Id2 }));
 
@@ -4712,7 +5058,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.HasMany(e => e.Products)
                             .WithOne()
                             .HasForeignKey(e => new { e.CategoryId1, e.CategoryId2 });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<ProductPN>(b => b.HasKey(e => new { e.Id1, e.Id2 }));
 
@@ -4723,7 +5070,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.HasMany<ProductNN>()
                             .WithOne()
                             .HasForeignKey(e => new { e.CategoryId1, e.CategoryId2 });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<ProductNN>(b => b.HasKey(e => new { e.Id1, e.Id2 }));
 
@@ -4734,7 +5082,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.HasMany(e => e.Products)
                             .WithOne(e => e.Category)
                             .HasForeignKey(e => new { e.CategoryId1, e.CategoryId2 });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<Product>(b => b.HasKey(e => new { e.Id1, e.Id2 }));
 
@@ -4743,7 +5092,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         eb.Property(g => g.Id).ValueGeneratedNever();
                         eb.HasKey(l => new { l.GameId, l.Id });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<GameEntity>();
 
@@ -4754,7 +5104,8 @@ namespace Microsoft.EntityFrameworkCore
                             .WithMany(l => l.Items)
                             .HasForeignKey(i => new { i.GameId, i.LevelId })
                             .OnDelete(DeleteBehavior.Restrict);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<Actor>(
                     eb =>
@@ -4763,11 +5114,10 @@ namespace Microsoft.EntityFrameworkCore
                             .WithMany(l => l.Actors)
                             .HasForeignKey(i => new { i.GameId, i.LevelId })
                             .OnDelete(DeleteBehavior.Restrict);
-                    });
+                    }
+                );
 
-                modelBuilder
-                    .Entity<FirstLevel>()
-                    .HasData(new FirstLevel { Id = 1 });
+                modelBuilder.Entity<FirstLevel>().HasData(new FirstLevel { Id = 1 });
             }
         }
     }

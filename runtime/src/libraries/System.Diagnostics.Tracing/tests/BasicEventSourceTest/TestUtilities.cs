@@ -16,7 +16,9 @@ namespace BasicEventSourceTests
     internal class TestUtilities
     {
         // Specifies whether the process is elevated or not.
-        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(() => AdminHelpers.IsProcessElevated());
+        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(
+            () => AdminHelpers.IsProcessElevated()
+        );
         internal static bool IsProcessElevated => s_isElevated.Value;
 
         /// <summary>
@@ -31,21 +33,23 @@ namespace BasicEventSourceTests
             foreach (var eventSource in EventSource.GetSources())
             {
                 // Exempt sources built in to the framework that might be used by types involved in the tests
-                if (eventSource.Name != "System.Threading.Tasks.TplEventSource" &&
-                    eventSource.Name != "System.Diagnostics.Eventing.FrameworkEventSource" &&
-                    eventSource.Name != "System.Buffers.ArrayPoolEventSource" &&
-                    eventSource.Name != "System.Threading.SynchronizationEventSource" &&
-                    eventSource.Name != "System.Collections.Concurrent.ConcurrentCollectionsEventSource" &&
-                    eventSource.Name != "System.Runtime.InteropServices.InteropEventProvider" &&
-                    eventSource.Name != "System.Reflection.Runtime.Tracing" &&
-                    eventSource.Name != "Microsoft-Windows-DotNETRuntime" &&
-                    eventSource.Name != "System.Runtime" &&
-
+                if (
+                    eventSource.Name != "System.Threading.Tasks.TplEventSource"
+                    && eventSource.Name != "System.Diagnostics.Eventing.FrameworkEventSource"
+                    && eventSource.Name != "System.Buffers.ArrayPoolEventSource"
+                    && eventSource.Name != "System.Threading.SynchronizationEventSource"
+                    && eventSource.Name
+                        != "System.Collections.Concurrent.ConcurrentCollectionsEventSource"
+                    && eventSource.Name != "System.Runtime.InteropServices.InteropEventProvider"
+                    && eventSource.Name != "System.Reflection.Runtime.Tracing"
+                    && eventSource.Name != "Microsoft-Windows-DotNETRuntime"
+                    && eventSource.Name != "System.Runtime"
+                    &&
                     // These event sources show up when hosted in the VS test runner
-                    eventSource.Name != "System.Net.Sockets" &&
-                    eventSource.Name != "Private.InternalDiagnostics.System.Net.Sockets" &&
-                    eventSource.Name != "TestPlatform"
-                    )
+                    eventSource.Name != "System.Net.Sockets"
+                    && eventSource.Name != "Private.InternalDiagnostics.System.Net.Sockets"
+                    && eventSource.Name != "TestPlatform"
+                )
                 {
                     eventSourceNames += eventSource.Name + " ";
                 }

@@ -24,10 +24,24 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
     {
         // Arrange
         var quicTransportOptions = new QuicTransportOptions();
-        var quicTransportFactory = new QuicTransportFactory(NullLoggerFactory.Instance, Options.Create(quicTransportOptions));
+        var quicTransportFactory = new QuicTransportFactory(
+            NullLoggerFactory.Instance,
+            Options.Create(quicTransportOptions)
+        );
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => quicTransportFactory.BindAsync(new IPEndPoint(0, 0), features: null, cancellationToken: CancellationToken.None).AsTask()).DefaultTimeout();
+        var ex = await Assert
+            .ThrowsAsync<InvalidOperationException>(
+                () =>
+                    quicTransportFactory
+                        .BindAsync(
+                            new IPEndPoint(0, 0),
+                            features: null,
+                            cancellationToken: CancellationToken.None
+                        )
+                        .AsTask()
+            )
+            .DefaultTimeout();
 
         // Assert
         Assert.Equal("Couldn't find HTTPS configuration for QUIC transport.", ex.Message);
@@ -39,14 +53,31 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
     {
         // Arrange
         var quicTransportOptions = new QuicTransportOptions();
-        var quicTransportFactory = new QuicTransportFactory(NullLoggerFactory.Instance, Options.Create(quicTransportOptions));
+        var quicTransportFactory = new QuicTransportFactory(
+            NullLoggerFactory.Instance,
+            Options.Create(quicTransportOptions)
+        );
         var features = new FeatureCollection();
         features.Set(new SslServerAuthenticationOptions());
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => quicTransportFactory.BindAsync(new IPEndPoint(0, 0), features: features, cancellationToken: CancellationToken.None).AsTask()).DefaultTimeout();
+        var ex = await Assert
+            .ThrowsAsync<InvalidOperationException>(
+                () =>
+                    quicTransportFactory
+                        .BindAsync(
+                            new IPEndPoint(0, 0),
+                            features: features,
+                            cancellationToken: CancellationToken.None
+                        )
+                        .AsTask()
+            )
+            .DefaultTimeout();
 
         // Assert
-        Assert.Equal("SslServerAuthenticationOptions must provide a server certificate using ServerCertificate, ServerCertificateContext, or ServerCertificateSelectionCallback.", ex.Message);
+        Assert.Equal(
+            "SslServerAuthenticationOptions must provide a server certificate using ServerCertificate, ServerCertificateContext, or ServerCertificateSelectionCallback.",
+            ex.Message
+        );
     }
 }

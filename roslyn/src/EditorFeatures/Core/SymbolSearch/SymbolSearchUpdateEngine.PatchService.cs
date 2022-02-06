@@ -10,8 +10,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     {
         private class PatchService : IPatchService
         {
-            public byte[] ApplyPatch(byte[] databaseBytes, byte[] patchBytes)
-                => Patching.Delta.ApplyPatch(databaseBytes, patchBytes);
+            public byte[] ApplyPatch(byte[] databaseBytes, byte[] patchBytes) =>
+                Patching.Delta.ApplyPatch(databaseBytes, patchBytes);
         }
     }
 }

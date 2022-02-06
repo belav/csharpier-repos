@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Components.HotReload
 {
     internal class HotReloadEnvironment
     {
-        public static readonly HotReloadEnvironment Instance = new(Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES") == "debug");
+        public static readonly HotReloadEnvironment Instance =
+            new(Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES") == "debug");
 
         public HotReloadEnvironment(bool isHotReloadEnabled)
         {

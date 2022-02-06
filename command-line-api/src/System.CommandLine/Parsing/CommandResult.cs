@@ -8,12 +8,8 @@ namespace System.CommandLine.Parsing
     /// </summary>
     public class CommandResult : SymbolResult
     {
-        internal CommandResult(
-            ICommand command,
-            Token token,
-            CommandResult? parent = null) :
-            base(command ?? throw new ArgumentNullException(nameof(command)),
-                 parent)
+        internal CommandResult(ICommand command, Token token, CommandResult? parent = null)
+            : base(command ?? throw new ArgumentNullException(nameof(command)), parent)
         {
             Command = command;
 
@@ -33,8 +29,7 @@ namespace System.CommandLine.Parsing
         internal override bool UseDefaultValueFor(IArgument argument) =>
             FindResultFor(argument) switch
             {
-                ArgumentResult arg => arg.Argument.HasDefaultValue && 
-                                      arg.Tokens.Count == 0,
+                ArgumentResult arg => arg.Argument.HasDefaultValue && arg.Tokens.Count == 0,
                 _ => false
             };
     }

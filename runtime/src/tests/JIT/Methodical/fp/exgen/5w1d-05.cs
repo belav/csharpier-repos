@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     private static float[] s_arr1d_0 = new float[6];
-
 
     public static int Func_0()
     {

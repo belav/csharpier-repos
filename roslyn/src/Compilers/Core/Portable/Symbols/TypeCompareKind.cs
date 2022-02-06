@@ -32,11 +32,17 @@ namespace Microsoft.CodeAnalysis
         // parameter in metadata, which would change the type. However, this would be inconsistent with how ref vs out vs in works on
         // top-level signatures today, so we disallow it in source.
         FunctionPointerRefMatchesOutInRefReadonly = 64,
-
-        AllNullableIgnoreOptions = IgnoreNullableModifiersForReferenceTypes | ObliviousNullableModifierMatchesAny,
-        AllIgnoreOptions = IgnoreCustomModifiersAndArraySizesAndLowerBounds | IgnoreDynamic | IgnoreTupleNames | AllNullableIgnoreOptions | IgnoreNativeIntegers,
+        AllNullableIgnoreOptions =
+            IgnoreNullableModifiersForReferenceTypes | ObliviousNullableModifierMatchesAny,
+        AllIgnoreOptions =
+            IgnoreCustomModifiersAndArraySizesAndLowerBounds
+            | IgnoreDynamic
+            | IgnoreTupleNames
+            | AllNullableIgnoreOptions
+            | IgnoreNativeIntegers,
         AllIgnoreOptionsForVB = IgnoreCustomModifiersAndArraySizesAndLowerBounds | IgnoreTupleNames,
-
-        CLRSignatureCompareOptions = TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds,
+        CLRSignatureCompareOptions =
+            TypeCompareKind.AllIgnoreOptions
+            & ~TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds,
     }
 }

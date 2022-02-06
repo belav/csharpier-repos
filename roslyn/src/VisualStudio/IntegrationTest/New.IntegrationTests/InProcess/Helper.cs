@@ -13,14 +13,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     {
         /// <summary>
         /// This method will retry the asynchronous action represented by <paramref name="action"/>,
-        /// waiting for <paramref name="delay"/> time after each retry. If a given retry returns a value 
+        /// waiting for <paramref name="delay"/> time after each retry. If a given retry returns a value
         /// other than the default value of <typeparamref name="T"/>, this value is returned.
         /// </summary>
         /// <param name="action">the asynchronous action to retry</param>
         /// <param name="delay">the amount of time to wait between retries</param>
         /// <typeparam name="T">type of return value</typeparam>
         /// <returns>the return value of <paramref name="action"/></returns>
-        public static Task<T?> RetryAsync<T>(Func<CancellationToken, Task<T>> action, TimeSpan delay, CancellationToken cancellationToken)
+        public static Task<T?> RetryAsync<T>(
+            Func<CancellationToken, Task<T>> action,
+            TimeSpan delay,
+            CancellationToken cancellationToken
+        )
         {
             return RetryAsyncHelper(
                 async cancellationToken =>
@@ -36,10 +40,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     }
                 },
                 delay,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        private static async Task<T> RetryAsyncHelper<T>(Func<CancellationToken, Task<T>> action, TimeSpan delay, CancellationToken cancellationToken)
+        private static async Task<T> RetryAsyncHelper<T>(
+            Func<CancellationToken, Task<T>> action,
+            TimeSpan delay,
+            CancellationToken cancellationToken
+        )
         {
             while (true)
             {

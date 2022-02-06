@@ -7,8 +7,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class TestWebHost
     {
-        public TestWebHost(IServiceProvider services)
-            => Services = services;
+        public TestWebHost(IServiceProvider services) => Services = services;
 
         public IServiceProvider Services { get; }
     }

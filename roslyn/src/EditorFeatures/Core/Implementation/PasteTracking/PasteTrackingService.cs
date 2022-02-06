@@ -23,10 +23,13 @@ namespace Microsoft.CodeAnalysis.PasteTracking
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PasteTrackingService(IThreadingContext threadingContext)
-            => _threadingContext = threadingContext;
+        public PasteTrackingService(IThreadingContext threadingContext) =>
+            _threadingContext = threadingContext;
 
-        public bool TryGetPastedTextSpan(SourceTextContainer sourceTextContainer, out TextSpan textSpan)
+        public bool TryGetPastedTextSpan(
+            SourceTextContainer sourceTextContainer,
+            out TextSpan textSpan
+        )
         {
             var textBuffer = sourceTextContainer.TryGetTextBuffer();
             if (textBuffer is null)
@@ -43,7 +46,7 @@ namespace Microsoft.CodeAnalysis.PasteTracking
         {
             Contract.ThrowIfFalse(_threadingContext.HasMainThread);
 
-            // Use the TextBuffer properties to store the pasted text span. 
+            // Use the TextBuffer properties to store the pasted text span.
             // The `PropertiesCollection` is thread-safe and will be cleared
             // when all TextViews that share this buffer are closed.
             // Any change to the TextBuffer will remove the pasted text span.

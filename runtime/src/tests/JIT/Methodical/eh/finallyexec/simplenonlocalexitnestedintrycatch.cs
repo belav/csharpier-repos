@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// try/finally embedded in a try catch with a nonlocal exit 
+// try/finally embedded in a try catch with a nonlocal exit
 using System;
 
 namespace hello
@@ -9,6 +9,7 @@ namespace hello
     class Class1
     {
         private static TestUtil.TestLog testLog;
+
         static Class1()
         {
             // Create test writer object to hold expected output
@@ -30,7 +31,8 @@ namespace hello
             {
                 try
                 {
-                    if (args.Length == 0) goto done;
+                    if (args.Length == 0)
+                        goto done;
                     Console.WriteLine("in try");
                 }
                 finally
@@ -50,7 +52,5 @@ namespace hello
 
             return testLog.VerifyOutput();
         }
-
     }
 }
-

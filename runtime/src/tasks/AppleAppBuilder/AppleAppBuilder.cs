@@ -20,15 +20,8 @@ public class AppleAppBuilderTask : Task
     [Required]
     public string TargetOS
     {
-        get
-        {
-            return targetOS;
-        }
-
-        set
-        {
-            targetOS = value.ToLower();
-        }
+        get { return targetOS; }
+        set { targetOS = value.ToLower(); }
     }
 
     /// <summary>
@@ -166,7 +159,9 @@ public class AppleAppBuilderTask : Task
         {
             if (!File.Exists(Path.Combine(AppDir, MainLibraryFileName)))
             {
-                throw new ArgumentException($"MainLibraryFileName='{MainLibraryFileName}' was not found in AppDir='{AppDir}'");
+                throw new ArgumentException(
+                    $"MainLibraryFileName='{MainLibraryFileName}' was not found in AppDir='{AppDir}'"
+                );
             }
         }
 
@@ -222,37 +217,85 @@ public class AppleAppBuilderTask : Task
                 validDiagnosticsConfig = false;
             else if (RuntimeComponents.Equals("*", StringComparison.OrdinalIgnoreCase))
                 validDiagnosticsConfig = true;
-            else if (RuntimeComponents.Contains("diagnostics_tracing", StringComparison.OrdinalIgnoreCase))
+            else if (
+                RuntimeComponents.Contains(
+                    "diagnostics_tracing",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
                 validDiagnosticsConfig = true;
 
             if (!validDiagnosticsConfig)
-                throw new ArgumentException("Using DiagnosticPorts require diagnostics_tracing runtime component.");
+                throw new ArgumentException(
+                    "Using DiagnosticPorts require diagnostics_tracing runtime component."
+                );
         }
 
         var generator = new Xcode(Log, TargetOS, Arch);
 
         if (GenerateXcodeProject)
         {
-            XcodeProjectPath = generator.GenerateXCode(ProjectName, MainLibraryFileName, assemblerFiles, assemblerFilesToLink,
-                AppDir, binDir, MonoRuntimeHeaders, !isDevice, UseConsoleUITemplate, ForceAOT, ForceInterpreter, InvariantGlobalization, Optimized, EnableRuntimeLogging, DiagnosticPorts, RuntimeComponents, NativeMainSource);
+            XcodeProjectPath = generator.GenerateXCode(
+                ProjectName,
+                MainLibraryFileName,
+                assemblerFiles,
+                assemblerFilesToLink,
+                AppDir,
+                binDir,
+                MonoRuntimeHeaders,
+                !isDevice,
+                UseConsoleUITemplate,
+                ForceAOT,
+                ForceInterpreter,
+                InvariantGlobalization,
+                Optimized,
+                EnableRuntimeLogging,
+                DiagnosticPorts,
+                RuntimeComponents,
+                NativeMainSource
+            );
 
             if (BuildAppBundle)
             {
                 if (isDevice && string.IsNullOrEmpty(DevTeamProvisioning))
                 {
                     // DevTeamProvisioning shouldn't be empty for arm64 builds
-                    Log.LogMessage(MessageImportance.High, "DevTeamProvisioning is not set, BuildAppBundle step is skipped.");
+                    Log.LogMessage(
+                        MessageImportance.High,
+                        "DevTeamProvisioning is not set, BuildAppBundle step is skipped."
+                    );
                 }
                 else
                 {
-                    AppBundlePath = generator.BuildAppBundle(XcodeProjectPath, Optimized, DevTeamProvisioning);
+                    AppBundlePath = generator.BuildAppBundle(
+                        XcodeProjectPath,
+                        Optimized,
+                        DevTeamProvisioning
+                    );
                 }
             }
         }
         else if (GenerateCMakeProject)
         {
-             generator.GenerateCMake(ProjectName, MainLibraryFileName, assemblerFiles, assemblerFilesToLink,
-                AppDir, binDir, MonoRuntimeHeaders, !isDevice, UseConsoleUITemplate, ForceAOT, ForceInterpreter, InvariantGlobalization, Optimized, EnableRuntimeLogging, DiagnosticPorts, RuntimeComponents, NativeMainSource);
+            generator.GenerateCMake(
+                ProjectName,
+                MainLibraryFileName,
+                assemblerFiles,
+                assemblerFilesToLink,
+                AppDir,
+                binDir,
+                MonoRuntimeHeaders,
+                !isDevice,
+                UseConsoleUITemplate,
+                ForceAOT,
+                ForceInterpreter,
+                InvariantGlobalization,
+                Optimized,
+                EnableRuntimeLogging,
+                DiagnosticPorts,
+                RuntimeComponents,
+                NativeMainSource
+            );
         }
 
         return true;

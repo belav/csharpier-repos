@@ -16,8 +16,9 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// A list of <see cref="SyntaxNode"/>.
     /// </summary>
-    public readonly partial struct SyntaxList<TNode> : IReadOnlyList<TNode>, IEquatable<SyntaxList<TNode>>
-        where TNode : SyntaxNode
+    public readonly partial struct SyntaxList<TNode>
+        : IReadOnlyList<TNode>,
+          IEquatable<SyntaxList<TNode>> where TNode : SyntaxNode
     {
         private readonly SyntaxNode? _node;
 
@@ -30,19 +31,13 @@ namespace Microsoft.CodeAnalysis
         /// Creates a singleton list of syntax nodes.
         /// </summary>
         /// <param name="node">The single element node.</param>
-        public SyntaxList(TNode? node)
-            : this((SyntaxNode?)node)
-        {
-        }
+        public SyntaxList(TNode? node) : this((SyntaxNode?)node) { }
 
         /// <summary>
         /// Creates a list of syntax nodes.
         /// </summary>
         /// <param name="nodes">A sequence of element nodes.</param>
-        public SyntaxList(IEnumerable<TNode>? nodes)
-            : this(CreateNode(nodes))
-        {
-        }
+        public SyntaxList(IEnumerable<TNode>? nodes) : this(CreateNode(nodes)) { }
 
         private static SyntaxNode? CreateNode(IEnumerable<TNode>? nodes)
         {
@@ -52,7 +47,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             var collection = nodes as ICollection<TNode>;
-            var builder = (collection != null) ? new SyntaxListBuilder<TNode>(collection.Count) : SyntaxListBuilder<TNode>.Create();
+            var builder =
+                (collection != null)
+                    ? new SyntaxListBuilder<TNode>(collection.Count)
+                    : SyntaxListBuilder<TNode>.Create();
 
             foreach (TNode node in nodes)
             {
@@ -64,10 +62,7 @@ namespace Microsoft.CodeAnalysis
 
         internal SyntaxNode? Node
         {
-            get
-            {
-                return _node;
-            }
+            get { return _node; }
         }
 
         /// <summary>
@@ -75,10 +70,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public int Count
         {
-            get
-            {
-                return _node == null ? 0 : (_node.IsList ? _node.SlotCount : 1);
-            }
+            get { return _node == null ? 0 : (_node.IsList ? _node.SlotCount : 1); }
         }
 
         /// <summary>
@@ -132,7 +124,10 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    return TextSpan.FromBounds(this[0].FullSpan.Start, this[this.Count - 1].FullSpan.End);
+                    return TextSpan.FromBounds(
+                        this[0].FullSpan.Start,
+                        this[this.Count - 1].FullSpan.End
+                    );
                 }
             }
         }
@@ -156,11 +151,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the string representation of the nodes in this list, not including 
+        /// Returns the string representation of the nodes in this list, not including
         /// the first node's leading trivia and the last node's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The string representation of the nodes in this list, not including 
+        /// The string representation of the nodes in this list, not including
         /// the first node's leading trivia and the last node's trailing trivia.
         /// </returns>
         public override string ToString()
@@ -169,11 +164,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the full string representation of the nodes in this list including 
+        /// Returns the full string representation of the nodes in this list including
         /// the first node's leading trivia and the last node's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The full string representation of the nodes in this list including 
+        /// The full string representation of the nodes in this list including
         /// the first node's leading trivia and the last node's trailing trivia.
         /// </returns>
         public string ToFullString()

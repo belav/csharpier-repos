@@ -15,7 +15,11 @@ internal class UrlEncodeSegment : PatternSegment
         _pattern = pattern;
     }
 
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var oldBuilder = context.Builder;
         // PERF

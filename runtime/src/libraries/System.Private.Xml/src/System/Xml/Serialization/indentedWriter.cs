@@ -23,31 +23,28 @@ namespace System.Xml.Serialization
 
         internal int Indent
         {
-            get
-            {
-                return _indentLevel;
-            }
-            set
-            {
-                _indentLevel = value;
-            }
+            get { return _indentLevel; }
+            set { _indentLevel = value; }
         }
 
         internal void Write(string? s)
         {
-            if (_needIndent) WriteIndent();
+            if (_needIndent)
+                WriteIndent();
             _writer.Write(s);
         }
 
         internal void Write(char c)
         {
-            if (_needIndent) WriteIndent();
+            if (_needIndent)
+                WriteIndent();
             _writer.Write(c);
         }
 
         internal void WriteLine(string? s)
         {
-            if (_needIndent) WriteIndent();
+            if (_needIndent)
+                WriteIndent();
             _writer.WriteLine(s);
             _needIndent = true;
         }

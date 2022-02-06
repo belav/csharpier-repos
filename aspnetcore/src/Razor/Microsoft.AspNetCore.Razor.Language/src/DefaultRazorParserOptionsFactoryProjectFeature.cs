@@ -6,13 +6,17 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal class DefaultRazorParserOptionsFactoryProjectFeature : RazorProjectEngineFeatureBase, IRazorParserOptionsFactoryProjectFeature
+internal class DefaultRazorParserOptionsFactoryProjectFeature
+    : RazorProjectEngineFeatureBase,
+      IRazorParserOptionsFactoryProjectFeature
 {
     private IConfigureRazorParserOptionsFeature[] _configureOptions;
 
     protected override void OnInitialized()
     {
-        _configureOptions = ProjectEngine.EngineFeatures.OfType<IConfigureRazorParserOptionsFeature>().ToArray();
+        _configureOptions = ProjectEngine.EngineFeatures
+            .OfType<IConfigureRazorParserOptionsFeature>()
+            .ToArray();
     }
 
     public RazorParserOptions Create(string fileKind, Action<RazorParserOptionsBuilder> configure)

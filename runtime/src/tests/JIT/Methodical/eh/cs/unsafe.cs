@@ -7,7 +7,6 @@ using System;
 
 class Test
 {
-
     private static TestUtil.TestLog testLog;
 
     static Test()
@@ -43,7 +42,12 @@ class Test
                 for (int i = 1; i < arr.Length; i++)
                 {
                     byte value = *p_elem;
-                    Console.WriteLine("arr[{0}] at 0x{1:X} is {2}", i, (uint)(p_elem - p_prev), value);
+                    Console.WriteLine(
+                        "arr[{0}] at 0x{1:X} is {2}",
+                        i,
+                        (uint)(p_elem - p_prev),
+                        value
+                    );
                     p_elem++;
                 }
             }

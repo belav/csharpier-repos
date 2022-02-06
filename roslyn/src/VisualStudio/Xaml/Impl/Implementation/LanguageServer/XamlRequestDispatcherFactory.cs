@@ -30,18 +30,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XamlRequestDispatcherFactory(
-            [ImportMany] IEnumerable<Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>> requestHandlerProviders,
+            [ImportMany]
+                IEnumerable<
+                Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>
+            > requestHandlerProviders,
             XamlProjectService projectService,
-            [Import(AllowDefault = true)] IXamlLanguageServerFeedbackService? feedbackService)
-            : base(requestHandlerProviders)
+            [Import(AllowDefault = true)] IXamlLanguageServerFeedbackService? feedbackService
+        ) : base(requestHandlerProviders)
         {
             _projectService = projectService;
             _feedbackService = feedbackService;
         }
 
-        public override RequestDispatcher CreateRequestDispatcher(ImmutableArray<string> supportedLanguages)
+        public override RequestDispatcher CreateRequestDispatcher(
+            ImmutableArray<string> supportedLanguages
+        )
         {
-            return new XamlRequestDispatcher(_projectService, _requestHandlerProviders, _feedbackService, supportedLanguages);
+            return new XamlRequestDispatcher(
+                _projectService,
+                _requestHandlerProviders,
+                _feedbackService,
+                supportedLanguages
+            );
         }
 
         private class XamlRequestDispatcher : RequestDispatcher
@@ -51,16 +61,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
 
             public XamlRequestDispatcher(
                 XamlProjectService projectService,
-                ImmutableArray<Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>> requestHandlerProviders,
+                ImmutableArray<
+                    Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>
+                > requestHandlerProviders,
                 IXamlLanguageServerFeedbackService? feedbackService,
-                ImmutableArray<string> languageNames) : base(requestHandlerProviders, languageNames)
+                ImmutableArray<string> languageNames
+            ) : base(requestHandlerProviders, languageNames)
             {
                 _projectService = projectService;
                 _feedbackService = feedbackService;
             }
 
-            protected override async Task<ResponseType?> ExecuteRequestAsync<RequestType, ResponseType>(
-                RequestExecutionQueue queue, RequestType request, ClientCapabilities clientCapabilities, string? clientName, string methodName, bool mutatesSolutionState, bool requiresLSPSolution, IRequestHandler<RequestType, ResponseType> handler, CancellationToken cancellationToken)
+            protected override async Task<ResponseType?> ExecuteRequestAsync<
+                RequestType,
+                ResponseType
+            >(
+                RequestExecutionQueue queue,
+                RequestType request,
+                ClientCapabilities clientCapabilities,
+                string? clientName,
+                string methodName,
+                bool mutatesSolutionState,
+                bool requiresLSPSolution,
+                IRequestHandler<RequestType, ResponseType> handler,
+                CancellationToken cancellationToken
+            )
                 where RequestType : class
                 where ResponseType : default
             {
@@ -72,11 +97,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                     documentId = _projectService.TrackOpenDocument(documentUri.LocalPath);
                 }
 
-                using (var requestScope = _feedbackService?.CreateRequestScope(documentId, methodName))
+                using (
+                    var requestScope = _feedbackService?.CreateRequestScope(documentId, methodName)
+                )
                 {
                     try
                     {
-                        return await base.ExecuteRequestAsync(queue, request, clientCapabilities, clientName, methodName, mutatesSolutionState, requiresLSPSolution, handler, cancellationToken).ConfigureAwait(false);
+                        return await base.ExecuteRequestAsync(
+                            queue,
+                            request,
+                            clientCapabilities,
+                            clientName,
+                            methodName,
+                            mutatesSolutionState,
+                            requiresLSPSolution,
+                            handler,
+                            cancellationToken
+                        )
+                            .ConfigureAwait(false);
                     }
                     catch (Exception e) when (e is not OperationCanceledException)
                     {

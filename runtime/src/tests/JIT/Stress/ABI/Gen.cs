@@ -16,7 +16,8 @@ namespace ABIStress
     internal static class Gen
     {
         private static unsafe TVec GenConstantVector<TVec, TElem>(Random rand)
-            where TVec : unmanaged where TElem : unmanaged
+            where TVec : unmanaged
+            where TElem : unmanaged
         {
             int outerSize = sizeof(TVec);
             int innerSize = sizeof(TElem);
@@ -58,7 +59,10 @@ namespace ABIStress
                 return GenConstantVector<Vector256<int>, int>(rand);
 
             Debug.Assert(fields != null);
-            return Activator.CreateInstance(type, fields.Select(fi => GenConstant(fi.FieldType, null, rand)).ToArray());
+            return Activator.CreateInstance(
+                type,
+                fields.Select(fi => GenConstant(fi.FieldType, null, rand)).ToArray()
+            );
         }
     }
 
@@ -88,6 +92,7 @@ namespace ABIStress
         public int Index { get; }
 
         public override object Get(object[] args) => args[Index];
+
         public override void Emit(ILGenerator il)
         {
             il.Emit(OpCodes.Ldarg, checked((short)Index));
@@ -96,7 +101,8 @@ namespace ABIStress
 
     internal class FieldValue : Value
     {
-        public FieldValue(Value val, int fieldIndex) : base(new TypeEx(val.Type.Fields[fieldIndex].FieldType))
+        public FieldValue(Value val, int fieldIndex)
+            : base(new TypeEx(val.Type.Fields[fieldIndex].FieldType))
         {
             Value = val;
             FieldIndex = fieldIndex;
@@ -129,6 +135,7 @@ namespace ABIStress
         public object Value { get; }
 
         public override object Get(object[] args) => Value;
+
         public override void Emit(ILGenerator il)
         {
             if (Type.Fields == null)

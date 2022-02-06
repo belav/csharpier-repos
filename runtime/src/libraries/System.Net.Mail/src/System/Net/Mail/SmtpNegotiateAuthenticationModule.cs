@@ -9,13 +9,18 @@ namespace System.Net.Mail
 {
     internal sealed class SmtpNegotiateAuthenticationModule : ISmtpAuthenticationModule
     {
-        private readonly Dictionary<object, NTAuthentication> _sessions = new Dictionary<object, NTAuthentication>();
+        private readonly Dictionary<object, NTAuthentication> _sessions =
+            new Dictionary<object, NTAuthentication>();
 
-        internal SmtpNegotiateAuthenticationModule()
-        {
-        }
+        internal SmtpNegotiateAuthenticationModule() { }
 
-        public Authorization? Authenticate(string? challenge, NetworkCredential? credential, object sessionCookie, string? spn, ChannelBinding? channelBindingToken)
+        public Authorization? Authenticate(
+            string? challenge,
+            NetworkCredential? credential,
+            object sessionCookie,
+            string? spn,
+            ChannelBinding? channelBindingToken
+        )
         {
             try
             {
@@ -29,10 +34,14 @@ namespace System.Net.Mail
                             return null;
                         }
 
-                        _sessions[sessionCookie] =
-                            clientContext =
-                            new NTAuthentication(false, "Negotiate", credential, spn,
-                                                 ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity, channelBindingToken);
+                        _sessions[sessionCookie] = clientContext = new NTAuthentication(
+                            false,
+                            "Negotiate",
+                            credential,
+                            spn,
+                            ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity,
+                            channelBindingToken
+                        );
                     }
 
                     byte[]? byteResp;
@@ -40,15 +49,13 @@ namespace System.Net.Mail
 
                     if (!clientContext.IsCompleted)
                     {
-
                         // If auth is not yet completed keep producing
                         // challenge responses with GetOutgoingBlob
 
                         byte[]? decodedChallenge = null;
                         if (challenge != null)
                         {
-                            decodedChallenge =
-                                Convert.FromBase64String(challenge);
+                            decodedChallenge = Convert.FromBase64String(challenge);
                         }
                         byteResp = clientContext.GetOutgoingBlob(decodedChallenge, false);
                         if (clientContext.IsCompleted && byteResp == null)
@@ -82,10 +89,7 @@ namespace System.Net.Mail
 
         public string AuthenticationType
         {
-            get
-            {
-                return "gssapi";
-            }
+            get { return "gssapi"; }
         }
 
         public void CloseContext(object sessionCookie)
@@ -109,7 +113,10 @@ namespace System.Net.Mail
         //
         // Returns null for failure, Base64 encoded string on
         // success.
-        private string? GetSecurityLayerOutgoingBlob(string? challenge, NTAuthentication clientContext)
+        private string? GetSecurityLayerOutgoingBlob(
+            string? challenge,
+            NTAuthentication clientContext
+        )
         {
             // must have a security layer challenge
 
@@ -154,11 +161,16 @@ namespace System.Net.Mail
             // and the 2nd-4th bytes are value zero since token size is not
             // applicable when there is no security layer.
 
-            if (len < 4 ||          // expect 4 bytes
-                input[0] != 1 ||    // first value 1
-                input[1] != 0 ||    // rest value 0
-                input[2] != 0 ||
-                input[3] != 0)
+            if (
+                len < 4
+                || // expect 4 bytes
+                input[0] != 1
+                || // first value 1
+                input[1] != 0
+                || // rest value 0
+                input[2] != 0
+                || input[3] != 0
+            )
             {
                 return null;
             }

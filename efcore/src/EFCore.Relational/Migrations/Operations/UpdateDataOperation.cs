@@ -74,36 +74,46 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         {
             Check.DebugAssert(
                 KeyColumns.Length == KeyValues.GetLength(1),
-                $"The number of key values doesn't match the number of keys (${KeyColumns.Length})");
+                $"The number of key values doesn't match the number of keys (${KeyColumns.Length})"
+            );
             Check.DebugAssert(
                 Columns.Length == Values.GetLength(1),
-                $"The number of values doesn't match the number of keys (${Columns.Length})");
+                $"The number of values doesn't match the number of keys (${Columns.Length})"
+            );
             Check.DebugAssert(
                 KeyValues.GetLength(0) == Values.GetLength(0),
-                $"The number of key values doesn't match the number of values (${KeyValues.GetLength(0)})");
+                $"The number of key values doesn't match the number of values (${KeyValues.GetLength(0)})"
+            );
 
             var table = model?.GetRelationalModel().FindTable(Table, Schema);
-            var keyProperties = table != null
-                ? MigrationsModelDiffer.GetMappedProperties(table, KeyColumns)
-                : null;
-            var properties = table != null
-                ? MigrationsModelDiffer.GetMappedProperties(table, Columns)
-                : null;
+            var keyProperties =
+                table != null ? MigrationsModelDiffer.GetMappedProperties(table, KeyColumns) : null;
+            var properties =
+                table != null ? MigrationsModelDiffer.GetMappedProperties(table, Columns) : null;
 
             var modificationCommandFactory = new ModificationCommandFactory();
 
             for (var i = 0; i < KeyValues.GetLength(0); i++)
             {
                 var modificationCommand = modificationCommandFactory.CreateModificationCommand(
-                    new ModificationCommandParameters(
-                        Table, Schema, sensitiveLoggingEnabled: false));
+                    new ModificationCommandParameters(Table, Schema, sensitiveLoggingEnabled: false)
+                );
 
                 for (var j = 0; j < KeyColumns.Length; j++)
                 {
                     var columnModificationParameters = new ColumnModificationParameters(
-                        KeyColumns[j], originalValue: null, value: KeyValues[i, j], property: keyProperties?[j],
-                        columnType: KeyColumnTypes?[j], typeMapping: null, read: false, write: false, key: true, condition: true,
-                        sensitiveLoggingEnabled: false);
+                        KeyColumns[j],
+                        originalValue: null,
+                        value: KeyValues[i, j],
+                        property: keyProperties?[j],
+                        columnType: KeyColumnTypes?[j],
+                        typeMapping: null,
+                        read: false,
+                        write: false,
+                        key: true,
+                        condition: true,
+                        sensitiveLoggingEnabled: false
+                    );
 
                     modificationCommand.AddColumnModification(columnModificationParameters);
                 }
@@ -111,9 +121,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
                 for (var j = 0; j < Columns.Length; j++)
                 {
                     var columnModificationParameters = new ColumnModificationParameters(
-                        Columns[j], originalValue: null, value: Values[i, j], property: properties?[j],
-                        columnType: ColumnTypes?[j], typeMapping: null, read: false, write: true, key: true, condition: false,
-                        sensitiveLoggingEnabled: false);
+                        Columns[j],
+                        originalValue: null,
+                        value: Values[i, j],
+                        property: properties?[j],
+                        columnType: ColumnTypes?[j],
+                        typeMapping: null,
+                        read: false,
+                        write: true,
+                        key: true,
+                        condition: false,
+                        sensitiveLoggingEnabled: false
+                    );
 
                     modificationCommand.AddColumnModification(columnModificationParameters);
                 }

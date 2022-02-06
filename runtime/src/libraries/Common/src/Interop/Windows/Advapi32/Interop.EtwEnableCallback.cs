@@ -27,6 +27,7 @@ internal static partial class Interop
             long matchAnyKeywords,
             long matchAllKeywords,
             EVENT_FILTER_DESCRIPTOR* filterData,
-            void* callbackContext);
+            void* callbackContext
+        );
     }
 }

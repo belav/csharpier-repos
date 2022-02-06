@@ -12,12 +12,25 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal static class MarshalAsAttributeDecoder<TWellKnownAttributeData, TAttributeSyntax, TAttributeData, TAttributeLocation>
+    internal static class MarshalAsAttributeDecoder<
+        TWellKnownAttributeData,
+        TAttributeSyntax,
+        TAttributeData,
+        TAttributeLocation
+    >
         where TWellKnownAttributeData : WellKnownAttributeData, IMarshalAsAttributeTarget, new()
         where TAttributeSyntax : SyntaxNode
         where TAttributeData : AttributeData
     {
-        internal static void Decode(ref DecodeWellKnownAttributeArguments<TAttributeSyntax, TAttributeData, TAttributeLocation> arguments, AttributeTargets target, CommonMessageProvider messageProvider)
+        internal static void Decode(
+            ref DecodeWellKnownAttributeArguments<
+                TAttributeSyntax,
+                TAttributeData,
+                TAttributeLocation
+            > arguments,
+            AttributeTargets target,
+            CommonMessageProvider messageProvider
+        )
         {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
@@ -42,7 +55,13 @@ namespace Microsoft.CodeAnalysis
                 case UnmanagedType.ByValArray:
                     if (target != AttributeTargets.Field)
                     {
-                        messageProvider.ReportMarshalUnmanagedTypeOnlyValidForFields(arguments.Diagnostics, arguments.AttributeSyntaxOpt, 0, "ByValArray", arguments.Attribute);
+                        messageProvider.ReportMarshalUnmanagedTypeOnlyValidForFields(
+                            arguments.Diagnostics,
+                            arguments.AttributeSyntaxOpt,
+                            0,
+                            "ByValArray",
+                            arguments.Attribute
+                        );
                     }
                     else
                     {
@@ -58,7 +77,13 @@ namespace Microsoft.CodeAnalysis
                 case UnmanagedType.ByValTStr:
                     if (target != AttributeTargets.Field)
                     {
-                        messageProvider.ReportMarshalUnmanagedTypeOnlyValidForFields(arguments.Diagnostics, arguments.AttributeSyntaxOpt, 0, "ByValTStr", arguments.Attribute);
+                        messageProvider.ReportMarshalUnmanagedTypeOnlyValidForFields(
+                            arguments.Diagnostics,
+                            arguments.AttributeSyntaxOpt,
+                            0,
+                            "ByValTStr",
+                            arguments.Attribute
+                        );
                     }
                     else
                     {
@@ -70,26 +95,46 @@ namespace Microsoft.CodeAnalysis
                 case Cci.Constants.UnmanagedType_VBByRefStr:
                     if (target == AttributeTargets.Field)
                     {
-                        messageProvider.ReportMarshalUnmanagedTypeNotValidForFields(arguments.Diagnostics, arguments.AttributeSyntaxOpt, 0, "VBByRefStr", arguments.Attribute);
+                        messageProvider.ReportMarshalUnmanagedTypeNotValidForFields(
+                            arguments.Diagnostics,
+                            arguments.AttributeSyntaxOpt,
+                            0,
+                            "VBByRefStr",
+                            arguments.Attribute
+                        );
                     }
                     else
                     {
                         // named parameters ignored with no error
-                        arguments.GetOrCreateData<TWellKnownAttributeData>().GetOrCreateData().SetMarshalAsSimpleType(unmanagedType);
+                        arguments
+                            .GetOrCreateData<TWellKnownAttributeData>()
+                            .GetOrCreateData()
+                            .SetMarshalAsSimpleType(unmanagedType);
                     }
 
                     break;
 
                 default:
-                    if ((int)unmanagedType < 0 || (int)unmanagedType > MarshalPseudoCustomAttributeData.MaxMarshalInteger)
+                    if (
+                        (int)unmanagedType < 0
+                        || (int)unmanagedType > MarshalPseudoCustomAttributeData.MaxMarshalInteger
+                    )
                     {
                         // Dev10 reports CS0647: "Error emitting attribute ..."
-                        messageProvider.ReportInvalidAttributeArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, 0, arguments.Attribute);
+                        messageProvider.ReportInvalidAttributeArgument(
+                            arguments.Diagnostics,
+                            arguments.AttributeSyntaxOpt,
+                            0,
+                            arguments.Attribute
+                        );
                     }
                     else
                     {
                         // named parameters ignored with no error
-                        arguments.GetOrCreateData<TWellKnownAttributeData>().GetOrCreateData().SetMarshalAsSimpleType(unmanagedType);
+                        arguments
+                            .GetOrCreateData<TWellKnownAttributeData>()
+                            .GetOrCreateData()
+                            .SetMarshalAsSimpleType(unmanagedType);
                     }
 
                     break;
@@ -99,19 +144,33 @@ namespace Microsoft.CodeAnalysis
         private static UnmanagedType DecodeMarshalAsType(AttributeData attribute)
         {
             UnmanagedType unmanagedType;
-            if (attribute.AttributeConstructor.Parameters[0].Type.SpecialType == SpecialType.System_Int16)
+            if (
+                attribute.AttributeConstructor.Parameters[0].Type.SpecialType
+                == SpecialType.System_Int16
+            )
             {
-                unmanagedType = (UnmanagedType)attribute.CommonConstructorArguments[0].DecodeValue<short>(SpecialType.System_Int16);
+                unmanagedType = (UnmanagedType)attribute.CommonConstructorArguments[
+                    0
+                ].DecodeValue<short>(SpecialType.System_Int16);
             }
             else
             {
-                unmanagedType = attribute.CommonConstructorArguments[0].DecodeValue<UnmanagedType>(SpecialType.System_Enum);
+                unmanagedType = attribute.CommonConstructorArguments[0].DecodeValue<UnmanagedType>(
+                    SpecialType.System_Enum
+                );
             }
 
             return unmanagedType;
         }
 
-        private static void DecodeMarshalAsCustom(ref DecodeWellKnownAttributeArguments<TAttributeSyntax, TAttributeData, TAttributeLocation> arguments, CommonMessageProvider messageProvider)
+        private static void DecodeMarshalAsCustom(
+            ref DecodeWellKnownAttributeArguments<
+                TAttributeSyntax,
+                TAttributeData,
+                TAttributeLocation
+            > arguments,
+            CommonMessageProvider messageProvider
+        )
         {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
@@ -131,7 +190,13 @@ namespace Microsoft.CodeAnalysis
                         typeName = namedArg.Value.DecodeValue<string>(SpecialType.System_String);
                         if (!MetadataHelpers.IsValidUnicodeString(typeName))
                         {
-                            messageProvider.ReportInvalidNamedArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position, arguments.Attribute.AttributeClass, namedArg.Key);
+                            messageProvider.ReportInvalidNamedArgument(
+                                arguments.Diagnostics,
+                                arguments.AttributeSyntaxOpt,
+                                position,
+                                arguments.Attribute.AttributeClass,
+                                namedArg.Key
+                            );
                             hasErrors = true;
                         }
 
@@ -139,7 +204,9 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case "MarshalTypeRef":
-                        typeSymbol = namedArg.Value.DecodeValue<ITypeSymbolInternal>(SpecialType.None);
+                        typeSymbol = namedArg.Value.DecodeValue<ITypeSymbolInternal>(
+                            SpecialType.None
+                        );
                         hasTypeSymbol = true; // even if MarshalTypeRef == null
                         break;
 
@@ -147,12 +214,18 @@ namespace Microsoft.CodeAnalysis
                         cookie = namedArg.Value.DecodeValue<string>(SpecialType.System_String);
                         if (!MetadataHelpers.IsValidUnicodeString(cookie))
                         {
-                            messageProvider.ReportInvalidNamedArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position, arguments.Attribute.AttributeClass, namedArg.Key);
+                            messageProvider.ReportInvalidNamedArgument(
+                                arguments.Diagnostics,
+                                arguments.AttributeSyntaxOpt,
+                                position,
+                                arguments.Attribute.AttributeClass,
+                                namedArg.Key
+                            );
                             hasErrors = true;
                         }
 
                         break;
-                        // other parameters ignored with no error
+                    // other parameters ignored with no error
                 }
 
                 position++;
@@ -161,17 +234,33 @@ namespace Microsoft.CodeAnalysis
             if (!hasTypeName && !hasTypeSymbol)
             {
                 // MarshalType or MarshalTypeRef must be specified:
-                messageProvider.ReportAttributeParameterRequired(arguments.Diagnostics, arguments.AttributeSyntaxOpt, "MarshalType", "MarshalTypeRef");
+                messageProvider.ReportAttributeParameterRequired(
+                    arguments.Diagnostics,
+                    arguments.AttributeSyntaxOpt,
+                    "MarshalType",
+                    "MarshalTypeRef"
+                );
                 hasErrors = true;
             }
 
             if (!hasErrors)
             {
-                arguments.GetOrCreateData<TWellKnownAttributeData>().GetOrCreateData().SetMarshalAsCustom(hasTypeName ? (object)typeName : typeSymbol, cookie);
+                arguments
+                    .GetOrCreateData<TWellKnownAttributeData>()
+                    .GetOrCreateData()
+                    .SetMarshalAsCustom(hasTypeName ? (object)typeName : typeSymbol, cookie);
             }
         }
 
-        private static void DecodeMarshalAsComInterface(ref DecodeWellKnownAttributeArguments<TAttributeSyntax, TAttributeData, TAttributeLocation> arguments, UnmanagedType unmanagedType, CommonMessageProvider messageProvider)
+        private static void DecodeMarshalAsComInterface(
+            ref DecodeWellKnownAttributeArguments<
+                TAttributeSyntax,
+                TAttributeData,
+                TAttributeLocation
+            > arguments,
+            UnmanagedType unmanagedType,
+            CommonMessageProvider messageProvider
+        )
         {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
@@ -185,14 +274,23 @@ namespace Microsoft.CodeAnalysis
                 {
                     case "IidParameterIndex":
                         parameterIndex = namedArg.Value.DecodeValue<int>(SpecialType.System_Int32);
-                        if (parameterIndex < 0 || parameterIndex > MarshalPseudoCustomAttributeData.MaxMarshalInteger)
+                        if (
+                            parameterIndex < 0
+                            || parameterIndex > MarshalPseudoCustomAttributeData.MaxMarshalInteger
+                        )
                         {
-                            messageProvider.ReportInvalidNamedArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position, arguments.Attribute.AttributeClass, namedArg.Key);
+                            messageProvider.ReportInvalidNamedArgument(
+                                arguments.Diagnostics,
+                                arguments.AttributeSyntaxOpt,
+                                position,
+                                arguments.Attribute.AttributeClass,
+                                namedArg.Key
+                            );
                             hasErrors = true;
                         }
 
                         break;
-                        // other parameters ignored with no error
+                    // other parameters ignored with no error
                 }
 
                 position++;
@@ -200,11 +298,22 @@ namespace Microsoft.CodeAnalysis
 
             if (!hasErrors)
             {
-                arguments.GetOrCreateData<TWellKnownAttributeData>().GetOrCreateData().SetMarshalAsComInterface(unmanagedType, parameterIndex);
+                arguments
+                    .GetOrCreateData<TWellKnownAttributeData>()
+                    .GetOrCreateData()
+                    .SetMarshalAsComInterface(unmanagedType, parameterIndex);
             }
         }
 
-        private static void DecodeMarshalAsArray(ref DecodeWellKnownAttributeArguments<TAttributeSyntax, TAttributeData, TAttributeLocation> arguments, CommonMessageProvider messageProvider, bool isFixed)
+        private static void DecodeMarshalAsArray(
+            ref DecodeWellKnownAttributeArguments<
+                TAttributeSyntax,
+                TAttributeData,
+                TAttributeLocation
+            > arguments,
+            CommonMessageProvider messageProvider,
+            bool isFixed
+        )
         {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
@@ -220,14 +329,24 @@ namespace Microsoft.CodeAnalysis
                 {
                     // array:
                     case "ArraySubType":
-                        elementType = namedArg.Value.DecodeValue<UnmanagedType>(SpecialType.System_Enum);
+                        elementType = namedArg.Value.DecodeValue<UnmanagedType>(
+                            SpecialType.System_Enum
+                        );
 
                         // for some reason, Dev10 metadata writer disallows CustomMarshaler type as an element type of non-fixed arrays
-                        if (!isFixed && elementType == Cci.Constants.UnmanagedType_CustomMarshaler ||
-                            (int)elementType < 0 ||
-                            (int)elementType > MarshalPseudoCustomAttributeData.MaxMarshalInteger)
+                        if (
+                            !isFixed && elementType == Cci.Constants.UnmanagedType_CustomMarshaler
+                            || (int)elementType < 0
+                            || (int)elementType > MarshalPseudoCustomAttributeData.MaxMarshalInteger
+                        )
                         {
-                            messageProvider.ReportInvalidNamedArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position, arguments.Attribute.AttributeClass, namedArg.Key);
+                            messageProvider.ReportInvalidNamedArgument(
+                                arguments.Diagnostics,
+                                arguments.AttributeSyntaxOpt,
+                                position,
+                                arguments.Attribute.AttributeClass,
+                                namedArg.Key
+                            );
                             hasErrors = true;
                         }
 
@@ -235,9 +354,18 @@ namespace Microsoft.CodeAnalysis
 
                     case "SizeConst":
                         elementCount = namedArg.Value.DecodeValue<int>(SpecialType.System_Int32);
-                        if (elementCount < 0 || elementCount > MarshalPseudoCustomAttributeData.MaxMarshalInteger)
+                        if (
+                            elementCount < 0
+                            || elementCount > MarshalPseudoCustomAttributeData.MaxMarshalInteger
+                        )
                         {
-                            messageProvider.ReportInvalidNamedArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position, arguments.Attribute.AttributeClass, namedArg.Key);
+                            messageProvider.ReportInvalidNamedArgument(
+                                arguments.Diagnostics,
+                                arguments.AttributeSyntaxOpt,
+                                position,
+                                arguments.Attribute.AttributeClass,
+                                namedArg.Key
+                            );
                             hasErrors = true;
                         }
 
@@ -249,20 +377,32 @@ namespace Microsoft.CodeAnalysis
                             goto case "SafeArraySubType";
                         }
 
-                        parameterIndex = namedArg.Value.DecodeValue<short>(SpecialType.System_Int16);
+                        parameterIndex = namedArg.Value.DecodeValue<short>(
+                            SpecialType.System_Int16
+                        );
                         if (parameterIndex < 0)
                         {
-                            messageProvider.ReportInvalidNamedArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position, arguments.Attribute.AttributeClass, namedArg.Key);
+                            messageProvider.ReportInvalidNamedArgument(
+                                arguments.Diagnostics,
+                                arguments.AttributeSyntaxOpt,
+                                position,
+                                arguments.Attribute.AttributeClass,
+                                namedArg.Key
+                            );
                             hasErrors = true;
                         }
 
                         break;
 
                     case "SafeArraySubType":
-                        messageProvider.ReportParameterNotValidForType(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position);
+                        messageProvider.ReportParameterNotValidForType(
+                            arguments.Diagnostics,
+                            arguments.AttributeSyntaxOpt,
+                            position
+                        );
                         hasErrors = true;
                         break;
-                        // other parameters ignored with no error
+                    // other parameters ignored with no error
                 }
 
                 position++;
@@ -282,7 +422,14 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static void DecodeMarshalAsSafeArray(ref DecodeWellKnownAttributeArguments<TAttributeSyntax, TAttributeData, TAttributeLocation> arguments, CommonMessageProvider messageProvider)
+        private static void DecodeMarshalAsSafeArray(
+            ref DecodeWellKnownAttributeArguments<
+                TAttributeSyntax,
+                TAttributeData,
+                TAttributeLocation
+            > arguments,
+            CommonMessageProvider messageProvider
+        )
         {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
@@ -297,27 +444,45 @@ namespace Microsoft.CodeAnalysis
                 switch (namedArg.Key)
                 {
                     case "SafeArraySubType":
-                        elementTypeVariant = namedArg.Value.DecodeValue<Cci.VarEnum>(SpecialType.System_Enum);
-                        if (elementTypeVariant < 0 || (int)elementTypeVariant > MarshalPseudoCustomAttributeData.MaxMarshalInteger)
+                        elementTypeVariant = namedArg.Value.DecodeValue<Cci.VarEnum>(
+                            SpecialType.System_Enum
+                        );
+                        if (
+                            elementTypeVariant < 0
+                            || (int)elementTypeVariant
+                                > MarshalPseudoCustomAttributeData.MaxMarshalInteger
+                        )
                         {
-                            messageProvider.ReportInvalidNamedArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position, arguments.Attribute.AttributeClass, namedArg.Key);
+                            messageProvider.ReportInvalidNamedArgument(
+                                arguments.Diagnostics,
+                                arguments.AttributeSyntaxOpt,
+                                position,
+                                arguments.Attribute.AttributeClass,
+                                namedArg.Key
+                            );
                             hasErrors = true;
                         }
 
                         break;
 
                     case "SafeArrayUserDefinedSubType":
-                        elementTypeSymbol = namedArg.Value.DecodeValue<ITypeSymbolInternal>(SpecialType.None);
+                        elementTypeSymbol = namedArg.Value.DecodeValue<ITypeSymbolInternal>(
+                            SpecialType.None
+                        );
                         symbolIndex = position;
                         break;
 
                     case "ArraySubType":
                     case "SizeConst":
                     case "SizeParamIndex":
-                        messageProvider.ReportParameterNotValidForType(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position);
+                        messageProvider.ReportParameterNotValidForType(
+                            arguments.Diagnostics,
+                            arguments.AttributeSyntaxOpt,
+                            position
+                        );
                         hasErrors = true;
                         break;
-                        // other parameters ignored with no error
+                    // other parameters ignored with no error
                 }
 
                 position++;
@@ -334,7 +499,11 @@ namespace Microsoft.CodeAnalysis
                 default:
                     if (elementTypeVariant != null && symbolIndex >= 0)
                     {
-                        messageProvider.ReportParameterNotValidForType(arguments.Diagnostics, arguments.AttributeSyntaxOpt, symbolIndex);
+                        messageProvider.ReportParameterNotValidForType(
+                            arguments.Diagnostics,
+                            arguments.AttributeSyntaxOpt,
+                            symbolIndex
+                        );
                         hasErrors = true;
                     }
                     else
@@ -348,11 +517,21 @@ namespace Microsoft.CodeAnalysis
 
             if (!hasErrors)
             {
-                arguments.GetOrCreateData<TWellKnownAttributeData>().GetOrCreateData().SetMarshalAsSafeArray(elementTypeVariant, elementTypeSymbol);
+                arguments
+                    .GetOrCreateData<TWellKnownAttributeData>()
+                    .GetOrCreateData()
+                    .SetMarshalAsSafeArray(elementTypeVariant, elementTypeSymbol);
             }
         }
 
-        private static void DecodeMarshalAsFixedString(ref DecodeWellKnownAttributeArguments<TAttributeSyntax, TAttributeData, TAttributeLocation> arguments, CommonMessageProvider messageProvider)
+        private static void DecodeMarshalAsFixedString(
+            ref DecodeWellKnownAttributeArguments<
+                TAttributeSyntax,
+                TAttributeData,
+                TAttributeLocation
+            > arguments,
+            CommonMessageProvider messageProvider
+        )
         {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
@@ -366,9 +545,18 @@ namespace Microsoft.CodeAnalysis
                 {
                     case "SizeConst":
                         elementCount = namedArg.Value.DecodeValue<int>(SpecialType.System_Int32);
-                        if (elementCount < 0 || elementCount > MarshalPseudoCustomAttributeData.MaxMarshalInteger)
+                        if (
+                            elementCount < 0
+                            || elementCount > MarshalPseudoCustomAttributeData.MaxMarshalInteger
+                        )
                         {
-                            messageProvider.ReportInvalidNamedArgument(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position, arguments.Attribute.AttributeClass, namedArg.Key);
+                            messageProvider.ReportInvalidNamedArgument(
+                                arguments.Diagnostics,
+                                arguments.AttributeSyntaxOpt,
+                                position,
+                                arguments.Attribute.AttributeClass,
+                                namedArg.Key
+                            );
                             hasErrors = true;
                         }
 
@@ -376,10 +564,14 @@ namespace Microsoft.CodeAnalysis
 
                     case "ArraySubType":
                     case "SizeParamIndex":
-                        messageProvider.ReportParameterNotValidForType(arguments.Diagnostics, arguments.AttributeSyntaxOpt, position);
+                        messageProvider.ReportParameterNotValidForType(
+                            arguments.Diagnostics,
+                            arguments.AttributeSyntaxOpt,
+                            position
+                        );
                         hasErrors = true;
                         break;
-                        // other parameters ignored with no error
+                    // other parameters ignored with no error
                 }
 
                 position++;
@@ -388,13 +580,20 @@ namespace Microsoft.CodeAnalysis
             if (elementCount < 0)
             {
                 // SizeConst must be specified:
-                messageProvider.ReportAttributeParameterRequired(arguments.Diagnostics, arguments.AttributeSyntaxOpt, "SizeConst");
+                messageProvider.ReportAttributeParameterRequired(
+                    arguments.Diagnostics,
+                    arguments.AttributeSyntaxOpt,
+                    "SizeConst"
+                );
                 hasErrors = true;
             }
 
             if (!hasErrors)
             {
-                arguments.GetOrCreateData<TWellKnownAttributeData>().GetOrCreateData().SetMarshalAsFixedString(elementCount);
+                arguments
+                    .GetOrCreateData<TWellKnownAttributeData>()
+                    .GetOrCreateData()
+                    .SetMarshalAsFixedString(elementCount);
             }
         }
     }

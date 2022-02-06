@@ -25,11 +25,14 @@ namespace AutoMapper.UnitTests.Bug
         public void Should_project_ienumerable_to_aggregate_destinations()
         {
             // arrange
-            var config = new MapperConfiguration(cfg => cfg.CreateProjection<DummySource, DummyDestination>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateProjection<DummySource, DummyDestination>()
+            );
             var source = new DummySource() { DummyEnumerable = new[] { 1, 4, 5 } };
 
             // act
-            var destination = new[] { source }.AsQueryable()
+            var destination = new[] { source }
+                .AsQueryable()
                 .ProjectTo<DummyDestination>(config)
                 .Single();
 

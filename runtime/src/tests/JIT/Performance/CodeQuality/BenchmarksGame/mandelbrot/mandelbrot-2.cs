@@ -8,9 +8,9 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
- *
- * Adapted by Antti Lankila from the earlier Isaac Gouy's implementation
- */
+   *
+   * Adapted by Antti Lankila from the earlier Isaac Gouy's implementation
+   */
 
 using System;
 using System.IO;

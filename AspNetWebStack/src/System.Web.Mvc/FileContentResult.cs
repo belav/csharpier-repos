@@ -7,8 +7,7 @@ namespace System.Web.Mvc
 {
     public class FileContentResult : FileResult
     {
-        public FileContentResult(byte[] fileContents, string contentType)
-            : base(contentType)
+        public FileContentResult(byte[] fileContents, string contentType) : base(contentType)
         {
             if (fileContents == null)
             {
@@ -18,7 +17,11 @@ namespace System.Web.Mvc
             FileContents = fileContents;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "There's no reason to tamper-proof this array since it's supplied to the type's constructor.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "There's no reason to tamper-proof this array since it's supplied to the type's constructor."
+        )]
         public byte[] FileContents { get; private set; }
 
         protected override void WriteFile(HttpResponseBase response)

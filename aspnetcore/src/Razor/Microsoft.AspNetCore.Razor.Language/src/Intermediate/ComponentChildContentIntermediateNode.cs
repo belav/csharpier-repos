@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public sealed class ComponentChildContentIntermediateNode : IntermediateNode
 {
-    public string AttributeName => BoundAttribute?.Name ?? ComponentsApi.RenderTreeBuilder.ChildContent;
+    public string AttributeName =>
+        BoundAttribute?.Name ?? ComponentsApi.RenderTreeBuilder.ChildContent;
 
     public BoundAttributeDescriptor BoundAttribute { get; set; }
 

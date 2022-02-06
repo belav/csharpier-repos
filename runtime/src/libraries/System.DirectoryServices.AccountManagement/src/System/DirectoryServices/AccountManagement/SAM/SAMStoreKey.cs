@@ -24,11 +24,12 @@ namespace System.DirectoryServices.AccountManagement
             Array.Copy(sid, _sid, sid.Length);
 
             GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "SAMStoreKey",
-                            "creating key for machineName={0}, sid={1}",
-                            machineName,
-                            Utils.ByteArrayToString(sid));
+                GlobalDebug.Info,
+                "SAMStoreKey",
+                "creating key for machineName={0}, sid={1}",
+                machineName,
+                Utils.ByteArrayToString(sid)
+            );
         }
 
         public override bool Equals(object o)

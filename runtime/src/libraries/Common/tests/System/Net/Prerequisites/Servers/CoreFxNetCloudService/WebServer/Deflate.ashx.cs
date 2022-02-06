@@ -15,7 +15,10 @@ namespace WebServer
         {
             string responseBody = "Sending DEFLATE compressed";
 
-            context.Response.Headers.Add("Content-MD5", Convert.ToBase64String(ContentHelper.ComputeMD5Hash(responseBody)));
+            context.Response.Headers.Add(
+                "Content-MD5",
+                Convert.ToBase64String(ContentHelper.ComputeMD5Hash(responseBody))
+            );
             context.Response.Headers.Add("Content-Encoding", "deflate");
 
             context.Response.ContentType = "text/plain";
@@ -26,10 +29,7 @@ namespace WebServer
 
         public bool IsReusable
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 }

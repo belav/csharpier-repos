@@ -23,11 +23,12 @@ namespace System.CommandLine.DragonFruit.Tests
         public async Task It_executes_method_with_string_option()
         {
             int exitCode = await CommandLine.InvokeMethodAsync(
-                               new[] { "--name", "Wayne" },
-                               TestProgram.TestMainMethodInfo,
-                               null,
-                               _testProgram,
-                               _terminal);
+                new[] { "--name", "Wayne" },
+                TestProgram.TestMainMethodInfo,
+                null,
+                _testProgram,
+                _terminal
+            );
             exitCode.Should().Be(0);
             _terminal.Out.ToString().Should().Be("Wayne");
         }
@@ -40,7 +41,8 @@ namespace System.CommandLine.DragonFruit.Tests
                 TestProgram.TestMainMethodInfo,
                 null,
                 _testProgram,
-                _terminal);
+                _terminal
+            );
             exitCode.Should().Be(0);
             _terminal.Out.ToString().Should().Be("Wayne");
         }
@@ -49,24 +51,23 @@ namespace System.CommandLine.DragonFruit.Tests
         public async Task It_shows_help_text_based_on_XML_documentation_comments()
         {
             int exitCode = await CommandLine.InvokeMethodAsync(
-                               new[] { "--help" },
-                               TestProgram.TestMainMethodInfo,
-                               null,
-                               _testProgram, 
-                               _terminal);
+                new[] { "--help" },
+                TestProgram.TestMainMethodInfo,
+                null,
+                _testProgram,
+                _terminal
+            );
 
             exitCode.Should().Be(0);
 
             var stdOut = _terminal.Out.ToString();
 
-            stdOut.Should()
-                  .Contain("<args>  These are arguments")
-                  .And.Contain("Arguments:");
-            stdOut.Should()
-                  .ContainAll("--name <name>", "Specifies the name option")
-                  .And.Contain("Options:");
-            stdOut.Should()
-                  .Contain("Help for the test program");
+            stdOut.Should().Contain("<args>  These are arguments").And.Contain("Arguments:");
+            stdOut
+                .Should()
+                .ContainAll("--name <name>", "Specifies the name option")
+                .And.Contain("Options:");
+            stdOut.Should().Contain("Help for the test program");
         }
 
         [Fact]
@@ -77,31 +78,31 @@ namespace System.CommandLine.DragonFruit.Tests
                 TestProgram.TestMainMethodInfo,
                 null,
                 _testProgram,
-                _terminal);
+                _terminal
+            );
 
             exitCode.Should().Be(0);
 
             var stdOut = _terminal.Out.ToString();
 
-            stdOut.Should()
-                .Contain("<args>  These are arguments")
-                .And.Contain("Arguments:");
-            stdOut.Should()
-                .ContainAll("--name <name>","Specifies the name option")
+            stdOut.Should().Contain("<args>  These are arguments").And.Contain("Arguments:");
+            stdOut
+                .Should()
+                .ContainAll("--name <name>", "Specifies the name option")
                 .And.Contain("Options:");
-            stdOut.Should()
-                .Contain("Help for the test program");
+            stdOut.Should().Contain("Help for the test program");
         }
 
         [Fact]
         public async Task It_executes_method_with_string_option_with_default()
         {
             int exitCode = await CommandLine.InvokeMethodAsync(
-                               Array.Empty<string>(),
-                               TestProgram.TestMainMethodInfoWithDefault,
-                               null,
-                               _testProgram, 
-                               _terminal);
+                Array.Empty<string>(),
+                TestProgram.TestMainMethodInfoWithDefault,
+                null,
+                _testProgram,
+                _terminal
+            );
 
             exitCode.Should().Be(0);
             _terminal.Out.ToString().Should().Be("Bruce");
@@ -115,13 +116,15 @@ namespace System.CommandLine.DragonFruit.Tests
                 TestProgram.TestMainMethodInfoWithDefault,
                 null,
                 _testProgram,
-                _terminal);
-            
+                _terminal
+            );
+
             exitCode.Should().Be(0);
             _terminal.Out.ToString().Should().Be("Bruce");
         }
 
-        private void TestMainThatThrows() => throw new InvalidOperationException("This threw an error");
+        private void TestMainThatThrows() =>
+            throw new InvalidOperationException("This threw an error");
 
         [Fact]
         public async Task It_shows_error_without_invoking_method()
@@ -129,17 +132,15 @@ namespace System.CommandLine.DragonFruit.Tests
             Action action = TestMainThatThrows;
 
             int exitCode = await CommandLine.InvokeMethodAsync(
-                               new[] { "--unknown" },
-                               action.Method,
-                               null,
-                               this, 
-                               _terminal);
+                new[] { "--unknown" },
+                action.Method,
+                null,
+                this,
+                _terminal
+            );
 
             exitCode.Should().Be(1);
-            _terminal.Error.ToString()
-                    .Should().NotBeEmpty()
-                    .And
-                    .Contain("--unknown");
+            _terminal.Error.ToString().Should().NotBeEmpty().And.Contain("--unknown");
             _terminal.ForegroundColor.Should().Be(ConsoleColor.Red);
         }
 
@@ -153,13 +154,11 @@ namespace System.CommandLine.DragonFruit.Tests
                 action.Method,
                 null,
                 this,
-                _terminal);
+                _terminal
+            );
 
             exitCode.Should().Be(1);
-            _terminal.Error.ToString()
-                .Should().NotBeEmpty()
-                .And
-                .Contain("--unknown");
+            _terminal.Error.ToString().Should().NotBeEmpty().And.Contain("--unknown");
             _terminal.ForegroundColor.Should().Be(ConsoleColor.Red);
         }
 
@@ -169,17 +168,15 @@ namespace System.CommandLine.DragonFruit.Tests
             Action action = TestMainThatThrows;
 
             int exitCode = await CommandLine.InvokeMethodAsync(
-                               Array.Empty<string>(),
-                               action.Method,
-                               null,
-                               this, 
-                               _terminal);
+                Array.Empty<string>(),
+                action.Method,
+                null,
+                this,
+                _terminal
+            );
 
             exitCode.Should().Be(1);
-            _terminal.Error.ToString()
-                    .Should().NotBeEmpty()
-                    .And
-                    .Contain("This threw an error");
+            _terminal.Error.ToString().Should().NotBeEmpty().And.Contain("This threw an error");
             _terminal.ForegroundColor.Should().Be(ConsoleColor.Red);
         }
 
@@ -193,13 +190,11 @@ namespace System.CommandLine.DragonFruit.Tests
                 action.Method,
                 null,
                 this,
-                _terminal);
+                _terminal
+            );
 
             exitCode.Should().Be(1);
-            _terminal.Error.ToString()
-                .Should().NotBeEmpty()
-                .And
-                .Contain("This threw an error");
+            _terminal.Error.ToString().Should().NotBeEmpty().And.Contain("This threw an error");
             _terminal.ForegroundColor.Should().Be(ConsoleColor.Red);
         }
     }

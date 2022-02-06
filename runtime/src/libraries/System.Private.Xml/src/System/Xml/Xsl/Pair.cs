@@ -18,8 +18,14 @@ namespace System.Xml.Xsl
             _right = right;
         }
 
-        public int Left { get { return _left; } }
-        public int Right { get { return _right; } }
+        public int Left
+        {
+            get { return _left; }
+        }
+        public int Right
+        {
+            get { return _right; }
+        }
 
         public override bool Equals([NotNullWhen(true)] object? other)
         {
@@ -49,7 +55,13 @@ namespace System.Xml.Xsl
             _right = right;
         }
 
-        public string Left { get { return _left; } }
-        public string Right { get { return _right; } }
+        public string Left
+        {
+            get { return _left; }
+        }
+        public string Right
+        {
+            get { return _right; }
+        }
     }
 }

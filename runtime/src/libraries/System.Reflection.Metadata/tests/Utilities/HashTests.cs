@@ -18,7 +18,10 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public void GetFNVHashCodeImmutableByteTest()
         {
-            Assert.Equal(-1088511923, Hash.GetFNVHashCode(ImmutableArray.Create((byte)0xFF, (byte)0xD1)));
+            Assert.Equal(
+                -1088511923,
+                Hash.GetFNVHashCode(ImmutableArray.Create((byte)0xFF, (byte)0xD1))
+            );
         }
 
         [Fact]

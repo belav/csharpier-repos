@@ -15,12 +15,16 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Indicates that this version of runtime supports default interface method implementations.
         /// </summary>
-        public const string DefaultImplementationsOfInterfaces = nameof(DefaultImplementationsOfInterfaces);
+        public const string DefaultImplementationsOfInterfaces = nameof(
+            DefaultImplementationsOfInterfaces
+        );
 
         /// <summary>
         /// Indicates that this version of runtime supports the Unmanaged calling convention value.
         /// </summary>
-        public const string UnmanagedSignatureCallingConvention = nameof(UnmanagedSignatureCallingConvention);
+        public const string UnmanagedSignatureCallingConvention = nameof(
+            UnmanagedSignatureCallingConvention
+        );
 
         /// <summary>
         /// Indicates that this version of runtime supports covariant returns in overrides of methods declared in classes.

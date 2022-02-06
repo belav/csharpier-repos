@@ -65,7 +65,10 @@ namespace System.Reflection.Emit
 
         public override MethodInfo? GetAddMethod(bool nonPublic)
         {
-            MethodInfo? add = event_builder != null ? event_builder.add_method : event_info!.GetAddMethod(nonPublic);
+            MethodInfo? add =
+                event_builder != null
+                    ? event_builder.add_method
+                    : event_info!.GetAddMethod(nonPublic);
             if (add == null || (!nonPublic && !add.IsPublic))
                 return null;
             return TypeBuilder.GetMethod(instantiation, add);
@@ -73,7 +76,10 @@ namespace System.Reflection.Emit
 
         public override MethodInfo? GetRaiseMethod(bool nonPublic)
         {
-            MethodInfo? raise = event_builder != null ? event_builder.raise_method : event_info!.GetRaiseMethod(nonPublic);
+            MethodInfo? raise =
+                event_builder != null
+                    ? event_builder.raise_method
+                    : event_info!.GetRaiseMethod(nonPublic);
             if (raise == null || (!nonPublic && !raise.IsPublic))
                 return null;
             return TypeBuilder.GetMethod(instantiation, raise);
@@ -81,7 +87,10 @@ namespace System.Reflection.Emit
 
         public override MethodInfo? GetRemoveMethod(bool nonPublic)
         {
-            MethodInfo? remove = event_builder != null ? event_builder.remove_method : event_info!.GetRemoveMethod(nonPublic);
+            MethodInfo? remove =
+                event_builder != null
+                    ? event_builder.remove_method
+                    : event_info!.GetRemoveMethod(nonPublic);
             if (remove == null || (!nonPublic && !remove.IsPublic))
                 return null;
             return TypeBuilder.GetMethod(instantiation, remove);
@@ -89,7 +98,10 @@ namespace System.Reflection.Emit
 
         public override MethodInfo[] GetOtherMethods(bool nonPublic)
         {
-            MethodInfo[]? other = event_builder != null ? event_builder.other_methods : event_info!.GetOtherMethods(nonPublic);
+            MethodInfo[]? other =
+                event_builder != null
+                    ? event_builder.other_methods
+                    : event_info!.GetOtherMethods(nonPublic);
             if (other == null)
                 return Array.Empty<MethodInfo>();
 

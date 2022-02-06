@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             IUpdateSqlGenerator updateSqlGenerator,
             IRelationalValueBufferFactoryFactory valueBufferFactoryFactory,
             ICurrentDbContext currentContext,
-            IRelationalCommandDiagnosticsLogger logger)
+            IRelationalCommandDiagnosticsLogger logger
+        )
         {
             CommandBuilderFactory = commandBuilderFactory;
             SqlGenerationHelper = sqlGenerationHelper;

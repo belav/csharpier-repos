@@ -7,8 +7,7 @@ namespace System.Web.Mvc
 {
     public class FilePathResult : FileResult
     {
-        public FilePathResult(string fileName, string contentType)
-            : base(contentType)
+        public FilePathResult(string fileName, string contentType) : base(contentType)
         {
             if (String.IsNullOrEmpty(fileName))
             {

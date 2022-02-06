@@ -16,8 +16,7 @@ public class BadHttpRequestException : IOException
     /// </summary>
     /// <param name="message">The message to associate with this exception.</param>
     /// <param name="statusCode">The HTTP status code to associate with this exception.</param>
-    public BadHttpRequestException(string message, int statusCode)
-        : base(message)
+    public BadHttpRequestException(string message, int statusCode) : base(message)
     {
         StatusCode = statusCode;
     }
@@ -26,8 +25,7 @@ public class BadHttpRequestException : IOException
     /// Initializes a new instance of the <see cref="BadHttpRequestException"/> class with the <see cref="StatusCode"/> set to 400 Bad Request.
     /// </summary>
     /// <param name="message">The message to associate with this exception</param>
-    public BadHttpRequestException(string message)
-        : base(message)
+    public BadHttpRequestException(string message) : base(message)
     {
         StatusCode = StatusCodes.Status400BadRequest;
     }

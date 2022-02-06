@@ -43,11 +43,16 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     It should not be used from application code.
         /// </remarks>
         [EntityFrameworkInternal]
-        public static readonly IDictionary<Type, ServiceCharacteristics> Services
-            = new Dictionary<Type, ServiceCharacteristics>
+        public static readonly IDictionary<Type, ServiceCharacteristics> Services = new Dictionary<
+            Type,
+            ServiceCharacteristics
+        >
+        {
             {
-                { typeof(ICSharpRuntimeAnnotationCodeGenerator), new ServiceCharacteristics(ServiceLifetime.Singleton) }
-            };
+                typeof(ICSharpRuntimeAnnotationCodeGenerator),
+                new ServiceCharacteristics(ServiceLifetime.Singleton)
+            }
+        };
 
         /// <summary>
         ///     Creates a new <see cref="EntityFrameworkDesignServicesBuilder" /> for
@@ -55,19 +60,17 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// </summary>
         /// <param name="serviceCollection">The collection to which services will be registered.</param>
         public EntityFrameworkDesignServicesBuilder(IServiceCollection serviceCollection)
-            : base(serviceCollection)
-        {
-        }
+            : base(serviceCollection) { }
 
         /// <summary>
         ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.
         /// </summary>
         /// <param name="serviceType">The type that defines the service API.</param>
         /// <returns>The <see cref="ServiceCharacteristics" /> for the type or <see langword="null" /> if it's not an EF service.</returns>
-        protected override ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType)
-            => Services.TryGetValue(serviceType, out var characteristics)
-                ? characteristics
-                : base.TryGetServiceCharacteristics(serviceType);
+        protected override ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType) =>
+            Services.TryGetValue(serviceType, out var characteristics)
+              ? characteristics
+              : base.TryGetServiceCharacteristics(serviceType);
 
         /// <summary>
         ///     Registers default implementations of all services, including relational services, not already
@@ -79,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         {
             TryAdd<ICSharpRuntimeAnnotationCodeGenerator, CSharpRuntimeAnnotationCodeGenerator>();
 
-            ServiceCollectionMap.GetInfrastructure()
+            ServiceCollectionMap
+                .GetInfrastructure()
                 .AddDependencySingleton<CSharpRuntimeAnnotationCodeGeneratorDependencies>();
 
             return this;

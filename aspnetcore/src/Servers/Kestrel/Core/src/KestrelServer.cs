@@ -25,12 +25,17 @@ public class KestrelServer : IServer
     /// <param name="options">The Kestrel <see cref="IOptions{TOptions}"/>.</param>
     /// <param name="transportFactory">The <see cref="IConnectionListenerFactory"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-    public KestrelServer(IOptions<KestrelServerOptions> options, IConnectionListenerFactory transportFactory, ILoggerFactory loggerFactory)
+    public KestrelServer(
+        IOptions<KestrelServerOptions> options,
+        IConnectionListenerFactory transportFactory,
+        ILoggerFactory loggerFactory
+    )
     {
         _innerKestrelServer = new KestrelServerImpl(
             options,
             new[] { transportFactory ?? throw new ArgumentNullException(nameof(transportFactory)) },
-            loggerFactory);
+            loggerFactory
+        );
     }
 
     /// <inheritdoc />
@@ -42,7 +47,10 @@ public class KestrelServer : IServer
     public KestrelServerOptions Options => _innerKestrelServer.Options;
 
     /// <inheritdoc />
-    public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken) where TContext : notnull
+    public Task StartAsync<TContext>(
+        IHttpApplication<TContext> application,
+        CancellationToken cancellationToken
+    ) where TContext : notnull
     {
         return _innerKestrelServer.StartAsync(application, cancellationToken);
     }

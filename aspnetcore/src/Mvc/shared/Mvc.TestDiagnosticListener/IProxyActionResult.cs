@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-public interface IProxyActionResult
-{
-}
+public interface IProxyActionResult { }

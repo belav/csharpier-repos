@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: DesignTimeProviderServices("Microsoft.EntityFrameworkCore.SqlServer.Design.Internal.SqlServerDesignTimeServices")]
+[assembly: DesignTimeProviderServices(
+    "Microsoft.EntityFrameworkCore.SqlServer.Design.Internal.SqlServerDesignTimeServices"
+)]
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
 {
@@ -32,7 +34,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
 #pragma warning disable EF1001 // Internal EF Core API usage.
             new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection)
                 .TryAdd<IAnnotationCodeGenerator, SqlServerAnnotationCodeGenerator>()
-                .TryAdd<ICSharpRuntimeAnnotationCodeGenerator, SqlServerCSharpRuntimeAnnotationCodeGenerator>()
+                .TryAdd<
+                    ICSharpRuntimeAnnotationCodeGenerator,
+                    SqlServerCSharpRuntimeAnnotationCodeGenerator
+                >()
 #pragma warning restore EF1001 // Internal EF Core API usage.
                 .TryAdd<IDatabaseModelFactory, SqlServerDatabaseModelFactory>()
                 .TryAdd<IProviderConfigurationCodeGenerator, SqlServerCodeGenerator>()

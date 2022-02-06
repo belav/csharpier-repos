@@ -27,7 +27,8 @@ public class HeaderPropagationEntry
     public HeaderPropagationEntry(
         string inboundHeaderName,
         string capturedHeaderName,
-        Func<HeaderPropagationContext, StringValues>? valueFilter)
+        Func<HeaderPropagationContext, StringValues>? valueFilter
+    )
     {
         if (inboundHeaderName == null)
         {

@@ -13,6 +13,7 @@ internal static partial class Interop
         [DllImport(Libraries.Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern bool SetCommTimeouts(
             SafeFileHandle hFile,
-            ref COMMTIMEOUTS lpCommTimeouts);
+            ref COMMTIMEOUTS lpCommTimeouts
+        );
     }
 }

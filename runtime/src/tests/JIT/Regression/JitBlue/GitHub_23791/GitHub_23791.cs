@@ -12,9 +12,9 @@ unsafe struct GitHub_23791
     fixed byte A[10];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    byte NextElement(int i) => A[1+i];
+    byte NextElement(int i) => A[1 + i];
 
-    static int Main() 
+    static int Main()
     {
         int result = -1;
         GitHub_23791* x = null;

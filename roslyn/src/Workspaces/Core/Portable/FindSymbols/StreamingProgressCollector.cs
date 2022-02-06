@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
     /// <summary>
-    /// Collects all the <see cref="ISymbol"/> definitions and <see cref="ReferenceLocation"/> 
+    /// Collects all the <see cref="ISymbol"/> definitions and <see cref="ReferenceLocation"/>
     /// references that are reported independently and packages them up into the final list
     /// of <see cref="ReferencedSymbol" />.  This is used by the old non-streaming Find-References
     /// APIs to return all the results at the end of the operation, as opposed to broadcasting
@@ -28,18 +28,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private readonly object _gate = new();
         private readonly IStreamingFindReferencesProgress _underlyingProgress;
 
-        private readonly Dictionary<ISymbol, List<ReferenceLocation>> _symbolToLocations =
-            new();
+        private readonly Dictionary<ISymbol, List<ReferenceLocation>> _symbolToLocations = new();
 
         public IStreamingProgressTracker ProgressTracker => _underlyingProgress.ProgressTracker;
 
-        public StreamingProgressCollector()
-            : this(NoOpStreamingFindReferencesProgress.Instance)
-        {
-        }
+        public StreamingProgressCollector() : this(NoOpStreamingFindReferencesProgress.Instance) { }
 
-        public StreamingProgressCollector(
-            IStreamingFindReferencesProgress underlyingProgress)
+        public StreamingProgressCollector(IStreamingFindReferencesProgress underlyingProgress)
         {
             _underlyingProgress = underlyingProgress;
         }
@@ -56,13 +51,26 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        public ValueTask OnStartedAsync(CancellationToken cancellationToken) => _underlyingProgress.OnStartedAsync(cancellationToken);
-        public ValueTask OnCompletedAsync(CancellationToken cancellationToken) => _underlyingProgress.OnCompletedAsync(cancellationToken);
+        public ValueTask OnStartedAsync(CancellationToken cancellationToken) =>
+            _underlyingProgress.OnStartedAsync(cancellationToken);
 
-        public ValueTask OnFindInDocumentCompletedAsync(Document document, CancellationToken cancellationToken) => _underlyingProgress.OnFindInDocumentCompletedAsync(document, cancellationToken);
-        public ValueTask OnFindInDocumentStartedAsync(Document document, CancellationToken cancellationToken) => _underlyingProgress.OnFindInDocumentStartedAsync(document, cancellationToken);
+        public ValueTask OnCompletedAsync(CancellationToken cancellationToken) =>
+            _underlyingProgress.OnCompletedAsync(cancellationToken);
 
-        public ValueTask OnDefinitionFoundAsync(SymbolGroup group, CancellationToken cancellationToken)
+        public ValueTask OnFindInDocumentCompletedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => _underlyingProgress.OnFindInDocumentCompletedAsync(document, cancellationToken);
+
+        public ValueTask OnFindInDocumentStartedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => _underlyingProgress.OnFindInDocumentStartedAsync(document, cancellationToken);
+
+        public ValueTask OnDefinitionFoundAsync(
+            SymbolGroup group,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -74,20 +82,31 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 return _underlyingProgress.OnDefinitionFoundAsync(group, cancellationToken);
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
         }
 
-        public ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol definition, ReferenceLocation location, CancellationToken cancellationToken)
+        public ValueTask OnReferenceFoundAsync(
+            SymbolGroup group,
+            ISymbol definition,
+            ReferenceLocation location,
+            CancellationToken cancellationToken
+        )
         {
             lock (_gate)
             {
                 _symbolToLocations[definition].Add(location);
             }
 
-            return _underlyingProgress.OnReferenceFoundAsync(group, definition, location, cancellationToken);
+            return _underlyingProgress.OnReferenceFoundAsync(
+                group,
+                definition,
+                location,
+                cancellationToken
+            );
         }
     }
 }

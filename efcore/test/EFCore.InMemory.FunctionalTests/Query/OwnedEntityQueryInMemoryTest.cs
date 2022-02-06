@@ -20,19 +20,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             using var context = contextFactory.CreateContext();
             var query = context.Set<Foo>().Include(c => c.Bar);
-            var foo = async
-                ? await query.FirstOrDefaultAsync()
-                : query.FirstOrDefault();
+            var foo = async ? await query.FirstOrDefaultAsync() : query.FirstOrDefault();
 
             Assert.NotNull(foo);
         }
 
         protected class MyContext : DbContext
         {
-            public MyContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public MyContext(DbContextOptions options) : base(options) { }
 
             public DbSet<Warehouse> Warehouses { get; set; }
 
@@ -46,7 +41,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<Bar>().OwnsOne(t => t.Baz, e => { });
-                modelBuilder.Entity<Foo>().HasOne(t => t.Bar)
+                modelBuilder
+                    .Entity<Foo>()
+                    .HasOne(t => t.Bar)
                     .WithOne(t => t.Foo)
                     .HasForeignKey<Bar>(t => t.FooId);
             }
@@ -63,8 +60,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             public virtual Baz Baz { get; set; } = new();
         }
 
-        protected class Baz
-        { }
+        protected class Baz { }
 
         protected class Foo
         {

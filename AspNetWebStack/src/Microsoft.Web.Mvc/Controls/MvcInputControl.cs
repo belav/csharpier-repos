@@ -52,7 +52,10 @@ namespace Microsoft.Web.Mvc.Controls
             ModelState modelState = GetModelState();
             if (modelState != null)
             {
-                return modelState.Value.ConvertTo(destinationType, null /* culture */);
+                return modelState.Value.ConvertTo(
+                    destinationType,
+                    null /* culture */
+                );
             }
             return null;
         }
@@ -124,7 +127,8 @@ namespace Microsoft.Web.Mvc.Controls
 
                     if (attrs.TryGetValue("class", out currentValue))
                     {
-                        attrs["class"] = HtmlHelper.ValidationInputCssClassName + " " + currentValue;
+                        attrs["class"] =
+                            HtmlHelper.ValidationInputCssClassName + " " + currentValue;
                     }
                     else
                     {
@@ -135,7 +139,10 @@ namespace Microsoft.Web.Mvc.Controls
 
             foreach (KeyValuePair<string, string> attribute in attrs)
             {
-                writer.AddAttribute(attribute.Key, Convert.ToString(attribute.Value, CultureInfo.CurrentCulture));
+                writer.AddAttribute(
+                    attribute.Key,
+                    Convert.ToString(attribute.Value, CultureInfo.CurrentCulture)
+                );
             }
 
             writer.RenderBeginTag(HtmlTextWriterTag.Input);

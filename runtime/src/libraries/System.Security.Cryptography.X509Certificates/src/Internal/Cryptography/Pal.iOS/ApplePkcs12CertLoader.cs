@@ -16,9 +16,7 @@ namespace Internal.Cryptography.Pal
         private readonly ApplePkcs12Reader _pkcs12;
         private SafePasswordHandle _password;
 
-        public ApplePkcs12CertLoader(
-            ApplePkcs12Reader pkcs12,
-            SafePasswordHandle password)
+        public ApplePkcs12CertLoader(ApplePkcs12Reader pkcs12, SafePasswordHandle password)
         {
             _pkcs12 = pkcs12;
 

@@ -36,30 +36,16 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         public string Description
         {
-            get
-            {
-                return _innerTransaction.Description;
-            }
-
-            set
-            {
-                _innerTransaction.Description = value;
-            }
+            get { return _innerTransaction.Description; }
+            set { _innerTransaction.Description = value; }
         }
 
         public ITextUndoHistory History => _innerTransaction.History;
 
         public IMergeTextUndoTransactionPolicy MergePolicy
         {
-            get
-            {
-                return _innerTransaction.MergePolicy;
-            }
-
-            set
-            {
-                _innerTransaction.MergePolicy = value;
-            }
+            get { return _innerTransaction.MergePolicy; }
+            set { _innerTransaction.MergePolicy = value; }
         }
 
         public ITextUndoTransaction Parent => _innerTransaction.Parent;
@@ -68,8 +54,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         public IList<ITextUndoPrimitive> UndoPrimitives => _innerTransaction.UndoPrimitives;
 
-        public void AddUndo(ITextUndoPrimitive undo)
-            => _innerTransaction.AddUndo(undo);
+        public void AddUndo(ITextUndoPrimitive undo) => _innerTransaction.AddUndo(undo);
 
         public void Cancel()
         {
@@ -111,11 +96,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             _innerTransaction.Dispose();
         }
 
-        public void Do()
-            => _innerTransaction.Do();
+        public void Do() => _innerTransaction.Do();
 
-        public void Undo()
-            => _innerTransaction.Undo();
+        public void Undo() => _innerTransaction.Undo();
 
         private class RollbackDetectingUndoPrimitive : ITextUndoPrimitive
         {
@@ -127,18 +110,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
             public ITextUndoTransaction? Parent { get; set; }
 
-            public bool CanMerge(ITextUndoPrimitive older)
-                => false;
+            public bool CanMerge(ITextUndoPrimitive older) => false;
 
-            public void Do()
-            {
-            }
+            public void Do() { }
 
-            public ITextUndoPrimitive Merge(ITextUndoPrimitive older)
-                => throw new NotSupportedException();
+            public ITextUndoPrimitive Merge(ITextUndoPrimitive older) =>
+                throw new NotSupportedException();
 
-            public void Undo()
-                => UndoCalled = true;
+            public void Undo() => UndoCalled = true;
         }
     }
 }

@@ -66,12 +66,22 @@ namespace JIT.HardwareIntrinsics.General
 
             private ulong alignment;
 
-            public DataTable(Single[] inArray1, Double[] outLowerArray, Double[] outUpperArray, int alignment)
+            public DataTable(
+                Single[] inArray1,
+                Double[] outLowerArray,
+                Double[] outUpperArray,
+                int alignment
+            )
             {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Single>();
                 int sizeOfoutLowerArray = outLowerArray.Length * Unsafe.SizeOf<Double>();
                 int sizeOfoutUpperArray = outUpperArray.Length * Unsafe.SizeOf<Double>();
-                if ((alignment != 32 && alignment != 16 && alignment != 8) || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfoutLowerArray|| (alignment * 2) < sizeOfoutUpperArray)
+                if (
+                    (alignment != 32 && alignment != 16 && alignment != 8)
+                    || (alignment * 2) < sizeOfinArray1
+                    || (alignment * 2) < sizeOfoutLowerArray
+                    || (alignment * 2) < sizeOfoutUpperArray
+                )
                 {
                     throw new ArgumentException("Invalid value of alignment");
                 }
@@ -86,12 +96,19 @@ namespace JIT.HardwareIntrinsics.General
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<Single, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<Single, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
             }
 
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outLowerArrayPtr => Align((byte*)(outLowerHandle.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outUpperArrayPtr => Align((byte*)(outUpperHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outLowerArrayPtr =>
+                Align((byte*)(outLowerHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outUpperArrayPtr =>
+                Align((byte*)(outUpperHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -114,8 +131,15 @@ namespace JIT.HardwareIntrinsics.General
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetSingle();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Single, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Single>>()
+                );
 
                 return testStruct;
             }
@@ -126,14 +150,20 @@ namespace JIT.HardwareIntrinsics.General
 
                 Unsafe.Write(testClass._dataTable.outLowerArrayPtr, result.Lower);
                 Unsafe.Write(testClass._dataTable.outUpperArrayPtr, result.Upper);
-                testClass.ValidateResult(_fld1, testClass._dataTable.outLowerArrayPtr, testClass._dataTable.outUpperArrayPtr);
+                testClass.ValidateResult(
+                    _fld1,
+                    testClass._dataTable.outLowerArrayPtr,
+                    testClass._dataTable.outUpperArrayPtr
+                );
             }
         }
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
 
         private static Single[] _data1 = new Single[Op1ElementCount];
 
@@ -145,19 +175,41 @@ namespace JIT.HardwareIntrinsics.General
 
         static VectorWidenTest__WidenDouble()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar1),
+                ref Unsafe.As<Single, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
         }
 
         public VectorWidenTest__WidenDouble()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _fld1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _fld1),
+                ref Unsafe.As<Single, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            _dataTable = new DataTable(_data1, new Double[RetElementCount], new Double[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            _dataTable = new DataTable(
+                _data1,
+                new Double[RetElementCount],
+                new Double[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool Succeeded { get; set; }
@@ -166,28 +218,36 @@ namespace JIT.HardwareIntrinsics.General
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Vector128.Widen(
-                Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr)
-            );
+            var result = Vector128.Widen(Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr));
 
             Unsafe.Write(_dataTable.outLowerArrayPtr, result.Lower);
             Unsafe.Write(_dataTable.outUpperArrayPtr, result.Upper);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.outLowerArrayPtr, _dataTable.outUpperArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.outLowerArrayPtr,
+                _dataTable.outUpperArrayPtr
+            );
         }
 
         public void RunReflectionScenario_UnsafeRead()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var method = typeof(Vector128).GetMethod(nameof(Vector128.Widen), new Type[] {
-                typeof(Vector128<Single>)
-            });
+            var method = typeof(Vector128).GetMethod(
+                nameof(Vector128.Widen),
+                new Type[] { typeof(Vector128<Single>) }
+            );
 
             if (method is null)
             {
-                method = typeof(Vector128).GetMethod(nameof(Vector128.Widen), 1, new Type[] {
-                    typeof(Vector128<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
-                });
+                method = typeof(Vector128).GetMethod(
+                    nameof(Vector128.Widen),
+                    1,
+                    new Type[]
+                    {
+                        typeof(Vector128<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
+                    }
+                );
             }
 
             if (method.IsGenericMethodDefinition)
@@ -195,22 +255,31 @@ namespace JIT.HardwareIntrinsics.General
                 method = method.MakeGenericMethod(typeof(Double));
             }
 
-            var result = method.Invoke(null, new object[] {
-                Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr)
-            });
+            var result = method.Invoke(
+                null,
+                new object[] { Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr) }
+            );
 
-            Unsafe.Write(_dataTable.outLowerArrayPtr, (((Vector128<Double> Lower, Vector128<Double> Upper))(result)).Lower);
-            Unsafe.Write(_dataTable.outUpperArrayPtr, (((Vector128<Double> Lower, Vector128<Double> Upper))(result)).Upper);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.outLowerArrayPtr, _dataTable.outUpperArrayPtr);
+            Unsafe.Write(
+                _dataTable.outLowerArrayPtr,
+                (((Vector128<Double> Lower, Vector128<Double> Upper))(result)).Lower
+            );
+            Unsafe.Write(
+                _dataTable.outUpperArrayPtr,
+                (((Vector128<Double> Lower, Vector128<Double> Upper))(result)).Upper
+            );
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.outLowerArrayPtr,
+                _dataTable.outUpperArrayPtr
+            );
         }
 
         public void RunClsVarScenario()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Vector128.Widen(
-                _clsVar1
-            );
+            var result = Vector128.Widen(_clsVar1);
 
             Unsafe.Write(_dataTable.outLowerArrayPtr, result.Lower);
             Unsafe.Write(_dataTable.outUpperArrayPtr, result.Upper);
@@ -272,33 +341,68 @@ namespace JIT.HardwareIntrinsics.General
             test.RunStructFldScenario(this);
         }
 
-        private void ValidateResult(Vector128<Single> op1, void* lowerResult, void* upperResult, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Single> op1,
+            void* lowerResult,
+            void* upperResult,
+            [CallerMemberName] string method = ""
+        )
         {
             Single[] inArray1 = new Single[Op1ElementCount];
             Double[] outLowerArray = new Double[RetElementCount];
             Double[] outUpperArray = new Double[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray1[0]), op1);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Double, byte>(ref outLowerArray[0]), ref Unsafe.AsRef<byte>(lowerResult), (uint)Unsafe.SizeOf<Vector128<Double>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Double, byte>(ref outUpperArray[0]), ref Unsafe.AsRef<byte>(upperResult), (uint)Unsafe.SizeOf<Vector128<Double>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Double, byte>(ref outLowerArray[0]),
+                ref Unsafe.AsRef<byte>(lowerResult),
+                (uint)Unsafe.SizeOf<Vector128<Double>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Double, byte>(ref outUpperArray[0]),
+                ref Unsafe.AsRef<byte>(upperResult),
+                (uint)Unsafe.SizeOf<Vector128<Double>>()
+            );
 
             ValidateResult(inArray1, outLowerArray, outUpperArray, method);
         }
 
-        private void ValidateResult(void* op1, void* lowerResult, void* upperResult, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* op1,
+            void* lowerResult,
+            void* upperResult,
+            [CallerMemberName] string method = ""
+        )
         {
             Single[] inArray1 = new Single[Op1ElementCount];
             Double[] outLowerArray = new Double[RetElementCount];
             Double[] outUpperArray = new Double[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(op1), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Double, byte>(ref outLowerArray[0]), ref Unsafe.AsRef<byte>(lowerResult), (uint)Unsafe.SizeOf<Vector128<Double>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Double, byte>(ref outUpperArray[0]), ref Unsafe.AsRef<byte>(upperResult), (uint)Unsafe.SizeOf<Vector128<Double>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(op1),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Double, byte>(ref outLowerArray[0]),
+                ref Unsafe.AsRef<byte>(lowerResult),
+                (uint)Unsafe.SizeOf<Vector128<Double>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Double, byte>(ref outUpperArray[0]),
+                ref Unsafe.AsRef<byte>(upperResult),
+                (uint)Unsafe.SizeOf<Vector128<Double>>()
+            );
 
             ValidateResult(inArray1, outLowerArray, outUpperArray, method);
         }
 
-        private void ValidateResult(Single[] firstOp, Double[] lowerResult, Double[] upperResult, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Single[] firstOp,
+            Double[] lowerResult,
+            Double[] upperResult,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -322,10 +426,18 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Vector128)}.{nameof(Vector128.Widen)}<Double>(Vector128<Single>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"      firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"  lowerResult: ({string.Join(", ", lowerResult)})");
-				TestLibrary.TestFramework.LogInformation($"  upperResult: ({string.Join(", ", upperResult)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Vector128)}.{nameof(Vector128.Widen)}<Double>(Vector128<Single>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"      firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  lowerResult: ({string.Join(", ", lowerResult)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  upperResult: ({string.Join(", ", upperResult)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

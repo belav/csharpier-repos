@@ -26,11 +26,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public StreamingFindReferencesProgressAdapter(IFindReferencesProgress progress)
         {
             _progress = progress;
-            ProgressTracker = new StreamingProgressTracker((current, max, ct) =>
-            {
-                _progress.ReportProgress(current, max);
-                return default;
-            });
+            ProgressTracker = new StreamingProgressTracker(
+                (current, max, ct) =>
+                {
+                    _progress.ReportProgress(current, max);
+                    return default;
+                }
+            );
         }
 
         public ValueTask OnCompletedAsync(CancellationToken cancellationToken)
@@ -39,19 +41,28 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             return default;
         }
 
-        public ValueTask OnFindInDocumentCompletedAsync(Document document, CancellationToken cancellationToken)
+        public ValueTask OnFindInDocumentCompletedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             _progress.OnFindInDocumentCompleted(document);
             return default;
         }
 
-        public ValueTask OnFindInDocumentStartedAsync(Document document, CancellationToken cancellationToken)
+        public ValueTask OnFindInDocumentStartedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             _progress.OnFindInDocumentStarted(document);
             return default;
         }
 
-        public ValueTask OnDefinitionFoundAsync(SymbolGroup group, CancellationToken cancellationToken)
+        public ValueTask OnDefinitionFoundAsync(
+            SymbolGroup group,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -60,13 +71,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 return default;
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
         }
 
-        public ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol symbol, ReferenceLocation location, CancellationToken cancellationToken)
+        public ValueTask OnReferenceFoundAsync(
+            SymbolGroup group,
+            ISymbol symbol,
+            ReferenceLocation location,
+            CancellationToken cancellationToken
+        )
         {
             _progress.OnReferenceFound(symbol, location);
             return default;

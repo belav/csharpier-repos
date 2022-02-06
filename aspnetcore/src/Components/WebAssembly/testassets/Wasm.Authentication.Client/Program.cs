@@ -16,10 +16,18 @@ public class Program
     {
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-        builder.Services.AddApiAuthorization<RemoteAppState, OidcAccount>()
-            .AddAccountClaimsPrincipalFactory<RemoteAppState, OidcAccount, PreferencesUserFactory>();
+        builder.Services
+            .AddApiAuthorization<RemoteAppState, OidcAccount>()
+            .AddAccountClaimsPrincipalFactory<
+                RemoteAppState,
+                OidcAccount,
+                PreferencesUserFactory
+            >();
 
-        builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+        builder.Services
+            .AddHttpClient<WeatherForecastClient>(
+                client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            )
             .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
         builder.Services.AddSingleton<StateService>();

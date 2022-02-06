@@ -10,9 +10,11 @@ internal sealed class TestCompilation
 {
     public static Compilation Create(string source)
     {
-        return CSharpCompilation.Create("Test",
+        return CSharpCompilation.Create(
+            "Test",
             new[] { CSharpSyntaxTree.ParseText(source) },
             TestReferences.MetadataReferences,
-            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+        );
     }
 }

@@ -58,14 +58,13 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
 
             public IEntityType EntityType { get; }
 
-            public bool Equals(CacheKey other)
-                => Property.Equals(other.Property) && EntityType.Equals(other.EntityType);
+            public bool Equals(CacheKey other) =>
+                Property.Equals(other.Property) && EntityType.Equals(other.EntityType);
 
-            public override bool Equals(object? obj)
-                => obj is CacheKey cacheKey && Equals(cacheKey);
+            public override bool Equals(object? obj) =>
+                obj is CacheKey cacheKey && Equals(cacheKey);
 
-            public override int GetHashCode()
-                => HashCode.Combine(Property, EntityType);
+            public override int GetHashCode() => HashCode.Combine(Property, EntityType);
         }
 
         /// <summary>
@@ -82,7 +81,12 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         public virtual ValueGenerator GetOrAdd(
             IProperty property,
             IEntityType entityType,
-            Func<IProperty, IEntityType, ValueGenerator> factory)
-            => _cache.GetOrAdd(new CacheKey(property, entityType), static (ck, f) => f(ck.Property, ck.EntityType), factory);
+            Func<IProperty, IEntityType, ValueGenerator> factory
+        ) =>
+            _cache.GetOrAdd(
+                new CacheKey(property, entityType),
+                static (ck, f) => f(ck.Property, ck.EntityType),
+                factory
+            );
     }
 }

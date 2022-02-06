@@ -3,11 +3,10 @@
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class QueryNoClientEvalSqliteTest : QueryNoClientEvalTestBase<QueryNoClientEvalSqliteFixture>
+    public class QueryNoClientEvalSqliteTest
+        : QueryNoClientEvalTestBase<QueryNoClientEvalSqliteFixture>
     {
-        public QueryNoClientEvalSqliteTest(QueryNoClientEvalSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public QueryNoClientEvalSqliteTest(QueryNoClientEvalSqliteFixture fixture) : base(fixture)
+        { }
     }
 }

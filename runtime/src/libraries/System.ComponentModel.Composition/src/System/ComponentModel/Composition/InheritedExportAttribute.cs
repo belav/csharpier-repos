@@ -8,7 +8,11 @@ namespace System.ComponentModel.Composition
     /// <summary>
     ///     Specifies that a type or interface that provides a particular export.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = true,
+        Inherited = true
+    )]
     public class InheritedExportAttribute : ExportAttribute
     {
         /// <summary>
@@ -26,10 +30,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public InheritedExportAttribute()
-            : this((string?)null, (Type?)null)
-        {
-        }
+        public InheritedExportAttribute() : this((string?)null, (Type?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the
@@ -56,10 +57,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public InheritedExportAttribute(Type? contractType)
-            : this((string?)null, contractType)
-        {
-        }
+        public InheritedExportAttribute(Type? contractType) : this((string?)null, contractType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the
@@ -81,10 +79,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public InheritedExportAttribute(string? contractName)
-            : this(contractName, (Type?)null)
-        {
-        }
+        public InheritedExportAttribute(string? contractName) : this(contractName, (Type?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the
@@ -112,8 +107,6 @@ namespace System.ComponentModel.Composition
         ///     </para>
         /// </remarks>
         public InheritedExportAttribute(string? contractName, Type? contractType)
-            : base(contractName, contractType)
-        {
-        }
+            : base(contractName, contractType) { }
     }
 }

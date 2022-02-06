@@ -16,8 +16,7 @@ namespace System.Diagnostics.Tracing
     /// Provides support for EventSource activities by marking the start and
     /// end of a particular operation.
     /// </summary>
-    internal sealed class EventSourceActivity
-        : IDisposable
+    internal sealed class EventSourceActivity : IDisposable
     {
         /// <summary>
         /// Initializes a new instance of the EventSourceActivity class that
@@ -87,6 +86,7 @@ namespace System.Diagnostics.Tracing
         {
             return this.Start(eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Shortcut version see Start(string eventName, EventSourceOptions options, T data) Options is empty (no keywords
         /// and level==Info) Data payload is empty.
@@ -97,6 +97,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             return this.Start(eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Shortcut version see Start(string eventName, EventSourceOptions options, T data).  Data payload is empty.
         /// </summary>
@@ -105,6 +106,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             return this.Start(eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Shortcut version see Start(string eventName, EventSourceOptions options, T data) Options is empty (no keywords
         /// and level==Info)
@@ -127,6 +129,7 @@ namespace System.Diagnostics.Tracing
         {
             this.Stop(null, ref data);
         }
+
         /// <summary>
         /// Used if you wish to use the non-default stop name (which is the start name with Start replace with 'Stop')
         /// This can be useful to indicate unusual ways of stopping (but it is still STRONGLY recommended that
@@ -137,6 +140,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             this.Stop(eventName, ref data);
         }
+
         /// <summary>
         /// Used if you wish to use the non-default stop name (which is the start name with Start replace with 'Stop')
         /// This can be useful to indicate unusual ways of stopping (but it is still STRONGLY recommended that
@@ -163,6 +167,7 @@ namespace System.Diagnostics.Tracing
         {
             this.Write(this.eventSource, eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Writes an event associated with this activity.
         /// May only be called when the activity is in the Started state.
@@ -177,6 +182,7 @@ namespace System.Diagnostics.Tracing
             EventSourceOptions options = default;
             this.Write(this.eventSource, eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Writes a trivial event associated with this activity.
         /// May only be called when the activity is in the Started state.
@@ -192,6 +198,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             this.Write(this.eventSource, eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Writes a trivial event associated with this activity.
         /// May only be called when the activity is in the Started state.
@@ -205,10 +212,16 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             this.Write(this.eventSource, eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Writes an event to a arbitrary eventSource stamped with the activity ID of this activity.
         /// </summary>
-        public void Write<T>(EventSource source, string? eventName, EventSourceOptions options, T data)
+        public void Write<T>(
+            EventSource source,
+            string? eventName,
+            EventSourceOptions options,
+            T data
+        )
         {
             this.Write(source, eventName, ref options, ref data);
         }
@@ -227,7 +240,11 @@ namespace System.Diagnostics.Tracing
         }
 
 #region private
-        private EventSourceActivity Start<T>(string? eventName, ref EventSourceOptions options, ref T data)
+        private EventSourceActivity Start<T>(
+            string? eventName,
+            ref EventSourceOptions options,
+            ref T data
+        )
         {
             if (this.state != State.Started)
                 throw new InvalidOperationException();
@@ -245,7 +262,13 @@ namespace System.Diagnostics.Tracing
                 newActivity.startStopOptions = options;
                 newActivity.eventName = eventName;
                 newActivity.startStopOptions.Opcode = EventOpcode.Start;
-                this.eventSource.Write(eventName, ref newActivity.startStopOptions, ref newActivity.activityId, ref relatedActivityId, ref data);
+                this.eventSource.Write(
+                    eventName,
+                    ref newActivity.startStopOptions,
+                    ref newActivity.activityId,
+                    ref relatedActivityId,
+                    ref data
+                );
             }
             else
             {
@@ -256,10 +279,15 @@ namespace System.Diagnostics.Tracing
             return newActivity;
         }
 
-        private void Write<T>(EventSource eventSource, string? eventName, ref EventSourceOptions options, ref T data)
+        private void Write<T>(
+            EventSource eventSource,
+            string? eventName,
+            ref EventSourceOptions options,
+            ref T data
+        )
         {
             if (this.state != State.Started)
-                throw new InvalidOperationException();      // Write after stop.
+                throw new InvalidOperationException(); // Write after stop.
             if (eventName == null)
                 throw new ArgumentNullException();
 
@@ -286,7 +314,13 @@ namespace System.Diagnostics.Tracing
                 eventName += "Stop";
             }
             this.startStopOptions.Opcode = EventOpcode.Stop;
-            this.eventSource.Write(eventName, ref this.startStopOptions, ref this.activityId, ref s_empty, ref data);
+            this.eventSource.Write(
+                eventName,
+                ref this.startStopOptions,
+                ref this.activityId,
+                ref s_empty,
+                ref data
+            );
         }
 
         private enum State
@@ -303,6 +337,7 @@ namespace System.Diagnostics.Tracing
         private readonly EventSource eventSource;
         private EventSourceOptions startStopOptions;
         internal Guid activityId;
+
         // internal Guid relatedActivityId;
         private State state;
         private string? eventName;

@@ -72,8 +72,7 @@ namespace System.Collections.Generic
         /// Constructs a new builder.
         /// </summary>
         /// <param name="initialize">Pass <c>true</c>.</param>
-        public SparseArrayBuilder(bool initialize)
-            : this()
+        public SparseArrayBuilder(bool initialize) : this()
         {
             // Once C# gains parameterless struct constructors, please
             // remove this workaround.
@@ -171,7 +170,6 @@ namespace System.Collections.Generic
             Debug.Assert(count >= 0);
 
             _markers.Add(new Marker(count: count, index: Count));
-
             checked
             {
                 _reservedCount += count;

@@ -48,8 +48,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public LazyLoaderParameterBindingFactoryDependencies()
-        {
-        }
+        public LazyLoaderParameterBindingFactoryDependencies() { }
     }
 }

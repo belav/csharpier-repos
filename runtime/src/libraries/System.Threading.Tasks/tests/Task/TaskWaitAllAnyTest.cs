@@ -52,7 +52,7 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
     {
         Exceptional = -2,
         Cancelled = -1,
-        VeryLight = 100,     // the number is the N input to the ZetaSequence workload
+        VeryLight = 100, // the number is the N input to the ZetaSequence workload
         Light = 200,
         Medium = 400,
         Heavy = 800,
@@ -148,7 +148,7 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                 {
                     Result = ZetaSequence((int)WorkType, CancellationToken);
                 }
-                else  // task re-entry, mark it failed
+                else // task re-entry, mark it failed
                 {
                     Result = s_UNINITIALED_RESULT;
                 }
@@ -194,17 +194,16 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
 
         private const int MAX_DELAY_TIMEOUT = 10;
 
-        private readonly API _api;                  // the API_WaitAllAny to be tested
-        private readonly WaitBy _waitBy;            // the format of Wait
-        private readonly int _waitTimeout;          // the timeout in ms to be waited
-        private readonly TaskInfo[] _taskInfos;     // task info for each task
-        private readonly Task[] _tasks;             // _tasks to be waited
+        private readonly API _api; // the API_WaitAllAny to be tested
+        private readonly WaitBy _waitBy; // the format of Wait
+        private readonly int _waitTimeout; // the timeout in ms to be waited
+        private readonly TaskInfo[] _taskInfos; // task info for each task
+        private readonly Task[] _tasks; // _tasks to be waited
 
-        private bool _taskWaitAllReturn;            // result to record the WaitAll(timeout) return value
-        private int _taskWaitAnyReturn;             // result to record the WaitAny(timeout) return value
+        private bool _taskWaitAllReturn; // result to record the WaitAll(timeout) return value
+        private int _taskWaitAnyReturn; // result to record the WaitAny(timeout) return value
 
         private AggregateException _caughtException; // exception thrown during wait
-
         #endregion
 
         public TaskWaitAllAnyTest(TestParameters_WaitAllAny parameters)
@@ -242,7 +241,10 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                                 _taskWaitAllReturn = Task.WaitAll(_tasks, _waitTimeout);
                                 break;
                             case WaitBy.TimeSpan:
-                                _taskWaitAllReturn = Task.WaitAll(_tasks, new TimeSpan(0, 0, 0, 0, _waitTimeout));
+                                _taskWaitAllReturn = Task.WaitAll(
+                                    _tasks,
+                                    new TimeSpan(0, 0, 0, 0, _waitTimeout)
+                                );
                                 break;
                         }
                         break;
@@ -259,7 +261,10 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                                 break;
                             case WaitBy.TimeSpan:
                                 //save the returned task index
-                                _taskWaitAnyReturn = Task.WaitAny(_tasks, new TimeSpan(0, 0, 0, 0, _waitTimeout));
+                                _taskWaitAnyReturn = Task.WaitAny(
+                                    _tasks,
+                                    new TimeSpan(0, 0, 0, 0, _waitTimeout)
+                                );
                                 break;
                         }
                         break;
@@ -278,8 +283,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             if (_waitTimeout != -1 && sw.ElapsedMilliseconds > maxTimeout)
             {
                 Debug.WriteLine("ElapsedMilliseconds way more than requested Timeout.");
-                Debug.WriteLine("Max Timeout: {0}ms + {1}ms, Actual Time: {2}ms",
-                    _waitTimeout, MAX_DELAY_TIMEOUT, sw.ElapsedMilliseconds);
+                Debug.WriteLine(
+                    "Max Timeout: {0}ms + {1}ms, Actual Time: {2}ms",
+                    _waitTimeout,
+                    MAX_DELAY_TIMEOUT,
+                    sw.ElapsedMilliseconds
+                );
             }
 
             Verify();
@@ -294,7 +303,10 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                 if (taskInfo.Task.Status == TaskStatus.Running)
                 {
                     taskInfo.CancellationTokenSource.Cancel();
-                    try { taskInfo.Task.GetAwaiter().GetResult(); }
+                    try
+                    {
+                        taskInfo.Task.GetAwaiter().GetResult();
+                    }
                     catch (OperationCanceledException) { }
                 }
             }
@@ -309,10 +321,15 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             {
                 int iCopy = i;
                 _taskInfos[i].Task = Task.Factory.StartNew(
-                   delegate (object o)
-                   {
-                       _taskInfos[iCopy].RunWorkload();
-                   }, string.Concat("Task_", iCopy), _taskInfos[iCopy].CancellationTokenSource.Token, TaskCreationOptions.AttachedToParent, TaskScheduler.Current);
+                    delegate(object o)
+                    {
+                        _taskInfos[iCopy].RunWorkload();
+                    },
+                    string.Concat("Task_", iCopy),
+                    _taskInfos[iCopy].CancellationTokenSource.Token,
+                    TaskCreationOptions.AttachedToParent,
+                    TaskScheduler.Current
+                );
 
                 _tasks[i] = _taskInfos[i].Task;
             }
@@ -332,7 +349,10 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             bool allShouldFinish = (_api == API.WaitAll && _taskWaitAllReturn);
 
             // verification for WaitAny
-            Task thisShouldFinish = (_api == API.WaitAny && _taskWaitAnyReturn != -1) ? _taskInfos[_taskWaitAnyReturn].Task : null;
+            Task thisShouldFinish =
+                (_api == API.WaitAny && _taskWaitAnyReturn != -1)
+                    ? _taskInfos[_taskWaitAnyReturn].Task
+                    : null;
 
             Dictionary<int, Task> faultyTasks = new Dictionary<int, Task>();
             bool expCaught = false;
@@ -342,32 +362,58 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                 TaskInfo ti = _taskInfos[i];
 
                 if (allShouldFinish && !ti.Task.IsCompleted)
-                    Assert.True(false, string.Format("WaitAll contract is broken -- Task at Index = {0} does not finish", i));
+                    Assert.True(
+                        false,
+                        string.Format(
+                            "WaitAll contract is broken -- Task at Index = {0} does not finish",
+                            i
+                        )
+                    );
 
                 if (thisShouldFinish == ti.Task && !ti.Task.IsCompleted)
-                    Assert.True(false, string.Format("WaitAny contract is broken -- Task at Index = {0} does not finish", i));
+                    Assert.True(
+                        false,
+                        string.Format(
+                            "WaitAny contract is broken -- Task at Index = {0} does not finish",
+                            i
+                        )
+                    );
 
                 WorkloadType workType = ti.WorkType;
 
                 if (workType == WorkloadType.Exceptional)
                 {
                     // verify whether exception has(not) been propogated
-                    expCaught = VerifyException((ex) =>
-                    {
-                        TPLTestException expectedExp = ex as TPLTestException;
-                        return expectedExp != null && expectedExp.FromTaskId == ti.Task.Id;
-                    });
+                    expCaught = VerifyException(
+                        (ex) =>
+                        {
+                            TPLTestException expectedExp = ex as TPLTestException;
+                            return expectedExp != null && expectedExp.FromTaskId == ti.Task.Id;
+                        }
+                    );
 
                     if (_api == API.WaitAll)
                     {
                         if (!expCaught)
-                            Assert.True(false, string.Format("excepted TPLTestException in Task at Index = {0}  NOT caught", i));
+                            Assert.True(
+                                false,
+                                string.Format(
+                                    "excepted TPLTestException in Task at Index = {0}  NOT caught",
+                                    i
+                                )
+                            );
                     }
                     else // must be API_WaitAllAny.WaitAny
                     {
                         //waitAny will not fail if a number of tasks were exceptional
                         if (expCaught)
-                            Assert.True(false, string.Format("Unexpected TPLTestException in Task at Index = {0} caught", i));
+                            Assert.True(
+                                false,
+                                string.Format(
+                                    "Unexpected TPLTestException in Task at Index = {0} caught",
+                                    i
+                                )
+                            );
 
                         //need to check it eventually to prevent it from crashing the finalizer
                         faultyTasks.Add(i, ti.Task);
@@ -375,26 +421,42 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                 }
                 else if (workType == WorkloadType.Cancelled)
                 {
-                    expCaught = VerifyException((ex) =>
-                    {
-                        TaskCanceledException expectedExp = ex as TaskCanceledException;
-                        return expectedExp != null && expectedExp.Task == ti.Task;
-                    });
+                    expCaught = VerifyException(
+                        (ex) =>
+                        {
+                            TaskCanceledException expectedExp = ex as TaskCanceledException;
+                            return expectedExp != null && expectedExp.Task == ti.Task;
+                        }
+                    );
 
                     if (_api == API.WaitAll)
-                        Assert.True(expCaught, "excepted TaskCanceledException in Task at Index = " + i + " NOT caught");
+                        Assert.True(
+                            expCaught,
+                            "excepted TaskCanceledException in Task at Index = " + i + " NOT caught"
+                        );
                     else // must be API_WaitAllAny.WaitAny
                     {
                         if (expCaught) //waitAny will not fail if a number of tasks were cancelled
-                            Assert.False(expCaught, "Unexpected TaskCanceledException in Task at Index = " + i + " caught");
+                            Assert.False(
+                                expCaught,
+                                "Unexpected TaskCanceledException in Task at Index = "
+                                    + i
+                                    + " caught"
+                            );
                     }
                 }
                 else if (ti.Task.IsCompleted && !CheckResult(ti.Result))
-                    Assert.True(false, string.Format("Failed result verification in Task at Index = {0}", i));
+                    Assert.True(
+                        false,
+                        string.Format("Failed result verification in Task at Index = {0}", i)
+                    );
             }
 
             if (!expCaught && _caughtException != null)
-                Assert.True(false, string.Format("Caught unexpected exception of {0}", _caughtException));
+                Assert.True(
+                    false,
+                    string.Format("Caught unexpected exception of {0}", _caughtException)
+                );
 
             // second pass on the faulty tasks
             if (faultyTasks.Count > 0)
@@ -408,7 +470,13 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                 foreach (var tasks in faultyTasks)
                 {
                     if (!(tasks.Value.Exception.InnerException is TPLTestException))
-                        Assert.True(false, string.Format("Unexpected Exception in Task at Index = {0} caught", tasks.Key));
+                        Assert.True(
+                            false,
+                            string.Format(
+                                "Unexpected Exception in Task at Index = {0} caught",
+                                tasks.Key
+                            )
+                        );
                 }
             }
         }
@@ -426,7 +494,8 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
 
             foreach (Exception ex in _caughtException.InnerExceptions)
             {
-                if (isExpectedExp(ex)) return true;
+                if (isExpectedExp(ex))
+                    return true;
             }
 
             return false;
@@ -457,7 +526,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, -1, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                -1,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -469,7 +543,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Light);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, -1, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                -1,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -478,7 +557,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny2()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, -1, WaitBy.None, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                -1,
+                WaitBy.None,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -488,7 +572,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, -1, WaitBy.None, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                -1,
+                WaitBy.None,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -499,7 +588,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node2 = new TaskInfo(WorkloadType.Light);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, -1, WaitBy.None, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                -1,
+                WaitBy.None,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -516,7 +610,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, -1, WaitBy.None, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                -1,
+                WaitBy.None,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -526,7 +625,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Light);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, -1, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                -1,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -543,7 +647,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, -1, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                -1,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -552,7 +661,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny8()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 0, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                0,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -563,7 +677,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 0, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                0,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -573,7 +692,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 0, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                0,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -589,7 +713,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 0, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                0,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -600,7 +729,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Light);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 197, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                197,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -616,7 +750,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 197, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                197,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -625,7 +764,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny14()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 197, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                197,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -635,7 +779,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 197, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                197,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -646,7 +795,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 197, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                197,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -656,7 +810,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 1, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                1,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -665,7 +824,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny18()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 1, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                1,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -676,7 +840,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 1, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                1,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -692,7 +861,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 1, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                1,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -701,7 +875,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny21()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 47, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                47,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -710,7 +889,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny22()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 47, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                47,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -720,7 +904,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 47, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                47,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -731,7 +920,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 47, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                47,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -747,7 +941,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 47, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                47,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -756,7 +955,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny26()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 7, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                7,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -766,7 +970,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Light);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 7, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                7,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -777,7 +986,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node2 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 7, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                7,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -793,7 +1007,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.Light);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAll, 7, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAll,
+                7,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -802,7 +1021,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny30()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, -1, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                -1,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -877,8 +1101,81 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node64 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node65 = new TaskInfo(WorkloadType.Light);
             TaskInfo node66 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node15, node16, node17, node18, node19, node20, node21, node22, node23, node24, node25, node26, node27, node28, node29, node30, node31, node32, node33, node34, node35, node36, node37, node38, node39, node40, node41, node42, node43, node44, node45, node46, node47, node48, node49, node50, node51, node52, node53, node54, node55, node56, node57, node58, node59, node60, node61, node62, node63, node64, node65, node66, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, -1, WaitBy.Millisecond, allTasks);
+            TaskInfo[] allTasks = new[]
+            {
+                node1,
+                node2,
+                node3,
+                node4,
+                node5,
+                node6,
+                node7,
+                node8,
+                node9,
+                node10,
+                node11,
+                node12,
+                node13,
+                node14,
+                node15,
+                node16,
+                node17,
+                node18,
+                node19,
+                node20,
+                node21,
+                node22,
+                node23,
+                node24,
+                node25,
+                node26,
+                node27,
+                node28,
+                node29,
+                node30,
+                node31,
+                node32,
+                node33,
+                node34,
+                node35,
+                node36,
+                node37,
+                node38,
+                node39,
+                node40,
+                node41,
+                node42,
+                node43,
+                node44,
+                node45,
+                node46,
+                node47,
+                node48,
+                node49,
+                node50,
+                node51,
+                node52,
+                node53,
+                node54,
+                node55,
+                node56,
+                node57,
+                node58,
+                node59,
+                node60,
+                node61,
+                node62,
+                node63,
+                node64,
+                node65,
+                node66,
+            };
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                -1,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -887,7 +1184,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny32()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, -1, WaitBy.None, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                -1,
+                WaitBy.None,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -898,7 +1200,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, -1, WaitBy.None, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                -1,
+                WaitBy.None,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -910,7 +1217,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, -1, WaitBy.None, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                -1,
+                WaitBy.None,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -919,7 +1231,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny35()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, -1, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                -1,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -935,7 +1252,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.Light);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, -1, WaitBy.None, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                -1,
+                WaitBy.None,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -947,7 +1269,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, -1, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                -1,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -957,7 +1284,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 0, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                0,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -973,7 +1305,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 0, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                0,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -982,7 +1319,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny40()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 0, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                0,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -993,7 +1335,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 0, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                0,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1002,7 +1349,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny42()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 197, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                197,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1012,7 +1364,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 197, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                197,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1023,7 +1380,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 197, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                197,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1101,8 +1463,84 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node67 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node68 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node69 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node15, node16, node17, node18, node19, node20, node21, node22, node23, node24, node25, node26, node27, node28, node29, node30, node31, node32, node33, node34, node35, node36, node37, node38, node39, node40, node41, node42, node43, node44, node45, node46, node47, node48, node49, node50, node51, node52, node53, node54, node55, node56, node57, node58, node59, node60, node61, node62, node63, node64, node65, node66, node67, node68, node69, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 197, WaitBy.TimeSpan, allTasks);
+            TaskInfo[] allTasks = new[]
+            {
+                node1,
+                node2,
+                node3,
+                node4,
+                node5,
+                node6,
+                node7,
+                node8,
+                node9,
+                node10,
+                node11,
+                node12,
+                node13,
+                node14,
+                node15,
+                node16,
+                node17,
+                node18,
+                node19,
+                node20,
+                node21,
+                node22,
+                node23,
+                node24,
+                node25,
+                node26,
+                node27,
+                node28,
+                node29,
+                node30,
+                node31,
+                node32,
+                node33,
+                node34,
+                node35,
+                node36,
+                node37,
+                node38,
+                node39,
+                node40,
+                node41,
+                node42,
+                node43,
+                node44,
+                node45,
+                node46,
+                node47,
+                node48,
+                node49,
+                node50,
+                node51,
+                node52,
+                node53,
+                node54,
+                node55,
+                node56,
+                node57,
+                node58,
+                node59,
+                node60,
+                node61,
+                node62,
+                node63,
+                node64,
+                node65,
+                node66,
+                node67,
+                node68,
+                node69,
+            };
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                197,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1111,7 +1549,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny46()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 1, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                1,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1122,7 +1565,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 1, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                1,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1138,7 +1586,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 1, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                1,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1148,7 +1601,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 1, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                1,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1158,7 +1616,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Light);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 47, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                47,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1169,7 +1632,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Light);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 47, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                47,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1185,7 +1653,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 47, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                47,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1194,7 +1667,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny53()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 47, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                47,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1205,7 +1683,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 47, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                47,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1215,7 +1698,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Light);
             TaskInfo[] allTasks = new[] { node1, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 7, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                7,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1226,7 +1714,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Light);
             TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 7, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                7,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1242,7 +1735,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
             TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 7, WaitBy.Millisecond, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                7,
+                WaitBy.Millisecond,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }
@@ -1251,7 +1749,12 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public static void TaskWaitAllAny58()
         {
             TaskInfo[] allTasks = new TaskInfo[0];
-            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(API.WaitAny, 7, WaitBy.TimeSpan, allTasks);
+            TestParameters_WaitAllAny parameters = new TestParameters_WaitAllAny(
+                API.WaitAny,
+                7,
+                WaitBy.TimeSpan,
+                allTasks
+            );
             TaskWaitAllAnyTest test = new TaskWaitAllAnyTest(parameters);
             test.RealRun();
         }

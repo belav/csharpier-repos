@@ -19,9 +19,9 @@ namespace Microsoft.CodeAnalysis
 
         public void VisitWithModel(SemanticModel model, SyntaxNode node)
         {
-            Debug.Assert(_semanticModel is null
-                         && model is not null
-                         && model.SyntaxTree == node.SyntaxTree);
+            Debug.Assert(
+                _semanticModel is null && model is not null && model.SyntaxTree == node.SyntaxTree
+            );
 
             _semanticModel = model;
             Visit(node);

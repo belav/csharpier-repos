@@ -17,30 +17,52 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Formatting
     public abstract class AbstractNewDocumentFormattingServiceTests
     {
         protected abstract string Language { get; }
-        protected abstract TestWorkspace CreateTestWorkspace(string testCode, ParseOptions? parseOptions);
+        protected abstract TestWorkspace CreateTestWorkspace(
+            string testCode,
+            ParseOptions? parseOptions
+        );
 
         internal Task TestAsync(string testCode, string expected)
         {
             return TestCoreAsync<object>(testCode, expected, options: null, parseOptions: null);
         }
 
-        internal Task TestAsync<T>(string testCode, string expected, (PerLanguageOption2<T>, T)[]? options = null, ParseOptions? parseOptions = null)
+        internal Task TestAsync<T>(
+            string testCode,
+            string expected,
+            (PerLanguageOption2<T>, T)[]? options = null,
+            ParseOptions? parseOptions = null
+        )
         {
-            return TestCoreAsync<T>(testCode,
+            return TestCoreAsync<T>(
+                testCode,
                 expected,
                 options.Select(o => (new OptionKey(o.Item1, Language), o.Item2)).ToArray(),
-                parseOptions);
+                parseOptions
+            );
         }
 
-        internal Task TestAsync<T>(string testCode, string expected, (Option2<T>, T)[]? options = null, ParseOptions? parseOptions = null)
+        internal Task TestAsync<T>(
+            string testCode,
+            string expected,
+            (Option2<T>, T)[]? options = null,
+            ParseOptions? parseOptions = null
+        )
         {
-            return TestCoreAsync<T>(testCode,
+            return TestCoreAsync<T>(
+                testCode,
                 expected,
                 options.Select(o => (new OptionKey(o.Item1), o.Item2)).ToArray(),
-                parseOptions);
+                parseOptions
+            );
         }
 
-        private async Task TestCoreAsync<T>(string testCode, string expected, (OptionKey, T)[]? options, ParseOptions? parseOptions)
+        private async Task TestCoreAsync<T>(
+            string testCode,
+            string expected,
+            (OptionKey, T)[]? options,
+            ParseOptions? parseOptions
+        )
         {
             using (var workspace = CreateTestWorkspace(testCode, parseOptions))
             {
@@ -49,7 +71,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Formatting
                     var workspaceOptions = workspace.Options;
                     foreach (var option in options)
                     {
-                        workspaceOptions = workspaceOptions.WithChangedOption(option.Item1, option.Item2);
+                        workspaceOptions = workspaceOptions.WithChangedOption(
+                            option.Item1,
+                            option.Item2
+                        );
                     }
 
                     workspace.SetOptions(workspaceOptions);
@@ -57,8 +82,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Formatting
 
                 var document = workspace.CurrentSolution.Projects.First().Documents.First();
 
-                var formattingService = document.GetRequiredLanguageService<INewDocumentFormattingService>();
-                var formattedDocument = await formattingService.FormatNewDocumentAsync(document, hintDocument: null, CancellationToken.None);
+                var formattingService =
+                    document.GetRequiredLanguageService<INewDocumentFormattingService>();
+                var formattedDocument = await formattingService.FormatNewDocumentAsync(
+                    document,
+                    hintDocument: null,
+                    CancellationToken.None
+                );
 
                 // Format to match what AbstractEditorFactory does
                 formattedDocument = await Formatter.FormatAsync(formattedDocument);

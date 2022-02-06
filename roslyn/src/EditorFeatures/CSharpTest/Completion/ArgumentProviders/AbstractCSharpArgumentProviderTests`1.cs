@@ -9,7 +9,5 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
 {
     public abstract class AbstractCSharpArgumentProviderTests<TWorkspaceFixture>
         : AbstractArgumentProviderTests<TWorkspaceFixture>
-        where TWorkspaceFixture : TestWorkspaceFixture, new()
-    {
-    }
+        where TWorkspaceFixture : TestWorkspaceFixture, new() { }
 }

@@ -15,7 +15,9 @@ internal readonly struct RouteKey : IEquatable<RouteKey>
     public RouteKey(Assembly appAssembly, IEnumerable<Assembly> additionalAssemblies)
     {
         AppAssembly = appAssembly;
-        AdditionalAssemblies = additionalAssemblies is null ? null : new HashSet<Assembly>(additionalAssemblies);
+        AdditionalAssemblies = additionalAssemblies is null
+            ? null
+            : new HashSet<Assembly>(additionalAssemblies);
     }
 
     public override bool Equals(object? obj)
@@ -40,8 +42,8 @@ internal readonly struct RouteKey : IEquatable<RouteKey>
             return false;
         }
 
-        return AdditionalAssemblies.Count == other.AdditionalAssemblies.Count &&
-            AdditionalAssemblies.SetEquals(other.AdditionalAssemblies);
+        return AdditionalAssemblies.Count == other.AdditionalAssemblies.Count
+            && AdditionalAssemblies.SetEquals(other.AdditionalAssemblies);
     }
 
     public override int GetHashCode()

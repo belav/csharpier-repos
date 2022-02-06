@@ -44,9 +44,7 @@ namespace Newtonsoft.Json.Tests.Issues
     [TestFixture]
     public class Issue1798
     {
-        public class NonSerializableException : Exception
-        {
-        }
+        public class NonSerializableException : Exception { }
 
         [Test]
         public void Test()
@@ -60,10 +58,10 @@ namespace Newtonsoft.Json.Tests.Issues
             }
             catch (Exception ex)
             {
-                nonSerializableJson = JsonConvert.SerializeObject(ex, new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented
-                });
+                nonSerializableJson = JsonConvert.SerializeObject(
+                    ex,
+                    new JsonSerializerSettings { Formatting = Formatting.Indented }
+                );
             }
 
             try
@@ -72,10 +70,10 @@ namespace Newtonsoft.Json.Tests.Issues
             }
             catch (Exception ex)
             {
-                serializableJson = JsonConvert.SerializeObject(ex, new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented
-                });
+                serializableJson = JsonConvert.SerializeObject(
+                    ex,
+                    new JsonSerializerSettings { Formatting = Formatting.Indented }
+                );
             }
 
             AssertNoTargetSite(nonSerializableJson);
@@ -87,14 +85,19 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             DefaultContractResolver resolver = new DefaultContractResolver();
 
-            var objectContract = (JsonObjectContract) resolver.ResolveContract(typeof(NonSerializableException));
+            var objectContract = (JsonObjectContract)resolver.ResolveContract(
+                typeof(NonSerializableException)
+            );
             Assert.IsFalse(objectContract.Properties.Contains("TargetSite"));
 
 #if (PORTABLE40 || PORTABLE) && !(NETSTANDARD2_0 || NETSTANDARD1_3)
             objectContract = (JsonObjectContract) resolver.ResolveContract(typeof(Exception));
             Assert.IsFalse(objectContract.Properties.Contains("TargetSite"));
 #else
-            Assert.IsInstanceOf(typeof(JsonISerializableContract), resolver.ResolveContract(typeof(Exception)));
+            Assert.IsInstanceOf(
+                typeof(JsonISerializableContract),
+                resolver.ResolveContract(typeof(Exception))
+            );
 #endif
         }
 

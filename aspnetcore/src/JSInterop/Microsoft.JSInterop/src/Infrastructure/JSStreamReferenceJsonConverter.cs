@@ -10,7 +10,9 @@ namespace Microsoft.JSInterop.Infrastructure;
 
 internal sealed class JSStreamReferenceJsonConverter : JsonConverter<IJSStreamReference>
 {
-    private static readonly JsonEncodedText _jsStreamReferenceLengthKey = JsonEncodedText.Encode("__jsStreamReferenceLength");
+    private static readonly JsonEncodedText _jsStreamReferenceLengthKey = JsonEncodedText.Encode(
+        "__jsStreamReferenceLength"
+    );
 
     private readonly JSRuntime _jsRuntime;
 
@@ -19,10 +21,14 @@ internal sealed class JSStreamReferenceJsonConverter : JsonConverter<IJSStreamRe
         _jsRuntime = jsRuntime;
     }
 
-    public override bool CanConvert(Type typeToConvert)
-        => typeToConvert == typeof(IJSStreamReference) || typeToConvert == typeof(JSStreamReference);
+    public override bool CanConvert(Type typeToConvert) =>
+        typeToConvert == typeof(IJSStreamReference) || typeToConvert == typeof(JSStreamReference);
 
-    public override IJSStreamReference? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override IJSStreamReference? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         long? id = null;
         long? length = null;
@@ -31,12 +37,20 @@ internal sealed class JSStreamReferenceJsonConverter : JsonConverter<IJSStreamRe
         {
             if (reader.TokenType == JsonTokenType.PropertyName)
             {
-                if (id is null && reader.ValueTextEquals(JSObjectReferenceJsonWorker.JSObjectIdKey.EncodedUtf8Bytes))
+                if (
+                    id is null
+                    && reader.ValueTextEquals(
+                        JSObjectReferenceJsonWorker.JSObjectIdKey.EncodedUtf8Bytes
+                    )
+                )
                 {
                     reader.Read();
                     id = reader.GetInt64();
                 }
-                else if (length is null && reader.ValueTextEquals(_jsStreamReferenceLengthKey.EncodedUtf8Bytes))
+                else if (
+                    length is null
+                    && reader.ValueTextEquals(_jsStreamReferenceLengthKey.EncodedUtf8Bytes)
+                )
                 {
                     reader.Read();
                     length = reader.GetInt64();
@@ -54,7 +68,9 @@ internal sealed class JSStreamReferenceJsonConverter : JsonConverter<IJSStreamRe
 
         if (!id.HasValue)
         {
-            throw new JsonException($"Required property {JSObjectReferenceJsonWorker.JSObjectIdKey} not found.");
+            throw new JsonException(
+                $"Required property {JSObjectReferenceJsonWorker.JSObjectIdKey} not found."
+            );
         }
 
         if (!length.HasValue)
@@ -65,7 +81,11 @@ internal sealed class JSStreamReferenceJsonConverter : JsonConverter<IJSStreamRe
         return new JSStreamReference(_jsRuntime, id.Value, length.Value);
     }
 
-    public override void Write(Utf8JsonWriter writer, IJSStreamReference value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        IJSStreamReference value,
+        JsonSerializerOptions options
+    )
     {
         JSObjectReferenceJsonWorker.WriteJSObjectReference(writer, (JSStreamReference)value);
     }

@@ -21,25 +21,45 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public IStreamingProgressTracker ProgressTracker { get; } = new NoOpProgressTracker();
 
-        private NoOpStreamingFindReferencesProgress()
-        {
-        }
+        private NoOpStreamingFindReferencesProgress() { }
 
 #pragma warning disable IDE0060 // Remove unused parameter
         public static Task ReportProgressAsync(int current, int maximum) => Task.CompletedTask;
 #pragma warning restore IDE0060 // Remove unused parameter
 
         public ValueTask OnCompletedAsync(CancellationToken cancellationToken) => default;
+
         public ValueTask OnStartedAsync(CancellationToken cancellationToken) => default;
-        public ValueTask OnDefinitionFoundAsync(SymbolGroup group, CancellationToken cancellationToken) => default;
-        public ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol symbol, ReferenceLocation location, CancellationToken cancellationToken) => default;
-        public ValueTask OnFindInDocumentStartedAsync(Document document, CancellationToken cancellationToken) => default;
-        public ValueTask OnFindInDocumentCompletedAsync(Document document, CancellationToken cancellationToken) => default;
+
+        public ValueTask OnDefinitionFoundAsync(
+            SymbolGroup group,
+            CancellationToken cancellationToken
+        ) => default;
+
+        public ValueTask OnReferenceFoundAsync(
+            SymbolGroup group,
+            ISymbol symbol,
+            ReferenceLocation location,
+            CancellationToken cancellationToken
+        ) => default;
+
+        public ValueTask OnFindInDocumentStartedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => default;
+
+        public ValueTask OnFindInDocumentCompletedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => default;
 
         private class NoOpProgressTracker : IStreamingProgressTracker
         {
-            public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken) => default;
-            public ValueTask ItemsCompletedAsync(int count, CancellationToken cancellationToken) => default;
+            public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken) =>
+                default;
+
+            public ValueTask ItemsCompletedAsync(int count, CancellationToken cancellationToken) =>
+                default;
         }
     }
 }

@@ -70,10 +70,13 @@ namespace DllImportGenerator.UnitTests
                 "CS8019", // Unnecessary using
             };
             var compDiags = comp.GetDiagnostics();
-            Assert.All(compDiags, diag =>
-            {
-                Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
-            });
+            Assert.All(
+                compDiags,
+                diag =>
+                {
+                    Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
+                }
+            );
         }
 
         /// <summary>
@@ -83,27 +86,21 @@ namespace DllImportGenerator.UnitTests
         /// <param name="outputKind">Output type</param>
         /// <param name="allowUnsafe">Whether or not use of the unsafe keyword should be allowed</param>
         /// <returns>The resulting compilation</returns>
-        public static Task<Compilation> CreateCompilation(string source, TestTargetFramework targetFramework = TestTargetFramework.Net, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, bool allowUnsafe = true, IEnumerable<string>? preprocessorSymbols = null)
-        {
-            return CreateCompilation(new[] { source }, targetFramework, outputKind, allowUnsafe, preprocessorSymbols);
-        }
-
-        /// <summary>
-        /// Create a compilation given sources
-        /// </summary>
-        /// <param name="sources">Sources to compile</param>
-        /// <param name="outputKind">Output type</param>
-        /// <param name="allowUnsafe">Whether or not use of the unsafe keyword should be allowed</param>
-        /// <returns>The resulting compilation</returns>
-        public static Task<Compilation> CreateCompilation(string[] sources, TestTargetFramework targetFramework = TestTargetFramework.Net, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, bool allowUnsafe = true, IEnumerable<string>? preprocessorSymbols = null)
+        public static Task<Compilation> CreateCompilation(
+            string source,
+            TestTargetFramework targetFramework = TestTargetFramework.Net,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+            bool allowUnsafe = true,
+            IEnumerable<string>? preprocessorSymbols = null
+        )
         {
             return CreateCompilation(
-                sources.Select(source =>
-                    CSharpSyntaxTree.ParseText(source, new CSharpParseOptions(LanguageVersion.Preview, preprocessorSymbols: preprocessorSymbols))).ToArray(),
+                new[] { source },
                 targetFramework,
                 outputKind,
                 allowUnsafe,
-                preprocessorSymbols);
+                preprocessorSymbols
+            );
         }
 
         /// <summary>
@@ -113,7 +110,48 @@ namespace DllImportGenerator.UnitTests
         /// <param name="outputKind">Output type</param>
         /// <param name="allowUnsafe">Whether or not use of the unsafe keyword should be allowed</param>
         /// <returns>The resulting compilation</returns>
-        public static async Task<Compilation> CreateCompilation(SyntaxTree[] sources, TestTargetFramework targetFramework = TestTargetFramework.Net, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, bool allowUnsafe = true, IEnumerable<string>? preprocessorSymbols = null)
+        public static Task<Compilation> CreateCompilation(
+            string[] sources,
+            TestTargetFramework targetFramework = TestTargetFramework.Net,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+            bool allowUnsafe = true,
+            IEnumerable<string>? preprocessorSymbols = null
+        )
+        {
+            return CreateCompilation(
+                sources
+                    .Select(
+                        source =>
+                            CSharpSyntaxTree.ParseText(
+                                source,
+                                new CSharpParseOptions(
+                                    LanguageVersion.Preview,
+                                    preprocessorSymbols: preprocessorSymbols
+                                )
+                            )
+                    )
+                    .ToArray(),
+                targetFramework,
+                outputKind,
+                allowUnsafe,
+                preprocessorSymbols
+            );
+        }
+
+        /// <summary>
+        /// Create a compilation given sources
+        /// </summary>
+        /// <param name="sources">Sources to compile</param>
+        /// <param name="outputKind">Output type</param>
+        /// <param name="allowUnsafe">Whether or not use of the unsafe keyword should be allowed</param>
+        /// <returns>The resulting compilation</returns>
+        public static async Task<Compilation> CreateCompilation(
+            SyntaxTree[] sources,
+            TestTargetFramework targetFramework = TestTargetFramework.Net,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+            bool allowUnsafe = true,
+            IEnumerable<string>? preprocessorSymbols = null
+        )
         {
             var (mdRefs, ancillary) = GetReferenceAssemblies(targetFramework);
 
@@ -125,10 +163,12 @@ namespace DllImportGenerator.UnitTests
                 referenceAssemblies = referenceAssemblies.Add(ancillary);
             }
 
-            return CSharpCompilation.Create("compilation",
+            return CSharpCompilation.Create(
+                "compilation",
                 sources,
                 referenceAssemblies,
-                new CSharpCompilationOptions(outputKind, allowUnsafe: allowUnsafe));
+                new CSharpCompilationOptions(outputKind, allowUnsafe: allowUnsafe)
+            );
         }
 
         /// <summary>
@@ -136,7 +176,9 @@ namespace DllImportGenerator.UnitTests
         /// </summary>
         /// <param name="targetFramework">The target framework.</param>
         /// <returns>The reference assembly collection and metadata references</returns>
-        public static (ReferenceAssemblies, MetadataReference) GetReferenceAssemblies(TestTargetFramework targetFramework = TestTargetFramework.Net)
+        public static (ReferenceAssemblies, MetadataReference) GetReferenceAssemblies(
+            TestTargetFramework targetFramework = TestTargetFramework.Net
+        )
         {
             // Compute the reference assemblies for the target framework.
             var referenceAssembliesSdk = targetFramework switch
@@ -151,8 +193,12 @@ namespace DllImportGenerator.UnitTests
             };
 
             // Update the reference assemblies to include details from the NuGet.config.
-            var referenceAssemblies = referenceAssembliesSdk
-                .WithNuGetConfigFilePath(Path.Combine(Path.GetDirectoryName(typeof(TestUtils).Assembly.Location)!, "NuGet.config"));
+            var referenceAssemblies = referenceAssembliesSdk.WithNuGetConfigFilePath(
+                Path.Combine(
+                    Path.GetDirectoryName(typeof(TestUtils).Assembly.Location)!,
+                    "NuGet.config"
+                )
+            );
 
             // Include the assembly containing the new attribute and all of its references.
             // [TODO] Remove once the attribute has been added to the BCL
@@ -168,9 +214,14 @@ namespace DllImportGenerator.UnitTests
         /// <param name="diagnostics">Resulting diagnostics</param>
         /// <param name="generators">Source generator instances</param>
         /// <returns>The resulting compilation</returns>
-        public static Compilation RunGenerators(Compilation comp, out ImmutableArray<Diagnostic> diagnostics, params IIncrementalGenerator[] generators)
+        public static Compilation RunGenerators(
+            Compilation comp,
+            out ImmutableArray<Diagnostic> diagnostics,
+            params IIncrementalGenerator[] generators
+        )
         {
-            CreateDriver(comp, null, generators).RunGeneratorsAndUpdateCompilation(comp, out var d, out diagnostics);
+            CreateDriver(comp, null, generators)
+                .RunGeneratorsAndUpdateCompilation(comp, out var d, out diagnostics);
             return d;
         }
 
@@ -181,17 +232,28 @@ namespace DllImportGenerator.UnitTests
         /// <param name="diagnostics">Resulting diagnostics</param>
         /// <param name="generators">Source generator instances</param>
         /// <returns>The resulting compilation</returns>
-        public static Compilation RunGenerators(Compilation comp, AnalyzerConfigOptionsProvider options, out ImmutableArray<Diagnostic> diagnostics, params IIncrementalGenerator[] generators)
+        public static Compilation RunGenerators(
+            Compilation comp,
+            AnalyzerConfigOptionsProvider options,
+            out ImmutableArray<Diagnostic> diagnostics,
+            params IIncrementalGenerator[] generators
+        )
         {
-            CreateDriver(comp, options, generators).RunGeneratorsAndUpdateCompilation(comp, out var d, out diagnostics);
+            CreateDriver(comp, options, generators)
+                .RunGeneratorsAndUpdateCompilation(comp, out var d, out diagnostics);
             return d;
         }
 
-        public static GeneratorDriver CreateDriver(Compilation c, AnalyzerConfigOptionsProvider? options, IIncrementalGenerator[] generators)
-            => CSharpGeneratorDriver.Create(
+        public static GeneratorDriver CreateDriver(
+            Compilation c,
+            AnalyzerConfigOptionsProvider? options,
+            IIncrementalGenerator[] generators
+        ) =>
+            CSharpGeneratorDriver.Create(
                 ImmutableArray.Create(generators.Select(gen => gen.AsSourceGenerator()).ToArray()),
                 parseOptions: (CSharpParseOptions)c.SyntaxTrees.First().Options,
-                optionsProvider: options);
+                optionsProvider: options
+            );
 
         // The non-configurable test-packages folder may be incomplete/corrupt.
         // - https://github.com/dotnet/roslyn-sdk/issues/487
@@ -199,15 +261,22 @@ namespace DllImportGenerator.UnitTests
         internal static void ThrowSkipExceptionIfPackagingException(Exception e)
         {
             if (e.GetType().FullName == "NuGet.Packaging.Core.PackagingException")
-                throw new SkipTestException($"Skipping test due to issue with test-packages ({e.Message}). See https://github.com/dotnet/roslyn-sdk/issues/590.");
+                throw new SkipTestException(
+                    $"Skipping test due to issue with test-packages ({e.Message}). See https://github.com/dotnet/roslyn-sdk/issues/590."
+                );
         }
 
-        private static async Task<ImmutableArray<MetadataReference>> ResolveReferenceAssemblies(ReferenceAssemblies referenceAssemblies)
+        private static async Task<ImmutableArray<MetadataReference>> ResolveReferenceAssemblies(
+            ReferenceAssemblies referenceAssemblies
+        )
         {
             try
             {
                 ResolveRedirect.Instance.Start();
-                return await referenceAssemblies.ResolveAsync(LanguageNames.CSharp, CancellationToken.None);
+                return await referenceAssemblies.ResolveAsync(
+                    LanguageNames.CSharp,
+                    CancellationToken.None
+                );
             }
             catch (Exception e)
             {
@@ -232,7 +301,13 @@ namespace DllImportGenerator.UnitTests
             public void Start()
             {
                 // Set the NuGet package cache location to a subdirectory such that we should always have access to it
-                Environment.SetEnvironmentVariable(EnvVarName, Path.Combine(Path.GetDirectoryName(typeof(TestUtils).Assembly.Location)!, "packages"));
+                Environment.SetEnvironmentVariable(
+                    EnvVarName,
+                    Path.Combine(
+                        Path.GetDirectoryName(typeof(TestUtils).Assembly.Location)!,
+                        "packages"
+                    )
+                );
                 Interlocked.Increment(ref _count);
             }
 
@@ -241,7 +316,7 @@ namespace DllImportGenerator.UnitTests
                 int count = Interlocked.Decrement(ref _count);
                 if (count == 0)
                 {
-                   Environment.SetEnvironmentVariable(EnvVarName, null);
+                    Environment.SetEnvironmentVariable(EnvVarName, null);
                 }
             }
         }

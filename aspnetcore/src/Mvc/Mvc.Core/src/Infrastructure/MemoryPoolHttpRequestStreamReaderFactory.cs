@@ -35,7 +35,8 @@ internal class MemoryPoolHttpRequestStreamReaderFactory : IHttpRequestStreamRead
     /// </param>
     public MemoryPoolHttpRequestStreamReaderFactory(
         ArrayPool<byte> bytePool,
-        ArrayPool<char> charPool)
+        ArrayPool<char> charPool
+    )
     {
         if (bytePool == null)
         {
@@ -64,6 +65,12 @@ internal class MemoryPoolHttpRequestStreamReaderFactory : IHttpRequestStreamRead
             throw new ArgumentNullException(nameof(encoding));
         }
 
-        return new HttpRequestStreamReader(stream, encoding, DefaultBufferSize, _bytePool, _charPool);
+        return new HttpRequestStreamReader(
+            stream,
+            encoding,
+            DefaultBufferSize,
+            _bytePool,
+            _charPool
+        );
     }
 }

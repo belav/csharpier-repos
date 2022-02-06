@@ -10,32 +10,25 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Initializes a new instance of the JavaScript Core Uint8Array class.
         /// </summary>
-        public Uint8Array()
-        { }
+        public Uint8Array() { }
 
-        public Uint8Array(int length) : base(length)
-        { }
+        public Uint8Array(int length) : base(length) { }
 
-        public Uint8Array(ArrayBuffer buffer) : base(buffer)
-        { }
+        public Uint8Array(ArrayBuffer buffer) : base(buffer) { }
 
-        public Uint8Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset)
-        { }
+        public Uint8Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Uint8Array(ArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length)
-        { }
+        public Uint8Array(ArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
-        public Uint8Array(SharedArrayBuffer buffer) : base(buffer)
-        { }
+        public Uint8Array(SharedArrayBuffer buffer) : base(buffer) { }
 
-        public Uint8Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset)
-        { }
+        public Uint8Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Uint8Array(SharedArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length)
-        { }
+        public Uint8Array(SharedArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
-        internal Uint8Array(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal Uint8Array(IntPtr jsHandle) : base(jsHandle) { }
 
         /// <summary>
         /// Defines an implicit conversion of JavaScript Core Uint8Array class to a Span&lt;byte&gt;

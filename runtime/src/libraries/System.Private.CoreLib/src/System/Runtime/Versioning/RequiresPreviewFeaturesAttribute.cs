@@ -3,18 +3,21 @@
 
 namespace System.Runtime.Versioning
 {
-    [AttributeUsage(AttributeTargets.Assembly |
-                AttributeTargets.Module |
-                AttributeTargets.Class |
-                AttributeTargets.Interface |
-                AttributeTargets.Delegate |
-                AttributeTargets.Struct |
-                AttributeTargets.Enum |
-                AttributeTargets.Constructor |
-                AttributeTargets.Method |
-                AttributeTargets.Property |
-                AttributeTargets.Field |
-                AttributeTargets.Event, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Module
+            | AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Event,
+        Inherited = false
+    )]
     public sealed class RequiresPreviewFeaturesAttribute : Attribute
     {
         /// <summary>

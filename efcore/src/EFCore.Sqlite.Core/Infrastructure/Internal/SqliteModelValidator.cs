@@ -26,10 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         /// </summary>
         public SqliteModelValidator(
             ModelValidatorDependencies dependencies,
-            RelationalModelValidatorDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+            RelationalModelValidatorDependencies relationalDependencies
+        ) : base(dependencies, relationalDependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,7 +35,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override void Validate(IModel model, IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        public override void Validate(
+            IModel model,
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+        )
         {
             base.Validate(model, logger);
 
@@ -53,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         /// </summary>
         protected virtual void ValidateNoSchemas(
             IModel model,
-            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+        )
         {
             foreach (var entityType in model.GetEntityTypes().Where(e => e.GetSchema() != null))
             {
@@ -69,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         /// </summary>
         protected virtual void ValidateNoSequences(
             IModel model,
-            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+        )
         {
             foreach (var sequence in model.GetSequences())
             {
@@ -88,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
             IProperty duplicateProperty,
             string columnName,
             in StoreObjectIdentifier storeObject,
-            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+        )
         {
             base.ValidateCompatible(property, duplicateProperty, columnName, storeObject, logger);
 
@@ -103,7 +107,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
                         property.DeclaringEntityType.DisplayName(),
                         property.Name,
                         columnName,
-                        storeObject.DisplayName()));
+                        storeObject.DisplayName()
+                    )
+                );
             }
         }
     }

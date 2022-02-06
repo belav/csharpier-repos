@@ -35,13 +35,23 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
         return directory
             .EnumerateFiles("*.cshtml", SearchOption.AllDirectories)
             .Concat(directory.EnumerateFiles("*.razor", SearchOption.AllDirectories))
-            .Select(file =>
-            {
-                var relativePhysicalPath = file.FullName.Substring(absoluteBasePath.Length + 1); // Include leading separator
-                    var filePath = "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
+            .Select(
+                file =>
+                {
+                    var relativePhysicalPath = file.FullName.Substring(absoluteBasePath.Length + 1); // Include leading separator
+                    var filePath =
+                        "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
 
-                return new DefaultRazorProjectItem(basePath, filePath, relativePhysicalPath, fileKind: null, file, cssScope: null);
-            });
+                    return new DefaultRazorProjectItem(
+                        basePath,
+                        filePath,
+                        relativePhysicalPath,
+                        fileKind: null,
+                        file,
+                        cssScope: null
+                    );
+                }
+            );
     }
 
     public override RazorProjectItem GetItem(string path, string fileKind)
@@ -52,15 +62,23 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
         var file = new FileInfo(absolutePath);
         if (!absolutePath.StartsWith(absoluteBasePath, StringComparison.OrdinalIgnoreCase))
         {
-            throw new InvalidOperationException($"The file '{absolutePath}' is not a descendent of the base path '{absoluteBasePath}'.");
+            throw new InvalidOperationException(
+                $"The file '{absolutePath}' is not a descendent of the base path '{absoluteBasePath}'."
+            );
         }
 
         var relativePhysicalPath = file.FullName.Substring(absoluteBasePath.Length + 1); // Include leading separator
         var filePath = "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
 
-        return new DefaultRazorProjectItem("/", filePath, relativePhysicalPath, fileKind, new FileInfo(absolutePath), cssScope: null);
+        return new DefaultRazorProjectItem(
+            "/",
+            filePath,
+            relativePhysicalPath,
+            fileKind,
+            new FileInfo(absolutePath),
+            cssScope: null
+        );
     }
-
 
     public override RazorProjectItem GetItem(string path)
     {
@@ -79,8 +97,10 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
         // Check if the given path is an absolute path. It is absolute if,
         // 1. It starts with Root or
         // 2. It is a network share path and starts with a '//'. Eg. //servername/some/network/folder
-        if (!absolutePath.StartsWith(Root, StringComparison.OrdinalIgnoreCase) &&
-            !absolutePath.StartsWith("//", StringComparison.OrdinalIgnoreCase))
+        if (
+            !absolutePath.StartsWith(Root, StringComparison.OrdinalIgnoreCase)
+            && !absolutePath.StartsWith("//", StringComparison.OrdinalIgnoreCase)
+        )
         {
             // This is not an absolute path. Strip the leading slash if any and combine it with Root.
             if (path[0] == '/' || path[0] == '\\')

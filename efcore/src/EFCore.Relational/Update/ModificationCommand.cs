@@ -65,8 +65,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     The <see cref="IUpdateEntry" />s that represent the entities that are mapped to the row
         ///     to update.
         /// </summary>
-        public virtual IReadOnlyList<IUpdateEntry> Entries
-            => _entries;
+        public virtual IReadOnlyList<IUpdateEntry> Entries => _entries;
 
         /// <summary>
         ///     The <see cref="EntityFrameworkCore.EntityState" /> that indicates whether the row will be
@@ -79,9 +78,12 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     The list of <see cref="IColumnModification" /> needed to perform the insert, update, or delete.
         /// </summary>
-        public virtual IReadOnlyList<IColumnModification> ColumnModifications
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _columnModifications, this, static command => command.GenerateColumnModifications());
+        public virtual IReadOnlyList<IColumnModification> ColumnModifications =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _columnModifications,
+                this,
+                static command => command.GenerateColumnModifications()
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -136,14 +138,20 @@ namespace Microsoft.EntityFrameworkCore.Update
                         throw new InvalidOperationException(
                             RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
                                 entry.EntityType.DisplayName(),
-                                entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties),
-                                entry.EntityState));
+                                entry.BuildCurrentValuesString(
+                                    entry.EntityType.FindPrimaryKey()!.Properties
+                                ),
+                                entry.EntityState
+                            )
+                        );
                     }
 
                     throw new InvalidOperationException(
                         RelationalStrings.ModificationCommandInvalidEntityState(
                             entry.EntityType.DisplayName(),
-                            entry.EntityState));
+                            entry.EntityState
+                        )
+                    );
             }
 
             if (mainEntry)
@@ -158,13 +166,15 @@ namespace Microsoft.EntityFrameworkCore.Update
                 _mainEntryAdded = true;
                 _entries.Insert(0, entry);
 
-                EntityState = entry.SharedIdentityEntry == null
-                    ? entry.EntityState
-                    : entry.SharedIdentityEntry.EntityType == entry.EntityType
-                    || entry.SharedIdentityEntry.EntityType.GetTableMappings()
-                        .Any(m => m.Table.Name == TableName && m.Table.Schema == Schema)
-                        ? EntityState.Modified
-                        : entry.EntityState;
+                EntityState =
+                    entry.SharedIdentityEntry == null
+                        ? entry.EntityState
+                        : entry.SharedIdentityEntry.EntityType == entry.EntityType
+                          || entry.SharedIdentityEntry.EntityType
+                              .GetTableMappings()
+                              .Any(m => m.Table.Name == TableName && m.Table.Schema == Schema)
+                            ? EntityState.Modified
+                            : entry.EntityState;
             }
             else
             {
@@ -179,17 +189,17 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         private void ValidateState(IUpdateEntry mainEntry, IUpdateEntry entry)
         {
-            var mainEntryState = mainEntry.SharedIdentityEntry == null
-                ? mainEntry.EntityState
-                : EntityState.Modified;
+            var mainEntryState =
+                mainEntry.SharedIdentityEntry == null
+                    ? mainEntry.EntityState
+                    : EntityState.Modified;
             if (mainEntryState == EntityState.Modified)
             {
                 return;
             }
 
-            var entryState = entry.SharedIdentityEntry == null
-                ? entry.EntityState
-                : EntityState.Modified;
+            var entryState =
+                entry.SharedIdentityEntry == null ? entry.EntityState : EntityState.Modified;
             if (mainEntryState != entryState)
             {
                 if (_sensitiveLoggingEnabled)
@@ -197,11 +207,17 @@ namespace Microsoft.EntityFrameworkCore.Update
                     throw new InvalidOperationException(
                         RelationalStrings.ConflictingRowUpdateTypesSensitive(
                             entry.EntityType.DisplayName(),
-                            entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties),
+                            entry.BuildCurrentValuesString(
+                                entry.EntityType.FindPrimaryKey()!.Properties
+                            ),
                             entryState,
                             mainEntry.EntityType.DisplayName(),
-                            mainEntry.BuildCurrentValuesString(mainEntry.EntityType.FindPrimaryKey()!.Properties),
-                            mainEntryState));
+                            mainEntry.BuildCurrentValuesString(
+                                mainEntry.EntityType.FindPrimaryKey()!.Properties
+                            ),
+                            mainEntryState
+                        )
+                    );
                 }
 
                 throw new InvalidOperationException(
@@ -209,7 +225,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                         entry.EntityType.DisplayName(),
                         entryState,
                         mainEntry.EntityType.DisplayName(),
-                        mainEntryState));
+                        mainEntryState
+                    )
+                );
             }
         }
 
@@ -218,7 +236,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// </summary>
         /// <param name="columnModificationParameters">Creation parameters.</param>
         /// <returns>The new <see cref="IColumnModification" /> instance.</returns>
-        public virtual IColumnModification AddColumnModification(in ColumnModificationParameters columnModificationParameters)
+        public virtual IColumnModification AddColumnModification(
+            in ColumnModificationParameters columnModificationParameters
+        )
         {
             var modification = CreateColumnModification(columnModificationParameters);
 
@@ -237,8 +257,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// </summary>
         /// <param name="columnModificationParameters">Creation parameters.</param>
         /// <returns>The new instance that implements <see cref="IColumnModification" /> interface.</returns>
-        protected virtual IColumnModification CreateColumnModification(in ColumnModificationParameters columnModificationParameters)
-            => new ColumnModification(columnModificationParameters);
+        protected virtual IColumnModification CreateColumnModification(
+            in ColumnModificationParameters columnModificationParameters
+        ) => new ColumnModification(columnModificationParameters);
 
         private List<IColumnModification> GenerateColumnModifications()
         {
@@ -248,8 +269,10 @@ namespace Microsoft.EntityFrameworkCore.Update
             var columnModifications = new List<IColumnModification>();
             Dictionary<string, ColumnValuePropagator>? sharedTableColumnMap = null;
 
-            if (_entries.Count > 1
-                || (_entries.Count == 1 && _entries[0].SharedIdentityEntry != null))
+            if (
+                _entries.Count > 1
+                || (_entries.Count == 1 && _entries[0].SharedIdentityEntry != null)
+            )
             {
                 sharedTableColumnMap = new Dictionary<string, ColumnValuePropagator>();
 
@@ -268,12 +291,18 @@ namespace Microsoft.EntityFrameworkCore.Update
 
                     if (entry.SharedIdentityEntry != null)
                     {
-                        var sharedTableMapping = entry.EntityType != entry.SharedIdentityEntry.EntityType
-                            ? GetTableMapping(entry.SharedIdentityEntry.EntityType)
-                            : tableMapping;
+                        var sharedTableMapping =
+                            entry.EntityType != entry.SharedIdentityEntry.EntityType
+                                ? GetTableMapping(entry.SharedIdentityEntry.EntityType)
+                                : tableMapping;
                         if (sharedTableMapping != null)
                         {
-                            InitializeSharedColumns(entry.SharedIdentityEntry, sharedTableMapping, updating, sharedTableColumnMap);
+                            InitializeSharedColumns(
+                                entry.SharedIdentityEntry,
+                                sharedTableMapping,
+                                updating,
+                                sharedTableColumnMap
+                            );
                         }
                     }
 
@@ -283,9 +312,12 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             foreach (var entry in _entries)
             {
-                var nonMainEntry = updating
-                    && (entry.EntityState == EntityState.Deleted
-                        || entry.EntityState == EntityState.Added);
+                var nonMainEntry =
+                    updating
+                    && (
+                        entry.EntityState == EntityState.Deleted
+                        || entry.EntityState == EntityState.Added
+                    );
 
                 var tableMapping = GetTableMapping(entry.EntityType);
                 if (tableMapping == null)
@@ -294,8 +326,10 @@ namespace Microsoft.EntityFrameworkCore.Update
                 }
 
                 var optionalDependentWithAllNull =
-                    (entry.EntityState == EntityState.Deleted
-                        || entry.EntityState == EntityState.Added)
+                    (
+                        entry.EntityState == EntityState.Deleted
+                        || entry.EntityState == EntityState.Added
+                    )
                     && tableMapping.Table.IsOptional(entry.EntityType)
                     && tableMapping.Table.GetRowInternalForeignKeys(entry.EntityType).Any();
 
@@ -305,7 +339,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     var column = (IColumn)columnMapping.Column;
                     var isKey = property.IsPrimaryKey();
                     var isCondition = !adding && (isKey || property.IsConcurrencyToken);
-                    var readValue = state != EntityState.Deleted && entry.IsStoreGenerated(property);
+                    var readValue =
+                        state != EntityState.Deleted && entry.IsStoreGenerated(property);
 
                     ColumnValuePropagator? columnPropagator = null;
                     sharedTableColumnMap?.TryGetValue(column.Name, out columnPropagator);
@@ -315,19 +350,26 @@ namespace Microsoft.EntityFrameworkCore.Update
                     {
                         if (adding)
                         {
-                            writeValue = property.GetBeforeSaveBehavior() == PropertySaveBehavior.Save;
+                            writeValue =
+                                property.GetBeforeSaveBehavior() == PropertySaveBehavior.Save;
                         }
-                        else if ((updating && property.GetAfterSaveBehavior() == PropertySaveBehavior.Save)
-                            || (!isKey && nonMainEntry))
+                        else if (
+                            (
+                                updating
+                                && property.GetAfterSaveBehavior() == PropertySaveBehavior.Save
+                            ) || (!isKey && nonMainEntry)
+                        )
                         {
-                            writeValue = columnPropagator?.TryPropagate(property, entry)
-                                ?? (entry.EntityState == EntityState.Added || entry.IsModified(property));
+                            writeValue =
+                                columnPropagator?.TryPropagate(property, entry)
+                                ?? (
+                                    entry.EntityState == EntityState.Added
+                                    || entry.IsModified(property)
+                                );
                         }
                     }
 
-                    if (readValue
-                        || writeValue
-                        || isCondition)
+                    if (readValue || writeValue || isCondition)
                     {
                         if (readValue)
                         {
@@ -344,16 +386,20 @@ namespace Microsoft.EntityFrameworkCore.Update
                             writeValue,
                             isKey,
                             isCondition,
-                            _sensitiveLoggingEnabled);
+                            _sensitiveLoggingEnabled
+                        );
 
-                        var columnModification = CreateColumnModification(columnModificationParameters);
+                        var columnModification = CreateColumnModification(
+                            columnModificationParameters
+                        );
 
-                        if (columnPropagator != null
-                            && column.PropertyMappings.Count() != 1)
+                        if (columnPropagator != null && column.PropertyMappings.Count() != 1)
                         {
                             if (columnPropagator.ColumnModification != null)
                             {
-                                columnPropagator.ColumnModification.AddSharedColumnModification(columnModification);
+                                columnPropagator.ColumnModification.AddSharedColumnModification(
+                                    columnModification
+                                );
 
                                 continue;
                             }
@@ -363,9 +409,14 @@ namespace Microsoft.EntityFrameworkCore.Update
 
                         columnModifications.Add(columnModification);
 
-                        if (optionalDependentWithAllNull
+                        if (
+                            optionalDependentWithAllNull
                             && columnModification.IsWrite
-                            && (entry.EntityState != EntityState.Added || columnModification.Value is not null))
+                            && (
+                                entry.EntityState != EntityState.Added
+                                || columnModification.Value is not null
+                            )
+                        )
                         {
                             optionalDependentWithAllNull = false;
                         }
@@ -394,8 +445,7 @@ namespace Microsoft.EntityFrameworkCore.Update
             foreach (var mapping in entityType.GetTableMappings())
             {
                 var table = ((ITableMappingBase)mapping).Table;
-                if (table.Name == TableName
-                    && table.Schema == Schema)
+                if (table.Name == TableName && table.Schema == Schema)
                 {
                     tableMapping = mapping;
                     break;
@@ -409,7 +459,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             IUpdateEntry entry,
             ITableMappingBase tableMapping,
             bool updating,
-            Dictionary<string, ColumnValuePropagator> columnMap)
+            Dictionary<string, ColumnValuePropagator> columnMap
+        )
         {
             foreach (var columnMapping in tableMapping.ColumnMappings)
             {
@@ -453,7 +504,15 @@ namespace Microsoft.EntityFrameworkCore.Update
                 return result;
             }
 
-            result += "(" + string.Join(", ", _columnModifications.Where(m => m.IsKey).Select(m => m.OriginalValue?.ToString())) + ")";
+            result +=
+                "("
+                + string.Join(
+                    ", ",
+                    _columnModifications
+                        .Where(m => m.IsKey)
+                        .Select(m => m.OriginalValue?.ToString())
+                )
+                + ")";
             return result;
         }
 
@@ -470,8 +529,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                 switch (entry.EntityState)
                 {
                     case EntityState.Modified:
-                        if (!_write
-                            && entry.IsModified(property))
+                        if (!_write && entry.IsModified(property))
                         {
                             _write = true;
                             _currentValue = entry.GetCurrentValue(property);
@@ -485,8 +543,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                         break;
                     case EntityState.Deleted:
                         _originalValue = entry.GetOriginalValue(property);
-                        if (!_write
-                            && !property.IsPrimaryKey())
+                        if (!_write && !property.IsPrimaryKey())
                         {
                             _write = true;
                             _currentValue = null;
@@ -498,11 +555,21 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             public bool TryPropagate(IProperty property, IUpdateEntry entry)
             {
-                if (_write
-                    && (entry.EntityState == EntityState.Unchanged
-                        || (entry.EntityState == EntityState.Modified && !entry.IsModified(property))
-                        || (entry.EntityState == EntityState.Added
-                            && property.GetValueComparer().Equals(_originalValue, entry.GetCurrentValue(property)))))
+                if (
+                    _write
+                    && (
+                        entry.EntityState == EntityState.Unchanged
+                        || (
+                            entry.EntityState == EntityState.Modified && !entry.IsModified(property)
+                        )
+                        || (
+                            entry.EntityState == EntityState.Added
+                            && property
+                                .GetValueComparer()
+                                .Equals(_originalValue, entry.GetCurrentValue(property))
+                        )
+                    )
+                )
                 {
                     entry.SetStoreGeneratedValue(property, _currentValue);
 

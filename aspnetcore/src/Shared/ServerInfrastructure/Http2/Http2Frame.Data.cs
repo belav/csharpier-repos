@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     +---------------------------------------------------------------+
     |                           Padding (*)                       ...
     +---------------------------------------------------------------+
-*/
+    */
 internal partial class Http2Frame
 {
     public Http2DataFrameFlags DataFlags
@@ -20,9 +20,11 @@ internal partial class Http2Frame
         set => Flags = (byte)value;
     }
 
-    public bool DataEndStream => (DataFlags & Http2DataFrameFlags.END_STREAM) == Http2DataFrameFlags.END_STREAM;
+    public bool DataEndStream =>
+        (DataFlags & Http2DataFrameFlags.END_STREAM) == Http2DataFrameFlags.END_STREAM;
 
-    public bool DataHasPadding => (DataFlags & Http2DataFrameFlags.PADDED) == Http2DataFrameFlags.PADDED;
+    public bool DataHasPadding =>
+        (DataFlags & Http2DataFrameFlags.PADDED) == Http2DataFrameFlags.PADDED;
 
     public byte DataPadLength { get; set; }
 

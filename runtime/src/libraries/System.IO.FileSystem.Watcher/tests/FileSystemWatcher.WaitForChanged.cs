@@ -6,7 +6,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public partial class WaitForChangedTests : FileSystemWatcherTest
     {
         private const int BetweenOperationsDelayMilliseconds = 100;
@@ -84,7 +89,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, GetTestFileName())))
             using (var fsw = new FileSystemWatcher(testDirectory.Path))
             {
-                if (enabledBeforeWait) fsw.EnableRaisingEvents = true;
+                if (enabledBeforeWait)
+                    fsw.EnableRaisingEvents = true;
                 AssertTimedOut(fsw.WaitForChanged(WatcherChangeTypes.All, 0));
                 Assert.Equal(enabledBeforeWait, fsw.EnableRaisingEvents);
             }
@@ -99,7 +105,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, GetTestFileName())))
             using (var fsw = new FileSystemWatcher(testDirectory.Path))
             {
-                if (enabledBeforeWait) fsw.EnableRaisingEvents = true;
+                if (enabledBeforeWait)
+                    fsw.EnableRaisingEvents = true;
                 AssertTimedOut(fsw.WaitForChanged(0, 1));
                 Assert.Equal(enabledBeforeWait, fsw.EnableRaisingEvents);
             }
@@ -111,14 +118,23 @@ namespace System.IO.Tests
         [InlineData(WatcherChangeTypes.Changed, false)]
         [InlineData(WatcherChangeTypes.Renamed, true)]
         [InlineData(WatcherChangeTypes.All, true)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/58418", typeof(PlatformDetection), nameof(PlatformDetection.IsMacCatalyst), nameof(PlatformDetection.IsArm64Process))]
-        public void NonZeroTimeout_NoActivity_TimesOut(WatcherChangeTypes changeType, bool enabledBeforeWait)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/58418",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMacCatalyst),
+            nameof(PlatformDetection.IsArm64Process)
+        )]
+        public void NonZeroTimeout_NoActivity_TimesOut(
+            WatcherChangeTypes changeType,
+            bool enabledBeforeWait
+        )
         {
             using (var testDirectory = new TempDirectory(GetTestFilePath()))
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, GetTestFileName())))
             using (var fsw = new FileSystemWatcher(testDirectory.Path))
             {
-                if (enabledBeforeWait) fsw.EnableRaisingEvents = true;
+                if (enabledBeforeWait)
+                    fsw.EnableRaisingEvents = true;
                 AssertTimedOut(fsw.WaitForChanged(changeType, 1));
                 Assert.Equal(enabledBeforeWait, fsw.EnableRaisingEvents);
             }
@@ -135,7 +151,9 @@ namespace System.IO.Tests
             {
                 for (int i = 1; i <= DefaultAttemptsForExpectedEvent; i++)
                 {
-                    Task<WaitForChangedResult> t = Task.Run(() => fsw.WaitForChanged(changeType, LongWaitTimeout));
+                    Task<WaitForChangedResult> t = Task.Run(
+                        () => fsw.WaitForChanged(changeType, LongWaitTimeout)
+                    );
                     while (!t.IsCompleted)
                     {
                         string path = Path.Combine(testDirectory.Path, Path.GetRandomFileName());
@@ -176,7 +194,9 @@ namespace System.IO.Tests
                     string name = Path.Combine(testDirectory.Path, Path.GetRandomFileName());
                     File.Create(name).Dispose();
 
-                    Task<WaitForChangedResult> t = Task.Run(() => fsw.WaitForChanged(WatcherChangeTypes.Changed, LongWaitTimeout));
+                    Task<WaitForChangedResult> t = Task.Run(
+                        () => fsw.WaitForChanged(WatcherChangeTypes.Changed, LongWaitTimeout)
+                    );
                     while (!t.IsCompleted)
                     {
                         File.AppendAllText(name, "text");
@@ -209,8 +229,13 @@ namespace System.IO.Tests
             {
                 for (int i = 1; i <= DefaultAttemptsForExpectedEvent; i++)
                 {
-                    Task<WaitForChangedResult> t = Task.Run(() =>
-                        fsw.WaitForChanged(WatcherChangeTypes.Renamed | WatcherChangeTypes.Created, LongWaitTimeout)); // on some OSes, the renamed might come through as Deleted/Created
+                    Task<WaitForChangedResult> t = Task.Run(
+                        () =>
+                            fsw.WaitForChanged(
+                                WatcherChangeTypes.Renamed | WatcherChangeTypes.Created,
+                                LongWaitTimeout
+                            )
+                    ); // on some OSes, the renamed might come through as Deleted/Created
 
                     string name = Path.Combine(testDirectory.Path, Path.GetRandomFileName());
                     File.Create(name).Dispose();
@@ -226,7 +251,10 @@ namespace System.IO.Tests
                     try
                     {
                         Assert.Equal(TaskStatus.RanToCompletion, t.Status);
-                        Assert.True(t.Result.ChangeType == WatcherChangeTypes.Created || t.Result.ChangeType == WatcherChangeTypes.Renamed);
+                        Assert.True(
+                            t.Result.ChangeType == WatcherChangeTypes.Created
+                                || t.Result.ChangeType == WatcherChangeTypes.Renamed
+                        );
                         Assert.NotNull(t.Result.Name);
                         Assert.False(t.Result.TimedOut);
                     }

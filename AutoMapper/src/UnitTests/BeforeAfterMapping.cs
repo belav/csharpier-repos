@@ -8,12 +8,9 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
 
     public class When_configuring_before_and_after_methods
     {
-        public class Source
-        {
-        }
-        public class Destination
-        {
-        }
+        public class Source { }
+
+        public class Destination { }
 
         [Fact]
         public void Before_and_After_should_be_called()
@@ -21,9 +18,12 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             var beforeMapCalled = false;
             var afterMapCalled = false;
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>()
-                .BeforeMap((src, dest) => beforeMapCalled = true)
-                .AfterMap((src, dest) => afterMapCalled = true));
+            var config = new MapperConfiguration(
+                cfg =>
+                    cfg.CreateMap<Source, Destination>()
+                        .BeforeMap((src, dest) => beforeMapCalled = true)
+                        .AfterMap((src, dest) => afterMapCalled = true)
+            );
 
             var mapper = config.CreateMapper();
 
@@ -39,15 +39,19 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             var beforeMapCalled = false;
             var afterMapCalled = false;
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Destination>();
-                cfg.ForAllMaps((map, expression) =>
+            var config = new MapperConfiguration(
+                cfg =>
                 {
-                    expression.BeforeMap((src, dest, context) => beforeMapCalled = true);
-                    expression.AfterMap((src, dest, context) => afterMapCalled = true);
-                });
-            });
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.ForAllMaps(
+                        (map, expression) =>
+                        {
+                            expression.BeforeMap((src, dest, context) => beforeMapCalled = true);
+                            expression.AfterMap((src, dest, context) => afterMapCalled = true);
+                        }
+                    );
+                }
+            );
 
             var mapper = config.CreateMapper();
 
@@ -56,17 +60,13 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             beforeMapCalled.ShouldBeTrue();
             afterMapCalled.ShouldBeTrue();
         }
-
     }
 
     public class When_configuring_before_and_after_methods_multiple_times
     {
-        public class Source
-        {
-        }
-        public class Destination
-        {
-        }
+        public class Source { }
+
+        public class Destination { }
 
         [Fact]
         public void Before_and_After_should_be_called()
@@ -74,14 +74,16 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             var beforeMapCount = 0;
             var afterMapCount = 0;
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Destination>()
-                    .BeforeMap((src, dest) => beforeMapCount++)
-                    .BeforeMap((src, dest) => beforeMapCount++)
-                    .AfterMap((src, dest) => afterMapCount++)
-                    .AfterMap((src, dest) => afterMapCount++);
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .BeforeMap((src, dest) => beforeMapCount++)
+                        .BeforeMap((src, dest) => beforeMapCount++)
+                        .AfterMap((src, dest) => afterMapCount++)
+                        .AfterMap((src, dest) => afterMapCount++);
+                }
+            );
 
             var mapper = config.CreateMapper();
 
@@ -97,17 +99,23 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             var beforeMapCount = 0;
             var afterMapCount = 0;
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Destination>();
-                cfg.ForAllMaps((map, expression) =>
+            var config = new MapperConfiguration(
+                cfg =>
                 {
-                    expression.BeforeMap((src, dest, context) => beforeMapCount++)
-                        .BeforeMap((src, dest, context) => beforeMapCount++);
-                    expression.AfterMap((src, dest, context) => afterMapCount++)
-                        .AfterMap((src, dest, context) => afterMapCount++);
-                });
-            });
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.ForAllMaps(
+                        (map, expression) =>
+                        {
+                            expression
+                                .BeforeMap((src, dest, context) => beforeMapCount++)
+                                .BeforeMap((src, dest, context) => beforeMapCount++);
+                            expression
+                                .AfterMap((src, dest, context) => afterMapCount++)
+                                .AfterMap((src, dest, context) => afterMapCount++);
+                        }
+                    );
+                }
+            );
 
             var mapper = config.CreateMapper();
 
@@ -116,7 +124,6 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             beforeMapCount.ShouldBe(2);
             afterMapCount.ShouldBe(2);
         }
-
     }
 
     public class When_using_a_class_to_do_before_after_mappings : AutoMapperSpecBase
@@ -163,18 +170,21 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.ConstructServicesUsing(t => Activator.CreateInstance(t, 2));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.ConstructServicesUsing(t => Activator.CreateInstance(t, 2));
 
-            cfg.CreateMap<Source, Destination>()
-                .BeforeMap<BeforeMapAction>()
-                .AfterMap<AfterMapAction>();
-        });
+                    cfg.CreateMap<Source, Destination>()
+                        .BeforeMap<BeforeMapAction>()
+                        .AfterMap<AfterMapAction>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Source, Destination>(new Source {Value = 4});
+            _destination = Mapper.Map<Source, Destination>(new Source { Value = 4 });
         }
 
         [Fact]
@@ -184,7 +194,8 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
         }
     }
 
-    public class When_using_a_class_to_do_before_after_mappings_with_resolutioncontext : AutoMapperSpecBase
+    public class When_using_a_class_to_do_before_after_mappings_with_resolutioncontext
+        : AutoMapperSpecBase
     {
         private Destination _destination;
 
@@ -230,18 +241,24 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.ConstructServicesUsing(t => Activator.CreateInstance(t, 2));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.ConstructServicesUsing(t => Activator.CreateInstance(t, 2));
 
-            cfg.CreateMap<Source, Destination>()
-                .BeforeMap<BeforeMapAction>()
-                .AfterMap<AfterMapAction>();
-        });
+                    cfg.CreateMap<Source, Destination>()
+                        .BeforeMap<BeforeMapAction>()
+                        .AfterMap<AfterMapAction>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Source, Destination>(new Source { Value = 4 }, opt => opt.Items["CustomMultiplier"] = 10);
+            _destination = Mapper.Map<Source, Destination>(
+                new Source { Value = 4 },
+                opt => opt.Items["CustomMultiplier"] = 10
+            );
         }
 
         [Fact]
@@ -265,19 +282,20 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             public int Value { get; set; }
         }
 
-
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>()
-                .BeforeMap((src, dest) => src.Value += 10);
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>().BeforeMap((src, dest) => src.Value += 10);
+                }
+            );
 
         protected override void Because_of()
         {
-            _dest = Mapper.Map<Source, Dest>(new Source
-            {
-                Value = 5
-            }, opt => opt.BeforeMap((src, dest) => src.Value += 10));
+            _dest = Mapper.Map<Source, Dest>(
+                new Source { Value = 5 },
+                opt => opt.BeforeMap((src, dest) => src.Value += 10)
+            );
         }
 
         [Fact]
@@ -301,19 +319,20 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             public int Value { get; set; }
         }
 
-
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>()
-                .AfterMap((src, dest) => dest.Value += 10);
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>().AfterMap((src, dest) => dest.Value += 10);
+                }
+            );
 
         protected override void Because_of()
         {
-            _dest = Mapper.Map<Source, Dest>(new Source
-            {
-                Value = 5
-            }, opt => opt.AfterMap((src, dest) => dest.Value += 10));
+            _dest = Mapper.Map<Source, Dest>(
+                new Source { Value = 5 },
+                opt => opt.AfterMap((src, dest) => dest.Value += 10)
+            );
         }
 
         [Fact]
@@ -322,5 +341,4 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
             _dest.Value.ShouldBe(25);
         }
     }
-
 }

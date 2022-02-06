@@ -15,10 +15,12 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.StartupAnalyzerTest
 
         public void Configure(IApplicationBuilder app)
         {
-            /*MM*/app.UseMvc(routes =>
-            {
-                routes.MapRoute("Name", "Template");
-            });
+            /*MM*/app.UseMvc(
+                routes =>
+                {
+                    routes.MapRoute("Name", "Template");
+                }
+            );
         }
     }
 }

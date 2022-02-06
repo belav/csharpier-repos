@@ -15,9 +15,7 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Initializes a new instance of the <see cref='PrintEventArgs'/> class.
         /// </summary>
-        public PrintEventArgs()
-        {
-        }
+        public PrintEventArgs() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='PrintEventArgs'/> class.
@@ -32,10 +30,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public PrintAction PrintAction
         {
-            get
-            {
-                return _printAction;
-            }
+            get { return _printAction; }
         }
     }
 }

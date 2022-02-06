@@ -17,6 +17,6 @@ namespace System.CodeDom.Compiler
         {
             get { return _evidence?.Clone(); }
             set { _evidence = value?.Clone(); }
-         }
+        }
     }
 }

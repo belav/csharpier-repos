@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
-    /// Manages remote workspaces. Currently supports only a single, primary workspace of kind <see cref="WorkspaceKind.RemoteWorkspace"/>. 
+    /// Manages remote workspaces. Currently supports only a single, primary workspace of kind <see cref="WorkspaceKind.RemoteWorkspace"/>.
     /// In future it should support workspaces of all kinds.
     /// </summary>
     internal class RemoteWorkspaceManager
@@ -25,7 +25,12 @@ namespace Microsoft.CodeAnalysis.Remote
         /// in order to override workspace services.
         /// </summary>
         internal static readonly RemoteWorkspaceManager Default = new RemoteWorkspaceManager(
-            new SolutionAssetCache(cleanupInterval: TimeSpan.FromMinutes(1), purgeAfter: TimeSpan.FromMinutes(3), gcAfter: TimeSpan.FromMinutes(5)));
+            new SolutionAssetCache(
+                cleanupInterval: TimeSpan.FromMinutes(1),
+                purgeAfter: TimeSpan.FromMinutes(3),
+                gcAfter: TimeSpan.FromMinutes(5)
+            )
+        );
 
         internal static readonly ImmutableArray<Assembly> RemoteHostAssemblies =
             MefHostServices.DefaultAssemblies
@@ -45,7 +50,11 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             var resolver = new Resolver(SimpleAssemblyLoader.Instance);
             var discovery = new AttributedPartDiscovery(resolver, isNonPublicSupported: true);
-            var parts = Task.Run(async () => await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)).GetAwaiter().GetResult();
+            var parts = Task.Run(
+                    async () => await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)
+                )
+                .GetAwaiter()
+                .GetResult();
             return ComposableCatalog.Create(resolver).AddParts(parts);
         }
 
@@ -62,26 +71,42 @@ namespace Microsoft.CodeAnalysis.Remote
             var exportProviderFactory = CreateExportProviderFactory(catalog);
             var exportProvider = exportProviderFactory.CreateExportProvider();
 
-            return new RemoteWorkspace(VisualStudioMefHostServices.Create(exportProvider), WorkspaceKind.RemoteWorkspace);
+            return new RemoteWorkspace(
+                VisualStudioMefHostServices.Create(exportProvider),
+                WorkspaceKind.RemoteWorkspace
+            );
         }
 
-        public virtual RemoteWorkspace GetWorkspace()
-            => _lazyPrimaryWorkspace.Value;
+        public virtual RemoteWorkspace GetWorkspace() => _lazyPrimaryWorkspace.Value;
 
-        public ValueTask<Solution> GetSolutionAsync(ServiceBrokerClient client, PinnedSolutionInfo solutionInfo, CancellationToken cancellationToken)
+        public ValueTask<Solution> GetSolutionAsync(
+            ServiceBrokerClient client,
+            PinnedSolutionInfo solutionInfo,
+            CancellationToken cancellationToken
+        )
         {
             var assetSource = new SolutionAssetSource(client);
             var workspace = GetWorkspace();
-            var assetProvider = workspace.CreateAssetProvider(solutionInfo, SolutionAssetCache, assetSource);
-            return workspace.GetSolutionAsync(assetProvider, solutionInfo.SolutionChecksum, solutionInfo.FromPrimaryBranch, solutionInfo.WorkspaceVersion, solutionInfo.ProjectId, cancellationToken);
+            var assetProvider = workspace.CreateAssetProvider(
+                solutionInfo,
+                SolutionAssetCache,
+                assetSource
+            );
+            return workspace.GetSolutionAsync(
+                assetProvider,
+                solutionInfo.SolutionChecksum,
+                solutionInfo.FromPrimaryBranch,
+                solutionInfo.WorkspaceVersion,
+                solutionInfo.ProjectId,
+                cancellationToken
+            );
         }
 
         private sealed class SimpleAssemblyLoader : IAssemblyLoader
         {
             public static readonly IAssemblyLoader Instance = new SimpleAssemblyLoader();
 
-            public Assembly LoadAssembly(AssemblyName assemblyName)
-                => Assembly.Load(assemblyName);
+            public Assembly LoadAssembly(AssemblyName assemblyName) => Assembly.Load(assemblyName);
 
             public Assembly LoadAssembly(string assemblyFullName, string codeBasePath)
             {

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         TStatementSyntax,
         TIfStatementSyntax,
         TExpressionSyntax,
-        TConditionalExpressionSyntax> : SyntaxEditorBasedCodeFixProvider
+        TConditionalExpressionSyntax
+    > : SyntaxEditorBasedCodeFixProvider
         where TStatementSyntax : SyntaxNode
         where TIfStatementSyntax : TStatementSyntax
         where TExpressionSyntax : SyntaxNode
@@ -39,17 +40,28 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 #endif
 
         protected abstract TExpressionSyntax ConvertToExpression(IThrowOperation throwOperation);
-        protected abstract TStatementSyntax WrapWithBlockIfAppropriate(TIfStatementSyntax ifStatement, TStatementSyntax statement);
+        protected abstract TStatementSyntax WrapWithBlockIfAppropriate(
+            TIfStatementSyntax ifStatement,
+            TStatementSyntax statement
+        );
 
         protected abstract Task FixOneAsync(
-            Document document, Diagnostic diagnostic,
-            SyntaxEditor editor, CancellationToken cancellationToken);
+            Document document,
+            Diagnostic diagnostic,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        );
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor,
-            CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Defer to our callback to actually make the edits for each diagnostic. In turn, it
             // will return 'true' if it made a multi-line conditional expression. In that case,
@@ -58,8 +70,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             var nestedEditor = new SyntaxEditor(root, document.Project.Solution.Workspace);
             foreach (var diagnostic in diagnostics)
             {
-                await FixOneAsync(
-                    document, diagnostic, nestedEditor, cancellationToken).ConfigureAwait(false);
+                await FixOneAsync(document, diagnostic, nestedEditor, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             var changedRoot = nestedEditor.GetChangedRoot();
@@ -70,20 +82,29 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             // annotation on it.
             var rules = new List<AbstractFormattingRule> { GetMultiLineFormattingRule() };
 
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(root.SyntaxTree, cancellationToken);
+            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
+                root.SyntaxTree,
+                cancellationToken
+            );
 
 #if CODE_STYLE
-            var formattedRoot = FormatterHelper.Format(changedRoot,
+            var formattedRoot = FormatterHelper.Format(
+                changedRoot,
                 GetSyntaxFormattingService(),
                 SpecializedFormattingAnnotation,
                 options,
-                rules, cancellationToken);
+                rules,
+                cancellationToken
+            );
 #else
-            var formattedRoot = Formatter.Format(changedRoot,
+            var formattedRoot = Formatter.Format(
+                changedRoot,
                 SpecializedFormattingAnnotation,
                 document.Project.Solution.Workspace,
                 options,
-                rules, cancellationToken);
+                rules,
+                cancellationToken
+            );
 #endif
             changedRoot = formattedRoot;
 
@@ -97,14 +118,21 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         /// is also properly simplified and formatted.
         /// </summary>
         protected async Task<TExpressionSyntax> CreateConditionalExpressionAsync(
-            Document document, IConditionalOperation ifOperation,
-            IOperation trueStatement, IOperation falseStatement,
-            IOperation trueValue, IOperation falseValue,
-            bool isRef, CancellationToken cancellationToken)
+            Document document,
+            IConditionalOperation ifOperation,
+            IOperation trueStatement,
+            IOperation falseStatement,
+            IOperation trueValue,
+            IOperation falseValue,
+            bool isRef,
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var condition = ifOperation.Condition.Syntax;
             if (!isRef)
@@ -120,24 +148,43 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 // instead.
                 if (IsBooleanLiteral(trueValue, false) && IsBooleanLiteral(falseValue, true))
                 {
-                    return (TExpressionSyntax)generator.Negate(generatorInternal,
-                        condition, semanticModel, cancellationToken).WithoutTrivia();
+                    return (TExpressionSyntax)generator
+                        .Negate(generatorInternal, condition, semanticModel, cancellationToken)
+                        .WithoutTrivia();
                 }
             }
 
-            var conditionalExpression = (TConditionalExpressionSyntax)generator.ConditionalExpression(
-                condition.WithoutTrivia(),
-                MakeRef(generatorInternal, isRef, CastValueIfNecessary(generator, trueStatement, trueValue)),
-                MakeRef(generatorInternal, isRef, CastValueIfNecessary(generator, falseStatement, falseValue)));
+            var conditionalExpression =
+                (TConditionalExpressionSyntax)generator.ConditionalExpression(
+                    condition.WithoutTrivia(),
+                    MakeRef(
+                        generatorInternal,
+                        isRef,
+                        CastValueIfNecessary(generator, trueStatement, trueValue)
+                    ),
+                    MakeRef(
+                        generatorInternal,
+                        isRef,
+                        CastValueIfNecessary(generator, falseStatement, falseValue)
+                    )
+                );
 
-            conditionalExpression = conditionalExpression.WithAdditionalAnnotations(Simplifier.Annotation);
+            conditionalExpression = conditionalExpression.WithAdditionalAnnotations(
+                Simplifier.Annotation
+            );
             var makeMultiLine = await MakeMultiLineAsync(
-                document, condition,
-                trueValue.Syntax, falseValue.Syntax, cancellationToken).ConfigureAwait(false);
+                    document,
+                    condition,
+                    trueValue.Syntax,
+                    falseValue.Syntax,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (makeMultiLine)
             {
                 conditionalExpression = conditionalExpression.WithAdditionalAnnotations(
-                    SpecializedFormattingAnnotation);
+                    SpecializedFormattingAnnotation
+                );
             }
 
             return MakeRef(generatorInternal, isRef, conditionalExpression);
@@ -154,33 +201,57 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             return false;
         }
 
-        private static TExpressionSyntax MakeRef(SyntaxGeneratorInternal generator, bool isRef, TExpressionSyntax syntaxNode)
-            => isRef ? (TExpressionSyntax)generator.RefExpression(syntaxNode) : syntaxNode;
+        private static TExpressionSyntax MakeRef(
+            SyntaxGeneratorInternal generator,
+            bool isRef,
+            TExpressionSyntax syntaxNode
+        ) => isRef ? (TExpressionSyntax)generator.RefExpression(syntaxNode) : syntaxNode;
 
         /// <summary>
         /// Checks if we should wrap the conditional expression over multiple lines.
         /// </summary>
         private static async Task<bool> MakeMultiLineAsync(
-            Document document, SyntaxNode condition, SyntaxNode trueSyntax, SyntaxNode falseSyntax,
-            CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode condition,
+            SyntaxNode trueSyntax,
+            SyntaxNode falseSyntax,
+            CancellationToken cancellationToken
+        )
         {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            if (!sourceText.AreOnSameLine(condition.GetFirstToken(), condition.GetLastToken()) ||
-                !sourceText.AreOnSameLine(trueSyntax.GetFirstToken(), trueSyntax.GetLastToken()) ||
-                !sourceText.AreOnSameLine(falseSyntax.GetFirstToken(), falseSyntax.GetLastToken()))
+            if (
+                !sourceText.AreOnSameLine(condition.GetFirstToken(), condition.GetLastToken())
+                || !sourceText.AreOnSameLine(trueSyntax.GetFirstToken(), trueSyntax.GetLastToken())
+                || !sourceText.AreOnSameLine(
+                    falseSyntax.GetFirstToken(),
+                    falseSyntax.GetLastToken()
+                )
+            )
             {
                 return true;
             }
 
 #if CODE_STYLE
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var wrappingLength = document.Project.AnalyzerOptions.GetOption(UseConditionalExpressionOptions.ConditionalExpressionWrappingLength, document.Project.Language, tree, cancellationToken);
+            var tree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var wrappingLength = document.Project.AnalyzerOptions.GetOption(
+                UseConditionalExpressionOptions.ConditionalExpressionWrappingLength,
+                document.Project.Language,
+                tree,
+                cancellationToken
+            );
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var wrappingLength = options.GetOption(UseConditionalExpressionOptions.ConditionalExpressionWrappingLength);
+            var wrappingLength = options.GetOption(
+                UseConditionalExpressionOptions.ConditionalExpressionWrappingLength
+            );
 #endif
 
-            if (condition.Span.Length + trueSyntax.Span.Length + falseSyntax.Span.Length > wrappingLength)
+            if (
+                condition.Span.Length + trueSyntax.Span.Length + falseSyntax.Span.Length
+                > wrappingLength
+            )
             {
                 return true;
             }
@@ -189,7 +260,10 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         }
 
         private TExpressionSyntax CastValueIfNecessary(
-            SyntaxGenerator generator, IOperation statement, IOperation value)
+            SyntaxGenerator generator,
+            IOperation statement,
+            IOperation value
+        )
         {
             if (statement is IThrowOperation throwOperation)
                 return ConvertToExpression(throwOperation);
@@ -201,16 +275,24 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             // inference in conditional expressions, so we need to ensure that the same conversions
             // that were occurring previously still occur after conversion. Note: the simplifier
             // will remove any of these casts that are unnecessary.
-            if (value is IConversionOperation conversion &&
-                conversion.IsImplicit &&
-                conversion.Type != null &&
-                conversion.Type.TypeKind != TypeKind.Error)
+            if (
+                value is IConversionOperation conversion
+                && conversion.IsImplicit
+                && conversion.Type != null
+                && conversion.Type.TypeKind != TypeKind.Error
+            )
             {
                 // Note we only add the cast if the source had no type (like the null literal), or a
                 // non-error type itself.  We don't want to insert lots of casts in error code.
-                if (conversion.Operand.Type == null || conversion.Operand.Type.TypeKind != TypeKind.Error)
+                if (
+                    conversion.Operand.Type == null
+                    || conversion.Operand.Type.TypeKind != TypeKind.Error
+                )
                 {
-                    return (TExpressionSyntax)generator.CastExpression(conversion.Type, sourceSyntax);
+                    return (TExpressionSyntax)generator.CastExpression(
+                        conversion.Type,
+                        sourceSyntax
+                    );
                 }
             }
 

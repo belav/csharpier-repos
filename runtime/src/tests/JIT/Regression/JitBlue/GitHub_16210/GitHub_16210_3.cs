@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
- public struct float4
+public struct float4
 {
     public float4(float x, float y, float z, float w)
     {
@@ -13,7 +13,7 @@ using System.Runtime.CompilerServices;
         this.z = z;
         this.w = w;
     }
-    
+
     public float x;
     public float y;
     public float z;

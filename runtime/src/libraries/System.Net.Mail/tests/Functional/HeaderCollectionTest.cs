@@ -14,45 +14,57 @@ namespace System.Net.Mime.Tests
         [Fact]
         public void Set_ValidNameAndValue_Success()
         {
-          string validName = "foo";
-          string validValue = "bar";
-          mail.Headers.Set(validName, validValue);
-          Assert.Equal(validValue, mail.Headers.Get(validName));
-          mail.Headers.Remove(validName);
+            string validName = "foo";
+            string validValue = "bar";
+            mail.Headers.Set(validName, validValue);
+            Assert.Equal(validValue, mail.Headers.Get(validName));
+            mail.Headers.Remove(validName);
         }
 
         [Fact]
         public void Set_EmptyName_Throws()
         {
-          AssertExtensions.Throws<ArgumentException>("name", () => mail.Headers.Set(string.Empty, "value"));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => mail.Headers.Set(string.Empty, "value")
+            );
         }
 
         [Fact]
         public void Set_EmptyValue_Throws()
         {
-          AssertExtensions.Throws<ArgumentException>("value", () => mail.Headers.Set("name", string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => mail.Headers.Set("name", string.Empty)
+            );
         }
 
         [Fact]
         public void Add_ValidNameAndValue_Success()
         {
-          string validName = "foo";
-          string validValue = "bar";
-          mail.Headers.Add(validName, validValue);
-          Assert.Equal(validValue, mail.Headers.Get(validName));
-          mail.Headers.Remove(validName);
+            string validName = "foo";
+            string validValue = "bar";
+            mail.Headers.Add(validName, validValue);
+            Assert.Equal(validValue, mail.Headers.Get(validName));
+            mail.Headers.Remove(validName);
         }
 
         [Fact]
         public void Add_EmptyName_Throws()
         {
-          AssertExtensions.Throws<ArgumentException>("name", () => mail.Headers.Add(string.Empty, "value"));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => mail.Headers.Add(string.Empty, "value")
+            );
         }
 
         [Fact]
         public void Add_EmptyValue_Throws()
         {
-          AssertExtensions.Throws<ArgumentException>("value", () => mail.Headers.Add("name", string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => mail.Headers.Add("name", string.Empty)
+            );
         }
     }
 }

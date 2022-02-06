@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ReorderParameters_Cascade_ToImplementedMethod()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     void M(int x, string y);
@@ -29,7 +30,8 @@ class C : I
     { }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 interface I
 {
     void M(string y, int x);
@@ -41,13 +43,19 @@ class C : I
     { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ReorderParameters_Cascade_ToImplementedMethod_WithTuples()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     void M((int, int) x, (string a, string b) y);
@@ -59,7 +67,8 @@ class C : I
     { }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 interface I
 {
     void M((string a, string b) y, (int, int) x);
@@ -71,13 +80,19 @@ class C : I
     { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ReorderParameters_Cascade_ToImplementingMethod()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     $$void M(int x, string y);
@@ -89,7 +104,8 @@ class C : I
     { }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 interface I
 {
     void M(string y, int x);
@@ -101,13 +117,19 @@ class C : I
     { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ReorderParameters_Cascade_ToOverriddenMethod()
         {
-            var markup = @"
+            var markup =
+                @"
 class B
 {
     public virtual void M(int x, string y)
@@ -120,7 +142,8 @@ class D : B
     { }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class B
 {
     public virtual void M(string y, int x)
@@ -133,13 +156,19 @@ class D : B
     { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ReorderParameters_Cascade_ToOverridingMethod()
         {
-            var markup = @"
+            var markup =
+                @"
 class B
 {
     $$public virtual void M(int x, string y)
@@ -152,7 +181,8 @@ class D : B
     { }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class B
 {
     public virtual void M(string y, int x)
@@ -165,13 +195,19 @@ class D : B
     { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ReorderParameters_Cascade_ToOverriddenMethod_Transitive()
         {
-            var markup = @"
+            var markup =
+                @"
 class B
 {
     public virtual void M(int x, string y)
@@ -190,7 +226,8 @@ class D2 : D
     { }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class B
 {
     public virtual void M(string y, int x)
@@ -209,13 +246,19 @@ class D2 : D
     { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ReorderParameters_Cascade_ToOverridingMethod_Transitive()
         {
-            var markup = @"
+            var markup =
+                @"
 class B
 {
     $$public virtual void M(int x, string y)
@@ -234,7 +277,8 @@ class D2 : D
     { }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class B
 {
     public virtual void M(string y, int x)
@@ -253,7 +297,12 @@ class D2 : D
     { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
@@ -265,7 +314,8 @@ class D2 : D
             ////      / \   \
             ////   $$D2  D3  C
 
-            var markup = @"
+            var markup =
+                @"
 class B { public virtual void M(int x, string y) { } }
 class D : B, I { public override void M(int x, string y) { } }
 class D2 : D { public override void $$M(int x, string y) { } }
@@ -276,7 +326,8 @@ interface I3 : I, I2 { }
 class C : I3 { public void M(int x, string y) { } }";
 
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class B { public virtual void M(string y, int x) { } }
 class D : B, I { public override void M(string y, int x) { } }
 class D2 : D { public override void M(string y, int x) { } }
@@ -286,13 +337,19 @@ interface I2 { void M(string y, int x); }
 interface I3 : I, I2 { }
 class C : I3 { public void M(string y, int x) { } }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ReorderParameters_Cascade_ToMethods_WithDifferentParameterNames()
         {
-            var markup = @"
+            var markup =
+                @"
 public class B
 {
     /// <param name=""x""></param>
@@ -331,7 +388,8 @@ public class D2 : D
     }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class B
 {
     /// <param name=""y""></param>
@@ -369,7 +427,12 @@ public class D2 : D
         return 1;
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
     }
 }

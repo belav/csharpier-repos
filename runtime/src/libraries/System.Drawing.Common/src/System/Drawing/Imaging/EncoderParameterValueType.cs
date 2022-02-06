@@ -27,7 +27,7 @@ namespace System.Drawing.Imaging
         /// <summary>
         /// The data is two long integers, specifying the numerator and the denominator of a rational number, respectively.
         /// </summary>
-        ValueTypeRational = 5,   // Two Longs. The first Long is the numerator, the second Long expresses the denomintor.
+        ValueTypeRational = 5, // Two Longs. The first Long is the numerator, the second Long expresses the denomintor.
 
         /// <summary>
         /// Two longs which specify a range of integer values.

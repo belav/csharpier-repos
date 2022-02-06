@@ -11,10 +11,13 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 #if IGNITOR
 namespace Ignitor;
+
 #elif BLAZOR_WEBVIEW
 namespace Microsoft.AspNetCore.Components.WebView;
+
 #else
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
+
 #endif
 
 // TODO: We should consider *not* having this type of infrastructure in the .Server
@@ -164,7 +167,10 @@ internal class RenderBatchWriter : IDisposable
                 else
                 {
                     var attributeValueString = frame.AttributeValue as string;
-                    WriteString(attributeValueString, allowDeduplication: string.IsNullOrEmpty(attributeValueString));
+                    WriteString(
+                        attributeValueString,
+                        allowDeduplication: string.IsNullOrEmpty(attributeValueString)
+                    );
                 }
                 _binaryWriter.Write(frame.AttributeEventHandlerId); // 8 bytes
                 break;
@@ -195,7 +201,8 @@ internal class RenderBatchWriter : IDisposable
             case RenderTreeFrameType.Text:
                 WriteString(
                     frame.TextContent,
-                    allowDeduplication: string.IsNullOrWhiteSpace(frame.TextContent));
+                    allowDeduplication: string.IsNullOrWhiteSpace(frame.TextContent)
+                );
                 WritePadding(_binaryWriter, 12);
                 break;
             case RenderTreeFrameType.Markup:
@@ -247,7 +254,10 @@ internal class RenderBatchWriter : IDisposable
         {
             int stringIndex;
 
-            if (!allowDeduplication || !_deduplicatedStringIndices.TryGetValue(value, out stringIndex))
+            if (
+                !allowDeduplication
+                || !_deduplicatedStringIndices.TryGetValue(value, out stringIndex)
+            )
             {
                 stringIndex = _strings.Count;
                 _strings.Append(value);

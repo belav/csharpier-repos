@@ -20,24 +20,48 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         public async Task TestGetSemanticTokensRangeAsync()
         {
             var markup =
-@"{|caret:|}// Comment
+                @"{|caret:|}// Comment
 static class C { }
 ";
             using var testLspServer = await CreateTestLspServerAsync(markup);
 
             var range = new LSP.Range { Start = new Position(1, 0), End = new Position(2, 0) };
-            var results = await RunGetSemanticTokensRangeAsync(testLspServer, testLspServer.GetLocations("caret").First(), range);
+            var results = await RunGetSemanticTokensRangeAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").First(),
+                range
+            );
 
             var expectedResults = new LSP.SemanticTokens
             {
                 Data = new int[]
                 {
                     // Line | Char | Len | Token type                                                               | Modifier
-                       1,     0,     6,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'static'
-                       0,     7,     5,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'class'
-                       0,     6,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],   (int)TokenModifiers.Static, // 'C'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '{'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '}'
+                    1,
+                    0,
+                    6,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'static'
+                    0,
+                    7,
+                    5,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'class'
+                    0,
+                    6,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],
+                    (int)TokenModifiers.Static, // 'C'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '{'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '}'
                 },
                 ResultId = "1"
             };

@@ -24,7 +24,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly TypeWithAnnotations _type;
             private readonly object _identifier;
 
-            public PlaceholderLocal(Symbol containingSymbol, object identifier, TypeWithAnnotations type)
+            public PlaceholderLocal(
+                Symbol containingSymbol,
+                object identifier,
+                TypeWithAnnotations type
+            )
             {
                 Debug.Assert(identifier != null);
                 _containingSymbol = containingSymbol;
@@ -43,9 +47,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             public override int GetHashCode() => _identifier.GetHashCode();
+
             internal override SyntaxNode ScopeDesignatorOpt => null;
             public override Symbol ContainingSymbol => _containingSymbol;
-            public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+            public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+                ImmutableArray<SyntaxReference>.Empty;
             public override ImmutableArray<Location> Locations => ImmutableArray<Location>.Empty;
             public override TypeWithAnnotations TypeWithAnnotations => _type;
             internal override LocalDeclarationKind DeclarationKind => LocalDeclarationKind.None;
@@ -54,11 +60,27 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal override bool IsImportedFromMetadata => false;
             internal override bool IsPinned => false;
             public override RefKind RefKind => RefKind.None;
-            internal override SynthesizedLocalKind SynthesizedKind => throw ExceptionUtilities.Unreachable;
-            internal override ConstantValue GetConstantValue(SyntaxNode node, LocalSymbol inProgress, BindingDiagnosticBag diagnostics = null) => null;
-            internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(BoundExpression boundInitValue) => ImmutableBindingDiagnostic<AssemblySymbol>.Empty;
-            internal override SyntaxNode GetDeclaratorSyntax() => throw ExceptionUtilities.Unreachable;
-            internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(SynthesizedLocalKind kind, SyntaxNode syntax) => throw ExceptionUtilities.Unreachable;
+            internal override SynthesizedLocalKind SynthesizedKind =>
+                throw ExceptionUtilities.Unreachable;
+
+            internal override ConstantValue GetConstantValue(
+                SyntaxNode node,
+                LocalSymbol inProgress,
+                BindingDiagnosticBag diagnostics = null
+            ) => null;
+
+            internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
+                BoundExpression boundInitValue
+            ) => ImmutableBindingDiagnostic<AssemblySymbol>.Empty;
+
+            internal override SyntaxNode GetDeclaratorSyntax() =>
+                throw ExceptionUtilities.Unreachable;
+
+            internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(
+                SynthesizedLocalKind kind,
+                SyntaxNode syntax
+            ) => throw ExceptionUtilities.Unreachable;
+
             internal override uint ValEscapeScope => throw ExceptionUtilities.Unreachable;
             internal override uint RefEscapeScope => throw ExceptionUtilities.Unreachable;
         }

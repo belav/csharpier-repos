@@ -17,24 +17,21 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var pass = new FunctionsDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new FunctionsDirectivePass() { Engine = projectEngine.Engine, };
 
         var sourceDocument = TestRazorSourceDocument.Create("@functions { var value = true; }");
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
-        irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = FunctionsDirective.Directive, });
+        irDocument.Children.Add(
+            new DirectiveIntermediateNode() { Directive = FunctionsDirective.Directive, }
+        );
 
         // Act
         pass.Execute(codeDocument, irDocument);
 
         // Assert
-        Children(
-            irDocument,
-            node => Assert.IsType<DirectiveIntermediateNode>(node));
+        Children(irDocument, node => Assert.IsType<DirectiveIntermediateNode>(node));
     }
 
     [Fact]
@@ -42,10 +39,7 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var pass = new FunctionsDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new FunctionsDirectivePass() { Engine = projectEngine.Engine, };
 
         var sourceDocument = TestRazorSourceDocument.Create("@functions { var value = true; }");
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -56,20 +50,17 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
         pass.Execute(codeDocument, irDocument);
 
         // Assert
-        Children(
-            irDocument,
-            node => Assert.IsType<NamespaceDeclarationIntermediateNode>(node));
+        Children(irDocument, node => Assert.IsType<NamespaceDeclarationIntermediateNode>(node));
 
         var @namespace = irDocument.Children[0];
-        Children(
-            @namespace,
-            node => Assert.IsType<ClassDeclarationIntermediateNode>(node));
+        Children(@namespace, node => Assert.IsType<ClassDeclarationIntermediateNode>(node));
 
         var @class = @namespace.Children[0];
         Children(
             @class,
             node => Assert.IsType<MethodDeclarationIntermediateNode>(node),
-            node => CSharpCode(" var value = true; ", node));
+            node => CSharpCode(" var value = true; ", node)
+        );
 
         var method = @class.Children[0];
         Assert.Empty(method.Children);
@@ -79,11 +70,10 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     public void Execute_ComponentCodeDirective_AddsStatementsToClassLevel()
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(b => b.AddDirective(ComponentCodeDirective.Directive));
-        var pass = new FunctionsDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var projectEngine = CreateProjectEngine(
+            b => b.AddDirective(ComponentCodeDirective.Directive)
+        );
+        var pass = new FunctionsDirectivePass() { Engine = projectEngine.Engine, };
 
         var sourceDocument = TestRazorSourceDocument.Create("@code { var value = true; }");
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -95,20 +85,17 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
         pass.Execute(codeDocument, irDocument);
 
         // Assert
-        Children(
-            irDocument,
-            node => Assert.IsType<NamespaceDeclarationIntermediateNode>(node));
+        Children(irDocument, node => Assert.IsType<NamespaceDeclarationIntermediateNode>(node));
 
         var @namespace = irDocument.Children[0];
-        Children(
-            @namespace,
-            node => Assert.IsType<ClassDeclarationIntermediateNode>(node));
+        Children(@namespace, node => Assert.IsType<ClassDeclarationIntermediateNode>(node));
 
         var @class = @namespace.Children[0];
         Children(
             @class,
             node => Assert.IsType<MethodDeclarationIntermediateNode>(node),
-            node => CSharpCode(" var value = true; ", node));
+            node => CSharpCode(" var value = true; ", node)
+        );
 
         var method = @class.Children[0];
         Assert.Empty(method.Children);
@@ -118,16 +105,17 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     public void Execute_FunctionsAndComponentCodeDirective_AddsStatementsToClassLevel()
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(b => b.AddDirective(ComponentCodeDirective.Directive));
-        var pass = new FunctionsDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var projectEngine = CreateProjectEngine(
+            b => b.AddDirective(ComponentCodeDirective.Directive)
+        );
+        var pass = new FunctionsDirectivePass() { Engine = projectEngine.Engine, };
 
-        var sourceDocument = TestRazorSourceDocument.Create(@"
+        var sourceDocument = TestRazorSourceDocument.Create(
+            @"
 @functions { var value1 = true; }
 @code { var value2 = true; }
-@functions { var value3 = true; }");
+@functions { var value3 = true; }"
+        );
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
         codeDocument.SetFileKind(FileKinds.Component);
 
@@ -137,14 +125,10 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
         pass.Execute(codeDocument, irDocument);
 
         // Assert
-        Children(
-            irDocument,
-            node => Assert.IsType<NamespaceDeclarationIntermediateNode>(node));
+        Children(irDocument, node => Assert.IsType<NamespaceDeclarationIntermediateNode>(node));
 
         var @namespace = irDocument.Children[0];
-        Children(
-            @namespace,
-            node => Assert.IsType<ClassDeclarationIntermediateNode>(node));
+        Children(@namespace, node => Assert.IsType<ClassDeclarationIntermediateNode>(node));
 
         var @class = @namespace.Children[0];
         Children(
@@ -152,15 +136,17 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
             node => Assert.IsType<MethodDeclarationIntermediateNode>(node),
             node => CSharpCode(" var value1 = true; ", node),
             node => CSharpCode(" var value2 = true; ", node),
-            node => CSharpCode(" var value3 = true; ", node));
+            node => CSharpCode(" var value3 = true; ", node)
+        );
 
         var method = @class.Children[0];
-        Children(
-            method,
-            node => Assert.IsType<HtmlContentIntermediateNode>(node));
+        Children(method, node => Assert.IsType<HtmlContentIntermediateNode>(node));
     }
 
-    private static DocumentIntermediateNode Lower(RazorCodeDocument codeDocument, RazorProjectEngine projectEngine)
+    private static DocumentIntermediateNode Lower(
+        RazorCodeDocument codeDocument,
+        RazorProjectEngine projectEngine
+    )
     {
         for (var i = 0; i < projectEngine.Phases.Count; i++)
         {

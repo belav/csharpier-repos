@@ -16,23 +16,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         // exclusive
         public int End { get; private set; }
 
-        public static LineSpan FromBounds(int start, int end)
-            => new LineSpan()
-            {
-                Start = start,
-                End = end
-            };
+        public static LineSpan FromBounds(int start, int end) =>
+            new LineSpan() { Start = start, End = end };
 
-        public bool Equals(LineSpan other)
-            => this.Start == other.Start && this.End == other.End;
+        public bool Equals(LineSpan other) => this.Start == other.Start && this.End == other.End;
 
         public override bool Equals(object? obj)
         {
-            return obj is LineSpan other
-                && this.Equals(other);
+            return obj is LineSpan other && this.Equals(other);
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(this.Start, this.End);
+        public override int GetHashCode() => Hash.Combine(this.Start, this.End);
     }
 }

@@ -24,10 +24,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsInitialized
         {
-            get
-            {
-                return _gcFlags != null;
-            }
+            get { return _gcFlags != null; }
         }
 
         /// <summary>
@@ -35,10 +32,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public int Size
         {
-            get
-            {
-                return _numCells;
-            }
+            get { return _numCells; }
         }
 
         /// <summary>
@@ -54,7 +48,8 @@ namespace Internal.TypeSystem
                     if (this[i])
                     {
                         numSeries++;
-                        while (++i < _numCells && this[i]) ;
+                        while (++i < _numCells && this[i])
+                            ;
                     }
                 }
                 return numSeries;
@@ -79,10 +74,7 @@ namespace Internal.TypeSystem
 
         public bool this[int index]
         {
-            get
-            {
-                return (_gcFlags[index >> 5] & (1 << (index & 0x1F))) != 0;
-            }
+            get { return (_gcFlags[index >> 5] & (1 << (index & 0x1F))) != 0; }
         }
 
         public GCPointerMap(uint[] gcFlags, int numCells)
@@ -129,7 +121,7 @@ namespace Internal.TypeSystem
                 sb.Append(bit ? '1' : '0');
             return sb.ToString();
         }
-        
+
         public int CompareTo(GCPointerMap other)
         {
             if (_numCells != other._numCells)
@@ -256,10 +248,7 @@ namespace Internal.TypeSystem
 
         public bool Current
         {
-            get
-            {
-                return (_buffer[_currentBit >> 5] & (1 << (_currentBit & 0x1F))) != 0;
-            }
+            get { return (_buffer[_currentBit >> 5] & (1 << (_currentBit & 0x1F))) != 0; }
         }
 
         public bool MoveNext()

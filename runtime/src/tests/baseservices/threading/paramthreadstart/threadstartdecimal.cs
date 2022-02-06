@@ -10,7 +10,7 @@ class ThreadStartDecimal
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartDouble <decimal>|min|max\n");
             return -1;
@@ -18,10 +18,10 @@ class ThreadStartDecimal
 
         decimal d = 0M;
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             d = Decimal.MaxValue;
-        else if(args[0].ToLower() == "min")
-            d = Decimal.MinValue;       
+        else if (args[0].ToLower() == "min")
+            d = Decimal.MinValue;
         else
             d = Convert.ToDecimal(args[0]);
         ThreadStartDecimal tsd = new ThreadStartDecimal();

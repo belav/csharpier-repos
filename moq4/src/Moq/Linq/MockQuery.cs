@@ -10,75 +10,78 @@ using System.Linq.Expressions;
 
 namespace Moq.Linq
 {
-	/// <summary>
-	/// A default implementation of IQueryable for use with QueryProvider
-	/// </summary>
-	internal class MockQueryable<T> : IQueryable<T>, IQueryProvider
-	{
-		private readonly Expression expression;
+    /// <summary>
+    /// A default implementation of IQueryable for use with QueryProvider
+    /// </summary>
+    internal class MockQueryable<T> : IQueryable<T>, IQueryProvider
+    {
+        private readonly Expression expression;
 
-		public MockQueryable(Expression expression)
-		{
-			Debug.Assert(expression != null);
+        public MockQueryable(Expression expression)
+        {
+            Debug.Assert(expression != null);
 
-			Guard.ImplementsInterface(typeof(IQueryable<T>), expression.Type, nameof(expression));
+            Guard.ImplementsInterface(typeof(IQueryable<T>), expression.Type, nameof(expression));
 
-			this.expression = expression;
-		}
+            this.expression = expression;
+        }
 
-		public Type ElementType
-		{
-			get { return typeof(T); }
-		}
+        public Type ElementType
+        {
+            get { return typeof(T); }
+        }
 
-		public Expression Expression => this.expression;
+        public Expression Expression => this.expression;
 
-		public IQueryProvider Provider
-		{
-			get { return this; }
-		}
+        public IQueryProvider Provider
+        {
+            get { return this; }
+        }
 
-		public IQueryable CreateQuery(Expression expression)
-		{
-			return this.CreateQuery<T>(expression);
-		}
+        public IQueryable CreateQuery(Expression expression)
+        {
+            return this.CreateQuery<T>(expression);
+        }
 
-		public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
-		{
-			return new MockQueryable<TElement>(expression);
-		}
+        public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
+        {
+            return new MockQueryable<TElement>(expression);
+        }
 
-		public object Execute(Expression expression)
-		{
-			return this.Execute<IQueryable<T>>(expression);
-		}
+        public object Execute(Expression expression)
+        {
+            return this.Execute<IQueryable<T>>(expression);
+        }
 
-		public TResult Execute<TResult>(Expression expression)
-		{
-			var replaced = new MockSetupsBuilder().Visit(expression);
+        public TResult Execute<TResult>(Expression expression)
+        {
+            var replaced = new MockSetupsBuilder().Visit(expression);
 
-			var lambda = Expression.Lambda<Func<TResult>>(replaced);
-			return lambda.CompileUsingExpressionCompiler().Invoke();
-		}
+            var lambda = Expression.Lambda<Func<TResult>>(replaced);
+            return lambda.CompileUsingExpressionCompiler().Invoke();
+        }
 
-		public IEnumerator<T> GetEnumerator()
-		{
-			return this.Provider.Execute<IQueryable<T>>(this.Expression).GetEnumerator();
-		}
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this.Provider.Execute<IQueryable<T>>(this.Expression).GetEnumerator();
+        }
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
 
-		public override string ToString()
-		{
-			if (this.Expression.NodeType == ExpressionType.Constant && ((ConstantExpression)this.Expression).Value == this)
-			{
-				return "Query(" + typeof(T) + ")";
-			}
+        public override string ToString()
+        {
+            if (
+                this.Expression.NodeType == ExpressionType.Constant
+                && ((ConstantExpression)this.Expression).Value == this
+            )
+            {
+                return "Query(" + typeof(T) + ")";
+            }
 
-			return this.Expression.ToString();
-		}
-	}
+            return this.Expression.ToString();
+        }
+    }
 }

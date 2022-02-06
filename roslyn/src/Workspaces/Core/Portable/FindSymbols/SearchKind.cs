@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         ExactIgnoreCase,
 
         /// <summary>
-        /// Use a fuzzy comparison when searching for matching items. Fuzzy matching allows for 
-        /// a certain amount of misspellings, missing words, etc. See <see cref="SpellChecker"/> for 
+        /// Use a fuzzy comparison when searching for matching items. Fuzzy matching allows for
+        /// a certain amount of misspellings, missing words, etc. See <see cref="SpellChecker"/> for
         /// more details.
         /// </summary>
         Fuzzy,

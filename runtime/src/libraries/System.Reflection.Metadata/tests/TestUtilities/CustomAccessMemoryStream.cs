@@ -7,10 +7,16 @@ namespace System.Reflection.Metadata.Tests
 {
     public class CustomAccessMemoryStream : MemoryStream
     {
-        private readonly bool _canRead, _canSeek, _canWrite;
+        private readonly bool _canRead,
+            _canSeek,
+            _canWrite;
 
-        public CustomAccessMemoryStream(bool canRead, bool canSeek, bool canWrite, byte[] buffer = null)
-            : base(buffer ?? Array.Empty<byte>())
+        public CustomAccessMemoryStream(
+            bool canRead,
+            bool canSeek,
+            bool canWrite,
+            byte[] buffer = null
+        ) : base(buffer ?? Array.Empty<byte>())
         {
             _canRead = canRead;
             _canSeek = canSeek;

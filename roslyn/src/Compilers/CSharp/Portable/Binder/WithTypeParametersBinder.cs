@@ -13,10 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal abstract class WithTypeParametersBinder : Binder
     {
-        internal WithTypeParametersBinder(Binder next)
-            : base(next)
-        {
-        }
+        internal WithTypeParametersBinder(Binder next) : base(next) { }
 
         // TODO: Change this to a data structure that won't allocate enumerators
         protected abstract MultiDictionary<string, TypeParameterSymbol> TypeParameterMap { get; }
@@ -32,11 +29,21 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected bool CanConsiderTypeParameters(LookupOptions options)
         {
-            return (options & (LookupMask | LookupOptions.MustBeInstance | LookupOptions.LabelsOnly)) == 0;
+            return (
+                    options & (LookupMask | LookupOptions.MustBeInstance | LookupOptions.LabelsOnly)
+                ) == 0;
         }
 
         internal override void LookupSymbolsInSingleBinder(
-            LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol> basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(result.IsClear);
 
@@ -47,7 +54,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var typeParameter in TypeParameterMap[name])
             {
-                result.MergeEqual(originalBinder.CheckViability(typeParameter, arity, options, null, diagnose, ref useSiteInfo));
+                result.MergeEqual(
+                    originalBinder.CheckViability(
+                        typeParameter,
+                        arity,
+                        options,
+                        null,
+                        diagnose,
+                        ref useSiteInfo
+                    )
+                );
             }
         }
     }

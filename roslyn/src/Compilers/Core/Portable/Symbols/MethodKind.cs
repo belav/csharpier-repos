@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// <inheritdoc cref="AnonymousFunction"/>
         /// </summary>
-        LambdaMethod = 0,  // VB term
+        LambdaMethod = 0, // VB term
 
         /// <summary>
         /// Method is a constructor.

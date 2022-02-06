@@ -24,7 +24,13 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// <param name="allowDecompilation"><see langword="false"/> to disallow decompiling code, which may
         /// result in signagures only being returned if there is no other non-decompilation option available</param>
         /// <param name="cancellationToken">To cancel project and document operations</param>
-        Task<MetadataAsSourceFile> GetGeneratedFileAsync(Project project, ISymbol symbol, bool signaturesOnly, bool allowDecompilation, CancellationToken cancellationToken = default);
+        Task<MetadataAsSourceFile> GetGeneratedFileAsync(
+            Project project,
+            ISymbol symbol,
+            bool signaturesOnly,
+            bool allowDecompilation,
+            CancellationToken cancellationToken = default
+        );
 
         bool TryAddDocumentToWorkspace(string filePath, SourceTextContainer buffer);
 

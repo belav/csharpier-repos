@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 namespace AutoMapper.UnitTests.Bug
 {
-    public class Self_referencing_existing_destination_without_PreserveReferences : AutoMapperSpecBase
+    public class Self_referencing_existing_destination_without_PreserveReferences
+        : AutoMapperSpecBase
     {
         public class BaseType
         {
@@ -14,6 +15,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 SelfReference = this;
             }
+
             public BaseType SelfReference { get; set; }
         }
 
@@ -23,10 +25,12 @@ namespace AutoMapper.UnitTests.Bug
             {
                 SelfReference = this;
             }
+
             public BaseTypeDto SelfReference { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=> cfg.CreateMap<BaseType, BaseTypeDto>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(cfg => cfg.CreateMap<BaseType, BaseTypeDto>());
 
         protected override void Because_of()
         {
@@ -65,26 +69,29 @@ namespace AutoMapper.UnitTests.Bug
             public virtual ICollection<EntityOne> Ones { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<EntityTwo, DtoTwo>();
-            cfg.CreateMap<EntityOne, DtoOne>();
-            cfg.CreateMap<EntityOne, DtoThree>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<EntityTwo, DtoTwo>();
+                    cfg.CreateMap<EntityOne, DtoOne>();
+                    cfg.CreateMap<EntityOne, DtoThree>();
+                }
+            );
 
         [Fact]
         public void Should_use_the_right_map()
         {
-            var source =
-                    new EntityOne {
-                        Two = new EntityTwo {
-                            Ones = new List<EntityOne> {
-                                new EntityOne {
-                                    Two = new EntityTwo { Ones = new List<EntityOne>() }
-                                }
-                            }
-                        }
-                    };
+            var source = new EntityOne
+            {
+                Two = new EntityTwo
+                {
+                    Ones = new List<EntityOne>
+                    {
+                        new EntityOne { Two = new EntityTwo { Ones = new List<EntityOne>() } }
+                    }
+                }
+            };
             Mapper.Map<EntityOne, DtoOne>(source).ShouldBeOfType<DtoOne>();
             Mapper.Map<EntityOne, DtoThree>(source).ShouldBeOfType<DtoThree>();
         }

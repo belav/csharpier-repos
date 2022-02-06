@@ -20,11 +20,13 @@ namespace System.Xml.Tests
         [Fact]
         public void NullNamespaceAndNullReader()
         {
-            Assert.ThrowsAny<ArgumentNullException>(() =>
-            {
-                XmlSchemaSet sc = new XmlSchemaSet();
-                sc.Add((string)null, (XmlReader)null);
-            });
+            Assert.ThrowsAny<ArgumentNullException>(
+                () =>
+                {
+                    XmlSchemaSet sc = new XmlSchemaSet();
+                    sc.Add((string)null, (XmlReader)null);
+                }
+            );
         }
 
         [Fact]
@@ -52,26 +54,30 @@ namespace System.Xml.Tests
         [Fact]
         public void ValidNamespaceReaderPositionedOnElementButNoXsdSchemaTag()
         {
-            Assert.ThrowsAny<XmlSchemaException>(() =>
-            {
-                XmlSchemaSet sc = new XmlSchemaSet();
-                XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
+            Assert.ThrowsAny<XmlSchemaException>(
+                () =>
+                {
+                    XmlSchemaSet sc = new XmlSchemaSet();
+                    XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
 
-                while (Reader.Read()) { }
+                    while (Reader.Read()) { }
 
-                sc.Add("xsdauthor", Reader);
-            });
+                    sc.Add("xsdauthor", Reader);
+                }
+            );
         }
 
         [Fact]
         public void NamespaceUnmatchingReaderValid()
         {
-            Assert.ThrowsAny<XmlSchemaException>(() =>
-            {
-                XmlSchemaSet sc = new XmlSchemaSet();
-                XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
-                sc.Add("", Reader);
-            });
+            Assert.ThrowsAny<XmlSchemaException>(
+                () =>
+                {
+                    XmlSchemaSet sc = new XmlSchemaSet();
+                    XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
+                    sc.Add("", Reader);
+                }
+            );
         }
 
         [Fact]
@@ -106,27 +112,31 @@ namespace System.Xml.Tests
         [Fact]
         public void AddingReaderOnXDRSchema()
         {
-            Assert.ThrowsAny<XmlSchemaException>(() =>
-            {
-                XmlSchemaSet sc = new XmlSchemaSet();
-                XmlTextReader Reader1 = new XmlTextReader(TestData._SchemaXdr);
-                sc.Add(null, Reader1);
-            });
+            Assert.ThrowsAny<XmlSchemaException>(
+                () =>
+                {
+                    XmlSchemaSet sc = new XmlSchemaSet();
+                    XmlTextReader Reader1 = new XmlTextReader(TestData._SchemaXdr);
+                    sc.Add(null, Reader1);
+                }
+            );
         }
 
         [Fact]
         public void ValidNamespaceReaderPositionedOnANonElementNode()
         {
-            Assert.ThrowsAny<XmlSchemaException>(() =>
-            {
-                XmlSchemaSet sc = new XmlSchemaSet();
-                XmlTextReader reader = new XmlTextReader(TestData._FileXSD1);
+            Assert.ThrowsAny<XmlSchemaException>(
+                () =>
+                {
+                    XmlSchemaSet sc = new XmlSchemaSet();
+                    XmlTextReader reader = new XmlTextReader(TestData._FileXSD1);
 
-                // positions on a non element (annotation) node
-                while (reader.LocalName != "annotation")
-                    reader.Read();
-                sc.Add(null, reader);
-            });
+                    // positions on a non element (annotation) node
+                    while (reader.LocalName != "annotation")
+                        reader.Read();
+                    sc.Add(null, reader);
+                }
+            );
         }
 
         [Fact]
@@ -146,13 +156,20 @@ namespace System.Xml.Tests
         {
             XmlSchemaSet sc = new XmlSchemaSet();
             //first schema
-            XmlSchema schema = XmlSchema.Read(new StringReader(@"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='bar'><xsd:element name='author1' type='xsd:string'/></xsd:schema>"), null);
+            XmlSchema schema = XmlSchema.Read(
+                new StringReader(
+                    @"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='bar'><xsd:element name='author1' type='xsd:string'/></xsd:schema>"
+                ),
+                null
+            );
             XmlSchema temp = sc.Add(schema);
             Assert.Equal("bar", temp.TargetNamespace);
 
             //second schema
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml("<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='foo'><xsd:element name='author2' type='xsd:boolean'/></xsd:schema>");
+            doc.LoadXml(
+                "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='foo'><xsd:element name='author2' type='xsd:boolean'/></xsd:schema>"
+            );
             XmlNode root = doc.FirstChild;
             XmlNodeReader reader = new XmlNodeReader(root);
             temp = sc.Add(null, reader);
@@ -168,7 +185,12 @@ namespace System.Xml.Tests
             XmlSchemaSet sc = new XmlSchemaSet();
 
             //first schema
-            XmlSchema schema = XmlSchema.Read(new StringReader(@"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='foo'><xsd:element name='author1' type='xsd:string'/></xsd:schema>"), null);
+            XmlSchema schema = XmlSchema.Read(
+                new StringReader(
+                    @"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='foo'><xsd:element name='author1' type='xsd:string'/></xsd:schema>"
+                ),
+                null
+            );
 
             XmlSchema temp = sc.Add(schema);
             Assert.Equal("foo", temp.TargetNamespace);
@@ -176,7 +198,9 @@ namespace System.Xml.Tests
             //second schema
             XmlDocument doc = new XmlDocument();
 
-            doc.LoadXml("<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='foo'><xsd:element name='author2' type='xsd:boolean'/></xsd:schema>");
+            doc.LoadXml(
+                "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='foo'><xsd:element name='author2' type='xsd:boolean'/></xsd:schema>"
+            );
 
             XmlNode root = doc.FirstChild;
             XmlNodeReader reader = new XmlNodeReader(root);
@@ -193,7 +217,12 @@ namespace System.Xml.Tests
             XmlSchemaSet sc = new XmlSchemaSet();
 
             //first schema
-            XmlSchema schema = XmlSchema.Read(new StringReader(@"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element name='author1' type='xsd:string'/></xsd:schema>"), null);
+            XmlSchema schema = XmlSchema.Read(
+                new StringReader(
+                    @"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element name='author1' type='xsd:string'/></xsd:schema>"
+                ),
+                null
+            );
 
             XmlSchema temp = sc.Add(schema);
             Assert.Null(temp.TargetNamespace);
@@ -201,7 +230,9 @@ namespace System.Xml.Tests
             //second schema
             XmlDocument doc = new XmlDocument();
 
-            doc.LoadXml("<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element name='author2' type='xsd:boolean'/></xsd:schema>");
+            doc.LoadXml(
+                "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element name='author2' type='xsd:boolean'/></xsd:schema>"
+            );
 
             XmlNode root = doc.FirstChild;
             XmlNodeReader reader = new XmlNodeReader(root);
@@ -218,13 +249,20 @@ namespace System.Xml.Tests
             XmlSchemaSet sc = new XmlSchemaSet();
 
             //first schema
-            XmlSchema schema = XmlSchema.Read(new StringReader(@"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='bar'><xsd:element name='author1' type='xsd:string'/></xsd:schema>"), null);
+            XmlSchema schema = XmlSchema.Read(
+                new StringReader(
+                    @"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='bar'><xsd:element name='author1' type='xsd:string'/></xsd:schema>"
+                ),
+                null
+            );
             Assert.Equal("bar", sc.Add(schema).TargetNamespace);
             Assert.Equal(1, sc.Count);
 
             //second schema
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml("<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='foo'><xsd:element name='author2' type='xsd:boolean'/></xsd:schema>");
+            doc.LoadXml(
+                "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' targetNamespace='foo'><xsd:element name='author2' type='xsd:boolean'/></xsd:schema>"
+            );
 
             XmlNode root = doc.FirstChild;
             XmlNodeReader reader = new XmlNodeReader(root);
@@ -237,7 +275,7 @@ namespace System.Xml.Tests
         public void RegressionTest2()
         {
             string xsd =
-@"<xsd:schema targetNamespace='x' xmlns='SMIT_Perf_TopLevelSettings_ListTypes_Large' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+                @"<xsd:schema targetNamespace='x' xmlns='SMIT_Perf_TopLevelSettings_ListTypes_Large' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
   <xsd:complexType name='Setting_type_scalarlist_int_6'>
 	<xsd:sequence>
 	  <xsd:element name='Setting_4_int' type='xsd:int' minOccurs='0' maxOccurs='G0XNiUJFUJvBc6UueYW75O9Hb6VKN34FAlZSSMasbKJJijolOJXAet120Pwl981bPqA0hBbR8ogvF0j2Su6Dg3kRugcDayscSr31ixEMsFCzNFx9q3SPBy5VFtGAjX1J5DdX7rUfpuVa1uDotcWggdbdwiwyrEnUO24JmaC9jxjRcfdUpbRHBUnbm9lY4gylGBM904CSaX7s4JBQFbIPwgT3OdhnznED98KbTdevZ8rnX5hc8UTdXiyksSuWWYdwT4s59j7l7XzyzpgT6EoeUlpaKjtAtHYAe4UcMldZWsgAt9vCwaaSt8crOSvZz61z8yT4UDHUlPIlEorKxqOSqGQgcmO3zDjZ0qC4p1ssSFqe00njkllIsjI1hxbrzNfhqsvXmwe68f9lawpm9oTObbrRiKX2ZB2FkIxIFP6yGpKMjhbuIzrL4QGPAdzcZmh7n4AR9ghurfIwQesBsmtjTrKUCiHlZeYdHMjohKvlS6dZHT8fvytx37n5tpPaZ6UMGpoD5Ddi0IRWNvMtklzlulkKjo515VMWmRSco4ksUL6upQr8df0xGtcfEeeRImnf65u6ctEpBGRipzeS66YZfYP3yxYKZTkriayugvftbKwAb30O9LULNNAhp1HpV4QrfjAOBtwLbo8UmPb57JKN8ZdUaQFonzXg4Ee12lNQZJtjPp5ZZLsMuCsGFpyvoIhlQbahvjCV54yzq4FuVpObHLw2VXvNxclRlHSyOXo0IWQ0N3aLkDa83GeFoiMXyzidShNimQf7BYSu46oc7knuCnXfnMJqLQBTywhqq1iThc7fxuKs4uZNMxboJr5aHzwuW95HY8vFBTMjq2s3Cbwa1yHAV2g86IMspMIyyCT58UL2l18R9CXpCV3i24wfbxJ3He4dt4E9H0cgmOZd4P84ugpTTk53QyeKKSvH6fhF7YiM3W5nfSlLyOIkylJJ8LtTVRWUdSgYs36W8cZ7oSY7MSV6JKSVWXHwpP0lAlKM' />

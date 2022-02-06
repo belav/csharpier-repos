@@ -19,11 +19,12 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PdbFileLocatorService()
-        {
-        }
+        public PdbFileLocatorService() { }
 
-        public Task<DocumentDebugInfoReader?> GetDocumentDebugInfoReaderAsync(string dllPath, CancellationToken cancellationToken)
+        public Task<DocumentDebugInfoReader?> GetDocumentDebugInfoReaderAsync(
+            string dllPath,
+            CancellationToken cancellationToken
+        )
         {
             var dllStream = IOUtilities.PerformIO(() => File.OpenRead(dllPath));
             if (dllStream is null)
@@ -34,7 +35,14 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             var peReader = new PEReader(dllStream);
             try
             {
-                if (peReader.TryOpenAssociatedPortablePdb(dllPath, pdbPath => File.OpenRead(pdbPath), out var pdbReaderProvider, out _))
+                if (
+                    peReader.TryOpenAssociatedPortablePdb(
+                        dllPath,
+                        pdbPath => File.OpenRead(pdbPath),
+                        out var pdbReaderProvider,
+                        out _
+                    )
+                )
                 {
                     Contract.ThrowIfNull(pdbReaderProvider);
 
@@ -50,7 +58,7 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     // - PDB TimeStamp
                     // - PDB Path
                     // - DLL Path
-                    // 
+                    //
                     // Most of this info comes from the CodeView Debug Directory from the dll
                 }
             }

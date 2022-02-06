@@ -11,7 +11,10 @@ namespace Internal.TypeSystem
         private MethodDesc _typicalMethodDef;
         private RuntimeDeterminedType _rdType;
 
-        internal MethodForRuntimeDeterminedType(MethodDesc typicalMethodDef, RuntimeDeterminedType rdType)
+        internal MethodForRuntimeDeterminedType(
+            MethodDesc typicalMethodDef,
+            RuntimeDeterminedType rdType
+        )
         {
             Debug.Assert(typicalMethodDef.IsTypicalMethodDefinition);
 
@@ -22,8 +25,11 @@ namespace Internal.TypeSystem
         // This constructor is a performance optimization - it allows supplying the hash code if it has already
         // been computed prior to the allocation of this type. The supplied hash code still has to match the
         // hash code this type would compute on it's own (and we assert to enforce that).
-        internal MethodForRuntimeDeterminedType(MethodDesc typicalMethodDef, RuntimeDeterminedType rdType, int hashcode)
-            : this(typicalMethodDef, rdType)
+        internal MethodForRuntimeDeterminedType(
+            MethodDesc typicalMethodDef,
+            RuntimeDeterminedType rdType,
+            int hashcode
+        ) : this(typicalMethodDef, rdType)
         {
             SetHashCode(hashcode);
         }
@@ -37,7 +43,9 @@ namespace Internal.TypeSystem
         public override bool IsFinal => _typicalMethodDef.IsFinal;
         public override bool IsDefaultConstructor => _typicalMethodDef.IsDefaultConstructor;
         public override string Name => _typicalMethodDef.Name;
+
         public override MethodDesc GetTypicalMethodDefinition() => _typicalMethodDef;
+
         public override Instantiation Instantiation => _typicalMethodDef.Instantiation;
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
@@ -54,8 +62,13 @@ namespace Internal.TypeSystem
 
         public override MethodDesc GetCanonMethodTarget(CanonicalFormKind kind)
         {
-            TypeDesc canonicalizedTypeOfTargetMethod = _rdType.CanonicalType.ConvertToCanonForm(kind);
-            return Context.GetMethodForInstantiatedType(_typicalMethodDef, (InstantiatedType)canonicalizedTypeOfTargetMethod);
+            TypeDesc canonicalizedTypeOfTargetMethod = _rdType.CanonicalType.ConvertToCanonForm(
+                kind
+            );
+            return Context.GetMethodForInstantiatedType(
+                _typicalMethodDef,
+                (InstantiatedType)canonicalizedTypeOfTargetMethod
+            );
         }
     }
 }

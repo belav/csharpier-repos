@@ -14,21 +14,29 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.CodeAnalysis.IncrementalCaches
 {
-    [ExportIncrementalAnalyzerProvider(nameof(SyntaxTreeInfoIncrementalAnalyzerProvider), new[] { WorkspaceKind.RemoteWorkspace }), Shared]
+    [
+        ExportIncrementalAnalyzerProvider(
+            nameof(SyntaxTreeInfoIncrementalAnalyzerProvider),
+            new[] { WorkspaceKind.RemoteWorkspace }
+        ),
+        Shared
+    ]
     internal class SyntaxTreeInfoIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SyntaxTreeInfoIncrementalAnalyzerProvider()
-        {
-        }
+        public SyntaxTreeInfoIncrementalAnalyzerProvider() { }
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new IncrementalAnalyzer();
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new IncrementalAnalyzer();
 
         private class IncrementalAnalyzer : IncrementalAnalyzerBase
         {
-            public override Task AnalyzeSyntaxAsync(Document document, InvocationReasons reasons, CancellationToken cancellationToken)
+            public override Task AnalyzeSyntaxAsync(
+                Document document,
+                InvocationReasons reasons,
+                CancellationToken cancellationToken
+            )
             {
                 if (!document.SupportsSyntaxTree)
                 {

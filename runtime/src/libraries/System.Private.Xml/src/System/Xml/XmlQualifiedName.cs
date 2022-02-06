@@ -40,10 +40,12 @@ namespace System.Xml
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public string Namespace { get; private set; }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public string Name { get; private set; }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -60,6 +62,7 @@ namespace System.Xml
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public bool IsEmpty => Name.Length == 0 && Namespace.Length == 0;
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -78,7 +81,9 @@ namespace System.Xml
                 return true;
             }
 
-            return other is XmlQualifiedName qName && Name == qName.Name && Namespace == qName.Namespace;
+            return other is XmlQualifiedName qName
+                && Name == qName.Name
+                && Namespace == qName.Namespace;
         }
 
         /// <devdoc>
@@ -143,7 +148,11 @@ namespace System.Xml
             Namespace = nameTable.Add(Namespace);
         }
 
-        internal static XmlQualifiedName Parse(string s, IXmlNamespaceResolver nsmgr, out string prefix)
+        internal static XmlQualifiedName Parse(
+            string s,
+            IXmlNamespaceResolver nsmgr,
+            out string prefix
+        )
         {
             ValidateNames.ParseQNameThrow(s, out prefix, out string localName);
 

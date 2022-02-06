@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// </remarks>
         [EntityFrameworkInternal]
         public AnnotationCodeGeneratorDependencies(
-            IRelationalTypeMappingSource relationalTypeMappingSource)
+            IRelationalTypeMappingSource relationalTypeMappingSource
+        )
         {
             RelationalTypeMappingSource = relationalTypeMappingSource;
         }

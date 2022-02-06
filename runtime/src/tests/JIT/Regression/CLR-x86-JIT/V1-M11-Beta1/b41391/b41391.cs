@@ -4,7 +4,7 @@
 
 /*
 ---------------------------
-Assert Failure (PID 848, Thread 1036/40c)        
+Assert Failure (PID 848, Thread 1036/40c)
 ---------------------------
 (argCnt < MAX_PTRARG_OFS)
 
@@ -19,7 +19,7 @@ Image:
 D:\bugs\bug.exe
 
 ---------------------------
-Abort   Retry   Ignore   
+Abort   Retry   Ignore
 ---------------------------
 */
 namespace Test
@@ -37,8 +37,14 @@ namespace Test
 
         static object m_axStatic2 = null;
 
-        public static int Method1(AA param1, AA param2, ref AA param3,
-                                uint[] param4, int[] param5, __arglist)
+        public static int Method1(
+            AA param1,
+            AA param2,
+            ref AA param3,
+            uint[] param4,
+            int[] param5,
+            __arglist
+        )
         {
             GC.Collect();
             return 0;
@@ -47,11 +53,25 @@ namespace Test
         public static void Static2(AA[] param2)
         {
             AA aa = new AA();
-            Method1(aa, param2[Method1(aa, aa, ref aa, null, null, __arglist(0.0f, aa))],
-                    ref aa, null, null, __arglist());
+            Method1(
+                aa,
+                param2[Method1(aa, aa, ref aa, null, null, __arglist(0.0f, aa))],
+                ref aa,
+                null,
+                null,
+                __arglist()
+            );
             while ((bool)m_axStatic2) { }
         }
 
-        static int Main() { try { Static2(null); } catch (NullReferenceException) { } return 100; }
+        static int Main()
+        {
+            try
+            {
+                Static2(null);
+            }
+            catch (NullReferenceException) { }
+            return 100;
+        }
     }
 }

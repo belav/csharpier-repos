@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
         /// </summary>
         Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(
             string projectPath,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Updates the project’s reference by removing or marking references as
@@ -27,6 +28,7 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
         Task<bool> TryUpdateReferenceAsync(
             string projectPath,
             ReferenceUpdate referenceUpdate,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }
