@@ -7046,7 +7046,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             BindingFlags.Public
                                 | BindingFlags.Static
                                 | BindingFlags.FlattenHierarchy
-                        )?.DeclaringType?.DisplayName(),
+                        )
+                        ?.DeclaringType?.DisplayName(),
                     nameof(UnknownMethod)
                 )
             );

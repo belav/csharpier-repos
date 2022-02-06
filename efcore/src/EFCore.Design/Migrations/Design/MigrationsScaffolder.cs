@@ -149,9 +149,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             }
 
             var modelSnapshot = Dependencies.MigrationsAssembly.ModelSnapshot;
-            var lastModel = Dependencies.SnapshotModelProcessor.Process(
-                modelSnapshot?.Model
-            )?.GetRelationalModel();
+            var lastModel = Dependencies.SnapshotModelProcessor
+                .Process(modelSnapshot?.Model)
+                ?.GetRelationalModel();
             var upOperations = Dependencies.MigrationsModelDiffer.GetDifferences(
                 lastModel,
                 Dependencies.Model.GetRelationalModel()

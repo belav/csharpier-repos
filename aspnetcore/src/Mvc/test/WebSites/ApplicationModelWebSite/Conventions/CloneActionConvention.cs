@@ -14,8 +14,10 @@ public class CloneActionConvention : IControllerModelConvention
         var actionModels = new List<ActionModel>();
         foreach (var action in controller.Actions)
         {
-            var actionName =
-                action.Attributes.OfType<CloneActionAttribute>()?.FirstOrDefault()?.ActionName;
+            var actionName = action.Attributes
+                .OfType<CloneActionAttribute>()
+                ?.FirstOrDefault()
+                ?.ActionName;
 
             if (!string.IsNullOrEmpty(actionName))
             {

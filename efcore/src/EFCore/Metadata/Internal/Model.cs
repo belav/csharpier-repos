@@ -285,9 +285,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _entityTypes.Add(entityTypeName, entityType);
 
-            return (EntityType?)ConventionDispatcher.OnEntityTypeAdded(
-                entityType.Builder
-            )?.Metadata;
+            return (EntityType?)ConventionDispatcher
+                .OnEntityTypeAdded(entityType.Builder)
+                ?.Metadata;
         }
 
         /// <summary>
@@ -498,9 +498,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                   ?? (
                       entityType.HasSharedClrType
                           ? entityType.FindOwnership() is ForeignKey ownership
-                              ? FindActualEntityType(ownership.PrincipalEntityType)?.FindNavigation(
-                                    ownership.PrincipalToDependent!.Name
-                                )?.TargetEntityType
+                              ? FindActualEntityType(ownership.PrincipalEntityType)
+                                ?.FindNavigation(ownership.PrincipalToDependent!.Name)
+                                ?.TargetEntityType
                               : null
                           : null
                   );

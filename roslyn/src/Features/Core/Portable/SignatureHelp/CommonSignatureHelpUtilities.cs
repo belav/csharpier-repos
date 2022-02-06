@@ -146,8 +146,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             }
             else if (triggerReason == SignatureHelpTriggerReason.InvokeSignatureHelpCommand)
             {
-                expression = token.Parent?
-                    .GetAncestorsOrThis<TSyntax>()
+                expression = token.Parent
+                    ?.GetAncestorsOrThis<TSyntax>()
                     .SkipWhile(syntax => !isArgumentListToken(syntax, token))
                     .FirstOrDefault();
                 return expression != null;
@@ -163,8 +163,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                     )
                 )
                 {
-                    expression = token.Parent?
-                        .AncestorsAndSelf()
+                    expression = token.Parent
+                        ?.AncestorsAndSelf()
                         .TakeWhile(n => !syntaxFacts.IsAnonymousFunctionExpression(n))
                         .OfType<TSyntax>()
                         .SkipWhile(syntax => !isArgumentListToken(syntax, token))

@@ -946,9 +946,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         (string)discriminatorPropertyAnnotation.Value
                     )!;
                     var propertyClrType =
-                        FindValueConverter(discriminatorProperty)?.ProviderClrType.MakeNullable(
-                            discriminatorProperty.IsNullable
-                        ) ?? discriminatorProperty.ClrType;
+                        FindValueConverter(discriminatorProperty)
+                            ?.ProviderClrType.MakeNullable(discriminatorProperty.IsNullable)
+                        ?? discriminatorProperty.ClrType;
                     stringBuilder
                         .Append("<")
                         .Append(Code.Reference(propertyClrType))

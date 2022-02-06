@@ -23,7 +23,9 @@ namespace Microsoft.EntityFrameworkCore
         protected override string ProviderName => "Microsoft.EntityFrameworkCore.InMemory";
 
         protected override string ProviderVersion =>
-            typeof(InMemoryOptionsExtension).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            typeof(InMemoryOptionsExtension).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
 
         protected override string DefaultOptions => "StoreName=LoggingInMemoryTest ";
     }

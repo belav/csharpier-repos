@@ -107,7 +107,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (
                 request.Character == "\n"
                 && context.ClientName
-                    == document.Services.GetService<DocumentPropertiesService>()?.DiagnosticsLspClientName
+                    == document.Services
+                        .GetService<DocumentPropertiesService>()
+                        ?.DiagnosticsLspClientName
             )
             {
                 var braceCompletionAfterReturnResponse =

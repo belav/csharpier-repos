@@ -90,8 +90,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                     var objectType = startContext.Compilation.GetSpecialType(
                         SpecialType.System_Object
                     );
-                    var referenceEqualsMethodOpt = objectType?
-                        .GetMembers(nameof(ReferenceEquals))
+                    var referenceEqualsMethodOpt = objectType
+                        ?.GetMembers(nameof(ReferenceEquals))
                         .OfType<IMethodSymbol>()
                         .FirstOrDefault(
                             m =>

@@ -167,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 case QueryRootExpression queryRootExpression
                       when queryRootExpression.EntityType
                           .GetSqlQueryMappings()
-                          .FirstOrDefault(m => m.IsDefaultSqlQueryMapping)?.SqlQuery
+                          .FirstOrDefault(m => m.IsDefaultSqlQueryMapping)
+                          ?.SqlQuery
                           is ISqlQuery sqlQuery:
                     return Visit(
                         new FromSqlQueryRootExpression(
@@ -1523,9 +1524,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                               )
                               .Single();
                     if (
-                        table.GetReferencingRowInternalForeignKeys(
-                            foreignKey.PrincipalEntityType
-                        )?.Contains(foreignKey) == true
+                        table
+                            .GetReferencingRowInternalForeignKeys(foreignKey.PrincipalEntityType)
+                            ?.Contains(foreignKey) == true
                     )
                     {
                         // Mapped to same table

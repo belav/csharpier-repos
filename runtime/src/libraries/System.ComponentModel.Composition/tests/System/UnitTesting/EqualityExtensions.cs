@@ -34,20 +34,24 @@ namespace System.UnitTesting
         {
             if (extendedType.IsGenericType)
             {
-                var x = typeof(EqualityExtensions).GetMethods()?.Where(
-                    m =>
-                        m.Name == "IsEqual"
-                        && m.GetParameters().Length == 2
-                        && m.IsGenericMethodDefinition
-                );
+                var x = typeof(EqualityExtensions)
+                    .GetMethods()
+                    ?.Where(
+                        m =>
+                            m.Name == "IsEqual"
+                            && m.GetParameters().Length == 2
+                            && m.IsGenericMethodDefinition
+                    );
 
-                MethodInfo method = typeof(EqualityExtensions).GetMethods()?.SingleOrDefault(
-                    m =>
-                        m.Name == "IsEqual"
-                        && m.GetParameters().Length == 2
-                        && m.GetParameters()[0].ParameterType.Name == extendedType.Name
-                        && m.IsGenericMethodDefinition
-                );
+                MethodInfo method = typeof(EqualityExtensions)
+                    .GetMethods()
+                    ?.SingleOrDefault(
+                        m =>
+                            m.Name == "IsEqual"
+                            && m.GetParameters().Length == 2
+                            && m.GetParameters()[0].ParameterType.Name == extendedType.Name
+                            && m.IsGenericMethodDefinition
+                    );
 
                 // If extension method found, make it generic and return
                 if (method != null)

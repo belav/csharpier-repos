@@ -2030,14 +2030,16 @@ namespace Microsoft.EntityFrameworkCore
             string? sql,
             bool fromDataAnnotation = false
         ) =>
-            InternalCheckConstraintBuilder.HasCheckConstraint(
-                entityTypeBuilder.Metadata,
-                name,
-                sql,
-                fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
-            )?.Builder;
+            InternalCheckConstraintBuilder
+                .HasCheckConstraint(
+                    entityTypeBuilder.Metadata,
+                    name,
+                    sql,
+                    fromDataAnnotation
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
+                )
+                ?.Builder;
 
         /// <summary>
         ///     Returns a value indicating whether the check constraint can be configured.

@@ -125,9 +125,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         )
         {
             if (
-                entityType.Model.FindAnnotation(
-                    CoreAnnotationNames.InverseNavigationCandidates
-                )?.Value
+                entityType.Model
+                    .FindAnnotation(CoreAnnotationNames.InverseNavigationCandidates)
+                    ?.Value
                     is not Dictionary<Type, SortedSet<Type>> inverseCandidatesLookup
                 || !inverseCandidatesLookup.TryGetValue(
                     entityType.ClrType,

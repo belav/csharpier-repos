@@ -31,6 +31,8 @@ namespace Microsoft.EntityFrameworkCore
         protected override string ProviderName => "Microsoft.EntityFrameworkCore.Sqlite";
 
         protected override string ProviderVersion =>
-            typeof(SqliteOptionsExtension).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            typeof(SqliteOptionsExtension).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
     }
 }

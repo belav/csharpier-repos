@@ -77,8 +77,8 @@ public class ApiExplorerDataFilter : IResourceFilter
             {
                 parameterData.RouteInfo = new ApiExplorerParameterRouteInfo()
                 {
-                    ConstraintTypes = parameter.RouteInfo.Constraints?
-                        .Select(c => c.GetType().Name)
+                    ConstraintTypes = parameter.RouteInfo.Constraints
+                        ?.Select(c => c.GetType().Name)
                         .ToArray(),
                     DefaultValue = parameter.RouteInfo.DefaultValue,
                     IsOptional = parameter.RouteInfo.IsOptional,

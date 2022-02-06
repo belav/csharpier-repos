@@ -147,8 +147,9 @@ public class BodyModelBinder : IModelBinder
         {
             if (AllowEmptyBody)
             {
-                var hasBody =
-                    httpContext.Features.Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
+                var hasBody = httpContext.Features
+                    .Get<IHttpRequestBodyDetectionFeature>()
+                    ?.CanHaveBody;
                 hasBody ??=
                     httpContext.Request.ContentLength is not null
                     && httpContext.Request.ContentLength == 0;

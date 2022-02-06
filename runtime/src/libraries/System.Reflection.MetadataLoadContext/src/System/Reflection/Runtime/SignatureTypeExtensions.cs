@@ -126,27 +126,27 @@ namespace System.Reflection
 
             if (signatureType.IsSZArray())
             {
-                return signatureType.GetElementType()!.TryResolve(
-                    genericMethodParameters
-                )?.TryMakeArrayType();
+                return signatureType.GetElementType()!
+                    .TryResolve(genericMethodParameters)
+                    ?.TryMakeArrayType();
             }
             else if (signatureType.IsVariableBoundArray())
             {
-                return signatureType.GetElementType()!.TryResolve(
-                    genericMethodParameters
-                )?.TryMakeArrayType(signatureType.GetArrayRank());
+                return signatureType.GetElementType()!
+                    .TryResolve(genericMethodParameters)
+                    ?.TryMakeArrayType(signatureType.GetArrayRank());
             }
             else if (signatureType.IsByRef)
             {
-                return signatureType.GetElementType()!.TryResolve(
-                    genericMethodParameters
-                )?.TryMakeByRefType();
+                return signatureType.GetElementType()!
+                    .TryResolve(genericMethodParameters)
+                    ?.TryMakeByRefType();
             }
             else if (signatureType.IsPointer)
             {
-                return signatureType.GetElementType()!.TryResolve(
-                    genericMethodParameters
-                )?.TryMakePointerType();
+                return signatureType.GetElementType()!
+                    .TryResolve(genericMethodParameters)
+                    ?.TryMakePointerType();
             }
             else if (signatureType.IsConstructedGenericType)
             {

@@ -69,9 +69,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // HACK: to keep F# working, we will ensure we return the ProjectId if there is a project that matches this path. Otherwise, we'll just return
             // a random ProjectId, which is sufficient for their needs. They'll simply observe there is no project with that ID, and then go and create a
             // new project. Then they call this function again, and fetch the real ID.
-            return _workspace.CurrentSolution.Projects.FirstOrDefault(
-                    p => p.FilePath == filePath
-                )?.Id ?? ProjectId.CreateNewId("ProjectNotFound");
+            return _workspace.CurrentSolution.Projects
+                    .FirstOrDefault(p => p.FilePath == filePath)
+                    ?.Id ?? ProjectId.CreateNewId("ProjectNotFound");
         }
 
         [Obsolete("This is a compatibility shim for TypeScript and F#; please do not use it.")]

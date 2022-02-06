@@ -86,11 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 IsPatternExpressionSyntax isPattern => (isPattern.Expression, isPattern.Pattern),
                 _ => throw ExceptionUtilities.Unreachable,
             };
-            var operand = GetNullCheckOperand(
-                comparisonLeft,
-                comparison.Kind(),
-                comparisonRight
-            )?.WalkDownParentheses();
+            var operand = GetNullCheckOperand(comparisonLeft, comparison.Kind(), comparisonRight)
+                ?.WalkDownParentheses();
             if (operand == null)
             {
                 return;

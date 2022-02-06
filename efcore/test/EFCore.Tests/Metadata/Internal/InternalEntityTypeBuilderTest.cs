@@ -4690,21 +4690,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             switch (memberType)
             {
                 case MemberType.Property:
-                    return entityTypeBuilder.Metadata.FindProperty(
-                        nameof(Order.Products)
-                    )?.DeclaringEntityType;
+                    return entityTypeBuilder.Metadata
+                        .FindProperty(nameof(Order.Products))
+                        ?.DeclaringEntityType;
                 case MemberType.ServiceProperty:
-                    return entityTypeBuilder.Metadata.FindServiceProperty(
-                        nameof(Order.Products)
-                    )?.DeclaringEntityType;
+                    return entityTypeBuilder.Metadata
+                        .FindServiceProperty(nameof(Order.Products))
+                        ?.DeclaringEntityType;
                 case MemberType.Navigation:
-                    return entityTypeBuilder.Metadata.FindNavigation(
-                        nameof(Order.Products)
-                    )?.DeclaringEntityType;
+                    return entityTypeBuilder.Metadata
+                        .FindNavigation(nameof(Order.Products))
+                        ?.DeclaringEntityType;
                 case MemberType.SkipNavigation:
-                    return entityTypeBuilder.Metadata.FindSkipNavigation(
-                        nameof(Order.Products)
-                    )?.DeclaringEntityType;
+                    return entityTypeBuilder.Metadata
+                        .FindSkipNavigation(nameof(Order.Products))
+                        ?.DeclaringEntityType;
             }
 
             return null;
@@ -5111,10 +5111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     pointsToPrincipal: false,
                     ConfigurationSource.Convention
                 )
-                .HasForeignKey(
-                    new[] { fkProperty },
-                    ConfigurationSource.Convention
-                )?.HasPrincipalKey(key.Properties, ConfigurationSource.Convention);
+                .HasForeignKey(new[] { fkProperty }, ConfigurationSource.Convention)
+                ?.HasPrincipalKey(key.Properties, ConfigurationSource.Convention);
 
             var navigationFk = customerEntityBuilder.Metadata.GetNavigations().Single().ForeignKey;
             Assert.Same(

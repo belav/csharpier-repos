@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         protected string? EFCoreVersion =>
             _efcoreVersion ??= System.Reflection.Assembly
                 .Load("Microsoft.EntityFrameworkCore.Design")
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
 
         public override void Configure(CommandLineApplication command)
         {

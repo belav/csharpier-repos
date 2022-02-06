@@ -91,8 +91,9 @@ public class Startup
                     {
                         OnMessageReceived = context =>
                         {
-                            var endpoint =
-                                context.HttpContext.Features.Get<IEndpointFeature>()?.Endpoint;
+                            var endpoint = context.HttpContext.Features
+                                .Get<IEndpointFeature>()
+                                ?.Endpoint;
                             if (
                                 endpoint != null
                                 && endpoint.Metadata.GetMetadata<HubMetadata>() != null

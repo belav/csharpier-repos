@@ -47,8 +47,8 @@ namespace Microsoft.Extensions.DependencyModel
             );
             string? application = files != null && files.Length > 0 ? files[0] : null;
 
-            string[]? nonApplicationPaths = files?
-                .Skip(1) // the application path
+            string[]? nonApplicationPaths = files
+                ?.Skip(1) // the application path
                 .ToArray();
 
             return new DependencyContextPaths(application, sharedRuntime, nonApplicationPaths);

@@ -2176,17 +2176,17 @@ namespace System.Threading.Tasks
         internal ExceptionDispatchInfo? GetCancellationExceptionDispatchInfo()
         {
             Debug.Assert(IsCanceled, "Must only be used when the task has canceled.");
-            return Volatile.Read(
-                ref m_contingentProperties
-            )?.m_exceptionsHolder?.GetCancellationExceptionDispatchInfo(); // may be null
+            return Volatile
+                .Read(ref m_contingentProperties)
+                ?.m_exceptionsHolder?.GetCancellationExceptionDispatchInfo(); // may be null
         }
 
         /// <summary>Marks any exceptions stored in the Task as having been handled.</summary>
         internal void MarkExceptionsAsHandled()
         {
-            Volatile.Read(ref m_contingentProperties)?.m_exceptionsHolder?.MarkAsHandled(
-                calledFromFinalizer: false
-            );
+            Volatile
+                .Read(ref m_contingentProperties)
+                ?.m_exceptionsHolder?.MarkAsHandled(calledFromFinalizer: false);
         }
 
         /// <summary>

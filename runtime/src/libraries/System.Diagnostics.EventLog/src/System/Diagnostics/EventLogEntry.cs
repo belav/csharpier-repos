@@ -407,13 +407,15 @@ namespace System.Diagnostics
             try
             {
                 eventKey = EventLog.GetEventLogRegKey(machineName, false);
-                return eventKey?.OpenSubKey(
-                    logName ?? "Application", /*writable*/
-                    false
-                )?.OpenSubKey(
-                    source, /*writeable*/
-                    false
-                );
+                return eventKey
+                    ?.OpenSubKey(
+                        logName ?? "Application", /*writable*/
+                        false
+                    )
+                    ?.OpenSubKey(
+                        source, /*writeable*/
+                        false
+                    );
             }
             finally
             {

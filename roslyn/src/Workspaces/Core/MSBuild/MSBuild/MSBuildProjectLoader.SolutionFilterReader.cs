@@ -33,10 +33,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     using var document = JsonDocument.Parse(File.ReadAllText(filterFilename));
                     var solution = document.RootElement.GetProperty("solution");
                     // Convert directory separators to the platform's default, since that is what MSBuild provide us.
-                    var solutionPath = solution.GetProperty("path").GetString()?.Replace(
-                        '\\',
-                        Path.DirectorySeparatorChar
-                    );
+                    var solutionPath = solution
+                        .GetProperty("path")
+                        .GetString()
+                        ?.Replace('\\', Path.DirectorySeparatorChar);
                     if (
                         solutionPath is null
                         || Path.GetDirectoryName(filterFilename) is not string baseDirectory
@@ -78,10 +78,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     foreach (var project in solution.GetProperty("projects").EnumerateArray())
                     {
                         // Convert directory separators to the platform's default, since that is what MSBuild provide us.
-                        var projectPath = project.GetString()?.Replace(
-                            '\\',
-                            Path.DirectorySeparatorChar
-                        );
+                        var projectPath = project
+                            .GetString()
+                            ?.Replace('\\', Path.DirectorySeparatorChar);
                         if (projectPath is null)
                         {
                             continue;

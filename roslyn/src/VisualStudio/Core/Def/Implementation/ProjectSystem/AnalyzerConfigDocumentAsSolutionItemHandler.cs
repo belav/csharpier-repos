@@ -83,9 +83,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             // Check if added analyzer config document is at the root of the current solution.
-            var analyzerConfigDocumentFilePath = e.NewSolution.GetAnalyzerConfigDocument(
-                e.DocumentId
-            )?.FilePath;
+            var analyzerConfigDocumentFilePath = e.NewSolution
+                .GetAnalyzerConfigDocument(e.DocumentId)
+                ?.FilePath;
             var analyzerConfigDirectory = PathUtilities.GetDirectoryName(
                 analyzerConfigDocumentFilePath
             );

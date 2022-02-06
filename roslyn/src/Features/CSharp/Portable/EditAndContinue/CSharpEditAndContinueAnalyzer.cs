@@ -240,9 +240,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             where
                 (string?)nameSyntax.Identifier.Value == localOrParameter.Name
                 && (
-                    model.GetSymbolInfo(nameSyntax, cancellationToken).Symbol?.Equals(
-                        localOrParameter
-                    ) ?? false
+                    model
+                        .GetSymbolInfo(nameSyntax, cancellationToken)
+                        .Symbol?.Equals(localOrParameter) ?? false
                 )
             select node;
         }

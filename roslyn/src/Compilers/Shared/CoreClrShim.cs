@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis
 
             // only available in netstandard 1.6+
             internal static readonly Func<string, object> GetData = Type.GetTypeInfo()
-                .GetDeclaredMethod("GetData")?.CreateDelegate<Func<string, object>>();
+                .GetDeclaredMethod("GetData")
+                ?.CreateDelegate<Func<string, object>>();
         }
     }
 }

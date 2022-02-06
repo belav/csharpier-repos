@@ -714,9 +714,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (templateNode.Children.Count > 0)
             {
-                var sourceRangeStart = templateNode.Children.FirstOrDefault(
-                    child => child.Source != null
-                )?.Source;
+                var sourceRangeStart = templateNode.Children
+                    .FirstOrDefault(child => child.Source != null)
+                    ?.Source;
 
                 if (sourceRangeStart != null)
                 {
@@ -761,9 +761,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                    child => child.Source != null
-                )?.Source;
+                var sourceRangeStart = expressionNode.Children
+                    .FirstOrDefault(child => child.Source != null)
+                    ?.Source;
 
                 if (sourceRangeStart != null)
                 {
@@ -802,9 +802,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                    child => child.Source != null
-                )?.Source;
+                var sourceRangeStart = expressionNode.Children
+                    .FirstOrDefault(child => child.Source != null)
+                    ?.Source;
 
                 if (sourceRangeStart != null)
                 {
@@ -1729,9 +1729,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (templateNode.Children.Count > 0)
             {
-                var sourceRangeStart = templateNode.Children.FirstOrDefault(
-                    child => child.Source != null
-                )?.Source;
+                var sourceRangeStart = templateNode.Children
+                    .FirstOrDefault(child => child.Source != null)
+                    ?.Source;
 
                 if (sourceRangeStart != null)
                 {
@@ -1794,9 +1794,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                    child => child.Source != null
-                )?.Source;
+                var sourceRangeStart = expressionNode.Children
+                    .FirstOrDefault(child => child.Source != null)
+                    ?.Source;
 
                 if (sourceRangeStart != null)
                 {
@@ -1853,9 +1853,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                    child => child.Source != null
-                )?.Source;
+                var sourceRangeStart = expressionNode.Children
+                    .FirstOrDefault(child => child.Source != null)
+                    ?.Source;
 
                 if (sourceRangeStart != null)
                 {
@@ -2593,9 +2593,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                    child => child.Source != null
-                )?.Source;
+                var sourceRangeStart = expressionNode.Children
+                    .FirstOrDefault(child => child.Source != null)
+                    ?.Source;
 
                 if (sourceRangeStart != null)
                 {

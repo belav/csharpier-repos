@@ -547,14 +547,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
             if (propertyStrategy != duplicatePropertyStrategy)
             {
                 var isConflicting =
-                    ((IConventionProperty)property).FindAnnotation(
-                        SqlServerAnnotationNames.ValueGenerationStrategy
-                    )?.GetConfigurationSource() == ConfigurationSource.Explicit
+                    ((IConventionProperty)property)
+                        .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
+                        ?.GetConfigurationSource() == ConfigurationSource.Explicit
                     || propertyStrategy != SqlServerValueGenerationStrategy.None;
                 var isDuplicateConflicting =
-                    ((IConventionProperty)duplicateProperty).FindAnnotation(
-                        SqlServerAnnotationNames.ValueGenerationStrategy
-                    )?.GetConfigurationSource() == ConfigurationSource.Explicit
+                    ((IConventionProperty)duplicateProperty)
+                        .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
+                        ?.GetConfigurationSource() == ConfigurationSource.Explicit
                     || duplicatePropertyStrategy != SqlServerValueGenerationStrategy.None;
 
                 if (isConflicting && isDuplicateConflicting)

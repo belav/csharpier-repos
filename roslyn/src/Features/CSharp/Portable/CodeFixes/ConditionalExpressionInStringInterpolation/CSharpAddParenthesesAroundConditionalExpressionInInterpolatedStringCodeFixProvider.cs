@@ -120,8 +120,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             if (
                 parenthesizedExpression.Expression is ConditionalExpressionSyntax conditional
-                && parenthesizedExpression.GetAncestor<InterpolatedStringExpressionSyntax>()?.StringStartToken.Kind()
-                    == SyntaxKind.InterpolatedStringStartToken
+                && parenthesizedExpression
+                    .GetAncestor<InterpolatedStringExpressionSyntax>()
+                    ?.StringStartToken.Kind() == SyntaxKind.InterpolatedStringStartToken
             )
             {
                 // If they have something like:

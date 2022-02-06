@@ -60,7 +60,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     for the database provider assembly.
         /// </summary>
         public virtual string? Version =>
-            typeof(TOptionsExtension).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            typeof(TOptionsExtension).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
 
         /// <summary>
         ///     Gets a value indicating whether this database provider has been selected for a given context.

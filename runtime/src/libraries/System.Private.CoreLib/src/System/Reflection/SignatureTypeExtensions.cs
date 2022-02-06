@@ -130,27 +130,27 @@ namespace System.Reflection
         {
             if (signatureType.IsSZArray)
             {
-                return signatureType.ElementType!.TryResolve(
-                    genericMethodParameters
-                )?.TryMakeArrayType();
+                return signatureType.ElementType!
+                    .TryResolve(genericMethodParameters)
+                    ?.TryMakeArrayType();
             }
             else if (signatureType.IsVariableBoundArray)
             {
-                return signatureType.ElementType!.TryResolve(
-                    genericMethodParameters
-                )?.TryMakeArrayType(signatureType.GetArrayRank());
+                return signatureType.ElementType!
+                    .TryResolve(genericMethodParameters)
+                    ?.TryMakeArrayType(signatureType.GetArrayRank());
             }
             else if (signatureType.IsByRef)
             {
-                return signatureType.ElementType!.TryResolve(
-                    genericMethodParameters
-                )?.TryMakeByRefType();
+                return signatureType.ElementType!
+                    .TryResolve(genericMethodParameters)
+                    ?.TryMakeByRefType();
             }
             else if (signatureType.IsPointer)
             {
-                return signatureType.ElementType!.TryResolve(
-                    genericMethodParameters
-                )?.TryMakePointerType();
+                return signatureType.ElementType!
+                    .TryResolve(genericMethodParameters)
+                    ?.TryMakePointerType();
             }
             else if (signatureType.IsConstructedGenericType)
             {

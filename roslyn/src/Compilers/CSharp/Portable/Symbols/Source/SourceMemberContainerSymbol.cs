@@ -1715,9 +1715,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 RoslynDebug.AssertOrFailFast(forDiagnostics);
                 RoslynDebug.AssertOrFailFast(
-                    Volatile.Read(ref _lazyTypeMembers)?.Values.Any(
-                        types => types.Contains(t => t == (object)type)
-                    ) == true
+                    Volatile
+                        .Read(ref _lazyTypeMembers)
+                        ?.Values.Any(types => types.Contains(t => t == (object)type)) == true
                 );
                 return;
             }

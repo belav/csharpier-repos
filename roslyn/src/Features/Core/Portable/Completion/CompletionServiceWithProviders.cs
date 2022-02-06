@@ -665,9 +665,9 @@ namespace Microsoft.CodeAnalysis.Completion
             // changed it 'wins' and picks the span that will be used for all items in the completion
             // list.  If no contexts changed it, then just use the default span provided by the service.
             var finalCompletionListSpan =
-                completionContexts.FirstOrDefault(
-                    c => c.CompletionListSpan != defaultSpan
-                )?.CompletionListSpan ?? defaultSpan;
+                completionContexts
+                    .FirstOrDefault(c => c.CompletionListSpan != defaultSpan)
+                    ?.CompletionListSpan ?? defaultSpan;
             using var displayNameToItemsMap = new DisplayNameToItemsMap(this);
             CompletionItem? suggestionModeItem = null;
 

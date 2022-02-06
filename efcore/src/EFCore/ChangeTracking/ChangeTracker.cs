@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context
                     .GetService<IDbContextOptions>()
                     .Extensions.OfType<CoreOptionsExtension>()
-                    .FirstOrDefault()?.QueryTrackingBehavior ?? QueryTrackingBehavior.TrackAll;
+                    .FirstOrDefault()
+                    ?.QueryTrackingBehavior ?? QueryTrackingBehavior.TrackAll;
 
             _queryTrackingBehavior = _defaultQueryTrackingBehavior;
 

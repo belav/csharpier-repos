@@ -648,15 +648,18 @@ public partial class HubConnectionContext
 
                                 // != true needed because it could be null (which we treat as false)
                                 if (
-                                    Features.Get<IConnectionInherentKeepAliveFeature>()?.HasInherentKeepAlive
-                                    != true
+                                    Features
+                                        .Get<IConnectionInherentKeepAliveFeature>()
+                                        ?.HasInherentKeepAlive != true
                                 )
                                 {
                                     // Only register KeepAlive after protocol handshake otherwise KeepAliveTick could try to write without having a ProtocolReaderWriter
-                                    Features.Get<IConnectionHeartbeatFeature>()?.OnHeartbeat(
-                                        state => ((HubConnectionContext)state).KeepAliveTick(),
-                                        this
-                                    );
+                                    Features
+                                        .Get<IConnectionHeartbeatFeature>()
+                                        ?.OnHeartbeat(
+                                            state => ((HubConnectionContext)state).KeepAliveTick(),
+                                            this
+                                        );
                                 }
 
                                 Log.HandshakeComplete(_logger, Protocol.Name);
@@ -762,10 +765,9 @@ public partial class HubConnectionContext
             return;
         }
         _clientTimeoutActive = true;
-        Features.Get<IConnectionHeartbeatFeature>()?.OnHeartbeat(
-            state => ((HubConnectionContext)state).CheckClientTimeout(),
-            this
-        );
+        Features
+            .Get<IConnectionHeartbeatFeature>()
+            ?.OnHeartbeat(state => ((HubConnectionContext)state).CheckClientTimeout(), this);
     }
 
     private void CheckClientTimeout()

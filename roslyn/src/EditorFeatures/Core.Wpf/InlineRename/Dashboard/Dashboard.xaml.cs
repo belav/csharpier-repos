@@ -146,9 +146,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             // session has begun.
             if (AutomationPeer.ListenerExists(AutomationEvents.AutomationFocusChanged))
             {
-                UIElementAutomationPeer.CreatePeerForElement(this)?.RaiseAutomationEvent(
-                    AutomationEvents.AutomationFocusChanged
-                );
+                UIElementAutomationPeer
+                    .CreatePeerForElement(this)
+                    ?.RaiseAutomationEvent(AutomationEvents.AutomationFocusChanged);
             }
         }
 

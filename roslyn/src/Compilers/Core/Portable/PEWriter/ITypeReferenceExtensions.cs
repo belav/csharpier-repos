@@ -19,8 +19,8 @@ namespace Microsoft.Cci
         )
         {
             INestedTypeReference? nestedTypeReference = typeReference.AsNestedTypeReference;
-            nestedTypeReference?
-                .GetContainingType(context)
+            nestedTypeReference
+                ?.GetContainingType(context)
                 .GetConsolidatedTypeArguments(consolidatedTypeArguments, context);
 
             IGenericTypeInstanceReference? genTypeInstance =

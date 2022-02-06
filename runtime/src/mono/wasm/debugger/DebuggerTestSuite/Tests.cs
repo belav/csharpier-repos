@@ -1008,9 +1008,10 @@ namespace DebuggerTests
             );
 
         JObject FindFrame(JObject pause_location, string function_name) =>
-            pause_location["callFrames"]?.Values<JObject>()?.Where(
-                f => f["functionName"]?.Value<string>() == function_name
-            )?.FirstOrDefault();
+            pause_location["callFrames"]
+                ?.Values<JObject>()
+                ?.Where(f => f["functionName"]?.Value<string>() == function_name)
+                ?.FirstOrDefault();
 
         [Fact]
         public async Task DebugLazyLoadedAssemblyWithPdb()

@@ -440,9 +440,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     /// <returns>A <see cref="IHostBuilder"/> instance.</returns>
     protected virtual IHostBuilder? CreateHostBuilder()
     {
-        var hostBuilder = HostFactoryResolver.ResolveHostBuilderFactory<IHostBuilder>(
-            typeof(TEntryPoint).Assembly
-        )?.Invoke(Array.Empty<string>());
+        var hostBuilder = HostFactoryResolver
+            .ResolveHostBuilderFactory<IHostBuilder>(typeof(TEntryPoint).Assembly)
+            ?.Invoke(Array.Empty<string>());
 
         hostBuilder?.UseEnvironment(Environments.Development);
         return hostBuilder;

@@ -85,13 +85,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     continue;
                 }
 
-                entityTypeBuilder.ServiceProperty(propertyInfo)?.HasParameterBinding(
-                    (ServiceParameterBinding)factory.Bind(
-                        entityType,
-                        propertyInfo.PropertyType,
-                        propertyInfo.GetSimpleMemberName()
-                    )
-                );
+                entityTypeBuilder
+                    .ServiceProperty(propertyInfo)
+                    ?.HasParameterBinding(
+                        (ServiceParameterBinding)factory.Bind(
+                            entityType,
+                            propertyInfo.PropertyType,
+                            propertyInfo.GetSimpleMemberName()
+                        )
+                    );
             }
         }
     }

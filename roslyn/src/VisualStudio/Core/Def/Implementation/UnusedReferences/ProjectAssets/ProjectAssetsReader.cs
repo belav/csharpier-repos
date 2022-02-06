@@ -58,8 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            var autoReferences = projectAssets.Project?
-                .Frameworks?.Values.SelectMany(
+            var autoReferences = projectAssets.Project
+                ?.Frameworks?.Values.SelectMany(
                     framework =>
                         framework.Dependencies?.Keys.Where(
                             key => framework.Dependencies[key].AutoReferenced

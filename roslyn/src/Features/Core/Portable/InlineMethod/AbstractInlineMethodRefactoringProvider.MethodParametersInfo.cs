@@ -395,7 +395,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                                     argument.Parameter,
                                     callerSemanticModel
                                         .GetSymbolInfo(argument.Value.Syntax, cancellationToken)
-                                        .GetAnySymbol()?.Name
+                                        .GetAnySymbol()
+                                        ?.Name
                                 )
                         )
                         .Where(parameterAndArgumentName => parameterAndArgumentName.Name != null)

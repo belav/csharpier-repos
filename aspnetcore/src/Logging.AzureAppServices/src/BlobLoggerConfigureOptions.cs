@@ -29,9 +29,9 @@ internal class BlobLoggerConfigureOptions
     public void Configure(AzureBlobLoggerOptions options)
     {
         base.Configure(options);
-        options.ContainerUrl = _configuration.GetSection(
-            "APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL"
-        )?.Value;
+        options.ContainerUrl = _configuration
+            .GetSection("APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL")
+            ?.Value;
         options.ApplicationName = _context.SiteName;
         options.ApplicationInstanceId = _context.SiteInstanceId;
 

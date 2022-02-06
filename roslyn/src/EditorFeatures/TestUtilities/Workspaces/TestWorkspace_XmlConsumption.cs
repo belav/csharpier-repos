@@ -980,12 +980,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 // This is a linked file. Use the filePath and markup from the referenced document.
 
-                var originalAssemblyName = documentElement.Attribute(
-                    LinkAssemblyNameAttributeName
-                )?.Value;
-                var originalProjectName = documentElement.Attribute(
-                    LinkProjectNameAttributeName
-                )?.Value;
+                var originalAssemblyName = documentElement
+                    .Attribute(LinkAssemblyNameAttributeName)
+                    ?.Value;
+                var originalProjectName = documentElement
+                    .Attribute(LinkProjectNameAttributeName)
+                    ?.Value;
 
                 if (originalAssemblyName == null && originalProjectName == null)
                 {
@@ -1028,9 +1028,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     }
                 }
 
-                var originalDocumentPath = documentElement.Attribute(
-                    LinkFilePathAttributeName
-                )?.Value;
+                var originalDocumentPath = documentElement
+                    .Attribute(LinkFilePathAttributeName)
+                    ?.Value;
 
                 if (originalDocumentPath == null)
                 {

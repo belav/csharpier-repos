@@ -33,6 +33,8 @@ namespace Microsoft.EntityFrameworkCore
         protected override string ProviderName => "Microsoft.EntityFrameworkCore.SqlServer";
 
         protected override string ProviderVersion =>
-            typeof(SqlServerOptionsExtension).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            typeof(SqlServerOptionsExtension).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
     }
 }

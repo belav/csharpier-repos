@@ -382,11 +382,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             var semanticModel = await document
                 .GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var fullName = GetEnclosingMethod(
-                semanticModel,
-                commonLocation,
-                cancellationToken
-            )?.ToDisplayString(MethodDisplayFormat);
+            var fullName = GetEnclosingMethod(semanticModel, commonLocation, cancellationToken)
+                ?.ToDisplayString(MethodDisplayFormat);
 
             return !string.IsNullOrEmpty(fullName)
               ? new ReferenceMethodDescriptor(

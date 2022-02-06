@@ -138,8 +138,9 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         {
             if (UseProxies)
             {
-                var internalServiceProvider =
-                    options.FindExtension<CoreOptionsExtension>()?.InternalServiceProvider;
+                var internalServiceProvider = options
+                    .FindExtension<CoreOptionsExtension>()
+                    ?.InternalServiceProvider;
                 if (internalServiceProvider != null)
                 {
                     using var scope = internalServiceProvider.CreateScope();

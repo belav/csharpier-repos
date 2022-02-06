@@ -73,9 +73,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetIsMemoryOptimizedConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                SqlServerAnnotationNames.MemoryOptimized
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(SqlServerAnnotationNames.MemoryOptimized)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns a value indicating whether the entity type is mapped to a temporal table.
@@ -123,9 +123,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetIsTemporalConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                SqlServerAnnotationNames.IsTemporal
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(SqlServerAnnotationNames.IsTemporal)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns a value representing the name of the period start property of the entity mapped to a temporal table.
@@ -181,9 +181,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetPeriodStartPropertyNameConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                SqlServerAnnotationNames.TemporalPeriodStartPropertyName
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(SqlServerAnnotationNames.TemporalPeriodStartPropertyName)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns a value representing the name of the period end property of the entity mapped to a temporal table.
@@ -239,9 +239,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetPeriodEndPropertyNameConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                SqlServerAnnotationNames.TemporalPeriodEndPropertyName
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(SqlServerAnnotationNames.TemporalPeriodEndPropertyName)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns a value representing the name of the history table associated with the entity mapped to a temporal table.
@@ -304,9 +304,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetHistoryTableNameConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                SqlServerAnnotationNames.TemporalHistoryTableName
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(SqlServerAnnotationNames.TemporalHistoryTableName)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns a value representing the schema of the history table associated with the entity mapped to a temporal table.
@@ -363,8 +363,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetHistoryTableSchemaConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                SqlServerAnnotationNames.TemporalHistoryTableSchema
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(SqlServerAnnotationNames.TemporalHistoryTableSchema)
+                ?.GetConfigurationSource();
     }
 }

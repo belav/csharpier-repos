@@ -45,12 +45,14 @@ public class Startup
                 Console.WriteLine("Application started.");
 
                 var runtimeVersion =
-                    typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
-                    ?? "Unknown";
+                    typeof(object).Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                        ?.InformationalVersion ?? "Unknown";
                 Console.WriteLine($"NetCoreAppVersion: {runtimeVersion}");
                 var aspNetCoreVersion =
-                    typeof(HeaderNames).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
-                    ?? "Unknown";
+                    typeof(HeaderNames).Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                        ?.InformationalVersion ?? "Unknown";
                 Console.WriteLine($"AspNetCoreAppVersion: {aspNetCoreVersion}");
             }
         );

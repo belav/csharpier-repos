@@ -237,19 +237,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var collectionType = namedType
                     .GetMembers()
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m => m.IsValidGetEnumerator() || m.IsValidGetAsyncEnumerator()
-                    )?.ReturnType?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
+                    .FirstOrDefault(m => m.IsValidGetEnumerator() || m.IsValidGetAsyncEnumerator())
+                    ?.ReturnType?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
                     .OfType<IPropertySymbol>()
-                    .FirstOrDefault(p => p.GetMethod != null)?.Type;
+                    .FirstOrDefault(p => p.GetMethod != null)
+                    ?.Type;
 
                 // This can happen for an un-implemented IEnumerable or IAsyncEnumerable.
-                collectionType ??= namedType.AllInterfaces.FirstOrDefault(
-                    t =>
-                        t.OriginalDefinition.SpecialType
-                            == SpecialType.System_Collections_Generic_IEnumerable_T
-                        || Equals(t.OriginalDefinition, compilation.IAsyncEnumerableOfTType())
-                )?.TypeArguments[0];
+                collectionType ??= namedType.AllInterfaces
+                    .FirstOrDefault(
+                        t =>
+                            t.OriginalDefinition.SpecialType
+                                == SpecialType.System_Collections_Generic_IEnumerable_T
+                            || Equals(t.OriginalDefinition, compilation.IAsyncEnumerableOfTType())
+                    )
+                    ?.TypeArguments[0];
 
                 if (collectionType is not null)
                 {

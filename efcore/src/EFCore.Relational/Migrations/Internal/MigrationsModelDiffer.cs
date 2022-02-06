@@ -1128,10 +1128,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var nextSource = sourceTable
                 .GetRowInternalForeignKeys(source)
-                .FirstOrDefault()?.PrincipalEntityType;
+                .FirstOrDefault()
+                ?.PrincipalEntityType;
             var nextTarget = targetTable
                 .GetRowInternalForeignKeys(target)
-                .FirstOrDefault()?.PrincipalEntityType;
+                .FirstOrDefault()
+                ?.PrincipalEntityType;
             return (nextSource == null && nextTarget == null)
                 || (
                     nextSource != null
@@ -2336,8 +2338,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
                             var targetColumn = targetTable.FindColumn(targetProperty);
                             var sourceColumn = diffContext.FindSource(targetColumn);
-                            var sourceProperty = sourceColumn?
-                                .PropertyMappings.Select(m => m.Property)
+                            var sourceProperty = sourceColumn
+                                ?.PropertyMappings.Select(m => m.Property)
                                 .FirstOrDefault(
                                     p => p.DeclaringEntityType.IsAssignableFrom(sourceEntityType)
                                 );
@@ -2402,9 +2404,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
                                 if (!storeValuesChanged && convertedType != null)
                                 {
-                                    comparer = TypeMappingSource.FindMapping(
-                                        convertedType
-                                    )?.Comparer;
+                                    comparer = TypeMappingSource
+                                        .FindMapping(convertedType)
+                                        ?.Comparer;
 
                                     storeValuesChanged =
                                         !comparer?.Equals(
@@ -2495,9 +2497,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                     .Where(
                                         fk =>
                                         {
-                                            var behavior = diffContext.FindTarget(
-                                                fk
-                                            )?.DeleteBehavior;
+                                            var behavior = diffContext
+                                                .FindTarget(fk)
+                                                ?.DeleteBehavior;
                                             return behavior != null
                                                 && behavior != DeleteBehavior.ClientNoAction;
                                         }

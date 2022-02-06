@@ -720,9 +720,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetDefaultValueSqlConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                RelationalAnnotationNames.DefaultValueSql
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(RelationalAnnotationNames.DefaultValueSql)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the SQL expression that is used as the computed value for the column this property is mapped to.
@@ -796,9 +796,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetComputedColumnSqlConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                RelationalAnnotationNames.ComputedColumnSql
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(RelationalAnnotationNames.ComputedColumnSql)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Gets whether the value of the computed column this property is mapped to is stored in the database, or calculated when
@@ -1038,9 +1038,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetDefaultValueConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                RelationalAnnotationNames.DefaultValue
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(RelationalAnnotationNames.DefaultValue)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Gets the maximum length of data that is allowed in this property. For example, if the property is a <see cref="string" />
@@ -1209,9 +1209,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetIsFixedLengthConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                RelationalAnnotationNames.IsFixedLength
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(RelationalAnnotationNames.IsFixedLength)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Checks whether the column mapped to the given <see cref="IProperty" /> will be nullable

@@ -849,8 +849,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                           isWinMdOutput: _property.IsCompilationOutputWinMdObj()
                                       ); //Not name - could be indexer placeholder
 
-                            string? aliasQualifierOpt =
-                                _property.GetExplicitInterfaceSpecifier()?.Name.GetAliasQualifierOpt();
+                            string? aliasQualifierOpt = _property
+                                .GetExplicitInterfaceSpecifier()
+                                ?.Name.GetAliasQualifierOpt();
                             name = ExplicitInterfaceHelpers.GetMemberName(
                                 accessorName,
                                 explicitlyImplementedPropertyOpt.ContainingType,

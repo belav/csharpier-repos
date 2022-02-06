@@ -2473,8 +2473,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         !implementedProperty.SetMethod.IsImplementable()
                                         || implementingGetMethod?.AssociatedSymbol
                                             != implementingProperty
-                                        || implementingProperty.GetOwnOrInheritedSetMethod()?.AssociatedSymbol
-                                            != implementingProperty
+                                        || implementingProperty
+                                            .GetOwnOrInheritedSetMethod()
+                                            ?.AssociatedSymbol != implementingProperty
                                     )
                                       ? reportMismatchInParameterType
                                       : null,

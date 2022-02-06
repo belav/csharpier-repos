@@ -144,16 +144,14 @@ namespace Microsoft.Extensions.DependencyModel
             // Replace with public API once https://github.com/dotnet/runtime/issues/28482 is fixed
             object boxedState = reader.CurrentState;
             long lineNumber = (long)(
-                typeof(JsonReaderState).GetField(
-                    "_lineNumber",
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                )?.GetValue(boxedState) ?? -1
+                typeof(JsonReaderState)
+                    .GetField("_lineNumber", BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.GetValue(boxedState) ?? -1
             );
             long bytePositionInLine = (long)(
-                typeof(JsonReaderState).GetField(
-                    "_bytePositionInLine",
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                )?.GetValue(boxedState) ?? -1
+                typeof(JsonReaderState)
+                    .GetField("_bytePositionInLine", BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.GetValue(boxedState) ?? -1
             );
 
             return new FormatException(

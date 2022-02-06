@@ -668,19 +668,22 @@ namespace Newtonsoft.Json.Serialization
                     valueType,
                     new[] { keyType },
                     null
-                )?.GetSetMethod();
+                )
+                    ?.GetSetMethod();
                 if (setMethod == null)
                 {
                     // Item is explicitly implemented and non-public
                     // get from dictionary interface
-                    setMethod = dictionaryType!.GetProperty(
-                        "Item",
-                        BindingFlags.Public | BindingFlags.Instance,
-                        null,
-                        valueType,
-                        new[] { keyType },
-                        null
-                    )?.GetSetMethod();
+                    setMethod = dictionaryType!
+                        .GetProperty(
+                            "Item",
+                            BindingFlags.Public | BindingFlags.Instance,
+                            null,
+                            valueType,
+                            new[] { keyType },
+                            null
+                        )
+                        ?.GetSetMethod();
                 }
 
                 MethodCall<object, object?> setExtensionDataDictionaryValue =

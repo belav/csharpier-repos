@@ -1282,8 +1282,8 @@ namespace Microsoft.EntityFrameworkCore
                     var (mutableType, conventionType, conventionBuilderType, runtimeType) =
                         MetadataTypes[type];
                     var readOnlyMethods =
-                        extensionTypeTuple.ReadonlyExtensions?
-                            .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                        extensionTypeTuple.ReadonlyExtensions
+                            ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                             .Where(
                                 m =>
                                     !IsObsolete(m)
@@ -1291,8 +1291,8 @@ namespace Microsoft.EntityFrameworkCore
                             )
                             .ToArray() ?? new MethodInfo[0];
                     var mutableMethods =
-                        extensionTypeTuple.MutableExtensions?
-                            .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                        extensionTypeTuple.MutableExtensions
+                            ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                             .Where(
                                 m =>
                                     !IsObsolete(m)
@@ -1300,8 +1300,8 @@ namespace Microsoft.EntityFrameworkCore
                             )
                             .ToArray() ?? new MethodInfo[0];
                     var conventionMethods =
-                        extensionTypeTuple.ConventionExtensions?
-                            .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                        extensionTypeTuple.ConventionExtensions
+                            ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                             .Where(
                                 m =>
                                     !IsObsolete(m)
@@ -1309,8 +1309,8 @@ namespace Microsoft.EntityFrameworkCore
                             )
                             .ToArray() ?? new MethodInfo[0];
                     var conventionBuilderMethods =
-                        extensionTypeTuple.ConventionBuilderExtensions?
-                            .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                        extensionTypeTuple.ConventionBuilderExtensions
+                            ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                             .Where(
                                 m =>
                                     !IsObsolete(m)
@@ -1319,8 +1319,8 @@ namespace Microsoft.EntityFrameworkCore
                             )
                             .ToArray() ?? new MethodInfo[0];
                     var runtimeMethods =
-                        extensionTypeTuple.RuntimeExtensions?
-                            .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                        extensionTypeTuple.RuntimeExtensions
+                            ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                             .Where(
                                 m =>
                                     !IsObsolete(m)
@@ -1364,13 +1364,13 @@ namespace Microsoft.EntityFrameworkCore
                             .Where(m => !IsObsolete(m))
                             .ToArray() ?? new MethodInfo[0];
                     var conventionBuilderMethods =
-                        typeTuple.Value.ConventionBuilder?
-                            .GetMethods(PublicInstance)
+                        typeTuple.Value.ConventionBuilder
+                            ?.GetMethods(PublicInstance)
                             .Where(m => !IsObsolete(m))
                             .ToArray() ?? new MethodInfo[0];
                     var runtimeMethods =
-                        typeTuple.Value.Runtime?
-                            .GetMethods(PublicInstance)
+                        typeTuple.Value.Runtime
+                            ?.GetMethods(PublicInstance)
                             .Where(m => !IsObsolete(m))
                             .ToArray() ?? new MethodInfo[0];
                     MetadataMethods.Add(

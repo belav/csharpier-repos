@@ -438,9 +438,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             if (name == DocumentationCommentXmlNames.ListElementName)
             {
-                var rawListType = element.Attribute(
-                    DocumentationCommentXmlNames.TypeAttributeName
-                )?.Value;
+                var rawListType = element
+                    .Attribute(DocumentationCommentXmlNames.TypeAttributeName)
+                    ?.Value;
                 var listType = rawListType switch
                 {
                     "table" => DocumentationCommentListType.Table,

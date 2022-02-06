@@ -137,10 +137,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                                 || foreignKey.Properties.Any(joinEntry.IsModified)
                                 || inverseForeignKey.Properties.Any(joinEntry.IsModified)
                                 || (
-                                    stateManager.FindPrincipal(
-                                        joinEntry,
-                                        inverseForeignKey
-                                    )?.EntityState == EntityState.Deleted
+                                    stateManager
+                                        .FindPrincipal(joinEntry, inverseForeignKey)
+                                        ?.EntityState == EntityState.Deleted
                                 )
                             )
                         )

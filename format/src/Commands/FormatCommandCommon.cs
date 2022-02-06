@@ -439,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Tools
         {
             return Assembly
                 .GetExecutingAssembly()
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
         }
 
         internal static bool TryGetDotNetCliVersion(

@@ -109,8 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             var textView = interactiveWorkspace.Window.TextView;
             var document = interactiveWorkspace.CurrentSolution.GetDocument(documentId);
 
-            var textSnapshot = document?
-                .GetTextSynchronously(cancellationToken)
+            var textSnapshot = document
+                ?.GetTextSynchronously(cancellationToken)
                 .FindCorrespondingEditorTextSnapshot();
             if (textSnapshot == null)
             {

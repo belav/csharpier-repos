@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         {
             var isProxy =
                 set.GetService<IDbContextOptions>()
-                    .FindExtension<ProxiesOptionsExtension>()?.UseChangeTrackingProxies == true;
+                    .FindExtension<ProxiesOptionsExtension>()
+                    ?.UseChangeTrackingProxies == true;
 
             var entity = isProxy ? set.CreateProxy() : new TEntity();
 

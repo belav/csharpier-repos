@@ -49,9 +49,9 @@ namespace Microsoft.EntityFrameworkCore
                 return (string?)annotation.Value;
             }
 
-            return property.FindSharedStoreObjectRootProperty(storeObject)?.GetHiLoSequenceName(
-                storeObject
-            );
+            return property
+                .FindSharedStoreObjectRootProperty(storeObject)
+                ?.GetHiLoSequenceName(storeObject);
         }
 
         /// <summary>
@@ -95,9 +95,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetHiLoSequenceNameConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                SqlServerAnnotationNames.HiLoSequenceName
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the schema to use for the hi-lo sequence.
@@ -124,9 +124,9 @@ namespace Microsoft.EntityFrameworkCore
                 return (string?)annotation.Value;
             }
 
-            return property.FindSharedStoreObjectRootProperty(storeObject)?.GetHiLoSequenceSchema(
-                storeObject
-            );
+            return property
+                .FindSharedStoreObjectRootProperty(storeObject)
+                ?.GetHiLoSequenceSchema(storeObject);
         }
 
         /// <summary>
@@ -170,9 +170,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetHiLoSequenceSchemaConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                SqlServerAnnotationNames.HiLoSequenceSchema
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Finds the <see cref="ISequence" /> in the model to use for the hi-lo pattern.
@@ -319,9 +319,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetIdentitySeedConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                SqlServerAnnotationNames.IdentitySeed
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(SqlServerAnnotationNames.IdentitySeed)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the identity increment.
@@ -400,9 +400,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetIdentityIncrementConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                SqlServerAnnotationNames.IdentityIncrement
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the <see cref="SqlServerValueGenerationStrategy" /> to use for the property.
@@ -623,9 +623,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetValueGenerationStrategyConfigurationSource(
             this IConventionProperty property
         ) =>
-            property.FindAnnotation(
-                SqlServerAnnotationNames.ValueGenerationStrategy
-            )?.GetConfigurationSource();
+            property
+                .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns a value indicating whether the property is compatible with any <see cref="SqlServerValueGenerationStrategy" />.

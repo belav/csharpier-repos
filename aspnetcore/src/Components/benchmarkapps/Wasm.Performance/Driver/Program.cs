@@ -235,7 +235,8 @@ public class Program
                 Name = "blazorwasm/commit",
                 Value = typeof(Program).Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .FirstOrDefault(f => f.Key == "CommitHash")?.Value,
+                    .FirstOrDefault(f => f.Key == "CommitHash")
+                    ?.Value,
             }
         );
 

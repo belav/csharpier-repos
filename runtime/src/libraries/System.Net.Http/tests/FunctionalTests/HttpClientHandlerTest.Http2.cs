@@ -4430,8 +4430,8 @@ namespace System.Net.Http.Functional.Tests
                     // A Http2ConnectionException will be present somewhere in the inner exceptions.
                     // Its location depends on which method threw the exception.
                     while (
-                        requestException?
-                            .GetType()
+                        requestException
+                            ?.GetType()
                             .FullName.Equals("System.Net.Http.Http2ConnectionException") == false
                     )
                     {

@@ -710,10 +710,8 @@ namespace System.Resources.Extensions.Tests
             );
             IResourceReader reader = (IResourceReader)resSet
                 .GetType()
-                .GetField(
-                    "_defaultReader",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )?.GetValue(resSet);
+                .GetField("_defaultReader", BindingFlags.NonPublic | BindingFlags.Instance)
+                ?.GetValue(resSet);
             Assert.IsType<DeserializingResourceReader>(reader);
         }
 

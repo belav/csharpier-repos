@@ -412,11 +412,13 @@ namespace Microsoft.CodeAnalysis
                                 metadata =
                                     inProgressCompilationNotRef.ExternalReferences.FirstOrDefault(
                                         r =>
-                                            solution.GetProjectState(
-                                                inProgressCompilationNotRef.GetAssemblyOrModuleSymbol(
-                                                    r
-                                                ) as IAssemblySymbol
-                                            )?.Id == projectReference.ProjectId
+                                            solution
+                                                .GetProjectState(
+                                                    inProgressCompilationNotRef.GetAssemblyOrModuleSymbol(
+                                                        r
+                                                    ) as IAssemblySymbol
+                                                )
+                                                ?.Id == projectReference.ProjectId
                                     );
                             }
 

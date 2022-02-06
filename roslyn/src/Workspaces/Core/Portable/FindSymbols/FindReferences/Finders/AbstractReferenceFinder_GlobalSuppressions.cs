@@ -244,10 +244,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 }
 
                 // Check the attribute type matches 'SuppressMessageAttribute'.
-                var attributeSymbol = semanticModel.GetSymbolInfo(
-                    attributeNode,
-                    cancellationToken
-                ).Symbol?.ContainingType;
+                var attributeSymbol = semanticModel
+                    .GetSymbolInfo(attributeNode, cancellationToken)
+                    .Symbol?.ContainingType;
                 return suppressMessageAttribute.Equals(attributeSymbol);
             }
 

@@ -348,8 +348,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     }
                 }
 
-                var entries = referenceLocationDescriptors?
-                    .references.Select(
+                var entries = referenceLocationDescriptors
+                    ?.references.Select(
                         referenceLocationDescriptor =>
                         {
                             ImageId imageId = default;

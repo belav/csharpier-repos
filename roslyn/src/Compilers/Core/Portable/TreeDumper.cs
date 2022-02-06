@@ -182,10 +182,8 @@ namespace Microsoft.CodeAnalysis
             var ti = o.GetType().GetTypeInfo();
             if (ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(ImmutableArray<>))
             {
-                var result = ti?.GetDeclaredMethod("get_IsDefault")?.Invoke(
-                    o,
-                    Array.Empty<object>()
-                );
+                var result = ti?.GetDeclaredMethod("get_IsDefault")
+                    ?.Invoke(o, Array.Empty<object>());
                 return result is bool b && b;
             }
 
