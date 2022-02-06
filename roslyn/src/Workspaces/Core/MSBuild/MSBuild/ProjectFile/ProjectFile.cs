@@ -585,14 +585,16 @@ namespace Microsoft.CodeAnalysis.MSBuild
         }
 
         private static string GetHintPath(MSB.Evaluation.ProjectItem item) =>
-            item.Metadata.FirstOrDefault(
-                m =>
-                    string.Equals(
-                        m.Name,
-                        MetadataNames.HintPath,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-            )?.EvaluatedValue ?? string.Empty;
+            item.Metadata
+                .FirstOrDefault(
+                    m =>
+                        string.Equals(
+                            m.Name,
+                            MetadataNames.HintPath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
+                ?.EvaluatedValue ?? string.Empty;
 
         public void AddProjectReference(string projectName, ProjectFileReference reference)
         {

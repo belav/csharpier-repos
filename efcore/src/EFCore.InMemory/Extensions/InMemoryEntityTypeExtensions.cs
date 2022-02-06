@@ -61,14 +61,14 @@ namespace Microsoft.EntityFrameworkCore
             (LambdaExpression?)entityType
 #pragma warning disable EF1001 // Internal EF Core API usage.
 #pragma warning disable CS0612 // Type or member is obsolete
-            .SetOrRemoveAnnotation(
-                CoreAnnotationNames.DefiningQuery,
-                inMemoryQuery,
-                fromDataAnnotation
-            )
+                .SetOrRemoveAnnotation(
+                    CoreAnnotationNames.DefiningQuery,
+                    inMemoryQuery,
+                    fromDataAnnotation
+                )
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore EF1001 // Internal EF Core API usage.
-            ?.Value;
+                ?.Value;
 
         /// <summary>
         ///     Returns the configuration source for <see cref="GetInMemoryQuery" />.

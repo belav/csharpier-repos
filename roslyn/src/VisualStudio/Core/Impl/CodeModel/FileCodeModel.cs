@@ -706,8 +706,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 }
             }
 
-            var node = parent?
-                .AncestorsAndSelf()
+            var node = parent
+                ?.AncestorsAndSelf()
                 .FirstOrDefault(n => CodeModelService.MatchesScope(n, scope));
 
             if (node == null)

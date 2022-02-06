@@ -2121,7 +2121,8 @@ namespace Microsoft.EntityFrameworkCore
                 nameof(Book.Label),
                 model
                     .FindEntityType(typeof(BookLabel))
-                    .FindNavigation(nameof(BookLabel.Book)).Inverse?.Name
+                    .FindNavigation(nameof(BookLabel.Book))
+                    .Inverse?.Name
             );
 
             Assert.Null(
@@ -2147,7 +2148,8 @@ namespace Microsoft.EntityFrameworkCore
                 nameof(Book.Label),
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
-                    .FindNavigation(nameof(SpecialBookLabel.Book)).Inverse?.Name
+                    .FindNavigation(nameof(SpecialBookLabel.Book))
+                    .Inverse?.Name
             );
             Assert.Null(
                 model
@@ -2192,7 +2194,8 @@ namespace Microsoft.EntityFrameworkCore
                 nameof(Book.Label),
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
-                    .FindNavigation(nameof(SpecialBookLabel.Book)).Inverse?.Name
+                    .FindNavigation(nameof(SpecialBookLabel.Book))
+                    .Inverse?.Name
             );
             Assert.Null(
                 model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel))
@@ -2236,7 +2239,8 @@ namespace Microsoft.EntityFrameworkCore
                 nameof(Book.Label),
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
-                    .FindNavigation(nameof(SpecialBookLabel.Book)).Inverse?.Name
+                    .FindNavigation(nameof(SpecialBookLabel.Book))
+                    .Inverse?.Name
             );
             Assert.Null(
                 model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel))
@@ -2259,7 +2263,8 @@ namespace Microsoft.EntityFrameworkCore
                 nameof(Book.Label),
                 model
                     .FindEntityType(typeof(ExtraSpecialBookLabel))
-                    .FindNavigation(nameof(ExtraSpecialBookLabel.Book)).Inverse?.Name
+                    .FindNavigation(nameof(ExtraSpecialBookLabel.Book))
+                    .Inverse?.Name
             );
             Assert.Null(
                 model

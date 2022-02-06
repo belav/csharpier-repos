@@ -126,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public override IColumnBase? FindColumn(IProperty property) =>
             property
                 .GetTableColumnMappings()
-                .FirstOrDefault(cm => cm.TableMapping.Table == this)?.Column;
+                .FirstOrDefault(cm => cm.TableMapping.Table == this)
+                ?.Column;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

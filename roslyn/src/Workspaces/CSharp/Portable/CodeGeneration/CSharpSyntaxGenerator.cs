@@ -943,8 +943,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<SyntaxNode> members
         )
         {
-            var itypes = interfaceTypes?
-                .Select(i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i))
+            var itypes = interfaceTypes
+                ?.Select(i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i))
                 .ToList();
             if (itypes?.Count == 0)
             {
@@ -970,8 +970,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<SyntaxNode> members = null
         )
         {
-            var itypes = interfaceTypes?
-                .Select(i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i))
+            var itypes = interfaceTypes
+                ?.Select(i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i))
                 .ToList();
             if (itypes?.Count == 0)
             {

@@ -306,14 +306,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 var foreignKey = Metadata.ForeignKey!;
                 if (!foreignKey.IsInModel)
                 {
-                    foreignKey = InternalForeignKeyBuilder.FindCurrentForeignKeyBuilder(
-                        foreignKey.PrincipalEntityType,
-                        foreignKey.DeclaringEntityType,
-                        foreignKey.DependentToPrincipal?.CreateMemberIdentity(),
-                        foreignKey.PrincipalToDependent?.CreateMemberIdentity(),
-                        dependentProperties: foreignKey.Properties,
-                        principalProperties: foreignKey.PrincipalKey.Properties
-                    )?.Metadata;
+                    foreignKey = InternalForeignKeyBuilder
+                        .FindCurrentForeignKeyBuilder(
+                            foreignKey.PrincipalEntityType,
+                            foreignKey.DeclaringEntityType,
+                            foreignKey.DependentToPrincipal?.CreateMemberIdentity(),
+                            foreignKey.PrincipalToDependent?.CreateMemberIdentity(),
+                            dependentProperties: foreignKey.Properties,
+                            principalProperties: foreignKey.PrincipalKey.Properties
+                        )
+                        ?.Metadata;
                 }
 
                 if (foreignKey != null)
@@ -337,10 +339,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (inverseBuilder != null)
                 {
                     inverse =
-                        inverseBuilder.Attach(
-                            targetEntityType.Builder,
-                            entityTypeBuilder.Metadata
-                        )?.Metadata ?? inverse;
+                        inverseBuilder
+                            .Attach(targetEntityType.Builder, entityTypeBuilder.Metadata)
+                            ?.Metadata ?? inverse;
                 }
 
                 if (inverse != null)

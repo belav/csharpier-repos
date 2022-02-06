@@ -666,7 +666,8 @@ public class ApkBuilder
                 }
             )
             .OrderByDescending(v => v)
-            .FirstOrDefault()?.ToString();
+            .FirstOrDefault()
+            ?.ToString();
 
         if (string.IsNullOrEmpty(buildTools))
             throw new ArgumentException(

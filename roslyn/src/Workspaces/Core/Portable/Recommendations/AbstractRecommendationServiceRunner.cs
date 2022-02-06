@@ -312,9 +312,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
         {
             if (!string.IsNullOrEmpty(argumentName))
             {
-                parameterType = method.Parameters.FirstOrDefault(
-                    p => _stringComparerForLanguage.Equals(p.Name, argumentName)
-                )?.Type;
+                parameterType = method.Parameters
+                    .FirstOrDefault(p => _stringComparerForLanguage.Equals(p.Name, argumentName))
+                    ?.Type;
                 return parameterType != null;
             }
 

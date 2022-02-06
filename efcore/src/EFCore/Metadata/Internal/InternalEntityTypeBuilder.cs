@@ -1394,8 +1394,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     == false
                 || (
                     type?.TryGetSequenceType() is Type sequenceType
-                    && ModelBuilder.Metadata.Configuration?
-                        .GetConfigurationType(sequenceType)
+                    && ModelBuilder.Metadata.Configuration
+                        ?.GetConfigurationType(sequenceType)
                         .IsEntityType() == false
                 )
             )
@@ -2033,7 +2033,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 n.ForeignKey,
                                 ConfigurationSource.Explicit
                             )
-                    )?.Select(n => n.ForeignKey).ToHashSet();
+                    )
+                        ?.Select(n => n.ForeignKey)
+                        .ToHashSet();
 
                     foreach (var key in Metadata.GetDeclaredKeys().ToList())
                     {
@@ -2744,8 +2746,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         )
         {
             var detachedBuilder = foreignKey.Builder;
-            var referencingSkipNavigations = foreignKey.ReferencingSkipNavigations?
-                .Select(s => (s, s.GetForeignKeyConfigurationSource()!.Value))
+            var referencingSkipNavigations = foreignKey.ReferencingSkipNavigations
+                ?.Select(s => (s, s.GetForeignKeyConfigurationSource()!.Value))
                 .ToList();
             var relationshipConfigurationSource =
                 foreignKey.DeclaringEntityType.Builder.HasNoRelationship(
@@ -3641,8 +3643,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 || (
                     setTargetAsPrincipal == null
                     && inverseNavigation?.Name == null
-                    && navigationProperty?
-                        .GetMemberType()
+                    && navigationProperty
+                        ?.GetMemberType()
                         .IsAssignableFrom(targetEntityType.ClrType) == false
                 )
             )
@@ -4179,11 +4181,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 newRelationship = relationship;
                 if (principalKey != null)
                 {
-                    newRelationship = newRelationship.HasEntityTypes(
-                        targetEntityType,
-                        Metadata,
-                        configurationSource
-                    )?.HasPrincipalKey(principalKey.Properties, configurationSource);
+                    newRelationship = newRelationship
+                        .HasEntityTypes(targetEntityType, Metadata, configurationSource)
+                        ?.HasPrincipalKey(principalKey.Properties, configurationSource);
                 }
 
                 newRelationship = newRelationship == null ? null : batch.Run(newRelationship);
@@ -4357,10 +4357,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     relationship = existingNavigation.ForeignKey.Builder;
                     if (existingNavigation.ForeignKey.IsOwnership)
                     {
-                        relationship = relationship.IsOwnership(
-                            true,
-                            configurationSource
-                        )?.HasNavigations(inverse, navigation, configurationSource);
+                        relationship = relationship
+                            .IsOwnership(true, configurationSource)
+                            ?.HasNavigations(inverse, navigation, configurationSource);
 
                         relationship?.Metadata.UpdateConfigurationSource(configurationSource);
                         return relationship;
@@ -4382,10 +4381,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             + "Owned types should only have ownership or ownee navigations point at it"
                     );
 
-                    relationship = relationship.IsOwnership(
-                        true,
-                        configurationSource
-                    )?.HasNavigations(inverse, navigation, configurationSource);
+                    relationship = relationship
+                        .IsOwnership(true, configurationSource)
+                        ?.HasNavigations(inverse, navigation, configurationSource);
 
                     relationship?.Metadata.UpdateConfigurationSource(configurationSource);
                     return relationship;
@@ -4407,9 +4405,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 // TODO: Use convention batch to get the updated builder, see #15898
                 var principalBuilder = Metadata.IsInModel
                     ? Metadata.Builder
-                    : ownership?.PrincipalEntityType.FindNavigation(
-                          ownership.PrincipalToDependent!.Name
-                      )?.TargetEntityType
+                    : ownership
+                          ?.PrincipalEntityType.FindNavigation(ownership.PrincipalToDependent!.Name)
+                          ?.TargetEntityType
                           is EntityType target
                       && target.IsInModel
                         ? target.Builder
@@ -4424,14 +4422,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     return null;
                 }
 
-                relationship = ownedEntityTypeBuilder.HasRelationship(
-                    targetEntityType: principalBuilder.Metadata,
-                    navigationToTarget: inverse,
-                    inverseNavigation: navigation,
-                    setTargetAsPrincipal: true,
-                    configurationSource,
-                    required: true
-                )?.IsOwnership(true, configurationSource);
+                relationship = ownedEntityTypeBuilder
+                    .HasRelationship(
+                        targetEntityType: principalBuilder.Metadata,
+                        navigationToTarget: inverse,
+                        inverseNavigation: navigation,
+                        setTargetAsPrincipal: true,
+                        configurationSource,
+                        required: true
+                    )
+                    ?.IsOwnership(true, configurationSource);
 
                 if (relationship == null)
                 {
@@ -4479,10 +4479,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     relationship = existingNavigation.ForeignKey.Builder;
                     if (existingNavigation.ForeignKey.IsOwnership)
                     {
-                        relationship = relationship.IsOwnership(
-                            true,
-                            configurationSource
-                        )?.HasNavigations(inverse, navigation, configurationSource);
+                        relationship = relationship
+                            .IsOwnership(true, configurationSource)
+                            ?.HasNavigations(inverse, navigation, configurationSource);
 
                         relationship?.Metadata.UpdateConfigurationSource(configurationSource);
                         return relationship;
@@ -4504,10 +4503,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             + "Owned types should only have ownership or ownee navigations point at it"
                     );
 
-                    relationship = relationship.IsOwnership(
-                        true,
-                        configurationSource
-                    )?.HasNavigations(inverse, navigation, configurationSource);
+                    relationship = relationship
+                        .IsOwnership(true, configurationSource)
+                        ?.HasNavigations(inverse, navigation, configurationSource);
 
                     relationship?.Metadata.UpdateConfigurationSource(configurationSource);
                     return relationship;
@@ -4516,14 +4514,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             using (var batch = Metadata.Model.DelayConventions())
             {
-                relationship = targetEntityType.Builder.HasRelationship(
-                    targetEntityType: Metadata,
-                    navigationToTarget: inverse,
-                    inverseNavigation: navigation,
-                    setTargetAsPrincipal: true,
-                    configurationSource,
-                    required: true
-                )?.IsOwnership(true, configurationSource);
+                relationship = targetEntityType.Builder
+                    .HasRelationship(
+                        targetEntityType: Metadata,
+                        navigationToTarget: inverse,
+                        inverseNavigation: navigation,
+                        setTargetAsPrincipal: true,
+                        configurationSource,
+                        required: true
+                    )
+                    ?.IsOwnership(true, configurationSource);
 
                 if (relationship == null)
                 {
@@ -5004,9 +5004,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           )
                         : Metadata.Model.GetDisplayName(targetType);
 
-            var targetEntityTypeBuilder = ModelBuilder.Metadata.FindEntityType(
-                targetTypeName
-            )?.Builder;
+            var targetEntityTypeBuilder = ModelBuilder.Metadata
+                .FindEntityType(targetTypeName)
+                ?.Builder;
             if (
                 targetEntityTypeBuilder != null
                 && targetEntityTypeBuilder.Metadata.IsOwned()
@@ -5309,10 +5309,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         return null;
                     }
 
-                    principalKey = principalBaseEntityTypeBuilder.HasKeyInternal(
-                        principalKeyProperties,
-                        ConfigurationSource.Convention
-                    )?.Metadata;
+                    principalKey = principalBaseEntityTypeBuilder
+                        .HasKeyInternal(principalKeyProperties, ConfigurationSource.Convention)
+                        ?.Metadata;
 
                     if (principalKey == null)
                     {
@@ -5741,8 +5740,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string propertyName,
             bool required
         ) =>
-            CreateUniqueProperties(new[] { propertyType }, new[] { propertyName }, required)?
-                .First()
+            CreateUniqueProperties(new[] { propertyType }, new[] { propertyName }, required)
+                ?.First()
                 .Builder;
 
         /// <summary>
@@ -6314,7 +6313,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     name ?? discriminatorProperty?.Name ?? _defaultDiscriminatorName,
                     typeConfigurationSource: type != null ? configurationSource : null,
                     configurationSource
-                )?.AfterSave(PropertySaveBehavior.Throw, ConfigurationSource.Convention);
+                )
+                ?.AfterSave(PropertySaveBehavior.Throw, ConfigurationSource.Convention);
         }
 
         private DiscriminatorBuilder? DiscriminatorBuilder(

@@ -100,8 +100,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 var services = new ServiceCollection();
                 var hasProvider = ApplyServices(options, services);
 
-                var replacedServices =
-                    options.FindExtension<CoreOptionsExtension>()?.ReplacedServices;
+                var replacedServices = options
+                    .FindExtension<CoreOptionsExtension>()
+                    ?.ReplacedServices;
                 if (replacedServices != null)
                 {
                     var updatedServices = new ServiceCollection();
@@ -191,8 +192,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
                             }
                         }
 
-                        var applicationServiceProvider =
-                            options.FindExtension<CoreOptionsExtension>()?.ApplicationServiceProvider;
+                        var applicationServiceProvider = options
+                            .FindExtension<CoreOptionsExtension>()
+                            ?.ApplicationServiceProvider;
                         if (applicationServiceProvider?.GetService<IRegisteredServices>() != null)
                         {
                             logger.RedundantAddServicesCallWarning(serviceProvider);

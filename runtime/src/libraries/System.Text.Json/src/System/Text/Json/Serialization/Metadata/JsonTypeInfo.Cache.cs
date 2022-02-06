@@ -59,8 +59,9 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options
         )
         {
-            JsonIgnoreCondition? ignoreCondition =
-                JsonPropertyInfo.GetAttribute<JsonIgnoreAttribute>(memberInfo)?.Condition;
+            JsonIgnoreCondition? ignoreCondition = JsonPropertyInfo
+                .GetAttribute<JsonIgnoreAttribute>(memberInfo)
+                ?.Condition;
             if (ignoreCondition == JsonIgnoreCondition.Always)
             {
                 return JsonPropertyInfo.CreateIgnoredPropertyPlaceholder(

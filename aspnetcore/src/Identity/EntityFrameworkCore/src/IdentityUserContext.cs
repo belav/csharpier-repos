@@ -108,9 +108,9 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
     private StoreOptions GetStoreOptions() =>
         this.GetService<IDbContextOptions>()
             .Extensions.OfType<CoreOptionsExtension>()
-            .FirstOrDefault()?.ApplicationServiceProvider?.GetService<
-            IOptions<IdentityOptions>
-        >()?.Value?.Stores;
+            .FirstOrDefault()
+            ?.ApplicationServiceProvider?.GetService<IOptions<IdentityOptions>>()
+            ?.Value?.Stores;
 
     private class PersonalDataConverter : ValueConverter<string, string>
     {

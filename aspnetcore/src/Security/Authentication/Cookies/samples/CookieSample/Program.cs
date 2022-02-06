@@ -29,8 +29,9 @@ builder.Services
                         context.ElapsedTime > (context.Options.ExpireTimeSpan / 4);
 
                     // Don't renew on API endpoints that use JWT.
-                    var authData =
-                        context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<IAuthorizeData>();
+                    var authData = context.HttpContext
+                        .GetEndpoint()
+                        ?.Metadata.GetMetadata<IAuthorizeData>();
                     if (
                         authData != null
                         && string.Equals(

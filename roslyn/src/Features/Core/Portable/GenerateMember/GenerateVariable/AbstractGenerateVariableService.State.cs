@@ -574,9 +574,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 if (inferredType.IsDelegateType() && !inferredType.CanBeReferencedByName)
                 {
-                    var namedDelegateType = inferredType.GetDelegateType(
-                        compilation
-                    )?.DelegateInvokeMethod?.ConvertToType(compilation);
+                    var namedDelegateType = inferredType
+                        .GetDelegateType(compilation)
+                        ?.DelegateInvokeMethod?.ConvertToType(compilation);
                     if (namedDelegateType != null)
                     {
                         inferredType = namedDelegateType;

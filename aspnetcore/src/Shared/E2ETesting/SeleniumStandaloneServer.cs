@@ -85,7 +85,8 @@ public class SeleniumStandaloneServer : IDisposable
 
         var seleniumConfigPath = typeof(SeleniumStandaloneServer).Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
-            .FirstOrDefault(k => k.Key == "Microsoft.AspNetCore.Testing.SeleniumConfigPath")?.Value;
+            .FirstOrDefault(k => k.Key == "Microsoft.AspNetCore.Testing.SeleniumConfigPath")
+            ?.Value;
 
         if (seleniumConfigPath == null)
         {

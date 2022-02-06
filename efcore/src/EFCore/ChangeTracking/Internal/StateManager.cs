@@ -908,10 +908,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ) =>
             FilterIncompatiblePrincipal(
                 foreignKey,
-                FindIdentityMap(foreignKey.PrincipalKey)?.TryGetEntryUsingPreStoreGeneratedValues(
-                    foreignKey,
-                    dependentEntry
-                )
+                FindIdentityMap(foreignKey.PrincipalKey)
+                    ?.TryGetEntryUsingPreStoreGeneratedValues(foreignKey, dependentEntry)
             );
 
         /// <summary>
@@ -926,10 +924,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ) =>
             FilterIncompatiblePrincipal(
                 foreignKey,
-                FindIdentityMap(foreignKey.PrincipalKey)?.TryGetEntryUsingRelationshipSnapshot(
-                    foreignKey,
-                    dependentEntry
-                )
+                FindIdentityMap(foreignKey.PrincipalKey)
+                    ?.TryGetEntryUsingRelationshipSnapshot(foreignKey, dependentEntry)
             );
 
         private static InternalEntityEntry? FilterIncompatiblePrincipal(
@@ -977,9 +973,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 return;
             }
 
-            FindIdentityMap(foreignKey.DeclaringEntityType.FindPrimaryKey())?.FindDependentsMap(
-                foreignKey
-            )?.Update(entry);
+            FindIdentityMap(foreignKey.DeclaringEntityType.FindPrimaryKey())
+                ?.FindDependentsMap(foreignKey)
+                ?.Update(entry);
         }
 
         /// <summary>

@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     // this can be null in test env.
                     return (IDiagnosticAnalyzerService?)analyzerProviders
                         .Where(p => p.Value is IDiagnosticAnalyzerService)
-                        .SingleOrDefault()?.Value;
+                        .SingleOrDefault()
+                        ?.Value;
                 }
 
                 private static ImmutableArray<IIncrementalAnalyzer> GetIncrementalAnalyzers(

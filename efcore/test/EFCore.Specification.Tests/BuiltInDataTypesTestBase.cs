@@ -1365,9 +1365,9 @@ namespace Microsoft.EntityFrameworkCore
 
             if (
                 UnwrapNullableType(
-                    entityType.FindProperty(
-                        nameof(BuiltInNullableDataTypes.Enum64)
-                    )?.GetProviderClrType()
+                    entityType
+                        .FindProperty(nameof(BuiltInNullableDataTypes.Enum64))
+                        ?.GetProviderClrType()
                 ) == typeof(long)
             )
             {
@@ -1400,9 +1400,9 @@ namespace Microsoft.EntityFrameworkCore
 
             if (
                 UnwrapNullableType(
-                    entityType.FindProperty(
-                        nameof(BuiltInNullableDataTypes.Enum32)
-                    )?.GetProviderClrType()
+                    entityType
+                        .FindProperty(nameof(BuiltInNullableDataTypes.Enum32))
+                        ?.GetProviderClrType()
                 ) == typeof(int)
             )
             {
@@ -1435,9 +1435,9 @@ namespace Microsoft.EntityFrameworkCore
 
             if (
                 UnwrapNullableType(
-                    entityType.FindProperty(
-                        nameof(BuiltInNullableDataTypes.Enum16)
-                    )?.GetProviderClrType()
+                    entityType
+                        .FindProperty(nameof(BuiltInNullableDataTypes.Enum16))
+                        ?.GetProviderClrType()
                 ) == typeof(short)
             )
             {
@@ -1470,9 +1470,9 @@ namespace Microsoft.EntityFrameworkCore
 
             if (
                 UnwrapNullableType(
-                    entityType.FindProperty(
-                        nameof(BuiltInNullableDataTypes.Enum8)
-                    )?.GetProviderClrType()
+                    entityType
+                        .FindProperty(nameof(BuiltInNullableDataTypes.Enum8))
+                        ?.GetProviderClrType()
                 ) == typeof(byte)
             )
             {

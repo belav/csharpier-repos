@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.Remote.Services
         {
             // may return null in tests
             var assetSource = RemoteWorkspaceManager.Default.TryGetAssetSource();
-            return assetSource?
-                    .IsExperimentEnabledAsync(experimentName, CancellationToken.None)
+            return assetSource
+                    ?.IsExperimentEnabledAsync(experimentName, CancellationToken.None)
                     .Result ?? false;
         }
     }

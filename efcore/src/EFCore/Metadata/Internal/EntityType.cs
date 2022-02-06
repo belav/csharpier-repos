@@ -1103,9 +1103,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             OnForeignKeyUpdated(foreignKey);
 
-            return (ForeignKey?)Model.ConventionDispatcher.OnForeignKeyAdded(
-                foreignKey.Builder
-            )?.Metadata;
+            return (ForeignKey?)Model.ConventionDispatcher
+                .OnForeignKeyAdded(foreignKey.Builder)
+                ?.Metadata;
         }
 
         /// <summary>
@@ -1924,9 +1924,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Check.DebugAssert(added, "added is false");
             }
 
-            return (SkipNavigation?)Model.ConventionDispatcher.OnSkipNavigationAdded(
-                skipNavigation.Builder
-            )?.Metadata;
+            return (SkipNavigation?)Model.ConventionDispatcher
+                .OnSkipNavigationAdded(skipNavigation.Builder)
+                ?.Metadata;
         }
 
         private Type? ValidateClrMember(
@@ -2728,9 +2728,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            return (Property?)Model.ConventionDispatcher.OnPropertyAdded(
-                property.Builder
-            )?.Metadata;
+            return (Property?)Model.ConventionDispatcher
+                .OnPropertyAdded(property.Builder)
+                ?.Metadata;
         }
 
         /// <summary>

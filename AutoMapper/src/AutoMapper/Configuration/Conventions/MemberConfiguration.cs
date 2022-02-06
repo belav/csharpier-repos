@@ -178,8 +178,8 @@ namespace AutoMapper.Configuration.Conventions
                 : SourceMemberNamingConvention;
 
             var matches =
-                destinationMemberNamingConvention.SplittingExpression?
-                    .Matches(nameToSearch)
+                destinationMemberNamingConvention.SplittingExpression
+                    ?.Matches(nameToSearch)
                     .Cast<Match>()
                     .Select(m => sourceMemberNamingConvention.ReplaceValue(m))
                     .ToArray() ?? Array.Empty<string>();

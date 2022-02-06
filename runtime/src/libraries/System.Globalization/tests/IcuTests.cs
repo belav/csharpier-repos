@@ -18,10 +18,9 @@ namespace System.Globalization.Tests
             Type globalizationMode = Type.GetType("System.Globalization.GlobalizationMode");
             if (globalizationMode != null)
             {
-                MethodInfo methodInfo = globalizationMode.GetProperty(
-                    "UseNls",
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )?.GetMethod;
+                MethodInfo methodInfo = globalizationMode
+                    .GetProperty("UseNls", BindingFlags.NonPublic | BindingFlags.Static)
+                    ?.GetMethod;
                 if (methodInfo != null)
                 {
                     Assert.False((bool)methodInfo.Invoke(null, null));

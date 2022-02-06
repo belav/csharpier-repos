@@ -1948,9 +1948,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 if (
                     !principalEndConfigurationSource.HasValue
-                    || Metadata.GetPrincipalEndConfigurationSource()?.Overrides(
-                        principalEndConfigurationSource
-                    ) == true
+                    || Metadata
+                        .GetPrincipalEndConfigurationSource()
+                        ?.Overrides(principalEndConfigurationSource) == true
                 )
                 {
                     return this;
@@ -2025,9 +2025,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? dependentProperties
                     : (
                           (
-                              Metadata.GetPropertiesConfigurationSource()?.Overrides(
-                                  configurationSource
-                              ) ?? false
+                              Metadata
+                                  .GetPropertiesConfigurationSource()
+                                  ?.Overrides(configurationSource) ?? false
                           )
                               ? dependentEntityType.Builder.GetActualProperties(
                                     Metadata.Properties,
@@ -2040,9 +2040,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? principalProperties
                     : (
                           (
-                              Metadata.GetPrincipalKeyConfigurationSource()?.Overrides(
-                                  configurationSource
-                              ) ?? false
+                              Metadata
+                                  .GetPrincipalKeyConfigurationSource()
+                                  ?.Overrides(configurationSource) ?? false
                           )
                               ? principalEntityType.Builder.GetActualProperties(
                                     Metadata.PrincipalKey.Properties,
@@ -2831,18 +2831,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (oldRelationshipInverted)
                 {
                     navigationToPrincipal =
-                        Metadata.GetPrincipalToDependentConfigurationSource()?.Overrides(
-                            configurationSource
-                        ) ?? false
+                        Metadata
+                            .GetPrincipalToDependentConfigurationSource()
+                            ?.Overrides(configurationSource) ?? false
                             ? Metadata.PrincipalToDependent.CreateMemberIdentity()
                             : navigationToPrincipal;
                 }
                 else
                 {
                     navigationToPrincipal =
-                        Metadata.GetDependentToPrincipalConfigurationSource()?.Overrides(
-                            configurationSource
-                        ) ?? false
+                        Metadata
+                            .GetDependentToPrincipalConfigurationSource()
+                            ?.Overrides(configurationSource) ?? false
                             ? Metadata.DependentToPrincipal.CreateMemberIdentity()
                             : navigationToPrincipal;
                 }
@@ -2853,18 +2853,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (oldRelationshipInverted)
                 {
                     navigationToDependent =
-                        Metadata.GetDependentToPrincipalConfigurationSource()?.Overrides(
-                            configurationSource
-                        ) ?? false
+                        Metadata
+                            .GetDependentToPrincipalConfigurationSource()
+                            ?.Overrides(configurationSource) ?? false
                             ? Metadata.DependentToPrincipal.CreateMemberIdentity()
                             : navigationToDependent;
                 }
                 else
                 {
                     navigationToDependent =
-                        Metadata.GetPrincipalToDependentConfigurationSource()?.Overrides(
-                            configurationSource
-                        ) ?? false
+                        Metadata
+                            .GetPrincipalToDependentConfigurationSource()
+                            ?.Overrides(configurationSource) ?? false
                             ? Metadata.PrincipalToDependent.CreateMemberIdentity()
                             : navigationToDependent;
                 }
@@ -2897,18 +2897,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             isRequired ??= !oldRelationshipInverted
                 ? (
                       (
-                          Metadata.GetIsRequiredConfigurationSource()?.Overrides(
-                              configurationSource
-                          ) ?? false
+                          Metadata
+                              .GetIsRequiredConfigurationSource()
+                              ?.Overrides(configurationSource) ?? false
                       )
                           ? Metadata.IsRequired
                           : null
                   )
                 : (
                       (
-                          Metadata.GetIsRequiredDependentConfigurationSource()?.Overrides(
-                              ConfigurationSource.Explicit
-                          ) ?? false
+                          Metadata
+                              .GetIsRequiredDependentConfigurationSource()
+                              ?.Overrides(ConfigurationSource.Explicit) ?? false
                       )
                           ? Metadata.IsRequiredDependent
                           : null
@@ -2917,18 +2917,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             isRequiredDependent ??= !oldRelationshipInverted
                 ? (
                       (
-                          Metadata.GetIsRequiredDependentConfigurationSource()?.Overrides(
-                              configurationSource
-                          ) ?? false
+                          Metadata
+                              .GetIsRequiredDependentConfigurationSource()
+                              ?.Overrides(configurationSource) ?? false
                       )
                           ? Metadata.IsRequiredDependent
                           : null
                   )
                 : (
                       (
-                          Metadata.GetIsRequiredConfigurationSource()?.Overrides(
-                              ConfigurationSource.Explicit
-                          ) ?? false
+                          Metadata
+                              .GetIsRequiredConfigurationSource()
+                              ?.Overrides(ConfigurationSource.Explicit) ?? false
                       )
                           ? Metadata.IsRequired
                           : null
@@ -3083,8 +3083,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             InternalForeignKeyBuilder? newRelationshipBuilder;
             using (var batch = Metadata.DeclaringEntityType.Model.DelayConventions())
             {
-                var referencingSkipNavigations = Metadata.ReferencingSkipNavigations?
-                    .Select(
+                var referencingSkipNavigations = Metadata.ReferencingSkipNavigations
+                    ?.Select(
                         n =>
                             (
                                 Navigation: n,
@@ -3344,7 +3344,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 dependentProperties?.Count == 0 ? null : dependentProperties,
                                 principalKey,
                                 navigationToPrincipal?.Name
-                                    ?? referencingSkipNavigations?.FirstOrDefault().Navigation?.Inverse?.Name,
+                                    ?? referencingSkipNavigations
+                                        ?.FirstOrDefault()
+                                        .Navigation?.Inverse?.Name,
                                 isRequired,
                                 configurationSource: null
                             );
@@ -3814,8 +3816,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             // This workaround prevents the properties to be cleaned away before the new FK is created,
             // this should be replaced with reference counting
             // Issue #15898
-            var temporaryProperties = dependentProperties?
-                .Where(
+            var temporaryProperties = dependentProperties
+                ?.Where(
                     p =>
                         p.GetConfigurationSource() == ConfigurationSource.Convention
                         && ((IConventionProperty)p).IsImplicitlyCreated()
@@ -3830,8 +3832,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                       )!.Metadata
                     : null;
 
-            var temporaryKeyProperties = principalProperties?
-                .Where(
+            var temporaryKeyProperties = principalProperties
+                ?.Where(
                     p =>
                         p.GetConfigurationSource() == ConfigurationSource.Convention
                         && ((IConventionProperty)p).IsImplicitlyCreated()
@@ -3847,8 +3849,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : null;
 
             var removedForeignKeys = new List<ForeignKey>();
-            var referencingSkipNavigationName =
-                Metadata.ReferencingSkipNavigations?.FirstOrDefault()?.Inverse?.Name;
+            var referencingSkipNavigationName = Metadata.ReferencingSkipNavigations
+                ?.FirstOrDefault()
+                ?.Inverse?.Name;
             if (!Metadata.IsInModel)
             {
                 removedForeignKeys.Add(Metadata);
@@ -4955,9 +4958,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 (
                     principalProperties.Count == 0
-                    && Metadata.GetPropertiesConfigurationSource()?.Overrides(
-                        ConfigurationSource.Explicit
-                    ) != true
+                    && Metadata
+                        .GetPropertiesConfigurationSource()
+                        ?.Overrides(ConfigurationSource.Explicit) != true
                 )
                 || Metadata.GetPropertiesConfigurationSource()?.Overrides(configurationSource)
                     != true

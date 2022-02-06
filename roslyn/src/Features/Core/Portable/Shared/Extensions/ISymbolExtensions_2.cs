@@ -219,18 +219,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return symbol switch
             {
                 IParameterSymbol parameter
-                  => GetParameterDocumentation(
-                      parameter,
-                      compilation,
-                      cancellationToken
-                  )?.GetParameterText(parameter.Name),
+                  => GetParameterDocumentation(parameter, compilation, cancellationToken)
+                      ?.GetParameterText(parameter.Name),
                 ITypeParameterSymbol typeParam
-                  => typeParam.ContainingSymbol.GetDocumentationComment(
-                      compilation,
-                      expandIncludes: true,
-                      expandInheritdoc: true,
-                      cancellationToken: cancellationToken
-                  )?.GetTypeParameterText(typeParam.Name),
+                  => typeParam.ContainingSymbol
+                      .GetDocumentationComment(
+                          compilation,
+                          expandIncludes: true,
+                          expandInheritdoc: true,
+                          cancellationToken: cancellationToken
+                      )
+                      ?.GetTypeParameterText(typeParam.Name),
                 IMethodSymbol method
                   => GetMethodDocumentation(method, compilation, cancellationToken).SummaryText,
                 IAliasSymbol alias

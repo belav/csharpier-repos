@@ -2619,7 +2619,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     l =>
                         Services
                             .GetLanguageServices(l)
-                            .GetService<IProjectExistsUIContextProviderLanguageService>()?.GetUIContext()
+                            .GetService<IProjectExistsUIContextProviderLanguageService>()
+                            ?.GetUIContext()
                 );
 
                 // UIContexts can be "zombied" if UIContexts aren't supported because we're in a command line build or in other scenarios.

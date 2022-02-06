@@ -351,8 +351,8 @@ internal class ViewComponentTagHelperDescriptorFactory
             )
             .FirstOrDefault();
         var name =
-            viewComponentAttribute?
-                .NamedArguments.Where(
+            viewComponentAttribute
+                ?.NamedArguments.Where(
                     namedArgument =>
                         string.Equals(
                             namedArgument.Key,

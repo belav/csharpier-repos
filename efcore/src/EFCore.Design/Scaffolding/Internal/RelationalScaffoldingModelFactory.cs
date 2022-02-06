@@ -248,11 +248,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Type? sequenceType = null;
             if (sequence.StoreType != null)
             {
-                sequenceType = _scaffoldingTypeMapper.FindMapping(
-                    sequence.StoreType,
-                    keyOrIndex: false,
-                    rowVersion: false
-                )?.ClrType;
+                sequenceType = _scaffoldingTypeMapper
+                    .FindMapping(sequence.StoreType, keyOrIndex: false, rowVersion: false)
+                    ?.ClrType;
             }
 
             if (sequenceType != null && !Sequence.SupportedTypes.Contains(sequenceType))

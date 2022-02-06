@@ -99,12 +99,14 @@ namespace Roslyn.Test.Utilities.PDB
 
             pdbOptions.VerifyPdbOption("portability-policy", portabilityPolicy);
 
-            var compilerVersion =
-                typeof(Compilation).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            var compilerVersion = typeof(Compilation).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
             Assert.Equal(compilerVersion.ToString(), pdbOptions["compiler-version"]);
 
-            var runtimeVersion =
-                typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            var runtimeVersion = typeof(object).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
             Assert.Equal(runtimeVersion, pdbOptions[CompilationOptionNames.RuntimeVersion]);
 
             pdbOptions.VerifyPdbOption(

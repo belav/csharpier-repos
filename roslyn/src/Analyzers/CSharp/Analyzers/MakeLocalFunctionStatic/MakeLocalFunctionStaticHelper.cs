@@ -42,8 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                 ISymbol calledLocationFunction
             )
             {
-                var node =
-                    calledLocationFunction.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+                var node = calledLocationFunction.DeclaringSyntaxReferences
+                    .FirstOrDefault()
+                    ?.GetSyntax();
                 // Contains also returns true if node is equal to the containing local function
                 return containingLocalFunction.Contains(node);
             }

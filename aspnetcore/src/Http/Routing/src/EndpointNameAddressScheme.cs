@@ -97,8 +97,9 @@ internal sealed class EndpointNameAddressScheme : IEndpointAddressScheme<string>
         string? GetEndpointName(Endpoint endpoint)
         {
             if (
-                endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
-                == true
+                endpoint.Metadata
+                    .GetMetadata<ISuppressLinkGenerationMetadata>()
+                    ?.SuppressLinkGeneration == true
             )
             {
                 // Skip anything that's suppressed for linking.

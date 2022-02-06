@@ -154,8 +154,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             // To get a Speculative SemanticModel (which is much faster), we need to
             // walk up to the node the DocumentationTrivia is attached to.
-            var parentNode =
-                token.Parent?.FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()?.ParentTrivia.Token.Parent;
+            var parentNode = token.Parent
+                ?.FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()
+                ?.ParentTrivia.Token.Parent;
             _testSpeculativeNodeCallback?.Invoke(parentNode);
             if (parentNode == null)
             {

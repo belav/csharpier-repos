@@ -212,8 +212,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             windowFrame.Show();
 
-            var openedDocument = textBuffer?
-                .AsTextContainer()
+            var openedDocument = textBuffer
+                ?.AsTextContainer()
                 .GetRelatedDocuments()
                 .FirstOrDefault();
             if (openedDocument != null)

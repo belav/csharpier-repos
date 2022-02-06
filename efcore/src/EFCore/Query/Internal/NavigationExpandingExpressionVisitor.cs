@@ -2010,8 +2010,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         && navigationTreeExpression.Value is EntityReference entityReference
                     )
                     {
-                        var primaryKeyProperties =
-                            entityReference.EntityType.FindPrimaryKey()?.Properties;
+                        var primaryKeyProperties = entityReference.EntityType
+                            .FindPrimaryKey()
+                            ?.Properties;
                         if (primaryKeyProperties != null)
                         {
                             for (var i = 0; i < primaryKeyProperties.Count; i++)
@@ -2053,8 +2054,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             is EntityReference subqueryEntityReference
                     )
                     {
-                        var primaryKeyProperties =
-                            subqueryEntityReference.EntityType.FindPrimaryKey()?.Properties;
+                        var primaryKeyProperties = subqueryEntityReference.EntityType
+                            .FindPrimaryKey()
+                            ?.Properties;
                         if (primaryKeyProperties != null)
                         {
                             for (var i = 0; i < primaryKeyProperties.Count; i++)

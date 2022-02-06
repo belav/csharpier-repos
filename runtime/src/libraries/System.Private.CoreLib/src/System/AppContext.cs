@@ -27,7 +27,10 @@ namespace System
         public static string? TargetFrameworkName =>
             // The Target framework is not the framework that the process is actually running on.
             // It is the value read from the TargetFrameworkAttribute on the .exe that started the process.
-            Assembly.GetEntryAssembly()?.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName;
+            Assembly
+                .GetEntryAssembly()
+                ?.GetCustomAttribute<TargetFrameworkAttribute>()
+                ?.FrameworkName;
 
         public static object? GetData(string name)
         {

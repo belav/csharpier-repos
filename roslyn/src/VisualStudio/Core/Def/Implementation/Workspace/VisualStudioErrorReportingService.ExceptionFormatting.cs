@@ -183,8 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             stringBuilder.Append(
                 string.Join(
                     ",",
-                    method?
-                        .GetParameters()
+                    method
+                        ?.GetParameters()
                         .Select(t => (t.ParameterType?.Name ?? "<UnknownType>") + " " + t.Name)
                         ?? Array.Empty<string>()
                 )

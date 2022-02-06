@@ -647,10 +647,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (navigation != null)
             {
-                navigation =
-                    (Navigation?)DeclaringEntityType.Model.ConventionDispatcher.OnNavigationAdded(
-                        navigation.Builder
-                    )?.Metadata;
+                navigation = (Navigation?)DeclaringEntityType.Model.ConventionDispatcher
+                    .OnNavigationAdded(navigation.Builder)
+                    ?.Metadata;
             }
             else
             {

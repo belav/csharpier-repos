@@ -112,10 +112,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (entityType.IsDocumentRoot())
             {
-                entityTypeBuilder.HasDiscriminator(typeof(string))?.HasValue(
-                    entityType,
-                    entityType.ShortName()
-                );
+                entityTypeBuilder
+                    .HasDiscriminator(typeof(string))
+                    ?.HasValue(entityType, entityType.ShortName());
             }
             else
             {

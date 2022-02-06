@@ -38,9 +38,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             Dependencies = dependencies;
 
-            var configuredFactory = RelationalOptionsExtension.Extract(
-                dependencies.Options
-            )?.ExecutionStrategyFactory;
+            var configuredFactory = RelationalOptionsExtension
+                .Extract(dependencies.Options)
+                ?.ExecutionStrategyFactory;
 
             _createExecutionStrategy = configuredFactory ?? CreateDefaultStrategy;
         }

@@ -139,7 +139,8 @@ internal class CompiledPageRouteModelProvider : IPageRouteModelProvider
         {
             return viewDescriptor.Item.Metadata
                 .OfType<RazorCompiledItemMetadataAttribute>()
-                .FirstOrDefault(f => f.Key == RouteTemplateKey)?.Value;
+                .FirstOrDefault(f => f.Key == RouteTemplateKey)
+                ?.Value;
         }
 
         return null;

@@ -1103,11 +1103,12 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     {
                         solution.Workspace.Services
                             .GetLanguageServices(language)
-                            .GetService<IRenameRewriterLanguageService>()?.TryAddPossibleNameConflicts(
-                            symbol,
-                            _replacementText,
-                            _possibleNameConflicts
-                        );
+                            .GetService<IRenameRewriterLanguageService>()
+                            ?.TryAddPossibleNameConflicts(
+                                symbol,
+                                _replacementText,
+                                _possibleNameConflicts
+                            );
                     }
 
                     await AddDocumentsWithPotentialConflictsAsync(documentsFromAffectedProjects)

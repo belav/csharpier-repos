@@ -64,9 +64,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             {
                 if (!_builder.Metadata.IsInModel && PrincipalEntityType.IsInModel)
                 {
-                    _builder = PrincipalEntityType.FindNavigation(
-                        _builder.Metadata.PrincipalToDependent!.Name
-                    )?.ForeignKey.Builder!;
+                    _builder = PrincipalEntityType
+                        .FindNavigation(_builder.Metadata.PrincipalToDependent!.Name)
+                        ?.ForeignKey.Builder!;
                 }
 
                 return _builder;
@@ -984,10 +984,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
             if (
                 relatedEntityType == null
-                && ((IReadOnlyModel)model).GetProductVersion()?.StartsWith(
-                    "2.",
-                    StringComparison.Ordinal
-                ) == true
+                && ((IReadOnlyModel)model)
+                    .GetProductVersion()
+                    ?.StartsWith("2.", StringComparison.Ordinal) == true
             )
             {
                 var owner = DependentEntityType.FindOwnership()!.PrincipalEntityType;

@@ -137,9 +137,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetMaxIdentifierLengthConfigurationSource(
             this IConventionModel model
         ) =>
-            model.FindAnnotation(
-                RelationalAnnotationNames.MaxIdentifierLength
-            )?.GetConfigurationSource();
+            model
+                .FindAnnotation(RelationalAnnotationNames.MaxIdentifierLength)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Finds a sequence with the given name.

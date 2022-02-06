@@ -4070,8 +4070,9 @@ namespace Microsoft.EntityFrameworkCore
                     optionsBuilder.UseInternalServiceProvider(_internalServicesProvider);
                 }
                 else if (
-                    optionsBuilder.Options.FindExtension<CoreOptionsExtension>()?.InternalServiceProvider
-                    == null
+                    optionsBuilder.Options
+                        .FindExtension<CoreOptionsExtension>()
+                        ?.InternalServiceProvider == null
                 )
                 {
                     optionsBuilder.EnableServiceProviderCaching(false);

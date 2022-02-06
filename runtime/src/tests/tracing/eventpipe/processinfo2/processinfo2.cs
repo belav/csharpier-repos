@@ -331,8 +331,9 @@ namespace Tracing.Tests.ProcessInfoValidation
                 .TrimEnd('\0');
             Logger.logger.Log($"ClrProductVersion: \"{clrProductVersion}\"");
 
-            string expectedClrProductVersion =
-                typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            string expectedClrProductVersion = typeof(object).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
 
             Utils.Assert(
                 expectedClrProductVersion.Equals(clrProductVersion),

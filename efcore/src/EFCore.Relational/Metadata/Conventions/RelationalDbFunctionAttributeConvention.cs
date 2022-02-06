@@ -99,8 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             var methodInfo = dbFunctionBuilder.Metadata.MethodInfo;
-            var dbFunctionAttribute = methodInfo?
-                .GetCustomAttributes<DbFunctionAttribute>()
+            var dbFunctionAttribute = methodInfo
+                ?.GetCustomAttributes<DbFunctionAttribute>()
                 .SingleOrDefault();
             if (dbFunctionAttribute != null)
             {

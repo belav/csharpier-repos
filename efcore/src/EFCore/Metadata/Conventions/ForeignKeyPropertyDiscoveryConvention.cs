@@ -326,11 +326,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                             foreignKey.DeclaringEntityType,
                                             foreignKey.PrincipalEntityType
                                         )!;
-                                    return batch.Run(
-                                        invertedRelationshipBuilder.HasForeignKey(
-                                            candidatePropertiesOnPrincipal
-                                        )!.Metadata
-                                    )?.Builder;
+                                    return batch
+                                        .Run(
+                                            invertedRelationshipBuilder.HasForeignKey(
+                                                candidatePropertiesOnPrincipal
+                                            )!.Metadata
+                                        )
+                                        ?.Builder;
                                 }
 
                                 foreignKeyProperties = null;

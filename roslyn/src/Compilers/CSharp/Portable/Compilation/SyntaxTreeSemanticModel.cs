@@ -2104,10 +2104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             CheckSyntaxNode(declarationSyntax);
 
-            return this.GetMemberModel(declarationSyntax)?.GetDeclaredSymbol(
-                declarationSyntax,
-                cancellationToken
-            );
+            return this.GetMemberModel(declarationSyntax)
+                ?.GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
         /// <summary>

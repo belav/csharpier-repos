@@ -72,9 +72,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetContainerConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                CosmosAnnotationNames.ContainerName
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(CosmosAnnotationNames.ContainerName)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the name of the parent property to which the entity type is mapped.
@@ -178,9 +178,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetPartitionKeyPropertyNameConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                CosmosAnnotationNames.PartitionKeyName
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(CosmosAnnotationNames.PartitionKeyName)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the property that is used to store the partition key.
@@ -354,9 +354,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetAnalyticalStoreTimeToLiveConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                CosmosAnnotationNames.AnalyticalStoreTimeToLive
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(CosmosAnnotationNames.AnalyticalStoreTimeToLive)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the default time to live in seconds at container scope.
@@ -401,9 +401,9 @@ namespace Microsoft.EntityFrameworkCore
         public static ConfigurationSource? GetDefaultTimeToLiveConfigurationSource(
             this IConventionEntityType entityType
         ) =>
-            entityType.FindAnnotation(
-                CosmosAnnotationNames.DefaultTimeToLive
-            )?.GetConfigurationSource();
+            entityType
+                .FindAnnotation(CosmosAnnotationNames.DefaultTimeToLive)
+                ?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the provisioned throughput at container scope.

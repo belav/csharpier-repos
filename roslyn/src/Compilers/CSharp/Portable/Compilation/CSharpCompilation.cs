@@ -4976,9 +4976,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (!_lazyEmitNullablePublicOnly.HasValue())
                 {
                     bool value =
-                        SyntaxTrees.FirstOrDefault()?.Options?.Features?.ContainsKey(
-                            "nullablePublicOnly"
-                        ) == true;
+                        SyntaxTrees
+                            .FirstOrDefault()
+                            ?.Options?.Features?.ContainsKey("nullablePublicOnly") == true;
                     _lazyEmitNullablePublicOnly = value.ToThreeState();
                 }
                 return _lazyEmitNullablePublicOnly.Value();

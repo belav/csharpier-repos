@@ -485,8 +485,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Avoid resolving previously resolved missing references. If we call to the resolver again we would create new assembly symbols for them,
                     // which would not match the previously created ones. As a result we would get duplicate PE types and conversion errors.
                     var implicitReferenceResolutions =
-                        compilation.ScriptCompilationInfo?
-                            .PreviousScriptCompilation?.GetBoundReferenceManager()
+                        compilation.ScriptCompilationInfo
+                            ?.PreviousScriptCompilation?.GetBoundReferenceManager()
                             .ImplicitReferenceResolutions
                         ?? ImmutableDictionary<
                             AssemblyIdentity,

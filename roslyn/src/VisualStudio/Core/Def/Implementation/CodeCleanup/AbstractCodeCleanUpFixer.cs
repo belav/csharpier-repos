@@ -97,10 +97,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                 ) && contextProjectNameObject is string contextProjectName
             )
             {
-                projectId = _workspace.GetProjectWithHierarchyAndName(
-                    hierarchy,
-                    contextProjectName
-                )?.Id;
+                projectId = _workspace
+                    .GetProjectWithHierarchyAndName(hierarchy, contextProjectName)
+                    ?.Id;
             }
 
             if (projectId is null)

@@ -576,9 +576,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         ) => (genericName as GenericNameSyntax)?.TypeArgumentList.Arguments ?? default;
 
         public SyntaxNode? GetTargetOfMemberBinding(SyntaxNode? node) =>
-            (
-                node as MemberBindingExpressionSyntax
-            ).GetParentConditionalAccessExpression()?.Expression;
+            (node as MemberBindingExpressionSyntax)
+                .GetParentConditionalAccessExpression()
+                ?.Expression;
 
         public SyntaxNode GetNameOfMemberBindingExpression(SyntaxNode node) =>
             ((MemberBindingExpressionSyntax)node).Name;

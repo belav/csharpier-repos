@@ -117,8 +117,9 @@ namespace ILCompiler
             string document = null;
             int? lineNumber = null;
 
-            IEnumerable<ILSequencePoint> sequencePoints =
-                origin.GetDebugInfo()?.GetSequencePoints();
+            IEnumerable<ILSequencePoint> sequencePoints = origin
+                .GetDebugInfo()
+                ?.GetSequencePoints();
             if (sequencePoints != null)
             {
                 foreach (var sequencePoint in sequencePoints)

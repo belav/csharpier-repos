@@ -39,8 +39,8 @@ public sealed class HtmlAttributeIntermediateNode : IntermediateNode
             nameof(AttributeNameExpression),
             string.Join(
                 string.Empty,
-                AttributeNameExpression?
-                    .FindDescendantNodes<IntermediateToken>()
+                AttributeNameExpression
+                    ?.FindDescendantNodes<IntermediateToken>()
                     .Select(n => n.Content) ?? Array.Empty<string>()
             )
         );

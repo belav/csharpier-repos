@@ -44,8 +44,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             // want to suggest removing the entire if statement as that might lead to change of semantics.
             // So, we conservatively bail out from removable assignment analysis for such cases.
 
-            var statementAncestor =
-                unusedSymbolWriteOperation.Syntax.FirstAncestorOrSelf<StatementSyntax>()?.Parent;
+            var statementAncestor = unusedSymbolWriteOperation.Syntax
+                .FirstAncestorOrSelf<StatementSyntax>()
+                ?.Parent;
             switch (statementAncestor)
             {
                 case BlockSyntax _:

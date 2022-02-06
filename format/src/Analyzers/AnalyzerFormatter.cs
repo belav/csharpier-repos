@@ -82,9 +82,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             var fixableCompilerDiagnostics = allFixers
                 .Where(
                     codefix =>
-                        codefix.GetFixAllProvider()?.GetSupportedFixAllScopes()?.Contains(
-                            FixAllScope.Solution
-                        ) == true
+                        codefix
+                            .GetFixAllProvider()
+                            ?.GetSupportedFixAllScopes()
+                            ?.Contains(FixAllScope.Solution) == true
                 )
                 .SelectMany(
                     codefix =>

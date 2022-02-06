@@ -384,12 +384,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 {
                     var assemblyName = GetAssemblyNameFromProjectPath(projectPath);
 
-                    var parseOptions = GetLanguageService<ISyntaxTreeFactoryService>(
-                        language
-                    )?.GetDefaultParseOptions();
+                    var parseOptions = GetLanguageService<ISyntaxTreeFactoryService>(language)
+                        ?.GetDefaultParseOptions();
                     var compilationOptions = GetLanguageService<ICompilationFactoryService>(
                         language
-                    )?.GetDefaultCompilationOptions();
+                    )
+                        ?.GetDefaultCompilationOptions();
 
                     return Task.FromResult(
                         ProjectInfo.Create(

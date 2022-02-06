@@ -1757,17 +1757,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     || table.Indexes.Any(u => u.Columns.Contains(column));
             }
 
-            return Dependencies.TypeMappingSource.FindMapping(
-                operation.ClrType,
-                null,
-                keyOrIndex,
-                operation.IsUnicode,
-                operation.MaxLength,
-                operation.IsRowVersion,
-                operation.IsFixedLength,
-                operation.Precision,
-                operation.Scale
-            )?.StoreType;
+            return Dependencies.TypeMappingSource
+                .FindMapping(
+                    operation.ClrType,
+                    null,
+                    keyOrIndex,
+                    operation.IsUnicode,
+                    operation.MaxLength,
+                    operation.IsRowVersion,
+                    operation.IsFixedLength,
+                    operation.Precision,
+                    operation.Scale
+                )
+                ?.StoreType;
         }
 
         /// <summary>
@@ -2105,9 +2107,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? schema,
             string tableName
         ) =>
-            model?.GetRelationalModel().FindTable(tableName, schema)?.EntityTypeMappings.Select(
-                m => m.EntityType
-            );
+            model
+                ?.GetRelationalModel()
+                .FindTable(tableName, schema)
+                ?.EntityTypeMappings.Select(m => m.EntityType);
 
         /// <summary>
         ///     Finds some <see cref="IProperty" /> mapped to the given column.
@@ -2129,8 +2132,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string tableName,
             string columnName
         ) =>
-            model?.GetRelationalModel().FindTable(tableName, schema)?
-                .Columns.FirstOrDefault(c => c.Name == columnName)?.PropertyMappings.First()
+            model
+                ?.GetRelationalModel()
+                .FindTable(tableName, schema)
+                ?.Columns.FirstOrDefault(c => c.Name == columnName)
+                ?.PropertyMappings.First()
                 .Property;
 
         /// <summary>
