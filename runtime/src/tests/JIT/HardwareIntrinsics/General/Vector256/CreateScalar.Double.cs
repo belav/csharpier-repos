@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<Double>>() / sizeof(Double);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<Double>>() / sizeof(Double);
 
         public bool Succeeded { get; set; } = true;
 
@@ -58,20 +59,28 @@ namespace JIT.HardwareIntrinsics.General
 
             Double value = TestLibrary.Generator.GetDouble();
             object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.CreateScalar), new Type[] { typeof(Double) })
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector256.CreateScalar), new Type[] { typeof(Double) })
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector256<Double>)(result), value);
         }
 
-        private void ValidateResult(Vector256<Double> result, Double expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<Double> result,
+            Double expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             Double[] resultElements = new Double[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(Double[] resultElements, Double expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Double[] resultElements,
+            Double expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -93,9 +102,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.CreateScalar(Double): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.CreateScalar(Double): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -21,7 +21,13 @@ public interface IUserAuthenticationTokenStore<TUser> : IUserStore<TUser> where 
     /// <param name="value">The value of the token.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task SetTokenAsync(TUser user, string loginProvider, string name, string value, CancellationToken cancellationToken);
+    Task SetTokenAsync(
+        TUser user,
+        string loginProvider,
+        string name,
+        string value,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Deletes a token for a user.
@@ -31,7 +37,12 @@ public interface IUserAuthenticationTokenStore<TUser> : IUserStore<TUser> where 
     /// <param name="name">The name of the token.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task RemoveTokenAsync(TUser user, string loginProvider, string name, CancellationToken cancellationToken);
+    Task RemoveTokenAsync(
+        TUser user,
+        string loginProvider,
+        string name,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Returns the token value.
@@ -41,5 +52,10 @@ public interface IUserAuthenticationTokenStore<TUser> : IUserStore<TUser> where 
     /// <param name="name">The name of the token.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task<string> GetTokenAsync(TUser user, string loginProvider, string name, CancellationToken cancellationToken);
+    Task<string> GetTokenAsync(
+        TUser user,
+        string loginProvider,
+        string name,
+        CancellationToken cancellationToken
+    );
 }

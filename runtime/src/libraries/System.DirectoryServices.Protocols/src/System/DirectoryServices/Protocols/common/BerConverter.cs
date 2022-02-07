@@ -57,7 +57,9 @@ namespace System.DirectoryServices.Protocols
                     if (valueCount >= value.Length)
                     {
                         // we don't have enough argument for the format string
-                        Debug.WriteLine("value argument is not valid, valueCount >= value.Length\n");
+                        Debug.WriteLine(
+                            "value argument is not valid, valueCount >= value.Length\n"
+                        );
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
 
@@ -69,7 +71,12 @@ namespace System.DirectoryServices.Protocols
                     }
 
                     // one int argument
-                    error = BerPal.PrintInt(berElement, new string(fmt, 1), (int)value[valueCount], tag);
+                    error = BerPal.PrintInt(
+                        berElement,
+                        new string(fmt, 1),
+                        (int)value[valueCount],
+                        tag
+                    );
 
                     // increase the value count
                     valueCount++;
@@ -79,7 +86,9 @@ namespace System.DirectoryServices.Protocols
                     if (valueCount >= value.Length)
                     {
                         // we don't have enough argument for the format string
-                        Debug.WriteLine("value argument is not valid, valueCount >= value.Length\n");
+                        Debug.WriteLine(
+                            "value argument is not valid, valueCount >= value.Length\n"
+                        );
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
 
@@ -91,7 +100,12 @@ namespace System.DirectoryServices.Protocols
                     }
 
                     // one int argument
-                    error = BerPal.PrintInt(berElement, new string(fmt, 1), (bool)value[valueCount] ? 1 : 0, tag);
+                    error = BerPal.PrintInt(
+                        berElement,
+                        new string(fmt, 1),
+                        (bool)value[valueCount] ? 1 : 0,
+                        tag
+                    );
 
                     // increase the value count
                     valueCount++;
@@ -101,7 +115,9 @@ namespace System.DirectoryServices.Protocols
                     if (valueCount >= value.Length)
                     {
                         // we don't have enough argument for the format string
-                        Debug.WriteLine("value argument is not valid, valueCount >= value.Length\n");
+                        Debug.WriteLine(
+                            "value argument is not valid, valueCount >= value.Length\n"
+                        );
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
 
@@ -130,7 +146,9 @@ namespace System.DirectoryServices.Protocols
                     if (valueCount >= value.Length)
                     {
                         // we don't have enough argument for the format string
-                        Debug.WriteLine("value argument is not valid, valueCount >= value.Length\n");
+                        Debug.WriteLine(
+                            "value argument is not valid, valueCount >= value.Length\n"
+                        );
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
 
@@ -153,14 +171,18 @@ namespace System.DirectoryServices.Protocols
                     if (valueCount >= value.Length)
                     {
                         // we don't have enough argument for the format string
-                        Debug.WriteLine("value argument is not valid, valueCount >= value.Length\n");
+                        Debug.WriteLine(
+                            "value argument is not valid, valueCount >= value.Length\n"
+                        );
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
 
                     if (value[valueCount] != null && !(value[valueCount] is string[]))
                     {
                         // argument is wrong
-                        Debug.WriteLine("type should be string[], but receiving value has type of ");
+                        Debug.WriteLine(
+                            "type should be string[], but receiving value has type of "
+                        );
                         Debug.WriteLine(value[valueCount].GetType());
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
@@ -194,14 +216,18 @@ namespace System.DirectoryServices.Protocols
                     if (valueCount >= value.Length)
                     {
                         // we don't have enough argument for the format string
-                        Debug.WriteLine("value argument is not valid, valueCount >= value.Length\n");
+                        Debug.WriteLine(
+                            "value argument is not valid, valueCount >= value.Length\n"
+                        );
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
 
                     if (value[valueCount] != null && !(value[valueCount] is byte[][]))
                     {
                         // argument is wrong
-                        Debug.WriteLine("type should be byte[][], but receiving value has type of ");
+                        Debug.WriteLine(
+                            "type should be byte[][], but receiving value has type of "
+                        );
                         Debug.WriteLine(value[valueCount].GetType());
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
@@ -217,7 +243,9 @@ namespace System.DirectoryServices.Protocols
                     if (valueCount >= value.Length)
                     {
                         // we don't have enough argument for the format string
-                        Debug.WriteLine("value argument is not valid, valueCount >= value.Length\n");
+                        Debug.WriteLine(
+                            "value argument is not valid, valueCount >= value.Length\n"
+                        );
                         throw new ArgumentException(SR.BerConverterNotMatch);
                     }
 
@@ -343,7 +371,9 @@ namespace System.DirectoryServices.Protocols
             for (int formatCount = 0; formatCount < format.Length; formatCount++)
             {
                 char fmt = format[formatCount];
-                if (fmt == '{' || fmt == '}' || fmt == '[' || fmt == ']' || fmt == 'n' || fmt == 'x')
+                if (
+                    fmt == '{' || fmt == '}' || fmt == '[' || fmt == ']' || fmt == 'n' || fmt == 'x'
+                )
                 {
                     error = BerPal.ScanNext(berElement, new string(fmt, 1));
 
@@ -463,7 +493,12 @@ namespace System.DirectoryServices.Protocols
             return decodeResult;
         }
 
-        private static int EncodingByteArrayHelper(SafeBerHandle berElement, byte[] tempValue, char fmt, nuint tag)
+        private static int EncodingByteArrayHelper(
+            SafeBerHandle berElement,
+            byte[] tempValue,
+            char fmt,
+            nuint tag
+        )
         {
             int error = 0;
 
@@ -473,7 +508,13 @@ namespace System.DirectoryServices.Protocols
                 IntPtr tmp = Marshal.AllocHGlobal(tempValue.Length);
                 Marshal.Copy(tempValue, 0, tmp, tempValue.Length);
                 HGlobalMemHandle memHandle = new HGlobalMemHandle(tmp);
-                error = BerPal.PrintByteArray(berElement, new string(fmt, 1), memHandle, (uint)tempValue.Length, tag);
+                error = BerPal.PrintByteArray(
+                    berElement,
+                    new string(fmt, 1),
+                    memHandle,
+                    (uint)tempValue.Length,
+                    tag
+                );
             }
             else
             {
@@ -484,7 +525,11 @@ namespace System.DirectoryServices.Protocols
             return error;
         }
 
-        private static byte[] DecodingByteArrayHelper(SafeBerHandle berElement, char fmt, ref int error)
+        private static byte[] DecodingByteArrayHelper(
+            SafeBerHandle berElement,
+            char fmt,
+            ref int error
+        )
         {
             error = 0;
             IntPtr result = IntPtr.Zero;
@@ -519,7 +564,12 @@ namespace System.DirectoryServices.Protocols
             return byteArray;
         }
 
-        private static int EncodingMultiByteArrayHelper(SafeBerHandle berElement, byte[][] tempValue, char fmt, nuint tag)
+        private static int EncodingMultiByteArrayHelper(
+            SafeBerHandle berElement,
+            byte[][] tempValue,
+            char fmt,
+            nuint tag
+        )
         {
             IntPtr berValArray = IntPtr.Zero;
             IntPtr tempPtr = IntPtr.Zero;
@@ -546,7 +596,12 @@ namespace System.DirectoryServices.Protocols
                         {
                             managedBervalArray[i].bv_len = byteArray.Length;
                             managedBervalArray[i].bv_val = Marshal.AllocHGlobal(byteArray.Length);
-                            Marshal.Copy(byteArray, 0, managedBervalArray[i].bv_val, byteArray.Length);
+                            Marshal.Copy(
+                                byteArray,
+                                0,
+                                managedBervalArray[i].bv_val,
+                                byteArray.Length
+                            );
                         }
 
                         // allocate memory for the unmanaged structure
@@ -590,7 +645,11 @@ namespace System.DirectoryServices.Protocols
             return error;
         }
 
-        private static byte[][] DecodingMultiByteArrayHelper(SafeBerHandle berElement, char fmt, ref int error)
+        private static byte[][] DecodingMultiByteArrayHelper(
+            SafeBerHandle berElement,
+            char fmt,
+            ref int error
+        )
         {
             error = 0;
             // several berval

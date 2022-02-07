@@ -6,9 +6,11 @@ using System.Runtime.CompilerServices;
 using AutoMapper.Configuration;
 using AutoMapper.Configuration.Conventions;
 using AutoMapper.Internal;
+
 namespace AutoMapper
 {
     using static Execution.ExpressionBuilder;
+
     public interface IProfileConfiguration
     {
         IReadOnlyCollection<IMemberConfiguration> MemberConfigurations { get; }
@@ -19,7 +21,9 @@ namespace AutoMapper
         bool? AllowNullCollections { get; }
         bool? EnableNullPropagationForQueryMapping { get; }
         IReadOnlyCollection<Action<TypeMap, IMappingExpression>> AllTypeMapActions { get; }
-        IReadOnlyCollection<Action<PropertyMap, IMemberConfigurationExpression>> AllPropertyMapActions { get; }
+        IReadOnlyCollection<
+            Action<PropertyMap, IMemberConfigurationExpression>
+        > AllPropertyMapActions { get; }
 
         /// <summary>
         /// Source extension methods included for search
@@ -58,14 +62,17 @@ namespace AutoMapper
         IReadOnlyCollection<ITypeMapConfiguration> OpenTypeMapConfigs { get; }
         IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers { get; }
     }
+
     /// <summary>
     ///     Provides a named configuration for maps. Naming conventions become scoped per profile.
     /// </summary>
     public abstract class Profile : IProfileExpressionInternal, IProfileConfiguration
     {
-        private readonly List<ITypeMapConfiguration> _typeMapConfigs = new List<ITypeMapConfiguration>();
+        private readonly List<ITypeMapConfiguration> _typeMapConfigs =
+            new List<ITypeMapConfiguration>();
         private readonly PrePostfixName _prePostfixName = new PrePostfixName();
-        private readonly List<IMemberConfiguration> _memberConfigurations = new List<IMemberConfiguration>();
+        private readonly List<IMemberConfiguration> _memberConfigurations =
+            new List<IMemberConfiguration>();
         private List<Action<PropertyMap, IMemberConfigurationExpression>> _allPropertyMapActions;
         private List<Action<TypeMap, IMappingExpression>> _allTypeMapActions;
         private List<string> _globalIgnores;
@@ -85,8 +92,9 @@ namespace AutoMapper
             memberConfiguration.NameMapper.NamedMappers.Add(_prePostfixName);
             _memberConfigurations.Add(memberConfiguration);
         }
+
         protected Profile(string profileName, Action<IProfileExpression> configurationAction)
-            : this(profileName)  => configurationAction(this);
+            : this(profileName) => configurationAction(this);
 
         IMemberConfiguration DefaultMemberConfig => _memberConfigurations[0];
         IMemberConfiguration IProfileExpressionInternal.DefaultMemberConfig => DefaultMemberConfig;
@@ -95,16 +103,26 @@ namespace AutoMapper
         bool? IProfileConfiguration.MethodMappingEnabled => this.Internal().MethodMappingEnabled;
         bool? IProfileExpressionInternal.FieldMappingEnabled { get; set; }
         bool? IProfileConfiguration.FieldMappingEnabled => this.Internal().FieldMappingEnabled;
-        bool? IProfileConfiguration.EnableNullPropagationForQueryMapping => this.Internal().EnableNullPropagationForQueryMapping;
-        IReadOnlyCollection<Action<PropertyMap, IMemberConfigurationExpression>> IProfileConfiguration.AllPropertyMapActions
-            => _allPropertyMapActions.NullCheck();
-        IReadOnlyCollection<Action<TypeMap, IMappingExpression>> IProfileConfiguration.AllTypeMapActions => _allTypeMapActions.NullCheck();
-        IReadOnlyCollection<string> IProfileConfiguration.GlobalIgnores => _globalIgnores.NullCheck();
-        IReadOnlyCollection<IMemberConfiguration> IProfileConfiguration.MemberConfigurations => _memberConfigurations;
-        IReadOnlyCollection<MethodInfo> IProfileConfiguration.SourceExtensionMethods => _sourceExtensionMethods.NullCheck();
-        IReadOnlyCollection<ITypeMapConfiguration> IProfileConfiguration.TypeMapConfigs => _typeMapConfigs;
-        IReadOnlyCollection<ITypeMapConfiguration> IProfileConfiguration.OpenTypeMapConfigs => _openTypeMapConfigs.NullCheck();
-        IReadOnlyCollection<ValueTransformerConfiguration> IProfileConfiguration.ValueTransformers => _valueTransformerConfigs.NullCheck();
+        bool? IProfileConfiguration.EnableNullPropagationForQueryMapping =>
+            this.Internal().EnableNullPropagationForQueryMapping;
+        IReadOnlyCollection<
+            Action<PropertyMap, IMemberConfigurationExpression>
+        > IProfileConfiguration.AllPropertyMapActions => _allPropertyMapActions.NullCheck();
+        IReadOnlyCollection<
+            Action<TypeMap, IMappingExpression>
+        > IProfileConfiguration.AllTypeMapActions => _allTypeMapActions.NullCheck();
+        IReadOnlyCollection<string> IProfileConfiguration.GlobalIgnores =>
+            _globalIgnores.NullCheck();
+        IReadOnlyCollection<IMemberConfiguration> IProfileConfiguration.MemberConfigurations =>
+            _memberConfigurations;
+        IReadOnlyCollection<MethodInfo> IProfileConfiguration.SourceExtensionMethods =>
+            _sourceExtensionMethods.NullCheck();
+        IReadOnlyCollection<ITypeMapConfiguration> IProfileConfiguration.TypeMapConfigs =>
+            _typeMapConfigs;
+        IReadOnlyCollection<ITypeMapConfiguration> IProfileConfiguration.OpenTypeMapConfigs =>
+            _openTypeMapConfigs.NullCheck();
+        IReadOnlyCollection<ValueTransformerConfiguration> IProfileConfiguration.ValueTransformers =>
+            _valueTransformerConfigs.NullCheck();
 
         public virtual string ProfileName { get; }
         public bool? AllowNullDestinationValues { get; set; }
@@ -116,43 +134,72 @@ namespace AutoMapper
         public Func<ConstructorInfo, bool> ShouldUseConstructor { get; set; }
         public INamingConvention SourceMemberNamingConvention { get; set; }
         public INamingConvention DestinationMemberNamingConvention { get; set; }
-        public List<ValueTransformerConfiguration> ValueTransformers => _valueTransformerConfigs ??= new();
+        public List<ValueTransformerConfiguration> ValueTransformers =>
+            _valueTransformerConfigs ??= new();
 
         public void DisableConstructorMapping() => _constructorMappingEnabled = false;
 
-        void IProfileExpressionInternal.ForAllMaps(Action<TypeMap, IMappingExpression> configuration)
+        void IProfileExpressionInternal.ForAllMaps(
+            Action<TypeMap, IMappingExpression> configuration
+        )
         {
             _allTypeMapActions ??= new();
             _allTypeMapActions.Add(configuration);
         }
 
-        void IProfileExpressionInternal.ForAllPropertyMaps(Func<PropertyMap, bool> condition, Action<PropertyMap, IMemberConfigurationExpression> configuration)
+        void IProfileExpressionInternal.ForAllPropertyMaps(
+            Func<PropertyMap, bool> condition,
+            Action<PropertyMap, IMemberConfigurationExpression> configuration
+        )
         {
             _allPropertyMapActions ??= new();
-            _allPropertyMapActions.Add((pm, cfg) =>
-            {
-                if (condition(pm)) configuration(pm, cfg);
-            });
+            _allPropertyMapActions.Add(
+                (pm, cfg) =>
+                {
+                    if (condition(pm))
+                        configuration(pm, cfg);
+                }
+            );
         }
-        public IProjectionExpression<TSource, TDestination> CreateProjection<TSource, TDestination>() =>
-            CreateProjection<TSource, TDestination>(MemberList.Destination);
-        public IProjectionExpression<TSource, TDestination> CreateProjection<TSource, TDestination>(MemberList memberList) =>
-            (IProjectionExpression<TSource, TDestination>)CreateMapCore<TSource, TDestination>(memberList, projection: true);
+
+        public IProjectionExpression<TSource, TDestination> CreateProjection<
+            TSource,
+            TDestination
+        >() => CreateProjection<TSource, TDestination>(MemberList.Destination);
+
+        public IProjectionExpression<TSource, TDestination> CreateProjection<TSource, TDestination>(
+            MemberList memberList
+        ) =>
+            (IProjectionExpression<TSource, TDestination>)CreateMapCore<TSource, TDestination>(
+                memberList,
+                projection: true
+            );
+
         public IMappingExpression<TSource, TDestination> CreateMap<TSource, TDestination>() =>
             CreateMapCore<TSource, TDestination>(MemberList.Destination);
-        public IMappingExpression<TSource, TDestination> CreateMap<TSource, TDestination>(MemberList memberList) =>
-            CreateMapCore<TSource, TDestination>(memberList);
-        private IMappingExpression<TSource, TDestination> CreateMapCore<TSource, TDestination>(MemberList memberList, bool projection = false)
+
+        public IMappingExpression<TSource, TDestination> CreateMap<TSource, TDestination>(
+            MemberList memberList
+        ) => CreateMapCore<TSource, TDestination>(memberList);
+
+        private IMappingExpression<TSource, TDestination> CreateMapCore<TSource, TDestination>(
+            MemberList memberList,
+            bool projection = false
+        )
         {
             var mappingExp = new MappingExpression<TSource, TDestination>(memberList, projection);
             _typeMapConfigs.Add(mappingExp);
             return mappingExp;
         }
 
-        public IMappingExpression CreateMap(Type sourceType, Type destinationType) => 
+        public IMappingExpression CreateMap(Type sourceType, Type destinationType) =>
             CreateMap(sourceType, destinationType, MemberList.Destination);
 
-        public IMappingExpression CreateMap(Type sourceType, Type destinationType, MemberList memberList)
+        public IMappingExpression CreateMap(
+            Type sourceType,
+            Type destinationType,
+            MemberList memberList
+        )
         {
             var types = new TypePair(sourceType, destinationType);
             var map = new MappingExpression(types, memberList);
@@ -164,29 +211,44 @@ namespace AutoMapper
             }
             return map;
         }
+
         public void ClearPrefixes() => _prePostfixName.Prefixes.Clear();
+
         public void ReplaceMemberName(string original, string newValue) =>
             DefaultMemberConfig.AddName<ReplaceName>(_ => _.AddReplace(original, newValue));
-        public void RecognizePrefixes(params string[] prefixes) => _prePostfixName.Prefixes.AddRange(prefixes);
-        public void RecognizePostfixes(params string[] postfixes) => _prePostfixName.Postfixes.AddRange(postfixes);
-        public void RecognizeDestinationPrefixes(params string[] prefixes) => _prePostfixName.DestinationPrefixes.AddRange(prefixes);
-        public void RecognizeDestinationPostfixes(params string[] postfixes) => _prePostfixName.DestinationPostfixes.AddRange(postfixes);
+
+        public void RecognizePrefixes(params string[] prefixes) =>
+            _prePostfixName.Prefixes.AddRange(prefixes);
+
+        public void RecognizePostfixes(params string[] postfixes) =>
+            _prePostfixName.Postfixes.AddRange(postfixes);
+
+        public void RecognizeDestinationPrefixes(params string[] prefixes) =>
+            _prePostfixName.DestinationPrefixes.AddRange(prefixes);
+
+        public void RecognizeDestinationPostfixes(params string[] postfixes) =>
+            _prePostfixName.DestinationPostfixes.AddRange(postfixes);
+
         public void AddGlobalIgnore(string propertyNameStartingWith)
         {
             _globalIgnores ??= new();
             _globalIgnores.Add(propertyNameStartingWith);
         }
+
         IMemberConfiguration IProfileExpressionInternal.AddMemberConfiguration()
         {
             var condition = new MemberConfiguration();
             _memberConfigurations.Add(condition);
             return condition;
         }
+
         public void IncludeSourceExtensionMethods(Type type)
         {
             _sourceExtensionMethods ??= new();
             _sourceExtensionMethods.AddRange(
-                type.GetMethods(TypeExtensions.StaticFlags).Where(m => m.GetParameters().Length == 1 && m.Has<ExtensionAttribute>()));
+                type.GetMethods(TypeExtensions.StaticFlags)
+                    .Where(m => m.GetParameters().Length == 1 && m.Has<ExtensionAttribute>())
+            );
         }
     }
 }

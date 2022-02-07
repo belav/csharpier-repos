@@ -14,7 +14,8 @@ namespace System.Net.Security.Tests
     internal static class TestConfiguration
     {
         public const int PassingTestTimeoutMilliseconds = 4 * 60 * 1000;
-        public static TimeSpan PassingTestTimeout => TimeSpan.FromMilliseconds(PassingTestTimeoutMilliseconds);
+        public static TimeSpan PassingTestTimeout =>
+            TimeSpan.FromMilliseconds(PassingTestTimeoutMilliseconds);
 
         public const string Realm = "TEST.COREFX.NET";
         public const string KerberosUser = "krb_user";
@@ -26,42 +27,77 @@ namespace System.Net.Security.Tests
         public const string NtlmPassword = "ntlm_password";
         public const string NtlmUserFilePath = "/var/tmp/ntlm_user_file";
 
-        public static bool SupportsNullEncryption { get { return s_supportsNullEncryption.Value; } }
-        public static bool SupportsHandshakeAlerts { get { return OperatingSystem.IsLinux() || OperatingSystem.IsWindows(); } }
-        public static bool SupportsRenegotiation { get { return (OperatingSystem.IsWindows() && !PlatformDetection.IsWindows7) || ((OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD()) && PlatformDetection.OpenSslVersion >= new Version(1, 1, 1)); } }
-
-        public static Task WhenAllOrAnyFailedWithTimeout(params Task[] tasks)
-            => tasks.WhenAllOrAnyFailed(PassingTestTimeoutMilliseconds);
-
-        private static Lazy<bool> s_supportsNullEncryption = new Lazy<bool>(() =>
+        public static bool SupportsNullEncryption
         {
-            // On Windows, null ciphers (no encryption) are supported.
-            if (OperatingSystem.IsWindows())
+            get { return s_supportsNullEncryption.Value; }
+        }
+        public static bool SupportsHandshakeAlerts
+        {
+            get { return OperatingSystem.IsLinux() || OperatingSystem.IsWindows(); }
+        }
+        public static bool SupportsRenegotiation
+        {
+            get
             {
-                return true;
+                return (OperatingSystem.IsWindows() && !PlatformDetection.IsWindows7)
+                    || (
+                        (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
+                        && PlatformDetection.OpenSslVersion >= new Version(1, 1, 1)
+                    );
             }
+        }
 
-            // On macOS and Android, the null cipher (no encryption) is not supported.
-            if (OperatingSystem.IsMacOS() || OperatingSystem.IsAndroid())
-            {
-                return false;
-            }
+        public static Task WhenAllOrAnyFailedWithTimeout(params Task[] tasks) =>
+            tasks.WhenAllOrAnyFailed(PassingTestTimeoutMilliseconds);
 
-            // On Unix, it depends on how openssl was built.  So we ask openssl if it has any.
-            try
+        private static Lazy<bool> s_supportsNullEncryption = new Lazy<bool>(
+            () =>
             {
-                using (Process p = Process.Start(new ProcessStartInfo("openssl", "ciphers NULL") { RedirectStandardOutput = true, RedirectStandardError = true }))
+                // On Windows, null ciphers (no encryption) are supported.
+                if (OperatingSystem.IsWindows())
                 {
-                    // On some platforms (openSUSE 13.2 is one example), doing this query can print error messages to standard error
-                    // when the tests are run via MSBuild, this error message gets picked up and treated as an error from the test itself
-                    // causing the task to fail.  We don't actually care about the error text at all, so we just ignore it.
-                    p.ErrorDataReceived += ((object sendingProcess, DataReceivedEventArgs errorText) => { /* ignore */ });
-                    p.BeginErrorReadLine();
+                    return true;
+                }
 
-                    return p.StandardOutput.ReadToEnd().Trim().Length > 0;
+                // On macOS and Android, the null cipher (no encryption) is not supported.
+                if (OperatingSystem.IsMacOS() || OperatingSystem.IsAndroid())
+                {
+                    return false;
+                }
+
+                // On Unix, it depends on how openssl was built.  So we ask openssl if it has any.
+                try
+                {
+                    using (
+                        Process p = Process.Start(
+                            new ProcessStartInfo("openssl", "ciphers NULL")
+                            {
+                                RedirectStandardOutput = true,
+                                RedirectStandardError = true
+                            }
+                        )
+                    )
+                    {
+                        // On some platforms (openSUSE 13.2 is one example), doing this query can print error messages to standard error
+                        // when the tests are run via MSBuild, this error message gets picked up and treated as an error from the test itself
+                        // causing the task to fail.  We don't actually care about the error text at all, so we just ignore it.
+                        p.ErrorDataReceived += (
+                            (
+                                object sendingProcess,
+                                DataReceivedEventArgs errorText
+                            ) => { /* ignore */
+                            }
+                        );
+                        p.BeginErrorReadLine();
+
+                        return p.StandardOutput.ReadToEnd().Trim().Length > 0;
+                    }
+                }
+                catch
+                {
+                    return false;
                 }
             }
-            catch { return false; }
-        });
+        );
     }
 }

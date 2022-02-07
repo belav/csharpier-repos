@@ -15,38 +15,48 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 {
     internal class OperatorOverloadSyntaxClassifier : AbstractSyntaxClassifier
     {
-        public override ImmutableArray<Type> SyntaxNodeTypes { get; } = ImmutableArray.Create(
-            typeof(AssignmentExpressionSyntax),
-            typeof(BinaryExpressionSyntax),
-            typeof(PrefixUnaryExpressionSyntax),
-            typeof(PostfixUnaryExpressionSyntax));
+        public override ImmutableArray<Type> SyntaxNodeTypes { get; } =
+            ImmutableArray.Create(
+                typeof(AssignmentExpressionSyntax),
+                typeof(BinaryExpressionSyntax),
+                typeof(PrefixUnaryExpressionSyntax),
+                typeof(PostfixUnaryExpressionSyntax)
+            );
 
         public override void AddClassifications(
             SyntaxNode syntax,
             SemanticModel semanticModel,
             ClassificationOptions options,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var symbolInfo = semanticModel.GetSymbolInfo(syntax, cancellationToken);
-            if (symbolInfo.Symbol is IMethodSymbol methodSymbol
-                && methodSymbol.MethodKind == MethodKind.UserDefinedOperator)
+            if (
+                symbolInfo.Symbol is IMethodSymbol methodSymbol
+                && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
+            )
             {
                 var operatorSpan = GetOperatorTokenSpan(syntax);
                 if (!operatorSpan.IsEmpty)
                 {
-                    result.Add(new ClassifiedSpan(operatorSpan, ClassificationTypeNames.OperatorOverloaded));
+                    result.Add(
+                        new ClassifiedSpan(operatorSpan, ClassificationTypeNames.OperatorOverloaded)
+                    );
                 }
             }
         }
 
-        private static TextSpan GetOperatorTokenSpan(SyntaxNode syntax)
-            => syntax switch
+        private static TextSpan GetOperatorTokenSpan(SyntaxNode syntax) =>
+            syntax switch
             {
-                AssignmentExpressionSyntax assignmentExpression => assignmentExpression.OperatorToken.Span,
+                AssignmentExpressionSyntax assignmentExpression
+                  => assignmentExpression.OperatorToken.Span,
                 BinaryExpressionSyntax binaryExpression => binaryExpression.OperatorToken.Span,
-                PrefixUnaryExpressionSyntax prefixUnaryExpression => prefixUnaryExpression.OperatorToken.Span,
-                PostfixUnaryExpressionSyntax postfixUnaryExpression => postfixUnaryExpression.OperatorToken.Span,
+                PrefixUnaryExpressionSyntax prefixUnaryExpression
+                  => prefixUnaryExpression.OperatorToken.Span,
+                PostfixUnaryExpressionSyntax postfixUnaryExpression
+                  => postfixUnaryExpression.OperatorToken.Span,
                 _ => default,
             };
     }

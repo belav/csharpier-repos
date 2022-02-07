@@ -17,13 +17,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureCodeStyle
 {
-    public abstract partial class EnumCodeStyleOptionConfigurationTests : AbstractSuppressionDiagnosticTest
+    public abstract partial class EnumCodeStyleOptionConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         protected internal override string GetLanguage() => LanguageNames.CSharp;
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace)
         {
             /*
                 /// <summary>
@@ -31,26 +35,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
                 /// </summary>
                 internal enum UnusedValuePreference
                 {
-                    // Unused values must be explicitly assigned to a local variable
-                    // that is never read/used.
-                    UnusedLocalVariable = 1,
-
-                    // Unused values must be explicitly assigned to a discard '_' variable.
-                    DiscardVariable = 2,
+                // Unused values must be explicitly assigned to a local variable
+                // that is never read/used.
+                UnusedLocalVariable = 1,
+                
+                // Unused values must be explicitly assigned to a discard '_' variable.
+                DiscardVariable = 2,
                 }
-             */
+                */
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                        new CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer(), new ConfigureCodeStyleOptionCodeFixProvider());
+                new CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer(),
+                new ConfigureCodeStyleOptionCodeFixProvider()
+            );
         }
 
         public class UnusedLocalVariableConfigurationTests : EnumCodeStyleOptionConfigurationTests
         {
             protected override int CodeActionIndex => 0;
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_Empty_UnusedLocalVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -69,7 +79,8 @@ class Program1
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -98,7 +109,8 @@ csharp_style_unused_value_assignment_preference = unused_local_variable
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_RuleExists_UnusedLocalVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -119,7 +131,8 @@ csharp_style_unused_value_assignment_preference = discard_variable:suggestion   
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -143,10 +156,14 @@ csharp_style_unused_value_assignment_preference = unused_local_variable:suggesti
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_RuleExists_DotnetDiagnosticEntry()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -167,7 +184,8 @@ dotnet_diagnostic.IDE0059.severity = warning    ; Comment2
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -194,10 +212,14 @@ csharp_style_unused_value_assignment_preference = unused_local_variable
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_RuleExists_ConflictingDotnetDiagnosticEntry()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -219,7 +241,8 @@ csharp_style_unused_value_assignment_preference = discard_variable:suggestion   
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -244,10 +267,14 @@ csharp_style_unused_value_assignment_preference = unused_local_variable:suggesti
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidHeader_UnusedLocalVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -268,7 +295,8 @@ csharp_style_unused_value_assignment_preference = discard_variable:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -300,7 +328,8 @@ csharp_style_unused_value_assignment_preference = unused_local_variable
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_MaintainSeverity_UnusedLocalVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -321,7 +350,8 @@ csharp_style_unused_value_assignment_preference = discard_variable:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -345,10 +375,14 @@ csharp_style_unused_value_assignment_preference = unused_local_variable:suggesti
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidRule_UnusedLocalVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -369,7 +403,8 @@ csharp_style_unused_value_assignment_preferencer = discard_variable:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -401,10 +436,14 @@ csharp_style_unused_value_assignment_preference = unused_local_variable
         {
             protected override int CodeActionIndex => 1;
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_Empty_DiscardVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -423,7 +462,8 @@ class Program1
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -452,7 +492,8 @@ csharp_style_unused_value_assignment_preference = discard_variable
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_RuleExists_DiscardVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -473,7 +514,8 @@ csharp_style_unused_value_assignment_preference = unused_local_variable:suggesti
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -500,7 +542,8 @@ csharp_style_unused_value_assignment_preference = discard_variable:suggestion
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_RuleExists_DiscardVariable_WithoutSeveritySuffix()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -521,7 +564,8 @@ csharp_style_unused_value_assignment_preference = unused_local_variable
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -545,10 +589,14 @@ csharp_style_unused_value_assignment_preference = discard_variable
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidHeader_DiscardVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -569,7 +617,8 @@ csharp_style_unused_value_assignment_preference = unused_local_variable:suggesti
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -601,7 +650,8 @@ csharp_style_unused_value_assignment_preference = discard_variable
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_MaintainSeverity_DiscardVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -622,7 +672,8 @@ csharp_style_unused_value_assignment_preference = unused_local_variable:suggesti
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -646,10 +697,14 @@ csharp_style_unused_value_assignment_preference = discard_variable:suggestion
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidRule_DiscardVariable()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -670,7 +725,8 @@ csharp_style_unused_value_assignment_preference_error = discard_variable:suggest
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">

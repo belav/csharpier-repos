@@ -10,9 +10,7 @@ namespace System.Data.Common
 {
     public abstract class DbCommand : Component, IDbCommand, IAsyncDisposable
     {
-        protected DbCommand() : base()
-        {
-        }
+        protected DbCommand() : base() { }
 
         [DefaultValue("")]
         [RefreshProperties(RefreshProperties.All)]
@@ -91,9 +89,7 @@ namespace System.Data.Common
             {
                 Cancel();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         public abstract void Cancel();
@@ -112,9 +108,11 @@ namespace System.Data.Common
 
         IDataReader IDbCommand.ExecuteReader() => ExecuteDbDataReader(CommandBehavior.Default);
 
-        public DbDataReader ExecuteReader(CommandBehavior behavior) => ExecuteDbDataReader(behavior);
+        public DbDataReader ExecuteReader(CommandBehavior behavior) =>
+            ExecuteDbDataReader(behavior);
 
-        IDataReader IDbCommand.ExecuteReader(CommandBehavior behavior) => ExecuteDbDataReader(behavior);
+        IDataReader IDbCommand.ExecuteReader(CommandBehavior behavior) =>
+            ExecuteDbDataReader(behavior);
 
         public Task<int> ExecuteNonQueryAsync() => ExecuteNonQueryAsync(CancellationToken.None);
 
@@ -129,7 +127,10 @@ namespace System.Data.Common
                 CancellationTokenRegistration registration = default;
                 if (cancellationToken.CanBeCanceled)
                 {
-                    registration = cancellationToken.Register(s => ((DbCommand)s!).CancelIgnoreFailure(), this);
+                    registration = cancellationToken.Register(
+                        s => ((DbCommand)s!).CancelIgnoreFailure(),
+                        this
+                    );
                 }
 
                 try
@@ -156,10 +157,15 @@ namespace System.Data.Common
         public Task<DbDataReader> ExecuteReaderAsync(CommandBehavior behavior) =>
             ExecuteReaderAsync(behavior, CancellationToken.None);
 
-        public Task<DbDataReader> ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) =>
-            ExecuteDbDataReaderAsync(behavior, cancellationToken);
+        public Task<DbDataReader> ExecuteReaderAsync(
+            CommandBehavior behavior,
+            CancellationToken cancellationToken
+        ) => ExecuteDbDataReaderAsync(behavior, cancellationToken);
 
-        protected virtual Task<DbDataReader> ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+        protected virtual Task<DbDataReader> ExecuteDbDataReaderAsync(
+            CommandBehavior behavior,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -170,7 +176,10 @@ namespace System.Data.Common
                 CancellationTokenRegistration registration = default;
                 if (cancellationToken.CanBeCanceled)
                 {
-                    registration = cancellationToken.Register(s => ((DbCommand)s!).CancelIgnoreFailure(), this);
+                    registration = cancellationToken.Register(
+                        s => ((DbCommand)s!).CancelIgnoreFailure(),
+                        this
+                    );
                 }
 
                 try
@@ -188,8 +197,7 @@ namespace System.Data.Common
             }
         }
 
-        public Task<object?> ExecuteScalarAsync() =>
-            ExecuteScalarAsync(CancellationToken.None);
+        public Task<object?> ExecuteScalarAsync() => ExecuteScalarAsync(CancellationToken.None);
 
         public virtual Task<object?> ExecuteScalarAsync(CancellationToken cancellationToken)
         {
@@ -202,7 +210,10 @@ namespace System.Data.Common
                 CancellationTokenRegistration registration = default;
                 if (cancellationToken.CanBeCanceled)
                 {
-                    registration = cancellationToken.Register(s => ((DbCommand)s!).CancelIgnoreFailure(), this);
+                    registration = cancellationToken.Register(
+                        s => ((DbCommand)s!).CancelIgnoreFailure(),
+                        this
+                    );
                 }
 
                 try

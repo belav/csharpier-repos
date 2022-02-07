@@ -17,146 +17,98 @@ public class ClosedGenericMatcherTest
         get
         {
             return new TheoryData<Type, Type, Type>
+            {
+                // Closed generic types that match given open generic type.
                 {
-                    // Closed generic types that match given open generic type.
-                    {
-                        typeof(IEnumerable<BaseClass>),
-                        typeof(IEnumerable<>),
-                        typeof(IEnumerable<BaseClass>)
-                    },
-                    {
-                        typeof(IReadOnlyList<int>),
-                        typeof(IReadOnlyList<>),
-                        typeof(IReadOnlyList<int>)
-                    },
-                    {
-                        typeof(KeyValuePair<string, object>),
-                        typeof(KeyValuePair<,>),
-                        typeof(KeyValuePair<string, object>)
-                    },
-                    // Closed generic interfaces that implement sub-interface of given open generic type.
-                    {
-                        typeof(ICollection<BaseClass>),
-                        typeof(IEnumerable<>),
-                        typeof(IEnumerable<BaseClass>)
-                    },
-                    {
-                        typeof(IReadOnlyList<int>),
-                        typeof(IEnumerable<>),
-                        typeof(IEnumerable<int>)
-                    },
-                    {
-                        typeof(IDictionary<string, object>),
-                        typeof(IEnumerable<>),
-                        typeof(IEnumerable<KeyValuePair<string, object>>)
-                    },
-                    // Class that implements closed generic based on given open generic interface.
-                    {
-                        typeof(BaseClass),
-                        typeof(IDictionary<,>),
-                        typeof(IDictionary<string, object>)
-                    },
-                    {
-                        typeof(BaseClass),
-                        typeof(IEquatable<>),
-                        typeof(IEquatable<BaseClass>)
-                    },
-                    {
-                        typeof(BaseClass),
-                        typeof(ICollection<>),
-                        typeof(ICollection<KeyValuePair<string, object>>)
-                    },
-                    // Derived class that implements closed generic based on given open generic interface.
-                    {
-                        typeof(DerivedClass),
-                        typeof(IDictionary<,>),
-                        typeof(IDictionary<string, object>)
-                    },
-                    {
-                        typeof(DerivedClass),
-                        typeof(IEquatable<>),
-                        typeof(IEquatable<BaseClass>)
-                    },
-                    {
-                        typeof(DerivedClass),
-                        typeof(ICollection<>),
-                        typeof(ICollection<KeyValuePair<string, object>>)
-                    },
-                    // Derived class that also implements another interface.
-                    {
-                        typeof(DerivedClassWithComparable),
-                        typeof(IDictionary<,>),
-                        typeof(IDictionary<string, object>)
-                    },
-                    {
-                        typeof(DerivedClassWithComparable),
-                        typeof(IEquatable<>),
-                        typeof(IEquatable<BaseClass>)
-                    },
-                    {
-                        typeof(DerivedClassWithComparable),
-                        typeof(ICollection<>),
-                        typeof(ICollection<KeyValuePair<string, object>>)
-                    },
-                    {
-                        typeof(DerivedClassWithComparable),
-                        typeof(IComparable<>),
-                        typeof(IComparable<DerivedClassWithComparable>)
-                    },
-                    // Derived class using system implementation.
-                    {
-                        typeof(DerivedClassFromSystemImplementation),
-                        typeof(ICollection<>),
-                        typeof(ICollection<BaseClass>)
-                    },
-                    {
-                        typeof(DerivedClassFromSystemImplementation),
-                        typeof(IReadOnlyList<>),
-                        typeof(IReadOnlyList<BaseClass>)
-                    },
-                    {
-                        typeof(DerivedClassFromSystemImplementation),
-                        typeof(IEnumerable<>),
-                        typeof(IEnumerable<BaseClass>)
-                    },
-                    // Not given an open generic type.
-                    {
-                        typeof(IEnumerable<BaseClass>),
-                        typeof(IEnumerable<BaseClass>),
-                        null
-                    },
-                    {
-                        typeof(IEnumerable<BaseClass>),
-                        typeof(IEnumerable),
-                        null
-                    },
-                    {
-                        typeof(IReadOnlyList<int>),
-                        typeof(BaseClass),
-                        null
-                    },
-                    {
-                        typeof(KeyValuePair<,>),
-                        typeof(KeyValuePair<string, object>),
-                        null
-                    },
-                    // Not a match.
-                    {
-                        typeof(IEnumerable<BaseClass>),
-                        typeof(IReadOnlyList<>),
-                        null
-                    },
-                    {
-                        typeof(IList<int>),
-                        typeof(IReadOnlyList<>),
-                        null
-                    },
-                    {
-                        typeof(IDictionary<string, object>),
-                        typeof(KeyValuePair<,>),
-                        null
-                    },
-                };
+                    typeof(IEnumerable<BaseClass>),
+                    typeof(IEnumerable<>),
+                    typeof(IEnumerable<BaseClass>)
+                },
+                { typeof(IReadOnlyList<int>), typeof(IReadOnlyList<>), typeof(IReadOnlyList<int>) },
+                {
+                    typeof(KeyValuePair<string, object>),
+                    typeof(KeyValuePair<,>),
+                    typeof(KeyValuePair<string, object>)
+                },
+                // Closed generic interfaces that implement sub-interface of given open generic type.
+                {
+                    typeof(ICollection<BaseClass>),
+                    typeof(IEnumerable<>),
+                    typeof(IEnumerable<BaseClass>)
+                },
+                { typeof(IReadOnlyList<int>), typeof(IEnumerable<>), typeof(IEnumerable<int>) },
+                {
+                    typeof(IDictionary<string, object>),
+                    typeof(IEnumerable<>),
+                    typeof(IEnumerable<KeyValuePair<string, object>>)
+                },
+                // Class that implements closed generic based on given open generic interface.
+                { typeof(BaseClass), typeof(IDictionary<,>), typeof(IDictionary<string, object>) },
+                { typeof(BaseClass), typeof(IEquatable<>), typeof(IEquatable<BaseClass>) },
+                {
+                    typeof(BaseClass),
+                    typeof(ICollection<>),
+                    typeof(ICollection<KeyValuePair<string, object>>)
+                },
+                // Derived class that implements closed generic based on given open generic interface.
+                {
+                    typeof(DerivedClass),
+                    typeof(IDictionary<,>),
+                    typeof(IDictionary<string, object>)
+                },
+                { typeof(DerivedClass), typeof(IEquatable<>), typeof(IEquatable<BaseClass>) },
+                {
+                    typeof(DerivedClass),
+                    typeof(ICollection<>),
+                    typeof(ICollection<KeyValuePair<string, object>>)
+                },
+                // Derived class that also implements another interface.
+                {
+                    typeof(DerivedClassWithComparable),
+                    typeof(IDictionary<,>),
+                    typeof(IDictionary<string, object>)
+                },
+                {
+                    typeof(DerivedClassWithComparable),
+                    typeof(IEquatable<>),
+                    typeof(IEquatable<BaseClass>)
+                },
+                {
+                    typeof(DerivedClassWithComparable),
+                    typeof(ICollection<>),
+                    typeof(ICollection<KeyValuePair<string, object>>)
+                },
+                {
+                    typeof(DerivedClassWithComparable),
+                    typeof(IComparable<>),
+                    typeof(IComparable<DerivedClassWithComparable>)
+                },
+                // Derived class using system implementation.
+                {
+                    typeof(DerivedClassFromSystemImplementation),
+                    typeof(ICollection<>),
+                    typeof(ICollection<BaseClass>)
+                },
+                {
+                    typeof(DerivedClassFromSystemImplementation),
+                    typeof(IReadOnlyList<>),
+                    typeof(IReadOnlyList<BaseClass>)
+                },
+                {
+                    typeof(DerivedClassFromSystemImplementation),
+                    typeof(IEnumerable<>),
+                    typeof(IEnumerable<BaseClass>)
+                },
+                // Not given an open generic type.
+                { typeof(IEnumerable<BaseClass>), typeof(IEnumerable<BaseClass>), null },
+                { typeof(IEnumerable<BaseClass>), typeof(IEnumerable), null },
+                { typeof(IReadOnlyList<int>), typeof(BaseClass), null },
+                { typeof(KeyValuePair<,>), typeof(KeyValuePair<string, object>), null },
+                // Not a match.
+                { typeof(IEnumerable<BaseClass>), typeof(IReadOnlyList<>), null },
+                { typeof(IList<int>), typeof(IReadOnlyList<>), null },
+                { typeof(IDictionary<string, object>), typeof(KeyValuePair<,>), null },
+            };
         }
     }
 
@@ -165,7 +117,8 @@ public class ClosedGenericMatcherTest
     public void ExtractGenericInterface_ReturnsExpectedType(
         Type queryType,
         Type interfaceType,
-        Type expectedResult)
+        Type expectedResult
+    )
     {
         // Arrange & Act
         var result = ClosedGenericMatcher.ExtractGenericInterface(queryType, interfaceType);
@@ -237,47 +190,28 @@ public class ClosedGenericMatcherTest
     {
         object IDictionary<string, object>.this[string key]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         int ICollection<KeyValuePair<string, object>>.Count
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         bool ICollection<KeyValuePair<string, object>>.IsReadOnly
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         ICollection<string> IDictionary<string, object>.Keys
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         ICollection<object> IDictionary<string, object>.Values
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public bool Equals(BaseClass other)
@@ -310,7 +244,10 @@ public class ClosedGenericMatcherTest
             throw new NotImplementedException();
         }
 
-        void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<string, object>>.CopyTo(
+            KeyValuePair<string, object>[] array,
+            int arrayIndex
+        )
         {
             throw new NotImplementedException();
         }
@@ -320,7 +257,9 @@ public class ClosedGenericMatcherTest
             throw new NotImplementedException();
         }
 
-        IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, object>> IEnumerable<
+            KeyValuePair<string, object>
+        >.GetEnumerator()
         {
             throw new NotImplementedException();
         }
@@ -341,9 +280,7 @@ public class ClosedGenericMatcherTest
         }
     }
 
-    private class DerivedClass : BaseClass
-    {
-    }
+    private class DerivedClass : BaseClass { }
 
     private class DerivedClassWithComparable : DerivedClass, IComparable<DerivedClassWithComparable>
     {
@@ -353,7 +290,5 @@ public class ClosedGenericMatcherTest
         }
     }
 
-    private class DerivedClassFromSystemImplementation : Collection<BaseClass>
-    {
-    }
+    private class DerivedClassFromSystemImplementation : Collection<BaseClass> { }
 }

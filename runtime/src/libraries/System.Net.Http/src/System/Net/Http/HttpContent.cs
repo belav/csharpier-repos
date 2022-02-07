@@ -53,58 +53,94 @@ namespace System.Net.Http
         static HttpContent()
         {
             // Ensure the encoding constants used in this class match the actual data from the Encoding class
-            AssertEncodingConstants(Encoding.UTF8, UTF8CodePage, UTF8PreambleLength, UTF8PreambleFirst2Bytes,
+            AssertEncodingConstants(
+                Encoding.UTF8,
+                UTF8CodePage,
+                UTF8PreambleLength,
+                UTF8PreambleFirst2Bytes,
                 UTF8PreambleByte0,
                 UTF8PreambleByte1,
-                UTF8PreambleByte2);
+                UTF8PreambleByte2
+            );
 
             // UTF32 not supported on Phone
-            AssertEncodingConstants(Encoding.UTF32, UTF32CodePage, UTF32PreambleLength, UTF32OrUnicodePreambleFirst2Bytes,
+            AssertEncodingConstants(
+                Encoding.UTF32,
+                UTF32CodePage,
+                UTF32PreambleLength,
+                UTF32OrUnicodePreambleFirst2Bytes,
                 UTF32PreambleByte0,
                 UTF32PreambleByte1,
                 UTF32PreambleByte2,
-                UTF32PreambleByte3);
+                UTF32PreambleByte3
+            );
 
-            AssertEncodingConstants(Encoding.Unicode, UnicodeCodePage, UnicodePreambleLength, UTF32OrUnicodePreambleFirst2Bytes,
+            AssertEncodingConstants(
+                Encoding.Unicode,
+                UnicodeCodePage,
+                UnicodePreambleLength,
+                UTF32OrUnicodePreambleFirst2Bytes,
                 UnicodePreambleByte0,
-                UnicodePreambleByte1);
+                UnicodePreambleByte1
+            );
 
-            AssertEncodingConstants(Encoding.BigEndianUnicode, BigEndianUnicodeCodePage, BigEndianUnicodePreambleLength, BigEndianUnicodePreambleFirst2Bytes,
+            AssertEncodingConstants(
+                Encoding.BigEndianUnicode,
+                BigEndianUnicodeCodePage,
+                BigEndianUnicodePreambleLength,
+                BigEndianUnicodePreambleFirst2Bytes,
                 BigEndianUnicodePreambleByte0,
-                BigEndianUnicodePreambleByte1);
+                BigEndianUnicodePreambleByte1
+            );
         }
 
-        private static void AssertEncodingConstants(Encoding encoding, int codePage, int preambleLength, int first2Bytes, params byte[] preamble)
+        private static void AssertEncodingConstants(
+            Encoding encoding,
+            int codePage,
+            int preambleLength,
+            int first2Bytes,
+            params byte[] preamble
+        )
         {
             Debug.Assert(encoding != null);
             Debug.Assert(preamble != null);
 
-            Debug.Assert(codePage == encoding.CodePage,
+            Debug.Assert(
+                codePage == encoding.CodePage,
                 $"Encoding code page mismatch for encoding: {encoding.EncodingName}",
-                $"Expected (constant): {codePage}, Actual (Encoding.CodePage): {encoding.CodePage}");
+                $"Expected (constant): {codePage}, Actual (Encoding.CodePage): {encoding.CodePage}"
+            );
 
             byte[] actualPreamble = encoding.GetPreamble();
 
-            Debug.Assert(preambleLength == actualPreamble.Length,
+            Debug.Assert(
+                preambleLength == actualPreamble.Length,
                 $"Encoding preamble length mismatch for encoding: {encoding.EncodingName}",
-                $"Expected (constant): {preambleLength}, Actual (Encoding.GetPreamble().Length): {actualPreamble.Length}");
+                $"Expected (constant): {preambleLength}, Actual (Encoding.GetPreamble().Length): {actualPreamble.Length}"
+            );
 
             Debug.Assert(actualPreamble.Length >= 2);
             int actualFirst2Bytes = actualPreamble[0] << 8 | actualPreamble[1];
 
-            Debug.Assert(first2Bytes == actualFirst2Bytes,
+            Debug.Assert(
+                first2Bytes == actualFirst2Bytes,
                 $"Encoding preamble first 2 bytes mismatch for encoding: {encoding.EncodingName}",
-                $"Expected (constant): {first2Bytes}, Actual: {actualFirst2Bytes}");
+                $"Expected (constant): {first2Bytes}, Actual: {actualFirst2Bytes}"
+            );
 
-            Debug.Assert(preamble.Length == actualPreamble.Length,
+            Debug.Assert(
+                preamble.Length == actualPreamble.Length,
                 $"Encoding preamble mismatch for encoding: {encoding.EncodingName}",
-                $"Expected (constant): {BitConverter.ToString(preamble)}, Actual (Encoding.GetPreamble()): {BitConverter.ToString(actualPreamble)}");
+                $"Expected (constant): {BitConverter.ToString(preamble)}, Actual (Encoding.GetPreamble()): {BitConverter.ToString(actualPreamble)}"
+            );
 
             for (int i = 0; i < preamble.Length; i++)
             {
-                Debug.Assert(preamble[i] == actualPreamble[i],
+                Debug.Assert(
+                    preamble[i] == actualPreamble[i],
                     $"Encoding preamble mismatch for encoding: {encoding.EncodingName}",
-                    $"Expected (constant): {BitConverter.ToString(preamble)}, Actual (Encoding.GetPreamble()): {BitConverter.ToString(actualPreamble)}");
+                    $"Expected (constant): {BitConverter.ToString(preamble)}, Actual (Encoding.GetPreamble()): {BitConverter.ToString(actualPreamble)}"
+                );
             }
         }
 #endif
@@ -139,19 +175,23 @@ namespace System.Net.Http
         protected HttpContent()
         {
             // Log to get an ID for the current content. This ID is used when the content gets associated to a message.
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
 
             // We start with the assumption that we can calculate the content length.
             _canCalculateLength = true;
         }
 
-        public Task<string> ReadAsStringAsync() =>
-            ReadAsStringAsync(CancellationToken.None);
+        public Task<string> ReadAsStringAsync() => ReadAsStringAsync(CancellationToken.None);
 
         public Task<string> ReadAsStringAsync(CancellationToken cancellationToken)
         {
             CheckDisposed();
-            return WaitAndReturnAsync(LoadIntoBufferAsync(cancellationToken), this, static s => s.ReadBufferedContentAsString());
+            return WaitAndReturnAsync(
+                LoadIntoBufferAsync(cancellationToken),
+                this,
+                static s => s.ReadBufferedContentAsString()
+            );
         }
 
         private string ReadBufferedContentAsString()
@@ -172,7 +212,10 @@ namespace System.Net.Http
             return ReadBufferAsString(buffer, Headers);
         }
 
-        internal static string ReadBufferAsString(ArraySegment<byte> buffer, HttpContentHeaders headers)
+        internal static string ReadBufferAsString(
+            ArraySegment<byte> buffer,
+            HttpContentHeaders headers
+        )
         {
             // We don't validate the Content-Encoding header: If the content was encoded, it's the caller's
             // responsibility to make sure to only call ReadAsString() on already decoded content. E.g. if the
@@ -191,9 +234,11 @@ namespace System.Net.Http
                 try
                 {
                     // Remove at most a single set of quotes.
-                    if (charset.Length > 2 &&
-                        charset[0] == '\"' &&
-                        charset[charset.Length - 1] == '\"')
+                    if (
+                        charset.Length > 2
+                        && charset[0] == '\"'
+                        && charset[charset.Length - 1] == '\"'
+                    )
                     {
                         encoding = Encoding.GetEncoding(charset.Substring(1, charset.Length - 2));
                     }
@@ -227,16 +272,23 @@ namespace System.Net.Http
             }
 
             // Drop the BOM when decoding the data.
-            return encoding.GetString(buffer.Array!, buffer.Offset + bomLength, buffer.Count - bomLength);
+            return encoding.GetString(
+                buffer.Array!,
+                buffer.Offset + bomLength,
+                buffer.Count - bomLength
+            );
         }
 
-        public Task<byte[]> ReadAsByteArrayAsync() =>
-            ReadAsByteArrayAsync(CancellationToken.None);
+        public Task<byte[]> ReadAsByteArrayAsync() => ReadAsByteArrayAsync(CancellationToken.None);
 
         public Task<byte[]> ReadAsByteArrayAsync(CancellationToken cancellationToken)
         {
             CheckDisposed();
-            return WaitAndReturnAsync(LoadIntoBufferAsync(cancellationToken), this, static s => s.ReadBufferedContentAsByteArray());
+            return WaitAndReturnAsync(
+                LoadIntoBufferAsync(cancellationToken),
+                this,
+                static s => s.ReadBufferedContentAsByteArray()
+            );
         }
 
         internal byte[] ReadBufferedContentAsByteArray()
@@ -247,8 +299,7 @@ namespace System.Net.Http
             return _bufferedContent.ToArray();
         }
 
-        public Stream ReadAsStream() =>
-            ReadAsStream(CancellationToken.None);
+        public Stream ReadAsStream() => ReadAsStream(CancellationToken.None);
 
         public Stream ReadAsStream(CancellationToken cancellationToken)
         {
@@ -260,9 +311,9 @@ namespace System.Net.Http
 
             if (_contentReadStream == null) // don't yet have a Stream
             {
-                Stream s = TryGetBuffer(out ArraySegment<byte> buffer) ?
-                    new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false) :
-                    CreateContentReadStream(cancellationToken);
+                Stream s = TryGetBuffer(out ArraySegment<byte> buffer)
+                  ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
+                  : CreateContentReadStream(cancellationToken);
                 _contentReadStream = s;
                 return s;
             }
@@ -277,8 +328,7 @@ namespace System.Net.Http
             }
         }
 
-        public Task<Stream> ReadAsStreamAsync() =>
-            ReadAsStreamAsync(CancellationToken.None);
+        public Task<Stream> ReadAsStreamAsync() => ReadAsStreamAsync(CancellationToken.None);
 
         public Task<Stream> ReadAsStreamAsync(CancellationToken cancellationToken)
         {
@@ -290,9 +340,16 @@ namespace System.Net.Http
 
             if (_contentReadStream == null) // don't yet have a Stream
             {
-                Task<Stream> t = TryGetBuffer(out ArraySegment<byte> buffer) ?
-                    Task.FromResult<Stream>(new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)) :
-                    CreateContentReadStreamAsync(cancellationToken);
+                Task<Stream> t = TryGetBuffer(out ArraySegment<byte> buffer)
+                  ? Task.FromResult<Stream>(
+                        new MemoryStream(
+                            buffer.Array!,
+                            buffer.Offset,
+                            buffer.Count,
+                            writable: false
+                        )
+                    )
+                  : CreateContentReadStreamAsync(cancellationToken);
                 _contentReadStream = t;
                 return t;
             }
@@ -302,7 +359,10 @@ namespace System.Net.Http
             }
             else
             {
-                Debug.Assert(_contentReadStream is Stream, $"Expected a Stream, got ${_contentReadStream}");
+                Debug.Assert(
+                    _contentReadStream is Stream,
+                    $"Expected a Stream, got ${_contentReadStream}"
+                );
                 Task<Stream> ts = Task.FromResult((Stream)_contentReadStream);
                 _contentReadStream = ts;
                 return ts;
@@ -319,9 +379,9 @@ namespace System.Net.Http
 
             if (_contentReadStream == null) // don't yet have a Stream
             {
-                Stream? s = TryGetBuffer(out ArraySegment<byte> buffer) ?
-                    new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false) :
-                    TryCreateContentReadStream();
+                Stream? s = TryGetBuffer(out ArraySegment<byte> buffer)
+                  ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
+                  : TryCreateContentReadStream();
                 _contentReadStream = s;
                 return s;
             }
@@ -331,7 +391,10 @@ namespace System.Net.Http
             }
             else // have a Task<Stream>
             {
-                Debug.Assert(_contentReadStream is Task<Stream>, $"Expected a Task<Stream>, got ${_contentReadStream}");
+                Debug.Assert(
+                    _contentReadStream is Task<Stream>,
+                    $"Expected a Task<Stream>, got ${_contentReadStream}"
+                );
                 Task<Stream> t = (Task<Stream>)_contentReadStream;
                 return t.Status == TaskStatus.RanToCompletion ? t.Result : null;
             }
@@ -342,13 +405,27 @@ namespace System.Net.Http
         // We cannot add abstract member to a public class in order to not to break already established contract of this class.
         // So we add virtual method, override it everywhere internally and provide proper implementation.
         // Unfortunately we cannot force everyone to implement so in such case we throw NSE.
-        protected virtual void SerializeToStream(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        protected virtual void SerializeToStream(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
-            throw new NotSupportedException(SR.Format(SR.net_http_missing_sync_implementation, GetType(), nameof(HttpContent), nameof(SerializeToStream)));
+            throw new NotSupportedException(
+                SR.Format(
+                    SR.net_http_missing_sync_implementation,
+                    GetType(),
+                    nameof(HttpContent),
+                    nameof(SerializeToStream)
+                )
+            );
         }
 
-        protected virtual Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken) =>
-            SerializeToStreamAsync(stream, context);
+        protected virtual Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        ) => SerializeToStreamAsync(stream, context);
 
         // TODO https://github.com/dotnet/runtime/issues/31316: Expose something to enable this publicly.  For very specific
         // HTTP/2 scenarios (e.g. gRPC), we need to be able to allow request content to continue sending after SendAsync has
@@ -358,7 +435,11 @@ namespace System.Net.Http
         // on all known HttpContent types, waiting for the request content to complete before completing the SendAsync task.
         internal virtual bool AllowDuplex => true;
 
-        public void CopyTo(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        public void CopyTo(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
             CheckDisposed();
             if (stream == null)
@@ -383,8 +464,7 @@ namespace System.Net.Http
             }
         }
 
-        public Task CopyToAsync(Stream stream) =>
-            CopyToAsync(stream, CancellationToken.None);
+        public Task CopyToAsync(Stream stream) => CopyToAsync(stream, CancellationToken.None);
 
         public Task CopyToAsync(Stream stream, CancellationToken cancellationToken) =>
             CopyToAsync(stream, null, cancellationToken);
@@ -392,7 +472,11 @@ namespace System.Net.Http
         public Task CopyToAsync(Stream stream, TransportContext? context) =>
             CopyToAsync(stream, context, CancellationToken.None);
 
-        public Task CopyToAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        public Task CopyToAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
             CheckDisposed();
             if (stream == null)
@@ -422,7 +506,11 @@ namespace System.Net.Http
             }
         }
 
-        internal ValueTask InternalCopyToAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        internal ValueTask InternalCopyToAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
             if (TryGetBuffer(out ArraySegment<byte> buffer))
             {
@@ -438,7 +526,13 @@ namespace System.Net.Http
         {
             CheckDisposed();
 
-            if (!CreateTemporaryBuffer(maxBufferSize, out MemoryStream? tempBuffer, out Exception? error))
+            if (
+                !CreateTemporaryBuffer(
+                    maxBufferSize,
+                    out MemoryStream? tempBuffer,
+                    out Exception? error
+                )
+            )
             {
                 // If we already buffered the content, just return.
                 return;
@@ -453,7 +547,10 @@ namespace System.Net.Http
             // We're only comfortable disposing of the HttpContent instance like this because LoadIntoBuffer is internal and
             // we're only using it on content instances we get back from a handler's Send call that haven't been given out to the user yet.
             // If we were to ever make LoadIntoBuffer public, we'd need to rethink this.
-            CancellationTokenRegistration cancellationRegistration = cancellationToken.Register(static s => ((HttpContent)s!).Dispose(), this);
+            CancellationTokenRegistration cancellationRegistration = cancellationToken.Register(
+                static s => ((HttpContent)s!).Dispose(),
+                this
+            );
 
             try
             {
@@ -463,7 +560,8 @@ namespace System.Net.Http
             }
             catch (Exception e)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, e);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, e);
 
                 if (CancellationHelper.ShouldWrapInOperationCanceledException(e, cancellationToken))
                 {
@@ -484,8 +582,7 @@ namespace System.Net.Http
             }
         }
 
-        public Task LoadIntoBufferAsync() =>
-            LoadIntoBufferAsync(MaxBufferSize);
+        public Task LoadIntoBufferAsync() => LoadIntoBufferAsync(MaxBufferSize);
 
         // No "CancellationToken" parameter needed since canceling the CTS will close the connection, resulting
         // in an exception being thrown while we're buffering.
@@ -500,7 +597,13 @@ namespace System.Net.Http
         {
             CheckDisposed();
 
-            if (!CreateTemporaryBuffer(maxBufferSize, out MemoryStream? tempBuffer, out Exception? error))
+            if (
+                !CreateTemporaryBuffer(
+                    maxBufferSize,
+                    out MemoryStream? tempBuffer,
+                    out Exception? error
+                )
+            )
             {
                 // If we already buffered the content, just return a completed task.
                 return Task.CompletedTask;
@@ -525,7 +628,10 @@ namespace System.Net.Http
             // other synchronous exceptions from SerializeToStreamAsync/CheckTaskNotNull will propagate
         }
 
-        private async Task LoadIntoBufferAsyncCore(Task serializeToStreamTask, MemoryStream tempBuffer)
+        private async Task LoadIntoBufferAsyncCore(
+            Task serializeToStreamTask,
+            MemoryStream tempBuffer
+        )
         {
             try
             {
@@ -535,7 +641,8 @@ namespace System.Net.Http
             {
                 tempBuffer.Dispose(); // Cleanup partially filled stream.
                 Exception we = GetStreamCopyException(e);
-                if (we != e) throw we;
+                if (we != e)
+                    throw we;
                 throw;
             }
 
@@ -546,7 +653,8 @@ namespace System.Net.Http
             }
             catch (Exception e)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, e);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, e);
                 throw;
             }
         }
@@ -573,10 +681,16 @@ namespace System.Net.Http
             // By default just buffer the content to a memory stream. Derived classes can override this behavior
             // if there is a better way to retrieve the content as stream (e.g. byte array/string use a more efficient
             // way, like wrapping a read-only MemoryStream around the bytes/string)
-            return WaitAndReturnAsync(LoadIntoBufferAsync(), this, s => (Stream)s._bufferedContent!);
+            return WaitAndReturnAsync(
+                LoadIntoBufferAsync(),
+                this,
+                s => (Stream)s._bufferedContent!
+            );
         }
 
-        protected virtual Task<Stream> CreateContentReadStreamAsync(CancellationToken cancellationToken)
+        protected virtual Task<Stream> CreateContentReadStreamAsync(
+            CancellationToken cancellationToken
+        )
         {
             // Drops the CT for compatibility reasons, see https://github.com/dotnet/runtime/issues/916#issuecomment-562083237
             return CreateContentReadStreamAsync();
@@ -619,15 +733,25 @@ namespace System.Net.Http
             return null;
         }
 
-        private bool CreateTemporaryBuffer(long maxBufferSize, out MemoryStream? tempBuffer, out Exception? error)
+        private bool CreateTemporaryBuffer(
+            long maxBufferSize,
+            out MemoryStream? tempBuffer,
+            out Exception? error
+        )
         {
             if (maxBufferSize > HttpContent.MaxBufferSize)
             {
                 // This should only be hit when called directly; HttpClient/HttpClientHandler
                 // will not exceed this limit.
-                throw new ArgumentOutOfRangeException(nameof(maxBufferSize), maxBufferSize,
-                    SR.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SR.net_http_content_buffersize_limit, HttpContent.MaxBufferSize));
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxBufferSize),
+                    maxBufferSize,
+                    SR.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        SR.net_http_content_buffersize_limit,
+                        HttpContent.MaxBufferSize
+                    )
+                );
             }
 
             if (IsBuffered)
@@ -656,7 +780,13 @@ namespace System.Net.Http
 
                 if (contentLength > maxBufferSize)
                 {
-                    error = new HttpRequestException(SR.Format(System.Globalization.CultureInfo.InvariantCulture, SR.net_http_content_buffersize_exceeded, maxBufferSize));
+                    error = new HttpRequestException(
+                        SR.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            SR.net_http_content_buffersize_exceeded,
+                            maxBufferSize
+                        )
+                    );
                     return null;
                 }
 
@@ -678,8 +808,14 @@ namespace System.Net.Http
 
                 if (_contentReadStream != null)
                 {
-                    Stream? s = _contentReadStream as Stream ??
-                        (_contentReadStream is Task<Stream> t && t.Status == TaskStatus.RanToCompletion ? t.Result : null);
+                    Stream? s =
+                        _contentReadStream as Stream
+                        ?? (
+                            _contentReadStream is Task<Stream> t
+                            && t.Status == TaskStatus.RanToCompletion
+                                ? t.Result
+                                : null
+                        );
                     s?.Dispose();
                     _contentReadStream = null;
                 }
@@ -714,12 +850,14 @@ namespace System.Net.Http
             if (task == null)
             {
                 var e = new InvalidOperationException(SR.net_http_content_no_task_returned);
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, e);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, e);
                 throw e;
             }
         }
 
-        internal static bool StreamCopyExceptionNeedsWrapping(Exception e) => e is IOException || e is ObjectDisposedException;
+        internal static bool StreamCopyExceptionNeedsWrapping(Exception e) =>
+            e is IOException || e is ObjectDisposedException;
 
         private static Exception GetStreamCopyException(Exception originalException)
         {
@@ -732,9 +870,9 @@ namespace System.Net.Http
             // don't want to hide such "usage error" exceptions in HttpRequestException.
             // ObjectDisposedException is also wrapped, since aborting HWR after a request is complete will result in
             // the response stream being closed.
-            return StreamCopyExceptionNeedsWrapping(originalException) ?
-                WrapStreamCopyException(originalException) :
-                originalException;
+            return StreamCopyExceptionNeedsWrapping(originalException)
+              ? WrapStreamCopyException(originalException)
+              : originalException;
         }
 
         internal static Exception WrapStreamCopyException(Exception e)
@@ -755,25 +893,41 @@ namespace System.Net.Http
             switch (encoding.CodePage)
             {
                 case UTF8CodePage:
-                    return (dataLength >= UTF8PreambleLength
+                    return (
+                        dataLength >= UTF8PreambleLength
                         && data[offset + 0] == UTF8PreambleByte0
                         && data[offset + 1] == UTF8PreambleByte1
-                        && data[offset + 2] == UTF8PreambleByte2) ? UTF8PreambleLength : 0;
+                        && data[offset + 2] == UTF8PreambleByte2
+                    )
+                      ? UTF8PreambleLength
+                      : 0;
                 case UTF32CodePage:
-                    return (dataLength >= UTF32PreambleLength
+                    return (
+                        dataLength >= UTF32PreambleLength
                         && data[offset + 0] == UTF32PreambleByte0
                         && data[offset + 1] == UTF32PreambleByte1
                         && data[offset + 2] == UTF32PreambleByte2
-                        && data[offset + 3] == UTF32PreambleByte3) ? UTF32PreambleLength : 0;
+                        && data[offset + 3] == UTF32PreambleByte3
+                    )
+                      ? UTF32PreambleLength
+                      : 0;
                 case UnicodeCodePage:
-                    return (dataLength >= UnicodePreambleLength
+                    return (
+                        dataLength >= UnicodePreambleLength
                         && data[offset + 0] == UnicodePreambleByte0
-                        && data[offset + 1] == UnicodePreambleByte1) ? UnicodePreambleLength : 0;
+                        && data[offset + 1] == UnicodePreambleByte1
+                    )
+                      ? UnicodePreambleLength
+                      : 0;
 
                 case BigEndianUnicodeCodePage:
-                    return (dataLength >= BigEndianUnicodePreambleLength
+                    return (
+                        dataLength >= BigEndianUnicodePreambleLength
                         && data[offset + 0] == BigEndianUnicodePreambleByte0
-                        && data[offset + 1] == BigEndianUnicodePreambleByte1) ? BigEndianUnicodePreambleLength : 0;
+                        && data[offset + 1] == BigEndianUnicodePreambleByte1
+                    )
+                      ? BigEndianUnicodePreambleLength
+                      : 0;
 
                 default:
                     byte[] preamble = encoding.GetPreamble();
@@ -781,7 +935,11 @@ namespace System.Net.Http
             }
         }
 
-        private static bool TryDetectEncoding(ArraySegment<byte> buffer, [NotNullWhen(true)] out Encoding? encoding, out int preambleLength)
+        private static bool TryDetectEncoding(
+            ArraySegment<byte> buffer,
+            [NotNullWhen(true)] out Encoding? encoding,
+            out int preambleLength
+        )
         {
             byte[]? data = buffer.Array;
             int offset = buffer.Offset;
@@ -796,7 +954,10 @@ namespace System.Net.Http
                 switch (first2Bytes)
                 {
                     case UTF8PreambleFirst2Bytes:
-                        if (dataLength >= UTF8PreambleLength && data[offset + 2] == UTF8PreambleByte2)
+                        if (
+                            dataLength >= UTF8PreambleLength
+                            && data[offset + 2] == UTF8PreambleByte2
+                        )
                         {
                             encoding = Encoding.UTF8;
                             preambleLength = UTF8PreambleLength;
@@ -806,7 +967,11 @@ namespace System.Net.Http
 
                     case UTF32OrUnicodePreambleFirst2Bytes:
                         // UTF32 not supported on Phone
-                        if (dataLength >= UTF32PreambleLength && data[offset + 2] == UTF32PreambleByte2 && data[offset + 3] == UTF32PreambleByte3)
+                        if (
+                            dataLength >= UTF32PreambleLength
+                            && data[offset + 2] == UTF32PreambleByte2
+                            && data[offset + 3] == UTF32PreambleByte3
+                        )
                         {
                             encoding = Encoding.UTF32;
                             preambleLength = UTF32PreambleLength;
@@ -833,7 +998,12 @@ namespace System.Net.Http
         private static bool BufferHasPrefix(ArraySegment<byte> buffer, byte[] prefix)
         {
             byte[]? byteArray = buffer.Array;
-            if (prefix == null || byteArray == null || prefix.Length > buffer.Count || prefix.Length == 0)
+            if (
+                prefix == null
+                || byteArray == null
+                || prefix.Length > buffer.Count
+                || prefix.Length == 0
+            )
                 return false;
 
             for (int i = 0, j = buffer.Offset; i < prefix.Length; i++, j++)
@@ -847,7 +1017,11 @@ namespace System.Net.Http
 
         #endregion Helpers
 
-        private static async Task<TResult> WaitAndReturnAsync<TState, TResult>(Task waitTask, TState state, Func<TState, TResult> returnFunc)
+        private static async Task<TResult> WaitAndReturnAsync<TState, TResult>(
+            Task waitTask,
+            TState state,
+            Func<TState, TResult> returnFunc
+        )
         {
             await waitTask.ConfigureAwait(false);
             return returnFunc(state);
@@ -855,15 +1029,16 @@ namespace System.Net.Http
 
         private static Exception CreateOverCapacityException(int maxBufferSize)
         {
-            return new HttpRequestException(SR.Format(SR.net_http_content_buffersize_exceeded, maxBufferSize));
+            return new HttpRequestException(
+                SR.Format(SR.net_http_content_buffersize_exceeded, maxBufferSize)
+            );
         }
 
         internal sealed class LimitMemoryStream : MemoryStream
         {
             private readonly int _maxSize;
 
-            public LimitMemoryStream(int maxSize, int capacity)
-                : base(capacity)
+            public LimitMemoryStream(int maxSize, int capacity) : base(capacity)
             {
                 Debug.Assert(capacity <= maxSize);
                 _maxSize = maxSize;
@@ -872,9 +1047,12 @@ namespace System.Net.Http
             public byte[] GetSizedBuffer()
             {
                 ArraySegment<byte> buffer;
-                return TryGetBuffer(out buffer) && buffer.Offset == 0 && buffer.Count == buffer.Array!.Length ?
-                    buffer.Array :
-                    ToArray();
+                return
+                    TryGetBuffer(out buffer)
+                    && buffer.Offset == 0
+                    && buffer.Count == buffer.Array!.Length
+                  ? buffer.Array
+                  : ToArray();
             }
 
             public override void Write(byte[] buffer, int offset, int count)
@@ -889,19 +1067,33 @@ namespace System.Net.Http
                 base.WriteByte(value);
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 CheckSize(count);
                 return base.WriteAsync(buffer, offset, count, cancellationToken);
             }
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken
+            )
             {
                 CheckSize(buffer.Length);
                 return base.WriteAsync(buffer, cancellationToken);
             }
 
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            )
             {
                 CheckSize(count);
                 return base.BeginWrite(buffer, offset, count, callback, state);
@@ -912,7 +1104,11 @@ namespace System.Net.Http
                 base.EndWrite(asyncResult);
             }
 
-            public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+            public override Task CopyToAsync(
+                Stream destination,
+                int bufferSize,
+                CancellationToken cancellationToken
+            )
             {
                 ArraySegment<byte> buffer;
                 if (TryGetBuffer(out buffer))
@@ -924,7 +1120,12 @@ namespace System.Net.Http
                     Position = length;
 
                     long bytesToWrite = length - pos;
-                    return destination.WriteAsync(buffer.Array!, (int)(buffer.Offset + pos), (int)bytesToWrite, cancellationToken);
+                    return destination.WriteAsync(
+                        buffer.Array!,
+                        (int)(buffer.Offset + pos),
+                        (int)bytesToWrite,
+                        cancellationToken
+                    );
                 }
 
                 return base.CopyToAsync(destination, bufferSize, cancellationToken);
@@ -947,7 +1148,8 @@ namespace System.Net.Http
             private byte[] _buffer;
             private int _length;
 
-            public LimitArrayPoolWriteStream(int maxBufferSize) : this(maxBufferSize, InitialLength) { }
+            public LimitArrayPoolWriteStream(int maxBufferSize) : this(maxBufferSize, InitialLength)
+            { }
 
             public LimitArrayPoolWriteStream(int maxBufferSize, long capacity)
             {
@@ -1009,9 +1211,10 @@ namespace System.Net.Http
                 // allowed byte array, than shrink to that (and if the required length is actually
                 // longer than that, we'll let the runtime throw).
                 uint twiceLength = 2 * (uint)currentBuffer.Length;
-                int newCapacity = twiceLength > Array.MaxLength ?
-                    Math.Max(value, Array.MaxLength) :
-                    Math.Max(value, (int)twiceLength);
+                int newCapacity =
+                    twiceLength > Array.MaxLength
+                        ? Math.Max(value, Array.MaxLength)
+                        : Math.Max(value, (int)twiceLength);
 
                 // Get a new buffer, copy the current one to it, return the current one, and
                 // set the new buffer as current.
@@ -1039,23 +1242,40 @@ namespace System.Net.Http
                 _length += buffer.Length;
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 Write(buffer, offset, count);
                 return Task.CompletedTask;
             }
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 Write(buffer.Span);
                 return default;
             }
 
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState) =>
-                TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), asyncCallback, asyncState);
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? asyncCallback,
+                object? asyncState
+            ) =>
+                TaskToApm.Begin(
+                    WriteAsync(buffer, offset, count, CancellationToken.None),
+                    asyncCallback,
+                    asyncState
+                );
 
-            public override void EndWrite(IAsyncResult asyncResult) =>
-                TaskToApm.End(asyncResult);
+            public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 
             public override void WriteByte(byte value)
             {
@@ -1066,17 +1286,35 @@ namespace System.Net.Http
             }
 
             public override void Flush() { }
-            public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
+            public override Task FlushAsync(CancellationToken cancellationToken) =>
+                Task.CompletedTask;
 
             public override long Length => _length;
             public override bool CanWrite => true;
             public override bool CanRead => false;
             public override bool CanSeek => false;
 
-            public override long Position { get { throw new NotSupportedException(); } set { throw new NotSupportedException(); } }
-            public override int Read(byte[] buffer, int offset, int count) { throw new NotSupportedException(); }
-            public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
-            public override void SetLength(long value) { throw new NotSupportedException(); }
+            public override long Position
+            {
+                get { throw new NotSupportedException(); }
+                set { throw new NotSupportedException(); }
+            }
+
+            public override int Read(byte[] buffer, int offset, int count)
+            {
+                throw new NotSupportedException();
+            }
+
+            public override long Seek(long offset, SeekOrigin origin)
+            {
+                throw new NotSupportedException();
+            }
+
+            public override void SetLength(long value)
+            {
+                throw new NotSupportedException();
+            }
         }
     }
 }

@@ -12,8 +12,7 @@ namespace System.Reflection.Context.Projection
     {
         private readonly Projector _projector;
 
-        public ProjectingMethodBody(MethodBody body, Projector projector)
-            : base(body)
+        public ProjectingMethodBody(MethodBody body, Projector projector) : base(body)
         {
             Debug.Assert(null != projector);
 
@@ -22,7 +21,13 @@ namespace System.Reflection.Context.Projection
 
         public override IList<ExceptionHandlingClause> ExceptionHandlingClauses
         {
-            get { return _projector.Project(base.ExceptionHandlingClauses, _projector.ProjectExceptionHandlingClause); }
+            get
+            {
+                return _projector.Project(
+                    base.ExceptionHandlingClauses,
+                    _projector.ProjectExceptionHandlingClause
+                );
+            }
         }
 
         public override IList<LocalVariableInfo> LocalVariables

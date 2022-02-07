@@ -14,14 +14,11 @@ public class DefaultViewComponentFactoryTest
     public void CreateViewComponent_ActivatesProperties_OnTheInstance()
     {
         // Arrange
-        var context = new ViewComponentContext
-        {
-        };
+        var context = new ViewComponentContext { };
 
         var component = new ActivablePropertiesViewComponent();
         var activator = new Mock<IViewComponentActivator>();
-        activator.Setup(a => a.Create(context))
-            .Returns(component);
+        activator.Setup(a => a.Create(context)).Returns(component);
 
         var factory = new DefaultViewComponentFactory(activator.Object);
 
@@ -39,14 +36,13 @@ public class DefaultViewComponentFactoryTest
     public void ReleaseViewComponent_CallsDispose_OnTheInstance()
     {
         // Arrange
-        var context = new ViewComponentContext
-        {
-        };
+        var context = new ViewComponentContext { };
 
         var component = new ActivablePropertiesViewComponent();
 
         var viewComponentActivator = new Mock<IViewComponentActivator>();
-        viewComponentActivator.Setup(vca => vca.Release(context, component))
+        viewComponentActivator
+            .Setup(vca => vca.Release(context, component))
             .Callback<ViewComponentContext, object>((c, o) => (o as IDisposable)?.Dispose());
 
         var factory = new DefaultViewComponentFactory(viewComponentActivator.Object);
@@ -62,14 +58,13 @@ public class DefaultViewComponentFactoryTest
     public async Task ReleaseViewComponentAsync_CallsDispose_OnTheInstance()
     {
         // Arrange
-        var context = new ViewComponentContext
-        {
-        };
+        var context = new ViewComponentContext { };
 
         var component = new ActivablePropertiesViewComponent();
 
         var viewComponentActivator = new Mock<IViewComponentActivator>();
-        viewComponentActivator.Setup(vca => vca.ReleaseAsync(context, component))
+        viewComponentActivator
+            .Setup(vca => vca.ReleaseAsync(context, component))
             .Callback<ViewComponentContext, object>((c, o) => (o as IDisposable)?.Dispose())
             .Returns(default(ValueTask));
 
@@ -86,15 +81,16 @@ public class DefaultViewComponentFactoryTest
     public async Task ReleaseViewComponentAsync_CallsDisposeAsync_OnAsyncDisposableComponents()
     {
         // Arrange
-        var context = new ViewComponentContext
-        {
-        };
+        var context = new ViewComponentContext { };
 
         var component = new AsyncDisposableViewComponent();
 
         var viewComponentActivator = new Mock<IViewComponentActivator>();
-        viewComponentActivator.Setup(vca => vca.ReleaseAsync(context, component))
-            .Callback<ViewComponentContext, object>((c, o) => (o as IAsyncDisposable)?.DisposeAsync())
+        viewComponentActivator
+            .Setup(vca => vca.ReleaseAsync(context, component))
+            .Callback<ViewComponentContext, object>(
+                (c, o) => (o as IAsyncDisposable)?.DisposeAsync()
+            )
             .Returns(default(ValueTask));
 
         var factory = new DefaultViewComponentFactory(viewComponentActivator.Object);

@@ -53,10 +53,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(2, fakeConnection.DbConnections[0].DbCommands.Count);
             Assert.Same(
                 fakeConnection.DbConnections[0].DbTransactions[0],
-                fakeConnection.DbConnections[0].DbCommands[0].Transaction);
+                fakeConnection.DbConnections[0].DbCommands[0].Transaction
+            );
             Assert.Same(
                 fakeConnection.DbConnections[0].DbTransactions[0],
-                fakeConnection.DbConnections[0].DbCommands[1].Transaction);
+                fakeConnection.DbConnections[0].DbCommands[1].Transaction
+            );
         }
 
         [ConditionalTheory]
@@ -80,7 +82,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 if (async)
                 {
-                    await migrationCommandExecutor.ExecuteNonQueryAsync(commandList, fakeConnection);
+                    await migrationCommandExecutor.ExecuteNonQueryAsync(
+                        commandList,
+                        fakeConnection
+                    );
                 }
                 else
                 {
@@ -101,19 +106,21 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(2, fakeConnection.DbConnections[0].DbCommands.Count);
             Assert.Same(
                 fakeConnection.DbConnections[0].DbTransactions[0],
-                fakeConnection.DbConnections[0].DbCommands[0].Transaction);
+                fakeConnection.DbConnections[0].DbCommands[0].Transaction
+            );
             Assert.Same(
                 fakeConnection.DbConnections[0].DbTransactions[0],
-                fakeConnection.DbConnections[0].DbCommands[1].Transaction);
-            Assert.Same(
-                tx.GetDbTransaction(),
-                fakeConnection.DbConnections[0].DbTransactions[0]);
+                fakeConnection.DbConnections[0].DbCommands[1].Transaction
+            );
+            Assert.Same(tx.GetDbTransaction(), fakeConnection.DbConnections[0].DbTransactions[0]);
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task Executes_transaction_suppressed_migration_commands_in_user_transaction(bool async)
+        public async Task Executes_transaction_suppressed_migration_commands_in_user_transaction(
+            bool async
+        )
         {
             var fakeConnection = CreateConnection();
             var logger = new FakeRelationalCommandDiagnosticsLogger();
@@ -131,17 +138,31 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 if (async)
                 {
-                    Assert.Equal(RelationalStrings.TransactionSuppressedMigrationInUserTransaction,
-                        (await Assert.ThrowsAsync<NotSupportedException>(
-                        async ()
-                            => await migrationCommandExecutor.ExecuteNonQueryAsync(commandList, fakeConnection))).Message);
+                    Assert.Equal(
+                        RelationalStrings.TransactionSuppressedMigrationInUserTransaction,
+                        (
+                            await Assert.ThrowsAsync<NotSupportedException>(
+                                async () =>
+                                    await migrationCommandExecutor.ExecuteNonQueryAsync(
+                                        commandList,
+                                        fakeConnection
+                                    )
+                            )
+                        ).Message
+                    );
                 }
                 else
                 {
-                    Assert.Equal(RelationalStrings.TransactionSuppressedMigrationInUserTransaction,
+                    Assert.Equal(
+                        RelationalStrings.TransactionSuppressedMigrationInUserTransaction,
                         Assert.Throws<NotSupportedException>(
-                            ()
-                                => migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection)).Message);
+                            () =>
+                                migrationCommandExecutor.ExecuteNonQuery(
+                                    commandList,
+                                    fakeConnection
+                                )
+                        ).Message
+                    );
                 }
 
                 tx.Rollback();
@@ -156,15 +177,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(1, fakeConnection.DbConnections[0].DbTransactions[0].RollbackCount);
 
             Assert.Equal(0, fakeConnection.DbConnections[0].DbCommands.Count);
-            Assert.Same(
-                tx.GetDbTransaction(),
-                fakeConnection.DbConnections[0].DbTransactions[0]);
+            Assert.Same(tx.GetDbTransaction(), fakeConnection.DbConnections[0].DbTransactions[0]);
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task Executes_migration_commands_with_transaction_suppressed_outside_of_transaction(bool async)
+        public async Task Executes_migration_commands_with_transaction_suppressed_outside_of_transaction(
+            bool async
+        )
         {
             var fakeConnection = CreateConnection();
             var logger = new FakeRelationalCommandDiagnosticsLogger();
@@ -233,9 +254,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(2, fakeConnection.DbConnections[0].DbCommands.Count);
             Assert.Same(
                 fakeConnection.DbConnections[0].DbTransactions[0],
-                fakeConnection.DbConnections[0].DbCommands[0].Transaction);
-            Assert.Null(
-                fakeConnection.DbConnections[0].DbCommands[1].Transaction);
+                fakeConnection.DbConnections[0].DbCommands[0].Transaction
+            );
+            Assert.Null(fakeConnection.DbConnections[0].DbCommands[1].Transaction);
         }
 
         [ConditionalTheory]
@@ -272,17 +293,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(0, fakeConnection.DbConnections[0].DbTransactions[0].RollbackCount);
 
             Assert.Equal(2, fakeConnection.DbConnections[0].DbCommands.Count);
-            Assert.Null(
-                fakeConnection.DbConnections[0].DbCommands[0].Transaction);
+            Assert.Null(fakeConnection.DbConnections[0].DbCommands[0].Transaction);
             Assert.Same(
                 fakeConnection.DbConnections[0].DbTransactions[0],
-                fakeConnection.DbConnections[0].DbCommands[1].Transaction);
+                fakeConnection.DbConnections[0].DbCommands[1].Transaction
+            );
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task Executes_commands_in_order_regardless_of_transaction_suppression(bool async)
+        public async Task Executes_commands_in_order_regardless_of_transaction_suppression(
+            bool async
+        )
         {
             var fakeConnection = CreateConnection();
             var logger = new FakeRelationalCommandDiagnosticsLogger();
@@ -290,7 +313,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var commandList = new List<MigrationCommand>
             {
                 new(CreateRelationalCommand(commandText: "First"), null, logger),
-                new(CreateRelationalCommand(commandText: "Second"), null, logger, transactionSuppressed: true),
+                new(
+                    CreateRelationalCommand(commandText: "Second"),
+                    null,
+                    logger,
+                    transactionSuppressed: true
+                ),
                 new(CreateRelationalCommand(commandText: "Third"), null, logger)
             };
 
@@ -319,28 +347,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             var command = fakeConnection.DbConnections[0].DbCommands[0];
 
-            Assert.Same(
-                fakeConnection.DbConnections[0].DbTransactions[0],
-                command.Transaction);
-            Assert.Equal(
-                "First",
-                command.CommandText);
+            Assert.Same(fakeConnection.DbConnections[0].DbTransactions[0], command.Transaction);
+            Assert.Equal("First", command.CommandText);
 
             command = fakeConnection.DbConnections[0].DbCommands[1];
 
             Assert.Null(command.Transaction);
-            Assert.Equal(
-                "Second",
-                command.CommandText);
+            Assert.Equal("Second", command.CommandText);
 
             command = fakeConnection.DbConnections[0].DbCommands[2];
 
-            Assert.Same(
-                fakeConnection.DbConnections[0].DbTransactions[1],
-                command.Transaction);
-            Assert.Equal(
-                "Third",
-                command.CommandText);
+            Assert.Same(fakeConnection.DbConnections[0].DbTransactions[1], command.Transaction);
+            Assert.Equal("Third", command.CommandText);
         }
 
         [ConditionalTheory]
@@ -348,35 +366,42 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [InlineData(true)]
         public async Task Disposes_transaction_on_exception(bool async)
         {
-            var fakeDbConnection =
-                new FakeDbConnection(
-                    ConnectionString,
-                    new FakeCommandExecutor(
-                        executeNonQuery: c => throw new InvalidOperationException(),
-                        executeNonQueryAsync: (c, ct) => throw new InvalidOperationException()));
+            var fakeDbConnection = new FakeDbConnection(
+                ConnectionString,
+                new FakeCommandExecutor(
+                    executeNonQuery: c => throw new InvalidOperationException(),
+                    executeNonQueryAsync: (c, ct) => throw new InvalidOperationException()
+                )
+            );
 
-            var fakeConnection =
-                CreateConnection(
-                    CreateOptions(
-                        new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection)));
+            var fakeConnection = CreateConnection(
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection))
+            );
 
             var logger = new FakeRelationalCommandDiagnosticsLogger();
 
-            var commandList = new List<MigrationCommand> { new(CreateRelationalCommand(), null, logger) };
+            var commandList = new List<MigrationCommand>
+            {
+                new(CreateRelationalCommand(), null, logger)
+            };
 
             var migrationCommandExecutor = new MigrationCommandExecutor();
 
             if (async)
             {
                 await Assert.ThrowsAsync<InvalidOperationException>(
-                    async ()
-                        => await migrationCommandExecutor.ExecuteNonQueryAsync(commandList, fakeConnection));
+                    async () =>
+                        await migrationCommandExecutor.ExecuteNonQueryAsync(
+                            commandList,
+                            fakeConnection
+                        )
+                );
             }
             else
             {
                 Assert.Throws<InvalidOperationException>(
-                    ()
-                        => migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection));
+                    () => migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection)
+                );
             }
 
             Assert.Equal(1, fakeDbConnection.OpenCount);
@@ -390,30 +415,37 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
         private const string ConnectionString = "Fake Connection String";
 
-        private static FakeRelationalConnection CreateConnection(IDbContextOptions options = null)
-            => new(options ?? CreateOptions());
+        private static FakeRelationalConnection CreateConnection(
+            IDbContextOptions options = null
+        ) => new(options ?? CreateOptions());
 
-        private static IDbContextOptions CreateOptions(RelationalOptionsExtension optionsExtension = null)
+        private static IDbContextOptions CreateOptions(
+            RelationalOptionsExtension optionsExtension = null
+        )
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
-                .AddOrUpdateExtension(
-                    optionsExtension
-                    ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString));
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                optionsExtension
+                    ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
+            );
 
             return optionsBuilder.Options;
         }
 
         private IRelationalCommand CreateRelationalCommand(
             string commandText = "Command Text",
-            IReadOnlyList<IRelationalParameter> parameters = null)
-            => new RelationalCommand(
+            IReadOnlyList<IRelationalParameter> parameters = null
+        ) =>
+            new RelationalCommand(
                 new RelationalCommandBuilderDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>())),
+                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                    )
+                ),
                 commandText,
-                parameters ?? Array.Empty<IRelationalParameter>());
+                parameters ?? Array.Empty<IRelationalParameter>()
+            );
     }
 }

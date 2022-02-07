@@ -13,8 +13,11 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
 {
     private readonly IServiceCollection _services;
     private readonly List<Action<IConfigurationBuilder>> _configureHostActions = new();
-    private readonly List<Action<HostBuilderContext, IConfigurationBuilder>> _configureAppActions = new();
-    private readonly List<Action<HostBuilderContext, IServiceCollection>> _configureServicesActions = new();
+    private readonly List<Action<HostBuilderContext, IConfigurationBuilder>> _configureAppActions =
+        new();
+    private readonly List<
+        Action<HostBuilderContext, IServiceCollection>
+    > _configureServicesActions = new();
 
     private readonly List<Action<IHostBuilder>> _remainingOperations = new();
 
@@ -33,13 +36,19 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
         throw new InvalidOperationException();
     }
 
-    public IHostBuilder ConfigureAppConfiguration(Action<HostBuilderContext, IConfigurationBuilder> configureDelegate)
+    public IHostBuilder ConfigureAppConfiguration(
+        Action<HostBuilderContext, IConfigurationBuilder> configureDelegate
+    )
     {
-        _configureAppActions.Add(configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate)));
+        _configureAppActions.Add(
+            configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
+        );
         return this;
     }
 
-    public IHostBuilder ConfigureContainer<TContainerBuilder>(Action<HostBuilderContext, TContainerBuilder> configureDelegate)
+    public IHostBuilder ConfigureContainer<TContainerBuilder>(
+        Action<HostBuilderContext, TContainerBuilder> configureDelegate
+    )
     {
         // This is not called by HostingHostBuilderExtensions.ConfigureDefaults currently, but that could change in the future.
         // If this does get called in the future, it should be called again at a later stage on the ConfigureHostBuilder.
@@ -48,24 +57,34 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
             throw new ArgumentNullException(nameof(configureDelegate));
         }
 
-        _remainingOperations.Add(hostBuilder => hostBuilder.ConfigureContainer<TContainerBuilder>(configureDelegate));
+        _remainingOperations.Add(
+            hostBuilder => hostBuilder.ConfigureContainer<TContainerBuilder>(configureDelegate)
+        );
         return this;
     }
 
     public IHostBuilder ConfigureHostConfiguration(Action<IConfigurationBuilder> configureDelegate)
     {
-        _configureHostActions.Add(configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate)));
+        _configureHostActions.Add(
+            configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
+        );
         return this;
     }
 
-    public IHostBuilder ConfigureServices(Action<HostBuilderContext, IServiceCollection> configureDelegate)
+    public IHostBuilder ConfigureServices(
+        Action<HostBuilderContext, IServiceCollection> configureDelegate
+    )
     {
         // HostingHostBuilderExtensions.ConfigureDefaults calls this via ConfigureLogging
-        _configureServicesActions.Add(configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate)));
+        _configureServicesActions.Add(
+            configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
+        );
         return this;
     }
 
-    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(IServiceProviderFactory<TContainerBuilder> factory) where TContainerBuilder : notnull
+    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
+        IServiceProviderFactory<TContainerBuilder> factory
+    ) where TContainerBuilder : notnull
     {
         // This is not called by HostingHostBuilderExtensions.ConfigureDefaults currently, but that could change in the future.
         // If this does get called in the future, it should be called again at a later stage on the ConfigureHostBuilder.
@@ -74,11 +93,15 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
             throw new ArgumentNullException(nameof(factory));
         }
 
-        _remainingOperations.Add(hostBuilder => hostBuilder.UseServiceProviderFactory<TContainerBuilder>(factory));
+        _remainingOperations.Add(
+            hostBuilder => hostBuilder.UseServiceProviderFactory<TContainerBuilder>(factory)
+        );
         return this;
     }
 
-    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory) where TContainerBuilder : notnull
+    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
+        Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
+    ) where TContainerBuilder : notnull
     {
         // HostingHostBuilderExtensions.ConfigureDefaults calls this via UseDefaultServiceProvider
         // during the initial config stage. It should be called again later on the ConfigureHostBuilder.
@@ -87,11 +110,16 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
             throw new ArgumentNullException(nameof(factory));
         }
 
-        _remainingOperations.Add(hostBuilder => hostBuilder.UseServiceProviderFactory<TContainerBuilder>(factory));
+        _remainingOperations.Add(
+            hostBuilder => hostBuilder.UseServiceProviderFactory<TContainerBuilder>(factory)
+        );
         return this;
     }
 
-    public (HostBuilderContext, ConfigurationManager) RunDefaultCallbacks(ConfigurationManager configuration, HostBuilder innerBuilder)
+    public (HostBuilderContext, ConfigurationManager) RunDefaultCallbacks(
+        ConfigurationManager configuration,
+        HostBuilder innerBuilder
+    )
     {
         var hostConfiguration = new ConfigurationManager();
 
@@ -105,11 +133,16 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
         {
             // ApplicationKey is always configured by WebApplicationOptions, so it's never expected to be null
             ApplicationName = hostConfiguration[HostDefaults.ApplicationKey]!,
-            EnvironmentName = hostConfiguration[HostDefaults.EnvironmentKey] ?? Environments.Production,
-            ContentRootPath = HostingPathResolver.ResolvePath(hostConfiguration[HostDefaults.ContentRootKey]),
+            EnvironmentName =
+                hostConfiguration[HostDefaults.EnvironmentKey] ?? Environments.Production,
+            ContentRootPath = HostingPathResolver.ResolvePath(
+                hostConfiguration[HostDefaults.ContentRootKey]
+            ),
         };
 
-        hostingEnvironment.ContentRootFileProvider = new PhysicalFileProvider(hostingEnvironment.ContentRootPath);
+        hostingEnvironment.ContentRootFileProvider = new PhysicalFileProvider(
+            hostingEnvironment.ContentRootPath
+        );
 
         // Normalize the content root setting for the path in configuration
         hostConfiguration[HostDefaults.ContentRootKey] = hostingEnvironment.ContentRootPath;

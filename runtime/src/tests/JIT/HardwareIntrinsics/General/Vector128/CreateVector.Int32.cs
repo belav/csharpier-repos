@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
 
         public bool Succeeded { get; set; } = true;
 
@@ -68,20 +69,33 @@ namespace JIT.HardwareIntrinsics.General
             Vector64<Int32> upper = Vector64.Create(upperValue);
 
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.Create), new Type[] { typeof(Vector64<Int32>), typeof(Vector64<Int32>) })
-                                .Invoke(null, new object[] { lower, upper });
+                .GetMethod(
+                    nameof(Vector128.Create),
+                    new Type[] { typeof(Vector64<Int32>), typeof(Vector64<Int32>) }
+                )
+                .Invoke(null, new object[] { lower, upper });
 
             ValidateResult((Vector128<Int32>)(result), lowerValue, upperValue);
         }
 
-        private void ValidateResult(Vector128<Int32> result, Int32 expectedLowerValue, Int32 expectedUpperValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Int32> result,
+            Int32 expectedLowerValue,
+            Int32 expectedUpperValue,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] resultElements = new Int32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedLowerValue, expectedUpperValue, method);
         }
 
-        private void ValidateResult(Int32[] resultElements, Int32 expectedLowerValue, Int32 expectedUpperValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int32[] resultElements,
+            Int32 expectedLowerValue,
+            Int32 expectedUpperValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -105,10 +119,14 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.Create(Int32): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.Create(Int32): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   lower: {expectedLowerValue}");
                 TestLibrary.TestFramework.LogInformation($"   upper: {expectedUpperValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

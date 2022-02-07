@@ -29,12 +29,17 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
         private readonly IAsynchronousOperationListenerProvider _listenerProvider;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public NavigableSymbolService(
             IUIThreadOperationExecutor uiThreadOperationExecutor,
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _threadingContext = threadingContext;
@@ -42,10 +47,22 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
             _listenerProvider = listenerProvider;
         }
 
-        public INavigableSymbolSource TryCreateNavigableSymbolSource(ITextView textView, ITextBuffer buffer)
+        public INavigableSymbolSource TryCreateNavigableSymbolSource(
+            ITextView textView,
+            ITextBuffer buffer
+        )
         {
-            return textView.GetOrCreatePerSubjectBufferProperty(buffer, s_key,
-                (v, b) => new NavigableSymbolSource(_threadingContext, _streamingPresenter, _uiThreadOperationExecutor, _listenerProvider));
+            return textView.GetOrCreatePerSubjectBufferProperty(
+                buffer,
+                s_key,
+                (v, b) =>
+                    new NavigableSymbolSource(
+                        _threadingContext,
+                        _streamingPresenter,
+                        _uiThreadOperationExecutor,
+                        _listenerProvider
+                    )
+            );
         }
     }
 }

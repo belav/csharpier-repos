@@ -14,14 +14,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             builder.Entity<MyType>().Property(e => e.Id).HasColumnType("money");
             builder.Entity<MyRelatedType1>().Property(e => e.Id).HasMaxLength(200).IsFixedLength();
-            builder.Entity<MyRelatedType1>().Property(e => e.Relationship2Id).HasColumnType("dec(6,1)");
+            builder
+                .Entity<MyRelatedType1>()
+                .Property(e => e.Relationship2Id)
+                .HasColumnType("dec(6,1)");
             builder.Entity<MyRelatedType2>().Property(e => e.Id).HasMaxLength(100).IsFixedLength();
             builder.Entity<MyRelatedType2>().Property(e => e.Relationship2Id).HasMaxLength(787);
             builder.Entity<MyRelatedType3>().Property(e => e.Id).IsUnicode(false);
             builder.Entity<MyRelatedType3>().Property(e => e.Relationship2Id).HasMaxLength(767);
             builder.Entity<MyRelatedType4>().Property(e => e.Relationship2Id).IsUnicode();
             builder.Entity<MyPrecisionType>().Property(e => e.PrecisionOnly).HasPrecision(16);
-            builder.Entity<MyPrecisionType>().Property(e => e.PrecisionAndScale).HasPrecision(18, 7);
+            builder
+                .Entity<MyPrecisionType>()
+                .Property(e => e.PrecisionAndScale)
+                .HasPrecision(18, 7);
             builder.Entity<MyTypeWithIndexAttribute>();
 
             return builder.Model.FindEntityType(typeof(TEntity));
@@ -39,51 +45,55 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? unicode = null,
             bool? fixedLength = null,
             string storeTypeName = null,
-            bool useConfiguration = false)
+            bool useConfiguration = false
+        )
         {
             if (useConfiguration)
             {
-                var model = CreateModelBuilder(c =>
-                {
-                    var scalarBuilder = c.DefaultTypeMapping(propertyType);
-
-                    if (maxLength.HasValue)
-                    {
-                        scalarBuilder.HasMaxLength(maxLength.Value);
-                    }
-
-                    if (precision.HasValue)
-                    {
-                        if (scale.HasValue)
+                var model = CreateModelBuilder(
+                        c =>
                         {
-                            scalarBuilder.HasPrecision(precision.Value, scale.Value);
+                            var scalarBuilder = c.DefaultTypeMapping(propertyType);
+
+                            if (maxLength.HasValue)
+                            {
+                                scalarBuilder.HasMaxLength(maxLength.Value);
+                            }
+
+                            if (precision.HasValue)
+                            {
+                                if (scale.HasValue)
+                                {
+                                    scalarBuilder.HasPrecision(precision.Value, scale.Value);
+                                }
+                                else
+                                {
+                                    scalarBuilder.HasPrecision(precision.Value);
+                                }
+                            }
+
+                            if (providerType != null)
+                            {
+                                scalarBuilder.HasConversion(providerType);
+                            }
+
+                            if (unicode.HasValue)
+                            {
+                                scalarBuilder.IsUnicode(unicode.Value);
+                            }
+
+                            if (fixedLength.HasValue)
+                            {
+                                scalarBuilder.IsFixedLength(fixedLength.Value);
+                            }
+
+                            if (storeTypeName != null)
+                            {
+                                scalarBuilder.HasColumnType(storeTypeName);
+                            }
                         }
-                        else
-                        {
-                            scalarBuilder.HasPrecision(precision.Value);
-                        }
-                    }
-
-                    if (providerType != null)
-                    {
-                        scalarBuilder.HasConversion(providerType);
-                    }
-
-                    if (unicode.HasValue)
-                    {
-                        scalarBuilder.IsUnicode(unicode.Value);
-                    }
-
-                    if (fixedLength.HasValue)
-                    {
-                        scalarBuilder.IsFixedLength(fixedLength.Value);
-                    }
-
-                    if (storeTypeName != null)
-                    {
-                        scalarBuilder.HasColumnType(storeTypeName);
-                    }
-                }).FinalizeModel();
+                    )
+                    .FinalizeModel();
 
                 return CreateRelationalTypeMappingSource().GetMapping(propertyType, model);
             }
@@ -135,11 +145,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
 
                 var model = modelBuilder.Model.FinalizeModel();
-                return CreateRelationalTypeMappingSource().GetMapping(model.FindEntityType(typeof(MyType)).FindProperty(property.Name));
+                return CreateRelationalTypeMappingSource()
+                    .GetMapping(model.FindEntityType(typeof(MyType)).FindProperty(property.Name));
             }
         }
 
-        protected abstract ModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null);
+        protected abstract ModelBuilder CreateModelBuilder(
+            Action<ModelConfigurationBuilder> configure = null
+        );
         protected abstract IRelationalTypeMappingSource CreateRelationalTypeMappingSource();
 
         protected class MyType

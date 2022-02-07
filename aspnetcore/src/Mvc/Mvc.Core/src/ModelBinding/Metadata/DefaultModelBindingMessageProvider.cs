@@ -33,15 +33,23 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     {
         SetMissingBindRequiredValueAccessor(Resources.FormatModelBinding_MissingBindRequiredMember);
         SetMissingKeyOrValueAccessor(() => Resources.KeyValuePair_BothKeyAndValueMustBePresent);
-        SetMissingRequestBodyRequiredValueAccessor(() => Resources.ModelBinding_MissingRequestBodyRequiredMember);
+        SetMissingRequestBodyRequiredValueAccessor(
+            () => Resources.ModelBinding_MissingRequestBodyRequiredMember
+        );
         SetValueMustNotBeNullAccessor(Resources.FormatModelBinding_NullValueNotValid);
         SetAttemptedValueIsInvalidAccessor(Resources.FormatModelState_AttemptedValueIsInvalid);
-        SetNonPropertyAttemptedValueIsInvalidAccessor(Resources.FormatModelState_NonPropertyAttemptedValueIsInvalid);
+        SetNonPropertyAttemptedValueIsInvalidAccessor(
+            Resources.FormatModelState_NonPropertyAttemptedValueIsInvalid
+        );
         SetUnknownValueIsInvalidAccessor(Resources.FormatModelState_UnknownValueIsInvalid);
-        SetNonPropertyUnknownValueIsInvalidAccessor(() => Resources.ModelState_NonPropertyUnknownValueIsInvalid);
+        SetNonPropertyUnknownValueIsInvalidAccessor(
+            () => Resources.ModelState_NonPropertyUnknownValueIsInvalid
+        );
         SetValueIsInvalidAccessor(Resources.FormatHtmlGeneration_ValueIsInvalid);
         SetValueMustBeANumberAccessor(Resources.FormatHtmlGeneration_ValueMustBeNumber);
-        SetNonPropertyValueMustBeANumberAccessor(() => Resources.HtmlGeneration_NonPropertyValueMustBeNumber);
+        SetNonPropertyValueMustBeANumberAccessor(
+            () => Resources.HtmlGeneration_NonPropertyValueMustBeNumber
+        );
     }
 
     /// <summary>
@@ -58,26 +66,37 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
 
         SetMissingBindRequiredValueAccessor(originalProvider.MissingBindRequiredValueAccessor);
         SetMissingKeyOrValueAccessor(originalProvider.MissingKeyOrValueAccessor);
-        SetMissingRequestBodyRequiredValueAccessor(originalProvider.MissingRequestBodyRequiredValueAccessor);
+        SetMissingRequestBodyRequiredValueAccessor(
+            originalProvider.MissingRequestBodyRequiredValueAccessor
+        );
         SetValueMustNotBeNullAccessor(originalProvider.ValueMustNotBeNullAccessor);
         SetAttemptedValueIsInvalidAccessor(originalProvider.AttemptedValueIsInvalidAccessor);
-        SetNonPropertyAttemptedValueIsInvalidAccessor(originalProvider.NonPropertyAttemptedValueIsInvalidAccessor);
+        SetNonPropertyAttemptedValueIsInvalidAccessor(
+            originalProvider.NonPropertyAttemptedValueIsInvalidAccessor
+        );
         SetUnknownValueIsInvalidAccessor(originalProvider.UnknownValueIsInvalidAccessor);
-        SetNonPropertyUnknownValueIsInvalidAccessor(originalProvider.NonPropertyUnknownValueIsInvalidAccessor);
+        SetNonPropertyUnknownValueIsInvalidAccessor(
+            originalProvider.NonPropertyUnknownValueIsInvalidAccessor
+        );
         SetValueIsInvalidAccessor(originalProvider.ValueIsInvalidAccessor);
         SetValueMustBeANumberAccessor(originalProvider.ValueMustBeANumberAccessor);
-        SetNonPropertyValueMustBeANumberAccessor(originalProvider.NonPropertyValueMustBeANumberAccessor);
+        SetNonPropertyValueMustBeANumberAccessor(
+            originalProvider.NonPropertyValueMustBeANumberAccessor
+        );
     }
 
     /// <inheritdoc/>
-    public override Func<string, string> MissingBindRequiredValueAccessor => _missingBindRequiredValueAccessor;
+    public override Func<string, string> MissingBindRequiredValueAccessor =>
+        _missingBindRequiredValueAccessor;
 
     /// <summary>
     /// Sets the <see cref="MissingBindRequiredValueAccessor"/> property.
     /// </summary>
     /// <param name="missingBindRequiredValueAccessor">The value to set.</param>
     [MemberNotNull(nameof(_missingBindRequiredValueAccessor))]
-    public void SetMissingBindRequiredValueAccessor(Func<string, string> missingBindRequiredValueAccessor)
+    public void SetMissingBindRequiredValueAccessor(
+        Func<string, string> missingBindRequiredValueAccessor
+    )
     {
         if (missingBindRequiredValueAccessor == null)
         {
@@ -106,14 +125,17 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     }
 
     /// <inheritdoc/>
-    public override Func<string> MissingRequestBodyRequiredValueAccessor => _missingRequestBodyRequiredValueAccessor;
+    public override Func<string> MissingRequestBodyRequiredValueAccessor =>
+        _missingRequestBodyRequiredValueAccessor;
 
     /// <summary>
     /// Sets the <see cref="MissingRequestBodyRequiredValueAccessor"/> property.
     /// </summary>
     /// <param name="missingRequestBodyRequiredValueAccessor">The value to set.</param>
     [MemberNotNull(nameof(_missingRequestBodyRequiredValueAccessor))]
-    public void SetMissingRequestBodyRequiredValueAccessor(Func<string> missingRequestBodyRequiredValueAccessor)
+    public void SetMissingRequestBodyRequiredValueAccessor(
+        Func<string> missingRequestBodyRequiredValueAccessor
+    )
     {
         if (missingRequestBodyRequiredValueAccessor == null)
         {
@@ -142,14 +164,17 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     }
 
     /// <inheritdoc/>
-    public override Func<string, string, string> AttemptedValueIsInvalidAccessor => _attemptedValueIsInvalidAccessor;
+    public override Func<string, string, string> AttemptedValueIsInvalidAccessor =>
+        _attemptedValueIsInvalidAccessor;
 
     /// <summary>
     /// Sets the <see cref="AttemptedValueIsInvalidAccessor"/> property.
     /// </summary>
     /// <param name="attemptedValueIsInvalidAccessor">The value to set.</param>
     [MemberNotNull(nameof(_attemptedValueIsInvalidAccessor))]
-    public void SetAttemptedValueIsInvalidAccessor(Func<string, string, string> attemptedValueIsInvalidAccessor)
+    public void SetAttemptedValueIsInvalidAccessor(
+        Func<string, string, string> attemptedValueIsInvalidAccessor
+    )
     {
         if (attemptedValueIsInvalidAccessor == null)
         {
@@ -160,7 +185,8 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     }
 
     /// <inheritdoc/>
-    public override Func<string, string> NonPropertyAttemptedValueIsInvalidAccessor => _nonPropertyAttemptedValueIsInvalidAccessor;
+    public override Func<string, string> NonPropertyAttemptedValueIsInvalidAccessor =>
+        _nonPropertyAttemptedValueIsInvalidAccessor;
 
     /// <summary>
     /// Sets the <see cref="NonPropertyAttemptedValueIsInvalidAccessor"/> property.
@@ -168,7 +194,8 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     /// <param name="nonPropertyAttemptedValueIsInvalidAccessor">The value to set.</param>
     [MemberNotNull(nameof(_nonPropertyAttemptedValueIsInvalidAccessor))]
     public void SetNonPropertyAttemptedValueIsInvalidAccessor(
-        Func<string, string> nonPropertyAttemptedValueIsInvalidAccessor)
+        Func<string, string> nonPropertyAttemptedValueIsInvalidAccessor
+    )
     {
         if (nonPropertyAttemptedValueIsInvalidAccessor == null)
         {
@@ -179,7 +206,8 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     }
 
     /// <inheritdoc/>
-    public override Func<string, string> UnknownValueIsInvalidAccessor => _unknownValueIsInvalidAccessor;
+    public override Func<string, string> UnknownValueIsInvalidAccessor =>
+        _unknownValueIsInvalidAccessor;
 
     /// <summary>
     /// Sets the <see cref="UnknownValueIsInvalidAccessor"/> property.
@@ -197,14 +225,17 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     }
 
     /// <inheritdoc/>
-    public override Func<string> NonPropertyUnknownValueIsInvalidAccessor => _nonPropertyUnknownValueIsInvalidAccessor;
+    public override Func<string> NonPropertyUnknownValueIsInvalidAccessor =>
+        _nonPropertyUnknownValueIsInvalidAccessor;
 
     /// <summary>
     /// Sets the <see cref="NonPropertyUnknownValueIsInvalidAccessor"/> property.
     /// </summary>
     /// <param name="nonPropertyUnknownValueIsInvalidAccessor">The value to set.</param>
     [MemberNotNull(nameof(_nonPropertyUnknownValueIsInvalidAccessor))]
-    public void SetNonPropertyUnknownValueIsInvalidAccessor(Func<string> nonPropertyUnknownValueIsInvalidAccessor)
+    public void SetNonPropertyUnknownValueIsInvalidAccessor(
+        Func<string> nonPropertyUnknownValueIsInvalidAccessor
+    )
     {
         if (nonPropertyUnknownValueIsInvalidAccessor == null)
         {
@@ -251,14 +282,17 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     }
 
     /// <inheritdoc/>
-    public override Func<string> NonPropertyValueMustBeANumberAccessor => _nonPropertyValueMustBeANumberAccessor;
+    public override Func<string> NonPropertyValueMustBeANumberAccessor =>
+        _nonPropertyValueMustBeANumberAccessor;
 
     /// <summary>
     /// Sets the <see cref="NonPropertyValueMustBeANumberAccessor"/> property.
     /// </summary>
     /// <param name="nonPropertyValueMustBeANumberAccessor">The value to set.</param>
     [MemberNotNull(nameof(_nonPropertyValueMustBeANumberAccessor))]
-    public void SetNonPropertyValueMustBeANumberAccessor(Func<string> nonPropertyValueMustBeANumberAccessor)
+    public void SetNonPropertyValueMustBeANumberAccessor(
+        Func<string> nonPropertyValueMustBeANumberAccessor
+    )
     {
         if (nonPropertyValueMustBeANumberAccessor == null)
         {

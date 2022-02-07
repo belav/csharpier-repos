@@ -172,7 +172,9 @@ namespace System.Security.Principal
         BuiltinAuthorizationAccessSid = 59,
         /// <summary>Indicates a SID is present in a server that can issue terminal server licenses.</summary>
         WinBuiltinTerminalServerLicenseServersSid = 60,
-        [Obsolete("This member has been deprecated and is only maintained for backwards compatability. WellKnownSidType values greater than MaxDefined may be defined in future releases.")]
+        [Obsolete(
+            "This member has been deprecated and is only maintained for backwards compatability. WellKnownSidType values greater than MaxDefined may be defined in future releases."
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         MaxDefined = WinBuiltinTerminalServerLicenseServersSid,
         /// <summary>Indicates a SID that matches the distributed COM user group.</summary>
@@ -278,7 +280,6 @@ namespace System.Security.Principal
         //
 
         public static readonly int MaxBinaryLength = 1 + 1 + 6 + MaxSubAuthorities * 4; // 4 bytes for each subauth
-
         #endregion
 
         #region Private Members
@@ -288,6 +289,7 @@ namespace System.Security.Principal
         //
 
         private IdentifierAuthority _identifierAuthority;
+
         // values guaranteed to be non-null on account of CreateFromParts()
         // method called by every constructor in this class.
         private int[] _subAuthorities;
@@ -314,7 +316,10 @@ namespace System.Security.Principal
 
         [MemberNotNull(nameof(_binaryForm))]
         [MemberNotNull(nameof(_subAuthorities))]
-        private void CreateFromParts(IdentifierAuthority identifierAuthority, ReadOnlySpan<int> subAuthorities)
+        private void CreateFromParts(
+            IdentifierAuthority identifierAuthority,
+            ReadOnlySpan<int> subAuthorities
+        )
         {
             //
             // Check the number of subauthorities passed in
@@ -374,7 +379,9 @@ namespace System.Security.Principal
 
             for (int i = 0; i < 6; i++)
             {
-                _binaryForm[2 + i] = (byte)((((ulong)_identifierAuthority) >> ((5 - i) * 8)) & 0xFF);
+                _binaryForm[2 + i] = (byte)(
+                    (((ulong)_identifierAuthority) >> ((5 - i) * 8)) & 0xFF
+                );
             }
 
             //
@@ -385,7 +392,9 @@ namespace System.Security.Principal
             {
                 for (byte shift = 0; shift < 4; shift += 1)
                 {
-                    _binaryForm[8 + 4 * i + shift] = unchecked((byte)(((ulong)_subAuthorities[i]) >> (shift * 8)));
+                    _binaryForm[8 + 4 * i + shift] = unchecked(
+                        (byte)(((ulong)_subAuthorities[i]) >> (shift * 8))
+                    );
                 }
             }
         }
@@ -409,7 +418,11 @@ namespace System.Security.Principal
 
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(offset), offset, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    offset,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             //
@@ -418,7 +431,10 @@ namespace System.Security.Principal
 
             if (binaryForm.Length - offset < SecurityIdentifier.MinBinaryLength)
             {
-                throw new ArgumentOutOfRangeException(nameof(binaryForm), SR.ArgumentOutOfRange_ArrayTooSmall);
+                throw new ArgumentOutOfRangeException(
+                    nameof(binaryForm),
+                    SR.ArgumentOutOfRange_ArrayTooSmall
+                );
             }
 
             //
@@ -431,7 +447,10 @@ namespace System.Security.Principal
                 // Revision is incorrect
                 //
 
-                throw new ArgumentException(SR.IdentityReference_InvalidSidRevision, nameof(binaryForm));
+                throw new ArgumentException(
+                    SR.IdentityReference_InvalidSidRevision,
+                    nameof(binaryForm)
+                );
             }
 
             //
@@ -440,7 +459,13 @@ namespace System.Security.Principal
             int subAuthoritiesLength = binaryForm[offset + 1];
             if (subAuthoritiesLength > MaxSubAuthorities)
             {
-                throw new ArgumentException(SR.Format(SR.IdentityReference_InvalidNumberOfSubauthorities, MaxSubAuthorities), nameof(binaryForm));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.IdentityReference_InvalidNumberOfSubauthorities,
+                        MaxSubAuthorities
+                    ),
+                    nameof(binaryForm)
+                );
             }
 
             //
@@ -451,17 +476,20 @@ namespace System.Security.Principal
 
             if (binaryForm.Length - offset < totalLength)
             {
-                throw new ArgumentException(SR.ArgumentOutOfRange_ArrayTooSmall, nameof(binaryForm));
+                throw new ArgumentException(
+                    SR.ArgumentOutOfRange_ArrayTooSmall,
+                    nameof(binaryForm)
+                );
             }
 
             Span<int> subAuthorities = stackalloc int[MaxSubAuthorities];
             IdentifierAuthority authority = (IdentifierAuthority)(
-                (((long)binaryForm[offset + 2]) << 40) +
-                (((long)binaryForm[offset + 3]) << 32) +
-                (((long)binaryForm[offset + 4]) << 24) +
-                (((long)binaryForm[offset + 5]) << 16) +
-                (((long)binaryForm[offset + 6]) << 8) +
-                (((long)binaryForm[offset + 7]))
+                (((long)binaryForm[offset + 2]) << 40)
+                + (((long)binaryForm[offset + 3]) << 32)
+                + (((long)binaryForm[offset + 4]) << 24)
+                + (((long)binaryForm[offset + 5]) << 16)
+                + (((long)binaryForm[offset + 6]) << 8)
+                + (((long)binaryForm[offset + 7]))
             );
 
             //
@@ -470,19 +498,15 @@ namespace System.Security.Principal
 
             for (int i = 0; i < subAuthoritiesLength; i++)
             {
-                subAuthorities[i] =
-                    (int)(
-                    (((uint)binaryForm[offset + 8 + 4 * i + 0]) << 0) +
-                    (((uint)binaryForm[offset + 8 + 4 * i + 1]) << 8) +
-                    (((uint)binaryForm[offset + 8 + 4 * i + 2]) << 16) +
-                    (((uint)binaryForm[offset + 8 + 4 * i + 3]) << 24)
+                subAuthorities[i] = (int)(
+                    (((uint)binaryForm[offset + 8 + 4 * i + 0]) << 0)
+                    + (((uint)binaryForm[offset + 8 + 4 * i + 1]) << 8)
+                    + (((uint)binaryForm[offset + 8 + 4 * i + 2]) << 16)
+                    + (((uint)binaryForm[offset + 8 + 4 * i + 3]) << 24)
                 );
             }
 
-            CreateFromParts(
-                authority,
-                subAuthorities.Slice(0, subAuthoritiesLength)
-            );
+            CreateFromParts(authority, subAuthorities.Slice(0, subAuthoritiesLength));
 
             return;
         }
@@ -547,9 +571,7 @@ namespace System.Security.Principal
         //
 
         public SecurityIdentifier(IntPtr binaryForm)
-            : this(Win32.ConvertIntPtrSidToByteArraySid(binaryForm), 0)
-        {
-        }
+            : this(Win32.ConvertIntPtrSidToByteArraySid(binaryForm), 0) { }
 
         //
         // Constructs a well-known SID
@@ -568,14 +590,20 @@ namespace System.Security.Principal
 
             if (sidType == WellKnownSidType.LogonIdsSid)
             {
-                throw new ArgumentException(SR.IdentityReference_CannotCreateLogonIdsSid, nameof(sidType));
+                throw new ArgumentException(
+                    SR.IdentityReference_CannotCreateLogonIdsSid,
+                    nameof(sidType)
+                );
             }
 
             //
             // sidType should not exceed the max defined value
             //
 
-            if ((sidType < WellKnownSidType.NullSid) || (sidType > WellKnownSidType.WinCapabilityRemovableStorageSid))
+            if (
+                (sidType < WellKnownSidType.NullSid)
+                || (sidType > WellKnownSidType.WinCapabilityRemovableStorageSid)
+            )
             {
                 throw new ArgumentException(SR.Argument_InvalidValue, nameof(sidType));
             }
@@ -584,18 +612,27 @@ namespace System.Security.Principal
             // for sidType between 38 to 50, the domainSid parameter must be specified
             //
             int error;
-            if ((sidType >= WellKnownSidType.AccountAdministratorSid) && (sidType <= WellKnownSidType.AccountRasAndIasServersSid))
+            if (
+                (sidType >= WellKnownSidType.AccountAdministratorSid)
+                && (sidType <= WellKnownSidType.AccountRasAndIasServersSid)
+            )
             {
                 if (domainSid == null)
                 {
-                    throw new ArgumentNullException(nameof(domainSid), SR.Format(SR.IdentityReference_DomainSidRequired, sidType));
+                    throw new ArgumentNullException(
+                        nameof(domainSid),
+                        SR.Format(SR.IdentityReference_DomainSidRequired, sidType)
+                    );
                 }
 
                 //
                 // verify that the domain sid is a valid windows domain sid
                 // to do that we call GetAccountDomainSid and the return value should be the same as the domainSid
                 //
-                error = Win32.GetWindowsAccountDomainSid(domainSid, out SecurityIdentifier? resultDomainSid);
+                error = Win32.GetWindowsAccountDomainSid(
+                    domainSid,
+                    out SecurityIdentifier? resultDomainSid
+                );
 
                 if (error == Interop.Errors.ERROR_INSUFFICIENT_BUFFER)
                 {
@@ -604,11 +641,16 @@ namespace System.Security.Principal
                 else if (error == Interop.Errors.ERROR_NON_ACCOUNT_SID)
                 {
                     // this means that the domain sid is not valid
-                    throw new ArgumentException(SR.IdentityReference_NotAWindowsDomain, nameof(domainSid));
+                    throw new ArgumentException(
+                        SR.IdentityReference_NotAWindowsDomain,
+                        nameof(domainSid)
+                    );
                 }
                 else if (error != Interop.Errors.ERROR_SUCCESS)
                 {
-                    Debug.Fail($"Win32.GetWindowsAccountDomainSid returned unrecognized error {error}");
+                    Debug.Fail(
+                        $"Win32.GetWindowsAccountDomainSid returned unrecognized error {error}"
+                    );
                     throw new Win32Exception(error);
                 }
 
@@ -618,10 +660,12 @@ namespace System.Security.Principal
                 //
                 if (resultDomainSid != domainSid)
                 {
-                    throw new ArgumentException(SR.IdentityReference_NotAWindowsDomain, nameof(domainSid));
+                    throw new ArgumentException(
+                        SR.IdentityReference_NotAWindowsDomain,
+                        nameof(domainSid)
+                    );
                 }
             }
-
 
             error = Win32.CreateWellKnownSid(sidType, domainSid, out byte[]? resultSid);
 
@@ -640,7 +684,10 @@ namespace System.Security.Principal
             CreateFromBinaryForm(resultSid!, 0);
         }
 
-        internal SecurityIdentifier(IdentifierAuthority identifierAuthority, ReadOnlySpan<int> subAuthorities)
+        internal SecurityIdentifier(
+            IdentifierAuthority identifierAuthority,
+            ReadOnlySpan<int> subAuthorities
+        )
         {
             CreateFromParts(identifierAuthority, subAuthorities);
         }
@@ -756,10 +803,7 @@ namespace System.Security.Principal
 
         public override string Value
         {
-            get
-            {
-                return ToString().ToUpperInvariant();
-            }
+            get { return ToString().ToUpperInvariant(); }
         }
 
         internal static bool IsValidTargetTypeStatic(Type targetType)
@@ -783,7 +827,6 @@ namespace System.Security.Principal
             return IsValidTargetTypeStatic(targetType);
         }
 
-
         internal SecurityIdentifier? GetAccountDomainSid()
         {
             int error = Win32.GetWindowsAccountDomainSid(this, out SecurityIdentifier? resultSid);
@@ -804,7 +847,6 @@ namespace System.Security.Principal
             return resultSid;
         }
 
-
         public bool IsAccountSid()
         {
             if (!_accountDomainSidInitialized)
@@ -820,7 +862,6 @@ namespace System.Security.Principal
 
             return true;
         }
-
 
         public override IdentityReference Translate(Type targetType)
         {
@@ -845,7 +886,10 @@ namespace System.Security.Principal
             }
             else
             {
-                throw new ArgumentException(SR.IdentityReference_MustBeIdentityReference, nameof(targetType));
+                throw new ArgumentException(
+                    SR.IdentityReference_MustBeIdentityReference,
+                    nameof(targetType)
+                );
             }
         }
 
@@ -959,8 +1003,10 @@ namespace System.Security.Principal
             return Win32.IsEqualDomainSid(this, sid);
         }
 
-
-        private static IdentityReferenceCollection TranslateToNTAccounts(IdentityReferenceCollection sourceSids, out bool someFailed)
+        private static IdentityReferenceCollection TranslateToNTAccounts(
+            IdentityReferenceCollection sourceSids,
+            out bool someFailed
+        )
         {
             if (sourceSids == null)
             {
@@ -1009,15 +1055,23 @@ namespace System.Security.Principal
 
                 someFailed = false;
                 uint ReturnCode;
-                ReturnCode = Interop.Advapi32.LsaLookupSids(LsaHandle, sourceSids.Count, SidArrayPtr, out ReferencedDomainsPtr, out NamesPtr);
+                ReturnCode = Interop.Advapi32.LsaLookupSids(
+                    LsaHandle,
+                    sourceSids.Count,
+                    SidArrayPtr,
+                    out ReferencedDomainsPtr,
+                    out NamesPtr
+                );
 
                 //
                 // Make a decision regarding whether it makes sense to proceed
                 // based on the return code and the value of the forceSuccess argument
                 //
 
-                if (ReturnCode == Interop.StatusOptions.STATUS_NO_MEMORY ||
-                    ReturnCode == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES)
+                if (
+                    ReturnCode == Interop.StatusOptions.STATUS_NO_MEMORY
+                    || ReturnCode == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES
+                )
                 {
                     throw new OutOfMemoryException();
                 }
@@ -1025,8 +1079,10 @@ namespace System.Security.Principal
                 {
                     throw new UnauthorizedAccessException();
                 }
-                else if (ReturnCode == Interop.StatusOptions.STATUS_NONE_MAPPED ||
-                    ReturnCode == Interop.StatusOptions.STATUS_SOME_NOT_MAPPED)
+                else if (
+                    ReturnCode == Interop.StatusOptions.STATUS_NONE_MAPPED
+                    || ReturnCode == Interop.StatusOptions.STATUS_SOME_NOT_MAPPED
+                )
                 {
                     someFailed = true;
                 }
@@ -1038,15 +1094,19 @@ namespace System.Security.Principal
                     throw new Win32Exception(unchecked((int)win32ErrorCode));
                 }
 
-
-                NamesPtr.Initialize((uint)sourceSids.Count, (uint)Marshal.SizeOf<Interop.LSA_TRANSLATED_NAME>());
+                NamesPtr.Initialize(
+                    (uint)sourceSids.Count,
+                    (uint)Marshal.SizeOf<Interop.LSA_TRANSLATED_NAME>()
+                );
                 Win32.InitializeReferencedDomainsPointer(ReferencedDomainsPtr);
 
                 //
                 // Interpret the results and generate NTAccount objects
                 //
 
-                IdentityReferenceCollection Result = new IdentityReferenceCollection(sourceSids.Count);
+                IdentityReferenceCollection Result = new IdentityReferenceCollection(
+                    sourceSids.Count
+                );
 
                 if (ReturnCode == 0 || ReturnCode == Interop.StatusOptions.STATUS_SOME_NOT_MAPPED)
                 {
@@ -1054,16 +1114,28 @@ namespace System.Security.Principal
                     // Interpret the results and generate NT Account objects
                     //
 
-                    Interop.LSA_REFERENCED_DOMAIN_LIST rdl = ReferencedDomainsPtr.Read<Interop.LSA_REFERENCED_DOMAIN_LIST>(0);
+                    Interop.LSA_REFERENCED_DOMAIN_LIST rdl =
+                        ReferencedDomainsPtr.Read<Interop.LSA_REFERENCED_DOMAIN_LIST>(0);
                     string[] ReferencedDomains = new string[rdl.Entries];
 
                     for (int i = 0; i < rdl.Entries; i++)
                     {
-                        Interop.LSA_TRUST_INFORMATION ti = (Interop.LSA_TRUST_INFORMATION)Marshal.PtrToStructure<Interop.LSA_TRUST_INFORMATION>(new IntPtr((long)rdl.Domains + i * Marshal.SizeOf<Interop.LSA_TRUST_INFORMATION>()));
-                        ReferencedDomains[i] = Marshal.PtrToStringUni(ti.Name.Buffer, ti.Name.Length / sizeof(char));
+                        Interop.LSA_TRUST_INFORMATION ti =
+                            (Interop.LSA_TRUST_INFORMATION)Marshal.PtrToStructure<Interop.LSA_TRUST_INFORMATION>(
+                                new IntPtr(
+                                    (long)rdl.Domains
+                                        + i * Marshal.SizeOf<Interop.LSA_TRUST_INFORMATION>()
+                                )
+                            );
+                        ReferencedDomains[i] = Marshal.PtrToStringUni(
+                            ti.Name.Buffer,
+                            ti.Name.Length / sizeof(char)
+                        );
                     }
 
-                    Interop.LSA_TRANSLATED_NAME[] translatedNames = new Interop.LSA_TRANSLATED_NAME[sourceSids.Count];
+                    Interop.LSA_TRANSLATED_NAME[] translatedNames = new Interop.LSA_TRANSLATED_NAME[
+                        sourceSids.Count
+                    ];
                     NamesPtr.ReadArray(0, translatedNames, 0, translatedNames.Length);
 
                     for (int i = 0; i < sourceSids.Count; i++)
@@ -1077,7 +1149,10 @@ namespace System.Security.Principal
                             case SidNameUse.Alias:
                             case SidNameUse.Computer:
                             case SidNameUse.WellKnownGroup:
-                                string account = Marshal.PtrToStringUni(Ltn.Name.Buffer, Ltn.Name.Length / sizeof(char));
+                                string account = Marshal.PtrToStringUni(
+                                    Ltn.Name.Buffer,
+                                    Ltn.Name.Length / sizeof(char)
+                                );
                                 string domain = ReferencedDomains[Ltn.DomainIndex];
                                 Result.Add(new NTAccount(domain, account));
                                 break;
@@ -1115,10 +1190,17 @@ namespace System.Security.Principal
             }
         }
 
-
-        internal static IdentityReferenceCollection Translate(IdentityReferenceCollection sourceSids, Type targetType, bool forceSuccess)
+        internal static IdentityReferenceCollection Translate(
+            IdentityReferenceCollection sourceSids,
+            Type targetType,
+            bool forceSuccess
+        )
         {
-            IdentityReferenceCollection result = Translate(sourceSids, targetType, out bool someFailed);
+            IdentityReferenceCollection result = Translate(
+                sourceSids,
+                targetType,
+                out bool someFailed
+            );
 
             if (forceSuccess && someFailed)
             {
@@ -1132,14 +1214,20 @@ namespace System.Security.Principal
                     }
                 }
 
-                throw new IdentityNotMappedException(SR.IdentityReference_IdentityNotMapped, UnmappedIdentities);
+                throw new IdentityNotMappedException(
+                    SR.IdentityReference_IdentityNotMapped,
+                    UnmappedIdentities
+                );
             }
 
             return result;
         }
 
-
-        internal static IdentityReferenceCollection Translate(IdentityReferenceCollection sourceSids, Type targetType, out bool someFailed)
+        internal static IdentityReferenceCollection Translate(
+            IdentityReferenceCollection sourceSids,
+            Type targetType,
+            out bool someFailed
+        )
         {
             if (sourceSids == null)
             {
@@ -1151,7 +1239,10 @@ namespace System.Security.Principal
                 return TranslateToNTAccounts(sourceSids, out someFailed);
             }
 
-            throw new ArgumentException(SR.IdentityReference_MustBeIdentityReference, nameof(targetType));
+            throw new ArgumentException(
+                SR.IdentityReference_MustBeIdentityReference,
+                nameof(targetType)
+            );
         }
 #endregion
     }

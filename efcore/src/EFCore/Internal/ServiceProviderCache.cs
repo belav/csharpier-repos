@@ -21,8 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
     /// </summary>
     public class ServiceProviderCache
     {
-        private readonly ConcurrentDictionary<IDbContextOptions, (IServiceProvider ServiceProvider, IDictionary<string, string> DebugInfo)>
-            _configurations = new();
+        private readonly ConcurrentDictionary<
+            IDbContextOptions,
+            (IServiceProvider ServiceProvider, IDictionary<string, string> DebugInfo)
+        > _configurations = new();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             {
                 ValidateOptions(options);
 
-                var optionsInitializer = internalServiceProvider.GetService<ISingletonOptionsInitializer>();
+                var optionsInitializer =
+                    internalServiceProvider.GetService<ISingletonOptionsInitializer>();
                 if (optionsInitializer == null)
                 {
                     throw new InvalidOperationException(CoreStrings.NoEfServices);
@@ -65,12 +68,22 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 return BuildServiceProvider(options, _configurations).ServiceProvider;
             }
 
-            return _configurations.GetOrAdd(options, BuildServiceProvider, _configurations).ServiceProvider;
+            return _configurations.GetOrAdd(
+                options,
+                BuildServiceProvider,
+                _configurations
+            ).ServiceProvider;
 
-            static (IServiceProvider ServiceProvider, IDictionary<string, string> DebugInfo) BuildServiceProvider(
+            static (IServiceProvider ServiceProvider, IDictionary<
+                string,
+                string
+            > DebugInfo) BuildServiceProvider(
                 IDbContextOptions options,
-                ConcurrentDictionary<IDbContextOptions, (IServiceProvider ServiceProvider, IDictionary<string, string> DebugInfo)>
-                    configurations)
+                ConcurrentDictionary<
+                    IDbContextOptions,
+                    (IServiceProvider ServiceProvider, IDictionary<string, string> DebugInfo)
+                > configurations
+            )
             {
                 ValidateOptions(options);
 
@@ -80,26 +93,50 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     optionsExtension.Info.PopulateDebugInfo(debugInfo);
                 }
 
-                debugInfo = debugInfo.OrderBy(v => debugInfo.Keys).ToDictionary(d => d.Key, v => v.Value);
+                debugInfo = debugInfo
+                    .OrderBy(v => debugInfo.Keys)
+                    .ToDictionary(d => d.Key, v => v.Value);
 
                 var services = new ServiceCollection();
                 var hasProvider = ApplyServices(options, services);
 
-                var replacedServices = options.FindExtension<CoreOptionsExtension>()?.ReplacedServices;
+                var replacedServices = options
+                    .FindExtension<CoreOptionsExtension>()
+                    ?.ReplacedServices;
                 if (replacedServices != null)
                 {
                     var updatedServices = new ServiceCollection();
                     foreach (var descriptor in services)
                     {
-                        if (replacedServices.TryGetValue((descriptor.ServiceType, descriptor.ImplementationType), out var replacementType))
+                        if (
+                            replacedServices.TryGetValue(
+                                (descriptor.ServiceType, descriptor.ImplementationType),
+                                out var replacementType
+                            )
+                        )
                         {
                             ((IList<ServiceDescriptor>)updatedServices).Add(
-                                new ServiceDescriptor(descriptor.ServiceType, replacementType, descriptor.Lifetime));
+                                new ServiceDescriptor(
+                                    descriptor.ServiceType,
+                                    replacementType,
+                                    descriptor.Lifetime
+                                )
+                            );
                         }
-                        else if (replacedServices.TryGetValue((descriptor.ServiceType, null), out replacementType))
+                        else if (
+                            replacedServices.TryGetValue(
+                                (descriptor.ServiceType, null),
+                                out replacementType
+                            )
+                        )
                         {
                             ((IList<ServiceDescriptor>)updatedServices).Add(
-                                new ServiceDescriptor(descriptor.ServiceType, replacementType, descriptor.Lifetime));
+                                new ServiceDescriptor(
+                                    descriptor.ServiceType,
+                                    replacementType,
+                                    descriptor.Lifetime
+                                )
+                            );
                         }
                         else
                         {
@@ -133,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                             scopedProvider.GetRequiredService<ILoggingOptions>(),
                             scopedProvider.GetRequiredService<DiagnosticSource>(),
                             loggingDefinitions,
-                            new NullDbContextLogger());
+                            new NullDbContextLogger()
+                        );
 
                         if (configurations.Count == 0)
                         {
@@ -143,16 +181,20 @@ namespace Microsoft.EntityFrameworkCore.Internal
                         {
                             logger.ServiceProviderDebugInfo(
                                 debugInfo,
-                                configurations.Values.Select(v => v.DebugInfo).ToList());
+                                configurations.Values.Select(v => v.DebugInfo).ToList()
+                            );
 
                             if (configurations.Count >= 20)
                             {
                                 logger.ManyServiceProvidersCreatedWarning(
-                                    configurations.Values.Select(e => e.ServiceProvider).ToList());
+                                    configurations.Values.Select(e => e.ServiceProvider).ToList()
+                                );
                             }
                         }
 
-                        var applicationServiceProvider = options.FindExtension<CoreOptionsExtension>()?.ApplicationServiceProvider;
+                        var applicationServiceProvider = options
+                            .FindExtension<CoreOptionsExtension>()
+                            ?.ApplicationServiceProvider;
                         if (applicationServiceProvider?.GetService<IRegisteredServices>() != null)
                         {
                             logger.RedundantAddServicesCallWarning(serviceProvider);

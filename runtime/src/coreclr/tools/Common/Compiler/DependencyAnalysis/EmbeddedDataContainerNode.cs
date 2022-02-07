@@ -6,7 +6,7 @@ using Internal.TypeSystem;
 namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
-    /// Represents a node that contains a set of embedded objects. The main function is 
+    /// Represents a node that contains a set of embedded objects. The main function is
     /// to serve as a base class, providing symbol name boundaries and node ordering.
     /// </summary>
     public abstract class EmbeddedDataContainerNode : ObjectNode
@@ -18,7 +18,10 @@ namespace ILCompiler.DependencyAnalysis
         public ObjectAndOffsetSymbolNode StartSymbol => _startSymbol;
         public ObjectAndOffsetSymbolNode EndSymbol => _endSymbol;
 
-        protected EmbeddedDataContainerNode(string startSymbolMangledName, string endSymbolMangledName)
+        protected EmbeddedDataContainerNode(
+            string startSymbolMangledName,
+            string endSymbolMangledName
+        )
         {
             _startSymbolMangledName = startSymbolMangledName;
             _startSymbol = new ObjectAndOffsetSymbolNode(this, 0, startSymbolMangledName, true);
@@ -29,7 +32,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return _startSymbolMangledName.CompareTo(((EmbeddedDataContainerNode)other)._startSymbolMangledName);
+            return _startSymbolMangledName.CompareTo(
+                ((EmbeddedDataContainerNode)other)._startSymbolMangledName
+            );
         }
     }
 }

@@ -9,9 +9,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 internal class OrderedEndpointsSequenceProviderCache
 {
-    private readonly ConcurrentDictionary<IEndpointRouteBuilder, OrderedEndpointsSequenceProvider> _sequenceProviderCache = new();
+    private readonly ConcurrentDictionary<
+        IEndpointRouteBuilder,
+        OrderedEndpointsSequenceProvider
+    > _sequenceProviderCache = new();
 
-    public OrderedEndpointsSequenceProvider GetOrCreateOrderedEndpointsSequenceProvider(IEndpointRouteBuilder endpoints)
+    public OrderedEndpointsSequenceProvider GetOrCreateOrderedEndpointsSequenceProvider(
+        IEndpointRouteBuilder endpoints
+    )
     {
         return _sequenceProviderCache.GetOrAdd(endpoints, new OrderedEndpointsSequenceProvider());
     }

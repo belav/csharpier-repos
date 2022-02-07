@@ -21,7 +21,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
     [Trait(Traits.Feature, Traits.Features.Classification)]
     public partial class TotalClassifierTests : AbstractCSharpClassifierTests
     {
-        protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(string code, TextSpan span, ParseOptions options, TestHost testHost)
+        protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(
+            string code,
+            TextSpan span,
+            ParseOptions options,
+            TestHost testHost
+        )
         {
             using var workspace = CreateWorkspace(code, options, testHost);
             var document = workspace.CurrentSolution.GetDocument(workspace.Documents.First().Id);
@@ -34,13 +39,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task VarAsUsingAliasForNamespace(TestHost testHost)
         {
             await TestAsync(
-@"using var = System;",
+                @"using var = System;",
                 testHost,
                 Keyword("using"),
                 Namespace("var"),
                 Operators.Equals,
                 Namespace("System"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -49,7 +55,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task Bug17819(TestHost testHost)
         {
             await TestAsync(
-@"_ _()
+                @"_ _()
 {
 }
 ///<param name='_
@@ -69,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Delimiter("="),
                 XmlDoc.AttributeQuotes("'"),
                 Identifier("_"),
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -77,7 +84,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task VarAsUsingAliasForClass(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.Math;",
+                @"using var = System.Math;",
                 testHost,
                 Keyword("using"),
                 Class("var"),
@@ -86,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.Dot,
                 Class("Math"),
                 Static("Math"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -94,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task VarAsUsingAliasForDelegate(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.Action;",
+                @"using var = System.Action;",
                 testHost,
                 Keyword("using"),
                 Delegate("var"),
@@ -102,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Delegate("Action"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -110,7 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task VarAsUsingAliasForStruct(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.DateTime;",
+                @"using var = System.DateTime;",
                 testHost,
                 Keyword("using"),
                 Struct("var"),
@@ -118,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Struct("DateTime"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -126,7 +136,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task VarAsUsingAliasForEnum(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.DayOfWeek;",
+                @"using var = System.DayOfWeek;",
                 testHost,
                 Keyword("using"),
                 Enum("var"),
@@ -134,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Enum("DayOfWeek"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -142,7 +153,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task VarAsUsingAliasForInterface(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.IDisposable;",
+                @"using var = System.IDisposable;",
                 testHost,
                 Keyword("using"),
                 Interface("var"),
@@ -150,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Interface("IDisposable"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -158,7 +170,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task VarAsConstructorName(TestHost testHost)
         {
             await TestAsync(
-@"class var
+                @"class var
 {
     var()
     {
@@ -173,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -181,7 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestRecordClass(TestHost testHost)
         {
             await TestAsync(
-@"record class R
+                @"record class R
 {
     R()
     {
@@ -197,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -205,7 +219,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestRecordStruct(TestHost testHost)
         {
             await TestAsync(
-@"record struct R
+                @"record struct R
 {
     R(int i)
     {
@@ -223,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -231,7 +246,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task UsingAliasGlobalNamespace(TestHost testHost)
         {
             await TestAsync(
-@"using IO = global::System.IO;",
+                @"using IO = global::System.IO;",
                 testHost,
                 Keyword("using"),
                 Namespace("IO"),
@@ -241,14 +256,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Namespace("IO"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PartialDynamicWhere(TestHost testHost)
         {
-            var code = @"partial class partial<where> where where : partial<where>
+            var code =
+                @"partial class partial<where> where where : partial<where>
 {
     static dynamic dynamic<partial>()
     {
@@ -256,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
     }
 }
 ";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 Keyword("partial"),
                 Keyword("class"),
@@ -292,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -300,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         [WorkItem(543123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543123")]
         public async Task VarInForeach(TestHost testHost)
         {
-            await TestInMethodAsync(@"foreach (var v in args) { }",
+            await TestInMethodAsync(
+                @"foreach (var v in args) { }",
                 testHost,
                 ControlKeyword("foreach"),
                 Punctuation.OpenParen,
@@ -310,7 +330,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("args"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -318,7 +339,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task ValueInSetterAndAnonymousTypePropertyName(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     int P
     {
@@ -349,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -357,7 +379,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestValueInEvent(TestHost testHost)
         {
             await TestInClassAsync(
-@"event int Bar
+                @"event int Bar
 {
     add
     {
@@ -383,7 +405,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-
                 Keyword("remove"),
                 Punctuation.OpenCurly,
                 Keyword("this"),
@@ -393,7 +414,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -401,7 +423,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestValueInProperty(TestHost testHost)
         {
             await TestInClassAsync(
-@"int Goo
+                @"int Goo
 {
     get
     {
@@ -426,7 +448,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-
                 Keyword("set"),
                 Punctuation.OpenCurly,
                 Keyword("this"),
@@ -436,7 +457,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -444,7 +466,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task ValueFieldInSetterAccessedThroughThis(TestHost testHost)
         {
             await TestInClassAsync(
-@"int P
+                @"int P
 {
     set
     {
@@ -464,7 +486,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -472,7 +495,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task NewOfInterface(TestHost testHost)
         {
             await TestInMethodAsync(
-@"object o = new System.IDisposable();",
+                @"object o = new System.IDisposable();",
                 testHost,
                 Keyword("object"),
                 Local("o"),
@@ -483,7 +506,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Interface("IDisposable"),
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [WorkItem(545611, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545611")]
@@ -492,7 +516,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestVarConstructor(TestHost testHost)
         {
             await TestAsync(
-@"class var
+                @"class var
 {
     void Main()
     {
@@ -514,7 +538,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(545609, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545609")]
@@ -523,7 +548,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestVarTypeParameter(TestHost testHost)
         {
             await TestAsync(
-@"class X
+                @"class X
 {
     void Goo<var>()
     {
@@ -546,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Local("x"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(545610, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545610")]
@@ -555,7 +581,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestVarAttribute1(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 [var]
 class var : Attribute
@@ -573,7 +599,8 @@ class var : Attribute
                 Punctuation.Colon,
                 Class("Attribute"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(545610, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545610")]
@@ -582,7 +609,7 @@ class var : Attribute
         public async Task TestVarAttribute2(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 [var]
 class varAttribute : Attribute
@@ -600,7 +627,8 @@ class varAttribute : Attribute
                 Punctuation.Colon,
                 Class("Attribute"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(546170, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546170")]
@@ -609,7 +637,7 @@ class varAttribute : Attribute
         public async Task TestStandaloneTypeName(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -638,7 +666,8 @@ class C
                 Class("Console"),
                 Static("Console"),
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(546403, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546403")]
@@ -647,7 +676,7 @@ class C
         public async Task TestNamespaceClassAmbiguities(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
 }
 
@@ -662,7 +691,8 @@ namespace C
                 Keyword("namespace"),
                 Namespace("C"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -670,7 +700,7 @@ namespace C
         public async Task NameAttributeValue(TestHost testHost)
         {
             await TestAsync(
-@"class Program<T>
+                @"class Program<T>
 {
     /// <param name=""x""/>
     void Goo(int x)
@@ -702,7 +732,8 @@ namespace C
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -710,7 +741,7 @@ namespace C
         public async Task Cref1(TestHost testHost)
         {
             await TestAsync(
-@"/// <see cref=""Program{T}""/>
+                @"/// <see cref=""Program{T}""/>
 class Program<T>
 {
     void Goo()
@@ -743,7 +774,8 @@ class Program<T>
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -751,7 +783,7 @@ class Program<T>
         public async Task CrefNamespaceIsNotClass(TestHost testHost)
         {
             await TestAsync(
-@"///  <see cref=""N""/>
+                @"///  <see cref=""N""/>
 namespace N
 {
     class Program
@@ -776,7 +808,8 @@ namespace N
                 Class("Program"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -784,7 +817,7 @@ namespace N
         public async Task InterfacePropertyWithSameNameShouldBePreferredToType(TestHost testHost)
         {
             await TestAsync(
-@"interface IGoo
+                @"interface IGoo
 {
     int IGoo { get; set; }
 
@@ -811,7 +844,8 @@ namespace N
                 Property("IGoo"),
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -820,7 +854,7 @@ namespace N
         public async Task XmlDocCref(TestHost testHost)
         {
             await TestAsync(
-@"/// <summary>
+                @"/// <summary>
 /// <see cref=""MyClass.MyClass(int)""/>
 /// </summary>
 class MyClass
@@ -866,7 +900,8 @@ class MyClass
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -874,7 +909,7 @@ class MyClass
         public async Task TestGenericTypeWithNoArity(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Collections.Generic;
 
 class Program : IReadOnlyCollection
@@ -893,7 +928,8 @@ class Program : IReadOnlyCollection
                 Punctuation.Colon,
                 Interface("IReadOnlyCollection"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -901,7 +937,7 @@ class Program : IReadOnlyCollection
         public async Task TestGenericTypeWithWrongArity(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Collections.Generic;
 
 class Program : IReadOnlyCollection<int,string>
@@ -925,7 +961,8 @@ class Program : IReadOnlyCollection<int,string>
                 Keyword("string"),
                 Punctuation.CloseAngle,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -933,7 +970,7 @@ class Program : IReadOnlyCollection<int,string>
         public async Task TestExtensionMethodDeclaration(TestHost testHost)
         {
             await TestAsync(
-@"static class ExtMethod
+                @"static class ExtMethod
 {
     public static void TestMethod(this C c)
     {
@@ -958,7 +995,8 @@ class Program : IReadOnlyCollection<int,string>
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -966,7 +1004,7 @@ class Program : IReadOnlyCollection<int,string>
         public async Task TestExtensionMethodUsage(TestHost testHost)
         {
             await TestAsync(
-@"static class ExtMethod
+                @"static class ExtMethod
 {
     public static void TestMethod(this C c)
     {
@@ -1032,7 +1070,8 @@ class C
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -1040,7 +1079,7 @@ class C
         public async Task TestConstLocals(TestHost testHost)
         {
             await TestInMethodAsync(
-@"const int Number = 42;
+                @"const int Number = 42;
 var x = Number;",
                 testHost,
                 Keyword("const"),
@@ -1054,14 +1093,16 @@ var x = Number;",
                 Local("x"),
                 Operators.Equals,
                 Constant("Number"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_InsideMethod(TestHost testHost)
         {
-            await TestInMethodAsync(@"
+            await TestInMethodAsync(
+                @"
 var unmanaged = 0;
 unmanaged++;",
                 testHost,
@@ -1072,7 +1113,8 @@ unmanaged++;",
                 Punctuation.Semicolon,
                 Local("unmanaged"),
                 Operators.PlusPlus,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -1092,14 +1134,16 @@ unmanaged++;",
                 Punctuation.Colon,
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Type_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface unmanaged {}
 class X<T> where T : unmanaged { }",
                 testHost,
@@ -1117,14 +1161,18 @@ class X<T> where T : unmanaged { }",
                 Punctuation.Colon,
                 Interface("unmanaged"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface unmanaged {}
@@ -1149,14 +1197,16 @@ class X<T> where T : unmanaged { }",
                 Punctuation.Colon,
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_Keyword(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void M<T>() where T : unmanaged { }
@@ -1178,14 +1228,16 @@ class X
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface unmanaged {}
 class X
 {
@@ -1212,14 +1264,18 @@ class X
                 Interface("unmanaged"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface unmanaged {}
@@ -1253,7 +1309,8 @@ class X
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -1275,14 +1332,16 @@ class X
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("unmanaged"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Delegate_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface unmanaged {}
 delegate void D<T>() where T : unmanaged;",
                 testHost,
@@ -1302,14 +1361,18 @@ delegate void D<T>() where T : unmanaged;",
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Interface("unmanaged"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface unmanaged {}
@@ -1336,14 +1399,16 @@ delegate void D<T>() where T : unmanaged;",
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("unmanaged"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_Keyword(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -1374,14 +1439,16 @@ class X
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface unmanaged {}
 class X
 {
@@ -1417,14 +1484,18 @@ class X
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface unmanaged {}
@@ -1467,7 +1538,8 @@ class X
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(29492, "https://github.com/dotnet/roslyn/issues/29492")]
@@ -1475,7 +1547,8 @@ class X
         [CombinatorialData]
         public async Task TestOperatorOverloading(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class C
 {
     void M()
@@ -1491,68 +1564,70 @@ class True
          return new True();
     }
 }",
-    testHost,
-    Keyword("class"),
-    Class("C"),
-    Punctuation.OpenCurly,
-    Keyword("void"),
-    Method("M"),
-    Punctuation.OpenParen,
-    Punctuation.CloseParen,
-    Punctuation.OpenCurly,
-    Keyword("var"),
-    Local("a"),
-    Operators.Equals,
-    Number("1"),
-    Operators.Plus,
-    Number("1"),
-    Punctuation.Semicolon,
-    Keyword("var"),
-    Local("b"),
-    Operators.Equals,
-    Keyword("new"),
-    Class("True"),
-    Punctuation.OpenParen,
-    Punctuation.CloseParen,
-    OverloadedOperators.Plus,
-    Keyword("new"),
-    Class("True"),
-    Punctuation.OpenParen,
-    Punctuation.CloseParen,
-    Punctuation.Semicolon,
-    Punctuation.CloseCurly,
-    Punctuation.CloseCurly,
-    Keyword("class"),
-    Class("True"),
-    Punctuation.OpenCurly,
-    Keyword("public"),
-    Keyword("static"),
-    Class("True"),
-    Keyword("operator"),
-    Operators.Plus,
-    Punctuation.OpenParen,
-    Class("True"),
-    Parameter("a"),
-    Punctuation.Comma,
-    Class("True"),
-    Parameter("b"),
-    Punctuation.CloseParen,
-    Punctuation.OpenCurly,
-    ControlKeyword("return"),
-    Keyword("new"),
-    Class("True"),
-    Punctuation.OpenParen,
-    Punctuation.CloseParen,
-    Punctuation.Semicolon,
-    Punctuation.CloseCurly,
-    Punctuation.CloseCurly);
+                testHost,
+                Keyword("class"),
+                Class("C"),
+                Punctuation.OpenCurly,
+                Keyword("void"),
+                Method("M"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                Keyword("var"),
+                Local("a"),
+                Operators.Equals,
+                Number("1"),
+                Operators.Plus,
+                Number("1"),
+                Punctuation.Semicolon,
+                Keyword("var"),
+                Local("b"),
+                Operators.Equals,
+                Keyword("new"),
+                Class("True"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                OverloadedOperators.Plus,
+                Keyword("new"),
+                Class("True"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.Semicolon,
+                Punctuation.CloseCurly,
+                Punctuation.CloseCurly,
+                Keyword("class"),
+                Class("True"),
+                Punctuation.OpenCurly,
+                Keyword("public"),
+                Keyword("static"),
+                Class("True"),
+                Keyword("operator"),
+                Operators.Plus,
+                Punctuation.OpenParen,
+                Class("True"),
+                Parameter("a"),
+                Punctuation.Comma,
+                Class("True"),
+                Parameter("b"),
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                ControlKeyword("return"),
+                Keyword("new"),
+                Class("True"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.Semicolon,
+                Punctuation.CloseCurly,
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_InsideMethod(TestHost testHost)
         {
-            await TestInMethodAsync(@"
+            await TestInMethodAsync(
+                @"
 var notnull = 0;
 notnull++;",
                 testHost,
@@ -1563,7 +1638,8 @@ notnull++;",
                 Punctuation.Semicolon,
                 Local("notnull"),
                 Operators.PlusPlus,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -1583,14 +1659,16 @@ notnull++;",
                 Punctuation.Colon,
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_Type_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface notnull {}
 class X<T> where T : notnull { }",
                 testHost,
@@ -1608,14 +1686,18 @@ class X<T> where T : notnull { }",
                 Punctuation.Colon,
                 Interface("notnull"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface notnull {}
@@ -1640,14 +1722,16 @@ class X<T> where T : notnull { }",
                 Punctuation.Colon,
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_Method_Keyword(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void M<T>() where T : notnull { }
@@ -1669,14 +1753,16 @@ class X
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_Method_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface notnull {}
 class X
 {
@@ -1703,14 +1789,18 @@ class X
                 Interface("notnull"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface notnull {}
@@ -1744,7 +1834,8 @@ class X
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -1766,14 +1857,16 @@ class X
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("notnull"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_Delegate_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface notnull {}
 delegate void D<T>() where T : notnull;",
                 testHost,
@@ -1793,14 +1886,18 @@ delegate void D<T>() where T : notnull;",
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Interface("notnull"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface notnull {}
@@ -1827,14 +1924,16 @@ delegate void D<T>() where T : notnull;",
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("notnull"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_Keyword(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -1865,14 +1964,16 @@ class X
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface notnull {}
 class X
 {
@@ -1908,14 +2009,18 @@ class X
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface notnull {}
@@ -1958,7 +2063,8 @@ class X
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(10174, "https://github.com/dotnet/roslyn/issues/10174")]
@@ -1967,7 +2073,7 @@ class X
         public async Task VarInPropertyPattern(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 
 class Person { public string Name; }
@@ -2028,7 +2134,8 @@ class Program
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2037,7 +2144,7 @@ class Program
         public async Task NotPattern(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 class Person
 {
     void Goo(object o)
@@ -2069,7 +2176,8 @@ class Person
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2078,7 +2186,7 @@ class Person
         public async Task OrPattern(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 class Person
 {
     void Goo(object o)
@@ -2110,7 +2218,8 @@ class Person
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2119,7 +2228,7 @@ class Person
         public async Task RelationalPattern(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 class Person
 {
     void Goo(object o)
@@ -2150,7 +2259,8 @@ class Person
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -2158,7 +2268,7 @@ class Person
         public async Task BasicFileScopedNamespaceClassification(TestHost testHost)
         {
             await TestAsync(
-@"namespace NS;
+                @"namespace NS;
 
 class C { }",
                 testHost,
@@ -2168,7 +2278,8 @@ class C { }",
                 Keyword("class"),
                 Class("C"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
     }
 }

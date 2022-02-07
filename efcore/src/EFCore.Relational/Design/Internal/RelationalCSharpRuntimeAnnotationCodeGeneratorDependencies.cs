@@ -39,8 +39,6 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies()
-        {
-        }
+        public RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies() { }
     }
 }

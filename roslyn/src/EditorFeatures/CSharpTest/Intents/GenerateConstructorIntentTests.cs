@@ -18,14 +18,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
         public async Task GenerateConstructorSimpleResult()
         {
             var initialText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
     {|typed:public C|}
 }";
             var expectedText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
@@ -35,21 +35,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
     }
 }";
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorTypedPrivate()
         {
             var initialText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
     {|typed:private C|}
 }";
             var expectedText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
@@ -59,26 +64,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
     }
 }";
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorWithFieldsInPartial()
         {
             var initialText =
-@"partial class C
+                @"partial class C
 {
     {|typed:public C|}
 }";
             var additionalDocuments = new string[]
             {
-@"partial class C
+                @"partial class C
 {
     private readonly int _someInt;
 }"
             };
             var expectedText =
-@"partial class C
+                @"partial class C
 {
     public C(int someInt)
     {
@@ -86,21 +96,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
     }
 }";
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, additionalDocuments, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    additionalDocuments,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorWithReferenceType()
         {
             var initialText =
-@"class C
+                @"class C
 {
     private readonly object _someObject;
 
     {|typed:public C|}
 }";
             var expectedText =
-@"class C
+                @"class C
 {
     private readonly object _someObject;
 
@@ -110,32 +126,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
     }
 }";
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorWithExpressionBodyOption()
         {
             var initialText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
     {|typed:public C|}
 }";
             var expectedText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
     public C(int someInt) => _someInt = someInt;
 }";
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, expectedText,
-                options: new OptionsCollection(LanguageNames.CSharp)
-                {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement }
-                }).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    expectedText,
+                    options: new OptionsCollection(LanguageNames.CSharp)
+                    {
+                        {
+                            CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                            CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                        }
+                    }
+                )
+                .ConfigureAwait(false);
         }
     }
 }

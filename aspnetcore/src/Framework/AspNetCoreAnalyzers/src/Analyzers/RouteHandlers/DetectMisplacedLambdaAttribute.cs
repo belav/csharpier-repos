@@ -14,7 +14,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     private static void DetectMisplacedLambdaAttribute(
         in OperationAnalysisContext context,
         IInvocationOperation invocation,
-        IAnonymousFunctionOperation lambda)
+        IAnonymousFunctionOperation lambda
+    )
     {
         // This analyzer will only process invocations that are immediate children of the
         // AnonymousFunctionOperation provided as the delegate endpoint. We'll support checking
@@ -32,8 +33,11 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             targetInvocation = innerInvocation;
         }
 
-        if (lambda.Children.FirstOrDefault().Children.FirstOrDefault() is IReturnOperation returnOperation
-            && returnOperation.ReturnedValue is IInvocationOperation returnedInvocation)
+        if (
+            lambda.Children.FirstOrDefault().Children.FirstOrDefault()
+                is IReturnOperation returnOperation
+            && returnOperation.ReturnedValue is IInvocationOperation returnedInvocation
+        )
         {
             targetInvocation = (InvocationExpressionSyntax)returnedInvocation.Syntax;
         }
@@ -44,7 +48,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         }
 
         var methodOperation = invocation.SemanticModel.GetSymbolInfo(targetInvocation);
-        var methodSymbol = methodOperation.Symbol ?? methodOperation.CandidateSymbols.FirstOrDefault();
+        var methodSymbol =
+            methodOperation.Symbol ?? methodOperation.CandidateSymbols.FirstOrDefault();
 
         // If no method definition was found for the lambda, then abort.
         if (methodSymbol is null)
@@ -59,11 +64,14 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         {
             if (IsInValidNamespace(attribute.AttributeClass?.ContainingNamespace))
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.DetectMisplacedLambdaAttribute,
-                    location,
-                    attribute.AttributeClass?.Name,
-                    methodSymbol.Name));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.DetectMisplacedLambdaAttribute,
+                        location,
+                        attribute.AttributeClass?.Name,
+                        methodSymbol.Name
+                    )
+                );
             }
         }
 
@@ -72,7 +80,13 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             if (@namespace != null && !@namespace.IsGlobalNamespace)
             {
                 // Check for Microsoft.AspNetCore in the ContainingNamespaces for this type
-                if (@namespace.Name.Equals("AspNetCore", System.StringComparison.Ordinal) && @namespace.ContainingNamespace.Name.Equals("Microsoft", System.StringComparison.Ordinal))
+                if (
+                    @namespace.Name.Equals("AspNetCore", System.StringComparison.Ordinal)
+                    && @namespace.ContainingNamespace.Name.Equals(
+                        "Microsoft",
+                        System.StringComparison.Ordinal
+                    )
+                )
                 {
                     return true;
                 }

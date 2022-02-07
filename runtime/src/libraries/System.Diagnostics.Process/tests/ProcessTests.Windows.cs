@@ -16,7 +16,7 @@ namespace System.Diagnostics.Tests
             return filename;
         }
 
-        private static void ChMod(string filename, string mode)
-            => throw new PlatformNotSupportedException();
+        private static void ChMod(string filename, string mode) =>
+            throw new PlatformNotSupportedException();
     }
 }

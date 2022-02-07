@@ -15,7 +15,8 @@ public class OSSkipConditionAttributeTest
         // Act
         var osSkipAttribute = new OSSkipConditionAttribute(
             OperatingSystems.Windows,
-            OperatingSystems.Windows);
+            OperatingSystems.Windows
+        );
 
         // Assert
         Assert.False(osSkipAttribute.IsMet);
@@ -27,7 +28,8 @@ public class OSSkipConditionAttributeTest
         // Act
         var osSkipAttribute = new OSSkipConditionAttribute(
             OperatingSystems.Linux,
-            OperatingSystems.Windows);
+            OperatingSystems.Windows
+        );
 
         // Assert
         Assert.True(osSkipAttribute.IsMet);
@@ -37,8 +39,14 @@ public class OSSkipConditionAttributeTest
     public void Skips_BothMacOSXAndLinux()
     {
         // Act
-        var osSkipAttributeLinux = new OSSkipConditionAttribute(OperatingSystems.Linux | OperatingSystems.MacOSX, OperatingSystems.Linux);
-        var osSkipAttributeMacOSX = new OSSkipConditionAttribute(OperatingSystems.Linux | OperatingSystems.MacOSX, OperatingSystems.MacOSX);
+        var osSkipAttributeLinux = new OSSkipConditionAttribute(
+            OperatingSystems.Linux | OperatingSystems.MacOSX,
+            OperatingSystems.Linux
+        );
+        var osSkipAttributeMacOSX = new OSSkipConditionAttribute(
+            OperatingSystems.Linux | OperatingSystems.MacOSX,
+            OperatingSystems.MacOSX
+        );
 
         // Assert
         Assert.False(osSkipAttributeLinux.IsMet);
@@ -49,8 +57,14 @@ public class OSSkipConditionAttributeTest
     public void Skips_BothMacOSXAndWindows()
     {
         // Act
-        var osSkipAttribute = new OSSkipConditionAttribute(OperatingSystems.Windows | OperatingSystems.MacOSX, OperatingSystems.Windows);
-        var osSkipAttributeMacOSX = new OSSkipConditionAttribute(OperatingSystems.Windows | OperatingSystems.MacOSX, OperatingSystems.MacOSX);
+        var osSkipAttribute = new OSSkipConditionAttribute(
+            OperatingSystems.Windows | OperatingSystems.MacOSX,
+            OperatingSystems.Windows
+        );
+        var osSkipAttributeMacOSX = new OSSkipConditionAttribute(
+            OperatingSystems.Windows | OperatingSystems.MacOSX,
+            OperatingSystems.MacOSX
+        );
 
         // Assert
         Assert.False(osSkipAttribute.IsMet);
@@ -61,8 +75,14 @@ public class OSSkipConditionAttributeTest
     public void Skips_BothWindowsAndLinux()
     {
         // Act
-        var osSkipAttribute = new OSSkipConditionAttribute(OperatingSystems.Linux | OperatingSystems.Windows, OperatingSystems.Windows);
-        var osSkipAttributeLinux = new OSSkipConditionAttribute(OperatingSystems.Linux | OperatingSystems.Windows, OperatingSystems.Linux);
+        var osSkipAttribute = new OSSkipConditionAttribute(
+            OperatingSystems.Linux | OperatingSystems.Windows,
+            OperatingSystems.Windows
+        );
+        var osSkipAttributeLinux = new OSSkipConditionAttribute(
+            OperatingSystems.Linux | OperatingSystems.Windows,
+            OperatingSystems.Linux
+        );
 
         // Assert
         Assert.False(osSkipAttribute.IsMet);

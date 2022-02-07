@@ -2,15 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /* Regression Test for Dev12 bug #518401: Bug in accessing x64 bit Multidimensional Arrays in x64
- * 
+ *
  * Change description: Store the callee saved registers more often in hand generated assembly helper.
-*/
+ */
 using System;
 
 #pragma warning disable 169
 struct MyStruct
 {
-    byte a, b, c;
+    byte a,
+        b,
+        c;
 }
 #pragma warning restore 169
 

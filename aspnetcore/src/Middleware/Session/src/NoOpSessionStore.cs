@@ -11,9 +11,7 @@ namespace Microsoft.AspNetCore.Session;
 
 internal class NoOpSessionStore : IDistributedSessionStore
 {
-    public void SetValue(EncodedKey key, byte[] value)
-    {
-    }
+    public void SetValue(EncodedKey key, byte[] value) { }
 
     public int Count => 0;
 
@@ -25,7 +23,8 @@ internal class NoOpSessionStore : IDistributedSessionStore
 
     public void Clear() { }
 
-    public IEnumerator<KeyValuePair<EncodedKey, byte[]>> GetEnumerator() => Enumerable.Empty<KeyValuePair<EncodedKey, byte[]>>().GetEnumerator();
+    public IEnumerator<KeyValuePair<EncodedKey, byte[]>> GetEnumerator() =>
+        Enumerable.Empty<KeyValuePair<EncodedKey, byte[]>>().GetEnumerator();
 
     public bool Remove(EncodedKey key) => false;
 

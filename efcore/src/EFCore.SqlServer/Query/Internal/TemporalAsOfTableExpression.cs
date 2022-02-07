@@ -22,14 +22,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public TemporalAsOfTableExpression(ITableBase table, DateTime pointInTime)
-            : base(table)
+        public TemporalAsOfTableExpression(ITableBase table, DateTime pointInTime) : base(table)
         {
             PointInTime = pointInTime;
         }
 
-        private TemporalAsOfTableExpression(string name, string? schema, string? alias, DateTime pointInTime)
-            : base(name, schema, alias)
+        private TemporalAsOfTableExpression(
+            string name,
+            string? schema,
+            string? alias,
+            DateTime pointInTime
+        ) : base(name, schema, alias)
         {
             PointInTime = pointInTime;
         }
@@ -43,8 +46,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public virtual DateTime PointInTime { get; }
 
         /// <inheritdoc />
-        public override TableExpressionBase Clone()
-            => new TemporalAsOfTableExpression(Name, Schema, Alias, PointInTime);
+        public override TableExpressionBase Clone() =>
+            new TemporalAsOfTableExpression(Name, Schema, Alias, PointInTime);
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
@@ -66,7 +69,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         }
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), PointInTime);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), PointInTime);
     }
 }

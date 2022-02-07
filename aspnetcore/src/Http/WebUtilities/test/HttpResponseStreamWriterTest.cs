@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -136,7 +136,9 @@ public class HttpResponseStreamWriterTest
         var writer = new HttpResponseStreamWriter(stream, Encoding.UTF8);
         writer.Write(new string('a', byteLength));
 
-        var expectedWriteCount = Math.Ceiling((double)byteLength / HttpResponseStreamWriter.DefaultBufferSize);
+        var expectedWriteCount = Math.Ceiling(
+            (double)byteLength / HttpResponseStreamWriter.DefaultBufferSize
+        );
 
         // Act
         writer.Flush();
@@ -174,7 +176,9 @@ public class HttpResponseStreamWriterTest
         var writer = new HttpResponseStreamWriter(stream, Encoding.UTF8);
         await writer.WriteAsync(new string('a', byteLength));
 
-        var expectedWriteCount = Math.Ceiling((double)byteLength / HttpResponseStreamWriter.DefaultBufferSize);
+        var expectedWriteCount = Math.Ceiling(
+            (double)byteLength / HttpResponseStreamWriter.DefaultBufferSize
+        );
 
         // Act
         await writer.FlushAsync();
@@ -391,7 +395,9 @@ public class HttpResponseStreamWriterTest
         var cancellationToken = new CancellationToken(true);
 
         // Act
-        await Assert.ThrowsAsync<TaskCanceledException>(async () => await writer.WriteAsync(memory, cancellationToken));
+        await Assert.ThrowsAsync<TaskCanceledException>(
+            async () => await writer.WriteAsync(memory, cancellationToken)
+        );
 
         // Assert
         Assert.Equal(0, stream.Length);
@@ -417,7 +423,10 @@ public class HttpResponseStreamWriterTest
     [InlineData(2048, 2)]
     [InlineData(HttpResponseStreamWriter.DefaultBufferSize + 1, 1)]
     [InlineData(HttpResponseStreamWriter.DefaultBufferSize + 1, 2)]
-    [InlineData(HttpResponseStreamWriter.DefaultBufferSize + 1, HttpResponseStreamWriter.DefaultBufferSize)]
+    [InlineData(
+        HttpResponseStreamWriter.DefaultBufferSize + 1,
+        HttpResponseStreamWriter.DefaultBufferSize
+    )]
     public async Task WriteLineReadOnlyMemoryAsync_WritesToStream(int byteLength, int newLineLength)
     {
         // Arrange
@@ -449,7 +458,9 @@ public class HttpResponseStreamWriterTest
         // Act
         using (writer)
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(async () => await writer.WriteLineAsync(memory, cancellationToken));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await writer.WriteLineAsync(memory, cancellationToken)
+            );
         }
 
         // Assert
@@ -494,7 +505,8 @@ public class HttpResponseStreamWriterTest
     public async Task WritesData_OfDifferentLength_InExpectedEncoding(
         char character,
         int charCount,
-        string encodingName)
+        string encodingName
+    )
     {
         // Arrange
         var encoding = Encoding.GetEncoding(encodingName);
@@ -526,12 +538,15 @@ public class HttpResponseStreamWriterTest
 
         var expectedBytes = encoding.GetBytes("Hello, World!");
 
-        using (var writer = new HttpResponseStreamWriter(
-            stream,
-            encoding,
-            1024,
-            ArrayPool<byte>.Shared,
-            ArrayPool<char>.Shared))
+        using (
+            var writer = new HttpResponseStreamWriter(
+                stream,
+                encoding,
+                1024,
+                ArrayPool<byte>.Shared,
+                ArrayPool<char>.Shared
+            )
+        )
         {
             // Act
             writer.Write("Hello, World!");
@@ -545,7 +560,9 @@ public class HttpResponseStreamWriterTest
     [InlineData(DefaultCharacterChunkSize)]
     [InlineData(DefaultCharacterChunkSize * 2)]
     [InlineData(DefaultCharacterChunkSize * 3)]
-    public async Task HttpResponseStreamWriter_WritesDataCorrectly_ForCharactersHavingSurrogatePairs(int characterSize)
+    public async Task HttpResponseStreamWriter_WritesDataCorrectly_ForCharactersHavingSurrogatePairs(
+        int characterSize
+    )
     {
         // Arrange
         // Here "𐐀" (called Deseret Long I) actually represents 2 characters. Try to make this character split across
@@ -567,12 +584,25 @@ public class HttpResponseStreamWriterTest
 
     [Theory]
     [MemberData(nameof(HttpResponseStreamWriterData))]
-    public static void NullInputsInConstructor_ExpectArgumentNullException(Stream stream, Encoding encoding, ArrayPool<byte> bytePool, ArrayPool<char> charPool)
+    public static void NullInputsInConstructor_ExpectArgumentNullException(
+        Stream stream,
+        Encoding encoding,
+        ArrayPool<byte> bytePool,
+        ArrayPool<char> charPool
+    )
     {
-        Assert.Throws<ArgumentNullException>(() =>
-        {
-            var httpRequestStreamReader = new HttpResponseStreamWriter(stream, encoding, 1, bytePool, charPool);
-        });
+        Assert.Throws<ArgumentNullException>(
+            () =>
+            {
+                var httpRequestStreamReader = new HttpResponseStreamWriter(
+                    stream,
+                    encoding,
+                    1,
+                    bytePool,
+                    charPool
+                );
+            }
+        );
     }
 
     [Theory]
@@ -580,10 +610,18 @@ public class HttpResponseStreamWriterTest
     [InlineData(-1)]
     public static void NegativeOrZeroBufferSize_ExpectArgumentOutOfRangeException(int size)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var httpRequestStreamReader = new HttpRequestStreamReader(new MemoryStream(), Encoding.UTF8, size, ArrayPool<byte>.Shared, ArrayPool<char>.Shared);
-        });
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () =>
+            {
+                var httpRequestStreamReader = new HttpRequestStreamReader(
+                    new MemoryStream(),
+                    Encoding.UTF8,
+                    size,
+                    ArrayPool<byte>.Shared,
+                    ArrayPool<char>.Shared
+                );
+            }
+        );
     }
 
     [Fact]
@@ -591,38 +629,65 @@ public class HttpResponseStreamWriterTest
     {
         var mockStream = new Mock<Stream>();
         mockStream.Setup(m => m.CanWrite).Returns(false);
-        Assert.Throws<ArgumentException>(() =>
-        {
-            var httpRequestStreamReader = new HttpRequestStreamReader(mockStream.Object, Encoding.UTF8, 1, ArrayPool<byte>.Shared, ArrayPool<char>.Shared);
-        });
+        Assert.Throws<ArgumentException>(
+            () =>
+            {
+                var httpRequestStreamReader = new HttpRequestStreamReader(
+                    mockStream.Object,
+                    Encoding.UTF8,
+                    1,
+                    ArrayPool<byte>.Shared,
+                    ArrayPool<char>.Shared
+                );
+            }
+        );
     }
 
     [Theory]
     [MemberData(nameof(HttpResponseDisposeData))]
-    public static void StreamDisposed_ExpectedObjectDisposedException(Action<HttpResponseStreamWriter> action)
+    public static void StreamDisposed_ExpectedObjectDisposedException(
+        Action<HttpResponseStreamWriter> action
+    )
     {
-        var httpResponseStreamWriter = new HttpResponseStreamWriter(new MemoryStream(), Encoding.UTF8, 10, ArrayPool<byte>.Shared, ArrayPool<char>.Shared);
+        var httpResponseStreamWriter = new HttpResponseStreamWriter(
+            new MemoryStream(),
+            Encoding.UTF8,
+            10,
+            ArrayPool<byte>.Shared,
+            ArrayPool<char>.Shared
+        );
         httpResponseStreamWriter.Dispose();
 
-        Assert.Throws<ObjectDisposedException>(() =>
-        {
-            action(httpResponseStreamWriter);
-        });
+        Assert.Throws<ObjectDisposedException>(
+            () =>
+            {
+                action(httpResponseStreamWriter);
+            }
+        );
     }
 
     [Theory]
     [MemberData(nameof(HttpResponseDisposeDataAsync))]
-    public static async Task StreamDisposed_ExpectedObjectDisposedExceptionAsync(Func<HttpResponseStreamWriter, Task> function)
+    public static async Task StreamDisposed_ExpectedObjectDisposedExceptionAsync(
+        Func<HttpResponseStreamWriter, Task> function
+    )
     {
-        var httpResponseStreamWriter = new HttpResponseStreamWriter(new MemoryStream(), Encoding.UTF8, 10, ArrayPool<byte>.Shared, ArrayPool<char>.Shared);
+        var httpResponseStreamWriter = new HttpResponseStreamWriter(
+            new MemoryStream(),
+            Encoding.UTF8,
+            10,
+            ArrayPool<byte>.Shared,
+            ArrayPool<char>.Shared
+        );
         httpResponseStreamWriter.Dispose();
 
-        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-        {
-            return function(httpResponseStreamWriter);
-        });
+        await Assert.ThrowsAsync<ObjectDisposedException>(
+            () =>
+            {
+                return function(httpResponseStreamWriter);
+            }
+        );
     }
-
 
     private class TestMemoryStream : MemoryStream
     {
@@ -662,10 +727,17 @@ public class HttpResponseStreamWriterTest
             base.Write(buffer, offset, count);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => WriteAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => WriteAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             WriteAsyncCallCount++;
             if (ThrowOnWrite)
@@ -684,63 +756,146 @@ public class HttpResponseStreamWriterTest
 
     public static IEnumerable<object?[]> HttpResponseStreamWriterData()
     {
-        yield return new object?[] { null, Encoding.UTF8, ArrayPool<byte>.Shared, ArrayPool<char>.Shared };
-        yield return new object?[] { new MemoryStream(), null, ArrayPool<byte>.Shared, ArrayPool<char>.Shared };
-        yield return new object?[] { new MemoryStream(), Encoding.UTF8, null, ArrayPool<char>.Shared };
-        yield return new object?[] { new MemoryStream(), Encoding.UTF8, ArrayPool<byte>.Shared, null };
+        yield return new object?[]
+        {
+            null,
+            Encoding.UTF8,
+            ArrayPool<byte>.Shared,
+            ArrayPool<char>.Shared
+        };
+        yield return new object?[]
+        {
+            new MemoryStream(),
+            null,
+            ArrayPool<byte>.Shared,
+            ArrayPool<char>.Shared
+        };
+        yield return new object?[]
+        {
+            new MemoryStream(),
+            Encoding.UTF8,
+            null,
+            ArrayPool<char>.Shared
+        };
+        yield return new object?[]
+        {
+            new MemoryStream(),
+            Encoding.UTF8,
+            ArrayPool<byte>.Shared,
+            null
+        };
     }
 
     public static IEnumerable<object[]> HttpResponseDisposeData()
     {
-        yield return new object[] { new Action<HttpResponseStreamWriter>((httpResponseStreamWriter) =>
-            {
-                 httpResponseStreamWriter.Write('a');
-            })};
-        yield return new object[] { new Action<HttpResponseStreamWriter>((httpResponseStreamWriter) =>
-            {
-                 httpResponseStreamWriter.Write(new char[] { 'a', 'b' }, 0, 1);
-            })};
-        yield return new object[] { new Action<HttpResponseStreamWriter>((httpResponseStreamWriter) =>
-            {
-                httpResponseStreamWriter.Write("hello");
-            })};
-        yield return new object[] { new Action<HttpResponseStreamWriter>((httpResponseStreamWriter) =>
-            {
-                httpResponseStreamWriter.Write(new ReadOnlySpan<char>(new char[] { 'a', 'b' }));
-            })};
+        yield return new object[]
+        {
+            new Action<HttpResponseStreamWriter>(
+                (httpResponseStreamWriter) =>
+                {
+                    httpResponseStreamWriter.Write('a');
+                }
+            )
+        };
+        yield return new object[]
+        {
+            new Action<HttpResponseStreamWriter>(
+                (httpResponseStreamWriter) =>
+                {
+                    httpResponseStreamWriter.Write(new char[] { 'a', 'b' }, 0, 1);
+                }
+            )
+        };
+        yield return new object[]
+        {
+            new Action<HttpResponseStreamWriter>(
+                (httpResponseStreamWriter) =>
+                {
+                    httpResponseStreamWriter.Write("hello");
+                }
+            )
+        };
+        yield return new object[]
+        {
+            new Action<HttpResponseStreamWriter>(
+                (httpResponseStreamWriter) =>
+                {
+                    httpResponseStreamWriter.Write(new ReadOnlySpan<char>(new char[] { 'a', 'b' }));
+                }
+            )
+        };
 
-        yield return new object[] { new Action<HttpResponseStreamWriter>((httpResponseStreamWriter) =>
-            {
-                httpResponseStreamWriter.Flush();
-            })};
+        yield return new object[]
+        {
+            new Action<HttpResponseStreamWriter>(
+                (httpResponseStreamWriter) =>
+                {
+                    httpResponseStreamWriter.Flush();
+                }
+            )
+        };
     }
 
     public static IEnumerable<object[]> HttpResponseDisposeDataAsync()
     {
-        yield return new object[] { new Func<HttpResponseStreamWriter, Task>(async (httpResponseStreamWriter) =>
-            {
-                await httpResponseStreamWriter.WriteAsync('a');
-            })};
-        yield return new object[] { new Func<HttpResponseStreamWriter, Task>(async (httpResponseStreamWriter) =>
-            {
-                await httpResponseStreamWriter.WriteAsync(new char[] { 'a', 'b' }, 0, 1);
-            })};
-        yield return new object[] { new Func<HttpResponseStreamWriter, Task>(async (httpResponseStreamWriter) =>
-            {
-                await httpResponseStreamWriter.WriteAsync("hello");
-            })};
-        yield return new object[] { new Func<HttpResponseStreamWriter, Task>(async (httpResponseStreamWriter) =>
-            {
-                await httpResponseStreamWriter.WriteAsync(new ReadOnlyMemory<char>(new char[] { 'a', 'b' }));
-            })};
-        yield return new object[] { new Func<HttpResponseStreamWriter, Task>(async (httpResponseStreamWriter) =>
-            {
-                await httpResponseStreamWriter.WriteLineAsync(new ReadOnlyMemory<char>(new char[] { 'a', 'b' }));
-            })};
+        yield return new object[]
+        {
+            new Func<HttpResponseStreamWriter, Task>(
+                async (httpResponseStreamWriter) =>
+                {
+                    await httpResponseStreamWriter.WriteAsync('a');
+                }
+            )
+        };
+        yield return new object[]
+        {
+            new Func<HttpResponseStreamWriter, Task>(
+                async (httpResponseStreamWriter) =>
+                {
+                    await httpResponseStreamWriter.WriteAsync(new char[] { 'a', 'b' }, 0, 1);
+                }
+            )
+        };
+        yield return new object[]
+        {
+            new Func<HttpResponseStreamWriter, Task>(
+                async (httpResponseStreamWriter) =>
+                {
+                    await httpResponseStreamWriter.WriteAsync("hello");
+                }
+            )
+        };
+        yield return new object[]
+        {
+            new Func<HttpResponseStreamWriter, Task>(
+                async (httpResponseStreamWriter) =>
+                {
+                    await httpResponseStreamWriter.WriteAsync(
+                        new ReadOnlyMemory<char>(new char[] { 'a', 'b' })
+                    );
+                }
+            )
+        };
+        yield return new object[]
+        {
+            new Func<HttpResponseStreamWriter, Task>(
+                async (httpResponseStreamWriter) =>
+                {
+                    await httpResponseStreamWriter.WriteLineAsync(
+                        new ReadOnlyMemory<char>(new char[] { 'a', 'b' })
+                    );
+                }
+            )
+        };
 
-        yield return new object[] { new Func<HttpResponseStreamWriter, Task>(async (httpResponseStreamWriter) =>
-            {
-                await httpResponseStreamWriter.FlushAsync();
-            })};
+        yield return new object[]
+        {
+            new Func<HttpResponseStreamWriter, Task>(
+                async (httpResponseStreamWriter) =>
+                {
+                    await httpResponseStreamWriter.FlushAsync();
+                }
+            )
+        };
     }
 }

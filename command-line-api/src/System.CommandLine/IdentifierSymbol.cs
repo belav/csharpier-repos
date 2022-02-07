@@ -27,7 +27,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="name">The name of the symbol.</param>
         /// <param name="description">The description of the symbol, which is displayed in command line help.</param>
-        protected IdentifierSymbol(string name, string? description = null) 
+        protected IdentifierSymbol(string name, string? description = null)
         {
             Name = name;
             Description = description;
@@ -44,7 +44,10 @@ namespace System.CommandLine
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("Value cannot be null or whitespace.", nameof(value));
+                    throw new ArgumentException(
+                        "Value cannot be null or whitespace.",
+                        nameof(value)
+                    );
                 }
 
                 if (_specifiedName is { })

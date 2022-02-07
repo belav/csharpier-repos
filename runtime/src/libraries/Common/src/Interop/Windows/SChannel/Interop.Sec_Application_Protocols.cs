@@ -25,20 +25,29 @@ internal static partial class Interop
 
                 if (protocolLength == 0 || protocolLength > byte.MaxValue)
                 {
-                    throw new ArgumentException(SR.net_ssl_app_protocols_invalid, nameof(applicationProtocols));
+                    throw new ArgumentException(
+                        SR.net_ssl_app_protocols_invalid,
+                        nameof(applicationProtocols)
+                    );
                 }
 
                 protocolListSize += protocolLength + 1;
 
                 if (protocolListSize > short.MaxValue)
                 {
-                    throw new ArgumentException(SR.net_ssl_app_protocols_invalid, nameof(applicationProtocols));
+                    throw new ArgumentException(
+                        SR.net_ssl_app_protocols_invalid,
+                        nameof(applicationProtocols)
+                    );
                 }
             }
 
             Sec_Application_Protocols protocols = default;
 
-            int protocolListConstSize = sizeof(Sec_Application_Protocols) - sizeof(uint) /* offsetof(Sec_Application_Protocols, ProtocolExtensionType) */;
+            int protocolListConstSize =
+                sizeof(Sec_Application_Protocols)
+                - sizeof(uint) /* offsetof(Sec_Application_Protocols, ProtocolExtensionType) */
+            ;
             protocols.ProtocolListsSize = (uint)(protocolListConstSize + protocolListSize);
 
             protocols.ProtocolExtensionType = ApplicationProtocolNegotiationExt.ALPN;

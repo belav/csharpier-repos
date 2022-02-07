@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace Tests
 {
     internal class Operators
@@ -479,7 +478,6 @@ namespace Tests
             string string9 = s_string1 + s_string_null;
             string string10 = s_string1 + s_string_null + s_string3;
             string string11 = s_string_null + s_string2;
-
 
             Console.WriteLine("Booleans:");
             Console.WriteLine(s_t);

@@ -24,13 +24,19 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipGetAdjustableArrowCapHeight(new HandleRef(this, nativeCap), out float height);
+                int status = Gdip.GdipGetAdjustableArrowCapHeight(
+                    new HandleRef(this, nativeCap),
+                    out float height
+                );
                 Gdip.CheckStatus(status);
                 return height;
             }
             set
             {
-                int status = Gdip.GdipSetAdjustableArrowCapHeight(new HandleRef(this, nativeCap), value);
+                int status = Gdip.GdipSetAdjustableArrowCapHeight(
+                    new HandleRef(this, nativeCap),
+                    value
+                );
                 Gdip.CheckStatus(status);
             }
         }
@@ -39,13 +45,19 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipGetAdjustableArrowCapWidth(new HandleRef(this, nativeCap), out float width);
+                int status = Gdip.GdipGetAdjustableArrowCapWidth(
+                    new HandleRef(this, nativeCap),
+                    out float width
+                );
                 Gdip.CheckStatus(status);
                 return width;
             }
             set
             {
-                int status = Gdip.GdipSetAdjustableArrowCapWidth(new HandleRef(this, nativeCap), value);
+                int status = Gdip.GdipSetAdjustableArrowCapWidth(
+                    new HandleRef(this, nativeCap),
+                    value
+                );
                 Gdip.CheckStatus(status);
             }
         }
@@ -54,13 +66,19 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipGetAdjustableArrowCapMiddleInset(new HandleRef(this, nativeCap), out float middleInset);
+                int status = Gdip.GdipGetAdjustableArrowCapMiddleInset(
+                    new HandleRef(this, nativeCap),
+                    out float middleInset
+                );
                 Gdip.CheckStatus(status);
                 return middleInset;
             }
             set
             {
-                int status = Gdip.GdipSetAdjustableArrowCapMiddleInset(new HandleRef(this, nativeCap), value);
+                int status = Gdip.GdipSetAdjustableArrowCapMiddleInset(
+                    new HandleRef(this, nativeCap),
+                    value
+                );
                 Gdip.CheckStatus(status);
             }
         }
@@ -69,13 +87,19 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipGetAdjustableArrowCapFillState(new HandleRef(this, nativeCap), out bool isFilled);
+                int status = Gdip.GdipGetAdjustableArrowCapFillState(
+                    new HandleRef(this, nativeCap),
+                    out bool isFilled
+                );
                 Gdip.CheckStatus(status);
                 return isFilled;
             }
             set
             {
-                int status = Gdip.GdipSetAdjustableArrowCapFillState(new HandleRef(this, nativeCap), value);
+                int status = Gdip.GdipSetAdjustableArrowCapFillState(
+                    new HandleRef(this, nativeCap),
+                    value
+                );
                 Gdip.CheckStatus(status);
             }
         }

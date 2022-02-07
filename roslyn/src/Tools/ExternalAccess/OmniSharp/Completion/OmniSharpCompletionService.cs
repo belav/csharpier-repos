@@ -19,12 +19,24 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Completion
             int caretPosition,
             CompletionTrigger trigger,
             ImmutableHashSet<string>? roles,
-            CancellationToken cancellationToken)
-            => completionService.GetCompletionsInternalAsync(document, caretPosition, CompletionOptions.Default, trigger, roles, cancellationToken);
+            CancellationToken cancellationToken
+        ) =>
+            completionService.GetCompletionsInternalAsync(
+                document,
+                caretPosition,
+                CompletionOptions.Default,
+                trigger,
+                roles,
+                cancellationToken
+            );
 
-        public static string? GetProviderName(this CompletionItem completionItem) => completionItem.ProviderName;
+        public static string? GetProviderName(this CompletionItem completionItem) =>
+            completionItem.ProviderName;
 
-        public static bool? IncludeItemsFromUnimportedNamespaces(Document document)
-            => document.Project.Solution.Options.GetOption(CompletionOptions.Metadata.ShowItemsFromUnimportedNamespaces, document.Project.Language);
+        public static bool? IncludeItemsFromUnimportedNamespaces(Document document) =>
+            document.Project.Solution.Options.GetOption(
+                CompletionOptions.Metadata.ShowItemsFromUnimportedNamespaces,
+                document.Project.Language
+            );
     }
 }

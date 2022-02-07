@@ -10,12 +10,12 @@ namespace Microsoft.EntityFrameworkCore
         : GraphUpdatesSqliteTestBase<GraphUpdatesSqliteChangedChangingNotificationsTest.SqliteFixture>
     {
         public GraphUpdatesSqliteChangedChangingNotificationsTest(SqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
-        protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected override void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
         public class SqliteFixture : GraphUpdatesSqliteFixtureBase
         {
@@ -23,7 +23,9 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
-                modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
+                modelBuilder.HasChangeTrackingStrategy(
+                    ChangeTrackingStrategy.ChangingAndChangedNotifications
+                );
 
                 base.OnModelCreating(modelBuilder, context);
             }

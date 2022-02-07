@@ -10,7 +10,12 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [GeneratedDllImport(Libraries.Kernel32, EntryPoint = "ReadDirectoryChangesW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            EntryPoint = "ReadDirectoryChangesW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static unsafe partial bool ReadDirectoryChangesW(
             SafeFileHandle hDirectory,
             byte[] lpBuffer,
@@ -19,7 +24,8 @@ internal static partial class Interop
             uint dwNotifyFilter,
             uint* lpBytesReturned,
             NativeOverlapped* lpOverlapped,
-            void* lpCompletionRoutine);
+            void* lpCompletionRoutine
+        );
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal readonly struct FILE_NOTIFY_INFORMATION

@@ -12,16 +12,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    public class OwnedEntityTypeAttributeConvention : EntityTypeAttributeConventionBase<OwnedAttribute>
+    public class OwnedEntityTypeAttributeConvention
+        : EntityTypeAttributeConventionBase<OwnedAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="OwnedEntityTypeAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-        public OwnedEntityTypeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public OwnedEntityTypeAttributeConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model if it has an attribute.
@@ -32,9 +32,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             OwnedAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
-            entityTypeBuilder.ModelBuilder.Owned(entityTypeBuilder.Metadata.ClrType, fromDataAnnotation: true);
+            entityTypeBuilder.ModelBuilder.Owned(
+                entityTypeBuilder.Metadata.ClrType,
+                fromDataAnnotation: true
+            );
         }
     }
 }

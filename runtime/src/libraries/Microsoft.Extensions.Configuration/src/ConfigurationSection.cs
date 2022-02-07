@@ -63,14 +63,8 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         public string? Value
         {
-            get
-            {
-                return _root[Path];
-            }
-            set
-            {
-                _root[Path] = value;
-            }
+            get { return _root[Path]; }
+            set { _root[Path] = value; }
         }
 
         /// <summary>
@@ -80,14 +74,8 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The configuration value.</returns>
         public string? this[string key]
         {
-            get
-            {
-                return _root[ConfigurationPath.Combine(Path, key)];
-            }
-            set
-            {
-                _root[ConfigurationPath.Combine(Path, key)] = value;
-            }
+            get { return _root[ConfigurationPath.Combine(Path, key)]; }
+            set { _root[ConfigurationPath.Combine(Path, key)] = value; }
         }
 
         /// <summary>
@@ -99,13 +87,15 @@ namespace Microsoft.Extensions.Configuration
         ///     This method will never return <c>null</c>. If no matching sub-section is found with the specified key,
         ///     an empty <see cref="IConfigurationSection"/> will be returned.
         /// </remarks>
-        public IConfigurationSection GetSection(string key) => _root.GetSection(ConfigurationPath.Combine(Path, key));
+        public IConfigurationSection GetSection(string key) =>
+            _root.GetSection(ConfigurationPath.Combine(Path, key));
 
         /// <summary>
         /// Gets the immediate descendant configuration sub-sections.
         /// </summary>
         /// <returns>The configuration sub-sections.</returns>
-        public IEnumerable<IConfigurationSection> GetChildren() => _root.GetChildrenImplementation(Path);
+        public IEnumerable<IConfigurationSection> GetChildren() =>
+            _root.GetChildrenImplementation(Path);
 
         /// <summary>
         /// Returns a <see cref="IChangeToken"/> that can be used to observe when this configuration is reloaded.

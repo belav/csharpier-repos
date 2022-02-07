@@ -38,7 +38,9 @@ public class HubConnectionBuilder : IHubConnectionBuilder
         // Build can only be used once
         if (_hubConnectionBuilt)
         {
-            throw new InvalidOperationException("HubConnectionBuilder allows creation only of a single instance of HubConnection.");
+            throw new InvalidOperationException(
+                "HubConnectionBuilder allows creation only of a single instance of HubConnection."
+            );
         }
 
         _hubConnectionBuilt = true;
@@ -46,11 +48,17 @@ public class HubConnectionBuilder : IHubConnectionBuilder
         // The service provider is disposed by the HubConnection
         var serviceProvider = Services.BuildServiceProvider();
 
-        var connectionFactory = serviceProvider.GetService<IConnectionFactory>() ??
-            throw new InvalidOperationException($"Cannot create {nameof(HubConnection)} instance. An {nameof(IConnectionFactory)} was not configured.");
+        var connectionFactory =
+            serviceProvider.GetService<IConnectionFactory>()
+            ?? throw new InvalidOperationException(
+                $"Cannot create {nameof(HubConnection)} instance. An {nameof(IConnectionFactory)} was not configured."
+            );
 
-        var endPoint = serviceProvider.GetService<EndPoint>() ??
-            throw new InvalidOperationException($"Cannot create {nameof(HubConnection)} instance. An {nameof(EndPoint)} was not configured.");
+        var endPoint =
+            serviceProvider.GetService<EndPoint>()
+            ?? throw new InvalidOperationException(
+                $"Cannot create {nameof(HubConnection)} instance. An {nameof(EndPoint)} was not configured."
+            );
 
         return serviceProvider.GetRequiredService<HubConnection>();
     }

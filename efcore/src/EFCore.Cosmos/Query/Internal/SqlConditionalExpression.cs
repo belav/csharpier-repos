@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public SqlConditionalExpression(
             SqlExpression test,
             SqlExpression ifTrue,
-            SqlExpression ifFalse)
-            : base(ifTrue.Type, ifTrue.TypeMapping ?? ifFalse.TypeMapping)
+            SqlExpression ifFalse
+        ) : base(ifTrue.Type, ifTrue.TypeMapping ?? ifFalse.TypeMapping)
         {
             Test = test;
             IfTrue = ifTrue;
@@ -80,8 +80,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public virtual SqlConditionalExpression Update(
             SqlExpression test,
             SqlExpression ifTrue,
-            SqlExpression ifFalse)
-            => test != Test || ifTrue != IfTrue || ifFalse != IfFalse
+            SqlExpression ifFalse
+        ) =>
+            test != Test || ifTrue != IfTrue || ifFalse != IfFalse
                 ? new SqlConditionalExpression(test, ifTrue, ifFalse)
                 : this;
 
@@ -108,17 +109,19 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is SqlConditionalExpression sqlConditionalExpression
-                    && Equals(sqlConditionalExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is SqlConditionalExpression sqlConditionalExpression
+                    && Equals(sqlConditionalExpression)
+            );
 
-        private bool Equals(SqlConditionalExpression sqlConditionalExpression)
-            => base.Equals(sqlConditionalExpression)
-                && Test.Equals(sqlConditionalExpression.Test)
-                && IfTrue.Equals(sqlConditionalExpression.IfTrue)
-                && IfFalse.Equals(sqlConditionalExpression.IfFalse);
+        private bool Equals(SqlConditionalExpression sqlConditionalExpression) =>
+            base.Equals(sqlConditionalExpression)
+            && Test.Equals(sqlConditionalExpression.Test)
+            && IfTrue.Equals(sqlConditionalExpression.IfTrue)
+            && IfFalse.Equals(sqlConditionalExpression.IfFalse);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

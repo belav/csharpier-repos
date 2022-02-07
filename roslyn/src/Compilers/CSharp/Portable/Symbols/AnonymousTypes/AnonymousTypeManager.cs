@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Symbols;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// Manages anonymous types created in owning compilation. All requests for 
+    /// Manages anonymous types created in owning compilation. All requests for
     /// anonymous type symbols go via the instance of this class.
     /// </summary>
     internal sealed partial class AnonymousTypeManager : CommonAnonymousTypeManager
@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this.Compilation = compilation;
         }
 
-        /// <summary> 
+        /// <summary>
         /// Current compilation
         /// </summary>
         public CSharpCompilation Compilation { get; }
@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Retrieves anonymous type field types.
         /// </summary>
-        internal static ImmutableArray<TypeWithAnnotations> GetAnonymousTypeFieldTypes(NamedTypeSymbol type)
+        internal static ImmutableArray<TypeWithAnnotations> GetAnonymousTypeFieldTypes(
+            NamedTypeSymbol type
+        )
         {
             Debug.Assert(type.IsAnonymousType);
             var anonymous = (AnonymousTypeOrDelegatePublicSymbol)type;
@@ -62,16 +64,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Given an anonymous type and new field types construct a new anonymous type symbol; 
+        /// Given an anonymous type and new field types construct a new anonymous type symbol;
         /// a new type symbol will reuse type descriptor from the constructed type with new type arguments.
         /// </summary>
-        public static NamedTypeSymbol ConstructAnonymousTypeSymbol(NamedTypeSymbol type, ImmutableArray<TypeWithAnnotations> newFieldTypes)
+        public static NamedTypeSymbol ConstructAnonymousTypeSymbol(
+            NamedTypeSymbol type,
+            ImmutableArray<TypeWithAnnotations> newFieldTypes
+        )
         {
             Debug.Assert(!newFieldTypes.IsDefault);
             Debug.Assert(type.IsAnonymousType);
 
             var anonymous = (AnonymousTypePublicSymbol)type;
-            return anonymous.Manager.ConstructAnonymousTypeSymbol(anonymous.TypeDescriptor.WithNewFieldsTypes(newFieldTypes));
+            return anonymous.Manager.ConstructAnonymousTypeSymbol(
+                anonymous.TypeDescriptor.WithNewFieldsTypes(newFieldTypes)
+            );
         }
     }
 }

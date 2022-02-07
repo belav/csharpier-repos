@@ -12,4 +12,3 @@ internal enum ImportCertificateResult
     ExistingCertificatesPresent,
     ErrorSavingTheCertificateIntoTheCurrentUserPersonalStore,
 }
-

@@ -5,10 +5,8 @@ using System;
 
 namespace test
 {
-
     class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -30,6 +28,7 @@ namespace test
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         static int Main()
         {
             //Start recording

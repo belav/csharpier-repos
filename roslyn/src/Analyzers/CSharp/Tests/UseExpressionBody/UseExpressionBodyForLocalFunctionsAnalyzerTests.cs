@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     public class UseExpressionBodyForLocalFunctionsAnalyzerTests
     {
@@ -27,27 +28,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.WhenPossible } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.WhenPossible
+                    }
+                }
             }.RunAsync();
         }
 
-        private static async Task TestWithUseExpressionBodyWhenOnSingleLine(string code, string fixedCode)
+        private static async Task TestWithUseExpressionBodyWhenOnSingleLine(
+            string code,
+            string fixedCode
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.WhenOnSingleLine } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.WhenOnSingleLine
+                    }
+                }
             }.RunAsync();
         }
 
-        private static async Task TestWithUseBlockBody(string code, string fixedCode, ReferenceAssemblies? referenceAssemblies = null)
+        private static async Task TestWithUseBlockBody(
+            string code,
+            string fixedCode,
+            ReferenceAssemblies? referenceAssemblies = null
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.Never } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.Never
+                    }
+                },
                 ReferenceAssemblies = referenceAssemblies ?? ReferenceAssemblies.Default,
             }.RunAsync();
         }
@@ -55,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Test() { }
@@ -68,7 +95,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void Test() { }
@@ -84,7 +112,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBody2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Test() { return 0; }
@@ -97,7 +126,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Test() { return 0; }
@@ -113,7 +143,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -126,7 +157,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -142,7 +174,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -155,7 +188,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -171,7 +205,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBodyWhenOnSingleLineMissing()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Goo()
@@ -190,7 +225,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBodyWhenOnSingleLine()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Goo()
@@ -201,7 +237,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void Goo()
@@ -215,7 +252,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Test() { }
@@ -225,7 +263,8 @@ class C
         {|IDE0061:void Bar() => Test();|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void Test() { }
@@ -244,7 +283,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBody2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Test() { return 0; }
@@ -254,7 +294,8 @@ class C
         {|IDE0061:int Bar() => Test();|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Test() { return 0; }
@@ -273,7 +314,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -283,7 +325,8 @@ class C
         {|IDE0061:int Bar() => throw new NotImplementedException();|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -302,7 +345,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -312,7 +356,8 @@ class C
         {|IDE0061:int Bar() => throw new NotImplementedException();|} // comment
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -331,7 +376,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestComments1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Test() { }
@@ -345,7 +391,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void Test() { }
@@ -363,7 +410,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestComments2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Test() { return 0; }
@@ -377,7 +425,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Test() { return 0; }
@@ -395,7 +444,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestComments3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -411,7 +461,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -431,7 +482,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestComments4()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Test() { }
@@ -444,7 +496,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void Test() { }
@@ -460,7 +513,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestComments5()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Test() { return 0; }
@@ -473,7 +527,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Test() { return 0; }
@@ -489,7 +544,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestComments6()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -504,7 +560,8 @@ class C
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -522,7 +579,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestDirectives1()
         {
-            var code = @"
+            var code =
+                @"
 #define DEBUG
 using System;
 
@@ -538,7 +596,8 @@ class Program
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 #define DEBUG
 using System;
 
@@ -559,7 +618,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestDirectives2()
         {
-            var code = @"
+            var code =
+                @"
 #define DEBUG
 using System;
 
@@ -577,7 +637,8 @@ class Program
         }|}
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 #define DEBUG
 using System;
 
@@ -600,7 +661,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBodyAsync1()
         {
-            var code = @"
+            var code =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -612,7 +674,8 @@ class C
 
     Task Test() { return Task.CompletedTask; }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -633,7 +696,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBodyAsync2()
         {
-            var code = @"
+            var code =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -645,7 +709,8 @@ class C
 
     Task Test() { return Task.CompletedTask; }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -666,7 +731,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBodyAsync3()
         {
-            var code = @"
+            var code =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -678,7 +744,8 @@ class C
 
     Task Bar() { return Task.CompletedTask; }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -693,13 +760,18 @@ class C
 
     Task Bar() { return Task.CompletedTask; }
 }";
-            await TestWithUseBlockBody(code, fixedCode, ReferenceAssemblies.NetStandard.NetStandard21);
+            await TestWithUseBlockBody(
+                code,
+                fixedCode,
+                ReferenceAssemblies.NetStandard.NetStandard21
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBodyAsync4()
         {
-            var code = @"
+            var code =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -711,7 +783,8 @@ class C
 
     Task<int> Bar() { return Task.FromResult(0); }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -732,7 +805,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBodyAsync5()
         {
-            var code = @"
+            var code =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -744,7 +818,8 @@ class C
 
     Task Bar() { return Task.CompletedTask; }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -765,7 +840,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBodyNestedLocalFunction()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void NestedTest() { }
@@ -778,7 +854,8 @@ class C
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void NestedTest() { }
@@ -800,7 +877,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBodyNestedLocalFunction()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void NestedTest() { }
@@ -816,7 +894,8 @@ class C
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void NestedTest() { }
@@ -861,7 +940,13 @@ int Bar(int x) => x;
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp9,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.WhenPossible } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.WhenPossible
+                    }
+                },
             }.RunAsync();
         }
 
@@ -893,7 +978,13 @@ int Bar(int x)
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp9,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.Never } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.Never
+                    }
+                },
             }.RunAsync();
         }
     }

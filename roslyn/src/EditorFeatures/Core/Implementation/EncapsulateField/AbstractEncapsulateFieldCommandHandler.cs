@@ -20,7 +20,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
 {
-    internal abstract class AbstractEncapsulateFieldCommandHandler : ICommandHandler<EncapsulateFieldCommandArgs>
+    internal abstract class AbstractEncapsulateFieldCommandHandler
+        : ICommandHandler<EncapsulateFieldCommandArgs>
     {
         private readonly IThreadingContext _threadingContext;
         private readonly ITextBufferUndoManagerProvider _undoManager;
@@ -31,21 +32,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
         public AbstractEncapsulateFieldCommandHandler(
             IThreadingContext threadingContext,
             ITextBufferUndoManagerProvider undoManager,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _undoManager = undoManager;
             _listener = listenerProvider.GetListener(FeatureAttribute.EncapsulateField);
         }
 
-        public bool ExecuteCommand(EncapsulateFieldCommandArgs args, CommandExecutionContext context)
+        public bool ExecuteCommand(
+            EncapsulateFieldCommandArgs args,
+            CommandExecutionContext context
+        )
         {
             if (!args.SubjectBuffer.SupportsRefactorings())
             {
                 return false;
             }
 
-            using var waitScope = context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Applying_Encapsulate_Field_refactoring);
+            using var waitScope = context.OperationContext.AddScope(
+                allowCancellation: true,
+                EditorFeaturesResources.Applying_Encapsulate_Field_refactoring
+            );
 
             return Execute(args, waitScope);
         }
@@ -55,8 +63,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
             using var token = _listener.BeginAsyncOperation("EncapsulateField");
 
             var cancellationToken = waitScope.Context.UserCancellationToken;
-            var document = args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
-                waitScope.Context, _threadingContext);
+            var document =
+                args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                    waitScope.Context,
+                    _threadingContext
+                );
             if (document == null)
             {
                 return false;
@@ -66,10 +77,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
 
             var service = document.GetLanguageService<AbstractEncapsulateFieldService>();
 
-            var result = service.EncapsulateFieldsInSpanAsync(document, spans.First().Span.ToTextSpan(), true, cancellationToken).WaitAndGetResult(cancellationToken);
+            var result = service
+                .EncapsulateFieldsInSpanAsync(
+                    document,
+                    spans.First().Span.ToTextSpan(),
+                    true,
+                    cancellationToken
+                )
+                .WaitAndGetResult(cancellationToken);
 
             // We are about to show a modal UI dialog so we should take over the command execution
-            // wait context. That means the command system won't attempt to show its own wait dialog 
+            // wait context. That means the command system won't attempt to show its own wait dialog
             // and also will take it into consideration when measuring command handling duration.
             waitScope.Context.TakeOwnership();
 
@@ -77,26 +95,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
             if (result == null)
             {
                 var notificationService = workspace.Services.GetService<INotificationService>();
-                notificationService.SendNotification(EditorFeaturesResources.Please_select_the_definition_of_the_field_to_encapsulate, severity: NotificationSeverity.Error);
+                notificationService.SendNotification(
+                    EditorFeaturesResources.Please_select_the_definition_of_the_field_to_encapsulate,
+                    severity: NotificationSeverity.Error
+                );
                 return false;
             }
 
             waitScope.AllowCancellation = false;
             cancellationToken = waitScope.Context.UserCancellationToken;
 
-            var finalSolution = result.GetSolutionAsync(cancellationToken).WaitAndGetResult(cancellationToken);
+            var finalSolution = result
+                .GetSolutionAsync(cancellationToken)
+                .WaitAndGetResult(cancellationToken);
 
             var previewService = workspace.Services.GetService<IPreviewDialogService>();
             if (previewService != null)
             {
                 finalSolution = previewService.PreviewChanges(
-                    string.Format(EditorFeaturesResources.Preview_Changes_0, EditorFeaturesResources.Encapsulate_Field),
-                     "vs.csharp.refactoring.preview",
+                    string.Format(
+                        EditorFeaturesResources.Preview_Changes_0,
+                        EditorFeaturesResources.Encapsulate_Field
+                    ),
+                    "vs.csharp.refactoring.preview",
                     EditorFeaturesResources.Encapsulate_Field_colon,
                     result.Name,
                     result.Glyph,
                     finalSolution,
-                    document.Project.Solution);
+                    document.Project.Solution
+                );
             }
 
             if (finalSolution == null)
@@ -105,7 +132,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
                 return true;
             }
 
-            using (var undoTransaction = _undoManager.GetTextBufferUndoManager(args.SubjectBuffer).TextBufferUndoHistory.CreateTransaction(EditorFeaturesResources.Encapsulate_Field))
+            using (
+                var undoTransaction = _undoManager
+                    .GetTextBufferUndoManager(args.SubjectBuffer)
+                    .TextBufferUndoHistory.CreateTransaction(
+                        EditorFeaturesResources.Encapsulate_Field
+                    )
+            )
             {
                 if (!workspace.TryApplyChanges(finalSolution))
                 {
@@ -119,7 +152,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
             return true;
         }
 
-        public CommandState GetCommandState(EncapsulateFieldCommandArgs args)
-            => args.SubjectBuffer.SupportsRefactorings() ? CommandState.Available : CommandState.Unspecified;
+        public CommandState GetCommandState(EncapsulateFieldCommandArgs args) =>
+            args.SubjectBuffer.SupportsRefactorings()
+              ? CommandState.Available
+              : CommandState.Unspecified;
     }
 }

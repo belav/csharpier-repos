@@ -25,6 +25,10 @@ internal static partial class Interop
         internal const int WAVE_FORMAT_IEEE_FLOAT = 0x0003;
 
         [DllImport(Libraries.WinMM)]
-        internal static extern int mmioRead(IntPtr hMIO, [MarshalAs(UnmanagedType.LPArray)] byte[] wf, int cch);
+        internal static extern int mmioRead(
+            IntPtr hMIO,
+            [MarshalAs(UnmanagedType.LPArray)] byte[] wf,
+            int cch
+        );
     }
 }

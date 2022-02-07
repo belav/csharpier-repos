@@ -22,7 +22,11 @@ public class JavaScriptResourcesTest
         var cache = new ConcurrentDictionary<string, string>();
 
         // Act
-        var result = JavaScriptResources.GetEmbeddedJavaScript("test.js", getManifestResourceStream, cache);
+        var result = JavaScriptResources.GetEmbeddedJavaScript(
+            "test.js",
+            getManifestResourceStream,
+            cache
+        );
 
         // Assert
         Assert.Equal(expected, result);
@@ -39,14 +43,21 @@ public class JavaScriptResourcesTest
         var cache = new ConcurrentDictionary<string, string>();
 
         // Act
-        var result = JavaScriptResources.GetEmbeddedJavaScript("test.js", getManifestResourceStream, cache);
+        var result = JavaScriptResources.GetEmbeddedJavaScript(
+            "test.js",
+            getManifestResourceStream,
+            cache
+        );
 
         // Assert
-        Assert.Collection(cache, kvp =>
-        {
-            Assert.Equal("test.js", kvp.Key);
-            Assert.Equal(expected, kvp.Value);
-        });
+        Assert.Collection(
+            cache,
+            kvp =>
+            {
+                Assert.Equal("test.js", kvp.Key);
+                Assert.Equal(expected, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -56,16 +67,26 @@ public class JavaScriptResourcesTest
         var resource = "window.alert('An alert');";
         var stream = new MemoryStream(Encoding.UTF8.GetBytes(resource));
         var callCount = 0;
-        var getManifestResourceStream = new Func<string, Stream>(name =>
-        {
-            callCount++;
-            return stream;
-        });
+        var getManifestResourceStream = new Func<string, Stream>(
+            name =>
+            {
+                callCount++;
+                return stream;
+            }
+        );
         var cache = new ConcurrentDictionary<string, string>();
 
         // Act
-        var result = JavaScriptResources.GetEmbeddedJavaScript("test.js", getManifestResourceStream, cache);
-        result = JavaScriptResources.GetEmbeddedJavaScript("test.js", getManifestResourceStream, cache);
+        var result = JavaScriptResources.GetEmbeddedJavaScript(
+            "test.js",
+            getManifestResourceStream,
+            cache
+        );
+        result = JavaScriptResources.GetEmbeddedJavaScript(
+            "test.js",
+            getManifestResourceStream,
+            cache
+        );
 
         // Assert
         Assert.Equal(1, callCount);
@@ -84,7 +105,11 @@ public class JavaScriptResourcesTest
         var cache = new ConcurrentDictionary<string, string>();
 
         // Act
-        var result = JavaScriptResources.GetEmbeddedJavaScript("test.js", getManifestResourceStream, cache);
+        var result = JavaScriptResources.GetEmbeddedJavaScript(
+            "test.js",
+            getManifestResourceStream,
+            cache
+        );
 
         // Assert
         Assert.Equal(expected, result);

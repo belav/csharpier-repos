@@ -16,18 +16,24 @@ internal abstract class LspWorkspaceRegistrationService
 
     public abstract string GetHostWorkspaceKind();
 
-    public ImmutableArray<Workspace> GetAllRegistrations()
-        => _registrations;
+    public ImmutableArray<Workspace> GetAllRegistrations() => _registrations;
 
     public virtual void Register(Workspace workspace)
     {
-        Logger.Log(FunctionId.RegisterWorkspace, KeyValueLogMessage.Create(LogType.Trace, m =>
-        {
-            m["WorkspaceKind"] = workspace.Kind;
-            m["WorkspaceCanOpenDocuments"] = workspace.CanOpenDocuments;
-            m["WorkspaceCanChangeActiveContextDocument"] = workspace.CanChangeActiveContextDocument;
-            m["WorkspacePartialSemanticsEnabled"] = workspace.PartialSemanticsEnabled;
-        }));
+        Logger.Log(
+            FunctionId.RegisterWorkspace,
+            KeyValueLogMessage.Create(
+                LogType.Trace,
+                m =>
+                {
+                    m["WorkspaceKind"] = workspace.Kind;
+                    m["WorkspaceCanOpenDocuments"] = workspace.CanOpenDocuments;
+                    m["WorkspaceCanChangeActiveContextDocument"] =
+                        workspace.CanChangeActiveContextDocument;
+                    m["WorkspacePartialSemanticsEnabled"] = workspace.PartialSemanticsEnabled;
+                }
+            )
+        );
 
         lock (_gate)
         {

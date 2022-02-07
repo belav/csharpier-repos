@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-public sealed class ModelExpression
-{
-}
+public sealed class ModelExpression { }

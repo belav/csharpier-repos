@@ -26,7 +26,5 @@ public class ServiceBasedControllerActivator : IControllerActivator
     }
 
     /// <inheritdoc />
-    public virtual void Release(ControllerContext context, object controller)
-    {
-    }
+    public virtual void Release(ControllerContext context, object controller) { }
 }

@@ -52,7 +52,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'FullName': 'Dan Deleted',
               'Deleted': true,
               'DeletedDate': '2013-01-20T00:00:00'
@@ -60,10 +61,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             try
             {
-                JsonConvert.DeserializeObject<Account>(json, new JsonSerializerSettings
-                {
-                    MissingMemberHandling = MissingMemberHandling.Error
-                });
+                JsonConvert.DeserializeObject<Account>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        MissingMemberHandling = MissingMemberHandling.Error
+                    }
+                );
             }
             catch (JsonSerializationException ex)
             {

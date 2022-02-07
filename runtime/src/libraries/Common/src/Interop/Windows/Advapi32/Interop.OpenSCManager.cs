@@ -8,8 +8,16 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [DllImport(Libraries.Advapi32, EntryPoint = "OpenSCManagerW", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern IntPtr OpenSCManager(string? machineName, string? databaseName, int access);
-
+        [DllImport(
+            Libraries.Advapi32,
+            EntryPoint = "OpenSCManagerW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
+        internal static extern IntPtr OpenSCManager(
+            string? machineName,
+            string? databaseName,
+            int access
+        );
     }
 }

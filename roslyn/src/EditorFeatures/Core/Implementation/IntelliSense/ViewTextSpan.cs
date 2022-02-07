@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
     {
         public readonly TextSpan TextSpan;
 
-        public ViewTextSpan(TextSpan textSpan)
-            => this.TextSpan = textSpan;
+        public ViewTextSpan(TextSpan textSpan) => this.TextSpan = textSpan;
     }
 
     internal struct DisconnectedBufferGraph
@@ -38,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         public readonly ITextSnapshot ViewSnapshot;
 
         // The relation of the subject buffer to the TextView's top buffer.  This information
-        // is used with the subjectBufferSnapshot and viewSnapshot to map spans even when 
+        // is used with the subjectBufferSnapshot and viewSnapshot to map spans even when
         // the buffers might be temporarily disconnected during Razor/Venus remappings.
         public readonly BufferMapDirection SubjectBufferToTextViewDirection;
 
@@ -47,12 +46,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             this.SubjectBufferSnapshot = subjectBuffer.CurrentSnapshot;
             this.ViewSnapshot = viewBuffer.CurrentSnapshot;
 
-            this.SubjectBufferToTextViewDirection = IBufferGraphExtensions.ClassifyBufferMapDirection(
-                subjectBuffer,
-                viewBuffer);
+            this.SubjectBufferToTextViewDirection =
+                IBufferGraphExtensions.ClassifyBufferMapDirection(subjectBuffer, viewBuffer);
         }
 
-        // Normally, we could just use a BufferGraph to do the mapping, but our subjectBuffer may be 
+        // Normally, we could just use a BufferGraph to do the mapping, but our subjectBuffer may be
         // disconnected from the view when we are asked to do this mapping.
         public ViewTextSpan GetSubjectBufferTextSpanInViewBuffer(TextSpan textSpan)
         {
@@ -64,33 +62,44 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 
                 // The subject buffer contains the view buffer.  This happens in debugger intellisense.
                 case BufferMapDirection.Down:
-                    {
-                        var projection = SubjectBufferSnapshot as IProjectionSnapshot;
-                        var span = MapDownToSnapshot(textSpan.ToSpan(), projection, ViewSnapshot);
-                        return new ViewTextSpan(span.ToTextSpan());
-                    }
+                {
+                    var projection = SubjectBufferSnapshot as IProjectionSnapshot;
+                    var span = MapDownToSnapshot(textSpan.ToSpan(), projection, ViewSnapshot);
+                    return new ViewTextSpan(span.ToTextSpan());
+                }
 
                 // The view buffer contains the subject buffer.  This is the typical Razor setup.
                 case BufferMapDirection.Up:
-                    {
-                        var projection = ViewSnapshot as IProjectionSnapshot;
-                        var span = MapUpToSnapshot(textSpan.ToSpan(), SubjectBufferSnapshot, projection);
-                        return new ViewTextSpan(span.ToTextSpan());
-                    }
+                {
+                    var projection = ViewSnapshot as IProjectionSnapshot;
+                    var span = MapUpToSnapshot(
+                        textSpan.ToSpan(),
+                        SubjectBufferSnapshot,
+                        projection
+                    );
+                    return new ViewTextSpan(span.ToTextSpan());
+                }
 
                 default:
                     throw ExceptionUtilities.Unreachable;
             }
         }
 
-        private static Span MapUpToSnapshot(Span span, ITextSnapshot start, IProjectionSnapshot target)
+        private static Span MapUpToSnapshot(
+            Span span,
+            ITextSnapshot start,
+            IProjectionSnapshot target
+        )
         {
             var spans = MapUpToSnapshotRecursive(new SnapshotSpan(start, span), target);
             return spans.First();
         }
 
         // Do a depth first search through the projection graph to find the first mapping
-        private static IEnumerable<Span> MapUpToSnapshotRecursive(SnapshotSpan start, IProjectionSnapshot target)
+        private static IEnumerable<Span> MapUpToSnapshotRecursive(
+            SnapshotSpan start,
+            IProjectionSnapshot target
+        )
         {
             foreach (var source in target.SourceSnapshots)
             {
@@ -105,7 +114,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                 {
                     foreach (var span in MapUpToSnapshotRecursive(start, sourceProjection))
                     {
-                        foreach (var result in target.MapFromSourceSnapshot(new SnapshotSpan(source, span)))
+                        foreach (
+                            var result in target.MapFromSourceSnapshot(
+                                new SnapshotSpan(source, span)
+                            )
+                        )
                         {
                             yield return result;
                         }
@@ -116,7 +129,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             yield break;
         }
 
-        private static Span MapDownToSnapshot(Span span, IProjectionSnapshot start, ITextSnapshot target)
+        private static Span MapDownToSnapshot(
+            Span span,
+            IProjectionSnapshot start,
+            ITextSnapshot target
+        )
         {
             var sourceSpans = new Queue<SnapshotSpan>(start.MapToSourceSnapshots(span));
             while (true)
@@ -128,7 +145,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                 }
                 else if (sourceSpan.Snapshot is IProjectionSnapshot)
                 {
-                    foreach (var s in (sourceSpan.Snapshot as IProjectionSnapshot).MapToSourceSnapshots(sourceSpan.Span))
+                    foreach (
+                        var s in (sourceSpan.Snapshot as IProjectionSnapshot).MapToSourceSnapshots(
+                            sourceSpan.Span
+                        )
+                    )
                     {
                         sourceSpans.Enqueue(s);
                     }

@@ -18,11 +18,13 @@ namespace System.Speech.Recognition
         {
             _sapiRecognizer = new SapiRecognizer(SapiRecognizer.RecognizerType.Shared);
         }
+
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing && !_disposed)
@@ -115,18 +117,22 @@ namespace System.Speech.Recognition
         {
             RecoBase.LoadGrammar(grammar);
         }
+
         public void LoadGrammarAsync(Grammar grammar)
         {
             RecoBase.LoadGrammarAsync(grammar);
         }
+
         public void UnloadGrammar(Grammar grammar)
         {
             RecoBase.UnloadGrammar(grammar);
         }
+
         public void UnloadAllGrammars()
         {
             RecoBase.UnloadAllGrammars();
         }
+
         public RecognitionResult EmulateRecognize(string inputText)
         {
             if (Enabled)
@@ -138,6 +144,7 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
+
         public RecognitionResult EmulateRecognize(string inputText, CompareOptions compareOptions)
         {
             if (Enabled)
@@ -149,7 +156,11 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
-        public RecognitionResult EmulateRecognize(RecognizedWordUnit[] wordUnits, CompareOptions compareOptions)
+
+        public RecognitionResult EmulateRecognize(
+            RecognizedWordUnit[] wordUnits,
+            CompareOptions compareOptions
+        )
         {
             if (Enabled)
             {
@@ -160,6 +171,7 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
+
         public void EmulateRecognizeAsync(string inputText)
         {
             if (Enabled)
@@ -171,6 +183,7 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
+
         public void EmulateRecognizeAsync(string inputText, CompareOptions compareOptions)
         {
             if (Enabled)
@@ -182,7 +195,11 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
-        public void EmulateRecognizeAsync(RecognizedWordUnit[] wordUnits, CompareOptions compareOptions)
+
+        public void EmulateRecognizeAsync(
+            RecognizedWordUnit[] wordUnits,
+            CompareOptions compareOptions
+        )
         {
             if (Enabled)
             {
@@ -199,11 +216,16 @@ namespace System.Speech.Recognition
         {
             RecoBase.RequestRecognizerUpdate();
         }
+
         public void RequestRecognizerUpdate(object userToken)
         {
             RecoBase.RequestRecognizerUpdate(userToken);
         }
-        public void RequestRecognizerUpdate(object userToken, TimeSpan audioPositionAheadToRaiseUpdate)
+
+        public void RequestRecognizerUpdate(
+            object userToken,
+            TimeSpan audioPositionAheadToRaiseUpdate
+        )
         {
             RecoBase.RequestRecognizerUpdate(userToken, audioPositionAheadToRaiseUpdate);
         }
@@ -240,7 +262,6 @@ namespace System.Speech.Recognition
                 }
                 _speechHypothesizedDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -264,7 +285,6 @@ namespace System.Speech.Recognition
                 }
                 _audioSignalProblemOccurredDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -288,7 +308,6 @@ namespace System.Speech.Recognition
                 }
                 _audioLevelUpdatedDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -312,7 +331,6 @@ namespace System.Speech.Recognition
                 }
                 _audioStateChangedDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -340,9 +358,13 @@ namespace System.Speech.Recognition
             }
         }
 
-        private void EmulateRecognizeCompletedProxy(object sender, EmulateRecognizeCompletedEventArgs e)
+        private void EmulateRecognizeCompletedProxy(
+            object sender,
+            EmulateRecognizeCompletedEventArgs e
+        )
         {
-            EventHandler<EmulateRecognizeCompletedEventArgs> emulateRecognizeCompletedHandler = EmulateRecognizeCompleted;
+            EventHandler<EmulateRecognizeCompletedEventArgs> emulateRecognizeCompletedHandler =
+                EmulateRecognizeCompleted;
             if (emulateRecognizeCompletedHandler != null)
             {
                 emulateRecognizeCompletedHandler(this, e);
@@ -351,7 +373,8 @@ namespace System.Speech.Recognition
 
         private void LoadGrammarCompletedProxy(object sender, LoadGrammarCompletedEventArgs e)
         {
-            EventHandler<LoadGrammarCompletedEventArgs> loadGrammarCompletedHandler = LoadGrammarCompleted;
+            EventHandler<LoadGrammarCompletedEventArgs> loadGrammarCompletedHandler =
+                LoadGrammarCompleted;
             if (loadGrammarCompletedHandler != null)
             {
                 loadGrammarCompletedHandler(this, e);
@@ -376,9 +399,13 @@ namespace System.Speech.Recognition
             }
         }
 
-        private void SpeechRecognitionRejectedProxy(object sender, SpeechRecognitionRejectedEventArgs e)
+        private void SpeechRecognitionRejectedProxy(
+            object sender,
+            SpeechRecognitionRejectedEventArgs e
+        )
         {
-            EventHandler<SpeechRecognitionRejectedEventArgs> speechRecognitionRejectedHandler = SpeechRecognitionRejected;
+            EventHandler<SpeechRecognitionRejectedEventArgs> speechRecognitionRejectedHandler =
+                SpeechRecognitionRejected;
             if (speechRecognitionRejectedHandler != null)
             {
                 speechRecognitionRejectedHandler(this, e);
@@ -387,7 +414,8 @@ namespace System.Speech.Recognition
 
         private void RecognizerUpdateReachedProxy(object sender, RecognizerUpdateReachedEventArgs e)
         {
-            EventHandler<RecognizerUpdateReachedEventArgs> recognizerUpdateReachedHandler = RecognizerUpdateReached;
+            EventHandler<RecognizerUpdateReachedEventArgs> recognizerUpdateReachedHandler =
+                RecognizerUpdateReached;
             if (recognizerUpdateReachedHandler != null)
             {
                 recognizerUpdateReachedHandler(this, e);
@@ -396,16 +424,21 @@ namespace System.Speech.Recognition
 
         private void SpeechHypothesizedProxy(object sender, SpeechHypothesizedEventArgs e)
         {
-            EventHandler<SpeechHypothesizedEventArgs> speechHypothesizedHandler = _speechHypothesizedDelegate;
+            EventHandler<SpeechHypothesizedEventArgs> speechHypothesizedHandler =
+                _speechHypothesizedDelegate;
             if (speechHypothesizedHandler != null)
             {
                 speechHypothesizedHandler(this, e);
             }
         }
 
-        private void AudioSignalProblemOccurredProxy(object sender, AudioSignalProblemOccurredEventArgs e)
+        private void AudioSignalProblemOccurredProxy(
+            object sender,
+            AudioSignalProblemOccurredEventArgs e
+        )
         {
-            EventHandler<AudioSignalProblemOccurredEventArgs> audioSignalProblemOccurredHandler = _audioSignalProblemOccurredDelegate;
+            EventHandler<AudioSignalProblemOccurredEventArgs> audioSignalProblemOccurredHandler =
+                _audioSignalProblemOccurredDelegate;
             if (audioSignalProblemOccurredHandler != null)
             {
                 audioSignalProblemOccurredHandler(this, e);
@@ -414,7 +447,8 @@ namespace System.Speech.Recognition
 
         private void AudioLevelUpdatedProxy(object sender, AudioLevelUpdatedEventArgs e)
         {
-            EventHandler<AudioLevelUpdatedEventArgs> audioLevelUpdatedHandler = _audioLevelUpdatedDelegate;
+            EventHandler<AudioLevelUpdatedEventArgs> audioLevelUpdatedHandler =
+                _audioLevelUpdatedDelegate;
             if (audioLevelUpdatedHandler != null)
             {
                 audioLevelUpdatedHandler(this, e);
@@ -423,7 +457,8 @@ namespace System.Speech.Recognition
 
         private void AudioStateChangedProxy(object sender, AudioStateChangedEventArgs e)
         {
-            EventHandler<AudioStateChangedEventArgs> audioStateChangedHandler = _audioStateChangedDelegate;
+            EventHandler<AudioStateChangedEventArgs> audioStateChangedHandler =
+                _audioStateChangedDelegate;
             if (audioStateChangedHandler != null)
             {
                 audioStateChangedHandler(this, e);

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(37456, "https://github.com/dotnet/roslyn/issues/37456")]
         public void Verify37456()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,8 @@ public static partial class EnumerableEx
             from s in j.Value.DefaultIfEmpty()
             select s.Key ? sel(j.Key, s.Value) : aSel(j.Key);
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             CompileAndVerify(comp);
@@ -58,7 +60,8 @@ public static partial class EnumerableEx
         [Fact, WorkItem(608181, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/608181")]
         public void BadInvocationInLambda()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -71,13 +74,14 @@ class C
                 // (7,52): error CS1586: Array creation must have array size or array initializer
                 //     Expression<Action<dynamic>> e = x => new object[](x);
                 Diagnostic(ErrorCode.ERR_MissingArraySize, "[]").WithLocation(7, 52)
-                );
+            );
         }
 
         [Fact]
         public void TestLambdaErrors01()
         {
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(@"
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -151,106 +155,163 @@ class C
         Expression<int> ex1 = ()=>1;
 
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
-    // (16,18): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
-    //         int q1 = ()=>1;
-    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "()=>1").WithArguments("lambda expression", "int").WithLocation(16, 18),
-    // (17,18): error CS1660: Cannot convert anonymous method to type 'int' because it is not a delegate type
-    //         int q2 = delegate { return 1; };
-    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "delegate { return 1; }").WithArguments("anonymous method", "int").WithLocation(17, 18),
-    // (18,24): error CS1593: Delegate 'Func<int>' does not take 1 arguments
-    //         Func<int> q3 = x3=>1;
-    Diagnostic(ErrorCode.ERR_BadDelArgCount, "x3=>1").WithArguments("System.Func<int>", "1").WithLocation(18, 24),
-    // (19,37): error CS0234: The type or namespace name 'Itn23' does not exist in the namespace 'System' (are you missing an assembly reference?)
-    //         Func<int, int> q4 = (System.Itn23 x4)=>1; // type mismatch error should be suppressed on error type
-    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Itn23").WithArguments("Itn23", "System").WithLocation(19, 37),
-    // (20,35): error CS0234: The type or namespace name 'Duobel' does not exist in the namespace 'System' (are you missing an assembly reference?)
-    //         Func<double> q5 = (System.Duobel x5)=>1;  // but arity error should not be suppressed on error type
-    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Duobel").WithArguments("Duobel", "System").WithLocation(20, 35),
-    // (20,27): error CS1593: Delegate 'Func<double>' does not take 1 arguments
-    //         Func<double> q5 = (System.Duobel x5)=>1;  // but arity error should not be suppressed on error type
-    Diagnostic(ErrorCode.ERR_BadDelArgCount, "(System.Duobel x5)=>1").WithArguments("System.Func<double>", "1").WithLocation(20, 27),
-    // (21,17): error CS1661: Cannot convert lambda expression to delegate type 'C.D1' because the parameter types do not match the delegate parameter types
-    //         D1 q6 = (double x6, ref int y6, ref int z6)=>1; 
-    Diagnostic(ErrorCode.ERR_CantConvAnonMethParams, "(double x6, ref int y6, ref int z6)=>1").WithArguments("lambda expression", "C.D1").WithLocation(21, 17),
-    // (21,25): error CS1678: Parameter 1 is declared as type 'double' but should be 'ref int'
-    //         D1 q6 = (double x6, ref int y6, ref int z6)=>1; 
-    Diagnostic(ErrorCode.ERR_BadParamType, "x6").WithArguments("1", "", "double", "ref ", "int").WithLocation(21, 25),
-    // (21,37): error CS1676: Parameter 2 must be declared with the 'out' keyword
-    //         D1 q6 = (double x6, ref int y6, ref int z6)=>1; 
-    Diagnostic(ErrorCode.ERR_BadParamRef, "y6").WithArguments("2", "out").WithLocation(21, 37),
-    // (21,49): error CS1677: Parameter 3 should not be declared with the 'ref' keyword
-    //         D1 q6 = (double x6, ref int y6, ref int z6)=>1; 
-    Diagnostic(ErrorCode.ERR_BadParamExtraRef, "z6").WithArguments("3", "ref").WithLocation(21, 49),
-    // (32,17): error CS1688: Cannot convert anonymous method block without a parameter list to delegate type 'C.D1' because it has one or more out parameters
-    //         D1 q7 = delegate {};
-    Diagnostic(ErrorCode.ERR_CantConvAnonMethNoParams, "delegate {}").WithArguments("C.D1").WithLocation(32, 17),
-    // (34,9): error CS0246: The type or namespace name 'Frob' could not be found (are you missing a using directive or an assembly reference?)
-    //         Frob q8 = ()=>{};
-    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Frob").WithArguments("Frob").WithLocation(34, 9),
-    // (36,17): error CS1676: Parameter 1 must be declared with the 'out' keyword
-    //         D2 q9 = x9=>{};
-    Diagnostic(ErrorCode.ERR_BadParamRef, "x9").WithArguments("1", "out").WithLocation(36, 17),
-    // (38,19): error CS1676: Parameter 1 must be declared with the 'ref' keyword
-    //         D1 q10 = (x10,y10,z10)=>{}; 
-    Diagnostic(ErrorCode.ERR_BadParamRef, "x10").WithArguments("1", "ref").WithLocation(38, 19),
-    // (38,23): error CS1676: Parameter 2 must be declared with the 'out' keyword
-    //         D1 q10 = (x10,y10,z10)=>{}; 
-    Diagnostic(ErrorCode.ERR_BadParamRef, "y10").WithArguments("2", "out").WithLocation(38, 23),
-    // (52,28): error CS8030: Anonymous function converted to a void returning delegate cannot return a value
-    //         Action q11 = ()=>{ return 1; };
-    Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return").WithLocation(52, 28),
-    // (54,26): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-    //         Action q12 = ()=>1;
-    Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(54, 26),
-    // (56,42): warning CS0162: Unreachable code detected
-    //         Func<int> q13 = ()=>{ if (false) return 1; };
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(56, 42),
-    // (56,27): error CS1643: Not all code paths return a value in lambda expression of type 'Func<int>'
-    //         Func<int> q13 = ()=>{ if (false) return 1; };
-    Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "=>").WithArguments("lambda expression", "System.Func<int>").WithLocation(56, 27),
-    // (58,29): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
-    //         Func<int> q14 = ()=>123.456;
-    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "123.456").WithArguments("double", "int").WithLocation(58, 29),
-    // (58,29): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-    //         Func<int> q14 = ()=>123.456;
-    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "123.456").WithArguments("lambda expression").WithLocation(58, 29),
-    // (62,51): error CS0266: Cannot implicitly convert type 'decimal' to 'double'. An explicit conversion exists (are you missing a cast?)
-    //         Func<double> q15 = ()=>{if (false) return 1m; else return 0; };
-    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1m").WithArguments("decimal", "double").WithLocation(62, 51),
-    // (62,51): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-    //         Func<double> q15 = ()=>{if (false) return 1m; else return 0; };
-    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1m").WithArguments("lambda expression").WithLocation(62, 51),
-    // (62,44): warning CS0162: Unreachable code detected
-    //         Func<double> q15 = ()=>{if (false) return 1m; else return 0; };
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(62, 44),
-    // (66,39): error CS1670: params is not valid in this context
-    //         Action<int[]> q16 = delegate (params int[] p) { };
-    Diagnostic(ErrorCode.ERR_IllegalParams, "params int[] p").WithLocation(66, 39),
-    // (67,33): error CS1670: params is not valid in this context
-    //         Action<string[]> q17 = (params string[] s)=>{};
-    Diagnostic(ErrorCode.ERR_IllegalParams, "params string[] s").WithLocation(67, 33),
-    // (68,45): error CS1670: params is not valid in this context
-    //         Action<int, double[]> q18 = (int x, params double[] s)=>{};
-    Diagnostic(ErrorCode.ERR_IllegalParams, "params double[] s").WithLocation(68, 45),
-    // (70,34): error CS1593: Delegate 'Action' does not take 1 arguments
-    //         object q19 = new Action( (int x)=>{} );
-    Diagnostic(ErrorCode.ERR_BadDelArgCount, "(int x)=>{}").WithArguments("System.Action", "1").WithLocation(70, 34),
-    // (72,9): warning CS0436: The type 'Expression<T>' in '' conflicts with the imported type 'Expression<TDelegate>' in 'System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
-    //         Expression<int> ex1 = ()=>1;  
-    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Expression<int>").WithArguments("", "System.Linq.Expressions.Expression<T>", "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "System.Linq.Expressions.Expression<TDelegate>").WithLocation(72, 9),
-    // (72,31): error CS0835: Cannot convert lambda to an expression tree whose type argument 'int' is not a delegate type
-    //         Expression<int> ex1 = ()=>1;  
-    Diagnostic(ErrorCode.ERR_ExpressionTreeMustHaveDelegate, "()=>1").WithArguments("int").WithLocation(72, 31)
-                );
+                // (16,18): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
+                //         int q1 = ()=>1;
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "()=>1")
+                    .WithArguments("lambda expression", "int")
+                    .WithLocation(16, 18),
+                // (17,18): error CS1660: Cannot convert anonymous method to type 'int' because it is not a delegate type
+                //         int q2 = delegate { return 1; };
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "delegate { return 1; }")
+                    .WithArguments("anonymous method", "int")
+                    .WithLocation(17, 18),
+                // (18,24): error CS1593: Delegate 'Func<int>' does not take 1 arguments
+                //         Func<int> q3 = x3=>1;
+                Diagnostic(ErrorCode.ERR_BadDelArgCount, "x3=>1")
+                    .WithArguments("System.Func<int>", "1")
+                    .WithLocation(18, 24),
+                // (19,37): error CS0234: The type or namespace name 'Itn23' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                //         Func<int, int> q4 = (System.Itn23 x4)=>1; // type mismatch error should be suppressed on error type
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Itn23")
+                    .WithArguments("Itn23", "System")
+                    .WithLocation(19, 37),
+                // (20,35): error CS0234: The type or namespace name 'Duobel' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                //         Func<double> q5 = (System.Duobel x5)=>1;  // but arity error should not be suppressed on error type
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Duobel")
+                    .WithArguments("Duobel", "System")
+                    .WithLocation(20, 35),
+                // (20,27): error CS1593: Delegate 'Func<double>' does not take 1 arguments
+                //         Func<double> q5 = (System.Duobel x5)=>1;  // but arity error should not be suppressed on error type
+                Diagnostic(ErrorCode.ERR_BadDelArgCount, "(System.Duobel x5)=>1")
+                    .WithArguments("System.Func<double>", "1")
+                    .WithLocation(20, 27),
+                // (21,17): error CS1661: Cannot convert lambda expression to delegate type 'C.D1' because the parameter types do not match the delegate parameter types
+                //         D1 q6 = (double x6, ref int y6, ref int z6)=>1;
+                Diagnostic(
+                        ErrorCode.ERR_CantConvAnonMethParams,
+                        "(double x6, ref int y6, ref int z6)=>1"
+                    )
+                    .WithArguments("lambda expression", "C.D1")
+                    .WithLocation(21, 17),
+                // (21,25): error CS1678: Parameter 1 is declared as type 'double' but should be 'ref int'
+                //         D1 q6 = (double x6, ref int y6, ref int z6)=>1;
+                Diagnostic(ErrorCode.ERR_BadParamType, "x6")
+                    .WithArguments("1", "", "double", "ref ", "int")
+                    .WithLocation(21, 25),
+                // (21,37): error CS1676: Parameter 2 must be declared with the 'out' keyword
+                //         D1 q6 = (double x6, ref int y6, ref int z6)=>1;
+                Diagnostic(ErrorCode.ERR_BadParamRef, "y6")
+                    .WithArguments("2", "out")
+                    .WithLocation(21, 37),
+                // (21,49): error CS1677: Parameter 3 should not be declared with the 'ref' keyword
+                //         D1 q6 = (double x6, ref int y6, ref int z6)=>1;
+                Diagnostic(ErrorCode.ERR_BadParamExtraRef, "z6")
+                    .WithArguments("3", "ref")
+                    .WithLocation(21, 49),
+                // (32,17): error CS1688: Cannot convert anonymous method block without a parameter list to delegate type 'C.D1' because it has one or more out parameters
+                //         D1 q7 = delegate {};
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethNoParams, "delegate {}")
+                    .WithArguments("C.D1")
+                    .WithLocation(32, 17),
+                // (34,9): error CS0246: The type or namespace name 'Frob' could not be found (are you missing a using directive or an assembly reference?)
+                //         Frob q8 = ()=>{};
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Frob")
+                    .WithArguments("Frob")
+                    .WithLocation(34, 9),
+                // (36,17): error CS1676: Parameter 1 must be declared with the 'out' keyword
+                //         D2 q9 = x9=>{};
+                Diagnostic(ErrorCode.ERR_BadParamRef, "x9")
+                    .WithArguments("1", "out")
+                    .WithLocation(36, 17),
+                // (38,19): error CS1676: Parameter 1 must be declared with the 'ref' keyword
+                //         D1 q10 = (x10,y10,z10)=>{};
+                Diagnostic(ErrorCode.ERR_BadParamRef, "x10")
+                    .WithArguments("1", "ref")
+                    .WithLocation(38, 19),
+                // (38,23): error CS1676: Parameter 2 must be declared with the 'out' keyword
+                //         D1 q10 = (x10,y10,z10)=>{};
+                Diagnostic(ErrorCode.ERR_BadParamRef, "y10")
+                    .WithArguments("2", "out")
+                    .WithLocation(38, 23),
+                // (52,28): error CS8030: Anonymous function converted to a void returning delegate cannot return a value
+                //         Action q11 = ()=>{ return 1; };
+                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return")
+                    .WithLocation(52, 28),
+                // (54,26): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                //         Action q12 = ()=>1;
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(54, 26),
+                // (56,42): warning CS0162: Unreachable code detected
+                //         Func<int> q13 = ()=>{ if (false) return 1; };
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(56, 42),
+                // (56,27): error CS1643: Not all code paths return a value in lambda expression of type 'Func<int>'
+                //         Func<int> q13 = ()=>{ if (false) return 1; };
+                Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "=>")
+                    .WithArguments("lambda expression", "System.Func<int>")
+                    .WithLocation(56, 27),
+                // (58,29): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
+                //         Func<int> q14 = ()=>123.456;
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "123.456")
+                    .WithArguments("double", "int")
+                    .WithLocation(58, 29),
+                // (58,29): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         Func<int> q14 = ()=>123.456;
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "123.456")
+                    .WithArguments("lambda expression")
+                    .WithLocation(58, 29),
+                // (62,51): error CS0266: Cannot implicitly convert type 'decimal' to 'double'. An explicit conversion exists (are you missing a cast?)
+                //         Func<double> q15 = ()=>{if (false) return 1m; else return 0; };
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1m")
+                    .WithArguments("decimal", "double")
+                    .WithLocation(62, 51),
+                // (62,51): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         Func<double> q15 = ()=>{if (false) return 1m; else return 0; };
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1m")
+                    .WithArguments("lambda expression")
+                    .WithLocation(62, 51),
+                // (62,44): warning CS0162: Unreachable code detected
+                //         Func<double> q15 = ()=>{if (false) return 1m; else return 0; };
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(62, 44),
+                // (66,39): error CS1670: params is not valid in this context
+                //         Action<int[]> q16 = delegate (params int[] p) { };
+                Diagnostic(ErrorCode.ERR_IllegalParams, "params int[] p").WithLocation(66, 39),
+                // (67,33): error CS1670: params is not valid in this context
+                //         Action<string[]> q17 = (params string[] s)=>{};
+                Diagnostic(ErrorCode.ERR_IllegalParams, "params string[] s").WithLocation(67, 33),
+                // (68,45): error CS1670: params is not valid in this context
+                //         Action<int, double[]> q18 = (int x, params double[] s)=>{};
+                Diagnostic(ErrorCode.ERR_IllegalParams, "params double[] s").WithLocation(68, 45),
+                // (70,34): error CS1593: Delegate 'Action' does not take 1 arguments
+                //         object q19 = new Action( (int x)=>{} );
+                Diagnostic(ErrorCode.ERR_BadDelArgCount, "(int x)=>{}")
+                    .WithArguments("System.Action", "1")
+                    .WithLocation(70, 34),
+                // (72,9): warning CS0436: The type 'Expression<T>' in '' conflicts with the imported type 'Expression<TDelegate>' in 'System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+                //         Expression<int> ex1 = ()=>1;
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Expression<int>")
+                    .WithArguments(
+                        "",
+                        "System.Linq.Expressions.Expression<T>",
+                        "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "System.Linq.Expressions.Expression<TDelegate>"
+                    )
+                    .WithLocation(72, 9),
+                // (72,31): error CS0835: Cannot convert lambda to an expression tree whose type argument 'int' is not a delegate type
+                //         Expression<int> ex1 = ()=>1;
+                Diagnostic(ErrorCode.ERR_ExpressionTreeMustHaveDelegate, "()=>1")
+                    .WithArguments("int")
+                    .WithLocation(72, 31)
+            );
         }
 
         [Fact] // 5368
         public void TestLambdaErrors02()
         {
-            string code = @"
+            string code =
+                @"
 class C
 {
     void M()
@@ -266,7 +327,8 @@ class C
         [Fact]
         public void TestLambdaErrors03()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 interface I : IComparable<IComparable<I>> { }
@@ -281,17 +343,25 @@ class C
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (12,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.Goo(Func<IComparable<I>>)' and 'C.Goo(Func<I>)'
-                //         Goo(() => null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "Goo").WithArguments("C.Goo(System.Func<System.IComparable<I>>)", "C.Goo(System.Func<I>)").WithLocation(12, 9));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (12,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.Goo(Func<IComparable<I>>)' and 'C.Goo(Func<I>)'
+                    //         Goo(() => null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
+                        .WithArguments(
+                            "C.Goo(System.Func<System.IComparable<I>>)",
+                            "C.Goo(System.Func<I>)"
+                        )
+                        .WithLocation(12, 9)
+                );
         }
 
         [WorkItem(18645, "https://github.com/dotnet/roslyn/issues/18645")]
         [Fact]
         public void LambdaExpressionTreesErrors()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -305,23 +375,35 @@ class C
 }
 ";
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,41): error CS1593: Delegate 'Func<int, int>' does not take 0 arguments
-                //         Expression<Func<int,int>> ex1 = () => 1;
-                Diagnostic(ErrorCode.ERR_BadDelArgCount, "() => 1").WithArguments("System.Func<int, int>", "0").WithLocation(9, 41),
-                // (10,41): error CS1661: Cannot convert lambda expression to type 'Expression<Func<int, int>>' because the parameter types do not match the delegate parameter types
-                //         Expression<Func<int,int>> ex2 = (double d) => 1;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethParams, "(double d) => 1").WithArguments("lambda expression", "System.Linq.Expressions.Expression<System.Func<int, int>>").WithLocation(10, 41),
-                // (10,49): error CS1678: Parameter 1 is declared as type 'double' but should be 'int'
-                //         Expression<Func<int,int>> ex2 = (double d) => 1;
-                Diagnostic(ErrorCode.ERR_BadParamType, "d").WithArguments("1", "", "double", "", "int").WithLocation(10, 49));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,41): error CS1593: Delegate 'Func<int, int>' does not take 0 arguments
+                    //         Expression<Func<int,int>> ex1 = () => 1;
+                    Diagnostic(ErrorCode.ERR_BadDelArgCount, "() => 1")
+                        .WithArguments("System.Func<int, int>", "0")
+                        .WithLocation(9, 41),
+                    // (10,41): error CS1661: Cannot convert lambda expression to type 'Expression<Func<int, int>>' because the parameter types do not match the delegate parameter types
+                    //         Expression<Func<int,int>> ex2 = (double d) => 1;
+                    Diagnostic(ErrorCode.ERR_CantConvAnonMethParams, "(double d) => 1")
+                        .WithArguments(
+                            "lambda expression",
+                            "System.Linq.Expressions.Expression<System.Func<int, int>>"
+                        )
+                        .WithLocation(10, 41),
+                    // (10,49): error CS1678: Parameter 1 is declared as type 'double' but should be 'int'
+                    //         Expression<Func<int,int>> ex2 = (double d) => 1;
+                    Diagnostic(ErrorCode.ERR_BadParamType, "d")
+                        .WithArguments("1", "", "double", "", "int")
+                        .WithLocation(10, 49)
+                );
         }
 
         [WorkItem(539976, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539976")]
         [Fact]
         public void LambdaArgumentToOverloadedDelegate()
         {
-            var text = @"class W
+            var text =
+                @"class W
 {
     delegate T Func<A0, T>(A0 a0);
 
@@ -342,7 +424,8 @@ class C
         [Fact]
         public void MissingReferenceInOverloadResolution()
         {
-            var text1 = @"
+            var text1 =
+                @"
 using System;
 public static class A
 {
@@ -368,9 +451,11 @@ public class C
 
             var comp1 = CreateCompilationWithMscorlib40(
                 new[] { Parse(text1) },
-                new[] { TestMetadata.Net451.System });
+                new[] { TestMetadata.Net451.System }
+            );
 
-            var text2 = @"
+            var text2 =
+                @"
 class Program
 {
     static void Main()
@@ -382,7 +467,8 @@ class Program
 
             var comp2 = CreateCompilationWithMscorlib40(
                 new[] { Parse(text2) },
-                new[] { new CSharpCompilationReference(comp1) });
+                new[] { new CSharpCompilationReference(comp1) }
+            );
 
             Assert.Equal(0, comp2.GetDiagnostics().Count());
         }
@@ -391,7 +477,8 @@ class Program
         [Fact()]
         public void OverloadResolutionWithEmbeddedInteropType()
         {
-            var text1 = @"
+            var text1 =
+                @"
 using System;
 using System.Collections.Generic;
 using stdole;
@@ -415,9 +502,11 @@ public delegate void Y(List<string> addin);
             var comp1 = CreateCompilation(
                 Parse(text1),
                 new[] { TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true) },
-                options: TestOptions.ReleaseDll);
+                options: TestOptions.ReleaseDll
+            );
 
-            var text2 = @"
+            var text2 =
+                @"
 public class Program
 {
     public static void Main()
@@ -430,22 +519,24 @@ public class Program
             var comp2 = CreateCompilation(
                 Parse(text2),
                 new MetadataReference[]
-                    {
-                        new CSharpCompilationReference(comp1),
-                        TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true)
-                    },
-                options: TestOptions.ReleaseExe);
+                {
+                    new CSharpCompilationReference(comp1),
+                    TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true)
+                },
+                options: TestOptions.ReleaseExe
+            );
 
             CompileAndVerify(comp2, expectedOutput: "Y").Diagnostics.Verify();
 
             var comp3 = CreateCompilation(
                 Parse(text2),
                 new MetadataReference[]
-                    {
-                        comp1.EmitToImageReference(),
-                        TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true)
-                    },
-                options: TestOptions.ReleaseExe);
+                {
+                    comp1.EmitToImageReference(),
+                    TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true)
+                },
+                options: TestOptions.ReleaseExe
+            );
 
             CompileAndVerify(comp3, expectedOutput: "Y").Diagnostics.Verify();
         }
@@ -454,7 +545,8 @@ public class Program
         [Fact]
         public void InvalidExpressionInvolveLambdaOperator()
         {
-            var text1 = @"
+            var text1 =
+                @"
 class C
 {
     static void X() 
@@ -471,14 +563,18 @@ class C
             var comp = CreateCompilation(Parse(text1));
             var errs = comp.GetDiagnostics();
             Assert.True(0 < errs.Count(), "Diagnostics not empty");
-            Assert.True(0 < errs.Where(e => e.Code == 1525).Select(e => e).Count(), "Diagnostics contains CS1525");
+            Assert.True(
+                0 < errs.Where(e => e.Code == 1525).Select(e => e).Count(),
+                "Diagnostics contains CS1525"
+            );
         }
 
         [WorkItem(540219, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540219")]
         [Fact]
         public void OverloadResolutionWithStaticType()
         {
-            var vbSource = @"
+            var vbSource =
+                @"
 Imports System
 
 Namespace Microsoft.VisualBasic.CompilerServices
@@ -507,9 +603,11 @@ End Module
             var vbProject = VisualBasic.VisualBasicCompilation.Create(
                 "VBProject",
                 references: new[] { MscorlibRef },
-                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) });
+                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+            );
 
-            var csSource = @"
+            var csSource =
+                @"
 class Program
 {
     static void Main()
@@ -519,12 +617,16 @@ class Program
 }
 ";
             var metadataStream = new MemoryStream();
-            var emitResult = vbProject.Emit(metadataStream, options: new EmitOptions(metadataOnly: true));
+            var emitResult = vbProject.Emit(
+                metadataStream,
+                options: new EmitOptions(metadataOnly: true)
+            );
             Assert.True(emitResult.Success);
 
             var csProject = CreateCompilation(
                 Parse(csSource),
-                new[] { MetadataReference.CreateFromImage(metadataStream.ToImmutable()) });
+                new[] { MetadataReference.CreateFromImage(metadataStream.ToImmutable()) }
+            );
 
             Assert.Equal(0, csProject.GetDiagnostics().Count());
         }
@@ -532,7 +634,8 @@ class Program
         [Fact]
         public void OverloadResolutionWithStaticTypeError()
         {
-            var vbSource = @"
+            var vbSource =
+                @"
 Imports System
 
 Namespace Microsoft.VisualBasic.CompilerServices
@@ -557,9 +660,11 @@ End Module
             var vbProject = VisualBasic.VisualBasicCompilation.Create(
                 "VBProject",
                 references: new[] { MscorlibRef },
-                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) });
+                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+            );
 
-            var csSource = @"
+            var csSource =
+                @"
 class Program
 {
     static void Main()
@@ -569,18 +674,25 @@ class Program
 }
 ";
             var vbMetadata = vbProject.EmitToArray(options: new EmitOptions(metadataOnly: true));
-            var csProject = CreateCompilation(Parse(csSource), new[] { MetadataReference.CreateFromImage(vbMetadata) });
+            var csProject = CreateCompilation(
+                Parse(csSource),
+                new[] { MetadataReference.CreateFromImage(vbMetadata) }
+            );
             csProject.VerifyDiagnostics(
                 // (6,15): error CS0721: 'GC': static types cannot be used as parameters
                 //         M.F = x=>{};
-                Diagnostic(ErrorCode.ERR_ParameterIsStaticClass, "x").WithArguments("System.GC").WithLocation(6, 15));
+                Diagnostic(ErrorCode.ERR_ParameterIsStaticClass, "x")
+                    .WithArguments("System.GC")
+                    .WithLocation(6, 15)
+            );
         }
 
         [WorkItem(540251, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540251")]
         [Fact]
         public void AttributesCannotBeUsedInAnonymousMethods()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System;
 
 class Program
@@ -597,17 +709,22 @@ class Program
             csProject.VerifyEmitDiagnostics(
                 // (8,22): warning CS0219: The variable 'message' is assigned but its value is never used
                 //         const string message = "The parameter is obsolete";
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "message").WithArguments("message").WithLocation(8, 22),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "message")
+                    .WithArguments("message")
+                    .WithLocation(8, 22),
                 // (9,35): error CS7014: Attributes are not valid in this context.
                 //         Action<int> a = delegate ([ObsoleteAttribute(message)] int x) { };
-                Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[ObsoleteAttribute(message)]").WithLocation(9, 35));
+                Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[ObsoleteAttribute(message)]")
+                    .WithLocation(9, 35)
+            );
         }
 
         [WorkItem(540263, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540263")]
         [Fact]
         public void ErrorsInUnboundLambdas()
         {
-            var csSource = @"using System;
+            var csSource =
+                @"using System;
 
 class Program
 {
@@ -620,33 +737,43 @@ class Program
 }
 ";
 
-            CreateCompilation(csSource).VerifyDiagnostics(
-    // (7,39): error CS0029: Cannot implicitly convert type 'string' to 'int'
-    //         ((Func<int>)delegate { return ""; })();
-    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""").WithArguments("string", "int").WithLocation(7, 39),
-    // (7,39): error CS1662: Cannot convert anonymous method to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-    //         ((Func<int>)delegate { return ""; })();
-    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, @"""""").WithArguments("anonymous method").WithLocation(7, 39),
-    // (8,21): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
-    //         ((Func<int>)delegate { })();
-    Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate").WithArguments("anonymous method", "System.Func<int>").WithLocation(8, 21),
-    // (9,32): error CS0020: Division by constant zero
-    //         ((Func<int>)delegate { 1 / 0; })();
-    Diagnostic(ErrorCode.ERR_IntDivByZero, "1 / 0").WithLocation(9, 32),
-    // (9,32): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-    //         ((Func<int>)delegate { 1 / 0; })();
-    Diagnostic(ErrorCode.ERR_IllegalStatement, "1 / 0").WithLocation(9, 32),
-    // (9,21): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
-    //         ((Func<int>)delegate { 1 / 0; })();
-    Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate").WithArguments("anonymous method", "System.Func<int>").WithLocation(9, 21)
-            );
+            CreateCompilation(csSource)
+                .VerifyDiagnostics(
+                    // (7,39): error CS0029: Cannot implicitly convert type 'string' to 'int'
+                    //         ((Func<int>)delegate { return ""; })();
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
+                        .WithArguments("string", "int")
+                        .WithLocation(7, 39),
+                    // (7,39): error CS1662: Cannot convert anonymous method to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                    //         ((Func<int>)delegate { return ""; })();
+                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, @"""""")
+                        .WithArguments("anonymous method")
+                        .WithLocation(7, 39),
+                    // (8,21): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
+                    //         ((Func<int>)delegate { })();
+                    Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate")
+                        .WithArguments("anonymous method", "System.Func<int>")
+                        .WithLocation(8, 21),
+                    // (9,32): error CS0020: Division by constant zero
+                    //         ((Func<int>)delegate { 1 / 0; })();
+                    Diagnostic(ErrorCode.ERR_IntDivByZero, "1 / 0").WithLocation(9, 32),
+                    // (9,32): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         ((Func<int>)delegate { 1 / 0; })();
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "1 / 0").WithLocation(9, 32),
+                    // (9,21): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
+                    //         ((Func<int>)delegate { 1 / 0; })();
+                    Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate")
+                        .WithArguments("anonymous method", "System.Func<int>")
+                        .WithLocation(9, 21)
+                );
         }
 
         [WorkItem(540181, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540181")]
         [Fact]
         public void ErrorInLambdaArgumentList()
         {
-            var csSource = @"using System;
+            var csSource =
+                @"using System;
 
 class Program
 {
@@ -657,20 +784,27 @@ class Program
     }
 }";
 
-            CreateCompilation(csSource).VerifyDiagnostics(
-                // (5,37): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
-                //     public Program(string x) : this(() => x) { }
-                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "() => x").WithArguments("lambda expression", "string").WithLocation(5, 37),
-                // (8,55): error CS0103: The name 'nulF' does not exist in the current context
-                //         ((Action<string>)(f => Console.WriteLine(f)))(nulF);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "nulF").WithArguments("nulF").WithLocation(8, 55));
+            CreateCompilation(csSource)
+                .VerifyDiagnostics(
+                    // (5,37): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+                    //     public Program(string x) : this(() => x) { }
+                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "() => x")
+                        .WithArguments("lambda expression", "string")
+                        .WithLocation(5, 37),
+                    // (8,55): error CS0103: The name 'nulF' does not exist in the current context
+                    //         ((Action<string>)(f => Console.WriteLine(f)))(nulF);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "nulF")
+                        .WithArguments("nulF")
+                        .WithLocation(8, 55)
+                );
         }
 
         [WorkItem(541725, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541725")]
         [Fact]
         public void DelegateCreationIsNotStatement()
         {
-            var csSource = @"
+            var csSource =
+                @"
 delegate void D();
 class Program
 {
@@ -685,20 +819,23 @@ class Program
             // for its side effects, a delegate-creation-expression is not allowed as a
             // statement expression.
 
-            CreateCompilation(csSource).VerifyDiagnostics(
-                // (7,21): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                //         D d = () => new D(() => { });
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "new D(() => { })"),
-                // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                //         new D(()=>{});
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "new D(()=>{})"));
+            CreateCompilation(csSource)
+                .VerifyDiagnostics(
+                    // (7,21): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         D d = () => new D(() => { });
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "new D(() => { })"),
+                    // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         new D(()=>{});
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "new D(()=>{})")
+                );
         }
 
         [WorkItem(542336, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542336")]
         [Fact]
         public void ThisInStaticContext()
         {
-            var csSource = @"
+            var csSource =
+                @"
 delegate void D();
 class Program
 {
@@ -709,10 +846,11 @@ class Program
         };
     }
 }";
-            CreateCompilation(csSource).VerifyDiagnostics(
-                // (8,24): error CS0026: Keyword 'this' is not valid in a static property, static method, or static field initializer
-                //             object o = this;
-                Diagnostic(ErrorCode.ERR_ThisInStaticMeth, "this")
+            CreateCompilation(csSource)
+                .VerifyDiagnostics(
+                    // (8,24): error CS0026: Keyword 'this' is not valid in a static property, static method, or static field initializer
+                    //             object o = this;
+                    Diagnostic(ErrorCode.ERR_ThisInStaticMeth, "this")
                 );
         }
 
@@ -720,7 +858,8 @@ class Program
         [Fact]
         public void LambdaHasMoreParametersThanDelegate()
         {
-            var csSource = @"
+            var csSource =
+                @"
 class C
 {
     static void Main()
@@ -728,15 +867,19 @@ class C
         System.Func<int> f = new System.Func<int>(r => 0);
     }
 }";
-            CreateCompilation(csSource).VerifyDiagnostics(
-                // (6,51): error CS1593: Delegate 'System.Func<int>' does not take 1 arguments
-                Diagnostic(ErrorCode.ERR_BadDelArgCount, "r => 0").WithArguments("System.Func<int>", "1"));
+            CreateCompilation(csSource)
+                .VerifyDiagnostics(
+                    // (6,51): error CS1593: Delegate 'System.Func<int>' does not take 1 arguments
+                    Diagnostic(ErrorCode.ERR_BadDelArgCount, "r => 0")
+                        .WithArguments("System.Func<int>", "1")
+                );
         }
 
         [Fact, WorkItem(529054, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529054")]
         public void LambdaInDynamicCall()
         {
-            var source = @"
+            var source =
+                @"
 public class Program
 {
     static void Main()
@@ -745,17 +888,19 @@ public class Program
         bool exists = System.Array.Exists(b, o => o != ""BB"");
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-    // (7,46): error CS1977: Cannot use a lambda expression as an argument to a dynamically dispatched operation without first casting it to a delegate or expression tree type.
-    //         bool exists = System.Array.Exists(b, o => o != "BB");
-    Diagnostic(ErrorCode.ERR_BadDynamicMethodArgLambda, @"o => o != ""BB""")
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (7,46): error CS1977: Cannot use a lambda expression as an argument to a dynamically dispatched operation without first casting it to a delegate or expression tree type.
+                    //         bool exists = System.Array.Exists(b, o => o != "BB");
+                    Diagnostic(ErrorCode.ERR_BadDynamicMethodArgLambda, @"o => o != ""BB""")
                 );
         }
 
         [Fact, WorkItem(529389, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529389")]
         public void ParenthesizedLambdaInCastExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 class Program
@@ -773,15 +918,20 @@ class Program
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            ExpressionSyntax expr = tree.GetCompilationUnitRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().
-                Where(e => e.Kind() == SyntaxKind.AddExpression).Single();
+            ExpressionSyntax expr = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.AddExpression)
+                .Single();
 
             var tinfo = model.GetTypeInfo(expr);
             var conv = model.GetConversion(expr);
             // Not byte
             Assert.Equal("int", tinfo.Type.ToDisplayString());
 
-            var exprs = tree.GetCompilationUnitRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>();
+            var exprs = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ParenthesizedLambdaExpressionSyntax>();
             expr = exprs.First();
             tinfo = model.GetTypeInfo(expr);
             conv = model.GetConversion(expr);
@@ -807,7 +957,8 @@ class Program
         [Fact]
         public void LambdaInEnumMemberDecl()
         {
-            var csSource = @"
+            var csSource =
+                @"
 public class TestClass
 {
     public enum Test { aa = ((System.Func<int>)(() => 1))() }
@@ -817,18 +968,26 @@ public class TestClass
     }
 }
 ";
-            CreateCompilation(csSource).VerifyDiagnostics(
-                // (4,29): error CS0133: The expression being assigned to 'TestClass.Test.aa' must be constant
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "((System.Func<int>)(() => 1))()").WithArguments("TestClass.Test.aa"),
-                // (5,10): warning CS0414: The field 'TestClass.MyTest' is assigned but its value is never used
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "MyTest").WithArguments("TestClass.MyTest"));
+            CreateCompilation(csSource)
+                .VerifyDiagnostics(
+                    // (4,29): error CS0133: The expression being assigned to 'TestClass.Test.aa' must be constant
+                    Diagnostic(
+                            ErrorCode.ERR_NotConstantExpression,
+                            "((System.Func<int>)(() => 1))()"
+                        )
+                        .WithArguments("TestClass.Test.aa"),
+                    // (5,10): warning CS0414: The field 'TestClass.MyTest' is assigned but its value is never used
+                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "MyTest")
+                        .WithArguments("TestClass.MyTest")
+                );
         }
 
         [WorkItem(544932, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544932")]
         [Fact]
         public void AnonymousLambdaInEnumSubtraction()
         {
-            string source = @"
+            string source =
+                @"
 class Test
 {
     enum E1 : byte
@@ -853,7 +1012,8 @@ class Test
         [Fact]
         public void SpeculativelyBindOverloadResolution()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -873,20 +1033,25 @@ class Program
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var invocation = tree.GetCompilationUnitRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var invocation = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
 
             // Used to throw a NRE because of the ExpressionSyntax's null SyntaxTree.
             model.GetSpeculativeSymbolInfo(
                 invocation.SpanStart,
                 SyntaxFactory.ParseExpression("Goo(() => () => { var x = null; return x; })"), // cast removed
-                SpeculativeBindingOption.BindAsExpression);
+                SpeculativeBindingOption.BindAsExpression
+            );
         }
 
         [WorkItem(545343, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545343")]
         [Fact]
         public void LambdaUsingFieldInConstructor()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class Derived
@@ -916,7 +1081,8 @@ public class Derived
         [Fact]
         public void SpeculativelyBindOverloadResolutionAndInferenceWithError()
         {
-            string source = @"
+            string source =
+                @"
 using System;using System.Linq.Expressions;
 namespace IntellisenseBug
 {
@@ -961,12 +1127,10 @@ namespace IntellisenseBug
                 // (10,36): error CS1002: ; expected
                 //             mapper.Map(x => x/* */.
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "")
-                );
+            );
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
-            var xReference =
-                tree
-                .GetCompilationUnitRoot()
+            var xReference = tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .OfType<ExpressionSyntax>()
                 .Where(e => e.ToFullString() == "x/* */")
@@ -979,7 +1143,8 @@ namespace IntellisenseBug
         [Fact]
         public void CompletionInLambdaInIncompleteInvocation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq.Expressions;
  
@@ -1015,12 +1180,10 @@ public class IntelliSenseError
                 // (21,37): error CS1002: ; expected
                 //         Test2<SomeType>(o => o/* */.
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "")
-                );
+            );
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
-            var oReference =
-                tree
-                .GetCompilationUnitRoot()
+            var oReference = tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .OfType<NameSyntax>()
                 .Where(e => e.ToFullString() == "o/* */")
@@ -1033,7 +1196,8 @@ public class IntelliSenseError
         [Fact]
         public void Bug871896()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading;
 using System.Threading.Tasks;
 class TestDataPointBase
@@ -1053,9 +1217,7 @@ class TestDataPointBase
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
-            var oReference =
-                tree
-                .GetCompilationUnitRoot()
+            var oReference = tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .OfType<ExpressionSyntax>()
                 .OrderByDescending(s => s.SpanStart);
@@ -1067,28 +1229,41 @@ class TestDataPointBase
 
             // We should get a bunch of errors, but no asserts.
             compilation.VerifyDiagnostics(
-    // (6,22): error CS0246: The type or namespace name 'IVisualStudioIntegrationService' could not be found (are you missing a using directive or an assembly reference?)
-    //     private readonly IVisualStudioIntegrationService integrationService;
-    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IVisualStudioIntegrationService").WithArguments("IVisualStudioIntegrationService").WithLocation(6, 22),
-    // (9,9): error CS0246: The type or namespace name 'DocumentId' could not be found (are you missing a using directive or an assembly reference?)
-    //         DocumentId documentId = null;
-    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "DocumentId").WithArguments("DocumentId").WithLocation(9, 9),
-    // (10,25): error CS0117: 'System.Threading.Tasks.Task' does not contain a definition for 'Run'
-    //         if (!await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false))
-    Diagnostic(ErrorCode.ERR_NoSuchMember, "Run").WithArguments("System.Threading.Tasks.Task", "Run").WithLocation(10, 25),
-    // (10,14): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
-    //         if (!await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false))
-    Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false)").WithLocation(10, 14),
-    // (6,54): warning CS0649: Field 'TestDataPointBase.integrationService' is never assigned to, and will always have its default value null
-    //     private readonly IVisualStudioIntegrationService integrationService;
-    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "integrationService").WithArguments("TestDataPointBase.integrationService", "null").WithLocation(6, 54)
-                );
+                // (6,22): error CS0246: The type or namespace name 'IVisualStudioIntegrationService' could not be found (are you missing a using directive or an assembly reference?)
+                //     private readonly IVisualStudioIntegrationService integrationService;
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IVisualStudioIntegrationService")
+                    .WithArguments("IVisualStudioIntegrationService")
+                    .WithLocation(6, 22),
+                // (9,9): error CS0246: The type or namespace name 'DocumentId' could not be found (are you missing a using directive or an assembly reference?)
+                //         DocumentId documentId = null;
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "DocumentId")
+                    .WithArguments("DocumentId")
+                    .WithLocation(9, 9),
+                // (10,25): error CS0117: 'System.Threading.Tasks.Task' does not contain a definition for 'Run'
+                //         if (!await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false))
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Run")
+                    .WithArguments("System.Threading.Tasks.Task", "Run")
+                    .WithLocation(10, 25),
+                // (10,14): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
+                //         if (!await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false))
+                Diagnostic(
+                        ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod,
+                        "await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false)"
+                    )
+                    .WithLocation(10, 14),
+                // (6,54): warning CS0649: Field 'TestDataPointBase.integrationService' is never assigned to, and will always have its default value null
+                //     private readonly IVisualStudioIntegrationService integrationService;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "integrationService")
+                    .WithArguments("TestDataPointBase.integrationService", "null")
+                    .WithLocation(6, 54)
+            );
         }
 
         [Fact, WorkItem(960755, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/960755")]
         public void Bug960755_01()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
  
 class C
@@ -1106,23 +1281,33 @@ class C
             comp.VerifyDiagnostics(
                 // (9,15): error CS1660: Cannot convert lambda expression to type 'IList<C>' because it is not a delegate type
                 //         tmp.M((a, b) => c.Add);
-                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(a, b) => c.Add").WithArguments("lambda expression", "System.Collections.Generic.IList<C>").WithLocation(9, 15));
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(a, b) => c.Add")
+                    .WithArguments("lambda expression", "System.Collections.Generic.IList<C>")
+                    .WithLocation(9, 15)
+            );
 
             var model = comp.GetSemanticModel(tree);
 
-            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single().Body;
+            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ParenthesizedLambdaExpressionSyntax>()
+                .Single().Body;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
             Assert.Null(symbolInfo.Symbol);
-            Assert.Equal("void System.Collections.Generic.ICollection<C>.Add(C item)", symbolInfo.CandidateSymbols.Single().ToTestDisplayString());
+            Assert.Equal(
+                "void System.Collections.Generic.ICollection<C>.Add(C item)",
+                symbolInfo.CandidateSymbols.Single().ToTestDisplayString()
+            );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
         }
 
         [Fact, WorkItem(960755, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/960755")]
         public void Bug960755_02()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
  
 class C
@@ -1138,19 +1323,26 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot().DescendantNodes().OfType<VariableDeclaratorSyntax>().Single().Initializer.Value;
+            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single().Initializer.Value;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
             Assert.Null(symbolInfo.Symbol);
-            Assert.Equal("void System.Collections.Generic.ICollection<C>.Add(C item)", symbolInfo.CandidateSymbols.Single().ToTestDisplayString());
+            Assert.Equal(
+                "void System.Collections.Generic.ICollection<C>.Add(C item)",
+                symbolInfo.CandidateSymbols.Single().ToTestDisplayString()
+            );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
         }
 
         [Fact, WorkItem(960755, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/960755")]
         public void Bug960755_03()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
  
 class C
@@ -1170,11 +1362,17 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single().Body;
+            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ParenthesizedLambdaExpressionSyntax>()
+                .Single().Body;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
-            Assert.Equal("void System.Collections.Generic.ICollection<C>.Add(C item)", symbolInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Collections.Generic.ICollection<C>.Add(C item)",
+                symbolInfo.Symbol.ToTestDisplayString()
+            );
             Assert.Equal(0, symbolInfo.CandidateSymbols.Length);
             Assert.Equal(CandidateReason.None, symbolInfo.CandidateReason);
         }
@@ -1182,7 +1380,8 @@ class C
         [Fact]
         public void RefLambdaInferenceMethodArgument()
         {
-            var text = @"
+            var text =
+                @"
 delegate ref int D();
 
 class C
@@ -1202,11 +1401,11 @@ class C
             CreateCompilationWithMscorlib45(text).VerifyDiagnostics();
         }
 
-
         [Fact]
         public void RefLambdaInferenceDelegateCreation()
         {
-            var text = @"
+            var text =
+                @"
 delegate ref int D();
 
 class C
@@ -1227,7 +1426,8 @@ class C
         [Fact]
         public void RefLambdaInferenceOverloadedDelegateType()
         {
-            var text = @"
+            var text =
+                @"
 delegate ref int D();
 delegate int E();
 
@@ -1255,7 +1455,8 @@ class C
         [Fact]
         public void RefLambdaInferenceArgumentBadRefReturn()
         {
-            var text = @"
+            var text =
+                @"
 delegate int E();
 
 class C
@@ -1272,22 +1473,25 @@ class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(text).VerifyDiagnostics(
-                // (11,22): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                //         ME(() => ref i);
-                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "i").WithLocation(11, 22),
-                // (12,20): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                //         ME(() => { return ref i; });
-                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(12, 20),
-                // (13,23): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                //         ME(delegate { return ref i; });
-                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(13, 23));
+            CreateCompilationWithMscorlib45(text)
+                .VerifyDiagnostics(
+                    // (11,22): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                    //         ME(() => ref i);
+                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "i").WithLocation(11, 22),
+                    // (12,20): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                    //         ME(() => { return ref i; });
+                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(12, 20),
+                    // (13,23): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                    //         ME(delegate { return ref i; });
+                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(13, 23)
+                );
         }
 
         [Fact]
         public void RefLambdaInferenceDelegateCreationBadRefReturn()
         {
-            var text = @"
+            var text =
+                @"
 delegate int E();
 
 class C
@@ -1302,22 +1506,25 @@ class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(text).VerifyDiagnostics(
-                // (9,33): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                //         var e = new E(() => ref i);
-                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "i").WithLocation(9, 33),
-                // (10,27): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                //         e = new E(() => { return ref i; });
-                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(10, 27),
-                // (11,30): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                //         e = new E(delegate { return ref i; });
-                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(11, 30));
+            CreateCompilationWithMscorlib45(text)
+                .VerifyDiagnostics(
+                    // (9,33): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                    //         var e = new E(() => ref i);
+                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "i").WithLocation(9, 33),
+                    // (10,27): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                    //         e = new E(() => { return ref i; });
+                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(10, 27),
+                    // (11,30): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                    //         e = new E(delegate { return ref i; });
+                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(11, 30)
+                );
         }
 
         [Fact]
         public void RefLambdaInferenceMixedByValueAndByRefReturns()
         {
-            var text = @"
+            var text =
+                @"
 delegate ref int D();
 delegate int E();
 
@@ -1347,13 +1554,15 @@ class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(text).VerifyDiagnostics(
-                // (18,13): error CS8150: By-value returns may only be used in by-value returning methods.
-                //             return i;
-                Diagnostic(ErrorCode.ERR_MustHaveRefReturn, "return").WithLocation(18, 13),
-                // (23,17): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                //                 return ref i;
-                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(23, 17));
+            CreateCompilationWithMscorlib45(text)
+                .VerifyDiagnostics(
+                    // (18,13): error CS8150: By-value returns may only be used in by-value returning methods.
+                    //             return i;
+                    Diagnostic(ErrorCode.ERR_MustHaveRefReturn, "return").WithLocation(18, 13),
+                    // (23,17): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                    //                 return ref i;
+                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(23, 17)
+                );
         }
 
         [WorkItem(1112875, "DevDiv")]
@@ -1361,7 +1570,8 @@ class C
         [Fact]
         public void Bug1112875_1()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
  
 class Program
@@ -1374,7 +1584,9 @@ class Program
  
     static void Goo(Action x, string y) { }
     static void Goo(Func<object> x, object y) { Console.WriteLine(42); }
-}", options: TestOptions.ReleaseExe);
+}",
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyDiagnostics();
 
             CompileAndVerify(comp, expectedOutput: "42");
@@ -1384,7 +1596,8 @@ class Program
         [Fact]
         public void Bug1112875_2()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class Program
 {
     void M()
@@ -1392,18 +1605,21 @@ class Program
         var d = new System.Action(() => (new object()));
     }
 }
-");
+"
+            );
             comp.VerifyDiagnostics(
                 // (6,41): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         var d = new System.Action(() => (new object()));
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "(new object())").WithLocation(6, 41));
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "(new object())").WithLocation(6, 41)
+            );
         }
 
         [WorkItem(1830, "https://github.com/dotnet/roslyn/issues/1830")]
         [Fact]
         public void FuncOfVoid()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 class Program
 {
@@ -1413,18 +1629,21 @@ class Program
         M1(() => { return System.Console.Beep(); });
     }
 }
-");
+"
+            );
             comp.VerifyDiagnostics(
                 // (8,27): error CS4029: Cannot return an expression of type 'void'
                 //         M1(() => { return System.Console.Beep(); });
-                Diagnostic(ErrorCode.ERR_CantReturnVoid, "System.Console.Beep()").WithLocation(8, 27)
-                );
+                Diagnostic(ErrorCode.ERR_CantReturnVoid, "System.Console.Beep()")
+                    .WithLocation(8, 27)
+            );
         }
 
         [Fact, WorkItem(1179899, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1179899")]
         public void ParameterReference_01()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 class Program
@@ -1437,16 +1656,20 @@ class Program
 ";
             var compilation = CreateCompilation(src);
             compilation.VerifyDiagnostics(
-    // (8,23): error CS1001: Identifier expected
-    //         return a => a.
-    Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(8, 23),
-    // (8,23): error CS1002: ; expected
-    //         return a => a.
-    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(8, 23)
-                );
+                // (8,23): error CS1001: Identifier expected
+                //         return a => a.
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(8, 23),
+                // (8,23): error CS1002: ; expected
+                //         return a => a.
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(8, 23)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "a").Single();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "a")
+                .Single();
 
             Assert.Equal("a.", node.Parent.ToString().Trim());
 
@@ -1459,7 +1682,8 @@ class Program
         [Fact, WorkItem(1179899, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1179899")]
         public void ParameterReference_02()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 class Program
@@ -1472,16 +1696,20 @@ class Program
 ";
             var compilation = CreateCompilation(src);
             compilation.VerifyDiagnostics(
-    // (8,42): error CS1001: Identifier expected
-    //         Func<Program, string> l = a => a.
-    Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(8, 42),
-    // (8,42): error CS1002: ; expected
-    //         Func<Program, string> l = a => a.
-    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(8, 42)
-                );
+                // (8,42): error CS1001: Identifier expected
+                //         Func<Program, string> l = a => a.
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(8, 42),
+                // (8,42): error CS1002: ; expected
+                //         Func<Program, string> l = a => a.
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(8, 42)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "a").Single();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "a")
+                .Single();
 
             Assert.Equal("a.", node.Parent.ToString().Trim());
 
@@ -1494,7 +1722,8 @@ class Program
         [Fact, WorkItem(1179899, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1179899")]
         public void ParameterReference_03()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 class Program
@@ -1509,13 +1738,17 @@ class Program
 ";
             var compilation = CreateCompilation(src);
             compilation.VerifyDiagnostics(
-    // (8,20): error CS1001: Identifier expected
-    //          M1(a => a.);
-    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 20)
-                );
+                // (8,20): error CS1001: Identifier expected
+                //          M1(a => a.);
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 20)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "a").Single();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "a")
+                .Single();
 
             Assert.Equal("a.", node.Parent.ToString().Trim());
 
@@ -1528,7 +1761,8 @@ class Program
         [Fact, WorkItem(1179899, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1179899")]
         public void ParameterReference_04()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 class Program
@@ -1541,13 +1775,17 @@ class Program
 ";
             var compilation = CreateCompilation(src);
             compilation.VerifyDiagnostics(
-    // (8,49): error CS1001: Identifier expected
-    //         var l = (Func<Program, string>) (a => a.);
-    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 49)
-                );
+                // (8,49): error CS1001: Identifier expected
+                //         var l = (Func<Program, string>) (a => a.);
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 49)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "a").Single();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "a")
+                .Single();
 
             Assert.Equal("a.", node.Parent.ToString().Trim());
 
@@ -1561,7 +1799,8 @@ class Program
         [WorkItem(3826, "https://github.com/dotnet/roslyn/issues/3826")]
         public void ExpressionTreeSelfAssignmentShouldError()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -1579,13 +1818,16 @@ class Program
                 Diagnostic(ErrorCode.WRN_AssignmentToSelf, "y = y").WithLocation(9, 45),
                 // (9,45): error CS0832: An expression tree may not contain an assignment operator
                 //         Expression<Func<int, int>> x = y => y = y;
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "y = y").WithLocation(9, 45));
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "y = y")
+                    .WithLocation(9, 45)
+            );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
         public void RefStructExpressionTree()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Linq.Expressions;
 public class Class1
@@ -1602,16 +1844,21 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                //         Method((Class1 c) => c.Method2(default(Struct1)));
-                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default(Struct1)").WithArguments("Struct1").WithLocation(8, 40));
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                    //         Method((Class1 c) => c.Method2(default(Struct1)));
+                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default(Struct1)")
+                        .WithArguments("Struct1")
+                        .WithLocation(8, 40)
+                );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
         public void RefStructDefaultExpressionTree()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Linq.Expressions;
 public class Class1
@@ -1628,16 +1875,21 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                //         Method((Class1 c) => c.Method2(default));
-                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default").WithArguments("Struct1").WithLocation(8, 40));
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                    //         Method((Class1 c) => c.Method2(default));
+                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
+                        .WithArguments("Struct1")
+                        .WithLocation(8, 40)
+                );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
         public void RefStructDefaultCastExpressionTree()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Linq.Expressions;
 public class Class1
@@ -1654,16 +1906,21 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (8,50): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                //         Method((Class1 c) => c.Method2((Struct1) default));
-                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default").WithArguments("Struct1").WithLocation(8, 50));
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (8,50): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                    //         Method((Class1 c) => c.Method2((Struct1) default));
+                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
+                        .WithArguments("Struct1")
+                        .WithLocation(8, 50)
+                );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
         public void RefStructNewExpressionTree()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Linq.Expressions;
 public class Class1
@@ -1680,16 +1937,21 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                //         Method((Class1 c) => c.Method2(new Struct1()));
-                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "new Struct1()").WithArguments("Struct1").WithLocation(8, 40));
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                    //         Method((Class1 c) => c.Method2(new Struct1()));
+                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "new Struct1()")
+                        .WithArguments("Struct1")
+                        .WithLocation(8, 40)
+                );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
         public void RefStructParamExpressionTree()
         {
-            var text = @"
+            var text =
+                @"
 using System.Linq.Expressions;
 
 public delegate void Delegate1(Struct1 s);
@@ -1707,16 +1969,21 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (9,25): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                //         Method((Struct1 s) => Method2());
-                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "s").WithArguments("Struct1").WithLocation(9, 25));
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (9,25): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                    //         Method((Struct1 s) => Method2());
+                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "s")
+                        .WithArguments("Struct1")
+                        .WithLocation(9, 25)
+                );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
         public void RefStructParamLambda()
         {
-            var text = @"
+            var text =
+                @"
 public delegate void Delegate1(Struct1 s);
 public class Class1
 {
@@ -1732,13 +1999,15 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics();
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics();
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
         public void TypedReferenceExpressionTree()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Linq.Expressions;
 public class Class1
@@ -1753,16 +2022,21 @@ public class Class1
     public static void Method(Expression<Action> expression) { }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (8,30): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
-                //         Method(() => Method2(default));
-                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default").WithArguments("TypedReference").WithLocation(8, 30));
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (8,30): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                    //         Method(() => Method2(default));
+                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
+                        .WithArguments("TypedReference")
+                        .WithLocation(8, 30)
+                );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
         public void TypedReferenceParamExpressionTree()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Linq.Expressions;
 public delegate void Delegate1(TypedReference tr);
@@ -1778,17 +2052,21 @@ public class Class1
     public static void Method(Expression<Delegate1> expression) { }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (9,32): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
-                //         Method((TypedReference tr) => Method2());
-                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "tr").WithArguments("TypedReference").WithLocation(9, 32));
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (9,32): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                    //         Method((TypedReference tr) => Method2());
+                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "tr")
+                        .WithArguments("TypedReference")
+                        .WithLocation(9, 32)
+                );
         }
 
         [Fact, WorkItem(5363, "https://github.com/dotnet/roslyn/issues/5363")]
         public void ReturnInferenceCache_Dynamic_vs_Object_01()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1818,7 +2096,11 @@ public static class Program
 
 public interface IColumn { }
 ";
-            var compilation = CreateCompilation(source, new[] { CSharpRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilation(
+                source,
+                new[] { CSharpRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: "Select<T, S>");
         }
 
@@ -1826,7 +2108,7 @@ public interface IColumn { }
         public void ReturnInferenceCache_Dynamic_vs_Object_02()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1856,7 +2138,11 @@ public static class Program
 
 public interface IColumn { }
 ";
-            var compilation = CreateCompilation(source, new[] { CSharpRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilation(
+                source,
+                new[] { CSharpRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: "Select<T, S>");
         }
 
@@ -1864,7 +2150,7 @@ public interface IColumn { }
         public void SyntaxAndSemanticErrorInLambda()
         {
             var source =
-@"
+                @"
 using System;
 class C
 {
@@ -1875,13 +2161,16 @@ class C
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (7,47): error CS1002: ; expected
-                //         Action a = () => { new X().ToString() };
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(7, 47),
-                // (7,32): error CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or an assembly reference?)
-                //         Action a = () => { new X().ToString() };
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "X").WithArguments("X").WithLocation(7, 32)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (7,47): error CS1002: ; expected
+                    //         Action a = () => { new X().ToString() };
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(7, 47),
+                    // (7,32): error CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or an assembly reference?)
+                    //         Action a = () => { new X().ToString() };
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "X")
+                        .WithArguments("X")
+                        .WithLocation(7, 32)
                 );
         }
 
@@ -1889,7 +2178,7 @@ class C
         public void AnonymousMethodExpressionWithoutParameterList()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1907,16 +2196,29 @@ namespace RoslynAsyncDelegate
 }
 
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.DebugExe
+            );
 
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var node1 = tree.GetRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.AnonymousMethodExpression)).Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.IsKind(SyntaxKind.AnonymousMethodExpression))
+                .Single();
 
             Assert.Equal("async delegate { await Task.Delay(0); }", node1.ToString());
 
-            Assert.Equal("void System.EventHandler.Invoke(System.Object sender, System.EventArgs e)", model.GetTypeInfo(node1).ConvertedType.GetMembers("Invoke").Single().ToTestDisplayString());
+            Assert.Equal(
+                "void System.EventHandler.Invoke(System.Object sender, System.EventArgs e)",
+                model
+                    .GetTypeInfo(node1)
+                    .ConvertedType.GetMembers("Invoke")
+                    .Single()
+                    .ToTestDisplayString()
+            );
 
             var lambdaParameters = ((IMethodSymbol)(model.GetSymbolInfo(node1)).Symbol).Parameters;
 
@@ -1931,18 +2233,21 @@ namespace RoslynAsyncDelegate
         public void TestLambdaWithError01()
         {
             var source =
-@"using System.Linq;
+                @"using System.Linq;
 class C { C() { string.Empty.Select(() => { new Unbound1 }); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-    // (2,58): error CS1526: A new expression requires (), [], or {} after type
-    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
-    Diagnostic(ErrorCode.ERR_BadNewExpr, "}").WithLocation(2, 58),
-    // (2,58): error CS1002: ; expected
-    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
-    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 58),
-    // (2,49): error CS0246: The type or namespace name 'Unbound1' could not be found (are you missing a using directive or an assembly reference?)
-    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
-    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unbound1").WithArguments("Unbound1").WithLocation(2, 49)
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (2,58): error CS1526: A new expression requires (), [], or {} after type
+                    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
+                    Diagnostic(ErrorCode.ERR_BadNewExpr, "}").WithLocation(2, 58),
+                    // (2,58): error CS1002: ; expected
+                    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 58),
+                    // (2,49): error CS0246: The type or namespace name 'Unbound1' could not be found (are you missing a using directive or an assembly reference?)
+                    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unbound1")
+                        .WithArguments("Unbound1")
+                        .WithLocation(2, 49)
                 );
         }
 
@@ -1951,15 +2256,18 @@ class C { C() { string.Empty.Select(() => { new Unbound1 }); } }";
         public void TestLambdaWithError02()
         {
             var source =
-@"using System.Linq;
+                @"using System.Linq;
 class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-    // (2,62): error CS1002: ; expected
-    // class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }
-    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 62),
-    // (2,49): error CS0246: The type or namespace name 'Unbound1' could not be found (are you missing a using directive or an assembly reference?)
-    // class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }
-    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unbound1").WithArguments("Unbound1").WithLocation(2, 49)
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (2,62): error CS1002: ; expected
+                    // class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 62),
+                    // (2,49): error CS0246: The type or namespace name 'Unbound1' could not be found (are you missing a using directive or an assembly reference?)
+                    // class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unbound1")
+                        .WithArguments("Unbound1")
+                        .WithLocation(2, 49)
                 );
         }
 
@@ -1968,21 +2276,30 @@ class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }";
         public void TestLambdaWithError03()
         {
             var source =
-@"using System.Linq;
+                @"using System.Linq;
 class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-    // (2,61): error CS1003: Syntax error, ',' expected
-    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
-    Diagnostic(ErrorCode.ERR_SyntaxError, "Unbound2").WithArguments(",", "").WithLocation(2, 61),
-    // (2,52): error CS0103: The name 'Unbound2' does not exist in the current context
-    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2").WithArguments("Unbound2").WithLocation(2, 52),
-    // (2,61): error CS0103: The name 'Unbound2' does not exist in the current context
-    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2").WithArguments("Unbound2").WithLocation(2, 61),
-    // (2,42): error CS0103: The name 'Unbound1' does not exist in the current context
-    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1").WithArguments("Unbound1").WithLocation(2, 42)
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (2,61): error CS1003: Syntax error, ',' expected
+                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "Unbound2")
+                        .WithArguments(",", "")
+                        .WithLocation(2, 61),
+                    // (2,52): error CS0103: The name 'Unbound2' does not exist in the current context
+                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
+                        .WithArguments("Unbound2")
+                        .WithLocation(2, 52),
+                    // (2,61): error CS0103: The name 'Unbound2' does not exist in the current context
+                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
+                        .WithArguments("Unbound2")
+                        .WithLocation(2, 61),
+                    // (2,42): error CS0103: The name 'Unbound1' does not exist in the current context
+                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
+                        .WithArguments("Unbound1")
+                        .WithLocation(2, 42)
                 );
         }
 
@@ -1991,15 +2308,20 @@ class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }";
         public void TestLambdaWithError04()
         {
             var source =
-@"using System.Linq;
+                @"using System.Linq;
 class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-    // (2,52): error CS0103: The name 'Unbound2' does not exist in the current context
-    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2").WithArguments("Unbound2").WithLocation(2, 52),
-    // (2,42): error CS0103: The name 'Unbound1' does not exist in the current context
-    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1").WithArguments("Unbound1").WithLocation(2, 42)
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (2,52): error CS0103: The name 'Unbound2' does not exist in the current context
+                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
+                        .WithArguments("Unbound2")
+                        .WithLocation(2, 52),
+                    // (2,42): error CS0103: The name 'Unbound1' does not exist in the current context
+                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
+                        .WithArguments("Unbound1")
+                        .WithLocation(2, 42)
                 );
         }
 
@@ -2008,15 +2330,20 @@ class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }";
         public void TestLambdaWithError05()
         {
             var source =
-@"using System.Linq;
+                @"using System.Linq;
 class C { C() { Unbound2.Select(x => Unbound1); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-    // (2,17): error CS0103: The name 'Unbound2' does not exist in the current context
-    // class C { C() { Unbound2.Select(x => Unbound1); } }
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2").WithArguments("Unbound2").WithLocation(2, 17),
-    // (2,38): error CS0103: The name 'Unbound1' does not exist in the current context
-    // class C { C() { Unbound2.Select(x => Unbound1); } }
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1").WithArguments("Unbound1").WithLocation(2, 38)
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (2,17): error CS0103: The name 'Unbound2' does not exist in the current context
+                    // class C { C() { Unbound2.Select(x => Unbound1); } }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
+                        .WithArguments("Unbound2")
+                        .WithLocation(2, 17),
+                    // (2,38): error CS0103: The name 'Unbound1' does not exist in the current context
+                    // class C { C() { Unbound2.Select(x => Unbound1); } }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
+                        .WithArguments("Unbound1")
+                        .WithLocation(2, 38)
                 );
         }
 
@@ -2025,7 +2352,7 @@ class C { C() { Unbound2.Select(x => Unbound1); } }";
         public void TestLambdaWithError06()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2045,15 +2372,18 @@ public class MyArgumentType
 }";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source)
                 .VerifyDiagnostics(
-                //         var handler = new MyDelegateType((s, e) => { e. });
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "}").WithLocation(6, 57),
-                // (6,57): error CS1002: ; expected
-                //         var handler = new MyDelegateType((s, e) => { e. });
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(6, 57)
+                    //         var handler = new MyDelegateType((s, e) => { e. });
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "}").WithLocation(6, 57),
+                    // (6,57): error CS1002: ; expected
+                    //         var handler = new MyDelegateType((s, e) => { e. });
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(6, 57)
                 );
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            var lambda = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var lambda = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
             var eReference = lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().First();
             Assert.Equal("e", eReference.ToString());
             var typeInfo = sm.GetTypeInfo(eReference);
@@ -2068,7 +2398,7 @@ public class MyArgumentType
         public void TestLambdaWithError07()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 public static class Program
@@ -2092,14 +2422,18 @@ public static class Enumerable
         return default(TSource);
     }
 }";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-                // (9,55): error CS1001: Identifier expected
-                //         var result = parameter.FirstOrDefault(x => x. );
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(9, 55)
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (9,55): error CS1001: Identifier expected
+                    //         var result = parameter.FirstOrDefault(x => x. );
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(9, 55)
                 );
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            var lambda = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var lambda = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
             var eReference = lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().First();
             Assert.Equal("x", eReference.ToString());
             var typeInfo = sm.GetTypeInfo(eReference);
@@ -2114,7 +2448,7 @@ public static class Enumerable
         public void TestLambdaWithError08()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 public static class Program
@@ -2138,14 +2472,18 @@ public static class Enumerable
         return default(TSource);
 }
 }";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-                // (9,55): error CS1001: Identifier expected
-                //         var result = parameter.FirstOrDefault(x => x. );
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(9, 55)
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (9,55): error CS1001: Identifier expected
+                    //         var result = parameter.FirstOrDefault(x => x. );
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(9, 55)
                 );
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            var lambda = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var lambda = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
             var eReference = lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().First();
             Assert.Equal("x", eReference.ToString());
             var typeInfo = sm.GetTypeInfo(eReference);
@@ -2160,7 +2498,7 @@ public static class Enumerable
         public void TestLambdaWithError09()
         {
             var source =
-@"using System;
+                @"using System;
 
 public static class Program
 {
@@ -2184,14 +2522,18 @@ public class MyList<TSource>
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-                // (8,55): error CS1001: Identifier expected
-                //         var result = parameter.FirstOrDefault(x => x. );
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 55)
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (8,55): error CS1001: Identifier expected
+                    //         var result = parameter.FirstOrDefault(x => x. );
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 55)
                 );
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            var lambda = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var lambda = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
             var eReference = lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().First();
             Assert.Equal("x", eReference.ToString());
             var typeInfo = sm.GetTypeInfo(eReference);
@@ -2206,7 +2548,7 @@ public class MyList<TSource>
         public void TestLambdaWithError10()
         {
             var source =
-@"using System;
+                @"using System;
 
 public static class Program
 {
@@ -2230,14 +2572,18 @@ public class MyList<TSource>
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-                // (8,55): error CS1001: Identifier expected
-                //         var result = parameter.FirstOrDefault(x => x. );
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 55)
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (8,55): error CS1001: Identifier expected
+                    //         var result = parameter.FirstOrDefault(x => x. );
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 55)
                 );
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            var lambda = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var lambda = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
             var eReference = lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().First();
             Assert.Equal("x", eReference.ToString());
             var typeInfo = sm.GetTypeInfo(eReference);
@@ -2251,7 +2597,7 @@ public class MyList<TSource>
         public void TestLambdaWithError11()
         {
             var source =
-@"using System.Linq;
+                @"using System.Linq;
 
 public static class Program
 {
@@ -2267,7 +2613,10 @@ public static class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            var lambda = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var lambda = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
             var eReference = lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().First();
             Assert.Equal("c", eReference.ToString());
             var typeInfo = sm.GetTypeInfo(eReference);
@@ -2281,7 +2630,7 @@ public static class Program
         public void TestLambdaWithError12()
         {
             var source =
-@"using System.Linq;
+                @"using System.Linq;
 
 class Program
 {
@@ -2294,7 +2643,10 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            var lambda = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var lambda = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
             var eReference = lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().First();
             Assert.Equal("a", eReference.ToString());
             var typeInfo = sm.GetTypeInfo(eReference);
@@ -2313,7 +2665,7 @@ class Program
             // case when there is more than one method in the method group.
             // See https://github.com/dotnet/roslyn/issues/11901 for the case of one method in the group
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2348,9 +2700,14 @@ public static class XThing
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            foreach (var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>())
+            foreach (
+                var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
+            )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().First();
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
+                    .OfType<IdentifierNameSyntax>()
+                    .First();
                 Assert.Equal("x", reference.ToString());
                 var typeInfo = sm.GetTypeInfo(reference);
                 Assert.Equal(TypeKind.Class, typeInfo.Type.TypeKind);
@@ -2367,7 +2724,7 @@ public static class XThing
             // argument even when there are too many or too few arguments to an invocation, in the
             // case when there is exactly one method in the method group.
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2394,9 +2751,14 @@ public static class XThing
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            foreach (var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>())
+            foreach (
+                var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
+            )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().First();
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
+                    .OfType<IdentifierNameSyntax>()
+                    .First();
                 Assert.Equal("x", reference.ToString());
                 var typeInfo = sm.GetTypeInfo(reference);
                 Assert.Equal(TypeKind.Class, typeInfo.Type.TypeKind);
@@ -2413,7 +2775,7 @@ public static class XThing
             // argument even when there are too many or too few arguments to an invocation, in the
             // case when there is exactly one method in the method group.
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2440,9 +2802,14 @@ public static class XThing
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            foreach (var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>())
+            foreach (
+                var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
+            )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().First();
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
+                    .OfType<IdentifierNameSyntax>()
+                    .First();
                 Assert.Equal("x", reference.ToString());
                 var typeInfo = sm.GetTypeInfo(reference);
                 Assert.Equal(TypeKind.Class, typeInfo.Type.TypeKind);
@@ -2456,7 +2823,7 @@ public static class XThing
         public void TestLambdaWithError17()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2473,9 +2840,14 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            foreach (var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>())
+            foreach (
+                var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
+            )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().First();
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
+                    .OfType<IdentifierNameSyntax>()
+                    .First();
                 Assert.Equal("x", reference.ToString());
                 var typeInfo = sm.GetTypeInfo(reference);
                 Assert.Equal(TypeKind.Class, typeInfo.Type.TypeKind);
@@ -2489,7 +2861,7 @@ class Program
         public void TestLambdaWithError18()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2506,9 +2878,14 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            foreach (var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>())
+            foreach (
+                var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
+            )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().First();
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
+                    .OfType<IdentifierNameSyntax>()
+                    .First();
                 Assert.Equal("x", reference.ToString());
                 var typeInfo = sm.GetTypeInfo(reference);
                 Assert.Equal(TypeKind.Class, typeInfo.Type.TypeKind);
@@ -2522,7 +2899,7 @@ class Program
         public void TestLambdaWithError19()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 class Program
@@ -2543,9 +2920,14 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            foreach (var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>())
+            foreach (
+                var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
+            )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().First();
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
+                    .OfType<IdentifierNameSyntax>()
+                    .First();
                 Assert.Equal("x", reference.ToString());
                 var typeInfo = sm.GetTypeInfo(reference);
                 Assert.Equal(TypeKind.Class, typeInfo.Type.TypeKind);
@@ -2558,8 +2940,14 @@ class Program
         [Fact]
         public void BuildArgumentsForErrorRecovery_ManyOverloads()
         {
-            BuildArgumentsForErrorRecovery_ManyOverloads_Internal(Binder.MaxParameterListsForErrorRecovery - 1, tooMany: false);
-            BuildArgumentsForErrorRecovery_ManyOverloads_Internal(Binder.MaxParameterListsForErrorRecovery, tooMany: true);
+            BuildArgumentsForErrorRecovery_ManyOverloads_Internal(
+                Binder.MaxParameterListsForErrorRecovery - 1,
+                tooMany: false
+            );
+            BuildArgumentsForErrorRecovery_ManyOverloads_Internal(
+                Binder.MaxParameterListsForErrorRecovery,
+                tooMany: true
+            );
         }
 
         private void BuildArgumentsForErrorRecovery_ManyOverloads_Internal(int n, bool tooMany)
@@ -2571,7 +2959,7 @@ class Program
                 builder.AppendLine($"class C{i} {{ }}");
             }
             builder.Append(
-@"class A { }
+                @"class A { }
 class B { }
 class C
 {
@@ -2580,12 +2968,17 @@ class C
         F(1, (t, a, b, c) => { });
         var o = this[(a, b, c) => { }];
     }
-");
+"
+            );
             // Too few parameters.
             AppendLines(builder, n, i => $"    void F<T>(T t, Action<T, A, C{i}> a) {{ }}");
             AppendLines(builder, n, i => $"    object this[Action<A, C{i}> a] => {i}");
             // Type inference failure.
-            AppendLines(builder, n, i => $"    void F<T, U>(T t, Action<T, U, C{i}> a) where U : T {{ }}");
+            AppendLines(
+                builder,
+                n,
+                i => $"    void F<T, U>(T t, Action<T, U, C{i}> a) where U : T {{ }}"
+            );
             // Too many parameters.
             AppendLines(builder, n, i => $"    void F<T>(T t, Action<T, A, B, C, C{i}> a) {{ }}");
             AppendLines(builder, n, i => $"    object this[Action<A, B, C, C{i}> a] => {i}");
@@ -2595,7 +2988,10 @@ class C
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees[0];
             var sm = compilation.GetSemanticModel(tree);
-            var lambdas = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().ToArray();
+            var lambdas = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ParenthesizedLambdaExpressionSyntax>()
+                .ToArray();
 
             // F(1, (t, a, b, c) => { });
             var lambda = lambdas[0];
@@ -2633,7 +3029,8 @@ class C
         [WorkItem(13797, "https://github.com/dotnet/roslyn/issues/13797")]
         public void DelegateAsAction()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public static class C
@@ -2651,7 +3048,8 @@ public static class C
         [Fact, WorkItem(278481, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=278481")]
         public void LambdaReturningNull_1()
         {
-            var src = @"
+            var src =
+                @"
 public static class ExtensionMethods
 {
     public static System.Linq.IQueryable<TResult> LeftOuterJoin<TOuter, TInner, TKey, TResult>(
@@ -2721,14 +3119,18 @@ class B
 {
     public int id = 2;
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(src, options: TestOptions.DebugExe);
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                src,
+                options: TestOptions.DebugExe
+            );
             CompileAndVerify(comp, expectedOutput: "1");
         }
 
         [Fact, WorkItem(296550, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=296550")]
         public void LambdaReturningNull_2()
         {
-            var src = @"
+            var src =
+                @"
 class Test1<T>
     {
         public void M1(System.Func<T> x) {}
@@ -2752,13 +3154,14 @@ class Test1<T>
                 // (10,32): error CS1001: Identifier expected
                 //     class Test2 : Test1<System.>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ">").WithLocation(10, 32)
-                );
+            );
         }
 
         [Fact, WorkItem(22662, "https://github.com/dotnet/roslyn/issues/22662")]
         public void LambdaSquigglesArea()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     void M()
@@ -2774,17 +3177,22 @@ class C
             comp.VerifyDiagnostics(
                 // (8,13): error CS0103: The name 'error' does not exist in the current context
                 //             error();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "error").WithArguments("error").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "error")
+                    .WithArguments("error")
+                    .WithLocation(8, 13),
                 // (6,58): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
                 //         System.Func<bool, System.Action<bool>> x = x1 => x2 =>
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "x2 =>").WithArguments("lambda expression").WithLocation(6, 58)
-                );
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "x2 =>")
+                    .WithArguments("lambda expression")
+                    .WithLocation(6, 58)
+            );
         }
 
         [Fact, WorkItem(22662, "https://github.com/dotnet/roslyn/issues/22662")]
         public void LambdaSquigglesAreaInAsync()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     void M()
@@ -2800,20 +3208,28 @@ class C
             comp.VerifyDiagnostics(
                 // (8,13): error CS0103: The name 'error' does not exist in the current context
                 //             error();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "error").WithArguments("error").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "error")
+                    .WithArguments("error")
+                    .WithLocation(8, 13),
                 // (6,93): error CS4010: Cannot convert async lambda expression to delegate type 'Task<Action<bool>>'. An async lambda expression may return void, Task or Task<T>, none of which are convertible to 'Task<Action<bool>>'.
                 //         System.Func<bool, System.Threading.Tasks.Task<System.Action<bool>>> x = async x1 => x2 =>
-                Diagnostic(ErrorCode.ERR_CantConvAsyncAnonFuncReturns, "x2 =>").WithArguments("lambda expression", "System.Threading.Tasks.Task<System.Action<bool>>").WithLocation(6, 93),
+                Diagnostic(ErrorCode.ERR_CantConvAsyncAnonFuncReturns, "x2 =>")
+                    .WithArguments(
+                        "lambda expression",
+                        "System.Threading.Tasks.Task<System.Action<bool>>"
+                    )
+                    .WithLocation(6, 93),
                 // (6,90): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //         System.Func<bool, System.Threading.Tasks.Task<System.Action<bool>>> x = async x1 => x2 =>
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "=>").WithLocation(6, 90)
-                );
+            );
         }
 
         [Fact, WorkItem(22662, "https://github.com/dotnet/roslyn/issues/22662")]
         public void DelegateSquigglesArea()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     void M()
@@ -2829,17 +3245,22 @@ class C
             comp.VerifyDiagnostics(
                 // (8,13): error CS0103: The name 'error' does not exist in the current context
                 //             error();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "error").WithArguments("error").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "error")
+                    .WithArguments("error")
+                    .WithLocation(8, 13),
                 // (6,58): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
                 //         System.Func<bool, System.Action<bool>> x = x1 => delegate(bool x2)
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "delegate(bool x2)").WithArguments("lambda expression").WithLocation(6, 58)
-                );
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "delegate(bool x2)")
+                    .WithArguments("lambda expression")
+                    .WithLocation(6, 58)
+            );
         }
 
         [Fact, WorkItem(22662, "https://github.com/dotnet/roslyn/issues/22662")]
         public void DelegateWithoutArgumentsSquigglesArea()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     void M()
@@ -2855,17 +3276,22 @@ class C
             comp.VerifyDiagnostics(
                 // (8,13): error CS0103: The name 'error' does not exist in the current context
                 //             error();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "error").WithArguments("error").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "error")
+                    .WithArguments("error")
+                    .WithLocation(8, 13),
                 // (6,52): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
                 //         System.Func<bool, System.Action> x = x1 => delegate
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "delegate").WithArguments("lambda expression").WithLocation(6, 52)
-                );
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "delegate")
+                    .WithArguments("lambda expression")
+                    .WithLocation(6, 52)
+            );
         }
 
         [Fact]
         public void ThrowExpression_Lambda()
         {
-            var src = @"using System;
+            var src =
+                @"using System;
 class C
 {
     public static void Main()
@@ -2908,14 +3334,18 @@ class C
         }
     }
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(src, options: TestOptions.DebugExe);
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                src,
+                options: TestOptions.DebugExe
+            );
             CompileAndVerify(comp, expectedOutput: "1234");
         }
 
         [Fact, WorkItem(23883, "https://github.com/dotnet/roslyn/issues/23883")]
         public void InMalformedEmbeddedStatement_01()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     void method1()
@@ -2930,14 +3360,22 @@ class Program
             var tree = SyntaxFactory.ParseSyntaxTree(source);
             var comp = CreateCompilation(tree);
 
-            ExpressionSyntax contentType = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "ContentType").Single();
+            ExpressionSyntax contentType = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "ContentType")
+                .Single();
 
             var model = comp.GetSemanticModel(tree);
             Assert.Equal("ContentType", contentType.ToString());
             Assert.Null(model.GetSymbolInfo(contentType).Symbol);
             Assert.Equal(TypeKind.Error, model.GetTypeInfo(contentType).Type.TypeKind);
 
-            ExpressionSyntax b = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "b").Single();
+            ExpressionSyntax b = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "b")
+                .Single();
 
             model = comp.GetSemanticModel(tree);
             Assert.Equal("b", b.ToString());
@@ -2946,7 +3384,10 @@ class Program
             Assert.Equal("? b", symbol.ToTestDisplayString());
             Assert.Equal(TypeKind.Error, model.GetTypeInfo(b).Type.TypeKind);
 
-            ParameterSyntax parameterSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<ParameterSyntax>().Single();
+            ParameterSyntax parameterSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ParameterSyntax>()
+                .Single();
 
             model = comp.GetSemanticModel(tree);
             symbol = model.GetDeclaredSymbol(parameterSyntax);
@@ -2957,7 +3398,8 @@ class Program
         [Fact, WorkItem(23883, "https://github.com/dotnet/roslyn/issues/23883")]
         public void InMalformedEmbeddedStatement_02()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     void method1()
@@ -2972,14 +3414,22 @@ class Program
             var tree = SyntaxFactory.ParseSyntaxTree(source);
             var comp = CreateCompilation(tree);
 
-            ExpressionSyntax contentType = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "ContentType").Single();
+            ExpressionSyntax contentType = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "ContentType")
+                .Single();
 
             var model = comp.GetSemanticModel(tree);
             Assert.Equal("ContentType", contentType.ToString());
             var lambda = (IMethodSymbol)model.GetEnclosingSymbol(contentType.SpanStart);
             Assert.Equal(MethodKind.AnonymousFunction, lambda.MethodKind);
 
-            ExpressionSyntax b = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "b").Single();
+            ExpressionSyntax b = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "b")
+                .Single();
 
             model = comp.GetSemanticModel(tree);
             Assert.Equal("b", b.ToString());
@@ -2987,15 +3437,21 @@ class Program
             Assert.Equal(MethodKind.AnonymousFunction, lambda.MethodKind);
 
             model = comp.GetSemanticModel(tree);
-            ParameterSyntax parameterSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<ParameterSyntax>().Single();
-            Assert.Equal("void Program.method1()", model.GetEnclosingSymbol(parameterSyntax.SpanStart).ToTestDisplayString());
+            ParameterSyntax parameterSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ParameterSyntax>()
+                .Single();
+            Assert.Equal(
+                "void Program.method1()",
+                model.GetEnclosingSymbol(parameterSyntax.SpanStart).ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void ShadowNames_Local()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 using System.Linq;
@@ -3015,19 +3471,30 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,36): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action a1 = () => { object x = 0; }; // local
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(9, 36),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(9, 36),
                 // (10,29): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action<string> a2 = x => { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(10, 29),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(10, 29),
                 // (11,37): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action<string> a3 = (string x) => { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(11, 37),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 37),
                 // (13,34): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action a4 = () => { void x() { } }; // method
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(13, 34),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(13, 34),
                 // (14,38): error CS1931: The range variable 'x' conflicts with a previous declaration of 'x'
                 //         Action a5 = () => { _ = from x in new[] { 1, 2, 3 } select x; }; // range variable
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x").WithArguments("x").WithLocation(14, 38));
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(14, 38)
+            );
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular8);
             comp.VerifyDiagnostics();
@@ -3040,7 +3507,7 @@ class Program
         public void ShadowNames_Parameter()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 using System.Linq;
@@ -3059,16 +3526,25 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,36): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action a1 = () => { object x = 0; }; // local
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(9, 36),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(9, 36),
                 // (10,29): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action<string> a2 = x => { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(10, 29),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(10, 29),
                 // (11,37): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action<string> a3 = (string x) => { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(11, 37),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 37),
                 // (13,38): error CS1931: The range variable 'x' conflicts with a previous declaration of 'x'
                 //         Action a5 = () => { _ = from x in new[] { 1, 2, 3 } select x; }; // range variable
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x").WithArguments("x").WithLocation(13, 38));
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(13, 38)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3078,7 +3554,7 @@ class Program
         public void ShadowNames_TypeParameter()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 using System.Linq;
@@ -3097,19 +3573,30 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,36): error CS0412: 'x': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //         Action a1 = () => { object x = 0; }; // local
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x").WithArguments("x").WithLocation(9, 36),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(9, 36),
                 // (10,29): error CS0412: 'x': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //         Action<string> a2 = x => { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x").WithArguments("x").WithLocation(10, 29),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(10, 29),
                 // (11,37): error CS0412: 'x': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //         Action<string> a3 = (string x) => { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x").WithArguments("x").WithLocation(11, 37),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 37),
                 // (12,34): error CS0412: 'x': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //         Action a4 = () => { void x() { } }; // method
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x").WithArguments("x").WithLocation(12, 34),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(12, 34),
                 // (13,38): error CS1948: The range variable 'x' cannot have the same name as a method type parameter
                 //         Action a5 = () => { _ = from x in new[] { 1, 2, 3 } select x; }; // range variable
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableSameAsTypeParam, "x").WithArguments("x").WithLocation(13, 38));
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableSameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(13, 38)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3119,7 +3606,7 @@ class Program
         public void ShadowNames_QueryParameter()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 using System.Linq;
@@ -3138,16 +3625,25 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,59): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         _ = from x in args select (Action)(() => { object x = 0; }); // local
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(9, 59),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(9, 59),
                 // (10,52): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         _ = from x in args select (Action<string>)(x => { }); // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(10, 52),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(10, 52),
                 // (11,60): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         _ = from x in args select (Action<string>)((string x) => { }); // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(11, 60),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 60),
                 // (13,61): error CS1931: The range variable 'x' conflicts with a previous declaration of 'x'
                 //         _ = from x in args select (Action)(() => { _ = from x in new[] { 1, 2, 3 } select x; }); // range variable
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x").WithArguments("x").WithLocation(13, 61));
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(13, 61)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3157,7 +3653,7 @@ class Program
         public void ShadowNames_Local_Delegate()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 using System.Linq;
@@ -3176,16 +3672,25 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,41): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action a1 = delegate() { object x = 0; }; // local
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(10, 41),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(10, 41),
                 // (11,45): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action<string> a2 = delegate(string x) { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(11, 45),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 45),
                 // (12,39): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action a3 = delegate() { void x() { } }; // method
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(12, 39),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(12, 39),
                 // (13,43): error CS1931: The range variable 'x' conflicts with a previous declaration of 'x'
                 //         Action a4 = delegate() { _ = from x in new[] { 1, 2, 3 } select x; }; // range variable
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x").WithArguments("x").WithLocation(13, 43));
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(13, 43)
+            );
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular8);
             comp.VerifyDiagnostics();
@@ -3198,7 +3703,7 @@ class Program
         public void ShadowNames_Parameter_Delegate()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 using System.Linq;
@@ -3216,13 +3721,20 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,41): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action a1 = delegate() { object x = 0; }; // local
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(9, 41),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(9, 41),
                 // (10,45): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Action<string> a2 = delegate(string x) { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(10, 45),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(10, 45),
                 // (12,43): error CS1931: The range variable 'x' conflicts with a previous declaration of 'x'
                 //         Action a4 = delegate() { _ = from x in new[] { 1, 2, 3 } select x; }; // range variable
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x").WithArguments("x").WithLocation(12, 43));
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(12, 43)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3232,7 +3744,7 @@ class Program
         public void ShadowNames_TypeParameter_Delegate()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 using System.Linq;
@@ -3250,16 +3762,25 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,41): error CS0412: 'x': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //         Action a1 = delegate() { object x = 0; }; // local
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x").WithArguments("x").WithLocation(9, 41),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(9, 41),
                 // (10,45): error CS0412: 'x': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //         Action<string> a2 = delegate(string x) { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x").WithArguments("x").WithLocation(10, 45),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(10, 45),
                 // (11,39): error CS0412: 'x': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //         Action a3 = delegate() { void x() { } }; // method
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x").WithArguments("x").WithLocation(11, 39),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 39),
                 // (12,43): error CS1948: The range variable 'x' cannot have the same name as a method type parameter
                 //         Action a4 = delegate() { _ = from x in new[] { 1, 2, 3 } select x; }; // range variable
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableSameAsTypeParam, "x").WithArguments("x").WithLocation(12, 43));
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableSameAsTypeParam, "x")
+                    .WithArguments("x")
+                    .WithLocation(12, 43)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3269,7 +3790,7 @@ class Program
         public void ShadowNames_LambdaInsideLambda()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 class Program
@@ -3292,16 +3813,25 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,40): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             Action b1 = () => { object x = 1; }; // local
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(10, 40),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(10, 40),
                 // (11,41): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             Action<string> b2 = (string x) => { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(11, 41),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 41),
                 // (15,40): error CS0412: 'T': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //             Action b3 = () => { object T = 3; }; // local
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T").WithArguments("T").WithLocation(15, 40),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T")
+                    .WithArguments("T")
+                    .WithLocation(15, 40),
                 // (16,33): error CS0412: 'T': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //             Action<string> b4 = T => { }; // parameter
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T").WithArguments("T").WithLocation(16, 33));
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T")
+                    .WithArguments("T")
+                    .WithLocation(16, 33)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3311,7 +3841,7 @@ class Program
         public void ShadowNames_Underscore_01()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 class Program
@@ -3325,7 +3855,10 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,44): error CS0136: A local or parameter named '_' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Func<int, Func<int, int>> f = _ => _ => _;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "_").WithArguments("_").WithLocation(8, 44));
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "_")
+                    .WithArguments("_")
+                    .WithLocation(8, 44)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3335,7 +3868,7 @@ class Program
         public void ShadowNames_Underscore_02()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 class Program
@@ -3349,7 +3882,10 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,37): error CS8370: Feature 'lambda discard parameters' is not available in C# 7.3. Please use language version 9.0 or greater.
                 //         Func<int, int, int> f = (_, _) => 0;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "_").WithArguments("lambda discard parameters", "9.0").WithLocation(8, 37));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "_")
+                    .WithArguments("lambda discard parameters", "9.0")
+                    .WithLocation(8, 37)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
@@ -3359,7 +3895,7 @@ class Program
         public void ShadowNames_Nested_01()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 class Program
@@ -3373,10 +3909,15 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,55): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Func<int, Func<int, Func<int, int>>> f = x => x => x => x;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(8, 55),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(8, 55),
                 // (8,60): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Func<int, Func<int, Func<int, int>>> f = x => x => x => x;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(8, 60));
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(8, 60)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3386,7 +3927,7 @@ class Program
         public void ShadowNames_Nested_02()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 class Program
@@ -3400,13 +3941,20 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,87): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Func<int, int, int, Func<int, int, Func<int, int, int>>> f = (x, y, z) => (_, x) => (y, _) => x + y + z + _;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(8, 87),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(8, 87),
                 // (8,94): error CS0136: A local or parameter named 'y' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Func<int, int, int, Func<int, int, Func<int, int, int>>> f = (x, y, z) => (_, x) => (y, _) => x + y + z + _;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y").WithArguments("y").WithLocation(8, 94),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y")
+                    .WithArguments("y")
+                    .WithLocation(8, 94),
                 // (8,97): error CS0136: A local or parameter named '_' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         Func<int, int, int, Func<int, int, Func<int, int, int>>> f = (x, y, z) => (_, x) => (y, _) => x + y + z + _;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "_").WithArguments("_").WithLocation(8, 97));
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "_")
+                    .WithArguments("_")
+                    .WithLocation(8, 97)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3416,7 +3964,7 @@ class Program
         public void ShadowNames_LambdaInsideLocalFunction_01()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 class Program
@@ -3438,10 +3986,15 @@ class Program
             comp.VerifyDiagnostics(
                 // (11,37): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             Action a1 = () => { int x = 0; };
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(11, 37),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 37),
                 // (15,37): error CS0412: 'T': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //             Action a2 = () => { int T = 0; };
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T").WithArguments("T").WithLocation(15, 37));
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T")
+                    .WithArguments("T")
+                    .WithLocation(15, 37)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3451,7 +4004,7 @@ class Program
         public void ShadowNames_LambdaInsideLocalFunction_02()
         {
             var source =
-@"#pragma warning disable 0219
+                @"#pragma warning disable 0219
 #pragma warning disable 8321
 using System;
 class Program
@@ -3477,16 +4030,25 @@ class Program
             comp.VerifyDiagnostics(
                 // (11,35): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             Action<int> a1 = (int x) =>
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(11, 35),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(11, 35),
                 // (13,41): error CS0412: 'T': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //                 Action b1 = () => { int T = 0; };
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T").WithArguments("T").WithLocation(13, 41),
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T")
+                    .WithArguments("T")
+                    .WithLocation(13, 41),
                 // (17,21): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                 int x = 0;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x").WithLocation(17, 21),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x")
+                    .WithArguments("x")
+                    .WithLocation(17, 21),
                 // (18,39): error CS0412: 'T': a parameter, local variable, or local function cannot have the same name as a method type parameter
                 //                 Action<int> b2 = (int T) => { };
-                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T").WithArguments("T").WithLocation(18, 39));
+                Diagnostic(ErrorCode.ERR_LocalSameNameAsTypeParam, "T")
+                    .WithArguments("T")
+                    .WithLocation(18, 39)
+            );
 
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3496,7 +4058,7 @@ class Program
         public void LambdaAttributes_01()
         {
             var sourceA =
-@"using System;
+                @"using System;
 class A : Attribute { }
 class B : Attribute { }
 partial class Program
@@ -3507,7 +4069,7 @@ partial class Program
     Delegate D4() => (Func<int>)([return: A][B] () => GetHashCode());
 }";
             var sourceB =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -3542,7 +4104,11 @@ partial class Program
     }
 }";
 
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.Regular10, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.Regular10,
+                options: TestOptions.ReleaseExe
+            );
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>();
@@ -3554,28 +4120,51 @@ partial class Program
                 "([A]_, y) => { }: [parameter: A]",
                 "[return: A][B] () => GetHashCode(): [method: B] [return: A]",
             };
-            AssertEx.Equal(expectedAttributes, pairs.Select(p => getAttributesInternal(p.Item1, p.Item2)));
-            AssertEx.Equal(expectedAttributes, pairs.Select(p => getAttributesPublic(p.Item1, p.Item2)));
+            AssertEx.Equal(
+                expectedAttributes,
+                pairs.Select(p => getAttributesInternal(p.Item1, p.Item2))
+            );
+            AssertEx.Equal(
+                expectedAttributes,
+                pairs.Select(p => getAttributesPublic(p.Item1, p.Item2))
+            );
 
-            CompileAndVerify(comp, expectedOutput:
-@"<D1>b__0_0: [method: A]
+            CompileAndVerify(
+                comp,
+                expectedOutput: @"<D1>b__0_0: [method: A]
 <D2>b__0: [parameter: A] [parameter: B]
 <D3>b__2_0: [parameter: A]
-<D4>b__3_0: [method: System.Runtime.CompilerServices.CompilerGeneratedAttribute] [method: B] [return: A]");
+<D4>b__3_0: [method: System.Runtime.CompilerServices.CompilerGeneratedAttribute] [method: B] [return: A]"
+            );
 
             static string getAttributesInternal(LambdaExpressionSyntax expr, ISymbol symbol)
             {
                 var method = symbol.GetSymbol<MethodSymbol>();
-                return format(expr, method.GetAttributes(), method.GetReturnTypeAttributes(), method.Parameters.SelectMany(p => p.GetAttributes()));
+                return format(
+                    expr,
+                    method.GetAttributes(),
+                    method.GetReturnTypeAttributes(),
+                    method.Parameters.SelectMany(p => p.GetAttributes())
+                );
             }
 
             static string getAttributesPublic(LambdaExpressionSyntax expr, ISymbol symbol)
             {
                 var method = (IMethodSymbol)symbol;
-                return format(expr, method.GetAttributes(), method.GetReturnTypeAttributes(), method.Parameters.SelectMany(p => p.GetAttributes()));
+                return format(
+                    expr,
+                    method.GetAttributes(),
+                    method.GetReturnTypeAttributes(),
+                    method.Parameters.SelectMany(p => p.GetAttributes())
+                );
             }
 
-            static string format(LambdaExpressionSyntax expr, IEnumerable<object> methodAttributes, IEnumerable<object> returnAttributes, IEnumerable<object> parameterAttributes)
+            static string format(
+                LambdaExpressionSyntax expr,
+                IEnumerable<object> methodAttributes,
+                IEnumerable<object> returnAttributes,
+                IEnumerable<object> parameterAttributes
+            )
             {
                 var forMethod = toString("method", methodAttributes);
                 var forReturn = toString("return", returnAttributes);
@@ -3596,7 +4185,7 @@ partial class Program
         public void LambdaAttributes_02()
         {
             var source =
-@"using System;
+                @"using System;
 class AAttribute : Attribute { }
 class BAttribute : Attribute { }
 class C
@@ -3614,19 +4203,30 @@ class C
             comp.VerifyDiagnostics(
                 // (9,13): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         a = [A, B] (x, y) => { };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[A, B]").WithArguments("lambda attributes", "10.0").WithLocation(9, 13),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[A, B]")
+                    .WithArguments("lambda attributes", "10.0")
+                    .WithLocation(9, 13),
                 // (10,14): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         a = ([A] x, [B] y) => { };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[A]").WithArguments("lambda attributes", "10.0").WithLocation(10, 14),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[A]")
+                    .WithArguments("lambda attributes", "10.0")
+                    .WithLocation(10, 14),
                 // (10,21): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         a = ([A] x, [B] y) => { };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[B]").WithArguments("lambda attributes", "10.0").WithLocation(10, 21),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[B]")
+                    .WithArguments("lambda attributes", "10.0")
+                    .WithLocation(10, 21),
                 // (11,24): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         a = (object x, [A][B] object y) => { };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[A]").WithArguments("lambda attributes", "10.0").WithLocation(11, 24),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[A]")
+                    .WithArguments("lambda attributes", "10.0")
+                    .WithLocation(11, 24),
                 // (11,27): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         a = (object x, [A][B] object y) => { };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[B]").WithArguments("lambda attributes", "10.0").WithLocation(11, 27));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "[B]")
+                    .WithArguments("lambda attributes", "10.0")
+                    .WithLocation(11, 27)
+            );
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics();
@@ -3636,7 +4236,7 @@ class C
         public void LambdaAttributes_03()
         {
             var source =
-@"using System;
+                @"using System;
 class AAttribute : Attribute { }
 class BAttribute : Attribute { }
 class C
@@ -3658,10 +4258,12 @@ class C
                 Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[B]").WithLocation(8, 59),
                 // (9,34): error CS8916: Attributes on lambda expressions require a parenthesized parameter list.
                 //         Func<object, object> f = [A][B] x => x;
-                Diagnostic(ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression, "[A]").WithLocation(9, 34),
+                Diagnostic(ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression, "[A]")
+                    .WithLocation(9, 34),
                 // (9,37): error CS8916: Attributes on lambda expressions require a parenthesized parameter list.
                 //         Func<object, object> f = [A][B] x => x;
-                Diagnostic(ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression, "[B]").WithLocation(9, 37)
+                Diagnostic(ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression, "[B]")
+                    .WithLocation(9, 37)
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -3675,7 +4277,7 @@ class C
         public void LambdaAttributes_04()
         {
             var sourceA =
-@"namespace N1
+                @"namespace N1
 {
     class A1Attribute : System.Attribute { }
 }
@@ -3684,7 +4286,7 @@ namespace N2
     class A2Attribute : System.Attribute { }
 }";
             var sourceB =
-@"using N1;
+                @"using N1;
 using N2;
 class Program
 {
@@ -3694,7 +4296,10 @@ class Program
         System.Action<object> a2 = ([A2] object obj) => { };
     }
 }";
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics();
         }
 
@@ -3702,7 +4307,7 @@ class Program
         public void LambdaAttributes_05()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -3715,29 +4320,42 @@ class Program
             comp.VerifyDiagnostics(
                 // (5,29): error CS0246: The type or namespace name 'A1Attribute' could not be found (are you missing a using directive or an assembly reference?)
                 //         System.Action a1 = [A1] () => { };
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A1").WithArguments("A1Attribute").WithLocation(5, 29),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A1")
+                    .WithArguments("A1Attribute")
+                    .WithLocation(5, 29),
                 // (5,29): error CS0246: The type or namespace name 'A1' could not be found (are you missing a using directive or an assembly reference?)
                 //         System.Action a1 = [A1] () => { };
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A1").WithArguments("A1").WithLocation(5, 29),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A1")
+                    .WithArguments("A1")
+                    .WithLocation(5, 29),
                 // (6,43): error CS0246: The type or namespace name 'A2Attribute' could not be found (are you missing a using directive or an assembly reference?)
                 //         System.Func<object> a2 = [return: A2] () => null;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A2").WithArguments("A2Attribute").WithLocation(6, 43),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A2")
+                    .WithArguments("A2Attribute")
+                    .WithLocation(6, 43),
                 // (6,43): error CS0246: The type or namespace name 'A2' could not be found (are you missing a using directive or an assembly reference?)
                 //         System.Func<object> a2 = [return: A2] () => null;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A2").WithArguments("A2").WithLocation(6, 43),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A2")
+                    .WithArguments("A2")
+                    .WithLocation(6, 43),
                 // (7,38): error CS0246: The type or namespace name 'A3Attribute' could not be found (are you missing a using directive or an assembly reference?)
                 //         System.Action<object> a3 = ([A3] object obj) => { };
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A3").WithArguments("A3Attribute").WithLocation(7, 38),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A3")
+                    .WithArguments("A3Attribute")
+                    .WithLocation(7, 38),
                 // (7,38): error CS0246: The type or namespace name 'A3' could not be found (are you missing a using directive or an assembly reference?)
                 //         System.Action<object> a3 = ([A3] object obj) => { };
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A3").WithArguments("A3").WithLocation(7, 38));
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A3")
+                    .WithArguments("A3")
+                    .WithLocation(7, 38)
+            );
         }
 
         [Fact]
         public void LambdaAttributes_06()
         {
             var source =
-@"using System;
+                @"using System;
 class AAttribute : Attribute
 {
     public AAttribute(Action a) { }
@@ -3750,14 +4368,17 @@ class BAttribute : Attribute
             comp.VerifyDiagnostics(
                 // (6,2): error CS0181: Attribute constructor parameter 'a' has type 'Action', which is not a valid attribute parameter type
                 // [A([B] () => { })]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A").WithArguments("a", "System.Action").WithLocation(6, 2));
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
+                    .WithArguments("a", "System.Action")
+                    .WithLocation(6, 2)
+            );
         }
 
         [Fact]
         public void LambdaAttributes_BadAttributeLocation()
         {
             var source =
-@"using System;
+                @"using System;
 
 [AttributeUsage(AttributeTargets.Property)]
 class PropAttribute : Attribute { }
@@ -3798,19 +4419,30 @@ class Program
             comp.VerifyDiagnostics(
                 // (23,14): error CS0592: Attribute 'Prop' is not valid on this declaration type. It is only valid on 'property, indexer' declarations.
                 //             [Prop] // 1
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Prop").WithArguments("Prop", "property, indexer").WithLocation(23, 14),
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Prop")
+                    .WithArguments("Prop", "property, indexer")
+                    .WithLocation(23, 14),
                 // (24,14): error CS0592: Attribute 'Return' is not valid on this declaration type. It is only valid on 'return' declarations.
                 //             [Return] // 2
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Return").WithArguments("Return", "return").WithLocation(24, 14),
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Return")
+                    .WithArguments("Return", "return")
+                    .WithLocation(24, 14),
                 // (26,22): error CS0592: Attribute 'Prop' is not valid on this declaration type. It is only valid on 'property, indexer' declarations.
                 //             [return: Prop] // 3
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Prop").WithArguments("Prop", "property, indexer").WithLocation(26, 22),
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Prop")
+                    .WithArguments("Prop", "property, indexer")
+                    .WithLocation(26, 22),
                 // (28,22): error CS0592: Attribute 'Method' is not valid on this declaration type. It is only valid on 'method' declarations.
                 //             [return: Method] // 4
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Method").WithArguments("Method", "method").WithLocation(28, 22),
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Method")
+                    .WithArguments("Method", "method")
+                    .WithLocation(28, 22),
                 // (31,14): error CS0592: Attribute 'TypeParam' is not valid on this declaration type. It is only valid on 'type parameter' declarations.
                 //             [TypeParam] // 5
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "TypeParam").WithArguments("TypeParam", "type parameter").WithLocation(31, 14));
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "TypeParam")
+                    .WithArguments("TypeParam", "type parameter")
+                    .WithLocation(31, 14)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
@@ -3818,14 +4450,33 @@ class Program
             var symbol = (IMethodSymbol)model.GetSymbolInfo(lambda).Symbol;
             Assert.NotNull(symbol);
 
-            verifyAttributes(symbol.GetAttributes(), "PropAttribute", "ReturnAttribute", "MethodAttribute");
-            verifyAttributes(symbol.GetReturnTypeAttributes(), "PropAttribute", "ReturnAttribute", "MethodAttribute");
-            verifyAttributes(symbol.Parameters[0].GetAttributes(), "ParamAttribute", "TypeParamAttribute");
+            verifyAttributes(
+                symbol.GetAttributes(),
+                "PropAttribute",
+                "ReturnAttribute",
+                "MethodAttribute"
+            );
+            verifyAttributes(
+                symbol.GetReturnTypeAttributes(),
+                "PropAttribute",
+                "ReturnAttribute",
+                "MethodAttribute"
+            );
+            verifyAttributes(
+                symbol.Parameters[0].GetAttributes(),
+                "ParamAttribute",
+                "TypeParamAttribute"
+            );
 
-            void verifyAttributes(ImmutableArray<AttributeData> attributes, params string[] expectedAttributeNames)
+            void verifyAttributes(
+                ImmutableArray<AttributeData> attributes,
+                params string[] expectedAttributeNames
+            )
             {
                 var actualAttributes = attributes.SelectAsArray(a => a.AttributeClass.GetSymbol());
-                var expectedAttributes = expectedAttributeNames.Select(n => comp.GetTypeByMetadataName(n));
+                var expectedAttributes = expectedAttributeNames.Select(
+                    n => comp.GetTypeByMetadataName(n)
+                );
                 AssertEx.Equal(expectedAttributes, actualAttributes);
             }
         }
@@ -3834,7 +4485,7 @@ class Program
         public void LambdaAttributes_AttributeSemanticModel()
         {
             var source =
-@"using System;
+                @"using System;
 class AAttribute : Attribute { }
 class BAttribute : Attribute { }
 class CAttribute : Attribute { }
@@ -3854,13 +4505,25 @@ class Program
             comp.VerifyDiagnostics(
                 // (13,34): error CS8916: Attributes on lambda expressions require a parenthesized parameter list.
                 //         Func<object, object> d = [D] x => x;
-                Diagnostic(ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression, "[D]").WithLocation(13, 34));
+                Diagnostic(ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression, "[D]")
+                    .WithLocation(13, 34)
+            );
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
             var attributeSyntaxes = tree.GetRoot().DescendantNodes().OfType<AttributeSyntax>();
-            var actualAttributes = attributeSyntaxes.Select(a => model.GetSymbolInfo(a).Symbol.GetSymbol<MethodSymbol>()).ToImmutableArray();
-            var expectedAttributes = new[] { "AAttribute", "BAttribute", "CAttribute", "DAttribute" }.Select(a => comp.GetTypeByMetadataName(a).InstanceConstructors.Single()).ToImmutableArray();
+            var actualAttributes = attributeSyntaxes
+                .Select(a => model.GetSymbolInfo(a).Symbol.GetSymbol<MethodSymbol>())
+                .ToImmutableArray();
+            var expectedAttributes = new[]
+            {
+                "AAttribute",
+                "BAttribute",
+                "CAttribute",
+                "DAttribute"
+            }
+                .Select(a => comp.GetTypeByMetadataName(a).InstanceConstructors.Single())
+                .ToImmutableArray();
             AssertEx.Equal(expectedAttributes, actualAttributes);
         }
 
@@ -3871,7 +4534,7 @@ class Program
         public void LambdaAttributes_SpeculativeSemanticModel(string statement)
         {
             string source =
-$@"using System;
+                $@"using System;
 class AAttribute : Attribute {{ }}
 class Program
 {{
@@ -3885,7 +4548,10 @@ class Program
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            var a = (IdentifierNameSyntax)tree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().Single().Name;
+            var a = (IdentifierNameSyntax)tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AttributeSyntax>()
+                .Single().Name;
             Assert.Equal("A", a.Identifier.Text);
             var attrInfo = model.GetSymbolInfo(a);
             var attrType = comp.GetMember<NamedTypeSymbol>("AAttribute").GetPublicSymbol();
@@ -3896,9 +4562,15 @@ class Program
             var newTree = SyntaxFactory.ParseSyntaxTree(source + " ");
             var m = newTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
 
-            Assert.True(model.TryGetSpeculativeSemanticModelForMethodBody(m.Body.SpanStart, m, out model));
+            Assert.True(
+                model.TryGetSpeculativeSemanticModelForMethodBody(m.Body.SpanStart, m, out model)
+            );
 
-            a = (IdentifierNameSyntax)newTree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().Single().Name;
+            a = (IdentifierNameSyntax)newTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<AttributeSyntax>()
+                .Single().Name;
             Assert.Equal("A", a.Identifier.Text);
 
             // If we aren't using the right binder here, the compiler crashes going through the binder factory
@@ -3911,7 +4583,7 @@ class Program
         public void LambdaAttributes_DisallowedAttributes()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 namespace System.Runtime.CompilerServices
 {
@@ -3937,26 +4609,35 @@ class Program
             comp.VerifyDiagnostics(
                 // (15,14): error CS8335: Do not use 'System.Runtime.CompilerServices.IsReadOnlyAttribute'. This is reserved for compiler usage.
                 //             [IsReadOnly] // 1
-                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsReadOnly").WithArguments("System.Runtime.CompilerServices.IsReadOnlyAttribute").WithLocation(15, 14),
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsReadOnly")
+                    .WithArguments("System.Runtime.CompilerServices.IsReadOnlyAttribute")
+                    .WithLocation(15, 14),
                 // (16,14): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
                 //             [IsUnmanaged] // 2
-                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged").WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute").WithLocation(16, 14),
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(16, 14),
                 // (17,14): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
                 //             [IsByRefLike] // 3
-                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike").WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute").WithLocation(17, 14),
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
+                    .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
+                    .WithLocation(17, 14),
                 // (18,14): error CS1112: Do not use 'System.Runtime.CompilerServices.ExtensionAttribute'. Use the 'this' keyword instead.
                 //             [Extension] // 4
                 Diagnostic(ErrorCode.ERR_ExplicitExtension, "Extension").WithLocation(18, 14),
                 // (19,14): error CS8335: Do not use 'System.Runtime.CompilerServices.NullableContextAttribute'. This is reserved for compiler usage.
                 //             [NullableContext(0)] // 5
-                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullableContext(0)").WithArguments("System.Runtime.CompilerServices.NullableContextAttribute").WithLocation(19, 14));
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullableContext(0)")
+                    .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
+                    .WithLocation(19, 14)
+            );
         }
 
         [Fact]
         public void LambdaAttributes_DisallowedSecurityAttributes()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Security;
 class Program
 {
@@ -3972,20 +4653,31 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,14): error CS4030: Security attribute 'SecurityCritical' cannot be applied to an Async method.
                 //             [SecurityCritical] // 1
-                Diagnostic(ErrorCode.ERR_SecurityCriticalOrSecuritySafeCriticalOnAsync, "SecurityCritical").WithArguments("SecurityCritical").WithLocation(8, 14),
+                Diagnostic(
+                        ErrorCode.ERR_SecurityCriticalOrSecuritySafeCriticalOnAsync,
+                        "SecurityCritical"
+                    )
+                    .WithArguments("SecurityCritical")
+                    .WithLocation(8, 14),
                 // (9,14): error CS4030: Security attribute 'SecuritySafeCriticalAttribute' cannot be applied to an Async method.
                 //             [SecuritySafeCriticalAttribute] // 2
-                Diagnostic(ErrorCode.ERR_SecurityCriticalOrSecuritySafeCriticalOnAsync, "SecuritySafeCriticalAttribute").WithArguments("SecuritySafeCriticalAttribute").WithLocation(9, 14),
+                Diagnostic(
+                        ErrorCode.ERR_SecurityCriticalOrSecuritySafeCriticalOnAsync,
+                        "SecuritySafeCriticalAttribute"
+                    )
+                    .WithArguments("SecuritySafeCriticalAttribute")
+                    .WithLocation(9, 14),
                 // (10,22): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //             async () => { }; // 3
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "=>").WithLocation(10, 22));
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "=>").WithLocation(10, 22)
+            );
         }
 
         [Fact]
         public void LambdaAttributes_ObsoleteAttribute()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Report(Action a)
@@ -3998,7 +4690,11 @@ class Program
         Report([Obsolete] () => { });
     }
 }";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(comp, expectedOutput: "System.ObsoleteAttribute");
 
             var tree = comp.SyntaxTrees[0];
@@ -4012,7 +4708,7 @@ class Program
         public void LambdaParameterAttributes_Conditional()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Diagnostics;
 class Program
 {
@@ -4024,15 +4720,25 @@ class Program
         Report([Conditional(""DEBUG"")] static () => { });
     }
 }";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyDiagnostics(
                 // (10,17): error CS0577: The Conditional attribute is not valid on 'lambda expression' because it is a constructor, destructor, operator, lambda expression, or explicit interface implementation
                 //         Report([Conditional("DEBUG")] static () => { });
-                Diagnostic(ErrorCode.ERR_ConditionalOnSpecialMethod, @"Conditional(""DEBUG"")").WithArguments("lambda expression").WithLocation(10, 17));
+                Diagnostic(ErrorCode.ERR_ConditionalOnSpecialMethod, @"Conditional(""DEBUG"")")
+                    .WithArguments("lambda expression")
+                    .WithLocation(10, 17)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().ToImmutableArray();
+            var exprs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .ToImmutableArray();
             var lambda = exprs.SelectAsArray(e => GetLambdaSymbol(model, e)).Single();
             Assert.Equal(new[] { "DEBUG" }, lambda.GetAppliedConditionalSymbols());
         }
@@ -4041,7 +4747,7 @@ class Program
         public void LambdaAttributes_WellKnownAttributes()
         {
             var sourceA =
-@"using System;
+                @"using System;
 using System.Runtime.InteropServices;
 using System.Security;
 class Program
@@ -4055,19 +4761,27 @@ class Program
     }
 }";
             var sourceB =
-@"namespace System.Security
+                @"namespace System.Security
 {
     internal class DynamicSecurityMethodAttribute : Attribute { }
 }";
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics(
                 // (8,22): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
                 //         Action a1 = [DllImport("MyModule.dll")] static () => { };
-                Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport").WithLocation(8, 22));
+                Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport")
+                    .WithLocation(8, 22)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().ToImmutableArray();
+            var exprs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .ToImmutableArray();
             Assert.Equal(4, exprs.Length);
             var lambdas = exprs.SelectAsArray(e => GetLambdaSymbol(model, e));
             Assert.Null(lambdas[0].GetDllImportData()); // [DllImport] is ignored if there are errors.
@@ -4080,7 +4794,7 @@ class Program
         public void LambdaAttributes_Permissions()
         {
             var source =
-@"#pragma warning disable 618
+                @"#pragma warning disable 618
 using System;
 using System.Security.Permissions;
 class Program
@@ -4090,12 +4804,18 @@ class Program
         Action a1 = [PermissionSet(SecurityAction.Deny)] () => { };
     }
 }";
-            var comp = CreateCompilationWithMscorlib40(source, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilationWithMscorlib40(
+                source,
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().ToImmutableArray();
+            var exprs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .ToImmutableArray();
             var lambda = exprs.SelectAsArray(e => GetLambdaSymbol(model, e)).Single();
             Assert.NotEmpty(lambda.GetSecurityInformation());
         }
@@ -4104,7 +4824,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_01()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Diagnostics.CodeAnalysis;
 class Program
 {
@@ -4116,16 +4836,31 @@ class Program
     }
 }";
             var comp = CreateCompilation(
-                new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition, NotNullIfNotNullAttributeDefinition, MemberNotNullAttributeDefinition, MemberNotNullWhenAttributeDefinition },
-                parseOptions: TestOptions.RegularPreview);
+                new[]
+                {
+                    source,
+                    MaybeNullAttributeDefinition,
+                    NotNullAttributeDefinition,
+                    NotNullIfNotNullAttributeDefinition,
+                    MemberNotNullAttributeDefinition,
+                    MemberNotNullWhenAttributeDefinition
+                },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().ToImmutableArray();
+            var exprs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .ToImmutableArray();
             Assert.Equal(3, exprs.Length);
             var lambdas = exprs.SelectAsArray(e => GetLambdaSymbol(model, e));
-            Assert.Equal(FlowAnalysisAnnotations.MaybeNull | FlowAnalysisAnnotations.NotNull, lambdas[0].ReturnTypeFlowAnalysisAnnotations);
+            Assert.Equal(
+                FlowAnalysisAnnotations.MaybeNull | FlowAnalysisAnnotations.NotNull,
+                lambdas[0].ReturnTypeFlowAnalysisAnnotations
+            );
             Assert.Equal(new[] { "obj" }, lambdas[1].ReturnNotNullIfParameterNotNull);
             Assert.Equal(new[] { "x" }, lambdas[2].NotNullMembers);
             Assert.Equal(new[] { "y" }, lambdas[2].NotNullWhenFalseMembers);
@@ -4137,7 +4872,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_02()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 class Program
@@ -4148,18 +4883,31 @@ class Program
         Func<object?> a2 = [return: NotNull] () => null;
     }
 }";
-            var comp = CreateCompilation(new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition }, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics(
                 // (8,27): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<object>' (possibly because of nullability attributes).
                 //         Func<object> a1 = [return: MaybeNull] () => null;
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: MaybeNull] () =>").WithArguments("lambda expression", "System.Func<object>").WithLocation(8, 27),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: MaybeNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<object>")
+                    .WithLocation(8, 27),
                 // (9,28): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<object?>' (possibly because of nullability attributes).
                 //         Func<object?> a2 = [return: NotNull] () => null;
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: NotNull] () =>").WithArguments("lambda expression", "System.Func<object?>").WithLocation(9, 28),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: NotNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<object?>")
+                    .WithLocation(9, 28),
                 // (9,52): warning CS8603: Possible null reference return.
                 //         Func<object?> a2 = [return: NotNull] () => null;
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(9, 52)
-                );
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4167,7 +4915,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_AnonymousFunctionConversion_Return()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -4195,17 +4943,34 @@ class Program
         D3 f12 = [return: NotNull] object? () => null;
     }
 }";
-            var comp = CreateCompilation(new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition });
+            var comp = CreateCompilation(
+                new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (13,27): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<object>' (possibly because of nullability attributes).
                 //         Func<object> f1 = [return: MaybeNull] () => null; // 1
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: MaybeNull] () =>").WithArguments("lambda expression", "System.Func<object>").WithLocation(13, 27),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: MaybeNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<object>")
+                    .WithLocation(13, 27),
                 // (14,17): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D1' (possibly because of nullability attributes).
                 //         D1 f2 = [return: MaybeNull] () => null; // 2
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: MaybeNull] () =>").WithArguments("lambda expression", "D1").WithLocation(14, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: MaybeNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "D1")
+                    .WithLocation(14, 17),
                 // (16,17): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         D3 f4 = [return: MaybeNull] () => null; // 3
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: MaybeNull] () =>").WithArguments("lambda expression", "D3").WithLocation(16, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: MaybeNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "D3")
+                    .WithLocation(16, 17),
                 // (18,51): warning CS8603: Possible null reference return.
                 //         Func<object> f5 = [return: NotNull] () => null;
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(18, 51),
@@ -4214,7 +4979,12 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(19, 41),
                 // (20,17): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         D2 f7 = [return: NotNull] () => null; // 4
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: NotNull] () =>").WithArguments("lambda expression", "D2").WithLocation(20, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: NotNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "D2")
+                    .WithLocation(20, 17),
                 // (20,41): warning CS8603: Possible null reference return.
                 //         D2 f7 = [return: NotNull] () => null; // 4
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(20, 41),
@@ -4223,7 +4993,12 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(21, 41),
                 // (23,28): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<object?>' (possibly because of nullability attributes).
                 //         Func<object?> f9 = [return: NotNull] () => null; // 5
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: NotNull] () =>").WithArguments("lambda expression", "System.Func<object?>").WithLocation(23, 28),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: NotNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<object?>")
+                    .WithLocation(23, 28),
                 // (23,52): warning CS8603: Possible null reference return.
                 //         Func<object?> f9 = [return: NotNull] () => null; // 5
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(23, 52),
@@ -4232,14 +5007,19 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(24, 50),
                 // (25,18): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         D2 f11 = [return: NotNull] object? () => null; // 6
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: NotNull] object? () =>").WithArguments("lambda expression", "D2").WithLocation(25, 18),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: NotNull] object? () =>"
+                    )
+                    .WithArguments("lambda expression", "D2")
+                    .WithLocation(25, 18),
                 // (25,50): warning CS8603: Possible null reference return.
                 //         D2 f11 = [return: NotNull] object? () => null; // 6
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(25, 50),
                 // (26,50): warning CS8603: Possible null reference return.
                 //         D3 f12 = [return: NotNull] object? () => null;
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(26, 50)
-                );
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4247,7 +5027,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_AnonymousFunctionConversion_Return_Suppressed()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -4269,7 +5049,9 @@ class Program
         D2 f11 = ([return: NotNull] object? () => null)!;
     }
 }";
-            var comp = CreateCompilation(new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition });
+            var comp = CreateCompilation(
+                new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (17,42): warning CS8603: Possible null reference return.
                 //         D2 f7 = ([return: NotNull] () => null)!;
@@ -4280,7 +5062,7 @@ class Program
                 // (20,51): warning CS8603: Possible null reference return.
                 //         D2 f11 = ([return: NotNull] object? () => null)!;
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(20, 51)
-                );
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4288,7 +5070,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_DelegateCreation_Return()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -4316,17 +5098,34 @@ class Program
         _ = new D3([return: NotNull] object? () => null);
     }
 }";
-            var comp = CreateCompilation(new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition });
+            var comp = CreateCompilation(
+                new[] { source, MaybeNullAttributeDefinition, NotNullAttributeDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (13,30): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<object>' (possibly because of nullability attributes).
                 //         _ = new Func<object>([return: MaybeNull] () => null); // 1
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: MaybeNull] () =>").WithArguments("lambda expression", "System.Func<object>").WithLocation(13, 30),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: MaybeNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<object>")
+                    .WithLocation(13, 30),
                 // (14,20): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D1' (possibly because of nullability attributes).
                 //         _ = new D1([return: MaybeNull] () => null); // 2
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: MaybeNull] () =>").WithArguments("lambda expression", "D1").WithLocation(14, 20),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: MaybeNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "D1")
+                    .WithLocation(14, 20),
                 // (16,20): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         _ = new D3([return: MaybeNull] () => null); // 3
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: MaybeNull] () =>").WithArguments("lambda expression", "D3").WithLocation(16, 20),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: MaybeNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "D3")
+                    .WithLocation(16, 20),
                 // (18,54): warning CS8603: Possible null reference return.
                 //         _ = new Func<object>([return: NotNull] () => null);
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(18, 54),
@@ -4335,7 +5134,12 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(19, 44),
                 // (20,20): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         _ = new D2([return: NotNull] () => null); // 4
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: NotNull] () =>").WithArguments("lambda expression", "D2").WithLocation(20, 20),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: NotNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "D2")
+                    .WithLocation(20, 20),
                 // (20,44): warning CS8603: Possible null reference return.
                 //         _ = new D2([return: NotNull] () => null); // 4
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(20, 44),
@@ -4344,7 +5148,12 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(21, 44),
                 // (23,31): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<object?>' (possibly because of nullability attributes).
                 //         _ = new Func<object?>([return: NotNull] () => null); // 5
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: NotNull] () =>").WithArguments("lambda expression", "System.Func<object?>").WithLocation(23, 31),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: NotNull] () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<object?>")
+                    .WithLocation(23, 31),
                 // (23,55): warning CS8603: Possible null reference return.
                 //         _ = new Func<object?>([return: NotNull] () => null); // 5
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(23, 55),
@@ -4353,14 +5162,19 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(24, 52),
                 // (25,20): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         _ = new D2([return: NotNull] object? () => null); // 6
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "[return: NotNull] object? () =>").WithArguments("lambda expression", "D2").WithLocation(25, 20),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "[return: NotNull] object? () =>"
+                    )
+                    .WithArguments("lambda expression", "D2")
+                    .WithLocation(25, 20),
                 // (25,52): warning CS8603: Possible null reference return.
                 //         _ = new D2([return: NotNull] object? () => null); // 6
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(25, 52),
                 // (26,52): warning CS8603: Possible null reference return.
                 //         _ = new D3([return: NotNull] object? () => null);
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(26, 52)
-                );
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4368,7 +5182,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_AnonymousFunctionConversion_Parameter()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -4396,27 +5210,59 @@ class Program
         D3 x12 = ([DisallowNull] object? o) => { };
     }
 }";
-            var comp = CreateCompilation(new[] { source, AllowNullAttributeDefinition, DisallowNullAttributeDefinition });
+            var comp = CreateCompilation(
+                new[] { source, AllowNullAttributeDefinition, DisallowNullAttributeDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (13,29): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'Action<object>' (possibly because of nullability attributes).
                 //         Action<object> x1 = ([AllowNull] object o) => { }; // 1
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([AllowNull] object o) =>").WithArguments("o", "lambda expression", "System.Action<object>").WithLocation(13, 29),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([AllowNull] object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "System.Action<object>")
+                    .WithLocation(13, 29),
                 // (14,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D1' (possibly because of nullability attributes).
                 //         D1 x2 = ([AllowNull] object o) => { }; // 2
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([AllowNull] object o) =>").WithArguments("o", "lambda expression", "D1").WithLocation(14, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([AllowNull] object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D1")
+                    .WithLocation(14, 17),
                 // (16,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         D3 x4 = ([AllowNull] object o) => { }; // 3
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([AllowNull] object o) =>").WithArguments("o", "lambda expression", "D3").WithLocation(16, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([AllowNull] object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D3")
+                    .WithLocation(16, 17),
                 // (20,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         D2 x7 = ([DisallowNull] object o) => { }; // 4
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([DisallowNull] object o) =>").WithArguments("o", "lambda expression", "D2").WithLocation(20, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([DisallowNull] object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D2")
+                    .WithLocation(20, 17),
                 // (23,30): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'Action<object?>' (possibly because of nullability attributes).
                 //         Action<object?> x9 = ([DisallowNull] object? o) => { }; // 5
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([DisallowNull] object? o) =>").WithArguments("o", "lambda expression", "System.Action<object?>").WithLocation(23, 30),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([DisallowNull] object? o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "System.Action<object?>")
+                    .WithLocation(23, 30),
                 // (25,18): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         D2 x11 = ([DisallowNull] object? o) => { }; // 6
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([DisallowNull] object? o) =>").WithArguments("o", "lambda expression", "D2").WithLocation(25, 18)
-                );
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([DisallowNull] object? o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D2")
+                    .WithLocation(25, 18)
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4424,7 +5270,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_AnonymousFunctionConversion_Parameter_WithoutType()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -4443,21 +5289,33 @@ class Program
         D3 x5 = (o) => { o.ToString(); }; // 3, 4
     }
 }";
-            var comp = CreateCompilation(new[] { source, AllowNullAttributeDefinition, DisallowNullAttributeDefinition });
+            var comp = CreateCompilation(
+                new[] { source, AllowNullAttributeDefinition, DisallowNullAttributeDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (14,39): warning CS8602: Dereference of a possibly null reference.
                 //         Action<object?> x2 = (o) => { o.ToString(); }; // 1
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "o").WithLocation(14, 39),
                 // (16,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         D2 x4 = (o) => { o.ToString(); }; // 2
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "(o) =>").WithArguments("o", "lambda expression", "D2").WithLocation(16, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "(o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D2")
+                    .WithLocation(16, 17),
                 // (17,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         D3 x5 = (o) => { o.ToString(); }; // 3, 4
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "(o) =>").WithArguments("o", "lambda expression", "D3").WithLocation(17, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "(o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D3")
+                    .WithLocation(17, 17),
                 // (17,26): warning CS8602: Dereference of a possibly null reference.
                 //         D3 x5 = (o) => { o.ToString(); }; // 3, 4
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "o").WithLocation(17, 26)
-                );
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4465,7 +5323,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_AnonymousFunctionConversion_Parameter_ConditionalAttributes()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System.Diagnostics.CodeAnalysis;
 
 delegate bool D1([MaybeNullWhen(true)] out object o);
@@ -4492,36 +5350,89 @@ class Program
         D3 x12 = bool (out object? o) => throw null!; // 9
     }
 }";
-            var comp = CreateCompilation(new[] { source, MaybeNullWhenAttributeDefinition, NotNullWhenAttributeDefinition, MaybeNullAttributeDefinition });
+            var comp = CreateCompilation(
+                new[]
+                {
+                    source,
+                    MaybeNullWhenAttributeDefinition,
+                    NotNullWhenAttributeDefinition,
+                    MaybeNullAttributeDefinition
+                }
+            );
             comp.VerifyDiagnostics(
                 // (13,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D1' (possibly because of nullability attributes).
                 //         D1 x2 = bool ([MaybeNullWhen(false)] out object o) => throw null!; // 1
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool ([MaybeNullWhen(false)] out object o) =>").WithArguments("o", "lambda expression", "D1").WithLocation(13, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool ([MaybeNullWhen(false)] out object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D1")
+                    .WithLocation(13, 17),
                 // (14,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D1' (possibly because of nullability attributes).
                 //         D1 x3 = bool ([MaybeNull] out object o) => throw null!; // 2
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool ([MaybeNull] out object o) =>").WithArguments("o", "lambda expression", "D1").WithLocation(14, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool ([MaybeNull] out object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D1")
+                    .WithLocation(14, 17),
                 // (15,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D1' (possibly because of nullability attributes).
                 //         D1 x4 = bool (out object? o) => throw null!; // 3
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool (out object? o) =>").WithArguments("o", "lambda expression", "D1").WithLocation(15, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool (out object? o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D1")
+                    .WithLocation(15, 17),
                 // (17,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         D2 x5 = bool ([MaybeNullWhen(true)] out object o) => throw null!; // 4
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool ([MaybeNullWhen(true)] out object o) =>").WithArguments("o", "lambda expression", "D2").WithLocation(17, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool ([MaybeNullWhen(true)] out object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D2")
+                    .WithLocation(17, 17),
                 // (19,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         D2 x7 = bool ([MaybeNull] out object o) => throw null!; // 5
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool ([MaybeNull] out object o) =>").WithArguments("o", "lambda expression", "D2").WithLocation(19, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool ([MaybeNull] out object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D2")
+                    .WithLocation(19, 17),
                 // (20,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         D2 x8 = bool (out object? o) => throw null!; // 6
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool (out object? o) =>").WithArguments("o", "lambda expression", "D2").WithLocation(20, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool (out object? o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D2")
+                    .WithLocation(20, 17),
                 // (22,17): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         D3 x9 = bool ([MaybeNullWhen(true)] out object o) => throw null!; // 7
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool ([MaybeNullWhen(true)] out object o) =>").WithArguments("o", "lambda expression", "D3").WithLocation(22, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool ([MaybeNullWhen(true)] out object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D3")
+                    .WithLocation(22, 17),
                 // (24,18): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         D3 x11 = bool ([MaybeNull] out object o) => throw null!; // 8
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool ([MaybeNull] out object o) =>").WithArguments("o", "lambda expression", "D3").WithLocation(24, 18),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool ([MaybeNull] out object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D3")
+                    .WithLocation(24, 18),
                 // (25,18): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         D3 x12 = bool (out object? o) => throw null!; // 9
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "bool (out object? o) =>").WithArguments("o", "lambda expression", "D3").WithLocation(25, 18)
-                );
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "bool (out object? o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D3")
+                    .WithLocation(25, 18)
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4529,7 +5440,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_AnonymousFunctionConversion_NotNullIfNotNull()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -4549,18 +5460,25 @@ class Program
         D4 f5 = [return: NotNullIfNotNull(""o"")] (object? o) => null; // 3
     }
 }";
-            var comp = CreateCompilation(new[] { source, NotNullIfNotNullAttributeDefinition, NotNullAttributeDefinition });
+            var comp = CreateCompilation(
+                new[] { source, NotNullIfNotNullAttributeDefinition, NotNullAttributeDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (14,83): warning CS8603: Possible null reference return.
                 //         Func<object?, object> f1 = [return: NotNullIfNotNull("o")] (object? o) => null; // 1
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(14, 83),
                 // (17,17): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         D3 f4 = [return: NotNullIfNotNull("o")] (object? o) => null; // 2
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, @"[return: NotNullIfNotNull(""o"")] (object? o) =>").WithArguments("lambda expression", "D3").WithLocation(17, 17),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        @"[return: NotNullIfNotNull(""o"")] (object? o) =>"
+                    )
+                    .WithArguments("lambda expression", "D3")
+                    .WithLocation(17, 17),
                 // (18,64): warning CS8603: Possible null reference return.
                 //         D4 f5 = [return: NotNullIfNotNull("o")] (object? o) => null; // 3
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "null").WithLocation(18, 64)
-                );
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4568,7 +5486,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_DelegateCreation_Parameter()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -4596,27 +5514,59 @@ class Program
         _ = new D3(([DisallowNull] object? o) => { });
     }
 }";
-            var comp = CreateCompilation(new[] { source, AllowNullAttributeDefinition, DisallowNullAttributeDefinition });
+            var comp = CreateCompilation(
+                new[] { source, AllowNullAttributeDefinition, DisallowNullAttributeDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (13,32): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'Action<object>' (possibly because of nullability attributes).
                 //         _ = new Action<object>(([AllowNull] object o) => { }); // 1
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([AllowNull] object o) =>").WithArguments("o", "lambda expression", "System.Action<object>").WithLocation(13, 32),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([AllowNull] object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "System.Action<object>")
+                    .WithLocation(13, 32),
                 // (14,20): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D1' (possibly because of nullability attributes).
                 //         _ = new D1(([AllowNull] object o) => { }); // 2
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([AllowNull] object o) =>").WithArguments("o", "lambda expression", "D1").WithLocation(14, 20),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([AllowNull] object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D1")
+                    .WithLocation(14, 20),
                 // (16,20): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D3' (possibly because of nullability attributes).
                 //         _ = new D3(([AllowNull] object o) => { }); // 3
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([AllowNull] object o) =>").WithArguments("o", "lambda expression", "D3").WithLocation(16, 20),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([AllowNull] object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D3")
+                    .WithLocation(16, 20),
                 // (20,20): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         _ = new D2(([DisallowNull] object o) => { }); // 4
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([DisallowNull] object o) =>").WithArguments("o", "lambda expression", "D2").WithLocation(20, 20),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([DisallowNull] object o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D2")
+                    .WithLocation(20, 20),
                 // (23,33): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'Action<object?>' (possibly because of nullability attributes).
                 //         _ = new Action<object?>(([DisallowNull] object? o) => { }); // 5
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([DisallowNull] object? o) =>").WithArguments("o", "lambda expression", "System.Action<object?>").WithLocation(23, 33),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([DisallowNull] object? o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "System.Action<object?>")
+                    .WithLocation(23, 33),
                 // (25,20): warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'D2' (possibly because of nullability attributes).
                 //         _ = new D2(([DisallowNull] object? o) => { }); // 6
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([DisallowNull] object? o) =>").WithArguments("o", "lambda expression", "D2").WithLocation(25, 20)
-                );
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([DisallowNull] object? o) =>"
+                    )
+                    .WithArguments("o", "lambda expression", "D2")
+                    .WithLocation(25, 20)
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
@@ -4624,7 +5574,7 @@ class Program
         public void LambdaAttributes_NullableAttributes_03()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
 class Program
@@ -4635,18 +5585,31 @@ class Program
         Action<object?> a2 = ([DisallowNull] x) => { x.ToString(); };
     }
 }";
-            var comp = CreateCompilation(new[] { source, AllowNullAttributeDefinition, DisallowNullAttributeDefinition }, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                new[] { source, AllowNullAttributeDefinition, DisallowNullAttributeDefinition },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics(
                 // (8,29): warning CS8622: Nullability of reference types in type of parameter 'x' of 'lambda expression' doesn't match the target delegate 'Action<object>' (possibly because of nullability attributes).
                 //         Action<object> a1 = ([AllowNull] x) => { x.ToString(); };
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([AllowNull] x) =>").WithArguments("x", "lambda expression", "System.Action<object>").WithLocation(8, 29),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([AllowNull] x) =>"
+                    )
+                    .WithArguments("x", "lambda expression", "System.Action<object>")
+                    .WithLocation(8, 29),
                 // (8,50): warning CS8602: Dereference of a possibly null reference.
                 //         Action<object> a1 = ([AllowNull] x) => { x.ToString(); };
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(8, 50),
                 // (9,30): warning CS8622: Nullability of reference types in type of parameter 'x' of 'lambda expression' doesn't match the target delegate 'Action<object?>' (possibly because of nullability attributes).
                 //         Action<object?> a2 = ([DisallowNull] x) => { x.ToString(); };
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([DisallowNull] x) =>").WithArguments("x", "lambda expression", "System.Action<object?>").WithLocation(9, 30)
-                );
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([DisallowNull] x) =>"
+                    )
+                    .WithArguments("x", "lambda expression", "System.Action<object?>")
+                    .WithLocation(9, 30)
+            );
         }
 
         [WorkItem(55013, "https://github.com/dotnet/roslyn/issues/55013")]
@@ -4654,7 +5617,7 @@ class Program
         public void NullableTypeArraySwitchPattern()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 class C
 {
     object? field;
@@ -4667,16 +5630,22 @@ class C
             comp.VerifyDiagnostics(
                 // (4,13): warning CS0649: Field 'C.field' is never assigned to, and will always have its default value null
                 //     object? field;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field").WithArguments("C.field", "null").WithLocation(4, 13),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
+                    .WithArguments("C.field", "null")
+                    .WithLocation(4, 13),
                 // (5,26): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
                 //     string Prop => field switch
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("_").WithLocation(5, 26));
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("_")
+                    .WithLocation(5, 26)
+            );
         }
 
         [Fact, WorkItem(52827, "https://github.com/dotnet/roslyn/issues/52827")]
         public void LambdaAttributes_DoesNotReturn()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -4693,11 +5662,14 @@ class Program
                 // (9,43): warning CS8763: A method marked [DoesNotReturn] should not return.
                 //         Action a1 = [DoesNotReturn] () => { };
                 Diagnostic(ErrorCode.WRN_ShouldNotReturn, "{ }").WithLocation(9, 43)
-                );
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().ToImmutableArray();
+            var exprs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .ToImmutableArray();
             Assert.Equal(2, exprs.Length);
             var lambdas = exprs.SelectAsArray(e => GetLambdaSymbol(model, e));
             Assert.Equal(FlowAnalysisAnnotations.DoesNotReturn, lambdas[0].FlowAnalysisAnnotations);
@@ -4708,7 +5680,8 @@ class Program
         [WorkItem(56668, "https://github.com/dotnet/roslyn/issues/56668")]
         public void LambdaAttributes_DoesNotReturn_OnDelegateType()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -4728,24 +5701,30 @@ class Program
             comp.VerifyDiagnostics(
                 // (6,10): error CS0592: Attribute 'DoesNotReturn' is not valid on this declaration type. It is only valid on 'method' declarations.
                 // [return: DoesNotReturn] delegate void DoesNotReturnDelegate();
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DoesNotReturn").WithArguments("DoesNotReturn", "method").WithLocation(6, 10),
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DoesNotReturn")
+                    .WithArguments("DoesNotReturn", "method")
+                    .WithLocation(6, 10),
                 // (6,39): warning CS8770: Method 'void DoesNotReturnDelegate.Invoke()' lacks `[DoesNotReturn]` annotation to match implemented or overridden member.
                 // [return: DoesNotReturn] delegate void DoesNotReturnDelegate();
-                Diagnostic(ErrorCode.WRN_DoesNotReturnMismatch, "DoesNotReturnDelegate").WithArguments("void DoesNotReturnDelegate.Invoke()").WithLocation(6, 39),
+                Diagnostic(ErrorCode.WRN_DoesNotReturnMismatch, "DoesNotReturnDelegate")
+                    .WithArguments("void DoesNotReturnDelegate.Invoke()")
+                    .WithLocation(6, 39),
                 // (6,39): warning CS8770: Method 'void DoesNotReturnDelegate.Invoke()' lacks `[DoesNotReturn]` annotation to match implemented or overridden member.
                 // [return: DoesNotReturn] delegate void DoesNotReturnDelegate();
-                Diagnostic(ErrorCode.WRN_DoesNotReturnMismatch, "DoesNotReturnDelegate").WithArguments("void DoesNotReturnDelegate.Invoke()").WithLocation(6, 39),
+                Diagnostic(ErrorCode.WRN_DoesNotReturnMismatch, "DoesNotReturnDelegate")
+                    .WithArguments("void DoesNotReturnDelegate.Invoke()")
+                    .WithLocation(6, 39),
                 // (11,58): warning CS8763: A method marked [DoesNotReturn] should not return.
                 //         DoesNotReturnDelegate a1 = [DoesNotReturn] () => { }; // 1
                 Diagnostic(ErrorCode.WRN_ShouldNotReturn, "{ }").WithLocation(11, 58)
-                );
+            );
         }
 
         [Fact]
         public void LambdaAttributes_UnmanagedCallersOnly()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Runtime.InteropServices;
 class Program
 {
@@ -4754,18 +5733,23 @@ class Program
         Action a = [UnmanagedCallersOnly] static () => { };
     }
 }";
-            var comp = CreateCompilation(new[] { source, UnmanagedCallersOnlyAttributeDefinition }, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                new[] { source, UnmanagedCallersOnlyAttributeDefinition },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics(
                 // (7,21): error CS8896: 'UnmanagedCallersOnly' can only be applied to ordinary static non-abstract methods or static local functions.
                 //         Action a = [UnmanagedCallersOnly] static () => { };
-                Diagnostic(ErrorCode.ERR_UnmanagedCallersOnlyRequiresStatic, "UnmanagedCallersOnly").WithLocation(7, 21));
+                Diagnostic(ErrorCode.ERR_UnmanagedCallersOnlyRequiresStatic, "UnmanagedCallersOnly")
+                    .WithLocation(7, 21)
+            );
         }
 
         [Fact]
         public void LambdaParameterAttributes_OptionalAndDefaultValueAttributes()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Runtime.InteropServices;
 class Program
 {
@@ -4779,7 +5763,10 @@ class Program
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().ToImmutableArray();
+            var exprs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .ToImmutableArray();
             var lambda = exprs.SelectAsArray(e => GetLambdaSymbol(model, e)).Single();
             var parameter = (SourceParameterSymbol)lambda.Parameters[0];
             Assert.True(parameter.HasOptionalAttribute);
@@ -4791,7 +5778,7 @@ class Program
         public void LambdaParameterAttributes_WellKnownAttributes()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 class Program
 {
@@ -4806,7 +5793,10 @@ class Program
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().ToImmutableArray();
+            var exprs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .ToImmutableArray();
             Assert.Equal(2, exprs.Length);
             var lambdas = exprs.SelectAsArray(e => GetLambdaSymbol(model, e));
             Assert.True(lambdas[0].Parameters[0].IsIDispatchConstant);
@@ -4817,7 +5807,7 @@ class Program
         public void LambdaParameterAttributes_NullableAttributes_01()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Diagnostics.CodeAnalysis;
 class Program
 {
@@ -4828,16 +5818,29 @@ class Program
     }
 }";
             var comp = CreateCompilation(
-                new[] { source, AllowNullAttributeDefinition, MaybeNullWhenAttributeDefinition, NotNullIfNotNullAttributeDefinition },
-                parseOptions: TestOptions.RegularPreview);
+                new[]
+                {
+                    source,
+                    AllowNullAttributeDefinition,
+                    MaybeNullWhenAttributeDefinition,
+                    NotNullIfNotNullAttributeDefinition
+                },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var exprs = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().ToImmutableArray();
+            var exprs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .ToImmutableArray();
             Assert.Equal(2, exprs.Length);
             var lambdas = exprs.SelectAsArray(e => GetLambdaSymbol(model, e));
-            Assert.Equal(FlowAnalysisAnnotations.AllowNull | FlowAnalysisAnnotations.MaybeNullWhenFalse, lambdas[0].Parameters[0].FlowAnalysisAnnotations);
+            Assert.Equal(
+                FlowAnalysisAnnotations.AllowNull | FlowAnalysisAnnotations.MaybeNullWhenFalse,
+                lambdas[0].Parameters[0].FlowAnalysisAnnotations
+            );
             Assert.Equal(new[] { "x" }, lambdas[1].Parameters[1].NotNullIfParameterNotNull);
         }
 
@@ -4846,7 +5849,7 @@ class Program
         public void LambdaParameterAttributes_NullableAttributes_02()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System.Diagnostics.CodeAnalysis;
 delegate bool D(out object? obj);
 delegate bool D2([NotNullWhen(true)] out object? obj);
@@ -4868,28 +5871,41 @@ class Program
             };
      }
 }";
-            var comp = CreateCompilation(new[] { source, NotNullWhenAttributeDefinition }, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                new[] { source, NotNullWhenAttributeDefinition },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics(
                 // (10,15): warning CS8622: Nullability of reference types in type of parameter 'obj' of 'lambda expression' doesn't match the target delegate 'D' (possibly because of nullability attributes).
                 //         D d = ([NotNullWhen(true)] out object? obj) =>
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate, "([NotNullWhen(true)] out object? obj) =>").WithArguments("obj", "lambda expression", "D").WithLocation(10, 15),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOfTargetDelegate,
+                        "([NotNullWhen(true)] out object? obj) =>"
+                    )
+                    .WithArguments("obj", "lambda expression", "D")
+                    .WithLocation(10, 15),
                 // (13,17): warning CS8762: Parameter 'obj' must have a non-null value when exiting with 'true'.
                 //                 return true;
-                Diagnostic(ErrorCode.WRN_ParameterConditionallyDisallowsNull, "return true;").WithArguments("obj", "true").WithLocation(13, 17)
-                );
+                Diagnostic(ErrorCode.WRN_ParameterConditionallyDisallowsNull, "return true;")
+                    .WithArguments("obj", "true")
+                    .WithLocation(13, 17)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             var expr = tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>().First();
             var lambda = GetLambdaSymbol(model, expr);
-            Assert.Equal(FlowAnalysisAnnotations.NotNullWhenTrue, lambda.Parameters[0].FlowAnalysisAnnotations);
+            Assert.Equal(
+                FlowAnalysisAnnotations.NotNullWhenTrue,
+                lambda.Parameters[0].FlowAnalysisAnnotations
+            );
         }
 
         [Fact]
         public void LambdaReturnType_01()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void F<T>()
@@ -4904,13 +5920,20 @@ class Program
             comp.VerifyDiagnostics(
                 // (6,22): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         Func<T> f1 = T () => default;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "T").WithArguments("lambda return type", "10.0").WithLocation(6, 22),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "T")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(6, 22),
                 // (7,25): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         Func<T, T> f2 = T (x) => { return x; };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "T").WithArguments("lambda return type", "10.0").WithLocation(7, 25),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "T")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(7, 25),
                 // (8,25): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         Func<T, T> f3 = T (T x) => x;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "T").WithArguments("lambda return type", "10.0").WithLocation(8, 25));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "T")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(8, 25)
+            );
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics();
@@ -4920,7 +5943,7 @@ class Program
         public void LambdaReturnType_02()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void F<T, U>()
@@ -4937,17 +5960,22 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,14): error CS8934: Cannot convert lambda expression to type 'Func<U>' because the return type does not match the delegate return type
                 //         f2 = T () => default;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T () => default").WithArguments("lambda expression", "System.Func<U>").WithLocation(9, 14),
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T () => default")
+                    .WithArguments("lambda expression", "System.Func<U>")
+                    .WithLocation(9, 14),
                 // (10,14): error CS8934: Cannot convert lambda expression to type 'Func<T>' because the return type does not match the delegate return type
                 //         f1 = U () => default;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "U () => default").WithArguments("lambda expression", "System.Func<T>").WithLocation(10, 14));
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "U () => default")
+                    .WithArguments("lambda expression", "System.Func<T>")
+                    .WithLocation(10, 14)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_03()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void F<T, U>() where U : T
@@ -4964,17 +5992,22 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,14): error CS8934: Cannot convert lambda expression to type 'Func<U>' because the return type does not match the delegate return type
                 //         f2 = T () => default;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T () => default").WithArguments("lambda expression", "System.Func<U>").WithLocation(9, 14),
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T () => default")
+                    .WithArguments("lambda expression", "System.Func<U>")
+                    .WithLocation(9, 14),
                 // (10,14): error CS8934: Cannot convert lambda expression to type 'Func<T>' because the return type does not match the delegate return type
                 //         f1 = U () => default;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "U () => default").WithArguments("lambda expression", "System.Func<T>").WithLocation(10, 14));
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "U () => default")
+                    .WithArguments("lambda expression", "System.Func<T>")
+                    .WithLocation(10, 14)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_04()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 class Program
 {
@@ -4992,17 +6025,28 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,14): error CS8934: Cannot convert lambda expression to type 'Expression<Func<U>>' because the return type does not match the delegate return type
                 //         e2 = T () => default;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T () => default").WithArguments("lambda expression", "System.Linq.Expressions.Expression<System.Func<U>>").WithLocation(10, 14),
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T () => default")
+                    .WithArguments(
+                        "lambda expression",
+                        "System.Linq.Expressions.Expression<System.Func<U>>"
+                    )
+                    .WithLocation(10, 14),
                 // (11,14): error CS8934: Cannot convert lambda expression to type 'Expression<Func<T>>' because the return type does not match the delegate return type
                 //         e1 = U () => default;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "U () => default").WithArguments("lambda expression", "System.Linq.Expressions.Expression<System.Func<T>>").WithLocation(11, 14));
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "U () => default")
+                    .WithArguments(
+                        "lambda expression",
+                        "System.Linq.Expressions.Expression<System.Func<T>>"
+                    )
+                    .WithLocation(11, 14)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_05()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 class Program
 {
@@ -5018,14 +6062,20 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,28): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<string?>' (possibly because of nullability attributes).
                 //         Func<string?> f3 = string () => default!;
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "string () =>").WithArguments("lambda expression", "System.Func<string?>").WithLocation(9, 28));
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "string () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<string?>")
+                    .WithLocation(9, 28)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_06()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Linq.Expressions;
 class Program
@@ -5042,14 +6092,20 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,39): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<string>' (possibly because of nullability attributes).
                 //         Expression<Func<string>> e3 = string? () => default;
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "string? () =>").WithArguments("lambda expression", "System.Func<string>").WithLocation(10, 39));
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "string? () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<string>")
+                    .WithLocation(10, 39)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_07()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 struct S<T> { }
 class Program
@@ -5071,17 +6127,22 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "default").WithLocation(9, 36),
                 // (11,40): warning CS8619: Nullability of reference types in value of type 'S<object>' doesn't match target type 'S<object?>'.
                 //         Delegate d4 = S<object?> () => default(S<object>);
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "default(S<object>)").WithArguments("S<object>", "S<object?>").WithLocation(11, 40),
+                Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "default(S<object>)")
+                    .WithArguments("S<object>", "S<object?>")
+                    .WithLocation(11, 40),
                 // (12,39): warning CS8619: Nullability of reference types in value of type 'S<object?>' doesn't match target type 'S<object>'.
                 //         Delegate d5 = S<object> () => default(S<object?>);
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "default(S<object?>)").WithArguments("S<object?>", "S<object>").WithLocation(12, 39));
+                Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "default(S<object?>)")
+                    .WithArguments("S<object?>", "S<object>")
+                    .WithLocation(12, 39)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_08()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 struct S<T> { }
 class Program
@@ -5102,23 +6163,44 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,28): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<string?>' (possibly because of nullability attributes).
                 //         Func<string?> f2 = string () => throw null!;
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "string () =>").WithArguments("lambda expression", "System.Func<string?>").WithLocation(9, 28),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "string () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<string?>")
+                    .WithLocation(9, 28),
                 // (10,27): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<string>' (possibly because of nullability attributes).
                 //         Func<string> f3 = string? () => throw null!;
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "string? () =>").WithArguments("lambda expression", "System.Func<string>").WithLocation(10, 27),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "string? () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<string>")
+                    .WithLocation(10, 27),
                 // (13,31): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<S<object?>>' (possibly because of nullability attributes).
                 //         Func<S<object?>> f6 = S<object> () => throw null!;
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "S<object> () =>").WithArguments("lambda expression", "System.Func<S<object?>>").WithLocation(13, 31),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "S<object> () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<S<object?>>")
+                    .WithLocation(13, 31),
                 // (14,30): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<S<object>>' (possibly because of nullability attributes).
                 //         Func<S<object>> f7 = S<object?> () => throw null!;
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "S<object?> () =>").WithArguments("lambda expression", "System.Func<S<object>>").WithLocation(14, 30));
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "S<object?> () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<S<object>>")
+                    .WithLocation(14, 30)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_09()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 struct S<T> { }
 delegate ref T D1<T>();
 delegate ref readonly T D2<T>();
@@ -5140,23 +6222,44 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,30): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D1<S<object?>>' (possibly because of nullability attributes).
                 //         D1<S<object?>> f2 = (ref S<object> () => throw null!);
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "ref S<object> () =>").WithArguments("lambda expression", "D1<S<object?>>").WithLocation(10, 30),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "ref S<object> () =>"
+                    )
+                    .WithArguments("lambda expression", "D1<S<object?>>")
+                    .WithLocation(10, 30),
                 // (11,29): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D1<S<object>>' (possibly because of nullability attributes).
                 //         D1<S<object>> f3 = (ref S<object?> () => throw null!);
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "ref S<object?> () =>").WithArguments("lambda expression", "D1<S<object>>").WithLocation(11, 29),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "ref S<object?> () =>"
+                    )
+                    .WithArguments("lambda expression", "D1<S<object>>")
+                    .WithLocation(11, 29),
                 // (14,30): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D2<S<object?>>' (possibly because of nullability attributes).
                 //         D2<S<object?>> f6 = (ref readonly S<object> () => throw null!);
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "ref readonly S<object> () =>").WithArguments("lambda expression", "D2<S<object?>>").WithLocation(14, 30),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "ref readonly S<object> () =>"
+                    )
+                    .WithArguments("lambda expression", "D2<S<object?>>")
+                    .WithLocation(14, 30),
                 // (15,29): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'D2<S<object>>' (possibly because of nullability attributes).
                 //         D2<S<object>> f7 = (ref readonly S<object?> () => throw null!);
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "ref readonly S<object?> () =>").WithArguments("lambda expression", "D2<S<object>>").WithLocation(15, 29));
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "ref readonly S<object?> () =>"
+                    )
+                    .WithArguments("lambda expression", "D2<S<object>>")
+                    .WithLocation(15, 29)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_10()
         {
             var source =
-@"delegate T D1<T>(ref T t);
+                @"delegate T D1<T>(ref T t);
 delegate ref T D2<T>(ref T t);
 delegate ref readonly T D3<T>(ref T t);
 class Program
@@ -5181,29 +6284,48 @@ class Program
             comp.VerifyDiagnostics(
                 // (12,14): error CS8934: Cannot convert lambda expression to type 'D2<T>' because the return type does not match the delegate return type
                 //         d2 = T (ref T t) => t;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T (ref T t) => t").WithArguments("lambda expression", "D2<T>").WithLocation(12, 14),
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T (ref T t) => t")
+                    .WithArguments("lambda expression", "D2<T>")
+                    .WithLocation(12, 14),
                 // (13,14): error CS8934: Cannot convert lambda expression to type 'D3<T>' because the return type does not match the delegate return type
                 //         d3 = T (ref T t) => t;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T (ref T t) => t").WithArguments("lambda expression", "D3<T>").WithLocation(13, 14),
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "T (ref T t) => t")
+                    .WithArguments("lambda expression", "D3<T>")
+                    .WithLocation(13, 14),
                 // (14,15): error CS8934: Cannot convert lambda expression to type 'D1<T>' because the return type does not match the delegate return type
                 //         d1 = (ref T (ref T t) => ref t);
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "ref T (ref T t) => ref t").WithArguments("lambda expression", "D1<T>").WithLocation(14, 15),
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "ref T (ref T t) => ref t")
+                    .WithArguments("lambda expression", "D1<T>")
+                    .WithLocation(14, 15),
                 // (16,15): error CS8934: Cannot convert lambda expression to type 'D3<T>' because the return type does not match the delegate return type
                 //         d3 = (ref T (ref T t) => ref t);
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "ref T (ref T t) => ref t").WithArguments("lambda expression", "D3<T>").WithLocation(16, 15),
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "ref T (ref T t) => ref t")
+                    .WithArguments("lambda expression", "D3<T>")
+                    .WithLocation(16, 15),
                 // (17,15): error CS8934: Cannot convert lambda expression to type 'D1<T>' because the return type does not match the delegate return type
                 //         d1 = (ref readonly T (ref T t) => ref t);
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "ref readonly T (ref T t) => ref t").WithArguments("lambda expression", "D1<T>").WithLocation(17, 15),
+                Diagnostic(
+                        ErrorCode.ERR_CantConvAnonMethReturnType,
+                        "ref readonly T (ref T t) => ref t"
+                    )
+                    .WithArguments("lambda expression", "D1<T>")
+                    .WithLocation(17, 15),
                 // (18,15): error CS8934: Cannot convert lambda expression to type 'D2<T>' because the return type does not match the delegate return type
                 //         d2 = (ref readonly T (ref T t) => ref t);
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturnType, "ref readonly T (ref T t) => ref t").WithArguments("lambda expression", "D2<T>").WithLocation(18, 15));
+                Diagnostic(
+                        ErrorCode.ERR_CantConvAnonMethReturnType,
+                        "ref readonly T (ref T t) => ref t"
+                    )
+                    .WithArguments("lambda expression", "D2<T>")
+                    .WithLocation(18, 15)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_11()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -5217,16 +6339,19 @@ class Program
             comp.VerifyDiagnostics(
                 // (7,14): error CS8917: The delegate type could not be inferred.
                 //         d = (ref void () => { });
-                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "ref void () => { }").WithLocation(7, 14),
+                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "ref void () => { }")
+                    .WithLocation(7, 14),
                 // (7,18): error CS1547: Keyword 'void' cannot be used in this context
                 //         d = (ref void () => { });
                 Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(7, 18),
                 // (8,14): error CS8917: The delegate type could not be inferred.
                 //         d = (ref readonly void () => { });
-                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "ref readonly void () => { }").WithLocation(8, 14),
+                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "ref readonly void () => { }")
+                    .WithLocation(8, 14),
                 // (8,27): error CS1547: Keyword 'void' cannot be used in this context
                 //         d = (ref readonly void () => { });
-                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(8, 27));
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(8, 27)
+            );
         }
 
         [WorkItem(55217, "https://github.com/dotnet/roslyn/issues/55217")]
@@ -5234,7 +6359,7 @@ class Program
         public void LambdaReturnType_12()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -5249,29 +6374,42 @@ class Program
             comp.VerifyDiagnostics(
                 // (7,13): error CS1599: The return type of a method, delegate, or function pointer cannot be 'TypedReference'
                 //         d = TypedReference () => throw null;
-                Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "TypedReference").WithArguments("System.TypedReference").WithLocation(7, 13),
+                Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "TypedReference")
+                    .WithArguments("System.TypedReference")
+                    .WithLocation(7, 13),
                 // (7,13): error CS8917: The delegate type could not be inferred.
                 //         d = TypedReference () => throw null;
-                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "TypedReference () => throw null").WithLocation(7, 13),
+                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "TypedReference () => throw null")
+                    .WithLocation(7, 13),
                 // (8,13): error CS1599: The return type of a method, delegate, or function pointer cannot be 'RuntimeArgumentHandle'
                 //         d = RuntimeArgumentHandle () => throw null;
-                Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "RuntimeArgumentHandle").WithArguments("System.RuntimeArgumentHandle").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "RuntimeArgumentHandle")
+                    .WithArguments("System.RuntimeArgumentHandle")
+                    .WithLocation(8, 13),
                 // (8,13): error CS8917: The delegate type could not be inferred.
                 //         d = RuntimeArgumentHandle () => throw null;
-                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "RuntimeArgumentHandle () => throw null").WithLocation(8, 13),
+                Diagnostic(
+                        ErrorCode.ERR_CannotInferDelegateType,
+                        "RuntimeArgumentHandle () => throw null"
+                    )
+                    .WithLocation(8, 13),
                 // (9,13): error CS1599: The return type of a method, delegate, or function pointer cannot be 'ArgIterator'
                 //         d = ArgIterator () => throw null;
-                Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "ArgIterator").WithArguments("System.ArgIterator").WithLocation(9, 13),
+                Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "ArgIterator")
+                    .WithArguments("System.ArgIterator")
+                    .WithLocation(9, 13),
                 // (9,13): error CS8917: The delegate type could not be inferred.
                 //         d = ArgIterator () => throw null;
-                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "ArgIterator () => throw null").WithLocation(9, 13));
+                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "ArgIterator () => throw null")
+                    .WithLocation(9, 13)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_13()
         {
             var source =
-@"static class S { }
+                @"static class S { }
 delegate S D();
 class Program
 {
@@ -5284,14 +6422,17 @@ class Program
             comp.VerifyDiagnostics(
                 // (7,15): error CS0722: 'S': static types cannot be used as return types
                 //         D d = S () => default;
-                Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "S").WithArguments("S").WithLocation(7, 15));
+                Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "S")
+                    .WithArguments("S")
+                    .WithLocation(7, 15)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_14()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -5306,14 +6447,15 @@ class Program
                 Diagnostic(ErrorCode.ERR_BadAsyncReturn, "=>").WithLocation(6, 35),
                 // (6,35): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //         Delegate d = async int () => 0;
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "=>").WithLocation(6, 35));
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "=>").WithLocation(6, 35)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_15()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 delegate ref Task D(string s);
 class Program
@@ -5328,20 +6470,29 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,23): error CS8917: The delegate type could not be inferred.
                 //         Delegate d1 = async ref Task (s) => { _ = s.Length; await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "async ref Task (s) => { _ = s.Length; await Task.Yield(); }").WithLocation(8, 23),
+                Diagnostic(
+                        ErrorCode.ERR_CannotInferDelegateType,
+                        "async ref Task (s) => { _ = s.Length; await Task.Yield(); }"
+                    )
+                    .WithLocation(8, 23),
                 // (8,29): error CS1073: Unexpected token 'ref'
                 //         Delegate d1 = async ref Task (s) => { _ = s.Length; await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref").WithArguments("ref").WithLocation(8, 29),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(8, 29),
                 // (9,22): error CS1073: Unexpected token 'ref'
                 //         D d2 = async ref Task (s) => { _ = s.Length; await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref").WithArguments("ref").WithLocation(9, 22));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(9, 22)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_16()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 delegate ref Task D(string s);
 class Program
@@ -5356,17 +6507,22 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,29): error CS1073: Unexpected token 'ref'
                 //         Delegate d1 = async ref Task (string s) => { _ = s.Length; await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref").WithArguments("ref").WithLocation(8, 29),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(8, 29),
                 // (9,22): error CS1073: Unexpected token 'ref'
                 //         D d2 = async ref Task (string s) => { _ = s.Length; await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref").WithArguments("ref").WithLocation(9, 22));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(9, 22)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_17()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 class Program
 {
@@ -5380,20 +6536,31 @@ class Program
             comp.VerifyDiagnostics(
                 // (7,28): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<string?>' (possibly because of nullability attributes).
                 //         Func<string?> f1 = string () => { if (x is null) return x; return y; };
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "string () =>").WithArguments("lambda expression", "System.Func<string?>").WithLocation(7, 28),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "string () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<string?>")
+                    .WithLocation(7, 28),
                 // (7,65): warning CS8603: Possible null reference return.
                 //         Func<string?> f1 = string () => { if (x is null) return x; return y; };
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "x").WithLocation(7, 65),
                 // (8,27): warning CS8621: Nullability of reference types in return type of 'lambda expression' doesn't match the target delegate 'Func<string>' (possibly because of nullability attributes).
                 //         Func<string> f2 = string? () => { if (x is not null) return x; return y; };
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate, "string? () =>").WithArguments("lambda expression", "System.Func<string>").WithLocation(8, 27));
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOfTargetDelegate,
+                        "string? () =>"
+                    )
+                    .WithArguments("lambda expression", "System.Func<string>")
+                    .WithLocation(8, 27)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_CustomModifiers_01()
         {
             var sourceA =
-@".class public auto ansi sealed D extends [mscorlib]System.MulticastDelegate
+                @".class public auto ansi sealed D extends [mscorlib]System.MulticastDelegate
 {
     .method public hidebysig specialname rtspecialname instance void .ctor (object 'object', native int 'method') runtime managed { }
     .method public hidebysig newslot virtual instance int32 modopt([mscorlib]System.Int16) Invoke () runtime managed { }
@@ -5403,7 +6570,7 @@ class Program
             var refA = CompileIL(sourceA);
 
             var sourceB =
-@"class Program
+                @"class Program
 {
     static void F(D d)
     {
@@ -5415,16 +6582,20 @@ class Program
         F(int () => 2);
     }
 }";
-            CompileAndVerify(sourceB, references: new[] { refA }, parseOptions: TestOptions.RegularPreview, expectedOutput:
-@"1
-2");
+            CompileAndVerify(
+                sourceB,
+                references: new[] { refA },
+                parseOptions: TestOptions.RegularPreview,
+                expectedOutput: @"1
+2"
+            );
         }
 
         [Fact]
         public void LambdaReturnType_CustomModifiers_02()
         {
             var sourceA =
-@".class public auto ansi sealed D extends [mscorlib]System.MulticastDelegate
+                @".class public auto ansi sealed D extends [mscorlib]System.MulticastDelegate
 {
     .method public hidebysig specialname rtspecialname instance void .ctor (object 'object', native int 'method') runtime managed { }
     .method public hidebysig newslot virtual instance int32 modreq([mscorlib]System.Int16) Invoke () runtime managed { }
@@ -5434,7 +6605,7 @@ class Program
             var refA = CompileIL(sourceA);
 
             var sourceB =
-@"class Program
+                @"class Program
 {
     static void F(D d)
     {
@@ -5446,24 +6617,35 @@ class Program
         F(int () => 2);
     }
 }";
-            var comp = CreateCompilation(sourceB, references: new[] { refA }, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics(
                 // (5,34): error CS0570: 'D.Invoke()' is not supported by the language
                 //         System.Console.WriteLine(d());
-                Diagnostic(ErrorCode.ERR_BindToBogus, "d()").WithArguments("D.Invoke()").WithLocation(5, 34),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "d()")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(5, 34),
                 // (9,11): error CS0570: 'D.Invoke()' is not supported by the language
                 //         F(() => 1);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "() => 1").WithArguments("D.Invoke()").WithLocation(9, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "() => 1")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(9, 11),
                 // (10,11): error CS0570: 'D.Invoke()' is not supported by the language
                 //         F(int () => 2);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "int () => 2").WithArguments("D.Invoke()").WithLocation(10, 11));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "int () => 2")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(10, 11)
+            );
         }
 
         [Fact]
         public void LambdaReturnType_UseSiteErrors()
         {
             var sourceA =
-@".class public sealed A extends [mscorlib]System.Object
+                @".class public sealed A extends [mscorlib]System.Object
 {
   .custom instance void [mscorlib]System.Runtime.CompilerServices.RequiredAttributeAttribute::.ctor(class [mscorlib]System.Type) = ( 01 00 FF 00 00 ) 
   .method public hidebysig specialname rtspecialname instance void .ctor() cil managed { ret }
@@ -5471,7 +6653,7 @@ class Program
             var refA = CompileIL(sourceA);
 
             var sourceB =
-@"using System;
+                @"using System;
 class B
 {
     static void F<T>(Func<T> f) { }
@@ -5480,18 +6662,23 @@ class B
         F(A () => default);
     }
 }";
-            var comp = CreateCompilation(sourceB, references: new[] { refA }, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyDiagnostics(
                 // (7,11): error CS0648: 'A' is a type not supported by the language
                 //         F(A () => default);
-                Diagnostic(ErrorCode.ERR_BogusType, "A").WithArguments("A").WithLocation(7, 11));
+                Diagnostic(ErrorCode.ERR_BogusType, "A").WithArguments("A").WithLocation(7, 11)
+            );
         }
 
         [Fact]
         public void VarReturnType_01()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -5515,14 +6702,15 @@ class Program
                 Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(8, 17),
                 // (8,17): error CS0825: The contextual keyword 'var' may only appear within a local variable declaration or in script code
                 //         d = ref var () => throw null;
-                Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(8, 17));
+                Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(8, 17)
+            );
         }
 
         [Fact]
         public void VarReturnType_02()
         {
             var source =
-@"using System;
+                @"using System;
 class var { }
 class Program
 {
@@ -5543,14 +6731,15 @@ class Program
                 Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(8, 13),
                 // (9,17): error CS8975: The contextual keyword 'var' cannot be used as an explicit lambda return type
                 //         d = ref var (ref var v) => ref v;
-                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(9, 17));
+                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(9, 17)
+            );
         }
 
         [Fact]
         public void VarReturnType_03()
         {
             var source =
-@"using System;
+                @"using System;
 class var { }
 class Program
 {
@@ -5572,14 +6761,15 @@ class Program
                 Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(7, 11),
                 // (8,15): error CS8975: The contextual keyword 'var' cannot be used as an explicit lambda return type
                 //         F(ref var (ref var v) => ref v);
-                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(8, 15));
+                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(8, 15)
+            );
         }
 
         [Fact]
         public void VarReturnType_04()
         {
             var source =
-@"using System;
+                @"using System;
 struct var
 {
     internal class other { }
@@ -5605,14 +6795,15 @@ class Program
                 Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(11, 11),
                 // (12,15): error CS8975: The contextual keyword 'var' cannot be used as an explicit lambda return type
                 //         F(ref var () => throw null);
-                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(12, 15));
+                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(12, 15)
+            );
         }
 
         [Fact]
         public void VarReturnType_05()
         {
             var source =
-@"using System;
+                @"using System;
 using var = System.Int32;
 class Program
 {
@@ -5629,14 +6820,15 @@ class Program
             comp.VerifyDiagnostics(
                 // (7,11): error CS8975: The contextual keyword 'var' cannot be used as an explicit lambda return type
                 //         F(var (var v) => v);
-                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(7, 11));
+                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(7, 11)
+            );
         }
 
         [Fact]
         public void VarReturnType_06()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void M<var>()
@@ -5652,14 +6844,15 @@ class Program
             comp.VerifyDiagnostics(
                 // (6,11): error CS8975: The contextual keyword 'var' cannot be used as an explicit lambda return type
                 //         F(var () => default);
-                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(6, 11));
+                Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(6, 11)
+            );
         }
 
         [Fact]
         public void VarReturnType_07()
         {
             var source =
-@"using System;
+                @"using System;
 static class var { }
 class Program
 {
@@ -5677,14 +6870,17 @@ class Program
                 Diagnostic(ErrorCode.ERR_LambdaExplicitReturnTypeVar, "var").WithLocation(7, 11),
                 // (7,11): error CS0722: 'var': static types cannot be used as return types
                 //         F(var () => default);
-                Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "var").WithArguments("var").WithLocation(7, 11));
+                Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "var")
+                    .WithArguments("var")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
         public void AsyncLambdaParameters_01()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 delegate Task D(ref string s);
 class Program
@@ -5702,14 +6898,15 @@ class Program
                 Diagnostic(ErrorCode.ERR_BadAsyncArgType, "s").WithLocation(8, 41),
                 // (9,34): error CS1988: Async methods cannot have ref, in or out parameters
                 //         D d2 = async (ref string s) => { _ = s.Length; await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_BadAsyncArgType, "s").WithLocation(9, 34));
+                Diagnostic(ErrorCode.ERR_BadAsyncArgType, "s").WithLocation(9, 34)
+            );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void AsyncLambdaParameters_02()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 delegate void D1(TypedReference r);
 delegate void D2(RuntimeArgumentHandle h);
@@ -5727,20 +6924,27 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,39): error CS4012: Parameters or locals of type 'TypedReference' cannot be declared in async methods or async lambda expressions.
                 //         D1 d1 = async (TypedReference r) => { await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "r").WithArguments("System.TypedReference").WithLocation(10, 39),
+                Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "r")
+                    .WithArguments("System.TypedReference")
+                    .WithLocation(10, 39),
                 // (11,46): error CS4012: Parameters or locals of type 'RuntimeArgumentHandle' cannot be declared in async methods or async lambda expressions.
                 //         D2 d2 = async (RuntimeArgumentHandle h) => { await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "h").WithArguments("System.RuntimeArgumentHandle").WithLocation(11, 46),
+                Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "h")
+                    .WithArguments("System.RuntimeArgumentHandle")
+                    .WithLocation(11, 46),
                 // (12,36): error CS4012: Parameters or locals of type 'ArgIterator' cannot be declared in async methods or async lambda expressions.
                 //         D3 d3 = async (ArgIterator i) => { await Task.Yield(); };
-                Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "i").WithArguments("System.ArgIterator").WithLocation(12, 36));
+                Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "i")
+                    .WithArguments("System.ArgIterator")
+                    .WithLocation(12, 36)
+            );
         }
 
         [Fact]
         public void BestType_01()
         {
             var source =
-@"using System;
+                @"using System;
 class A { }
 class B1 : A { }
 class B2 : A { }
@@ -5761,10 +6965,14 @@ class Program
             {
                 // (13,9): error CS0411: The type arguments for method 'Program.F<T>(Func<bool, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F((bool b) => { if (b) return new B1(); return new B2(); });
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(System.Func<bool, T>)").WithLocation(13, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(System.Func<bool, T>)")
+                    .WithLocation(13, 9),
                 // (14,9): error CS0411: The type arguments for method 'Program.F<T>(Func<bool, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F((bool b) => { if (b) return new C1(); return new C2(); });
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(System.Func<bool, T>)").WithLocation(14, 9)
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(System.Func<bool, T>)")
+                    .WithLocation(14, 9)
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -5779,7 +6987,7 @@ class Program
         public void BestType_02()
         {
             var source =
-@"using System;
+                @"using System;
 class A { }
 class B1 : A { }
 class B2 : A { }
@@ -5799,14 +7007,22 @@ class Program
             comp.VerifyDiagnostics(
                 // (13,11): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         F(A (bool b) => { if (b) return new B1(); return new B2(); });
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "A").WithArguments("lambda return type", "10.0").WithLocation(13, 11),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "A")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(13, 11),
                 // (14,11): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         F(I (bool b) => { if (b) return new C1(); return new C2(); });
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "I").WithArguments("lambda return type", "10.0").WithLocation(14, 11));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "I")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(14, 11)
+            );
 
-            CompileAndVerify(source, parseOptions: TestOptions.RegularPreview, expectedOutput:
-@"A
-I");
+            CompileAndVerify(
+                source,
+                parseOptions: TestOptions.RegularPreview,
+                expectedOutput: @"A
+I"
+            );
         }
 
         [WorkItem(54257, "https://github.com/dotnet/roslyn/issues/54257")]
@@ -5814,7 +7030,7 @@ I");
         public void BestType_03()
         {
             var source =
-@"using System;
+                @"using System;
 class A { }
 class B1 : A { }
 class B2 : A { }
@@ -5833,44 +7049,66 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,11): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         F(B2 () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B2").WithArguments("lambda return type", "10.0").WithLocation(10, 11),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B2")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(10, 11),
                 // (10,26): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         F(B2 () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B2").WithArguments("lambda return type", "10.0").WithLocation(10, 26),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B2")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(10, 26),
                 // (11,9): error CS0411: The type arguments for method 'Program.F<T>(Func<T>, Func<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F(A () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(System.Func<T>, System.Func<T>)").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(System.Func<T>, System.Func<T>)")
+                    .WithLocation(11, 9),
                 // (11,11): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         F(A () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "A").WithArguments("lambda return type", "10.0").WithLocation(11, 11),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "A")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(11, 11),
                 // (11,25): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         F(A () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B2").WithArguments("lambda return type", "10.0").WithLocation(11, 25),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B2")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(11, 25),
                 // (12,9): error CS0411: The type arguments for method 'Program.F<T>(Func<T>, Func<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F(B1 () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(System.Func<T>, System.Func<T>)").WithLocation(12, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(System.Func<T>, System.Func<T>)")
+                    .WithLocation(12, 9),
                 // (12,11): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         F(B1 () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B1").WithArguments("lambda return type", "10.0").WithLocation(12, 11),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B1")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(12, 11),
                 // (12,26): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         F(B1 () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B2").WithArguments("lambda return type", "10.0").WithLocation(12, 26));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "B2")
+                    .WithArguments("lambda return type", "10.0")
+                    .WithLocation(12, 26)
+            );
 
             comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyDiagnostics(
                 // (11,9): error CS0411: The type arguments for method 'Program.F<T>(Func<T>, Func<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F(A () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(System.Func<T>, System.Func<T>)").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(System.Func<T>, System.Func<T>)")
+                    .WithLocation(11, 9),
                 // (12,9): error CS0411: The type arguments for method 'Program.F<T>(Func<T>, Func<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F(B1 () => null, B2 () => null);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(System.Func<T>, System.Func<T>)").WithLocation(12, 9));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(System.Func<T>, System.Func<T>)")
+                    .WithLocation(12, 9)
+            );
         }
 
         [Fact]
         public void TypeInference_01()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void F<T>(Func<object, T> f)
@@ -5882,7 +7120,11 @@ class Program
         F(long (o) => 1);
     }
 }";
-            CompileAndVerify(source, parseOptions: TestOptions.RegularPreview, expectedOutput: @"System.Int64");
+            CompileAndVerify(
+                source,
+                parseOptions: TestOptions.RegularPreview,
+                expectedOutput: @"System.Int64"
+            );
         }
 
         [WorkItem(54257, "https://github.com/dotnet/roslyn/issues/54257")]
@@ -5890,7 +7132,7 @@ class Program
         public void TypeInference_02()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void F<T>(Func<T, T> f)
@@ -5912,7 +7154,7 @@ class Program
         public void SecurityCritical_AsyncLambda()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Security;
 using System.Threading.Tasks;
 [SecurityCritical]
@@ -5933,7 +7175,7 @@ class Program
         public void SecurityCritical_AsyncLambda_AttributeArgument()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Security;
 using System.Threading.Tasks;
 class A : Attribute
@@ -5950,10 +7192,15 @@ class Program
             comp.VerifyDiagnostics(
                 // (9,4): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 // [A(F(async () => await Task.Yield()))]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "F(async () => await Task.Yield())").WithLocation(9, 4));
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "F(async () => await Task.Yield())")
+                    .WithLocation(9, 4)
+            );
         }
 
-        private static LambdaSymbol GetLambdaSymbol(SemanticModel model, LambdaExpressionSyntax syntax)
+        private static LambdaSymbol GetLambdaSymbol(
+            SemanticModel model,
+            LambdaExpressionSyntax syntax
+        )
         {
             return model.GetSymbolInfo(syntax).Symbol.GetSymbol<LambdaSymbol>();
         }
@@ -5963,7 +7210,7 @@ class Program
         public void WithAttributesToExpressionTree_01()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -5975,8 +7222,9 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,32): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = [A] (x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[A] (x) => x").WithLocation(5, 32)
-                );
+                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[A] (x) => x")
+                    .WithLocation(5, 32)
+            );
         }
 
         [Fact]
@@ -5984,7 +7232,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_02()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -5997,8 +7245,9 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,32): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = [A][A] (x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[A][A] (x) => x").WithLocation(5, 32)
-                );
+                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[A][A] (x) => x")
+                    .WithLocation(5, 32)
+            );
         }
 
         [Fact]
@@ -6006,7 +7255,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_03()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -6018,8 +7267,9 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,37): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = ([A] x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "x").WithLocation(5, 37)
-                );
+                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "x")
+                    .WithLocation(5, 37)
+            );
         }
 
         [Fact]
@@ -6027,7 +7277,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_04()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -6040,8 +7290,9 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,40): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = ([A][A] x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "x").WithLocation(5, 40)
-                );
+                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "x")
+                    .WithLocation(5, 40)
+            );
         }
 
         [Fact]
@@ -6049,7 +7300,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_05()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -6061,8 +7312,9 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,42): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int, int>> e = ([A] x, [A] y) => x + y;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "x").WithLocation(5, 42)
-                );
+                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "x")
+                    .WithLocation(5, 42)
+            );
         }
 
         [Fact]
@@ -6070,7 +7322,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_06()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -6082,8 +7334,12 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,32): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = [return: A] (x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[return: A] (x) => x").WithLocation(5, 32)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_LambdaWithAttributesToExpressionTree,
+                        "[return: A] (x) => x"
+                    )
+                    .WithLocation(5, 32)
+            );
         }
 
         [Fact]
@@ -6091,7 +7347,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_07()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -6104,8 +7360,12 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,32): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = [return: A][return: A] (x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[return: A][return: A] (x) => x").WithLocation(5, 32)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_LambdaWithAttributesToExpressionTree,
+                        "[return: A][return: A] (x) => x"
+                    )
+                    .WithLocation(5, 32)
+            );
         }
 
         [Fact]
@@ -6113,7 +7373,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_08()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -6125,8 +7385,12 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,32): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = [A][return: A] (x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[A][return: A] (x) => x").WithLocation(5, 32)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_LambdaWithAttributesToExpressionTree,
+                        "[A][return: A] (x) => x"
+                    )
+                    .WithLocation(5, 32)
+            );
         }
 
         [Fact]
@@ -6134,7 +7398,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_09()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -6146,8 +7410,9 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,32): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = [A] ([A] x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[A] ([A] x) => x").WithLocation(5, 32)
-                );
+                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[A] ([A] x) => x")
+                    .WithLocation(5, 32)
+            );
         }
 
         [Fact]
@@ -6155,7 +7420,7 @@ class A : Attribute { }
         public void WithAttributesToExpressionTree_10()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -6167,8 +7432,12 @@ class A : Attribute { }
             comp.VerifyDiagnostics(
                 // (5,32): error CS8972: A lambda expression with attributes cannot be converted to an expression tree
                 // Expression<Func<int, int>> e = [return: A] ([A] x) => x;
-                Diagnostic(ErrorCode.ERR_LambdaWithAttributesToExpressionTree, "[return: A] ([A] x) => x").WithLocation(5, 32)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_LambdaWithAttributesToExpressionTree,
+                        "[return: A] ([A] x) => x"
+                    )
+                    .WithLocation(5, 32)
+            );
         }
     }
 }

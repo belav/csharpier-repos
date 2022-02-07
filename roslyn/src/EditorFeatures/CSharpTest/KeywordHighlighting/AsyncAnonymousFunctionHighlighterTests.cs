@@ -14,14 +14,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 {
     public class AsyncAnonymousFunctionHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(AsyncAwaitHighlighter);
+        internal override Type GetHighlighterType() => typeof(AsyncAwaitHighlighter);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestSimpleLambda()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -43,14 +42,15 @@ class AsyncExample
         result = await resultTask;
         result = await lambda(0);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestParenthesizedLambda()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -72,14 +72,15 @@ class AsyncExample
         result = await resultTask;
         result = await lambda();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestAnonymousMethod()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -101,7 +102,8 @@ class AsyncExample
         result = await resultTask;
         result = await lambda();
     }
-}");
+}"
+            );
         }
     }
 }

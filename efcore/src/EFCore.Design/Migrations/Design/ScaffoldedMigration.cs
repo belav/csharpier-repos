@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string migrationSubNamespace,
             string snapshotCode,
             string snapshotName,
-            string snapshotSubNamespace)
+            string snapshotSubNamespace
+        )
         {
             FileExtension = fileExtension;
             PreviousMigrationId = previousMigrationId;

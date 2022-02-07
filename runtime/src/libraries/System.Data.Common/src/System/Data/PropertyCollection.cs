@@ -11,16 +11,15 @@ namespace System.Data
     /// <see cref='System.Data.DataSet'/>, or <see cref='System.Data.DataTable'/>.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class PropertyCollection : Hashtable, ICloneable
     {
-        public PropertyCollection() : base()
-        {
-        }
+        public PropertyCollection() : base() { }
 
-        protected PropertyCollection(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected PropertyCollection(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public override object Clone()
         {

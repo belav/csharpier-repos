@@ -8,23 +8,20 @@ namespace Microsoft.EntityFrameworkCore
 {
     public class TwoDatabasesSqlServerTest : TwoDatabasesTestBase, IClassFixture<SqlServerFixture>
     {
-        public TwoDatabasesSqlServerTest(SqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+        public TwoDatabasesSqlServerTest(SqlServerFixture fixture) : base(fixture) { }
 
-        protected new SqlServerFixture Fixture
-            => (SqlServerFixture)base.Fixture;
+        protected new SqlServerFixture Fixture => (SqlServerFixture)base.Fixture;
 
         protected override DbContextOptionsBuilder CreateTestOptions(
             DbContextOptionsBuilder optionsBuilder,
-            bool withConnectionString = false)
-            => withConnectionString
+            bool withConnectionString = false
+        ) =>
+            withConnectionString
                 ? optionsBuilder.UseSqlServer(DummyConnectionString)
                 : optionsBuilder.UseSqlServer();
 
-        protected override TwoDatabasesWithDataContext CreateBackingContext(string databaseName)
-            => new(Fixture.CreateOptions(SqlServerTestStore.Create(databaseName)));
+        protected override TwoDatabasesWithDataContext CreateBackingContext(string databaseName) =>
+            new(Fixture.CreateOptions(SqlServerTestStore.Create(databaseName)));
 
         protected override string DummyConnectionString { get; } = "Database=DoesNotExist";
     }

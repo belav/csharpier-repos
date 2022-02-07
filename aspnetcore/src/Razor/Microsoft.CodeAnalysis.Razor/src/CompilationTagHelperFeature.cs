@@ -18,7 +18,10 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
         var results = new List<TagHelperDescriptor>();
 
         var context = TagHelperDescriptorProviderContext.Create(results);
-        var compilation = CSharpCompilation.Create("__TagHelpers", references: _referenceFeature.References);
+        var compilation = CSharpCompilation.Create(
+            "__TagHelpers",
+            references: _referenceFeature.References
+        );
         if (IsValidCompilation(compilation))
         {
             context.SetCompilation(compilation);
@@ -35,7 +38,10 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
     protected override void OnInitialized()
     {
         _referenceFeature = Engine.Features.OfType<IMetadataReferenceFeature>().FirstOrDefault();
-        _providers = Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
+        _providers = Engine.Features
+            .OfType<ITagHelperDescriptorProvider>()
+            .OrderBy(f => f.Order)
+            .ToArray();
     }
 
     internal static bool IsValidCompilation(Compilation compilation)

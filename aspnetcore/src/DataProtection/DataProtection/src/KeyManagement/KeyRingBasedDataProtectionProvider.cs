@@ -12,7 +12,10 @@ internal sealed unsafe class KeyRingBasedDataProtectionProvider : IDataProtectio
     private readonly IKeyRingProvider _keyRingProvider;
     private readonly ILogger _logger;
 
-    public KeyRingBasedDataProtectionProvider(IKeyRingProvider keyRingProvider, ILoggerFactory loggerFactory)
+    public KeyRingBasedDataProtectionProvider(
+        IKeyRingProvider keyRingProvider,
+        ILoggerFactory loggerFactory
+    )
     {
         _keyRingProvider = keyRingProvider;
         _logger = loggerFactory.CreateLogger<KeyRingBasedDataProtector>(); // note: for protector (not provider!) type
@@ -29,6 +32,7 @@ internal sealed unsafe class KeyRingBasedDataProtectionProvider : IDataProtectio
             logger: _logger,
             keyRingProvider: _keyRingProvider,
             originalPurposes: null,
-            newPurpose: purpose);
+            newPurpose: purpose
+        );
     }
 }

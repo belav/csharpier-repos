@@ -12,10 +12,12 @@ namespace MS.Internal.Xml.XPath
         {
             base.count = -1;
         }
+
         protected ResetableIterator(ResetableIterator other)
         {
             base.count = other.count;
         }
+
         protected void ResetCount()
         {
             base.count = -1;

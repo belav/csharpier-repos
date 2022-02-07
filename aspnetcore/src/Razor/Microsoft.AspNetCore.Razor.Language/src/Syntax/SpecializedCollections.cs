@@ -40,24 +40,18 @@ internal static class SpecializedCollections
         {
             public static new readonly IEnumerator<T> Instance = new Enumerator<T>();
 
-            protected Enumerator()
-            {
-            }
+            protected Enumerator() { }
 
             public new T Current => throw new InvalidOperationException();
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         internal class Enumerator : IEnumerator
         {
             public static readonly IEnumerator Instance = new Enumerator();
 
-            protected Enumerator()
-            {
-            }
+            protected Enumerator() { }
 
             public object Current => throw new InvalidOperationException();
 
@@ -95,9 +89,7 @@ internal static class SpecializedCollections
         {
             public static readonly ICollection<T> Instance = new Collection<T>();
 
-            protected Collection()
-            {
-            }
+            protected Collection() { }
 
             public void Add(T item)
             {
@@ -114,9 +106,7 @@ internal static class SpecializedCollections
                 return false;
             }
 
-            public void CopyTo(T[] array, int arrayIndex)
-            {
-            }
+            public void CopyTo(T[] array, int arrayIndex) { }
 
             public int Count => 0;
 
@@ -132,9 +122,7 @@ internal static class SpecializedCollections
         {
             public static new readonly List<T> Instance = new List<T>();
 
-            protected List()
-            {
-            }
+            protected List() { }
 
             public int IndexOf(T item)
             {
@@ -153,15 +141,8 @@ internal static class SpecializedCollections
 
             public T this[int index]
             {
-                get
-                {
-                    throw new ArgumentOutOfRangeException(nameof(index));
-                }
-
-                set
-                {
-                    throw new NotSupportedException();
-                }
+                get { throw new ArgumentOutOfRangeException(nameof(index)); }
+                set { throw new NotSupportedException(); }
             }
         }
     }

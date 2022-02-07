@@ -26,6 +26,7 @@ class test
         // Create and initialize test log object
         testLog = new TestUtil.TestLog(expectedOut);
     }
+
     public static int Main()
     {
         //Start recording
@@ -69,7 +70,5 @@ class test
         testLog.StopRecording();
 
         return testLog.VerifyOutput();
-
-
     }
 }

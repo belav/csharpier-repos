@@ -10,23 +10,28 @@ namespace ShiftTest
     {
         public int clm_data = 0x7FFFFFFF;
     }
+
     public struct VT
     {
         public int vtm_data;
     }
+
     public class int32Test
     {
         private static int s_data = 0x7FFFFFFF;
+
         public static int f1(int arg_data)
         {
             arg_data >>= 4;
             return arg_data;
         }
+
         public static int f2(int arg_data)
         {
             arg_data <<= 4;
             return arg_data;
         }
+
         public static int Main()
         {
             int loc_data = 0x7FFFFFFF;

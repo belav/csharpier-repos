@@ -15,17 +15,17 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class NullReferenceException : SystemException
     {
-        public NullReferenceException()
-            : base(SR.Arg_NullReferenceException)
+        public NullReferenceException() : base(SR.Arg_NullReferenceException)
         {
             HResult = HResults.E_POINTER;
         }
 
-        public NullReferenceException(string? message)
-            : base(message)
+        public NullReferenceException(string? message) : base(message)
         {
             HResult = HResults.E_POINTER;
         }
@@ -36,8 +36,7 @@ namespace System
             HResult = HResults.E_POINTER;
         }
 
-        protected NullReferenceException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected NullReferenceException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

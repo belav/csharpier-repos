@@ -14,7 +14,8 @@ public static class FunctionsDirective
         builder =>
         {
             builder.Description = Resources.FunctionsDirective_Description;
-        });
+        }
+    );
 
     public static void Register(RazorProjectEngineBuilder builder)
     {

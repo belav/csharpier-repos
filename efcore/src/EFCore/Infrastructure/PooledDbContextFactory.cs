@@ -34,22 +34,27 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public PooledDbContextFactory(IDbContextPool<TContext> pool)
-            => _pool = pool;
+        public PooledDbContextFactory(IDbContextPool<TContext> pool) => _pool = pool;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PooledDbContextFactory{TContext}" /> class.
         /// </summary>
         /// <param name="options">The options to use for contexts produced by this factory.</param>
         /// <param name="poolSize">Sets the maximum number of instances retained by the pool. Defaults to 1024.</param>
-        public PooledDbContextFactory(DbContextOptions<TContext> options, int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
+        public PooledDbContextFactory(
+            DbContextOptions<TContext> options,
+            int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+        )
         {
             var optionsBuilder = new DbContextOptionsBuilder<TContext>(options);
 
-            var extension = (options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension())
-                .WithMaxPoolSize(poolSize);
+            var extension = (
+                options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()
+            ).WithMaxPoolSize(poolSize);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                extension
+            );
 
             _pool = new DbContextPool<TContext>(optionsBuilder.Options);
         }
@@ -64,7 +69,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         }
 
         /// <inheritdoc />
-        public virtual async Task<TContext> CreateDbContextAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<TContext> CreateDbContextAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             var lease = new DbContextLease(_pool, standalone: true);
             await lease.Context.SetLeaseAsync(lease, cancellationToken);

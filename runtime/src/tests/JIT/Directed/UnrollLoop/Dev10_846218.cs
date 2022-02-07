@@ -23,6 +23,7 @@ namespace Test
     internal class DoSomething : IDoSomething
     {
         public string output = "";
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void Do(IntVec o)
         {
@@ -55,9 +56,12 @@ namespace Test
                 Console.WriteLine("PASS");
                 return 100;
             }
-            Console.WriteLine("Expected :{0} but found :{1}", "0 0,0 1,1 0,1 1,", doSomething.output);
+            Console.WriteLine(
+                "Expected :{0} but found :{1}",
+                "0 0,0 1,1 0,1 1,",
+                doSomething.output
+            );
             return 101;
         }
     }
 }
-

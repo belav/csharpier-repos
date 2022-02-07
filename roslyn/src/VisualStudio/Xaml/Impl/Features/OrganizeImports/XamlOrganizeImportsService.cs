@@ -16,7 +16,10 @@ using Microsoft.VisualStudio.LanguageServices.Xaml;
 
 namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
 {
-    [ExportLanguageService(typeof(IOrganizeImportsService), StringConstants.XamlLanguageName), Shared]
+    [
+        ExportLanguageService(typeof(IOrganizeImportsService), StringConstants.XamlLanguageName),
+        Shared
+    ]
     internal partial class XamlOrganizeImportsService : IOrganizeImportsService
     {
         private readonly IXamlOrganizeNamespacesService _organizeService;
@@ -28,27 +31,28 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
             _organizeService = organizeService;
         }
 
-        public async Task<Document> OrganizeImportsAsync(Document document, CancellationToken cancellationToken)
+        public async Task<Document> OrganizeImportsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var placeSystemNamespaceFirst = options.GetOption(GenerationOptions.PlaceSystemNamespaceFirst);
-            return await _organizeService.OrganizeNamespacesAsync(document, placeSystemNamespaceFirst, cancellationToken).ConfigureAwait(false) ?? document;
+            var placeSystemNamespaceFirst = options.GetOption(
+                GenerationOptions.PlaceSystemNamespaceFirst
+            );
+            return await _organizeService
+                    .OrganizeNamespacesAsync(document, placeSystemNamespaceFirst, cancellationToken)
+                    .ConfigureAwait(false) ?? document;
         }
 
         public string SortImportsDisplayStringWithAccelerator
         {
-            get
-            {
-                return Resources.Sort_Namespaces;
-            }
+            get { return Resources.Sort_Namespaces; }
         }
 
         public string SortAndRemoveUnusedImportsDisplayStringWithAccelerator
         {
-            get
-            {
-                return Resources.RemoveAndSortNamespacesWithAccelerator;
-            }
+            get { return Resources.RemoveAndSortNamespacesWithAccelerator; }
         }
     }
 }

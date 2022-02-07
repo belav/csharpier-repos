@@ -9,7 +9,11 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Contains common arguments to Symbol.DecodeWellKnownAttribute method in both the language compilers.
     /// </summary>
-    internal struct DecodeWellKnownAttributeArguments<TAttributeSyntax, TAttributeData, TAttributeLocation>
+    internal struct DecodeWellKnownAttributeArguments<
+        TAttributeSyntax,
+        TAttributeData,
+        TAttributeLocation
+    >
         where TAttributeSyntax : SyntaxNode
         where TAttributeData : AttributeData
     {
@@ -68,7 +72,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Syntax of the attribute to decode. Might be null when the attribute information is not coming 
+        /// Syntax of the attribute to decode. Might be null when the attribute information is not coming
         /// from syntax. For example, an assembly attribute propagated from added module to the resulting assembly.
         /// </summary>
         public TAttributeSyntax? AttributeSyntaxOpt { get; set; }

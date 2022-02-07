@@ -31,7 +31,11 @@ internal class RequestFormLimitsFilter : IAuthorizationFilter, IRequestFormLimit
         var effectivePolicy = context.FindEffectivePolicy<IRequestFormLimitsPolicy>();
         if (effectivePolicy != null && effectivePolicy != this)
         {
-            _logger.NotMostEffectiveFilter(GetType(), effectivePolicy.GetType(), typeof(IRequestFormLimitsPolicy));
+            _logger.NotMostEffectiveFilter(
+                GetType(),
+                effectivePolicy.GetType(),
+                typeof(IRequestFormLimitsPolicy)
+            );
             return;
         }
 

@@ -13,7 +13,8 @@ namespace XPathTests.XPathExpressionTests
 {
     public class EvaluateTests
     {
-        private const string xml = @"<DocumentElement>
+        private const string xml =
+            @"<DocumentElement>
     <Level1 Data='0'>
         <Name>first</Name>
         <Level2 Data='1'></Level2>
@@ -51,7 +52,6 @@ namespace XPathTests.XPathExpressionTests
             Assert.Equal(expected, convertedResult);
         }
 
-
         private static void EvaluateTestsBoth<T>(string toEvaluate, T expected)
         {
             EvaluateTestNonCompiled(toEvaluate, expected);
@@ -60,7 +60,9 @@ namespace XPathTests.XPathExpressionTests
 
         private static void EvaluateTestsErrors(string toEvaluate, string exceptionString)
         {
-            Assert.Throws<XPathException>(() => EvaluateTestCompiledXPathExpression<object>(toEvaluate, null));
+            Assert.Throws<XPathException>(
+                () => EvaluateTestCompiledXPathExpression<object>(toEvaluate, null)
+            );
             Assert.Throws<XPathException>(() => EvaluateTestNonCompiled<object>(toEvaluate, null));
         }
 
@@ -114,7 +116,6 @@ namespace XPathTests.XPathExpressionTests
             EvaluateTestsErrors("string(1, 2)", "Xp_InvalidNumArgs");
         }
 
-
         private static void EvaluateTestNonCompiledNodeset(string toEvaluate, string[] expected)
         {
             var navigator = Utils.CreateNavigator(xml);
@@ -147,8 +148,14 @@ namespace XPathTests.XPathExpressionTests
         [Fact]
         public static void Variation_7()
         {
-            EvaluateTestCompiledNodeset("DocumentElement/child::*", new[] { "first", "second", "third", "last" });
-            EvaluateTestNonCompiledNodeset("DocumentElement/child::*", new[] { "first", "second", "third", "last" });
+            EvaluateTestCompiledNodeset(
+                "DocumentElement/child::*",
+                new[] { "first", "second", "third", "last" }
+            );
+            EvaluateTestNonCompiledNodeset(
+                "DocumentElement/child::*",
+                new[] { "first", "second", "third", "last" }
+            );
         }
 
         /// <summary>
@@ -230,7 +237,9 @@ namespace XPathTests.XPathExpressionTests
         [Fact]
         public static void EvaluateTextNode_4()
         {
-            XElement element = XElement.Parse("<root>1<element>2</element><element>3</element>4</root>");
+            XElement element = XElement.Parse(
+                "<root>1<element>2</element><element>3</element>4</root>"
+            );
             IEnumerable result = (IEnumerable)element.XPathEvaluate("/element/text()[1]");
             Assert.Equal(2, result.Cast<XText>().Count());
             Assert.Equal("2", result.Cast<XText>().First().ToString());

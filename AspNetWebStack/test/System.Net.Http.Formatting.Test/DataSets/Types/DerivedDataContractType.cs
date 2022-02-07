@@ -16,12 +16,9 @@ namespace System.Net.Http.Formatting.DataSets.Types
     {
         private WcfPocoType reference;
 
-        public DerivedDataContractType()
-        {
-        }
+        public DerivedDataContractType() { }
 
-        public DerivedDataContractType(int id, string name, WcfPocoType reference)
-            : base(id, name)
+        public DerivedDataContractType(int id, string name, WcfPocoType reference) : base(id, name)
         {
             this.reference = reference;
         }
@@ -29,11 +26,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
         [DataMember]
         public WcfPocoType Reference
         {
-            get
-            {
-                return this.reference;
-            }
-
+            get { return this.reference; }
             set
             {
                 this.ReferenceSet = true;
@@ -46,17 +39,25 @@ namespace System.Net.Http.Formatting.DataSets.Types
 
         public static new IEnumerable<DerivedDataContractType> GetTestData()
         {
-            return new DerivedDataContractType[] { 
-                new DerivedDataContractType(), 
-                new DerivedDataContractType(1, "SomeName", new WcfPocoType(2, "SomeOtherName")) };
+            return new DerivedDataContractType[]
+            {
+                new DerivedDataContractType(),
+                new DerivedDataContractType(1, "SomeName", new WcfPocoType(2, "SomeOtherName"))
+            };
         }
 
         public static IEnumerable<DerivedDataContractType> GetKnownTypeTestData()
         {
-            return new DerivedDataContractType[] { 
-                new DerivedDataContractType(), 
-                new DerivedDataContractType(1, "SomeName", null), 
-                new DerivedDataContractType(1, "SomeName", new DerivedWcfPocoType(2, "SomeOtherName", null))};
+            return new DerivedDataContractType[]
+            {
+                new DerivedDataContractType(),
+                new DerivedDataContractType(1, "SomeName", null),
+                new DerivedDataContractType(
+                    1,
+                    "SomeName",
+                    new DerivedWcfPocoType(2, "SomeOtherName", null)
+                )
+            };
         }
     }
 }

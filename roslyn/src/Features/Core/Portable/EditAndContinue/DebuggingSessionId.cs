@@ -14,25 +14,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         [DataMember(Order = 0)]
         private readonly int _id;
 
-        public DebuggingSessionId(int id)
-            => _id = id;
+        public DebuggingSessionId(int id) => _id = id;
 
-        public override bool Equals(object? obj)
-            => obj is DebuggingSessionId id && Equals(id);
+        public override bool Equals(object? obj) => obj is DebuggingSessionId id && Equals(id);
 
-        public bool Equals(DebuggingSessionId other)
-            => _id == other._id;
+        public bool Equals(DebuggingSessionId other) => _id == other._id;
 
-        public override int GetHashCode()
-            => _id;
+        public override int GetHashCode() => _id;
 
-        public static bool operator ==(DebuggingSessionId left, DebuggingSessionId right)
-            => left.Equals(right);
+        public static bool operator ==(DebuggingSessionId left, DebuggingSessionId right) =>
+            left.Equals(right);
 
-        public static bool operator !=(DebuggingSessionId left, DebuggingSessionId right)
-            => !(left == right);
+        public static bool operator !=(DebuggingSessionId left, DebuggingSessionId right) =>
+            !(left == right);
 
-        public override string ToString()
-            => _id.ToString();
+        public override string ToString() => _id.ToString();
     }
 }

@@ -30,17 +30,17 @@ public class ChangeCookieActionTests
 
         var cookieHeaders = context.HttpContext.Response.Headers.SetCookie;
         var header = Assert.Single(cookieHeaders);
-        Assert.Equal($"Cookie=Chocolate%20Chip; expires={HeaderUtilities.FormatDate(now.AddMinutes(1440))}; domain=contoso.com; path=/recipes; secure; httponly", header);
+        Assert.Equal(
+            $"Cookie=Chocolate%20Chip; expires={HeaderUtilities.FormatDate(now.AddMinutes(1440))}; domain=contoso.com; path=/recipes; secure; httponly",
+            header
+        );
     }
 
     [Fact]
     public void ZeroLifetime()
     {
         var context = new RewriteContext { HttpContext = new DefaultHttpContext() };
-        var action = new ChangeCookieAction("Cookie")
-        {
-            Value = "Chocolate Chip",
-        };
+        var action = new ChangeCookieAction("Cookie") { Value = "Chocolate Chip", };
 
         action.ApplyAction(context, null, null);
 
@@ -48,7 +48,6 @@ public class ChangeCookieActionTests
         var header = Assert.Single(cookieHeaders);
         Assert.Equal($"Cookie=Chocolate%20Chip", header);
     }
-
 
     [Fact]
     public void UnsetCookie()

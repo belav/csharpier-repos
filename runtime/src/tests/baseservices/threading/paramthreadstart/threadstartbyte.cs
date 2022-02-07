@@ -10,7 +10,7 @@ class ThreadStartByte
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartByte <int>|min|max\n");
             return -1;
@@ -18,10 +18,10 @@ class ThreadStartByte
 
         byte b = 0x0;
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             b = Byte.MaxValue;
-        else if(args[0].ToLower() == "min")
-            b = Byte.MinValue;       
+        else if (args[0].ToLower() == "min")
+            b = Byte.MinValue;
         else
             b = Convert.ToByte(args[0]);
 

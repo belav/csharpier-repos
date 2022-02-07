@@ -69,7 +69,6 @@ namespace System.Drawing.Printing
         /// A paper cassette.
         /// </summary>
         Cassette = SafeNativeMethods.DMBIN_CASSETTE,
-
         FormSource = SafeNativeMethods.DMBIN_FORMSOURCE,
 
         /// <summary>

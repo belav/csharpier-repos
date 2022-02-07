@@ -6,7 +6,6 @@ using System.Speech.Synthesis.TtsEngine;
 
 namespace System.Speech.Internal.Synthesis
 {
-
     internal class SpeechSeg
     {
         #region Constructors
@@ -23,34 +22,22 @@ namespace System.Speech.Internal.Synthesis
 
         internal List<TextFragment> FragmentList
         {
-            get
-            {
-                return _textFragments;
-            }
+            get { return _textFragments; }
         }
 
         internal AudioData Audio
         {
-            get
-            {
-                return _audio;
-            }
+            get { return _audio; }
         }
 
         internal TTSVoice Voice
         {
-            get
-            {
-                return _voice;
-            }
+            get { return _voice; }
         }
 
         internal bool IsText
         {
-            get
-            {
-                return _audio == null;
-            }
+            get { return _audio == null; }
         }
 
         #endregion

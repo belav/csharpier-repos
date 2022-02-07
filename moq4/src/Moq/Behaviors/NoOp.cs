@@ -3,16 +3,12 @@
 
 namespace Moq.Behaviors
 {
-	internal sealed class NoOp : Behavior
-	{
-		public static readonly NoOp Instance = new NoOp();
+    internal sealed class NoOp : Behavior
+    {
+        public static readonly NoOp Instance = new NoOp();
 
-		private NoOp()
-		{
-		}
+        private NoOp() { }
 
-		public override void Execute(Invocation invocation)
-		{
-		}
-	}
+        public override void Execute(Invocation invocation) { }
+    }
 }

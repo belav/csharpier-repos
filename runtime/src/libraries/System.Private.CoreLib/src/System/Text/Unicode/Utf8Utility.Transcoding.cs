@@ -20,18 +20,35 @@ namespace System.Text.Unicode
         // On method return, pInputBufferRemaining and pOutputBufferRemaining will both point to where
         // the next byte would have been consumed from / the next char would have been written to.
         // inputLength in bytes, outputCharsRemaining in chars.
-        public static OperationStatus TranscodeToUtf16(byte* pInputBuffer, int inputLength, char* pOutputBuffer, int outputCharsRemaining, out byte* pInputBufferRemaining, out char* pOutputBufferRemaining)
+        public static OperationStatus TranscodeToUtf16(
+            byte* pInputBuffer,
+            int inputLength,
+            char* pOutputBuffer,
+            int outputCharsRemaining,
+            out byte* pInputBufferRemaining,
+            out char* pOutputBufferRemaining
+        )
         {
             Debug.Assert(inputLength >= 0, "Input length must not be negative.");
-            Debug.Assert(pInputBuffer != null || inputLength == 0, "Input length must be zero if input buffer pointer is null.");
+            Debug.Assert(
+                pInputBuffer != null || inputLength == 0,
+                "Input length must be zero if input buffer pointer is null."
+            );
 
             Debug.Assert(outputCharsRemaining >= 0, "Destination length must not be negative.");
-            Debug.Assert(pOutputBuffer != null || outputCharsRemaining == 0, "Destination length must be zero if destination buffer pointer is null.");
+            Debug.Assert(
+                pOutputBuffer != null || outputCharsRemaining == 0,
+                "Destination length must be zero if destination buffer pointer is null."
+            );
 
             // First, try vectorized conversion.
 
             {
-                nuint numElementsConverted = ASCIIUtility.WidenAsciiToUtf16(pInputBuffer, pOutputBuffer, (uint)Math.Min(inputLength, outputCharsRemaining));
+                nuint numElementsConverted = ASCIIUtility.WidenAsciiToUtf16(
+                    pInputBuffer,
+                    pOutputBuffer,
+                    (uint)Math.Min(inputLength, outputCharsRemaining)
+                );
 
                 pInputBuffer += numElementsConverted;
                 pOutputBuffer += numElementsConverted;
@@ -70,10 +87,13 @@ namespace System.Text.Unicode
 
                 uint thisDWord = Unsafe.ReadUnaligned<uint>(pInputBuffer);
 
-            AfterReadDWord:
+                AfterReadDWord:
 
 #if DEBUG
-                Debug.Assert(pLastBufferPosProcessed < pInputBuffer, "Algorithm should've made forward progress since last read.");
+                Debug.Assert(
+                    pLastBufferPosProcessed < pInputBuffer,
+                    "Algorithm should've made forward progress since last read."
+                );
                 pLastBufferPosProcessed = pInputBuffer;
 #endif
                 // First, check for the common case of all-ASCII bytes.
@@ -87,7 +107,10 @@ namespace System.Text.Unicode
                         goto ProcessRemainingBytesSlow; // running out of space, but may be able to write some data
                     }
 
-                    ASCIIUtility.WidenFourAsciiBytesToUtf16AndWriteToBuffer(ref *pOutputBuffer, thisDWord);
+                    ASCIIUtility.WidenFourAsciiBytesToUtf16AndWriteToBuffer(
+                        ref *pOutputBuffer,
+                        thisDWord
+                    );
                     pInputBuffer += 4;
                     pOutputBuffer += 4;
                     outputCharsRemaining -= 4;
@@ -95,8 +118,14 @@ namespace System.Text.Unicode
                     // If we saw a sequence of all ASCII, there's a good chance a significant amount of following data is also ASCII.
                     // Below is basically unrolled loops with poor man's vectorization.
 
-                    uint remainingInputBytes = (uint)(void*)Unsafe.ByteOffset(ref *pInputBuffer, ref *pFinalPosWhereCanReadDWordFromInputBuffer) + 4;
-                    uint maxIters = Math.Min(remainingInputBytes, (uint)outputCharsRemaining) / (2 * sizeof(uint));
+                    uint remainingInputBytes =
+                        (uint)(void*)Unsafe.ByteOffset(
+                            ref *pInputBuffer,
+                            ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                        ) + 4;
+                    uint maxIters =
+                        Math.Min(remainingInputBytes, (uint)outputCharsRemaining)
+                        / (2 * sizeof(uint));
                     uint secondDWord;
                     int i;
                     for (i = 0; (uint)i < maxIters; i++)
@@ -113,8 +142,14 @@ namespace System.Text.Unicode
 
                         pInputBuffer += 8;
 
-                        ASCIIUtility.WidenFourAsciiBytesToUtf16AndWriteToBuffer(ref pOutputBuffer[0], thisDWord);
-                        ASCIIUtility.WidenFourAsciiBytesToUtf16AndWriteToBuffer(ref pOutputBuffer[4], secondDWord);
+                        ASCIIUtility.WidenFourAsciiBytesToUtf16AndWriteToBuffer(
+                            ref pOutputBuffer[0],
+                            thisDWord
+                        );
+                        ASCIIUtility.WidenFourAsciiBytesToUtf16AndWriteToBuffer(
+                            ref pOutputBuffer[4],
+                            secondDWord
+                        );
 
                         pOutputBuffer += 8;
                     }
@@ -123,13 +158,16 @@ namespace System.Text.Unicode
 
                     continue; // need to perform a bounds check because we might be running out of data
 
-                LoopTerminatedEarlyDueToNonAsciiData:
+                    LoopTerminatedEarlyDueToNonAsciiData:
 
                     if (ASCIIUtility.AllBytesInUInt32AreAscii(thisDWord))
                     {
                         // The first DWORD contained all-ASCII bytes, so expand it.
 
-                        ASCIIUtility.WidenFourAsciiBytesToUtf16AndWriteToBuffer(ref *pOutputBuffer, thisDWord);
+                        ASCIIUtility.WidenFourAsciiBytesToUtf16AndWriteToBuffer(
+                            ref *pOutputBuffer,
+                            thisDWord
+                        );
 
                         // continue the outer loop from the second DWORD
 
@@ -149,7 +187,7 @@ namespace System.Text.Unicode
                     goto AfterReadDWordSkipAllBytesAsciiCheck;
                 }
 
-            AfterReadDWordSkipAllBytesAsciiCheck:
+                AfterReadDWordSkipAllBytesAsciiCheck:
 
                 Debug.Assert(!ASCIIUtility.AllBytesInUInt32AreAscii(thisDWord)); // this should have been handled earlier
 
@@ -248,7 +286,7 @@ namespace System.Text.Unicode
                     }
                 }
 
-            BeforeProcessTwoByteSequence:
+                BeforeProcessTwoByteSequence:
 
                 // At this point, we know we're working with a multi-byte code unit,
                 // but we haven't yet validated it.
@@ -268,7 +306,7 @@ namespace System.Text.Unicode
                         goto Error;
                     }
 
-                ProcessTwoByteSequenceSkipOverlongFormCheck:
+                    ProcessTwoByteSequenceSkipOverlongFormCheck:
 
                     // Optimization: If this is a two-byte-per-character language like Cyrillic or Hebrew,
                     // there's a good chance that if we see one two-byte run then there's another two-byte
@@ -278,8 +316,19 @@ namespace System.Text.Unicode
                     // the value isn't overlong using a single comparison. On big-endian platforms, we'll need
                     // to validate the mask and validate that the sequence isn't overlong as two separate comparisons.
 
-                    if ((BitConverter.IsLittleEndian && UInt32EndsWithValidUtf8TwoByteSequenceLittleEndian(thisDWord))
-                        || (!BitConverter.IsLittleEndian && (UInt32EndsWithUtf8TwoByteMask(thisDWord) && !UInt32EndsWithOverlongUtf8TwoByteSequence(thisDWord))))
+                    if (
+                        (
+                            BitConverter.IsLittleEndian
+                            && UInt32EndsWithValidUtf8TwoByteSequenceLittleEndian(thisDWord)
+                        )
+                        || (
+                            !BitConverter.IsLittleEndian
+                            && (
+                                UInt32EndsWithUtf8TwoByteMask(thisDWord)
+                                && !UInt32EndsWithOverlongUtf8TwoByteSequence(thisDWord)
+                            )
+                        )
+                    )
                     {
                         // We have two runs of two bytes each.
 
@@ -288,7 +337,10 @@ namespace System.Text.Unicode
                             goto ProcessRemainingBytesSlow; // running out of output buffer
                         }
 
-                        Unsafe.WriteUnaligned<uint>(pOutputBuffer, ExtractTwoCharsPackedFromTwoAdjacentTwoByteSequences(thisDWord));
+                        Unsafe.WriteUnaligned<uint>(
+                            pOutputBuffer,
+                            ExtractTwoCharsPackedFromTwoAdjacentTwoByteSequences(thisDWord)
+                        );
 
                         pInputBuffer += 4;
                         pOutputBuffer += 2;
@@ -374,7 +426,9 @@ namespace System.Text.Unicode
                             }
 
                             pOutputBuffer[0] = (char)charToWrite;
-                            pOutputBuffer[1] = (char)(byte)(thisDWord >> (BitConverter.IsLittleEndian ? 16 : 8));
+                            pOutputBuffer[1] = (char)(byte)(
+                                thisDWord >> (BitConverter.IsLittleEndian ? 16 : 8)
+                            );
                             pInputBuffer += 3;
                             pOutputBuffer += 2;
                             outputCharsRemaining -= 2;
@@ -417,13 +471,13 @@ namespace System.Text.Unicode
                     }
                 }
 
-            // Check the 3-byte case.
+                // Check the 3-byte case.
 
-            BeforeProcessThreeByteSequence:
+                BeforeProcessThreeByteSequence:
 
                 if (UInt32BeginsWithUtf8ThreeByteMask(thisDWord))
                 {
-                ProcessThreeByteSequenceWithCheck:
+                    ProcessThreeByteSequenceWithCheck:
 
                     // We need to check for overlong or surrogate three-byte sequences.
                     //
@@ -452,14 +506,20 @@ namespace System.Text.Unicode
 
                         // Code below becomes 5 instructions: test, jz, lea, test, jz
 
-                        if (((thisDWord & 0x0000_200Fu) == 0) || (((thisDWord - 0x0000_200Du) & 0x0000_200Fu) == 0))
+                        if (
+                            ((thisDWord & 0x0000_200Fu) == 0)
+                            || (((thisDWord - 0x0000_200Du) & 0x0000_200Fu) == 0)
+                        )
                         {
                             goto Error; // overlong or surrogate
                         }
                     }
                     else
                     {
-                        if (((thisDWord & 0x0F20_0000u) == 0) || (((thisDWord - 0x0D20_0000u) & 0x0F20_0000u) == 0))
+                        if (
+                            ((thisDWord & 0x0F20_0000u) == 0)
+                            || (((thisDWord - 0x0D20_0000u) & 0x0F20_0000u) == 0)
+                        )
                         {
                             goto Error; // overlong or surrogate
                         }
@@ -486,7 +546,13 @@ namespace System.Text.Unicode
                             // the final place where we can safely perform a DWORD read, and we want to probe whether it's
                             // safe to read a DWORD beginning at address &pInputBuffer[3].
 
-                            if (outputCharsRemaining > 1 && (nint)(void*)Unsafe.ByteOffset(ref *pInputBuffer, ref *pFinalPosWhereCanReadDWordFromInputBuffer) >= 3)
+                            if (
+                                outputCharsRemaining > 1
+                                && (nint)(void*)Unsafe.ByteOffset(
+                                    ref *pInputBuffer,
+                                    ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                                ) >= 3
+                            )
                             {
                                 // We're going to attempt to read a second 3-byte sequence and write them both out one after the other.
                                 // We need to check the continuation bit mask on the remaining two bytes (and we may as well check the leading
@@ -497,12 +563,18 @@ namespace System.Text.Unicode
 
                                 uint secondDWord = Unsafe.ReadUnaligned<uint>(pInputBuffer + 3);
 
-                                if (UInt32BeginsWithUtf8ThreeByteMask(secondDWord)
+                                if (
+                                    UInt32BeginsWithUtf8ThreeByteMask(secondDWord)
                                     && ((secondDWord & 0x0000_200Fu) != 0)
-                                    && (((secondDWord - 0x0000_200Du) & 0x0000_200Fu) != 0))
+                                    && (((secondDWord - 0x0000_200Du) & 0x0000_200Fu) != 0)
+                                )
                                 {
-                                    pOutputBuffer[0] = (char)ExtractCharFromFirstThreeByteSequence(thisDWord);
-                                    pOutputBuffer[1] = (char)ExtractCharFromFirstThreeByteSequence(secondDWord);
+                                    pOutputBuffer[0] = (char)ExtractCharFromFirstThreeByteSequence(
+                                        thisDWord
+                                    );
+                                    pOutputBuffer[1] = (char)ExtractCharFromFirstThreeByteSequence(
+                                        secondDWord
+                                    );
                                     pInputBuffer += 6;
                                     pOutputBuffer += 2;
                                     outputCharsRemaining -= 2;
@@ -522,7 +594,7 @@ namespace System.Text.Unicode
                     pOutputBuffer++;
                     outputCharsRemaining--;
 
-                CheckForAsciiByteAfterThreeByteSequence:
+                    CheckForAsciiByteAfterThreeByteSequence:
 
                     // Occasionally one-off ASCII characters like spaces, periods, or newlines will make their way
                     // in to the text. If this happens strip it off now before seeing if the next character
@@ -613,7 +685,13 @@ namespace System.Text.Unicode
                     }
                     else
                     {
-                        if (!UnicodeUtility.IsInRangeInclusive(thisDWord, 0xF090_0000u, 0xF48F_FFFFu))
+                        if (
+                            !UnicodeUtility.IsInRangeInclusive(
+                                thisDWord,
+                                0xF090_0000u,
+                                0xF48F_FFFFu
+                            )
+                        )
                         {
                             goto Error;
                         }
@@ -628,7 +706,10 @@ namespace System.Text.Unicode
                         goto OutputBufferTooSmall;
                     }
 
-                    Unsafe.WriteUnaligned<uint>(pOutputBuffer, ExtractCharsFromFourByteSequence(thisDWord));
+                    Unsafe.WriteUnaligned<uint>(
+                        pOutputBuffer,
+                        ExtractCharsFromFourByteSequence(thisDWord)
+                    );
 
                     pInputBuffer += 4;
                     pOutputBuffer += 2;
@@ -638,10 +719,14 @@ namespace System.Text.Unicode
                 }
             } while (pInputBuffer <= pFinalPosWhereCanReadDWordFromInputBuffer);
 
-        ProcessRemainingBytesSlow:
-            inputLength = (int)(void*)Unsafe.ByteOffset(ref *pInputBuffer, ref *pFinalPosWhereCanReadDWordFromInputBuffer) + 4;
+            ProcessRemainingBytesSlow:
+            inputLength =
+                (int)(void*)Unsafe.ByteOffset(
+                    ref *pInputBuffer,
+                    ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                ) + 4;
 
-        ProcessInputOfLessThanDWordSize:
+            ProcessInputOfLessThanDWordSize:
             while (inputLength > 0)
             {
                 uint firstByte = pInputBuffer[0];
@@ -700,7 +785,10 @@ namespace System.Text.Unicode
                     {
                         uint secondByte = pInputBuffer[1];
                         uint thirdByte = pInputBuffer[2];
-                        if (!IsLowByteUtf8ContinuationByte(secondByte) || !IsLowByteUtf8ContinuationByte(thirdByte))
+                        if (
+                            !IsLowByteUtf8ContinuationByte(secondByte)
+                            || !IsLowByteUtf8ContinuationByte(thirdByte)
+                        )
                         {
                             goto Error; // 3-byte marker not followed by 2 continuation bytes
                         }
@@ -715,7 +803,9 @@ namespace System.Text.Unicode
                         }
 
                         partialChar -= ((0xEDu - 0xC2u) << 12) + (0xA0u << 6); // if partialChar = 0, we're at beginning of UTF-16 surrogate code point range
-                        if (partialChar < 0x0800u /* number of code points in UTF-16 surrogate code point range */)
+                        if (
+                            partialChar < 0x0800u /* number of code points in UTF-16 surrogate code point range */
+                        )
                         {
                             goto Error; // attempted to encode a UTF-16 surrogate code point; fail
                         }
@@ -755,7 +845,13 @@ namespace System.Text.Unicode
                         {
                             goto Error; // failed overlong check
                         }
-                        if (UnicodeUtility.IsInRangeInclusive(partialChar, ((0xEDu - 0xC2u) << 6) + 0xA0u, ((0xEEu - 0xC2u) << 6) + 0x7Fu))
+                        if (
+                            UnicodeUtility.IsInRangeInclusive(
+                                partialChar,
+                                ((0xEDu - 0xC2u) << 6) + 0xA0u,
+                                ((0xEEu - 0xC2u) << 6) + 0x7Fu
+                            )
+                        )
                         {
                             goto Error; // failed surrogate check
                         }
@@ -779,7 +875,13 @@ namespace System.Text.Unicode
                     }
 
                     uint asPartialChar = (firstByte << 6) + nextByte; // don't worry about fixing up the UTF-8 markers; we'll account for it in the below comparison
-                    if (!UnicodeUtility.IsInRangeInclusive(asPartialChar, ((0xF0u - 0xC2u) << 6) + 0x90u, ((0xF4u - 0xC2u) << 6) + 0x8Fu))
+                    if (
+                        !UnicodeUtility.IsInRangeInclusive(
+                            asPartialChar,
+                            ((0xF0u - 0xC2u) << 6) + 0x90u,
+                            ((0xF4u - 0xC2u) << 6) + 0x8Fu
+                        )
+                    )
                     {
                         goto Error; // failed overlong / out-of-range check
                     }
@@ -818,19 +920,19 @@ namespace System.Text.Unicode
             OperationStatus retVal = OperationStatus.Done;
             goto ReturnCommon;
 
-        InputBufferTooSmall:
+            InputBufferTooSmall:
             retVal = OperationStatus.NeedMoreData;
             goto ReturnCommon;
 
-        OutputBufferTooSmall:
+            OutputBufferTooSmall:
             retVal = OperationStatus.DestinationTooSmall;
             goto ReturnCommon;
 
-        Error:
+            Error:
             retVal = OperationStatus.InvalidData;
             goto ReturnCommon;
 
-        ReturnCommon:
+            ReturnCommon:
             pInputBufferRemaining = pInputBuffer;
             pOutputBufferRemaining = pOutputBuffer;
             return retVal;
@@ -839,20 +941,37 @@ namespace System.Text.Unicode
         // On method return, pInputBufferRemaining and pOutputBufferRemaining will both point to where
         // the next char would have been consumed from / the next byte would have been written to.
         // inputLength in chars, outputBytesRemaining in bytes.
-        public static OperationStatus TranscodeToUtf8(char* pInputBuffer, int inputLength, byte* pOutputBuffer, int outputBytesRemaining, out char* pInputBufferRemaining, out byte* pOutputBufferRemaining)
+        public static OperationStatus TranscodeToUtf8(
+            char* pInputBuffer,
+            int inputLength,
+            byte* pOutputBuffer,
+            int outputBytesRemaining,
+            out char* pInputBufferRemaining,
+            out byte* pOutputBufferRemaining
+        )
         {
             const int CharsPerDWord = sizeof(uint) / sizeof(char);
 
             Debug.Assert(inputLength >= 0, "Input length must not be negative.");
-            Debug.Assert(pInputBuffer != null || inputLength == 0, "Input length must be zero if input buffer pointer is null.");
+            Debug.Assert(
+                pInputBuffer != null || inputLength == 0,
+                "Input length must be zero if input buffer pointer is null."
+            );
 
             Debug.Assert(outputBytesRemaining >= 0, "Destination length must not be negative.");
-            Debug.Assert(pOutputBuffer != null || outputBytesRemaining == 0, "Destination length must be zero if destination buffer pointer is null.");
+            Debug.Assert(
+                pOutputBuffer != null || outputBytesRemaining == 0,
+                "Destination length must be zero if destination buffer pointer is null."
+            );
 
             // First, try vectorized conversion.
 
             {
-                nuint numElementsConverted = ASCIIUtility.NarrowUtf16ToAscii(pInputBuffer, pOutputBuffer, (uint)Math.Min(inputLength, outputBytesRemaining));
+                nuint numElementsConverted = ASCIIUtility.NarrowUtf16ToAscii(
+                    pInputBuffer,
+                    pOutputBuffer,
+                    (uint)Math.Min(inputLength, outputBytesRemaining)
+                );
 
                 pInputBuffer += numElementsConverted;
                 pOutputBuffer += numElementsConverted;
@@ -876,7 +995,8 @@ namespace System.Text.Unicode
                 goto ProcessInputOfLessThanDWordSize;
             }
 
-            char* pFinalPosWhereCanReadDWordFromInputBuffer = pInputBuffer + (uint)inputLength - CharsPerDWord;
+            char* pFinalPosWhereCanReadDWordFromInputBuffer =
+                pInputBuffer + (uint)inputLength - CharsPerDWord;
 
             // We have paths for SSE4.1 vectorization inside the inner loop. Since the below
             // vector is only used in those code paths, we leave it uninitialized if SSE4.1
@@ -904,10 +1024,13 @@ namespace System.Text.Unicode
 
                 thisDWord = Unsafe.ReadUnaligned<uint>(pInputBuffer);
 
-            AfterReadDWord:
+                AfterReadDWord:
 
 #if DEBUG
-                Debug.Assert(pLastBufferPosProcessed < pInputBuffer, "Algorithm should've made forward progress since last read.");
+                Debug.Assert(
+                    pLastBufferPosProcessed < pInputBuffer,
+                    "Algorithm should've made forward progress since last read."
+                );
                 pLastBufferPosProcessed = pInputBuffer;
 #endif
 
@@ -939,10 +1062,17 @@ namespace System.Text.Unicode
                     // If we saw a sequence of all ASCII, there's a good chance a significant amount of following data is also ASCII.
                     // Below is basically unrolled loops with poor man's vectorization.
 
-                    uint inputCharsRemaining = (uint)(pFinalPosWhereCanReadDWordFromInputBuffer - pInputBuffer) + 2;
-                    uint minElementsRemaining = (uint)Math.Min(inputCharsRemaining, outputBytesRemaining);
+                    uint inputCharsRemaining =
+                        (uint)(pFinalPosWhereCanReadDWordFromInputBuffer - pInputBuffer) + 2;
+                    uint minElementsRemaining = (uint)Math.Min(
+                        inputCharsRemaining,
+                        outputBytesRemaining
+                    );
 
-                    if (Sse41.X64.IsSupported || (AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian))
+                    if (
+                        Sse41.X64.IsSupported
+                        || (AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
+                    )
                     {
                         // Try reading and writing 8 elements per iteration.
                         uint maxIters = minElementsRemaining / 8;
@@ -959,15 +1089,23 @@ namespace System.Text.Unicode
 
                             if (AdvSimd.IsSupported)
                             {
-                                Vector128<short> isUtf16DataNonAscii = AdvSimd.CompareTest(utf16Data, nonAsciiUtf16DataMask);
-                                bool hasNonAsciiDataInVector = AdvSimd.Arm64.MinPairwise(isUtf16DataNonAscii, isUtf16DataNonAscii).AsUInt64().ToScalar() != 0;
+                                Vector128<short> isUtf16DataNonAscii = AdvSimd.CompareTest(
+                                    utf16Data,
+                                    nonAsciiUtf16DataMask
+                                );
+                                bool hasNonAsciiDataInVector =
+                                    AdvSimd.Arm64
+                                        .MinPairwise(isUtf16DataNonAscii, isUtf16DataNonAscii)
+                                        .AsUInt64()
+                                        .ToScalar() != 0;
 
                                 if (hasNonAsciiDataInVector)
                                 {
                                     goto LoopTerminatedDueToNonAsciiDataInVectorLocal;
                                 }
 
-                                Vector64<byte> lower = AdvSimd.ExtractNarrowingSaturateUnsignedLower(utf16Data);
+                                Vector64<byte> lower =
+                                    AdvSimd.ExtractNarrowingSaturateUnsignedLower(utf16Data);
                                 AdvSimd.Store(pOutputBuffer, lower);
                             }
                             else
@@ -978,7 +1116,11 @@ namespace System.Text.Unicode
                                 }
 
                                 // narrow and write
-                                Sse2.StoreScalar((ulong*)pOutputBuffer /* unaligned */, Sse2.PackUnsignedSaturate(utf16Data, utf16Data).AsUInt64());
+                                Sse2.StoreScalar(
+                                    (ulong*)pOutputBuffer /* unaligned */
+                                    ,
+                                    Sse2.PackUnsignedSaturate(utf16Data, utf16Data).AsUInt64()
+                                );
                             }
 
                             pInputBuffer += 8;
@@ -997,16 +1139,28 @@ namespace System.Text.Unicode
                                 goto LoopTerminatedDueToNonAsciiDataInPossibleNonAsciiQWordLocal;
                             }
 
-                            utf16Data = Vector128.CreateScalarUnsafe(possibleNonAsciiQWord).AsInt16();
+                            utf16Data = Vector128
+                                .CreateScalarUnsafe(possibleNonAsciiQWord)
+                                .AsInt16();
 
                             if (AdvSimd.IsSupported)
                             {
-                                Vector64<byte> lower = AdvSimd.ExtractNarrowingSaturateUnsignedLower(utf16Data);
-                                AdvSimd.StoreSelectedScalar((uint*)pOutputBuffer, lower.AsUInt32(), 0);
+                                Vector64<byte> lower =
+                                    AdvSimd.ExtractNarrowingSaturateUnsignedLower(utf16Data);
+                                AdvSimd.StoreSelectedScalar(
+                                    (uint*)pOutputBuffer,
+                                    lower.AsUInt32(),
+                                    0
+                                );
                             }
                             else
                             {
-                                Unsafe.WriteUnaligned<uint>(pOutputBuffer, Sse2.ConvertToUInt32(Sse2.PackUnsignedSaturate(utf16Data, utf16Data).AsUInt32()));
+                                Unsafe.WriteUnaligned<uint>(
+                                    pOutputBuffer,
+                                    Sse2.ConvertToUInt32(
+                                        Sse2.PackUnsignedSaturate(utf16Data, utf16Data).AsUInt32()
+                                    )
+                                );
                             }
 
                             pInputBuffer += 4;
@@ -1016,7 +1170,7 @@ namespace System.Text.Unicode
 
                         continue; // Go back to beginning of main loop, read data, check for ASCII
 
-                    LoopTerminatedDueToNonAsciiDataInVectorLocal:
+                        LoopTerminatedDueToNonAsciiDataInVectorLocal:
 
                         outputBytesRemaining -= 8 * i;
 
@@ -1039,12 +1193,22 @@ namespace System.Text.Unicode
                         {
                             if (AdvSimd.IsSupported)
                             {
-                                Vector64<byte> lower = AdvSimd.ExtractNarrowingSaturateUnsignedLower(utf16Data);
-                                AdvSimd.StoreSelectedScalar((uint*)pOutputBuffer, lower.AsUInt32(), 0);
+                                Vector64<byte> lower =
+                                    AdvSimd.ExtractNarrowingSaturateUnsignedLower(utf16Data);
+                                AdvSimd.StoreSelectedScalar(
+                                    (uint*)pOutputBuffer,
+                                    lower.AsUInt32(),
+                                    0
+                                );
                             }
                             else
                             {
-                                Unsafe.WriteUnaligned<uint>(pOutputBuffer, Sse2.ConvertToUInt32(Sse2.PackUnsignedSaturate(utf16Data, utf16Data).AsUInt32()));
+                                Unsafe.WriteUnaligned<uint>(
+                                    pOutputBuffer,
+                                    Sse2.ConvertToUInt32(
+                                        Sse2.PackUnsignedSaturate(utf16Data, utf16Data).AsUInt32()
+                                    )
+                                );
                             }
                             pInputBuffer += 4;
                             pOutputBuffer += 4;
@@ -1052,7 +1216,7 @@ namespace System.Text.Unicode
                             possibleNonAsciiQWord = utf16Data.AsUInt64().GetElement(1);
                         }
 
-                    LoopTerminatedDueToNonAsciiDataInPossibleNonAsciiQWordLocal:
+                        LoopTerminatedDueToNonAsciiDataInPossibleNonAsciiQWordLocal:
 
                         Debug.Assert(!Utf16Utility.AllCharsInUInt64AreAscii(possibleNonAsciiQWord)); // this condition should've been checked earlier
 
@@ -1060,7 +1224,10 @@ namespace System.Text.Unicode
                         if (Utf16Utility.AllCharsInUInt32AreAscii(thisDWord))
                         {
                             // [ 00000000 0bbbbbbb | 00000000 0aaaaaaa ] -> [ 00000000 0bbbbbbb | 0bbbbbbb 0aaaaaaa ]
-                            Unsafe.WriteUnaligned<ushort>(pOutputBuffer, (ushort)(thisDWord | (thisDWord >> 8)));
+                            Unsafe.WriteUnaligned<ushort>(
+                                pOutputBuffer,
+                                (ushort)(thisDWord | (thisDWord >> 8))
+                            );
                             pInputBuffer += 2;
                             pOutputBuffer += 2;
                             outputBytesRemaining -= 2;
@@ -1087,8 +1254,14 @@ namespace System.Text.Unicode
 
                             // [ 00000000 0bbbbbbb | 00000000 0aaaaaaa ] -> [ 00000000 0bbbbbbb | 0bbbbbbb 0aaaaaaa ]
                             // (Same logic works regardless of endianness.)
-                            Unsafe.WriteUnaligned<ushort>(pOutputBuffer, (ushort)(thisDWord | (thisDWord >> 8)));
-                            Unsafe.WriteUnaligned<ushort>(pOutputBuffer + 2, (ushort)(secondDWord | (secondDWord >> 8)));
+                            Unsafe.WriteUnaligned<ushort>(
+                                pOutputBuffer,
+                                (ushort)(thisDWord | (thisDWord >> 8))
+                            );
+                            Unsafe.WriteUnaligned<ushort>(
+                                pOutputBuffer + 2,
+                                (ushort)(secondDWord | (secondDWord >> 8))
+                            );
 
                             pInputBuffer += 4;
                             pOutputBuffer += 4;
@@ -1098,7 +1271,7 @@ namespace System.Text.Unicode
 
                         continue; // Go back to beginning of main loop, read data, check for ASCII
 
-                    LoopTerminatedDueToNonAsciiData:
+                        LoopTerminatedDueToNonAsciiData:
 
                         outputBytesRemaining -= 4 * i;
 
@@ -1108,7 +1281,10 @@ namespace System.Text.Unicode
                         {
                             // [ 00000000 0bbbbbbb | 00000000 0aaaaaaa ] -> [ 00000000 0bbbbbbb | 0bbbbbbb 0aaaaaaa ]
                             // (Same logic works regardless of endianness.)
-                            Unsafe.WriteUnaligned<ushort>(pOutputBuffer, (ushort)(thisDWord | (thisDWord >> 8)));
+                            Unsafe.WriteUnaligned<ushort>(
+                                pOutputBuffer,
+                                (ushort)(thisDWord | (thisDWord >> 8))
+                            );
                             pInputBuffer += 2;
                             pOutputBuffer += 2;
                             outputBytesRemaining -= 2;
@@ -1119,7 +1295,7 @@ namespace System.Text.Unicode
                     }
                 }
 
-            AfterReadDWordSkipAllCharsAsciiCheck:
+                AfterReadDWordSkipAllCharsAsciiCheck:
 
                 Debug.Assert(!Utf16Utility.AllCharsInUInt32AreAscii(thisDWord)); // this should have been handled earlier
 
@@ -1162,7 +1338,7 @@ namespace System.Text.Unicode
 
                 if (!IsFirstCharAtLeastThreeUtf8Bytes(thisDWord))
                 {
-                TryConsumeMultipleTwoByteSequences:
+                    TryConsumeMultipleTwoByteSequences:
 
                     // For certain text (Greek, Cyrillic, ...), 2-byte sequences tend to be clustered. We'll try transcoding them in
                     // a tight loop without falling back to the main loop.
@@ -1176,7 +1352,10 @@ namespace System.Text.Unicode
                             goto ProcessOneCharFromCurrentDWordAndFinish; // running out of output buffer
                         }
 
-                        Unsafe.WriteUnaligned<uint>(pOutputBuffer, ExtractTwoUtf8TwoByteSequencesFromTwoPackedUtf16Chars(thisDWord));
+                        Unsafe.WriteUnaligned<uint>(
+                            pOutputBuffer,
+                            ExtractTwoUtf8TwoByteSequencesFromTwoPackedUtf16Chars(thisDWord)
+                        );
 
                         pInputBuffer += 2;
                         pOutputBuffer += 4;
@@ -1210,7 +1389,10 @@ namespace System.Text.Unicode
                         goto OutputBufferTooSmall;
                     }
 
-                    Unsafe.WriteUnaligned<ushort>(pOutputBuffer, (ushort)ExtractUtf8TwoByteSequenceFromFirstUtf16Char(thisDWord));
+                    Unsafe.WriteUnaligned<ushort>(
+                        pOutputBuffer,
+                        (ushort)ExtractUtf8TwoByteSequenceFromFirstUtf16Char(thisDWord)
+                    );
 
                     // The buffer contains a 2-byte sequence followed by 2 bytes that aren't a 2-byte sequence.
                     // Unlikely that a 3-byte sequence would follow a 2-byte sequence, so perhaps remaining
@@ -1257,9 +1439,9 @@ namespace System.Text.Unicode
                     }
                 }
 
-            // Check the 3-byte case.
+                // Check the 3-byte case.
 
-            BeforeProcessThreeByteSequence:
+                BeforeProcessThreeByteSequence:
 
                 if (!IsFirstCharSurrogate(thisDWord))
                 {
@@ -1276,7 +1458,10 @@ namespace System.Text.Unicode
                                 goto ConsumeSingleThreeByteRun; // not enough space - try consuming as much as we can
                             }
 
-                            WriteTwoUtf16CharsAsTwoUtf8ThreeByteSequences(ref *pOutputBuffer, thisDWord);
+                            WriteTwoUtf16CharsAsTwoUtf8ThreeByteSequences(
+                                ref *pOutputBuffer,
+                                thisDWord
+                            );
 
                             pInputBuffer += 2;
                             pOutputBuffer += 6;
@@ -1305,7 +1490,7 @@ namespace System.Text.Unicode
                         }
                     }
 
-                ConsumeSingleThreeByteRun:
+                    ConsumeSingleThreeByteRun:
 
                     if (outputBytesRemaining < 3)
                     {
@@ -1382,7 +1567,10 @@ namespace System.Text.Unicode
                         goto OutputBufferTooSmall;
                     }
 
-                    Unsafe.WriteUnaligned<uint>(pOutputBuffer, ExtractFourUtf8BytesFromSurrogatePair(thisDWord));
+                    Unsafe.WriteUnaligned<uint>(
+                        pOutputBuffer,
+                        ExtractFourUtf8BytesFromSurrogatePair(thisDWord)
+                    );
 
                     pInputBuffer += 2;
                     pOutputBuffer += 4;
@@ -1394,10 +1582,11 @@ namespace System.Text.Unicode
                 goto Error; // an ill-formed surrogate sequence: high not followed by low, or low not preceded by high
             } while (pInputBuffer <= pFinalPosWhereCanReadDWordFromInputBuffer);
 
-        ProcessNextCharAndFinish:
-            inputLength = (int)(pFinalPosWhereCanReadDWordFromInputBuffer - pInputBuffer) + CharsPerDWord;
+            ProcessNextCharAndFinish:
+            inputLength =
+                (int)(pFinalPosWhereCanReadDWordFromInputBuffer - pInputBuffer) + CharsPerDWord;
 
-        ProcessInputOfLessThanDWordSize:
+            ProcessInputOfLessThanDWordSize:
             Debug.Assert(inputLength < CharsPerDWord);
 
             if (inputLength == 0)
@@ -1408,7 +1597,7 @@ namespace System.Text.Unicode
             uint thisChar = *pInputBuffer;
             goto ProcessFinalChar;
 
-        ProcessOneCharFromCurrentDWordAndFinish:
+            ProcessOneCharFromCurrentDWordAndFinish:
             if (BitConverter.IsLittleEndian)
             {
                 thisChar = thisDWord & 0xFFFFu; // preserve only the first char
@@ -1418,7 +1607,7 @@ namespace System.Text.Unicode
                 thisChar = thisDWord >> 16; // preserve only the first char
             }
 
-        ProcessFinalChar:
+            ProcessFinalChar:
             {
                 if (thisChar <= 0x7Fu)
                 {
@@ -1456,7 +1645,9 @@ namespace System.Text.Unicode
 
                     // 3-byte case
                     pOutputBuffer[2] = (byte)((thisChar & 0x3Fu) | unchecked((uint)(sbyte)0x80)); // [ 10xxxxxx ]
-                    pOutputBuffer[1] = (byte)(((thisChar >> 6) & 0x3Fu) | unchecked((uint)(sbyte)0x80)); // [ 10yyyyyy ]
+                    pOutputBuffer[1] = (byte)(
+                        ((thisChar >> 6) & 0x3Fu) | unchecked((uint)(sbyte)0x80)
+                    ); // [ 10yyyyyy ]
                     pOutputBuffer[0] = (byte)((thisChar >> 12) | unchecked((uint)(sbyte)0xE0)); // [ 1110zzzz ]
 
                     pInputBuffer++;
@@ -1488,23 +1679,23 @@ namespace System.Text.Unicode
                 goto OutputBufferTooSmall;
             }
 
-        InputBufferFullyConsumed:
+            InputBufferFullyConsumed:
             OperationStatus retVal = OperationStatus.Done;
             goto ReturnCommon;
 
-        InputBufferTooSmall:
+            InputBufferTooSmall:
             retVal = OperationStatus.NeedMoreData;
             goto ReturnCommon;
 
-        OutputBufferTooSmall:
+            OutputBufferTooSmall:
             retVal = OperationStatus.DestinationTooSmall;
             goto ReturnCommon;
 
-        Error:
+            Error:
             retVal = OperationStatus.InvalidData;
             goto ReturnCommon;
 
-        ReturnCommon:
+            ReturnCommon:
             pInputBufferRemaining = pInputBuffer;
             pOutputBufferRemaining = pOutputBuffer;
             return retVal;

@@ -12,7 +12,9 @@ using System.Diagnostics;
 namespace System.Xml.Schema
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class XmlSchemaException : SystemException
     {
         private readonly string? _res;
@@ -27,7 +29,8 @@ namespace System.Xml.Schema
         // message == null for V2 or higher exceptions; the exception message is stored on the base class (Exception._message)
         private readonly string? _message;
 
-        protected XmlSchemaException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected XmlSchemaException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _res = (string?)info.GetValue("res", typeof(string));
             _args = (string[]?)info.GetValue("args", typeof(string[]));
@@ -68,60 +71,92 @@ namespace System.Xml.Schema
             info.AddValue("version", "2.0");
         }
 
-        public XmlSchemaException() : this(null)
-        {
-        }
+        public XmlSchemaException() : this(null) { }
 
         public XmlSchemaException(string? message) : this(message, ((Exception?)null), 0, 0)
         {
 #if DEBUG
-            Debug.Assert(message == null || !message.StartsWith("Sch_", StringComparison.Ordinal), "Do not pass a resource here!");
+            Debug.Assert(
+                message == null || !message.StartsWith("Sch_", StringComparison.Ordinal),
+                "Do not pass a resource here!"
+            );
 #endif
         }
 
-        public XmlSchemaException(string? message, Exception? innerException) : this(message, innerException, 0, 0)
-        {
-        }
+        public XmlSchemaException(string? message, Exception? innerException)
+            : this(message, innerException, 0, 0) { }
 
-        public XmlSchemaException(string? message, Exception? innerException, int lineNumber, int linePosition) :
-            this((message == null ? SR.Sch_DefaultException : SR.Xml_UserException), new string?[] { message }, innerException, null, lineNumber, linePosition, null)
-        {
-        }
+        public XmlSchemaException(
+            string? message,
+            Exception? innerException,
+            int lineNumber,
+            int linePosition
+        )
+            : this(
+                (message == null ? SR.Sch_DefaultException : SR.Xml_UserException),
+                new string?[] { message },
+                innerException,
+                null,
+                lineNumber,
+                linePosition,
+                null
+            ) { }
 
-        internal XmlSchemaException(string? res, string?[]? args) :
-            this(res, args, null, null, 0, 0, null)
-        { }
+        internal XmlSchemaException(string? res, string?[]? args)
+            : this(res, args, null, null, 0, 0, null) { }
 
-        internal XmlSchemaException(string? res, string? arg) :
-            this(res, new string?[] { arg }, null, null, 0, 0, null)
-        { }
+        internal XmlSchemaException(string? res, string? arg)
+            : this(res, new string?[] { arg }, null, null, 0, 0, null) { }
 
-        internal XmlSchemaException(string? res, string? arg, string? sourceUri, int lineNumber, int linePosition) :
-            this(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null)
-        { }
+        internal XmlSchemaException(
+            string? res,
+            string? arg,
+            string? sourceUri,
+            int lineNumber,
+            int linePosition
+        ) : this(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null) { }
 
-        internal XmlSchemaException(string? res, string? sourceUri, int lineNumber, int linePosition) :
-            this(res, (string?[]?)null, null, sourceUri, lineNumber, linePosition, null)
-        { }
+        internal XmlSchemaException(
+            string? res,
+            string? sourceUri,
+            int lineNumber,
+            int linePosition
+        ) : this(res, (string?[]?)null, null, sourceUri, lineNumber, linePosition, null) { }
 
-        internal XmlSchemaException(string? res, string?[]? args, string? sourceUri, int lineNumber, int linePosition) :
-            this(res, args, null, sourceUri, lineNumber, linePosition, null)
-        { }
+        internal XmlSchemaException(
+            string? res,
+            string?[]? args,
+            string? sourceUri,
+            int lineNumber,
+            int linePosition
+        ) : this(res, args, null, sourceUri, lineNumber, linePosition, null) { }
 
-        internal XmlSchemaException(string? res, XmlSchemaObject source) :
-            this(res, (string?[]?)null, source)
-        { }
+        internal XmlSchemaException(string? res, XmlSchemaObject source)
+            : this(res, (string?[]?)null, source) { }
 
-        internal XmlSchemaException(string? res, string? arg, XmlSchemaObject source) :
-            this(res, new string?[] { arg }, source)
-        { }
+        internal XmlSchemaException(string? res, string? arg, XmlSchemaObject source)
+            : this(res, new string?[] { arg }, source) { }
 
-        internal XmlSchemaException(string? res, string?[]? args, XmlSchemaObject source) :
-            this(res, args, null, source.SourceUri, source.LineNumber, source.LinePosition, source)
-        { }
+        internal XmlSchemaException(string? res, string?[]? args, XmlSchemaObject source)
+            : this(
+                res,
+                args,
+                null,
+                source.SourceUri,
+                source.LineNumber,
+                source.LinePosition,
+                source
+            ) { }
 
-        internal XmlSchemaException(string? res, string?[]? args, Exception? innerException, string? sourceUri, int lineNumber, int linePosition, XmlSchemaObject? source) :
-            base(CreateMessage(res, args), innerException)
+        internal XmlSchemaException(
+            string? res,
+            string?[]? args,
+            Exception? innerException,
+            string? sourceUri,
+            int lineNumber,
+            int linePosition,
+            XmlSchemaObject? source
+        ) : base(CreateMessage(res, args), innerException)
         {
             HResult = HResults.XmlSchema;
             _res = res;
@@ -151,18 +186,12 @@ namespace System.Xml.Schema
 
         internal string? GetRes
         {
-            get
-            {
-                return _res;
-            }
+            get { return _res; }
         }
 
         internal string?[]? Args
         {
-            get
-            {
-                return _args;
-            }
+            get { return _args; }
         }
 
         public string? SourceUri
@@ -187,7 +216,7 @@ namespace System.Xml.Schema
 
         /*internal static XmlSchemaException Create(string res) { //Since internal overload with res string will clash with public constructor that takes in a message
             return new XmlSchemaException(res, (string[])null, null, null, 0, 0, null);
-        }*/
+            }*/
 
         internal void SetSource(string? sourceUri, int lineNumber, int linePosition)
         {
@@ -211,10 +240,7 @@ namespace System.Xml.Schema
 
         public override string Message
         {
-            get
-            {
-                return (_message == null) ? base.Message : _message;
-            }
+            get { return (_message == null) ? base.Message : _message; }
         }
     };
 }

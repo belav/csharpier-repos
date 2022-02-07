@@ -28,9 +28,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     /// </summary>
     public class CosmosProjectionBindingExpressionVisitor : ExpressionVisitor
     {
-        private static readonly MethodInfo _getParameterValueMethodInfo
-            = typeof(CosmosProjectionBindingExpressionVisitor)
-                .GetTypeInfo().GetDeclaredMethod(nameof(GetParameterValue));
+        private static readonly MethodInfo _getParameterValueMethodInfo =
+            typeof(CosmosProjectionBindingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(GetParameterValue));
 
         private readonly CosmosSqlTranslatingExpressionVisitor _sqlTranslator;
         private readonly IModel _model;
@@ -39,7 +40,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
         private readonly Dictionary<ProjectionMember, Expression> _projectionMapping = new();
         private readonly Stack<ProjectionMember> _projectionMembers = new();
-        private readonly Dictionary<ParameterExpression, CollectionShaperExpression> _collectionShaperMapping = new();
+        private readonly Dictionary<
+            ParameterExpression,
+            CollectionShaperExpression
+        > _collectionShaperMapping = new();
         private readonly Stack<INavigation> _includedNavigations = new();
 
         /// <summary>
@@ -50,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public CosmosProjectionBindingExpressionVisitor(
             IModel model,
-            CosmosSqlTranslatingExpressionVisitor sqlTranslator)
+            CosmosSqlTranslatingExpressionVisitor sqlTranslator
+        )
         {
             _model = model;
             _sqlTranslator = sqlTranslator;
@@ -62,7 +67,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Expression Translate(SelectExpression selectExpression, Expression expression)
+        public virtual Expression Translate(
+            SelectExpression selectExpression,
+            Expression expression
+        )
         {
             _selectExpression = selectExpression;
             _clientEval = false;
@@ -102,17 +110,21 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 return null;
             }
 
-            if (expression is NewExpression
+            if (
+                expression is NewExpression
                 || expression is MemberInitExpression
-                || expression is EntityShaperExpression)
+                || expression is EntityShaperExpression
+            )
             {
                 return base.Visit(expression);
             }
 
             // This skips the group parameter from GroupJoin
-            if (expression is ParameterExpression parameter
+            if (
+                expression is ParameterExpression parameter
                 && parameter.Type.IsGenericType
-                && parameter.Type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                && parameter.Type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+            )
             {
                 return parameter;
             }
@@ -130,16 +142,25 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             return parameterExpression;
                         }
 
-                        if (parameterExpression.Name?.StartsWith(QueryCompilationContext.QueryParameterPrefix, StringComparison.Ordinal)
-                            == true)
+                        if (
+                            parameterExpression.Name?.StartsWith(
+                                QueryCompilationContext.QueryParameterPrefix,
+                                StringComparison.Ordinal
+                            ) == true
+                        )
                         {
                             return Expression.Call(
-                                _getParameterValueMethodInfo.MakeGenericMethod(parameterExpression.Type),
+                                _getParameterValueMethodInfo.MakeGenericMethod(
+                                    parameterExpression.Type
+                                ),
                                 QueryCompilationContext.QueryContextParameter,
-                                Expression.Constant(parameterExpression.Name));
+                                Expression.Constant(parameterExpression.Name)
+                            );
                         }
 
-                        throw new InvalidOperationException(CoreStrings.TranslationFailed(parameterExpression.Print()));
+                        throw new InvalidOperationException(
+                            CoreStrings.TranslationFailed(parameterExpression.Print())
+                        );
 
                     case MaterializeCollectionNavigationExpression _:
                         return base.Visit(expression);
@@ -152,7 +173,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 }
 
                 return new ProjectionBindingExpression(
-                    _selectExpression, _selectExpression.AddToProjection(translation), expression.Type.MakeNullable());
+                    _selectExpression,
+                    _selectExpression.AddToProjection(translation),
+                    expression.Type.MakeNullable()
+                );
             }
             else
             {
@@ -164,7 +188,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                 _projectionMapping[_projectionMembers.Peek()] = translation;
 
-                return new ProjectionBindingExpression(_selectExpression, _projectionMembers.Peek(), expression.Type.MakeNullable());
+                return new ProjectionBindingExpression(
+                    _selectExpression,
+                    _projectionMembers.Peek(),
+                    expression.Type.MakeNullable()
+                );
             }
         }
 
@@ -179,7 +207,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var left = MatchTypes(Visit(binaryExpression.Left), binaryExpression.Left.Type);
             var right = MatchTypes(Visit(binaryExpression.Right), binaryExpression.Right.Type);
 
-            return binaryExpression.Update(left, VisitAndConvert(binaryExpression.Conversion, "VisitBinary"), right);
+            return binaryExpression.Update(
+                left,
+                VisitAndConvert(binaryExpression.Conversion, "VisitBinary"),
+                right
+            );
         }
 
         /// <summary>
@@ -217,31 +249,47 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 case EntityShaperExpression entityShaperExpression:
                 {
-                    var projectionBindingExpression = (ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression;
+                    var projectionBindingExpression =
+                        (ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression;
                     VerifySelectExpression(projectionBindingExpression);
 
                     if (_clientEval)
                     {
-                        var entityProjection = (EntityProjectionExpression)_selectExpression.GetMappedProjection(
-                            projectionBindingExpression.ProjectionMember);
+                        var entityProjection =
+                            (EntityProjectionExpression)_selectExpression.GetMappedProjection(
+                                projectionBindingExpression.ProjectionMember
+                            );
 
                         return entityShaperExpression.Update(
                             new ProjectionBindingExpression(
-                                _selectExpression, _selectExpression.AddToProjection(entityProjection), typeof(ValueBuffer)));
+                                _selectExpression,
+                                _selectExpression.AddToProjection(entityProjection),
+                                typeof(ValueBuffer)
+                            )
+                        );
                     }
 
-                    _projectionMapping[_projectionMembers.Peek()]
-                        = _selectExpression.GetMappedProjection(projectionBindingExpression.ProjectionMember);
+                    _projectionMapping[_projectionMembers.Peek()] =
+                        _selectExpression.GetMappedProjection(
+                            projectionBindingExpression.ProjectionMember
+                        );
 
                     return entityShaperExpression.Update(
-                        new ProjectionBindingExpression(_selectExpression, _projectionMembers.Peek(), typeof(ValueBuffer)));
+                        new ProjectionBindingExpression(
+                            _selectExpression,
+                            _projectionMembers.Peek(),
+                            typeof(ValueBuffer)
+                        )
+                    );
                 }
 
                 case MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression:
-                    return materializeCollectionNavigationExpression.Navigation is INavigation embeddableNavigation
+                    return
+                        materializeCollectionNavigationExpression.Navigation
+                            is INavigation embeddableNavigation
                         && embeddableNavigation.IsEmbedded()
-                            ? base.Visit(materializeCollectionNavigationExpression.Subquery)
-                            : base.VisitExtension(materializeCollectionNavigationExpression);
+                      ? base.Visit(materializeCollectionNavigationExpression.Subquery)
+                      : base.VisitExtension(materializeCollectionNavigationExpression);
 
                 case IncludeExpression includeExpression:
                     if (!_clientEval)
@@ -249,11 +297,18 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         return null;
                     }
 
-                    if (!(includeExpression.Navigation is INavigation includableNavigation
-                        && includableNavigation.IsEmbedded()))
+                    if (
+                        !(
+                            includeExpression.Navigation is INavigation includableNavigation
+                            && includableNavigation.IsEmbedded()
+                        )
+                    )
                     {
                         throw new InvalidOperationException(
-                            CosmosStrings.NonEmbeddedIncludeNotSupported(includeExpression.Navigation));
+                            CosmosStrings.NonEmbeddedIncludeNotSupported(
+                                includeExpression.Navigation
+                            )
+                        );
                     }
 
                     _includedNavigations.Push(includableNavigation);
@@ -265,7 +320,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     return newIncludeExpression;
 
                 default:
-                    throw new InvalidOperationException(CoreStrings.TranslationFailed(extensionExpression.Print()));
+                    throw new InvalidOperationException(
+                        CoreStrings.TranslationFailed(extensionExpression.Print())
+                    );
             }
         }
 
@@ -275,8 +332,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override ElementInit VisitElementInit(ElementInit elementInit)
-            => elementInit.Update(elementInit.Arguments.Select(e => MatchTypes(Visit(e), e.Type)));
+        protected override ElementInit VisitElementInit(ElementInit elementInit) =>
+            elementInit.Update(elementInit.Arguments.Select(e => MatchTypes(Visit(e), e.Type)));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -302,8 +359,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                 case UnaryExpression unaryExpression:
                     shaperExpression = unaryExpression.Operand as EntityShaperExpression;
-                    if (shaperExpression == null
-                        || unaryExpression.NodeType != ExpressionType.Convert)
+                    if (
+                        shaperExpression == null
+                        || unaryExpression.NodeType != ExpressionType.Convert
+                    )
                     {
                         return NullSafeUpdate(innerExpression);
                     }
@@ -318,24 +377,33 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             switch (shaperExpression.ValueBufferExpression)
             {
                 case ProjectionBindingExpression innerProjectionBindingExpression:
-                    innerEntityProjection = (EntityProjectionExpression)_selectExpression.Projection[
-                        innerProjectionBindingExpression.Index.Value].Expression;
+                    innerEntityProjection =
+                        (EntityProjectionExpression)_selectExpression.Projection[
+                            innerProjectionBindingExpression.Index.Value
+                        ].Expression;
                     break;
 
                 case UnaryExpression unaryExpression:
                     // Unwrap EntityProjectionExpression when the root entity is not projected
-                    innerEntityProjection = (EntityProjectionExpression)((UnaryExpression)unaryExpression.Operand).Operand;
+                    innerEntityProjection = (EntityProjectionExpression)(
+                        (UnaryExpression)unaryExpression.Operand
+                    ).Operand;
                     break;
 
                 default:
-                    throw new InvalidOperationException(CoreStrings.TranslationFailed(memberExpression.Print()));
+                    throw new InvalidOperationException(
+                        CoreStrings.TranslationFailed(memberExpression.Print())
+                    );
             }
 
             var navigationProjection = innerEntityProjection.BindMember(
-                memberExpression.Member, innerExpression.Type, clientEval: true, out var propertyBase);
+                memberExpression.Member,
+                innerExpression.Type,
+                clientEval: true,
+                out var propertyBase
+            );
 
-            if (!(propertyBase is INavigation navigation)
-                || !navigation.IsEmbedded())
+            if (!(propertyBase is INavigation navigation) || !navigation.IsEmbedded())
             {
                 return NullSafeUpdate(innerExpression);
             }
@@ -345,16 +413,26 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 case EntityProjectionExpression entityProjection:
                     return new EntityShaperExpression(
                         navigation.TargetEntityType,
-                        Expression.Convert(Expression.Convert(entityProjection, typeof(object)), typeof(ValueBuffer)),
-                        nullable: true);
+                        Expression.Convert(
+                            Expression.Convert(entityProjection, typeof(object)),
+                            typeof(ValueBuffer)
+                        ),
+                        nullable: true
+                    );
 
                 case ObjectArrayProjectionExpression objectArrayProjectionExpression:
                 {
                     var innerShaperExpression = new EntityShaperExpression(
                         navigation.TargetEntityType,
                         Expression.Convert(
-                            Expression.Convert(objectArrayProjectionExpression.InnerProjection, typeof(object)), typeof(ValueBuffer)),
-                        nullable: true);
+                            Expression.Convert(
+                                objectArrayProjectionExpression.InnerProjection,
+                                typeof(object)
+                            ),
+                            typeof(ValueBuffer)
+                        ),
+                        nullable: true
+                    );
 
 #pragma warning disable CS0618 // Type or member is obsolete
                     return new CollectionShaperExpression(
@@ -362,30 +440,40 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         objectArrayProjectionExpression,
                         innerShaperExpression,
                         navigation,
-                        innerShaperExpression.EntityType.ClrType);
+                        innerShaperExpression.EntityType.ClrType
+                    );
                 }
 
                 default:
-                    throw new InvalidOperationException(CoreStrings.TranslationFailed(memberExpression.Print()));
+                    throw new InvalidOperationException(
+                        CoreStrings.TranslationFailed(memberExpression.Print())
+                    );
             }
 
             Expression NullSafeUpdate(Expression expression)
             {
                 Expression updatedMemberExpression = memberExpression.Update(
-                    expression != null ? MatchTypes(expression, memberExpression.Expression.Type) : expression);
+                    expression != null
+                      ? MatchTypes(expression, memberExpression.Expression.Type)
+                      : expression
+                );
 
                 if (expression?.Type.IsNullableType() == true)
                 {
                     var nullableReturnType = memberExpression.Type.MakeNullable();
                     if (!memberExpression.Type.IsNullableType())
                     {
-                        updatedMemberExpression = Expression.Convert(updatedMemberExpression, nullableReturnType);
+                        updatedMemberExpression = Expression.Convert(
+                            updatedMemberExpression,
+                            nullableReturnType
+                        );
                     }
 
                     updatedMemberExpression = Expression.Condition(
                         Expression.Equal(expression, Expression.Default(expression.Type)),
                         Expression.Constant(null, nullableReturnType),
-                        updatedMemberExpression);
+                        updatedMemberExpression
+                    );
                 }
 
                 return updatedMemberExpression;
@@ -466,8 +554,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
         {
-            if (methodCallExpression.TryGetEFPropertyArguments(out var source, out var memberName)
-                || methodCallExpression.TryGetIndexerArguments(_model, out source, out memberName))
+            if (
+                methodCallExpression.TryGetEFPropertyArguments(out var source, out var memberName)
+                || methodCallExpression.TryGetIndexerArguments(_model, out source, out memberName)
+            )
             {
                 if (!_clientEval)
                 {
@@ -485,8 +575,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                     case UnaryExpression unaryExpression:
                         shaperExpression = unaryExpression.Operand as EntityShaperExpression;
-                        if (shaperExpression == null
-                            || unaryExpression.NodeType != ExpressionType.Convert)
+                        if (
+                            shaperExpression == null
+                            || unaryExpression.NodeType != ExpressionType.Convert
+                        )
                         {
                             return null;
                         }
@@ -494,7 +586,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         break;
 
                     case ParameterExpression parameterExpression:
-                        if (!_collectionShaperMapping.TryGetValue(parameterExpression, out var collectionShaper))
+                        if (
+                            !_collectionShaperMapping.TryGetValue(
+                                parameterExpression,
+                                out var collectionShaper
+                            )
+                        )
                         {
                             return null;
                         }
@@ -510,16 +607,22 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 switch (shaperExpression.ValueBufferExpression)
                 {
                     case ProjectionBindingExpression innerProjectionBindingExpression:
-                        innerEntityProjection = (EntityProjectionExpression)_selectExpression.Projection[
-                            innerProjectionBindingExpression.Index.Value].Expression;
+                        innerEntityProjection =
+                            (EntityProjectionExpression)_selectExpression.Projection[
+                                innerProjectionBindingExpression.Index.Value
+                            ].Expression;
                         break;
 
                     case UnaryExpression unaryExpression:
-                        innerEntityProjection = (EntityProjectionExpression)((UnaryExpression)unaryExpression.Operand).Operand;
+                        innerEntityProjection = (EntityProjectionExpression)(
+                            (UnaryExpression)unaryExpression.Operand
+                        ).Operand;
                         break;
 
                     default:
-                        throw new InvalidOperationException(CoreStrings.TranslationFailed(methodCallExpression.Print()));
+                        throw new InvalidOperationException(
+                            CoreStrings.TranslationFailed(methodCallExpression.Print())
+                        );
                 }
 
                 Expression navigationProjection;
@@ -527,10 +630,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 if (navigation == null)
                 {
                     navigationProjection = innerEntityProjection.BindMember(
-                        memberName, visitedSource.Type, clientEval: true, out var propertyBase);
+                        memberName,
+                        visitedSource.Type,
+                        clientEval: true,
+                        out var propertyBase
+                    );
 
-                    if (!(propertyBase is INavigation projectedNavigation)
-                        || !projectedNavigation.IsEmbedded())
+                    if (
+                        !(propertyBase is INavigation projectedNavigation)
+                        || !projectedNavigation.IsEmbedded()
+                    )
                     {
                         return null;
                     }
@@ -539,7 +648,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 }
                 else
                 {
-                    navigationProjection = innerEntityProjection.BindNavigation(navigation, clientEval: true);
+                    navigationProjection = innerEntityProjection.BindNavigation(
+                        navigation,
+                        clientEval: true
+                    );
                 }
 
                 switch (navigationProjection)
@@ -547,16 +659,26 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     case EntityProjectionExpression entityProjection:
                         return new EntityShaperExpression(
                             navigation.TargetEntityType,
-                            Expression.Convert(Expression.Convert(entityProjection, typeof(object)), typeof(ValueBuffer)),
-                            nullable: true);
+                            Expression.Convert(
+                                Expression.Convert(entityProjection, typeof(object)),
+                                typeof(ValueBuffer)
+                            ),
+                            nullable: true
+                        );
 
                     case ObjectArrayProjectionExpression objectArrayProjectionExpression:
                     {
                         var innerShaperExpression = new EntityShaperExpression(
                             navigation.TargetEntityType,
                             Expression.Convert(
-                                Expression.Convert(objectArrayProjectionExpression.InnerProjection, typeof(object)), typeof(ValueBuffer)),
-                            nullable: true);
+                                Expression.Convert(
+                                    objectArrayProjectionExpression.InnerProjection,
+                                    typeof(object)
+                                ),
+                                typeof(ValueBuffer)
+                            ),
+                            nullable: true
+                        );
 
 #pragma warning disable CS0618 // Type or member is obsolete
                         return new CollectionShaperExpression(
@@ -564,11 +686,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             objectArrayProjectionExpression,
                             innerShaperExpression,
                             navigation,
-                            innerShaperExpression.EntityType.ClrType);
+                            innerShaperExpression.EntityType.ClrType
+                        );
                     }
 
                     default:
-                        throw new InvalidOperationException(CoreStrings.TranslationFailed(methodCallExpression.Print()));
+                        throw new InvalidOperationException(
+                            CoreStrings.TranslationFailed(methodCallExpression.Print())
+                        );
                 }
             }
 
@@ -577,18 +702,19 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 var method = methodCallExpression.Method;
                 if (method.DeclaringType == typeof(Queryable))
                 {
-                    var genericMethod = method.IsGenericMethod ? method.GetGenericMethodDefinition() : null;
+                    var genericMethod = method.IsGenericMethod
+                        ? method.GetGenericMethodDefinition()
+                        : null;
                     var visitedSource = Visit(methodCallExpression.Arguments[0]);
 
                     switch (method.Name)
                     {
                         case nameof(Queryable.AsQueryable)
-                            when genericMethod == QueryableMethods.AsQueryable:
+                              when genericMethod == QueryableMethods.AsQueryable:
                             // Unwrap AsQueryable
                             return visitedSource;
 
-                        case nameof(Queryable.Select)
-                            when genericMethod == QueryableMethods.Select:
+                        case nameof(Queryable.Select) when genericMethod == QueryableMethods.Select:
 #pragma warning disable CS0618 // Type or member is obsolete
                             if (!(visitedSource is CollectionShaperExpression shaper))
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -602,9 +728,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                             lambda = Expression.Lambda(Visit(lambda.Body), lambda.Parameters);
                             return Expression.Call(
-                                EnumerableMethods.Select.MakeGenericMethod(method.GetGenericArguments()),
+                                EnumerableMethods.Select.MakeGenericMethod(
+                                    method.GetGenericArguments()
+                                ),
                                 shaper,
-                                lambda);
+                                lambda
+                            );
                     }
                 }
             }
@@ -619,21 +748,28 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             Expression updatedMethodCallExpression = methodCallExpression.Update(
                 @object != null ? MatchTypes(@object, methodCallExpression.Object.Type) : @object,
-                arguments);
+                arguments
+            );
 
-            if (@object?.Type.IsNullableType() == true
-                && !methodCallExpression.Object.Type.IsNullableType())
+            if (
+                @object?.Type.IsNullableType() == true
+                && !methodCallExpression.Object.Type.IsNullableType()
+            )
             {
                 var nullableReturnType = methodCallExpression.Type.MakeNullable();
                 if (!methodCallExpression.Type.IsNullableType())
                 {
-                    updatedMethodCallExpression = Expression.Convert(updatedMethodCallExpression, nullableReturnType);
+                    updatedMethodCallExpression = Expression.Convert(
+                        updatedMethodCallExpression,
+                        nullableReturnType
+                    );
                 }
 
                 return Expression.Condition(
                     Expression.Equal(@object, Expression.Default(@object.Type)),
                     Expression.Constant(null, nullableReturnType),
-                    updatedMethodCallExpression);
+                    updatedMethodCallExpression
+                );
             }
 
             return updatedMethodCallExpression;
@@ -652,8 +788,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 return newExpression;
             }
 
-            if (!_clientEval
-                && newExpression.Members == null)
+            if (!_clientEval && newExpression.Members == null)
             {
                 return null;
             }
@@ -669,7 +804,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 }
                 else
                 {
-                    var projectionMember = _projectionMembers.Peek().Append(newExpression.Members[i]);
+                    var projectionMember = _projectionMembers
+                        .Peek()
+                        .Append(newExpression.Members[i]);
                     _projectionMembers.Push(projectionMember);
                     visitedArgument = Visit(argument);
                     if (visitedArgument == null)
@@ -692,8 +829,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Expression VisitNewArray(NewArrayExpression newArrayExpression)
-            => newArrayExpression.Update(newArrayExpression.Expressions.Select(e => MatchTypes(Visit(e), e.Type)));
+        protected override Expression VisitNewArray(NewArrayExpression newArrayExpression) =>
+            newArrayExpression.Update(
+                newArrayExpression.Expressions.Select(e => MatchTypes(Visit(e), e.Type))
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -705,11 +844,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         {
             var operand = Visit(unaryExpression.Operand);
 
-            return (unaryExpression.NodeType == ExpressionType.Convert
-                    || unaryExpression.NodeType == ExpressionType.ConvertChecked)
+            return
+                (
+                    unaryExpression.NodeType == ExpressionType.Convert
+                    || unaryExpression.NodeType == ExpressionType.ConvertChecked
+                )
                 && unaryExpression.Type == operand.Type
-                    ? operand
-                    : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
+              ? operand
+              : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
         }
 
         // TODO: Debugging
@@ -717,16 +859,20 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         {
             if (projectionBindingExpression.QueryExpression != _selectExpression)
             {
-                throw new InvalidOperationException(CoreStrings.TranslationFailed(projectionBindingExpression.Print()));
+                throw new InvalidOperationException(
+                    CoreStrings.TranslationFailed(projectionBindingExpression.Print())
+                );
             }
         }
 
         private static Expression MatchTypes(Expression expression, Type targetType)
         {
-            if (targetType != expression.Type
-                && targetType.TryGetSequenceType() == null)
+            if (targetType != expression.Type && targetType.TryGetSequenceType() == null)
             {
-                Check.DebugAssert(targetType.MakeNullable() == expression.Type, "expression.Type must be nullable of targetType");
+                Check.DebugAssert(
+                    targetType.MakeNullable() == expression.Type,
+                    "expression.Type must be nullable of targetType"
+                );
 
                 expression = Expression.Convert(expression, targetType);
             }
@@ -735,7 +881,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         }
 
         [UsedImplicitly]
-        private static T GetParameterValue<T>(QueryContext queryContext, string parameterName)
-            => (T)queryContext.ParameterValues[parameterName];
+        private static T GetParameterValue<T>(QueryContext queryContext, string parameterName) =>
+            (T)queryContext.ParameterValues[parameterName];
     }
 }

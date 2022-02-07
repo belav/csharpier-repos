@@ -17,13 +17,17 @@ public struct AA
 {
     public A m_a;
     public B m_b;
+
     public AA(int a, int b)
     {
         m_a.m_aval = a;
         m_b.m_bval = b;
     }
 
-    public unsafe static B* get_pb(AA* px) { return &px->m_b; }
+    public unsafe static B* get_pb(AA* px)
+    {
+        return &px->m_b;
+    }
 }
 
 internal class TestApp
@@ -32,6 +36,7 @@ internal class TestApp
     {
         return AA.get_pb(px)->m_bval;
     }
+
     private static unsafe int Main()
     {
         AA loc_x = new AA(0, 100);

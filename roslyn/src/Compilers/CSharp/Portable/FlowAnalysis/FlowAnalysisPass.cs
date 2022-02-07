@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundBlock block,
             DiagnosticBag diagnostics,
             bool hasTrailingExpression,
-            bool originalBodyNested)
+            bool originalBodyNested
+        )
         {
 #if DEBUG
             // We should only see a trailingExpression if we're in a Script initializer.
@@ -40,11 +41,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 #endif
             var compilation = method.DeclaringCompilation;
 
-            if (method.ReturnsVoid || method.IsIterator || method.IsAsyncEffectivelyReturningTask(compilation))
+            if (
+                method.ReturnsVoid
+                || method.IsIterator
+                || method.IsAsyncEffectivelyReturningTask(compilation)
+            )
             {
                 // we don't analyze synthesized void methods.
-                if ((method.IsImplicitlyDeclared && !method.IsScriptInitializer) ||
-                    Analyze(compilation, method, block, diagnostics))
+                if (
+                    (method.IsImplicitlyDeclared && !method.IsScriptInitializer)
+                    || Analyze(compilation, method, block, diagnostics)
+                )
                 {
                     block = AppendImplicitReturn(block, method, originalBodyNested);
                 }
@@ -57,22 +64,46 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(method.MethodKind != MethodKind.AnonymousFunction);
 
                 // Add implicit "return default(T)" if this is a submission that does not have a trailing expression.
-                var submissionResultType = (method as SynthesizedInteractiveInitializerMethod)?.ResultType;
+                var submissionResultType = (
+                    method as SynthesizedInteractiveInitializerMethod
+                )?.ResultType;
                 if (!hasTrailingExpression && ((object)submissionResultType != null))
                 {
                     Debug.Assert(!submissionResultType.IsVoidType());
 
-                    var trailingExpression = new BoundDefaultExpression(method.GetNonNullSyntaxNode(), submissionResultType);
-                    var newStatements = block.Statements.Add(new BoundReturnStatement(trailingExpression.Syntax, RefKind.None, trailingExpression));
-                    block = new BoundBlock(block.Syntax, ImmutableArray<LocalSymbol>.Empty, newStatements) { WasCompilerGenerated = true };
+                    var trailingExpression = new BoundDefaultExpression(
+                        method.GetNonNullSyntaxNode(),
+                        submissionResultType
+                    );
+                    var newStatements = block.Statements.Add(
+                        new BoundReturnStatement(
+                            trailingExpression.Syntax,
+                            RefKind.None,
+                            trailingExpression
+                        )
+                    );
+                    block = new BoundBlock(
+                        block.Syntax,
+                        ImmutableArray<LocalSymbol>.Empty,
+                        newStatements
+                    )
+                    {
+                        WasCompilerGenerated = true
+                    };
 #if DEBUG
                     // It should not be necessary to repeat analysis after adding this node, because adding a trailing
                     // return in cases where one was missing should never produce different Diagnostics.
-                    IEnumerable<Diagnostic> getErrorsOnly(IEnumerable<Diagnostic> diags) => diags.Where(d => d.Severity == DiagnosticSeverity.Error);
+                    IEnumerable<Diagnostic> getErrorsOnly(IEnumerable<Diagnostic> diags) =>
+                        diags.Where(d => d.Severity == DiagnosticSeverity.Error);
                     var flowAnalysisDiagnostics = DiagnosticBag.GetInstance();
                     Debug.Assert(!Analyze(compilation, method, block, flowAnalysisDiagnostics));
                     // Ignore warnings since flow analysis reports nullability mismatches.
-                    Debug.Assert(getErrorsOnly(flowAnalysisDiagnostics.ToReadOnly()).SequenceEqual(getErrorsOnly(diagnostics.ToReadOnly().Skip(initialDiagnosticCount))));
+                    Debug.Assert(
+                        getErrorsOnly(flowAnalysisDiagnostics.ToReadOnly())
+                            .SequenceEqual(
+                                getErrorsOnly(diagnostics.ToReadOnly().Skip(initialDiagnosticCount))
+                            )
+                    );
                     flowAnalysisDiagnostics.Free();
 #endif
                 }
@@ -87,7 +118,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return block;
         }
 
-        private static BoundBlock AppendImplicitReturn(BoundBlock body, MethodSymbol method, bool originalBodyNested)
+        private static BoundBlock AppendImplicitReturn(
+            BoundBlock body,
+            MethodSymbol method,
+            bool originalBodyNested
+        )
         {
             if (originalBodyNested)
             {
@@ -98,7 +133,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 builder.AddRange(statements, n - 1);
                 builder.Add(AppendImplicitReturn((BoundBlock)statements[n - 1], method));
 
-                return body.Update(body.Locals, ImmutableArray<LocalFunctionSymbol>.Empty, builder.ToImmutableAndFree());
+                return body.Update(
+                    body.Locals,
+                    ImmutableArray<LocalFunctionSymbol>.Empty,
+                    builder.ToImmutableAndFree()
+                );
             }
             else
             {
@@ -116,15 +155,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             SyntaxNode syntax = body.Syntax;
 
-            Debug.Assert(body.WasCompilerGenerated ||
-                         syntax.IsKind(SyntaxKind.Block) ||
-                         syntax.IsKind(SyntaxKind.ArrowExpressionClause) ||
-                         syntax.IsKind(SyntaxKind.ConstructorDeclaration) ||
-                         syntax.IsKind(SyntaxKind.CompilationUnit));
+            Debug.Assert(
+                body.WasCompilerGenerated
+                    || syntax.IsKind(SyntaxKind.Block)
+                    || syntax.IsKind(SyntaxKind.ArrowExpressionClause)
+                    || syntax.IsKind(SyntaxKind.ConstructorDeclaration)
+                    || syntax.IsKind(SyntaxKind.CompilationUnit)
+            );
 
-            BoundStatement ret = (method.IsIterator && !method.IsAsync)
-                ? (BoundStatement)BoundYieldBreakStatement.Synthesized(syntax)
-                : BoundReturnStatement.Synthesized(syntax, RefKind.None, null);
+            BoundStatement ret =
+                (method.IsIterator && !method.IsAsync)
+                    ? (BoundStatement)BoundYieldBreakStatement.Synthesized(syntax)
+                    : BoundReturnStatement.Synthesized(syntax, RefKind.None, null);
 
             return body.Update(body.Locals, body.LocalFunctions, body.Statements.Add(ret));
         }
@@ -133,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             MethodSymbol method,
             BoundBlock block,
-            DiagnosticBag diagnostics)
+            DiagnosticBag diagnostics
+        )
         {
             var result = ControlFlowPass.Analyze(compilation, method, block, diagnostics);
             DefiniteAssignmentPass.Analyze(compilation, method, block, diagnostics);

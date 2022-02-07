@@ -16,13 +16,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 {
     public class ObjectCreationCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ObjectCreationCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ObjectCreationCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InObjectCreation()
         {
-            var markup = @"
+            var markup =
+                @"
 class MyGeneric<T> { }
 
 void goo()
@@ -36,7 +37,8 @@ void goo()
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInAnonymousTypeObjectCreation1()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -52,7 +54,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotVoid()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -69,7 +72,7 @@ class C
         public async Task InYieldReturn()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -87,7 +90,7 @@ class Program
         public async Task InAsyncMethodReturnStatement()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -104,7 +107,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task IsCommitCharacterTest()
         {
-            const string markup = @"
+            const string markup =
+                @"
 using D = System.Globalization.DigitShapes; 
 class Program
 {
@@ -114,25 +118,49 @@ class Program
     }
 }";
 
-            await VerifyCommitCharactersAsync(markup, textTypedSoFar: "",
+            await VerifyCommitCharactersAsync(
+                markup,
+                textTypedSoFar: "",
                 validChars: new[] { ' ', '(', '{', '[' },
-                invalidChars: new[] { 'x', ',', '#' });
+                invalidChars: new[] { 'x', ',', '#' }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public void IsTextualTriggerCharacterTest()
         {
-            VerifyTextualTriggerCharacter("Abc$$ ", shouldTriggerWithTriggerOnLettersEnabled: true, shouldTriggerWithTriggerOnLettersDisabled: true);
-            VerifyTextualTriggerCharacter("Abc $$X", shouldTriggerWithTriggerOnLettersEnabled: true, shouldTriggerWithTriggerOnLettersDisabled: false);
-            VerifyTextualTriggerCharacter("Abc $$@", shouldTriggerWithTriggerOnLettersEnabled: false, shouldTriggerWithTriggerOnLettersDisabled: false);
-            VerifyTextualTriggerCharacter("Abc$$@", shouldTriggerWithTriggerOnLettersEnabled: false, shouldTriggerWithTriggerOnLettersDisabled: false);
-            VerifyTextualTriggerCharacter("Abc$$.", shouldTriggerWithTriggerOnLettersEnabled: false, shouldTriggerWithTriggerOnLettersDisabled: false);
+            VerifyTextualTriggerCharacter(
+                "Abc$$ ",
+                shouldTriggerWithTriggerOnLettersEnabled: true,
+                shouldTriggerWithTriggerOnLettersDisabled: true
+            );
+            VerifyTextualTriggerCharacter(
+                "Abc $$X",
+                shouldTriggerWithTriggerOnLettersEnabled: true,
+                shouldTriggerWithTriggerOnLettersDisabled: false
+            );
+            VerifyTextualTriggerCharacter(
+                "Abc $$@",
+                shouldTriggerWithTriggerOnLettersEnabled: false,
+                shouldTriggerWithTriggerOnLettersDisabled: false
+            );
+            VerifyTextualTriggerCharacter(
+                "Abc$$@",
+                shouldTriggerWithTriggerOnLettersEnabled: false,
+                shouldTriggerWithTriggerOnLettersDisabled: false
+            );
+            VerifyTextualTriggerCharacter(
+                "Abc$$.",
+                shouldTriggerWithTriggerOnLettersEnabled: false,
+                shouldTriggerWithTriggerOnLettersDisabled: false
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task SendEnterThroughToEditorTest()
         {
-            const string markup = @"
+            const string markup =
+                @"
 using D = System.Globalization.DigitShapes; 
 class Program
 {
@@ -142,16 +170,32 @@ class Program
     }
 }";
 
-            await VerifySendEnterThroughToEnterAsync(markup, "D", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync(markup, "D", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync(markup, "D", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "D",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "D",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "D",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [WorkItem(828196, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/828196")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task SuggestAlias()
         {
-            var markup = @"
+            var markup =
+                @"
 using D = System.Globalization.DigitShapes; 
 class Program
 {
@@ -167,7 +211,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task SuggestAlias2()
         {
-            var markup = @"
+            var markup =
+                @"
 namespace N
 {
 using D = System.Globalization.DigitShapes; 
@@ -188,7 +233,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CommitAlias()
         {
-            var markup = @"
+            var markup =
+                @"
 using D = System.Globalization.DigitShapes; 
 class Program
 {
@@ -198,7 +244,8 @@ class Program
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using D = System.Globalization.DigitShapes; 
 class Program
 {
@@ -214,7 +261,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AfterNewFollowedByAssignment()
         {
-            var markup = @"
+            var markup =
+                @"
 class Location {}
 enum EAB { A, B }
 class Goo
@@ -240,7 +288,8 @@ class Goo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AfterNewFollowedByAssignment_GrandParentIsSimpleAssignment()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -256,7 +305,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AfterNewFollowedBySimpleAssignment_GrandParentIsEqualsValueClause()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -273,7 +323,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AfterNewFollowedByCompoundAssignment_GrandParentIsEqualsValueClause()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -290,7 +341,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AfterNewFollowedByCompoundAssignment_GrandParentIsEqualsValueClause2()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -307,7 +359,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CommitObjectWithParenthesis1()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M1()
@@ -316,7 +369,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M1()
@@ -332,7 +386,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CommitObjectWithParenthesis2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M1()
@@ -343,7 +398,8 @@ class C
     void M2(object o) { }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M1()
@@ -361,7 +417,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task DontCommitObjectWithOpenBrace1()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M1()
@@ -370,7 +427,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M1()
@@ -386,7 +444,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task DontCommitObjectWithOpenBrace2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M1()
@@ -397,7 +456,8 @@ class C
     void M2(object o) { }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M1()
@@ -416,7 +476,7 @@ class C
         public async Task InExpressionBodiedProperty()
         {
             var markup =
-@"class C
+                @"class C
 {
     object Object => new $$
 }
@@ -429,7 +489,7 @@ class C
         public async Task InExpressionBodiedMethod()
         {
             var markup =
-@"class C
+                @"class C
 {
     object GetObject() => new $$
 }
@@ -442,7 +502,7 @@ class C
         public async Task BeforeAttributeParsedAsImplicitArray()
         {
             var markup =
-@"class Program
+                @"class Program
 {
     Program p = new $$ 
 
@@ -458,7 +518,7 @@ class C
         public async Task InMethodCallBeforeAssignment1()
         {
             var markup =
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -482,7 +542,7 @@ class C
         public async Task InMethodCallBeforeAssignment2()
         {
             var markup =
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -506,7 +566,7 @@ class C
         public async Task InPropertyWithSameNameAsGenericTypeArgument1()
         {
             var markup =
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -531,7 +591,7 @@ class C
         public async Task InPropertyWithSameNameAsGenericTypeArgument2()
         {
             var markup =
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -551,7 +611,7 @@ class C
         public async Task InPropertyWithSameNameAsGenericTypeArgument3()
         {
             var markup =
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -571,7 +631,7 @@ class C
         public async Task InPropertyWithSameNameAsGenericTypeArgument4()
         {
             var markup =
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -596,7 +656,7 @@ class C
         public async Task PropertyWithSameNameAsOtherType()
         {
             var markup =
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -619,7 +679,7 @@ class C
         public async Task NullableTypeCreation()
         {
             var markup =
-@"#nullable enable
+                @"#nullable enable
 namespace ConsoleApplication1
 {
     class Program
@@ -639,7 +699,7 @@ namespace ConsoleApplication1
         public async Task NullableTypeCreation_AssignedNull()
         {
             var markup =
-@"#nullable enable
+                @"#nullable enable
 namespace ConsoleApplication1
 {
     class Program
@@ -659,7 +719,7 @@ namespace ConsoleApplication1
         public async Task NullableTypeCreation_NestedNull()
         {
             var markup =
-@"#nullable enable
+                @"#nullable enable
 
 using System.Collections.Generic;
 
@@ -683,7 +743,8 @@ namespace ConsoleApplication1
         [InlineData(';')]
         public async Task CreateObjectAndCommitWithCustomizedCommitChar(char commitChar)
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void Bar()
@@ -691,7 +752,8 @@ class Program
         object o = new $$
     }
 }";
-            var expectedMark = $@"
+            var expectedMark =
+                $@"
 class Program
 {{
     void Bar()
@@ -707,7 +769,8 @@ class Program
         [InlineData(';')]
         public async Task CreateNullableObjectAndCommitWithCustomizedCommitChar(char commitChar)
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void Bar()
@@ -715,7 +778,8 @@ class Program
         object? o = new $$
     }
 }";
-            var expectedMark = $@"
+            var expectedMark =
+                $@"
 class Program
 {{
     void Bar()
@@ -731,7 +795,8 @@ class Program
         [InlineData(';')]
         public async Task CreateStringAsLocalAndCommitWithCustomizedCommitChar(char commitChar)
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void Bar()
@@ -739,7 +804,8 @@ class Program
         string o = new $$
     }
 }";
-            var expectedMark = $@"
+            var expectedMark =
+                $@"
 class Program
 {{
     void Bar()
@@ -755,7 +821,8 @@ class Program
         [InlineData(';')]
         public async Task CreateGenericListAsLocalAndCommitWithCustomizedChar(char commitChar)
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -764,7 +831,8 @@ class Program
         List<int> o = new $$
     }
 }";
-            var expectedMark = $@"
+            var expectedMark =
+                $@"
 using System.Collections.Generic;
 class Program
 {{
@@ -773,19 +841,26 @@ class Program
         List<int> o = new List<int>(){commitChar}
     }}
 }}";
-            await VerifyProviderCommitAsync(markup, "List<int>", expectedMark, commitChar: commitChar);
+            await VerifyProviderCommitAsync(
+                markup,
+                "List<int>",
+                expectedMark,
+                commitChar: commitChar
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CreateGenericListAsFieldAndCommitWithSemicolon()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 class Program
 {
     private List<int> o = new $$
 }";
-            var expectedMark = @"
+            var expectedMark =
+                @"
 using System.Collections.Generic;
 class Program
 {

@@ -12,7 +12,11 @@ internal static partial class Interop
         [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_CreateMemoryBio")]
         internal static partial SafeBioHandle CreateMemoryBio();
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioNewFile", CharSet = CharSet.Ansi)]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_BioNewFile",
+            CharSet = CharSet.Ansi
+        )]
         internal static partial SafeBioHandle BioNewFile(string filename, string mode);
 
         [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioDestroy")]

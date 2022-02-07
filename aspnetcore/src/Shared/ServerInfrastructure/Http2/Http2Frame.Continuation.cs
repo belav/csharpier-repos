@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     +---------------------------------------------------------------+
     |                   Header Block Fragment (*)                 ...
     +---------------------------------------------------------------+
-*/
+    */
 internal partial class Http2Frame
 {
     public Http2ContinuationFrameFlags ContinuationFlags
@@ -16,7 +16,9 @@ internal partial class Http2Frame
         set => Flags = (byte)value;
     }
 
-    public bool ContinuationEndHeaders => (ContinuationFlags & Http2ContinuationFrameFlags.END_HEADERS) == Http2ContinuationFrameFlags.END_HEADERS;
+    public bool ContinuationEndHeaders =>
+        (ContinuationFlags & Http2ContinuationFrameFlags.END_HEADERS)
+        == Http2ContinuationFrameFlags.END_HEADERS;
 
     public void PrepareContinuation(Http2ContinuationFrameFlags flags, int streamId)
     {

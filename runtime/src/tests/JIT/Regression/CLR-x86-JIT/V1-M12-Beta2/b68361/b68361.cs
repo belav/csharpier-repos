@@ -5,6 +5,7 @@
 namespace A
 {
     using System;
+
     class B
     {
         public static int downBy1ge(int amount)
@@ -249,4 +250,3 @@ namespace A
         }
     }
 }
-

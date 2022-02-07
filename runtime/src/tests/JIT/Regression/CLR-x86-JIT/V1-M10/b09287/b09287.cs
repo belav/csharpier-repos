@@ -7,6 +7,7 @@ namespace Default
     //@BEGINRENAME; Verify this renames
     //@ENDRENAME; Verify this renames
     using System;
+
     //
     // X class
     //
@@ -14,15 +15,10 @@ namespace Default
     {
         public static int Main(String[] argv)
         {
-
             Console.WriteLine("Entering Hello world");
-
 
             Console.WriteLine("Done");
             return 100;
-
         } // main
-
     } // Spin
-
 }

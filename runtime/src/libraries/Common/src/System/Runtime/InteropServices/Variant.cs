@@ -34,12 +34,14 @@ namespace System.Runtime.InteropServices
 #endif
 
         // Most of the data types in the Variant are carried in _typeUnion
-        [FieldOffset(0)] private TypeUnion _typeUnion;
+        [FieldOffset(0)]
+        private TypeUnion _typeUnion;
 
         // Decimal is the largest data type and it needs to use the space that is normally unused in TypeUnion._wReserved1, etc.
         // Hence, it is declared to completely overlap with TypeUnion. A Decimal does not use the first two bytes, and so
         // TypeUnion._vt can still be used to encode the type.
-        [FieldOffset(0)] private decimal _decimal;
+        [FieldOffset(0)]
+        private decimal _decimal;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct TypeUnion
@@ -62,28 +64,71 @@ namespace System.Runtime.InteropServices
         [StructLayout(LayoutKind.Explicit)]
         private struct UnionTypes
         {
-            [FieldOffset(0)] public sbyte _i1;
-            [FieldOffset(0)] public short _i2;
-            [FieldOffset(0)] public int _i4;
-            [FieldOffset(0)] public long _i8;
-            [FieldOffset(0)] public byte _ui1;
-            [FieldOffset(0)] public ushort _ui2;
-            [FieldOffset(0)] public uint _ui4;
-            [FieldOffset(0)] public ulong _ui8;
-            [FieldOffset(0)] public int _int;
-            [FieldOffset(0)] public uint _uint;
-            [FieldOffset(0)] public short _bool;
-            [FieldOffset(0)] public int _error;
-            [FieldOffset(0)] public float _r4;
-            [FieldOffset(0)] public double _r8;
-            [FieldOffset(0)] public long _cy;
-            [FieldOffset(0)] public double _date;
-            [FieldOffset(0)] public IntPtr _bstr;
-            [FieldOffset(0)] public IntPtr _unknown;
-            [FieldOffset(0)] public IntPtr _dispatch;
-            [FieldOffset(0)] public IntPtr _pvarVal;
-            [FieldOffset(0)] public IntPtr _byref;
-            [FieldOffset(0)] public Record _record;
+            [FieldOffset(0)]
+            public sbyte _i1;
+
+            [FieldOffset(0)]
+            public short _i2;
+
+            [FieldOffset(0)]
+            public int _i4;
+
+            [FieldOffset(0)]
+            public long _i8;
+
+            [FieldOffset(0)]
+            public byte _ui1;
+
+            [FieldOffset(0)]
+            public ushort _ui2;
+
+            [FieldOffset(0)]
+            public uint _ui4;
+
+            [FieldOffset(0)]
+            public ulong _ui8;
+
+            [FieldOffset(0)]
+            public int _int;
+
+            [FieldOffset(0)]
+            public uint _uint;
+
+            [FieldOffset(0)]
+            public short _bool;
+
+            [FieldOffset(0)]
+            public int _error;
+
+            [FieldOffset(0)]
+            public float _r4;
+
+            [FieldOffset(0)]
+            public double _r8;
+
+            [FieldOffset(0)]
+            public long _cy;
+
+            [FieldOffset(0)]
+            public double _date;
+
+            [FieldOffset(0)]
+            public IntPtr _bstr;
+
+            [FieldOffset(0)]
+            public IntPtr _unknown;
+
+            [FieldOffset(0)]
+            public IntPtr _dispatch;
+
+            [FieldOffset(0)]
+            public IntPtr _pvarVal;
+
+            [FieldOffset(0)]
+            public IntPtr _byref;
+
+            [FieldOffset(0)]
+            public Record _record;
         }
 
         /// <summary>
@@ -160,7 +205,9 @@ namespace System.Runtime.InteropServices
                 case VarEnum.VT_BOOL:
                     // VARIANT_TRUE  = -1
                     // VARIANT_FALSE = 0
-                    *(short*)this._typeUnion._unionTypes._byref = (bool)value ? (short)-1 : (short)0;
+                    *(short*)this._typeUnion._unionTypes._byref = (bool)value
+                        ? (short)-1
+                        : (short)0;
                     break;
 
                 case VarEnum.VT_I4:
@@ -198,19 +245,27 @@ namespace System.Runtime.InteropServices
                     break;
 
                 case VarEnum.VT_UNKNOWN:
-                    *(IntPtr*)this._typeUnion._unionTypes._byref = Marshal.GetIUnknownForObject(value);
+                    *(IntPtr*)this._typeUnion._unionTypes._byref = Marshal.GetIUnknownForObject(
+                        value
+                    );
                     break;
 
                 case VarEnum.VT_DISPATCH:
-                    *(IntPtr*)this._typeUnion._unionTypes._byref = Marshal.GetIDispatchForObject(value);
+                    *(IntPtr*)this._typeUnion._unionTypes._byref = Marshal.GetIDispatchForObject(
+                        value
+                    );
                     break;
 
                 case VarEnum.VT_BSTR:
-                    *(IntPtr*)this._typeUnion._unionTypes._byref = Marshal.StringToBSTR((string)value);
+                    *(IntPtr*)this._typeUnion._unionTypes._byref = Marshal.StringToBSTR(
+                        (string)value
+                    );
                     break;
 
                 case VarEnum.VT_CY:
-                    *(long*)this._typeUnion._unionTypes._byref = decimal.ToOACurrency((decimal)value);
+                    *(long*)this._typeUnion._unionTypes._byref = decimal.ToOACurrency(
+                        (decimal)value
+                    );
                     break;
 
                 case VarEnum.VT_DECIMAL:
@@ -243,26 +298,46 @@ namespace System.Runtime.InteropServices
                 case VarEnum.VT_NULL:
                     return DBNull.Value;
 
-                case VarEnum.VT_I1: return AsI1;
-                case VarEnum.VT_I2: return AsI2;
-                case VarEnum.VT_I4: return AsI4;
-                case VarEnum.VT_I8: return AsI8;
-                case VarEnum.VT_UI1: return AsUi1;
-                case VarEnum.VT_UI2: return AsUi2;
-                case VarEnum.VT_UI4: return AsUi4;
-                case VarEnum.VT_UI8: return AsUi8;
-                case VarEnum.VT_INT: return AsInt;
-                case VarEnum.VT_UINT: return AsUint;
-                case VarEnum.VT_BOOL: return AsBool;
-                case VarEnum.VT_ERROR: return AsError;
-                case VarEnum.VT_R4: return AsR4;
-                case VarEnum.VT_R8: return AsR8;
-                case VarEnum.VT_DECIMAL: return AsDecimal;
-                case VarEnum.VT_CY: return AsCy;
-                case VarEnum.VT_DATE: return AsDate;
-                case VarEnum.VT_BSTR: return AsBstr;
-                case VarEnum.VT_UNKNOWN: return AsUnknown;
-                case VarEnum.VT_DISPATCH: return AsDispatch;
+                case VarEnum.VT_I1:
+                    return AsI1;
+                case VarEnum.VT_I2:
+                    return AsI2;
+                case VarEnum.VT_I4:
+                    return AsI4;
+                case VarEnum.VT_I8:
+                    return AsI8;
+                case VarEnum.VT_UI1:
+                    return AsUi1;
+                case VarEnum.VT_UI2:
+                    return AsUi2;
+                case VarEnum.VT_UI4:
+                    return AsUi4;
+                case VarEnum.VT_UI8:
+                    return AsUi8;
+                case VarEnum.VT_INT:
+                    return AsInt;
+                case VarEnum.VT_UINT:
+                    return AsUint;
+                case VarEnum.VT_BOOL:
+                    return AsBool;
+                case VarEnum.VT_ERROR:
+                    return AsError;
+                case VarEnum.VT_R4:
+                    return AsR4;
+                case VarEnum.VT_R8:
+                    return AsR8;
+                case VarEnum.VT_DECIMAL:
+                    return AsDecimal;
+                case VarEnum.VT_CY:
+                    return AsCy;
+                case VarEnum.VT_DATE:
+                    return AsDate;
+                case VarEnum.VT_BSTR:
+                    return AsBstr;
+                case VarEnum.VT_UNKNOWN:
+                    return AsUnknown;
+                case VarEnum.VT_DISPATCH:
+                    return AsDispatch;
 
                 default:
                     unsafe
@@ -291,12 +366,14 @@ namespace System.Runtime.InteropServices
             {
                 VariantType = VarEnum.VT_EMPTY;
             }
-            else if (((vt & VarEnum.VT_ARRAY) != 0)
-                    || (vt == VarEnum.VT_BSTR)
-                    || (vt == VarEnum.VT_UNKNOWN)
-                    || (vt == VarEnum.VT_DISPATCH)
-                    || (vt == VarEnum.VT_VARIANT)
-                    || (vt == VarEnum.VT_RECORD))
+            else if (
+                ((vt & VarEnum.VT_ARRAY) != 0)
+                || (vt == VarEnum.VT_BSTR)
+                || (vt == VarEnum.VT_UNKNOWN)
+                || (vt == VarEnum.VT_DISPATCH)
+                || (vt == VarEnum.VT_VARIANT)
+                || (vt == VarEnum.VT_RECORD)
+            )
             {
                 unsafe
                 {

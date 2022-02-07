@@ -9,11 +9,11 @@ namespace System.Net.Sockets
     {
         [SupportedOSPlatform("windows")]
         AsyncIO = 0x8004667D,
-        NonBlockingIO = 0x8004667E,  // fionbio
-        DataToRead = 0x4004667F,  // fionread
+        NonBlockingIO = 0x8004667E, // fionbio
+        DataToRead = 0x4004667F, // fionread
         OobDataRead = 0x40047307,
         [SupportedOSPlatform("windows")]
-        AssociateHandle = 0x88000001,  // SIO_ASSOCIATE_HANDLE
+        AssociateHandle = 0x88000001, // SIO_ASSOCIATE_HANDLE
         [SupportedOSPlatform("windows")]
         EnableCircularQueuing = 0x28000002,
         [SupportedOSPlatform("windows")]

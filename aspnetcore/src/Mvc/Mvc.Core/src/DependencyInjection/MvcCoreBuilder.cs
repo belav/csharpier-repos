@@ -16,9 +16,7 @@ internal class MvcCoreBuilder : IMvcCoreBuilder
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="manager">The <see cref="ApplicationPartManager"/> of the application.</param>
-    public MvcCoreBuilder(
-        IServiceCollection services,
-        ApplicationPartManager manager)
+    public MvcCoreBuilder(IServiceCollection services, ApplicationPartManager manager)
     {
         if (services == null)
         {

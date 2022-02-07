@@ -27,7 +27,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.StackTraceExplorer
             var stackFrame = result.ParsedFrames[0] as ParsedStackFrame;
             AssertEx.NotNull(stackFrame);
 
-            var symbol = await stackFrame.ResolveSymbolAsync(workspace.CurrentSolution, CancellationToken.None);
+            var symbol = await stackFrame.ResolveSymbolAsync(
+                workspace.CurrentSolution,
+                CancellationToken.None
+            );
 
             var cursorDoc = workspace.Documents.Single();
             var selectedSpan = cursorDoc.SelectedSpans.Single();
@@ -55,7 +58,8 @@ namespace ConsoleApp4
     {
         void [|M|]() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -71,7 +75,8 @@ namespace ConsoleApp4
     {
         void [|M|](string s) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -87,7 +92,8 @@ namespace ConsoleApp4
     {
         void [|M|]() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -103,7 +109,8 @@ namespace ConsoleApp4
     {
         void [|M|](string s) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -119,7 +126,8 @@ namespace ConsoleApp4
     {
         void [|M|]() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -135,7 +143,8 @@ namespace ConsoleApp4
     {
         void [|M|]<T>(T t) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -151,7 +160,8 @@ namespace ConsoleApp4
     {
         void [|M|]<T>(T t) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -167,7 +177,8 @@ namespace ConsoleApp4
     {
         void [|M|]<T>(T t) {}
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "The parser does not handle arity on types yet")]
@@ -189,7 +200,8 @@ namespace ConsoleApp4
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "ref params do not work yet")]
@@ -208,7 +220,8 @@ namespace ConsoleApp4
             s = string.Empty;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "out params do not work yet")]
@@ -227,7 +240,8 @@ namespace ConsoleApp4
             s = string.Empty;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "in params do not work yet")]
@@ -246,7 +260,8 @@ namespace ConsoleApp4
             throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Generated types/methods are not supported")]
@@ -276,7 +291,8 @@ namespace ConsoleApp4
             await task;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Generated types/methods are not supported")]
@@ -296,7 +312,8 @@ namespace ConsoleApp4
             [|set|] => throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Generated types/methods are not supported")]
@@ -316,7 +333,8 @@ namespace ConsoleApp4
             set => throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Generated types/methods are not supported")]
@@ -336,7 +354,8 @@ namespace ConsoleApp4
             [|set|] => throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Generated types/methods are not supported")]
@@ -356,7 +375,8 @@ namespace ConsoleApp4
             set => throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Generated types/methods are not supported")]
@@ -380,7 +400,8 @@ namespace ConsoleApp4
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Generated types/methods are not supported")]
@@ -395,7 +416,8 @@ LoaclInTopLevelStatement();
 void [|LocalInTopLevelStatement|]()
 {
     throw new Exception();
-}");
+}"
+            );
         }
 
         [Fact(Skip = "The parser doesn't correctly handle ..ctor() methods yet")]
@@ -417,7 +439,8 @@ void [|LocalInTopLevelStatement|]()
             throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -441,57 +464,84 @@ void [|LocalInTopLevelStatement|]()
 
         /// <summary>
         /// Tests cases where the text will technically parse and look like a symbol, but does not point to
-        /// a symbol in the solution. 
+        /// a symbol in the solution.
         /// </summary>
         [Theory]
         [InlineData("at __.__._()")]
         [InlineData("abcd!__.__._()")]
         public async Task TestInvalidSymbol(string line)
         {
-            using var workspace = TestWorkspace.CreateCSharp(@"
+            using var workspace = TestWorkspace.CreateCSharp(
+                @"
 class C
 {
-}");
+}"
+            );
 
             var result = await StackTraceAnalyzer.AnalyzeAsync(line, CancellationToken.None);
             Assert.Equal(1, result.ParsedFrames.Length);
 
             var parsedFame = result.ParsedFrames.OfType<ParsedStackFrame>().Single();
-            var symbol = await parsedFame.ResolveSymbolAsync(workspace.CurrentSolution, CancellationToken.None);
+            var symbol = await parsedFame.ResolveSymbolAsync(
+                workspace.CurrentSolution,
+                CancellationToken.None
+            );
             Assert.Null(symbol);
         }
 
         [Fact]
         public async Task TestActivityLogParsing()
         {
-            var activityLogException = @"Exception occurred while loading solution options: System.Runtime.InteropServices.COMException (0x8000FFFF): Catastrophic failure (Exception from HRESULT: 0x8000FFFF (E_UNEXPECTED))&#x000D;&#x000A;   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)&#x000D;&#x000A;   at Microsoft.VisualStudio.Shell.Package.Initialize()&#x000D;&#x000A;--- End of stack trace from previous location where exception was thrown ---&#x000D;&#x000A;   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw&lt;string&gt;()&#x000D;&#x000A;   at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)";
+            var activityLogException =
+                @"Exception occurred while loading solution options: System.Runtime.InteropServices.COMException (0x8000FFFF): Catastrophic failure (Exception from HRESULT: 0x8000FFFF (E_UNEXPECTED))&#x000D;&#x000A;   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)&#x000D;&#x000A;   at Microsoft.VisualStudio.Shell.Package.Initialize()&#x000D;&#x000A;--- End of stack trace from previous location where exception was thrown ---&#x000D;&#x000A;   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw&lt;string&gt;()&#x000D;&#x000A;   at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)";
 
-            var result = await StackTraceAnalyzer.AnalyzeAsync(activityLogException, CancellationToken.None);
+            var result = await StackTraceAnalyzer.AnalyzeAsync(
+                activityLogException,
+                CancellationToken.None
+            );
             Assert.Equal(6, result.ParsedFrames.Length);
 
             var ignoredFrame1 = result.ParsedFrames[0] as IgnoredFrame;
             AssertEx.NotNull(ignoredFrame1);
-            Assert.Equal(@"Exception occurred while loading solution options: System.Runtime.InteropServices.COMException (0x8000FFFF): Catastrophic failure (Exception from HRESULT: 0x8000FFFF (E_UNEXPECTED))", ignoredFrame1.OriginalText);
+            Assert.Equal(
+                @"Exception occurred while loading solution options: System.Runtime.InteropServices.COMException (0x8000FFFF): Catastrophic failure (Exception from HRESULT: 0x8000FFFF (E_UNEXPECTED))",
+                ignoredFrame1.OriginalText
+            );
 
             var parsedFrame2 = result.ParsedFrames[1] as ParsedStackFrame;
             AssertEx.NotNull(parsedFrame2);
-            Assert.Equal(@"at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)", parsedFrame2.OriginalText);
+            Assert.Equal(
+                @"at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)",
+                parsedFrame2.OriginalText
+            );
 
             var parsedFrame3 = result.ParsedFrames[2] as ParsedStackFrame;
             AssertEx.NotNull(parsedFrame3);
-            Assert.Equal(@"at Microsoft.VisualStudio.Shell.Package.Initialize()", parsedFrame3.OriginalText);
+            Assert.Equal(
+                @"at Microsoft.VisualStudio.Shell.Package.Initialize()",
+                parsedFrame3.OriginalText
+            );
 
             var ignoredFrame4 = result.ParsedFrames[3] as IgnoredFrame;
             AssertEx.NotNull(ignoredFrame4);
-            Assert.Equal(@"--- End of stack trace from previous location where exception was thrown ---", ignoredFrame4.OriginalText);
+            Assert.Equal(
+                @"--- End of stack trace from previous location where exception was thrown ---",
+                ignoredFrame4.OriginalText
+            );
 
             var parsedFrame5 = result.ParsedFrames[4] as ParsedStackFrame;
             AssertEx.NotNull(parsedFrame5);
-            Assert.Equal(@"at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw<string>()", parsedFrame5.OriginalText);
+            Assert.Equal(
+                @"at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw<string>()",
+                parsedFrame5.OriginalText
+            );
 
             var parsedFrame6 = result.ParsedFrames[5] as ParsedStackFrame;
             AssertEx.NotNull(parsedFrame6);
-            Assert.Equal(@"at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)", parsedFrame6.OriginalText);
+            Assert.Equal(
+                @"at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)",
+                parsedFrame6.OriginalText
+            );
         }
     }
 }

@@ -29,8 +29,11 @@ namespace System.Web.Helpers
             return null;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "TypeConverter throws System.Exception instead of a more specific one.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "TypeConverter throws System.Exception instead of a more specific one."
+        )]
         internal static bool TryFromString(Type type, string value, out object result)
         {
             result = null;
@@ -73,13 +76,19 @@ namespace System.Web.Helpers
             return Enum.TryParse(value, ignoreCase: true, result: out result);
         }
 
-        private static bool TryFromStringToEnumHelper(Type enumType, string value, out object result)
+        private static bool TryFromStringToEnumHelper(
+            Type enumType,
+            string value,
+            out object result
+        )
         {
             result = null;
             if (_stringToEnumMethod == null)
             {
-                _stringToEnumMethod = typeof(ConversionUtil).GetMethod("TryFromStringToEnum",
-                                                                       BindingFlags.Static | BindingFlags.NonPublic);
+                _stringToEnumMethod = typeof(ConversionUtil).GetMethod(
+                    "TryFromStringToEnum",
+                    BindingFlags.Static | BindingFlags.NonPublic
+                );
                 Debug.Assert(_stringToEnumMethod != null);
             }
             var args = new object[] { value, null };
@@ -104,8 +113,11 @@ namespace System.Web.Helpers
             return converted;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "TypeConverter throws System.Exception instad of a more specific one.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "TypeConverter throws System.Exception instad of a more specific one."
+        )]
         internal static bool TryFromStringToColor(string value, out Color result)
         {
             result = default(Color);
@@ -134,9 +146,9 @@ namespace System.Web.Helpers
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(Color));
             Debug.Assert((converter != null) && (converter.CanConvertFrom(typeof(string))));
 
-            // There are no TryConvert APIs on TypeConverter so we have to catch exception. 
+            // There are no TryConvert APIs on TypeConverter so we have to catch exception.
             // In addition to that, invalid conversion just throws System.Exception with misleading message,
-            // instead of a more specific exception type. 
+            // instead of a more specific exception type.
             try
             {
                 result = (Color)converter.ConvertFromInvariantString(value);
@@ -149,8 +161,11 @@ namespace System.Web.Helpers
             return true;
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "Format names are used in Http headers and are usually specified in lower case")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "Format names are used in Http headers and are usually specified in lower case"
+        )]
         internal static string NormalizeImageFormat(string value)
         {
             value = value.ToLowerInvariant();

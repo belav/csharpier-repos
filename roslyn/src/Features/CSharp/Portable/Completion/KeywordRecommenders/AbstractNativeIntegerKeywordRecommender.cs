@@ -9,17 +9,20 @@ using Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
-    internal abstract class AbstractNativeIntegerKeywordRecommender : IKeywordRecommender<CSharpSyntaxContext>
+    internal abstract class AbstractNativeIntegerKeywordRecommender
+        : IKeywordRecommender<CSharpSyntaxContext>
     {
         protected abstract RecommendedKeyword Keyword { get; }
 
         private static bool IsValidContext(CSharpSyntaxContext context)
         {
-            if (context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsPossibleTupleContext ||
-                context.IsAtStartOfPattern ||
-                (context.IsTypeContext && !context.IsEnumBaseListContext))
+            if (
+                context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsPossibleTupleContext
+                || context.IsAtStartOfPattern
+                || (context.IsTypeContext && !context.IsEnumBaseListContext)
+            )
             {
                 return true;
             }
@@ -27,7 +30,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return context.IsLocalVariableDeclarationContext;
         }
 
-        public ImmutableArray<RecommendedKeyword> RecommendKeywords(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => IsValidContext(context) ? ImmutableArray.Create(Keyword) : ImmutableArray<RecommendedKeyword>.Empty;
+        public ImmutableArray<RecommendedKeyword> RecommendKeywords(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) =>
+            IsValidContext(context)
+              ? ImmutableArray.Create(Keyword)
+              : ImmutableArray<RecommendedKeyword>.Empty;
     }
 }

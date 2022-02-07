@@ -16,7 +16,10 @@ public class MvcViewDocumentClassifierPass : DocumentClassifierPassBase
 
     protected override string DocumentKind => MvcViewDocumentKind;
 
-    protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode) => true;
+    protected override bool IsMatch(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    ) => true;
 
     public MvcViewDocumentClassifierPass() : this(false) { }
 
@@ -29,13 +32,18 @@ public class MvcViewDocumentClassifierPass : DocumentClassifierPassBase
         RazorCodeDocument codeDocument,
         NamespaceDeclarationIntermediateNode @namespace,
         ClassDeclarationIntermediateNode @class,
-        MethodDeclarationIntermediateNode method)
+        MethodDeclarationIntermediateNode method
+    )
     {
         base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
-        if (!codeDocument.TryComputeNamespace(fallbackToRootNamespace: false, out var namespaceName))
+        if (
+            !codeDocument.TryComputeNamespace(fallbackToRootNamespace: false, out var namespaceName)
+        )
         {
-            @namespace.Content = _useConsolidatedMvcViews ? "AspNetCoreGeneratedDocument" : "AspNetCore";
+            @namespace.Content = _useConsolidatedMvcViews
+                ? "AspNetCoreGeneratedDocument"
+                : "AspNetCore";
         }
         else
         {

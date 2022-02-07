@@ -33,7 +33,6 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern void Enter(object obj);
 
-
         // Use a ref bool instead of out to ensure that unverifiable code must
         // initialize this value to something.  If we used out, the value
         // could be uninitialized if we threw an exception in our prolog.
@@ -56,8 +55,6 @@ namespace System.Threading
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void ReliableEnter(object obj, ref bool lockTaken);
-
-
 
         /*=========================================================================
         ** Release the monitor lock. If one or more threads are waiting to acquire the
@@ -123,7 +120,11 @@ namespace System.Threading
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void ReliableEnterTimeout(object obj, int timeout, ref bool lockTaken);
+        private static extern void ReliableEnterTimeout(
+            object obj,
+            int timeout,
+            ref bool lockTaken
+        );
 
         public static bool IsEntered(object obj)
         {
@@ -137,14 +138,14 @@ namespace System.Threading
         private static extern bool IsEnteredNative(object obj);
 
         /*========================================================================
-    ** Waits for notification from the object (via a Pulse/PulseAll).
-    ** timeout indicates how long to wait before the method returns.
-    ** This method acquires the monitor waithandle for the object
-    ** If this thread holds the monitor lock for the object, it releases it.
-    ** On exit from the method, it obtains the monitor lock back.
-    **
+        ** Waits for notification from the object (via a Pulse/PulseAll).
+        ** timeout indicates how long to wait before the method returns.
+        ** This method acquires the monitor waithandle for the object
+        ** If this thread holds the monitor lock for the object, it releases it.
+        ** On exit from the method, it obtains the monitor lock back.
+        **
         ** Exceptions: ArgumentNullException if object is null.
-    ========================================================================*/
+        ========================================================================*/
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern bool ObjWait(int millisecondsTimeout, object obj);
 
@@ -154,7 +155,10 @@ namespace System.Threading
             if (obj == null)
                 throw (new ArgumentNullException(nameof(obj)));
             if (millisecondsTimeout < -1)
-                throw new ArgumentOutOfRangeException(nameof(millisecondsTimeout), SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                throw new ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
 
             return ObjWait(millisecondsTimeout, obj);
         }
@@ -176,6 +180,7 @@ namespace System.Threading
 
             ObjPulse(obj);
         }
+
         /*========================================================================
         ** Sends a notification to all waiting objects.
         ========================================================================*/

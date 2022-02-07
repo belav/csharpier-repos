@@ -11,7 +11,9 @@ namespace System.IO
     /// <summary>Base class for test classes the use temporary files that need to be cleaned up.</summary>
     public abstract class FileCleanupTestBase : IDisposable
     {
-        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(() => AdminHelpers.IsProcessElevated());
+        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(
+            () => AdminHelpers.IsProcessElevated()
+        );
 
         private string fallbackGuid = Guid.NewGuid().ToString("N").Substring(0, 10);
 
@@ -33,7 +35,10 @@ namespace System.IO
             string failure = string.Empty;
             for (int i = 0; i <= 2; i++)
             {
-                TestDirectory = Path.Combine(tempDirectory, GetType().Name + "_" + Path.GetRandomFileName());
+                TestDirectory = Path.Combine(
+                    tempDirectory,
+                    GetType().Name + "_" + Path.GetRandomFileName()
+                );
                 try
                 {
                     Directory.CreateDirectory(TestDirectory);
@@ -46,7 +51,10 @@ namespace System.IO
                 }
             }
 
-            Assert.True(Directory.Exists(TestDirectory), $"FileCleanupTestBase failed to create {TestDirectory}. {failure}");
+            Assert.True(
+                Directory.Exists(TestDirectory),
+                $"FileCleanupTestBase failed to create {TestDirectory}. {failure}"
+            );
         }
 
         /// <summary>Delete the associated test directory.</summary>
@@ -67,7 +75,10 @@ namespace System.IO
         {
             // No managed resources to clean up, so disposing is ignored.
 
-            try { Directory.Delete(TestDirectory, recursive: true); }
+            try
+            {
+                Directory.Delete(TestDirectory, recursive: true);
+            }
             catch { } // avoid exceptions escaping Dispose
         }
 
@@ -81,14 +92,21 @@ namespace System.IO
         /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a loop index.</param>
         /// <param name="memberName">The member name of the function calling this method.</param>
         /// <param name="lineNumber">The line number of the function calling this method.</param>
-        protected virtual string GetTestFilePath(int? index = null, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0) =>
-            Path.Combine(TestDirectory, GetTestFileName(index, memberName, lineNumber));
+        protected virtual string GetTestFilePath(
+            int? index = null,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => Path.Combine(TestDirectory, GetTestFileName(index, memberName, lineNumber));
 
         /// <summary>Gets a test file name that is associated with the call site.</summary>
         /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a loop index.</param>
         /// <param name="memberName">The member name of the function calling this method.</param>
         /// <param name="lineNumber">The line number of the function calling this method.</param>
-        protected string GetTestFileName(int? index = null, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
+        protected string GetTestFileName(
+            int? index = null,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             string testFileName = GenerateTestFileName(index, memberName, lineNumber);
             string testFilePath = Path.Combine(TestDirectory, testFileName);
@@ -106,7 +124,10 @@ namespace System.IO
                     // Take a chunk out of the middle as perhaps it's the least interesting part of the name
                     int halfMemberNameLength = (int)Math.Floor((double)memberName.Length / 2);
                     int halfExcessLength = (int)Math.Ceiling((double)excessLength / 2);
-                    memberName = memberName.Substring(0, halfMemberNameLength - halfExcessLength) + "..." + memberName.Substring(halfMemberNameLength + halfExcessLength);
+                    memberName =
+                        memberName.Substring(0, halfMemberNameLength - halfExcessLength)
+                        + "..."
+                        + memberName.Substring(halfMemberNameLength + halfExcessLength);
 
                     testFileName = GenerateTestFileName(index, memberName, lineNumber);
                     testFilePath = Path.Combine(TestDirectory, testFileName);
@@ -128,7 +149,8 @@ namespace System.IO
                 memberName ?? "TestBase",
                 lineNumber,
                 index.GetValueOrDefault(),
-                Guid.NewGuid().ToString("N").Substring(0, 8)); // randomness to avoid collisions between derived test classes using same base method concurrently
+                Guid.NewGuid().ToString("N").Substring(0, 8)
+            ); // randomness to avoid collisions between derived test classes using same base method concurrently
 
         /// <summary>
         /// In some cases (such as when running without elevated privileges),
@@ -137,33 +159,56 @@ namespace System.IO
         /// </summary>
         protected static bool CanCreateSymbolicLinks => s_canCreateSymbolicLinks.Value;
 
-        private static readonly Lazy<bool> s_canCreateSymbolicLinks = new Lazy<bool>(() =>
-        {
-            bool success = true;
+        private static readonly Lazy<bool> s_canCreateSymbolicLinks = new Lazy<bool>(
+            () =>
+            {
+                bool success = true;
 
-            // Verify file symlink creation
-            string path = Path.GetTempFileName();
-            string linkPath = path + ".link";
-            success = CreateSymLink(path, linkPath, isDirectory: false);
-            try { File.Delete(path); } catch { }
-            try { File.Delete(linkPath); } catch { }
+                // Verify file symlink creation
+                string path = Path.GetTempFileName();
+                string linkPath = path + ".link";
+                success = CreateSymLink(path, linkPath, isDirectory: false);
+                try
+                {
+                    File.Delete(path);
+                }
+                catch { }
+                try
+                {
+                    File.Delete(linkPath);
+                }
+                catch { }
 
-            // Verify directory symlink creation
-            path = Path.GetTempFileName();
-            linkPath = path + ".link";
-            success = success && CreateSymLink(path, linkPath, isDirectory: true);
-            try { Directory.Delete(path); } catch { }
-            try { Directory.Delete(linkPath); } catch { }
+                // Verify directory symlink creation
+                path = Path.GetTempFileName();
+                linkPath = path + ".link";
+                success = success && CreateSymLink(path, linkPath, isDirectory: true);
+                try
+                {
+                    Directory.Delete(path);
+                }
+                catch { }
+                try
+                {
+                    Directory.Delete(linkPath);
+                }
+                catch { }
 
-            return success;
-        });
+                return success;
+            }
+        );
 
         protected static bool CreateSymLink(string targetPath, string linkPath, bool isDirectory)
         {
 #if NETFRAMEWORK
             bool isWindows = true;
 #else
-            if (OperatingSystem.IsIOS() || OperatingSystem.IsTvOS() || OperatingSystem.IsMacCatalyst() || OperatingSystem.IsBrowser()) // OSes that don't support Process.Start()
+            if (
+                OperatingSystem.IsIOS()
+                || OperatingSystem.IsTvOS()
+                || OperatingSystem.IsMacCatalyst()
+                || OperatingSystem.IsBrowser()
+            ) // OSes that don't support Process.Start()
             {
                 return false;
             }
@@ -173,12 +218,21 @@ namespace System.IO
             if (isWindows)
             {
                 symLinkProcess.StartInfo.FileName = "cmd";
-                symLinkProcess.StartInfo.Arguments = string.Format("/c mklink{0} \"{1}\" \"{2}\"", isDirectory ? " /D" : "", Path.GetFullPath(linkPath), Path.GetFullPath(targetPath));
+                symLinkProcess.StartInfo.Arguments = string.Format(
+                    "/c mklink{0} \"{1}\" \"{2}\"",
+                    isDirectory ? " /D" : "",
+                    Path.GetFullPath(linkPath),
+                    Path.GetFullPath(targetPath)
+                );
             }
             else
             {
                 symLinkProcess.StartInfo.FileName = "/bin/ln";
-                symLinkProcess.StartInfo.Arguments = string.Format("-s \"{0}\" \"{1}\"", Path.GetFullPath(targetPath), Path.GetFullPath(linkPath));
+                symLinkProcess.StartInfo.Arguments = string.Format(
+                    "-s \"{0}\" \"{1}\"",
+                    Path.GetFullPath(targetPath),
+                    Path.GetFullPath(linkPath)
+                );
             }
             symLinkProcess.StartInfo.RedirectStandardOutput = true;
             symLinkProcess.Start();
@@ -186,6 +240,5 @@ namespace System.IO
             symLinkProcess.WaitForExit();
             return (0 == symLinkProcess.ExitCode);
         }
-
     }
 }

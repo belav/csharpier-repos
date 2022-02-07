@@ -67,7 +67,8 @@ internal class DeletePersonalDataModel<TUser> : DeletePersonalDataModel where TU
     public DeletePersonalDataModel(
         UserManager<TUser> userManager,
         SignInManager<TUser> signInManager,
-        ILogger<DeletePersonalDataModel> logger)
+        ILogger<DeletePersonalDataModel> logger
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;

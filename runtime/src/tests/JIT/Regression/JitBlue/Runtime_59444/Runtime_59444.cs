@@ -13,9 +13,9 @@ public class Program
     public static int Main()
     {
         int testCount = 0;
-        foreach (MethodInfo mi in typeof(Program)
-            .GetMethods()
-            .Where(m => m.Name.StartsWith("Test")))
+        foreach (
+            MethodInfo mi in typeof(Program).GetMethods().Where(m => m.Name.StartsWith("Test"))
+        )
         {
             mi.Invoke(null, null);
             testCount++;
@@ -831,7 +831,7 @@ public class Program
         Unsafe.InitBlockUnaligned(ref bytes[0], Value, len);
         return BitConverter.ToString(bytes);
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static byte[] TestData()
     {

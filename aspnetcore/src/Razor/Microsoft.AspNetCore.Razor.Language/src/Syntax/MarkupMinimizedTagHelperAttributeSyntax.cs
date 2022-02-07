@@ -13,17 +13,20 @@ internal sealed partial class MarkupMinimizedTagHelperAttributeSyntax
     {
         get
         {
-            var tagHelperAttributeInfo = this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
+            var tagHelperAttributeInfo =
+                this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
             return tagHelperAttributeInfo;
         }
     }
 
-    public MarkupMinimizedTagHelperAttributeSyntax WithTagHelperAttributeInfo(TagHelperAttributeInfo info)
+    public MarkupMinimizedTagHelperAttributeSyntax WithTagHelperAttributeInfo(
+        TagHelperAttributeInfo info
+    )
     {
         var annotations = new List<SyntaxAnnotation>(GetAnnotations())
-            {
-                new SyntaxAnnotation(TagHelperAttributeInfoKey, info)
-            };
+        {
+            new SyntaxAnnotation(TagHelperAttributeInfoKey, info)
+        };
 
         var newGreen = Green.WithAnnotationsGreen(annotations.ToArray());
 

@@ -39,7 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyDiagnostics(
                 // (3,23): error CS0121: The call is ambiguous between the following methods or properties: 'C.F(C0)' and 'C.F(C1)'
                 //     static void F() { F(null); }
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F").WithArguments("C.F(C0)", "C.F(C1)").WithLocation(3, 23));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F")
+                    .WithArguments("C.F(C0)", "C.F(C1)")
+                    .WithLocation(3, 23)
+            );
         }
 
         [WorkItem(13685, "https://github.com/dotnet/roslyn/issues/13685")]
@@ -65,7 +68,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyDiagnostics(
                 // (3,29): error CS0034: Operator '+' is ambiguous on operands of type 'C' and '<null>'
                 //     static object F(C x) => x + null;
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "x + null").WithArguments("+", "C", "<null>").WithLocation(3, 29));
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "x + null")
+                    .WithArguments("+", "C", "<null>")
+                    .WithLocation(3, 29)
+            );
         }
 
         [ConditionalFact(typeof(IsRelease))]
@@ -82,7 +88,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             builder.AppendLine("{");
             for (int i = 0; i < n; i++)
             {
-                builder.AppendLine($"    internal static void F(C{i} x, Action<C{i}> a) {{ F(x, y => F(y, z => F(z, w => {{ }}))); }}");
+                builder.AppendLine(
+                    $"    internal static void F(C{i} x, Action<C{i}> a) {{ F(x, y => F(y, z => F(z, w => {{ }}))); }}"
+                );
             }
             builder.AppendLine("}");
             var source = builder.ToString();
@@ -104,8 +112,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             builder.AppendLine("{");
             for (int i = 0; i < n; i++)
             {
-                builder.AppendLine($"    internal static C F(C{i} x, params object[] args) => new C(x, y => F(y, args[1]), args[0]);");
-                builder.AppendLine($"    internal C(C{i} x, Func<C{i}, C> f, params object[] args) {{ }}");
+                builder.AppendLine(
+                    $"    internal static C F(C{i} x, params object[] args) => new C(x, y => F(y, args[1]), args[0]);"
+                );
+                builder.AppendLine(
+                    $"    internal C(C{i} x, Func<C{i}, C> f, params object[] args) {{ }}"
+                );
             }
             builder.AppendLine("}");
             var source = builder.ToString();
@@ -127,7 +139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             builder.AppendLine("{");
             for (int i = 0; i < n; i++)
             {
-                builder.AppendLine($"    internal static void F(this C{i} x, Action<C{i}> a) {{ x.F(y => y.F(z => z.F(w => {{ }}))); }}");
+                builder.AppendLine(
+                    $"    internal static void F(this C{i} x, Action<C{i}> a) {{ x.F(y => y.F(z => z.F(w => {{ }}))); }}"
+                );
             }
             builder.AppendLine("}");
             var source = builder.ToString();
@@ -149,7 +163,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             builder.AppendLine("{");
             for (int i = 0; i < n; i++)
             {
-                builder.AppendLine($"    internal static void F(this C{i} x, Action<C{i}> a, params object[] args) {{ x.F(y => y.F(z => z.F(w => {{ }}), args[1]), args[0]); }}");
+                builder.AppendLine(
+                    $"    internal static void F(this C{i} x, Action<C{i}> a, params object[] args) {{ x.F(y => y.F(z => z.F(w => {{ }}), args[1]), args[0]); }}"
+                );
             }
             builder.AppendLine("}");
             var source = builder.ToString();
@@ -173,20 +189,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 if (i % 2 == 0)
                 {
-                    builder.AppendLine($"    internal static void F(this C{i} x) {{ x.G(y => y.G(z => z.F())); }}"); // No match for x.G(...).
+                    builder.AppendLine(
+                        $"    internal static void F(this C{i} x) {{ x.G(y => y.G(z => z.F())); }}"
+                    ); // No match for x.G(...).
                 }
                 else
                 {
-                    builder.AppendLine($"    internal static void G(this C{i} x, Action<C{i}> a) {{ }}");
+                    builder.AppendLine(
+                        $"    internal static void G(this C{i} x, Action<C{i}> a) {{ }}"
+                    );
                 }
             }
             builder.AppendLine("}");
             var source = builder.ToString();
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             // error CS1929: 'Ci' does not contain a definition for 'G' and the best extension method overload 'S.G(C1, Action<C1>)' requires a receiver of type 'C1'
-            var diagnostics = Enumerable.Range(0, n / 2).
-                Select(i => Diagnostic(ErrorCode.ERR_BadInstanceArgType, "x").WithArguments($"C{i * 2}", "G", "S.G(C1, System.Action<C1>)", "C1")).
-                ToArray();
+            var diagnostics = Enumerable
+                .Range(0, n / 2)
+                .Select(
+                    i =>
+                        Diagnostic(ErrorCode.ERR_BadInstanceArgType, "x")
+                            .WithArguments($"C{i * 2}", "G", "S.G(C1, System.Action<C1>)", "C1")
+                )
+                .ToArray();
             comp.VerifyDiagnostics(diagnostics);
         }
 
@@ -222,13 +247,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 builder.AppendLine("}");
             }
 
-            builder.AppendLine(@"
+            builder.AppendLine(
+                @"
 public static class Class
 {
     public static void Method<TClass>(Func<TClass, Func<string>> method) { }
     public static void Method<TClass>(Func<TClass, Func<string, string>> method) { }
 }
-");
+"
+            );
             var source = builder.ToString();
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -238,7 +265,8 @@ public static class Class
         [ConditionalFact(typeof(IsRelease))]
         public void NotNull_Complexity()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -291,7 +319,7 @@ static class Ext
         public void NestedLambdas_01()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System.Linq;
 class Program
 {
@@ -317,7 +345,7 @@ class Program
         public void NestedLambdas_02()
         {
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 using System.Linq;
 class Program
 {
@@ -397,7 +425,9 @@ class Program
             comp.NullableAnalysisData = new();
             comp.VerifyDiagnostics();
 
-            int analyzed = comp.NullableAnalysisData.Data.Where(pair => pair.Value.RequiredAnalysis).Count();
+            int analyzed = comp.NullableAnalysisData.Data
+                .Where(pair => pair.Value.RequiredAnalysis)
+                .Count();
             Assert.Equal(nMethods / 2, analyzed);
         }
 
@@ -513,10 +543,12 @@ class Program
             comp.VerifyDiagnostics(
                 // (6,21): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         object i0 = null;
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(6, 21),
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(6, 21),
                 // (65542,16): warning CS8603: Possible null reference return.
                 //         return i65535;
-                Diagnostic(ErrorCode.WRN_NullReferenceReturn, "i65535").WithLocation(65542, 16));
+                Diagnostic(ErrorCode.WRN_NullReferenceReturn, "i65535").WithLocation(65542, 16)
+            );
         }
 
         [ConditionalFact(typeof(NoIOperationValidation), typeof(IsRelease))]
@@ -537,7 +569,9 @@ class Program
             builder.AppendLine("        F0(() => { });");
             for (int i = 0; i < nFunctions / 2; i++)
             {
-                builder.AppendLine($"        F0(() => {{ value = F1(value, arg{i} => arg{i}?.ToString()); }});");
+                builder.AppendLine(
+                    $"        F0(() => {{ value = F1(value, arg{i} => arg{i}?.ToString()); }});"
+                );
             }
             builder.AppendLine("        return value;");
             builder.AppendLine("    }");
@@ -548,7 +582,8 @@ class Program
             comp.VerifyDiagnostics(
                 // (16395,16): warning CS8603: Possible null reference return.
                 //         return value;
-                Diagnostic(ErrorCode.WRN_NullReferenceReturn, "value").WithLocation(16395, 16));
+                Diagnostic(ErrorCode.WRN_NullReferenceReturn, "value").WithLocation(16395, 16)
+            );
         }
 
         [WorkItem(51739, "https://github.com/dotnet/roslyn/issues/51739")]
@@ -579,7 +614,8 @@ class Program
             comp.VerifyDiagnostics(
                 // (7,15): error CS8078: An expression is too long or complex to compile
                 //         C c = new C()
-                Diagnostic(ErrorCode.ERR_InsufficientStack, "new").WithLocation(7, 15));
+                Diagnostic(ErrorCode.ERR_InsufficientStack, "new").WithLocation(7, 15)
+            );
         }
 
         [WorkItem(51739, "https://github.com/dotnet/roslyn/issues/51739")]
@@ -615,19 +651,22 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,15): error CS8078: An expression is too long or complex to compile
                 //         C c = new C()
-                Diagnostic(ErrorCode.ERR_InsufficientStack, "new").WithLocation(10, 15));
+                Diagnostic(ErrorCode.ERR_InsufficientStack, "new").WithLocation(10, 15)
+            );
         }
 
         [ConditionalFact(typeof(NoIOperationValidation), typeof(IsRelease))]
         public void NullableAnalysis_CondAccess_ComplexRightSide()
         {
-            var source1 = @"
+            var source1 =
+                @"
 #nullable enable
 object? x = null;
 C? c = null;
 if (
 ";
-            var source2 = @"
+            var source2 =
+                @"
     )
 {
 }
@@ -748,7 +787,10 @@ class C
             comp.VerifyDiagnostics(
                 // (9,13): warning CS0168: The variable 'tmp2' is declared but never used
                 //         int tmp2; // unused
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "tmp2").WithArguments("tmp2").WithLocation(9, 13));
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "tmp2")
+                    .WithArguments("tmp2")
+                    .WithLocation(9, 13)
+            );
         }
     }
 }

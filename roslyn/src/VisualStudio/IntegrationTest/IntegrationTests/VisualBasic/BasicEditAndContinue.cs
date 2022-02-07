@@ -23,9 +23,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         private const string module1FileName = "Module1.vb";
 
         public BasicEditAndContinue(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 
@@ -35,7 +33,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 
             VisualStudio.SolutionExplorer.CreateSolution(nameof(BasicBuild));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(testProj, WellKnownProjectTemplates.ConsoleApplication, LanguageNames.VisualBasic);
+            VisualStudio.SolutionExplorer.AddProject(
+                testProj,
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.VisualBasic
+            );
         }
 
         // Also "https://github.com/dotnet/roslyn/issues/37689")]
@@ -43,7 +45,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         [Trait(Traits.Feature, Traits.Features.DebuggingEditAndContinue)]
         public void UpdateActiveStatementLeafNode()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -59,9 +62,13 @@ Module Module1
         Next
     End Sub
 End Module
-");
+"
+            );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "names(0)");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
@@ -77,7 +84,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.DebuggingEditAndContinue)]
         public void AddTryCatchAroundActiveStatement()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 Module Module1
     Sub Main()
@@ -87,18 +95,27 @@ Module Module1
     Private Sub Goo()
         Console.WriteLine(1)
     End Sub
-End Module");
+End Module"
+            );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "Console.WriteLine(1)");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
-            VisualStudio.Editor.ReplaceText("Console.WriteLine(1)",
+            VisualStudio.Editor.ReplaceText(
+                "Console.WriteLine(1)",
                 @"Try
 Console.WriteLine(1)
 Catch ex As Exception
-End Try");
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+End Try"
+            );
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.Debugger.StepOver(waitForBreakOrEnd: true);
             VisualStudio.Editor.Verify.CurrentLineText("End Try");
         }
@@ -108,7 +125,8 @@ End Try");
         [Trait(Traits.Feature, Traits.Features.DebuggingEditAndContinue)]
         public void EditLambdaExpression()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 Module Module1
     Private Delegate Function del(i As Integer) As Integer
@@ -117,9 +135,13 @@ Module Module1
         Dim myDel As del = Function(x) x * x
         Dim j As Integer = myDel(5)
     End Sub
-End Module");
+End Module"
+            );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "x * x", charsOffset: -1);
 
             VisualStudio.Debugger.Go(waitForBreakMode: true);
@@ -143,7 +165,8 @@ End Module");
         [Trait(Traits.Feature, Traits.Features.DebuggingEditAndContinue)]
         public void EnCWhileDebuggingFromImmediateWindow()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 
 Module Module1
@@ -151,9 +174,13 @@ Module Module1
         Dim x = 4
         Console.WriteLine(x)
     End Sub
-End Module");
+End Module"
+            );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "Dim x", charsOffset: 1);
             VisualStudio.Debugger.ExecuteStatement("Module1.Main()");
@@ -166,14 +193,23 @@ End Module");
         private void SetupMultiProjectSolution()
         {
             var basicLibrary = new ProjectUtils.Project("BasicLibrary1");
-            VisualStudio.SolutionExplorer.AddProject(basicLibrary, WellKnownProjectTemplates.ClassLibrary, LanguageNames.VisualBasic);
+            VisualStudio.SolutionExplorer.AddProject(
+                basicLibrary,
+                WellKnownProjectTemplates.ClassLibrary,
+                LanguageNames.VisualBasic
+            );
 
             var cSharpLibrary = new ProjectUtils.Project("CSharpLibrary1");
-            VisualStudio.SolutionExplorer.AddProject(cSharpLibrary, WellKnownProjectTemplates.ClassLibrary, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                cSharpLibrary,
+                WellKnownProjectTemplates.ClassLibrary,
+                LanguageNames.CSharp
+            );
             VisualStudio.SolutionExplorer.AddFile(cSharpLibrary, "File1.cs");
 
             VisualStudio.SolutionExplorer.OpenFile(basicLibrary, "Class1.vb");
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 Public Class Class1
     Public Sub New()
@@ -183,13 +219,18 @@ Public Class Class1
         Console.WriteLine(x)
     End Sub
 End Class
-");
+"
+            );
 
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddProjectReference(project, new ProjectUtils.ProjectReference("BasicLibrary1"));
+            VisualStudio.SolutionExplorer.AddProjectReference(
+                project,
+                new ProjectUtils.ProjectReference("BasicLibrary1")
+            );
             VisualStudio.SolutionExplorer.OpenFile(project, module1FileName);
 
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 Imports BasicLibrary1
 
@@ -199,9 +240,13 @@ Module Module1
         c.PrintX(5)
     End Sub
 End Module
-");
+"
+            );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
         }
 
         // Also https://github.com/dotnet/roslyn/issues/36763
@@ -223,7 +268,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.DebuggingEditAndContinue)]
         public void LocalsWindowUpdatesAfterLocalGetsItsTypeUpdatedDuringEnC()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 Module Module1
     Sub Main()
@@ -231,12 +277,19 @@ Module Module1
         Console.WriteLine(goo)
     End Sub
 End Module
-");
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+"
+            );
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "End Sub");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
-            VisualStudio.Editor.ReplaceText("Dim goo As String = \"abc\"", "Dim goo As Single = 10");
+            VisualStudio.Editor.ReplaceText(
+                "Dim goo As String = \"abc\"",
+                "Dim goo As Single = 10"
+            );
             VisualStudio.Editor.SelectTextInCurrentDocument("Sub Main()");
             VisualStudio.Debugger.SetNextStatement();
             VisualStudio.Debugger.Go(waitForBreakMode: true);
@@ -249,7 +302,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.DebuggingEditAndContinue)]
         public void LocalsWindowUpdatesCorrectlyDuringEnC()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 
 Module Module1
@@ -265,9 +319,16 @@ Module Module1
         Return 4
     End Function
 End Module
-");
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
-            VisualStudio.Debugger.SetBreakPoint(module1FileName, "Function bar(ByVal moo As Long) As Decimal");
+"
+            );
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
+            VisualStudio.Debugger.SetBreakPoint(
+                module1FileName,
+                "Function bar(ByVal moo As Long) As Decimal"
+            );
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
             VisualStudio.Editor.ReplaceText("Dim lLng As Long = 5", "Dim lLng As Long = 444");
@@ -285,7 +346,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.DebuggingEditAndContinue)]
         public void WatchWindowUpdatesCorrectlyDuringEnC()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 
 Module Module1
@@ -294,16 +356,23 @@ Module Module1
         System.Diagnostics.Debugger.Break()
     End Sub
 End Module
-");
+"
+            );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
 
             VisualStudio.Debugger.CheckExpression("iInt", "Integer", "0");
 
-            VisualStudio.Editor.ReplaceText("System.Diagnostics.Debugger.Break()", @"iInt = 5
-System.Diagnostics.Debugger.Break()");
+            VisualStudio.Editor.ReplaceText(
+                "System.Diagnostics.Debugger.Break()",
+                @"iInt = 5
+System.Diagnostics.Debugger.Break()"
+            );
 
             VisualStudio.Editor.SelectTextInCurrentDocument("iInt = 5");
             VisualStudio.Debugger.SetNextStatement();

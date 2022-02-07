@@ -3,7 +3,5 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel
 {
-    public class ContinuousCombustionEngine : CombustionEngine
-    {
-    }
+    public class ContinuousCombustionEngine : CombustionEngine { }
 }

@@ -18,6 +18,7 @@ namespace System.Xml
         // Member fields
         //
         private readonly XmlTextReaderImpl _impl;
+
         //
         //
         // Constructors
@@ -105,6 +106,7 @@ namespace System.Xml
             _impl = new XmlTextReaderImpl(url, nt);
             _impl.OuterReader = this;
         }
+
         //
         // XmlReader members
         //
@@ -180,7 +182,10 @@ namespace System.Xml
 
         // XmlTextReader does not override SchemaInfo, ValueType and ReadTypeValue
 
-        public override int AttributeCount { get { return _impl.AttributeCount; } }
+        public override int AttributeCount
+        {
+            get { return _impl.AttributeCount; }
+        }
 
         public override string? GetAttribute(string name)
         {
@@ -327,16 +332,27 @@ namespace System.Xml
         //
         // IXmlLineInfo members
         //
-        public bool HasLineInfo() { return true; }
+        public bool HasLineInfo()
+        {
+            return true;
+        }
 
-        public int LineNumber { get { return _impl.LineNumber; } }
+        public int LineNumber
+        {
+            get { return _impl.LineNumber; }
+        }
 
-        public int LinePosition { get { return _impl.LinePosition; } }
+        public int LinePosition
+        {
+            get { return _impl.LinePosition; }
+        }
 
         //
         // IXmlNamespaceResolver members
         //
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             return _impl.GetNamespacesInScope(scope);
         }
@@ -432,6 +448,7 @@ namespace System.Xml
         {
             return _impl.ReadBinHex(array, offset, len);
         }
+
         //
         // Internal helper methods
         //

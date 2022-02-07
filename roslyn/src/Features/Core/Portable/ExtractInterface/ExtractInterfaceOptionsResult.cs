@@ -24,7 +24,13 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         public string FileName { get; }
         public ExtractLocation Location { get; }
 
-        public ExtractInterfaceOptionsResult(bool isCancelled, ImmutableArray<ISymbol> includedMembers, string interfaceName, string fileName, ExtractLocation location)
+        public ExtractInterfaceOptionsResult(
+            bool isCancelled,
+            ImmutableArray<ISymbol> includedMembers,
+            string interfaceName,
+            string fileName,
+            ExtractLocation location
+        )
         {
             IsCancelled = isCancelled;
             IncludedMembers = includedMembers;
@@ -33,7 +39,6 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             FileName = fileName;
         }
 
-        private ExtractInterfaceOptionsResult(bool isCancelled)
-            => IsCancelled = isCancelled;
+        private ExtractInterfaceOptionsResult(bool isCancelled) => IsCancelled = isCancelled;
     }
 }

@@ -83,7 +83,8 @@ namespace Internal.IL.Stubs
                 ilBytes = new byte[]
                 {
                     (byte)ILOpcode.ldarg_0,
-                    (byte)ILOpcode.prefix1, unchecked((byte)ILOpcode.volatile_),
+                    (byte)ILOpcode.prefix1,
+                    unchecked((byte)ILOpcode.volatile_),
                     (byte)opcode,
                     (byte)ILOpcode.ret
                 };
@@ -94,13 +95,19 @@ namespace Internal.IL.Stubs
                 {
                     (byte)ILOpcode.ldarg_0,
                     (byte)ILOpcode.ldarg_1,
-                    (byte)ILOpcode.prefix1, unchecked((byte)ILOpcode.volatile_),
+                    (byte)ILOpcode.prefix1,
+                    unchecked((byte)ILOpcode.volatile_),
                     (byte)opcode,
                     (byte)ILOpcode.ret
                 };
             }
 
-            return new ILStubMethodIL(method, ilBytes, Array.Empty<LocalVariableDefinition>(), null);
+            return new ILStubMethodIL(
+                method,
+                ilBytes,
+                Array.Empty<LocalVariableDefinition>(),
+                null
+            );
         }
     }
 }

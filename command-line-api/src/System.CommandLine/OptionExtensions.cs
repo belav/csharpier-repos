@@ -21,9 +21,7 @@ namespace System.CommandLine
         /// <param name="values">The values that are allowed for the option.</param>
         /// <typeparam name="TOption">The type of the option's parsed value.</typeparam>
         /// <returns>The configured argument.</returns>
-        public static TOption FromAmong<TOption>(
-            this TOption option,
-            params string[] values)
+        public static TOption FromAmong<TOption>(this TOption option, params string[] values)
             where TOption : Option
         {
             option.Argument.AddAllowedValues(values);
@@ -39,9 +37,7 @@ namespace System.CommandLine
         /// <param name="option">The option for which to add suggestions.</param>
         /// <param name="values">The suggestions to add.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption AddSuggestions<TOption>(
-            this TOption option,
-            params string[] values)
+        public static TOption AddSuggestions<TOption>(this TOption option, params string[] values)
             where TOption : Option
         {
             option.Argument.Suggestions.Add(values);
@@ -56,9 +52,7 @@ namespace System.CommandLine
         /// <param name="option">The option for which to add suggestions.</param>
         /// <param name="suggest">A <see cref="SuggestDelegate"/> that will be called to provide suggestions.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption AddSuggestions<TOption>(
-            this TOption option,
-            SuggestDelegate suggest)
+        public static TOption AddSuggestions<TOption>(this TOption option, SuggestDelegate suggest)
             where TOption : Option
         {
             option.Argument.Suggestions.Add(suggest);
@@ -76,10 +70,11 @@ namespace System.CommandLine
             option.Argument.AddValidator(
                 a =>
                     a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !File.Exists(filePath))
-                     .Select(a.LocalizationResources.FileDoesNotExist)
-                     .FirstOrDefault());
+                        .Select(t => t.Value)
+                        .Where(filePath => !File.Exists(filePath))
+                        .Select(a.LocalizationResources.FileDoesNotExist)
+                        .FirstOrDefault()
+            );
 
             return option;
         }
@@ -94,10 +89,11 @@ namespace System.CommandLine
             option.Argument.AddValidator(
                 a =>
                     a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !Directory.Exists(filePath))
-                     .Select(a.LocalizationResources.DirectoryDoesNotExist)
-                     .FirstOrDefault());
+                        .Select(t => t.Value)
+                        .Where(filePath => !Directory.Exists(filePath))
+                        .Select(a.LocalizationResources.DirectoryDoesNotExist)
+                        .FirstOrDefault()
+            );
 
             return option;
         }
@@ -112,10 +108,11 @@ namespace System.CommandLine
             option.Argument.AddValidator(
                 a =>
                     a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                     .Select(a.LocalizationResources.FileOrDirectoryDoesNotExist)
-                     .FirstOrDefault());
+                        .Select(t => t.Value)
+                        .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
+                        .Select(a.LocalizationResources.FileOrDirectoryDoesNotExist)
+                        .FirstOrDefault()
+            );
 
             return option;
         }
@@ -141,8 +138,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="option">The option to configure.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption LegalFilePathsOnly<TOption>(
-            this TOption option)
+        public static TOption LegalFilePathsOnly<TOption>(this TOption option)
             where TOption : Option
         {
             option.Argument.LegalFilePathsOnly();
@@ -156,8 +152,7 @@ namespace System.CommandLine
         /// <remarks>A parse error will result, for example, if file path separators are found in the parsed value.</remarks>
         /// <param name="option">The option to configure.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption LegalFileNamesOnly<TOption>(
-            this TOption option)
+        public static TOption LegalFileNamesOnly<TOption>(this TOption option)
             where TOption : Option
         {
             option.Argument.LegalFileNamesOnly();
@@ -172,9 +167,7 @@ namespace System.CommandLine
         /// <param name="option">The option to use to parse the command line input.</param>
         /// <param name="commandLine">A command line string to parse, which can include spaces and quotes equivalent to what can be entered into a terminal.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Option option,
-            string commandLine) =>
+        public static ParseResult Parse(this Option option, string commandLine) =>
             option.GetOrCreateDefaultParser().Parse(commandLine);
 
         /// <summary>
@@ -183,9 +176,7 @@ namespace System.CommandLine
         /// <param name="option">The option to use to parse the command line input.</param>
         /// <param name="args">The string options to parse.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Option option,
-            string[] args) =>
+        public static ParseResult Parse(this Option option, string[] args) =>
             option.GetOrCreateDefaultParser().Parse(args);
     }
 }

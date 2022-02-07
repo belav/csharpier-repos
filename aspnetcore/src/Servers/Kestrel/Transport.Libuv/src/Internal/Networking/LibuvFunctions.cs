@@ -60,9 +60,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         // Second ctor that doesn't set any fields only to be used by MockLibuv
-        public LibuvFunctions(bool onlyForTesting)
-        {
-        }
+        public LibuvFunctions(bool onlyForTesting) { }
 
         public readonly bool IsWindows;
 
@@ -96,16 +94,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             // Check and ThrowError and alter their jit heuristics.
             var errorName = err_name(statusCode);
             var errorDescription = strerror(statusCode);
-            return new UvException("Error " + statusCode + " " + errorName + " " + errorDescription, statusCode);
+            return new UvException(
+                "Error " + statusCode + " " + errorName + " " + errorDescription,
+                statusCode
+            );
         }
 
         protected Func<UvLoopHandle, int> _uv_loop_init;
+
         public void loop_init(UvLoopHandle handle)
         {
             ThrowIfErrored(_uv_loop_init(handle));
         }
 
         protected Func<IntPtr, int> _uv_loop_close;
+
         public void loop_close(UvLoopHandle handle)
         {
             handle.Validate(closed: true);
@@ -113,6 +116,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvLoopHandle, int, int> _uv_run;
+
         public void run(UvLoopHandle handle, int mode)
         {
             handle.Validate();
@@ -120,6 +124,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Action<UvLoopHandle> _uv_stop;
+
         public void stop(UvLoopHandle handle)
         {
             handle.Validate();
@@ -127,6 +132,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Action<UvHandle> _uv_ref;
+
         public void @ref(UvHandle handle)
         {
             handle.Validate();
@@ -134,6 +140,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Action<UvHandle> _uv_unref;
+
         public void unref(UvHandle handle)
         {
             handle.Validate();
@@ -143,6 +150,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         protected delegate int uv_fileno_func(UvHandle handle, ref IntPtr socket);
         protected uv_fileno_func _uv_fileno;
+
         public void uv_fileno(UvHandle handle, ref IntPtr socket)
         {
             handle.Validate();
@@ -152,6 +160,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_close_cb(IntPtr handle);
         protected Action<IntPtr, uv_close_cb> _uv_close;
+
         public void close(UvHandle handle, uv_close_cb close_cb)
         {
             handle.Validate(closed: true);
@@ -166,6 +175,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_async_cb(IntPtr handle);
         protected Func<UvLoopHandle, UvAsyncHandle, uv_async_cb, int> _uv_async_init;
+
         public void async_init(UvLoopHandle loop, UvAsyncHandle handle, uv_async_cb cb)
         {
             loop.Validate();
@@ -174,18 +184,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvAsyncHandle, int> _uv_async_send;
+
         public void async_send(UvAsyncHandle handle)
         {
             ThrowIfErrored(_uv_async_send(handle));
         }
 
         protected Func<IntPtr, int> _uv_unsafe_async_send;
+
         public void unsafe_async_send(IntPtr handle)
         {
             ThrowIfErrored(_uv_unsafe_async_send(handle));
         }
 
         protected Func<UvLoopHandle, UvTcpHandle, int> _uv_tcp_init;
+
         public void tcp_init(UvLoopHandle loop, UvTcpHandle handle)
         {
             loop.Validate();
@@ -195,6 +208,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 
         protected delegate int uv_tcp_bind_func(UvTcpHandle handle, ref SockAddr addr, int flags);
         protected uv_tcp_bind_func _uv_tcp_bind;
+
         public void tcp_bind(UvTcpHandle handle, ref SockAddr addr, int flags)
         {
             handle.Validate();
@@ -202,6 +216,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvTcpHandle, IntPtr, int> _uv_tcp_open;
+
         public void tcp_open(UvTcpHandle handle, IntPtr hSocket)
         {
             handle.Validate();
@@ -209,6 +224,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvTcpHandle, int, int> _uv_tcp_nodelay;
+
         public void tcp_nodelay(UvTcpHandle handle, bool enable)
         {
             handle.Validate();
@@ -216,6 +232,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvLoopHandle, UvPipeHandle, int, int> _uv_pipe_init;
+
         public void pipe_init(UvLoopHandle loop, UvPipeHandle handle, bool ipc)
         {
             loop.Validate();
@@ -224,6 +241,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvPipeHandle, string, int> _uv_pipe_bind;
+
         public void pipe_bind(UvPipeHandle handle, string name)
         {
             handle.Validate();
@@ -231,6 +249,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvPipeHandle, IntPtr, int> _uv_pipe_open;
+
         public void pipe_open(UvPipeHandle handle, IntPtr hSocket)
         {
             handle.Validate();
@@ -240,6 +259,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_connection_cb(IntPtr server, int status);
         protected Func<UvStreamHandle, int, uv_connection_cb, int> _uv_listen;
+
         public void listen(UvStreamHandle handle, int backlog, uv_connection_cb cb)
         {
             handle.Validate();
@@ -247,6 +267,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvStreamHandle, UvStreamHandle, int> _uv_accept;
+
         public void accept(UvStreamHandle server, UvStreamHandle client)
         {
             server.Validate();
@@ -257,7 +278,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_connect_cb(IntPtr req, int status);
         protected Action<UvConnectRequest, UvPipeHandle, string, uv_connect_cb> _uv_pipe_connect;
-        public void pipe_connect(UvConnectRequest req, UvPipeHandle handle, string name, uv_connect_cb cb)
+
+        public void pipe_connect(
+            UvConnectRequest req,
+            UvPipeHandle handle,
+            string name,
+            uv_connect_cb cb
+        )
         {
             req.Validate();
             handle.Validate();
@@ -265,6 +292,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvPipeHandle, int> _uv_pipe_pending_count;
+
         public int pipe_pending_count(UvPipeHandle handle)
         {
             handle.Validate();
@@ -273,9 +301,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_alloc_cb(IntPtr server, int suggested_size, out uv_buf_t buf);
+
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_read_cb(IntPtr server, int nread, ref uv_buf_t buf);
         protected Func<UvStreamHandle, uv_alloc_cb, uv_read_cb, int> _uv_read_start;
+
         public void read_start(UvStreamHandle handle, uv_alloc_cb alloc_cb, uv_read_cb read_cb)
         {
             handle.Validate();
@@ -283,6 +313,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvStreamHandle, int> _uv_read_stop;
+
         public void read_stop(UvStreamHandle handle)
         {
             handle.Validate();
@@ -290,6 +321,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvStreamHandle, uv_buf_t[], int, int> _uv_try_write;
+
         public int try_write(UvStreamHandle handle, uv_buf_t[] bufs, int nbufs)
         {
             handle.Validate();
@@ -301,18 +333,46 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_write_cb(IntPtr req, int status);
 
-        unsafe protected delegate int uv_write_func(UvRequest req, UvStreamHandle handle, uv_buf_t* bufs, int nbufs, uv_write_cb cb);
+        unsafe protected delegate int uv_write_func(
+            UvRequest req,
+            UvStreamHandle handle,
+            uv_buf_t* bufs,
+            int nbufs,
+            uv_write_cb cb
+        );
         protected uv_write_func _uv_write;
-        unsafe public void write(UvRequest req, UvStreamHandle handle, uv_buf_t* bufs, int nbufs, uv_write_cb cb)
+
+        unsafe public void write(
+            UvRequest req,
+            UvStreamHandle handle,
+            uv_buf_t* bufs,
+            int nbufs,
+            uv_write_cb cb
+        )
         {
             req.Validate();
             handle.Validate();
             ThrowIfErrored(_uv_write(req, handle, bufs, nbufs, cb));
         }
 
-        unsafe protected delegate int uv_write2_func(UvRequest req, UvStreamHandle handle, uv_buf_t* bufs, int nbufs, UvStreamHandle sendHandle, uv_write_cb cb);
+        unsafe protected delegate int uv_write2_func(
+            UvRequest req,
+            UvStreamHandle handle,
+            uv_buf_t* bufs,
+            int nbufs,
+            UvStreamHandle sendHandle,
+            uv_write_cb cb
+        );
         protected uv_write2_func _uv_write2;
-        unsafe public void write2(UvRequest req, UvStreamHandle handle, uv_buf_t* bufs, int nbufs, UvStreamHandle sendHandle, uv_write_cb cb)
+
+        unsafe public void write2(
+            UvRequest req,
+            UvStreamHandle handle,
+            uv_buf_t* bufs,
+            int nbufs,
+            UvStreamHandle sendHandle,
+            uv_write_cb cb
+        )
         {
             req.Validate();
             handle.Validate();
@@ -320,6 +380,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<int, IntPtr> _uv_err_name;
+
         public string err_name(int err)
         {
             IntPtr ptr = _uv_err_name(err);
@@ -327,6 +388,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<int, IntPtr> _uv_strerror;
+
         public string strerror(int err)
         {
             IntPtr ptr = _uv_strerror(err);
@@ -334,18 +396,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<int> _uv_loop_size;
+
         public int loop_size()
         {
             return _uv_loop_size();
         }
 
         protected Func<HandleType, int> _uv_handle_size;
+
         public int handle_size(HandleType handleType)
         {
             return _uv_handle_size(handleType);
         }
 
         protected Func<RequestType, int> _uv_req_size;
+
         public int req_size(RequestType reqType)
         {
             return _uv_req_size(reqType);
@@ -353,6 +418,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 
         protected delegate int uv_ip4_addr_func(string ip, int port, out SockAddr addr);
         protected uv_ip4_addr_func _uv_ip4_addr;
+
         public void ip4_addr(string ip, int port, out SockAddr addr, out UvException error)
         {
             Check(_uv_ip4_addr(ip, port, out addr), out error);
@@ -360,6 +426,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 
         protected delegate int uv_ip6_addr_func(string ip, int port, out SockAddr addr);
         protected uv_ip6_addr_func _uv_ip6_addr;
+
         public void ip6_addr(string ip, int port, out SockAddr addr, out UvException error)
         {
             Check(_uv_ip6_addr(ip, port, out addr), out error);
@@ -368,6 +435,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_walk_cb(IntPtr handle, IntPtr arg);
         protected Func<UvLoopHandle, uv_walk_cb, IntPtr, int> _uv_walk;
+
         public void walk(UvLoopHandle loop, uv_walk_cb walk_cb, IntPtr arg)
         {
             loop.Validate();
@@ -375,6 +443,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvLoopHandle, UvTimerHandle, int> _uv_timer_init;
+
         unsafe public void timer_init(UvLoopHandle loop, UvTimerHandle handle)
         {
             loop.Validate();
@@ -385,13 +454,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void uv_timer_cb(IntPtr handle);
         protected Func<UvTimerHandle, uv_timer_cb, long, long, int> _uv_timer_start;
-        unsafe public void timer_start(UvTimerHandle handle, uv_timer_cb cb, long timeout, long repeat)
+
+        unsafe public void timer_start(
+            UvTimerHandle handle,
+            uv_timer_cb cb,
+            long timeout,
+            long repeat
+        )
         {
             handle.Validate();
             ThrowIfErrored(_uv_timer_start(handle, cb, timeout, repeat));
         }
 
         protected Func<UvTimerHandle, int> _uv_timer_stop;
+
         unsafe public void timer_stop(UvTimerHandle handle)
         {
             handle.Validate();
@@ -399,22 +475,33 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         protected Func<UvLoopHandle, long> _uv_now;
+
         unsafe public long now(UvLoopHandle loop)
         {
             loop.Validate();
             return _uv_now(loop);
         }
 
-        public delegate int uv_tcp_getsockname_func(UvTcpHandle handle, out SockAddr addr, ref int namelen);
+        public delegate int uv_tcp_getsockname_func(
+            UvTcpHandle handle,
+            out SockAddr addr,
+            ref int namelen
+        );
         protected uv_tcp_getsockname_func _uv_tcp_getsockname;
+
         public void tcp_getsockname(UvTcpHandle handle, out SockAddr addr, ref int namelen)
         {
             handle.Validate();
             ThrowIfErrored(_uv_tcp_getsockname(handle, out addr, ref namelen));
         }
 
-        public delegate int uv_tcp_getpeername_func(UvTcpHandle handle, out SockAddr addr, ref int namelen);
+        public delegate int uv_tcp_getpeername_func(
+            UvTcpHandle handle,
+            out SockAddr addr,
+            ref int namelen
+        );
         protected uv_tcp_getpeername_func _uv_tcp_getpeername;
+
         public void tcp_getpeername(UvTcpHandle handle, out SockAddr addr, ref int namelen)
         {
             handle.Validate();
@@ -516,12 +603,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             public static extern void uv_close(IntPtr handle, uv_close_cb close_cb);
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            public static extern int uv_async_init(UvLoopHandle loop, UvAsyncHandle handle, uv_async_cb cb);
+            public static extern int uv_async_init(
+                UvLoopHandle loop,
+                UvAsyncHandle handle,
+                uv_async_cb cb
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
             public extern static int uv_async_send(UvAsyncHandle handle);
 
-            [DllImport("libuv", CallingConvention = CallingConvention.Cdecl, EntryPoint = "uv_async_send")]
+            [DllImport(
+                "libuv",
+                CallingConvention = CallingConvention.Cdecl,
+                EntryPoint = "uv_async_send"
+            )]
             public extern static int uv_unsafe_async_send(IntPtr handle);
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
@@ -546,31 +641,65 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             public static extern int uv_pipe_open(UvPipeHandle handle, IntPtr hSocket);
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            public static extern int uv_listen(UvStreamHandle handle, int backlog, uv_connection_cb cb);
+            public static extern int uv_listen(
+                UvStreamHandle handle,
+                int backlog,
+                uv_connection_cb cb
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
             public static extern int uv_accept(UvStreamHandle server, UvStreamHandle client);
 
-            [DllImport("libuv", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-            public static extern void uv_pipe_connect(UvConnectRequest req, UvPipeHandle handle, string name, uv_connect_cb cb);
+            [DllImport(
+                "libuv",
+                CallingConvention = CallingConvention.Cdecl,
+                CharSet = CharSet.Ansi
+            )]
+            public static extern void uv_pipe_connect(
+                UvConnectRequest req,
+                UvPipeHandle handle,
+                string name,
+                uv_connect_cb cb
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
             public extern static int uv_pipe_pending_count(UvPipeHandle handle);
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            public extern static int uv_read_start(UvStreamHandle handle, uv_alloc_cb alloc_cb, uv_read_cb read_cb);
+            public extern static int uv_read_start(
+                UvStreamHandle handle,
+                uv_alloc_cb alloc_cb,
+                uv_read_cb read_cb
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
             public static extern int uv_read_stop(UvStreamHandle handle);
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            public static extern int uv_try_write(UvStreamHandle handle, uv_buf_t[] bufs, int nbufs);
+            public static extern int uv_try_write(
+                UvStreamHandle handle,
+                uv_buf_t[] bufs,
+                int nbufs
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            unsafe public static extern int uv_write(UvRequest req, UvStreamHandle handle, uv_buf_t* bufs, int nbufs, uv_write_cb cb);
+            unsafe public static extern int uv_write(
+                UvRequest req,
+                UvStreamHandle handle,
+                uv_buf_t* bufs,
+                int nbufs,
+                uv_write_cb cb
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            unsafe public static extern int uv_write2(UvRequest req, UvStreamHandle handle, uv_buf_t* bufs, int nbufs, UvStreamHandle sendHandle, uv_write_cb cb);
+            unsafe public static extern int uv_write2(
+                UvRequest req,
+                UvStreamHandle handle,
+                uv_buf_t* bufs,
+                int nbufs,
+                UvStreamHandle sendHandle,
+                uv_write_cb cb
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
             public extern static IntPtr uv_err_name(int err);
@@ -594,10 +723,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             public static extern int uv_ip6_addr(string ip, int port, out SockAddr addr);
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            public static extern int uv_tcp_getsockname(UvTcpHandle handle, out SockAddr name, ref int namelen);
+            public static extern int uv_tcp_getsockname(
+                UvTcpHandle handle,
+                out SockAddr name,
+                ref int namelen
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            public static extern int uv_tcp_getpeername(UvTcpHandle handle, out SockAddr name, ref int namelen);
+            public static extern int uv_tcp_getpeername(
+                UvTcpHandle handle,
+                out SockAddr name,
+                ref int namelen
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
             public static extern int uv_walk(UvLoopHandle loop, uv_walk_cb walk_cb, IntPtr arg);
@@ -606,7 +743,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             unsafe public static extern int uv_timer_init(UvLoopHandle loop, UvTimerHandle handle);
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
-            unsafe public static extern int uv_timer_start(UvTimerHandle handle, uv_timer_cb cb, long timeout, long repeat);
+            unsafe public static extern int uv_timer_start(
+                UvTimerHandle handle,
+                uv_timer_cb cb,
+                long timeout,
+                long repeat
+            );
 
             [DllImport("libuv", CallingConvention = CallingConvention.Cdecl)]
             unsafe public static extern int uv_timer_stop(UvTimerHandle handle);

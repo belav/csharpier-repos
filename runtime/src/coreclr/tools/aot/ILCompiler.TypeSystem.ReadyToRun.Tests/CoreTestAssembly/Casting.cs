@@ -23,5 +23,6 @@ namespace Casting
 
     class ClassWithInterfaceConstraint<T> where T : IFoo { }
 
-    class ClassWithRecursiveImplementation : IContravariant<IContravariant<ClassWithRecursiveImplementation>> { }
+    class ClassWithRecursiveImplementation
+        : IContravariant<IContravariant<ClassWithRecursiveImplementation>> { }
 }

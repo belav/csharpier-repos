@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -35,7 +35,8 @@ public abstract class JsonOutputFormatterTestBase
     public void CanWriteResult_ReturnsExpectedValueForMediaType(
         string mediaType,
         bool isServerDefined,
-        string expectedResult)
+        string expectedResult
+    )
     {
         // Arrange
         var formatter = GetOutputFormatter();
@@ -46,7 +47,8 @@ public abstract class JsonOutputFormatterTestBase
             actionContext.HttpContext,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            new object())
+            new object()
+        )
         {
             ContentType = new StringSegment(mediaType),
             ContentTypeIsServerDefined = isServerDefined,
@@ -66,12 +68,12 @@ public abstract class JsonOutputFormatterTestBase
         get
         {
             var data = new TheoryData<string, string, bool>
-                {
-                    { "This is a test 激光這兩個字是甚麼意思 string written using utf-8", "utf-8", true },
-                    { "This is a test 激光這兩個字是甚麼意思 string written using utf-16", "utf-16", true },
-                    { "This is a test 激光這兩個字是甚麼意思 string written using utf-32", "utf-32", false },
-                    { "This is a test æøå string written using iso-8859-1", "iso-8859-1", false },
-                };
+            {
+                { "This is a test 激光這兩個字是甚麼意思 string written using utf-8", "utf-8", true },
+                { "This is a test 激光這兩個字是甚麼意思 string written using utf-16", "utf-16", true },
+                { "This is a test 激光這兩個字是甚麼意思 string written using utf-32", "utf-32", false },
+                { "This is a test æøå string written using iso-8859-1", "iso-8859-1", false },
+            };
 
             return data;
         }
@@ -80,16 +82,22 @@ public abstract class JsonOutputFormatterTestBase
     [Theory]
     [MemberData(nameof(WriteCorrectCharacterEncoding))]
     public async Task WriteToStreamAsync_UsesCorrectCharacterEncoding(
-       string content,
-       string encodingAsString,
-       bool isDefaultEncoding)
+        string content,
+        string encodingAsString,
+        bool isDefaultEncoding
+    )
     {
         // Arrange
         var formatter = GetOutputFormatter();
         var expectedContent = "\"" + content + "\"";
-        var mediaType = MediaTypeHeaderValue.Parse(string.Format(CultureInfo.InvariantCulture, "application/json; charset={0}", encodingAsString));
+        var mediaType = MediaTypeHeaderValue.Parse(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "application/json; charset={0}",
+                encodingAsString
+            )
+        );
         var encoding = CreateOrGetSupportedEncoding(formatter, encodingAsString, isDefaultEncoding);
-
 
         var body = new MemoryStream();
         var actionContext = GetActionContext(mediaType, body);
@@ -98,13 +106,17 @@ public abstract class JsonOutputFormatterTestBase
             actionContext.HttpContext,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            content)
+            content
+        )
         {
             ContentType = new StringSegment(mediaType.ToString()),
         };
 
         // Act
-        await formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.GetEncoding(encodingAsString));
+        await formatter.WriteResponseBodyAsync(
+            outputFormatterContext,
+            Encoding.GetEncoding(encodingAsString)
+        );
 
         // Assert
         var actualContent = encoding.GetString(body.ToArray());
@@ -130,13 +142,17 @@ public abstract class JsonOutputFormatterTestBase
             actionContext.HttpContext,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            content)
+            content
+        )
         {
             ContentType = new StringSegment(mediaType.ToString()),
         };
 
         // Act
-        await formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.GetEncoding("utf-8"));
+        await formatter.WriteResponseBodyAsync(
+            outputFormatterContext,
+            Encoding.GetEncoding("utf-8")
+        );
 
         // Assert
         var actualContent = encoding.GetString(body.ToArray());
@@ -149,11 +165,14 @@ public abstract class JsonOutputFormatterTestBase
         // Arrange
         var outputFormatterContext = GetOutputFormatterContext(
             new ModelWithSerializationError(),
-            typeof(ModelWithSerializationError));
+            typeof(ModelWithSerializationError)
+        );
         var jsonFormatter = GetOutputFormatter();
 
         // Act
-        await Record.ExceptionAsync(() => jsonFormatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.UTF8));
+        await Record.ExceptionAsync(
+            () => jsonFormatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.UTF8)
+        );
 
         // Assert
         var body = outputFormatterContext.HttpContext.Response.Body;
@@ -167,12 +186,12 @@ public abstract class JsonOutputFormatterTestBase
 
     protected static ActionContext GetActionContext(
         MediaTypeHeaderValue contentType,
-        Stream responseStream = null)
+        Stream responseStream = null
+    )
     {
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = contentType.ToString();
         httpContext.Request.Headers.AcceptCharset = contentType.Charset.ToString();
-
 
         httpContext.Response.Body = responseStream ?? new MemoryStream();
         return new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
@@ -183,7 +202,8 @@ public abstract class JsonOutputFormatterTestBase
         Type outputType,
         string contentType = "application/xml; charset=utf-8",
         Stream responseStream = null,
-        Func<Stream, Encoding, TextWriter> writerFactory = null)
+        Func<Stream, Encoding, TextWriter> writerFactory = null
+    )
     {
         var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
 
@@ -192,7 +212,8 @@ public abstract class JsonOutputFormatterTestBase
             actionContext.HttpContext,
             writerFactory ?? new TestHttpResponseStreamWriterFactory().CreateWriter,
             outputType,
-            outputValue)
+            outputValue
+        )
         {
             ContentType = new StringSegment(contentType),
         };
@@ -201,14 +222,15 @@ public abstract class JsonOutputFormatterTestBase
     protected static Encoding CreateOrGetSupportedEncoding(
         TextOutputFormatter formatter,
         string encodingAsString,
-        bool isDefaultEncoding)
+        bool isDefaultEncoding
+    )
     {
         Encoding encoding = null;
         if (isDefaultEncoding)
         {
-            encoding = formatter
-                .SupportedEncodings
-                .First((e) => e.WebName.Equals(encodingAsString, StringComparison.OrdinalIgnoreCase));
+            encoding = formatter.SupportedEncodings.First(
+                (e) => e.WebName.Equals(encodingAsString, StringComparison.OrdinalIgnoreCase)
+            );
         }
         else
         {
@@ -228,7 +250,9 @@ public abstract class JsonOutputFormatterTestBase
         {
             get
             {
-                throw new NotImplementedException($"Property {nameof(Age)} has not been implemented");
+                throw new NotImplementedException(
+                    $"Property {nameof(Age)} has not been implemented"
+                );
             }
         }
     }

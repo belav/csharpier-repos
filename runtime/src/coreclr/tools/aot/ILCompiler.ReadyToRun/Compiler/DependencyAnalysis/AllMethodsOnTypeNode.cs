@@ -28,8 +28,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override bool StaticDependenciesAreComputed => true;
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context)
         {
@@ -37,16 +44,22 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             foreach (MethodDesc method in Type.GetAllMethods())
             {
-                if (!method.IsGenericMethodDefinition &&
-                    context.CompilationModuleGroup.ContainsMethodBody(method, false))
+                if (
+                    !method.IsGenericMethodDefinition
+                    && context.CompilationModuleGroup.ContainsMethodBody(method, false)
+                )
                 {
-                    dependencies.Add(context.CompiledMethodNode(method), $"Method on type {Type.ToString()}");
+                    dependencies.Add(
+                        context.CompiledMethodNode(method),
+                        $"Method on type {Type.ToString()}"
+                    );
                 }
             }
 
             return dependencies;
         }
 
-        protected override string GetName(NodeFactory factory) => $"All methods on type {Type.ToString()}";
+        protected override string GetName(NodeFactory factory) =>
+            $"All methods on type {Type.ToString()}";
     }
 }

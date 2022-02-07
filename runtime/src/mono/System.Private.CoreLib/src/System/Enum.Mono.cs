@@ -9,7 +9,11 @@ namespace System
     public partial class Enum
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern bool GetEnumValuesAndNames(RuntimeType enumType, out ulong[] values, out string[] names);
+        private static extern bool GetEnumValuesAndNames(
+            RuntimeType enumType,
+            out ulong[] values,
+            out string[] names
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern object InternalBoxEnum(RuntimeType enumType, long value);

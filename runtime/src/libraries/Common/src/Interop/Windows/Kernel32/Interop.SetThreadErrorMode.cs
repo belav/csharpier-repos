@@ -9,9 +9,7 @@ internal static partial class Interop
     {
         [SuppressGCTransition]
         [GeneratedDllImport(Libraries.Kernel32, ExactSpelling = true, SetLastError = true)]
-        internal static partial bool SetThreadErrorMode(
-            uint dwNewMode,
-            out uint lpOldMode);
+        internal static partial bool SetThreadErrorMode(uint dwNewMode, out uint lpOldMode);
 
         internal const uint SEM_FAILCRITICALERRORS = 1;
     }

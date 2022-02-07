@@ -14,13 +14,17 @@ namespace Test
             while (a == 1)
                 throw new Exception();
         }
+
         static int Main()
         {
             try
             {
                 Func();
             }
-            catch (Exception) { return -1; }
+            catch (Exception)
+            {
+                return -1;
+            }
             return 100;
         }
     }

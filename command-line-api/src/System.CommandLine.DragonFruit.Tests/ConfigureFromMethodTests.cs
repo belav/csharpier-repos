@@ -27,9 +27,8 @@ namespace System.CommandLine.DragonFruit.Tests
         public async Task Generated_boolean_parameters_will_accept_zero_arguments()
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(
-                             GetMethodInfo(nameof(Method_taking_bool)), this)
-                         .Build();
+                .ConfigureRootCommandFromMethod(GetMethodInfo(nameof(Method_taking_bool)), this)
+                .Build();
 
             await parser.InvokeAsync($"{RootCommand.ExecutableName} --value", _testConsole);
 
@@ -43,12 +42,14 @@ namespace System.CommandLine.DragonFruit.Tests
         [InlineData("--value:false", false)]
         [InlineData("--value=true", true)]
         [InlineData("--value=false", false)]
-        public async Task Generated_boolean_parameters_will_accept_one_argument(string commandLine, bool expected)
+        public async Task Generated_boolean_parameters_will_accept_one_argument(
+            string commandLine,
+            bool expected
+        )
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(
-                             GetMethodInfo(nameof(Method_taking_bool)), this)
-                         .Build();
+                .ConfigureRootCommandFromMethod(GetMethodInfo(nameof(Method_taking_bool)), this)
+                .Build();
 
             await parser.InvokeAsync(commandLine, _testConsole);
 
@@ -59,14 +60,15 @@ namespace System.CommandLine.DragonFruit.Tests
         public async Task Single_character_parameters_generate_aliases_that_accept_a_single_dash_prefix()
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(
-                             GetMethodInfo(nameof(Method_with_single_letter_parameters)), this)
-                         .Build();
+                .ConfigureRootCommandFromMethod(
+                    GetMethodInfo(nameof(Method_with_single_letter_parameters)),
+                    this
+                )
+                .Build();
 
             await parser.InvokeAsync("-x 123 -y 456", _testConsole);
 
-            _receivedValues.Should()
-                           .BeEquivalentSequenceTo(123, 456);
+            _receivedValues.Should().BeEquivalentSequenceTo(123, 456);
         }
 
         [Theory]
@@ -81,17 +83,18 @@ namespace System.CommandLine.DragonFruit.Tests
         public void Parameters_named_arguments_generate_command_arguments_having_the_correct_arity(
             string methodName,
             int minNumberOfValues,
-            int maxNumberOfValues)
+            int maxNumberOfValues
+        )
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(GetMethodInfo(methodName))
-                         .Build();
+                .ConfigureRootCommandFromMethod(GetMethodInfo(methodName))
+                .Build();
 
             var rootCommandArgument = parser.Configuration.RootCommand.Arguments.Single();
 
             rootCommandArgument.Arity
-                               .Should()
-                               .BeEquivalentTo(new ArgumentArity(minNumberOfValues, maxNumberOfValues));
+                .Should()
+                .BeEquivalentTo(new ArgumentArity(minNumberOfValues, maxNumberOfValues));
         }
 
         [Theory]
@@ -102,17 +105,18 @@ namespace System.CommandLine.DragonFruit.Tests
         [InlineData(nameof(Method_having_FileInfo_argument), "argument")]
         [InlineData(nameof(Method_having_FileInfo_argument_with_default_value), "argument")]
         [InlineData(nameof(Method_having_FileInfo_array_args), "args")]
-        public void Parameters_named_arguments_generate_command_arguments_having_the_correct_name(string methodName, string expectedArgName)
+        public void Parameters_named_arguments_generate_command_arguments_having_the_correct_name(
+            string methodName,
+            string expectedArgName
+        )
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(GetMethodInfo(methodName))
-                         .Build();
+                .ConfigureRootCommandFromMethod(GetMethodInfo(methodName))
+                .Build();
 
             var rootCommandArgument = parser.Configuration.RootCommand.Arguments.Single();
 
-            rootCommandArgument.Name
-                               .Should()
-                               .Be(expectedArgName);
+            rootCommandArgument.Name.Should().Be(expectedArgName);
         }
 
         [Theory]
@@ -126,53 +130,47 @@ namespace System.CommandLine.DragonFruit.Tests
         public void Options_are_not_generated_for_command_argument_parameters(string methodName)
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(GetMethodInfo(methodName))
-                         .Build();
+                .ConfigureRootCommandFromMethod(GetMethodInfo(methodName))
+                .Build();
 
             var rootCommand = parser.Configuration.RootCommand;
 
-            var argumentParameterNames = new[]
-                                         {
-                                             "arguments",
-                                             "argument",
-                                             "args"
-                                         };
+            var argumentParameterNames = new[] { "arguments", "argument", "args" };
 
-            rootCommand.Options
-                       .Should()
-                       .NotContain(o => argumentParameterNames.Contains(o.Name));
+            rootCommand.Options.Should().NotContain(o => argumentParameterNames.Contains(o.Name));
         }
 
         [Theory]
         [InlineData(nameof(Method_having_string_argument), typeof(string))]
         [InlineData(nameof(Method_having_string_argument_with_null_default_value), typeof(string))]
         [InlineData(nameof(Method_having_string_array_arguments), typeof(string[]))]
-        [InlineData(nameof(Method_having_string_array_arguments_with_default_value), typeof(string[]))]
+        [InlineData(
+            nameof(Method_having_string_array_arguments_with_default_value),
+            typeof(string[])
+        )]
         [InlineData(nameof(Method_having_FileInfo_argument), typeof(FileInfo))]
         [InlineData(nameof(Method_having_FileInfo_argument_with_default_value), typeof(FileInfo))]
         [InlineData(nameof(Method_having_FileInfo_array_args), typeof(FileInfo[]))]
         public void Parameters_named_arguments_generate_command_arguments_having_the_correct_type(
             string methodName,
-            Type expectedType)
+            Type expectedType
+        )
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(GetMethodInfo(methodName))
-                         .Build();
+                .ConfigureRootCommandFromMethod(GetMethodInfo(methodName))
+                .Build();
 
             var rootCommandArgument = parser.Configuration.RootCommand.Arguments.Single();
 
-            rootCommandArgument.ValueType
-                               .Should()
-                               .Be(expectedType);
+            rootCommandArgument.ValueType.Should().Be(expectedType);
         }
 
         [Fact]
         public async Task When_method_returns_void_then_return_code_is_0()
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(
-                             GetMethodInfo(nameof(Method_returning_void)), this)
-                         .Build();
+                .ConfigureRootCommandFromMethod(GetMethodInfo(nameof(Method_returning_void)), this)
+                .Build();
 
             var result = await parser.InvokeAsync("", _testConsole);
 
@@ -183,9 +181,8 @@ namespace System.CommandLine.DragonFruit.Tests
         public async Task When_method_returns_int_then_return_code_is_set_to_return_value()
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(
-                             GetMethodInfo(nameof(Method_returning_int)), this)
-                         .Build();
+                .ConfigureRootCommandFromMethod(GetMethodInfo(nameof(Method_returning_int)), this)
+                .Build();
 
             var result = await parser.InvokeAsync("-i 123", _testConsole);
 
@@ -196,9 +193,11 @@ namespace System.CommandLine.DragonFruit.Tests
         public async Task When_method_returns_Task_of_int_then_return_code_is_set_to_return_value()
         {
             var parser = new CommandLineBuilder()
-                         .ConfigureRootCommandFromMethod(
-                             GetMethodInfo(nameof(Method_returning_Task_of_int)), this)
-                         .Build();
+                .ConfigureRootCommandFromMethod(
+                    GetMethodInfo(nameof(Method_returning_Task_of_int)),
+                    this
+                )
+                .Build();
 
             var result = await parser.InvokeAsync("-i 123", _testConsole);
 
@@ -211,16 +210,19 @@ namespace System.CommandLine.DragonFruit.Tests
         [InlineData(typeof(BindingContext))]
         [InlineData(typeof(ParseResult))]
         [InlineData(typeof(CancellationToken))]
-        public void Options_are_not_built_for_infrastructure_types_exposed_by_method_parameters(Type type)
+        public void Options_are_not_built_for_infrastructure_types_exposed_by_method_parameters(
+            Type type
+        )
         {
             var targetType = typeof(ClassWithMethodHavingParameter<>).MakeGenericType(type);
 
-            var handlerMethod = targetType.GetMethod(nameof(ClassWithMethodHavingParameter<int>.Handle));
+            var handlerMethod = targetType.GetMethod(
+                nameof(ClassWithMethodHavingParameter<int>.Handle)
+            );
 
             var options = handlerMethod.BuildOptions();
 
-            options.Should()
-                   .NotContain(o => o.ValueType == type);
+            options.Should().NotContain(o => o.ValueType == type);
         }
 
         [Fact]
@@ -238,7 +240,10 @@ namespace System.CommandLine.DragonFruit.Tests
         public async Task Method_with_multiple_parameters_with_default_values_are_resolved_correctly()
         {
             var command = new Command("test");
-            command.ConfigureFromMethod(GetMethodInfo(nameof(Method_with_multiple_default_values)), this);
+            command.ConfigureFromMethod(
+                GetMethodInfo(nameof(Method_with_multiple_default_values)),
+                this
+            );
 
             await command.InvokeAsync("");
 
@@ -250,16 +255,12 @@ namespace System.CommandLine.DragonFruit.Tests
             _receivedValues = new object[] { value };
         }
 
-        internal void Method_with_single_letter_parameters(
-            int x,
-            int y)
+        internal void Method_with_single_letter_parameters(int x, int y)
         {
             _receivedValues = new object[] { x, y };
         }
 
-        internal void Method_returning_void()
-        {
-        }
+        internal void Method_returning_void() { }
 
         internal int Method_returning_int(int i)
         {
@@ -272,37 +273,53 @@ namespace System.CommandLine.DragonFruit.Tests
             return i;
         }
 
-        internal void Method_having_string_argument(string stringOption, int intOption, string argument)
-        {
-        }
+        internal void Method_having_string_argument(
+            string stringOption,
+            int intOption,
+            string argument
+        ) { }
 
-        internal void Method_having_string_argument_with_null_default_value(string stringOption, int intOption, string argument = null)
-        {
-        }
+        internal void Method_having_string_argument_with_null_default_value(
+            string stringOption,
+            int intOption,
+            string argument = null
+        ) { }
 
-        internal void Method_having_string_argument_with_non_null_default_value(string stringOption, int intOption, string argument = "the-default-value")
-        {
-        }
+        internal void Method_having_string_argument_with_non_null_default_value(
+            string stringOption,
+            int intOption,
+            string argument = "the-default-value"
+        ) { }
 
-        internal void Method_having_string_array_arguments(string stringOption, int intOption, string[] arguments)
-        {
-        }
+        internal void Method_having_string_array_arguments(
+            string stringOption,
+            int intOption,
+            string[] arguments
+        ) { }
 
-        internal void Method_having_string_array_arguments_with_default_value(string stringOption, int intOption, string[] arguments = null)
-        {
-        }
+        internal void Method_having_string_array_arguments_with_default_value(
+            string stringOption,
+            int intOption,
+            string[] arguments = null
+        ) { }
 
-        internal void Method_having_FileInfo_argument(string stringOption, int intOption, FileInfo argument)
-        {
-        }
+        internal void Method_having_FileInfo_argument(
+            string stringOption,
+            int intOption,
+            FileInfo argument
+        ) { }
 
-        internal void Method_having_FileInfo_argument_with_default_value(string stringOption, int intOption, FileInfo argument = null)
-        {
-        }
+        internal void Method_having_FileInfo_argument_with_default_value(
+            string stringOption,
+            int intOption,
+            FileInfo argument = null
+        ) { }
 
-        internal void Method_having_FileInfo_array_args(string stringOption, int intOption, FileInfo[] args)
-        {
-        }
+        internal void Method_having_FileInfo_array_args(
+            string stringOption,
+            int intOption,
+            FileInfo[] args
+        ) { }
 
         internal void Method_with_multiple_default_values(int firstValue = 1, int secondValue = 2)
         {
@@ -312,8 +329,8 @@ namespace System.CommandLine.DragonFruit.Tests
         private MethodInfo GetMethodInfo(string name)
         {
             return typeof(ConfigureFromMethodTests)
-                   .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                   .Single(m => m.Name == name);
+                .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                .Single(m => m.Name == name);
         }
     }
 }

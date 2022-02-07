@@ -65,7 +65,8 @@ public static class WebAssemblyHostEnvironmentExtensions
     /// <returns>True if the specified name is the same as the current environment, otherwise false.</returns>
     public static bool IsEnvironment(
         this IWebAssemblyHostEnvironment hostingEnvironment,
-        string environmentName)
+        string environmentName
+    )
     {
         if (hostingEnvironment == null)
         {
@@ -75,6 +76,7 @@ public static class WebAssemblyHostEnvironmentExtensions
         return string.Equals(
             hostingEnvironment.Environment,
             environmentName,
-            StringComparison.OrdinalIgnoreCase);
+            StringComparison.OrdinalIgnoreCase
+        );
     }
 }

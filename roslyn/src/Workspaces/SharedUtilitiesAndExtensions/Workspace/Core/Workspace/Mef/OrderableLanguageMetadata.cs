@@ -13,14 +13,17 @@ namespace Microsoft.CodeAnalysis.Host.Mef
     {
         public string Language { get; }
 
-        public OrderableLanguageMetadata(IDictionary<string, object> data)
-            : base(data)
+        public OrderableLanguageMetadata(IDictionary<string, object> data) : base(data)
         {
             this.Language = (string)data.GetValueOrDefault("Language");
         }
 
-        public OrderableLanguageMetadata(string name, string language, IEnumerable<string> after, IEnumerable<string> before)
-            : base(name, after, before)
+        public OrderableLanguageMetadata(
+            string name,
+            string language,
+            IEnumerable<string> after,
+            IEnumerable<string> before
+        ) : base(name, after, before)
         {
             this.Language = language;
         }

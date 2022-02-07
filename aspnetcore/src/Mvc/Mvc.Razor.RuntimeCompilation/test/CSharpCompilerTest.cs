@@ -20,7 +20,9 @@ public class CSharpCompilerTest
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public void GetCompilationOptions_ReturnsDefaultOptionsIfApplicationNameIsNullOrEmpty(string name)
+    public void GetCompilationOptions_ReturnsDefaultOptionsIfApplicationNameIsNullOrEmpty(
+        string name
+    )
     {
         // Arrange
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>(e => e.ApplicationName == name);
@@ -53,13 +55,13 @@ public class CSharpCompilerTest
     [InlineData("Production", OptimizationLevel.Release)]
     public void Constructor_SetsOptimizationLevelBasedOnEnvironment(
         string environment,
-        OptimizationLevel expected)
+        OptimizationLevel expected
+    )
     {
         // Arrange
         var options = new RazorViewEngineOptions();
         var hostingEnvironment = new Mock<IWebHostEnvironment>();
-        hostingEnvironment.SetupGet(e => e.EnvironmentName)
-              .Returns(environment);
+        hostingEnvironment.SetupGet(e => e.EnvironmentName).Returns(environment);
         var compiler = new CSharpCompiler(ReferenceManager, hostingEnvironment.Object);
 
         // Act & Assert
@@ -71,13 +73,15 @@ public class CSharpCompilerTest
     [InlineData("Development", "DEBUG")]
     [InlineData("Staging", "RELEASE")]
     [InlineData("Production", "RELEASE")]
-    public void EnsureOptions_SetsPreprocessorSymbols(string environment, string expectedConfiguration)
+    public void EnsureOptions_SetsPreprocessorSymbols(
+        string environment,
+        string expectedConfiguration
+    )
     {
         // Arrange
         var options = new RazorViewEngineOptions();
         var hostingEnvironment = new Mock<IWebHostEnvironment>();
-        hostingEnvironment.SetupGet(e => e.EnvironmentName)
-              .Returns(environment);
+        hostingEnvironment.SetupGet(e => e.EnvironmentName).Returns(environment);
         var compiler = new CSharpCompiler(ReferenceManager, hostingEnvironment.Object);
 
         // Act & Assert
@@ -89,7 +93,9 @@ public class CSharpCompilerTest
     public void EnsureOptions_ConfiguresDefaultCompilationOptions()
     {
         // Arrange
-        var hostingEnvironment = Mock.Of<IWebHostEnvironment>(h => h.EnvironmentName == "Development");
+        var hostingEnvironment = Mock.Of<IWebHostEnvironment>(
+            h => h.EnvironmentName == "Development"
+        );
         var compiler = new CSharpCompiler(ReferenceManager, hostingEnvironment);
 
         // Act & Assert
@@ -97,7 +103,8 @@ public class CSharpCompilerTest
         Assert.False(compilationOptions.AllowUnsafe);
         Assert.Equal(ReportDiagnostic.Default, compilationOptions.GeneralDiagnosticOption);
         Assert.Equal(OptimizationLevel.Debug, compilationOptions.OptimizationLevel);
-        Assert.Collection(compilationOptions.SpecificDiagnosticOptions.OrderBy(d => d.Key),
+        Assert.Collection(
+            compilationOptions.SpecificDiagnosticOptions.OrderBy(d => d.Key),
             item =>
             {
                 Assert.Equal("CS1701", item.Key);
@@ -112,14 +119,17 @@ public class CSharpCompilerTest
             {
                 Assert.Equal("CS1705", item.Key);
                 Assert.Equal(ReportDiagnostic.Suppress, item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
     public void EnsureOptions_ConfiguresDefaultParseOptions()
     {
         // Arrange
-        var hostingEnvironment = Mock.Of<IWebHostEnvironment>(h => h.EnvironmentName == "Development");
+        var hostingEnvironment = Mock.Of<IWebHostEnvironment>(
+            h => h.EnvironmentName == "Development"
+        );
         var compiler = new CSharpCompiler(ReferenceManager, hostingEnvironment);
 
         // Act & Assert
@@ -135,7 +145,11 @@ public class CSharpCompilerTest
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
         var dependencyContextOptions = GetDependencyContextCompilationOptions("SOME_TEST_DEFINE");
 
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         var parseOptions = compiler.ParseOptions;
@@ -146,25 +160,36 @@ public class CSharpCompilerTest
     public void Constructor_ConfiguresLanguageVersion()
     {
         // Arrange
-        var dependencyContextOptions = GetDependencyContextCompilationOptions(languageVersion: "7.1");
+        var dependencyContextOptions = GetDependencyContextCompilationOptions(
+            languageVersion: "7.1"
+        );
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
 
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         var compilationOptions = compiler.ParseOptions;
         Assert.Equal(LanguageVersion.CSharp7_1, compilationOptions.LanguageVersion);
     }
 
-
     [Fact]
     public void EmitOptions_ReadsDebugTypeFromDependencyContext()
     {
         // Arrange
-        var dependencyContextOptions = GetDependencyContextCompilationOptions(debugType: "portable");
+        var dependencyContextOptions = GetDependencyContextCompilationOptions(
+            debugType: "portable"
+        );
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
 
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         var emitOptions = compiler.EmitOptions;
@@ -176,10 +201,16 @@ public class CSharpCompilerTest
     public void EmitOptions_SetsDebugInformationFormatToPortable_WhenDebugTypeIsEmbedded()
     {
         // Arrange
-        var dependencyContextOptions = GetDependencyContextCompilationOptions(debugType: "embedded");
+        var dependencyContextOptions = GetDependencyContextCompilationOptions(
+            debugType: "embedded"
+        );
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
 
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         var emitOptions = compiler.EmitOptions;
@@ -194,7 +225,11 @@ public class CSharpCompilerTest
         var dependencyContextOptions = GetDependencyContextCompilationOptions(debugType: "none");
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
 
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         Assert.False(compiler.EmitPdb);
@@ -207,7 +242,11 @@ public class CSharpCompilerTest
         var dependencyContextOptions = GetDependencyContextCompilationOptions(allowUnsafe: true);
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
 
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         var compilationOptions = compiler.CSharpCompilationOptions;
@@ -218,10 +257,16 @@ public class CSharpCompilerTest
     public void Constructor_SetsDiagnosticOption()
     {
         // Arrange
-        var dependencyContextOptions = GetDependencyContextCompilationOptions(warningsAsErrors: true);
+        var dependencyContextOptions = GetDependencyContextCompilationOptions(
+            warningsAsErrors: true
+        );
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
 
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         var compilationOptions = compiler.CSharpCompilationOptions;
@@ -235,7 +280,11 @@ public class CSharpCompilerTest
         var dependencyContextOptions = GetDependencyContextCompilationOptions(optimize: true);
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
 
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         var compilationOptions = compiler.CSharpCompilationOptions;
@@ -248,7 +297,11 @@ public class CSharpCompilerTest
         // Arrange
         var dependencyContextOptions = GetDependencyContextCompilationOptions("MyDefine");
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act & Assert
         var parseOptions = compiler.ParseOptions;
@@ -263,7 +316,11 @@ public class CSharpCompilerTest
         var define = "MY_CUSTOM_DEFINE";
         var dependencyContextOptions = GetDependencyContextCompilationOptions(define);
         var hostingEnvironment = Mock.Of<IWebHostEnvironment>();
-        var compiler = new TestCSharpCompiler(ReferenceManager, hostingEnvironment, dependencyContextOptions);
+        var compiler = new TestCSharpCompiler(
+            ReferenceManager,
+            hostingEnvironment,
+            dependencyContextOptions
+        );
 
         // Act
         var syntaxTree = compiler.CreateSyntaxTree(SourceText.From(content));
@@ -282,7 +339,8 @@ public class CSharpCompilerTest
         string keyFile = null,
         bool? delaySign = null,
         bool? publicSign = null,
-        string debugType = null)
+        string debugType = null
+    )
     {
         return new DependencyContextCompilationOptions(
             new[] { define },
@@ -296,7 +354,8 @@ public class CSharpCompilerTest
             publicSign,
             debugType,
             emitEntryPoint: null,
-            generateXmlDocumentation: null);
+            generateXmlDocumentation: null
+        );
     }
 
     private class TestCSharpCompiler : CSharpCompiler
@@ -306,13 +365,13 @@ public class CSharpCompilerTest
         public TestCSharpCompiler(
             RazorReferenceManager referenceManager,
             IWebHostEnvironment hostingEnvironment,
-            DependencyContextCompilationOptions options)
-            : base(referenceManager, hostingEnvironment)
+            DependencyContextCompilationOptions options
+        ) : base(referenceManager, hostingEnvironment)
         {
             _options = options;
         }
 
-        protected internal override DependencyContextCompilationOptions GetDependencyContextCompilationOptions()
-            => _options;
+        protected internal override DependencyContextCompilationOptions GetDependencyContextCompilationOptions() =>
+            _options;
     }
 }

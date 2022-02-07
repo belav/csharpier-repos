@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.Notification
         private readonly TaskQueue _eventQueue;
         private readonly EventMap _eventMap = new();
 
-        public GlobalOperationNotificationService(IAsynchronousOperationListener listener)
-            => _eventQueue = new TaskQueue(listener, TaskScheduler.Default);
+        public GlobalOperationNotificationService(IAsynchronousOperationListener listener) =>
+            _eventQueue = new TaskQueue(listener, TaskScheduler.Default);
 
         public override GlobalOperationRegistration Start(string operation)
         {
@@ -57,7 +57,11 @@ namespace Microsoft.CodeAnalysis.Notification
             var ev = _eventMap.GetEventHandlers<EventHandler>(GlobalOperationStartedEventName);
             if (ev.HasHandlers)
             {
-                return _eventQueue.ScheduleTask(GlobalOperationStartedEventName, () => ev.RaiseEvent(handler => handler(this, EventArgs.Empty)), CancellationToken.None);
+                return _eventQueue.ScheduleTask(
+                    GlobalOperationStartedEventName,
+                    () => ev.RaiseEvent(handler => handler(this, EventArgs.Empty)),
+                    CancellationToken.None
+                );
             }
 
             return Task.CompletedTask;
@@ -65,11 +69,17 @@ namespace Microsoft.CodeAnalysis.Notification
 
         private Task RaiseGlobalOperationStoppedAsync(ImmutableArray<string> operations)
         {
-            var ev = _eventMap.GetEventHandlers<EventHandler<GlobalOperationEventArgs>>(GlobalOperationStoppedEventName);
+            var ev = _eventMap.GetEventHandlers<EventHandler<GlobalOperationEventArgs>>(
+                GlobalOperationStoppedEventName
+            );
             if (ev.HasHandlers)
             {
                 var args = new GlobalOperationEventArgs(operations);
-                return _eventQueue.ScheduleTask(GlobalOperationStoppedEventName, () => ev.RaiseEvent(handler => handler(this, args)), CancellationToken.None);
+                return _eventQueue.ScheduleTask(
+                    GlobalOperationStoppedEventName,
+                    () => ev.RaiseEvent(handler => handler(this, args)),
+                    CancellationToken.None
+                );
             }
 
             return Task.CompletedTask;
@@ -79,30 +89,22 @@ namespace Microsoft.CodeAnalysis.Notification
         {
             add
             {
-                // currently, if one subscribes while a global operation is already in progress, it will not be notified for 
+                // currently, if one subscribes while a global operation is already in progress, it will not be notified for
                 // that one.
                 _eventMap.AddEventHandler(GlobalOperationStartedEventName, value);
             }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(GlobalOperationStartedEventName, value);
-            }
+            remove { _eventMap.RemoveEventHandler(GlobalOperationStartedEventName, value); }
         }
 
         public override event EventHandler<GlobalOperationEventArgs> Stopped
         {
             add
             {
-                // currently, if one subscribes while a global operation is already in progress, it will not be notified for 
+                // currently, if one subscribes while a global operation is already in progress, it will not be notified for
                 // that one.
                 _eventMap.AddEventHandler(GlobalOperationStoppedEventName, value);
             }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(GlobalOperationStoppedEventName, value);
-            }
+            remove { _eventMap.RemoveEventHandler(GlobalOperationStoppedEventName, value); }
         }
 
         public override void Done(GlobalOperationRegistration registration)

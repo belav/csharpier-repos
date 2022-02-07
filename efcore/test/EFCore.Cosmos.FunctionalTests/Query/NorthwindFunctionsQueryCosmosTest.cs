@@ -11,12 +11,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindFunctionsQueryCosmosTest : NorthwindFunctionsQueryTestBase<NorthwindQueryCosmosFixture<NoopModelCustomizer>>
+    public class NorthwindFunctionsQueryCosmosTest
+        : NorthwindFunctionsQueryTestBase<NorthwindQueryCosmosFixture<NoopModelCustomizer>>
     {
         public NorthwindFunctionsQueryCosmosTest(
             NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             ClearLog();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -29,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) AND ((""M"" != null) AND STARTSWITH(c[""ContactName""], ""M""))))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) AND ((""M"" != null) AND STARTSWITH(c[""ContactName""], ""M""))))"
+            );
         }
 
         public override async Task String_StartsWith_Identity(bool async)
@@ -39,7 +41,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) A
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR ((c[""ContactName""] != null) AND ((c[""ContactName""] != null) AND STARTSWITH(c[""ContactName""], c[""ContactName""])))))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR ((c[""ContactName""] != null) AND ((c[""ContactName""] != null) AND STARTSWITH(c[""ContactName""], c[""ContactName""])))))"
+            );
         }
 
         public override async Task String_StartsWith_Column(bool async)
@@ -49,7 +52,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR ((c[""ContactName""] != null) AND ((c[""ContactName""] != null) AND STARTSWITH(c[""ContactName""], c[""ContactName""])))))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR ((c[""ContactName""] != null) AND ((c[""ContactName""] != null) AND STARTSWITH(c[""ContactName""], c[""ContactName""])))))"
+            );
         }
 
         public override async Task String_StartsWith_MethodCall(bool async)
@@ -59,7 +63,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) AND ((""M"" != null) AND STARTSWITH(c[""ContactName""], ""M""))))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) AND ((""M"" != null) AND STARTSWITH(c[""ContactName""], ""M""))))"
+            );
         }
 
         public override async Task String_EndsWith_Literal(bool async)
@@ -69,7 +74,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) A
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) AND ((""b"" != null) AND ENDSWITH(c[""ContactName""], ""b""))))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) AND ((""b"" != null) AND ENDSWITH(c[""ContactName""], ""b""))))"
+            );
         }
 
         public override async Task String_EndsWith_Identity(bool async)
@@ -79,7 +85,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) A
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR ((c[""ContactName""] != null) AND ((c[""ContactName""] != null) AND ENDSWITH(c[""ContactName""], c[""ContactName""])))))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR ((c[""ContactName""] != null) AND ((c[""ContactName""] != null) AND ENDSWITH(c[""ContactName""], c[""ContactName""])))))"
+            );
         }
 
         public override async Task String_EndsWith_Column(bool async)
@@ -89,7 +96,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR ((c[""ContactName""] != null) AND ((c[""ContactName""] != null) AND ENDSWITH(c[""ContactName""], c[""ContactName""])))))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR ((c[""ContactName""] != null) AND ((c[""ContactName""] != null) AND ENDSWITH(c[""ContactName""], c[""ContactName""])))))"
+            );
         }
 
         public override async Task String_EndsWith_MethodCall(bool async)
@@ -99,7 +107,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] = """") OR
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) AND ((""m"" != null) AND ENDSWITH(c[""ContactName""], ""m""))))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) AND ((""m"" != null) AND ENDSWITH(c[""ContactName""], ""m""))))"
+            );
         }
 
         public override async Task String_Contains_Literal(bool async)
@@ -109,7 +118,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""ContactName""] != null) A
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], ""M""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], ""M""))"
+            );
         }
 
         public override async Task String_Contains_Identity(bool async)
@@ -118,7 +128,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], ""
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], c[""ContactName""]))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], c[""ContactName""]))"
+            );
         }
 
         public override async Task String_Contains_Column(bool async)
@@ -128,7 +139,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], c[
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], c[""ContactName""]))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], c[""ContactName""]))"
+            );
         }
 
         public override async Task String_FirstOrDefault_MethodCall(bool async)
@@ -138,7 +150,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], c[
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (LEFT(c[""ContactName""], 1) = ""A""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (LEFT(c[""ContactName""], 1) = ""A""))"
+            );
         }
 
         public override async Task String_LastOrDefault_MethodCall(bool async)
@@ -148,7 +161,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (LEFT(c[""ContactName""], 1) = 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (RIGHT(c[""ContactName""], 1) = ""s""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (RIGHT(c[""ContactName""], 1) = ""s""))"
+            );
         }
 
         public override async Task String_Contains_MethodCall(bool async)
@@ -158,7 +172,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (RIGHT(c[""ContactName""], 1) =
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], ""M""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], ""M""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -169,7 +184,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND CONTAINS(c[""ContactName""], ""
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -180,7 +196,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -191,7 +208,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -202,7 +220,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -213,7 +232,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -224,7 +244,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -235,7 +256,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -246,7 +268,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -257,7 +280,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -268,7 +292,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -279,7 +304,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -290,7 +316,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Where_math_abs1(bool async)
@@ -300,7 +327,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Product"") AND (ABS(c[""ProductID""]) > 10))");
+WHERE ((c[""Discriminator""] = ""Product"") AND (ABS(c[""ProductID""]) > 10))"
+            );
         }
 
         public override async Task Where_math_abs2(bool async)
@@ -310,7 +338,8 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (ABS(c[""ProductID""]) > 10))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""UnitPrice""] < 7.0)) AND (ABS(c[""Quantity""]) > 10))");
+WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""UnitPrice""] < 7.0)) AND (ABS(c[""Quantity""]) > 10))"
+            );
         }
 
         public override async Task Where_math_abs3(bool async)
@@ -320,7 +349,8 @@ WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""UnitPrice""] < 7.0)) A
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND (ABS(c[""UnitPrice""]) > 10.0))");
+WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND (ABS(c[""UnitPrice""]) > 10.0))"
+            );
         }
 
         public override async Task Where_math_abs_uncorrelated(bool async)
@@ -330,7 +360,8 @@ WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""UnitPrice""] < 7.0)) AND (10 < c[""ProductID""]))");
+WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""UnitPrice""] < 7.0)) AND (10 < c[""ProductID""]))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -341,7 +372,8 @@ WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""UnitPrice""] < 7.0)) A
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""OrderDetail"")");
+WHERE (c[""Discriminator""] = ""OrderDetail"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -352,7 +384,8 @@ WHERE (c[""Discriminator""] = ""OrderDetail"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""OrderDetail"")");
+WHERE (c[""Discriminator""] = ""OrderDetail"")"
+            );
         }
 
         public override async Task Where_math_floor(bool async)
@@ -362,7 +395,8 @@ WHERE (c[""Discriminator""] = ""OrderDetail"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND (FLOOR(c[""UnitPrice""]) > 10.0))");
+WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND (FLOOR(c[""UnitPrice""]) > 10.0))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #25120")]
@@ -373,7 +407,8 @@ WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""OrderDetail"")");
+WHERE (c[""Discriminator""] = ""OrderDetail"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #25120")]
@@ -384,7 +419,8 @@ WHERE (c[""Discriminator""] = ""OrderDetail"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""OrderDetail"")");
+WHERE (c[""Discriminator""] = ""OrderDetail"")"
+            );
         }
 
         public override async Task Where_math_round(bool async)
@@ -394,7 +430,8 @@ WHERE (c[""Discriminator""] = ""OrderDetail"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND (ROUND(c[""UnitPrice""]) > 10.0))");
+WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND (ROUND(c[""UnitPrice""]) > 10.0))"
+            );
         }
 
         public override async Task Select_math_round_int(bool async)
@@ -404,7 +441,8 @@ WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND 
             AssertSql(
                 @"SELECT c[""OrderID""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
+            );
         }
 
         public override async Task Select_math_truncate_int(bool async)
@@ -414,7 +452,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
             AssertSql(
                 @"SELECT c[""OrderID""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -425,7 +464,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (ROUND(c[""UnitPrice""]) > 100.0))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (ROUND(c[""UnitPrice""]) > 100.0))"
+            );
         }
 
         public override async Task Where_math_truncate(bool async)
@@ -435,7 +475,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (ROUND(c[""UnitPrice""]) > 1
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND (TRUNC(c[""UnitPrice""]) > 10.0))");
+WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND (TRUNC(c[""UnitPrice""]) > 10.0))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -446,7 +487,8 @@ WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5)) AND 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -457,7 +499,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AND (c[""Discount""] > 0.0)))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AND (c[""Discount""] > 0.0)))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -468,7 +511,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AN
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AND (c[""Discount""] > 0.0)))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AND (c[""Discount""] > 0.0)))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -479,7 +523,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AN
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AND (c[""Discount""] > 0.0)))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AND (c[""Discount""] > 0.0)))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -490,7 +535,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND ((c[""OrderID""] = 11077) AN
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -501,7 +547,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -512,7 +559,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -523,7 +571,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -534,7 +583,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -545,7 +595,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -556,7 +607,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -567,7 +619,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         public override async Task Where_math_sign(bool async)
@@ -577,7 +630,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077)) AND (SIGN(c[""Discount""]) > 0))");
+WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077)) AND (SIGN(c[""Discount""]) > 0))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -588,7 +642,8 @@ WHERE (((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077)) A
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -599,7 +654,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -610,7 +666,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""OrderID""] = 11077))");
             AssertSql(
                 @"SELECT [p].[ProductID], [p].[Discontinued], [p].[ProductName], [p].[SupplierID], [p].[UnitPrice], [p].[UnitsInStock]
 FROM [Products] AS [p]
-WHERE ABS(CAST([p].[ProductID] AS real)) > CAST(10 AS real)");
+WHERE ABS(CAST([p].[ProductID] AS real)) > CAST(10 AS real)"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -621,7 +678,8 @@ WHERE ABS(CAST([p].[ProductID] AS real)) > CAST(10 AS real)");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[UnitPrice] < 7.0) AND (CEILING([o].[Discount]) > CAST(0 AS real))");
+WHERE ([o].[UnitPrice] < 7.0) AND (CEILING([o].[Discount]) > CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -632,7 +690,8 @@ WHERE ([o].[UnitPrice] < 7.0) AND (CEILING([o].[Discount]) > CAST(0 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (FLOOR(CAST([o].[UnitPrice] AS real)) > CAST(10 AS real))");
+WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (FLOOR(CAST([o].[UnitPrice] AS real)) > CAST(10 AS real))"
+            );
         }
 
         [ConditionalTheory]
@@ -643,7 +702,8 @@ WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (FLOOR(CAST([o].[UnitPrice] AS 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (POWER(c[""Discount""], 3.0) > 0.005))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (POWER(c[""Discount""], 3.0) > 0.005))"
+            );
         }
 
         [ConditionalTheory]
@@ -654,7 +714,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (POWER(c[""Discount""], 3.0)
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (POWER(c[""Discount""], 2.0) > 0.05))");
+WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (POWER(c[""Discount""], 2.0) > 0.05))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -665,7 +726,8 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (POWER(c[""Discount""], 2.0)
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ROUND(CAST([o].[UnitPrice] AS real), 2) > CAST(100 AS real)");
+WHERE ROUND(CAST([o].[UnitPrice] AS real), 2) > CAST(100 AS real)"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -676,7 +738,8 @@ WHERE ROUND(CAST([o].[UnitPrice] AS real), 2) > CAST(100 AS real)");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (ROUND(CAST([o].[UnitPrice] AS real), 0, 1) > CAST(10 AS real))");
+WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (ROUND(CAST([o].[UnitPrice] AS real), 0, 1) > CAST(10 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -687,7 +750,8 @@ WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (ROUND(CAST([o].[UnitPrice] AS 
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (EXP([o].[Discount]) > CAST(1 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (EXP([o].[Discount]) > CAST(1 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -698,7 +762,8 @@ WHERE ([o].[OrderID] = 11077) AND (EXP([o].[Discount]) > CAST(1 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG10([o].[Discount]) < CAST(0 AS real))");
+WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG10([o].[Discount]) < CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -709,7 +774,8 @@ WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG1
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG([o].[Discount]) < CAST(0 AS real))");
+WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG([o].[Discount]) < CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -720,7 +786,8 @@ WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG(
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG([o].[Discount], CAST(7 AS real)) < CAST(0 AS real))");
+WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG([o].[Discount], CAST(7 AS real)) < CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -731,7 +798,8 @@ WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG(
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (SQRT([o].[Discount]) > CAST(0 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (SQRT([o].[Discount]) > CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -742,7 +810,8 @@ WHERE ([o].[OrderID] = 11077) AND (SQRT([o].[Discount]) > CAST(0 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (ACOS([o].[Discount]) > CAST(1 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (ACOS([o].[Discount]) > CAST(1 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -753,7 +822,8 @@ WHERE ([o].[OrderID] = 11077) AND (ACOS([o].[Discount]) > CAST(1 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (ASIN([o].[Discount]) > CAST(0 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (ASIN([o].[Discount]) > CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -764,7 +834,8 @@ WHERE ([o].[OrderID] = 11077) AND (ASIN([o].[Discount]) > CAST(0 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (ATAN([o].[Discount]) > CAST(0 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (ATAN([o].[Discount]) > CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -775,7 +846,8 @@ WHERE ([o].[OrderID] = 11077) AND (ATAN([o].[Discount]) > CAST(0 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (ATN2([o].[Discount], CAST(1 AS real)) > CAST(0 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (ATN2([o].[Discount], CAST(1 AS real)) > CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -786,7 +858,8 @@ WHERE ([o].[OrderID] = 11077) AND (ATN2([o].[Discount], CAST(1 AS real)) > CAST(
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (COS([o].[Discount]) > CAST(0 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (COS([o].[Discount]) > CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -797,7 +870,8 @@ WHERE ([o].[OrderID] = 11077) AND (COS([o].[Discount]) > CAST(0 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (SIN([o].[Discount]) > CAST(0 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (SIN([o].[Discount]) > CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -808,7 +882,8 @@ WHERE ([o].[OrderID] = 11077) AND (SIN([o].[Discount]) > CAST(0 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (TAN([o].[Discount]) > CAST(0 AS real))");
+WHERE ([o].[OrderID] = 11077) AND (TAN([o].[Discount]) > CAST(0 AS real))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -819,7 +894,8 @@ WHERE ([o].[OrderID] = 11077) AND (TAN([o].[Discount]) > CAST(0 AS real))");
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
-WHERE ([o].[OrderID] = 11077) AND (SIGN([o].[Discount]) > 0)");
+WHERE ([o].[OrderID] = 11077) AND (SIGN([o].[Discount]) > 0)"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -830,7 +906,8 @@ WHERE ([o].[OrderID] = 11077) AND (SIGN([o].[Discount]) > 0)");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""OrderDetail"")");
+WHERE (c[""Discriminator""] = ""OrderDetail"")"
+            );
         }
 
         public override async Task Where_string_to_upper(bool async)
@@ -840,7 +917,8 @@ WHERE (c[""Discriminator""] = ""OrderDetail"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (UPPER(c[""CustomerID""]) = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (UPPER(c[""CustomerID""]) = ""ALFKI""))"
+            );
         }
 
         public override async Task Where_string_to_lower(bool async)
@@ -850,7 +928,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (UPPER(c[""CustomerID""]) = ""A
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (LOWER(c[""CustomerID""]) = ""alfki""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (LOWER(c[""CustomerID""]) = ""alfki""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -861,7 +940,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (LOWER(c[""CustomerID""]) = ""a
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -872,7 +952,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -883,7 +964,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -894,7 +976,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -905,7 +988,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -916,7 +1000,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -927,7 +1012,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -938,7 +1024,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -949,7 +1036,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Indexof_with_emptystring(bool async)
@@ -959,7 +1047,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT INDEX_OF(c[""ContactName""], """") AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Indexof_with_starting_position(bool async)
@@ -969,7 +1058,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT INDEX_OF(c[""ContactName""], ""a"", 3) AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Replace_with_emptystring(bool async)
@@ -979,7 +1069,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT REPLACE(c[""ContactName""], ""ari"", """") AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Replace_using_property_arguments(bool async)
@@ -989,7 +1080,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT REPLACE(c[""ContactName""], c[""ContactName""], c[""CustomerID""]) AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Substring_with_one_arg_with_zero_startindex(bool async)
@@ -999,7 +1091,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT c[""ContactName""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], 0, LENGTH(c[""CustomerID""])) = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], 0, LENGTH(c[""CustomerID""])) = ""ALFKI""))"
+            );
         }
 
         public override async Task Substring_with_one_arg_with_constant(bool async)
@@ -1009,7 +1102,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], 0
             AssertSql(
                 @"SELECT c[""ContactName""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], 1, LENGTH(c[""CustomerID""])) = ""LFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], 1, LENGTH(c[""CustomerID""])) = ""LFKI""))"
+            );
         }
 
         public override async Task Substring_with_one_arg_with_closure(bool async)
@@ -1021,7 +1115,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], 1
 
 SELECT c[""ContactName""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], @__start_0, LENGTH(c[""CustomerID""])) = ""FKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], @__start_0, LENGTH(c[""CustomerID""])) = ""FKI""))"
+            );
         }
 
         public override async Task Substring_with_two_args_with_zero_startindex(bool async)
@@ -1031,7 +1126,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (SUBSTRING(c[""CustomerID""], @
             AssertSql(
                 @"SELECT LEFT(c[""ContactName""], 3) AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Substring_with_two_args_with_zero_length(bool async)
@@ -1041,7 +1137,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT SUBSTRING(c[""ContactName""], 2, 0) AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Substring_with_two_args_with_constant(bool async)
@@ -1051,7 +1148,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT SUBSTRING(c[""ContactName""], 1, 3) AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Substring_with_two_args_with_closure(bool async)
@@ -1063,7 +1161,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
 
 SELECT SUBSTRING(c[""ContactName""], @__start_0, 3) AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         public override async Task Substring_with_two_args_with_Index_of(bool async)
@@ -1073,7 +1172,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT SUBSTRING(c[""ContactName""], INDEX_OF(c[""ContactName""], ""a""), 3) AS c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1084,7 +1184,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1108,7 +1209,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""CustomerID""], c[""Region""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task IsNullOrEmpty_negated_in_projection(bool async)
@@ -1118,7 +1220,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""CustomerID""], c[""Region""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1129,7 +1232,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task TrimStart_without_arguments_in_predicate(bool async)
@@ -1139,7 +1243,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (LTRIM(c[""ContactTitle""]) = ""Owner""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (LTRIM(c[""ContactTitle""]) = ""Owner""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1150,7 +1255,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (LTRIM(c[""ContactTitle""]) = "
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1161,7 +1267,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task TrimEnd_without_arguments_in_predicate(bool async)
@@ -1171,7 +1278,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (RTRIM(c[""ContactTitle""]) = ""Owner""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (RTRIM(c[""ContactTitle""]) = ""Owner""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1182,7 +1290,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (RTRIM(c[""ContactTitle""]) = "
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1193,7 +1302,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Trim_without_argument_in_predicate(bool async)
@@ -1203,7 +1313,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (TRIM(c[""ContactTitle""]) = ""Owner""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (TRIM(c[""ContactTitle""]) = ""Owner""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1214,7 +1325,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (TRIM(c[""ContactTitle""]) = ""
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1225,7 +1337,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1236,18 +1349,24 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(bool async)
+        public override async Task Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
+            bool async
+        )
         {
-            await base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(async);
+            await base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
+                async
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Static_string_equals_in_predicate(bool async)
@@ -1257,18 +1376,22 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ANATR""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ANATR""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Static_equals_nullable_datetime_compared_to_non_nullable(bool async)
+        public override async Task Static_equals_nullable_datetime_compared_to_non_nullable(
+            bool async
+        )
         {
             await base.Static_equals_nullable_datetime_compared_to_non_nullable(async);
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1279,7 +1402,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1290,7 +1414,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1301,7 +1426,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1312,7 +1438,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -1340,7 +1467,9 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
 
         public override Task Regex_IsMatch_MethodCall_constant_input(bool async)
         {
-            return AssertTranslationFailed(() => base.Regex_IsMatch_MethodCall_constant_input(async));
+            return AssertTranslationFailed(
+                () => base.Regex_IsMatch_MethodCall_constant_input(async)
+            );
         }
 
         [ConditionalTheory]
@@ -1349,13 +1478,19 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
         {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID.Equals("alFkI", StringComparison.OrdinalIgnoreCase)),
-                entryCount: 1);
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(
+                            c => c.CustomerID.Equals("alFkI", StringComparison.OrdinalIgnoreCase)
+                        ),
+                entryCount: 1
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""], ""alFkI"", true))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""], ""alFkI"", true))"
+            );
         }
 
         [ConditionalTheory]
@@ -1364,13 +1499,24 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""],
         {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => string.Equals(c.CustomerID, "alFkI", StringComparison.OrdinalIgnoreCase)),
-            entryCount: 1);
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(
+                            c =>
+                                string.Equals(
+                                    c.CustomerID,
+                                    "alFkI",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                        ),
+                entryCount: 1
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""], ""alFkI"", true))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""], ""alFkI"", true))"
+            );
         }
 
         [ConditionalTheory]
@@ -1379,13 +1525,17 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""],
         {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID.Equals("ALFKI", StringComparison.Ordinal)),
-                entryCount: 1);
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(c => c.CustomerID.Equals("ALFKI", StringComparison.Ordinal)),
+                entryCount: 1
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""], ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""], ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory]
@@ -1394,13 +1544,17 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""],
         {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => string.Equals(c.CustomerID, "ALFKI", StringComparison.Ordinal)),
-            entryCount: 1);
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(c => string.Equals(c.CustomerID, "ALFKI", StringComparison.Ordinal)),
+                entryCount: 1
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""], ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""], ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1409,10 +1563,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""CustomerID""],
             return base.Datetime_subtraction_TotalDays(async);
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-        protected override void ClearLog()
-            => Fixture.TestSqlLoggerFactory.Clear();
+        protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
     }
 }

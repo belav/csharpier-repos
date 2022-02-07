@@ -5,11 +5,14 @@ using System;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public class StashBoxDependencyInjectionSpecificationTests : DependencyInjectionSpecificationTests
+    public class StashBoxDependencyInjectionSpecificationTests
+        : DependencyInjectionSpecificationTests
     {
         public override bool SupportsIServiceProviderIsService => false;
 
-        protected override IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
+        protected override IServiceProvider CreateServiceProvider(
+            IServiceCollection serviceCollection
+        )
         {
             return serviceCollection.UseStashbox();
         }

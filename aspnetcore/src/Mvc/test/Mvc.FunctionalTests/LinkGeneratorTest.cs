@@ -11,11 +11,14 @@ using Xunit;
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 // Functional tests for MVC's scenarios with LinkGenerator (2.2+ only)
-public class LinkGeneratorTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForLinkGenerator>>
+public class LinkGeneratorTest
+    : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForLinkGenerator>>
 {
     public LinkGeneratorTest(MvcTestFixture<RoutingWebSite.StartupForLinkGenerator> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 

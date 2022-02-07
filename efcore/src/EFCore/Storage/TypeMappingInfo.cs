@@ -22,10 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Creates a new instance of <see cref="TypeMappingInfo" />.
         /// </summary>
         /// <param name="property">The property for which mapping is needed.</param>
-        public TypeMappingInfo(IProperty property)
-            : this(property.GetPrincipals())
-        {
-        }
+        public TypeMappingInfo(IProperty property) : this(property.GetPrincipals()) { }
 
         /// <summary>
         ///     Creates a new instance of <see cref="TypeMappingInfo" />.
@@ -52,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? fallbackUnicode = null,
             int? fallbackSize = null,
             int? fallbackPrecision = null,
-            int? fallbackScale = null)
+            int? fallbackScale = null
+        )
         {
             ValueConverter? customConverter = null;
             int? size = null;
@@ -114,7 +112,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IsKeyOrIndex = property.IsKey() || property.IsForeignKey() || property.IsIndex();
             Size = size ?? mappingHints?.Size ?? fallbackSize;
             IsUnicode = isUnicode ?? mappingHints?.IsUnicode ?? fallbackUnicode;
-            IsRowVersion = property.IsConcurrencyToken && property.ValueGenerated == ValueGenerated.OnAddOrUpdate;
+            IsRowVersion =
+                property.IsConcurrencyToken
+                && property.ValueGenerated == ValueGenerated.OnAddOrUpdate;
             ClrType = (customConverter?.ProviderClrType ?? property.ClrType).UnwrapNullableType();
             Scale = scale ?? mappingHints?.Scale ?? fallbackScale;
             Precision = precision ?? mappingHints?.Precision ?? fallbackPrecision;
@@ -133,8 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? unicode = null,
             int? size = null,
             int? precision = null,
-            int? scale = null)
-            : this(member.GetMemberType())
+            int? scale = null
+        ) : this(member.GetMemberType())
         {
             IsUnicode = unicode;
             Size = size;
@@ -159,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             int? size = null,
             bool? rowVersion = null,
             int? precision = null,
-            int? scale = null)
+            int? scale = null
+        )
         {
             ClrType = type?.UnwrapNullableType();
 
@@ -186,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? unicode = null,
             int? size = null,
             int? precision = null,
-            int? scale = null)
+            int? scale = null
+        )
         {
             IsRowVersion = source.IsRowVersion;
             IsKeyOrIndex = source.IsKeyOrIndex;
@@ -206,8 +208,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="converterInfo">The converter to apply.</param>
         /// <returns>The new mapping info.</returns>
-        public TypeMappingInfo WithConverter(in ValueConverterInfo converterInfo)
-            => new(this, converterInfo);
+        public TypeMappingInfo WithConverter(in ValueConverterInfo converterInfo) =>
+            new(this, converterInfo);
 
         /// <summary>
         ///     Indicates whether or not the mapping is part of a key or index.

@@ -54,11 +54,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
                 // Buckets queued duration into 10ms buckets with the last bucket starting at 1000ms.
                 // Queue times are relatively short and fall under 50ms, so tracking past 1000ms is not useful.
-                _queuedDurationLogAggregator = new HistogramLogAggregator(bucketSize: 10, maxBucketValue: 1000);
+                _queuedDurationLogAggregator = new HistogramLogAggregator(
+                    bucketSize: 10,
+                    maxBucketValue: 1000
+                );
 
                 // Since this is a log based histogram, these are appropriate bucket sizes for the log data.
                 // A bucket at 1 corresponds to ~26ms, while the max bucket value corresponds to ~17minutes
-                _requestDurationLogAggregator = new HistogramLogAggregator(bucketSize: 1, maxBucketValue: 40);
+                _requestDurationLogAggregator = new HistogramLogAggregator(
+                    bucketSize: 1,
+                    maxBucketValue: 40
+                );
             }
 
             public void UpdateFindDocumentTelemetryData(bool success, string? workspaceKind)
@@ -75,14 +81,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 string methodName,
                 TimeSpan queuedDuration,
                 TimeSpan requestDuration,
-                Result result)
+                Result result
+            )
             {
                 // Find the bucket corresponding to the queued duration and update the count of durations in that bucket.
                 // This is not broken down per method as time in queue is not specific to an LSP method.
-                _queuedDurationLogAggregator?.IncreaseCount(QueuedDurationKey, Convert.ToDecimal(queuedDuration.TotalMilliseconds));
+                _queuedDurationLogAggregator?.IncreaseCount(
+                    QueuedDurationKey,
+                    Convert.ToDecimal(queuedDuration.TotalMilliseconds)
+                );
 
                 // Store the request time metrics per LSP method.
-                _requestDurationLogAggregator?.IncreaseCount(methodName, Convert.ToDecimal(ComputeLogValue(requestDuration.TotalMilliseconds)));
+                _requestDurationLogAggregator?.IncreaseCount(
+                    methodName,
+                    Convert.ToDecimal(ComputeLogValue(requestDuration.TotalMilliseconds))
+                );
                 _requestCounters.GetOrAdd(methodName, (_) => new Counter()).IncrementCount(result);
             }
 
@@ -103,52 +116,84 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             /// </summary>
             public void Dispose()
             {
-                if (_queuedDurationLogAggregator is null || _queuedDurationLogAggregator.IsEmpty
-                    || _requestDurationLogAggregator is null || _requestDurationLogAggregator.IsEmpty)
+                if (
+                    _queuedDurationLogAggregator is null
+                    || _queuedDurationLogAggregator.IsEmpty
+                    || _requestDurationLogAggregator is null
+                    || _requestDurationLogAggregator.IsEmpty
+                )
                 {
                     return;
                 }
 
-                var queuedDurationCounter = _queuedDurationLogAggregator.GetValue(QueuedDurationKey);
-                Logger.Log(FunctionId.LSP_TimeInQueue, KeyValueLogMessage.Create(LogType.Trace, m =>
-                {
-                    m["server"] = _serverTypeName;
-                    m["bucketsize_ms"] = queuedDurationCounter?.BucketSize;
-                    m["maxbucketvalue_ms"] = queuedDurationCounter?.MaxBucketValue;
-                    m["buckets"] = queuedDurationCounter?.GetBucketsAsString();
-                }));
+                var queuedDurationCounter = _queuedDurationLogAggregator.GetValue(
+                    QueuedDurationKey
+                );
+                Logger.Log(
+                    FunctionId.LSP_TimeInQueue,
+                    KeyValueLogMessage.Create(
+                        LogType.Trace,
+                        m =>
+                        {
+                            m["server"] = _serverTypeName;
+                            m["bucketsize_ms"] = queuedDurationCounter?.BucketSize;
+                            m["maxbucketvalue_ms"] = queuedDurationCounter?.MaxBucketValue;
+                            m["buckets"] = queuedDurationCounter?.GetBucketsAsString();
+                        }
+                    )
+                );
 
                 foreach (var kvp in _requestCounters)
                 {
-                    Logger.Log(FunctionId.LSP_RequestCounter, KeyValueLogMessage.Create(LogType.Trace, m =>
-                    {
-                        m["server"] = _serverTypeName;
-                        m["method"] = kvp.Key;
-                        m["successful"] = kvp.Value.SucceededCount;
-                        m["failed"] = kvp.Value.FailedCount;
-                        m["cancelled"] = kvp.Value.CancelledCount;
-                    }));
+                    Logger.Log(
+                        FunctionId.LSP_RequestCounter,
+                        KeyValueLogMessage.Create(
+                            LogType.Trace,
+                            m =>
+                            {
+                                m["server"] = _serverTypeName;
+                                m["method"] = kvp.Key;
+                                m["successful"] = kvp.Value.SucceededCount;
+                                m["failed"] = kvp.Value.FailedCount;
+                                m["cancelled"] = kvp.Value.CancelledCount;
+                            }
+                        )
+                    );
 
                     var requestExecutionDuration = _requestDurationLogAggregator.GetValue(kvp.Key);
-                    Logger.Log(FunctionId.LSP_RequestDuration, KeyValueLogMessage.Create(LogType.Trace, m =>
-                    {
-                        m["server"] = _serverTypeName;
-                        m["method"] = kvp.Key;
-                        m["bucketsize_logms"] = requestExecutionDuration?.BucketSize;
-                        m["maxbucketvalue_logms"] = requestExecutionDuration?.MaxBucketValue;
-                        m["bucketdata_logms"] = requestExecutionDuration?.GetBucketsAsString();
-                    }));
+                    Logger.Log(
+                        FunctionId.LSP_RequestDuration,
+                        KeyValueLogMessage.Create(
+                            LogType.Trace,
+                            m =>
+                            {
+                                m["server"] = _serverTypeName;
+                                m["method"] = kvp.Key;
+                                m["bucketsize_logms"] = requestExecutionDuration?.BucketSize;
+                                m["maxbucketvalue_logms"] =
+                                    requestExecutionDuration?.MaxBucketValue;
+                                m["bucketdata_logms"] =
+                                    requestExecutionDuration?.GetBucketsAsString();
+                            }
+                        )
+                    );
                 }
 
-                Logger.Log(FunctionId.LSP_FindDocumentInWorkspace, KeyValueLogMessage.Create(LogType.Trace, m =>
-                {
-                    m["server"] = _serverTypeName;
-                    foreach (var kvp in _findDocumentResults)
-                    {
-                        var info = kvp.Key.ToString()!;
-                        m[info] = kvp.Value.GetCount();
-                    }
-                }));
+                Logger.Log(
+                    FunctionId.LSP_FindDocumentInWorkspace,
+                    KeyValueLogMessage.Create(
+                        LogType.Trace,
+                        m =>
+                        {
+                            m["server"] = _serverTypeName;
+                            foreach (var kvp in _findDocumentResults)
+                            {
+                                var info = kvp.Key.ToString()!;
+                                m[info] = kvp.Value.GetCount();
+                            }
+                        }
+                    )
+                );
 
                 // Clear telemetry we've published in case dispose is called multiple times.
                 _requestCounters.Clear();

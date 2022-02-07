@@ -15,7 +15,8 @@ public abstract class RazorParserOptions
             designTime: false,
             parseLeadingDirectives: false,
             version: RazorLanguageVersion.Latest,
-            fileKind: FileKinds.Legacy);
+            fileKind: FileKinds.Legacy
+        );
     }
 
     public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure)
@@ -23,14 +24,21 @@ public abstract class RazorParserOptions
         return Create(configure, fileKind: FileKinds.Legacy);
     }
 
-    public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure, string fileKind)
+    public static RazorParserOptions Create(
+        Action<RazorParserOptionsBuilder> configure,
+        string fileKind
+    )
     {
         if (configure == null)
         {
             throw new ArgumentNullException(nameof(configure));
         }
 
-        var builder = new DefaultRazorParserOptionsBuilder(designTime: false, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
+        var builder = new DefaultRazorParserOptionsBuilder(
+            designTime: false,
+            version: RazorLanguageVersion.Latest,
+            fileKind ?? FileKinds.Legacy
+        );
         configure(builder);
         var options = builder.Build();
 
@@ -42,14 +50,21 @@ public abstract class RazorParserOptions
         return CreateDesignTime(configure, fileKind: null);
     }
 
-    public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure, string fileKind)
+    public static RazorParserOptions CreateDesignTime(
+        Action<RazorParserOptionsBuilder> configure,
+        string fileKind
+    )
     {
         if (configure == null)
         {
             throw new ArgumentNullException(nameof(configure));
         }
 
-        var builder = new DefaultRazorParserOptionsBuilder(designTime: true, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
+        var builder = new DefaultRazorParserOptionsBuilder(
+            designTime: true,
+            version: RazorLanguageVersion.Latest,
+            fileKind ?? FileKinds.Legacy
+        );
         configure(builder);
         var options = builder.Build();
 

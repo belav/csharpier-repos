@@ -7,7 +7,12 @@ internal static partial class Interop
 {
     internal static partial class User32
     {
-        [DllImport(Libraries.User32, CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true)]
+        [DllImport(
+            Libraries.User32,
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            ExactSpelling = true
+        )]
         public static extern short RegisterClassW(ref WNDCLASS wc);
     }
 }

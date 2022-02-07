@@ -7,9 +7,17 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [GeneratedDllImport(Libraries.Advapi32, EntryPoint = "LookupPrivilegeValueW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Advapi32,
+            EntryPoint = "LookupPrivilegeValueW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static partial bool LookupPrivilegeValue(
-            [MarshalAs(UnmanagedType.LPTStr)] string? lpSystemName, [MarshalAs(UnmanagedType.LPTStr)] string lpName, out LUID lpLuid);
+            [MarshalAs(UnmanagedType.LPTStr)] string? lpSystemName,
+            [MarshalAs(UnmanagedType.LPTStr)] string lpName,
+            out LUID lpLuid
+        );
 
         internal const string SeDebugPrivilege = "SeDebugPrivilege";
     }

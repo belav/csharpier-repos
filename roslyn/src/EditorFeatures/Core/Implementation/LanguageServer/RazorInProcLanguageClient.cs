@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 
         private readonly DefaultCapabilitiesProvider _defaultCapabilitiesProvider;
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         /// <summary>
         /// Gets the name of the language client (displayed in yellow bars).
@@ -58,8 +59,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             DefaultCapabilitiesProvider defaultCapabilitiesProvider,
             IThreadingContext threadingContext,
-            ILspLoggerFactory lspLoggerFactory)
-            : base(csharpVBRequestDispatcherFactory, globalOptions, diagnosticService, listenerProvider, lspWorkspaceRegistrationService, lspLoggerFactory, threadingContext, ClientName)
+            ILspLoggerFactory lspLoggerFactory
+        )
+            : base(
+                csharpVBRequestDispatcherFactory,
+                globalOptions,
+                diagnosticService,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                lspLoggerFactory,
+                threadingContext,
+                ClientName
+            )
         {
             _defaultCapabilitiesProvider = defaultCapabilitiesProvider;
         }
@@ -73,7 +84,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 
             if (capabilities is VSInternalServerCapabilities vsServerCapabilities)
             {
-                vsServerCapabilities.SupportsDiagnosticRequests = GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.RazorDiagnosticMode);
+                vsServerCapabilities.SupportsDiagnosticRequests = GlobalOptions.IsPullDiagnostics(
+                    InternalDiagnosticsOptions.RazorDiagnosticMode
+                );
                 return vsServerCapabilities;
             }
 

@@ -19,19 +19,19 @@ using System.Runtime.Serialization;
 namespace System.Resources
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MissingSatelliteAssemblyException : SystemException
     {
         private readonly string? _cultureName;
 
-        public MissingSatelliteAssemblyException()
-            : base(SR.MissingSatelliteAssembly_Default)
+        public MissingSatelliteAssemblyException() : base(SR.MissingSatelliteAssembly_Default)
         {
             HResult = System.HResults.COR_E_MISSINGSATELLITEASSEMBLY;
         }
 
-        public MissingSatelliteAssemblyException(string? message)
-            : base(message)
+        public MissingSatelliteAssemblyException(string? message) : base(message)
         {
             HResult = System.HResults.COR_E_MISSINGSATELLITEASSEMBLY;
         }
@@ -49,10 +49,10 @@ namespace System.Resources
             HResult = System.HResults.COR_E_MISSINGSATELLITEASSEMBLY;
         }
 
-        protected MissingSatelliteAssemblyException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected MissingSatelliteAssemblyException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
 
         public string? CultureName => _cultureName;
     }

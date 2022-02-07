@@ -28,36 +28,45 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 SymbolItemLocation location,
                 ImmutableArray<RoslynNavigationBarItem> childItems = default,
                 int indent = 0,
-                bool bolded = false)
+                bool bolded = false
+            )
                 : base(
-                      RoslynNavigationBarItemKind.Symbol,
-                      text,
-                      glyph,
-                      bolded,
-                      grayed: location.OtherDocumentInfo != null,
-                      indent,
-                      childItems)
+                    RoslynNavigationBarItemKind.Symbol,
+                    text,
+                    glyph,
+                    bolded,
+                    grayed: location.OtherDocumentInfo != null,
+                    indent,
+                    childItems
+                )
             {
-
                 Name = name;
                 IsObsolete = isObsolete;
                 Location = location;
             }
 
-            protected internal override SerializableNavigationBarItem Dehydrate()
-                => SerializableNavigationBarItem.SymbolItem(Text, Glyph, Name, IsObsolete, Location, SerializableNavigationBarItem.Dehydrate(ChildItems), Indent, Bolded, Grayed);
+            protected internal override SerializableNavigationBarItem Dehydrate() =>
+                SerializableNavigationBarItem.SymbolItem(
+                    Text,
+                    Glyph,
+                    Name,
+                    IsObsolete,
+                    Location,
+                    SerializableNavigationBarItem.Dehydrate(ChildItems),
+                    Indent,
+                    Bolded,
+                    Grayed
+                );
 
-            public override bool Equals(object? obj)
-                => Equals(obj as SymbolItem);
+            public override bool Equals(object? obj) => Equals(obj as SymbolItem);
 
-            public bool Equals(SymbolItem? other)
-                => base.Equals(other) &&
-                   Name == other.Name &&
-                   IsObsolete == other.IsObsolete &&
-                   Location.Equals(other.Location);
+            public bool Equals(SymbolItem? other) =>
+                base.Equals(other)
+                && Name == other.Name
+                && IsObsolete == other.IsObsolete
+                && Location.Equals(other.Location);
 
-            public override int GetHashCode()
-                => throw new NotImplementedException();
+            public override int GetHashCode() => throw new NotImplementedException();
         }
 
         [DataContract]
@@ -87,22 +96,32 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
             public SymbolItemLocation(
                 (ImmutableArray<TextSpan> spans, TextSpan navigationSpan)? inDocumentInfo,
-                (DocumentId documentId, TextSpan navigationSpan)? otherDocumentInfo)
+                (DocumentId documentId, TextSpan navigationSpan)? otherDocumentInfo
+            )
             {
-                Contract.ThrowIfTrue(inDocumentInfo == null && otherDocumentInfo == null, "Both locations were null");
-                Contract.ThrowIfTrue(inDocumentInfo != null && otherDocumentInfo != null, "Both locations were not null");
+                Contract.ThrowIfTrue(
+                    inDocumentInfo == null && otherDocumentInfo == null,
+                    "Both locations were null"
+                );
+                Contract.ThrowIfTrue(
+                    inDocumentInfo != null && otherDocumentInfo != null,
+                    "Both locations were not null"
+                );
 
                 if (inDocumentInfo != null)
                 {
-                    Contract.ThrowIfTrue(inDocumentInfo.Value.spans.IsEmpty, "If location is in document, it must have non-empty spans");
+                    Contract.ThrowIfTrue(
+                        inDocumentInfo.Value.spans.IsEmpty,
+                        "If location is in document, it must have non-empty spans"
+                    );
                 }
 
                 InDocumentInfo = inDocumentInfo;
                 OtherDocumentInfo = otherDocumentInfo;
             }
 
-            public override bool Equals(object? obj)
-                => obj is SymbolItemLocation location && Equals(location);
+            public override bool Equals(object? obj) =>
+                obj is SymbolItemLocation location && Equals(location);
 
             public bool Equals(SymbolItemLocation other)
             {
@@ -114,8 +133,13 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
                 if (InDocumentInfo != null)
                 {
-                    if (!this.InDocumentInfo.Value.spans.SequenceEqual(other.InDocumentInfo!.Value.spans) ||
-                        this.InDocumentInfo.Value.navigationSpan != other.InDocumentInfo.Value.navigationSpan)
+                    if (
+                        !this.InDocumentInfo.Value.spans.SequenceEqual(
+                            other.InDocumentInfo!.Value.spans
+                        )
+                        || this.InDocumentInfo.Value.navigationSpan
+                            != other.InDocumentInfo.Value.navigationSpan
+                    )
                     {
                         return false;
                     }
@@ -130,8 +154,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 return true;
             }
 
-            public override int GetHashCode()
-                => throw new NotImplementedException();
+            public override int GetHashCode() => throw new NotImplementedException();
         }
     }
 }

@@ -21,7 +21,7 @@ internal static class Http2FrameReader
         +=+=============================================================+
         |                   Frame Payload (0...)                      ...
         +---------------------------------------------------------------+
-    */
+        */
     public const int HeaderLength = 9;
 
     private const int TypeOffset = 3;
@@ -30,7 +30,12 @@ internal static class Http2FrameReader
 
     public const int SettingSize = 6; // 2 bytes for the id, 4 bytes for the value.
 
-    public static bool TryReadFrame(ref ReadOnlySequence<byte> buffer, Http2Frame frame, uint maxFrameSize, out ReadOnlySequence<byte> framePayload)
+    public static bool TryReadFrame(
+        ref ReadOnlySequence<byte> buffer,
+        Http2Frame frame,
+        uint maxFrameSize,
+        out ReadOnlySequence<byte> framePayload
+    )
     {
         framePayload = ReadOnlySequence<byte>.Empty;
 
@@ -45,7 +50,10 @@ internal static class Http2FrameReader
         var payloadLength = (int)Bitshifter.ReadUInt24BigEndian(header);
         if (payloadLength > maxFrameSize)
         {
-            throw new Http2ConnectionErrorException(SharedStrings.FormatHttp2ErrorFrameOverLimit(payloadLength, maxFrameSize), Http2ErrorCode.FRAME_SIZE_ERROR);
+            throw new Http2ConnectionErrorException(
+                SharedStrings.FormatHttp2ErrorFrameOverLimit(payloadLength, maxFrameSize),
+                Http2ErrorCode.FRAME_SIZE_ERROR
+            );
         }
 
         // Make sure the whole frame is buffered
@@ -63,13 +71,19 @@ internal static class Http2FrameReader
         var extendedHeaderLength = ReadExtendedFields(frame, buffer);
 
         // The remaining payload minus the extra fields
-        framePayload = buffer.Slice(HeaderLength + extendedHeaderLength, payloadLength - extendedHeaderLength);
+        framePayload = buffer.Slice(
+            HeaderLength + extendedHeaderLength,
+            payloadLength - extendedHeaderLength
+        );
         buffer = buffer.Slice(framePayload.End);
 
         return true;
     }
 
-    private static int ReadExtendedFields(Http2Frame frame, in ReadOnlySequence<byte> readableBuffer)
+    private static int ReadExtendedFields(
+        Http2Frame frame,
+        in ReadOnlySequence<byte> readableBuffer
+    )
     {
         // Copy in any extra fields for the given frame type
         var extendedHeaderLength = GetPayloadFieldsLength(frame);
@@ -77,7 +91,12 @@ internal static class Http2FrameReader
         if (extendedHeaderLength > frame.PayloadLength)
         {
             throw new Http2ConnectionErrorException(
-                SharedStrings.FormatHttp2ErrorUnexpectedFrameLength(frame.Type, expectedLength: extendedHeaderLength), Http2ErrorCode.FRAME_SIZE_ERROR);
+                SharedStrings.FormatHttp2ErrorUnexpectedFrameLength(
+                    frame.Type,
+                    expectedLength: extendedHeaderLength
+                ),
+                Http2ErrorCode.FRAME_SIZE_ERROR
+            );
         }
 
         var extendedHeaders = readableBuffer.Slice(HeaderLength, extendedHeaderLength).ToSpan();
@@ -93,7 +112,7 @@ internal static class Http2FrameReader
                 +---------------------------------------------------------------+
                 |                           Padding (*)                       ...
                 +---------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.DATA: // Variable 0 or 1
                 frame.DataPadLength = frame.DataHasPadding ? extendedHeaders[0] : (byte)0;
                 break;
@@ -110,7 +129,7 @@ internal static class Http2FrameReader
                 +---------------------------------------------------------------+
                 |                           Padding (*)                       ...
                 +---------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.HEADERS:
                 if (frame.HeadersHasPadding)
                 {
@@ -124,7 +143,9 @@ internal static class Http2FrameReader
 
                 if (frame.HeadersHasPriority)
                 {
-                    frame.HeadersStreamDependency = (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
+                    frame.HeadersStreamDependency = (int)Bitshifter.ReadUInt31BigEndian(
+                        extendedHeaders
+                    );
                     frame.HeadersPriorityWeight = extendedHeaders.Slice(4)[0];
                 }
                 else
@@ -142,10 +163,12 @@ internal static class Http2FrameReader
                 +---------------------------------------------------------------+
                 |                  Additional Debug Data (*)                    |
                 +---------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.GOAWAY:
                 frame.GoAwayLastStreamId = (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
-                frame.GoAwayErrorCode = (Http2ErrorCode)BinaryPrimitives.ReadUInt32BigEndian(extendedHeaders.Slice(4));
+                frame.GoAwayErrorCode = (Http2ErrorCode)BinaryPrimitives.ReadUInt32BigEndian(
+                    extendedHeaders.Slice(4)
+                );
                 break;
 
             /* https://tools.ietf.org/html/rfc7540#section-6.3
@@ -154,9 +177,11 @@ internal static class Http2FrameReader
                 +-+-------------+-----------------------------------------------+
                 |   Weight (8)  |
                 +-+-------------+
-            */
+                */
             case Http2FrameType.PRIORITY:
-                frame.PriorityStreamDependency = (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
+                frame.PriorityStreamDependency = (int)Bitshifter.ReadUInt31BigEndian(
+                    extendedHeaders
+                );
                 frame.PriorityWeight = extendedHeaders.Slice(4)[0];
                 break;
 
@@ -164,18 +189,22 @@ internal static class Http2FrameReader
                 +---------------------------------------------------------------+
                 |                        Error Code (32)                        |
                 +---------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.RST_STREAM:
-                frame.RstStreamErrorCode = (Http2ErrorCode)BinaryPrimitives.ReadUInt32BigEndian(extendedHeaders);
+                frame.RstStreamErrorCode = (Http2ErrorCode)BinaryPrimitives.ReadUInt32BigEndian(
+                    extendedHeaders
+                );
                 break;
 
             /* https://tools.ietf.org/html/rfc7540#section-6.9
                 +-+-------------------------------------------------------------+
                 |R|              Window Size Increment (31)                     |
                 +-+-------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.WINDOW_UPDATE:
-                frame.WindowUpdateSizeIncrement = (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
+                frame.WindowUpdateSizeIncrement = (int)Bitshifter.ReadUInt31BigEndian(
+                    extendedHeaders
+                );
                 break;
 
             case Http2FrameType.PING: // Opaque payload 8 bytes long

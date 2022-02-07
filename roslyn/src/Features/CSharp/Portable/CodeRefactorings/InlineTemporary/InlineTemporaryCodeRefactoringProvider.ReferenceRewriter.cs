@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 ISet<IdentifierNameSyntax> conflictReferences,
                 ISet<IdentifierNameSyntax> nonConflictReferences,
                 ExpressionSyntax expressionToInline,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 _conflictReferences = conflictReferences;
                 _nonConflictReferences = nonConflictReferences;
@@ -40,7 +41,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 _cancellationToken.ThrowIfCancellationRequested();
 
                 if (_conflictReferences.Contains(node))
-                    return node.Update(node.Identifier.WithAdditionalAnnotations(CreateConflictAnnotation()));
+                    return node.Update(
+                        node.Identifier.WithAdditionalAnnotations(CreateConflictAnnotation())
+                    );
 
                 if (_nonConflictReferences.Contains(node))
                     return _expressionToInline;
@@ -48,13 +51,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 return base.VisitIdentifierName(node);
             }
 
-            public override SyntaxNode? VisitAnonymousObjectMemberDeclarator(AnonymousObjectMemberDeclaratorSyntax node)
+            public override SyntaxNode? VisitAnonymousObjectMemberDeclarator(
+                AnonymousObjectMemberDeclaratorSyntax node
+            )
             {
-                if (node.NameEquals == null &&
-                    node.Expression is IdentifierNameSyntax identifier &&
-                    _nonConflictReferences.Contains(identifier))
+                if (
+                    node.NameEquals == null
+                    && node.Expression is IdentifierNameSyntax identifier
+                    && _nonConflictReferences.Contains(identifier)
+                )
                 {
-
                     // Special case inlining into anonymous types to ensure that we keep property names:
                     //
                     // E.g.
@@ -63,7 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     //
                     // Should become:
                     //     var a = new { x = 42; };
-                    return node.Update(SyntaxFactory.NameEquals(identifier), (ExpressionSyntax)Visit(node.Expression));
+                    return node.Update(
+                        SyntaxFactory.NameEquals(identifier),
+                        (ExpressionSyntax)Visit(node.Expression)
+                    );
                 }
 
                 return base.VisitAnonymousObjectMemberDeclarator(node);
@@ -71,22 +80,33 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             public override SyntaxNode? VisitArgument(ArgumentSyntax node)
             {
-                if (node.Parent is TupleExpressionSyntax tupleExpression &&
-                    ShouldAddTupleMemberName(node, out var identifier) &&
-                    tupleExpression.Arguments.Count(a => ShouldAddTupleMemberName(a, out _)) == 1)
+                if (
+                    node.Parent is TupleExpressionSyntax tupleExpression
+                    && ShouldAddTupleMemberName(node, out var identifier)
+                    && tupleExpression.Arguments.Count(a => ShouldAddTupleMemberName(a, out _)) == 1
+                )
                 {
-                    return node.Update(SyntaxFactory.NameColon(identifier), node.RefKindKeyword, (ExpressionSyntax)Visit(node.Expression));
+                    return node.Update(
+                        SyntaxFactory.NameColon(identifier),
+                        node.RefKindKeyword,
+                        (ExpressionSyntax)Visit(node.Expression)
+                    );
                 }
 
                 return base.VisitArgument(node);
             }
 
-            private bool ShouldAddTupleMemberName(ArgumentSyntax node, [NotNullWhen(true)] out IdentifierNameSyntax? identifier)
+            private bool ShouldAddTupleMemberName(
+                ArgumentSyntax node,
+                [NotNullWhen(true)] out IdentifierNameSyntax? identifier
+            )
             {
-                if (node.NameColon == null &&
-                    node.Expression is IdentifierNameSyntax id &&
-                    _nonConflictReferences.Contains(id) &&
-                    !SyntaxFacts.IsReservedTupleElementName(id.Identifier.ValueText))
+                if (
+                    node.NameColon == null
+                    && node.Expression is IdentifierNameSyntax id
+                    && _nonConflictReferences.Contains(id)
+                    && !SyntaxFacts.IsReservedTupleElementName(id.Identifier.ValueText)
+                )
                 {
                     identifier = id;
                     return true;
@@ -101,9 +121,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 ISet<IdentifierNameSyntax> conflictReferences,
                 ISet<IdentifierNameSyntax> nonConflictReferences,
                 ExpressionSyntax expressionToInline,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                var rewriter = new ReferenceRewriter(conflictReferences, nonConflictReferences, expressionToInline, cancellationToken);
+                var rewriter = new ReferenceRewriter(
+                    conflictReferences,
+                    nonConflictReferences,
+                    expressionToInline,
+                    cancellationToken
+                );
                 return rewriter.Visit(scope);
             }
         }

@@ -5,7 +5,6 @@
 using System;
 using System.Runtime.InteropServices;
 
-
 namespace JitTest
 {
     internal class Test
@@ -35,7 +34,9 @@ namespace JitTest
 
         private static unsafe int Main()
         {
-            byte* buf1 = stackalloc byte[100], buf2 = null, buf3 = null;
+            byte* buf1 = stackalloc byte[100],
+                buf2 = null,
+                buf3 = null;
             initbuf(buf1, 1);
             ckbuf(buf1, 1);
             try

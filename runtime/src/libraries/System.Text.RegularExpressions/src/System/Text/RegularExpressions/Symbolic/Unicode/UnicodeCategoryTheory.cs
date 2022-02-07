@@ -18,8 +18,14 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
         {
             if (_catConditions[i] is not TPredicate condition)
             {
-                BDD bdd = BDD.Deserialize(UnicodeCategoryRanges.AllCategoriesSerializedBDD[i], _solver.CharSetProvider);
-                _catConditions[i] = condition = _solver.ConvertFromCharSet(_solver.CharSetProvider, bdd);
+                BDD bdd = BDD.Deserialize(
+                    UnicodeCategoryRanges.AllCategoriesSerializedBDD[i],
+                    _solver.CharSetProvider
+                );
+                _catConditions[i] = condition = _solver.ConvertFromCharSet(
+                    _solver.CharSetProvider,
+                    bdd
+                );
             }
 
             return condition;
@@ -31,8 +37,14 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
             {
                 if (_whiteSpaceCondition is not TPredicate condition)
                 {
-                    BDD bdd = BDD.Deserialize(UnicodeCategoryRanges.WhitespaceSerializedBDD, _solver.CharSetProvider);
-                    _whiteSpaceCondition = condition = _solver.ConvertFromCharSet(_solver.CharSetProvider, bdd);
+                    BDD bdd = BDD.Deserialize(
+                        UnicodeCategoryRanges.WhitespaceSerializedBDD,
+                        _solver.CharSetProvider
+                    );
+                    _whiteSpaceCondition = condition = _solver.ConvertFromCharSet(
+                        _solver.CharSetProvider,
+                        bdd
+                    );
                 }
 
                 return condition;
@@ -46,9 +58,17 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
                 if (_wordLetterCondition is not TPredicate condition)
                 {
                     // \w is the union of the 8 categories: 0,1,2,3,4,5,8,18
-                    TPredicate[] predicates = new TPredicate[] {
-                        CategoryCondition(0), CategoryCondition(1), CategoryCondition(2), CategoryCondition(3),
-                        CategoryCondition(4), CategoryCondition(5), CategoryCondition(8), CategoryCondition(18)};
+                    TPredicate[] predicates = new TPredicate[]
+                    {
+                        CategoryCondition(0),
+                        CategoryCondition(1),
+                        CategoryCondition(2),
+                        CategoryCondition(3),
+                        CategoryCondition(4),
+                        CategoryCondition(5),
+                        CategoryCondition(8),
+                        CategoryCondition(18)
+                    };
                     _wordLetterCondition = condition = _solver.Or(predicates);
                 }
 
@@ -65,9 +85,18 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
                     // Create the condition from WordLetterCondition together with the characters
                     // \u200C (zero width non joiner) and \u200D (zero width joiner) that are treated
                     // as if they were word characters in the context of the anchors \b and \B
-                    BDD extra_bdd = _solver.CharSetProvider.CreateCharSetFromRange('\u200C', '\u200D');
-                    TPredicate extra_pred = _solver.ConvertFromCharSet(_solver.CharSetProvider, extra_bdd);
-                    _wordLetterConditionForAnchors = condition = _solver.Or(WordLetterCondition, extra_pred);
+                    BDD extra_bdd = _solver.CharSetProvider.CreateCharSetFromRange(
+                        '\u200C',
+                        '\u200D'
+                    );
+                    TPredicate extra_pred = _solver.ConvertFromCharSet(
+                        _solver.CharSetProvider,
+                        extra_bdd
+                    );
+                    _wordLetterConditionForAnchors = condition = _solver.Or(
+                        WordLetterCondition,
+                        extra_pred
+                    );
                 }
 
                 return condition;

@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             Assert.Equal(
                 AbstractionsStrings.ArgumentIsEmpty("name"),
-                Assert.Throws<ArgumentException>(() => new Annotation("", "Kake")).Message);
+                Assert.Throws<ArgumentException>(() => new Annotation("", "Kake")).Message
+            );
         }
 
         [ConditionalFact]
@@ -32,13 +33,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             Assert.Equal(
                 AbstractionsStrings.ArgumentIsNegativeNumber("precision"),
-                Assert.Throws<ArgumentException>(() => new PrecisionAttribute(-1)).Message);
+                Assert.Throws<ArgumentException>(() => new PrecisionAttribute(-1)).Message
+            );
             Assert.Equal(
                 AbstractionsStrings.ArgumentIsNegativeNumber("scale"),
-                Assert.Throws<ArgumentException>(() => new PrecisionAttribute(3, -2)).Message);
+                Assert.Throws<ArgumentException>(() => new PrecisionAttribute(3, -2)).Message
+            );
             Assert.Equal(
                 AbstractionsStrings.ArgumentIsNegativeNumber("precision"),
-                Assert.Throws<ArgumentException>(() => new PrecisionAttribute(-5, 4)).Message);
+                Assert.Throws<ArgumentException>(() => new PrecisionAttribute(-5, 4)).Message
+            );
         }
     }
 }

@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["TransposeOdd.Vector64.Int16"] = TransposeOdd_Vector64_Int16,
                 ["TransposeOdd.Vector64.Int32"] = TransposeOdd_Vector64_Int32,
                 ["TransposeOdd.Vector64.SByte"] = TransposeOdd_Vector64_SByte,
@@ -29,8 +30,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["TransposeOdd.Vector128.UInt64"] = TransposeOdd_Vector128_UInt64,
                 ["VectorTableLookup.Vector128.Byte"] = VectorTableLookup_Vector128_Byte,
                 ["VectorTableLookup.Vector128.SByte"] = VectorTableLookup_Vector128_SByte,
-                ["VectorTableLookupExtension.Vector128.Byte"] = VectorTableLookupExtension_Vector128_Byte,
-                ["VectorTableLookupExtension.Vector128.SByte"] = VectorTableLookupExtension_Vector128_SByte,
+                ["VectorTableLookupExtension.Vector128.Byte"] =
+                    VectorTableLookupExtension_Vector128_Byte,
+                ["VectorTableLookupExtension.Vector128.SByte"] =
+                    VectorTableLookupExtension_Vector128_SByte,
                 ["UnzipEven.Vector64.Byte"] = UnzipEven_Vector64_Byte,
                 ["UnzipEven.Vector64.Int16"] = UnzipEven_Vector64_Int16,
                 ["UnzipEven.Vector64.Int32"] = UnzipEven_Vector64_Int32,

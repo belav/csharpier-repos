@@ -7,35 +7,33 @@ using System;
 public struct VT
 {
     public double[,] double2darr;
-    public double[, ,] double3darr;
+    public double[,,] double3darr;
     public double[,] double2darr_b;
-    public double[, ,] double3darr_b;
+    public double[,,] double3darr_b;
 }
 
 public class CL
 {
     public double[,] double2darr = { { 0, -1 }, { 0, 0 } };
-    public double[, ,] double3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    public double[,,] double3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     public double[,] double2darr_b = { { 0, 1 }, { 0, 0 } };
-    public double[, ,] double3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public double[,,] double3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
 }
 
 public class doubleMDArrTest
 {
-
     static double[,] double2darr = { { 0, -1 }, { 0, 0 } };
-    static double[, ,] double3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    static double[,,] double3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     static double[,] double2darr_b = { { 0, 1 }, { 0, 0 } };
-    static double[, ,] double3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static double[,,] double3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
 
     static double[][,] ja1 = new double[2][,];
-    static double[][, ,] ja2 = new double[2][, ,];
+    static double[][,,] ja2 = new double[2][,,];
     static double[][,] ja1_b = new double[2][,];
-    static double[][, ,] ja2_b = new double[2][, ,];
+    static double[][,,] ja2_b = new double[2][,,];
 
     public static int Main()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -1080,8 +1078,5 @@ public class doubleMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

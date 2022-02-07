@@ -21,7 +21,13 @@ public class TestHostingStartup1 : IHostingStartup
         }
 
         builder.UseSetting("testhostingstartup1", "1");
-        builder.UseSetting("testhostingstartup_chain", builder.GetSetting("testhostingstartup_chain") + "1");
-        builder.UseSetting("testhostingstartup1_calls", numCalls.ToString(CultureInfo.InvariantCulture));
+        builder.UseSetting(
+            "testhostingstartup_chain",
+            builder.GetSetting("testhostingstartup_chain") + "1"
+        );
+        builder.UseSetting(
+            "testhostingstartup1_calls",
+            numCalls.ToString(CultureInfo.InvariantCulture)
+        );
     }
 }

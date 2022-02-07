@@ -22,19 +22,25 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// List of tuples of possible actions that can be used to transform the code the TextSpan within the original document they're applicable to.
         /// </summary>
         /// <remarks>
-        /// applicableToSpan should represent a logical section within the original document that the action is 
+        /// applicableToSpan should represent a logical section within the original document that the action is
         /// applicable to. It doesn't have to precisely represent the exact <see cref="TextSpan"/> that will get changed.
         /// </remarks>
         public ImmutableArray<(CodeAction action, TextSpan? applicableToSpan)> CodeActions { get; }
 
-        public CodeRefactoring(CodeRefactoringProvider provider, ImmutableArray<(CodeAction, TextSpan?)> actions)
+        public CodeRefactoring(
+            CodeRefactoringProvider provider,
+            ImmutableArray<(CodeAction, TextSpan?)> actions
+        )
         {
             Provider = provider;
             CodeActions = actions.NullToEmpty();
 
             if (CodeActions.IsEmpty)
             {
-                throw new ArgumentException(FeaturesResources.Actions_can_not_be_empty, nameof(actions));
+                throw new ArgumentException(
+                    FeaturesResources.Actions_can_not_be_empty,
+                    nameof(actions)
+                );
             }
         }
     }

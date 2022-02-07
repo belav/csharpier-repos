@@ -10,9 +10,7 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />.
         /// </summary>
-        public SafeWaitHandle() : base(true)
-        {
-        }
+        public SafeWaitHandle() : base(true) { }
 
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" /> around a wait handle.

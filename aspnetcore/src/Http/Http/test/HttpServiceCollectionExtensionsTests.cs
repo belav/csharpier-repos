@@ -27,6 +27,9 @@ public class HttpServiceCollectionExtensionsTests
     [Fact]
     public void AddHttpContextAccessor_ThrowsWithoutServices()
     {
-        Assert.Throws<ArgumentNullException>("services", () => HttpServiceCollectionExtensions.AddHttpContextAccessor(null));
+        Assert.Throws<ArgumentNullException>(
+            "services",
+            () => HttpServiceCollectionExtensions.AddHttpContextAccessor(null)
+        );
     }
 }

@@ -52,12 +52,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public int BB_property8 { protected get; set; }
 
-        public BBTestClass()
-        {
-        }
+        public BBTestClass() { }
 
-        public BBTestClass(int f, int g)
-            : base(f)
+        public BBTestClass(int f, int g) : base(f)
         {
             BB_field1 = g;
             BB_field2 = g;

@@ -42,14 +42,21 @@ namespace System.Security.Cryptography
             byte[] salt,
             int iterations,
             HashAlgorithmName hashAlgorithm,
-            int outputLength)
+            int outputLength
+        )
         {
             if (password is null)
                 throw new ArgumentNullException(nameof(password));
             if (salt is null)
                 throw new ArgumentNullException(nameof(salt));
 
-            return Pbkdf2(new ReadOnlySpan<byte>(password), new ReadOnlySpan<byte>(salt), iterations, hashAlgorithm, outputLength);
+            return Pbkdf2(
+                new ReadOnlySpan<byte>(password),
+                new ReadOnlySpan<byte>(salt),
+                iterations,
+                hashAlgorithm,
+                outputLength
+            );
         }
 
         /// <summary>
@@ -79,12 +86,19 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithm,
-            int outputLength)
+            int outputLength
+        )
         {
             if (iterations <= 0)
-                throw new ArgumentOutOfRangeException(nameof(iterations), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(iterations),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             if (outputLength < 0)
-                throw new ArgumentOutOfRangeException(nameof(outputLength), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(outputLength),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             ValidateHashAlgorithm(hashAlgorithm);
 
@@ -118,10 +132,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             Span<byte> destination,
             int iterations,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             if (iterations <= 0)
-                throw new ArgumentOutOfRangeException(nameof(iterations), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(iterations),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             ValidateHashAlgorithm(hashAlgorithm);
 
@@ -166,14 +184,21 @@ namespace System.Security.Cryptography
             byte[] salt,
             int iterations,
             HashAlgorithmName hashAlgorithm,
-            int outputLength)
+            int outputLength
+        )
         {
             if (password is null)
                 throw new ArgumentNullException(nameof(password));
             if (salt is null)
                 throw new ArgumentNullException(nameof(salt));
 
-            return Pbkdf2(password.AsSpan(), new ReadOnlySpan<byte>(salt), iterations, hashAlgorithm, outputLength);
+            return Pbkdf2(
+                password.AsSpan(),
+                new ReadOnlySpan<byte>(salt),
+                iterations,
+                hashAlgorithm,
+                outputLength
+            );
         }
 
         /// <summary>
@@ -211,12 +236,19 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithm,
-            int outputLength)
+            int outputLength
+        )
         {
             if (outputLength < 0)
-                throw new ArgumentOutOfRangeException(nameof(outputLength), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(outputLength),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (iterations <= 0)
-                throw new ArgumentOutOfRangeException(nameof(iterations), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(iterations),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             ValidateHashAlgorithm(hashAlgorithm);
 
@@ -258,10 +290,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             Span<byte> destination,
             int iterations,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             if (iterations <= 0)
-                throw new ArgumentOutOfRangeException(nameof(iterations), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(iterations),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             ValidateHashAlgorithm(hashAlgorithm);
 
@@ -273,7 +309,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             Span<byte> destination,
             int iterations,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             Debug.Assert(hashAlgorithm.Name is not null);
             Debug.Assert(iterations > 0);
@@ -288,15 +325,22 @@ namespace System.Security.Cryptography
             byte[]? rentedPasswordBuffer = null;
             int maxEncodedSize = s_throwingUtf8Encoding.GetMaxByteCount(password.Length);
 
-            Span<byte> passwordBuffer = maxEncodedSize > MaxPasswordStackSize ?
-                (rentedPasswordBuffer = CryptoPool.Rent(maxEncodedSize)) :
-                stackalloc byte[MaxPasswordStackSize];
+            Span<byte> passwordBuffer =
+                maxEncodedSize > MaxPasswordStackSize
+                    ? (rentedPasswordBuffer = CryptoPool.Rent(maxEncodedSize))
+                    : stackalloc byte[MaxPasswordStackSize];
             int passwordBytesWritten = s_throwingUtf8Encoding.GetBytes(password, passwordBuffer);
             Span<byte> passwordBytes = passwordBuffer.Slice(0, passwordBytesWritten);
 
             try
             {
-                Pbkdf2Implementation.Fill(passwordBytes, salt, iterations, hashAlgorithm, destination);
+                Pbkdf2Implementation.Fill(
+                    passwordBytes,
+                    salt,
+                    iterations,
+                    hashAlgorithm,
+                    destination
+                );
             }
             finally
             {
@@ -314,7 +358,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             Span<byte> destination,
             int iterations,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             Debug.Assert(hashAlgorithm.Name is not null);
             Debug.Assert(iterations > 0);
@@ -330,17 +375,24 @@ namespace System.Security.Cryptography
         private static void ValidateHashAlgorithm(HashAlgorithmName hashAlgorithm)
         {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             string hashAlgorithmName = hashAlgorithm.Name;
 
             // MD5 intentionally left out.
-            if (hashAlgorithmName != HashAlgorithmName.SHA1.Name &&
-                hashAlgorithmName != HashAlgorithmName.SHA256.Name &&
-                hashAlgorithmName != HashAlgorithmName.SHA384.Name &&
-                hashAlgorithmName != HashAlgorithmName.SHA512.Name)
+            if (
+                hashAlgorithmName != HashAlgorithmName.SHA1.Name
+                && hashAlgorithmName != HashAlgorithmName.SHA256.Name
+                && hashAlgorithmName != HashAlgorithmName.SHA384.Name
+                && hashAlgorithmName != HashAlgorithmName.SHA512.Name
+            )
             {
-                throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmName));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmName)
+                );
             }
         }
     }

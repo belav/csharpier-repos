@@ -28,7 +28,8 @@ namespace System.Xml.Linq
         /// </exception>
         public XComment(string value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
             this.value = value;
         }
 
@@ -38,7 +39,8 @@ namespace System.Xml.Linq
         /// <param name="other">Comment node to copy from.</param>
         public XComment(XComment other)
         {
-            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
             this.value = other.value;
         }
 
@@ -56,10 +58,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.Comment;
-            }
+            get { return XmlNodeType.Comment; }
         }
 
         /// <summary>
@@ -70,16 +69,15 @@ namespace System.Xml.Linq
         /// </exception>
         public string Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Value);
                 this.value = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Value);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Value);
             }
         }
 
@@ -91,7 +89,8 @@ namespace System.Xml.Linq
         /// </param>
         public override void WriteTo(XmlWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException(nameof(writer));
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
             writer.WriteComment(value);
         }
 

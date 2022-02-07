@@ -8,26 +8,24 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     /*
     // ===========================================================================
-       Defines structs that package an aggregate member together with
-       generic type argument information.
+    Defines structs that package an aggregate member together with
+    generic type argument information.
     // ===========================================================================*/
     /******************************************************************************
         SymWithType and its cousins. These package an aggregate member (field,
         prop, event, or meth) together with the particular instantiation of the
         aggregate (the AggregateType).
-
+        
         The default constructor does nothing so these are not safe to use
         uninitialized. Note that when they are used as member of an EXPR they
         are automatically zero filled by newExpr.
-    ******************************************************************************/
+        ******************************************************************************/
     internal class SymWithType
     {
         private AggregateType _ats;
         private Symbol _sym;
 
-        public SymWithType()
-        {
-        }
+        public SymWithType() { }
 
         public SymWithType(Symbol sym, AggregateType ats)
         {
@@ -81,7 +79,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             Debug.Fail("Sub-optimal equality called. Check if this is correct.");
             SymWithType other = obj as SymWithType;
-            if (other == null) return false;
+            if (other == null)
+                return false;
             return Sym == other.Sym && Ats == other.Ats;
         }
 
@@ -136,9 +135,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal class MethPropWithType : SymWithType
     {
-        public MethPropWithType()
-        {
-        }
+        public MethPropWithType() { }
 
         public MethPropWithType(MethodOrPropertySymbol mps, AggregateType ats)
         {
@@ -148,9 +145,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class MethWithType : MethPropWithType
     {
-        public MethWithType()
-        {
-        }
+        public MethWithType() { }
 
         public MethWithType(MethodSymbol meth, AggregateType ats)
         {
@@ -192,11 +187,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         the method type arguments. Properties will never have type args, but
         methods and properties share a lot of code so it's convenient to allow
         both here.
-
+        
         The default constructor does nothing so these are not safe to use
         uninitialized. Note that when they are used as member of an EXPR they
         are automatically zero filled by newExpr.
-    ******************************************************************************/
+        ******************************************************************************/
 
     internal class MethPropWithInst : MethPropWithType
     {
@@ -208,9 +203,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         public MethPropWithInst(MethodOrPropertySymbol mps, AggregateType ats)
-            : this(mps, ats, null)
-        {
-        }
+            : this(mps, ats, null) { }
 
         public MethPropWithInst(MethodOrPropertySymbol mps, AggregateType ats, TypeArray typeArgs)
         {
@@ -238,14 +231,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class MethWithInst : MethPropWithInst
     {
-        public MethWithInst(MethodSymbol meth, AggregateType ats)
-            : this(meth, ats, null)
-        {
-        }
+        public MethWithInst(MethodSymbol meth, AggregateType ats) : this(meth, ats, null) { }
+
         public MethWithInst(MethodSymbol meth, AggregateType ats, TypeArray typeArgs)
         {
             Set(meth, ats, typeArgs);
         }
+
         public MethWithInst(MethPropWithInst mpwi)
         {
             Set(mpwi.Sym as MethodSymbol, mpwi.Ats, mpwi.TypeArgs);

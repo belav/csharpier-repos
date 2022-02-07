@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void VariableDeclarator()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -31,7 +32,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'int i1;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1')
     Declarators:
@@ -41,20 +43,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0168: The variable 'i1' is declared but never used
                 //         /*<bind>*/int i1;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1").WithArguments("i1").WithLocation(6, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 23)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void VariableDeclaratorWithInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -63,7 +73,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'int i1 = 1;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1 = 1')
     Declarators:
@@ -74,20 +85,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         /*<bind>*/int i1 = 1;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(6, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 23)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void VariableDeclaratorWithInvalidInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -96,7 +115,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'int i1 = ;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1 = ')
     Declarators:
@@ -108,20 +128,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         /*<bind>*/int i1 = ;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(6, 28)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(6, 28)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void MultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -130,7 +158,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'int i1, i2;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1, i2')
     Declarators:
@@ -143,23 +172,33 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0168: The variable 'i1' is declared but never used
                 //         /*<bind>*/int i1, i2;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1").WithArguments("i1").WithLocation(6, 23),
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 23),
                 // CS0168: The variable 'i2' is declared but never used
                 //         /*<bind>*/int i1, i2;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i2").WithArguments("i2").WithLocation(6, 27)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i2")
+                    .WithArguments("i2")
+                    .WithLocation(6, 27)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void MultipleDeclarationsWithInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -168,7 +207,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'int i1 = 2, i2 = 2;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1 = 2, i2 = 2')
     Declarators:
@@ -183,23 +223,33 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         /*<bind>*/int i1 = 2, i2 = 2/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(6, 23),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 23),
                 // CS0219: The variable 'i2' is assigned but its value is never used
                 //         /*<bind>*/int i1 = 2, i2 = 2/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2").WithArguments("i2").WithLocation(6, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2")
+                    .WithArguments("i2")
+                    .WithLocation(6, 31)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void MultipleDeclarationsWithInvalidInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -208,7 +258,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'int i1 = , i2 = 2;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1 = , i2 = 2')
     Declarators:
@@ -224,23 +275,33 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ','
                 //         /*<bind>*/int i1 = , i2 = 2/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(6, 28),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(6, 28),
                 // CS0219: The variable 'i2' is assigned but its value is never used
                 //         /*<bind>*/int i1 = , i2 = 2/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2").WithArguments("i2").WithLocation(6, 30)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2")
+                    .WithArguments("i2")
+                    .WithLocation(6, 30)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void InvalidMultipleVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -249,7 +310,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'int i,;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i,')
     Declarators:
@@ -262,23 +324,31 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1001: Identifier expected
                 //         /*<bind>*/int i,/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(6, 25),
                 // CS0168: The variable 'i' is declared but never used
                 //         /*<bind>*/int i,/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i").WithArguments("i").WithLocation(6, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 23)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void VariableDeclaratorExpressionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -289,7 +359,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'int i = GetInt();')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i = GetInt()')
     Declarators:
@@ -305,14 +376,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void MultipleVariableDeclarationsExpressionInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -323,7 +399,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'int i = Get ... = GetInt();')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i = Get ...  = GetInt()')
     Declarators:
@@ -346,14 +423,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void VariableDeclaratorLocalReferenceInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -365,7 +447,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'int i1 = i;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1 = i')
     Declarators:
@@ -378,14 +461,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void MultipleDeclarationsLocalReferenceInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -397,7 +485,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'int i1 = i, i2 = i1;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1 = i, i2 = i1')
     Declarators:
@@ -414,14 +503,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void InvalidArrayDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -430,7 +524,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'int[2, 3] a;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[2, 3] a')
     Ignored Dimensions(2):
@@ -443,23 +538,31 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[2, 3] a;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[2, 3]").WithLocation(6, 22),
                 // file.cs(6,29): warning CS0168: The variable 'a' is declared but never used
                 //         /*<bind>*/int[2, 3] a;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "a").WithArguments("a").WithLocation(6, 29)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "a")
+                    .WithArguments("a")
+                    .WithLocation(6, 29)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void InvalidArrayMultipleDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -468,7 +571,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'int[2, 3] a, b;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[2, 3] a, b')
     Ignored Dimensions(2):
@@ -484,26 +588,36 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[2, 3] a, b;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[2, 3]").WithLocation(6, 22),
                 // file.cs(6,29): warning CS0168: The variable 'a' is declared but never used
                 //         /*<bind>*/int[2, 3] a, b;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "a").WithArguments("a").WithLocation(6, 29),
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "a")
+                    .WithArguments("a")
+                    .WithLocation(6, 29),
                 // file.cs(6,32): warning CS0168: The variable 'b' is declared but never used
                 //         /*<bind>*/int[2, 3] a, b;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "b").WithArguments("b").WithLocation(6, 32)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "b")
+                    .WithArguments("b")
+                    .WithLocation(6, 32)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestGetOperationForVariableInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Test
 {
     void M()
@@ -513,20 +627,26 @@ class Test
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= 1')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredArguments_WithInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -535,7 +655,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'x[10] = 1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= 1')
@@ -543,7 +664,8 @@ IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDec
   IgnoredArguments(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
                 //         int /*<bind>*/x[10] = 1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[10]").WithLocation(6, 24),
@@ -552,17 +674,24 @@ IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDec
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "10").WithLocation(6, 25),
                 // CS0219: The variable 'x' is assigned but its value is never used
                 //         int /*<bind>*/x[10] = 1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x").WithArguments("x").WithLocation(6, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 23)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredArguments_NoInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -571,14 +700,16 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'x[10]')
   Initializer: 
     null
   IgnoredArguments(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
                 //         int /*<bind>*/x[10]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[10]").WithLocation(6, 24),
@@ -587,17 +718,24 @@ IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDec
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "10").WithLocation(6, 25),
                 // CS0168: The variable 'x' is declared but never used
                 //         int /*<bind>*/x[10]/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(6, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 23)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredArgumentsWithInitializer_VerifyChildren()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -608,7 +746,9 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(compilation);
+            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(
+                compilation
+            );
             var declarator = (IVariableDeclaratorOperation)operation;
             Assert.Equal(2, declarator.Children.Count());
             Assert.Equal(OperationKind.Literal, declarator.Children.First().Kind);
@@ -619,7 +759,8 @@ class C
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredArguments_VerifyChildren()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -630,7 +771,9 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(compilation);
+            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(
+                compilation
+            );
             var declarator = (IVariableDeclaratorOperation)operation;
             Assert.Equal(1, declarator.Children.Count());
             Assert.Equal(OperationKind.Literal, declarator.Children.First().Kind);
@@ -640,7 +783,8 @@ class C
         [Fact]
         public void IVariableDeclaration_WithInitializer_VerifyChildren()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -651,7 +795,9 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(compilation);
+            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(
+                compilation
+            );
             var declarator = (IVariableDeclaratorOperation)operation;
             Assert.Equal(1, declarator.Children.Count());
             Assert.Equal(OperationKind.VariableInitializer, declarator.Children.ElementAt(0).Kind);
@@ -661,7 +807,8 @@ class C
         [Fact]
         public void IVariableDeclaration_NoChildren()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -672,7 +819,9 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(compilation);
+            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(
+                compilation
+            );
             Assert.Empty(operation.Children);
         }
 
@@ -680,7 +829,8 @@ class C
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_WithInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -689,7 +839,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[10] x = { 1 }')
   Ignored Dimensions(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')
@@ -707,20 +858,26 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[10] x = { 1 };/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(6, 22)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_NoInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -729,7 +886,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[10] x')
   Ignored Dimensions(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')
@@ -740,23 +898,31 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[10] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(6, 22),
                 // file.cs(6,27): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/int[10] x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(6, 27)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 27)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_InArrayOfArrays()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -766,7 +932,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[][10] x')
   Ignored Dimensions(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')
@@ -777,23 +944,31 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,24): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[][10] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(7, 24),
                 // file.cs(7,29): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/int[][10] x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(7, 29)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 29)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_2ndDimensionOfMultidimensionalArray()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -803,7 +978,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[,10] x')
   Ignored Dimensions(2):
       IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
@@ -816,7 +992,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[,10] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[,10]").WithLocation(7, 22),
@@ -825,17 +1002,24 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_ValueExpected, "").WithLocation(7, 23),
                 // file.cs(7,28): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/int[,10] x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(7, 28)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 28)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensionsWithInitializer_VerifyChildren()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -846,7 +1030,9 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclarationSyntax>(compilation);
+            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclarationSyntax>(
+                compilation
+            );
             var declaration = (IVariableDeclarationOperation)operation;
             Assert.Equal(2, declaration.Children.Count());
             Assert.Equal(OperationKind.Literal, declaration.Children.First().Kind);
@@ -857,7 +1043,8 @@ class C
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_VerifyChildren()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -868,7 +1055,9 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclarationSyntax>(compilation);
+            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclarationSyntax>(
+                compilation
+            );
             var declaration = (IVariableDeclarationOperation)operation;
             Assert.Equal(2, declaration.Children.Count());
             Assert.Equal(OperationKind.Literal, declaration.Children.First().Kind);
@@ -879,7 +1068,8 @@ class C
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_VerifyInvalidDimensions()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -888,25 +1078,35 @@ class C
     }
 }
 ";
-            string expectedOperationTree = "ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')";
+            string expectedOperationTree =
+                "ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         int[/*<bind>*/10/*</bind>*/] x;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[/*<bind>*/10/*</bind>*/]").WithLocation(6, 12),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[/*<bind>*/10/*</bind>*/]")
+                    .WithLocation(6, 12),
                 // file.cs(6,38): warning CS0168: The variable 'x' is declared but never used
                 //         int[/*<bind>*/10/*</bind>*/] x;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(6, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 38)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_TestSemanticModel()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -928,14 +1128,20 @@ class C
 
             Assert.Equal(@"10", literalExpr.ToString());
             Assert.Equal("System.Int32", model.GetTypeInfo(literalExpr).Type.ToTestDisplayString());
-            Assert.Equal("System.Int32", model.GetTypeInfo(literalExpr).ConvertedType.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                model.GetTypeInfo(literalExpr).ConvertedType.ToTestDisplayString()
+            );
             Assert.Equal(Conversion.Identity, model.GetConversion(literalExpr));
 
             var invocExpr = nodes.OfType<InvocationExpressionSyntax>().ElementAt(0);
 
             Assert.Equal(@"M2()", invocExpr.ToString());
             Assert.Equal("System.Int32", model.GetTypeInfo(invocExpr).Type.ToTestDisplayString());
-            Assert.Equal("System.Int32", model.GetTypeInfo(invocExpr).ConvertedType.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                model.GetTypeInfo(invocExpr).ConvertedType.ToTestDisplayString()
+            );
             Assert.Equal(Conversion.Identity, model.GetConversion(invocExpr));
 
             var invocInfo = model.GetSymbolInfo(invocExpr);
@@ -948,7 +1154,8 @@ class C
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_OutVarDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -960,7 +1167,8 @@ class C
     public int M2(out int i) => i = 42;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[M2(out var z)] x')
   Ignored Dimensions(1):
       IInvocationOperation ( System.Int32 C.M2(out System.Int32 i)) (OperationKind.Invocation, Type: System.Int32, IsInvalid) (Syntax: 'M2(out var z)')
@@ -979,26 +1187,37 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[M2(out var z)] x;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]").WithLocation(6, 22),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]")
+                    .WithLocation(6, 22),
                 // file.cs(6,34): warning CS0219: The variable 'z' is assigned but its value is never used
                 //         /*<bind>*/int[M2(out var z)] x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z").WithArguments("z").WithLocation(6, 34),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z")
+                    .WithArguments("z")
+                    .WithLocation(6, 34),
                 // file.cs(6,38): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/int[M2(out var z)] x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(6, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 38)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_OutVarDeclaration_InNullableArrayType()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -1010,7 +1229,8 @@ class C
     public int M2(out int i) => i = 42;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[M2(out var z)]? x')
   Ignored Dimensions(1):
       IInvocationOperation ( System.Int32 C.M2(out System.Int32 i)) (OperationKind.Invocation, Type: System.Int32, IsInvalid) (Syntax: 'M2(out var z)')
@@ -1029,29 +1249,41 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[M2(out var z)]? x;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]").WithLocation(6, 22),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]")
+                    .WithLocation(6, 22),
                 // file.cs(6,34): warning CS0219: The variable 'z' is assigned but its value is never used
                 //         /*<bind>*/int[M2(out var z)]? x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z").WithArguments("z").WithLocation(6, 34),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z")
+                    .WithArguments("z")
+                    .WithLocation(6, 34),
                 // file.cs(6,37): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' context.
                 //         /*<bind>*/int[M2(out var z)]? x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?").WithLocation(6, 37),
+                Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
+                    .WithLocation(6, 37),
                 // file.cs(6,39): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/int[M2(out var z)]? x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(6, 39)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 39)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_OutVarDeclaration_InRefType()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -1063,7 +1295,8 @@ class C
     public int M2(out int i) => i = 42;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'ref int[M2(out var z)] y')
   Ignored Dimensions(1):
       IInvocationOperation ( System.Int32 C.M2(out System.Int32 i)) (OperationKind.Invocation, Type: System.Int32, IsInvalid) (Syntax: 'M2(out var z)')
@@ -1082,29 +1315,41 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,26): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/ref int[M2(out var z)] y;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]").WithLocation(6, 26),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]")
+                    .WithLocation(6, 26),
                 // file.cs(6,38): warning CS0219: The variable 'z' is assigned but its value is never used
                 //         /*<bind>*/ref int[M2(out var z)] y;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z").WithArguments("z").WithLocation(6, 38),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z")
+                    .WithArguments("z")
+                    .WithLocation(6, 38),
                 // file.cs(6,42): error CS8174: A declaration of a by-reference variable must have an initializer
                 //         /*<bind>*/ref int[M2(out var z)] y;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ByReferenceVariableMustBeInitialized, "y").WithLocation(6, 42),
+                Diagnostic(ErrorCode.ERR_ByReferenceVariableMustBeInitialized, "y")
+                    .WithLocation(6, 42),
                 // file.cs(6,42): warning CS0168: The variable 'y' is declared but never used
                 //         /*<bind>*/ref int[M2(out var z)] y;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "y").WithArguments("y").WithLocation(6, 42)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 42)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_OutVarDeclaration_InDoublyNestedType()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -1116,7 +1361,8 @@ class C
     public int M2(out int i) => i = 42;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'ref int[M2( ...  var z)]? y')
   Ignored Dimensions(1):
       IInvocationOperation ( System.Int32 C.M2(out System.Int32 i)) (OperationKind.Invocation, Type: System.Int32, IsInvalid) (Syntax: 'M2(out var z)')
@@ -1135,33 +1381,45 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,26): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/ref int[M2(out var z)]? y;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]").WithLocation(6, 26),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]")
+                    .WithLocation(6, 26),
                 // file.cs(6,38): warning CS0219: The variable 'z' is assigned but its value is never used
                 //         /*<bind>*/ref int[M2(out var z)]? y;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z").WithArguments("z").WithLocation(6, 38),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z")
+                    .WithArguments("z")
+                    .WithLocation(6, 38),
                 // file.cs(6,41): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' context.
                 //         /*<bind>*/ref int[M2(out var z)]? y;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?").WithLocation(6, 41),
+                Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
+                    .WithLocation(6, 41),
                 // file.cs(6,43): error CS8174: A declaration of a by-reference variable must have an initializer
                 //         /*<bind>*/ref int[M2(out var z)]? y;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ByReferenceVariableMustBeInitialized, "y").WithLocation(6, 43),
+                Diagnostic(ErrorCode.ERR_ByReferenceVariableMustBeInitialized, "y")
+                    .WithLocation(6, 43),
                 // file.cs(6,43): warning CS0168: The variable 'y' is declared but never used
                 //         /*<bind>*/ref int[M2(out var z)]? y;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "y").WithArguments("y").WithLocation(6, 43)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 43)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
-
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_NestedArrayType()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
 #nullable enable
@@ -1171,7 +1429,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[10]?[20]? x')
   Ignored Dimensions(2):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')
@@ -1183,7 +1442,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[10]?[20]? x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(7, 22),
@@ -1192,17 +1452,24 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[20]").WithLocation(7, 27),
                 // file.cs(7,33): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/int[10]?[20]? x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(7, 33)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 33)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_AliasQualifiedName01()
         {
-            string source = @"
+            string source =
+                @"
 using Col=System.Collections.Generic;
 class C
 {
@@ -1213,12 +1480,28 @@ class C
 }
 ";
             var syntaxTree = Parse(source, filename: "file.cs");
-            var rankSpecifierOld = syntaxTree.GetCompilationUnitRoot().DescendantNodes().OfType<ArrayRankSpecifierSyntax>().First();
-            var rankSpecifierNew = rankSpecifierOld
-                .WithSizes(SyntaxFactory.SeparatedList<ExpressionSyntax>(SyntaxFactory.NodeOrTokenList(SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(10)))));
-            syntaxTree = syntaxTree.GetCompilationUnitRoot().ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
+            var rankSpecifierOld = syntaxTree
+                .GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ArrayRankSpecifierSyntax>()
+                .First();
+            var rankSpecifierNew = rankSpecifierOld.WithSizes(
+                SyntaxFactory.SeparatedList<ExpressionSyntax>(
+                    SyntaxFactory.NodeOrTokenList(
+                        SyntaxFactory.LiteralExpression(
+                            SyntaxKind.NumericLiteralExpression,
+                            SyntaxFactory.Literal(10)
+                        )
+                    )
+                )
+            );
+            syntaxTree =
+                syntaxTree
+                    .GetCompilationUnitRoot()
+                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Col::List<int[10]> x')
   Ignored Dimensions(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 10, IsInvalid) (Syntax: '10')
@@ -1229,23 +1512,31 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,32): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/Col::List<int[10]> x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(7, 32),
                 // file.cs(7,38): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/Col::List<int[10]> x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(7, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 38)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(new[] { syntaxTree }, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                new[] { syntaxTree },
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_AliasQualifiedName02()
         {
-            string source = @"
+            string source =
+                @"
 using List=System.Collections.Generic.List<int[10]>;
 
 class C
@@ -1257,7 +1548,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'List x')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Collections.Generic.List<System.Int32[]> x) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'x')
@@ -1266,23 +1558,31 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(2,47): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 // using List=System.Collections.Generic.List<int[10]>;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(2, 47),
                 // file.cs(8,24): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/List x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(8, 24)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(8, 24)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_DeclarationPattern()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -1293,7 +1593,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[y is int z] x')
   Ignored Dimensions(1):
       IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Int32, IsInvalid, IsImplicit) (Syntax: 'y is int z')
@@ -1311,29 +1612,42 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,13): warning CS0219: The variable 'y' is assigned but its value is never used
                 //         int y = 10;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 13),
                 // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[y is int z] x;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y is int z]").WithLocation(7, 22),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y is int z]")
+                    .WithLocation(7, 22),
                 // file.cs(7,23): error CS0029: Cannot implicitly convert type 'bool' to 'int'
                 //         /*<bind>*/int[y is int z] x;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "y is int z").WithArguments("bool", "int").WithLocation(7, 23),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "y is int z")
+                    .WithArguments("bool", "int")
+                    .WithLocation(7, 23),
                 // file.cs(7,35): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/int[y is int z] x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(7, 35)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 35)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IVariableDeclaration_InvalidIgnoredDimensions_SwitchExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -1346,7 +1660,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[M(y swi ... => 42 })] x')
   Ignored Dimensions(1):
       IInvocationOperation ( System.Int32 C.M(System.Int32 a)) (OperationKind.Invocation, Type: System.Int32, IsInvalid) (Syntax: 'M(y switch  ...  z => 42 })')
@@ -1374,19 +1689,29 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
     null
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,13): warning CS0219: The variable 'y' is assigned but its value is never used
                 //         int y = 10;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 13),
                 // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[M(y switch { int z => 42 })] x;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M(y switch { int z => 42 })]").WithLocation(7, 22),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M(y switch { int z => 42 })]")
+                    .WithLocation(7, 22),
                 // file.cs(7,52): warning CS0168: The variable 'x' is declared but never used
                 //         /*<bind>*/int[M(y switch { int z => 42 })] x;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(7, 52)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 52)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         #endregion
@@ -1397,7 +1722,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void FixedStatementDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     int i1;
@@ -1415,8 +1741,8 @@ class Program
 }
 ";
 
-
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int* p = &reference.i1')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32* p) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p = &reference.i1')
@@ -1432,20 +1758,26 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void FixedStatementMultipleDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     int i1, i2;
@@ -1462,7 +1794,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int* p1 = & ... eference.i2')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32* p1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p1 = &reference.i1')
@@ -1488,20 +1821,26 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void FixedStatementInvalidAssignment()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     int i1;
@@ -1518,7 +1857,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int* p = /*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32* p) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'p = /*</bind>*/')
@@ -1529,26 +1869,36 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ')'
                 //             fixed (/*<bind>*/int* p = /*</bind>*/)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(10, 50),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(10, 50),
                 // CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9),
                 // CS0169: The field 'Program.i1' is never used
                 //     int i1;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "i1").WithArguments("Program.i1").WithLocation(4, 9)
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "i1")
+                    .WithArguments("Program.i1")
+                    .WithLocation(4, 9)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void FixedStatementMultipleDeclarationsInvalidInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     int i1, i2;
@@ -1565,7 +1915,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int* p1 = , ... /*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32* p1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'p1 = ')
@@ -1581,32 +1932,46 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ','
                 //             fixed (/*<bind>*/int* p1 = , p2 = /*</bind>*/)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(10, 40),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(10, 40),
                 // CS1525: Invalid expression term ')'
                 //             fixed (/*<bind>*/int* p1 = , p2 = /*</bind>*/)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(10, 58),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(10, 58),
                 // CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9),
                 // CS0169: The field 'Program.i2' is never used
                 //     int i1, i2;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "i2").WithArguments("Program.i2").WithLocation(4, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "i2")
+                    .WithArguments("Program.i2")
+                    .WithLocation(4, 13),
                 // CS0169: The field 'Program.i1' is never used
                 //     int i1, i2;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "i1").WithArguments("Program.i1").WithLocation(4, 9)
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "i1")
+                    .WithArguments("Program.i1")
+                    .WithLocation(4, 9)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void FixedStatementNoInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     int i1;
@@ -1623,7 +1988,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int* p')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32* p) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'p')
@@ -1632,7 +1998,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9),
@@ -1641,17 +2008,24 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "p").WithLocation(10, 35),
                 // CS0169: The field 'Program.i1' is never used
                 //     int i1;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "i1").WithArguments("Program.i1").WithLocation(4, 9)
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "i1")
+                    .WithArguments("Program.i1")
+                    .WithLocation(4, 9)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void FixedStatementMultipleDeclarationsNoInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     int i1, i2;
@@ -1668,7 +2042,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int* p1, p2')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32* p1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'p1')
@@ -1680,7 +2055,8 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9),
@@ -1692,20 +2068,29 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "p2").WithLocation(10, 39),
                 // CS0169: The field 'Program.i2' is never used
                 //     int i1, i2;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "i2").WithArguments("Program.i2").WithLocation(4, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "i2")
+                    .WithArguments("Program.i2")
+                    .WithLocation(4, 13),
                 // CS0169: The field 'Program.i1' is never used
                 //     int i1, i2;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "i1").WithArguments("Program.i1").WithLocation(4, 9)
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "i1")
+                    .WithArguments("Program.i1")
+                    .WithLocation(4, 9)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void FixedStatementInvalidMultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     int i1, i2;
@@ -1722,7 +2107,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int* p1 = & ... /*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32* p1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p1 = &reference.i1')
@@ -1741,7 +2127,8 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1001: Identifier expected
                 //             fixed (/*<bind>*/int* p1 = &reference.i1,/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(10, 65),
@@ -1753,16 +2140,23 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "").WithLocation(10, 65),
                 // CS0169: The field 'Program.i2' is never used
                 //     int i1, i2;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "i2").WithArguments("Program.i2").WithLocation(4, 13)
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "i2")
+                    .WithArguments("Program.i2")
+                    .WithLocation(4, 13)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void FixedStatement_InvalidIgnoredDimensions_SwitchExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -1781,7 +2175,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[M2(y sw ... ] p1 = null')
   Ignored Dimensions(1):
       IInvocationOperation ( System.Int32 C.M2(System.Int32 x)) (OperationKind.Invocation, Type: System.Int32, IsInvalid) (Syntax: 'M2(y switch ...  z => 42 })')
@@ -1814,19 +2209,26 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
             {
                 // file.cs(6,13): warning CS0219: The variable 'y' is assigned but its value is never used
                 //         int y = 10;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 13),
                 // file.cs(7,9): error CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(7, 9),
                 // file.cs(9,33): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //             fixed (/*<bind>*/int[M2(y switch { int z => 42 })] p1 = null/*</bind>*/)
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(y switch { int z => 42 })]").WithLocation(9, 33),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(y switch { int z => 42 })]")
+                    .WithLocation(9, 33),
                 // file.cs(9,64): error CS0209: The type of a local declared in a fixed statement must be a pointer type
                 //             fixed (/*<bind>*/int[M2(y switch { int z => 42 })] p1 = null/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_BadFixedInitType, "p1 = null").WithLocation(9, 64)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         #endregion
@@ -1837,7 +2239,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -1852,7 +2255,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Program p1  ... w Program()')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p1 = new Program()')
@@ -1867,14 +2271,19 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementMultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -1889,7 +2298,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Program p1  ... w Program()')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p1 = new Program()')
@@ -1911,14 +2321,19 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementInvalidInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -1933,7 +2348,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Program p1 =/*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'p1 =/*</bind>*/')
@@ -1944,20 +2360,28 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ')'
                 //         using (/*<bind>*/Program p1 =/*</bind>*/)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(8, 49)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(8, 49)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementMultipleDeclarationsInvalidInitializers()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -1972,7 +2396,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Program p1  ... /*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'p1 =')
@@ -1988,23 +2413,33 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ','
                 //         using (/*<bind>*/Program p1 =, p2 =/*</bind>*/)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(8, 38),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(8, 38),
                 // CS1525: Invalid expression term ')'
                 //         using (/*<bind>*/Program p1 =, p2 =/*</bind>*/)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(8, 55)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(8, 55)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementNoInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -2019,7 +2454,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Program p1')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'p1')
@@ -2028,20 +2464,26 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0210: You must provide an initializer in a fixed or using statement declaration
                 //         using (/*<bind>*/Program p1/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "p1").WithLocation(8, 34)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementMultipleDeclarationsNoInitializers()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -2056,7 +2498,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Program p1, p2')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'p1')
@@ -2068,7 +2511,8 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0210: You must provide an initializer in a fixed or using statement declaration
                 //         using (/*<bind>*/Program p1, p2/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "p1").WithLocation(8, 34),
@@ -2077,14 +2521,19 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "p2").WithLocation(8, 38)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementInvalidMultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -2099,7 +2548,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Program p1  ... /*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p1 = new Program()')
@@ -2115,7 +2565,8 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1001: Identifier expected
                 //         using (/*<bind>*/Program p1 = new Program(),/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 64),
@@ -2124,14 +2575,19 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "").WithLocation(8, 64)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementExpressionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -2148,7 +2604,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Program p1  ... etProgram()')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p1 = GetProgram()')
@@ -2163,14 +2620,19 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementMultipleDeclarationsExpressionInitializers()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -2187,7 +2649,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Program p1  ... etProgram()')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p1 = GetProgram()')
@@ -2209,14 +2672,19 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementLocalReferenceInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -2232,7 +2700,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Program p2 = p1')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p2 = p1')
@@ -2244,14 +2713,19 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void UsingStatementMultipleDeclarationsLocalReferenceInitializers()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program : IDisposable
@@ -2267,7 +2741,8 @@ class Program : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Program p2 = p1, p3 = p1')
   Declarators:
       IVariableDeclaratorOperation (Symbol: Program p2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'p2 = p1')
@@ -2283,13 +2758,18 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void UsingBlock_InvalidIgnoredDimensions_SwitchExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -2300,13 +2780,25 @@ class C
 }
 ";
             var syntaxTree = Parse(source, filename: "file.cs");
-            var rankSpecifierOld = syntaxTree.GetCompilationUnitRoot().DescendantNodes().OfType<ArrayRankSpecifierSyntax>().First();
-            var rankSpecifierNew = rankSpecifierOld
-                .WithSizes(SyntaxFactory.SeparatedList<ExpressionSyntax>(SyntaxFactory.NodeOrTokenList(SyntaxFactory.ParseExpression("y switch { int z => 42 }"))));
-            syntaxTree = syntaxTree.GetCompilationUnitRoot().ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
+            var rankSpecifierOld = syntaxTree
+                .GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ArrayRankSpecifierSyntax>()
+                .First();
+            var rankSpecifierNew = rankSpecifierOld.WithSizes(
+                SyntaxFactory.SeparatedList<ExpressionSyntax>(
+                    SyntaxFactory.NodeOrTokenList(
+                        SyntaxFactory.ParseExpression("y switch { int z => 42 }")
+                    )
+                )
+            );
+            syntaxTree =
+                syntaxTree
+                    .GetCompilationUnitRoot()
+                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
 
-
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
     IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[y switc ...  new int[0]')
       Ignored Dimensions(1):
           ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExpression, Type: System.Int32, IsInvalid) (Syntax: 'y switch { int z => 42 }')
@@ -2336,22 +2828,35 @@ class C
             {
                 // file.cs(6,13): warning CS0219: The variable 'y' is assigned but its value is never used
                 //         int y = 10;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 13),
                 // file.cs(7,25): error CS1674: 'int[]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/){}
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "int[y switch { int z => 42 }] x = new int[0]").WithArguments("int[]").WithLocation(7, 25),
+                Diagnostic(
+                        ErrorCode.ERR_NoConvToIDisp,
+                        "int[y switch { int z => 42 }] x = new int[0]"
+                    )
+                    .WithArguments("int[]")
+                    .WithLocation(7, 25),
                 // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/){}
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]").WithLocation(7, 28),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
+                    .WithLocation(7, 28),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(new[] { syntaxTree }, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                new[] { syntaxTree },
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void UsingStatement_InvalidIgnoredDimensions_SwitchExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -2362,13 +2867,25 @@ class C
 }
 ";
             var syntaxTree = Parse(source, filename: "file.cs");
-            var rankSpecifierOld = syntaxTree.GetCompilationUnitRoot().DescendantNodes().OfType<ArrayRankSpecifierSyntax>().First();
-            var rankSpecifierNew = rankSpecifierOld
-                .WithSizes(SyntaxFactory.SeparatedList<ExpressionSyntax>(SyntaxFactory.NodeOrTokenList(SyntaxFactory.ParseExpression("y switch { int z => 42 }"))));
-            syntaxTree = syntaxTree.GetCompilationUnitRoot().ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
+            var rankSpecifierOld = syntaxTree
+                .GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ArrayRankSpecifierSyntax>()
+                .First();
+            var rankSpecifierNew = rankSpecifierOld.WithSizes(
+                SyntaxFactory.SeparatedList<ExpressionSyntax>(
+                    SyntaxFactory.NodeOrTokenList(
+                        SyntaxFactory.ParseExpression("y switch { int z => 42 }")
+                    )
+                )
+            );
+            syntaxTree =
+                syntaxTree
+                    .GetCompilationUnitRoot()
+                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
 
-
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
     IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[y switc ...  new int[0]')
       Ignored Dimensions(1):
           ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExpression, Type: System.Int32, IsInvalid) (Syntax: 'y switch { int z => 42 }')
@@ -2398,25 +2915,38 @@ class C
             {
                 // file.cs(6,13): warning CS0219: The variable 'y' is assigned but its value is never used
                 //         int y = 10;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 13),
                 // file.cs(7,25): error CS1674: 'int[]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/);
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "int[y switch { int z => 42 }] x = new int[0]").WithArguments("int[]").WithLocation(7, 25),
+                Diagnostic(
+                        ErrorCode.ERR_NoConvToIDisp,
+                        "int[y switch { int z => 42 }] x = new int[0]"
+                    )
+                    .WithArguments("int[]")
+                    .WithLocation(7, 25),
                 // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/);
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]").WithLocation(7, 28),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
+                    .WithLocation(7, 28),
                 // file.cs(7,81): warning CS0642: Possible mistaken empty statement
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/);
                 Diagnostic(ErrorCode.WRN_PossibleMistakenNullStatement, ";").WithLocation(7, 81)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(new[] { syntaxTree }, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                new[] { syntaxTree },
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void UsingDeclaration_InvalidIgnoredDimensions_SwitchExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -2427,7 +2957,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
     IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[y switc ...  new int[0]')
       Ignored Dimensions(1):
           ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExpression, Type: System.Int32, IsInvalid) (Syntax: 'y switch { int z => 42 }')
@@ -2457,16 +2988,28 @@ class C
             {
                 // file.cs(6,13): warning CS0219: The variable 'y' is assigned but its value is never used
                 //         int y = 10;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 13),
                 // file.cs(7,8): error CS1674: 'int[]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 //        using /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "using /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;").WithArguments("int[]").WithLocation(7, 8),
+                Diagnostic(
+                        ErrorCode.ERR_NoConvToIDisp,
+                        "using /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;"
+                    )
+                    .WithArguments("int[]")
+                    .WithLocation(7, 8),
                 // file.cs(7,27): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //        using /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]").WithLocation(7, 27)
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
+                    .WithLocation(7, 27)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         #endregion
@@ -2477,7 +3020,8 @@ class C
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2489,7 +3033,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i = 0')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = 0')
@@ -2501,14 +3046,19 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopMultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2519,7 +3069,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i = 0, j = 0')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = 0')
@@ -2533,20 +3084,28 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'j' is assigned but its value is never used
                 //         for (/*<bind>*/int i = 0, j = 0/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "j").WithArguments("j").WithLocation(6, 35)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "j")
+                    .WithArguments("j")
+                    .WithLocation(6, 35)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopInvalidInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2558,7 +3117,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i =/*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i =/*</bind>*/')
@@ -2569,20 +3129,28 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         for (/*<bind>*/int i =/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(6, 42)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(6, 42)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopMultipleDeclarationsInvalidInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2594,7 +3162,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i =, j =/*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i =')
@@ -2610,23 +3179,33 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ','
                 //         for (/*<bind>*/int i =, j =/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(6, 31),
                 // CS1525: Invalid expression term ';'
                 //         for (/*<bind>*/int i =, j =/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(6, 47)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(6, 47)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopNoInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2638,7 +3217,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i')
@@ -2647,20 +3227,28 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0165: Use of unassigned local variable 'i'
                 //         for (/*<bind>*/int i/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "i").WithArguments("i").WithLocation(6, 42)
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 42)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopMultipleDeclarationsNoInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2672,7 +3260,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i, j')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i')
@@ -2684,23 +3273,33 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0165: Use of unassigned local variable 'i'
                 //         for (/*<bind>*/int i, j/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "i").WithArguments("i").WithLocation(6, 45),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 45),
                 // CS0168: The variable 'j' is declared but never used
                 //         for (/*<bind>*/int i, j/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "j").WithArguments("j").WithLocation(6, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "j")
+                    .WithArguments("j")
+                    .WithLocation(6, 31)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopInvalidMultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2712,7 +3311,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i =,/*</bind>*/')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i =')
@@ -2726,23 +3326,31 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
   Initializer: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ','
                 //         for (/*<bind>*/int i =,/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(6, 31),
                 // CS1001: Identifier expected
                 //         for (/*<bind>*/int i =,/*</bind>*/; i < 0; i++)
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(6, 43)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopExpressionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2756,7 +3364,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i = GetInt()')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = GetInt()')
@@ -2771,14 +3380,19 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ForLoopMultipleDeclarationsExpressionInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2792,7 +3406,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i = Get ...  = GetInt()')
   Declarators:
       IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = GetInt()')
@@ -2814,13 +3429,18 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void ForLoop_InvalidIgnoredDimensions_SwitchExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1()
@@ -2831,13 +3451,25 @@ class C
 }
 ";
             var syntaxTree = Parse(source, filename: "file.cs");
-            var rankSpecifierOld = syntaxTree.GetCompilationUnitRoot().DescendantNodes().OfType<ArrayRankSpecifierSyntax>().First();
-            var rankSpecifierNew = rankSpecifierOld
-                .WithSizes(SyntaxFactory.SeparatedList<ExpressionSyntax>(SyntaxFactory.NodeOrTokenList(SyntaxFactory.ParseExpression("y switch { int z => 42 }"))));
-            syntaxTree = syntaxTree.GetCompilationUnitRoot().ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
+            var rankSpecifierOld = syntaxTree
+                .GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ArrayRankSpecifierSyntax>()
+                .First();
+            var rankSpecifierNew = rankSpecifierOld.WithSizes(
+                SyntaxFactory.SeparatedList<ExpressionSyntax>(
+                    SyntaxFactory.NodeOrTokenList(
+                        SyntaxFactory.ParseExpression("y switch { int z => 42 }")
+                    )
+                )
+            );
+            syntaxTree =
+                syntaxTree
+                    .GetCompilationUnitRoot()
+                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
 
-
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int[y switc ...  new int[0]')
   Ignored Dimensions(1):
       ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExpression, Type: System.Int32, IsInvalid) (Syntax: 'y switch { int z => 42 }')
@@ -2867,13 +3499,20 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
             {
                 // file.cs(6,13): warning CS0219: The variable 'y' is assigned but its value is never used
                 //         int y = 10;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 13),
                 // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         for (/*<bind/>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;;);
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]").WithLocation(7, 28),
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
+                    .WithLocation(7, 28),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(new[] { syntaxTree }, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                new[] { syntaxTree },
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         #endregion
@@ -2884,7 +3523,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2893,7 +3533,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'const int i1 = 1;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1 = 1')
     Declarators:
@@ -2904,20 +3545,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         /*<bind>*/const int i1 = 1;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(6, 29)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 29)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalMultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2929,7 +3578,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'const int i ...  1, i2 = 2;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1 = 1, i2 = 2')
     Declarators:
@@ -2944,23 +3594,33 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         /*<bind>*/const int i1 = 1, i2 = 2;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(9, 29),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(9, 29),
                 // CS0219: The variable 'i2' is assigned but its value is never used
                 //         /*<bind>*/const int i1 = 1, i2 = 2;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2").WithArguments("i2").WithLocation(9, 37)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2")
+                    .WithArguments("i2")
+                    .WithLocation(9, 37)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalDeclarationInvalidInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2969,7 +3629,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'const int i1 = ;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1 = ')
     Declarators:
@@ -2981,20 +3642,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         /*<bind>*/const int i1 = ;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(6, 34)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(6, 34)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalMultipleDeclarationsInvalidInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3003,7 +3672,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'const int i1 = , i2 = ;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1 = , i2 = ')
     Declarators:
@@ -3020,23 +3690,33 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ','
                 //         const /*<bind>*/int i1 = , i2 = /*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(6, 34),
                 // CS1525: Invalid expression term ';'
                 //         const /*<bind>*/int i1 = , i2 = /*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(6, 41)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(6, 41)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalDeclarationNoInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3045,7 +3725,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'const int i1;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1')
     Declarators:
@@ -3055,23 +3736,31 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0145: A const field requires a value to be provided
                 //         const /*<bind>*/int i1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ConstValueRequired, "i1").WithLocation(6, 29),
                 // CS0168: The variable 'i1' is declared but never used
                 //         const /*<bind>*/int i1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1").WithArguments("i1").WithLocation(6, 29)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 29)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalMultipleDeclarationsNoInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3080,7 +3769,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'const int i1, i2;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1, i2')
     Declarators:
@@ -3093,7 +3783,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0145: A const field requires a value to be provided
                 //         const /*<bind>*/int i1, i2/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ConstValueRequired, "i1").WithLocation(6, 29),
@@ -3102,20 +3793,29 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 Diagnostic(ErrorCode.ERR_ConstValueRequired, "i2").WithLocation(6, 33),
                 // CS0168: The variable 'i1' is declared but never used
                 //         const /*<bind>*/int i1, i2/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1").WithArguments("i1").WithLocation(6, 29),
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 29),
                 // CS0168: The variable 'i2' is declared but never used
                 //         const /*<bind>*/int i1, i2/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i2").WithArguments("i2").WithLocation(6, 33)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i2")
+                    .WithArguments("i2")
+                    .WithLocation(6, 33)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalInvalidMultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3124,7 +3824,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'const int i1,;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1,')
     Declarators:
@@ -3137,7 +3838,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0145: A const field requires a value to be provided
                 //         const /*<bind>*/int i1,/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ConstValueRequired, "i1").WithLocation(6, 29),
@@ -3149,17 +3851,24 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 Diagnostic(ErrorCode.ERR_ConstValueRequired, ";").WithLocation(6, 32),
                 // CS0168: The variable 'i1' is declared but never used
                 //         const /*<bind>*/int i1,/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1").WithArguments("i1").WithLocation(6, 29)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 29)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalDeclarationExpressionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3170,7 +3879,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'const int i1 = GetInt();')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1 = GetInt()')
     Declarators:
@@ -3184,20 +3894,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0133: The expression being assigned to 'i1' must be constant
                 //         const /*<bind>*/int i1 = GetInt()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "GetInt()").WithArguments("i1").WithLocation(6, 34)
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "GetInt()")
+                    .WithArguments("i1")
+                    .WithLocation(6, 34)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalMultipleDeclarationsExpressionInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3208,7 +3926,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'const int i ... = GetInt();')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'int i1 = Ge ...  = GetInt()')
     Declarators:
@@ -3229,23 +3948,33 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0133: The expression being assigned to 'i1' must be constant
                 //         const /*<bind>*/int i1 = GetInt(), i2 = GetInt()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "GetInt()").WithArguments("i1").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "GetInt()")
+                    .WithArguments("i1")
+                    .WithLocation(6, 34),
                 // CS0133: The expression being assigned to 'i2' must be constant
                 //         const /*<bind>*/int i1 = GetInt(), i2 = GetInt()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "GetInt()").WithArguments("i2").WithLocation(6, 49)
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "GetInt()")
+                    .WithArguments("i2")
+                    .WithLocation(6, 49)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalDeclarationLocalReferenceInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3257,7 +3986,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'const int i1 = i;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1 = i')
     Declarators:
@@ -3268,20 +3998,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         const /*<bind>*/int i1 = i/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(7, 29)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(7, 29)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17599, "https://github.com/dotnet/roslyn/issues/17599")]
         public void ConstLocalMultipleDeclarationsLocalReferenceInitializers()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3293,7 +4031,8 @@ class Program
     static int GetInt() => 1;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'const int i ... i, i2 = i1;')
   IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'int i1 = i, i2 = i1')
     Declarators:
@@ -3308,13 +4047,20 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i2' is assigned but its value is never used
                 //         const /*<bind>*/int i1 = i, i2 = i1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2").WithArguments("i2").WithLocation(7, 37)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2")
+                    .WithArguments("i2")
+                    .WithLocation(7, 37)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         #endregion
@@ -3324,7 +4070,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
         [Fact]
         public void VariableDeclaration_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3338,7 +4085,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3382,14 +4130,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3402,7 +4155,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3430,14 +4184,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool a, int b, int c)
@@ -3449,7 +4208,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3499,14 +4259,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3516,13 +4281,17 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         int d = ;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(7, 17)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(7, 17)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3549,14 +4318,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_05()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3568,7 +4342,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3594,14 +4369,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_05_WithControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3613,7 +4393,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3663,14 +4444,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_06()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3680,7 +4466,8 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
                 //         int d[10] = 1;
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[10]").WithLocation(7, 14),
@@ -3689,7 +4476,8 @@ class C
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "10").WithLocation(7, 15)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3715,14 +4503,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_07()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3732,13 +4525,15 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1001: Identifier expected
                 //         int = 5;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(7, 13)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3764,14 +4559,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_08()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3784,7 +4584,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3816,14 +4617,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_09()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     int _c = 1;
@@ -3836,7 +4642,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3864,14 +4671,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_10()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3881,16 +4693,19 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS8172: Cannot initialize a by-reference variable with a value
                 //         ref int b = 1;
-                Diagnostic(ErrorCode.ERR_InitializeByReferenceVariableWithValue, "b = 1").WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_InitializeByReferenceVariableWithValue, "b = 1")
+                    .WithLocation(7, 17),
                 // CS1510: A ref or out value must be an assignable variable
                 //         ref int b = 1;
                 Diagnostic(ErrorCode.ERR_RefLvalueExpected, "1").WithLocation(7, 21)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3918,14 +4733,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_11()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3936,13 +4756,16 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS8172: Cannot initialize a by-reference variable with a value
                 //         ref int b = a;
-                Diagnostic(ErrorCode.ERR_InitializeByReferenceVariableWithValue, "b = a").WithLocation(8, 17)
+                Diagnostic(ErrorCode.ERR_InitializeByReferenceVariableWithValue, "b = a")
+                    .WithLocation(8, 17)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3974,14 +4797,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_12()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool a, int b, int c)
@@ -3993,7 +4821,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4058,14 +4887,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void VariableDeclaration_13()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -4076,13 +4910,17 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0841: Cannot use local variable 'a' before it is declared
                 //         a = 1;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "a").WithArguments("a").WithLocation(7, 9)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "a")
+                    .WithArguments("a")
+                    .WithLocation(7, 9)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4110,7 +4948,11 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         #endregion

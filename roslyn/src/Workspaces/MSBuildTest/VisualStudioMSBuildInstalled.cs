@@ -21,10 +21,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
         private readonly Version _minimumVersion;
 
-        public VisualStudioMSBuildInstalled() : this(new Version(15, 0))
-        {
+        public VisualStudioMSBuildInstalled() : this(new Version(15, 0)) { }
 
-        }
         protected VisualStudioMSBuildInstalled(Version minimumVersion)
         {
             _minimumVersion = minimumVersion;
@@ -55,7 +53,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             }
         }
 
-        public override string SkipReason => $"Could not locate Visual Studio with MSBuild {_minimumVersion} or higher installed";
+        public override string SkipReason =>
+            $"Could not locate Visual Studio with MSBuild {_minimumVersion} or higher installed";
 
         private static void RegisterMSBuildAssemblyResolution(string msbuildToolsPath)
         {
@@ -72,14 +71,16 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 "Microsoft.Build.Utilities.Core"
             };
 
-            var builder = ImmutableDictionary.CreateBuilder<string, Assembly>(StringComparer.OrdinalIgnoreCase);
+            var builder = ImmutableDictionary.CreateBuilder<string, Assembly>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             foreach (var assemblyName in assemblyNames)
             {
                 var assemblyFilePath = Path.Combine(msbuildToolsPath, assemblyName + ".dll");
                 var assembly = File.Exists(assemblyFilePath)
-                    ? Assembly.LoadFrom(assemblyFilePath)
-                    : null;
+                  ? Assembly.LoadFrom(assemblyFilePath)
+                  : null;
 
                 if (assembly != null)
                 {
@@ -105,23 +106,23 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
     internal class VisualStudio16_2OrHigherMSBuildInstalled : VisualStudioMSBuildInstalled
     {
-        public VisualStudio16_2OrHigherMSBuildInstalled() : base(new Version(16, 2))
-        {
-        }
+        public VisualStudio16_2OrHigherMSBuildInstalled() : base(new Version(16, 2)) { }
     }
 
     internal class VisualStudio16_9_Preview3OrHigherMSBuildInstalled : VisualStudioMSBuildInstalled
     {
-        public VisualStudio16_9_Preview3OrHigherMSBuildInstalled() : base(new Version(16, 9, 30914, 41))
-        {
-        }
+        public VisualStudio16_9_Preview3OrHigherMSBuildInstalled()
+            : base(new Version(16, 9, 30914, 41)) { }
     }
 
     internal static class VisualStudioMSBuildLocator
     {
-        private static readonly Lazy<(Version version, string path)> s_versionAndPath = new(FindMSBuildToolsPathFromVisualStudioCore);
+        private static readonly Lazy<(Version version, string path)> s_versionAndPath =
+            new(FindMSBuildToolsPathFromVisualStudioCore);
 
-        public static bool TryFindMSBuildToolsPath(out (Version version, string path) versionAndPath)
+        public static bool TryFindMSBuildToolsPath(
+            out (Version version, string path) versionAndPath
+        )
         {
             versionAndPath = s_versionAndPath.Value;
             return versionAndPath.path != null;
@@ -158,8 +159,16 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
                     var instance2 = (ISetupInstance2)instances[0];
                     var state = instance2.GetState();
-                    if (state == InstanceState.Complete &&
-                        instance2.GetPackages().Any(package => package.GetId() == "Microsoft.VisualStudio.Component.Roslyn.Compiler"))
+                    if (
+                        state == InstanceState.Complete
+                        && instance2
+                            .GetPackages()
+                            .Any(
+                                package =>
+                                    package.GetId()
+                                    == "Microsoft.VisualStudio.Component.Roslyn.Compiler"
+                            )
+                    )
                     {
                         var instanceVersionString = instance2.GetInstallationVersion();
 
@@ -167,10 +176,15 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                         {
                             // We'll throw an exception here -- this means we have some build with a new style of version numbers, which is probably the high version we want to pick but
                             // we won't know it
-                            throw new Exception($"Unable to parse version string '{instanceVersionString}'");
+                            throw new Exception(
+                                $"Unable to parse version string '{instanceVersionString}'"
+                            );
                         }
 
-                        var toolsBasePath = Path.Combine(instance2.GetInstallationPath(), "MSBuild");
+                        var toolsBasePath = Path.Combine(
+                            instance2.GetInstallationPath(),
+                            "MSBuild"
+                        );
                         string instanceMsBuildPath = null;
 
                         // Visual Studio 2019 and later place MSBuild in a "Current" folder.
@@ -191,7 +205,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
                         // We found some version; we will always use the highest possible version because we want to support the running of the most tests
                         // possible -- we can't load multiple versions sanely unless we tried multiple AppDomains
-                        if (instanceMsBuildPath != null && (found.version == null || instanceVersion > found.version))
+                        if (
+                            instanceMsBuildPath != null
+                            && (found.version == null || instanceVersion > found.version)
+                        )
                         {
                             found.version = instanceVersion;
                             found.path = instanceMsBuildPath;

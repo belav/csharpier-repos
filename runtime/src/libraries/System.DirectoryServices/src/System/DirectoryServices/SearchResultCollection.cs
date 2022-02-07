@@ -21,14 +21,23 @@ namespace System.DirectoryServices
         private UnsafeNativeMethods.IDirectorySearch? _searchObject;
         private ArrayList? _innerList;
         private bool _disposed;
-        private readonly DirectoryEntry _rootEntry;       // clone of parent entry object
+        private readonly DirectoryEntry _rootEntry; // clone of parent entry object
         private const string ADS_DIRSYNC_COOKIE = "fc8cb04d-311d-406c-8cb9-1ae8b843b418";
-        private readonly IntPtr _adsDirsynCookieName = Marshal.StringToCoTaskMemUni(ADS_DIRSYNC_COOKIE);
+        private readonly IntPtr _adsDirsynCookieName = Marshal.StringToCoTaskMemUni(
+            ADS_DIRSYNC_COOKIE
+        );
         private const string ADS_VLV_RESPONSE = "fc8cb04d-311d-406c-8cb9-1ae8b843b419";
-        private readonly IntPtr _adsVLVResponseName = Marshal.StringToCoTaskMemUni(ADS_VLV_RESPONSE);
+        private readonly IntPtr _adsVLVResponseName = Marshal.StringToCoTaskMemUni(
+            ADS_VLV_RESPONSE
+        );
         internal DirectorySearcher srch;
 
-        internal SearchResultCollection(DirectoryEntry root, IntPtr searchHandle, string[] propertiesLoaded, DirectorySearcher srch)
+        internal SearchResultCollection(
+            DirectoryEntry root,
+            IntPtr searchHandle,
+            string[] propertiesLoaded,
+            DirectorySearcher srch
+        )
         {
             _handle = searchHandle;
             PropertiesLoaded = propertiesLoaded;
@@ -54,7 +63,8 @@ namespace System.DirectoryServices
                         this,
                         _rootEntry.GetUsername(),
                         _rootEntry.GetPassword(),
-                        _rootEntry.AuthenticationType);
+                        _rootEntry.AuthenticationType
+                    );
 
                     while (enumerator.MoveNext())
                         _innerList.Add(enumerator.Current);
@@ -70,7 +80,7 @@ namespace System.DirectoryServices
             {
                 if (_searchObject == null)
                 {
-                    _searchObject = (UnsafeNativeMethods.IDirectorySearch)_rootEntry.AdsObject;   // get it only once
+                    _searchObject = (UnsafeNativeMethods.IDirectorySearch)_rootEntry.AdsObject; // get it only once
                 }
                 return _searchObject;
             }
@@ -124,9 +134,7 @@ namespace System.DirectoryServices
                 {
                     SearchObject.FreeColumn((INTPTR_INTPTRCAST)pColumn);
                 }
-                catch (COMException)
-                {
-                }
+                catch (COMException) { }
             }
         }
 
@@ -142,7 +150,9 @@ namespace System.DirectoryServices
             try
             {
                 AdsValue* pValue = column.pADsValues;
-                DirectoryVirtualListView value = (DirectoryVirtualListView)new AdsValueHelper(*pValue).GetVlvValue();
+                DirectoryVirtualListView value = (DirectoryVirtualListView)new AdsValueHelper(
+                    *pValue
+                ).GetVlvValue();
                 return value;
             }
             finally
@@ -151,9 +161,7 @@ namespace System.DirectoryServices
                 {
                     SearchObject.FreeColumn((INTPTR_INTPTRCAST)pColumn);
                 }
-                catch (COMException)
-                {
-                }
+                catch (COMException) { }
             }
         }
 
@@ -201,10 +209,12 @@ namespace System.DirectoryServices
         {
             // Two ResultsEnumerators can't exist at the same time over the
             // same object. Need to get a new handle, which means re-querying.
-            return new ResultsEnumerator(this,
-                                                       _rootEntry.GetUsername(),
-                                                       _rootEntry.GetPassword(),
-                                                       _rootEntry.AuthenticationType);
+            return new ResultsEnumerator(
+                this,
+                _rootEntry.GetUsername(),
+                _rootEntry.GetPassword(),
+                _rootEntry.AuthenticationType
+            );
         }
 
         public bool Contains(SearchResult result) => InnerList.Contains(result);
@@ -237,7 +247,12 @@ namespace System.DirectoryServices
             private SearchResult? _currentResult;
             private bool _eof;
 
-            internal ResultsEnumerator(SearchResultCollection results, string? parentUserName, string? parentPassword, AuthenticationTypes parentAuthenticationType)
+            internal ResultsEnumerator(
+                SearchResultCollection results,
+                string? parentUserName,
+                string? parentPassword,
+                AuthenticationTypes parentAuthenticationType
+            )
             {
                 if (parentUserName != null && parentPassword != null)
                     _parentCredentials = new NetworkCredential(parentUserName, parentPassword);
@@ -266,17 +281,27 @@ namespace System.DirectoryServices
 
             private unsafe SearchResult GetCurrentResult()
             {
-                SearchResult entry = new SearchResult(_parentCredentials, _parentAuthenticationType);
+                SearchResult entry = new SearchResult(
+                    _parentCredentials,
+                    _parentAuthenticationType
+                );
                 int hr = 0;
                 IntPtr pszColumnName = (IntPtr)0;
-                hr = _results.SearchObject.GetNextColumnName(_results.Handle, (INTPTR_INTPTRCAST)(&pszColumnName));
+                hr = _results.SearchObject.GetNextColumnName(
+                    _results.Handle,
+                    (INTPTR_INTPTRCAST)(&pszColumnName)
+                );
                 while (hr == 0)
                 {
                     try
                     {
                         AdsSearchColumn column = default;
                         AdsSearchColumn* pColumn = &column;
-                        _results.SearchObject.GetColumn(_results.Handle, pszColumnName, (INTPTR_INTPTRCAST)pColumn);
+                        _results.SearchObject.GetColumn(
+                            _results.Handle,
+                            pszColumnName,
+                            (INTPTR_INTPTRCAST)pColumn
+                        );
                         try
                         {
                             int numValues = column.dwNumValues;
@@ -287,7 +312,10 @@ namespace System.DirectoryServices
                                 values[i] = new AdsValueHelper(*pValue).GetValue();
                                 pValue++;
                             }
-                            entry.Properties.Add(Marshal.PtrToStringUni(pszColumnName)!, new ResultPropertyValueCollection(values));
+                            entry.Properties.Add(
+                                Marshal.PtrToStringUni(pszColumnName)!,
+                                new ResultPropertyValueCollection(values)
+                            );
                         }
                         finally
                         {
@@ -295,16 +323,17 @@ namespace System.DirectoryServices
                             {
                                 _results.SearchObject.FreeColumn((INTPTR_INTPTRCAST)pColumn);
                             }
-                            catch (COMException)
-                            {
-                            }
+                            catch (COMException) { }
                         }
                     }
                     finally
                     {
                         SafeNativeMethods.FreeADsMem(pszColumnName);
                     }
-                    hr = _results.SearchObject.GetNextColumnName(_results.Handle, (INTPTR_INTPTRCAST)(&pszColumnName));
+                    hr = _results.SearchObject.GetNextColumnName(
+                        _results.Handle,
+                        (INTPTR_INTPTRCAST)(&pszColumnName)
+                    );
                 }
 
                 return entry;
@@ -332,7 +361,9 @@ namespace System.DirectoryServices
                     {
                         //throw a clearer exception if the filter was invalid
                         if (hr == UnsafeNativeMethods.INVALID_FILTER)
-                            throw new ArgumentException(SR.Format(SR.DSInvalidSearchFilter, _results.Filter));
+                            throw new ArgumentException(
+                                SR.Format(SR.DSInvalidSearchFilter, _results.Filter)
+                            );
                         if (hr != 0)
                             throw COMExceptionHelper.CreateFormattedComException(hr);
 
@@ -352,7 +383,10 @@ namespace System.DirectoryServices
 
                     int hr = _results.SearchObject.GetNextRow(_results.Handle);
                     //  SIZE_LIMIT_EXCEEDED occurs when we supply too generic filter or small SizeLimit value.
-                    if (hr == UnsafeNativeMethods.S_ADS_NOMORE_ROWS || hr == UnsafeNativeMethods.SIZE_LIMIT_EXCEEDED)
+                    if (
+                        hr == UnsafeNativeMethods.S_ADS_NOMORE_ROWS
+                        || hr == UnsafeNativeMethods.SIZE_LIMIT_EXCEEDED
+                    )
                     {
                         // need to make sure this is not the case that server actually still has record not returned yet
                         if (hr == UnsafeNativeMethods.S_ADS_NOMORE_ROWS)
@@ -389,7 +423,9 @@ namespace System.DirectoryServices
                     }
                     //throw a clearer exception if the filter was invalid
                     if (hr == UnsafeNativeMethods.INVALID_FILTER)
-                        throw new ArgumentException(SR.Format(SR.DSInvalidSearchFilter, _results.Filter));
+                        throw new ArgumentException(
+                            SR.Format(SR.DSInvalidSearchFilter, _results.Filter)
+                        );
                     if (hr != 0)
                         throw COMExceptionHelper.CreateFormattedComException(hr);
 
@@ -416,7 +452,8 @@ namespace System.DirectoryServices
 
             private unsafe int GetLastError(ref int errorCode)
             {
-                char c1 = '\0', c2 = '\0';
+                char c1 = '\0',
+                    c2 = '\0';
                 errorCode = SafeNativeMethods.ERROR_SUCCESS;
                 return SafeNativeMethods.ADsGetLastError(out errorCode, &c1, 0, &c2, 0);
             }

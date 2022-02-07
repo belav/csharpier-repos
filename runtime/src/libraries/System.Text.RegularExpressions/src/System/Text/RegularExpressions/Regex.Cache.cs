@@ -39,22 +39,28 @@ namespace System.Text.RegularExpressions
 
         /// <summary>The default maximum number of items to store in the cache.</summary>
         private const int DefaultMaxCacheSize = 15;
+
         /// <summary>The maximum number of cached items to examine when we need to replace an existing one in the cache with a new one.</summary>
         /// <remarks>This is a somewhat arbitrary value, chosen to be small but at least as large as DefaultMaxCacheSize.</remarks>
         private const int MaxExamineOnDrop = 30;
 
         /// <summary>A read-through cache of one element, representing the most recently used regular expression.</summary>
         private static volatile Node? s_lastAccessed;
+
         /// <summary>The thread-safe dictionary storing all the items in the cache.</summary>
         /// <remarks>
         /// The concurrency level is initialized to 1 as we're using our own global lock for all mutations, so we don't need ConcurrentDictionary's
         /// striped locking.  Capacity is initialized to 31, which is the same as (the private) ConcurrentDictionary.DefaultCapacity.
         /// </remarks>
-        private static readonly ConcurrentDictionary<Key, Node> s_cacheDictionary = new ConcurrentDictionary<Key, Node>(concurrencyLevel: 1, capacity: 31);
+        private static readonly ConcurrentDictionary<Key, Node> s_cacheDictionary =
+            new ConcurrentDictionary<Key, Node>(concurrencyLevel: 1, capacity: 31);
+
         /// <summary>A list of all the items in the cache.  Protected by <see cref="SyncObj"/>.</summary>
         private static readonly List<Node> s_cacheList = new List<Node>(DefaultMaxCacheSize);
+
         /// <summary>Random number generator used to examine a subset of items when we need to drop one from a large list.  Protected by <see cref="SyncObj"/>.</summary>
         private static readonly Random s_random = new Random();
+
         /// <summary>The current maximum number of items allowed in the cache.  This rarely changes.  Mostly protected by <see cref="SyncObj"/>.</summary>
         private static int s_maxCacheSize = DefaultMaxCacheSize;
 
@@ -86,7 +92,12 @@ namespace System.Text.RegularExpressions
                         // If the value is being changed to less than the number of items we're currently storing,
                         // sort the entries descending by last access stamp, and remove the excess.  This is expensive, but
                         // this should be exceedingly rare, as CacheSize is generally set once (if at all) and then left unchanged.
-                        s_cacheList.Sort((n1, n2) => Volatile.Read(ref n2.LastAccessStamp).CompareTo(Volatile.Read(ref n1.LastAccessStamp)));
+                        s_cacheList.Sort(
+                            (n1, n2) =>
+                                Volatile
+                                    .Read(ref n2.LastAccessStamp)
+                                    .CompareTo(Volatile.Read(ref n1.LastAccessStamp))
+                        );
                         s_lastAccessed = s_cacheList[0];
                         for (int i = value; i < s_cacheList.Count; i++)
                         {
@@ -110,7 +121,12 @@ namespace System.Text.RegularExpressions
             Regex.ValidatePattern(pattern);
 
             CultureInfo culture = CultureInfo.CurrentCulture;
-            Key key = new Key(pattern, culture.ToString(), RegexOptions.None, Regex.s_defaultMatchTimeout);
+            Key key = new Key(
+                pattern,
+                culture.ToString(),
+                RegexOptions.None,
+                Regex.s_defaultMatchTimeout
+            );
 
             Regex? regex = Get(key);
             if (regex is null)
@@ -128,7 +144,10 @@ namespace System.Text.RegularExpressions
             Regex.ValidateOptions(options);
             Regex.ValidateMatchTimeout(matchTimeout);
 
-            CultureInfo culture = (options & RegexOptions.CultureInvariant) != 0 ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture;
+            CultureInfo culture =
+                (options & RegexOptions.CultureInvariant) != 0
+                    ? CultureInfo.InvariantCulture
+                    : CultureInfo.CurrentCulture;
             Key key = new Key(pattern, culture.ToString(), options, matchTimeout);
 
             Regex? regex = Get(key);
@@ -162,8 +181,11 @@ namespace System.Text.RegularExpressions
             }
 
             // Now consult the full cache.
-            if (s_maxCacheSize != 0 && // hot-read of s_maxCacheSize to try to avoid the cost of the dictionary lookup if the cache is disabled
-                s_cacheDictionary.TryGetValue(key, out Node? node))
+            if (
+                s_maxCacheSize != 0
+                && // hot-read of s_maxCacheSize to try to avoid the cost of the dictionary lookup if the cache is disabled
+                s_cacheDictionary.TryGetValue(key, out Node? node)
+            )
             {
                 // We found our item in the cache. Make this node's last access stamp one higher than
                 // the previous one.  It's ok if multiple threads racing to update the last access cause
@@ -280,10 +302,10 @@ namespace System.Text.RegularExpressions
                 obj is Key other && Equals(other);
 
             public bool Equals(Key other) =>
-                _pattern.Equals(other._pattern) &&
-                _culture.Equals(other._culture) &&
-                _options == other._options &&
-                _matchTimeout == other._matchTimeout;
+                _pattern.Equals(other._pattern)
+                && _culture.Equals(other._culture)
+                && _options == other._options
+                && _matchTimeout == other._matchTimeout;
 
             public override int GetHashCode() =>
                 // Hash code only factors in pattern and options, as regex instances are unlikely to have
@@ -296,8 +318,10 @@ namespace System.Text.RegularExpressions
         {
             /// <summary>The key associated with this cached instance.</summary>
             public readonly Key Key;
+
             /// <summary>The cached Regex instance.</summary>
             public readonly Regex Regex;
+
             /// <summary>A "time" stamp representing the approximate last access time for this Regex.</summary>
             public long LastAccessStamp;
 

@@ -18,8 +18,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         private readonly Func<int, int, CancellationToken, ValueTask>? _updateAction;
 
-        public StreamingProgressTracker(Func<int, int, CancellationToken, ValueTask>? updateAction = null)
-            => _updateAction = updateAction;
+        public StreamingProgressTracker(
+            Func<int, int, CancellationToken, ValueTask>? updateAction = null
+        ) => _updateAction = updateAction;
 
         public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken)
         {
@@ -33,7 +34,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return UpdateAsync(cancellationToken);
         }
 
-        private ValueTask UpdateAsync(CancellationToken cancellationToken)
-            => _updateAction?.Invoke(Volatile.Read(ref _completedItems), Volatile.Read(ref _totalItems), cancellationToken) ?? default;
+        private ValueTask UpdateAsync(CancellationToken cancellationToken) =>
+            _updateAction?.Invoke(
+                Volatile.Read(ref _completedItems),
+                Volatile.Read(ref _totalItems),
+                cancellationToken
+            ) ?? default;
     }
 }

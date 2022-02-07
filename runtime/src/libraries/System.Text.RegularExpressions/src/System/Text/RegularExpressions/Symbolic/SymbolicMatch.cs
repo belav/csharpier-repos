@@ -26,8 +26,7 @@ namespace System.Text.RegularExpressions.Symbolic
         public static bool operator ==(SymbolicMatch left, SymbolicMatch right) =>
             left.Index == right.Index && left.Length == right.Length;
 
-        public static bool operator !=(SymbolicMatch left, SymbolicMatch right) =>
-            !(left == right);
+        public static bool operator !=(SymbolicMatch left, SymbolicMatch right) => !(left == right);
 
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is SymbolicMatch other && this == other;

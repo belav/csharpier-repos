@@ -34,7 +34,9 @@ using VSUtilities = Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {
-    internal sealed class CompletionSource : ForegroundThreadAffinitizedObject, IAsyncExpandingCompletionSource
+    internal sealed class CompletionSource
+        : ForegroundThreadAffinitizedObject,
+          IAsyncExpandingCompletionSource
     {
         internal const string RoslynItem = nameof(RoslynItem);
         internal const string TriggerLocation = nameof(TriggerLocation);
@@ -47,16 +49,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         internal const string ExcludedCommitCharacters = nameof(ExcludedCommitCharacters);
         internal const string NonBlockingCompletion = nameof(NonBlockingCompletion);
         internal const string TypeImportCompletionEnabled = nameof(TypeImportCompletionEnabled);
-        internal const string TargetTypeFilterExperimentEnabled = nameof(TargetTypeFilterExperimentEnabled);
+        internal const string TargetTypeFilterExperimentEnabled = nameof(
+            TargetTypeFilterExperimentEnabled
+        );
 
         private static readonly ImmutableArray<ImageElement> s_WarningImageAttributeImagesArray =
-            ImmutableArray.Create(new ImageElement(Glyph.CompletionWarning.GetImageId(), EditorFeaturesResources.Warning_image_element));
+            ImmutableArray.Create(
+                new ImageElement(
+                    Glyph.CompletionWarning.GetImageId(),
+                    EditorFeaturesResources.Warning_image_element
+                )
+            );
 
-        private static readonly EditorOptionKey<bool> NonBlockingCompletionEditorOption = new(NonBlockingCompletion);
+        private static readonly EditorOptionKey<bool> NonBlockingCompletionEditorOption =
+            new(NonBlockingCompletion);
 
         // Use CWT to cache data needed to create VSCompletionItem, so the table would be cleared when Roslyn completion item cache is cleared.
-        private static readonly ConditionalWeakTable<RoslynCompletionItem, StrongBox<VSCompletionItemData>> s_roslynItemToVsItemData =
-            new();
+        private static readonly ConditionalWeakTable<
+            RoslynCompletionItem,
+            StrongBox<VSCompletionItemData>
+        > s_roslynItemToVsItemData = new();
 
         private readonly ITextView _textView;
         private readonly bool _isDebuggerTextView;
@@ -73,8 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             IThreadingContext threadingContext,
             VSUtilities.IUIThreadOperationExecutor operationExecutor,
             IAsynchronousOperationListener asyncListener,
-            IGlobalOptionService globalOptions)
-            : base(threadingContext)
+            IGlobalOptionService globalOptions
+        ) : base(threadingContext)
         {
             _textView = textView;
             _streamingPresenter = streamingPresenter;
@@ -88,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public AsyncCompletionData.CompletionStartData InitializeCompletion(
             AsyncCompletionData.CompletionTrigger trigger,
             SnapshotPoint triggerLocation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We take sourceText from document to get a snapshot span.
             // We would like to be sure that nobody changes buffers at the same time.
@@ -116,13 +129,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             // The Editor supports the option per textView.
             // There could be mixed desired behavior per textView and even per same completion session.
-            // The right fix would be to send this information as a result of the method. 
+            // The right fix would be to send this information as a result of the method.
             // Then, the Editor would choose the right behavior for mixed cases.
-            _textView.Options.GlobalOptions.SetOptionValue(NonBlockingCompletionEditorOption, !_globalOptions.GetOption(CompletionViewOptions.BlockForCompletionItems, service.Language));
+            _textView.Options.GlobalOptions.SetOptionValue(
+                NonBlockingCompletionEditorOption,
+                !_globalOptions.GetOption(
+                    CompletionViewOptions.BlockForCompletionItems,
+                    service.Language
+                )
+            );
 
             // In case of calls with multiple completion services for the same view (e.g. TypeScript and C#), those completion services must not be called simultaneously for the same session.
             // Therefore, in each completion session we use a list of commit character for a specific completion service and a specific content type.
-            _textView.Properties[PotentialCommitCharacters] = service.GetRules(options).DefaultCommitCharacters;
+            _textView.Properties[PotentialCommitCharacters] =
+                service.GetRules(options).DefaultCommitCharacters;
 
             // Reset a flag which means a snippet triggered by ? + Tab.
             // Set it later if met the condition.
@@ -132,22 +152,36 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             var sourceText = document.GetTextSynchronously(cancellationToken);
 
-            return ShouldTriggerCompletion(trigger, triggerLocation, sourceText, document, service, options)
-                ? new AsyncCompletionData.CompletionStartData(
+            return ShouldTriggerCompletion(
+                trigger,
+                triggerLocation,
+                sourceText,
+                document,
+                service,
+                options
+            )
+              ? new AsyncCompletionData.CompletionStartData(
                     participation: AsyncCompletionData.CompletionParticipation.ProvidesItems,
                     applicableToSpan: new SnapshotSpan(
                         triggerLocation.Snapshot,
-                        service.GetDefaultCompletionListSpan(sourceText, triggerLocation.Position).ToSpan()))
-                : AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
+                        service
+                            .GetDefaultCompletionListSpan(sourceText, triggerLocation.Position)
+                            .ToSpan()
+                    )
+                )
+              : AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
 
             // For telemetry reporting purpose
             static void CheckForExperimentStatus(ITextView textView, in CompletionOptions options)
             {
-                textView.Properties[TargetTypeFilterExperimentEnabled] = options.TargetTypedCompletionFilter;
+                textView.Properties[TargetTypeFilterExperimentEnabled] =
+                    options.TargetTypedCompletionFilter;
 
                 var importCompletionOptionValue = options.ShowItemsFromUnimportedNamespaces;
                 var importCompletionExperimentValue = options.TypeImportCompletion;
-                var isTypeImportEnababled = importCompletionOptionValue == true || (importCompletionOptionValue == null && importCompletionExperimentValue);
+                var isTypeImportEnababled =
+                    importCompletionOptionValue == true
+                    || (importCompletionOptionValue == null && importCompletionExperimentValue);
                 textView.Properties[TypeImportCompletionEnabled] = isTypeImportEnababled;
             }
         }
@@ -158,17 +192,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             SourceText sourceText,
             Document document,
             CompletionService completionService,
-            in CompletionOptions options)
+            in CompletionOptions options
+        )
         {
             // The trigger reason guarantees that user wants a completion.
-            if (trigger.Reason is AsyncCompletionData.CompletionTriggerReason.Invoke or
-                AsyncCompletionData.CompletionTriggerReason.InvokeAndCommitIfUnique)
+            if (
+                trigger.Reason
+                is AsyncCompletionData.CompletionTriggerReason.Invoke
+                    or AsyncCompletionData.CompletionTriggerReason.InvokeAndCommitIfUnique
+            )
             {
                 return true;
             }
 
             // Enter does not trigger completion.
-            if (trigger.Reason == AsyncCompletionData.CompletionTriggerReason.Insertion && trigger.Character == '\n')
+            if (
+                trigger.Reason == AsyncCompletionData.CompletionTriggerReason.Insertion
+                && trigger.Character == '\n'
+            )
             {
                 return false;
             }
@@ -176,15 +217,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             //The user may be trying to invoke snippets through question-tab.
             // We may provide a completion after that.
             // Otherwise, tab should not be a completion trigger.
-            if (trigger.Reason == AsyncCompletionData.CompletionTriggerReason.Insertion && trigger.Character == '\t')
+            if (
+                trigger.Reason == AsyncCompletionData.CompletionTriggerReason.Insertion
+                && trigger.Character == '\t'
+            )
             {
-                return TryInvokeSnippetCompletion(completionService, document, sourceText, triggerLocation.Position, options);
+                return TryInvokeSnippetCompletion(
+                    completionService,
+                    document,
+                    sourceText,
+                    triggerLocation.Position,
+                    options
+                );
             }
 
             var roslynTrigger = Helpers.GetRoslynTrigger(trigger, triggerLocation);
 
             // The completion service decides that user may want a completion.
-            if (completionService.ShouldTriggerCompletion(document.Project, document.Project.LanguageServices, sourceText, triggerLocation.Position, roslynTrigger, options))
+            if (
+                completionService.ShouldTriggerCompletion(
+                    document.Project,
+                    document.Project.LanguageServices,
+                    sourceText,
+                    triggerLocation.Position,
+                    roslynTrigger,
+                    options
+                )
+            )
             {
                 return true;
             }
@@ -193,7 +252,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         }
 
         private bool TryInvokeSnippetCompletion(
-            CompletionService completionService, Document document, SourceText text, int caretPoint, in CompletionOptions options)
+            CompletionService completionService,
+            Document document,
+            SourceText text,
+            int caretPoint,
+            in CompletionOptions options
+        )
         {
             var rules = completionService.GetRules(options);
             // Do not invoke snippet if the corresponding rule is not set in options.
@@ -205,18 +269,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             var syntaxFactsOpt = document.GetLanguageService<ISyntaxFactsService>();
             // Snippets are included if the user types: <quesiton><tab>
             // If at least one condition for snippets do not hold, bail out.
-            if (syntaxFactsOpt == null ||
-                caretPoint < 3 ||
-                text[caretPoint - 2] != '?' ||
-                !QuestionMarkIsPrecededByIdentifierAndWhitespace(text, caretPoint - 2, syntaxFactsOpt))
+            if (
+                syntaxFactsOpt == null
+                || caretPoint < 3
+                || text[caretPoint - 2] != '?'
+                || !QuestionMarkIsPrecededByIdentifierAndWhitespace(
+                    text,
+                    caretPoint - 2,
+                    syntaxFactsOpt
+                )
+            )
             {
                 return false;
             }
 
             // Because <question><tab> is actually a command to bring up snippets,
             // we delete the last <question> that was typed.
-            var textChange = new TextChange(TextSpan.FromBounds(caretPoint - 2, caretPoint), string.Empty);
-            document.Project.Solution.Workspace.ApplyTextChanges(document.Id, textChange, CancellationToken.None);
+            var textChange = new TextChange(
+                TextSpan.FromBounds(caretPoint - 2, caretPoint),
+                string.Empty
+            );
+            document.Project.Solution.Workspace.ApplyTextChanges(
+                document.Id,
+                textChange,
+                CancellationToken.None
+            );
 
             _snippetCompletionTriggeredIndirectly = true;
             return true;
@@ -227,12 +304,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             AsyncCompletionData.CompletionTrigger trigger,
             SnapshotPoint triggerLocation,
             SnapshotSpan applicableToSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (session is null)
                 throw new ArgumentNullException(nameof(session));
 
-            return GetCompletionContextWorkerAsync(session, trigger, triggerLocation, isExpanded: false, cancellationToken);
+            return GetCompletionContextWorkerAsync(
+                session,
+                trigger,
+                triggerLocation,
+                isExpanded: false,
+                cancellationToken
+            );
         }
 
         public async Task<AsyncCompletionData.CompletionContext> GetExpandedCompletionContextAsync(
@@ -240,12 +324,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             AsyncCompletionData.CompletionExpander expander,
             AsyncCompletionData.CompletionTrigger intialTrigger,
             SnapshotSpan applicableToSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We only want to provide expanded items for Roslyn's expander.
-            if (expander == FilterSet.Expander && session.Properties.TryGetProperty(ExpandedItemTriggerLocation, out SnapshotPoint initialTriggerLocation))
+            if (
+                expander == FilterSet.Expander
+                && session.Properties.TryGetProperty(
+                    ExpandedItemTriggerLocation,
+                    out SnapshotPoint initialTriggerLocation
+                )
+            )
             {
-                return await GetCompletionContextWorkerAsync(session, intialTrigger, initialTriggerLocation, isExpanded: true, cancellationToken).ConfigureAwait(false);
+                return await GetCompletionContextWorkerAsync(
+                        session,
+                        intialTrigger,
+                        initialTriggerLocation,
+                        isExpanded: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             return AsyncCompletionData.CompletionContext.Empty;
@@ -256,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             AsyncCompletionData.CompletionTrigger trigger,
             SnapshotPoint triggerLocation,
             bool isExpanded,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var document = triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
@@ -286,13 +385,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 };
             }
 
-            var (completionList, expandItemsAvailable) = await completionService.GetCompletionsInternalAsync(
-                document,
-                triggerLocation,
-                options,
-                roslynTrigger,
-                _roles,
-                cancellationToken).ConfigureAwait(false);
+            var (completionList, expandItemsAvailable) = await completionService
+                .GetCompletionsInternalAsync(
+                    document,
+                    triggerLocation,
+                    options,
+                    roslynTrigger,
+                    _roles,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             ImmutableArray<VSCompletionItem> items;
             AsyncCompletionData.SuggestionItemOptions? suggestionItemOptions;
@@ -315,12 +417,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
                 items = itemsBuilder.ToImmutableAndFree();
 
-                suggestionItemOptions = completionList.SuggestionModeItem != null
+                suggestionItemOptions =
+                    completionList.SuggestionModeItem != null
                         ? new AsyncCompletionData.SuggestionItemOptions(
-                            completionList.SuggestionModeItem.DisplayText,
-                            completionList.SuggestionModeItem.Properties.TryGetValue(Description, out var description)
+                              completionList.SuggestionModeItem.DisplayText,
+                              completionList.SuggestionModeItem.Properties.TryGetValue(
+                                  Description,
+                                  out var description
+                              )
                                 ? description
-                                : string.Empty)
+                                : string.Empty
+                          )
                         : null;
 
                 // Store around the span this completion list applies to.  We'll use this later
@@ -328,10 +435,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 // It's OK to overwrite this value when expanded items are requested.
                 session.Properties[CompletionListSpan] = completionList.Span;
 
-                // This is a code supporting original completion scenarios: 
+                // This is a code supporting original completion scenarios:
                 // Controller.Session_ComputeModel: if completionList.SuggestionModeItem != null, then suggestionMode = true
                 // If there are suggestionItemOptions, then later HandleNormalFiltering should set selection to SoftSelection.
-                if (!session.Properties.TryGetProperty(HasSuggestionItemOptions, out bool hasSuggestionItemOptionsBefore) || !hasSuggestionItemOptionsBefore)
+                if (
+                    !session.Properties.TryGetProperty(
+                        HasSuggestionItemOptions,
+                        out bool hasSuggestionItemOptionsBefore
+                    ) || !hasSuggestionItemOptionsBefore
+                )
                 {
                     session.Properties[HasSuggestionItemOptions] = suggestionItemOptions != null;
                 }
@@ -339,9 +451,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 var excludedCommitCharacters = GetExcludedCommitCharacters(completionList.Items);
                 if (excludedCommitCharacters.Length > 0)
                 {
-                    if (session.Properties.TryGetProperty(ExcludedCommitCharacters, out ImmutableArray<char> excludedCommitCharactersBefore))
+                    if (
+                        session.Properties.TryGetProperty(
+                            ExcludedCommitCharacters,
+                            out ImmutableArray<char> excludedCommitCharactersBefore
+                        )
+                    )
                     {
-                        excludedCommitCharacters = excludedCommitCharacters.Union(excludedCommitCharactersBefore).ToImmutableArray();
+                        excludedCommitCharacters = excludedCommitCharacters
+                            .Union(excludedCommitCharactersBefore)
+                            .ToImmutableArray();
                     }
 
                     session.Properties[ExcludedCommitCharacters] = excludedCommitCharacters;
@@ -363,20 +482,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 items,
                 suggestionItemOptions,
                 suggestionItemOptions == null
-                    ? AsyncCompletionData.InitialSelectionHint.RegularSelection
-                    : AsyncCompletionData.InitialSelectionHint.SoftSelection,
-                filterSet.GetFilterStatesInSet(addUnselectedExpander: expandItemsAvailable));
+                  ? AsyncCompletionData.InitialSelectionHint.RegularSelection
+                  : AsyncCompletionData.InitialSelectionHint.SoftSelection,
+                filterSet.GetFilterStatesInSet(addUnselectedExpander: expandItemsAvailable)
+            );
         }
 
-        public async Task<object?> GetDescriptionAsync(IAsyncCompletionSession session, VSCompletionItem item, CancellationToken cancellationToken)
+        public async Task<object?> GetDescriptionAsync(
+            IAsyncCompletionSession session,
+            VSCompletionItem item,
+            CancellationToken cancellationToken
+        )
         {
             if (session is null)
                 throw new ArgumentNullException(nameof(session));
             if (item is null)
                 throw new ArgumentNullException(nameof(item));
 
-            if (!item.Properties.TryGetProperty(RoslynItem, out RoslynCompletionItem roslynItem) ||
-                !item.Properties.TryGetProperty(TriggerLocation, out SnapshotPoint triggerLocation))
+            if (
+                !item.Properties.TryGetProperty(RoslynItem, out RoslynCompletionItem roslynItem)
+                || !item.Properties.TryGetProperty(
+                    TriggerLocation,
+                    out SnapshotPoint triggerLocation
+                )
+            )
             {
                 return null;
             }
@@ -391,34 +520,57 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             var options = CompletionOptions.From(document.Project);
             var displayOptions = SymbolDescriptionOptions.From(document.Project);
-            var description = await service.GetDescriptionAsync(document, roslynItem, options, displayOptions, cancellationToken).ConfigureAwait(false);
+            var description = await service
+                .GetDescriptionAsync(
+                    document,
+                    roslynItem,
+                    options,
+                    displayOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (description == null)
                 return null;
 
             var context = new IntellisenseQuickInfoBuilderContext(
-                document, ThreadingContext, _operationExecutor, _asyncListener, _streamingPresenter);
+                document,
+                ThreadingContext,
+                _operationExecutor,
+                _asyncListener,
+                _streamingPresenter
+            );
 
-            var elements = IntelliSense.Helpers.BuildInteractiveTextElements(description.TaggedParts, context).ToArray();
+            var elements = IntelliSense.Helpers
+                .BuildInteractiveTextElements(description.TaggedParts, context)
+                .ToArray();
             if (elements.Length == 0)
                 return new ClassifiedTextElement();
 
             if (elements.Length == 1)
                 return elements[0];
 
-            return new ContainerElement(ContainerElementStyle.Stacked | ContainerElementStyle.VerticalPadding, elements);
+            return new ContainerElement(
+                ContainerElementStyle.Stacked | ContainerElementStyle.VerticalPadding,
+                elements
+            );
         }
 
         /// <summary>
         /// We'd like to cache VS Completion item directly to avoid allocation completely. However it holds references
-        /// to transient objects, which would cause memory leak (among other potential issues) if cached. 
-        /// So as a compromise,  we cache data that can be calculated from Roslyn completion item to avoid repeated 
+        /// to transient objects, which would cause memory leak (among other potential issues) if cached.
+        /// So as a compromise,  we cache data that can be calculated from Roslyn completion item to avoid repeated
         /// calculation cost for cached Roslyn completion items.
         /// </summary>
         private readonly struct VSCompletionItemData
         {
             public VSCompletionItemData(
-                string displayText, ImageElement icon, ImmutableArray<AsyncCompletionData.CompletionFilter> filters,
-                int filterSetData, ImmutableArray<ImageElement> attributeIcons, string insertionText)
+                string displayText,
+                ImageElement icon,
+                ImmutableArray<AsyncCompletionData.CompletionFilter> filters,
+                int filterSetData,
+                ImmutableArray<ImageElement> attributeIcons,
+                string insertionText
+            )
             {
                 DisplayText = displayText;
                 Icon = icon;
@@ -448,11 +600,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             Document document,
             RoslynCompletionItem roslynItem,
             FilterSet filterSet,
-            SnapshotPoint initialTriggerLocation)
+            SnapshotPoint initialTriggerLocation
+        )
         {
             VSCompletionItemData itemData;
 
-            if (roslynItem.Flags.IsCached() && s_roslynItemToVsItemData.TryGetValue(roslynItem, out var boxedItemData))
+            if (
+                roslynItem.Flags.IsCached()
+                && s_roslynItemToVsItemData.TryGetValue(roslynItem, out var boxedItemData)
+            )
             {
                 itemData = boxedItemData.Value;
                 filterSet.CombineData(itemData.FilterSetData);
@@ -470,22 +626,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     insertionText = roslynItem.DisplayText;
                 }
 
-                var supportedPlatforms = SymbolCompletionItem.GetSupportedPlatforms(roslynItem, document.Project.Solution);
-                var attributeImages = supportedPlatforms != null ? s_WarningImageAttributeImagesArray : ImmutableArray<ImageElement>.Empty;
+                var supportedPlatforms = SymbolCompletionItem.GetSupportedPlatforms(
+                    roslynItem,
+                    document.Project.Solution
+                );
+                var attributeImages =
+                    supportedPlatforms != null
+                        ? s_WarningImageAttributeImagesArray
+                        : ImmutableArray<ImageElement>.Empty;
 
                 itemData = new VSCompletionItemData(
                     displayText: roslynItem.GetEntireDisplayText(),
-                    icon: new ImageElement(new ImageId(imageId.Guid, imageId.Id), roslynItem.DisplayText),
+                    icon: new ImageElement(
+                        new ImageId(imageId.Guid, imageId.Id),
+                        roslynItem.DisplayText
+                    ),
                     filters: filters,
                     filterSetData: filterSetData,
                     attributeIcons: attributeImages,
-                    insertionText: insertionText);
+                    insertionText: insertionText
+                );
 
                 // It doesn't make sense to cache VS item data for those Roslyn items created from scratch for each session,
                 // since CWT uses object identity for comparison.
                 if (roslynItem.Flags.IsCached())
                 {
-                    s_roslynItemToVsItemData.Add(roslynItem, new StrongBox<VSCompletionItemData>(itemData));
+                    s_roslynItemToVsItemData.Add(
+                        roslynItem,
+                        new StrongBox<VSCompletionItemData>(itemData)
+                    );
                 }
             }
 
@@ -499,7 +668,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 sortText: roslynItem.SortText,
                 filterText: roslynItem.FilterText,
                 automationText: roslynItem.AutomationText ?? roslynItem.DisplayText,
-                attributeIcons: itemData.AttributeIcons);
+                attributeIcons: itemData.AttributeIcons
+            );
 
             item.Properties.AddProperty(RoslynItem, roslynItem);
             item.Properties.AddProperty(TriggerLocation, initialTriggerLocation);
@@ -507,7 +677,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             return item;
         }
 
-        private static ImmutableArray<char> GetExcludedCommitCharacters(ImmutableArray<RoslynCompletionItem> roslynItems)
+        private static ImmutableArray<char> GetExcludedCommitCharacters(
+            ImmutableArray<RoslynCompletionItem> roslynItems
+        )
         {
             var hashSet = new HashSet<char>();
             foreach (var roslynItem in roslynItems)
@@ -528,7 +700,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         }
 
         internal static bool QuestionMarkIsPrecededByIdentifierAndWhitespace(
-            SourceText text, int questionPosition, ISyntaxFactsService syntaxFacts)
+            SourceText text,
+            int questionPosition,
+            ISyntaxFactsService syntaxFacts
+        )
         {
             var startOfLine = text.Lines.GetLineFromPosition(questionPosition).Start;
 
@@ -548,7 +723,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 return false;
             }
 
-            while (current < questionPosition && syntaxFacts.IsIdentifierPartCharacter(text[current]))
+            while (
+                current < questionPosition && syntaxFacts.IsIdentifierPartCharacter(text[current])
+            )
             {
                 current++;
             }

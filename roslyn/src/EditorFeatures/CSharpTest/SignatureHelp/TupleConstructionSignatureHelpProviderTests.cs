@@ -15,22 +15,30 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
 {
-    public class TupleConstructionSignatureHelpProviderTests : AbstractCSharpSignatureHelpProviderTests
+    public class TupleConstructionSignatureHelpProviderTests
+        : AbstractCSharpSignatureHelpProviderTests
     {
-        internal override Type GetSignatureHelpProviderType()
-            => typeof(TupleConstructionSignatureHelpProvider);
+        internal override Type GetSignatureHelpProviderType() =>
+            typeof(TupleConstructionSignatureHelpProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task InvocationAfterOpenParen()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int, int) y = [|($$
 |]}";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int, int)", currentParameterIndex: 0, parameterDocumentation: ""));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "(int, int)",
+                    currentParameterIndex: 0,
+                    parameterDocumentation: ""
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -38,14 +46,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task InvocationWithNullableReferenceTypes()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (string?, string) y = [|($$
 |]}";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(string?, string)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(string?, string)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -54,7 +65,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task TestMissingTupleElement()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -64,7 +76,9 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(object a, object)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(object a, object)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -72,14 +86,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task InvocationAfterOpenParen2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int, int) y = [|($$)|]
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int, int)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(int, int)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -87,14 +104,21 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task InvocationAfterComma1()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int, int) y = [|(1,$$
 |]}";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int, int)", currentParameterIndex: 1, parameterDocumentation: ""));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "(int, int)",
+                    currentParameterIndex: 1,
+                    parameterDocumentation: ""
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -102,14 +126,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task InvocationAfterComma2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int, int) y = [|(1,$$)|]
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int, int)", currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(int, int)", currentParameterIndex: 1)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -117,7 +144,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task ParameterIndexWithNameTyped()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int a, int b) y = [|(b: $$
@@ -125,25 +153,33 @@ class C
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
 
-            // currentParameterIndex only considers the position in the argument list 
+            // currentParameterIndex only considers the position in the argument list
             // and not names, hence passing 0 even though the controller will highlight
             // "int b" in the actual display
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int a, int b)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(int a, int b)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
 
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/14277"), Trait(Traits.Feature, Traits.Features.SignatureHelp)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/14277"),
+            Trait(Traits.Feature, Traits.Features.SignatureHelp)
+        ]
         public async Task NestedTuple()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int a, (int b, int c)) y = [|(1, ($$
 |]}";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int b, int c)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(int b, int c)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -151,14 +187,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task NestedTupleWhenNotInferred()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int, object) y = [|(1, ($$
 |]}";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int, object)", currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(int, object)", currentParameterIndex: 1)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -166,14 +205,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task NestedTupleWhenNotInferred2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int, object) y = [|(1, (2,$$
 |]}";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int, object)", currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(int, object)", currentParameterIndex: 1)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -181,14 +223,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task NestedTupleWhenNotInferred3()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (int, object) y = [|(1, ($$
 |]}";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int, object)", currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(int, object)", currentParameterIndex: 1)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -196,14 +241,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task NestedTupleWhenNotInferred4()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     (object, object) y = [|(($$
 |]}";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(object, object)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(object, object)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -211,7 +259,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task MultipleOverloads()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -224,8 +273,12 @@ class Program
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(int, int)", currentParameterIndex: 0));
-            expectedOrderedItems.Add(new SignatureHelpTestItem("(string, string)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(int, int)", currentParameterIndex: 0)
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("(string, string)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -234,7 +287,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task DoNotCrashInLinkedFile()
         {
-            var markup = @"<Workspace>
+            var markup =
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Proj1"" PreprocessorSymbols=""GOO"">
         <Document FilePath=""SourceDocument""><![CDATA[
 class C
@@ -256,7 +310,10 @@ class C
         <Document IsLinkFile=""true"" LinkAssemblyName=""Proj1"" LinkFilePath=""SourceDocument""/>
     </Project>
 </Workspace>";
-            var expectedDescription = new SignatureHelpTestItem($"(int, string)", currentParameterIndex: 0);
+            var expectedDescription = new SignatureHelpTestItem(
+                $"(int, string)",
+                currentParameterIndex: 0
+            );
             await VerifyItemWithReferenceWorkerAsync(markup, new[] { expectedDescription }, false);
         }
     }

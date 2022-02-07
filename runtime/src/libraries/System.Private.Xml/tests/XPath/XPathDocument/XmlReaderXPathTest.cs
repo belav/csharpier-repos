@@ -7,7 +7,8 @@ namespace XPathTests.Common
 {
     public static partial class Utils
     {
-        private static readonly ICreateNavigator _navigatorCreator = new CreateNavigatorFromXmlReader();
+        private static readonly ICreateNavigator _navigatorCreator =
+            new CreateNavigatorFromXmlReader();
         public static readonly string ResourceFilesPath = "System.Xml.XPath.Tests.TestData.";
     }
 }

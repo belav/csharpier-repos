@@ -15,7 +15,11 @@ internal class WebHostLifetime : IDisposable
     private bool _disposed;
     private bool _exitedGracefully;
 
-    public WebHostLifetime(CancellationTokenSource cts, ManualResetEventSlim resetEvent, string shutdownMessage)
+    public WebHostLifetime(
+        CancellationTokenSource cts,
+        ManualResetEventSlim resetEvent,
+        string shutdownMessage
+    )
     {
         _cts = cts;
         _resetEvent = resetEvent;

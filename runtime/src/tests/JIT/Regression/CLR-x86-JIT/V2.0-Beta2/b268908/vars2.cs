@@ -14,7 +14,6 @@ using System.Runtime.CompilerServices;
 #pragma warning disable 219
 public class Test_vars2
 {
-
     public static int Main()
     {
         try
@@ -32805,10 +32804,16 @@ public class Test_vars2
         long a32769 = 32769;
         long a32770 = 32770;
 
-        Console.WriteLine("a0 {0} a1 {1} a2 {2} a3 {3} a4 {4} a32770 {5}", a0, a1, a2, a3, a4, a32770);
+        Console.WriteLine(
+            "a0 {0} a1 {1} a2 {2} a3 {3} a4 {4} a32770 {5}",
+            a0,
+            a1,
+            a2,
+            a3,
+            a4,
+            a32770
+        );
         return 100;
     }
-
 }
 #pragma warning restore 219
-

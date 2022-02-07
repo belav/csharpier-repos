@@ -19,14 +19,20 @@ namespace Interop.FunctionalTests.Http3;
 
 public static class Http3Helpers
 {
-    public static HttpMessageInvoker CreateClient(TimeSpan? idleTimeout = null, TimeSpan? expect100ContinueTimeout = null, bool includeClientCert = false)
+    public static HttpMessageInvoker CreateClient(
+        TimeSpan? idleTimeout = null,
+        TimeSpan? expect100ContinueTimeout = null,
+        bool includeClientCert = false
+    )
     {
         var handler = new SocketsHttpHandler();
         handler.SslOptions = new System.Net.Security.SslClientAuthenticationOptions
         {
             RemoteCertificateValidationCallback = (_, __, ___, ____) => true,
             TargetHost = "targethost",
-            ClientCertificates = !includeClientCert ? null : new X509CertificateCollection() { TestResources.GetTestCertificate() },
+            ClientCertificates = !includeClientCert
+                ? null
+                : new X509CertificateCollection() { TestResources.GetTestCertificate() },
         };
 
         if (expect100ContinueTimeout != null)
@@ -42,44 +48,62 @@ public static class Http3Helpers
         return new HttpMessageInvoker(handler);
     }
 
-    public static IHostBuilder CreateHostBuilder(Action<IServiceCollection> configureServices, RequestDelegate requestDelegate, HttpProtocols? protocol = null, Action<KestrelServerOptions> configureKestrel = null)
+    public static IHostBuilder CreateHostBuilder(
+        Action<IServiceCollection> configureServices,
+        RequestDelegate requestDelegate,
+        HttpProtocols? protocol = null,
+        Action<KestrelServerOptions> configureKestrel = null
+    )
     {
         return new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
-                    {
-                        if (configureKestrel == null)
-                        {
-                            o.Listen(IPAddress.Parse("127.0.0.1"), 0, listenOptions =>
-                            {
-                                listenOptions.Protocols = protocol ?? HttpProtocols.Http3;
-                                listenOptions.UseHttps();
-                            });
-                        }
-                        else
-                        {
-                            configureKestrel(o);
-                        }
-                    })
-                    .Configure(app =>
-                    {
-                        app.Run(requestDelegate);
-                    });
-            })
-            .ConfigureServices(configureServices)
-            .ConfigureHostOptions(o =>
-            {
-                if (Debugger.IsAttached)
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
+                    webHostBuilder
+                        .UseKestrel(
+                            o =>
+                            {
+                                if (configureKestrel == null)
+                                {
+                                    o.Listen(
+                                        IPAddress.Parse("127.0.0.1"),
+                                        0,
+                                        listenOptions =>
+                                        {
+                                            listenOptions.Protocols =
+                                                protocol ?? HttpProtocols.Http3;
+                                            listenOptions.UseHttps();
+                                        }
+                                    );
+                                }
+                                else
+                                {
+                                    configureKestrel(o);
+                                }
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(requestDelegate);
+                            }
+                        );
+                }
+            )
+            .ConfigureServices(configureServices)
+            .ConfigureHostOptions(
+                o =>
+                {
+                    if (Debugger.IsAttached)
+                    {
                         // Avoid timeout while debugging.
                         o.ShutdownTimeout = TimeSpan.FromHours(1);
+                    }
+                    else
+                    {
+                        o.ShutdownTimeout = TimeSpan.FromSeconds(1);
+                    }
                 }
-                else
-                {
-                    o.ShutdownTimeout = TimeSpan.FromSeconds(1);
-                }
-            });
+            );
     }
 }

@@ -43,10 +43,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             _unknownSingleValueResponseHeaders.Append("Four", "Value");
 
             _unknownMultipleValueResponseHeaders = new HttpResponseHeaders();
-            _unknownMultipleValueResponseHeaders.Append("One", new StringValues(new[] { "One", "Two" }));
-            _unknownMultipleValueResponseHeaders.Append("Two", new StringValues(new[] { "One", "Two" }));
-            _unknownMultipleValueResponseHeaders.Append("Three", new StringValues(new[] { "One", "Two" }));
-            _unknownMultipleValueResponseHeaders.Append("Four", new StringValues(new[] { "One", "Two" }));
+            _unknownMultipleValueResponseHeaders.Append(
+                "One",
+                new StringValues(new[] { "One", "Two" })
+            );
+            _unknownMultipleValueResponseHeaders.Append(
+                "Two",
+                new StringValues(new[] { "One", "Two" })
+            );
+            _unknownMultipleValueResponseHeaders.Append(
+                "Three",
+                new StringValues(new[] { "One", "Two" })
+            );
+            _unknownMultipleValueResponseHeaders.Append(
+                "Four",
+                new StringValues(new[] { "One", "Two" })
+            );
 
             _enumerator = new Http2HeadersEnumerator();
         }
@@ -56,9 +68,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             _enumerator.Initialize(_knownSingleValueResponseHeaders);
 
-            if (_enumerator.MoveNext())
-            {
-            }
+            if (_enumerator.MoveNext()) { }
         }
 
         [Benchmark]
@@ -66,9 +76,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             _enumerator.Initialize(_knownMultipleValueResponseHeaders);
 
-            if (_enumerator.MoveNext())
-            {
-            }
+            if (_enumerator.MoveNext()) { }
         }
 
         [Benchmark]
@@ -76,9 +84,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             _enumerator.Initialize(_unknownSingleValueResponseHeaders);
 
-            if (_enumerator.MoveNext())
-            {
-            }
+            if (_enumerator.MoveNext()) { }
         }
 
         [Benchmark]
@@ -86,9 +92,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             _enumerator.Initialize(_unknownMultipleValueResponseHeaders);
 
-            if (_enumerator.MoveNext())
-            {
-            }
+            if (_enumerator.MoveNext()) { }
         }
     }
 }

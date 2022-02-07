@@ -14,7 +14,10 @@ namespace System.Drawing.Tests
         {
             yield return Brush(() => SystemBrushes.ActiveBorder, SystemColors.ActiveBorder);
             yield return Brush(() => SystemBrushes.ActiveCaption, SystemColors.ActiveCaption);
-            yield return Brush(() => SystemBrushes.ActiveCaptionText, SystemColors.ActiveCaptionText);
+            yield return Brush(
+                () => SystemBrushes.ActiveCaptionText,
+                SystemColors.ActiveCaptionText
+            );
             yield return Brush(() => SystemBrushes.AppWorkspace, SystemColors.AppWorkspace);
             yield return Brush(() => SystemBrushes.ButtonFace, SystemColors.ButtonFace);
             yield return Brush(() => SystemBrushes.ButtonHighlight, SystemColors.ButtonHighlight);
@@ -23,18 +26,30 @@ namespace System.Drawing.Tests
             yield return Brush(() => SystemBrushes.ControlDark, SystemColors.ControlDark);
             yield return Brush(() => SystemBrushes.ControlDarkDark, SystemColors.ControlDarkDark);
             yield return Brush(() => SystemBrushes.ControlLight, SystemColors.ControlLight);
-            yield return Brush(() => SystemBrushes.ControlLightLight, SystemColors.ControlLightLight);
+            yield return Brush(
+                () => SystemBrushes.ControlLightLight,
+                SystemColors.ControlLightLight
+            );
             yield return Brush(() => SystemBrushes.ControlText, SystemColors.ControlText);
             yield return Brush(() => SystemBrushes.Desktop, SystemColors.Desktop);
-            yield return Brush(() => SystemBrushes.GradientActiveCaption, SystemColors.GradientActiveCaption);
-            yield return Brush(() => SystemBrushes.GradientInactiveCaption, SystemColors.GradientInactiveCaption);
+            yield return Brush(
+                () => SystemBrushes.GradientActiveCaption,
+                SystemColors.GradientActiveCaption
+            );
+            yield return Brush(
+                () => SystemBrushes.GradientInactiveCaption,
+                SystemColors.GradientInactiveCaption
+            );
             yield return Brush(() => SystemBrushes.GrayText, SystemColors.GrayText);
             yield return Brush(() => SystemBrushes.Highlight, SystemColors.Highlight);
             yield return Brush(() => SystemBrushes.HighlightText, SystemColors.HighlightText);
             yield return Brush(() => SystemBrushes.HotTrack, SystemColors.HotTrack);
             yield return Brush(() => SystemBrushes.InactiveBorder, SystemColors.InactiveBorder);
             yield return Brush(() => SystemBrushes.InactiveCaption, SystemColors.InactiveCaption);
-            yield return Brush(() => SystemBrushes.InactiveCaptionText, SystemColors.InactiveCaptionText);
+            yield return Brush(
+                () => SystemBrushes.InactiveCaptionText,
+                SystemColors.InactiveCaptionText
+            );
             yield return Brush(() => SystemBrushes.Info, SystemColors.Info);
             yield return Brush(() => SystemBrushes.InfoText, SystemColors.InfoText);
             yield return Brush(() => SystemBrushes.Menu, SystemColors.Menu);
@@ -47,7 +62,8 @@ namespace System.Drawing.Tests
             yield return Brush(() => SystemBrushes.WindowText, SystemColors.WindowText);
         }
 
-        public static object[] Brush(Func<Brush> getBrush, Color expectedColor) => new object[] { getBrush, expectedColor };
+        public static object[] Brush(Func<Brush> getBrush, Color expectedColor) =>
+            new object[] { getBrush, expectedColor };
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(SystemBrushes_TestData))]
@@ -63,7 +79,10 @@ namespace System.Drawing.Tests
         [Fact]
         public void FromSystemColor_NotSystemColor_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => SystemBrushes.FromSystemColor(Color.Blue));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => SystemBrushes.FromSystemColor(Color.Blue)
+            );
         }
     }
 }

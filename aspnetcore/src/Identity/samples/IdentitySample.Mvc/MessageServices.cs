@@ -18,5 +18,4 @@ public static class MessageServices
         // Plug in your sms service
         return Task.FromResult(0);
     }
-
 }

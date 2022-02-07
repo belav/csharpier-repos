@@ -249,7 +249,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// For signed integer types return number of bits for their representation minus 1. 
+        /// For signed integer types return number of bits for their representation minus 1.
         /// I.e. 7 for Int8, 31 for Int32, etc.
         /// Used for checking loop end condition for VB for loop.
         /// </summary>

@@ -24,6 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         void ProcessForeignKeyNullNavigationSet(
             IConventionForeignKeyBuilder relationshipBuilder,
             bool pointsToPrincipal,
-            IConventionContext<IConventionNavigation> context);
+            IConventionContext<IConventionNavigation> context
+        );
     }
 }

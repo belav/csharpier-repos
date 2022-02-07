@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     using Workspace = Microsoft.CodeAnalysis.Workspace;
 
     [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
-    internal abstract partial class AbstractProject : ForegroundThreadAffinitizedObject, IVisualStudioHostProject
+    internal abstract partial class AbstractProject
+        : ForegroundThreadAffinitizedObject,
+          IVisualStudioHostProject
     {
         internal const string ProjectGuidPropertyName = "ProjectGuid";
 
@@ -45,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             VisualStudioWorkspaceImpl workspace,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSourceOpt,
 #pragma warning disable IDE0060 // Remove unused parameter - not used, but left for compat
-            ICommandLineParserService commandLineParserServiceOpt = null)
+            ICommandLineParserService commandLineParserServiceOpt = null
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
             : base(projectTracker.ThreadingContext)
         {
@@ -55,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ProjectTracker = projectTracker;
             _visualStudioWorkspace = workspace;
 
-            this.DisplayName = hierarchy != null && hierarchy.TryGetName(out var name) ? name : projectSystemName;
+            this.DisplayName =
+                hierarchy != null && hierarchy.TryGetName(out var name) ? name : projectSystemName;
 
             ProjectSystemName = projectSystemName;
             HostDiagnosticUpdateSource = hostDiagnosticUpdateSourceOpt;
@@ -90,8 +94,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         // the method.
         internal string BinOutputPath => GetOutputFilePath();
 
-        protected virtual string GetOutputFilePath()
-            => VisualStudioProject.OutputFilePath;
+        protected virtual string GetOutputFilePath() => VisualStudioProject.OutputFilePath;
 
         protected IVsReportExternalErrors ExternalErrorReporter { get; }
 
@@ -111,7 +114,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         /// <summary>
         /// Guid of the project
-        /// 
+        ///
         /// it is not readonly since it can be changed while loading project
         /// </summary>
         public Guid Guid { get; protected set; }
@@ -196,11 +199,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         }
 
         [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
-        protected void UpdateProjectDisplayName(string displayName)
-            => this.DisplayName = displayName;
+        protected void UpdateProjectDisplayName(string displayName) =>
+            this.DisplayName = displayName;
 
         [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
-        internal void AddDocument(IVisualStudioHostDocument document, bool isCurrentContext, bool hookupHandlers)
+        internal void AddDocument(
+            IVisualStudioHostDocument document,
+            bool isCurrentContext,
+            bool hookupHandlers
+        )
         {
             var shimDocument = (DocumentProvider.ShimDocument)document;
 
@@ -213,7 +220,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var containedDocument = ContainedDocument.TryGetContainedDocument(document.Id);
             if (containedDocument != null)
             {
-                VisualStudioProject.RemoveSourceTextContainer(containedDocument.SubjectBuffer.AsTextContainer());
+                VisualStudioProject.RemoveSourceTextContainer(
+                    containedDocument.SubjectBuffer.AsTextContainer()
+                );
                 containedDocument.Dispose();
             }
             else
@@ -226,7 +235,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
         internal IVisualStudioHostDocument GetCurrentDocumentFromPath(string filePath)
         {
-            var id = _visualStudioWorkspace.CurrentSolution.GetDocumentIdsWithFilePath(filePath).FirstOrDefault(d => d.ProjectId == Id);
+            var id = _visualStudioWorkspace.CurrentSolution
+                .GetDocumentIdsWithFilePath(filePath)
+                .FirstOrDefault(d => d.ProjectId == Id);
 
             if (id != null)
             {
@@ -241,8 +252,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
         internal ImmutableArray<IVisualStudioHostDocument> GetCurrentDocuments()
         {
-            return _visualStudioWorkspace.CurrentSolution.GetProject(Id).Documents.SelectAsArray(
-                d => (IVisualStudioHostDocument)new DocumentProvider.ShimDocument(this, d.Id, d.FilePath, d.SourceCodeKind));
+            return _visualStudioWorkspace.CurrentSolution
+                .GetProject(Id)
+                .Documents.SelectAsArray(
+                    d =>
+                        (IVisualStudioHostDocument)new DocumentProvider.ShimDocument(
+                            this,
+                            d.Id,
+                            d.FilePath,
+                            d.SourceCodeKind
+                        )
+                );
         }
     }
 }

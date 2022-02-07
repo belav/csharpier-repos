@@ -18,7 +18,9 @@ public class FunctionalTestBase : VerifiableLoggedTest
         _globalExpectedErrorsFilter = (writeContext) => false;
     }
 
-    private Func<WriteContext, bool> ResolveExpectedErrorsFilter(Func<WriteContext, bool> expectedErrorsFilter)
+    private Func<WriteContext, bool> ResolveExpectedErrorsFilter(
+        Func<WriteContext, bool> expectedErrorsFilter
+    )
     {
         if (expectedErrorsFilter == null)
         {
@@ -36,7 +38,9 @@ public class FunctionalTestBase : VerifiableLoggedTest
         };
     }
 
-    public Task<InProcessTestServer<T>> StartServer<T>(Func<WriteContext, bool> expectedErrorsFilter = null) where T : class
+    public Task<InProcessTestServer<T>> StartServer<T>(
+        Func<WriteContext, bool> expectedErrorsFilter = null
+    ) where T : class
     {
         var disposable = base.StartVerifiableLog(ResolveExpectedErrorsFilter(expectedErrorsFilter));
         return InProcessTestServer<T>.StartServer(LoggerFactory, disposable);
