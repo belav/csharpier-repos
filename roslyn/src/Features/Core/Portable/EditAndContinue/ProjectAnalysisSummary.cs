@@ -11,20 +11,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         NoChanges,
 
+
         /// <summary>
         /// Project contains compilation errors that block EnC analysis.
         /// </summary>
         CompilationErrors,
+
 
         /// <summary>
         /// Project contains rude edits.
         /// </summary>
         RudeEdits,
 
+
         /// <summary>
         /// The project only changed in comments, whitespaces, etc. that don't require compilation.
         /// </summary>
         ValidInsignificantChanges,
+
 
         /// <summary>
         /// The project contains valid changes that require application of a delta.

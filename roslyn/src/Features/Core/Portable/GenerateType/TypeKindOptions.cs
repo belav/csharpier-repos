@@ -19,18 +19,23 @@ namespace Microsoft.CodeAnalysis.GenerateType
         Delegate = 0x10,
         Module = 0x20,
 
+
         // Enables class, struct, interface, enum and delegate
         AllOptions = Class | Structure | Interface | Enum | Delegate,
 
+
         // Only class is valid with Attribute
         Attribute = Class,
+
 
         // Only class, struct and interface are allowed. No Enums
         BaseList = Class | Interface,
         AllOptionsWithModule = AllOptions | Module,
 
+
         // Only Interface and Delegate cannot be part of the member access with Namespace as Left expression
         MemberAccessWithNamespace = Class | Structure | Enum | Module,
+
 
         // Enum and Modules are incompatible with Generics
         GenericInCompatibleTypes = Enum | Module

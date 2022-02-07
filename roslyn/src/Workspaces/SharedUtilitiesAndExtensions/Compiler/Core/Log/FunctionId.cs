@@ -31,6 +31,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Diagnostics_RemoveProject = 18,
         Diagnostics_DocumentClose = 19,
 
+
         // add new values after this
         Run_Environment = 20,
         Run_Environment_Options = 21,
@@ -77,6 +78,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Workspace_ApplyChanges = 62,
         Workspace_TryGetDocument = 63,
         Workspace_TryGetDocumentFromInProgressSolution = 64,
+
         // obsolete: Workspace_Solution_LinkedFileDiffMergingSession = 65,
         // obsolete: Workspace_Solution_LinkedFileDiffMergingSession_LinkedFileGroup = 66,
         Workspace_Solution_Info = 67,
@@ -225,6 +227,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         PullMembersUpWarning_UserProceedToFinish = 211,
         PullMembersUpWarning_UserGoBack = 212,
 
+
         // currently no-one uses these
         SmartTags_RefreshSession = 213,
         SmartTags_SmartTagInitializeFixes = 214,
@@ -246,6 +249,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         DiagnosticAnalyzerService_Analyzers = 230,
         DiagnosticAnalyzerDriver_AnalyzerCrash = 231,
         DiagnosticAnalyzerDriver_AnalyzerTypeCount = 232,
+
         // obsolete: PersistedSemanticVersion_Info = 233,
         StorageDatabase_Exceptions = 234,
         WorkCoordinator_ShutdownTimeout = 235,
@@ -291,12 +295,14 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         CodefixInfobar_ErrorIgnored = 275,
         Refactoring_NamingStyle = 276,
 
+
         // Caches
         SymbolTreeInfo_ExceptionInCacheRead = 277,
         SpellChecker_ExceptionInCacheRead = 278,
         BKTree_ExceptionInCacheRead = 279,
         IntellisenseBuild_Failed = 280,
         FileTextLoader_FileLengthThresholdExceeded = 281,
+
 
         // Generic performance measurement action IDs
         MeasurePerformance_StartAction = 282,
@@ -313,10 +319,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         CodeAnalysisService_GetTodoCommentsAsync = 293,
         CodeAnalysisService_GetDesignerAttributesAsync = 294,
         ServiceHubRemoteHostClient_CreateAsync = 295,
+
         // obsolete: PinnedRemotableDataScope_GetRemotableData = 296,
 
         RemoteHost_Connect = 297,
         RemoteHost_Disconnect = 298,
+
 
         // obsolete: RemoteHostClientService_AddGlobalAssetsAsync = 299,
         // obsolete: RemoteHostClientService_RemoveGlobalAssets = 300,
@@ -324,6 +332,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         // obsolete: RemoteHostClientService_Restarted = 302,
 
         RemoteHostService_SynchronizePrimaryWorkspaceAsync = 303,
+
         // obsolete: RemoteHostService_SynchronizeGlobalAssetsAsync = 304,
 
         AssetStorage_CleanAssets = 305,
@@ -340,6 +349,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         ProjectState_ComputeChecksumsAsync = 316,
         DocumentState_ComputeChecksumsAsync = 317,
 
+
         // obsolete: SolutionSynchronizationService_GetRemotableData = 318,
         // obsolete: SolutionSynchronizationServiceFactory_CreatePinnedRemotableDataScopeAsync = 319,
 
@@ -349,11 +359,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         SolutionService_UpdatePrimaryWorkspaceAsync = 323,
         RemoteHostService_GetAssetsAsync = 324,
 
+
         // obsolete: CompilationService_GetCompilationAsync = 325,
         SolutionCreator_AssetDifferences = 326,
         Extension_InfoBar = 327,
         FxCopAnalyzersInstall = 328,
         AssetStorage_ForceGC = 329,
+
         // obsolete: RemoteHost_Bitness = 330,
         Intellisense_Completion = 331,
         MetadataOnlyImage_EmitFailure = 332,
@@ -363,6 +375,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Diagnostics_BadAnalyzer = 336,
         CodeAnalysisService_ReportAnalyzerPerformance = 337,
         PerformanceTrackerService_AddSnapshot = 338,
+
         // obsolete: AbstractProject_SetIntelliSenseBuild = 339,
         // obsolete: AbstractProject_Created = 340,
         // obsolete: AbstractProject_PushedToWorkspace = 341,
@@ -372,6 +385,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         RemoteHostService_SynchronizeTextAsync = 345,
         SymbolFinder_Solution_Pattern_FindSourceDeclarationsAsync = 346,
         SymbolFinder_Project_Pattern_FindSourceDeclarationsAsync = 347,
+
         // obsolete: Intellisense_Completion_Commit = 348,
 
         CodeCleanupInfobar_BarDisplayed = 349,
@@ -401,6 +415,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         RemoteHostService_IsExperimentEnabledAsync = 373,
         PartialLoad_FullyLoaded = 374,
         Liveshare_UnknownCodeAction = 375,
+
         // obsolete: Liveshare_LexicalClassifications = 376,
         // obsolete: Liveshare_SyntacticClassifications = 377,
         // obsolete: Liveshare_SyntacticTagger = 378,
@@ -422,12 +437,14 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         DependentTypeFinder_FindAndCacheDerivedInterfacesAsync = 431,
         DependentTypeFinder_FindAndCacheImplementingTypesAsync = 432,
         RemoteSemanticClassificationCacheService_ExceptionInCacheRead = 440,
+
         // obsolete: FeatureNotAvailable = 441,
 
         LSPCompletion_MissingLSPCompletionTriggerKind = 450,
         LSPCompletion_MissingLSPCompletionInvokeKind = 451,
         Workspace_Project_CompilationThrownAway = 460,
         CommandHandler_Paste_ImportsOnPaste = 470,
+
 
         // Superseded by LSP_FindDocumentInWorkspace
         // obsolete: FindDocumentInWorkspace = 480,

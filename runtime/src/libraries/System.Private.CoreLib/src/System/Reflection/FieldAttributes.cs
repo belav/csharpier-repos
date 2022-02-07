@@ -16,6 +16,7 @@ namespace System.Reflection
         Family = 0x0004, // Accessible only by type and sub-types.
         FamORAssem = 0x0005, // Accessibly by sub-types anywhere, plus anyone in assembly.
         Public = 0x0006, // Accessibly by anyone who has visibility to this scope.
+
         // end member access mask
 
         // field contract attributes.
@@ -24,6 +25,7 @@ namespace System.Reflection
         Literal = 0x0040, // Value is compile time constant.
         NotSerialized = 0x0080, // Field does not have to be serialized when type is remoted.
         SpecialName = 0x0200, // field is special.  Name describes how.
+
 
         // interop attributes
         PinvokeImpl = 0x2000, // Implementation is forwarded through pinvoke.

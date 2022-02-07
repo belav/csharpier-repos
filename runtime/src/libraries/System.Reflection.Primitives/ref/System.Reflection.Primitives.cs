@@ -14,6 +14,7 @@ namespace System.Reflection.Emit
         Cond_Branch = 3,
         Meta = 4,
         Next = 5,
+
         [System.ObsoleteAttribute("FlowControl.Phi has been deprecated and is not supported.")]
         Phi = 6,
         Return = 7,
@@ -353,6 +354,7 @@ namespace System.Reflection.Emit
         InlineI8 = 3,
         InlineMethod = 4,
         InlineNone = 5,
+
         [System.ObsoleteAttribute(
             "OperandType.InlinePhi has been deprecated and is not supported."
         )]

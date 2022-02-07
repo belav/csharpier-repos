@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// </summary>
         Up = 1,
 
+
         /// <summary>
         /// Cascade down the inheritance hierarchy.
         /// </summary>
         Down = 2,
+
 
         /// <summary>
         /// Cascade in both directions.

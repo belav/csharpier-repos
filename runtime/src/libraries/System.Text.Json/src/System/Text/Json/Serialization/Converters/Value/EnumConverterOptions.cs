@@ -11,6 +11,7 @@ namespace System.Text.Json.Serialization.Converters
         /// </summary>
         AllowStrings = 0b0001,
 
+
         /// <summary>
         /// Allow number values.
         /// </summary>

@@ -195,6 +195,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// </summary>
         Trace,
 
+
         /// <summary>
         /// Log an user explicit action
         /// </summary>

@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         /// </summary>
         InProcess,
 
+
         /// <summary>
         /// Features that optionally dispatch to a remote implementation service will do so.
         /// This remote implementation will execute in the same process to simplify debugging

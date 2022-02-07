@@ -96,6 +96,7 @@ namespace System
             UserDrivenParsing = 0x01000000,
             CanonicalDnsHost = 0x02000000,
             ErrorOrParsingRecursion = 0x04000000, // Used to signal a default parser error and also to confirm Port
+
             // and Host values in case of a custom user Parser
             DosPath = 0x08000000,
             UncPath = 0x10000000,
@@ -108,6 +109,7 @@ namespace System
             RestUnicodeNormalized = 0x800000000,
             UnicodeHost = 0x1000000000,
             IntranetUri = 0x2000000000,
+
             // Is this component Iri canonical
             UserIriCanonical = 0x8000000000,
             PathIriCanonical = 0x10000000000,
@@ -116,15 +118,18 @@ namespace System
             IriCanonical = 0x78000000000,
             UnixPath = 0x100000000000,
 
+
             /// <summary>
             /// Disables any validation/normalization past the authority. Fragments will always be empty. GetComponents will throw for Path/Query.
             /// </summary>
             DisablePathAndQueryCanonicalization = 0x200000000000,
 
+
             /// <summary>
             /// Used to ensure that InitializeAndValidate is only called once per Uri instance and only from an override of InitializeAndValidate
             /// </summary>
             CustomParser_ParseMinimalAlreadyCalled = 0x4000000000000000,
+
 
             /// <summary>
             /// Used for asserting that certain methods are only called from the constructor to validate thread-safety assumptions

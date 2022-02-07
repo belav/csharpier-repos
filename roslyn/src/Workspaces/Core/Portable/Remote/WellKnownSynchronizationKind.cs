@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.Serialization
         OptionSet,
         SerializableSourceText,
 
+
         //
 
         SyntaxTreeIndex,

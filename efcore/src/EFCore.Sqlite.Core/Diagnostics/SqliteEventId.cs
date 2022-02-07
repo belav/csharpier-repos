@@ -32,11 +32,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             SchemaConfiguredWarning = CoreEventId.ProviderBaseId,
             SequenceConfiguredWarning,
 
+
             // Infrastructure events
             UnexpectedConnectionTypeWarning = CoreEventId.ProviderBaseId + 100,
 
+
             // Migrations events
             TableRebuildPendingWarning = CoreEventId.ProviderBaseId + 200,
+
 
             // Scaffolding events
             ColumnFound = CoreEventId.ProviderDesignBaseId,

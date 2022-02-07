@@ -6292,21 +6292,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             PreferTypeToConstructors = 0x1,
 
+
             /// <summary>
             /// When binding "C" new C(...), return the constructor of C that was bound to, if C unambiguously
             /// binds to a single type with at least one constructor.
             /// </summary>
             PreferConstructorsToType = 0x2,
 
+
             /// <summary>
             /// When binding a name X that was declared with a "using X=OtherTypeOrNamespace", return OtherTypeOrNamespace.
             /// </summary>
             ResolveAliases = 0x4,
 
+
             /// <summary>
             /// When binding a name X that was declared with a "using X=OtherTypeOrNamespace", return the alias symbol X.
             /// </summary>
             PreserveAliases = 0x8,
+
 
             // Default Options.
             DefaultOptions = PreferConstructorsToType | ResolveAliases

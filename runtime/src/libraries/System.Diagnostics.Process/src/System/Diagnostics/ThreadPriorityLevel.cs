@@ -15,30 +15,36 @@ namespace System.Diagnostics
         /// </devdoc>
         Idle = -15,
 
+
         /// <devdoc>
         ///     Lowest priority
         /// </devdoc>
         Lowest = -2,
+
 
         /// <devdoc>
         ///     Below normal priority
         /// </devdoc>
         BelowNormal = -1,
 
+
         /// <devdoc>
         ///     Normal priority
         /// </devdoc>
         Normal = 0,
+
 
         /// <devdoc>
         ///     Above normal priority
         /// </devdoc>
         AboveNormal = 1,
 
+
         /// <devdoc>
         ///     Highest priority
         /// </devdoc>
         Highest = 2,
+
 
         /// <devdoc>
         ///     Time critical priority

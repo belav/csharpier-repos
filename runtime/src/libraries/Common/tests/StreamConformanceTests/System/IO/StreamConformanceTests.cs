@@ -86,16 +86,22 @@ namespace System.IO.Tests
         {
             /// <summary>ReadByte / WriteByte</summary>
             SyncByte,
+
             /// <summary>Read(Span{byte}) / Write(ReadOnlySpan{byte})</summary>
             SyncSpan,
+
             /// <summary>Read(byte[], int, int) / Write(byte[], int, int)</summary>
             SyncArray,
+
             /// <summary>ReadAsync(byte[], int, int) / WriteAsync(byte[], int, int)</summary>
             AsyncArray,
+
             /// <summary>ReadAsync(Memory{byte}) / WriteAsync(ReadOnlyMemory{byte})</summary>
             AsyncMemory,
+
             /// <summary>EndRead(BeginRead(..., null, null)) / EndWrite(BeginWrite(..., null, null))</summary>
             SyncAPM,
+
             /// <summary>Task.Factory.FromAsync(s.BeginRead, s.EndRead, ...) / Task.Factory.FromAsync(s.BeginWrite, s.EndWrite, ...)</summary>
             AsyncAPM
         }
@@ -113,10 +119,13 @@ namespace System.IO.Tests
         {
             /// <summary>Stream.Position = pos;</summary>
             Position,
+
             /// <summary>Stream.Seek(pos, SeekOrigin.Begin)</summary>
             SeekFromBeginning,
+
             /// <summary>Stream.Seek(pos - stream.Position, SeekOrigin.Current)</summary>
             SeekFromCurrent,
+
             /// <summary>Stream.Seek(pos - stream.Length, SeekOrigin.End)</summary>
             SeekFromEnd,
         }

@@ -9,6 +9,7 @@ namespace Microsoft.Web.Helpers
     {
         Delicious = 0,
         Digg = 1,
+
         // GoogleBuzz = 2, has been deprecated
         Facebook = 3,
         Reddit = 4,

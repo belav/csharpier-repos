@@ -34,6 +34,7 @@ namespace System.Net
         Renegotiate,
         TryAgain,
 
+
         // Errors
         OutOfMemory,
         InvalidHandle,

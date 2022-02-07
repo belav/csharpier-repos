@@ -44,6 +44,7 @@ namespace Newtonsoft.Json
         /// </summary>
         Include = 0,
 
+
         /// <summary>
         /// Ignore members where the member value is the same as the member's default value when serializing objects
         /// so that it is not written to JSON.
@@ -53,10 +54,12 @@ namespace Newtonsoft.Json
         /// </summary>
         Ignore = 1,
 
+
         /// <summary>
         /// Members with a default value but no JSON will be set to their default value when deserializing.
         /// </summary>
         Populate = 2,
+
 
         /// <summary>
         /// Ignore members where the member value is the same as the member's default value when serializing objects

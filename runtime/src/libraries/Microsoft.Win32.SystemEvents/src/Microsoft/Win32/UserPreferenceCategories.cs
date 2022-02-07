@@ -16,12 +16,14 @@ namespace Microsoft.Win32
         /// </devdoc>
         Accessibility = 1,
 
+
         /// <devdoc>
         ///    <para> Specifies user preferences
         ///       associated with system colors, such as the
         ///       default color of windows or menus.</para>
         /// </devdoc>
         Color = 2,
+
 
         /// <devdoc>
         ///    <para> Specifies user
@@ -31,11 +33,13 @@ namespace Microsoft.Win32
         /// </devdoc>
         Desktop = 3,
 
+
         /// <devdoc>
         ///    <para> Specifies user preferences
         ///       that are not associated with any other category.</para>
         /// </devdoc>
         General = 4,
+
 
         /// <devdoc>
         ///    <para> Specifies
@@ -44,12 +48,14 @@ namespace Microsoft.Win32
         /// </devdoc>
         Icon = 5,
 
+
         /// <devdoc>
         ///    <para>
         ///       Specifies user preferences for keyboard settings,
         ///       such as the keyboard repeat rate.</para>
         /// </devdoc>
         Keyboard = 6,
+
 
         /// <devdoc>
         ///    <para> Specifies user preferences
@@ -58,6 +64,7 @@ namespace Microsoft.Win32
         /// </devdoc>
         Menu = 7,
 
+
         /// <devdoc>
         ///    <para> Specifies user preferences
         ///       for mouse settings, such as double click
@@ -65,12 +72,14 @@ namespace Microsoft.Win32
         /// </devdoc>
         Mouse = 8,
 
+
         /// <devdoc>
         ///    <para> Specifies user preferences
         ///       for policy settings, such as user rights and
         ///       access levels.</para>
         /// </devdoc>
         Policy = 9,
+
 
         /// <devdoc>
         ///    <para> Specifies user preferences
@@ -80,11 +89,13 @@ namespace Microsoft.Win32
         /// </devdoc>
         Power = 10,
 
+
         /// <devdoc>
         ///    <para> Specifies user preferences
         ///       associated with the screensaver.</para>
         /// </devdoc>
         Screensaver = 11,
+
 
         /// <devdoc>
         ///    <para> Specifies user preferences
@@ -93,11 +104,13 @@ namespace Microsoft.Win32
         /// </devdoc>
         Window = 12,
 
+
         /// <devdoc>
         ///    <para> Specifies user preferences
         ///       associated with the locale of the system.</para>
         /// </devdoc>
         Locale = 13,
+
 
         /// <devdoc>
         ///    <para> Specifies user preferences

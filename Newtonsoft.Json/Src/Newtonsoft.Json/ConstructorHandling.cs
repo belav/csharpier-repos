@@ -35,6 +35,7 @@ namespace Newtonsoft.Json
         /// </summary>
         Default = 0,
 
+
         /// <summary>
         /// Json.NET will use a non-public default constructor before falling back to a parameterized constructor.
         /// </summary>

@@ -17,15 +17,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         None,
 
+
         /// <summary>
         ///     Append only the size.
         /// </summary>
         Size,
 
+
         /// <summary>
         ///     Append only the precision.
         /// </summary>
         Precision,
+
 
         /// <summary>
         ///     Append the precision and scale.

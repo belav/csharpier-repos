@@ -40,17 +40,20 @@ internal static partial class Interop
         /// </summary>
         Anonymous,
 
+
         /// <summary>
         ///  The server process can obtain identification information about the client, but cannot impersonate the client.
         ///  [SecurityIdentification]
         /// </summary>
         Identification,
 
+
         /// <summary>
         ///  The server process can impersonate the client's security context on it's local system.
         ///  [SecurityImpersonation]
         /// </summary>
         Impersonation,
+
 
         /// <summary>
         ///  The server process can impersonate the client's security context on remote systems.
@@ -69,6 +72,7 @@ internal static partial class Interop
         ///  [SECURITY_STATIC_TRACKING]
         /// </summary>
         Static = 0x00,
+
 
         /// <summary>
         ///  The server is continually updated with changes.

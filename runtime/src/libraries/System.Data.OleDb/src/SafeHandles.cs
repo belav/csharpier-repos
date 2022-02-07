@@ -287,10 +287,12 @@ namespace System.Data.OleDb
         /// </summary>
         VT_BSTR = 8, // BSTR allocated using SysAllocString
 
+
         /// <summary>
         /// LPSTR
         /// </summary>
         VT_LPSTR = 30,
+
 
         /// <summary>
         /// FILETIME

@@ -45,6 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TypeInferrer
             /// </summary>
             Node,
 
+
             /// <summary>
             /// Specifies the test is going to call into <see cref="ITypeInferenceService.InferTypes(SemanticModel, int, string, System.Threading.CancellationToken)"/>.
             /// </summary>

@@ -19,6 +19,7 @@ namespace System.Net
         End, // EOLN
         Equals,
 
+
         // Value types
         Comment,
         CommentUrl,

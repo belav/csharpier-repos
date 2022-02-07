@@ -261,6 +261,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         Default,
 
+
         /// <summary>
         /// Indicate that this watson is critical and need to be addressed soon
         /// </summary>

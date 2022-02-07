@@ -44,15 +44,18 @@ namespace Newtonsoft.Json
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// Preserve references when serializing into a JSON object structure.
         /// </summary>
         Objects = 1,
 
+
         /// <summary>
         /// Preserve references when serializing into a JSON array structure.
         /// </summary>
         Arrays = 2,
+
 
         /// <summary>
         /// Preserve references when serializing.

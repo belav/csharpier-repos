@@ -21,9 +21,11 @@ namespace System.Reflection.Metadata.Ecma335
         ELEMENT_TYPE_R8 = 0xD, // Double
         ELEMENT_TYPE_STRING = 0xE,
 
+
         // every type above PTR will be simple type
         ELEMENT_TYPE_PTR = 0xF, // PTR <type>
         ELEMENT_TYPE_BYREF = 0x10, // BYREF <type>
+
 
         // Please use ELEMENT_TYPE_VALUETYPE. ELEMENT_TYPE_VALUECLASS is deprecated.
         ELEMENT_TYPE_VALUETYPE = 0x11, // VALUETYPE <class Token>
@@ -37,8 +39,10 @@ namespace System.Reflection.Metadata.Ecma335
         ELEMENT_TYPE_FNPTR = 0x1B, // FNPTR <complete sig for the function including calling convention>
         ELEMENT_TYPE_OBJECT = 0x1C, // Shortcut for System.Object
         ELEMENT_TYPE_SZARRAY = 0x1D, // Shortcut for single dimension zero lower bound array
+
         // SZARRAY <type>
         ELEMENT_TYPE_MVAR = 0x1E, // a method type variable MVAR <U1>
+
 
         // This is only for binding
         ELEMENT_TYPE_CMOD_REQD = 0x1F, // required C modifier : E_T_CMOD_REQD <mdTypeRef/mdTypeDef>

@@ -24,10 +24,12 @@ public enum HealthStatus
     /// </summary>
     Unhealthy = 0,
 
+
     /// <summary>
     /// Indicates that the health check determined that the component was in a degraded state.
     /// </summary>
     Degraded = 1,
+
 
     /// <summary>
     /// Indicates that the health check determined that the component was healthy.

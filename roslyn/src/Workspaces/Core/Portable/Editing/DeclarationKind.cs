@@ -19,10 +19,12 @@ namespace Microsoft.CodeAnalysis.Editing
         None,
         CompilationUnit,
 
+
         /// <summary>
         /// Represents a class declaration, including record class declarations in C#.
         /// </summary>
         Class,
+
 
         /// <summary>
         /// Represents a struct declaration, including record struct declarations in C#.
@@ -50,6 +52,7 @@ namespace Microsoft.CodeAnalysis.Editing
         LambdaExpression,
         GetAccessor,
 
+
         /// <summary>
         /// Represents set accessor declaration of a property, including init accessors in C#.
         /// </summary>
@@ -57,6 +60,7 @@ namespace Microsoft.CodeAnalysis.Editing
         AddAccessor,
         RemoveAccessor,
         RaiseAccessor,
+
         [Obsolete($"This value is not used. Use {nameof(Class)} instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         RecordClass,

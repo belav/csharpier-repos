@@ -7,6 +7,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
     {
         OP_NONE,
 
+
         // Binary
         OP_ASSIGN,
         OP_ADDEQ,
@@ -41,6 +42,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         OP_MUL,
         OP_DIV,
         OP_MOD,
+
 
         // Unary
         OP_NOP,

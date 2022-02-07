@@ -12,6 +12,7 @@ namespace System.Drawing.Drawing2D
         // Flush all batched rendering operations
         Flush = 0,
 
+
         // Flush all batched rendering operations and wait for them to complete
         Sync = 1
     }

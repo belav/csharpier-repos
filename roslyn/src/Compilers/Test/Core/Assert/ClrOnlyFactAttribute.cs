@@ -12,18 +12,22 @@ namespace Roslyn.Test.Utilities
     {
         Unknown,
 
+
         // The Mono version of ilasm doesn't have all of the features we need to run
         // our tests.  In particular it doesn't appear to support the full range of
         // modopt operators that our tests invoke.
         Ilasm,
+
 
         // Mono lists certain methods in a different order than the CLR.  For example
         // Equals, GetHashCode, ToString, etc ... which breaks our tests which hard
         // code the order.
         MemberOrder,
 
+
         // Can't emit a PDB.
         Pdb,
+
 
         // The documentation comment compiler has a dependency on a resource in the
         // System.Xml assembly.  This is a non-portable / implementation detail
@@ -32,6 +36,7 @@ namespace Roslyn.Test.Utilities
         //
         // See DocumentationCommentCompiler.GetDescription
         DocumentationComment,
+
 
         // Can't sign.
         Signing,

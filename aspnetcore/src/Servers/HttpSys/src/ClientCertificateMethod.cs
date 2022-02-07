@@ -13,10 +13,12 @@ public enum ClientCertificateMethod
     /// </summary>
     NoCertificate = 0,
 
+
     /// <summary>
     /// A client certificate will be populated if already present at the start of a request.
     /// </summary>
     AllowCertificate,
+
 
     /// <summary>
     /// The TLS session can be renegotiated to request a client certificate.

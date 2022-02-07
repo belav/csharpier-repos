@@ -15,11 +15,13 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// </summary>
         Entry,
 
+
         /// <summary>
         /// Indicates an exit block for a <see cref="ControlFlowGraph"/>,
         /// which is always the last block in <see cref="ControlFlowGraph.Blocks"/>.
         /// </summary>
         Exit,
+
 
         /// <summary>
         /// Indicates an intermediate block for a <see cref="ControlFlowGraph"/>.

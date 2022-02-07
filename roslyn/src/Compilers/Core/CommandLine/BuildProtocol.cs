@@ -299,20 +299,25 @@ namespace Microsoft.CodeAnalysis.CommandLine
             // The client and server are using incompatible protocol versions.
             MismatchedVersion,
 
+
             // The build request completed on the server and the results are contained
             // in the message.
             Completed,
+
 
             // The build request could not be run on the server due because it created
             // an unresolvable inconsistency with analyzers.
             AnalyzerInconsistency,
 
+
             // The shutdown request completed and the server process information is
             // contained in the message.
             Shutdown,
 
+
             // The request was rejected by the server.
             Rejected,
+
 
             // The server hash did not match the one supplied by the client
             IncorrectHash,
@@ -569,17 +574,22 @@ namespace Microsoft.CodeAnalysis.CommandLine
             // The current directory of the client
             CurrentDirectory = 0x51147221,
 
+
             // A comment line argument. The argument index indicates which one (0 .. N)
             CommandLineArgument,
+
 
             // The "LIB" environment variable of the client
             LibEnvVariable,
 
+
             // Request a longer keep alive time for the server
             KeepAlive,
 
+
             // Request a server shutdown from the client
             Shutdown,
+
 
             // The directory to use for temporary operations.
             TempDirectory,

@@ -19,11 +19,13 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// </summary>
         UsingGroups = 0,
 
+
         /// <summary>
         /// C# only. Indicates that per-method debug information (import strings) is stored on another method,
         /// whose token is specified.
         /// </summary>
         ForwardMethodInfo = 1,
+
 
         /// <summary>
         /// C# only. Indicates that per-module debug information (assembly reference aliases) is stored on another method,
@@ -31,20 +33,24 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// </summary>
         ForwardModuleInfo = 2,
 
+
         /// <summary>
         /// C# only. Specifies local scopes for state machine hoisted local variables.
         /// </summary>
         StateMachineHoistedLocalScopes = 3,
+
 
         /// <summary>
         /// C# and VB. The name of the state machine type. Emitted for async and iterator kick-off methods.
         /// </summary>
         StateMachineTypeName = 4,
 
+
         /// <summary>
         /// C# only. Dynamic flags for local variables and constants.
         /// </summary>
         DynamicLocals = 5,
+
 
         /// <summary>
         /// C# and VB. Encodes EnC local variable slot map.
@@ -52,11 +58,13 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// </summary>
         EditAndContinueLocalSlotMap = 6,
 
+
         /// <summary>
         /// C# and VB. Encodes EnC lambda map.
         /// See https://github.com/dotnet/corefx/blob/main/src/System.Reflection.Metadata/specs/PortablePdb-Metadata.md#EditAndContinueLambdaAndClosureMap.
         /// </summary>
         EditAndContinueLambdaMap = 7,
+
 
         /// <summary>
         /// C# and VB. Tuple element names for local variables and constants.

@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </summary>
         Never,
 
+
         /// <summary>
         /// Indicates that the code style diagnostic can be enforced on build when explicitly enabled in a configuration file,
         /// but is not part of the <see cref="Recommended"/> or <see cref="HighlyRecommended"/> group for build enforcement.
@@ -21,11 +22,13 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </summary>
         WhenExplicitlyEnabled,
 
+
         /// <summary>
         /// Indicates that the code style diagnostic can be enforced on build and is part of the recommended group for build enforcement.
         /// <para>This is the suggested <b>P2</b> bucket of code style diagnostics to enforce on build.</para>
         /// </summary>
         Recommended,
+
 
         /// <summary>
         /// Indicates that the code style diagnostic can be enforced on build and is part of the highly recommended group for build enforcement.

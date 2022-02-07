@@ -690,8 +690,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         /// Placed in the Zeroth column of the text editor
         LeftMost = 0,
 
+
         /// Placed at one less indent to the current context
         OneLess = 1,
+
 
         /// Placed at the same indent as the current context
         NoIndent = 2
@@ -706,8 +708,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         /// Single Spacing
         Single = 0,
 
+
         /// Ignore Formatting
         Ignore = 1,
+
 
         /// Remove Spacing
         Remove = 2

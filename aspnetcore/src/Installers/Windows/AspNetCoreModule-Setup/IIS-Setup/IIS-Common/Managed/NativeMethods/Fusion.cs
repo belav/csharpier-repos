@@ -138,6 +138,7 @@ namespace Microsoft.Web.Utility.PInvoke.Fusion
         PROCESSORARCHITECTURE = 0x20,
         RETARGETABLE = 0x80,
 
+
         // This enum might change in the future to include
         // more attributes.
         ALL = VERSION | CULTURE | PUBLIC_KEY_TOKEN | PROCESSORARCHITECTURE | RETARGETABLE

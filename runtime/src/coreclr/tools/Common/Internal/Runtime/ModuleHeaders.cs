@@ -55,6 +55,7 @@ namespace Internal.Runtime
         ExceptionInfo = 104,
         DebugInfo = 105,
         DelayLoadMethodCallThunks = 106,
+
         // 107 is deprecated - it was used by an older format of AvailableTypes
         AvailableTypes = 108,
         InstanceMethodEntryPoints = 109,
@@ -67,6 +68,7 @@ namespace Internal.Runtime
         OwnerCompositeExecutable = 116, // Added in 4.1
         PgoInstrumentationData = 117, // Added in 5.2
         ManifestAssemblyMvids = 118, // Added in 5.3
+
 
         //
         // CoreRT ReadyToRun sections
@@ -84,6 +86,7 @@ namespace Internal.Runtime
         ThreadStaticIndex = 210,
         LoopHijackFlag = 211,
         ImportAddressTables = 212,
+
 
         // Sections 300 - 399 are reserved for RhFindBlob backwards compatibility
         ReadonlyBlobRegionStart = 300,

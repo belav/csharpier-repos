@@ -13,25 +13,30 @@ namespace System.Drawing.Text
         /// </summary>
         SystemDefault = 0,
 
+
         /// <summary>
         /// Glyph bitmap with hinting.
         /// </summary>
         SingleBitPerPixelGridFit,
+
 
         /// <summary>
         /// Glyph bitmap without hinting.
         /// </summary>
         SingleBitPerPixel,
 
+
         /// <summary>
         /// Anti-aliasing with hinting.
         /// </summary>
         AntiAliasGridFit,
 
+
         /// <summary>
         /// Glyph anti-alias bitmap without hinting.
         /// </summary>
         AntiAlias,
+
 
         /// <summary>
         /// Glyph CT bitmap with hinting.

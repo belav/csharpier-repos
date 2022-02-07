@@ -10,6 +10,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         None = 0,
 
+
         // Used by EE:
         ThisProxyField = '4',
         HoistedLocalField = '5',
@@ -19,9 +20,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         StateMachineType = 'd',
         LocalFunction = 'g', // note collision with Deprecated_InitializerLocal, however this one is only used for method names
 
+
         // Used by EnC:
         AwaiterField = 'u',
         HoistedSynthesizedLocalField = 's',
+
 
         // Currently not parsed:
         StateMachineStateField = '1',
@@ -45,16 +48,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         DisposeModeField = 'w',
         CombinedTokensField = 'x', // last
 
+
         // Deprecated - emitted by Dev12, but not by Roslyn.
         // Don't reuse the values because the debugger might encounter them when consuming old binaries.
         [Obsolete]
         Deprecated_OuterscopeLocals = '6',
+
         [Obsolete]
         Deprecated_IteratorInstance = 'a',
+
         [Obsolete]
         Deprecated_InitializerLocal = 'g',
+
         [Obsolete]
         Deprecated_DynamicDelegate = 'q',
+
         [Obsolete]
         Deprecated_ComrefCallLocal = 'r',
     }

@@ -17,12 +17,14 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// Uses keywords for predefined types.
         /// For example, "int" instead of "System.Int32" in C#
         /// or "Integer" instead of "System.Integer" in Visual Basic.
         /// </summary>
         UseSpecialTypes = 1 << 0,
+
 
         /// <summary>
         /// Escapes identifiers that are also keywords.
@@ -31,6 +33,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         EscapeKeywordIdentifiers = 1 << 1,
 
+
         /// <summary>
         /// Displays asterisks between commas in multi-dimensional arrays.
         /// For example, "int[][*,*]" instead of "int[][,]" in C# or
@@ -38,10 +41,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         UseAsterisksInMultiDimensionalArrays = 1 << 2,
 
+
         /// <summary>
         /// Displays "?" for erroneous types that lack names (perhaps due to faulty metadata).
         /// </summary>
         UseErrorTypeSymbolName = 1 << 3,
+
 
         /// <summary>
         /// Displays attributes names without the "Attribute" suffix, if possible.
@@ -52,26 +57,31 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         RemoveAttributeSuffix = 1 << 4,
 
+
         /// <summary>
         /// Displays <see cref="Nullable{T}"/> as a normal generic type, rather than with
         /// the special question mark syntax.
         /// </summary>
         ExpandNullable = 1 << 5,
 
+
         /// <summary>
         /// Append '?' to nullable reference types.
         /// </summary>
         IncludeNullableReferenceTypeModifier = 1 << 6,
+
 
         /// <summary>
         /// Allow the use of <c>default</c> instead of <c>default(T)</c> where applicable.
         /// </summary>
         AllowDefaultLiteral = 1 << 7,
 
+
         /// <summary>
         /// Append '!' to non-nullable reference types.
         /// </summary>
         IncludeNotNullableReferenceTypeModifier = 1 << 8,
+
 
         /// <summary>
         /// Insert a tuple into the display parts as a single part instead of multiple parts (similar

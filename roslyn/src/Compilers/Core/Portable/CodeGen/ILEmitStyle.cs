@@ -11,8 +11,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
         // like nops for sequence points mapping to no IL
         Debug = 0,
 
+
         // do optimizations that do not diminish debug experience
         DebugFriendlyRelease = 1,
+
 
         // do all optimizations
         Release = 2,

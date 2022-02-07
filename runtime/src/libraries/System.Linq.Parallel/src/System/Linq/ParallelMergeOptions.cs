@@ -37,11 +37,13 @@ namespace System.Linq
         /// </summary>
         Default = 0,
 
+
         /// <summary>
         /// Use a merge without output buffers. As soon as result elements have been computed,
         /// make that element available to the consumer of the query.
         /// </summary>
         NotBuffered = 1,
+
 
         /// <summary>
         /// Use a merge with output buffers of a size chosen by the system. Results
@@ -49,6 +51,7 @@ namespace System.Linq
         /// the query.
         /// </summary>
         AutoBuffered = 2,
+
 
         /// <summary>
         /// Use a merge with full output buffers. The system will accumulate all of the

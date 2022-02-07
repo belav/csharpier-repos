@@ -16,6 +16,7 @@ namespace System.Diagnostics
     public enum DebuggerBrowsableState
     {
         Never = 0,
+
         // Expanded is not supported in this release
         // Expanded = 1,
         Collapsed = 2,

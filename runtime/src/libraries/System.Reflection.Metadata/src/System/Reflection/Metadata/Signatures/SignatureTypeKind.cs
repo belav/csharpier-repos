@@ -12,10 +12,12 @@ namespace System.Reflection.Metadata
         /// </summary>
         Unknown = 0,
 
+
         /// <summary>
         /// The type definition or reference refers to a class.
         /// </summary>
         Class = CorElementType.ELEMENT_TYPE_CLASS,
+
 
         /// <summary>
         /// The type definition or reference refers to a value type.

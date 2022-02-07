@@ -13,6 +13,7 @@ public enum PasswordHasherCompatibilityMode
     /// </summary>
     IdentityV2,
 
+
     /// <summary>
     /// Indicates hashing passwords in a way that is compatible with ASP.NET Identity version 3.
     /// </summary>

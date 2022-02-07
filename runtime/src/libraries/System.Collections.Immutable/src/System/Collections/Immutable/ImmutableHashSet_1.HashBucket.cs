@@ -21,6 +21,7 @@ namespace System.Collections.Immutable
             /// </summary>
             SizeChanged,
 
+
             /// <summary>
             /// No change was required (the operation ended in a no-op).
             /// </summary>
@@ -312,15 +313,18 @@ namespace System.Collections.Immutable
                     /// </summary>
                     BeforeFirst,
 
+
                     /// <summary>
                     /// We're at the <see cref="_firstValue"/> of the containing bucket.
                     /// </summary>
                     First,
 
+
                     /// <summary>
                     /// We're enumerating the <see cref="_additionalElements"/> in the bucket.
                     /// </summary>
                     Additional,
+
 
                     /// <summary>
                     /// The end of enumeration has been reached.

@@ -13,20 +13,24 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         /// </summary>
         PascalCase,
 
+
         /// <summary>
         /// Every word except the first word is capitalized
         /// </summary>
         CamelCase,
+
 
         /// <summary>
         /// Only the first word is capitalized
         /// </summary>
         FirstUpper,
 
+
         /// <summary>
         /// Every character is capitalized
         /// </summary>
         AllUpper,
+
 
         /// <summary>
         /// No characters are capitalized

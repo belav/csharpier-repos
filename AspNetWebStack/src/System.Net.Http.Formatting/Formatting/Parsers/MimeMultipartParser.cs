@@ -119,15 +119,18 @@ namespace System.Net.Http.Formatting.Parsers
             /// </summary>
             NeedMoreData = 0,
 
+
             /// <summary>
             /// Parsing of a complete body part succeeded.
             /// </summary>
             BodyPartCompleted,
 
+
             /// <summary>
             /// Bad data format
             /// </summary>
             Invalid,
+
 
             /// <summary>
             /// Data exceeds the allowed size

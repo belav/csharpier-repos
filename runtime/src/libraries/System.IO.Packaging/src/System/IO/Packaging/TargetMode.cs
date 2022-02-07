@@ -22,6 +22,7 @@ namespace System.IO.Packaging
         /// </summary>
         Internal = 0,
 
+
         /// <summary>
         /// TargetMode is "External".
         /// PackageRelationship target points to an external resource.

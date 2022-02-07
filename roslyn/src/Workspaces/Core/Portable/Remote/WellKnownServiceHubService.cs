@@ -8,6 +8,7 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         None = 0,
         RemoteHost = 1,
+
         // obsolete: CodeAnalysis = 2,
         // obsolete: RemoteSymbolSearchUpdateService = 3,
         // obsolete: RemoteDesignerAttributeService = 4,
@@ -16,6 +17,7 @@ namespace Microsoft.CodeAnalysis.Remote
         // obsolete: RemoteLanguageServer = 7,
         IntelliCode = 8,
         Razor = 9,
+
 
         // owned by Unit Testing team:
         UnitTestingAnalysisService = 10,

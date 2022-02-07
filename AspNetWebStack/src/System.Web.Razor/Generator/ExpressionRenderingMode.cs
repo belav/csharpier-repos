@@ -15,6 +15,7 @@ namespace System.Web.Razor.Generator
         /// </example>
         WriteToOutput,
 
+
         /// <summary>
         /// Indicates that expressions should simply be placed as-is in the code, and the context in which
         /// the code exists will be used to render it

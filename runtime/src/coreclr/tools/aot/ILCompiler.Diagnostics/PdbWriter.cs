@@ -20,6 +20,7 @@ namespace ILCompiler.Diagnostics
     public enum PDBExtraData
     {
         None = 0,
+
         // Add string table subsection, files checksum subsection, and lines subsection to
         // allow tools to map IP ranges to source lines.
         kPDBLines = 0x00000001,

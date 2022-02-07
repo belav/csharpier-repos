@@ -12,6 +12,7 @@ namespace System.Net
         Processing = 102,
         EarlyHints = 103,
 
+
         // Successful 2xx
         OK = 200,
         Created = 201,
@@ -23,6 +24,7 @@ namespace System.Net
         MultiStatus = 207,
         AlreadyReported = 208,
         IMUsed = 226,
+
 
         // Redirection 3xx
         MultipleChoices = 300,
@@ -39,6 +41,7 @@ namespace System.Net
         TemporaryRedirect = 307,
         RedirectKeepVerb = 307,
         PermanentRedirect = 308,
+
 
         // Client Error 4xx
         BadRequest = 400,
@@ -59,6 +62,7 @@ namespace System.Net
         UnsupportedMediaType = 415,
         RequestedRangeNotSatisfiable = 416,
         ExpectationFailed = 417,
+
         // From https://github.com/dotnet/runtime/issues/15650:
         // "It would be a mistake to add it to .NET now. See golang/go#21326,
         // nodejs/node#14644, requests/requests#4238 and aspnet/HttpAbstractions#915".
@@ -73,6 +77,7 @@ namespace System.Net
         TooManyRequests = 429,
         RequestHeaderFieldsTooLarge = 431,
         UnavailableForLegalReasons = 451,
+
 
         // Server Error 5xx
         InternalServerError = 500,

@@ -40,15 +40,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnyMemberHasAttributes = 1 << 4,
             HasAnyNontypeMembers = 1 << 5,
 
+
             /// <summary>
             /// Simple program uses await expressions. Set only in conjunction with <see cref="TypeDeclarationFlags.IsSimpleProgram"/>
             /// </summary>
             HasAwaitExpressions = 1 << 6,
 
+
             /// <summary>
             /// Set only in conjunction with <see cref="TypeDeclarationFlags.IsSimpleProgram"/>
             /// </summary>
             IsIterator = 1 << 7,
+
 
             /// <summary>
             /// Set only in conjunction with <see cref="TypeDeclarationFlags.IsSimpleProgram"/>

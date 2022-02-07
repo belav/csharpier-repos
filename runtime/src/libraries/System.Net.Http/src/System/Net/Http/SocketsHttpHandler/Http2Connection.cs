@@ -2337,6 +2337,7 @@ namespace System.Net.Http
         {
             None = 0,
 
+
             // Some frame types define bits differently.  Define them all here for simplicity.
 
             EndStream = 0b00000001,

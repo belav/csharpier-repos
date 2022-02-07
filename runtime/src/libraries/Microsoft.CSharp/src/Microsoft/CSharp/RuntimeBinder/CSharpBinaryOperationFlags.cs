@@ -14,10 +14,12 @@ namespace Microsoft.CSharp.RuntimeBinder
     {
         None = 0,
 
+
         /// <summary>
         /// The operation is a binary compound operation on a member access.
         /// </summary>
         MemberAccess = 1,
+
 
         /// <summary>
         /// The operation is a logical binary operation.

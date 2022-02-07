@@ -21,6 +21,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         UserCallable = EXPRFLAG.EXF_USERCALLABLE,
         BaseCall = EXPRFLAG.EXF_BASECALL,
 
+
         // All EXF flags are < 0x01000000
         MustBeInvocable = 0x20000000,
         All = Ctor | NewObj | Operator | Indexer | UserCallable | BaseCall | MustBeInvocable

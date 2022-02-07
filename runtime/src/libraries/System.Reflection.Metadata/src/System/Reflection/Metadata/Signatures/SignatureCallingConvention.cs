@@ -15,30 +15,36 @@ namespace System.Reflection.Metadata
         /// </summary>
         Default = 0x0,
 
+
         /// <summary>
         /// Unmanaged C/C++-style calling convention where the call stack is cleaned by the caller.
         /// </summary>
         CDecl = 0x1,
+
 
         /// <summary>
         /// Unmanaged calling convention where call stack is cleaned up by the callee.
         /// </summary>
         StdCall = 0x2,
 
+
         /// <summary>
         /// Unmanaged C++-style calling convention for calling instance member functions with a fixed argument list.
         /// </summary>
         ThisCall = 0x3,
+
 
         /// <summary>
         /// Unmanaged calling convention where arguments are passed in registers when possible.
         /// </summary>
         FastCall = 0x4,
 
+
         /// <summary>
         /// Managed calling convention for passing extra arguments.
         /// </summary>
         VarArgs = 0x5,
+
 
         /// <summary>
         /// Indicating the specifics of the unmanaged calling convention are encoded as modopts.

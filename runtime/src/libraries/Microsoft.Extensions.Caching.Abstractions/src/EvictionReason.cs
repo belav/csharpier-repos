@@ -7,25 +7,30 @@ namespace Microsoft.Extensions.Caching.Memory
     {
         None,
 
+
         /// <summary>
         /// Manually
         /// </summary>
         Removed,
+
 
         /// <summary>
         /// Overwritten
         /// </summary>
         Replaced,
 
+
         /// <summary>
         /// Timed out
         /// </summary>
         Expired,
 
+
         /// <summary>
         /// Event
         /// </summary>
         TokenExpired,
+
 
         /// <summary>
         /// Overflow

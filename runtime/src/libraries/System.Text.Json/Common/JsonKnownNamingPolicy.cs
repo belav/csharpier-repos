@@ -18,6 +18,7 @@ namespace System.Text.Json.Serialization
         /// </summary>
         Unspecified = 0,
 
+
         /// <summary>
         /// Specifies that the built-in <see cref="Json.JsonNamingPolicy.CamelCase"/> be used to convert JSON property names.
         /// </summary>

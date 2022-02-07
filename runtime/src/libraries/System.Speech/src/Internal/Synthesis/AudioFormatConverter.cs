@@ -1413,20 +1413,24 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         PCM16 = 128,
 
+
         /// <summary>
         /// Audio format PCM 16 bit
         /// </summary>
         PCM8 = 127,
+
 
         /// <summary>
         /// Audio format G.711 mu-law
         /// </summary>
         G711U = 0,
 
+
         /// <summary>
         /// AudioFormat G.711 A-law
         /// </summary>
         G711A = 8,
+
 
         /// <summary>
         /// No audio format specified

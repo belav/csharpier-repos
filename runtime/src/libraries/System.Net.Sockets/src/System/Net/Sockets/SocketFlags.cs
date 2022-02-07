@@ -11,14 +11,18 @@ namespace System.Net.Sockets
         // Use no flags for this call.
         None = 0x0000,
 
+
         // Process out-of-band data.
         OutOfBand = 0x0001,
+
 
         // Peek at incoming message.
         Peek = 0x0002,
 
+
         // Send without using routing tables.
         DontRoute = 0x0004,
+
 
         // This is defined in the .NET Framework and isn't being ported to .NET Core
         // since it is Windows specific. However, leave this enum value reserved

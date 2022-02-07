@@ -9,8 +9,10 @@ namespace System.IO
         /// <summary>Matches using the default casing for the given platform.</summary>
         PlatformDefault,
 
+
         /// <summary>Matches respecting character casing.</summary>
         CaseSensitive,
+
 
         /// <summary>Matches ignoring character casing.</summary>
         CaseInsensitive

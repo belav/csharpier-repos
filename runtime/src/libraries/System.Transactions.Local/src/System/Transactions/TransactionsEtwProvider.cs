@@ -28,8 +28,12 @@ namespace System.Transactions
         Commit = 1,
         Rollback = 2,
         InDoubt = 3,
+
+
         // ISinglePhaseNotification
         SinglePhaseCommit = 4,
+
+
         // IPromotableSinglePhaseNotification
         Promote = 5
     }

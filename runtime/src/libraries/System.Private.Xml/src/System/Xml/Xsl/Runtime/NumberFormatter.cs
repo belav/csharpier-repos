@@ -40,6 +40,7 @@ namespace System.Xml.Xsl.Runtime
         KorDbNum1, // 0xc77c -- Korea (decimal)
         LastNum = KorDbNum1,
 
+
         // Alphabetic numbering sequences (do not change order unless you also change _rgnfcToLab's order)
         FirstAlpha,
         UCLetter = FirstAlpha, // 0x0041 -- A, B, C, D, ...
@@ -57,6 +58,7 @@ namespace System.Xml.Xsl.Runtime
         Ganada, // 0xac00 -- Korea
         ArabicScript, // 0x0623 -- BIDI AraAlpha for Arabic/Persian/Urdu
         LastAlpha = ArabicScript,
+
 
         // Special numbering sequences (includes peculiar alphabetic and numeric sequences)
         FirstSpecial,

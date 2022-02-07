@@ -19,10 +19,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// Parses documentation comments as structured trivia, but do not report any diagnostics.
         /// </summary>
         Parse = 1,
+
 
         /// <summary>
         /// Parses documentation comments as structured trivia and report diagnostics.

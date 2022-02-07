@@ -13,15 +13,18 @@ public enum ModelMetadataKind
     /// </summary>
     Type,
 
+
     /// <summary>
     /// Used for <see cref="ModelMetadata"/> for a property.
     /// </summary>
     Property,
 
+
     /// <summary>
     /// Used for <see cref="ModelMetadata"/> for a parameter.
     /// </summary>
     Parameter,
+
 
     /// <summary>
     /// <see cref="ModelMetadata"/> for a constructor.

@@ -199,9 +199,11 @@ namespace System.Speech.Internal.SrgsCompiler
             // Defines a rule that is automatically matched that is, matched without
             // the user speaking any word.
             Null,
+
             // Defines a rule that can never be spoken. Inserting VOID into a sequence
             // automatically makes that sequence unspeakable.
             Void,
+
             // Defines a rule that may match any speech up until the next rule match,
             // the next token or until the end of spoken input.
             // Designed for applications that would like to recognize some phrases

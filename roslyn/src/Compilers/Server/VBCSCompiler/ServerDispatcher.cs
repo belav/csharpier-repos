@@ -30,10 +30,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             /// </summary>
             Running,
 
+
             /// <summary>
             /// Server is in the process of shutting down. New connections will not be accepted.
             /// </summary>
             ShuttingDown,
+
 
             /// <summary>
             /// Server is done.

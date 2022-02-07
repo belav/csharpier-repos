@@ -13,15 +13,18 @@ public enum JSCallResultType : int
     /// </summary>
     Default = 0,
 
+
     /// <summary>
     /// Indicates that the returned value is to be treated as a JS object reference.
     /// </summary>
     JSObjectReference = 1,
 
+
     /// <summary>
     /// Indicates that the returned value is to be treated as a JS data reference.
     /// </summary>
     JSStreamReference = 2,
+
 
     /// <summary>
     /// Indicates a void result type.

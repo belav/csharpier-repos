@@ -34,8 +34,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             ConflictingValueGenerationStrategiesWarning,
             DecimalTypeKeyWarning,
 
+
             // Transaction events
             SavepointsDisabledBecauseOfMARS,
+
 
             // Scaffolding events
             ColumnFound = CoreEventId.ProviderDesignBaseId,

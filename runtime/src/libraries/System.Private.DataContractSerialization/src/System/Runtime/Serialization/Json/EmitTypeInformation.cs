@@ -13,10 +13,12 @@ namespace System.Runtime.Serialization
         /// </summary>
         AsNeeded,
 
+
         /// <summary>
         /// Dummy documentation
         /// </summary>
         Always,
+
 
         /// <summary>
         /// Dummy documentation

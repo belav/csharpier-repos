@@ -56,6 +56,7 @@ namespace System.Xml
             GoToEof,
             PartialTextValue,
 
+
             // these two states must be last; see InAttributeValueIterator property
             InReadAttributeValue,
             InReadValueChunk,
@@ -102,6 +103,7 @@ namespace System.Xml
             ReadData,
             EndElement,
             End,
+
 
             // Following values are used in ReadTextChunk, ReadContentAsBase64 and ReadBinHexChunk (V2 streaming methods)
             ReadValueChunk_OnCachedValue,

@@ -23,10 +23,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         Enumerable,
 
+
         /// <summary>
         ///     Indicates that the query returns a single result. Throws if there is no result or more than one result.
         /// </summary>
         Single,
+
 
         /// <summary>
         ///     Indicates that the query returns a single or default result. Throws if there is more than one result.

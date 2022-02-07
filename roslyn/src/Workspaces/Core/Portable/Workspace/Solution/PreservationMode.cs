@@ -16,6 +16,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         PreserveValue = 0,
 
+
         /// <summary>
         /// The value is guaranteed to the same instance across multiple accesses.
         /// </summary>

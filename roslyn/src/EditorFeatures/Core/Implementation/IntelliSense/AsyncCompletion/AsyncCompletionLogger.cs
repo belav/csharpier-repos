@@ -16,13 +16,16 @@ namespace Microsoft.CodeAnalysis
             SessionWithTypeImportCompletionEnabled,
             CommitWithTypeImportCompletionEnabled,
 
+
             // For targeted type completion
             SessionHasTargetTypeFilterEnabled,
+
 
             // TargetTypeFilterChosenInSession / SessionContainsTargetTypeFilter indicates % of the time
             // the Target Type Completion Filter is chosen of the sessions offering it.
             SessionContainsTargetTypeFilter,
             TargetTypeFilterChosenInSession,
+
 
             // CommitItemWithTargetTypeFilter / CommitWithTargetTypeCompletionExperimentEnabled indicates
             // % of the time a completion item is committed that could have been picked via the Target Type

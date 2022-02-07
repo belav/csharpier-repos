@@ -15,10 +15,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// </summary>
         Exact,
 
+
         /// <summary>
         /// Use a case-insensitive comparison when searching for matching items.
         /// </summary>
         ExactIgnoreCase,
+
 
         /// <summary>
         /// Use a fuzzy comparison when searching for matching items. Fuzzy matching allows for
@@ -26,6 +28,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// more details.
         /// </summary>
         Fuzzy,
+
 
         /// <summary>
         /// Search term is matched in a custom manner (i.e. with a user provided predicate).

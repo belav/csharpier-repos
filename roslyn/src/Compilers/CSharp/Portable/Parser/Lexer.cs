@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         XmlCharacter = 0x4000,
         MaskLexMode = 0xFFFF,
 
+
         // The following are lexer driven, which is to say the lexer can push a change back to the
         // blender. There is in general no need to use a whole bit per enum value, but the debugging
         // experience is bad if you don't do that.

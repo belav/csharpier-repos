@@ -55,55 +55,66 @@ namespace System.Reflection.PortableExecutable
         /// </summary>
         ProcessInit = 0x0001,
 
+
         /// <summary>
         /// Reserved.
         /// </summary>
         ProcessTerm = 0x0002,
+
 
         /// <summary>
         /// Reserved.
         /// </summary>
         ThreadInit = 0x0004,
 
+
         /// <summary>
         /// Reserved.
         /// </summary>
         ThreadTerm = 0x0008,
+
 
         /// <summary>
         /// Image can handle a high entropy 64-bit virtual address space.
         /// </summary>
         HighEntropyVirtualAddressSpace = 0x0020,
 
+
         /// <summary>
         /// DLL can move.
         /// </summary>
         DynamicBase = 0x0040,
+
 
         /// <summary>
         /// Image is NX compatible.
         /// </summary>
         NxCompatible = 0x0100,
 
+
         /// <summary>
         /// Image understands isolation and doesn't want it.
         /// </summary>
         NoIsolation = 0x0200,
+
 
         /// <summary>
         /// Image does not use SEH.  No SE handler may reside in this image.
         /// </summary>
         NoSeh = 0x0400,
 
+
         /// <summary>
         /// Do not bind this image.
         /// </summary>
         NoBind = 0x0800,
 
+
         /// <summary>
         /// The image must run inside an AppContainer.
         /// </summary>
         AppContainer = 0x1000,
+
 
         /// <summary>
         /// Driver uses WDM model.
@@ -129,6 +140,7 @@ namespace System.Reflection.PortableExecutable
         TypeOver = 0x00000400, // Reserved.
         LinkerRemove = 0x00000800, // Section contents will not become part of image.
         LinkerComdat = 0x00001000, // Section contents comdat.
+
         //                               0x00002000  // Reserved.
         MemProtected = 0x00004000,
         NoDeferSpecExc = 0x00004000, // Reset speculative exceptions handling bits in the TLB entries for this section.
@@ -153,6 +165,7 @@ namespace System.Reflection.PortableExecutable
         Align2048Bytes = 0x00C00000, //
         Align4096Bytes = 0x00D00000, //
         Align8192Bytes = 0x00E00000, //
+
         // Unused                     0x00F00000
         AlignMask = 0x00F00000,
         LinkerNRelocOvfl = 0x01000000, // Section contains extended relocations.

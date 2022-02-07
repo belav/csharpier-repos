@@ -21,6 +21,7 @@ namespace System.Text.Json.Serialization
         /// </summary>
         Default = 0,
 
+
         /// <summary>
         /// Instructs the JSON source generator to generate type-metadata initialization logic.
         /// </summary>
@@ -28,6 +29,7 @@ namespace System.Text.Json.Serialization
         /// This mode supports all <see cref="JsonSerializer"/> features.
         /// </remarks>
         Metadata = 1,
+
 
         /// <summary>
         /// Instructs the JSON source generator to generate optimized serialization logic.

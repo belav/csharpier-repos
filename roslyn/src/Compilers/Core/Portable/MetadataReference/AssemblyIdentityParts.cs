@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis
         Name = 1,
         Version = VersionMajor | VersionMinor | VersionBuild | VersionRevision,
 
+
         // version parts are assumed to be in order:
         VersionMajor = 1 << 1,
         VersionMinor = 1 << 2,

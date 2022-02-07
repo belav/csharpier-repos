@@ -17,11 +17,13 @@ namespace System.ComponentModel.Composition
         /// </summary>
         Any = 0,
 
+
         /// <summary>
         /// A single shared instance of the associated <see cref="Primitives.ComposablePart"/> will be created
         /// by the <see cref="Hosting.CompositionContainer"/> and shared by all requestors.
         /// </summary>
         Shared = 1,
+
 
         /// <summary>
         /// A new non-shared instance of the associated <see cref="Primitives.ComposablePart"/> will be created

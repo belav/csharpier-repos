@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         Debug = 0,
 
+
         /// <summary>
         /// Enables all optimizations, debugging experience might be degraded.
         /// </summary>

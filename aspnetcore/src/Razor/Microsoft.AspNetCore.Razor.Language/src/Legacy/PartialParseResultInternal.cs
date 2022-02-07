@@ -29,10 +29,12 @@ internal enum PartialParseResultInternal
     /// </summary>
     Rejected = 1,
 
+
     /// <summary>
     /// Indicates that the edit was accepted and has been added to the parse tree
     /// </summary>
     Accepted = 2,
+
 
     /// <summary>
     /// Indicates that the edit was accepted, but that a reparse should be forced when idle time is available
@@ -45,11 +47,13 @@ internal enum PartialParseResultInternal
     /// </remarks>
     Provisional = 4,
 
+
     /// <summary>
     /// Indicates that the edit caused a change in the span's context and that if any statement completions were active prior to starting this
     /// partial parse, they should be reinitialized.
     /// </summary>
     SpanContextChanged = 8,
+
 
     /// <summary>
     /// Indicates that the edit requires an auto completion to occur

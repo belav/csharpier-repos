@@ -29,6 +29,7 @@ namespace System
         FormatStubInfo = 0x00000080, // Include stub info like {unbox-stub}
         FormatGenericParam = 0x00000100, // Use !name and !!name for generic type and method parameters
 
+
         // If we want to be able to distinguish between overloads whose parameter types have the same name but come from different assemblies,
         // we can add FormatAssembly | FormatNoVersion to FormatSerialization. But we are omitting it because it is not a useful scenario
         // and including the assembly name will normally increase the size of the serialized data and also decrease the performance.

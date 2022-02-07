@@ -14,10 +14,12 @@ namespace System.ComponentModel
         /// </summary>
         None,
 
+
         /// <summary>
         /// Indicates to use the refresh all refresh mode.
         /// </summary>
         All,
+
 
         /// <summary>
         /// Indicates to use the repaint refresh mode.

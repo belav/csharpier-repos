@@ -99,15 +99,18 @@ namespace ILCompiler
         /// </summary>
         None,
 
+
         /// <summary>
         /// Minimize code space.
         /// </summary>
         PreferSize,
 
+
         /// <summary>
         /// Generate blended code. (E.g. favor size for rarely executed code such as class constructors.)
         /// </summary>
         Blended,
+
 
         /// <summary>
         /// Maximize execution speed.

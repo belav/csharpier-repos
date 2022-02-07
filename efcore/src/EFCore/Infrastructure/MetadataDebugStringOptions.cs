@@ -20,25 +20,30 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         IncludeAnnotations = 1,
 
+
         /// <summary>
         ///     Include property indexes in debug string.
         /// </summary>
         IncludePropertyIndexes = 2,
+
 
         /// <summary>
         ///     Print debug string on single line only.
         /// </summary>
         SingleLine = 4,
 
+
         /// <summary>
         ///     Default settings for short debug string.
         /// </summary>
         ShortDefault = 0,
 
+
         /// <summary>
         ///     Default settings for long debug string.
         /// </summary>
         LongDefault = IncludeAnnotations,
+
 
         /// <summary>
         ///     Default settings for single line debug string.

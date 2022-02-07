@@ -143,6 +143,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         UInt32 = 15,
         UInt64 = 16,
 
+
         // Used in only for MethodCall or MethodReturn header
         Null = 17,
         String = 18,

@@ -13,10 +13,12 @@ public enum KeyDerivationPrf
     /// </summary>
     HMACSHA1,
 
+
     /// <summary>
     /// The HMAC algorithm (RFC 2104) using the SHA-256 hash function (FIPS 180-4).
     /// </summary>
     HMACSHA256,
+
 
     /// <summary>
     /// The HMAC algorithm (RFC 2104) using the SHA-512 hash function (FIPS 180-4).

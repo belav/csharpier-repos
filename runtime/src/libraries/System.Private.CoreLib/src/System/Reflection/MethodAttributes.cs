@@ -17,6 +17,7 @@ namespace System.Reflection
         Family = 0x0004, // Accessible only by type and sub-types.
         FamORAssem = 0x0005, // Accessibly by sub-types anywhere, plus anyone in assembly.
         Public = 0x0006, // Accessibly by anyone who has visibility to this scope.
+
         // end member access mask
 
         // method contract attributes.
@@ -26,15 +27,18 @@ namespace System.Reflection
         HideBySig = 0x0080, // Method hides by name+sig, else just by name.
         CheckAccessOnOverride = 0x0200,
 
+
         // vtable layout mask - Use this mask to retrieve vtable attributes.
         VtableLayoutMask = 0x0100,
         ReuseSlot = 0x0000, // The default.
         NewSlot = 0x0100, // Method always gets a new slot in the vtable.
+
         // end vtable layout mask
 
         // method implementation attributes.
         Abstract = 0x0400, // Method does not provide an implementation.
         SpecialName = 0x0800, // Method is special.  Name describes how.
+
 
         // interop attributes
         PinvokeImpl = 0x2000, // Implementation is forwarded through pinvoke.

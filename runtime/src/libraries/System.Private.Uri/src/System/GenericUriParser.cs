@@ -15,36 +15,47 @@ namespace System
         // empty segments and dots-only segments
         Default = 0x0,
 
+
         // Allows a free style authority that would terminate with '/'
         GenericAuthority = 0x1,
+
 
         // Allows an empty authority foo:///
         AllowEmptyAuthority = 0x2,
 
+
         // Disables a user info component, it implied in the case of GenericAuthority flag
         NoUserInfo = 0x4,
+
 
         // Disables a port component, it is implied in the case of GenericAuthority flag
         NoPort = 0x8,
 
+
         // Disables a query. A ? char is considered as part of the path and is escaped
         NoQuery = 0x10,
+
 
         // Disables a fragment. A # char is considered as part of the path or query and is escaped
         NoFragment = 0x20,
 
+
         // if false then converta \ to /, otherwise does this conversion for the Path component.
         DontConvertPathBackslashes = 0x40,
+
 
         // if false, then a/./b or a/.../b becomes a/b and /a/../b becomes /b
         DontCompressPath = 0x80,
 
+
         // if false  then a/%2e./b  becomes a/../b and then usually compressed
         DontUnescapePathDotsAndSlashes = 0x100,
+
 
         // IDN hosts supported. if true then unicode hostname is converted to IDN host
         //  and vice versa
         Idn = 0x200,
+
 
         //  Iri strict parsing flag. Makes sense for Unicode. If true then string is
         //  normalized, bidi control characters are removed, unicode char limits are checked

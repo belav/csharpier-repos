@@ -64,14 +64,17 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         // Summary:
         //     Location unknown.
         Unknown,
+
         //
         // Summary:
         //     The ...\Documents\...\Visual Studio X\Visualizers directory.
         UserDirectory,
+
         //
         // Summary:
         //     The ...\Common7\Packages\Debugger\Visualizers directory.
         SharedDirectory,
+
         //
         // Summary:
         //     Present on an assembly loaded by the debuggee.

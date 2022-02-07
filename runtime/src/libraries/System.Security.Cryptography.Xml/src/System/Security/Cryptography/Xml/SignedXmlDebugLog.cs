@@ -68,86 +68,103 @@ namespace System.Security.Cryptography.Xml
             /// </summary>
             BeginCanonicalization,
 
+
             /// <summary>
             ///     Verification of the signature format itself is beginning
             /// </summary>
             BeginCheckSignatureFormat,
+
 
             /// <summary>
             ///     Verification of a signed info is beginning
             /// </summary>
             BeginCheckSignedInfo,
 
+
             /// <summary>
             ///     Signing is beginning
             /// </summary>
             BeginSignatureComputation,
+
 
             /// <summary>
             ///     Signature verification is beginning
             /// </summary>
             BeginSignatureVerification,
 
+
             /// <summary>
             ///     Input data has been transformed to its canonicalized form
             /// </summary>
             CanonicalizedData,
+
 
             /// <summary>
             ///     The result of signature format validation
             /// </summary>
             FormatValidationResult,
 
+
             /// <summary>
             ///     Namespaces are being propigated into the signature
             /// </summary>
             NamespacePropagation,
+
 
             /// <summary>
             ///     Output from a Reference
             /// </summary>
             ReferenceData,
 
+
             /// <summary>
             ///     The result of a signature verification
             /// </summary>
             SignatureVerificationResult,
+
 
             /// <summary>
             ///     Calculating the final signature
             /// </summary>
             Signing,
 
+
             /// <summary>
             ///     A reference is being hashed
             /// </summary>
             SigningReference,
+
 
             /// <summary>
             ///     A signature has failed to verify
             /// </summary>
             VerificationFailure,
 
+
             /// <summary>
             ///     Verify that a reference has the correct hash value
             /// </summary>
             VerifyReference,
+
 
             /// <summary>
             ///     Verification is processing the SignedInfo section of the signature
             /// </summary>
             VerifySignedInfo,
 
+
             /// <summary>
             ///     Verification status on the x.509 certificate in use
             /// </summary>
             X509Verification,
+
 
             /// <summary>
             ///     The signature is being rejected by the signature format verifier due to having
             ///     a canonicalization algorithm which is not on the known valid list.
             /// </summary>
             UnsafeCanonicalizationMethod,
+
 
             /// <summary>
             ///     The signature is being rejected by the signature verifier due to having

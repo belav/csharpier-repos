@@ -241,6 +241,7 @@ namespace Internal.Cryptography.Pal.Native
         CERT_TRUST_HAS_NOT_SUPPORTED_CRITICAL_EXT = 0x08000000,
         CERT_TRUST_HAS_WEAK_SIGNATURE = 0x00100000,
 
+
         // These can be applied to chains only
         CERT_TRUST_IS_PARTIAL_CHAIN = 0x00010000,
         CERT_TRUST_CTL_IS_NOT_TIME_VALID = 0x00020000,
@@ -257,10 +258,12 @@ namespace Internal.Cryptography.Pal.Native
         CERT_TRUST_HAS_NAME_MATCH_ISSUER = 0x00000004,
         CERT_TRUST_IS_SELF_SIGNED = 0x00000008,
 
+
         // These can be applied to certificates and chains
         CERT_TRUST_HAS_PREFERRED_ISSUER = 0x00000100,
         CERT_TRUST_HAS_ISSUANCE_CHAIN_POLICY = 0x00000200,
         CERT_TRUST_HAS_VALID_NAME_CONSTRAINTS = 0x00000400,
+
 
         // These can be applied to chains only
         CERT_TRUST_IS_COMPLEX_CHAIN = 0x00010000,

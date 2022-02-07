@@ -13,6 +13,7 @@ namespace System.IO.Packaging
         /// </summary>
         Id = 0,
 
+
         /// <summary>
         /// Type
         /// </summary>

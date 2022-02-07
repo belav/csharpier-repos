@@ -51,6 +51,7 @@ namespace System.Reflection.Metadata.Ecma335
         MethodSpec = 0x2B,
         GenericParamConstraint = 0x2C,
 
+
         // debug tables:
         Document = 0x30,
         MethodDebugInformation = 0x31,

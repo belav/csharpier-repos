@@ -12,10 +12,12 @@ namespace Internal.TypeSystem
         /// </summary>
         AnsiClass = 0x00000000,
 
+
         /// <summary>
         /// LPTSTR is interpreted as UNICODE.
         /// </summary>
         UnicodeClass = 0x00010000,
+
 
         /// <summary>
         /// LPTSTR is interpreted automatically.

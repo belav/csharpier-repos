@@ -22,13 +22,16 @@ namespace Internal.Pgo
         EightByte = 2,
         TypeHandle = 3,
 
+
         // Mask of all schema data types
         MarshalMask = 0xF,
+
 
         // ExcessAlignment
         Align4Byte = 0x10,
         Align8Byte = 0x20,
         AlignPointer = 0x30,
+
 
         // Mask of all schema data types
         AlignMask = 0x30,

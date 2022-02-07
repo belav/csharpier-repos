@@ -14,15 +14,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// All changes are valid, can be applied.
         /// </summary>
         Ready = 1,
 
+
         /// <summary>
         /// Changes require restarting the application in order to be applied.
         /// </summary>
         RestartRequired = 2,
+
 
         /// <summary>
         /// Some changes are errors that block rebuild of the module.

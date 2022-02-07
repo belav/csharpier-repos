@@ -14,10 +14,12 @@ namespace System.Formats.Asn1
         /// </summary>
         BER,
 
+
         /// <summary>
         /// ITU-T X.690 Canonical Encoding Rules
         /// </summary>
         CER,
+
 
         /// <summary>
         /// ITU-T X.690 Distinguished Encoding Rules

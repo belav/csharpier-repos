@@ -11,10 +11,12 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.ProjectSystem.A
         /// </summary>
         SetTreatAsUsed,
 
+
         /// <summary>
         /// Indicates the reference should be updated with `TreatAsUsed="false"`
         /// </summary>
         UnsetTreatAsUsed,
+
 
         /// <summary>
         /// Indicates the reference should be removed from the project.

@@ -14,11 +14,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         None = 0x0,
 
+
         /// <summary>
         /// Represents a value read.
         /// For example, reading the value of a local/field/parameter.
         /// </summary>
         Read = 0x1,
+
 
         /// <summary>
         /// Represents a value write.
@@ -26,11 +28,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Write = 0x2,
 
+
         /// <summary>
         /// Represents a reference being taken for the symbol.
         /// For example, passing an argument to an "in", "ref" or "out" parameter.
         /// </summary>
         Reference = 0x4,
+
 
         /// <summary>
         /// Represents a name-only reference that neither reads nor writes the underlying value.
@@ -39,11 +43,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Name = 0x8,
 
+
         /// <summary>
         /// Represents a value read and/or write.
         /// For example, an increment or compound assignment operation.
         /// </summary>
         ReadWrite = Read | Write,
+
 
         /// <summary>
         /// Represents a readable reference being taken to the value.
@@ -51,11 +57,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         ReadableReference = Read | Reference,
 
+
         /// <summary>
         /// Represents a readable reference being taken to the value.
         /// For example, passing an argument to an "out" parameter.
         /// </summary>
         WritableReference = Write | Reference,
+
 
         /// <summary>
         /// Represents a value read or write.

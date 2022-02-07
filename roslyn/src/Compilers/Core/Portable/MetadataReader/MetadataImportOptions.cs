@@ -16,10 +16,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Public = 0,
 
+
         /// <summary>
         /// Import public, protected and internal symbols.
         /// </summary>
         Internal = 1,
+
 
         /// <summary>
         /// Import all symbols.

@@ -33,6 +33,7 @@ namespace System.Reflection.Metadata
         GenericParameterConstraint = (byte)HandleType.GenericParamConstraint,
         ManifestResource = (byte)HandleType.ManifestResource,
 
+
         // Debug handles
         Document = (byte)HandleType.Document,
         MethodDebugInformation = (byte)HandleType.MethodDebugInformation,
@@ -41,6 +42,7 @@ namespace System.Reflection.Metadata
         LocalConstant = (byte)HandleType.LocalConstant,
         ImportScope = (byte)HandleType.ImportScope,
         CustomDebugInformation = (byte)HandleType.CustomDebugInformation,
+
 
         // Heap handles
         NamespaceDefinition = (byte)HandleType.Namespace,

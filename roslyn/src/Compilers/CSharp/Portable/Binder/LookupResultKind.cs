@@ -53,14 +53,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         StaticInstanceMismatch,
         OverloadResolutionFailure,
 
+
         // Note: within LookupResult, LookupResultKind.Ambiguous is currently not used (in C#). Instead
         // ambiguous results are determined later by examining multiple viable results to determine if
         // they are ambiguous or overloaded. Thus, LookupResultKind.Ambiguous does not occur in a LookupResult,
         // but can occur within a BoundBadExpression.
         Ambiguous,
 
+
         // Indicates a set of symbols, and they are totally fine.
         MemberGroup,
+
 
         // Indicates a single symbol is totally fine.
         Viable,

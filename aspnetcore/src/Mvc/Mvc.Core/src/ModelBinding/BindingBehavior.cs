@@ -15,10 +15,12 @@ public enum BindingBehavior
     /// </summary>
     Optional = 0,
 
+
     /// <summary>
     /// The property should be excluded from model binding.
     /// </summary>
     Never,
+
 
     /// <summary>
     /// The property is required for model binding.

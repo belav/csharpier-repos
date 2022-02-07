@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </summary>
         Applied = 0,
 
+
         /// <summary>
         /// No changes were found.
         /// </summary>
         NoChanges = 1,
+
 
         /// <summary>
         /// Rude edits were found.
@@ -25,11 +27,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </summary>
         RestartRequired = 2,
 
+
         /// <summary>
         /// Edits with a compiler error were found.
         /// This assumes that the agents do not support restart and any rude edits were treated as errors.
         /// </summary>
         ErrorEdits = 3,
+
 
         /// <summary>
         /// An internal error was found while applying code updates. This will generally be propagated through an exception.

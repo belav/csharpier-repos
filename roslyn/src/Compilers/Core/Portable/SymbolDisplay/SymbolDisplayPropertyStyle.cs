@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         NameOnly = 0,
 
+
         /// <summary>
         /// Indicates whether the property is readable and/or writable.
         /// In C#, this is accomplished by including accessors.

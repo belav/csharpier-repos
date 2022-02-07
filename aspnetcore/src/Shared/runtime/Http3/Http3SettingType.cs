@@ -12,6 +12,7 @@ namespace System.Net.Http
         /// </summary>
         QPackMaxTableCapacity = 0x1,
 
+
         // Below are explicitly reserved and should never be sent, per
         // https://tools.ietf.org/html/draft-ietf-quic-http-31#section-7.2.4.1
         // and
@@ -21,12 +22,14 @@ namespace System.Net.Http
         ReservedHttp2InitialWindowSize = 0x4,
         ReservedHttp2MaxFrameSize = 0x5,
 
+
         /// <summary>
         /// SETTINGS_MAX_HEADER_LIST_SIZE
         /// The maximum size of headers. The default is unlimited.
         /// https://tools.ietf.org/html/draft-ietf-quic-http-24#section-7.2.4.1
         /// </summary>
         MaxHeaderListSize = 0x6,
+
 
         /// <summary>
         /// SETTINGS_QPACK_BLOCKED_STREAMS

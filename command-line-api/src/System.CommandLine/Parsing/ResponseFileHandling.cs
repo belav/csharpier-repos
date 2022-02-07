@@ -16,10 +16,12 @@ namespace System.CommandLine.Parsing
         ///</remarks>
         ParseArgsAsLineSeparated,
 
+
         ///<summary>
         /// Arguments are separated by whitespace (spaces and/or new-lines)
         ///</summary>
         ParseArgsAsSpaceSeparated,
+
 
         ///<summary>
         /// Do not parse response files. Command line tokens beginning with <c>@</c> receive no special treatment.

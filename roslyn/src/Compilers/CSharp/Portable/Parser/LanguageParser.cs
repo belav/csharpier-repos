@@ -8085,6 +8085,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             /// </summary>
             NotType,
 
+
             /// <summary>
             /// Definitely a type name: either a predefined type (int, string, etc.) or an array
             /// type (ending with a [] brackets), or a pointer type (ending with *s), or a function
@@ -8093,20 +8094,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             /// </summary>
             MustBeType,
 
+
             /// <summary>
             /// Might be a generic (qualified) type name or a method name.
             /// </summary>
             GenericTypeOrMethod,
+
 
             /// <summary>
             /// Might be a generic (qualified) type name or an expression or a method name.
             /// </summary>
             GenericTypeOrExpression,
 
+
             /// <summary>
             /// Might be a non-generic (qualified) type name or an expression.
             /// </summary>
             NonGenericTypeOrExpression,
+
 
             /// <summary>
             /// A type name with alias prefix (Alias::Name).  Note that Alias::Name.X would not fall under this.  This
@@ -8114,15 +8119,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             /// </summary>
             AliasQualifiedName,
 
+
             /// <summary>
             /// Nullable type (ending with ?).
             /// </summary>
             NullableType,
 
+
             /// <summary>
             /// Might be a pointer type or a multiplication.
             /// </summary>
             PointerOrMultiplication,
+
 
             /// <summary>
             /// Might be a tuple type.

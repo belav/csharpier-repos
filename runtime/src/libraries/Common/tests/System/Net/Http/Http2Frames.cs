@@ -27,6 +27,7 @@ namespace System.Net.Test.Common
     {
         None = 0,
 
+
         // Some frame types define bits differently.  Define them all here for simplicity.
         EndStream = 0b00000001,
         Ack = 0b00000001,

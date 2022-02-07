@@ -17,6 +17,7 @@ namespace Microsoft.Extensions.Hosting
         /// </remarks>
         StopHost = 0,
 
+
         /// <summary>
         /// Ignore exceptions thrown in <see cref="BackgroundService"/>.
         /// </summary>

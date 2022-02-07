@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             // like s.Substring(expr, s.Length - expr) or s.Substring(expr).  'expr' has to match on both sides.
             Computed,
 
+
             // like s.Substring(constant1, s.Length - constant2).  the constants don't have to match.
             Constant,
         }

@@ -138,6 +138,7 @@ namespace Internal.TypeSystem
         ThrowOnUnmappableCharDisable = 8192,
         ThrowOnUnmappableCharMask = 12288,
 
+
         // Not actually part of MethodImportAttributes.
         // MethodImportAttributes is limited to `short`. This enum is based on int
         // and we have 16 spare bytes.

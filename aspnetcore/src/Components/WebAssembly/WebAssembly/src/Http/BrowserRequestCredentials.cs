@@ -13,11 +13,13 @@ public enum BrowserRequestCredentials
     /// </summary>
     Omit,
 
+
     /// <summary>
     /// Advises the browser to send credentials (such as cookies or HTTP auth headers)
     /// only if the target URL is on the same origin as the calling application.
     /// </summary>
     SameOrigin,
+
 
     /// <summary>
     /// Advises the browser to send credentials (such as cookies or HTTP auth headers)

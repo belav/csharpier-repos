@@ -20,6 +20,7 @@ namespace System.IO.Compression
         HaveFullLength = 12, // Ditto, now have the full match length (incl. extra length bits)
         HaveDistCode = 13, // Ditto, now have the distance code also, need extra dist bits
 
+
         /* uncompressed blocks */
         UncompressedAligning = 15,
         UncompressedByte1 = 16,
@@ -27,6 +28,7 @@ namespace System.IO.Compression
         UncompressedByte3 = 18,
         UncompressedByte4 = 19,
         DecodingUncompressed = 20,
+
 
         // These three apply only to GZIP
         StartReadingFooter = 21, // (Initialisation for reading footer)

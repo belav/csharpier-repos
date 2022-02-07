@@ -17,6 +17,7 @@ namespace System.ComponentModel.Design
         /// </summary>
         Auto = 0x0001,
 
+
         /// <summary>
         /// A Normal selection. With this type of selection, the selection service responds
         /// to the control and shift keys to support appending or toggling components into the
@@ -25,11 +26,13 @@ namespace System.ComponentModel.Design
         [Obsolete("SelectionTypes.Normal has been deprecated. Use SelectionTypes.Auto instead.")]
         Normal = 0x0001,
 
+
         /// <summary>
         /// A Replace selection. This causes the selection service to always replace the
         /// current selection with the replacement.
         /// </summary>
         Replace = 0x0002,
+
 
         /// <summary>
         /// A MouseDown selection. Happens when the user presses down on
@@ -40,6 +43,7 @@ namespace System.ComponentModel.Design
         [Obsolete("SelectionTypes.MouseDown has been deprecated and is not supported.")]
         MouseDown = 0x0004,
 
+
         /// <summary>
         /// A MouseUp selection. Happens when the user releases the
         /// mouse button when a control (or component) has been selected. If a component
@@ -48,6 +52,7 @@ namespace System.ComponentModel.Design
         /// </summary>
         [Obsolete("SelectionTypes.MouseUp has been deprecated and is not supported.")]
         MouseUp = 0x0008,
+
 
         /// <summary>
         /// A Click selection.
@@ -58,6 +63,7 @@ namespace System.ComponentModel.Design
         [Obsolete("SelectionTypes.Click has been deprecated. Use SelectionTypes.Primary instead.")]
         Click = 0x0010,
 
+
         /// <summary>
         /// A Primary selection.
         /// Happens when a user clicks on a component. If a component in the selection list is already
@@ -65,6 +71,7 @@ namespace System.ComponentModel.Design
         /// primary selection.
         /// </summary>
         Primary = 0x0010,
+
 
         /// <summary>
         /// A toggle selection.
@@ -74,6 +81,7 @@ namespace System.ComponentModel.Design
         /// </summary>
         Toggle = 0x0020,
 
+
         /// <summary>
         /// An Add selection.
         /// This selection adds the selected components to the current selection,
@@ -81,12 +89,14 @@ namespace System.ComponentModel.Design
         /// </summary>
         Add = 0x0040,
 
+
         /// <summary>
         /// A Remove selection.
         /// This selection removes the selected components from the current selection,
         /// maintaining the current set of selected components.
         /// </summary>
         Remove = 0x0080,
+
 
         /// <summary>
         /// Limits valid selection types to Normal, Replace, MouseDown, MouseUp,

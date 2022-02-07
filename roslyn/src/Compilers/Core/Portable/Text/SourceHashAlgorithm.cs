@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// Secure Hash Algorithm 1.
         /// </summary>
         Sha1 = 1,
+
 
         /// <summary>
         /// Secure Hash Algorithm 2 with a hash size of 256 bits.

@@ -301,6 +301,7 @@ internal class HtmlTokenizer : Tokenizer
         Data,
         Text,
 
+
         // Razor Comments - need to be the same for HTML and CSharp
         AfterRazorCommentTransition = RazorCommentTokenizerState.AfterRazorCommentTransition,
         EscapedRazorCommentTransition = RazorCommentTokenizerState.EscapedRazorCommentTransition,

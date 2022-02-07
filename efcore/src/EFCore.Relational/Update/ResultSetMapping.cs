@@ -22,10 +22,12 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// </summary>
         NoResultSet,
 
+
         /// <summary>
         ///     The command maps to a result in the result set, but this is not the last result.
         /// </summary>
         NotLastInResultSet,
+
 
         /// <summary>
         ///     The command maps to the last result in the result set.

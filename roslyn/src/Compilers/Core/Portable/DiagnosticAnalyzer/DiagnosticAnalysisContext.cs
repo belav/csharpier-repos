@@ -297,11 +297,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         None = 0x00,
 
+
         /// <summary>
         /// Enable analyzer action callbacks for generated code.
         /// Analyzer driver will make callbacks into the analyzer for all entities (source files, symbols, etc.) in the compilation, including generated code.
         /// </summary>
         Analyze = 0x01,
+
 
         /// <summary>
         /// Enable reporting diagnostics on generated code.

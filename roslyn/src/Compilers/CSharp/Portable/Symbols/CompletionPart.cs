@@ -27,14 +27,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         None = 0,
         Attributes = 1 << 0,
 
+
         // For method symbols
         ReturnTypeAttributes = 1 << 1,
+
 
         // For methods.
         Parameters = 1 << 2,
 
+
         // For symbols with type: method, and field symbols. Properties are handled separately.
         Type = 1 << 3,
+
 
         // For named type symbols
         StartBaseType = 1 << 4,
@@ -51,6 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         FinishMemberChecks = 1 << 15,
         MembersCompleted = 1 << 16, // this should be the last (highest-value) part
         All = (1 << 17) - 1,
+
 
         // This is the work we can do if ForceComplete is scoped to a particular SyntaxTree.
         NamedTypeSymbolWithLocationAll =
@@ -69,19 +74,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             | FinishMemberChecks,
         NamedTypeSymbolAll = NamedTypeSymbolWithLocationAll | MembersCompleted,
 
+
         // For Usings
         StartValidatingImports = 1 << 4,
         FinishValidatingImports = 1 << 5,
         ImportsAll = StartValidatingImports | FinishValidatingImports,
 
+
         // For namespace symbols
         NameToMembersMap = 1 << 11,
         NamespaceSymbolAll = NameToMembersMap | MembersCompleted,
+
 
         // For field symbols
         FixedSize = 1 << 11,
         ConstantValue = 1 << 12,
         FieldSymbolAll = Attributes | Type | FixedSize | ConstantValue,
+
 
         // For method symbols
         StartAsyncMethodChecks = 1 << 11,
@@ -99,6 +108,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             | StartAsyncMethodChecks
             | FinishAsyncMethodChecks,
 
+
         // For complex parameter symbols
         StartDefaultSyntaxValue = 1 << 11,
         EndDefaultSyntaxValue = 1 << 12,
@@ -109,9 +119,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             | EndDefaultSyntaxValue
             | EndDefaultSyntaxValueDiagnostics,
 
+
         // For type parameter symbols
         TypeParameterConstraints = 1 << 11,
         TypeParameterSymbolAll = Attributes | TypeParameterConstraints,
+
 
         // For property symbols
         StartPropertyEnsureSignature = 1 << 4,
@@ -129,8 +141,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             | StartPropertyType
             | FinishPropertyType,
 
+
         // For alias symbols
         AliasTarget = 1 << 4,
+
 
         // For assembly symbols
         StartAttributeChecks = 1 << 4,
@@ -145,6 +159,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             | Module
             | StartValidatingAddedModules
             | FinishValidatingAddedModules,
+
 
         // For module symbol
         StartValidatingReferencedAssemblies = 1 << 4,

@@ -19,6 +19,7 @@ namespace System
             // Output [ '0' .. '9' ] and [ 'A' .. 'F' ].
             Upper = 0,
 
+
             // Output [ '0' .. '9' ] and [ 'a' .. 'f' ].
             // This works because values in the range [ 0x30 .. 0x39 ] ([ '0' .. '9' ])
             // already have the 0x20 bit set, so ORing them with 0x20 is a no-op,

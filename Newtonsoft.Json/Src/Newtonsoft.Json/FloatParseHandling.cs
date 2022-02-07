@@ -35,6 +35,7 @@ namespace Newtonsoft.Json
         /// </summary>
         Double = 0,
 
+
         /// <summary>
         /// Floating point numbers are parsed to <see cref="Decimal"/>.
         /// </summary>

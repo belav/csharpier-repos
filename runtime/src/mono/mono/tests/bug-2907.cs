@@ -118,6 +118,7 @@ public enum ItemChoiceType
     /// <remarks/>
     OptionA,
 
+
     /// <remarks/>
     OptionB,
 }

@@ -13,11 +13,13 @@ public enum DirectiveUsage
     /// </summary>
     Unrestricted,
 
+
     /// <summary>
     /// Directive must exist prior to any HTML or code and have no duplicates. When importing the directive, if it is
     /// <see cref="DirectiveKind.SingleLine"/>, the last occurrence of the directive is imported.
     /// </summary>
     FileScopedSinglyOccurring,
+
 
     /// <summary>
     /// Directive must exist prior to any HTML or code.

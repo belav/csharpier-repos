@@ -312,6 +312,7 @@ namespace System.Formats.Cbor.Tests
             KeyOps = 4,
             BaseIv = 5,
 
+
             // cf. https://tools.ietf.org/html/rfc8152#section-13.1.1 table 23
             EcCrv = -1,
             EcX = -2,

@@ -867,10 +867,12 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             /// </summary>
             Normal,
 
+
             /// <summary>
             /// Span starts at the beginning of the tree
             /// </summary>
             BeginningOfFile,
+
 
             /// <summary>
             /// Span ends at the end of the tree

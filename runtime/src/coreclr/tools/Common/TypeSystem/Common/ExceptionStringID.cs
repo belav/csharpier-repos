@@ -16,14 +16,18 @@ namespace Internal.TypeSystem
         ClassLoadValueClassTooLarge,
         ClassLoadRankTooLarge,
 
+
         // MissingMethodException
         MissingMethod,
+
 
         // MissingFieldException
         MissingField,
 
+
         // FileNotFoundException
         FileLoadErrorGeneric,
+
 
         // InvalidProgramException
         InvalidProgramDefault,
@@ -38,9 +42,11 @@ namespace Internal.TypeSystem
         InvalidProgramNonBlittableTypes,
         InvalidProgramMultipleCallConv,
 
+
         // BadImageFormatException
         BadImageFormatGeneric,
         BadImageFormatSpecific,
+
 
         // MarshalDirectiveException
         MarshalDirectiveGeneric,

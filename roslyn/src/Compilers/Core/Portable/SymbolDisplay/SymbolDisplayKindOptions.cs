@@ -17,17 +17,20 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// Includes the <c>namespace</c> keyword before namespaces.
         /// For example, "namespace System", rather than "System".
         /// </summary>
         IncludeNamespaceKeyword = 1 << 0,
 
+
         /// <summary>
         /// Includes the type keyword before types.
         /// For example, "class C" in C# or "Structure S" in Visual Basic.
         /// </summary>
         IncludeTypeKeyword = 1 << 1,
+
 
         /// <summary>
         /// Include the member keyword before members (if one exists).

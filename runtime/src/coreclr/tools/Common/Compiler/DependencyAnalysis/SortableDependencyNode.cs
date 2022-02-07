@@ -66,6 +66,7 @@ namespace ILCompiler.DependencyAnalysis
             ImportSectionNode,
             MethodEntrypointTableNode,
 
+
             //
             // CoreRT Nodes
             //

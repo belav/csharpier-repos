@@ -35,6 +35,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         internal enum CorFileMapping : uint
         {
             Flat = 0, // Flat file mapping - file is mapped as data file (code:SEC_IMAGE flag was not
+
             // passed to code:CreateFileMapping).
             ExecutableImage = 1 // Executable image file mapping - file is mapped for execution
             // (either via code:LoadLibrary or code:CreateFileMapping with code:SEC_IMAGE flag).

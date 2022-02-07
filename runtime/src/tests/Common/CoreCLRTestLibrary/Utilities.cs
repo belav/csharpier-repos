@@ -381,6 +381,7 @@ namespace TestLibrary
                 /// </summary>
                 Any = 0xffff,
 
+
                 /// <summary>
                 /// A null-terminated string.
                 /// This will be either a Unicode or an ANSI string, depending on whether you use the Unicode or ANSI function.
@@ -397,6 +398,7 @@ namespace TestLibrary
                 /// No defined value type
                 /// </summary>
                 RegNone = 0,
+
 
                 /// <summary>
                 /// A null-terminated string.

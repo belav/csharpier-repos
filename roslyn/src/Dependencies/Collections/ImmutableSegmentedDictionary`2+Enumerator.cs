@@ -31,6 +31,7 @@ namespace Microsoft.CodeAnalysis.Collections
                 /// </summary>
                 KeyValuePair,
 
+
                 /// <summary>
                 /// The return value from the implementation of <see cref="IEnumerable.GetEnumerator"/> is
                 /// <see cref="System.Collections.DictionaryEntry"/>. This is the return value for instances of this

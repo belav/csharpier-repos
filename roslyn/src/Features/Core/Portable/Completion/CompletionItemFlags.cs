@@ -11,6 +11,7 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         None = 0x0,
 
+
         /// <summary>
         /// Indicates this <see cref="CompletionItem"/> is cached and reused across completion sessions.
         /// This might be used by completion system for things like deciding whether it can safely cache and reuse
@@ -20,6 +21,7 @@ namespace Microsoft.CodeAnalysis.Completion
         ///       https://github.com/dotnet/roslyn/issues/35160
         /// </summary>
         Cached = 0x1,
+
 
         /// <summary>
         /// Indicates this <see cref="CompletionItem"/> should be shown only when expanded items is requested.

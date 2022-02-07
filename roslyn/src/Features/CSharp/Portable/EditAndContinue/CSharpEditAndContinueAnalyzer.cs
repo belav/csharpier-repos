@@ -66,6 +66,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         {
             WholeExpression = DefaultStatementPart,
 
+
             // An active statement that covers IL generated for the decision tree:
             //   <governing-expression> [|switch { <arm>, ..., <arm> }|]
             // This active statement is never a leaf active statement (does not correspond to a breakpoint span).

@@ -13,15 +13,18 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         ReadWriteCreate,
 
+
         /// <summary>
         ///     Opens the database for reading and writing.
         /// </summary>
         ReadWrite,
 
+
         /// <summary>
         ///     Opens the database in read-only mode.
         /// </summary>
         ReadOnly,
+
 
         /// <summary>
         ///     Opens an in-memory database.

@@ -13,6 +13,7 @@ namespace Internal.TypeSystem
     {
         Unknown,
 
+
         // Primitive types are first - keep in sync with type flags
         Void,
         Boolean,

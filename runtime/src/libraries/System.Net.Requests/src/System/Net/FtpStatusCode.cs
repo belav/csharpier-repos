@@ -7,6 +7,7 @@ namespace System.Net
     {
         Undefined = 0,
 
+
         //
         // Informational 1xx
         //
@@ -15,6 +16,7 @@ namespace System.Net
         ServiceTemporarilyNotAvailable = 120,
         DataAlreadyOpen = 125,
         OpeningData = 150,
+
 
         //
         // Success 2xx
@@ -34,6 +36,7 @@ namespace System.Net
         FileActionOK = 250,
         PathnameCreated = 257,
 
+
         //
         // Intermediate 3xx
         //
@@ -41,6 +44,7 @@ namespace System.Net
         SendPasswordCommand = 331,
         NeedLoginAccount = 332,
         FileCommandPending = 350,
+
 
         //
         // Temporary Errors 4xx
@@ -52,6 +56,7 @@ namespace System.Net
         ActionNotTakenFileUnavailableOrBusy = 450,
         ActionAbortedLocalProcessingError = 451,
         ActionNotTakenInsufficientSpace = 452,
+
 
         //
         // Fatal Errors 5xx

@@ -22,25 +22,30 @@ public enum RenderTreeFrameType : short
     /// </summary>
     None = 0,
 
+
     /// <summary>
     /// Represents a container for other frames.
     /// </summary>
     Element = 1,
+
 
     /// <summary>
     /// Represents text content.
     /// </summary>
     Text = 2,
 
+
     /// <summary>
     /// Represents a key-value pair associated with another <see cref="RenderTreeFrame"/>.
     /// </summary>
     Attribute = 3,
 
+
     /// <summary>
     /// Represents a child component.
     /// </summary>
     Component = 4,
+
 
     /// <summary>
     /// Defines the boundary around range of sibling frames that should be treated as an
@@ -50,15 +55,18 @@ public enum RenderTreeFrameType : short
     /// </summary>
     Region = 5,
 
+
     /// <summary>
     /// Represents an instruction to capture or update a reference to the parent element.
     /// </summary>
     ElementReferenceCapture = 6,
 
+
     /// <summary>
     /// Represents an instruction to capture or update a reference to the parent component.
     /// </summary>
     ComponentReferenceCapture = 7,
+
 
     /// <summary>
     /// Represents a block of markup content.

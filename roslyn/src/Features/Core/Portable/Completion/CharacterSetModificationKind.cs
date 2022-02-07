@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         Add,
 
+
         /// <summary>
         /// The rule removes characters from the existing set of characters.
         /// </summary>
         Remove,
+
 
         /// <summary>
         /// The rule replaces the existing set of characters.

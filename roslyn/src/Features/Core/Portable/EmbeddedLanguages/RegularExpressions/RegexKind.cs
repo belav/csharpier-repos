@@ -54,6 +54,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         KCaptureEscape,
         BackreferenceEscape,
 
+
         // Tokens
         DollarToken,
         OpenBraceToken,
@@ -79,11 +80,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         MinusToken,
         SingleQuoteToken,
 
+
         // Special multi-character tokens that have to be explicitly requested.
         OptionsToken,
         NumberToken,
         CaptureNameToken,
         EscapeCategoryToken,
+
 
         // Trivia
         CommentTrivia,

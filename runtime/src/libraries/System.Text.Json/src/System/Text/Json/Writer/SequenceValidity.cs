@@ -13,6 +13,7 @@ namespace System.Buffers.Text
         /// </summary>
         Empty = 0,
 
+
         /// <summary>
         /// The sequence is well-formed and unambiguously represents a proper Unicode scalar value.
         /// </summary>
@@ -23,6 +24,7 @@ namespace System.Buffers.Text
         /// [ D83D DE00 ] (U+1F600 GRINNING FACE) is a well-formed UTF-16 sequence.
         /// </remarks>
         WellFormed = 1,
+
 
         /// <summary>
         /// The sequence is not well-formed on its own, but it could appear as a prefix
@@ -36,6 +38,7 @@ namespace System.Buffers.Text
         /// [ D83D ] is an incomplete UTF-16 sequence if it is followed by nothing.
         /// </remarks>
         Incomplete = 2,
+
 
         /// <summary>
         /// The sequence is never well-formed anywhere, or this sequence can never appear as a prefix

@@ -57,15 +57,18 @@ namespace Internal.TypeSystem
         /// </summary>
         None,
 
+
         /// <summary>
         /// A default implementation was found.
         /// </summary>
         DefaultImplementation,
 
+
         /// <summary>
         /// The implementation was reabstracted.
         /// </summary>
         Reabstraction,
+
 
         /// <summary>
         /// The default implementation conflicts.

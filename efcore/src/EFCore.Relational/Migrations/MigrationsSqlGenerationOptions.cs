@@ -19,15 +19,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// </summary>
         Default = 0,
 
+
         /// <summary>
         ///     Generate SQL for a script. Automatically added by <see cref="IMigrator.GenerateScript" />.
         /// </summary>
         Script = 1,
 
+
         /// <summary>
         ///     Generate SQL for an idempotent script.
         /// </summary>
         Idempotent = 1 << 1,
+
 
         /// <summary>
         ///     Generate SQL for a script without transaction statements.

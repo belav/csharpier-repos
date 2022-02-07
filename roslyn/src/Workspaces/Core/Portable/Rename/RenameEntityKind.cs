@@ -13,6 +13,7 @@ namespace Microsoft.CodeAnalysis.Rename
         /// </summary>
         BaseSymbol = 0,
 
+
         /// <summary>
         /// mentions that the result is for the overloaded symbols of the rename
         /// </summary>

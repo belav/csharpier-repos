@@ -33,11 +33,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             None = 0,
 
+
             /// <summary>
             /// The current document content does not match the content the module was compiled with.
             /// This document state may change to <see cref="MatchesBuildOutput"/> or <see cref="DesignTimeOnly"/>.
             /// </summary>
             OutOfSync = 1,
+
 
             /// <summary>
             /// It hasn't been possible to determine whether the current document content does matches the content
@@ -46,12 +48,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             /// </summary>
             Indeterminate = 2,
 
+
             /// <summary>
             /// The document is not compiled into the module. It's only included in the project
             /// to support design-time features such as completion, etc.
             /// This is a final state. Once a document is in this state it won't switch to a different one.
             /// </summary>
             DesignTimeOnly = 3,
+
 
             /// <summary>
             /// The current document content matches the content the built module was compiled with.

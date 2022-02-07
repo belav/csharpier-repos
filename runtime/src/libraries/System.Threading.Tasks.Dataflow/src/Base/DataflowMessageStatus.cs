@@ -21,10 +21,12 @@ namespace System.Threading.Tasks.Dataflow
         /// </summary>
         Accepted = 0x0,
 
+
         /// <summary>
         /// Indicates that the <see cref="ITargetBlock{TInput}"/> declined the message.  The <see cref="ISourceBlock{TOutput}"/> still owns the message.
         /// </summary>
         Declined = 0x1,
+
 
         /// <summary>
         /// Indicates that the <see cref="ITargetBlock{TInput}"/> postponed the message for potential consumption at a later time.
@@ -32,11 +34,13 @@ namespace System.Threading.Tasks.Dataflow
         /// </summary>
         Postponed = 0x2,
 
+
         /// <summary>
         /// Indicates that the <see cref="ITargetBlock{TInput}"/> tried to accept the message from the <see cref="ISourceBlock{TOutput}"/>, but the
         /// message was no longer available.
         /// </summary>
         NotAvailable = 0x3,
+
 
         /// <summary>
         /// Indicates that the <see cref="ITargetBlock{TInput}"/> declined the message.  The <see cref="ISourceBlock{TOutput}"/> still owns the message.

@@ -30,6 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompilerGenerated = 1 << 1,
             IsSuppressed = 1 << 2,
 
+
             // Bit 3: 1 if the node has maybe-null state, 0 if the node is not null
             // Bits 4 and 5: 01 if the node is not annotated, 10 if the node is annotated, 11 if the node is disabled
             TopLevelFlowStateMaybeNull = 1 << 3,
@@ -38,12 +39,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             TopLevelNone = TopLevelAnnotated | TopLevelNotAnnotated,
             TopLevelAnnotationMask = TopLevelNone,
 
+
             /// <summary>
             /// Captures the fact that consumers of the node already checked the state of the WasCompilerGenerated bit.
             /// Allows to assert on attempts to set WasCompilerGenerated bit after that.
             /// </summary>
             WasCompilerGeneratedIsChecked = 1 << 6,
             WasTopLevelNullabilityChecked = 1 << 7,
+
 
             /// <summary>
             /// Captures the fact that the node was either converted to some type, or converted to its natural

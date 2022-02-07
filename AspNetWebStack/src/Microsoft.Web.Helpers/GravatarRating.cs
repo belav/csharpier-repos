@@ -8,6 +8,7 @@ namespace Microsoft.Web.Helpers
     public enum GravatarRating
     {
         Default,
+
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -16,6 +17,7 @@ namespace Microsoft.Web.Helpers
         )]
         G,
         PG,
+
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -23,6 +25,7 @@ namespace Microsoft.Web.Helpers
             Justification = "Matches the gravatar.com rating. Suppressed in source because this is a one-time occurrence"
         )]
         R,
+
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",

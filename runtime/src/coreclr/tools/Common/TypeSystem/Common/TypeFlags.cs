@@ -10,6 +10,7 @@ namespace Internal.TypeSystem
     {
         CategoryMask = 0x3F,
 
+
         // Primitive
         Unknown = 0x00,
         Void = 0x01,
@@ -30,10 +31,12 @@ namespace Internal.TypeSystem
         ValueType = 0x10,
         Enum = 0x11, // Parent is enum
         Nullable = 0x12, // Nullable instantiation
+
         // Unused         0x13
 
         Class = 0x14,
         Interface = 0x15,
+
         // Unused         0x16
 
         Array = 0x17,

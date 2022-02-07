@@ -289,11 +289,14 @@ namespace System.Configuration
             // Initialization has not yet started.
             NotStarted = 0,
 
+
             // Initialization has started.
             Started,
 
+
             // The config system can be used, but initialization is not yet complete.
             Usable,
+
 
             // The config system has been completely initialized.
             Completed

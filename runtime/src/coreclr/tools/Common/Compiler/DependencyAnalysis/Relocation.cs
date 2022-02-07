@@ -17,6 +17,7 @@ namespace ILCompiler.DependencyAnalysis
         IMAGE_REL_BASED_THUMB_MOV32_PCREL = 0x14, // Thumb2: based MOVW/MOVT
         IMAGE_REL_BASED_ARM64_BRANCH26 = 0x15, // Arm64: B, BL
         IMAGE_REL_BASED_RELPTR32 = 0x7C, // 32-bit relative address from byte starting reloc
+
         // This is a special NGEN-specific relocation type
         // for relative pointer (used to make NGen relocation
         // section smaller)
@@ -24,6 +25,7 @@ namespace ILCompiler.DependencyAnalysis
         IMAGE_REL_BASED_ARM64_PAGEBASE_REL21 = 0x81, // ADRP
         IMAGE_REL_BASED_ARM64_PAGEOFFSET_12A = 0x82, // ADD/ADDS (immediate) with zero shift, for page offset
         IMAGE_REL_BASED_ARM64_PAGEOFFSET_12L = 0x83, // LDR (indexed, unsigned immediate), for page offset
+
 
         //
         // Relocations for R2R image production

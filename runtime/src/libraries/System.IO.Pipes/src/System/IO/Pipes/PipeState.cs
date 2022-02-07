@@ -11,9 +11,11 @@ namespace System.IO.Pipes
         // server ctor has completed).
         WaitingToConnect = 0,
 
+
         // For named pipes: the state we're in after calling Connect. For anonymous pipes: occurs as soon as
         // both handles are created.
         Connected = 1,
+
 
         // It's detected that the other side has broken the connection. Note that this effect isn't immediate; we
         // only detect this on the subsequent Win32 call, as indicated by the following error codes:
@@ -24,8 +26,10 @@ namespace System.IO.Pipes
         //    - One side closes the handle
         Broken = 2,
 
+
         // Valid only for named servers. The server transitions to this state immediately after Disconnect is called.
         Disconnected = 3,
+
 
         // Close/Disposed are the same state. The Close method calls Dispose; both of these close the pipe handle
         // and perform other cleanup. The pipe object is no longer usable after this has been called.

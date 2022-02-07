@@ -16,6 +16,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Match,
 
+
         /// <summary>
         /// This indicates that friend access should be granted for the purposes of error recovery,
         /// but the program is wrong.
@@ -28,12 +29,14 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         OneSignedOneNot,
 
+
         /// <summary>
         /// This indicates that friend access should not be granted because the other assembly grants
         /// friend access to a strong-named assembly, and either this assembly is weak-named, or
         /// it is strong-named and the names don't match.
         /// </summary>
         PublicKeyDoesntMatch,
+
 
         /// <summary>
         /// This indicates that friend access should not be granted because the other assembly

@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// Covariant (<c>out</c>).
         /// </summary>
         Out = 1,
+
 
         /// <summary>
         /// Contravariant (<c>in</c>).

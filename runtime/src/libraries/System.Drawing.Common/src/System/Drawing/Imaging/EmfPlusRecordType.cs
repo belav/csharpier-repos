@@ -79,6 +79,7 @@ namespace System.Drawing.Imaging
         WmfCreateBrushIndirect = WmfRecordBase | 0x2fc,
         WmfCreateRegion = WmfRecordBase | 0x6ff,
 
+
         // Since we have to enumerate GDI records right along with GDI+ records,
         // we list all the GDI records here so that they can be part of the
         // same enumeration type which is used in the enumeration callback.
@@ -208,6 +209,7 @@ namespace System.Drawing.Imaging
         EmfMax = 122,
         EmfMin = 1,
 
+
         // That is the END of the GDI EMF records.
 
         // Now we start the list of EMF+ records.  We leave quite
@@ -224,8 +226,10 @@ namespace System.Drawing.Imaging
         MultiFormatSection,
         MultiFormatEnd,
 
+
         // For all Persistent Objects
         Object,
+
         // Drawing Records
         Clear,
         FillRects,
@@ -247,6 +251,7 @@ namespace System.Drawing.Imaging
         DrawImage,
         DrawImagePoints,
         DrawString,
+
 
         // Graphics State Records
         SetRenderingOrigin,

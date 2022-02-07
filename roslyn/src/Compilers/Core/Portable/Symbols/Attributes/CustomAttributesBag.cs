@@ -231,11 +231,13 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             None = 0,
 
+
             /// <summary>
             /// Early decoded attribute data has been computed and stored on the bag, but bound attributes or remaining decoded attribute data is not stored.
             /// Only <see cref="EarlyDecodedWellKnownAttributeData"/> can be accessed from this bag.
             /// </summary>
             EarlyDecodedWellKnownAttributeData = 1 << 0,
+
 
             /// <summary>
             /// All decoded attribute data has been computed and stored on the bag, but bound attributes are not yet stored.
@@ -243,10 +245,12 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             DecodedWellKnownAttributeData = 1 << 1,
 
+
             /// <summary>
             /// Bound attributes have been computed and stored on this bag.
             /// </summary>
             Attributes = 1 << 2,
+
 
             /// <summary>
             /// CustomAttributeBag is completely initialized and immutable.

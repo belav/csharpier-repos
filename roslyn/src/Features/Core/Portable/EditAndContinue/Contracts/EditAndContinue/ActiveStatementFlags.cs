@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
     {
         None = 0,
 
+
         /// <summary>
         /// At least one of the threads whom this active statement belongs to is in a leaf frame.
         /// </summary>
         LeafFrame = 1,
+
 
         /// <summary>
         /// The statement is partially executed.
@@ -31,10 +33,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </remarks>
         PartiallyExecuted = 2,
 
+
         /// <summary>
         /// The statement IL is not in user code.
         /// </summary>
         NonUserCode = 4,
+
 
         /// <summary>
         /// Indicates that the active statement instruction belongs to the latest version of the containing method.
@@ -47,10 +51,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </remarks>
         MethodUpToDate = 8,
 
+
         /// <summary>
         /// At least one of the threads whom this active statement belongs to is in a non-leaf frame.
         /// </summary>
         NonLeafFrame = 16,
+
 
         /// <summary>
         /// When applying updates while the code is executing, we will not attempt any remap for methods which are on the

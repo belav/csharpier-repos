@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// </summary>
         RequestCompleted,
 
+
         /// <summary>
         /// The request contained an error that should cause the server to shutdown. This can happen for cases
         /// like:

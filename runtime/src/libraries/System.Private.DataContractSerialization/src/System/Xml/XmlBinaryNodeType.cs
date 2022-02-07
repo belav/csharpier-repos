@@ -202,6 +202,7 @@ namespace System.Xml
         PrefixElementZ = PrefixElementY + 1,
         MaxElement = PrefixElementZ,
 
+
         // MinorVersion = MaxElement + 1, // Reserved (Not supported)
 
         MinText = 0x80, // Must be even

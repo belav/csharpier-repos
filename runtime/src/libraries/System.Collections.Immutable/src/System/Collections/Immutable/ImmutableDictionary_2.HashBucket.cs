@@ -403,15 +403,18 @@ namespace System.Collections.Immutable
                     /// </summary>
                     BeforeFirst,
 
+
                     /// <summary>
                     /// We're at the <see cref="_firstValue"/> of the containing bucket.
                     /// </summary>
                     First,
 
+
                     /// <summary>
                     /// We're enumerating the <see cref="_additionalElements"/> in the bucket.
                     /// </summary>
                     Additional,
+
 
                     /// <summary>
                     /// The end of enumeration has been reached.

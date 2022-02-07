@@ -13,10 +13,12 @@ public enum ApiConventionNameMatchBehavior
     /// </summary>
     Any,
 
+
     /// <summary>
     /// The parameter or method name must exactly match the convention.
     /// </summary>
     Exact,
+
 
     /// <summary>
     /// The parameter or method name in the convention is a proper prefix.
@@ -26,6 +28,7 @@ public enum ApiConventionNameMatchBehavior
     /// </para>
     /// </summary>
     Prefix,
+
 
     /// <summary>
     /// The parameter or method name in the convention is a proper suffix.

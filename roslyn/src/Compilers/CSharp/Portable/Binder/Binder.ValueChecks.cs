@@ -63,12 +63,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </remarks>
             RValue = 1 << ValueKindInsignificantBits,
 
+
             /// <summary>
             /// Expression can be the LHS of a simple assignment operation.
             /// Example:
             ///   property with a setter
             /// </summary>
             Assignable = 2 << ValueKindInsignificantBits,
+
 
             /// <summary>
             /// Expression represents a location. Often referred as a "variable"
@@ -77,12 +79,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             RefersToLocation = 4 << ValueKindInsignificantBits,
 
+
             /// <summary>
             /// Expression can be the LHS of a ref-assign operation.
             /// Example:
             ///  ref local, ref parameter, out parameter
             /// </summary>
             RefAssignable = 8 << ValueKindInsignificantBits,
+
 
             ///////////////////
             // The rest are just combinations of the above.
@@ -95,11 +99,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             RValueOrMethodGroup = RValue + 1,
 
+
             /// <summary>
             /// Expression can be an LHS of a compound assignment
             /// operation (such as +=).
             /// </summary>
             CompoundAssignment = RValue | Assignable,
+
 
             /// <summary>
             /// Expression can be the operand of an increment or decrement operation.
@@ -107,10 +113,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             IncrementDecrement = CompoundAssignment + 1,
 
+
             /// <summary>
             /// Expression is a r/o reference.
             /// </summary>
             ReadonlyRef = RefersToLocation | RValue,
+
 
             /// <summary>
             /// Expression can be the operand of an address-of operation (&amp;).
@@ -118,16 +126,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             AddressOf = ReadonlyRef + 1,
 
+
             /// <summary>
             /// Expression is the receiver of a fixed buffer field access
             /// Same as ReadonlyRef. The difference is just for error reporting.
             /// </summary>
             FixedReceiver = ReadonlyRef + 2,
 
+
             /// <summary>
             /// Expression is passed as a ref or out parameter or assigned to a byref variable.
             /// </summary>
             RefOrOut = RefersToLocation | RValue | Assignable,
+
 
             /// <summary>
             /// Expression is returned by an ordinary r/w reference.
@@ -4648,13 +4659,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             // reference may be written to
             Writeable,
 
+
             // reference itself will not be written to, but may be used for call, callvirt.
             // for all purposes it is the same as Writeable, except when fetching an address of an array element
             // where it results in a ".readonly" prefix to deal with array covariance.
             Constrained,
 
+
             // reference itself will not be written to, nor it will be used to modify fields.
             ReadOnly,
+
 
             // same as ReadOnly, but we are not supposed to get a reference to a clone
             // regardless of compat settings.

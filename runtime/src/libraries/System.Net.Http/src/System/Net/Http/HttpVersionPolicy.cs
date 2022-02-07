@@ -19,6 +19,7 @@ namespace System.Net.Http
         /// </remarks>
         RequestVersionOrLower,
 
+
         /// <summary>
         /// Tries to uses highest available version, downgrading only to the requested version, not bellow.
         /// Throwing <see cref="HttpRequestException" /> if a connection with higher or equal version cannot be established.
@@ -30,6 +31,7 @@ namespace System.Net.Http
         /// Note that this option allows to use prenegotiated clear text connection for the requested version but not for anything higher.
         /// </remarks>
         RequestVersionOrHigher,
+
 
         /// <summary>
         /// Uses only the requested version.

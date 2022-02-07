@@ -13,11 +13,13 @@ namespace System.Xml.Tests
         AFTER_READ_FALSE,
         AFTER_RESETSTATE,
 
+
         //DataWriter
         BEFORE_WRITE,
         AFTER_WRITE_FALSE,
         AFTER_CLEAR,
         AFTER_FLUSH,
+
 
         // Both DataWriter and DataReader
         AFTER_CLOSE,

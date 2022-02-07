@@ -17,6 +17,7 @@ namespace Moq
         /// </summary>
         Default = 0,
 
+
         /// <summary>
         /// When enabled, specifies that source file information should be collected for each setup.
         /// This results in more helpful error messages, but may affect performance.

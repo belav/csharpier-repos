@@ -9,8 +9,10 @@ namespace System.Net.Sockets
         // Poll the read status of a socket.
         SelectRead = 0,
 
+
         // Poll the write status of a socket.
         SelectWrite = 1,
+
 
         // Poll the error status of a socket.
         SelectError = 2

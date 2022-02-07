@@ -24,6 +24,7 @@ namespace System.Reflection.Metadata.Ecma335
         SystemDelegate = 1,
         SystemAttribute = 2,
 
+
         // RowId is an index to the projection info table.
         UseProjectionInfo = 3,
     }

@@ -19,20 +19,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         Unknown = 0,
 
+
         /// <summary>
         /// No [NullableContext] attribute
         /// </summary>
         None,
+
 
         /// <summary>
         /// [NullableContext(0)]
         /// </summary>
         Oblivious,
 
+
         /// <summary>
         /// [NullableContext(1)]
         /// </summary>
         NotAnnotated,
+
 
         /// <summary>
         /// [NullableContext(2)]

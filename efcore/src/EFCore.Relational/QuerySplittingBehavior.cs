@@ -21,6 +21,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </remarks>
         SingleQuery = 0,
 
+
         /// <summary>
         ///     The related collections will be loaded in separate database queries from the parent query.
         /// </summary>

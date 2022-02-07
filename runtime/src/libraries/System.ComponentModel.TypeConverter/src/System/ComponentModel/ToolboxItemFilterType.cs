@@ -15,6 +15,7 @@ namespace System.ComponentModel
         /// </summary>
         Allow,
 
+
         /// <summary>
         /// Specifies that a toolbox item filter string will require custom processing. This is generally
         /// specified on the root designer class to indicate that the designer wishes to accept or reject
@@ -22,12 +23,14 @@ namespace System.ComponentModel
         /// </summary>
         Custom,
 
+
         /// <summary>
         /// Specifies that a toolbox item filter string should be rejected. If a designer and a component
         /// class both have the filter string and one has a type of Prevent, the toolbox item will not
         /// be available.
         /// </summary>
         Prevent,
+
 
         /// <summary>
         /// Specifies that a toolbox item filter string must be present for a toolbox item to be enabled.

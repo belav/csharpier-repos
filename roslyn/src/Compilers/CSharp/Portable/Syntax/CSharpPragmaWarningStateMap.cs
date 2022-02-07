@@ -22,11 +22,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         /// </summary>
         Default = 0,
 
+
         /// <summary>
         /// Diagnostic is enabled.
         /// NOTE: this may be removed as part of https://github.com/dotnet/roslyn/issues/36550
         /// </summary>
         Enabled = 1,
+
 
         /// <summary>
         /// Diagnostic is disabled.

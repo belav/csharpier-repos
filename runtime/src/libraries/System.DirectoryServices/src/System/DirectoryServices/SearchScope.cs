@@ -13,10 +13,12 @@ namespace System.DirectoryServices
         /// </devdoc>
         Base = 0,
 
+
         /// <devdoc>
         /// Searched one level of the immediate children, excluding the base object.
         /// </devdoc>
         OneLevel = 1,
+
 
         /// <devdoc>
         /// Searches the whole subtree, including all the children and the base object itself.

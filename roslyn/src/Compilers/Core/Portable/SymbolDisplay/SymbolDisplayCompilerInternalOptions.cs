@@ -16,10 +16,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// ".ctor" instead of "Goo"
         /// </summary>
         UseMetadataMethodNames = 1 << 0,
+
 
         /// <summary>
         /// "List`1" instead of "List&lt;T&gt;" ("List(of T)" in VB). Overrides GenericsOptions on
@@ -27,15 +29,18 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         UseArityForGenericTypes = 1 << 1,
 
+
         /// <summary>
         /// Append "[Missing]" to missing Metadata types (for testing).
         /// </summary>
         FlagMissingMetadataTypes = 1 << 2,
 
+
         /// <summary>
         /// Include the Script type when qualifying type names.
         /// </summary>
         IncludeScriptType = 1 << 3,
+
 
         /// <summary>
         /// Include custom modifiers (e.g. modopt([mscorlib]System.Runtime.CompilerServices.IsConst)) on
@@ -46,6 +51,7 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         IncludeCustomModifiers = 1 << 4,
 
+
         /// <summary>
         /// For a type written as "int[][,]" in C#, then
         ///   a) setting this option will produce "int[,][]", and
@@ -53,10 +59,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         ReverseArrayRankSpecifiers = 1 << 5,
 
+
         /// <summary>
         /// Display `System.ValueTuple` instead of tuple syntax `(...)`.
         /// </summary>
         UseValueTuple = 1 << 6,
+
 
         /// <summary>
         /// Display `System.[U]IntPtr` instead of `n[u]int`.

@@ -13,10 +13,12 @@ public enum Http503VerbosityLevel : long
     /// </summary>
     Basic = 0,
 
+
     /// <summary>
     /// The HTTP Server API sends a 503 response with a "Service Unavailable" reason phrase.
     /// </summary>
     Limited = 1,
+
 
     /// <summary>
     /// The HTTP Server API sends a 503 response with a detailed reason phrase.

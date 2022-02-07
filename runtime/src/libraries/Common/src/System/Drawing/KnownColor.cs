@@ -46,6 +46,7 @@ namespace System.Drawing
         WindowFrame,
         WindowText,
 
+
         // "Web" Colors, Part 1
         Transparent,
         AliceBlue,
@@ -189,6 +190,7 @@ namespace System.Drawing
         Yellow,
         YellowGreen,
 
+
         // "System" colors, Part 2
         ButtonFace,
         ButtonHighlight,
@@ -197,6 +199,7 @@ namespace System.Drawing
         GradientInactiveCaption,
         MenuBar,
         MenuHighlight,
+
 
         // "Web" colors, Part 2
         /// <summary>

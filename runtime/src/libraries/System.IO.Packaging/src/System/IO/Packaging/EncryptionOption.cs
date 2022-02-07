@@ -13,6 +13,7 @@ namespace System.IO.Packaging
         /// </summary>
         None = 0,
 
+
         /// <summary>
         /// RightsManagement is the only supported option right now.
         /// </summary>

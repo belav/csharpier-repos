@@ -16,6 +16,7 @@ namespace System.Data.SqlTypes
     {
         Null = 0,
         Buffer = 1,
+
         //IntPtr = 2,
         Stream = 3,
     }

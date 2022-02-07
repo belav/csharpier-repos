@@ -20,10 +20,12 @@ namespace Internal.TypeSystem
         /// </summary>
         Specific,
 
+
         /// <summary>
         /// Canonicalization that works for any type
         /// </summary>
         Universal,
+
 
         /// <summary>
         /// Value used for lookup for Specific or Universal. Must not be used for canonicalizing.

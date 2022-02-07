@@ -16,15 +16,18 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Hidden = 0,
 
+
         /// <summary>
         /// Information that does not indicate a problem (i.e. not prescriptive).
         /// </summary>
         Info = 1,
 
+
         /// <summary>
         /// Something suspicious but allowed.
         /// </summary>
         Warning = 2,
+
 
         /// <summary>
         /// Something not allowed by the rules of the language or other authority.

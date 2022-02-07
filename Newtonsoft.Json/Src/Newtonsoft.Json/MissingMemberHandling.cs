@@ -39,6 +39,7 @@ namespace Newtonsoft.Json
         /// </summary>
         Ignore = 0,
 
+
         /// <summary>
         /// Throw a <see cref="JsonSerializationException"/> when a missing member is encountered during deserialization.
         /// </summary>

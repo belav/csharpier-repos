@@ -15,10 +15,12 @@ namespace System.Drawing
         /// </summary>
         Near = 0,
 
+
         /// <summary>
         /// Specifies that text is aligned in the center of the layout rectangle.
         /// </summary>
         Center = 1,
+
 
         // right or bottom in English
         /// <summary>

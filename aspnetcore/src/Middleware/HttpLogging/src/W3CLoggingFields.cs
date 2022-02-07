@@ -18,11 +18,13 @@ public enum W3CLoggingFields : long
     /// </summary>
     None = 0x0,
 
+
     /// <summary>
     /// Flag for logging the date
     /// that the activity occurred.
     /// </summary>
     Date = 0x1,
+
 
     /// <summary>
     /// Flag for logging the time
@@ -30,11 +32,13 @@ public enum W3CLoggingFields : long
     /// </summary>
     Time = 0x2,
 
+
     /// <summary>
     /// Flag for logging the IP address
     /// of the client that accessed the server.
     /// </summary>
     ClientIpAddress = 0x4,
+
 
     /// <summary>
     /// Flag for logging the name of the
@@ -47,11 +51,13 @@ public enum W3CLoggingFields : long
     /// </summary>
     UserName = 0x8,
 
+
     /// <summary>
     /// Flag for logging the name of the
     /// server on which the log entry was generated.
     /// </summary>
     ServerName = 0x10,
+
 
     /// <summary>
     /// Flag for logging the IP address of the
@@ -59,11 +65,13 @@ public enum W3CLoggingFields : long
     /// </summary>
     ServerIpAddress = 0x20,
 
+
     /// <summary>
     /// Flag for logging the port number
     /// the client is connected to.
     /// </summary>
     ServerPort = 0x40,
+
 
     /// <summary>
     /// Flag for logging the action
@@ -71,10 +79,12 @@ public enum W3CLoggingFields : long
     /// </summary>
     Method = 0x80,
 
+
     /// <summary>
     /// Flag for logging the resource accessed.
     /// </summary>
     UriStem = 0x100,
+
 
     /// <summary>
     /// Flag for logging the query, if any,
@@ -82,16 +92,19 @@ public enum W3CLoggingFields : long
     /// </summary>
     UriQuery = 0x200,
 
+
     /// <summary>
     /// Flag for logging the HTTP response status code.
     /// </summary>
     ProtocolStatus = 0x400,
+
 
     /// <summary>
     /// Flag for logging the duration of time,
     /// in milliseconds, that the action consumed.
     /// </summary>
     TimeTaken = 0x800,
+
 
     /// <summary>
     /// Flag for logging the protocol (HTTP, FTP) version
@@ -100,15 +113,18 @@ public enum W3CLoggingFields : long
     /// </summary>
     ProtocolVersion = 0x1000,
 
+
     /// <summary>
     /// Flag for logging the content of the host header.
     /// </summary>
     Host = 0x2000,
 
+
     /// <summary>
     /// Flag for logging the requesting user agent.
     /// </summary>
     UserAgent = 0x4000,
+
 
     /// <summary>
     /// Flag for logging the content of the cookie
@@ -121,11 +137,13 @@ public enum W3CLoggingFields : long
     /// </summary>
     Cookie = 0x8000,
 
+
     /// <summary>
     /// Flag for logging the previous site visited by the user,
     /// which provided a link to the current site, if any.
     /// </summary>
     Referer = 0x10000,
+
 
     /// <summary>
     /// Flag for logging properties that are part of the <see cref="ConnectionInfo"/>
@@ -133,11 +151,13 @@ public enum W3CLoggingFields : long
     /// </summary>
     ConnectionInfoFields = ClientIpAddress | ServerIpAddress | ServerPort,
 
+
     /// <summary>
     /// Flag for logging properties that are part of the <see cref="HttpRequest.Headers"/>
     /// Includes <see cref="Host"/>, <see cref="Referer"/>, and <see cref="UserAgent"/>.
     /// </summary>
     RequestHeaders = Host | Referer | UserAgent,
+
 
     /// <summary>
     /// Flag for logging properties that are part of the <see cref="HttpRequest"/>
@@ -146,6 +166,7 @@ public enum W3CLoggingFields : long
     /// and <see cref="UserAgent"/>.
     /// </summary>
     Request = UriStem | UriQuery | ProtocolVersion | Method | RequestHeaders,
+
 
     /// <summary>
     /// Flag for logging all possible fields.

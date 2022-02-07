@@ -16,40 +16,48 @@ namespace Microsoft.Win32
         /// </devdoc>
         ConsoleConnect = Interop.Wtsapi32.WTS_CONSOLE_CONNECT,
 
+
         /// <devdoc>
         ///      A session was disconnected from the console session.
         /// </devdoc>
         ConsoleDisconnect = Interop.Wtsapi32.WTS_CONSOLE_DISCONNECT,
+
 
         /// <devdoc>
         ///      A session was connected to the remote session.
         /// </devdoc>
         RemoteConnect = Interop.Wtsapi32.WTS_REMOTE_CONNECT,
 
+
         /// <devdoc>
         ///      A session was disconnected from the remote session.
         /// </devdoc>
         RemoteDisconnect = Interop.Wtsapi32.WTS_REMOTE_DISCONNECT,
+
 
         /// <devdoc>
         ///      A user has logged on to the session.
         /// </devdoc>
         SessionLogon = Interop.Wtsapi32.WTS_SESSION_LOGON,
 
+
         /// <devdoc>
         ///      A user has logged off the session.
         /// </devdoc>
         SessionLogoff = Interop.Wtsapi32.WTS_SESSION_LOGOFF,
+
 
         /// <devdoc>
         ///      A session has been locked.
         /// </devdoc>
         SessionLock = Interop.Wtsapi32.WTS_SESSION_LOCK,
 
+
         /// <devdoc>
         ///      A session has been unlocked.
         /// </devdoc>
         SessionUnlock = Interop.Wtsapi32.WTS_SESSION_UNLOCK,
+
 
         /// <devdoc>
         ///      A session has changed its remote controlled status.

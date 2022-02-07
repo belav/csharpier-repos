@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         Boxing,
         ImplicitPointerToVoid,
         ImplicitNullToPointer,
+
         // Any explicit conversions involving pointers not covered by PointerToVoid or NullToPointer.
         // Currently, this is just implicit function pointer conversions.
         ImplicitPointer,
@@ -31,6 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ImplicitUserDefined,
         AnonymousFunction,
         MethodGroup,
+
         // Function type conversions are conversions from an inferred "function type" of
         // a method group or lambda expression:
         // - to another inferred "function type", or
@@ -46,6 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ExplicitPointerToPointer,
         ExplicitIntegerToPointer,
         ExplicitPointerToInteger,
+
         // The IntPtr conversions are not described by the specification but we must
         // implement them for compatibility with the native compiler.
         IntPtr,
@@ -55,6 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         Deconstruction, // The Deconstruction conversion is not part of the language, it is an implementation detail
         StackAllocToPointerType,
         StackAllocToSpanType,
+
 
         // PinnedObjectToPointer is not directly a part of the language
         // It is used by lowering of "fixed" statements to represent conversion of an object reference (O) to an unmanaged pointer (*)

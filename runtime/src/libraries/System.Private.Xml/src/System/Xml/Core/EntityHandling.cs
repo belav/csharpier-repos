@@ -10,6 +10,7 @@ namespace System.Xml
         // The entity text is expanded in place of the entity references.
         ExpandEntities = 1,
 
+
         // Expand character entities only and return general entities as nodes (NodeType=XmlNodeType.EntityReference, Name=the name of the entity).
         // Default in XmlTextReader. You must call ResolveEntity to see what the general entity expands to.
         ExpandCharEntities = 2,
