@@ -26,11 +26,9 @@ public class JSObjectReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":{expectedId}}}";
 
         // Act
-        var deserialized =
-            (JSInProcessObjectReference)JsonSerializer.Deserialize<IJSInProcessObjectReference>(
-                json,
-                JsonSerializerOptions
-            )!;
+        var deserialized = (JSInProcessObjectReference)JsonSerializer
+            .Deserialize<IJSInProcessObjectReference>(json, JsonSerializerOptions)
+            !;
 
         // Assert
         Assert.Equal(expectedId, deserialized?.Id);
@@ -44,11 +42,9 @@ public class JSObjectReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":{expectedId}}}";
 
         // Act
-        var deserialized =
-            (WebAssemblyJSObjectReference)JsonSerializer.Deserialize<IJSUnmarshalledObjectReference>(
-                json,
-                JsonSerializerOptions
-            )!;
+        var deserialized = (WebAssemblyJSObjectReference)JsonSerializer
+            .Deserialize<IJSUnmarshalledObjectReference>(json, JsonSerializerOptions)
+            !;
 
         // Assert
         Assert.Equal(expectedId, deserialized?.Id);

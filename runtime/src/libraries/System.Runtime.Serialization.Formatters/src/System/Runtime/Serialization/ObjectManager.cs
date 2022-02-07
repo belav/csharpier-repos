@@ -17,10 +17,9 @@ namespace System.Runtime.Serialization
         private const string ObjectManagerUnreferencedCodeMessage =
             "ObjectManager is not trim compatible because the Type of objects being managed cannot be statically discovered.";
 
-        private static readonly FieldInfo s_nullableValueField = typeof(Nullable<>).GetField(
-            "value",
-            BindingFlags.NonPublic | BindingFlags.Instance
-        )!;
+        private static readonly FieldInfo s_nullableValueField = typeof(Nullable<>)
+            .GetField("value", BindingFlags.NonPublic | BindingFlags.Instance)
+            !;
 
         private DeserializationEventHandler? _onDeserializationHandler;
         private SerializationEventHandler? _onDeserializedHandler;
@@ -1938,10 +1937,12 @@ namespace System.Runtime.Serialization
     internal static class SerializationInfoExtensions
     {
         private static readonly Action<SerializationInfo, string, object, Type> s_updateValue =
-            typeof(SerializationInfo).GetMethod(
-                "UpdateValue",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            )!.CreateDelegate<Action<SerializationInfo, string, object, Type>>();
+            typeof(SerializationInfo)
+                .GetMethod(
+                    "UpdateValue",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )
+                !.CreateDelegate<Action<SerializationInfo, string, object, Type>>();
 
         public static void UpdateValue(
             this SerializationInfo si,

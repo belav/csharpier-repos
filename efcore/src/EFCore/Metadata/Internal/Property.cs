@@ -838,7 +838,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           static property =>
                               property.DeclaringEntityType.Model
                                   .GetModelDependencies()
-                                  .TypeMappingSource.FindMapping(property)!
+                                  .TypeMappingSource.FindMapping(property)
+                                  !
                       )
                     : _typeMapping;
             set => SetTypeMapping(value, ConfigurationSource.Explicit);

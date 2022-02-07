@@ -27,12 +27,14 @@ namespace Microsoft.EntityFrameworkCore
             using var context = Fixture.CreateContext();
             var serviceCollection = new ServiceCollection().AddEntityFrameworkDesignTimeServices();
             (
-                (IDesignTimeServices)Activator.CreateInstance(
-                    ProviderAssembly.GetType(
-                        ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
-                        throwOnError: true
+                (IDesignTimeServices)Activator
+                    .CreateInstance(
+                        ProviderAssembly.GetType(
+                            ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
+                            throwOnError: true
+                        )
                     )
-                )!
+                    !
             ).ConfigureDesignTimeServices(serviceCollection);
             using var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
@@ -51,12 +53,14 @@ namespace Microsoft.EntityFrameworkCore
                 .AddEntityFrameworkDesignTimeServices()
                 .AddDbContextDesignTimeServices(context);
             (
-                (IDesignTimeServices)Activator.CreateInstance(
-                    ProviderAssembly.GetType(
-                        ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
-                        throwOnError: true
+                (IDesignTimeServices)Activator
+                    .CreateInstance(
+                        ProviderAssembly.GetType(
+                            ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
+                            throwOnError: true
+                        )
                     )
-                )!
+                    !
             ).ConfigureDesignTimeServices(serviceCollection);
             using var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 

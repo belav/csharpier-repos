@@ -126,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                                 Dependencies.CommandLogger,
                                 CommandSource.Migrations
                             )
-                        )! != 0,
+                        )
+                        ! != 0,
                 null
             );
 

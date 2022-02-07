@@ -194,7 +194,8 @@ namespace System.Drawing
                     try
                     {
                         fontSize = (float)GetFloatConverter()
-                            .ConvertFromString(context, culture, unitTokens.size)!;
+                            .ConvertFromString(context, culture, unitTokens.size)
+                            !;
                     }
                     catch
                     {

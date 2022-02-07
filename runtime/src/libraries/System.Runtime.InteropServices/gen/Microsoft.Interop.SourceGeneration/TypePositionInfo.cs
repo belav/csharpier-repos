@@ -101,12 +101,12 @@ namespace Microsoft.Interop
             Compilation compilation
         )
         {
-            INamedTypeSymbol outAttributeType = compilation.GetTypeByMetadataName(
-                TypeNames.System_Runtime_InteropServices_OutAttribute
-            )!;
-            INamedTypeSymbol inAttributeType = compilation.GetTypeByMetadataName(
-                TypeNames.System_Runtime_InteropServices_InAttribute
-            )!;
+            INamedTypeSymbol outAttributeType = compilation
+                .GetTypeByMetadataName(TypeNames.System_Runtime_InteropServices_OutAttribute)
+                !;
+            INamedTypeSymbol inAttributeType = compilation
+                .GetTypeByMetadataName(TypeNames.System_Runtime_InteropServices_InAttribute)
+                !;
 
             ByValueContentsMarshalKind marshalKind = ByValueContentsMarshalKind.Default;
 

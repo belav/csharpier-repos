@@ -1705,10 +1705,9 @@ namespace System.Reflection
                 }
                 else
                 {
-                    attribute = attributeType.CreateInstanceDefaultCtor(
-                        publicOnly: false,
-                        wrapExceptions: false
-                    )!;
+                    attribute = attributeType
+                        .CreateInstanceDefaultCtor(publicOnly: false, wrapExceptions: false)
+                        !;
 
                     // It is allowed by the ECMA spec to have an empty signature blob
                     int blobLen = (int)((byte*)blobEnd - (byte*)blobStart);
@@ -1886,11 +1885,9 @@ namespace System.Reflection
                 // See https://github.com/dotnet/runtime/issues/11637 for why we fast-path non-generics here (fewer allocations)
                 if (attributeType.IsGenericType)
                 {
-                    ctorWithParameters = decoratedModule.ResolveMethod(
-                        caCtorToken,
-                        attributeType.GenericTypeArguments,
-                        null
-                    )!.MethodHandle.GetMethodInfo();
+                    ctorWithParameters = decoratedModule
+                        .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)
+                        !.MethodHandle.GetMethodInfo();
                 }
                 else
                 {

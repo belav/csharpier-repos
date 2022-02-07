@@ -398,11 +398,13 @@ namespace Microsoft.EntityFrameworkCore
             this IMutableModel model,
             MethodInfo methodInfo
         ) =>
-            DbFunction.AddDbFunction(
-                model,
-                Check.NotNull(methodInfo, nameof(methodInfo)),
-                ConfigurationSource.Explicit
-            )!;
+            DbFunction
+                .AddDbFunction(
+                    model,
+                    Check.NotNull(methodInfo, nameof(methodInfo)),
+                    ConfigurationSource.Explicit
+                )
+                !;
 
         /// <summary>
         ///     Creates a function mapped to the given method.

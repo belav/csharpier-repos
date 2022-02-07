@@ -619,9 +619,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             RuntimeEntityType runtimeEntityType
         )
         {
-            var principalEntityType = runtimeEntityType.Model.FindEntityType(
-                foreignKey.PrincipalEntityType.Name
-            )!;
+            var principalEntityType = runtimeEntityType.Model
+                .FindEntityType(foreignKey.PrincipalEntityType.Name)
+                !;
             return runtimeEntityType.AddForeignKey(
                 runtimeEntityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!,
                 GetKey(foreignKey.PrincipalKey, principalEntityType),
@@ -714,9 +714,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 runtimeEntityType.Model.FindEntityType(navigation.TargetEntityType.Name)!,
                 GetForeignKey(
                     navigation.ForeignKey,
-                    runtimeEntityType.Model.FindEntityType(
-                        navigation.ForeignKey.DeclaringEntityType.Name
-                    )!
+                    runtimeEntityType.Model
+                        .FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name)
+                        !
                 ),
                 navigation.IsCollection,
                 navigation.IsOnDependent,
@@ -766,9 +766,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <returns>The corresponding read-optimized index.</returns>
         protected virtual RuntimeIndex GetIndex(IIndex index, RuntimeEntityType entityType) =>
             index.Name == null
-                ? entityType.FindIndex(
-                      entityType.FindProperties(index.Properties.Select(p => p.Name))!
-                  )!
+                ? entityType
+                  .FindIndex(entityType.FindProperties(index.Properties.Select(p => p.Name))!)
+                  !
                 : entityType.FindIndex(index.Name)!;
 
         /// <summary>

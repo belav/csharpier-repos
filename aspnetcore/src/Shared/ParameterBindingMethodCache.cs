@@ -19,16 +19,16 @@ namespace Microsoft.AspNetCore.Http;
 
 internal sealed class ParameterBindingMethodCache
 {
-    private static readonly MethodInfo ConvertValueTaskMethod =
-        typeof(ParameterBindingMethodCache).GetMethod(
-            nameof(ConvertValueTask),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
+    private static readonly MethodInfo ConvertValueTaskMethod = typeof(ParameterBindingMethodCache)
+        .GetMethod(nameof(ConvertValueTask), BindingFlags.NonPublic | BindingFlags.Static)
+        !;
     private static readonly MethodInfo ConvertValueTaskOfNullableResultMethod =
-        typeof(ParameterBindingMethodCache).GetMethod(
-            nameof(ConvertValueTaskOfNullableResult),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
+        typeof(ParameterBindingMethodCache)
+            .GetMethod(
+                nameof(ConvertValueTaskOfNullableResult),
+                BindingFlags.NonPublic | BindingFlags.Static
+            )
+            !;
 
     internal static readonly ParameterExpression TempSourceStringExpr = Expression.Variable(
         typeof(string),

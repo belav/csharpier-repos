@@ -63,16 +63,12 @@ namespace System.Reflection
         > s_baseTypeAndInterfaceToGeneratedProxyType =
             new Dictionary<Type, Dictionary<Type, GeneratedTypeInfo>>();
         private static readonly ProxyAssembly s_proxyAssembly = new ProxyAssembly();
-        private static readonly MethodInfo s_dispatchProxyInvokeMethod =
-            typeof(DispatchProxy).GetMethod(
-                "Invoke",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            )!;
-        private static readonly MethodInfo s_getTypeFromHandleMethod =
-            typeof(Type).GetRuntimeMethod(
-                "GetTypeFromHandle",
-                new Type[] { typeof(RuntimeTypeHandle) }
-            )!;
+        private static readonly MethodInfo s_dispatchProxyInvokeMethod = typeof(DispatchProxy)
+            .GetMethod("Invoke", BindingFlags.NonPublic | BindingFlags.Instance)
+            !;
+        private static readonly MethodInfo s_getTypeFromHandleMethod = typeof(Type)
+            .GetRuntimeMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) })
+            !;
         private static readonly MethodInfo s_makeGenericMethodMethod = GetGenericMethodMethodInfo();
 
         [UnconditionalSuppressMessage(
@@ -83,10 +79,9 @@ namespace System.Reflection
         )]
         private static MethodInfo GetGenericMethodMethodInfo()
         {
-            return typeof(MethodInfo).GetMethod(
-                "MakeGenericMethod",
-                new Type[] { typeof(Type[]) }
-            )!;
+            return typeof(MethodInfo)
+                .GetMethod("MakeGenericMethod", new Type[] { typeof(Type[]) })
+                !;
         }
 
         // Returns a new instance of a proxy the derives from 'baseType' and implements 'interfaceType'
@@ -102,10 +97,9 @@ namespace System.Reflection
             Debug.Assert(interfaceType != null);
 
             GeneratedTypeInfo proxiedType = GetProxyType(baseType, interfaceType);
-            return Activator.CreateInstance(
-                proxiedType.GeneratedType,
-                new object[] { proxiedType.MethodInfos }
-            )!;
+            return Activator
+                .CreateInstance(proxiedType.GeneratedType, new object[] { proxiedType.MethodInfos })
+                !;
         }
 
         private static GeneratedTypeInfo GetProxyType(

@@ -202,9 +202,9 @@ namespace Microsoft.CodeAnalysis.Host
                 return null;
             }
 
-            var designTimeProjectDirectoryName = PathUtilities.GetDirectoryName(
-                designTimeDocument.Project.FilePath
-            )!;
+            var designTimeProjectDirectoryName = PathUtilities
+                .GetDirectoryName(designTimeDocument.Project.FilePath)
+                !;
 
             var generatedDocumentPath = BuildGeneratedDocumentPath(
                 designTimeProjectDirectoryName,
@@ -379,9 +379,9 @@ namespace Microsoft.CodeAnalysis.Host
                     continue;
                 }
 
-                var designTimeProjectDirectory = PathUtilities.GetDirectoryName(
-                    designTimeProjectState.FilePath
-                )!;
+                var designTimeProjectDirectory = PathUtilities
+                    .GetDirectoryName(designTimeProjectState.FilePath)
+                    !;
 
                 foreach (
                     var (_, designTimeDocumentState) in designTimeProjectState.DocumentStates.States

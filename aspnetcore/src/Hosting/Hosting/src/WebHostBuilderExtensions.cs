@@ -45,8 +45,9 @@ public static class WebHostBuilderExtensions
             return supportsStartup.Configure(configureApp);
         }
 
-        var startupAssemblyName =
-            configureApp.GetMethodInfo().DeclaringType!.Assembly.GetName().Name!;
+        var startupAssemblyName = configureApp
+            .GetMethodInfo()
+            .DeclaringType!.Assembly.GetName().Name!;
 
         hostBuilder.UseSetting(WebHostDefaults.ApplicationKey, startupAssemblyName);
 
@@ -88,8 +89,9 @@ public static class WebHostBuilderExtensions
             return supportsStartup.Configure(configureApp);
         }
 
-        var startupAssemblyName =
-            configureApp.GetMethodInfo().DeclaringType!.Assembly.GetName().Name!;
+        var startupAssemblyName = configureApp
+            .GetMethodInfo()
+            .DeclaringType!.Assembly.GetName().Name!;
 
         hostBuilder.UseSetting(WebHostDefaults.ApplicationKey, startupAssemblyName);
 

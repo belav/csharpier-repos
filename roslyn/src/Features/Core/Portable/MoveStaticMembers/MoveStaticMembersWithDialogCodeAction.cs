@@ -281,9 +281,9 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                             syntaxFacts.GetExpressionOfInvocationExpression(
                                 expandedExtensionInvocation
                             );
-                        var typeExpression = syntaxFacts.GetExpressionOfMemberAccessExpression(
-                            memberAccessExpression
-                        )!;
+                        var typeExpression = syntaxFacts
+                            .GetExpressionOfMemberAccessExpression(memberAccessExpression)
+                            !;
                         expandedExtensionInvocation = expandedExtensionInvocation.ReplaceNode(
                             typeExpression,
                             generator

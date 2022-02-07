@@ -78,10 +78,9 @@ namespace System.Net.Sockets
         )
         {
             Debug.Assert(OperatingSystem.IsWindows());
-            BaseOverlappedAsyncResult asyncResult =
-                (BaseOverlappedAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    nativeOverlapped
-                )!;
+            BaseOverlappedAsyncResult asyncResult = (BaseOverlappedAsyncResult)ThreadPoolBoundHandle
+                .GetNativeOverlappedState(nativeOverlapped)
+                !;
 
             Debug.Assert(
                 !asyncResult.InternalPeekCompleted,

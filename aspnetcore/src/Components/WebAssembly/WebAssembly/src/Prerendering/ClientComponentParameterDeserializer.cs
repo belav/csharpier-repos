@@ -103,10 +103,12 @@ internal class WebAssemblyComponentParameterDeserializer
     // This should use JSON source generation
     public ComponentParameter[] GetParameterDefinitions(string parametersDefinitions)
     {
-        return JsonSerializer.Deserialize<ComponentParameter[]>(
-            parametersDefinitions,
-            WebAssemblyComponentSerializationSettings.JsonSerializationOptions
-        )!;
+        return JsonSerializer
+            .Deserialize<ComponentParameter[]>(
+                parametersDefinitions,
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+            !;
     }
 
     [RequiresUnreferencedCode(
@@ -114,9 +116,11 @@ internal class WebAssemblyComponentParameterDeserializer
     )]
     public IList<object> GetParameterValues(string parameterValues)
     {
-        return JsonSerializer.Deserialize<IList<object>>(
-            parameterValues,
-            WebAssemblyComponentSerializationSettings.JsonSerializationOptions
-        )!;
+        return JsonSerializer
+            .Deserialize<IList<object>>(
+                parameterValues,
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+            !;
     }
 }

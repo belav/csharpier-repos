@@ -627,9 +627,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 newSolution1.GetAdditionalDocument(documentId)!.TryGetText(out var actualText)
             );
             Assert.True(
-                newSolution1.GetAdditionalDocument(documentId)!.TryGetTextVersion(
-                    out var actualVersion
-                )
+                newSolution1
+                    .GetAdditionalDocument(documentId)
+                    !.TryGetTextVersion(out var actualVersion)
             );
             Assert.Same(textAndVersion.Text, actualText);
             Assert.Equal(textAndVersion.Version, actualVersion);
@@ -756,9 +756,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetText(out var actualText)
             );
             Assert.True(
-                newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetTextVersion(
-                    out var actualVersion
-                )
+                newSolution1
+                    .GetAnalyzerConfigDocument(documentId)
+                    !.TryGetTextVersion(out var actualVersion)
             );
             Assert.Same(textAndVersion.Text, actualText);
             Assert.Equal(textAndVersion.Version, actualVersion);
@@ -820,8 +820,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             Assert.Equal(
                 "new text",
-                newSolution1.GetDocument(documentId)!
-                    .GetTextSynchronously(CancellationToken.None)
+                newSolution1
+                    .GetDocument(documentId)
+                    !.GetTextSynchronously(CancellationToken.None)
                     .ToString()
             );
 
@@ -878,8 +879,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             Assert.Equal(
                 "new text",
-                newSolution1.GetAdditionalDocument(documentId)!
-                    .GetTextSynchronously(CancellationToken.None)
+                newSolution1
+                    .GetAdditionalDocument(documentId)
+                    !.GetTextSynchronously(CancellationToken.None)
                     .ToString()
             );
 
@@ -941,8 +943,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             Assert.Equal(
                 "new text",
-                newSolution1.GetAnalyzerConfigDocument(documentId)!
-                    .GetTextSynchronously(CancellationToken.None)
+                newSolution1
+                    .GetAnalyzerConfigDocument(documentId)
+                    !.GetTextSynchronously(CancellationToken.None)
                     .ToString()
             );
 

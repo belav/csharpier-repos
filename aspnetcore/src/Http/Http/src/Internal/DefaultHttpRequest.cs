@@ -75,11 +75,9 @@ internal sealed class DefaultHttpRequest : HttpRequest
         _features.Fetch(ref _features.Cache.RouteValues, _newRouteValuesFeature)!;
 
     private IRequestBodyPipeFeature RequestBodyPipeFeature =>
-        _features.Fetch(
-            ref _features.Cache.BodyPipe,
-            this.HttpContext,
-            _newRequestBodyPipeFeature
-        )!;
+        _features
+            .Fetch(ref _features.Cache.BodyPipe, this.HttpContext, _newRequestBodyPipeFeature)
+            !;
 
     public override PathString PathBase
     {

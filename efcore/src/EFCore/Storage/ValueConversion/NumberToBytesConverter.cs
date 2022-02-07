@@ -105,10 +105,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                             ? Expression.Call(_toBytesMethod, input)
                             : EnsureEndian(
                                   Expression.Call(
-                                      typeof(BitConverter).GetMethod(
-                                          nameof(BitConverter.GetBytes),
-                                          new[] { type }
-                                      )!,
+                                      typeof(BitConverter)
+                                          .GetMethod(nameof(BitConverter.GetBytes), new[] { type })
+                                          !,
                                       input
                                   )
                               );
@@ -144,10 +143,12 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         : type == typeof(decimal)
                             ? Expression.Call(_toDecimalMethod, param)
                             : (Expression)Expression.Call(
-                                  typeof(BitConverter).GetMethod(
-                                      "To" + type.Name,
-                                      new[] { typeof(byte[]), typeof(int) }
-                                  )!,
+                                  typeof(BitConverter)
+                                      .GetMethod(
+                                          "To" + type.Name,
+                                          new[] { typeof(byte[]), typeof(int) }
+                                      )
+                                      !,
                                   EnsureEndian(HandleEmptyArray(param)),
                                   Expression.Constant(0)
                               );
@@ -202,22 +203,19 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         }
 
         private static readonly MethodInfo _reverseLongMethod =
-            typeof(NumberToBytesConverter<TNumber>).GetMethod(
-                nameof(ReverseLong),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!;
+            typeof(NumberToBytesConverter<TNumber>)
+                .GetMethod(nameof(ReverseLong), BindingFlags.Static | BindingFlags.NonPublic)
+                !;
 
         private static readonly MethodInfo _reverseIntMethod =
-            typeof(NumberToBytesConverter<TNumber>).GetMethod(
-                nameof(ReverseInt),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!;
+            typeof(NumberToBytesConverter<TNumber>)
+                .GetMethod(nameof(ReverseInt), BindingFlags.Static | BindingFlags.NonPublic)
+                !;
 
         private static readonly MethodInfo _reverseShortMethod =
-            typeof(NumberToBytesConverter<TNumber>).GetMethod(
-                nameof(ReverseShort),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!;
+            typeof(NumberToBytesConverter<TNumber>)
+                .GetMethod(nameof(ReverseShort), BindingFlags.Static | BindingFlags.NonPublic)
+                !;
 
         private static byte[] ReverseLong(byte[] bytes) =>
             new[]
@@ -263,11 +261,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         private static byte[] EnsureEndianInt(byte[] bytes) =>
             BitConverter.IsLittleEndian ? ReverseInt(bytes) : bytes;
 
-        private static readonly MethodInfo _toBytesMethod =
-            typeof(NumberToBytesConverter<TNumber>).GetMethod(
-                nameof(DecimalToBytes),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!;
+        private static readonly MethodInfo _toBytesMethod = typeof(NumberToBytesConverter<TNumber>)
+            .GetMethod(nameof(DecimalToBytes), BindingFlags.Static | BindingFlags.NonPublic)
+            !;
 
         private static byte[] DecimalToBytes(decimal value)
         {
@@ -283,10 +279,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         }
 
         private static readonly MethodInfo _toDecimalMethod =
-            typeof(NumberToBytesConverter<TNumber>).GetMethod(
-                nameof(BytesToDecimal),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!;
+            typeof(NumberToBytesConverter<TNumber>)
+                .GetMethod(nameof(BytesToDecimal), BindingFlags.Static | BindingFlags.NonPublic)
+                !;
 
         private static decimal BytesToDecimal(byte[] bytes)
         {

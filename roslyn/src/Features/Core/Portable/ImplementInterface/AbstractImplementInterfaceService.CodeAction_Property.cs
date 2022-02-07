@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     compilation.NativeIntegerAttributeType()
                 }
                     .WhereNotNull()
-                    .ToArray()!;
+                    .ToArray()
+                    !;
             }
 
             private IMethodSymbol? GenerateSetAccessor(

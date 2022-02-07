@@ -42,12 +42,14 @@ internal sealed class RuntimeViewCompilerProvider : IViewCompilerProvider
 
     public IViewCompiler GetCompiler()
     {
-        return LazyInitializer.EnsureInitialized(
-            ref _compiler,
-            ref _initialized,
-            ref _initializeLock,
-            _createCompiler
-        )!;
+        return LazyInitializer
+            .EnsureInitialized(
+                ref _compiler,
+                ref _initialized,
+                ref _initializeLock,
+                _createCompiler
+            )
+            !;
     }
 
     private IViewCompiler CreateCompiler()

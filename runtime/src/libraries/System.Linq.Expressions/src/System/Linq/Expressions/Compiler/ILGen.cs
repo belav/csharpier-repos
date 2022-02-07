@@ -12,16 +12,15 @@ namespace System.Linq.Expressions.Compiler
 {
     internal static class ILGen
     {
-        private static readonly MethodInfo s_nullableHasValueGetter = typeof(Nullable<>).GetMethod(
-            "get_HasValue",
-            BindingFlags.Instance | BindingFlags.Public
-        )!;
-        private static readonly MethodInfo s_nullableValueGetter = typeof(Nullable<>).GetMethod(
-            "get_Value",
-            BindingFlags.Instance | BindingFlags.Public
-        )!;
-        private static readonly MethodInfo s_nullableGetValueOrDefault =
-            typeof(Nullable<>).GetMethod("GetValueOrDefault", Type.EmptyTypes)!;
+        private static readonly MethodInfo s_nullableHasValueGetter = typeof(Nullable<>)
+            .GetMethod("get_HasValue", BindingFlags.Instance | BindingFlags.Public)
+            !;
+        private static readonly MethodInfo s_nullableValueGetter = typeof(Nullable<>)
+            .GetMethod("get_Value", BindingFlags.Instance | BindingFlags.Public)
+            !;
+        private static readonly MethodInfo s_nullableGetValueOrDefault = typeof(Nullable<>)
+            .GetMethod("GetValueOrDefault", Type.EmptyTypes)
+            !;
 
         internal static void Emit(this ILGenerator il, OpCode opcode, MethodBase methodBase)
         {

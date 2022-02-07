@@ -146,12 +146,14 @@ namespace Microsoft.Extensions.FileProviders
         {
             get
             {
-                return LazyInitializer.EnsureInitialized(
-                    ref _fileWatcher,
-                    ref _fileWatcherInitialized,
-                    ref _fileWatcherLock,
-                    _fileWatcherFactory
-                )!;
+                return LazyInitializer
+                    .EnsureInitialized(
+                        ref _fileWatcher,
+                        ref _fileWatcherInitialized,
+                        ref _fileWatcherLock,
+                        _fileWatcherFactory
+                    )
+                    !;
             }
             set
             {

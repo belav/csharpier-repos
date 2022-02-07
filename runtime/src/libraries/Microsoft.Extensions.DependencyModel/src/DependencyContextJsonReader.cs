@@ -804,7 +804,8 @@ namespace Microsoft.Extensions.DependencyModel
             }
             return libraries
                 .Select(property => CreateLibrary(property, runtime, libraryStubs))
-                .Where(library => library != null)!;
+                .Where(library => library != null)
+                !;
         }
 
         private Library? CreateLibrary(

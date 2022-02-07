@@ -338,11 +338,9 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 // the "dnsHostName" attribute contains the dns name of the computer
-                dcName = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    de,
-                    PropertyManager.DnsHostName
-                )!;
+                dcName = (string)PropertyManager
+                    .GetPropertyValue(context, de, PropertyManager.DnsHostName)
+                    !;
             }
             finally
             {
@@ -407,11 +405,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string objectCategoryValue =
-                        (string)PropertyManager.GetSearchResultPropertyValue(
-                            res,
-                            PropertyManager.ObjectCategory
-                        )!;
+                    string objectCategoryValue = (string)PropertyManager
+                        .GetSearchResultPropertyValue(res, PropertyManager.ObjectCategory)
+                        !;
                     if (
                         (objectCategoryValue.Length >= ntdsdsa.Length)
                         && (
@@ -427,10 +423,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     )
                     {
                         // ntdsa object
-                        ldapPort = (int)PropertyManager.GetSearchResultPropertyValue(
-                            res,
-                            PropertyManager.MsDSPortLDAP
-                        )!;
+                        ldapPort = (int)PropertyManager
+                            .GetSearchResultPropertyValue(res, PropertyManager.MsDSPortLDAP)
+                            !;
                     }
                     else
                     {
@@ -516,11 +511,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string objectCategoryValue =
-                        (string)PropertyManager.GetSearchResultPropertyValue(
-                            res,
-                            PropertyManager.ObjectCategory
-                        )!;
+                    string objectCategoryValue = (string)PropertyManager
+                        .GetSearchResultPropertyValue(res, PropertyManager.ObjectCategory)
+                        !;
                     if (
                         (objectCategoryValue.Length >= ntdsdsa.Length)
                         && (
@@ -536,14 +529,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     )
                     {
                         // ntdsa object
-                        ldapPort = (int)PropertyManager.GetSearchResultPropertyValue(
-                            res,
-                            PropertyManager.MsDSPortLDAP
-                        )!;
-                        sslPort = (int)PropertyManager.GetSearchResultPropertyValue(
-                            res,
-                            PropertyManager.MsDSPortSSL
-                        )!;
+                        ldapPort = (int)PropertyManager
+                            .GetSearchResultPropertyValue(res, PropertyManager.MsDSPortLDAP)
+                            !;
+                        sslPort = (int)PropertyManager
+                            .GetSearchResultPropertyValue(res, PropertyManager.MsDSPortSSL)
+                            !;
                     }
                     else
                     {
@@ -1209,11 +1200,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (server is AdamInstance)
                 {
                     // we might need to add the port number
-                    int portnumber = (int)PropertyManager.GetPropertyValue(
-                        server.Context,
-                        de,
-                        PropertyManager.MsDSPortLDAP
-                    )!;
+                    int portnumber = (int)PropertyManager
+                        .GetPropertyValue(server.Context, de, PropertyManager.MsDSPortLDAP)
+                        !;
 
                     if (portnumber != 389)
                         originatingServerName = originatingServerName + ":" + portnumber;
@@ -1677,22 +1666,26 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         fsmoRoleOwnerName = Utils.GetAdamDnsHostNameFromNTDSA(
                             context,
-                            (string)PropertyManager.GetPropertyValue(
-                                context,
-                                partitionsEntry,
-                                PropertyManager.FsmoRoleOwner
-                            )!
+                            (string)PropertyManager
+                                .GetPropertyValue(
+                                    context,
+                                    partitionsEntry,
+                                    PropertyManager.FsmoRoleOwner
+                                )
+                                !
                         );
                     }
                     else
                     {
                         fsmoRoleOwnerName = Utils.GetDnsHostNameFromNTDSA(
                             context,
-                            (string)PropertyManager.GetPropertyValue(
-                                context,
-                                partitionsEntry,
-                                PropertyManager.FsmoRoleOwner
-                            )!
+                            (string)PropertyManager
+                                .GetPropertyValue(
+                                    context,
+                                    partitionsEntry,
+                                    PropertyManager.FsmoRoleOwner
+                                )
+                                !
                         );
                     }
 
@@ -2032,11 +2025,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         foreach (SearchResult res in resCol)
                         {
-                            string objectCategory =
-                                (string)PropertyManager.GetSearchResultPropertyValue(
-                                    res,
-                                    PropertyManager.ObjectCategory
-                                )!;
+                            string objectCategory = (string)PropertyManager
+                                .GetSearchResultPropertyValue(res, PropertyManager.ObjectCategory)
+                                !;
                             if (
                                 (objectCategory.Length >= objectCategoryValue.Length)
                                 && (
@@ -2054,11 +2045,12 @@ namespace System.DirectoryServices.ActiveDirectory
                                 //
                                 // ntdsa objects (return only those servers which have the partition fully instantiated)
                                 //
-                                string ntdsaName =
-                                    (string)PropertyManager.GetSearchResultPropertyValue(
+                                string ntdsaName = (string)PropertyManager
+                                    .GetSearchResultPropertyValue(
                                         res,
                                         PropertyManager.DistinguishedName
-                                    )!;
+                                    )
+                                    !;
                                 if (useReplicaInfo)
                                 {
                                     if (
@@ -2083,10 +2075,12 @@ namespace System.DirectoryServices.ActiveDirectory
                                         {
                                             serverPorts.Add(
                                                 ntdsaName,
-                                                (int)PropertyManager.GetSearchResultPropertyValue(
-                                                    res,
-                                                    PropertyManager.MsDSPortLDAP
-                                                )!
+                                                (int)PropertyManager
+                                                    .GetSearchResultPropertyValue(
+                                                        res,
+                                                        PropertyManager.MsDSPortLDAP
+                                                    )
+                                                    !
                                             );
                                         }
                                         continue;
@@ -2179,10 +2173,12 @@ namespace System.DirectoryServices.ActiveDirectory
                                                 {
                                                     serverPorts.Add(
                                                         ntdsaName,
-                                                        (int)PropertyManager.GetSearchResultPropertyValue(
-                                                            res,
-                                                            PropertyManager.MsDSPortLDAP
-                                                        )!
+                                                        (int)PropertyManager
+                                                            .GetSearchResultPropertyValue(
+                                                                res,
+                                                                PropertyManager.MsDSPortLDAP
+                                                            )
+                                                            !
                                                     );
                                                 }
                                                 break;
@@ -2222,10 +2218,12 @@ namespace System.DirectoryServices.ActiveDirectory
                                     {
                                         serverPorts.Add(
                                             ntdsaName,
-                                            (int)PropertyManager.GetSearchResultPropertyValue(
-                                                res,
-                                                PropertyManager.MsDSPortLDAP
-                                            )!
+                                            (int)PropertyManager
+                                                .GetSearchResultPropertyValue(
+                                                    res,
+                                                    PropertyManager.MsDSPortLDAP
+                                                )
+                                                !
                                         );
                                     }
                                 }
@@ -2238,10 +2236,12 @@ namespace System.DirectoryServices.ActiveDirectory
                                 {
                                     serverNames.Add(
                                         "CN=NTDS Settings,"
-                                            + (string)PropertyManager.GetSearchResultPropertyValue(
-                                                res,
-                                                PropertyManager.DistinguishedName
-                                            )!,
+                                            + (string)PropertyManager
+                                                .GetSearchResultPropertyValue(
+                                                    res,
+                                                    PropertyManager.DistinguishedName
+                                                )
+                                                !,
                                         (string?)PropertyManager.GetSearchResultPropertyValue(
                                             res,
                                             PropertyManager.DnsHostName
@@ -2317,11 +2317,12 @@ namespace System.DirectoryServices.ActiveDirectory
                             {
                                 foreach (SearchResult res in resCol2)
                                 {
-                                    string ntdsaName =
-                                        (string)PropertyManager.GetSearchResultPropertyValue(
+                                    string ntdsaName = (string)PropertyManager
+                                        .GetSearchResultPropertyValue(
                                             res,
                                             PropertyManager.DistinguishedName
-                                        )!;
+                                        )
+                                        !;
                                     // Here we need to check if we retrieved all the msDS-HasInstantiatedNCs values
                                     // if not we need to continue with the range retrieval (in parallel for the various ntdsa objects)
                                     string? propertyName = null;
@@ -2399,10 +2400,12 @@ namespace System.DirectoryServices.ActiveDirectory
                                                 {
                                                     serverPorts.Add(
                                                         ntdsaName,
-                                                        (int)PropertyManager.GetSearchResultPropertyValue(
-                                                            res,
-                                                            PropertyManager.MsDSPortLDAP
-                                                        )!
+                                                        (int)PropertyManager
+                                                            .GetSearchResultPropertyValue(
+                                                                res,
+                                                                PropertyManager.MsDSPortLDAP
+                                                            )
+                                                            !
                                                     );
                                                 }
                                                 break;
@@ -2928,10 +2931,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
 
                 // Retrieve the user's SID from the user info
-                TOKEN_USER tokenUser = (TOKEN_USER)Marshal.PtrToStructure(
-                    pBuffer,
-                    typeof(TOKEN_USER)
-                )!;
+                TOKEN_USER tokenUser = (TOKEN_USER)Marshal
+                    .PtrToStructure(pBuffer, typeof(TOKEN_USER))
+                    !;
                 IntPtr pUserSid = tokenUser.sidAndAttributes.pSid; // this is a reference into the NATIVE memory (into pBuffer)
 
                 Debug.Assert(UnsafeNativeMethods.IsValidSid(pUserSid));
@@ -3007,11 +3009,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
 
                 Debug.Assert(pBuffer != IntPtr.Zero);
-                POLICY_ACCOUNT_DOMAIN_INFO info =
-                    (POLICY_ACCOUNT_DOMAIN_INFO)Marshal.PtrToStructure(
-                        pBuffer,
-                        typeof(POLICY_ACCOUNT_DOMAIN_INFO)
-                    )!;
+                POLICY_ACCOUNT_DOMAIN_INFO info = (POLICY_ACCOUNT_DOMAIN_INFO)Marshal
+                    .PtrToStructure(pBuffer, typeof(POLICY_ACCOUNT_DOMAIN_INFO))
+                    !;
 
                 Debug.Assert(UnsafeNativeMethods.IsValidSid(info.domainSid));
 
@@ -3070,10 +3070,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
 
                 DSROLE_PRIMARY_DOMAIN_INFO_BASIC dsRolePrimaryDomainInfo =
-                    (DSROLE_PRIMARY_DOMAIN_INFO_BASIC)Marshal.PtrToStructure(
-                        dsRoleInfoPtr,
-                        typeof(DSROLE_PRIMARY_DOMAIN_INFO_BASIC)
-                    )!;
+                    (DSROLE_PRIMARY_DOMAIN_INFO_BASIC)Marshal
+                        .PtrToStructure(dsRoleInfoPtr, typeof(DSROLE_PRIMARY_DOMAIN_INFO_BASIC))
+                        !;
 
                 return (
                     dsRolePrimaryDomainInfo.MachineRole
@@ -3096,10 +3095,9 @@ namespace System.DirectoryServices.ActiveDirectory
             // Get the issuing authority and the first RID
             IntPtr pIdentAuth = UnsafeNativeMethods.GetSidIdentifierAuthority(pSid);
 
-            SID_IDENTIFIER_AUTHORITY identAuth = (SID_IDENTIFIER_AUTHORITY)Marshal.PtrToStructure(
-                pIdentAuth,
-                typeof(SID_IDENTIFIER_AUTHORITY)
-            )!;
+            SID_IDENTIFIER_AUTHORITY identAuth = (SID_IDENTIFIER_AUTHORITY)Marshal
+                .PtrToStructure(pIdentAuth, typeof(SID_IDENTIFIER_AUTHORITY))
+                !;
 
             IntPtr pRid = UnsafeNativeMethods.GetSidSubAuthority(pSid, 0);
             int rid = Marshal.ReadInt32(pRid);

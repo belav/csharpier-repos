@@ -164,7 +164,8 @@ namespace System.Linq.Parallel
                     );
                     result = ExceptionAggregator
                         .WrapEnumerable(childWithCancelChecks, cancelState)
-                        .ElementAtOrDefault(_index)!;
+                        .ElementAtOrDefault(_index)
+                        !;
                 }
                 else
                 {

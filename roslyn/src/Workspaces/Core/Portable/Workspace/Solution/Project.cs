@@ -329,15 +329,17 @@ namespace Microsoft.CodeAnalysis
                 .ConfigureAwait(false);
 
             // return an iterator to avoid eagerly allocating all the document instances
-            return generatedDocumentStates.States.Values.Select(
-                state =>
-                    ImmutableHashMapExtensions.GetOrAdd(
-                        ref _idToSourceGeneratedDocumentMap,
-                        state.Id,
-                        s_createSourceGeneratedDocumentFunction,
-                        (state, this)
-                    )
-            )!;
+            return generatedDocumentStates.States.Values
+                .Select(
+                    state =>
+                        ImmutableHashMapExtensions.GetOrAdd(
+                            ref _idToSourceGeneratedDocumentMap,
+                            state.Id,
+                            s_createSourceGeneratedDocumentFunction,
+                            (state, this)
+                        )
+                )
+                !;
         }
 
         internal async ValueTask<
@@ -383,12 +385,14 @@ namespace Microsoft.CodeAnalysis
         internal SourceGeneratedDocument GetOrCreateSourceGeneratedDocument(
             SourceGeneratedDocumentState state
         ) =>
-            ImmutableHashMapExtensions.GetOrAdd(
-                ref _idToSourceGeneratedDocumentMap,
-                state.Id,
-                s_createSourceGeneratedDocumentFunction,
-                (state, this)
-            )!;
+            ImmutableHashMapExtensions
+                .GetOrAdd(
+                    ref _idToSourceGeneratedDocumentMap,
+                    state.Id,
+                    s_createSourceGeneratedDocumentFunction,
+                    (state, this)
+                )
+                !;
 
         /// <summary>
         /// Returns the <see cref="SourceGeneratedDocumentState"/> for a source generated document that has already been generated and observed.
@@ -665,7 +669,8 @@ namespace Microsoft.CodeAnalysis
         public Project WithDefaultNamespace(string defaultNamespace) =>
             this.Solution
                 .WithProjectDefaultNamespace(this.Id, defaultNamespace)
-                .GetProject(this.Id)!;
+                .GetProject(this.Id)
+                !;
 
         /// <summary>
         /// Creates a new instance of this project updated to have the specified compilation options.
@@ -733,7 +738,8 @@ namespace Microsoft.CodeAnalysis
         public Project WithMetadataReferences(IEnumerable<MetadataReference> metadataReferences) =>
             this.Solution
                 .WithProjectMetadataReferences(this.Id, metadataReferences)
-                .GetProject(this.Id)!;
+                .GetProject(this.Id)
+                !;
 
         /// <summary>
         /// Creates a new instance of this project updated to include the specified analyzer reference
@@ -762,7 +768,8 @@ namespace Microsoft.CodeAnalysis
         public Project WithAnalyzerReferences(IEnumerable<AnalyzerReference> analyzerReferencs) =>
             this.Solution
                 .WithProjectAnalyzerReferences(this.Id, analyzerReferencs)
-                .GetProject(this.Id)!;
+                .GetProject(this.Id)
+                !;
 
         /// <summary>
         /// Creates a new document in a new instance of this project.
@@ -787,7 +794,8 @@ namespace Microsoft.CodeAnalysis
                     filePath,
                     preservationMode: PreservationMode.PreserveIdentity
                 )
-                .GetDocument(id)!;
+                .GetDocument(id)
+                !;
         }
 
         /// <summary>
@@ -831,7 +839,8 @@ namespace Microsoft.CodeAnalysis
             var id = DocumentId.CreateNewId(this.Id);
             return this.Solution
                 .AddAdditionalDocument(id, name, text, folders, filePath)
-                .GetAdditionalDocument(id)!;
+                .GetAdditionalDocument(id)
+                !;
         }
 
         /// <summary>
@@ -847,7 +856,8 @@ namespace Microsoft.CodeAnalysis
             var id = DocumentId.CreateNewId(this.Id);
             return this.Solution
                 .AddAdditionalDocument(id, name, text, folders, filePath)
-                .GetAdditionalDocument(id)!;
+                .GetAdditionalDocument(id)
+                !;
         }
 
         /// <summary>
@@ -863,7 +873,8 @@ namespace Microsoft.CodeAnalysis
             var id = DocumentId.CreateNewId(this.Id);
             return this.Solution
                 .AddAnalyzerConfigDocument(id, name, text, folders, filePath)
-                .GetAnalyzerConfigDocument(id)!;
+                .GetAnalyzerConfigDocument(id)
+                !;
         }
 
         /// <summary>

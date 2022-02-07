@@ -615,14 +615,16 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 )
                 {
                     // Find the first conditional access expression that starts left of our open bracket
-                    var conditionalAccess = elementBindingExpression.FirstAncestorOrSelf<
-                        ConditionalAccessExpressionSyntax,
-                        ElementBindingExpressionSyntax
-                    >(
-                        (c, elementBindingExpression) =>
-                            c.SpanStart < elementBindingExpression.SpanStart,
-                        elementBindingExpression
-                    )!;
+                    var conditionalAccess = elementBindingExpression
+                        .FirstAncestorOrSelf<
+                            ConditionalAccessExpressionSyntax,
+                            ElementBindingExpressionSyntax
+                        >(
+                            (c, elementBindingExpression) =>
+                                c.SpanStart < elementBindingExpression.SpanStart,
+                            elementBindingExpression
+                        )
+                        !;
 
                     identifier = conditionalAccess.Expression;
                     openBrace = elementBindingExpression.ArgumentList.OpenBracketToken;

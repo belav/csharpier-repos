@@ -141,10 +141,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 Attribute.IsDefined(inverseNavigationPropertyInfo, typeof(InversePropertyAttribute))
             )
             {
-                var inverseAttribute =
-                    inverseNavigationPropertyInfo.GetCustomAttribute<InversePropertyAttribute>(
-                        true
-                    )!;
+                var inverseAttribute = inverseNavigationPropertyInfo
+                    .GetCustomAttribute<InversePropertyAttribute>(true)
+                    !;
                 if (inverseAttribute.Property != navigationMemberInfo.GetSimpleMemberName())
                 {
                     throw new InvalidOperationException(

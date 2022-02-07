@@ -29,9 +29,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         /// <inheritdoc />
         public override RelationalTypeMapping TypeMapping =>
-            Property.FindRelationalTypeMapping(
-                StoreObjectIdentifier.View(ViewMapping.View.Name, ViewMapping.View.Schema)
-            )!;
+            Property
+                .FindRelationalTypeMapping(
+                    StoreObjectIdentifier.View(ViewMapping.View.Name, ViewMapping.View.Schema)
+                )
+                !;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

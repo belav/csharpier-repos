@@ -1077,10 +1077,9 @@ namespace System.IO
                 NativeOverlapped* pOverlapped
             )
             {
-                CallbackResetEvent state =
-                    (CallbackResetEvent)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        pOverlapped
-                    )!;
+                CallbackResetEvent state = (CallbackResetEvent)ThreadPoolBoundHandle
+                    .GetNativeOverlappedState(pOverlapped)
+                    !;
                 state.FreeNativeOverlapped(pOverlapped);
             }
         }

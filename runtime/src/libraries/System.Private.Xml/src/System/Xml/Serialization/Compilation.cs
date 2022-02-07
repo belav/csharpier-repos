@@ -119,9 +119,9 @@ namespace System.Xml.Serialization
             {
                 if (_contract == null)
                 {
-                    _contract = (XmlSerializerImplementation)Activator.CreateInstance(
-                        GetTypeFromAssembly(_assembly!, "XmlSerializerContract")
-                    )!;
+                    _contract = (XmlSerializerImplementation)Activator
+                        .CreateInstance(GetTypeFromAssembly(_assembly!, "XmlSerializerContract"))
+                        !;
                 }
                 return _contract;
             }
@@ -598,10 +598,9 @@ namespace System.Xml.Serialization
                 // Add AssemblyVersion attribute to match parent assembly version
                 if (mainType != null)
                 {
-                    ConstructorInfo AssemblyVersionAttribute_ctor =
-                        typeof(AssemblyVersionAttribute).GetConstructor(
-                            new Type[] { typeof(string) }
-                        )!;
+                    ConstructorInfo AssemblyVersionAttribute_ctor = typeof(AssemblyVersionAttribute)
+                        .GetConstructor(new Type[] { typeof(string) })
+                        !;
                     string assemblyVersion = mainType.Assembly.GetName().Version!.ToString();
                     assemblyBuilder.SetCustomAttribute(
                         new CustomAttributeBuilder(

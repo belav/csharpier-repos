@@ -469,9 +469,9 @@ namespace System.Collections.Generic
                         {
                             // `current` is a 2-node and `sibling` is either a 3-node or a 4-node.
                             // We can change the color of `current` to red by some rotation.
-                            Node newGrandParent = parent.Rotate(
-                                parent.GetRotation(current, sibling)
-                            )!;
+                            Node newGrandParent = parent
+                                .Rotate(parent.GetRotation(current, sibling))
+                                !;
 
                             newGrandParent.Color = parent.Color;
                             parent.ColorBlack();

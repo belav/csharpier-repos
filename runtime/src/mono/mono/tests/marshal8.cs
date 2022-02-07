@@ -41,8 +41,8 @@ public class X
     public static unsafe int Main()
     {
         ///
-           ///	Structure to pointer
-           ///
+              ///	Structure to pointer
+              ///
 
         Dummy dummy = new Dummy();
         dummy.a = new byte[16];
@@ -76,8 +76,8 @@ public class X
                 return 3;
 
         ///
-           ///	Pointer to structure
-           ///
+              ///	Pointer to structure
+              ///
         Dummy dummy2 = new Dummy();
         Marshal.PtrToStructure(p, dummy2);
 

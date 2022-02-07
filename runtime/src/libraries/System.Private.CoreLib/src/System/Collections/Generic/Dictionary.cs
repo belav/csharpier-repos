@@ -951,10 +951,9 @@ namespace System.Collections.Generic
             int realVersion = siInfo.GetInt32(VersionName);
             int hashsize = siInfo.GetInt32(HashSizeName);
             _comparer =
-                (IEqualityComparer<TKey>)siInfo.GetValue(
-                    ComparerName,
-                    typeof(IEqualityComparer<TKey>)
-                )!; // When serialized if comparer is null, we use the default.
+                (IEqualityComparer<TKey>)siInfo
+                    .GetValue(ComparerName, typeof(IEqualityComparer<TKey>))
+                    !; // When serialized if comparer is null, we use the default.
 
             if (hashsize != 0)
             {

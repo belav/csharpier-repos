@@ -156,11 +156,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         null
                     );
                 }
-                rootDomainNC = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.RootDomainNamingContext
-                )!;
+                rootDomainNC = (string)PropertyManager
+                    .GetPropertyValue(context, rootDSE, PropertyManager.RootDomainNamingContext)
+                    !;
             }
             catch (COMException e)
             {
@@ -1112,11 +1110,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 dcName = Utils.GetDnsHostNameFromNTDSA(
                     _context,
-                    (string)PropertyManager.GetPropertyValue(
-                        _context,
-                        entry,
-                        PropertyManager.FsmoRoleOwner
-                    )!
+                    (string)PropertyManager
+                        .GetPropertyValue(_context, entry, PropertyManager.FsmoRoleOwner)
+                        !
                 );
             }
             catch (COMException e)
@@ -1303,10 +1299,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     // add the name of the appNC only if it is not
                     // the Schema or Configuration partition
-                    string nCName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.NCName
-                    )!;
+                    string nCName = (string)PropertyManager
+                        .GetSearchResultPropertyValue(res, PropertyManager.NCName)
+                        !;
                     if (
                         (!(nCName.Equals(schemaNamingContext)))
                         && (!(nCName.Equals(configurationNamingContext)))
@@ -1314,10 +1309,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         // create a new context to be passed on to the appNC object
                         // (pass the dns name of the appliction partition as the target)
-                        string dnsName = (string)PropertyManager.GetSearchResultPropertyValue(
-                            res,
-                            PropertyManager.DnsRoot
-                        )!;
+                        string dnsName = (string)PropertyManager
+                            .GetSearchResultPropertyValue(res, PropertyManager.DnsRoot)
+                            !;
                         DirectoryContext appNCContext = Utils.GetNewDirectoryContext(
                             dnsName,
                             DirectoryContextType.ApplicationPartition,
@@ -1327,10 +1321,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             new ApplicationPartition(
                                 appNCContext,
                                 nCName,
-                                (string)PropertyManager.GetSearchResultPropertyValue(
-                                    res,
-                                    PropertyManager.DnsRoot
-                                )!,
+                                (string)PropertyManager
+                                    .GetSearchResultPropertyValue(res, PropertyManager.DnsRoot)
+                                    !,
                                 ApplicationPartitionType.ADApplicationPartition,
                                 new DirectoryEntryManager(appNCContext)
                             )
@@ -1398,10 +1391,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string domainName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.DnsRoot
-                    )!;
+                    string domainName = (string)PropertyManager
+                        .GetSearchResultPropertyValue(res, PropertyManager.DnsRoot)
+                        !;
                     DirectoryContext domainContext = Utils.GetNewDirectoryContext(
                         domainName,
                         DirectoryContextType.Domain,

@@ -1763,14 +1763,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                             );
 
                             return SimplifyLogicalSqlBinaryExpression(
-                                _sqlExpressionFactory.MakeBinary(
-                                    sqlBinaryOperand.OperatorType == ExpressionType.AndAlso
-                                      ? ExpressionType.OrElse
-                                      : ExpressionType.AndAlso,
-                                    left,
-                                    right,
-                                    sqlBinaryOperand.TypeMapping
-                                )!
+                                _sqlExpressionFactory
+                                    .MakeBinary(
+                                        sqlBinaryOperand.OperatorType == ExpressionType.AndAlso
+                                          ? ExpressionType.OrElse
+                                          : ExpressionType.AndAlso,
+                                        left,
+                                        right,
+                                        sqlBinaryOperand.TypeMapping
+                                    )
+                                    !
                             );
                         }
 
@@ -1786,15 +1788,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && leftConstant.Type == typeof(bool)
                             )
                             {
-                                return _sqlExpressionFactory.MakeBinary(
-                                    ExpressionType.Equal,
-                                    _sqlExpressionFactory.Constant(
-                                        !(bool)leftConstant.Value!,
-                                        leftConstant.TypeMapping
-                                    ),
-                                    sqlBinaryOperand.Right,
-                                    sqlBinaryOperand.TypeMapping
-                                )!;
+                                return _sqlExpressionFactory
+                                    .MakeBinary(
+                                        ExpressionType.Equal,
+                                        _sqlExpressionFactory.Constant(
+                                            !(bool)leftConstant.Value!,
+                                            leftConstant.TypeMapping
+                                        ),
+                                        sqlBinaryOperand.Right,
+                                        sqlBinaryOperand.TypeMapping
+                                    )
+                                    !;
                             }
 
                             if (
@@ -1802,15 +1806,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && rightConstant.Type == typeof(bool)
                             )
                             {
-                                return _sqlExpressionFactory.MakeBinary(
-                                    ExpressionType.Equal,
-                                    sqlBinaryOperand.Left,
-                                    _sqlExpressionFactory.Constant(
-                                        !(bool)rightConstant.Value!,
-                                        rightConstant.TypeMapping
-                                    ),
-                                    sqlBinaryOperand.TypeMapping
-                                )!;
+                                return _sqlExpressionFactory
+                                    .MakeBinary(
+                                        ExpressionType.Equal,
+                                        sqlBinaryOperand.Left,
+                                        _sqlExpressionFactory.Constant(
+                                            !(bool)rightConstant.Value!,
+                                            rightConstant.TypeMapping
+                                        ),
+                                        sqlBinaryOperand.TypeMapping
+                                    )
+                                    !;
                             }
                         }
 
@@ -1822,12 +1828,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                         // !(a <= b) -> a > b
                         if (TryNegate(sqlBinaryOperand.OperatorType, out var negated))
                         {
-                            return _sqlExpressionFactory.MakeBinary(
-                                negated,
-                                sqlBinaryOperand.Left,
-                                sqlBinaryOperand.Right,
-                                sqlBinaryOperand.TypeMapping
-                            )!;
+                            return _sqlExpressionFactory
+                                .MakeBinary(
+                                    negated,
+                                    sqlBinaryOperand.Left,
+                                    sqlBinaryOperand.Right,
+                                    sqlBinaryOperand.TypeMapping
+                                )
+                                !;
                         }
                     }
                     break;
@@ -1945,34 +1953,40 @@ namespace Microsoft.EntityFrameworkCore.Query
                     // NOTE: we don't preserve nullabilities of left/right individually so we are using nullability binary expression as a whole
                     // this may lead to missing some optimizations, where one of the operands (left or right) is not nullable and the other one is
                     var left = ProcessNullNotNull(
-                        _sqlExpressionFactory.MakeUnary(
-                            sqlUnaryExpression.OperatorType,
-                            sqlBinaryOperand.Left,
-                            typeof(bool),
-                            sqlUnaryExpression.TypeMapping
-                        )!,
+                        _sqlExpressionFactory
+                            .MakeUnary(
+                                sqlUnaryExpression.OperatorType,
+                                sqlBinaryOperand.Left,
+                                typeof(bool),
+                                sqlUnaryExpression.TypeMapping
+                            )
+                            !,
                         operandNullable
                     );
 
                     var right = ProcessNullNotNull(
-                        _sqlExpressionFactory.MakeUnary(
-                            sqlUnaryExpression.OperatorType,
-                            sqlBinaryOperand.Right,
-                            typeof(bool),
-                            sqlUnaryExpression.TypeMapping
-                        )!,
+                        _sqlExpressionFactory
+                            .MakeUnary(
+                                sqlUnaryExpression.OperatorType,
+                                sqlBinaryOperand.Right,
+                                typeof(bool),
+                                sqlUnaryExpression.TypeMapping
+                            )
+                            !,
                         operandNullable
                     );
 
                     return SimplifyLogicalSqlBinaryExpression(
-                        _sqlExpressionFactory.MakeBinary(
-                            sqlUnaryExpression.OperatorType == ExpressionType.Equal
-                              ? ExpressionType.OrElse
-                              : ExpressionType.AndAlso,
-                            left,
-                            right,
-                            sqlUnaryExpression.TypeMapping
-                        )!
+                        _sqlExpressionFactory
+                            .MakeBinary(
+                                sqlUnaryExpression.OperatorType == ExpressionType.Equal
+                                  ? ExpressionType.OrElse
+                                  : ExpressionType.AndAlso,
+                                left,
+                                right,
+                                sqlUnaryExpression.TypeMapping
+                            )
+                            !
                     );
                 }
 
@@ -1996,27 +2010,31 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 .Select(
                                     a =>
                                         ProcessNullNotNull(
-                                            _sqlExpressionFactory.MakeUnary(
-                                                sqlUnaryExpression.OperatorType,
-                                                a,
-                                                typeof(bool),
-                                                sqlUnaryExpression.TypeMapping
-                                            )!,
+                                            _sqlExpressionFactory
+                                                .MakeUnary(
+                                                    sqlUnaryExpression.OperatorType,
+                                                    a,
+                                                    typeof(bool),
+                                                    sqlUnaryExpression.TypeMapping
+                                                )
+                                                !,
                                             operandNullable
                                         )
                                 )
                                 .Aggregate(
                                     (l, r) =>
                                         SimplifyLogicalSqlBinaryExpression(
-                                            _sqlExpressionFactory.MakeBinary(
-                                                sqlUnaryExpression.OperatorType
-                                                    == ExpressionType.Equal
-                                                  ? ExpressionType.AndAlso
-                                                  : ExpressionType.OrElse,
-                                                l,
-                                                r,
-                                                sqlUnaryExpression.TypeMapping
-                                            )!
+                                            _sqlExpressionFactory
+                                                .MakeBinary(
+                                                    sqlUnaryExpression.OperatorType
+                                                        == ExpressionType.Equal
+                                                      ? ExpressionType.AndAlso
+                                                      : ExpressionType.OrElse,
+                                                    l,
+                                                    r,
+                                                    sqlUnaryExpression.TypeMapping
+                                                )
+                                                !
                                         )
                                 );
                         }
@@ -2064,12 +2082,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 .Select(
                                     e =>
                                         ProcessNullNotNull(
-                                            _sqlExpressionFactory.MakeUnary(
-                                                sqlUnaryExpression.OperatorType,
-                                                e,
-                                                sqlUnaryExpression.Type,
-                                                sqlUnaryExpression.TypeMapping
-                                            )!,
+                                            _sqlExpressionFactory
+                                                .MakeUnary(
+                                                    sqlUnaryExpression.OperatorType,
+                                                    e,
+                                                    sqlUnaryExpression.Type,
+                                                    sqlUnaryExpression.TypeMapping
+                                                )
+                                                !,
                                             operandNullable
                                         )
                                 )

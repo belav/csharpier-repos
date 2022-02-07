@@ -55,9 +55,9 @@ namespace System.Net.WebSockets
             response.Headers.Add(HttpKnownHeaderNames.SecWebSocketAccept, secWebSocketAccept);
 
             response.StatusCode = (int)HttpStatusCode.SwitchingProtocols; // HTTP 101
-            response.StatusDescription = HttpStatusDescription.Get(
-                HttpStatusCode.SwitchingProtocols
-            )!;
+            response.StatusDescription = HttpStatusDescription
+                .Get(HttpStatusCode.SwitchingProtocols)
+                !;
 
             HttpResponseStream responseStream = (response.OutputStream as HttpResponseStream)!;
 

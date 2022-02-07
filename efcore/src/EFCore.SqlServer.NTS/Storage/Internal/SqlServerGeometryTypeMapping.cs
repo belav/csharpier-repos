@@ -29,10 +29,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
     public class SqlServerGeometryTypeMapping<TGeometry>
         : RelationalGeometryTypeMapping<TGeometry, SqlBytes> where TGeometry : Geometry
     {
-        private static readonly MethodInfo _getSqlBytes = typeof(SqlDataReader).GetRuntimeMethod(
-            nameof(SqlDataReader.GetSqlBytes),
-            new[] { typeof(int) }
-        )!;
+        private static readonly MethodInfo _getSqlBytes = typeof(SqlDataReader)
+            .GetRuntimeMethod(nameof(SqlDataReader.GetSqlBytes), new[] { typeof(int) })
+            !;
 
         private static Action<DbParameter, SqlDbType>? _sqlDbTypeSetter;
         private static Action<DbParameter, string>? _udtTypeNameSetter;

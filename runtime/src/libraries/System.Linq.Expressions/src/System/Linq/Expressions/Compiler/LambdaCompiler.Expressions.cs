@@ -13,9 +13,9 @@ namespace System.Linq.Expressions.Compiler
 {
     internal sealed partial class LambdaCompiler
     {
-        private static readonly FieldInfo s_callSiteTargetField = typeof(CallSite<>).GetField(
-            "Target"
-        )!;
+        private static readonly FieldInfo s_callSiteTargetField = typeof(CallSite<>)
+            .GetField("Target")
+            !;
 
         [Flags]
         internal enum CompilationFlags

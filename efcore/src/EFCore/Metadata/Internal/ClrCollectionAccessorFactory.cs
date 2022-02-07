@@ -23,34 +23,41 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     {
         private static readonly MethodInfo _genericCreate = typeof(ClrCollectionAccessorFactory)
             .GetTypeInfo()
-            .GetDeclaredMethod(nameof(CreateGeneric))!;
+            .GetDeclaredMethod(nameof(CreateGeneric))
+            !;
 
         private static readonly MethodInfo _createAndSet = typeof(ClrCollectionAccessorFactory)
             .GetTypeInfo()
-            .GetDeclaredMethod(nameof(CreateAndSet))!;
+            .GetDeclaredMethod(nameof(CreateAndSet))
+            !;
 
         private static readonly MethodInfo _create = typeof(ClrCollectionAccessorFactory)
             .GetTypeInfo()
-            .GetDeclaredMethod(nameof(CreateCollection))!;
+            .GetDeclaredMethod(nameof(CreateCollection))
+            !;
 
         private static readonly MethodInfo _createAndSetHashSet =
             typeof(ClrCollectionAccessorFactory)
                 .GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateAndSetHashSet))!;
+                .GetDeclaredMethod(nameof(CreateAndSetHashSet))
+                !;
 
         private static readonly MethodInfo _createHashSet = typeof(ClrCollectionAccessorFactory)
             .GetTypeInfo()
-            .GetDeclaredMethod(nameof(CreateHashSet))!;
+            .GetDeclaredMethod(nameof(CreateHashSet))
+            !;
 
         private static readonly MethodInfo _createAndSetObservableHashSet =
             typeof(ClrCollectionAccessorFactory)
                 .GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateAndSetObservableHashSet))!;
+                .GetDeclaredMethod(nameof(CreateAndSetObservableHashSet))
+                !;
 
         private static readonly MethodInfo _createObservableHashSet =
             typeof(ClrCollectionAccessorFactory)
                 .GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateObservableHashSet))!;
+                .GetDeclaredMethod(nameof(CreateObservableHashSet))
+                !;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

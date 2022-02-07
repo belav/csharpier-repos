@@ -98,7 +98,8 @@ namespace System.Runtime.CompilerServices
             {
                 MethodInfo method = typeof(CallSite<>)
                     .MakeGenericType(delegateType)
-                    .GetMethod(nameof(Create))!;
+                    .GetMethod(nameof(Create))
+                    !;
 
                 if (delegateType.IsCollectible)
                 {

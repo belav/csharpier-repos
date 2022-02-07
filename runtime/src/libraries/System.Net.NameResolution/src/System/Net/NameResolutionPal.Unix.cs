@@ -118,9 +118,9 @@ namespace System.Net
                         localAliases = new string[numAliases];
                         for (int i = 0; i < localAliases.Length; i++)
                         {
-                            localAliases[i] = Marshal.PtrToStringAnsi(
-                                (IntPtr)hostEntry.Aliases[i]
-                            )!;
+                            localAliases[i] = Marshal
+                                .PtrToStringAnsi((IntPtr)hostEntry.Aliases[i])
+                                !;
                         }
                     }
                 }

@@ -52,62 +52,65 @@ namespace System.Text.RegularExpressions
         private static readonly MethodInfo s_dumpStateM = RegexRunnerMethod("DumpState");
 #endif
 
-        private static readonly MethodInfo s_charIsDigitMethod = typeof(char).GetMethod(
-            "IsDigit",
-            new Type[] { typeof(char) }
-        )!;
-        private static readonly MethodInfo s_charIsWhiteSpaceMethod = typeof(char).GetMethod(
-            "IsWhiteSpace",
-            new Type[] { typeof(char) }
-        )!;
-        private static readonly MethodInfo s_charGetUnicodeInfo = typeof(char).GetMethod(
-            "GetUnicodeCategory",
-            new Type[] { typeof(char) }
-        )!;
-        private static readonly MethodInfo s_charToLowerInvariantMethod = typeof(char).GetMethod(
-            "ToLowerInvariant",
-            new Type[] { typeof(char) }
-        )!;
+        private static readonly MethodInfo s_charIsDigitMethod = typeof(char)
+            .GetMethod("IsDigit", new Type[] { typeof(char) })
+            !;
+        private static readonly MethodInfo s_charIsWhiteSpaceMethod = typeof(char)
+            .GetMethod("IsWhiteSpace", new Type[] { typeof(char) })
+            !;
+        private static readonly MethodInfo s_charGetUnicodeInfo = typeof(char)
+            .GetMethod("GetUnicodeCategory", new Type[] { typeof(char) })
+            !;
+        private static readonly MethodInfo s_charToLowerInvariantMethod = typeof(char)
+            .GetMethod("ToLowerInvariant", new Type[] { typeof(char) })
+            !;
         private static readonly MethodInfo s_cultureInfoGetCurrentCultureMethod =
             typeof(CultureInfo).GetMethod("get_CurrentCulture")!;
-        private static readonly MethodInfo s_cultureInfoGetTextInfoMethod =
-            typeof(CultureInfo).GetMethod("get_TextInfo")!;
+        private static readonly MethodInfo s_cultureInfoGetTextInfoMethod = typeof(CultureInfo)
+            .GetMethod("get_TextInfo")
+            !;
 #if DEBUG
-        private static readonly MethodInfo s_debugWriteLine = typeof(Debug).GetMethod(
-            "WriteLine",
-            new Type[] { typeof(string) }
-        )!;
+        private static readonly MethodInfo s_debugWriteLine = typeof(Debug)
+            .GetMethod("WriteLine", new Type[] { typeof(string) })
+            !;
 #endif
-        private static readonly MethodInfo s_spanGetItemMethod =
-            typeof(ReadOnlySpan<char>).GetMethod("get_Item", new Type[] { typeof(int) })!;
-        private static readonly MethodInfo s_spanGetLengthMethod =
-            typeof(ReadOnlySpan<char>).GetMethod("get_Length")!;
-        private static readonly MethodInfo s_memoryMarshalGetReference =
-            typeof(MemoryMarshal).GetMethod(
+        private static readonly MethodInfo s_spanGetItemMethod = typeof(ReadOnlySpan<char>)
+            .GetMethod("get_Item", new Type[] { typeof(int) })
+            !;
+        private static readonly MethodInfo s_spanGetLengthMethod = typeof(ReadOnlySpan<char>)
+            .GetMethod("get_Length")
+            !;
+        private static readonly MethodInfo s_memoryMarshalGetReference = typeof(MemoryMarshal)
+            .GetMethod(
                 "GetReference",
                 new Type[]
                 {
                     typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
                 }
-            )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanIndexOfChar = typeof(MemoryExtensions).GetMethod(
-            "IndexOf",
-            new Type[]
-            {
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
-                Type.MakeGenericMethodParameter(0)
-            }
-        )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanIndexOfSpan = typeof(MemoryExtensions).GetMethod(
-            "IndexOf",
-            new Type[]
-            {
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
-            }
-        )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanIndexOfAnyCharChar =
-            typeof(MemoryExtensions).GetMethod(
+            )
+            !.MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanIndexOfChar = typeof(MemoryExtensions)
+            .GetMethod(
+                "IndexOf",
+                new Type[]
+                {
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
+                    Type.MakeGenericMethodParameter(0)
+                }
+            )
+            !.MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanIndexOfSpan = typeof(MemoryExtensions)
+            .GetMethod(
+                "IndexOf",
+                new Type[]
+                {
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
+                }
+            )
+            !.MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanIndexOfAnyCharChar = typeof(MemoryExtensions)
+            .GetMethod(
                 "IndexOfAny",
                 new Type[]
                 {
@@ -115,9 +118,10 @@ namespace System.Text.RegularExpressions
                     Type.MakeGenericMethodParameter(0),
                     Type.MakeGenericMethodParameter(0)
                 }
-            )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanIndexOfAnyCharCharChar =
-            typeof(MemoryExtensions).GetMethod(
+            )
+            !.MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanIndexOfAnyCharCharChar = typeof(MemoryExtensions)
+            .GetMethod(
                 "IndexOfAny",
                 new Type[]
                 {
@@ -126,42 +130,42 @@ namespace System.Text.RegularExpressions
                     Type.MakeGenericMethodParameter(0),
                     Type.MakeGenericMethodParameter(0)
                 }
-            )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanSliceIntMethod =
-            typeof(ReadOnlySpan<char>).GetMethod("Slice", new Type[] { typeof(int) })!;
-        private static readonly MethodInfo s_spanSliceIntIntMethod =
-            typeof(ReadOnlySpan<char>).GetMethod("Slice", new Type[] { typeof(int), typeof(int) })!;
-        private static readonly MethodInfo s_spanStartsWith = typeof(MemoryExtensions).GetMethod(
-            "StartsWith",
-            new Type[]
-            {
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
-            }
-        )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_stringAsSpanMethod =
-            typeof(MemoryExtensions).GetMethod("AsSpan", new Type[] { typeof(string) })!;
-        private static readonly MethodInfo s_stringAsSpanIntIntMethod =
-            typeof(MemoryExtensions).GetMethod(
-                "AsSpan",
-                new Type[] { typeof(string), typeof(int), typeof(int) }
-            )!;
-        private static readonly MethodInfo s_stringGetCharsMethod = typeof(string).GetMethod(
-            "get_Chars",
-            new Type[] { typeof(int) }
-        )!;
-        private static readonly MethodInfo s_stringIndexOfCharInt = typeof(string).GetMethod(
-            "IndexOf",
-            new Type[] { typeof(char), typeof(int) }
-        )!;
-        private static readonly MethodInfo s_stringLastIndexOfCharIntInt = typeof(string).GetMethod(
-            "LastIndexOf",
-            new Type[] { typeof(char), typeof(int), typeof(int) }
-        )!;
-        private static readonly MethodInfo s_textInfoToLowerMethod = typeof(TextInfo).GetMethod(
-            "ToLower",
-            new Type[] { typeof(char) }
-        )!;
+            )
+            !.MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanSliceIntMethod = typeof(ReadOnlySpan<char>)
+            .GetMethod("Slice", new Type[] { typeof(int) })
+            !;
+        private static readonly MethodInfo s_spanSliceIntIntMethod = typeof(ReadOnlySpan<char>)
+            .GetMethod("Slice", new Type[] { typeof(int), typeof(int) })
+            !;
+        private static readonly MethodInfo s_spanStartsWith = typeof(MemoryExtensions)
+            .GetMethod(
+                "StartsWith",
+                new Type[]
+                {
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
+                }
+            )
+            !.MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_stringAsSpanMethod = typeof(MemoryExtensions)
+            .GetMethod("AsSpan", new Type[] { typeof(string) })
+            !;
+        private static readonly MethodInfo s_stringAsSpanIntIntMethod = typeof(MemoryExtensions)
+            .GetMethod("AsSpan", new Type[] { typeof(string), typeof(int), typeof(int) })
+            !;
+        private static readonly MethodInfo s_stringGetCharsMethod = typeof(string)
+            .GetMethod("get_Chars", new Type[] { typeof(int) })
+            !;
+        private static readonly MethodInfo s_stringIndexOfCharInt = typeof(string)
+            .GetMethod("IndexOf", new Type[] { typeof(char), typeof(int) })
+            !;
+        private static readonly MethodInfo s_stringLastIndexOfCharIntInt = typeof(string)
+            .GetMethod("LastIndexOf", new Type[] { typeof(char), typeof(int), typeof(int) })
+            !;
+        private static readonly MethodInfo s_textInfoToLowerMethod = typeof(TextInfo)
+            .GetMethod("ToLower", new Type[] { typeof(char) })
+            !;
 
         protected ILGenerator? _ilg;
 
@@ -216,22 +220,26 @@ namespace System.Text.RegularExpressions
         private const int LoopTimeoutCheckCount = 2048; // A conservative value to guarantee the correct timeout handling.
 
         private static FieldInfo RegexRunnerField(string fieldname) =>
-            typeof(RegexRunner).GetField(
-                fieldname,
-                BindingFlags.NonPublic
-                    | BindingFlags.Public
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            )!;
+            typeof(RegexRunner)
+                .GetField(
+                    fieldname,
+                    BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                )
+                !;
 
         private static MethodInfo RegexRunnerMethod(string methname) =>
-            typeof(RegexRunner).GetMethod(
-                methname,
-                BindingFlags.NonPublic
-                    | BindingFlags.Public
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            )!;
+            typeof(RegexRunner)
+                .GetMethod(
+                    methname,
+                    BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                )
+                !;
 
         /// <summary>
         /// Entry point to dynamically compile a regular expression.  The expression is compiled to

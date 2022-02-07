@@ -111,11 +111,13 @@ namespace System.Xml.Serialization
                 {
                     ILG.Load(varA);
                     ILG.Load(varIA);
-                    MethodInfo get_Item = varType.GetMethod(
-                        "get_Item",
-                        CodeGenerator.InstanceBindingFlags,
-                        new Type[] { typeof(int) }
-                    )!;
+                    MethodInfo get_Item = varType
+                        .GetMethod(
+                            "get_Item",
+                            CodeGenerator.InstanceBindingFlags,
+                            new Type[] { typeof(int) }
+                        )
+                        !;
 
                     if (get_Item == null && typeof(IList).IsAssignableFrom(varType))
                     {
@@ -257,11 +259,9 @@ namespace System.Xml.Serialization
             );
             if (targetType != nullableType)
             {
-                MethodInfo Nullable_get_Value = nullableType.GetMethod(
-                    "get_Value",
-                    CodeGenerator.InstanceBindingFlags,
-                    Type.EmptyTypes
-                )!;
+                MethodInfo Nullable_get_Value = nullableType
+                    .GetMethod("get_Value", CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)
+                    !;
                 ILG.Call(Nullable_get_Value);
                 if (targetType != null)
                 {

@@ -355,9 +355,9 @@ namespace Internal.Cryptography.Pal
                                     CERT_POLICY_INFO* pCertPolicyInfo = &(
                                         pCertPoliciesInfo->rgPolicyInfo[i]
                                     );
-                                    string actual = Marshal.PtrToStringAnsi(
-                                        pCertPolicyInfo->pszPolicyIdentifier
-                                    )!;
+                                    string actual = Marshal
+                                        .PtrToStringAnsi(pCertPolicyInfo->pszPolicyIdentifier)
+                                        !;
                                     if (oidValue.Equals(actual, StringComparison.OrdinalIgnoreCase))
                                     {
                                         foundMatch = true;

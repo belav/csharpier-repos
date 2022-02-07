@@ -87,7 +87,8 @@ internal class AuthorizationApplicationModelProvider : IApplicationModelProvider
             var policy = AuthorizationPolicy
                 .CombineAsync(policyProvider, authData)
                 .GetAwaiter()
-                .GetResult()!;
+                .GetResult()
+                !;
             return new AuthorizeFilter(policy);
         }
         else

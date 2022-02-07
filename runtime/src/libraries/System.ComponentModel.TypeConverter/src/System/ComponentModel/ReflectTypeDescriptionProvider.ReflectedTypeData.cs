@@ -220,10 +220,9 @@ namespace System.ComponentModel
                             && typeof(TypeConverter).IsAssignableFrom(converterType)
                         )
                         {
-                            return (TypeConverter)ReflectTypeDescriptionProvider.CreateInstance(
-                                converterType,
-                                _type
-                            )!;
+                            return (TypeConverter)ReflectTypeDescriptionProvider
+                                .CreateInstance(converterType, _type)
+                                !;
                         }
                     }
                 }

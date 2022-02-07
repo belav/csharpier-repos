@@ -83,10 +83,9 @@ namespace System.Reflection.TypeLoading.Ecma
 
         private Type[] GetCustomModifiers(bool isRequired)
         {
-            RoType type = FieldDefinition.DecodeSignature(
-                new EcmaModifiedTypeProvider(_module),
-                TypeContext
-            )!;
+            RoType type = FieldDefinition
+                .DecodeSignature(new EcmaModifiedTypeProvider(_module), TypeContext)
+                !;
             return type.ExtractCustomModifiers(isRequired);
         }
 

@@ -509,9 +509,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private SlimForeignKey Create(IForeignKey foreignKey, SlimEntityType slimEntityType)
         {
-            var principalEntityType = slimEntityType.Model.FindEntityType(
-                foreignKey.PrincipalEntityType.Name
-            )!;
+            var principalEntityType = slimEntityType.Model
+                .FindEntityType(foreignKey.PrincipalEntityType.Name)
+                !;
             return slimEntityType.AddForeignKey(
                 slimEntityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!,
                 GetKey(foreignKey.PrincipalKey, principalEntityType),
@@ -587,9 +587,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 slimEntityType.Model.FindEntityType(navigation.TargetEntityType.Name)!,
                 GetForeignKey(
                     navigation.ForeignKey,
-                    slimEntityType.Model.FindEntityType(
-                        navigation.ForeignKey.DeclaringEntityType.Name
-                    )!
+                    slimEntityType.Model
+                        .FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name)
+                        !
                 ),
                 navigation.IsCollection,
                 navigation.IsOnDependent,
@@ -636,9 +636,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <returns> The corresponding read-optimized index. </returns>
         protected virtual SlimIndex GetIndex(IIndex index, SlimEntityType entityType) =>
             index.Name == null
-                ? entityType.FindIndex(
-                      entityType.FindProperties(index.Properties.Select(p => p.Name))!
-                  )!
+                ? entityType
+                  .FindIndex(entityType.FindProperties(index.Properties.Select(p => p.Name))!)
+                  !
                 : entityType.FindIndex(index.Name)!;
 
         /// <summary>

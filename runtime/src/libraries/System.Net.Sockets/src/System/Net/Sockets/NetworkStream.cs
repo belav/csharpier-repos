@@ -113,10 +113,9 @@ namespace System.Net.Sockets
         {
             get
             {
-                int timeout = (int)_streamSocket.GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.ReceiveTimeout
-                )!;
+                int timeout = (int)_streamSocket
+                    .GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout)
+                    !;
                 if (timeout == 0)
                 {
                     return -1;
@@ -142,10 +141,9 @@ namespace System.Net.Sockets
         {
             get
             {
-                int timeout = (int)_streamSocket.GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.SendTimeout
-                )!;
+                int timeout = (int)_streamSocket
+                    .GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout)
+                    !;
                 if (timeout == 0)
                 {
                     return -1;

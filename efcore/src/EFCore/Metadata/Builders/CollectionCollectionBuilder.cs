@@ -495,16 +495,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
                     newJoinEntityType =
                         joinEntityName == null
-                            ? ModelBuilder.Entity(
-                                  joinEntityType,
-                                  ConfigurationSource.Explicit,
-                                  shouldBeOwned: false
-                              )!.Metadata
-                            : ModelBuilder.SharedTypeEntity(
-                                  joinEntityName,
-                                  joinEntityType,
-                                  ConfigurationSource.Explicit
-                              )!.Metadata;
+                            ? ModelBuilder
+                                  .Entity(
+                                      joinEntityType,
+                                      ConfigurationSource.Explicit,
+                                      shouldBeOwned: false
+                                  )
+                                  !.Metadata
+                            : ModelBuilder
+                                  .SharedTypeEntity(
+                                      joinEntityName,
+                                      joinEntityType,
+                                      ConfigurationSource.Explicit
+                                  )
+                                  !.Metadata;
                 }
             }
 
@@ -561,12 +565,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     return compatibleFk;
                 }
 
-                return joinEntityType.Builder.HasRelationship(
-                    skipNavigation.DeclaringEntityType,
-                    ConfigurationSource.Convention,
-                    required: true,
-                    skipNavigation.Inverse!.Name
-                )!.IsUnique(false, ConfigurationSource.Convention)!.Metadata;
+                return joinEntityType.Builder
+                    .HasRelationship(
+                        skipNavigation.DeclaringEntityType,
+                        ConfigurationSource.Convention,
+                        required: true,
+                        skipNavigation.Inverse!.Name
+                    )
+                    !.IsUnique(false, ConfigurationSource.Convention)
+                    !.Metadata;
             }
         }
 

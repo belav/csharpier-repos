@@ -1029,13 +1029,15 @@ namespace System.Xml
         [MemberNotNull(nameof(_validator))]
         private void SetupValidation(ValidationType valType)
         {
-            _validator = BaseValidator.CreateInstance(
-                valType,
-                this,
-                _schemaCollection,
-                _eventHandling,
-                _processIdentityConstraints
-            )!;
+            _validator = BaseValidator
+                .CreateInstance(
+                    valType,
+                    this,
+                    _schemaCollection,
+                    _eventHandling,
+                    _processIdentityConstraints
+                )
+                !;
 
             XmlResolver? resolver = GetResolver();
             _validator.XmlResolver = resolver;

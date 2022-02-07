@@ -29,11 +29,9 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    de,
-                    PropertyManager.ConfigurationNamingContext
-                )!;
+                string config = (string)PropertyManager
+                    .GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)
+                    !;
                 string subnetdn = "CN=Subnets,CN=Sites," + config;
                 de = DirectoryEntryManager.GetDirectoryEntry(context, subnetdn);
             }
@@ -142,11 +140,9 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    de,
-                    PropertyManager.ConfigurationNamingContext
-                )!;
+                string config = (string)PropertyManager
+                    .GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)
+                    !;
                 string subnetn = "CN=Subnets,CN=Sites," + config;
                 // bind to the subnet container
                 de = DirectoryEntryManager.GetDirectoryEntry(context, subnetn);

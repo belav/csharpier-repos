@@ -403,10 +403,9 @@ internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
             JsonSerializerOptions options
         )
         {
-            var parsed = JsonSerializer.Deserialize<IDictionary<string, StaticWebAssetNode>>(
-                ref reader,
-                options
-            )!;
+            var parsed = JsonSerializer
+                .Deserialize<IDictionary<string, StaticWebAssetNode>>(ref reader, options)
+                !;
             var result = new Dictionary<string, StaticWebAssetNode>(
                 StaticWebAssetManifest.PathComparer
             );

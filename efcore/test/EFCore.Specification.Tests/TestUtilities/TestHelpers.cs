@@ -129,11 +129,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 );
             }
 
-            var designTimeServicesType = providerAssembly.GetType(
-                providerServicesAttribute.TypeName,
-                throwOnError: true,
-                ignoreCase: false
-            )!;
+            var designTimeServicesType = providerAssembly
+                .GetType(providerServicesAttribute.TypeName, throwOnError: true, ignoreCase: false)
+                !;
 
             ConfigureDesignTimeServices(designTimeServicesType, services);
         }
@@ -143,9 +141,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             IServiceCollection services
         )
         {
-            var designTimeServices = (IDesignTimeServices)Activator.CreateInstance(
-                designTimeServicesType
-            )!;
+            var designTimeServices = (IDesignTimeServices)Activator
+                .CreateInstance(designTimeServicesType)
+                !;
             designTimeServices.ConfigureDesignTimeServices(services);
         }
 

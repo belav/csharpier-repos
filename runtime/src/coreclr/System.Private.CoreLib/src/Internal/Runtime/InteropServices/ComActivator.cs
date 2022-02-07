@@ -787,49 +787,42 @@ namespace Internal.Runtime.InteropServices
                 "System.ComponentModel.LicenseContext, System.ComponentModel.TypeConverter",
                 throwOnError: true
             )!;
-            _setSavedLicenseKey = licContext.GetMethod(
-                "SetSavedLicenseKey",
-                BindingFlags.Instance | BindingFlags.Public
-            )!;
-            _createWithContext = licManager.GetMethod(
-                "CreateWithContext",
-                new[] { typeof(Type), licContext }
-            )!;
+            _setSavedLicenseKey = licContext
+                .GetMethod("SetSavedLicenseKey", BindingFlags.Instance | BindingFlags.Public)
+                !;
+            _createWithContext = licManager
+                .GetMethod("CreateWithContext", new[] { typeof(Type), licContext })
+                !;
 
-            Type interopHelper = licManager.GetNestedType(
-                "LicenseInteropHelper",
-                BindingFlags.NonPublic
-            )!;
-            _validateTypeAndReturnDetails = interopHelper.GetMethod(
-                "ValidateAndRetrieveLicenseDetails",
-                BindingFlags.Static | BindingFlags.Public
-            )!;
-            _getCurrentContextInfo = interopHelper.GetMethod(
-                "GetCurrentContextInfo",
-                BindingFlags.Static | BindingFlags.Public
-            )!;
+            Type interopHelper = licManager
+                .GetNestedType("LicenseInteropHelper", BindingFlags.NonPublic)
+                !;
+            _validateTypeAndReturnDetails = interopHelper
+                .GetMethod(
+                    "ValidateAndRetrieveLicenseDetails",
+                    BindingFlags.Static | BindingFlags.Public
+                )
+                !;
+            _getCurrentContextInfo = interopHelper
+                .GetMethod("GetCurrentContextInfo", BindingFlags.Static | BindingFlags.Public)
+                !;
 
-            Type clrLicContext = licManager.GetNestedType(
-                "CLRLicenseContext",
-                BindingFlags.NonPublic
-            )!;
-            _createDesignContext = clrLicContext.GetMethod(
-                "CreateDesignContext",
-                BindingFlags.Static | BindingFlags.Public
-            )!;
-            _createRuntimeContext = clrLicContext.GetMethod(
-                "CreateRuntimeContext",
-                BindingFlags.Static | BindingFlags.Public
-            )!;
+            Type clrLicContext = licManager
+                .GetNestedType("CLRLicenseContext", BindingFlags.NonPublic)
+                !;
+            _createDesignContext = clrLicContext
+                .GetMethod("CreateDesignContext", BindingFlags.Static | BindingFlags.Public)
+                !;
+            _createRuntimeContext = clrLicContext
+                .GetMethod("CreateRuntimeContext", BindingFlags.Static | BindingFlags.Public)
+                !;
 
-            _licInfoHelper = licManager.GetNestedType(
-                "LicInfoHelperLicenseContext",
-                BindingFlags.NonPublic
-            )!;
-            _licInfoHelperContains = _licInfoHelper.GetMethod(
-                "Contains",
-                BindingFlags.Instance | BindingFlags.Public
-            )!;
+            _licInfoHelper = licManager
+                .GetNestedType("LicInfoHelperLicenseContext", BindingFlags.NonPublic)
+                !;
+            _licInfoHelperContains = _licInfoHelper
+                .GetMethod("Contains", BindingFlags.Instance | BindingFlags.Public)
+                !;
         }
 
         // Helper function to create an object from the native side
@@ -871,13 +864,15 @@ namespace Internal.Runtime.InteropServices
                 null, /* out */
                 null
             };
-            bool isValid = (bool)_validateTypeAndReturnDetails.Invoke(
-                null,
-                BindingFlags.DoNotWrapExceptions,
-                binder: null,
-                parameters: parameters,
-                culture: null
-            )!;
+            bool isValid = (bool)_validateTypeAndReturnDetails
+                .Invoke(
+                    null,
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: parameters,
+                    culture: null
+                )
+                !;
             if (!isValid)
             {
                 return;
@@ -891,13 +886,15 @@ namespace Internal.Runtime.InteropServices
             }
 
             parameters = new object?[] { type.AssemblyQualifiedName };
-            runtimeKeyAvail = (bool)_licInfoHelperContains.Invoke(
-                licContext,
-                BindingFlags.DoNotWrapExceptions,
-                binder: null,
-                parameters: parameters,
-                culture: null
-            )!;
+            runtimeKeyAvail = (bool)_licInfoHelperContains
+                .Invoke(
+                    licContext,
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: parameters,
+                    culture: null
+                )
+                !;
         }
 
         // The CLR invokes this whenever a COM client invokes
@@ -920,13 +917,15 @@ namespace Internal.Runtime.InteropServices
                 null, /* out */
                 null
             };
-            bool isValid = (bool)_validateTypeAndReturnDetails.Invoke(
-                null,
-                BindingFlags.DoNotWrapExceptions,
-                binder: null,
-                parameters: parameters,
-                culture: null
-            )!;
+            bool isValid = (bool)_validateTypeAndReturnDetails
+                .Invoke(
+                    null,
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: parameters,
+                    culture: null
+                )
+                !;
             if (!isValid)
             {
                 throw new COMException(); // E_FAIL
@@ -992,13 +991,15 @@ namespace Internal.Runtime.InteropServices
             try
             {
                 parameters = new object?[] { type, licContext };
-                return _createWithContext.Invoke(
-                    null,
-                    BindingFlags.DoNotWrapExceptions,
-                    binder: null,
-                    parameters: parameters,
-                    culture: null
-                )!;
+                return _createWithContext
+                    .Invoke(
+                        null,
+                        BindingFlags.DoNotWrapExceptions,
+                        binder: null,
+                        parameters: parameters,
+                        culture: null
+                    )
+                    !;
             }
             catch (Exception exception) when (exception.GetType() == s_licenseExceptionType)
             {

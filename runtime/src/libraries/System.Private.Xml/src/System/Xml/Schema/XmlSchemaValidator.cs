@@ -135,10 +135,12 @@ namespace System.Xml.Schema
         private string _xsiNoNamespaceSchemaLocationString;
 
         //Xsi Attributes parsing
-        private static readonly XmlSchemaDatatype s_dtQName =
-            XmlSchemaDatatype.FromXmlTokenizedTypeXsd(XmlTokenizedType.QName)!;
-        private static readonly XmlSchemaDatatype s_dtCDATA =
-            XmlSchemaDatatype.FromXmlTokenizedType(XmlTokenizedType.CDATA)!;
+        private static readonly XmlSchemaDatatype s_dtQName = XmlSchemaDatatype
+            .FromXmlTokenizedTypeXsd(XmlTokenizedType.QName)
+            !;
+        private static readonly XmlSchemaDatatype s_dtCDATA = XmlSchemaDatatype
+            .FromXmlTokenizedType(XmlTokenizedType.CDATA)
+            !;
         private static readonly XmlSchemaDatatype s_dtStringArray = s_dtCDATA.DeriveByList(null);
 
         //Error message constants

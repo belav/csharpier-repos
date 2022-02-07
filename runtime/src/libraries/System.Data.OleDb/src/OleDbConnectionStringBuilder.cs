@@ -447,9 +447,9 @@ namespace System.Data.OleDb
                         )
                         {
                             // get all the init property information for the provider
-                            hash = connection.GetPropertyInfo(
-                                new Guid[] { OleDbPropertySetGuid.DBInitAll }
-                            )!;
+                            hash = connection
+                                .GetPropertyInfo(new Guid[] { OleDbPropertySetGuid.DBInitAll })
+                                !;
                             foreach (KeyValuePair<string, OleDbPropertyInfo> entry in hash)
                             {
                                 Keywords index;
@@ -821,8 +821,9 @@ namespace System.Data.OleDb
             {
                 Type[] ctorParams = new Type[] { typeof(string) };
                 object[] ctorValues = new object[] { options.ConnectionString };
-                System.Reflection.ConstructorInfo ctor =
-                    typeof(OleDbConnectionStringBuilder).GetConstructor(ctorParams)!;
+                System.Reflection.ConstructorInfo ctor = typeof(OleDbConnectionStringBuilder)
+                    .GetConstructor(ctorParams)
+                    !;
                 return new System.ComponentModel.Design.Serialization.InstanceDescriptor(
                     ctor,
                     ctorValues

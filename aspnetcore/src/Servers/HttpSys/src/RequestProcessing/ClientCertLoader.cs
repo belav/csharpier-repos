@@ -333,9 +333,9 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
         NativeOverlapped* nativeOverlapped
     )
     {
-        var asyncResult = (ClientCertLoader)ThreadPoolBoundHandle.GetNativeOverlappedState(
-            nativeOverlapped
-        )!;
+        var asyncResult = (ClientCertLoader)ThreadPoolBoundHandle
+            .GetNativeOverlappedState(nativeOverlapped)
+            !;
         IOCompleted(asyncResult, errorCode, numBytes);
     }
 

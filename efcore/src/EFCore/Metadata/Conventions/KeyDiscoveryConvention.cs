@@ -127,11 +127,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     )
                     {
                         shadowProperty =
-                            entityTypeBuilder.CreateUniqueProperty(
-                                typeof(int),
-                                "Id",
-                                required: true
-                            )!.Metadata;
+                            entityTypeBuilder
+                                .CreateUniqueProperty(typeof(int), "Id", required: true)
+                                !.Metadata;
                     }
 
                     keyProperties.Clear();

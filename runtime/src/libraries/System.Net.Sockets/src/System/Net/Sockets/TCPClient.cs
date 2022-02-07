@@ -431,10 +431,9 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)Client.GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.ReceiveBuffer
-                )!;
+                return (int)Client
+                    .GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer)
+                    !;
             }
             set
             {
@@ -451,10 +450,9 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)Client.GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.SendBuffer
-                )!;
+                return (int)Client
+                    .GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendBuffer)
+                    !;
             }
             set
             {
@@ -471,10 +469,9 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)Client.GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.ReceiveTimeout
-                )!;
+                return (int)Client
+                    .GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout)
+                    !;
             }
             set
             {
@@ -491,10 +488,9 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)Client.GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.SendTimeout
-                )!;
+                return (int)Client
+                    .GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout)
+                    !;
             }
             set
             {

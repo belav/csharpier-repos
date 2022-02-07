@@ -534,10 +534,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? startIndex
         )
         {
-            var stringTypeMapping = ExpressionExtensions.InferTypeMapping(
-                instance,
-                searchExpression
-            )!;
+            var stringTypeMapping = ExpressionExtensions
+                .InferTypeMapping(instance, searchExpression)
+                !;
             searchExpression = _sqlExpressionFactory.ApplyTypeMapping(
                 searchExpression,
                 stringTypeMapping

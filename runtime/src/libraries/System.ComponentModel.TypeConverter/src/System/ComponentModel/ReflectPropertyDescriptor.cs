@@ -796,10 +796,9 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        return (bool)ShouldSerializeMethodValue.Invoke(
-                            prov,
-                            new object[] { component }
-                        )!;
+                        return (bool)ShouldSerializeMethodValue
+                            .Invoke(prov, new object[] { component })
+                            !;
                     }
                     catch { }
                 }
@@ -811,10 +810,9 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        return (bool)ShouldSerializeMethodValue.Invoke(
-                            prov,
-                            new object[] { component }
-                        )!;
+                        return (bool)ShouldSerializeMethodValue
+                            .Invoke(prov, new object[] { component })
+                            !;
                     }
                     catch { }
                 }

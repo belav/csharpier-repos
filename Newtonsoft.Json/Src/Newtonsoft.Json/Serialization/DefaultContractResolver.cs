@@ -417,9 +417,9 @@ namespace Newtonsoft.Json.Serialization
 
                 if (attribute.NamingStrategyType != null)
                 {
-                    NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
-                        attribute
-                    )!;
+                    NamingStrategy namingStrategy = JsonTypeReflector
+                        .GetContainerNamingStrategy(attribute)
+                        !;
                     extensionDataNameResolver = s => namingStrategy.GetDictionaryKey(s);
                 }
             }
@@ -1324,9 +1324,9 @@ namespace Newtonsoft.Json.Serialization
                 JsonTypeReflector.GetAttribute<JsonContainerAttribute>(objectType);
             if (containerAttribute?.NamingStrategyType != null)
             {
-                NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
-                    containerAttribute
-                )!;
+                NamingStrategy namingStrategy = JsonTypeReflector
+                    .GetContainerNamingStrategy(containerAttribute)
+                    !;
                 contract.DictionaryKeyResolver = s => namingStrategy.GetDictionaryKey(s);
             }
             else
@@ -1510,9 +1510,9 @@ namespace Newtonsoft.Json.Serialization
                 JsonTypeReflector.GetAttribute<JsonContainerAttribute>(objectType);
             if (containerAttribute?.NamingStrategyType != null)
             {
-                NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
-                    containerAttribute
-                )!;
+                NamingStrategy namingStrategy = JsonTypeReflector
+                    .GetContainerNamingStrategy(containerAttribute)
+                    !;
                 contract.PropertyNameResolver = s => namingStrategy.GetDictionaryKey(s);
             }
             else
@@ -2163,8 +2163,9 @@ namespace Newtonsoft.Json.Serialization
                 return;
             }
 
-            Func<object, object> specifiedPropertyGet =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateGet<object>(specifiedMember)!;
+            Func<object, object> specifiedPropertyGet = JsonTypeReflector.ReflectionDelegateFactory
+                .CreateGet<object>(specifiedMember)
+                !;
 
             property.GetIsSpecified = o => (bool)specifiedPropertyGet(o);
 

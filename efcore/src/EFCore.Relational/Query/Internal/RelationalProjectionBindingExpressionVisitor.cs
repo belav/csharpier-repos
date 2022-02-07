@@ -187,9 +187,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         case MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression:
                             _clientProjections!.Add(
-                                _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(
-                                    materializeCollectionNavigationExpression.Subquery
-                                )!
+                                _queryableMethodTranslatingExpressionVisitor
+                                    .TranslateSubquery(
+                                        materializeCollectionNavigationExpression.Subquery
+                                    )
+                                    !
                             );
                             return new CollectionResultExpression(
                                 new ProjectionBindingExpression(

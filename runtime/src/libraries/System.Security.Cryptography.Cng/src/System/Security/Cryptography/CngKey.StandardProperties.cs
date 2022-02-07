@@ -28,10 +28,9 @@ namespace System.Security.Cryptography
         {
             get
             {
-                string algorithm = _keyHandle.GetPropertyAsString(
-                    KeyPropertyName.Algorithm,
-                    CngPropertyOptions.None
-                )!;
+                string algorithm = _keyHandle
+                    .GetPropertyAsString(KeyPropertyName.Algorithm, CngPropertyOptions.None)
+                    !;
                 // .NET Framework compat: Don't check for null. Just let CngAlgorithm handle it.
                 return new CngAlgorithm(algorithm);
             }

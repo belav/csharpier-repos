@@ -279,9 +279,11 @@ namespace System.Diagnostics.Tracing
             PropertyInfo property
         )
         {
-            var helper = (TypeHelper)Activator.CreateInstance(
-                typeof(ReferenceTypeHelper<>).MakeGenericType(property.DeclaringType!)
-            )!;
+            var helper = (TypeHelper)Activator
+                .CreateInstance(
+                    typeof(ReferenceTypeHelper<>).MakeGenericType(property.DeclaringType!)
+                )
+                !;
             return helper.GetPropertyGetter(property);
         }
 

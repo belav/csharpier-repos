@@ -50,11 +50,9 @@ namespace System.DirectoryServices.ActiveDirectory
             );
             try
             {
-                string serverDN = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    de,
-                    PropertyManager.ServerName
-                )!;
+                string serverDN = (string)PropertyManager
+                    .GetPropertyValue(context, de, PropertyManager.ServerName)
+                    !;
                 string connectionContainer = "CN=NTDS Settings," + serverDN;
                 de = DirectoryEntryManager.GetDirectoryEntry(context, connectionContainer);
                 // doing the search to find the connection object based on its name
@@ -183,11 +181,9 @@ namespace System.DirectoryServices.ActiveDirectory
             );
             try
             {
-                string serverDN = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    de,
-                    PropertyManager.ServerName
-                )!;
+                string serverDN = (string)PropertyManager
+                    .GetPropertyValue(context, de, PropertyManager.ServerName)
+                    !;
                 string connectionContainer = "CN=NTDS Settings," + serverDN;
                 de = DirectoryEntryManager.GetDirectoryEntry(context, connectionContainer);
 
@@ -204,11 +200,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     sourceServerContext,
                     WellKnownDN.RootDSE
                 );
-                string serverName = (string)PropertyManager.GetPropertyValue(
-                    sourceServerContext,
-                    de,
-                    PropertyManager.ServerName
-                )!;
+                string serverName = (string)PropertyManager
+                    .GetPropertyValue(sourceServerContext, de, PropertyManager.ServerName)
+                    !;
                 serverName = "CN=NTDS Settings," + serverName;
 
                 cachedDirectoryEntry.Properties["fromServer"].Add(serverName);
@@ -308,22 +302,18 @@ namespace System.DirectoryServices.ActiveDirectory
                 // get the source server
                 if (_sourceServerName == null)
                 {
-                    string sourceServerDN = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        cachedDirectoryEntry,
-                        PropertyManager.FromServer
-                    )!;
+                    string sourceServerDN = (string)PropertyManager
+                        .GetPropertyValue(context, cachedDirectoryEntry, PropertyManager.FromServer)
+                        !;
                     DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
                         context,
                         sourceServerDN
                     );
                     if (IsADAM)
                     {
-                        int portnumber = (int)PropertyManager.GetPropertyValue(
-                            context,
-                            de,
-                            PropertyManager.MsDSPortLDAP
-                        )!;
+                        int portnumber = (int)PropertyManager
+                            .GetPropertyValue(context, de, PropertyManager.MsDSPortLDAP)
+                            !;
                         string? tmpServerName = (string?)PropertyManager.GetPropertyValue(
                             context,
                             de.Parent,
@@ -368,18 +358,14 @@ namespace System.DirectoryServices.ActiveDirectory
                         throw ExceptionHelper.GetExceptionFromCOMException(context, e);
                     }
 
-                    string hostName = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        serverObject,
-                        PropertyManager.DnsHostName
-                    )!;
+                    string hostName = (string)PropertyManager
+                        .GetPropertyValue(context, serverObject, PropertyManager.DnsHostName)
+                        !;
                     if (IsADAM)
                     {
-                        int portnumber = (int)PropertyManager.GetPropertyValue(
-                            context,
-                            NTDSObject,
-                            PropertyManager.MsDSPortLDAP
-                        )!;
+                        int portnumber = (int)PropertyManager
+                            .GetPropertyValue(context, NTDSObject, PropertyManager.MsDSPortLDAP)
+                            !;
                         if (portnumber != 389)
                         {
                             _destinationServerName = hostName + ":" + portnumber;
@@ -847,22 +833,18 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw new ObjectDisposedException(GetType().Name);
 
                 // find out whether the site and the destination is in the same site
-                string destinationPath = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    cachedDirectoryEntry,
-                    PropertyManager.FromServer
-                )!;
+                string destinationPath = (string)PropertyManager
+                    .GetPropertyValue(context, cachedDirectoryEntry, PropertyManager.FromServer)
+                    !;
                 string? destinationSite = Utils.GetDNComponents(destinationPath)[3].Value;
 
                 DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
                     context,
                     WellKnownDN.RootDSE
                 );
-                string serverDN = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    de,
-                    PropertyManager.ServerName
-                )!;
+                string serverDN = (string)PropertyManager
+                    .GetPropertyValue(context, de, PropertyManager.ServerName)
+                    !;
                 string? serverSite = Utils.GetDNComponents(serverDN)[2].Value;
 
                 if (Utils.Compare(destinationSite, serverSite) == 0)

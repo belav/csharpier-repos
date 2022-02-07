@@ -514,9 +514,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                         AccessibilityModifiersRequired.Never
                     )
                 );
-                return s_accessibilityModifiersRequiredMap.GetKeyOrDefault(
-                    AccessibilityModifiersRequired.Never
-                )!;
+                return s_accessibilityModifiersRequiredMap
+                    .GetKeyOrDefault(AccessibilityModifiersRequired.Never)
+                    !;
             }
 
             Debug.Assert(s_accessibilityModifiersRequiredMap.ContainsValue(option.Value));

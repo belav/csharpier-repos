@@ -185,11 +185,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
         private InternalForeignKeyBuilder WithManyBuilder(MemberIdentity collection)
         {
-            var builder = Builder.HasEntityTypes(
-                (EntityType)RelatedEntityType,
-                (EntityType)DeclaringEntityType,
-                ConfigurationSource.Explicit
-            )!;
+            var builder = Builder
+                .HasEntityTypes(
+                    (EntityType)RelatedEntityType,
+                    (EntityType)DeclaringEntityType,
+                    ConfigurationSource.Explicit
+                )
+                !;
             var collectionName = collection.Name;
             if (
                 builder.Metadata.IsUnique
@@ -224,20 +226,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             }
 
             return collection.MemberInfo == null || ReferenceMember == null
-              ? builder.HasNavigations(
+              ? builder
+                .HasNavigations(
                     ReferenceName,
                     collection.Name,
                     (EntityType)RelatedEntityType,
                     (EntityType)DeclaringEntityType,
                     ConfigurationSource.Explicit
-                )!
-              : builder.HasNavigations(
+                )
+                !
+              : builder
+                .HasNavigations(
                     ReferenceMember,
                     collection.MemberInfo,
                     (EntityType)RelatedEntityType,
                     (EntityType)DeclaringEntityType,
                     ConfigurationSource.Explicit
-                )!;
+                )
+                !;
         }
 
         /// <summary>
@@ -362,39 +368,47 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             {
                 builder =
                     referenceProperty == null || ReferenceMember == null
-                        ? builder.HasNavigations(
+                        ? builder
+                          .HasNavigations(
                               referenceName,
                               ReferenceName,
                               (EntityType)DeclaringEntityType,
                               (EntityType)RelatedEntityType,
                               ConfigurationSource.Explicit
-                          )!
-                        : builder.HasNavigations(
+                          )
+                          !
+                        : builder
+                          .HasNavigations(
                               referenceProperty,
                               ReferenceMember,
                               (EntityType)DeclaringEntityType,
                               (EntityType)RelatedEntityType,
                               ConfigurationSource.Explicit
-                          )!;
+                          )
+                          !;
             }
             else
             {
                 builder =
                     referenceProperty == null || ReferenceMember == null
-                        ? builder.HasNavigations(
+                        ? builder
+                          .HasNavigations(
                               ReferenceName,
                               referenceName,
                               (EntityType)RelatedEntityType,
                               (EntityType)DeclaringEntityType,
                               ConfigurationSource.Explicit
-                          )!
-                        : builder.HasNavigations(
+                          )
+                          !
+                        : builder
+                          .HasNavigations(
                               ReferenceMember,
                               referenceProperty,
                               (EntityType)RelatedEntityType,
                               (EntityType)DeclaringEntityType,
                               ConfigurationSource.Explicit
-                          )!;
+                          )
+                          !;
             }
 
             return batch.Run(builder)!;

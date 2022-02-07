@@ -32,9 +32,9 @@ namespace System.ComponentModel.Composition
             ReflectionContext reflectionContext;
             try
             {
-                reflectionContext = (ReflectionContext)Activator.CreateInstance(
-                    _reflectionContextType
-                )!;
+                reflectionContext = (ReflectionContext)Activator
+                    .CreateInstance(_reflectionContextType)
+                    !;
             }
             catch (InvalidCastException invalidCastException)
             {

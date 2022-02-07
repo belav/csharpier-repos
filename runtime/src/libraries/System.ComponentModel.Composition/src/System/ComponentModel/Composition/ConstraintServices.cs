@@ -20,18 +20,18 @@ namespace System.ComponentModel.Composition
         private static readonly MethodInfo _metadataContainsKeyMethod = typeof(IDictionary<
             string,
             object
-        >).GetMethod("ContainsKey")!;
-        private static readonly MethodInfo _metadataItemMethod = typeof(IDictionary<
-            string,
-            object
-        >).GetMethod("get_Item")!;
-        private static readonly MethodInfo _metadataEqualsMethod = typeof(object).GetMethod(
-            "Equals",
-            new Type[] { typeof(object) }
-        )!;
-        private static readonly MethodInfo _typeIsInstanceOfTypeMethod = typeof(Type).GetMethod(
-            "IsInstanceOfType"
-        )!;
+        >)
+            .GetMethod("ContainsKey")
+            !;
+        private static readonly MethodInfo _metadataItemMethod = typeof(IDictionary<string, object>)
+            .GetMethod("get_Item")
+            !;
+        private static readonly MethodInfo _metadataEqualsMethod = typeof(object)
+            .GetMethod("Equals", new Type[] { typeof(object) })
+            !;
+        private static readonly MethodInfo _typeIsInstanceOfTypeMethod = typeof(Type)
+            .GetMethod("IsInstanceOfType")
+            !;
 
         public static Expression<Func<ExportDefinition, bool>> CreateConstraint(
             string contractName,

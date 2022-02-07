@@ -127,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                   .ParameterBindingFactories.FindFactory(
                                       property.ClrType,
                                       property.Name
-                                  )!;
+                                  )
+                                  !;
                               return (ServiceParameterBinding)factory.Bind(
                                   entityType,
                                   property.ClrType,

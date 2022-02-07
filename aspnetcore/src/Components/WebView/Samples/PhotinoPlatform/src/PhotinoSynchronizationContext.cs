@@ -50,13 +50,14 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
 
         _uiThreadId = (int)_window
             .GetType()
-            .GetField("_managedThreadId", BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(
-            _window
-        )!;
+            .GetField("_managedThreadId", BindingFlags.NonPublic | BindingFlags.Instance)
+            !.GetValue(_window)
+            !;
 
         _invokeMethodInfo = _window
             .GetType()
-            .GetMethod("Invoke", BindingFlags.NonPublic | BindingFlags.Instance)!;
+            .GetMethod("Invoke", BindingFlags.NonPublic | BindingFlags.Instance)
+            !;
     }
 
     private readonly State _state;

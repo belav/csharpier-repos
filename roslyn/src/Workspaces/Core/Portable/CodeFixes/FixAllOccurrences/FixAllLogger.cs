@@ -55,8 +55,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         }
                         else
                         {
-                            m[CodeFixProvider] = fixAllState.CodeFixProvider.GetType().FullName!
-                                .GetHashCode()
+                            m[CodeFixProvider] = fixAllState.CodeFixProvider
+                                .GetType()
+                                .FullName!.GetHashCode()
                                 .ToString();
                             m[CodeActionEquivalenceKey] = fixAllState.CodeActionEquivalenceKey
                                 ?.GetHashCode()

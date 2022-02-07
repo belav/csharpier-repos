@@ -303,11 +303,13 @@ namespace DllImportGenerator.UnitTests
                 syntaxTree
                     .GetCompilationUnitRoot()
                     .AddMembers(
-                        SyntaxFactory.ParseMemberDeclaration(
-                            CodeSnippets.MarshalAsParametersAndModifiers<bool>(
-                                System.Runtime.InteropServices.UnmanagedType.Bool
+                        SyntaxFactory
+                            .ParseMemberDeclaration(
+                                CodeSnippets.MarshalAsParametersAndModifiers<bool>(
+                                    System.Runtime.InteropServices.UnmanagedType.Bool
+                                )
                             )
-                        )!
+                            !
                     ),
                 syntaxTree.Options
             );

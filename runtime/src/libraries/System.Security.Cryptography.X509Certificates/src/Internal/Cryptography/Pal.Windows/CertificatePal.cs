@@ -101,9 +101,11 @@ namespace Internal.Cryptography.Pal
                 unsafe
                 {
                     Interop.Crypt32.CERT_CONTEXT* pCertContext = _certContext.CertContext;
-                    string keyAlgorithm = Marshal.PtrToStringAnsi(
-                        pCertContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.pszObjId
-                    )!;
+                    string keyAlgorithm = Marshal
+                        .PtrToStringAnsi(
+                            pCertContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.pszObjId
+                        )
+                        !;
                     GC.KeepAlive(this);
                     return keyAlgorithm;
                 }
@@ -117,9 +119,11 @@ namespace Internal.Cryptography.Pal
                 unsafe
                 {
                     Interop.Crypt32.CERT_CONTEXT* pCertContext = _certContext.CertContext;
-                    string keyAlgorithmOid = Marshal.PtrToStringAnsi(
-                        pCertContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.pszObjId
-                    )!;
+                    string keyAlgorithmOid = Marshal
+                        .PtrToStringAnsi(
+                            pCertContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.pszObjId
+                        )
+                        !;
 
                     int algId;
                     if (keyAlgorithmOid == Oids.Rsa)
@@ -266,9 +270,9 @@ namespace Internal.Cryptography.Pal
                 unsafe
                 {
                     Interop.Crypt32.CERT_CONTEXT* pCertContext = _certContext.CertContext;
-                    string signatureAlgorithm = Marshal.PtrToStringAnsi(
-                        pCertContext->pCertInfo->SignatureAlgorithm.pszObjId
-                    )!;
+                    string signatureAlgorithm = Marshal
+                        .PtrToStringAnsi(pCertContext->pCertInfo->SignatureAlgorithm.pszObjId)
+                        !;
                     GC.KeepAlive(this);
                     return signatureAlgorithm;
                 }

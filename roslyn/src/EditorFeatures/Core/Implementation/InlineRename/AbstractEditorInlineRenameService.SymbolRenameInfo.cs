@@ -168,9 +168,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
 
             private string GetWithoutAttributeSuffix(string value) =>
-                value.GetWithoutAttributeSuffix(
-                    isCaseSensitive: _document.GetRequiredLanguageService<ISyntaxFactsService>().IsCaseSensitive
-                )!;
+                value
+                    .GetWithoutAttributeSuffix(
+                        isCaseSensitive: _document.GetRequiredLanguageService<ISyntaxFactsService>().IsCaseSensitive
+                    )
+                    !;
 
             private bool HasAttributeSuffix(string value) =>
                 value.TryGetWithoutAttributeSuffix(

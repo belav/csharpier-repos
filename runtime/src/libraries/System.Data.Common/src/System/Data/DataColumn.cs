@@ -798,11 +798,13 @@ namespace System.Data
                     }
                     else if (_implementsINullable)
                     {
-                        PropertyInfo propInfo = _dataType.GetProperty(
-                            "Null",
-                            System.Reflection.BindingFlags.Public
-                                | System.Reflection.BindingFlags.Static
-                        )!;
+                        PropertyInfo propInfo = _dataType
+                            .GetProperty(
+                                "Null",
+                                System.Reflection.BindingFlags.Public
+                                    | System.Reflection.BindingFlags.Static
+                            )
+                            !;
                         if (propInfo != null)
                         {
                             _defaultValue = propInfo.GetValue(null, null)!;

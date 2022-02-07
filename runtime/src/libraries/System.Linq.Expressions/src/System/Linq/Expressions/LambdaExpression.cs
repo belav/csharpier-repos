@@ -21,8 +21,9 @@ namespace System.Linq.Expressions
     [DebuggerTypeProxy(typeof(LambdaExpressionProxy))]
     public abstract class LambdaExpression : Expression, IParameterProvider
     {
-        private static readonly MethodInfo s_expressionCompileMethodInfo =
-            typeof(Expression<>).GetMethod("Compile", Type.EmptyTypes)!;
+        private static readonly MethodInfo s_expressionCompileMethodInfo = typeof(Expression<>)
+            .GetMethod("Compile", Type.EmptyTypes)
+            !;
 
         private readonly Expression _body;
 
@@ -718,18 +719,19 @@ namespace System.Linq.Expressions
 #if FEATURE_COMPILE
                 MethodInfo create = typeof(Expression<>)
                     .MakeGenericType(delegateType)
-                    .GetMethod("Create", BindingFlags.Static | BindingFlags.NonPublic)!;
+                    .GetMethod("Create", BindingFlags.Static | BindingFlags.NonPublic)
+                    !;
 #else
                 MethodInfo create = typeof(ExpressionCreator<>)
                     .MakeGenericType(delegateType)
-                    .GetMethod("CreateExpressionFunc", BindingFlags.Static | BindingFlags.Public)!;
+                    .GetMethod("CreateExpressionFunc", BindingFlags.Static | BindingFlags.Public)
+                    !;
 #endif
                 if (delegateType.IsCollectible)
                 {
-                    return (LambdaExpression)create.Invoke(
-                        null,
-                        new object?[] { body, name, tailCall, parameters }
-                    )!;
+                    return (LambdaExpression)create
+                        .Invoke(null, new object?[] { body, name, tailCall, parameters })
+                        !;
                 }
 
                 factories[delegateType] = fastPath =

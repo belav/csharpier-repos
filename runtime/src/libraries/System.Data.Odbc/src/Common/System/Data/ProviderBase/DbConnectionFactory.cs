@@ -86,28 +86,30 @@ namespace System.Data.ProviderBase
                             // now that we have an antecedent task, schedule our work when it is completed.
                             // If it is a new slot or a completed task, this continuation will start right away.
                             // TODO: newTask needs to be over non-nullable DbConnection (see below), there may be a bug here
-                            newTask = s_pendingOpenNonPooled[idx].ContinueWith(
-                                (_) =>
-                                {
-                                    var newConnection = CreateNonPooledConnection(
-                                        owningConnection,
-                                        poolGroup,
-                                        userOptions
-                                    );
-                                    if (
-                                        (oldConnection != null)
-                                        && (oldConnection.State == ConnectionState.Open)
-                                    )
+                            newTask = s_pendingOpenNonPooled[idx]
+                                .ContinueWith(
+                                    (_) =>
                                     {
-                                        oldConnection.PrepareForReplaceConnection();
-                                        oldConnection.Dispose();
-                                    }
-                                    return newConnection;
-                                },
-                                cancellationTokenSource.Token,
-                                TaskContinuationOptions.LongRunning,
-                                TaskScheduler.Default
-                            )!;
+                                        var newConnection = CreateNonPooledConnection(
+                                            owningConnection,
+                                            poolGroup,
+                                            userOptions
+                                        );
+                                        if (
+                                            (oldConnection != null)
+                                            && (oldConnection.State == ConnectionState.Open)
+                                        )
+                                        {
+                                            oldConnection.PrepareForReplaceConnection();
+                                            oldConnection.Dispose();
+                                        }
+                                        return newConnection;
+                                    },
+                                    cancellationTokenSource.Token,
+                                    TaskContinuationOptions.LongRunning,
+                                    TaskScheduler.Default
+                                )
+                                !;
 
                             // Place this new task in the slot so any future work will be queued behind it
                             s_pendingOpenNonPooled[idx] = newTask!;

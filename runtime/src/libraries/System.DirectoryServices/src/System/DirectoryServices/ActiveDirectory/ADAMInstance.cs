@@ -161,11 +161,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         context.Name
                     );
                 }
-                dnsHostName = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.DnsHostName
-                )!;
+                dnsHostName = (string)PropertyManager
+                    .GetPropertyValue(context, rootDSE, PropertyManager.DnsHostName)
+                    !;
             }
             catch (COMException e)
             {
@@ -636,11 +634,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry serverEntry = directoryEntryMgr.GetCachedDirectoryEntry(
                         ServerObjectName
                     );
-                    _cachedHostName = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        serverEntry,
-                        PropertyManager.DnsHostName
-                    )!;
+                    _cachedHostName = (string)PropertyManager
+                        .GetPropertyValue(context, serverEntry, PropertyManager.DnsHostName)
+                        !;
                 }
                 return _cachedHostName;
             }
@@ -656,11 +652,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
                         NtdsaObjectName
                     );
-                    _cachedLdapPort = (int)PropertyManager.GetPropertyValue(
-                        context,
-                        ntdsaEntry,
-                        PropertyManager.MsDSPortLDAP
-                    )!;
+                    _cachedLdapPort = (int)PropertyManager
+                        .GetPropertyValue(context, ntdsaEntry, PropertyManager.MsDSPortLDAP)
+                        !;
                 }
                 return _cachedLdapPort;
             }
@@ -676,11 +670,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
                         NtdsaObjectName
                     );
-                    _cachedSslPort = (int)PropertyManager.GetPropertyValue(
-                        context,
-                        ntdsaEntry,
-                        PropertyManager.MsDSPortSSL
-                    )!;
+                    _cachedSslPort = (int)PropertyManager
+                        .GetPropertyValue(context, ntdsaEntry, PropertyManager.MsDSPortSSL)
+                        !;
                 }
                 return _cachedSslPort;
             }
@@ -709,11 +701,13 @@ namespace System.DirectoryServices.ActiveDirectory
 
                         if (
                             NtdsaObjectName.Equals(
-                                (string)PropertyManager.GetPropertyValue(
-                                    context,
-                                    schemaEntry,
-                                    PropertyManager.FsmoRoleOwner
-                                )!
+                                (string)PropertyManager
+                                    .GetPropertyValue(
+                                        context,
+                                        schemaEntry,
+                                        PropertyManager.FsmoRoleOwner
+                                    )
+                                    !
                             )
                         )
                         {
@@ -727,11 +721,13 @@ namespace System.DirectoryServices.ActiveDirectory
 
                         if (
                             NtdsaObjectName.Equals(
-                                (string)PropertyManager.GetPropertyValue(
-                                    context,
-                                    partitionsEntry,
-                                    PropertyManager.FsmoRoleOwner
-                                )!
+                                (string)PropertyManager
+                                    .GetPropertyValue(
+                                        context,
+                                        partitionsEntry,
+                                        PropertyManager.FsmoRoleOwner
+                                    )
+                                    !
                             )
                         )
                         {
@@ -783,11 +779,13 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                         else
                         {
-                            _cachedDefaultPartition = (string)PropertyManager.GetPropertyValue(
-                                context,
-                                ntdsaEntry,
-                                PropertyManager.MsDSDefaultNamingContext
-                            )!;
+                            _cachedDefaultPartition = (string)PropertyManager
+                                .GetPropertyValue(
+                                    context,
+                                    ntdsaEntry,
+                                    PropertyManager.MsDSDefaultNamingContext
+                                )
+                                !;
                         }
                     }
                     catch (COMException e)
@@ -868,11 +866,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                     try
                     {
-                        cachedSiteName = (string)PropertyManager.GetPropertyValue(
-                            context,
-                            siteEntry,
-                            PropertyManager.Cn
-                        )!;
+                        cachedSiteName = (string)PropertyManager
+                            .GetPropertyValue(context, siteEntry, PropertyManager.Cn)
+                            !;
                     }
                     finally
                     {
@@ -922,11 +918,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                     try
                     {
-                        cachedServerObjectName = (string)PropertyManager.GetPropertyValue(
-                            context,
-                            rootDSE,
-                            PropertyManager.ServerName
-                        )!;
+                        cachedServerObjectName = (string)PropertyManager
+                            .GetPropertyValue(context, rootDSE, PropertyManager.ServerName)
+                            !;
                     }
                     catch (COMException e)
                     {
@@ -954,11 +948,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                     try
                     {
-                        cachedNtdsaObjectName = (string)PropertyManager.GetPropertyValue(
-                            context,
-                            rootDSE,
-                            PropertyManager.DsServiceName
-                        )!;
+                        cachedNtdsaObjectName = (string)PropertyManager
+                            .GetPropertyValue(context, rootDSE, PropertyManager.DsServiceName)
+                            !;
                     }
                     catch (COMException e)
                     {
@@ -983,11 +975,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
                         NtdsaObjectName
                     );
-                    byte[] guidByteArray = (byte[])PropertyManager.GetPropertyValue(
-                        context,
-                        ntdsaEntry,
-                        PropertyManager.ObjectGuid
-                    )!;
+                    byte[] guidByteArray = (byte[])PropertyManager
+                        .GetPropertyValue(context, ntdsaEntry, PropertyManager.ObjectGuid)
+                        !;
                     cachedNtdsaObjectGuid = new Guid(guidByteArray);
                 }
                 return cachedNtdsaObjectGuid;

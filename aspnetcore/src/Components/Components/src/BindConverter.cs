@@ -2319,10 +2319,12 @@ public static class BindConverter
                 }
                 else if (typeof(T).IsArray)
                 {
-                    var method = _makeArrayFormatter ??= typeof(FormatterDelegateCache).GetMethod(
-                        nameof(MakeArrayFormatter),
-                        BindingFlags.NonPublic | BindingFlags.Static
-                    )!;
+                    var method = _makeArrayFormatter ??= typeof(FormatterDelegateCache)
+                        .GetMethod(
+                            nameof(MakeArrayFormatter),
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )
+                        !;
                     var elementType = typeof(T).GetElementType()!;
                     formatter = (Delegate)method.MakeGenericMethod(elementType).Invoke(null, null)!;
                 }
@@ -2527,10 +2529,12 @@ public static class BindConverter
                 else if (typeof(T).IsEnum)
                 {
                     // We have to deal invoke this dynamically to work around the type constraint on Enum.TryParse.
-                    var method = _convertToEnum ??= typeof(BindConverter).GetMethod(
-                        nameof(ConvertToEnum),
-                        BindingFlags.NonPublic | BindingFlags.Static
-                    )!;
+                    var method = _convertToEnum ??= typeof(BindConverter)
+                        .GetMethod(
+                            nameof(ConvertToEnum),
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )
+                        !;
                     parser = method
                         .MakeGenericMethod(typeof(T))
                         .CreateDelegate(typeof(BindParser<T>), target: null);
@@ -2540,20 +2544,24 @@ public static class BindConverter
                 )
                 {
                     // We have to deal invoke this dynamically to work around the type constraint on Enum.TryParse.
-                    var method = _convertToNullableEnum ??= typeof(BindConverter).GetMethod(
-                        nameof(ConvertToNullableEnum),
-                        BindingFlags.NonPublic | BindingFlags.Static
-                    )!;
+                    var method = _convertToNullableEnum ??= typeof(BindConverter)
+                        .GetMethod(
+                            nameof(ConvertToNullableEnum),
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )
+                        !;
                     parser = method
                         .MakeGenericMethod(innerType)
                         .CreateDelegate(typeof(BindParser<T>), target: null);
                 }
                 else if (typeof(T).IsArray)
                 {
-                    var method = _makeArrayTypeConverter ??= typeof(ParserDelegateCache).GetMethod(
-                        nameof(MakeArrayTypeConverter),
-                        BindingFlags.NonPublic | BindingFlags.Static
-                    )!;
+                    var method = _makeArrayTypeConverter ??= typeof(ParserDelegateCache)
+                        .GetMethod(
+                            nameof(MakeArrayTypeConverter),
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )
+                        !;
                     var elementType = typeof(T).GetElementType()!;
                     parser = (Delegate)method.MakeGenericMethod(elementType).Invoke(null, null)!;
                 }

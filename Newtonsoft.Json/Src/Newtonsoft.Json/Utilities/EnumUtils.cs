@@ -65,10 +65,12 @@ namespace Newtonsoft.Json.Utilities
             for (int i = 0; i < names.Length; i++)
             {
                 string name = names[i];
-                FieldInfo f = enumType.GetField(
-                    name,
-                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
-                )!;
+                FieldInfo f = enumType
+                    .GetField(
+                        name,
+                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
+                    )
+                    !;
                 values[i] = ToUInt64(f.GetValue(null));
 
                 string resolvedName;

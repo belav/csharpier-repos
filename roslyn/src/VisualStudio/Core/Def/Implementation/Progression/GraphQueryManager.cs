@@ -141,7 +141,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 liveQueries = _trackedQueries
                     .Select(t => ValueTuple.Create(t.Item1.GetTarget(), t.Item2))
                     .Where(t => t.Item1 != null)
-                    .ToList()!;
+                    .ToList()
+                    !;
             }
 
             var solution = _workspace.CurrentSolution;

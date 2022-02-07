@@ -63,19 +63,21 @@ namespace System.Runtime.Serialization
                 if (_helper.XmlFormatWriterMethod == null)
                 {
                     if (UnderlyingType.IsValueType)
-                        _helper.XmlFormatWriterMethod = typeof(XmlWriterDelegator).GetMethod(
-                            WriteMethodName,
-                            Globals.ScanAllMembers,
-                            new Type[]
-                            {
-                                UnderlyingType,
-                                typeof(XmlDictionaryString),
-                                typeof(XmlDictionaryString)
-                            }
-                        )!;
+                        _helper.XmlFormatWriterMethod = typeof(XmlWriterDelegator)
+                            .GetMethod(
+                                WriteMethodName,
+                                Globals.ScanAllMembers,
+                                new Type[]
+                                {
+                                    UnderlyingType,
+                                    typeof(XmlDictionaryString),
+                                    typeof(XmlDictionaryString)
+                                }
+                            )
+                            !;
                     else
-                        _helper.XmlFormatWriterMethod =
-                            typeof(XmlObjectSerializerWriteContext).GetMethod(
+                        _helper.XmlFormatWriterMethod = typeof(XmlObjectSerializerWriteContext)
+                            .GetMethod(
                                 WriteMethodName,
                                 Globals.ScanAllMembers,
                                 new Type[]
@@ -85,7 +87,8 @@ namespace System.Runtime.Serialization
                                     typeof(XmlDictionaryString),
                                     typeof(XmlDictionaryString)
                                 }
-                            )!;
+                            )
+                            !;
                 }
                 return _helper.XmlFormatWriterMethod;
             }
@@ -99,18 +102,22 @@ namespace System.Runtime.Serialization
                 if (_helper.XmlFormatContentWriterMethod == null)
                 {
                     if (UnderlyingType.IsValueType)
-                        _helper.XmlFormatContentWriterMethod = typeof(XmlWriterDelegator).GetMethod(
-                            WriteMethodName,
-                            Globals.ScanAllMembers,
-                            new Type[] { UnderlyingType }
-                        )!;
-                    else
-                        _helper.XmlFormatContentWriterMethod =
-                            typeof(XmlObjectSerializerWriteContext).GetMethod(
+                        _helper.XmlFormatContentWriterMethod = typeof(XmlWriterDelegator)
+                            .GetMethod(
                                 WriteMethodName,
                                 Globals.ScanAllMembers,
-                                new Type[] { typeof(XmlWriterDelegator), UnderlyingType }
-                            )!;
+                                new Type[] { UnderlyingType }
+                            )
+                            !;
+                    else
+                        _helper.XmlFormatContentWriterMethod =
+                            typeof(XmlObjectSerializerWriteContext)
+                                .GetMethod(
+                                    WriteMethodName,
+                                    Globals.ScanAllMembers,
+                                    new Type[] { typeof(XmlWriterDelegator), UnderlyingType }
+                                )
+                                !;
                 }
                 return _helper.XmlFormatContentWriterMethod;
             }
@@ -122,10 +129,9 @@ namespace System.Runtime.Serialization
             {
                 if (_helper.XmlFormatReaderMethod == null)
                 {
-                    _helper.XmlFormatReaderMethod = typeof(XmlReaderDelegator).GetMethod(
-                        ReadMethodName,
-                        Globals.ScanAllMembers
-                    )!;
+                    _helper.XmlFormatReaderMethod = typeof(XmlReaderDelegator)
+                        .GetMethod(ReadMethodName, Globals.ScanAllMembers)
+                        !;
                 }
                 return _helper.XmlFormatReaderMethod;
             }

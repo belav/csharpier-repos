@@ -586,10 +586,12 @@ public partial class HubConnectionContext
                                 consumed = segment.Start;
                                 examined = consumed;
 
-                                Protocol = protocolResolver.GetProtocol(
-                                    handshakeRequestMessage.Protocol,
-                                    supportedProtocols
-                                )!;
+                                Protocol = protocolResolver
+                                    .GetProtocol(
+                                        handshakeRequestMessage.Protocol,
+                                        supportedProtocols
+                                    )
+                                    !;
                                 if (Protocol == null)
                                 {
                                     Log.HandshakeFailed(_logger, null);

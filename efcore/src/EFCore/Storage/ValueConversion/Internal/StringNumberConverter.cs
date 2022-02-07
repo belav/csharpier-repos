@@ -115,10 +115,12 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
                 typeof(double)
             );
 
-            var formatMethod = typeof(string).GetMethod(
-                nameof(string.Format),
-                new[] { typeof(IFormatProvider), typeof(string), typeof(object) }
-            )!;
+            var formatMethod = typeof(string)
+                .GetMethod(
+                    nameof(string.Format),
+                    new[] { typeof(IFormatProvider), typeof(string), typeof(object) }
+                )
+                !;
 
             var param = Expression.Parameter(typeof(TNumber), "v");
 

@@ -15,8 +15,9 @@ namespace System.ComponentModel
     /// </summary>
     public class NullableConverter : TypeConverter
     {
-        private static readonly ConstructorInfo s_nullableConstructor =
-            typeof(Nullable<>).GetConstructor(typeof(Nullable<>).GetGenericArguments())!;
+        private static readonly ConstructorInfo s_nullableConstructor = typeof(Nullable<>)
+            .GetConstructor(typeof(Nullable<>).GetGenericArguments())
+            !;
 
         /// <summary>
         /// Nullable converter is initialized with the underlying simple type.

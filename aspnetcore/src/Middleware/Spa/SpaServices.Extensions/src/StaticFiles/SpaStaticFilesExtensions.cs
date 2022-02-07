@@ -31,9 +31,9 @@ public static class SpaStaticFilesExtensions
             serviceProvider =>
             {
                 // Use the options configured in DI (or blank if none was configured)
-                var optionsProvider = serviceProvider.GetService<
-                    IOptions<SpaStaticFilesOptions>
-                >()!;
+                var optionsProvider = serviceProvider
+                    .GetService<IOptions<SpaStaticFilesOptions>>()
+                    !;
                 var options = optionsProvider.Value;
 
                 // Allow the developer to perform further configuration

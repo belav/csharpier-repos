@@ -137,9 +137,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 // If authentication succeeded ask Windows about the identity and send it back as custom header.
                 SecurityContextTokenHandle? userContext = null;
-                using SafeDeleteContext securityContext = authContext.GetContext(
-                    out SecurityStatusPal statusCodeNew
-                )!;
+                using SafeDeleteContext securityContext = authContext
+                    .GetContext(out SecurityStatusPal statusCodeNew)
+                    !;
                 SSPIWrapper.QuerySecurityContextToken(
                     GlobalSSPI.SSPIAuth,
                     securityContext,

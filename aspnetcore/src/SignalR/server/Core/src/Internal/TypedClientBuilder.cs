@@ -20,8 +20,9 @@ internal static class TypedClientBuilder<T>
         () => GenerateClientBuilder()
     );
 
-    private static readonly PropertyInfo CancellationTokenNoneProperty =
-        typeof(CancellationToken).GetProperty("None", BindingFlags.Public | BindingFlags.Static)!;
+    private static readonly PropertyInfo CancellationTokenNoneProperty = typeof(CancellationToken)
+        .GetProperty("None", BindingFlags.Public | BindingFlags.Static)
+        !;
 
     private static readonly ConstructorInfo ObjectConstructor = typeof(object)
         .GetConstructors()
@@ -148,13 +149,15 @@ internal static class TypedClientBuilder<T>
 
         var methodBuilder = type.DefineMethod(interfaceMethodInfo.Name, methodAttributes);
 
-        var invokeMethod = typeof(IClientProxy).GetMethod(
-            nameof(IClientProxy.SendCoreAsync),
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-            null,
-            new[] { typeof(string), typeof(object[]), typeof(CancellationToken) },
-            null
-        )!;
+        var invokeMethod = typeof(IClientProxy)
+            .GetMethod(
+                nameof(IClientProxy.SendCoreAsync),
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                null,
+                new[] { typeof(string), typeof(object[]), typeof(CancellationToken) },
+                null
+            )
+            !;
 
         methodBuilder.SetReturnType(interfaceMethodInfo.ReturnType);
         methodBuilder.SetParameters(paramTypes);

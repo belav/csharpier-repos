@@ -758,10 +758,12 @@ namespace System.Xml.Serialization
                         }
 
                         MethodInfo getSetMemberValueDelegateWithTypeGenericMi =
-                            typeof(ReflectionXmlSerializationReaderHelper).GetMethod(
-                                "GetSetMemberValueDelegateWithType",
-                                BindingFlags.Static | BindingFlags.Public
-                            )!;
+                            typeof(ReflectionXmlSerializationReaderHelper)
+                                .GetMethod(
+                                    "GetSetMemberValueDelegateWithType",
+                                    BindingFlags.Static | BindingFlags.Public
+                                )
+                                !;
                         MethodInfo getSetMemberValueDelegateWithTypeMi =
                             getSetMemberValueDelegateWithTypeGenericMi.MakeGenericMethod(
                                 o.GetType(),

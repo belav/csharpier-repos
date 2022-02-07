@@ -191,9 +191,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     }
                 );
 
-                var principalEntityType = model.FindEntityType(
-                    typeof(ManyToManyPrincipalWithField)
-                )!;
+                var principalEntityType = model
+                    .FindEntityType(typeof(ManyToManyPrincipalWithField))
+                    !;
                 var dependentEntityType = model.FindEntityType(typeof(DependentWithField))!;
                 var joinEntityType = model.FindEntityType(typeof(ManyToManyJoinWithFields))!;
 
@@ -720,9 +720,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Equal(
                     "_randomField",
-                    model.FindEntityType(typeof(ManyToManyNavPrincipal))!.FindSkipNavigation(
-                        "Dependents"
-                    )!.GetFieldName()
+                    model
+                        .FindEntityType(typeof(ManyToManyNavPrincipal))
+                        !.FindSkipNavigation("Dependents")
+                        !.GetFieldName()
                 );
             }
 
@@ -941,9 +942,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var model = modelBuilder.Model;
 
-                var shared1 = model.FindEntityType(
-                    typeof(ManyToManyNavPrincipal)
-                )!.FindSkipNavigation(nameof(ManyToManyNavPrincipal.Dependents))!.JoinEntityType!;
+                var shared1 = model
+                    .FindEntityType(typeof(ManyToManyNavPrincipal))
+                    !.FindSkipNavigation(nameof(ManyToManyNavPrincipal.Dependents))
+                    !.JoinEntityType!;
                 Assert.Equal(2, shared1.GetForeignKeys().Count());
                 Assert.Equal(
                     new[]
@@ -958,11 +960,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(typeof(Dictionary<string, object>), shared1.ClrType);
                 Assert.Equal("ManyToManyNavPrincipalNavDependent", shared1.Name);
 
-                var shared2 = model.FindEntityType(
-                    typeof(ManyToManyPrincipalWithField)
-                )!.FindSkipNavigation(
-                    nameof(ManyToManyPrincipalWithField.Dependents)
-                )!.JoinEntityType!;
+                var shared2 = model
+                    .FindEntityType(typeof(ManyToManyPrincipalWithField))
+                    !.FindSkipNavigation(nameof(ManyToManyPrincipalWithField.Dependents))
+                    !.JoinEntityType!;
                 Assert.Equal(2, shared2.GetForeignKeys().Count());
                 Assert.Equal(
                     new[]
@@ -1087,9 +1088,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var model = modelBuilder.Model;
 
-                var shared1 = model.FindEntityType(
-                    typeof(ManyToManyNavPrincipal)
-                )!.FindSkipNavigation(nameof(ManyToManyNavPrincipal.Dependents))!.JoinEntityType!;
+                var shared1 = model
+                    .FindEntityType(typeof(ManyToManyNavPrincipal))
+                    !.FindSkipNavigation(nameof(ManyToManyNavPrincipal.Dependents))
+                    !.JoinEntityType!;
                 Assert.Equal(2, shared1.GetForeignKeys().Count());
                 Assert.Equal(
                     new[]
@@ -1104,11 +1106,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(typeof(Dictionary<string, object>), shared1.ClrType);
                 Assert.Equal("ManyToManyNavPrincipalNavDependent", shared1.Name);
 
-                var shared2 = model.FindEntityType(
-                    typeof(ManyToManyPrincipalWithField)
-                )!.FindSkipNavigation(
-                    nameof(ManyToManyPrincipalWithField.Dependents)
-                )!.JoinEntityType!;
+                var shared2 = model
+                    .FindEntityType(typeof(ManyToManyPrincipalWithField))
+                    !.FindSkipNavigation(nameof(ManyToManyPrincipalWithField.Dependents))
+                    !.JoinEntityType!;
                 Assert.Equal(2, shared2.GetForeignKeys().Count());
                 Assert.Equal(
                     new[]
@@ -1153,9 +1154,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var model = modelBuilder.FinalizeModel();
 
-                var joinType = model.FindEntityType(
-                    typeof(NavDependentManyToManyNavPrincipalWithNavigationIds)
-                )!;
+                var joinType = model
+                    .FindEntityType(typeof(NavDependentManyToManyNavPrincipalWithNavigationIds))
+                    !;
                 Assert.Equal(2, joinType.GetForeignKeys().Count());
                 Assert.Equal(
                     joinType.GetForeignKeys().SelectMany(fk => fk.Properties),
@@ -1183,9 +1184,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var model = modelBuilder.FinalizeModel();
 
-                var joinType = model.FindEntityType(
-                    typeof(NavDependentManyToManyNavPrincipalWithTypeIds)
-                )!;
+                var joinType = model
+                    .FindEntityType(typeof(NavDependentManyToManyNavPrincipalWithTypeIds))
+                    !;
                 Assert.Equal(2, joinType.GetForeignKeys().Count());
                 Assert.Equal(
                     joinType.GetForeignKeys().SelectMany(fk => fk.Properties).Reverse(),

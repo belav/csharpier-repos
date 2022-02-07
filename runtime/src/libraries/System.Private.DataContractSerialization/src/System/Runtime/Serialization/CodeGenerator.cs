@@ -1621,9 +1621,9 @@ namespace System.Runtime.Serialization
             MarkLabel(switchState.EndOfSwitchLabel);
         }
 
-        private static readonly MethodInfo s_stringLength = typeof(string).GetProperty(
-            "Length"
-        )!.GetMethod!;
+        private static readonly MethodInfo s_stringLength = typeof(string)
+            .GetProperty("Length")
+            !.GetMethod!;
 
         internal void ElseIfIsEmptyString(LocalBuilder strLocal)
         {

@@ -85,15 +85,15 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                 var name = (TSimpleNameSyntax)SyntaxFacts.GetNameOfMemberAccessExpression(
                     memberAccess
                 );
-                var whereExpression =
-                    (TInvocationExpressionSyntax)SyntaxFacts.GetExpressionOfMemberAccessExpression(
-                        memberAccess
-                    )!;
+                var whereExpression = (TInvocationExpressionSyntax)SyntaxFacts
+                    .GetExpressionOfMemberAccessExpression(memberAccess)
+                    !;
                 var arguments = SyntaxFacts.GetArgumentsOfInvocationExpression(whereExpression);
-                var expression =
-                    (TExpressionSyntax)SyntaxFacts.GetExpressionOfMemberAccessExpression(
+                var expression = (TExpressionSyntax)SyntaxFacts
+                    .GetExpressionOfMemberAccessExpression(
                         SyntaxFacts.GetExpressionOfInvocationExpression(whereExpression)
-                    )!;
+                    )
+                    !;
                 return (expression, name, arguments);
             }
         }

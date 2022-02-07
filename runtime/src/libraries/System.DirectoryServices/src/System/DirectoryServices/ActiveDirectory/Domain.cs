@@ -131,11 +131,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         null
                     );
                 }
-                defaultDomainNC = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.DefaultNamingContext
-                )!;
+                defaultDomainNC = (string)PropertyManager
+                    .GetPropertyValue(context, rootDSE, PropertyManager.DefaultNamingContext)
+                    !;
             }
             catch (COMException e)
             {
@@ -1119,11 +1117,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry rootDSE = directoryEntryMgr.GetCachedDirectoryEntry(
                         WellKnownDN.RootDSE
                     );
-                    string rootDomainNC = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        rootDSE,
-                        PropertyManager.RootDomainNamingContext
-                    )!;
+                    string rootDomainNC = (string)PropertyManager
+                        .GetPropertyValue(context, rootDSE, PropertyManager.RootDomainNamingContext)
+                        !;
                     string? forestName = Utils.GetDnsNameFromDN(rootDomainNC);
                     DirectoryContext forestContext = Utils.GetNewDirectoryContext(
                         forestName,
@@ -1263,11 +1259,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (rootDSE.Properties.Contains(PropertyManager.DomainFunctionality))
                 {
                     domainFunctionality = int.Parse(
-                        (string)PropertyManager.GetPropertyValue(
-                            context,
-                            rootDSE,
-                            PropertyManager.DomainFunctionality
-                        )!,
+                        (string)PropertyManager
+                            .GetPropertyValue(context, rootDSE, PropertyManager.DomainFunctionality)
+                            !,
                         NumberFormatInfo.InvariantInfo
                     );
                 }
@@ -1315,11 +1309,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             context,
                             directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.DefaultNamingContext)
                         );
-                        int ntMixedDomain = (int)PropertyManager.GetPropertyValue(
-                            context,
-                            domainEntry,
-                            PropertyManager.NTMixedDomain
-                        )!;
+                        int ntMixedDomain = (int)PropertyManager
+                            .GetPropertyValue(context, domainEntry, PropertyManager.NTMixedDomain)
+                            !;
 
                         if (ntMixedDomain == 0)
                         {
@@ -1414,11 +1406,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 dcName = Utils.GetDnsHostNameFromNTDSA(
                     context,
-                    (string)PropertyManager.GetPropertyValue(
-                        context,
-                        entry,
-                        PropertyManager.FsmoRoleOwner
-                    )!
+                    (string)PropertyManager
+                        .GetPropertyValue(context, entry, PropertyManager.FsmoRoleOwner)
+                        !
                 );
             }
             catch (COMException e)
@@ -1493,10 +1483,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 );
                 SearchResult res = searcher.FindOne()!;
 
-                _crossRefDN = (string)PropertyManager.GetSearchResultPropertyValue(
-                    res,
-                    PropertyManager.DistinguishedName
-                )!;
+                _crossRefDN = (string)PropertyManager
+                    .GetSearchResultPropertyValue(res, PropertyManager.DistinguishedName)
+                    !;
 
                 // "trustParent" attribute may not be set
                 if (res.Properties[PropertyManager.TrustParent].Count > 0)
@@ -1534,11 +1523,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 try
                 {
                     // create a new directory context for the parent domain
-                    parentDomainName = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        parentCrossRef,
-                        PropertyManager.DnsRoot
-                    )!;
+                    parentDomainName = (string)PropertyManager
+                        .GetPropertyValue(context, parentCrossRef, PropertyManager.DnsRoot)
+                        !;
                     domainContext = Utils.GetNewDirectoryContext(
                         parentDomainName,
                         DirectoryContextType.Domain,
@@ -1610,10 +1597,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string childDomainName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.DnsRoot
-                    )!;
+                    string childDomainName = (string)PropertyManager
+                        .GetSearchResultPropertyValue(res, PropertyManager.DnsRoot)
+                        !;
                     DirectoryContext childContext = Utils.GetNewDirectoryContext(
                         childDomainName,
                         DirectoryContextType.Domain,

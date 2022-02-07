@@ -92,9 +92,9 @@ namespace System.Runtime.Serialization
         internal static PropertyInfo ExtensionDataProperty =>
             s_extensionDataProperty
             ?? (
-                s_extensionDataProperty = typeof(IExtensibleDataObject).GetProperty(
-                    "ExtensionData"
-                )!
+                s_extensionDataProperty = typeof(IExtensibleDataObject)
+                    .GetProperty("ExtensionData")
+                    !
             );
 
         private static ConstructorInfo? s_dictionaryEnumeratorCtor;
@@ -136,9 +136,9 @@ namespace System.Runtime.Serialization
             {
                 if (s_ienumeratorGetCurrentMethod == null)
                 {
-                    s_ienumeratorGetCurrentMethod = typeof(IEnumerator).GetProperty(
-                        "Current"
-                    )!.GetGetMethod();
+                    s_ienumeratorGetCurrentMethod = typeof(IEnumerator)
+                        .GetProperty("Current")
+                        !.GetGetMethod();
                     Debug.Assert(s_ienumeratorGetCurrentMethod != null);
                 }
                 return s_ienumeratorGetCurrentMethod;
@@ -154,10 +154,9 @@ namespace System.Runtime.Serialization
                 if (s_getItemContractMethod == null)
                 {
                     s_getItemContractMethod =
-                        typeof(CollectionDataContract).GetProperty(
-                            "ItemContract",
-                            Globals.ScanAllMembers
-                        )!.GetMethod;
+                        typeof(CollectionDataContract)
+                            .GetProperty("ItemContract", Globals.ScanAllMembers)
+                            !.GetMethod;
                     Debug.Assert(s_getItemContractMethod != null);
                 }
                 return s_getItemContractMethod;
@@ -256,10 +255,9 @@ namespace System.Runtime.Serialization
         internal static ConstructorInfo ExtensionDataObjectCtor =>
             s_extensionDataObjectCtor
             ?? (
-                s_extensionDataObjectCtor = typeof(ExtensionDataObject).GetConstructor(
-                    Globals.ScanAllMembers,
-                    Type.EmptyTypes
-                )!
+                s_extensionDataObjectCtor = typeof(ExtensionDataObject)
+                    .GetConstructor(Globals.ScanAllMembers, Type.EmptyTypes)
+                    !
             );
 
         private static ConstructorInfo? s_hashtableCtor;
@@ -1070,10 +1068,9 @@ namespace System.Runtime.Serialization
             {
                 if (s_writeExtensionDataMethod == null)
                 {
-                    s_writeExtensionDataMethod = typeof(XmlObjectSerializerWriteContext).GetMethod(
-                        "WriteExtensionData",
-                        Globals.ScanAllMembers
-                    )!;
+                    s_writeExtensionDataMethod = typeof(XmlObjectSerializerWriteContext)
+                        .GetMethod("WriteExtensionData", Globals.ScanAllMembers)
+                        !;
                 }
                 return s_writeExtensionDataMethod;
             }
@@ -1170,9 +1167,9 @@ namespace System.Runtime.Serialization
         internal static MethodInfo ExtensionDataSetExplicitMethodInfo =>
             s_extensionDataSetExplicitMethodInfo
             ?? (
-                s_extensionDataSetExplicitMethodInfo = typeof(IExtensibleDataObject).GetMethod(
-                    Globals.ExtensionDataSetMethod
-                )!
+                s_extensionDataSetExplicitMethodInfo = typeof(IExtensibleDataObject)
+                    .GetMethod(Globals.ExtensionDataSetMethod)
+                    !
             );
 
         private static PropertyInfo? s_childElementNamespacesProperty;

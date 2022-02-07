@@ -159,10 +159,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                         case MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression:
                         {
-                            var subquery =
-                                _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(
+                            var subquery = _queryableMethodTranslatingExpressionVisitor
+                                .TranslateSubquery(
                                     materializeCollectionNavigationExpression.Subquery
-                                )!;
+                                )
+                                !;
                             _clientProjections!.Add(subquery.QueryExpression);
                             return new CollectionResultShaperExpression(
                                 new ProjectionBindingExpression(

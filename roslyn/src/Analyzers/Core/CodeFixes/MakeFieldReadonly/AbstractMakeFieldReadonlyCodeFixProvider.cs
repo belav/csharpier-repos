@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
 
                 declarators.Add(
                     root.FindNode(diagnosticSpan, getInnermostNodeForTie: true)
-                        .FirstAncestorOrSelf<TSymbolSyntax>()!
+                        .FirstAncestorOrSelf<TSymbolSyntax>()
+                        !
                 );
             }
 

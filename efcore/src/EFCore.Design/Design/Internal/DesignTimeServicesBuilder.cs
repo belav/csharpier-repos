@@ -217,11 +217,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 throw new InvalidOperationException(message);
             }
 
-            var designTimeServicesType = providerAssembly.GetType(
-                providerServicesAttribute.TypeName,
-                throwOnError: true,
-                ignoreCase: false
-            )!;
+            var designTimeServicesType = providerAssembly
+                .GetType(providerServicesAttribute.TypeName, throwOnError: true, ignoreCase: false)
+                !;
 
             _reporter.WriteVerbose(DesignStrings.UsingProviderServices(provider));
 
@@ -235,9 +233,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             Check.DebugAssert(designTimeServicesType != null, "designTimeServicesType is null.");
 
-            var designTimeServices = (IDesignTimeServices)Activator.CreateInstance(
-                designTimeServicesType
-            )!;
+            var designTimeServices = (IDesignTimeServices)Activator
+                .CreateInstance(designTimeServicesType)
+                !;
             designTimeServices.ConfigureDesignTimeServices(services);
         }
     }

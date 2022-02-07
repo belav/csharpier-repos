@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     skipNavigation.TargetEntityType.ClrType,
                     skipNavigation.DeclaringEntityType.ClrType
                 )
-                .Invoke(null, new object[] { skipNavigation })!;
+                .Invoke(null, new object[] { skipNavigation })
+                !;
 
         [UsedImplicitly]
         private static ICollectionLoader CreateManyToMany<TEntity, TTargetEntity>(

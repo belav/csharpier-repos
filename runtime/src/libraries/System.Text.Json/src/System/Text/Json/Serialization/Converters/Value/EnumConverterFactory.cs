@@ -23,10 +23,12 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions serializerOptions
         )
         {
-            return (JsonConverter)Activator.CreateInstance(
-                GetEnumConverterType(enumType),
-                new object[] { converterOptions, serializerOptions }
-            )!;
+            return (JsonConverter)Activator
+                .CreateInstance(
+                    GetEnumConverterType(enumType),
+                    new object[] { converterOptions, serializerOptions }
+                )
+                !;
         }
 
         internal static JsonConverter Create(
@@ -36,10 +38,12 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions serializerOptions
         )
         {
-            return (JsonConverter)Activator.CreateInstance(
-                GetEnumConverterType(enumType),
-                new object?[] { converterOptions, namingPolicy, serializerOptions }
-            )!;
+            return (JsonConverter)Activator
+                .CreateInstance(
+                    GetEnumConverterType(enumType),
+                    new object?[] { converterOptions, namingPolicy, serializerOptions }
+                )
+                !;
         }
 
         [UnconditionalSuppressMessage(

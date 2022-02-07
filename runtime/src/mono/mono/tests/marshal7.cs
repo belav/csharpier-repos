@@ -148,8 +148,8 @@ public class Test
     public unsafe static int Main()
     {
         ///
-           ///	Testing simple struct size
-           ///
+              ///	Testing simple struct size
+              ///
         if (Marshal.SizeOf(typeof(TestStruct1)) != 32)
         {
             return 1;
@@ -168,8 +168,8 @@ public class Test
         Marshal.FreeHGlobal(p);
 
         ///
-           ///	Testing struct size with ByValTStr string
-           ///
+              ///	Testing struct size with ByValTStr string
+              ///
         if (Marshal.SizeOf(typeof(TestStruct2)) != 32)
             return 3;
 
@@ -186,8 +186,8 @@ public class Test
         Marshal.FreeHGlobal(p);
 
         ///
-           ///	Test structure size and struct with inheritance
-           ///
+              ///	Test structure size and struct with inheritance
+              ///
         if (Marshal.SizeOf(typeof(TestStruct3)) != 64)
             return 5;
 
@@ -208,8 +208,8 @@ public class Test
         Marshal.FreeHGlobal(p);
 
         ///
-           ///	Also make sure OffsetOf returns the correct Exception.
-           ///
+              ///	Also make sure OffsetOf returns the correct Exception.
+              ///
         try
         {
             Marshal.OffsetOf(testType3, "blah");

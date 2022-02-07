@@ -171,12 +171,14 @@ namespace System.Text.RegularExpressions
             Ldthis();
             _ilg!.Emit(
                 OpCodes.Call,
-                typeof(Regex).GetConstructor(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                    null,
-                    Type.EmptyTypes,
-                    Array.Empty<ParameterModifier>()
-                )!
+                typeof(Regex)
+                    .GetConstructor(
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        Type.EmptyTypes,
+                        Array.Empty<ParameterModifier>()
+                    )
+                    !
             );
             Ldthis();
             Ldstr(pattern);
@@ -200,10 +202,12 @@ namespace System.Text.RegularExpressions
                 Ldthis();
                 LdcI8(matchTimeout.Ticks);
                 Call(
-                    typeof(TimeSpan).GetMethod(
-                        nameof(TimeSpan.FromTicks),
-                        BindingFlags.Public | BindingFlags.Static
-                    )!
+                    typeof(TimeSpan)
+                        .GetMethod(
+                            nameof(TimeSpan.FromTicks),
+                            BindingFlags.Public | BindingFlags.Static
+                        )
+                        !
                 );
             }
             Stfld(RegexField(nameof(Regex.internalMatchTimeout)));
@@ -246,10 +250,12 @@ namespace System.Text.RegularExpressions
             // return;
             Ldthis();
             Call(
-                typeof(Regex).GetMethod(
-                    "InitializeReferences",
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                )!
+                typeof(Regex)
+                    .GetMethod(
+                        "InitializeReferences",
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    )
+                    !
             );
             Ret();
         }
@@ -266,10 +272,12 @@ namespace System.Text.RegularExpressions
             _ilg!.Emit(OpCodes.Call, defaultCtorBuilder);
             _ilg.Emit(OpCodes.Ldarg_1);
             Call(
-                typeof(Regex).GetMethod(
-                    nameof(Regex.ValidateMatchTimeout),
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                )!
+                typeof(Regex)
+                    .GetMethod(
+                        nameof(Regex.ValidateMatchTimeout),
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                    )
+                    !
             );
             Ldthis();
             _ilg.Emit(OpCodes.Ldarg_1);
@@ -287,10 +295,9 @@ namespace System.Text.RegularExpressions
             // hashtable.Add(key1, value1);
             // hashtable.Add(key2, value2);
             // ...
-            MethodInfo addMethod = typeof(Hashtable).GetMethod(
-                nameof(Hashtable.Add),
-                BindingFlags.Public | BindingFlags.Instance
-            )!;
+            MethodInfo addMethod = typeof(Hashtable)
+                .GetMethod(nameof(Hashtable.Add), BindingFlags.Public | BindingFlags.Instance)
+                !;
             IDictionaryEnumerator en = ht.GetEnumerator();
             while (en.MoveNext())
             {
@@ -314,13 +321,15 @@ namespace System.Text.RegularExpressions
 
         /// <summary>Gets the named instance field from the Regex type.</summary>
         private static FieldInfo RegexField(string fieldname) =>
-            typeof(Regex).GetField(
-                fieldname,
-                BindingFlags.Public
-                    | BindingFlags.NonPublic
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            )!;
+            typeof(Regex)
+                .GetField(
+                    fieldname,
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                )
+                !;
 
         /// <summary>Saves the assembly to a file in the current directory based on the assembly's name.</summary>
         internal void Save()

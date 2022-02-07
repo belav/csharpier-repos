@@ -36,9 +36,10 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         public virtual IKeyValueIndexFactory Create(IKey key) =>
             (IKeyValueIndexFactory)typeof(KeyValueIndexFactorySource)
                 .GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateFactory))!
-                .MakeGenericMethod(key.GetKeyType())
-                .Invoke(null, new object[] { key })!;
+                .GetDeclaredMethod(nameof(CreateFactory))
+                !.MakeGenericMethod(key.GetKeyType())
+                .Invoke(null, new object[] { key })
+                !;
 
         [UsedImplicitly]
         private static IKeyValueIndexFactory CreateFactory<TKey>(IKey key) where TKey : notnull =>

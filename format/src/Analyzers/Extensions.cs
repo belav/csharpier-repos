@@ -24,14 +24,12 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             MicrosoftCodeAnalysisFeaturesAssembly = Assembly.Load(
                 new AssemblyName("Microsoft.CodeAnalysis.Features")
             );
-            IDEDiagnosticIdToOptionMappingHelperType =
-                MicrosoftCodeAnalysisFeaturesAssembly.GetType(
-                    "Microsoft.CodeAnalysis.Diagnostics.IDEDiagnosticIdToOptionMappingHelper"
-                )!;
-            TryGetMappedOptionsMethod = IDEDiagnosticIdToOptionMappingHelperType.GetMethod(
-                "TryGetMappedOptions",
-                BindingFlags.Static | BindingFlags.Public
-            )!;
+            IDEDiagnosticIdToOptionMappingHelperType = MicrosoftCodeAnalysisFeaturesAssembly
+                .GetType("Microsoft.CodeAnalysis.Diagnostics.IDEDiagnosticIdToOptionMappingHelper")
+                !;
+            TryGetMappedOptionsMethod = IDEDiagnosticIdToOptionMappingHelperType
+                .GetMethod("TryGetMappedOptions", BindingFlags.Static | BindingFlags.Public)
+                !;
         }
 
         public static bool Any(this SolutionChanges solutionChanges) =>
@@ -55,13 +53,17 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                 instance =
                     defaultCtor != null
-                        ? (T)Activator.CreateInstance(
-                              type,
-                              BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                              binder: null,
-                              args: null,
-                              culture: null
-                          )!
+                        ? (T)Activator
+                              .CreateInstance(
+                                  type,
+                                  BindingFlags.Public
+                                      | BindingFlags.NonPublic
+                                      | BindingFlags.Instance,
+                                  binder: null,
+                                  args: null,
+                                  culture: null
+                              )
+                              !
                         : null;
 
                 return instance != null;

@@ -84,10 +84,9 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var ifOperation = (IConditionalOperation)semanticModel.GetOperation(
-                ifStatement,
-                cancellationToken
-            )!;
+            var ifOperation = (IConditionalOperation)semanticModel
+                .GetOperation(ifStatement, cancellationToken)
+                !;
 
             if (
                 !UseConditionalExpressionForAssignmentHelpers.TryMatchPattern(

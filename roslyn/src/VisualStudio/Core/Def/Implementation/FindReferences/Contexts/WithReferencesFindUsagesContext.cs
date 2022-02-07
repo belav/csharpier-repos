@@ -255,11 +255,13 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                         await OnEntryFoundAsync(
                                 definition,
                                 bucket =>
-                                    SimpleMessageEntry.CreateAsync(
-                                        bucket,
-                                        bucket,
-                                        ServicesVSResources.External_reference_found
-                                    )!,
+                                    SimpleMessageEntry
+                                        .CreateAsync(
+                                            bucket,
+                                            bucket,
+                                            ServicesVSResources.External_reference_found
+                                        )
+                                        !,
                                 addToEntriesWhenGroupingByDefinition: whenGroupingByDefinition,
                                 addToEntriesWhenNotGroupingByDefinition: !whenGroupingByDefinition,
                                 expandedByDefault: true,
@@ -276,19 +278,21 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                         await OnEntryFoundAsync(
                                 SymbolsWithoutReferencesDefinitionItem,
                                 bucket =>
-                                    SimpleMessageEntry.CreateAsync(
-                                        definitionBucket: bucket,
-                                        navigationBucket: RoslynDefinitionBucket.Create(
-                                            Presenter,
-                                            this,
-                                            definition,
-                                            expandedByDefault: false
-                                        ),
-                                        string.Format(
-                                            ServicesVSResources.No_references_found_to_0,
-                                            definition.NameDisplayParts.JoinText()
+                                    SimpleMessageEntry
+                                        .CreateAsync(
+                                            definitionBucket: bucket,
+                                            navigationBucket: RoslynDefinitionBucket.Create(
+                                                Presenter,
+                                                this,
+                                                definition,
+                                                expandedByDefault: false
+                                            ),
+                                            string.Format(
+                                                ServicesVSResources.No_references_found_to_0,
+                                                definition.NameDisplayParts.JoinText()
+                                            )
                                         )
-                                    )!,
+                                        !,
                                 addToEntriesWhenGroupingByDefinition: whenGroupingByDefinition,
                                 addToEntriesWhenNotGroupingByDefinition: !whenGroupingByDefinition,
                                 expandedByDefault: false,
@@ -358,11 +362,13 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     await OnEntryFoundAsync(
                             NoResultsDefinitionItem,
                             bucket =>
-                                SimpleMessageEntry.CreateAsync(
-                                    bucket,
-                                    null,
-                                    ServicesVSResources.Search_found_no_results
-                                )!,
+                                SimpleMessageEntry
+                                    .CreateAsync(
+                                        bucket,
+                                        null,
+                                        ServicesVSResources.Search_found_no_results
+                                    )
+                                    !,
                             addToEntriesWhenGroupingByDefinition: true,
                             addToEntriesWhenNotGroupingByDefinition: true,
                             expandedByDefault: true,

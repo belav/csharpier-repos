@@ -255,11 +255,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 UpdatePrincipalKeyConfigurationSource(configurationSource.Value);
             }
 
-            return (IReadOnlyList<Property>)DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyPropertiesChanged(
-                Builder,
-                oldProperties,
-                oldPrincipalKey
-            )!;
+            return (IReadOnlyList<Property>)DeclaringEntityType.Model.ConventionDispatcher
+                .OnForeignKeyPropertiesChanged(Builder, oldProperties, oldPrincipalKey)
+                !;
         }
 
         /// <summary>

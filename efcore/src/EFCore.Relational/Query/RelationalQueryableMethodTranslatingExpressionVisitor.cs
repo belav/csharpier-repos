@@ -1597,21 +1597,23 @@ namespace Microsoft.EntityFrameworkCore.Query
                             makeNullable
                         );
 
-                        var joinPredicate = _sqlTranslator.Translate(
-                            Expression.Equal(outerKey, innerKey)
-                        )!;
+                        var joinPredicate = _sqlTranslator
+                            .Translate(Expression.Equal(outerKey, innerKey))
+                            !;
                         _selectExpression.AddLeftJoin(innerSelectExpression, joinPredicate);
                         var leftJoinTable = _selectExpression.Tables.Last();
 
                         innerShaper = new RelationalEntityShaperExpression(
                             targetEntityType,
-                            _selectExpression.GenerateWeakEntityProjectionExpression(
-                                targetEntityType,
-                                table,
-                                null,
-                                leftJoinTable,
-                                nullable: true
-                            )!,
+                            _selectExpression
+                                .GenerateWeakEntityProjectionExpression(
+                                    targetEntityType,
+                                    table,
+                                    null,
+                                    leftJoinTable,
+                                    nullable: true
+                                )
+                                !,
                             nullable: true
                         );
                     }

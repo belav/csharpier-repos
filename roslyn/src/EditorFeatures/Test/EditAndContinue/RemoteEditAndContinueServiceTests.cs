@@ -318,7 +318,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
 
                 var syntaxTree = project.Documents
                     .Single()
-                    .GetSyntaxTreeSynchronously(CancellationToken.None)!;
+                    .GetSyntaxTreeSynchronously(CancellationToken.None)
+                    !;
 
                 var documentDiagnostic = Diagnostic.Create(
                     diagnosticDescriptor1,

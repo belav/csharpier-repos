@@ -274,9 +274,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class Principal
         {
-            public static readonly PropertyInfo DependentIdProperty = typeof(Principal).GetProperty(
-                "DependentId"
-            )!;
+            public static readonly PropertyInfo DependentIdProperty = typeof(Principal)
+                .GetProperty("DependentId")
+                !;
 
             public int Id { get; set; }
 
@@ -290,9 +290,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class Dependent
         {
-            public static readonly PropertyInfo PrincipalIdProperty = typeof(Dependent).GetProperty(
-                "PrincipalId"
-            )!;
+            public static readonly PropertyInfo PrincipalIdProperty = typeof(Dependent)
+                .GetProperty("PrincipalId")
+                !;
 
             public int Id { get; set; }
 

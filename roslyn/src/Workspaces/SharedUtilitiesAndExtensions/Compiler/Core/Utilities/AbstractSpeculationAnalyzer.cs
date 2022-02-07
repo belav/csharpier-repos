@@ -196,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 _lazyReplacedExpression = (TExpressionSyntax)_lazySemanticRootOfReplacedExpression
                     .GetAnnotatedNodesAndTokens(annotation)
                     .Single()
-                    .AsNode()!;
+                    .AsNode()
+                    !;
             }
             else
             {

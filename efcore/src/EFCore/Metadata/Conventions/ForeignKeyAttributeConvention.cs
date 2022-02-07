@@ -355,29 +355,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (upgradeDependentToPrincipalNavigationSource)
             {
-                newRelationshipBuilder = newRelationshipBuilder.HasNavigation(
-                    newRelationshipBuilder.Metadata.DependentToPrincipal!.Name,
-                    pointsToPrincipal: true,
-                    fromDataAnnotation: true
-                )!;
+                newRelationshipBuilder = newRelationshipBuilder
+                    .HasNavigation(
+                        newRelationshipBuilder.Metadata.DependentToPrincipal!.Name,
+                        pointsToPrincipal: true,
+                        fromDataAnnotation: true
+                    )
+                    !;
             }
 
             if (upgradePrincipalToDependentNavigationSource)
             {
-                newRelationshipBuilder = newRelationshipBuilder.HasNavigation(
-                    newRelationshipBuilder.Metadata.PrincipalToDependent!.Name,
-                    pointsToPrincipal: false,
-                    fromDataAnnotation: true
-                )!;
+                newRelationshipBuilder = newRelationshipBuilder
+                    .HasNavigation(
+                        newRelationshipBuilder.Metadata.PrincipalToDependent!.Name,
+                        pointsToPrincipal: false,
+                        fromDataAnnotation: true
+                    )
+                    !;
             }
 
             if (shouldInvert)
             {
-                newRelationshipBuilder = newRelationshipBuilder.HasEntityTypes(
-                    foreignKey.DeclaringEntityType,
-                    foreignKey.PrincipalEntityType,
-                    fromDataAnnotation: true
-                )!;
+                newRelationshipBuilder = newRelationshipBuilder
+                    .HasEntityTypes(
+                        foreignKey.DeclaringEntityType,
+                        foreignKey.PrincipalEntityType,
+                        fromDataAnnotation: true
+                    )
+                    !;
             }
             else
             {

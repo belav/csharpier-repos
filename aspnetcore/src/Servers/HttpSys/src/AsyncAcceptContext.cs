@@ -115,9 +115,9 @@ internal unsafe class AsyncAcceptContext : IValueTaskSource<RequestContext>, IDi
         NativeOverlapped* nativeOverlapped
     )
     {
-        var acceptContext = (AsyncAcceptContext)ThreadPoolBoundHandle.GetNativeOverlappedState(
-            nativeOverlapped
-        )!;
+        var acceptContext = (AsyncAcceptContext)ThreadPoolBoundHandle
+            .GetNativeOverlappedState(nativeOverlapped)
+            !;
         acceptContext.IOCompleted(errorCode, numBytes);
     }
 

@@ -1610,10 +1610,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string ldapDisplayName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.LdapDisplayName
-                    )!;
+                    string ldapDisplayName = (string)PropertyManager
+                        .GetSearchResultPropertyValue(res, PropertyManager.LdapDisplayName)
+                        !;
                     DirectoryEntry de = res.GetDirectoryEntry();
 
                     de.AuthenticationType = Utils.DefaultAuthType;
@@ -1711,10 +1710,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string ldapDisplayName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.LdapDisplayName
-                    )!;
+                    string ldapDisplayName = (string)PropertyManager
+                        .GetSearchResultPropertyValue(res, PropertyManager.LdapDisplayName)
+                        !;
                     DirectoryEntry de = res.GetDirectoryEntry();
 
                     de.AuthenticationType = Utils.DefaultAuthType;

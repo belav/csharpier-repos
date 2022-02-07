@@ -2116,12 +2116,16 @@ namespace System.Reflection.Emit
                 if (inst is TypeBuilderInstantiation)
                     con = GetConstructor(
                         inst,
-                        genericTypeDefinition.GetConstructor(
-                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                            null,
-                            EmptyTypes,
-                            null
-                        )!
+                        genericTypeDefinition
+                            .GetConstructor(
+                                BindingFlags.Instance
+                                    | BindingFlags.Public
+                                    | BindingFlags.NonPublic,
+                                null,
+                                EmptyTypes,
+                                null
+                            )
+                            !
                     );
                 else
                     con = inst.GetConstructor(

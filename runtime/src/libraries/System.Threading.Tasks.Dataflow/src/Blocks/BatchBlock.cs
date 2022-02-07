@@ -603,11 +603,9 @@ namespace System.Threading.Tasks.Dataflow
                             );
 
                             bool consumed;
-                            messageValue = source.ConsumeMessage(
-                                messageHeader,
-                                _owningBatch,
-                                out consumed
-                            )!;
+                            messageValue = source
+                                .ConsumeMessage(messageHeader, _owningBatch, out consumed)
+                                !;
                             if (!consumed)
                                 return DataflowMessageStatus.NotAvailable;
                         }

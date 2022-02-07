@@ -110,10 +110,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                               ).GetModelDependencies().TypeMappingSource;
                               return !string.IsNullOrEmpty(dbFunction._storeType)
                                 ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
-                                : relationalTypeMappingSource.FindMapping(
-                                      dbFunction._returnType,
-                                      dbFunction.Model
-                                  )!;
+                                : relationalTypeMappingSource
+                                  .FindMapping(dbFunction._returnType, dbFunction.Model)
+                                  !;
                           }
                       )
                     : _typeMapping;

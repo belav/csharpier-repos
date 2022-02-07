@@ -161,10 +161,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                               ).GetModelDependencies().TypeMappingSource;
                               return !string.IsNullOrEmpty(parameter._storeType)
                                 ? relationalTypeMappingSource.FindMapping(parameter._storeType)!
-                                : relationalTypeMappingSource.FindMapping(
-                                      parameter.ClrType,
-                                      (IModel)parameter.Function.Model
-                                  )!;
+                                : relationalTypeMappingSource
+                                  .FindMapping(parameter.ClrType, (IModel)parameter.Function.Model)
+                                  !;
                           }
                       )
                     : _typeMapping;

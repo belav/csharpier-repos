@@ -141,10 +141,9 @@ namespace System.Net
             NativeOverlapped* nativeOverlapped
         )
         {
-            ListenerAsyncResult asyncResult =
-                (ListenerAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    nativeOverlapped
-                )!;
+            ListenerAsyncResult asyncResult = (ListenerAsyncResult)ThreadPoolBoundHandle
+                .GetNativeOverlappedState(nativeOverlapped)
+                !;
             IOCompleted(asyncResult, errorCode, numBytes);
         }
 

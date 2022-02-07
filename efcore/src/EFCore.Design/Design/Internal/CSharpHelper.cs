@@ -798,13 +798,17 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 }
             }
 
-            return allValues.Aggregate(
-                (string?)null,
-                (previous, current) =>
-                    previous == null
-                        ? GetSimpleEnumValue(type, Enum.GetName(type, current)!)
-                        : previous + " | " + GetSimpleEnumValue(type, Enum.GetName(type, current)!)
-            )!;
+            return allValues
+                .Aggregate(
+                    (string?)null,
+                    (previous, current) =>
+                        previous == null
+                            ? GetSimpleEnumValue(type, Enum.GetName(type, current)!)
+                            : previous
+                              + " | "
+                              + GetSimpleEnumValue(type, Enum.GetName(type, current)!)
+                )
+                !;
         }
 
         internal static IReadOnlyCollection<Enum> GetFlags(Enum flags)

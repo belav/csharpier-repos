@@ -115,6 +115,7 @@ namespace System.ComponentModel
         public override string ToString() =>
             TypeDescriptor
                 .GetConverterTrimUnsafe(typeof(InheritanceLevel))
-                .ConvertToString(InheritanceLevel)!;
+                .ConvertToString(InheritanceLevel)
+                !;
     }
 }

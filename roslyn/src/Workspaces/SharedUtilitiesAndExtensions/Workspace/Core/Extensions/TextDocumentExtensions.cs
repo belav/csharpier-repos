@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     text,
                     PreservationMode.PreserveIdentity
                 )
-                .GetTextDocument(textDocument.Id)!;
+                .GetTextDocument(textDocument.Id)
+                !;
         }
 
         /// <summary>
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     text,
                     PreservationMode.PreserveIdentity
                 )
-                .GetTextDocument(textDocument.Id)!;
+                .GetTextDocument(textDocument.Id)
+                !;
         }
     }
 }

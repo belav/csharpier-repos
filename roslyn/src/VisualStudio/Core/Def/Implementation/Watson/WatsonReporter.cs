@@ -36,18 +36,18 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 
             // We also must set the handlers for the compiler layer as well.
             var compilerAssembly = typeof(Compilation).Assembly;
-            var compilerFatalErrorType = compilerAssembly.GetType(
-                "Microsoft.CodeAnalysis.FatalError",
-                throwOnError: true
-            )!;
-            var compilerFatalErrorHandlerProperty = compilerFatalErrorType.GetProperty(
-                nameof(FatalError.Handler),
-                BindingFlags.Static | BindingFlags.Public
-            )!;
-            var compilerNonFatalErrorHandlerProperty = compilerFatalErrorType.GetProperty(
-                nameof(FatalError.NonFatalHandler),
-                BindingFlags.Static | BindingFlags.Public
-            )!;
+            var compilerFatalErrorType = compilerAssembly
+                .GetType("Microsoft.CodeAnalysis.FatalError", throwOnError: true)
+                !;
+            var compilerFatalErrorHandlerProperty = compilerFatalErrorType
+                .GetProperty(nameof(FatalError.Handler), BindingFlags.Static | BindingFlags.Public)
+                !;
+            var compilerNonFatalErrorHandlerProperty = compilerFatalErrorType
+                .GetProperty(
+                    nameof(FatalError.NonFatalHandler),
+                    BindingFlags.Static | BindingFlags.Public
+                )
+                !;
             compilerFatalErrorHandlerProperty.SetValue(null, fatalHandler);
             compilerNonFatalErrorHandlerProperty.SetValue(null, nonFatalHandler);
         }

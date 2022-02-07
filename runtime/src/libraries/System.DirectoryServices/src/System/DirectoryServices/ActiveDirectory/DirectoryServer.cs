@@ -987,10 +987,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         ReplicationConnection con = new ReplicationConnection(
                             newContext,
                             r.GetDirectoryEntry(),
-                            (string)PropertyManager.GetSearchResultPropertyValue(
-                                r,
-                                PropertyManager.Cn
-                            )!
+                            (string)PropertyManager
+                                .GetSearchResultPropertyValue(r, PropertyManager.Cn)
+                                !
                         );
                         _inbound.Add(con);
                     }

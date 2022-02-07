@@ -160,10 +160,9 @@ public abstract class ProtectedBrowserStorage
         var protector = GetOrCreateCachedProtector(purpose);
         var json = protector.Unprotect(protectedJson);
 
-        return JsonSerializer.Deserialize<TValue>(
-            json,
-            options: JsonSerializerOptionsProvider.Options
-        )!;
+        return JsonSerializer
+            .Deserialize<TValue>(json, options: JsonSerializerOptionsProvider.Options)
+            !;
     }
 
     private ValueTask SetProtectedJsonAsync(string key, string protectedJson) =>

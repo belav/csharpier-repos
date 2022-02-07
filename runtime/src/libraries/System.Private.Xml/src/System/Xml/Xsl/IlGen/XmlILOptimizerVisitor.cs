@@ -268,10 +268,9 @@ namespace System.Xml.Xsl.IlGen
                         if (IsConstructedExpression(ndFunc.Definition))
                         {
                             // Perform state analysis on function's content
-                            ndFunc.Definition = _contentAnalyzer.Analyze(
-                                ndFunc,
-                                ndFunc.Definition
-                            )!;
+                            ndFunc.Definition = _contentAnalyzer
+                                .Analyze(ndFunc, ndFunc.Definition)
+                                !;
                         }
                     }
 

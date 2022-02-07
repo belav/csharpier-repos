@@ -352,8 +352,9 @@ namespace System.ComponentModel
                     && typeof(TypeDescriptionProvider).IsAssignableFrom(providerType)
                 )
                 {
-                    TypeDescriptionProvider prov =
-                        (TypeDescriptionProvider)Activator.CreateInstance(providerType)!;
+                    TypeDescriptionProvider prov = (TypeDescriptionProvider)Activator
+                        .CreateInstance(providerType)
+                        !;
                     AddProvider(prov, type);
                     providerAdded = true;
                 }
@@ -3335,9 +3336,9 @@ namespace System.ComponentModel
                     "System.Windows.Forms.ComponentModel.Com2Interop.ComNativeDescriptor, System.Windows.Forms",
                     throwOnError: true
                 )!;
-                _comNativeDescriptor = (TypeDescriptionProvider)Activator.CreateInstance(
-                    realComNativeDescriptor
-                )!;
+                _comNativeDescriptor = (TypeDescriptionProvider)Activator
+                    .CreateInstance(realComNativeDescriptor)
+                    !;
             }
 
             [return: NotNullIfNotNull("instance")]

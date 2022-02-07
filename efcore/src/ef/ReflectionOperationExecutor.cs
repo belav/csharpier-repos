@@ -50,41 +50,43 @@ namespace Microsoft.EntityFrameworkCore.Tools
             AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
 
             _commandsAssembly = Assembly.Load(new AssemblyName { Name = DesignAssemblyName });
-            var reportHandlerType = _commandsAssembly.GetType(
-                ReportHandlerTypeName,
-                throwOnError: true,
-                ignoreCase: false
-            )!;
+            var reportHandlerType = _commandsAssembly
+                .GetType(ReportHandlerTypeName, throwOnError: true, ignoreCase: false)
+                !;
 
-            var reportHandler = Activator.CreateInstance(
-                reportHandlerType,
-                (Action<string>)Reporter.WriteError,
-                (Action<string>)Reporter.WriteWarning,
-                (Action<string>)Reporter.WriteInformation,
-                (Action<string>)Reporter.WriteVerbose
-            )!;
+            var reportHandler = Activator
+                .CreateInstance(
+                    reportHandlerType,
+                    (Action<string>)Reporter.WriteError,
+                    (Action<string>)Reporter.WriteWarning,
+                    (Action<string>)Reporter.WriteInformation,
+                    (Action<string>)Reporter.WriteVerbose
+                )
+                !;
 
-            _executor = Activator.CreateInstance(
-                _commandsAssembly.GetType(ExecutorTypeName, throwOnError: true, ignoreCase: false)!,
-                reportHandler,
-                new Dictionary<string, object?>
-                {
-                    { "targetName", AssemblyFileName },
-                    { "startupTargetName", StartupAssemblyFileName },
-                    { "projectDir", ProjectDirectory },
-                    { "rootNamespace", RootNamespace },
-                    { "language", Language },
-                    { "nullable", Nullable },
-                    { "toolsVersion", ProductInfo.GetVersion() },
-                    { "remainingArguments", RemainingArguments }
-                }
-            )!;
+            _executor = Activator
+                .CreateInstance(
+                    _commandsAssembly
+                        .GetType(ExecutorTypeName, throwOnError: true, ignoreCase: false)
+                        !,
+                    reportHandler,
+                    new Dictionary<string, object?>
+                    {
+                        { "targetName", AssemblyFileName },
+                        { "startupTargetName", StartupAssemblyFileName },
+                        { "projectDir", ProjectDirectory },
+                        { "rootNamespace", RootNamespace },
+                        { "language", Language },
+                        { "nullable", Nullable },
+                        { "toolsVersion", ProductInfo.GetVersion() },
+                        { "remainingArguments", RemainingArguments }
+                    }
+                )
+                !;
 
-            _resultHandlerType = _commandsAssembly.GetType(
-                ResultHandlerTypeName,
-                throwOnError: true,
-                ignoreCase: false
-            )!;
+            _resultHandlerType = _commandsAssembly
+                .GetType(ResultHandlerTypeName, throwOnError: true, ignoreCase: false)
+                !;
         }
 
         protected override object CreateResultHandler() =>
@@ -96,11 +98,13 @@ namespace Microsoft.EntityFrameworkCore.Tools
             IDictionary arguments
         ) =>
             Activator.CreateInstance(
-                _commandsAssembly.GetType(
-                    ExecutorTypeName + "+" + operationName,
-                    throwOnError: true,
-                    ignoreCase: true
-                )!,
+                _commandsAssembly
+                    .GetType(
+                        ExecutorTypeName + "+" + operationName,
+                        throwOnError: true,
+                        ignoreCase: true
+                    )
+                    !,
                 _executor,
                 resultHandler,
                 arguments

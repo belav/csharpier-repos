@@ -24,68 +24,64 @@ public static partial class RequestDelegateFactory
 {
     private static readonly ParameterBindingMethodCache ParameterBindingMethodCache = new();
 
-    private static readonly MethodInfo ExecuteTaskOfTMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteTask),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
-    private static readonly MethodInfo ExecuteTaskOfStringMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteTaskOfString),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
-    private static readonly MethodInfo ExecuteValueTaskOfTMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteValueTaskOfT),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
-    private static readonly MethodInfo ExecuteValueTaskMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteValueTask),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
+    private static readonly MethodInfo ExecuteTaskOfTMethod = typeof(RequestDelegateFactory)
+        .GetMethod(nameof(ExecuteTask), BindingFlags.NonPublic | BindingFlags.Static)
+        !;
+    private static readonly MethodInfo ExecuteTaskOfStringMethod = typeof(RequestDelegateFactory)
+        .GetMethod(nameof(ExecuteTaskOfString), BindingFlags.NonPublic | BindingFlags.Static)
+        !;
+    private static readonly MethodInfo ExecuteValueTaskOfTMethod = typeof(RequestDelegateFactory)
+        .GetMethod(nameof(ExecuteValueTaskOfT), BindingFlags.NonPublic | BindingFlags.Static)
+        !;
+    private static readonly MethodInfo ExecuteValueTaskMethod = typeof(RequestDelegateFactory)
+        .GetMethod(nameof(ExecuteValueTask), BindingFlags.NonPublic | BindingFlags.Static)
+        !;
     private static readonly MethodInfo ExecuteValueTaskOfStringMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteValueTaskOfString),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
-    private static readonly MethodInfo ExecuteTaskResultOfTMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteTaskResult),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
+        typeof(RequestDelegateFactory)
+            .GetMethod(
+                nameof(ExecuteValueTaskOfString),
+                BindingFlags.NonPublic | BindingFlags.Static
+            )
+            !;
+    private static readonly MethodInfo ExecuteTaskResultOfTMethod = typeof(RequestDelegateFactory)
+        .GetMethod(nameof(ExecuteTaskResult), BindingFlags.NonPublic | BindingFlags.Static)
+        !;
     private static readonly MethodInfo ExecuteValueResultTaskOfTMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteValueTaskResult),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
-    private static readonly MethodInfo ExecuteObjectReturnMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteObjectReturn),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
+        typeof(RequestDelegateFactory)
+            .GetMethod(nameof(ExecuteValueTaskResult), BindingFlags.NonPublic | BindingFlags.Static)
+            !;
+    private static readonly MethodInfo ExecuteObjectReturnMethod = typeof(RequestDelegateFactory)
+        .GetMethod(nameof(ExecuteObjectReturn), BindingFlags.NonPublic | BindingFlags.Static)
+        !;
     private static readonly MethodInfo GetRequiredServiceMethod =
-        typeof(ServiceProviderServiceExtensions).GetMethod(
-            nameof(ServiceProviderServiceExtensions.GetRequiredService),
-            BindingFlags.Public | BindingFlags.Static,
-            new Type[] { typeof(IServiceProvider) }
-        )!;
-    private static readonly MethodInfo GetServiceMethod =
-        typeof(ServiceProviderServiceExtensions).GetMethod(
+        typeof(ServiceProviderServiceExtensions)
+            .GetMethod(
+                nameof(ServiceProviderServiceExtensions.GetRequiredService),
+                BindingFlags.Public | BindingFlags.Static,
+                new Type[] { typeof(IServiceProvider) }
+            )
+            !;
+    private static readonly MethodInfo GetServiceMethod = typeof(ServiceProviderServiceExtensions)
+        .GetMethod(
             nameof(ServiceProviderServiceExtensions.GetService),
             BindingFlags.Public | BindingFlags.Static,
             new Type[] { typeof(IServiceProvider) }
-        )!;
+        )
+        !;
     private static readonly MethodInfo ResultWriteResponseAsyncMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteResultWriteResponse),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
+        typeof(RequestDelegateFactory)
+            .GetMethod(
+                nameof(ExecuteResultWriteResponse),
+                BindingFlags.NonPublic | BindingFlags.Static
+            )
+            !;
     private static readonly MethodInfo StringResultWriteResponseAsyncMethod =
-        typeof(RequestDelegateFactory).GetMethod(
-            nameof(ExecuteWriteStringResponseAsync),
-            BindingFlags.NonPublic | BindingFlags.Static
-        )!;
+        typeof(RequestDelegateFactory)
+            .GetMethod(
+                nameof(ExecuteWriteStringResponseAsync),
+                BindingFlags.NonPublic | BindingFlags.Static
+            )
+            !;
     private static readonly MethodInfo JsonResultWriteResponseAsyncMethod = GetMethodInfo<
         Func<HttpResponse, object, Task>
     >((response, value) => HttpResponseJsonExtensions.WriteAsJsonAsync(response, value, default));

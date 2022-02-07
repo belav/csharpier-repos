@@ -100,9 +100,9 @@ namespace System.Data.Odbc
 
             Debug.Assert(XMLStream != null, "XMLstream may not be null.");
 
-            string versionString = odbcOuterConnection.GetInfoStringUnhandled(
-                ODBC32.SQL_INFO.DBMS_VER
-            )!;
+            string versionString = odbcOuterConnection
+                .GetInfoStringUnhandled(ODBC32.SQL_INFO.DBMS_VER)
+                !;
 
             return new OdbcMetaDataFactory(
                 XMLStream,

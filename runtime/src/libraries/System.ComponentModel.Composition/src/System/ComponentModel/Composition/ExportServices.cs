@@ -16,21 +16,15 @@ namespace System.ComponentModel.Composition
     // Provides helpers for creating and dealing with Exports
     internal static partial class ExportServices
     {
-        private static readonly MethodInfo _createStronglyTypedLazyOfTM =
-            typeof(ExportServices).GetMethod(
-                "CreateStronglyTypedLazyOfTM",
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
-        private static readonly MethodInfo _createStronglyTypedLazyOfT =
-            typeof(ExportServices).GetMethod(
-                "CreateStronglyTypedLazyOfT",
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
-        private static readonly MethodInfo _createSemiStronglyTypedLazy =
-            typeof(ExportServices).GetMethod(
-                "CreateSemiStronglyTypedLazy",
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
+        private static readonly MethodInfo _createStronglyTypedLazyOfTM = typeof(ExportServices)
+            .GetMethod("CreateStronglyTypedLazyOfTM", BindingFlags.NonPublic | BindingFlags.Static)
+            !;
+        private static readonly MethodInfo _createStronglyTypedLazyOfT = typeof(ExportServices)
+            .GetMethod("CreateStronglyTypedLazyOfT", BindingFlags.NonPublic | BindingFlags.Static)
+            !;
+        private static readonly MethodInfo _createSemiStronglyTypedLazy = typeof(ExportServices)
+            .GetMethod("CreateSemiStronglyTypedLazy", BindingFlags.NonPublic | BindingFlags.Static)
+            !;
 
         internal static readonly Type DefaultMetadataViewType = typeof(IDictionary<string, object>);
         internal static readonly Type DefaultExportedValueType = typeof(object);

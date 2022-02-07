@@ -16,16 +16,12 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
 {
     internal sealed class SafeMsQuicConfigurationHandle : SafeHandle
     {
-        private static readonly FieldInfo _contextCertificate =
-            typeof(SslStreamCertificateContext).GetField(
-                "Certificate",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            )!;
-        private static readonly FieldInfo _contextChain =
-            typeof(SslStreamCertificateContext).GetField(
-                "IntermediateCertificates",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            )!;
+        private static readonly FieldInfo _contextCertificate = typeof(SslStreamCertificateContext)
+            .GetField("Certificate", BindingFlags.NonPublic | BindingFlags.Instance)
+            !;
+        private static readonly FieldInfo _contextChain = typeof(SslStreamCertificateContext)
+            .GetField("IntermediateCertificates", BindingFlags.NonPublic | BindingFlags.Instance)
+            !;
 
         public override bool IsInvalid => handle == IntPtr.Zero;
 

@@ -605,17 +605,21 @@ namespace System.Runtime.Serialization.Json
                                 }
                             }
                             if (moveNextMethod == null)
-                                moveNextMethod = CollectionDataContract.GetTargetMethodWithName(
-                                    Globals.MoveNextMethodName,
-                                    enumeratorType,
-                                    ienumeratorInterface
-                                )!;
+                                moveNextMethod = CollectionDataContract
+                                    .GetTargetMethodWithName(
+                                        Globals.MoveNextMethodName,
+                                        enumeratorType,
+                                        ienumeratorInterface
+                                    )
+                                    !;
                             if (getCurrentMethod == null)
-                                getCurrentMethod = CollectionDataContract.GetTargetMethodWithName(
-                                    Globals.GetCurrentMethodName,
-                                    enumeratorType,
-                                    ienumeratorInterface
-                                )!;
+                                getCurrentMethod = CollectionDataContract
+                                    .GetTargetMethodWithName(
+                                        Globals.GetCurrentMethodName,
+                                        enumeratorType,
+                                        ienumeratorInterface
+                                    )
+                                    !;
                         }
                     }
                     Type elementType = getCurrentMethod.ReturnType;
@@ -625,10 +629,12 @@ namespace System.Runtime.Serialization.Json
                     _ilg.Call(_objectLocal, collectionContract.GetEnumeratorMethod);
                     if (isDictionary)
                     {
-                        ConstructorInfo dictEnumCtor = enumeratorType.GetConstructor(
-                            Globals.ScanAllMembers,
-                            new Type[] { Globals.TypeOfIDictionaryEnumerator }
-                        )!;
+                        ConstructorInfo dictEnumCtor = enumeratorType
+                            .GetConstructor(
+                                Globals.ScanAllMembers,
+                                new Type[] { Globals.TypeOfIDictionaryEnumerator }
+                            )
+                            !;
                         _ilg.ConvertValue(
                             collectionContract.GetEnumeratorMethod.ReturnType,
                             Globals.TypeOfIDictionaryEnumerator
@@ -641,10 +647,9 @@ namespace System.Runtime.Serialization.Json
                         Type ctorParam = Globals.TypeOfIEnumeratorGeneric.MakeGenericType(
                             Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes)
                         );
-                        ConstructorInfo dictEnumCtor = enumeratorType.GetConstructor(
-                            Globals.ScanAllMembers,
-                            new Type[] { ctorParam }
-                        )!;
+                        ConstructorInfo dictEnumCtor = enumeratorType
+                            .GetConstructor(Globals.ScanAllMembers, new Type[] { ctorParam })
+                            !;
                         _ilg.ConvertValue(
                             collectionContract.GetEnumeratorMethod.ReturnType,
                             ctorParam
@@ -660,10 +665,12 @@ namespace System.Runtime.Serialization.Json
                         Type genericDictionaryKeyValueType = Globals.TypeOfKeyValue.MakeGenericType(
                             keyValueTypes
                         );
-                        PropertyInfo genericDictionaryKeyProperty =
-                            genericDictionaryKeyValueType.GetProperty(JsonGlobals.KeyString)!;
-                        PropertyInfo genericDictionaryValueProperty =
-                            genericDictionaryKeyValueType.GetProperty(JsonGlobals.ValueString)!;
+                        PropertyInfo genericDictionaryKeyProperty = genericDictionaryKeyValueType
+                            .GetProperty(JsonGlobals.KeyString)
+                            !;
+                        PropertyInfo genericDictionaryValueProperty = genericDictionaryKeyValueType
+                            .GetProperty(JsonGlobals.ValueString)
+                            !;
 
                         _ilg.Load(_contextArg);
                         _ilg.LoadMember(
@@ -879,16 +886,18 @@ namespace System.Runtime.Serialization.Json
                 {
                     WriteArrayAttribute();
 
-                    MethodInfo writeArrayMethodInfo = typeof(JsonWriterDelegator).GetMethod(
-                        writeArrayMethod,
-                        Globals.ScanAllMembers,
-                        new Type[]
-                        {
-                            type,
-                            typeof(XmlDictionaryString),
-                            typeof(XmlDictionaryString)
-                        }
-                    )!;
+                    MethodInfo writeArrayMethodInfo = typeof(JsonWriterDelegator)
+                        .GetMethod(
+                            writeArrayMethod,
+                            Globals.ScanAllMembers,
+                            new Type[]
+                            {
+                                type,
+                                typeof(XmlDictionaryString),
+                                typeof(XmlDictionaryString)
+                            }
+                        )
+                        !;
                     _ilg.Call(_xmlWriterArg, writeArrayMethodInfo, value, itemName, null);
                     return true;
                 }
@@ -1073,10 +1082,9 @@ namespace System.Runtime.Serialization.Json
                 _ilg.LoadAddress(typeHandleValue);
                 _ilg.Ldtoken(memberType);
                 _ilg.Call(
-                    typeof(RuntimeTypeHandle).GetMethod(
-                        "Equals",
-                        new Type[] { typeof(RuntimeTypeHandle) }
-                    )!
+                    typeof(RuntimeTypeHandle)
+                        .GetMethod("Equals", new Type[] { typeof(RuntimeTypeHandle) })
+                        !
                 );
                 _ilg.Load(writeXsiType);
                 _ilg.Load(DataContract.GetId(memberType.TypeHandle));

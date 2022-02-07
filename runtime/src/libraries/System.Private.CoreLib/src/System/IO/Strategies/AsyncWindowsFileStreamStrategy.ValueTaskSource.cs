@@ -149,8 +149,9 @@ namespace System.IO.Strategies
                 NativeOverlapped* pOverlapped
             )
             {
-                ValueTaskSource valueTaskSource =
-                    (ValueTaskSource)ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped)!;
+                ValueTaskSource valueTaskSource = (ValueTaskSource)ThreadPoolBoundHandle
+                    .GetNativeOverlappedState(pOverlapped)
+                    !;
                 Debug.Assert(valueTaskSource._overlapped == pOverlapped, "Overlaps don't match");
 
                 // Handle reading from & writing to closed pipes.  While I'm not sure

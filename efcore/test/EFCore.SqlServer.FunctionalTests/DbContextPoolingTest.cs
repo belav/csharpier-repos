@@ -237,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore
                 scope.ServiceProvider
                     .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()
+                    !.MaxPoolSize
             );
         }
 
@@ -252,7 +253,8 @@ namespace Microsoft.EntityFrameworkCore
                 64,
                 ((DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>())
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()
+                    !.MaxPoolSize
             );
         }
 
@@ -269,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore
                 64,
                 context
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()
+                    !.MaxPoolSize
             );
         }
 
@@ -302,7 +305,8 @@ namespace Microsoft.EntityFrameworkCore
                 scope.ServiceProvider
                     .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()
+                    !.MaxPoolSize
             );
         }
 
@@ -317,7 +321,8 @@ namespace Microsoft.EntityFrameworkCore
                 1024,
                 ((DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>())
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()
+                    !.MaxPoolSize
             );
         }
 
@@ -347,7 +352,8 @@ namespace Microsoft.EntityFrameworkCore
                 1024,
                 context
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()
+                    !.MaxPoolSize
             );
         }
 
@@ -548,12 +554,12 @@ namespace Microsoft.EntityFrameworkCore
             async Task<DbContext> GetContextAsync(IServiceScope serviceScope) =>
                 useFactory
                     ? async
-                        ? await serviceScope.ServiceProvider.GetService<
-                              IDbContextFactory<DbContext>
-                          >()!.CreateDbContextAsync()
-                        : serviceScope.ServiceProvider.GetService<
-                              IDbContextFactory<DbContext>
-                          >()!.CreateDbContext()
+                        ? await serviceScope.ServiceProvider
+                              .GetService<IDbContextFactory<DbContext>>()
+                              !.CreateDbContextAsync()
+                        : serviceScope.ServiceProvider
+                          .GetService<IDbContextFactory<DbContext>>()
+                          !.CreateDbContext()
                     : serviceScope.ServiceProvider.GetService<DbContext>();
         }
 
@@ -935,10 +941,12 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private object GetContextEventField(DbContext context, string eventName) =>
-            typeof(DbContext).GetField(
-                eventName,
-                BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance
-            )!.GetValue(context);
+            typeof(DbContext)
+                .GetField(
+                    eventName,
+                    BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance
+                )
+                !.GetValue(context);
 
         private bool _changeTracker_OnTracked;
 

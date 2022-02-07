@@ -110,7 +110,8 @@ namespace System.Reflection.Emit
         public override ParameterInfo[] GetParameters()
         {
             ConstructorInfo rci = GetTypeBuilder()
-                .GetConstructor(m_methodBuilder.m_parameterTypes!)!;
+                .GetConstructor(m_methodBuilder.m_parameterTypes!)
+                !;
             return rci.GetParameters();
         }
 

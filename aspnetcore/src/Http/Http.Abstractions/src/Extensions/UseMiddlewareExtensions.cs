@@ -21,10 +21,9 @@ public static class UseMiddlewareExtensions
     internal const string InvokeMethodName = "Invoke";
     internal const string InvokeAsyncMethodName = "InvokeAsync";
 
-    private static readonly MethodInfo GetServiceInfo = typeof(UseMiddlewareExtensions).GetMethod(
-        nameof(GetService),
-        BindingFlags.NonPublic | BindingFlags.Static
-    )!;
+    private static readonly MethodInfo GetServiceInfo = typeof(UseMiddlewareExtensions)
+        .GetMethod(nameof(GetService), BindingFlags.NonPublic | BindingFlags.Static)
+        !;
 
     // We're going to keep all public constructors and public methods on middleware
     private const DynamicallyAccessedMemberTypes MiddlewareAccessibility =

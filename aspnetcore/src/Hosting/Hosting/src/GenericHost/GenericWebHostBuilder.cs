@@ -176,9 +176,9 @@ internal sealed class GenericWebHostBuilder
 
                 foreach (var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>())
                 {
-                    var hostingStartup = (IHostingStartup)Activator.CreateInstance(
-                        attribute.HostingStartupType
-                    )!;
+                    var hostingStartup = (IHostingStartup)Activator
+                        .CreateInstance(attribute.HostingStartupType)
+                        !;
                     hostingStartup.Configure(_hostingStartupWebHostBuilder);
                 }
             }
@@ -386,16 +386,18 @@ internal sealed class GenericWebHostBuilder
                 );
 
                 // Get the private ConfigureContainer method on this type then close over the container type
-                var configureCallback = typeof(GenericWebHostBuilder).GetMethod(
-                    nameof(ConfigureContainerImpl),
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )!
-                    .MakeGenericMethod(containerType)
+                var configureCallback = typeof(GenericWebHostBuilder)
+                    .GetMethod(
+                        nameof(ConfigureContainerImpl),
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    )
+                    !.MakeGenericMethod(containerType)
                     .CreateDelegate(actionType, this);
 
                 // _builder.ConfigureContainer<T>(ConfigureContainer);
-                typeof(IHostBuilder).GetMethod(nameof(IHostBuilder.ConfigureContainer))!
-                    .MakeGenericMethod(containerType)
+                typeof(IHostBuilder)
+                    .GetMethod(nameof(IHostBuilder.ConfigureContainer))
+                    !.MakeGenericMethod(containerType)
                     .InvokeWithoutWrappingExceptions(_builder, new object[] { configureCallback });
             }
 

@@ -177,10 +177,9 @@ namespace System.Drawing.Printing
                     IntPtr modePointer = Interop.Kernel32.GlobalLock(
                         new HandleRef(this, modeHandle)
                     );
-                    Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                        modePointer,
-                        typeof(Interop.Gdi32.DEVMODE)
-                    )!;
+                    Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                        .PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))
+                        !;
 
                     PaperSource result = PaperSourceFromMode(mode);
 
@@ -305,10 +304,9 @@ namespace System.Drawing.Printing
                     IntPtr modePointer = Interop.Kernel32.GlobalLock(
                         new HandleRef(this, modeHandle)
                     );
-                    Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                        modePointer,
-                        typeof(Interop.Gdi32.DEVMODE)
-                    )!;
+                    Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                        .PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))
+                        !;
 
                     PrinterResolution result = PrinterResolutionFromMode(mode);
 
@@ -353,10 +351,9 @@ namespace System.Drawing.Printing
         public void CopyToHdevmode(IntPtr hdevmode)
         {
             IntPtr modePointer = Interop.Kernel32.GlobalLock(hdevmode);
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                modePointer,
-                typeof(Interop.Gdi32.DEVMODE)
-            )!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                .PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))
+                !;
 
             if (
                 _color.IsNotDefault
@@ -525,10 +522,9 @@ namespace System.Drawing.Printing
             {
                 IntPtr modeHandle = printerSettings.GetHdevmodeInternal();
                 IntPtr modePointer = Interop.Kernel32.GlobalLock(new HandleRef(this, modeHandle));
-                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                    modePointer,
-                    typeof(Interop.Gdi32.DEVMODE)
-                )!;
+                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                    .PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))
+                    !;
 
                 short result = mode?.dmDriverExtra ?? 0;
 
@@ -576,10 +572,9 @@ namespace System.Drawing.Printing
                 }
 
                 IntPtr modePointer = Interop.Kernel32.GlobalLock(modeHandle);
-                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                    modePointer,
-                    typeof(Interop.Gdi32.DEVMODE)
-                )!;
+                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                    .PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))
+                    !;
 
                 PaperSize result = PaperSizeFromMode(mode);
 
@@ -700,10 +695,9 @@ namespace System.Drawing.Printing
             }
 
             IntPtr pointer = Interop.Kernel32.GlobalLock(hdevmode);
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                pointer,
-                typeof(Interop.Gdi32.DEVMODE)
-            )!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                .PtrToStructure(pointer, typeof(Interop.Gdi32.DEVMODE))
+                !;
 
             if ((mode.dmFields & SafeNativeMethods.DM_COLOR) == SafeNativeMethods.DM_COLOR)
             {

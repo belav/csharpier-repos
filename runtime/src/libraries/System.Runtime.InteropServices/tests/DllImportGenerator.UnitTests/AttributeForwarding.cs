@@ -102,9 +102,9 @@ struct Native
             );
             Assert.Empty(newComp.GetDiagnostics());
 
-            ITypeSymbol attributeType = newComp.GetTypeByMetadataName(
-                "System.Runtime.InteropServices.UnmanagedCallConvAttribute"
-            )!;
+            ITypeSymbol attributeType = newComp
+                .GetTypeByMetadataName("System.Runtime.InteropServices.UnmanagedCallConvAttribute")
+                !;
 
             Assert.NotNull(attributeType);
 
@@ -153,12 +153,12 @@ struct Native
             );
             Assert.Empty(newComp.GetDiagnostics());
 
-            ITypeSymbol attributeType = newComp.GetTypeByMetadataName(
-                "System.Runtime.InteropServices.UnmanagedCallConvAttribute"
-            )!;
-            ITypeSymbol callConvType = newComp.GetTypeByMetadataName(
-                "System.Runtime.CompilerServices.CallConvStdcall"
-            )!;
+            ITypeSymbol attributeType = newComp
+                .GetTypeByMetadataName("System.Runtime.InteropServices.UnmanagedCallConvAttribute")
+                !;
+            ITypeSymbol callConvType = newComp
+                .GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall")
+                !;
 
             Assert.NotNull(attributeType);
 
@@ -211,15 +211,17 @@ struct Native
             );
             Assert.Empty(newComp.GetDiagnostics());
 
-            ITypeSymbol attributeType = newComp.GetTypeByMetadataName(
-                "System.Runtime.InteropServices.UnmanagedCallConvAttribute"
-            )!;
-            ITypeSymbol callConvType = newComp.GetTypeByMetadataName(
-                "System.Runtime.CompilerServices.CallConvStdcall"
-            )!;
-            ITypeSymbol callConvType2 = newComp.GetTypeByMetadataName(
-                "System.Runtime.CompilerServices.CallConvSuppressGCTransition"
-            )!;
+            ITypeSymbol attributeType = newComp
+                .GetTypeByMetadataName("System.Runtime.InteropServices.UnmanagedCallConvAttribute")
+                !;
+            ITypeSymbol callConvType = newComp
+                .GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall")
+                !;
+            ITypeSymbol callConvType2 = newComp
+                .GetTypeByMetadataName(
+                    "System.Runtime.CompilerServices.CallConvSuppressGCTransition"
+                )
+                !;
 
             Assert.NotNull(attributeType);
 

@@ -358,18 +358,16 @@ namespace Microsoft.CodeAnalysis
             {
                 case LanguageNames.CSharp:
                     // Suppression should be removed or addressed https://github.com/dotnet/roslyn/issues/41636
-                    sourceFilePath = PathUtilities.CombineAbsoluteAndRelativePaths(
-                        projectDirectory,
-                        $"{fileName}.cs"
-                    )!;
+                    sourceFilePath = PathUtilities
+                        .CombineAbsoluteAndRelativePaths(projectDirectory, $"{fileName}.cs")
+                        !;
                     break;
 
                 case LanguageNames.VisualBasic:
                     // Suppression should be removed or addressed https://github.com/dotnet/roslyn/issues/41636
-                    sourceFilePath = PathUtilities.CombineAbsoluteAndRelativePaths(
-                        projectDirectory,
-                        $"{fileName}.vb"
-                    )!;
+                    sourceFilePath = PathUtilities
+                        .CombineAbsoluteAndRelativePaths(projectDirectory, $"{fileName}.vb")
+                        !;
                     break;
 
                 default:

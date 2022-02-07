@@ -118,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                         Dependencies.CommandLogger,
                         CommandSource.Migrations
                     )
-                )!;
+                )
+                !;
 
             return count != 0;
         }

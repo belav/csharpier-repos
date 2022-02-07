@@ -647,10 +647,9 @@ namespace System.Data.OleDb
                         )
                         {
                             IntPtr ptr = ADP.IntPtrOffset(schemaGuids, i * ODB.SizeOf_Guid);
-                            supportedSchemas[i]._schemaRowset = (Guid)Marshal.PtrToStructure(
-                                ptr,
-                                typeof(Guid)
-                            )!;
+                            supportedSchemas[i]._schemaRowset = (Guid)Marshal
+                                .PtrToStructure(ptr, typeof(Guid))
+                                !;
                         }
                     }
                     if (ADP.PtrZero != schemaRestrictions)
@@ -776,14 +775,16 @@ namespace System.Data.OleDb
         private static object CreateInstanceDataLinks()
         {
             Type datalink = Type.GetTypeFromCLSID(ODB.CLSID_DataLinks, true)!;
-            return Activator.CreateInstance(
-                datalink,
-                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance,
-                null,
-                null,
-                CultureInfo.InvariantCulture,
-                null
-            )!;
+            return Activator
+                .CreateInstance(
+                    datalink,
+                    System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance,
+                    null,
+                    null,
+                    CultureInfo.InvariantCulture,
+                    null
+                )
+                !;
         }
 
         // @devnote: should be multithread safe access to OleDbConnection.idataInitialize,

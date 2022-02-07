@@ -34,7 +34,8 @@ internal class StreamTracker
     {
         var newConverter = (IStreamConverter)_buildConverterMethod
             .MakeGenericMethod(itemType)
-            .Invoke(null, _streamConverterArgs)!;
+            .Invoke(null, _streamConverterArgs)
+            !;
         _lookup[streamId] = newConverter;
         return newConverter.GetReaderAsObject(targetType);
     }

@@ -976,10 +976,9 @@ namespace System.Drawing.Printing
                 }
             }
 
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                pointer,
-                typeof(Interop.Gdi32.DEVMODE)
-            )!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                .PtrToStructure(pointer, typeof(Interop.Gdi32.DEVMODE))
+                !;
 
             if (_extrainfo != null)
             {
@@ -1113,10 +1112,9 @@ namespace System.Drawing.Printing
                 }
 
                 IntPtr modePointer = Interop.Kernel32.GlobalLock(new HandleRef(this, modeHandle));
-                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                    modePointer,
-                    typeof(Interop.Gdi32.DEVMODE)
-                )!;
+                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                    .PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))
+                    !;
                 switch (field)
                 {
                     case ModeField.Orientation:
@@ -1212,10 +1210,9 @@ namespace System.Drawing.Printing
             PaperSize[] result = new PaperSize[count];
             for (int i = 0; i < count; i++)
             {
-                string name = Marshal.PtrToStringAuto(
-                    (IntPtr)(checked((long)namesBuffer + stringSize * i)),
-                    64
-                )!;
+                string name = Marshal
+                    .PtrToStringAuto((IntPtr)(checked((long)namesBuffer + stringSize * i)), 64)
+                    !;
                 int index = name.IndexOf('\0');
                 if (index > -1)
                 {
@@ -1278,10 +1275,9 @@ namespace System.Drawing.Printing
             PaperSource[] result = new PaperSource[count];
             for (int i = 0; i < count; i++)
             {
-                string name = Marshal.PtrToStringAuto(
-                    (IntPtr)(checked((long)namesBuffer + stringSize * i)),
-                    24
-                )!;
+                string name = Marshal
+                    .PtrToStringAuto((IntPtr)(checked((long)namesBuffer + stringSize * i)), 24)
+                    !;
                 int index = name.IndexOf('\0');
                 if (index > -1)
                 {
@@ -1360,10 +1356,9 @@ namespace System.Drawing.Printing
                 throw new ArgumentException(SR.Format(SR.InvalidPrinterHandle, hdevmode));
 
             IntPtr pointer = Interop.Kernel32.GlobalLock(hdevmode);
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                pointer,
-                typeof(Interop.Gdi32.DEVMODE)
-            )!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal
+                .PtrToStructure(pointer, typeof(Interop.Gdi32.DEVMODE))
+                !;
 
             //Copy entire public devmode as a byte array...
             _devmodebytes = mode.dmSize;

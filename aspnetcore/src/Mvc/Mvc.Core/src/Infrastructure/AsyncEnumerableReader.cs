@@ -32,10 +32,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// </remarks>
 internal sealed class AsyncEnumerableReader
 {
-    private readonly MethodInfo Converter = typeof(AsyncEnumerableReader).GetMethod(
-        nameof(ReadInternal),
-        BindingFlags.NonPublic | BindingFlags.Instance
-    )!;
+    private readonly MethodInfo Converter = typeof(AsyncEnumerableReader)
+        .GetMethod(nameof(ReadInternal), BindingFlags.NonPublic | BindingFlags.Instance)
+        !;
 
     private readonly ConcurrentDictionary<
         Type,
