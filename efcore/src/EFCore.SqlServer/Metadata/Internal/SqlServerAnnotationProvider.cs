@@ -23,9 +23,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public SqlServerAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,9 +41,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             var maxSize = model.Model.GetDatabaseMaxSize();
             var serviceTier = model.Model.GetServiceTierSql();
             var performanceLevel = model.Model.GetPerformanceLevelSql();
-            if (maxSize != null
-                || serviceTier != null
-                || performanceLevel != null)
+            if (maxSize != null || serviceTier != null || performanceLevel != null)
             {
                 var options = new StringBuilder();
 
@@ -72,10 +68,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
 
                 options.Remove(options.Length - 2, 2);
 
-                yield return new Annotation(SqlServerAnnotationNames.EditionOptions, options.ToString());
+                yield return new Annotation(
+                    SqlServerAnnotationNames.EditionOptions,
+                    options.ToString()
+                );
             }
 
-            if (model.Tables.Any(t => !t.IsExcludedFromMigrations && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)))
+            if (
+                model.Tables.Any(
+                    t =>
+                        !t.IsExcludedFromMigrations
+                        && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
+                )
+            )
             {
                 yield return new Annotation(SqlServerAnnotationNames.MemoryOptimized, true);
             }
@@ -105,8 +110,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             if (entityType.IsTemporal() && designTime)
             {
                 yield return new Annotation(SqlServerAnnotationNames.IsTemporal, true);
-                yield return new Annotation(SqlServerAnnotationNames.TemporalHistoryTableName, entityType.GetHistoryTableName());
-                yield return new Annotation(SqlServerAnnotationNames.TemporalHistoryTableSchema, entityType.GetHistoryTableSchema());
+                yield return new Annotation(
+                    SqlServerAnnotationNames.TemporalHistoryTableName,
+                    entityType.GetHistoryTableName()
+                );
+                yield return new Annotation(
+                    SqlServerAnnotationNames.TemporalHistoryTableSchema,
+                    entityType.GetHistoryTableSchema()
+                );
 
                 // for the RevEng path, we avoid adding period properties to the entity
                 // because we don't want code for them to be generated - they need to be in shadow state
@@ -119,22 +130,30 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
                 if (periodStartPropertyName != null)
                 {
                     var periodStartProperty = entityType.FindProperty(periodStartPropertyName);
-                    var periodStartColumnName = periodStartProperty != null
-                        ? periodStartProperty.GetColumnName(storeObjectIdentifier)
-                        : periodStartPropertyName;
+                    var periodStartColumnName =
+                        periodStartProperty != null
+                            ? periodStartProperty.GetColumnName(storeObjectIdentifier)
+                            : periodStartPropertyName;
 
-                    yield return new Annotation(SqlServerAnnotationNames.TemporalPeriodStartColumnName, periodStartColumnName);
+                    yield return new Annotation(
+                        SqlServerAnnotationNames.TemporalPeriodStartColumnName,
+                        periodStartColumnName
+                    );
                 }
 
                 var periodEndPropertyName = entityType.GetPeriodEndPropertyName();
                 if (periodEndPropertyName != null)
                 {
                     var periodEndProperty = entityType.FindProperty(periodEndPropertyName);
-                    var periodEndColumnName = periodEndProperty != null
-                        ? periodEndProperty.GetColumnName(storeObjectIdentifier)
-                        : periodEndPropertyName;
+                    var periodEndColumnName =
+                        periodEndProperty != null
+                            ? periodEndProperty.GetColumnName(storeObjectIdentifier)
+                            : periodEndPropertyName;
 
-                    yield return new Annotation(SqlServerAnnotationNames.TemporalPeriodEndColumnName, periodEndColumnName);
+                    yield return new Annotation(
+                        SqlServerAnnotationNames.TemporalPeriodEndColumnName,
+                        periodEndColumnName
+                    );
                 }
             }
         }
@@ -157,7 +176,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
 
             var table = constraint.Table;
 
-            if (key.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema)) is bool isClustered)
+            if (
+                key.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema))
+                is bool isClustered
+            )
             {
                 yield return new Annotation(SqlServerAnnotationNames.Clustered, isClustered);
             }
@@ -188,13 +210,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             {
                 var includeColumns = includeProperties
                     .Select(
-                        p => modelIndex.DeclaringEntityType.FindProperty(p)!
-                            .GetColumnName(StoreObjectIdentifier.Table(table.Name, table.Schema)))
+                        p =>
+                            modelIndex.DeclaringEntityType.FindProperty(p)!.GetColumnName(
+                                StoreObjectIdentifier.Table(table.Name, table.Schema)
+                            )
+                    )
                     .ToArray();
 
-                yield return new Annotation(
-                    SqlServerAnnotationNames.Include,
-                    includeColumns);
+                yield return new Annotation(SqlServerAnnotationNames.Include, includeColumns);
             }
 
             if (modelIndex.IsCreatedOnline(table) is bool isOnline)
@@ -222,12 +245,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             }
 
             var table = StoreObjectIdentifier.Table(column.Table.Name, column.Table.Schema);
-            var identityProperty = column.PropertyMappings.Where(
-                    m => m.TableMapping.IsSharedTablePrincipal && m.TableMapping.EntityType == m.Property.DeclaringEntityType)
+            var identityProperty = column.PropertyMappings
+                .Where(
+                    m =>
+                        m.TableMapping.IsSharedTablePrincipal
+                        && m.TableMapping.EntityType == m.Property.DeclaringEntityType
+                )
                 .Select(m => m.Property)
                 .FirstOrDefault(
-                    p => p.GetValueGenerationStrategy(table)
-                        == SqlServerValueGenerationStrategy.IdentityColumn);
+                    p =>
+                        p.GetValueGenerationStrategy(table)
+                        == SqlServerValueGenerationStrategy.IdentityColumn
+                );
             if (identityProperty != null)
             {
                 var seed = identityProperty.GetIdentitySeed(table);
@@ -235,7 +264,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
 
                 yield return new Annotation(
                     SqlServerAnnotationNames.Identity,
-                    string.Format(CultureInfo.InvariantCulture, "{0}, {1}", seed ?? 1, increment ?? 1));
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}, {1}",
+                        seed ?? 1,
+                        increment ?? 1
+                    )
+                );
             }
 
             // Model validation ensures that these facets are the same on all mapped properties
@@ -259,21 +294,28 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
                 // since in RevEng scenario there can't be custom column mapping
                 // see #26007
                 var periodStartProperty = entityType.FindProperty(periodStartPropertyName!);
-                var periodStartColumnName = periodStartProperty != null
-                    ? periodStartProperty.GetColumnName(storeObjectIdentifier)
-                    : periodStartPropertyName;
+                var periodStartColumnName =
+                    periodStartProperty != null
+                        ? periodStartProperty.GetColumnName(storeObjectIdentifier)
+                        : periodStartPropertyName;
 
                 var periodEndProperty = entityType.FindProperty(periodEndPropertyName!);
-                var periodEndColumnName = periodEndProperty != null
-                    ? periodEndProperty.GetColumnName(storeObjectIdentifier)
-                    : periodEndPropertyName;
+                var periodEndColumnName =
+                    periodEndProperty != null
+                        ? periodEndProperty.GetColumnName(storeObjectIdentifier)
+                        : periodEndPropertyName;
 
-                if (column.Name == periodStartColumnName
-                    || column.Name == periodEndColumnName)
+                if (column.Name == periodStartColumnName || column.Name == periodEndColumnName)
                 {
                     yield return new Annotation(SqlServerAnnotationNames.IsTemporal, true);
-                    yield return new Annotation(SqlServerAnnotationNames.TemporalPeriodStartColumnName, periodStartColumnName);
-                    yield return new Annotation(SqlServerAnnotationNames.TemporalPeriodEndColumnName, periodEndColumnName);
+                    yield return new Annotation(
+                        SqlServerAnnotationNames.TemporalPeriodStartColumnName,
+                        periodStartColumnName
+                    );
+                    yield return new Annotation(
+                        SqlServerAnnotationNames.TemporalPeriodEndColumnName,
+                        periodEndColumnName
+                    );
                 }
             }
         }

@@ -33,14 +33,32 @@ namespace System.Text.RegularExpressions
         /// <param name="maxLabelLength">maximum length of labels in nodes anything over that length is indicated with .. </param>
         /// <param name="asNFA">if true creates NFA instead of DFA</param>
         [ExcludeFromCodeCoverage(Justification = "Debug only")]
-        internal void SaveDGML(TextWriter writer, int bound, bool hideStateInfo, bool addDotStar, bool inReverse, bool onlyDFAinfo, int maxLabelLength, bool asNFA)
+        internal void SaveDGML(
+            TextWriter writer,
+            int bound,
+            bool hideStateInfo,
+            bool addDotStar,
+            bool inReverse,
+            bool onlyDFAinfo,
+            int maxLabelLength,
+            bool asNFA
+        )
         {
             if (factory is not SymbolicRegexRunnerFactory srmFactory)
             {
                 throw new NotSupportedException();
             }
 
-            srmFactory._matcher.SaveDGML(writer, bound, hideStateInfo, addDotStar, inReverse, onlyDFAinfo, maxLabelLength, asNFA);
+            srmFactory._matcher.SaveDGML(
+                writer,
+                bound,
+                hideStateInfo,
+                addDotStar,
+                inReverse,
+                onlyDFAinfo,
+                maxLabelLength,
+                asNFA
+            );
         }
 
         /// <summary>
@@ -50,8 +68,16 @@ namespace System.Text.RegularExpressions
         [ExcludeFromCodeCoverage(Justification = "Debug only")]
         internal static void GenerateUnicodeTables(string path)
         {
-            IgnoreCaseRelationGenerator.Generate("System.Text.RegularExpressions.Symbolic.Unicode", "IgnoreCaseRelation", path);
-            UnicodeCategoryRangesGenerator.Generate("System.Text.RegularExpressions.Symbolic.Unicode", "UnicodeCategoryRanges", path);
+            IgnoreCaseRelationGenerator.Generate(
+                "System.Text.RegularExpressions.Symbolic.Unicode",
+                "IgnoreCaseRelation",
+                path
+            );
+            UnicodeCategoryRangesGenerator.Generate(
+                "System.Text.RegularExpressions.Symbolic.Unicode",
+                "UnicodeCategoryRanges",
+                path
+            );
         }
 
         /// <summary>
@@ -62,7 +88,11 @@ namespace System.Text.RegularExpressions
         /// <param name="negative">if true then generate inputs that do not match</param>
         /// <returns></returns>
         [ExcludeFromCodeCoverage(Justification = "Debug only")]
-        internal Collections.Generic.IEnumerable<string> GenerateRandomMembers(int k, int randomseed, bool negative)
+        internal Collections.Generic.IEnumerable<string> GenerateRandomMembers(
+            int k,
+            int randomseed,
+            bool negative
+        )
         {
             if (factory is not SymbolicRegexRunnerFactory srmFactory)
             {

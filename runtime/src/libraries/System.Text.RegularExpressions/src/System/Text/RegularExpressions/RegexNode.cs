@@ -51,35 +51,35 @@ namespace System.Text.RegularExpressions
 
         // The following are leaves, and correspond to primitive operations
 
-        public const int Oneloop = RegexCode.Oneloop;                 // c,n      a*
-        public const int Notoneloop = RegexCode.Notoneloop;           // c,n      .*
-        public const int Setloop = RegexCode.Setloop;                 // set,n    \d*
+        public const int Oneloop = RegexCode.Oneloop; // c,n      a*
+        public const int Notoneloop = RegexCode.Notoneloop; // c,n      .*
+        public const int Setloop = RegexCode.Setloop; // set,n    \d*
 
-        public const int Onelazy = RegexCode.Onelazy;                 // c,n      a*?
-        public const int Notonelazy = RegexCode.Notonelazy;           // c,n      .*?
-        public const int Setlazy = RegexCode.Setlazy;                 // set,n    \d*?
+        public const int Onelazy = RegexCode.Onelazy; // c,n      a*?
+        public const int Notonelazy = RegexCode.Notonelazy; // c,n      .*?
+        public const int Setlazy = RegexCode.Setlazy; // set,n    \d*?
 
-        public const int One = RegexCode.One;                         // char     a
-        public const int Notone = RegexCode.Notone;                   // char     . [^a]
-        public const int Set = RegexCode.Set;                         // set      [a-z] \w \s \d
+        public const int One = RegexCode.One; // char     a
+        public const int Notone = RegexCode.Notone; // char     . [^a]
+        public const int Set = RegexCode.Set; // set      [a-z] \w \s \d
 
-        public const int Multi = RegexCode.Multi;                     // string   abcdef
-        public const int Ref = RegexCode.Ref;                         // index    \1
+        public const int Multi = RegexCode.Multi; // string   abcdef
+        public const int Ref = RegexCode.Ref; // index    \1
 
-        public const int Bol = RegexCode.Bol;                         //          ^
-        public const int Eol = RegexCode.Eol;                         //          $
-        public const int Boundary = RegexCode.Boundary;               //          \b
-        public const int NonBoundary = RegexCode.NonBoundary;         //          \B
-        public const int ECMABoundary = RegexCode.ECMABoundary;       // \b
+        public const int Bol = RegexCode.Bol; //          ^
+        public const int Eol = RegexCode.Eol; //          $
+        public const int Boundary = RegexCode.Boundary; //          \b
+        public const int NonBoundary = RegexCode.NonBoundary; //          \B
+        public const int ECMABoundary = RegexCode.ECMABoundary; // \b
         public const int NonECMABoundary = RegexCode.NonECMABoundary; // \B
-        public const int Beginning = RegexCode.Beginning;             //          \A
-        public const int Start = RegexCode.Start;                     //          \G
-        public const int EndZ = RegexCode.EndZ;                       //          \Z
-        public const int End = RegexCode.End;                         //          \z
+        public const int Beginning = RegexCode.Beginning; //          \A
+        public const int Start = RegexCode.Start; //          \G
+        public const int EndZ = RegexCode.EndZ; //          \Z
+        public const int End = RegexCode.End; //          \z
 
-        public const int Oneloopatomic = RegexCode.Oneloopatomic;        // c,n      (?> a*)
-        public const int Notoneloopatomic = RegexCode.Notoneloopatomic;  // c,n      (?> .*)
-        public const int Setloopatomic = RegexCode.Setloopatomic;        // set,n    (?> \d*)
+        public const int Oneloopatomic = RegexCode.Oneloopatomic; // c,n      (?> a*)
+        public const int Notoneloopatomic = RegexCode.Notoneloopatomic; // c,n      (?> .*)
+        public const int Setloopatomic = RegexCode.Setloopatomic; // set,n    (?> \d*)
         public const int UpdateBumpalong = RegexCode.UpdateBumpalong;
 
         // Interior nodes do not correspond to primitive operations, but
@@ -87,22 +87,22 @@ namespace System.Text.RegularExpressions
 
         // Concat and alternate take n children, and can run forward or backwards
 
-        public const int Nothing = 22;                                //          []
-        public const int Empty = 23;                                  //          ()
+        public const int Nothing = 22; //          []
+        public const int Empty = 23; //          ()
 
-        public const int Alternate = 24;                              //          a|b
-        public const int Concatenate = 25;                            //          ab
+        public const int Alternate = 24; //          a|b
+        public const int Concatenate = 25; //          ab
 
-        public const int Loop = 26;                                   // m,x      * + ? {,}
-        public const int Lazyloop = 27;                               // m,x      *? +? ?? {,}?
+        public const int Loop = 26; // m,x      * + ? {,}
+        public const int Lazyloop = 27; // m,x      *? +? ?? {,}?
 
-        public const int Capture = 28;                                // n        ()         - capturing group
-        public const int Group = 29;                                  //          (?:)       - noncapturing group
-        public const int Require = 30;                                //          (?=) (?<=) - lookahead and lookbehind assertions
-        public const int Prevent = 31;                                //          (?!) (?<!) - negative lookahead and lookbehind assertions
-        public const int Atomic = 32;                                 //          (?>)       - atomic subexpression
-        public const int Testref = 33;                                //          (?(n) | )  - alternation, reference
-        public const int Testgroup = 34;                              //          (?(...) | )- alternation, expression
+        public const int Capture = 28; // n        ()         - capturing group
+        public const int Group = 29; //          (?:)       - noncapturing group
+        public const int Require = 30; //          (?=) (?<=) - lookahead and lookbehind assertions
+        public const int Prevent = 31; //          (?!) (?<!) - negative lookahead and lookbehind assertions
+        public const int Atomic = 32; //          (?>)       - atomic subexpression
+        public const int Testref = 33; //          (?(n) | )  - alternation, reference
+        public const int Testgroup = 34; //          (?(...) | )- alternation, expression
 
         /// <summary>empty bit from the node's options to store data on whether a node contains captures</summary>
         internal const RegexOptions HasCapturesFlag = (RegexOptions)(1 << 31);
@@ -237,7 +237,10 @@ namespace System.Text.RegularExpressions
                     case Setloopatomic:
                     case Start:
                     case UpdateBumpalong:
-                        Debug.Assert(childCount == 0, $"Expected zero children for {node.TypeName}, got {childCount}.");
+                        Debug.Assert(
+                            childCount == 0,
+                            $"Expected zero children for {node.TypeName}, got {childCount}."
+                        );
                         break;
 
                     case Atomic:
@@ -246,13 +249,19 @@ namespace System.Text.RegularExpressions
                     case Loop:
                     case Prevent:
                     case Require:
-                        Debug.Assert(childCount == 1, $"Expected one and only one child for {node.TypeName}, got {childCount}.");
+                        Debug.Assert(
+                            childCount == 1,
+                            $"Expected one and only one child for {node.TypeName}, got {childCount}."
+                        );
                         toExamine.Push(node.Child(0));
                         break;
 
                     case Testref:
                     case Testgroup:
-                        Debug.Assert(childCount >= 1, $"Expected at least one child for {node.TypeName}, got {childCount}.");
+                        Debug.Assert(
+                            childCount >= 1,
+                            $"Expected at least one child for {node.TypeName}, got {childCount}."
+                        );
                         for (int i = 0; i < childCount; i++)
                         {
                             toExamine.Push(node.Child(i));
@@ -261,7 +270,10 @@ namespace System.Text.RegularExpressions
 
                     case Concatenate:
                     case Alternate:
-                        Debug.Assert(childCount >= 2, $"Expected at least two children for {node.TypeName}, got {childCount}.");
+                        Debug.Assert(
+                            childCount >= 2,
+                            $"Expected at least two children for {node.TypeName}, got {childCount}."
+                        );
                         for (int i = 0; i < childCount; i++)
                         {
                             toExamine.Push(node.Child(i));
@@ -277,11 +289,17 @@ namespace System.Text.RegularExpressions
                     case Setloop:
                     case Setloopatomic:
                     case Setlazy:
-                        Debug.Assert(!string.IsNullOrEmpty(node.Str), $"Expected non-null, non-empty string for {node.TypeName}.");
+                        Debug.Assert(
+                            !string.IsNullOrEmpty(node.Str),
+                            $"Expected non-null, non-empty string for {node.TypeName}."
+                        );
                         break;
 
                     default:
-                        Debug.Assert(node.Str is null, $"Expected null string for {node.TypeName}, got \"{node.Str}\".");
+                        Debug.Assert(
+                            node.Str is null,
+                            $"Expected null string for {node.TypeName}, got \"{node.Str}\"."
+                        );
                         break;
                 }
             }
@@ -342,7 +360,10 @@ namespace System.Text.RegularExpressions
                                 RegexNode? parent = node.Next;
                                 if (parent != null && parent.Type == Concatenate)
                                 {
-                                    parent.InsertChild(1, new RegexNode(UpdateBumpalong, node.Options));
+                                    parent.InsertChild(
+                                        1,
+                                        new RegexNode(UpdateBumpalong, node.Options)
+                                    );
                                 }
                                 break;
                         }
@@ -417,8 +438,13 @@ namespace System.Text.RegularExpressions
                     case Capture:
                     case Concatenate:
                         RegexNode existingChild = node.Child(node.ChildCount() - 1);
-                        if ((existingChild.Type == Alternate || existingChild.Type == Loop || existingChild.Type == Lazyloop) &&
-                            (node.Next is null || node.Next.Type != Atomic)) // validate grandparent isn't atomic
+                        if (
+                            (
+                                existingChild.Type == Alternate
+                                || existingChild.Type == Loop
+                                || existingChild.Type == Lazyloop
+                            ) && (node.Next is null || node.Next.Type != Atomic)
+                        ) // validate grandparent isn't atomic
                         {
                             var atomic = new RegexNode(Atomic, existingChild.Options);
                             atomic.AddChild(existingChild);
@@ -430,6 +456,7 @@ namespace System.Text.RegularExpressions
                     // For alternate, we can recur into each branch separately.  We use this iteration for the first branch.
                     // e.g. abc*|def* => ab(?>c*)|de(?>f*)
                     case Alternate:
+
                         {
                             int branches = node.ChildCount();
                             for (int i = 1; i < branches; i++)
@@ -444,8 +471,10 @@ namespace System.Text.RegularExpressions
                     // is we recur into processing it.
                     // e.g. (?:abc*)* => (?:ab(?>c*))*
                     case Loop:
+
                         {
-                            RegexNode? loopDescendent = node.FindLastExpressionInLoopForAutoAtomic();
+                            RegexNode? loopDescendent =
+                                node.FindLastExpressionInLoopForAutoAtomic();
                             if (loopDescendent != null)
                             {
                                 node = loopDescendent;
@@ -468,12 +497,16 @@ namespace System.Text.RegularExpressions
         public bool IsAtomicByParent()
         {
             RegexNode? next = Next;
-            if (next is null) return false;
-            if (next.Type == Atomic) return true;
+            if (next is null)
+                return false;
+            if (next.Type == Atomic)
+                return true;
 
             // We only walk up one group as a balance between optimization and cost.
-            if ((next.Type != Concatenate && next.Type != Capture) ||
-                next.Child(next.ChildCount() - 1) != this)
+            if (
+                (next.Type != Concatenate && next.Type != Capture)
+                || next.Child(next.ChildCount() - 1) != this
+            )
             {
                 return false;
             }
@@ -525,8 +558,9 @@ namespace System.Text.RegularExpressions
         private RegexNode ReplaceNodeIfUnnecessary(int emptyTypeIfNoChildren)
         {
             Debug.Assert(
-                (Type == Alternate && emptyTypeIfNoChildren == Nothing) ||
-                (Type == Concatenate && emptyTypeIfNoChildren == Empty));
+                (Type == Alternate && emptyTypeIfNoChildren == Nothing)
+                    || (Type == Concatenate && emptyTypeIfNoChildren == Empty)
+            );
 
             return ChildCount() switch
             {
@@ -653,7 +687,10 @@ namespace System.Text.RegularExpressions
 
                             // Find the contiguous range of nodes from this point that are similarly one, multi, or concat of those.
                             int endExclusive = start + 1;
-                            while (endExclusive < branches.Count && branches[endExclusive].FindBranchOneOrMultiStart() is not null)
+                            while (
+                                endExclusive < branches.Count
+                                && branches[endExclusive].FindBranchOneOrMultiStart() is not null
+                            )
                             {
                                 endExclusive++;
                             }
@@ -666,10 +703,17 @@ namespace System.Text.RegularExpressions
                                 while (compare < endExclusive)
                                 {
                                     // Get the starting character
-                                    char c = branches[compare].FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti();
+                                    char c = branches[
+                                        compare
+                                    ].FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti();
 
                                     // Move compare to point to the last branch that has the same starting value.
-                                    while (compare < endExclusive && branches[compare].FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti() == c)
+                                    while (
+                                        compare < endExclusive
+                                        && branches[
+                                            compare
+                                        ].FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti() == c
+                                    )
                                     {
                                         compare++;
                                     }
@@ -682,7 +726,10 @@ namespace System.Text.RegularExpressions
                                         for (int next = compare + 1; next < endExclusive; next++)
                                         {
                                             RegexNode nextChild = branches[next];
-                                            if (nextChild.FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti() == c)
+                                            if (
+                                                nextChild.FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti()
+                                                == c
+                                            )
                                             {
                                                 branches.RemoveAt(next);
                                                 branches.Insert(compare++, nextChild);
@@ -834,7 +881,9 @@ namespace System.Text.RegularExpressions
         private RegexNode ReduceSet()
         {
             // Extract empty-set, one, and not-one case as special
-            Debug.Assert(Type == Set || Type == Setloop || Type == Setloopatomic || Type == Setlazy);
+            Debug.Assert(
+                Type == Set || Type == Setloop || Type == Setloopatomic || Type == Setlazy
+            );
             Debug.Assert(!string.IsNullOrEmpty(Str));
 
             if (RegexCharClass.IsEmpty(Str))
@@ -847,20 +896,26 @@ namespace System.Text.RegularExpressions
                 Ch = RegexCharClass.SingletonChar(Str);
                 Str = null;
                 Type =
-                    Type == Set ? One :
-                    Type == Setloop ? Oneloop :
-                    Type == Setloopatomic ? Oneloopatomic :
-                    Onelazy;
+                    Type == Set
+                        ? One
+                        : Type == Setloop
+                            ? Oneloop
+                            : Type == Setloopatomic
+                                ? Oneloopatomic
+                                : Onelazy;
             }
             else if (RegexCharClass.IsSingletonInverse(Str))
             {
                 Ch = RegexCharClass.SingletonChar(Str);
                 Str = null;
                 Type =
-                    Type == Set ? Notone :
-                    Type == Setloop ? Notoneloop :
-                    Type == Setloopatomic ? Notoneloopatomic :
-                    Notonelazy;
+                    Type == Set
+                        ? Notone
+                        : Type == Setloop
+                            ? Notoneloop
+                            : Type == Setloopatomic
+                                ? Notoneloopatomic
+                                : Notonelazy;
             }
 
             return this;
@@ -932,11 +987,17 @@ namespace System.Text.RegularExpressions
                         else if (at.Type == Set || at.Type == One)
                         {
                             // Cannot merge sets if L or I options differ, or if either are negated.
-                            optionsAt = at.Options & (RegexOptions.RightToLeft | RegexOptions.IgnoreCase);
+                            optionsAt =
+                                at.Options & (RegexOptions.RightToLeft | RegexOptions.IgnoreCase);
 
                             if (at.Type == Set)
                             {
-                                if (!wasLastSet || optionsLast != optionsAt || lastNodeCannotMerge || !RegexCharClass.IsMergeable(at.Str!))
+                                if (
+                                    !wasLastSet
+                                    || optionsLast != optionsAt
+                                    || lastNodeCannotMerge
+                                    || !RegexCharClass.IsMergeable(at.Str!)
+                                )
                                 {
                                     wasLastSet = true;
                                     lastNodeCannotMerge = !RegexCharClass.IsMergeable(at.Str!);
@@ -951,7 +1012,6 @@ namespace System.Text.RegularExpressions
                                 optionsLast = optionsAt;
                                 break;
                             }
-
 
                             // The last node was a Set or a One, we're a Set or One and our options are the same.
                             // Merge the two nodes.
@@ -1050,7 +1110,7 @@ namespace System.Text.RegularExpressions
 
                     // Now compare the rest of the branches against it.
                     int endingIndex = startingIndex + 1;
-                    for ( ; endingIndex < children.Count; endingIndex++)
+                    for (; endingIndex < children.Count; endingIndex++)
                     {
                         // Get the starting node of the next branch.
                         startingNode = children[endingIndex].FindBranchOneOrMultiStart();
@@ -1080,7 +1140,8 @@ namespace System.Text.RegularExpressions
 
                             int minLength = Math.Min(startingSpan.Length, startingNode.Str.Length);
                             int c = 0;
-                            while (c < minLength && startingSpan[c] == startingNode.Str[c]) c++;
+                            while (c < minLength && startingSpan[c] == startingNode.Str[c])
+                                c++;
                             if (c == 0)
                             {
                                 break;
@@ -1105,15 +1166,19 @@ namespace System.Text.RegularExpressions
                     //     Concatenation(prefix, Alternation(each | node | with | prefix | removed))
                     // that replaces all these branches in this alternation.
 
-                    var prefix = startingSpan.Length == 1 ?
-                        new RegexNode(One, startingNodeOptions, startingSpan[0]) :
-                        new RegexNode(Multi, startingNodeOptions, startingSpan.ToString());
+                    var prefix =
+                        startingSpan.Length == 1
+                            ? new RegexNode(One, startingNodeOptions, startingSpan[0])
+                            : new RegexNode(Multi, startingNodeOptions, startingSpan.ToString());
                     var newAlternate = new RegexNode(Alternate, startingNodeOptions);
                     bool seenEmpty = false;
                     for (int i = startingIndex; i < endingIndex; i++)
                     {
                         RegexNode branch = children[i];
-                        ProcessOneOrMulti(branch.Type == Concatenate ? branch.Child(0) : branch, startingSpan);
+                        ProcessOneOrMulti(
+                            branch.Type == Concatenate ? branch.Child(0) : branch,
+                            startingSpan
+                        );
                         branch = branch.Reduce();
                         if (branch.Type == Empty)
                         {
@@ -1127,7 +1192,10 @@ namespace System.Text.RegularExpressions
 
                         // Remove the starting text from the one or multi node.  This may end up changing
                         // the type of the node to be Empty if the starting text matches the node's full value.
-                        static void ProcessOneOrMulti(RegexNode node, ReadOnlySpan<char> startingSpan)
+                        static void ProcessOneOrMulti(
+                            RegexNode node,
+                            ReadOnlySpan<char> startingSpan
+                        )
                         {
                             if (node.Type == One)
                             {
@@ -1139,7 +1207,11 @@ namespace System.Text.RegularExpressions
                             else
                             {
                                 Debug.Assert(node.Type == Multi);
-                                Debug.Assert(node.Str.AsSpan().StartsWith(startingSpan, StringComparison.Ordinal));
+                                Debug.Assert(
+                                    node.Str
+                                        .AsSpan()
+                                        .StartsWith(startingSpan, StringComparison.Ordinal)
+                                );
                                 if (node.Str!.Length == startingSpan.Length)
                                 {
                                     node.Type = Empty;
@@ -1219,7 +1291,9 @@ namespace System.Text.RegularExpressions
                 switch (node.Type)
                 {
                     case One:
-                    case Oneloop or Oneloopatomic or Onelazy when node.M > 0:
+                    case Oneloop
+                    or Oneloopatomic
+                    or Onelazy when node.M > 0:
                         c = node.Ch;
                         break;
 
@@ -1231,7 +1305,8 @@ namespace System.Text.RegularExpressions
                     case Concatenate:
                     case Capture:
                     case Group:
-                    case Loop or Lazyloop when node.M > 0:
+                    case Loop
+                    or Lazyloop when node.M > 0:
                     case Require:
                         node = node.Child(0);
                         continue;
@@ -1240,8 +1315,10 @@ namespace System.Text.RegularExpressions
                         return null;
                 }
 
-                if ((node.Options & RegexOptions.IgnoreCase) == 0 ||
-                    !RegexCharClass.ParticipatesInCaseConversion(c))
+                if (
+                    (node.Options & RegexOptions.IgnoreCase) == 0
+                    || !RegexCharClass.ParticipatesInCaseConversion(c)
+                )
                 {
                     return c;
                 }
@@ -1297,7 +1374,8 @@ namespace System.Text.RegularExpressions
 
             bool wasLastString = false;
             RegexOptions optionsLast = 0;
-            int i, j;
+            int i,
+                j;
 
             List<RegexNode> children = (List<RegexNode>)Children!;
             for (i = 0, j = 0; i < children.Count; i++, j++)
@@ -1309,8 +1387,13 @@ namespace System.Text.RegularExpressions
                     children[j] = at;
                 }
 
-                if (at.Type == Concatenate &&
-                    ((at.Options & RegexOptions.RightToLeft) == (Options & RegexOptions.RightToLeft)))
+                if (
+                    at.Type == Concatenate
+                    && (
+                        (at.Options & RegexOptions.RightToLeft)
+                        == (Options & RegexOptions.RightToLeft)
+                    )
+                )
                 {
                     if (at.Children is List<RegexNode> atChildren)
                     {
@@ -1331,7 +1414,8 @@ namespace System.Text.RegularExpressions
                 else if (at.Type == Multi || at.Type == One)
                 {
                     // Cannot merge strings if L or I options differ
-                    RegexOptions optionsAt = at.Options & (RegexOptions.RightToLeft | RegexOptions.IgnoreCase);
+                    RegexOptions optionsAt =
+                        at.Options & (RegexOptions.RightToLeft | RegexOptions.IgnoreCase);
 
                     if (!wasLastString || optionsLast != optionsAt)
                     {
@@ -1383,7 +1467,9 @@ namespace System.Text.RegularExpressions
             Debug.Assert(Children is List<RegexNode>);
 
             var children = (List<RegexNode>)Children!;
-            int current = 0, next = 1, nextSave = 1;
+            int current = 0,
+                next = 1,
+                nextSave = 1;
 
             while (next < children.Count)
             {
@@ -1396,17 +1482,21 @@ namespace System.Text.RegularExpressions
                     {
                         // We shouldn't have an infinite minimum; bail if we find one. Also check for the
                         // degenerate case where we'd make the min overflow or go infinite when it wasn't already.
-                        if (nodeMin == int.MaxValue ||
-                            nextMin == int.MaxValue ||
-                            (uint)nodeMin + (uint)nextMin >= int.MaxValue)
+                        if (
+                            nodeMin == int.MaxValue
+                            || nextMin == int.MaxValue
+                            || (uint)nodeMin + (uint)nextMin >= int.MaxValue
+                        )
                         {
                             return false;
                         }
 
                         // Similar overflow / go infinite check for max (which can be infinite).
-                        if (nodeMax != int.MaxValue &&
-                            nextMax != int.MaxValue &&
-                            (uint)nodeMax + (uint)nextMax >= int.MaxValue)
+                        if (
+                            nodeMax != int.MaxValue
+                            && nextMax != int.MaxValue
+                            && (uint)nodeMax + (uint)nextMax >= int.MaxValue
+                        )
                         {
                             return false;
                         }
@@ -1418,20 +1508,39 @@ namespace System.Text.RegularExpressions
                     {
                         // Coalescing a loop with its same type
                         case Oneloop when nextNode.Type == Oneloop && currentNode.Ch == nextNode.Ch:
-                        case Oneloopatomic when nextNode.Type == Oneloopatomic && currentNode.Ch == nextNode.Ch:
+                        case Oneloopatomic
+                              when nextNode.Type == Oneloopatomic && currentNode.Ch == nextNode.Ch:
                         case Onelazy when nextNode.Type == Onelazy && currentNode.Ch == nextNode.Ch:
-                        case Notoneloop when nextNode.Type == Notoneloop && currentNode.Ch == nextNode.Ch:
-                        case Notoneloopatomic when nextNode.Type == Notoneloopatomic && currentNode.Ch == nextNode.Ch:
-                        case Notonelazy when nextNode.Type == Notonelazy && currentNode.Ch == nextNode.Ch:
-                        case Setloop when nextNode.Type == Setloop && currentNode.Str == nextNode.Str:
-                        case Setloopatomic when nextNode.Type == Setloopatomic && currentNode.Str == nextNode.Str:
-                        case Setlazy when nextNode.Type == Setlazy && currentNode.Str == nextNode.Str:
-                            if (CanCombineCounts(currentNode.M, currentNode.N, nextNode.M, nextNode.N))
+                        case Notoneloop
+                              when nextNode.Type == Notoneloop && currentNode.Ch == nextNode.Ch:
+                        case Notoneloopatomic
+                              when nextNode.Type == Notoneloopatomic
+                                  && currentNode.Ch == nextNode.Ch:
+                        case Notonelazy
+                              when nextNode.Type == Notonelazy && currentNode.Ch == nextNode.Ch:
+                        case Setloop
+                              when nextNode.Type == Setloop && currentNode.Str == nextNode.Str:
+                        case Setloopatomic
+                              when nextNode.Type == Setloopatomic
+                                  && currentNode.Str == nextNode.Str:
+                        case Setlazy
+                              when nextNode.Type == Setlazy && currentNode.Str == nextNode.Str:
+                            if (
+                                CanCombineCounts(
+                                    currentNode.M,
+                                    currentNode.N,
+                                    nextNode.M,
+                                    nextNode.N
+                                )
+                            )
                             {
                                 currentNode.M += nextNode.M;
                                 if (currentNode.N != int.MaxValue)
                                 {
-                                    currentNode.N = nextNode.N == int.MaxValue ? int.MaxValue : currentNode.N + nextNode.N;
+                                    currentNode.N =
+                                        nextNode.N == int.MaxValue
+                                            ? int.MaxValue
+                                            : currentNode.N + nextNode.N;
                                 }
                                 next++;
                                 continue;
@@ -1440,13 +1549,18 @@ namespace System.Text.RegularExpressions
 
                         // Coalescing a loop with an additional item of the same type
                         case Oneloop when nextNode.Type == One && currentNode.Ch == nextNode.Ch:
-                        case Oneloopatomic when nextNode.Type == One && currentNode.Ch == nextNode.Ch:
+                        case Oneloopatomic
+                              when nextNode.Type == One && currentNode.Ch == nextNode.Ch:
                         case Onelazy when nextNode.Type == One && currentNode.Ch == nextNode.Ch:
-                        case Notoneloop when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
-                        case Notoneloopatomic when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
-                        case Notonelazy when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
+                        case Notoneloop
+                              when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
+                        case Notoneloopatomic
+                              when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
+                        case Notonelazy
+                              when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
                         case Setloop when nextNode.Type == Set && currentNode.Str == nextNode.Str:
-                        case Setloopatomic when nextNode.Type == Set && currentNode.Str == nextNode.Str:
+                        case Setloopatomic
+                              when nextNode.Type == Set && currentNode.Str == nextNode.Str:
                         case Setlazy when nextNode.Type == Set && currentNode.Str == nextNode.Str:
                             if (CanCombineCounts(currentNode.M, currentNode.N, 1, 1))
                             {
@@ -1461,14 +1575,33 @@ namespace System.Text.RegularExpressions
                             break;
 
                         // Coalescing an individual item with a loop.
-                        case One when (nextNode.Type == Oneloop || nextNode.Type == Oneloopatomic || nextNode.Type == Onelazy) && currentNode.Ch == nextNode.Ch:
-                        case Notone when (nextNode.Type == Notoneloop || nextNode.Type == Notoneloopatomic || nextNode.Type == Notonelazy) && currentNode.Ch == nextNode.Ch:
-                        case Set when (nextNode.Type == Setloop || nextNode.Type == Setloopatomic || nextNode.Type == Setlazy) && currentNode.Str == nextNode.Str:
+                        case One
+                              when (
+                                  nextNode.Type == Oneloop
+                                  || nextNode.Type == Oneloopatomic
+                                  || nextNode.Type == Onelazy
+                              )
+                                  && currentNode.Ch == nextNode.Ch:
+                        case Notone
+                              when (
+                                  nextNode.Type == Notoneloop
+                                  || nextNode.Type == Notoneloopatomic
+                                  || nextNode.Type == Notonelazy
+                              )
+                                  && currentNode.Ch == nextNode.Ch:
+                        case Set
+                              when (
+                                  nextNode.Type == Setloop
+                                  || nextNode.Type == Setloopatomic
+                                  || nextNode.Type == Setlazy
+                              )
+                                  && currentNode.Str == nextNode.Str:
                             if (CanCombineCounts(1, 1, nextNode.M, nextNode.N))
                             {
                                 currentNode.Type = nextNode.Type;
                                 currentNode.M = nextNode.M + 1;
-                                currentNode.N = nextNode.N == int.MaxValue ? int.MaxValue : nextNode.N + 1;
+                                currentNode.N =
+                                    nextNode.N == int.MaxValue ? int.MaxValue : nextNode.N + 1;
                                 next++;
                                 continue;
                             }
@@ -1542,7 +1675,8 @@ namespace System.Text.RegularExpressions
                         // compatible for the optimization.
                         if (node.Type == Loop)
                         {
-                            RegexNode? loopDescendent = node.FindLastExpressionInLoopForAutoAtomic();
+                            RegexNode? loopDescendent =
+                                node.FindLastExpressionInLoopForAutoAtomic();
                             if (loopDescendent != null)
                             {
                                 node = loopDescendent;
@@ -1563,6 +1697,7 @@ namespace System.Text.RegularExpressions
                             node.MakeLoopAtomic();
                             break;
                         case Alternate:
+
                             // In the case of alternation, we can't change the alternation node itself
                             // based on what comes after it (at least not with more complicated analysis
                             // that factors in all branches together), but we can look at each individual
@@ -1693,9 +1828,15 @@ namespace System.Text.RegularExpressions
                         case Notoneloopatomic when subsequent.M > 0 && node.Ch == subsequent.Ch:
                         case Multi when node.Ch != subsequent.Str![0]:
                         case Set when !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
-                        case Setlazy when subsequent.M > 0 && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
-                        case Setloop when subsequent.M > 0 && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
-                        case Setloopatomic when subsequent.M > 0 && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
+                        case Setlazy
+                              when subsequent.M > 0
+                                  && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
+                        case Setloop
+                              when subsequent.M > 0
+                                  && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
+                        case Setloopatomic
+                              when subsequent.M > 0
+                                  && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
                         case End:
                         case EndZ when node.Ch != '\n':
                         case Eol when node.Ch != '\n':
@@ -1724,21 +1865,41 @@ namespace System.Text.RegularExpressions
                     switch (subsequent.Type)
                     {
                         case One when !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
-                        case Onelazy when subsequent.M > 0 && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
-                        case Oneloop when subsequent.M > 0 && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
-                        case Oneloopatomic when subsequent.M > 0 && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
+                        case Onelazy
+                              when subsequent.M > 0
+                                  && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
+                        case Oneloop
+                              when subsequent.M > 0
+                                  && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
+                        case Oneloopatomic
+                              when subsequent.M > 0
+                                  && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
                         case Multi when !RegexCharClass.CharInClass(subsequent.Str![0], node.Str!):
                         case Set when !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
-                        case Setlazy when subsequent.M > 0 && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
-                        case Setloop when subsequent.M > 0 && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
-                        case Setloopatomic when subsequent.M > 0 && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
+                        case Setlazy
+                              when subsequent.M > 0
+                                  && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
+                        case Setloop
+                              when subsequent.M > 0
+                                  && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
+                        case Setloopatomic
+                              when subsequent.M > 0
+                                  && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
                         case End:
                         case EndZ when !RegexCharClass.CharInClass('\n', node.Str!):
                         case Eol when !RegexCharClass.CharInClass('\n', node.Str!):
-                        case Boundary when node.Str == RegexCharClass.WordClass || node.Str == RegexCharClass.DigitClass:
-                        case NonBoundary when node.Str == RegexCharClass.NotWordClass || node.Str == RegexCharClass.NotDigitClass:
-                        case ECMABoundary when node.Str == RegexCharClass.ECMAWordClass || node.Str == RegexCharClass.ECMADigitClass:
-                        case NonECMABoundary when node.Str == RegexCharClass.NotECMAWordClass || node.Str == RegexCharClass.NotDigitClass:
+                        case Boundary
+                              when node.Str == RegexCharClass.WordClass
+                                  || node.Str == RegexCharClass.DigitClass:
+                        case NonBoundary
+                              when node.Str == RegexCharClass.NotWordClass
+                                  || node.Str == RegexCharClass.NotDigitClass:
+                        case ECMABoundary
+                              when node.Str == RegexCharClass.ECMAWordClass
+                                  || node.Str == RegexCharClass.ECMADigitClass:
+                        case NonECMABoundary
+                              when node.Str == RegexCharClass.NotECMAWordClass
+                                  || node.Str == RegexCharClass.NotDigitClass:
                             return true;
                     }
                     break;
@@ -1790,29 +1951,29 @@ namespace System.Text.RegularExpressions
                     return (int)Math.Min(int.MaxValue, (long)M * Child(0).ComputeMinLength());
 
                 case Alternate:
-                    // The minimum required length for any of the alternation's branches.
+                // The minimum required length for any of the alternation's branches.
+                {
+                    int childCount = ChildCount();
+                    Debug.Assert(childCount >= 2);
+                    int min = Child(0).ComputeMinLength();
+                    for (int i = 1; i < childCount && min > 0; i++)
                     {
-                        int childCount = ChildCount();
-                        Debug.Assert(childCount >= 2);
-                        int min = Child(0).ComputeMinLength();
-                        for (int i = 1; i < childCount && min > 0; i++)
-                        {
-                            min = Math.Min(min, Child(i).ComputeMinLength());
-                        }
-                        return min;
+                        min = Math.Min(min, Child(i).ComputeMinLength());
                     }
+                    return min;
+                }
 
                 case Concatenate:
-                    // The sum of all of the concatenation's children.
+                // The sum of all of the concatenation's children.
+                {
+                    long sum = 0;
+                    int childCount = ChildCount();
+                    for (int i = 0; i < childCount; i++)
                     {
-                        long sum = 0;
-                        int childCount = ChildCount();
-                        for (int i = 0; i < childCount; i++)
-                        {
-                            sum += Child(i).ComputeMinLength();
-                        }
-                        return (int)Math.Min(int.MaxValue, sum);
+                        sum += Child(i).ComputeMinLength();
                     }
+                    return (int)Math.Min(int.MaxValue, sum);
+                }
 
                 case Atomic:
                 case Capture:
@@ -1874,17 +2035,29 @@ namespace System.Text.RegularExpressions
         /// remains focused on only a core subset of nodes that are a) likely to be used in concatenations and
         /// b) employ simple patterns of checks.
         /// </remarks>
-        public bool TryGetJoinableLengthCheckChildRange(int childIndex, out int requiredLength, out int exclusiveEnd)
+        public bool TryGetJoinableLengthCheckChildRange(
+            int childIndex,
+            out int requiredLength,
+            out int exclusiveEnd
+        )
         {
-            static bool CanJoinLengthCheck(RegexNode node) => node.Type switch
-            {
-                One or Notone or Set => true,
-                Multi => true,
-                Oneloop or Onelazy or Oneloopatomic or
-                    Notoneloop or Notonelazy or Notoneloopatomic or
-                    Setloop or Setlazy or Setloopatomic when node.M == node.N => true,
-                _ => false,
-            };
+            static bool CanJoinLengthCheck(RegexNode node) =>
+                node.Type switch
+                {
+                    One or Notone or Set => true,
+                    Multi => true,
+                    Oneloop
+                    or Onelazy
+                    or Oneloopatomic
+                    or Notoneloop
+                    or Notonelazy
+                    or Notoneloopatomic
+                    or Setloop
+                    or Setlazy
+                    or Setloopatomic when node.M == node.N
+                      => true,
+                    _ => false,
+                };
 
             RegexNode child = Child(childIndex);
             if (CanJoinLengthCheck(child))
@@ -2073,7 +2246,10 @@ namespace System.Text.RegularExpressions
                     case Oneloop:
                     case Notoneloop:
                     case Setloop:
-                        Debug.Assert(Next == null || Next.Type != Atomic, "Loop should have been transformed into an atomic type.");
+                        Debug.Assert(
+                            Next == null || Next.Type != Atomic,
+                            "Loop should have been transformed into an atomic type."
+                        );
                         supported = M == N || AncestorsAllowBacktracking(Next);
                         static bool AncestorsAllowBacktracking(RegexNode? node)
                         {
@@ -2107,8 +2283,8 @@ namespace System.Text.RegularExpressions
                     case Loop:
                     case Lazyloop:
                         supported =
-                            (M == N || (Next != null && Next.Type == Atomic)) &&
-                            Child(0).SupportsSimplifiedCodeGenerationImplementation();
+                            (M == N || (Next != null && Next.Type == Atomic))
+                            && Child(0).SupportsSimplifiedCodeGenerationImplementation();
                         break;
 
                     // We can handle atomic as long as we can handle making its child atomic, or
@@ -2126,9 +2302,14 @@ namespace System.Text.RegularExpressions
                     // effectively atomic, as nothing will try to backtrack into it as it's the last thing).
                     // Its children must all also be supported.
                     case Alternate:
-                        if (Next != null &&
-                            (IsAtomicByParent() || // atomic alternate
-                            (Next.Type == Capture && Next.Next is null))) // root alternate
+                        if (
+                            Next != null
+                            && (
+                                IsAtomicByParent()
+                                || // atomic alternate
+                                (Next.Type == Capture && Next.Next is null)
+                            )
+                        ) // root alternate
                         {
                             goto case Concatenate;
                         }
@@ -2176,14 +2357,17 @@ namespace System.Text.RegularExpressions
                             if (supported)
                             {
                                 // And we only support them if their children are supported.
-                                supported = Child(0).SupportsSimplifiedCodeGenerationImplementation();
+                                supported = Child(0)
+                                    .SupportsSimplifiedCodeGenerationImplementation();
 
                                 // If we've found a supported capture, mark all of the nodes in its parent
                                 // hierarchy as containing a capture.
                                 if (supported)
                                 {
                                     parent = this;
-                                    while (parent != null && ((parent.Options & HasCapturesFlag) == 0))
+                                    while (
+                                        parent != null && ((parent.Options & HasCapturesFlag) == 0)
+                                    )
                                     {
                                         parent.Options |= HasCapturesFlag;
                                         parent = parent.Next;
@@ -2197,7 +2381,9 @@ namespace System.Text.RegularExpressions
 #if DEBUG
             if (!supported && (Options & RegexOptions.Debug) != 0)
             {
-                Debug.WriteLine($"Unable to use non-backtracking code gen: node {Description()} isn't supported.");
+                Debug.WriteLine(
+                    $"Unable to use non-backtracking code gen: node {Description()} isn't supported."
+                );
             }
 #endif
             return supported;
@@ -2210,13 +2396,22 @@ namespace System.Text.RegularExpressions
         public bool IsOneFamily => Type is One or Oneloop or Oneloopatomic or Onelazy;
 
         /// <summary>Gets whether the node is a Notone/Notoneloop/Notoneloopatomic/Notonelazy node.</summary>
-        public bool IsNotoneFamily => Type is Notone or Notoneloop or Notoneloopatomic or Notonelazy;
+        public bool IsNotoneFamily =>
+            Type is Notone or Notoneloop or Notoneloopatomic or Notonelazy;
 
         /// <summary>Gets whether this node may be a source of backtracking.</summary>
         public bool InstigatesBacktracking =>
             Type switch
             {
-                Oneloop or Notoneloop or Setloop or Onelazy or Notonelazy or Setlazy or Loop or Lazyloop when !IsAtomicByParent() && M != N => true,
+                Oneloop
+                or Notoneloop
+                or Setloop
+                or Onelazy
+                or Notonelazy
+                or Setlazy
+                or Loop
+                or Lazyloop when !IsAtomicByParent() && M != N
+                  => true,
                 Alternate => !IsAtomicByParent(),
                 Ref or Testref or Testgroup => true,
                 _ => false,
@@ -2271,13 +2466,20 @@ namespace System.Text.RegularExpressions
         {
             var sb = new StringBuilder(TypeName);
 
-            if ((Options & RegexOptions.ExplicitCapture) != 0) sb.Append("-C");
-            if ((Options & RegexOptions.IgnoreCase) != 0) sb.Append("-I");
-            if ((Options & RegexOptions.RightToLeft) != 0) sb.Append("-L");
-            if ((Options & RegexOptions.Multiline) != 0) sb.Append("-M");
-            if ((Options & RegexOptions.Singleline) != 0) sb.Append("-S");
-            if ((Options & RegexOptions.IgnorePatternWhitespace) != 0) sb.Append("-X");
-            if ((Options & RegexOptions.ECMAScript) != 0) sb.Append("-E");
+            if ((Options & RegexOptions.ExplicitCapture) != 0)
+                sb.Append("-C");
+            if ((Options & RegexOptions.IgnoreCase) != 0)
+                sb.Append("-I");
+            if ((Options & RegexOptions.RightToLeft) != 0)
+                sb.Append("-L");
+            if ((Options & RegexOptions.Multiline) != 0)
+                sb.Append("-M");
+            if ((Options & RegexOptions.Singleline) != 0)
+                sb.Append("-S");
+            if ((Options & RegexOptions.IgnorePatternWhitespace) != 0)
+                sb.Append("-X");
+            if ((Options & RegexOptions.ECMAScript) != 0)
+                sb.Append("-E");
 
             switch (Type)
             {
@@ -2327,12 +2529,18 @@ namespace System.Text.RegularExpressions
                 case Loop:
                 case Lazyloop:
                     sb.Append(
-                        (M == 0 && N == int.MaxValue) ? "*" :
-                        (M == 0 && N == 1) ? "?" :
-                        (M == 1 && N == int.MaxValue) ? "+" :
-                        (N == int.MaxValue) ? $"{{{M}, *}}" :
-                        (N == M) ? $"{{{M}}}" :
-                        $"{{{M}, {N}}}");
+                        (M == 0 && N == int.MaxValue)
+                          ? "*"
+                          : (M == 0 && N == 1)
+                              ? "?"
+                              : (M == 1 && N == int.MaxValue)
+                                  ? "+"
+                                  : (N == int.MaxValue)
+                                      ? $"{{{M}, *}}"
+                                      : (N == M)
+                                          ? $"{{{M}}}"
+                                          : $"{{{M}, {N}}}"
+                    );
                     break;
             }
 
@@ -2358,7 +2566,9 @@ namespace System.Text.RegularExpressions
                     curNode = curNode.Child(curChild);
                     curChild = 0;
 
-                    sb.Append(new string(' ', stack.Count * 2)).Append(curNode.Description()).AppendLine();
+                    sb.Append(new string(' ', stack.Count * 2))
+                        .Append(curNode.Description())
+                        .AppendLine();
                 }
                 else
                 {

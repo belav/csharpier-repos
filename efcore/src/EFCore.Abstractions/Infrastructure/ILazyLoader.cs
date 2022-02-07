@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         void SetLoaded(
             object entity,
             [CallerMemberName] string navigationName = "",
-            bool loaded = true);
+            bool loaded = true
+        );
 
         /// <summary>
         ///     Loads a navigation property if it has not already been loaded.
@@ -57,6 +58,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 #pragma warning restore CA1068 // CancellationToken parameters must come last
             object entity,
             CancellationToken cancellationToken = default,
-            [CallerMemberName] string navigationName = "");
+            [CallerMemberName] string navigationName = ""
+        );
     }
 }

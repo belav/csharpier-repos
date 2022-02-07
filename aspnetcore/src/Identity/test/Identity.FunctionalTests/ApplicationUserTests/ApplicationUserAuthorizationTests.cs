@@ -7,9 +7,10 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.IdentityUserTests;
 
-public class ApplicationUserAuthorizationTests : AuthorizationTests<ApplicationUserStartup, ApplicationDbContext>
+public class ApplicationUserAuthorizationTests
+    : AuthorizationTests<ApplicationUserStartup, ApplicationDbContext>
 {
-    public ApplicationUserAuthorizationTests(ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory) : base(serverFactory)
-    {
-    }
+    public ApplicationUserAuthorizationTests(
+        ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory
+    ) : base(serverFactory) { }
 }

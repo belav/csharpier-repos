@@ -10,13 +10,18 @@ namespace Microsoft.Extensions.FileProviders.Physical.Internal
     internal static class PathUtils
     {
         private static readonly char[] _invalidFileNameChars = Path.GetInvalidFileNameChars()
-            .Where(c => c != Path.DirectorySeparatorChar && c != Path.AltDirectorySeparatorChar).ToArray();
+            .Where(c => c != Path.DirectorySeparatorChar && c != Path.AltDirectorySeparatorChar)
+            .ToArray();
 
         private static readonly char[] _invalidFilterChars = _invalidFileNameChars
-            .Where(c => c != '*' && c != '|' && c != '?').ToArray();
+            .Where(c => c != '*' && c != '|' && c != '?')
+            .ToArray();
 
         private static readonly char[] _pathSeparators = new[]
-            {Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar};
+        {
+            Path.DirectorySeparatorChar,
+            Path.AltDirectorySeparatorChar
+        };
 
         internal static bool HasInvalidPathChars(string path)
         {
@@ -30,8 +35,7 @@ namespace Microsoft.Extensions.FileProviders.Physical.Internal
 
         internal static string EnsureTrailingSlash(string path)
         {
-            if (!string.IsNullOrEmpty(path) &&
-                path[path.Length - 1] != Path.DirectorySeparatorChar)
+            if (!string.IsNullOrEmpty(path) && path[path.Length - 1] != Path.DirectorySeparatorChar)
             {
                 return path + Path.DirectorySeparatorChar;
             }

@@ -32,7 +32,13 @@ namespace System.Diagnostics
             // Otherwise enumerate all processes and compare ids
             if (!IsRemoteMachine(machineName))
             {
-                using (SafeProcessHandle processHandle = Interop.Kernel32.OpenProcess(ProcessOptions.PROCESS_QUERY_INFORMATION, false, processId))
+                using (
+                    SafeProcessHandle processHandle = Interop.Kernel32.OpenProcess(
+                        ProcessOptions.PROCESS_QUERY_INFORMATION,
+                        false,
+                        processId
+                    )
+                )
                 {
                     if (!processHandle.IsInvalid)
                     {
@@ -49,9 +55,9 @@ namespace System.Diagnostics
         /// <returns>An array of process infos, one per found process.</returns>
         public static ProcessInfo[] GetProcessInfos(string machineName)
         {
-            return IsRemoteMachine(machineName) ?
-                NtProcessManager.GetProcessInfos(machineName, isRemoteMachine: true) :
-                NtProcessInfoHelper.GetProcessInfos();
+            return IsRemoteMachine(machineName)
+              ? NtProcessManager.GetProcessInfos(machineName, isRemoteMachine: true)
+              : NtProcessInfoHelper.GetProcessInfos();
         }
 
         /// <summary>Gets the ProcessInfo for the specified process ID on the specified machine.</summary>
@@ -63,7 +69,10 @@ namespace System.Diagnostics
             if (IsRemoteMachine(machineName))
             {
                 // remote case: we take the hit of looping through all results
-                ProcessInfo[] processInfos = NtProcessManager.GetProcessInfos(machineName, isRemoteMachine: true);
+                ProcessInfo[] processInfos = NtProcessManager.GetProcessInfos(
+                    machineName,
+                    isRemoteMachine: true
+                );
                 foreach (ProcessInfo processInfo in processInfos)
                 {
                     if (processInfo.ProcessId == processId)
@@ -94,9 +103,9 @@ namespace System.Diagnostics
             // on PerformanceCounters to get the ProcessIds for both remote desktop
             // and the local machine, unlike Desktop on which we rely on PCs only for
             // remote machines.
-            return IsRemoteMachine(machineName) ?
-                NtProcessManager.GetProcessIds(machineName, true) :
-                GetProcessIds();
+            return IsRemoteMachine(machineName)
+              ? NtProcessManager.GetProcessIds(machineName, true)
+              : GetProcessIds();
         }
 
         /// <summary>Gets the IDs of all processes on the current machine.</summary>
@@ -124,9 +133,11 @@ namespace System.Diagnostics
         private static bool IsRemoteMachineCore(string machineName)
         {
             ReadOnlySpan<char> baseName = machineName.AsSpan(machineName.StartsWith('\\') ? 2 : 0);
-            return
-                !baseName.Equals(".", StringComparison.Ordinal) &&
-                !baseName.Equals(Interop.Kernel32.GetComputerName(), StringComparison.OrdinalIgnoreCase);
+            return !baseName.Equals(".", StringComparison.Ordinal)
+                && !baseName.Equals(
+                    Interop.Kernel32.GetComputerName(),
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         static unsafe ProcessManager()
@@ -139,7 +150,13 @@ namespace System.Diagnostics
             // We could fail if the user account doesn't have right to do this, but that's fair.
 
             Interop.Advapi32.LUID luid;
-            if (!Interop.Advapi32.LookupPrivilegeValue(null, Interop.Advapi32.SeDebugPrivilege, out luid))
+            if (
+                !Interop.Advapi32.LookupPrivilegeValue(
+                    null,
+                    Interop.Advapi32.SeDebugPrivilege,
+                    out luid
+                )
+            )
             {
                 return;
             }
@@ -147,10 +164,13 @@ namespace System.Diagnostics
             SafeTokenHandle? tokenHandle = null;
             try
             {
-                if (!Interop.Advapi32.OpenProcessToken(
+                if (
+                    !Interop.Advapi32.OpenProcessToken(
                         Interop.Kernel32.GetCurrentProcess(),
                         Interop.Kernel32.HandleOptions.TOKEN_ADJUST_PRIVILEGES,
-                        out tokenHandle))
+                        out tokenHandle
+                    )
+                )
                 {
                     return;
                 }
@@ -174,7 +194,11 @@ namespace System.Diagnostics
 
         public static SafeProcessHandle OpenProcess(int processId, int access, bool throwIfExited)
         {
-            SafeProcessHandle processHandle = Interop.Kernel32.OpenProcess(access, false, processId);
+            SafeProcessHandle processHandle = Interop.Kernel32.OpenProcess(
+                access,
+                false,
+                processId
+            );
             int result = Marshal.GetLastWin32Error();
             if (!processHandle.IsInvalid)
             {
@@ -192,7 +216,9 @@ namespace System.Diagnostics
             {
                 if (throwIfExited)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.ProcessHasExited, processId.ToString()));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.ProcessHasExited, processId.ToString())
+                    );
                 }
                 else
                 {
@@ -209,7 +235,9 @@ namespace System.Diagnostics
             if (threadHandle.IsInvalid)
             {
                 if (result == Interop.Errors.ERROR_INVALID_PARAMETER)
-                    throw new InvalidOperationException(SR.Format(SR.ThreadExited, threadId.ToString()));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.ThreadExited, threadId.ToString())
+                    );
                 throw new Win32Exception(result);
             }
             return threadHandle;
@@ -229,7 +257,10 @@ namespace System.Diagnostics
         private const string PerfCounterQueryString = "230 232";
         internal const int IdleProcessID = 0;
 
-        private static readonly Dictionary<string, ValueId> s_valueIds = new Dictionary<string, ValueId>(19)
+        private static readonly Dictionary<string, ValueId> s_valueIds = new Dictionary<
+            string,
+            ValueId
+        >(19)
         {
             { "Pool Paged Bytes", ValueId.PoolPagedBytes },
             { "Pool Nonpaged Bytes", ValueId.PoolNonpagedBytes },
@@ -316,7 +347,10 @@ namespace System.Diagnostics
             {
                 // We don't want to call library.Close() here because that would cause us to unload all of the perflibs.
                 // On the next call to GetProcessInfos, we'd have to load them all up again, which is SLOW!
-                PerformanceCounterLib library = PerformanceCounterLib.GetPerformanceCounterLib(machineName, new CultureInfo("en"));
+                PerformanceCounterLib library = PerformanceCounterLib.GetPerformanceCounterLib(
+                    machineName,
+                    new CultureInfo("en")
+                );
                 return GetProcessInfos(library);
             }
             catch (Exception e)
@@ -342,7 +376,12 @@ namespace System.Diagnostics
                 try
                 {
                     byte[]? dataPtr = library.GetPerformanceData(PerfCounterQueryString);
-                    processInfos = GetProcessInfos(library, ProcessPerfCounterId, ThreadPerfCounterId, dataPtr);
+                    processInfos = GetProcessInfos(
+                        library,
+                        ProcessPerfCounterId,
+                        ThreadPerfCounterId,
+                        dataPtr
+                    );
                 }
                 catch (Exception e)
                 {
@@ -350,8 +389,7 @@ namespace System.Diagnostics
                 }
 
                 --retryCount;
-            }
-            while (processInfos.Length == 0 && retryCount != 0);
+            } while (processInfos.Length == 0 && retryCount != 0);
 
             if (processInfos.Length == 0)
                 throw new InvalidOperationException(SR.ProcessDisabled);
@@ -359,7 +397,12 @@ namespace System.Diagnostics
             return processInfos;
         }
 
-        private static ProcessInfo[] GetProcessInfos(PerformanceCounterLib library, int processIndex, int threadIndex, ReadOnlySpan<byte> data)
+        private static ProcessInfo[] GetProcessInfos(
+            PerformanceCounterLib library,
+            int processIndex,
+            int threadIndex,
+            ReadOnlySpan<byte> data
+        )
         {
             Dictionary<int, ProcessInfo> processInfos = new Dictionary<int, ProcessInfo>();
             List<ThreadInfo> threadInfos = new List<ThreadInfo>();
@@ -369,14 +412,17 @@ namespace System.Diagnostics
             int typePos = dataBlock.HeaderLength;
             for (int i = 0; i < dataBlock.NumObjectTypes; i++)
             {
-                ref readonly PERF_OBJECT_TYPE type = ref MemoryMarshal.AsRef<PERF_OBJECT_TYPE>(data.Slice(typePos));
+                ref readonly PERF_OBJECT_TYPE type = ref MemoryMarshal.AsRef<PERF_OBJECT_TYPE>(
+                    data.Slice(typePos)
+                );
 
                 PERF_COUNTER_DEFINITION[] counters = new PERF_COUNTER_DEFINITION[type.NumCounters];
 
                 int counterPos = typePos + type.HeaderLength;
                 for (int j = 0; j < type.NumCounters; j++)
                 {
-                    ref readonly PERF_COUNTER_DEFINITION counter = ref MemoryMarshal.AsRef<PERF_COUNTER_DEFINITION>(data.Slice(counterPos));
+                    ref readonly PERF_COUNTER_DEFINITION counter =
+                        ref MemoryMarshal.AsRef<PERF_COUNTER_DEFINITION>(data.Slice(counterPos));
 
                     string counterName = library.GetCounterName(counter.CounterNameTitleIndex);
 
@@ -392,9 +438,13 @@ namespace System.Diagnostics
                 int instancePos = typePos + type.DefinitionLength;
                 for (int j = 0; j < type.NumInstances; j++)
                 {
-                    ref readonly PERF_INSTANCE_DEFINITION instance = ref MemoryMarshal.AsRef<PERF_INSTANCE_DEFINITION>(data.Slice(instancePos));
+                    ref readonly PERF_INSTANCE_DEFINITION instance =
+                        ref MemoryMarshal.AsRef<PERF_INSTANCE_DEFINITION>(data.Slice(instancePos));
 
-                    ReadOnlySpan<char> instanceName = PERF_INSTANCE_DEFINITION.GetName(in instance, data.Slice(instancePos));
+                    ReadOnlySpan<char> instanceName = PERF_INSTANCE_DEFINITION.GetName(
+                        in instance,
+                        data.Slice(instancePos)
+                    );
 
                     if (instanceName.Equals("_Total", StringComparison.Ordinal))
                     {
@@ -402,8 +452,14 @@ namespace System.Diagnostics
                     }
                     else if (type.ObjectNameTitleIndex == processIndex)
                     {
-                        ProcessInfo processInfo = GetProcessInfo(data.Slice(instancePos + instance.ByteLength), counters);
-                        if (processInfo.ProcessId == 0 && !instanceName.Equals("Idle", StringComparison.OrdinalIgnoreCase))
+                        ProcessInfo processInfo = GetProcessInfo(
+                            data.Slice(instancePos + instance.ByteLength),
+                            counters
+                        );
+                        if (
+                            processInfo.ProcessId == 0
+                            && !instanceName.Equals("Idle", StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             // Sometimes we'll get a process structure that is not completely filled in.
                             // We can catch some of these by looking for non-"idle" processes that have id 0
@@ -444,7 +500,10 @@ namespace System.Diagnostics
                     }
                     else if (type.ObjectNameTitleIndex == threadIndex)
                     {
-                        ThreadInfo threadInfo = GetThreadInfo(data.Slice(instancePos + instance.ByteLength), counters);
+                        ThreadInfo threadInfo = GetThreadInfo(
+                            data.Slice(instancePos + instance.ByteLength),
+                            counters
+                        );
                         if (threadInfo._threadId != 0)
                         {
                             threadInfos.Add(threadInfo);
@@ -453,7 +512,8 @@ namespace System.Diagnostics
 
                     instancePos += instance.ByteLength;
 
-                    instancePos += MemoryMarshal.AsRef<PERF_COUNTER_BLOCK>(data.Slice(instancePos)).ByteLength;
+                    instancePos +=
+                        MemoryMarshal.AsRef<PERF_COUNTER_BLOCK>(data.Slice(instancePos)).ByteLength;
                 }
 
                 typePos += type.TotalByteLength;
@@ -473,13 +533,19 @@ namespace System.Diagnostics
             return temp;
         }
 
-        private static ThreadInfo GetThreadInfo(ReadOnlySpan<byte> instanceData, PERF_COUNTER_DEFINITION[] counters)
+        private static ThreadInfo GetThreadInfo(
+            ReadOnlySpan<byte> instanceData,
+            PERF_COUNTER_DEFINITION[] counters
+        )
         {
             ThreadInfo threadInfo = new ThreadInfo();
             for (int i = 0; i < counters.Length; i++)
             {
                 PERF_COUNTER_DEFINITION counter = counters[i];
-                long value = ReadCounterValue(counter.CounterType, instanceData.Slice(counter.CounterOffset));
+                long value = ReadCounterValue(
+                    counter.CounterType,
+                    instanceData.Slice(counter.CounterOffset)
+                );
                 switch ((ValueId)counter.CounterNameTitlePtr)
                 {
                     case ValueId.ProcessId:
@@ -514,36 +580,56 @@ namespace System.Diagnostics
             switch (value)
             {
                 case 0:
-                case 7: return ThreadWaitReason.Executive;
+                case 7:
+                    return ThreadWaitReason.Executive;
                 case 1:
-                case 8: return ThreadWaitReason.FreePage;
+                case 8:
+                    return ThreadWaitReason.FreePage;
                 case 2:
-                case 9: return ThreadWaitReason.PageIn;
+                case 9:
+                    return ThreadWaitReason.PageIn;
                 case 3:
-                case 10: return ThreadWaitReason.SystemAllocation;
+                case 10:
+                    return ThreadWaitReason.SystemAllocation;
                 case 4:
-                case 11: return ThreadWaitReason.ExecutionDelay;
+                case 11:
+                    return ThreadWaitReason.ExecutionDelay;
                 case 5:
-                case 12: return ThreadWaitReason.Suspended;
+                case 12:
+                    return ThreadWaitReason.Suspended;
                 case 6:
-                case 13: return ThreadWaitReason.UserRequest;
-                case 14: return ThreadWaitReason.EventPairHigh;
-                case 15: return ThreadWaitReason.EventPairLow;
-                case 16: return ThreadWaitReason.LpcReceive;
-                case 17: return ThreadWaitReason.LpcReply;
-                case 18: return ThreadWaitReason.VirtualMemory;
-                case 19: return ThreadWaitReason.PageOut;
-                default: return ThreadWaitReason.Unknown;
+                case 13:
+                    return ThreadWaitReason.UserRequest;
+                case 14:
+                    return ThreadWaitReason.EventPairHigh;
+                case 15:
+                    return ThreadWaitReason.EventPairLow;
+                case 16:
+                    return ThreadWaitReason.LpcReceive;
+                case 17:
+                    return ThreadWaitReason.LpcReply;
+                case 18:
+                    return ThreadWaitReason.VirtualMemory;
+                case 19:
+                    return ThreadWaitReason.PageOut;
+                default:
+                    return ThreadWaitReason.Unknown;
             }
         }
 
-        private static ProcessInfo GetProcessInfo(ReadOnlySpan<byte> instanceData, PERF_COUNTER_DEFINITION[] counters)
+        private static ProcessInfo GetProcessInfo(
+            ReadOnlySpan<byte> instanceData,
+            PERF_COUNTER_DEFINITION[] counters
+        )
         {
             ProcessInfo processInfo = new ProcessInfo();
             for (int i = 0; i < counters.Length; i++)
             {
                 PERF_COUNTER_DEFINITION counter = counters[i];
-                long value = ReadCounterValue(counter.CounterType, instanceData.Slice(counter.CounterOffset));
+                long value = ReadCounterValue(
+                    counter.CounterType,
+                    instanceData.Slice(counter.CounterOffset)
+                );
                 switch ((ValueId)counter.CounterNameTitlePtr)
                 {
                     case ValueId.ProcessId:

@@ -24,11 +24,18 @@ internal class QuicConnectionListener : IMultiplexedConnectionListener, IAsyncDi
     private readonly QuicTransportContext _context;
     private readonly QuicListener _listener;
 
-    public QuicConnectionListener(QuicTransportOptions options, ILogger log, EndPoint endpoint, SslServerAuthenticationOptions sslServerAuthenticationOptions)
+    public QuicConnectionListener(
+        QuicTransportOptions options,
+        ILogger log,
+        EndPoint endpoint,
+        SslServerAuthenticationOptions sslServerAuthenticationOptions
+    )
     {
         if (!QuicImplementationProviders.Default.IsSupported)
         {
-            throw new NotSupportedException("QUIC is not supported or enabled on this platform. See https://aka.ms/aspnet/kestrel/http3reqs for details.");
+            throw new NotSupportedException(
+                "QUIC is not supported or enabled on this platform. See https://aka.ms/aspnet/kestrel/http3reqs for details."
+            );
         }
 
         _log = log;
@@ -39,7 +46,9 @@ internal class QuicConnectionListener : IMultiplexedConnectionListener, IAsyncDi
 
         if (listenEndPoint == null)
         {
-            throw new InvalidOperationException($"QUIC doesn't support listening on the configured endpoint type. Expected {nameof(IPEndPoint)} but got {endpoint.GetType().Name}.");
+            throw new InvalidOperationException(
+                $"QUIC doesn't support listening on the configured endpoint type. Expected {nameof(IPEndPoint)} but got {endpoint.GetType().Name}."
+            );
         }
 
         // Workaround for issue in System.Net.Quic
@@ -48,7 +57,10 @@ internal class QuicConnectionListener : IMultiplexedConnectionListener, IAsyncDi
         {
             listenEndPoint = new IPEndPoint(IPAddress.Any, listenEndPoint.Port);
         }
-        if (listenEndPoint.Address.Equals(IPAddress.IPv6Any) && listenEndPoint.Address != IPAddress.IPv6Any)
+        if (
+            listenEndPoint.Address.Equals(IPAddress.IPv6Any)
+            && listenEndPoint.Address != IPAddress.IPv6Any
+        )
         {
             listenEndPoint = new IPEndPoint(IPAddress.IPv6Any, listenEndPoint.Port);
         }
@@ -68,7 +80,10 @@ internal class QuicConnectionListener : IMultiplexedConnectionListener, IAsyncDi
 
     public EndPoint EndPoint { get; set; }
 
-    public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+    public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {

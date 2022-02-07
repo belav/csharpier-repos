@@ -35,8 +35,12 @@ namespace System.ServiceProcess.Tests
             this._exception = throwException;
             this._serverStream = new NamedPipeServerStream(serviceName);
             _waitClientConnect = this._serverStream.WaitForConnectionAsync();
-            _waitClientConnect = _waitClientConnect.ContinueWith(_ => DebugTrace("TestService " + ServiceName + ": Connected"));
-            _waitClientConnect = _waitClientConnect.ContinueWith(t => WriteStreamAsync(PipeMessageByteCode.Connected, waitForConnect: false));
+            _waitClientConnect = _waitClientConnect.ContinueWith(
+                _ => DebugTrace("TestService " + ServiceName + ": Connected")
+            );
+            _waitClientConnect = _waitClientConnect.ContinueWith(
+                t => WriteStreamAsync(PipeMessageByteCode.Connected, waitForConnect: false)
+            );
             DebugTrace("TestService " + ServiceName + ": Ctor completed");
         }
 
@@ -101,21 +105,33 @@ namespace System.ServiceProcess.Tests
             base.OnStop();
             // We may be  stopping because the test has completed and we're cleaning up the test service so there's no client at all, so don't waitForConnect.
             // Tests that verify "Stop" itself should ensure the client connection has completed before calling stop, by waiting on some other message from the pipe first.
-            WriteStreamAsync(PipeMessageByteCode.Stop, waitForConnect:false).Wait();
+            WriteStreamAsync(PipeMessageByteCode.Stop, waitForConnect: false).Wait();
         }
 
-        public async Task WriteStreamAsync(PipeMessageByteCode code, int command = 0, bool waitForConnect = true)
+        public async Task WriteStreamAsync(
+            PipeMessageByteCode code,
+            int command = 0,
+            bool waitForConnect = true
+        )
         {
-            DebugTrace("TestService " + ServiceName + ": WriteStreamAsync writing " + code.ToString());
+            DebugTrace(
+                "TestService " + ServiceName + ": WriteStreamAsync writing " + code.ToString()
+            );
 
-            var toWrite = (code == PipeMessageByteCode.OnCustomCommand) ? new byte[] { (byte)command } : new byte[] { (byte)code };
+            var toWrite =
+                (code == PipeMessageByteCode.OnCustomCommand)
+                    ? new byte[] { (byte)command }
+                    : new byte[] { (byte)code };
 
             // Wait for the client connection before writing to the pipe.
             if (waitForConnect)
             {
                 await _waitClientConnect;
             }
-            await _serverStream.WriteAsync(toWrite, 0, 1).WaitAsync(TimeSpan.FromSeconds(60)).ConfigureAwait(false);
+            await _serverStream
+                .WriteAsync(toWrite, 0, 1)
+                .WaitAsync(TimeSpan.FromSeconds(60))
+                .ConfigureAwait(false);
             DebugTrace("TestService " + ServiceName + ": WriteStreamAsync completed");
         }
 

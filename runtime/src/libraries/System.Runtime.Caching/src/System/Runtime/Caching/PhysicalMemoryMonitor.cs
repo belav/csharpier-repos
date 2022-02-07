@@ -34,7 +34,7 @@ namespace System.Runtime.Caching
             /*
               The chart below shows physical memory in megabytes, and the 1, 3, and 10% values.
               When we reach "middle" pressure, we begin trimming the cache.
-
+              
               RAM     1%      3%      10%
               -----------------------------
               128     1.28    3.84    12.8
@@ -44,8 +44,8 @@ namespace System.Runtime.Caching
               2048    20.48   61.44   204.8
               4096    40.96   122.88  409.6
               8192    81.92   245.76  819.2
-
-            */
+              
+              */
 
             long memory = TotalPhysical;
             if (memory >= 0x100000000)
@@ -86,12 +86,19 @@ namespace System.Runtime.Caching
                 long ticksSinceTrim = utcNow.Subtract(lastTrimTime).Ticks;
                 if (ticksSinceTrim > 0)
                 {
-                    percent = Math.Min(50, (int)((lastTrimPercent * TargetTotalMemoryTrimIntervalTicks) / ticksSinceTrim));
+                    percent = Math.Min(
+                        50,
+                        (int)(
+                            (lastTrimPercent * TargetTotalMemoryTrimIntervalTicks) / ticksSinceTrim
+                        )
+                    );
                     percent = Math.Max(MinTotalMemoryTrimPercent, percent);
                 }
 
 #if PERF
-                Debug.WriteLine($"PhysicalMemoryMonitor.GetPercentToTrim: percent={percent:N}, lastTrimPercent={lastTrimPercent:N}, secondsSinceTrim={ticksSinceTrim/TimeSpan.TicksPerSecond:N}{Environment.NewLine}");
+                Debug.WriteLine(
+                    $"PhysicalMemoryMonitor.GetPercentToTrim: percent={percent:N}, lastTrimPercent={lastTrimPercent:N}, secondsSinceTrim={ticksSinceTrim / TimeSpan.TicksPerSecond:N}{Environment.NewLine}"
+                );
 #endif
             }
 
@@ -107,7 +114,10 @@ namespace System.Runtime.Caching
             }
             _pressureHigh = Math.Max(3, physicalMemoryLimitPercentage);
             _pressureLow = Math.Max(1, _pressureHigh - 9);
-            Dbg.Trace($"MemoryCacheStats", "PhysicalMemoryMonitor.SetLimit: _pressureHigh={_pressureHigh}, _pressureLow={_pressureLow}");
+            Dbg.Trace(
+                $"MemoryCacheStats",
+                "PhysicalMemoryMonitor.SetLimit: _pressureHigh={_pressureHigh}, _pressureLow={_pressureLow}"
+            );
         }
     }
 }

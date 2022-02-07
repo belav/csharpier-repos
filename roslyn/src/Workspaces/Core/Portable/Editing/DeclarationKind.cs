@@ -54,11 +54,9 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Represents set accessor declaration of a property, including init accessors in C#.
         /// </summary>
         SetAccessor,
-
         AddAccessor,
         RemoveAccessor,
         RaiseAccessor,
-
         [Obsolete($"This value is not used. Use {nameof(Class)} instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         RecordClass,

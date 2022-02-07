@@ -26,16 +26,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         /// <summary>
-        /// Returns the first non-whitespace position on the given line, or null if 
+        /// Returns the first non-whitespace position on the given line, or null if
         /// the line is empty or contains only whitespace.
         /// </summary>
         public static int? GetFirstNonWhitespacePosition(this TextLine line)
         {
             var firstNonWhitespaceOffset = line.GetFirstNonWhitespaceOffset();
 
-            return firstNonWhitespaceOffset.HasValue
-                ? firstNonWhitespaceOffset + line.Start
-                : null;
+            return firstNonWhitespaceOffset.HasValue ? firstNonWhitespaceOffset + line.Start : null;
         }
 
         /// <summary>
@@ -43,11 +41,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// from the start of the line, or null if the line is empty or contains only
         /// whitespace.
         /// </summary>
-        public static int? GetFirstNonWhitespaceOffset(this TextLine line)
-            => line.ToString().GetFirstNonWhitespaceOffset();
+        public static int? GetFirstNonWhitespaceOffset(this TextLine line) =>
+            line.ToString().GetFirstNonWhitespaceOffset();
 
-        public static string GetLeadingWhitespace(this TextLine line)
-            => line.ToString().GetLeadingWhitespace();
+        public static string GetLeadingWhitespace(this TextLine line) =>
+            line.ToString().GetLeadingWhitespace();
 
         /// <summary>
         /// Determines whether the specified line is empty or contains whitespace only.
@@ -67,13 +65,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return true;
         }
 
-        public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(this TextLine line, int tabSize)
-            => line.ToString().GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize);
+        public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+            this TextLine line,
+            int tabSize
+        ) => line.ToString().GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize);
 
-        public static int GetColumnFromLineOffset(this TextLine line, int lineOffset, int tabSize)
-            => line.ToString().GetColumnFromLineOffset(lineOffset, tabSize);
+        public static int GetColumnFromLineOffset(
+            this TextLine line,
+            int lineOffset,
+            int tabSize
+        ) => line.ToString().GetColumnFromLineOffset(lineOffset, tabSize);
 
-        public static int GetLineOffsetFromColumn(this TextLine line, int column, int tabSize)
-            => line.ToString().GetLineOffsetFromColumn(column, tabSize);
+        public static int GetLineOffsetFromColumn(this TextLine line, int column, int tabSize) =>
+            line.ToString().GetLineOffsetFromColumn(column, tabSize);
     }
 }

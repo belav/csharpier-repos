@@ -47,7 +47,8 @@ internal class HttpConnection : ITimeoutHandler
 
     private KestrelTrace Log => _context.ServiceContext.Log;
 
-    public async Task ProcessRequestsAsync<TContext>(IHttpApplication<TContext> httpApplication) where TContext : notnull
+    public async Task ProcessRequestsAsync<TContext>(IHttpApplication<TContext> httpApplication)
+        where TContext : notnull
     {
         try
         {
@@ -60,7 +61,9 @@ internal class HttpConnection : ITimeoutHandler
             {
                 case HttpProtocols.Http1:
                     // _http1Connection must be initialized before adding the connection to the connection manager
-                    requestProcessor = _http1Connection = new Http1Connection<TContext>((HttpConnectionContext)_context);
+                    requestProcessor = _http1Connection = new Http1Connection<TContext>(
+                        (HttpConnectionContext)_context
+                    );
                     _protocolSelectionState = ProtocolSelectionState.Selected;
                     break;
                 case HttpProtocols.Http2:
@@ -71,7 +74,9 @@ internal class HttpConnection : ITimeoutHandler
                     _protocolSelectionState = ProtocolSelectionState.Selected;
                     break;
                 case HttpProtocols.Http3:
-                    requestProcessor = new Http3Connection((HttpMultiplexedConnectionContext)_context);
+                    requestProcessor = new Http3Connection(
+                        (HttpMultiplexedConnectionContext)_context
+                    );
                     _protocolSelectionState = ProtocolSelectionState.Selected;
                     break;
                 case HttpProtocols.None:
@@ -80,38 +85,62 @@ internal class HttpConnection : ITimeoutHandler
 
                 default:
                     // SelectProtocol() only returns Http1, Http2, Http3 or None.
-                    throw new NotSupportedException($"{nameof(SelectProtocol)} returned something other than Http1, Http2 or None.");
+                    throw new NotSupportedException(
+                        $"{nameof(SelectProtocol)} returned something other than Http1, Http2 or None."
+                    );
             }
 
             _requestProcessor = requestProcessor;
 
             if (requestProcessor != null)
             {
-                var connectionHeartbeatFeature = _context.ConnectionFeatures.Get<IConnectionHeartbeatFeature>();
-                var connectionLifetimeNotificationFeature = _context.ConnectionFeatures.Get<IConnectionLifetimeNotificationFeature>();
+                var connectionHeartbeatFeature =
+                    _context.ConnectionFeatures.Get<IConnectionHeartbeatFeature>();
+                var connectionLifetimeNotificationFeature =
+                    _context.ConnectionFeatures.Get<IConnectionLifetimeNotificationFeature>();
 
                 // These features should never be null in Kestrel itself, if this middleware is ever refactored to run outside of kestrel,
                 // we'll need to handle these missing.
-                Debug.Assert(connectionHeartbeatFeature != null, nameof(IConnectionHeartbeatFeature) + " is missing!");
-                Debug.Assert(connectionLifetimeNotificationFeature != null, nameof(IConnectionLifetimeNotificationFeature) + " is missing!");
+                Debug.Assert(
+                    connectionHeartbeatFeature != null,
+                    nameof(IConnectionHeartbeatFeature) + " is missing!"
+                );
+                Debug.Assert(
+                    connectionLifetimeNotificationFeature != null,
+                    nameof(IConnectionLifetimeNotificationFeature) + " is missing!"
+                );
 
                 // Register the various callbacks once we're going to start processing requests
 
                 // The heart beat for various timeouts
-                connectionHeartbeatFeature?.OnHeartbeat(state => ((HttpConnection)state).Tick(), this);
+                connectionHeartbeatFeature?.OnHeartbeat(
+                    state => ((HttpConnection)state).Tick(),
+                    this
+                );
 
                 // Register for graceful shutdown of the server
-                using var shutdownRegistration = connectionLifetimeNotificationFeature?.ConnectionClosedRequested.Register(state => ((HttpConnection)state!).StopProcessingNextRequest(), this);
+                using var shutdownRegistration =
+                    connectionLifetimeNotificationFeature?.ConnectionClosedRequested.Register(
+                        state => ((HttpConnection)state!).StopProcessingNextRequest(),
+                        this
+                    );
 
                 // Register for connection close
-                using var closedRegistration = _context.ConnectionContext.ConnectionClosed.Register(state => ((HttpConnection)state!).OnConnectionClosed(), this);
+                using var closedRegistration = _context.ConnectionContext.ConnectionClosed.Register(
+                    state => ((HttpConnection)state!).OnConnectionClosed(),
+                    this
+                );
 
                 await requestProcessor.ProcessRequestsAsync(httpApplication);
             }
         }
         catch (Exception ex)
         {
-            Log.LogCritical(0, ex, $"Unexpected exception in {nameof(HttpConnection)}.{nameof(ProcessRequestsAsync)}.");
+            Log.LogCritical(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(HttpConnection)}.{nameof(ProcessRequestsAsync)}."
+            );
         }
     }
 
@@ -129,7 +158,10 @@ internal class HttpConnection : ITimeoutHandler
         lock (_protocolSelectionLock)
         {
             previousState = _protocolSelectionState;
-            Debug.Assert(previousState != ProtocolSelectionState.Initializing, "The state should never be initializing");
+            Debug.Assert(
+                previousState != ProtocolSelectionState.Initializing,
+                "The state should never be initializing"
+            );
 
             switch (_protocolSelectionState)
             {
@@ -155,7 +187,10 @@ internal class HttpConnection : ITimeoutHandler
         lock (_protocolSelectionLock)
         {
             previousState = _protocolSelectionState;
-            Debug.Assert(previousState != ProtocolSelectionState.Initializing, "The state should never be initializing");
+            Debug.Assert(
+                previousState != ProtocolSelectionState.Initializing,
+                "The state should never be initializing"
+            );
 
             switch (_protocolSelectionState)
             {
@@ -182,7 +217,10 @@ internal class HttpConnection : ITimeoutHandler
         lock (_protocolSelectionLock)
         {
             previousState = _protocolSelectionState;
-            Debug.Assert(previousState != ProtocolSelectionState.Initializing, "The state should never be initializing");
+            Debug.Assert(
+                previousState != ProtocolSelectionState.Initializing,
+                "The state should never be initializing"
+            );
 
             _protocolSelectionState = ProtocolSelectionState.Aborted;
         }
@@ -200,7 +238,8 @@ internal class HttpConnection : ITimeoutHandler
     private HttpProtocols SelectProtocol()
     {
         var hasTls = _context.ConnectionFeatures.Get<ITlsConnectionFeature>() != null;
-        var applicationProtocol = _context.ConnectionFeatures.Get<ITlsApplicationProtocolFeature>()?.ApplicationProtocol
+        var applicationProtocol =
+            _context.ConnectionFeatures.Get<ITlsApplicationProtocolFeature>()?.ApplicationProtocol
             ?? new ReadOnlyMemory<byte>();
         var isMultiplexTransport = _context is HttpMultiplexedConnectionContext;
         var http1Enabled = _context.Protocols.HasFlag(HttpProtocols.Http1);
@@ -224,7 +263,12 @@ internal class HttpConnection : ITimeoutHandler
             error = $"Protocols {_context.Protocols} not supported on multiplexed transport.";
         }
 
-        if (!http1Enabled && http2Enabled && hasTls && !Http2Id.SequenceEqual(applicationProtocol.Span))
+        if (
+            !http1Enabled
+            && http2Enabled
+            && hasTls
+            && !Http2Id.SequenceEqual(applicationProtocol.Span)
+        )
         {
             error = CoreStrings.EndPointHttp2NotNegotiated;
         }
@@ -241,7 +285,9 @@ internal class HttpConnection : ITimeoutHandler
             return HttpProtocols.Http1;
         }
 
-        return http2Enabled && (!hasTls || Http2Id.SequenceEqual(applicationProtocol.Span)) ? HttpProtocols.Http2 : HttpProtocols.Http1;
+        return http2Enabled && (!hasTls || Http2Id.SequenceEqual(applicationProtocol.Span))
+          ? HttpProtocols.Http2
+          : HttpProtocols.Http1;
     }
 
     private void Tick()
@@ -275,8 +321,15 @@ internal class HttpConnection : ITimeoutHandler
                 _requestProcessor!.HandleReadDataRateTimeout();
                 break;
             case TimeoutReason.WriteDataRate:
-                Log.ResponseMinimumDataRateNotSatisfied(_context.ConnectionId, _http1Connection?.TraceIdentifier);
-                Abort(new ConnectionAbortedException(CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied));
+                Log.ResponseMinimumDataRateNotSatisfied(
+                    _context.ConnectionId,
+                    _http1Connection?.TraceIdentifier
+                );
+                Abort(
+                    new ConnectionAbortedException(
+                        CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                    )
+                );
                 break;
             case TimeoutReason.RequestBodyDrain:
             case TimeoutReason.TimeoutFeature:

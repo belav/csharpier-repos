@@ -45,7 +45,12 @@ public abstract class Http2ConnectionBenchmarkBase
         _memoryPool = PinnedBlockMemoryPoolFactory.Create();
         _httpFrame = new Http2Frame();
 
-        var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            _memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
 
         _connectionPair = DuplexPipe.CreateConnectionPair(options, options);
 
@@ -61,7 +66,8 @@ public abstract class Http2ConnectionBenchmarkBase
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             dateHeaderValueManager: new DateHeaderValueManager(),
-            systemClock: new MockSystemClock());
+            systemClock: new MockSystemClock()
+        );
         serviceContext.DateHeaderValueManager.OnHeartbeat(default);
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
@@ -70,7 +76,8 @@ public abstract class Http2ConnectionBenchmarkBase
             transport: _connectionPair.Transport,
             timeoutControl: new MockTimeoutControl(),
             memoryPool: _memoryPool,
-            connectionFeatures: new FeatureCollection());
+            connectionFeatures: new FeatureCollection()
+        );
 
         _connection = new Http2Connection(connectionContext);
 
@@ -78,13 +85,14 @@ public abstract class Http2ConnectionBenchmarkBase
 
         _currentStreamId = 1;
 
-        _ = _connection.ProcessRequestsAsync(new DummyApplication(ProcessRequest, new MockHttpContextFactory()));
+        _ = _connection.ProcessRequestsAsync(
+            new DummyApplication(ProcessRequest, new MockHttpContextFactory())
+        );
 
         _connectionPair.Application.Output.Write(Http2Connection.ClientPreface);
-        _connectionPair.Application.Output.WriteSettings(new Http2PeerSettings
-        {
-            InitialWindowSize = 2147483647
-        });
+        _connectionPair.Application.Output.WriteSettings(
+            new Http2PeerSettings { InitialWindowSize = 2147483647 }
+        );
         _connectionPair.Application.Output.FlushAsync().GetAwaiter().GetResult();
 
         // Read past connection setup frames
@@ -101,7 +109,14 @@ public abstract class Http2ConnectionBenchmarkBase
     {
         _requestHeadersEnumerator.Initialize(_httpRequestHeaders);
         _requestHeadersEnumerator.MoveNext();
-        _connectionPair.Application.Output.WriteStartStream(streamId: _currentStreamId, _hpackEncoder, _requestHeadersEnumerator, _headersBuffer, endStream: true, frame: _httpFrame);
+        _connectionPair.Application.Output.WriteStartStream(
+            streamId: _currentStreamId,
+            _hpackEncoder,
+            _requestHeadersEnumerator,
+            _headersBuffer,
+            endStream: true,
+            frame: _httpFrame
+        );
         await _connectionPair.Application.Output.FlushAsync();
 
         while (true)
@@ -120,13 +135,20 @@ public abstract class Http2ConnectionBenchmarkBase
 
             if (_dataWritten > 1024 * 32)
             {
-                _connectionPair.Application.Output.WriteWindowUpdateAsync(streamId: 0, _dataWritten, _httpFrame);
+                _connectionPair.Application.Output.WriteWindowUpdateAsync(
+                    streamId: 0,
+                    _dataWritten,
+                    _httpFrame
+                );
                 await _connectionPair.Application.Output.FlushAsync();
 
                 _dataWritten = 0;
             }
 
-            if ((_httpFrame.HeadersFlags & Http2HeadersFrameFlags.END_STREAM) == Http2HeadersFrameFlags.END_STREAM)
+            if (
+                (_httpFrame.HeadersFlags & Http2HeadersFrameFlags.END_STREAM)
+                == Http2HeadersFrameFlags.END_STREAM
+            )
             {
                 break;
             }
@@ -135,7 +157,11 @@ public abstract class Http2ConnectionBenchmarkBase
         _currentStreamId += 2;
     }
 
-    internal async ValueTask ReceiveFrameAsync(PipeReader pipeReader, Http2Frame frame, uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize)
+    internal async ValueTask ReceiveFrameAsync(
+        PipeReader pipeReader,
+        Http2Frame frame,
+        uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize
+    )
     {
         while (true)
         {
@@ -146,7 +172,14 @@ public abstract class Http2ConnectionBenchmarkBase
 
             try
             {
-                if (Http2FrameReader.TryReadFrame(ref buffer, frame, maxFrameSize, out var framePayload))
+                if (
+                    Http2FrameReader.TryReadFrame(
+                        ref buffer,
+                        frame,
+                        maxFrameSize,
+                        out var framePayload
+                    )
+                )
                 {
                     consumed = examined = framePayload.End;
                     return;

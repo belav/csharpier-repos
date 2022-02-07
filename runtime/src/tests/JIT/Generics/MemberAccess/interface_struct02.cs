@@ -6,17 +6,9 @@ using System;
 
 interface IGen<T>
 {
-    T Property
-    {
-        get;
-        set;
-    }
+    T Property { get; set; }
 
-    T this[int i]
-    {
-        get;
-        set;
-    }
+    T this[int i] { get; set; }
 
     T Method(T t);
 }
@@ -43,7 +35,6 @@ struct GenInt : IGen<int>
     {
         return t;
     }
-
 }
 
 struct GenString : IGen<string>
@@ -68,7 +59,6 @@ struct GenString : IGen<string>
     {
         return t;
     }
-
 }
 
 public class Test_interface_struct02
@@ -134,6 +124,5 @@ public class Test_interface_struct02
         }
 
         return ret;
-
     }
 }

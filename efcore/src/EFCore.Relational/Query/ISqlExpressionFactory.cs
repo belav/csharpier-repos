@@ -30,7 +30,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="typeMapping">A type mapping to apply.</param>
         /// <returns>A SQL expression with given type mapping applied.</returns>
         [return: NotNullIfNotNull("sqlExpression")]
-        SqlExpression? ApplyTypeMapping(SqlExpression? sqlExpression, RelationalTypeMapping? typeMapping);
+        SqlExpression? ApplyTypeMapping(
+            SqlExpression? sqlExpression,
+            RelationalTypeMapping? typeMapping
+        );
 
         /// <summary>
         ///     Applies default type mapping to given <see cref="SqlExpression" />.
@@ -52,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             ExpressionType operatorType,
             SqlExpression operand,
             Type type,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlBinaryExpression" /> with the given arguments.
@@ -66,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             ExpressionType operatorType,
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping);
+            RelationalTypeMapping? typeMapping
+        );
 
         // Comparison
         /// <summary>
@@ -145,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlBinaryExpression Add(
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a <see cref="SqlBinaryExpression" /> which represents a subtraction.
@@ -157,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlBinaryExpression Subtract(
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a <see cref="SqlBinaryExpression" /> which represents a multiplication.
@@ -169,7 +176,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlBinaryExpression Multiply(
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a <see cref="SqlBinaryExpression" /> which represents a division.
@@ -181,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlBinaryExpression Divide(
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a <see cref="SqlBinaryExpression" /> which represents a modulo operation.
@@ -193,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlBinaryExpression Modulo(
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         // Bitwise
         /// <summary>
@@ -206,7 +216,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlBinaryExpression And(
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a <see cref="SqlBinaryExpression" /> which represents a bitwise OR operation.
@@ -218,7 +229,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlBinaryExpression Or(
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         // Other
         /// <summary>
@@ -231,7 +243,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlFunctionExpression Coalesce(
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlUnaryExpression" /> which represent equality to null.
@@ -257,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         SqlUnaryExpression Convert(
             SqlExpression operand,
             Type type,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlUnaryExpression" /> which represent a NOT operation in a SQL tree.
@@ -283,7 +297,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         CaseExpression Case(
             SqlExpression operand,
             IReadOnlyList<CaseWhenClause> whenClauses,
-            SqlExpression? elseResult);
+            SqlExpression? elseResult
+        );
 
         /// <summary>
         ///     Creates a new <see cref="CaseExpression" /> which represent a CASE statement in a SQL tree.
@@ -309,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool nullable,
             IEnumerable<bool> argumentsPropagateNullability,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a function call in a SQL tree.
@@ -329,7 +345,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool nullable,
             IEnumerable<bool> argumentsPropagateNullability,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a function call in a SQL tree.
@@ -351,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool instancePropagatesNullability,
             IEnumerable<bool> argumentsPropagateNullability,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a niladic function call in a SQL tree.
@@ -365,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             string name,
             bool nullable,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a niladic function call in a SQL tree.
@@ -381,7 +400,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             string name,
             bool nullable,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a niladic function call in a SQL tree.
@@ -399,7 +419,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool nullable,
             bool instancePropagatesNullability,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null);
+            RelationalTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="ExistsExpression" /> which represents an EXISTS operation in a SQL tree.
@@ -434,7 +455,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="pattern">A pattern to search.</param>
         /// <param name="escapeChar">An optional escape character to use in LIKE.</param>
         /// <returns>An expression representing a LIKE in a SQL tree.</returns>
-        LikeExpression Like(SqlExpression match, SqlExpression pattern, SqlExpression? escapeChar = null);
+        LikeExpression Like(
+            SqlExpression match,
+            SqlExpression pattern,
+            SqlExpression? escapeChar = null
+        );
 
         /// <summary>
         ///     Creates a new <see cref="SqlConstantExpression" /> which represents a constant in a SQL tree.

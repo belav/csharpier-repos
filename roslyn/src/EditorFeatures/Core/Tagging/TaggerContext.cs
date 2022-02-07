@@ -23,14 +23,16 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         private readonly ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> _existingTags;
 
         internal IEnumerable<DocumentSnapshotSpan> _spansTagged;
-        internal ImmutableArray<ITagSpan<TTag>>.Builder tagSpans = ImmutableArray.CreateBuilder<ITagSpan<TTag>>();
+        internal ImmutableArray<ITagSpan<TTag>>.Builder tagSpans = ImmutableArray.CreateBuilder<
+            ITagSpan<TTag>
+        >();
 
         public ImmutableArray<DocumentSnapshotSpan> SpansToTag { get; }
         public SnapshotPoint? CaretPosition { get; }
 
         /// <summary>
         /// The text that has changed between the last successful tagging and this new request to
-        /// produce tags.  In order to be passed this value, <see cref="TaggerTextChangeBehavior.TrackTextChanges"/> 
+        /// produce tags.  In order to be passed this value, <see cref="TaggerTextChangeBehavior.TrackTextChanges"/>
         /// must be specified in <see cref="AbstractAsynchronousTaggerProvider{TTag}.TextChangeBehavior"/>.
         /// </summary>
         public TextChangeRange? TextChangeRange { get; }
@@ -38,7 +40,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// <summary>
         /// The state of the tagger.  Taggers can use this to keep track of information across calls
         /// to <see cref="AbstractAsynchronousTaggerProvider{TTag}.ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/>.  Note: state will
-        /// only be preserved if the tagger infrastructure fully updates itself with the tags that 
+        /// only be preserved if the tagger infrastructure fully updates itself with the tags that
         /// were produced.  i.e. if that tagging pass is canceled, then the state set here will not
         /// be preserved and the previous preserved state will be used the next time ProduceTagsAsync
         /// is called.
@@ -47,20 +49,26 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
         // For testing only.
         internal TaggerContext(
-            Document document, ITextSnapshot snapshot,
+            Document document,
+            ITextSnapshot snapshot,
             SnapshotPoint? caretPosition = null,
-            TextChangeRange? textChangeRange = null)
-            : this(state: null, ImmutableArray.Create(new DocumentSnapshotSpan(document, snapshot.GetFullSpan())),
-                   caretPosition, textChangeRange, existingTags: null)
-        {
-        }
+            TextChangeRange? textChangeRange = null
+        )
+            : this(
+                state: null,
+                ImmutableArray.Create(new DocumentSnapshotSpan(document, snapshot.GetFullSpan())),
+                caretPosition,
+                textChangeRange,
+                existingTags: null
+            ) { }
 
         internal TaggerContext(
             object state,
             ImmutableArray<DocumentSnapshotSpan> spansToTag,
             SnapshotPoint? caretPosition,
             TextChangeRange? textChangeRange,
-            ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> existingTags)
+            ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> existingTags
+        )
         {
             this.State = state;
             this.SpansToTag = spansToTag;
@@ -71,27 +79,30 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             _existingTags = existingTags;
         }
 
-        public void AddTag(ITagSpan<TTag> tag)
-            => tagSpans.Add(tag);
+        public void AddTag(ITagSpan<TTag> tag) => tagSpans.Add(tag);
 
-        public void ClearTags()
-            => tagSpans.Clear();
+        public void ClearTags() => tagSpans.Clear();
 
         /// <summary>
-        /// Used to allow taggers to indicate what spans were actually tagged.  This is useful 
+        /// Used to allow taggers to indicate what spans were actually tagged.  This is useful
         /// when the tagger decides to tag a different span than the entire file.  If a sub-span
         /// of a document is tagged then the tagger infrastructure will keep previously computed
         /// tags from before and after the sub-span and merge them with the newly produced tags.
         /// </summary>
-        public void SetSpansTagged(IEnumerable<DocumentSnapshotSpan> spansTagged)
-            => _spansTagged = spansTagged ?? throw new ArgumentNullException(nameof(spansTagged));
+        public void SetSpansTagged(IEnumerable<DocumentSnapshotSpan> spansTagged) =>
+            _spansTagged = spansTagged ?? throw new ArgumentNullException(nameof(spansTagged));
 
         public IEnumerable<ITagSpan<TTag>> GetExistingContainingTags(SnapshotPoint point)
         {
-            if (_existingTags != null && _existingTags.TryGetValue(point.Snapshot.TextBuffer, out var tree))
+            if (
+                _existingTags != null
+                && _existingTags.TryGetValue(point.Snapshot.TextBuffer, out var tree)
+            )
             {
-                return tree.GetIntersectingSpans(new SnapshotSpan(point.Snapshot, new Span(point, 0)))
-                           .Where(s => s.Span.Contains(point));
+                return tree.GetIntersectingSpans(
+                        new SnapshotSpan(point.Snapshot, new Span(point, 0))
+                    )
+                    .Where(s => s.Span.Contains(point));
             }
 
             return SpecializedCollections.EmptyEnumerable<ITagSpan<TTag>>();

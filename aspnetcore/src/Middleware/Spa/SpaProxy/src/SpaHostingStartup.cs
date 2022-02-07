@@ -17,19 +17,25 @@ internal class SpaHostingStartup : IHostingStartup
 {
     public void Configure(IWebHostBuilder builder)
     {
-        builder.ConfigureServices(services =>
-        {
-            var spaProxyConfigFile = Path.Combine(AppContext.BaseDirectory, "spa.proxy.json");
-            if (File.Exists(spaProxyConfigFile))
+        builder.ConfigureServices(
+            services =>
             {
-                var configuration = new ConfigurationBuilder()
-                    .AddJsonFile(spaProxyConfigFile)
-                    .Build();
+                var spaProxyConfigFile = Path.Combine(AppContext.BaseDirectory, "spa.proxy.json");
+                if (File.Exists(spaProxyConfigFile))
+                {
+                    var configuration = new ConfigurationBuilder()
+                        .AddJsonFile(spaProxyConfigFile)
+                        .Build();
 
-                services.AddSingleton<SpaProxyLaunchManager>();
-                services.Configure<SpaDevelopmentServerOptions>(configuration.GetSection("SpaProxyServer"));
-                services.TryAddEnumerable(ServiceDescriptor.Singleton<IStartupFilter, SpaProxyStartupFilter>());
+                    services.AddSingleton<SpaProxyLaunchManager>();
+                    services.Configure<SpaDevelopmentServerOptions>(
+                        configuration.GetSection("SpaProxyServer")
+                    );
+                    services.TryAddEnumerable(
+                        ServiceDescriptor.Singleton<IStartupFilter, SpaProxyStartupFilter>()
+                    );
+                }
             }
-        });
+        );
     }
 }

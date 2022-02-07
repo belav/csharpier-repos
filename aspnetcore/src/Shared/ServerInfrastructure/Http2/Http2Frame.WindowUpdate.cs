@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     +-+-------------------------------------------------------------+
     |R|              Window Size Increment (31)                     |
     +-+-------------------------------------------------------------+
-*/
+    */
 internal partial class Http2Frame
 {
     public int WindowUpdateSizeIncrement { get; set; }

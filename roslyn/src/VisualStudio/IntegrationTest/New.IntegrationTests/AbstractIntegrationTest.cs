@@ -40,17 +40,15 @@ namespace Roslyn.VisualStudio.IntegrationTests
 
             JoinableTaskContext = ThreadHelper.JoinableTaskContext;
 
-            _hangMitigatingCancellationTokenSource = new CancellationTokenSource(HangMitigatingTimeout);
+            _hangMitigatingCancellationTokenSource = new CancellationTokenSource(
+                HangMitigatingTimeout
+            );
         }
 
         [NotNull]
         protected JoinableTaskContext? JoinableTaskContext
         {
-            get
-            {
-                return _joinableTaskContext ?? throw new InvalidOperationException();
-            }
-
+            get { return _joinableTaskContext ?? throw new InvalidOperationException(); }
             private set
             {
                 if (value == _joinableTaskContext)
@@ -68,7 +66,12 @@ namespace Roslyn.VisualStudio.IntegrationTests
                 {
                     _joinableTaskContext = value;
                     _joinableTaskCollection = value.CreateCollection();
-                    _joinableTaskFactory = value.CreateFactory(_joinableTaskCollection).WithPriority(Application.Current.Dispatcher, DispatcherPriority.Background);
+                    _joinableTaskFactory = value
+                        .CreateFactory(_joinableTaskCollection)
+                        .WithPriority(
+                            Application.Current.Dispatcher,
+                            DispatcherPriority.Background
+                        );
                 }
             }
         }
@@ -76,22 +79,15 @@ namespace Roslyn.VisualStudio.IntegrationTests
         [NotNull]
         private protected TestServices? TestServices
         {
-            get
-            {
-                return _testServices ?? throw new InvalidOperationException();
-            }
-
-            private set
-            {
-                _testServices = value;
-            }
+            get { return _testServices ?? throw new InvalidOperationException(); }
+            private set { _testServices = value; }
         }
 
-        protected JoinableTaskFactory JoinableTaskFactory
-            => _joinableTaskFactory ?? throw new InvalidOperationException();
+        protected JoinableTaskFactory JoinableTaskFactory =>
+            _joinableTaskFactory ?? throw new InvalidOperationException();
 
-        protected CancellationToken HangMitigatingCancellationToken
-            => _hangMitigatingCancellationTokenSource.Token;
+        protected CancellationToken HangMitigatingCancellationToken =>
+            _hangMitigatingCancellationTokenSource.Token;
 
         public virtual async Task InitializeAsync()
         {
@@ -120,11 +116,9 @@ namespace Roslyn.VisualStudio.IntegrationTests
         /// This method is called via the <see cref="IDisposable"/> interface if the constructor completes successfully.
         /// The <see cref="InitializeAsync"/> may or may not have completed successfully.
         /// </summary>
-        public virtual void Dispose()
-        {
-        }
+        public virtual void Dispose() { }
 
-        private protected virtual async Task<TestServices> CreateTestServicesAsync()
-            => await TestServices.CreateAsync(JoinableTaskFactory);
+        private protected virtual async Task<TestServices> CreateTestServicesAsync() =>
+            await TestServices.CreateAsync(JoinableTaskFactory);
     }
 }

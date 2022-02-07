@@ -20,6 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         void ProcessIndexAdded(
             IConventionIndexBuilder indexBuilder,
-            IConventionContext<IConventionIndexBuilder> context);
+            IConventionContext<IConventionIndexBuilder> context
+        );
     }
 }

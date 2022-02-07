@@ -16,8 +16,10 @@ internal class ActionResultTypeMapper : IActionResultTypeMapper
             throw new ArgumentNullException(nameof(returnType));
         }
 
-        if (returnType.IsGenericType &&
-            returnType.GetGenericTypeDefinition() == typeof(ActionResult<>))
+        if (
+            returnType.IsGenericType
+            && returnType.GetGenericTypeDefinition() == typeof(ActionResult<>)
+        )
         {
             return returnType.GetGenericArguments()[0];
         }
@@ -37,9 +39,6 @@ internal class ActionResultTypeMapper : IActionResultTypeMapper
             return converter.Convert();
         }
 
-        return new ObjectResult(value)
-        {
-            DeclaredType = returnType,
-        };
+        return new ObjectResult(value) { DeclaredType = returnType, };
     }
 }

@@ -27,11 +27,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void EndOfFileAfterOut()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out 
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -117,11 +119,13 @@ class C {
         [Fact]
         public void EndOfFileAfterOutType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out C
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -215,11 +219,13 @@ class C {
         [Fact]
         public void EndOfFileAfterOutTypeIdentifier()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out C c
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -320,11 +326,13 @@ class C {
         [Fact]
         public void EndOfFileAfterOutTypeIdentifierParen()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out C c
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -425,11 +433,13 @@ class C {
         [Fact]
         public void EndOfFileAfterOutTypeIdentifierComma()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out C c,
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -536,16 +546,21 @@ class C {
         public void HangingLambdaParsing_Bug14167()
         {
             var tree = UsingNode(@"(int a, int b Main();");
-            tree.GetDiagnostics().Verify(
-                // (1,1): error CS1073: Unexpected token 'b'
-                // (int a, int b Main();
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int a, int ").WithArguments("b").WithLocation(1, 1),
-                // (1,9): error CS1525: Invalid expression term 'int'
-                // (int a, int b Main();
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 9),
-                // (1,13): error CS1026: ) expected
-                // (int a, int b Main();
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "b").WithLocation(1, 13)
+            tree.GetDiagnostics()
+                .Verify(
+                    // (1,1): error CS1073: Unexpected token 'b'
+                    // (int a, int b Main();
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int a, int ")
+                        .WithArguments("b")
+                        .WithLocation(1, 1),
+                    // (1,9): error CS1525: Invalid expression term 'int'
+                    // (int a, int b Main();
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                        .WithArguments("int")
+                        .WithLocation(1, 9),
+                    // (1,13): error CS1026: ) expected
+                    // (int a, int b Main();
+                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "b").WithLocation(1, 13)
                 );
             N(SyntaxKind.TupleExpression);
             {
@@ -581,10 +596,14 @@ class C {
         public void Arglist_01()
         {
             string source = "(__arglist) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // (__arglist) => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(__arglist)").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(__arglist)")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ParenthesizedExpression);
             {
@@ -602,10 +621,14 @@ class C {
         public void Arglist_02()
         {
             string source = "(int x, __arglist) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // (int x, __arglist) => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int x, __arglist)").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int x, __arglist)")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.TupleExpression);
             {
@@ -641,10 +664,14 @@ class C {
         public void Arglist_03()
         {
             string source = "static (__arglist) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,9): error CS1041: Identifier expected; '__arglist' is a keyword
                 // static (__arglist) => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "__arglist").WithArguments("", "__arglist").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "__arglist")
+                    .WithArguments("", "__arglist")
+                    .WithLocation(1, 9)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {

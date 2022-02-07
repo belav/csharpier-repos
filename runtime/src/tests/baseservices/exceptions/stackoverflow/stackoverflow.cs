@@ -65,6 +65,7 @@ namespace TestStackOverflow
         LargeStruct4096 se;
         LargeStruct4096 sf;
     }
+
     class Program
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -148,4 +149,3 @@ namespace TestStackOverflow
         }
     }
 }
-

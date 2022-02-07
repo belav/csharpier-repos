@@ -67,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             ICurrentDbContext currentContext,
             IModelRuntimeInitializer modelRuntimeInitializer,
             IDiagnosticsLogger<DbLoggerCategory.Model> modelLogger,
-            IRelationalCommandDiagnosticsLogger commandLogger)
+            IRelationalCommandDiagnosticsLogger commandLogger
+        )
         {
             DatabaseCreator = databaseCreator;
             RawSqlCommandBuilder = rawSqlCommandBuilder;

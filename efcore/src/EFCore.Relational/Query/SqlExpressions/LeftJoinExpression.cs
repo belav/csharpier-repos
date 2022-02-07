@@ -22,9 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="table">A table source to LEFT JOIN with.</param>
         /// <param name="joinPredicate">A predicate to use for the join.</param>
         public LeftJoinExpression(TableExpressionBase table, SqlExpression joinPredicate)
-            : base(table, joinPredicate)
-        {
-        }
+            : base(table, joinPredicate) { }
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -42,8 +40,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="table">The <see cref="JoinExpressionBase.Table" /> property of the result.</param>
         /// <param name="joinPredicate">The <see cref="PredicateJoinExpressionBase.JoinPredicate" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public virtual LeftJoinExpression Update(TableExpressionBase table, SqlExpression joinPredicate)
-            => table != Table || joinPredicate != JoinPredicate
+        public virtual LeftJoinExpression Update(
+            TableExpressionBase table,
+            SqlExpression joinPredicate
+        ) =>
+            table != Table || joinPredicate != JoinPredicate
                 ? new LeftJoinExpression(table, joinPredicate)
                 : this;
 
@@ -57,17 +58,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is LeftJoinExpression leftJoinExpression
-                    && Equals(leftJoinExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is LeftJoinExpression leftJoinExpression && Equals(leftJoinExpression)
+            );
 
-        private bool Equals(LeftJoinExpression leftJoinExpression)
-            => base.Equals(leftJoinExpression);
+        private bool Equals(LeftJoinExpression leftJoinExpression) =>
+            base.Equals(leftJoinExpression);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

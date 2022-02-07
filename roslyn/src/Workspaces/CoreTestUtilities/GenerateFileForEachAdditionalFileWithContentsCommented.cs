@@ -11,7 +11,8 @@ using Roslyn.Utilities;
 
 namespace Roslyn.Test.Utilities
 {
-    internal sealed class GenerateFileForEachAdditionalFileWithContentsCommented : IIncrementalGenerator
+    internal sealed class GenerateFileForEachAdditionalFileWithContentsCommented
+        : IIncrementalGenerator
     {
         /// <remarks>
         /// This should only be updated with Interlocked APIs.
@@ -25,13 +26,20 @@ namespace Roslyn.Test.Utilities
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            context.RegisterSourceOutput(context.AdditionalTextsProvider, (context, additionalText) =>
-                context.AddSource(
-                    GetGeneratedFileName(additionalText.Path),
-                    GenerateSourceForAdditionalFile(additionalText, context.CancellationToken)));
+            context.RegisterSourceOutput(
+                context.AdditionalTextsProvider,
+                (context, additionalText) =>
+                    context.AddSource(
+                        GetGeneratedFileName(additionalText.Path),
+                        GenerateSourceForAdditionalFile(additionalText, context.CancellationToken)
+                    )
+            );
         }
 
-        private SourceText GenerateSourceForAdditionalFile(AdditionalText file, CancellationToken cancellationToken)
+        private SourceText GenerateSourceForAdditionalFile(
+            AdditionalText file,
+            CancellationToken cancellationToken
+        )
         {
             Interlocked.Increment(ref _additionalFilesConvertedCount);
 
@@ -39,12 +47,15 @@ namespace Roslyn.Test.Utilities
             var sourceText = file.GetText(cancellationToken);
             Contract.ThrowIfNull(sourceText, "Failed to fetch the text of an additional file.");
 
-            var changes = sourceText.Lines.SelectAsArray(l => new TextChange(new TextSpan(l.Start, length: 0), "// "));
+            var changes = sourceText.Lines.SelectAsArray(
+                l => new TextChange(new TextSpan(l.Start, length: 0), "// ")
+            );
             var generatedText = sourceText.WithChanges(changes);
 
             return SourceText.From(generatedText.ToString(), encoding: Encoding.UTF8);
         }
 
-        private static string GetGeneratedFileName(string path) => $"{Path.GetFileNameWithoutExtension(path)}.generated";
+        private static string GetGeneratedFileName(string path) =>
+            $"{Path.GetFileNameWithoutExtension(path)}.generated";
     }
 }

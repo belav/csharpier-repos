@@ -13,124 +13,139 @@ namespace System
     /*
      Customized format patterns:
      P.S. Format in the table below is the internal number format used to display the pattern.
-
+     
      Patterns   Format      Description                           Example
      =========  ==========  ===================================== ========
-        "h"     "0"         hour (12-hour clock)w/o leading zero  3
-        "hh"    "00"        hour (12-hour clock)with leading zero 03
-        "hh*"   "00"        hour (12-hour clock)with leading zero 03
-
-        "H"     "0"         hour (24-hour clock)w/o leading zero  8
-        "HH"    "00"        hour (24-hour clock)with leading zero 08
-        "HH*"   "00"        hour (24-hour clock)                  08
-
-        "m"     "0"         minute w/o leading zero
-        "mm"    "00"        minute with leading zero
-        "mm*"   "00"        minute with leading zero
-
-        "s"     "0"         second w/o leading zero
-        "ss"    "00"        second with leading zero
-        "ss*"   "00"        second with leading zero
-
-        "f"     "0"         second fraction (1 digit)
-        "ff"    "00"        second fraction (2 digit)
-        "fff"   "000"       second fraction (3 digit)
-        "ffff"  "0000"      second fraction (4 digit)
-        "fffff" "00000"         second fraction (5 digit)
-        "ffffff"    "000000"    second fraction (6 digit)
-        "fffffff"   "0000000"   second fraction (7 digit)
-
-        "F"     "0"         second fraction (up to 1 digit)
-        "FF"    "00"        second fraction (up to 2 digit)
-        "FFF"   "000"       second fraction (up to 3 digit)
-        "FFFF"  "0000"      second fraction (up to 4 digit)
-        "FFFFF" "00000"         second fraction (up to 5 digit)
-        "FFFFFF"    "000000"    second fraction (up to 6 digit)
-        "FFFFFFF"   "0000000"   second fraction (up to 7 digit)
-
-        "t"                 first character of AM/PM designator   A
-        "tt"                AM/PM designator                      AM
-        "tt*"               AM/PM designator                      PM
-
-        "d"     "0"         day w/o leading zero                  1
-        "dd"    "00"        day with leading zero                 01
-        "ddd"               short weekday name (abbreviation)     Mon
-        "dddd"              full weekday name                     Monday
-        "dddd*"             full weekday name                     Monday
-
-
-        "M"     "0"         month w/o leading zero                2
-        "MM"    "00"        month with leading zero               02
-        "MMM"               short month name (abbreviation)       Feb
-        "MMMM"              full month name                       Febuary
-        "MMMM*"             full month name                       Febuary
-
-        "y"     "0"         two digit year (year % 100) w/o leading zero           0
-        "yy"    "00"        two digit year (year % 100) with leading zero          00
-        "yyy"   "D3"        year                                  2000
-        "yyyy"  "D4"        year                                  2000
-        "yyyyy" "D5"        year                                  2000
-        ...
-
-        "z"     "+0;-0"     timezone offset w/o leading zero      -8
-        "zz"    "+00;-00"   timezone offset with leading zero     -08
-        "zzz"      "+00;-00" for hour offset, "00" for minute offset  full timezone offset   -07:30
-        "zzz*"  "+00;-00" for hour offset, "00" for minute offset   full timezone offset   -08:00
-
-        "K"    -Local       "zzz", e.g. -08:00
-               -Utc         "'Z'", representing UTC
-               -Unspecified ""
-               -DateTimeOffset      "zzzzz" e.g -07:30:15
-
-        "g*"                the current era name                  A.D.
-
-        ":"                 time separator                        : -- DEPRECATED - Insert separator directly into pattern (eg: "H.mm.ss")
-        "/"                 date separator                        /-- DEPRECATED - Insert separator directly into pattern (eg: "M-dd-yyyy")
-        "'"                 quoted string                         'ABC' will insert ABC into the formatted string.
-        '"'                 quoted string                         "ABC" will insert ABC into the formatted string.
-        "%"                 used to quote a single pattern characters      E.g.The format character "%y" is to print two digit year.
-        "\"                 escaped character                     E.g. '\d' insert the character 'd' into the format string.
-        other characters    insert the character into the format string.
-
-    Pre-defined format characters:
-        (U) to indicate Universal time is used.
-        (G) to indicate Gregorian calendar is used.
-
-        Format              Description                             Real format                             Example
-        =========           =================================       ======================                  =======================
-        "d"                 short date                              culture-specific                        10/31/1999
-        "D"                 long data                               culture-specific                        Sunday, October 31, 1999
-        "f"                 full date (long date + short time)      culture-specific                        Sunday, October 31, 1999 2:00 AM
-        "F"                 full date (long date + long time)       culture-specific                        Sunday, October 31, 1999 2:00:00 AM
-        "g"                 general date (short date + short time)  culture-specific                        10/31/1999 2:00 AM
-        "G"                 general date (short date + long time)   culture-specific                        10/31/1999 2:00:00 AM
-        "m"/"M"             Month/Day date                          culture-specific                        October 31
-(G)     "o"/"O"             Round Trip XML                          "yyyy-MM-ddTHH:mm:ss.fffffffK"          1999-10-31 02:00:00.0000000Z
-(G)     "r"/"R"             RFC 1123 date,                          "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'"   Sun, 31 Oct 1999 10:00:00 GMT
-(G)     "s"                 Sortable format, based on ISO 8601.     "yyyy-MM-dd'T'HH:mm:ss"                 1999-10-31T02:00:00
-                                                                    ('T' for local time)
-        "t"                 short time                              culture-specific                        2:00 AM
-        "T"                 long time                               culture-specific                        2:00:00 AM
-(G)     "u"                 Universal time with sortable format,    "yyyy'-'MM'-'dd HH':'mm':'ss'Z'"        1999-10-31 10:00:00Z
-                            based on ISO 8601.
-(U)     "U"                 Universal time with full                culture-specific                        Sunday, October 31, 1999 10:00:00 AM
-                            (long date + long time) format
-                            "y"/"Y"             Year/Month day                          culture-specific                        October, 1999
-
-    */
+     "h"     "0"         hour (12-hour clock)w/o leading zero  3
+     "hh"    "00"        hour (12-hour clock)with leading zero 03
+     "hh*"   "00"        hour (12-hour clock)with leading zero 03
+     
+     "H"     "0"         hour (24-hour clock)w/o leading zero  8
+     "HH"    "00"        hour (24-hour clock)with leading zero 08
+     "HH*"   "00"        hour (24-hour clock)                  08
+     
+     "m"     "0"         minute w/o leading zero
+     "mm"    "00"        minute with leading zero
+     "mm*"   "00"        minute with leading zero
+     
+     "s"     "0"         second w/o leading zero
+     "ss"    "00"        second with leading zero
+     "ss*"   "00"        second with leading zero
+     
+     "f"     "0"         second fraction (1 digit)
+     "ff"    "00"        second fraction (2 digit)
+     "fff"   "000"       second fraction (3 digit)
+     "ffff"  "0000"      second fraction (4 digit)
+     "fffff" "00000"         second fraction (5 digit)
+     "ffffff"    "000000"    second fraction (6 digit)
+     "fffffff"   "0000000"   second fraction (7 digit)
+     
+     "F"     "0"         second fraction (up to 1 digit)
+     "FF"    "00"        second fraction (up to 2 digit)
+     "FFF"   "000"       second fraction (up to 3 digit)
+     "FFFF"  "0000"      second fraction (up to 4 digit)
+     "FFFFF" "00000"         second fraction (up to 5 digit)
+     "FFFFFF"    "000000"    second fraction (up to 6 digit)
+     "FFFFFFF"   "0000000"   second fraction (up to 7 digit)
+     
+     "t"                 first character of AM/PM designator   A
+     "tt"                AM/PM designator                      AM
+     "tt*"               AM/PM designator                      PM
+     
+     "d"     "0"         day w/o leading zero                  1
+     "dd"    "00"        day with leading zero                 01
+     "ddd"               short weekday name (abbreviation)     Mon
+     "dddd"              full weekday name                     Monday
+     "dddd*"             full weekday name                     Monday
+     
+     
+     "M"     "0"         month w/o leading zero                2
+     "MM"    "00"        month with leading zero               02
+     "MMM"               short month name (abbreviation)       Feb
+     "MMMM"              full month name                       Febuary
+     "MMMM*"             full month name                       Febuary
+     
+     "y"     "0"         two digit year (year % 100) w/o leading zero           0
+     "yy"    "00"        two digit year (year % 100) with leading zero          00
+     "yyy"   "D3"        year                                  2000
+     "yyyy"  "D4"        year                                  2000
+     "yyyyy" "D5"        year                                  2000
+     ...
+     
+     "z"     "+0;-0"     timezone offset w/o leading zero      -8
+     "zz"    "+00;-00"   timezone offset with leading zero     -08
+     "zzz"      "+00;-00" for hour offset, "00" for minute offset  full timezone offset   -07:30
+     "zzz*"  "+00;-00" for hour offset, "00" for minute offset   full timezone offset   -08:00
+     
+     "K"    -Local       "zzz", e.g. -08:00
+     -Utc         "'Z'", representing UTC
+     -Unspecified ""
+     -DateTimeOffset      "zzzzz" e.g -07:30:15
+     
+     "g*"                the current era name                  A.D.
+     
+     ":"                 time separator                        : -- DEPRECATED - Insert separator directly into pattern (eg: "H.mm.ss")
+     "/"                 date separator                        /-- DEPRECATED - Insert separator directly into pattern (eg: "M-dd-yyyy")
+     "'"                 quoted string                         'ABC' will insert ABC into the formatted string.
+     '"'                 quoted string                         "ABC" will insert ABC into the formatted string.
+     "%"                 used to quote a single pattern characters      E.g.The format character "%y" is to print two digit year.
+     "\"                 escaped character                     E.g. '\d' insert the character 'd' into the format string.
+     other characters    insert the character into the format string.
+     
+     Pre-defined format characters:
+     (U) to indicate Universal time is used.
+     (G) to indicate Gregorian calendar is used.
+     
+     Format              Description                             Real format                             Example
+     =========           =================================       ======================                  =======================
+     "d"                 short date                              culture-specific                        10/31/1999
+     "D"                 long data                               culture-specific                        Sunday, October 31, 1999
+     "f"                 full date (long date + short time)      culture-specific                        Sunday, October 31, 1999 2:00 AM
+     "F"                 full date (long date + long time)       culture-specific                        Sunday, October 31, 1999 2:00:00 AM
+     "g"                 general date (short date + short time)  culture-specific                        10/31/1999 2:00 AM
+     "G"                 general date (short date + long time)   culture-specific                        10/31/1999 2:00:00 AM
+     "m"/"M"             Month/Day date                          culture-specific                        October 31
+     (G)     "o"/"O"             Round Trip XML                          "yyyy-MM-ddTHH:mm:ss.fffffffK"          1999-10-31 02:00:00.0000000Z
+     (G)     "r"/"R"             RFC 1123 date,                          "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'"   Sun, 31 Oct 1999 10:00:00 GMT
+     (G)     "s"                 Sortable format, based on ISO 8601.     "yyyy-MM-dd'T'HH:mm:ss"                 1999-10-31T02:00:00
+     ('T' for local time)
+     "t"                 short time                              culture-specific                        2:00 AM
+     "T"                 long time                               culture-specific                        2:00:00 AM
+     (G)     "u"                 Universal time with sortable format,    "yyyy'-'MM'-'dd HH':'mm':'ss'Z'"        1999-10-31 10:00:00Z
+     based on ISO 8601.
+     (U)     "U"                 Universal time with full                culture-specific                        Sunday, October 31, 1999 10:00:00 AM
+     (long date + long time) format
+     "y"/"Y"             Year/Month day                          culture-specific                        October, 1999
+     
+     */
 
     // This class contains only static members and does not require the serializable attribute.
-    internal static
-    class DateTimeFormat
+    internal static class DateTimeFormat
     {
         internal const int MaxSecondsFractionDigits = 7;
         internal const long NullOffset = long.MinValue;
 
         internal static char[] allStandardFormats =
         {
-            'd', 'D', 'f', 'F', 'g', 'G',
-            'm', 'M', 'o', 'O', 'r', 'R',
-            's', 't', 'T', 'u', 'U', 'y', 'Y',
+            'd',
+            'D',
+            'f',
+            'F',
+            'g',
+            'G',
+            'm',
+            'M',
+            'o',
+            'O',
+            'r',
+            'R',
+            's',
+            't',
+            'T',
+            'u',
+            'U',
+            'y',
+            'Y',
         };
 
         internal const string RoundtripFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK";
@@ -138,12 +153,16 @@ namespace System
 
         private const int DEFAULT_ALL_DATETIMES_SIZE = 132;
 
-        internal static readonly DateTimeFormatInfo InvariantFormatInfo = CultureInfo.InvariantCulture.DateTimeFormat;
-        internal static readonly string[] InvariantAbbreviatedMonthNames = InvariantFormatInfo.AbbreviatedMonthNames;
-        internal static readonly string[] InvariantAbbreviatedDayNames = InvariantFormatInfo.AbbreviatedDayNames;
+        internal static readonly DateTimeFormatInfo InvariantFormatInfo =
+            CultureInfo.InvariantCulture.DateTimeFormat;
+        internal static readonly string[] InvariantAbbreviatedMonthNames =
+            InvariantFormatInfo.AbbreviatedMonthNames;
+        internal static readonly string[] InvariantAbbreviatedDayNames =
+            InvariantFormatInfo.AbbreviatedDayNames;
         internal const string Gmt = "GMT";
 
-        internal static string[] fixedNumberFormats = new string[] {
+        internal static string[] fixedNumberFormats = new string[]
+        {
             "0",
             "00",
             "000",
@@ -173,7 +192,12 @@ namespace System
             FormatDigits(outputBuffer, value, len, false);
         }
 
-        internal static unsafe void FormatDigits(StringBuilder outputBuffer, int value, int len, bool overrideLengthLimit)
+        internal static unsafe void FormatDigits(
+            StringBuilder outputBuffer,
+            int value,
+            int len,
+            bool overrideLengthLimit
+        )
         {
             Debug.Assert(value >= 0, "DateTimeFormat.FormatDigits(): value >= 0");
 
@@ -272,10 +296,15 @@ namespace System
             11  Hebrew 10th Month
             12  Hebrew 11th Month
             13  Hebrew 12th Month
-
+            
             Therefore, if we are in a regular year, we have to increment the month name if month is greater or equal to 7.
-        */
-        private static string FormatHebrewMonthName(DateTime time, int month, int repeatCount, DateTimeFormatInfo dtfi)
+            */
+        private static string FormatHebrewMonthName(
+            DateTime time,
+            int month,
+            int repeatCount,
+            DateTimeFormatInfo dtfi
+        )
         {
             Debug.Assert(repeatCount != 3 || repeatCount != 4, "repeateCount should be 3 or 4");
             if (dtfi.Calendar.IsLeapYear(dtfi.Calendar.GetYear(time)))
@@ -299,7 +328,11 @@ namespace System
         // The pos should point to a quote character. This method will
         // append to the result StringBuilder the string enclosed by the quote character.
         //
-        internal static int ParseQuoteString(ReadOnlySpan<char> format, int pos, StringBuilder result)
+        internal static int ParseQuoteString(
+            ReadOnlySpan<char> format,
+            int pos,
+            StringBuilder result
+        )
         {
             //
             // NOTE : pos will be the index of the quote character in the 'format' string.
@@ -381,7 +414,12 @@ namespace System
         //      tokenLen    The len of the current pattern character.  This indicates how many "M" that we have.
         //      patternToMatch  The pattern that we want to search. This generally uses "d"
         //
-        private static bool IsUseGenitiveForm(ReadOnlySpan<char> format, int index, int tokenLen, char patternToMatch)
+        private static bool IsUseGenitiveForm(
+            ReadOnlySpan<char> format,
+            int index,
+            int tokenLen,
+            char patternToMatch
+        )
         {
             int i;
             int repeat = 0;
@@ -390,7 +428,9 @@ namespace System
             //
 
             // Find first "d".
-            for (i = index - 1; i >= 0 && format[i] != patternToMatch; i--) {  /*Do nothing here */ }
+            for (i = index - 1; i >= 0 && format[i] != patternToMatch; i--)
+            { /*Do nothing here */
+            }
 
             if (i >= 0)
             {
@@ -416,7 +456,9 @@ namespace System
             //
 
             // Find first "d"
-            for (i = index + tokenLen; i < format.Length && format[i] != patternToMatch; i++) { /* Do nothing here */ }
+            for (i = index + tokenLen; i < format.Length && format[i] != patternToMatch; i++)
+            { /* Do nothing here */
+            }
 
             if (i < format.Length)
             {
@@ -444,7 +486,12 @@ namespace System
         //  Actions: Format the DateTime instance using the specified format.
         //
         private static StringBuilder FormatCustomized(
-            DateTime dateTime, ReadOnlySpan<char> format, DateTimeFormatInfo dtfi, TimeSpan offset, StringBuilder? result)
+            DateTime dateTime,
+            ReadOnlySpan<char> format,
+            DateTimeFormatInfo dtfi,
+            TimeSpan offset,
+            StringBuilder? result
+        )
         {
             Calendar cal = dtfi.Calendar;
 
@@ -462,7 +509,8 @@ namespace System
             bool bTimeOnly = true;
 
             int i = 0;
-            int tokenLen, hour12;
+            int tokenLen,
+                hour12;
 
             while (i < format.Length)
             {
@@ -504,7 +552,11 @@ namespace System
                             fraction /= (long)Math.Pow(10, 7 - tokenLen);
                             if (ch == 'f')
                             {
-                                result.AppendSpanFormattable((int)fraction, fixedNumberFormats[tokenLen - 1], CultureInfo.InvariantCulture);
+                                result.AppendSpanFormattable(
+                                    (int)fraction,
+                                    fixedNumberFormats[tokenLen - 1],
+                                    CultureInfo.InvariantCulture
+                                );
                             }
                             else
                             {
@@ -523,7 +575,11 @@ namespace System
                                 }
                                 if (effectiveDigits > 0)
                                 {
-                                    result.AppendSpanFormattable((int)fraction, fixedNumberFormats[effectiveDigits - 1], CultureInfo.InvariantCulture);
+                                    result.AppendSpanFormattable(
+                                        (int)fraction,
+                                        fixedNumberFormats[effectiveDigits - 1],
+                                        CultureInfo.InvariantCulture
+                                    );
                                 }
                                 else
                                 {
@@ -565,7 +621,9 @@ namespace System
                         }
                         else
                         {
-                            result.Append(dateTime.Hour < 12 ? dtfi.AMDesignator : dtfi.PMDesignator);
+                            result.Append(
+                                dateTime.Hour < 12 ? dtfi.AMDesignator : dtfi.PMDesignator
+                            );
                         }
                         break;
                     case 'd':
@@ -621,7 +679,9 @@ namespace System
                         {
                             if (isHebrewCalendar)
                             {
-                                result.Append(FormatHebrewMonthName(dateTime, month, tokenLen, dtfi));
+                                result.Append(
+                                    FormatHebrewMonthName(dateTime, month, tokenLen, dtfi)
+                                );
                             }
                             else
                             {
@@ -630,8 +690,12 @@ namespace System
                                     result.Append(
                                         dtfi.InternalGetMonthName(
                                             month,
-                                            IsUseGenitiveForm(format, i, tokenLen, 'd') ? MonthNameStyles.Genitive : MonthNameStyles.Regular,
-                                            tokenLen == 3));
+                                            IsUseGenitiveForm(format, i, tokenLen, 'd')
+                                              ? MonthNameStyles.Genitive
+                                              : MonthNameStyles.Regular,
+                                            tokenLen == 3
+                                        )
+                                    );
                                 }
                                 else
                                 {
@@ -649,11 +713,23 @@ namespace System
 
                         int year = cal.GetYear(dateTime);
                         tokenLen = ParseRepeatPattern(format, i, ch);
-                        if (isJapaneseCalendar &&
-                            !LocalAppContextSwitches.FormatJapaneseFirstYearAsANumber &&
-                            year == 1 &&
-                            ((i + tokenLen < format.Length && format[i + tokenLen] == DateTimeFormatInfoScanner.CJKYearSuff) ||
-                            (i + tokenLen < format.Length - 1 && format[i + tokenLen] == '\'' && format[i + tokenLen + 1] == DateTimeFormatInfoScanner.CJKYearSuff)))
+                        if (
+                            isJapaneseCalendar
+                            && !LocalAppContextSwitches.FormatJapaneseFirstYearAsANumber
+                            && year == 1
+                            && (
+                                (
+                                    i + tokenLen < format.Length
+                                    && format[i + tokenLen] == DateTimeFormatInfoScanner.CJKYearSuff
+                                )
+                                || (
+                                    i + tokenLen < format.Length - 1
+                                    && format[i + tokenLen] == '\''
+                                    && format[i + tokenLen + 1]
+                                        == DateTimeFormatInfoScanner.CJKYearSuff
+                                )
+                            )
+                        )
                         {
                             // We are formatting a Japanese date with year equals 1 and the year number is followed by the year sign \u5e74
                             // In Japanese dates, the first year in the era is not formatted as a number 1 instead it is formatted as \u5143 which means
@@ -680,7 +756,12 @@ namespace System
                             }
                             else
                             {
-                                result.Append(year.ToString("D" + tokenLen.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture));
+                                result.Append(
+                                    year.ToString(
+                                        "D" + tokenLen.ToString(CultureInfo.InvariantCulture),
+                                        CultureInfo.InvariantCulture
+                                    )
+                                );
                             }
                         }
                         bTimeOnly = false;
@@ -715,7 +796,13 @@ namespace System
                         if (nextChar >= 0 && nextChar != '%')
                         {
                             char nextCharChar = (char)nextChar;
-                            StringBuilder origStringBuilder = FormatCustomized(dateTime, MemoryMarshal.CreateReadOnlySpan<char>(ref nextCharChar, 1), dtfi, offset, result);
+                            StringBuilder origStringBuilder = FormatCustomized(
+                                dateTime,
+                                MemoryMarshal.CreateReadOnlySpan<char>(ref nextCharChar, 1),
+                                dtfi,
+                                offset,
+                                result
+                            );
                             Debug.Assert(ReferenceEquals(origStringBuilder, result));
                             tokenLen = 2;
                         }
@@ -774,7 +861,13 @@ namespace System
         }
 
         // output the 'z' family of formats, which output a the offset from UTC, e.g. "-07:30"
-        private static void FormatCustomizedTimeZone(DateTime dateTime, TimeSpan offset, int tokenLen, bool timeOnly, StringBuilder result)
+        private static void FormatCustomizedTimeZone(
+            DateTime dateTime,
+            TimeSpan offset,
+            int tokenLen,
+            bool timeOnly,
+            StringBuilder result
+        )
         {
             // See if the instance already has an offset
             bool dateTimeFormat = (offset.Ticks == NullOffset);
@@ -786,7 +879,10 @@ namespace System
                 {
                     // For time only format and a time only input, the time offset on 0001/01/01 is less
                     // accurate than the system's current offset because of daylight saving time.
-                    offset = TimeZoneInfo.GetLocalUtcOffset(DateTime.Now, TimeZoneInfoOptions.NoThrowOnInvalidTime);
+                    offset = TimeZoneInfo.GetLocalUtcOffset(
+                        DateTime.Now,
+                        TimeZoneInfoOptions.NoThrowOnInvalidTime
+                    );
                 }
                 else if (dateTime.Kind == DateTimeKind.Utc)
                 {
@@ -794,7 +890,10 @@ namespace System
                 }
                 else
                 {
-                    offset = TimeZoneInfo.GetLocalUtcOffset(dateTime, TimeZoneInfoOptions.NoThrowOnInvalidTime);
+                    offset = TimeZoneInfo.GetLocalUtcOffset(
+                        dateTime,
+                        TimeZoneInfoOptions.NoThrowOnInvalidTime
+                    );
                 }
             }
             if (offset.Ticks >= 0)
@@ -826,7 +925,11 @@ namespace System
         }
 
         // output the 'K' format, which is for round-tripping the data
-        private static void FormatCustomizedRoundripTimeZone(DateTime dateTime, TimeSpan offset, StringBuilder result)
+        private static void FormatCustomizedRoundripTimeZone(
+            DateTime dateTime,
+            TimeSpan offset,
+            StringBuilder result
+        )
         {
             // The objective of this format is to round trip the data in the type
             // For DateTime it should round-trip the Kind value and preserve the time zone.
@@ -839,7 +942,10 @@ namespace System
                 {
                     case DateTimeKind.Local:
                         // This should output the local offset, e.g. "-07:30"
-                        offset = TimeZoneInfo.GetLocalUtcOffset(dateTime, TimeZoneInfoOptions.NoThrowOnInvalidTime);
+                        offset = TimeZoneInfo.GetLocalUtcOffset(
+                            dateTime,
+                            TimeZoneInfoOptions.NoThrowOnInvalidTime
+                        );
                         // fall through to shared time zone output code
                         break;
                     case DateTimeKind.Utc:
@@ -879,26 +985,26 @@ namespace System
 
             switch (format[0])
             {
-                case 'd':       // Short Date
+                case 'd': // Short Date
                     realFormat = dtfi.ShortDatePattern;
                     break;
-                case 'D':       // Long Date
+                case 'D': // Long Date
                     realFormat = dtfi.LongDatePattern;
                     break;
-                case 'f':       // Full (long date + short time)
+                case 'f': // Full (long date + short time)
                     realFormat = dtfi.LongDatePattern + " " + dtfi.ShortTimePattern;
                     break;
-                case 'F':       // Full (long date + long time)
+                case 'F': // Full (long date + long time)
                     realFormat = dtfi.FullDateTimePattern;
                     break;
-                case 'g':       // General (short date + short time)
+                case 'g': // General (short date + short time)
                     realFormat = dtfi.GeneralShortTimePattern;
                     break;
-                case 'G':       // General (short date + long time)
+                case 'G': // General (short date + long time)
                     realFormat = dtfi.GeneralLongTimePattern;
                     break;
                 case 'm':
-                case 'M':       // Month/Day Date
+                case 'M': // Month/Day Date
                     realFormat = dtfi.MonthDayPattern;
                     break;
                 case 'o':
@@ -906,26 +1012,26 @@ namespace System
                     realFormat = RoundtripFormat;
                     break;
                 case 'r':
-                case 'R':       // RFC 1123 Standard
+                case 'R': // RFC 1123 Standard
                     realFormat = dtfi.RFC1123Pattern;
                     break;
-                case 's':       // Sortable without Time Zone Info
+                case 's': // Sortable without Time Zone Info
                     realFormat = dtfi.SortableDateTimePattern;
                     break;
-                case 't':       // Short Time
+                case 't': // Short Time
                     realFormat = dtfi.ShortTimePattern;
                     break;
-                case 'T':       // Long Time
+                case 'T': // Long Time
                     realFormat = dtfi.LongTimePattern;
                     break;
-                case 'u':       // Universal with Sortable format
+                case 'u': // Universal with Sortable format
                     realFormat = dtfi.UniversalSortableDateTimePattern;
                     break;
-                case 'U':       // Universal with Full (long date + long time) format
+                case 'U': // Universal with Full (long date + long time) format
                     realFormat = dtfi.FullDateTimePattern;
                     break;
                 case 'y':
-                case 'Y':       // Year/Month Date
+                case 'Y': // Year/Month Date
                     realFormat = dtfi.YearMonthPattern;
                     break;
                 default:
@@ -939,17 +1045,22 @@ namespace System
         // This method also convert the dateTime if necessary (e.g. when the format is in Universal time),
         // and change dtfi if necessary (e.g. when the format should use invariant culture).
         //
-        private static string ExpandPredefinedFormat(ReadOnlySpan<char> format, ref DateTime dateTime, ref DateTimeFormatInfo dtfi, TimeSpan offset)
+        private static string ExpandPredefinedFormat(
+            ReadOnlySpan<char> format,
+            ref DateTime dateTime,
+            ref DateTimeFormatInfo dtfi,
+            TimeSpan offset
+        )
         {
             switch (format[0])
             {
                 case 'o':
-                case 'O':       // Round trip format
+                case 'O': // Round trip format
                     dtfi = DateTimeFormatInfo.InvariantInfo;
                     break;
                 case 'r':
-                case 'R':       // RFC 1123 Standard
-                case 'u':       // Universal time in sortable format.
+                case 'R': // RFC 1123 Standard
+                case 'u': // Universal time in sortable format.
                     if (offset.Ticks != NullOffset)
                     {
                         // Convert to UTC invariants mean this will be in range
@@ -957,10 +1068,10 @@ namespace System
                     }
                     dtfi = DateTimeFormatInfo.InvariantInfo;
                     break;
-                case 's':       // Sortable without Time Zone Info
+                case 's': // Sortable without Time Zone Info
                     dtfi = DateTimeFormatInfo.InvariantInfo;
                     break;
-                case 'U':       // Universal time in culture dependent format.
+                case 'U': // Universal time in culture dependent format.
                     if (offset.Ticks != NullOffset)
                     {
                         // This format is not supported by DateTimeOffset
@@ -986,7 +1097,12 @@ namespace System
             return Format(dateTime, format, provider, new TimeSpan(NullOffset));
         }
 
-        internal static string Format(DateTime dateTime, string? format, IFormatProvider? provider, TimeSpan offset)
+        internal static string Format(
+            DateTime dateTime,
+            string? format,
+            IFormatProvider? provider,
+            TimeSpan offset
+        )
         {
             if (format != null && format.Length == 1)
             {
@@ -996,7 +1112,8 @@ namespace System
                     // Round trip format
                     case 'o':
                     case 'O':
-                        const int MinFormatOLength = 27, MaxFormatOLength = 33;
+                        const int MinFormatOLength = 27,
+                            MaxFormatOLength = 33;
                         Span<char> span = stackalloc char[MaxFormatOLength];
                         TryFormatO(dateTime, offset, span, out int ochars);
                         Debug.Assert(ochars >= MinFormatOLength && ochars <= MaxFormatOLength);
@@ -1007,20 +1124,47 @@ namespace System
                     case 'R':
                         const int FormatRLength = 29;
                         string str = string.FastAllocateString(FormatRLength);
-                        TryFormatR(dateTime, offset, new Span<char>(ref str.GetRawStringData(), str.Length), out int rchars);
+                        TryFormatR(
+                            dateTime,
+                            offset,
+                            new Span<char>(ref str.GetRawStringData(), str.Length),
+                            out int rchars
+                        );
                         Debug.Assert(rchars == str.Length);
                         return str;
                 }
             }
 
             DateTimeFormatInfo dtfi = DateTimeFormatInfo.GetInstance(provider);
-            return StringBuilderCache.GetStringAndRelease(FormatStringBuilder(dateTime, format, dtfi, offset));
+            return StringBuilderCache.GetStringAndRelease(
+                FormatStringBuilder(dateTime, format, dtfi, offset)
+            );
         }
 
-        internal static bool TryFormat(DateTime dateTime, Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
-            TryFormat(dateTime, destination, out charsWritten, format, provider, new TimeSpan(NullOffset));
+        internal static bool TryFormat(
+            DateTime dateTime,
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        ) =>
+            TryFormat(
+                dateTime,
+                destination,
+                out charsWritten,
+                format,
+                provider,
+                new TimeSpan(NullOffset)
+            );
 
-        internal static bool TryFormat(DateTime dateTime, Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider, TimeSpan offset)
+        internal static bool TryFormat(
+            DateTime dateTime,
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider,
+            TimeSpan offset
+        )
         {
             if (format.Length == 1)
             {
@@ -1057,7 +1201,12 @@ namespace System
             return success;
         }
 
-        private static StringBuilder FormatStringBuilder(DateTime dateTime, ReadOnlySpan<char> format, DateTimeFormatInfo dtfi, TimeSpan offset)
+        private static StringBuilder FormatStringBuilder(
+            DateTime dateTime,
+            ReadOnlySpan<char> format,
+            DateTimeFormatInfo dtfi,
+            TimeSpan offset
+        )
         {
             Debug.Assert(dtfi != null);
             if (format.Length == 0)
@@ -1100,7 +1249,9 @@ namespace System
                 else
                 {
                     // Default DateTimeOffset.ToString case.
-                    format = timeOnlySpecialCase ? RoundtripDateTimeUnfixed : dtfi.DateTimeOffsetPattern;
+                    format = timeOnlySpecialCase
+                        ? RoundtripDateTimeUnfixed
+                        : dtfi.DateTimeOffsetPattern;
                 }
             }
 
@@ -1182,7 +1333,6 @@ namespace System
             return true;
         }
 
-
         internal static bool IsValidCustomTimeFormat(ReadOnlySpan<char> format, bool throwOnError)
         {
             int length = format.Length;
@@ -1252,7 +1402,13 @@ namespace System
         //   012345678901234567890123456789012
         //   ---------------------------------
         //   05:30:45.7680000
-        internal static bool TryFormatTimeOnlyO(int hour, int minute, int second, long fraction, Span<char> destination)
+        internal static bool TryFormatTimeOnlyO(
+            int hour,
+            int minute,
+            int second,
+            long fraction,
+            Span<char> destination
+        )
         {
             if (destination.Length < 16)
             {
@@ -1273,7 +1429,12 @@ namespace System
         //   012345678901234567890123456789012
         //   ---------------------------------
         //   05:30:45
-        internal static bool TryFormatTimeOnlyR(int hour, int minute, int second, Span<char> destination)
+        internal static bool TryFormatTimeOnlyR(
+            int hour,
+            int minute,
+            int second,
+            Span<char> destination
+        )
         {
             if (destination.Length < 8)
             {
@@ -1293,7 +1454,12 @@ namespace System
         //   012345678901234567890123456789012
         //   ---------------------------------
         //   2017-06-12
-        internal static bool TryFormatDateOnlyO(int year, int month, int day, Span<char> destination)
+        internal static bool TryFormatDateOnlyO(
+            int year,
+            int month,
+            int day,
+            Span<char> destination
+        )
         {
             if (destination.Length < 10)
             {
@@ -1312,7 +1478,13 @@ namespace System
         //   01234567890123456789012345678
         //   -----------------------------
         //   Tue, 03 Jan 2017
-        internal static bool TryFormatDateOnlyR(DayOfWeek dayOfWeek, int year, int month, int day, Span<char> destination)
+        internal static bool TryFormatDateOnlyR(
+            DayOfWeek dayOfWeek,
+            int year,
+            int month,
+            int day,
+            Span<char> destination
+        )
         {
             if (destination.Length < 16)
             {
@@ -1346,7 +1518,12 @@ namespace System
         //   2017-06-12T05:30:45.7680000-07:00
         //   2017-06-12T05:30:45.7680000Z           (Z is short for "+00:00" but also distinguishes DateTimeKind.Utc from DateTimeKind.Local)
         //   2017-06-12T05:30:45.7680000            (interpreted as local time wrt to current time zone)
-        private static bool TryFormatO(DateTime dateTime, TimeSpan offset, Span<char> destination, out int charsWritten)
+        private static bool TryFormatO(
+            DateTime dateTime,
+            TimeSpan offset,
+            Span<char> destination,
+            out int charsWritten
+        )
         {
             const int MinimumBytesNeeded = 27;
 
@@ -1379,7 +1556,9 @@ namespace System
             charsWritten = charsRequired;
 
             // Hoist most of the bounds checks on destination.
-            { _ = destination[MinimumBytesNeeded - 1]; }
+            {
+                _ = destination[MinimumBytesNeeded - 1];
+            }
 
             dateTime.GetDate(out int year, out int month, out int day);
             dateTime.GetTimePrecise(out int hour, out int minute, out int second, out int tick);
@@ -1434,7 +1613,12 @@ namespace System
         //   01234567890123456789012345678
         //   -----------------------------
         //   Tue, 03 Jan 2017 08:08:05 GMT
-        private static bool TryFormatR(DateTime dateTime, TimeSpan offset, Span<char> destination, out int charsWritten)
+        private static bool TryFormatR(
+            DateTime dateTime,
+            TimeSpan offset,
+            Span<char> destination,
+            out int charsWritten
+        )
         {
             if (destination.Length <= 28)
             {
@@ -1504,7 +1688,11 @@ namespace System
         /// This method performs best when the starting index is a constant literal.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void WriteFourDecimalDigits(uint value, Span<char> buffer, int startingIndex = 0)
+        private static void WriteFourDecimalDigits(
+            uint value,
+            Span<char> buffer,
+            int startingIndex = 0
+        )
         {
             Debug.Assert(value <= 9999);
 
@@ -1540,7 +1728,11 @@ namespace System
             buffer[0] = (char)('0' + value);
         }
 
-        internal static string[] GetAllDateTimes(DateTime dateTime, char format, DateTimeFormatInfo dtfi)
+        internal static string[] GetAllDateTimes(
+            DateTime dateTime,
+            char format,
+            DateTimeFormatInfo dtfi
+        )
         {
             Debug.Assert(dtfi != null);
             string[] allFormats;

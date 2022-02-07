@@ -13,7 +13,8 @@ internal static class Template
     {
         var controllerCount = 0;
         var templatesVisited = new Dictionary<string, (int ControllerIndex, int ActionIndex)>(
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
 
         var setupEndpointsLines = new List<string>();
         for (var i = 0; i < entries.Count; i++)
@@ -37,8 +38,13 @@ internal static class Template
             var controllerName = $"Controller{visitedTemplateInfo.ControllerIndex}";
             var actionName = $"Action{visitedTemplateInfo.ActionIndex}";
 
-            var httpMethodText = entry.Method == null ? "httpMethod: null" : $"\"{entry.Method.ToUpperInvariant()}\"";
-            setupEndpointsLines.Add($"            Endpoints[{i}] = CreateEndpoint(\"{template}\", \"{controllerName}\", \"{actionName}\", {httpMethodText});");
+            var httpMethodText =
+                entry.Method == null
+                    ? "httpMethod: null"
+                    : $"\"{entry.Method.ToUpperInvariant()}\"";
+            setupEndpointsLines.Add(
+                $"            Endpoints[{i}] = CreateEndpoint(\"{template}\", \"{controllerName}\", \"{actionName}\", {httpMethodText});"
+            );
         }
 
         var setupRequestsLines = new List<string>();
@@ -46,14 +52,20 @@ internal static class Template
         {
             var entry = entries[i];
             setupRequestsLines.Add($"            Requests[{i}] = new DefaultHttpContext();");
-            setupRequestsLines.Add($"            Requests[{i}].RequestServices = CreateServices();");
+            setupRequestsLines.Add(
+                $"            Requests[{i}].RequestServices = CreateServices();"
+            );
 
             if (entry.Method != null)
             {
-                setupRequestsLines.Add($"            Requests[{i}].Request.Method = HttpMethods.GetCanonicalizedValue({entries[i].Method});");
+                setupRequestsLines.Add(
+                    $"            Requests[{i}].Request.Method = HttpMethods.GetCanonicalizedValue({entries[i].Method});"
+                );
             }
 
-            setupRequestsLines.Add($"            Requests[{i}].Request.Path = \"{entries[i].RequestUrl}\";");
+            setupRequestsLines.Add(
+                $"            Requests[{i}].Request.Path = \"{entries[i].RequestUrl}\";"
+            );
         }
 
         var setupMatcherLines = new List<string>();
@@ -129,9 +141,10 @@ namespace Microsoft.AspNetCore.Routing
         }}
     }}
 }}",
-string.Join(Environment.NewLine, setupEndpointsLines),
-string.Join(Environment.NewLine, setupRequestsLines),
-string.Join(Environment.NewLine, setupMatcherLines),
-entries.Count);
+            string.Join(Environment.NewLine, setupEndpointsLines),
+            string.Join(Environment.NewLine, setupRequestsLines),
+            string.Join(Environment.NewLine, setupMatcherLines),
+            entries.Count
+        );
     }
 }

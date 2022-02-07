@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 {
     internal class TypeSyntaxSimplifierWalker : CSharpSyntaxWalker
     {
-        private static readonly ImmutableHashSet<string> s_emptyAliasedNames = ImmutableHashSet.Create<string>(StringComparer.Ordinal);
+        private static readonly ImmutableHashSet<string> s_emptyAliasedNames =
+            ImmutableHashSet.Create<string>(StringComparer.Ordinal);
 
         /// <summary>
         /// This set contains the full names of types that have equivalent predefined names in the language.
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 nameof(Decimal),
                 nameof(String),
                 nameof(Char),
-                nameof(Object));
+                nameof(Object)
+            );
 
         private readonly CSharpSimplifyTypeNamesDiagnosticAnalyzer _analyzer;
         private readonly SemanticModel _semanticModel;
@@ -58,21 +60,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 
         public bool HasDiagnostics => _diagnostics?.Count > 0;
 
-        public ImmutableArray<Diagnostic> Diagnostics => _diagnostics?.ToImmutable() ?? ImmutableArray<Diagnostic>.Empty;
+        public ImmutableArray<Diagnostic> Diagnostics =>
+            _diagnostics?.ToImmutable() ?? ImmutableArray<Diagnostic>.Empty;
 
         public ImmutableArray<Diagnostic>.Builder DiagnosticsBuilder
         {
             get
             {
                 if (_diagnostics is null)
-                    Interlocked.CompareExchange(ref _diagnostics, ImmutableArray.CreateBuilder<Diagnostic>(), null);
+                    Interlocked.CompareExchange(
+                        ref _diagnostics,
+                        ImmutableArray.CreateBuilder<Diagnostic>(),
+                        null
+                    );
 
                 return _diagnostics;
             }
         }
 
-        public TypeSyntaxSimplifierWalker(CSharpSimplifyTypeNamesDiagnosticAnalyzer analyzer, SemanticModel semanticModel, OptionSet optionSet, SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? ignoredSpans, CancellationToken cancellationToken)
-            : base(SyntaxWalkerDepth.StructuredTrivia)
+        public TypeSyntaxSimplifierWalker(
+            CSharpSimplifyTypeNamesDiagnosticAnalyzer analyzer,
+            SemanticModel semanticModel,
+            OptionSet optionSet,
+            SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? ignoredSpans,
+            CancellationToken cancellationToken
+        ) : base(SyntaxWalkerDepth.StructuredTrivia)
         {
             _analyzer = analyzer;
             _semanticModel = semanticModel;
@@ -84,7 +96,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             _aliasedNames = GetAliasedNames(root as CompilationUnitSyntax);
         }
 
-        private static ImmutableHashSet<string> GetAliasedNames(CompilationUnitSyntax? compilationUnit)
+        private static ImmutableHashSet<string> GetAliasedNames(
+            CompilationUnitSyntax? compilationUnit
+        )
         {
             var aliasedNames = s_emptyAliasedNames;
             if (compilationUnit is null)
@@ -105,7 +119,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             {
                 if (usingDirective.Alias is object)
                 {
-                    if (usingDirective.Name.GetRightmostName() is IdentifierNameSyntax identifierName)
+                    if (
+                        usingDirective.Name.GetRightmostName()
+                        is IdentifierNameSyntax identifierName
+                    )
                     {
                         var identifierAlias = identifierName.Identifier.ValueText;
                         if (!RoslynString.IsNullOrEmpty(identifierAlias))
@@ -131,7 +148,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 
         public override void VisitQualifiedName(QualifiedNameSyntax node)
         {
-            if (_ignoredSpans?.HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false)
+            if (
+                _ignoredSpans?.HasIntervalThatOverlapsWith(
+                    node.FullSpan.Start,
+                    node.FullSpan.Length
+                ) ?? false
+            )
             {
                 return;
             }
@@ -148,7 +170,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 
         public override void VisitAliasQualifiedName(AliasQualifiedNameSyntax node)
         {
-            if (_ignoredSpans?.HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false)
+            if (
+                _ignoredSpans?.HasIntervalThatOverlapsWith(
+                    node.FullSpan.Start,
+                    node.FullSpan.Length
+                ) ?? false
+            )
             {
                 return;
             }
@@ -165,7 +192,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 
         public override void VisitGenericName(GenericNameSyntax node)
         {
-            if (_ignoredSpans?.HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false)
+            if (
+                _ignoredSpans?.HasIntervalThatOverlapsWith(
+                    node.FullSpan.Start,
+                    node.FullSpan.Length
+                ) ?? false
+            )
             {
                 return;
             }
@@ -182,7 +214,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (_ignoredSpans?.HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false)
+            if (
+                _ignoredSpans?.HasIntervalThatOverlapsWith(
+                    node.FullSpan.Start,
+                    node.FullSpan.Length
+                ) ?? false
+            )
             {
                 return;
             }
@@ -191,12 +228,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             //
             // In other cases, don't bother looking at the right side of A.B or A::B. We will process those in
             // one of our other top level Visit methods (like VisitQualifiedName).
-            var canTrySimplify = node.Identifier.ValueText.EndsWith("Attribute", StringComparison.Ordinal);
+            var canTrySimplify = node.Identifier.ValueText.EndsWith(
+                "Attribute",
+                StringComparison.Ordinal
+            );
             if (!canTrySimplify && !node.IsRightSideOfDotOrArrowOrColonColon())
             {
                 // The only possible simplifications to an unqualified identifier are replacement with an alias or
                 // replacement with a predefined type.
-                canTrySimplify = CanReplaceIdentifierWithAlias(node.Identifier.ValueText)
+                canTrySimplify =
+                    CanReplaceIdentifierWithAlias(node.Identifier.ValueText)
                     || CanReplaceIdentifierWithPredefinedType(node.Identifier.ValueText);
             }
 
@@ -211,16 +252,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             return;
 
             // Local functions
-            bool CanReplaceIdentifierWithAlias(string identifier)
-                => _aliasedNames.Contains(identifier);
+            bool CanReplaceIdentifierWithAlias(string identifier) =>
+                _aliasedNames.Contains(identifier);
 
-            static bool CanReplaceIdentifierWithPredefinedType(string identifier)
-                => s_predefinedTypeMetadataNames.Contains(identifier);
+            static bool CanReplaceIdentifierWithPredefinedType(string identifier) =>
+                s_predefinedTypeMetadataNames.Contains(identifier);
         }
 
         public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
         {
-            if (_ignoredSpans?.HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false)
+            if (
+                _ignoredSpans?.HasIntervalThatOverlapsWith(
+                    node.FullSpan.Start,
+                    node.FullSpan.Length
+                ) ?? false
+            )
             {
                 return;
             }
@@ -237,7 +283,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 
         public override void VisitQualifiedCref(QualifiedCrefSyntax node)
         {
-            if (_ignoredSpans?.HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false)
+            if (
+                _ignoredSpans?.HasIntervalThatOverlapsWith(
+                    node.FullSpan.Start,
+                    node.FullSpan.Length
+                ) ?? false
+            )
             {
                 return;
             }
@@ -276,7 +327,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
         /// </summary>
         private bool TrySimplify(SyntaxNode node)
         {
-            if (!_analyzer.TrySimplify(_semanticModel, node, out var diagnostic, _optionSet, _cancellationToken))
+            if (
+                !_analyzer.TrySimplify(
+                    _semanticModel,
+                    node,
+                    out var diagnostic,
+                    _optionSet,
+                    _cancellationToken
+                )
+            )
                 return false;
 
             DiagnosticsBuilder.Add(diagnostic);

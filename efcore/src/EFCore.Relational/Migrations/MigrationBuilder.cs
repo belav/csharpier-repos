@@ -92,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? collation = null,
             int? precision = null,
             int? scale = null,
-            bool? stored = null)
+            bool? stored = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -153,8 +154,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? principalSchema = null,
             string? principalColumn = null,
             ReferentialAction onUpdate = ReferentialAction.NoAction,
-            ReferentialAction onDelete = ReferentialAction.NoAction)
-            => AddForeignKey(
+            ReferentialAction onDelete = ReferentialAction.NoAction
+        ) =>
+            AddForeignKey(
                 name,
                 table,
                 new[] { Check.NotEmpty(column, nameof(column)) },
@@ -163,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 principalSchema,
                 principalColumn != null ? new[] { principalColumn } : null,
                 onUpdate,
-                onDelete);
+                onDelete
+            );
 
         /// <summary>
         ///     Builds an <see cref="AddForeignKeyOperation" /> to add a new composite (multi-column) foreign key to a table.
@@ -195,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? principalSchema = null,
             string[]? principalColumns = null,
             ReferentialAction onUpdate = ReferentialAction.NoAction,
-            ReferentialAction onDelete = ReferentialAction.NoAction)
+            ReferentialAction onDelete = ReferentialAction.NoAction
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -234,12 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string column,
-            string? schema = null)
-            => AddPrimaryKey(
-                name,
-                table,
-                new[] { Check.NotEmpty(column, nameof(column)) },
-                schema);
+            string? schema = null
+        ) => AddPrimaryKey(name, table, new[] { Check.NotEmpty(column, nameof(column)) }, schema);
 
         /// <summary>
         ///     Builds an <see cref="AddPrimaryKeyOperation" /> to add a new composite (multi-column) primary key to a table.
@@ -256,7 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string[] columns,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -289,12 +290,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string column,
-            string? schema = null)
-            => AddUniqueConstraint(
+            string? schema = null
+        ) =>
+            AddUniqueConstraint(
                 name,
                 table,
                 new[] { Check.NotEmpty(column, nameof(column)) },
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="AddUniqueConstraintOperation" /> to add a new composite (multi-column) unique constraint to a table.
@@ -311,7 +314,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string[] columns,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -443,7 +447,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             int? scale = null,
             int? oldScale = null,
             bool? stored = null,
-            bool? oldStored = null)
+            bool? oldStored = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -504,15 +509,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <returns>A builder to allow annotations to be added to the operation.</returns>
         public virtual AlterOperationBuilder<AlterDatabaseOperation> AlterDatabase(
             string? collation = null,
-            string? oldCollation = null)
+            string? oldCollation = null
+        )
         {
             var operation = new AlterDatabaseOperation
             {
                 Collation = collation,
-                OldDatabase =
-                {
-                    Collation = oldCollation
-                }
+                OldDatabase = { Collation = oldCollation }
             };
             Operations.Add(operation);
 
@@ -546,7 +549,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             int oldIncrementBy = 1,
             long? oldMinValue = null,
             long? oldMaxValue = null,
-            bool oldCyclic = false)
+            bool oldCyclic = false
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -586,7 +590,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string? schema = null,
             string? comment = null,
-            string? oldComment = null)
+            string? oldComment = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -621,14 +626,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string column,
             string? schema = null,
             bool unique = false,
-            string? filter = null)
-            => CreateIndex(
+            string? filter = null
+        ) =>
+            CreateIndex(
                 name,
                 table,
                 new[] { Check.NotEmpty(column, nameof(column)) },
                 schema,
                 unique,
-                filter);
+                filter
+            );
 
         /// <summary>
         ///     Builds a <see cref="CreateIndexOperation" /> to create a new composite (multi-column) index.
@@ -649,7 +656,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columns,
             string? schema = null,
             bool unique = false,
-            string? filter = null)
+            string? filter = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -677,8 +685,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// </remarks>
         /// <param name="name">The name of the schema.</param>
         /// <returns>A builder to allow annotations to be added to the operation.</returns>
-        public virtual OperationBuilder<EnsureSchemaOperation> EnsureSchema(
-            string name)
+        public virtual OperationBuilder<EnsureSchemaOperation> EnsureSchema(string name)
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -709,8 +716,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             int incrementBy = 1,
             long? minValue = null,
             long? maxValue = null,
-            bool cyclic = false)
-            => CreateSequence<long>(name, schema, startValue, incrementBy, minValue, maxValue, cyclic);
+            bool cyclic = false
+        ) =>
+            CreateSequence<long>(name, schema, startValue, incrementBy, minValue, maxValue, cyclic);
 
         /// <summary>
         ///     Builds a <see cref="CreateSequenceOperation" /> to create a new sequence.
@@ -734,7 +742,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             int incrementBy = 1,
             long? minValue = null,
             long? maxValue = null,
-            bool cyclic = false)
+            bool cyclic = false
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -775,8 +784,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string sql,
-            string? schema = null)
-            => AddCheckConstraint(name, table, sql, schema);
+            string? schema = null
+        ) => AddCheckConstraint(name, table, sql, schema);
 
         /// <summary>
         ///     Builds an <see cref="AddCheckConstraintOperation" /> to add a new check constraint to a table.
@@ -793,7 +802,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string sql,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -831,7 +841,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Func<ColumnsBuilder, TColumns> columns,
             string? schema = null,
             Action<CreateTableBuilder<TColumns>>? constraints = null,
-            string? comment = null)
+            string? comment = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(columns, nameof(columns));
@@ -848,7 +859,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var columnMap = new Dictionary<PropertyInfo, AddColumnOperation>();
             foreach (var property in typeof(TColumns).GetTypeInfo().DeclaredProperties)
             {
-                var addColumnOperation = ((IInfrastructure<AddColumnOperation>)property.GetMethod!.Invoke(columnsObject, null)!).Instance;
+                var addColumnOperation =
+                    (
+                        (IInfrastructure<AddColumnOperation>)property.GetMethod!.Invoke(
+                            columnsObject,
+                            null
+                        )!
+                    ).Instance;
                 if (addColumnOperation.Name == null)
                 {
                     addColumnOperation.Name = property.Name;
@@ -879,7 +896,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<DropColumnOperation> DropColumn(
             string name,
             string table,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -908,7 +926,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<DropForeignKeyOperation> DropForeignKey(
             string name,
             string table,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -937,7 +956,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<DropIndexOperation> DropIndex(
             string name,
             string? table = null,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -965,7 +985,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<DropPrimaryKeyOperation> DropPrimaryKey(
             string name,
             string table,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -989,8 +1010,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// </remarks>
         /// <param name="name">The name of the schema to drop.</param>
         /// <returns>A builder to allow annotations to be added to the operation.</returns>
-        public virtual OperationBuilder<DropSchemaOperation> DropSchema(
-            string name)
+        public virtual OperationBuilder<DropSchemaOperation> DropSchema(string name)
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -1011,7 +1031,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <returns>A builder to allow annotations to be added to the operation.</returns>
         public virtual OperationBuilder<DropSequenceOperation> DropSequence(
             string name,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -1034,7 +1055,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<DropCheckConstraintOperation> DropCheckConstraint(
             string name,
             string table,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -1060,7 +1082,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <returns>A builder to allow annotations to be added to the operation.</returns>
         public virtual OperationBuilder<DropTableOperation> DropTable(
             string name,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -1083,7 +1106,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<DropUniqueConstraintOperation> DropUniqueConstraint(
             string name,
             string table,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -1114,7 +1138,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string newName,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
@@ -1147,7 +1172,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string newName,
             string? table = null,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(newName, nameof(newName));
@@ -1180,7 +1206,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string? schema = null,
             string? newName = null,
-            string? newSchema = null)
+            string? newSchema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -1211,7 +1238,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string? schema = null,
             string? newName = null,
-            string? newSchema = null)
+            string? newSchema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -1240,7 +1268,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<RestartSequenceOperation> RestartSequence(
             string name,
             long startValue = 1L,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -1268,11 +1297,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <returns>A builder to allow annotations to be added to the operation.</returns>
         public virtual OperationBuilder<SqlOperation> Sql(
             string sql,
-            bool suppressTransaction = false)
+            bool suppressTransaction = false
+        )
         {
             Check.NotEmpty(sql, nameof(sql));
 
-            var operation = new SqlOperation { Sql = sql, SuppressTransaction = suppressTransaction };
+            var operation = new SqlOperation
+            {
+                Sql = sql,
+                SuppressTransaction = suppressTransaction
+            };
             Operations.Add(operation);
 
             return new OperationBuilder<SqlOperation>(operation);
@@ -1293,8 +1327,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string column,
             object? value,
-            string? schema = null)
-            => InsertData(table, new[] { Check.NotEmpty(column, nameof(column)) }, new[] { value }, schema);
+            string? schema = null
+        ) =>
+            InsertData(
+                table,
+                new[] { Check.NotEmpty(column, nameof(column)) },
+                new[] { value },
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="InsertDataOperation" /> to insert a single seed data value for a single column.
@@ -1313,12 +1353,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string column,
             string columnType,
             object? value,
-            string? schema = null)
-            => InsertData(
+            string? schema = null
+        ) =>
+            InsertData(
                 table,
                 new[] { Check.NotEmpty(column, nameof(column)) },
                 new[] { Check.NotEmpty(columnType, nameof(columnType)) },
-                new[] { value }, schema);
+                new[] { value },
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="InsertDataOperation" /> to insert a single row of seed data values.
@@ -1335,8 +1378,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string[] columns,
             object?[] values,
-            string? schema = null)
-            => InsertData(table, columns, ToMultidimensionalArray(Check.NotNull(values, nameof(values))), schema);
+            string? schema = null
+        ) =>
+            InsertData(
+                table,
+                columns,
+                ToMultidimensionalArray(Check.NotNull(values, nameof(values))),
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="InsertDataOperation" /> to insert a single row of seed data values.
@@ -1355,8 +1404,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columns,
             string[] columnTypes,
             object?[] values,
-            string? schema = null)
-            => InsertData(table, columns, columnTypes, ToMultidimensionalArray(Check.NotNull(values, nameof(values))), schema);
+            string? schema = null
+        ) =>
+            InsertData(
+                table,
+                columns,
+                columnTypes,
+                ToMultidimensionalArray(Check.NotNull(values, nameof(values))),
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="InsertDataOperation" /> to insert multiple rows of seed data values for a single column.
@@ -1373,13 +1429,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string column,
             object[] values,
-            string? schema = null)
-            => InsertDataInternal(
+            string? schema = null
+        ) =>
+            InsertDataInternal(
                 table,
                 new[] { Check.NotEmpty(column, nameof(column)) },
                 null,
-                ToMultidimensionalArray(Check.NotNull(values, nameof(values)), firstDimension: true),
-                schema);
+                ToMultidimensionalArray(
+                    Check.NotNull(values, nameof(values)),
+                    firstDimension: true
+                ),
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="InsertDataOperation" /> to insert multiple rows of seed data values for a single column.
@@ -1398,13 +1459,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string column,
             string columnType,
             object[] values,
-            string? schema = null)
-            => InsertDataInternal(
+            string? schema = null
+        ) =>
+            InsertDataInternal(
                 table,
                 new[] { Check.NotEmpty(column, nameof(column)) },
                 new[] { Check.NotEmpty(columnType, nameof(columnType)) },
-                ToMultidimensionalArray(Check.NotNull(values, nameof(values)), firstDimension: true),
-                schema);
+                ToMultidimensionalArray(
+                    Check.NotNull(values, nameof(values)),
+                    firstDimension: true
+                ),
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="InsertDataOperation" /> to insert multiple rows of seed data values for multiple columns.
@@ -1424,8 +1490,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string[] columns,
             object?[,] values,
-            string? schema = null)
-            => InsertDataInternal(table, columns, null, values, schema);
+            string? schema = null
+        ) => InsertDataInternal(table, columns, null, values, schema);
 
         /// <summary>
         ///     Builds an <see cref="InsertDataOperation" /> to insert multiple rows of seed data values for multiple columns.
@@ -1447,7 +1513,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columns,
             string[] columnTypes,
             object?[,] values,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(columnTypes, nameof(columnTypes));
 
@@ -1459,7 +1526,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columns,
             string[]? columnTypes,
             object?[,] values,
-            string? schema)
+            string? schema
+        )
         {
             Check.NotEmpty(table, nameof(table));
             Check.NotNull(columns, nameof(columns));
@@ -1493,8 +1561,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string keyColumn,
             object? keyValue,
-            string? schema = null)
-            => DeleteData(table, new[] { Check.NotNull(keyColumn, nameof(keyValue)) }, new[] { keyValue }, schema);
+            string? schema = null
+        ) =>
+            DeleteData(
+                table,
+                new[] { Check.NotNull(keyColumn, nameof(keyValue)) },
+                new[] { keyValue },
+                schema
+            );
 
         /// <summary>
         ///     Builds a <see cref="DeleteDataOperation" /> to delete a single row of seed data.
@@ -1515,13 +1589,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string keyColumn,
             string keyColumnType,
             object? keyValue,
-            string? schema = null)
-            => DeleteData(
+            string? schema = null
+        ) =>
+            DeleteData(
                 table,
                 new[] { Check.NotNull(keyColumn, nameof(keyValue)) },
                 new[] { Check.NotNull(keyColumnType, nameof(keyColumnType)) },
                 new[] { keyValue },
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds a <see cref="DeleteDataOperation" /> to delete a single row of seed data from
@@ -1539,12 +1615,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string[] keyColumns,
             object?[] keyValues,
-            string? schema = null)
-            => DeleteData(
+            string? schema = null
+        ) =>
+            DeleteData(
                 table,
                 keyColumns,
                 ToMultidimensionalArray(Check.NotNull(keyValues, nameof(keyValues))),
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds a <see cref="DeleteDataOperation" /> to delete a single row of seed data from
@@ -1566,13 +1644,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] keyColumns,
             string[] keyColumnTypes,
             object?[] keyValues,
-            string? schema = null)
-            => DeleteDataInternal(
+            string? schema = null
+        ) =>
+            DeleteDataInternal(
                 table,
                 keyColumns,
                 keyColumnTypes,
                 ToMultidimensionalArray(Check.NotNull(keyValues, nameof(keyValues))),
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds a <see cref="DeleteDataOperation" /> to delete multiple rows of seed data.
@@ -1589,12 +1669,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string keyColumn,
             object[] keyValues,
-            string? schema = null)
-            => DeleteData(
+            string? schema = null
+        ) =>
+            DeleteData(
                 table,
                 new[] { Check.NotEmpty(keyColumn, nameof(keyColumn)) },
-                ToMultidimensionalArray(Check.NotNull(keyValues, nameof(keyValues)), firstDimension: true),
-                schema);
+                ToMultidimensionalArray(
+                    Check.NotNull(keyValues, nameof(keyValues)),
+                    firstDimension: true
+                ),
+                schema
+            );
 
         /// <summary>
         ///     Builds a <see cref="DeleteDataOperation" /> to delete multiple rows of seed data.
@@ -1615,13 +1700,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string keyColumn,
             string keyColumnType,
             object[] keyValues,
-            string? schema = null)
-            => DeleteData(
+            string? schema = null
+        ) =>
+            DeleteData(
                 table,
                 new[] { Check.NotEmpty(keyColumn, nameof(keyColumn)) },
                 new[] { Check.NotEmpty(keyColumnType, nameof(keyColumnType)) },
-                ToMultidimensionalArray(Check.NotNull(keyValues, nameof(keyValues)), firstDimension: true),
-                schema);
+                ToMultidimensionalArray(
+                    Check.NotNull(keyValues, nameof(keyValues)),
+                    firstDimension: true
+                ),
+                schema
+            );
 
         /// <summary>
         ///     Builds a <see cref="DeleteDataOperation" /> to delete multiple rows of seed data from
@@ -1642,8 +1732,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string[] keyColumns,
             object?[,] keyValues,
-            string? schema = null)
-            => DeleteDataInternal(table, keyColumns, null, keyValues, schema);
+            string? schema = null
+        ) => DeleteDataInternal(table, keyColumns, null, keyValues, schema);
 
         /// <summary>
         ///     Builds a <see cref="DeleteDataOperation" /> to delete multiple rows of seed data from
@@ -1668,7 +1758,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] keyColumns,
             string[] keyColumnTypes,
             object?[,] keyValues,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(keyColumnTypes, nameof(keyColumnTypes));
 
@@ -1680,7 +1771,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] keyColumns,
             string[]? keyColumnTypes,
             object?[,] keyValues,
-            string? schema)
+            string? schema
+        )
         {
             Check.NotEmpty(table, nameof(table));
             Check.NotNull(keyColumns, nameof(keyColumns));
@@ -1718,14 +1810,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object? keyValue,
             string column,
             object? value,
-            string? schema = null)
-            => UpdateData(
+            string? schema = null
+        ) =>
+            UpdateData(
                 table,
                 keyColumn,
                 keyValue,
                 new[] { Check.NotEmpty(column, nameof(column)) },
                 new[] { value },
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update a single row of seed data.
@@ -1746,14 +1840,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object? keyValue,
             string[] columns,
             object?[] values,
-            string? schema = null)
-            => UpdateData(
+            string? schema = null
+        ) =>
+            UpdateData(
                 table,
                 new[] { Check.NotEmpty(keyColumn, nameof(keyColumn)) },
                 new[] { keyValue },
                 columns,
                 values,
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update a single row of seed data for a table with
@@ -1775,14 +1871,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object[] keyValues,
             string column,
             object? value,
-            string? schema = null)
-            => UpdateData(
+            string? schema = null
+        ) =>
+            UpdateData(
                 table,
                 keyColumns,
                 keyValues,
                 new[] { Check.NotEmpty(column, nameof(column)) },
                 new[] { value },
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update a single row of seed data for a table with
@@ -1804,14 +1902,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object?[] keyValues,
             string[] columns,
             object?[] values,
-            string? schema = null)
-            => UpdateData(
+            string? schema = null
+        ) =>
+            UpdateData(
                 table,
                 keyColumns,
                 ToMultidimensionalArray(Check.NotNull(keyValues, nameof(keyValues))),
                 columns,
                 ToMultidimensionalArray(Check.NotNull(values, nameof(values))),
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update a single row of seed data for a table with
@@ -1839,8 +1939,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columns,
             string[] columnTypes,
             object[] values,
-            string? schema = null)
-            => UpdateData(
+            string? schema = null
+        ) =>
+            UpdateData(
                 table,
                 keyColumns,
                 keyColumnTypes,
@@ -1848,7 +1949,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 columns,
                 columnTypes,
                 ToMultidimensionalArray(Check.NotNull(values, nameof(values))),
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update multiple rows of seed data.
@@ -1869,14 +1971,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object[] keyValues,
             string column,
             object[] values,
-            string? schema = null)
-            => UpdateData(
+            string? schema = null
+        ) =>
+            UpdateData(
                 table,
                 keyColumn,
                 keyValues,
                 new[] { Check.NotEmpty(column, nameof(column)) },
-                ToMultidimensionalArray(Check.NotNull(values, nameof(values)), firstDimension: true),
-                schema);
+                ToMultidimensionalArray(
+                    Check.NotNull(values, nameof(values)),
+                    firstDimension: true
+                ),
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update multiple rows of seed data.
@@ -1900,14 +2007,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object[] keyValues,
             string[] columns,
             object?[,] values,
-            string? schema = null)
-            => UpdateData(
+            string? schema = null
+        ) =>
+            UpdateData(
                 table,
                 new[] { Check.NotEmpty(keyColumn, nameof(keyColumn)) },
-                ToMultidimensionalArray(Check.NotNull(keyValues, nameof(keyValues)), firstDimension: true),
+                ToMultidimensionalArray(
+                    Check.NotNull(keyValues, nameof(keyValues)),
+                    firstDimension: true
+                ),
                 columns,
                 values,
-                schema);
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update multiple rows of seed data for a table with
@@ -1932,14 +2044,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object[,] keyValues,
             string column,
             object[] values,
-            string? schema = null)
-            => UpdateData(
+            string? schema = null
+        ) =>
+            UpdateData(
                 table,
                 keyColumns,
                 keyValues,
                 new[] { Check.NotEmpty(column, nameof(column)) },
-                ToMultidimensionalArray(Check.NotNull(values, nameof(values)), firstDimension: true),
-                schema);
+                ToMultidimensionalArray(
+                    Check.NotNull(values, nameof(values)),
+                    firstDimension: true
+                ),
+                schema
+            );
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update multiple rows of seed data for a table with
@@ -1967,8 +2084,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object?[,] keyValues,
             string[] columns,
             object?[,] values,
-            string? schema = null)
-            => UpdateDataInternal(table, keyColumns, null, keyValues, columns, null, values, schema);
+            string? schema = null
+        ) => UpdateDataInternal(table, keyColumns, null, keyValues, columns, null, values, schema);
 
         /// <summary>
         ///     Builds an <see cref="UpdateDataOperation" /> to update multiple rows of seed data for a table with
@@ -2002,12 +2119,22 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columns,
             string[] columnTypes,
             object?[,] values,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotEmpty(keyColumnTypes, nameof(keyColumnTypes));
             Check.NotEmpty(columnTypes, nameof(columnTypes));
 
-            return UpdateDataInternal(table, keyColumns, keyColumnTypes, keyValues, columns, columnTypes, values, schema);
+            return UpdateDataInternal(
+                table,
+                keyColumns,
+                keyColumnTypes,
+                keyValues,
+                columns,
+                columnTypes,
+                values,
+                schema
+            );
         }
 
         private OperationBuilder<UpdateDataOperation> UpdateDataInternal(
@@ -2018,7 +2145,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columns,
             string[]? columnTypes,
             object?[,] values,
-            string? schema)
+            string? schema
+        )
         {
             Check.NotEmpty(table, nameof(table));
             Check.NotNull(keyColumns, nameof(keyColumns));
@@ -2042,7 +2170,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             return new OperationBuilder<UpdateDataOperation>(operation);
         }
 
-        private static object?[,] ToMultidimensionalArray(object?[] values, bool firstDimension = false)
+        private static object?[,] ToMultidimensionalArray(
+            object?[] values,
+            bool firstDimension = false
+        )
         {
             var result = firstDimension
                 ? new object?[values.Length, 1]
@@ -2069,8 +2200,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string ToString()
-            => base.ToString()!;
+        public override string ToString() => base.ToString()!;
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -2078,16 +2208,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
         /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
 
         #endregion
     }

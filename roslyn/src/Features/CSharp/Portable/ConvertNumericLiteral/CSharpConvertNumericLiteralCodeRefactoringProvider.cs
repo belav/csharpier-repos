@@ -12,15 +12,25 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertNumericLiteral
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertNumericLiteral), Shared]
-    internal sealed class CSharpConvertNumericLiteralCodeRefactoringProvider : AbstractConvertNumericLiteralCodeRefactoringProvider<LiteralExpressionSyntax>
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertNumericLiteral
+        ),
+        Shared
+    ]
+    internal sealed class CSharpConvertNumericLiteralCodeRefactoringProvider
+        : AbstractConvertNumericLiteralCodeRefactoringProvider<LiteralExpressionSyntax>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertNumericLiteralCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertNumericLiteralCodeRefactoringProvider() { }
 
-        protected override (string hexPrefix, string binaryPrefix) GetNumericLiteralPrefixes() => (hexPrefix: "0x", binaryPrefix: "0b");
+        protected override (string hexPrefix, string binaryPrefix) GetNumericLiteralPrefixes() =>
+            (hexPrefix: "0x", binaryPrefix: "0b");
     }
 }

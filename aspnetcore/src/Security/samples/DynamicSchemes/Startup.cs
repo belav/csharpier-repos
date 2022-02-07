@@ -26,9 +26,16 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddMvc();
-        services.AddAuthentication()
-            .AddScheme<SimpleOptions, SimpleAuthHandler>("fromStartup1", o => o.DisplayMessage = "I am from startup..")
-            .AddScheme<SimpleOptions, SimpleAuthHandler>("fromStartup2", o => o.DisplayMessage = "Me too!");
+        services
+            .AddAuthentication()
+            .AddScheme<SimpleOptions, SimpleAuthHandler>(
+                "fromStartup1",
+                o => o.DisplayMessage = "I am from startup.."
+            )
+            .AddScheme<SimpleOptions, SimpleAuthHandler>(
+                "fromStartup2",
+                o => o.DisplayMessage = "Me too!"
+            );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,10 +57,12 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-            endpoints.MapRazorPages();
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+            }
+        );
     }
 }

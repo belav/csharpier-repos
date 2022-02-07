@@ -15,24 +15,25 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRole, string>
 {
-    public ProtectedUserStoreTest(ScratchDatabaseFixture fixture)
-        : base(fixture)
-    { }
+    public ProtectedUserStoreTest(ScratchDatabaseFixture fixture) : base(fixture) { }
 
     protected override void SetupAddIdentity(IServiceCollection services)
     {
-        services.AddIdentity<IdentityUser, IdentityRole>(options =>
-        {
-            options.Stores.ProtectPersonalData = true;
-            options.Password.RequireDigit = false;
-            options.Password.RequireLowercase = false;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequireUppercase = false;
-            options.User.AllowedUserNameCharacters = null;
-        })
-        .AddDefaultTokenProviders()
-        .AddEntityFrameworkStores<TestDbContext>()
-        .AddPersonalDataProtection<SillyEncryptor, DefaultKeyRing>();
+        services
+            .AddIdentity<IdentityUser, IdentityRole>(
+                options =>
+                {
+                    options.Stores.ProtectPersonalData = true;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.User.AllowedUserNameCharacters = null;
+                }
+            )
+            .AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<TestDbContext>()
+            .AddPersonalDataProtection<SillyEncryptor, DefaultKeyRing>();
     }
 
     public class DefaultKeyRing : ILookupProtectorKeyRing
@@ -63,8 +64,7 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
             return data.Substring(pad.Length);
         }
 
-        public string Protect(string keyId, string data)
-            => _keyRing[keyId] + data;
+        public string Protect(string keyId, string data) => _keyRing[keyId] + data;
     }
 
     /// <summary>
@@ -103,11 +103,9 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
     {
         public InkProtector() { }
 
-        public string Unprotect(string keyId, string data)
-            => data?.Substring(4);
+        public string Unprotect(string keyId, string data) => data?.Substring(4);
 
-        public string Protect(string keyId, string data)
-            => "ink:" + data;
+        public string Protect(string keyId, string data) => "ink:" + data;
     }
 
     private class CustomUser : IdentityUser
@@ -115,9 +113,11 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
         [ProtectedPersonalData]
         public string PersonalData1 { get; set; }
         public string NonPersonalData1 { get; set; }
+
         [ProtectedPersonalData]
         public string PersonalData2 { get; set; }
         public string NonPersonalData2 { get; set; }
+
         [PersonalData]
         public string SafePersonalData { get; set; }
     }
@@ -141,14 +141,15 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
         return false;
     }
 
-    private bool FindAuthenticatorKeyInk(DbConnection conn, string id)
-        => FindTokenInk(conn, id, "[AspNetUserStore]", "AuthenticatorKey");
+    private bool FindAuthenticatorKeyInk(DbConnection conn, string id) =>
+        FindTokenInk(conn, id, "[AspNetUserStore]", "AuthenticatorKey");
 
     private bool FindTokenInk(DbConnection conn, string id, string loginProvider, string tokenName)
     {
         using (var command = conn.CreateCommand())
         {
-            command.CommandText = $"SELECT u.Value FROM AspNetUserTokens u WHERE u.LoginProvider = '{loginProvider}' AND u.Name = '{tokenName}' AND u.UserId = '{id}'";
+            command.CommandText =
+                $"SELECT u.Value FROM AspNetUserTokens u WHERE u.LoginProvider = '{loginProvider}' AND u.Name = '{tokenName}' AND u.UserId = '{id}'";
             command.CommandType = System.Data.CommandType.Text;
             using (var reader = command.ExecuteReader())
             {
@@ -167,16 +168,16 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
     /// </summary>
     /// <returns>Task</returns>
     [Fact]
-    public Task CustomPersonalDataPropertiesCanBeProtected()
-        => CustomPersonalDataPropertiesAreProtected<ProtectedIdentityDbContext>(true);
+    public Task CustomPersonalDataPropertiesCanBeProtected() =>
+        CustomPersonalDataPropertiesAreProtected<ProtectedIdentityDbContext>(true);
 
     /// <summary>
     /// Test.
     /// </summary>
     /// <returns>Task</returns>
     [Fact]
-    public Task CustomPersonalDataPropertiesCanBeNotProtected()
-        => CustomPersonalDataPropertiesAreProtected<UnprotectedIdentityDbContext>(false);
+    public Task CustomPersonalDataPropertiesCanBeNotProtected() =>
+        CustomPersonalDataPropertiesAreProtected<UnprotectedIdentityDbContext>(false);
 
     private async Task CustomPersonalDataPropertiesAreProtected<TContext>(bool protect)
         where TContext : DbContext
@@ -184,10 +185,13 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
         using (var connection = new SqliteConnection($"DataSource=D{Guid.NewGuid()}.db"))
         {
             var services = new ServiceCollection().AddLogging();
-            services.AddIdentity<CustomUser, IdentityRole>(options =>
-            {
-                options.Stores.ProtectPersonalData = protect;
-            })
+            services
+                .AddIdentity<CustomUser, IdentityRole>(
+                    options =>
+                    {
+                        options.Stores.ProtectPersonalData = protect;
+                    }
+                )
                 .AddEntityFrameworkStores<TContext>()
                 .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
 
@@ -217,7 +221,14 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
                 IdentityResultAssert.IsSuccess(await manager.UpdateAsync(user));
 
                 IdentityResultAssert.IsSuccess(await manager.ResetAuthenticatorKeyAsync(user));
-                IdentityResultAssert.IsSuccess(await manager.SetAuthenticationTokenAsync(user, "loginProvider", "token", "value"));
+                IdentityResultAssert.IsSuccess(
+                    await manager.SetAuthenticationTokenAsync(
+                        user,
+                        "loginProvider",
+                        "token",
+                        "value"
+                    )
+                );
 
                 connection.Open();
                 if (protect)
@@ -253,17 +264,13 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
     private class ProtectedIdentityDbContext : IdentityDbContext<CustomUser>
     {
         public ProtectedIdentityDbContext(DbContextOptions<ProtectedIdentityDbContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
     }
 
     private class UnprotectedIdentityDbContext : IdentityDbContext<CustomUser>
     {
         public UnprotectedIdentityDbContext(DbContextOptions<UnprotectedIdentityDbContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
     }
 
     private class InvalidUser : IdentityUser
@@ -281,17 +288,23 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
         using (var scratch = new ScratchDatabaseFixture())
         {
             var services = new ServiceCollection().AddLogging();
-            services.AddIdentity<CustomUser, IdentityRole>(options =>
-            {
-                options.Stores.ProtectPersonalData = true;
-            })
+            services
+                .AddIdentity<CustomUser, IdentityRole>(
+                    options =>
+                    {
+                        options.Stores.ProtectPersonalData = true;
+                    }
+                )
                 .AddEntityFrameworkStores<IdentityDbContext<CustomUser>>()
                 .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
-            var dbOptions = new DbContextOptionsBuilder().UseSqlite(scratch.Connection)
-                .UseApplicationServiceProvider(services.BuildServiceProvider())
-                .Options;
+            var dbOptions =
+                new DbContextOptionsBuilder()
+                    .UseSqlite(scratch.Connection)
+                    .UseApplicationServiceProvider(services.BuildServiceProvider()).Options;
             var dbContext = new IdentityDbContext<InvalidUser>(dbOptions);
-            var e = Assert.Throws<InvalidOperationException>(() => dbContext.Database.EnsureCreated());
+            var e = Assert.Throws<InvalidOperationException>(
+                () => dbContext.Database.EnsureCreated()
+            );
             Assert.Equal("[ProtectedPersonalData] only works strings by default.", e.Message);
         }
     }
@@ -301,7 +314,5 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
     /// </summary>
     /// <returns>Task</returns>
     [Fact]
-    public override Task CanFindUsersViaUserQuerable()
-        => Task.CompletedTask;
-
+    public override Task CanFindUsersViaUserQuerable() => Task.CompletedTask;
 }

@@ -61,14 +61,18 @@ public abstract class TwoFactorAuthenticationModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal class TwoFactorAuthenticationModel<TUser> : TwoFactorAuthenticationModel where TUser : class
+internal class TwoFactorAuthenticationModel<TUser> : TwoFactorAuthenticationModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly SignInManager<TUser> _signInManager;
     private readonly ILogger<TwoFactorAuthenticationModel> _logger;
 
     public TwoFactorAuthenticationModel(
-        UserManager<TUser> userManager, SignInManager<TUser> signInManager, ILogger<TwoFactorAuthenticationModel> logger)
+        UserManager<TUser> userManager,
+        SignInManager<TUser> signInManager,
+        ILogger<TwoFactorAuthenticationModel> logger
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -100,7 +104,8 @@ internal class TwoFactorAuthenticationModel<TUser> : TwoFactorAuthenticationMode
         }
 
         await _signInManager.ForgetTwoFactorClientAsync();
-        StatusMessage = "The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code.";
+        StatusMessage =
+            "The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code.";
         return RedirectToPage();
     }
 }

@@ -15,7 +15,11 @@ internal sealed class StreamSourceDocument : RazorSourceDocument
 
     private readonly byte[] _checksum;
 
-    public StreamSourceDocument(Stream stream, Encoding encoding, RazorSourceDocumentProperties properties)
+    public StreamSourceDocument(
+        Stream stream,
+        Encoding encoding,
+        RazorSourceDocumentProperties properties
+    )
     {
         if (stream == null)
         {
@@ -44,8 +48,12 @@ internal sealed class StreamSourceDocument : RazorSourceDocument
 
     public override string RelativePath => _innerSourceDocument.RelativePath;
 
-    public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
-        => _innerSourceDocument.CopyTo(sourceIndex, destination, destinationIndex, count);
+    public override void CopyTo(
+        int sourceIndex,
+        char[] destination,
+        int destinationIndex,
+        int count
+    ) => _innerSourceDocument.CopyTo(sourceIndex, destination, destinationIndex, count);
 
     public override byte[] GetChecksum()
     {
@@ -66,7 +74,11 @@ internal sealed class StreamSourceDocument : RazorSourceDocument
         }
     }
 
-    private static RazorSourceDocument CreateInnerSourceDocument(Stream stream, Encoding encoding, RazorSourceDocumentProperties properties)
+    private static RazorSourceDocument CreateInnerSourceDocument(
+        Stream stream,
+        Encoding encoding,
+        RazorSourceDocumentProperties properties
+    )
     {
         var streamLength = (int)stream.Length;
         var content = string.Empty;
@@ -81,11 +93,12 @@ internal sealed class StreamSourceDocument : RazorSourceDocument
                 contentEncoding,
                 detectEncodingFromByteOrderMarks: true,
                 bufferSize: bufferSize,
-                leaveOpen: true);
+                leaveOpen: true
+            );
 
             using (reader)
             {
-                reader.Peek();      // Just to populate the encoding
+                reader.Peek(); // Just to populate the encoding
 
                 if (encoding == null)
                 {
@@ -96,7 +109,9 @@ internal sealed class StreamSourceDocument : RazorSourceDocument
                     throw new InvalidOperationException(
                         Resources.FormatMismatchedContentEncoding(
                             encoding.EncodingName,
-                            reader.CurrentEncoding.EncodingName));
+                            reader.CurrentEncoding.EncodingName
+                        )
+                    );
                 }
 
                 if (streamLength > LargeObjectHeapLimitInChars)
@@ -106,7 +121,8 @@ internal sealed class StreamSourceDocument : RazorSourceDocument
                         reader,
                         LargeObjectHeapLimitInChars,
                         contentEncoding,
-                        properties);
+                        properties
+                    );
                 }
 
                 content = reader.ReadToEnd();

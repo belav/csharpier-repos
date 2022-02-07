@@ -16,7 +16,9 @@ namespace Microsoft.IO.Enumeration
 namespace System.IO.Enumeration
 #endif
 {
-    public unsafe abstract partial class FileSystemEnumerator<TResult> : CriticalFinalizerObject, IEnumerator<TResult>
+    public unsafe abstract partial class FileSystemEnumerator<TResult>
+        : CriticalFinalizerObject,
+          IEnumerator<TResult>
     {
         private const int StandardBufferSize = 4096;
 
@@ -57,8 +59,10 @@ namespace System.IO.Enumeration
             _currentPath = _rootDirectory;
 
             int requestedBufferSize = _options.BufferSize;
-            _bufferLength = requestedBufferSize <= 0 ? StandardBufferSize
-                : Math.Max(MinimumBufferSize, requestedBufferSize);
+            _bufferLength =
+                requestedBufferSize <= 0
+                    ? StandardBufferSize
+                    : Math.Max(MinimumBufferSize, requestedBufferSize);
 
             try
             {
@@ -93,7 +97,8 @@ namespace System.IO.Enumeration
                 Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
                 FileShare.ReadWrite | FileShare.Delete,
                 FileMode.Open,
-                Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS);
+                Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS
+            );
 
             if (handle == IntPtr.Zero || handle == (IntPtr)(-1))
             {
@@ -122,7 +127,14 @@ namespace System.IO.Enumeration
             // we are enumerating. The only reasonable way to handle this is to simply move on. There is no such thing as a "true"
             // snapshot of filesystem state- our "snapshot" will consider the name non-existent in this rare case.
 
-            return (ignoreNotFound && (error == Interop.Errors.ERROR_FILE_NOT_FOUND || error == Interop.Errors.ERROR_PATH_NOT_FOUND || error == Interop.Errors.ERROR_DIRECTORY))
+            return (
+                    ignoreNotFound
+                    && (
+                        error == Interop.Errors.ERROR_FILE_NOT_FOUND
+                        || error == Interop.Errors.ERROR_PATH_NOT_FOUND
+                        || error == Interop.Errors.ERROR_DIRECTORY
+                    )
+                )
                 || (error == Interop.Errors.ERROR_ACCESS_DENIED && _options.IgnoreInaccessible)
                 || ContinueOnError(error);
         }
@@ -146,7 +158,13 @@ namespace System.IO.Enumeration
                         return false;
 
                     // Calling the constructor inside the try block would create a second instance on the stack.
-                    FileSystemEntry.Initialize(ref entry, _entry, _currentPath.AsSpan(), _rootDirectory.AsSpan(), _originalRootDirectory.AsSpan());
+                    FileSystemEntry.Initialize(
+                        ref entry,
+                        _entry,
+                        _currentPath.AsSpan(),
+                        _rootDirectory.AsSpan(),
+                        _originalRootDirectory.AsSpan()
+                    );
 
                     // Skip specified attributes
                     if ((_entry->FileAttributes & _options.AttributesToSkip) != 0)
@@ -155,24 +173,46 @@ namespace System.IO.Enumeration
                     if ((_entry->FileAttributes & FileAttributes.Directory) != 0)
                     {
                         // Subdirectory found
-                        if (!(_entry->FileName.Length > 2 || _entry->FileName[0] != '.' || (_entry->FileName.Length == 2 && _entry->FileName[1] != '.')))
+                        if (
+                            !(
+                                _entry->FileName.Length > 2
+                                || _entry->FileName[0] != '.'
+                                || (_entry->FileName.Length == 2 && _entry->FileName[1] != '.')
+                            )
+                        )
                         {
                             // "." or "..", don't process unless the option is set
                             if (!_options.ReturnSpecialDirectories)
                                 continue;
                         }
-                        else if (_options.RecurseSubdirectories && _remainingRecursionDepth > 0 && ShouldRecurseIntoEntry(ref entry))
+                        else if (
+                            _options.RecurseSubdirectories
+                            && _remainingRecursionDepth > 0
+                            && ShouldRecurseIntoEntry(ref entry)
+                        )
                         {
                             // Recursion is on and the directory was accepted, Queue it
-                            string subDirectory = Path.Join(_currentPath.AsSpan(), _entry->FileName);
-                            IntPtr subDirectoryHandle = CreateRelativeDirectoryHandle(_entry->FileName, subDirectory);
+                            string subDirectory = Path.Join(
+                                _currentPath.AsSpan(),
+                                _entry->FileName
+                            );
+                            IntPtr subDirectoryHandle = CreateRelativeDirectoryHandle(
+                                _entry->FileName,
+                                subDirectory
+                            );
                             if (subDirectoryHandle != IntPtr.Zero)
                             {
                                 try
                                 {
                                     if (_pending == null)
                                         _pending = new Queue<(IntPtr, string, int)>();
-                                    _pending.Enqueue((subDirectoryHandle, subDirectory, _remainingRecursionDepth - 1));
+                                    _pending.Enqueue(
+                                        (
+                                            subDirectoryHandle,
+                                            subDirectory,
+                                            _remainingRecursionDepth - 1
+                                        )
+                                    );
                                 }
                                 catch
                                 {

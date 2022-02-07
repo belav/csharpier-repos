@@ -30,13 +30,16 @@ namespace Microsoft.EntityFrameworkCore
                         Id1 = ticks,
                         Id2 = ticks + 1,
                         Name = "Rainbow Dash"
-                    });
+                    }
+                );
                 await context.SaveChangesAsync();
             }
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var pegasus = context.Pegasuses.Single(e => (e.Id1 == ticks) && (e.Id2 == ticks + 1));
+                var pegasus = context.Pegasuses.Single(
+                    e => (e.Id1 == ticks) && (e.Id2 == ticks + 1)
+                );
 
                 pegasus.Name = "Rainbow Crash";
 
@@ -45,7 +48,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var pegasus = context.Pegasuses.Single(e => (e.Id1 == ticks) && (e.Id2 == ticks + 1));
+                var pegasus = context.Pegasuses.Single(
+                    e => (e.Id1 == ticks) && (e.Id2 == ticks + 1)
+                );
 
                 Assert.Equal("Rainbow Crash", pegasus.Name);
 
@@ -56,7 +61,10 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                Assert.Equal(0, context.Pegasuses.Count(e => (e.Id1 == ticks) && (e.Id2 == ticks + 1)));
+                Assert.Equal(
+                    0,
+                    context.Pegasuses.Count(e => (e.Id1 == ticks) && (e.Id2 == ticks + 1))
+                );
             }
         }
 
@@ -73,8 +81,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var added = context.Add(
-                    new Unicorn { Id2 = id2, Name = "Rarity" }).Entity;
+                var added = context.Add(new Unicorn { Id2 = id2, Name = "Rarity" }).Entity;
 
                 Assert.True(added.Id1 > 0);
                 Assert.NotEqual(Guid.Empty, added.Id3);
@@ -87,12 +94,17 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                Assert.Equal(1, context.Unicorns.Count(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)));
+                Assert.Equal(
+                    1,
+                    context.Unicorns.Count(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3))
+                );
             }
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var unicorn = context.Unicorns.Single(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3));
+                var unicorn = context.Unicorns.Single(
+                    e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)
+                );
 
                 unicorn.Name = "Bad Hair Day";
 
@@ -101,7 +113,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var unicorn = context.Unicorns.Single(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3));
+                var unicorn = context.Unicorns.Single(
+                    e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)
+                );
 
                 Assert.Equal("Bad Hair Day", unicorn.Name);
 
@@ -112,7 +126,10 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                Assert.Equal(0, context.Unicorns.Count(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)));
+                Assert.Equal(
+                    0,
+                    context.Unicorns.Count(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3))
+                );
             }
         }
 
@@ -127,12 +144,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var pony1 = context.Add(
-                    new EarthPony { Id2 = 7, Name = "Apple Jack 1" }).Entity;
-                var pony2 = context.Add(
-                    new EarthPony { Id2 = 7, Name = "Apple Jack 2" }).Entity;
-                var pony3 = context.Add(
-                    new EarthPony { Id2 = 7, Name = "Apple Jack 3" }).Entity;
+                var pony1 = context.Add(new EarthPony { Id2 = 7, Name = "Apple Jack 1" }).Entity;
+                var pony2 = context.Add(new EarthPony { Id2 = 7, Name = "Apple Jack 2" }).Entity;
+                var pony3 = context.Add(new EarthPony { Id2 = 7, Name = "Apple Jack 3" }).Entity;
 
                 await context.SaveChangesAsync();
 
@@ -188,54 +202,42 @@ namespace Microsoft.EntityFrameworkCore
             public DbSet<Unicorn> Unicorns { get; set; }
             public DbSet<EarthPony> EarthPonies { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseInMemoryDatabase(nameof(BronieContext)).UseInternalServiceProvider(_serviceProvider);
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
+                    .UseInMemoryDatabase(nameof(BronieContext))
+                    .UseInternalServiceProvider(_serviceProvider);
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Pegasus>().HasKey(
-                    e => new { e.Id1, e.Id2 });
-                modelBuilder
-                    .Entity<Pegasus>(
-                        b =>
-                        {
-                            b.HasKey(
-                                e => new { e.Id1, e.Id2 });
-                            b.Property(e => e.Id1).ValueGeneratedOnAdd();
-                            b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                        });
-
-                modelBuilder.Entity<Unicorn>().HasKey(
-                    e => new
+                modelBuilder.Entity<Pegasus>().HasKey(e => new { e.Id1, e.Id2 });
+                modelBuilder.Entity<Pegasus>(
+                    b =>
                     {
-                        e.Id1,
-                        e.Id2,
-                        e.Id3
-                    });
+                        b.HasKey(e => new { e.Id1, e.Id2 });
+                        b.Property(e => e.Id1).ValueGeneratedOnAdd();
+                        b.Property(e => e.Id2).ValueGeneratedOnAdd();
+                    }
+                );
+
+                modelBuilder.Entity<Unicorn>().HasKey(e => new { e.Id1, e.Id2, e.Id3 });
                 modelBuilder.Entity<Unicorn>(
                     b =>
                     {
-                        b.HasKey(
-                            e => new
-                            {
-                                e.Id1,
-                                e.Id2,
-                                e.Id3
-                            });
+                        b.HasKey(e => new { e.Id1, e.Id2, e.Id3 });
                         b.Property(e => e.Id1).ValueGeneratedOnAdd();
                         b.Property(e => e.Id3).ValueGeneratedOnAdd();
-                    });
+                    }
+                );
 
-                modelBuilder.Entity<EarthPony>().HasKey(
-                    e => new { e.Id1, e.Id2 });
+                modelBuilder.Entity<EarthPony>().HasKey(e => new { e.Id1, e.Id2 });
                 modelBuilder.Entity<EarthPony>(
                     b =>
                     {
-                        b.HasKey(
-                            e => new { e.Id1, e.Id2 });
+                        b.HasKey(e => new { e.Id1, e.Id2 });
                         b.Property(e => e.Id1).ValueGeneratedOnAdd();
                         b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                    });
+                    }
+                );
             }
         }
 

@@ -23,7 +23,12 @@ namespace System.Drawing.Printing.Tests
                 var controller = new PreviewPrintController();
                 controller.OnStartPrint(document, new PrintEventArgs());
 
-                var printEventArgs = new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, new PageSettings());
+                var printEventArgs = new PrintPageEventArgs(
+                    null,
+                    Rectangle.Empty,
+                    Rectangle.Empty,
+                    new PageSettings()
+                );
                 Assert.NotNull(controller.OnStartPage(document, printEventArgs));
 
                 // Call OnEndPage.
@@ -60,8 +65,15 @@ namespace System.Drawing.Printing.Tests
                 var controller = new PreviewPrintController();
                 controller.OnStartPrint(document, new PrintEventArgs());
 
-                var printEventArgs = new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, null);
-                Assert.Throws<NullReferenceException>(() => controller.OnStartPage(document, printEventArgs));
+                var printEventArgs = new PrintPageEventArgs(
+                    null,
+                    Rectangle.Empty,
+                    Rectangle.Empty,
+                    null
+                );
+                Assert.Throws<NullReferenceException>(
+                    () => controller.OnStartPage(document, printEventArgs)
+                );
             }
         }
 
@@ -77,13 +89,19 @@ namespace System.Drawing.Printing.Tests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Fixed a NullReferenceException")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Fixed a NullReferenceException"
+        )]
         public void OnEndPage_InvokeWithoutStarting_Nop()
         {
             using (var document = new PrintDocument())
             {
                 var controller = new PreviewPrintController();
-                controller.OnEndPage(document, new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, null));
+                controller.OnEndPage(
+                    document,
+                    new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, null)
+                );
                 controller.OnEndPage(null, null);
             }
         }
@@ -127,13 +145,18 @@ namespace System.Drawing.Printing.Tests
         public void OnStartPrint_InvokeNullDocument_ThrowsNullReferenceException()
         {
             var controller = new PreviewPrintController();
-            Assert.Throws<NullReferenceException>(() => controller.OnStartPrint(null, new PrintEventArgs()));
+            Assert.Throws<NullReferenceException>(
+                () => controller.OnStartPrint(null, new PrintEventArgs())
+            );
         }
 
         [Theory]
         [MemberData(nameof(PrintEventArgs_TestData))]
         [PlatformSpecific(TestPlatforms.Windows)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Fixed a NullReferenceException")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Fixed a NullReferenceException"
+        )]
         public void OnEndPrint_InvokeWithoutStarting_Nop(PrintEventArgs e)
         {
             using (var document = new PrintDocument())

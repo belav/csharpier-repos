@@ -11,13 +11,11 @@ using Xunit;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore
 {
-    public abstract class ConcurrencyDetectorEnabledTestBase<TFixture> : ConcurrencyDetectorTestBase<TFixture>
+    public abstract class ConcurrencyDetectorEnabledTestBase<TFixture>
+        : ConcurrencyDetectorTestBase<TFixture>
         where TFixture : ConcurrencyDetectorTestBase<TFixture>.ConcurrencyDetectorFixtureBase, new()
     {
-        protected ConcurrencyDetectorEnabledTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected ConcurrencyDetectorEnabledTestBase(TFixture fixture) : base(fixture) { }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
@@ -28,14 +26,17 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     c.Products.Add(new Product { Id = 2, Name = "Unicorn Replacement Horn Pack" });
                     return async ? await c.SaveChangesAsync() : c.SaveChanges();
-                });
+                }
+            );
 
             using var ctx = CreateContext();
             var newProduct = await ctx.Products.SingleOrDefaultAsync(p => p.Id == 2);
             Assert.Null(newProduct);
         }
 
-        protected override async Task ConcurrencyDetectorTest(Func<ConcurrencyDetectorDbContext, Task<object>> test)
+        protected override async Task ConcurrencyDetectorTest(
+            Func<ConcurrencyDetectorDbContext, Task<object>> test
+        )
         {
             using var context = CreateContext();
 
@@ -46,7 +47,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (disposer)
             {
-                Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(() => test(context));
+                Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => test(context)
+                );
 
                 Assert.Equal(CoreStrings.ConcurrentMethodInvocation, ex.Message);
             }

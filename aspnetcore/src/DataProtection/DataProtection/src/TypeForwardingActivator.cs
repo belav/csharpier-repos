@@ -14,9 +14,7 @@ internal class TypeForwardingActivator : SimpleActivator
     private readonly ILogger _logger;
 
     public TypeForwardingActivator(IServiceProvider services)
-        : this(services, NullLoggerFactory.Instance)
-    {
-    }
+        : this(services, NullLoggerFactory.Instance) { }
 
     public TypeForwardingActivator(IServiceProvider services, ILoggerFactory loggerFactory)
         : base(services)
@@ -24,11 +22,15 @@ internal class TypeForwardingActivator : SimpleActivator
         _logger = loggerFactory.CreateLogger(typeof(TypeForwardingActivator));
     }
 
-    public override object CreateInstance(Type expectedBaseType, string originalTypeName)
-        => CreateInstance(expectedBaseType, originalTypeName, out var _);
+    public override object CreateInstance(Type expectedBaseType, string originalTypeName) =>
+        CreateInstance(expectedBaseType, originalTypeName, out var _);
 
     // for testing
-    internal object CreateInstance(Type expectedBaseType, string originalTypeName, out bool forwarded)
+    internal object CreateInstance(
+        Type expectedBaseType,
+        string originalTypeName,
+        out bool forwarded
+    )
     {
         var forwardedTypeName = originalTypeName;
         var candidate = false;
@@ -38,7 +40,10 @@ internal class TypeForwardingActivator : SimpleActivator
             forwardedTypeName = originalTypeName.Replace(OldNamespace, CurrentNamespace);
         }
 
-        if (candidate || forwardedTypeName.StartsWith(CurrentNamespace + ".", StringComparison.Ordinal))
+        if (
+            candidate
+            || forwardedTypeName.StartsWith(CurrentNamespace + ".", StringComparison.Ordinal)
+        )
         {
             candidate = true;
             forwardedTypeName = RemoveVersionFromAssemblyName(forwardedTypeName);
@@ -49,9 +54,11 @@ internal class TypeForwardingActivator : SimpleActivator
             var type = Type.GetType(forwardedTypeName, false);
             if (type != null)
             {
-                _logger.LogDebug("Forwarded activator type request from {FromType} to {ToType}",
+                _logger.LogDebug(
+                    "Forwarded activator type request from {FromType} to {ToType}",
                     originalTypeName,
-                    forwardedTypeName);
+                    forwardedTypeName
+                );
                 forwarded = true;
                 return base.CreateInstance(expectedBaseType, forwardedTypeName);
             }
@@ -68,7 +75,10 @@ internal class TypeForwardingActivator : SimpleActivator
         var versionStartIndex = forwardedTypeName.IndexOf(", Version=", StringComparison.Ordinal);
         while (versionStartIndex != -1)
         {
-            var versionEndIndex = forwardedTypeName.IndexOf(',', versionStartIndex + ", Version=".Length);
+            var versionEndIndex = forwardedTypeName.IndexOf(
+                ',',
+                versionStartIndex + ", Version=".Length
+            );
 
             if (versionEndIndex == -1)
             {
@@ -76,12 +86,14 @@ internal class TypeForwardingActivator : SimpleActivator
                 return forwardedTypeName.Substring(0, versionStartIndex);
             }
 
-            forwardedTypeName = forwardedTypeName.Remove(versionStartIndex, versionEndIndex - versionStartIndex);
+            forwardedTypeName = forwardedTypeName.Remove(
+                versionStartIndex,
+                versionEndIndex - versionStartIndex
+            );
             versionStartIndex = forwardedTypeName.IndexOf(", Version=", StringComparison.Ordinal);
         }
 
         // No version left
         return forwardedTypeName;
-
     }
 }

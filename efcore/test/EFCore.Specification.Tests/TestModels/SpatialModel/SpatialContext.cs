@@ -8,10 +8,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel
 {
     public class SpatialContext : PoolableDbContext
     {
-        public SpatialContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public SpatialContext(DbContextOptions options) : base(options) { }
 
         public static void Seed(SpatialContext context, GeometryFactory factory)
         {

@@ -9,7 +9,7 @@ namespace System.CommandLine.Builder
     public class CommandBuilder
     {
         /// <param name="command">The command to be configured.</param>
-        internal CommandBuilder(Command command) 
+        internal CommandBuilder(Command command)
         {
             Command = command;
         }

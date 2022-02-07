@@ -7,9 +7,10 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.IdentityUserTests;
 
-public class IdentityUserLoginWithoutEndpointRoutingTests : LoginTests<StartupWithoutEndpointRouting, IdentityDbContext>
+public class IdentityUserLoginWithoutEndpointRoutingTests
+    : LoginTests<StartupWithoutEndpointRouting, IdentityDbContext>
 {
-    public IdentityUserLoginWithoutEndpointRoutingTests(ServerFactory<StartupWithoutEndpointRouting, IdentityDbContext> serverFactory) : base(serverFactory)
-    {
-    }
+    public IdentityUserLoginWithoutEndpointRoutingTests(
+        ServerFactory<StartupWithoutEndpointRouting, IdentityDbContext> serverFactory
+    ) : base(serverFactory) { }
 }

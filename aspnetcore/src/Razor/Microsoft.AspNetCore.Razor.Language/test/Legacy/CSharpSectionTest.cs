@@ -13,9 +13,7 @@ public class CSharpSectionTest : ParserTestBase
     [Fact]
     public void CapturesNewlineImmediatelyFollowing()
     {
-        ParseDocumentTest(
-            "@section" + Environment.NewLine,
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section" + Environment.NewLine, new[] { SectionDirective.Directive });
     }
 
     [Fact]
@@ -23,7 +21,8 @@ public class CSharpSectionTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section Foo         " + Environment.NewLine + "    ",
-            new[] { SectionDirective.Directive });
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
@@ -31,33 +30,28 @@ public class CSharpSectionTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section         " + Environment.NewLine + "    ",
-            new[] { SectionDirective.Directive });
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
     public void IgnoresSectionUnlessAllLowerCase()
     {
-        ParseDocumentTest(
-            "@Section foo",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@Section foo", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void ReportsErrorAndTerminatesSectionBlockIfKeywordNotFollowedByIdentifierStartChar()
     {
         // ParseSectionBlockReportsErrorAndTerminatesSectionBlockIfKeywordNotFollowedByIdentifierStartCharacter
-        ParseDocumentTest(
-            "@section 9 { <p>Foo</p> }",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section 9 { <p>Foo</p> }", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void ReportsErrorAndTerminatesSectionBlockIfNameNotFollowedByOpenBrace()
     {
         // ParseSectionBlockReportsErrorAndTerminatesSectionBlockIfNameNotFollowedByOpenBrace
-        ParseDocumentTest(
-            "@section foo-bar { <p>Foo</p> }",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo-bar { <p>Foo</p> }", new[] { SectionDirective.Directive });
     }
 
     [Fact]
@@ -65,7 +59,8 @@ public class CSharpSectionTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section foo { @section bar { <p>Foo</p> } }",
-            new[] { SectionDirective.Directive });
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
@@ -73,7 +68,8 @@ public class CSharpSectionTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section foo { @section bar { <p>Foo</p> @section baz { } } }",
-            new[] { SectionDirective.Directive });
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
@@ -82,59 +78,44 @@ public class CSharpSectionTest : ParserTestBase
         // This isn't a real scenario but we just want to verify we don't show misleading errors.
         ParseDocumentTest(
             "@section foo { @inherits Bar }",
-            new[] { SectionDirective.Directive, InheritsDirective.Directive });
+            new[] { SectionDirective.Directive, InheritsDirective.Directive }
+        );
     }
 
     [Fact]
     public void HandlesEOFAfterOpenBrace()
     {
-        ParseDocumentTest(
-            "@section foo {",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo {", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void HandlesEOFAfterOpenContent1()
     {
-
-        ParseDocumentTest(
-            "@section foo { ",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo { ", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void HandlesEOFAfterOpenContent2()
     {
-
-        ParseDocumentTest(
-            "@section foo {\n",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo {\n", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void HandlesEOFAfterOpenContent3()
     {
-
-        ParseDocumentTest(
-            "@section foo {abc",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo {abc", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void HandlesEOFAfterOpenContent4()
     {
-
-        ParseDocumentTest(
-            "@section foo {\n abc",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo {\n abc", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void HandlesUnterminatedSection()
     {
-        ParseDocumentTest(
-            "@section foo { <p>Foo{}</p>",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo { <p>Foo{}</p>", new[] { SectionDirective.Directive });
     }
 
     [Fact]
@@ -150,8 +131,10 @@ public class CSharpSectionTest : ParserTestBase
                 CultureInfo.InvariantCulture,
                 "@section Test{0}{{{0}{1}@if(true){0}{1}{{{0}{1}{1}<p>Hello World</p>{0}{1}}}",
                 newLine,
-                spaces),
-            new[] { SectionDirective.Directive });
+                spaces
+            ),
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
@@ -160,7 +143,8 @@ public class CSharpSectionTest : ParserTestBase
         // ParseSectionBlockReportsErrorAndAcceptsWhitespaceToEndOfLineIfSectionNotFollowedByOpenBrace
         ParseDocumentTest(
             "@section foo      " + Environment.NewLine,
-            new[] { SectionDirective.Directive });
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
@@ -168,32 +152,31 @@ public class CSharpSectionTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section foo      "
-            + Environment.NewLine
-            + Environment.NewLine
-            + Environment.NewLine
-            + Environment.NewLine
-            + Environment.NewLine
-            + Environment.NewLine
-            + "{" + Environment.NewLine
-            + "<p>Foo</p>" + Environment.NewLine
-            + "}",
-            new[] { SectionDirective.Directive });
+                + Environment.NewLine
+                + Environment.NewLine
+                + Environment.NewLine
+                + Environment.NewLine
+                + Environment.NewLine
+                + Environment.NewLine
+                + "{"
+                + Environment.NewLine
+                + "<p>Foo</p>"
+                + Environment.NewLine
+                + "}",
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
     public void ParsesNamedSectionCorrectly()
     {
-        ParseDocumentTest(
-            "@section foo { <p>Foo</p> }",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo { <p>Foo</p> }", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void DoesNotRequireSpaceBetweenSectionNameAndOpenBrace()
     {
-        ParseDocumentTest(
-            "@section foo{ <p>Foo</p> }",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo{ <p>Foo</p> }", new[] { SectionDirective.Directive });
     }
 
     [Fact]
@@ -201,7 +184,8 @@ public class CSharpSectionTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section foo { <script>(function foo() { return 1; })();</script> }",
-            new[] { SectionDirective.Directive });
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
@@ -209,18 +193,23 @@ public class CSharpSectionTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section foo { I really want to render a close brace, so here I go: @(\"}\") }",
-            new[] { SectionDirective.Directive });
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
     public void SectionIsCorrectlyTerminatedWhenCloseBraceImmediatelyFollowsCodeBlock()
     {
         ParseDocumentTest(
-            "@section Foo {" + Environment.NewLine
-            + "@if(true) {" + Environment.NewLine
-            + "}" + Environment.NewLine
-            + "}",
-            new[] { SectionDirective.Directive });
+            "@section Foo {"
+                + Environment.NewLine
+                + "@if(true) {"
+                + Environment.NewLine
+                + "}"
+                + Environment.NewLine
+                + "}",
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
@@ -228,26 +217,21 @@ public class CSharpSectionTest : ParserTestBase
     {
         // SectionIsCorrectlyTerminatedWhenCloseBraceImmediatelyFollowsCodeBlockNoWhitespace
         ParseDocumentTest(
-            "@section Foo {" + Environment.NewLine
-            + "@if(true) {" + Environment.NewLine
-            + "}}",
-            new[] { SectionDirective.Directive });
+            "@section Foo {" + Environment.NewLine + "@if(true) {" + Environment.NewLine + "}}",
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
     public void CorrectlyTerminatesWhenCloseBraceImmediatelyFollowsMarkup()
     {
-        ParseDocumentTest(
-            "@section foo {something}",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section foo {something}", new[] { SectionDirective.Directive });
     }
 
     [Fact]
     public void ParsesComment()
     {
-        ParseDocumentTest(
-            "@section s {<!-- -->}",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section s {<!-- -->}", new[] { SectionDirective.Directive });
     }
 
     // This was a user reported bug (codeplex #710), the section parser wasn't handling
@@ -255,9 +239,7 @@ public class CSharpSectionTest : ParserTestBase
     [Fact]
     public void ParsesCommentWithDelimiters()
     {
-        ParseDocumentTest(
-            "@section s {<!-- > \" '-->}",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section s {<!-- > \" '-->}", new[] { SectionDirective.Directive });
     }
 
     [Fact]
@@ -265,15 +247,14 @@ public class CSharpSectionTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section s {" + Environment.NewLine + "<a" + Environment.NewLine + "<!--  > \" '-->}",
-            new[] { SectionDirective.Directive });
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]
     public void ParsesXmlProcessingInstruction()
     {
-        ParseDocumentTest(
-            "@section s { <? xml bleh ?>}",
-            new[] { SectionDirective.Directive });
+        ParseDocumentTest("@section s { <? xml bleh ?>}", new[] { SectionDirective.Directive });
     }
 
     [Fact]
@@ -285,7 +266,9 @@ public class CSharpSectionTest : ParserTestBase
     [Fact]
     public void _WithDoubleTransition2()
     {
-        ParseDocumentTest("@section s {<span foo='@DateTime.Now @@' />}", new[] { SectionDirective.Directive });
+        ParseDocumentTest(
+            "@section s {<span foo='@DateTime.Now @@' />}",
+            new[] { SectionDirective.Directive }
+        );
     }
-
 }

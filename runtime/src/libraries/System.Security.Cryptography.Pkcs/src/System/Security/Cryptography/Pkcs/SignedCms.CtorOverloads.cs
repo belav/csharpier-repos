@@ -11,28 +11,18 @@ namespace System.Security.Cryptography.Pkcs
             new ContentInfo(Oids.Pkcs7DataOid.CopyOid(), Array.Empty<byte>());
 
         public SignedCms()
-            : this(SubjectIdentifierType.IssuerAndSerialNumber, MakeEmptyContentInfo(), false)
-        {
-        }
+            : this(SubjectIdentifierType.IssuerAndSerialNumber, MakeEmptyContentInfo(), false) { }
 
         public SignedCms(SubjectIdentifierType signerIdentifierType)
-            : this(signerIdentifierType, MakeEmptyContentInfo(), false)
-        {
-        }
+            : this(signerIdentifierType, MakeEmptyContentInfo(), false) { }
 
         public SignedCms(ContentInfo contentInfo)
-            : this(SubjectIdentifierType.IssuerAndSerialNumber, contentInfo, false)
-        {
-        }
+            : this(SubjectIdentifierType.IssuerAndSerialNumber, contentInfo, false) { }
 
         public SignedCms(SubjectIdentifierType signerIdentifierType, ContentInfo contentInfo)
-            : this(signerIdentifierType, contentInfo, false)
-        {
-        }
+            : this(signerIdentifierType, contentInfo, false) { }
 
         public SignedCms(ContentInfo contentInfo, bool detached)
-            : this(SubjectIdentifierType.IssuerAndSerialNumber, contentInfo, detached)
-        {
-        }
+            : this(SubjectIdentifierType.IssuerAndSerialNumber, contentInfo, detached) { }
     }
 }

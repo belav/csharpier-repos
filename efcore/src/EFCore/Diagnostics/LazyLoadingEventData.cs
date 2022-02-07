@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             DbContext context,
             object entity,
-            string navigationPropertyName)
-            : base(eventDefinition, messageGenerator, context)
+            string navigationPropertyName
+        ) : base(eventDefinition, messageGenerator, context)
         {
             Entity = entity;
             NavigationPropertyName = navigationPropertyName;

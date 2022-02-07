@@ -54,7 +54,12 @@ namespace System.Diagnostics.Tests
         protected Process CreateProcess(Func<int> method = null)
         {
             Process p = null;
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(method ?? (() => RemoteExecutor.SuccessExitCode), new RemoteInvokeOptions { Start = false }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    method ?? (() => RemoteExecutor.SuccessExitCode),
+                    new RemoteInvokeOptions { Start = false }
+                )
+            )
             {
                 p = handle.Process;
                 handle.Process = null;
@@ -66,7 +71,12 @@ namespace System.Diagnostics.Tests
         protected Process CreateProcess(Func<Task<int>> method)
         {
             Process p = null;
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(method, new RemoteInvokeOptions { Start = false }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    method,
+                    new RemoteInvokeOptions { Start = false }
+                )
+            )
             {
                 p = handle.Process;
                 handle.Process = null;
@@ -75,10 +85,20 @@ namespace System.Diagnostics.Tests
             return p;
         }
 
-        protected Process CreateProcess(Func<string, int> method, string arg, bool autoDispose = true)
+        protected Process CreateProcess(
+            Func<string, int> method,
+            string arg,
+            bool autoDispose = true
+        )
         {
             Process p = null;
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(method, arg, new RemoteInvokeOptions { Start = false }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    method,
+                    arg,
+                    new RemoteInvokeOptions { Start = false }
+                )
+            )
             {
                 p = handle.Process;
                 handle.Process = null;
@@ -92,10 +112,22 @@ namespace System.Diagnostics.Tests
             return p;
         }
 
-        protected Process CreateProcess(Func<string, string, int> method, string arg1, string arg2, bool autoDispose = true)
+        protected Process CreateProcess(
+            Func<string, string, int> method,
+            string arg1,
+            string arg2,
+            bool autoDispose = true
+        )
         {
             Process p = null;
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(method, arg1, arg2, new RemoteInvokeOptions { Start = false }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    method,
+                    arg1,
+                    arg2,
+                    new RemoteInvokeOptions { Start = false }
+                )
+            )
             {
                 p = handle.Process;
                 handle.Process = null;
@@ -112,7 +144,13 @@ namespace System.Diagnostics.Tests
         protected Process CreateProcess(Func<string, Task<int>> method, string arg)
         {
             Process p = null;
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(method, arg, new RemoteInvokeOptions { Start = false }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    method,
+                    arg,
+                    new RemoteInvokeOptions { Start = false }
+                )
+            )
             {
                 p = handle.Process;
                 handle.Process = null;

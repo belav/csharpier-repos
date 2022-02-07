@@ -9,20 +9,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 public class ReliabilityTestSet
 {
-    private int _maximumTestLoops = 0;									// default run based on time.
-    private int _maximumExecutionTime = 60;	                        // 60 minute run by default.
-    private int _maximumWaitTime = 10;	                            // 10 minute wait by default.
-    private int _percentPassIsPass = System.Environment.GetEnvironmentVariable("PERCENTPASSISPASS") == null ? -1 : Convert.ToInt32(System.Environment.GetEnvironmentVariable("PERCENTPASSISPASS"));
+    private int _maximumTestLoops = 0; // default run based on time.
+    private int _maximumExecutionTime = 60; // 60 minute run by default.
+    private int _maximumWaitTime = 10; // 10 minute wait by default.
+    private int _percentPassIsPass =
+        System.Environment.GetEnvironmentVariable("PERCENTPASSISPASS") == null
+            ? -1
+            : Convert.ToInt32(System.Environment.GetEnvironmentVariable("PERCENTPASSISPASS"));
     private int[] _minPercentCPUStaggered_times = null;
     private int[] _minPercentCPUStaggered_usage = null;
-    private int _minimumCPUpercent = 0, _minimumMemoryPercent = 0, _minimumTestsRunning = 0, _maximumTestsRunning = -1;			// minimum CPU & memory requirements.
+    private int _minimumCPUpercent = 0,
+        _minimumMemoryPercent = 0,
+        _minimumTestsRunning = 0,
+        _maximumTestsRunning = -1; // minimum CPU & memory requirements.
     private ReliabilityTest[] _tests;
     private string[] _discoveryPaths = null;
     private string _friendlyName;
-    private bool _enablePerfCounters = true, _disableLogging = false, _installDetours = false;
+    private bool _enablePerfCounters = true,
+        _disableLogging = false,
+        _installDetours = false;
     private bool _suppressConsoleOutputFromTests = false;
     private bool _debugBreakOnTestHang = true;
     private bool _debugBreakOnBadTest = false;
@@ -30,8 +37,12 @@ public class ReliabilityTestSet
     private bool _debugBreakOnPathTooLong = false;
     private bool _debugBreakOnMissingTest = false;
     private TestStartModeEnum _testStartMode = TestStartModeEnum.AppDomainLoader;
-    private string _defaultDebugger, _defaultDebuggerOptions;
-    private int _ulGeneralUnloadPercent = 0, _ulAppDomainUnloadPercent = 0, _ulAssemblyLoadPercent = 0, _ulWaitTime = 0;
+    private string _defaultDebugger,
+        _defaultDebuggerOptions;
+    private int _ulGeneralUnloadPercent = 0,
+        _ulAppDomainUnloadPercent = 0,
+        _ulAssemblyLoadPercent = 0,
+        _ulWaitTime = 0;
     private bool _reportResults = false;
     private string _reportResultsTo = "http://clrqa/SmartAPI/result.asmx";
     private Guid _bvtCategory = Guid.Empty;
@@ -41,58 +52,33 @@ public class ReliabilityTestSet
     private int _numAppDomains = 10; //used for roundRobin scheduling, our app domain index
     private int _numAssemblyLoadContexts = 10; //used for roundRobin scheduling, our AssemblyLoadContext index
     private Random _rand = new Random();
-    private LoggingLevels _loggingLevel = LoggingLevels.All;	// by default log everything
-
+    private LoggingLevels _loggingLevel = LoggingLevels.All; // by default log everything
 
     public ReliabilityTest[] Tests
     {
-        get
-        {
-            return (_tests);
-        }
-
-        set
-        {
-            _tests = value;
-        }
+        get { return (_tests); }
+        set { _tests = value; }
     }
 
     public int MaximumLoops
     {
-        get
-        {
-            return (_maximumTestLoops);
-        }
-        set
-        {
-            _maximumTestLoops = value;
-        }
+        get { return (_maximumTestLoops); }
+        set { _maximumTestLoops = value; }
     }
 
     public LoggingLevels LoggingLevel
     {
-        get
-        {
-            return (_loggingLevel);
-        }
-        set
-        {
-            _loggingLevel = value;
-        }
+        get { return (_loggingLevel); }
+        set { _loggingLevel = value; }
     }
+
     /// <summary>
     /// Maximum execution time, in minutes.
     /// </summary>
     public int MaximumTime
     {
-        get
-        {
-            return (_maximumExecutionTime);
-        }
-        set
-        {
-            _maximumExecutionTime = value;
-        }
+        get { return (_maximumExecutionTime); }
+        set { _maximumExecutionTime = value; }
     }
 
     /// <summary>
@@ -100,49 +86,25 @@ public class ReliabilityTestSet
     /// </summary>
     public int MaximumWaitTime
     {
-        get
-        {
-            return (_maximumWaitTime);
-        }
-        set
-        {
-            _maximumWaitTime = value;
-        }
+        get { return (_maximumWaitTime); }
+        set { _maximumWaitTime = value; }
     }
 
     public string FriendlyName
     {
-        get
-        {
-            return (_friendlyName);
-        }
-        set
-        {
-            _friendlyName = value;
-        }
+        get { return (_friendlyName); }
+        set { _friendlyName = value; }
     }
     public string[] DiscoveryPaths
     {
-        get
-        {
-            return (_discoveryPaths);
-        }
-        set
-        {
-            _discoveryPaths = value;
-        }
+        get { return (_discoveryPaths); }
+        set { _discoveryPaths = value; }
     }
 
     public int MinPercentCPU
     {
-        get
-        {
-            return (_minimumCPUpercent);
-        }
-        set
-        {
-            _minimumCPUpercent = value;
-        }
+        get { return (_minimumCPUpercent); }
+        set { _minimumCPUpercent = value; }
     }
 
     public int GetCurrentMinPercentCPU(TimeSpan timeRunning)
@@ -209,7 +171,7 @@ public class ReliabilityTestSet
             string trimmedTimes = times.Substring(5).Trim();
             string[] values = trimmedTimes.Split(new char[] { ',' });
             int min = Convert.ToInt32(values[0]);
-            int max = Convert.ToInt32(values[1].Substring(0, values[1].Length - 1));   // remove the ending )
+            int max = Convert.ToInt32(values[1].Substring(0, values[1].Length - 1)); // remove the ending )
             return (_rand.Next(min, max));
         }
         else
@@ -220,124 +182,62 @@ public class ReliabilityTestSet
 
     public int MinPercentMem
     {
-        get
-        {
-            return (_minimumMemoryPercent);
-        }
-        set
-        {
-            _minimumMemoryPercent = value;
-        }
+        get { return (_minimumMemoryPercent); }
+        set { _minimumMemoryPercent = value; }
     }
-
 
     public int MinTestsRunning
     {
-        get
-        {
-            return (_minimumTestsRunning);
-        }
-        set
-        {
-            _minimumTestsRunning = value;
-        }
+        get { return (_minimumTestsRunning); }
+        set { _minimumTestsRunning = value; }
     }
 
     public int MaxTestsRunning
     {
-        get
-        {
-            return (_maximumTestsRunning);
-        }
-        set
-        {
-            _maximumTestsRunning = value;
-        }
+        get { return (_maximumTestsRunning); }
+        set { _maximumTestsRunning = value; }
     }
 
     public bool EnablePerfCounters
     {
-        get
-        {
-            return false;
-        }
-        set
-        {
-            _enablePerfCounters = value;
-        }
+        get { return false; }
+        set { _enablePerfCounters = value; }
     }
 
     public bool DisableLogging
     {
-        get
-        {
-            return (_disableLogging);
-        }
-
-        set
-        {
-            _disableLogging = value;
-        }
+        get { return (_disableLogging); }
+        set { _disableLogging = value; }
     }
 
     public bool InstallDetours
     {
-        get
-        {
-            return (_installDetours);
-        }
-        set
-        {
-            _installDetours = value;
-        }
+        get { return (_installDetours); }
+        set { _installDetours = value; }
     }
 
     public TestStartModeEnum DefaultTestStartMode
     {
-        get
-        {
-            return (_testStartMode);
-        }
-        set
-        {
-            _testStartMode = value;
-        }
+        get { return (_testStartMode); }
+        set { _testStartMode = value; }
     }
 
     public int PercentPassIsPass
     {
-        get
-        {
-            return (_percentPassIsPass);
-        }
-        set
-        {
-            _percentPassIsPass = value;
-        }
+        get { return (_percentPassIsPass); }
+        set { _percentPassIsPass = value; }
     }
 
     public AppDomainLoaderMode AppDomainLoaderMode
     {
-        get
-        {
-            return (_adLoaderMode);
-        }
-        set
-        {
-            _adLoaderMode = value;
-        }
+        get { return (_adLoaderMode); }
+        set { _adLoaderMode = value; }
     }
 
     public AssemblyLoadContextLoaderMode AssemblyLoadContextLoaderMode
     {
-        get
-        {
-            return (_alcLoaderMode);
-        }
-        set
-        {
-            _alcLoaderMode = value;
-        }
+        get { return (_alcLoaderMode); }
+        set { _alcLoaderMode = value; }
     }
 
     /// <summary>
@@ -345,14 +245,8 @@ public class ReliabilityTestSet
     /// </summary>
     public int NumAssemblyLoadContexts
     {
-        get
-        {
-            return (_numAssemblyLoadContexts);
-        }
-        set
-        {
-            _numAssemblyLoadContexts = value;
-        }
+        get { return (_numAssemblyLoadContexts); }
+        set { _numAssemblyLoadContexts = value; }
     }
 
     /// <summary>
@@ -360,86 +254,40 @@ public class ReliabilityTestSet
     /// </summary>
     public int NumAppDomains
     {
-        get
-        {
-            return (_numAppDomains);
-        }
-        set
-        {
-            _numAppDomains = value;
-        }
+        get { return (_numAppDomains); }
+        set { _numAppDomains = value; }
     }
 
     public string DefaultDebugger
     {
-        get
-        {
-            return (_defaultDebugger);
-        }
-        set
-        {
-            _defaultDebugger = value;
-        }
+        get { return (_defaultDebugger); }
+        set { _defaultDebugger = value; }
     }
 
     public string DefaultDebuggerOptions
     {
-        get
-        {
-            return (_defaultDebuggerOptions);
-        }
-        set
-        {
-            _defaultDebuggerOptions = value;
-        }
+        get { return (_defaultDebuggerOptions); }
+        set { _defaultDebuggerOptions = value; }
     }
     public int ULGeneralUnloadPercent
     {
-        get
-        {
-            return (_ulGeneralUnloadPercent);
-        }
-
-        set
-        {
-            _ulGeneralUnloadPercent = value;
-        }
+        get { return (_ulGeneralUnloadPercent); }
+        set { _ulGeneralUnloadPercent = value; }
     }
     public int ULAppDomainUnloadPercent
     {
-        get
-        {
-            return (_ulAppDomainUnloadPercent);
-        }
-
-        set
-        {
-            _ulAppDomainUnloadPercent = value;
-        }
+        get { return (_ulAppDomainUnloadPercent); }
+        set { _ulAppDomainUnloadPercent = value; }
     }
     public int ULAssemblyLoadPercent
     {
-        get
-        {
-            return (_ulAssemblyLoadPercent);
-        }
-
-        set
-        {
-            _ulAssemblyLoadPercent = value;
-        }
+        get { return (_ulAssemblyLoadPercent); }
+        set { _ulAssemblyLoadPercent = value; }
     }
     public int ULWaitTime
     {
-        get
-        {
-            return (_ulWaitTime);
-        }
-
-        set
-        {
-            _ulWaitTime = value;
-        }
+        get { return (_ulWaitTime); }
+        set { _ulWaitTime = value; }
     }
     public bool ReportResults
     {
@@ -451,115 +299,58 @@ public class ReliabilityTestSet
             }
             return (_reportResults);
         }
-        set
-        {
-            _reportResults = value;
-        }
+        set { _reportResults = value; }
     }
     public string ReportResultsTo
     {
-        get
-        {
-            return (_reportResultsTo);
-        }
-        set
-        {
-            _reportResultsTo = value;
-        }
+        get { return (_reportResultsTo); }
+        set { _reportResultsTo = value; }
     }
     public Guid BvtCategory
     {
-        get
-        {
-            return (_bvtCategory);
-        }
-        set
-        {
-            _bvtCategory = value;
-        }
+        get { return (_bvtCategory); }
+        set { _bvtCategory = value; }
     }
 
     public string CCFailMail
     {
-        get
-        {
-            return (_ccFailMail);
-        }
-        set
-        {
-            _ccFailMail = value;
-        }
+        get { return (_ccFailMail); }
+        set { _ccFailMail = value; }
     }
 
     public bool SuppressConsoleOutputFromTests
     {
-        get
-        {
-            return _suppressConsoleOutputFromTests;
-        }
-        set
-        {
-            _suppressConsoleOutputFromTests = value;
-        }
+        get { return _suppressConsoleOutputFromTests; }
+        set { _suppressConsoleOutputFromTests = value; }
     }
 
     public bool DebugBreakOnTestHang
     {
-        get
-        {
-            return _debugBreakOnTestHang;
-        }
-        set
-        {
-            _debugBreakOnTestHang = value;
-        }
+        get { return _debugBreakOnTestHang; }
+        set { _debugBreakOnTestHang = value; }
     }
 
     public bool DebugBreakOnBadTest
     {
-        get
-        {
-            return _debugBreakOnBadTest;
-        }
-        set
-        {
-            _debugBreakOnBadTest = value;
-        }
+        get { return _debugBreakOnBadTest; }
+        set { _debugBreakOnBadTest = value; }
     }
 
     public bool DebugBreakOnOutOfMemory
     {
-        get
-        {
-            return _debugBreakOnOutOfMemory;
-        }
-        set
-        {
-            _debugBreakOnOutOfMemory = value;
-        }
+        get { return _debugBreakOnOutOfMemory; }
+        set { _debugBreakOnOutOfMemory = value; }
     }
 
     public bool DebugBreakOnPathTooLong
     {
-        get
-        {
-            return _debugBreakOnPathTooLong;
-        }
-        set
-        {
-            _debugBreakOnPathTooLong = value;
-        }
+        get { return _debugBreakOnPathTooLong; }
+        set { _debugBreakOnPathTooLong = value; }
     }
 
     public bool DebugBreakOnMissingTest
     {
-        get
-        {
-            return _debugBreakOnMissingTest;
-        }
-        set
-        {
-            _debugBreakOnMissingTest = value;
-        }
+        get { return _debugBreakOnMissingTest; }
+        set { _debugBreakOnMissingTest = value; }
     }
 }

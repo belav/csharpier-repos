@@ -22,26 +22,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory()
-            {
-            }
+            public Factory() { }
 
             [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-            public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-                => new CSharpCompletionService(languageServices.WorkspaceServices.Workspace);
+            public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+                new CSharpCompletionService(languageServices.WorkspaceServices.Workspace);
         }
 
         private CompletionRules _latestRules = CompletionRules.Default;
 
-        private CSharpCompletionService(Workspace workspace)
-            : base(workspace)
-        {
-        }
+        private CSharpCompletionService(Workspace workspace) : base(workspace) { }
 
         public override string Language => LanguageNames.CSharp;
 
-        public override TextSpan GetDefaultCompletionListSpan(SourceText text, int caretPosition)
-            => CompletionUtilities.GetCompletionItemSpan(text, caretPosition);
+        public override TextSpan GetDefaultCompletionListSpan(SourceText text, int caretPosition) =>
+            CompletionUtilities.GetCompletionItemSpan(text, caretPosition);
 
         internal override CompletionRules GetRules(CompletionOptions options)
         {
@@ -61,8 +56,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
             }
 
             // use interlocked + stored rules to reduce # of times this gets created when option is different than default
-            var newRules = _latestRules.WithDefaultEnterKeyRule(enterRule)
-                                       .WithSnippetsRule(snippetRule);
+            var newRules = _latestRules
+                .WithDefaultEnterKeyRule(enterRule)
+                .WithSnippetsRule(snippetRule);
 
             Interlocked.Exchange(ref _latestRules, newRules);
 

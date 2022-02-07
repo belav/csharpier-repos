@@ -55,7 +55,8 @@ namespace System.Xml
         /// </summary>
         public static int LeastPosition(uint num)
         {
-            if (num == 0) return 0;
+            if (num == 0)
+                return 0;
             return Count(num ^ (num - 1));
         }
     }

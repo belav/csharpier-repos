@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace JitTest
 {
     internal struct SimpleStruct

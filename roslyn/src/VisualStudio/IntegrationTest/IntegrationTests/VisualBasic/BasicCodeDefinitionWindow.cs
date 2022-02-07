@@ -15,9 +15,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.Basic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicCodeDefinitionWindow(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicCodeDefinitionWindow))
-        {
-        }
+            : base(instanceFactory, nameof(BasicCodeDefinitionWindow)) { }
 
         [WpfTheory]
         [CombinatorialData]
@@ -30,17 +28,25 @@ namespace Roslyn.VisualStudio.IntegrationTests.Basic
             // our regular file.
             VisualStudio.Editor.Activate();
 
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Public Class Test
     Dim field As $$Integer
 End Class
-");
+"
+            );
 
             // If we are enabling decompilation, we'll get C# code since we don't support decompiling into VB
             if (enableDecompilation)
-                Assert.Contains("public struct Int32", VisualStudio.CodeDefinitionWindow.GetCurrentLineText());
+                Assert.Contains(
+                    "public struct Int32",
+                    VisualStudio.CodeDefinitionWindow.GetCurrentLineText()
+                );
             else
-                Assert.Contains("Public Structure Int32", VisualStudio.CodeDefinitionWindow.GetCurrentLineText());
+                Assert.Contains(
+                    "Public Structure Int32",
+                    VisualStudio.CodeDefinitionWindow.GetCurrentLineText()
+                );
         }
     }
 }

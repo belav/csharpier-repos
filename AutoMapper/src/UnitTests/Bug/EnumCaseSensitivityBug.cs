@@ -21,10 +21,13 @@ namespace AutoMapper.UnitTests.Bug
             dog
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            // not creating a map on purpose to trigger use of EnumToEnumMapper
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    // not creating a map on purpose to trigger use of EnumToEnumMapper
+                }
+            );
 
         protected override void Because_of()
         {

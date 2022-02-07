@@ -11,9 +11,7 @@ namespace System.Net
         Negotiate = 0x00000002,
         Ntlm = 0x00000004,
         Basic = 0x00000008,
-
         Anonymous = 0x00008000,
-
         IntegratedWindowsAuthentication = Negotiate | Ntlm,
     }
 }

@@ -4,29 +4,29 @@
 using System;
 using System.Threading;
 
-public class Stop {
-
-    public static int Main(String[] args) {              
-
-        Stop tm = new Stop();
-	try
-	{
-
-		ThreadPool.QueueUserWorkItem(new WaitCallback(tm.RunTest));
-		Thread.Sleep(3000);
-	}
-	catch
-	{
-		return -1;
-	}
-	return 100;
-    }
-    public void RunTest(object foo)
+public class Stop
+{
+    public static int Main(String[] args)
     {
-        try{
-	    throw new Exception();
+        Stop tm = new Stop();
+        try
+        {
+            ThreadPool.QueueUserWorkItem(new WaitCallback(tm.RunTest));
+            Thread.Sleep(3000);
         }
         catch
-        {}        
+        {
+            return -1;
+        }
+        return 100;
+    }
+
+    public void RunTest(object foo)
+    {
+        try
+        {
+            throw new Exception();
+        }
+        catch { }
     }
 }

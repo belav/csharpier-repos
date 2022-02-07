@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.Primitives
     /// <summary>
     /// Tokenizes a <see cref="string"/> into <see cref="StringSegment"/>s.
     /// </summary>
-    public readonly struct StringTokenizer :  IEnumerable<StringSegment>
+    public readonly struct StringTokenizer : IEnumerable<StringSegment>
     {
         private readonly StringSegment _value;
         private readonly char[] _separators;
@@ -89,9 +89,7 @@ namespace Microsoft.Extensions.Primitives
 
             object IEnumerator.Current => Current;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {

@@ -16,8 +16,8 @@ namespace X
         /*
         int     filt(unsigned a)
         {
-            Console.WriteLine("Exception code = " + a);
-            return  1;
+        Console.WriteLine("Exception code = " + a);
+        return  1;
         }
         */
 

@@ -8,7 +8,7 @@ namespace AutoMapper.IntegrationTests
 {
     using UnitTests;
     using QueryableExtensions;
-        
+
     public class ByteArrayColumns : AutoMapperSpecBase
     {
         public class Customer
@@ -42,22 +42,27 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer
-                {
-                    Id = 1,
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    RowVersion = new byte[] { 1, 2, 3 }
-                });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        RowVersion = new byte[] { 1, 2, 3 }
+                    }
+                );
 
                 base.Seed(context);
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Customer, CustomerViewModel>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerViewModel>();
+                }
+            );
 
         [Fact]
         public void Can_map_with_projection()
@@ -65,10 +70,12 @@ namespace AutoMapper.IntegrationTests
             using (var context = new Context())
             {
                 var customerVms = ProjectTo<CustomerViewModel>(context.Customers).ToList();
-                customerVms.ForEach(x =>
-                {
-                    x.RowVersion.SequenceEqual(new byte[] { 1, 2, 3 }).ShouldBeTrue();
-                });
+                customerVms.ForEach(
+                    x =>
+                    {
+                        x.RowVersion.SequenceEqual(new byte[] { 1, 2, 3 }).ShouldBeTrue();
+                    }
+                );
             }
         }
     }

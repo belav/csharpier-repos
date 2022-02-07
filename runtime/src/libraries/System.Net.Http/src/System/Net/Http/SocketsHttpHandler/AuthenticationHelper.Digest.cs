@@ -40,22 +40,35 @@ namespace System.Net.Http
         // 48='0', 65='A', 97='a'
         private static readonly int[] s_alphaNumChooser = new int[] { 48, 65, 97 };
 
-        public static async Task<string?> GetDigestTokenForCredential(NetworkCredential credential, HttpRequestMessage request, DigestResponse digestResponse)
+        public static async Task<string?> GetDigestTokenForCredential(
+            NetworkCredential credential,
+            HttpRequestMessage request,
+            DigestResponse digestResponse
+        )
         {
             StringBuilder sb = StringBuilderCache.Acquire();
 
             // It is mandatory for servers to implement sha-256 per RFC 7616
             // Keep MD5 for backward compatibility.
             string? algorithm;
-            bool isAlgorithmSpecified = digestResponse.Parameters.TryGetValue(Algorithm, out algorithm);
+            bool isAlgorithmSpecified = digestResponse.Parameters.TryGetValue(
+                Algorithm,
+                out algorithm
+            );
             if (isAlgorithmSpecified)
             {
-                if (!algorithm!.Equals(Sha256, StringComparison.OrdinalIgnoreCase) &&
-                    !algorithm.Equals(Md5, StringComparison.OrdinalIgnoreCase) &&
-                    !algorithm.Equals(Sha256Sess, StringComparison.OrdinalIgnoreCase) &&
-                    !algorithm.Equals(MD5Sess, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !algorithm!.Equals(Sha256, StringComparison.OrdinalIgnoreCase)
+                    && !algorithm.Equals(Md5, StringComparison.OrdinalIgnoreCase)
+                    && !algorithm.Equals(Sha256Sess, StringComparison.OrdinalIgnoreCase)
+                    && !algorithm.Equals(MD5Sess, StringComparison.OrdinalIgnoreCase)
+                )
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(digestResponse, $"Algorithm not supported: {algorithm}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(
+                            digestResponse,
+                            $"Algorithm not supported: {algorithm}"
+                        );
                     return null;
                 }
             }
@@ -68,7 +81,8 @@ namespace System.Net.Http
             string? nonce;
             if (!digestResponse.Parameters.TryGetValue(Nonce, out nonce))
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(digestResponse, "Nonce missing");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(digestResponse, "Nonce missing");
                 return null;
             }
 
@@ -79,7 +93,8 @@ namespace System.Net.Http
             string? realm;
             if (!digestResponse.Parameters.TryGetValue(Realm, out realm))
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(digestResponse, "Realm missing");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(digestResponse, "Realm missing");
                 return null;
             }
 
@@ -87,7 +102,10 @@ namespace System.Net.Http
             string? userhash;
             if (digestResponse.Parameters.TryGetValue(UserHash, out userhash) && userhash == "true")
             {
-                sb.AppendKeyValue(Username, ComputeHash(credential.UserName + ":" + realm, algorithm));
+                sb.AppendKeyValue(
+                    Username,
+                    ComputeHash(credential.UserName + ":" + realm, algorithm)
+                );
                 sb.AppendKeyValue(UserHash, userhash, includeQuotes: false);
             }
             else
@@ -119,17 +137,27 @@ namespace System.Net.Http
             if (isQopSpecified)
             {
                 // Check if auth-int present in qop string
-                int index1 = digestResponse.Parameters[Qop].IndexOf(AuthInt, StringComparison.Ordinal);
+                int index1 = digestResponse.Parameters[Qop].IndexOf(
+                    AuthInt,
+                    StringComparison.Ordinal
+                );
                 if (index1 != -1)
                 {
                     // Get index of auth if present in qop string
-                    int index2 = digestResponse.Parameters[Qop].IndexOf(Auth, StringComparison.Ordinal);
+                    int index2 = digestResponse.Parameters[Qop].IndexOf(
+                        Auth,
+                        StringComparison.Ordinal
+                    );
 
                     // If index2 < index1, auth option is available
                     // If index2 == index1, check if auth option available later in string after auth-int.
                     if (index2 == index1)
                     {
-                        index2 = digestResponse.Parameters[Qop].IndexOf(Auth, index1 + AuthInt.Length, StringComparison.Ordinal);
+                        index2 = digestResponse.Parameters[Qop].IndexOf(
+                            Auth,
+                            index1 + AuthInt.Length,
+                            StringComparison.Ordinal
+                        );
                         if (index2 == -1)
                         {
                             qop = AuthInt;
@@ -151,40 +179,65 @@ namespace System.Net.Http
             string a2 = request.Method.Method + ":" + request.RequestUri.PathAndQuery;
             if (qop == AuthInt)
             {
-                string content = request.Content == null ? string.Empty : await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+                string content =
+                    request.Content == null
+                        ? string.Empty
+                        : await request.Content.ReadAsStringAsync().ConfigureAwait(false);
                 a2 = a2 + ":" + ComputeHash(content, algorithm);
             }
 
             string response;
             if (isQopSpecified)
             {
-                response = ComputeHash(ComputeHash(a1, algorithm) + ":" +
-                                            nonce + ":" +
-                                            DigestResponse.NonceCount + ":" +
-                                            cnonce + ":" +
-                                            qop + ":" +
-                                            ComputeHash(a2, algorithm), algorithm);
+                response = ComputeHash(
+                    ComputeHash(a1, algorithm)
+                        + ":"
+                        + nonce
+                        + ":"
+                        + DigestResponse.NonceCount
+                        + ":"
+                        + cnonce
+                        + ":"
+                        + qop
+                        + ":"
+                        + ComputeHash(a2, algorithm),
+                    algorithm
+                );
             }
             else
             {
-                response = ComputeHash(ComputeHash(a1, algorithm) + ":" +
-                            nonce + ":" +
-                            ComputeHash(a2, algorithm), algorithm);
+                response = ComputeHash(
+                    ComputeHash(a1, algorithm) + ":" + nonce + ":" + ComputeHash(a2, algorithm),
+                    algorithm
+                );
             }
 
             // Add response
-            sb.AppendKeyValue(Response, response, includeComma: opaque != null || isAlgorithmSpecified || isQopSpecified);
+            sb.AppendKeyValue(
+                Response,
+                response,
+                includeComma: opaque != null || isAlgorithmSpecified || isQopSpecified
+            );
 
             // Add opaque
             if (opaque != null)
             {
-                sb.AppendKeyValue(Opaque, opaque, includeComma: isAlgorithmSpecified || isQopSpecified);
+                sb.AppendKeyValue(
+                    Opaque,
+                    opaque,
+                    includeComma: isAlgorithmSpecified || isQopSpecified
+                );
             }
 
             if (isAlgorithmSpecified)
             {
                 // Add algorithm
-                sb.AppendKeyValue(Algorithm, algorithm, includeQuotes: false, includeComma: isQopSpecified);
+                sb.AppendKeyValue(
+                    Algorithm,
+                    algorithm,
+                    includeQuotes: false,
+                    includeComma: isQopSpecified
+                );
             }
 
             if (isQopSpecified)
@@ -204,7 +257,8 @@ namespace System.Net.Http
 
         public static bool IsServerNonceStale(DigestResponse digestResponse)
         {
-            return digestResponse.Parameters.TryGetValue(Stale, out string? stale) && stale == "true";
+            return digestResponse.Parameters.TryGetValue(Stale, out string? stale)
+                && stale == "true";
         }
 
         private static string GetRandomAlphaNumericString()
@@ -214,7 +268,7 @@ namespace System.Net.Http
             RandomNumberGenerator.Fill(randomNumbers);
 
             StringBuilder sb = StringBuilderCache.Acquire(Length);
-            for (int i = 0; i < randomNumbers.Length;)
+            for (int i = 0; i < randomNumbers.Length; )
             {
                 // Get a random digit 0-9, a random alphabet in a-z, or a random alphabeta in A-Z
                 int rangeIndex = randomNumbers[i++] % 3;
@@ -229,11 +283,22 @@ namespace System.Net.Http
         {
             // Disable MD5 insecure warning.
 #pragma warning disable CA5351
-            using (HashAlgorithm hash = algorithm.StartsWith(Sha256, StringComparison.OrdinalIgnoreCase) ? SHA256.Create() : (HashAlgorithm)MD5.Create())
+            using (
+                HashAlgorithm hash = algorithm.StartsWith(
+                    Sha256,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                  ? SHA256.Create()
+                  : (HashAlgorithm)MD5.Create()
+            )
 #pragma warning restore CA5351
             {
                 Span<byte> result = stackalloc byte[hash.HashSize / 8]; // HashSize is in bits
-                bool hashComputed = hash.TryComputeHash(Encoding.UTF8.GetBytes(data), result, out int bytesWritten);
+                bool hashComputed = hash.TryComputeHash(
+                    Encoding.UTF8.GetBytes(data),
+                    result,
+                    out int bytesWritten
+                );
                 Debug.Assert(hashComputed && bytesWritten == result.Length);
 
                 return HexConverter.ToString(result, HexConverter.Casing.Lower);
@@ -242,7 +307,10 @@ namespace System.Net.Http
 
         internal sealed class DigestResponse
         {
-            internal readonly Dictionary<string, string> Parameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            internal readonly Dictionary<string, string> Parameters = new Dictionary<
+                string,
+                string
+            >(StringComparer.OrdinalIgnoreCase);
             internal const string NonceCount = "00000001";
 
             internal DigestResponse(string? challenge)
@@ -259,8 +327,10 @@ namespace System.Net.Http
             private static bool MustValueBeQuoted(string key)
             {
                 // As per the RFC, these string must be quoted for historical reasons.
-                return key.Equals(Realm, StringComparison.OrdinalIgnoreCase) || key.Equals(Nonce, StringComparison.OrdinalIgnoreCase) ||
-                    key.Equals(Opaque, StringComparison.OrdinalIgnoreCase) || key.Equals(Qop, StringComparison.OrdinalIgnoreCase);
+                return key.Equals(Realm, StringComparison.OrdinalIgnoreCase)
+                    || key.Equals(Nonce, StringComparison.OrdinalIgnoreCase)
+                    || key.Equals(Opaque, StringComparison.OrdinalIgnoreCase)
+                    || key.Equals(Qop, StringComparison.OrdinalIgnoreCase);
             }
 
             private string? GetNextKey(string data, int currentIndex, out int parsedIndex)
@@ -276,7 +346,11 @@ namespace System.Net.Http
 
                 // Parse till '=' is encountered marking end of key.
                 // Key cannot contain space or tab, break if either is found.
-                while (currentIndex < data.Length && data[currentIndex] != '=' && !CharIsSpaceOrTab(data[currentIndex]))
+                while (
+                    currentIndex < data.Length
+                    && data[currentIndex] != '='
+                    && !CharIsSpaceOrTab(data[currentIndex])
+                )
                 {
                     currentIndex++;
                 }
@@ -308,7 +382,10 @@ namespace System.Net.Http
                 }
 
                 // Skip trailing space and tab and '='
-                while (currentIndex < data.Length && (CharIsSpaceOrTab(data[currentIndex]) || data[currentIndex] == '='))
+                while (
+                    currentIndex < data.Length
+                    && (CharIsSpaceOrTab(data[currentIndex]) || data[currentIndex] == '=')
+                )
                 {
                     currentIndex++;
                 }
@@ -318,7 +395,12 @@ namespace System.Net.Http
                 return data.Substring(start, length);
             }
 
-            private string? GetNextValue(string data, int currentIndex, bool expectQuotes, out int parsedIndex)
+            private string? GetNextValue(
+                string data,
+                int currentIndex,
+                bool expectQuotes,
+                out int parsedIndex
+            )
             {
                 Debug.Assert(currentIndex < data.Length && !CharIsSpaceOrTab(data[currentIndex]));
 
@@ -337,7 +419,13 @@ namespace System.Net.Http
                 }
 
                 StringBuilder sb = StringBuilderCache.Acquire();
-                while (currentIndex < data.Length && ((quotedValue && data[currentIndex] != '"') || (!quotedValue && data[currentIndex] != ',')))
+                while (
+                    currentIndex < data.Length
+                    && (
+                        (quotedValue && data[currentIndex] != '"')
+                        || (!quotedValue && data[currentIndex] != ',')
+                    )
+                )
                 {
                     sb.Append(data[currentIndex]);
                     currentIndex++;
@@ -401,16 +489,23 @@ namespace System.Net.Http
                         break;
 
                     // Get the value.
-                    string? value = GetNextValue(challenge, parsedIndex, MustValueBeQuoted(key), out parsedIndex);
+                    string? value = GetNextValue(
+                        challenge,
+                        parsedIndex,
+                        MustValueBeQuoted(key),
+                        out parsedIndex
+                    );
                     if (value == null)
                         break;
 
                     // Ensure value is valid.
                     // Opaque, Domain and Realm can have empty string
-                    if (value == string.Empty &&
-                        !key.Equals(Opaque, StringComparison.OrdinalIgnoreCase) &&
-                        !key.Equals(Domain, StringComparison.OrdinalIgnoreCase) &&
-                        !key.Equals(Realm, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        value == string.Empty
+                        && !key.Equals(Opaque, StringComparison.OrdinalIgnoreCase)
+                        && !key.Equals(Domain, StringComparison.OrdinalIgnoreCase)
+                        && !key.Equals(Realm, StringComparison.OrdinalIgnoreCase)
+                    )
                         break;
 
                     // Add the key-value pair to Parameters.
@@ -425,7 +520,13 @@ namespace System.Net.Http
         // Characters that require escaping in quoted string
         private static readonly char[] SpecialCharacters = new[] { '"', '\\' };
 
-        public static void AppendKeyValue(this StringBuilder sb, string key, string value, bool includeQuotes = true, bool includeComma = true)
+        public static void AppendKeyValue(
+            this StringBuilder sb,
+            string key,
+            string value,
+            bool includeQuotes = true,
+            bool includeComma = true
+        )
         {
             sb.Append(key);
             sb.Append('=');

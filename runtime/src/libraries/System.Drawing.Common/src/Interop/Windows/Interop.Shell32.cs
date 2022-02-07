@@ -9,6 +9,10 @@ internal static partial class Interop
     internal static partial class Shell32
     {
         [DllImport(Libraries.Shell32, CharSet = CharSet.Unicode)]
-        internal static extern unsafe IntPtr ExtractAssociatedIcon(HandleRef hInst, char* iconPath, ref int index);
+        internal static extern unsafe IntPtr ExtractAssociatedIcon(
+            HandleRef hInst,
+            char* iconPath,
+            ref int index
+        );
     }
 }

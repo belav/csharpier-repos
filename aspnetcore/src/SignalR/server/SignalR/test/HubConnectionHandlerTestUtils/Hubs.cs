@@ -52,7 +52,11 @@ public class MethodHub : TestHub
         return Clients.Group(groupName).SendAsync("Send", message);
     }
 
-    public Task GroupExceptSendMethod(string groupName, string message, IReadOnlyList<string> excludedConnectionIds)
+    public Task GroupExceptSendMethod(
+        string groupName,
+        string message,
+        IReadOnlyList<string> excludedConnectionIds
+    )
     {
         return Clients.GroupExcept(groupName, excludedConnectionIds).SendAsync("Send", message);
     }
@@ -74,7 +78,10 @@ public class MethodHub : TestHub
 
     public Task BroadcastItem()
     {
-        return Clients.All.SendAsync("Broadcast", new Result { Message = "test", paramName = "param" });
+        return Clients.All.SendAsync(
+            "Broadcast",
+            new Result { Message = "test", paramName = "param" }
+        );
     }
 
     public Task SendArray()
@@ -113,9 +120,7 @@ public class MethodHub : TestHub
         return data;
     }
 
-    public void VoidMethod()
-    {
-    }
+    public void VoidMethod() { }
 
     public string ConcatString(byte b, int i, char c, string s)
     {
@@ -147,19 +152,13 @@ public class MethodHub : TestHub
         return Task.FromException(new InvalidOperationException("BOOM!"));
     }
 
-    public static void StaticMethod()
-    {
-    }
+    public static void StaticMethod() { }
 
     [Authorize("test")]
-    public void AuthMethod()
-    {
-    }
+    public void AuthMethod() { }
 
     [Authorize("test")]
-    public void MultiParamAuthMethod(string s1, string s2)
-    {
-    }
+    public void MultiParamAuthMethod(string s1, string s2) { }
 
     public Task SendToAllExcept(string message, IReadOnlyList<string> excludedConnectionIds)
     {
@@ -186,9 +185,7 @@ public class MethodHub : TestHub
         return Clients.Caller.SendAsync("Send", new SelfRef());
     }
 
-    public void InvalidArgument(CancellationToken token)
-    {
-    }
+    public void InvalidArgument(CancellationToken token) { }
 
     public async Task<string> StreamingConcat(ChannelReader<string> source)
     {
@@ -207,9 +204,7 @@ public class MethodHub : TestHub
 
     public async Task StreamDontRead(ChannelReader<string> source)
     {
-        while (await source.WaitToReadAsync())
-        {
-        }
+        while (await source.WaitToReadAsync()) { }
     }
 
     public async Task<int> StreamingSum(ChannelReader<int> source)
@@ -314,9 +309,7 @@ public class MethodHub : TestHub
         {
             while (await source.WaitToReadAsync())
             {
-                while (source.TryRead(out var item))
-                {
-                }
+                while (source.TryRead(out var item)) { }
             }
         }
         catch (Exception ex)
@@ -331,8 +324,13 @@ public class MethodHub : TestHub
 
     public async Task BlockingMethod()
     {
-        var tcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-        Context.ConnectionAborted.Register(state => ((TaskCompletionSource<object>)state).SetResult(null), tcs);
+        var tcs = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        Context.ConnectionAborted.Register(
+            state => ((TaskCompletionSource<object>)state).SetResult(null),
+            tcs
+        );
 
         await tcs.Task;
     }
@@ -402,7 +400,11 @@ public class DynamicTestHub : DynamicHub
         return Clients.Group(groupName).Send(message);
     }
 
-    public Task GroupExceptSendMethod(string groupName, string message, IReadOnlyList<string> excludedConnectionIds)
+    public Task GroupExceptSendMethod(
+        string groupName,
+        string message,
+        IReadOnlyList<string> excludedConnectionIds
+    )
     {
         return Clients.GroupExcept(groupName, excludedConnectionIds).Send(message);
     }
@@ -488,7 +490,11 @@ public class HubT : Hub<Test>
         return Clients.Group(groupName).Send(message);
     }
 
-    public Task GroupExceptSendMethod(string groupName, string message, IReadOnlyList<string> excludedConnectionIds)
+    public Task GroupExceptSendMethod(
+        string groupName,
+        string message,
+        IReadOnlyList<string> excludedConnectionIds
+    )
     {
         return Clients.GroupExcept(groupName, excludedConnectionIds).Send(message);
     }
@@ -584,20 +590,14 @@ public class BaseHub : TestHub
 
 public class InvalidHub : TestHub
 {
-    public void OverloadedMethod(int num)
-    {
-    }
+    public void OverloadedMethod(int num) { }
 
-    public void OverloadedMethod(string message)
-    {
-    }
+    public void OverloadedMethod(string message) { }
 }
 
 public class GenericMethodHub : Hub
 {
-    public void GenericMethod<T>()
-    {
-    }
+    public void GenericMethod<T>() { }
 }
 
 public class DisposeTrackingHub : TestHub
@@ -627,10 +627,7 @@ public class HubWithAsyncDisposable : TestHub
         _disposable = disposable;
     }
 
-    public void Test()
-    {
-
-    }
+    public void Test() { }
 }
 
 public class AbortHub : Hub
@@ -647,14 +644,16 @@ public class StreamingHub : TestHub
     {
         var channel = Channel.CreateUnbounded<string>();
 
-        _ = Task.Run(async () =>
-        {
-            for (int i = 0; i < count; i++)
+        _ = Task.Run(
+            async () =>
             {
-                await channel.Writer.WriteAsync(i.ToString(CultureInfo.InvariantCulture));
+                for (int i = 0; i < count; i++)
+                {
+                    await channel.Writer.WriteAsync(i.ToString(CultureInfo.InvariantCulture));
+                }
+                channel.Writer.Complete();
             }
-            channel.Writer.Complete();
-        });
+        );
 
         return channel.Reader;
     }
@@ -691,7 +690,9 @@ public class StreamingHub : TestHub
         return new AsyncEnumerableImpl<string>(CounterAsyncEnumerable(count));
     }
 
-    public AsyncEnumerableImplChannelThrows<string> AsyncEnumerableIsPreferredOverChannelReader(int count)
+    public AsyncEnumerableImplChannelThrows<string> AsyncEnumerableIsPreferredOverChannelReader(
+        int count
+    )
     {
         return new AsyncEnumerableImplChannelThrows<string>(CounterChannel(count));
     }
@@ -727,41 +728,53 @@ public class StreamingHub : TestHub
     {
         Channel<string> output = Channel.CreateUnbounded<string>();
 
-        _ = Task.Run(async () =>
-        {
-            while (await source.WaitToReadAsync())
+        _ = Task.Run(
+            async () =>
             {
-                while (source.TryRead(out string item))
+                while (await source.WaitToReadAsync())
                 {
-                    await output.Writer.WriteAsync("echo:" + item);
+                    while (source.TryRead(out string item))
+                    {
+                        await output.Writer.WriteAsync("echo:" + item);
+                    }
                 }
-            }
 
-            output.Writer.TryComplete();
-        });
+                output.Writer.TryComplete();
+            }
+        );
 
         return output.Reader;
     }
 
-    public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerable(IDerivedParameterTestObject param)
+    public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerable(
+        IDerivedParameterTestObject param
+    )
     {
         await Task.Yield();
         yield return param.Value;
     }
 
-    public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerable(DerivedParameterTestObjectBase param)
+    public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerable(
+        DerivedParameterTestObjectBase param
+    )
     {
         await Task.Yield();
         yield return param.Value;
     }
 
-    public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerableWithCancellation(IDerivedParameterTestObject param, [EnumeratorCancellation] CancellationToken token)
+    public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerableWithCancellation(
+        IDerivedParameterTestObject param,
+        [EnumeratorCancellation] CancellationToken token
+    )
     {
         await Task.Yield();
         yield return param.Value;
     }
 
-    public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerableWithCancellation(DerivedParameterTestObjectBase param, [EnumeratorCancellation] CancellationToken token)
+    public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerableWithCancellation(
+        DerivedParameterTestObjectBase param,
+        [EnumeratorCancellation] CancellationToken token
+    )
     {
         await Task.Yield();
         yield return param.Value;
@@ -797,7 +810,9 @@ public class StreamingHub : TestHub
             throw new NotImplementedException();
         }
 
-        public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken = default)
+        public override ValueTask<bool> WaitToReadAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             // Not implemented to verify this is consumed as an IAsyncEnumerable<T> instead of a ChannelReader<T>.
             throw new NotImplementedException();
@@ -813,12 +828,17 @@ public class StreamingHub : TestHub
         {
             /// <summary>The channel being enumerated.</summary>
             private readonly ChannelReader<T> _channel;
+
             /// <summary>Cancellation token used to cancel the enumeration.</summary>
             private readonly CancellationToken _cancellationToken;
+
             /// <summary>The current element of the enumeration.</summary>
             private T _current;
 
-            public ChannelAsyncEnumerator(ChannelReader<T> channel, CancellationToken cancellationToken)
+            public ChannelAsyncEnumerator(
+                ChannelReader<T> channel,
+                CancellationToken cancellationToken
+            )
             {
                 _channel = channel;
                 _cancellationToken = cancellationToken;
@@ -875,11 +895,12 @@ public class StreamingHub : TestHub
     public class DerivedParameterKnownTypesBinder : ISerializationBinder
     {
         private static readonly IEnumerable<Type> _knownTypes = new List<Type>()
-            {
-                typeof(DerivedParameterTestObject)
-            };
+        {
+            typeof(DerivedParameterTestObject)
+        };
 
-        public static ISerializationBinder Instance { get; } = new DerivedParameterKnownTypesBinder();
+        public static ISerializationBinder Instance { get; } =
+            new DerivedParameterKnownTypesBinder();
 
         public void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
@@ -948,43 +969,57 @@ public class LongRunningHub : Hub
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(async () =>
-        {
-            _tcsService.StartedMethod.SetResult(null);
-            await token.WaitForCancellationAsync();
-            channel.Writer.TryComplete();
-            _tcsService.EndMethod.SetResult(null);
-        });
+        Task.Run(
+            async () =>
+            {
+                _tcsService.StartedMethod.SetResult(null);
+                await token.WaitForCancellationAsync();
+                channel.Writer.TryComplete();
+                _tcsService.EndMethod.SetResult(null);
+            }
+        );
 
         return channel.Reader;
     }
 
-    public ChannelReader<int> CancelableStreamMultiParameter(int ignore, int ignore2, CancellationToken token)
+    public ChannelReader<int> CancelableStreamMultiParameter(
+        int ignore,
+        int ignore2,
+        CancellationToken token
+    )
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(async () =>
-        {
-            _tcsService.StartedMethod.SetResult(null);
-            await token.WaitForCancellationAsync();
-            channel.Writer.TryComplete();
-            _tcsService.EndMethod.SetResult(null);
-        });
+        Task.Run(
+            async () =>
+            {
+                _tcsService.StartedMethod.SetResult(null);
+                await token.WaitForCancellationAsync();
+                channel.Writer.TryComplete();
+                _tcsService.EndMethod.SetResult(null);
+            }
+        );
 
         return channel.Reader;
     }
 
-    public ChannelReader<int> CancelableStreamNullableParameter(int x, string y, CancellationToken token)
+    public ChannelReader<int> CancelableStreamNullableParameter(
+        int x,
+        string y,
+        CancellationToken token
+    )
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(async () =>
-        {
-            _tcsService.StartedMethod.SetResult(x);
-            await token.WaitForCancellationAsync();
-            channel.Writer.TryComplete();
-            _tcsService.EndMethod.SetResult(y);
-        });
+        Task.Run(
+            async () =>
+            {
+                _tcsService.StartedMethod.SetResult(x);
+                await token.WaitForCancellationAsync();
+                channel.Writer.TryComplete();
+                _tcsService.EndMethod.SetResult(y);
+            }
+        );
 
         return channel.Reader;
     }
@@ -993,33 +1028,43 @@ public class LongRunningHub : Hub
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(() =>
-        {
-            _tcsService.StartedMethod.SetResult(x);
-            channel.Writer.TryComplete();
-            _tcsService.EndMethod.SetResult(input);
-            return Task.CompletedTask;
-        });
+        Task.Run(
+            () =>
+            {
+                _tcsService.StartedMethod.SetResult(x);
+                channel.Writer.TryComplete();
+                _tcsService.EndMethod.SetResult(input);
+                return Task.CompletedTask;
+            }
+        );
 
         return channel.Reader;
     }
 
-    public ChannelReader<int> CancelableStreamMiddleParameter(int ignore, CancellationToken token, int ignore2)
+    public ChannelReader<int> CancelableStreamMiddleParameter(
+        int ignore,
+        CancellationToken token,
+        int ignore2
+    )
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(async () =>
-        {
-            _tcsService.StartedMethod.SetResult(null);
-            await token.WaitForCancellationAsync();
-            channel.Writer.TryComplete();
-            _tcsService.EndMethod.SetResult(null);
-        });
+        Task.Run(
+            async () =>
+            {
+                _tcsService.StartedMethod.SetResult(null);
+                await token.WaitForCancellationAsync();
+                channel.Writer.TryComplete();
+                _tcsService.EndMethod.SetResult(null);
+            }
+        );
 
         return channel.Reader;
     }
 
-    public async IAsyncEnumerable<int> CancelableStreamGeneratedAsyncEnumerable([EnumeratorCancellation] CancellationToken token)
+    public async IAsyncEnumerable<int> CancelableStreamGeneratedAsyncEnumerable(
+        [EnumeratorCancellation] CancellationToken token
+    )
     {
         _tcsService.StartedMethod.SetResult(null);
         await token.WaitForCancellationAsync();
@@ -1027,7 +1072,10 @@ public class LongRunningHub : Hub
         yield break;
     }
 
-    public async IAsyncEnumerable<int> CountingCancelableStreamGeneratedAsyncEnumerable(int count, [EnumeratorCancellation] CancellationToken token)
+    public async IAsyncEnumerable<int> CountingCancelableStreamGeneratedAsyncEnumerable(
+        int count,
+        [EnumeratorCancellation] CancellationToken token
+    )
     {
         for (int i = 0; i < count; i++)
         {
@@ -1040,22 +1088,27 @@ public class LongRunningHub : Hub
         yield break;
     }
 
-    public ChannelReader<int> CountingCancelableStreamGeneratedChannel(int count, CancellationToken token)
+    public ChannelReader<int> CountingCancelableStreamGeneratedChannel(
+        int count,
+        CancellationToken token
+    )
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(async () =>
-        {
-            for (int i = 0; i < count; i++)
+        Task.Run(
+            async () =>
             {
-                await Task.Yield();
-                await channel.Writer.WriteAsync(i);
+                for (int i = 0; i < count; i++)
+                {
+                    await Task.Yield();
+                    await channel.Writer.WriteAsync(i);
+                }
+                _tcsService.StartedMethod.SetResult(null);
+                await token.WaitForCancellationAsync();
+                channel.Writer.TryComplete();
+                _tcsService.EndMethod.SetResult(null);
             }
-            _tcsService.StartedMethod.SetResult(null);
-            await token.WaitForCancellationAsync();
-            channel.Writer.TryComplete();
-            _tcsService.EndMethod.SetResult(null);
-        });
+        );
 
         return channel.Reader;
     }
@@ -1086,7 +1139,9 @@ public class LongRunningHub : Hub
             _tcsService = tcsService;
         }
 
-        public IAsyncEnumerator<int> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+        public IAsyncEnumerator<int> GetAsyncEnumerator(
+            CancellationToken cancellationToken = default
+        )
         {
             return new CustomAsyncEnumerator(_tcsService, cancellationToken);
         }
@@ -1132,8 +1187,12 @@ public class TcsService
 
     public void Reset()
     {
-        StartedMethod = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-        EndMethod = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+        StartedMethod = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        EndMethod = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
     }
 }
 
@@ -1153,10 +1212,12 @@ public class ErrorInAbortedTokenHub : Hub
     {
         Context.Items[nameof(OnConnectedAsync)] = true;
 
-        Context.ConnectionAborted.Register(() =>
-        {
-            throw new InvalidOperationException("BOOM");
-        });
+        Context.ConnectionAborted.Register(
+            () =>
+            {
+                throw new InvalidOperationException("BOOM");
+            }
+        );
 
         return base.OnConnectedAsync();
     }
@@ -1182,10 +1243,12 @@ public class ConnectionLifetimeHub : Hub
     {
         _state.TokenStateInConnected = Context.ConnectionAborted.IsCancellationRequested;
 
-        Context.ConnectionAborted.Register(() =>
-        {
-            _state.TokenCallbackTriggered = true;
-        });
+        Context.ConnectionAborted.Register(
+            () =>
+            {
+                _state.TokenCallbackTriggered = true;
+            }
+        );
 
         return base.OnConnectedAsync();
     }

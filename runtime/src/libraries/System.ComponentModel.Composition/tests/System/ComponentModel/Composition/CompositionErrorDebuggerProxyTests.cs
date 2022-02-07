@@ -11,10 +11,13 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor_NullAsErrorArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("error", () =>
-            {
-                new CompositionErrorDebuggerProxy((CompositionError)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "error",
+                () =>
+                {
+                    new CompositionErrorDebuggerProxy((CompositionError)null);
+                }
+            );
         }
 
         [Fact]
@@ -61,6 +64,5 @@ namespace System.ComponentModel.Composition
                 Assert.Same(error.Element, proxy.Element);
             }
         }
-
-   }
+    }
 }

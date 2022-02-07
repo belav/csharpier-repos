@@ -22,6 +22,7 @@ public sealed class ConsolidatedAssemblyApplicationPartFactory : ApplicationPart
     {
         return Enumerable.Concat(
             DefaultApplicationPartFactory.GetDefaultApplicationParts(assembly),
-            CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(assembly));
+            CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(assembly)
+        );
     }
 }

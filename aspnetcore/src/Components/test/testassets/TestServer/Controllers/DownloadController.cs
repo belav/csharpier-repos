@@ -10,7 +10,6 @@ namespace Components.TestServer.Controllers;
 
 public class DownloadController : Controller
 {
-
     [HttpGet("~/download")]
     public FileStreamResult Download()
     {

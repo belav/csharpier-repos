@@ -72,7 +72,9 @@ public class HtmlHelperValueExtensionsTest
         {
             return string.Format(
                 CultureInfo.InvariantCulture,
-                "{{ SomeProperty = {0} }}", SomeProperty ?? "(null)");
+                "{{ SomeProperty = {0} }}",
+                SomeProperty ?? "(null)"
+            );
         }
     }
 }

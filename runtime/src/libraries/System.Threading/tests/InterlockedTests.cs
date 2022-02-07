@@ -418,7 +418,10 @@ namespace System.Threading.Tests
             var waitsForThread = new Action[ThreadCount];
             for (int i = 0; i < ThreadCount; ++i)
             {
-                Thread t = ThreadTestHelpers.CreateGuardedThread(out waitsForThread[i], threadStart);
+                Thread t = ThreadTestHelpers.CreateGuardedThread(
+                    out waitsForThread[i],
+                    threadStart
+                );
                 t.IsBackground = true;
                 t.Start();
                 threadStarted.CheckedWait();
@@ -430,7 +433,10 @@ namespace System.Threading.Tests
                 waitForThread();
             }
 
-            Assert.Equal(ThreadCount * IterationCount, Interlocked.CompareExchange(ref value, 0, 0));
+            Assert.Equal(
+                ThreadCount * IterationCount,
+                Interlocked.CompareExchange(ref value, 0, 0)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -452,7 +458,11 @@ namespace System.Threading.Tests
                     double oldValue = value;
                     while (true)
                     {
-                        double valueBeforeUpdate = Interlocked.CompareExchange(ref value, oldValue + Increment, oldValue);
+                        double valueBeforeUpdate = Interlocked.CompareExchange(
+                            ref value,
+                            oldValue + Increment,
+                            oldValue
+                        );
                         if (valueBeforeUpdate == oldValue)
                         {
                             break;
@@ -466,7 +476,10 @@ namespace System.Threading.Tests
             var waitsForThread = new Action[ThreadCount];
             for (int i = 0; i < ThreadCount; ++i)
             {
-                Thread t = ThreadTestHelpers.CreateGuardedThread(out waitsForThread[i], threadStart);
+                Thread t = ThreadTestHelpers.CreateGuardedThread(
+                    out waitsForThread[i],
+                    threadStart
+                );
                 t.IsBackground = true;
                 t.Start();
                 threadStarted.CheckedWait();
@@ -478,7 +491,10 @@ namespace System.Threading.Tests
                 waitForThread();
             }
 
-            Assert.Equal(ThreadCount * IterationCount * Increment, Interlocked.CompareExchange(ref value, 0, 0));
+            Assert.Equal(
+                ThreadCount * IterationCount * Increment,
+                Interlocked.CompareExchange(ref value, 0, 0)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -508,8 +524,11 @@ namespace System.Threading.Tests
             var waitsForThread = new Action[ThreadCount];
             for (int i = 0; i < ThreadCount; ++i)
             {
-                Thread t =
-                    ThreadTestHelpers.CreateGuardedThread(out checksForThreadErrors[i], out waitsForThread[i], threadStart);
+                Thread t = ThreadTestHelpers.CreateGuardedThread(
+                    out checksForThreadErrors[i],
+                    out waitsForThread[i],
+                    threadStart
+                );
                 t.IsBackground = true;
                 t.Start();
                 threadStarted.CheckedWait();
@@ -529,7 +548,8 @@ namespace System.Threading.Tests
                     }
 
                     Thread.Sleep(1);
-                });
+                }
+            );
             foreach (var waitForThread in waitsForThread)
             {
                 waitForThread();
@@ -549,18 +569,22 @@ namespace System.Threading.Tests
             int count = 0;
             for (int i = 0; i < 1000; i++)
             {
-                threads.Add(Task.Run(() =>
-                {
-                    for (int j = 0; j < 1000; j++)
-                    {
-                        var cookie = asymmetricLock.Enter();
-                        count++;
-                        cookie.Exit();
-                    }
-                }));
+                threads.Add(
+                    Task.Run(
+                        () =>
+                        {
+                            for (int j = 0; j < 1000; j++)
+                            {
+                                var cookie = asymmetricLock.Enter();
+                                count++;
+                                cookie.Exit();
+                            }
+                        }
+                    )
+                );
             }
             Task.WaitAll(threads.ToArray());
-            Assert.Equal(1000*1000, count);
+            Assert.Equal(1000 * 1000, count);
         }
 
         // Taking this lock on the same thread repeatedly is very fast because it has no interlocked operations.

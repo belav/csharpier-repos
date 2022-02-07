@@ -12,22 +12,22 @@ namespace Microsoft.Data.Sqlite.Utilities
         private static string? _localFolder;
         private static string? _tempFolder;
 
-        public static object? CurrentApplicationData
-            => _appData ??= LoadAppData();
+        public static object? CurrentApplicationData => _appData ??= LoadAppData();
 
-        public static string? TemporaryFolderPath
-            => _tempFolder ??= GetFolderPath("TemporaryFolder");
+        public static string? TemporaryFolderPath =>
+            _tempFolder ??= GetFolderPath("TemporaryFolder");
 
-        public static string? LocalFolderPath
-            => _localFolder ??= GetFolderPath("LocalFolder");
+        public static string? LocalFolderPath => _localFolder ??= GetFolderPath("LocalFolder");
 
         private static object? LoadAppData()
         {
             try
             {
-                return Type.GetType("Windows.Storage.ApplicationData, Windows, ContentType=WindowsRuntime")
+                return Type.GetType(
+                        "Windows.Storage.ApplicationData, Windows, ContentType=WindowsRuntime"
+                    )
                     ?? Type.GetType("Windows.Storage.ApplicationData, Microsoft.Windows.SDK.NET")
-                    ?.GetRuntimeProperty("Current")!.GetValue(null);
+                        ?.GetRuntimeProperty("Current")!.GetValue(null);
             }
             catch
             {
@@ -39,9 +39,12 @@ namespace Microsoft.Data.Sqlite.Utilities
         private static string? GetFolderPath(string propertyName)
         {
             var appDataType = CurrentApplicationData?.GetType();
-            var temporaryFolder = appDataType?.GetRuntimeProperty(propertyName)!.GetValue(CurrentApplicationData);
+            var temporaryFolder = appDataType?.GetRuntimeProperty(propertyName)!.GetValue(
+                CurrentApplicationData
+            );
 
-            return temporaryFolder?.GetType().GetRuntimeProperty("Path")!.GetValue(temporaryFolder) as string;
+            return temporaryFolder?.GetType().GetRuntimeProperty("Path")!.GetValue(temporaryFolder)
+                as string;
         }
     }
 }

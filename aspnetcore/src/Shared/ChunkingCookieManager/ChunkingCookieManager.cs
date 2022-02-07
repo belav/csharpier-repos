@@ -71,7 +71,14 @@ internal class ChunkingCookieManager
     {
         if (value != null && value.StartsWith(ChunkCountPrefix, StringComparison.Ordinal))
         {
-            if (int.TryParse(value.AsSpan(ChunkCountPrefix.Length), NumberStyles.None, CultureInfo.InvariantCulture, out var chunksCount))
+            if (
+                int.TryParse(
+                    value.AsSpan(ChunkCountPrefix.Length),
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out var chunksCount
+                )
+            )
             {
                 return chunksCount;
             }
@@ -106,7 +113,9 @@ internal class ChunkingCookieManager
             var chunks = new string[chunksCount];
             for (var chunkId = 1; chunkId <= chunksCount; chunkId++)
             {
-                var chunk = requestCookies[key + ChunkKeySuffix + chunkId.ToString(CultureInfo.InvariantCulture)];
+                var chunk = requestCookies[
+                    key + ChunkKeySuffix + chunkId.ToString(CultureInfo.InvariantCulture)
+                ];
                 if (string.IsNullOrEmpty(chunk))
                 {
                     if (ThrowForPartialCookies)
@@ -122,7 +131,9 @@ internal class ChunkingCookieManager
                                 "The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded.",
                                 chunkId - 1,
                                 chunksCount,
-                                totalSize));
+                                totalSize
+                            )
+                        );
                     }
                     // Missing chunk, abort by returning the original cookie value. It may have been a false positive?
                     return value;
@@ -148,7 +159,12 @@ internal class ChunkingCookieManager
     /// <param name="key"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public void AppendResponseCookie(HttpContext context, string key, string? value, CookieOptions options)
+    public void AppendResponseCookie(
+        HttpContext context,
+        string key,
+        string? value,
+        CookieOptions options
+    )
     {
         if (context == null)
         {
@@ -195,7 +211,9 @@ internal class ChunkingCookieManager
         {
             // 10 is the minimum data we want to put in an individual cookie, including the cookie chunk identifier "CXX".
             // No room for data, we can't chunk the options and name
-            throw new InvalidOperationException("The cookie key and options are larger than ChunksSize, leaving no room for data.");
+            throw new InvalidOperationException(
+                "The cookie key and options are larger than ChunksSize, leaving no room for data."
+            );
         }
         else
         {
@@ -209,7 +227,10 @@ internal class ChunkingCookieManager
             var cookieChunkCount = (int)Math.Ceiling(value.Length * 1.0 / dataSizePerCookie);
 
             var keyValuePairs = new KeyValuePair<string, string>[cookieChunkCount + 1];
-            keyValuePairs[0] = KeyValuePair.Create(key, ChunkCountPrefix + cookieChunkCount.ToString(CultureInfo.InvariantCulture));
+            keyValuePairs[0] = KeyValuePair.Create(
+                key,
+                ChunkCountPrefix + cookieChunkCount.ToString(CultureInfo.InvariantCulture)
+            );
 
             var offset = 0;
             for (var chunkId = 1; chunkId <= cookieChunkCount; chunkId++)
@@ -218,7 +239,14 @@ internal class ChunkingCookieManager
                 var length = Math.Min(dataSizePerCookie, remainingLength);
                 var segment = value.Substring(offset, length);
                 offset += length;
-                keyValuePairs[chunkId] = KeyValuePair.Create(string.Concat(key, ChunkKeySuffix, chunkId.ToString(CultureInfo.InvariantCulture)), segment);
+                keyValuePairs[chunkId] = KeyValuePair.Create(
+                    string.Concat(
+                        key,
+                        ChunkKeySuffix,
+                        chunkId.ToString(CultureInfo.InvariantCulture)
+                    ),
+                    segment
+                );
             }
 
             responseCookies.Append(keyValuePairs, options);
@@ -249,10 +277,7 @@ internal class ChunkingCookieManager
             throw new ArgumentNullException(nameof(options));
         }
 
-        var keys = new List<string>
-            {
-                key + "="
-            };
+        var keys = new List<string> { key + "=" };
 
         var requestCookie = context.Request.Cookies[key];
         var chunks = ParseChunksCount(requestCookie);
@@ -269,14 +294,20 @@ internal class ChunkingCookieManager
         var pathHasValue = !string.IsNullOrEmpty(options.Path);
 
         Func<string, bool> rejectPredicate;
-        Func<string, bool> predicate = value => keys.Any(k => value.StartsWith(k, StringComparison.OrdinalIgnoreCase));
+        Func<string, bool> predicate = value =>
+            keys.Any(k => value.StartsWith(k, StringComparison.OrdinalIgnoreCase));
         if (domainHasValue)
         {
-            rejectPredicate = value => predicate(value) && value.IndexOf("domain=" + options.Domain, StringComparison.OrdinalIgnoreCase) != -1;
+            rejectPredicate = value =>
+                predicate(value)
+                && value.IndexOf("domain=" + options.Domain, StringComparison.OrdinalIgnoreCase)
+                    != -1;
         }
         else if (pathHasValue)
         {
-            rejectPredicate = value => predicate(value) && value.IndexOf("path=" + options.Path, StringComparison.OrdinalIgnoreCase) != -1;
+            rejectPredicate = value =>
+                predicate(value)
+                && value.IndexOf("path=" + options.Path, StringComparison.OrdinalIgnoreCase) != -1;
         }
         else
         {
@@ -310,19 +341,24 @@ internal class ChunkingCookieManager
 
         for (var i = 1; i <= chunks; i++)
         {
-            keyValuePairs[i] = KeyValuePair.Create(string.Concat(key, "C", i.ToString(CultureInfo.InvariantCulture)), string.Empty);
+            keyValuePairs[i] = KeyValuePair.Create(
+                string.Concat(key, "C", i.ToString(CultureInfo.InvariantCulture)),
+                string.Empty
+            );
         }
 
-        responseCookies.Append(keyValuePairs, new CookieOptions()
-        {
-            Path = options.Path,
-            Domain = options.Domain,
-            SameSite = options.SameSite,
-            Secure = options.Secure,
-            IsEssential = options.IsEssential,
-            Expires = DateTimeOffset.UnixEpoch,
-            HttpOnly = options.HttpOnly,
-        });
+        responseCookies.Append(
+            keyValuePairs,
+            new CookieOptions()
+            {
+                Path = options.Path,
+                Domain = options.Domain,
+                SameSite = options.SameSite,
+                Secure = options.Secure,
+                IsEssential = options.IsEssential,
+                Expires = DateTimeOffset.UnixEpoch,
+                HttpOnly = options.HttpOnly,
+            }
+        );
     }
 }
-

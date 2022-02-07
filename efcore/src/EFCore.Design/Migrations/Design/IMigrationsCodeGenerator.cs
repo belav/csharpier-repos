@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Type contextType,
             string migrationName,
             string migrationId,
-            IModel targetModel);
+            IModel targetModel
+        );
 
         /// <summary>
         ///     Generates the migration code.
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string? migrationNamespace,
             string migrationName,
             IReadOnlyList<MigrationOperation> upOperations,
-            IReadOnlyList<MigrationOperation> downOperations);
+            IReadOnlyList<MigrationOperation> downOperations
+        );
 
         /// <summary>
         ///     Generates the model snapshot code.
@@ -60,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string? modelSnapshotNamespace,
             Type contextType,
             string modelSnapshotName,
-            IModel model);
+            IModel model
+        );
 
         /// <summary>
         ///     Gets the file extension code files should use.

@@ -8,34 +8,37 @@ using System.IO;
 
 namespace Microsoft.Extensions.DependencyModel.Resolution
 {
-    public class ReferenceAssemblyPathResolver: ICompilationAssemblyResolver
+    public class ReferenceAssemblyPathResolver : ICompilationAssemblyResolver
     {
         private readonly IFileSystem _fileSystem;
         private readonly string? _defaultReferenceAssembliesPath;
         private readonly string[] _fallbackSearchPaths;
 
         public ReferenceAssemblyPathResolver()
-            : this(FileSystemWrapper.Default, EnvironmentWrapper.Default)
-        {
-        }
+            : this(FileSystemWrapper.Default, EnvironmentWrapper.Default) { }
 
-        public ReferenceAssemblyPathResolver(string? defaultReferenceAssembliesPath, string[] fallbackSearchPaths)
-            : this(FileSystemWrapper.Default, defaultReferenceAssembliesPath, fallbackSearchPaths)
-        {
-        }
+        public ReferenceAssemblyPathResolver(
+            string? defaultReferenceAssembliesPath,
+            string[] fallbackSearchPaths
+        ) : this(FileSystemWrapper.Default, defaultReferenceAssembliesPath, fallbackSearchPaths) { }
 
         internal ReferenceAssemblyPathResolver(IFileSystem fileSystem, IEnvironment environment)
-            : this(fileSystem,
+            : this(
+                fileSystem,
                 GetDefaultReferenceAssembliesPath(fileSystem, environment),
-                GetFallbackSearchPaths(fileSystem, environment))
-        {
-        }
+                GetFallbackSearchPaths(fileSystem, environment)
+            ) { }
 
-        internal ReferenceAssemblyPathResolver(IFileSystem fileSystem, string? defaultReferenceAssembliesPath, string[] fallbackSearchPaths)
+        internal ReferenceAssemblyPathResolver(
+            IFileSystem fileSystem,
+            string? defaultReferenceAssembliesPath,
+            string[] fallbackSearchPaths
+        )
         {
             _fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
             _defaultReferenceAssembliesPath = defaultReferenceAssembliesPath;
-            _fallbackSearchPaths = fallbackSearchPaths ?? throw new ArgumentNullException(nameof(fallbackSearchPaths));
+            _fallbackSearchPaths =
+                fallbackSearchPaths ?? throw new ArgumentNullException(nameof(fallbackSearchPaths));
         }
 
         public bool TryResolveAssemblyPaths(CompilationLibrary library, List<string>? assemblies)
@@ -45,7 +48,13 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                 throw new ArgumentNullException(nameof(library));
             }
 
-            if (!string.Equals(library.Type, "referenceassembly", StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.Equals(
+                    library.Type,
+                    "referenceassembly",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
@@ -53,20 +62,28 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             {
                 if (!TryResolveReferenceAssembly(assembly, out string? fullName))
                 {
-                    throw new InvalidOperationException(SR.Format(SR.ReferenceAssemblyNotFound, assembly, library.Name));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.ReferenceAssemblyNotFound, assembly, library.Name)
+                    );
                 }
                 assemblies?.Add(fullName);
             }
             return true;
         }
 
-        private bool TryResolveReferenceAssembly(string path, [MaybeNullWhen(false)] out string fullPath)
+        private bool TryResolveReferenceAssembly(
+            string path,
+            [MaybeNullWhen(false)] out string fullPath
+        )
         {
             fullPath = null;
 
             if (_defaultReferenceAssembliesPath != null)
             {
-                string relativeToReferenceAssemblies = Path.Combine(_defaultReferenceAssembliesPath, path);
+                string relativeToReferenceAssemblies = Path.Combine(
+                    _defaultReferenceAssembliesPath,
+                    path
+                );
                 if (_fileSystem.File.Exists(relativeToReferenceAssemblies))
                 {
                     fullPath = relativeToReferenceAssemblies;
@@ -89,7 +106,10 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             return false;
         }
 
-        internal static string[] GetFallbackSearchPaths(IFileSystem fileSystem, IEnvironment environment)
+        internal static string[] GetFallbackSearchPaths(
+            IFileSystem fileSystem,
+            IEnvironment environment
+        )
         {
             if (!environment.IsWindows())
             {
@@ -111,10 +131,16 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             return new[] { net20Dir };
         }
 
-        internal static string? GetDefaultReferenceAssembliesPath(IFileSystem fileSystem, IEnvironment environment)
+        internal static string? GetDefaultReferenceAssembliesPath(
+            IFileSystem fileSystem,
+            IEnvironment environment
+        )
         {
             // Allow setting the reference assemblies path via an environment variable
-            string? referenceAssembliesPath = DotNetReferenceAssembliesPathResolver.Resolve(environment, fileSystem);
+            string? referenceAssembliesPath = DotNetReferenceAssembliesPathResolver.Resolve(
+                environment,
+                fileSystem
+            );
             if (!string.IsNullOrEmpty(referenceAssembliesPath))
             {
                 return referenceAssembliesPath;
@@ -143,9 +169,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                 return null;
             }
 
-            return Path.Combine(
-                programFiles,
-                "Reference Assemblies", "Microsoft", "Framework");
+            return Path.Combine(programFiles, "Reference Assemblies", "Microsoft", "Framework");
         }
     }
 }

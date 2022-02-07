@@ -31,10 +31,7 @@ namespace System.Drawing.Printing.Tests
     {
         private readonly PageSettings _pageSettings = new PageSettings()
         {
-            PaperSize = new PaperSize()
-            {
-                RawKind = (int)PaperKind.A3
-            }
+            PaperSize = new PaperSize() { RawKind = (int)PaperKind.A3 }
         };
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -126,7 +123,11 @@ namespace System.Drawing.Printing.Tests
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
-        [ConditionalFact(Helpers.AnyInstalledPrinters, Helpers.IsDrawingSupported, Helpers.WindowsRS3OrEarlier)] // RS4 failures: https://github.com/dotnet/runtime/issues/26247
+        [ConditionalFact(
+            Helpers.AnyInstalledPrinters,
+            Helpers.IsDrawingSupported,
+            Helpers.WindowsRS3OrEarlier
+        )] // RS4 failures: https://github.com/dotnet/runtime/issues/26247
         public void PrinterSettings_SetValue_ReturnsExpected()
         {
             using (var document = new PrintDocument())
@@ -139,18 +140,24 @@ namespace System.Drawing.Printing.Tests
                 Assert.Same(printerSettings, document.PrinterSettings);
                 Assert.Equal(
                     document.PrinterSettings.DefaultPageSettings.PaperSize.Kind,
-                    document.DefaultPageSettings.PaperSize.Kind);
+                    document.DefaultPageSettings.PaperSize.Kind
+                );
 
                 document.DefaultPageSettings = _pageSettings;
                 document.PrinterSettings = printerSettings;
                 Assert.Equal(
                     _pageSettings.PaperSize.Kind,
-                    document.DefaultPageSettings.PaperSize.Kind);
+                    document.DefaultPageSettings.PaperSize.Kind
+                );
             }
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
-        [ConditionalFact(Helpers.AnyInstalledPrinters, Helpers.IsDrawingSupported, Helpers.WindowsRS3OrEarlier)] // RS4 failures: https://github.com/dotnet/runtime/issues/26247
+        [ConditionalFact(
+            Helpers.AnyInstalledPrinters,
+            Helpers.IsDrawingSupported,
+            Helpers.WindowsRS3OrEarlier
+        )] // RS4 failures: https://github.com/dotnet/runtime/issues/26247
         public void BeginPrint_SetValue_ReturnsExpected()
         {
             bool flag = false;
@@ -215,11 +222,17 @@ namespace System.Drawing.Printing.Tests
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
-        [ConditionalFact(Helpers.AnyInstalledPrinters, Helpers.IsDrawingSupported, Helpers.WindowsRS3OrEarlier)] // RS4 failures: https://github.com/dotnet/runtime/issues/26247
+        [ConditionalFact(
+            Helpers.AnyInstalledPrinters,
+            Helpers.IsDrawingSupported,
+            Helpers.WindowsRS3OrEarlier
+        )] // RS4 failures: https://github.com/dotnet/runtime/issues/26247
         public void QueryPageSettings_SetValue_ReturnsExpected()
         {
             bool flag = false;
-            var queryPageSettingsHandler = new QueryPageSettingsEventHandler((sender, e) => flag = true);
+            var queryPageSettingsHandler = new QueryPageSettingsEventHandler(
+                (sender, e) => flag = true
+            );
 
             using (var document = new PrintDocument())
             {
@@ -259,7 +272,9 @@ namespace System.Drawing.Printing.Tests
                     break;
             }
 
-            Assert.True(Enum.IsDefined(typeof(PrinterResolutionKind), pageSettings.PrinterResolution.Kind));
+            Assert.True(
+                Enum.IsDefined(typeof(PrinterResolutionKind), pageSettings.PrinterResolution.Kind)
+            );
             Assert.True(pageSettings.PrinterSettings.IsDefaultPrinter);
         }
 

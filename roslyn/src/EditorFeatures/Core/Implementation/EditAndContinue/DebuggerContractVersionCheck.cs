@@ -28,7 +28,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static Type LoadContracts()
-            => typeof(ManagedHotReloadAvailability);
+        private static Type LoadContracts() => typeof(ManagedHotReloadAvailability);
     }
 }

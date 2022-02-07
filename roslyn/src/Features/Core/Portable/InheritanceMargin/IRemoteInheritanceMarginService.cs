@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             PinnedSolutionInfo pinnedSolutionInfo,
             ProjectId projectId,
             ImmutableArray<(SymbolKey symbolKey, int lineNumber)> symbolKeyAndLineNumbers,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -40,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
         public RelationalDatabase(
             DatabaseDependencies dependencies,
-            RelationalDatabaseDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalDatabaseDependencies relationalDependencies
+        ) : base(dependencies)
         {
             RelationalDependencies = relationalDependencies;
         }
@@ -56,12 +56,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="entries">Entries representing the changes to be persisted.</param>
         /// <returns>The number of state entries persisted to the database.</returns>
-        public override int SaveChanges(IList<IUpdateEntry> entries)
-            => RelationalDependencies.BatchExecutor.Execute(
+        public override int SaveChanges(IList<IUpdateEntry> entries) =>
+            RelationalDependencies.BatchExecutor.Execute(
                 RelationalDependencies.BatchPreparer.BatchCommands(
                     entries,
-                    Dependencies.UpdateAdapterFactory.Create()),
-                RelationalDependencies.Connection);
+                    Dependencies.UpdateAdapterFactory.Create()
+                ),
+                RelationalDependencies.Connection
+            );
 
         /// <summary>
         ///     Asynchronously persists changes from the supplied entries to the database.
@@ -75,12 +77,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public override Task<int> SaveChangesAsync(
             IList<IUpdateEntry> entries,
-            CancellationToken cancellationToken = default)
-            => RelationalDependencies.BatchExecutor.ExecuteAsync(
+            CancellationToken cancellationToken = default
+        ) =>
+            RelationalDependencies.BatchExecutor.ExecuteAsync(
                 RelationalDependencies.BatchPreparer.BatchCommands(
                     entries,
-                    Dependencies.UpdateAdapterFactory.Create()),
+                    Dependencies.UpdateAdapterFactory.Create()
+                ),
                 RelationalDependencies.Connection,
-                cancellationToken);
+                cancellationToken
+            );
     }
 }

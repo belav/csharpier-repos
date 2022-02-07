@@ -10,8 +10,10 @@ namespace System.Collections.Specialized.Tests
     {
         public new bool Equals(object x, object y)
         {
-            if (x == y) return true;
-            if (x == null || y == null) return false;
+            if (x == y)
+                return true;
+            if (x == null || y == null)
+                return false;
 
             string sa = x as string;
             if (sa != null)

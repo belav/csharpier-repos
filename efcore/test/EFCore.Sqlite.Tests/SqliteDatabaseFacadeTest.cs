@@ -16,8 +16,10 @@ namespace Microsoft.EntityFrameworkCore
                     .UseInternalServiceProvider(
                         new ServiceCollection()
                             .AddEntityFrameworkSqlite()
-                            .BuildServiceProvider(validateScopes: true))
-                    .UseSqlite("Database=Maltesers").Options);
+                            .BuildServiceProvider(validateScopes: true)
+                    )
+                    .UseSqlite("Database=Maltesers").Options
+            );
             Assert.True(context.Database.IsSqlite());
         }
 
@@ -27,16 +29,14 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ProviderContext(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                    .UseInMemoryDatabase("Maltesers").Options);
+                    .UseInMemoryDatabase("Maltesers").Options
+            );
             Assert.False(context.Database.IsSqlite());
         }
 
         private class ProviderContext : DbContext
         {
-            public ProviderContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public ProviderContext(DbContextOptions options) : base(options) { }
         }
     }
 }

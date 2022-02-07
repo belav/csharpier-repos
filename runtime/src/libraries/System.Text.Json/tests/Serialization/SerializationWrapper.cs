@@ -11,28 +11,43 @@ namespace System.Text.Json.Serialization.Tests
     /// </summary>
     public abstract class SerializationWrapper
     {
-        private static readonly JsonSerializerOptions _optionsWithSmallBuffer = new JsonSerializerOptions { DefaultBufferSize = 1 };
+        private static readonly JsonSerializerOptions _optionsWithSmallBuffer =
+            new JsonSerializerOptions { DefaultBufferSize = 1 };
 
         public static SerializationWrapper SpanSerializer => new SpanSerializerWrapper();
         public static SerializationWrapper StringSerializer => new StringSerializerWrapper();
         public static SerializationWrapper StreamSerializer => new StreamSerializerWrapper();
-        public static SerializationWrapper StreamSerializerWithSmallBuffer => new StreamSerializerWrapperWithSmallBuffer();
+        public static SerializationWrapper StreamSerializerWithSmallBuffer =>
+            new StreamSerializerWrapperWithSmallBuffer();
         public static SerializationWrapper WriterSerializer => new WriterSerializerWrapper();
 
-        protected internal abstract Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerOptions options = null);
+        protected internal abstract Task<string> SerializeWrapper(
+            object value,
+            Type inputType,
+            JsonSerializerOptions options = null
+        );
 
-        protected internal abstract Task<string> SerializeWrapper<T>(T value, JsonSerializerOptions options = null);
-
+        protected internal abstract Task<string> SerializeWrapper<T>(
+            T value,
+            JsonSerializerOptions options = null
+        );
 
         private class SpanSerializerWrapper : SerializationWrapper
         {
-            protected internal override Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerOptions options = null)
+            protected internal override Task<string> SerializeWrapper(
+                object value,
+                Type inputType,
+                JsonSerializerOptions options = null
+            )
             {
                 byte[] result = JsonSerializer.SerializeToUtf8Bytes(value, inputType, options);
                 return Task.FromResult(Encoding.UTF8.GetString(result));
             }
 
-            protected internal override Task<string> SerializeWrapper<T>(T value, JsonSerializerOptions options = null)
+            protected internal override Task<string> SerializeWrapper<T>(
+                T value,
+                JsonSerializerOptions options = null
+            )
             {
                 byte[] result = JsonSerializer.SerializeToUtf8Bytes<T>(value, options);
                 return Task.FromResult(Encoding.UTF8.GetString(result));
@@ -41,12 +56,19 @@ namespace System.Text.Json.Serialization.Tests
 
         private class StringSerializerWrapper : SerializationWrapper
         {
-            protected internal override Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerOptions options = null)
+            protected internal override Task<string> SerializeWrapper(
+                object value,
+                Type inputType,
+                JsonSerializerOptions options = null
+            )
             {
                 return Task.FromResult(JsonSerializer.Serialize(value, inputType, options));
             }
 
-            protected internal override Task<string> SerializeWrapper<T>(T value, JsonSerializerOptions options = null)
+            protected internal override Task<string> SerializeWrapper<T>(
+                T value,
+                JsonSerializerOptions options = null
+            )
             {
                 return Task.FromResult(JsonSerializer.Serialize(value, options));
             }
@@ -54,14 +76,21 @@ namespace System.Text.Json.Serialization.Tests
 
         private class StreamSerializerWrapper : SerializationWrapper
         {
-            protected internal override async Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerOptions options = null)
+            protected internal override async Task<string> SerializeWrapper(
+                object value,
+                Type inputType,
+                JsonSerializerOptions options = null
+            )
             {
                 using var stream = new MemoryStream();
                 await JsonSerializer.SerializeAsync(stream, value, inputType, options);
                 return Encoding.UTF8.GetString(stream.ToArray());
             }
 
-            protected internal override async Task<string> SerializeWrapper<T>(T value, JsonSerializerOptions options = null)
+            protected internal override async Task<string> SerializeWrapper<T>(
+                T value,
+                JsonSerializerOptions options = null
+            )
             {
                 using var stream = new MemoryStream();
                 await JsonSerializer.SerializeAsync<T>(stream, value, options);
@@ -71,7 +100,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class StreamSerializerWrapperWithSmallBuffer : StreamSerializerWrapper
         {
-            protected internal override Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerOptions options = null)
+            protected internal override Task<string> SerializeWrapper(
+                object value,
+                Type inputType,
+                JsonSerializerOptions options = null
+            )
             {
                 if (options == null)
                 {
@@ -81,7 +114,10 @@ namespace System.Text.Json.Serialization.Tests
                 return base.SerializeWrapper(value, inputType, options);
             }
 
-            protected internal override Task<string> SerializeWrapper<T>(T value, JsonSerializerOptions options = null)
+            protected internal override Task<string> SerializeWrapper<T>(
+                T value,
+                JsonSerializerOptions options = null
+            )
             {
                 return base.SerializeWrapper<T>(value, options);
             }
@@ -89,7 +125,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class WriterSerializerWrapper : SerializationWrapper
         {
-            protected internal override Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerOptions options = null)
+            protected internal override Task<string> SerializeWrapper(
+                object value,
+                Type inputType,
+                JsonSerializerOptions options = null
+            )
             {
                 using MemoryStream stream = new MemoryStream();
                 using var writer = new Utf8JsonWriter(stream);
@@ -97,7 +137,10 @@ namespace System.Text.Json.Serialization.Tests
                 return Task.FromResult(Encoding.UTF8.GetString(stream.ToArray()));
             }
 
-            protected internal override Task<string> SerializeWrapper<T>(T value, JsonSerializerOptions options = null)
+            protected internal override Task<string> SerializeWrapper<T>(
+                T value,
+                JsonSerializerOptions options = null
+            )
             {
                 using MemoryStream stream = new MemoryStream();
                 using var writer = new Utf8JsonWriter(stream);

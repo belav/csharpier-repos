@@ -8,8 +8,14 @@ namespace System.IO.Tests
 {
     public class Directory_GetFiles_str : Directory_GetFileSystemEntries_str
     {
-        protected override bool TestFiles { get { return true; } }
-        protected override bool TestDirectories { get { return false; } }
+        protected override bool TestFiles
+        {
+            get { return true; }
+        }
+        protected override bool TestDirectories
+        {
+            get { return false; }
+        }
 
         public override string[] GetEntries(string path)
         {
@@ -26,7 +32,9 @@ namespace System.IO.Tests
             targetFile.Create().Dispose();
 
             string linkPath = Path.Combine(containingFolder.FullName, Path.GetRandomFileName());
-            Assert.True(MountHelper.CreateSymbolicLink(linkPath, targetFile.FullName, isDirectory: false));
+            Assert.True(
+                MountHelper.CreateSymbolicLink(linkPath, targetFile.FullName, isDirectory: false)
+            );
 
             Assert.True(File.Exists(linkPath));
             Assert.Equal(1, GetEntries(containingFolder.FullName).Count());
@@ -42,7 +50,10 @@ namespace System.IO.Tests
         }
 
         [ConditionalFact(nameof(AreAllLongPathsAvailable))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51371", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51371",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void EnumerateFilesOverLegacyMaxPath()
         {
             // We want to test that directories under the legacy MAX_PATH (260 characters, including the null) can iterate files
@@ -84,8 +95,14 @@ namespace System.IO.Tests
 
     public class Directory_GetFiles_str_str : Directory_GetFileSystemEntries_str_str
     {
-        protected override bool TestFiles { get { return true; } }
-        protected override bool TestDirectories { get { return false; } }
+        protected override bool TestFiles
+        {
+            get { return true; }
+        }
+        protected override bool TestDirectories
+        {
+            get { return false; }
+        }
 
         public override string[] GetEntries(string path)
         {
@@ -112,18 +129,27 @@ namespace System.IO.Tests
             string testFile3 = GetTestFileName();
             string searchPattern = string.Format("???{0}", testFile1.Substring(3));
 
-            using (File.Create(Path.Combine(TestDirectory, testDir1Str, testDir11Str, GetTestFileName())))
+            using (
+                File.Create(
+                    Path.Combine(TestDirectory, testDir1Str, testDir11Str, GetTestFileName())
+                )
+            )
             using (File.Create(Path.Combine(TestDirectory, testDir1Str, testFile1)))
             using (File.Create(Path.Combine(TestDirectory, testDir1Str, testFile2)))
             using (File.Create(Path.Combine(TestDirectory, testDir1Str, testFile3)))
             {
-                string[] results = GetEntries(Path.Combine(TestDirectory, testDir1Str), searchPattern);
+                string[] results = GetEntries(
+                    Path.Combine(TestDirectory, testDir1Str),
+                    searchPattern
+                );
                 Assert.Equal(2, results.Length);
                 Assert.Contains(Path.Combine(TestDirectory, testDir1Str, testFile1), results);
                 Assert.Contains(Path.Combine(TestDirectory, testDir1Str, testFile2), results);
 
                 //suffix only should return the empty array
-                Assert.Empty(GetEntries(Path.Combine(TestDirectory, testDir1Str), testFile1.Substring(3)));
+                Assert.Empty(
+                    GetEntries(Path.Combine(TestDirectory, testDir1Str), testFile1.Substring(3))
+                );
             }
         }
 
@@ -149,8 +175,14 @@ namespace System.IO.Tests
     {
         public virtual bool IsDirectoryInfo => false;
 
-        protected override bool TestFiles { get { return true; } }
-        protected override bool TestDirectories { get { return false; } }
+        protected override bool TestFiles
+        {
+            get { return true; }
+        }
+        protected override bool TestDirectories
+        {
+            get { return false; }
+        }
 
         public override string[] GetEntries(string path)
         {
@@ -190,7 +222,11 @@ namespace System.IO.Tests
             // either retain (D) or don't retain (DI) the separators as we specified them.
             // Note that some of the cases actually match canonical (one standard separator)
             // so they never change.
-            string[] files = GetEntries(root + (IsDirectoryInfo ? trailing : ""), "*", SearchOption.AllDirectories);
+            string[] files = GetEntries(
+                root + (IsDirectoryInfo ? trailing : ""),
+                "*",
+                SearchOption.AllDirectories
+            );
             FSAssert.EqualWhenOrdered(new string[] { rootFile, nestedFile }, files);
         }
     }

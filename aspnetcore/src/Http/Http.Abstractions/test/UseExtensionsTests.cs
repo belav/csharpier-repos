@@ -20,23 +20,29 @@ public class UseExtensionsTests
         var secondCalled = false;
         var lastCalled = false;
 
-        builder.Use((context, next) =>
-        {
-            firstCalled = true;
-            return next();
-        });
-        builder.Use((context, next) =>
-        {
-            Assert.True(firstCalled);
-            secondCalled = true;
-            return next(context);
-        });
-        builder.Run(context =>
-        {
-            Assert.True(secondCalled);
-            lastCalled = true;
-            return Task.CompletedTask;
-        });
+        builder.Use(
+            (context, next) =>
+            {
+                firstCalled = true;
+                return next();
+            }
+        );
+        builder.Use(
+            (context, next) =>
+            {
+                Assert.True(firstCalled);
+                secondCalled = true;
+                return next(context);
+            }
+        );
+        builder.Run(
+            context =>
+            {
+                Assert.True(secondCalled);
+                lastCalled = true;
+                return Task.CompletedTask;
+            }
+        );
 
         // Act
         await builder.Build().Invoke(context);
@@ -55,22 +61,28 @@ public class UseExtensionsTests
         var context = new DefaultHttpContext();
         var shouldThrow = true;
 
-        builder.Use(async (context, next) =>
-        {
-            throw await Assert.ThrowsAsync<Exception>(() => next());
-        });
-        builder.Use(async (context, next) =>
-        {
-            throw await Assert.ThrowsAsync<Exception>(() => next(context));
-        });
-        builder.Run(context =>
-        {
-            if (shouldThrow)
+        builder.Use(
+            async (context, next) =>
             {
-                throw new Exception("From Use");
+                throw await Assert.ThrowsAsync<Exception>(() => next());
             }
-            return Task.CompletedTask;
-        });
+        );
+        builder.Use(
+            async (context, next) =>
+            {
+                throw await Assert.ThrowsAsync<Exception>(() => next(context));
+            }
+        );
+        builder.Run(
+            context =>
+            {
+                if (shouldThrow)
+                {
+                    throw new Exception("From Use");
+                }
+                return Task.CompletedTask;
+            }
+        );
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<Exception>(() => builder.Build().Invoke(context));

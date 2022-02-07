@@ -34,8 +34,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual IInMemoryDatabase Database
-            => (IInMemoryDatabase)_database;
+        protected virtual IInMemoryDatabase Database => (IInMemoryDatabase)_database;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,8 +42,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool EnsureDeleted()
-            => Database.Store.Clear();
+        public virtual bool EnsureDeleted() => Database.Store.Clear();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,8 +50,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = default)
-            => Task.FromResult(EnsureDeleted());
+        public virtual Task<bool> EnsureDeletedAsync(
+            CancellationToken cancellationToken = default
+        ) => Task.FromResult(EnsureDeleted());
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,8 +60,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool EnsureCreated()
-            => Database.EnsureDatabaseCreated();
+        public virtual bool EnsureCreated() => Database.EnsureDatabaseCreated();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -70,8 +68,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = default)
-            => Task.FromResult(Database.EnsureDatabaseCreated());
+        public virtual Task<bool> EnsureCreatedAsync(
+            CancellationToken cancellationToken = default
+        ) => Task.FromResult(Database.EnsureDatabaseCreated());
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -79,8 +78,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool CanConnect()
-            => true;
+        public virtual bool CanConnect() => true;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -88,7 +86,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Task<bool> CanConnectAsync(CancellationToken cancellationToken = default)
-            => Task.FromResult(true);
+        public virtual Task<bool> CanConnectAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(true);
     }
 }

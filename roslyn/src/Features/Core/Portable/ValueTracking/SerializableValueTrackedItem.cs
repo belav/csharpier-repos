@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             SymbolKey symbolKey,
             TextSpan textSpan,
             DocumentId documentId,
-            SerializableValueTrackedItem? parent = null)
+            SerializableValueTrackedItem? parent = null
+        )
         {
             SymbolKey = symbolKey;
             Parent = parent;
@@ -37,7 +38,11 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             DocumentId = documentId;
         }
 
-        public static SerializableValueTrackedItem Dehydrate(Solution solution, ValueTrackedItem valueTrackedItem, CancellationToken cancellationToken)
+        public static SerializableValueTrackedItem Dehydrate(
+            Solution solution,
+            ValueTrackedItem valueTrackedItem,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -45,14 +50,27 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 ? null
                 : Dehydrate(solution, valueTrackedItem.Parent, cancellationToken);
 
-            return new SerializableValueTrackedItem(valueTrackedItem.SymbolKey, valueTrackedItem.Span, valueTrackedItem.DocumentId, parent);
+            return new SerializableValueTrackedItem(
+                valueTrackedItem.SymbolKey,
+                valueTrackedItem.Span,
+                valueTrackedItem.DocumentId,
+                parent
+            );
         }
 
-        public async Task<ValueTrackedItem?> RehydrateAsync(Solution solution, CancellationToken cancellationToken)
+        public async Task<ValueTrackedItem?> RehydrateAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             var document = solution.GetRequiredDocument(DocumentId);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var symbolResolution = SymbolKey.Resolve(semanticModel.Compilation, cancellationToken: cancellationToken);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var symbolResolution = SymbolKey.Resolve(
+                semanticModel.Compilation,
+                cancellationToken: cancellationToken
+            );
 
             if (symbolResolution.Symbol is null)
             {
@@ -60,9 +78,19 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             }
 
             cancellationToken.ThrowIfCancellationRequested();
-            var parent = Parent is null ? null : await Parent.RehydrateAsync(solution, cancellationToken).ConfigureAwait(false);
+            var parent = Parent is null
+                ? null
+                : await Parent.RehydrateAsync(solution, cancellationToken).ConfigureAwait(false);
 
-            return await ValueTrackedItem.TryCreateAsync(document, TextSpan, symbolResolution.Symbol, parent, cancellationToken).ConfigureAwait(false);
+            return await ValueTrackedItem
+                .TryCreateAsync(
+                    document,
+                    TextSpan,
+                    symbolResolution.Symbol,
+                    parent,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

@@ -17,9 +17,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             string language,
             bool nullable,
             string[] args,
-            AppServiceProviderFactory appServicesFactory)
-            : base(reporter, assembly, startupAssembly, projectDir, rootNamespace, language, nullable, args, appServicesFactory)
-        {
-        }
+            AppServiceProviderFactory appServicesFactory
+        )
+            : base(
+                reporter,
+                assembly,
+                startupAssembly,
+                projectDir,
+                rootNamespace,
+                language,
+                nullable,
+                args,
+                appServicesFactory
+            ) { }
     }
 }

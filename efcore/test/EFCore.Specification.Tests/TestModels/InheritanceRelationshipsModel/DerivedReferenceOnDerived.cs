@@ -3,7 +3,5 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
 {
-    public class DerivedReferenceOnDerived : BaseReferenceOnDerived
-    {
-    }
+    public class DerivedReferenceOnDerived : BaseReferenceOnDerived { }
 }

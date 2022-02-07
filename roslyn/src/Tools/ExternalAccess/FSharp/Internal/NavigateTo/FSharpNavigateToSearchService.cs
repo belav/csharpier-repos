@@ -35,11 +35,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var results = await _service.SearchDocumentAsync(document, searchPattern, kinds, cancellationToken).ConfigureAwait(false);
+            var results = await _service
+                .SearchDocumentAsync(document, searchPattern, kinds, cancellationToken)
+                .ConfigureAwait(false);
             foreach (var result in results)
-                await onResultFound(new InternalFSharpNavigateToSearchResult(result)).ConfigureAwait(false);
+                await onResultFound(new InternalFSharpNavigateToSearchResult(result))
+                    .ConfigureAwait(false);
         }
 
         public async Task SearchProjectAsync(
@@ -48,11 +52,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var results = await _service.SearchProjectAsync(project, priorityDocuments, searchPattern, kinds, cancellationToken).ConfigureAwait(false);
+            var results = await _service
+                .SearchProjectAsync(
+                    project,
+                    priorityDocuments,
+                    searchPattern,
+                    kinds,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             foreach (var result in results)
-                await onResultFound(new InternalFSharpNavigateToSearchResult(result)).ConfigureAwait(false);
+                await onResultFound(new InternalFSharpNavigateToSearchResult(result))
+                    .ConfigureAwait(false);
         }
 
         public Task SearchCachedDocumentsAsync(
@@ -61,7 +75,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // we don't support searching cached documents.
             return Task.CompletedTask;
@@ -72,7 +87,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // we don't support searching generated documents.
             return Task.CompletedTask;

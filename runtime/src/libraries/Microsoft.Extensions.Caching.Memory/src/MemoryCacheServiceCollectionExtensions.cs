@@ -41,7 +41,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// The <see cref="Action{MemoryCacheOptions}"/> to configure the provided <see cref="MemoryCacheOptions"/>.
         /// </param>
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddMemoryCache(this IServiceCollection services, Action<MemoryCacheOptions> setupAction)
+        public static IServiceCollection AddMemoryCache(
+            this IServiceCollection services,
+            Action<MemoryCacheOptions> setupAction
+        )
         {
             if (services == null)
             {
@@ -81,7 +84,9 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             services.AddOptions();
-            services.TryAdd(ServiceDescriptor.Singleton<IDistributedCache, MemoryDistributedCache>());
+            services.TryAdd(
+                ServiceDescriptor.Singleton<IDistributedCache, MemoryDistributedCache>()
+            );
 
             return services;
         }
@@ -103,7 +108,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// The <see cref="Action{MemoryDistributedCacheOptions}"/> to configure the provided <see cref="MemoryDistributedCacheOptions"/>.
         /// </param>
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddDistributedMemoryCache(this IServiceCollection services, Action<MemoryDistributedCacheOptions> setupAction)
+        public static IServiceCollection AddDistributedMemoryCache(
+            this IServiceCollection services,
+            Action<MemoryDistributedCacheOptions> setupAction
+        )
         {
             if (services == null)
             {

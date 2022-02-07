@@ -15,7 +15,10 @@ internal class HostedServiceExecutor
     private readonly IEnumerable<IHostedService> _services;
     private readonly ILogger<HostedServiceExecutor> _logger;
 
-    public HostedServiceExecutor(ILogger<HostedServiceExecutor> logger, IEnumerable<IHostedService> services)
+    public HostedServiceExecutor(
+        ILogger<HostedServiceExecutor> logger,
+        IEnumerable<IHostedService> services
+    )
     {
         _logger = logger;
         _services = services;
@@ -31,7 +34,10 @@ internal class HostedServiceExecutor
         return ExecuteAsync(service => service.StopAsync(token), throwOnFirstFailure: false);
     }
 
-    private async Task ExecuteAsync(Func<IHostedService, Task> callback, bool throwOnFirstFailure = true)
+    private async Task ExecuteAsync(
+        Func<IHostedService, Task> callback,
+        bool throwOnFirstFailure = true
+    )
     {
         List<Exception>? exceptions = null;
 

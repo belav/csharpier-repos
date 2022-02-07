@@ -35,8 +35,15 @@ public class OpenApiRefreshTests : OpenApiTestBase
         AssertNoErrors(run);
 
         var secondWriteTime = File.GetLastWriteTime(expectedJsonPath);
-        Assert.True(firstWriteTime < secondWriteTime, $"File wasn't updated! {firstWriteTime} {secondWriteTime}");
-        Assert.Equal(Content, await File.ReadAllTextAsync(expectedJsonPath), ignoreLineEndingDifferences: true);
+        Assert.True(
+            firstWriteTime < secondWriteTime,
+            $"File wasn't updated! {firstWriteTime} {secondWriteTime}"
+        );
+        Assert.Equal(
+            Content,
+            await File.ReadAllTextAsync(expectedJsonPath),
+            ignoreLineEndingDifferences: true
+        );
     }
 
     // Regression test for #35767 scenario.
@@ -65,8 +72,15 @@ public class OpenApiRefreshTests : OpenApiTestBase
         AssertNoErrors(run);
 
         var secondWriteTime = File.GetLastWriteTime(expectedJsonPath);
-        Assert.True(firstWriteTime < secondWriteTime, $"File wasn't updated! {firstWriteTime} {secondWriteTime}");
-        Assert.Equal(Content, await File.ReadAllTextAsync(expectedJsonPath), ignoreLineEndingDifferences: true);
+        Assert.True(
+            firstWriteTime < secondWriteTime,
+            $"File wasn't updated! {firstWriteTime} {secondWriteTime}"
+        );
+        Assert.Equal(
+            Content,
+            await File.ReadAllTextAsync(expectedJsonPath),
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [Fact]

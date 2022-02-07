@@ -22,7 +22,9 @@ public class BringUpTest_Unbox
         int r = 3;
         object o = r;
         int y = Unbox(o);
-        if (y == 3) return Pass;
-        else return Fail;
+        if (y == 3)
+            return Pass;
+        else
+            return Fail;
     }
 }

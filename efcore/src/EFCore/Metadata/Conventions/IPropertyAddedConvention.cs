@@ -20,6 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<IConventionPropertyBuilder> context);
+            IConventionContext<IConventionPropertyBuilder> context
+        );
     }
 }

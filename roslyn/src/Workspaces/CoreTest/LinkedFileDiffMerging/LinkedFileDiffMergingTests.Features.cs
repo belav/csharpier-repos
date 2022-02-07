@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
     }
 #endif
 }",
-                LanguageNames.CSharp);
+                LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -167,7 +168,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
     }
 #endif
 }",
-                LanguageNames.CSharp);
+                LanguageNames.CSharp
+            );
         }
     }
 }

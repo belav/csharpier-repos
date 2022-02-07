@@ -8,10 +8,10 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
- 
-   contributed by Isaac Gouy 
+   
+   contributed by Isaac Gouy
    modified by Josh Goldfoot, based on the Java version by The Anh Tran
-*/
+   */
 
 using System;
 using System.Runtime.CompilerServices;
@@ -25,7 +25,8 @@ namespace BenchmarksGame
         public static int Main(String[] args)
         {
             int n = 100;
-            if (args.Length > 0) n = Int32.Parse(args[0]);
+            if (args.Length > 0)
+                n = Int32.Parse(args[0]);
 
             double norm = Bench(n);
             Console.WriteLine("{0:f9}", norm);
@@ -58,7 +59,8 @@ namespace BenchmarksGame
                 ap[i] = new Approximate(u, v, tmp, r1, r2, barrier);
             }
 
-            double vBv = 0, vv = 0;
+            double vBv = 0,
+                vv = 0;
             for (int i = 0; i < nthread; i++)
             {
                 ap[i].t.Wait();
@@ -68,7 +70,6 @@ namespace BenchmarksGame
 
             return Math.Sqrt(vBv / vv);
         }
-
     }
 
     public class Approximate
@@ -80,8 +81,10 @@ namespace BenchmarksGame
         private double[] _v;
         private double[] _tmp;
 
-        private int range_begin, range_end;
-        public double m_vBv, m_vv;
+        private int range_begin,
+            range_end;
+        public double m_vBv,
+            m_vv;
 
         public Approximate(double[] u, double[] v, double[] tmp, int rbegin, int rend, Barrier b)
         {
@@ -147,7 +150,6 @@ namespace BenchmarksGame
         /* multiply vector v by matrix A and then by matrix A transposed */
         private void MultiplyAtAv(double[] v, double[] tmp, double[] AtAv)
         {
-
             MultiplyAv(v, tmp);
             // all thread must syn at completion
             barrier.SignalAndWait();
@@ -155,6 +157,5 @@ namespace BenchmarksGame
             // all thread must syn at completion
             barrier.SignalAndWait();
         }
-
     }
 }

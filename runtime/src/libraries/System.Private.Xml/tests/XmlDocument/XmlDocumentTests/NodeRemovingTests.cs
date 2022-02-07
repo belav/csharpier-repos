@@ -17,7 +17,8 @@ namespace System.Xml.Tests
 
             int count = 0;
             xmlDocument.NodeRemoving += (s, e) => count++;
-            xmlDocument.NodeRemoving += (s, e) => Assert.Equal(XmlNodeChangedAction.Remove, e.Action);
+            xmlDocument.NodeRemoving += (s, e) =>
+                Assert.Equal(XmlNodeChangedAction.Remove, e.Action);
 
             Assert.Equal(0, count);
             xmlDocument.DocumentElement.RemoveChild(xmlDocument.DocumentElement.FirstChild);
@@ -30,7 +31,10 @@ namespace System.Xml.Tests
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(@"<root> <elem1>text1</elem1> <elem2>text2</elem2> </root>");
 
-            XmlNodeChangedEventHandler handler = (s, e) => { throw new ShouldNotBeInvokedException(); };
+            XmlNodeChangedEventHandler handler = (s, e) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            };
             xmlDocument.NodeRemoving += handler;
             xmlDocument.NodeRemoving -= handler;
 

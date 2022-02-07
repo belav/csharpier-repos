@@ -22,18 +22,24 @@ namespace Microsoft.CodeAnalysis
         private readonly IEqualityComparer<T> _comparer;
 
         public InputNode(Func<DriverStateTable.Builder, ImmutableArray<T>> getInput)
-            : this(getInput, registerOutput: null, comparer: null)
-        {
-        }
+            : this(getInput, registerOutput: null, comparer: null) { }
 
-        private InputNode(Func<DriverStateTable.Builder, ImmutableArray<T>> getInput, Action<IIncrementalGeneratorOutputNode>? registerOutput, IEqualityComparer<T>? comparer = null)
+        private InputNode(
+            Func<DriverStateTable.Builder, ImmutableArray<T>> getInput,
+            Action<IIncrementalGeneratorOutputNode>? registerOutput,
+            IEqualityComparer<T>? comparer = null
+        )
         {
             _getInput = getInput;
             _comparer = comparer ?? EqualityComparer<T>.Default;
             _registerOutput = registerOutput ?? (o => throw ExceptionUtilities.Unreachable);
         }
 
-        public NodeStateTable<T> UpdateStateTable(DriverStateTable.Builder graphState, NodeStateTable<T> previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<T> UpdateStateTable(
+            DriverStateTable.Builder graphState,
+            NodeStateTable<T> previousTable,
+            CancellationToken cancellationToken
+        )
         {
             var inputItems = _getInput(graphState);
 
@@ -83,10 +89,14 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutableAndFree();
         }
 
-        public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) => new InputNode<T>(_getInput, _registerOutput, comparer);
+        public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) =>
+            new InputNode<T>(_getInput, _registerOutput, comparer);
 
-        public InputNode<T> WithRegisterOutput(Action<IIncrementalGeneratorOutputNode> registerOutput) => new InputNode<T>(_getInput, registerOutput, _comparer);
+        public InputNode<T> WithRegisterOutput(
+            Action<IIncrementalGeneratorOutputNode> registerOutput
+        ) => new InputNode<T>(_getInput, registerOutput, _comparer);
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _registerOutput(output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _registerOutput(output);
     }
 }

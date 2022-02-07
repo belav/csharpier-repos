@@ -13,9 +13,9 @@ using Newtonsoft.Json.Linq;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// This class provides a low-level API for parsing HTML form URL-encoded data, also known as <c>application/x-www-form-urlencoded</c> 
-    /// data. The output of the parser is a <see cref="JObject"/> instance. 
-    /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and 
+    /// This class provides a low-level API for parsing HTML form URL-encoded data, also known as <c>application/x-www-form-urlencoded</c>
+    /// data. The output of the parser is a <see cref="JObject"/> instance.
+    /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
     /// is not intended to be called directly from user code.</remarks>
     /// </summary>
     internal static class FormUrlEncodedJson
@@ -23,15 +23,12 @@ namespace System.Net.Http.Formatting
         private const string ApplicationFormUrlEncoded = @"application/x-www-form-urlencoded";
         private const int MinDepth = 0;
 
-        private static readonly string[] _emptyPath = new string[]
-        {
-            String.Empty
-        };
+        private static readonly string[] _emptyPath = new string[] { String.Empty };
 
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and 
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
         /// is not intended to be called directly from user code.</remarks>
         /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
@@ -44,13 +41,16 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and 
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
         /// is not intended to be called directly from user code.</remarks>
         /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
         /// <param name="maxDepth">The maximum depth of object graph encoded as <c>x-www-form-urlencoded</c>.</param>
         /// <returns>The <see cref="JObject"/> corresponding to the given query string values.</returns>
-        public static JObject Parse(IEnumerable<KeyValuePair<string, string>> nameValuePairs, int maxDepth)
+        public static JObject Parse(
+            IEnumerable<KeyValuePair<string, string>> nameValuePairs,
+            int maxDepth
+        )
         {
             return ParseInternal(nameValuePairs, maxDepth, true);
         }
@@ -58,13 +58,16 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and 
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
         /// is not intended to be called directly from user code.</remarks>
         /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
         /// <param name="value">The parsed result or null if parsing failed.</param>
         /// <returns><c>true</c> if <paramref name="nameValuePairs"/> was parsed successfully; otherwise false.</returns>
-        public static bool TryParse(IEnumerable<KeyValuePair<string, string>> nameValuePairs, out JObject value)
+        public static bool TryParse(
+            IEnumerable<KeyValuePair<string, string>> nameValuePairs,
+            out JObject value
+        )
         {
             return (value = ParseInternal(nameValuePairs, Int32.MaxValue, false)) != null;
         }
@@ -72,14 +75,18 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and 
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
         /// is not intended to be called directly from user code.</remarks>
         /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
         /// <param name="maxDepth">The maximum depth of object graph encoded as <c>x-www-form-urlencoded</c>.</param>
         /// <param name="value">The parsed result or null if parsing failed.</param>
         /// <returns><c>true</c> if <paramref name="nameValuePairs"/> was parsed successfully; otherwise false.</returns>
-        public static bool TryParse(IEnumerable<KeyValuePair<string, string>> nameValuePairs, int maxDepth, out JObject value)
+        public static bool TryParse(
+            IEnumerable<KeyValuePair<string, string>> nameValuePairs,
+            int maxDepth,
+            out JObject value
+        )
         {
             return (value = ParseInternal(nameValuePairs, maxDepth, false)) != null;
         }
@@ -87,14 +94,18 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and 
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
         /// is not intended to be called directly from user code.</remarks>
         /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
         /// <param name="maxDepth">The maximum depth of object graph encoded as <c>x-www-form-urlencoded</c>.</param>
         /// <param name="throwOnError">Indicates whether to throw an exception on error or return false</param>
         /// <returns>The <see cref="JObject"/> corresponding to the given query string values.</returns>
-        private static JObject ParseInternal(IEnumerable<KeyValuePair<string, string>> nameValuePairs, int maxDepth, bool throwOnError)
+        private static JObject ParseInternal(
+            IEnumerable<KeyValuePair<string, string>> nameValuePairs,
+            int maxDepth,
+            bool throwOnError
+        )
         {
             if (nameValuePairs == null)
             {
@@ -112,7 +123,7 @@ namespace System.Net.Http.Formatting
                 string key = nameValuePair.Key;
                 string value = nameValuePair.Value;
 
-                // value is preserved, even if it's null, "undefined", "null", String.Empty, etc when converting to JToken. 
+                // value is preserved, even if it's null, "undefined", "null", String.Empty, etc when converting to JToken.
 
                 if (key == null)
                 {
@@ -120,7 +131,10 @@ namespace System.Net.Http.Formatting
                     {
                         if (throwOnError)
                         {
-                            throw Error.Argument("nameValuePairs", Properties.Resources.QueryStringNameShouldNotNull);
+                            throw Error.Argument(
+                                "nameValuePairs",
+                                Properties.Resources.QueryStringNameShouldNotNull
+                            );
                         }
 
                         return null;
@@ -148,7 +162,10 @@ namespace System.Net.Http.Formatting
 
         private static string[] GetPath(string key, int maxDepth, bool throwOnError)
         {
-            Contract.Assert(key != null, "Key cannot be null (this function is only called by Parse if key != null)");
+            Contract.Assert(
+                key != null,
+                "Key cannot be null (this function is only called by Parse if key != null)"
+            );
 
             if (String.IsNullOrWhiteSpace(key))
             {
@@ -202,7 +219,11 @@ namespace System.Net.Http.Formatting
                         {
                             if (throwOnError)
                             {
-                                throw Error.Argument(Properties.Resources.NestedBracketNotValid, ApplicationFormUrlEncoded, i);
+                                throw Error.Argument(
+                                    Properties.Resources.NestedBracketNotValid,
+                                    ApplicationFormUrlEncoded,
+                                    i
+                                );
                             }
 
                             return false;
@@ -218,7 +239,11 @@ namespace System.Net.Http.Formatting
                         {
                             if (throwOnError)
                             {
-                                throw Error.Argument(Properties.Resources.UnMatchedBracketNotValid, ApplicationFormUrlEncoded, i);
+                                throw Error.Argument(
+                                    Properties.Resources.UnMatchedBracketNotValid,
+                                    ApplicationFormUrlEncoded,
+                                    i
+                                );
                             }
 
                             return false;
@@ -232,7 +257,11 @@ namespace System.Net.Http.Formatting
             {
                 if (throwOnError)
                 {
-                    throw Error.Argument(Properties.Resources.NestedBracketNotValid, ApplicationFormUrlEncoded, key.LastIndexOf('['));
+                    throw Error.Argument(
+                        Properties.Resources.NestedBracketNotValid,
+                        ApplicationFormUrlEncoded,
+                        key.LastIndexOf('[')
+                    );
                 }
 
                 return false;
@@ -255,7 +284,10 @@ namespace System.Net.Http.Formatting
                 {
                     if (throwOnError)
                     {
-                        throw Error.Argument(Properties.Resources.InvalidArrayInsert, BuildPathString(path, i));
+                        throw Error.Argument(
+                            Properties.Resources.InvalidArrayInsert,
+                            BuildPathString(path, i)
+                        );
                     }
 
                     return false;
@@ -273,7 +305,10 @@ namespace System.Net.Http.Formatting
                     {
                         if (throwOnError)
                         {
-                            throw Error.Argument(Properties.Resources.FormUrlEncodedMismatchingTypes, BuildPathString(path, i));
+                            throw Error.Argument(
+                                Properties.Resources.FormUrlEncodedMismatchingTypes,
+                                BuildPathString(path, i)
+                            );
                         }
 
                         return false;
@@ -298,7 +333,10 @@ namespace System.Net.Http.Formatting
                 {
                     if (throwOnError)
                     {
-                        throw Error.Argument(Properties.Resources.FormUrlEncodedMismatchingTypes, BuildPathString(path, path.Length - 1));
+                        throw Error.Argument(
+                            Properties.Resources.FormUrlEncodedMismatchingTypes,
+                            BuildPathString(path, path.Length - 1)
+                        );
                     }
 
                     return false;
@@ -326,7 +364,10 @@ namespace System.Net.Http.Formatting
                 {
                     if (throwOnError)
                     {
-                        throw Error.Argument(Properties.Resources.FormUrlEncodedMismatchingTypes, BuildPathString(path, pathIndex));
+                        throw Error.Argument(
+                            Properties.Resources.FormUrlEncodedMismatchingTypes,
+                            BuildPathString(path, pathIndex)
+                        );
                     }
 
                     return false;
@@ -361,7 +402,10 @@ namespace System.Net.Http.Formatting
                 {
                     if (throwOnError)
                     {
-                        throw Error.Argument(Properties.Resources.JQuery13CompatModeNotSupportNestedJson, BuildPathString(path, pathIndex));
+                        throw Error.Argument(
+                            Properties.Resources.JQuery13CompatModeNotSupportNestedJson,
+                            BuildPathString(path, pathIndex)
+                        );
                     }
 
                     return false;
@@ -385,14 +429,25 @@ namespace System.Net.Http.Formatting
         }
 
         // JsonObject passed in is semantically an array
-        private static bool AddToArray(JObject parent, string[] path, string value, bool throwOnError)
+        private static bool AddToArray(
+            JObject parent,
+            string[] path,
+            string value,
+            bool throwOnError
+        )
         {
             Contract.Assert(parent != null, "Parent cannot be null");
-            Contract.Assert(path.Length >= 2, "The path must be at least 2, one for the ending [], and one for before the '[' (which can be empty)");
+            Contract.Assert(
+                path.Length >= 2,
+                "The path must be at least 2, one for the ending [], and one for before the '[' (which can be empty)"
+            );
 
             string parentPath = path[path.Length - 2];
 
-            Contract.Assert(((IDictionary<string, JToken>)parent).ContainsKey(parentPath), "It was added on insert to get to this point");
+            Contract.Assert(
+                ((IDictionary<string, JToken>)parent).ContainsKey(parentPath),
+                "It was added on insert to get to this point"
+            );
             JObject jo = parent[parentPath] as JObject;
 
             if (jo == null)
@@ -400,7 +455,10 @@ namespace System.Net.Http.Formatting
                 // a[b][c]=1&a[b][]=2 => invalid
                 if (throwOnError)
                 {
-                    throw Error.Argument(Properties.Resources.FormUrlEncodedMismatchingTypes, BuildPathString(path, path.Length - 1));
+                    throw Error.Argument(
+                        Properties.Resources.FormUrlEncodedMismatchingTypes,
+                        BuildPathString(path, path.Length - 1)
+                    );
                 }
 
                 return false;
@@ -429,7 +487,15 @@ namespace System.Net.Http.Formatting
                 foreach (var key in keys)
                 {
                     int tempInt;
-                    if (Int32.TryParse(key, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out tempInt) && tempInt > max)
+                    if (
+                        Int32.TryParse(
+                            key,
+                            NumberStyles.Integer,
+                            NumberFormatInfo.InvariantInfo,
+                            out tempInt
+                        )
+                        && tempInt > max
+                    )
                     {
                         max = tempInt;
                     }
@@ -437,7 +503,10 @@ namespace System.Net.Http.Formatting
                     {
                         if (throwOnError)
                         {
-                            throw Error.Argument(Properties.Resources.FormUrlEncodedMismatchingTypes, key);
+                            throw Error.Argument(
+                                Properties.Resources.FormUrlEncodedMismatchingTypes,
+                                key
+                            );
                         }
 
                         return null;
@@ -515,7 +584,14 @@ namespace System.Net.Http.Formatting
             foreach (string key in keys)
             {
                 int intKey;
-                if (!Int32.TryParse(key, NumberStyles.None, CultureInfo.InvariantCulture, out intKey))
+                if (
+                    !Int32.TryParse(
+                        key,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out intKey
+                    )
+                )
                 {
                     // if not a non-negative number, it cannot become an array
                     areContiguousIndices = false;

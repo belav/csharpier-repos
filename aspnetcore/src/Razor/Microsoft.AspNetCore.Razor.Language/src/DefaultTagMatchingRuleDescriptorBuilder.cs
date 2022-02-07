@@ -75,7 +75,9 @@ internal class DefaultTagMatchingRuleDescriptorBuilder : TagMatchingRuleDescript
         var requiredAttributes = Array.Empty<RequiredAttributeDescriptor>();
         if (_requiredAttributeBuilders != null)
         {
-            var requiredAttributeSet = new HashSet<RequiredAttributeDescriptor>(RequiredAttributeDescriptorComparer.Default);
+            var requiredAttributeSet = new HashSet<RequiredAttributeDescriptor>(
+                RequiredAttributeDescriptorComparer.Default
+            );
             for (var i = 0; i < _requiredAttributeBuilders.Count; i++)
             {
                 requiredAttributeSet.Add(_requiredAttributeBuilders[i].Build());
@@ -90,7 +92,8 @@ internal class DefaultTagMatchingRuleDescriptorBuilder : TagMatchingRuleDescript
             TagStructure,
             CaseSensitive,
             requiredAttributes,
-            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>());
+            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>()
+        );
 
         return rule;
     }
@@ -101,7 +104,8 @@ internal class DefaultTagMatchingRuleDescriptorBuilder : TagMatchingRuleDescript
 
         if (string.IsNullOrWhiteSpace(TagName))
         {
-            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagNameNullOrWhitespace();
+            var diagnostic =
+                RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagNameNullOrWhitespace();
 
             diagnostics ??= new();
             diagnostics.Add(diagnostic);
@@ -110,9 +114,15 @@ internal class DefaultTagMatchingRuleDescriptorBuilder : TagMatchingRuleDescript
         {
             foreach (var character in TagName)
             {
-                if (char.IsWhiteSpace(character) || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character))
+                if (
+                    char.IsWhiteSpace(character)
+                    || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character)
+                )
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagName(TagName, character);
+                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagName(
+                        TagName,
+                        character
+                    );
 
                     diagnostics ??= new();
                     diagnostics.Add(diagnostic);
@@ -124,7 +134,8 @@ internal class DefaultTagMatchingRuleDescriptorBuilder : TagMatchingRuleDescript
         {
             if (string.IsNullOrWhiteSpace(ParentTag))
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagNameNullOrWhitespace();
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagNameNullOrWhitespace();
 
                 diagnostics ??= new();
                 diagnostics.Add(diagnostic);
@@ -133,9 +144,16 @@ internal class DefaultTagMatchingRuleDescriptorBuilder : TagMatchingRuleDescript
             {
                 foreach (var character in ParentTag)
                 {
-                    if (char.IsWhiteSpace(character) || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character))
+                    if (
+                        char.IsWhiteSpace(character)
+                        || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character)
+                    )
                     {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagName(ParentTag, character);
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagName(
+                                ParentTag,
+                                character
+                            );
 
                         diagnostics ??= new();
                         diagnostics.Add(diagnostic);

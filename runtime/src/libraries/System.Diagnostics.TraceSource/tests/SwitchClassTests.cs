@@ -36,7 +36,9 @@ namespace System.Diagnostics.TraceSourceTests
             Assert.Equal("", item.Description);
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         static WeakReference PruneMakeRef()
         {
             return new WeakReference(new TestSwitch());

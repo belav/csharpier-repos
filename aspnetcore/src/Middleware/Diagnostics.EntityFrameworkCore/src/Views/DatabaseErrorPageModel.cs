@@ -14,7 +14,8 @@ internal class DatabaseErrorPageModel
         Exception exception,
         IEnumerable<DatabaseContextDetails> contextDetails,
         DatabaseErrorPageOptions options,
-        PathString pathBase)
+        PathString pathBase
+    )
     {
         Exception = exception;
         ContextDetails = contextDetails;

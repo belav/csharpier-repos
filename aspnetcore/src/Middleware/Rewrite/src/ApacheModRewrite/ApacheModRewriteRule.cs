@@ -12,7 +12,11 @@ internal class ApacheModRewriteRule : IRule
     public IList<Condition>? Conditions { get; }
     public IList<UrlAction> Actions { get; }
 
-    public ApacheModRewriteRule(UrlMatch initialMatch, IList<Condition>? conditions, IList<UrlAction> urlActions)
+    public ApacheModRewriteRule(
+        UrlMatch initialMatch,
+        IList<Condition>? conditions,
+        IList<UrlAction> urlActions
+    )
     {
         Conditions = conditions;
         InitialMatch = initialMatch;
@@ -33,7 +37,11 @@ internal class ApacheModRewriteRule : IRule
         BackReferenceCollection? condBackReferences = null;
         if (Conditions != null)
         {
-            var condResult = ConditionEvaluator.Evaluate(Conditions, context, initMatchRes.BackReferences);
+            var condResult = ConditionEvaluator.Evaluate(
+                Conditions,
+                context,
+                initMatchRes.BackReferences
+            );
             if (!condResult.Success)
             {
                 context.Logger.ModRewriteNotMatchedRule();

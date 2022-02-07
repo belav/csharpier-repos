@@ -15,21 +15,22 @@ internal class UploadSample
 {
     internal static void Register(CommandLineApplication app)
     {
-        app.Command("uploading", cmd =>
-        {
-            cmd.Description = "Tests a streaming invocation from client to hub";
+        app.Command(
+            "uploading",
+            cmd =>
+            {
+                cmd.Description = "Tests a streaming invocation from client to hub";
 
-            var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
+                var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
 
-            cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
-        });
+                cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
+            }
+        );
     }
 
     public static async Task<int> ExecuteAsync(string baseUrl)
     {
-        var connection = new HubConnectionBuilder()
-            .WithUrl(baseUrl)
-            .Build();
+        var connection = new HubConnectionBuilder().WithUrl(baseUrl).Build();
         await connection.StartAsync();
 
         //await BasicInvoke(connection);
@@ -62,7 +63,11 @@ internal class UploadSample
         _ = WriteItemsAsync(channel_one.Writer, new[] { 2, 2, 3 });
         _ = WriteItemsAsync(channel_two.Writer, new[] { -2, 5, 3 });
 
-        var result = await connection.InvokeAsync<string>("ScoreTracker", channel_one.Reader, channel_two.Reader);
+        var result = await connection.InvokeAsync<string>(
+            "ScoreTracker",
+            channel_one.Reader,
+            channel_two.Reader
+        );
         Debug.WriteLine(result);
 
         async Task WriteItemsAsync(ChannelWriter<int> source, IEnumerable<int> scores)
@@ -84,13 +89,15 @@ internal class UploadSample
     {
         var channel = Channel.CreateUnbounded<string>();
 
-        _ = Task.Run(async () =>
-        {
-            foreach (var phrase in new[] { "one fish", "two fish", "red fish", "blue fish" })
+        _ = Task.Run(
+            async () =>
             {
-                await channel.Writer.WriteAsync(phrase);
+                foreach (var phrase in new[] { "one fish", "two fish", "red fish", "blue fish" })
+                {
+                    await channel.Writer.WriteAsync(phrase);
+                }
             }
-        });
+        );
 
         var outputs = await connection.StreamAsChannelAsync<string>("StreamEcho", channel.Reader);
 
@@ -103,4 +110,3 @@ internal class UploadSample
         }
     }
 }
-

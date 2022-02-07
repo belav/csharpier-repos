@@ -15,11 +15,11 @@ public class FormatterCollectionTest
     {
         // Arrange
         var collection = new FormatterCollection<IOutputFormatter>
-            {
-                new TestOutputFormatter(),
-                new AnotherTestOutputFormatter(),
-                new TestOutputFormatter()
-            };
+        {
+            new TestOutputFormatter(),
+            new AnotherTestOutputFormatter(),
+            new TestOutputFormatter()
+        };
 
         // Act
         collection.RemoveType(typeof(TestOutputFormatter));
@@ -34,11 +34,11 @@ public class FormatterCollectionTest
     {
         // Arrange
         var collection = new FormatterCollection<IOutputFormatter>
-            {
-                new TestOutputFormatter(),
-                new AnotherTestOutputFormatter(),
-                new TestOutputFormatter()
-            };
+        {
+            new TestOutputFormatter(),
+            new AnotherTestOutputFormatter(),
+            new TestOutputFormatter()
+        };
 
         // Act
         collection.RemoveType<TestOutputFormatter>();
@@ -50,7 +50,10 @@ public class FormatterCollectionTest
 
     private class TestOutputFormatter : TextOutputFormatter
     {
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             throw new NotImplementedException();
         }
@@ -58,7 +61,10 @@ public class FormatterCollectionTest
 
     private class AnotherTestOutputFormatter : TextOutputFormatter
     {
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             throw new NotImplementedException();
         }

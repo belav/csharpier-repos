@@ -26,7 +26,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             private readonly IServiceProvider _serviceProvider;
             private readonly IGlobalOptionService _globalOptions;
 
-            public ColorSchemeSettings(IServiceProvider serviceProvider, IGlobalOptionService globalOptions)
+            public ColorSchemeSettings(
+                IServiceProvider serviceProvider,
+                IGlobalOptionService globalOptions
+            )
             {
                 _serviceProvider = serviceProvider;
                 _globalOptions = globalOptions;
@@ -50,12 +53,21 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             private Stream GetColorSchemeXmlStream(SchemeName schemeName)
             {
                 var assembly = Assembly.GetExecutingAssembly();
-                return assembly.GetManifestResourceStream($"Microsoft.VisualStudio.LanguageServices.ColorSchemes.{schemeName}.xml");
+                return assembly.GetManifestResourceStream(
+                    $"Microsoft.VisualStudio.LanguageServices.ColorSchemes.{schemeName}.xml"
+                );
             }
 
-            public void ApplyColorScheme(SchemeName schemeName, ImmutableArray<RegistryItem> registryItems)
+            public void ApplyColorScheme(
+                SchemeName schemeName,
+                ImmutableArray<RegistryItem> registryItems
+            )
             {
-                using var registryRoot = VSRegistry.RegistryRoot(_serviceProvider, __VsLocalRegistryType.RegType_Configuration, writable: true);
+                using var registryRoot = VSRegistry.RegistryRoot(
+                    _serviceProvider,
+                    __VsLocalRegistryType.RegType_Configuration,
+                    writable: true
+                );
 
                 foreach (var item in registryItems)
                 {
@@ -70,7 +82,12 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 SetAppliedColorScheme(schemeName);
 
                 // Broadcast that system color settings have changed to force the ColorThemeService to reload colors.
-                NativeMethods.PostMessage(NativeMethods.HWND_BROADCAST, NativeMethods.WM_SYSCOLORCHANGE, wparam: IntPtr.Zero, lparam: IntPtr.Zero);
+                NativeMethods.PostMessage(
+                    NativeMethods.HWND_BROADCAST,
+                    NativeMethods.WM_SYSCOLORCHANGE,
+                    wparam: IntPtr.Zero,
+                    lparam: IntPtr.Zero
+                );
             }
 
             /// <summary>
@@ -80,18 +97,26 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             {
                 // The applied color scheme is stored in the configuration registry with the color theme information because
                 // when the hive gets rebuilt during upgrades, we need to reapply the color scheme information.
-                using var registryRoot = VSRegistry.RegistryRoot(_serviceProvider, __VsLocalRegistryType.RegType_Configuration, writable: false);
+                using var registryRoot = VSRegistry.RegistryRoot(
+                    _serviceProvider,
+                    __VsLocalRegistryType.RegType_Configuration,
+                    writable: false
+                );
                 using var itemKey = registryRoot.OpenSubKey(ColorSchemeApplierKey);
                 return itemKey is object
-                    ? (SchemeName)itemKey.GetValue(AppliedColorSchemeName)
-                    : default;
+                  ? (SchemeName)itemKey.GetValue(AppliedColorSchemeName)
+                  : default;
             }
 
             private void SetAppliedColorScheme(SchemeName schemeName)
             {
                 // The applied color scheme is stored in the configuration registry with the color theme information because
                 // when the hive gets rebuilt during upgrades, we need to reapply the color scheme information.
-                using var registryRoot = VSRegistry.RegistryRoot(_serviceProvider, __VsLocalRegistryType.RegType_Configuration, writable: true);
+                using var registryRoot = VSRegistry.RegistryRoot(
+                    _serviceProvider,
+                    __VsLocalRegistryType.RegType_Configuration,
+                    writable: true
+                );
                 using var itemKey = registryRoot.CreateSubKey(ColorSchemeApplierKey);
                 itemKey.SetValue(AppliedColorSchemeName, (int)schemeName);
                 // Flush RegistryKeys out of paranoia
@@ -102,14 +127,16 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             {
                 var schemeName = _globalOptions.GetOption(ColorSchemeOptions.ColorScheme);
                 return schemeName != SchemeName.None
-                    ? schemeName
-                    : ColorSchemeOptions.ColorScheme.DefaultValue;
+                  ? schemeName
+                  : ColorSchemeOptions.ColorScheme.DefaultValue;
             }
 
             public void MigrateToColorSchemeSetting()
             {
                 // Get the preview feature flag value.
-                var useEnhancedColorsSetting = _globalOptions.GetOption(ColorSchemeOptions.LegacyUseEnhancedColors);
+                var useEnhancedColorsSetting = _globalOptions.GetOption(
+                    ColorSchemeOptions.LegacyUseEnhancedColors
+                );
 
                 // Return if we have already migrated.
                 if (useEnhancedColorsSetting == ColorSchemeOptions.UseEnhancedColors.Migrated)
@@ -117,12 +144,19 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                     return;
                 }
 
-                var colorScheme = useEnhancedColorsSetting == ColorSchemeOptions.UseEnhancedColors.DoNotUse
-                    ? SchemeName.VisualStudio2017
-                    : SchemeName.VisualStudio2019;
+                var colorScheme =
+                    useEnhancedColorsSetting == ColorSchemeOptions.UseEnhancedColors.DoNotUse
+                        ? SchemeName.VisualStudio2017
+                        : SchemeName.VisualStudio2019;
 
-                _globalOptions.SetGlobalOption(new OptionKey(ColorSchemeOptions.ColorScheme), colorScheme);
-                _globalOptions.SetGlobalOption(new OptionKey(ColorSchemeOptions.LegacyUseEnhancedColors), ColorSchemeOptions.UseEnhancedColors.Migrated);
+                _globalOptions.SetGlobalOption(
+                    new OptionKey(ColorSchemeOptions.ColorScheme),
+                    colorScheme
+                );
+                _globalOptions.SetGlobalOption(
+                    new OptionKey(ColorSchemeOptions.LegacyUseEnhancedColors),
+                    ColorSchemeOptions.UseEnhancedColors.Migrated
+                );
             }
         }
     }

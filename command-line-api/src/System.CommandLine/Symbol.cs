@@ -15,9 +15,7 @@ namespace System.CommandLine
         private string? _name;
         private readonly SymbolSet _parents = new();
 
-        private protected Symbol()
-        {
-        }
+        private protected Symbol() { }
 
         /// <summary>
         /// Gets or sets the description of the symbol.
@@ -68,7 +66,10 @@ namespace System.CommandLine
         public bool IsHidden { get; set; }
 
         /// <inheritdoc />
-        public virtual IEnumerable<string> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
+        public virtual IEnumerable<string> GetSuggestions(
+            ParseResult? parseResult = null,
+            string? textToMatch = null
+        )
         {
             var suggestions = new HashSet<string>();
 
@@ -83,8 +84,10 @@ namespace System.CommandLine
                     case IIdentifierSymbol identifier when !child.IsHidden:
                         foreach (var alias in identifier.Aliases)
                         {
-                            if (alias is { } suggestion && 
-                                suggestion.ContainsCaseInsensitive(textToMatch))
+                            if (
+                                alias is { } suggestion
+                                && suggestion.ContainsCaseInsensitive(textToMatch)
+                            )
                             {
                                 suggestions.Add(suggestion);
                             }
@@ -92,10 +95,13 @@ namespace System.CommandLine
 
                         break;
                     case IArgument argument:
-                        foreach (var suggestion in argument.GetSuggestions(parseResult, textToMatch))
+                        foreach (
+                            var suggestion in argument.GetSuggestions(parseResult, textToMatch)
+                        )
                         {
-                            if (suggestion is { } && 
-                                suggestion.ContainsCaseInsensitive(textToMatch))
+                            if (
+                                suggestion is { } && suggestion.ContainsCaseInsensitive(textToMatch)
+                            )
                             {
                                 suggestions.Add(suggestion);
                             }
@@ -106,8 +112,8 @@ namespace System.CommandLine
             }
 
             return suggestions
-                   .OrderBy(symbol => symbol!.IndexOfCaseInsensitive(textToMatch))
-                   .ThenBy(symbol => symbol, StringComparer.OrdinalIgnoreCase);
+                .OrderBy(symbol => symbol!.IndexOfCaseInsensitive(textToMatch))
+                .ThenBy(symbol => symbol, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc/>
@@ -123,14 +129,19 @@ namespace System.CommandLine
         {
             if (string.IsNullOrWhiteSpace(alias))
             {
-                throw new ArgumentException("An alias cannot be null, empty, or consist entirely of whitespace.");
+                throw new ArgumentException(
+                    "An alias cannot be null, empty, or consist entirely of whitespace."
+                );
             }
 
             for (var i = 0; i < alias.Length; i++)
             {
                 if (char.IsWhiteSpace(alias[i]))
                 {
-                    throw new ArgumentException($"{GetType().Name} alias cannot contain whitespace: \"{alias}\"", nameof(alias));
+                    throw new ArgumentException(
+                        $"{GetType().Name} alias cannot contain whitespace: \"{alias}\"",
+                        nameof(alias)
+                    );
                 }
             }
         }

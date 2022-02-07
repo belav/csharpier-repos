@@ -22,10 +22,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerSqlNullabilityProcessor(
             RelationalParameterBasedSqlProcessorDependencies dependencies,
-            bool useRelationalNulls)
-            : base(dependencies, useRelationalNulls)
-        {
-        }
+            bool useRelationalNulls
+        ) : base(dependencies, useRelationalNulls) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         protected override TableExpressionBase Visit(TableExpressionBase tableExpressionBase)
         {
             return tableExpressionBase is TemporalTableExpression temporalTableExpression
-                ? temporalTableExpression
-                : base.Visit(tableExpressionBase);
+              ? temporalTableExpression
+              : base.Visit(tableExpressionBase);
         }
     }
 }

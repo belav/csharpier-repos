@@ -27,7 +27,9 @@ public class CultureChangeSecurity
 
     public static bool Scenario1()
     {
-        Console.WriteLine("Scenario1: Ensure user code can access Globalization.CultureInfo.CurrentCulture");
+        Console.WriteLine(
+            "Scenario1: Ensure user code can access Globalization.CultureInfo.CurrentCulture"
+        );
 
         try
         {
@@ -43,7 +45,9 @@ public class CultureChangeSecurity
 
     public static bool Scenario2()
     {
-        Console.WriteLine("Scenario2: Ensure user code can access Globalization.CultureInfo.CurrentUICulture");
+        Console.WriteLine(
+            "Scenario2: Ensure user code can access Globalization.CultureInfo.CurrentUICulture"
+        );
 
         try
         {
@@ -57,5 +61,3 @@ public class CultureChangeSecurity
         }
     }
 }
-
-

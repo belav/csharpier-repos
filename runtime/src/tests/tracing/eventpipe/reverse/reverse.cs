@@ -26,7 +26,7 @@ namespace Tracing.Tests.ReverseValidation
             Logger.logger.Log($"Server name is '{serverName}'");
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> 
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
                 },
@@ -52,15 +52,17 @@ namespace Tracing.Tests.ReverseValidation
         {
             bool fSuccess = true;
             string serverName = ReverseServer.MakeServerAddress();
-            Task<IpcAdvertise> advertiseTask = ReverseServer.CreateServerAndReceiveAdvertisement(serverName);
+            Task<IpcAdvertise> advertiseTask = ReverseServer.CreateServerAndReceiveAdvertisement(
+                serverName
+            );
             Logger.logger.Log($"Server name is `{serverName}`");
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> 
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
                 },
-                duringExecution: async (_) => 
+                duringExecution: async (_) =>
                 {
                     IpcAdvertise advertise = await advertiseTask;
                     Logger.logger.Log(advertise.ToString());
@@ -72,7 +74,6 @@ namespace Tracing.Tests.ReverseValidation
             return fSuccess;
         }
 
-
         public static async Task<bool> TEST_CanConnectServerAndClientAtSameTime()
         {
             bool fSuccess = true;
@@ -81,40 +82,52 @@ namespace Tracing.Tests.ReverseValidation
             var server = new ReverseServer(serverName);
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> 
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
                 },
                 duringExecution: async (int pid) =>
                 {
-                    Task reverseTask = Task.Run(async () => 
-                    {
-                        Logger.logger.Log($"Waiting for reverse connection");
-                        Stream reverseStream = await server.AcceptAsync();
-                        Logger.logger.Log("Got reverse connection");
-                        IpcAdvertise advertise = IpcAdvertise.Parse(reverseStream);
-                        Logger.logger.Log(advertise.ToString());
-                    });
+                    Task reverseTask = Task.Run(
+                        async () =>
+                        {
+                            Logger.logger.Log($"Waiting for reverse connection");
+                            Stream reverseStream = await server.AcceptAsync();
+                            Logger.logger.Log("Got reverse connection");
+                            IpcAdvertise advertise = IpcAdvertise.Parse(reverseStream);
+                            Logger.logger.Log(advertise.ToString());
+                        }
+                    );
 
-                    Task regularTask = Task.Run(async () => 
-                    {
-                        var config = new SessionConfiguration(
-                            circularBufferSizeMB: 1000,
-                            format: EventPipeSerializationFormat.NetTrace,
-                            providers: new List<Provider> { 
-                                new Provider("Microsoft-DotNETCore-SampleProfiler")
-                            });
-                        Logger.logger.Log("Starting EventPipeSession over standard connection");
-                        using Stream stream = EventPipeClient.CollectTracing(pid, config, out var sessionId);
-                        Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}");
-                        using var source = new EventPipeEventSource(stream);
-                        Task readerTask = Task.Run(() => source.Process());
-                        await Task.Delay(500);
-                        Logger.logger.Log("Stopping EventPipeSession over standard connection");
-                        EventPipeClient.StopTracing(pid, sessionId);
-                        await readerTask;
-                        Logger.logger.Log("Stopped EventPipeSession over standard connection");
-                    });
+                    Task regularTask = Task.Run(
+                        async () =>
+                        {
+                            var config = new SessionConfiguration(
+                                circularBufferSizeMB: 1000,
+                                format: EventPipeSerializationFormat.NetTrace,
+                                providers: new List<Provider>
+                                {
+                                    new Provider("Microsoft-DotNETCore-SampleProfiler")
+                                }
+                            );
+                            Logger.logger.Log("Starting EventPipeSession over standard connection");
+                            using Stream stream = EventPipeClient.CollectTracing(
+                                pid,
+                                config,
+                                out var sessionId
+                            );
+                            Logger.logger.Log(
+                                $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                            );
+                            using var source = new EventPipeEventSource(stream);
+                            Task readerTask = Task.Run(() => source.Process());
+                            await Task.Delay(500);
+                            Logger.logger.Log("Stopping EventPipeSession over standard connection");
+                            EventPipeClient.StopTracing(pid, sessionId);
+                            await readerTask;
+                            Logger.logger.Log("Stopped EventPipeSession over standard connection");
+                        }
+                    );
 
                     await Task.WhenAll(reverseTask, regularTask);
                 }
@@ -134,7 +147,7 @@ namespace Tracing.Tests.ReverseValidation
             var server = new ReverseServer(serverName);
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> 
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
                 },
@@ -143,12 +156,20 @@ namespace Tracing.Tests.ReverseValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 10,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
+                        providers: new List<Provider>
+                        {
                             new Provider("Microsoft-DotNETCore-SampleProfiler")
-                        });
+                        }
+                    );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream stream = EventPipeClient.CollectTracing(pid, config, out var sessionId);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}");
+                    using Stream stream = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
                     using var source = new EventPipeEventSource(stream);
                     Task readerTask = Task.Run(() => source.Process());
                     await Task.Delay(500);
@@ -175,7 +196,7 @@ namespace Tracing.Tests.ReverseValidation
             var server = new ReverseServer(serverName, 0);
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> 
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
                 },
@@ -184,12 +205,20 @@ namespace Tracing.Tests.ReverseValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 10,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
+                        providers: new List<Provider>
+                        {
                             new Provider("Microsoft-DotNETCore-SampleProfiler")
-                        });
+                        }
+                    );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream stream = EventPipeClient.CollectTracing(pid, config, out var sessionId);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}");
+                    using Stream stream = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
                     using var source = new EventPipeEventSource(stream);
                     Task readerTask = Task.Run(() => source.Process());
                     await Task.Delay(500);
@@ -213,7 +242,7 @@ namespace Tracing.Tests.ReverseValidation
             Logger.logger.Log($"Server name is '{serverName}'");
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> 
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
                 },
@@ -222,12 +251,20 @@ namespace Tracing.Tests.ReverseValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
+                        providers: new List<Provider>
+                        {
                             new Provider("Microsoft-DotNETCore-SampleProfiler")
-                        });
+                        }
+                    );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream stream = EventPipeClient.CollectTracing(pid, config, out var sessionId);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}");
+                    using Stream stream = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
                     using var source = new EventPipeEventSource(stream);
                     Task readerTask = Task.Run(() => source.Process());
                     await Task.Delay(500);
@@ -256,14 +293,16 @@ namespace Tracing.Tests.ReverseValidation
             bool fSuccess = true;
             if (!IpcTraceTest.EnsureCleanEnvironment())
                 return -1;
-            IEnumerable<MethodInfo> tests = typeof(ReverseValidation).GetMethods().Where(mi => mi.Name.StartsWith("TEST_"));
+            IEnumerable<MethodInfo> tests = typeof(ReverseValidation)
+                .GetMethods()
+                .Where(mi => mi.Name.StartsWith("TEST_"));
             foreach (var test in tests)
             {
                 Logger.logger.Log($"::== Running test: {test.Name}");
                 bool result = true;
                 try
                 {
-                    result = await (Task<bool>)test.Invoke(null, new object[] {});
+                    result = await (Task<bool>)test.Invoke(null, new object[] { });
                 }
                 catch (Exception e)
                 {
@@ -273,7 +312,6 @@ namespace Tracing.Tests.ReverseValidation
                 fSuccess &= result;
                 Logger.logger.Log($"Test passed: {result}");
                 Logger.logger.Log($"");
-
             }
             return fSuccess ? 100 : -1;
         }

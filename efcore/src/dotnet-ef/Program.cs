@@ -10,7 +10,10 @@ namespace Microsoft.EntityFrameworkCore.Tools
     {
         private static int Main(string[] args)
         {
-            var app = new CommandLineApplication(throwOnUnexpectedArg: false) { Name = "dotnet ef" };
+            var app = new CommandLineApplication(throwOnUnexpectedArg: false)
+            {
+                Name = "dotnet ef"
+            };
 
             new RootCommand().Configure(app);
 
@@ -20,8 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
             }
             catch (Exception ex)
             {
-                if (ex is CommandException
-                    || ex is CommandParsingException)
+                if (ex is CommandException || ex is CommandParsingException)
                 {
                     Reporter.WriteVerbose(ex.ToString());
                 }

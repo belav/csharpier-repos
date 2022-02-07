@@ -10,11 +10,14 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program>>
+public class SimpleWithWebApplicationBuilderTests
+    : IClassFixture<MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program>>
 {
     private readonly MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program> _fixture;
 
-    public SimpleWithWebApplicationBuilderTests(MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program> fixture)
+    public SimpleWithWebApplicationBuilderTests(
+        MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program> fixture
+    )
     {
         _fixture = fixture;
         Client = _fixture.CreateDefaultClient();
@@ -132,7 +135,8 @@ public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture
     {
         // Arrange
         var expected = "Development";
-        using var client = new WebApplicationFactory<SimpleWebSiteWithWebApplicationBuilder.Program>().CreateClient();
+        using var client =
+            new WebApplicationFactory<SimpleWebSiteWithWebApplicationBuilder.Program>().CreateClient();
 
         // Act
         var content = await client.GetStringAsync("http://localhost/environment");
@@ -145,18 +149,22 @@ public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture
     public async Task Configuration_Can_Be_Overridden()
     {
         // Arrange
-        var fixture = _fixture.WithWebHostBuilder(builder =>
-        {
-            builder.ConfigureAppConfiguration(builder =>
+        var fixture = _fixture.WithWebHostBuilder(
+            builder =>
             {
-                var config = new[]
-                {
-                        KeyValuePair.Create("Greeting", "Bonjour tout le monde"),
-                };
+                builder.ConfigureAppConfiguration(
+                    builder =>
+                    {
+                        var config = new[]
+                        {
+                            KeyValuePair.Create("Greeting", "Bonjour tout le monde"),
+                        };
 
-                builder.AddInMemoryCollection(config);
-            });
-        });
+                        builder.AddInMemoryCollection(config);
+                    }
+                );
+            }
+        );
 
         var expected = "Bonjour tout le monde";
         using var client = fixture.CreateDefaultClient();
@@ -172,10 +180,12 @@ public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture
     public async Task Environment_Can_Be_Overridden()
     {
         // Arrange
-        var fixture = _fixture.WithWebHostBuilder(builder =>
-        {
-            builder.UseEnvironment(Environments.Staging);
-        });
+        var fixture = _fixture.WithWebHostBuilder(
+            builder =>
+            {
+                builder.UseEnvironment(Environments.Staging);
+            }
+        );
 
         var expected = "Staging";
         using var client = fixture.CreateDefaultClient();
@@ -193,11 +203,15 @@ public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture
         var webRoot = "foo";
         var expectedWebRoot = "";
         // Arrange
-        var fixture = _fixture.WithWebHostBuilder(builder =>
-        {
-            expectedWebRoot = Path.GetFullPath(Path.Combine(builder.GetSetting(WebHostDefaults.ContentRootKey), webRoot));
-            builder.UseSetting(WebHostDefaults.WebRootKey, webRoot);
-        });
+        var fixture = _fixture.WithWebHostBuilder(
+            builder =>
+            {
+                expectedWebRoot = Path.GetFullPath(
+                    Path.Combine(builder.GetSetting(WebHostDefaults.ContentRootKey), webRoot)
+                );
+                builder.UseSetting(WebHostDefaults.WebRootKey, webRoot);
+            }
+        );
 
         using var client = fixture.CreateDefaultClient();
 

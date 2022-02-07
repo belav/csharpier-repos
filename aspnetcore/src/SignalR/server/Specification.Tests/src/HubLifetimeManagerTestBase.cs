@@ -19,7 +19,9 @@ public abstract class HubLifetimeManagerTestsBase<THub> where THub : Hub
     /// <summary>
     /// This API is obsolete and will be removed in a future version. Use CreateNewHubLifetimeManager in tests instead.
     /// </summary>
-    [Obsolete("This API is obsolete and will be removed in a future version. Use CreateNewHubLifetimeManager in tests instead.")]
+    [Obsolete(
+        "This API is obsolete and will be removed in a future version. Use CreateNewHubLifetimeManager in tests instead."
+    )]
     public HubLifetimeManager<THub> Manager { get; set; }
 
     /// <summary>
@@ -47,7 +49,9 @@ public abstract class HubLifetimeManagerTestsBase<THub> where THub : Hub
 
             await manager.SendAllAsync("Hello", new object[] { "World" }).DefaultTimeout();
 
-            var message = Assert.IsType<InvocationMessage>(await client1.ReadAsync().DefaultTimeout());
+            var message = Assert.IsType<InvocationMessage>(
+                await client1.ReadAsync().DefaultTimeout()
+            );
             Assert.Equal("Hello", message.Target);
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
@@ -80,7 +84,9 @@ public abstract class HubLifetimeManagerTestsBase<THub> where THub : Hub
 
             await manager.SendAllAsync("Hello", new object[] { "World" }).DefaultTimeout();
 
-            var message = Assert.IsType<InvocationMessage>(await client1.ReadAsync().DefaultTimeout());
+            var message = Assert.IsType<InvocationMessage>(
+                await client1.ReadAsync().DefaultTimeout()
+            );
             Assert.Equal("Hello", message.Target);
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
@@ -108,9 +114,13 @@ public abstract class HubLifetimeManagerTestsBase<THub> where THub : Hub
 
             await manager.AddToGroupAsync(connection1.ConnectionId, "group").DefaultTimeout();
 
-            await manager.SendGroupAsync("group", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendGroupAsync("group", "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
-            var message = Assert.IsType<InvocationMessage>(await client1.ReadAsync().DefaultTimeout());
+            var message = Assert.IsType<InvocationMessage>(
+                await client1.ReadAsync().DefaultTimeout()
+            );
             Assert.Equal("Hello", message.Target);
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
@@ -139,9 +149,18 @@ public abstract class HubLifetimeManagerTestsBase<THub> where THub : Hub
             await manager.AddToGroupAsync(connection1.ConnectionId, "group1").DefaultTimeout();
             await manager.AddToGroupAsync(connection2.ConnectionId, "group1").DefaultTimeout();
 
-            await manager.SendGroupExceptAsync("group1", "Hello", new object[] { "World" }, new[] { connection2.ConnectionId }).DefaultTimeout();
+            await manager
+                .SendGroupExceptAsync(
+                    "group1",
+                    "Hello",
+                    new object[] { "World" },
+                    new[] { connection2.ConnectionId }
+                )
+                .DefaultTimeout();
 
-            var message = Assert.IsType<InvocationMessage>(await client1.ReadAsync().DefaultTimeout());
+            var message = Assert.IsType<InvocationMessage>(
+                await client1.ReadAsync().DefaultTimeout()
+            );
             Assert.Equal("Hello", message.Target);
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
@@ -164,9 +183,13 @@ public abstract class HubLifetimeManagerTestsBase<THub> where THub : Hub
 
             await manager.OnConnectedAsync(connection).DefaultTimeout();
 
-            await manager.SendConnectionAsync(connection.ConnectionId, "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendConnectionAsync(connection.ConnectionId, "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
-            var message = Assert.IsType<InvocationMessage>(await client.ReadAsync().DefaultTimeout());
+            var message = Assert.IsType<InvocationMessage>(
+                await client.ReadAsync().DefaultTimeout()
+            );
             Assert.Equal("Hello", message.Target);
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);

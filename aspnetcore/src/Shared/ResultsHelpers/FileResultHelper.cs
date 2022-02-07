@@ -25,7 +25,12 @@ internal static partial class FileResultHelper
         PreconditionFailed
     }
 
-    internal static async Task WriteFileAsync(HttpContext context, Stream fileStream, RangeItemHeaderValue? range, long rangeLength)
+    internal static async Task WriteFileAsync(
+        HttpContext context,
+        Stream fileStream,
+        RangeItemHeaderValue? range,
+        long rangeLength
+    )
     {
         const int BufferSize = 64 * 1024;
         var outputStream = context.Response.Body;
@@ -35,12 +40,24 @@ internal static partial class FileResultHelper
             {
                 if (range == null)
                 {
-                    await StreamCopyOperation.CopyToAsync(fileStream, outputStream, count: null, bufferSize: 64 * 1024, cancel: context.RequestAborted);
+                    await StreamCopyOperation.CopyToAsync(
+                        fileStream,
+                        outputStream,
+                        count: null,
+                        bufferSize: 64 * 1024,
+                        cancel: context.RequestAborted
+                    );
                 }
                 else
                 {
                     fileStream.Seek(range.From!.Value, SeekOrigin.Begin);
-                    await StreamCopyOperation.CopyToAsync(fileStream, outputStream, rangeLength, BufferSize, context.RequestAborted);
+                    await StreamCopyOperation.CopyToAsync(
+                        fileStream,
+                        outputStream,
+                        rangeLength,
+                        BufferSize,
+                        context.RequestAborted
+                    );
                 }
             }
             catch (OperationCanceledException)
@@ -59,7 +76,8 @@ internal static partial class FileResultHelper
         bool enableRangeProcessing,
         DateTimeOffset? lastModified,
         EntityTagHeaderValue? etag,
-        ILogger logger)
+        ILogger logger
+    )
     {
         var request = httpContext.Request;
         var httpRequestHeaders = request.GetTypedHeaders();
@@ -71,7 +89,12 @@ internal static partial class FileResultHelper
             lastModified = RoundDownToWholeSeconds(lastModified.Value);
         }
 
-        var preconditionState = GetPreconditionState(httpRequestHeaders, lastModified, etag, logger);
+        var preconditionState = GetPreconditionState(
+            httpRequestHeaders,
+            lastModified,
+            etag,
+            logger
+        );
 
         var response = httpContext.Response;
         SetLastModifiedAndEtagHeaders(response, lastModified, etag);
@@ -107,11 +130,21 @@ internal static partial class FileResultHelper
 
                 // If the request method is HEAD or GET, PreconditionState is Unspecified or ShouldProcess, and IfRange header is valid,
                 // range should be processed and Range headers should be set
-                if ((HttpMethods.IsHead(request.Method) || HttpMethods.IsGet(request.Method))
-                    && (preconditionState == PreconditionState.Unspecified || preconditionState == PreconditionState.ShouldProcess)
-                    && (IfRangeValid(httpRequestHeaders, lastModified, etag, logger)))
+                if (
+                    (HttpMethods.IsHead(request.Method) || HttpMethods.IsGet(request.Method))
+                    && (
+                        preconditionState == PreconditionState.Unspecified
+                        || preconditionState == PreconditionState.ShouldProcess
+                    )
+                    && (IfRangeValid(httpRequestHeaders, lastModified, etag, logger))
+                )
                 {
-                    return SetRangeHeaders(httpContext, httpRequestHeaders, fileLength.Value, logger);
+                    return SetRangeHeaders(
+                        httpContext,
+                        httpRequestHeaders,
+                        fileLength.Value,
+                        logger
+                    );
                 }
             }
             else
@@ -127,7 +160,8 @@ internal static partial class FileResultHelper
         RequestHeaders httpRequestHeaders,
         DateTimeOffset? lastModified,
         EntityTagHeaderValue? etag,
-        ILogger logger)
+        ILogger logger
+    )
     {
         // 14.27 If-Range
         var ifRange = httpRequestHeaders.IfRange;
@@ -142,11 +176,19 @@ internal static partial class FileResultHelper
             {
                 if (lastModified.HasValue && lastModified > ifRange.LastModified)
                 {
-                    Log.IfRangeLastModifiedPreconditionFailed(logger, lastModified, ifRange.LastModified);
+                    Log.IfRangeLastModifiedPreconditionFailed(
+                        logger,
+                        lastModified,
+                        ifRange.LastModified
+                    );
                     return false;
                 }
             }
-            else if (etag != null && ifRange.EntityTag != null && !ifRange.EntityTag.Compare(etag, useStrongComparison: true))
+            else if (
+                etag != null
+                && ifRange.EntityTag != null
+                && !ifRange.EntityTag.Compare(etag, useStrongComparison: true)
+            )
             {
                 Log.IfRangeETagPreconditionFailed(logger, etag, ifRange.EntityTag);
                 return false;
@@ -160,7 +202,8 @@ internal static partial class FileResultHelper
         RequestHeaders httpRequestHeaders,
         DateTimeOffset? lastModified,
         EntityTagHeaderValue? etag,
-        ILogger logger)
+        ILogger logger
+    )
     {
         var ifMatchState = PreconditionState.Unspecified;
         var ifNoneMatchState = PreconditionState.Unspecified;
@@ -176,7 +219,8 @@ internal static partial class FileResultHelper
                 etagHeader: ifMatch,
                 etag: etag,
                 matchFoundState: PreconditionState.ShouldProcess,
-                matchNotFoundState: PreconditionState.PreconditionFailed);
+                matchNotFoundState: PreconditionState.PreconditionFailed
+            );
 
             if (ifMatchState == PreconditionState.PreconditionFailed)
             {
@@ -193,7 +237,8 @@ internal static partial class FileResultHelper
                 etagHeader: ifNoneMatch,
                 etag: etag,
                 matchFoundState: PreconditionState.NotModified,
-                matchNotFoundState: PreconditionState.ShouldProcess);
+                matchNotFoundState: PreconditionState.ShouldProcess
+            );
         }
 
         var now = RoundDownToWholeSeconds(DateTimeOffset.UtcNow);
@@ -203,7 +248,9 @@ internal static partial class FileResultHelper
         if (lastModified.HasValue && ifModifiedSince.HasValue && ifModifiedSince <= now)
         {
             var modified = ifModifiedSince < lastModified;
-            ifModifiedSinceState = modified ? PreconditionState.ShouldProcess : PreconditionState.NotModified;
+            ifModifiedSinceState = modified
+                ? PreconditionState.ShouldProcess
+                : PreconditionState.NotModified;
         }
 
         // 14.28 If-Unmodified-Since
@@ -211,7 +258,9 @@ internal static partial class FileResultHelper
         if (lastModified.HasValue && ifUnmodifiedSince.HasValue && ifUnmodifiedSince <= now)
         {
             var unmodified = ifUnmodifiedSince >= lastModified;
-            ifUnmodifiedSinceState = unmodified ? PreconditionState.ShouldProcess : PreconditionState.PreconditionFailed;
+            ifUnmodifiedSinceState = unmodified
+                ? PreconditionState.ShouldProcess
+                : PreconditionState.PreconditionFailed;
 
             if (ifUnmodifiedSinceState == PreconditionState.PreconditionFailed)
             {
@@ -219,7 +268,12 @@ internal static partial class FileResultHelper
             }
         }
 
-        var state = GetMaxPreconditionState(ifMatchState, ifNoneMatchState, ifModifiedSinceState, ifUnmodifiedSinceState);
+        var state = GetMaxPreconditionState(
+            ifMatchState,
+            ifNoneMatchState,
+            ifModifiedSinceState,
+            ifUnmodifiedSinceState
+        );
         return state;
     }
 
@@ -228,14 +282,18 @@ internal static partial class FileResultHelper
         IList<EntityTagHeaderValue> etagHeader,
         EntityTagHeaderValue etag,
         PreconditionState matchFoundState,
-        PreconditionState matchNotFoundState)
+        PreconditionState matchNotFoundState
+    )
     {
         if (etagHeader?.Count > 0)
         {
             var state = matchNotFoundState;
             foreach (var entityTag in etagHeader)
             {
-                if (entityTag.Equals(EntityTagHeaderValue.Any) || entityTag.Compare(etag, useStrongComparison))
+                if (
+                    entityTag.Equals(EntityTagHeaderValue.Any)
+                    || entityTag.Compare(etag, useStrongComparison)
+                )
                 {
                     state = matchFoundState;
                     break;
@@ -252,7 +310,8 @@ internal static partial class FileResultHelper
         HttpContext httpContext,
         RequestHeaders httpRequestHeaders,
         long fileLength,
-        ILogger logger)
+        ILogger logger
+    )
     {
         var response = httpContext.Response;
         var httpResponseHeaders = response.GetTypedHeaders();
@@ -264,7 +323,8 @@ internal static partial class FileResultHelper
             httpContext,
             httpRequestHeaders,
             fileLength,
-            logger);
+            logger
+        );
 
         if (!isRangeRequest)
         {
@@ -288,7 +348,8 @@ internal static partial class FileResultHelper
         httpResponseHeaders.ContentRange = new ContentRangeHeaderValue(
             range.From!.Value,
             range.To!.Value,
-            fileLength);
+            fileLength
+        );
 
         // Overwrite the Content-Length header for valid range requests with the range length.
         var rangeLength = SetContentLength(response, range);
@@ -305,7 +366,10 @@ internal static partial class FileResultHelper
         return length;
     }
 
-    private static void SetContentDispositionHeader(HttpContext httpContext, in FileResultInfo result)
+    private static void SetContentDispositionHeader(
+        HttpContext httpContext,
+        in FileResultInfo result
+    )
     {
         if (!string.IsNullOrEmpty(result.FileDownloadName))
         {
@@ -320,7 +384,11 @@ internal static partial class FileResultHelper
         }
     }
 
-    private static void SetLastModifiedAndEtagHeaders(HttpResponse response, DateTimeOffset? lastModified, EntityTagHeaderValue? etag)
+    private static void SetLastModifiedAndEtagHeaders(
+        HttpResponse response,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue? etag
+    )
     {
         var httpResponseHeaders = response.GetTypedHeaders();
         if (lastModified.HasValue)
@@ -360,42 +428,67 @@ internal static partial class FileResultHelper
 
     internal static partial class Log
     {
-        [LoggerMessage(17, LogLevel.Debug, "Writing the requested range of bytes to the body.", EventName = "WritingRangeToBody")]
+        [LoggerMessage(
+            17,
+            LogLevel.Debug,
+            "Writing the requested range of bytes to the body.",
+            EventName = "WritingRangeToBody"
+        )]
         public static partial void WritingRangeToBody(ILogger logger);
 
-        [LoggerMessage(34, LogLevel.Debug,
+        [LoggerMessage(
+            34,
+            LogLevel.Debug,
             "Current request's If-Match header check failed as the file's current etag '{CurrentETag}' does not match with any of the supplied etags.",
-            EventName = "IfMatchPreconditionFailed")]
-        public static partial void IfMatchPreconditionFailed(ILogger logger, EntityTagHeaderValue currentETag);
+            EventName = "IfMatchPreconditionFailed"
+        )]
+        public static partial void IfMatchPreconditionFailed(
+            ILogger logger,
+            EntityTagHeaderValue currentETag
+        );
 
-        [LoggerMessage(35, LogLevel.Debug,
+        [LoggerMessage(
+            35,
+            LogLevel.Debug,
             "Current request's If-Unmodified-Since header check failed as the file was modified (at '{lastModified}') after the If-Unmodified-Since date '{IfUnmodifiedSinceDate}'.",
-            EventName = "IfUnmodifiedSincePreconditionFailed")]
+            EventName = "IfUnmodifiedSincePreconditionFailed"
+        )]
         public static partial void IfUnmodifiedSincePreconditionFailed(
             ILogger logger,
             DateTimeOffset? lastModified,
-            DateTimeOffset? ifUnmodifiedSinceDate);
+            DateTimeOffset? ifUnmodifiedSinceDate
+        );
 
-        [LoggerMessage(36, LogLevel.Debug,
+        [LoggerMessage(
+            36,
+            LogLevel.Debug,
             "Could not serve range as the file was modified (at {LastModified}) after the if-Range's last modified date '{IfRangeLastModified}'.",
-            EventName = "IfRangeLastModifiedPreconditionFailed")]
+            EventName = "IfRangeLastModifiedPreconditionFailed"
+        )]
         public static partial void IfRangeLastModifiedPreconditionFailed(
             ILogger logger,
             DateTimeOffset? lastModified,
-            DateTimeOffset? IfRangeLastModified);
+            DateTimeOffset? IfRangeLastModified
+        );
 
-        [LoggerMessage(37, LogLevel.Debug,
+        [LoggerMessage(
+            37,
+            LogLevel.Debug,
             "Could not serve range as the file's current etag '{CurrentETag}' does not match the If-Range etag '{IfRangeETag}'.",
-            EventName = "IfRangeETagPreconditionFailed")]
+            EventName = "IfRangeETagPreconditionFailed"
+        )]
         public static partial void IfRangeETagPreconditionFailed(
             ILogger logger,
             EntityTagHeaderValue currentETag,
-            EntityTagHeaderValue IfRangeETag);
+            EntityTagHeaderValue IfRangeETag
+        );
 
-        [LoggerMessage(38, LogLevel.Debug,
+        [LoggerMessage(
+            38,
+            LogLevel.Debug,
             "The file result has not been enabled for processing range requests. To enable it, set the EnableRangeProcessing property on the result to 'true'.",
-            EventName = "NotEnabledForRangeProcessing")]
+            EventName = "NotEnabledForRangeProcessing"
+        )]
         public static partial void NotEnabledForRangeProcessing(ILogger logger);
     }
-
 }

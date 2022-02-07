@@ -34,10 +34,12 @@ internal class DefaultTypeNameFeature : TypeNameFeature
         }
         else
         {
-            return parsed.DescendantNodesAndSelf()
+            return parsed
+                .DescendantNodesAndSelf()
                 .OfType<TypeArgumentListSyntax>()
                 .SelectMany(arg => arg.Arguments)
-                .Select(a => a.ToString()).ToList();
+                .Select(a => a.ToString())
+                .ToList();
         }
     }
 
@@ -51,7 +53,9 @@ internal class DefaultTypeNameFeature : TypeNameFeature
         return new GenericTypeNameRewriter(bindings);
     }
 
-    public override TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(ICollection<string> ignore)
+    public override TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(
+        ICollection<string> ignore
+    )
     {
         if (ignore == null)
         {

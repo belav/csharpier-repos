@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {

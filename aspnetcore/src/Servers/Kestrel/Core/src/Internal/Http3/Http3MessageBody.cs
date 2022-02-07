@@ -17,8 +17,7 @@ internal sealed class Http3MessageBody : MessageBody
     private readonly Http3Stream _context;
     private ReadResult _readResult;
 
-    private Http3MessageBody(Http3Stream context)
-        : base(context)
+    private Http3MessageBody(Http3Stream context) : base(context)
     {
         _context = context;
     }
@@ -30,7 +29,10 @@ internal sealed class Http3MessageBody : MessageBody
 
         if (_context.RequestHeaders.ContentLength > maxRequestBodySize)
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.RequestBodyTooLarge, maxRequestBodySize.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.RequestBodyTooLarge,
+                maxRequestBodySize.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)
+            );
         }
     }
 
@@ -70,7 +72,9 @@ internal sealed class Http3MessageBody : MessageBody
     }
 
     [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
-    public override async ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+    public override async ValueTask<ReadResult> ReadAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         await TryStartAsync();
 

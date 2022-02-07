@@ -19,7 +19,8 @@ internal class RewriteAction : UrlAction
         Pattern pattern,
         bool queryStringAppend,
         bool queryStringDelete,
-        bool escapeBackReferences)
+        bool escapeBackReferences
+    )
     {
         // For the replacement, we must have at least
         // one segment (cannot have an empty replacement)
@@ -30,20 +31,20 @@ internal class RewriteAction : UrlAction
         EscapeBackReferences = escapeBackReferences;
     }
 
-    public RewriteAction(
-        RuleResult result,
-        Pattern pattern,
-        bool queryStringAppend) :
-        this(result,
+    public RewriteAction(RuleResult result, Pattern pattern, bool queryStringAppend)
+        : this(
+            result,
             pattern,
             queryStringAppend,
             queryStringDelete: false,
-            escapeBackReferences: false)
-    {
+            escapeBackReferences: false
+        ) { }
 
-    }
-
-    public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override void ApplyAction(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var pattern = Url!.Evaluate(context, ruleBackReferences, conditionBackReferences);
         var request = context.HttpContext.Request;
@@ -59,7 +60,6 @@ internal class RewriteAction : UrlAction
             pattern = Uri.EscapeDataString(pattern);
         }
 
-
         // TODO PERF, substrings, object creation, etc.
         if (pattern.IndexOf(Uri.SchemeDelimiter, StringComparison.Ordinal) >= 0)
         {
@@ -68,7 +68,14 @@ internal class RewriteAction : UrlAction
             PathString path;
             QueryString query;
             FragmentString fragment;
-            UriHelper.FromAbsolute(pattern, out scheme, out host, out path, out query, out fragment);
+            UriHelper.FromAbsolute(
+                pattern,
+                out scheme,
+                out host,
+                out path,
+                out query,
+                out fragment
+            );
 
             if (query.HasValue)
             {
@@ -108,13 +115,12 @@ internal class RewriteAction : UrlAction
                 if (QueryStringAppend)
                 {
                     request.QueryString = request.QueryString.Add(
-                        QueryString.FromUriComponent(
-                            pattern.Substring(split)));
+                        QueryString.FromUriComponent(pattern.Substring(split))
+                    );
                 }
                 else
                 {
-                    request.QueryString = QueryString.FromUriComponent(
-                        pattern.Substring(split));
+                    request.QueryString = QueryString.FromUriComponent(pattern.Substring(split));
                 }
             }
             else

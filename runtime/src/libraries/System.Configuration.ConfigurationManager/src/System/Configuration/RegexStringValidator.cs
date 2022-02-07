@@ -12,7 +12,8 @@ namespace System.Configuration
 
         public RegexStringValidator(string regex)
         {
-            if (string.IsNullOrEmpty(regex)) throw ExceptionUtil.ParameterNullOrEmpty(nameof(regex));
+            if (string.IsNullOrEmpty(regex))
+                throw ExceptionUtil.ParameterNullOrEmpty(nameof(regex));
 
             _expression = regex;
             _regex = new Regex(regex, RegexOptions.Compiled);
@@ -27,11 +28,13 @@ namespace System.Configuration
         {
             ValidatorUtils.HelperParamValidation(value, typeof(string));
 
-            if (value == null) return;
+            if (value == null)
+                return;
 
             Match match = _regex.Match((string)value);
 
-            if (!match.Success) throw new ArgumentException(SR.Format(SR.Regex_validator_error, _expression));
+            if (!match.Success)
+                throw new ArgumentException(SR.Format(SR.Regex_validator_error, _expression));
         }
     }
 }

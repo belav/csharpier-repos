@@ -15,8 +15,7 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
         private static Action<Exception> RethrowException = exception =>
             ExceptionDispatchInfo.Capture(exception).Throw();
 
-        public override bool CheckAccess()
-            => CurrentDispatcher.CheckAccess();
+        public override bool CheckAccess() => CurrentDispatcher.CheckAccess();
 
         public override async Task InvokeAsync(Action workItem)
         {

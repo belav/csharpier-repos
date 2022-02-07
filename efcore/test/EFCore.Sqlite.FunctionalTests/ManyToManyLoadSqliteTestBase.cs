@@ -10,15 +10,12 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class ManyToManyLoadSqliteTestBase<TFixture> : ManyToManyLoadTestBase<TFixture>
         where TFixture : ManyToManyLoadSqliteTestBase<TFixture>.ManyToManyLoadSqliteFixtureBase
     {
-        protected ManyToManyLoadSqliteTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected ManyToManyLoadSqliteTestBase(TFixture fixture) : base(fixture) { }
 
         public class ManyToManyLoadSqliteFixtureBase : ManyToManyLoadFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {

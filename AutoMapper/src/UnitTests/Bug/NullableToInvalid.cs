@@ -16,19 +16,22 @@ namespace AutoMapper.UnitTests.Bug
             public SomeObject Value { get; set; }
         }
 
-        public class SomeObject
-        {
-        }
+        public class SomeObject { }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         [Fact]
         public void Should_not_validate()
         {
-            new Action(Configuration.AssertConfigurationIsValid).ShouldThrow<AutoMapperConfigurationException>();
+            new Action(
+                Configuration.AssertConfigurationIsValid
+            ).ShouldThrow<AutoMapperConfigurationException>();
         }
     }
 }

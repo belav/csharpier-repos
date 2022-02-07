@@ -23,14 +23,14 @@ public class UrlResolutionTagHelperTest
         {
             // url, expectedHref
             return new TheoryData<string, string>
+            {
+                { "~/home/index.html", "/approot/home/index.html" },
+                { "  ~/home/index.html", "/approot/home/index.html" },
                 {
-                   { "~/home/index.html", "/approot/home/index.html" },
-                   { "  ~/home/index.html", "/approot/home/index.html" },
-                   {
-                        "~/home/index.html ~/secondValue/index.html",
-                        "/approot/home/index.html ~/secondValue/index.html"
-                   },
-                };
+                    "~/home/index.html ~/secondValue/index.html",
+                    "/approot/home/index.html ~/secondValue/index.html"
+                },
+            };
         }
     }
 
@@ -40,18 +40,20 @@ public class UrlResolutionTagHelperTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             tagName: null,
-            attributes: new TagHelperAttributeList
-            {
-                    { "href", "~/home/index.html" }
-            },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(null));
+            attributes: new TagHelperAttributeList { { "href", "~/home/index.html" } },
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(null)
+        );
 
-        var tagHelper = new UrlResolutionTagHelper(Mock.Of<IUrlHelperFactory>(), new HtmlTestEncoder());
+        var tagHelper = new UrlResolutionTagHelper(
+            Mock.Of<IUrlHelperFactory>(),
+            new HtmlTestEncoder()
+        );
         var context = new TagHelperContext(
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         tagHelper.Process(context, tagHelperOutput);
@@ -70,11 +72,10 @@ public class UrlResolutionTagHelperTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             tagName: "a",
-            attributes: new TagHelperAttributeList
-            {
-                    { "href", url }
-            },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(null));
+            attributes: new TagHelperAttributeList { { "href", url } },
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(null)
+        );
         var urlHelperMock = new Mock<IUrlHelper>();
         urlHelperMock
             .Setup(urlHelper => urlHelper.Content(It.IsAny<string>()))
@@ -87,10 +88,10 @@ public class UrlResolutionTagHelperTest
 
         var context = new TagHelperContext(
             tagName: "a",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         tagHelper.Process(context, tagHelperOutput);
@@ -109,14 +110,14 @@ public class UrlResolutionTagHelperTest
         {
             // url, expectedHref
             return new TheoryData<string, string>
+            {
+                { "~/home/index.html", "HtmlEncode[[/approot/]]home/index.html" },
+                { "  ~/home/index.html", "HtmlEncode[[/approot/]]home/index.html" },
                 {
-                   { "~/home/index.html", "HtmlEncode[[/approot/]]home/index.html" },
-                   { "  ~/home/index.html", "HtmlEncode[[/approot/]]home/index.html" },
-                   {
-                        "~/home/index.html ~/secondValue/index.html",
-                        "HtmlEncode[[/approot/]]home/index.html ~/secondValue/index.html"
-                   },
-                };
+                    "~/home/index.html ~/secondValue/index.html",
+                    "HtmlEncode[[/approot/]]home/index.html ~/secondValue/index.html"
+                },
+            };
         }
     }
 
@@ -127,11 +128,10 @@ public class UrlResolutionTagHelperTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             tagName: "a",
-            attributes: new TagHelperAttributeList
-            {
-                    { "href", new HtmlString(url) }
-            },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(null));
+            attributes: new TagHelperAttributeList { { "href", new HtmlString(url) } },
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(null)
+        );
         var urlHelperMock = new Mock<IUrlHelper>();
         urlHelperMock
             .Setup(urlHelper => urlHelper.Content(It.IsAny<string>()))
@@ -144,10 +144,10 @@ public class UrlResolutionTagHelperTest
 
         var context = new TagHelperContext(
             tagName: "a",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         tagHelper.Process(context, tagHelperOutput);
@@ -156,7 +156,11 @@ public class UrlResolutionTagHelperTest
         var attribute = Assert.Single(tagHelperOutput.Attributes);
         Assert.Equal("href", attribute.Name, StringComparer.Ordinal);
         var htmlContent = Assert.IsAssignableFrom<IHtmlContent>(attribute.Value);
-        Assert.Equal(expectedHref, HtmlContentUtilities.HtmlContentToString(htmlContent), StringComparer.Ordinal);
+        Assert.Equal(
+            expectedHref,
+            HtmlContentUtilities.HtmlContentToString(htmlContent),
+            StringComparer.Ordinal
+        );
         Assert.Equal(HtmlAttributeValueStyle.DoubleQuotes, attribute.ValueStyle);
     }
 
@@ -166,13 +170,13 @@ public class UrlResolutionTagHelperTest
         {
             // url
             return new TheoryData<string>
-                {
-                   { "/home/index.html" },
-                   { "~ /home/index.html" },
-                   { "/home/index.html ~/second/wontresolve.html" },
-                   { "  ~\\home\\index.html" },
-                   { "~\\/home/index.html" },
-                };
+            {
+                { "/home/index.html" },
+                { "~ /home/index.html" },
+                { "/home/index.html ~/second/wontresolve.html" },
+                { "  ~\\home\\index.html" },
+                { "~\\/home/index.html" },
+            };
         }
     }
 
@@ -183,11 +187,10 @@ public class UrlResolutionTagHelperTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             tagName: "a",
-            attributes: new TagHelperAttributeList
-            {
-                    { "href", url }
-            },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(null));
+            attributes: new TagHelperAttributeList { { "href", url } },
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(null)
+        );
         var urlHelperMock = new Mock<IUrlHelper>();
         urlHelperMock
             .Setup(urlHelper => urlHelper.Content(It.IsAny<string>()))
@@ -200,10 +203,10 @@ public class UrlResolutionTagHelperTest
 
         var context = new TagHelperContext(
             tagName: "a",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         tagHelper.Process(context, tagHelperOutput);
@@ -222,13 +225,13 @@ public class UrlResolutionTagHelperTest
         {
             // url
             return new TheoryData<string>
-                {
-                   { "/home/index.html" },
-                   { "~ /home/index.html" },
-                   { "/home/index.html ~/second/wontresolve.html" },
-                   { "~\\home\\index.html" },
-                   { "~\\/home/index.html" },
-                };
+            {
+                { "/home/index.html" },
+                { "~ /home/index.html" },
+                { "/home/index.html ~/second/wontresolve.html" },
+                { "~\\home\\index.html" },
+                { "~\\/home/index.html" },
+            };
         }
     }
 
@@ -239,11 +242,10 @@ public class UrlResolutionTagHelperTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             tagName: "a",
-            attributes: new TagHelperAttributeList
-            {
-                    { "href", new HtmlString(url) }
-            },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(null));
+            attributes: new TagHelperAttributeList { { "href", new HtmlString(url) } },
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(null)
+        );
         var urlHelperMock = new Mock<IUrlHelper>();
         urlHelperMock
             .Setup(urlHelper => urlHelper.Content(It.IsAny<string>()))
@@ -256,10 +258,10 @@ public class UrlResolutionTagHelperTest
 
         var context = new TagHelperContext(
             tagName: "a",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         tagHelper.Process(context, tagHelperOutput);
@@ -278,19 +280,18 @@ public class UrlResolutionTagHelperTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             tagName: "a",
-            attributes: new TagHelperAttributeList
-            {
-                    { "href", true }
-            },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(null));
+            attributes: new TagHelperAttributeList { { "href", true } },
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(null)
+        );
         var tagHelper = new UrlResolutionTagHelper(urlHelperFactory: null, htmlEncoder: null);
 
         var context = new TagHelperContext(
             tagName: "a",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         tagHelper.Process(context, tagHelperOutput);
@@ -307,20 +308,21 @@ public class UrlResolutionTagHelperTest
     {
         // Arrange
         var relativeUrl = "~/home/index.html";
-        var expectedExceptionMessage = Resources.FormatCouldNotResolveApplicationRelativeUrl_TagHelper(
-            relativeUrl,
-            nameof(IUrlHelper),
-            nameof(IUrlHelper.Content),
-            "removeTagHelper",
-            typeof(UrlResolutionTagHelper).FullName,
-            typeof(UrlResolutionTagHelper).Assembly.GetName().Name);
+        var expectedExceptionMessage =
+            Resources.FormatCouldNotResolveApplicationRelativeUrl_TagHelper(
+                relativeUrl,
+                nameof(IUrlHelper),
+                nameof(IUrlHelper.Content),
+                "removeTagHelper",
+                typeof(UrlResolutionTagHelper).FullName,
+                typeof(UrlResolutionTagHelper).Assembly.GetName().Name
+            );
         var tagHelperOutput = new TagHelperOutput(
             tagName: "a",
-            attributes: new TagHelperAttributeList
-            {
-                    { "href", new HtmlString(relativeUrl) }
-            },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(null));
+            attributes: new TagHelperAttributeList { { "href", new HtmlString(relativeUrl) } },
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(null)
+        );
         var urlHelperMock = new Mock<IUrlHelper>();
         urlHelperMock
             .Setup(urlHelper => urlHelper.Content(It.IsAny<string>()))
@@ -333,14 +335,15 @@ public class UrlResolutionTagHelperTest
 
         var context = new TagHelperContext(
             tagName: "a",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => tagHelper.Process(context, tagHelperOutput));
+            () => tagHelper.Process(context, tagHelperOutput)
+        );
         Assert.Equal(expectedExceptionMessage, exception.Message, StringComparer.Ordinal);
     }
 }

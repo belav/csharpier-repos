@@ -14,10 +14,10 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	using System;
+    using System;
 
-	public interface IFooWithOutUIntPtr
-	{
-		int Bar(out UIntPtr i);
-	}
+    public interface IFooWithOutUIntPtr
+    {
+        int Bar(out UIntPtr i);
+    }
 }

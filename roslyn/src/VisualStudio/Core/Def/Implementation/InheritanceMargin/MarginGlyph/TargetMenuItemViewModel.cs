@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             string displayContent,
             ImageMoniker imageMoniker,
             string automationName,
-            DefinitionItem.DetachedDefinitionItem definitionItem) : base(displayContent, imageMoniker, automationName)
+            DefinitionItem.DetachedDefinitionItem definitionItem
+        ) : base(displayContent, imageMoniker, automationName)
         {
             DefinitionItem = definitionItem;
         }
@@ -37,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 displayContent,
                 imageMoniker,
                 displayContent,
-                target.DefinitionItem);
+                target.DefinitionItem
+            );
         }
     }
 }

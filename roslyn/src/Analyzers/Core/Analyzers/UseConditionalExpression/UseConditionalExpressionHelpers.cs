@@ -11,8 +11,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
     internal static partial class UseConditionalExpressionHelpers
     {
         public static bool CanConvert(
-            ISyntaxFacts syntaxFacts, IConditionalOperation ifOperation,
-            IOperation whenTrue, IOperation whenFalse)
+            ISyntaxFacts syntaxFacts,
+            IConditionalOperation ifOperation,
+            IOperation whenTrue,
+            IOperation whenFalse
+        )
         {
             // Will likely not work as intended if the if directive spans any preprocessor directives. So
             // do not offer for now.  Note: we pass in both the node for the ifOperation and the
@@ -23,7 +26,7 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             //  #if DEBUG
             //  if (check)
             //      return 3;
-            //  #endif  
+            //  #endif
             //  return 2;
             //  ```
             //
@@ -36,8 +39,10 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             // User may have comments on the when-true/when-false statements.  These statements can
             // be very important. Often they indicate why the true/false branches are important in
             // the first place.  We don't have any place to put these, so we don't offer here.
-            if (HasRegularComments(syntaxFacts, whenTrue.Syntax) ||
-                HasRegularComments(syntaxFacts, whenFalse.Syntax))
+            if (
+                HasRegularComments(syntaxFacts, whenTrue.Syntax)
+                || HasRegularComments(syntaxFacts, whenFalse.Syntax)
+            )
             {
                 return false;
             }
@@ -50,21 +55,24 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         /// support both <c>if (expr) { statement }</c> and <c>if (expr) statement</c>
         /// </summary>
         [return: NotNullIfNotNull("statement")]
-        public static IOperation? UnwrapSingleStatementBlock(IOperation? statement)
-            => statement is IBlockOperation block && block.Operations.Length == 1
+        public static IOperation? UnwrapSingleStatementBlock(IOperation? statement) =>
+            statement is IBlockOperation block && block.Operations.Length == 1
                 ? block.Operations[0]
                 : statement;
 
-        public static IOperation UnwrapImplicitConversion(IOperation value)
-            => value is IConversionOperation conversion && conversion.IsImplicit
+        public static IOperation UnwrapImplicitConversion(IOperation value) =>
+            value is IConversionOperation conversion && conversion.IsImplicit
                 ? conversion.Operand
                 : value;
 
-        public static bool HasRegularComments(ISyntaxFacts syntaxFacts, SyntaxNode syntax)
-            => HasRegularCommentTrivia(syntaxFacts, syntax.GetLeadingTrivia()) ||
-               HasRegularCommentTrivia(syntaxFacts, syntax.GetTrailingTrivia());
+        public static bool HasRegularComments(ISyntaxFacts syntaxFacts, SyntaxNode syntax) =>
+            HasRegularCommentTrivia(syntaxFacts, syntax.GetLeadingTrivia())
+            || HasRegularCommentTrivia(syntaxFacts, syntax.GetTrailingTrivia());
 
-        public static bool HasRegularCommentTrivia(ISyntaxFacts syntaxFacts, SyntaxTriviaList triviaList)
+        public static bool HasRegularCommentTrivia(
+            ISyntaxFacts syntaxFacts,
+            SyntaxTriviaList triviaList
+        )
         {
             foreach (var trivia in triviaList)
             {
@@ -78,8 +86,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         }
 
         public static bool HasInconvertibleThrowStatement(
-            ISyntaxFacts syntaxFacts, bool isRef,
-            IThrowOperation? trueThrow, IThrowOperation? falseThrow)
+            ISyntaxFacts syntaxFacts,
+            bool isRef,
+            IThrowOperation? trueThrow,
+            IThrowOperation? falseThrow
+        )
         {
             // Can't convert to `x ? throw ... : throw ...` as there's no best common type between the two (even when
             // throwing the same exception type).

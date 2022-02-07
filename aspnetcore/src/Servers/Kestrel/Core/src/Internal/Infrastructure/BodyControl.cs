@@ -12,8 +12,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 internal class BodyControl
 {
-    private static readonly ThrowingWasUpgradedWriteOnlyStream _throwingResponseStream
-        = new ThrowingWasUpgradedWriteOnlyStream();
+    private static readonly ThrowingWasUpgradedWriteOnlyStream _throwingResponseStream =
+        new ThrowingWasUpgradedWriteOnlyStream();
     private readonly HttpResponseStream _response;
     private readonly HttpResponsePipeWriter _responseWriter;
     private readonly HttpRequestPipeReader _requestReader;
@@ -46,7 +46,9 @@ internal class BodyControl
         return _upgradeStream;
     }
 
-    public (Stream request, Stream response, PipeReader reader, PipeWriter writer) Start(MessageBody body)
+    public (Stream request, Stream response, PipeReader reader, PipeWriter writer) Start(
+        MessageBody body
+    )
     {
         CanHaveBody = !body.IsEmpty;
         _requestReader.StartAcceptingReads(body);

@@ -37,12 +37,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
     internal class CSharpDecompiledSourceService : IDecompiledSourceService
     {
         private readonly HostLanguageServices provider;
-        private static readonly FileVersionInfo decompilerVersion = FileVersionInfo.GetVersionInfo(typeof(CSharpDecompiler).Assembly.Location);
+        private static readonly FileVersionInfo decompilerVersion = FileVersionInfo.GetVersionInfo(
+            typeof(CSharpDecompiler).Assembly.Location
+        );
 
-        public CSharpDecompiledSourceService(HostLanguageServices provider)
-            => this.provider = provider;
+        public CSharpDecompiledSourceService(HostLanguageServices provider) =>
+            this.provider = provider;
 
-        public async Task<Document> AddSourceToAsync(Document document, Compilation symbolCompilation, ISymbol symbol, CancellationToken cancellationToken)
+        public async Task<Document> AddSourceToAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             // Get the name of the type the symbol is in
             var containingOrThis = symbol.GetContainingTypeOrThis();
@@ -50,53 +57,91 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
 
             MetadataReference metadataReference = null;
             string assemblyLocation = null;
-            var isReferenceAssembly = symbol.ContainingAssembly.GetAttributes().Any(attribute => attribute.AttributeClass.Name == nameof(ReferenceAssemblyAttribute)
-                && attribute.AttributeClass.ToNameDisplayString() == typeof(ReferenceAssemblyAttribute).FullName);
+            var isReferenceAssembly = symbol.ContainingAssembly
+                .GetAttributes()
+                .Any(
+                    attribute =>
+                        attribute.AttributeClass.Name == nameof(ReferenceAssemblyAttribute)
+                        && attribute.AttributeClass.ToNameDisplayString()
+                            == typeof(ReferenceAssemblyAttribute).FullName
+                );
             if (isReferenceAssembly)
             {
                 try
                 {
                     var fullAssemblyName = symbol.ContainingAssembly.Identity.GetDisplayName();
-                    GlobalAssemblyCache.Instance.ResolvePartialName(fullAssemblyName, out assemblyLocation, preferredCulture: CultureInfo.CurrentCulture);
+                    GlobalAssemblyCache.Instance.ResolvePartialName(
+                        fullAssemblyName,
+                        out assemblyLocation,
+                        preferredCulture: CultureInfo.CurrentCulture
+                    );
                 }
-                catch (Exception e) when (FatalError.ReportAndCatch(e))
-                {
-                }
+                catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
             }
 
             if (assemblyLocation == null)
             {
-                metadataReference = symbolCompilation.GetMetadataReference(symbol.ContainingAssembly);
+                metadataReference = symbolCompilation.GetMetadataReference(
+                    symbol.ContainingAssembly
+                );
                 assemblyLocation = (metadataReference as PortableExecutableReference)?.FilePath;
             }
 
             // Decompile
-            document = PerformDecompilation(document, fullName, symbolCompilation, metadataReference, assemblyLocation);
+            document = PerformDecompilation(
+                document,
+                fullName,
+                symbolCompilation,
+                metadataReference,
+                assemblyLocation
+            );
 
-            document = await AddAssemblyInfoRegionAsync(document, symbol, cancellationToken).ConfigureAwait(false);
+            document = await AddAssemblyInfoRegionAsync(document, symbol, cancellationToken)
+                .ConfigureAwait(false);
 
             // Convert XML doc comments to regular comments, just like MAS
-            var docCommentFormattingService = document.GetLanguageService<IDocumentationCommentFormattingService>();
-            document = await ConvertDocCommentsToRegularCommentsAsync(document, docCommentFormattingService, cancellationToken).ConfigureAwait(false);
+            var docCommentFormattingService =
+                document.GetLanguageService<IDocumentationCommentFormattingService>();
+            document = await ConvertDocCommentsToRegularCommentsAsync(
+                    document,
+                    docCommentFormattingService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return await FormatDocumentAsync(document, cancellationToken).ConfigureAwait(false);
         }
 
-        public static async Task<Document> FormatDocumentAsync(Document document, CancellationToken cancellationToken)
+        public static async Task<Document> FormatDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var node = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             // Apply formatting rules
-            var formattedDoc = await Formatter.FormatAsync(
-                 document, SpecializedCollections.SingletonEnumerable(node.FullSpan),
-                 options: null,
-                 CSharpDecompiledSourceFormattingRule.Instance.Concat(Formatter.GetDefaultFormattingRules(document)),
-                 cancellationToken).ConfigureAwait(false);
+            var formattedDoc = await Formatter
+                .FormatAsync(
+                    document,
+                    SpecializedCollections.SingletonEnumerable(node.FullSpan),
+                    options: null,
+                    CSharpDecompiledSourceFormattingRule.Instance.Concat(
+                        Formatter.GetDefaultFormattingRules(document)
+                    ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return formattedDoc;
         }
 
-        private static Document PerformDecompilation(Document document, string fullName, Compilation compilation, MetadataReference metadataReference, string assemblyLocation)
+        private static Document PerformDecompilation(
+            Document document,
+            string fullName,
+            Compilation compilation,
+            MetadataReference metadataReference,
+            string assemblyLocation
+        )
         {
             var logger = new StringBuilder();
             var resolver = new AssemblyResolver(compilation, logger);
@@ -108,7 +153,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
 
             if (file is null && assemblyLocation is null)
             {
-                throw new NotSupportedException(EditorFeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret);
+                throw new NotSupportedException(
+                    EditorFeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret
+                );
             }
 
             file ??= new PEFile(assemblyLocation, PEStreamOptions.PrefetchEntireImage);
@@ -131,37 +178,65 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             return document.WithText(SourceText.From(text));
         }
 
-        private static async Task<Document> AddAssemblyInfoRegionAsync(Document document, ISymbol symbol, CancellationToken cancellationToken)
+        private static async Task<Document> AddAssemblyInfoRegionAsync(
+            Document document,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var assemblyInfo = MetadataAsSourceHelpers.GetAssemblyInfo(symbol.ContainingAssembly);
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(compilation, symbol.ContainingAssembly);
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(
+                compilation,
+                symbol.ContainingAssembly
+            );
 
-            var regionTrivia = SyntaxFactory.RegionDirectiveTrivia(true)
-                .WithTrailingTrivia(new[] { SyntaxFactory.Space, SyntaxFactory.PreprocessingMessage(assemblyInfo) });
+            var regionTrivia = SyntaxFactory
+                .RegionDirectiveTrivia(true)
+                .WithTrailingTrivia(
+                    new[] { SyntaxFactory.Space, SyntaxFactory.PreprocessingMessage(assemblyInfo) }
+                );
 
-            var oldRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var newRoot = oldRoot.WithLeadingTrivia(new[]
+            var oldRoot = await document
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var newRoot = oldRoot.WithLeadingTrivia(
+                new[]
                 {
                     SyntaxFactory.Trivia(regionTrivia),
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.Comment("// " + assemblyPath),
                     SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.Comment($"// Decompiled with ICSharpCode.Decompiler {decompilerVersion.FileVersion}"),
+                    SyntaxFactory.Comment(
+                        $"// Decompiled with ICSharpCode.Decompiler {decompilerVersion.FileVersion}"
+                    ),
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.Trivia(SyntaxFactory.EndRegionDirectiveTrivia(true)),
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.CarriageReturnLineFeed
-                });
+                }
+            );
 
             return document.WithSyntaxRoot(newRoot);
         }
 
-        private static async Task<Document> ConvertDocCommentsToRegularCommentsAsync(Document document, IDocumentationCommentFormattingService docCommentFormattingService, CancellationToken cancellationToken)
+        private static async Task<Document> ConvertDocCommentsToRegularCommentsAsync(
+            Document document,
+            IDocumentationCommentFormattingService docCommentFormattingService,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxRoot = await document
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var newSyntaxRoot = DocCommentConverter.ConvertToRegularComments(syntaxRoot, docCommentFormattingService, cancellationToken);
+            var newSyntaxRoot = DocCommentConverter.ConvertToRegularComments(
+                syntaxRoot,
+                docCommentFormattingService,
+                cancellationToken
+            );
 
             return document.WithSyntaxRoot(newSyntaxRoot);
         }
@@ -171,9 +246,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             var containingTypeStack = new Stack<string>();
             var containingNamespaceStack = new Stack<string>();
 
-            for (INamespaceOrTypeSymbol symbol = containingType;
+            for (
+                INamespaceOrTypeSymbol symbol = containingType;
                 symbol is not null and not INamespaceSymbol { IsGlobalNamespace: true };
-                symbol = (INamespaceOrTypeSymbol)symbol.ContainingType ?? symbol.ContainingNamespace)
+                symbol = (INamespaceOrTypeSymbol)symbol.ContainingType ?? symbol.ContainingNamespace
+            )
             {
                 if (symbol.ContainingType is not null)
                     containingTypeStack.Push(symbol.MetadataName);

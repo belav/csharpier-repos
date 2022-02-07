@@ -12,9 +12,9 @@ namespace Internal.NativeCrypto
     {
         private const int DSS_Q_LEN = 20;
 
-        internal const int DSS_MAGIC = 0x31535344;           // Encoding of "DSS1"
-        internal const int DSS_PRIVATE_MAGIC = 0x32535344;   // Encoding of "DSS2"
-        internal const int DSS_PUB_MAGIC_VER3 = 0x33535344;  // Encoding of "DSS3"
+        internal const int DSS_MAGIC = 0x31535344; // Encoding of "DSS1"
+        internal const int DSS_PRIVATE_MAGIC = 0x32535344; // Encoding of "DSS2"
+        internal const int DSS_PUB_MAGIC_VER3 = 0x33535344; // Encoding of "DSS3"
         internal const int DSS_PRIV_MAGIC_VER3 = 0x34535344; // Encoding of "DSS4"
 
         /// <summary>
@@ -24,7 +24,12 @@ namespace Internal.NativeCrypto
         {
             // Validate the DSA structure first
             // P and Q are required. Q is a 160 bit divisor of P-1.
-            if (dsaParameters.P == null || dsaParameters.P.Length == 0 || dsaParameters.Q == null || dsaParameters.Q.Length != DSS_Q_LEN)
+            if (
+                dsaParameters.P == null
+                || dsaParameters.P.Length == 0
+                || dsaParameters.Q == null
+                || dsaParameters.Q.Length != DSS_Q_LEN
+            )
                 throw GetBadDataException();
 
             // G is required. G is an element of Z_p
@@ -147,7 +152,11 @@ namespace Internal.NativeCrypto
         /// <summary>
         /// Helper for DSACryptoServiceProvider.ExportParameters()
         /// </summary>
-        internal static DSAParameters ToDSAParameters(this byte[] cspBlob, bool includePrivateParameters, byte[]? cspPublicBlob)
+        internal static DSAParameters ToDSAParameters(
+            this byte[] cspBlob,
+            bool includePrivateParameters,
+            byte[]? cspPublicBlob
+        )
         {
             try
             {
@@ -220,7 +229,7 @@ namespace Internal.NativeCrypto
                         //  DWORD           counter (DSSSEED)
                         //  BYTE[20]        seed (DSSSEED)
 
-                        br.ReadInt32();    // Expected to be DSS_MAGIC or DSS_PRIVATE_MAGIC
+                        br.ReadInt32(); // Expected to be DSS_MAGIC or DSS_PRIVATE_MAGIC
                         int len = (br.ReadInt32() + 7) / 8;
                         dsaParameters.P = br.ReadReversed(len);
                         dsaParameters.Q = br.ReadReversed(DSS_Q_LEN);
@@ -279,15 +288,20 @@ namespace Internal.NativeCrypto
             //  WORD   reserved
             //  ALG_ID aiKeyAlg
 
-            br.ReadByte();    // BLOBHEADER.bType: Expected to be 0x6 (PUBLICKEYBLOB) or 0x7 (PRIVATEKEYBLOB), though there's no check for backward compat reasons.
-            bVersion = br.ReadByte();      // BLOBHEADER.bVersion: Expected to be 0x2 or 0x3, though there's no check for backward compat reasons.
+            br.ReadByte(); // BLOBHEADER.bType: Expected to be 0x6 (PUBLICKEYBLOB) or 0x7 (PRIVATEKEYBLOB), though there's no check for backward compat reasons.
+            bVersion = br.ReadByte(); // BLOBHEADER.bVersion: Expected to be 0x2 or 0x3, though there's no check for backward compat reasons.
             br.BaseStream.Position += sizeof(ushort); // BLOBHEADER.wReserved
-            int algId = br.ReadInt32();    // BLOBHEADER.aiKeyAlg
+            int algId = br.ReadInt32(); // BLOBHEADER.aiKeyAlg
             if (algId != CALG_DSS_SIGN)
                 throw new PlatformNotSupportedException();
         }
 
-        private static void WriteKeyBlobHeader(DSAParameters dsaParameters, BinaryWriter bw, bool isPrivate, out bool isV3)
+        private static void WriteKeyBlobHeader(
+            DSAParameters dsaParameters,
+            BinaryWriter bw,
+            bool isPrivate,
+            out bool isV3
+        )
         {
             // Write out the BLOBHEADER (or PUBLICKEYSTRUC).
             isV3 = false;
@@ -295,17 +309,19 @@ namespace Internal.NativeCrypto
             // If Y is present and this is a private key,
             // or Y and J are present and this is a public key, this should be a v3 blob.
             byte version = BLOBHEADER_CURRENT_BVERSION;
-            if (((dsaParameters.Y != null) && isPrivate) ||
-                ((dsaParameters.Y != null) && (dsaParameters.J != null)))
+            if (
+                ((dsaParameters.Y != null) && isPrivate)
+                || ((dsaParameters.Y != null) && (dsaParameters.J != null))
+            )
             {
                 Debug.Assert(dsaParameters.Y.Length > 0);
                 isV3 = true;
                 version = 0x3;
             }
-            bw.Write((byte)(isPrivate ? PRIVATEKEYBLOB : PUBLICKEYBLOB));  // BLOBHEADER.bType
-            bw.Write((byte)version);                                       // BLOBHEADER.bVersion
-            bw.Write((ushort)0);                                           // BLOBHEADER.wReserved
-            bw.Write((int)CapiHelper.CALG_DSS_SIGN);                       // BLOBHEADER.aiKeyAlg
+            bw.Write((byte)(isPrivate ? PRIVATEKEYBLOB : PUBLICKEYBLOB)); // BLOBHEADER.bType
+            bw.Write((byte)version); // BLOBHEADER.bVersion
+            bw.Write((ushort)0); // BLOBHEADER.wReserved
+            bw.Write((int)CapiHelper.CALG_DSS_SIGN); // BLOBHEADER.aiKeyAlg
         }
 
         private static void ReadDSSSeed(DSAParameters dsaParameters, BinaryReader br, bool isV3)

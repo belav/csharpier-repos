@@ -31,10 +31,12 @@ public class Startup
 
         app.UseRouting();
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapRazorPages();
-            endpoints.MapFallbackToFile("/_Host");
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapFallbackToFile("/_Host");
+            }
+        );
     }
 }

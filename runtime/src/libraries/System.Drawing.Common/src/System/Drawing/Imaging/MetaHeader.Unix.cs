@@ -37,7 +37,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Imaging
 {
-
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
     internal struct WmfMetaHeader
     {
@@ -46,6 +45,7 @@ namespace System.Drawing.Imaging
         public short file_type;
         public short header_size;
         public short version;
+
         // this is unaligned and fails on the SPARC architecture (see bug #81254 for details)
         // public int file_size;
         public ushort file_size_low;
@@ -58,12 +58,9 @@ namespace System.Drawing.Imaging
     [StructLayout(LayoutKind.Sequential)]
     public sealed class MetaHeader
     {
-
         private WmfMetaHeader wmf;
 
-        public MetaHeader()
-        {
-        }
+        public MetaHeader() { }
 
         internal MetaHeader(WmfMetaHeader header)
         {
@@ -76,7 +73,6 @@ namespace System.Drawing.Imaging
             wmf.max_record_size = header.max_record_size;
             wmf.num_of_params = header.num_of_params;
         }
-
 
         public short HeaderSize
         {

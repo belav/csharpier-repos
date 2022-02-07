@@ -27,13 +27,16 @@ namespace Microsoft.EntityFrameworkCore
                             {
                                 car.Owner = context.CreateProxy<Person>();
                                 car.Id = Guid.NewGuid();
-                            }),
+                            }
+                        ),
                         context.CreateProxy<Car>(
                             car =>
                             {
                                 car.Owner = context.CreateProxy<Person>();
                                 car.Id = Guid.NewGuid();
-                            }));
+                            }
+                        )
+                    );
 
                     context.SaveChanges();
                 },
@@ -43,7 +46,7 @@ namespace Microsoft.EntityFrameworkCore
 
                     var owner0 = cars[0].Owner;
                     var owner1 = cars[1].Owner;
-                    
+
                     (cars[1].Owner, cars[0].Owner) = (cars[0].Owner, cars[1].Owner);
 
                     cars[0].Owner.Vehicle = cars[0];
@@ -59,10 +62,17 @@ namespace Microsoft.EntityFrameworkCore
                     }
                     else
                     {
-                        var message = Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message;
-                        Assert.StartsWith(CoreStrings.CircularDependency("").Substring(0, 30), message);
+                        var message =
+                            Assert.Throws<InvalidOperationException>(
+                                () => context.SaveChanges()
+                            ).Message;
+                        Assert.StartsWith(
+                            CoreStrings.CircularDependency("").Substring(0, 30),
+                            message
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -143,13 +153,16 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(root.Id, parent.RootId);
                     Assert.Null(parent.DependantId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(bool nullPrincipal)
+        public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(
+            bool nullPrincipal
+        )
         {
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -232,7 +245,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(root.Id, dependent.RootId);
                     Assert.Equal(root.Id, parent.RootId);
                     Assert.Null(parent.DependantId);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -297,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(dependent.BadCustomerId);
                     Assert.Null(dependent.BadCustomer);
                     Assert.Empty(principal.BadOrders);
-                });
+                }
+            );
         }
     }
 }

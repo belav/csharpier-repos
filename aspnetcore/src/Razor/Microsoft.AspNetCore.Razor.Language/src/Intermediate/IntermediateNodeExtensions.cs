@@ -9,11 +9,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public static class IntermediateNodeExtensions
 {
-    private static readonly IReadOnlyList<RazorDiagnostic> EmptyDiagnostics = Array.Empty<RazorDiagnostic>();
+    private static readonly IReadOnlyList<RazorDiagnostic> EmptyDiagnostics =
+        Array.Empty<RazorDiagnostic>();
 
     public static bool IsImported(this IntermediateNode node)
     {
-        return ReferenceEquals(node.Annotations[CommonAnnotations.Imported], CommonAnnotations.Imported);
+        return ReferenceEquals(
+            node.Annotations[CommonAnnotations.Imported],
+            CommonAnnotations.Imported
+        );
     }
 
     public static IReadOnlyList<RazorDiagnostic> GetAllDiagnostics(this IntermediateNode node)
@@ -27,7 +31,9 @@ public static class IntermediateNodeExtensions
 
         AddAllDiagnostics(node);
 
-        var allOrderedDiagnostics = diagnostics?.OrderBy(diagnostic => diagnostic.Span.AbsoluteIndex);
+        var allOrderedDiagnostics = diagnostics?.OrderBy(
+            diagnostic => diagnostic.Span.AbsoluteIndex
+        );
 
         return allOrderedDiagnostics?.ToList() ?? EmptyDiagnostics;
 

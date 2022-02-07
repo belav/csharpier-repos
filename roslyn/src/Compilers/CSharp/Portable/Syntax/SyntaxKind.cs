@@ -435,11 +435,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         ReferenceKeyword = 8481,
 
         /// <summary>Represents <c>$"</c> token.</summary>
-        InterpolatedStringStartToken = 8482,            // $"
+        InterpolatedStringStartToken = 8482, // $"
         /// <summary>Represents <c>"</c> token that is closing <c>$"</c>.</summary>
-        InterpolatedStringEndToken = 8483,              // "
+        InterpolatedStringEndToken = 8483, // "
         /// <summary>Represents <c>$@</c> or <c>@$</c> token.</summary>
-        InterpolatedVerbatimStringStartToken = 8484,    // $@" or @$"
+        InterpolatedVerbatimStringStartToken = 8484, // $@" or @$"
 
         // additional preprocessor keywords (continued)
         /// <summary>Represents <see langword="load"/>.</summary>
@@ -479,13 +479,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         NumericLiteralToken = 8509,
         CharacterLiteralToken = 8510,
         StringLiteralToken = 8511,
-        XmlEntityLiteralToken = 8512,  // &lt; &gt; &quot; &amp; &apos; or &name; or &#nnnn; or &#xhhhh;
-        XmlTextLiteralToken = 8513,    // xml text node text
+        XmlEntityLiteralToken = 8512, // &lt; &gt; &quot; &amp; &apos; or &name; or &#nnnn; or &#xhhhh;
+        XmlTextLiteralToken = 8513, // xml text node text
         XmlTextLiteralNewLineToken = 8514,
-
-        InterpolatedStringToken = 8515,                 // terminal for a whole interpolated string $" ... { expr } ..."
-                                                        // This only exists in transient form during parsing.
-        InterpolatedStringTextToken = 8517,             // literal text that is part of an interpolated string
+        InterpolatedStringToken = 8515, // terminal for a whole interpolated string $" ... { expr } ..."
+        // This only exists in transient form during parsing.
+        InterpolatedStringTextToken = 8517, // literal text that is part of an interpolated string
 
         // trivia
         EndOfLineTrivia = 8539,
@@ -606,9 +605,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         IsExpression = 8686,
         AsExpression = 8687,
         CoalesceExpression = 8688,
-        SimpleMemberAccessExpression = 8689,  // dot access:   a.b
-        PointerMemberAccessExpression = 8690,  // arrow access:   a->b
-        ConditionalAccessExpression = 8691,    // question mark access:   a?.b , a?[1]
+        SimpleMemberAccessExpression = 8689, // dot access:   a.b
+        PointerMemberAccessExpression = 8690, // arrow access:   a->b
+        ConditionalAccessExpression = 8691, // question mark access:   a?.b , a?[1]
 
         // binding expressions
         MemberBindingExpression = 8707,
@@ -700,7 +699,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         YieldReturnStatement = 8806,
         YieldBreakStatement = 8807,
         ThrowStatement = 8808,
-
         WhileStatement = 8809,
         DoStatement = 8810,
         ForStatement = 8811,
@@ -711,7 +709,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         // checked statements
         CheckedStatement = 8815,
         UncheckedStatement = 8816,
-
         UnsafeStatement = 8817,
         LockStatement = 8818,
         IfStatement = 8819,
@@ -751,7 +748,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         InterfaceDeclaration = 8857,
         EnumDeclaration = 8858,
         DelegateDeclaration = 8859,
-
         BaseList = 8864,
         SimpleBaseType = 8865,
         TypeParameterConstraintClause = 8866,
@@ -767,7 +763,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         OperatorDeclaration = 8876,
         ConversionOperatorDeclaration = 8877,
         ConstructorDeclaration = 8878,
-
         BaseConstructorInitializer = 8889,
         ThisConstructorInitializer = 8890,
         DestructorDeclaration = 8891,
@@ -791,7 +786,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         InterpolatedStringText = 8919,
         InterpolationAlignmentClause = 8920,
         InterpolationFormatClause = 8921,
-
         ShebangDirectiveTrivia = 8922,
         LoadDirectiveTrivia = 8923,
         // Changes after C# 6
@@ -838,27 +832,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         ImplicitStackAllocArrayCreationExpression = 9053,
         SuppressNullableWarningExpression = 9054,
         NullableDirectiveTrivia = 9055,
-
         FunctionPointerType = 9056,
         FunctionPointerParameter = 9057,
         FunctionPointerParameterList = 9058,
         FunctionPointerCallingConvention = 9059,
-
         InitAccessorDeclaration = 9060,
-
         WithExpression = 9061,
         WithInitializerExpression = 9062,
         RecordDeclaration = 9063,
-
         DefaultConstraint = 9064,
-
         PrimaryConstructorBaseType = 9065,
-
         FunctionPointerUnmanagedCallingConventionList = 9066,
         FunctionPointerUnmanagedCallingConvention = 9067,
-
         RecordStructDeclaration = 9068,
-
         ExpressionColon = 9069,
         LineDirectivePosition = 9070,
         LineSpanDirectiveTrivia = 9071,

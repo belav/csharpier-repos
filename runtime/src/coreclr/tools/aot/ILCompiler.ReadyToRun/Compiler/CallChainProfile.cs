@@ -48,9 +48,11 @@ namespace ILCompiler
         private Dictionary<string, int> _resolveFails = new Dictionary<string, int>();
 #endif
 
-        public CallChainProfile(string callChainProfileFile,
-                                CompilerTypeSystemContext context,
-                                IEnumerable<ModuleDesc> referenceableModules)
+        public CallChainProfile(
+            string callChainProfileFile,
+            CompilerTypeSystemContext context,
+            IEnumerable<ModuleDesc> referenceableModules
+        )
         {
             _referenceableModules = referenceableModules;
             var analysisData = ReadCallChainAnalysisData(callChainProfileFile);
@@ -60,15 +62,23 @@ namespace ILCompiler
         /// <summary>
         /// Try to resolve each name from the profile data to a MethodDesc
         /// </summary>
-        private Dictionary<MethodDesc, Dictionary<MethodDesc, int>> ResolveMethods(Dictionary<string, Dictionary<string, int>> profileData, CompilerTypeSystemContext context)
+        private Dictionary<MethodDesc, Dictionary<MethodDesc, int>> ResolveMethods(
+            Dictionary<string, Dictionary<string, int>> profileData,
+            CompilerTypeSystemContext context
+        )
         {
             var resolvedProfileData = new Dictionary<MethodDesc, Dictionary<MethodDesc, int>>();
-            Dictionary<string, MethodDesc> nameToMethodDescMap = new Dictionary<string, MethodDesc>();
+            Dictionary<string, MethodDesc> nameToMethodDescMap =
+                new Dictionary<string, MethodDesc>();
 
             foreach (var keyAndMethods in profileData)
             {
                 // Resolve the calling method
-                var resolvedKeyMethod = CachedResolveMethodName(nameToMethodDescMap, keyAndMethods.Key, context);
+                var resolvedKeyMethod = CachedResolveMethodName(
+                    nameToMethodDescMap,
+                    keyAndMethods.Key,
+                    context
+                );
 
                 if (resolvedKeyMethod == null)
                     continue;
@@ -76,27 +86,39 @@ namespace ILCompiler
                 // Resolve each callee and counts
                 foreach (var methodAndHitCount in keyAndMethods.Value)
                 {
-                    var resolvedCalledMethod = CachedResolveMethodName(nameToMethodDescMap ,methodAndHitCount.Key, context);
+                    var resolvedCalledMethod = CachedResolveMethodName(
+                        nameToMethodDescMap,
+                        methodAndHitCount.Key,
+                        context
+                    );
                     if (resolvedCalledMethod == null)
                         continue;
 
                     if (!resolvedProfileData.ContainsKey(resolvedKeyMethod))
                     {
-                        resolvedProfileData.Add(resolvedKeyMethod, new Dictionary<MethodDesc, int>());
+                        resolvedProfileData.Add(
+                            resolvedKeyMethod,
+                            new Dictionary<MethodDesc, int>()
+                        );
                     }
 
                     if (!resolvedProfileData[resolvedKeyMethod].ContainsKey(resolvedCalledMethod))
                     {
                         resolvedProfileData[resolvedKeyMethod].Add(resolvedCalledMethod, 0);
                     }
-                    resolvedProfileData[resolvedKeyMethod][resolvedCalledMethod] += methodAndHitCount.Value;
+                    resolvedProfileData[resolvedKeyMethod][resolvedCalledMethod] +=
+                        methodAndHitCount.Value;
                 }
             }
 
             return resolvedProfileData;
         }
 
-        private MethodDesc CachedResolveMethodName(Dictionary<string, MethodDesc> nameToMethodDescMap, string methodName, CompilerTypeSystemContext context)
+        private MethodDesc CachedResolveMethodName(
+            Dictionary<string, MethodDesc> nameToMethodDescMap,
+            string methodName,
+            CompilerTypeSystemContext context
+        )
         {
             MethodDesc resolvedMethod = null;
             if (nameToMethodDescMap.ContainsKey(methodName))
@@ -139,10 +161,12 @@ namespace ILCompiler
                 return null;
             }
 
-            if (splitMethodName[0].EndsWith(".dll") ||
-                splitMethodName[0].EndsWith(".ni.dll") ||
-                splitMethodName[0].EndsWith(".exe") ||
-                splitMethodName[0].EndsWith(".ni.exe"))
+            if (
+                splitMethodName[0].EndsWith(".dll")
+                || splitMethodName[0].EndsWith(".ni.dll")
+                || splitMethodName[0].EndsWith(".exe")
+                || splitMethodName[0].EndsWith(".ni.exe")
+            )
             {
                 // Native stack frame for the method name. This happens for managed methods in native images
                 // (Remember, this is .NET Framework data we're starting with)
@@ -164,12 +188,18 @@ namespace ILCompiler
 
                 if (unresolvedNamespaceTypeAndMethodName.EndsWith("..ctor"))
                 {
-                    namespaceAndTypeName = unresolvedNamespaceTypeAndMethodName.Substring(0, unresolvedNamespaceTypeAndMethodName.Length - "..ctor".Length);
+                    namespaceAndTypeName = unresolvedNamespaceTypeAndMethodName.Substring(
+                        0,
+                        unresolvedNamespaceTypeAndMethodName.Length - "..ctor".Length
+                    );
                     methodNameWithoutType = ".ctor";
                 }
                 else if (unresolvedNamespaceTypeAndMethodName.EndsWith("..cctor"))
                 {
-                    namespaceAndTypeName = unresolvedNamespaceTypeAndMethodName.Substring(0, unresolvedNamespaceTypeAndMethodName.Length - "..cctor".Length);
+                    namespaceAndTypeName = unresolvedNamespaceTypeAndMethodName.Substring(
+                        0,
+                        unresolvedNamespaceTypeAndMethodName.Length - "..cctor".Length
+                    );
                     methodNameWithoutType = ".cctor";
                 }
                 else
@@ -178,11 +208,22 @@ namespace ILCompiler
                     if (lastDotIndex < 0)
                         return null;
 
-                    namespaceAndTypeName = unresolvedNamespaceTypeAndMethodName.Substring(0, lastDotIndex);
-                    methodNameWithoutType = unresolvedNamespaceTypeAndMethodName.Length > lastDotIndex ? unresolvedNamespaceTypeAndMethodName.Substring(lastDotIndex + 1) : "";
+                    namespaceAndTypeName = unresolvedNamespaceTypeAndMethodName.Substring(
+                        0,
+                        lastDotIndex
+                    );
+                    methodNameWithoutType =
+                        unresolvedNamespaceTypeAndMethodName.Length > lastDotIndex
+                            ? unresolvedNamespaceTypeAndMethodName.Substring(lastDotIndex + 1)
+                            : "";
                 }
 
-                var resolvedMethod = ResolveMethodName(context, resolvedModule, namespaceAndTypeName, methodNameWithoutType);
+                var resolvedMethod = ResolveMethodName(
+                    context,
+                    resolvedModule,
+                    namespaceAndTypeName,
+                    methodNameWithoutType
+                );
                 if (resolvedMethod != null)
                 {
 #if DEBUG
@@ -190,7 +231,6 @@ namespace ILCompiler
 #endif
                     return resolvedMethod;
                 }
-                    
             }
             else
             {
@@ -200,10 +240,15 @@ namespace ILCompiler
                 // System.Runtime.CompilerServices.AsyncTaskMethodBuilder!Start
                 string namespaceAndTypeName = splitMethodName[0];
                 string methodNameWithoutType = splitMethodName[1];
-                
+
                 foreach (var module in _referenceableModules)
                 {
-                    var resolvedMethod = ResolveMethodName(context, module, namespaceAndTypeName, methodNameWithoutType);
+                    var resolvedMethod = ResolveMethodName(
+                        context,
+                        module,
+                        namespaceAndTypeName,
+                        methodNameWithoutType
+                    );
                     if (resolvedMethod != null)
                     {
 #if DEBUG
@@ -211,7 +256,6 @@ namespace ILCompiler
 #endif
                         return resolvedMethod;
                     }
-                        
                 }
             }
 
@@ -224,13 +268,26 @@ namespace ILCompiler
         /// but different signatures? For now we'll take the first matching and ignore others. Ideally we'll improve the profile data to include this.
         /// </summary>
         /// <returns>MethodDesc if found, null otherwise</returns>
-        private MethodDesc ResolveMethodName(CompilerTypeSystemContext context, ModuleDesc module, string namespaceAndTypeName, string methodName)
+        private MethodDesc ResolveMethodName(
+            CompilerTypeSystemContext context,
+            ModuleDesc module,
+            string namespaceAndTypeName,
+            string methodName
+        )
         {
-            TypeDesc resolvedType = module.GetTypeByCustomAttributeTypeName(namespaceAndTypeName, false, (typeDefName, module, throwIfNotFound) =>
-            {
-                return (MetadataType)context.GetCanonType(typeDefName)
-                    ?? CustomAttributeTypeNameParser.ResolveCustomAttributeTypeDefinitionName(typeDefName, module, throwIfNotFound);
-            });
+            TypeDesc resolvedType = module.GetTypeByCustomAttributeTypeName(
+                namespaceAndTypeName,
+                false,
+                (typeDefName, module, throwIfNotFound) =>
+                {
+                    return (MetadataType)context.GetCanonType(typeDefName)
+                        ?? CustomAttributeTypeNameParser.ResolveCustomAttributeTypeDefinitionName(
+                            typeDefName,
+                            module,
+                            throwIfNotFound
+                        );
+                }
+            );
 
             if (resolvedType != null)
             {
@@ -244,15 +301,18 @@ namespace ILCompiler
             return null;
         }
 
-        private Dictionary<string, Dictionary<string, int>> ReadCallChainAnalysisData(string jsonProfileFile)
+        private Dictionary<string, Dictionary<string, int>> ReadCallChainAnalysisData(
+            string jsonProfileFile
+        )
         {
-            Dictionary<string, Dictionary<string, int>> profileData = new Dictionary<string, Dictionary<string, int>>();
+            Dictionary<string, Dictionary<string, int>> profileData =
+                new Dictionary<string, Dictionary<string, int>>();
 
             using (StreamReader stream = File.OpenText(jsonProfileFile))
             using (JsonDocument document = JsonDocument.Parse(stream.BaseStream))
             {
                 JsonElement root = document.RootElement;
-                
+
                 foreach (JsonProperty methodAndCallees in root.EnumerateObject())
                 {
                     string keyParts = methodAndCallees.Name;
@@ -263,7 +323,9 @@ namespace ILCompiler
                         // This loop iterates twice: once for the callee method names, and again for a parallel list of call counts
                         if (readingMethodNames)
                         {
-                            foreach (JsonElement followingMethods in methodListArray.EnumerateArray())
+                            foreach (
+                                JsonElement followingMethods in methodListArray.EnumerateArray()
+                            )
                             {
                                 followingMethodList.Add(followingMethods.GetString());
                             }
@@ -285,11 +347,15 @@ namespace ILCompiler
                                 }
                                 if (!profileData[keyParts].ContainsKey(followingMethodList[index]))
                                 {
-                                    profileData[keyParts].Add(followingMethodList[index], methodCount.GetInt32());
+                                    profileData[keyParts].Add(
+                                        followingMethodList[index],
+                                        methodCount.GetInt32()
+                                    );
                                 }
                                 else
                                 {
-                                    profileData[keyParts][followingMethodList[index]] += methodCount.GetInt32();
+                                    profileData[keyParts][followingMethodList[index]] +=
+                                        methodCount.GetInt32();
                                 }
                                 index++;
                             }
@@ -315,15 +381,20 @@ namespace ILCompiler
 
                 foreach (var calledMethodAndCount in key.Value)
                 {
-                    Console.WriteLine($"\t{calledMethodAndCount.Key.ToString()} -> {calledMethodAndCount.Value} calls");
+                    Console.WriteLine(
+                        $"\t{calledMethodAndCount.Key.ToString()} -> {calledMethodAndCount.Value} calls"
+                    );
                 }
             }
 
             Console.WriteLine($"Method resolves attempted: {_methodResolvesAttempted}");
-            Console.WriteLine($"Successfully resolved {_methodsSuccessfullyResolved} methods ({(double)_methodsSuccessfullyResolved / (double)_methodResolvesAttempted:P})");
+            Console.WriteLine(
+                $"Successfully resolved {_methodsSuccessfullyResolved} methods ({(double)_methodsSuccessfullyResolved / (double)_methodResolvesAttempted:P})"
+            );
         }
 #endif
 
-        public IReadOnlyDictionary<MethodDesc, Dictionary<MethodDesc, int>> ResolvedProfileData => _resolvedProfileData;
+        public IReadOnlyDictionary<MethodDesc, Dictionary<MethodDesc, int>> ResolvedProfileData =>
+            _resolvedProfileData;
     }
 }

@@ -20,7 +20,16 @@ namespace System.Text.RegularExpressions
         public readonly RegexOptions Options;
         public readonly int MinRequiredLength;
 
-        internal RegexTree(RegexNode root, Hashtable caps, int[] capNumList, int capTop, Hashtable capNames, string[] capsList, RegexOptions options, int minRequiredLength)
+        internal RegexTree(
+            RegexNode root,
+            Hashtable caps,
+            int[] capNumList,
+            int capTop,
+            Hashtable capNames,
+            string[] capsList,
+            RegexOptions options,
+            int minRequiredLength
+        )
         {
             Root = root;
             Caps = caps;

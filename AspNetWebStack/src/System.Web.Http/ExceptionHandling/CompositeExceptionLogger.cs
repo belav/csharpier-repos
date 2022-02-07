@@ -15,9 +15,7 @@ namespace System.Web.Http.ExceptionHandling
         private readonly IExceptionLogger[] _loggers;
 
         public CompositeExceptionLogger(params IExceptionLogger[] loggers)
-            : this((IEnumerable<IExceptionLogger>)loggers)
-        {
-        }
+            : this((IEnumerable<IExceptionLogger>)loggers) { }
 
         public CompositeExceptionLogger(IEnumerable<IExceptionLogger> loggers)
         {
@@ -44,8 +42,12 @@ namespace System.Web.Http.ExceptionHandling
             {
                 if (logger == null)
                 {
-                    throw new InvalidOperationException(Error.Format(SRResources.TypeInstanceMustNotBeNull,
-                        typeof(IExceptionLogger).Name));
+                    throw new InvalidOperationException(
+                        Error.Format(
+                            SRResources.TypeInstanceMustNotBeNull,
+                            typeof(IExceptionLogger).Name
+                        )
+                    );
                 }
 
                 Task task = logger.LogAsync(context, cancellationToken);

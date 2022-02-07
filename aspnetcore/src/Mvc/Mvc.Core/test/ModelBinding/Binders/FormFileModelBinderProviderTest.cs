@@ -48,7 +48,5 @@ public class FormFileModelBinderProviderTest
         Assert.IsType<FormFileModelBinder>(result);
     }
 
-    private class TestClass
-    {
-    }
+    private class TestClass { }
 }

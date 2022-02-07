@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             IEnumerable<IDatabaseProvider> databaseProviders,
             IDiagnosticsLogger<DbLoggerCategory.Database.Command> commandLogger,
             IConcurrencyDetector concurrencyDetector,
-            ICoreSingletonOptions coreOptions)
+            ICoreSingletonOptions coreOptions
+        )
         {
             TransactionManager = transactionManager;
             DatabaseCreator = databaseCreator;

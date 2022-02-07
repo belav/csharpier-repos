@@ -21,7 +21,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// An empty collection means any host will be accepted.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public static TBuilder RequireHost<TBuilder>(this TBuilder builder, params string[] hosts) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireHost<TBuilder>(this TBuilder builder, params string[] hosts)
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -33,10 +34,12 @@ public static class RoutingEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(hosts));
         }
 
-        builder.Add(endpointBuilder =>
-        {
-            endpointBuilder.Metadata.Add(new HostAttribute(hosts));
-        });
+        builder.Add(
+            endpointBuilder =>
+            {
+                endpointBuilder.Metadata.Add(new HostAttribute(hosts));
+            }
+        );
         return builder;
     }
 
@@ -47,17 +50,20 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="displayName">The display name.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithDisplayName<TBuilder>(this TBuilder builder, string displayName) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithDisplayName<TBuilder>(this TBuilder builder, string displayName)
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Add(b =>
-        {
-            b.DisplayName = displayName;
-        });
+        builder.Add(
+            b =>
+            {
+                b.DisplayName = displayName;
+            }
+        );
 
         return builder;
     }
@@ -69,7 +75,10 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="func">A delegate that produces the display name for each <see cref="EndpointBuilder"/>.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithDisplayName<TBuilder>(this TBuilder builder, Func<EndpointBuilder, string> func) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithDisplayName<TBuilder>(
+        this TBuilder builder,
+        Func<EndpointBuilder, string> func
+    ) where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -81,10 +90,12 @@ public static class RoutingEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(func));
         }
 
-        builder.Add(b =>
-        {
-            b.DisplayName = func(b);
-        });
+        builder.Add(
+            b =>
+            {
+                b.DisplayName = func(b);
+            }
+        );
 
         return builder;
     }
@@ -96,7 +107,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="items">A collection of metadata items.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithMetadata<TBuilder>(this TBuilder builder, params object[] items) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithMetadata<TBuilder>(this TBuilder builder, params object[] items)
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -108,13 +120,15 @@ public static class RoutingEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(items));
         }
 
-        builder.Add(b =>
-        {
-            foreach (var item in items)
+        builder.Add(
+            b =>
             {
-                b.Metadata.Add(item);
+                foreach (var item in items)
+                {
+                    b.Metadata.Add(item);
+                }
             }
-        });
+        );
 
         return builder;
     }
@@ -128,9 +142,13 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="endpointName">The endpoint name.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithName<TBuilder>(this TBuilder builder, string endpointName) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithName<TBuilder>(this TBuilder builder, string endpointName)
+        where TBuilder : IEndpointConventionBuilder
     {
-        builder.WithMetadata(new EndpointNameMetadata(endpointName), new RouteNameMetadata(endpointName));
+        builder.WithMetadata(
+            new EndpointNameMetadata(endpointName),
+            new RouteNameMetadata(endpointName)
+        );
         return builder;
     }
 
@@ -143,7 +161,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="endpointGroupName">The endpoint group name.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithGroupName<TBuilder>(this TBuilder builder, string endpointGroupName) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithGroupName<TBuilder>(this TBuilder builder, string endpointGroupName)
+        where TBuilder : IEndpointConventionBuilder
     {
         builder.WithMetadata(new EndpointGroupNameAttribute(endpointGroupName));
         return builder;

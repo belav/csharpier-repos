@@ -9,11 +9,15 @@ internal static partial class Interop
 {
     internal static partial class Crypto
     {
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509ExtensionCreateByObj")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_X509ExtensionCreateByObj"
+        )]
         internal static partial SafeX509ExtensionHandle X509ExtensionCreateByObj(
             SafeAsn1ObjectHandle oid,
             [MarshalAs(UnmanagedType.Bool)] bool isCritical,
-            SafeAsn1OctetStringHandle data);
+            SafeAsn1OctetStringHandle data
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509ExtensionDestroy")]
         internal static extern int X509ExtensionDestroy(IntPtr x);
@@ -22,16 +26,23 @@ internal static partial class Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool X509V3ExtPrint(SafeBioHandle buf, SafeX509ExtensionHandle ext);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DecodeX509BasicConstraints2Extension")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_DecodeX509BasicConstraints2Extension"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool DecodeX509BasicConstraints2Extension(
             byte[] encoded,
             int encodedLength,
             [MarshalAs(UnmanagedType.Bool)] out bool certificateAuthority,
             [MarshalAs(UnmanagedType.Bool)] out bool hasPathLengthConstraint,
-            out int pathLengthConstraint);
+            out int pathLengthConstraint
+        );
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DecodeExtendedKeyUsage")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_DecodeExtendedKeyUsage"
+        )]
         internal static partial SafeEkuExtensionHandle DecodeExtendedKeyUsage(byte[] buf, int len);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ExtendedKeyUsageDestory")]

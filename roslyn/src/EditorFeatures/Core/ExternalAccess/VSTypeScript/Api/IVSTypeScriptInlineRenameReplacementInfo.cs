@@ -7,7 +7,6 @@
 using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
-
 {
     internal interface IVSTypeScriptInlineRenameReplacementInfo
     {
@@ -29,6 +28,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         /// <summary>
         /// Returns all the replacements that need to be performed for the specified document.
         /// </summary>
-        IEnumerable<VSTypeScriptInlineRenameReplacementWrapper> GetReplacements(DocumentId documentId);
+        IEnumerable<VSTypeScriptInlineRenameReplacementWrapper> GetReplacements(
+            DocumentId documentId
+        );
     }
 }

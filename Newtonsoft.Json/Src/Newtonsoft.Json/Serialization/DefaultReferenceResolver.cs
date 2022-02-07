@@ -43,7 +43,9 @@ namespace Newtonsoft.Json.Serialization
                 }
                 else
                 {
-                    throw new JsonException("The DefaultReferenceResolver can only be used internally.");
+                    throw new JsonException(
+                        "The DefaultReferenceResolver can only be used internally."
+                    );
                 }
             }
 

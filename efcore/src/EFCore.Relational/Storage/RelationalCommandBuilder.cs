@@ -34,8 +34,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     </para>
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-        public RelationalCommandBuilder(
-            RelationalCommandBuilderDependencies dependencies)
+        public RelationalCommandBuilder(RelationalCommandBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
@@ -48,27 +47,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     The source for <see cref="RelationalTypeMapping" />s to use.
         /// </summary>
-        public virtual IRelationalTypeMappingSource TypeMappingSource
-            => Dependencies.TypeMappingSource;
+        public virtual IRelationalTypeMappingSource TypeMappingSource =>
+            Dependencies.TypeMappingSource;
 
         /// <summary>
         ///     Creates the command.
         /// </summary>
         /// <returns>The newly created command.</returns>
-        public virtual IRelationalCommand Build()
-            => new RelationalCommand(Dependencies, _commandTextBuilder.ToString(), Parameters);
+        public virtual IRelationalCommand Build() =>
+            new RelationalCommand(Dependencies, _commandTextBuilder.ToString(), Parameters);
 
         /// <summary>
         ///     Gets the command text.
         /// </summary>
-        public override string ToString()
-            => _commandTextBuilder.ToString();
+        public override string ToString() => _commandTextBuilder.ToString();
 
         /// <summary>
         ///     The collection of parameters.
         /// </summary>
-        public virtual IReadOnlyList<IRelationalParameter> Parameters
-            => _parameters;
+        public virtual IReadOnlyList<IRelationalParameter> Parameters => _parameters;
 
         /// <summary>
         ///     Adds the given parameter to this command.
@@ -130,7 +127,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Gets the length of the command text.
         /// </summary>
-        public virtual int CommandTextLength
-            => _commandTextBuilder.Length;
+        public virtual int CommandTextLength => _commandTextBuilder.Length;
     }
 }

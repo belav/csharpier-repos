@@ -24,29 +24,31 @@ public class Startup
     {
         app.UseResponseCompression();
 
-        app.UseFileServer(new FileServerOptions
-        {
-            EnableDirectoryBrowsing = true
-        });
+        app.UseFileServer(new FileServerOptions { EnableDirectoryBrowsing = true });
     }
 
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .ConfigureLogging(factory =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    factory.AddFilter("Console", level => level >= LogLevel.Debug);
-                    factory.AddConsole();
-                })
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseKestrel()
-                // .UseHttpSys()
-                .UseIISIntegration()
-                .UseStartup<Startup>();
-            }).Build();
+                    webHostBuilder
+                        .ConfigureLogging(
+                            factory =>
+                            {
+                                factory.AddFilter("Console", level => level >= LogLevel.Debug);
+                                factory.AddConsole();
+                            }
+                        )
+                        .UseContentRoot(Directory.GetCurrentDirectory())
+                        .UseKestrel()
+                        // .UseHttpSys()
+                        .UseIISIntegration()
+                        .UseStartup<Startup>();
+                }
+            )
+            .Build();
 
         return host.RunAsync();
     }

@@ -13,13 +13,18 @@ public class FormatterMappingsTest
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public void FormatterMappings_GetMediaTypeMappingForFormat_ThrowsForInvalidFormats(string format)
+    public void FormatterMappings_GetMediaTypeMappingForFormat_ThrowsForInvalidFormats(
+        string format
+    )
     {
         // Arrange
         var options = new FormatterMappings();
 
         // Act & Assert
-        Assert.Throws<ArgumentException>("format", () => options.GetMediaTypeMappingForFormat(format));
+        Assert.Throws<ArgumentException>(
+            "format",
+            () => options.GetMediaTypeMappingForFormat(format)
+        );
     }
 
     [Theory]
@@ -28,7 +33,11 @@ public class FormatterMappingsTest
     [InlineData(".foo", "text/foo", "Foo")]
     [InlineData(".Json", "application/json", "json")]
     [InlineData("FOo", "text/foo", "FOO")]
-    public void FormatterMappings_SetFormatMapping_DiffSetGetFormat(string setFormat, string contentType, string getFormat)
+    public void FormatterMappings_SetFormatMapping_DiffSetGetFormat(
+        string setFormat,
+        string contentType,
+        string getFormat
+    )
     {
         // Arrange
         var options = new FormatterMappings();
@@ -47,16 +56,20 @@ public class FormatterMappingsTest
         // Arrange
         var options = new FormatterMappings();
         var format = ".";
-        var expected = $"The format provided is invalid '{format}'. A format must be a non-empty file-" +
-            "extension, optionally prefixed with a '.' character.";
+        var expected =
+            $"The format provided is invalid '{format}'. A format must be a non-empty file-"
+            + "extension, optionally prefixed with a '.' character.";
 
         // Act and assert
         ExceptionAssert.ThrowsArgument(
-            () => options.SetMediaTypeMappingForFormat(
-                format,
-                MediaTypeHeaderValue.Parse("application/xml")),
+            () =>
+                options.SetMediaTypeMappingForFormat(
+                    format,
+                    MediaTypeHeaderValue.Parse("application/xml")
+                ),
             "format",
-            expected);
+            expected
+        );
     }
 
     [Fact]
@@ -68,10 +81,13 @@ public class FormatterMappingsTest
 
         // Act and Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
-            () => options.SetMediaTypeMappingForFormat(
-                format,
-                MediaTypeHeaderValue.Parse("application/xml")),
-            "format");
+            () =>
+                options.SetMediaTypeMappingForFormat(
+                    format,
+                    MediaTypeHeaderValue.Parse("application/xml")
+                ),
+            "format"
+        );
     }
 
     [Theory]
@@ -82,16 +98,16 @@ public class FormatterMappingsTest
     {
         // Arrange
         var options = new FormatterMappings();
-        var expected = $@"The media type ""{format}"" is not valid. MediaTypes containing wildcards (*) " +
-            "are not allowed in formatter mappings.";
+        var expected =
+            $@"The media type ""{format}"" is not valid. MediaTypes containing wildcards (*) "
+            + "are not allowed in formatter mappings.";
 
         // Act and assert
         ExceptionAssert.ThrowsArgument(
-            () => options.SetMediaTypeMappingForFormat(
-                "star",
-                MediaTypeHeaderValue.Parse(format)),
+            () => options.SetMediaTypeMappingForFormat("star", MediaTypeHeaderValue.Parse(format)),
             "contentType",
-            expected);
+            expected
+        );
     }
 
     [Theory]

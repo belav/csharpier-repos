@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         [EntityFrameworkInternal]
         public UpdateSqlGeneratorDependencies(
             ISqlGenerationHelper sqlGenerationHelper,
-            IRelationalTypeMappingSource typeMappingSource)
+            IRelationalTypeMappingSource typeMappingSource
+        )
         {
             SqlGenerationHelper = sqlGenerationHelper;
             TypeMappingSource = typeMappingSource;

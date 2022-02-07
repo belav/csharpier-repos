@@ -28,7 +28,11 @@ public class AnalysisMiddleware
     /// The name of the next middleware in the pipeline. This name is typically retrieved from <see cref="Builder.IApplicationBuilder.Properties"/>
     /// using the "analysis.NextMiddlewareName" key.
     /// </param>
-    public AnalysisMiddleware(RequestDelegate next, DiagnosticSource diagnosticSource, string middlewareName)
+    public AnalysisMiddleware(
+        RequestDelegate next,
+        DiagnosticSource diagnosticSource,
+        string middlewareName
+    )
     {
         _next = next;
         _diagnostics = diagnosticSource;
@@ -56,14 +60,17 @@ public class AnalysisMiddleware
                     httpContext = httpContext,
                     instanceId = _instanceId,
                     timestamp = startTimestamp,
-                });
+                }
+            );
         }
 
         try
         {
             await _next(httpContext);
 
-            if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished"))
+            if (
+                _diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished")
+            )
             {
                 var currentTimestamp = Stopwatch.GetTimestamp();
                 _diagnostics.Write(
@@ -75,12 +82,17 @@ public class AnalysisMiddleware
                         instanceId = _instanceId,
                         timestamp = currentTimestamp,
                         duration = currentTimestamp - startTimestamp,
-                    });
+                    }
+                );
             }
         }
         catch (Exception ex)
         {
-            if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException"))
+            if (
+                _diagnostics.IsEnabled(
+                    "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException"
+                )
+            )
             {
                 var currentTimestamp = Stopwatch.GetTimestamp();
                 _diagnostics.Write(
@@ -93,7 +105,8 @@ public class AnalysisMiddleware
                         timestamp = currentTimestamp,
                         duration = currentTimestamp - startTimestamp,
                         exception = ex,
-                    });
+                    }
+                );
             }
             throw;
         }

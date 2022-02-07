@@ -22,9 +22,9 @@ internal sealed partial class RazorDirectiveSyntax
     public RazorDirectiveSyntax WithDirectiveDescriptor(DirectiveDescriptor descriptor)
     {
         var annotations = new List<SyntaxAnnotation>(GetAnnotations())
-            {
-                new SyntaxAnnotation(DirectiveDescriptorKey, descriptor)
-            };
+        {
+            new SyntaxAnnotation(DirectiveDescriptorKey, descriptor)
+        };
 
         var newGreen = this.WithAnnotationsGreen(annotations.ToArray());
 

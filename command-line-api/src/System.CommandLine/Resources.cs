@@ -12,28 +12,51 @@ namespace System.CommandLine
     {
         public static Resources Instance { get; } = new Resources();
 
-        protected Resources()
-        {
-        }
+        protected Resources() { }
 
-        public virtual string ExpectsOneArgument(SymbolResult symbolResult) => 
+        public virtual string ExpectsOneArgument(SymbolResult symbolResult) =>
             symbolResult is CommandResult
-                    ? GetResourceString(Properties.Resources.CommandExpectsOneArgument, symbolResult.Token().Value, symbolResult.Tokens.Count)
-                    : GetResourceString(Properties.Resources.OptionExpectsOneArgument, symbolResult.Token().Value, symbolResult.Tokens.Count);
+                ? GetResourceString(
+                      Properties.Resources.CommandExpectsOneArgument,
+                      symbolResult.Token().Value,
+                      symbolResult.Tokens.Count
+                  )
+                : GetResourceString(
+                      Properties.Resources.OptionExpectsOneArgument,
+                      symbolResult.Token().Value,
+                      symbolResult.Tokens.Count
+                  );
 
         public virtual string NoArgumentProvided(SymbolResult symbolResult) =>
             symbolResult is CommandResult
-                ? GetResourceString(Properties.Resources.CommandNoArgumentProvided, symbolResult.Token().Value)
-                : GetResourceString(Properties.Resources.OptionNoArgumentProvided, symbolResult.Token().Value);
+                ? GetResourceString(
+                      Properties.Resources.CommandNoArgumentProvided,
+                      symbolResult.Token().Value
+                  )
+                : GetResourceString(
+                      Properties.Resources.OptionNoArgumentProvided,
+                      symbolResult.Token().Value
+                  );
 
         public virtual string ExpectsFewerArguments(
             Token token,
             int providedNumberOfValues,
-            int maximumNumberOfValues) =>
+            int maximumNumberOfValues
+        ) =>
             token.Type == TokenType.Command
-                ? GetResourceString(Properties.Resources.CommandExpectsFewerArguments, token, maximumNumberOfValues, providedNumberOfValues)
-                : GetResourceString(Properties.Resources.OptionExpectsFewerArguments, token, maximumNumberOfValues, providedNumberOfValues);
-                
+                ? GetResourceString(
+                      Properties.Resources.CommandExpectsFewerArguments,
+                      token,
+                      maximumNumberOfValues,
+                      providedNumberOfValues
+                  )
+                : GetResourceString(
+                      Properties.Resources.OptionExpectsFewerArguments,
+                      token,
+                      maximumNumberOfValues,
+                      providedNumberOfValues
+                  );
+
         public virtual string DirectoryDoesNotExist(string path) =>
             GetResourceString(Properties.Resources.DirectoryDoesNotExist, path);
 
@@ -51,14 +74,27 @@ namespace System.CommandLine
 
         public virtual string RequiredArgumentMissing(SymbolResult symbolResult) =>
             symbolResult is CommandResult
-                ? GetResourceString(Properties.Resources.CommandRequiredArgumentMissing, symbolResult.Token().Value)
-                : GetResourceString(Properties.Resources.OptionRequiredArgumentMissing, symbolResult.Token().Value);
+                ? GetResourceString(
+                      Properties.Resources.CommandRequiredArgumentMissing,
+                      symbolResult.Token().Value
+                  )
+                : GetResourceString(
+                      Properties.Resources.OptionRequiredArgumentMissing,
+                      symbolResult.Token().Value
+                  );
 
         public virtual string RequiredCommandWasNotProvided() =>
             GetResourceString(Properties.Resources.RequiredCommandWasNotProvided);
 
-        public virtual string UnrecognizedArgument(string unrecognizedArg, IReadOnlyCollection<string> allowedValues) =>
-            GetResourceString(Properties.Resources.UnrecognizedArgument, unrecognizedArg,$"\n\t{string.Join("\n\t", allowedValues.Select(v => $"'{v}'"))}");
+        public virtual string UnrecognizedArgument(
+            string unrecognizedArg,
+            IReadOnlyCollection<string> allowedValues
+        ) =>
+            GetResourceString(
+                Properties.Resources.UnrecognizedArgument,
+                unrecognizedArg,
+                $"\n\t{string.Join("\n\t", allowedValues.Select(v => $"'{v}'"))}"
+            );
 
         public virtual string UnrecognizedCommandOrArgument(string arg) =>
             GetResourceString(Properties.Resources.UnrecognizedCommandOrArgument, arg);
@@ -105,7 +141,10 @@ namespace System.CommandLine
         public virtual string HelpAdditionalArgumentsDescription() =>
             GetResourceString(Properties.Resources.HelpAdditionalArgumentsDescription);
 
-        protected virtual string GetResourceString(string resourceString, params object[] formatArguments)
+        protected virtual string GetResourceString(
+            string resourceString,
+            params object[] formatArguments
+        )
         {
             if (resourceString is null)
             {

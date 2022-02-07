@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public struct AA
 {
     public static void f()
@@ -16,22 +17,16 @@ public struct AA
                     break;
                 else
                 {
-                    if (a)
-                    {
-                    }
+                    if (a) { }
                 }
             }
             a = false;
-            do
-            {
-            }
-            while (a);
+            do { } while (a);
 
             // stop the loop
             App.flag = false;
         }
     }
-
 }
 
 class App
@@ -49,5 +44,6 @@ class App
         Console.WriteLine("Passed.");
         return 100;
     }
+
     public static bool flag = true;
 }

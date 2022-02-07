@@ -15,10 +15,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         protected internal int this[int x]
         {
-            set
-            {
-                Test.Status = 0;
-            }
+            set { Test.Status = 0; }
         }
     }
 
@@ -41,8 +38,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Oneclass.Oneparam.errorverifier.errorverifier
 {
@@ -235,6 +230,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         private static Assembly s_asm;
         private static ResourceManager s_rm1;
         private static ResourceManager s_rm2;
+
         public static string GetErrorElement(ErrorElementId id)
         {
             return string.Empty;
@@ -250,7 +246,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             return true;
         }
 
-        private static bool CompareMessages(ResourceManager rm, string id, string actualError, params string[] args)
+        private static bool CompareMessages(
+            ResourceManager rm,
+            string id,
+            string actualError,
+            params string[] args
+        )
         {
             // should not happen
             if (null == rm)
@@ -271,15 +272,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             // debug
             if (!ret)
             {
-                System.Console.WriteLine("*** Expected= {0}\r\n***   Actual= {1}", message, actualError);
+                System.Console.WriteLine(
+                    "*** Expected= {0}\r\n***   Actual= {1}",
+                    message,
+                    actualError
+                );
             }
 
             return ret;
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Oneclass.Oneparam.param012.param012
 {
@@ -301,15 +304,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[params int[] x]
         {
-            set
-            {
-            }
+            set { }
         }
     }
 
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -326,7 +328,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "Foo.this[params int[]]"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "Foo.this[params int[]]"
+                    )
+                )
                     return 0;
             }
 
@@ -335,8 +343,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Oneclass.Oneparam.param014.param014
 {
@@ -357,9 +363,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[params int[] x]
         {
-            set
-            {
-            }
+            set { }
         }
     }
 
@@ -382,7 +386,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "Foo.this[params int[]]"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "Foo.this[params int[]]"
+                    )
+                )
                     return 0;
             }
 

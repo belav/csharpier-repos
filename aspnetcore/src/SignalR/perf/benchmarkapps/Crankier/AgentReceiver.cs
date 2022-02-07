@@ -22,42 +22,49 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         public void Start()
         {
-            Task.Run(async () =>
-            {
-                var messageString = await _reader.ReadLineAsync();
-                while (messageString != null)
+            Task.Run(
+                async () =>
                 {
-                    try
+                    var messageString = await _reader.ReadLineAsync();
+                    while (messageString != null)
                     {
-                        var message = JsonConvert.DeserializeObject<Message>(messageString);
-
-                        switch (message.Command.ToLowerInvariant())
+                        try
                         {
-                            case "pong":
-                                await _agent.PongAsync(
-                                    message.Value["Id"].ToObject<int>(),
-                                    message.Value["Value"].ToObject<int>());
-                                break;
-                            case "log":
-                                await _agent.LogAsync(
-                                    message.Value["Id"].ToObject<int>(),
-                                    message.Value["Text"].ToObject<string>());
-                                break;
-                            case "status":
-                                await _agent.StatusAsync(
-                                    message.Value["Id"].ToObject<int>(),
-                                    message.Value["StatusInformation"].ToObject<StatusInformation>());
-                                break;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Trace.WriteLine($"Error parsing '{messageString}': {ex.Message}");
-                    }
+                            var message = JsonConvert.DeserializeObject<Message>(messageString);
 
-                    messageString = await _reader.ReadLineAsync();
+                            switch (message.Command.ToLowerInvariant())
+                            {
+                                case "pong":
+                                    await _agent.PongAsync(
+                                        message.Value["Id"].ToObject<int>(),
+                                        message.Value["Value"].ToObject<int>()
+                                    );
+                                    break;
+                                case "log":
+                                    await _agent.LogAsync(
+                                        message.Value["Id"].ToObject<int>(),
+                                        message.Value["Text"].ToObject<string>()
+                                    );
+                                    break;
+                                case "status":
+                                    await _agent.StatusAsync(
+                                        message.Value["Id"].ToObject<int>(),
+                                        message.Value[
+                                            "StatusInformation"
+                                        ].ToObject<StatusInformation>()
+                                    );
+                                    break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Trace.WriteLine($"Error parsing '{messageString}': {ex.Message}");
+                        }
+
+                        messageString = await _reader.ReadLineAsync();
+                    }
                 }
-            });
+            );
         }
     }
 }

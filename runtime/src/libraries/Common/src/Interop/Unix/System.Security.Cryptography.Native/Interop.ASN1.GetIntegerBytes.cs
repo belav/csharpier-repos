@@ -11,7 +11,10 @@ internal static partial class Interop
 {
     internal static partial class Crypto
     {
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetAsn1IntegerDerSize")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_GetAsn1IntegerDerSize"
+        )]
         private static partial int GetAsn1IntegerDerSize(SafeSharedAsn1IntegerHandle i);
 
         [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EncodeAsn1Integer")]
@@ -33,14 +36,14 @@ internal static partial class Interop
             byte[] derEncoded = OpenSslEncode(
                 handle => GetAsn1IntegerDerSize(handle),
                 (handle, buf) => EncodeAsn1Integer(handle, buf),
-                asn1Integer);
+                asn1Integer
+            );
 
             try
             {
-                return AsnDecoder.ReadIntegerBytes(
-                    derEncoded,
-                    AsnEncodingRules.DER,
-                    out _).ToArray();
+                return AsnDecoder
+                    .ReadIntegerBytes(derEncoded, AsnEncodingRules.DER, out _)
+                    .ToArray();
             }
             catch (AsnContentException e)
             {

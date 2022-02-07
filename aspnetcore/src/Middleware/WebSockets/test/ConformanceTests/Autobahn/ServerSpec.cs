@@ -16,9 +16,10 @@ public class ServerSpec
         Url = url;
     }
 
-    public JObject GetJson() => new JObject(
-        new JProperty("agent", Name),
-        new JProperty("url", Url),
-        new JProperty("options", new JObject(
-            new JProperty("version", 18))));
+    public JObject GetJson() =>
+        new JObject(
+            new JProperty("agent", Name),
+            new JProperty("url", Url),
+            new JProperty("options", new JObject(new JProperty("version", 18)))
+        );
 }

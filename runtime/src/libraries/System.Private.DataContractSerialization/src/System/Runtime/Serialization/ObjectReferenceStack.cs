@@ -5,7 +5,6 @@ using System;
 using System.Xml;
 using System.Collections.Generic;
 
-
 namespace System.Runtime.Serialization
 {
     internal struct ObjectReferenceStack
@@ -95,7 +94,11 @@ namespace System.Runtime.Serialization
             }
             for (int i = (currentCount - 1); i >= 0; i--)
             {
-                if (object.ReferenceEquals(obj, _objectArray![i]) && _isReferenceArray != null && !_isReferenceArray[i])
+                if (
+                    object.ReferenceEquals(obj, _objectArray![i])
+                    && _isReferenceArray != null
+                    && !_isReferenceArray[i]
+                )
                     return true;
             }
             return false;

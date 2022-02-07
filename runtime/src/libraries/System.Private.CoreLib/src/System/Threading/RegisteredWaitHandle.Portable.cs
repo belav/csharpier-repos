@@ -13,8 +13,12 @@ namespace System.Threading
     [UnsupportedOSPlatform("browser")]
     public sealed partial class RegisteredWaitHandle : MarshalByRefObject
     {
-        internal RegisteredWaitHandle(WaitHandle waitHandle, _ThreadPoolWaitOrTimerCallback callbackHelper,
-            int millisecondsTimeout, bool repeating)
+        internal RegisteredWaitHandle(
+            WaitHandle waitHandle,
+            _ThreadPoolWaitOrTimerCallback callbackHelper,
+            int millisecondsTimeout,
+            bool repeating
+        )
         {
             Handle = waitHandle.SafeWaitHandle;
             Callback = callbackHelper;
@@ -29,8 +33,7 @@ namespace System.Threading
         private static AutoResetEvent? s_cachedEvent;
 
         private static AutoResetEvent RentEvent() =>
-            Interlocked.Exchange(ref s_cachedEvent, null) ??
-            new AutoResetEvent(false);
+            Interlocked.Exchange(ref s_cachedEvent, null) ?? new AutoResetEvent(false);
 
         private static void ReturnEvent(AutoResetEvent resetEvent)
         {
@@ -128,7 +131,8 @@ namespace System.Threading
                 UserUnregisterWaitHandle = waitObject?.SafeWaitHandle;
                 UserUnregisterWaitHandle?.DangerousAddRef(ref needToRollBackRefCountOnException);
 
-                UserUnregisterWaitHandleValue = UserUnregisterWaitHandle?.DangerousGetHandle() ?? IntPtr.Zero;
+                UserUnregisterWaitHandleValue =
+                    UserUnregisterWaitHandle?.DangerousGetHandle() ?? IntPtr.Zero;
 
                 if (_unregistered)
                 {

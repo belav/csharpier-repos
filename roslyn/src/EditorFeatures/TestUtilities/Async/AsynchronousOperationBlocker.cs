@@ -33,7 +33,6 @@ namespace Roslyn.Test.Utilities
                     return _blocking;
                 }
             }
-
             private set
             {
                 lock (_lockObj)
@@ -59,11 +58,9 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        public void BlockOperations()
-            => this.IsBlockingOperations = true;
+        public void BlockOperations() => this.IsBlockingOperations = true;
 
-        public void UnblockOperations()
-            => this.IsBlockingOperations = false;
+        public void UnblockOperations() => this.IsBlockingOperations = false;
 
         public bool WaitIfBlocked(TimeSpan timeout)
         {

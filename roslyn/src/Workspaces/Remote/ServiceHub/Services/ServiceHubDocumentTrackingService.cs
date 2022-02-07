@@ -17,24 +17,34 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ServiceHubDocumentTrackingService()
-        {
-        }
+        public ServiceHubDocumentTrackingService() { }
 
         public bool SupportsDocumentTracking => false;
 
-        public event EventHandler<DocumentId?> ActiveDocumentChanged { add { } remove { } }
-        public event EventHandler<EventArgs> NonRoslynBufferTextChanged { add { } remove { } }
+        public event EventHandler<DocumentId?> ActiveDocumentChanged
+        {
+            add { }
+            remove { }
+        }
+        public event EventHandler<EventArgs> NonRoslynBufferTextChanged
+        {
+            add { }
+            remove { }
+        }
 
         public ImmutableArray<DocumentId> GetVisibleDocuments()
         {
-            Fail("Code should not be attempting to obtain visible documents from a stateless remote invocation.");
+            Fail(
+                "Code should not be attempting to obtain visible documents from a stateless remote invocation."
+            );
             return ImmutableArray<DocumentId>.Empty;
         }
 
         public DocumentId? TryGetActiveDocument()
         {
-            Fail("Code should not be attempting to obtain active document from a stateless remote invocation.");
+            Fail(
+                "Code should not be attempting to obtain active document from a stateless remote invocation."
+            );
             return null;
         }
 

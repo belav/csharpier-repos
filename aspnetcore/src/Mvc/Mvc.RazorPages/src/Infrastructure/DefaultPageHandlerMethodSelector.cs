@@ -37,10 +37,7 @@ internal class DefaultPageHandlerMethodSelector : IPageHandlerMethodSelector
 
                     if (ambiguousMatches == null)
                     {
-                        ambiguousMatches = new List<HandlerMethodDescriptor>
-                            {
-                                bestMatch
-                            };
+                        ambiguousMatches = new List<HandlerMethodDescriptor> { bestMatch };
                     }
 
                     ambiguousMatches.Add(handler);
@@ -49,8 +46,13 @@ internal class DefaultPageHandlerMethodSelector : IPageHandlerMethodSelector
 
             if (ambiguousMatches != null)
             {
-                var ambiguousMethods = string.Join(", ", ambiguousMatches.Select(m => m.MethodInfo));
-                throw new InvalidOperationException(Resources.FormatAmbiguousHandler(Environment.NewLine, ambiguousMethods));
+                var ambiguousMethods = string.Join(
+                    ", ",
+                    ambiguousMatches.Select(m => m.MethodInfo)
+                );
+                throw new InvalidOperationException(
+                    Resources.FormatAmbiguousHandler(Environment.NewLine, ambiguousMethods)
+                );
             }
 
             if (bestMatch != null)
@@ -90,8 +92,10 @@ internal class DefaultPageHandlerMethodSelector : IPageHandlerMethodSelector
         for (var i = 0; i < handlers.Count; i++)
         {
             var handler = handlers[i];
-            if (handler.HttpMethod != null &&
-                string.Equals(handler.HttpMethod, httpMethod, StringComparison.OrdinalIgnoreCase))
+            if (
+                handler.HttpMethod != null
+                && string.Equals(handler.HttpMethod, httpMethod, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 candidates.Add(handler);
             }
@@ -106,8 +110,14 @@ internal class DefaultPageHandlerMethodSelector : IPageHandlerMethodSelector
                 for (var i = 0; i < handlers.Count; i++)
                 {
                     var handler = handlers[i];
-                    if (handler.HttpMethod != null &&
-                        string.Equals(handler.HttpMethod, fuzzyHttpMethod, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        handler.HttpMethod != null
+                        && string.Equals(
+                            handler.HttpMethod,
+                            fuzzyHttpMethod,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         candidates.Add(handler);
                     }
@@ -119,8 +129,10 @@ internal class DefaultPageHandlerMethodSelector : IPageHandlerMethodSelector
         for (var i = candidates.Count - 1; i >= 0; i--)
         {
             var handler = candidates[i];
-            if (handler.Name != null &&
-                !handler.Name.Equals(handlerName, StringComparison.OrdinalIgnoreCase))
+            if (
+                handler.Name != null
+                && !handler.Name.Equals(handlerName, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 candidates.RemoveAt(i);
             }
@@ -147,7 +159,10 @@ internal class DefaultPageHandlerMethodSelector : IPageHandlerMethodSelector
 
     private static string? GetHandlerName(PageContext context)
     {
-        var handlerName = Convert.ToString(context.RouteData.Values[Handler], CultureInfo.InvariantCulture);
+        var handlerName = Convert.ToString(
+            context.RouteData.Values[Handler],
+            CultureInfo.InvariantCulture
+        );
         if (!string.IsNullOrEmpty(handlerName))
         {
             return handlerName;

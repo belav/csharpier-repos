@@ -75,7 +75,10 @@ public static class MvcCoreServiceCollectionExtensions
         }
     }
 
-    private static ApplicationPartManager GetApplicationPartManager(IServiceCollection services, IWebHostEnvironment? environment)
+    private static ApplicationPartManager GetApplicationPartManager(
+        IServiceCollection services,
+        IWebHostEnvironment? environment
+    )
     {
         var manager = GetServiceFromCollection<ApplicationPartManager>(services);
         if (manager == null)
@@ -96,9 +99,7 @@ public static class MvcCoreServiceCollectionExtensions
 
     private static T? GetServiceFromCollection<T>(IServiceCollection services)
     {
-        return (T?)services
-            .LastOrDefault(d => d.ServiceType == typeof(T))
-            ?.ImplementationInstance;
+        return (T?)services.LastOrDefault(d => d.ServiceType == typeof(T))?.ImplementationInstance;
     }
 
     /// <summary>
@@ -120,7 +121,8 @@ public static class MvcCoreServiceCollectionExtensions
     /// </remarks>
     public static IMvcCoreBuilder AddMvcCore(
         this IServiceCollection services,
-        Action<MvcOptions> setupAction)
+        Action<MvcOptions> setupAction
+    )
     {
         if (services == null)
         {
@@ -145,13 +147,20 @@ public static class MvcCoreServiceCollectionExtensions
         // Options
         //
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, MvcCoreMvcOptionsSetup>());
+            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, MvcCoreMvcOptionsSetup>()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IPostConfigureOptions<MvcOptions>, MvcCoreMvcOptionsSetup>());
+            ServiceDescriptor.Transient<IPostConfigureOptions<MvcOptions>, MvcCoreMvcOptionsSetup>()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<ApiBehaviorOptions>, ApiBehaviorOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<ApiBehaviorOptions>,
+                ApiBehaviorOptionsSetup
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<RouteOptions>, MvcCoreRouteOptionsSetup>());
+            ServiceDescriptor.Transient<IConfigureOptions<RouteOptions>, MvcCoreRouteOptionsSetup>()
+        );
 
         //
         // Action Discovery
@@ -159,13 +168,28 @@ public static class MvcCoreServiceCollectionExtensions
         // These are consumed only when creating action descriptors, then they can be deallocated
         services.TryAddSingleton<ApplicationModelFactory>();
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IApplicationModelProvider, DefaultApplicationModelProvider>());
+            ServiceDescriptor.Transient<
+                IApplicationModelProvider,
+                DefaultApplicationModelProvider
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IApplicationModelProvider, ApiBehaviorApplicationModelProvider>());
+            ServiceDescriptor.Transient<
+                IApplicationModelProvider,
+                ApiBehaviorApplicationModelProvider
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IActionDescriptorProvider, ControllerActionDescriptorProvider>());
+            ServiceDescriptor.Transient<
+                IActionDescriptorProvider,
+                ControllerActionDescriptorProvider
+            >()
+        );
 
-        services.TryAddSingleton<IActionDescriptorCollectionProvider, DefaultActionDescriptorCollectionProvider>();
+        services.TryAddSingleton<
+            IActionDescriptorCollectionProvider,
+            DefaultActionDescriptorCollectionProvider
+        >();
 
         //
         // Action Selection
@@ -174,10 +198,17 @@ public static class MvcCoreServiceCollectionExtensions
         services.TryAddSingleton<ActionConstraintCache>();
 
         // Will be cached by the DefaultActionSelector
-        services.TryAddEnumerable(ServiceDescriptor.Transient<IActionConstraintProvider, DefaultActionConstraintProvider>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Transient<
+                IActionConstraintProvider,
+                DefaultActionConstraintProvider
+            >()
+        );
 
         // Policies for Endpoints
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<MatcherPolicy, ActionConstraintMatcherPolicy>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<MatcherPolicy, ActionConstraintMatcherPolicy>()
+        );
 
         //
         // Controller Factory
@@ -191,7 +222,11 @@ public static class MvcCoreServiceCollectionExtensions
         services.TryAddSingleton<IControllerFactoryProvider, ControllerFactoryProvider>();
         services.TryAddSingleton<IControllerActivatorProvider, ControllerActivatorProvider>();
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IControllerPropertyActivator, DefaultControllerPropertyActivator>());
+            ServiceDescriptor.Transient<
+                IControllerPropertyActivator,
+                DefaultControllerPropertyActivator
+            >()
+        );
 
         //
         // Action Invoker
@@ -199,12 +234,14 @@ public static class MvcCoreServiceCollectionExtensions
         // The IActionInvokerFactory is cachable
         services.TryAddSingleton<IActionInvokerFactory, ActionInvokerFactory>();
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IActionInvokerProvider, ControllerActionInvokerProvider>());
+            ServiceDescriptor.Transient<IActionInvokerProvider, ControllerActionInvokerProvider>()
+        );
 
         // These are stateless
         services.TryAddSingleton<ControllerActionInvokerCache>();
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IFilterProvider, DefaultFilterProvider>());
+            ServiceDescriptor.Singleton<IFilterProvider, DefaultFilterProvider>()
+        );
         services.TryAddSingleton<IActionResultTypeMapper, ActionResultTypeMapper>();
 
         //
@@ -219,18 +256,30 @@ public static class MvcCoreServiceCollectionExtensions
         //
         // The DefaultModelMetadataProvider does significant caching and should be a singleton.
         services.TryAddSingleton<IModelMetadataProvider, DefaultModelMetadataProvider>();
-        services.TryAdd(ServiceDescriptor.Transient<ICompositeMetadataDetailsProvider>(s =>
-        {
-            var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
-            return new DefaultCompositeMetadataDetailsProvider(options.ModelMetadataDetailsProviders);
-        }));
+        services.TryAdd(
+            ServiceDescriptor.Transient<ICompositeMetadataDetailsProvider>(
+                s =>
+                {
+                    var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
+                    return new DefaultCompositeMetadataDetailsProvider(
+                        options.ModelMetadataDetailsProviders
+                    );
+                }
+            )
+        );
         services.TryAddSingleton<IModelBinderFactory, ModelBinderFactory>();
-        services.TryAddSingleton<IObjectModelValidator>(s =>
-        {
-            var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
-            var metadataProvider = s.GetRequiredService<IModelMetadataProvider>();
-            return new DefaultObjectValidator(metadataProvider, options.ModelValidatorProviders, options);
-        });
+        services.TryAddSingleton<IObjectModelValidator>(
+            s =>
+            {
+                var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
+                var metadataProvider = s.GetRequiredService<IModelMetadataProvider>();
+                return new DefaultObjectValidator(
+                    metadataProvider,
+                    options.ModelValidatorProviders,
+                    options
+                );
+            }
+        );
         services.TryAddSingleton<ClientValidatorCache>();
         services.TryAddSingleton<ParameterBinder>();
 
@@ -240,21 +289,51 @@ public static class MvcCoreServiceCollectionExtensions
         services.TryAddSingleton<MvcMarkerService, MvcMarkerService>();
         services.TryAddSingleton<ITypeActivatorCache, TypeActivatorCache>();
         services.TryAddSingleton<IUrlHelperFactory, UrlHelperFactory>();
-        services.TryAddSingleton<IHttpRequestStreamReaderFactory, MemoryPoolHttpRequestStreamReaderFactory>();
-        services.TryAddSingleton<IHttpResponseStreamWriterFactory, MemoryPoolHttpResponseStreamWriterFactory>();
+        services.TryAddSingleton<
+            IHttpRequestStreamReaderFactory,
+            MemoryPoolHttpRequestStreamReaderFactory
+        >();
+        services.TryAddSingleton<
+            IHttpResponseStreamWriterFactory,
+            MemoryPoolHttpResponseStreamWriterFactory
+        >();
         services.TryAddSingleton(ArrayPool<byte>.Shared);
         services.TryAddSingleton(ArrayPool<char>.Shared);
         services.TryAddSingleton<OutputFormatterSelector, DefaultOutputFormatterSelector>();
         services.TryAddSingleton<IActionResultExecutor<ObjectResult>, ObjectResultExecutor>();
-        services.TryAddSingleton<IActionResultExecutor<PhysicalFileResult>, PhysicalFileResultExecutor>();
-        services.TryAddSingleton<IActionResultExecutor<VirtualFileResult>, VirtualFileResultExecutor>();
-        services.TryAddSingleton<IActionResultExecutor<FileStreamResult>, FileStreamResultExecutor>();
-        services.TryAddSingleton<IActionResultExecutor<FileContentResult>, FileContentResultExecutor>();
+        services.TryAddSingleton<
+            IActionResultExecutor<PhysicalFileResult>,
+            PhysicalFileResultExecutor
+        >();
+        services.TryAddSingleton<
+            IActionResultExecutor<VirtualFileResult>,
+            VirtualFileResultExecutor
+        >();
+        services.TryAddSingleton<
+            IActionResultExecutor<FileStreamResult>,
+            FileStreamResultExecutor
+        >();
+        services.TryAddSingleton<
+            IActionResultExecutor<FileContentResult>,
+            FileContentResultExecutor
+        >();
         services.TryAddSingleton<IActionResultExecutor<RedirectResult>, RedirectResultExecutor>();
-        services.TryAddSingleton<IActionResultExecutor<LocalRedirectResult>, LocalRedirectResultExecutor>();
-        services.TryAddSingleton<IActionResultExecutor<RedirectToActionResult>, RedirectToActionResultExecutor>();
-        services.TryAddSingleton<IActionResultExecutor<RedirectToRouteResult>, RedirectToRouteResultExecutor>();
-        services.TryAddSingleton<IActionResultExecutor<RedirectToPageResult>, RedirectToPageResultExecutor>();
+        services.TryAddSingleton<
+            IActionResultExecutor<LocalRedirectResult>,
+            LocalRedirectResultExecutor
+        >();
+        services.TryAddSingleton<
+            IActionResultExecutor<RedirectToActionResult>,
+            RedirectToActionResultExecutor
+        >();
+        services.TryAddSingleton<
+            IActionResultExecutor<RedirectToRouteResult>,
+            RedirectToRouteResultExecutor
+        >();
+        services.TryAddSingleton<
+            IActionResultExecutor<RedirectToPageResult>,
+            RedirectToPageResultExecutor
+        >();
         services.TryAddSingleton<IActionResultExecutor<ContentResult>, ContentResultExecutor>();
         services.TryAddSingleton<IActionResultExecutor<JsonResult>, SystemTextJsonResultExecutor>();
         services.TryAddSingleton<IClientErrorFactory, ProblemDetailsClientErrorFactory>();
@@ -274,8 +353,12 @@ public static class MvcCoreServiceCollectionExtensions
         services.TryAddSingleton<ControllerActionEndpointDataSourceIdProvider>();
         services.TryAddSingleton<ActionEndpointFactory>();
         services.TryAddSingleton<DynamicControllerEndpointSelectorCache>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<MatcherPolicy, DynamicControllerEndpointMatcherPolicy>());
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IRequestDelegateFactory, ControllerRequestDelegateFactory>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<MatcherPolicy, DynamicControllerEndpointMatcherPolicy>()
+        );
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IRequestDelegateFactory, ControllerRequestDelegateFactory>()
+        );
 
         //
         // Middleware pipeline filter related
@@ -284,7 +367,9 @@ public static class MvcCoreServiceCollectionExtensions
         // This maintains a cache of middleware pipelines, so it needs to be a singleton
         services.TryAddSingleton<MiddlewareFilterBuilder>();
         // Sets ApplicationBuilder on MiddlewareFilterBuilder
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IStartupFilter, MiddlewareFilterBuilderStartupFilter>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IStartupFilter, MiddlewareFilterBuilderStartupFilter>()
+        );
     }
 
     private static void ConfigureDefaultServices(IServiceCollection services)

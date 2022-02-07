@@ -19,24 +19,40 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
     [ExportNewDocumentFormattingProvider(LanguageNames.CSharp), Shared]
-    internal class CSharpNamespaceDeclarationNewDocumentFormattingProvider : INewDocumentFormattingProvider
+    internal class CSharpNamespaceDeclarationNewDocumentFormattingProvider
+        : INewDocumentFormattingProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpNamespaceDeclarationNewDocumentFormattingProvider()
-        {
-        }
+        public CSharpNamespaceDeclarationNewDocumentFormattingProvider() { }
 
-        public async Task<Document> FormatNewDocumentAsync(Document document, Document? hintDocument, CancellationToken cancellationToken)
+        public async Task<Document> FormatNewDocumentAsync(
+            Document document,
+            Document? hintDocument,
+            CancellationToken cancellationToken
+        )
         {
             var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var root = (CompilationUnitSyntax)await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = (CompilationUnitSyntax)await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var namespaces = GetNamespacesToReplace(document, root, optionSet);
-            return await document.ReplaceNodesAsync(namespaces, (oldNode, newNode) => ConvertNamespaceTransform.Convert((BaseNamespaceDeclarationSyntax)newNode), cancellationToken).ConfigureAwait(false);
+            return await document
+                .ReplaceNodesAsync(
+                    namespaces,
+                    (oldNode, newNode) =>
+                        ConvertNamespaceTransform.Convert((BaseNamespaceDeclarationSyntax)newNode),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private static IEnumerable<BaseNamespaceDeclarationSyntax> GetNamespacesToReplace(Document document, CompilationUnitSyntax root, DocumentOptionSet optionSet)
+        private static IEnumerable<BaseNamespaceDeclarationSyntax> GetNamespacesToReplace(
+            Document document,
+            CompilationUnitSyntax root,
+            DocumentOptionSet optionSet
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var declarations = root.DescendantNodes().OfType<BaseNamespaceDeclarationSyntax>();
@@ -44,8 +60,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             foreach (var declaration in declarations)
             {
                 // Passing in forAnalyzer: true means we'll only get a result if the declaration doesn't match the preferences
-                if (ConvertNamespaceAnalysis.CanOfferUseBlockScoped(optionSet, declaration, forAnalyzer: true) ||
-                    ConvertNamespaceAnalysis.CanOfferUseFileScoped(optionSet, root, declaration, forAnalyzer: true))
+                if (
+                    ConvertNamespaceAnalysis.CanOfferUseBlockScoped(
+                        optionSet,
+                        declaration,
+                        forAnalyzer: true
+                    )
+                    || ConvertNamespaceAnalysis.CanOfferUseFileScoped(
+                        optionSet,
+                        root,
+                        declaration,
+                        forAnalyzer: true
+                    )
+                )
                 {
                     yield return declaration;
                 }

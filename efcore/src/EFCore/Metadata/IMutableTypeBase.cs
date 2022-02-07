@@ -61,8 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     be used for any property or navigation for which no override has been specified.
         /// </remarks>
         /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null" /> to clear the mode set.</param>
-        void SetPropertyAccessMode(PropertyAccessMode? propertyAccessMode)
-            => SetOrRemoveAnnotation(CoreAnnotationNames.PropertyAccessMode, propertyAccessMode);
+        void SetPropertyAccessMode(PropertyAccessMode? propertyAccessMode) =>
+            SetOrRemoveAnnotation(CoreAnnotationNames.PropertyAccessMode, propertyAccessMode);
 
         /// <summary>
         ///     Sets the <see cref="PropertyAccessMode" /> to use for navigations of this entity type.
@@ -72,7 +72,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     be used for any navigation for which no override has been specified.
         /// </remarks>
         /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null" /> to clear the mode set.</param>
-        void SetNavigationAccessMode(PropertyAccessMode? propertyAccessMode)
-            => SetOrRemoveAnnotation(CoreAnnotationNames.NavigationAccessMode, propertyAccessMode);
+        void SetNavigationAccessMode(PropertyAccessMode? propertyAccessMode) =>
+            SetOrRemoveAnnotation(CoreAnnotationNames.NavigationAccessMode, propertyAccessMode);
     }
 }

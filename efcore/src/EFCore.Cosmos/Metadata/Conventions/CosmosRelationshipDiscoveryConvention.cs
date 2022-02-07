@@ -23,10 +23,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="RelationshipDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-        public CosmosRelationshipDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public CosmosRelationshipDiscoveryConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Returns a value indicating whether the given entity type should be added as owned if it isn't currently in the model.
@@ -34,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="targetType">Target entity type.</param>
         /// <param name="model">The model.</param>
         /// <returns><see langword="true" /> if the given entity type should be owned.</returns>
-        protected override bool? ShouldBeOwned(Type targetType, IConventionModel model)
-            => ShouldBeOwnedType(targetType, model);
+        protected override bool? ShouldBeOwned(Type targetType, IConventionModel model) =>
+            ShouldBeOwnedType(targetType, model);
 
         /// <summary>
         ///     Returns a value indicating whether the given entity type should be added as owned if it isn't currently in the model.
@@ -43,9 +42,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="targetType">Target entity type.</param>
         /// <param name="model">The model.</param>
         /// <returns><see langword="true" /> if the given entity type should be owned.</returns>
-        public static bool ShouldBeOwnedType(Type targetType, IConventionModel model)
-            => !targetType.IsGenericType
-                || targetType == typeof(Dictionary<string, object>)
-                || targetType.GetInterface(typeof(IEnumerable<>).Name) == null;
+        public static bool ShouldBeOwnedType(Type targetType, IConventionModel model) =>
+            !targetType.IsGenericType
+            || targetType == typeof(Dictionary<string, object>)
+            || targetType.GetInterface(typeof(IEnumerable<>).Name) == null;
     }
 }

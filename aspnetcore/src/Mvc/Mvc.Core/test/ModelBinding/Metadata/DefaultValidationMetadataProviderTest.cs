@@ -17,17 +17,27 @@ public class DefaultValidationMetadataProviderTest
         var provider = new DefaultValidationMetadataProvider();
 
         var attributes = new Attribute[] { new ValidateNeverAttribute() };
-        var key = ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string));
-        var context = new ValidationMetadataProviderContext(key, new ModelAttributes(new object[0], attributes, null));
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(string).GetProperty(nameof(string.Length)),
+            typeof(int),
+            typeof(string)
+        );
+        var context = new ValidationMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], attributes, null)
+        );
 
         // Act
         provider.CreateValidationMetadata(context);
 
         // Assert
         Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
-        Assert.False(context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-            new ValidationEntry(),
-            new ValidationEntry()));
+        Assert.False(
+            context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
+                new ValidationEntry(),
+                new ValidationEntry()
+            )
+        );
     }
 
     [Fact]
@@ -37,8 +47,15 @@ public class DefaultValidationMetadataProviderTest
         var provider = new DefaultValidationMetadataProvider();
 
         var attributes = new Attribute[] { new ValidateNeverAttribute() };
-        var key = ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string));
-        var context = new ValidationMetadataProviderContext(key, new ModelAttributes(attributes, new object[0], null));
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(string).GetProperty(nameof(string.Length)),
+            typeof(int),
+            typeof(string)
+        );
+        var context = new ValidationMetadataProviderContext(
+            key,
+            new ModelAttributes(attributes, new object[0], null)
+        );
 
         // Act
         provider.CreateValidationMetadata(context);
@@ -55,7 +72,10 @@ public class DefaultValidationMetadataProviderTest
 
         var attributes = new Attribute[] { new ValidateNeverAttribute() };
         var key = ModelMetadataIdentity.ForType(typeof(ValidateNeverClass));
-        var context = new ValidationMetadataProviderContext(key, new ModelAttributes(attributes, null, null));
+        var context = new ValidationMetadataProviderContext(
+            key,
+            new ModelAttributes(attributes, null, null)
+        );
 
         // Act
         provider.CreateValidationMetadata(context);
@@ -73,17 +93,24 @@ public class DefaultValidationMetadataProviderTest
         var key = ModelMetadataIdentity.ForProperty(
             typeof(ValidateNeverClass).GetProperty(nameof(ValidateNeverClass.ClassName)),
             typeof(string),
-            typeof(ValidateNeverClass));
-        var context = new ValidationMetadataProviderContext(key, new ModelAttributes(new object[0], new object[0], null));
+            typeof(ValidateNeverClass)
+        );
+        var context = new ValidationMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         // Act
         provider.CreateValidationMetadata(context);
 
         // Assert
         Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
-        Assert.False(context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-            new ValidationEntry(),
-            new ValidationEntry()));
+        Assert.False(
+            context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
+                new ValidationEntry(),
+                new ValidationEntry()
+            )
+        );
     }
 
     [Fact]
@@ -95,17 +122,24 @@ public class DefaultValidationMetadataProviderTest
         var key = ModelMetadataIdentity.ForProperty(
             typeof(ValidateNeverSubclass).GetProperty(nameof(ValidateNeverSubclass.SubclassName)),
             typeof(string),
-            typeof(ValidateNeverSubclass));
-        var context = new ValidationMetadataProviderContext(key, new ModelAttributes(new object[0], new object[0], null));
+            typeof(ValidateNeverSubclass)
+        );
+        var context = new ValidationMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         // Act
         provider.CreateValidationMetadata(context);
 
         // Assert
         Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
-        Assert.False(context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-            new ValidationEntry(),
-            new ValidationEntry()));
+        Assert.False(
+            context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
+                new ValidationEntry(),
+                new ValidationEntry()
+            )
+        );
     }
 
     [Fact]
@@ -116,8 +150,15 @@ public class DefaultValidationMetadataProviderTest
 
         var attribute = new TestClientModelValidationAttribute();
         var attributes = new Attribute[] { attribute };
-        var key = ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string));
-        var context = new ValidationMetadataProviderContext(key, new ModelAttributes(new object[0], attributes, null));
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(string).GetProperty(nameof(string.Length)),
+            typeof(int),
+            typeof(string)
+        );
+        var context = new ValidationMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], attributes, null)
+        );
 
         // Act
         provider.CreateValidationMetadata(context);
@@ -135,8 +176,15 @@ public class DefaultValidationMetadataProviderTest
 
         var attribute = new TestModelValidationAttribute();
         var attributes = new Attribute[] { attribute };
-        var key = ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string));
-        var context = new ValidationMetadataProviderContext(key, new ModelAttributes(new object[0], attributes, null));
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(string).GetProperty(nameof(string.Length)),
+            typeof(int),
+            typeof(string)
+        );
+        var context = new ValidationMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], attributes, null)
+        );
 
         // Act
         provider.CreateValidationMetadata(context);
@@ -154,8 +202,15 @@ public class DefaultValidationMetadataProviderTest
 
         var attribute = new TestValidationAttribute();
         var attributes = new Attribute[] { attribute };
-        var key = ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string));
-        var context = new ValidationMetadataProviderContext(key, new ModelAttributes(new object[0], attributes, null));
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(string).GetProperty(nameof(string.Length)),
+            typeof(int),
+            typeof(string)
+        );
+        var context = new ValidationMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], attributes, null)
+        );
         context.ValidationMetadata.ValidatorMetadata.Add(attribute);
 
         // Act

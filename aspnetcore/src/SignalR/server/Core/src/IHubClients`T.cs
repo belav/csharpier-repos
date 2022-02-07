@@ -74,4 +74,3 @@ public interface IHubClients<T>
     /// <returns>A client caller.</returns>
     T Users(IReadOnlyList<string> userIds);
 }
-
