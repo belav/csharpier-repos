@@ -13,18 +13,15 @@ namespace Microsoft.CodeAnalysis.Emit
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// No change to symbol but may contain changed symbols.
         /// </summary>
         ContainsChanges,
 
-
         /// <summary>
         /// Symbol updated.
         /// </summary>
         Updated,
-
 
         /// <summary>
         /// Symbol added.

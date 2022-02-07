@@ -21,7 +21,6 @@ namespace System.Security.Cryptography
         /// </remarks>
         IeeeP1363FixedFieldConcatenation,
 
-
         /// <summary>
         ///   The signature format from IETF RFC 3279, which produces a variably-sized signature.
         /// </summary>

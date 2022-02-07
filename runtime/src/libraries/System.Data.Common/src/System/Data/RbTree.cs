@@ -18,12 +18,10 @@ namespace System.Data
     {
         InvalidPageSize = 1,
 
-
         //      InvalidCompareDelegate                      =  2,
         PagePositionInSlotInUse = 3,
         NoFreeSlots = 4,
         InvalidStateinInsert = 5,
-
 
         //      InvalidStateinEndInsert                     =  6,
         InvalidNextSizeInDelete = 7,
@@ -31,7 +29,6 @@ namespace System.Data
         InvalidNodeSizeinDelete = 9,
         InvalidStateinEndDelete = 10,
         CannotRotateInvalidsuccessorNodeinDelete = 11,
-
 
         //      IndexOutOfRange                             = 12,
         IndexOutOFRangeinGetNodeByIndex = 13,

@@ -13,7 +13,6 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         Ignore = 0,
 
-
         /// <summary>
         /// The content's null value properties will be merged.
         /// </summary>

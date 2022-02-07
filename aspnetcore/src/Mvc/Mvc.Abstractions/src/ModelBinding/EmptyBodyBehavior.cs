@@ -14,12 +14,10 @@ public enum EmptyBodyBehavior
     /// </summary>
     Default,
 
-
     /// <summary>
     /// Empty bodies are treated as valid inputs.
     /// </summary>
     Allow,
-
 
     /// <summary>
     /// Empty bodies are treated as invalid inputs.

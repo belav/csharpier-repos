@@ -226,36 +226,30 @@ namespace System.Net.Test.Common
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Applies Huffman encoding to the header's name.
         /// </summary>
         HuffmanEncodeName = 1,
-
 
         /// <summary>
         /// Applies Huffman encoding to the header's value.
         /// </summary>
         HuffmanEncodeValue = 2,
 
-
         /// <summary>
         /// Applies Huffman encoding to both the name and the value of the header.
         /// </summary>
         HuffmanEncode = HuffmanEncodeName | HuffmanEncodeValue,
-
 
         /// <summary>
         /// Encode a literal value without adding a new dynamic index. Intermediaries (such as a proxy) are still allowed to index the value when forwarding the header.
         /// </summary>
         WithoutIndexing = 0,
 
-
         /// <summary>
         /// Encode a literal value to a new dynamic index.
         /// </summary>
         NewIndexed = 4,
-
 
         /// <summary>
         /// Encode a literal value without adding a new dynamic index. Intermediaries (such as a proxy) must not index the value when forwarding the header.

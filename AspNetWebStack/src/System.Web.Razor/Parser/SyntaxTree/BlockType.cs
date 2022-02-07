@@ -12,12 +12,10 @@ namespace System.Web.Razor.Parser.SyntaxTree
         Expression,
         Helper,
 
-
         // Markup
         Markup,
         Section,
         Template,
-
 
         // Special
         Comment

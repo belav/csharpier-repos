@@ -13,18 +13,15 @@ public enum RemoteAuthenticationStatus
     /// </summary>
     Redirect,
 
-
     /// <summary>
     /// The authentication operation completed successfully.
     /// </summary>
     Success,
 
-
     /// <summary>
     /// There was an error performing the authentication operation.
     /// </summary>
     Failure,
-
 
     /// <summary>
     /// The operation in the current navigation context has completed. This signals that the application running on the

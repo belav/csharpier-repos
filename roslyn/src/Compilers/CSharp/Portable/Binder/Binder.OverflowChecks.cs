@@ -19,12 +19,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             Implicit,
 
-
             /// <summary>
             /// Within <c>unchecked</c> expression/block.
             /// </summary>
             Disabled,
-
 
             /// <summary>
             /// Within <c>checked</c> expression/block.

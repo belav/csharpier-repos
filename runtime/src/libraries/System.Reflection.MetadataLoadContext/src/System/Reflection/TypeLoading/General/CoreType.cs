@@ -38,23 +38,19 @@ namespace System.Reflection.TypeLoading
         Void,
         MulticastDelegate,
 
-
         // "Implemented" by arrays
         IEnumerableT,
         ICollectionT,
         IListT,
         IReadOnlyListT,
 
-
         // Default values
         DBNull,
         Decimal,
         DateTime,
 
-
         // For custom attribute processing
         Type,
-
 
         // Pseudo Custom Attributes
         ComImportAttribute,

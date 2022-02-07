@@ -19,7 +19,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// If the caret moves outside of a tag, immediately remove all existing tags.
         /// </summary>

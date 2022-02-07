@@ -15,7 +15,6 @@ namespace Moq
         /// </summary>
         Inclusive,
 
-
         /// <summary>
         /// The range does not include the <c>to</c> and
         /// <c>from</c> values.

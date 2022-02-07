@@ -35,7 +35,6 @@ namespace Newtonsoft.Json
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Causes child objects to be indented according to the <see cref="JsonTextWriter.Indentation"/> and <see cref="JsonTextWriter.IndentChar"/> settings.
         /// </summary>

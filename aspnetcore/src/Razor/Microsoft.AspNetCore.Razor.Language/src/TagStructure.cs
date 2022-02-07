@@ -14,12 +14,10 @@ public enum TagStructure
     /// </summary>
     Unspecified,
 
-
     /// <summary>
     /// Element can be written as &lt;my-tag-helper&gt;&lt;/my-tag-helper&gt; or &lt;my-tag-helper /&gt;.
     /// </summary>
     NormalOrSelfClosing,
-
 
     /// <summary>
     /// Element can be written as &lt;my-tag-helper&gt; or &lt;my-tag-helper /&gt;.

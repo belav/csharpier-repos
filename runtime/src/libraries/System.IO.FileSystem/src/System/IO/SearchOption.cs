@@ -19,7 +19,6 @@ namespace System.IO
         /// </devdoc>
         TopDirectoryOnly,
 
-
         /// <devdoc>
         ///   Include the current directory and all the sub-directories
         ///   underneath it including reparse points in the search operation.

@@ -9,7 +9,6 @@ namespace System.Speech.Recognition
         // The recognizer is currently stopped and not listening.
         Stopped,
 
-
         // The recognizer is currently listening.
         Listening
     }

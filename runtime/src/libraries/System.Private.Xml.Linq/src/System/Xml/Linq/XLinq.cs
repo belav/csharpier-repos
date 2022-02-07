@@ -740,18 +740,15 @@ namespace System.Xml.Linq
         /// </summary>
         Add,
 
-
         /// <summary>
         /// An <see cref="XObject"/> has been or will be removed from an <see cref="XContainer"/>.
         /// </summary>
         Remove,
 
-
         /// <summary>
         /// An <see cref="XObject"/> has been or will be renamed.
         /// </summary>
         Name,
-
 
         /// <summary>
         /// The value of an <see cref="XObject"/> has been or will be changed.
@@ -771,14 +768,11 @@ namespace System.Xml.Linq
         /// <summary>Default options.</summary>
         None = 0x00000000,
 
-
         /// <summary>Preserve whitespace.</summary>
         PreserveWhitespace = 0x00000001,
 
-
         /// <summary>Set the BaseUri property.</summary>
         SetBaseUri = 0x00000002,
-
 
         /// <summary>Set the IXmlLineInfo.</summary>
         SetLineInfo = 0x00000004,
@@ -793,10 +787,8 @@ namespace System.Xml.Linq
         /// <summary>Default options.</summary>
         None = 0x00000000,
 
-
         /// <summary>Disable formatting.</summary>
         DisableFormatting = 0x00000001,
-
 
         /// <summary>Remove duplicate namespace declarations.</summary>
         OmitDuplicateNamespaces = 0x00000002,
@@ -810,7 +802,6 @@ namespace System.Xml.Linq
     {
         /// <summary>Default options.</summary>
         None = 0x00000000,
-
 
         /// <summary>Remove duplicate namespace declarations.</summary>
         OmitDuplicateNamespaces = 0x00000001,

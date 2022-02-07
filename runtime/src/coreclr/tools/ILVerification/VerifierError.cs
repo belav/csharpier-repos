@@ -166,12 +166,10 @@ namespace ILVerify
         InitLocals, // initlocals must be set for verifiable methods with one or more local variables.
         CallCtor, // call to .ctor only allowed to initialize this pointer from within a .ctor. Try newobj.
 
-
         ////@GENERICSVER: new generics related error messages
         ExpectedValClassObjRefVariable, // Value type, ObjRef type or variable type expected.
         ReadOnly, // Missing ldelema or call following readonly prefix.
         Constrained, // Missing callvirt following constrained prefix.
-
 
         //E_CIRCULAR_VAR_CONSTRAINTS    "Method parent has circular class type parameter constraints."
         //E_CIRCULAR_MVAR_CONSTRAINTS   "Method has circular method type parameter constraints."
@@ -198,7 +196,6 @@ namespace ILVerify
 
         //E_FIELD_OVERLAP                     "Accessing type with overlapping fields."
         ThisMismatch, // The 'this' parameter to the call must be the calling method's 'this' parameter.
-
 
         //E_BAD_PE             "Unverifiable PE Header/native stub."
         //E_BAD_MD             "Unrecognized metadata, unable to verify IL."

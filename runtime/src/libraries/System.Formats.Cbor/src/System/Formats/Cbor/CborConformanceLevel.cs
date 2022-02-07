@@ -13,7 +13,6 @@ namespace System.Formats.Cbor
         /// <summary>Ensures that the CBOR data is well-formed, as specified in RFC7049.</summary>
         Lax,
 
-
         /// <summary>
         /// <para>Ensures that the CBOR data adheres to strict mode, as specified in RFC7049 section 3.10.</para>
         /// <para>Extends lax conformance with the following requirements:</para>
@@ -25,7 +24,6 @@ namespace System.Formats.Cbor
         /// </summary>
         Strict,
 
-
         /// <summary>
         /// <para>Ensures that the CBOR data is canonical, as specified in RFC7049 section 3.9.</para>
         /// <para>Extends strict conformance with the following requirements:</para>
@@ -36,7 +34,6 @@ namespace System.Formats.Cbor
         /// </list>
         /// </summary>
         Canonical,
-
 
         /// <summary>
         /// <para>Ensures that the CBOR data is canonical, as specified by the CTAP v2.0 standard, section 6.</para>

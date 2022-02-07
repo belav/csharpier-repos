@@ -31,7 +31,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         /// </summary>
         Comment,
 
-
         /// <summary>
         /// The operation is an uncomment action.
         /// </summary>

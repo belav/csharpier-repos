@@ -9,7 +9,6 @@ namespace System.Xml
         // No validation will be performed.
         None,
 
-
         // In XmlValidatingReader ValidationType.Auto does the following:
         // 1) If there is no DTD or schema, it will parse the XML without validation.
         // 2) If there is a DTD defined in a <!DOCTYPE ...> declaration, it will load the DTD and
@@ -23,17 +22,14 @@ namespace System.Xml
         [Obsolete("ValidationType.Auto has been deprecated. Use DTD or Schema instead.")]
         Auto,
 
-
         // Validate according to DTD.
         DTD,
-
 
         // Validate according to XDR.
         [Obsolete(
             "XDR Validation through XmlValidatingReader has been deprecated and is not supported."
         )]
         XDR,
-
 
         // Validate according to W3C XSD schemas, including inline schemas. An error is returned if both XDR and XSD schemas
         // are referenced from the same document.

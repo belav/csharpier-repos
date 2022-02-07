@@ -36,13 +36,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
             /// </summary>
             NotReachable = 0,
 
-
             /// <summary>
             /// Block can be reached either falling through
             /// from previous block or from branch.
             /// </summary>
             Reachable,
-
 
             /// <summary>
             /// Block is reachable from try or catch but

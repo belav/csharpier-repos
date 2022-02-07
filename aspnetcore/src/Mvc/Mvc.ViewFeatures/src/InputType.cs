@@ -13,24 +13,20 @@ public enum InputType
     /// </summary>
     CheckBox,
 
-
     /// <summary>
     /// A hidden input.
     /// </summary>
     Hidden,
-
 
     /// <summary>
     /// A password input.
     /// </summary>
     Password,
 
-
     /// <summary>
     /// A radio input.
     /// </summary>
     Radio,
-
 
     /// <summary>
     /// A text input.

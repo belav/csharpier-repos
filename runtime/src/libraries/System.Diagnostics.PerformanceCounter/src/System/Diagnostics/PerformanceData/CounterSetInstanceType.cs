@@ -13,19 +13,16 @@ namespace System.Diagnostics.PerformanceData
         /// </summary>
         Single = 0, // PERF_COUNTERSET_SINGLE_INSTANCE
 
-
         /// <summary>
         /// Multiple means that CounterSet could have multiple active instances.
         /// </summary>
         Multiple = 0x00000002, // PERF_COUNTERSET_MULTI_INSTANCES
-
 
         /// <summary>
         /// GlobalAggregate means that CounterSet could have multiple active instances, but counter consumption
         /// applications (for example, perfmon) would aggregate raw counter data from different instances.
         /// </summary>
         GlobalAggregate = 0x00000004, // PERF_COUNTERSET_SINGLE_AGGREGATE
-
 
         /// <summary>
         /// GlobalAggregateWithHistory is similar to GlobalAggregate, but counter consumption applications
@@ -34,13 +31,11 @@ namespace System.Diagnostics.PerformanceData
         /// </summary>
         GlobalAggregateWithHistory = 0x0000000B, // PERF_COUNTERSET_SINGLE_AGGREGATE_HISTORY
 
-
         /// <summary>
         /// MultipleInstancesWithAggregate acts similar to Multiple, but it also generate aggregated instace
         /// "_Total" that hosts aggregated raw counter data from all other instances.
         /// </summary>
         MultipleAggregate = 0x00000006, // PERF_COUNTERSET_MULTI_AGGREGATE
-
 
         /// <summary>
         /// InstanceAggregate only exists in Longhonr Server. Counter consumption applications aggregate raw

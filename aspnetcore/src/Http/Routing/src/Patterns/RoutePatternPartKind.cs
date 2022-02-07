@@ -13,12 +13,10 @@ public enum RoutePatternPartKind
     /// </summary>
     Literal,
 
-
     /// <summary>
     /// The <see cref="RoutePatternPartKind"/> of a <see cref="RoutePatternParameterPart"/>.
     /// </summary>
     Parameter,
-
 
     /// <summary>
     /// The <see cref="RoutePatternPartKind"/> of a <see cref="RoutePatternSeparatorPart"/>.

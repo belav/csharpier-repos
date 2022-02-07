@@ -14,7 +14,6 @@ namespace System.Drawing.Imaging
         /// </summary>
         None = 0,
 
-
         // Low-word: shared with SINKFLAG_x
 
         /// <summary>
@@ -32,7 +31,6 @@ namespace System.Drawing.Imaging
         /// Pixel data is partially scalable, but there are some limitations.
         /// </summary>
         PartiallyScalable = 0x0008,
-
 
         // Low-word: color space definition
 
@@ -53,12 +51,10 @@ namespace System.Drawing.Imaging
         ColorSpaceYcbcr = 0x0080,
         ColorSpaceYcck = 0x0100,
 
-
         // Low-word: image size info
 
         HasRealDpi = 0x1000,
         HasRealPixelSize = 0x2000,
-
 
         // High-word
 

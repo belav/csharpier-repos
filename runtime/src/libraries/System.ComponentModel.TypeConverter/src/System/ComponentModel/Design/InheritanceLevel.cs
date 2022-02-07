@@ -13,12 +13,10 @@ namespace System.ComponentModel
         /// </summary>
         Inherited = 1,
 
-
         /// <summary>
         /// Indicates that the object is inherited, but has read-only access.
         /// </summary>
         InheritedReadOnly = 2,
-
 
         /// <summary>
         /// Indicates that the object is not inherited.

@@ -35,24 +35,20 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         FrameCache = -5,
 
-
         /// <summary>
         /// Temp variable created by the optimizer.
         /// </summary>
         OptimizerTemp = -3,
-
 
         /// <summary>
         /// Temp variable created during lowering.
         /// </summary>
         LoweringTemp = -2,
 
-
         /// <summary>
         /// Temp variable created by the emitter.
         /// </summary>
         EmitterTemp = -1,
-
 
         /// <summary>
         /// The variable is not synthesized (C#, VB). Note that SynthesizedLocalKind values
@@ -60,7 +56,6 @@ namespace Microsoft.CodeAnalysis
         /// see <see cref="SynthesizedLocalKindExtensions.IsLongLived"/>.
         /// </summary>
         UserDefined = 0,
-
 
         /// <summary>
         /// Local variable that stores value of an expression consumed by a subsequent conditional branch instruction that might jump across PDB sequence points.
@@ -70,60 +65,50 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         ConditionalBranchDiscriminator = 1,
 
-
         /// <summary>
         /// Boolean passed to Monitor.Enter (C#, VB).
         /// </summary>
         LockTaken = 2,
-
 
         /// <summary>
         /// Variable holding on the object being locked while the execution is within the block of the lock statement (C#) or SyncLock statement (VB).
         /// </summary>
         Lock = 3,
 
-
         /// <summary>
         /// Local variable that stores the resources to be disposed at the end of using statement (C#, VB).
         /// </summary>
         Using = 4,
-
 
         /// <summary>
         /// Local variable that stores the enumerator instance (C#, VB).
         /// </summary>
         ForEachEnumerator = 5,
 
-
         /// <summary>
         /// Local variable that stores the array instance (C#, VB?).
         /// </summary>
         ForEachArray = 6,
-
 
         /// <summary>
         /// Local variables that store upper bound of multi-dimensional array, for each dimension (C#, VB?).
         /// </summary>
         ForEachArrayLimit = 7,
 
-
         /// <summary>
         /// Local variables that store the current index, for each dimension (C#, VB?).
         /// </summary>
         ForEachArrayIndex = 8,
-
 
         /// <summary>
         /// Local variable that holds a pinned handle of a managed reference passed to a fixed statement (C#).
         /// </summary>
         FixedReference = 9,
 
-
         /// <summary>
         /// Local variable that holds the object passed to With statement (VB).
         /// </summary>
         With = 10,
-
 
         // VB TODO:
         ForLimit = 11,
@@ -137,12 +122,10 @@ namespace Microsoft.CodeAnalysis
         // VB TODO:
         ForDirection = 14,
 
-
         /// <summary>
         /// Local variable used to store the value of Select Case during the execution of Case statements.
         /// </summary>
         SelectCaseValue = 15,
-
 
         // VB TODO
         OnErrorActiveHandler = 16,
@@ -156,13 +139,11 @@ namespace Microsoft.CodeAnalysis
         // VB TODO
         OnErrorCurrentLine = 19,
 
-
         /// <summary>
         /// Local variable that stores the return value of an async method.
         /// </summary>
         AsyncMethodReturnValue = 20,
         StateMachineReturnValue = AsyncMethodReturnValue, // TODO VB: why do we need this in iterators?
-
 
         /// <summary>
         /// VB: Stores the return value of a function that is not accessible from user code (e.g. operator, lambda, async, iterator).
@@ -174,19 +155,16 @@ namespace Microsoft.CodeAnalysis
         TryAwaitPendingCatch = 24,
         TryAwaitPendingCaughtException = 25,
 
-
         /// <summary>
         /// Very special corner case involving filters, await and lambdas.
         /// </summary>
         ExceptionFilterAwaitHoistedExceptionLocal = 26,
-
 
         /// <summary>
         /// Local variable that stores the current state of the state machine while MoveNext method is executing.
         /// Used to avoid race conditions due to multiple reads from the lifted state.
         /// </summary>
         StateMachineCachedState = 27,
-
 
         /// <summary>
         /// Local that stores an expression value which needs to be spilled.
@@ -197,12 +175,10 @@ namespace Microsoft.CodeAnalysis
         Spill = 28,
         AwaitByRefSpill = 29,
 
-
         /// <summary>
         /// Local variable that holds on the display class instance.
         /// </summary>
         LambdaDisplayClass = 30,
-
 
         /// <summary>
         /// Local variable used to cache a delegate that is used in inner block (possibly a loop),
@@ -210,10 +186,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         CachedAnonymousMethodDelegate = 31,
 
-
         // VB TODO: XmlInExpressionLambda locals are always lifted and must have distinct names.
         XmlInExpressionLambda = 32,
-
 
         /// <summary>
         /// Local variable that stores the result of an await expression (the awaiter object).
@@ -231,13 +205,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Awaiter = 33,
 
-
         /// <summary>
         /// Stores a dynamic analysis instrumentation payload array. The value is initialized in
         /// synthesized method prologue code and referred to throughout the method body.
         /// </summary>
         InstrumentationPayload = 34,
-
 
         /// <summary>
         /// Temp created for pattern matching by type. This holds the value of an input value provisionally
@@ -245,13 +217,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         SwitchCasePatternMatching = 35,
 
-
         /// <summary>
         /// All values have to be less than or equal to <see cref="MaxValidValueForLocalVariableSerializedToDebugInformation"/>
         /// (<see cref="EditAndContinueMethodDebugInformation"/>)
         /// </summary>
         MaxValidValueForLocalVariableSerializedToDebugInformation = 0x7f - 2,
-
 
         /// <summary>
         /// An awaiter in async method.
@@ -259,7 +229,6 @@ namespace Microsoft.CodeAnalysis
         /// Not serialized to <see cref="EditAndContinueMethodDebugInformation"/>.
         /// </summary>
         AwaiterField = 0x100,
-
 
         /// <summary>
         /// The receiver of a delegate relaxation stub.

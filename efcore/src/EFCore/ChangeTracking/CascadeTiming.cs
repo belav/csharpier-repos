@@ -18,12 +18,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         Immediate,
 
-
         /// <summary>
         ///     Cascading actions are made to dependent/child entities as part of <see cref="DbContext.SaveChanges()" />.
         /// </summary>
         OnSaveChanges,
-
 
         /// <summary>
         ///     Cascading actions are never made automatically to dependent/child entities, but must instead

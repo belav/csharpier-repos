@@ -26,7 +26,6 @@ namespace Microsoft.Web.Management.PInvoke.User32
         PowerOff = 0x08,
         RestartApps = 0x40,
 
-
         //
         // plus AT MOST ONE of the following two:
         //

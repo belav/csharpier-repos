@@ -17,12 +17,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// The method was called given only a simple name, such as M(), unlike x.M().
         /// </summary>
         SimpleNameCall = 1,
-
 
         /// <summary>
         /// The call is permitted to bind against special names

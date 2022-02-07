@@ -23,66 +23,55 @@ namespace System.Text.Json
         /// </remarks>
         None,
 
-
         /// <summary>
         ///   Indicates that the token type is the start of a JSON object.
         /// </summary>
         StartObject,
-
 
         /// <summary>
         ///   Indicates that the token type is the end of a JSON object.
         /// </summary>
         EndObject,
 
-
         /// <summary>
         ///   Indicates that the token type is the start of a JSON array.
         /// </summary>
         StartArray,
-
 
         /// <summary>
         ///   Indicates that the token type is the end of a JSON array.
         /// </summary>
         EndArray,
 
-
         /// <summary>
         ///   Indicates that the token type is a JSON property name.
         /// </summary>
         PropertyName,
-
 
         /// <summary>
         ///   Indicates that the token type is the comment string.
         /// </summary>
         Comment,
 
-
         /// <summary>
         ///   Indicates that the token type is a JSON string.
         /// </summary>
         String,
-
 
         /// <summary>
         ///   Indicates that the token type is a JSON number.
         /// </summary>
         Number,
 
-
         /// <summary>
         ///   Indicates that the token type is the JSON literal <c>true</c>.
         /// </summary>
         True,
 
-
         /// <summary>
         ///   Indicates that the token type is the JSON literal <c>false</c>.
         /// </summary>
         False,
-
 
         /// <summary>
         ///   Indicates that the token type is the JSON literal <c>null</c>.

@@ -15,7 +15,6 @@ namespace System.Buffers
         /// </summary>
         After,
 
-
         /// <summary>
         /// The poison page should be placed immediately before the memory region.
         /// Attempting to access the memory page immediately before the

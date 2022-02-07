@@ -39,7 +39,6 @@ namespace Newtonsoft.Json
         /// </summary>
         Include = 0,
 
-
         /// <summary>
         /// Ignore null values when serializing and deserializing objects.
         /// </summary>

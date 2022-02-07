@@ -501,12 +501,10 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         /// </summary>
         AppendVersion = 0,
 
-
         /// <summary>
         /// Just performing file globbing search for the src, rendering a separate &lt;script&gt; for each match.
         /// </summary>
         GlobbedSrc = 1,
-
 
         /// <summary>
         /// Rendering a fallback block if primary javascript fails to load. Will also do globbing for both the

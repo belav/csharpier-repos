@@ -12,11 +12,9 @@ internal enum BlockKindInternal
     Directive = 1,
     Expression = 3,
 
-
     // Markup
     Markup = 5,
     Template = 7,
-
 
     // Special
     Comment = 8,

@@ -14,10 +14,8 @@ namespace System.Text.RegularExpressions
         /// <summary>Use default behavior.</summary>
         None = 0x0000,
 
-
         /// <summary>Use case-insensitive matching.</summary>
         IgnoreCase = 0x0001, // "i"
-
 
         /// <summary>
         /// Use multiline mode, where ^ and $ match the beginning and end of each line
@@ -25,27 +23,22 @@ namespace System.Text.RegularExpressions
         /// </summary>
         Multiline = 0x0002, // "m"
 
-
         /// <summary>
         /// Do not capture unnamed groups. The only valid captures are explicitly named
         /// or numbered groups of the form (?&lt;name&gt; subexpression).
         /// </summary>
         ExplicitCapture = 0x0004, // "n"
 
-
         /// <summary>Compile the regular expression to Microsoft intermediate language (MSIL).</summary>
         Compiled = 0x0008, // "c"
-
 
         /// <summary>
         /// Use single-line mode, where the period (.) matches every character (instead of every character except \n).
         /// </summary>
         Singleline = 0x0010, // "s"
 
-
         /// <summary>Exclude unescaped white space from the pattern, and enable comments after a number sign (#).</summary>
         IgnorePatternWhitespace = 0x0020, // "x"
-
 
         /// <summary>Change the search direction. Search moves from right to left instead of from left to right.</summary>
         RightToLeft = 0x0040, // "r"
@@ -57,10 +50,8 @@ namespace System.Text.RegularExpressions
         /// <summary>Enable ECMAScript-compliant behavior for the expression.</summary>
         ECMAScript = 0x0100, // "e"
 
-
         /// <summary>Ignore cultural differences in language.</summary>
         CultureInvariant = 0x0200,
-
 
         /// <summary>
         /// Enable matching using an approach that avoids backtracking and guarantees linear-time processing

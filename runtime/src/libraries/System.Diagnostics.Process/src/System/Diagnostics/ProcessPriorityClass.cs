@@ -14,7 +14,6 @@ namespace System.Diagnostics
         /// </devdoc>
         Normal = 0x20,
 
-
         /// <devdoc>
         ///     Specify this class for a process whose threads run only when the system is idle.
         ///     The threads of the process are preempted by the threads of any process running in
@@ -22,7 +21,6 @@ namespace System.Diagnostics
         ///     inherited by child processes.
         /// </devdoc>
         Idle = 0x40,
-
 
         /// <devdoc>
         ///     Specify this class for a process that performs time-critical tasks that must
@@ -34,7 +32,6 @@ namespace System.Diagnostics
         /// </devdoc>
         High = 0x80,
 
-
         /// <devdoc>
         ///     Specify this class for a process that has the highest possible priority.
         ///     The threads of the process preempt the threads of all other processes,
@@ -44,12 +41,10 @@ namespace System.Diagnostics
         /// </devdoc>
         RealTime = 0x100,
 
-
         /// <devdoc>
         ///     Indicates a process that has priority above Idle but below Normal.
         /// </devdoc>
         BelowNormal = 0x4000,
-
 
         /// <devdoc>
         ///     Indicates a process that has priority above Normal but below High.

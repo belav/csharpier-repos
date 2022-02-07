@@ -118,18 +118,15 @@ namespace System
             IriCanonical = 0x78000000000,
             UnixPath = 0x100000000000,
 
-
             /// <summary>
             /// Disables any validation/normalization past the authority. Fragments will always be empty. GetComponents will throw for Path/Query.
             /// </summary>
             DisablePathAndQueryCanonicalization = 0x200000000000,
 
-
             /// <summary>
             /// Used to ensure that InitializeAndValidate is only called once per Uri instance and only from an override of InitializeAndValidate
             /// </summary>
             CustomParser_ParseMinimalAlreadyCalled = 0x4000000000000000,
-
 
             /// <summary>
             /// Used for asserting that certain methods are only called from the constructor to validate thread-safety assumptions

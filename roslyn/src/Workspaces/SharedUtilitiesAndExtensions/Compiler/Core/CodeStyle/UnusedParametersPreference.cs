@@ -12,7 +12,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         // Ununsed parameters of non-public methods are flagged.
         NonPublicMethods = 0,
 
-
         // Unused parameters of methods with any accessibility (private/public/protected/internal) are flagged.
         AllMethods = 1,
     }

@@ -17,12 +17,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Includes the (return) type of the method/field/property/event.
         /// </summary>
         IncludeType = 1 << 0,
-
 
         /// <summary>
         /// Includes the modifiers of the member.
@@ -33,13 +31,11 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         IncludeModifiers = 1 << 1,
 
-
         /// <summary>
         /// Includes the accessibility modifiers of the member.
         /// For example, "public" in C# or "Public" in Visual Basic.
         /// </summary>
         IncludeAccessibility = 1 << 2,
-
 
         /// <summary>
         /// Includes the name of corresponding interface on members that explicitly implement
@@ -51,7 +47,6 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         IncludeExplicitInterface = 1 << 3,
 
-
         /// <summary>
         /// Includes the parameters of methods and properties/indexers.
         /// </summary>
@@ -59,7 +54,6 @@ namespace Microsoft.CodeAnalysis
         /// See <see cref="SymbolDisplayParameterOptions"/> for finer-grained settings.
         /// </remarks>
         IncludeParameters = 1 << 4,
-
 
         /// <summary>
         /// Includes the name of the type containing the member.
@@ -69,12 +63,10 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         IncludeContainingType = 1 << 5,
 
-
         /// <summary>
         /// Includes the value of the member if is a constant.
         /// </summary>
         IncludeConstantValue = 1 << 6,
-
 
         /// <summary>
         /// Includes the <c>ref</c>, <c>ref readonly</c>, <c>ByRef</c> keywords for ref-returning methods and properties/indexers.

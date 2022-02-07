@@ -26,7 +26,6 @@ namespace System.Reflection
         NotSerialized = 0x0080, // Field does not have to be serialized when type is remoted.
         SpecialName = 0x0200, // field is special.  Name describes how.
 
-
         // interop attributes
         PinvokeImpl = 0x2000, // Implementation is forwarded through pinvoke.
         RTSpecialName = 0x0400, // Runtime(metadata internal APIs) should check name encoding.

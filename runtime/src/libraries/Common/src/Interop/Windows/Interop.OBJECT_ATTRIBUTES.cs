@@ -70,7 +70,6 @@ internal static partial class Interop
         /// </summary>
         OBJ_INHERIT = 0x00000002,
 
-
         /// <summary>
         /// This flag only applies to objects that are named within the object manager.
         /// By default, such objects are deleted when all open handles to them are closed.
@@ -78,24 +77,20 @@ internal static partial class Interop
         /// </summary>
         OBJ_PERMANENT = 0x00000010,
 
-
         /// <summary>
         /// Only a single handle can be open for this object.
         /// </summary>
         OBJ_EXCLUSIVE = 0x00000020,
-
 
         /// <summary>
         /// Lookups for this object should be case insensitive.
         /// </summary>
         OBJ_CASE_INSENSITIVE = 0x00000040,
 
-
         /// <summary>
         /// Create on existing object should open, not fail with STATUS_OBJECT_NAME_COLLISION.
         /// </summary>
         OBJ_OPENIF = 0x00000080,
-
 
         /// <summary>
         /// Open the symbolic link, not its target.

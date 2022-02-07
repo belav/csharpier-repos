@@ -34,7 +34,6 @@ namespace Microsoft.CodeAnalysis
             GenericParameter = AttributeTargets.GenericParameter,
             All = AttributeTargets.All,
 
-
             // NOTE: VB allows AttributeUsageAttribute with no valid target, i.e. <AttributeUsageAttribute(0)>, and doesn't generate any diagnostics.
             // We use PackedAttributeUsage.Initialized field to differentiate between uninitialized AttributeUsageInfo and initialized AttributeUsageInfo with no valid target.
             Initialized = GenericParameter << 1,

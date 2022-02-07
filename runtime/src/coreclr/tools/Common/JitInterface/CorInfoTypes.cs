@@ -526,7 +526,6 @@ namespace Internal.JitInterface
     {
         INLINE_PASS = 0, // Inlining OK
 
-
         // failures are negative
         INLINE_FAIL = -1, // Inlining not OK for this case only
         INLINE_NEVER = -2, // This method should never be inlined, regardless of context
@@ -563,7 +562,6 @@ namespace Internal.JitInterface
         TAILCALL_OPTIMIZED = 0, // Optimized tail call (epilog + jmp)
         TAILCALL_RECURSIVE = 1, // Optimized into a loop (only when a method tail calls itself)
         TAILCALL_HELPER = 2, // Helper assisted tail call (call to JIT_TailCall)
-
 
         // failures are negative
         TAILCALL_FAIL = -1, // Couldn't do a tail call
@@ -604,7 +602,6 @@ namespace Internal.JitInterface
         CORINFO_ACCESS_NONNULL = 0x0004, // Instance is guaranteed non-null
         CORINFO_ACCESS_LDFTN = 0x0010, // Accessed via ldftn
 
-
         // Field access flags
         CORINFO_ACCESS_GET = 0x0100, // Field get (ldfld)
         CORINFO_ACCESS_SET = 0x0200, // Field set (stfld)
@@ -633,7 +630,6 @@ namespace Internal.JitInterface
         CORINFO_FLG_ABSTRACT = 0x00000400,
         CORINFO_FLG_EnC = 0x00000800, // member was added by Edit'n'Continue
 
-
         // These are internal flags that can only be on methods
         CORINFO_FLG_FORCEINLINE = 0x00010000, // The method should be inlined if possible.
         CORINFO_FLG_SHAREDINST = 0x00020000, // the code for this method is shared between different generic instantiations (also set on classes/types)
@@ -651,7 +647,6 @@ namespace Internal.JitInterface
         CORINFO_FLG_DONT_INLINE = 0x10000000, // The method should not be inlined
         CORINFO_FLG_DONT_INLINE_CALLER = 0x20000000, // The method should not be inlined, nor should its callers. It cannot be tail called.
         CORINFO_FLG_JIT_INTRINSIC = 0x40000000, // Method is a potential jit intrinsic; verify identity by name check
-
 
         // These are internal flags that can only be on Classes
         CORINFO_FLG_VALUECLASS = 0x00010000, // is the class a value class
@@ -735,7 +730,6 @@ namespace Internal.JitInterface
         CORINFO_TYPE_VALUECLASS = 0x13,
         CORINFO_TYPE_CLASS = 0x14,
         CORINFO_TYPE_REFANY = 0x15,
-
 
         // CORINFO_TYPE_VAR is for a generic type variable.
         // Generic type variables only appear when the JIT is doing
@@ -1299,7 +1293,6 @@ namespace Internal.JitInterface
         NOP_BOUNDARIES = 0x02, // Before every CEE_NOP instruction
         CALL_SITE_BOUNDARIES = 0x04, // Before every CEE_CALL, CEE_CALLVIRT, etc instruction
 
-
         // Set of boundaries that debugger should always reasonably ask the JIT for.
         DEFAULT_BOUNDARIES = STACK_EMPTY_BOUNDARIES | NOP_BOUNDARIES | CALL_SITE_BOUNDARIES
     }
@@ -1357,35 +1350,27 @@ namespace Internal.JitInterface
         CORINFO_TOKENKIND_Field = 0x04,
         CORINFO_TOKENKIND_Mask = 0x07,
 
-
         // token comes from CEE_LDTOKEN
         CORINFO_TOKENKIND_Ldtoken =
             0x10 | CORINFO_TOKENKIND_Class | CORINFO_TOKENKIND_Method | CORINFO_TOKENKIND_Field,
 
-
         // token comes from CEE_CASTCLASS or CEE_ISINST
         CORINFO_TOKENKIND_Casting = 0x20 | CORINFO_TOKENKIND_Class,
-
 
         // token comes from CEE_NEWARR
         CORINFO_TOKENKIND_Newarr = 0x40 | CORINFO_TOKENKIND_Class,
 
-
         // token comes from CEE_BOX
         CORINFO_TOKENKIND_Box = 0x80 | CORINFO_TOKENKIND_Class,
-
 
         // token comes from CEE_CONSTRAINED
         CORINFO_TOKENKIND_Constrained = 0x100 | CORINFO_TOKENKIND_Class,
 
-
         // token comes from CEE_NEWOBJ
         CORINFO_TOKENKIND_NewObj = 0x200 | CORINFO_TOKENKIND_Method,
 
-
         // token comes from CEE_LDVIRTFTN
         CORINFO_TOKENKIND_Ldvirtftn = 0x400 | CORINFO_TOKENKIND_Method,
-
 
         // token comes from devirtualizing a method
         CORINFO_TOKENKIND_DevirtualizedMethod = 0x800 | CORINFO_TOKENKIND_Method,

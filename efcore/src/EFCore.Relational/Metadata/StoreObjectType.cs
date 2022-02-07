@@ -16,18 +16,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         Table,
 
-
         /// <summary>
         ///     A view.
         /// </summary>
         View,
 
-
         /// <summary>
         ///     A SQL query.
         /// </summary>
         SqlQuery,
-
 
         /// <summary>
         ///     A table-valued function.

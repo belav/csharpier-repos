@@ -39,12 +39,10 @@ namespace Newtonsoft.Json
         /// </summary>
         Default = 0,
 
-
         /// <summary>
         /// Read metadata properties located anywhere in a JSON object. Note that this setting will impact performance.
         /// </summary>
         ReadAhead = 1,
-
 
         /// <summary>
         /// Do not try to read metadata properties.

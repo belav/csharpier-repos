@@ -19,14 +19,12 @@ namespace Internal.TypeSystem
     {
         None = 0,
 
-
         /// <summary>
         /// The generic type parameter is covariant. A covariant type parameter can appear
         /// as the result type of a method, the type of a read-only field, a declared base
         /// type, or an implemented interface.
         /// </summary>
         Covariant = 1,
-
 
         /// <summary>
         /// The generic type parameter is contravariant. A contravariant type parameter can
@@ -43,19 +41,16 @@ namespace Internal.TypeSystem
     {
         None = 0,
 
-
         /// <summary>
         /// A type can be substituted for the generic type parameter only if it is a reference type.
         /// </summary>
         ReferenceTypeConstraint = 0x04,
-
 
         /// <summary>
         /// A type can be substituted for the generic type parameter only if it is a value
         /// type and is not nullable.
         /// </summary>
         NotNullableValueTypeConstraint = 0x08,
-
 
         /// <summary>
         /// A type can be substituted for the generic type parameter only if it has a parameterless

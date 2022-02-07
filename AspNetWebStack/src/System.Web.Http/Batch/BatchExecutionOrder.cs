@@ -13,7 +13,6 @@ namespace System.Web.Http.Batch
         /// </summary>
         Sequential = 0,
 
-
         /// <summary>
         /// Executes the batch requests non-sequentially.
         /// </summary>

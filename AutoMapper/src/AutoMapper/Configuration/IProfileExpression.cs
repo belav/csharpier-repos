@@ -164,12 +164,10 @@ namespace AutoMapper
         /// </summary>
         Destination = 0,
 
-
         /// <summary>
         /// Check that all source members are mapped
         /// </summary>
         Source = 1,
-
 
         /// <summary>
         /// Check neither source nor destination members, skipping validation

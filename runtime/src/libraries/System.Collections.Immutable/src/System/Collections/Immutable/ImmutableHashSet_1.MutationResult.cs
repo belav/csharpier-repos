@@ -18,7 +18,6 @@ namespace System.Collections.Immutable
             /// </summary>
             Adjustment,
 
-
             /// <summary>
             /// The <see cref="MutationResult.Count"/> member describes the actual count of the collection.
             /// </summary>

@@ -14,12 +14,10 @@ namespace System.Drawing
         /// </summary>
         DirectionRightToLeft = 0x00000001,
 
-
         /// <summary>
         /// Specifies that text is vertical.
         /// </summary>
         DirectionVertical = 0x00000002,
-
 
         /// <summary>
         /// Specifies that no part of any glyph overhangs the bounding rectangle. By default some glyphs
@@ -37,12 +35,10 @@ namespace System.Drawing
         /// </summary>
         FitBlackBox = 0x00000004,
 
-
         /// <summary>
         /// Causes control characters such as the left-to-right mark to be shown in the output with a representative glyph.
         /// </summary>
         DisplayFormatControl = 0x00000020,
-
 
         /// <summary>
         /// Disables fallback to alternate fonts for characters not supported in the requested font. Any missing characters are
@@ -50,12 +46,10 @@ namespace System.Drawing
         /// </summary>
         NoFontFallback = 0x00000400,
 
-
         /// <summary>
         /// Specifies that the space at the end of each line is included in a string measurement.
         /// </summary>
         MeasureTrailingSpaces = 0x00000800,
-
 
         /// <summary>
         /// Specifies that the wrapping of text to the next line is disabled. NoWrap is implied when a point of origin
@@ -63,7 +57,6 @@ namespace System.Drawing
         /// the last word boundary that is inside the rectangle's boundary and wrapped to the next line.
         /// </summary>
         NoWrap = 0x00001000,
-
 
         /// <summary>
         /// Specifies that only entire lines are laid out in the layout rectangle. By default, layout
@@ -74,7 +67,6 @@ namespace System.Drawing
         /// rectangle at least as tall as the height of one line.
         /// </summary>
         LineLimit = 0x00002000,
-
 
         /// <summary>
         /// Specifies that characters overhanging the layout rectangle and text extending outside the layout

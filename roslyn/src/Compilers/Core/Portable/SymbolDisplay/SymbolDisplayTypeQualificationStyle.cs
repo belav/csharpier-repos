@@ -14,12 +14,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         NameOnly = 0,
 
-
         /// <summary>
         /// Shows the name of the symbol and the names of all containing types.
         /// </summary>
         NameAndContainingTypes = 1,
-
 
         /// <summary>
         /// Shows the name of the symbol the names of all containing types and namespaces.

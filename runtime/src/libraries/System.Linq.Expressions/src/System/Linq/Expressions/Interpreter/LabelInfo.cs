@@ -250,19 +250,16 @@ namespace System.Linq.Expressions.Interpreter
         // any "statement like" node that can be jumped into
         Statement,
 
-
         // these correspond to the node of the same name
         Block,
         Switch,
         Lambda,
         Try,
 
-
         // these correspond to the part of the try block we're in
         Catch,
         Finally,
         Filter,
-
 
         // the catch-all value for any other expression type
         // (means we can't jump into it)

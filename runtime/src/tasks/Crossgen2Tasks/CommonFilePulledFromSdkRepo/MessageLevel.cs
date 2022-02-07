@@ -13,7 +13,6 @@ namespace Microsoft.NET.Build.Tasks
         NormalImportance = MessageImportance.Normal,
         HighImportance = MessageImportance.High,
 
-
         // And negative values are for levels that are not informational (warning/error):
         Warning = -1,
         Error = -2,

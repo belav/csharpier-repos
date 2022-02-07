@@ -217,14 +217,12 @@ namespace Test.Cryptography
         // people's machines with leaked keys on disk every time they build.
         Disable = 1,
 
-
         // Load certs from PFX data. This is convenient as it requires no preparatory steps. The downside is that every time you open a CNG .PFX,
         // a temporarily key is permanently leaked to your disk. (And every time you open a CAPI PFX, a key is leaked if the test aborts before
         // Disposing the certificate.)
         //
         // Only use if you're testing on a VM or if you just don't care about your machine accumulating leaked keys.
         LoadFromPfx = 2,
-
 
         // Load certs from the certificate store (set StoreName to the name you want to use.) This requires that you preinstall the certificates
         // into the cert store (say by File.WriteAllByte()'ing the PFX blob into a "foo.pfx" file, then launching it and following the wizard.)

@@ -14,7 +14,6 @@ public enum HttpOnlyPolicy
     /// </summary>
     None,
 
-
     /// <summary>
     /// The cookie is configured with a HttpOnly attribute. This cookie inaccessible to the
     /// JavaScript <c>document.cookie</c> API.

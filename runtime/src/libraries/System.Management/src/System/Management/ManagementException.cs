@@ -622,7 +622,6 @@ namespace System.Management
         /// </summary>
         ClientTooSlow = unchecked((int)0x80041067),
 
-
         /// <summary>
         ///    <para> The provider registration overlaps with the system event
         ///       domain. </para>

@@ -27,7 +27,6 @@ namespace System.Reflection
         HideBySig = 0x0080, // Method hides by name+sig, else just by name.
         CheckAccessOnOverride = 0x0200,
 
-
         // vtable layout mask - Use this mask to retrieve vtable attributes.
         VtableLayoutMask = 0x0100,
         ReuseSlot = 0x0000, // The default.
@@ -38,7 +37,6 @@ namespace System.Reflection
         // method implementation attributes.
         Abstract = 0x0400, // Method does not provide an implementation.
         SpecialName = 0x0800, // Method is special.  Name describes how.
-
 
         // interop attributes
         PinvokeImpl = 0x2000, // Implementation is forwarded through pinvoke.

@@ -76,7 +76,6 @@ namespace Internal.NativeFormat
         TypeHandle = 0x01,
         InterfaceCall = 0x02,
 
-
         // unused                   = 0x03,
         MethodDictionary = 0x04,
         StaticData = 0x05,
@@ -87,13 +86,11 @@ namespace Internal.NativeFormat
         DefaultConstructor = 0x0a,
         ThreadStaticIndex = 0x0b,
 
-
         // unused                   = 0x0c,
         Method = 0x0d,
         IsInst = 0x0e,
         CastClass = 0x0f,
         AllocateArray = 0x10,
-
 
         // unused                   = 0x11,
         TypeSize = 0x12,

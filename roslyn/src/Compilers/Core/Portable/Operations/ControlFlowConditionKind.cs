@@ -15,7 +15,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// </summary>
         None,
 
-
         /// <summary>
         /// Indicates a conditional branch from a <see cref="BasicBlock"/>,
         /// with a non-null <see cref="BasicBlock.BranchValue"/> and <see cref="BasicBlock.ConditionalSuccessor"/>.
@@ -23,7 +22,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// then the branch <see cref="BasicBlock.ConditionalSuccessor"/> is taken.
         /// </summary>
         WhenFalse,
-
 
         /// <summary>
         /// Indicates a conditional branch from a <see cref="BasicBlock"/>,

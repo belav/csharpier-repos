@@ -321,7 +321,6 @@ namespace System
             Era = 16, // era name
             NumUTCTimeMark = 17, // Num + 'Z'
 
-
             // When you add a new token which will be in the
             // state table, add it after NumLocalTimeMark.
             Unk = 18, // unknown
@@ -348,7 +347,6 @@ namespace System
             N = 1, // have one number
             NN = 2, // have two numbers
 
-
             // The following are known to be part of a date
 
             D_Nd = 3, // date string: have number followed by date separator
@@ -367,13 +365,11 @@ namespace System
             D_S = 16, // have numbers followed by a date suffix.
             T_S = 17, // have numbers followed by a time suffix.
 
-
             // The following are known to be part of a time
 
             T_Nt = 18, // have num followed by time separator
             T_NNt = 19, // have two numbers followed by time separator
             ERROR = 20,
-
 
             // The following are terminal states. These all have an action
             // associated with them; and transition back to BEGIN.
@@ -7368,7 +7364,6 @@ namespace System
         JapaneseEraToken = 13, // Era name for JapaneseCalendar
         TEraToken = 14, // Era name for TaiwanCalendar
         IgnorableSymbol = 15, // A separator like "," that is equivalent to whitespace
-
 
         // Separator tokens.
         SEP_Unk = 0x100, // Unknown separator.

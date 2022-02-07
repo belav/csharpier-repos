@@ -52,7 +52,6 @@ public enum CompatibilityVersion
     [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
     Version_2_0,
 
-
     /// <summary>
     /// Sets the default value of settings on <see cref="MvcOptions"/> to match the behavior of
     /// ASP.NET Core MVC 2.1.
@@ -63,7 +62,6 @@ public enum CompatibilityVersion
     /// </remarks>
     [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
     Version_2_1,
-
 
     /// <summary>
     /// Sets the default value of settings on <see cref="MvcOptions"/> to match the behavior of
@@ -81,14 +79,12 @@ public enum CompatibilityVersion
     [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
     Version_2_2,
 
-
     /// <summary>
     /// Sets the default value of settings on <see cref="MvcOptions"/> and other <c>Options</c> types to match
     /// the behavior of ASP.NET Core MVC 3.0.
     /// </summary>
     [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
     Version_3_0,
-
 
     /// <summary>
     /// Sets the default value of settings on <see cref="MvcOptions"/> to match the latest release. Use this

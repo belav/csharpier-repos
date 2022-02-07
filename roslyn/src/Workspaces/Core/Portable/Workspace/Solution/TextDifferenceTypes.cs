@@ -24,12 +24,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Line = 1,
 
-
         /// <summary>
         /// Compute the word difference.
         /// </summary>
         Word = 2,
-
 
         /// <summary>
         /// Compute the character difference.

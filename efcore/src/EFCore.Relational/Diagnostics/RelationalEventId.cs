@@ -36,14 +36,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             ConnectionClosed,
             ConnectionError,
 
-
             // Command events
             CommandExecuting = CoreEventId.RelationalBaseId + 100,
             CommandExecuted,
             CommandError,
             CommandCreating,
             CommandCreated,
-
 
             // Transaction events
             TransactionStarted = CoreEventId.RelationalBaseId + 200,
@@ -65,10 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             ReleasingTransactionSavepoint,
             ReleasedTransactionSavepoint,
 
-
             // DataReader events
             DataReaderDisposing = CoreEventId.RelationalBaseId + 300,
-
 
             // Migrations events
             MigrateUsingConnection = CoreEventId.RelationalBaseId + 400,
@@ -81,14 +77,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             MigrationAttributeMissingWarning,
             ColumnOrderIgnoredWarning,
 
-
             // Query events
             QueryClientEvaluationWarning = CoreEventId.RelationalBaseId + 500,
             QueryPossibleUnintendedUseOfEqualsWarning,
             Obsolete_QueryPossibleExceptionWithAggregateOperatorWarning,
             Obsolete_ValueConversionSqlLiteralWarning,
             MultipleCollectionIncludeWarning,
-
 
             // Model validation events
             ModelValidationKeyDefaultValueWarning = CoreEventId.RelationalBaseId + 600,
@@ -99,7 +93,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             ForeignKeyPropertiesMappedToUnrelatedTables,
             OptionalDependentWithoutIdentifyingPropertyWarning,
             DuplicateColumnOrders,
-
 
             // Update events
             BatchReadyForExecution = CoreEventId.RelationalBaseId + 700,

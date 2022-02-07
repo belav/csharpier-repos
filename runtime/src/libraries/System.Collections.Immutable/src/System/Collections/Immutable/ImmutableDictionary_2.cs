@@ -90,18 +90,15 @@ namespace System.Collections.Immutable
             /// </summary>
             SetValue,
 
-
             /// <summary>
             /// Skips the mutating operation if a key conflict is detected.
             /// </summary>
             Skip,
 
-
             /// <summary>
             /// Throw an exception if the key already exists with a different key.
             /// </summary>
             ThrowIfValueDifferent,
-
 
             /// <summary>
             /// Throw an exception if the key already exists regardless of its value.
@@ -119,12 +116,10 @@ namespace System.Collections.Immutable
             /// </summary>
             AppliedWithoutSizeChange,
 
-
             /// <summary>
             /// The change required element(s) to be added or removed from the collection.
             /// </summary>
             SizeChanged,
-
 
             /// <summary>
             /// No change was required (the operation ended in a no-op).

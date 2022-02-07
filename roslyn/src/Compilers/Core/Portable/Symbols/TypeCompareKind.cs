@@ -14,7 +14,6 @@ namespace Microsoft.CodeAnalysis
     {
         ConsiderEverything = 0,
 
-
         // This comparison option is temporary. All usages should be reviewed, and it should be removed. https://github.com/dotnet/roslyn/issues/31742
         ConsiderEverything2 = ConsiderEverything,
         IgnoreCustomModifiersAndArraySizesAndLowerBounds = 1,
@@ -24,7 +23,6 @@ namespace Microsoft.CodeAnalysis
         IgnoreNullableModifiersForReferenceTypes = 8,
         ObliviousNullableModifierMatchesAny = 16,
         IgnoreNativeIntegers = 32,
-
 
         // For the purposes of a few specific cases such as overload comparisons, we need to consider function pointers that only differ
         // by ref, in, out, or ref readonly identical. For these specific scenarios, this option is available. However, it is not in

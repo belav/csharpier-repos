@@ -627,120 +627,100 @@ namespace Microsoft.Cci
         /// </summary>
         Boolean,
 
-
         /// <summary>
         /// An unsigned 16 bit integer representing a Unicode UTF16 code point.
         /// </summary>
         Char,
-
 
         /// <summary>
         /// A signed 8 bit integer.
         /// </summary>
         Int8,
 
-
         /// <summary>
         /// A 32 bit IEEE floating point number.
         /// </summary>
         Float32,
-
 
         /// <summary>
         /// A 64 bit IEEE floating point number.
         /// </summary>
         Float64,
 
-
         /// <summary>
         /// A signed 16 bit integer.
         /// </summary>
         Int16,
-
 
         /// <summary>
         /// A signed 32 bit integer.
         /// </summary>
         Int32,
 
-
         /// <summary>
         /// A signed 64 bit integer.
         /// </summary>
         Int64,
-
 
         /// <summary>
         /// A signed 32 bit integer or 64 bit integer, depending on the native word size of the underlying processor.
         /// </summary>
         IntPtr,
 
-
         /// <summary>
         /// A pointer to fixed or unmanaged memory.
         /// </summary>
         Pointer,
-
 
         /// <summary>
         /// A reference to managed memory.
         /// </summary>
         Reference,
 
-
         /// <summary>
         /// A string.
         /// </summary>
         String,
-
 
         /// <summary>
         /// An unsigned 8 bit integer.
         /// </summary>
         UInt8,
 
-
         /// <summary>
         /// An unsigned 16 bit integer.
         /// </summary>
         UInt16,
-
 
         /// <summary>
         /// An unsigned 32 bit integer.
         /// </summary>
         UInt32,
 
-
         /// <summary>
         /// An unsigned 64 bit integer.
         /// </summary>
         UInt64,
-
 
         /// <summary>
         /// An unsigned 32 bit integer or 64 bit integer, depending on the native word size of the underlying processor.
         /// </summary>
         UIntPtr,
 
-
         /// <summary>
         /// A type that denotes the absence of a value.
         /// </summary>
         Void,
-
 
         /// <summary>
         /// Not a primitive type.
         /// </summary>
         NotPrimitive,
 
-
         /// <summary>
         /// A pointer to a function in fixed or managed memory.
         /// </summary>
         FunctionPointer,
-
 
         /// <summary>
         /// Type is a dummy type.
@@ -758,30 +738,25 @@ namespace Microsoft.Cci
         /// </summary>
         Private = 1,
 
-
         /// <summary>
         /// The member is visible only within the intersection of its family (its own type and any subtypes) and assembly.
         /// </summary>
         FamilyAndAssembly = 2,
-
 
         /// <summary>
         /// The member is visible only within its own assembly.
         /// </summary>
         Assembly = 3,
 
-
         /// <summary>
         /// The member is visible only within its own type and any subtypes.
         /// </summary>
         Family = 4,
 
-
         /// <summary>
         /// The member is visible only within the union of its family and assembly.
         /// </summary>
         FamilyOrAssembly = 5,
-
 
         /// <summary>
         /// The member is visible everywhere its declaring type is visible.
@@ -799,13 +774,11 @@ namespace Microsoft.Cci
         /// </summary>
         NonVariant = 0,
 
-
         /// <summary>
         /// A type or method instance will match another instance if it has a type for this parameter that is the same or a subtype of the type the
         /// other instance has for this parameter.
         /// </summary>
         Covariant = 1,
-
 
         /// <summary>
         /// A type or method instance will match another instance if it has a type for this parameter that is the same or a supertype of the type the

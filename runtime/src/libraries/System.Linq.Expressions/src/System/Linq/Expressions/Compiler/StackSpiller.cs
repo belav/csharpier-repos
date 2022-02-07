@@ -43,12 +43,10 @@ namespace System.Linq.Expressions.Compiler
             /// </summary>
             None = 0,
 
-
             /// <summary>
             /// Copy into a new node.
             /// </summary>
             Copy = 1,
-
 
             /// <summary>
             /// Spill stack into temps.

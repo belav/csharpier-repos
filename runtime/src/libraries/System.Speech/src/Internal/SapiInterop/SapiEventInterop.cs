@@ -32,7 +32,6 @@ namespace System.Speech.Internal.SapiInterop
     {
         SPEI_UNDEFINED = 0,
 
-
         // TTS engine
         SPEI_START_INPUT_STREAM = 1,
         SPEI_END_INPUT_STREAM = 2,
@@ -44,12 +43,10 @@ namespace System.Speech.Internal.SapiInterop
         SPEI_VISEME = 8,
         SPEI_TTS_AUDIO_LEVEL = 9, // wParam contains current output audio level
 
-
         // TTS engine vendors use these reserved bits
         SPEI_TTS_PRIVATE = 15,
         SPEI_MIN_TTS = 1,
         SPEI_MAX_TTS = 15,
-
 
         // Speech Recognition
         SPEI_END_SR_STREAM = 34, // LPARAM contains HRESULT, WPARAM contains flags (SPESF_xxx)
@@ -75,7 +72,6 @@ namespace System.Speech.Internal.SapiInterop
         SPEI_TEXTFEEDBACK = 54, // LPARAM is a pointer to FILETIME + FeedbackText
         SPEI_RECOGNITION_ALL = 55,
         SPEI_BARGE_IN = 56,
-
 
         // SPEI_MIN_SR = 34,
         // SPEI_MAX_SR = 56,

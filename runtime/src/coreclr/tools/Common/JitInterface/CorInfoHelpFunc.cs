@@ -15,7 +15,6 @@ namespace Internal.JitInterface
     {
         CORINFO_HELP_UNDEF, // invalid value. This should never be used
 
-
         /* Arithmetic helpers */
 
         CORINFO_HELP_DIV, // For the ARM 32-bit integer divide uses a helper call :-(
@@ -47,7 +46,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_FLTROUND,
         CORINFO_HELP_DBLROUND,
 
-
         /* Allocating a new object. Always use ICorClassInfo::getNewHelper() to decide
            which is the right helper to use to allocate an object of a given type. */
 
@@ -70,7 +68,6 @@ namespace Internal.JitInterface
 
         CORINFO_HELP_INITCLASS, // Initialize class if not already initialized
         CORINFO_HELP_INITINSTCLASS, // Initialize class for instantiated type
-
 
         // Use ICorClassInfo::getCastingHelper to determine
         // the right helper to use
@@ -95,7 +92,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_ARRADDR_ST, // assign to element of object array with type-checking
         CORINFO_HELP_LDELEMA_REF, // does a precise type comparision and returns address
 
-
         /* Exceptions */
 
         CORINFO_HELP_THROW, // Throw an exception object
@@ -111,7 +107,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_FIELD_ACCESS_EXCEPTION,
         CORINFO_HELP_CLASS_ACCESS_EXCEPTION,
         CORINFO_HELP_ENDCATCH, // call back into the EE at the end of a catch block
-
 
         /* Synchronization */
 
@@ -131,7 +126,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_STRESS_GC, // Force a GC, but then update the JITTED code to be a noop call
         CORINFO_HELP_CHECK_OBJ, // confirm that ECX is a valid object pointer (debugging only)
 
-
         /* GC Write barrier support */
 
         CORINFO_HELP_ASSIGN_REF, // universal helpers with F_CALL_CONV calling convention
@@ -139,7 +133,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_ASSIGN_REF_ENSURE_NONHEAP, // Do the store, and ensure that the target was not in the heap.
         CORINFO_HELP_ASSIGN_BYREF,
         CORINFO_HELP_ASSIGN_STRUCT,
-
 
         /* Accessing fields */
 
@@ -165,7 +158,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_GETSTATICFIELDADDR_CONTEXT, // Helper for context-static fields
         CORINFO_HELP_GETSTATICFIELDADDR_TLS, // Helper for PE TLS fields
 
-
         // There are a variety of specialized helpers for accessing static fields. The JIT should use
         // ICorClassInfo::getSharedStaticsOrCCtorHelper to determine which helper to use
 
@@ -182,7 +174,6 @@ namespace Internal.JitInterface
         // Helper to class initialize shared generic with dynamicclass, but not get static field address
         CORINFO_HELP_CLASSINIT_SHARED_DYNAMICCLASS,
 
-
         // Helpers for thread statics
         CORINFO_HELP_GETGENERICS_GCTHREADSTATIC_BASE,
         CORINFO_HELP_GETGENERICS_NONGCTHREADSTATIC_BASE,
@@ -193,17 +184,14 @@ namespace Internal.JitInterface
         CORINFO_HELP_GETSHARED_GCTHREADSTATIC_BASE_DYNAMICCLASS,
         CORINFO_HELP_GETSHARED_NONGCTHREADSTATIC_BASE_DYNAMICCLASS,
 
-
         /* Debugger */
 
         CORINFO_HELP_DBG_IS_JUST_MY_CODE, // Check if this is "JustMyCode" and needs to be stepped through.
-
 
         /* Profiling enter/leave probe addresses */
         CORINFO_HELP_PROF_FCN_ENTER, // record the entry to a method (caller)
         CORINFO_HELP_PROF_FCN_LEAVE, // record the completion of current method (caller)
         CORINFO_HELP_PROF_FCN_TAILCALL, // record the completionof current method through tailcall (caller)
-
 
         /* Miscellaneous */
 
@@ -248,7 +236,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_EE_REMOTING_THUNK, // Not real JIT helper. Used for remoting precode in native images.
         CORINFO_HELP_EE_PERSONALITY_ROUTINE, // Not real JIT helper. Used in native images.
         CORINFO_HELP_EE_PERSONALITY_ROUTINE_FILTER_FUNCLET, // Not real JIT helper. Used in native images to detect filter funclets.
-
 
         // ASSIGN_REF_EAX - CHECKED_ASSIGN_REF_EBP: NOGC_WRITE_BARRIERS JIT helper calls
         //

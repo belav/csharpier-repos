@@ -19,7 +19,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     {
         Undefined, // use when we don't have a specific goal for this operation
 
-
         // Name             Target (ms)     Upper Bound (ms)        UX / Feedback
         Instant, // <=50            100                     No noticeable delay
         Fast, // 50-100          200                     Minimally noticeable delay

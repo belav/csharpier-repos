@@ -13,12 +13,10 @@ namespace System.ComponentModel.DataAnnotations.Schema
         /// </summary>
         None = 0,
 
-
         /// <summary>
         ///     The database generates a value when a row is inserted.
         /// </summary>
         Identity = 1,
-
 
         /// <summary>
         ///     The database generates a value when a row is inserted or updated.

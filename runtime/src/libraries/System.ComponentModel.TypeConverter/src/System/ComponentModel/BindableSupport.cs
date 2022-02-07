@@ -14,12 +14,10 @@ namespace System.ComponentModel
         /// </summary>
         No = 0x00,
 
-
         /// <summary>
         /// The property or event is not bindable.
         /// </summary>
         Yes = 0x01,
-
 
         /// <summary>
         /// The property or event is the default.

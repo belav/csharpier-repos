@@ -7,7 +7,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         NoOp,
 
-
         // Now expressions. Keep BINOP first!
         BinaryOp,
         UnaryOp,
@@ -37,7 +36,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         PropertyInfo,
         NamedArgumentSpecification,
 
-
         /***************************************************************************************************
             Ones below here are not used to create actual expr types, only EK_ values.
             ***************************************************************************************************/
@@ -51,7 +49,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Dec,
         LogicalNot,
 
-
         // keep Eq to GreaterThanOrEqual in the same sequence (ILGENREC::genCondBranch)
         Eq,
         RelationalMin = Eq,
@@ -61,7 +58,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         GreaterThan,
         GreaterThanOrEqual,
         RelationalMax = GreaterThanOrEqual,
-
 
         // keep Add to RightShift in the same sequence (ILGENREC::genBinopExpr)
         Add,
@@ -78,7 +74,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         LeftShirt,
         RightShift,
 
-
         // keep Add to RightShift in the same sequence (ILGENREC::genBinopExpr)
         LogicalAnd,
         LogicalOr,
@@ -87,7 +82,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Swap,
         Indir,
         Addr,
-
 
         // Next we have the predefined operator kinds. We have one EXPRKINDDEF for each of these.
         // So for example, we will have an EK_STRINGCOMPARISON, and an EK_DELEGATEADDITION etc.
@@ -104,7 +98,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         EK_RANGE,
 #endif
         MultiOffset, // This has to be last!!! To deal /w multiops we add this to the op to obtain the ek in the op table
-
 
         // Statements are all before expressions and the first expression is EK_BINOP
         // EK types starting with EK_COUNT do not have associated EXPR structures,

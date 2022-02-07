@@ -559,7 +559,6 @@ public class ByteMark
         LUMINS = 40, /* LUMINSECONDS */
         ALIGN = 41, /* ALIGN */
 
-
         // Added for control of new C# rect/jagged struct/class tests
         DONUMJAGGED = 42, /* DONUMSORTJAGGED */
         DONUMRECT = 43, /* DONUMSORTRECT */

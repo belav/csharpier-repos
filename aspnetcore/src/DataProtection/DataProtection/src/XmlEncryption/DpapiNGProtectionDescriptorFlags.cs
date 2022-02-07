@@ -20,13 +20,11 @@ public enum DpapiNGProtectionDescriptorFlags
     /// </summary>
     None = 0,
 
-
     /// <summary>
     /// The provided descriptor is a reference to a full descriptor stored
     /// in the system registry.
     /// </summary>
     NamedDescriptor = 0x00000001,
-
 
     /// <summary>
     /// When combined with <see cref="NamedDescriptor"/>, uses the HKLM registry

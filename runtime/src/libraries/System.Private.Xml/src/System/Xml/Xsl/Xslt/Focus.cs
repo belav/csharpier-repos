@@ -17,16 +17,13 @@ namespace System.Xml.Xsl.Xslt
         // Used to prevent bugs
         None,
 
-
         // Document node of the document containing the initial context node
         // Used while compiling global variables and params
         InitialDocumentNode,
 
-
         // Initial context node for the transformation
         // Used while compiling initial apply-templates
         InitialContextNode,
-
 
         // Context node is specified by iterator
         // Used while compiling keys

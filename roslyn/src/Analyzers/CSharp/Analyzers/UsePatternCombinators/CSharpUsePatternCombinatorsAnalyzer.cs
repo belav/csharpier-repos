@@ -26,12 +26,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             /// </summary>
             None,
 
-
             /// <summary>
             /// The left operand is the constant.
             /// </summary>
             Left,
-
 
             /// <summary>
             /// The right operand is the constant.

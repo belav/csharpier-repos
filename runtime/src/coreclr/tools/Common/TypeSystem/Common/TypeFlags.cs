@@ -10,7 +10,6 @@ namespace Internal.TypeSystem
     {
         CategoryMask = 0x3F,
 
-
         // Primitive
         Unknown = 0x00,
         Void = 0x01,

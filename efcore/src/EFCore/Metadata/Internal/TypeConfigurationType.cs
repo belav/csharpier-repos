@@ -19,7 +19,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         Ignored,
 
-
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -27,7 +26,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         EntityType,
-
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,7 +35,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         SharedTypeEntityType,
 
-
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -46,7 +43,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         OwnedEntityType,
 
-
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -54,7 +50,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         Property,
-
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

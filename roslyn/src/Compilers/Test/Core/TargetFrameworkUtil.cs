@@ -22,13 +22,11 @@ namespace Roslyn.Test.Utilities
         /// </summary>
         Empty,
 
-
         // These are the preferred values that we should be targeting
         NetStandard20,
         NetCoreApp,
         NetFramework,
         StandardLatest,
-
 
         // Eventually these will be deleted and replaced with NetStandard20. Short term this creates the "standard"
         // API set across desktop and coreclr. It's also helpful because there are no null annotations hence error
@@ -37,12 +35,10 @@ namespace Roslyn.Test.Utilities
         StandardAndCSharp,
         StandardAndVBRuntime,
 
-
         /// <summary>
         /// Compat framework for the default set of references many vb compilations get.
         /// </summary>
         DefaultVb,
-
 
         /// <summary>
         /// This will eventually be folded into NetCoreApp. The default experience for compiling .NET Core code
@@ -50,12 +46,10 @@ namespace Roslyn.Test.Utilities
         /// </summary>
         NetCoreAppAndCSharp,
 
-
         /// <summary>
         /// Used for building tests against WinRT scenarios
         /// </summary>
         WinRT,
-
 
         // The flavors of mscorlib we support + extending them with LINQ and dynamic.
         Mscorlib40,
@@ -72,12 +66,10 @@ namespace Roslyn.Test.Utilities
         Mscorlib461Extended,
         DesktopLatestExtended = Mscorlib461Extended,
 
-
         /// <summary>
         /// Minimal set of required types (<see cref="NetFx.Minimal.mincorlib"/>).
         /// </summary>
         Minimal,
-
 
         /// <summary>
         /// Minimal set of required types and Task implementation (<see cref="NetFx.Minimal.minasync"/>).

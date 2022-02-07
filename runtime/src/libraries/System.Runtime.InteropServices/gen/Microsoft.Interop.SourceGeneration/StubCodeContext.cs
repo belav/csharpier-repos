@@ -18,24 +18,20 @@ namespace Microsoft.Interop
             /// </summary>
             Invalid,
 
-
             /// <summary>
             /// Perform any setup required
             /// </summary>
             Setup,
-
 
             /// <summary>
             /// Convert managed data to native data
             /// </summary>
             Marshal,
 
-
             /// <summary>
             /// Pin data in preparation for calling the generated P/Invoke
             /// </summary>
             Pin,
-
 
             /// <summary>
             /// Call the generated P/Invoke
@@ -46,24 +42,20 @@ namespace Microsoft.Interop
             /// </remarks>
             Invoke,
 
-
             /// <summary>
             /// Convert native data to managed data
             /// </summary>
             Unmarshal,
-
 
             /// <summary>
             /// Perform any cleanup required
             /// </summary>
             Cleanup,
 
-
             /// <summary>
             /// Keep alive any managed objects that need to stay alive across the call.
             /// </summary>
             KeepAlive,
-
 
             /// <summary>
             /// Convert native data to managed data even in the case of an exception during

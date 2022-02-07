@@ -35,12 +35,10 @@ namespace Newtonsoft.Json
         /// </summary>
         Auto = 0,
 
-
         /// <summary>
         /// Only reuse existing objects.
         /// </summary>
         Reuse = 1,
-
 
         /// <summary>
         /// Always create new objects.

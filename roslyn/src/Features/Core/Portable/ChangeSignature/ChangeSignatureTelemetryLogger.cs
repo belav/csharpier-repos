@@ -26,11 +26,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ChangeSignatureDialogCommitted,
             ChangeSignatureCommitCompleted,
 
-
             // Calculate % of successful dialog launches
             AddParameterDialogLaunched,
             AddParameterDialogCommitted,
-
 
             // Which transformations were done
             CommittedSessionAddedRemovedReordered,
@@ -41,26 +39,21 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             CommittedSessionRemovedOnly,
             CommittedSessionReorderedOnly,
 
-
             // Signature change specification details
             CommittedSession_OriginalParameterCount,
             CommittedSessionWithRemoved_NumberRemoved,
             CommittedSessionWithAdded_NumberAdded,
-
 
             // Signature change commit information
             CommittedSessionNumberOfDeclarationsUpdated,
             CommittedSessionNumberOfCallSitesUpdated,
             CommittedSessionCommitElapsedMS,
 
-
             // Added parameter binds or doesn't bind
             AddedParameterTypeBinds,
 
-
             // Added parameter required or optional w/default
             AddedParameterRequired,
-
 
             // Added parameter callsite value options
             AddedParameterValueExplicit,

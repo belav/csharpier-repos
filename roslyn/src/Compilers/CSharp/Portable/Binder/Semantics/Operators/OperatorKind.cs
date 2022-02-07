@@ -259,17 +259,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedBitwiseComplement = Lifted | UserDefined | BitwiseComplement,
         DynamicBitwiseComplement = Dynamic | BitwiseComplement,
 
-
         // operator true and operator false are almost always user-defined, and never lifted.
         UserDefinedTrue = UserDefined | True,
         UserDefinedFalse = UserDefined | False,
-
 
         // The one time operator true is not user-defined is "if(dyn)" where dyn is of type dynamic.
         // In that case we bind this as a dynamic "operator true" invocation, rather than as a
         // dynamic conversion to bool.
         DynamicTrue = Dynamic | True,
-
 
         // Used during lowering of dynamic logical operators.
         DynamicFalse = Dynamic | False,

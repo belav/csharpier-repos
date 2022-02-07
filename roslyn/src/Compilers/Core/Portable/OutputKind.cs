@@ -18,30 +18,25 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         ConsoleApplication = 0,
 
-
         /// <summary>
         /// An .exe with an entry point but no console.
         /// </summary>
         WindowsApplication = 1,
-
 
         /// <summary>
         /// A .dll file.
         /// </summary>
         DynamicallyLinkedLibrary = 2,
 
-
         /// <summary>
         /// A .netmodule file.
         /// </summary>
         NetModule = 3,
 
-
         /// <summary>
         /// A .winmdobj file.
         /// </summary>
         WindowsRuntimeMetadata = 4,
-
 
         /// <summary>
         /// An .exe that can run in an app container.

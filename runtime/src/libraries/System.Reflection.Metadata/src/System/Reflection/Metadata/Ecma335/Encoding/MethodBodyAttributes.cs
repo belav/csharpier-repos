@@ -14,7 +14,6 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Zero-initialize any locals the method defines and dynamically allocated local memory.
         /// </summary>

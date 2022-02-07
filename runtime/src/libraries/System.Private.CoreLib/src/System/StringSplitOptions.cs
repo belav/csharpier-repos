@@ -30,7 +30,6 @@ namespace System
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Remove empty (zero-length) substrings from the result.
         /// </summary>
@@ -39,7 +38,6 @@ namespace System
         /// then substrings that consist only of whitespace characters are also removed from the result.
         /// </remarks>
         RemoveEmptyEntries = 1,
-
 
         /// <summary>
         /// Trim whitespace from each substring in the result.

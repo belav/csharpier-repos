@@ -292,7 +292,6 @@ internal static partial class Interop
             SSL_ERROR_SYSCALL = 5,
             SSL_ERROR_ZERO_RETURN = 6,
 
-
             // NOTE: this SslErrorCode value doesn't exist in OpenSSL, but
             // we use it to distinguish when a renegotiation is pending.
             // Choosing an arbitrarily large value that shouldn't conflict

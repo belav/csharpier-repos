@@ -35,7 +35,6 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         Ignore = 0,
 
-
         /// <summary>
         /// Load comments as a <see cref="JValue"/> with type <see cref="JTokenType.Comment"/>.
         /// </summary>

@@ -21,7 +21,6 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         None = 0,
 
-
         /// <summary>
         /// Includes the <c>this</c> keyword before the first parameter of an extension method in C#.
         /// </summary>
@@ -30,31 +29,26 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         IncludeExtensionThis = 1 << 0,
 
-
         /// <summary>
         /// Includes the <c>params</c>, <c>ref</c>, <c>in</c>, <c>out</c>, <c>ByRef</c>, <c>ByVal</c> keywords before parameters.
         /// </summary>
         IncludeParamsRefOut = 1 << 1,
-
 
         /// <summary>
         /// Includes parameter types in symbol descriptions.
         /// </summary>
         IncludeType = 1 << 2,
 
-
         /// <summary>
         /// Includes parameter names in symbol descriptions.
         /// </summary>
         IncludeName = 1 << 3,
-
 
         /// <summary>
         /// Includes parameter default values in symbol descriptions.
         /// </summary>
         /// <remarks>Ignored if <see cref="IncludeName"/> is not set.</remarks>
         IncludeDefaultValue = 1 << 4,
-
 
         /// <summary>
         /// Includes square brackets around optional parameters.

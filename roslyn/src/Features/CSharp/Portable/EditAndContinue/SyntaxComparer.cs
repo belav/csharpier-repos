@@ -75,7 +75,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             AccessorList, // tied to parent
             AccessorDeclaration, // tied to parent
 
-
             // Statement syntax kinds
             Block,
             CheckedStatement,
@@ -109,7 +108,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             ExpressionStatement,
             LabeledStatement,
 
-
             // TODO:
             // Ideally we could declare LocalVariableDeclarator tied to the first enclosing node that defines local scope (block, foreach, etc.)
             // Also consider handling LocalDeclarationStatement as just a bag of variable declarators,
@@ -133,7 +131,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             GroupClauseLambda, // tied to parent
             QueryContinuation, // tied to parent
 
-
             // Syntax kinds that are common to both statement and top level
             TypeParameterList, // tied to parent
             TypeParameterConstraintClause, // tied to parent
@@ -143,7 +140,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             Parameter, // tied to parent
             AttributeList, // tied to parent
             Attribute, // tied to parent
-
 
             // helpers:
             Count,

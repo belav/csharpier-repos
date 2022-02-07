@@ -19,12 +19,10 @@ namespace ILCompiler
         /// </summary>
         None,
 
-
         /// <summary>
         /// The graph keeps track of the first dependency.
         /// </summary>
         First,
-
 
         /// <summary>
         /// The graph keeps track of all dependencies.

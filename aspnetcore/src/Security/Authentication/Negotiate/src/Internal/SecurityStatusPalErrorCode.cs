@@ -14,7 +14,6 @@ internal enum SecurityStatusPalErrorCode
     CredentialsNeeded,
     Renegotiate,
 
-
     // Errors
     OutOfMemory,
     InvalidHandle,

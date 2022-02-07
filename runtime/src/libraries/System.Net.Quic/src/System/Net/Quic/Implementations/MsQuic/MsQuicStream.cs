@@ -1797,18 +1797,15 @@ namespace System.Net.Quic.Implementations.MsQuic
             /// </summary>
             None = 0,
 
-
             /// <summary>
             /// Data is available in <see cref="State.ReceiveQuicBuffers"/>.
             /// </summary>
             IndividualReadComplete,
 
-
             /// <summary>
             /// User called ReadAsync()
             /// </summary>
             PendingRead,
-
 
             // following states are final:
 
@@ -1817,18 +1814,15 @@ namespace System.Net.Quic.Implementations.MsQuic
             /// </summary>
             ReadsCompleted,
 
-
             /// <summary>
             /// User has aborted the stream, either via a cancellation token on ReadAsync(), or via AbortRead().
             /// </summary>
             Aborted,
 
-
             /// <summary>
             /// Connection was closed, either by user or by the peer.
             /// </summary>
             ConnectionClosed,
-
 
             /// <summary>
             /// Stream is closed for reading.
@@ -1858,7 +1852,6 @@ namespace System.Net.Quic.Implementations.MsQuic
             None = 0,
             Pending,
             Finished,
-
 
             // Terminal states
             Aborted,

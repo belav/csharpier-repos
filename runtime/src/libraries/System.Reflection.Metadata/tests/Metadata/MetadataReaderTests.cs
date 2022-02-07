@@ -47,7 +47,6 @@ namespace System.Reflection.Metadata.Tests
             mdtGenericParam = 0x2A000000,
             mdtGenericParamConstraint = 0x2C000000,
 
-
             // ===========================
             mdtConstant = 0x0B000000,
             mdtFieldMarshal = 0x0D000000,

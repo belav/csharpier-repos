@@ -13,7 +13,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Edit and Continue has been disabled by the client.
         /// </summary>

@@ -35,7 +35,6 @@ namespace System.Security.AccessControl
         Synchronize = 0x100000, // Can we wait on the handle?
         FullControl = 0x1F01FF,
 
-
         // These map to what Explorer sets, and are what most users want.
         // However, an ACL editor will also want to set the Synchronize
         // bit when allowing access, and exclude the synchronize bit when

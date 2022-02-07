@@ -12,7 +12,6 @@ namespace System.Globalization
     {
         None = 0x00000000,
 
-
         /// <summary>
         /// Bit flag indicating that leading whitespace is allowed. Character values
         /// 0x0009, 0x000A, 0x000B, 0x000C, 0x000D, and 0x0020 are considered to be
@@ -20,12 +19,10 @@ namespace System.Globalization
         /// </summary>
         AllowLeadingWhite = 0x00000001,
 
-
         /// <summary>
         /// Bitflag indicating trailing whitespace is allowed.
         /// </summary>
         AllowTrailingWhite = 0x00000002,
-
 
         /// <summary>
         /// Can the number start with a sign char specified by
@@ -33,12 +30,10 @@ namespace System.Globalization
         /// </summary>
         AllowLeadingSign = 0x00000004,
 
-
         /// <summary>
         /// Allow the number to end with a sign char
         /// </summary>
         AllowTrailingSign = 0x00000008,
-
 
         /// <summary>
         /// Allow the number to be enclosed in parens

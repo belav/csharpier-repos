@@ -903,14 +903,11 @@ namespace System.Net.Sockets
             {
                 Ready = 0, // Indicates that data MAY be available on the socket.
 
-
                 // Queue must be empty.
                 Waiting = 1, // Indicates that data is definitely not available on the socket.
 
-
                 // Queue must not be empty.
                 Processing = 2, // Indicates that a thread pool item has been scheduled (and may
-
 
                 // be executing) to process the IO operations in the queue.
                 // Queue must not be empty.

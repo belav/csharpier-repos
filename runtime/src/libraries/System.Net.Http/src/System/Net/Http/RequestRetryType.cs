@@ -13,24 +13,20 @@ namespace System.Net.Http
         /// </summary>
         NoRetry,
 
-
         /// <summary>
         /// The request failed due to e.g. server shutting down (GOAWAY) and should be retried on a new connection.
         /// </summary>
         RetryOnConnectionFailure,
-
 
         /// <summary>
         /// The request failed on the current HTTP version, and the server requested it be retried on a lower version.
         /// </summary>
         RetryOnLowerHttpVersion,
 
-
         /// <summary>
         /// The proxy failed, so the request should be retried on the next proxy.
         /// </summary>
         RetryOnNextProxy,
-
 
         /// <summary>
         /// The HTTP/2 connection reached the maximum number of streams and

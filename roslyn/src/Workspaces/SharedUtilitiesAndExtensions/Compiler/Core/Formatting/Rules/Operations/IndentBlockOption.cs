@@ -17,24 +17,20 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         /// </summary>
         RelativeToFirstTokenOnBaseTokenLine = 0x2,
 
-
         /// <summary>
         /// <see cref="IndentBlockOperation.IndentationDeltaOrPosition"/> will be interpreted as delta of its enclosing indentation
         /// </summary>
         RelativePosition = 0x4,
-
 
         /// <summary>
         /// <see cref="IndentBlockOperation.IndentationDeltaOrPosition"/> will be interpreted as absolute position
         /// </summary>
         AbsolutePosition = 0x8,
 
-
         /// <summary>
         /// Mask for relative position options
         /// </summary>
         RelativePositionMask = RelativeToFirstTokenOnBaseTokenLine | RelativePosition,
-
 
         /// <summary>
         /// Mask for position options.
@@ -44,7 +40,6 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         /// behavior for the operation.
         /// </remarks>
         PositionMask = RelativeToFirstTokenOnBaseTokenLine | RelativePosition | AbsolutePosition,
-
 
         /// <summary>
         /// Increase the <see cref="IndentBlockOperation.IndentationDeltaOrPosition"/> if the block is part of a

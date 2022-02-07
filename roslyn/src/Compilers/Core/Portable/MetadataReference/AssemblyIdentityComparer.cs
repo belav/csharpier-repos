@@ -37,13 +37,11 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             NotEquivalent = 0,
 
-
             /// <summary>
             /// Strongly named reference matches strongly named definition (strong identity is identity with public key or token),
             /// Or weak reference matches weak definition.
             /// </summary>
             Equivalent = 1,
-
 
             /// <summary>
             /// Reference matches definition except for version (reference version is lower or higher than definition version).

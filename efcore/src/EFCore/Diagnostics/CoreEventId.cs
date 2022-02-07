@@ -60,7 +60,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             SaveChangesCompleted,
             OptimisticConcurrencyException,
 
-
             // Query events
             QueryIterationFailed = CoreBaseId + 100,
             Obsolete_QueryModelCompiling,
@@ -78,7 +77,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             NavigationBaseIncludeIgnored,
             DistinctAfterOrderByWithoutRowLimitingOperatorWarning,
 
-
             // Infrastructure events
             SensitiveDataLoggingEnabledWarning = CoreBaseId + 400,
             ServiceProviderCreated,
@@ -92,7 +90,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             ServiceProviderDebugInfo,
             RedundantAddServicesCallWarning,
             OldModelVersionWarning,
-
 
             // Model and ModelValidation events
             ShadowPropertyCreated = CoreBaseId + 600,
@@ -121,7 +118,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             RequiredAttributeOnSkipNavigation,
             AmbiguousEndRequiredWarning,
             ShadowForeignKeyPropertyCreated,
-
 
             // ChangeTracking events
             DetectChangesStarting = CoreBaseId + 800,

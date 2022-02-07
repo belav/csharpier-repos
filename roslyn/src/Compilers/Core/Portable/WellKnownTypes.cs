@@ -18,7 +18,6 @@ namespace Microsoft.CodeAnalysis
         Unknown = SpecialType.None,
         First = SpecialType.Count + 1,
 
-
         // The following type ids should be in sync with names in WellKnownTypes.metadataNames array.
         System_Math = First,
         System_Array,
@@ -102,7 +101,6 @@ namespace Microsoft.CodeAnalysis
         Microsoft_VisualBasic_Information,
         Microsoft_VisualBasic_Interaction,
 
-
         // standard Func delegates - must be ordered by arity
         System_Func_T,
         System_Func_T2,
@@ -122,7 +120,6 @@ namespace Microsoft.CodeAnalysis
         System_Func_T16,
         System_Func_T17,
         System_Func_TMax = System_Func_T17,
-
 
         // standard Action delegates - must be ordered by arity
         System_Action,

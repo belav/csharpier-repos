@@ -22,7 +22,6 @@ namespace System.Runtime.Loader
             /// </summary>
             Alive,
 
-
             /// <summary>
             /// The unload process has started, the Unloading event will be called
             /// once the underlying LoaderAllocator has been finalized

@@ -13,7 +13,6 @@ public enum ApiConventionTypeMatchBehavior
     /// </summary>
     Any,
 
-
     /// <summary>
     /// The parameter in the convention is the exact type or a subclass of the type
     /// specified in the convention.

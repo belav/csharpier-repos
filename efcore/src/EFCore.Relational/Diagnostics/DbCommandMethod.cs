@@ -17,13 +17,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </summary>
         ExecuteNonQuery,
 
-
         /// <summary>
         ///     The <see cref="DbCommand.ExecuteScalar" /> or
         ///     <see cref="DbCommand.ExecuteScalarAsync()" /> method.
         /// </summary>
         ExecuteScalar,
-
 
         /// <summary>
         ///     The <see cref="DbCommand.ExecuteReader()" /> or

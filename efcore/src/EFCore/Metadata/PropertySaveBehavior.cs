@@ -20,12 +20,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         Save,
 
-
         /// <summary>
         ///     Any value set or changed will be ignored.
         /// </summary>
         Ignore,
-
 
         /// <summary>
         ///     If an explicit value is set or the value is changed, then an exception will be thrown.

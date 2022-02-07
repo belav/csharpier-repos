@@ -17,7 +17,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         DiagnosticsRemoved,
 
-
         /// <summary>
         /// Called when a new set of (possibly empty) diagnostics have been produced.  This
         /// happens through normal editing and processing of files as diagnostic analyzers

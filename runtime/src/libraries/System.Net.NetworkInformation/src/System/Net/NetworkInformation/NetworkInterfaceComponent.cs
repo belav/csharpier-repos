@@ -13,7 +13,6 @@ namespace System.Net.NetworkInformation
         /// </summary>
         IPv4,
 
-
         /// <summary>
         /// Internet Protocol version 6 is supported.
         /// </summary>

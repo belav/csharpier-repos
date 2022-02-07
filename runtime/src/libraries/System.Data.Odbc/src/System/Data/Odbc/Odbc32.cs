@@ -328,7 +328,6 @@ namespace System.Data.Odbc
             INPUT = 1, // SQL_PARAM_INPUT
             INPUT_OUTPUT = 2, // SQL_PARAM_INPUT_OUTPUT
 
-
             // unused   RESULT_COL          =   3,          // SQL_RESULT_COL
             OUTPUT = 4, // SQL_PARAM_OUTPUT
             RETURN_VALUE = 5, // SQL_RETURN_VALUE
@@ -366,7 +365,6 @@ namespace System.Data.Odbc
             UNNAMED = 1012,
             OCTET_LENGTH = 1013,
             ALLOC_TYPE = 1099,
-
 
             // from sqlext.h (ODBCVER >= 3.0)
             //
@@ -550,16 +548,13 @@ namespace System.Data.Odbc
             WCHAR = -8, //SQL_C_WCHAR
             SLONG = 4 + SIGNED_OFFSET, //SQL_C_LONG+SQL_SIGNED_OFFSET
 
-
             //          ULONG           =    4 + UNSIGNED_OFFSET,   //SQL_C_LONG+SQL_UNSIGNED_OFFSET
             SSHORT = 5 + SIGNED_OFFSET, //SQL_C_SSHORT+SQL_SIGNED_OFFSET
-
 
             //          USHORT          =    5 + UNSIGNED_OFFSET,   //SQL_C_USHORT+SQL_UNSIGNED_OFFSET
             REAL = 7, //SQL_C_REAL
             DOUBLE = 8, //SQL_C_DOUBLE
             BIT = -7, //SQL_C_BIT
-
 
             //          STINYINT        =   -6 + SIGNED_OFFSET,     //SQL_C_STINYINT+SQL_SIGNED_OFFSET
             UTINYINT = -6 + UNSIGNED_OFFSET, //SQL_C_UTINYINT+SQL_UNSIGNED_OFFSET
@@ -599,14 +594,12 @@ namespace System.Data.Odbc
             VARBINARY = -3, //SQL_VARBINARY
             LONGVARBINARY = -4, //SQL_LONGVARBINARY
 
-
             //          DATE            =   9,                      //SQL_DATE
             TYPE_DATE = SQL_C.TYPE_DATE, //SQL_TYPE_DATE
             TYPE_TIME = SQL_C.TYPE_TIME, //SQL_TYPE_TIME
             TIMESTAMP = SQL_C.TIMESTAMP, //SQL_TIMESTAMP
             TYPE_TIMESTAMP = SQL_C.TYPE_TIMESTAMP, //SQL_TYPE_TIMESTAMP
             GUID = SQL_C.GUID, //SQL_GUID
-
 
             //  from odbcss.h in mdac 9.0 sources!
             //  Driver specific SQL type defines.
@@ -653,7 +646,6 @@ namespace System.Data.Odbc
             LOGIN_TIMEOUT = 103,
             QUERY_TIMEOUT = 0, // from sqlext.h
             CONNECTION_DEAD = 1209, // from sqlext.h
-
 
             // from sqlncli.h
             SQL_COPT_SS_BASE = 1200,
@@ -735,7 +727,6 @@ namespace System.Data.Odbc
             // NONUNIQUE = 4,                 // NON_UNIQUE
             // INDEXQUALIFIER = 5,            // INDEX_QUALIFIER
             INDEXNAME = 6, // INDEX_NAME
-
 
             // TYPE = 7,                      // TYPE
             ORDINAL_POSITION = 8, // ORDINAL_POSITION

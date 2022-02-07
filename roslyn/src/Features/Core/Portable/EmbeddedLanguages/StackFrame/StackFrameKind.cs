@@ -8,7 +8,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     {
         None = 0,
 
-
         // Nodes
         CompilationUnit,
         MethodDeclaration,
@@ -21,7 +20,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         ParameterList,
         ArrayExpression,
         FileInformation,
-
 
         // Tokens
         EndOfFrame,
@@ -45,7 +43,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         IdentifierToken,
         PathToken,
         NumberToken,
-
 
         // Trivia
         WhitespaceTrivia,

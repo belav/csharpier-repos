@@ -764,7 +764,6 @@ internal static unsafe class HttpApiTypes
             HttpHeaderExpires = 18, // entity-header  [section 7.1]
             HttpHeaderLastModified = 19, // entity-header  [section 7.1]
 
-
             // Response Headers
 
             HttpHeaderAcceptRanges = 20, // response-header [section 6.2]

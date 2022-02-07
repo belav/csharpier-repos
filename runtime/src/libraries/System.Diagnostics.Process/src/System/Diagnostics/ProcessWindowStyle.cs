@@ -14,18 +14,15 @@ namespace System.Diagnostics
         /// </devdoc>
         Normal,
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         Hidden,
 
-
         /// <devdoc>
         ///     Show the window minimized.
         /// </devdoc>
         Minimized,
-
 
         /// <devdoc>
         ///     Show the window maximized.

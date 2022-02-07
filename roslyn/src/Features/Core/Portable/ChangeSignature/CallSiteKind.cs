@@ -12,7 +12,6 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         /// </summary>
         Value,
 
-
         /// <summary>
         /// Use an explicit value to populate call sites, and convert
         /// arguments to named arguments even if not required. Often
@@ -20,13 +19,11 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         /// </summary>
         ValueWithName,
 
-
         /// <summary>
         /// Indicates whether a "TODO" should be introduced at callsites
         /// to cause errors that the user can then go visit and fix up.
         /// </summary>
         Todo,
-
 
         /// <summary>
         /// When an optional parameter is added, passing an argument for
@@ -35,7 +32,6 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         /// to become named arguments
         /// </summary>
         Omitted,
-
 
         /// <summary>
         /// Populate each call site with an available variable of a matching types.

@@ -11,12 +11,10 @@ namespace System.Reflection.Metadata
         /// </summary>
         Default = 0,
 
-
         /// <summary>
         /// Keep the stream open when the <see cref="MetadataReaderProvider"/> is disposed.
         /// </summary>
         LeaveOpen = 1,
-
 
         /// <summary>
         /// Reads PDB metadata into memory right away.

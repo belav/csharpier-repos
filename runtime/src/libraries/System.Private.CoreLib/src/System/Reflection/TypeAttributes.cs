@@ -17,7 +17,6 @@ namespace System.Reflection
         NestedFamANDAssem = 0x00000006, // Class is nested with family and assembly visibility.
         NestedFamORAssem = 0x00000007, // Class is nested with family or assembly visibility.
 
-
         // Use this mask to retrieve class layout informaiton
         // 0 is AutoLayout, 0x2 is SequentialLayout, 4 is ExplicitLayout
         LayoutMask = 0x00000018,
@@ -32,18 +31,15 @@ namespace System.Reflection
         Class = 0x00000000, // Type is a class (or a value type).
         Interface = 0x00000020, // Type is an interface.
 
-
         // Special semantics in addition to class semantics.
         Abstract = 0x00000080, // Class is abstract
         Sealed = 0x00000100, // Class is concrete and may not be extended
         SpecialName = 0x00000400, // Class name is special.  Name describes how.
 
-
         // Implementation attributes.
         Import = 0x00001000, // Class / interface is imported
         Serializable = 0x00002000, // The class is Serializable.
         WindowsRuntime = 0x00004000, // Type is a Windows Runtime type.
-
 
         // Use tdStringFormatMask to retrieve string information for native interop
         StringFormatMask = 0x00030000,
@@ -52,7 +48,6 @@ namespace System.Reflection
         AutoClass = 0x00020000, // LPTSTR is interpreted automatically
         CustomFormatClass = 0x00030000, // A non-standard encoding specified by CustomFormatMask
         CustomFormatMask = 0x00C00000, // Use this mask to retrieve non-standard encoding information for native interop. The meaning of the values of these 2 bits is unspecified.
-
 
         // end string format mask
 

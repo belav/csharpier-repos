@@ -44,12 +44,10 @@ namespace Microsoft.Win32.SafeHandles
             /// </summary>
             Owner = 0,
 
-
             /// <summary>
             ///     The safe handle does not own the native handle, but points to a Holder which does
             /// </summary>
             Duplicate,
-
 
             /// <summary>
             ///     The safe handle owns the native handle, but shares it with other Duplicate handles

@@ -41,7 +41,6 @@ public enum InputFormatterExceptionPolicy
     /// </summary>
     AllExceptions = 0,
 
-
     /// <summary>
     /// This value indicates that only <see cref="InputFormatterException"/> and subclasses will be treated
     /// as model state errors. All other exceptions types will be re-thrown and can be handled by a higher

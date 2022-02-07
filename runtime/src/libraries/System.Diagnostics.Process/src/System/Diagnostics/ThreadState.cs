@@ -13,42 +13,35 @@ namespace System.Diagnostics
         /// </devdoc>
         Initialized,
 
-
         /// <devdoc>
         ///     The thread is in ready state.
         /// </devdoc>
         Ready,
-
 
         /// <devdoc>
         ///     The thread is running.
         /// </devdoc>
         Running,
 
-
         /// <devdoc>
         ///     The thread is in standby state.
         /// </devdoc>
         Standby,
-
 
         /// <devdoc>
         ///     The thread has exited.
         /// </devdoc>
         Terminated,
 
-
         /// <devdoc>
         ///     The thread is waiting.
         /// </devdoc>
         Wait,
 
-
         /// <devdoc>
         ///     The thread is transitioning between states.
         /// </devdoc>
         Transition,
-
 
         /// <devdoc>
         ///     The thread state is unknown.

@@ -26,7 +26,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         NullableReferenceType = ReferenceType | 0x10,
         NotNullableReferenceType = ReferenceType | 0x20,
 
-
         /// <summary>
         /// Type parameter has no type constraints, including `struct`, `class`, `unmanaged` and is declared in a context
         /// where nullable annotations are disabled.
@@ -39,7 +38,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         NotNull = 0x80,
         Default = 0x100,
 
-
         /// <summary>
         /// <see cref="TypeParameterConstraintKind"/> mismatch is detected during merging process for partial type declarations.
         /// </summary>
@@ -47,18 +45,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ValueTypeFromConstraintTypes = 0x400, // Not set if any flag from AllValueTypeKinds is set
         ReferenceTypeFromConstraintTypes = 0x800,
 
-
         /// <summary>
         /// All bits involved into describing various aspects of 'class' constraint.
         /// </summary>
         AllReferenceTypeKinds = NullableReferenceType | NotNullableReferenceType,
 
-
         /// <summary>
         /// Any of these bits is equivalent to presence of 'struct' constraint.
         /// </summary>
         AllValueTypeKinds = ValueType | Unmanaged,
-
 
         /// <summary>
         /// All bits except those that are involved into describing various nullability aspects.

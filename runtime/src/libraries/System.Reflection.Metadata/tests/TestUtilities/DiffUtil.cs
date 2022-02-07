@@ -16,18 +16,15 @@ namespace System.Reflection.Metadata.Tests
             /// </summary>
             None = 0,
 
-
             /// <summary>
             /// Node value was updated.
             /// </summary>
             Update = 1,
 
-
             /// <summary>
             /// Node was inserted.
             /// </summary>
             Insert = 2,
-
 
             /// <summary>
             /// Node was deleted.

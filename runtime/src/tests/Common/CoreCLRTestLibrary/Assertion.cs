@@ -899,7 +899,6 @@ namespace TestLibrary
         /// </summary>
         None = 0,
 
-
         /// <summary>
         ///     Specifies that <see cref="Assert.Throws{T}"/> should not require an exact type
         ///     match when comparing the specified exception type with the thrown exception.

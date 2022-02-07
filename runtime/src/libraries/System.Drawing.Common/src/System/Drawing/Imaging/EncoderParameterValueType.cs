@@ -33,7 +33,6 @@ namespace System.Drawing.Imaging
         /// </summary>
         ValueTypeRational = 5, // Two Longs. The first Long is the numerator, the second Long expresses the denomintor.
 
-
         /// <summary>
         /// Two longs which specify a range of integer values.
         /// The first Long specifies the lower end and the second one specifies the higher end.

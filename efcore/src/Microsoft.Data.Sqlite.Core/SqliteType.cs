@@ -16,18 +16,15 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         Integer = SQLITE_INTEGER,
 
-
         /// <summary>
         ///     A floating point value.
         /// </summary>
         Real = SQLITE_FLOAT,
 
-
         /// <summary>
         ///     A text string.
         /// </summary>
         Text = SQLITE_TEXT,
-
 
         /// <summary>
         ///     A blob of data.

@@ -19,48 +19,40 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </summary>
         Unknown,
 
-
         /// <summary>
         ///     Linq Query
         /// </summary>
         LinqQuery,
-
 
         /// <summary>
         ///     Save Changes
         /// </summary>
         SaveChanges,
 
-
         /// <summary>
         ///     Migrations
         /// </summary>
         Migrations,
-
 
         /// <summary>
         ///     FromSqlQuery
         /// </summary>
         FromSqlQuery,
 
-
         /// <summary>
         ///     ExecuteSqlRaw
         /// </summary>
         ExecuteSqlRaw,
-
 
         /// <summary>
         ///     ValueGenerator
         /// </summary>
         ValueGenerator,
 
-
         /// <summary>
         ///     Scaffolding
         /// </summary>
         Scaffolding,
-
 
         /// <summary>
         ///     BulkUpdate

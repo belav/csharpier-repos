@@ -18,13 +18,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Regular = 0,
 
-
         /// <summary>
         /// Allows top-level statements, declarations, and optional trailing expression.
         /// Used for parsing .csx/.vbx and interactive submissions.
         /// </summary>
         Script = 1,
-
 
         /// <summary>
         /// The same as <see cref="Script"/>.

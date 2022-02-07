@@ -23,7 +23,6 @@ namespace System.ComponentModel.Design
         )]
         Passthrough = 0,
 
-
         /// <summary>
         /// Specifies that the view for a root designer is supplied through
         /// a Windows Forms control object. The designer host will fill the
@@ -33,7 +32,6 @@ namespace System.ComponentModel.Design
             "ViewTechnology.WindowsForms has been deprecated. Use ViewTechnology.Default instead."
         )]
         WindowsForms = 1,
-
 
         /// <summary>
         /// Specifies the default view technology support. Here, the root designer may return

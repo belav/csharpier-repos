@@ -16,7 +16,6 @@ namespace System.Net.Sockets
         InvalidArgument = (10000 + 22),
         TooManyOpenSockets = (10000 + 24),
 
-
         // Windows Sockets definitions of regular Berkeley error constants
         WouldBlock = (10000 + 35),
         InProgress = (10000 + 36),
@@ -48,7 +47,6 @@ namespace System.Net.Sockets
         HostUnreachable = (10000 + 65),
         ProcessLimit = (10000 + 67),
 
-
         // Extended Windows Sockets error constant definitions
         SystemNotReady = (10000 + 91),
         VersionNotSupported = (10000 + 92),
@@ -59,7 +57,6 @@ namespace System.Net.Sockets
         TryAgain = (10000 + 1002),
         NoRecovery = (10000 + 1003),
         NoData = (10000 + 1004),
-
 
         // OS dependent errors
         IOPending = (int)Interop.Winsock.ERROR_IO_PENDING,

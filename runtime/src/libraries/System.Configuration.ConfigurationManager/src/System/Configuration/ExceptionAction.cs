@@ -10,12 +10,10 @@ namespace System.Configuration
         /// </summary>
         NonSpecific,
 
-
         /// <summary>
         /// Error specific to a particular section
         /// </summary>
         Local,
-
 
         /// <summary>
         /// Error in the global (file) schema

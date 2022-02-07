@@ -11,7 +11,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         None = 0,
         List = GreenNode.ListKind,
 
-
         // punctuation
         /// <summary>Represents <c>~</c> token.</summary>
         TildeToken = 8193,
@@ -104,7 +103,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>Represents <c>..</c> token.</summary>
         DotDotToken = 8222,
 
-
         // additional xml tokens
         /// <summary>Represents <c>/&gt;</c> token.</summary>
         SlashGreaterThanToken = 8232, // xml empty element end
@@ -129,7 +127,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>Represents <c>?&gt;</c> token.</summary>
         XmlProcessingInstructionEndToken = 8239, // ?>
-
 
         // compound punctuation
         /// <summary>Represents <c>||</c> token.</summary>
@@ -206,7 +203,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>Represents <c>??=</c> token.</summary>
         QuestionQuestionEqualsToken = 8284,
-
 
         // Keywords
         /// <summary>Represents <see langword="bool"/>.</summary>
@@ -452,7 +448,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>Represents <see langword="implicit"/>.</summary>
         ImplicitKeyword = 8384,
 
-
         // contextual keywords
         /// <summary>Represents <see langword="yield"/>.</summary>
         YieldKeyword = 8405,
@@ -562,7 +557,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>Represents <see langword="not"/>.</summary>
         NotKeyword = 8440,
 
-
         // Don't use 8441. It corresponds to a deleted kind (DataKeyword) that was previously shipped.
 
         /// <summary>Represents <see langword="with"/>.</summary>
@@ -579,7 +573,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>Represents <see langword="unmanaged"/>.</summary>
         UnmanagedKeyword = 8446,
-
 
         // when adding a contextual keyword following functions must be adapted:
         // <see cref="SyntaxFacts.GetContextualKeywordKinds"/>
@@ -634,7 +627,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>Represents <see langword="r"/>.</summary>
         ReferenceKeyword = 8481,
 
-
         /// <summary>Represents <c>$"</c> token.</summary>
         InterpolatedStringStartToken = 8482, // $"
 
@@ -643,7 +635,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>Represents <c>$@</c> or <c>@$</c> token.</summary>
         InterpolatedVerbatimStringStartToken = 8484, // $@" or @$"
-
 
         // additional preprocessor keywords (continued)
         /// <summary>Represents <see langword="load"/>.</summary>
@@ -655,14 +646,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>Represents <see langword="enable"/>.</summary>
         EnableKeyword = 8487,
 
-
         // targets for #nullable directive
         /// <summary>Represents <see langword="warnings"/>.</summary>
         WarningsKeyword = 8488,
 
         /// <summary>Represents <see langword="annotations"/>.</summary>
         AnnotationsKeyword = 8489,
-
 
         // Other
         /// <summary>Represents <see langword="var"/>.</summary>
@@ -688,7 +677,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>Represents the end of a file.</summary>
         EndOfFileToken = 8496, //NB: this is assumed to be the last textless token
 
-
         // tokens with text
         BadToken = 8507,
         IdentifierToken = 8508,
@@ -702,7 +690,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // This only exists in transient form during parsing.
         InterpolatedStringTextToken = 8517, // literal text that is part of an interpolated string
-
 
         // trivia
         EndOfLineTrivia = 8539,
@@ -732,7 +719,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         SkippedTokensTrivia = 8563,
         ConflictMarkerTrivia = 8564,
 
-
         // xml nodes (for xml doc comment structure)
         XmlElement = 8574,
         XmlElementStartTag = 8575,
@@ -748,7 +734,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         XmlComment = 8585,
         XmlProcessingInstruction = 8586,
 
-
         // documentation comment nodes (structure inside DocumentationCommentTrivia)
         TypeCref = 8597,
         QualifiedCref = 8598,
@@ -759,7 +744,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         CrefParameterList = 8603,
         CrefBracketedParameterList = 8604,
         CrefParameter = 8605,
-
 
         // names & type-names
         IdentifierName = 8616,
@@ -773,7 +757,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         PointerType = 8624,
         NullableType = 8625,
         OmittedTypeArgument = 8626,
-
 
         // expressions
         ParenthesizedExpression = 8632,
@@ -805,7 +788,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         RangeExpression = 8658,
         ImplicitObjectCreationExpression = 8659,
 
-
         // binary expressions
         AddExpression = 8668,
         SubtractExpression = 8669,
@@ -832,11 +814,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         PointerMemberAccessExpression = 8690, // arrow access:   a->b
         ConditionalAccessExpression = 8691, // question mark access:   a?.b , a?[1]
 
-
         // binding expressions
         MemberBindingExpression = 8707,
         ElementBindingExpression = 8708,
-
 
         // binary assignment expressions
         SimpleAssignmentExpression = 8714,
@@ -852,7 +832,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         RightShiftAssignmentExpression = 8724,
         CoalesceAssignmentExpression = 8725,
 
-
         // unary expressions
         UnaryPlusExpression = 8730,
         UnaryMinusExpression = 8731,
@@ -867,7 +846,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         AwaitExpression = 8740,
         IndexExpression = 8741,
 
-
         // primary expression
         ThisExpression = 8746,
         BaseExpression = 8747,
@@ -879,7 +857,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         FalseLiteralExpression = 8753,
         NullLiteralExpression = 8754,
         DefaultLiteralExpression = 8755,
-
 
         // primary function expressions
         TypeOfExpression = 8760,
@@ -908,7 +885,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         GroupClause = 8785,
         QueryContinuation = 8786,
 
-
         // statements
         Block = 8792,
         LocalDeclarationStatement = 8793,
@@ -918,7 +894,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         ExpressionStatement = 8797,
         EmptyStatement = 8798,
         LabeledStatement = 8799,
-
 
         // jump statements
         GotoStatement = 8800,
@@ -937,7 +912,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         UsingStatement = 8813,
         FixedStatement = 8814,
 
-
         // checked statements
         CheckedStatement = 8815,
         UncheckedStatement = 8816,
@@ -955,10 +929,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         CatchFilterClause = 8828,
         FinallyClause = 8829,
 
-
         // statements that didn't fit above
         LocalFunctionStatement = 8830,
-
 
         // declarations
         CompilationUnit = 8840,
@@ -968,7 +940,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         ExternAliasDirective = 8844,
         FileScopedNamespaceDeclaration = 8845,
 
-
         // attributes
         AttributeList = 8847,
         AttributeTargetSpecifier = 8848,
@@ -976,7 +947,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         AttributeArgumentList = 8850,
         AttributeArgument = 8851,
         NameEquals = 8852,
-
 
         // type declarations
         ClassDeclaration = 8855,
@@ -1035,14 +1005,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         ParenthesizedVariableDesignation = 8928,
         ForEachVariableStatement = 8929,
 
-
         // patterns (for pattern-matching)
         DeclarationPattern = 9000,
         ConstantPattern = 9002,
         CasePatternSwitchLabel = 9009,
         WhenClause = 9013,
         DiscardDesignation = 9014,
-
 
         // added along with recursive patterns
         RecursivePattern = 9020,
@@ -1054,7 +1022,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         SwitchExpressionArm = 9026,
         VarPattern = 9027,
 
-
         // new patterns added in C# 9.0
         ParenthesizedPattern = 9028,
         RelationalPattern = 9029,
@@ -1062,7 +1029,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         OrPattern = 9031,
         AndPattern = 9032,
         NotPattern = 9033,
-
 
         // Kinds between 9000 and 9039 are "reserved" for pattern matching.
 

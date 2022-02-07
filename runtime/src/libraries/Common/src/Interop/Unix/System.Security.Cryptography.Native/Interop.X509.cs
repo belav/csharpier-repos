@@ -351,7 +351,6 @@ internal static partial class Interop
             X509_V_ERR_CERT_CHAIN_TOO_LONG = 22,
             X509_V_ERR_CERT_REVOKED = 23,
 
-
             // Code 24 varies.
 
             X509_V_ERR_PATH_LENGTH_EXCEEDED = 25,

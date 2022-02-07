@@ -134,12 +134,10 @@ namespace Internal.ReadyToRunConstants
     {
         Invalid = 0x00,
 
-
         // Not a real helper - handle to current module passed to delay load helpers.
         Module = 0x01,
         GSCookie = 0x02,
         IndirectTrapThreads = 0x03,
-
 
         //
         // Delay load helpers
@@ -153,7 +151,6 @@ namespace Internal.ReadyToRunConstants
         DelayLoad_Helper_Obj = 0x11,
         DelayLoad_Helper_ObjObj = 0x12,
 
-
         // Exception handling helpers
         Throw = 0x20,
         Rethrow = 0x21,
@@ -163,19 +160,16 @@ namespace Internal.ReadyToRunConstants
         ThrowNullRef = 0x25,
         ThrowDivZero = 0x26,
 
-
         // Write barriers
         WriteBarrier = 0x30,
         CheckedWriteBarrier = 0x31,
         ByRefWriteBarrier = 0x32,
-
 
         // Array helpers
         Stelem_Ref = 0x38,
         Ldelema_Ref = 0x39,
         MemSet = 0x40,
         MemCpy = 0x41,
-
 
         // P/Invoke support
         PInvokeBegin = 0x42,
@@ -184,14 +178,11 @@ namespace Internal.ReadyToRunConstants
         ReversePInvokeEnter = 0x45,
         ReversePInvokeExit = 0x46,
 
-
         // Get string handle lazily
         GetString = 0x50,
 
-
         // Used by /Tuning for Profile optimizations
         LogMethodEnter = 0x51,
-
 
         // Reflection helpers
         GetRuntimeTypeHandle = 0x54,
@@ -204,7 +195,6 @@ namespace Internal.ReadyToRunConstants
         NewMultiDimArr = 0x5C,
         NewMultiDimArr_NonVarArg = 0x5D,
 
-
         // Helpers used with generic handle lookup cases
         NewObject = 0x60,
         NewArray = 0x61,
@@ -215,7 +205,6 @@ namespace Internal.ReadyToRunConstants
         GenericGcTlsBase = 0x66,
         GenericNonGcTlsBase = 0x67,
         VirtualFuncPtr = 0x68,
-
 
         // Long mul/div/shift ops
         LMul = 0xC0,
@@ -231,13 +220,11 @@ namespace Internal.ReadyToRunConstants
         Lng2Dbl = 0xCA,
         ULng2Dbl = 0xCB,
 
-
         // 32-bit division helpers
         Div = 0xCC,
         Mod = 0xCD,
         UDiv = 0xCE,
         UMod = 0xCF,
-
 
         // Floating point conversions
         Dbl2Int = 0xD0,
@@ -249,23 +236,19 @@ namespace Internal.ReadyToRunConstants
         Dbl2ULng = 0xD6,
         Dbl2ULngOvf = 0xD7,
 
-
         // Floating point ops
         DblRem = 0xE0,
         FltRem = 0xE1,
         DblRound = 0xE2,
         FltRound = 0xE3,
 
-
         // Personality rountines
         PersonalityRoutine = 0xF0,
         PersonalityRoutineFilterFunclet = 0xF1,
 
-
         // Synchronized methods
         MonitorEnter = 0xF8,
         MonitorExit = 0xF9,
-
 
         // JIT32 x86-specific write barriers
         WriteBarrier_EAX = 0x100,
@@ -281,12 +264,10 @@ namespace Internal.ReadyToRunConstants
         CheckedWriteBarrier_EDI = 0x10A,
         CheckedWriteBarrier_EBP = 0x10B,
 
-
         // JIT32 x86-specific exception handling
         EndCatch = 0x110,
         StackProbe = 0x111,
         GetCurrentManagedThreadId = 0x112,
-
 
         // **********************************************************************************************
         //
@@ -312,10 +293,8 @@ namespace Internal.ReadyToRunConstants
         MonitorEnterStatic,
         MonitorExitStatic,
 
-
         // GVM lookup helper
         GVMLookupForSlot,
-
 
         // TypedReference
         TypeHandleToRuntimeType,

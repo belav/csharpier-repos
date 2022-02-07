@@ -61,7 +61,6 @@ namespace Internal.TypeSystem
         /// </summary>
         TypeOnly,
 
-
         /// <summary>
         /// Compute instance sizes, alignments and field offsets.
         /// </summary>
@@ -77,7 +76,6 @@ namespace Internal.TypeSystem
         /// Compute static region sizes.
         /// </summary>
         StaticRegionSizes,
-
 
         /// <summary>
         /// Compute static region sizes and static field offsets.
@@ -127,42 +125,35 @@ namespace Internal.TypeSystem
     {
         None = 0x00,
 
-
         /// <summary>
         /// The type is an aggregate of 32-bit floating-point values.
         /// </summary>
         Float32Aggregate = 0x01,
-
 
         /// <summary>
         /// The type is an aggregate of 64-bit floating-point values.
         /// </summary>
         Float64Aggregate = 0x02,
 
-
         /// <summary>
         /// The type is an aggregate of 64-bit short-vector values.
         /// </summary>
         Vector64Aggregate = 0x04,
-
 
         /// <summary>
         /// The type is an aggregate of 128-bit short-vector values.
         /// </summary>
         Vector128Aggregate = 0x08,
 
-
         /// <summary>
         /// The mask for homogeneous aggregates of floating-point values.
         /// </summary>
         FloatingPointAggregateMask = Float32Aggregate | Float64Aggregate,
 
-
         /// <summary>
         /// The mask for homogeneous aggregates of short-vector values.
         /// </summary>
         ShortVectorAggregateMask = Vector64Aggregate | Vector128Aggregate,
-
 
         /// <summary>
         /// The mask for homogeneous aggregates.

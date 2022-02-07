@@ -14,13 +14,11 @@ namespace System.CommandLine.Parsing
         /// <see cref="Argument"/>
         Argument,
 
-
         /// <summary>
         /// A command token.
         /// </summary>
         /// <see cref="Command"/>
         Command,
-
 
         /// <summary>
         /// An option token.
@@ -28,20 +26,17 @@ namespace System.CommandLine.Parsing
         /// <see cref="Option"/>
         Option,
 
-
         /// <summary>
         /// A double dash (<c>--</c>) token, which changes the meaning of subsequent tokens.
         /// </summary>
         /// <see cref="CommandLineConfiguration.EnableLegacyDoubleDashBehavior"/>
         DoubleDash,
 
-
         /// <summary>
         /// A token following <see cref="DoubleDash"/> when <see cref="CommandLineConfiguration.EnableLegacyDoubleDashBehavior"/> is set to <see langword="true"/>.
         /// </summary>
         /// <see cref="CommandLineConfiguration.EnableLegacyDoubleDashBehavior"/>
         Unparsed,
-
 
         /// <summary>
         /// A directive token.

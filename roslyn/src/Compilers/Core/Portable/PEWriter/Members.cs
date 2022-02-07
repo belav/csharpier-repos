@@ -29,36 +29,30 @@ namespace Microsoft.Cci
         /// </summary>
         CDecl = SignatureCallingConvention.CDecl,
 
-
         /// <summary>
         /// The convention for calling managed methods with a fixed number of arguments.
         /// </summary>
         Default = SignatureCallingConvention.Default,
-
 
         /// <summary>
         /// The convention for calling managed methods that accept extra arguments.
         /// </summary>
         ExtraArguments = SignatureCallingConvention.VarArgs,
 
-
         /// <summary>
         /// Arguments are passed in registers when possible. This calling convention is not yet supported.
         /// </summary>
         FastCall = SignatureCallingConvention.FastCall,
-
 
         /// <summary>
         /// Win32 API calling convention for calling unmanaged methods via PlatformInvoke. The call stack is cleaned up by the callee.
         /// </summary>
         Standard = SignatureCallingConvention.StdCall,
 
-
         /// <summary>
         /// C++ member unmanaged method (non-vararg) calling convention. The callee cleans the stack and the this pointer is pushed on the stack last.
         /// </summary>
         ThisCall = SignatureCallingConvention.ThisCall,
-
 
         /// <summary>
         /// Extensible calling convention protocol. This represents either the union of calling convention modopts after the paramcount specifier
@@ -66,18 +60,15 @@ namespace Microsoft.Cci
         /// </summary>
         Unmanaged = SignatureCallingConvention.Unmanaged,
 
-
         /// <summary>
         /// The convention for calling a generic method.
         /// </summary>
         Generic = SignatureAttributes.Generic,
 
-
         /// <summary>
         /// The convention for calling an instance method with an implicit this parameter (the method does not have an explicit parameter definition for this).
         /// </summary>
         HasThis = SignatureAttributes.Instance,
-
 
         /// <summary>
         /// The convention for calling an instance method that explicitly declares its first parameter to correspond to the this instance.

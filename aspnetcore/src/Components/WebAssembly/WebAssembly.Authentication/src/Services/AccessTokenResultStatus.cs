@@ -13,7 +13,6 @@ public enum AccessTokenResultStatus
     /// </summary>
     Success,
 
-
     /// <summary>
     /// A redirect is needed in order to provision the token.
     /// </summary>

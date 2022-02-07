@@ -13,20 +13,17 @@ namespace System.Drawing.Printing
         /// </summary>
         Display = 0,
 
-
         /// <summary>
         /// One thousandth of an inch (0.001 in.).
         /// </summary>
         // Used by PAGESETUPDLG.rtMargin and rtMinMargin
         ThousandthsOfAnInch = 1,
 
-
         /// <summary>
         /// One hundredth of a millimeter (0.01 mm).
         /// </summary>
         // Used by PAGESETUPDLG.rtMargin and rtMinMargin
         HundredthsOfAMillimeter = 2,
-
 
         /// <summary>
         /// One tenth of a millimeter (0.1 mm).

@@ -33,19 +33,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             /// </summary>
             Tool,
 
-
             /// <summary>
             /// Compilation occurred using the command line tool because the server was unable to complete
             /// the request
             /// </summary>
             ToolFallback,
 
-
             /// <summary>
             /// Compilation occurred in the compiler server process
             /// </summary>
             Server,
-
 
             /// <summary>
             /// Fatal error caused compilation to not even occur.

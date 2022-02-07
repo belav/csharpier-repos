@@ -14,18 +14,15 @@ namespace System.Web.Http
         /// </summary>
         Default = 0,
 
-
         /// <summary>
         /// Only include error details when responding to a local request.
         /// </summary>
         LocalOnly,
 
-
         /// <summary>
         /// Always include error details.
         /// </summary>
         Always,
-
 
         /// <summary>
         /// Never include error details.

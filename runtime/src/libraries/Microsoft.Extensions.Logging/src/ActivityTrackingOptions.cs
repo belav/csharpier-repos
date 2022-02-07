@@ -15,42 +15,35 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         None = 0x0000,
 
-
         /// <summary>
         /// Span Id will be included in the logging.
         /// </summary>
         SpanId = 0x0001,
-
 
         /// <summary>
         /// Trace Id will be included in the logging.
         /// </summary>
         TraceId = 0x0002,
 
-
         /// <summary>
         /// Parent Id will be included in the logging.
         /// </summary>
         ParentId = 0x0004,
-
 
         /// <summary>
         /// Trace State will be included in the logging.
         /// </summary>
         TraceState = 0x0008,
 
-
         /// <summary>
         /// Trace flags will be included in the logging.
         /// </summary>
         TraceFlags = 0x0010,
 
-
         /// <summary>
         /// Tags will be included in the logging.
         /// </summary>
         Tags = 0x0020,
-
 
         /// <summary>
         /// Items of baggage will be included in the logging.

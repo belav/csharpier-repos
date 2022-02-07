@@ -23,7 +23,6 @@ namespace ILCompiler.DependencyAnalysis
         GetThreadNonGcStaticBase,
         CctorTrigger,
 
-
         //// The following helpers are used for generic lookups only
         TypeHandle,
         DeclaringTypeHandle,

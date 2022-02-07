@@ -75,13 +75,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
         Z = 0x5A,
         Period = 0xBE,
 
-
         /// <summary>
         /// Used for miscellaneous characters; it can vary by keyboard.<br/>
         /// For the US standard keyboard, the '[{' key.
         /// </summary>
         VK_OEM_4 = 0xDB,
-
 
         /// <summary>
         /// Used for miscellaneous characters; it can vary by keyboard.<br/>

@@ -46,20 +46,17 @@ namespace Microsoft.CodeAnalysis.Editor
         /// </summary>
         NotAllowed,
 
-
         /// <summary>
         /// The type being renamed has multiple definition
         /// locations which is not supported.
         /// </summary>
         TypeWithMultipleLocations,
 
-
         /// <summary>
         /// The type being renamed doesn't match the file
         /// name prior to renaming
         /// </summary>
         TypeDoesNotMatchFileName,
-
 
         /// <summary>
         /// File rename is allowed

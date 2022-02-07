@@ -1731,10 +1731,8 @@ namespace System.Threading
         {
             None = 0x0,
 
-
             // Used for quick check when there are no waiters
             NoWaiters = 0x1,
-
 
             // Used to avoid signaling more than one waiter to wake up when only one can make progress, see WaitOnEvent
             WriteWaiterSignaled = 0x2,

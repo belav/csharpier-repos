@@ -14,7 +14,6 @@ namespace System.Runtime.InteropServices
     {
         None = 0,
 
-
         /// <summary>
         /// The caller will provide an IUnknown Vtable.
         /// </summary>
@@ -25,7 +24,6 @@ namespace System.Runtime.InteropServices
         /// calling of the IUnknown API during a GC is possible.
         /// </remarks>
         CallerDefinedIUnknown = 1,
-
 
         /// <summary>
         /// Flag used to indicate the COM interface should implement <see href="https://docs.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackertarget">IReferenceTrackerTarget</see>.
@@ -43,24 +41,20 @@ namespace System.Runtime.InteropServices
     {
         None = 0,
 
-
         /// <summary>
         /// Indicate if the supplied external COM object implements the <see href="https://docs.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetracker">IReferenceTracker</see>.
         /// </summary>
         TrackerObject = 1,
-
 
         /// <summary>
         /// Ignore any internal caching and always create a unique instance.
         /// </summary>
         UniqueInstance = 2,
 
-
         /// <summary>
         /// Defined when COM aggregation is involved (that is an inner instance supplied).
         /// </summary>
         Aggregation = 4,
-
 
         /// <summary>
         /// Check if the supplied instance is actually a wrapper and if so return the underlying

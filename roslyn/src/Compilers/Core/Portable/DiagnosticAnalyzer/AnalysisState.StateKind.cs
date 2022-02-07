@@ -24,12 +24,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             /// </summary>
             ReadyToProcess,
 
-
             /// <summary>
             /// Currently being processed.
             /// </summary>
             InProcess,
-
 
             /// <summary>
             /// Fully processed.

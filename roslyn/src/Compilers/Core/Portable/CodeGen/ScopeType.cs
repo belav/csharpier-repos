@@ -14,7 +14,6 @@ namespace Microsoft.CodeAnalysis.CodeGen
         Finally,
         Fault,
 
-
         /// <summary>
         /// Scope of user-defined variable hoisted to state machine.
         /// </summary>

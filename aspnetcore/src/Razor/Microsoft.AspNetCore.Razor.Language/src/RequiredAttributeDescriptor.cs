@@ -67,7 +67,6 @@ public abstract class RequiredAttributeDescriptor : IEquatable<RequiredAttribute
         /// </summary>
         FullMatch,
 
-
         /// <summary>
         /// HTML attribute name case insensitively starts with <see cref="RequiredAttributeDescriptor.Name"/>.
         /// </summary>
@@ -84,18 +83,15 @@ public abstract class RequiredAttributeDescriptor : IEquatable<RequiredAttribute
         /// </summary>
         None,
 
-
         /// <summary>
         /// HTML attribute value case sensitively matches <see cref="RequiredAttributeDescriptor.Value"/>.
         /// </summary>
         FullMatch,
 
-
         /// <summary>
         /// HTML attribute value case sensitively starts with <see cref="RequiredAttributeDescriptor.Value"/>.
         /// </summary>
         PrefixMatch,
-
 
         /// <summary>
         /// HTML attribute value case sensitively ends with <see cref="RequiredAttributeDescriptor.Value"/>.

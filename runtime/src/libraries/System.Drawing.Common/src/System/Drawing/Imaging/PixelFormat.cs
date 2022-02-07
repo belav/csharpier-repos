@@ -128,7 +128,6 @@ namespace System.Drawing.Imaging
         /// </summary>
         Format64bppPArgb = 14 | (64 << 8) | (int)Alpha | (int)PAlpha | (int)Extended,
 
-
         /// <summary>
         /// Specifies that pixel format is 64 bits per pixel. The color information specifies 16777216 shades of color
         /// of which 16 bits are red, 16 bits are green and 16 bits are blue. The 16 additional bits are alpha bits.

@@ -18,7 +18,6 @@ namespace Microsoft.CodeAnalysis.Remote
         IntelliCode = 8,
         Razor = 9,
 
-
         // owned by Unit Testing team:
         UnitTestingAnalysisService = 10,
         LiveUnitTestingBuildService = 11,

@@ -25,24 +25,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         Default = 0,
 
-
         /// <summary>
         /// Consider only namespace aliases and extern aliases.
         /// </summary>
         NamespaceAliasesOnly = 1 << 1,
-
 
         /// <summary>
         /// Consider only namespaces and types.
         /// </summary>
         NamespacesOrTypesOnly = 1 << 2,
 
-
         /// <summary>
         /// Consider non-members, plus invocable members.
         /// </summary>
         MustBeInvocableIfMember = 1 << 3,
-
 
         /// <summary>
         /// Consider only symbols that are instance members. Valid with IncludeExtensionMethods
@@ -50,18 +46,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         MustBeInstance = 1 << 4,
 
-
         /// <summary>
         /// Do not consider symbols that are instance members.
         /// </summary>
         MustNotBeInstance = 1 << 5,
 
-
         /// <summary>
         /// Do not consider symbols that are namespaces.
         /// </summary>
         MustNotBeNamespace = 1 << 6,
-
 
         /// <summary>
         /// Consider methods of any arity when arity zero is specified. Because type parameters can be inferred, it is
@@ -69,12 +62,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         AllMethodsOnArityZero = 1 << 7,
 
-
         /// <summary>
         /// Look only for label symbols.  This must be exclusive of all other options.
         /// </summary>
         LabelsOnly = 1 << 8,
-
 
         /// <summary>
         /// Usually, when determining if a member is accessible, both the type of the receiver
@@ -83,18 +74,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         UseBaseReferenceAccessibility = 1 << 9,
 
-
         /// <summary>
         /// Include extension methods.
         /// </summary>
         IncludeExtensionMethods = 1 << 10,
 
-
         /// <summary>
         /// Consider only attribute types.
         /// </summary>
         AttributeTypeOnly = (1 << 11) | NamespacesOrTypesOnly,
-
 
         /// <summary>
         /// Consider lookup name to be a verbatim identifier.
@@ -103,18 +91,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         VerbatimNameAttributeTypeOnly = (1 << 12) | AttributeTypeOnly,
 
-
         /// <summary>
         /// Consider named types of any arity when arity zero is specified. It is specifically desired for nameof in such situations: nameof(System.Collections.Generic.List)
         /// </summary>
         AllNamedTypesOnArityZero = 1 << 13,
 
-
         /// <summary>
         /// Do not consider symbols that are method type parameters.
         /// </summary>
         MustNotBeMethodTypeParameter = 1 << 14,
-
 
         /// <summary>
         /// Consider only symbols that are abstract.

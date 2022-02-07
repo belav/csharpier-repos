@@ -22,7 +22,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </remarks>
         None = 0,
 
-
         /// <summary>
         /// <para>Braces are preferred where allowed except in the following limited situations:</para>
         ///
@@ -39,7 +38,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// was the <see cref="bool"/> value <see langword="true"/>.</para>
         /// </remarks>
         Always = 1,
-
 
         /// <summary>
         /// <para>Braces are always allowed, and generally preferred except in limited situations involving single-line

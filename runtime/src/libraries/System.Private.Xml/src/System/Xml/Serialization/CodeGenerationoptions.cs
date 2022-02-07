@@ -19,13 +19,11 @@ namespace System.Xml.Serialization
         [XmlIgnore]
         None = 0,
 
-
         /// <summary>
         /// Generate propertyes instead of fields
         /// </summary>
         [XmlEnum("properties")]
         GenerateProperties = 0x1,
-
 
         /// <summary>
         /// Generate new RAD asynchronous pattern. The feature allows customers to use an event-based model for invoking Web services asynchronously
@@ -33,20 +31,17 @@ namespace System.Xml.Serialization
         [XmlEnum("newAsync")]
         GenerateNewAsync = 0x2,
 
-
         /// <summary>
         /// Generate old asynchronous pattern: BeginXXX/EndXXX.
         /// </summary>
         [XmlEnum("oldAsync")]
         GenerateOldAsync = 0x4,
 
-
         /// <summary>
         /// Generate OM using explicit ordering feature.
         /// </summary>
         [XmlEnum("order")]
         GenerateOrder = 0x08,
-
 
         /// <summary>
         /// Generate OM INotifyPropertyChanged interface to enable data binding.

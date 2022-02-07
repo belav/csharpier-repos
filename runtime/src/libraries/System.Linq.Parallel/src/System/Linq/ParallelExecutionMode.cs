@@ -26,7 +26,6 @@ namespace System.Linq
         /// </summary>
         Default = 0,
 
-
         /// <summary>
         /// Parallelize the entire query, even if that means using high-overhead algorithms.
         /// </summary>

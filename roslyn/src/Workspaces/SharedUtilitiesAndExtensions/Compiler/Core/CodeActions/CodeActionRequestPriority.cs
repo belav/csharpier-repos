@@ -15,7 +15,6 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Only normal priority refactoring, code fix providers should be run.  Specifically,
         /// providers will be run when <see cref="T:CodeRefactoringProvider.RequestPriority"/> or

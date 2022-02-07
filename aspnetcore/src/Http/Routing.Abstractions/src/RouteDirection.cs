@@ -13,7 +13,6 @@ public enum RouteDirection
     /// </summary>
     IncomingRequest,
 
-
     /// <summary>
     /// A URL is being created based on the route definition.
     /// </summary>

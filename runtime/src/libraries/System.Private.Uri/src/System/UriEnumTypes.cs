@@ -26,16 +26,13 @@ namespace System
         StrongPort = 0x80,
         NormalizedHost = 0x100,
 
-
         // This will also return respective delimiters for scheme, userinfo or port
         // Valid only for a single component requests.
         KeepDelimiter = 0x40000000,
 
-
         // This is used by GetObjectData and can also be used directly.
         // Works for both absolute and relative Uris
         SerializationInfoString = unchecked((int)0x80000000),
-
 
         // Shortcuts for general cases
         AbsoluteUri = Scheme | UserInfo | Host | Port | Path | Query | Fragment,
@@ -71,7 +68,6 @@ namespace System
         // looks good
         None = 0,
 
-
         // These first errors indicate that the Uri cannot be absolute, but may be relative.
         BadFormat = 1,
         BadScheme = 2,
@@ -79,20 +75,17 @@ namespace System
         EmptyUriString = 4,
         LastRelativeUriOkErrIndex = 4,
 
-
         // All higher error values are fatal, indicating that neither an absolute or relative
         // Uri could be generated.
         SchemeLimit = 5,
         SizeLimit = 6,
         MustRootedPath = 7,
 
-
         // derived class controlled
         BadHostName = 8,
         NonEmptyHost = 9, // unix only
         BadPort = 10,
         BadAuthorityTerminator = 11,
-
 
         // The user requested only a relative Uri, but an absolute Uri was parsed.
         CannotCreateRelative = 12

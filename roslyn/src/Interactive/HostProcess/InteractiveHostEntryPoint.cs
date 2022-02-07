@@ -76,14 +76,12 @@ namespace Microsoft.CodeAnalysis.Interactive
             /// </summary>
             SEM_FAILCRITICALERRORS = 0x0001,
 
-
             /// <summary>
             /// The system does not display the critical-error-handler message box. Instead, the system sends the error to the calling process.
             /// Best practice is that all applications call the process-wide SetErrorMode function with a parameter of SEM_FAILCRITICALERRORS at startup.
             /// This is to prevent error mode dialogs from blocking the application.
             /// </summary>
             SEM_NOGPFAULTERRORBOX = 0x0002,
-
 
             /// <summary>
             /// The system automatically fixes memory alignment faults and makes them invisible to the application.
@@ -92,7 +90,6 @@ namespace Microsoft.CodeAnalysis.Interactive
             /// After this value is set for a process, subsequent attempts to clear the value are ignored.
             /// </summary>
             SEM_NOALIGNMENTFAULTEXCEPT = 0x0004,
-
 
             /// <summary>
             /// The system does not display a message box when it fails to find a file. Instead, the error is returned to the calling process.

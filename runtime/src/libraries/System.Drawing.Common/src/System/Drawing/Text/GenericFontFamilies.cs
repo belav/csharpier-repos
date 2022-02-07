@@ -13,12 +13,10 @@ namespace System.Drawing.Text
         /// </summary>
         Serif,
 
-
         /// <summary>
         /// A generic SansSerif <see cref='System.Drawing.FontFamily'/>.
         /// </summary>
         SansSerif,
-
 
         /// <summary>
         /// A generic Monospace <see cref='System.Drawing.FontFamily'/>.

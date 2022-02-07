@@ -58,12 +58,10 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             Syntax = 0x01,
 
-
             /// <summary>
             /// Include semantic errors
             /// </summary>
             Semantic = 0x02,
-
 
             /// <summary>
             /// Include script semantic errors

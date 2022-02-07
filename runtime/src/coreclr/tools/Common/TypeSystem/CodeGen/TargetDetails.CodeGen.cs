@@ -32,12 +32,10 @@ namespace Internal.TypeSystem
         /// </summary>
         None,
 
-
         /// <summary>
         /// Specifies that native vectors are 128 bit (e.g. SSE on x86).
         /// </summary>
         Vector128Bit,
-
 
         /// <summary>
         /// Specifies that native vectors are 256 bit (e.g. AVX on x86).

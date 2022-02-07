@@ -35,7 +35,6 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         Ignore = 0,
 
-
         /// <summary>
         /// Load line information.
         /// </summary>

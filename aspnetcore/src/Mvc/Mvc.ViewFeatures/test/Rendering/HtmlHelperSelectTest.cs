@@ -2015,7 +2015,6 @@ public class HtmlHelperSelectTest
         [Display(Name = "dos")]
         Two = 2,
 
-
         // Display attribute exists but does not set Name.
         [Display(ShortName = "uno")]
         One = 1,

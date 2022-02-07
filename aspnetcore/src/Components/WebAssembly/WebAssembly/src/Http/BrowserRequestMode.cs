@@ -13,19 +13,16 @@ public enum BrowserRequestMode
     /// </summary>
     SameOrigin,
 
-
     /// <summary>
     /// Prevents the method from being anything other than HEAD, GET or POST, and the headers from
     /// being anything other than simple headers.
     /// </summary>
     NoCors,
 
-
     /// <summary>
     /// Allows cross-origin requests, for example to access various APIs offered by 3rd party vendors.
     /// </summary>
     Cors,
-
 
     /// <summary>
     /// A mode for supporting navigation.

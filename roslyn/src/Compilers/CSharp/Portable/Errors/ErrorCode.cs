@@ -9,7 +9,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         Void = InternalErrorCode.Void,
         Unknown = InternalErrorCode.Unknown,
 
-
         #region diagnostics introduced in C# 4 and earlier
         //FTL_InternalError = 1,
         //FTL_FailedToLoadResource = 2,
@@ -594,7 +593,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         // ERR_PartialMethodMustReturnVoid = 766, Removed as part of 'extended partial methods' feature
         ERR_ExplicitImplCollisionOnRefOut = 767,
         ERR_IndirectRecursiveConstructorCall = 768,
-
 
         // unused 769-799
         //ERR_NoEmptyArrayRanges = 800,
@@ -1261,7 +1259,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         // WRN_UnknownOption = 5000,   //unused in Roslyn
         ERR_NoEntryPoint = 5001,
 
-
         // huge gap here; available 5002-6999
 
         ERR_UnexpectedAliasedName = 7000,
@@ -1490,7 +1487,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         ERR_LocalFunctionMissingBody = 8112,
         ERR_InvalidHashAlgorithmName = 8113,
-
 
         // Unused 8113, 8114, 8115
 
@@ -1959,7 +1955,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_ExpressionTreeContainsWithExpression = 8849,
         WRN_AnalyzerReferencesFramework = 8850,
 
-
         // WRN_EqualsWithoutGetHashCode is for object.Equals and works for classes.
         // WRN_RecordEqualsWithoutGetHashCode is for IEquatable<T>.Equals and works for records.
         WRN_RecordEqualsWithoutGetHashCode = 8851,
@@ -1992,7 +1987,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_CopyConstructorWrongAccessibility = 8878,
         ERR_NonPrivateAPIInRecord = 8879,
 
-
         // The following warnings correspond to errors of the same name, but are reported
         // when a definite assignment issue is reported due to private fields imported from metadata.
         WRN_UnassignedThisAutoProperty = 8880,
@@ -2012,7 +2006,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_CannotUseManagedTypeInUnmanagedCallersOnly = 8894,
         ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric = 8895,
         ERR_UnmanagedCallersOnlyRequiresStatic = 8896,
-
 
         // The following warnings correspond to errors of the same name, but are reported
         // as warnings on interface methods and properties due in warning level 5. They
@@ -2102,7 +2095,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_MethGrpToNonDel = 8974,
         ERR_LambdaExplicitReturnTypeVar = 8975,
         ERR_InterpolatedStringsReferencingInstanceCannotBeInObjectInitializers = 8976,
-
 
         // Added in VS 17.1. Technically a breaking change, but the code it breaks was already guaranteed to throw
         // at runtime.

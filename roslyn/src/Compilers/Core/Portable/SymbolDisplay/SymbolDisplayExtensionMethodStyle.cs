@@ -16,13 +16,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Default = 0,
 
-
         /// <summary>
         /// Displays the extension method in the form of an instance method.
         /// For example, IEnumerable&lt;TSource&gt;.ElementAt&lt;TSource&gt;(int index).
         /// </summary>
         InstanceMethod = 1,
-
 
         /// <summary>
         /// Displays the extension method as a static method.

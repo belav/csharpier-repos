@@ -10,7 +10,6 @@ namespace System.Net.Http
         /// </summary>
         WithActiveRequests,
 
-
         /// <summary>
         /// Sends keep alive ping for whole connection lifetime.
         /// </summary>

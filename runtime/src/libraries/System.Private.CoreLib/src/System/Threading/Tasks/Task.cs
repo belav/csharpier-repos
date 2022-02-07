@@ -30,24 +30,20 @@ namespace System.Threading.Tasks
         /// </summary>
         Created,
 
-
         /// <summary>
         /// The task is waiting to be activated and scheduled internally by the .NET Framework infrastructure.
         /// </summary>
         WaitingForActivation,
-
 
         /// <summary>
         /// The task has been scheduled for execution but has not yet begun executing.
         /// </summary>
         WaitingToRun,
 
-
         /// <summary>
         /// The task is running but has not yet completed.
         /// </summary>
         Running,
-
 
         // /// <summary>
         // /// The task is currently blocked in a wait state.
@@ -59,12 +55,10 @@ namespace System.Threading.Tasks
         /// </summary>
         WaitingForChildrenToComplete,
 
-
         /// <summary>
         /// The task completed execution successfully.
         /// </summary>
         RanToCompletion,
-
 
         /// <summary>
         /// The task acknowledged cancellation by throwing an OperationCanceledException with its own CancellationToken
@@ -72,7 +66,6 @@ namespace System.Threading.Tasks
         /// task started executing.
         /// </summary>
         Canceled,
-
 
         /// <summary>
         /// The task completed due to an unhandled exception.
@@ -7653,14 +7646,12 @@ namespace System.Threading.Tasks
         /// </summary>
         None = 0x0,
 
-
         /// <summary>
         /// A hint to a <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see> to schedule a
         /// task in as fair a manner as possible, meaning that tasks scheduled sooner will be more likely to
         /// be run sooner, and tasks scheduled later will be more likely to be run later.
         /// </summary>
         PreferFairness = 0x01,
-
 
         /// <summary>
         /// Specifies that a task will be a long-running, course-grained operation. It provides a hint to the
@@ -7669,25 +7660,21 @@ namespace System.Threading.Tasks
         /// </summary>
         LongRunning = 0x02,
 
-
         /// <summary>
         /// Specifies that a task is attached to a parent in the task hierarchy.
         /// </summary>
         AttachedToParent = 0x04,
-
 
         /// <summary>
         /// Specifies that an InvalidOperationException will be thrown if an attempt is made to attach a child task to the created task.
         /// </summary>
         DenyChildAttach = 0x08,
 
-
         /// <summary>
         /// Prevents the ambient scheduler from being seen as the current scheduler in the created task.  This means that operations
         /// like StartNew or ContinueWith that are performed in the created task will see TaskScheduler.Default as the current scheduler.
         /// </summary>
         HideScheduler = 0x10,
-
 
         // 0x20 is already being used in TaskContinuationOptions
 
@@ -7707,12 +7694,10 @@ namespace System.Threading.Tasks
         /// <summary> Specifies "No internal task options" </summary>
         None,
 
-
         /// <summary>Used to filter out internal vs. public task creation options.</summary>
         InternalOptionsMask = 0x0000FF00,
         ContinuationTask = 0x0200,
         PromiseTask = 0x0400,
-
 
         /// <summary>
         /// Store the presence of TaskContinuationOptions.LazyCancellation, since it does not directly
@@ -7720,11 +7705,9 @@ namespace System.Threading.Tasks
         /// </summary>
         LazyCancellation = 0x1000,
 
-
         /// <summary>Specifies that the task will be queued by the runtime before handing it over to the user.
         /// This flag will be used to skip the cancellationtoken registration step, which is only meant for unstarted tasks.</summary>
         QueuedByRuntime = 0x2000,
-
 
         /// <summary>
         /// Denotes that Dispose should be a complete nop for a Task.  Used when constructing tasks that are meant to be cached/reused.
@@ -7746,7 +7729,6 @@ namespace System.Threading.Tasks
         /// </summary>
         None = 0,
 
-
         // These are identical to their meanings and values in TaskCreationOptions
 
         /// <summary>
@@ -7756,7 +7738,6 @@ namespace System.Threading.Tasks
         /// </summary>
         PreferFairness = 0x01,
 
-
         /// <summary>
         /// Specifies that a task will be a long-running, coarse-grained operation.  It provides
         /// a hint to the <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see> that
@@ -7764,18 +7745,15 @@ namespace System.Threading.Tasks
         /// </summary>
         LongRunning = 0x02,
 
-
         /// <summary>
         /// Specifies that a task is attached to a parent in the task hierarchy.
         /// </summary>
         AttachedToParent = 0x04,
 
-
         /// <summary>
         /// Specifies that an InvalidOperationException will be thrown if an attempt is made to attach a child task to the created task.
         /// </summary>
         DenyChildAttach = 0x08,
-
 
         /// <summary>
         /// Prevents the ambient scheduler from being seen as the current scheduler in the created task.  This means that operations
@@ -7783,13 +7761,11 @@ namespace System.Threading.Tasks
         /// </summary>
         HideScheduler = 0x10,
 
-
         /// <summary>
         /// In the case of continuation cancellation, prevents completion of the continuation until the antecedent has completed.
         /// </summary>
         LazyCancellation = 0x20,
         RunContinuationsAsynchronously = 0x40,
-
 
         // These are specific to continuations
 
@@ -7799,13 +7775,11 @@ namespace System.Threading.Tasks
         /// </summary>
         NotOnRanToCompletion = 0x10000,
 
-
         /// <summary>
         /// Specifies that the continuation task should not be scheduled if its antecedent threw an unhandled
         /// exception. This option is not valid for multi-task continuations.
         /// </summary>
         NotOnFaulted = 0x20000,
-
 
         /// <summary>
         /// Specifies that the continuation task should not be scheduled if its antecedent was canceled. This
@@ -7813,13 +7787,11 @@ namespace System.Threading.Tasks
         /// </summary>
         NotOnCanceled = 0x40000,
 
-
         /// <summary>
         /// Specifies that the continuation task should be scheduled only if its antecedent ran to
         /// completion. This option is not valid for multi-task continuations.
         /// </summary>
         OnlyOnRanToCompletion = NotOnFaulted | NotOnCanceled,
-
 
         /// <summary>
         /// Specifies that the continuation task should be scheduled only if its antecedent threw an
@@ -7827,13 +7799,11 @@ namespace System.Threading.Tasks
         /// </summary>
         OnlyOnFaulted = NotOnRanToCompletion | NotOnCanceled,
 
-
         /// <summary>
         /// Specifies that the continuation task should be scheduled only if its antecedent was canceled.
         /// This option is not valid for multi-task continuations.
         /// </summary>
         OnlyOnCanceled = NotOnRanToCompletion | NotOnFaulted,
-
 
         /// <summary>
         /// Specifies that the continuation task should be executed synchronously. With this option

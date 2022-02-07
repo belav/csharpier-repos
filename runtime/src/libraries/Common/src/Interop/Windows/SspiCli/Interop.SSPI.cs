@@ -59,7 +59,6 @@ internal static partial class Interop
             SECPKG_ATTR_CLIENT_SPECIFIED_TARGET = 27,
             SECPKG_ATTR_APPLICATION_PROTOCOL = 35,
 
-
             // minschannel.h
             SECPKG_ATTR_REMOTE_CERT_CONTEXT = 0x53, // returns PCCERT_CONTEXT
             SECPKG_ATTR_LOCAL_CERT_CONTEXT = 0x54, // returns PCCERT_CONTEXT
@@ -110,10 +109,8 @@ internal static partial class Interop
             UseSessionKey = 0x00000020,
             AllocateMemory = 0x00000100,
 
-
             // Connection semantics must be used.
             Connection = 0x00000800,
-
 
             // Client applications requiring extended error messages specify the
             // ISC_REQ_EXTENDED_ERROR flag when calling the InitializeSecurityContext

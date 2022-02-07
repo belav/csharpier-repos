@@ -18,36 +18,30 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         None = 0x00000000,
 
-
         /// <summary>
         /// The argument's compile-time type should be considered during binding.
         /// </summary>
         UseCompileTimeType = 0x00000001,
-
 
         /// <summary>
         /// The argument is a constant.
         /// </summary>
         Constant = 0x00000002,
 
-
         /// <summary>
         /// The argument is a named argument.
         /// </summary>
         NamedArgument = 0x00000004,
-
 
         /// <summary>
         /// The argument is passed to a ref parameter.
         /// </summary>
         IsRef = 0x00000008,
 
-
         /// <summary>
         /// The argument is passed to an out parameter.
         /// </summary>
         IsOut = 0x00000010,
-
 
         /// <summary>
         /// The argument is a <see cref="System.Type"/> indicating an actual typename used in source. Used only for target objects in static calls.

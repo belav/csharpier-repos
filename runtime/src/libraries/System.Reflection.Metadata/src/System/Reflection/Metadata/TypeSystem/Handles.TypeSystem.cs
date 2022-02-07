@@ -2636,18 +2636,14 @@ namespace System.Reflection.Metadata
         {
             Nil,
 
-
             // B0 3F 5F 7F 11 D5 0A 3A
             ContractPublicKeyToken,
-
 
             // 00, 24, 00, 00, 04, ...
             ContractPublicKey,
 
-
             // Template for projected AttributeUsage attribute blob
             AttributeUsage_AllowSingle,
-
 
             // Template for projected AttributeUsage attribute blob with AllowMultiple=true
             AttributeUsage_AllowMultiple,

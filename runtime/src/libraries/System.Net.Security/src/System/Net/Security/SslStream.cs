@@ -18,10 +18,8 @@ namespace System.Net.Security
         // Prohibit null ciphers (current system defaults)
         RequireEncryption = 0,
 
-
         // Add null ciphers to current system defaults
         AllowNoEncryption,
-
 
         // Request null ciphers only
         NoEncryption

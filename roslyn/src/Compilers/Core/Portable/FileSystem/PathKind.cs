@@ -13,36 +13,30 @@ namespace Roslyn.Utilities
         /// </summary>
         Empty,
 
-
         /// <summary>
         /// "file"
         /// </summary>
         Relative,
-
 
         /// <summary>
         /// ".\file"
         /// </summary>
         RelativeToCurrentDirectory,
 
-
         /// <summary>
         /// "..\file"
         /// </summary>
         RelativeToCurrentParent,
-
 
         /// <summary>
         /// "\dir\file"
         /// </summary>
         RelativeToCurrentRoot,
 
-
         /// <summary>
         /// "C:dir\file"
         /// </summary>
         RelativeToDriveDirectory,
-
 
         /// <summary>
         /// "C:\file" or "\\machine" (UNC).

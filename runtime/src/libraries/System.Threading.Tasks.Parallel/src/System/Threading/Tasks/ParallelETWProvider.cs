@@ -38,10 +38,8 @@ namespace System.Threading.Tasks
             /// <summary>Parallel.Invoke.</summary>
             ParallelInvoke = 1,
 
-
             /// <summary>Parallel.For.</summary>
             ParallelFor = 2,
-
 
             /// <summary>Parallel.ForEach.</summary>
             ParallelForEach = 3

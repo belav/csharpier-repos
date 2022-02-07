@@ -618,12 +618,10 @@ public class LinkTagHelper : UrlResolutionTagHelper
         /// </summary>
         AppendVersion = 0,
 
-
         /// <summary>
         /// Just performing file globbing search for the href, rendering a separate &lt;link&gt; for each match.
         /// </summary>
         GlobbedHref = 1,
-
 
         /// <summary>
         /// Rendering a fallback block if primary stylesheet fails to load. Will also do globbing for both the

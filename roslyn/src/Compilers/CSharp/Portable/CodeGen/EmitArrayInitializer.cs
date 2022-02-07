@@ -21,10 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // Initialize every element
             Element,
 
-
             // Initialize all elements at once from a metadata blob
             Block,
-
 
             // Mixed case where there are some initializers that are constants and
             // there is enough of them so that it makes sense to use block initialization

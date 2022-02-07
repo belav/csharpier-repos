@@ -22,84 +22,70 @@ namespace Microsoft.TestCommon
             /// </summary>
             IsAbstract = 0x1,
 
-
             /// <summary>
             /// Indicates that the type must be a class.
             /// </summary>
             IsClass = 0x2,
-
 
             /// <summary>
             /// Indicates that the type must be a COM object.
             /// </summary>
             IsComObject = 0x4,
 
-
             /// <summary>
             /// Indicates that the type must be disposable.
             /// </summary>
             IsDisposable = 0x8,
-
 
             /// <summary>
             /// Indicates that the type must be an enum.
             /// </summary>
             IsEnum = 0x10,
 
-
             /// <summary>
             /// Indicates that the type must be a generic type.
             /// </summary>
             IsGenericType = 0x20,
-
 
             /// <summary>
             /// Indicates that the type must be a generic type definition.
             /// </summary>
             IsGenericTypeDefinition = 0x40,
 
-
             /// <summary>
             /// Indicates that the type must be an interface.
             /// </summary>
             IsInterface = 0x80,
-
 
             /// <summary>
             /// Indicates that the type must be nested and declared private.
             /// </summary>
             IsNestedPrivate = 0x100,
 
-
             /// <summary>
             /// Indicates that the type must be nested and declared public.
             /// </summary>
             IsNestedPublic = 0x200,
-
 
             /// <summary>
             /// Indicates that the type must be public.
             /// </summary>
             IsPublic = 0x400,
 
-
             /// <summary>
             /// Indicates that the type must be sealed.
             /// </summary>
             IsSealed = 0x800,
-
 
             /// <summary>
             /// Indicates that the type must be visible outside the assembly.
             /// </summary>
             IsVisible = 0x1000,
 
-
             /// <summary>
             /// Indicates that the type must be static.
             /// </summary>
             IsStatic = TypeAssert.TypeProperties.IsAbstract | TypeAssert.TypeProperties.IsSealed,
-
 
             /// <summary>
             /// Indicates that the type must be a public, visible class.

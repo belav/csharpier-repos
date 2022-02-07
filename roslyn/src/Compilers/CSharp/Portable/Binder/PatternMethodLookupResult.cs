@@ -15,24 +15,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         Success,
 
-
         /// <summary>
         /// A member was found, but it was not a method
         /// </summary>
         NotAMethod,
-
 
         /// <summary>
         /// A member was found, but it was not callable
         /// </summary>
         NotCallable,
 
-
         /// <summary>
         /// The lookup failed to find anything
         /// </summary>
         NoResults,
-
 
         /// <summary>
         /// One or more errors occurred while performing the lookup

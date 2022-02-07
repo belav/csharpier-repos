@@ -1501,7 +1501,6 @@ namespace System.Threading
         Upgrade = 0x2000,
         Release = 0x4000,
 
-
         // Lock state before the performed operation, to which the lock state may need to be reverted
         OwnedNone = 0x10000,
         OwnedWriter = 0x20000,

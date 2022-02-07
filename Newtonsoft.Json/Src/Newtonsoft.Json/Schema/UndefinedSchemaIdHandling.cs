@@ -47,12 +47,10 @@ namespace Newtonsoft.Json.Schema
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Use the .NET type name as the schema Id.
         /// </summary>
         UseTypeName = 1,
-
 
         /// <summary>
         /// Use the assembly qualified .NET type name as the schema Id.

@@ -9,10 +9,8 @@ namespace System.Speech.Recognition
         // The audio input is stopped.
         Stopped,
 
-
         // The audio input contains silence.
         Silence,
-
 
         // The audio input contains speech signal.
         Speech

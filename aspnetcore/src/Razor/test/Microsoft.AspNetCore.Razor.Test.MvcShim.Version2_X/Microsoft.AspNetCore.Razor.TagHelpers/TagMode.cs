@@ -13,12 +13,10 @@ public enum TagMode
     /// </summary>
     StartTagAndEndTag,
 
-
     /// <summary>
     /// A self-closed tag.
     /// </summary>
     SelfClosing,
-
 
     /// <summary>
     /// Only a start tag.

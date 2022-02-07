@@ -13,7 +13,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         // that is never read/used.
         UnusedLocalVariable = 1,
 
-
         // Unused values must be explicitly assigned to a discard '_' variable.
         DiscardVariable = 2,
     }

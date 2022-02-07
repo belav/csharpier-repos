@@ -22,18 +22,15 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         None = 0,
 
-
         /// <summary>
         /// Disable Implicit Activity Tracking
         /// </summary>
         Disable = 0x2,
 
-
         /// <summary>
         /// Allow activity event to call itself (directly or indirectly)
         /// </summary>
         Recursive = 0x4,
-
 
         /// <summary>
         /// Allows event activity to live beyond its parent.

@@ -16,7 +16,6 @@ namespace Dia
         nsfRegularExpression = 0x8, // regular expression
         nsfUndecoratedName = 0x10, // applies only to symbols that have both undecorated and decorated names
 
-
         // predefined names for backward source compatibility
 
         nsCaseSensitive = nsfCaseSensitive, // apply a case sensitive match
@@ -283,7 +282,6 @@ namespace Dia
         CV_ALLREG_PARAMS = 30008,
         CV_ALLREG_LOCALS = 30009,
 
-
         //  Register set for the Intel 80x86 and ix86 processor series
         //  (plus PCODE registers)
 
@@ -459,7 +457,6 @@ namespace Dia
         CV_REG_EMM6H = 234,
         CV_REG_EMM7H = 235,
 
-
         // do not change the order of these regs, first one must be even too
         CV_REG_MM00 = 236,
         CV_REG_MM01 = 237,
@@ -477,7 +474,6 @@ namespace Dia
         CV_REG_MM61 = 249,
         CV_REG_MM70 = 250,
         CV_REG_MM71 = 251,
-
 
         // registers for the 68K processors
 
@@ -565,7 +561,6 @@ namespace Dia
         CV_R68_BAC6 = 78,
         CV_R68_BAC7 = 79,
 
-
         // Register set for the MIPS 4000
 
         CV_M4_NOREG = CV_REG_NONE,
@@ -638,7 +633,6 @@ namespace Dia
         CV_M4_FltF30 = 90,
         CV_M4_FltF31 = 91,
         CV_M4_FltFsr = 92,
-
 
         // Register set for the ALPHA AXP
 
@@ -713,7 +707,6 @@ namespace Dia
         CV_ALPHA_FltFsr = 77,
         CV_ALPHA_SoftFpcr = 78,
 
-
         // Register Set for Motorola/IBM PowerPC
 
         /*
@@ -752,7 +745,6 @@ namespace Dia
         CV_PPC_GPR30 = 31,
         CV_PPC_GPR31 = 32,
 
-
         /*
         ** PowerPC Condition Register ( User Level )
         */
@@ -765,7 +757,6 @@ namespace Dia
         CV_PPC_CR5 = 39,
         CV_PPC_CR6 = 40,
         CV_PPC_CR7 = 41,
-
 
         /*
         ** PowerPC Floating Point Registers ( User Level )
@@ -803,18 +794,15 @@ namespace Dia
         CV_PPC_FPR30 = 72,
         CV_PPC_FPR31 = 73,
 
-
         /*
         ** PowerPC Floating Point Status and Control Register ( User Level )
         */
         CV_PPC_FPSCR = 74,
 
-
         /*
         ** PowerPC Machine State Register ( Supervisor Level )
         */
         CV_PPC_MSR = 75,
-
 
         /*
         ** PowerPC Segment Registers ( Supervisor Level )
@@ -836,7 +824,6 @@ namespace Dia
         CV_PPC_SR14 = 90,
         CV_PPC_SR15 = 91,
 
-
         /*
         ** For all of the special purpose registers add 100 to the SPR# that the
         ** Motorola/IBM documentation gives with the exception of any imaginary
@@ -855,7 +842,6 @@ namespace Dia
         CV_PPC_CTR = 109,
         CV_PPC_COMPARE = 110, // part of XER (internal to the debugger only)
         CV_PPC_COUNT = 111, // part of XER (internal to the debugger only)
-
 
         /*
         ** PowerPC Special Purpose Registers ( Supervisor Level )
@@ -889,7 +875,6 @@ namespace Dia
         CV_PPC_DBAT2L = 641,
         CV_PPC_DBAT3U = 642,
         CV_PPC_DBAT3L = 643,
-
 
         /*
         ** PowerPC Special Purpose Registers Implementation Dependent ( Supervisor Level )
@@ -939,13 +924,11 @@ namespace Dia
         CV_PPC_HID14 = 1122, // Not Defined
         CV_PPC_HID15 = 1123, // MPC601, MPC604, MPC620 ( PIR )
 
-
         //
         // JAVA VM registers
         //
 
         CV_JAVA_PC = 1,
-
 
         //
         // Register set for the Hitachi SH3
@@ -986,7 +969,6 @@ namespace Dia
         CV_SH3_BdmrB = 69,
         CV_SH3_Brcr = 70,
 
-
         //
         // Additional registers for Hitachi SH processors
         //
@@ -1026,7 +1008,6 @@ namespace Dia
         CV_SH_XFpR14 = 110,
         CV_SH_XFpR15 = 111,
 
-
         //
         // Register set for the ARM processor.
         //
@@ -1050,13 +1031,11 @@ namespace Dia
         CV_ARM_PC = 25, // Program counter
         CV_ARM_CPSR = 26, // Current program status register
 
-
         //
         // Register set for Intel IA64
         //
 
         CV_IA64_NOREG = CV_REG_NONE,
-
 
         // Branch Registers
 
@@ -1068,7 +1047,6 @@ namespace Dia
         CV_IA64_Br5 = 517,
         CV_IA64_Br6 = 518,
         CV_IA64_Br7 = 519,
-
 
         // Predicate Registers
 
@@ -1138,7 +1116,6 @@ namespace Dia
         CV_IA64_P63 = 767,
         CV_IA64_Preds = 768,
 
-
         // Banked General Registers
 
         CV_IA64_IntH0 = 832,
@@ -1158,7 +1135,6 @@ namespace Dia
         CV_IA64_IntH14 = 846,
         CV_IA64_IntH15 = 847,
 
-
         // Special Registers
 
         CV_IA64_Ip = 1016,
@@ -1166,13 +1142,11 @@ namespace Dia
         CV_IA64_Cfm = 1018,
         CV_IA64_Psr = 1019,
 
-
         // Banked General Registers
 
         CV_IA64_Nats = 1020,
         CV_IA64_Nats2 = 1021,
         CV_IA64_Nats3 = 1022,
-
 
         // General-Purpose Registers
 
@@ -1209,7 +1183,6 @@ namespace Dia
         CV_IA64_IntR29 = 1053,
         CV_IA64_IntR30 = 1054,
         CV_IA64_IntR31 = 1055,
-
 
         // Register Stack
         CV_IA64_IntR32 = 1056,
@@ -1309,7 +1282,6 @@ namespace Dia
         CV_IA64_IntR126 = 1150,
         CV_IA64_IntR127 = 1151,
 
-
         // Floating-Point Registers
 
         // Low Floating Point Registers
@@ -1345,7 +1317,6 @@ namespace Dia
         CV_IA64_FltF29 = 2077,
         CV_IA64_FltF30 = 2078,
         CV_IA64_FltF31 = 2079,
-
 
         // High Floating Point Registers
         CV_IA64_FltF32 = 2080,
@@ -1444,7 +1415,6 @@ namespace Dia
         CV_IA64_FltF125 = 2173,
         CV_IA64_FltF126 = 2174,
         CV_IA64_FltF127 = 2175,
-
 
         // Application Registers
 
@@ -1577,7 +1547,6 @@ namespace Dia
         CV_IA64_AR126 = 3198,
         CV_IA64_AR127 = 3199,
 
-
         // CPUID Registers
 
         CV_IA64_CPUID0 = 3328,
@@ -1585,7 +1554,6 @@ namespace Dia
         CV_IA64_CPUID2 = 3330,
         CV_IA64_CPUID3 = 3331,
         CV_IA64_CPUID4 = 3332,
-
 
         // Control Registers
 
@@ -1718,7 +1686,6 @@ namespace Dia
         CV_IA64_CR126 = 4222,
         CV_IA64_CR127 = 4223,
 
-
         // Protection Key Registers
 
         CV_IA64_Pkr0 = 5120,
@@ -1738,7 +1705,6 @@ namespace Dia
         CV_IA64_Pkr14 = 5134,
         CV_IA64_Pkr15 = 5135,
 
-
         // Region Registers
 
         CV_IA64_Rr0 = 6144,
@@ -1749,7 +1715,6 @@ namespace Dia
         CV_IA64_Rr5 = 6149,
         CV_IA64_Rr6 = 6150,
         CV_IA64_Rr7 = 6151,
-
 
         // Performance Monitor Data Registers
 
@@ -1762,7 +1727,6 @@ namespace Dia
         CV_IA64_PFD6 = 7174,
         CV_IA64_PFD7 = 7175,
 
-
         // Performance Monitor Config Registers
 
         CV_IA64_PFC0 = 7424,
@@ -1773,7 +1737,6 @@ namespace Dia
         CV_IA64_PFC5 = 7429,
         CV_IA64_PFC6 = 7430,
         CV_IA64_PFC7 = 7431,
-
 
         // Instruction Translation Registers
 
@@ -1786,7 +1749,6 @@ namespace Dia
         CV_IA64_TrI6 = 8198,
         CV_IA64_TrI7 = 8199,
 
-
         // Data Translation Registers
 
         CV_IA64_TrD0 = 8320,
@@ -1797,7 +1759,6 @@ namespace Dia
         CV_IA64_TrD5 = 8325,
         CV_IA64_TrD6 = 8326,
         CV_IA64_TrD7 = 8327,
-
 
         // Instruction Breakpoint Registers
 
@@ -1810,7 +1771,6 @@ namespace Dia
         CV_IA64_DbI6 = 8454,
         CV_IA64_DbI7 = 8455,
 
-
         // Data Breakpoint Registers
 
         CV_IA64_DbD0 = 8576,
@@ -1822,13 +1782,11 @@ namespace Dia
         CV_IA64_DbD6 = 8582,
         CV_IA64_DbD7 = 8583,
 
-
         //
         // Register set for the TriCore processor.
         //
 
         CV_TRI_NOREG = CV_REG_NONE,
-
 
         // General Purpose Data Registers
 
@@ -1849,7 +1807,6 @@ namespace Dia
         CV_TRI_D14 = 24,
         CV_TRI_D15 = 25,
 
-
         // General Purpose Address Registers
 
         CV_TRI_A0 = 26,
@@ -1869,7 +1826,6 @@ namespace Dia
         CV_TRI_A14 = 40,
         CV_TRI_A15 = 41,
 
-
         // Extended (64-bit) data registers
 
         CV_TRI_E0 = 42,
@@ -1880,7 +1836,6 @@ namespace Dia
         CV_TRI_E10 = 47,
         CV_TRI_E12 = 48,
         CV_TRI_E14 = 49,
-
 
         // Extended (64-bit) address registers
 
@@ -1930,13 +1885,11 @@ namespace Dia
         CV_TRI_TPX = 81,
         CV_TRI_TFA = 82,
 
-
         //
         // Register set for the AM33 and related processors.
         //
 
         CV_AM33_NOREG = CV_REG_NONE,
-
 
         // "Extended" (general purpose integer) registers
         CV_AM33_E0 = 10,
@@ -1948,20 +1901,17 @@ namespace Dia
         CV_AM33_E6 = 16,
         CV_AM33_E7 = 17,
 
-
         // Address registers
         CV_AM33_A0 = 20,
         CV_AM33_A1 = 21,
         CV_AM33_A2 = 22,
         CV_AM33_A3 = 23,
 
-
         // Integer data registers
         CV_AM33_D0 = 30,
         CV_AM33_D1 = 31,
         CV_AM33_D2 = 32,
         CV_AM33_D3 = 33,
-
 
         // (Single-precision) floating-point registers
         CV_AM33_FS0 = 40,
@@ -1997,16 +1947,13 @@ namespace Dia
         CV_AM33_FS30 = 70,
         CV_AM33_FS31 = 71,
 
-
         // Special purpose registers
 
         // Stack pointer
         CV_AM33_SP = 80,
 
-
         // Program counter
         CV_AM33_PC = 81,
-
 
         // Multiply-divide/accumulate registers
         CV_AM33_MDR = 82,
@@ -2015,16 +1962,13 @@ namespace Dia
         CV_AM33_MCRL = 85,
         CV_AM33_MCVF = 86,
 
-
         // CPU status words
         CV_AM33_EPSW = 87,
         CV_AM33_FPCR = 88,
 
-
         // Loop buffer registers
         CV_AM33_LIR = 89,
         CV_AM33_LAR = 90,
-
 
         //
         // Register set for the Mitsubishi M32R

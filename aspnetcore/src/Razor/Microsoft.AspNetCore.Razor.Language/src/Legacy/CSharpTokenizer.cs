@@ -885,7 +885,6 @@ internal class CSharpTokenizer : Tokenizer
         QuotedStringLiteral,
         VerbatimStringLiteral,
 
-
         // Razor Comments - need to be the same for HTML and CSharp
         AfterRazorCommentTransition = RazorCommentTokenizerState.AfterRazorCommentTransition,
         EscapedRazorCommentTransition = RazorCommentTokenizerState.EscapedRazorCommentTransition,

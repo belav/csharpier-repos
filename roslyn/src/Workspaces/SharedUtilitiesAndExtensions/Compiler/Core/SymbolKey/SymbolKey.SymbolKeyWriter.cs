@@ -42,7 +42,6 @@ namespace Microsoft.CodeAnalysis
             TypeParameter = 'Y',
             AnonymousFunctionOrDelegate = 'Z',
 
-
             // Not to be confused with ArrayType.  This indicates an array of elements in the stream.
             Array = '%',
             Reference = '#',

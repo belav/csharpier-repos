@@ -18,13 +18,11 @@ public enum RenderMode
     /// </summary>
     Static = 1,
 
-
     /// <summary>
     /// Renders a marker for a Blazor server-side application. This doesn't include any output from the component.
     /// When the user-agent starts, it uses this marker to bootstrap a blazor application.
     /// </summary>
     Server = 2,
-
 
     /// <summary>
     /// Renders the component into static HTML and includes a marker for a Blazor server-side application.
@@ -32,13 +30,11 @@ public enum RenderMode
     /// </summary>
     ServerPrerendered = 3,
 
-
     /// <summary>
     /// Renders a marker for a Blazor webassembly application. This doesn't include any output from the component.
     /// When the user-agent starts, it uses this marker to bootstrap a blazor client-side application.
     /// </summary>
     WebAssembly = 4,
-
 
     /// <summary>
     /// Renders the component into static HTML and includes a marker for a Blazor webassembly application.

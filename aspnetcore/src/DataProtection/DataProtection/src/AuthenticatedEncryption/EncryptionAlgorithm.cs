@@ -14,18 +14,15 @@ public enum EncryptionAlgorithm
     /// </summary>
     AES_128_CBC,
 
-
     /// <summary>
     /// The AES algorithm (FIPS 197) with a 192-bit key running in Cipher Block Chaining mode.
     /// </summary>
     AES_192_CBC,
 
-
     /// <summary>
     /// The AES algorithm (FIPS 197) with a 256-bit key running in Cipher Block Chaining mode.
     /// </summary>
     AES_256_CBC,
-
 
     /// <summary>
     /// The AES algorithm (FIPS 197) with a 128-bit key running in Galois/Counter Mode (FIPS SP 800-38D).
@@ -36,7 +33,6 @@ public enum EncryptionAlgorithm
     /// </remarks>
     AES_128_GCM,
 
-
     /// <summary>
     /// The AES algorithm (FIPS 197) with a 192-bit key running in Galois/Counter Mode (FIPS SP 800-38D).
     /// </summary>
@@ -44,7 +40,6 @@ public enum EncryptionAlgorithm
     /// This cipher mode produces a 128-bit authentication tag.
     /// </remarks>
     AES_192_GCM,
-
 
     /// <summary>
     /// The AES algorithm (FIPS 197) with a 256-bit key running in Galois/Counter Mode (FIPS SP 800-38D).

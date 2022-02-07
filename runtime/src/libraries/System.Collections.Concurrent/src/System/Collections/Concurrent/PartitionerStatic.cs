@@ -30,7 +30,6 @@ namespace System.Collections.Concurrent
         /// </summary>
         None = 0x0,
 
-
         /// <summary>
         /// Creates a partitioner that will take items from the source enumerable one at a time
         /// and will not use intermediate storage that can be accessed more efficiently by multiple threads.

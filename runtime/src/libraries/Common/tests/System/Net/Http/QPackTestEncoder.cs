@@ -219,42 +219,35 @@ namespace System.Net.Test.Common
     {
         None = 0,
 
-
         /// <summary>
         /// Applies Huffman encoding to the header's name.
         /// </summary>
         HuffmanEncodeName = 1,
-
 
         /// <summary>
         /// Applies Huffman encoding to the header's value.
         /// </summary>
         HuffmanEncodeValue = 2,
 
-
         /// <summary>
         /// Applies Huffman encoding to both the name and the value of the header.
         /// </summary>
         HuffmanEncode = HuffmanEncodeName | HuffmanEncodeValue,
-
 
         /// <summary>
         /// The header is using an indexed header from the static table.
         /// </summary>
         StaticIndex = 4,
 
-
         /// <summary>
         /// The header is using an indexed header from the dynamic table.
         /// </summary>
         DynamicIndex = 8,
 
-
         /// <summary>
         /// The header is using an indexed header from the dynamic table, adjusted from a base index.
         /// </summary>
         DynamicIndexPostBase = 16,
-
 
         /// <summary>
         /// Intermediaries (such as a proxy) must not index the value when forwarding the header.

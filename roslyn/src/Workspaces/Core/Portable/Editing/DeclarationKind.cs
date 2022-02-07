@@ -19,12 +19,10 @@ namespace Microsoft.CodeAnalysis.Editing
         None,
         CompilationUnit,
 
-
         /// <summary>
         /// Represents a class declaration, including record class declarations in C#.
         /// </summary>
         Class,
-
 
         /// <summary>
         /// Represents a struct declaration, including record struct declarations in C#.
@@ -51,7 +49,6 @@ namespace Microsoft.CodeAnalysis.Editing
         Attribute,
         LambdaExpression,
         GetAccessor,
-
 
         /// <summary>
         /// Represents set accessor declaration of a property, including init accessors in C#.

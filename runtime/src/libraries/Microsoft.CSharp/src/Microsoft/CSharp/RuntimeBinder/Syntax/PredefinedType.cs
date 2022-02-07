@@ -15,7 +15,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PT_CHAR,
         PT_BOOL,
 
-
         // "simple" types are certain types that the compiler knows about for conversion and operator purposes.ses.
         // Keep these first so that we can build conversion tables on their ordinals... Don't change the orderer
         // of the simple types because it will mess up conversion tables.
@@ -25,14 +24,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PT_UINT,
         PT_ULONG,
 
-
         // The special "pointer-sized int" types. Note that this are not considered numeric types from the compiler's point of view --
         // they are special only in that they have special signature encodings.
         FirstNonSimpleType,
         PT_INTPTR = FirstNonSimpleType,
         PT_UINTPTR,
         PT_OBJECT,
-
 
         // THE ORDER ABOVE HERE IS IMPORTANT!!!  It is used in tables in both fncbind and ilgen
         PT_STRING,
@@ -44,18 +41,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PT_ENUM,
         PT_DATETIME,
 
-
         // predefined types for the BCL
         PT_IENUMERABLE,
-
 
         // Generic variants of enumerator interfaces
         PT_G_IENUMERABLE,
 
-
         // Nullable<T>
         PT_G_OPTIONAL,
-
 
         // LINQ
         PT_G_IQUERYABLE,

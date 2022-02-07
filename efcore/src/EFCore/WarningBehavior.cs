@@ -16,12 +16,10 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         Log,
 
-
         /// <summary>
         ///     No action is taken.
         /// </summary>
         Ignore,
-
 
         /// <summary>
         ///     An exception is thrown.

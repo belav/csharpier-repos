@@ -16,12 +16,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// </summary>
         RValueCapture,
 
-
         /// <summary>
         /// Indicates an L-Value flow capture, i.e. captures of a symbol's location/address.
         /// </summary>
         LValueCapture,
-
 
         /// <summary>
         /// Indicates both an R-Value and an L-Value flow capture, i.e. captures of a symbol's value and location/address.

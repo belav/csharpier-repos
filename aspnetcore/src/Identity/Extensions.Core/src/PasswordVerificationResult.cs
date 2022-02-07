@@ -13,12 +13,10 @@ public enum PasswordVerificationResult
     /// </summary>
     Failed = 0,
 
-
     /// <summary>
     /// Indicates password verification was successful.
     /// </summary>
     Success = 1,
-
 
     /// <summary>
     /// Indicates password verification was successful however the password was encoded using a deprecated algorithm

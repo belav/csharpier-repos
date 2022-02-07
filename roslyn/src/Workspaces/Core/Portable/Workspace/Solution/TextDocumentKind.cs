@@ -14,12 +14,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         Document,
 
-
         /// <summary>
         /// Indicates an <see cref="CodeAnalysis.AdditionalDocument"/>
         /// </summary>
         AdditionalDocument,
-
 
         /// <summary>
         /// Indicates an <see cref="CodeAnalysis.AnalyzerConfigDocument"/>

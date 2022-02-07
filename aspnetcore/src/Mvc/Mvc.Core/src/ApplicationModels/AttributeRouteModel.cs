@@ -481,16 +481,13 @@ public class AttributeRouteModel
         // buffer.
         Plaintext = 0,
 
-
         // We're inside a replacement token, may be combined with other states to detect
         // a possible escaped bracket inside the token.
         InsideToken = 1,
 
-
         // We've seen a left brace, need to see the next character to find out if it's escaped
         // or not.
         SeenLeft = 2,
-
 
         // We've seen a right brace, need to see the next character to find out if it's escaped
         // or not.

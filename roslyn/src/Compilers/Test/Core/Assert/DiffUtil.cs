@@ -20,18 +20,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             /// </summary>
             None = 0,
 
-
             /// <summary>
             /// Node value was updated.
             /// </summary>
             Update = 1,
 
-
             /// <summary>
             /// Node was inserted.
             /// </summary>
             Insert = 2,
-
 
             /// <summary>
             /// Node was deleted.

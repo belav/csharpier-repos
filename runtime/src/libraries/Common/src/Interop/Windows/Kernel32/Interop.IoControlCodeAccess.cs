@@ -20,13 +20,11 @@ internal static partial class Interop
             /// </summary>
             FILE_ANY_ACCESS = 0x00,
 
-
             /// <summary>
             /// The I/O manager sends the IRP only for a caller with read access rights, allowing the underlying device driver to transfer
             /// data from the device to system memory.
             /// </summary>
             FILE_READ_DATA = 0x01,
-
 
             /// <summary>
             /// The I/O manager sends the IRP only for a caller with write access rights, allowing the underlying device driver to transfer

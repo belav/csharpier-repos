@@ -45,7 +45,6 @@ namespace Microsoft.EntityFrameworkCore
         /// </remarks>
         ClientSetNull,
 
-
         /// <summary>
         ///     For entities being tracked by the <see cref="DbContext" />, the values of foreign key properties in
         ///     dependent entities are set to null when the related principal is deleted.
@@ -59,7 +58,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     is to generate an error if a foreign key constraint is violated.
         /// </remarks>
         Restrict,
-
 
         /// <summary>
         ///     For entities being tracked by the <see cref="DbContext" />, the values of foreign key properties in
@@ -77,7 +75,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     on loaded entities even if the database does not support this.
         /// </remarks>
         SetNull,
-
 
         /// <summary>
         ///     For entities being tracked by the <see cref="DbContext" />, dependent entities
@@ -99,7 +96,6 @@ namespace Microsoft.EntityFrameworkCore
         /// </remarks>
         Cascade,
 
-
         /// <summary>
         ///     For entities being tracked by the <see cref="DbContext" />, dependent entities
         ///     will be deleted when the related principal is deleted.
@@ -110,7 +106,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     is to generate an error if a foreign key constraint is violated.
         /// </remarks>
         ClientCascade,
-
 
         /// <summary>
         ///     For entities being tracked by the <see cref="DbContext" />, the values of foreign key properties in
@@ -125,7 +120,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     is to generate an error if a foreign key constraint is violated.
         /// </remarks>
         NoAction,
-
 
         /// <summary>
         ///     Note: it is unusual to use this value. Consider using <see cref="ClientSetNull" /> instead to match

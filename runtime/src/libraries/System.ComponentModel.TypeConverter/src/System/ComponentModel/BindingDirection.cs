@@ -13,7 +13,6 @@ namespace System.ComponentModel
         /// </summary>
         OneWay = 0,
 
-
         /// <summary>
         /// The template can accept and expose property values. Used with an IBindableTemplate.
         /// </summary>

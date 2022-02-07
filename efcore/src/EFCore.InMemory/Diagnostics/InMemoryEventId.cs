@@ -30,7 +30,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             // Transaction events
             TransactionIgnoredWarning = CoreEventId.ProviderBaseId,
 
-
             // Update events
             ChangesSaved = CoreEventId.ProviderBaseId + 100
         }

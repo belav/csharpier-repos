@@ -10,7 +10,6 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         Default,
 
-
         /// <summary>
         /// If no text has been typed, the item should be soft selected. This is appropriate for
         /// completion providers that want to provide suggestions that shouldn't interfere with
@@ -19,7 +18,6 @@ namespace Microsoft.CodeAnalysis.Completion
         /// commit that item.
         /// </summary>
         SoftSelection,
-
 
         /// <summary>
         /// If no text has been typed, the item should be hard selected.  This is appropriate for

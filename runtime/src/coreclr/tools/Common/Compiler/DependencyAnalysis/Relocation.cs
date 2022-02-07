@@ -26,7 +26,6 @@ namespace ILCompiler.DependencyAnalysis
         IMAGE_REL_BASED_ARM64_PAGEOFFSET_12A = 0x82, // ADD/ADDS (immediate) with zero shift, for page offset
         IMAGE_REL_BASED_ARM64_PAGEOFFSET_12L = 0x83, // LDR (indexed, unsigned immediate), for page offset
 
-
         //
         // Relocations for R2R image production
         //

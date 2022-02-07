@@ -838,10 +838,8 @@ namespace System.Data.Common
             NonPooledObjectUsedMoreThanOnce = 7,
             AttemptingToPoolOnRestrictedToken = 8,
 
-
             //          ConnectionOptionsInUse                                  =  9,
             ConvertSidToStringSidWReturnedNull = 10,
-
 
             //          UnexpectedTransactedObject                              = 11,
             AttemptingToConstructReferenceCollectionOnStaticObject = 12,

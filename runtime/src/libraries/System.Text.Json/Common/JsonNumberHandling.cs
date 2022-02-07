@@ -19,7 +19,6 @@ namespace System.Text.Json.Serialization
         /// </summary>
         Strict = 0x0,
 
-
         /// <summary>
         /// Numbers can be read from <see cref="JsonTokenType.String"/> tokens.
         /// Does not prevent numbers from being read from <see cref="JsonTokenType.Number"/> token.
@@ -28,12 +27,10 @@ namespace System.Text.Json.Serialization
         /// </summary>
         AllowReadingFromString = 0x1,
 
-
         /// <summary>
         /// Numbers will be written as JSON strings (with quotes), not as JSON numbers.
         /// </summary>
         WriteAsString = 0x2,
-
 
         /// <summary>
         /// The "NaN", "Infinity", and "-Infinity" <see cref="JsonTokenType.String"/> tokens can be read as

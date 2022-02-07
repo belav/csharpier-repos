@@ -31,7 +31,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Diagnostics_RemoveProject = 18,
         Diagnostics_DocumentClose = 19,
 
-
         // add new values after this
         Run_Environment = 20,
         Run_Environment_Options = 21,
@@ -227,7 +226,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         PullMembersUpWarning_UserProceedToFinish = 211,
         PullMembersUpWarning_UserGoBack = 212,
 
-
         // currently no-one uses these
         SmartTags_RefreshSession = 213,
         SmartTags_SmartTagInitializeFixes = 214,
@@ -295,14 +293,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         CodefixInfobar_ErrorIgnored = 275,
         Refactoring_NamingStyle = 276,
 
-
         // Caches
         SymbolTreeInfo_ExceptionInCacheRead = 277,
         SpellChecker_ExceptionInCacheRead = 278,
         BKTree_ExceptionInCacheRead = 279,
         IntellisenseBuild_Failed = 280,
         FileTextLoader_FileLengthThresholdExceeded = 281,
-
 
         // Generic performance measurement action IDs
         MeasurePerformance_StartAction = 282,
@@ -324,7 +320,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         RemoteHost_Connect = 297,
         RemoteHost_Disconnect = 298,
-
 
         // obsolete: RemoteHostClientService_AddGlobalAssetsAsync = 299,
         // obsolete: RemoteHostClientService_RemoveGlobalAssets = 300,
@@ -349,7 +344,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         ProjectState_ComputeChecksumsAsync = 316,
         DocumentState_ComputeChecksumsAsync = 317,
 
-
         // obsolete: SolutionSynchronizationService_GetRemotableData = 318,
         // obsolete: SolutionSynchronizationServiceFactory_CreatePinnedRemotableDataScopeAsync = 319,
 
@@ -358,7 +352,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         SolutionService_GetSolutionAsync = 322,
         SolutionService_UpdatePrimaryWorkspaceAsync = 323,
         RemoteHostService_GetAssetsAsync = 324,
-
 
         // obsolete: CompilationService_GetCompilationAsync = 325,
         SolutionCreator_AssetDifferences = 326,
@@ -444,7 +437,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         LSPCompletion_MissingLSPCompletionInvokeKind = 451,
         Workspace_Project_CompilationThrownAway = 460,
         CommandHandler_Paste_ImportsOnPaste = 470,
-
 
         // Superseded by LSP_FindDocumentInWorkspace
         // obsolete: FindDocumentInWorkspace = 480,
