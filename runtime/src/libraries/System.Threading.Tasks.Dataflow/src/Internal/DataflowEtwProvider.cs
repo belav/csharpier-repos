@@ -147,6 +147,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             /// <summary>A task is being launched to process incoming messages.</summary>
             ProcessingInputMessages = 1,
+
             /// <summary>A task is being launched to offer outgoing messages to linked targets.</summary>
             OfferingOutputMessages = 2,
         }
@@ -194,8 +195,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             /// <summary>The block completed successfully.</summary>
             RanToCompletion = (int)TaskStatus.RanToCompletion,
+
             /// <summary>The block completed due to an error.</summary>
             Faulted = (int)TaskStatus.Faulted,
+
             /// <summary>The block completed due to cancellation.</summary>
             Canceled = (int)TaskStatus.Canceled
         }

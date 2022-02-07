@@ -10,10 +10,12 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
         /// Disabled in the extension manager or not installed.
         /// </summary>
         NotInstalledOrDisabled,
+
         /// <summary>
         /// ReSharper is suspended. Package is loaded, but is not actually performing actions.
         /// </summary>
         Suspended,
+
         /// <summary>
         /// ReSharper is installed and enabled.
         /// </summary>

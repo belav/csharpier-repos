@@ -431,10 +431,13 @@ namespace System.Web.Mvc.Html.Test
         {
             [Display(Name = "First")]
             Zero,
+
             [Display(Name = "Second")]
             One,
+
             [Display(Name = "Third")]
             Two,
+
             [Display(Name = "Fourth")]
             Three,
         }

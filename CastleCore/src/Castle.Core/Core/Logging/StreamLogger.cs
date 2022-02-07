@@ -19,13 +19,13 @@ namespace Castle.Core.Logging
     using System.Text;
 
     /// <summary>
-          ///	The Stream Logger class.  This class can stream log information
-          ///	to any stream, it is suitable for storing a log file to disk,
-          ///	or to a <c>MemoryStream</c> for testing your components.
-          /// </summary>
-          /// <remarks>
-          /// This logger is not thread safe.
-          /// </remarks>
+                      ///	The Stream Logger class.  This class can stream log information
+                      ///	to any stream, it is suitable for storing a log file to disk,
+                      ///	or to a <c>MemoryStream</c> for testing your components.
+                      /// </summary>
+                      /// <remarks>
+                      /// This logger is not thread safe.
+                      /// </remarks>
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

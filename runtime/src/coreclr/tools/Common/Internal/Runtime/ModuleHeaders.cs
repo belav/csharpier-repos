@@ -55,6 +55,7 @@ namespace Internal.Runtime
         ExceptionInfo = 104,
         DebugInfo = 105,
         DelayLoadMethodCallThunks = 106,
+
         // 107 is deprecated - it was used by an older format of AvailableTypes
         AvailableTypes = 108,
         InstanceMethodEntryPoints = 109,

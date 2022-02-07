@@ -15,14 +15,17 @@ namespace System.Net.Http
         /// https://tools.ietf.org/html/draft-ietf-quic-http-24#section-6.2.1
         /// </summary>
         Control = 0x00,
+
         /// <summary>
         /// https://tools.ietf.org/html/draft-ietf-quic-http-24#section-6.2.2
         /// </summary>
         Push = 0x01,
+
         /// <summary>
         /// https://tools.ietf.org/html/draft-ietf-quic-qpack-11#section-4.2
         /// </summary>
         QPackEncoder = 0x02,
+
         /// <summary>
         /// https://tools.ietf.org/html/draft-ietf-quic-qpack-11#section-4.2
         /// </summary>

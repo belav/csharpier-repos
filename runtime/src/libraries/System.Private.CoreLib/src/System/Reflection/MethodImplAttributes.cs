@@ -12,12 +12,14 @@ namespace System.Reflection
         Native = 0x0001, // Method impl is native.
         OPTIL = 0x0002, // Method impl is OPTIL
         Runtime = 0x0003, // Method impl is provided by the runtime.
+
         // end code impl mask
 
         // managed mask
         ManagedMask = 0x0004, // Flags specifying whether the code is managed or unmanaged.
         Unmanaged = 0x0004, // Method impl is unmanaged, otherwise managed.
         Managed = 0x0000, // Method impl is managed.
+
         // end managed mask
 
         // implementation info and interop

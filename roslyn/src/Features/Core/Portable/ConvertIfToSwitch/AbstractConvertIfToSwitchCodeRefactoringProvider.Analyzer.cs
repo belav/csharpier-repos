@@ -266,10 +266,12 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 /// None of operands were constant.
                 /// </summary>
                 None,
+
                 /// <summary>
                 /// Signifies that the left operand is the constant.
                 /// </summary>
                 Left,
+
                 /// <summary>
                 /// Signifies that the right operand is the constant.
                 /// </summary>
@@ -404,10 +406,12 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 /// Not a range bound.
                 /// </summary>
                 None,
+
                 /// <summary>
                 /// Signifies that the lower-bound of a range pattern
                 /// </summary>
                 Lower,
+
                 /// <summary>
                 /// Signifies that the higher-bound of a range pattern
                 /// </summary>
@@ -528,17 +532,22 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         internal enum Feature
         {
             None = 0,
+
             // VB/C# 9.0 features
             RelationalPattern = 1,
+
             // VB features
             InequalityPattern = 1 << 1,
             RangePattern = 1 << 2,
+
             // C# 7.0 features
             SourcePattern = 1 << 3,
             IsTypePattern = 1 << 4,
             CaseGuard = 1 << 5,
+
             // C# 8.0 features
             SwitchExpression = 1 << 6,
+
             // C# 9.0 features
             OrPattern = 1 << 7,
             AndPattern = 1 << 8,

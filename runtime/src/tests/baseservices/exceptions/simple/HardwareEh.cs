@@ -181,16 +181,16 @@ public class HardwareEh
 
     //	public bool PosTest10() { return ExceptionTest(10, "StackOverflow", typeof(StackOverflowException),  new TestDelegate( GobbleStack )); }
     /*	public bool PosTest11() { return ExceptionTest(11, "OutOfMemory", typeof(OutOfMemoryException),
-                                 delegate()
-                                 {
-                                 List<object> list;
-                                 list = new List<object>();
-                                 while(true)
-                                 {
-                                 // allocate memory (86 meg chunks)
-                                 list.Add( new byte[8388608]);
-                                 }
-                                 } ); } */
+                           delegate()
+                           {
+                           List<object> list;
+                           list = new List<object>();
+                           while(true)
+                           {
+                           // allocate memory (86 meg chunks)
+                           list.Add( new byte[8388608]);
+                           }
+                           } ); } */
     public bool PosTest12()
     {
         return ExceptionTest(

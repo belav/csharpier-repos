@@ -41,6 +41,7 @@ internal static partial class Interop
             kFSEventStreamEventFlagRootChanged = 0x00000020,
             kFSEventStreamEventFlagMount = 0x00000040,
             kFSEventStreamEventFlagUnmount = 0x00000080,
+
             /* These flags are only set if you specified the FileEvents */
             kFSEventStreamEventFlagItemCreated = 0x00000100,
             kFSEventStreamEventFlagItemRemoved = 0x00000200,

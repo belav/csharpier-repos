@@ -11,23 +11,28 @@ namespace MS.Internal.Xml.XPath
         public enum Op
         { // order is aligned with XPathOperator
             INVALID,
+
             /*Logical   */
             OR,
             AND,
+
             /*Equality  */
             EQ,
             NE,
+
             /*Relational*/
             LT,
             LE,
             GT,
             GE,
+
             /*Arithmetic*/
             PLUS,
             MINUS,
             MUL,
             DIV,
             MOD,
+
             /*Union     */
             UNION,
         };

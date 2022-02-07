@@ -4157,12 +4157,16 @@ namespace Internal.JitInterface
         {
             /// <summary>Not a generated block.</summary>
             Unknown = -1,
+
             /// <summary>Represent code.</summary>
             Code = 0,
+
             /// <summary>Represent cold code (i.e. code not called frequently).</summary>
             ColdCode = 1,
+
             /// <summary>Read-only data.</summary>
             ROData = 2,
+
             /// <summary>Instrumented Block Count Data</summary>
             BBCounts = 3
         }

@@ -3271,6 +3271,7 @@ public class TypeWithOptionalField
 public enum SerializableEnumWithNonSerializedValue
 {
     One = 1,
+
     [NonSerialized]
     Two = 2,
 }
@@ -3446,6 +3447,7 @@ public enum SoapEncodedTestEnum
 {
     [SoapEnum("Small")]
     A,
+
     [SoapEnum("Large")]
     B
 }

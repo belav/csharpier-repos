@@ -31,22 +31,27 @@ namespace DllImportGenerator.UnitTests
         /// The latest supported .NET Framework version.
         /// </summary>
         Framework,
+
         /// <summary>
         /// The latest supported .NET Core version.
         /// </summary>
         Core,
+
         /// <summary>
         /// The latest supported .NET Standard version.
         /// </summary>
         Standard,
+
         /// <summary>
         /// The latest supported .NET version.
         /// </summary>
         Net,
+
         /// <summary>
         /// .NET version 5.0.
         /// </summary>
         Net5,
+
         /// <summary>
         /// .NET version 6.0.
         /// </summary>

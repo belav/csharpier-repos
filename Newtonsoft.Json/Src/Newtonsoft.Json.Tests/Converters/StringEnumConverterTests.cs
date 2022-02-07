@@ -88,6 +88,7 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             [EnumMember(Value = "@first")]
             First,
+
             [EnumMember(Value = "@second")]
             Second,
             Third
@@ -97,6 +98,7 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             [EnumMember(Value = "Third")]
             First,
+
             [EnumMember(Value = "@second")]
             Second,
             Third
@@ -106,10 +108,13 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             [EnumMember(Value = "@first")]
             First,
+
             [EnumMember(Value = "@second")]
             Second,
+
             [EnumMember(Value = ",third")]
             Third,
+
             [EnumMember(Value = ",")]
             JustComma
         }
@@ -942,6 +947,7 @@ Parameter name: namingStrategyType",
             [EnumMember(Value = "foo_bar")]
             FooBar = 0x01,
             Bat = 0x02,
+
             [EnumMember(Value = "baz")]
             SerializeAsBaz = 0x4,
         }
@@ -952,6 +958,7 @@ Parameter name: namingStrategyType",
             [EnumMember(Value = "foo_bar")]
             FooBar,
             Bat,
+
             [EnumMember(Value = "baz")]
             SerializeAsBaz
         }
@@ -1212,6 +1219,7 @@ Parameter name: namingStrategyType",
         {
             [EnumMember(Value = "first_value")]
             First,
+
             [EnumMember(Value = "second_value")]
             first
         }
@@ -1241,6 +1249,7 @@ Parameter name: namingStrategyType",
         {
             [EnumMember(Value = "M")]
             Month,
+
             [EnumMember(Value = "m")]
             Minute
         }
@@ -1300,10 +1309,13 @@ Parameter name: namingStrategyType",
     {
         [EnumMember(Value = "2")]
         first,
+
         [EnumMember(Value = "1")]
         second,
+
         [EnumMember(Value = "3")]
         third,
+
         [EnumMember(Value = "-4")]
         fourth
     }
@@ -1313,10 +1325,13 @@ Parameter name: namingStrategyType",
     {
         [EnumMember]
         first = 0,
+
         [EnumMember]
         foo_bar = 1,
+
         [EnumMember(Value = "foo_bar")]
         FooBar = 2,
+
         [EnumMember]
         foo_bar_NOT_USED = 3
     }
@@ -1326,10 +1341,13 @@ Parameter name: namingStrategyType",
     {
         [EnumMember]
         first = 0,
+
         [EnumMember(Value = "foo_bar")]
         FooBar = 1,
+
         [EnumMember]
         foo_bar = 2,
+
         [EnumMember(Value = "TEST")]
         foo_bar_NOT_USED = 3
     }

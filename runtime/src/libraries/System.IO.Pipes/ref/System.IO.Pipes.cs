@@ -489,6 +489,7 @@ namespace System.IO.Pipes
     public enum PipeTransmissionMode
     {
         Byte = 0,
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         Message = 1,
     }

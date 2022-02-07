@@ -6449,24 +6449,29 @@ namespace System.ComponentModel.Design
     public enum SelectionTypes
     {
         Auto = 1,
+
         [System.ObsoleteAttribute(
             "SelectionTypes.Normal has been deprecated. Use SelectionTypes.Auto instead."
         )]
         Normal = 1,
         Replace = 2,
+
         [System.ObsoleteAttribute(
             "SelectionTypes.MouseDown has been deprecated and is not supported."
         )]
         MouseDown = 4,
+
         [System.ObsoleteAttribute(
             "SelectionTypes.MouseUp has been deprecated and is not supported."
         )]
         MouseUp = 8,
+
         [System.ObsoleteAttribute(
             "SelectionTypes.Click has been deprecated. Use SelectionTypes.Primary instead."
         )]
         Click = 16,
         Primary = 16,
+
         [System.ObsoleteAttribute(
             "SelectionTypes.Valid has been deprecated. Use Enum class methods to determine valid values, or use a type converter instead."
         )]
@@ -6617,6 +6622,7 @@ namespace System.ComponentModel.Design
             "ViewTechnology.Passthrough has been deprecated. Use ViewTechnology.Default instead."
         )]
         Passthrough = 0,
+
         [System.ObsoleteAttribute(
             "ViewTechnology.WindowsForms has been deprecated. Use ViewTechnology.Default instead."
         )]

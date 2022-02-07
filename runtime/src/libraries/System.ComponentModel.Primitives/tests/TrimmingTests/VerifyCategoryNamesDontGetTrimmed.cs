@@ -49,8 +49,10 @@ namespace Test
     {
         [Category("Action")] // Built-in category
         Action = 1,
+
         [Category("Something")] // Custom category
         Something = 2,
+
         [Category("WindowStyle")] // Built-in category with localized string different than category name.
         WindowStyle = 3,
     }

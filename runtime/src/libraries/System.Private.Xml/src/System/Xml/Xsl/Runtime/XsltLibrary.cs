@@ -464,6 +464,7 @@ namespace System.Xml.Xsl.Runtime
             /*Equality  */
             Eq,
             Ne,
+
             /*Relational*/
             Lt,
             Le,

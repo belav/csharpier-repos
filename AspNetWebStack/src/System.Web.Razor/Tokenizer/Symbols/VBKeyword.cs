@@ -15,6 +15,7 @@ namespace System.Web.Razor.Tokenizer.Symbols
         CInt,
         Const,
         CSng,
+
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -40,6 +41,7 @@ namespace System.Web.Razor.Tokenizer.Symbols
         As,
         ByVal,
         CBool,
+
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -70,6 +72,7 @@ namespace System.Web.Razor.Tokenizer.Symbols
         Call,
         CByte,
         CDec,
+
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",

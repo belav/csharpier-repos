@@ -15,30 +15,37 @@ namespace System.Management
         ///    <para>The default COM authentication level. WMI uses the default Windows Authentication setting.</para>
         /// </summary>
         Default = 0,
+
         /// <summary>
         ///    <para> No COM authentication.</para>
         /// </summary>
         None = 1,
+
         /// <summary>
         ///    <para> Connect-level COM authentication.</para>
         /// </summary>
         Connect = 2,
+
         /// <summary>
         ///    <para> Call-level COM authentication.</para>
         /// </summary>
         Call = 3,
+
         /// <summary>
         ///    <para> Packet-level COM authentication.</para>
         /// </summary>
         Packet = 4,
+
         /// <summary>
         ///    <para>Packet Integrity-level COM authentication.</para>
         /// </summary>
         PacketIntegrity = 5,
+
         /// <summary>
         ///    <para>Packet Privacy-level COM authentication.</para>
         /// </summary>
         PacketPrivacy = 6,
+
         /// <summary>
         ///    <para>The default COM authentication level. WMI uses the default Windows Authentication setting.</para>
         /// </summary>
@@ -54,23 +61,27 @@ namespace System.Management
         ///    <para>Default impersonation.</para>
         /// </summary>
         Default = 0,
+
         /// <summary>
         ///    <para> Anonymous COM impersonation level that hides the
         ///       identity of the caller. Calls to WMI may fail
         ///       with this impersonation level.</para>
         /// </summary>
         Anonymous = 1,
+
         /// <summary>
         ///    <para> Identify-level COM impersonation level that allows objects
         ///       to query the credentials of the caller. Calls to
         ///       WMI may fail with this impersonation level.</para>
         /// </summary>
         Identify = 2,
+
         /// <summary>
         ///    <para> Impersonate-level COM impersonation level that allows
         ///       objects to use the credentials of the caller. This is the recommended impersonation level for WMI calls.</para>
         /// </summary>
         Impersonate = 3,
+
         /// <summary>
         ///    <para> Delegate-level COM impersonation level that allows objects
         ///       to permit other objects to use the credentials of the caller. This
@@ -90,16 +101,19 @@ namespace System.Management
         ///    <para> Invalid Type </para>
         /// </summary>
         None = 0,
+
         /// <summary>
         ///    <para> Updates an existing object
         ///       only; does not create a new object.</para>
         /// </summary>
         UpdateOnly = 1,
+
         /// <summary>
         ///    <para> Creates an object only;
         ///       does not update an existing object.</para>
         /// </summary>
         CreateOnly = 2,
+
         /// <summary>
         ///    <para> Saves the object, whether
         ///       updating an existing object or creating a new object.</para>

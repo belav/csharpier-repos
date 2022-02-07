@@ -55,6 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>Remarks, mutually exclusive with <see cref="UncheckedRegion"/>.</summary>
         CheckedRegion = 1 << 14,
+
         /// <summary>Remarks, mutually exclusive with <see cref="CheckedRegion"/>.</summary>
         UncheckedRegion = 1 << 15,
 

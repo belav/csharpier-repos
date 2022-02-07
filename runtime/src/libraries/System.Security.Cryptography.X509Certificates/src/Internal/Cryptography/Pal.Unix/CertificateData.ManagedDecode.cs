@@ -17,6 +17,7 @@ namespace Internal.Cryptography.Pal
     {
         OtherName = 0,
         Rfc822Name = 1,
+
         // RFC 822: Standard for the format of ARPA Internet Text Messages.
         // That means "email", and an RFC 822 Name: "Email address"
         Email = Rfc822Name,

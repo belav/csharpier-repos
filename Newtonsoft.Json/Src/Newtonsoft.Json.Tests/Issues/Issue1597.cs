@@ -124,6 +124,7 @@ namespace Newtonsoft.Json.Tests.Issues
             Wish,
             Collect,
             Doing,
+
             [EnumMember(Value = "on_hold")]
             OnHold,
             Dropped

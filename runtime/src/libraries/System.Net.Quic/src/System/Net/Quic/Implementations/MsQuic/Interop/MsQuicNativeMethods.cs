@@ -189,6 +189,7 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             PacingEnabled = 1 << 1,
             MigrationEnabled = 1 << 2,
             DatagramReceiveEnabled = 1 << 3,
+
             // Contains values of QUIC_SERVER_RESUMPTION_LEVEL
             ServerResumptionLevel = 1 << 4 | 1 << 5,
             VersionNegotiationExtEnabled = 1 << 6,

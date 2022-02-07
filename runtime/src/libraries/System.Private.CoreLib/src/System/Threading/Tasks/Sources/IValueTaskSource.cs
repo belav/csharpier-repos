@@ -15,12 +15,14 @@ namespace System.Threading.Tasks.Sources
         /// No requirements are placed on how the continuation is invoked.
         /// </summary>
         None,
+
         /// <summary>
         /// Set if OnCompleted should capture the current scheduling context (e.g. SynchronizationContext)
         /// and use it when queueing the continuation for execution.  If this is not set, the implementation
         /// may choose to execute the continuation in an arbitrary location.
         /// </summary>
         UseSchedulingContext = 0x1,
+
         /// <summary>
         /// Set if OnCompleted should capture the current ExecutionContext and use it to run the continuation.
         /// </summary>
@@ -32,10 +34,13 @@ namespace System.Threading.Tasks.Sources
     {
         /// <summary>The operation has not yet completed.</summary>
         Pending = 0,
+
         /// <summary>The operation completed successfully.</summary>
         Succeeded = 1,
+
         /// <summary>The operation completed with an error.</summary>
         Faulted = 2,
+
         /// <summary>The operation completed due to cancellation.</summary>
         Canceled = 3
     }

@@ -167,8 +167,10 @@ namespace Microsoft.WebAssembly.Diagnostics
         GetName = 2,
         GetState = 3,
         GetInfo = 4,
+
         /* FIXME: Merge into GetInfo when the major protocol version is increased */
         GetId = 5,
+
         /* Ditto */
         GetTid = 6,
         SetIp = 7,
@@ -255,8 +257,10 @@ namespace Microsoft.WebAssembly.Diagnostics
         GetCattrs = 10,
         GetFieldCattrs = 11,
         GetPropertyCattrs = 12,
+
         /* FIXME: Merge into GetSourceFiles when the major protocol version is increased */
         GetSourceFiles2 = 13,
+
         /* FIXME: Merge into GetValues when the major protocol version is increased */
         GetValues2 = 14,
         GetMethodsByNameFlags = 15,

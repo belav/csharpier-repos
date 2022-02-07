@@ -12,30 +12,37 @@ namespace System.Drawing
         /// Specifies world units as the unit of measure.
         /// </summary>
         World = GraphicsUnit.World,
+
         /// <summary>
         /// Specifies the device unit as the unit of measure.
         /// </summary>
         Display = GraphicsUnit.Display,
+
         /// <summary>
         /// Specifies a pixel as the unit of measure.
         /// </summary>
         Pixel = GraphicsUnit.Pixel,
+
         /// <summary>
         /// Specifies a printer's point as the unit of measure.
         /// </summary>
         Point = GraphicsUnit.Point,
+
         /// <summary>
         /// Specifies an inch as the unit of measure.
         /// </summary>
         Inch = GraphicsUnit.Inch,
+
         /// <summary>
         /// Specifies 1/300 of an inch as the unit of measure.
         /// </summary>
         Document = GraphicsUnit.Document,
+
         /// <summary>
         /// Specifies a millimeter as the unit of measure
         /// </summary>
         Millimeter = GraphicsUnit.Millimeter,
+
         /// <summary>
         /// Specifies a printer's em size of 32 as the unit of measure.
         /// </summary>

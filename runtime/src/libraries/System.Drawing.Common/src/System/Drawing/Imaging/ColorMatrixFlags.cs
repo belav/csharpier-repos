@@ -12,10 +12,12 @@ namespace System.Drawing.Imaging
         /// Both colors and grayscale are color-adjusted.
         /// </summary>
         Default = 0,
+
         /// <summary>
         /// Grascale values are not color-adjusted.
         /// </summary>
         SkipGrays = 1,
+
         /// <summary>
         /// Only grascale values are color-adjusted.
         /// </summary>

@@ -16,6 +16,7 @@ namespace System.Security.AccessControl
         EnumerateSubKeys = Interop.Advapi32.RegistryOperations.KEY_ENUMERATE_SUB_KEYS, // 0x0008 required to enumerate sub keys of a key
         Notify = Interop.Advapi32.RegistryOperations.KEY_NOTIFY, // 0x0010 needed to request change notifications
         CreateLink = Interop.Advapi32.RegistryOperations.KEY_CREATE_LINK, // 0x0020 reserved for system use
+
         ///
         /// The Windows Kernel team agrees that it was a bad design to expose the WOW64_n options as permissions.
         /// in the .NET Framework these options are exposed via the RegistryView enum

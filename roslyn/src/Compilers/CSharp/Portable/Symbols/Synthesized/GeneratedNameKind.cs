@@ -49,12 +49,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // Don't reuse the values because the debugger might encounter them when consuming old binaries.
         [Obsolete]
         Deprecated_OuterscopeLocals = '6',
+
         [Obsolete]
         Deprecated_IteratorInstance = 'a',
+
         [Obsolete]
         Deprecated_InitializerLocal = 'g',
+
         [Obsolete]
         Deprecated_DynamicDelegate = 'q',
+
         [Obsolete]
         Deprecated_ComrefCallLocal = 'r',
     }

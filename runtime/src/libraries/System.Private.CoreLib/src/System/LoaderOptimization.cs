@@ -9,6 +9,7 @@ namespace System
             "LoaderOptimization.DisallowBindings has been deprecated and is not supported."
         )]
         DisallowBindings = 4,
+
         [System.ObsoleteAttribute(
             "LoaderOptimization.DomainMask has been deprecated and is not supported."
         )]

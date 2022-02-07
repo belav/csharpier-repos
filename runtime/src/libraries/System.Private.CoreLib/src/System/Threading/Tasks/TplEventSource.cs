@@ -64,6 +64,7 @@ namespace System.Threading.Tasks
         {
             /// <summary>A synchronous wait.</summary>
             Synchronous = 1,
+
             /// <summary>An asynchronous await.</summary>
             Asynchronous = 2
         }

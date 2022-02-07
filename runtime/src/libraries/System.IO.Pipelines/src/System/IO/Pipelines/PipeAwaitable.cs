@@ -232,10 +232,13 @@ namespace System.IO.Pipelines
         private enum AwaitableState
         {
             None = 0,
+
             // Marks that if logical operation (backpressure/waiting for data) is completed. Set in Complete reset in Reset
             Completed = 1,
+
             // Marks that operation is running. Set in *Async reset in  ObserveCancellation (GetResult)
             Running = 2,
+
             // Marks that operation is canceled. Set in Cancel reset in ObserveCancellation (GetResult)
             Canceled = 4,
             UseSynchronizationContext = 8
