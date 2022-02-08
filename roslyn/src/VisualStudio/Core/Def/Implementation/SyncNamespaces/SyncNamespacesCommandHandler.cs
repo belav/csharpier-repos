@@ -142,10 +142,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             return solution.Projects
                 .Where(
                     project =>
-                        project.FilePath?.Equals(
-                            projectFilePath,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == true
+                        project
+                            .FilePath?
+                            .Equals(projectFilePath, StringComparison.OrdinalIgnoreCase) == true
                 )
                 .ToImmutableArrayOrEmpty();
         }

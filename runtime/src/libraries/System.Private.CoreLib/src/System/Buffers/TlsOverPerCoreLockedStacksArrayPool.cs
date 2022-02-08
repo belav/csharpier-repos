@@ -222,12 +222,9 @@ namespace System.Buffers
             PerCoreLockedStacks?[] perCoreBuckets = _buckets;
             for (int i = 0; i < perCoreBuckets.Length; i++)
             {
-                perCoreBuckets[i]?.Trim(
-                    currentMilliseconds,
-                    Id,
-                    pressure,
-                    Utilities.GetMaxSizeForBucket(i)
-                );
+                perCoreBuckets[i]
+                    ?
+                    .Trim(currentMilliseconds, Id, pressure, Utilities.GetMaxSizeForBucket(i));
             }
 
             // Trim each of the TLS buckets. Note that threads may be modifying their TLS slots concurrently with

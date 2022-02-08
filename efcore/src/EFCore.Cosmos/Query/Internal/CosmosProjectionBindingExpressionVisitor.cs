@@ -143,10 +143,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         }
 
                         if (
-                            parameterExpression.Name?.StartsWith(
-                                QueryCompilationContext.QueryParameterPrefix,
-                                StringComparison.Ordinal
-                            ) == true
+                            parameterExpression
+                                .Name?
+                                .StartsWith(
+                                    QueryCompilationContext.QueryParameterPrefix,
+                                    StringComparison.Ordinal
+                                ) == true
                         )
                         {
                             return Expression.Call(

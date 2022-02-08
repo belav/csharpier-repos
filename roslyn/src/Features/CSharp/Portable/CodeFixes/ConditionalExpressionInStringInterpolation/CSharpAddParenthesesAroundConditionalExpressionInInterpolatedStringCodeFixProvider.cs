@@ -121,8 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
             if (
                 parenthesizedExpression.Expression is ConditionalExpressionSyntax conditional
                 && parenthesizedExpression
-                    .GetAncestor<InterpolatedStringExpressionSyntax>()
-                    ?.StringStartToken.Kind() == SyntaxKind.InterpolatedStringStartToken
+                    .GetAncestor<InterpolatedStringExpressionSyntax>()?
+                    .StringStartToken.Kind() == SyntaxKind.InterpolatedStringStartToken
             )
             {
                 // If they have something like:

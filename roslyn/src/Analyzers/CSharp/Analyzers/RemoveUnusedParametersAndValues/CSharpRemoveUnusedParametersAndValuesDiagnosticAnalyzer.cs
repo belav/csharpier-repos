@@ -45,8 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             // So, we conservatively bail out from removable assignment analysis for such cases.
 
             var statementAncestor = unusedSymbolWriteOperation.Syntax
-                .FirstAncestorOrSelf<StatementSyntax>()
-                ?.Parent;
+                .FirstAncestorOrSelf<StatementSyntax>()?
+                .Parent;
             switch (statementAncestor)
             {
                 case BlockSyntax _:

@@ -1048,9 +1048,13 @@ public class RequestTests : LoggedTest
                                             JsonConvert.SerializeObject(
                                                 new
                                                 {
-                                                    RemoteIPAddress = connection.RemoteIpAddress?.ToString(),
+                                                    RemoteIPAddress = connection
+                                                        .RemoteIpAddress?
+                                                        .ToString(),
                                                     RemotePort = connection.RemotePort,
-                                                    LocalIPAddress = connection.LocalIpAddress?.ToString(),
+                                                    LocalIPAddress = connection
+                                                        .LocalIpAddress?
+                                                        .ToString(),
                                                     LocalPort = connection.LocalPort
                                                 }
                                             )

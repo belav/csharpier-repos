@@ -181,10 +181,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 var previousSession = _activeRenameSession;
                 _activeRenameSession = value;
-                ActiveSessionChanged?.Invoke(
-                    this,
-                    new ActiveSessionChangedEventArgs(previousSession!)
-                );
+                ActiveSessionChanged
+                    ?
+                    .Invoke(this, new ActiveSessionChangedEventArgs(previousSession!));
             }
         }
 

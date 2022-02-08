@@ -224,12 +224,9 @@ namespace Microsoft.CodeAnalysis.Classification
             var classificationService = workspace.Services
                 .GetLanguageServices(oldRoot.Language)
                 .GetService<ISyntaxClassificationService>();
-            return classificationService?.ComputeSyntacticChangeRange(
-                oldRoot,
-                newRoot,
-                timeout,
-                cancellationToken
-            );
+            return classificationService
+                ?
+                .ComputeSyntacticChangeRange(oldRoot, newRoot, timeout, cancellationToken);
         }
     }
 }

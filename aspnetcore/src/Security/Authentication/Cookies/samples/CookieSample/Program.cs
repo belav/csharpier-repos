@@ -30,8 +30,8 @@ builder.Services
 
                     // Don't renew on API endpoints that use JWT.
                     var authData = context.HttpContext
-                        .GetEndpoint()
-                        ?.Metadata.GetMetadata<IAuthorizeData>();
+                        .GetEndpoint()?
+                        .Metadata.GetMetadata<IAuthorizeData>();
                     if (
                         authData != null
                         && string.Equals(

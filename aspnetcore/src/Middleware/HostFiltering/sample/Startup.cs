@@ -33,10 +33,9 @@ public class Startup
                 if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
                 {
                     // "AllowedHosts": "localhost;127.0.0.1;[::1]"
-                    var hosts = Config["AllowedHosts"]?.Split(
-                        new[] { ';' },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+                    var hosts = Config["AllowedHosts"]
+                        ?
+                        .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                     // Fall back to "*" to disable.
                     options.AllowedHosts = (hosts?.Length > 0 ? hosts : new[] { "*" });
                 }

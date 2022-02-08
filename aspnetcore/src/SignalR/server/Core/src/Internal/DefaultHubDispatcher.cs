@@ -925,9 +925,9 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
                 && (
                     hubMethodInvocationMessage.Arguments[hubInvocationArgumentPointer] == null
                     || descriptor.OriginalParameterTypes[parameterPointer].IsAssignableFrom(
-                        hubMethodInvocationMessage.Arguments[
-                            hubInvocationArgumentPointer
-                        ]?.GetType()
+                        hubMethodInvocationMessage.Arguments[hubInvocationArgumentPointer]
+                            ?
+                            .GetType()
                     )
                 )
             )

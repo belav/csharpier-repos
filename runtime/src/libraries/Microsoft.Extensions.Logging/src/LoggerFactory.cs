@@ -264,20 +264,22 @@ namespace Microsoft.Extensions.Logging
 
                 if (!loggerInformation.ExternalScope)
                 {
-                    scopeLoggers?.Add(
-                        new ScopeLogger(
-                            logger: loggerInformation.Logger,
-                            externalScopeProvider: null
-                        )
-                    );
+                    scopeLoggers
+                        ?
+                        .Add(
+                            new ScopeLogger(
+                                logger: loggerInformation.Logger,
+                                externalScopeProvider: null
+                            )
+                        );
                 }
             }
 
             if (_scopeProvider != null)
             {
-                scopeLoggers?.Add(
-                    new ScopeLogger(logger: null, externalScopeProvider: _scopeProvider)
-                );
+                scopeLoggers
+                    ?
+                    .Add(new ScopeLogger(logger: null, externalScopeProvider: _scopeProvider));
             }
 
             return (messageLoggers.ToArray(), scopeLoggers?.ToArray());

@@ -268,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             var firstGetter = accessorList
-                ?.Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
+                ?
+                .Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
                 .FirstOrDefault();
             if (firstGetter == null)
             {

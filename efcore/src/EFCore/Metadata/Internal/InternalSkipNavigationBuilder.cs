@@ -314,8 +314,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             foreignKey.PrincipalToDependent?.CreateMemberIdentity(),
                             dependentProperties: foreignKey.Properties,
                             principalProperties: foreignKey.PrincipalKey.Properties
-                        )
-                        ?.Metadata;
+                        )?
+                        .Metadata;
                 }
 
                 if (foreignKey != null)
@@ -340,8 +340,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     inverse =
                         inverseBuilder
-                            .Attach(targetEntityType.Builder, entityTypeBuilder.Metadata)
-                            ?.Metadata ?? inverse;
+                            .Attach(targetEntityType.Builder, entityTypeBuilder.Metadata)?
+                            .Metadata ?? inverse;
                 }
 
                 if (inverse != null)

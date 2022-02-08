@@ -4071,8 +4071,8 @@ namespace Microsoft.EntityFrameworkCore
                 }
                 else if (
                     optionsBuilder.Options
-                        .FindExtension<CoreOptionsExtension>()
-                        ?.InternalServiceProvider == null
+                        .FindExtension<CoreOptionsExtension>()?
+                        .InternalServiceProvider == null
                 )
                 {
                     optionsBuilder.EnableServiceProviderCaching(false);

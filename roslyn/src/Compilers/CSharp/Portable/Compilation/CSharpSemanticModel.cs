@@ -6637,7 +6637,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     GetSymbolInfo(tupleTypeSyntax, cancellationToken).Symbol.GetSymbol()
                     as NamedTypeSymbol
                 )
-                    ?.TupleElements.ElementAtOrDefault(
+                    ?
+                    .TupleElements.ElementAtOrDefault(
                         tupleTypeSyntax.Elements.IndexOf(declarationSyntax)
                     )
                     .GetPublicSymbol();

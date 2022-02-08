@@ -510,8 +510,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                                 )
                                 {
                                     var type = (TTypeNode?)syntaxFacts
-                                        .GetTypeOfVariableDeclarator(firstVariable)
-                                        ?.WithoutLeadingTrivia();
+                                        .GetTypeOfVariableDeclarator(firstVariable)?
+                                        .WithoutLeadingTrivia();
                                     var identifier = syntaxFacts.GetIdentifierOfVariableDeclarator(
                                         firstVariable
                                     );

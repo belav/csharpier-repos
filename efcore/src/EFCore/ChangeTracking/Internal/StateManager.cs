@@ -909,7 +909,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             FilterIncompatiblePrincipal(
                 foreignKey,
                 FindIdentityMap(foreignKey.PrincipalKey)
-                    ?.TryGetEntryUsingPreStoreGeneratedValues(foreignKey, dependentEntry)
+                    ?
+                    .TryGetEntryUsingPreStoreGeneratedValues(foreignKey, dependentEntry)
             );
 
         /// <summary>
@@ -925,7 +926,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             FilterIncompatiblePrincipal(
                 foreignKey,
                 FindIdentityMap(foreignKey.PrincipalKey)
-                    ?.TryGetEntryUsingRelationshipSnapshot(foreignKey, dependentEntry)
+                    ?
+                    .TryGetEntryUsingRelationshipSnapshot(foreignKey, dependentEntry)
             );
 
         private static InternalEntityEntry? FilterIncompatiblePrincipal(
@@ -974,8 +976,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
 
             FindIdentityMap(foreignKey.DeclaringEntityType.FindPrimaryKey())
-                ?.FindDependentsMap(foreignKey)
-                ?.Update(entry);
+                ?
+                .FindDependentsMap(foreignKey)?
+                .Update(entry);
         }
 
         /// <summary>
@@ -1489,10 +1492,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _changeTrackingLogger.StartedTracking(internalEntityEntry);
             }
 
-            @event?.Invoke(
-                Context.ChangeTracker,
-                new EntityTrackedEventArgs(internalEntityEntry, fromQuery)
-            );
+            @event
+                ?
+                .Invoke(
+                    Context.ChangeTracker,
+                    new EntityTrackedEventArgs(internalEntityEntry, fromQuery)
+                );
         }
 
         /// <summary>
@@ -1530,10 +1535,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _changeTrackingLogger.StateChanged(internalEntityEntry, oldState, newState);
             }
 
-            @event?.Invoke(
-                Context.ChangeTracker,
-                new EntityStateChangedEventArgs(internalEntityEntry, oldState, newState)
-            );
+            @event
+                ?
+                .Invoke(
+                    Context.ChangeTracker,
+                    new EntityStateChangedEventArgs(internalEntityEntry, oldState, newState)
+                );
         }
     }
 }

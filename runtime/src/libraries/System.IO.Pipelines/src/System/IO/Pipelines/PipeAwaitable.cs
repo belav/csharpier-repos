@@ -105,8 +105,9 @@ namespace System.IO.Pipelines
             object? currentState = _completionState;
             SchedulingContext? schedulingContext = _schedulingContext;
             ExecutionContext? executionContext = schedulingContext?.ExecutionContext;
-            SynchronizationContext? synchronizationContext =
-                schedulingContext?.SynchronizationContext;
+            SynchronizationContext? synchronizationContext = schedulingContext
+                ?
+                .SynchronizationContext;
 
             _completion = null;
             _completionState = null;

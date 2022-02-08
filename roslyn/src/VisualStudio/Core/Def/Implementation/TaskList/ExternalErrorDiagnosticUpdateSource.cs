@@ -649,17 +649,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             ImmutableArray<DiagnosticData> items
         )
         {
-            DiagnosticsUpdated?.Invoke(
-                this,
-                DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                    CreateArgumentKey(id),
-                    _workspace,
-                    solution,
-                    projectId,
-                    documentId,
-                    items
-                )
-            );
+            DiagnosticsUpdated
+                ?
+                .Invoke(
+                    this,
+                    DiagnosticsUpdatedArgs.DiagnosticsCreated(
+                        CreateArgumentKey(id),
+                        _workspace,
+                        solution,
+                        projectId,
+                        documentId,
+                        items
+                    )
+                );
         }
 
         private void RaiseDiagnosticsRemoved(
@@ -669,16 +671,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             DocumentId? documentId
         )
         {
-            DiagnosticsUpdated?.Invoke(
-                this,
-                DiagnosticsUpdatedArgs.DiagnosticsRemoved(
-                    CreateArgumentKey(id),
-                    _workspace,
-                    solution,
-                    projectId,
-                    documentId
-                )
-            );
+            DiagnosticsUpdated
+                ?
+                .Invoke(
+                    this,
+                    DiagnosticsUpdatedArgs.DiagnosticsRemoved(
+                        CreateArgumentKey(id),
+                        _workspace,
+                        solution,
+                        projectId,
+                        documentId
+                    )
+                );
         }
 
         private static ArgumentKey CreateArgumentKey(object? id) => new(id);

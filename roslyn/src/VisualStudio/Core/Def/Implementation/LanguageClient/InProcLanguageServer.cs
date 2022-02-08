@@ -1093,9 +1093,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         private void RequestExecutionQueue_Errored(object sender, RequestShutdownEventArgs e)
         {
             // log message and shut down
-            _logger?.TraceWarning(
-                $"Request queue is requesting shutdown due to error: {e.Message}"
-            );
+            _logger
+                ?
+                .TraceWarning($"Request queue is requesting shutdown due to error: {e.Message}");
 
             var message = new LogMessageParams()
             {
@@ -1277,8 +1277,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                     // There were diagnostics from other documents, but none from the current document.
                     // If we're tracking the current document, we can stop.
                     IReadOnlyDictionaryExtensions
-                        .GetValueOrDefault(_publishedFileToDiagnostics, fileUri)
-                        ?.Remove(document.Id);
+                        .GetValueOrDefault(_publishedFileToDiagnostics, fileUri)?
+                        .Remove(document.Id);
                     _documentsToPublishedUris.MultiRemove(document.Id, fileUri);
                 }
             }

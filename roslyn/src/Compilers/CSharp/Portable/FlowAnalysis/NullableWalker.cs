@@ -7007,9 +7007,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     BoundConditionalOperator { WasTargetTyped: true }
                                     or BoundConvertedSwitchExpression { WasTargetTyped: true }
                                 )
-                                && _conditionalInfoForConversionOpt?.ContainsKey(
-                                    argumentNoConversion
-                                )
+                                && _conditionalInfoForConversionOpt
+                                    ?
+                                    .ContainsKey(argumentNoConversion)
                                     is null
                                         or false
                         );
@@ -9435,10 +9435,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var explicitType = operandConversion.ConversionGroupOpt?.ExplicitType;
                         if (
-                            explicitType?.Equals(
-                                targetTypeWithNullability,
-                                TypeCompareKind.ConsiderEverything
-                            ) == true
+                            explicitType
+                                ?
+                                .Equals(
+                                    targetTypeWithNullability,
+                                    TypeCompareKind.ConsiderEverything
+                                ) == true
                         )
                         {
                             TrackAnalyzedNullabilityThroughConversionGroup(

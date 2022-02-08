@@ -577,8 +577,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 
         public SyntaxNode? GetTargetOfMemberBinding(SyntaxNode? node) =>
             (node as MemberBindingExpressionSyntax)
-                .GetParentConditionalAccessExpression()
-                ?.Expression;
+                .GetParentConditionalAccessExpression()?
+                .Expression;
 
         public SyntaxNode GetNameOfMemberBindingExpression(SyntaxNode node) =>
             ((MemberBindingExpressionSyntax)node).Name;
@@ -881,9 +881,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             {
                 if (memberDeclaration.Kind() == SyntaxKind.ConversionOperatorDeclaration)
                 {
-                    name = (
-                        memberDeclaration as ConversionOperatorDeclarationSyntax
-                    )?.Type.ToString();
+                    name = (memberDeclaration as ConversionOperatorDeclarationSyntax)
+                        ?
+                        .Type.ToString();
                 }
                 else
                 {

@@ -1197,8 +1197,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             else
                             {
-                                var argumentList =
-                                    recordDecl.PrimaryConstructorBaseTypeIfClass?.ArgumentList;
+                                var argumentList = recordDecl
+                                    .PrimaryConstructorBaseTypeIfClass?
+                                    .ArgumentList;
                                 outsideMemberDecl =
                                     argumentList is null
                                     || !LookupPosition.IsBetweenTokens(
@@ -1691,10 +1692,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ExceptionUtilities.UnexpectedValue(node.Parent);
                     }
 
-                    ExecutableCodeBinder binder = symbol?.TryGetBodyBinder(
-                        _binderFactory,
-                        this.IgnoresAccessibility
-                    );
+                    ExecutableCodeBinder binder = symbol
+                        ?
+                        .TryGetBodyBinder(_binderFactory, this.IgnoresAccessibility);
 
                     if (binder == null)
                     {
@@ -1773,10 +1773,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SourceMemberMethodSymbol symbol
             )
             {
-                ExecutableCodeBinder binder = symbol?.TryGetBodyBinder(
-                    _binderFactory,
-                    this.IgnoresAccessibility
-                );
+                ExecutableCodeBinder binder = symbol
+                    ?
+                    .TryGetBodyBinder(_binderFactory, this.IgnoresAccessibility);
 
                 if (binder == null)
                 {
@@ -2104,8 +2103,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             CheckSyntaxNode(declarationSyntax);
 
-            return this.GetMemberModel(declarationSyntax)
-                ?.GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return this.GetMemberModel(declarationSyntax)?.GetDeclaredSymbol(
+                declarationSyntax,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -3280,7 +3281,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     && !(
                                         node.Kind() == SyntaxKind.ArgumentList
                                         && node
-                                            == recordDeclaration.PrimaryConstructorBaseTypeIfClass?.ArgumentList
+                                            == recordDeclaration
+                                                .PrimaryConstructorBaseTypeIfClass?
+                                                .ArgumentList
                                     );
 
                             default:

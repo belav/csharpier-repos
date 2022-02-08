@@ -503,8 +503,9 @@ namespace System.Text.Json.SourceGeneration
                 SemanticModel compilationSemanticModel
             )
             {
-                SeparatedSyntaxList<BaseTypeSyntax>? baseTypeSyntaxList =
-                    classDeclarationSyntax.BaseList?.Types;
+                SeparatedSyntaxList<BaseTypeSyntax>? baseTypeSyntaxList = classDeclarationSyntax
+                    .BaseList?
+                    .Types;
                 if (baseTypeSyntaxList == null)
                 {
                     return false;

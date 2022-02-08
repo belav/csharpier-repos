@@ -83,8 +83,10 @@ public static class EncoderServiceCollectionExtensions
         return serviceProvider =>
         {
             var settings = serviceProvider
-                ?.GetService<IOptions<WebEncoderOptions>>()
-                ?.Value?.TextEncoderSettings;
+                ?
+                .GetService<IOptions<WebEncoderOptions>>()?
+                .Value?
+                .TextEncoderSettings;
             return (settings != null) ? customSettingsFactory(settings) : defaultFactory();
         };
     }

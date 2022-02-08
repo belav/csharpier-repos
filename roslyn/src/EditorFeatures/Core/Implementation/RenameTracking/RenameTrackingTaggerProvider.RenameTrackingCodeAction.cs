@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             // in the lightbulb. If this happens, do not perform the rename requested
                             // and instead let the user know their fix will not be applied.
                             _document.Project.Solution.Workspace.Services
-                                .GetService<INotificationService>()
-                                ?.SendNotification(
+                                .GetService<INotificationService>()?
+                                .SendNotification(
                                     EditorFeaturesResources.The_rename_tracking_session_was_cancelled_and_is_no_longer_available,
                                     severity: NotificationSeverity.Error
                                 );

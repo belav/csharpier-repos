@@ -86,8 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
 
                 entityTypeBuilder
-                    .ServiceProperty(propertyInfo)
-                    ?.HasParameterBinding(
+                    .ServiceProperty(propertyInfo)?
+                    .HasParameterBinding(
                         (ServiceParameterBinding)factory.Bind(
                             entityType,
                             propertyInfo.PropertyType,

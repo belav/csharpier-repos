@@ -494,10 +494,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             || expression is MemberInitExpression
             || expression is NewExpression
             || expression is ParameterExpression parameter
-                && parameter.Name?.StartsWith(
-                    QueryCompilationContext.QueryParameterPrefix,
-                    StringComparison.Ordinal
-                ) == true;
+                && parameter
+                    .Name?
+                    .StartsWith(
+                        QueryCompilationContext.QueryParameterPrefix,
+                        StringComparison.Ordinal
+                    ) == true;
 
         private static bool CanConvertEnumerableToQueryable(Type enumerableType, Type queryableType)
         {

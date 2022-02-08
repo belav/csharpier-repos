@@ -77,8 +77,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         public IEnumerable<InlineRenameReplacement> GetReplacements(DocumentId documentId)
         {
             return _info
-                .GetReplacements(documentId)
-                ?.Select(
+                .GetReplacements(documentId)?
+                .Select(
                     x =>
                         new InlineRenameReplacement(
                             FSharpInlineRenameReplacementKindHelpers.ConvertTo(x.Kind),
@@ -97,8 +97,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         public FSharpInlineRenameLocationSet(IFSharpInlineRenameLocationSet set)
         {
             _set = set;
-            _locations = set.Locations
-                ?.Select(x => new InlineRenameLocation(x.Document, x.TextSpan))
+            _locations = set.Locations?
+                .Select(x => new InlineRenameLocation(x.Document, x.TextSpan))
                 .ToList();
         }
 

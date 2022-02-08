@@ -1234,8 +1234,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         {
                             LanguageVersion requiredVersion =
                                 MessageID.IDS_FeatureImplicitImplementationOfNonPublicMembers.RequiredVersion();
-                            LanguageVersion? availableVersion =
-                                implementingType.DeclaringCompilation?.LanguageVersion;
+                            LanguageVersion? availableVersion = implementingType
+                                .DeclaringCompilation?
+                                .LanguageVersion;
                             if (requiredVersion > availableVersion)
                             {
                                 diagnostics.Add(
@@ -2076,8 +2077,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 LanguageVersion requiredVersion =
                     MessageID.IDS_DefaultInterfaceImplementation.RequiredVersion();
-                LanguageVersion? availableVersion =
-                    implementingType.DeclaringCompilation?.LanguageVersion;
+                LanguageVersion? availableVersion = implementingType
+                    .DeclaringCompilation?
+                    .LanguageVersion;
                 if (requiredVersion > availableVersion)
                 {
                     diagnostics.Add(
@@ -2474,8 +2476,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         || implementingGetMethod?.AssociatedSymbol
                                             != implementingProperty
                                         || implementingProperty
-                                            .GetOwnOrInheritedSetMethod()
-                                            ?.AssociatedSymbol != implementingProperty
+                                            .GetOwnOrInheritedSetMethod()?
+                                            .AssociatedSymbol != implementingProperty
                                     )
                                       ? reportMismatchInParameterType
                                       : null,

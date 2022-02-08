@@ -141,7 +141,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (SortedDictionary<(string, string?), ISequence>?)model[
                     RelationalAnnotationNames.Sequences
                 ]
-            )?.Values ?? Enumerable.Empty<ISequence>();
+            )
+                ?
+                .Values ?? Enumerable.Empty<ISequence>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

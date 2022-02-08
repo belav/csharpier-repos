@@ -721,8 +721,9 @@ namespace Newtonsoft.Json.Serialization
                 }
             }
 
-            IEnumerable<KeyValuePair<object, object>>? extensionData =
-                contract.ExtensionDataGetter?.Invoke(value);
+            IEnumerable<KeyValuePair<object, object>>? extensionData = contract
+                .ExtensionDataGetter?
+                .Invoke(value);
             if (extensionData != null)
             {
                 foreach (KeyValuePair<object, object> e in extensionData)

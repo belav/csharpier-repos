@@ -2038,8 +2038,8 @@ namespace Microsoft.EntityFrameworkCore
                     fromDataAnnotation
                       ? ConfigurationSource.DataAnnotation
                       : ConfigurationSource.Convention
-                )
-                ?.Builder;
+                )?
+                .Builder;
 
         /// <summary>
         ///     Returns a value indicating whether the check constraint can be configured.

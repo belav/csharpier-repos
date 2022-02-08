@@ -88,10 +88,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     {
                         Workspace.WorkspaceChanged -= OnWorkspaceChangedLookForAnalyzer;
 
-                        PropertyChanged?.Invoke(
-                            this,
-                            new PropertyChangedEventArgs(nameof(HasItems))
-                        );
+                        PropertyChanged
+                            ?
+                            .Invoke(this, new PropertyChangedEventArgs(nameof(HasItems)));
                     }
                 }
             }

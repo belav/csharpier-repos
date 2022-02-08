@@ -252,12 +252,9 @@ namespace System.Configuration
                 if (configSource == _configSource)
                     return;
 
-                _configRecord?.ChangeConfigSource(
-                    this,
-                    _configSource,
-                    ConfigSourceStreamName,
-                    configSource
-                );
+                _configRecord
+                    ?
+                    .ChangeConfigSource(this, _configSource, ConfigSourceStreamName, configSource);
 
                 _configSource = configSource;
                 _modifiedFlags[FlagConfigSourceModified] = true;

@@ -138,13 +138,15 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
                     return;
                 }
 
-                _loggerProvider._scopeProvider?.ForEachScope(
-                    (scopeObject, loggerPovider) =>
-                    {
-                        loggerPovider.ConnectionLogScope ??= scopeObject as ConnectionLogScope;
-                    },
-                    _loggerProvider
-                );
+                _loggerProvider
+                    ._scopeProvider?
+                    .ForEachScope(
+                        (scopeObject, loggerPovider) =>
+                        {
+                            loggerPovider.ConnectionLogScope ??= scopeObject as ConnectionLogScope;
+                        },
+                        _loggerProvider
+                    );
             }
         }
     }

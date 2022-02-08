@@ -1272,9 +1272,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 && configurationSource == ConfigurationSource.Explicit
             )
             {
-                Metadata.DeclaringEntityType.Model.ScopedModelDependencies?.Logger.AmbiguousEndRequiredWarning(
-                    Metadata
-                );
+                Metadata.DeclaringEntityType.Model
+                    .ScopedModelDependencies?
+                    .Logger.AmbiguousEndRequiredWarning(Metadata);
             }
 
             Metadata.SetIsRequired(required, configurationSource);
@@ -1949,8 +1949,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (
                     !principalEndConfigurationSource.HasValue
                     || Metadata
-                        .GetPrincipalEndConfigurationSource()
-                        ?.Overrides(principalEndConfigurationSource) == true
+                        .GetPrincipalEndConfigurationSource()?
+                        .Overrides(principalEndConfigurationSource) == true
                 )
                 {
                     return this;
@@ -2026,8 +2026,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : (
                           (
                               Metadata
-                                  .GetPropertiesConfigurationSource()
-                                  ?.Overrides(configurationSource) ?? false
+                                  .GetPropertiesConfigurationSource()?
+                                  .Overrides(configurationSource) ?? false
                           )
                               ? dependentEntityType.Builder.GetActualProperties(
                                     Metadata.Properties,
@@ -2041,8 +2041,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : (
                           (
                               Metadata
-                                  .GetPrincipalKeyConfigurationSource()
-                                  ?.Overrides(configurationSource) ?? false
+                                  .GetPrincipalKeyConfigurationSource()?
+                                  .Overrides(configurationSource) ?? false
                           )
                               ? principalEntityType.Builder.GetActualProperties(
                                     Metadata.PrincipalKey.Properties,
@@ -2832,8 +2832,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     navigationToPrincipal =
                         Metadata
-                            .GetPrincipalToDependentConfigurationSource()
-                            ?.Overrides(configurationSource) ?? false
+                            .GetPrincipalToDependentConfigurationSource()?
+                            .Overrides(configurationSource) ?? false
                             ? Metadata.PrincipalToDependent.CreateMemberIdentity()
                             : navigationToPrincipal;
                 }
@@ -2841,8 +2841,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     navigationToPrincipal =
                         Metadata
-                            .GetDependentToPrincipalConfigurationSource()
-                            ?.Overrides(configurationSource) ?? false
+                            .GetDependentToPrincipalConfigurationSource()?
+                            .Overrides(configurationSource) ?? false
                             ? Metadata.DependentToPrincipal.CreateMemberIdentity()
                             : navigationToPrincipal;
                 }
@@ -2854,8 +2854,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     navigationToDependent =
                         Metadata
-                            .GetDependentToPrincipalConfigurationSource()
-                            ?.Overrides(configurationSource) ?? false
+                            .GetDependentToPrincipalConfigurationSource()?
+                            .Overrides(configurationSource) ?? false
                             ? Metadata.DependentToPrincipal.CreateMemberIdentity()
                             : navigationToDependent;
                 }
@@ -2863,8 +2863,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     navigationToDependent =
                         Metadata
-                            .GetPrincipalToDependentConfigurationSource()
-                            ?.Overrides(configurationSource) ?? false
+                            .GetPrincipalToDependentConfigurationSource()?
+                            .Overrides(configurationSource) ?? false
                             ? Metadata.PrincipalToDependent.CreateMemberIdentity()
                             : navigationToDependent;
                 }
@@ -2898,8 +2898,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ? (
                       (
                           Metadata
-                              .GetIsRequiredConfigurationSource()
-                              ?.Overrides(configurationSource) ?? false
+                              .GetIsRequiredConfigurationSource()?
+                              .Overrides(configurationSource) ?? false
                       )
                           ? Metadata.IsRequired
                           : null
@@ -2907,8 +2907,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 : (
                       (
                           Metadata
-                              .GetIsRequiredDependentConfigurationSource()
-                              ?.Overrides(ConfigurationSource.Explicit) ?? false
+                              .GetIsRequiredDependentConfigurationSource()?
+                              .Overrides(ConfigurationSource.Explicit) ?? false
                       )
                           ? Metadata.IsRequiredDependent
                           : null
@@ -2918,8 +2918,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ? (
                       (
                           Metadata
-                              .GetIsRequiredDependentConfigurationSource()
-                              ?.Overrides(configurationSource) ?? false
+                              .GetIsRequiredDependentConfigurationSource()?
+                              .Overrides(configurationSource) ?? false
                       )
                           ? Metadata.IsRequiredDependent
                           : null
@@ -2927,8 +2927,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 : (
                       (
                           Metadata
-                              .GetIsRequiredConfigurationSource()
-                              ?.Overrides(ConfigurationSource.Explicit) ?? false
+                              .GetIsRequiredConfigurationSource()?
+                              .Overrides(ConfigurationSource.Explicit) ?? false
                       )
                           ? Metadata.IsRequired
                           : null
@@ -3083,8 +3083,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             InternalForeignKeyBuilder? newRelationshipBuilder;
             using (var batch = Metadata.DeclaringEntityType.Model.DelayConventions())
             {
-                var referencingSkipNavigations = Metadata.ReferencingSkipNavigations
-                    ?.Select(
+                var referencingSkipNavigations = Metadata
+                    .ReferencingSkipNavigations?
+                    .Select(
                         n =>
                             (
                                 Navigation: n,
@@ -3345,8 +3346,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 principalKey,
                                 navigationToPrincipal?.Name
                                     ?? referencingSkipNavigations
-                                        ?.FirstOrDefault()
-                                        .Navigation?.Inverse?.Name,
+                                        ?
+                                        .FirstOrDefault()
+                                        .Navigation?
+                                        .Inverse?
+                                        .Name,
                                 isRequired,
                                 configurationSource: null
                             );
@@ -3704,10 +3708,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 : navigationEntityType.FindSkipNavigation(skipNavigation.Name);
                         }
 
-                        skipNavigation?.Builder.HasForeignKey(
-                            newRelationshipBuilder.Metadata,
-                            referencingNavigationTuple.ConfigurationSource
-                        );
+                        skipNavigation
+                            ?
+                            .Builder.HasForeignKey(
+                                newRelationshipBuilder.Metadata,
+                                referencingNavigationTuple.ConfigurationSource
+                            );
                     }
                 }
 
@@ -3817,7 +3823,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             // this should be replaced with reference counting
             // Issue #15898
             var temporaryProperties = dependentProperties
-                ?.Where(
+                ?
+                .Where(
                     p =>
                         p.GetConfigurationSource() == ConfigurationSource.Convention
                         && ((IConventionProperty)p).IsImplicitlyCreated()
@@ -3833,7 +3840,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : null;
 
             var temporaryKeyProperties = principalProperties
-                ?.Where(
+                ?
+                .Where(
                     p =>
                         p.GetConfigurationSource() == ConfigurationSource.Convention
                         && ((IConventionProperty)p).IsImplicitlyCreated()
@@ -3849,9 +3857,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : null;
 
             var removedForeignKeys = new List<ForeignKey>();
-            var referencingSkipNavigationName = Metadata.ReferencingSkipNavigations
-                ?.FirstOrDefault()
-                ?.Inverse?.Name;
+            var referencingSkipNavigationName = Metadata
+                .ReferencingSkipNavigations?
+                .FirstOrDefault()?
+                .Inverse?
+                .Name;
             if (!Metadata.IsInModel)
             {
                 removedForeignKeys.Add(Metadata);
@@ -4959,8 +4969,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (
                     principalProperties.Count == 0
                     && Metadata
-                        .GetPropertiesConfigurationSource()
-                        ?.Overrides(ConfigurationSource.Explicit) != true
+                        .GetPropertiesConfigurationSource()?
+                        .Overrides(ConfigurationSource.Explicit) != true
                 )
                 || Metadata.GetPropertiesConfigurationSource()?.Overrides(configurationSource)
                     != true
@@ -5264,8 +5274,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             else
             {
                 bool? invertedShouldBeUnique = null;
-                var navigationToPrincipalProperty =
-                    Metadata.DependentToPrincipal?.GetIdentifyingMemberInfo();
+                var navigationToPrincipalProperty = Metadata
+                    .DependentToPrincipal?
+                    .GetIdentifyingMemberInfo();
                 if (
                     navigationToPrincipalProperty != null
                     && !IsCompatible(
@@ -5333,8 +5344,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             else
             {
                 bool? toDependentShouldBeUnique = null;
-                var navigationToDependentProperty =
-                    Metadata.PrincipalToDependent?.GetIdentifyingMemberInfo();
+                var navigationToDependentProperty = Metadata
+                    .PrincipalToDependent?
+                    .GetIdentifyingMemberInfo();
                 if (
                     navigationToDependentProperty != null
                     && !IsCompatible(

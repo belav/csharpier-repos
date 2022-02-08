@@ -58,14 +58,16 @@ public class OwinFeatureCollection
         var register = Prop<Action<Action<object>, object>>(
             OwinConstants.CommonKeys.OnSendingHeaders
         );
-        register?.Invoke(
-            state =>
-            {
-                var collection = (OwinFeatureCollection)state;
-                collection._headersSent = true;
-            },
-            this
-        );
+        register
+            ?
+            .Invoke(
+                state =>
+                {
+                    var collection = (OwinFeatureCollection)state;
+                    collection._headersSent = true;
+                },
+                this
+            );
     }
 
     T Prop<T>(string key)

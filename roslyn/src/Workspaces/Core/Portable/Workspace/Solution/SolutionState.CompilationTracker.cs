@@ -125,9 +125,9 @@ namespace Microsoft.CodeAnalysis
             {
                 var state = ReadState();
 
-                var baseCompilation = state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(
-                    cancellationToken
-                );
+                var baseCompilation = state
+                    .CompilationWithoutGeneratedDocuments?
+                    .GetValueOrNull(cancellationToken);
                 if (baseCompilation != null)
                 {
                     var intermediateProjects = state is InProgressState inProgressState
@@ -166,9 +166,9 @@ namespace Microsoft.CodeAnalysis
                         solutionServices,
                         baseCompilation,
                         state.GeneratorInfo,
-                        state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(
-                            cancellationToken
-                        ),
+                        state
+                            .FinalCompilationWithGeneratedDocuments?
+                            .GetValueOrNull(cancellationToken),
                         intermediateProjects
                     );
 
@@ -282,8 +282,9 @@ namespace Microsoft.CodeAnalysis
             )
             {
                 var state = ReadState();
-                var compilationWithoutGeneratedDocuments =
-                    state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(cancellationToken);
+                var compilationWithoutGeneratedDocuments = state
+                    .CompilationWithoutGeneratedDocuments?
+                    .GetValueOrNull(cancellationToken);
 
                 // check whether we can bail out quickly for typing case
                 var inProgressState = state as InProgressState;
@@ -417,8 +418,8 @@ namespace Microsoft.CodeAnalysis
                                                     inProgressCompilationNotRef.GetAssemblyOrModuleSymbol(
                                                         r
                                                     ) as IAssemblySymbol
-                                                )
-                                                ?.Id == projectReference.ProjectId
+                                                )?
+                                                .Id == projectReference.ProjectId
                                     );
                             }
 
@@ -531,18 +532,17 @@ namespace Microsoft.CodeAnalysis
                         var state = ReadState();
 
                         // we are already in the final stage. just return it.
-                        var compilation =
-                            state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(
-                                cancellationToken
-                            );
+                        var compilation = state
+                            .FinalCompilationWithGeneratedDocuments?
+                            .GetValueOrNull(cancellationToken);
                         if (compilation != null)
                         {
                             return compilation;
                         }
 
-                        compilation = state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(
-                            cancellationToken
-                        );
+                        compilation = state
+                            .CompilationWithoutGeneratedDocuments?
+                            .GetValueOrNull(cancellationToken);
                         if (compilation == null)
                         {
                             // We've got nothing.  Build it from scratch :(
@@ -601,10 +601,9 @@ namespace Microsoft.CodeAnalysis
                         var state = ReadState();
 
                         // Try to get the built compilation.  If it exists, then we can just return that.
-                        var finalCompilation =
-                            state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(
-                                cancellationToken
-                            );
+                        var finalCompilation = state
+                            .FinalCompilationWithGeneratedDocuments?
+                            .GetValueOrNull(cancellationToken);
                         if (finalCompilation != null)
                         {
                             RoslynDebug.Assert(state.HasSuccessfullyLoaded.HasValue);
@@ -658,9 +657,9 @@ namespace Microsoft.CodeAnalysis
 
                 // if we already have a compilation, we must be already done!  This can happen if two
                 // threads were waiting to build, and we came in after the other succeeded.
-                var compilation = state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(
-                    cancellationToken
-                );
+                var compilation = state
+                    .FinalCompilationWithGeneratedDocuments?
+                    .GetValueOrNull(cancellationToken);
                 if (compilation != null)
                 {
                     RoslynDebug.Assert(state.HasSuccessfullyLoaded.HasValue);
@@ -671,9 +670,9 @@ namespace Microsoft.CodeAnalysis
                     );
                 }
 
-                compilation = state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(
-                    cancellationToken
-                );
+                compilation = state
+                    .CompilationWithoutGeneratedDocuments?
+                    .GetValueOrNull(cancellationToken);
 
                 if (compilation == null)
                 {
@@ -1026,11 +1025,13 @@ namespace Microsoft.CodeAnalysis
                                         );
 
                                     compilationWithStaleGeneratedTrees =
-                                        compilationWithStaleGeneratedTrees?.WithScriptCompilationInfo(
-                                            compilationWithStaleGeneratedTrees.ScriptCompilationInfo!.WithPreviousScriptCompilation(
-                                                previousSubmissionCompilation!
-                                            )
-                                        );
+                                        compilationWithStaleGeneratedTrees
+                                            ?
+                                            .WithScriptCompilationInfo(
+                                                compilationWithStaleGeneratedTrees.ScriptCompilationInfo!.WithPreviousScriptCompilation(
+                                                    previousSubmissionCompilation!
+                                                )
+                                            );
                                 }
                             }
                             else
@@ -1075,8 +1076,9 @@ namespace Microsoft.CodeAnalysis
                         compilationWithoutGenerators = compilationWithoutGenerators.WithReferences(
                             newReferences
                         );
-                        compilationWithStaleGeneratedTrees =
-                            compilationWithStaleGeneratedTrees?.WithReferences(newReferences);
+                        compilationWithStaleGeneratedTrees = compilationWithStaleGeneratedTrees
+                            ?
+                            .WithReferences(newReferences);
                     }
 
                     // We will finalize the compilation by adding full contents here.

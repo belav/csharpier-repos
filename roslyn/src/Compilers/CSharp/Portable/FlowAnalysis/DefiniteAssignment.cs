@@ -2347,9 +2347,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // a read to an unassigned variable (i.e. the operand is definitely
                 // assigned).
                 if (
-                    _unassignedVariableAddressOfSyntaxes?.Contains(
-                        node.Syntax as PrefixUnaryExpressionSyntax
-                    ) == false
+                    _unassignedVariableAddressOfSyntaxes
+                        ?
+                        .Contains(node.Syntax as PrefixUnaryExpressionSyntax) == false
                 )
                 {
                     shouldReadOperand = true;

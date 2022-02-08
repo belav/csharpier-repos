@@ -648,8 +648,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (navigation != null)
             {
                 navigation = (Navigation?)DeclaringEntityType.Model.ConventionDispatcher
-                    .OnNavigationAdded(navigation.Builder)
-                    ?.Metadata;
+                    .OnNavigationAdded(navigation.Builder)?
+                    .Metadata;
             }
             else
             {
@@ -1159,9 +1159,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 var actualProperty = declaringEntityType.FindProperty(property.Name);
                 if (
-                    actualProperty?.DeclaringEntityType.IsAssignableFrom(
-                        property.DeclaringEntityType
-                    ) != true
+                    actualProperty
+                        ?
+                        .DeclaringEntityType.IsAssignableFrom(property.DeclaringEntityType) != true
                     || !property.IsInModel
                 )
                 {

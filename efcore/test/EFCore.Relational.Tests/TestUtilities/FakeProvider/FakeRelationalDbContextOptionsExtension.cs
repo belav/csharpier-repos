@@ -41,9 +41,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
                 extension
             );
 
-            fakeRelationalOptionsAction?.Invoke(
-                new FakeRelationalDbContextOptionsBuilder(optionsBuilder)
-            );
+            fakeRelationalOptionsAction
+                ?
+                .Invoke(new FakeRelationalDbContextOptionsBuilder(optionsBuilder));
 
             return optionsBuilder;
         }

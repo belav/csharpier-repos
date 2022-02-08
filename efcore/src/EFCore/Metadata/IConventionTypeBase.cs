@@ -82,7 +82,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 CoreAnnotationNames.PropertyAccessMode,
                 propertyAccessMode,
                 fromDataAnnotation
-            )?.Value;
+            )
+                ?
+                .Value;
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyTypeBase.GetPropertyAccessMode" />.
@@ -109,7 +111,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 CoreAnnotationNames.NavigationAccessMode,
                 propertyAccessMode,
                 fromDataAnnotation
-            )?.Value;
+            )
+                ?
+                .Value;
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyTypeBase.GetNavigationAccessMode" />.

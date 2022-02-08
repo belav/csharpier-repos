@@ -6836,12 +6836,12 @@ namespace Microsoft.EntityFrameworkCore
 
                                 if (navigation.IsCollection)
                                 {
-                                    var currentCollection = (
-                                        (IEnumerable<object>)current
-                                    )?.ToList();
-                                    var snapshotCollection = (
-                                        (IEnumerable<object>)snapshot
-                                    )?.ToList();
+                                    var currentCollection = ((IEnumerable<object>)current)
+                                        ?
+                                        .ToList();
+                                    var snapshotCollection = ((IEnumerable<object>)snapshot)
+                                        ?
+                                        .ToList();
 
                                     if (snapshot == null)
                                     {

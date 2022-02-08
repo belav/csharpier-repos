@@ -197,8 +197,8 @@ namespace BuildBoss
             var targetAssembly = element.Attribute("Include")?.Value.Trim();
             var key = element.Attribute("Key")?.Value.Trim();
             var loadsWithinVisualStudio = element
-                .Attribute("LoadsWithinVisualStudio")
-                ?.Value.Trim();
+                .Attribute("LoadsWithinVisualStudio")?
+                .Value.Trim();
             var workItem = element.Attribute("WorkItem")?.Value.Trim();
             return new InternalsVisibleTo(targetAssembly, key, loadsWithinVisualStudio, workItem);
         }

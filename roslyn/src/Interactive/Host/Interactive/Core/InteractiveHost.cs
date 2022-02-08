@@ -315,7 +315,9 @@ namespace Microsoft.CodeAnalysis.Interactive
             (
                 await InvokeRemoteAsync<RemoteExecutionResult.Data>(targetName, arguments)
                     .ConfigureAwait(false)
-            )?.Deserialize() ?? default;
+            )
+                ?
+                .Deserialize() ?? default;
 
         private async Task<TResult> InvokeRemoteAsync<TResult>(
             string targetName,
@@ -349,7 +351,9 @@ namespace Microsoft.CodeAnalysis.Interactive
                         arguments
                     )
                     .ConfigureAwait(false)
-            )?.Deserialize() ?? default;
+            )
+                ?
+                .Deserialize() ?? default;
 
         private static async Task<TResult> InvokeRemoteAsync<TResult>(
             RemoteService remoteService,

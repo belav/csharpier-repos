@@ -113,14 +113,14 @@ internal class HttpConnection : ITimeoutHandler
                 // Register the various callbacks once we're going to start processing requests
 
                 // The heart beat for various timeouts
-                connectionHeartbeatFeature?.OnHeartbeat(
-                    state => ((HttpConnection)state).Tick(),
-                    this
-                );
+                connectionHeartbeatFeature
+                    ?
+                    .OnHeartbeat(state => ((HttpConnection)state).Tick(), this);
 
                 // Register for graceful shutdown of the server
-                using var shutdownRegistration =
-                    connectionLifetimeNotificationFeature?.ConnectionClosedRequested.Register(
+                using var shutdownRegistration = connectionLifetimeNotificationFeature
+                    ?
+                    .ConnectionClosedRequested.Register(
                         state => ((HttpConnection)state!).StopProcessingNextRequest(),
                         this
                     );

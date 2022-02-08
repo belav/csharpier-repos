@@ -258,7 +258,9 @@ namespace Microsoft.CodeAnalysis.Emit
             {
                 var namespaceTypeDef = (
                     GetISymbolInternalOrNull(symbol)?.GetCciAdapter() as ITypeDefinition
-                )?.AsNamespaceTypeDefinition(context);
+                )
+                    ?
+                    .AsNamespaceTypeDefinition(context);
                 if (namespaceTypeDef != null)
                 {
                     yield return namespaceTypeDef;

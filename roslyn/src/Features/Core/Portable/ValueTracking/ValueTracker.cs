@@ -151,10 +151,12 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                         // want to track assignments to s that could impact the return rather than tracking the same method
                         // twice.
                         var isParameterForPreviousTrackedMethod =
-                            previousSymbol?.Equals(
-                                parameterSymbol.ContainingSymbol,
-                                SymbolEqualityComparer.Default
-                            ) == true;
+                            previousSymbol
+                                ?
+                                .Equals(
+                                    parameterSymbol.ContainingSymbol,
+                                    SymbolEqualityComparer.Default
+                                ) == true;
 
                         // For Ref or Out parameters, they contribute data across method calls through assignments
                         // within the method. No need to track returns

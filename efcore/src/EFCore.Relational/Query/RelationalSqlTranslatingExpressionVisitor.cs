@@ -830,10 +830,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         /// <inheritdoc />
         protected override Expression VisitParameter(ParameterExpression parameterExpression) =>
-            parameterExpression.Name?.StartsWith(
-                QueryCompilationContext.QueryParameterPrefix,
-                StringComparison.Ordinal
-            ) == true
+            parameterExpression
+                .Name?
+                .StartsWith(QueryCompilationContext.QueryParameterPrefix, StringComparison.Ordinal)
+            == true
                 ? new SqlParameterExpression(parameterExpression, null)
                 : throw new InvalidOperationException(
                       CoreStrings.TranslationFailed(parameterExpression.Print())

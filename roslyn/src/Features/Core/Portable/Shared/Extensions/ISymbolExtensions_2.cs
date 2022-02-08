@@ -220,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 IParameterSymbol parameter
                   => GetParameterDocumentation(parameter, compilation, cancellationToken)
-                      ?.GetParameterText(parameter.Name),
+                      ?
+                      .GetParameterText(parameter.Name),
                 ITypeParameterSymbol typeParam
                   => typeParam.ContainingSymbol
                       .GetDocumentationComment(
@@ -228,8 +229,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                           expandIncludes: true,
                           expandInheritdoc: true,
                           cancellationToken: cancellationToken
-                      )
-                      ?.GetTypeParameterText(typeParam.Name),
+                      )?
+                      .GetTypeParameterText(typeParam.Name),
                 IMethodSymbol method
                   => GetMethodDocumentation(method, compilation, cancellationToken).SummaryText,
                 IAliasSymbol alias
@@ -338,12 +339,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 case MethodKind.EventRemove:
                 case MethodKind.PropertyGet:
                 case MethodKind.PropertySet:
-                    return method.AssociatedSymbol?.GetDocumentationComment(
-                            compilation,
-                            expandIncludes: true,
-                            expandInheritdoc: true,
-                            cancellationToken: cancellationToken
-                        ) ?? DocumentationComment.Empty;
+                    return method
+                            .AssociatedSymbol?
+                            .GetDocumentationComment(
+                                compilation,
+                                expandIncludes: true,
+                                expandInheritdoc: true,
+                                cancellationToken: cancellationToken
+                            ) ?? DocumentationComment.Empty;
                 default:
                     return method.GetDocumentationComment(
                         compilation,

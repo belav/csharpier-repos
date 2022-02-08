@@ -1061,8 +1061,9 @@ namespace Microsoft.CodeAnalysis
                 referencesBuilder.AddRange(compilation.ExternalReferences);
 
                 // Add all explicit references of the previous script compilation.
-                var previousScriptCompilation =
-                    compilation.ScriptCompilationInfo?.PreviousScriptCompilation;
+                var previousScriptCompilation = compilation
+                    .ScriptCompilationInfo?
+                    .PreviousScriptCompilation;
                 if (previousScriptCompilation != null)
                 {
                     referencesBuilder.AddRange(

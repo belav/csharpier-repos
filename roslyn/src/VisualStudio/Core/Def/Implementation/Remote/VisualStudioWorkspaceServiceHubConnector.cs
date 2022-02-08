@@ -88,12 +88,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
             _globalNotificationDelivery?.Dispose();
 
             // dispose remote client if its initialization has completed:
-            _remoteClientInitializationTask?.ContinueWith(
-                previousTask => previousTask.Result?.Dispose(),
-                CancellationToken.None,
-                TaskContinuationOptions.OnlyOnRanToCompletion,
-                TaskScheduler.Default
-            );
+            _remoteClientInitializationTask
+                ?
+                .ContinueWith(
+                    previousTask => previousTask.Result?.Dispose(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.OnlyOnRanToCompletion,
+                    TaskScheduler.Default
+                );
         }
     }
 }

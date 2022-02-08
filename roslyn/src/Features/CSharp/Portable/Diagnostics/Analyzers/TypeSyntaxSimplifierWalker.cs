@@ -149,10 +149,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
         public override void VisitQualifiedName(QualifiedNameSyntax node)
         {
             if (
-                _ignoredSpans?.HasIntervalThatOverlapsWith(
-                    node.FullSpan.Start,
-                    node.FullSpan.Length
-                ) ?? false
+                _ignoredSpans
+                    ?
+                    .HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false
             )
             {
                 return;
@@ -171,10 +170,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
         public override void VisitAliasQualifiedName(AliasQualifiedNameSyntax node)
         {
             if (
-                _ignoredSpans?.HasIntervalThatOverlapsWith(
-                    node.FullSpan.Start,
-                    node.FullSpan.Length
-                ) ?? false
+                _ignoredSpans
+                    ?
+                    .HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false
             )
             {
                 return;
@@ -193,10 +191,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
         public override void VisitGenericName(GenericNameSyntax node)
         {
             if (
-                _ignoredSpans?.HasIntervalThatOverlapsWith(
-                    node.FullSpan.Start,
-                    node.FullSpan.Length
-                ) ?? false
+                _ignoredSpans
+                    ?
+                    .HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false
             )
             {
                 return;
@@ -215,10 +212,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
             if (
-                _ignoredSpans?.HasIntervalThatOverlapsWith(
-                    node.FullSpan.Start,
-                    node.FullSpan.Length
-                ) ?? false
+                _ignoredSpans
+                    ?
+                    .HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false
             )
             {
                 return;
@@ -262,10 +258,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
         public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
         {
             if (
-                _ignoredSpans?.HasIntervalThatOverlapsWith(
-                    node.FullSpan.Start,
-                    node.FullSpan.Length
-                ) ?? false
+                _ignoredSpans
+                    ?
+                    .HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false
             )
             {
                 return;
@@ -284,10 +279,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
         public override void VisitQualifiedCref(QualifiedCrefSyntax node)
         {
             if (
-                _ignoredSpans?.HasIntervalThatOverlapsWith(
-                    node.FullSpan.Start,
-                    node.FullSpan.Length
-                ) ?? false
+                _ignoredSpans
+                    ?
+                    .HasIntervalThatOverlapsWith(node.FullSpan.Start, node.FullSpan.Length) ?? false
             )
             {
                 return;

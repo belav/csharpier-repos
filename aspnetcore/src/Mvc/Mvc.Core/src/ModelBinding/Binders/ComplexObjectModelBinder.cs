@@ -470,8 +470,9 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
 
     internal bool CanBindItem(ModelBindingContext bindingContext, ModelMetadata propertyMetadata)
     {
-        var metadataProviderFilter =
-            bindingContext.ModelMetadata.PropertyFilterProvider?.PropertyFilter;
+        var metadataProviderFilter = bindingContext.ModelMetadata
+            .PropertyFilterProvider?
+            .PropertyFilter;
         if (metadataProviderFilter?.Invoke(propertyMetadata) == false)
         {
             return false;

@@ -2223,7 +2223,9 @@ switch (y)
 
             var symbol = (
                 (CSharp.Symbols.PublicModel.LabelSymbol)statModel.GetDeclaredSymbol(switchLabel)
-            )?.UnderlyingSymbol;
+            )
+                ?
+                .UnderlyingSymbol;
             Assert.NotNull(symbol);
             Assert.IsType<SourceLabelSymbol>(symbol);
 

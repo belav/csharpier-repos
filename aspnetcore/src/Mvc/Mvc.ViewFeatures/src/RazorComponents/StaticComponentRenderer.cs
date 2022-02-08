@@ -82,10 +82,12 @@ internal class StaticComponentRenderer
         {
             var navigationManager =
                 (IHostEnvironmentNavigationManager)httpContext.RequestServices.GetRequiredService<NavigationManager>();
-            navigationManager?.Initialize(
-                GetContextBaseUri(httpContext.Request),
-                GetFullUri(httpContext.Request)
-            );
+            navigationManager
+                ?
+                .Initialize(
+                    GetContextBaseUri(httpContext.Request),
+                    GetFullUri(httpContext.Request)
+                );
 
             var authenticationStateProvider =
                 httpContext.RequestServices.GetService<AuthenticationStateProvider>()

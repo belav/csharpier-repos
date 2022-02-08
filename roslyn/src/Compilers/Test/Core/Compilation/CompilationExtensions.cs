@@ -503,7 +503,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             (
                                 parameterInitializerOperation.Parameter.ContainingSymbol
                                 as IMethodSymbol
-                            )?.MethodKind != MethodKind.LocalFunction
+                            )
+                                ?
+                                .MethodKind != MethodKind.LocalFunction
                         )
                         {
                             ControlFlowGraphVerifier.GetFlowGraph(

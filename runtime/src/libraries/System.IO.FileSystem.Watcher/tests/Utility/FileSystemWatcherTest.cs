@@ -72,11 +72,13 @@ namespace System.IO.Tests
             {
                 if (e.ChangeType != WatcherChangeTypes.Created)
                 {
-                    _output?.WriteLine(
-                        "Unexpected event {0} while waiting for {1}",
-                        e.ChangeType,
-                        WatcherChangeTypes.Created
-                    );
+                    _output
+                        ?
+                        .WriteLine(
+                            "Unexpected event {0} while waiting for {1}",
+                            e.ChangeType,
+                            WatcherChangeTypes.Created
+                        );
                     Assert.Equal(WatcherChangeTypes.Created, e.ChangeType);
                 }
 
@@ -116,11 +118,13 @@ namespace System.IO.Tests
             {
                 if (e.ChangeType != WatcherChangeTypes.Deleted)
                 {
-                    _output?.WriteLine(
-                        "Unexpected event {0} while waiting for {1}",
-                        e.ChangeType,
-                        WatcherChangeTypes.Deleted
-                    );
+                    _output
+                        ?
+                        .WriteLine(
+                            "Unexpected event {0} while waiting for {1}",
+                            e.ChangeType,
+                            WatcherChangeTypes.Deleted
+                        );
                     Assert.Equal(WatcherChangeTypes.Deleted, e.ChangeType);
                 }
 
@@ -159,11 +163,13 @@ namespace System.IO.Tests
             {
                 if (e.ChangeType != WatcherChangeTypes.Renamed)
                 {
-                    _output?.WriteLine(
-                        "Unexpected event {0} while waiting for {1}",
-                        e.ChangeType,
-                        WatcherChangeTypes.Renamed
-                    );
+                    _output
+                        ?
+                        .WriteLine(
+                            "Unexpected event {0} while waiting for {1}",
+                            e.ChangeType,
+                            WatcherChangeTypes.Renamed
+                        );
                     Assert.Equal(WatcherChangeTypes.Renamed, e.ChangeType);
                 }
 

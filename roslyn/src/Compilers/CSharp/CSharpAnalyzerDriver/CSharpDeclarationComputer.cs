@@ -554,7 +554,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ? (
                       model.GetDeclaredSymbol(declarationWithExpressionBody, cancellationToken)
                       as IPropertySymbol
-                  )?.GetMethod
+                  )
+                  ?
+                  .GetMethod
                 : null;
 
             return new DeclarationInfo(

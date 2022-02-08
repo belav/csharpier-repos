@@ -172,14 +172,16 @@ namespace Microsoft.CodeAnalysis.Rename
                     {
                         var options = SerializableRenameOptionSet.Dehydrate(optionSet);
                         var nonConflictSymbolIds =
-                            nonConflictSymbols?.SelectAsArray(
-                                s =>
-                                    SerializableSymbolAndProjectId.Dehydrate(
-                                        solution,
-                                        s,
-                                        cancellationToken
-                                    )
-                            ) ?? default;
+                            nonConflictSymbols
+                                ?
+                                .SelectAsArray(
+                                    s =>
+                                        SerializableSymbolAndProjectId.Dehydrate(
+                                            solution,
+                                            s,
+                                            cancellationToken
+                                        )
+                                ) ?? default;
 
                         var result = await client
                             .TryInvokeAsync<IRemoteRenamerService, SerializableConflictResolution?>(

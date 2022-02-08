@@ -105,31 +105,35 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     _stopwatch.Restart();
 
                     var interceptionResult =
-                        logger?.CommandNonQueryExecuting(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            startTime,
-                            parameterObject.CommandSource
-                        ) ?? default;
+                        logger
+                            ?
+                            .CommandNonQueryExecuting(
+                                connection,
+                                command,
+                                context,
+                                commandId,
+                                connection.ConnectionId,
+                                startTime,
+                                parameterObject.CommandSource
+                            ) ?? default;
 
                     var nonQueryResult = interceptionResult.HasResult
                         ? interceptionResult.Result
                         : command.ExecuteNonQuery();
 
-                    return logger?.CommandNonQueryExecuted(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            nonQueryResult,
-                            startTime,
-                            _stopwatch.Elapsed,
-                            parameterObject.CommandSource
-                        ) ?? nonQueryResult;
+                    return logger
+                            ?
+                            .CommandNonQueryExecuted(
+                                connection,
+                                command,
+                                context,
+                                commandId,
+                                connection.ConnectionId,
+                                nonQueryResult,
+                                startTime,
+                                _stopwatch.Elapsed,
+                                parameterObject.CommandSource
+                            ) ?? nonQueryResult;
                 }
                 else
                 {
@@ -138,18 +142,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
             catch (Exception exception)
             {
-                logger?.CommandError(
-                    connection,
-                    command,
-                    context,
-                    DbCommandMethod.ExecuteNonQuery,
-                    commandId,
-                    connection.ConnectionId,
-                    exception,
-                    startTime,
-                    _stopwatch.Elapsed,
-                    parameterObject.CommandSource
-                );
+                logger
+                    ?
+                    .CommandError(
+                        connection,
+                        command,
+                        context,
+                        DbCommandMethod.ExecuteNonQuery,
+                        commandId,
+                        connection.ConnectionId,
+                        exception,
+                        startTime,
+                        _stopwatch.Elapsed,
+                        parameterObject.CommandSource
+                    );
 
                 throw;
             }
@@ -317,31 +323,35 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     _stopwatch.Restart();
 
                     var interceptionResult =
-                        logger?.CommandScalarExecuting(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            startTime,
-                            parameterObject.CommandSource
-                        ) ?? default;
+                        logger
+                            ?
+                            .CommandScalarExecuting(
+                                connection,
+                                command,
+                                context,
+                                commandId,
+                                connection.ConnectionId,
+                                startTime,
+                                parameterObject.CommandSource
+                            ) ?? default;
 
                     var result = interceptionResult.HasResult
                         ? interceptionResult.Result
                         : command.ExecuteScalar();
 
-                    return logger?.CommandScalarExecuted(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            result,
-                            startTime,
-                            _stopwatch.Elapsed,
-                            parameterObject.CommandSource
-                        ) ?? result;
+                    return logger
+                            ?
+                            .CommandScalarExecuted(
+                                connection,
+                                command,
+                                context,
+                                commandId,
+                                connection.ConnectionId,
+                                result,
+                                startTime,
+                                _stopwatch.Elapsed,
+                                parameterObject.CommandSource
+                            ) ?? result;
                 }
                 else
                 {
@@ -350,18 +360,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
             catch (Exception exception)
             {
-                logger?.CommandError(
-                    connection,
-                    command,
-                    context,
-                    DbCommandMethod.ExecuteScalar,
-                    commandId,
-                    connection.ConnectionId,
-                    exception,
-                    startTime,
-                    _stopwatch.Elapsed,
-                    parameterObject.CommandSource
-                );
+                logger
+                    ?
+                    .CommandError(
+                        connection,
+                        command,
+                        context,
+                        DbCommandMethod.ExecuteScalar,
+                        commandId,
+                        connection.ConnectionId,
+                        exception,
+                        startTime,
+                        _stopwatch.Elapsed,
+                        parameterObject.CommandSource
+                    );
 
                 throw;
             }
@@ -564,18 +576,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
             catch (Exception exception)
             {
-                logger?.CommandError(
-                    connection,
-                    command,
-                    context,
-                    DbCommandMethod.ExecuteReader,
-                    commandId,
-                    connection.ConnectionId,
-                    exception,
-                    startTime,
-                    _stopwatch.Elapsed,
-                    parameterObject.CommandSource
-                );
+                logger
+                    ?
+                    .CommandError(
+                        connection,
+                        command,
+                        context,
+                        DbCommandMethod.ExecuteReader,
+                        commandId,
+                        connection.ConnectionId,
+                        exception,
+                        startTime,
+                        _stopwatch.Elapsed,
+                        parameterObject.CommandSource
+                    );
 
                 CleanupCommand(command, connection);
 

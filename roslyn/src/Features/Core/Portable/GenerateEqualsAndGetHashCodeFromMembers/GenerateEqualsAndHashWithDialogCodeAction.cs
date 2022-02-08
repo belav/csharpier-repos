@@ -124,24 +124,28 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
                 if (_implementIEqutableOptionValue.HasValue)
                 {
-                    solution = solution?.WithOptions(
-                        solution.Options.WithChangedOption(
-                            GenerateEqualsAndGetHashCodeFromMembersOptions.ImplementIEquatable,
-                            _document.Project.Language,
-                            _implementIEqutableOptionValue.Value
-                        )
-                    );
+                    solution = solution
+                        ?
+                        .WithOptions(
+                            solution.Options.WithChangedOption(
+                                GenerateEqualsAndGetHashCodeFromMembersOptions.ImplementIEquatable,
+                                _document.Project.Language,
+                                _implementIEqutableOptionValue.Value
+                            )
+                        );
                 }
 
                 if (_generateOperatorsOptionValue.HasValue)
                 {
-                    solution = solution?.WithOptions(
-                        solution.Options.WithChangedOption(
-                            GenerateEqualsAndGetHashCodeFromMembersOptions.GenerateOperators,
-                            _document.Project.Language,
-                            _generateOperatorsOptionValue.Value
-                        )
-                    );
+                    solution = solution
+                        ?
+                        .WithOptions(
+                            solution.Options.WithChangedOption(
+                                GenerateEqualsAndGetHashCodeFromMembersOptions.GenerateOperators,
+                                _document.Project.Language,
+                                _generateOperatorsOptionValue.Value
+                            )
+                        );
                 }
 
                 return solution;

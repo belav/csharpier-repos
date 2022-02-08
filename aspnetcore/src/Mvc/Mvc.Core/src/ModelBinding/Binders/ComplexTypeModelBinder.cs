@@ -262,8 +262,9 @@ public class ComplexTypeModelBinder : IModelBinder
         ModelMetadata propertyMetadata
     )
     {
-        var metadataProviderFilter =
-            bindingContext.ModelMetadata.PropertyFilterProvider?.PropertyFilter;
+        var metadataProviderFilter = bindingContext.ModelMetadata
+            .PropertyFilterProvider?
+            .PropertyFilter;
         if (metadataProviderFilter?.Invoke(propertyMetadata) == false)
         {
             return false;

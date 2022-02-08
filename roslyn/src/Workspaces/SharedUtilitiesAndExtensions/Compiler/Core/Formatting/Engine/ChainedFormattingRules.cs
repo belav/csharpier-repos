@@ -181,8 +181,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 key =>
                     key.type
                         .GetRuntimeMethods()
-                        .FirstOrDefault(method => method.Name == key.name)
-                        ?.DeclaringType
+                        .FirstOrDefault(method => method.Name == key.name)?
+                        .DeclaringType
             );
         }
     }

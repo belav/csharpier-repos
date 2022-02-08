@@ -2011,8 +2011,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     )
                     {
                         var primaryKeyProperties = entityReference.EntityType
-                            .FindPrimaryKey()
-                            ?.Properties;
+                            .FindPrimaryKey()?
+                            .Properties;
                         if (primaryKeyProperties != null)
                         {
                             for (var i = 0; i < primaryKeyProperties.Count; i++)
@@ -2055,8 +2055,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     )
                     {
                         var primaryKeyProperties = subqueryEntityReference.EntityType
-                            .FindPrimaryKey()
-                            ?.Properties;
+                            .FindPrimaryKey()?
+                            .Properties;
                         if (primaryKeyProperties != null)
                         {
                             for (var i = 0; i < primaryKeyProperties.Count; i++)

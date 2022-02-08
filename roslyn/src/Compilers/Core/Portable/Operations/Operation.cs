@@ -173,7 +173,9 @@ namespace Microsoft.CodeAnalysis
         {
             // For simplicity of implementation of derived types, we handle `null` children, as some children
             // are optional.
-            (operation as Operation)?.SetParentOperation(parent);
+            (operation as Operation)
+                ?
+                .SetParentOperation(parent);
             return operation;
         }
 

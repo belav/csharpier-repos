@@ -170,13 +170,15 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
                 if (_addNullCheckOptionValue.HasValue)
                 {
-                    solution = solution?.WithOptions(
-                        solution.Options.WithChangedOption(
-                            GenerateConstructorFromMembersOptions.AddNullChecks,
-                            _document.Project.Language,
-                            _addNullCheckOptionValue.Value
-                        )
-                    );
+                    solution = solution
+                        ?
+                        .WithOptions(
+                            solution.Options.WithChangedOption(
+                                GenerateConstructorFromMembersOptions.AddNullChecks,
+                                _document.Project.Language,
+                                _addNullCheckOptionValue.Value
+                            )
+                        );
                 }
 
                 return solution;

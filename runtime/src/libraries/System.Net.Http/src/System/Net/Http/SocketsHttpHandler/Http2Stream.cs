@@ -784,11 +784,9 @@ namespace System.Net.Http
                         throw new HttpRequestException(SR.net_http_invalid_response);
                     }
 
-                    Encoding? valueEncoding =
-                        _connection._pool.Settings._responseHeaderEncodingSelector?.Invoke(
-                            descriptor.Name,
-                            _request
-                        );
+                    Encoding? valueEncoding = _connection._pool.Settings
+                        ._responseHeaderEncodingSelector?
+                        .Invoke(descriptor.Name, _request);
 
                     // Note we ignore the return value from TryAddWithoutValidation;
                     // if the header can't be added, we silently drop it.

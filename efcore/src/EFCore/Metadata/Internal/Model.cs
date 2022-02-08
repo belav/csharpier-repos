@@ -286,8 +286,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _entityTypes.Add(entityTypeName, entityType);
 
             return (EntityType?)ConventionDispatcher
-                .OnEntityTypeAdded(entityType.Builder)
-                ?.Metadata;
+                .OnEntityTypeAdded(entityType.Builder)?
+                .Metadata;
         }
 
         /// <summary>
@@ -499,8 +499,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                       entityType.HasSharedClrType
                           ? entityType.FindOwnership() is ForeignKey ownership
                               ? FindActualEntityType(ownership.PrincipalEntityType)
-                                ?.FindNavigation(ownership.PrincipalToDependent!.Name)
-                                ?.TargetEntityType
+                                ?
+                                .FindNavigation(ownership.PrincipalToDependent!.Name)?
+                                .TargetEntityType
                               : null
                           : null
                   );
@@ -931,7 +932,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.PropertyAccessMode,
                 propertyAccessMode,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

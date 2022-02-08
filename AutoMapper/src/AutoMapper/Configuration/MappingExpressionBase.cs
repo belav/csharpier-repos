@@ -235,11 +235,13 @@ namespace AutoMapper.Configuration
         }
 
         protected IEnumerable<IPropertyMapConfiguration> MapToSourceMembers() =>
-            _memberConfigurations?.Where(
-                m =>
-                    m.SourceExpression != null
-                    && m.SourceExpression.Body == m.SourceExpression.Parameters[0]
-            ) ?? Array.Empty<IPropertyMapConfiguration>();
+            _memberConfigurations
+                ?
+                .Where(
+                    m =>
+                        m.SourceExpression != null
+                        && m.SourceExpression.Body == m.SourceExpression.Parameters[0]
+                ) ?? Array.Empty<IPropertyMapConfiguration>();
 
         private void ReverseIncludedMembers(TypeMap typeMap)
         {

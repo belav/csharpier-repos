@@ -482,14 +482,16 @@ namespace Microsoft.Extensions.Options
             // Null name is used to configure all named options.
             if (Name == null || name == Name)
             {
-                Action?.Invoke(
-                    options,
-                    Dependency1,
-                    Dependency2,
-                    Dependency3,
-                    Dependency4,
-                    Dependency5
-                );
+                Action
+                    ?
+                    .Invoke(
+                        options,
+                        Dependency1,
+                        Dependency2,
+                        Dependency3,
+                        Dependency4,
+                        Dependency5
+                    );
             }
         }
 

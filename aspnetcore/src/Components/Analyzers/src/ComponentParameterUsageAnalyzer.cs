@@ -94,8 +94,9 @@ public class ComponentParameterUsageAnalyzer : DiagnosticAnalyzer
                                     return;
                                 }
 
-                                var assignmentContainingType =
-                                    startBlockContext.OwningSymbol?.ContainingType;
+                                var assignmentContainingType = startBlockContext
+                                    .OwningSymbol?
+                                    .ContainingType;
                                 if (assignmentContainingType == null)
                                 {
                                     // Assignment location has no containing type. Most likely we're operating on malformed code, don't try and validate.

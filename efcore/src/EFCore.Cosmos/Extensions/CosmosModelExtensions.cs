@@ -119,8 +119,8 @@ namespace Microsoft.EntityFrameworkCore
                           ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
                           : ThroughputProperties.CreateManualThroughput(throughput.Value),
                     fromDataAnnotation
-                )
-                ?.Value;
+                )?
+                .Value;
             return valueSet?.AutoscaleMaxThroughput ?? valueSet?.Throughput;
         }
 

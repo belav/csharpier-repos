@@ -2791,9 +2791,9 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                this.ScriptCompilationInfo?.PreviousScriptCompilation?.EnsureAnonymousTypeTemplates(
-                    cancellationToken
-                );
+                this.ScriptCompilationInfo?
+                    .PreviousScriptCompilation?
+                    .EnsureAnonymousTypeTemplates(cancellationToken);
             }
         }
 

@@ -745,9 +745,11 @@ namespace System.Net.Sockets.Tests
                                         remote.Poll(0, SelectMode.SelectRead),
                                         "Read poll after completion should have succeeded"
                                     );
-                                    _output?.WriteLine(
-                                        $"{DateTime.Now} Received 0 bytes. Stopping receiving loop after {count} iterations."
-                                    );
+                                    _output
+                                        ?
+                                        .WriteLine(
+                                            $"{DateTime.Now} Received 0 bytes. Stopping receiving loop after {count} iterations."
+                                        );
                                     break;
                                 }
 
@@ -820,9 +822,11 @@ namespace System.Net.Sockets.Tests
 
                 if (bytesSent != bytesReceived)
                 {
-                    _output?.WriteLine(
-                        $"{DateTime.Now} Test received only {bytesReceived} bytes from {bytesSent}. Client task is {clientTask.Status}, Server task is {serverTask.Status}"
-                    );
+                    _output
+                        ?
+                        .WriteLine(
+                            $"{DateTime.Now} Test received only {bytesReceived} bytes from {bytesSent}. Client task is {clientTask.Status}, Server task is {serverTask.Status}"
+                        );
                 }
 
                 Assert.Equal(bytesSent, bytesReceived);

@@ -184,12 +184,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         var index =
                             renameIndexOperation.Table != null
                                 ? model
-                                  ?.GetRelationalModel()
+                                  ?
+                                  .GetRelationalModel()
                                   .FindTable(
                                       renameIndexOperation.Table,
                                       renameIndexOperation.Schema
-                                  )
-                                  ?.Indexes.FirstOrDefault(
+                                  )?
+                                  .Indexes.FirstOrDefault(
                                       i => i.Name == renameIndexOperation.NewName
                                   )
                                 : null;
@@ -344,7 +345,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             foreach (var rebuild in rebuilds)
             {
                 var table = model
-                    ?.GetRelationalModel()
+                    ?
+                    .GetRelationalModel()
                     .FindTable(rebuild.Key.Table, rebuild.Key.Schema);
                 if (table == null)
                 {

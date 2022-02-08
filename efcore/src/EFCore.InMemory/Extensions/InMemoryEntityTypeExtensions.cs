@@ -68,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore
                 )
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore EF1001 // Internal EF Core API usage.
-                ?.Value;
+                ?
+                .Value;
 
         /// <summary>
         ///     Returns the configuration source for <see cref="GetInMemoryQuery" />.

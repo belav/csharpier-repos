@@ -201,9 +201,9 @@ public abstract class DiagnosticVerifier
         {
             var newFileName = fileNamePrefix + count;
 
-            _testOutputHelper?.WriteLine(
-                "Adding file: " + newFileName + Environment.NewLine + source
-            );
+            _testOutputHelper
+                ?
+                .WriteLine("Adding file: " + newFileName + Environment.NewLine + source);
 
             var documentId = DocumentId.CreateNewId(projectId, debugName: newFileName);
             Solution = Solution.AddDocument(documentId, newFileName, SourceText.From(source));

@@ -668,8 +668,7 @@ namespace Newtonsoft.Json.Serialization
                     valueType,
                     new[] { keyType },
                     null
-                )
-                    ?.GetSetMethod();
+                )?.GetSetMethod();
                 if (setMethod == null)
                 {
                     // Item is explicitly implemented and non-public
@@ -682,8 +681,8 @@ namespace Newtonsoft.Json.Serialization
                             valueType,
                             new[] { keyType },
                             null
-                        )
-                        ?.GetSetMethod();
+                        )?
+                        .GetSetMethod();
                 }
 
                 MethodCall<object, object?> setExtensionDataDictionaryValue =

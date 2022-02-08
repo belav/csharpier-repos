@@ -233,11 +233,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 
             var expressionBodyOpt = GetExpressionBody(declaration);
             var canOffer =
-                expressionBodyOpt?.TryConvertToBlock(
-                    SyntaxFactory.Token(SyntaxKind.SemicolonToken),
-                    false,
-                    block: out _
-                ) == true;
+                expressionBodyOpt
+                    ?
+                    .TryConvertToBlock(
+                        SyntaxFactory.Token(SyntaxKind.SemicolonToken),
+                        false,
+                        block: out _
+                    ) == true;
             if (!canOffer)
             {
                 return (canOffer, fixesError: false);

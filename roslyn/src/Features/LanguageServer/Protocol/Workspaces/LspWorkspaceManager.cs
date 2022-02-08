@@ -207,10 +207,9 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             }
 
             // If we can't find the document in any of the registered workspaces, add it to our loose files workspace.
-            var miscDocument = _lspMiscellaneousFilesWorkspace?.AddMiscellaneousDocument(
-                uri,
-                documentText
-            );
+            var miscDocument = _lspMiscellaneousFilesWorkspace
+                ?
+                .AddMiscellaneousDocument(uri, documentText);
             if (miscDocument != null)
             {
                 _workspaceToLspSolution[miscDocument.Project.Solution.Workspace] =

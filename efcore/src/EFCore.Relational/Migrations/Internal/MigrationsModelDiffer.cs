@@ -894,8 +894,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     var linkingForeignKey in table.GetReferencingRowInternalForeignKeys(entityType)
                 )
                 {
-                    var linkingNavigationProperty =
-                        linkingForeignKey.PrincipalToDependent?.PropertyInfo;
+                    var linkingNavigationProperty = linkingForeignKey
+                        .PrincipalToDependent?
+                        .PropertyInfo;
                     var properties = GetSortedProperties(
                             linkingForeignKey.DeclaringEntityType,
                             table
@@ -1128,12 +1129,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var nextSource = sourceTable
                 .GetRowInternalForeignKeys(source)
-                .FirstOrDefault()
-                ?.PrincipalEntityType;
+                .FirstOrDefault()?
+                .PrincipalEntityType;
             var nextTarget = targetTable
                 .GetRowInternalForeignKeys(target)
-                .FirstOrDefault()
-                ?.PrincipalEntityType;
+                .FirstOrDefault()?
+                .PrincipalEntityType;
             return (nextSource == null && nextTarget == null)
                 || (
                     nextSource != null
@@ -2339,7 +2340,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             var targetColumn = targetTable.FindColumn(targetProperty);
                             var sourceColumn = diffContext.FindSource(targetColumn);
                             var sourceProperty = sourceColumn
-                                ?.PropertyMappings.Select(m => m.Property)
+                                ?
+                                .PropertyMappings.Select(m => m.Property)
                                 .FirstOrDefault(
                                     p => p.DeclaringEntityType.IsAssignableFrom(sourceEntityType)
                                 );
@@ -2405,14 +2407,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                 if (!storeValuesChanged && convertedType != null)
                                 {
                                     comparer = TypeMappingSource
-                                        .FindMapping(convertedType)
-                                        ?.Comparer;
+                                        .FindMapping(convertedType)?
+                                        .Comparer;
 
                                     storeValuesChanged =
-                                        !comparer?.Equals(
-                                            convertedSourceValue,
-                                            convertedTargetValue
-                                        ) ?? !Equals(convertedSourceValue, convertedTargetValue);
+                                        !comparer
+                                            ?
+                                            .Equals(convertedSourceValue, convertedTargetValue)
+                                        ?? !Equals(convertedSourceValue, convertedTargetValue);
                                 }
 
                                 if (!storeValuesChanged)
@@ -2498,8 +2500,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                         fk =>
                                         {
                                             var behavior = diffContext
-                                                .FindTarget(fk)
-                                                ?.DeleteBehavior;
+                                                .FindTarget(fk)?
+                                                .DeleteBehavior;
                                             return behavior != null
                                                 && behavior != DeleteBehavior.ClientNoAction;
                                         }

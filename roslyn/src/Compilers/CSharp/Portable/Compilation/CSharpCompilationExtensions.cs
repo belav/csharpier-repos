@@ -10,9 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal static bool IsFeatureEnabled(this CSharpCompilation compilation, MessageID feature)
         {
-            return (
-                    (CSharpParseOptions?)compilation.SyntaxTrees.FirstOrDefault()?.Options
-                )?.IsFeatureEnabled(feature) == true;
+            return ((CSharpParseOptions?)compilation.SyntaxTrees.FirstOrDefault()?.Options)
+                    ?
+                    .IsFeatureEnabled(feature) == true;
         }
 
         internal static bool IsFeatureEnabled(this SyntaxNode? syntax, MessageID feature)

@@ -122,14 +122,14 @@ namespace System.Text.Json.Serialization.Metadata
             _fsharpMapType = fsharpCoreAssembly.GetType("Microsoft.FSharp.Collections.FSharpMap`2");
 
             _fsharpListCtor = fsharpCoreAssembly
-                .GetType("Microsoft.FSharp.Collections.ListModule")
-                ?.GetMethod("OfSeq", BindingFlags.Public | BindingFlags.Static);
+                .GetType("Microsoft.FSharp.Collections.ListModule")?
+                .GetMethod("OfSeq", BindingFlags.Public | BindingFlags.Static);
             _fsharpSetCtor = fsharpCoreAssembly
-                .GetType("Microsoft.FSharp.Collections.SetModule")
-                ?.GetMethod("OfSeq", BindingFlags.Public | BindingFlags.Static);
+                .GetType("Microsoft.FSharp.Collections.SetModule")?
+                .GetMethod("OfSeq", BindingFlags.Public | BindingFlags.Static);
             _fsharpMapCtor = fsharpCoreAssembly
-                .GetType("Microsoft.FSharp.Collections.MapModule")
-                ?.GetMethod("OfSeq", BindingFlags.Public | BindingFlags.Static);
+                .GetType("Microsoft.FSharp.Collections.MapModule")?
+                .GetMethod("OfSeq", BindingFlags.Public | BindingFlags.Static);
         }
 
         [RequiresUnreferencedCode(FSharpCoreUnreferencedCodeMessage)]

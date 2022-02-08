@@ -102,9 +102,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 else
                 {
                     var clientSupportsMarkdown =
-                        context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.DocumentationFormat.Contains(
-                            LSP.MarkupKind.Markdown
-                        ) == true;
+                        context.ClientCapabilities
+                            .TextDocument?
+                            .Completion?
+                            .CompletionItem?
+                            .DocumentationFormat.Contains(LSP.MarkupKind.Markdown) == true;
                     completionItem.Documentation =
                         ProtocolConversions.GetDocumentationMarkupContent(
                             description.TaggedParts,
@@ -125,8 +127,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Contract.ThrowIfTrue(completionItem.TextEdit != null);
 
                 var snippetsSupported =
-                    context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport
-                    ?? false;
+                    context.ClientCapabilities
+                        .TextDocument?
+                        .Completion?
+                        .CompletionItem?
+                        .SnippetSupport ?? false;
 
                 completionItem.TextEdit = await GenerateTextEditAsync(
                         document,

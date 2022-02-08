@@ -326,12 +326,9 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             in StoreObjectIdentifier storeObject
         ) =>
-            (
-                (RelationalPropertyOverrides?)RelationalPropertyOverrides.Find(
-                    property,
-                    storeObject
-                )
-            )?.GetColumnNameConfigurationSource();
+            ((RelationalPropertyOverrides?)RelationalPropertyOverrides.Find(property, storeObject))
+                ?
+                .GetColumnNameConfigurationSource();
 
         /// <summary>
         ///     Returns the order of the column this property is mapped to.
@@ -721,8 +718,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(RelationalAnnotationNames.DefaultValueSql)
-                ?.GetConfigurationSource();
+                .FindAnnotation(RelationalAnnotationNames.DefaultValueSql)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the SQL expression that is used as the computed value for the column this property is mapped to.
@@ -797,8 +794,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(RelationalAnnotationNames.ComputedColumnSql)
-                ?.GetConfigurationSource();
+                .FindAnnotation(RelationalAnnotationNames.ComputedColumnSql)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Gets whether the value of the computed column this property is mapped to is stored in the database, or calculated when
@@ -1039,8 +1036,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(RelationalAnnotationNames.DefaultValue)
-                ?.GetConfigurationSource();
+                .FindAnnotation(RelationalAnnotationNames.DefaultValue)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Gets the maximum length of data that is allowed in this property. For example, if the property is a <see cref="string" />
@@ -1210,8 +1207,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(RelationalAnnotationNames.IsFixedLength)
-                ?.GetConfigurationSource();
+                .FindAnnotation(RelationalAnnotationNames.IsFixedLength)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Checks whether the column mapped to the given <see cref="IProperty" /> will be nullable

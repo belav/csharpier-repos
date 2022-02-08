@@ -16,9 +16,9 @@ public class MultipleAreasControllerConvention : IApplicationModelConvention
         foreach (var controller in application.Controllers)
         {
             var areaNames = controller.ControllerType
-                .GetCustomAttributes<MultipleAreasAttribute>()
-                ?.FirstOrDefault()
-                ?.AreaNames;
+                .GetCustomAttributes<MultipleAreasAttribute>()?
+                .FirstOrDefault()?
+                .AreaNames;
             controller.RouteValues.Add("area", areaNames?[0]);
             for (var i = 1; i < areaNames?.Length; i++)
             {

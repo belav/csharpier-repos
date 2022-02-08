@@ -246,8 +246,8 @@ internal class ProcessEx : IDisposable
         (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_RESTORE")))
             ? typeof(ProcessEx).Assembly
               .GetCustomAttributes<AssemblyMetadataAttribute>()
-              .FirstOrDefault(attribute => attribute.Key == "TestPackageRestorePath")
-              ?.Value
+              .FirstOrDefault(attribute => attribute.Key == "TestPackageRestorePath")?
+              .Value
             : Environment.GetEnvironmentVariable("NUGET_RESTORE");
 
     public void Dispose()

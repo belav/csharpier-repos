@@ -210,8 +210,8 @@ public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtoco
         return testLspServer
             .GetManagerAccessor()
             .GetLspMiscellaneousFilesWorkspace()!.CurrentSolution.Projects
-            .SingleOrDefault()
-            ?.Documents.Single();
+            .SingleOrDefault()?
+            .Documents.Single();
     }
 
     private static async Task<LSP.Hover> RunGetHoverAsync(

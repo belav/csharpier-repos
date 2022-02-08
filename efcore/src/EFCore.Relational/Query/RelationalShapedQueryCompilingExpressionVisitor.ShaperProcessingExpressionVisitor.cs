@@ -1927,11 +1927,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             splitQueryCollectionContext.ResultContext,
                             resultCoordinator
                         );
-                        relatedDataLoaders?.Invoke(
-                            queryContext,
-                            executionStrategy,
-                            resultCoordinator
-                        );
+                        relatedDataLoaders
+                            ?
+                            .Invoke(queryContext, executionStrategy, resultCoordinator);
                         var relatedEntity = innerShaper(
                             queryContext,
                             dbDataReader,

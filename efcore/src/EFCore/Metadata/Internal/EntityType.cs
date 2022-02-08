@@ -1104,8 +1104,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             OnForeignKeyUpdated(foreignKey);
 
             return (ForeignKey?)Model.ConventionDispatcher
-                .OnForeignKeyAdded(foreignKey.Builder)
-                ?.Metadata;
+                .OnForeignKeyAdded(foreignKey.Builder)?
+                .Metadata;
         }
 
         /// <summary>
@@ -1925,8 +1925,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return (SkipNavigation?)Model.ConventionDispatcher
-                .OnSkipNavigationAdded(skipNavigation.Builder)
-                ?.Metadata;
+                .OnSkipNavigationAdded(skipNavigation.Builder)?
+                .Metadata;
         }
 
         private Type? ValidateClrMember(
@@ -2729,8 +2729,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return (Property?)Model.ConventionDispatcher
-                .OnPropertyAdded(property.Builder)
-                ?.Metadata;
+                .OnPropertyAdded(property.Builder)?
+                .Metadata;
         }
 
         /// <summary>
@@ -3674,7 +3674,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.QueryFilter,
                 queryFilter,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -3733,7 +3735,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.DefiningQuery,
                 definingQuery,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3776,7 +3780,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         CoreAnnotationNames.DiscriminatorProperty,
                         property?.Name,
                         configurationSource
-                    )?.Value
+                    )
+                        ?
+                        .Value
                 ) == property?.Name
               ? property
               : (Property?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
@@ -5982,11 +5988,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 InstantiationBinding? instantiationBinding,
                 EntityType entityType
             ) =>
-                instantiationBinding?.With(
-                    instantiationBinding.ParameterBindings
-                        .Select(binding => Create(binding, entityType))
-                        .ToList()
-                );
+                instantiationBinding
+                    ?
+                    .With(
+                        instantiationBinding.ParameterBindings
+                            .Select(binding => Create(binding, entityType))
+                            .ToList()
+                    );
 
             private ParameterBinding Create(
                 ParameterBinding parameterBinding,

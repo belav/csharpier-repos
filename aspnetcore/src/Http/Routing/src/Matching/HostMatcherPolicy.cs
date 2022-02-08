@@ -237,8 +237,8 @@ public sealed class HostMatcherPolicy
         {
             var endpoint = endpoints[i];
             var hosts = endpoint.Metadata
-                .GetMetadata<IHostMetadata>()
-                ?.Hosts.Select(h => CreateEdgeKey(h))
+                .GetMetadata<IHostMetadata>()?
+                .Hosts.Select(h => CreateEdgeKey(h))
                 .ToArray();
             if (hosts == null || hosts.Length == 0)
             {
@@ -263,8 +263,8 @@ public sealed class HostMatcherPolicy
 
             var endpointKeys =
                 endpoint.Metadata
-                    .GetMetadata<IHostMetadata>()
-                    ?.Hosts.Select(h => CreateEdgeKey(h))
+                    .GetMetadata<IHostMetadata>()?
+                    .Hosts.Select(h => CreateEdgeKey(h))
                     .ToArray() ?? Array.Empty<EdgeKey>();
             if (endpointKeys.Length == 0)
             {

@@ -144,7 +144,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                     var returnType = (
                         _semanticModel.GetSymbolInfo(lambdaExpression).Symbol as IMethodSymbol
-                    )?.ReturnType;
+                    )
+                        ?
+                        .ReturnType;
                     if (returnType != null)
                     {
                         return TryCastTo(
@@ -173,7 +175,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         {
                             var returnType = (
                                 _semanticModel.GetSymbolInfo(parentLambda).Symbol as IMethodSymbol
-                            )?.ReturnType;
+                            )
+                                ?
+                                .ReturnType;
                             if (returnType != null)
                             {
                                 if (

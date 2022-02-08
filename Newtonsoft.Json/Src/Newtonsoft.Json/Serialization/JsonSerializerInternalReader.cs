@@ -2209,7 +2209,9 @@ namespace Newtonsoft.Json.Serialization
                                                       (
                                                           Serializer._contractResolver
                                                           as DefaultContractResolver
-                                                      )?.NamingStrategy,
+                                                      )
+                                                          ?
+                                                          .NamingStrategy,
                                                       keyValue.ToString(),
                                                       false
                                                   )

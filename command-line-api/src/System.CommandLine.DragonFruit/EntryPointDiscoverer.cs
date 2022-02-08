@@ -21,8 +21,8 @@ namespace System.CommandLine.DragonFruit
             if (!string.IsNullOrWhiteSpace(entryPointFullTypeName))
             {
                 var typeInfo = assembly
-                    .GetType(entryPointFullTypeName, false, false)
-                    ?.GetTypeInfo();
+                    .GetType(entryPointFullTypeName, false, false)?
+                    .GetTypeInfo();
                 if (typeInfo == null)
                 {
                     throw new InvalidProgramException(

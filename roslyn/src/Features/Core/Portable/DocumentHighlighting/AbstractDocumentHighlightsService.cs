@@ -150,9 +150,9 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             {
                 foreach (var language in languagesProvider.Languages)
                 {
-                    var highlighter = (
-                        language as IEmbeddedLanguageFeatures
-                    )?.DocumentHighlightsService;
+                    var highlighter = (language as IEmbeddedLanguageFeatures)
+                        ?
+                        .DocumentHighlightsService;
                     if (highlighter != null)
                     {
                         var highlights = await highlighter

@@ -1098,8 +1098,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     {
                         // only remember the first syntax error we encounter:
                         syntaxError ??= changedDocumentAnalyses
-                            .FirstOrDefault(a => a.SyntaxError != null)
-                            ?.SyntaxError;
+                            .FirstOrDefault(a => a.SyntaxError != null)?
+                            .SyntaxError;
                         isBlocked = true;
                     }
                     else if (projectSummary == ProjectAnalysisSummary.RudeEdits)

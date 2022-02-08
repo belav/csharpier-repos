@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 _ => throw ExceptionUtilities.Unreachable,
             };
             var operand = GetNullCheckOperand(comparisonLeft, comparison.Kind(), comparisonRight)
-                ?.WalkDownParentheses();
+                ?
+                .WalkDownParentheses();
             if (operand == null)
             {
                 return;

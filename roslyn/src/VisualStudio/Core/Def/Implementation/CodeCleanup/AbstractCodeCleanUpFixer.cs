@@ -98,8 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             )
             {
                 projectId = _workspace
-                    .GetProjectWithHierarchyAndName(hierarchy, contextProjectName)
-                    ?.Id;
+                    .GetProjectWithHierarchyAndName(hierarchy, contextProjectName)?
+                    .Id;
             }
 
             if (projectId is null)

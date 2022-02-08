@@ -108,9 +108,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             foreach (var language in GetLanguageProviders(languageServices))
             {
-                var completionProvider = (
-                    language as IEmbeddedLanguageFeatures
-                )?.CompletionProvider;
+                var completionProvider = (language as IEmbeddedLanguageFeatures)
+                    ?
+                    .CompletionProvider;
                 if (completionProvider != null)
                 {
                     if (completionProvider.ShouldTriggerCompletion(text, caretPosition, trigger))
@@ -129,9 +129,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 var language in GetLanguageProviders(context.Document.Project.LanguageServices)
             )
             {
-                var completionProvider = (
-                    language as IEmbeddedLanguageFeatures
-                )?.CompletionProvider;
+                var completionProvider = (language as IEmbeddedLanguageFeatures)
+                    ?
+                    .CompletionProvider;
                 if (completionProvider != null)
                 {
                     var count = context.Items.Count;

@@ -15891,11 +15891,13 @@ enum E {{ }}
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo
+                        .Symbol?
+                        .ToDisplayString(
+                            SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -16394,11 +16396,13 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo
+                        .Symbol?
+                        .ToDisplayString(
+                            SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -16688,11 +16692,13 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo
+                        .Symbol?
+                        .ToDisplayString(
+                            SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -22178,11 +22184,13 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo
+                        .Symbol?
+                        .ToDisplayString(
+                            SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)

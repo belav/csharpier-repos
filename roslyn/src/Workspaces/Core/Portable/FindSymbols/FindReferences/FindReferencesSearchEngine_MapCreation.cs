@@ -238,7 +238,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                         searchSymbol.ContainingAssembly
                                     );
                                     if (
-                                        symbolProject?.LanguageServices.GetService<ILanguageServiceReferenceFinder>() is
+                                        symbolProject
+                                            ?
+                                            .LanguageServices.GetService<ILanguageServiceReferenceFinder>() is
                                         { } service
                                     )
                                     {

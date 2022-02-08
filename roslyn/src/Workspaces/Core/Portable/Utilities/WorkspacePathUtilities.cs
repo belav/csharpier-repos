@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Utilities
         /// </summary>
         public static bool TypeNameMatchesDocumentName(Document document, string typeName) =>
             GetTypeNameFromDocumentName(document)
-                ?.Equals(typeName, StringComparison.OrdinalIgnoreCase) == true;
+                ?
+                .Equals(typeName, StringComparison.OrdinalIgnoreCase) == true;
 
         /// <summary>
         /// Standard way to get the display name from a SyntaxNode. If the display

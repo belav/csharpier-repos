@@ -68,9 +68,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 FieldInfo f
                   => f.CustomAttributes.Any(a => a.AttributeType == typeof(MaybeNullAttribute)),
                 PropertyInfo p
-                  => p.GetMethod?.ReturnParameter?.CustomAttributes?.Any(
-                      a => a.AttributeType == typeof(MaybeNullAttribute)
-                  ) == true,
+                  => p.GetMethod?
+                      .ReturnParameter?
+                      .CustomAttributes?
+                      .Any(a => a.AttributeType == typeof(MaybeNullAttribute)) == true,
                 _ => false
             };
 

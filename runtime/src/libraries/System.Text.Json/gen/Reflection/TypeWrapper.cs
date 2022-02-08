@@ -185,11 +185,13 @@ namespace System.Text.Json.Reflection
         public override string Namespace =>
             IsArray
                 ? GetElementType().Namespace
-                : _typeSymbol.ContainingNamespace?.ToDisplayString(
-                      SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                          SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
-                      )
-                  )!;
+                : _typeSymbol
+                      .ContainingNamespace?
+                      .ToDisplayString(
+                          SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
+                              SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
+                          )
+                      )!;
 
         public override Type UnderlyingSystemType => this;
 

@@ -375,8 +375,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 // Partial types must match:
                 Assert.Equal(
                     expectedSemanticEdit.PartialType?.Invoke(newCompilation),
-                    actualSemanticEdit.PartialType
-                        ?.Resolve(newCompilation, ignoreAssemblyKey: true)
+                    actualSemanticEdit
+                        .PartialType?
+                        .Resolve(newCompilation, ignoreAssemblyKey: true)
                         .Symbol
                 );
 

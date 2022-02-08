@@ -39,8 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             _minBatchSize =
                 dependencies.Options.Extensions
                     .OfType<RelationalOptionsExtension>()
-                    .FirstOrDefault()
-                    ?.MinBatchSize ?? 4;
+                    .FirstOrDefault()?
+                    .MinBatchSize ?? 4;
             Dependencies = dependencies;
 
             if (dependencies.LoggingOptions.IsSensitiveDataLoggingEnabled)

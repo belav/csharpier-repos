@@ -241,8 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         document = documentSource.CreateDocument(entry);
 
                         var propertyName = entityType
-                            .FindDiscriminatorProperty()
-                            ?.GetJsonPropertyName();
+                            .FindDiscriminatorProperty()?
+                            .GetJsonPropertyName();
                         if (propertyName != null)
                         {
                             document[propertyName] = JToken.FromObject(
@@ -325,8 +325,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         document = documentSource.CreateDocument(entry);
 
                         var propertyName = entityType
-                            .FindDiscriminatorProperty()
-                            ?.GetJsonPropertyName();
+                            .FindDiscriminatorProperty()?
+                            .GetJsonPropertyName();
                         if (propertyName != null)
                         {
                             document[propertyName] = JToken.FromObject(

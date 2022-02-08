@@ -248,8 +248,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 && attrType.ContainingNamespace.ContainingNamespace?.Name == nameof(System.Runtime)
                 && attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace?.Name
                     == nameof(System)
-                && attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace.ContainingNamespace?.IsGlobalNamespace
-                    == true;
+                && attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace
+                    .ContainingNamespace?
+                    .IsGlobalNamespace == true;
         }
 
         private static void AddNonSubmissionDependentProjects(

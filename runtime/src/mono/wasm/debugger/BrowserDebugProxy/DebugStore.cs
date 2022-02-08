@@ -1293,9 +1293,11 @@ namespace Microsoft.WebAssembly.Diagnostics
             AssemblyInfo asm = assemblies.FirstOrDefault(
                 a => a.Name.Equals(request.Assembly, StringComparison.OrdinalIgnoreCase)
             );
-            SourceFile sourceFile = asm?.Sources?.SingleOrDefault(
-                s => s.DebuggerFileName.Equals(request.File, StringComparison.OrdinalIgnoreCase)
-            );
+            SourceFile sourceFile = asm?
+                .Sources?
+                .SingleOrDefault(
+                    s => s.DebuggerFileName.Equals(request.File, StringComparison.OrdinalIgnoreCase)
+                );
 
             if (sourceFile == null)
                 yield break;

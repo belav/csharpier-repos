@@ -1164,8 +1164,8 @@ namespace IOperationGenerator
         }
 
         private static List<string> GetPropertyOrder(Node node) =>
-            node.ChildrenOrder
-                ?.Split(",", StringSplitOptions.RemoveEmptyEntries)
+            node.ChildrenOrder?
+                .Split(",", StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
                 .ToList() ?? new List<string>();
 

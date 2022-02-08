@@ -284,10 +284,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 object sender,
                 TextContentChangedEventArgs e
             ) =>
-                _documentTracker.NonRoslynBufferTextChanged?.Invoke(
-                    _documentTracker,
-                    EventArgs.Empty
-                );
+                _documentTracker
+                    .NonRoslynBufferTextChanged?
+                    .Invoke(_documentTracker, EventArgs.Empty);
 
             /// <summary>
             /// Returns the current DocumentId for this window frame. Care must be made with this value, since "current" could change asynchronously as the document

@@ -66,7 +66,8 @@ namespace System.Diagnostics
             );
             // Enums in attribute constructors are boxed as ints, so cast to int? first.
             return (DebuggerBrowsableState?)(int?)debuggerBrowsableAttribute
-                ?.ConstructorArguments.Single()
+                ?
+                .ConstructorArguments.Single()
                 .Value;
         }
 

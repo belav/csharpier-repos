@@ -30,8 +30,8 @@ public class Project : IDisposable
         get
         {
             var testLogFolder = typeof(Project).Assembly
-                .GetCustomAttribute<TestFrameworkFileLoggerAttribute>()
-                ?.BaseDirectory;
+                .GetCustomAttribute<TestFrameworkFileLoggerAttribute>()?
+                .BaseDirectory;
             if (!string.IsNullOrEmpty(testLogFolder))
             {
                 return testLogFolder;

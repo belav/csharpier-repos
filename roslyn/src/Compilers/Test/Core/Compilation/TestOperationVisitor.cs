@@ -1485,9 +1485,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     break;
             }
 
-            var designation = (
-                operation.Syntax as CSharp.Syntax.RecursivePatternSyntax
-            )?.Designation;
+            var designation = (operation.Syntax as CSharp.Syntax.RecursivePatternSyntax)
+                ?
+                .Designation;
             if (designation.IsKind(CSharp.SyntaxKind.SingleVariableDesignation))
             {
                 Assert.NotNull(operation.DeclaredSymbol);

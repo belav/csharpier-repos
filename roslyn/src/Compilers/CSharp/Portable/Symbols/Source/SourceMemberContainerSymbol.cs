@@ -1716,8 +1716,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 RoslynDebug.AssertOrFailFast(forDiagnostics);
                 RoslynDebug.AssertOrFailFast(
                     Volatile
-                        .Read(ref _lazyTypeMembers)
-                        ?.Values.Any(types => types.Contains(t => t == (object)type)) == true
+                        .Read(ref _lazyTypeMembers)?
+                        .Values.Any(types => types.Contains(t => t == (object)type)) == true
                 );
                 return;
             }
@@ -4413,8 +4413,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            ParameterListSyntax? paramList =
-                declaredMembersAndInitializers.RecordDeclarationWithParameters?.ParameterList;
+            ParameterListSyntax? paramList = declaredMembersAndInitializers
+                .RecordDeclarationWithParameters?
+                .ParameterList;
             var memberSignatures = s_duplicateRecordMemberSignatureDictionary.Allocate();
             var fieldsByName = PooledDictionary<string, Symbol>.GetInstance();
             var membersSoFar = builder.GetNonTypeMembers(declaredMembersAndInitializers);

@@ -313,11 +313,9 @@ namespace System.Net.Http
                     Debug.Assert(headerValuesCount > 0, "No values for header??");
                     if (headerValuesCount > 0)
                     {
-                        Encoding? valueEncoding =
-                            _pool.Settings._requestHeaderEncodingSelector?.Invoke(
-                                header.Key.Name,
-                                _currentRequest
-                            );
+                        Encoding? valueEncoding = _pool.Settings
+                            ._requestHeaderEncodingSelector?
+                            .Invoke(header.Key.Name, _currentRequest);
 
                         await WriteStringAsync(_headerValues[0], async, valueEncoding)
                             .ConfigureAwait(false);
@@ -364,10 +362,9 @@ namespace System.Net.Http
                     .ConfigureAwait(false);
                 await WriteTwoBytesAsync((byte)':', (byte)' ', async).ConfigureAwait(false);
 
-                Encoding? valueEncoding = _pool.Settings._requestHeaderEncodingSelector?.Invoke(
-                    HttpKnownHeaderNames.Cookie,
-                    _currentRequest
-                );
+                Encoding? valueEncoding = _pool.Settings
+                    ._requestHeaderEncodingSelector?
+                    .Invoke(HttpKnownHeaderNames.Cookie, _currentRequest);
                 await WriteStringAsync(cookiesFromContainer, async, valueEncoding)
                     .ConfigureAwait(false);
 
@@ -1365,11 +1362,9 @@ namespace System.Net.Http
             }
 
             Debug.Assert(response.RequestMessage != null);
-            Encoding? valueEncoding =
-                connection._pool.Settings._responseHeaderEncodingSelector?.Invoke(
-                    descriptor.Name,
-                    response.RequestMessage
-                );
+            Encoding? valueEncoding = connection._pool.Settings
+                ._responseHeaderEncodingSelector?
+                .Invoke(descriptor.Name, response.RequestMessage);
 
             // Note we ignore the return value from TryAddWithoutValidation. If the header can't be added, we silently drop it.
             ReadOnlySpan<byte> value = line.Slice(pos);

@@ -295,10 +295,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         {
                             if (
                                 workQueue.ContainsKey(dependingProjectId)
-                                && analyzerService?.ContainsDiagnostics(
-                                    Workspace,
-                                    dependingProjectId
-                                ) == true
+                                && analyzerService
+                                    ?
+                                    .ContainsDiagnostics(Workspace, dependingProjectId) == true
                             )
                             {
                                 return dependingProjectId;

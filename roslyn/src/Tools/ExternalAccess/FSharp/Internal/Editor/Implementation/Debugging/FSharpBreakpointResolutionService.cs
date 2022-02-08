@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.Implement
                 await _service
                     .ResolveBreakpointAsync(document, textSpan, cancellationToken)
                     .ConfigureAwait(false)
-            )?.UnderlyingObject;
+            )
+                ?
+                .UnderlyingObject;
 
         public async Task<IEnumerable<BreakpointResolutionResult>> ResolveBreakpointsAsync(
             Solution solution,

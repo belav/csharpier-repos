@@ -48,149 +48,149 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     (typeof(Level1), "OneToOne_Optional_Self1Id"),
                     e =>
-                        l1s.SingleOrDefault(
-                            l => l.Id == ((Level1)e)?.Id
-                        )?.OneToOne_Optional_Self1?.Id
+                        l1s.SingleOrDefault(l => l.Id == ((Level1)e)?.Id)?
+                            .OneToOne_Optional_Self1?
+                            .Id
                 },
                 {
                     (typeof(Level1), "OneToMany_Required_Self_Inverse1Id"),
                     e =>
-                        l1s.SingleOrDefault(
-                            l => l.Id == ((Level1)e)?.Id
-                        )?.OneToMany_Required_Self_Inverse1?.Id
+                        l1s.SingleOrDefault(l => l.Id == ((Level1)e)?.Id)?
+                            .OneToMany_Required_Self_Inverse1?
+                            .Id
                 },
                 {
                     (typeof(Level1), "OneToMany_Optional_Self_Inverse1Id"),
                     e =>
-                        l1s.SingleOrDefault(
-                            l => l.Id == ((Level1)e)?.Id
-                        )?.OneToMany_Optional_Self_Inverse1?.Id
+                        l1s.SingleOrDefault(l => l.Id == ((Level1)e)?.Id)?
+                            .OneToMany_Optional_Self_Inverse1?
+                            .Id
                 },
                 {
                     (typeof(Level2), "OneToOne_Optional_PK_Inverse2Id"),
                     e =>
-                        l2s.SingleOrDefault(
-                            l => l.Id == ((Level2)e)?.Id
-                        )?.OneToOne_Optional_PK_Inverse2?.Id
+                        l2s.SingleOrDefault(l => l.Id == ((Level2)e)?.Id)?
+                            .OneToOne_Optional_PK_Inverse2?
+                            .Id
                 },
                 {
                     (typeof(Level2), "OneToMany_Required_Inverse2Id"),
                     e =>
-                        l2s.SingleOrDefault(
-                            l => l.Id == ((Level2)e)?.Id
-                        )?.OneToMany_Required_Inverse2?.Id
+                        l2s.SingleOrDefault(l => l.Id == ((Level2)e)?.Id)?
+                            .OneToMany_Required_Inverse2?
+                            .Id
                 },
                 {
                     (typeof(Level2), "OneToMany_Optional_Inverse2Id"),
                     e =>
-                        l2s.SingleOrDefault(
-                            l => l.Id == ((Level2)e)?.Id
-                        )?.OneToMany_Optional_Inverse2?.Id
+                        l2s.SingleOrDefault(l => l.Id == ((Level2)e)?.Id)?
+                            .OneToMany_Optional_Inverse2?
+                            .Id
                 },
                 {
                     (typeof(Level2), "OneToOne_Optional_Self2Id"),
                     e =>
-                        l2s.SingleOrDefault(
-                            l => l.Id == ((Level2)e)?.Id
-                        )?.OneToOne_Optional_Self2?.Id
+                        l2s.SingleOrDefault(l => l.Id == ((Level2)e)?.Id)?
+                            .OneToOne_Optional_Self2?
+                            .Id
                 },
                 {
                     (typeof(Level2), "OneToMany_Required_Self_Inverse2Id"),
                     e =>
-                        l2s.SingleOrDefault(
-                            l => l.Id == ((Level2)e)?.Id
-                        )?.OneToMany_Required_Self_Inverse2?.Id
+                        l2s.SingleOrDefault(l => l.Id == ((Level2)e)?.Id)?
+                            .OneToMany_Required_Self_Inverse2?
+                            .Id
                 },
                 {
                     (typeof(Level2), "OneToMany_Optional_Self_Inverse2Id"),
                     e =>
-                        l2s.SingleOrDefault(
-                            l => l.Id == ((Level2)e)?.Id
-                        )?.OneToMany_Optional_Self_Inverse2?.Id
+                        l2s.SingleOrDefault(l => l.Id == ((Level2)e)?.Id)?
+                            .OneToMany_Optional_Self_Inverse2?
+                            .Id
                 },
                 {
                     (typeof(Level3), "OneToOne_Optional_PK_Inverse3Id"),
                     e =>
-                        l3s.SingleOrDefault(
-                            l => l.Id == ((Level3)e)?.Id
-                        )?.OneToOne_Optional_PK_Inverse3?.Id
+                        l3s.SingleOrDefault(l => l.Id == ((Level3)e)?.Id)?
+                            .OneToOne_Optional_PK_Inverse3?
+                            .Id
                 },
                 {
                     (typeof(Level3), "OneToMany_Required_Inverse3Id"),
                     e =>
-                        l3s.SingleOrDefault(
-                            l => l.Id == ((Level3)e)?.Id
-                        )?.OneToMany_Required_Inverse3?.Id
+                        l3s.SingleOrDefault(l => l.Id == ((Level3)e)?.Id)?
+                            .OneToMany_Required_Inverse3?
+                            .Id
                 },
                 {
                     (typeof(Level3), "OneToMany_Optional_Inverse3Id"),
                     e =>
-                        l3s.SingleOrDefault(
-                            l => l.Id == ((Level3)e)?.Id
-                        )?.OneToMany_Optional_Inverse3?.Id
+                        l3s.SingleOrDefault(l => l.Id == ((Level3)e)?.Id)?
+                            .OneToMany_Optional_Inverse3?
+                            .Id
                 },
                 {
                     (typeof(Level3), "OneToOne_Optional_Self3Id"),
                     e =>
-                        l3s.SingleOrDefault(
-                            l => l.Id == ((Level3)e)?.Id
-                        )?.OneToOne_Optional_Self3?.Id
+                        l3s.SingleOrDefault(l => l.Id == ((Level3)e)?.Id)?
+                            .OneToOne_Optional_Self3?
+                            .Id
                 },
                 {
                     (typeof(Level3), "OneToMany_Required_Self_Inverse3Id"),
                     e =>
-                        l3s.SingleOrDefault(
-                            l => l.Id == ((Level3)e)?.Id
-                        )?.OneToMany_Required_Self_Inverse3?.Id
+                        l3s.SingleOrDefault(l => l.Id == ((Level3)e)?.Id)?
+                            .OneToMany_Required_Self_Inverse3?
+                            .Id
                 },
                 {
                     (typeof(Level3), "OneToMany_Optional_Self_Inverse3Id"),
                     e =>
-                        l3s.SingleOrDefault(
-                            l => l.Id == ((Level3)e)?.Id
-                        )?.OneToMany_Optional_Self_Inverse3?.Id
+                        l3s.SingleOrDefault(l => l.Id == ((Level3)e)?.Id)?
+                            .OneToMany_Optional_Self_Inverse3?
+                            .Id
                 },
                 {
                     (typeof(Level4), "OneToOne_Optional_PK_Inverse4Id"),
                     e =>
-                        l4s.SingleOrDefault(
-                            l => l.Id == ((Level4)e)?.Id
-                        )?.OneToOne_Optional_PK_Inverse4?.Id
+                        l4s.SingleOrDefault(l => l.Id == ((Level4)e)?.Id)?
+                            .OneToOne_Optional_PK_Inverse4?
+                            .Id
                 },
                 {
                     (typeof(Level4), "OneToMany_Required_Inverse4Id"),
                     e =>
-                        l4s.SingleOrDefault(
-                            l => l.Id == ((Level4)e)?.Id
-                        )?.OneToMany_Required_Inverse4?.Id
+                        l4s.SingleOrDefault(l => l.Id == ((Level4)e)?.Id)?
+                            .OneToMany_Required_Inverse4?
+                            .Id
                 },
                 {
                     (typeof(Level4), "OneToMany_Optional_Inverse4Id"),
                     e =>
-                        l4s.SingleOrDefault(
-                            l => l.Id == ((Level4)e)?.Id
-                        )?.OneToMany_Optional_Inverse4?.Id
+                        l4s.SingleOrDefault(l => l.Id == ((Level4)e)?.Id)?
+                            .OneToMany_Optional_Inverse4?
+                            .Id
                 },
                 {
                     (typeof(Level4), "OneToOne_Optional_Self4Id"),
                     e =>
-                        l4s.SingleOrDefault(
-                            l => l.Id == ((Level4)e)?.Id
-                        )?.OneToOne_Optional_Self4?.Id
+                        l4s.SingleOrDefault(l => l.Id == ((Level4)e)?.Id)?
+                            .OneToOne_Optional_Self4?
+                            .Id
                 },
                 {
                     (typeof(Level4), "OneToMany_Required_Self_Inverse4Id"),
                     e =>
-                        l4s.SingleOrDefault(
-                            l => l.Id == ((Level4)e)?.Id
-                        )?.OneToMany_Required_Self_Inverse4?.Id
+                        l4s.SingleOrDefault(l => l.Id == ((Level4)e)?.Id)?
+                            .OneToMany_Required_Self_Inverse4?
+                            .Id
                 },
                 {
                     (typeof(Level4), "OneToMany_Optional_Self_Inverse4Id"),
                     e =>
-                        l4s.SingleOrDefault(
-                            l => l.Id == ((Level4)e)?.Id
-                        )?.OneToMany_Optional_Self_Inverse4?.Id
+                        l4s.SingleOrDefault(l => l.Id == ((Level4)e)?.Id)?
+                            .OneToMany_Optional_Self_Inverse4?
+                            .Id
                 },
                 {
                     (typeof(InheritanceBase1), "InheritanceBase2Id"),

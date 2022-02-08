@@ -82,10 +82,12 @@ namespace System.ComponentModel
                             "System.ComponentModel.TypeDescriptor, System.ComponentModel.TypeConverter",
                             throwOnError: false
                         );
-                        MethodInfo? mi = typeDescriptorType?.GetMethod(
-                            "ConvertFromInvariantString",
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        );
+                        MethodInfo? mi = typeDescriptorType
+                            ?
+                            .GetMethod(
+                                "ConvertFromInvariantString",
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            );
                         Volatile.Write(
                             ref s_convertFromInvariantString,
                             mi == null

@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 .Where(
                     codefix =>
                         codefix
-                            .GetFixAllProvider()
-                            ?.GetSupportedFixAllScopes()
-                            ?.Contains(FixAllScope.Solution) == true
+                            .GetFixAllProvider()?
+                            .GetSupportedFixAllScopes()?
+                            .Contains(FixAllScope.Solution) == true
                 )
                 .SelectMany(
                     codefix =>

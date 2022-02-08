@@ -16,8 +16,8 @@ namespace System.Globalization.Tests
             if (globalizationMode != null)
             {
                 MethodInfo methodInfo = globalizationMode
-                    .GetProperty("UseNls", BindingFlags.NonPublic | BindingFlags.Static)
-                    ?.GetMethod;
+                    .GetProperty("UseNls", BindingFlags.NonPublic | BindingFlags.Static)?
+                    .GetMethod;
                 if (methodInfo != null)
                 {
                     Assert.True((bool)methodInfo.Invoke(null, null));

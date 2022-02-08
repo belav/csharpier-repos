@@ -183,14 +183,16 @@ public class Http3RequestTests : LoggedTest
                     return;
                 }
 
-                _loggerProvider._scopeProvider?.ForEachScope(
-                    (scopeObject, loggerPovider) =>
-                    {
-                        loggerPovider.LogScope ??=
-                            scopeObject as IReadOnlyList<KeyValuePair<string, object>>;
-                    },
-                    _loggerProvider
-                );
+                _loggerProvider
+                    ._scopeProvider?
+                    .ForEachScope(
+                        (scopeObject, loggerPovider) =>
+                        {
+                            loggerPovider.LogScope ??=
+                                scopeObject as IReadOnlyList<KeyValuePair<string, object>>;
+                        },
+                        _loggerProvider
+                    );
             }
         }
     }

@@ -1173,9 +1173,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         );
                     }
                     else if (
-                        block.EnclosingRegion.EnclosingRegion?.EnclosingRegion.CaptureIds.Contains(
-                            id
-                        ) ?? false
+                        block.EnclosingRegion
+                            .EnclosingRegion?
+                            .EnclosingRegion.CaptureIds.Contains(id) ?? false
                     )
                     {
                         AssertTrueWithGraph(
@@ -1587,9 +1587,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 case CSharp.SyntaxKind.ObjectCreationExpression:
                                 case CSharp.SyntaxKind.ImplicitObjectCreationExpression:
                                     if (
-                                        (
-                                            (CSharp.Syntax.BaseObjectCreationExpressionSyntax)syntax
-                                        ).Initializer?.Expressions.Any() == true
+                                        ((CSharp.Syntax.BaseObjectCreationExpressionSyntax)syntax)
+                                            .Initializer?
+                                            .Expressions.Any() == true
                                     )
                                     {
                                         return true;

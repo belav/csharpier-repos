@@ -18,8 +18,8 @@ namespace System.Runtime.InteropServices
                 if (s_frameworkDescription == null)
                 {
                     ReadOnlySpan<char> versionString = typeof(object).Assembly
-                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                        ?.InformationalVersion;
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+                        .InformationalVersion;
 
                     // Strip the git hash if there is one
                     int plusIndex = versionString.IndexOf('+');

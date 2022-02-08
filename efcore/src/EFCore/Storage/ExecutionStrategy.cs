@@ -464,7 +464,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         (
                             (IDatabaseFacadeDependenciesAccessor)Dependencies.CurrentContext.Context.Database
                         ).Dependencies.TransactionManager as ITransactionEnlistmentManager
-                    )?.CurrentAmbientTransaction
+                    )
+                        ?
+                        .CurrentAmbientTransaction
                         is not null
                 )
             )

@@ -176,14 +176,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             )
             {
                 // Retarget by type code - primitive types are encoded in short form in an attribute signature:
-                return marshallingInfo?.WithTranslatedTypes<
-                    TypeSymbol,
-                    RetargetingSymbolTranslator
-                >(
-                    (type, translator) =>
-                        translator.Retarget(type, RetargetOptions.RetargetPrimitiveTypesByTypeCode),
-                    this
-                );
+                return marshallingInfo
+                    ?
+                    .WithTranslatedTypes<TypeSymbol, RetargetingSymbolTranslator>(
+                        (type, translator) =>
+                            translator.Retarget(
+                                type,
+                                RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                            ),
+                        this
+                    );
             }
 
             public TypeSymbol Retarget(TypeSymbol symbol, RetargetOptions options)

@@ -321,9 +321,11 @@ namespace System.Net.Http.Functional.Tests
                 // If credit > 90% of the maximum window, we are safe to assume we reached the max window.
                 // We should not receive any more RTT PING's after this point
                 int maxWindowCreditThreshold = (int)(0.9 * maxWindowForPingStopValidation);
-                output?.WriteLine(
-                    $"maxWindowCreditThreshold: {maxWindowCreditThreshold} maxWindowForPingStopValidation: {maxWindowForPingStopValidation}"
-                );
+                output
+                    ?
+                    .WriteLine(
+                        $"maxWindowCreditThreshold: {maxWindowCreditThreshold} maxWindowForPingStopValidation: {maxWindowForPingStopValidation}"
+                    );
 
                 try
                 {
@@ -361,9 +363,11 @@ namespace System.Net.Http.Functional.Tests
                             maxCredit = Math.Max(currentCredit, maxCredit); // Detect if client grows the window
                             creditReceivedSemaphore.Release();
 
-                            output?.WriteLine(
-                                $"UpdateSize:{windowUpdateFrame.UpdateSize} currentCredit:{currentCredit} MaxCredit: {maxCredit}"
-                            );
+                            output
+                                ?
+                                .WriteLine(
+                                    $"UpdateSize:{windowUpdateFrame.UpdateSize} currentCredit:{currentCredit} MaxCredit: {maxCredit}"
+                                );
                         }
                         else if (frame is not null)
                         {

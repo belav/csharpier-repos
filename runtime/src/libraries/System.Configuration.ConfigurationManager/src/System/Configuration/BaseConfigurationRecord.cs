@@ -2334,11 +2334,9 @@ namespace System.Configuration
                                 }
 
                                 factoryRecord =
-                                    parentFactoryRecord?.CloneSectionGroup(
-                                        typeName,
-                                        xmlUtil.Filename,
-                                        lineNumber
-                                    )
+                                    parentFactoryRecord
+                                        ?
+                                        .CloneSectionGroup(typeName, xmlUtil.Filename, lineNumber)
                                     ?? new FactoryRecord(
                                         configKey,
                                         parentConfigKey,

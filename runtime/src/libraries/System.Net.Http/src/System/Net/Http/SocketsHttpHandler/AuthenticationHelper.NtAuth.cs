@@ -226,10 +226,9 @@ namespace System.Net.Http
                             );
                         }
 
-                        ChannelBinding? channelBinding =
-                            connection.TransportContext?.GetChannelBinding(
-                                ChannelBindingKind.Endpoint
-                            );
+                        ChannelBinding? channelBinding = connection
+                            .TransportContext?
+                            .GetChannelBinding(ChannelBindingKind.Endpoint);
                         NTAuthentication authContext = new NTAuthentication(
                             isServer: false,
                             challenge.SchemeName,

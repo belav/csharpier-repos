@@ -126,8 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             if (
                 entityType.Model
-                    .FindAnnotation(CoreAnnotationNames.InverseNavigationCandidates)
-                    ?.Value
+                    .FindAnnotation(CoreAnnotationNames.InverseNavigationCandidates)?
+                    .Value
                     is not Dictionary<Type, SortedSet<Type>> inverseCandidatesLookup
                 || !inverseCandidatesLookup.TryGetValue(
                     entityType.ClrType,
@@ -226,9 +226,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 return false;
             }
 
-            var configurationType = ((Model)model).Configuration?.GetConfigurationType(
-                propertyInfo.PropertyType
-            );
+            var configurationType = ((Model)model)
+                .Configuration?
+                .GetConfigurationType(propertyInfo.PropertyType);
             return configurationType == TypeConfigurationType.Property
                 || (
                     configurationType == null

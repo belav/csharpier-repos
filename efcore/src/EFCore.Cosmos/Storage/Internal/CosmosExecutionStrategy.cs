@@ -147,8 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     var response = (HttpWebResponse)webException.Response!;
 
                     var delayString = response.Headers
-                        .GetValues("x-ms-retry-after-ms")
-                        ?.FirstOrDefault();
+                        .GetValues("x-ms-retry-after-ms")?
+                        .FirstOrDefault();
                     if (TryParseMsRetryAfter(delayString, out var delay))
                     {
                         return delay;

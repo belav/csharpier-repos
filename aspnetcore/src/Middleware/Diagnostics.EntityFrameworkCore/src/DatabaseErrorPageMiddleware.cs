@@ -197,19 +197,23 @@ public class DatabaseErrorPageMiddleware
 
             case DbContextErrorEventData contextErrorEventData:
             {
-                _localDiagnostic.Value?.Hold(
-                    contextErrorEventData.Exception,
-                    contextErrorEventData.Context!.GetType()
-                );
+                _localDiagnostic
+                    .Value?
+                    .Hold(
+                        contextErrorEventData.Exception,
+                        contextErrorEventData.Context!.GetType()
+                    );
 
                 break;
             }
             case DbContextTypeErrorEventData contextTypeErrorEventData:
             {
-                _localDiagnostic.Value?.Hold(
-                    contextTypeErrorEventData.Exception,
-                    contextTypeErrorEventData.ContextType
-                );
+                _localDiagnostic
+                    .Value?
+                    .Hold(
+                        contextTypeErrorEventData.Exception,
+                        contextTypeErrorEventData.ContextType
+                    );
 
                 break;
             }

@@ -3361,11 +3361,13 @@ namespace Microsoft.Cci
                             ref mvidStringFixup
                         );
 
-                        nativePdbWriterOpt?.SerializeDebugInfo(
-                            body,
-                            localSignatureHandleOpt,
-                            customDebugInfoWriter
-                        );
+                        nativePdbWriterOpt
+                            ?
+                            .SerializeDebugInfo(
+                                body,
+                                localSignatureHandleOpt,
+                                customDebugInfoWriter
+                            );
                     }
                     else
                     {

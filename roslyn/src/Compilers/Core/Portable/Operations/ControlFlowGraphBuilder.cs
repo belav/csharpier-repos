@@ -4026,8 +4026,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             Debug.Assert(ITypeSymbolHelpers.IsNullableType(valueType));
 
             var method = (IMethodSymbol?)_compilation
-                .CommonGetSpecialTypeMember(nullableMember)
-                ?.GetISymbol();
+                .CommonGetSpecialTypeMember(nullableMember)?
+                .GetISymbol();
 
             if (method != null)
             {
@@ -5082,13 +5082,13 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             ? (IMethodSymbol?)_compilation
                                   .CommonGetWellKnownTypeMember(
                                       WellKnownMember.System_IAsyncDisposable__DisposeAsync
-                                  )
-                                  ?.GetISymbol()
+                                  )?
+                                  .GetISymbol()
                             : (IMethodSymbol?)_compilation
                                   .CommonGetSpecialTypeMember(
                                       SpecialMember.System_IDisposable__Dispose
-                                  )
-                                  ?.GetISymbol()
+                                  )?
+                                  .GetISymbol()
                     );
 
                 if (method != null)
@@ -5149,8 +5149,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 iDisposable.SpecialType == SpecialType.System_IDisposable
                     || iDisposable.Equals(
                         _compilation
-                            .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                            ?.GetITypeSymbol()
+                            .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)?
+                            .GetITypeSymbol()
                     )
             );
             return new ConversionOperation(
@@ -5231,16 +5231,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             PopStackFrame(frame);
 
             var enterMethod = (IMethodSymbol?)_compilation
-                .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Enter2)
-                ?.GetISymbol();
+                .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Enter2)?
+                .GetISymbol();
             bool legacyMode = (enterMethod == null);
 
             if (legacyMode)
             {
                 Debug.Assert(lockStatement.LockTakenSymbol == null);
                 enterMethod = (IMethodSymbol?)_compilation
-                    .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Enter)
-                    ?.GetISymbol();
+                    .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Enter)?
+                    .GetISymbol();
 
                 // Monitor.Enter($lock);
                 if (enterMethod == null)
@@ -5362,8 +5362,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             // Monitor.Exit($lock);
             var exitMethod = (IMethodSymbol?)_compilation
-                .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Exit)
-                ?.GetISymbol();
+                .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Exit)?
+                .GetISymbol();
             lockedValue = OperationCloner.CloneOperation(lockedValue);
 
             if (exitMethod == null)
@@ -5856,8 +5856,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 );
 
                 var method = (IMethodSymbol?)_compilation
-                    .CommonGetWellKnownTypeMember(helper)
-                    ?.GetISymbol();
+                    .CommonGetWellKnownTypeMember(helper)?
+                    .GetISymbol();
                 int parametersCount = WellKnownMembers.GetDescriptor(helper).ParametersCount;
 
                 if (method is null)
@@ -8404,9 +8404,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 #if DEBUG
             Debug.Assert(_evalStack[maxStackDepth + 1].frameOpt != null);
             if (
-                _currentInterpolatedStringHandlerArgumentContext?.ApplicableCreationOperations.Contains(
-                    operation
-                ) == true
+                _currentInterpolatedStringHandlerArgumentContext
+                    ?
+                    .ApplicableCreationOperations.Contains(operation) == true
             )
             {
                 for (
@@ -9953,7 +9953,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 ?? _compilation.CommonGetWellKnownTypeMember(
                     WellKnownMember.System_InvalidOperationException__ctor
                 )
-            )?.GetISymbol();
+            )
+                ?
+                .GetISymbol();
             var makeException =
                 (matchFailureCtor is null)
                     ? MakeInvalidOperation(

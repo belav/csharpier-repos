@@ -73,8 +73,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 for (var i = 0; i < _values.Length; i++)
                 {
                     var getter = obj.GetType()
-                        .GetAnyProperty(Properties[i].Name)
-                        ?.FindGetterProperty();
+                        .GetAnyProperty(Properties[i].Name)?
+                        .FindGetterProperty();
                     if (getter != null)
                     {
                         SetValue(i, getter.GetValue(obj));

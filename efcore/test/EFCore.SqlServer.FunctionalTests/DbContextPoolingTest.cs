@@ -1484,17 +1484,19 @@ namespace Microsoft.EntityFrameworkCore
                 var currentElapsed = elapsed - lastElapsed;
                 lastElapsed = elapsed;
 
-                _testOutputHelper?.WriteLine(
-                    $"[{DateTime.Now:HH:mm:ss.fff}] Requests: {_requests}, "
-                        + $"RPS: {Math.Round(currentRequests / currentElapsed.TotalSeconds)}"
-                );
+                _testOutputHelper
+                    ?
+                    .WriteLine(
+                        $"[{DateTime.Now:HH:mm:ss.fff}] Requests: {_requests}, "
+                            + $"RPS: {Math.Round(currentRequests / currentElapsed.TotalSeconds)}"
+                    );
 
                 if (elapsed > _duration)
                 {
                     _testOutputHelper?.WriteLine(message: "");
-                    _testOutputHelper?.WriteLine(
-                        $"Average RPS: {Math.Round(_requests / elapsed.TotalSeconds)}"
-                    );
+                    _testOutputHelper
+                        ?
+                        .WriteLine($"Average RPS: {Math.Round(_requests / elapsed.TotalSeconds)}");
 
                     _stopwatch.Stop();
                 }

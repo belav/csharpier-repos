@@ -213,10 +213,12 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             if (
                 kinds.Contains(declaredSymbolInfo.Kind)
                 && nameMatcher.AddMatches(declaredSymbolInfo.Name, ref nameMatches.AsRef())
-                && containerMatcher?.AddMatches(
-                    declaredSymbolInfo.FullyQualifiedContainerName,
-                    ref containerMatches.AsRef()
-                ) != false
+                && containerMatcher
+                    ?
+                    .AddMatches(
+                        declaredSymbolInfo.FullyQualifiedContainerName,
+                        ref containerMatches.AsRef()
+                    ) != false
             )
             {
                 // See if we have a match in a linked file.  If so, see if we have the same match in

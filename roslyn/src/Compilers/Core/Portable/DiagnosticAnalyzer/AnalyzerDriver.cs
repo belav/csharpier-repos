@@ -490,8 +490,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 SyntaxTree,
                                 ImmutableHashSet<DiagnosticAnalyzer>
                             >();
-                        _lazyGeneratedCodeAttribute =
-                            analyzerExecutor.Compilation?.GetTypeByMetadataName(
+                        _lazyGeneratedCodeAttribute = analyzerExecutor
+                            .Compilation?
+                            .GetTypeByMetadataName(
                                 "System.CodeDom.Compiler.GeneratedCodeAttribute"
                             );
 
@@ -1002,11 +1003,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         processedAnalyzers?.Add(analyzer);
                     }
 
-                    analysisState?.MarkSyntaxAnalysisCompleteForUnprocessedAnalyzers(
-                        file,
-                        analysisScope,
-                        processedAnalyzers!
-                    );
+                    analysisState
+                        ?
+                        .MarkSyntaxAnalysisCompleteForUnprocessedAnalyzers(
+                            file,
+                            analysisScope,
+                            processedAnalyzers!
+                        );
                 }
                 finally
                 {
@@ -1056,11 +1059,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         processedAnalyzers?.Add(analyzer);
                     }
 
-                    analysisState?.MarkSyntaxAnalysisCompleteForUnprocessedAnalyzers(
-                        file,
-                        analysisScope,
-                        processedAnalyzers!
-                    );
+                    analysisState
+                        ?
+                        .MarkSyntaxAnalysisCompleteForUnprocessedAnalyzers(
+                            file,
+                            analysisScope,
+                            processedAnalyzers!
+                        );
                 }
                 finally
                 {
@@ -2397,11 +2402,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     }
                 }
 
-                analysisState?.MarkSymbolCompleteForUnprocessedAnalyzers(
-                    symbol,
-                    analysisScope,
-                    processedAnalyzers!
-                );
+                analysisState
+                    ?
+                    .MarkSymbolCompleteForUnprocessedAnalyzers(
+                        symbol,
+                        analysisScope,
+                        processedAnalyzers!
+                    );
                 return success;
             }
             finally
@@ -2593,11 +2600,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     processedAnalyzers?.Add(analyzer);
                 }
 
-                analysisState?.MarkEventCompleteForUnprocessedAnalyzers(
-                    completedEvent,
-                    analysisScope,
-                    processedAnalyzers!
-                );
+                analysisState
+                    ?
+                    .MarkEventCompleteForUnprocessedAnalyzers(
+                        completedEvent,
+                        analysisScope,
+                        processedAnalyzers!
+                    );
                 return success;
             }
             finally
@@ -2695,11 +2704,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     processedAnalyzers?.Add(analyzer);
                 }
 
-                analysisState?.MarkEventCompleteForUnprocessedAnalyzers(
-                    compilationEvent,
-                    analysisScope,
-                    processedAnalyzers!
-                );
+                analysisState
+                    ?
+                    .MarkEventCompleteForUnprocessedAnalyzers(
+                        compilationEvent,
+                        analysisScope,
+                        processedAnalyzers!
+                    );
                 return success;
             }
             finally

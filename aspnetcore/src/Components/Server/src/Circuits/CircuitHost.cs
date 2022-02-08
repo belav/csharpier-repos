@@ -141,10 +141,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 {
                     // Report errors asynchronously. InitializeAsync is designed not to throw.
                     Log.InitializationFailed(_logger, ex);
-                    UnhandledException?.Invoke(
-                        this,
-                        new UnhandledExceptionEventArgs(ex, isTerminating: false)
-                    );
+                    UnhandledException
+                        ?
+                        .Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
                     await TryNotifyClientErrorAsync(Client, GetClientErrorMessage(ex), ex);
                 }
             }
@@ -434,10 +433,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 Client,
                 GetClientErrorMessage(ex, "Interop call failed.")
             );
-            UnhandledException?.Invoke(
-                this,
-                new UnhandledExceptionEventArgs(ex, isTerminating: false)
-            );
+            UnhandledException
+                ?
+                .Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
         }
     }
 
@@ -476,10 +474,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 Client,
                 GetClientErrorMessage(ex, "Invalid interop arguments.")
             );
-            UnhandledException?.Invoke(
-                this,
-                new UnhandledExceptionEventArgs(ex, isTerminating: false)
-            );
+            UnhandledException
+                ?
+                .Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
         }
     }
 
@@ -509,10 +506,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 Client,
                 GetClientErrorMessage(ex, "Invalid byte array.")
             );
-            UnhandledException?.Invoke(
-                this,
-                new UnhandledExceptionEventArgs(ex, isTerminating: false)
-            );
+            UnhandledException
+                ?
+                .Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
         }
     }
 
@@ -552,10 +548,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 Client,
                 GetClientErrorMessage(ex, "Invalid chunk supplied to stream.")
             );
-            UnhandledException?.Invoke(
-                this,
-                new UnhandledExceptionEventArgs(ex, isTerminating: false)
-            );
+            UnhandledException
+                ?
+                .Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
             return false;
         }
     }
@@ -584,10 +579,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 Client,
                 GetClientErrorMessage(ex, "Unable to send .NET stream.")
             );
-            UnhandledException?.Invoke(
-                this,
-                new UnhandledExceptionEventArgs(ex, isTerminating: false)
-            );
+            UnhandledException
+                ?
+                .Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
             return 0;
         }
     }
@@ -629,10 +623,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 Client,
                 GetClientErrorMessage(ex, "Unable to locate .NET stream.")
             );
-            UnhandledException?.Invoke(
-                this,
-                new UnhandledExceptionEventArgs(ex, isTerminating: false)
-            );
+            UnhandledException
+                ?
+                .Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
             return default;
         }
     }
@@ -675,10 +668,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 Client,
                 GetClientErrorMessage(nex, "Location change failed.")
             );
-            UnhandledException?.Invoke(
-                this,
-                new UnhandledExceptionEventArgs(nex, isTerminating: false)
-            );
+            UnhandledException
+                ?
+                .Invoke(this, new UnhandledExceptionEventArgs(nex, isTerminating: false));
         }
         catch (Exception ex)
         {
@@ -689,10 +681,9 @@ internal partial class CircuitHost : IAsyncDisposable
                 Client,
                 GetClientErrorMessage(ex, $"Location change to '{uri}' failed.")
             );
-            UnhandledException?.Invoke(
-                this,
-                new UnhandledExceptionEventArgs(ex, isTerminating: false)
-            );
+            UnhandledException
+                ?
+                .Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
         }
     }
 

@@ -50,8 +50,12 @@ namespace DebuggerTests
                     if (
                         args?["type"]?.Value<string>() == "debug"
                         && args?["args"]?.Type == JTokenType.Array
-                        && args?["args"]?[0]?["value"]?.Value<string>()
-                            ?.StartsWith("mono_wasm_debug_event_raised:") == true
+                        && args?
+                            ["args"]?
+                            [0]?
+                            ["value"]?
+                            .Value<string>()?
+                            .StartsWith("mono_wasm_debug_event_raised:") == true
                     )
                     {
                         tcs.SetResult(true);

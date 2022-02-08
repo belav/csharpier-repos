@@ -103,11 +103,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 // handle that case gracefully
                 var notificationService =
                     activeSession.Workspace.Services.GetService<INotificationService>();
-                notificationService?.SendNotification(
-                    ex.Message,
-                    title: EditorFeaturesResources.Rename,
-                    severity: NotificationSeverity.Error
-                );
+                notificationService
+                    ?
+                    .SendNotification(
+                        ex.Message,
+                        title: EditorFeaturesResources.Rename,
+                        severity: NotificationSeverity.Error
+                    );
             }
             catch (Exception ex) when (FatalError.ReportAndCatch(ex))
             {

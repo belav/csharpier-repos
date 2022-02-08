@@ -353,11 +353,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             InstantiationBinding? instantiationBinding,
             RuntimeEntityType entityType
         ) =>
-            instantiationBinding?.With(
-                instantiationBinding.ParameterBindings
-                    .Select(binding => Create(binding, entityType))
-                    .ToList()
-            );
+            instantiationBinding
+                ?
+                .With(
+                    instantiationBinding.ParameterBindings
+                        .Select(binding => Create(binding, entityType))
+                        .ToList()
+                );
 
         /// <summary>
         ///     Updates the entity type annotations that will be set on the read-only object.

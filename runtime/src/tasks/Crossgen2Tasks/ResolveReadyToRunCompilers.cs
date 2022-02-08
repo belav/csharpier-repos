@@ -66,9 +66,9 @@ namespace Microsoft.NET.Build.Tasks
 
             // Get the list of runtime identifiers that we support and can target
             ITaskItem targetingPack = GetNETCoreAppTargetingPack();
-            string supportedRuntimeIdentifiers = targetingPack?.GetMetadata(
-                MetadataKeys.RuntimePackRuntimeIdentifiers
-            );
+            string supportedRuntimeIdentifiers = targetingPack
+                ?
+                .GetMetadata(MetadataKeys.RuntimePackRuntimeIdentifiers);
 
             var runtimeGraph = new RuntimeGraphCache(this).GetRuntimeGraph(RuntimeGraphPath);
             var supportedRIDsList =

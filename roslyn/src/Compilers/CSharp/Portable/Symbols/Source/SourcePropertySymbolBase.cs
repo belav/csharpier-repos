@@ -1541,7 +1541,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     return (
                         (PropertyEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData
-                    )?.ObsoleteAttributeData;
+                    )
+                        ?
+                        .ObsoleteAttributeData;
                 }
 
                 return ObsoleteAttributeData.Uninitialized;

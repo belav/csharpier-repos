@@ -536,8 +536,8 @@ namespace Microsoft.EntityFrameworkCore
                         e.Name == nameof(ApplyConfiguration)
                         && e.ContainsGenericParameters
                         && e.GetParameters()
-                            .SingleOrDefault()
-                            ?.ParameterType.GetGenericTypeDefinition()
+                            .SingleOrDefault()?
+                            .ParameterType.GetGenericTypeDefinition()
                             == typeof(IEntityTypeConfiguration<>)
                 );
 

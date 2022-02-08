@@ -127,14 +127,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             if (
                 navigation
-                    .GetCollectionAccessor()
-                    ?.GetOrCreate(entry.Entity, forMaterialization: false)
+                    .GetCollectionAccessor()?
+                    .GetOrCreate(entry.Entity, forMaterialization: false)
                 is not INotifyCollectionChanged notifyingCollection
             )
             {
                 var collectionType = navigation
-                    .GetCollectionAccessor()
-                    ?.GetOrCreate(entry.Entity, forMaterialization: false)
+                    .GetCollectionAccessor()?
+                    .GetOrCreate(entry.Entity, forMaterialization: false)
                     .GetType()
                     .DisplayName(fullName: false);
                 throw new InvalidOperationException(

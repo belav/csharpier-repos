@@ -621,8 +621,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (
                 Metadata
-                    .FindEntityType(name)
-                    ?.GetConfigurationSource()
+                    .FindEntityType(name)?
+                    .GetConfigurationSource()
                     .OverridesStrictly(configurationSource) == true
             )
             {

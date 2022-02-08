@@ -165,9 +165,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isNullableFlowAnalysisWarning = ErrorFacts.NullableWarnings.Contains(id);
             if (isNullableFlowAnalysisWarning)
             {
-                Syntax.NullableContextState.State? warningsState = tree?.GetNullableContextState(
-                    position
-                ).WarningsState;
+                Syntax.NullableContextState.State? warningsState = tree?
+                    .GetNullableContextState(position)
+                    .WarningsState;
                 var nullableWarningsEnabled = warningsState switch
                 {
                     Syntax.NullableContextState.State.Enabled => true,

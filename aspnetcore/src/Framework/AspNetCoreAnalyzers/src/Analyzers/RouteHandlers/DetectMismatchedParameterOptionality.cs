@@ -59,8 +59,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                         parameter.IsOptional
                         || parameter.NullableAnnotation != NullableAnnotation.NotAnnotated;
                     var location = parameter.DeclaringSyntaxReferences
-                        .FirstOrDefault()
-                        ?.GetSyntax()
+                        .FirstOrDefault()?
+                        .GetSyntax()
                         .GetLocation();
                     var routeParamIsOptional = enumerator.CurrentQualifiers.IndexOf('?') > -1;
 
