@@ -54,6 +54,7 @@ class Test2
     class C0
     {
         public long F0;
+
         public C0(long f0)
         {
             F0 = f0;

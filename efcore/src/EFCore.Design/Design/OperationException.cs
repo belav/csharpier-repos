@@ -15,18 +15,13 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <summary>
         ///     Initializes a new instance of the <see cref="OperationException" /> class.
         /// </summary>
-        public OperationException()
-        {
-        }
+        public OperationException() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="OperationException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public OperationException(string message)
-            : base(message)
-        {
-        }
+        public OperationException(string message) : base(message) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="OperationException" /> class.
@@ -34,9 +29,7 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="message">The message that describes the error.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public OperationException(string message, Exception? innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized form.
@@ -44,8 +37,6 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="info">The serialization info.</param>
         /// <param name="context">The streaming context being used.</param>
         public OperationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

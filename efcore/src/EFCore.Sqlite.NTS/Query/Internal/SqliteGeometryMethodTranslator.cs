@@ -20,40 +20,197 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteGeometryMethodTranslator : IMethodCallTranslator
     {
-        private static readonly IDictionary<MethodInfo, string> _methodToFunctionName = new Dictionary<MethodInfo, string>
-        {
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.AsBinary), Type.EmptyTypes), "AsBinary" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.AsText), Type.EmptyTypes), "AsText" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Buffer), typeof(double)), "Buffer" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Buffer), typeof(double), typeof(int)), "Buffer" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Contains), typeof(Geometry)), "Contains" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.ConvexHull), Type.EmptyTypes), "ConvexHull" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Crosses), typeof(Geometry)), "Crosses" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.CoveredBy), typeof(Geometry)), "CoveredBy" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Covers), typeof(Geometry)), "Covers" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Difference), typeof(Geometry)), "Difference" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Disjoint), typeof(Geometry)), "Disjoint" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Distance), typeof(Geometry)), "Distance" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.EqualsTopologically), typeof(Geometry)), "Equals" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Intersection), typeof(Geometry)), "Intersection" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Intersects), typeof(Geometry)), "Intersects" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Overlaps), typeof(Geometry)), "Overlaps" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Relate), typeof(Geometry), typeof(string)), "Relate" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Reverse), Type.EmptyTypes), "ST_Reverse" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.SymmetricDifference), typeof(Geometry)), "SymDifference" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.ToBinary), Type.EmptyTypes), "AsBinary" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.ToText), Type.EmptyTypes), "AsText" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Touches), typeof(Geometry)), "Touches" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Union), Type.EmptyTypes), "UnaryUnion" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Union), typeof(Geometry)), "GUnion" },
-            { typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.Within), typeof(Geometry)), "Within" }
-        };
+        private static readonly IDictionary<MethodInfo, string> _methodToFunctionName =
+            new Dictionary<MethodInfo, string>
+            {
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.AsBinary),
+                        Type.EmptyTypes
+                    ),
+                    "AsBinary"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.AsText),
+                        Type.EmptyTypes
+                    ),
+                    "AsText"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Buffer),
+                        typeof(double)
+                    ),
+                    "Buffer"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Buffer),
+                        typeof(double),
+                        typeof(int)
+                    ),
+                    "Buffer"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Contains),
+                        typeof(Geometry)
+                    ),
+                    "Contains"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.ConvexHull),
+                        Type.EmptyTypes
+                    ),
+                    "ConvexHull"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Crosses),
+                        typeof(Geometry)
+                    ),
+                    "Crosses"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.CoveredBy),
+                        typeof(Geometry)
+                    ),
+                    "CoveredBy"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Covers),
+                        typeof(Geometry)
+                    ),
+                    "Covers"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Difference),
+                        typeof(Geometry)
+                    ),
+                    "Difference"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Disjoint),
+                        typeof(Geometry)
+                    ),
+                    "Disjoint"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Distance),
+                        typeof(Geometry)
+                    ),
+                    "Distance"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.EqualsTopologically),
+                        typeof(Geometry)
+                    ),
+                    "Equals"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Intersection),
+                        typeof(Geometry)
+                    ),
+                    "Intersection"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Intersects),
+                        typeof(Geometry)
+                    ),
+                    "Intersects"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Overlaps),
+                        typeof(Geometry)
+                    ),
+                    "Overlaps"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Relate),
+                        typeof(Geometry),
+                        typeof(string)
+                    ),
+                    "Relate"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Reverse),
+                        Type.EmptyTypes
+                    ),
+                    "ST_Reverse"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.SymmetricDifference),
+                        typeof(Geometry)
+                    ),
+                    "SymDifference"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.ToBinary),
+                        Type.EmptyTypes
+                    ),
+                    "AsBinary"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.ToText),
+                        Type.EmptyTypes
+                    ),
+                    "AsText"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Touches),
+                        typeof(Geometry)
+                    ),
+                    "Touches"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Union),
+                        Type.EmptyTypes
+                    ),
+                    "UnaryUnion"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Union),
+                        typeof(Geometry)
+                    ),
+                    "GUnion"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeMethod(
+                        nameof(Geometry.Within),
+                        typeof(Geometry)
+                    ),
+                    "Within"
+                }
+            };
 
-        private static readonly MethodInfo _getGeometryN = typeof(Geometry).GetRequiredRuntimeMethod(
-            nameof(Geometry.GetGeometryN), typeof(int));
+        private static readonly MethodInfo _getGeometryN =
+            typeof(Geometry).GetRequiredRuntimeMethod(nameof(Geometry.GetGeometryN), typeof(int));
 
-        private static readonly MethodInfo _isWithinDistance = typeof(Geometry).GetRequiredRuntimeMethod(
-            nameof(Geometry.IsWithinDistance), typeof(Geometry), typeof(double));
+        private static readonly MethodInfo _isWithinDistance =
+            typeof(Geometry).GetRequiredRuntimeMethod(
+                nameof(Geometry.IsWithinDistance),
+                typeof(Geometry),
+                typeof(double)
+            );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -78,7 +235,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             if (instance != null)
             {
@@ -93,7 +251,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         {
                             nullCheck = _sqlExpressionFactory.AndAlso(
                                 nullCheck,
-                                _sqlExpressionFactory.IsNotNull(argument));
+                                _sqlExpressionFactory.IsNotNull(argument)
+                            );
                         }
 
                         return _sqlExpressionFactory.Case(
@@ -106,9 +265,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                         finalArguments,
                                         nullable: false,
                                         finalArguments.Select(a => false),
-                                        method.ReturnType))
+                                        method.ReturnType
+                                    )
+                                )
                             },
-                            null);
+                            null
+                        );
                     }
 
                     return _sqlExpressionFactory.Function(
@@ -116,7 +278,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         finalArguments,
                         nullable: true,
                         finalArguments.Select(a => true),
-                        method.ReturnType);
+                        method.ReturnType
+                    );
                 }
 
                 if (Equals(method, _getGeometryN))
@@ -128,11 +291,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                             instance,
                             _sqlExpressionFactory.Add(
                                 arguments[0],
-                                _sqlExpressionFactory.Constant(1))
+                                _sqlExpressionFactory.Constant(1)
+                            )
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true },
-                        method.ReturnType);
+                        method.ReturnType
+                    );
                 }
 
                 if (Equals(method, _isWithinDistance))
@@ -143,8 +308,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                             new[] { instance, arguments[0] },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true, true },
-                            typeof(double)),
-                        arguments[1]);
+                            typeof(double)
+                        ),
+                        arguments[1]
+                    );
                 }
             }
 

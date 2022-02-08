@@ -37,9 +37,7 @@ public class TagHelperComponentPropertyActivatorTest
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
-        public void Init(TagHelperContext context)
-        {
-        }
+        public void Init(TagHelperContext context) { }
 
         public Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
@@ -52,8 +50,10 @@ public class TagHelperComponentPropertyActivatorTest
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = new ServiceCollection()
-            .AddSingleton<ITagHelperComponentPropertyActivator>(new TagHelperComponentPropertyActivator())
-            .BuildServiceProvider()
+                .AddSingleton<ITagHelperComponentPropertyActivator>(
+                    new TagHelperComponentPropertyActivator()
+                )
+                .BuildServiceProvider()
         };
 
         var viewContext = Mock.Of<ViewContext>(vc => vc.HttpContext == httpContext);

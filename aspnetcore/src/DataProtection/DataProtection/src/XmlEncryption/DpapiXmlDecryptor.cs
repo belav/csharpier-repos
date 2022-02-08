@@ -19,10 +19,7 @@ public sealed class DpapiXmlDecryptor : IXmlDecryptor
     /// <summary>
     /// Creates a new instance of a <see cref="DpapiXmlDecryptor"/>.
     /// </summary>
-    public DpapiXmlDecryptor()
-        : this(services: null)
-    {
-    }
+    public DpapiXmlDecryptor() : this(services: null) { }
 
     /// <summary>
     /// Creates a new instance of a <see cref="DpapiXmlDecryptor"/>.
@@ -56,7 +53,9 @@ public sealed class DpapiXmlDecryptor : IXmlDecryptor
             //   <value>{base64}</value>
             // </encryptedKey>
 
-            var protectedSecret = Convert.FromBase64String((string)encryptedElement.Element("value")!);
+            var protectedSecret = Convert.FromBase64String(
+                (string)encryptedElement.Element("value")!
+            );
             using (var secret = DpapiSecretSerializerHelper.UnprotectWithDpapi(protectedSecret))
             {
                 return secret.ToXElement();

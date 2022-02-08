@@ -11,9 +11,7 @@ namespace System.Reflection
     /// </summary>
     public abstract class DispatchProxy
     {
-        protected DispatchProxy()
-        {
-        }
+        protected DispatchProxy() { }
 
         /// <summary>
         /// Whenever any method on the generated proxy type is called, this method
@@ -33,8 +31,13 @@ namespace System.Reflection
         /// <returns>An object instance that implements <typeparamref name="T"/>.</returns>
         /// <exception cref="System.ArgumentException"><typeparamref name="T"/> is a class,
         /// or <typeparamref name="TProxy"/> is sealed or does not have a parameterless constructor</exception>
-        public static T Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TProxy>()
-            where TProxy : DispatchProxy
+        public static T Create<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                TProxy
+        >() where TProxy : DispatchProxy
         {
             return (T)DispatchProxyGenerator.CreateProxyInstance(typeof(TProxy), typeof(T));
         }

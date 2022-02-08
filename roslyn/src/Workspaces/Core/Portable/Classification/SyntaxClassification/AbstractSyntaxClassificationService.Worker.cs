@@ -21,8 +21,14 @@ namespace Microsoft.CodeAnalysis.Classification
             private readonly TextSpan _textSpan;
             private readonly ArrayBuilder<ClassifiedSpan> _list;
             private readonly CancellationToken _cancellationToken;
-            private readonly Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> _getNodeClassifiers;
-            private readonly Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> _getTokenClassifiers;
+            private readonly Func<
+                SyntaxNode,
+                ImmutableArray<ISyntaxClassifier>
+            > _getNodeClassifiers;
+            private readonly Func<
+                SyntaxToken,
+                ImmutableArray<ISyntaxClassifier>
+            > _getTokenClassifiers;
             private readonly HashSet<ClassifiedSpan> _set;
             private readonly Stack<SyntaxNodeOrToken> _pendingNodes;
             private readonly ClassificationOptions _options;
@@ -34,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
                 Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
                 ClassificationOptions options,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 _getNodeClassifiers = getNodeClassifiers;
                 _getTokenClassifiers = getTokenClassifiers;
@@ -57,9 +64,18 @@ namespace Microsoft.CodeAnalysis.Classification
                 Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
                 Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
                 ClassificationOptions options,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                var worker = new Worker(semanticModel, textSpan, list, getNodeClassifiers, getTokenClassifiers, options, cancellationToken);
+                var worker = new Worker(
+                    semanticModel,
+                    textSpan,
+                    list,
+                    getNodeClassifiers,
+                    getTokenClassifiers,
+                    options,
+                    cancellationToken
+                );
 
                 try
                 {
@@ -70,7 +86,9 @@ namespace Microsoft.CodeAnalysis.Classification
                 {
                     // release collections to the pool
                     SharedPools.Default<HashSet<ClassifiedSpan>>().ClearAndFree(worker._set);
-                    SharedPools.Default<Stack<SyntaxNodeOrToken>>().ClearAndFree(worker._pendingNodes);
+                    SharedPools
+                        .Default<Stack<SyntaxNodeOrToken>>()
+                        .ClearAndFree(worker._pendingNodes);
                 }
             }
 
@@ -128,7 +146,13 @@ namespace Microsoft.CodeAnalysis.Classification
                     _cancellationToken.ThrowIfCancellationRequested();
 
                     result.Clear();
-                    classifier.AddClassifications(syntax, _semanticModel, _options, result, _cancellationToken);
+                    classifier.AddClassifications(
+                        syntax,
+                        _semanticModel,
+                        _options,
+                        result,
+                        _cancellationToken
+                    );
                     AddClassifications(result);
                 }
             }
@@ -163,7 +187,13 @@ namespace Microsoft.CodeAnalysis.Classification
                     _cancellationToken.ThrowIfCancellationRequested();
 
                     result.Clear();
-                    classifier.AddClassifications(syntax, _semanticModel, _options, result, _cancellationToken);
+                    classifier.AddClassifications(
+                        syntax,
+                        _semanticModel,
+                        _options,
+                        result,
+                        _cancellationToken
+                    );
                     AddClassifications(result);
                 }
 

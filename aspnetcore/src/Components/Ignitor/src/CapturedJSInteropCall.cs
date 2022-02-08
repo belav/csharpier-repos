@@ -5,7 +5,13 @@ namespace Ignitor;
 
 public class CapturedJSInteropCall
 {
-    public CapturedJSInteropCall(int asyncHandle, string identifier, string argsJson, int resultType, long targetInstanceId)
+    public CapturedJSInteropCall(
+        int asyncHandle,
+        string identifier,
+        string argsJson,
+        int resultType,
+        long targetInstanceId
+    )
     {
         AsyncHandle = asyncHandle;
         Identifier = identifier;

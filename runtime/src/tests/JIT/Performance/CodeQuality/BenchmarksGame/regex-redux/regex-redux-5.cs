@@ -8,10 +8,10 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
- 
+   
    Regex-Redux by Josh Goldfoot
    order variants by execution time by Anthony Lloyd
-*/
+   */
 
 using System;
 using System.IO;
@@ -32,7 +32,11 @@ namespace BenchmarksGame
         {
             int c = 0;
             var m = regex(r).Match(s);
-            while (m.Success) { c++; m = m.NextMatch(); }
+            while (m.Success)
+            {
+                c++;
+                m = m.NextMatch();
+            }
             return r + " " + c;
         }
 
@@ -58,15 +62,17 @@ namespace BenchmarksGame
             var initialLength = sequences.Length;
             sequences = Regex.Replace(sequences, ">.*\n|\n", "");
 
-            var magicTask = Task.Run(() =>
-            {
-                var newseq = regex("tHa[Nt]").Replace(sequences, "<4>");
-                newseq = regex("aND|caN|Ha[DS]|WaS").Replace(newseq, "<3>");
-                newseq = regex("a[NSt]|BY").Replace(newseq, "<2>");
-                newseq = regex("<[^>]*>").Replace(newseq, "|");
-                newseq = regex("\\|[^|][^|]*\\|").Replace(newseq, "-");
-                return newseq.Length;
-            });
+            var magicTask = Task.Run(
+                () =>
+                {
+                    var newseq = regex("tHa[Nt]").Replace(sequences, "<4>");
+                    newseq = regex("aND|caN|Ha[DS]|WaS").Replace(newseq, "<3>");
+                    newseq = regex("a[NSt]|BY").Replace(newseq, "<2>");
+                    newseq = regex("<[^>]*>").Replace(newseq, "|");
+                    newseq = regex("\\|[^|][^|]*\\|").Replace(newseq, "-");
+                    return newseq.Length;
+                }
+            );
 
             var variant2 = Task.Run(() => regexCount(sequences, "[cgt]gggtaaa|tttaccc[acg]"));
             var variant3 = Task.Run(() => regexCount(sequences, "a[act]ggtaaa|tttacc[agt]t"));
@@ -94,7 +100,17 @@ namespace BenchmarksGame
             }
             else
             {
-                Task.WaitAll(variant1, variant2, variant3, variant4, variant5, variant6, variant7, variant8, variant9);
+                Task.WaitAll(
+                    variant1,
+                    variant2,
+                    variant3,
+                    variant4,
+                    variant5,
+                    variant6,
+                    variant7,
+                    variant8,
+                    variant9
+                );
             }
 
             return magicTask.Result;

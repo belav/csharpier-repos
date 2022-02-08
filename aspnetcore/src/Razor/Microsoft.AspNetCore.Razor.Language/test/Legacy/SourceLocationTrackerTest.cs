@@ -42,7 +42,6 @@ public class SourceLocationTrackerTest
         Assert.Equal(3, currentLocation.CharacterIndex);
     }
 
-
     [Fact]
     public void UpdateLocationAdvancesCharacterIndexOnNonNewlineCharacter()
     {
@@ -55,7 +54,6 @@ public class SourceLocationTrackerTest
         // Assert
         Assert.Equal(46, currentLocation.CharacterIndex);
     }
-
 
     [Fact]
     public void UpdateLocationDoesNotAdvanceLineIndexOnNonNewlineCharacter()
@@ -193,7 +191,13 @@ public class SourceLocationTrackerTest
         var lineIndex = location.LineIndex;
         var characterIndex = location.CharacterIndex;
 
-        SourceLocationTracker.UpdateCharacterCore(v1, v2, ref absoluteIndex, ref lineIndex, ref characterIndex);
+        SourceLocationTracker.UpdateCharacterCore(
+            v1,
+            v2,
+            ref absoluteIndex,
+            ref lineIndex,
+            ref characterIndex
+        );
 
         return new SourceLocation(location.FilePath, absoluteIndex, lineIndex, characterIndex);
     }

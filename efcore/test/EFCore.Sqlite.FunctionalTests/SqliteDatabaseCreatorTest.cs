@@ -18,13 +18,18 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, false)]
         [InlineData(false, true)]
         [InlineData(true, true)]
-        public async Task Exists_returns_false_when_database_doesnt_exist(bool async, bool useCanConnect)
+        public async Task Exists_returns_false_when_database_doesnt_exist(
+            bool async,
+            bool useCanConnect
+        )
         {
             var context = CreateContext("Data Source=doesnt-exist.db");
 
             if (useCanConnect)
             {
-                Assert.False(async ? await context.Database.CanConnectAsync() : context.Database.CanConnect());
+                Assert.False(
+                    async ? await context.Database.CanConnectAsync() : context.Database.CanConnect()
+                );
             }
             else
             {
@@ -50,7 +55,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public async Task HasTables_returns_true_when_database_is_not_empty(bool async)
         {
-            using var testStore = SqliteTestStore.GetOrCreateInitialized($"HasATable{(async ? 'A' : 'S')}");
+            using var testStore = SqliteTestStore.GetOrCreateInitialized(
+                $"HasATable{(async ? 'A' : 'S')}"
+            );
             var context = CreateContext(testStore.ConnectionString);
             context.Database.ExecuteSqlRaw("CREATE TABLE Dummy (Foo INTEGER)");
 
@@ -70,7 +77,9 @@ namespace Microsoft.EntityFrameworkCore
 
             if (useCanConnect)
             {
-                Assert.True(async ? await context.Database.CanConnectAsync() : context.Database.CanConnect());
+                Assert.True(
+                    async ? await context.Database.CanConnectAsync() : context.Database.CanConnect()
+                );
             }
             else
             {
@@ -102,10 +111,12 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal("wal", journalMode);
         }
 
-        [ConditionalTheory (Skip = "Issues #25797 and #26016")]
+        [ConditionalTheory(Skip = "Issues #25797 and #26016")]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task Delete_works_even_when_different_connection_exists_to_same_file(bool async)
+        public async Task Delete_works_even_when_different_connection_exists_to_same_file(
+            bool async
+        )
         {
             using (var context = new BathtubContext("DataSource=bathtub.db"))
             {
@@ -147,8 +158,8 @@ namespace Microsoft.EntityFrameworkCore
                 _connectionString = connectionString;
             }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseSqlite(_connectionString);
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlite(_connectionString);
         }
 
         [ConditionalTheory]
@@ -162,13 +173,15 @@ namespace Microsoft.EntityFrameworkCore
             Assert.True(creator.Exists());
         }
 
-        private DbContext CreateContext(string connectionString)
-            => new(
+        private DbContext CreateContext(string connectionString) =>
+            new(
                 new DbContextOptionsBuilder()
                     .UseSqlite(connectionString)
                     .UseInternalServiceProvider(
-                        SqliteTestStoreFactory.Instance.AddProviderServices(new ServiceCollection())
-                            .BuildServiceProvider(validateScopes: true))
-                    .Options);
+                        SqliteTestStoreFactory.Instance
+                            .AddProviderServices(new ServiceCollection())
+                            .BuildServiceProvider(validateScopes: true)
+                    ).Options
+            );
     }
 }

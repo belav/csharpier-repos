@@ -30,7 +30,6 @@ namespace System.Net.Sockets
         ControlDataTruncated = 0x0200,
         Broadcast = 0x0400,
         Multicast = 0x0800,
-
         Partial = 0x8000,
     }
 }

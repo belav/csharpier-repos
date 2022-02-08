@@ -21,26 +21,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateMet
 {
     public class GenerateMethodTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public GenerateMethodTests(ITestOutputHelper logger)
-             : base(logger)
-        {
-        }
+        public GenerateMethodTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new GenerateMethodCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new GenerateMethodCodeFixProvider());
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationIntoSameType()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -53,21 +51,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestOnRightOfNullCoalescingAssignment_NullableBool()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(bool? b)
     {
         b ??= [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -80,21 +79,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestOnRightOfNullCoalescingAssignment_String()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(string s)
     {
         s ??= [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -107,21 +107,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationIntoSameType_CodeStyle1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -132,7 +133,11 @@ class Class
 
     private void Goo() => throw new NotImplementedException();
 }",
-options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement));
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -140,7 +145,7 @@ options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCode
         public async Task NameMatchesNamespaceName()
         {
             await TestInRegularAndScriptAsync(
-@"namespace N
+                @"namespace N
 {
     class Class
     {
@@ -150,7 +155,7 @@ options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCode
         }
     }
 }",
-@"using System;
+                @"using System;
 
 namespace N
 {
@@ -166,21 +171,22 @@ namespace N
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationOffOfThis()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         this.[|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -193,21 +199,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationOffOfType()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         Class.[|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -220,21 +227,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationValueExpressionArg()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|](0);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -247,21 +255,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationMultipleValueExpressionArg()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|](0, 0);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -274,21 +283,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationValueArg()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         [|Goo|](i);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -301,14 +311,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationValueNullableReferenceType()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class Class
 {
@@ -317,7 +328,7 @@ class Class
         [|Goo|](s);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -332,14 +343,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationUnassignedNullableReferenceType()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class Class
 {
@@ -349,7 +361,7 @@ class Class
         [|Goo|](s);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -365,14 +377,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationCrossingNullableAnnotationsEnabled()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class NullableEnable
 {
@@ -387,7 +400,7 @@ class NullableEnable
 class NullableDisable
 {
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -407,14 +420,15 @@ class NullableDisable
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationValueNestedNullableReferenceType()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 using System.Collections.Generic;
 
@@ -425,7 +439,7 @@ class Class
         [|Goo|](l);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 using System.Collections.Generic;
@@ -441,21 +455,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleInvocationNamedValueArg()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         [|Goo|](bar: i);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -468,14 +483,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateAfterMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -486,7 +502,7 @@ class Class
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -503,14 +519,15 @@ class Class
     void NextMethod()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInterfaceNaming()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
@@ -521,7 +538,7 @@ class Class
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -538,14 +555,15 @@ class Class
     IGoo NextMethod()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestFuncArg0()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
@@ -556,7 +574,7 @@ class Class
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -573,14 +591,15 @@ class Class
     string NextMethod()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestFuncArg1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
@@ -591,7 +610,7 @@ class Class
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -608,14 +627,15 @@ class Class
     string NextMethod(int i)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestActionArg()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
@@ -626,7 +646,7 @@ class Class
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -643,14 +663,15 @@ class Class
     void NextMethod()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestActionArg1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
@@ -661,7 +682,7 @@ class Class
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -678,7 +699,8 @@ class Class
     void NextMethod(int i)
     {
     }
-}");
+}"
+            );
         }
 
         // Note: we only test type inference once.  This is just to verify that it's being used
@@ -688,7 +710,7 @@ class Class
         public async Task TestTypeInference()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -697,7 +719,7 @@ class Class
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -712,7 +734,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(784793, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784793")]
@@ -720,14 +743,14 @@ class Class
         public async Task TestOutRefArguments()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|](out a, ref b);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -740,21 +763,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestMemberAccessArgumentName()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|](this.Bar);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -767,7 +791,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(784793, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784793")]
@@ -775,14 +800,14 @@ class Class
         public async Task TestParenthesizedArgumentName()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|]((Bar));
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -795,7 +820,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(784793, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784793")]
@@ -803,14 +829,14 @@ class Class
         public async Task TestCastedArgumentName()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|]((Bar)this.Baz);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -823,21 +849,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestNullableArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
         [|Goo|]((int?)1);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -850,21 +877,22 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestNullArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
         [|Goo|](null);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -877,21 +905,22 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestTypeofArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
         [|Goo|](typeof(int));
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -904,21 +933,22 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDefaultArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
         [|Goo|](default(int));
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -931,21 +961,22 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestAsArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
         [|Goo|](1 as int?);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -958,14 +989,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestPointArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
@@ -973,7 +1005,7 @@ class C
         [|Goo|](p);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -987,14 +1019,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestArgumentWithPointerName()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
@@ -1002,7 +1035,7 @@ class C
         [|Goo|](p);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1016,14 +1049,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestArgumentWithPointTo()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
@@ -1031,7 +1065,7 @@ class C
         [|Goo|](*p);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1045,14 +1079,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestArgumentWithAddress()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     unsafe void Method()
     {
@@ -1060,7 +1095,7 @@ class C
         [|Goo|](&a);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1074,21 +1109,22 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateWithPointerReturn()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Method()
     {
         int* p = [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1101,7 +1137,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(784793, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784793")]
@@ -1109,14 +1146,14 @@ class C
         public async Task TestDuplicateNames()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|]((Bar)this.Baz, this.Baz);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1129,7 +1166,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(784793, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784793")]
@@ -1137,14 +1175,14 @@ class Class
         public async Task TestDuplicateNamesWithNamedArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|]((Bar)this.Baz, this.Baz, baz: this.Baz);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1157,7 +1195,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         // Note: we do not test the range of places where a delegate type can be inferred.  This is
@@ -1167,7 +1206,7 @@ class Class
         public async Task TestSimpleDelegate()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1176,7 +1215,7 @@ class Class
         Func<int, string, bool> f = [|Goo|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1189,14 +1228,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleAssignmentWithNullableReferenceType()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -1207,7 +1247,7 @@ class Class
         string? f = [|Goo|]();
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -1222,7 +1262,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -1232,7 +1273,7 @@ class Class
             // make the return value T, and assume the user just wanted to assign it to a nullable value because they
             // might be assigning null later in the caller.
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -1243,7 +1284,7 @@ class Class
         string? f = [|Goo|]<string>(""s"");
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -1258,7 +1299,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -1268,7 +1310,7 @@ class Class
             // the difference of nested nullability. Since there's no way to generate a method any other way,
             // we're assuming this is betetr than inferring that the return type is explicitly IEnumerable<string>
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -1280,7 +1322,7 @@ class Class
         IEnumerable<string?> f = [|Goo|]<IEnumerable<string>>(e);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -1296,14 +1338,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDelegateWithRefParameter()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -1312,7 +1355,7 @@ class Class
 }
 
 delegate void Goo(ref int i);",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1327,7 +1370,8 @@ class Class
     }
 }
 
-delegate void Goo(ref int i);");
+delegate void Goo(ref int i);"
+            );
         }
 
         // TODO(cyrusn): Add delegate tests that cover delegates with interesting signatures (i.e.
@@ -1339,7 +1383,7 @@ delegate void Goo(ref int i);");
         public async Task TestGenericArgs1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1348,7 +1392,7 @@ class Class
         [|Goo<int>|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1361,14 +1405,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenericArgs2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1377,7 +1422,7 @@ class Class
         [|Goo<int, string>|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1390,14 +1435,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenericArgsFromMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1406,7 +1452,7 @@ class Class
         [|Goo|](x);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1419,14 +1465,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestMultipleGenericArgsFromMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1435,7 +1482,7 @@ class Class
         [|Goo|](x, y);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1448,14 +1495,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestMultipleGenericArgsFromMethod2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1464,7 +1512,7 @@ class Class
         [|Goo|](y, x);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1477,21 +1525,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenericArgThatIsTypeParameter()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main<T>(T t)
     {
         [|Goo<T>|](t);
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1504,21 +1553,22 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestMultipleGenericArgsThatAreTypeParameters()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main<T, U>(T t, U u)
     {
         [|Goo<T, U>|](t, u);
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1531,14 +1581,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoOuterThroughInstance()
         {
             await TestInRegularAndScriptAsync(
-@"class Outer
+                @"class Outer
 {
     class Class
     {
@@ -1548,7 +1599,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Outer
 {
@@ -1564,14 +1615,15 @@ class Outer
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoOuterThroughClass()
         {
             await TestInRegularAndScriptAsync(
-@"class Outer
+                @"class Outer
 {
     class Class
     {
@@ -1581,7 +1633,7 @@ class Outer
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Outer
 {
@@ -1597,14 +1649,15 @@ class Outer
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoSiblingThroughInstance()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(Sibling s)
     {
@@ -1615,7 +1668,7 @@ class Outer
 class Sibling
 {
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1631,14 +1684,15 @@ class Sibling
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoSiblingThroughClass()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(Sibling s)
     {
@@ -1649,7 +1703,7 @@ class Sibling
 class Sibling
 {
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1665,14 +1719,15 @@ class Sibling
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoInterfaceThroughInstance()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(ISibling s)
     {
@@ -1683,7 +1738,7 @@ class Sibling
 interface ISibling
 {
 }",
-@"class Class
+                @"class Class
 {
     void Method(ISibling s)
     {
@@ -1694,14 +1749,15 @@ interface ISibling
 interface ISibling
 {
     void Goo();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoInterfaceThroughInstanceWithDelegate()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1714,7 +1770,7 @@ class Class
 interface ISibling
 {
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1727,7 +1783,8 @@ class Class
 interface ISibling
 {
     string Goo(int arg);
-}");
+}"
+            );
         }
 
         [WorkItem(29584, "https://github.com/dotnet/roslyn/issues/29584")]
@@ -1735,14 +1792,14 @@ interface ISibling
         public async Task TestGenerateAbstractIntoSameType()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Class
+                @"abstract class Class
 {
     void Method()
     {
         [|Goo|]();
     }
 }",
-@"abstract class Class
+                @"abstract class Class
 {
     void Method()
     {
@@ -1751,7 +1808,8 @@ interface ISibling
 
     protected abstract void Goo();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(537906, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537906")]
@@ -1759,14 +1817,14 @@ index: 1);
         public async Task TestMethodReturningDynamic()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         dynamic d = [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1779,7 +1837,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(537906, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537906")]
@@ -1787,14 +1846,14 @@ class Class
         public async Task TestMethodTakingDynamicArg()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(dynamic d)
     {
         [|Goo|](d);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1807,7 +1866,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(3203, "DevDiv_Projects/Roslyn")]
@@ -1815,7 +1875,7 @@ class Class
         public async Task TestNegativeWithNamedOptionalArg1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"namespace SyntaxError
+                @"namespace SyntaxError
 {
     class C1
     {
@@ -1831,7 +1891,8 @@ class Class
             (new C1()).[|Method|](num: 5, ""hi"");
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(537972, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537972")]
@@ -1839,7 +1900,7 @@ class Class
         public async Task TestWithNamedOptionalArg2()
         {
             await TestInRegularAndScriptAsync(
-@"namespace SyntaxError
+                @"namespace SyntaxError
 {
     class C1
     {
@@ -1856,7 +1917,7 @@ class Class
         }
     }
 }",
-@"using System;
+                @"using System;
 
 namespace SyntaxError
 {
@@ -1879,21 +1940,22 @@ namespace SyntaxError
             (new C1()).Method(num: 5, ""hi"");
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestArgOrderInNamedArgs()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
     static void Test()
     {
         (new Goo()).[|Method|](3, 4, n1: 5, n3: 6, n2: 7, n0: 8);
     }
 }",
-@"using System;
+                @"using System;
 
 class Goo
 {
@@ -1906,14 +1968,15 @@ class Goo
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestForMissingOptionalArg()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
     static void Test()
     {
@@ -1923,14 +1986,15 @@ class Goo
     private void Method(double n = 3.14, string s, bool b)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestNamingOfArgWithClashes()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
     static int i = 32;
 
@@ -1939,7 +2003,7 @@ class Goo
         (new Goo()).[|Method|](s: ""hello"", i: 52);
     }
 }",
-@"using System;
+                @"using System;
 
 class Goo
 {
@@ -1954,14 +2018,15 @@ class Goo
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestFixCountGeneratingIntoInterface()
         {
             await TestActionCountAsync(
-@"interface I2
+                @"interface I2
 {
 }
 
@@ -1973,7 +2038,8 @@ class C2 : I2
         i.[|M|]();
     }
 }",
-count: 1);
+                count: 1
+            );
         }
 
         [WorkItem(527278, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527278")]
@@ -1981,7 +2047,7 @@ count: 1);
         public async Task TestInvocationOffOfBase()
         {
             await TestInRegularAndScriptAsync(
-@"class C3A
+                @"class C3A
 {
 }
 
@@ -1992,7 +2058,7 @@ class C3 : C3A
         base.[|M|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C3A
 {
@@ -2008,21 +2074,22 @@ class C3 : C3A
     {
         base.M();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInvocationWithinCtor()
         {
             await TestInRegularAndScriptAsync(
-@"class C1
+                @"class C1
 {
     C1()
     {
         [|M|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C1
 {
@@ -2035,21 +2102,22 @@ class C1
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInvocationWithinBaseCtor()
         {
             await TestInRegularAndScriptAsync(
-@"class C1
+                @"class C1
 {
     C1()
     {
         [|M|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C1
 {
@@ -2062,7 +2130,8 @@ class C1
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(3095, "DevDiv_Projects/Roslyn")]
@@ -2070,7 +2139,7 @@ class C1
         public async Task TestForMultipleSmartTagsInvokingWithinCtor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C1
 {
@@ -2083,21 +2152,22 @@ class C1
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInvocationWithinDestructor()
         {
             await TestInRegularAndScriptAsync(
-@"class C1
+                @"class C1
 {
     ~C1()
     {
         [|M|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C1
 {
@@ -2110,14 +2180,15 @@ class C1
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInvocationWithinConditional()
         {
             await TestInRegularAndScriptAsync(
-@"class C4
+                @"class C4
 {
     void A()
     {
@@ -2127,7 +2198,7 @@ class C1
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C4
 {
@@ -2143,14 +2214,15 @@ class C4
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoStaticClass()
         {
             await TestInRegularAndScriptAsync(
-@"class Bar
+                @"class Bar
 {
     void Test()
     {
@@ -2161,7 +2233,7 @@ class C4
 static class Goo
 {
 }",
-@"using System;
+                @"using System;
 
 class Bar
 {
@@ -2177,14 +2249,15 @@ static class Goo
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoAbstractClass()
         {
             await TestInRegularAndScriptAsync(
-@"class Bar
+                @"class Bar
 {
     void Test()
     {
@@ -2195,7 +2268,7 @@ static class Goo
 abstract class Goo
 {
 }",
-@"using System;
+                @"using System;
 
 class Bar
 {
@@ -2211,14 +2284,15 @@ abstract class Goo
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoAbstractClassThoughInstance1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Test(Goo f)
     {
@@ -2229,7 +2303,7 @@ abstract class Goo
 abstract class Goo
 {
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2245,14 +2319,15 @@ abstract class Goo
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoAbstractClassThoughInstance2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Test(Goo f)
     {
@@ -2263,7 +2338,7 @@ abstract class Goo
 abstract class Goo
 {
 }",
-@"class C
+                @"class C
 {
     void Test(Goo f)
     {
@@ -2275,14 +2350,15 @@ abstract class Goo
 {
     internal abstract void M();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoPartialClass1()
         {
             await TestInRegularAndScriptAsync(
-@"class Bar
+                @"class Bar
 {
     void Test()
     {
@@ -2297,7 +2373,7 @@ partial class Goo
 partial class Goo
 {
 }",
-@"using System;
+                @"using System;
 
 class Bar
 {
@@ -2317,14 +2393,15 @@ partial class Goo
 
 partial class Goo
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoPartialClass2()
         {
             await TestInRegularAndScriptAsync(
-@"partial class Goo
+                @"partial class Goo
 {
     void Test()
     {
@@ -2335,7 +2412,7 @@ partial class Goo
 partial class Goo
 {
 }",
-@"using System;
+                @"using System;
 
 partial class Goo
 {
@@ -2352,14 +2429,15 @@ partial class Goo
 
 partial class Goo
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateIntoStruct()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
     void Test()
     {
@@ -2370,7 +2448,7 @@ partial class Goo
 struct S
 {
 }",
-@"using System;
+                @"using System;
 
 class Goo
 {
@@ -2386,7 +2464,8 @@ struct S
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(527291, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527291")]
@@ -2394,7 +2473,7 @@ struct S
         public async Task TestInvocationOffOfIndexer()
         {
             await TestInRegularAndScriptAsync(
-@"class Bar
+                @"class Bar
 {
     Goo f = new Goo();
 
@@ -2420,7 +2499,7 @@ struct S
 class Goo
 {
 }",
-@"using System;
+                @"using System;
 
 class Bar
 {
@@ -2451,7 +2530,8 @@ class Goo
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(527292, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527292")]
@@ -2459,7 +2539,7 @@ class Goo
         public async Task TestInvocationWithinForEach()
         {
             await TestInRegularAndScriptAsync(
-@"class C8
+                @"class C8
 {
     C8A[] items = {
         new C8A(),
@@ -2486,7 +2566,7 @@ class Goo
 class C8A
 {
 }",
-@"using System;
+                @"using System;
 
 class C8
 {
@@ -2518,7 +2598,8 @@ class C8A
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(48064, "https://github.com/dotnet/roslyn/issues/48064")]
@@ -2526,7 +2607,7 @@ class C8A
         public async Task TestInvocationWithinSynchronousForEach()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(ISomeInterface _someInterface)
     {
@@ -2539,7 +2620,7 @@ class C8A
 interface ISomeInterface
 {
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -2554,7 +2635,8 @@ class C
 interface ISomeInterface
 {
     IEnumerable<object> GetItems();
-}");
+}"
+            );
         }
 
         [WorkItem(48064, "https://github.com/dotnet/roslyn/issues/48064")]
@@ -2562,7 +2644,7 @@ interface ISomeInterface
         public async Task TestInvocationWithinAsynchronousForEach_IAsyncEnumerableDoesNotExist_FallbackToIEnumerable()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     async void M(ISomeInterface _someInterface)
     {
@@ -2575,7 +2657,7 @@ interface ISomeInterface
 interface ISomeInterface
 {
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -2590,7 +2672,8 @@ class C
 interface ISomeInterface
 {
     IEnumerable<object> GetItems();
-}");
+}"
+            );
         }
 
         [WorkItem(48064, "https://github.com/dotnet/roslyn/issues/48064")]
@@ -2598,7 +2681,7 @@ interface ISomeInterface
         public async Task TestInvocationWithinAsynchronousForEach_IAsyncEnumerableExists_UseIAsyncEnumerable()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     async void M(ISomeInterface _someInterface)
     {
@@ -2612,7 +2695,7 @@ interface ISomeInterface
 {
 }
 " + IAsyncEnumerable,
-@"class C
+                @"class C
 {
     async void M(ISomeInterface _someInterface)
     {
@@ -2626,7 +2709,8 @@ interface ISomeInterface
 {
     System.Collections.Generic.IAsyncEnumerable<object> GetItems();
 }
-" + IAsyncEnumerable);
+" + IAsyncEnumerable
+            );
         }
 
         [WorkItem(48064, "https://github.com/dotnet/roslyn/issues/48064")]
@@ -2634,7 +2718,7 @@ interface ISomeInterface
         public async Task TestInvocationWithinAsynchronousForEach_IAsyncEnumerableExists_UseIAsyncEnumerableOfString()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     async void M(ISomeInterface _someInterface)
     {
@@ -2648,7 +2732,7 @@ interface ISomeInterface
 {
 }
 " + IAsyncEnumerable,
-@"class C
+                @"class C
 {
     async void M(ISomeInterface _someInterface)
     {
@@ -2662,14 +2746,15 @@ interface ISomeInterface
 {
     System.Collections.Generic.IAsyncEnumerable<string> GetItems();
 }
-" + IAsyncEnumerable);
+" + IAsyncEnumerable
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInvocationOffOfAnotherMethodCall()
         {
             await TestInRegularAndScriptAsync(
-@"class C9
+                @"class C9
 {
     C9A m_item = new C9A();
 
@@ -2687,7 +2772,7 @@ interface ISomeInterface
 struct C9A
 {
 }",
-@"using System;
+                @"using System;
 
 class C9
 {
@@ -2710,14 +2795,15 @@ struct C9A
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInvocationIntoNestedNamespaces()
         {
             await TestInRegularAndScriptAsync(
-@"namespace NS11X
+                @"namespace NS11X
 {
     namespace NS11Y
     {
@@ -2740,7 +2826,7 @@ namespace NS11A
         }
     }
 }",
-@"using System;
+                @"using System;
 
 namespace NS11X
 {
@@ -2768,14 +2854,15 @@ namespace NS11A
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInvocationIntoAliasedNamespaces()
         {
             await TestInRegularAndScriptAsync(
-@"namespace NS11X
+                @"namespace NS11X
 {
     using NS = NS11A.NS11B;
 
@@ -2797,7 +2884,7 @@ namespace NS11A
         }
     }
 }",
-@"namespace NS11X
+                @"namespace NS11X
 {
     using System;
     using NS = NS11A.NS11B;
@@ -2823,14 +2910,15 @@ namespace NS11A
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInvocationOnGlobalNamespace()
         {
             await TestInRegularAndScriptAsync(
-@"namespace NS13X
+                @"namespace NS13X
 {
     namespace NS13A
     {
@@ -2860,7 +2948,7 @@ namespace NS13A
         }
     }
 }",
-@"using System;
+                @"using System;
 
 namespace NS13X
 {
@@ -2895,7 +2983,8 @@ namespace NS13A
             }
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(538353, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538353")]
@@ -2903,7 +2992,7 @@ namespace NS13A
         public async Task TestGenerateIntoAppropriatePart()
         {
             await TestInRegularAndScriptAsync(
-@"public partial class C
+                @"public partial class C
 {
 }
 
@@ -2914,7 +3003,7 @@ public partial class C
         [|Test|]();
     }
 }",
-@"using System;
+                @"using System;
 
 public partial class C
 {
@@ -2931,7 +3020,8 @@ public partial class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(538541, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538541")]
@@ -2939,7 +3029,7 @@ public partial class C
         public async Task TestGenerateWithVoidArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void VoidMethod()
     {
@@ -2950,7 +3040,7 @@ public partial class C
         [|Test|](VoidMethod());
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2967,7 +3057,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(538993, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538993")]
@@ -2975,7 +3066,7 @@ class C
         public async Task TestGenerateInSimpleLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2984,7 +3075,7 @@ class Program
         Func<string, int> f = x => [|Goo|](x);
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2997,14 +3088,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateInParenthesizedLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3013,7 +3105,7 @@ class Program
         Func<int> f = () => [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3026,7 +3118,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30232, "https://github.com/dotnet/roslyn/issues/30232")]
@@ -3034,7 +3127,7 @@ class Program
         public async Task TestGenerateInAsyncTaskOfTSimpleLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3044,7 +3137,7 @@ class Program
         Func<string, Task<int>> f = async x => [|Goo|](x);
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3058,7 +3151,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30232, "https://github.com/dotnet/roslyn/issues/30232")]
@@ -3066,7 +3160,7 @@ class Program
         public async Task TestGenerateInAsyncTaskOfTParenthesizedLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3076,7 +3170,7 @@ class Program
         Func<Task<int>> f = async () => [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3090,7 +3184,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30232, "https://github.com/dotnet/roslyn/issues/30232")]
@@ -3098,7 +3193,7 @@ class Program
         public async Task TestGenerateInAsyncTaskSimpleLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3108,7 +3203,7 @@ class Program
         Func<string, Task> f = async x => [|Goo|](x);
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3122,7 +3217,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30232, "https://github.com/dotnet/roslyn/issues/30232")]
@@ -3130,7 +3226,7 @@ class Program
         public async Task TestGenerateInAsyncTaskParenthesizedLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3140,7 +3236,7 @@ class Program
         Func<Task> f = async () => [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3154,14 +3250,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateInAsyncVoidSimpleLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3171,7 +3268,7 @@ class Program
         Action<string> f = async x => [|Goo|](x);
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3185,14 +3282,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateInAsyncVoidParenthesizedLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3202,7 +3300,7 @@ class Program
         Action f = async () => [|Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3216,14 +3314,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateInAssignmentInAnonymousMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -3232,7 +3331,7 @@ class Program
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3247,7 +3346,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3255,7 +3355,7 @@ class C
         public async Task TestGenerateOffOfExplicitInterface1()
         {
             await TestInRegularAndScriptAsync(
-@"interface I
+                @"interface I
 {
 }
 
@@ -3265,7 +3365,7 @@ class A : I
     {
     }|]
 }",
-@"interface I
+                @"interface I
 {
     void Goo();
 }
@@ -3275,7 +3375,8 @@ class A : I
     void I.Goo()
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3283,7 +3384,7 @@ class A : I
         public async Task TestGenerateOffOfExplicitInterface2()
         {
             await TestInRegularAndScriptAsync(
-@"interface I
+                @"interface I
 {
 }
 
@@ -3293,7 +3394,7 @@ class A : I
     {
     }|]
 }",
-@"interface I
+                @"interface I
 {
     int Goo();
 }
@@ -3303,7 +3404,8 @@ class A : I
     int I.Goo()
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3311,7 +3413,7 @@ class A : I
         public async Task TestGenerateOffOfExplicitInterface3()
         {
             await TestInRegularAndScriptAsync(
-@"interface I
+                @"interface I
 {
 }
 
@@ -3321,7 +3423,7 @@ class A : I
     {
     }|]
 }",
-@"interface I
+                @"interface I
 {
     void Goo(int i);
 }
@@ -3331,7 +3433,8 @@ class A : I
     void I.Goo(int i)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3339,7 +3442,7 @@ class A : I
         public async Task TestGenerateOffOfExplicitInterface4()
         {
             await TestInRegularAndScriptAsync(
-@"interface I
+                @"interface I
 {
 }
 
@@ -3349,7 +3452,7 @@ class A : I
     {
     }
 }",
-@"interface I
+                @"interface I
 {
     void Goo<T>();
 }
@@ -3359,7 +3462,8 @@ class A : I
     void I.Goo<T>()
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3367,7 +3471,7 @@ class A : I
         public async Task TestGenerateOffOfExplicitInterface5()
         {
             await TestInRegularAndScriptAsync(
-@"interface I
+                @"interface I
 {
 }
 
@@ -3377,7 +3481,7 @@ class A : I
     {
     }
 }",
-@"interface I
+                @"interface I
 {
     void Goo<T>();
 }
@@ -3387,7 +3491,8 @@ class A : I
     void I.Goo<in T>()
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3395,7 +3500,7 @@ class A : I
         public async Task TestGenerateOffOfExplicitInterface6()
         {
             await TestMissingInRegularAndScriptAsync(
-@"interface I
+                @"interface I
 {
     void Goo();
 }
@@ -3405,7 +3510,8 @@ class A : I
     void I.[|Goo|]()
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3413,7 +3519,7 @@ class A : I
         public async Task TestGenerateOffOfExplicitInterface7()
         {
             await TestMissingInRegularAndScriptAsync(
-@"interface I
+                @"interface I
 {
 }
 
@@ -3422,7 +3528,8 @@ class A
     void I.[|Goo|]()
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3430,7 +3537,7 @@ class A
         public async Task TestGenerateOffOfExplicitInterface8()
         {
             await TestInRegularAndScriptAsync(
-@"interface I<T>
+                @"interface I<T>
 {
 }
 
@@ -3440,7 +3547,7 @@ class A : I<int>
     {
     }
 }",
-@"interface I<T>
+                @"interface I<T>
 {
     void Goo();
 }
@@ -3450,7 +3557,8 @@ class A : I<int>
     void I<int>.Goo()
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539024, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539024")]
@@ -3459,7 +3567,7 @@ class A : I<int>
         {
             // TODO(cyrusn): It might be nice if we generated "Goo(T i)" here in the future.
             await TestInRegularAndScriptAsync(
-@"interface I<T>
+                @"interface I<T>
 {
 }
 
@@ -3469,7 +3577,7 @@ class A : I<int>
     {
     }
 }",
-@"interface I<T>
+                @"interface I<T>
 {
     void Goo(int i);
 }
@@ -3479,7 +3587,8 @@ class A : I<int>
     void I<int>.Goo(int i)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(5016, "DevDiv_Projects/Roslyn")]
@@ -3487,7 +3596,7 @@ class A : I<int>
         public async Task TestGenerateMethodWithArgumentFromBaseConstructorsArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     public A(string s)
     {
@@ -3500,7 +3609,7 @@ class B : A
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class A
 {
@@ -3519,7 +3628,8 @@ class B : A
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(5016, "DevDiv_Projects/Roslyn")]
@@ -3527,7 +3637,7 @@ class B : A
         public async Task TestGenerateMethodWithArgumentFromGenericConstructorsArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class A<T>
+                @"class A<T>
 {
     public A(T t)
     {
@@ -3540,7 +3650,7 @@ class B : A<int>
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class A<T>
 {
@@ -3559,14 +3669,15 @@ class B : A<int>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodWithVar()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -3574,7 +3685,7 @@ class B : A<int>
         v = [|Goo|](v);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -3586,7 +3697,8 @@ class B : A<int>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -3594,14 +3706,14 @@ class B : A<int>
         public async Task TestEscapedName()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|@Goo|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -3614,7 +3726,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -3622,14 +3735,14 @@ class Class
         public async Task TestEscapedKeyword()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|@int|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -3642,7 +3755,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539527, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539527")]
@@ -3650,7 +3764,7 @@ class Class
         public async Task TestUnmentionableTypeParameter1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class<A>
+                @"class Class<A>
 {
     void Method(A a)
     {
@@ -3661,7 +3775,7 @@ class Class
 class B
 {
 }",
-@"using System;
+                @"using System;
 
 class Class<A>
 {
@@ -3677,7 +3791,8 @@ class B
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539527, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539527")]
@@ -3685,14 +3800,14 @@ class B
         public async Task TestUnmentionableTypeParameter2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class<A>
+                @"class Class<A>
 {
     void Method(A a)
     {
         [|C|](a);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class<A>
 {
@@ -3705,7 +3820,8 @@ class Class<A>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539527, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539527")]
@@ -3713,7 +3829,7 @@ class Class<A>
         public async Task TestUnmentionableTypeParameter3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class<A>
+                @"class Class<A>
 {
     class Internal
     {
@@ -3723,7 +3839,7 @@ class Class<A>
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Class<A>
 {
@@ -3739,7 +3855,8 @@ class Class<A>
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539527, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539527")]
@@ -3747,7 +3864,7 @@ class Class<A>
         public async Task TestUnmentionableTypeParameter4()
         {
             await TestInRegularAndScriptAsync(
-@"class Class<A>
+                @"class Class<A>
 {
     class Internal
     {
@@ -3757,7 +3874,7 @@ class Class<A>
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Class<A>
 {
@@ -3773,7 +3890,8 @@ class Class<A>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539527, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539527")]
@@ -3781,7 +3899,7 @@ class Class<A>
         public async Task TestUnmentionableTypeParameter5()
         {
             await TestInRegularAndScriptAsync(
-@"class Class<A>
+                @"class Class<A>
 {
     class Internal
     {
@@ -3791,7 +3909,7 @@ class Class<A>
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Class<A>
 {
@@ -3807,7 +3925,8 @@ class Class<A>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539596, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539596")]
@@ -3815,14 +3934,14 @@ class Class<A>
         public async Task TestUnmentionableTypeParameter6()
         {
             await TestInRegularAndScriptAsync(
-@"class Test
+                @"class Test
 {
     void F<U, V>(U u1, V v1)
     {
         [|Goo<int, string>|](u1, v1);
     }
 }",
-@"using System;
+                @"using System;
 
 class Test
 {
@@ -3835,7 +3954,8 @@ class Test
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539593, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539593")]
@@ -3843,14 +3963,14 @@ class Test
         public async Task TestUnmentionableTypeParameter7()
         {
             await TestInRegularAndScriptAsync(
-@"class H<T>
+                @"class H<T>
 {
     void A(T t1)
     {
         t1 = [|Goo<T>|](t1);
     }
 }",
-@"using System;
+                @"using System;
 
 class H<T>
 {
@@ -3863,7 +3983,8 @@ class H<T>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539593, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539593")]
@@ -3871,14 +3992,14 @@ class H<T>
         public async Task TestUnmentionableTypeParameter8()
         {
             await TestInRegularAndScriptAsync(
-@"class H<T1, T2>
+                @"class H<T1, T2>
 {
     void A(T1 t1)
     {
         t1 = [|Goo<int, string>|](t1);
     }
 }",
-@"using System;
+                @"using System;
 
 class H<T1, T2>
 {
@@ -3891,7 +4012,8 @@ class H<T1, T2>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539597, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539597")]
@@ -3899,14 +4021,14 @@ class H<T1, T2>
         public async Task TestOddErrorType()
         {
             await TestInRegularAndScriptAsync(
-@"public class C
+                @"public class C
 {
     void M()
     {
         @public c = [|F|]();
     }
 }",
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -3919,7 +4041,8 @@ public class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539594, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539594")]
@@ -3927,7 +4050,7 @@ public class C
         public async Task TestGenericOverloads()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public C()
     {
@@ -3945,7 +4068,7 @@ class CA
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3969,7 +4092,8 @@ class CA
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(537929, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537929")]
@@ -3977,13 +4101,13 @@ class CA
         public async Task TestInScript1()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 static void Main(string[] args)
 {
     [|Goo|]();
 }",
-@"using System;
+                @"using System;
 
 static void Main(string[] args)
 {
@@ -3994,20 +4118,21 @@ void Goo()
 {
     throw new NotImplementedException();
 }",
-parseOptions: GetScriptOptions());
+                parseOptions: GetScriptOptions()
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInTopLevelImplicitClass1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 static void Main(string[] args)
 {
     [|Goo|]();
 }",
-@"using System;
+                @"using System;
 
 static void Main(string[] args)
 {
@@ -4017,14 +4142,15 @@ static void Main(string[] args)
 void Goo()
 {
     throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInNamespaceImplicitClass1()
         {
             await TestInRegularAndScriptAsync(
-@"namespace N
+                @"namespace N
 {
     using System;
 
@@ -4033,7 +4159,7 @@ void Goo()
         [|Goo|]();
     }
 }",
-@"namespace N
+                @"namespace N
 {
     using System;
 
@@ -4046,7 +4172,8 @@ void Goo()
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4054,13 +4181,13 @@ void Goo()
         public async Task TestInNamespaceImplicitClass_FieldInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"namespace N
+                @"namespace N
 {
     using System;
 
     int f = [|Goo|]();
 }",
-@"namespace N
+                @"namespace N
 {
     using System;
 
@@ -4070,7 +4197,8 @@ void Goo()
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539571, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539571")]
@@ -4078,7 +4206,7 @@ void Goo()
         public async Task TestSimplification1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4092,7 +4220,7 @@ class Program
         throw new System.NotImplementedException();
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4110,7 +4238,8 @@ class Program
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539571, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539571")]
@@ -4118,7 +4247,7 @@ class Program
         public async Task TestSimplification2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4127,7 +4256,7 @@ class Program
         System.Action a = [|Bar|](DateTime.Now);
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4140,7 +4269,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539618, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539618")]
@@ -4148,7 +4278,7 @@ class Program
         public async Task TestClashesWithMethod1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4158,7 +4288,8 @@ class Program
     }
 
     private void Goo(int x, bool b);
-}");
+}"
+            );
         }
 
         [WorkItem(539618, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539618")]
@@ -4166,7 +4297,7 @@ class Program
         public async Task TestClashesWithMethod2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program : IGoo
+                @"class Program : IGoo
 {
     [|bool IGoo.Goo()
     {
@@ -4174,7 +4305,8 @@ class Program
 } } interface IGoo
 {
     void Goo();
-}");
+}"
+            );
         }
 
         [WorkItem(539637, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539637")]
@@ -4182,7 +4314,7 @@ class Program
         public async Task TestReservedParametername1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public void Method()
     {
@@ -4190,7 +4322,7 @@ class Program
         [|M|](Long);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -4204,7 +4336,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539751, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539751")]
@@ -4212,7 +4345,7 @@ class C
         public async Task TestShadows1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4221,7 +4354,8 @@ class Program
         int Name;
         Name = [|Name|]();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539769, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539769")]
@@ -4229,7 +4363,7 @@ class Program
         public async Task TestShadows2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4241,7 +4375,8 @@ class Program
         myExp(10, 20);
         [|myExp|](10, 20, 10);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539781, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539781")]
@@ -4249,11 +4384,11 @@ class Program
         public async Task TestInTopLevelMethod()
         {
             await TestInRegularAndScriptAsync(
-@"void M()
+                @"void M()
 {
     [|Goo|]();
 }",
-@"using System;
+                @"using System;
 
 void M()
 {
@@ -4263,7 +4398,8 @@ void M()
 void Goo()
 {
     throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [WorkItem(539823, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539823")]
@@ -4271,7 +4407,7 @@ void Goo()
         public async Task TestLambdaReturnType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C<T, R>
 {
@@ -4280,7 +4416,7 @@ class C<T, R>
         return [|Goo<T, R>|](g);
     };
 }",
-@"using System;
+                @"using System;
 
 class C<T, R>
 {
@@ -4293,14 +4429,15 @@ class C<T, R>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateWithThrow()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -4311,7 +4448,7 @@ class C
         throw [|F|]();
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -4326,14 +4463,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestInDelegateConstructor()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 delegate void D(int x);
 
@@ -4344,7 +4482,7 @@ class C
         D d = new D([|Test|]);
     }
 }",
-@"using System;
+                @"using System;
 
 delegate void D(int x);
 
@@ -4359,7 +4497,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539871, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539871")]
@@ -4367,7 +4506,7 @@ class C
         public async Task TestDelegateScenario()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C<T>
+                @"class C<T>
 {
     public delegate void Goo<R>(R r);
 
@@ -4375,7 +4514,8 @@ class C
     {
         Goo<T> r = [|Goo<T>|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539928, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539928")]
@@ -4383,7 +4523,7 @@ class C
         public async Task TestInheritedTypeParameters1()
         {
             await TestInRegularAndScriptAsync(
-@"class C<T, R>
+                @"class C<T, R>
 {
     void M()
     {
@@ -4395,7 +4535,7 @@ class C
 interface I<T, R>
 {
 }",
-@"class C<T, R>
+                @"class C<T, R>
 {
     void M()
     {
@@ -4407,7 +4547,8 @@ interface I<T, R>
 interface I<T, R>
 {
     I<T, R> Goo();
-}");
+}"
+            );
         }
 
         [WorkItem(539928, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539928")]
@@ -4415,7 +4556,7 @@ interface I<T, R>
         public async Task TestInheritedTypeParameters2()
         {
             await TestInRegularAndScriptAsync(
-@"class C<T>
+                @"class C<T>
 {
     void M()
     {
@@ -4427,7 +4568,7 @@ interface I<T, R>
 interface I<T>
 {
 }",
-@"class C<T>
+                @"class C<T>
 {
     void M()
     {
@@ -4439,7 +4580,8 @@ interface I<T>
 interface I<T>
 {
     I<T> Goo();
-}");
+}"
+            );
         }
 
         [WorkItem(539928, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539928")]
@@ -4447,7 +4589,7 @@ interface I<T>
         public async Task TestInheritedTypeParameters3()
         {
             await TestInRegularAndScriptAsync(
-@"class C<T>
+                @"class C<T>
 {
     void M()
     {
@@ -4459,7 +4601,7 @@ interface I<T>
 interface I<X>
 {
 }",
-@"class C<T>
+                @"class C<T>
 {
     void M()
     {
@@ -4471,7 +4613,8 @@ interface I<X>
 interface I<X>
 {
     I<object> Goo();
-}");
+}"
+            );
         }
 
         [WorkItem(538995, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538995")]
@@ -4479,7 +4622,7 @@ interface I<X>
         public async Task TestBug4777()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -4490,7 +4633,7 @@ interface I<X>
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -4507,7 +4650,8 @@ class C
     void F(int x)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539856, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539856")]
@@ -4515,7 +4659,7 @@ class C
         public async Task TestGenerateOnInvalidInvocation()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public delegate int Func(ref int i);
 
@@ -4525,7 +4669,8 @@ class C
     {
         return [|Goo|](ref Goo);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539752")]
@@ -4533,7 +4678,7 @@ class C
         public async Task TestMissingOnMultipleLambdaInferences()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4558,7 +4703,8 @@ class C<T> : List<T>
     {
         return 3;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(540505, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540505")]
@@ -4566,7 +4712,7 @@ class C<T> : List<T>
         public async Task TestParameterTypeAmbiguity()
         {
             await TestInRegularAndScriptAsync(
-@"namespace N
+                @"namespace N
 {
     class N
     {
@@ -4581,7 +4727,7 @@ class C<T> : List<T>
     {
     }
 }",
-@"using System;
+                @"using System;
 
 namespace N
 {
@@ -4602,7 +4748,8 @@ namespace N
     class C
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(541176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541176")]
@@ -4610,7 +4757,7 @@ namespace N
         public async Task TestTernaryWithBodySidesBroken1()
         {
             await TestInRegularAndScriptAsync(
-@"public class C
+                @"public class C
 {
     void Method()
     {
@@ -4618,7 +4765,7 @@ namespace N
         int x = a > b ? [|M|](a) : M(b);
     }
 }",
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -4632,7 +4779,8 @@ public class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(541176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541176")]
@@ -4640,7 +4788,7 @@ public class C
         public async Task TestTernaryWithBodySidesBroken2()
         {
             await TestInRegularAndScriptAsync(
-@"public class C
+                @"public class C
 {
     void Method()
     {
@@ -4648,7 +4796,7 @@ public class C
         int x = a > b ? M(a) : [|M|](b);
     }
 }",
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -4662,14 +4810,15 @@ public class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestNotOnLeftOfAssign()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -4686,7 +4835,8 @@ public static class MyExtension
     {
         return s.Length;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(541405, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541405")]
@@ -4694,7 +4844,7 @@ public static class MyExtension
         public async Task TestMissingOnImplementedInterfaceMethod()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program<T> : ITest
+                @"class Program<T> : ITest
 {
     [|void ITest.Method(T t)
     {
@@ -4704,7 +4854,8 @@ public static class MyExtension
 interface ITest
 {
     void Method(object t);
-}");
+}"
+            );
         }
 
         [WorkItem(541660, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541660")]
@@ -4712,7 +4863,7 @@ interface ITest
         public async Task TestDelegateNamedVar()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4723,7 +4874,7 @@ class Program
 
     delegate void var(int x);
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4738,7 +4889,8 @@ class Program
     }
 
     delegate void var(int x);
-}");
+}"
+            );
         }
 
         [WorkItem(540991, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540991")]
@@ -4746,7 +4898,7 @@ class Program
         public async Task TestErrorVersusNamedTypeInSignature()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class Outer
 {
@@ -4767,7 +4919,8 @@ class A
         throw new NotImplementedException();
     }
 }",
-new TestParameters(Options.Regular));
+                new TestParameters(Options.Regular)
+            );
         }
 
         [Theory]
@@ -4780,7 +4933,7 @@ new TestParameters(Options.Regular));
         public async Task TestTypeParameterConstraints(string constraint)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class A<T> where T : {constraint}
 {{
@@ -4793,7 +4946,7 @@ class Program
         [|Bar|](x);
     }}
 }}",
-$@"using System;
+                $@"using System;
 
 class A<T> where T : {constraint}
 {{
@@ -4810,7 +4963,8 @@ class Program
     {{
         throw new NotImplementedException();
     }}
-}}");
+}}"
+            );
         }
 
         [WorkItem(542622, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542622")]
@@ -4818,7 +4972,7 @@ class Program
         public async Task TestLambdaTypeParameters()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4828,7 +4982,7 @@ class Program
         [|Bar|](() => x);
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4842,7 +4996,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -4855,7 +5010,7 @@ class Program
         public async Task TestMethodConstraints(string constraint)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class A<T> where T : {constraint}
 {{
@@ -4868,7 +5023,7 @@ class Program
         [|Bar<T>|](x);
     }}
 }}",
-$@"using System;
+                $@"using System;
 
 class A<T> where T : {constraint}
 {{
@@ -4885,7 +5040,8 @@ class Program
     {{
         throw new NotImplementedException();
     }}
-}}");
+}}"
+            );
         }
 
         [WorkItem(542627, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542627")]
@@ -4893,7 +5049,7 @@ class Program
         public async Task TestCaptureMethodTypeParametersReferencedInOuterType1()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -4902,7 +5058,7 @@ class Program
         [|Bar|](x);
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4916,7 +5072,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542658, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542658")]
@@ -4924,7 +5081,7 @@ class Program
         public async Task TestCaptureTypeParametersInConstraints()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4934,7 +5091,7 @@ class Program
         [|Bar|](x);
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4948,7 +5105,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542659, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542659")]
@@ -4956,7 +5114,7 @@ class Program
         public async Task TestConstraintOrder1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class A<T, S> where T : ICloneable, S
 {
@@ -4976,7 +5134,7 @@ class C : B<Exception>
         [|Bar|](x);
     }
 }",
-@"using System;
+                @"using System;
 
 class A<T, S> where T : ICloneable, S
 {
@@ -5000,7 +5158,8 @@ class C : B<Exception>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542678, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542678")]
@@ -5008,7 +5167,7 @@ class C : B<Exception>
         public async Task TestConstraintOrder2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class A<T, S, U> where T : U, S
 {
@@ -5028,7 +5187,7 @@ class C<U> : B<Exception, U>
         [|Bar|](x);
     }
 }",
-@"using System;
+                @"using System;
 
 class A<T, S, U> where T : U, S
 {
@@ -5052,7 +5211,8 @@ class C<U> : B<Exception, U>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542674, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542674")]
@@ -5060,13 +5220,13 @@ class C<U> : B<Exception, U>
         public async Task TestGenerateStaticMethodInField()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
     int x = [|Goo|]();
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -5076,7 +5236,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542680, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542680")]
@@ -5084,7 +5245,7 @@ class C
         public async Task TestGenerateIntoConstrainedTypeParameter()
         {
             await TestInRegularAndScriptAsync(
-@"interface I
+                @"interface I
 {
 }
 
@@ -5095,7 +5256,7 @@ class Program
         x.[|Bar|]();
     }
 }",
-@"interface I
+                @"interface I
 {
     void Bar();
 }
@@ -5106,7 +5267,8 @@ class Program
     {
         x.Bar();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542750, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542750")]
@@ -5114,7 +5276,7 @@ class Program
         public async Task TestCaptureOuterTypeParameter()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C<T>
@@ -5130,7 +5292,7 @@ class C<T>
 class D
 {
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C<T>
@@ -5149,7 +5311,8 @@ class D
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542744, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542744")]
@@ -5157,7 +5320,7 @@ class D
         public async Task TestMostDerivedTypeParameter()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class A<T, U> where T : U
 {
@@ -5177,7 +5340,7 @@ class C<U> : B<ArgumentException>
         [|Bar|](x);
     }
 }",
-@"using System;
+                @"using System;
 
 class A<T, U> where T : U
 {
@@ -5201,7 +5364,8 @@ class C<U> : B<ArgumentException>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(543152, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543152")]
@@ -5209,14 +5373,14 @@ class C<U> : B<ArgumentException>
         public async Task TestAnonymousTypeArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         [|M|](new { x = 1 });
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -5229,14 +5393,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestListOfAnonymousTypesArgument()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -5253,7 +5418,7 @@ class C
         return new List<T>();
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -5274,7 +5439,8 @@ class C
     {
         return new List<T>();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(543336, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543336")]
@@ -5282,14 +5448,14 @@ class C
         public async Task TestGenerateImplicitlyTypedArrays()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var a = new[] { [|goo|](2), 2, 3 };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -5302,7 +5468,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(543510, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543510")]
@@ -5310,7 +5477,7 @@ class C
         public async Task TestGenericArgWithMissingTypeParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public static int goo(ref int i)
     {
@@ -5321,7 +5488,8 @@ class C
     {
         return i;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544334, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544334")]
@@ -5329,7 +5497,7 @@ class C
         public async Task TestDuplicateWithErrorType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class class1
 {
@@ -5342,14 +5510,15 @@ class class1
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestNoGenerationIntoEntirelyHiddenType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -5361,14 +5530,15 @@ class class1
 class D
 {
 }
-#line default");
+#line default"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDoNotGenerateIntoHiddenRegion1()
         {
             await TestInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class C
 {
     void Goo()
@@ -5378,7 +5548,7 @@ class C
     }
 #line default
 }",
-@"#line default
+                @"#line default
 class C
 {
     private void Bar()
@@ -5392,14 +5562,15 @@ class C
 #line hidden
     }
 #line default
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDoNotGenerateIntoHiddenRegion2()
         {
             await TestInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class C
 {
     void Goo()
@@ -5413,7 +5584,7 @@ class C
 #line default
     }
 }",
-@"#line default
+                @"#line default
 class C
 {
     void Goo()
@@ -5431,14 +5602,15 @@ class C
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDoNotGenerateIntoHiddenRegion3()
         {
             await TestInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class C
 {
     void Goo()
@@ -5456,7 +5628,7 @@ class C
     {
     }
 }",
-@"#line default
+                @"#line default
 class C
 {
     void Goo()
@@ -5478,14 +5650,15 @@ class C
     void Quux()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDoNotAddImportsIntoHiddenRegion()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 #line hidden
 class C
 #line default
@@ -5497,7 +5670,7 @@ class C
     }
 #line default
 }",
-@"
+                @"
 #line hidden
 class C
 #line default
@@ -5513,7 +5686,8 @@ class C
 #line hidden
     }
 #line default
-}");
+}"
+            );
         }
 
         [WorkItem(545397, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545397")]
@@ -5522,7 +5696,7 @@ class C
         public async Task TestVarParameterTypeName()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -5532,7 +5706,7 @@ class Program
         [|goo|](out x);
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -5546,7 +5720,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545269, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545269")]
@@ -5554,7 +5729,7 @@ class Program
         public async Task TestGenerateInVenus1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
 #line 1 ""goo""
     void Goo()
@@ -5563,7 +5738,8 @@ class Program
     }
 #line default
 #line hidden
-}");
+}"
+            );
         }
 
         [WorkItem(538521, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538521")]
@@ -5571,7 +5747,7 @@ class Program
         public async Task TestWithYieldReturnInMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -5580,7 +5756,7 @@ class Program
         yield return [|Bar|]();
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -5594,14 +5770,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestWithYieldReturnInAsyncMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -5610,7 +5787,7 @@ class Program
         yield return [|Bar|]();
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -5624,7 +5801,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30235, "https://github.com/dotnet/roslyn/issues/30235")]
@@ -5632,7 +5810,7 @@ class Program
         public async Task TestWithYieldReturnInLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -5644,7 +5822,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -5661,7 +5839,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(784793, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784793")]
@@ -5669,14 +5848,14 @@ class Program
         public async Task TestGenerateMethodMissingForAnyArgumentInInvocationHavingErrorTypeAndNotBelongingToEnclosingNamedType()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         [|Main(args.Goo())|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -5689,7 +5868,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(907612, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/907612")]
@@ -5697,7 +5877,7 @@ class Program
         public async Task TestGenerateMethodWithLambda()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -5707,7 +5887,7 @@ class Program
         Baz([|() => { return true; }|]);
     }
 }",
-@"
+                @"
 using System;
 
 class Program
@@ -5721,7 +5901,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(889349, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/889349")]
@@ -5729,7 +5910,7 @@ class Program
         public async Task TestGenerateMethodForDifferentParameterName()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -5739,7 +5920,7 @@ class C
 
     void M(int y) { }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -5755,7 +5936,8 @@ class C
     }
 
     void M(int y) { }
-}");
+}"
+            );
         }
 
         [WorkItem(889349, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/889349")]
@@ -5763,7 +5945,7 @@ class C
         public async Task TestGenerateMethodForDifferentParameterNameCaseSensitive()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -5773,7 +5955,7 @@ class C
 
     void M(int y) { }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -5789,7 +5971,8 @@ class C
     }
 
     void M(int y) { }
-}");
+}"
+            );
         }
 
         [WorkItem(769760, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/769760")]
@@ -5797,7 +5980,7 @@ class C
         public async Task TestGenerateMethodForSameNamedButGenericUsage()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -5812,7 +5995,7 @@ class Program
         throw new NotImplementedException();
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -5831,7 +6014,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(910589, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/910589")]
@@ -5839,7 +6023,7 @@ class Program
         public async Task TestGenerateMethodForNewErrorCodeCS7036()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class C
 {
     void M(int x)
@@ -5847,7 +6031,7 @@ class C
         [|M|]();
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void M(int x)
@@ -5859,7 +6043,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(934729, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/934729")]
@@ -5867,7 +6052,7 @@ class C
         public async Task TestGenerateMethodUnknownReturnTypeInLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic; 
+                @"using System.Collections.Generic; 
 class C
 {
     void TestMethod(IEnumerable<C> c)
@@ -5875,7 +6060,7 @@ class C
        new C().[|TestMethod((a,b) => c.Add)|]
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic; 
 class C
 {
@@ -5888,7 +6073,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5896,13 +6082,13 @@ class C
         public async Task TestGenerateMethodInUnsafeMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class C {
     unsafe void Method(he) {
         int a = 10; [|TestMethod(&a)|];
     }
 }",
-@"using System;
+                @"using System;
 class C {
     unsafe void Method(he) {
         int a = 10; TestMethod(&a);
@@ -5912,7 +6098,8 @@ class C {
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5920,14 +6107,14 @@ class C {
         public async Task TestGenerateMethodInUnsafeMethodWithPointerArray()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     unsafe static void M1(int *[] o)
     {
         [|M2(o)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -5940,7 +6127,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5948,7 +6136,7 @@ class C
         public async Task TestGenerateMethodInUnsafeBlock()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -5962,7 +6150,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -5980,7 +6168,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5988,13 +6177,13 @@ class Program
         public async Task TestGenerateMethodInUnsafeMethodNoPointersInParameterList()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class C {
     unsafe void Method(he) {
         int a = 10; [|TestMethod(a)|];
     }
 }",
-@"using System;
+                @"using System;
 class C {
     unsafe void Method(he) {
         int a = 10; TestMethod(a);
@@ -6004,7 +6193,8 @@ class C {
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6012,7 +6202,7 @@ class C {
         public async Task TestGenerateMethodInUnsafeBlockNoPointers()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -6026,7 +6216,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -6044,7 +6234,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6052,7 +6243,7 @@ class Program
         public async Task TestGenerateMethodUnsafeReturnType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -6060,7 +6251,7 @@ class Program
         int* a = [|Test()|];
     }
 }",
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -6072,7 +6263,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6080,7 +6272,7 @@ class Program
         public async Task TestGenerateMethodUnsafeClass()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 unsafe class Program
 {
     static void Main()
@@ -6088,7 +6280,7 @@ unsafe class Program
         int* a = [|Test()|];
     }
 }",
-@"using System;
+                @"using System;
 unsafe class Program
 {
     static void Main()
@@ -6100,7 +6292,8 @@ unsafe class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6108,7 +6301,7 @@ unsafe class Program
         public async Task TestGenerateMethodUnsafeNestedClass()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 unsafe class Program
 {
     class MyClass
@@ -6119,7 +6312,7 @@ unsafe class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 unsafe class Program
 {
     class MyClass
@@ -6134,7 +6327,8 @@ unsafe class Program
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6142,7 +6336,7 @@ unsafe class Program
         public async Task TestGenerateMethodUnsafeNestedClass2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     unsafe class MyClass
@@ -6153,7 +6347,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 class Program
 {
     unsafe class MyClass
@@ -6168,20 +6362,22 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDoNotOfferMethodWithoutParenthesis()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6189,14 +6385,14 @@ class Program
         public async Task TestGenerateMethodInsideNameOf()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z|]);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -6207,7 +6403,8 @@ class Program
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6215,14 +6412,14 @@ class Program
         public async Task TestGenerateMethodInsideNameOf2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X|]);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -6233,7 +6430,8 @@ class Program
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6241,14 +6439,14 @@ class Program
         public async Task TestGenerateMethodInsideNameOf3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X.Y|]);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -6259,7 +6457,8 @@ class Program
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6267,7 +6466,7 @@ class Program
         public async Task TestGenerateMethodInsideNameOf4()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6283,7 +6482,7 @@ namespace Z
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6302,7 +6501,8 @@ namespace Z
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6310,13 +6510,14 @@ namespace Z
         public async Task TestGenerateMethodInsideNameOf5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|1 + 2|]);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6324,14 +6525,15 @@ namespace Z
         public async Task TestGenerateMethodInsideNameOf6()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var y = 1 + 2;
         var x = [|nameof(y)|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6339,7 +6541,7 @@ namespace Z
         public async Task TestGenerateMethodInsideNameOf7()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -6348,7 +6550,7 @@ namespace Z
         var x = [|nameof(y, z)|];
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -6361,7 +6563,8 @@ namespace Z
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6369,7 +6572,7 @@ namespace Z
         public async Task TestGenerateMethodInsideNameOf8()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6378,7 +6581,7 @@ class C
         var x = [|nameof|](1 + 2, """");
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6391,7 +6594,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6399,14 +6603,14 @@ class C
         public async Task TestGenerateMethodInsideNameOf9()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = [|nameof|](y, z);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -6417,7 +6621,8 @@ class C
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6425,14 +6630,14 @@ class C
         public async Task TestGenerateMethodInsideNameOf10()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|y|], z);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6445,7 +6650,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6453,14 +6659,14 @@ class C
         public async Task TestGenerateMethodInsideNameOf11()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof(y, [|z|]);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6473,7 +6679,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6481,7 +6688,7 @@ class C
         public async Task TestGenerateMethodInsideNameOf12()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6494,7 +6701,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6502,7 +6710,7 @@ class C
         public async Task TestGenerateMethodInsideNameOf13()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6516,7 +6724,7 @@ class C
         throw new NotImplementedException();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6534,7 +6742,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6542,7 +6751,7 @@ class C
         public async Task TestGenerateMethodInsideNameOf14()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6556,7 +6765,7 @@ class C
         throw new NotImplementedException();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6574,7 +6783,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6582,7 +6792,7 @@ class C
         public async Task TestGenerateMethodInsideNameOf15()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6596,7 +6806,7 @@ class C
         throw new NotImplementedException();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6614,7 +6824,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6622,7 +6833,7 @@ class C
         public async Task TestGenerateMethodInsideNameOf16()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6636,7 +6847,7 @@ class C
         throw new NotImplementedException();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6654,7 +6865,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1075289, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1075289")]
@@ -6662,7 +6874,7 @@ class C
         public async Task TestGenerateMethodForInaccessibleMethod()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -6683,7 +6895,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 namespace ConsoleApplication1
 {
@@ -6710,7 +6922,8 @@ namespace ConsoleApplication1
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6718,13 +6931,14 @@ namespace ConsoleApplication1
         public async Task TestGenerateMethodInConditionalAccessMissing()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         C x = new C? [|.B|]();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6732,14 +6946,14 @@ namespace ConsoleApplication1
         public async Task TestGenerateMethodInConditionalAccess()
         {
             await TestInRegularAndScriptAsync(
-@"public class C
+                @"public class C
 {
     void Main(C a)
     {
         C x = a?[|.B|]();
     }
 }",
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -6752,7 +6966,8 @@ public class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6760,14 +6975,14 @@ public class C
         public async Task TestGenerateMethodInConditionalAccess2()
         {
             await TestInRegularAndScriptAsync(
-@"public class C
+                @"public class C
 {
     void Main(C a)
     {
         int x = a?[|.B|]();
     }
 }",
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -6780,7 +6995,8 @@ public class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6788,14 +7004,14 @@ public class C
         public async Task TestGenerateMethodInConditionalAccess3()
         {
             await TestInRegularAndScriptAsync(
-@"public class C
+                @"public class C
 {
     void Main(C a)
     {
         int? x = a?[|.B|]();
     }
 }",
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -6808,7 +7024,8 @@ public class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6816,14 +7033,14 @@ public class C
         public async Task TestGenerateMethodInConditionalAccess4()
         {
             await TestInRegularAndScriptAsync(
-@"public class C
+                @"public class C
 {
     void Main(C a)
     {
         MyStruct? x = a?[|.B|]();
     }
 }",
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -6836,7 +7053,8 @@ public class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6844,7 +7062,7 @@ public class C
         public async Task TestTestGenerateMethodInConditionalAccess5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6857,7 +7075,7 @@ public class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6875,7 +7093,8 @@ class C
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6883,7 +7102,7 @@ class C
         public async Task TestGenerateMethodInConditionalAccess6()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6896,7 +7115,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6914,7 +7133,8 @@ class C
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6922,7 +7142,7 @@ class C
         public async Task TestGenerateMethodInConditionalAccess7()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6935,7 +7155,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -6953,7 +7173,8 @@ class C
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6961,7 +7182,7 @@ class C
         public async Task TestGenerateMethodInConditionalAccess8()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6974,7 +7195,7 @@ class C
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6990,7 +7211,8 @@ class C
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(39001, "https://github.com/dotnet/roslyn/issues/39001")]
@@ -6999,14 +7221,14 @@ class C
         public async Task TestGenerateMethodInConditionalAccess9()
         {
             await TestInRegularAndScriptAsync(
-@"struct C
+                @"struct C
 {
     void Main(C? c)
     {
         int? v = c?.[|Bar|]();
     }
 }",
-@"using System;
+                @"using System;
 
 struct C
 {
@@ -7019,18 +7241,19 @@ struct C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInPropertyInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int MyProperty { get; } = [|y|]();
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -7040,18 +7263,19 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInExpressionBodiedProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Y => [|y|]();
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -7061,18 +7285,19 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInExpressionBodiedMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static C GetValue(C p) => [|x|]();
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7082,7 +7307,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -7090,11 +7316,11 @@ class C
         public async Task TestGenerateMethodInExpressionBodiedAsyncTaskOfTMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static async System.Threading.Tasks.Task<C> GetValue(C p) => [|x|]();
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7104,7 +7330,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -7112,11 +7339,11 @@ class C
         public async Task TestGenerateMethodInExpressionBodiedAsyncTaskMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static async System.Threading.Tasks.Task GetValue(C p) => [|x|]();
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7126,18 +7353,19 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInExpressionBodiedAsyncVoidMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static async void GetValue(C p) => [|x|]();
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7147,18 +7375,19 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInExpressionBodiedOperator()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static C operator --(C p) => [|x|]();
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7168,14 +7397,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInDictionaryInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7184,7 +7414,7 @@ class Program
         var x = new Dictionary<string, int> { [[|key|]()] = 0 };
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -7198,14 +7428,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInDictionaryInitializer2()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7214,7 +7445,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = 0, [[|One|]()] = 1, [""Two""] = 2 };
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -7228,14 +7459,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInDictionaryInitializer3()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7244,7 +7476,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = [|i|]() };
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -7258,7 +7490,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(643, "https://github.com/dotnet/roslyn/issues/643")]
@@ -7266,7 +7499,7 @@ class Program
         public async Task TestGenerateMethodWithConfigureAwaitFalse()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7278,7 +7511,7 @@ class Program
         bool x = await [|Goo|]().ConfigureAwait(false);
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7294,7 +7527,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(643, "https://github.com/dotnet/roslyn/issues/643")]
@@ -7302,7 +7536,7 @@ class Program
         public async Task TestGenerateMethodWithMethodChaining()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7314,7 +7548,7 @@ class Program
         bool x = await [|Goo|]().ConfigureAwait(false);
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7330,7 +7564,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(643, "https://github.com/dotnet/roslyn/issues/643")]
@@ -7338,7 +7573,7 @@ class Program
         public async Task TestGenerateMethodWithMethodChaining2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -7352,7 +7587,7 @@ class C
         });
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -7370,7 +7605,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(529480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529480")]
@@ -7378,14 +7614,14 @@ class C
         public async Task TestInCollectionInitializers1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = new System.Collections.Generic.List<int> { [|T|]() };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7398,7 +7634,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(529480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529480")]
@@ -7406,14 +7643,14 @@ class C
         public async Task TestInCollectionInitializers2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = new System.Collections.Generic.Dictionary<int, bool> { { 1, [|T|]() } };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7426,7 +7663,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(5338, "https://github.com/dotnet/roslyn/issues/5338")]
@@ -7434,7 +7672,7 @@ class C
         public async Task TestGenerateMethodLambdaOverload1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Concurrent;
 
 class JToken
@@ -7450,7 +7688,7 @@ class Class1
         _deserializeHelpers.GetOrAdd(type, key => [|CreateDeserializeDelegate|](key));
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Concurrent;
 
 class JToken
@@ -7470,7 +7708,8 @@ class Class1
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(8010, "https://github.com/dotnet/roslyn/issues/8010")]
@@ -7478,7 +7717,7 @@ class Class1
         public async Task TestGenerateMethodFromStaticProperty()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7490,7 +7729,7 @@ public class Test
         }
     }
 }",
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7506,7 +7745,8 @@ public class Test
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(8010, "https://github.com/dotnet/roslyn/issues/8010")]
@@ -7514,7 +7754,7 @@ public class Test
         public async Task TestGenerateMethodFromStaticProperty_FieldInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class OtherClass
 {
@@ -7534,7 +7774,7 @@ public class Test
 
     private static OtherClass s_field;
 }",
-@"using System;
+                @"using System;
 
 public class OtherClass
 {
@@ -7558,7 +7798,8 @@ public class Test
     }
 
     private static OtherClass s_field;
-}");
+}"
+            );
         }
 
         [WorkItem(8230, "https://github.com/dotnet/roslyn/issues/8230")]
@@ -7566,7 +7807,7 @@ public class Test
         public async Task TestGenerateMethodForOverloadedSignatureWithDelegateType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class PropertyMetadata
 {
@@ -7586,7 +7827,7 @@ class Program
         new PropertyMetadata([|OnChanged|]);
     }
 }",
-@"using System;
+                @"using System;
 
 class PropertyMetadata
 {
@@ -7610,7 +7851,8 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(10004, "https://github.com/dotnet/roslyn/issues/10004")]
@@ -7618,7 +7860,7 @@ class Program
         public async Task TestGenerateMethodWithMultipleOfSameGenericType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -7631,7 +7873,7 @@ public static class Ex
         return [|t.M<T, T>()|];
     }
 }",
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -7648,7 +7890,8 @@ public static class Ex
     {
         return t.M<T, T>();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(11141, "https://github.com/dotnet/roslyn/issues/11141")]
@@ -7656,7 +7899,7 @@ public static class Ex
         public async Task InferTypeParameters1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7666,7 +7909,7 @@ class C
         int i = [|First<int>(list)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -7680,7 +7923,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -7688,14 +7932,14 @@ class C
         public async Task MethodWithNativeIntegerTypes()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void M(nint i, nuint i2)
     {
         (nint, nuint) d = [|NewMethod|](i, i2);
     }
 }",
-@"class Class
+                @"class Class
 {
     void M(nint i, nuint i2)
     {
@@ -7706,21 +7950,22 @@ class C
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task MethodWithTuple()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         (int, string) d = [|NewMethod|]((1, ""hello""));
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -7733,21 +7978,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task MethodWithTupleWithNames()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         (int a, string b) d = [|NewMethod|]((c: 1, d: ""hello""));
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -7760,21 +8006,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task MethodWithTupleWithOneName()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         (int a, string) d = [|NewMethod|]((c: 1, ""hello""));
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -7787,7 +8034,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -7795,14 +8043,14 @@ class Class
         public async Task TestOutVariableDeclaration_ImplicitlyTyped()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Undefined|](out var c);
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -7813,7 +8061,8 @@ class Class
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -7821,14 +8070,14 @@ class Class
         public async Task TestOutVariableDeclaration_ExplicitlyTyped()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Undefined|](out int c);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -7841,7 +8090,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -7849,14 +8099,14 @@ class Class
         public async Task TestOutVariableDeclaration_ImplicitlyTyped_NamedArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Undefined|](a: out var c);
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -7867,7 +8117,8 @@ class Class
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -7875,14 +8126,14 @@ class Class
         public async Task TestOutVariableDeclaration_ExplicitlyTyped_NamedArgument()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Undefined|](a: out int c);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -7895,21 +8146,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestOutVariableDeclaration_ImplicitlyTyped_CSharp6()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Undefined|](out var c);
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -7921,21 +8173,24 @@ class Class
         throw new System.NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestOutVariableDeclaration_ExplicitlyTyped_CSharp6()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Undefined|](out int c);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -7949,21 +8204,24 @@ class Class
         throw new NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestOutVariableDeclaration_ImplicitlyTyped_NamedArgument_CSharp6()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Undefined|](a: out var c);
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -7975,21 +8233,24 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
         throw new System.NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestOutVariableDeclaration_ExplicitlyTyped_NamedArgument_CSharp6()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Undefined|](a: out int c);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8003,7 +8264,10 @@ class Class
         throw new NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8011,7 +8275,7 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
         public async Task TestDeconstruction1()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8020,7 +8284,7 @@ class C
         (int x, int y) = [|Method|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8034,7 +8298,8 @@ class C
         throw new NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8042,7 +8307,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestDeconstruction2()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8051,7 +8316,7 @@ class C
         (int x, (int y, int z)) = [|Method|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8065,15 +8330,20 @@ class C
         throw new NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
-        [Fact/*(Skip = "https://github.com/dotnet/roslyn/issues/15508")*/, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
+        [
+            Fact /*(Skip = "https://github.com/dotnet/roslyn/issues/15508")*/
+            ,
+            Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)
+        ]
         [WorkItem(14136, "https://github.com/dotnet/roslyn/issues/14136")]
         public async Task TestDeconstruction3()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8082,7 +8352,7 @@ class C
         (int x, (int, int)) = [|Method|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8096,7 +8366,8 @@ class C
         throw new NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8104,7 +8375,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestDeconstruction4()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8113,7 +8384,7 @@ class C
         (int x, int) = [|Method|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8127,7 +8398,8 @@ class C
         throw new NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [WorkItem(15315, "https://github.com/dotnet/roslyn/issues/15315")]
@@ -8135,14 +8407,14 @@ parseOptions: TestOptions.Regular);
         public async Task TestInferBooleanTypeBasedOnName1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         var v = [|IsPrime|](i);
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
@@ -8153,7 +8425,8 @@ parseOptions: TestOptions.Regular);
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(15315, "https://github.com/dotnet/roslyn/issues/15315")]
@@ -8161,14 +8434,14 @@ parseOptions: TestOptions.Regular);
         public async Task TestInferBooleanTypeBasedOnName2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         var v = [|Issue|](i);
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
@@ -8179,7 +8452,8 @@ parseOptions: TestOptions.Regular);
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(16398, "https://github.com/dotnet/roslyn/issues/16398")]
@@ -8187,7 +8461,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestReturnsByRef()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C 
@@ -8197,7 +8471,7 @@ class C
         ref int i = ref [|Bar|]();
     }
 }",
-@"
+                @"
 using System;
 
 class C 
@@ -8211,7 +8485,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8219,7 +8494,7 @@ class C
         public async Task TestTupleElement1()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8228,7 +8503,7 @@ class C
         (int x, string y) t = ([|Method|](), null);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8242,7 +8517,8 @@ class C
         throw new NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8250,7 +8526,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestTupleElement2()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8259,7 +8535,7 @@ class C
         (int x, string y) t = (0, [|Method|]());
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8273,7 +8549,8 @@ class C
         throw new NotImplementedException();
     }
 }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8281,7 +8558,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestTupleAssignment()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8291,7 +8568,7 @@ class C
         (x, y) = [|Foo()|];
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8305,7 +8582,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8313,7 +8591,7 @@ class C
         public async Task TestTupleAssignment2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8322,7 +8600,7 @@ class C
         (x, y) = [|Foo()|];
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8335,7 +8613,8 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8343,7 +8622,7 @@ class C
         public async Task TestWithSameMethodNameAsTypeName1()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8354,7 +8633,7 @@ class C
 }
 
 class Goo { }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8370,7 +8649,8 @@ class C
 }
 
 class Goo { }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8378,7 +8658,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestWithSameMethodNameAsTypeName2()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8389,7 +8669,7 @@ class C
 }
 
 interface Goo { }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8405,7 +8685,8 @@ class C
 }
 
 interface Goo { }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8413,7 +8694,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestWithSameMethodNameAsTypeName3()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8424,7 +8705,7 @@ class C
 }
 
 struct Goo { }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8440,7 +8721,8 @@ class C
 }
 
 struct Goo { }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8448,7 +8730,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestWithSameMethodNameAsTypeName4()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8459,7 +8741,7 @@ class C
 }
 
 delegate void Goo()",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8475,7 +8757,8 @@ class C
 }
 
 delegate void Goo()",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8483,7 +8766,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestWithSameMethodNameAsTypeName5()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8494,7 +8777,7 @@ class C
 }
 
 namespace Goo { }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8510,7 +8793,8 @@ class C
 }
 
 namespace Goo { }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -8518,7 +8802,7 @@ parseOptions: TestOptions.Regular);
         public async Task TestWithSameMethodNameAsTypeName6()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8529,7 +8813,7 @@ class C
 }
 
 enum Goo { One }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -8545,7 +8829,8 @@ class C
 }
 
 enum Goo { One }",
-parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [WorkItem(26957, "https://github.com/dotnet/roslyn/issues/26957")]
@@ -8553,7 +8838,7 @@ parseOptions: TestOptions.Regular);
         public async Task NotOnNonExistedMetadataMemberWhenInsideLambda()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -8568,7 +8853,8 @@ class Program
             Console.WriteLine(arg.[|NotFound|]());
         });
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8576,14 +8862,14 @@ class Program
         public async Task TestGenerateMethodInExpressionBodiedGetter()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     int Property
     {
         get => [|GenerateMethod|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8596,7 +8882,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8604,14 +8891,14 @@ class Class
         public async Task TestGenerateMethodInExpressionBodiedSetter()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     int Property
     {
         set => [|GenerateMethod|](value);
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8624,7 +8911,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8632,14 +8920,14 @@ class Class
         public async Task TestGenerateMethodInExpressionBodiedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         int Local() => [|GenerateMethod()|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8652,7 +8940,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -8660,14 +8949,14 @@ class Class
         public async Task TestGenerateMethodInExpressionBodiedAsyncTaskOfTLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         async System.Threading.Tasks.Task<int> Local() => [|GenerateMethod()|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8680,7 +8969,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -8688,14 +8978,14 @@ class Class
         public async Task TestGenerateMethodInExpressionBodiedAsyncTaskLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         async System.Threading.Tasks.Task Local() => [|GenerateMethod()|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8708,21 +8998,22 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInExpressionBodiedAsyncVoidLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         async void Local() => [|GenerateMethod()|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8735,7 +9026,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8743,7 +9035,7 @@ class Class
         public async Task TestGenerateMethodInBlockBodiedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -8753,7 +9045,7 @@ class Class
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8769,14 +9061,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestGenerateMethodInBlockBodiedAsyncTaskOfTLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -8786,7 +9079,7 @@ class Class
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -8802,7 +9095,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8810,7 +9104,7 @@ class Class
         public async Task TestGenerateMethodInBlockBodiedLocalFunctionInsideLambdaExpression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Class
@@ -8826,7 +9120,7 @@ class Class
         }
     }
 }",
-@"
+                @"
 using System;
 
 class Class
@@ -8846,7 +9140,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8854,7 +9149,7 @@ class Class
         public async Task TestGenerateMethodInExpressionBodiedLocalFunctionInsideLambdaExpression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Class
@@ -8867,7 +9162,7 @@ class Class
         }
     }
 }",
-@"
+                @"
 using System;
 
 class Class
@@ -8884,7 +9179,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(24138, "https://github.com/dotnet/roslyn/issues/24138")]
@@ -8892,7 +9188,7 @@ class Class
         public async Task TestInCaseWhenClause()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Class
@@ -8906,7 +9202,7 @@ class Class
         }
     }
 }",
-@"
+                @"
 using System;
 
 class Class
@@ -8924,14 +9220,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestWithFunctionPointerArgument()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Class
@@ -8942,7 +9239,7 @@ class Class
         [|M2(y)|];
     }
 }",
-@"
+                @"
 using System;
 
 class Class
@@ -8957,14 +9254,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestWithFunctionPointerUnmanagedConvention()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Class
@@ -8975,7 +9273,7 @@ class Class
         [|M2(y)|];
     }
 }",
-@"
+                @"
 using System;
 
 class Class
@@ -8990,7 +9288,8 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -9003,7 +9302,7 @@ class Class
         public async Task TestWithFunctionPointerUnmanagedSpecificConvention(string convention)
         {
             await TestInRegularAndScriptAsync(
-$@"
+                $@"
 using System;
 
 class Class
@@ -9014,7 +9313,7 @@ class Class
         [|M2(y)|];
     }}
 }}",
-$@"
+                $@"
 using System;
 
 class Class
@@ -9029,14 +9328,15 @@ class Class
     {{
         throw new NotImplementedException();
     }}
-}}");
+}}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestWithFunctionPointerUnmanagedMissingConvention()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Class
@@ -9047,7 +9347,7 @@ class Class
         [|M2(y)|];
     }
 }",
-@"
+                @"
 using System;
 
 class Class
@@ -9062,14 +9362,15 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestNegativeIfGeneratingInDocumentFromSourceGenerator()
         {
             await TestMissingAsync(
-@" <Workspace>
+                @" <Workspace>
                     <Project Language=""C#"" AssemblyName=""ClassLibrary1"" CommonReferences=""true"">
                         <Document>
 public class C
@@ -9086,14 +9387,15 @@ public class GeneratedClass
 }
                         </DocumentFromSourceGenerator>
                     </Project>
-                </Workspace>");
+                </Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestIfGeneratingInPartialClassWithFileFromSourceGenerator()
         {
             await TestInRegularAndScriptAsync(
-@" <Workspace>
+                @" <Workspace>
                     <Project Language=""C#"" AssemblyName=""ClassLibrary1"" CommonReferences=""true"">
                         <Document>
 public class C
@@ -9117,7 +9419,8 @@ public partial class ClassWithGeneratedPartial
 }
                         </DocumentFromSourceGenerator>
                     </Project>
-                </Workspace>", @"
+                </Workspace>",
+                @"
 // regular file
 using System;
 
@@ -9128,7 +9431,8 @@ public partial class ClassWithGeneratedPartial
         throw new NotImplementedException();
     }
 }
-                        ");
+                        "
+            );
         }
     }
 }

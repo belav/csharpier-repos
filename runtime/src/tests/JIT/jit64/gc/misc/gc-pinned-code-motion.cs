@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-//this is regression test for 307867 
+//this is regression test for 307867
 //this failed due to inlining under gcstress
 internal class TEST
 {
@@ -13,7 +13,6 @@ internal class TEST
         string value = "Hello, World!";
         char[] dest = new char[value.Length];
         s_numLeft = value.Length - 1;
-
 
         while (s_numLeft >= 0)
         {
@@ -36,4 +35,3 @@ internal class TEST
         return 100;
     }
 }
-

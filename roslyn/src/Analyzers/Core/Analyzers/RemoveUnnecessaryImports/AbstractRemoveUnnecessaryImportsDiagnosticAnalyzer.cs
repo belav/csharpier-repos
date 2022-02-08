@@ -23,7 +23,8 @@ using Microsoft.CodeAnalysis.Options;
 namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
     internal abstract class AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer
-        : DiagnosticAnalyzer, IBuiltInAnalyzer
+        : DiagnosticAnalyzer,
+          IBuiltInAnalyzer
     {
         // NOTE: This is a trigger diagnostic, which doesn't show up in the ruleset editor and hence doesn't need a conventional IDE Diagnostic ID string.
         internal const string DiagnosticFixableId = "RemoveUnnecessaryImportsFixable";
@@ -34,11 +35,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 #pragma warning disable RS0030 // Do not used banned APIs - We cannot use AbstractBuiltInCodeStyleDiagnosticAnalyzer nor AbstractCodeQualityDiagnosticAnalyzer.
         // This analyzer is run against generated code while the abstract base classes mentioned doesn't.
         private static readonly DiagnosticDescriptor s_fixableIdDescriptor =
-            new(DiagnosticFixableId,
-                                     title: "", messageFormat: "", category: "",
-                                     defaultSeverity: DiagnosticSeverity.Hidden,
-                                     isEnabledByDefault: true,
-                                     customTags: DiagnosticCustomTags.NotConfigurable);
+            new(
+                DiagnosticFixableId,
+                title: "",
+                messageFormat: "",
+                category: "",
+                defaultSeverity: DiagnosticSeverity.Hidden,
+                isEnabledByDefault: true,
+                customTags: DiagnosticCustomTags.NotConfigurable
+            );
 #pragma warning restore RS0030 // Do not used banned APIs
 
         private readonly DiagnosticDescriptor _unnecessaryClassificationIdDescriptor;
@@ -51,50 +56,66 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             var titleAndMessageFormat = GetTitleAndMessageFormatForClassificationIdDescriptor();
 
 #pragma warning disable RS0030 // Do not used banned APIs
-            _unnecessaryClassificationIdDescriptor =
-                new DiagnosticDescriptor(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId,
-                                         titleAndMessageFormat,
-                                         titleAndMessageFormat,
-                                         DiagnosticCategory.Style,
-                                         DiagnosticSeverity.Hidden,
-                                         isEnabledByDefault: true,
-                                         helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId),
-                                         customTags: DiagnosticCustomTags.Unnecessary.Concat(EnforceOnBuildValues.RemoveUnnecessaryImports.ToCustomTag()).ToArray());
+            _unnecessaryClassificationIdDescriptor = new DiagnosticDescriptor(
+                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId,
+                titleAndMessageFormat,
+                titleAndMessageFormat,
+                DiagnosticCategory.Style,
+                DiagnosticSeverity.Hidden,
+                isEnabledByDefault: true,
+                helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
+                    IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId
+                ),
+                customTags: DiagnosticCustomTags.Unnecessary
+                    .Concat(EnforceOnBuildValues.RemoveUnnecessaryImports.ToCustomTag())
+                    .ToArray()
+            );
 
-            _classificationIdDescriptor =
-                new DiagnosticDescriptor(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId,
-                                         titleAndMessageFormat,
-                                         titleAndMessageFormat,
-                                         DiagnosticCategory.Style,
-                                         DiagnosticSeverity.Hidden,
-                                         isEnabledByDefault: true,
-                                         helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId),
-                                         customTags: EnforceOnBuildValues.RemoveUnnecessaryImports.ToCustomTag());
+            _classificationIdDescriptor = new DiagnosticDescriptor(
+                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId,
+                titleAndMessageFormat,
+                titleAndMessageFormat,
+                DiagnosticCategory.Style,
+                DiagnosticSeverity.Hidden,
+                isEnabledByDefault: true,
+                helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
+                    IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId
+                ),
+                customTags: EnforceOnBuildValues.RemoveUnnecessaryImports.ToCustomTag()
+            );
 
-            _unnecessaryGeneratedCodeClassificationIdDescriptor =
-                new DiagnosticDescriptor(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId + "_gen",
-                                         titleAndMessageFormat,
-                                         titleAndMessageFormat,
-                                         DiagnosticCategory.Style,
-                                         DiagnosticSeverity.Hidden,
-                                         isEnabledByDefault: true,
-                                         helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId),
-                                         customTags: DiagnosticCustomTags.UnnecessaryAndNotConfigurable);
+            _unnecessaryGeneratedCodeClassificationIdDescriptor = new DiagnosticDescriptor(
+                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId + "_gen",
+                titleAndMessageFormat,
+                titleAndMessageFormat,
+                DiagnosticCategory.Style,
+                DiagnosticSeverity.Hidden,
+                isEnabledByDefault: true,
+                helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
+                    IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId
+                ),
+                customTags: DiagnosticCustomTags.UnnecessaryAndNotConfigurable
+            );
 
-            _generatedCodeClassificationIdDescriptor =
-                new DiagnosticDescriptor(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId + "_gen",
-                                         titleAndMessageFormat,
-                                         titleAndMessageFormat,
-                                         DiagnosticCategory.Style,
-                                         DiagnosticSeverity.Hidden,
-                                         isEnabledByDefault: true,
-                                         helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId),
-                                         customTags: DiagnosticCustomTags.NotConfigurable);
+            _generatedCodeClassificationIdDescriptor = new DiagnosticDescriptor(
+                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId + "_gen",
+                titleAndMessageFormat,
+                titleAndMessageFormat,
+                DiagnosticCategory.Style,
+                DiagnosticSeverity.Hidden,
+                isEnabledByDefault: true,
+                helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
+                    IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId
+                ),
+                customTags: DiagnosticCustomTags.NotConfigurable
+            );
 #pragma warning restore RS0030 // Do not used banned APIs
         }
 
         protected abstract LocalizableString GetTitleAndMessageFormatForClassificationIdDescriptor();
-        protected abstract ImmutableArray<SyntaxNode> MergeImports(ImmutableArray<SyntaxNode> unnecessaryImports);
+        protected abstract ImmutableArray<SyntaxNode> MergeImports(
+            ImmutableArray<SyntaxNode> unnecessaryImports
+        );
         protected abstract bool IsRegularCommentOrDocComment(SyntaxTrivia trivia);
         protected abstract IUnnecessaryImportsProvider UnnecessaryImportsProvider { get; }
 
@@ -107,17 +128,21 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                     _unnecessaryClassificationIdDescriptor,
                     _classificationIdDescriptor,
                     _unnecessaryGeneratedCodeClassificationIdDescriptor,
-                    _generatedCodeClassificationIdDescriptor);
+                    _generatedCodeClassificationIdDescriptor
+                );
             }
         }
 
         public CodeActionRequestPriority RequestPriority => CodeActionRequestPriority.Normal;
+
         public bool OpenFileOnly(OptionSet options) => false;
 
         public override void Initialize(AnalysisContext context)
         {
             context.EnableConcurrentExecution();
-            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+            context.ConfigureGeneratedCodeAnalysis(
+                GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+            );
 
             context.RegisterSemanticModelAction(AnalyzeSemanticModel);
         }
@@ -128,7 +153,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             var cancellationToken = context.CancellationToken;
             var language = context.SemanticModel.Language;
 
-            var unnecessaryImports = UnnecessaryImportsProvider.GetUnnecessaryImports(context.SemanticModel, cancellationToken);
+            var unnecessaryImports = UnnecessaryImportsProvider.GetUnnecessaryImports(
+                context.SemanticModel,
+                cancellationToken
+            );
             if (unnecessaryImports.Any())
             {
                 // The IUnnecessaryImportsService will return individual import pieces that
@@ -141,20 +169,34 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 var fadeOut = ShouldFade(context.Options, tree, language, cancellationToken);
 
                 DiagnosticDescriptor descriptor;
-                if (GeneratedCodeUtilities.IsGeneratedCode(tree, IsRegularCommentOrDocComment, cancellationToken))
+                if (
+                    GeneratedCodeUtilities.IsGeneratedCode(
+                        tree,
+                        IsRegularCommentOrDocComment,
+                        cancellationToken
+                    )
+                )
                 {
-                    descriptor = fadeOut ? _unnecessaryGeneratedCodeClassificationIdDescriptor : _generatedCodeClassificationIdDescriptor;
+                    descriptor = fadeOut
+                        ? _unnecessaryGeneratedCodeClassificationIdDescriptor
+                        : _generatedCodeClassificationIdDescriptor;
                 }
                 else
                 {
-                    descriptor = fadeOut ? _unnecessaryClassificationIdDescriptor : _classificationIdDescriptor;
+                    descriptor = fadeOut
+                        ? _unnecessaryClassificationIdDescriptor
+                        : _classificationIdDescriptor;
                 }
 
                 var getLastTokenFunc = GetLastTokenDelegateForContiguousSpans();
                 var contiguousSpans = unnecessaryImports.GetContiguousSpans(getLastTokenFunc);
-                var diagnostics =
-                    CreateClassificationDiagnostics(contiguousSpans, tree, descriptor, cancellationToken).Concat(
-                    CreateFixableDiagnostics(unnecessaryImports, tree, cancellationToken));
+                var diagnostics = CreateClassificationDiagnostics(
+                        contiguousSpans,
+                        tree,
+                        descriptor,
+                        cancellationToken
+                    )
+                    .Concat(CreateFixableDiagnostics(unnecessaryImports, tree, cancellationToken));
 
                 foreach (var diagnostic in diagnostics)
                 {
@@ -162,23 +204,36 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 }
             }
 
-            static bool ShouldFade(AnalyzerOptions options, SyntaxTree tree, string language, CancellationToken cancellationToken)
+            static bool ShouldFade(
+                AnalyzerOptions options,
+                SyntaxTree tree,
+                string language,
+                CancellationToken cancellationToken
+            )
             {
 #if CODE_STYLE
                 return true;
 #else
-                return options.GetOption(Fading.FadingOptions.FadeOutUnusedImports, language, tree, cancellationToken);
+                return options.GetOption(
+                    Fading.FadingOptions.FadeOutUnusedImports,
+                    language,
+                    tree,
+                    cancellationToken
+                );
 #endif
             }
         }
 
-        protected virtual Func<SyntaxNode, SyntaxToken>? GetLastTokenDelegateForContiguousSpans()
-            => null;
+        protected virtual Func<SyntaxNode, SyntaxToken>? GetLastTokenDelegateForContiguousSpans() =>
+            null;
 
         // Create one diagnostic for each unnecessary span that will be classified as Unnecessary
         private static IEnumerable<Diagnostic> CreateClassificationDiagnostics(
-            IEnumerable<TextSpan> contiguousSpans, SyntaxTree tree,
-            DiagnosticDescriptor descriptor, CancellationToken cancellationToken)
+            IEnumerable<TextSpan> contiguousSpans,
+            SyntaxTree tree,
+            DiagnosticDescriptor descriptor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var span in contiguousSpans)
             {
@@ -192,10 +247,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         }
 
         protected abstract IEnumerable<TextSpan> GetFixableDiagnosticSpans(
-            IEnumerable<SyntaxNode> nodes, SyntaxTree tree, CancellationToken cancellationToken);
+            IEnumerable<SyntaxNode> nodes,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        );
 
         private IEnumerable<Diagnostic> CreateFixableDiagnostics(
-            IEnumerable<SyntaxNode> nodes, SyntaxTree tree, CancellationToken cancellationToken)
+            IEnumerable<SyntaxNode> nodes,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        )
         {
             var spans = GetFixableDiagnosticSpans(nodes, tree, cancellationToken);
 
@@ -205,7 +266,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             }
         }
 
-        public DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
+        public DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
     }
 }

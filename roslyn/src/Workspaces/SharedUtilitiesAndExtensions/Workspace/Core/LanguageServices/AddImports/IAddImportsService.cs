@@ -23,30 +23,61 @@ namespace Microsoft.CodeAnalysis.AddImports
         /// <paramref name="import"/> in scope at <paramref name="contextLocation"/>.  This includes
         /// global imports for VB.
         /// </summary>
-        bool HasExistingImport(Compilation compilation, SyntaxNode root, SyntaxNode? contextLocation, SyntaxNode import, SyntaxGenerator generator);
+        bool HasExistingImport(
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            SyntaxNode import,
+            SyntaxGenerator generator
+        );
 
         /// <summary>
         /// Given a context location in a provided syntax tree, returns the appropriate container
         /// that <paramref name="import"/> should be added to.
         /// </summary>
-        SyntaxNode GetImportContainer(SyntaxNode root, SyntaxNode? contextLocation, SyntaxNode import, OptionSet options);
+        SyntaxNode GetImportContainer(
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            SyntaxNode import,
+            OptionSet options
+        );
 
         SyntaxNode AddImports(
-            Compilation compilation, SyntaxNode root, SyntaxNode? contextLocation,
-            IEnumerable<SyntaxNode> newImports, SyntaxGenerator generator, OptionSet options,
-            bool allowInHiddenRegions, CancellationToken cancellationToken);
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            IEnumerable<SyntaxNode> newImports,
+            SyntaxGenerator generator,
+            OptionSet options,
+            bool allowInHiddenRegions,
+            CancellationToken cancellationToken
+        );
     }
 
     internal static class IAddImportServiceExtensions
     {
         public static SyntaxNode AddImport(
-            this IAddImportsService service, Compilation compilation, SyntaxNode root,
-            SyntaxNode contextLocation, SyntaxNode newImport, SyntaxGenerator generator, OptionSet options,
-            bool allowInHiddenRegions, CancellationToken cancellationToken)
+            this IAddImportsService service,
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode contextLocation,
+            SyntaxNode newImport,
+            SyntaxGenerator generator,
+            OptionSet options,
+            bool allowInHiddenRegions,
+            CancellationToken cancellationToken
+        )
         {
-            return service.AddImports(compilation, root, contextLocation,
-                SpecializedCollections.SingletonEnumerable(newImport), generator, options,
-                allowInHiddenRegions, cancellationToken);
+            return service.AddImports(
+                compilation,
+                root,
+                contextLocation,
+                SpecializedCollections.SingletonEnumerable(newImport),
+                generator,
+                options,
+                allowInHiddenRegions,
+                cancellationToken
+            );
         }
     }
 }

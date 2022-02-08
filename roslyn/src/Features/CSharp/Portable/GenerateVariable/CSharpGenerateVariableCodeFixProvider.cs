@@ -19,7 +19,13 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.GenerateVariable
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.GenerateVariable), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.GenerateVariable
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.GenerateMethod)]
     internal class CSharpGenerateVariableCodeFixProvider : AbstractGenerateMemberCodeFixProvider
     {
@@ -32,22 +38,28 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateVariable
         private const string CS0118 = nameof(CS0118); // error CS0118: 'C' is a type but is used like a variable
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpGenerateVariableCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpGenerateVariableCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS1061, CS0103, CS0117, CS0539, CS0246, CS0120, CS0118);
 
-        protected override bool IsCandidate(SyntaxNode node, SyntaxToken token, Diagnostic diagnostic)
-            => node is SimpleNameSyntax or PropertyDeclarationSyntax or MemberBindingExpressionSyntax;
+        protected override bool IsCandidate(
+            SyntaxNode node,
+            SyntaxToken token,
+            Diagnostic diagnostic
+        ) => node is SimpleNameSyntax or PropertyDeclarationSyntax or MemberBindingExpressionSyntax;
 
         protected override SyntaxNode GetTargetNode(SyntaxNode node)
         {
             if (node.IsKind(SyntaxKind.MemberBindingExpression))
             {
-                var nameNode = node.ChildNodes().FirstOrDefault(n => n.IsKind(SyntaxKind.IdentifierName));
+                var nameNode = node.ChildNodes()
+                    .FirstOrDefault(n => n.IsKind(SyntaxKind.IdentifierName));
                 if (nameNode != null)
                 {
                     return nameNode;
@@ -58,7 +70,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateVariable
         }
 
         protected override Task<ImmutableArray<CodeAction>> GetCodeActionsAsync(
-            Document document, SyntaxNode node, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetLanguageService<IGenerateVariableService>();
             return service.GenerateVariableAsync(document, node, cancellationToken);

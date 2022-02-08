@@ -54,8 +54,7 @@ namespace ILCompiler.IBC
                 result |= (current & 0x7f) << shift;
 
                 shift += 7;
-            }
-            while ((shift <= 28) && ((current & 0x80) != 0));
+            } while ((shift <= 28) && ((current & 0x80) != 0));
 
             if ((current & 0x80) != 0)
             {

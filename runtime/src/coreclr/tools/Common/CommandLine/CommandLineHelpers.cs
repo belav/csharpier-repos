@@ -15,7 +15,11 @@ namespace Internal.CommandLine
     internal class Helpers
     {
         // Helper to create a collection of paths unique in their simple names.
-        public static void AppendExpandedPaths(Dictionary<string, string> dictionary, string pattern, bool strict)
+        public static void AppendExpandedPaths(
+            Dictionary<string, string> dictionary,
+            string pattern,
+            bool strict
+        )
         {
             bool empty = true;
 
@@ -37,8 +41,12 @@ namespace Internal.CommandLine
                     {
                         if (strict)
                         {
-                            throw new CommandLineException("Multiple input files matching same simple name " +
-                                fullFileName + " " + dictionary[simpleName]);
+                            throw new CommandLineException(
+                                "Multiple input files matching same simple name "
+                                    + fullFileName
+                                    + " "
+                                    + dictionary[simpleName]
+                            );
                         }
                     }
                     else
@@ -63,9 +71,15 @@ namespace Internal.CommandLine
             }
         }
 
-// ILVerify needs to switch command line processing to Internal.CommandLine and then it can take advantage of this too
+        // ILVerify needs to switch command line processing to Internal.CommandLine and then it can take advantage of this too
 #if !ILVERIFY
-        public static void MakeReproPackage(string makeReproPath, string outputFilePath, string[] args, ArgumentSyntax argSyntax, IEnumerable<string> inputOptions)
+        public static void MakeReproPackage(
+            string makeReproPath,
+            string outputFilePath,
+            string[] args,
+            ArgumentSyntax argSyntax,
+            IEnumerable<string> inputOptions
+        )
         {
             Directory.CreateDirectory(makeReproPath);
 
@@ -78,7 +92,11 @@ namespace Internal.CommandLine
             catch { }
             try
             {
-                details.Add(System.Diagnostics.FileVersionInfo.GetVersionInfo(Environment.GetCommandLineArgs()[0]).ToString());
+                details.Add(
+                    System.Diagnostics.FileVersionInfo
+                        .GetVersionInfo(Environment.GetCommandLineArgs()[0])
+                        .ToString()
+                );
             }
             catch { }
 
@@ -124,7 +142,8 @@ namespace Internal.CommandLine
                 }
 
                 HashSet<string> inputOptionNames = new HashSet<string>(inputOptions);
-                Dictionary<string, string> inputToReproPackageFileName = new Dictionary<string, string>();
+                Dictionary<string, string> inputToReproPackageFileName =
+                    new Dictionary<string, string>();
 
                 List<string> rspFile = new List<string>();
                 foreach (var option in argSyntax.GetOptions())
@@ -140,14 +159,17 @@ namespace Internal.CommandLine
                         {
                             if (inputOptionNames.Contains(option.GetDisplayName()))
                             {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary =
+                                    new Dictionary<string, string>();
                                 foreach (string optInList in (IEnumerable)option.Value)
                                 {
                                     Helpers.AppendExpandedPaths(dictionary, optInList, false);
                                 }
                                 foreach (string inputFile in dictionary.Values)
                                 {
-                                    rspFile.Add($"{option.GetDisplayName()}:{ConvertFromInputPathToReproPackagePath(inputFile)}");
+                                    rspFile.Add(
+                                        $"{option.GetDisplayName()}:{ConvertFromInputPathToReproPackagePath(inputFile)}"
+                                    );
                                 }
                             }
                             else
@@ -173,12 +195,16 @@ namespace Internal.CommandLine
                         {
                             foreach (object optInList in (IEnumerable)parameter.Value)
                             {
-                                rspFile.Add($"{ConvertFromInputPathToReproPackagePath((string)optInList)}");
+                                rspFile.Add(
+                                    $"{ConvertFromInputPathToReproPackagePath((string)optInList)}"
+                                );
                             }
                         }
                         else
                         {
-                            rspFile.Add($"{ConvertFromInputPathToReproPackagePath((string)parameter.Value.ToString())}");
+                            rspFile.Add(
+                                $"{ConvertFromInputPathToReproPackagePath((string)parameter.Value.ToString())}"
+                            );
                         }
                     }
                 }
@@ -192,7 +218,12 @@ namespace Internal.CommandLine
 
                 string ConvertFromInputPathToReproPackagePath(string inputPath)
                 {
-                    if (inputToReproPackageFileName.TryGetValue(inputPath, out string reproPackagePath))
+                    if (
+                        inputToReproPackageFileName.TryGetValue(
+                            inputPath,
+                            out string reproPackagePath
+                        )
+                    )
                     {
                         return reproPackagePath;
                     }

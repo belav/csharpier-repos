@@ -10,38 +10,61 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
     internal class IncrementalAnalyzerBase : IIncrementalAnalyzer
     {
-        protected IncrementalAnalyzerBase()
-        {
-        }
+        protected IncrementalAnalyzerBase() { }
 
-        public virtual Task NewSolutionSnapshotAsync(Solution solution, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public virtual Task NewSolutionSnapshotAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public virtual Task DocumentOpenAsync(Document document, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public virtual Task DocumentOpenAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public virtual Task DocumentCloseAsync(Document document, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public virtual Task DocumentCloseAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public virtual Task DocumentResetAsync(Document document, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public virtual Task DocumentResetAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public virtual bool NeedsReanalysisOnOptionChanged(object sender, OptionChangedEventArgs e)
-            => false;
+        public virtual bool NeedsReanalysisOnOptionChanged(
+            object sender,
+            OptionChangedEventArgs e
+        ) => false;
 
-        public virtual Task AnalyzeSyntaxAsync(Document document, InvocationReasons reasons, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public virtual Task AnalyzeSyntaxAsync(
+            Document document,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public virtual Task AnalyzeDocumentAsync(Document document, SyntaxNode bodyOpt, InvocationReasons reasons, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public virtual Task AnalyzeDocumentAsync(
+            Document document,
+            SyntaxNode bodyOpt,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public virtual Task AnalyzeProjectAsync(Project project, bool semanticsChanged, InvocationReasons reasons, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public virtual Task AnalyzeProjectAsync(
+            Project project,
+            bool semanticsChanged,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public virtual Task RemoveDocumentAsync(DocumentId documentId, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public virtual Task RemoveDocumentAsync(
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public virtual Task RemoveProjectAsync(ProjectId projectId, CancellationToken cancellation)
-            => Task.CompletedTask;
+        public virtual Task RemoveProjectAsync(
+            ProjectId projectId,
+            CancellationToken cancellation
+        ) => Task.CompletedTask;
     }
 }

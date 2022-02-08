@@ -27,9 +27,7 @@ public class FileStreamResult : FileResult
     /// <param name="fileStream">The stream with the file.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     public FileStreamResult(Stream fileStream, string contentType)
-        : this(fileStream, MediaTypeHeaderValue.Parse(contentType))
-    {
-    }
+        : this(fileStream, MediaTypeHeaderValue.Parse(contentType)) { }
 
     /// <summary>
     /// Creates a new <see cref="FileStreamResult"/> instance with
@@ -55,7 +53,6 @@ public class FileStreamResult : FileResult
     public Stream FileStream
     {
         get => _fileStream;
-
         [MemberNotNull(nameof(_fileStream))]
         set
         {
@@ -76,7 +73,9 @@ public class FileStreamResult : FileResult
             throw new ArgumentNullException(nameof(context));
         }
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<FileStreamResult>>();
+        var executor = context.HttpContext.RequestServices.GetRequiredService<
+            IActionResultExecutor<FileStreamResult>
+        >();
         return executor.ExecuteAsync(context, this);
     }
 }

@@ -18,8 +18,13 @@ namespace Microsoft.CodeAnalysis
         private readonly string? _display;
         private readonly Metadata _metadata;
 
-        internal MetadataImageReference(Metadata metadata, MetadataReferenceProperties properties, DocumentationProvider? documentation, string? filePath, string? display)
-            : base(properties, filePath, documentation ?? DocumentationProvider.Default)
+        internal MetadataImageReference(
+            Metadata metadata,
+            MetadataReferenceProperties properties,
+            DocumentationProvider? documentation,
+            string? filePath,
+            string? display
+        ) : base(properties, filePath, documentation ?? DocumentationProvider.Default)
         {
             _display = display;
             _metadata = metadata;
@@ -36,21 +41,30 @@ namespace Microsoft.CodeAnalysis
             throw ExceptionUtilities.Unreachable;
         }
 
-        protected override PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties)
+        protected override PortableExecutableReference WithPropertiesImpl(
+            MetadataReferenceProperties properties
+        )
         {
             return new MetadataImageReference(
                 _metadata,
                 properties,
                 this.DocumentationProvider,
                 this.FilePath,
-                _display);
+                _display
+            );
         }
 
         public override string Display
         {
             get
             {
-                return _display ?? FilePath ?? (Properties.Kind == MetadataImageKind.Assembly ? CodeAnalysisResources.InMemoryAssembly : CodeAnalysisResources.InMemoryModule);
+                return _display
+                    ?? FilePath
+                    ?? (
+                        Properties.Kind == MetadataImageKind.Assembly
+                            ? CodeAnalysisResources.InMemoryAssembly
+                            : CodeAnalysisResources.InMemoryModule
+                    );
             }
         }
 

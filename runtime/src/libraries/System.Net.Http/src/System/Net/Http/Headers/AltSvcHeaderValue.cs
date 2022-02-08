@@ -13,9 +13,22 @@ namespace System.Net.Http.Headers
     /// </remarks>
     internal sealed class AltSvcHeaderValue
     {
-        public static AltSvcHeaderValue Clear { get; } = new AltSvcHeaderValue("clear", host: null, port: 0, maxAge: TimeSpan.Zero, persist: false);
+        public static AltSvcHeaderValue Clear { get; } =
+            new AltSvcHeaderValue(
+                "clear",
+                host: null,
+                port: 0,
+                maxAge: TimeSpan.Zero,
+                persist: false
+            );
 
-        public AltSvcHeaderValue(string alpnProtocolName, string? host, int port, TimeSpan maxAge, bool persist)
+        public AltSvcHeaderValue(
+            string alpnProtocolName,
+            string? host,
+            int port,
+            TimeSpan maxAge,
+            bool persist
+        )
         {
             AlpnProtocolName = alpnProtocolName;
             Host = host;
@@ -50,18 +63,24 @@ namespace System.Net.Http.Headers
 
         public override string ToString()
         {
-            StringBuilder sb = StringBuilderCache.Acquire(capacity: AlpnProtocolName.Length + (Host?.Length ?? 0) + 64);
+            StringBuilder sb = StringBuilderCache.Acquire(
+                capacity: AlpnProtocolName.Length + (Host?.Length ?? 0) + 64
+            );
 
             sb.Append(AlpnProtocolName);
             sb.Append("=\"");
-            if (Host != null) sb.Append(Host);
+            if (Host != null)
+                sb.Append(Host);
             sb.Append(':');
             sb.Append((uint)Port);
             sb.Append('"');
 
             if (MaxAge != TimeSpan.FromTicks(AltSvcHeaderParser.DefaultMaxAgeTicks))
             {
-                sb.Append(CultureInfo.InvariantCulture, $"; ma={MaxAge.Ticks / TimeSpan.TicksPerSecond}");
+                sb.Append(
+                    CultureInfo.InvariantCulture,
+                    $"; ma={MaxAge.Ticks / TimeSpan.TicksPerSecond}"
+                );
             }
 
             if (Persist)

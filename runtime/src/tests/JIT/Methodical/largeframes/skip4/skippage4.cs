@@ -11,12 +11,12 @@ using System.Runtime.CompilerServices;
 
 namespace BigFrames
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct LargeStructWithRef
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(65496)] // Must be 8-byte aligned for test to work on 64-bit platforms.
         public Object o1;
     }

@@ -18,11 +18,13 @@ public static class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                if (UseStartup)
+            .ConfigureWebHostDefaults(
+                webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    if (UseStartup)
+                    {
+                        webBuilder.UseStartup<Startup>();
+                    }
                 }
-            });
+            );
 }

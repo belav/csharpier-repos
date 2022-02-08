@@ -8,9 +8,6 @@ namespace System.Net.Http.Mocks
 {
     internal class MockDelegatingStream : DelegatingStream
     {
-        public MockDelegatingStream(Stream innerStream)
-            : base(innerStream)
-        {
-        }
+        public MockDelegatingStream(Stream innerStream) : base(innerStream) { }
     }
 }

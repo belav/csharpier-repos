@@ -11,7 +11,8 @@ internal class DefaultEndpointRouteBuilder : IEndpointRouteBuilder
 {
     public DefaultEndpointRouteBuilder(IApplicationBuilder applicationBuilder)
     {
-        ApplicationBuilder = applicationBuilder ?? throw new ArgumentNullException(nameof(applicationBuilder));
+        ApplicationBuilder =
+            applicationBuilder ?? throw new ArgumentNullException(nameof(applicationBuilder));
         DataSources = new List<EndpointDataSource>();
     }
 

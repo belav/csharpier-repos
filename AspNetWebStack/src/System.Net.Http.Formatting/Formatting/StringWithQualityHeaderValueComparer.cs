@@ -9,9 +9,9 @@ namespace System.Net.Http.Formatting
 {
     /// <summary>
     /// Implementation of <see cref="IComparer{T}"/> that can compare content negotiation header fields
-    /// based on their quality values (a.k.a q-values). This applies to values used in accept-charset, 
-    /// accept-encoding, accept-language and related header fields with similar syntax rules. See 
-    /// <see cref="MediaTypeWithQualityHeaderValueComparer"/> for a comparer for media type 
+    /// based on their quality values (a.k.a q-values). This applies to values used in accept-charset,
+    /// accept-encoding, accept-language and related header fields with similar syntax rules. See
+    /// <see cref="MediaTypeWithQualityHeaderValueComparer"/> for a comparer for media type
     /// q-values.
     /// </summary>
     internal class StringWithQualityHeaderValueComparer : IComparer<StringWithQualityHeaderValue>
@@ -19,9 +19,7 @@ namespace System.Net.Http.Formatting
         private static readonly StringWithQualityHeaderValueComparer _qualityComparer =
             new StringWithQualityHeaderValueComparer();
 
-        private StringWithQualityHeaderValueComparer()
-        {
-        }
+        private StringWithQualityHeaderValueComparer() { }
 
         public static StringWithQualityHeaderValueComparer QualityComparer
         {
@@ -38,8 +36,10 @@ namespace System.Net.Http.Formatting
         /// <param name="stringWithQuality1">The first value to compare.</param>
         /// <param name="stringWithQuality2">The second value to compare</param>
         /// <returns>The result of the comparison.</returns>
-        public int Compare(StringWithQualityHeaderValue stringWithQuality1,
-                           StringWithQualityHeaderValue stringWithQuality2)
+        public int Compare(
+            StringWithQualityHeaderValue stringWithQuality1,
+            StringWithQualityHeaderValue stringWithQuality2
+        )
         {
             Contract.Assert(stringWithQuality1 != null);
             Contract.Assert(stringWithQuality2 != null);
@@ -56,13 +56,23 @@ namespace System.Net.Http.Formatting
                 return 1;
             }
 
-            if (!String.Equals(stringWithQuality1.Value, stringWithQuality2.Value, StringComparison.OrdinalIgnoreCase))
+            if (
+                !String.Equals(
+                    stringWithQuality1.Value,
+                    stringWithQuality2.Value,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                if (String.Equals(stringWithQuality1.Value, "*", StringComparison.OrdinalIgnoreCase))
+                if (
+                    String.Equals(stringWithQuality1.Value, "*", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return -1;
                 }
-                else if (String.Equals(stringWithQuality2.Value, "*", StringComparison.OrdinalIgnoreCase))
+                else if (
+                    String.Equals(stringWithQuality2.Value, "*", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return 1;
                 }

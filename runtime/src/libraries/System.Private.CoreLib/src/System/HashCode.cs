@@ -6,37 +6,37 @@
 The xxHash32 implementation is based on the code published by Yann Collet:
 https://raw.githubusercontent.com/Cyan4973/xxHash/5c174cfa4e45a42f94082dc0d4539b39696afea1/xxhash.c
 
-  xxHash - Fast Hash algorithm
-  Copyright (C) 2012-2016, Yann Collet
+xxHash - Fast Hash algorithm
+Copyright (C) 2012-2016, Yann Collet
 
-  BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
+BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
 
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are
-  met:
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
 
-  * Redistributions of source code must retain the above copyright
-  notice, this list of conditions and the following disclaimer.
-  * Redistributions in binary form must reproduce the above
-  copyright notice, this list of conditions and the following disclaimer
-  in the documentation and/or other materials provided with the
-  distribution.
+* Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
 
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-  You can contact the author at :
-  - xxHash homepage: http://www.xxhash.com
-  - xxHash source repository : https://github.com/Cyan4973/xxHash
+You can contact the author at :
+- xxHash homepage: http://www.xxhash.com
+- xxHash source repository : https://github.com/Cyan4973/xxHash
 
 */
 
@@ -62,8 +62,13 @@ namespace System
         private const uint Prime4 = 668265263U;
         private const uint Prime5 = 374761393U;
 
-        private uint _v1, _v2, _v3, _v4;
-        private uint _queue1, _queue2, _queue3;
+        private uint _v1,
+            _v2,
+            _v3,
+            _v4;
+        private uint _queue1,
+            _queue2,
+            _queue3;
         private uint _length;
 
         private static unsafe uint GenerateGlobalSeed()
@@ -146,7 +151,13 @@ namespace System
             return (int)hash;
         }
 
-        public static int Combine<T1, T2, T3, T4, T5>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5)
+        public static int Combine<T1, T2, T3, T4, T5>(
+            T1 value1,
+            T2 value2,
+            T3 value3,
+            T4 value4,
+            T5 value5
+        )
         {
             uint hc1 = (uint)(value1?.GetHashCode() ?? 0);
             uint hc2 = (uint)(value2?.GetHashCode() ?? 0);
@@ -170,7 +181,14 @@ namespace System
             return (int)hash;
         }
 
-        public static int Combine<T1, T2, T3, T4, T5, T6>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6)
+        public static int Combine<T1, T2, T3, T4, T5, T6>(
+            T1 value1,
+            T2 value2,
+            T3 value3,
+            T4 value4,
+            T5 value5,
+            T6 value6
+        )
         {
             uint hc1 = (uint)(value1?.GetHashCode() ?? 0);
             uint hc2 = (uint)(value2?.GetHashCode() ?? 0);
@@ -196,7 +214,15 @@ namespace System
             return (int)hash;
         }
 
-        public static int Combine<T1, T2, T3, T4, T5, T6, T7>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7)
+        public static int Combine<T1, T2, T3, T4, T5, T6, T7>(
+            T1 value1,
+            T2 value2,
+            T3 value3,
+            T4 value4,
+            T5 value5,
+            T6 value6,
+            T7 value7
+        )
         {
             uint hc1 = (uint)(value1?.GetHashCode() ?? 0);
             uint hc2 = (uint)(value2?.GetHashCode() ?? 0);
@@ -224,7 +250,16 @@ namespace System
             return (int)hash;
         }
 
-        public static int Combine<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8)
+        public static int Combine<T1, T2, T3, T4, T5, T6, T7, T8>(
+            T1 value1,
+            T2 value2,
+            T3 value3,
+            T4 value4,
+            T5 value5,
+            T6 value6,
+            T7 value7,
+            T8 value8
+        )
         {
             uint hc1 = (uint)(value1?.GetHashCode() ?? 0);
             uint hc2 = (uint)(value2?.GetHashCode() ?? 0);
@@ -278,7 +313,10 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static uint MixState(uint v1, uint v2, uint v3, uint v4)
         {
-            return BitOperations.RotateLeft(v1, 1) + BitOperations.RotateLeft(v2, 7) + BitOperations.RotateLeft(v3, 12) + BitOperations.RotateLeft(v4, 18);
+            return BitOperations.RotateLeft(v1, 1)
+                + BitOperations.RotateLeft(v2, 7)
+                + BitOperations.RotateLeft(v3, 12)
+                + BitOperations.RotateLeft(v4, 18);
         }
 
         private static uint MixEmptyState()
@@ -438,13 +476,21 @@ namespace System
         //   implementation has to change in the future we don't want to worry
         //   about people who might have incorrectly used this type.
 
-        [Obsolete("HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.", error: true)]
+        [Obsolete(
+            "HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.",
+            error: true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => throw new NotSupportedException(SR.HashCode_HashCodeNotSupported);
+        public override int GetHashCode() =>
+            throw new NotSupportedException(SR.HashCode_HashCodeNotSupported);
 
-        [Obsolete("HashCode is a mutable struct and should not be compared with other HashCodes.", error: true)]
+        [Obsolete(
+            "HashCode is a mutable struct and should not be compared with other HashCodes.",
+            error: true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj) => throw new NotSupportedException(SR.HashCode_EqualityNotSupported);
+        public override bool Equals(object? obj) =>
+            throw new NotSupportedException(SR.HashCode_EqualityNotSupported);
 #pragma warning restore 0809
     }
 }

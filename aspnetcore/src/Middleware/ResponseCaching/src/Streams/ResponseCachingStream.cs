@@ -16,7 +16,12 @@ internal class ResponseCachingStream : Stream
     private readonly SegmentWriteStream _segmentWriteStream;
     private readonly Action _startResponseCallback;
 
-    internal ResponseCachingStream(Stream innerStream, long maxBufferSize, int segmentSize, Action startResponseCallback)
+    internal ResponseCachingStream(
+        Stream innerStream,
+        long maxBufferSize,
+        int segmentSize,
+        Action startResponseCallback
+    )
     {
         _innerStream = innerStream;
         _maxBufferSize = maxBufferSize;
@@ -49,9 +54,14 @@ internal class ResponseCachingStream : Stream
     {
         if (!BufferingEnabled)
         {
-            throw new InvalidOperationException("Buffer stream cannot be retrieved since buffering is disabled.");
+            throw new InvalidOperationException(
+                "Buffer stream cannot be retrieved since buffering is disabled."
+            );
         }
-        return new CachedResponseBody(_segmentWriteStream.GetSegments(), _segmentWriteStream.Length);
+        return new CachedResponseBody(
+            _segmentWriteStream.GetSegments(),
+            _segmentWriteStream.Length
+        );
     }
 
     internal void DisableBuffering()
@@ -101,8 +111,8 @@ internal class ResponseCachingStream : Stream
     }
 
     // Underlying stream is write-only, no need to override other read related methods
-    public override int Read(byte[] buffer, int offset, int count)
-        => _innerStream.Read(buffer, offset, count);
+    public override int Read(byte[] buffer, int offset, int count) =>
+        _innerStream.Read(buffer, offset, count);
 
     public override void Write(byte[] buffer, int offset, int count)
     {
@@ -130,10 +140,17 @@ internal class ResponseCachingStream : Stream
         }
     }
 
-    public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
-        await WriteAsync(buffer.AsMemory(offset, count), cancellationToken);
+    public override async Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => await WriteAsync(buffer.AsMemory(offset, count), cancellationToken);
 
-    public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
@@ -184,9 +201,14 @@ internal class ResponseCachingStream : Stream
         }
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        => TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    ) =>
+        TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
 
-    public override void EndWrite(IAsyncResult asyncResult)
-        => TaskToApm.End(asyncResult);
+    public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 }

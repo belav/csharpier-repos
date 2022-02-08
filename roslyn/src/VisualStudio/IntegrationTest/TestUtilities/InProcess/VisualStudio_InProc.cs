@@ -14,20 +14,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
     {
         private VisualStudio_InProc() { }
 
-        public static VisualStudio_InProc Create()
-            => new VisualStudio_InProc();
+        public static VisualStudio_InProc Create() => new VisualStudio_InProc();
 
-        public new void WaitForApplicationIdle(TimeSpan timeout)
-            => InProcComponent.WaitForApplicationIdle(timeout);
+        public new void WaitForApplicationIdle(TimeSpan timeout) =>
+            InProcComponent.WaitForApplicationIdle(timeout);
 
-        public new void WaitForSystemIdle()
-            => InProcComponent.WaitForSystemIdle();
+        public new void WaitForSystemIdle() => InProcComponent.WaitForSystemIdle();
 
-        public new bool IsCommandAvailable(string commandName)
-            => InProcComponent.IsCommandAvailable(commandName);
+        public new bool IsCommandAvailable(string commandName) =>
+            InProcComponent.IsCommandAvailable(commandName);
 
-        public new void ExecuteCommand(string commandName, string args = "")
-            => InProcComponent.ExecuteCommand(commandName, args);
+        public new void ExecuteCommand(string commandName, string args = "") =>
+            InProcComponent.ExecuteCommand(commandName, args);
 
         public string[] GetAvailableCommands()
         {
@@ -49,24 +47,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return result.ToArray();
         }
 
-        public void ActivateMainWindow()
-            => InvokeOnUIThread(cancellationToken =>
-            {
-                var dte = GetDTE();
-
-                var activeVisualStudioWindow = dte.ActiveWindow.HWnd;
-                Debug.WriteLine($"DTE.ActiveWindow.HWnd = {activeVisualStudioWindow}");
-                if (activeVisualStudioWindow != IntPtr.Zero)
+        public void ActivateMainWindow() =>
+            InvokeOnUIThread(
+                cancellationToken =>
                 {
-                    if (IntegrationHelper.TrySetForegroundWindow(activeVisualStudioWindow))
-                        return;
-                }
+                    var dte = GetDTE();
 
-                activeVisualStudioWindow = dte.MainWindow.HWnd;
-                Debug.WriteLine($"DTE.MainWindow.HWnd = {activeVisualStudioWindow}");
-                if (!IntegrationHelper.TrySetForegroundWindow(activeVisualStudioWindow))
-                    throw new InvalidOperationException("Failed to set the foreground window.");
-            });
+                    var activeVisualStudioWindow = dte.ActiveWindow.HWnd;
+                    Debug.WriteLine($"DTE.ActiveWindow.HWnd = {activeVisualStudioWindow}");
+                    if (activeVisualStudioWindow != IntPtr.Zero)
+                    {
+                        if (IntegrationHelper.TrySetForegroundWindow(activeVisualStudioWindow))
+                            return;
+                    }
+
+                    activeVisualStudioWindow = dte.MainWindow.HWnd;
+                    Debug.WriteLine($"DTE.MainWindow.HWnd = {activeVisualStudioWindow}");
+                    if (!IntegrationHelper.TrySetForegroundWindow(activeVisualStudioWindow))
+                        throw new InvalidOperationException("Failed to set the foreground window.");
+                }
+            );
 
         public int GetErrorListErrorCount()
         {
@@ -108,7 +108,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
         }
 
-        public void Quit()
-            => GetDTE().Quit();
+        public void Quit() => GetDTE().Quit();
     }
 }

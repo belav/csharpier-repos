@@ -18,7 +18,8 @@ internal class RequestCookieCollection : IRequestCookieCollection
     private static readonly string[] EmptyKeys = Array.Empty<string>();
 
     // Pre-box
-    private static readonly IEnumerator<KeyValuePair<string, string>> EmptyIEnumeratorType = default(Enumerator);
+    private static readonly IEnumerator<KeyValuePair<string, string>> EmptyIEnumeratorType =
+        default(Enumerator);
     private static readonly IEnumerator EmptyIEnumerator = default(Enumerator);
 
     private AdaptiveCapacityDictionary<string, string> Store { get; set; }
@@ -30,7 +31,10 @@ internal class RequestCookieCollection : IRequestCookieCollection
 
     public RequestCookieCollection(int capacity)
     {
-        Store = new AdaptiveCapacityDictionary<string, string>(capacity, StringComparer.OrdinalIgnoreCase);
+        Store = new AdaptiveCapacityDictionary<string, string>(
+            capacity,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     // For tests
@@ -61,10 +65,17 @@ internal class RequestCookieCollection : IRequestCookieCollection
         }
     }
 
-    public static RequestCookieCollection Parse(StringValues values)
-       => ParseInternal(values, AppContext.TryGetSwitch(ResponseCookies.EnableCookieNameEncoding, out var enabled) && enabled);
+    public static RequestCookieCollection Parse(StringValues values) =>
+        ParseInternal(
+            values,
+            AppContext.TryGetSwitch(ResponseCookies.EnableCookieNameEncoding, out var enabled)
+                && enabled
+        );
 
-    internal static RequestCookieCollection ParseInternal(StringValues values, bool enableCookieNameEncoding)
+    internal static RequestCookieCollection ParseInternal(
+        StringValues values,
+        bool enableCookieNameEncoding
+    )
     {
         if (values.Count == 0)
         {
@@ -75,7 +86,14 @@ internal class RequestCookieCollection : IRequestCookieCollection
         var collection = new RequestCookieCollection();
         var store = collection.Store!;
 
-        if (CookieHeaderParserShared.TryParseValues(values, store, enableCookieNameEncoding, supportsMultipleValues: true))
+        if (
+            CookieHeaderParserShared.TryParseValues(
+                values,
+                store,
+                enableCookieNameEncoding,
+                supportsMultipleValues: true
+            )
+        )
         {
             if (store.Count == 0)
             {
@@ -150,7 +168,9 @@ internal class RequestCookieCollection : IRequestCookieCollection
     /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
     /// </summary>
     /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the collection.</returns>
-    IEnumerator<KeyValuePair<string, string>> IEnumerable<KeyValuePair<string, string>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, string>> IEnumerable<
+        KeyValuePair<string, string>
+    >.GetEnumerator()
     {
         if (Store == null || Store.Count == 0)
         {
@@ -182,7 +202,9 @@ internal class RequestCookieCollection : IRequestCookieCollection
         private AdaptiveCapacityDictionary<string, string>.Enumerator _dictionaryEnumerator;
         private readonly bool _notEmpty;
 
-        internal Enumerator(AdaptiveCapacityDictionary<string, string>.Enumerator dictionaryEnumerator)
+        internal Enumerator(
+            AdaptiveCapacityDictionary<string, string>.Enumerator dictionaryEnumerator
+        )
         {
             _dictionaryEnumerator = dictionaryEnumerator;
             _notEmpty = true;
@@ -212,15 +234,10 @@ internal class RequestCookieCollection : IRequestCookieCollection
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void Reset()
         {

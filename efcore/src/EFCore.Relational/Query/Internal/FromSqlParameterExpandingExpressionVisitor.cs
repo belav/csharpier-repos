@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
     {
-        private readonly IDictionary<FromSqlExpression, Expression> _visitedFromSqlExpressions
-            = new Dictionary<FromSqlExpression, Expression>(LegacyReferenceEqualityComparer.Instance);
+        private readonly IDictionary<FromSqlExpression, Expression> _visitedFromSqlExpressions =
+            new Dictionary<FromSqlExpression, Expression>(LegacyReferenceEqualityComparer.Instance);
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
         private readonly IRelationalTypeMappingSource _typeMappingSource;
@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public FromSqlParameterExpandingExpressionVisitor(
-            RelationalParameterBasedSqlProcessorDependencies dependencies)
+            RelationalParameterBasedSqlProcessorDependencies dependencies
+        )
         {
             Dependencies = dependencies;
 
@@ -69,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual SelectExpression Expand(
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parameterValues,
-            out bool canCache)
+            out bool canCache
+        )
         {
             _visitedFromSqlExpressions.Clear();
             _parameterNameGenerator = _parameterNameGeneratorFactory.Create();
@@ -125,7 +127,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 parameterName = dbParameter.ParameterName;
                             }
 
-                            subParameters.Add(new RawRelationalParameter(parameterName, dbParameter));
+                            subParameters.Add(
+                                new RawRelationalParameter(parameterName, dbParameter)
+                            );
                         }
                         else
                         {
@@ -134,18 +138,32 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                     parameterName,
                                     parameterName,
                                     _typeMappingSource.GetMappingForValue(parameterValues[i]),
-                                    parameterValues[i]?.GetType().IsNullableType()));
+                                    parameterValues[i]?.GetType().IsNullableType()
+                                )
+                            );
                         }
                     }
 
                     return _visitedFromSqlExpressions[fromSql] = fromSql.Update(
-                        Expression.Constant(new CompositeRelationalParameter(parameterExpression.Name!, subParameters)));
+                        Expression.Constant(
+                            new CompositeRelationalParameter(
+                                parameterExpression.Name!,
+                                subParameters
+                            )
+                        )
+                    );
 
                 case ConstantExpression constantExpression:
-                    if (constantExpression.Value is not object?[]
-                        && new FromSqlInExistVerifyingExpressionVisitor(fromSql).Verify(_selectExpression))
+                    if (
+                        constantExpression.Value is not object?[]
+                        && new FromSqlInExistVerifyingExpressionVisitor(fromSql).Verify(
+                            _selectExpression
+                        )
+                    )
                     {
-                        throw new InvalidOperationException(RelationalStrings.QueryFromSqlInsideExists);
+                        throw new InvalidOperationException(
+                            RelationalStrings.QueryFromSqlInsideExists
+                        );
                     }
 
                     var existingValues = constantExpression.GetConstantValue<object?[]>();
@@ -165,20 +183,29 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 parameterName = dbParameter.ParameterName;
                             }
 
-                            constantValues[i] = new RawRelationalParameter(parameterName, dbParameter);
+                            constantValues[i] = new RawRelationalParameter(
+                                parameterName,
+                                dbParameter
+                            );
                         }
                         else
                         {
                             constantValues[i] = _sqlExpressionFactory.Constant(
-                                value, _typeMappingSource.GetMappingForValue(value));
+                                value,
+                                _typeMappingSource.GetMappingForValue(value)
+                            );
                         }
                     }
 
-                    return _visitedFromSqlExpressions[fromSql] = fromSql.Update(Expression.Constant(constantValues, typeof(object[])));
-
+                    return _visitedFromSqlExpressions[fromSql] = fromSql.Update(
+                        Expression.Constant(constantValues, typeof(object[]))
+                    );
 
                 default:
-                    Check.DebugAssert(false, "FromSql.Arguments must be Constant/ParameterExpression");
+                    Check.DebugAssert(
+                        false,
+                        "FromSql.Arguments must be Constant/ParameterExpression"
+                    );
                     return null;
             }
         }
@@ -210,8 +237,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     return expression;
                 }
 
-                if (expression is ExistsExpression existsExpression
-                    && existsExpression.Subquery.Tables.Contains(_mutatedExpression, ReferenceEqualityComparer.Instance))
+                if (
+                    expression is ExistsExpression existsExpression
+                    && existsExpression.Subquery.Tables.Contains(
+                        _mutatedExpression,
+                        ReferenceEqualityComparer.Instance
+                    )
+                )
                 {
                     _faulty = true;
 

@@ -26,15 +26,12 @@ public class DefaultApplicationModelProviderTest
     public void OnProvidersExecuting_AddsGlobalFilters()
     {
         // Arrange
-        var options = new MvcOptions()
-        {
-            Filters =
-                {
-                    new MyFilterAttribute(),
-                },
-        };
+        var options = new MvcOptions() { Filters = { new MyFilterAttribute(), }, };
 
-        var builder = new TestApplicationModelProvider(options, TestModelMetadataProvider.CreateDefaultProvider());
+        var builder = new TestApplicationModelProvider(
+            options,
+            TestModelMetadataProvider.CreateDefaultProvider()
+        );
         var context = new ApplicationModelProviderContext(Array.Empty<TypeInfo>());
 
         // Act
@@ -50,7 +47,13 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider();
 
-        var context = new ApplicationModelProviderContext(new[] { typeof(ModelBinderController).GetTypeInfo(), typeof(ConventionallyRoutedController).GetTypeInfo() });
+        var context = new ApplicationModelProviderContext(
+            new[]
+            {
+                typeof(ModelBinderController).GetTypeInfo(),
+                typeof(ConventionallyRoutedController).GetTypeInfo()
+            }
+        );
 
         // Act
         builder.OnProvidersExecuting(context);
@@ -58,8 +61,13 @@ public class DefaultApplicationModelProviderTest
         // Assert
         Assert.Collection(
             context.Result.Controllers.OrderBy(c => c.ControllerType.Name),
-            c => Assert.Equal(typeof(ConventionallyRoutedController).GetTypeInfo(), c.ControllerType),
-            c => Assert.Equal(typeof(ModelBinderController).GetTypeInfo(), c.ControllerType));
+            c =>
+                Assert.Equal(
+                    typeof(ConventionallyRoutedController).GetTypeInfo(),
+                    c.ControllerType
+                ),
+            c => Assert.Equal(typeof(ModelBinderController).GetTypeInfo(), c.ControllerType)
+        );
     }
 
     [Fact]
@@ -68,7 +76,8 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider(
             new MvcOptions(),
-            TestModelMetadataProvider.CreateDefaultProvider());
+            TestModelMetadataProvider.CreateDefaultProvider()
+        );
         var typeInfo = typeof(ModelBinderController).GetTypeInfo();
 
         var context = new ApplicationModelProviderContext(new[] { typeInfo });
@@ -102,15 +111,21 @@ public class DefaultApplicationModelProviderTest
                 Assert.Equal(nameof(ModelBinderController.Unbound), property.PropertyName);
                 Assert.Null(property.BindingInfo);
                 Assert.Same(controllerModel, property.Controller);
-            });
+            }
+        );
     }
 
     [Fact]
     public void OnProvidersExecuting_ReadsBindingSourceForPropertiesFromModelMetadata()
     {
         // Arrange
-        var detailsProvider = new BindingSourceMetadataProvider(typeof(string), BindingSource.Services);
-        var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider(new[] { detailsProvider });
+        var detailsProvider = new BindingSourceMetadataProvider(
+            typeof(string),
+            BindingSource.Services
+        );
+        var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider(
+            new[] { detailsProvider }
+        );
         var typeInfo = typeof(ModelBinderController).GetTypeInfo();
         var provider = new TestApplicationModelProvider(new MvcOptions(), modelMetadataProvider);
 
@@ -145,7 +160,8 @@ public class DefaultApplicationModelProviderTest
                 Assert.Equal(nameof(ModelBinderController.Unbound), property.PropertyName);
                 Assert.Equal(BindingSource.Services, property.BindingInfo.BindingSource);
                 Assert.Same(controllerModel, property.Controller);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -154,7 +170,8 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider(
             new MvcOptions(),
-            TestModelMetadataProvider.CreateDefaultProvider());
+            TestModelMetadataProvider.CreateDefaultProvider()
+        );
         var typeInfo = typeof(ModelBinderController).GetTypeInfo();
 
         var context = new ApplicationModelProviderContext(new[] { typeInfo });
@@ -164,7 +181,10 @@ public class DefaultApplicationModelProviderTest
 
         // Assert
         var controllerModel = Assert.Single(context.Result.Controllers);
-        var action = Assert.Single(controllerModel.Actions, a => a.ActionMethod.Name == nameof(ModelBinderController.PostAction));
+        var action = Assert.Single(
+            controllerModel.Actions,
+            a => a.ActionMethod.Name == nameof(ModelBinderController.PostAction)
+        );
         Assert.Collection(
             action.Parameters,
             parameter =>
@@ -189,7 +209,8 @@ public class DefaultApplicationModelProviderTest
                 Assert.Equal("unbound", parameter.ParameterName);
                 Assert.Null(parameter.BindingInfo);
                 Assert.Same(action, parameter.Action);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -198,7 +219,8 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider(
             new MvcOptions(),
-            TestModelMetadataProvider.CreateDefaultProvider());
+            TestModelMetadataProvider.CreateDefaultProvider()
+        );
         var typeInfo = typeof(ModelBinderController).GetTypeInfo();
 
         var context = new ApplicationModelProviderContext(new[] { typeInfo });
@@ -208,7 +230,10 @@ public class DefaultApplicationModelProviderTest
 
         // Assert
         var controllerModel = Assert.Single(context.Result.Controllers);
-        var action = Assert.Single(controllerModel.Actions, a => a.ActionMethod.Name == nameof(ModelBinderController.FormFilesSequences));
+        var action = Assert.Single(
+            controllerModel.Actions,
+            a => a.ActionMethod.Name == nameof(ModelBinderController.FormFilesSequences)
+        );
         Assert.Collection(
             action.Parameters,
             parameter =>
@@ -235,7 +260,8 @@ public class DefaultApplicationModelProviderTest
             {
                 Assert.Equal("formFileArray", parameter.ParameterName);
                 Assert.Equal(BindingSource.FormFile, parameter.BindingInfo.BindingSource);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -243,8 +269,13 @@ public class DefaultApplicationModelProviderTest
     {
         // Arrange
         var options = new MvcOptions();
-        var detailsProvider = new BindingSourceMetadataProvider(typeof(Guid), BindingSource.Special);
-        var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider(new[] { detailsProvider });
+        var detailsProvider = new BindingSourceMetadataProvider(
+            typeof(Guid),
+            BindingSource.Special
+        );
+        var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider(
+            new[] { detailsProvider }
+        );
 
         var provider = new TestApplicationModelProvider(options, modelMetadataProvider);
         var typeInfo = typeof(ModelBinderController).GetTypeInfo();
@@ -256,14 +287,18 @@ public class DefaultApplicationModelProviderTest
 
         // Assert
         var controllerModel = Assert.Single(context.Result.Controllers);
-        var action = Assert.Single(controllerModel.Actions, a => a.ActionName == nameof(ModelBinderController.PostAction1));
+        var action = Assert.Single(
+            controllerModel.Actions,
+            a => a.ActionName == nameof(ModelBinderController.PostAction1)
+        );
         Assert.Collection(
             action.Parameters,
             parameter =>
             {
                 Assert.Equal("guid", parameter.ParameterName);
                 Assert.Equal(BindingSource.Special, parameter.BindingInfo.BindingSource);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -271,8 +306,13 @@ public class DefaultApplicationModelProviderTest
     {
         // Arrange
         var options = new MvcOptions();
-        var detailsProvider = new BindingSourceMetadataProvider(typeof(Guid), BindingSource.Special);
-        var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider(new[] { detailsProvider });
+        var detailsProvider = new BindingSourceMetadataProvider(
+            typeof(Guid),
+            BindingSource.Special
+        );
+        var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider(
+            new[] { detailsProvider }
+        );
 
         var provider = new TestApplicationModelProvider(options, modelMetadataProvider);
         var typeInfo = typeof(ModelBinderController).GetTypeInfo();
@@ -284,14 +324,18 @@ public class DefaultApplicationModelProviderTest
 
         // Assert
         var controllerModel = Assert.Single(context.Result.Controllers);
-        var action = Assert.Single(controllerModel.Actions, a => a.ActionName == nameof(ModelBinderController.PostAction2));
+        var action = Assert.Single(
+            controllerModel.Actions,
+            a => a.ActionName == nameof(ModelBinderController.PostAction2)
+        );
         Assert.Collection(
             action.Parameters,
             parameter =>
             {
                 Assert.Equal("fromQuery", parameter.ParameterName);
                 Assert.Equal(BindingSource.Query, parameter.BindingInfo.BindingSource);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -499,7 +543,8 @@ public class DefaultApplicationModelProviderTest
         var builder = new TestApplicationModelProvider();
         var method = typeof(DerivedController).GetMethod(
             "PrivateMethod",
-            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+        );
         Assert.NotNull(method);
 
         // Act
@@ -566,7 +611,8 @@ public class DefaultApplicationModelProviderTest
         var builder = new TestApplicationModelProvider();
         var method = typeof(DerivedController).GetMethod(
             methodName,
-            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+        );
         Assert.NotNull(method);
 
         // Act
@@ -582,8 +628,7 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider();
         var typeInfo = typeof(DerivedController).GetTypeInfo();
-        var methodInfo =
-            typeInfo.GetRuntimeInterfaceMap(typeof(IDisposable)).TargetMethods[0];
+        var methodInfo = typeInfo.GetRuntimeInterfaceMap(typeof(IDisposable)).TargetMethods[0];
         var method = typeInfo.AsType().GetMethods().SingleOrDefault(m => (m == methodInfo));
         Assert.NotNull(method);
 
@@ -600,9 +645,11 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider();
         var typeInfo = typeof(DerivedController).GetTypeInfo();
-        var methodInfo =
-            typeInfo.GetRuntimeInterfaceMap(typeof(IDisposable)).TargetMethods[0];
-        var methods = typeInfo.AsType().GetMethods().Where(m => m.Name.Equals("Dispose") && m != methodInfo);
+        var methodInfo = typeInfo.GetRuntimeInterfaceMap(typeof(IDisposable)).TargetMethods[0];
+        var methods = typeInfo
+            .AsType()
+            .GetMethods()
+            .Where(m => m.Name.Equals("Dispose") && m != methodInfo);
 
         Assert.NotEmpty(methods);
 
@@ -654,8 +701,7 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider();
         var typeInfo = typeof(IDisposablePocoController).GetTypeInfo();
-        var methodInfo =
-            typeInfo.GetRuntimeInterfaceMap(typeof(IDisposable)).TargetMethods[0];
+        var methodInfo = typeInfo.GetRuntimeInterfaceMap(typeof(IDisposable)).TargetMethods[0];
         var method = typeInfo.AsType().GetMethods().SingleOrDefault(m => (m == methodInfo));
         Assert.NotNull(method);
 
@@ -672,9 +718,11 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider();
         var typeInfo = typeof(IDisposablePocoController).GetTypeInfo();
-        var methodInfo =
-            typeInfo.GetRuntimeInterfaceMap(typeof(IDisposable)).TargetMethods[0];
-        var methods = typeInfo.AsType().GetMethods().Where(m => m.Name.Equals("Dispose") && m != methodInfo);
+        var methodInfo = typeInfo.GetRuntimeInterfaceMap(typeof(IDisposable)).TargetMethods[0];
+        var methods = typeInfo
+            .AsType()
+            .GetMethods()
+            .Where(m => m.Name.Equals("Dispose") && m != methodInfo);
 
         Assert.NotEmpty(methods);
 
@@ -718,7 +766,8 @@ public class DefaultApplicationModelProviderTest
         var builder = new TestApplicationModelProvider();
         var method = typeof(DerivedController).GetMethod(
             methodName,
-            BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+        );
         Assert.NotNull(method);
 
         // Act
@@ -763,7 +812,8 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Single(action.Selectors);
         var methodConstraint = Assert.Single(
-            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>());
+            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Contains("PUT", methodConstraint.HttpMethods);
         Assert.Contains("PATCH", methodConstraint.HttpMethods);
 
@@ -787,7 +837,8 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Single(action.Selectors);
         var methodConstraint = Assert.Single(
-            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>());
+            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Contains("DELETE", methodConstraint.HttpMethods);
         Assert.Contains("HEAD", methodConstraint.HttpMethods);
 
@@ -812,7 +863,8 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Single(action.Selectors);
         var methodConstraint = Assert.Single(
-            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>());
+            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Contains("GET", methodConstraint.HttpMethods);
         Assert.Contains("POST", methodConstraint.HttpMethods);
         Assert.Contains("HEAD", methodConstraint.HttpMethods);
@@ -835,7 +887,8 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Single(action.Selectors);
         var methodConstraint = Assert.Single(
-            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>());
+            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Contains("GET", methodConstraint.HttpMethods);
         Assert.Contains("PUT", methodConstraint.HttpMethods);
         Assert.Contains("POST", methodConstraint.HttpMethods);
@@ -858,7 +911,8 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Single(action.Selectors);
         var methodConstraint = Assert.Single(
-            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>());
+            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
 
         Assert.Equal(actionName, action.ActionName);
 
@@ -910,13 +964,15 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Single(action.Selectors);
         var methodConstraint = Assert.Single(
-            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>());
+            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
 
         Assert.Equal(actionName, action.ActionName);
 
         Assert.Equal(
             new[] { "GET", "HEAD" },
-            methodConstraint.HttpMethods.OrderBy(m => m, StringComparer.Ordinal));
+            methodConstraint.HttpMethods.OrderBy(m => m, StringComparer.Ordinal)
+        );
 
         var attributeRoute = Assert.Single(GetAttributeRoutes(action.Selectors));
         Assert.Equal("ListAll", attributeRoute.Template);
@@ -949,13 +1005,20 @@ public class DefaultApplicationModelProviderTest
             Assert.NotNull(actionSelectorModel.AttributeRouteModel);
         }
 
-        var selectorModel = Assert.Single(action.Selectors, ai => ai.AttributeRouteModel?.Template == "List");
-        var methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        var selectorModel = Assert.Single(
+            action.Selectors,
+            ai => ai.AttributeRouteModel?.Template == "List"
+        );
+        var methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         var listMethod = Assert.Single(methodConstraint.HttpMethods);
         Assert.Equal("POST", listMethod);
 
         var all = Assert.Single(action.Selectors, ai => ai.AttributeRouteModel?.Template == "All");
-        methodConstraint = Assert.Single(all.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        methodConstraint = Assert.Single(
+            all.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         var allMethod = Assert.Single(methodConstraint.HttpMethods);
         Assert.Equal("GET", allMethod);
     }
@@ -984,7 +1047,9 @@ public class DefaultApplicationModelProviderTest
     [Theory]
     [InlineData(typeof(SingleRouteAttributeController))]
     [InlineData(typeof(MultipleRouteAttributeController))]
-    public void CreateActionModel_RouteAttributeOnController_CreatesAttributeRoute_ForNonAttributedActions(Type controller)
+    public void CreateActionModel_RouteAttributeOnController_CreatesAttributeRoute_ForNonAttributedActions(
+        Type controller
+    )
     {
         // Arrange
         var builder = new TestApplicationModelProvider();
@@ -1007,7 +1072,9 @@ public class DefaultApplicationModelProviderTest
     [Theory]
     [InlineData(typeof(SingleRouteAttributeController))]
     [InlineData(typeof(MultipleRouteAttributeController))]
-    public void CreateActionModel_RouteOnController_CreatesOneActionInfoPerRouteTemplateOnAction(Type controller)
+    public void CreateActionModel_RouteOnController_CreatesOneActionInfoPerRouteTemplateOnAction(
+        Type controller
+    )
     {
         // Arrange
         var builder = new TestApplicationModelProvider();
@@ -1024,7 +1091,9 @@ public class DefaultApplicationModelProviderTest
 
         foreach (var selectorModel in action.Selectors)
         {
-            var methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+            var methodConstraint = Assert.Single(
+                selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+            );
             var httpMethod = Assert.Single(methodConstraint.HttpMethods);
             Assert.Equal("GET", httpMethod);
 
@@ -1050,7 +1119,8 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Single(action.Selectors);
         var methodConstraint = Assert.Single(
-            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>());
+            action.Selectors[0].ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Equal<string>(new string[] { "GET" }, methodConstraint.HttpMethods);
         var attributeRoute = Assert.Single(GetAttributeRoutes(action.Selectors));
         Assert.Equal("Products", attributeRoute.Template);
@@ -1071,13 +1141,29 @@ public class DefaultApplicationModelProviderTest
         Assert.Equal(2, actions.Selectors.Count);
 
         // OrderBy is used because the order of the results may very depending on the platform / client.
-        var selectorModel = Assert.Single(actions.Selectors, a => a.AttributeRouteModel.Template == "Products");
-        var methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
-        Assert.Equal(new[] { "GET", "POST" }, methodConstraint.HttpMethods.OrderBy(key => key, StringComparer.Ordinal));
+        var selectorModel = Assert.Single(
+            actions.Selectors,
+            a => a.AttributeRouteModel.Template == "Products"
+        );
+        var methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
+        Assert.Equal(
+            new[] { "GET", "POST" },
+            methodConstraint.HttpMethods.OrderBy(key => key, StringComparer.Ordinal)
+        );
 
-        selectorModel = Assert.Single(actions.Selectors, a => a.AttributeRouteModel.Template == "v2/Products");
-        methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
-        Assert.Equal(new[] { "GET", "POST" }, methodConstraint.HttpMethods.OrderBy(key => key, StringComparer.Ordinal));
+        selectorModel = Assert.Single(
+            actions.Selectors,
+            a => a.AttributeRouteModel.Template == "v2/Products"
+        );
+        methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
+        Assert.Equal(
+            new[] { "GET", "POST" },
+            methodConstraint.HttpMethods.OrderBy(key => key, StringComparer.Ordinal)
+        );
     }
 
     [Fact]
@@ -1086,7 +1172,9 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider();
         var typeInfo = typeof(MixedHttpVerbsAndRouteAttributeController).GetTypeInfo();
-        var actionName = nameof(MixedHttpVerbsAndRouteAttributeController.MultipleVerbsWithAnyWithoutTemplateAndRoutes);
+        var actionName = nameof(
+            MixedHttpVerbsAndRouteAttributeController.MultipleVerbsWithAnyWithoutTemplateAndRoutes
+        );
 
         // Act
         var action = builder.CreateActionModel(typeInfo, typeInfo.AsType().GetMethod(actionName));
@@ -1094,16 +1182,31 @@ public class DefaultApplicationModelProviderTest
         // Assert
         Assert.Equal(3, action.Selectors.Count);
 
-        var selectorModel = Assert.Single(action.Selectors, s => s.AttributeRouteModel.Template == "Products");
-        var methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        var selectorModel = Assert.Single(
+            action.Selectors,
+            s => s.AttributeRouteModel.Template == "Products"
+        );
+        var methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Equal<string>(new string[] { "GET" }, methodConstraint.HttpMethods);
 
-        selectorModel = Assert.Single(action.Selectors, s => s.AttributeRouteModel.Template == "v2/Products");
-        methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        selectorModel = Assert.Single(
+            action.Selectors,
+            s => s.AttributeRouteModel.Template == "v2/Products"
+        );
+        methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Equal<string>(new string[] { "GET" }, methodConstraint.HttpMethods);
 
-        selectorModel = Assert.Single(action.Selectors, s => s.AttributeRouteModel.Template == "Products/Buy");
-        methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        selectorModel = Assert.Single(
+            action.Selectors,
+            s => s.AttributeRouteModel.Template == "Products/Buy"
+        );
+        methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Equal<string>(new string[] { "POST" }, methodConstraint.HttpMethods);
     }
 
@@ -1122,11 +1225,18 @@ public class DefaultApplicationModelProviderTest
         Assert.Equal(2, action.Selectors.Count);
 
         var selectorModel = Assert.Single(action.Selectors, s => s.AttributeRouteModel == null);
-        var methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        var methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Equal(new string[] { "GET" }, methodConstraint.HttpMethods);
 
-        selectorModel = Assert.Single(action.Selectors, s => s.AttributeRouteModel?.Template == "id/{id?}");
-        methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        selectorModel = Assert.Single(
+            action.Selectors,
+            s => s.AttributeRouteModel?.Template == "id/{id?}"
+        );
+        methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Equal(new string[] { "GET" }, methodConstraint.HttpMethods);
     }
 
@@ -1145,12 +1255,22 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Equal(2, action.Selectors.Count);
 
-        var selectorModel = Assert.Single(action.Selectors, s => s.AttributeRouteModel?.Template == "Products");
-        var methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        var selectorModel = Assert.Single(
+            action.Selectors,
+            s => s.AttributeRouteModel?.Template == "Products"
+        );
+        var methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Equal<string>(new string[] { "POST" }, methodConstraint.HttpMethods);
 
-        selectorModel = Assert.Single(action.Selectors, s => s.AttributeRouteModel?.Template == null);
-        methodConstraint = Assert.Single(selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>());
+        selectorModel = Assert.Single(
+            action.Selectors,
+            s => s.AttributeRouteModel?.Template == null
+        );
+        methodConstraint = Assert.Single(
+            selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
+        );
         Assert.Equal<string>(new string[] { "GET" }, methodConstraint.HttpMethods);
     }
 
@@ -1172,14 +1292,16 @@ public class DefaultApplicationModelProviderTest
         Assert.Equal(2, actionModel.Selectors.Count);
 
         var selectorModel = Assert.Single(
-            actionModel.Selectors.Where(sm => sm.AttributeRouteModel?.Template == "R1"));
+            actionModel.Selectors.Where(sm => sm.AttributeRouteModel?.Template == "R1")
+        );
 
         Assert.Equal(2, selectorModel.ActionConstraints.Count);
         Assert.Single(selectorModel.ActionConstraints.OfType<RouteAndConstraintAttribute>());
         Assert.Single(selectorModel.ActionConstraints.OfType<ConstraintAttribute>());
 
         selectorModel = Assert.Single(
-            actionModel.Selectors.Where(sm => sm.AttributeRouteModel?.Template == "R2"));
+            actionModel.Selectors.Where(sm => sm.AttributeRouteModel?.Template == "R2")
+        );
 
         Assert.Equal(2, selectorModel.ActionConstraints.Count);
         Assert.Single(selectorModel.ActionConstraints.OfType<RouteAndConstraintAttribute>());
@@ -1201,10 +1323,16 @@ public class DefaultApplicationModelProviderTest
         Assert.Equal(2, actions.Attributes.Count);
         Assert.Equal(2, actions.Selectors.Count);
 
-        var selectorModel = Assert.Single(actions.Selectors, a => a.AttributeRouteModel?.Template == "A");
+        var selectorModel = Assert.Single(
+            actions.Selectors,
+            a => a.AttributeRouteModel?.Template == "A"
+        );
         Assert.Contains(selectorModel.AttributeRouteModel.Attribute, actions.Attributes);
 
-        selectorModel = Assert.Single(actions.Selectors, a => a.AttributeRouteModel?.Template == "B");
+        selectorModel = Assert.Single(
+            actions.Selectors,
+            a => a.AttributeRouteModel?.Template == "B"
+        );
         Assert.Contains(selectorModel.AttributeRouteModel.Attribute, actions.Attributes);
     }
 
@@ -1223,10 +1351,16 @@ public class DefaultApplicationModelProviderTest
         Assert.Equal(4, action.Attributes.Count);
         Assert.Equal(2, action.Selectors.Count);
 
-        var selectorModel = Assert.Single(action.Selectors, a => a.AttributeRouteModel?.Template == "C");
+        var selectorModel = Assert.Single(
+            action.Selectors,
+            a => a.AttributeRouteModel?.Template == "C"
+        );
         Assert.Contains(selectorModel.AttributeRouteModel.Attribute, action.Attributes);
 
-        selectorModel = Assert.Single(action.Selectors, a => a.AttributeRouteModel?.Template == "D");
+        selectorModel = Assert.Single(
+            action.Selectors,
+            a => a.AttributeRouteModel?.Template == "D"
+        );
         Assert.Contains(selectorModel.AttributeRouteModel.Attribute, action.Attributes);
     }
 
@@ -1235,7 +1369,8 @@ public class DefaultApplicationModelProviderTest
     {
         // Arrange
         var builder = new TestApplicationModelProvider();
-        var typeInfo = typeof(DerivedFromControllerAndExplicitIDisposableImplementationController).GetTypeInfo();
+        var typeInfo =
+            typeof(DerivedFromControllerAndExplicitIDisposableImplementationController).GetTypeInfo();
         var context = new ApplicationModelProviderContext(new[] { typeInfo });
 
         // Act
@@ -1251,7 +1386,8 @@ public class DefaultApplicationModelProviderTest
     {
         // Arrange
         var builder = new TestApplicationModelProvider();
-        var typeInfo = typeof(DerivedFromControllerAndHidesBaseDisposeMethodController).GetTypeInfo();
+        var typeInfo =
+            typeof(DerivedFromControllerAndHidesBaseDisposeMethodController).GetTypeInfo();
         var context = new ApplicationModelProviderContext(new[] { typeInfo });
 
         // Act
@@ -1281,7 +1417,9 @@ public class DefaultApplicationModelProviderTest
     public void CreatePropertyModel_AddsBindingInfoToProperty_IfDeclaringTypeHasBindPropertiesAttribute()
     {
         // Arrange
-        var propertyInfo = typeof(BindPropertyController).GetProperty(nameof(BindPropertyController.Property));
+        var propertyInfo = typeof(BindPropertyController).GetProperty(
+            nameof(BindPropertyController.Property)
+        );
 
         // Act
         var property = Provider.CreatePropertyModel(propertyInfo);
@@ -1300,7 +1438,9 @@ public class DefaultApplicationModelProviderTest
     public void CreatePropertyModel_DoesNotSetBindingInfo_IfPropertySpecifiesBinderType()
     {
         // Arrange
-        var propertyInfo = typeof(BindPropertyController).GetProperty(nameof(BindPropertyController.BinderType));
+        var propertyInfo = typeof(BindPropertyController).GetProperty(
+            nameof(BindPropertyController.BinderType)
+        );
 
         // Act
         var property = Provider.CreatePropertyModel(propertyInfo);
@@ -1314,7 +1454,9 @@ public class DefaultApplicationModelProviderTest
     public void CreatePropertyModel_DoesNotSetBindingInfo_IfPropertySpecifiesBinderSource()
     {
         // Arrange
-        var propertyInfo = typeof(BindPropertyController).GetProperty(nameof(BindPropertyController.BinderSource));
+        var propertyInfo = typeof(BindPropertyController).GetProperty(
+            nameof(BindPropertyController.BinderSource)
+        );
 
         // Act
         var property = Provider.CreatePropertyModel(propertyInfo);
@@ -1324,7 +1466,6 @@ public class DefaultApplicationModelProviderTest
         Assert.Null(bindingInfo.BinderType);
         Assert.Same(BindingSource.Path, property.BindingInfo.BindingSource);
     }
-
 
     public class DerivedFromBindPropertyController : BindPropertyController
     {
@@ -1336,7 +1477,8 @@ public class DefaultApplicationModelProviderTest
     {
         // Arrange
         var propertyInfo = typeof(DerivedFromBindPropertyController).GetProperty(
-            nameof(DerivedFromBindPropertyController.DerivedProperty));
+            nameof(DerivedFromBindPropertyController.DerivedProperty)
+        );
 
         // Act
         var property = Provider.CreatePropertyModel(propertyInfo);
@@ -1357,8 +1499,12 @@ public class DefaultApplicationModelProviderTest
         // This test ensures that applying BindPropertyAttribute on a user defined type does not cause properties on
         // Controller \ ControllerBase to be treated as model bound.
         // Arrange
-        var derivedPropertyInfo = typeof(UserController).GetProperty(nameof(UserController.DerivedProperty));
-        var basePropertyInfo = typeof(UserController).GetProperty(nameof(ControllerBase.ControllerContext));
+        var derivedPropertyInfo = typeof(UserController).GetProperty(
+            nameof(UserController.DerivedProperty)
+        );
+        var basePropertyInfo = typeof(UserController).GetProperty(
+            nameof(ControllerBase.ControllerContext)
+        );
 
         // Act
         var derivedProperty = Provider.CreatePropertyModel(derivedPropertyInfo);
@@ -1378,7 +1524,8 @@ public class DefaultApplicationModelProviderTest
     }
 
     private class DerivedFromControllerAndExplicitIDisposableImplementationController
-        : ViewFeaturesController, IDisposable
+        : ViewFeaturesController,
+          IDisposable
     {
         void IDisposable.Dispose()
         {
@@ -1396,34 +1543,28 @@ public class DefaultApplicationModelProviderTest
 
     private class ViewFeaturesController : ControllerBase, IDisposable
     {
-        public virtual void Dispose()
-        {
-        }
+        public virtual void Dispose() { }
     }
 
     private class BaseClassWithAttributeRoutesController
     {
         [Route("A")]
         [Route("B")]
-        public virtual void Edit()
-        {
-        }
+        public virtual void Edit() { }
     }
 
-    private class DerivedClassInheritsAttributeRoutesController : BaseClassWithAttributeRoutesController
+    private class DerivedClassInheritsAttributeRoutesController
+        : BaseClassWithAttributeRoutesController
     {
-        public override void Edit()
-        {
-        }
+        public override void Edit() { }
     }
 
-    private class DerivedClassOverridesAttributeRoutesController : BaseClassWithAttributeRoutesController
+    private class DerivedClassOverridesAttributeRoutesController
+        : BaseClassWithAttributeRoutesController
     {
         [Route("C")]
         [Route("D")]
-        public override void Edit()
-        {
-        }
+        public override void Edit() { }
     }
 
     private class Controller : IDisposable
@@ -1443,18 +1584,13 @@ public class DefaultApplicationModelProviderTest
     private class BaseController : Controller
     {
         public void GetFromBase() // Valid action method.
-        {
-        }
+        { }
 
         [NonAction]
-        public virtual void OverridenNonActionMethod()
-        {
-        }
+        public virtual void OverridenNonActionMethod() { }
 
         [NonAction]
-        public virtual void NewMethod()
-        {
-        }
+        public virtual void NewMethod() { }
 
         public override IActionResult Redirect(string url)
         {
@@ -1465,46 +1601,30 @@ public class DefaultApplicationModelProviderTest
     private class DerivedController : BaseController
     {
         public void GetFromDerived() // Valid action method.
-        {
-        }
+        { }
 
         [HttpGet]
-        public override void OverridenNonActionMethod()
-        {
-        }
+        public override void OverridenNonActionMethod() { }
 
         public new void NewMethod() // Valid action method.
-        {
-        }
+        { }
 
-        public void GenericMethod<T>()
-        {
-        }
+        public void GenericMethod<T>() { }
 
-        private void PrivateMethod()
-        {
-        }
+        private void PrivateMethod() { }
 
-        public static void StaticMethod()
-        {
-        }
+        public static void StaticMethod() { }
 
-        protected static void ProtectedStaticMethod()
-        {
-        }
+        protected static void ProtectedStaticMethod() { }
 
-        private static void PrivateStaticMethod()
-        {
-        }
+        private static void PrivateStaticMethod() { }
 
         public string Dispose(string s)
         {
             return s;
         }
 
-        public new void Dispose()
-        {
-        }
+        public new void Dispose() { }
     }
 
     private class IDisposablePocoController : IDisposable
@@ -1520,9 +1640,8 @@ public class DefaultApplicationModelProviderTest
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
+
         public string Dispose(string s)
         {
             return s;
@@ -1536,10 +1655,10 @@ public class DefaultApplicationModelProviderTest
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+
+        protected virtual void Dispose(bool disposing) { }
     }
+
     private class DerivedOverriddenDisposeController : BaseClass
     {
         public override void Dispose()
@@ -1563,20 +1682,17 @@ public class DefaultApplicationModelProviderTest
             return "Hello world";
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
-        public void Dispose(string s)
-        {
-        }
+        public void Dispose(string s) { }
     }
 
     private class OperatorOverloadingController : Controller
     {
         public static OperatorOverloadingController operator +(
             OperatorOverloadingController c1,
-            OperatorOverloadingController c2)
+            OperatorOverloadingController c2
+        )
         {
             return new OperatorOverloadingController();
         }
@@ -1713,19 +1829,13 @@ public class DefaultApplicationModelProviderTest
 
     [Route("A")]
     [Route("B")]
-    private class BaseClassWithRoutesController
-    {
-    }
+    private class BaseClassWithRoutesController { }
 
-    private class DerivedClassInheritingRoutesController : BaseClassWithRoutesController
-    {
-    }
+    private class DerivedClassInheritingRoutesController : BaseClassWithRoutesController { }
 
     [Route("C")]
     [Route("D")]
-    private class DerivedClassHidingRoutesController : BaseClassWithRoutesController
-    {
-    }
+    private class DerivedClassHidingRoutesController : BaseClassWithRoutesController { }
 
     private class StoreController : Controller, IActionFilter
     {
@@ -1740,14 +1850,10 @@ public class DefaultApplicationModelProviderTest
         }
     }
 
-    private class MyFilterAttribute : Attribute, IFilterMetadata
-    {
-    }
+    private class MyFilterAttribute : Attribute, IFilterMetadata { }
 
     [MyFilter]
-    public class NoFiltersController
-    {
-    }
+    public class NoFiltersController { }
 
     public class ModelBinderController
     {
@@ -1758,14 +1864,19 @@ public class DefaultApplicationModelProviderTest
 
         public IFormFile FormFile { get; set; }
 
-        public IActionResult PostAction([FromQuery] string fromQuery, IFormFileCollection formFileCollection, string unbound) => null;
+        public IActionResult PostAction(
+            [FromQuery] string fromQuery,
+            IFormFileCollection formFileCollection,
+            string unbound
+        ) => null;
 
         public IActionResult FormFilesSequences(
             IEnumerable<IFormFile> formFileEnumerable,
             ICollection<IFormFile> formFileCollection,
             IList<IFormFile> formFileIList,
             List<IFormFile> formFileList,
-            IFormFile[] formFileArray) => null;
+            IFormFile[] formFileArray
+        ) => null;
 
         public IActionResult PostAction1(Guid guid) => null;
 
@@ -1776,21 +1887,21 @@ public class DefaultApplicationModelProviderTest
     {
         public Task OnActionExecutionAsync(
             ActionExecutingContext context,
-            ActionExecutionDelegate next)
+            ActionExecutionDelegate next
+        )
         {
             return null;
         }
 
-        public void OnResultExecuted(ResultExecutedContext context)
-        {
-        }
+        public void OnResultExecuted(ResultExecutedContext context) { }
 
-        public void OnResultExecuting(ResultExecutingContext context)
-        {
-        }
+        public void OnResultExecuting(ResultExecutingContext context) { }
     }
 
-    private class UnsupportedFiltersController : IExceptionFilter, IAuthorizationFilter, IAsyncResourceFilter
+    private class UnsupportedFiltersController
+        : IExceptionFilter,
+          IAuthorizationFilter,
+          IAsyncResourceFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -1802,14 +1913,24 @@ public class DefaultApplicationModelProviderTest
             throw new NotImplementedException();
         }
 
-        public Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)
+        public Task OnResourceExecutionAsync(
+            ResourceExecutingContext context,
+            ResourceExecutionDelegate next
+        )
         {
             throw new NotImplementedException();
         }
     }
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-    private class RouteAndConstraintAttribute : Attribute, IActionConstraintMetadata, IRouteTemplateProvider
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
+    private class RouteAndConstraintAttribute
+        : Attribute,
+          IActionConstraintMetadata,
+          IRouteTemplateProvider
     {
         public RouteAndConstraintAttribute(string template)
         {
@@ -1823,10 +1944,12 @@ public class DefaultApplicationModelProviderTest
         public string Template { get; private set; }
     }
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-    private class ConstraintAttribute : Attribute, IActionConstraintMetadata
-    {
-    }
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
+    private class ConstraintAttribute : Attribute, IActionConstraintMetadata { }
 
     private class MultipleRouteProviderOnActionController
     {
@@ -1847,15 +1970,11 @@ public class DefaultApplicationModelProviderTest
     private class TestApplicationModelProvider : DefaultApplicationModelProvider
     {
         public TestApplicationModelProvider()
-            : this(new MvcOptions(), new EmptyModelMetadataProvider())
-        {
-        }
+            : this(new MvcOptions(), new EmptyModelMetadataProvider()) { }
 
         public TestApplicationModelProvider(
             MvcOptions options,
-            IModelMetadataProvider modelMetadataProvider)
-            : base(Options.Create(options), modelMetadataProvider)
-        {
-        }
+            IModelMetadataProvider modelMetadataProvider
+        ) : base(Options.Create(options), modelMetadataProvider) { }
     }
 }

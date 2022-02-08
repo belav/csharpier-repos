@@ -14,12 +14,16 @@ namespace System.Net.WebSockets.Client.Tests
         public static string GetExceptionMessage(string resourceName, params object[] parameters)
         {
             Type srType = typeof(SR);
-            PropertyInfo property = srType.GetRuntimeProperties().Single(p => p.Name == resourceName);
+            PropertyInfo property = srType
+                .GetRuntimeProperties()
+                .Single(p => p.Name == resourceName);
 
             string errorMessageTemplate = (string)property.GetMethod.Invoke(null, null);
 
-            Assert.False(string.IsNullOrEmpty(errorMessageTemplate),
-                         string.Format("Localized error message '{0}' does not exist.", resourceName));
+            Assert.False(
+                string.IsNullOrEmpty(errorMessageTemplate),
+                string.Format("Localized error message '{0}' does not exist.", resourceName)
+            );
 
             return string.Format(errorMessageTemplate, parameters);
         }

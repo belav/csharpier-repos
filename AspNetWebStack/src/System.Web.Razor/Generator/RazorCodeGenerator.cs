@@ -13,11 +13,19 @@ namespace System.Web.Razor.Generator
     {
         private CodeGeneratorContext _context;
 
-        protected RazorCodeGenerator(string className, string rootNamespaceName, string sourceFileName, RazorEngineHost host)
+        protected RazorCodeGenerator(
+            string className,
+            string rootNamespaceName,
+            string sourceFileName,
+            RazorEngineHost host
+        )
         {
             if (String.IsNullOrEmpty(className))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "className");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "className"
+                );
             }
             if (rootNamespaceName == null)
             {
@@ -83,14 +91,23 @@ namespace System.Web.Razor.Generator
         {
             if (_context == null)
             {
-                _context = CodeGeneratorContext.Create(Host, CodeWriterFactory, ClassName, RootNamespaceName, SourceFileName, GenerateLinePragmas);
+                _context = CodeGeneratorContext.Create(
+                    Host,
+                    CodeWriterFactory,
+                    ClassName,
+                    RootNamespaceName,
+                    SourceFileName,
+                    GenerateLinePragmas
+                );
                 Initialize(_context);
             }
         }
 
         protected virtual void Initialize(CodeGeneratorContext context)
         {
-            context.Namespace.Imports.AddRange(Host.NamespaceImports.Select(s => new CodeNamespaceImport(s)).ToArray());
+            context.Namespace.Imports.AddRange(
+                Host.NamespaceImports.Select(s => new CodeNamespaceImport(s)).ToArray()
+            );
 
             if (!String.IsNullOrEmpty(Host.DefaultBaseClass))
             {
@@ -98,7 +115,9 @@ namespace System.Web.Razor.Generator
             }
 
             // Dev10 Bug 937438: Generate explicit Parameter-less constructor on Razor generated class
-            context.GeneratedClass.Members.Add(new CodeConstructor() { Attributes = MemberAttributes.Public });
+            context.GeneratedClass.Members.Add(
+                new CodeConstructor() { Attributes = MemberAttributes.Public }
+            );
         }
     }
 }

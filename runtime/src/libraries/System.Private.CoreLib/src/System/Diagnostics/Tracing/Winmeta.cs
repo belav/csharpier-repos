@@ -51,6 +51,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         Verbose
     }
+
     /// <summary>
     /// WindowsEventTask. Custom values must be in the range from 1 through 65534
     /// </summary>
@@ -61,6 +62,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         None = 0
     }
+
     /// <summary>
     /// EventOpcode. Custom values must be in the range from 11 through 239
     /// </summary>

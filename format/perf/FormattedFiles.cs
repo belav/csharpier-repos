@@ -14,12 +14,16 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Micro
     [SimpleJob(RuntimeMoniker.NetCoreApp31)]
     public class FormattedFiles
     {
-        private const string UnformattedProjectPath = "tests/projects/for_code_formatter/unformatted_project/";
-        private const string UnformattedProjectFilePath = UnformattedProjectPath + "unformatted_project.csproj";
-        private const string UnformattedSolutionFilePath = "tests/projects/for_code_formatter/unformatted_solution/unformatted_solution.sln";
+        private const string UnformattedProjectPath =
+            "tests/projects/for_code_formatter/unformatted_project/";
+        private const string UnformattedProjectFilePath =
+            UnformattedProjectPath + "unformatted_project.csproj";
+        private const string UnformattedSolutionFilePath =
+            "tests/projects/for_code_formatter/unformatted_solution/unformatted_solution.sln";
 
         private static EmptyLogger EmptyLogger => new EmptyLogger();
-        private static SourceFileMatcher AllFileMatcher => SourceFileMatcher.CreateMatcher(Array.Empty<string>(), Array.Empty<string>());
+        private static SourceFileMatcher AllFileMatcher =>
+            SourceFileMatcher.CreateMatcher(Array.Empty<string>(), Array.Empty<string>());
 
         [IterationSetup]
         public void NoFilesFormattedSetup()
@@ -31,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Micro
         [Benchmark(Description = "Whitespace Formatting (folder)")]
         public void FilesFormattedFolder()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(UnformattedProjectPath);
+            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
+                UnformattedProjectPath
+            );
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -46,14 +52,20 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Micro
                 AllFileMatcher,
                 ReportPath: string.Empty,
                 IncludeGeneratedFiles: false,
-                BinaryLogPath: null);
-            _ = CodeFormatter.FormatWorkspaceAsync(options, EmptyLogger, default).GetAwaiter().GetResult();
+                BinaryLogPath: null
+            );
+            _ = CodeFormatter
+                .FormatWorkspaceAsync(options, EmptyLogger, default)
+                .GetAwaiter()
+                .GetResult();
         }
 
         [Benchmark(Description = "Whitespace Formatting (project)")]
         public void FilesFormattedProject()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(UnformattedProjectFilePath);
+            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
+                UnformattedProjectFilePath
+            );
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -68,14 +80,20 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Micro
                 AllFileMatcher,
                 ReportPath: string.Empty,
                 IncludeGeneratedFiles: false,
-                BinaryLogPath: null);
-            _ = CodeFormatter.FormatWorkspaceAsync(options, EmptyLogger, default).GetAwaiter().GetResult();
+                BinaryLogPath: null
+            );
+            _ = CodeFormatter
+                .FormatWorkspaceAsync(options, EmptyLogger, default)
+                .GetAwaiter()
+                .GetResult();
         }
 
         [Benchmark(Description = "Whitespace Formatting (solution)")]
         public void FilesFormattedSolution()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(UnformattedSolutionFilePath);
+            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
+                UnformattedSolutionFilePath
+            );
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -90,8 +108,12 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Micro
                 AllFileMatcher,
                 ReportPath: string.Empty,
                 IncludeGeneratedFiles: false,
-                BinaryLogPath: null);
-            _ = CodeFormatter.FormatWorkspaceAsync(options, EmptyLogger, default).GetAwaiter().GetResult();
+                BinaryLogPath: null
+            );
+            _ = CodeFormatter
+                .FormatWorkspaceAsync(options, EmptyLogger, default)
+                .GetAwaiter()
+                .GetResult();
         }
 
         [IterationCleanup]

@@ -10,10 +10,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class FromSqlQuerySqliteTest : FromSqlQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+    public class FromSqlQuerySqliteTest
+        : FromSqlQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
     {
-        public FromSqlQuerySqliteTest(NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public FromSqlQuerySqliteTest(
+            NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
@@ -34,7 +37,9 @@ WHERE ('z' = '') OR (instr(""m"".""ContactName"", 'z') > 0)";
             return queryString;
         }
 
-        public override async Task<string> FromSqlRaw_queryable_with_parameters_and_closure(bool async)
+        public override async Task<string> FromSqlRaw_queryable_with_parameters_and_closure(
+            bool async
+        )
         {
             var queryString = await base.FromSqlRaw_queryable_with_parameters_and_closure(async);
 
@@ -46,7 +51,10 @@ SELECT ""m"".""CustomerID"", ""m"".""Address"", ""m"".""City"", ""m"".""CompanyN
 FROM (
     SELECT * FROM ""Customers"" WHERE ""City"" = @p0
 ) AS ""m""
-WHERE ""m"".""ContactTitle"" = @__contactTitle_1", queryString, ignoreLineEndingDifferences: true);
+WHERE ""m"".""ContactTitle"" = @__contactTitle_1",
+                queryString,
+                ignoreLineEndingDifferences: true
+            );
 
             return queryString;
         }
@@ -87,13 +95,14 @@ FROM (
     )
     SELECT * FROM ""Customers2""
 ) AS ""m""
-WHERE ('z' = '') OR (instr(""m"".""ContactName"", 'z') > 0)");
+WHERE ('z' = '') OR (instr(""m"".""ContactName"", 'z') > 0)"
+            );
         }
 
-        protected override DbParameter CreateDbParameter(string name, object value)
-            => new SqliteParameter { ParameterName = name, Value = value };
+        protected override DbParameter CreateDbParameter(string name, object value) =>
+            new SqliteParameter { ParameterName = name, Value = value };
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
     }
 }

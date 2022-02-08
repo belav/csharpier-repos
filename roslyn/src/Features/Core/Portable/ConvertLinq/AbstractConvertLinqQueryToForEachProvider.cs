@@ -14,7 +14,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ConvertLinq
 {
-    internal abstract class AbstractConvertLinqQueryToForEachProvider<TQueryExpression, TStatement> : CodeRefactoringProvider
+    internal abstract class AbstractConvertLinqQueryToForEachProvider<TQueryExpression, TStatement>
+        : CodeRefactoringProvider
         where TQueryExpression : SyntaxNode
         where TStatement : SyntaxNode
     {
@@ -25,14 +26,19 @@ namespace Microsoft.CodeAnalysis.ConvertLinq
             SemanticModel semanticModel,
             ISemanticFactsService semanticFacts,
             CancellationToken cancellationToken,
-            out DocumentUpdateInfo documentUpdate);
+            out DocumentUpdateInfo documentUpdate
+        );
 
-        protected abstract Task<TQueryExpression> FindNodeToRefactorAsync(CodeRefactoringContext context);
+        protected abstract Task<TQueryExpression> FindNodeToRefactorAsync(
+            CodeRefactoringContext context
+        );
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, _, cancellationToken) = context;
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var queryExpression = await FindNodeToRefactorAsync(context).ConfigureAwait(false);
             if (queryExpression == null)
@@ -40,15 +46,30 @@ namespace Microsoft.CodeAnalysis.ConvertLinq
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
-            if (TryConvert(queryExpression, semanticModel, semanticFacts, cancellationToken, out var documentUpdateInfo))
+            if (
+                TryConvert(
+                    queryExpression,
+                    semanticModel,
+                    semanticFacts,
+                    cancellationToken,
+                    out var documentUpdateInfo
+                )
+            )
             {
                 context.RegisterRefactoring(
                     new MyCodeAction(
                         Title,
-                        c => Task.FromResult(document.WithSyntaxRoot(documentUpdateInfo.UpdateRoot(root)))),
-                    queryExpression.Span);
+                        c =>
+                            Task.FromResult(
+                                document.WithSyntaxRoot(documentUpdateInfo.UpdateRoot(root))
+                            )
+                    ),
+                    queryExpression.Span
+                );
             }
         }
 
@@ -60,9 +81,8 @@ namespace Microsoft.CodeAnalysis.ConvertLinq
             public readonly TStatement Source;
             public readonly ImmutableArray<TStatement> Destinations;
 
-            public DocumentUpdateInfo(TStatement source, TStatement destination) : this(source, new[] { destination })
-            {
-            }
+            public DocumentUpdateInfo(TStatement source, TStatement destination)
+                : this(source, new[] { destination }) { }
 
             public DocumentUpdateInfo(TStatement source, IEnumerable<TStatement> destinations)
             {
@@ -91,10 +111,10 @@ namespace Microsoft.CodeAnalysis.ConvertLinq
 
         protected sealed class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument, title)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument, title) { }
         }
     }
 }

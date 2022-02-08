@@ -98,7 +98,13 @@ namespace System.Runtime.CompilerServices
             }
 
             newRules[InsertPosition] = item;
-            Array.Copy(rules, InsertPosition, newRules, InsertPosition + 1, newLength - InsertPosition - 1);
+            Array.Copy(
+                rules,
+                InsertPosition,
+                newRules,
+                InsertPosition + 1,
+                newLength - InsertPosition - 1
+            );
             return newRules;
         }
     }

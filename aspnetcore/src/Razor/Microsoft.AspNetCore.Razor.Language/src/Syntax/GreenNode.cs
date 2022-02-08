@@ -27,19 +27,23 @@ internal abstract class GreenNode
         Kind = kind;
     }
 
-    protected GreenNode(SyntaxKind kind, int fullWidth)
-        : this(kind)
+    protected GreenNode(SyntaxKind kind, int fullWidth) : this(kind)
     {
         FullWidth = fullWidth;
     }
 
-    protected GreenNode(SyntaxKind kind, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-        : this(kind, 0, diagnostics, annotations)
-    {
-    }
+    protected GreenNode(
+        SyntaxKind kind,
+        RazorDiagnostic[] diagnostics,
+        SyntaxAnnotation[] annotations
+    ) : this(kind, 0, diagnostics, annotations) { }
 
-    protected GreenNode(SyntaxKind kind, int fullWidth, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-        : this(kind, fullWidth)
+    protected GreenNode(
+        SyntaxKind kind,
+        int fullWidth,
+        RazorDiagnostic[] diagnostics,
+        SyntaxAnnotation[] annotations
+    ) : this(kind, fullWidth)
     {
         if (diagnostics?.Length > 0)
         {
@@ -96,11 +100,7 @@ internal abstract class GreenNode
 
             return count;
         }
-
-        protected set
-        {
-            _slotCount = (byte)value;
-        }
+        protected set { _slotCount = (byte)value; }
     }
 
     internal abstract GreenNode GetSlot(int index);
@@ -165,18 +165,12 @@ internal abstract class GreenNode
 
     public bool ContainsDiagnostics
     {
-        get
-        {
-            return (Flags & NodeFlags.ContainsDiagnostics) != 0;
-        }
+        get { return (Flags & NodeFlags.ContainsDiagnostics) != 0; }
     }
 
     public bool ContainsAnnotations
     {
-        get
-        {
-            return (Flags & NodeFlags.ContainsAnnotations) != 0;
-        }
+        get { return (Flags & NodeFlags.ContainsAnnotations) != 0; }
     }
     #endregion
 
@@ -185,10 +179,7 @@ internal abstract class GreenNode
 
     public virtual int Width
     {
-        get
-        {
-            return FullWidth - GetLeadingTriviaWidth() - GetTrailingTriviaWidth();
-        }
+        get { return FullWidth - GetLeadingTriviaWidth() - GetTrailingTriviaWidth(); }
     }
 
     public virtual int GetLeadingTriviaWidth()
@@ -203,18 +194,12 @@ internal abstract class GreenNode
 
     public bool HasLeadingTrivia
     {
-        get
-        {
-            return GetLeadingTriviaWidth() != 0;
-        }
+        get { return GetLeadingTriviaWidth() != 0; }
     }
 
     public bool HasTrailingTrivia
     {
-        get
-        {
-            return GetTrailingTriviaWidth() != 0;
-        }
+        get { return GetTrailingTriviaWidth() != 0; }
     }
     #endregion
 
@@ -449,7 +434,10 @@ internal abstract class GreenNode
     #endregion
 
     #region Factories
-    public virtual GreenNode CreateList(IEnumerable<GreenNode> nodes, bool alwaysCreateListNode = false)
+    public virtual GreenNode CreateList(
+        IEnumerable<GreenNode> nodes,
+        bool alwaysCreateListNode = false
+    )
     {
         if (nodes == null)
         {
@@ -494,8 +482,7 @@ internal abstract class GreenNode
 
     #region StaticMethods
 
-    private static void ProcessStack(TextWriter writer,
-        Stack<StackEntry> stack)
+    private static void ProcessStack(TextWriter writer, Stack<StackEntry> stack)
     {
         while (stack.Count > 0)
         {
@@ -526,7 +513,9 @@ internal abstract class GreenNode
                 {
                     var first = i == firstIndex;
                     var last = i == lastIndex;
-                    stack.Push(new StackEntry(child, currentLeading | !first, currentTrailing | !last));
+                    stack.Push(
+                        new StackEntry(child, currentLeading | !first, currentTrailing | !last)
+                    );
                 }
             }
         }

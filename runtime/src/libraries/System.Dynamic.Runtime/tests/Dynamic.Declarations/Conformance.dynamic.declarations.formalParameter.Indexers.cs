@@ -17,7 +17,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
                     MyClass.Status = 1;
                     return 1m;
                 }
-
                 set
                 {
                     //We look at the value element to make sure it got passed in correctly
@@ -48,8 +47,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Indexers.indexer002.indexer002
 {
     public class Test
@@ -65,7 +62,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
                     char? c = null;
                     return c;
                 }
-
                 set
                 {
                     //We look at the value element to make sure it got passed in correctly
@@ -96,8 +92,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Indexers.indexer003.indexer003
 {
     public class Test
@@ -115,14 +109,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
                 get
                 {
                     MyClass.Status = 1;
-                    return new C()
-                    {
-                        Field = 3
-                    }
-
-                    ;
+                    return new C() { Field = 3 };
                 }
-
                 set
                 {
                     //We look at the value element to make sure it got passed in correctly
@@ -153,8 +141,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Indexers.indexer004.indexer004
 {
     public class Test
@@ -169,7 +155,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
                     MyClass.Status = 1;
                     return 1m;
                 }
-
                 set
                 {
                     //We look at the value element to make sure it got passed in correctly

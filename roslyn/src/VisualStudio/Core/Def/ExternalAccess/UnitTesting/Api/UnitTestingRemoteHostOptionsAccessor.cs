@@ -12,8 +12,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
     internal static class UnitTestingRemoteHostOptionsAccessor
     {
-        public static Option<bool> OOP64Bit => new(
-            RemoteHostOptions.OOP64Bit.Feature, RemoteHostOptions.OOP64Bit.Name, defaultValue: RemoteHostOptions.OOP64Bit.DefaultValue,
-            storageLocations: RemoteHostOptions.OOP64Bit.StorageLocations.ToArray());
+        public static Option<bool> OOP64Bit =>
+            new(
+                RemoteHostOptions.OOP64Bit.Feature,
+                RemoteHostOptions.OOP64Bit.Name,
+                defaultValue: RemoteHostOptions.OOP64Bit.DefaultValue,
+                storageLocations: RemoteHostOptions.OOP64Bit.StorageLocations.ToArray()
+            );
     }
 }

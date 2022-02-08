@@ -13,7 +13,12 @@ internal class DatabaseContextDetails
     public bool PendingModelChanges { get; }
     public IEnumerable<string> PendingMigrations { get; }
 
-    public DatabaseContextDetails(Type type, bool databaseExists, bool pendingModelChanges, IEnumerable<string> pendingMigrations)
+    public DatabaseContextDetails(
+        Type type,
+        bool databaseExists,
+        bool pendingModelChanges,
+        IEnumerable<string> pendingMigrations
+    )
     {
         Type = type;
         DatabaseExists = databaseExists;

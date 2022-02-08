@@ -41,7 +41,8 @@ public abstract class ApplicationPartFactory
             throw new ArgumentNullException(nameof(assembly));
         }
 
-        var provideAttribute = assembly.GetCustomAttribute<ProvideApplicationPartFactoryAttribute>();
+        var provideAttribute =
+            assembly.GetCustomAttribute<ProvideApplicationPartFactoryAttribute>();
         if (provideAttribute == null)
         {
             return DefaultApplicationPartFactory.Instance;
@@ -50,10 +51,13 @@ public abstract class ApplicationPartFactory
         var type = provideAttribute.GetFactoryType();
         if (!typeof(ApplicationPartFactory).IsAssignableFrom(type))
         {
-            throw new InvalidOperationException(Resources.FormatApplicationPartFactory_InvalidFactoryType(
-                type,
-                nameof(ProvideApplicationPartFactoryAttribute),
-                typeof(ApplicationPartFactory)));
+            throw new InvalidOperationException(
+                Resources.FormatApplicationPartFactory_InvalidFactoryType(
+                    type,
+                    nameof(ProvideApplicationPartFactoryAttribute),
+                    typeof(ApplicationPartFactory)
+                )
+            );
         }
 
         return (ApplicationPartFactory)Activator.CreateInstance(type)!;

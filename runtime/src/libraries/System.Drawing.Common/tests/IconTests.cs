@@ -53,27 +53,79 @@ namespace System.Drawing.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void Unix_OverflowException_CorruptIcon()
         {
-            Assert.Throws<OverflowException>(() => new Icon(Helpers.GetTestBitmapPath("overflowicon.ico")));
+            Assert.Throws<OverflowException>(
+                () => new Icon(Helpers.GetTestBitmapPath("overflowicon.ico"))
+            );
         }
 
         public static IEnumerable<object[]> Size_TestData()
         {
             // Normal size
-            yield return new object[] { "48x48_multiple_entries_4bit.ico", new Size(16, 16), new Size(16, 16) };
-            yield return new object[] { "48x48_multiple_entries_4bit.ico", new Size(-32, -32), new Size(16, 16) };
-            yield return new object[] { "48x48_multiple_entries_4bit.ico", new Size(32, 16), new Size(32, 32) };
-            yield return new object[] { "256x256_seven_entries_multiple_bits.ico", new Size(48, 48), new Size(48, 48) };
-            yield return new object[] { "256x256_seven_entries_multiple_bits.ico", new Size(0, 0), new Size(32, 32) };
-            yield return new object[] { "256x256_seven_entries_multiple_bits.ico", new Size(1, 1), new Size(256, 256) };
+            yield return new object[]
+            {
+                "48x48_multiple_entries_4bit.ico",
+                new Size(16, 16),
+                new Size(16, 16)
+            };
+            yield return new object[]
+            {
+                "48x48_multiple_entries_4bit.ico",
+                new Size(-32, -32),
+                new Size(16, 16)
+            };
+            yield return new object[]
+            {
+                "48x48_multiple_entries_4bit.ico",
+                new Size(32, 16),
+                new Size(32, 32)
+            };
+            yield return new object[]
+            {
+                "256x256_seven_entries_multiple_bits.ico",
+                new Size(48, 48),
+                new Size(48, 48)
+            };
+            yield return new object[]
+            {
+                "256x256_seven_entries_multiple_bits.ico",
+                new Size(0, 0),
+                new Size(32, 32)
+            };
+            yield return new object[]
+            {
+                "256x256_seven_entries_multiple_bits.ico",
+                new Size(1, 1),
+                new Size(256, 256)
+            };
 
             // Unusual size
-            yield return new object[] { "10x16_one_entry_32bit.ico", new Size(16, 16), new Size(10, 16) };
-            yield return new object[] { "10x16_one_entry_32bit.ico", new Size(32, 32), new Size(11, 22) };
+            yield return new object[]
+            {
+                "10x16_one_entry_32bit.ico",
+                new Size(16, 16),
+                new Size(10, 16)
+            };
+            yield return new object[]
+            {
+                "10x16_one_entry_32bit.ico",
+                new Size(32, 32),
+                new Size(11, 22)
+            };
 
             // Only 256
-            yield return new object[] { "256x256_one_entry_32bit.ico", new Size(0, 0), new Size(256, 256) };
+            yield return new object[]
+            {
+                "256x256_one_entry_32bit.ico",
+                new Size(0, 0),
+                new Size(256, 256)
+            };
 
-            yield return new object[] { "256x256_one_entry_32bit.ico", new Size(int.MaxValue, int.MaxValue), new Size(256, 256) };
+            yield return new object[]
+            {
+                "256x256_one_entry_32bit.ico",
+                new Size(int.MaxValue, int.MaxValue),
+                new Size(256, 256)
+            };
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -81,7 +133,9 @@ namespace System.Drawing.Tests
         [MemberData(nameof(Size_TestData))]
         public void Ctor_FilePath_Width_Height(string fileName, Size size, Size expectedSize)
         {
-            using (var icon = new Icon(Helpers.GetTestBitmapPath(fileName), size.Width, size.Height))
+            using (
+                var icon = new Icon(Helpers.GetTestBitmapPath(fileName), size.Width, size.Height)
+            )
             {
                 Assert.Equal(expectedSize.Width, icon.Width);
                 Assert.Equal(expectedSize.Height, icon.Height);
@@ -106,14 +160,24 @@ namespace System.Drawing.Tests
         public void Ctor_NullFilePath_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("path", () => new Icon((string)null));
-            AssertExtensions.Throws<ArgumentNullException>("path", () => new Icon((string)null, new Size(32, 32)));
-            AssertExtensions.Throws<ArgumentNullException>("path", () => new Icon((string)null, 32, 32));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => new Icon((string)null, new Size(32, 32))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => new Icon((string)null, 32, 32)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_Stream()
         {
-            using (var stream = File.OpenRead(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")))
+            using (
+                var stream = File.OpenRead(
+                    Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")
+                )
+            )
             {
                 var icon = new Icon(stream);
                 Assert.Equal(32, icon.Width);
@@ -153,9 +217,21 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullStream_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Icon((Stream)null));
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Icon((Stream)null, 32, 32));
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Icon((Stream)null, new Size(32, 32)));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "stream",
+                null,
+                () => new Icon((Stream)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "stream",
+                null,
+                () => new Icon((Stream)null, 32, 32)
+            );
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "stream",
+                null,
+                () => new Icon((Stream)null, new Size(32, 32))
+            );
         }
 
         public static IEnumerable<object[]> Ctor_InvalidBytesInStream_TestData()
@@ -166,53 +242,199 @@ namespace System.Drawing.Tests
             yield return new object[] { new byte[21], typeof(ArgumentException) };
 
             // First two reserved bits are not zero.
-            yield return new object[] { new byte[] { 10, 0, 1, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, typeof(ArgumentException) };
-            yield return new object[] { new byte[] { 0, 10, 1, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                new byte[] { 10, 0, 1, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                typeof(ArgumentException)
+            };
+            yield return new object[]
+            {
+                new byte[] { 0, 10, 1, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                typeof(ArgumentException)
+            };
 
             // The type is not one.
-            yield return new object[] { new byte[] { 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, typeof(ArgumentException) };
-            yield return new object[] { new byte[] { 0, 0, 2, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, typeof(ArgumentException) };
-            yield return new object[] { new byte[] { 0, 0, 1, 2, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                new byte[] { 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                typeof(ArgumentException)
+            };
+            yield return new object[]
+            {
+                new byte[] { 0, 0, 2, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                typeof(ArgumentException)
+            };
+            yield return new object[]
+            {
+                new byte[] { 0, 0, 1, 2, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                typeof(ArgumentException)
+            };
 
             // The count is zero.
-            yield return new object[] { new byte[] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                new byte[] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                typeof(ArgumentException)
+            };
 
             // No space for the number of entries specified.
-            yield return new object[] { new byte[] { 0, 0, 1, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                new byte[] { 0, 0, 1, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                typeof(ArgumentException)
+            };
 
             // The number of entries specified is negative.
             yield return new object[]
             {
                 new byte[] { 0, 0, 1, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-
                 // There is no such thing as a negative number in the native struct, we're throwing ArgumentException
                 // here now as the data size doesn't match what is expected (as other inputs above).
-                PlatformDetection.IsNetFramework ? typeof(Win32Exception) : typeof(ArgumentException)
+                PlatformDetection.IsNetFramework
+                    ? typeof(Win32Exception)
+                    : typeof(ArgumentException)
             };
 
             // The size of an entry is negative.
-            yield return new object[] { new byte[] { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0 }, typeof(Win32Exception) };
+            yield return new object[]
+            {
+                new byte[]
+                {
+                    0,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    255,
+                    255,
+                    255,
+                    255,
+                    0,
+                    0,
+                    0,
+                    0
+                },
+                typeof(Win32Exception)
+            };
 
             // The offset of an entry is negative.
-            yield return new object[] { new byte[] { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255 }, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                new byte[]
+                {
+                    0,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    255,
+                    255,
+                    255,
+                    255
+                },
+                typeof(ArgumentException)
+            };
 
             // The size and offset of an entry refers to an invalid position in the list of entries.
-            yield return new object[] { new byte[] { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 12, 0, 0, 0 }, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                new byte[] { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 12, 0, 0, 0 },
+                typeof(ArgumentException)
+            };
 
             // The size and offset of an entry overflows.
             yield return new object[]
             {
-                new byte[] { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 127, 255, 255, 255, 127 },
-
+                new byte[]
+                {
+                    0,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    255,
+                    255,
+                    255,
+                    127,
+                    255,
+                    255,
+                    255,
+                    127
+                },
                 // Another case where we weren't checking data integrity before invoking.
-                PlatformDetection.IsNetFramework ? typeof(Win32Exception) : typeof(ArgumentException)
+                PlatformDetection.IsNetFramework
+                    ? typeof(Win32Exception)
+                    : typeof(ArgumentException)
             };
 
             // The offset and the size of the list of entries overflows.
-            yield return new object[] { new byte[] { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 127 }, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                new byte[]
+                {
+                    0,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    255,
+                    255,
+                    255,
+                    127
+                },
+                typeof(ArgumentException)
+            };
 
             // No handle can be created from this.
-            yield return new object[] { new byte[] { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, typeof(Win32Exception) };
+            yield return new object[]
+            {
+                new byte[] { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                typeof(Win32Exception)
+            };
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -262,8 +484,16 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullIcon_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("original", null, () => new Icon((Icon)null, 32, 32));
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("original", null, () => new Icon((Icon)null, new Size(32, 32)));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "original",
+                null,
+                () => new Icon((Icon)null, 32, 32)
+            );
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "original",
+                null,
+                () => new Icon((Icon)null, new Size(32, 32))
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -279,7 +509,9 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullType_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new Icon(null, "48x48_multiple_entries_4bit.ico"));
+            Assert.Throws<NullReferenceException>(
+                () => new Icon(null, "48x48_multiple_entries_4bit.ico")
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -294,13 +526,19 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_InvalidResource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("resource", null, () => new Icon(typeof(Icon), null));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "resource",
+                null,
+                () => new Icon(typeof(Icon), null)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Clone_ConstructedIcon_Success()
         {
-            using (var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")))
+            using (
+                var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
+            )
             using (Icon clone = Assert.IsType<Icon>(icon.Clone()))
             {
                 Assert.NotSame(icon, clone);
@@ -337,7 +575,9 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Dispose_OwnsHandle_DestroysHandle()
         {
-            Icon icon = Icon.ExtractAssociatedIcon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"));
+            Icon icon = Icon.ExtractAssociatedIcon(
+                Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")
+            );
             icon.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => icon.Handle);
@@ -346,7 +586,9 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Dispose_DoesNotOwnHandle_DoesNotDestroyHandle()
         {
-            using (var source = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")))
+            using (
+                var source = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
+            )
             using (var icon = Icon.FromHandle(source.Handle))
             {
                 IntPtr handle = icon.Handle;
@@ -363,7 +605,13 @@ namespace System.Drawing.Tests
         [InlineData(48)]
         public void XpIcon_ToBitmap_Success(int size)
         {
-            using (var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_32bit.ico"), size, size))
+            using (
+                var icon = new Icon(
+                    Helpers.GetTestBitmapPath("48x48_multiple_entries_32bit.ico"),
+                    size,
+                    size
+                )
+            )
             {
                 Assert.Equal(size, icon.Width);
                 Assert.Equal(size, icon.Height);
@@ -381,17 +629,23 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ExtractAssociatedIcon_FilePath_Success()
         {
-            ExtractAssociatedIcon_FilePath_Success_Helper(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"));
+            ExtractAssociatedIcon_FilePath_Success_Helper(
+                Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")
+            );
         }
 
         [PlatformSpecific(TestPlatforms.Windows)] // UNC
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Fix for https://github.com/dotnet/runtime/issues/28220")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Fix for https://github.com/dotnet/runtime/issues/28220"
+        )]
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ExtractAssociatedIcon_UNCFilePath_Success()
         {
             string bitmapPath = Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico");
             string bitmapPathRoot = Path.GetPathRoot(bitmapPath);
-            string bitmapUncPath = $"\\\\{Environment.MachineName}\\{bitmapPath.Substring(0, bitmapPathRoot.IndexOf(":"))}$\\{bitmapPath.Replace(bitmapPathRoot, "")}";
+            string bitmapUncPath =
+                $"\\\\{Environment.MachineName}\\{bitmapPath.Substring(0, bitmapPathRoot.IndexOf(":"))}$\\{bitmapPath.Replace(bitmapPathRoot, "")}";
 
             // Some path could not be accessible
             // if so we just pass the test
@@ -429,27 +683,38 @@ namespace System.Drawing.Tests
             }
             else
             {
-                Assert.Throws<FileNotFoundException>(() => Icon.ExtractAssociatedIcon("http://microsoft.com"));
+                Assert.Throws<FileNotFoundException>(
+                    () => Icon.ExtractAssociatedIcon("http://microsoft.com")
+                );
             }
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ExtractAssociatedIcon_NullFilePath_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("filePath", null, () => Icon.ExtractAssociatedIcon(null));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "filePath",
+                null,
+                () => Icon.ExtractAssociatedIcon(null)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ExtractAssociatedIcon_InvalidFilePath_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("filePath", null, () => Icon.ExtractAssociatedIcon(""));
+            AssertExtensions.Throws<ArgumentException>(
+                "filePath",
+                null,
+                () => Icon.ExtractAssociatedIcon("")
+            );
         }
-
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ExtractAssociatedIcon_NoSuchPath_ThrowsFileNotFoundException()
         {
-            Assert.Throws<FileNotFoundException>(() => Icon.ExtractAssociatedIcon("no-such-file.png"));
+            Assert.Throws<FileNotFoundException>(
+                () => Icon.ExtractAssociatedIcon("no-such-file.png")
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -492,7 +757,9 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Save_NullOutputStreamIconData_ThrowsNullReferenceException()
         {
-            using (var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")))
+            using (
+                var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
+            )
             {
                 Assert.Throws<NullReferenceException>(() => icon.Save(null));
             }
@@ -500,15 +767,26 @@ namespace System.Drawing.Tests
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/47759", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/47759",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Save_NullOutputStreamNoIconData_ThrowsArgumentNullException()
         {
-            using (var source = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")))
+            using (
+                var source = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
+            )
             {
                 var icon = Icon.FromHandle(source.Handle);
                 icon.Dispose();
 
-                AssertExtensions.Throws<ArgumentNullException>("outputStream", "dataStream", () => icon.Save(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "outputStream",
+                    "dataStream",
+                    () => icon.Save(null)
+                );
             }
         }
 
@@ -516,7 +794,9 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Save_ClosedOutputStreamIconData_ThrowsException()
         {
-            using (var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")))
+            using (
+                var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
+            )
             {
                 var stream = new MemoryStream();
                 stream.Close();
@@ -526,11 +806,18 @@ namespace System.Drawing.Tests
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/47759", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/47759",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Save_ClosedOutputStreamNoIconData()
         {
-            using (var source = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")))
+            using (
+                var source = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
+            )
             using (var icon = Icon.FromHandle(source.Handle))
             {
                 var stream = new MemoryStream();
@@ -553,7 +840,9 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Save_NoIconDataOwnsHandleAndDisposed_ThrowsObjectDisposedException()
         {
-            Icon icon = Icon.ExtractAssociatedIcon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"));
+            Icon icon = Icon.ExtractAssociatedIcon(
+                Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")
+            );
             icon.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => icon.Save(new MemoryStream()));
@@ -561,14 +850,42 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> ToBitmap_TestData()
         {
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico")) };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("32x32_one_entry_4bit.ico")) };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("48x48_one_entry_1bit.ico")) };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("64x64_one_entry_8bit.ico")) };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("96x96_one_entry_8bit.ico")) };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("256x256_two_entries_multiple_bits.ico"), 48, 48) };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("256x256_two_entries_multiple_bits.ico"), 256, 256) };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("256x256_two_entries_multiple_bits.ico"), 0, 0) };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico"))
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("32x32_one_entry_4bit.ico"))
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("48x48_one_entry_1bit.ico"))
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("64x64_one_entry_8bit.ico"))
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("96x96_one_entry_8bit.ico"))
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("256x256_two_entries_multiple_bits.ico"), 48, 48)
+            };
+            yield return new object[]
+            {
+                new Icon(
+                    Helpers.GetTestBitmapPath("256x256_two_entries_multiple_bits.ico"),
+                    256,
+                    256
+                )
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("256x256_two_entries_multiple_bits.ico"), 0, 0)
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -600,17 +917,25 @@ namespace System.Drawing.Tests
         {
             // Handle refers to an icon without any colour. This is not in ToBitmap_TestData as there is
             // a chance that the original icon will be finalized as it is not kept alive in the iterator.
-            using (var originalIcon = new Icon(Helpers.GetTestBitmapPath("48x48_one_entry_1bit.ico")))
+            using (
+                var originalIcon = new Icon(Helpers.GetTestBitmapPath("48x48_one_entry_1bit.ico"))
+            )
             using (Icon icon = Icon.FromHandle(originalIcon.Handle))
             {
                 ToBitmap_BitmapIcon_ReturnsExpected(icon);
             }
         }
 
-        private const string DontSupportPngFramesInIcons = "Switch.System.Drawing.DontSupportPngFramesInIcons";
+        private const string DontSupportPngFramesInIcons =
+            "Switch.System.Drawing.DontSupportPngFramesInIcons";
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55655", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55655",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ToBitmap_PngIconSupportedInSwitches_Success()
         {
@@ -633,13 +958,23 @@ namespace System.Drawing.Tests
                 }
             }
 
-            if (RemoteExecutor.IsSupported && (!AppContext.TryGetSwitch(DontSupportPngFramesInIcons, out bool isEnabled) || isEnabled))
+            if (
+                RemoteExecutor.IsSupported
+                && (
+                    !AppContext.TryGetSwitch(DontSupportPngFramesInIcons, out bool isEnabled)
+                    || isEnabled
+                )
+            )
             {
-                RemoteExecutor.Invoke(() =>
-                {
-                    AppContext.SetSwitch(DontSupportPngFramesInIcons, false);
-                    VerifyPng();
-                }).Dispose();
+                RemoteExecutor
+                    .Invoke(
+                        () =>
+                        {
+                            AppContext.SetSwitch(DontSupportPngFramesInIcons, false);
+                            VerifyPng();
+                        }
+                    )
+                    .Dispose();
             }
             else
             {
@@ -648,7 +983,12 @@ namespace System.Drawing.Tests
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55655", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55655",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ToBitmap_PngIconNotSupportedInSwitches_ThrowsArgumentOutOfRangeException()
         {
@@ -656,17 +996,30 @@ namespace System.Drawing.Tests
             {
                 using (Icon icon = GetPngIcon())
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () => icon.ToBitmap());
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        null,
+                        () => icon.ToBitmap()
+                    );
                 }
             }
 
-            if (RemoteExecutor.IsSupported && (!AppContext.TryGetSwitch(DontSupportPngFramesInIcons, out bool isEnabled) || !isEnabled))
+            if (
+                RemoteExecutor.IsSupported
+                && (
+                    !AppContext.TryGetSwitch(DontSupportPngFramesInIcons, out bool isEnabled)
+                    || !isEnabled
+                )
+            )
             {
-                RemoteExecutor.Invoke(() =>
-                {
-                    AppContext.SetSwitch(DontSupportPngFramesInIcons, true);
-                    VerifyPngNotSupported();
-                }).Dispose();
+                RemoteExecutor
+                    .Invoke(
+                        () =>
+                        {
+                            AppContext.SetSwitch(DontSupportPngFramesInIcons, true);
+                            VerifyPngNotSupported();
+                        }
+                    )
+                    .Dispose();
             }
             else
             {
@@ -681,7 +1034,35 @@ namespace System.Drawing.Tests
                 // Create a PNG inside an ICO.
                 using (var bitmap = new Bitmap(10, 10))
                 {
-                    stream.Write(new byte[] { 0, 0, 1, 0, 1, 0, (byte)bitmap.Width, (byte)bitmap.Height, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 22, 0, 0, 0 }, 0, 22);
+                    stream.Write(
+                        new byte[]
+                        {
+                            0,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            (byte)bitmap.Width,
+                            (byte)bitmap.Height,
+                            0,
+                            0,
+                            0,
+                            0,
+                            32,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            22,
+                            0,
+                            0,
+                            0
+                        },
+                        0,
+                        22
+                    );
 
                     // Writing actual data
                     bitmap.Save(stream, ImageFormat.Png);
@@ -700,7 +1081,12 @@ namespace System.Drawing.Tests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/47759", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/47759",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void FromHandle_IconHandleOneTime_Success()
         {
             using (var icon1 = new Icon(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico")))
@@ -713,7 +1099,12 @@ namespace System.Drawing.Tests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/47759", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/47759",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void FromHandle_IconHandleMultipleTime_Success()
         {
             using (var icon1 = new Icon(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico")))
@@ -734,7 +1125,12 @@ namespace System.Drawing.Tests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/47759", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/47759",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void FromHandle_BitmapHandleOneTime_Success()
         {
             IntPtr handle;
@@ -751,7 +1147,12 @@ namespace System.Drawing.Tests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/47759", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/47759",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void FromHandle_BitmapHandleMultipleTime_Success()
         {
             IntPtr handle;
@@ -776,7 +1177,11 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void FromHandle_Zero_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("handle", null, () => Icon.FromHandle(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentException>(
+                "handle",
+                null,
+                () => Icon.FromHandle(IntPtr.Zero)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -850,8 +1255,13 @@ namespace System.Drawing.Tests
                         }
                         else
                         {
-                            string fieldName = PlatformDetection.IsNetFramework ? "bitDepth" : "s_bitDepth";
-                            FieldInfo fi = typeof(Icon).GetField(fieldName, BindingFlags.Static | BindingFlags.NonPublic);
+                            string fieldName = PlatformDetection.IsNetFramework
+                                ? "bitDepth"
+                                : "s_bitDepth";
+                            FieldInfo fi = typeof(Icon).GetField(
+                                fieldName,
+                                BindingFlags.Static | BindingFlags.NonPublic
+                            );
                             expectedBitDepth = (int)fi.GetValue(null);
                         }
 
@@ -868,14 +1278,23 @@ namespace System.Drawing.Tests
                                     // When converting back and forth it results in slight loss of
                                     // precision so allow both original and rounded values here.
                                     uint color = (uint)bitmap.GetPixel(0, 0).ToArgb();
-                                    Assert.True(color == 0x879EE532u || color == 0x879EE431u, color.ToString("x"));
+                                    Assert.True(
+                                        color == 0x879EE532u || color == 0x879EE431u,
+                                        color.ToString("x")
+                                    );
                                     color = (uint)bitmap.GetPixel(0, 31).ToArgb();
-                                    Assert.True(color == 0x661CD8B7u || color == 0x661BD7B6u, color.ToString("x"));
+                                    Assert.True(
+                                        color == 0x661CD8B7u || color == 0x661BD7B6u,
+                                        color.ToString("x")
+                                    );
                                 }
                                 else
                                 {
                                     Assert.Equal(0x879EE532u, (uint)bitmap.GetPixel(0, 0).ToArgb());
-                                    Assert.Equal(0x661CD8B7u, (uint)bitmap.GetPixel(0, 31).ToArgb());
+                                    Assert.Equal(
+                                        0x661CD8B7u,
+                                        (uint)bitmap.GetPixel(0, 31).ToArgb()
+                                    );
                                 }
                                 break;
                             case 16:

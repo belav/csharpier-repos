@@ -17,7 +17,8 @@ internal class ControllerActionDescriptorProvider : IActionDescriptorProvider
 
     public ControllerActionDescriptorProvider(
         ApplicationPartManager partManager,
-        ApplicationModelFactory applicationModelFactory)
+        ApplicationModelFactory applicationModelFactory
+    )
     {
         if (partManager == null)
         {

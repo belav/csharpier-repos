@@ -13,10 +13,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public DiagnosticAnalyzer Analyzer => _Field1!;
 
-        protected AnalyzerUpdateArgsId(DiagnosticAnalyzer analyzer)
-            : base(analyzer)
-        {
-        }
+        protected AnalyzerUpdateArgsId(DiagnosticAnalyzer analyzer) : base(analyzer) { }
 
         public override string BuildTool => Analyzer.GetAnalyzerAssemblyName();
     }

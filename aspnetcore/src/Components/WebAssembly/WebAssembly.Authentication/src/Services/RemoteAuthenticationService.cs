@@ -18,10 +18,14 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// <typeparam name="TRemoteAuthenticationState">The state to preserve across authentication operations.</typeparam>
 /// <typeparam name="TAccount">The type of the <see cref="RemoteUserAccount" />.</typeparam>
 /// <typeparam name="TProviderOptions">The options to be passed down to the underlying JavaScript library handling the authentication operations.</typeparam>
-public class RemoteAuthenticationService<TRemoteAuthenticationState, [DynamicallyAccessedMembers(JsonSerialized)] TAccount, TProviderOptions> :
-    AuthenticationStateProvider,
-    IRemoteAuthenticationService<TRemoteAuthenticationState>,
-    IAccessTokenProvider
+public class RemoteAuthenticationService<
+    TRemoteAuthenticationState,
+    [DynamicallyAccessedMembers(JsonSerialized)] TAccount,
+    TProviderOptions
+>
+    : AuthenticationStateProvider,
+      IRemoteAuthenticationService<TRemoteAuthenticationState>,
+      IAccessTokenProvider
     where TRemoteAuthenticationState : RemoteAuthenticationState
     where TProviderOptions : new()
     where TAccount : RemoteUserAccount
@@ -64,7 +68,8 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
         IJSRuntime jsRuntime,
         IOptionsSnapshot<RemoteAuthenticationOptions<TProviderOptions>> options,
         NavigationManager navigation,
-        AccountClaimsPrincipalFactory<TAccount> accountClaimsPrincipalFactory)
+        AccountClaimsPrincipalFactory<TAccount> accountClaimsPrincipalFactory
+    )
     {
         JsRuntime = jsRuntime;
         Navigation = navigation;
@@ -73,14 +78,18 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
     }
 
     /// <inheritdoc />
-    public override async Task<AuthenticationState> GetAuthenticationStateAsync() => new AuthenticationState(await GetUser(useCache: true));
+    public override async Task<AuthenticationState> GetAuthenticationStateAsync() =>
+        new AuthenticationState(await GetUser(useCache: true));
 
     /// <inheritdoc />
     public virtual async Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> SignInAsync(
-        RemoteAuthenticationContext<TRemoteAuthenticationState> context)
+        RemoteAuthenticationContext<TRemoteAuthenticationState> context
+    )
     {
         await EnsureAuthService();
-        var internalResult = await JsRuntime.InvokeAsync<InternalRemoteAuthenticationResult<TRemoteAuthenticationState>>("AuthenticationService.signIn", context.State);
+        var internalResult = await JsRuntime.InvokeAsync<
+            InternalRemoteAuthenticationResult<TRemoteAuthenticationState>
+        >("AuthenticationService.signIn", context.State);
         var result = internalResult.Convert();
         if (result.Status == RemoteAuthenticationStatus.Success)
         {
@@ -93,11 +102,14 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
     }
 
     /// <inheritdoc />
-    public virtual async Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> CompleteSignInAsync(
-        RemoteAuthenticationContext<TRemoteAuthenticationState> context)
+    public virtual async Task<
+        RemoteAuthenticationResult<TRemoteAuthenticationState>
+    > CompleteSignInAsync(RemoteAuthenticationContext<TRemoteAuthenticationState> context)
     {
         await EnsureAuthService();
-        var internalResult = await JsRuntime.InvokeAsync<InternalRemoteAuthenticationResult<TRemoteAuthenticationState>>("AuthenticationService.completeSignIn", context.Url);
+        var internalResult = await JsRuntime.InvokeAsync<
+            InternalRemoteAuthenticationResult<TRemoteAuthenticationState>
+        >("AuthenticationService.completeSignIn", context.Url);
         var result = internalResult.Convert();
         if (result.Status == RemoteAuthenticationStatus.Success)
         {
@@ -111,10 +123,13 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
 
     /// <inheritdoc />
     public virtual async Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> SignOutAsync(
-        RemoteAuthenticationContext<TRemoteAuthenticationState> context)
+        RemoteAuthenticationContext<TRemoteAuthenticationState> context
+    )
     {
         await EnsureAuthService();
-        var internalResult = await JsRuntime.InvokeAsync<InternalRemoteAuthenticationResult<TRemoteAuthenticationState>>("AuthenticationService.signOut", context.State);
+        var internalResult = await JsRuntime.InvokeAsync<
+            InternalRemoteAuthenticationResult<TRemoteAuthenticationState>
+        >("AuthenticationService.signOut", context.State);
         var result = internalResult.Convert();
         if (result.Status == RemoteAuthenticationStatus.Success)
         {
@@ -127,11 +142,14 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
     }
 
     /// <inheritdoc />
-    public virtual async Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> CompleteSignOutAsync(
-        RemoteAuthenticationContext<TRemoteAuthenticationState> context)
+    public virtual async Task<
+        RemoteAuthenticationResult<TRemoteAuthenticationState>
+    > CompleteSignOutAsync(RemoteAuthenticationContext<TRemoteAuthenticationState> context)
     {
         await EnsureAuthService();
-        var internalResult = await JsRuntime.InvokeAsync<InternalRemoteAuthenticationResult<TRemoteAuthenticationState>>("AuthenticationService.completeSignOut", context.Url);
+        var internalResult = await JsRuntime.InvokeAsync<
+            InternalRemoteAuthenticationResult<TRemoteAuthenticationState>
+        >("AuthenticationService.completeSignOut", context.Url);
         var result = internalResult.Convert();
         if (result.Status == RemoteAuthenticationStatus.Success)
         {
@@ -147,11 +165,21 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
     public virtual async ValueTask<AccessTokenResult> RequestAccessToken()
     {
         await EnsureAuthService();
-        var result = await JsRuntime.InvokeAsync<InternalAccessTokenResult>("AuthenticationService.getAccessToken");
+        var result = await JsRuntime.InvokeAsync<InternalAccessTokenResult>(
+            "AuthenticationService.getAccessToken"
+        );
 
-        if (!Enum.TryParse<AccessTokenResultStatus>(result.Status, ignoreCase: true, out var parsedStatus))
+        if (
+            !Enum.TryParse<AccessTokenResultStatus>(
+                result.Status,
+                ignoreCase: true,
+                out var parsedStatus
+            )
+        )
         {
-            throw new InvalidOperationException($"Invalid access token result status '{result.Status ?? "(null)"}'");
+            throw new InvalidOperationException(
+                $"Invalid access token result status '{result.Status ?? "(null)"}'"
+            );
         }
 
         if (parsedStatus == AccessTokenResultStatus.RequiresRedirect)
@@ -164,7 +192,9 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
     }
 
     /// <inheritdoc />
-    public virtual async ValueTask<AccessTokenResult> RequestAccessToken(AccessTokenRequestOptions options)
+    public virtual async ValueTask<AccessTokenResult> RequestAccessToken(
+        AccessTokenRequestOptions options
+    )
     {
         if (options is null)
         {
@@ -172,11 +202,22 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
         }
 
         await EnsureAuthService();
-        var result = await JsRuntime.InvokeAsync<InternalAccessTokenResult>("AuthenticationService.getAccessToken", options);
+        var result = await JsRuntime.InvokeAsync<InternalAccessTokenResult>(
+            "AuthenticationService.getAccessToken",
+            options
+        );
 
-        if (!Enum.TryParse<AccessTokenResultStatus>(result.Status, ignoreCase: true, out var parsedStatus))
+        if (
+            !Enum.TryParse<AccessTokenResultStatus>(
+                result.Status,
+                ignoreCase: true,
+                out var parsedStatus
+            )
+        )
         {
-            throw new InvalidOperationException($"Invalid access token result status '{result.Status ?? "(null)"}'");
+            throw new InvalidOperationException(
+                $"Invalid access token result status '{result.Status ?? "(null)"}'"
+            );
         }
 
         if (parsedStatus == AccessTokenResultStatus.RequiresRedirect)
@@ -190,9 +231,12 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
 
     private Uri GetRedirectUrl(string customReturnUrl)
     {
-        var returnUrl = customReturnUrl != null ? Navigation.ToAbsoluteUri(customReturnUrl).ToString() : null;
+        var returnUrl =
+            customReturnUrl != null ? Navigation.ToAbsoluteUri(customReturnUrl).ToString() : null;
         var encodedReturnUrl = Uri.EscapeDataString(returnUrl ?? Navigation.Uri);
-        var redirectUrl = Navigation.ToAbsoluteUri($"{Options.AuthenticationPaths.LogInPath}?returnUrl={encodedReturnUrl}");
+        var redirectUrl = Navigation.ToAbsoluteUri(
+            $"{Options.AuthenticationPaths.LogInPath}?returnUrl={encodedReturnUrl}"
+        );
         return redirectUrl;
     }
 
@@ -218,7 +262,10 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
     {
         await EnsureAuthService();
         var account = await JsRuntime.InvokeAsync<TAccount>("AuthenticationService.getUser");
-        var user = await AccountClaimsPrincipalFactory.CreateUserAsync(account, Options.UserOptions);
+        var user = await AccountClaimsPrincipalFactory.CreateUserAsync(
+            account,
+            Options.UserOptions
+        );
 
         return user;
     }
@@ -236,7 +283,9 @@ public class RemoteAuthenticationService<TRemoteAuthenticationState, [Dynamicall
     {
         NotifyAuthenticationStateChanged(UpdateAuthenticationState(task));
 
-        static async Task<AuthenticationState> UpdateAuthenticationState(Task<ClaimsPrincipal> futureUser) => new AuthenticationState(await futureUser);
+        static async Task<AuthenticationState> UpdateAuthenticationState(
+            Task<ClaimsPrincipal> futureUser
+        ) => new AuthenticationState(await futureUser);
     }
 }
 
@@ -249,7 +298,8 @@ internal struct InternalAccessTokenResult
 }
 
 // Internal for testing purposes
-internal struct InternalRemoteAuthenticationResult<TRemoteAuthenticationState> where TRemoteAuthenticationState : RemoteAuthenticationState
+internal struct InternalRemoteAuthenticationResult<TRemoteAuthenticationState>
+    where TRemoteAuthenticationState : RemoteAuthenticationState
 {
     public string Status { get; set; }
 
@@ -263,7 +313,10 @@ internal struct InternalRemoteAuthenticationResult<TRemoteAuthenticationState> w
         result.ErrorMessage = ErrorMessage;
         result.State = State;
 
-        if (Status != null && Enum.TryParse<RemoteAuthenticationStatus>(Status, ignoreCase: true, out var status))
+        if (
+            Status != null
+            && Enum.TryParse<RemoteAuthenticationStatus>(Status, ignoreCase: true, out var status)
+        )
         {
             result.Status = status;
         }

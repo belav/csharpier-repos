@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Http;
 /// </summary>
 public static class OpenApiRouteHandlerBuilderExtensions
 {
-    private static readonly ExcludeFromDescriptionAttribute _excludeFromDescriptionMetadataAttribute = new();
+    private static readonly ExcludeFromDescriptionAttribute _excludeFromDescriptionMetadataAttribute =
+        new();
 
     /// <summary>
     /// Adds the <see cref="IExcludeFromDescriptionMetadata"/> to <see cref="EndpointBuilder.Metadata"/> for all builders
@@ -40,13 +41,21 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="additionalContentTypes">Additional response content types the endpoint produces for the supplied status code.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
 #pragma warning disable RS0026
-    public static RouteHandlerBuilder Produces<TResponse>(this RouteHandlerBuilder builder,
+    public static RouteHandlerBuilder Produces<TResponse>(
+        this RouteHandlerBuilder builder,
 #pragma warning restore RS0026
-            int statusCode = StatusCodes.Status200OK,
+        int statusCode = StatusCodes.Status200OK,
         string? contentType = null,
-        params string[] additionalContentTypes)
+        params string[] additionalContentTypes
+    )
     {
-        return Produces(builder, statusCode, typeof(TResponse), contentType, additionalContentTypes);
+        return Produces(
+            builder,
+            statusCode,
+            typeof(TResponse),
+            contentType,
+            additionalContentTypes
+        );
     }
 
     /// <summary>
@@ -60,12 +69,14 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="additionalContentTypes">Additional response content types the endpoint produces for the supplied status code.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
 #pragma warning disable RS0026
-    public static RouteHandlerBuilder Produces(this RouteHandlerBuilder builder,
+    public static RouteHandlerBuilder Produces(
+        this RouteHandlerBuilder builder,
 #pragma warning restore RS0026
-            int statusCode,
+        int statusCode,
         Type? responseType = null,
         string? contentType = null,
-        params string[] additionalContentTypes)
+        params string[] additionalContentTypes
+    )
     {
         if (responseType is Type && string.IsNullOrEmpty(contentType))
         {
@@ -74,11 +85,20 @@ public static class OpenApiRouteHandlerBuilderExtensions
 
         if (contentType is null)
         {
-            builder.WithMetadata(new ProducesResponseTypeMetadata(responseType ?? typeof(void), statusCode));
+            builder.WithMetadata(
+                new ProducesResponseTypeMetadata(responseType ?? typeof(void), statusCode)
+            );
             return builder;
         }
 
-        builder.WithMetadata(new ProducesResponseTypeMetadata(responseType ?? typeof(void), statusCode, contentType, additionalContentTypes));
+        builder.WithMetadata(
+            new ProducesResponseTypeMetadata(
+                responseType ?? typeof(void),
+                statusCode,
+                contentType,
+                additionalContentTypes
+            )
+        );
 
         return builder;
     }
@@ -91,9 +111,11 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="statusCode">The response status code.</param>
     /// <param name="contentType">The response content type. Defaults to "application/problem+json".</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder ProducesProblem(this RouteHandlerBuilder builder,
+    public static RouteHandlerBuilder ProducesProblem(
+        this RouteHandlerBuilder builder,
         int statusCode,
-        string? contentType = null)
+        string? contentType = null
+    )
     {
         if (string.IsNullOrEmpty(contentType))
         {
@@ -111,9 +133,11 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="statusCode">The response status code. Defaults to <see cref="StatusCodes.Status400BadRequest"/>.</param>
     /// <param name="contentType">The response content type. Defaults to "application/problem+json".</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder ProducesValidationProblem(this RouteHandlerBuilder builder,
+    public static RouteHandlerBuilder ProducesValidationProblem(
+        this RouteHandlerBuilder builder,
         int statusCode = StatusCodes.Status400BadRequest,
-        string? contentType = null)
+        string? contentType = null
+    )
     {
         if (string.IsNullOrEmpty(contentType))
         {
@@ -135,7 +159,10 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="tags">A collection of tags to be associated with the endpoint.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder WithTags(this RouteHandlerBuilder builder, params string[] tags)
+    public static RouteHandlerBuilder WithTags(
+        this RouteHandlerBuilder builder,
+        params string[] tags
+    )
     {
         builder.WithMetadata(new TagsAttribute(tags));
         return builder;
@@ -150,8 +177,11 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="contentType">The request content type that the endpoint accepts.</param>
     /// <param name="additionalContentTypes">The list of additional request content types that the endpoint accepts.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder Accepts<TRequest>(this RouteHandlerBuilder builder,
-        string contentType, params string[] additionalContentTypes) where TRequest : notnull
+    public static RouteHandlerBuilder Accepts<TRequest>(
+        this RouteHandlerBuilder builder,
+        string contentType,
+        params string[] additionalContentTypes
+    ) where TRequest : notnull
     {
         Accepts(builder, typeof(TRequest), contentType, additionalContentTypes);
 
@@ -168,8 +198,12 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="contentType">The request content type that the endpoint accepts.</param>
     /// <param name="additionalContentTypes">The list of additional request content types that the endpoint accepts.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder Accepts<TRequest>(this RouteHandlerBuilder builder,
-        bool isOptional, string contentType, params string[] additionalContentTypes) where TRequest : notnull
+    public static RouteHandlerBuilder Accepts<TRequest>(
+        this RouteHandlerBuilder builder,
+        bool isOptional,
+        string contentType,
+        params string[] additionalContentTypes
+    ) where TRequest : notnull
     {
         Accepts(builder, typeof(TRequest), isOptional, contentType, additionalContentTypes);
 
@@ -185,13 +219,22 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="contentType">The request content type that the endpoint accepts.</param>
     /// <param name="additionalContentTypes">The list of additional request content types that the endpoint accepts.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder Accepts(this RouteHandlerBuilder builder,
-        Type requestType, string contentType, params string[] additionalContentTypes)
+    public static RouteHandlerBuilder Accepts(
+        this RouteHandlerBuilder builder,
+        Type requestType,
+        string contentType,
+        params string[] additionalContentTypes
+    )
     {
-        builder.WithMetadata(new AcceptsMetadata(requestType, false, GetAllContentTypes(contentType, additionalContentTypes)));
+        builder.WithMetadata(
+            new AcceptsMetadata(
+                requestType,
+                false,
+                GetAllContentTypes(contentType, additionalContentTypes)
+            )
+        );
         return builder;
     }
-
 
     /// <summary>
     /// Adds <see cref="IAcceptsMetadata"/> to <see cref="EndpointBuilder.Metadata"/> for all builders
@@ -203,10 +246,21 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="contentType">The request content type that the endpoint accepts.</param>
     /// <param name="additionalContentTypes">The list of additional request content types that the endpoint accepts.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder Accepts(this RouteHandlerBuilder builder,
-        Type requestType, bool isOptional, string contentType, params string[] additionalContentTypes)
+    public static RouteHandlerBuilder Accepts(
+        this RouteHandlerBuilder builder,
+        Type requestType,
+        bool isOptional,
+        string contentType,
+        params string[] additionalContentTypes
+    )
     {
-        builder.WithMetadata(new AcceptsMetadata(requestType, isOptional, GetAllContentTypes(contentType, additionalContentTypes)));
+        builder.WithMetadata(
+            new AcceptsMetadata(
+                requestType,
+                isOptional,
+                GetAllContentTypes(contentType, additionalContentTypes)
+            )
+        );
         return builder;
     }
 

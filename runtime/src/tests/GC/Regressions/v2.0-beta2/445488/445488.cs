@@ -7,17 +7,16 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-[ StructLayout( LayoutKind.Sequential, CharSet=CharSet.Unicode )]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 public class Node
 {
     GCHandle gch1;
     byte[] pinnedData1;
     public Node Next;
 
-
     public Node()
     {
-        pinnedData1 = new byte[1024*50];
+        pinnedData1 = new byte[1024 * 50];
         gch1 = GCHandle.Alloc(pinnedData1, GCHandleType.Pinned);
     }
 }
@@ -32,15 +31,15 @@ public class Test_445488
         List<byte[]> list = new List<byte[]>();
         List<GCHandle> glist = new List<GCHandle>();
         //PC = new PerformanceCounter(".NET CLR Memory", "Gen 0 heap size", "445488", ".");
-        long count =0;
+        long count = 0;
 
         while (count <= 124979200)
         {
             //float gen0size = PC.NextValue();
-            byte[] b = new byte[1024*50];
-            count += (1024*50);
+            byte[] b = new byte[1024 * 50];
+            count += (1024 * 50);
 
-            if (count % (1024*2500)==0)
+            if (count % (1024 * 2500) == 0)
             {
                 glist.Add(GCHandle.Alloc(b, GCHandleType.Pinned));
             }
@@ -52,9 +51,7 @@ public class Test_445488
         GC.KeepAlive(list);
         GC.KeepAlive(glist);
         return 100;
-
     }
-
 }
 
 /*
@@ -92,7 +89,7 @@ Abort   Retry   Ignore
 Ignoring the asserts generates the AV from the bug report:
 
 
- # ChildEBP RetAddr
+# ChildEBP RetAddr
 00 0012d250 5e24645f mscorwks!DbgAssertDialog+0x394
 01 0012d618 5dcedf7c mscorwks!CHECK::Trigger+0x2df
 02 0012d800 5dcedb2d mscorwks!CLRVectoredExceptionHandlerPhase2+0x33c

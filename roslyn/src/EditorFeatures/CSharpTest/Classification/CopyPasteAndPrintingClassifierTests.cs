@@ -32,20 +32,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             using var workspace = TestWorkspace.CreateCSharp("class C { C c; }");
             var document = workspace.Documents.First();
 
-            var listenerProvider = workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
             var provider = new CopyPasteAndPrintingClassificationBufferTaggerProvider(
                 workspace.ExportProvider.GetExportedValue<IThreadingContext>(),
                 workspace.ExportProvider.GetExportedValue<ClassificationTypeMap>(),
-                listenerProvider);
+                listenerProvider
+            );
 
             var tagger = provider.CreateTagger<IClassificationTag>(document.GetTextBuffer())!;
             using var disposable = (IDisposable)tagger;
             var waiter = listenerProvider.GetWaiter(FeatureAttribute.Classification);
             await waiter.ExpeditedWaitAsync();
 
-            var tags = tagger.GetTags(document.GetTextBuffer().CurrentSnapshot.GetSnapshotSpanCollection());
-            var allTags = tagger.GetAllTags(document.GetTextBuffer().CurrentSnapshot.GetSnapshotSpanCollection(), CancellationToken.None);
+            var tags = tagger.GetTags(
+                document.GetTextBuffer().CurrentSnapshot.GetSnapshotSpanCollection()
+            );
+            var allTags = tagger.GetAllTags(
+                document.GetTextBuffer().CurrentSnapshot.GetSnapshotSpanCollection(),
+                CancellationToken.None
+            );
 
             Assert.Empty(tags);
             Assert.NotEmpty(allTags);

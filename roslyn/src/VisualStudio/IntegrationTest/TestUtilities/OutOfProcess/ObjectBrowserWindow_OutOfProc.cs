@@ -16,7 +16,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc = CreateInProcComponent<ObjectBrowserWindow_InProc>(visualStudioInstance);
         }
 
-        public void CloseWindow()
-            => _inProc.CloseWindow();
+        public void CloseWindow() => _inProc.CloseWindow();
     }
 }

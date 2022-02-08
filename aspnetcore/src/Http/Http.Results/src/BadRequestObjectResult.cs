@@ -5,8 +5,5 @@ namespace Microsoft.AspNetCore.Http.Result;
 
 internal sealed class BadRequestObjectResult : ObjectResult
 {
-    public BadRequestObjectResult(object? error)
-        : base(error, StatusCodes.Status400BadRequest)
-    {
-    }
+    public BadRequestObjectResult(object? error) : base(error, StatusCodes.Status400BadRequest) { }
 }

@@ -37,14 +37,8 @@ namespace System.Data.Odbc
 
         private object? CoercedValue
         {
-            get
-            {
-                return _coercedValue;
-            }
-            set
-            {
-                _coercedValue = value;
-            }
+            get { return _coercedValue; }
+            set { _coercedValue = value; }
         }
 
         public override ParameterDirection Direction
@@ -76,23 +70,13 @@ namespace System.Data.Odbc
 
         public override bool IsNullable
         {
-            get
-            {
-                return _isNullable;
-            }
-            set
-            {
-                _isNullable = value;
-            }
+            get { return _isNullable; }
+            set { _isNullable = value; }
         }
-
 
         public int Offset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
             set
             {
                 if (value < 0)
@@ -128,7 +112,6 @@ namespace System.Data.Odbc
             }
         }
 
-
         private bool ShouldSerializeSize()
         {
             return (0 != _size);
@@ -142,22 +125,13 @@ namespace System.Data.Odbc
                 string? sourceColumn = _sourceColumn;
                 return ((null != sourceColumn) ? sourceColumn : string.Empty);
             }
-            set
-            {
-                _sourceColumn = value;
-            }
+            set { _sourceColumn = value; }
         }
 
         public override bool SourceColumnNullMapping
         {
-            get
-            {
-                return _sourceColumnNullMapping;
-            }
-            set
-            {
-                _sourceColumnNullMapping = value;
-            }
+            get { return _sourceColumnNullMapping; }
+            set { _sourceColumnNullMapping = value; }
         }
 
         public override DataRowVersion SourceVersion

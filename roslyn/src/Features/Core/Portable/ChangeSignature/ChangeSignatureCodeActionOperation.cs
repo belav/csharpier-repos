@@ -23,32 +23,49 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
         public string? ConfirmationMessage { get; }
 
-        public ChangeSignatureCodeActionOperation(Solution changedSolution, string? confirmationMessage)
+        public ChangeSignatureCodeActionOperation(
+            Solution changedSolution,
+            string? confirmationMessage
+        )
         {
-            ChangedSolution = changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
+            ChangedSolution =
+                changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
             ConfirmationMessage = confirmationMessage;
         }
 
         internal override bool ApplyDuringTests => true;
 
-        public sealed override void Apply(Workspace workspace, CancellationToken cancellationToken)
-            => ApplyWorker(workspace, new ProgressTracker());
+        public sealed override void Apply(
+            Workspace workspace,
+            CancellationToken cancellationToken
+        ) => ApplyWorker(workspace, new ProgressTracker());
 
         /// <summary>
         /// Show the confirmation message, if available, before attempting to apply the changes.
         /// </summary>
         internal sealed override Task<bool> TryApplyAsync(
-            Workspace workspace, IProgressTracker progressTracker, CancellationToken cancellationToken)
+            Workspace workspace,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
-            return ApplyWorker(workspace, progressTracker) ? SpecializedTasks.True : SpecializedTasks.False;
+            return ApplyWorker(workspace, progressTracker)
+              ? SpecializedTasks.True
+              : SpecializedTasks.False;
         }
 
         private bool ApplyWorker(Workspace workspace, IProgressTracker progressTracker)
         {
             if (ConfirmationMessage != null)
             {
-                var notificationService = workspace.Services.GetRequiredService<INotificationService>();
-                if (!notificationService.ConfirmMessageBox(ConfirmationMessage, severity: NotificationSeverity.Warning))
+                var notificationService =
+                    workspace.Services.GetRequiredService<INotificationService>();
+                if (
+                    !notificationService.ConfirmMessageBox(
+                        ConfirmationMessage,
+                        severity: NotificationSeverity.Warning
+                    )
+                )
                 {
                     return false;
                 }

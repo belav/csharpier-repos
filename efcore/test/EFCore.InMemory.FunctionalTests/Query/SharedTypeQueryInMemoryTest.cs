@@ -17,8 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Can_use_shared_type_entity_type_in_ToInMemoryQuery(bool async)
         {
-            var contextFactory = await InitializeAsync<MyContextInMemory24601>(
-                   seed: c => c.Seed());
+            var contextFactory = await InitializeAsync<MyContextInMemory24601>(seed: c => c.Seed());
 
             using var context = contextFactory.CreateContext();
 
@@ -29,22 +28,27 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private class MyContextInMemory24601 : MyContext24601
         {
-            public MyContextInMemory24601(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public MyContextInMemory24601(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.SharedTypeEntity<Dictionary<string, object>>("STET",
+                modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
+                    "STET",
                     b =>
                     {
                         b.IndexerProperty<int>("Id");
                         b.IndexerProperty<string>("Value");
-                    });
+                    }
+                );
 
-                modelBuilder.Entity<ViewQuery24601>().HasNoKey()
-                    .ToInMemoryQuery(() => Set<Dictionary<string, object>>("STET").Select(e => new ViewQuery24601 { Value = (string)e["Value"] }));
+                modelBuilder
+                    .Entity<ViewQuery24601>()
+                    .HasNoKey()
+                    .ToInMemoryQuery(
+                        () =>
+                            Set<Dictionary<string, object>>("STET")
+                                .Select(e => new ViewQuery24601 { Value = (string)e["Value"] })
+                    );
             }
         }
     }

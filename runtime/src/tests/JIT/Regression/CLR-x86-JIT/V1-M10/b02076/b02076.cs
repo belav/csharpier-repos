@@ -20,7 +20,6 @@ class CSwarm
 {
     public CSwarm()
     {
-
         i = new MyInt();
         m_rScreen = new RECT();
 
@@ -34,10 +33,10 @@ class CSwarm
         Console.WriteLine(m_rScreen.left.ToString());
         Console.WriteLine(i.i.ToString());
     }
+
     RECT m_rScreen;
     MyInt i;
 };
-
 
 class MainClass
 {
@@ -47,5 +46,3 @@ class MainClass
         return (100);
     }
 };
-
-

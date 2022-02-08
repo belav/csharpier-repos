@@ -33,7 +33,11 @@ namespace JitTest
             finally
             {
                 Console.WriteLine(si._dwNumberOfProcessors.ToString() + " processor(s) found");
-                Console.WriteLine("Allocation granularity is " + si._dwAllocationGranularity.ToString() + " for this system.");
+                Console.WriteLine(
+                    "Allocation granularity is "
+                        + si._dwAllocationGranularity.ToString()
+                        + " for this system."
+                );
             }
             return 100;
         }

@@ -24,18 +24,23 @@ namespace System.Runtime.CompilerServices
         /// since the compiler-provided base length won't include the equivalent character count.
         /// </remarks>
         private const int GuessedLengthPerHole = 11;
+
         /// <summary>Minimum size array to rent from the pool.</summary>
         /// <remarks>Same as stack-allocation size used today by string.Format.</remarks>
         private const int MinimumArrayPoolLength = 256;
 
         /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat calls.</summary>
         private readonly IFormatProvider? _provider;
+
         /// <summary>Array rented from the array pool and used to back <see cref="_chars"/>.</summary>
         private char[]? _arrayToReturnToPool;
+
         /// <summary>The span to write into.</summary>
         private Span<char> _chars;
+
         /// <summary>Position at which to write the next character.</summary>
         private int _pos;
+
         /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
         /// <remarks>
         /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more expensive
@@ -102,16 +107,26 @@ namespace System.Runtime.CompilerServices
         /// <param name="formattedCount">The number of holes in the interpolated string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
-        public static InterpolatedStringBuilder Create(int literalLength, int formattedCount, IFormatProvider? provider) =>
-            new InterpolatedStringBuilder(GetDefaultLength(literalLength, formattedCount), provider);
+        public static InterpolatedStringBuilder Create(
+            int literalLength,
+            int formattedCount,
+            IFormatProvider? provider
+        ) =>
+            new InterpolatedStringBuilder(
+                GetDefaultLength(literalLength, formattedCount),
+                provider
+            );
 
         /// <summary>Creates a builder used to translate an interpolated string into a <see cref="string"/>.</summary>
         /// <param name="literalLength">The number of constant characters outside of holes in the interpolated string.</param>
         /// <param name="formattedCount">The number of holes in the interpolated string.</param>
         /// <param name="scratchBuffer">A buffer temporarily transferred to the builder for use as part of its formatting.  Contents may be overwritten.</param>
         /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
-        public static InterpolatedStringBuilder Create(int literalLength, int formattedCount, Span<char> scratchBuffer) =>
-            new InterpolatedStringBuilder(scratchBuffer);
+        public static InterpolatedStringBuilder Create(
+            int literalLength,
+            int formattedCount,
+            Span<char> scratchBuffer
+        ) => new InterpolatedStringBuilder(scratchBuffer);
 
         /// <summary>Creates a builder used to translate an interpolated string into a <see cref="string"/>.</summary>
         /// <param name="literalLength">The number of constant characters outside of holes in the interpolated string.</param>
@@ -119,15 +134,22 @@ namespace System.Runtime.CompilerServices
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="scratchBuffer">A buffer temporarily transferred to the builder for use as part of its formatting.  Contents may be overwritten.</param>
         /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
-        public static InterpolatedStringBuilder Create(int literalLength, int formattedCount, IFormatProvider? provider, Span<char> scratchBuffer) =>
-            new InterpolatedStringBuilder(scratchBuffer, provider);
+        public static InterpolatedStringBuilder Create(
+            int literalLength,
+            int formattedCount,
+            IFormatProvider? provider,
+            Span<char> scratchBuffer
+        ) => new InterpolatedStringBuilder(scratchBuffer, provider);
 
         /// <summary>Derives a default length with which to seed the builder.</summary>
         /// <param name="literalLength">The number of constant characters outside of holes in the interpolated string.</param>
         /// <param name="formattedCount">The number of holes in the interpolated string.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // becomes a constant when inputs are constant
         private static int GetDefaultLength(int literalLength, int formattedCount) =>
-            Math.Max(MinimumArrayPoolLength, literalLength + (formattedCount * GuessedLengthPerHole));
+            Math.Max(
+                MinimumArrayPoolLength,
+                literalLength + (formattedCount * GuessedLengthPerHole)
+            );
 
         /// <summary>Gets the built <see cref="string"/>.</summary>
         /// <returns>The built string.</returns>
@@ -274,7 +296,14 @@ namespace System.Runtime.CompilerServices
                 if (value is ISpanFormattable)
                 {
                     int charsWritten;
-                    while (!((ISpanFormattable)value).TryFormat(_chars.Slice(_pos), out charsWritten, default, _provider)) // constrained call avoiding boxing for value types
+                    while (
+                        !((ISpanFormattable)value).TryFormat(
+                            _chars.Slice(_pos),
+                            out charsWritten,
+                            default,
+                            _provider
+                        )
+                    ) // constrained call avoiding boxing for value types
                     {
                         Grow();
                     }
@@ -295,6 +324,7 @@ namespace System.Runtime.CompilerServices
                 AppendLiteral(s);
             }
         }
+
         /// <summary>Writes the specified value to the builder.</summary>
         /// <param name="value">The value to write.</param>
         /// <param name="format">The format string.</param>
@@ -321,7 +351,14 @@ namespace System.Runtime.CompilerServices
                 if (value is ISpanFormattable)
                 {
                     int charsWritten;
-                    while (!((ISpanFormattable)value).TryFormat(_chars.Slice(_pos), out charsWritten, format, _provider)) // constrained call avoiding boxing for value types
+                    while (
+                        !((ISpanFormattable)value).TryFormat(
+                            _chars.Slice(_pos),
+                            out charsWritten,
+                            format,
+                            _provider
+                        )
+                    ) // constrained call avoiding boxing for value types
                     {
                         Grow();
                     }
@@ -391,7 +428,11 @@ namespace System.Runtime.CompilerServices
         /// <param name="value">The span to write.</param>
         /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
         /// <param name="format">The format string.</param>
-        public void AppendFormatted(ReadOnlySpan<char> value, int alignment = 0, string? format = null)
+        public void AppendFormatted(
+            ReadOnlySpan<char> value,
+            int alignment = 0,
+            string? format = null
+        )
         {
             bool leftAlign = false;
             if (alignment < 0)
@@ -434,9 +475,7 @@ namespace System.Runtime.CompilerServices
         public void AppendFormatted(string? value)
         {
             // Fast-path for no custom formatter and a non-null string that fits in the current destination buffer.
-            if (!_hasCustomFormatter &&
-                value is not null &&
-                value.TryCopyTo(_chars.Slice(_pos)))
+            if (!_hasCustomFormatter && value is not null && value.TryCopyTo(_chars.Slice(_pos)))
             {
                 _pos += value.Length;
             }
@@ -496,9 +535,12 @@ namespace System.Runtime.CompilerServices
         private static bool HasCustomFormatter(IFormatProvider provider)
         {
             Debug.Assert(provider is not null);
-            Debug.Assert(provider is not CultureInfo || provider.GetFormat(typeof(ICustomFormatter)) is null, "Expected CultureInfo to not provide a custom formatter");
-            return
-                provider.GetType() != typeof(CultureInfo) && // optimization to avoid GetFormat in the majority case
+            Debug.Assert(
+                provider is not CultureInfo || provider.GetFormat(typeof(ICustomFormatter)) is null,
+                "Expected CultureInfo to not provide a custom formatter"
+            );
+            return provider.GetType() != typeof(CultureInfo)
+                && // optimization to avoid GetFormat in the majority case
                 provider.GetFormat(typeof(ICustomFormatter)) != null;
         }
 
@@ -515,10 +557,18 @@ namespace System.Runtime.CompilerServices
             Debug.Assert(_hasCustomFormatter);
             Debug.Assert(_provider != null);
 
-            ICustomFormatter? formatter = (ICustomFormatter?)_provider.GetFormat(typeof(ICustomFormatter));
-            Debug.Assert(formatter != null, "An incorrectly written provider said it implemented ICustomFormatter, and then didn't");
+            ICustomFormatter? formatter = (ICustomFormatter?)_provider.GetFormat(
+                typeof(ICustomFormatter)
+            );
+            Debug.Assert(
+                formatter != null,
+                "An incorrectly written provider said it implemented ICustomFormatter, and then didn't"
+            );
 
-            if (formatter is not null && formatter.Format(format, value, _provider) is string customFormatted)
+            if (
+                formatter is not null
+                && formatter.Format(format, value, _provider) is string customFormatted
+            )
             {
                 AppendLiteral(customFormatted);
             }
@@ -552,7 +602,9 @@ namespace System.Runtime.CompilerServices
                 }
                 else
                 {
-                    _chars.Slice(startingPos, charsWritten).CopyTo(_chars.Slice(startingPos + paddingNeeded));
+                    _chars
+                        .Slice(startingPos, charsWritten)
+                        .CopyTo(_chars.Slice(startingPos + paddingNeeded));
                     _chars.Slice(startingPos, paddingNeeded).Fill(' ');
                 }
 
@@ -621,7 +673,10 @@ namespace System.Runtime.CompilerServices
             // ints that could technically overflow if someone tried to, for example, append a huge string to a huge string, we also clamp to int.MaxValue.
             // Even if the array creation fails in such a case, we may later fail in ToStringAndClear.
 
-            uint newCapacity = Math.Max(requiredMinCapacity, Math.Min((uint)_chars.Length * 2, string.MaxLength));
+            uint newCapacity = Math.Max(
+                requiredMinCapacity,
+                Math.Min((uint)_chars.Length * 2, string.MaxLength)
+            );
             int arraySize = (int)Math.Clamp(newCapacity, MinimumArrayPoolLength, int.MaxValue);
 
             char[] newArray = ArrayPool<char>.Shared.Rent(arraySize);

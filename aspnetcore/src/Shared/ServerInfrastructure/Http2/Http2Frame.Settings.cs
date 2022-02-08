@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     +-------------------------------+-------------------------------+
     |                        Value (32)                             |
     +---------------------------------------------------------------+
-*/
+    */
 internal partial class Http2Frame
 {
     public Http2SettingsFrameFlags SettingsFlags
@@ -19,7 +19,8 @@ internal partial class Http2Frame
         set => Flags = (byte)value;
     }
 
-    public bool SettingsAck => (SettingsFlags & Http2SettingsFrameFlags.ACK) == Http2SettingsFrameFlags.ACK;
+    public bool SettingsAck =>
+        (SettingsFlags & Http2SettingsFrameFlags.ACK) == Http2SettingsFrameFlags.ACK;
 
     public void PrepareSettings(Http2SettingsFrameFlags flags)
     {

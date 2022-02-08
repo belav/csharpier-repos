@@ -13,7 +13,11 @@ namespace System.Net
         /// <param name="buffer">The buffer to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
-        public static void DumpBuffer(object thisOrContextObject, ReadOnlySpan<byte> buffer, [CallerMemberName] string? memberName = null)
+        public static void DumpBuffer(
+            object thisOrContextObject,
+            ReadOnlySpan<byte> buffer,
+            [CallerMemberName] string? memberName = null
+        )
         {
             if (Log.IsEnabled())
             {

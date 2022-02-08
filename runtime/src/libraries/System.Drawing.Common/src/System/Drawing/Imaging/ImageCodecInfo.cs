@@ -21,9 +21,7 @@ namespace System.Drawing.Imaging
         private byte[][]? _signaturePatterns;
         private byte[][]? _signatureMasks;
 
-        internal ImageCodecInfo()
-        {
-        }
+        internal ImageCodecInfo() { }
 
         public Guid Clsid
         {
@@ -45,14 +43,8 @@ namespace System.Drawing.Imaging
 
         public string? DllName
         {
-            get
-            {
-                return _dllName;
-            }
-            set
-            {
-                _dllName = value;
-            }
+            get { return _dllName; }
+            set { _dllName = value; }
         }
 
         public string? FormatDescription
@@ -177,7 +169,9 @@ namespace System.Drawing.Imaging
 
             for (index = 0; index < numCodecs; index++)
             {
-                IntPtr curcodec = (IntPtr)((long)memoryStart + (int)Marshal.SizeOf(typeof(ImageCodecInfoPrivate)) * index);
+                IntPtr curcodec = (IntPtr)(
+                    (long)memoryStart + (int)Marshal.SizeOf(typeof(ImageCodecInfoPrivate)) * index
+                );
                 ImageCodecInfoPrivate codecp = new ImageCodecInfoPrivate();
                 Marshal.PtrToStructure(curcodec, codecp);
 
@@ -201,8 +195,18 @@ namespace System.Drawing.Imaging
                     codecs[index].SignaturePatterns![j] = new byte[codecp.SigSize];
                     codecs[index].SignatureMasks![j] = new byte[codecp.SigSize];
 
-                    Marshal.Copy((IntPtr)((long)codecp.SigMask + j * codecp.SigSize), codecs[index].SignatureMasks![j], 0, codecp.SigSize);
-                    Marshal.Copy((IntPtr)((long)codecp.SigPattern + j * codecp.SigSize), codecs[index].SignaturePatterns![j], 0, codecp.SigSize);
+                    Marshal.Copy(
+                        (IntPtr)((long)codecp.SigMask + j * codecp.SigSize),
+                        codecs[index].SignatureMasks![j],
+                        0,
+                        codecp.SigSize
+                    );
+                    Marshal.Copy(
+                        (IntPtr)((long)codecp.SigPattern + j * codecp.SigSize),
+                        codecs[index].SignaturePatterns![j],
+                        0,
+                        codecp.SigSize
+                    );
                 }
             }
 

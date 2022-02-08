@@ -26,34 +26,55 @@ namespace System.Net.Security.Tests
             {
                 try
                 {
-                    await client.ConnectAsync(Configuration.Security.TlsServer.IdnHost, Configuration.Security.TlsServer.Port);
+                    await client.ConnectAsync(
+                        Configuration.Security.TlsServer.IdnHost,
+                        Configuration.Security.TlsServer.Port
+                    );
                 }
                 catch (Exception ex)
                 {
                     // if we cannot connect, skip the test instead of failing.
                     // This test is not trying to test networking.
-                    throw new SkipTestException($"Unable to connect to '{Configuration.Security.TlsServer.IdnHost}': {ex.Message}");
+                    throw new SkipTestException(
+                        $"Unable to connect to '{Configuration.Security.TlsServer.IdnHost}': {ex.Message}"
+                    );
                 }
 
-                using (SslStream sslStream = new SslStream(client.GetStream(), false, RemoteHttpsCertValidation, null))
+                using (
+                    SslStream sslStream = new SslStream(
+                        client.GetStream(),
+                        false,
+                        RemoteHttpsCertValidation,
+                        null
+                    )
+                )
                 {
                     try
                     {
                         if (useAsync)
                         {
-                            await sslStream.AuthenticateAsClientAsync(Configuration.Security.TlsServer.IdnHost);
+                            await sslStream.AuthenticateAsClientAsync(
+                                Configuration.Security.TlsServer.IdnHost
+                            );
                         }
                         else
                         {
-                            sslStream.AuthenticateAsClient(Configuration.Security.TlsServer.IdnHost);
+                            sslStream.AuthenticateAsClient(
+                                Configuration.Security.TlsServer.IdnHost
+                            );
                         }
                     }
-                    catch (IOException ex) when (ex.InnerException is SocketException &&
-                      ((SocketException)ex.InnerException).SocketErrorCode == SocketError.ConnectionReset)
+                    catch (IOException ex)
+                        when (ex.InnerException is SocketException
+                            && ((SocketException)ex.InnerException).SocketErrorCode
+                                == SocketError.ConnectionReset
+                        )
                     {
                         // Since we try to verify certificate validation, ignore IO errors
                         // caused most likely by environmental failures.
-                        throw new SkipTestException($"Unable to connect to '{Configuration.Security.TlsServer.IdnHost}': {ex.InnerException.Message}");
+                        throw new SkipTestException(
+                            $"Unable to connect to '{Configuration.Security.TlsServer.IdnHost}': {ex.InnerException.Message}"
+                        );
                     }
                 }
             }
@@ -100,14 +121,26 @@ namespace System.Net.Security.Tests
                     throw new SkipTestException($"Unable to connect to '{host}': {ex.Message}");
                 }
 
-                using (SslStream sslStream = new SslStream(client.GetStream(), false, RemoteHttpsCertValidation, null))
+                using (
+                    SslStream sslStream = new SslStream(
+                        client.GetStream(),
+                        false,
+                        RemoteHttpsCertValidation,
+                        null
+                    )
+                )
                 {
                     await sslStream.AuthenticateAsClientAsync(host);
                 }
             }
         }
 
-        private bool RemoteHttpsCertValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        private bool RemoteHttpsCertValidation(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             Assert.Equal(SslPolicyErrors.None, sslPolicyErrors);
 

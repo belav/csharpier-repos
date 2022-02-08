@@ -9,12 +9,11 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class F1RelationalFixture<TRowVersion> : F1FixtureBase<TRowVersion>
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(
-                w => w.Ignore(RelationalEventId.BatchSmallerThanMinBatchSize));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(w => w.Ignore(RelationalEventId.BatchSmallerThanMinBatchSize));
 
         protected override void BuildModelExternal(ModelBuilder modelBuilder)
         {

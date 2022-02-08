@@ -10,13 +10,17 @@ namespace System.Reflection.Emit.Tests
         [Theory]
         [InlineData(FieldAttributes.Static | FieldAttributes.Public)]
         [InlineData(FieldAttributes.Static | FieldAttributes.Private)]
-        [InlineData( FieldAttributes.Private)]
+        [InlineData(FieldAttributes.Private)]
         public void TestWithStaticAndPublic(FieldAttributes attributes)
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            FieldBuilder field = module.DefineInitializedData("MyField", new byte[] { 01, 00, 01 }, attributes);
+            FieldBuilder field = module.DefineInitializedData(
+                "MyField",
+                new byte[] { 01, 00, 01 },
+                attributes
+            );
             Assert.True(field.IsStatic);
-            Assert.Equal((attributes & FieldAttributes.Public) != 0 , field.IsPublic);
+            Assert.Equal((attributes & FieldAttributes.Public) != 0, field.IsPublic);
             Assert.Equal((attributes & FieldAttributes.Private) != 0, field.IsPrivate);
             Assert.Equal("MyField", field.Name);
         }
@@ -25,7 +29,15 @@ namespace System.Reflection.Emit.Tests
         public void DefineInitializedData_EmptyName_ThrowsArgumentException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>("name", () => module.DefineInitializedData("", new byte[] { 1, 0, 1 }, FieldAttributes.Private));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () =>
+                    module.DefineInitializedData(
+                        "",
+                        new byte[] { 1, 0, 1 },
+                        FieldAttributes.Private
+                    )
+            );
         }
 
         [Theory]
@@ -34,30 +46,60 @@ namespace System.Reflection.Emit.Tests
         public void DefineInitializedData_InvalidDataLength_ThrowsArgumentException(int length)
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>(null, () => module.DefineInitializedData("MyField", new byte[length], FieldAttributes.Public));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    module.DefineInitializedData(
+                        "MyField",
+                        new byte[length],
+                        FieldAttributes.Public
+                    )
+            );
         }
 
         [Fact]
         public void DefineInitializedData_NullName_ThrowsArgumentNullException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => module.DefineInitializedData(null, new byte[] { 1, 0, 1 }, FieldAttributes.Public));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                    module.DefineInitializedData(
+                        null,
+                        new byte[] { 1, 0, 1 },
+                        FieldAttributes.Public
+                    )
+            );
         }
 
         [Fact]
         public void DefineInitializedData_NullData_ThrowsArgumentNullException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentNullException>("data", () => module.DefineInitializedData("MyField", null, FieldAttributes.Public));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "data",
+                () => module.DefineInitializedData("MyField", null, FieldAttributes.Public)
+            );
         }
 
         [Fact]
         public void DefineInitializedData_CreateGlobalFunctionsCalled_ThrowsInvalidOperationException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            FieldBuilder field = module.DefineInitializedData("MyField", new byte[] { 1, 0, 1 }, FieldAttributes.Public);
+            FieldBuilder field = module.DefineInitializedData(
+                "MyField",
+                new byte[] { 1, 0, 1 },
+                FieldAttributes.Public
+            );
             module.CreateGlobalFunctions();
-            Assert.Throws<InvalidOperationException>(() => module.DefineInitializedData("MyField2", new byte[] { 1, 0, 1 }, FieldAttributes.Public));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    module.DefineInitializedData(
+                        "MyField2",
+                        new byte[] { 1, 0, 1 },
+                        FieldAttributes.Public
+                    )
+            );
         }
     }
 }

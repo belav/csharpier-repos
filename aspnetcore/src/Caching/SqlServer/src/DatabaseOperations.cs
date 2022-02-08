@@ -25,12 +25,16 @@ internal class DatabaseOperations : IDatabaseOperations
     private const int DuplicateKeyErrorId = 2627;
 
     protected const string GetTableSchemaErrorText =
-        "Could not retrieve information of table with schema '{0}' and " +
-        "name '{1}'. Make sure you have the table setup and try again. " +
-        "Connection string: {2}";
+        "Could not retrieve information of table with schema '{0}' and "
+        + "name '{1}'. Make sure you have the table setup and try again. "
+        + "Connection string: {2}";
 
     public DatabaseOperations(
-        string connectionString, string schemaName, string tableName, ISystemClock systemClock)
+        string connectionString,
+        string schemaName,
+        string tableName,
+        ISystemClock systemClock
+    )
     {
         ConnectionString = connectionString;
         SchemaName = schemaName;
@@ -62,7 +66,10 @@ internal class DatabaseOperations : IDatabaseOperations
         }
     }
 
-    public async Task DeleteCacheItemAsync(string key, CancellationToken token = default(CancellationToken))
+    public async Task DeleteCacheItemAsync(
+        string key,
+        CancellationToken token = default(CancellationToken)
+    )
     {
         token.ThrowIfCancellationRequested();
 
@@ -82,7 +89,10 @@ internal class DatabaseOperations : IDatabaseOperations
         return GetCacheItem(key, includeValue: true);
     }
 
-    public virtual async Task<byte[]> GetCacheItemAsync(string key, CancellationToken token = default(CancellationToken))
+    public virtual async Task<byte[]> GetCacheItemAsync(
+        string key,
+        CancellationToken token = default(CancellationToken)
+    )
     {
         token.ThrowIfCancellationRequested();
 
@@ -94,7 +104,10 @@ internal class DatabaseOperations : IDatabaseOperations
         GetCacheItem(key, includeValue: false);
     }
 
-    public async Task RefreshCacheItemAsync(string key, CancellationToken token = default(CancellationToken))
+    public async Task RefreshCacheItemAsync(
+        string key,
+        CancellationToken token = default(CancellationToken)
+    )
     {
         token.ThrowIfCancellationRequested();
 
@@ -154,7 +167,12 @@ internal class DatabaseOperations : IDatabaseOperations
         }
     }
 
-    public virtual async Task SetCacheItemAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
+    public virtual async Task SetCacheItemAsync(
+        string key,
+        byte[] value,
+        DistributedCacheEntryOptions options,
+        CancellationToken token = default(CancellationToken)
+    )
     {
         token.ThrowIfCancellationRequested();
 
@@ -218,8 +236,13 @@ internal class DatabaseOperations : IDatabaseOperations
 
             connection.Open();
 
-            using (var reader = command.ExecuteReader(
-                CommandBehavior.SequentialAccess | CommandBehavior.SingleRow | CommandBehavior.SingleResult))
+            using (
+                var reader = command.ExecuteReader(
+                    CommandBehavior.SequentialAccess
+                        | CommandBehavior.SingleRow
+                        | CommandBehavior.SingleResult
+                )
+            )
             {
                 if (reader.Read())
                 {
@@ -238,7 +261,11 @@ internal class DatabaseOperations : IDatabaseOperations
         return value;
     }
 
-    protected virtual async Task<byte[]> GetCacheItemAsync(string key, bool includeValue, CancellationToken token = default(CancellationToken))
+    protected virtual async Task<byte[]> GetCacheItemAsync(
+        string key,
+        bool includeValue,
+        CancellationToken token = default(CancellationToken)
+    )
     {
         token.ThrowIfCancellationRequested();
 
@@ -264,15 +291,24 @@ internal class DatabaseOperations : IDatabaseOperations
 
             await connection.OpenAsync(token).ConfigureAwait(false);
 
-            using (var reader = await command.ExecuteReaderAsync(
-                CommandBehavior.SequentialAccess | CommandBehavior.SingleRow | CommandBehavior.SingleResult,
-                token).ConfigureAwait(false))
+            using (
+                var reader = await command
+                    .ExecuteReaderAsync(
+                        CommandBehavior.SequentialAccess
+                            | CommandBehavior.SingleRow
+                            | CommandBehavior.SingleResult,
+                        token
+                    )
+                    .ConfigureAwait(false)
+            )
             {
                 if (await reader.ReadAsync(token).ConfigureAwait(false))
                 {
                     if (includeValue)
                     {
-                        value = await reader.GetFieldValueAsync<byte[]>(Columns.Indexes.CacheItemValueIndex, token).ConfigureAwait(false);
+                        value = await reader
+                            .GetFieldValueAsync<byte[]>(Columns.Indexes.CacheItemValueIndex, token)
+                            .ConfigureAwait(false);
                     }
                 }
                 else
@@ -294,7 +330,10 @@ internal class DatabaseOperations : IDatabaseOperations
         return false;
     }
 
-    protected DateTimeOffset? GetAbsoluteExpiration(DateTimeOffset utcNow, DistributedCacheEntryOptions options)
+    protected DateTimeOffset? GetAbsoluteExpiration(
+        DateTimeOffset utcNow,
+        DistributedCacheEntryOptions options
+    )
     {
         // calculate absolute expiration
         DateTimeOffset? absoluteExpiration = null;
@@ -306,7 +345,9 @@ internal class DatabaseOperations : IDatabaseOperations
         {
             if (options.AbsoluteExpiration.Value <= utcNow)
             {
-                throw new InvalidOperationException("The absolute expiration value must be in the future.");
+                throw new InvalidOperationException(
+                    "The absolute expiration value must be in the future."
+                );
             }
 
             absoluteExpiration = options.AbsoluteExpiration.Value;
@@ -318,8 +359,9 @@ internal class DatabaseOperations : IDatabaseOperations
     {
         if (!slidingExpiration.HasValue && !absoluteExpiration.HasValue)
         {
-            throw new InvalidOperationException("Either absolute or sliding expiration needs " +
-                "to be provided.");
+            throw new InvalidOperationException(
+                "Either absolute or sliding expiration needs " + "to be provided."
+            );
         }
     }
 }

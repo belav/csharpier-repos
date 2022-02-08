@@ -28,17 +28,13 @@ namespace System.Data.Odbc.Tests
                 var exception = Record.Exception(() => reader.GetString(1));
                 Assert.NotNull(exception);
                 Assert.IsType<InvalidOperationException>(exception);
-                Assert.Equal(
-                    "No data exists for the row/column.",
-                    exception.Message);
+                Assert.Equal("No data exists for the row/column.", exception.Message);
 
                 var values = new object[1];
                 exception = Record.Exception(() => reader.GetValues(values));
                 Assert.NotNull(exception);
                 Assert.IsType<InvalidOperationException>(exception);
-                Assert.Equal(
-                    "No data exists for the row/column.",
-                    exception.Message);
+                Assert.Equal("No data exists for the row/column.", exception.Message);
             }
         }
 
@@ -101,9 +97,7 @@ namespace System.Data.Odbc.Tests
                 var exception = Record.Exception(() => reader.GetValue(0));
                 Assert.NotNull(exception);
                 Assert.IsType<ArgumentException>(exception);
-                Assert.Equal(
-                    "Unknown SQL type - -25.",
-                    exception.Message);
+                Assert.Equal("Unknown SQL type - -25.", exception.Message);
 
                 Assert.Equal(2147499983647, reader.GetInt64(0));
                 Assert.Equal(2147499983647, reader.GetValue(0));
@@ -161,9 +155,7 @@ namespace System.Data.Odbc.Tests
                 var exception = Record.Exception(() => reader.GetFieldType(0));
                 Assert.NotNull(exception);
                 Assert.IsType<ArgumentException>(exception);
-                Assert.Equal(
-                    "Unknown SQL type - -25.",
-                    exception.Message);
+                Assert.Equal("Unknown SQL type - -25.", exception.Message);
             }
         }
 
@@ -192,9 +184,7 @@ namespace System.Data.Odbc.Tests
                 var exception = Record.Exception(() => reader.IsDBNull(0));
                 Assert.NotNull(exception);
                 Assert.IsType<ArgumentException>(exception);
-                Assert.Equal(
-                    "Unknown SQL type - -25.",
-                    exception.Message);
+                Assert.Equal("Unknown SQL type - -25.", exception.Message);
             }
         }
 
@@ -224,9 +214,7 @@ namespace System.Data.Odbc.Tests
                 var exception = Record.Exception(() => reader.GetString(2));
                 Assert.NotNull(exception);
                 Assert.IsType<IndexOutOfRangeException>(exception);
-                Assert.Equal(
-                    "Index was outside the bounds of the array.",
-                    exception.Message);
+                Assert.Equal("Index was outside the bounds of the array.", exception.Message);
             }
         }
 
@@ -256,9 +244,7 @@ namespace System.Data.Odbc.Tests
                 var exception = Record.Exception(() => reader["SomeOtherString"]);
                 Assert.NotNull(exception);
                 Assert.IsType<IndexOutOfRangeException>(exception);
-                Assert.Equal(
-                    "SomeOtherString",
-                    exception.Message);
+                Assert.Equal("SomeOtherString", exception.Message);
             }
         }
     }

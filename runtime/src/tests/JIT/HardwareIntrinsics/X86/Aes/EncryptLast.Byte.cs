@@ -129,9 +129,17 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld1), ref Unsafe.As<Byte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Byte, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Byte>>()
+                );
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld2), ref Unsafe.As<Byte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld2),
+                    ref Unsafe.As<Byte, byte>(ref _data2[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Byte>>()
+                );
 
                 return testStruct;
             }
@@ -162,12 +170,66 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
-        
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
 
-        private static Byte[] _data1 = new Byte[16] {0xef, 0xcd, 0xab, 0x89, 0x67, 0x45, 0x23, 0x01, 0xff, 0xee, 0xdd, 0xcc, 0xbb, 0xaa, 0x99, 0x88};
-        private static Byte[] _data2 = new Byte[16] {0xff, 0xdd, 0xbb, 0x99, 0x77, 0x55, 0x33, 0x11, 0xee, 0xcc, 0xaa, 0x88, 0x66, 0x44, 0x22, 0x00};
-        private static Byte[] _expectedRet = new Byte[16] {0x20, 0xb3, 0x7a, 0x5d, 0xf2, 0x7d, 0xdd, 0xb6, 0xf8, 0x60, 0xc8, 0xf4, 0x8c, 0xf9, 0x04, 0x4b};
+        private static Byte[] _data1 = new Byte[16]
+        {
+            0xef,
+            0xcd,
+            0xab,
+            0x89,
+            0x67,
+            0x45,
+            0x23,
+            0x01,
+            0xff,
+            0xee,
+            0xdd,
+            0xcc,
+            0xbb,
+            0xaa,
+            0x99,
+            0x88
+        };
+        private static Byte[] _data2 = new Byte[16]
+        {
+            0xff,
+            0xdd,
+            0xbb,
+            0x99,
+            0x77,
+            0x55,
+            0x33,
+            0x11,
+            0xee,
+            0xcc,
+            0xaa,
+            0x88,
+            0x66,
+            0x44,
+            0x22,
+            0x00
+        };
+        private static Byte[] _expectedRet = new Byte[16]
+        {
+            0x20,
+            0xb3,
+            0x7a,
+            0x5d,
+            0xf2,
+            0x7d,
+            0xdd,
+            0xb6,
+            0xf8,
+            0x60,
+            0xc8,
+            0xf4,
+            0x8c,
+            0xf9,
+            0x04,
+            0x4b
+        };
 
         private static Vector128<Byte> _clsVar1;
         private static Vector128<Byte> _clsVar2;
@@ -179,21 +241,41 @@ namespace JIT.HardwareIntrinsics.X86
 
         static AesBinaryOpTest__EncryptLastByte()
         {
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar1),
+                ref Unsafe.As<Byte, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar1), ref Unsafe.As<Byte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
-
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar2), ref Unsafe.As<Byte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar2),
+                ref Unsafe.As<Byte, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
         }
 
         public AesBinaryOpTest__EncryptLastByte()
         {
             Succeeded = true;
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _fld1), ref Unsafe.As<Byte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _fld1),
+                ref Unsafe.As<Byte, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _fld2), ref Unsafe.As<Byte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _fld2),
+                ref Unsafe.As<Byte, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
-            _dataTable = new SimpleBinaryOpTest__DataTable<Byte, Byte, Byte>(_data1, _data2, new Byte[RetElementCount], LargestVectorSize);
+            _dataTable = new SimpleBinaryOpTest__DataTable<Byte, Byte, Byte>(
+                _data1,
+                _data2,
+                new Byte[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Aes.IsSupported;
@@ -243,11 +325,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.EncryptLast), new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray1Ptr),
-                                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray2Ptr)
-                                     });
+            var result = typeof(Aes)
+                .GetMethod(
+                    nameof(Aes.EncryptLast),
+                    new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray1Ptr),
+                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray2Ptr)
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -257,11 +347,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.EncryptLast), new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Aes.LoadVector128((Byte*)(_dataTable.inArray1Ptr)),
-                                        Aes.LoadVector128((Byte*)(_dataTable.inArray2Ptr))
-                                     });
+            var result = typeof(Aes)
+                .GetMethod(
+                    nameof(Aes.EncryptLast),
+                    new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Aes.LoadVector128((Byte*)(_dataTable.inArray1Ptr)),
+                        Aes.LoadVector128((Byte*)(_dataTable.inArray2Ptr))
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -271,11 +369,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.EncryptLast), new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Aes.LoadAlignedVector128((Byte*)(_dataTable.inArray1Ptr)),
-                                        Aes.LoadAlignedVector128((Byte*)(_dataTable.inArray2Ptr))
-                                     });
+            var result = typeof(Aes)
+                .GetMethod(
+                    nameof(Aes.EncryptLast),
+                    new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Aes.LoadAlignedVector128((Byte*)(_dataTable.inArray1Ptr)),
+                        Aes.LoadAlignedVector128((Byte*)(_dataTable.inArray2Ptr))
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -285,10 +391,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Aes.EncryptLast(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = Aes.EncryptLast(_clsVar1, _clsVar2);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -468,32 +571,40 @@ namespace JIT.HardwareIntrinsics.X86
 
         private void ValidateResult(void* result, [CallerMemberName] string method = "")
         {
-
             Byte[] outArray = new Byte[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
             ValidateResult(outArray, method);
         }
 
-        
         private void ValidateResult(Byte[] result, [CallerMemberName] string method = "")
         {
             bool succeeded = true;
 
             for (int i = 0; i < result.Length; i++)
             {
-                if (result[i] != _expectedRet[i] )
+                if (result[i] != _expectedRet[i])
                 {
                     succeeded = false;
-                } 
+                }
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Aes)}.{nameof(Aes.EncryptLast)}<Byte>(Vector128<Byte>, Vector128<Byte>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Aes)}.{nameof(Aes.EncryptLast)}<Byte>(Vector128<Byte>, Vector128<Byte>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

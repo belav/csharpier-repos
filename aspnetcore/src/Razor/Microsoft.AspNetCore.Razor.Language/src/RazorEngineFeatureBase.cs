@@ -29,7 +29,9 @@ public abstract class RazorEngineFeatureBase : IRazorEngineFeature
     {
         if (Engine == null)
         {
-            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
+            throw new InvalidOperationException(
+                Resources.FormatFeatureMustBeInitialized(nameof(Engine))
+            );
         }
 
         var feature = Engine.GetFeature<TFeature>();
@@ -46,7 +48,9 @@ public abstract class RazorEngineFeatureBase : IRazorEngineFeature
                 Resources.FormatFeatureDependencyMissing(
                     GetType().Name,
                     typeof(TDocumentDependency).Name,
-                    typeof(RazorCodeDocument).Name));
+                    typeof(RazorCodeDocument).Name
+                )
+            );
         }
     }
 
@@ -58,11 +62,11 @@ public abstract class RazorEngineFeatureBase : IRazorEngineFeature
                 Resources.FormatFeatureDependencyMissing(
                     GetType().Name,
                     typeof(TEngineDependency).Name,
-                    typeof(RazorEngine).Name));
+                    typeof(RazorEngine).Name
+                )
+            );
         }
     }
 
-    protected virtual void OnInitialized()
-    {
-    }
+    protected virtual void OnInitialized() { }
 }

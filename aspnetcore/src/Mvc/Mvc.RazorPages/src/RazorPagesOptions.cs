@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages;
 /// </summary>
 public class RazorPagesOptions : IEnumerable<ICompatibilitySwitch>
 {
-    private readonly IReadOnlyList<ICompatibilitySwitch> _switches = Array.Empty<ICompatibilitySwitch>();
+    private readonly IReadOnlyList<ICompatibilitySwitch> _switches =
+        Array.Empty<ICompatibilitySwitch>();
     private string _root = "/Pages";
 
     /// <summary>
@@ -46,7 +47,8 @@ public class RazorPagesOptions : IEnumerable<ICompatibilitySwitch>
         }
     }
 
-    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() => _switches.GetEnumerator();
+    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() =>
+        _switches.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => _switches.GetEnumerator();
 }

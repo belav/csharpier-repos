@@ -12,14 +12,24 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class JsonResultWithNewtonsoftJsonTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithNewtonsoftJson>>
+public class JsonResultWithNewtonsoftJsonTest
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithNewtonsoftJson>>
 {
     private IServiceCollection _serviceCollection;
 
-    public JsonResultWithNewtonsoftJsonTest(MvcTestFixture<BasicWebSite.StartupWithNewtonsoftJson> fixture)
+    public JsonResultWithNewtonsoftJsonTest(
+        MvcTestFixture<BasicWebSite.StartupWithNewtonsoftJson> fixture
+    )
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b => b.UseStartup<BasicWebSite.StartupWithNewtonsoftJson>());
-        factory = factory.WithWebHostBuilder(b => b.ConfigureTestServices(serviceCollection => _serviceCollection = serviceCollection));
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(
+                b => b.UseStartup<BasicWebSite.StartupWithNewtonsoftJson>()
+            );
+        factory = factory.WithWebHostBuilder(
+            b =>
+                b.ConfigureTestServices(serviceCollection => _serviceCollection = serviceCollection)
+        );
 
         Client = factory.CreateDefaultClient();
     }

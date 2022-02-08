@@ -35,11 +35,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             string name = "N",
             IList<ISymbol> imports = null,
             IList<INamespaceOrTypeSymbol> members = null,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected);
-            var @namespace = CodeGenerationSymbolFactory.CreateNamespaceSymbol(name, imports, members);
-            context.Result = await context.Service.AddNamespaceAsync(context.Solution, (INamespaceSymbol)context.GetDestination(), @namespace, codeGenerationOptions);
+            var @namespace = CodeGenerationSymbolFactory.CreateNamespaceSymbol(
+                name,
+                imports,
+                members
+            );
+            context.Result = await context.Service.AddNamespaceAsync(
+                context.Solution,
+                (INamespaceSymbol)context.GetDestination(),
+                @namespace,
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddFieldAsync(
@@ -52,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             CodeGenerationOptions codeGenerationOptions = null,
             bool hasConstantValue = false,
             object constantValue = null,
-            bool addToCompilationUnit = false)
+            bool addToCompilationUnit = false
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected);
             var typeSymbol = type != null ? type(context.SemanticModel) : null;
@@ -63,14 +74,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 typeSymbol,
                 name,
                 hasConstantValue,
-                constantValue);
+                constantValue
+            );
             if (!addToCompilationUnit)
             {
-                context.Result = await context.Service.AddFieldAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), field, codeGenerationOptions);
+                context.Result = await context.Service.AddFieldAsync(
+                    context.Solution,
+                    (INamedTypeSymbol)context.GetDestination(),
+                    field,
+                    codeGenerationOptions
+                );
             }
             else
             {
-                var newRoot = context.Service.AddField(await context.Document.GetSyntaxRootAsync(), field, codeGenerationOptions);
+                var newRoot = context.Service.AddField(
+                    await context.Document.GetSyntaxRootAsync(),
+                    field,
+                    codeGenerationOptions
+                );
                 context.Result = context.Document.WithSyntaxRoot(newRoot);
             }
         }
@@ -85,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             ImmutableArray<SyntaxNode> statements = default,
             ImmutableArray<SyntaxNode> baseArguments = default,
             ImmutableArray<SyntaxNode> thisArguments = default,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected);
             var parameterSymbols = GetParameterSymbols(parameters, context);
@@ -97,8 +119,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 parameterSymbols,
                 statements,
                 baseConstructorArguments: baseArguments,
-                thisConstructorArguments: thisArguments);
-            context.Result = await context.Service.AddMethodAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), ctor, codeGenerationOptions);
+                thisConstructorArguments: thisArguments
+            );
+            context.Result = await context.Service.AddMethodAsync(
+                context.Solution,
+                (INamedTypeSymbol)context.GetDestination(),
+                ctor,
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddMethodAsync(
@@ -113,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters = default,
             string statements = null,
             ImmutableArray<SyntaxNode> handlesExpressions = default,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             if (statements != null)
             {
@@ -135,8 +164,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 typeParameters,
                 parameterSymbols,
                 parsedStatements,
-                handlesExpressions: handlesExpressions);
-            context.Result = await context.Service.AddMethodAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), method, codeGenerationOptions);
+                handlesExpressions: handlesExpressions
+            );
+            context.Result = await context.Service.AddMethodAsync(
+                context.Solution,
+                (INamedTypeSymbol)context.GetDestination(),
+                method,
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddOperatorsAsync(
@@ -148,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             Type returnType = null,
             ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters = default,
             string statements = null,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             if (statements != null)
             {
@@ -162,16 +198,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             var parameterSymbols = GetParameterSymbols(parameters, context);
             var parsedStatements = context.ParseStatements(statements);
 
-            var methods = operatorKinds.Select(kind => CodeGenerationSymbolFactory.CreateOperatorSymbol(
-                attributes: default,
-                accessibility,
-                modifiers,
-                GetTypeSymbol(returnType)(context.SemanticModel),
-                kind,
-                parameterSymbols,
-                parsedStatements));
+            var methods = operatorKinds.Select(
+                kind =>
+                    CodeGenerationSymbolFactory.CreateOperatorSymbol(
+                        attributes: default,
+                        accessibility,
+                        modifiers,
+                        GetTypeSymbol(returnType)(context.SemanticModel),
+                        kind,
+                        parameterSymbols,
+                        parsedStatements
+                    )
+            );
 
-            context.Result = await context.Service.AddMembersAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), methods.ToArray(), codeGenerationOptions);
+            context.Result = await context.Service.AddMembersAsync(
+                context.Solution,
+                (INamedTypeSymbol)context.GetDestination(),
+                methods.ToArray(),
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddUnsupportedOperatorAsync(
@@ -182,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             Type returnType = null,
             ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters = default,
             string statements = null,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, initial, ignoreResult: true);
             var parameterSymbols = GetParameterSymbols(parameters, context);
@@ -195,21 +241,37 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 GetTypeSymbol(returnType)(context.SemanticModel),
                 operatorKind,
                 parameterSymbols,
-                parsedStatements);
+                parsedStatements
+            );
 
             ArgumentException exception = null;
             try
             {
-                await context.Service.AddMethodAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), method, codeGenerationOptions);
+                await context.Service.AddMethodAsync(
+                    context.Solution,
+                    (INamedTypeSymbol)context.GetDestination(),
+                    method,
+                    codeGenerationOptions
+                );
             }
             catch (ArgumentException e)
             {
                 exception = e;
             }
 
-            var expectedMessage = string.Format(WorkspacesResources.Cannot_generate_code_for_unsupported_operator_0, method.Name);
-            Assert.True(exception != null && exception.Message.StartsWith(expectedMessage, StringComparison.Ordinal),
-                string.Format("\r\nExpected exception: {0}\r\nActual exception: {1}\r\n", expectedMessage, exception == null ? "no exception" : exception.Message));
+            var expectedMessage = string.Format(
+                WorkspacesResources.Cannot_generate_code_for_unsupported_operator_0,
+                method.Name
+            );
+            Assert.True(
+                exception != null
+                    && exception.Message.StartsWith(expectedMessage, StringComparison.Ordinal),
+                string.Format(
+                    "\r\nExpected exception: {0}\r\nActual exception: {1}\r\n",
+                    expectedMessage,
+                    exception == null ? "no exception" : exception.Message
+                )
+            );
         }
 
         internal static async Task TestAddConversionAsync(
@@ -221,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             Accessibility accessibility = Accessibility.Public,
             Editing.DeclarationModifiers modifiers = default,
             string statements = null,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             if (statements != null)
             {
@@ -238,16 +301,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 fromType(context.SemanticModel),
                 containingType: null,
                 isImplicit,
-                parsedStatements);
+                parsedStatements
+            );
 
-            context.Result = await context.Service.AddMethodAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), method, codeGenerationOptions);
+            context.Result = await context.Service.AddMethodAsync(
+                context.Solution,
+                (INamedTypeSymbol)context.GetDestination(),
+                method,
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddStatementsAsync(
             string initial,
             string expected,
             string statements,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             if (statements != null)
             {
@@ -257,21 +327,37 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             using var context = await TestContext.CreateAsync(initial, expected);
             var parsedStatements = context.ParseStatements(statements);
             var oldSyntax = context.GetSelectedSyntax<SyntaxNode>(true);
-            var newSyntax = context.Service.AddStatements(oldSyntax, parsedStatements, codeGenerationOptions);
-            context.Result = context.Document.WithSyntaxRoot((await context.Document.GetSyntaxRootAsync()).ReplaceNode(oldSyntax, newSyntax));
+            var newSyntax = context.Service.AddStatements(
+                oldSyntax,
+                parsedStatements,
+                codeGenerationOptions
+            );
+            context.Result = context.Document.WithSyntaxRoot(
+                (await context.Document.GetSyntaxRootAsync()).ReplaceNode(oldSyntax, newSyntax)
+            );
         }
 
         internal static async Task TestAddParametersAsync(
             string initial,
             string expected,
             ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected);
             var parameterSymbols = GetParameterSymbols(parameters, context);
             var oldMemberSyntax = context.GetSelectedSyntax<SyntaxNode>(true);
-            var newMemberSyntax = context.Service.AddParameters(oldMemberSyntax, parameterSymbols, codeGenerationOptions);
-            context.Result = context.Document.WithSyntaxRoot((await context.Document.GetSyntaxRootAsync()).ReplaceNode(oldMemberSyntax, newMemberSyntax));
+            var newMemberSyntax = context.Service.AddParameters(
+                oldMemberSyntax,
+                parameterSymbols,
+                codeGenerationOptions
+            );
+            context.Result = context.Document.WithSyntaxRoot(
+                (await context.Document.GetSyntaxRootAsync()).ReplaceNode(
+                    oldMemberSyntax,
+                    newMemberSyntax
+                )
+            );
         }
 
         internal static async Task TestAddDelegateTypeAsync(
@@ -283,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             Type returnType = null,
             ImmutableArray<ITypeParameterSymbol> typeParameters = default,
             ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters = default,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected);
             var parameterSymbols = GetParameterSymbols(parameters, context);
@@ -295,8 +382,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 RefKind.None,
                 name,
                 typeParameters,
-                parameterSymbols);
-            context.Result = await context.Service.AddNamedTypeAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), type, codeGenerationOptions);
+                parameterSymbols
+            );
+            context.Result = await context.Service.AddNamedTypeAsync(
+                context.Solution,
+                (INamedTypeSymbol)context.GetDestination(),
+                type,
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddEventAsync(
@@ -308,11 +401,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             Editing.DeclarationModifiers modifiers = default,
             ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters = default,
             Type type = null,
-            Func<SemanticModel, ImmutableArray<IEventSymbol>> getExplicitInterfaceImplementations = null,
+            Func<SemanticModel, ImmutableArray<IEventSymbol>> getExplicitInterfaceImplementations =
+                null,
             IMethodSymbol addMethod = null,
             IMethodSymbol removeMethod = null,
             IMethodSymbol raiseMethod = null,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected);
             type ??= typeof(Action);
@@ -328,8 +423,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 name,
                 addMethod,
                 removeMethod,
-                raiseMethod);
-            context.Result = await context.Service.AddEventAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), @event, codeGenerationOptions);
+                raiseMethod
+            );
+            context.Result = await context.Service.AddEventAsync(
+                context.Solution,
+                (INamedTypeSymbol)context.GetDestination(),
+                @event,
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddPropertyAsync(
@@ -346,7 +447,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters = default,
             bool isIndexer = false,
             CodeGenerationOptions codeGenerationOptions = null,
-            IDictionary<OptionKey2, object> options = null)
+            IDictionary<OptionKey2, object> options = null
+        )
         {
             // This assumes that tests will not use place holders for get/set statements at the same time
             if (getStatements != null)
@@ -372,9 +474,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             var typeSymbol = GetTypeSymbol(type)(context.SemanticModel);
             var getParameterSymbols = GetParameterSymbols(parameters, context);
-            var setParameterSymbols = getParameterSymbols == null
-                ? default
-                : getParameterSymbols.Add(Parameter(type, "value")(context.SemanticModel));
+            var setParameterSymbols =
+                getParameterSymbols == null
+                    ? default
+                    : getParameterSymbols.Add(Parameter(type, "value")(context.SemanticModel));
             var getAccessor = CodeGenerationSymbolFactory.CreateMethodSymbol(
                 attributes: default,
                 defaultAccessibility,
@@ -385,7 +488,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 "get_" + name,
                 typeParameters: default,
                 getParameterSymbols,
-                statements: context.ParseStatements(getStatements));
+                statements: context.ParseStatements(getStatements)
+            );
             var setAccessor = CodeGenerationSymbolFactory.CreateMethodSymbol(
                 attributes: default,
                 setterAccessibility,
@@ -396,7 +500,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 "set_" + name,
                 typeParameters: default,
                 setParameterSymbols,
-                statements: context.ParseStatements(setStatements));
+                statements: context.ParseStatements(setStatements)
+            );
 
             // If get is provided but set isn't, we don't want an accessor for set
             if (getStatements != null && setStatements == null)
@@ -421,11 +526,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 getParameterSymbols,
                 getAccessor,
                 setAccessor,
-                isIndexer);
+                isIndexer
+            );
 
             codeGenerationOptions ??= new CodeGenerationOptions();
-            codeGenerationOptions = codeGenerationOptions.With(options: codeGenerationOptions.Options ?? workspace.Options);
-            context.Result = await context.Service.AddPropertyAsync(context.Solution, (INamedTypeSymbol)context.GetDestination(), property, codeGenerationOptions);
+            codeGenerationOptions = codeGenerationOptions.With(
+                options: codeGenerationOptions.Options ?? workspace.Options
+            );
+            context.Result = await context.Service.AddPropertyAsync(
+                context.Solution,
+                (INamedTypeSymbol)context.GetDestination(),
+                property,
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddNamedTypeAsync(
@@ -440,44 +553,80 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             ImmutableArray<INamedTypeSymbol> interfaces = default,
             SpecialType specialType = SpecialType.None,
             ImmutableArray<Func<SemanticModel, ISymbol>> members = default,
-            CodeGenerationOptions codeGenerationOptions = null)
+            CodeGenerationOptions codeGenerationOptions = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected);
             var memberSymbols = GetSymbols(members, context);
             var type = CodeGenerationSymbolFactory.CreateNamedTypeSymbol(
-                attributes: default, accessibility, modifiers, typeKind, name,
-                typeParameters, baseType, interfaces, specialType, memberSymbols);
-            context.Result = await context.Service.AddNamedTypeAsync(context.Solution, (INamespaceSymbol)context.GetDestination(), type, codeGenerationOptions);
+                attributes: default,
+                accessibility,
+                modifiers,
+                typeKind,
+                name,
+                typeParameters,
+                baseType,
+                interfaces,
+                specialType,
+                memberSymbols
+            );
+            context.Result = await context.Service.AddNamedTypeAsync(
+                context.Solution,
+                (INamespaceSymbol)context.GetDestination(),
+                type,
+                codeGenerationOptions
+            );
         }
 
         internal static async Task TestAddAttributeAsync(
             string initial,
             string expected,
             Type attributeClass,
-            SyntaxToken? target = null)
+            SyntaxToken? target = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected);
-            var attr = CodeGenerationSymbolFactory.CreateAttributeData(GetTypeSymbol(attributeClass)(context.SemanticModel));
+            var attr = CodeGenerationSymbolFactory.CreateAttributeData(
+                GetTypeSymbol(attributeClass)(context.SemanticModel)
+            );
             var oldNode = context.GetDestinationNode();
-            var newNode = CodeGenerator.AddAttributes(oldNode, context.Document.Project.Solution.Workspace, new[] { attr }, target)
-                                       .WithAdditionalAnnotations(Formatter.Annotation);
-            context.Result = context.Document.WithSyntaxRoot(context.SemanticModel.SyntaxTree.GetRoot().ReplaceNode(oldNode, newNode));
+            var newNode = CodeGenerator
+                .AddAttributes(
+                    oldNode,
+                    context.Document.Project.Solution.Workspace,
+                    new[] { attr },
+                    target
+                )
+                .WithAdditionalAnnotations(Formatter.Annotation);
+            context.Result = context.Document.WithSyntaxRoot(
+                context.SemanticModel.SyntaxTree.GetRoot().ReplaceNode(oldNode, newNode)
+            );
         }
 
         internal static async Task TestRemoveAttributeAsync<T>(
             string initial,
             string expected,
-            Type attributeClass) where T : SyntaxNode
+            Type attributeClass
+        ) where T : SyntaxNode
         {
             using var context = await TestContext.CreateAsync(initial, expected);
             var attributeType = GetTypeSymbol(attributeClass)(context.SemanticModel);
             var taggedNode = context.GetDestinationNode();
             var attributeTarget = context.SemanticModel.GetDeclaredSymbol(taggedNode);
-            var attribute = attributeTarget.GetAttributes().Single(attr => Equals(attr.AttributeClass, attributeType));
+            var attribute = attributeTarget
+                .GetAttributes()
+                .Single(attr => Equals(attr.AttributeClass, attributeType));
             var declarationNode = taggedNode.FirstAncestorOrSelf<T>();
-            var newNode = CodeGenerator.RemoveAttribute(declarationNode, context.Document.Project.Solution.Workspace, attribute)
-                                       .WithAdditionalAnnotations(Formatter.Annotation);
-            context.Result = context.Document.WithSyntaxRoot(context.SemanticModel.SyntaxTree.GetRoot().ReplaceNode(declarationNode, newNode));
+            var newNode = CodeGenerator
+                .RemoveAttribute(
+                    declarationNode,
+                    context.Document.Project.Solution.Workspace,
+                    attribute
+                )
+                .WithAdditionalAnnotations(Formatter.Annotation);
+            context.Result = context.Document.WithSyntaxRoot(
+                context.SemanticModel.SyntaxTree.GetRoot().ReplaceNode(declarationNode, newNode)
+            );
         }
 
         internal static async Task TestUpdateDeclarationAsync<T>(
@@ -488,7 +637,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             Func<SemanticModel, ITypeSymbol> getType = null,
             ImmutableArray<Func<SemanticModel, ISymbol>> getNewMembers = default,
             bool? declareNewMembersAtTop = null,
-            string retainedMembersKey = "RetainedMember") where T : SyntaxNode
+            string retainedMembersKey = "RetainedMember"
+        ) where T : SyntaxNode
         {
             using var context = await TestContext.CreateAsync(initial, expected);
             var declarationNode = context.GetDestinationNode().FirstAncestorOrSelf<T>();
@@ -497,19 +647,34 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (accessibility.HasValue)
             {
-                updatedDeclarationNode = CodeGenerator.UpdateDeclarationAccessibility(declarationNode, workspace, accessibility.Value);
+                updatedDeclarationNode = CodeGenerator.UpdateDeclarationAccessibility(
+                    declarationNode,
+                    workspace,
+                    accessibility.Value
+                );
             }
             else if (modifiers != null)
             {
-                updatedDeclarationNode = CodeGenerator.UpdateDeclarationModifiers(declarationNode, workspace, modifiers);
+                updatedDeclarationNode = CodeGenerator.UpdateDeclarationModifiers(
+                    declarationNode,
+                    workspace,
+                    modifiers
+                );
             }
             else if (getType != null)
             {
-                updatedDeclarationNode = CodeGenerator.UpdateDeclarationType(declarationNode, workspace, getType(context.SemanticModel));
+                updatedDeclarationNode = CodeGenerator.UpdateDeclarationType(
+                    declarationNode,
+                    workspace,
+                    getType(context.SemanticModel)
+                );
             }
             else if (getNewMembers != null)
             {
-                var retainedMembers = context.GetAnnotatedDeclaredSymbols(retainedMembersKey, context.SemanticModel);
+                var retainedMembers = context.GetAnnotatedDeclaredSymbols(
+                    retainedMembersKey,
+                    context.SemanticModel
+                );
                 var newMembersToAdd = GetSymbols(getNewMembers, context);
                 var allMembers = new List<ISymbol>();
                 if (declareNewMembersAtTop.HasValue && declareNewMembersAtTop.Value)
@@ -523,11 +688,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                     allMembers.AddRange(newMembersToAdd);
                 }
 
-                updatedDeclarationNode = CodeGenerator.UpdateDeclarationMembers(declarationNode, workspace, allMembers);
+                updatedDeclarationNode = CodeGenerator.UpdateDeclarationMembers(
+                    declarationNode,
+                    workspace,
+                    allMembers
+                );
             }
 
-            updatedDeclarationNode = updatedDeclarationNode.WithAdditionalAnnotations(Formatter.Annotation);
-            context.Result = context.Document.WithSyntaxRoot(context.SemanticModel.SyntaxTree.GetRoot().ReplaceNode(declarationNode, updatedDeclarationNode));
+            updatedDeclarationNode = updatedDeclarationNode.WithAdditionalAnnotations(
+                Formatter.Annotation
+            );
+            context.Result = context.Document.WithSyntaxRoot(
+                context.SemanticModel.SyntaxTree
+                    .GetRoot()
+                    .ReplaceNode(declarationNode, updatedDeclarationNode)
+            );
         }
 
         internal static async Task TestGenerateFromSourceSymbolAsync(
@@ -536,109 +711,204 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             string expected,
             bool onlyGenerateMembers = false,
             CodeGenerationOptions codeGenerationOptions = null,
-            string forceLanguage = null)
+            string forceLanguage = null
+        )
         {
             using var context = await TestContext.CreateAsync(initial, expected, forceLanguage);
             var destSpan = new TextSpan();
-            MarkupTestFile.GetSpan(symbolSource.NormalizeLineEndings(), out symbolSource, out destSpan);
+            MarkupTestFile.GetSpan(
+                symbolSource.NormalizeLineEndings(),
+                out symbolSource,
+                out destSpan
+            );
 
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
 
             var semanticModel = await context.Solution
-                .AddProject(projectId, "GenerationSource", "GenerationSource", TestContext.GetLanguage(symbolSource))
+                .AddProject(
+                    projectId,
+                    "GenerationSource",
+                    "GenerationSource",
+                    TestContext.GetLanguage(symbolSource)
+                )
                 .AddDocument(documentId, "Source.cs", symbolSource)
                 .GetDocument(documentId)
                 .GetSemanticModelAsync();
 
             var docOptions = await context.Document.GetOptionsAsync();
             codeGenerationOptions ??= new CodeGenerationOptions();
-            codeGenerationOptions = codeGenerationOptions.With(options: codeGenerationOptions.Options ?? docOptions);
+            codeGenerationOptions = codeGenerationOptions.With(
+                options: codeGenerationOptions.Options ?? docOptions
+            );
 
-            var symbol = TestContext.GetSelectedSymbol<INamespaceOrTypeSymbol>(destSpan, semanticModel);
+            var symbol = TestContext.GetSelectedSymbol<INamespaceOrTypeSymbol>(
+                destSpan,
+                semanticModel
+            );
             var destination = context.GetDestination();
             if (destination.IsType)
             {
-                var members = onlyGenerateMembers ? symbol.GetMembers().ToArray() : new[] { symbol };
-                context.Result = await context.Service.AddMembersAsync(context.Solution, (INamedTypeSymbol)destination, members, codeGenerationOptions);
+                var members = onlyGenerateMembers
+                    ? symbol.GetMembers().ToArray()
+                    : new[] { symbol };
+                context.Result = await context.Service.AddMembersAsync(
+                    context.Solution,
+                    (INamedTypeSymbol)destination,
+                    members,
+                    codeGenerationOptions
+                );
             }
             else
             {
-                context.Result = await context.Service.AddNamespaceOrTypeAsync(context.Solution, (INamespaceSymbol)destination, symbol, codeGenerationOptions);
+                context.Result = await context.Service.AddNamespaceOrTypeAsync(
+                    context.Solution,
+                    (INamespaceSymbol)destination,
+                    symbol,
+                    codeGenerationOptions
+                );
             }
         }
 
-        internal static Func<SemanticModel, IParameterSymbol> Parameter(Type type, string name, bool hasDefaultValue = false, object defaultValue = null, bool isParams = false)
+        internal static Func<SemanticModel, IParameterSymbol> Parameter(
+            Type type,
+            string name,
+            bool hasDefaultValue = false,
+            object defaultValue = null,
+            bool isParams = false
+        )
         {
-            return s => CodeGenerationSymbolFactory.CreateParameterSymbol(
-                attributes: default, RefKind.None, isParams, GetTypeSymbol(s.Compilation, type), name,
-                isOptional: hasDefaultValue, hasDefaultValue: hasDefaultValue, defaultValue: defaultValue);
+            return s =>
+                CodeGenerationSymbolFactory.CreateParameterSymbol(
+                    attributes: default,
+                    RefKind.None,
+                    isParams,
+                    GetTypeSymbol(s.Compilation, type),
+                    name,
+                    isOptional: hasDefaultValue,
+                    hasDefaultValue: hasDefaultValue,
+                    defaultValue: defaultValue
+                );
         }
 
-        internal static Func<SemanticModel, IParameterSymbol> Parameter(string typeFullName, string parameterName, bool hasDefaultValue = false, object defaultValue = null, bool isParams = false, int typeArrayRank = 0)
+        internal static Func<SemanticModel, IParameterSymbol> Parameter(
+            string typeFullName,
+            string parameterName,
+            bool hasDefaultValue = false,
+            object defaultValue = null,
+            bool isParams = false,
+            int typeArrayRank = 0
+        )
         {
-            return s => CodeGenerationSymbolFactory.CreateParameterSymbol(
-                attributes: default, RefKind.None, isParams, GetTypeSymbol(s.Compilation, typeFullName, typeArrayRank), parameterName,
-                isOptional: hasDefaultValue, hasDefaultValue: hasDefaultValue, defaultValue: defaultValue);
+            return s =>
+                CodeGenerationSymbolFactory.CreateParameterSymbol(
+                    attributes: default,
+                    RefKind.None,
+                    isParams,
+                    GetTypeSymbol(s.Compilation, typeFullName, typeArrayRank),
+                    parameterName,
+                    isOptional: hasDefaultValue,
+                    hasDefaultValue: hasDefaultValue,
+                    defaultValue: defaultValue
+                );
         }
 
-        private static ITypeSymbol GetTypeSymbol(Compilation compilation, Type type)
-            => !type.IsArray ? GetTypeSymbol(compilation, type.FullName) : GetTypeSymbol(compilation, type.GetElementType().FullName, type.GetArrayRank());
+        private static ITypeSymbol GetTypeSymbol(Compilation compilation, Type type) =>
+            !type.IsArray
+                ? GetTypeSymbol(compilation, type.FullName)
+                : GetTypeSymbol(compilation, type.GetElementType().FullName, type.GetArrayRank());
 
-        private static ITypeSymbol GetTypeSymbol(Compilation compilation, string typeFullName, int arrayRank = 0)
+        private static ITypeSymbol GetTypeSymbol(
+            Compilation compilation,
+            string typeFullName,
+            int arrayRank = 0
+        )
         {
-            return arrayRank == 0 ? compilation.GetTypeByMetadataName(typeFullName)
-                : compilation.CreateArrayTypeSymbol(compilation.GetTypeByMetadataName(typeFullName), arrayRank);
+            return arrayRank == 0
+              ? compilation.GetTypeByMetadataName(typeFullName)
+              : compilation.CreateArrayTypeSymbol(
+                    compilation.GetTypeByMetadataName(typeFullName),
+                    arrayRank
+                );
         }
 
-        internal static ImmutableArray<Func<SemanticModel, IParameterSymbol>> Parameters(params Func<SemanticModel, IParameterSymbol>[] p)
-            => p.ToImmutableArray();
+        internal static ImmutableArray<Func<SemanticModel, IParameterSymbol>> Parameters(
+            params Func<SemanticModel, IParameterSymbol>[] p
+        ) => p.ToImmutableArray();
 
-        internal static ImmutableArray<Func<SemanticModel, ISymbol>> Members(params Func<SemanticModel, ISymbol>[] m)
-            => m.ToImmutableArray();
+        internal static ImmutableArray<Func<SemanticModel, ISymbol>> Members(
+            params Func<SemanticModel, ISymbol>[] m
+        ) => m.ToImmutableArray();
 
-        internal static Func<SemanticModel, ITypeSymbol> CreateArrayType(Type type, int rank = 1)
-            => s => CodeGenerationSymbolFactory.CreateArrayTypeSymbol(GetTypeSymbol(type)(s), rank);
+        internal static Func<SemanticModel, ITypeSymbol> CreateArrayType(Type type, int rank = 1) =>
+            s => CodeGenerationSymbolFactory.CreateArrayTypeSymbol(GetTypeSymbol(type)(s), rank);
 
-        private static ImmutableArray<IParameterSymbol> GetParameterSymbols(ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters, TestContext context)
-            => parameters.IsDefault
+        private static ImmutableArray<IParameterSymbol> GetParameterSymbols(
+            ImmutableArray<Func<SemanticModel, IParameterSymbol>> parameters,
+            TestContext context
+        ) =>
+            parameters.IsDefault
                 ? default
                 : parameters.SelectAsArray(p => p(context.SemanticModel));
 
         private static ImmutableArray<IMethodSymbol> GetMethodSymbols(
-            Func<SemanticModel, ImmutableArray<IMethodSymbol>> explicitInterface, TestContext context)
+            Func<SemanticModel, ImmutableArray<IMethodSymbol>> explicitInterface,
+            TestContext context
+        )
         {
             return explicitInterface == null ? default : explicitInterface(context.SemanticModel);
         }
 
-        private static ImmutableArray<ISymbol> GetSymbols(ImmutableArray<Func<SemanticModel, ISymbol>> members, TestContext context)
+        private static ImmutableArray<ISymbol> GetSymbols(
+            ImmutableArray<Func<SemanticModel, ISymbol>> members,
+            TestContext context
+        )
         {
-            return members == null
-                ? default
-                : members.SelectAsArray(m => m(context.SemanticModel));
+            return members == null ? default : members.SelectAsArray(m => m(context.SemanticModel));
         }
 
         private static Func<SemanticModel, ISymbol> CreateEnumField(string name, object value)
         {
-            return s => CodeGenerationSymbolFactory.CreateFieldSymbol(
-                attributes: default, Accessibility.Public,
-                new Editing.DeclarationModifiers(), GetTypeSymbol(typeof(int))(s), name, value != null, value);
+            return s =>
+                CodeGenerationSymbolFactory.CreateFieldSymbol(
+                    attributes: default,
+                    Accessibility.Public,
+                    new Editing.DeclarationModifiers(),
+                    GetTypeSymbol(typeof(int))(s),
+                    name,
+                    value != null,
+                    value
+                );
         }
 
-        internal static Func<SemanticModel, ISymbol> CreateField(Accessibility accessibility, Editing.DeclarationModifiers modifiers, Type type, string name)
+        internal static Func<SemanticModel, ISymbol> CreateField(
+            Accessibility accessibility,
+            Editing.DeclarationModifiers modifiers,
+            Type type,
+            string name
+        )
         {
-            return s => CodeGenerationSymbolFactory.CreateFieldSymbol(
-                attributes: default, accessibility,
-                modifiers, GetTypeSymbol(type)(s), name);
+            return s =>
+                CodeGenerationSymbolFactory.CreateFieldSymbol(
+                    attributes: default,
+                    accessibility,
+                    modifiers,
+                    GetTypeSymbol(type)(s),
+                    name
+                );
         }
 
-        private static Func<SemanticModel, INamedTypeSymbol> GetTypeSymbol(Type type)
-            => GetTypeSymbol(type.FullName);
+        private static Func<SemanticModel, INamedTypeSymbol> GetTypeSymbol(Type type) =>
+            GetTypeSymbol(type.FullName);
 
-        private static Func<SemanticModel, INamedTypeSymbol> GetTypeSymbol(string typeMetadataName)
-            => s => s?.Compilation.GetTypeByMetadataName(typeMetadataName);
+        private static Func<SemanticModel, INamedTypeSymbol> GetTypeSymbol(
+            string typeMetadataName
+        ) => s => s?.Compilation.GetTypeByMetadataName(typeMetadataName);
 
-        internal static IEnumerable<SyntaxToken> CreateModifierTokens(Editing.DeclarationModifiers modifiers, string language)
+        internal static IEnumerable<SyntaxToken> CreateModifierTokens(
+            Editing.DeclarationModifiers modifiers,
+            string language
+        )
         {
             if (language == LanguageNames.CSharp)
             {
@@ -771,7 +1041,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 bool ignoreResult,
                 string language,
                 TestWorkspace workspace,
-                SemanticModel semanticModel)
+                SemanticModel semanticModel
+            )
             {
                 _expected = expected.NormalizeLineEndings();
                 _language = language;
@@ -781,25 +1052,44 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 this.Document = Workspace.CurrentSolution.Projects.Single().Documents.Single();
                 this.SemanticModel = semanticModel;
                 this.SyntaxTree = SemanticModel.SyntaxTree;
-                this.Service = Document.Project.LanguageServices.GetService<ICodeGenerationService>();
+                this.Service =
+                    Document.Project.LanguageServices.GetService<ICodeGenerationService>();
             }
 
-            public static async Task<TestContext> CreateAsync(string initial, string expected, string forceLanguage = null, bool ignoreResult = false)
+            public static async Task<TestContext> CreateAsync(
+                string initial,
+                string expected,
+                string forceLanguage = null,
+                bool ignoreResult = false
+            )
             {
                 var language = forceLanguage ?? GetLanguage(initial);
                 var isVisualBasic = language == LanguageNames.VisualBasic;
-                var workspace = CreateWorkspaceFromFile(initial.NormalizeLineEndings(), isVisualBasic, null, null);
-                var semanticModel = await workspace.CurrentSolution.Projects.Single().Documents.Single().GetSemanticModelAsync();
+                var workspace = CreateWorkspaceFromFile(
+                    initial.NormalizeLineEndings(),
+                    isVisualBasic,
+                    null,
+                    null
+                );
+                var semanticModel = await workspace.CurrentSolution.Projects
+                    .Single()
+                    .Documents.Single()
+                    .GetSemanticModelAsync();
 
                 return new TestContext(expected, ignoreResult, language, workspace, semanticModel);
             }
 
-            public Solution Solution { get { return Workspace.CurrentSolution; } }
+            public Solution Solution
+            {
+                get { return Workspace.CurrentSolution; }
+            }
 
             public SyntaxNode GetDestinationNode()
             {
                 var destSpan = Workspace.Documents.Single().SelectedSpans.Single();
-                return SemanticModel.SyntaxTree.GetRoot().FindNode(destSpan, getInnermostNodeForTie: true);
+                return SemanticModel.SyntaxTree
+                    .GetRoot()
+                    .FindNode(destSpan, getInnermostNodeForTie: true);
             }
 
             public INamespaceOrTypeSymbol GetDestination()
@@ -808,7 +1098,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 return GetSelectedSymbol<INamespaceOrTypeSymbol>(destSpan, this.SemanticModel);
             }
 
-            public IEnumerable<ISymbol> GetAnnotatedDeclaredSymbols(string key, SemanticModel semanticModel)
+            public IEnumerable<ISymbol> GetAnnotatedDeclaredSymbols(
+                string key,
+                SemanticModel semanticModel
+            )
             {
                 var annotatedSpans = Workspace.Documents.Single().AnnotatedSpans[key];
                 foreach (var span in annotatedSpans)
@@ -822,9 +1115,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             {
                 var token = semanticModel.SyntaxTree.GetRoot().FindToken(selection.Start);
 
-                var symbol = token.Parent.AncestorsAndSelf()
-                    .Select(a => semanticModel.GetDeclaredSymbol(a))
-                    .Where(s => s != null).FirstOrDefault() as T;
+                var symbol =
+                    token.Parent
+                        .AncestorsAndSelf()
+                        .Select(a => semanticModel.GetDeclaredSymbol(a))
+                        .Where(s => s != null)
+                        .FirstOrDefault() as T;
 
                 return symbol;
             }
@@ -833,7 +1129,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             {
                 var destSpan = Workspace.Documents.Single().SelectedSpans.Single();
                 var token = SemanticModel.SyntaxTree.GetRoot().FindToken(destSpan.Start);
-                return token.Parent.AncestorsAndSelf().OfType<T>().FirstOrDefault(t => !fullSpanCoverage || t.Span.End >= destSpan.End);
+                return token.Parent
+                    .AncestorsAndSelf()
+                    .OfType<T>()
+                    .FirstOrDefault(t => !fullSpanCoverage || t.Span.End >= destSpan.End);
             }
 
             public ImmutableArray<SyntaxNode> ParseStatements(string statements)
@@ -845,7 +1144,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
                 using var listDisposer = ArrayBuilder<SyntaxNode>.GetInstance(out var list);
                 var delimiter = IsVisualBasic ? "\r\n" : ";";
-                var parts = statements.Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+                var parts = statements.Split(
+                    new[] { delimiter },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 foreach (var p in parts)
                 {
                     if (IsVisualBasic)
@@ -869,8 +1171,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                     {
                         this.Document = this.Result;
 
-                        var actual = Formatter.FormatAsync(Simplifier.ReduceAsync(this.Document, Simplifier.Annotation).Result, Formatter.Annotation).Result
-                            .GetSyntaxRootAsync().Result.ToFullString();
+                        var actual = Formatter
+                            .FormatAsync(
+                                Simplifier.ReduceAsync(this.Document, Simplifier.Annotation).Result,
+                                Formatter.Annotation
+                            )
+                            .Result.GetSyntaxRootAsync()
+                            .Result.ToFullString();
 
                         Assert.Equal(_expected, actual);
                     }
@@ -884,27 +1191,40 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             public static string GetLanguage(string input)
             {
                 return ContainsVisualBasicKeywords(input)
-                    ? LanguageNames.VisualBasic : LanguageNames.CSharp;
+                  ? LanguageNames.VisualBasic
+                  : LanguageNames.CSharp;
             }
 
             private static bool ContainsVisualBasicKeywords(string input)
             {
-                return
-                    input.Contains("Module") ||
-                    input.Contains("Class") ||
-                    input.Contains("Structure") ||
-                    input.Contains("Namespace") ||
-                    input.Contains("Sub") ||
-                    input.Contains("Function") ||
-                    input.Contains("Dim") ||
-                    input.Contains("Enum");
+                return input.Contains("Module")
+                    || input.Contains("Class")
+                    || input.Contains("Structure")
+                    || input.Contains("Namespace")
+                    || input.Contains("Sub")
+                    || input.Contains("Function")
+                    || input.Contains("Dim")
+                    || input.Contains("Enum");
             }
 
-            private static TestWorkspace CreateWorkspaceFromFile(string file, bool isVisualBasic, ParseOptions parseOptions, CompilationOptions compilationOptions)
+            private static TestWorkspace CreateWorkspaceFromFile(
+                string file,
+                bool isVisualBasic,
+                ParseOptions parseOptions,
+                CompilationOptions compilationOptions
+            )
             {
-                return isVisualBasic ?
-                    TestWorkspace.CreateVisualBasic(file, (VB.VisualBasicParseOptions)parseOptions, (VB.VisualBasicCompilationOptions)compilationOptions) :
-                    TestWorkspace.CreateCSharp(file, (CS.CSharpParseOptions)parseOptions, (CS.CSharpCompilationOptions)compilationOptions);
+                return isVisualBasic
+                  ? TestWorkspace.CreateVisualBasic(
+                        file,
+                        (VB.VisualBasicParseOptions)parseOptions,
+                        (VB.VisualBasicCompilationOptions)compilationOptions
+                    )
+                  : TestWorkspace.CreateCSharp(
+                        file,
+                        (CS.CSharpParseOptions)parseOptions,
+                        (CS.CSharpCompilationOptions)compilationOptions
+                    );
             }
         }
     }

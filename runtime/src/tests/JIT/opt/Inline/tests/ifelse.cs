@@ -10,10 +10,7 @@ namespace JitInliningTest
         private int _prop;
         public int prop
         {
-            get
-            {
-                return (_prop != 100) ? _prop : 100;
-            }
+            get { return (_prop != 100) ? _prop : 100; }
             set
             {
                 if (value == 1)
@@ -25,6 +22,7 @@ namespace JitInliningTest
             }
         }
     }
+
     internal class IfElse
     {
         public static int Main()

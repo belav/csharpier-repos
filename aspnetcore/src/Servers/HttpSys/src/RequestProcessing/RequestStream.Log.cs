@@ -16,8 +16,11 @@ internal partial class RequestStream
         private static readonly Action<ILogger, Exception?> _errorWhenReadBegun =
             LoggerMessage.Define(LogLevel.Debug, LoggerEventIds.ErrorWhenReadBegun, "BeginRead");
 
-        private static readonly Action<ILogger, Exception?> _errorWhileRead =
-            LoggerMessage.Define(LogLevel.Debug, LoggerEventIds.ErrorWhileRead, "Read");
+        private static readonly Action<ILogger, Exception?> _errorWhileRead = LoggerMessage.Define(
+            LogLevel.Debug,
+            LoggerEventIds.ErrorWhileRead,
+            "Read"
+        );
 
         public static void ErrorWhenReadAsync(ILogger logger, Exception exception)
         {

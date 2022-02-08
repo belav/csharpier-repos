@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Abs.Vector64.Int16"] = Abs_Vector64_Int16,
                 ["Abs.Vector64.Int32"] = Abs_Vector64_Int32,
                 ["Abs.Vector64.SByte"] = Abs_Vector64_SByte,
@@ -27,14 +28,22 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["AbsSaturate.Vector128.SByte"] = AbsSaturate_Vector128_SByte,
                 ["AbsScalar.Vector64.Double"] = AbsScalar_Vector64_Double,
                 ["AbsScalar.Vector64.Single"] = AbsScalar_Vector64_Single,
-                ["AbsoluteCompareGreaterThan.Vector64.Single"] = AbsoluteCompareGreaterThan_Vector64_Single,
-                ["AbsoluteCompareGreaterThan.Vector128.Single"] = AbsoluteCompareGreaterThan_Vector128_Single,
-                ["AbsoluteCompareGreaterThanOrEqual.Vector64.Single"] = AbsoluteCompareGreaterThanOrEqual_Vector64_Single,
-                ["AbsoluteCompareGreaterThanOrEqual.Vector128.Single"] = AbsoluteCompareGreaterThanOrEqual_Vector128_Single,
-                ["AbsoluteCompareLessThan.Vector64.Single"] = AbsoluteCompareLessThan_Vector64_Single,
-                ["AbsoluteCompareLessThan.Vector128.Single"] = AbsoluteCompareLessThan_Vector128_Single,
-                ["AbsoluteCompareLessThanOrEqual.Vector64.Single"] = AbsoluteCompareLessThanOrEqual_Vector64_Single,
-                ["AbsoluteCompareLessThanOrEqual.Vector128.Single"] = AbsoluteCompareLessThanOrEqual_Vector128_Single,
+                ["AbsoluteCompareGreaterThan.Vector64.Single"] =
+                    AbsoluteCompareGreaterThan_Vector64_Single,
+                ["AbsoluteCompareGreaterThan.Vector128.Single"] =
+                    AbsoluteCompareGreaterThan_Vector128_Single,
+                ["AbsoluteCompareGreaterThanOrEqual.Vector64.Single"] =
+                    AbsoluteCompareGreaterThanOrEqual_Vector64_Single,
+                ["AbsoluteCompareGreaterThanOrEqual.Vector128.Single"] =
+                    AbsoluteCompareGreaterThanOrEqual_Vector128_Single,
+                ["AbsoluteCompareLessThan.Vector64.Single"] =
+                    AbsoluteCompareLessThan_Vector64_Single,
+                ["AbsoluteCompareLessThan.Vector128.Single"] =
+                    AbsoluteCompareLessThan_Vector128_Single,
+                ["AbsoluteCompareLessThanOrEqual.Vector64.Single"] =
+                    AbsoluteCompareLessThanOrEqual_Vector64_Single,
+                ["AbsoluteCompareLessThanOrEqual.Vector128.Single"] =
+                    AbsoluteCompareLessThanOrEqual_Vector128_Single,
                 ["AbsoluteDifference.Vector64.Byte"] = AbsoluteDifference_Vector64_Byte,
                 ["AbsoluteDifference.Vector64.Int16"] = AbsoluteDifference_Vector64_Int16,
                 ["AbsoluteDifference.Vector64.Int32"] = AbsoluteDifference_Vector64_Int32,
@@ -61,30 +70,54 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["AbsoluteDifferenceAdd.Vector128.SByte"] = AbsoluteDifferenceAdd_Vector128_SByte,
                 ["AbsoluteDifferenceAdd.Vector128.UInt16"] = AbsoluteDifferenceAdd_Vector128_UInt16,
                 ["AbsoluteDifferenceAdd.Vector128.UInt32"] = AbsoluteDifferenceAdd_Vector128_UInt32,
-                ["AbsoluteDifferenceWideningLower.Vector64.Byte"] = AbsoluteDifferenceWideningLower_Vector64_Byte,
-                ["AbsoluteDifferenceWideningLower.Vector64.Int16"] = AbsoluteDifferenceWideningLower_Vector64_Int16,
-                ["AbsoluteDifferenceWideningLower.Vector64.Int32"] = AbsoluteDifferenceWideningLower_Vector64_Int32,
-                ["AbsoluteDifferenceWideningLower.Vector64.SByte"] = AbsoluteDifferenceWideningLower_Vector64_SByte,
-                ["AbsoluteDifferenceWideningLower.Vector64.UInt16"] = AbsoluteDifferenceWideningLower_Vector64_UInt16,
-                ["AbsoluteDifferenceWideningLower.Vector64.UInt32"] = AbsoluteDifferenceWideningLower_Vector64_UInt32,
-                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.Byte"] = AbsoluteDifferenceWideningLowerAndAdd_Vector64_Byte,
-                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.Int16"] = AbsoluteDifferenceWideningLowerAndAdd_Vector64_Int16,
-                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.Int32"] = AbsoluteDifferenceWideningLowerAndAdd_Vector64_Int32,
-                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.SByte"] = AbsoluteDifferenceWideningLowerAndAdd_Vector64_SByte,
-                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.UInt16"] = AbsoluteDifferenceWideningLowerAndAdd_Vector64_UInt16,
-                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.UInt32"] = AbsoluteDifferenceWideningLowerAndAdd_Vector64_UInt32,
-                ["AbsoluteDifferenceWideningUpper.Vector128.Byte"] = AbsoluteDifferenceWideningUpper_Vector128_Byte,
-                ["AbsoluteDifferenceWideningUpper.Vector128.Int16"] = AbsoluteDifferenceWideningUpper_Vector128_Int16,
-                ["AbsoluteDifferenceWideningUpper.Vector128.Int32"] = AbsoluteDifferenceWideningUpper_Vector128_Int32,
-                ["AbsoluteDifferenceWideningUpper.Vector128.SByte"] = AbsoluteDifferenceWideningUpper_Vector128_SByte,
-                ["AbsoluteDifferenceWideningUpper.Vector128.UInt16"] = AbsoluteDifferenceWideningUpper_Vector128_UInt16,
-                ["AbsoluteDifferenceWideningUpper.Vector128.UInt32"] = AbsoluteDifferenceWideningUpper_Vector128_UInt32,
-                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.Byte"] = AbsoluteDifferenceWideningUpperAndAdd_Vector128_Byte,
-                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.Int16"] = AbsoluteDifferenceWideningUpperAndAdd_Vector128_Int16,
-                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.Int32"] = AbsoluteDifferenceWideningUpperAndAdd_Vector128_Int32,
-                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.SByte"] = AbsoluteDifferenceWideningUpperAndAdd_Vector128_SByte,
-                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.UInt16"] = AbsoluteDifferenceWideningUpperAndAdd_Vector128_UInt16,
-                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.UInt32"] = AbsoluteDifferenceWideningUpperAndAdd_Vector128_UInt32,
+                ["AbsoluteDifferenceWideningLower.Vector64.Byte"] =
+                    AbsoluteDifferenceWideningLower_Vector64_Byte,
+                ["AbsoluteDifferenceWideningLower.Vector64.Int16"] =
+                    AbsoluteDifferenceWideningLower_Vector64_Int16,
+                ["AbsoluteDifferenceWideningLower.Vector64.Int32"] =
+                    AbsoluteDifferenceWideningLower_Vector64_Int32,
+                ["AbsoluteDifferenceWideningLower.Vector64.SByte"] =
+                    AbsoluteDifferenceWideningLower_Vector64_SByte,
+                ["AbsoluteDifferenceWideningLower.Vector64.UInt16"] =
+                    AbsoluteDifferenceWideningLower_Vector64_UInt16,
+                ["AbsoluteDifferenceWideningLower.Vector64.UInt32"] =
+                    AbsoluteDifferenceWideningLower_Vector64_UInt32,
+                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.Byte"] =
+                    AbsoluteDifferenceWideningLowerAndAdd_Vector64_Byte,
+                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.Int16"] =
+                    AbsoluteDifferenceWideningLowerAndAdd_Vector64_Int16,
+                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.Int32"] =
+                    AbsoluteDifferenceWideningLowerAndAdd_Vector64_Int32,
+                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.SByte"] =
+                    AbsoluteDifferenceWideningLowerAndAdd_Vector64_SByte,
+                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.UInt16"] =
+                    AbsoluteDifferenceWideningLowerAndAdd_Vector64_UInt16,
+                ["AbsoluteDifferenceWideningLowerAndAdd.Vector64.UInt32"] =
+                    AbsoluteDifferenceWideningLowerAndAdd_Vector64_UInt32,
+                ["AbsoluteDifferenceWideningUpper.Vector128.Byte"] =
+                    AbsoluteDifferenceWideningUpper_Vector128_Byte,
+                ["AbsoluteDifferenceWideningUpper.Vector128.Int16"] =
+                    AbsoluteDifferenceWideningUpper_Vector128_Int16,
+                ["AbsoluteDifferenceWideningUpper.Vector128.Int32"] =
+                    AbsoluteDifferenceWideningUpper_Vector128_Int32,
+                ["AbsoluteDifferenceWideningUpper.Vector128.SByte"] =
+                    AbsoluteDifferenceWideningUpper_Vector128_SByte,
+                ["AbsoluteDifferenceWideningUpper.Vector128.UInt16"] =
+                    AbsoluteDifferenceWideningUpper_Vector128_UInt16,
+                ["AbsoluteDifferenceWideningUpper.Vector128.UInt32"] =
+                    AbsoluteDifferenceWideningUpper_Vector128_UInt32,
+                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.Byte"] =
+                    AbsoluteDifferenceWideningUpperAndAdd_Vector128_Byte,
+                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.Int16"] =
+                    AbsoluteDifferenceWideningUpperAndAdd_Vector128_Int16,
+                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.Int32"] =
+                    AbsoluteDifferenceWideningUpperAndAdd_Vector128_Int32,
+                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.SByte"] =
+                    AbsoluteDifferenceWideningUpperAndAdd_Vector128_SByte,
+                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.UInt16"] =
+                    AbsoluteDifferenceWideningUpperAndAdd_Vector128_UInt16,
+                ["AbsoluteDifferenceWideningUpperAndAdd.Vector128.UInt32"] =
+                    AbsoluteDifferenceWideningUpperAndAdd_Vector128_UInt32,
                 ["Add.Vector64.Byte"] = Add_Vector64_Byte,
                 ["Add.Vector64.Int16"] = Add_Vector64_Int16,
                 ["Add.Vector64.Int32"] = Add_Vector64_Int32,

@@ -16,7 +16,6 @@ namespace SignalRSamples.Hubs;
 
 public class UploadHub : Hub
 {
-
     public string Echo(string word)
     {
         return "Echo: " + word;
@@ -70,19 +69,20 @@ public class UploadHub : Hub
     {
         var output = Channel.CreateUnbounded<string>();
 
-        _ = Task.Run(async () =>
-        {
-            while (await source.WaitToReadAsync())
+        _ = Task.Run(
+            async () =>
             {
-                while (source.TryRead(out var item))
+                while (await source.WaitToReadAsync())
                 {
-                    Debug.WriteLine($"Echoing '{item}'.");
-                    await output.Writer.WriteAsync("echo:" + item);
+                    while (source.TryRead(out var item))
+                    {
+                        Debug.WriteLine($"Echoing '{item}'.");
+                        await output.Writer.WriteAsync("echo:" + item);
+                    }
                 }
+                output.Writer.Complete();
             }
-            output.Writer.Complete();
-
-        });
+        );
 
         return output.Reader;
     }

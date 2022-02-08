@@ -9,6 +9,10 @@ namespace Microsoft.CodeAnalysis.Options
 {
     internal interface IEditorConfigStorageLocation
     {
-        bool TryGetOption(IReadOnlyDictionary<string, string?> rawOptions, Type type, out object? value);
+        bool TryGetOption(
+            IReadOnlyDictionary<string, string?> rawOptions,
+            Type type,
+            out object? value
+        );
     }
 }

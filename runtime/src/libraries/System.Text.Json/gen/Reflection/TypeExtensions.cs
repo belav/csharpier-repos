@@ -80,7 +80,11 @@ namespace System.Text.Json.Reflection
             return sb.ToString();
         }
 
-        public static bool IsNullableValueType(this Type type, Type nullableOfTType, out Type? underlyingType)
+        public static bool IsNullableValueType(
+            this Type type,
+            Type nullableOfTType,
+            out Type? underlyingType
+        )
         {
             Debug.Assert(nullableOfTType != null);
 

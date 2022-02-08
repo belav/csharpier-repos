@@ -31,7 +31,11 @@ public class NavigationManagerTest
     [InlineData("scheme://host/path/", "scheme://host/path#hash", "#hash")]
     [InlineData("scheme://host/path/", "scheme://host/path/#hash", "#hash")]
     [InlineData("scheme://host/path/", "scheme://host/path/more#hash", "more#hash")]
-    public void ComputesCorrectValidBaseRelativePaths(string baseUri, string uri, string expectedResult)
+    public void ComputesCorrectValidBaseRelativePaths(
+        string baseUri,
+        string uri,
+        string expectedResult
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
@@ -47,14 +51,17 @@ public class NavigationManagerTest
     {
         var navigationManager = new TestNavigationManager();
 
-        var ex = Assert.Throws<ArgumentException>(() =>
-        {
-            navigationManager.Initialize(baseUri, absoluteUri);
-        });
+        var ex = Assert.Throws<ArgumentException>(
+            () =>
+            {
+                navigationManager.Initialize(baseUri, absoluteUri);
+            }
+        );
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Theory]
@@ -65,41 +72,65 @@ public class NavigationManagerTest
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var ex = Assert.Throws<ArgumentException>(() =>
-        {
-            navigationManager.ToBaseRelativePath(absoluteUri);
-        });
+        var ex = Assert.Throws<ArgumentException>(
+            () =>
+            {
+                navigationManager.ToBaseRelativePath(absoluteUri);
+            }
+        );
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Theory]
     [InlineData("scheme://host/", "otherscheme://host/")]
     [InlineData("scheme://host/", "scheme://otherhost/")]
     [InlineData("scheme://host/path/", "scheme://host/")]
-    public void ToBaseRelativePath_ThrowsForInvalidBaseRelativePaths(string baseUri, string absoluteUri)
+    public void ToBaseRelativePath_ThrowsForInvalidBaseRelativePaths(
+        string baseUri,
+        string absoluteUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var ex = Assert.Throws<ArgumentException>(() =>
-        {
-            navigationManager.ToBaseRelativePath(absoluteUri);
-        });
+        var ex = Assert.Throws<ArgumentException>(
+            () =>
+            {
+                navigationManager.ToBaseRelativePath(absoluteUri);
+            }
+        );
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Theory]
-    [InlineData("scheme://host/?full%20name=Bob%20Joe&age=42", "scheme://host/?full%20name=John%20Doe&age=42")]
-    [InlineData("scheme://host/?fUlL%20nAmE=Bob%20Joe&AgE=42", "scheme://host/?full%20name=John%20Doe&AgE=42")]
-    [InlineData("scheme://host/?full%20name=Sally%20Smith&age=42&full%20name=Emily", "scheme://host/?full%20name=John%20Doe&age=42&full%20name=John%20Doe")]
-    [InlineData("scheme://host/?full%20name=&age=42", "scheme://host/?full%20name=John%20Doe&age=42")]
+    [InlineData(
+        "scheme://host/?full%20name=Bob%20Joe&age=42",
+        "scheme://host/?full%20name=John%20Doe&age=42"
+    )]
+    [InlineData(
+        "scheme://host/?fUlL%20nAmE=Bob%20Joe&AgE=42",
+        "scheme://host/?full%20name=John%20Doe&AgE=42"
+    )]
+    [InlineData(
+        "scheme://host/?full%20name=Sally%20Smith&age=42&full%20name=Emily",
+        "scheme://host/?full%20name=John%20Doe&age=42&full%20name=John%20Doe"
+    )]
+    [InlineData(
+        "scheme://host/?full%20name=&age=42",
+        "scheme://host/?full%20name=John%20Doe&age=42"
+    )]
     [InlineData("scheme://host/?full%20name=", "scheme://host/?full%20name=John%20Doe")]
-    public void GetUriWithQueryParameter_ReplacesWhenParameterExists(string baseUri, string expectedUri)
+    public void GetUriWithQueryParameter_ReplacesWhenParameterExists(
+        string baseUri,
+        string expectedUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
         var actualUri = navigationManager.GetUriWithQueryParameter("full name", "John Doe");
@@ -111,7 +142,10 @@ public class NavigationManagerTest
     [InlineData("scheme://host/?age=42", "scheme://host/?age=42&name=John%20Doe")]
     [InlineData("scheme://host/", "scheme://host/?name=John%20Doe")]
     [InlineData("scheme://host/?", "scheme://host/?name=John%20Doe")]
-    public void GetUriWithQueryParameter_AppendsWhenParameterDoesNotExist(string baseUri, string expectedUri)
+    public void GetUriWithQueryParameter_AppendsWhenParameterDoesNotExist(
+        string baseUri,
+        string expectedUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
         var actualUri = navigationManager.GetUriWithQueryParameter("name", "John Doe");
@@ -121,12 +155,21 @@ public class NavigationManagerTest
 
     [Theory]
     [InlineData("scheme://host/?full%20name=Bob%20Joe&age=42", "scheme://host/?age=42")]
-    [InlineData("scheme://host/?full%20name=Sally%Smith&age=42&full%20name=Emily%20Karlsen", "scheme://host/?age=42")]
-    [InlineData("scheme://host/?full%20name=Sally%Smith&age=42&FuLl%20NaMe=Emily%20Karlsen", "scheme://host/?age=42")]
+    [InlineData(
+        "scheme://host/?full%20name=Sally%Smith&age=42&full%20name=Emily%20Karlsen",
+        "scheme://host/?age=42"
+    )]
+    [InlineData(
+        "scheme://host/?full%20name=Sally%Smith&age=42&FuLl%20NaMe=Emily%20Karlsen",
+        "scheme://host/?age=42"
+    )]
     [InlineData("scheme://host/?full%20name=&age=42", "scheme://host/?age=42")]
     [InlineData("scheme://host/?full%20name=", "scheme://host/")]
     [InlineData("scheme://host/", "scheme://host/")]
-    public void GetUriWithQueryParameter_RemovesWhenParameterValueIsNull(string baseUri, string expectedUri)
+    public void GetUriWithQueryParameter_RemovesWhenParameterValueIsNull(
+        string baseUri,
+        string expectedUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
         var actualUri = navigationManager.GetUriWithQueryParameter("full name", (string)null);
@@ -142,42 +185,63 @@ public class NavigationManagerTest
         var baseUri = "scheme://host/";
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var exception = Assert.Throws<InvalidOperationException>(() => navigationManager.GetUriWithQueryParameter(name, "test"));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => navigationManager.GetUriWithQueryParameter(name, "test")
+        );
         Assert.StartsWith("Cannot have empty query parameter names.", exception.Message);
     }
 
     [Theory]
     [InlineData("scheme://host/?name=Bob%20Joe&age=42", "scheme://host/?age=25&eye%20color=green")]
     [InlineData("scheme://host/?NaMe=Bob%20Joe&AgE=42", "scheme://host/?age=25&eye%20color=green")]
-    [InlineData("scheme://host/?name=Bob%20Joe&age=42&keepme=true", "scheme://host/?age=25&keepme=true&eye%20color=green")]
+    [InlineData(
+        "scheme://host/?name=Bob%20Joe&age=42&keepme=true",
+        "scheme://host/?age=25&keepme=true&eye%20color=green"
+    )]
     [InlineData("scheme://host/?age=42&eye%20color=87", "scheme://host/?age=25&eye%20color=green")]
     [InlineData("scheme://host/?", "scheme://host/?age=25&eye%20color=green")]
     [InlineData("scheme://host/", "scheme://host/?age=25&eye%20color=green")]
     public void GetUriWithQueryParameters_CanAddUpdateAndRemove(string baseUri, string expectedUri)
     {
         var navigationManager = new TestNavigationManager(baseUri);
-        var actualUri = navigationManager.GetUriWithQueryParameters(new Dictionary<string, object>
-        {
-            ["name"] = null,        // Remove
-            ["age"] = (int?)25,     // Add/update
-            ["eye color"] = "green",// Add/update
-        });
+        var actualUri = navigationManager.GetUriWithQueryParameters(
+            new Dictionary<string, object>
+            {
+                ["name"] = null, // Remove
+                ["age"] = (int?)25, // Add/update
+                ["eye color"] = "green", // Add/update
+            }
+        );
 
         Assert.Equal(expectedUri, actualUri);
     }
 
     [Theory]
-    [InlineData("scheme://host/?full%20name=Bob%20Joe&ping=8&ping=300", "scheme://host/?full%20name=John%20Doe&ping=35&ping=16&ping=87&ping=240")]
-    [InlineData("scheme://host/?ping=8&full%20name=Bob%20Joe&ping=300", "scheme://host/?ping=35&full%20name=John%20Doe&ping=16&ping=87&ping=240")]
-    [InlineData("scheme://host/?ping=8&ping=300&ping=50&ping=68&ping=42", "scheme://host/?ping=35&ping=16&ping=87&ping=240&full%20name=John%20Doe")]
-    public void GetUriWithQueryParameters_SupportsEnumerableValues(string baseUri, string expectedUri)
+    [InlineData(
+        "scheme://host/?full%20name=Bob%20Joe&ping=8&ping=300",
+        "scheme://host/?full%20name=John%20Doe&ping=35&ping=16&ping=87&ping=240"
+    )]
+    [InlineData(
+        "scheme://host/?ping=8&full%20name=Bob%20Joe&ping=300",
+        "scheme://host/?ping=35&full%20name=John%20Doe&ping=16&ping=87&ping=240"
+    )]
+    [InlineData(
+        "scheme://host/?ping=8&ping=300&ping=50&ping=68&ping=42",
+        "scheme://host/?ping=35&ping=16&ping=87&ping=240&full%20name=John%20Doe"
+    )]
+    public void GetUriWithQueryParameters_SupportsEnumerableValues(
+        string baseUri,
+        string expectedUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
-        var actualUri = navigationManager.GetUriWithQueryParameters(new Dictionary<string, object>
-        {
-            ["full name"] = "John Doe", // Single value
-            ["ping"] = new int?[] { 35, 16, null, 87, 240 }
-        });
+        var actualUri = navigationManager.GetUriWithQueryParameters(
+            new Dictionary<string, object>
+            {
+                ["full name"] = "John Doe", // Single value
+                ["ping"] = new int?[] { 35, 16, null, 87, 240 }
+            }
+        );
 
         Assert.Equal(expectedUri, actualUri);
     }
@@ -192,7 +256,9 @@ public class NavigationManagerTest
             ["value"] = new { Value = 3 }
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(() => navigationManager.GetUriWithQueryParameters(unsupportedParameterValues));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => navigationManager.GetUriWithQueryParameters(unsupportedParameterValues)
+        );
         Assert.StartsWith("Cannot format query parameters with values of type", exception.Message);
     }
 
@@ -208,19 +274,22 @@ public class NavigationManagerTest
             [string.Empty] = "value2",
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(() => navigationManager.GetUriWithQueryParameters(values));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => navigationManager.GetUriWithQueryParameters(values)
+        );
         Assert.StartsWith("Cannot have empty query parameter names.", exception.Message);
     }
 
     private class TestNavigationManager : NavigationManager
     {
-        public TestNavigationManager()
-        {
-        }
+        public TestNavigationManager() { }
 
         public TestNavigationManager(string baseUri = null, string uri = null)
         {
-            Initialize(baseUri ?? "http://example.com/", uri ?? baseUri ?? "http://example.com/welcome-page");
+            Initialize(
+                baseUri ?? "http://example.com/",
+                uri ?? baseUri ?? "http://example.com/welcome-page"
+            );
         }
 
         public new void Initialize(string baseUri, string uri)

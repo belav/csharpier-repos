@@ -54,7 +54,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool TryCreateFromBuffer(in ValueBuffer valueBuffer, [NotNullWhen(true)] out object[]? key)
+        public virtual bool TryCreateFromBuffer(
+            in ValueBuffer valueBuffer,
+            [NotNullWhen(true)] out object[]? key
+        )
         {
             key = new object[Properties.Count];
             var index = 0;
@@ -80,8 +83,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool TryCreateFromCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out object[]? key)
-            => TryCreateFromEntry(entry, (e, p) => e.GetCurrentValue(p), out key);
+        public virtual bool TryCreateFromCurrentValues(
+            IUpdateEntry entry,
+            [NotNullWhen(true)] out object[]? key
+        ) => TryCreateFromEntry(entry, (e, p) => e.GetCurrentValue(p), out key);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -89,8 +94,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out object[]? key)
-            => TryCreateFromEntry(entry, (e, p) => e.GetPreStoreGeneratedCurrentValue(p), out key);
+        public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(
+            IUpdateEntry entry,
+            [NotNullWhen(true)] out object[]? key
+        ) => TryCreateFromEntry(entry, (e, p) => e.GetPreStoreGeneratedCurrentValue(p), out key);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,8 +105,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool TryCreateFromOriginalValues(IUpdateEntry entry, [NotNullWhen(true)] out object[]? key)
-            => TryCreateFromEntry(entry, (e, p) => e.GetOriginalValue(p), out key);
+        public virtual bool TryCreateFromOriginalValues(
+            IUpdateEntry entry,
+            [NotNullWhen(true)] out object[]? key
+        ) => TryCreateFromEntry(entry, (e, p) => e.GetOriginalValue(p), out key);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -107,8 +116,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool TryCreateFromRelationshipSnapshot(IUpdateEntry entry, [NotNullWhen(true)] out object[]? key)
-            => TryCreateFromEntry(entry, (e, p) => e.GetRelationshipSnapshotValue(p), out key);
+        public virtual bool TryCreateFromRelationshipSnapshot(
+            IUpdateEntry entry,
+            [NotNullWhen(true)] out object[]? key
+        ) => TryCreateFromEntry(entry, (e, p) => e.GetRelationshipSnapshotValue(p), out key);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -119,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         protected virtual bool TryCreateFromEntry(
             IUpdateEntry entry,
             Func<IUpdateEntry, IProperty, object?> getValue,
-            [NotNullWhen(true)] out object[]? key)
+            [NotNullWhen(true)] out object[]? key
+        )
         {
             key = new object[Properties.Count];
             var index = 0;
@@ -145,15 +157,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected static IEqualityComparer<object[]> CreateEqualityComparer(IReadOnlyList<IProperty> properties)
+        protected static IEqualityComparer<object[]> CreateEqualityComparer(
+            IReadOnlyList<IProperty> properties
+        )
         {
             var comparers = properties.Select(p => p.GetKeyValueComparer()).ToList();
 
             return comparers.All(c => c != null)
-                ? new CompositeCustomComparer(comparers!)
-                : properties.Any(p => typeof(IStructuralEquatable).IsAssignableFrom(p.ClrType))
-                    ? new StructuralCompositeComparer()
-                    : new CompositeComparer();
+              ? new CompositeCustomComparer(comparers!)
+              : properties.Any(p => typeof(IStructuralEquatable).IsAssignableFrom(p.ClrType))
+                  ? new StructuralCompositeComparer()
+                  : new CompositeComparer();
         }
 
         private sealed class CompositeCustomComparer : IEqualityComparer<object[]>
@@ -264,8 +278,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private sealed class StructuralCompositeComparer : IEqualityComparer<object[]>
         {
-            private readonly IEqualityComparer _structuralEqualityComparer
-                = StructuralComparisons.StructuralEqualityComparer;
+            private readonly IEqualityComparer _structuralEqualityComparer =
+                StructuralComparisons.StructuralEqualityComparer;
 
             public bool Equals(object[]? x, object[]? y)
             {

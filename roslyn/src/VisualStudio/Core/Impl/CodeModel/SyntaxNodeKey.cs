@@ -36,8 +36,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public bool Equals(SyntaxNodeKey other)
         {
-            return _name == other._name
-                && _ordinal == other._ordinal;
+            return _name == other._name && _ordinal == other._ordinal;
         }
 
         public override bool Equals(object obj)
@@ -50,11 +49,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return false;
         }
 
-        public override int GetHashCode()
-            => _name.GetHashCode() + _ordinal;
+        public override int GetHashCode() => _name.GetHashCode() + _ordinal;
 
-        public override string ToString()
-            => $"{{{_name}, {_ordinal}}}";
+        public override string ToString() => $"{{{_name}, {_ordinal}}}";
 
         public string Name
         {
@@ -71,10 +68,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             get { return _name == null && _ordinal == 0; }
         }
 
-        public static bool operator ==(SyntaxNodeKey left, SyntaxNodeKey right)
-            => left.Equals(right);
+        public static bool operator ==(SyntaxNodeKey left, SyntaxNodeKey right) =>
+            left.Equals(right);
 
-        public static bool operator !=(SyntaxNodeKey left, SyntaxNodeKey right)
-            => !left.Equals(right);
+        public static bool operator !=(SyntaxNodeKey left, SyntaxNodeKey right) =>
+            !left.Equals(right);
     }
 }

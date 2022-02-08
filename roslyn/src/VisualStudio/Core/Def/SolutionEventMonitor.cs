@@ -25,7 +25,10 @@ namespace Microsoft.VisualStudio.LanguageServices
 
         public SolutionEventMonitor(VisualStudioWorkspace workspace)
         {
-            if (workspace.Services.GetService<IGlobalOperationNotificationService>() is GlobalOperationNotificationService notificationService)
+            if (
+                workspace.Services.GetService<IGlobalOperationNotificationService>()
+                is GlobalOperationNotificationService notificationService
+            )
             {
                 // subscribe to events only if it is normal service. if it is one from unit test or other, don't bother to subscribe
                 _notificationService = notificationService;
@@ -36,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices
                     ContextChanged(active: true, operation: SolutionBuilding);
                 }
 
-                KnownUIContexts.SolutionBuildingContext.UIContextChanged += SolutionBuildingContextChanged;
+                KnownUIContexts.SolutionBuildingContext.UIContextChanged +=
+                    SolutionBuildingContextChanged;
 
                 // make sure we set initial state correctly. otherwise, we can get into a race where we might miss the very first events
                 if (KnownUIContexts.SolutionOpeningContext.IsActive)
@@ -44,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices
                     ContextChanged(active: true, operation: SolutionOpening);
                 }
 
-                KnownUIContexts.SolutionOpeningContext.UIContextChanged += SolutionOpeningContextChanged;
+                KnownUIContexts.SolutionOpeningContext.UIContextChanged +=
+                    SolutionOpeningContextChanged;
             }
         }
 
@@ -60,16 +65,18 @@ namespace Microsoft.VisualStudio.LanguageServices
             if (_notificationService != null)
             {
                 _notificationService = null;
-                KnownUIContexts.SolutionBuildingContext.UIContextChanged -= SolutionBuildingContextChanged;
-                KnownUIContexts.SolutionOpeningContext.UIContextChanged -= SolutionOpeningContextChanged;
+                KnownUIContexts.SolutionBuildingContext.UIContextChanged -=
+                    SolutionBuildingContextChanged;
+                KnownUIContexts.SolutionOpeningContext.UIContextChanged -=
+                    SolutionOpeningContextChanged;
             }
         }
 
-        private void SolutionBuildingContextChanged(object sender, UIContextChangedEventArgs e)
-            => ContextChanged(e.Activated, SolutionBuilding);
+        private void SolutionBuildingContextChanged(object sender, UIContextChangedEventArgs e) =>
+            ContextChanged(e.Activated, SolutionBuilding);
 
-        private void SolutionOpeningContextChanged(object sender, UIContextChangedEventArgs e)
-            => ContextChanged(e.Activated, SolutionOpening);
+        private void SolutionOpeningContextChanged(object sender, UIContextChangedEventArgs e) =>
+            ContextChanged(e.Activated, SolutionOpening);
 
         private void ContextChanged(bool active, string operation)
         {

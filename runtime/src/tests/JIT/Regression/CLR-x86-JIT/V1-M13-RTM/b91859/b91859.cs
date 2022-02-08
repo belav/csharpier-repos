@@ -3,13 +3,13 @@
 //
 
 using System;
+
 class AA
 {
     static int Main()
     {
         bool b = false;
-        b = (b ? (object)b : (object)new AA()) ==
-            (b ? new AA() : (b ? new AA() : null));
+        b = (b ? (object)b : (object)new AA()) == (b ? new AA() : (b ? new AA() : null));
         return 100;
     }
 }

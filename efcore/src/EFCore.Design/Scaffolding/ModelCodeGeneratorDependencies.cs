@@ -39,8 +39,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public ModelCodeGeneratorDependencies()
-        {
-        }
+        public ModelCodeGeneratorDependencies() { }
     }
 }

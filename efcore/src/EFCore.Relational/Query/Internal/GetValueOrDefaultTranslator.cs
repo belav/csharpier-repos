@@ -40,18 +40,22 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
-            if (method.Name == nameof(Nullable<int>.GetValueOrDefault)
+            if (
+                method.Name == nameof(Nullable<int>.GetValueOrDefault)
                 && instance != null
-                && method.ReturnType.IsNumeric())
+                && method.ReturnType.IsNumeric()
+            )
             {
                 return _sqlExpressionFactory.Coalesce(
                     instance,
                     arguments.Count == 0
-                        ? new SqlConstantExpression(method.ReturnType.GetDefaultValueConstant(), null)
-                        : arguments[0],
-                    instance.TypeMapping);
+                      ? new SqlConstantExpression(method.ReturnType.GetDefaultValueConstant(), null)
+                      : arguments[0],
+                    instance.TypeMapping
+                );
             }
 
             return null;

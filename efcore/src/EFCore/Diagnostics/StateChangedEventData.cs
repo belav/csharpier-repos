@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             EntityEntry entityEntry,
             EntityState oldState,
-            EntityState newState)
-            : base(eventDefinition, messageGenerator, entityEntry)
+            EntityState newState
+        ) : base(eventDefinition, messageGenerator, entityEntry)
         {
             OldState = oldState;
             NewState = newState;

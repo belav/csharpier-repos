@@ -7,12 +7,8 @@ namespace Microsoft.EntityFrameworkCore
         : ManyToManyTrackingSqlServerTestBase<ManyToManyTrackingSqlServerTest.ManyToManyTrackingSqlServerFixture>
     {
         public ManyToManyTrackingSqlServerTest(ManyToManyTrackingSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
-        public class ManyToManyTrackingSqlServerFixture : ManyToManyTrackingSqlServerFixtureBase
-        {
-        }
+        public class ManyToManyTrackingSqlServerFixture : ManyToManyTrackingSqlServerFixtureBase { }
     }
 }

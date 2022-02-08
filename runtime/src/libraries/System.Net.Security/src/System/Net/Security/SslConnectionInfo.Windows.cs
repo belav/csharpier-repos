@@ -5,7 +5,10 @@ namespace System.Net.Security
 {
     internal sealed partial class SslConnectionInfo
     {
-        public SslConnectionInfo(SecPkgContext_ConnectionInfo interopConnectionInfo, TlsCipherSuite cipherSuite)
+        public SslConnectionInfo(
+            SecPkgContext_ConnectionInfo interopConnectionInfo,
+            TlsCipherSuite cipherSuite
+        )
         {
             Protocol = interopConnectionInfo.Protocol;
             DataCipherAlg = interopConnectionInfo.DataCipherAlg;

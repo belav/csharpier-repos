@@ -187,32 +187,32 @@ namespace Microsoft.Test.ModuleCore
                 <-- Owner type is an enum, "test", "dev" or "pm" -->
                 <Owner Alias="YourAlias" Type="test"/>
                 <Description>XQuery conformance tests</Description>
-                    <Data filePath="\\webxtest\wdtest\managed\..." DBName="Northwind" Anything="whatever you want to be global">
-                        <!--My global data -->
-                        <xml>http://webdata/data/mytest/test.xml</xml>
-                        <xsd>http://webdata/data/mytest/test.xsd</xsd>
-                    </Data>
-                    <TestCase name="FLWR Expressions">
-                           <Description>Tests for FLWR expressions</description>
-                        <Variation id="1" Implemented="true" Priority="2">
-                            <Description>Simple 1 FLWR expression</description>
-                            <FilterCriteria>
-                                            <!-- Recommended place for filter criteria -->
-                                            <Os>NT</Os>
-                                            <Language>English</Language>
-                            </FilterCriteria>
-                            <Data >
-                                            <!-- Override global data -->
-                                            <xml>http://webdata/data/mytest/specialptest.xml</xml>
-                            </Data>
-                            <SoapData>
-                                            <!-- Additional data for SOAP tests -->
-                                            <wsdl>http://webdata/data/mytest/test.wsdl</wsdl>
-                            </SoapData>
-                        </Variation>
-                        </TestCase>
+                <Data filePath="\\webxtest\wdtest\managed\..." DBName="Northwind" Anything="whatever you want to be global">
+                <!--My global data -->
+                <xml>http://webdata/data/mytest/test.xml</xml>
+                <xsd>http://webdata/data/mytest/test.xsd</xsd>
+                </Data>
+                <TestCase name="FLWR Expressions">
+                <Description>Tests for FLWR expressions</description>
+                <Variation id="1" Implemented="true" Priority="2">
+                <Description>Simple 1 FLWR expression</description>
+                <FilterCriteria>
+                <!-- Recommended place for filter criteria -->
+                <Os>NT</Os>
+                <Language>English</Language>
+                </FilterCriteria>
+                <Data >
+                <!-- Override global data -->
+                <xml>http://webdata/data/mytest/specialptest.xml</xml>
+                </Data>
+                <SoapData>
+                <!-- Additional data for SOAP tests -->
+                <wsdl>http://webdata/data/mytest/test.wsdl</wsdl>
+                </SoapData>
+                </Variation>
+                </TestCase>
                 </TestModule>
-            */
+                */
 
             //Create the document
             pxmldoc = new CXmlDocument();
@@ -271,7 +271,12 @@ namespace Microsoft.Test.ModuleCore
                 this.AddProperty(element, property.Name, property.Value, property.Flags);
         }
 
-        protected void AddProperty(XElement element, string name, object value, TestPropertyFlags flags)
+        protected void AddProperty(
+            XElement element,
+            string name,
+            object value,
+            TestPropertyFlags flags
+        )
         {
             //Ignore all the properties that have no name or value (as to not bloat the xml)
             if (name == null || value == null)
@@ -291,7 +296,11 @@ namespace Microsoft.Test.ModuleCore
         protected void AddValue(XElement element, string name, object value)
         {
             //Recurise through the value(s)
-            if (value != null && value.GetType().HasElementType && value is System.Collections.IEnumerable)
+            if (
+                value != null
+                && value.GetType().HasElementType
+                && value is System.Collections.IEnumerable
+            )
             {
                 //Recurse through the values
                 foreach (object item in (System.Collections.IEnumerable)value)
@@ -325,8 +334,6 @@ namespace Microsoft.Test.ModuleCore
         public object UserData = null;
 
         public CXmlElement(string prefix, string name, string namespaceURI, CXmlDocument xmldoc)
-            : base(prefix, name, namespaceURI, xmldoc)
-        {
-        }
+            : base(prefix, name, namespaceURI, xmldoc) { }
     }
 }

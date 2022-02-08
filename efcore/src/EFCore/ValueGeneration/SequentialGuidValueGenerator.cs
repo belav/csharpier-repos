@@ -60,7 +60,6 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         ///     Gets a value indicating whether the values generated are temporary or permanent. This implementation
         ///     always returns false, meaning the generated values will be saved to the database.
         /// </summary>
-        public override bool GeneratesTemporaryValues
-            => false;
+        public override bool GeneratesTemporaryValues => false;
     }
 }

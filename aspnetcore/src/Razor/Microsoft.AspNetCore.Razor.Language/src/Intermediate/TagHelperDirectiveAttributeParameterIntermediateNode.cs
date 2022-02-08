@@ -43,7 +43,10 @@ public sealed class TagHelperDirectiveAttributeParameterIntermediateNode : Inter
         formatter.WriteProperty(nameof(OriginalAttributeName), OriginalAttributeName);
         formatter.WriteProperty(nameof(AttributeStructure), AttributeStructure.ToString());
         formatter.WriteProperty(nameof(BoundAttribute), BoundAttribute?.DisplayName);
-        formatter.WriteProperty(nameof(BoundAttributeParameter), BoundAttributeParameter?.DisplayName);
+        formatter.WriteProperty(
+            nameof(BoundAttributeParameter),
+            BoundAttributeParameter?.DisplayName
+        );
         formatter.WriteProperty(nameof(TagHelper), TagHelper?.DisplayName);
     }
 }

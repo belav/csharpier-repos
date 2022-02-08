@@ -81,5 +81,6 @@ namespace JitTest
     }
 
     internal class DerivedClass : TestClass { }
+
     internal class OtherClass { }
 }

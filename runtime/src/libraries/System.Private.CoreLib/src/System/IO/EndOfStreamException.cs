@@ -6,17 +6,17 @@ using System.Runtime.Serialization;
 namespace System.IO
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class EndOfStreamException : IOException
     {
-        public EndOfStreamException()
-            : base(SR.Arg_EndOfStreamException)
+        public EndOfStreamException() : base(SR.Arg_EndOfStreamException)
         {
             HResult = HResults.COR_E_ENDOFSTREAM;
         }
 
-        public EndOfStreamException(string? message)
-            : base(message)
+        public EndOfStreamException(string? message) : base(message)
         {
             HResult = HResults.COR_E_ENDOFSTREAM;
         }
@@ -28,8 +28,6 @@ namespace System.IO
         }
 
         protected EndOfStreamException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

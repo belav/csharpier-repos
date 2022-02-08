@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis
     /// We cannot just use <see cref="DiagnosticDescriptor"/>'s built-in implementation
     /// of <see cref="IEquatable{DiagnosticDescriptor}"/> for two reasons:
     ///
-    /// 1. <see cref="DiagnosticDescriptor.MessageFormat"/> is part of that built-in 
+    /// 1. <see cref="DiagnosticDescriptor.MessageFormat"/> is part of that built-in
     ///    equatability, but we do not write it out, and so descriptors differing only
     ///    by MessageFormat (common) would lead to duplicate rule metadata entries in
     ///    the log.
@@ -30,9 +30,7 @@ namespace Microsoft.CodeAnalysis
     {
         public static readonly SarifDiagnosticComparer Instance = new SarifDiagnosticComparer();
 
-        private SarifDiagnosticComparer()
-        {
-        }
+        private SarifDiagnosticComparer() { }
 
         public bool Equals(DiagnosticDescriptor? x, DiagnosticDescriptor? y)
         {
@@ -50,14 +48,16 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(x.Description != null && x.Title != null && x.CustomTags != null);
             Debug.Assert(y.Description != null && y.Title != null && y.CustomTags != null);
 
-            return (x.Category == y.Category
+            return (
+                x.Category == y.Category
                 && x.DefaultSeverity == y.DefaultSeverity
                 && x.Description!.Equals(y.Description)
                 && x.HelpLinkUri == y.HelpLinkUri
                 && x.Id == y.Id
                 && x.IsEnabledByDefault == y.IsEnabledByDefault
                 && x.Title!.Equals(y.Title)
-                && x.ImmutableCustomTags.SequenceEqual(y.ImmutableCustomTags));
+                && x.ImmutableCustomTags.SequenceEqual(y.ImmutableCustomTags)
+            );
         }
 
         public int GetHashCode(DiagnosticDescriptor obj)
@@ -68,17 +68,37 @@ namespace Microsoft.CodeAnalysis
             }
 
             // The properties are guaranteed to be non-null by DiagnosticDescriptor invariants.
-            Debug.Assert(obj.Category != null && obj.Description != null && obj.HelpLinkUri != null
-                && obj.Id != null && obj.Title != null && obj.CustomTags != null);
+            Debug.Assert(
+                obj.Category != null
+                    && obj.Description != null
+                    && obj.HelpLinkUri != null
+                    && obj.Id != null
+                    && obj.Title != null
+                    && obj.CustomTags != null
+            );
 
-            return Hash.Combine(obj.Category!.GetHashCode(),
-                Hash.Combine(obj.DefaultSeverity.GetHashCode(),
-                Hash.Combine(obj.Description!.GetHashCode(),
-                Hash.Combine(obj.HelpLinkUri!.GetHashCode(),
-                Hash.Combine(obj.Id!.GetHashCode(),
-                Hash.Combine(obj.IsEnabledByDefault.GetHashCode(),
-                Hash.Combine(obj.Title!.GetHashCode(),
-                Hash.CombineValues(obj.ImmutableCustomTags))))))));
+            return Hash.Combine(
+                obj.Category!.GetHashCode(),
+                Hash.Combine(
+                    obj.DefaultSeverity.GetHashCode(),
+                    Hash.Combine(
+                        obj.Description!.GetHashCode(),
+                        Hash.Combine(
+                            obj.HelpLinkUri!.GetHashCode(),
+                            Hash.Combine(
+                                obj.Id!.GetHashCode(),
+                                Hash.Combine(
+                                    obj.IsEnabledByDefault.GetHashCode(),
+                                    Hash.Combine(
+                                        obj.Title!.GetHashCode(),
+                                        Hash.CombineValues(obj.ImmutableCustomTags)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
         }
     }
 }

@@ -23,7 +23,10 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
 
             _output = command.Option("-o|--output <FILE>", Resources.OutputDescription);
             _idempotent = command.Option("-i|--idempotent", Resources.IdempotentDescription);
-            _noTransactions = command.Option("--no-transactions", Resources.NoTransactionsDescription);
+            _noTransactions = command.Option(
+                "--no-transactions",
+                Resources.NoTransactionsDescription
+            );
 
             base.Configure(command);
         }

@@ -20,29 +20,41 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LessAndGreaterThanBraceCompletionService()
-        {
-        }
+        public LessAndGreaterThanBraceCompletionService() { }
 
         protected override char OpeningBrace => LessAndGreaterThan.OpenCharacter;
 
         protected override char ClosingBrace => LessAndGreaterThan.CloseCharacter;
 
-        public override Task<bool> AllowOverTypeAsync(BraceCompletionContext context, CancellationToken cancellationToken)
-            => AllowOverTypeInUserCodeWithValidClosingTokenAsync(context, cancellationToken);
+        public override Task<bool> AllowOverTypeAsync(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeInUserCodeWithValidClosingTokenAsync(context, cancellationToken);
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.LessThanToken);
+        protected override bool IsValidOpeningBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.LessThanToken);
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.GreaterThanToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.GreaterThanToken);
 
-        protected override async Task<bool> IsValidOpenBraceTokenAtPositionAsync(SyntaxToken token, int position, Document document, CancellationToken cancellationToken)
+        protected override async Task<bool> IsValidOpenBraceTokenAtPositionAsync(
+            SyntaxToken token,
+            int position,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            // check what parser thinks about the newly typed "<" and only proceed if parser thinks it is "<" of 
+            // check what parser thinks about the newly typed "<" and only proceed if parser thinks it is "<" of
             // type argument or parameter list
-            if (!token.CheckParent<TypeParameterListSyntax>(n => n.LessThanToken == token) &&
-                !token.CheckParent<TypeArgumentListSyntax>(n => n.LessThanToken == token) &&
-                !token.CheckParent<FunctionPointerParameterListSyntax>(n => n.LessThanToken == token) &&
-                !await PossibleTypeArgumentAsync(document, token, cancellationToken).ConfigureAwait(false))
+            if (
+                !token.CheckParent<TypeParameterListSyntax>(n => n.LessThanToken == token)
+                && !token.CheckParent<TypeArgumentListSyntax>(n => n.LessThanToken == token)
+                && !token.CheckParent<FunctionPointerParameterListSyntax>(
+                    n => n.LessThanToken == token
+                )
+                && !await PossibleTypeArgumentAsync(document, token, cancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
                 return false;
             }
@@ -50,28 +62,39 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             return true;
         }
 
-        private static async Task<bool> PossibleTypeArgumentAsync(Document document, SyntaxToken token, CancellationToken cancellationToken)
+        private static async Task<bool> PossibleTypeArgumentAsync(
+            Document document,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        )
         {
             // type argument can be easily ambiguous with normal < operations
-            if (token.Parent is not BinaryExpressionSyntax node || node.Kind() != SyntaxKind.LessThanExpression || node.OperatorToken != token)
+            if (
+                token.Parent is not BinaryExpressionSyntax node
+                || node.Kind() != SyntaxKind.LessThanExpression
+                || node.OperatorToken != token
+            )
             {
                 return false;
             }
 
-            // use binding to see whether it is actually generic type or method 
-            var model = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            // use binding to see whether it is actually generic type or method
+            var model = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Analyze node on the left of < operator to verify if it is a generic type or method.
             var leftNode = node.Left;
             if (leftNode is ConditionalAccessExpressionSyntax leftConditionalAccessExpression)
             {
-                // If node on the left is a conditional access expression, get the member binding expression 
-                // from the innermost conditional access expression, which is the left of < operator. 
+                // If node on the left is a conditional access expression, get the member binding expression
+                // from the innermost conditional access expression, which is the left of < operator.
                 // e.g: Case a?.b?.c< : we need to get the conditional access expression .b?.c and analyze its
                 // member binding expression (the .c) to see if it is a generic type/method.
                 // Case a?.b?.c.d< : we need to analyze .c.d
                 // Case a?.M(x => x?.P)?.M2< : We need to analyze .M2
-                var innerMostConditionalAccessExpression = leftConditionalAccessExpression.GetInnerMostConditionalAccessExpression();
+                var innerMostConditionalAccessExpression =
+                    leftConditionalAccessExpression.GetInnerMostConditionalAccessExpression();
                 if (innerMostConditionalAccessExpression != null)
                 {
                     leftNode = innerMostConditionalAccessExpression.WhenNotNull;
@@ -82,7 +105,6 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             return info.CandidateSymbols.Any(IsGenericTypeOrMethod);
         }
 
-        private static bool IsGenericTypeOrMethod(ISymbol symbol)
-            => symbol.GetArity() > 0;
+        private static bool IsGenericTypeOrMethod(ISymbol symbol) => symbol.GetArity() > 0;
     }
 }

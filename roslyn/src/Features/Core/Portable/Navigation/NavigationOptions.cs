@@ -11,15 +11,17 @@ namespace Microsoft.CodeAnalysis.Navigation
     internal static class NavigationOptions
     {
         /// <summary>
-        /// This option can be passed to the <see cref="IDocumentNavigationService"/> APIs to request that a provisional (or preview) tab 
+        /// This option can be passed to the <see cref="IDocumentNavigationService"/> APIs to request that a provisional (or preview) tab
         /// be used for any document that needs to be opened, if one is available.
         /// </summary>
-        public static readonly Option2<bool> PreferProvisionalTab = new(nameof(NavigationOptions), nameof(PreferProvisionalTab), defaultValue: false);
+        public static readonly Option2<bool> PreferProvisionalTab =
+            new(nameof(NavigationOptions), nameof(PreferProvisionalTab), defaultValue: false);
 
         /// <summary>
         /// This option can be passed to the <see cref="IDocumentNavigationService"/> APIs to request that the navigation should activate the tab.
         /// The default for the platform is to activate the tab, so turning the option off tells the platform to not activate the tab.
         /// </summary>
-        public static readonly Option2<bool> ActivateTab = new(nameof(NavigationOptions), nameof(ActivateTab), defaultValue: true);
+        public static readonly Option2<bool> ActivateTab =
+            new(nameof(NavigationOptions), nameof(ActivateTab), defaultValue: true);
     }
 }

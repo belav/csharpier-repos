@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
     {
         public ManagedHotReloadAvailability(
             ManagedHotReloadAvailabilityStatus status,
-            string? localizedMessage = null)
+            string? localizedMessage = null
+        )
         {
             Status = status;
             LocalizedMessage = localizedMessage;

@@ -10,10 +10,12 @@ public class StartupBase
     public void ConfigureBaseClassServices(IServiceCollection services)
     {
         services.AddOptions();
-        services.Configure<FakeOptions>(o =>
-        {
-            o.Configured = true;
-            o.Environment = "BaseClass";
-        });
+        services.Configure<FakeOptions>(
+            o =>
+            {
+                o.Configured = true;
+                o.Environment = "BaseClass";
+            }
+        );
     }
 }

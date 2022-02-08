@@ -35,9 +35,10 @@ public class PageLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Executing page factory for page " +
-            "System.ValueTuple<int, string> (System.Private.CoreLib)",
-            write.State.ToString());
+            "Executing page factory for page "
+                + "System.ValueTuple<int, string> (System.Private.CoreLib)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -63,9 +64,10 @@ public class PageLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Executed page factory for page " +
-            "System.ValueTuple<int, string> (System.Private.CoreLib)",
-            write.State.ToString());
+            "Executed page factory for page "
+                + "System.ValueTuple<int, string> (System.Private.CoreLib)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -91,9 +93,10 @@ public class PageLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Executing page model factory for page " +
-            "System.ValueTuple<int, string> (System.Private.CoreLib)",
-            write.State.ToString());
+            "Executing page model factory for page "
+                + "System.ValueTuple<int, string> (System.Private.CoreLib)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -119,9 +122,10 @@ public class PageLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Executed page model factory for page " +
-            "System.ValueTuple<int, string> (System.Private.CoreLib)",
-            write.State.ToString());
+            "Executed page model factory for page "
+                + "System.ValueTuple<int, string> (System.Private.CoreLib)",
+            write.State.ToString()
+        );
     }
 
     [Theory]
@@ -153,14 +157,18 @@ public class PageLoggerExtensionsTest
         var validationState = isValidModelState ? "Valid" : "Invalid";
         Assert.Equal(
             $"Executing handler method System.ValueTuple<int, string>.ToString - ModelState is {validationState}",
-            write.State.ToString());
+            write.State.ToString()
+        );
     }
 
     [Theory]
     [InlineData("")]
     [InlineData("foo", "foo")]
     [InlineData("foo, 42", "foo", 42)]
-    public void ExecutingHandlerMethod_WithArguments_LogsArguments(string expectedArgumentsMessage, params object[] arguments)
+    public void ExecutingHandlerMethod_WithArguments_LogsArguments(
+        string expectedArgumentsMessage,
+        params object[] arguments
+    )
     {
         // Arrange
         var testSink = new TestSink();
@@ -184,6 +192,7 @@ public class PageLoggerExtensionsTest
         enumerator.MoveNext();
         Assert.Equal(
             $"Executing handler method System.ValueTuple<int, string>.ToString with arguments ({expectedArgumentsMessage})",
-            enumerator.Current.State.ToString());
+            enumerator.Current.State.ToString()
+        );
     }
 }

@@ -10,17 +10,22 @@ using Microsoft.CodeAnalysis.Notification;
 
 namespace Microsoft.CodeAnalysis.Remote.Services
 {
-    [ExportWorkspaceService(typeof(IGlobalOperationNotificationService), WorkspaceKind.RemoteWorkspace), Shared]
-    internal sealed class RemoteGlobalOperationNotificationService : IGlobalOperationNotificationService
+    [
+        ExportWorkspaceService(
+            typeof(IGlobalOperationNotificationService),
+            WorkspaceKind.RemoteWorkspace
+        ),
+        Shared
+    ]
+    internal sealed class RemoteGlobalOperationNotificationService
+        : IGlobalOperationNotificationService
     {
         public event EventHandler? Started;
         public event EventHandler<GlobalOperationEventArgs>? Stopped;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteGlobalOperationNotificationService()
-        {
-        }
+        public RemoteGlobalOperationNotificationService() { }
 
         public GlobalOperationRegistration Start(string operation)
         {
@@ -29,10 +34,9 @@ namespace Microsoft.CodeAnalysis.Remote.Services
             throw new NotSupportedException();
         }
 
-        public void OnStarted()
-            => Started?.Invoke(this, EventArgs.Empty);
+        public void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
 
-        public void OnStopped(ImmutableArray<string> operations)
-            => Stopped?.Invoke(this, new GlobalOperationEventArgs(operations));
+        public void OnStopped(ImmutableArray<string> operations) =>
+            Stopped?.Invoke(this, new GlobalOperationEventArgs(operations));
     }
 }

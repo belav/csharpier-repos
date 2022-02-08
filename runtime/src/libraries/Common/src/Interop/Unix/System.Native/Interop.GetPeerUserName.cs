@@ -9,7 +9,12 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetPeerUserName", CharSet = CharSet.Ansi, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetPeerUserName",
+            CharSet = CharSet.Ansi,
+            SetLastError = true
+        )]
         internal static partial string GetPeerUserName(SafeHandle socket);
     }
 }

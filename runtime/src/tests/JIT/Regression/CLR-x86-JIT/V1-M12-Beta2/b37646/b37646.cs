@@ -10,9 +10,22 @@ namespace Test
     {
         static void Static2(__arglist) { }
 
-        static bool[] Static3(ref int param1, uint[] param2, ref double param3,
-            object param4, ref float[] param5, ref object[] param6) { return null; }
+        static bool[] Static3(
+            ref int param1,
+            uint[] param2,
+            ref double param3,
+            object param4,
+            ref float[] param5,
+            ref object[] param6
+        )
+        {
+            return null;
+        }
 
-        static int Main() { Static2(__arglist()); return 100; }
+        static int Main()
+        {
+            Static2(__arglist());
+            return 100;
+        }
     }
 }

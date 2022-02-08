@@ -26,7 +26,11 @@ namespace Test
     public class BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public BaseClass(Func<int> arg) { Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg()); return; }
+        public BaseClass(Func<int> arg)
+        {
+            Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg());
+            return;
+        }
     }
 
     public class DerivedClass<T> : BaseClass
@@ -35,4 +39,3 @@ namespace Test
         public DerivedClass(int selector) : base(() => selector) { }
     }
 }
-

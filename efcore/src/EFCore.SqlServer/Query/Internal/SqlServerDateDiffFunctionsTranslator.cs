@@ -18,297 +18,475 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerDateDiffFunctionsTranslator : IMethodCallTranslator
     {
-        private readonly Dictionary<MethodInfo, string> _methodInfoDateDiffMapping
-            = new()
+        private readonly Dictionary<MethodInfo, string> _methodInfoDateDiffMapping =
+            new()
             {
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffYear), typeof(DbFunctions), typeof(DateTime), typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffYear),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "year"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffYear), typeof(DbFunctions), typeof(DateTime?), typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffYear),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "year"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffYear), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffYear),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "year"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffYear), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffYear),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "year"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMonth), typeof(DbFunctions), typeof(DateTime), typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMonth),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "month"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMonth), typeof(DbFunctions), typeof(DateTime?), typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMonth),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "month"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMonth), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMonth),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "month"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMonth), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMonth),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "month"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffDay), typeof(DbFunctions), typeof(DateTime), typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffDay),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "day"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffDay), typeof(DbFunctions), typeof(DateTime?), typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffDay),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "day"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffDay), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffDay),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "day"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffDay), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffDay),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "day"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour), typeof(DbFunctions), typeof(DateTime), typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "hour"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour), typeof(DbFunctions), typeof(DateTime?), typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "hour"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "hour"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "hour"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour), typeof(DbFunctions), typeof(TimeSpan), typeof(TimeSpan)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan),
+                        typeof(TimeSpan)
+                    ),
                     "hour"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour), typeof(DbFunctions), typeof(TimeSpan?), typeof(TimeSpan?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffHour),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan?),
+                        typeof(TimeSpan?)
+                    ),
                     "hour"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute), typeof(DbFunctions), typeof(DateTime), typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "minute"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute), typeof(DbFunctions), typeof(DateTime?), typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "minute"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "minute"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "minute"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute), typeof(DbFunctions), typeof(TimeSpan), typeof(TimeSpan)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan),
+                        typeof(TimeSpan)
+                    ),
                     "minute"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute), typeof(DbFunctions), typeof(TimeSpan?), typeof(TimeSpan?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMinute),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan?),
+                        typeof(TimeSpan?)
+                    ),
                     "minute"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond), typeof(DbFunctions), typeof(DateTime), typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "second"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond), typeof(DbFunctions), typeof(DateTime?), typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "second"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "second"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "second"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond), typeof(DbFunctions), typeof(TimeSpan), typeof(TimeSpan)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan),
+                        typeof(TimeSpan)
+                    ),
                     "second"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond), typeof(DbFunctions), typeof(TimeSpan?), typeof(TimeSpan?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffSecond),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan?),
+                        typeof(TimeSpan?)
+                    ),
                     "second"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond), typeof(DbFunctions), typeof(DateTime),
-                        typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "millisecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond), typeof(DbFunctions), typeof(DateTime?),
-                        typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "millisecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "millisecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "millisecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond), typeof(DbFunctions), typeof(TimeSpan),
-                        typeof(TimeSpan)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan),
+                        typeof(TimeSpan)
+                    ),
                     "millisecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond), typeof(DbFunctions), typeof(TimeSpan?),
-                        typeof(TimeSpan?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMillisecond),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan?),
+                        typeof(TimeSpan?)
+                    ),
                     "millisecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond), typeof(DbFunctions), typeof(DateTime),
-                        typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "microsecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond), typeof(DbFunctions), typeof(DateTime?),
-                        typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "microsecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "microsecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "microsecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond), typeof(DbFunctions), typeof(TimeSpan),
-                        typeof(TimeSpan)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan),
+                        typeof(TimeSpan)
+                    ),
                     "microsecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond), typeof(DbFunctions), typeof(TimeSpan?),
-                        typeof(TimeSpan?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffMicrosecond),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan?),
+                        typeof(TimeSpan?)
+                    ),
                     "microsecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond), typeof(DbFunctions), typeof(DateTime), typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "nanosecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond), typeof(DbFunctions), typeof(DateTime?),
-                        typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "nanosecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "nanosecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "nanosecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond), typeof(DbFunctions), typeof(TimeSpan), typeof(TimeSpan)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan),
+                        typeof(TimeSpan)
+                    ),
                     "nanosecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond), typeof(DbFunctions), typeof(TimeSpan?),
-                        typeof(TimeSpan?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffNanosecond),
+                        typeof(DbFunctions),
+                        typeof(TimeSpan?),
+                        typeof(TimeSpan?)
+                    ),
                     "nanosecond"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffWeek), typeof(DbFunctions), typeof(DateTime), typeof(DateTime)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffWeek),
+                        typeof(DbFunctions),
+                        typeof(DateTime),
+                        typeof(DateTime)
+                    ),
                     "week"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffWeek), typeof(DbFunctions), typeof(DateTime?), typeof(DateTime?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffWeek),
+                        typeof(DbFunctions),
+                        typeof(DateTime?),
+                        typeof(DateTime?)
+                    ),
                     "week"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffWeek), typeof(DbFunctions), typeof(DateTimeOffset),
-                        typeof(DateTimeOffset)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffWeek),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset),
+                        typeof(DateTimeOffset)
+                    ),
                     "week"
                 },
                 {
                     typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                        nameof(SqlServerDbFunctionsExtensions.DateDiffWeek), typeof(DbFunctions), typeof(DateTimeOffset?),
-                        typeof(DateTimeOffset?)),
+                        nameof(SqlServerDbFunctionsExtensions.DateDiffWeek),
+                        typeof(DbFunctions),
+                        typeof(DateTimeOffset?),
+                        typeof(DateTimeOffset?)
+                    ),
                     "week"
                 }
             };
@@ -321,8 +499,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqlServerDateDiffFunctionsTranslator(
-            ISqlExpressionFactory sqlExpressionFactory)
+        public SqlServerDateDiffFunctionsTranslator(ISqlExpressionFactory sqlExpressionFactory)
         {
             _sqlExpressionFactory = sqlExpressionFactory;
         }
@@ -337,7 +514,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             if (_methodInfoDateDiffMapping.TryGetValue(method, out var datePart))
             {
@@ -353,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     new[] { _sqlExpressionFactory.Fragment(datePart), startDate, endDate },
                     nullable: true,
                     argumentsPropagateNullability: new[] { false, true, true },
-                    typeof(int));
+                    typeof(int)
+                );
             }
 
             return null;

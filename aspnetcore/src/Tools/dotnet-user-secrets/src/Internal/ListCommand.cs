@@ -16,13 +16,18 @@ internal class ListCommand : ICommand
         command.Description = "Lists all the application secrets";
         command.HelpOption();
 
-        var optJson = command.Option("--json", "Use json output. JSON is wrapped by '//BEGIN' and '//END'",
-            CommandOptionType.NoValue);
+        var optJson = command.Option(
+            "--json",
+            "Use json output. JSON is wrapped by '//BEGIN' and '//END'",
+            CommandOptionType.NoValue
+        );
 
-        command.OnExecute(() =>
-        {
-            options.Command = new ListCommand(optJson.HasValue());
-        });
+        command.OnExecute(
+            () =>
+            {
+                options.Command = new ListCommand(optJson.HasValue());
+            }
+        );
     }
 
     public ListCommand(bool jsonOutput)
@@ -46,7 +51,9 @@ internal class ListCommand : ICommand
         {
             foreach (var secret in context.SecretStore.AsEnumerable())
             {
-                context.Reporter.Output(Resources.FormatMessage_Secret_Value_Format(secret.Key, secret.Value));
+                context.Reporter.Output(
+                    Resources.FormatMessage_Secret_Value_Format(secret.Key, secret.Value)
+                );
             }
         }
     }

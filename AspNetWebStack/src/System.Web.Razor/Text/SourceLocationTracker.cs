@@ -12,10 +12,7 @@ namespace System.Web.Razor.Text
         private int _lineIndex = 0;
         private SourceLocation _currentLocation;
 
-        public SourceLocationTracker()
-            : this(SourceLocation.Zero)
-        {
-        }
+        public SourceLocationTracker() : this(SourceLocation.Zero) { }
 
         public SourceLocationTracker(SourceLocation currentLocation)
         {
@@ -26,10 +23,7 @@ namespace System.Web.Razor.Text
 
         public SourceLocation CurrentLocation
         {
-            get
-            {
-                return _currentLocation;
-            }
+            get { return _currentLocation; }
             set
             {
                 if (_currentLocation != value)
@@ -65,7 +59,10 @@ namespace System.Web.Razor.Text
         {
             _absoluteIndex++;
 
-            if (ParserHelpers.IsNewLine(characterRead) && (characterRead != '\r' || nextCharacter != '\n'))
+            if (
+                ParserHelpers.IsNewLine(characterRead)
+                && (characterRead != '\r' || nextCharacter != '\n')
+            )
             {
                 _lineIndex++;
                 _characterIndex = 0;
@@ -88,9 +85,14 @@ namespace System.Web.Razor.Text
             _currentLocation = new SourceLocation(_absoluteIndex, _lineIndex, _characterIndex);
         }
 
-        public static SourceLocation CalculateNewLocation(SourceLocation lastPosition, string newContent)
+        public static SourceLocation CalculateNewLocation(
+            SourceLocation lastPosition,
+            string newContent
+        )
         {
-            return new SourceLocationTracker(lastPosition).UpdateLocation(newContent).CurrentLocation;
+            return new SourceLocationTracker(lastPosition).UpdateLocation(
+                newContent
+            ).CurrentLocation;
         }
     }
 }

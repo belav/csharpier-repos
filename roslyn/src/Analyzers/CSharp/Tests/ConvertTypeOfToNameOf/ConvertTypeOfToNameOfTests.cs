@@ -11,15 +11,18 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpConvertTypeOfToNameOfDiagnosticAnalyzer,
-        CSharpConvertTypeOfToNameOfCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpConvertTypeOfToNameOfDiagnosticAnalyzer,
+        CSharpConvertTypeOfToNameOfCodeFixProvider
+    >;
 
     public partial class ConvertTypeOfToNameOfTests
     {
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task BasicType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -28,7 +31,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -43,7 +47,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task ClassLibraryType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -52,7 +57,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -67,7 +73,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task ClassLibraryTypeWithUsing()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -78,7 +85,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -95,7 +103,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task NestedCall()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -110,7 +119,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -131,7 +141,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task NotOnVariableContainingType()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 class Test
 {
@@ -148,7 +159,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task PrimitiveType()
         {
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     void Method()
     {
@@ -156,7 +168,8 @@ class Test
     }
 }
 ";
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     void Method()
     {
@@ -170,7 +183,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task PrimitiveTypeWithUsing()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 class Test
 {
@@ -180,7 +194,8 @@ class Test
     }
 }
 ";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Test
 {
@@ -196,7 +211,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task NotOnGenericType()
         {
-            var text = @"class Test<T>
+            var text =
+                @"class Test<T>
 {
     void Method()
     {
@@ -210,7 +226,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task NotOnSimilarStatements()
         {
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     void Method()
     {
@@ -226,7 +243,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
         public async Task NotOnGenericClass()
         {
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     class Goo<T> 
     { 
@@ -247,7 +265,8 @@ class Test
         [WorkItem(54233, "https://github.com/dotnet/roslyn/issues/54233")]
         public async Task NotOnVoid()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     void M()

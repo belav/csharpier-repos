@@ -47,13 +47,25 @@ internal static partial class Interop
             void* context,
             delegate* unmanaged<void*, byte*, IpAddressInfo*, void> ipv4Found,
             delegate* unmanaged<void*, byte*, IpAddressInfo*, uint*, void> ipv6Found,
-            delegate* unmanaged<void*, byte*, LinkLayerAddressInfo*, void> linkLayerFound);
+            delegate* unmanaged<void*, byte*, LinkLayerAddressInfo*, void> linkLayerFound
+        );
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_EnumerateGatewayAddressesForInterface")]
-        public static extern unsafe int EnumerateGatewayAddressesForInterface(void* context, uint interfaceIndex, delegate* unmanaged<void*, IpAddressInfo*, void> onGatewayFound);
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_EnumerateGatewayAddressesForInterface"
+        )]
+        public static extern unsafe int EnumerateGatewayAddressesForInterface(
+            void* context,
+            uint interfaceIndex,
+            delegate* unmanaged<void*, IpAddressInfo*, void> onGatewayFound
+        );
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetNetworkInterfaces")]
-        public static unsafe extern int GetNetworkInterfaces(int* count, NetworkInterfaceInfo** addrs, int* addressCount, IpAddressInfo** aa);
-
+        public static unsafe extern int GetNetworkInterfaces(
+            int* count,
+            NetworkInterfaceInfo** addrs,
+            int* addressCount,
+            IpAddressInfo** aa
+        );
     }
 }

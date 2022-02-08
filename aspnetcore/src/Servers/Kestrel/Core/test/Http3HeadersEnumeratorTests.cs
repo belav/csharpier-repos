@@ -36,8 +36,9 @@ public class Http3HeadersEnumeratorTests
 
         var headers = GetNormalizedHeaders(e);
 
-        Assert.Equal(new[]
-        {
+        Assert.Equal(
+            new[]
+            {
                 CreateHeaderResult(-1, "Date", "Date!"),
                 CreateHeaderResult(-1, "Accept-Ranges", "AcceptRanges!"),
                 CreateHeaderResult(-1, "Age", "1"),
@@ -48,7 +49,9 @@ public class Http3HeadersEnumeratorTests
                 CreateHeaderResult(-1, "Name2", "Value2-1"),
                 CreateHeaderResult(-1, "Name2", "Value2-2"),
                 CreateHeaderResult(-1, "Name3", "Value3"),
-            }, headers);
+            },
+            headers
+        );
     }
 
     [Fact]
@@ -69,14 +72,17 @@ public class Http3HeadersEnumeratorTests
 
         var headers = GetNormalizedHeaders(e);
 
-        Assert.Equal(new[]
-        {
+        Assert.Equal(
+            new[]
+            {
                 CreateHeaderResult(-1, "ETag", "ETag!"),
                 CreateHeaderResult(-1, "Name1", "Value1"),
                 CreateHeaderResult(-1, "Name2", "Value2-1"),
                 CreateHeaderResult(-1, "Name2", "Value2-2"),
                 CreateHeaderResult(-1, "Name3", "Value3"),
-            }, headers);
+            },
+            headers
+        );
     }
 
     [Fact]
@@ -138,17 +144,29 @@ public class Http3HeadersEnumeratorTests
         Assert.False(e.MoveNext());
     }
 
-    private (int QPackStaticTableId, string Name, string Value)[] GetNormalizedHeaders(Http3HeadersEnumerator enumerator)
+    private (int QPackStaticTableId, string Name, string Value)[] GetNormalizedHeaders(
+        Http3HeadersEnumerator enumerator
+    )
     {
         var headers = new List<(int HPackStaticTableId, string Name, string Value)>();
         while (enumerator.MoveNext())
         {
-            headers.Add(CreateHeaderResult(enumerator.QPackStaticTableId, enumerator.Current.Key, enumerator.Current.Value));
+            headers.Add(
+                CreateHeaderResult(
+                    enumerator.QPackStaticTableId,
+                    enumerator.Current.Key,
+                    enumerator.Current.Value
+                )
+            );
         }
         return headers.ToArray();
     }
 
-    private static (int QPackStaticTableId, string Key, string Value) CreateHeaderResult(int hPackStaticTableId, string key, string value)
+    private static (int QPackStaticTableId, string Key, string Value) CreateHeaderResult(
+        int hPackStaticTableId,
+        string key,
+        string value
+    )
     {
         return (hPackStaticTableId, key, value);
     }

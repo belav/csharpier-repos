@@ -24,6 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             IConventionSkipNavigation? inverse,
             IConventionSkipNavigation? oldInverse,
-            IConventionContext<IConventionSkipNavigation> context);
+            IConventionContext<IConventionSkipNavigation> context
+        );
     }
 }

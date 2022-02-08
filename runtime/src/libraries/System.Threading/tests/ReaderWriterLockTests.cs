@@ -8,7 +8,8 @@ namespace System.Threading.Tests
 {
     public static class ReaderWriterLockTests
     {
-        private const int UnexpectedTimeoutMilliseconds = ThreadTestHelpers.UnexpectedTimeoutMilliseconds;
+        private const int UnexpectedTimeoutMilliseconds =
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds;
 
         private const int TimeoutExceptionHResult = unchecked((int)0x800705B4); // ERROR_TIMEOUT
         private const int NotOwnerExceptionHResult = 0x120; // this is not an HResult, see ReaderWriterLock.GetNotOwnerException
@@ -19,19 +20,28 @@ namespace System.Threading.Tests
         {
             var rwl = new ReaderWriterLock();
             Assert.Throws<ArgumentOutOfRangeException>(() => rwl.AcquireReaderLock(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => rwl.AcquireReaderLock(TimeSpan.FromMilliseconds(-2)));
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => rwl.AcquireReaderLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1)));
+                () => rwl.AcquireReaderLock(TimeSpan.FromMilliseconds(-2))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.AcquireReaderLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1))
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => rwl.AcquireWriterLock(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => rwl.AcquireWriterLock(TimeSpan.FromMilliseconds(-2)));
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => rwl.AcquireWriterLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1)));
+                () => rwl.AcquireWriterLock(TimeSpan.FromMilliseconds(-2))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.AcquireWriterLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1))
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => rwl.UpgradeToWriterLock(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => rwl.UpgradeToWriterLock(TimeSpan.FromMilliseconds(-2)));
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => rwl.UpgradeToWriterLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1)));
+                () => rwl.UpgradeToWriterLock(TimeSpan.FromMilliseconds(-2))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.UpgradeToWriterLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1))
+            );
         }
 
         [Fact]
@@ -68,12 +78,15 @@ namespace System.Threading.Tests
             trwl.AcquireWriterLock();
             TestLockCookie restoreWriteLockTlc = trwl.ReleaseLock();
 
-            Action verifyCannotRestore =
-                () =>
-                {
-                    Assert.Throws<SynchronizationLockException>(() => trwl.RestoreLock(restoreReadLockTlc));
-                    Assert.Throws<SynchronizationLockException>(() => trwl.RestoreLock(restoreWriteLockTlc));
-                };
+            Action verifyCannotRestore = () =>
+            {
+                Assert.Throws<SynchronizationLockException>(
+                    () => trwl.RestoreLock(restoreReadLockTlc)
+                );
+                Assert.Throws<SynchronizationLockException>(
+                    () => trwl.RestoreLock(restoreWriteLockTlc)
+                );
+            };
 
             trwl.AcquireReaderLock();
             verifyCannotRestore();
@@ -107,12 +120,14 @@ namespace System.Threading.Tests
             trwl.RestoreLock(tlc, InvalidLockCookieExceptionHResult);
 
             // Lock cookie owned by another thread
-            ThreadTestHelpers.RunTestInBackgroundThread(() =>
-            {
-                TestLockCookie tlc2 = trwl.UpgradeToWriterLock();
-                tlc = tlc2.Clone();
-                trwl.DowngradeFromWriterLock(tlc2);
-            });
+            ThreadTestHelpers.RunTestInBackgroundThread(
+                () =>
+                {
+                    TestLockCookie tlc2 = trwl.UpgradeToWriterLock();
+                    tlc = tlc2.Clone();
+                    trwl.DowngradeFromWriterLock(tlc2);
+                }
+            );
             trwl.AcquireWriterLock();
             trwl.DowngradeFromWriterLock(tlc, InvalidLockCookieExceptionHResult);
             trwl.ReleaseWriterLock();
@@ -122,24 +137,29 @@ namespace System.Threading.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51400", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51400",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void BasicLockTest()
         {
             var trwl = new TestReaderWriterLock();
             TestLockCookie tlc;
             var threadReady = new AutoResetEvent(false);
             var continueThread = new AutoResetEvent(false);
-            Action checkForThreadErrors, waitForThread;
-            Thread t =
-                ThreadTestHelpers.CreateGuardedThread(out checkForThreadErrors, out waitForThread, () =>
+            Action checkForThreadErrors,
+                waitForThread;
+            Thread t = ThreadTestHelpers.CreateGuardedThread(
+                out checkForThreadErrors,
+                out waitForThread,
+                () =>
                 {
                     TestLockCookie tlc2;
-                    Action switchToMainThread =
-                        () =>
-                        {
-                            threadReady.Set();
-                            continueThread.CheckedWait();
-                        };
+                    Action switchToMainThread = () =>
+                    {
+                        threadReady.Set();
+                        continueThread.CheckedWait();
+                    };
 
                     switchToMainThread();
 
@@ -217,29 +237,28 @@ namespace System.Threading.Tests
                         trwl.ReleaseWriterLock();
                         switchToMainThread();
                     }
-                });
+                }
+            );
             t.IsBackground = true;
             t.Start();
 
             Action beginSwitchToBackgroundThread = () => continueThread.Set();
-            Action endSwitchToBackgroundThread =
-                () =>
+            Action endSwitchToBackgroundThread = () =>
+            {
+                try
                 {
-                    try
-                    {
-                        threadReady.CheckedWait();
-                    }
-                    finally
-                    {
-                        checkForThreadErrors();
-                    }
-                };
-            Action switchToBackgroundThread =
-                () =>
+                    threadReady.CheckedWait();
+                }
+                finally
                 {
-                    beginSwitchToBackgroundThread();
-                    endSwitchToBackgroundThread();
-                };
+                    checkForThreadErrors();
+                }
+            };
+            Action switchToBackgroundThread = () =>
+            {
+                beginSwitchToBackgroundThread();
+                endSwitchToBackgroundThread();
+            };
             endSwitchToBackgroundThread();
 
             // Multiple readers from muliple threads
@@ -308,25 +327,23 @@ namespace System.Threading.Tests
             {
                 trwl.AcquireWriterLock();
                 TestLockCookie restoreToWriteLockTlc = trwl.ReleaseLock();
-                Action verifyCannotAcquireLock =
-                    () =>
-                    {
-                        trwl.AcquireReaderLock(TimeoutExceptionHResult);
-                        trwl.AcquireWriterLock(TimeoutExceptionHResult);
-                        trwl.UpgradeToWriterLock(TimeoutExceptionHResult);
-                    };
-                Action verifyCanAcquireLock =
-                    () =>
-                    {
-                        trwl.AcquireReaderLock();
-                        tlc = trwl.UpgradeToWriterLock();
-                        trwl.DowngradeFromWriterLock(tlc);
-                        trwl.ReleaseReaderLock();
-                        trwl.AcquireWriterLock();
-                        trwl.ReleaseWriterLock();
-                        trwl.RestoreLock(restoreToWriteLockTlc.Clone());
-                        trwl.ReleaseWriterLock();
-                    };
+                Action verifyCannotAcquireLock = () =>
+                {
+                    trwl.AcquireReaderLock(TimeoutExceptionHResult);
+                    trwl.AcquireWriterLock(TimeoutExceptionHResult);
+                    trwl.UpgradeToWriterLock(TimeoutExceptionHResult);
+                };
+                Action verifyCanAcquireLock = () =>
+                {
+                    trwl.AcquireReaderLock();
+                    tlc = trwl.UpgradeToWriterLock();
+                    trwl.DowngradeFromWriterLock(tlc);
+                    trwl.ReleaseReaderLock();
+                    trwl.AcquireWriterLock();
+                    trwl.ReleaseWriterLock();
+                    trwl.RestoreLock(restoreToWriteLockTlc.Clone());
+                    trwl.ReleaseWriterLock();
+                };
 
                 // Write lock acquired through AcquireWriteLock is exclusive
                 switchToBackgroundThread(); // AcquireWriterLock
@@ -356,7 +373,8 @@ namespace System.Threading.Tests
         public static void SingleThreadLockOwnerMiscellaneousTest()
         {
             var trwl = new TestReaderWriterLock();
-            TestLockCookie tlc, tlc2;
+            TestLockCookie tlc,
+                tlc2;
 
             // Read lock owner can upgrade to a write lock
             trwl.AcquireReaderLock();
@@ -486,21 +504,31 @@ namespace System.Threading.Tests
             var trwl = new TestReaderWriterLock();
             trwl.AcquireWriterLock();
 
-            Action acquireReleaseReaderLock =
-                () =>
-                {
-                    trwl.AcquireReaderLock();
-                    trwl.ReleaseReaderLock();
-                };
-            Action waitForWaitingReader1, waitForWaitingReader2;
-            Thread waitingReader1 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingReader1, acquireReleaseReaderLock);
-            Thread waitingReader2 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingReader2, acquireReleaseReaderLock);
+            Action acquireReleaseReaderLock = () =>
+            {
+                trwl.AcquireReaderLock();
+                trwl.ReleaseReaderLock();
+            };
+            Action waitForWaitingReader1,
+                waitForWaitingReader2;
+            Thread waitingReader1 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingReader1,
+                acquireReleaseReaderLock
+            );
+            Thread waitingReader2 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingReader2,
+                acquireReleaseReaderLock
+            );
             waitingReader1.IsBackground = true;
             waitingReader2.IsBackground = true;
             waitingReader1.Start();
             waitingReader2.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the write lock releases all waiting readers
             trwl.ReleaseWriterLock();
@@ -511,27 +539,40 @@ namespace System.Threading.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51400", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51400",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void WaitingWritersTest()
         {
             var trwl = new TestReaderWriterLock();
             trwl.AcquireReaderLock();
 
-            Action acquireReleaseWriterLock =
-                () =>
-                {
-                    trwl.AcquireWriterLock();
-                    trwl.ReleaseWriterLock();
-                };
-            Action waitForWaitingWriter1, waitForWaitingWriter2;
-            Thread waitingWriter1 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingWriter1, acquireReleaseWriterLock);
-            Thread waitingWriter2 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingWriter2, acquireReleaseWriterLock);
+            Action acquireReleaseWriterLock = () =>
+            {
+                trwl.AcquireWriterLock();
+                trwl.ReleaseWriterLock();
+            };
+            Action waitForWaitingWriter1,
+                waitForWaitingWriter2;
+            Thread waitingWriter1 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingWriter1,
+                acquireReleaseWriterLock
+            );
+            Thread waitingWriter2 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingWriter2,
+                acquireReleaseWriterLock
+            );
             waitingWriter1.IsBackground = true;
             waitingWriter2.IsBackground = true;
             waitingWriter1.Start();
             waitingWriter2.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingWriter1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() => (waitingWriter2.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the read lock releases a waiting writer, that writer releases its write lock, in turn releasing the
             // other writer
@@ -543,7 +584,10 @@ namespace System.Threading.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51400", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51400",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void ReadersWaitingOnWaitingWriterTest()
         {
             var trwl = new TestReaderWriterLock();
@@ -552,33 +596,47 @@ namespace System.Threading.Tests
             var waitingWriterReady = new AutoResetEvent(false);
             var continueWaitingWriter = new AutoResetEvent(false);
             Action waitForWaitingWriter;
-            Thread waitingWriter =
-                ThreadTestHelpers.CreateGuardedThread(out waitForWaitingWriter, () =>
+            Thread waitingWriter = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingWriter,
+                () =>
                 {
                     trwl.AcquireWriterLock();
                     waitingWriterReady.Set();
                     continueWaitingWriter.CheckedWait();
                     trwl.ReleaseWriterLock();
-                });
+                }
+            );
             waitingWriter.IsBackground = true;
             waitingWriter.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
-            Action acquireReleaseReaderLock =
-                () =>
-                {
-                    trwl.AcquireReaderLock();
-                    trwl.ReleaseReaderLock();
-                };
-            Action waitForWaitingReader1, waitForWaitingReader2;
-            Thread waitingReader1 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingReader1, acquireReleaseReaderLock);
-            Thread waitingReader2 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingReader2, acquireReleaseReaderLock);
+            Action acquireReleaseReaderLock = () =>
+            {
+                trwl.AcquireReaderLock();
+                trwl.ReleaseReaderLock();
+            };
+            Action waitForWaitingReader1,
+                waitForWaitingReader2;
+            Thread waitingReader1 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingReader1,
+                acquireReleaseReaderLock
+            );
+            Thread waitingReader2 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingReader2,
+                acquireReleaseReaderLock
+            );
             waitingReader1.IsBackground = true;
             waitingReader2.IsBackground = true;
             waitingReader1.Start();
             waitingReader2.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the read lock releases the waiting writer
             trwl.ReleaseReaderLock();
@@ -594,7 +652,10 @@ namespace System.Threading.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51400", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51400",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void ReadersWaitingOnWaitingUpgraderTest()
         {
             var trwl = new TestReaderWriterLock();
@@ -603,8 +664,9 @@ namespace System.Threading.Tests
             var waitingUpgraderReady = new AutoResetEvent(false);
             var continueWaitingUpgrader = new AutoResetEvent(false);
             Action waitForWaitingUpgrader;
-            Thread waitingUpgrader =
-                ThreadTestHelpers.CreateGuardedThread(out waitForWaitingUpgrader, () =>
+            Thread waitingUpgrader = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingUpgrader,
+                () =>
                 {
                     trwl.AcquireReaderLock();
                     trwl.UpgradeToWriterLock();
@@ -613,26 +675,39 @@ namespace System.Threading.Tests
                     trwl.ReleaseWriterLock();
                     trwl.VerifyIsReaderLockHeld(false);
                     trwl.VerifyIsWriterLockHeld(false);
-                });
+                }
+            );
             waitingUpgrader.IsBackground = true;
             waitingUpgrader.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingUpgrader.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingUpgrader.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
-            Action acquireReleaseReaderLock =
-                () =>
-                {
-                    trwl.AcquireReaderLock();
-                    trwl.ReleaseReaderLock();
-                };
-            Action waitForWaitingReader1, waitForWaitingReader2;
-            Thread waitingReader1 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingReader1, acquireReleaseReaderLock);
-            Thread waitingReader2 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingReader2, acquireReleaseReaderLock);
+            Action acquireReleaseReaderLock = () =>
+            {
+                trwl.AcquireReaderLock();
+                trwl.ReleaseReaderLock();
+            };
+            Action waitForWaitingReader1,
+                waitForWaitingReader2;
+            Thread waitingReader1 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingReader1,
+                acquireReleaseReaderLock
+            );
+            Thread waitingReader2 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingReader2,
+                acquireReleaseReaderLock
+            );
             waitingReader1.IsBackground = true;
             waitingReader2.IsBackground = true;
             waitingReader1.Start();
             waitingReader2.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the read lock releases the waiting upgrader
             trwl.ReleaseReaderLock();
@@ -648,40 +723,58 @@ namespace System.Threading.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51400", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51400",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void WaitingUpgradersTest()
         {
             var trwl = new TestReaderWriterLock();
             trwl.AcquireReaderLock();
 
             var waitingUpgrader1AcquiredReadLock = new ManualResetEvent(false);
-            Action waitForWaitingUpgrader1, waitForWaitingUpgrader2, waitForWaitingUpgrader3;
-            Thread waitingUpgrader1 =
-                ThreadTestHelpers.CreateGuardedThread(out waitForWaitingUpgrader1, () =>
+            Action waitForWaitingUpgrader1,
+                waitForWaitingUpgrader2,
+                waitForWaitingUpgrader3;
+            Thread waitingUpgrader1 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingUpgrader1,
+                () =>
                 {
                     trwl.AcquireReaderLock();
                     waitingUpgrader1AcquiredReadLock.Set();
                     TestLockCookie tlc = trwl.UpgradeToWriterLock();
                     trwl.DowngradeFromWriterLock(tlc);
                     trwl.ReleaseReaderLock();
-                });
-            Action upgradeDowngradeLock =
-                () =>
-                {
-                    TestLockCookie tlc = trwl.UpgradeToWriterLock();
-                    trwl.DowngradeFromWriterLock(tlc);
-                };
-            Thread waitingUpgrader2 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingUpgrader2, upgradeDowngradeLock);
-            Thread waitingUpgrader3 = ThreadTestHelpers.CreateGuardedThread(out waitForWaitingUpgrader3, upgradeDowngradeLock);
+                }
+            );
+            Action upgradeDowngradeLock = () =>
+            {
+                TestLockCookie tlc = trwl.UpgradeToWriterLock();
+                trwl.DowngradeFromWriterLock(tlc);
+            };
+            Thread waitingUpgrader2 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingUpgrader2,
+                upgradeDowngradeLock
+            );
+            Thread waitingUpgrader3 = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingUpgrader3,
+                upgradeDowngradeLock
+            );
             waitingUpgrader1.IsBackground = true;
             waitingUpgrader2.IsBackground = true;
             waitingUpgrader1.Start();
             waitingUpgrader1AcquiredReadLock.CheckedWait();
             waitingUpgrader2.Start();
             waitingUpgrader3.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingUpgrader1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() => (waitingUpgrader2.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() => (waitingUpgrader3.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingUpgrader1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingUpgrader2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingUpgrader3.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the read lock releases a waiting upgrader, that writer downgrades its write lock, in turn releasing the
             // other upgrader, and so on
@@ -694,21 +787,28 @@ namespace System.Threading.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51400", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51400",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void AtomicRecursiveReaderTest()
         {
             var trwl = new TestReaderWriterLock();
             trwl.AcquireReaderLock();
 
             Action waitForWaitingWriter;
-            Thread waitingWriter =
-                ThreadTestHelpers.CreateGuardedThread(out waitForWaitingWriter, () =>
+            Thread waitingWriter = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingWriter,
+                () =>
                 {
                     trwl.AcquireWriterLock();
                     trwl.ReleaseWriterLock();
-                });
+                }
+            );
             waitingWriter.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Acquire a recursive read lock successfully while there is a waiting writer
             trwl.AcquireReaderLock();
@@ -721,7 +821,10 @@ namespace System.Threading.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51400", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51400",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void AtomicDowngradeTest()
         {
             var trwl = new TestReaderWriterLock();
@@ -729,14 +832,18 @@ namespace System.Threading.Tests
             TestLockCookie tlc = trwl.UpgradeToWriterLock();
 
             Action waitForWaitingWriter;
-            Thread waitingWriter =
-                ThreadTestHelpers.CreateGuardedThread(out waitForWaitingWriter, () =>
+            Thread waitingWriter = ThreadTestHelpers.CreateGuardedThread(
+                out waitForWaitingWriter,
+                () =>
                 {
                     trwl.AcquireWriterLock();
                     trwl.ReleaseWriterLock();
-                });
+                }
+            );
             waitingWriter.Start();
-            ThreadTestHelpers.WaitForCondition(() => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Downgrade to a read lock successfully while there is a waiting writer
             trwl.DowngradeFromWriterLock(tlc);
@@ -771,7 +878,6 @@ namespace System.Threading.Tests
 
             Assert.Throws<OverflowException>(() => rwl.AcquireWriterLock(0));
         }
-
 
         private class TestReaderWriterLock : IDisposable
         {
@@ -810,7 +916,8 @@ namespace System.Threading.Tests
                 Dictionary<TestReaderWriterLock, int> threadReaderLevels = t_readerLevels;
                 if (threadReaderLevels == null)
                 {
-                    t_readerLevels = threadReaderLevels = new Dictionary<TestReaderWriterLock, int>();
+                    t_readerLevels = threadReaderLevels =
+                        new Dictionary<TestReaderWriterLock, int>();
                 }
                 return threadReaderLevels;
             }
@@ -914,7 +1021,10 @@ namespace System.Threading.Tests
                 Assert.Equal(0, _pendingStateChanges);
                 Assert.False(ThreadReaderLevel != 0 && _writerLevel != 0);
                 Assert.Equal(ThreadReaderLevel != 0, _rwl.IsReaderLockHeld);
-                Assert.Equal(_writerThreadID == Environment.CurrentManagedThreadId, _rwl.IsWriterLockHeld);
+                Assert.Equal(
+                    _writerThreadID == Environment.CurrentManagedThreadId,
+                    _rwl.IsWriterLockHeld
+                );
                 Assert.Equal(_writerSeqNum, _rwl.WriterSeqNum);
             }
 
@@ -927,7 +1037,8 @@ namespace System.Threading.Tests
                 int expectedFailureHResult,
                 bool isBlockingOperation,
                 Action rwlAction,
-                Action makeStateChangesOnSuccess)
+                Action makeStateChangesOnSuccess
+            )
             {
                 // Blocking operations are inherently nondeterministic in the order in which they are performed, so record a
                 // pending change before performing the operation. Since the state changes following some blocking operations
@@ -1021,7 +1132,8 @@ namespace System.Threading.Tests
             {
                 PerformLockAction(
                     expectedFailureHResult,
-                    true /* isBlockingOperation */,
+                    true /* isBlockingOperation */
+                    ,
                     () => _rwl.AcquireReaderLock(GetTimeoutMilliseconds(expectedFailureHResult)),
                     () =>
                     {
@@ -1035,14 +1147,16 @@ namespace System.Threading.Tests
                         {
                             ++ThreadReaderLevel;
                         }
-                    });
+                    }
+                );
             }
 
             public void AcquireWriterLock(int expectedFailureHResult = 0)
             {
                 PerformLockAction(
                     expectedFailureHResult,
-                    true /* isBlockingOperation */,
+                    true /* isBlockingOperation */
+                    ,
                     () => _rwl.AcquireWriterLock(GetTimeoutMilliseconds(expectedFailureHResult)),
                     () =>
                     {
@@ -1057,14 +1171,16 @@ namespace System.Threading.Tests
                             Assert.Equal(Environment.CurrentManagedThreadId, _writerThreadID);
                         }
                         ++_writerLevel;
-                    });
+                    }
+                );
             }
 
             public void ReleaseReaderLock(int expectedFailureHResult = 0)
             {
                 PerformLockAction(
                     expectedFailureHResult,
-                    false /* isBlockingOperation */,
+                    false /* isBlockingOperation */
+                    ,
                     () => _rwl.ReleaseReaderLock(),
                     () =>
                     {
@@ -1083,14 +1199,16 @@ namespace System.Threading.Tests
                             Assert.NotEqual(0, ThreadReaderLevel);
                             --ThreadReaderLevel;
                         }
-                    });
+                    }
+                );
             }
 
             public void ReleaseWriterLock(int expectedFailureHResult = 0)
             {
                 PerformLockAction(
                     expectedFailureHResult,
-                    false /* isBlockingOperation */,
+                    false /* isBlockingOperation */
+                    ,
                     () => _rwl.ReleaseWriterLock(),
                     () =>
                     {
@@ -1101,7 +1219,8 @@ namespace System.Threading.Tests
                         {
                             _writerThreadID = InvalidThreadID;
                         }
-                    });
+                    }
+                );
             }
 
             public TestLockCookie UpgradeToWriterLock(int expectedFailureHResult = 0)
@@ -1110,8 +1229,12 @@ namespace System.Threading.Tests
                 LockCookie lockCookie = default(LockCookie);
                 PerformLockAction(
                     expectedFailureHResult,
-                    true /* isBlockingOperation */,
-                    () => lockCookie = _rwl.UpgradeToWriterLock(GetTimeoutMilliseconds(expectedFailureHResult)),
+                    true /* isBlockingOperation */
+                    ,
+                    () =>
+                        lockCookie = _rwl.UpgradeToWriterLock(
+                            GetTimeoutMilliseconds(expectedFailureHResult)
+                        ),
                     () =>
                     {
                         tlc = new TestLockCookie()
@@ -1133,7 +1256,8 @@ namespace System.Threading.Tests
                             Assert.Equal(Environment.CurrentManagedThreadId, _writerThreadID);
                         }
                         ++_writerLevel;
-                    });
+                    }
+                );
                 return tlc;
             }
 
@@ -1143,7 +1267,8 @@ namespace System.Threading.Tests
 
                 PerformLockAction(
                     expectedFailureHResult,
-                    false /* isBlockingOperation */,
+                    false /* isBlockingOperation */
+                    ,
                     () => _rwl.DowngradeFromWriterLock(ref tlc._lockCookie),
                     () =>
                     {
@@ -1165,7 +1290,8 @@ namespace System.Threading.Tests
                             Assert.True(ThreadReaderLevel == 0);
                             ThreadReaderLevel = tlc._readerLevel;
                         }
-                    });
+                    }
+                );
             }
 
             public TestLockCookie ReleaseLock()
@@ -1173,8 +1299,10 @@ namespace System.Threading.Tests
                 TestLockCookie tlc = null;
                 LockCookie lockCookie = default(LockCookie);
                 PerformLockAction(
-                    0 /* expectedFailureHResult */,
-                    false /* isBlockingOperation */,
+                    0 /* expectedFailureHResult */
+                    ,
+                    false /* isBlockingOperation */
+                    ,
                     () => lockCookie = _rwl.ReleaseLock(),
                     () =>
                     {
@@ -1192,7 +1320,8 @@ namespace System.Threading.Tests
                         ThreadReaderLevel = 0;
                         _writerLevel = 0;
                         _writerThreadID = InvalidThreadID;
-                    });
+                    }
+                );
                 return tlc;
             }
 
@@ -1203,7 +1332,8 @@ namespace System.Threading.Tests
 
                 PerformLockAction(
                     expectedFailureHResult,
-                    true /* isBlockingOperation */,
+                    true /* isBlockingOperation */
+                    ,
                     () => _rwl.RestoreLock(ref tlc._lockCookie),
                     () =>
                     {
@@ -1218,7 +1348,8 @@ namespace System.Threading.Tests
                             _writerThreadID = Environment.CurrentManagedThreadId;
                             ++_writerSeqNum;
                         }
-                    });
+                    }
+                );
             }
         }
 

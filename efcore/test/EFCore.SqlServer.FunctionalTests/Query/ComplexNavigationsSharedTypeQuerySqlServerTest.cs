@@ -6,13 +6,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ComplexNavigationsSharedTypeQuerySqlServerTest : ComplexNavigationsSharedTypeQueryRelationalTestBase<
-        ComplexNavigationsSharedTypeQuerySqlServerFixture>
+    public class ComplexNavigationsSharedTypeQuerySqlServerTest
+        : ComplexNavigationsSharedTypeQueryRelationalTestBase<ComplexNavigationsSharedTypeQuerySqlServerFixture>
     {
         public ComplexNavigationsSharedTypeQuerySqlServerTest(
             ComplexNavigationsSharedTypeQuerySqlServerFixture fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -32,7 +32,8 @@ LEFT JOIN (
     WHERE ([l0].[OneToOne_Required_PK_Date] IS NOT NULL AND [l0].[Level1_Required_Id] IS NOT NULL) AND [l0].[OneToMany_Required_Inverse2Id] IS NOT NULL
 ) AS [t] ON [l].[Id] = CASE
     WHEN ([t].[OneToOne_Required_PK_Date] IS NOT NULL AND [t].[Level1_Required_Id] IS NOT NULL) AND [t].[OneToMany_Required_Inverse2Id] IS NOT NULL THEN [t].[Id]
-END");
+END"
+            );
         }
 
         public override async Task Simple_level1(bool async)
@@ -41,7 +42,8 @@ END");
 
             AssertSql(
                 @"SELECT [l].[Id], [l].[Date], [l].[Name]
-FROM [Level1] AS [l]");
+FROM [Level1] AS [l]"
+            );
         }
 
         public override async Task Simple_level1_level2_include(bool async)
@@ -72,7 +74,8 @@ LEFT JOIN (
     WHEN ([t].[OneToOne_Required_PK_Date] IS NOT NULL AND [t].[Level1_Required_Id] IS NOT NULL) AND [t].[OneToMany_Required_Inverse2Id] IS NOT NULL THEN [t].[Id]
 END = CASE
     WHEN [t0].[Level2_Required_Id] IS NOT NULL AND [t0].[OneToMany_Required_Inverse3Id] IS NOT NULL THEN [t0].[Id]
-END");
+END"
+            );
         }
 
         public override async Task Simple_level1_level2_GroupBy_Count(bool async)
@@ -105,7 +108,8 @@ LEFT JOIN (
 END = CASE
     WHEN [t0].[Level2_Required_Id] IS NOT NULL AND [t0].[OneToMany_Required_Inverse3Id] IS NOT NULL THEN [t0].[Id]
 END
-GROUP BY [t0].[Level3_Name]");
+GROUP BY [t0].[Level3_Name]"
+            );
         }
 
         public override async Task Simple_level1_level2_GroupBy_Having_Count(bool async)
@@ -149,7 +153,8 @@ END
 GROUP BY [t0].[Level3_Name]
 HAVING MIN(COALESCE(CASE
     WHEN ([t2].[OneToOne_Required_PK_Date] IS NOT NULL AND [t2].[Level1_Required_Id] IS NOT NULL) AND [t2].[OneToMany_Required_Inverse2Id] IS NOT NULL THEN [t2].[Id]
-END, 0)) > 0");
+END, 0)) > 0"
+            );
         }
 
         public override async Task Simple_level1_level2_level3_include(bool async)
@@ -201,7 +206,8 @@ LEFT JOIN (
     WHEN [t0].[Level2_Required_Id] IS NOT NULL AND [t0].[OneToMany_Required_Inverse3Id] IS NOT NULL THEN [t0].[Id]
 END = CASE
     WHEN [t2].[Level3_Required_Id] IS NOT NULL AND [t2].[OneToMany_Required_Inverse4Id] IS NOT NULL THEN [t2].[Id]
-END");
+END"
+            );
         }
 
         public override async Task Nested_group_join_with_take(bool async)
@@ -245,10 +251,13 @@ LEFT JOIN (
 ) AS [t2] ON CASE
     WHEN ([t1].[OneToOne_Required_PK_Date] IS NOT NULL AND [t1].[Level1_Required_Id] IS NOT NULL) AND [t1].[OneToMany_Required_Inverse2Id] IS NOT NULL THEN [t1].[Id00]
 END = [t2].[Level1_Optional_Id]
-ORDER BY [t1].[Id]");
+ORDER BY [t1].[Id]"
+            );
         }
 
-        public override async Task Explicit_GroupJoin_in_subquery_with_unrelated_projection2(bool async)
+        public override async Task Explicit_GroupJoin_in_subquery_with_unrelated_projection2(
+            bool async
+        )
         {
             await base.Explicit_GroupJoin_in_subquery_with_unrelated_projection2(async);
 
@@ -271,10 +280,13 @@ FROM (
         WHERE ([t].[OneToOne_Required_PK_Date] IS NOT NULL AND [t].[Level1_Required_Id] IS NOT NULL) AND [t].[OneToMany_Required_Inverse2Id] IS NOT NULL
     ) AS [t0] ON [l].[Id] = [t0].[Level1_Optional_Id]
     WHERE ([t0].[Level2_Name] <> N'Foo') OR [t0].[Level2_Name] IS NULL
-) AS [t1]");
+) AS [t1]"
+            );
         }
 
-        public override async Task Result_operator_nav_prop_reference_optional_via_DefaultIfEmpty(bool async)
+        public override async Task Result_operator_nav_prop_reference_optional_via_DefaultIfEmpty(
+            bool async
+        )
         {
             await base.Result_operator_nav_prop_reference_optional_via_DefaultIfEmpty(async);
 
@@ -296,10 +308,11 @@ LEFT JOIN (
         WHEN ([t].[OneToOne_Required_PK_Date] IS NOT NULL AND [t].[Level1_Required_Id] IS NOT NULL) AND [t].[OneToMany_Required_Inverse2Id] IS NOT NULL THEN [t].[Id]
     END
     WHERE ([t].[OneToOne_Required_PK_Date] IS NOT NULL AND [t].[Level1_Required_Id] IS NOT NULL) AND [t].[OneToMany_Required_Inverse2Id] IS NOT NULL
-) AS [t0] ON [l].[Id] = [t0].[Level1_Optional_Id]");
+) AS [t0] ON [l].[Id] = [t0].[Level1_Optional_Id]"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
     }
 }

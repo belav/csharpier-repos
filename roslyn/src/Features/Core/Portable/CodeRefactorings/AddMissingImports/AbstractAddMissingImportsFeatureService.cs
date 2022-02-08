@@ -23,24 +23,40 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddMissingImports
 {
-    internal abstract class AbstractAddMissingImportsFeatureService : IAddMissingImportsFeatureService
+    internal abstract class AbstractAddMissingImportsFeatureService
+        : IAddMissingImportsFeatureService
     {
         protected abstract ImmutableArray<string> FixableDiagnosticIds { get; }
 
         /// <inheritdoc/>
-        public async Task<Document> AddMissingImportsAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken)
+        public async Task<Document> AddMissingImportsAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        )
         {
-            var analysisResult = await AnalyzeAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
-            return await AddMissingImportsAsync(document, analysisResult, cancellationToken).ConfigureAwait(false);
+            var analysisResult = await AnalyzeAsync(document, textSpan, cancellationToken)
+                .ConfigureAwait(false);
+            return await AddMissingImportsAsync(document, analysisResult, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-        public async Task<Document> AddMissingImportsAsync(Document document, AddMissingImportsAnalysisResult analysisResult, CancellationToken cancellationToken)
+        public async Task<Document> AddMissingImportsAsync(
+            Document document,
+            AddMissingImportsAnalysisResult analysisResult,
+            CancellationToken cancellationToken
+        )
         {
             if (analysisResult.CanAddMissingImports)
             {
                 // Apply those fixes to the document.
-                var newDocument = await ApplyFixesAsync(document, analysisResult.AddImportFixData, cancellationToken).ConfigureAwait(false);
+                var newDocument = await ApplyFixesAsync(
+                        document,
+                        analysisResult.AddImportFixData,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return newDocument;
             }
 
@@ -48,35 +64,64 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         }
 
         /// <inheritdoc/>
-        public async Task<AddMissingImportsAnalysisResult> AnalyzeAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken)
+        public async Task<AddMissingImportsAnalysisResult> AnalyzeAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        )
         {
             // Get the diagnostics that indicate a missing import.
-            var addImportFeatureService = document.GetRequiredLanguageService<IAddImportFeatureService>();
+            var addImportFeatureService =
+                document.GetRequiredLanguageService<IAddImportFeatureService>();
 
             var solution = document.Project.Solution;
-            var symbolSearchService = solution.Workspace.Services.GetRequiredService<ISymbolSearchService>();
+            var symbolSearchService =
+                solution.Workspace.Services.GetRequiredService<ISymbolSearchService>();
 
             // Since we are not currently considering NuGet packages, pass an empty array
             var packageSources = ImmutableArray<PackageSource>.Empty;
 
-            var unambiguousFixes = await addImportFeatureService.GetUniqueFixesAsync(
-                document, textSpan, FixableDiagnosticIds, symbolSearchService,
-                searchReferenceAssemblies: true, packageSources, cancellationToken).ConfigureAwait(false);
+            var unambiguousFixes = await addImportFeatureService
+                .GetUniqueFixesAsync(
+                    document,
+                    textSpan,
+                    FixableDiagnosticIds,
+                    symbolSearchService,
+                    searchReferenceAssemblies: true,
+                    packageSources,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // We do not want to add project or framework references without the user's input, so filter those out.
-            var usableFixes = unambiguousFixes.WhereAsArray(fixData => DoesNotAddReference(fixData, document.Project.Id));
+            var usableFixes = unambiguousFixes.WhereAsArray(
+                fixData => DoesNotAddReference(fixData, document.Project.Id)
+            );
 
             return new AddMissingImportsAnalysisResult(usableFixes);
         }
 
-        private static bool DoesNotAddReference(AddImportFixData fixData, ProjectId currentProjectId)
+        private static bool DoesNotAddReference(
+            AddImportFixData fixData,
+            ProjectId currentProjectId
+        )
         {
-            return (fixData.ProjectReferenceToAdd is null || fixData.ProjectReferenceToAdd == currentProjectId)
-                && (fixData.PortableExecutableReferenceProjectId is null || fixData.PortableExecutableReferenceProjectId == currentProjectId)
+            return (
+                    fixData.ProjectReferenceToAdd is null
+                    || fixData.ProjectReferenceToAdd == currentProjectId
+                )
+                && (
+                    fixData.PortableExecutableReferenceProjectId is null
+                    || fixData.PortableExecutableReferenceProjectId == currentProjectId
+                )
                 && string.IsNullOrEmpty(fixData.AssemblyReferenceAssemblyName);
         }
 
-        private static async Task<Document> ApplyFixesAsync(Document document, ImmutableArray<AddImportFixData> fixes, CancellationToken cancellationToken)
+        private static async Task<Document> ApplyFixesAsync(
+            Document document,
+            ImmutableArray<AddImportFixData> fixes,
+            CancellationToken cancellationToken
+        )
         {
             if (fixes.IsEmpty)
             {
@@ -85,14 +130,29 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
             var solution = document.Project.Solution;
             var progressTracker = new ProgressTracker();
-            var textDiffingService = solution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
-            var packageInstallerService = solution.Workspace.Services.GetService<IPackageInstallerService>();
+            var textDiffingService =
+                solution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            var packageInstallerService =
+                solution.Workspace.Services.GetService<IPackageInstallerService>();
             var addImportService = document.GetRequiredLanguageService<IAddImportFeatureService>();
 
             // Do not limit the results since we plan to fix all the reported issues.
-            var codeActions = addImportService.GetCodeActionsForFixes(document, fixes, packageInstallerService, maxResults: int.MaxValue);
+            var codeActions = addImportService.GetCodeActionsForFixes(
+                document,
+                fixes,
+                packageInstallerService,
+                maxResults: int.MaxValue
+            );
             var getChangesTasks = codeActions.Select(
-                action => GetChangesForCodeActionAsync(document, action, progressTracker, textDiffingService, cancellationToken));
+                action =>
+                    GetChangesForCodeActionAsync(
+                        document,
+                        action,
+                        progressTracker,
+                        textDiffingService,
+                        cancellationToken
+                    )
+            );
 
             // Using Sets allows us to accumulate only the distinct changes.
             var allTextChanges = new HashSet<TextChange>();
@@ -118,14 +178,21 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             // badly merged final document. Alphabetize the new imports, this will not
             // change the insertion point but will give a more correct result. The user
             // may still need to use organize imports afterwards.
-            var orderedTextInserts = allTextChanges.Where(change => change.Span.IsEmpty)
+            var orderedTextInserts = allTextChanges
+                .Where(change => change.Span.IsEmpty)
                 .OrderBy(change => change.NewText);
 
             // Capture each location where we are inserting imports as well as the total
             // length of the text we are inserting so that we can format the span afterwards.
             var insertSpans = allTextChanges
                 .GroupBy(change => change.Span)
-                .Select(changes => new TextSpan(changes.Key.Start, changes.Sum(change => change.NewText!.Length)));
+                .Select(
+                    changes =>
+                        new TextSpan(
+                            changes.Key.Start,
+                            changes.Sum(change => change.NewText!.Length)
+                        )
+                );
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var newText = text.WithChanges(orderedTextInserts);
@@ -135,10 +202,15 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             // newlines are generated between each import because the fix is expecting to
             // separate the imports from the rest of the code file. We need to format the
             // imports to remove these extra newlines.
-            return await CleanUpNewLinesAsync(newDocument, insertSpans, cancellationToken).ConfigureAwait(false);
+            return await CleanUpNewLinesAsync(newDocument, insertSpans, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        private static async Task<Document> CleanUpNewLinesAsync(Document document, IEnumerable<TextSpan> insertSpans, CancellationToken cancellationToken)
+        private static async Task<Document> CleanUpNewLinesAsync(
+            Document document,
+            IEnumerable<TextSpan> insertSpans,
+            CancellationToken cancellationToken
+        )
         {
             var languageFormatter = document.GetRequiredLanguageService<ISyntaxFormattingService>();
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
@@ -150,21 +222,48 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             // to separate the import section from the other content.
             foreach (var insertSpan in insertSpans)
             {
-                newDocument = await CleanUpNewLinesAsync(newDocument, insertSpan, languageFormatter, options, cancellationToken).ConfigureAwait(false);
+                newDocument = await CleanUpNewLinesAsync(
+                        newDocument,
+                        insertSpan,
+                        languageFormatter,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             return newDocument;
         }
 
-        private static async Task<Document> CleanUpNewLinesAsync(Document document, TextSpan insertSpan, ISyntaxFormattingService languageFormatter, OptionSet optionSet, CancellationToken cancellationToken)
+        private static async Task<Document> CleanUpNewLinesAsync(
+            Document document,
+            TextSpan insertSpan,
+            ISyntaxFormattingService languageFormatter,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var optionService = document.Project.Solution.Workspace.Services.GetRequiredService<IOptionService>();
-            var shouldUseFormattingSpanCollapse = optionSet.GetOption(FormattingBehaviorOptions.AllowDisjointSpanMerging);
+            var optionService =
+                document.Project.Solution.Workspace.Services.GetRequiredService<IOptionService>();
+            var shouldUseFormattingSpanCollapse = optionSet.GetOption(
+                FormattingBehaviorOptions.AllowDisjointSpanMerging
+            );
             var options = optionSet.AsAnalyzerConfigOptions(optionService, root.Language);
 
-            var textChanges = languageFormatter.Format(root, new[] { insertSpan }, shouldUseFormattingSpanCollapse, options, new[] { new CleanUpNewLinesFormatter(text) }, cancellationToken).GetTextChanges(cancellationToken);
+            var textChanges = languageFormatter
+                .Format(
+                    root,
+                    new[] { insertSpan },
+                    shouldUseFormattingSpanCollapse,
+                    options,
+                    new[] { new CleanUpNewLinesFormatter(text) },
+                    cancellationToken
+                )
+                .GetTextChanges(cancellationToken);
 
             // If there are no changes then, do less work.
             if (textChanges.Count == 0)
@@ -190,42 +289,58 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             CodeAction codeAction,
             ProgressTracker progressTracker,
             IDocumentTextDifferencingService textDiffingService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            // CodeAction.GetChangedSolutionAsync is only implemented for code actions that can fully compute the new	            
-            // solution without deferred computation or taking a dependency on the main thread. In other cases, the	                
-            // implementation of GetChangedSolutionAsync will throw an exception and the code action application is	            
-            // expected to apply the changes by executing the operations in GetOperationsAsync (which may have other	
-            // side effects). This code cannot assume the input CodeAction supports GetChangedSolutionAsync, so it first	
-            // attempts to apply text changes obtained from GetOperationsAsync. Two forms are supported:	
-            //	
-            // 1. GetOperationsAsync returns an empty list of operations (i.e. no changes are required)	
-            // 2. GetOperationsAsync returns a list of operations, where the first change is an ApplyChangesOperation to	
-            //    change the text in the solution, and any remaining changes are deferred computation changes.	
-            //	
-            // If GetOperationsAsync does not adhere to one of these patterns, the code falls back to calling	
-            // GetChangedSolutionAsync since there is no clear way to apply the changes otherwise.	
-            var operations = await codeAction.GetOperationsAsync(cancellationToken).ConfigureAwait(false);
+            // CodeAction.GetChangedSolutionAsync is only implemented for code actions that can fully compute the new
+            // solution without deferred computation or taking a dependency on the main thread. In other cases, the
+            // implementation of GetChangedSolutionAsync will throw an exception and the code action application is
+            // expected to apply the changes by executing the operations in GetOperationsAsync (which may have other
+            // side effects). This code cannot assume the input CodeAction supports GetChangedSolutionAsync, so it first
+            // attempts to apply text changes obtained from GetOperationsAsync. Two forms are supported:
+            //
+            // 1. GetOperationsAsync returns an empty list of operations (i.e. no changes are required)
+            // 2. GetOperationsAsync returns a list of operations, where the first change is an ApplyChangesOperation to
+            //    change the text in the solution, and any remaining changes are deferred computation changes.
+            //
+            // If GetOperationsAsync does not adhere to one of these patterns, the code falls back to calling
+            // GetChangedSolutionAsync since there is no clear way to apply the changes otherwise.
+            var operations = await codeAction
+                .GetOperationsAsync(cancellationToken)
+                .ConfigureAwait(false);
             Solution newSolution;
             if (operations.Length == 0)
             {
                 newSolution = document.Project.Solution;
             }
-            else if (operations.Length == 1 && operations[0] is ApplyChangesOperation applyChangesOperation)
+            else if (
+                operations.Length == 1
+                && operations[0] is ApplyChangesOperation applyChangesOperation
+            )
             {
                 newSolution = applyChangesOperation.ChangedSolution;
             }
             else
             {
-                newSolution = await codeAction.GetRequiredChangedSolutionAsync(
-                    progressTracker, cancellationToken: cancellationToken).ConfigureAwait(false);
+                newSolution = await codeAction
+                    .GetRequiredChangedSolutionAsync(
+                        progressTracker,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             var newDocument = newSolution.GetRequiredDocument(document.Id);
 
             // Use Line differencing to reduce the possibility of changes that overwrite existing code.
-            var textChanges = await textDiffingService.GetTextChangesAsync(
-                document, newDocument, TextDifferenceTypes.Line, cancellationToken).ConfigureAwait(false);
+            var textChanges = await textDiffingService
+                .GetTextChangesAsync(
+                    document,
+                    newDocument,
+                    TextDifferenceTypes.Line,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var projectChanges = newDocument.Project.GetChanges(document.Project);
 
             return (projectChanges, textChanges);
@@ -235,10 +350,13 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         {
             private readonly SourceText _text;
 
-            public CleanUpNewLinesFormatter(SourceText text)
-                => _text = text;
+            public CleanUpNewLinesFormatter(SourceText text) => _text = text;
 
-            public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+            public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
+                in SyntaxToken previousToken,
+                in SyntaxToken currentToken,
+                in NextGetAdjustNewLinesOperation nextOperation
+            )
             {
                 // Since we know the general shape of these new import statements, we simply look for where
                 // tokens are not on the same line and force them to only be separated by a single newline.
@@ -248,7 +366,10 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
                 if (previousLine != currentLine)
                 {
-                    return FormattingOperations.CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.ForceLines);
+                    return FormattingOperations.CreateAdjustNewLinesOperation(
+                        1,
+                        AdjustNewLinesOption.ForceLines
+                    );
                 }
 
                 return null;

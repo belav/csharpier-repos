@@ -24,7 +24,7 @@ namespace System.Net.Http
         private HttpContent _parent;
 
         /// <summary>
-        /// Gets the <see cref="HttpContent"/> instance that has been marked as the <c>root</c> content in the 
+        /// Gets the <see cref="HttpContent"/> instance that has been marked as the <c>root</c> content in the
         /// MIME multipart related message using the <c>start</c> parameter. If no <c>start</c> parameter is
         /// present then pick the first of the children.
         /// </summary>
@@ -67,13 +67,19 @@ namespace System.Net.Http
         /// child HttpContent with a matching Content-ID header field.
         /// </summary>
         /// <returns>The matching child or null if none found.</returns>
-        private static HttpContent FindRootContent(HttpContent parent, IEnumerable<HttpContent> children)
+        private static HttpContent FindRootContent(
+            HttpContent parent,
+            IEnumerable<HttpContent> children
+        )
         {
             Contract.Assert(children != null);
 
-            // Find 'start' parameter from parent content type. The value is used 
+            // Find 'start' parameter from parent content type. The value is used
             // to identify the MIME body with the corresponding Content-ID header value.
-            NameValueHeaderValue startNameValue = FindMultipartRelatedParameter(parent, StartParameter);
+            NameValueHeaderValue startNameValue = FindMultipartRelatedParameter(
+                parent,
+                StartParameter
+            );
             if (startNameValue == null)
             {
                 // If we didn't find a "start" parameter then take the first child.
@@ -92,18 +98,23 @@ namespace System.Net.Http
                         return String.Equals(
                             FormattingUtilities.UnquoteToken(values.ElementAt(0)),
                             startValue,
-                            StringComparison.OrdinalIgnoreCase);
+                            StringComparison.OrdinalIgnoreCase
+                        );
                     }
 
                     return false;
-                });
+                }
+            );
         }
 
         /// <summary>
         /// Looks for a parameter in the <see cref="MediaTypeHeaderValue"/>.
         /// </summary>
         /// <returns>The matching parameter or null if none found.</returns>
-        private static NameValueHeaderValue FindMultipartRelatedParameter(HttpContent content, string parameterName)
+        private static NameValueHeaderValue FindMultipartRelatedParameter(
+            HttpContent content,
+            string parameterName
+        )
         {
             // If no parent then we are done
             if (content == null)
@@ -119,7 +130,9 @@ namespace System.Net.Http
             }
 
             // Look for parameter
-            return parentContentType.Parameters.FirstOrDefault(nvp => String.Equals(nvp.Name, parameterName, StringComparison.OrdinalIgnoreCase));
+            return parentContentType.Parameters.FirstOrDefault(
+                nvp => String.Equals(nvp.Name, parameterName, StringComparison.OrdinalIgnoreCase)
+            );
         }
     }
 }

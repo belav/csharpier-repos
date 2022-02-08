@@ -18,16 +18,18 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 /// An implementation of <see cref="IBindingMetadataProvider"/> and <see cref="IDisplayMetadataProvider"/> for
 /// the System.ComponentModel.DataAnnotations attribute classes.
 /// </summary>
-internal class DataAnnotationsMetadataProvider :
-    IBindingMetadataProvider,
-    IDisplayMetadataProvider,
-    IValidationMetadataProvider
+internal class DataAnnotationsMetadataProvider
+    : IBindingMetadataProvider,
+      IDisplayMetadataProvider,
+      IValidationMetadataProvider
 {
     // The [Nullable] attribute is synthesized by the compiler. It's best to just compare the type name.
-    private const string NullableAttributeFullTypeName = "System.Runtime.CompilerServices.NullableAttribute";
+    private const string NullableAttributeFullTypeName =
+        "System.Runtime.CompilerServices.NullableAttribute";
     private const string NullableFlagsFieldName = "NullableFlags";
 
-    private const string NullableContextAttributeFullName = "System.Runtime.CompilerServices.NullableContextAttribute";
+    private const string NullableContextAttributeFullName =
+        "System.Runtime.CompilerServices.NullableContextAttribute";
     private const string NullableContextFlagsFieldName = "Flag";
 
     private readonly IStringLocalizerFactory? _stringLocalizerFactory;
@@ -37,7 +39,8 @@ internal class DataAnnotationsMetadataProvider :
     public DataAnnotationsMetadataProvider(
         MvcOptions options,
         IOptions<MvcDataAnnotationsLocalizationOptions> localizationOptions,
-        IStringLocalizerFactory? stringLocalizerFactory)
+        IStringLocalizerFactory? stringLocalizerFactory
+    )
     {
         if (options == null)
         {
@@ -102,7 +105,8 @@ internal class DataAnnotationsMetadataProvider :
         // ConvertEmptyStringToNull
         if (displayFormatAttribute != null)
         {
-            displayMetadata.ConvertEmptyStringToNull = displayFormatAttribute.ConvertEmptyStringToNull;
+            displayMetadata.ConvertEmptyStringToNull =
+                displayFormatAttribute.ConvertEmptyStringToNull;
         }
 
         // DataTypeName
@@ -117,17 +121,25 @@ internal class DataAnnotationsMetadataProvider :
 
         var containerType = context.Key.ContainerType ?? context.Key.ModelType;
         IStringLocalizer? localizer = null;
-        if (_stringLocalizerFactory != null && _localizationOptions.DataAnnotationLocalizerProvider != null)
+        if (
+            _stringLocalizerFactory != null
+            && _localizationOptions.DataAnnotationLocalizerProvider != null
+        )
         {
-            localizer = _localizationOptions.DataAnnotationLocalizerProvider(containerType, _stringLocalizerFactory);
+            localizer = _localizationOptions.DataAnnotationLocalizerProvider(
+                containerType,
+                _stringLocalizerFactory
+            );
         }
 
         // Description
         if (displayAttribute != null)
         {
-            if (localizer != null &&
-                !string.IsNullOrEmpty(displayAttribute.Description) &&
-                displayAttribute.ResourceType == null)
+            if (
+                localizer != null
+                && !string.IsNullOrEmpty(displayAttribute.Description)
+                && displayAttribute.ResourceType == null
+            )
             {
                 displayMetadata.Description = () => localizer[displayAttribute.Description];
             }
@@ -147,9 +159,11 @@ internal class DataAnnotationsMetadataProvider :
         // DisplayAttribute has precedence over DisplayNameAttribute.
         if (displayAttribute?.GetName() != null)
         {
-            if (localizer != null &&
-                !string.IsNullOrEmpty(displayAttribute.Name) &&
-                displayAttribute.ResourceType == null)
+            if (
+                localizer != null
+                && !string.IsNullOrEmpty(displayAttribute.Name)
+                && displayAttribute.ResourceType == null
+            )
             {
                 displayMetadata.DisplayName = () => localizer[displayAttribute.Name];
             }
@@ -160,8 +174,7 @@ internal class DataAnnotationsMetadataProvider :
         }
         else if (displayNameAttribute != null)
         {
-            if (localizer != null &&
-                !string.IsNullOrEmpty(displayNameAttribute.DisplayName))
+            if (localizer != null && !string.IsNullOrEmpty(displayNameAttribute.DisplayName))
             {
                 displayMetadata.DisplayName = () => localizer[displayNameAttribute.DisplayName];
             }
@@ -178,7 +191,8 @@ internal class DataAnnotationsMetadataProvider :
         }
 
         // IsEnum et cetera
-        var underlyingType = Nullable.GetUnderlyingType(context.Key.ModelType) ?? context.Key.ModelType;
+        var underlyingType =
+            Nullable.GetUnderlyingType(context.Key.ModelType) ?? context.Key.ModelType;
 
         if (underlyingType.IsEnum)
         {
@@ -186,7 +200,10 @@ internal class DataAnnotationsMetadataProvider :
             displayMetadata.IsEnum = true;
 
             // IsFlagsEnum
-            displayMetadata.IsFlagsEnum = underlyingType.IsDefined(typeof(FlagsAttribute), inherit: false);
+            displayMetadata.IsFlagsEnum = underlyingType.IsDefined(
+                typeof(FlagsAttribute),
+                inherit: false
+            );
 
             // EnumDisplayNamesAndValues and EnumNamesAndValues
             //
@@ -198,25 +215,36 @@ internal class DataAnnotationsMetadataProvider :
             var namesAndValues = new Dictionary<string, string>();
 
             IStringLocalizer? enumLocalizer = null;
-            if (_stringLocalizerFactory != null && _localizationOptions.DataAnnotationLocalizerProvider != null)
+            if (
+                _stringLocalizerFactory != null
+                && _localizationOptions.DataAnnotationLocalizerProvider != null
+            )
             {
-                enumLocalizer = _localizationOptions.DataAnnotationLocalizerProvider(underlyingType, _stringLocalizerFactory);
+                enumLocalizer = _localizationOptions.DataAnnotationLocalizerProvider(
+                    underlyingType,
+                    _stringLocalizerFactory
+                );
             }
 
             var enumFields = Enum.GetNames(underlyingType)
                 .Select(name => underlyingType.GetField(name)!)
-                .OrderBy(field => field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder() ?? 1000);
+                .OrderBy(
+                    field =>
+                        field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder()
+                        ?? 1000
+                );
 
             foreach (var field in enumFields)
             {
                 var groupName = GetDisplayGroup(field);
                 var value = ((Enum)field.GetValue(obj: null)!).ToString("d");
 
-                groupedDisplayNamesAndValues.Add(new KeyValuePair<EnumGroupAndName, string>(
-                    new EnumGroupAndName(
-                        groupName,
-                        () => GetDisplayName(field, enumLocalizer)),
-                    value));
+                groupedDisplayNamesAndValues.Add(
+                    new KeyValuePair<EnumGroupAndName, string>(
+                        new EnumGroupAndName(groupName, () => GetDisplayName(field, enumLocalizer)),
+                        value
+                    )
+                );
                 namesAndValues.Add(field.Name, value);
             }
 
@@ -225,8 +253,10 @@ internal class DataAnnotationsMetadataProvider :
         }
 
         // HasNonDefaultEditFormat
-        if (!string.IsNullOrEmpty(displayFormatAttribute?.DataFormatString) &&
-            displayFormatAttribute?.ApplyFormatInEditMode == true)
+        if (
+            !string.IsNullOrEmpty(displayFormatAttribute?.DataFormatString)
+            && displayFormatAttribute?.ApplyFormatInEditMode == true
+        )
         {
             // Have a non-empty EditFormatString based on [DisplayFormat] from our cache.
             if (dataTypeAttribute == null)
@@ -275,9 +305,11 @@ internal class DataAnnotationsMetadataProvider :
         // Placeholder
         if (displayAttribute != null)
         {
-            if (localizer != null &&
-                !string.IsNullOrEmpty(displayAttribute.Prompt) &&
-                displayAttribute.ResourceType == null)
+            if (
+                localizer != null
+                && !string.IsNullOrEmpty(displayAttribute.Prompt)
+                && displayAttribute.ResourceType == null
+            )
             {
                 displayMetadata.Placeholder = () => localizer[displayAttribute.Prompt];
             }
@@ -349,10 +381,12 @@ internal class DataAnnotationsMetadataProvider :
         // For non-nullable reference types, treat them as-if they had an implicit [Required].
         // This allows the developer to specify [Required] to customize the error message, so
         // if they already have [Required] then there's no need for us to do this check.
-        if (!_options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes &&
-            requiredAttribute == null &&
-            !context.Key.ModelType.IsValueType &&
-            context.Key.MetadataKind != ModelMetadataKind.Type)
+        if (
+            !_options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
+            && requiredAttribute == null
+            && !context.Key.ModelType.IsValueType
+            && context.Key.MetadataKind != ModelMetadataKind.Type
+        )
         {
             var addInferredRequiredAttribute = false;
             if (context.Key.MetadataKind == ModelMetadataKind.Type)
@@ -370,7 +404,12 @@ internal class DataAnnotationsMetadataProvider :
                     // The only way we could arrive here is if the ModelMetadata was constructed using the non-default provider.
                     // We'll cursorily examine the attributes on the property, but not the ContainerType to make a decision about it's nullability.
 
-                    if (HasNullableAttribute(context.PropertyAttributes!, out var propertyHasNullableAttribute))
+                    if (
+                        HasNullableAttribute(
+                            context.PropertyAttributes!,
+                            out var propertyHasNullableAttribute
+                        )
+                    )
                     {
                         addInferredRequiredAttribute = propertyHasNullableAttribute;
                     }
@@ -380,7 +419,8 @@ internal class DataAnnotationsMetadataProvider :
                     addInferredRequiredAttribute = IsNullableReferenceType(
                         property.DeclaringType!,
                         member: null,
-                        context.PropertyAttributes!);
+                        context.PropertyAttributes!
+                    );
                 }
             }
             else if (context.Key.MetadataKind == ModelMetadataKind.Parameter)
@@ -388,11 +428,14 @@ internal class DataAnnotationsMetadataProvider :
                 addInferredRequiredAttribute = IsNullableReferenceType(
                     context.Key.ParameterInfo!.Member.ReflectedType,
                     context.Key.ParameterInfo.Member,
-                    context.ParameterAttributes!);
+                    context.ParameterAttributes!
+                );
             }
             else
             {
-                throw new InvalidOperationException("Unsupported ModelMetadataKind: " + context.Key.MetadataKind);
+                throw new InvalidOperationException(
+                    "Unsupported ModelMetadataKind: " + context.Key.MetadataKind
+                );
             }
 
             if (addInferredRequiredAttribute)
@@ -401,10 +444,7 @@ internal class DataAnnotationsMetadataProvider :
                 // option to tolerate empty/whitespace strings. empty/whitespace INPUT will still result in
                 // a validation error by default because we convert empty/whitespace strings to null
                 // unless you say otherwise.
-                requiredAttribute = new RequiredAttribute()
-                {
-                    AllowEmptyStrings = true,
-                };
+                requiredAttribute = new RequiredAttribute() { AllowEmptyStrings = true, };
                 attributes.Add(requiredAttribute);
             }
         }
@@ -434,7 +474,11 @@ internal class DataAnnotationsMetadataProvider :
         {
             // Note [Display(Name = "")] is allowed but we will not attempt to localize the empty name.
             var name = display.GetName();
-            if (stringLocalizer != null && !string.IsNullOrEmpty(name) && display.ResourceType == null)
+            if (
+                stringLocalizer != null
+                && !string.IsNullOrEmpty(name)
+                && display.ResourceType == null
+            )
             {
                 name = stringLocalizer[name];
             }
@@ -462,7 +506,11 @@ internal class DataAnnotationsMetadataProvider :
         return string.Empty;
     }
 
-    internal static bool IsNullableReferenceType(Type? containingType, MemberInfo? member, IEnumerable<object> attributes)
+    internal static bool IsNullableReferenceType(
+        Type? containingType,
+        MemberInfo? member,
+        IEnumerable<object> attributes
+    )
     {
         if (HasNullableAttribute(attributes, out var result))
         {
@@ -476,8 +524,14 @@ internal class DataAnnotationsMetadataProvider :
     internal static bool HasNullableAttribute(IEnumerable<object> attributes, out bool isNullable)
     {
         // [Nullable] is compiler synthesized, comparing by name.
-        var nullableAttribute = attributes
-            .FirstOrDefault(a => string.Equals(a.GetType().FullName, NullableAttributeFullTypeName, StringComparison.Ordinal));
+        var nullableAttribute = attributes.FirstOrDefault(
+            a =>
+                string.Equals(
+                    a.GetType().FullName,
+                    NullableAttributeFullTypeName,
+                    StringComparison.Ordinal
+                )
+        );
         if (nullableAttribute == null)
         {
             isNullable = false;
@@ -491,10 +545,12 @@ internal class DataAnnotationsMetadataProvider :
         // unbounded.
         //
         // See: https://github.com/dotnet/roslyn/blob/master/docs/features/nullable-reference-types.md#annotations
-        if (nullableAttribute.GetType().GetField(NullableFlagsFieldName) is FieldInfo field &&
-            field.GetValue(nullableAttribute) is byte[] flags &&
-            flags.Length > 0 &&
-            flags[0] == 1) // First element is the property/parameter type.
+        if (
+            nullableAttribute.GetType().GetField(NullableFlagsFieldName) is FieldInfo field
+            && field.GetValue(nullableAttribute) is byte[] flags
+            && flags.Length > 0
+            && flags[0] == 1
+        ) // First element is the property/parameter type.
         {
             isNullable = true;
             return true; // [Nullable] found and type is an NNRT
@@ -542,8 +598,7 @@ internal class DataAnnotationsMetadataProvider :
             }
 
             type = type.DeclaringType;
-        }
-        while (type != null);
+        } while (type != null);
 
         // If we don't find the attribute on the declaring type then repeat at the module level
         attributes = containingType.Module.GetCustomAttributes(inherit: false);
@@ -552,12 +607,21 @@ internal class DataAnnotationsMetadataProvider :
 
         bool? AttributesHasNullableContext(object[] attributes)
         {
-            var nullableContextAttribute = attributes
-                .FirstOrDefault(a => string.Equals(a.GetType().FullName, NullableContextAttributeFullName, StringComparison.Ordinal));
+            var nullableContextAttribute = attributes.FirstOrDefault(
+                a =>
+                    string.Equals(
+                        a.GetType().FullName,
+                        NullableContextAttributeFullName,
+                        StringComparison.Ordinal
+                    )
+            );
             if (nullableContextAttribute != null)
             {
-                if (nullableContextAttribute.GetType().GetField(NullableContextFlagsFieldName) is FieldInfo field &&
-                    field.GetValue(nullableContextAttribute) is byte @byte)
+                if (
+                    nullableContextAttribute.GetType().GetField(NullableContextFlagsFieldName)
+                        is FieldInfo field
+                    && field.GetValue(nullableContextAttribute) is byte @byte
+                )
                 {
                     return @byte == 1; // [NullableContext] found
                 }

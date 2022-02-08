@@ -29,8 +29,7 @@ namespace System.Runtime.Intrinsics
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(Vector256DebugView<>))]
     [StructLayout(LayoutKind.Sequential, Size = Vector256.Size)]
-    public readonly struct Vector256<T> : IEquatable<Vector256<T>>
-        where T : struct
+    public readonly struct Vector256<T> : IEquatable<Vector256<T>> where T : struct
     {
         // These fields exist to ensure the alignment is 8, rather than 1.
         // This also allows the debug view to work https://github.com/dotnet/runtime/issues/9495)
@@ -66,16 +65,17 @@ namespace System.Runtime.Intrinsics
         internal static bool IsTypeSupported
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (typeof(T) == typeof(byte)) ||
-                   (typeof(T) == typeof(double)) ||
-                   (typeof(T) == typeof(short)) ||
-                   (typeof(T) == typeof(int)) ||
-                   (typeof(T) == typeof(long)) ||
-                   (typeof(T) == typeof(sbyte)) ||
-                   (typeof(T) == typeof(float)) ||
-                   (typeof(T) == typeof(ushort)) ||
-                   (typeof(T) == typeof(uint)) ||
-                   (typeof(T) == typeof(ulong));
+            get =>
+                (typeof(T) == typeof(byte))
+                || (typeof(T) == typeof(double))
+                || (typeof(T) == typeof(short))
+                || (typeof(T) == typeof(int))
+                || (typeof(T) == typeof(long))
+                || (typeof(T) == typeof(sbyte))
+                || (typeof(T) == typeof(float))
+                || (typeof(T) == typeof(ushort))
+                || (typeof(T) == typeof(uint))
+                || (typeof(T) == typeof(ulong));
         }
 
         /// <summary>Gets a new <see cref="Vector256{T}" /> with all elements initialized to zero.</summary>
@@ -118,7 +118,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                var value = Scalar<T>.Add(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                var value = Scalar<T>.Add(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -172,7 +175,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                var value = Scalar<T>.Divide(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                var value = Scalar<T>.Divide(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -220,8 +226,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><c>true</c> if any elements in <paramref name="left" /> was not equal to the corresponding element in <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator !=(Vector256<T> left, Vector256<T> right)
-            => !(left == right);
+        public static bool operator !=(Vector256<T> left, Vector256<T> right) => !(left == right);
 
         /// <summary>Multiplies two vectors to compute their element-wise product.</summary>
         /// <param name="left">The vector to multiply with <paramref name="right" />.</param>
@@ -234,7 +239,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                var value = Scalar<T>.Multiply(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                var value = Scalar<T>.Multiply(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -265,8 +273,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>The product of <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<T> operator *(T left, Vector256<T> right)
-            => right * left;
+        public static Vector256<T> operator *(T left, Vector256<T> right) => right * left;
 
         /// <summary>Computes the ones-complement of a vector.</summary>
         /// <param name="vector">The vector whose ones-complement is to be computed.</param>
@@ -286,7 +293,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                var value = Scalar<T>.Subtract(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                var value = Scalar<T>.Subtract(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -311,8 +321,8 @@ namespace System.Runtime.Intrinsics
         /// <param name="obj">The object to compare with the current instance.</param>
         /// <returns><c>true</c> if <paramref name="obj" /> is a <see cref="Vector256{T}" /> and is equal to the current instance; otherwise, <c>false</c>.</returns>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>
-        public override bool Equals([NotNullWhen(true)] object? obj)
-            => (obj is Vector256<T> other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is Vector256<T> other) && Equals(other);
 
         /// <summary>Determines whether the specified <see cref="Vector256{T}" /> is equal to the current instance.</summary>
         /// <param name="other">The <see cref="Vector256{T}" /> to compare with the current instance.</param>
@@ -325,13 +335,21 @@ namespace System.Runtime.Intrinsics
             {
                 if (typeof(T) == typeof(float))
                 {
-                    Vector256<float> result = Avx.Compare(this.AsSingle(), other.AsSingle(), FloatComparisonMode.OrderedEqualNonSignaling);
+                    Vector256<float> result = Avx.Compare(
+                        this.AsSingle(),
+                        other.AsSingle(),
+                        FloatComparisonMode.OrderedEqualNonSignaling
+                    );
                     return Avx.MoveMask(result) == 0b1111_1111; // We have one bit per element
                 }
 
                 if (typeof(T) == typeof(double))
                 {
-                    Vector256<double> result = Avx.Compare(this.AsDouble(), other.AsDouble(), FloatComparisonMode.OrderedEqualNonSignaling);
+                    Vector256<double> result = Avx.Compare(
+                        this.AsDouble(),
+                        other.AsDouble(),
+                        FloatComparisonMode.OrderedEqualNonSignaling
+                    );
                     return Avx.MoveMask(result) == 0b1111; // We have one bit per element
                 }
             }
@@ -383,8 +401,7 @@ namespace System.Runtime.Intrinsics
         /// <summary>Converts the current instance to an equivalent string representation.</summary>
         /// <returns>An equivalent string representation of the current instance.</returns>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>
-        public override string ToString()
-            => ToString("G", CultureInfo.InvariantCulture);
+        public override string ToString() => ToString("G", CultureInfo.InvariantCulture);
 
         private string ToString(string? format, IFormatProvider? formatProvider)
         {

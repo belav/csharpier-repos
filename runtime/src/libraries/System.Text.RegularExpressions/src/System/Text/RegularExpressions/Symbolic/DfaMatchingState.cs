@@ -77,9 +77,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 // If the previous state was the start state, mark this as the very FIRST \n.
                 // Essentially, this looks the same as the very last \n and is used to nullify
                 // rev(\Z) in the conext of a reversed automaton.
-                nextCharKind = PrevCharKind == CharKind.StartStop ?
-                    CharKind.NewLineS :
-                    CharKind.Newline;
+                nextCharKind =
+                    PrevCharKind == CharKind.StartStop ? CharKind.NewLineS : CharKind.Newline;
             }
             else if (alg.IsSatisfiable(alg.And(wordLetterPredicate, minterm)))
             {
@@ -101,7 +100,14 @@ namespace System.Text.RegularExpressions.Symbolic
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool IsNullable(uint nextCharKind)
         {
-            Debug.Assert(nextCharKind is 0 or CharKind.StartStop or CharKind.Newline or CharKind.WordLetter or CharKind.NewLineS);
+            Debug.Assert(
+                nextCharKind
+                    is 0
+                        or CharKind.StartStop
+                        or CharKind.Newline
+                        or CharKind.WordLetter
+                        or CharKind.NewLineS
+            );
             uint context = CharKind.Context(PrevCharKind, nextCharKind);
             return Node.IsNullableFor(context);
         }
@@ -112,8 +118,7 @@ namespace System.Text.RegularExpressions.Symbolic
         public override int GetHashCode() => (PrevCharKind, Node).GetHashCode();
 
         public override string ToString() =>
-            PrevCharKind == 0 ? Node.ToString() :
-             $"({CharKind.DescribePrev(PrevCharKind)},{Node})";
+            PrevCharKind == 0 ? Node.ToString() : $"({CharKind.DescribePrev(PrevCharKind)},{Node})";
 
         internal string DgmlView
         {

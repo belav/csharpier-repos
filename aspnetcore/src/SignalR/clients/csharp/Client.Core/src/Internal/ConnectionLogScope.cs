@@ -60,7 +60,9 @@ internal class ConnectionLogScope : IReadOnlyList<KeyValuePair<string, object?>>
         {
             if (!string.IsNullOrEmpty(ConnectionId))
             {
-                _cachedToString = FormattableString.Invariant($"{ClientConnectionIdKey}:{ConnectionId}");
+                _cachedToString = FormattableString.Invariant(
+                    $"{ClientConnectionIdKey}:{ConnectionId}"
+                );
             }
         }
 

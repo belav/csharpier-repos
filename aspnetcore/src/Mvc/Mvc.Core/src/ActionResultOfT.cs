@@ -24,7 +24,10 @@ public sealed class ActionResult<TValue> : IConvertToActionResult
     {
         if (typeof(IActionResult).IsAssignableFrom(typeof(TValue)))
         {
-            var error = Resources.FormatInvalidTypeTForActionResultOfT(typeof(TValue), "ActionResult<T>");
+            var error = Resources.FormatInvalidTypeTForActionResultOfT(
+                typeof(TValue),
+                "ActionResult<T>"
+            );
             throw new ArgumentException(error);
         }
 
@@ -39,7 +42,10 @@ public sealed class ActionResult<TValue> : IConvertToActionResult
     {
         if (typeof(IActionResult).IsAssignableFrom(typeof(TValue)))
         {
-            var error = Resources.FormatInvalidTypeTForActionResultOfT(typeof(TValue), "ActionResult<T>");
+            var error = Resources.FormatInvalidTypeTForActionResultOfT(
+                typeof(TValue),
+                "ActionResult<T>"
+            );
             throw new ArgumentException(error);
         }
 
@@ -91,10 +97,6 @@ public sealed class ActionResult<TValue> : IConvertToActionResult
             statusCode = DefaultStatusCode;
         }
 
-        return new ObjectResult(Value)
-        {
-            DeclaredType = typeof(TValue),
-            StatusCode = statusCode
-        };
+        return new ObjectResult(Value) { DeclaredType = typeof(TValue), StatusCode = statusCode };
     }
 }

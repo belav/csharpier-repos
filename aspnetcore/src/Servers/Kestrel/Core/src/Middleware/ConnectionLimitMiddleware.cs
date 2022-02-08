@@ -16,12 +16,14 @@ internal class ConnectionLimitMiddleware<T> where T : BaseConnectionContext
     private readonly KestrelTrace _trace;
 
     public ConnectionLimitMiddleware(Func<T, Task> next, long connectionLimit, KestrelTrace trace)
-        : this(next, ResourceCounter.Quota(connectionLimit), trace)
-    {
-    }
+        : this(next, ResourceCounter.Quota(connectionLimit), trace) { }
 
     // For Testing
-    internal ConnectionLimitMiddleware(Func<T, Task> next, ResourceCounter concurrentConnectionCounter, KestrelTrace trace)
+    internal ConnectionLimitMiddleware(
+        Func<T, Task> next,
+        ResourceCounter concurrentConnectionCounter,
+        KestrelTrace trace
+    )
     {
         _next = next;
         _concurrentConnectionCounter = concurrentConnectionCounter;

@@ -81,8 +81,8 @@ public class CacheControlHeaderValue
     // OK to have multiple Cache-Control headers in a request/response message. However, after parsing all
     // Cache-Control headers, only one instance of CacheControlHeaderValue is created (if all headers contain valid
     // values, otherwise we may have multiple strings containing the invalid values).
-    private static readonly HttpHeaderParser<CacheControlHeaderValue> Parser
-        = new GenericHeaderParser<CacheControlHeaderValue>(true, GetCacheControlLength);
+    private static readonly HttpHeaderParser<CacheControlHeaderValue> Parser =
+        new GenericHeaderParser<CacheControlHeaderValue>(true, GetCacheControlLength);
 
     private static readonly Action<StringSegment> CheckIsValidTokenAction = CheckIsValidToken;
 
@@ -354,14 +354,22 @@ public class CacheControlHeaderValue
         {
             AppendValueWithSeparatorIfRequired(sb, MaxAgeString);
             sb.Append('=');
-            sb.Append(((int)_maxAge.GetValueOrDefault().TotalSeconds).ToString(NumberFormatInfo.InvariantInfo));
+            sb.Append(
+                ((int)_maxAge.GetValueOrDefault().TotalSeconds).ToString(
+                    NumberFormatInfo.InvariantInfo
+                )
+            );
         }
 
         if (_sharedMaxAge.HasValue)
         {
             AppendValueWithSeparatorIfRequired(sb, SharedMaxAgeString);
             sb.Append('=');
-            sb.Append(((int)_sharedMaxAge.GetValueOrDefault().TotalSeconds).ToString(NumberFormatInfo.InvariantInfo));
+            sb.Append(
+                ((int)_sharedMaxAge.GetValueOrDefault().TotalSeconds).ToString(
+                    NumberFormatInfo.InvariantInfo
+                )
+            );
         }
 
         if (_maxStale)
@@ -370,7 +378,11 @@ public class CacheControlHeaderValue
             if (_maxStaleLimit.HasValue)
             {
                 sb.Append('=');
-                sb.Append(((int)_maxStaleLimit.GetValueOrDefault().TotalSeconds).ToString(NumberFormatInfo.InvariantInfo));
+                sb.Append(
+                    ((int)_maxStaleLimit.GetValueOrDefault().TotalSeconds).ToString(
+                        NumberFormatInfo.InvariantInfo
+                    )
+                );
             }
         }
 
@@ -378,7 +390,11 @@ public class CacheControlHeaderValue
         {
             AppendValueWithSeparatorIfRequired(sb, MinFreshString);
             sb.Append('=');
-            sb.Append(((int)_minFresh.GetValueOrDefault().TotalSeconds).ToString(NumberFormatInfo.InvariantInfo));
+            sb.Append(
+                ((int)_minFresh.GetValueOrDefault().TotalSeconds).ToString(
+                    NumberFormatInfo.InvariantInfo
+                )
+            );
         }
 
         if (_private)
@@ -407,24 +423,43 @@ public class CacheControlHeaderValue
             return false;
         }
 
-        if ((_noCache != other._noCache) || (_noStore != other._noStore) || (_maxAge != other._maxAge) ||
-            (_sharedMaxAge != other._sharedMaxAge) || (_maxStale != other._maxStale) ||
-            (_maxStaleLimit != other._maxStaleLimit) || (_minFresh != other._minFresh) ||
-            (_noTransform != other._noTransform) || (_onlyIfCached != other._onlyIfCached) ||
-            (_public != other._public) || (_private != other._private) ||
-            (_mustRevalidate != other._mustRevalidate) || (_proxyRevalidate != other._proxyRevalidate))
+        if (
+            (_noCache != other._noCache)
+            || (_noStore != other._noStore)
+            || (_maxAge != other._maxAge)
+            || (_sharedMaxAge != other._sharedMaxAge)
+            || (_maxStale != other._maxStale)
+            || (_maxStaleLimit != other._maxStaleLimit)
+            || (_minFresh != other._minFresh)
+            || (_noTransform != other._noTransform)
+            || (_onlyIfCached != other._onlyIfCached)
+            || (_public != other._public)
+            || (_private != other._private)
+            || (_mustRevalidate != other._mustRevalidate)
+            || (_proxyRevalidate != other._proxyRevalidate)
+        )
         {
             return false;
         }
 
-        if (!HeaderUtilities.AreEqualCollections(_noCacheHeaders, other._noCacheHeaders,
-            StringSegmentComparer.OrdinalIgnoreCase))
+        if (
+            !HeaderUtilities.AreEqualCollections(
+                _noCacheHeaders,
+                other._noCacheHeaders,
+                StringSegmentComparer.OrdinalIgnoreCase
+            )
+        )
         {
             return false;
         }
 
-        if (!HeaderUtilities.AreEqualCollections(_privateHeaders, other._privateHeaders,
-            StringSegmentComparer.OrdinalIgnoreCase))
+        if (
+            !HeaderUtilities.AreEqualCollections(
+                _privateHeaders,
+                other._privateHeaders,
+                StringSegmentComparer.OrdinalIgnoreCase
+            )
+        )
         {
             return false;
         }
@@ -443,23 +478,32 @@ public class CacheControlHeaderValue
         // Use a different bit for bool fields: bool.GetHashCode() will return 0 (false) or 1 (true). So we would
         // end up having the same hash code for e.g. two instances where one has only noCache set and the other
         // only noStore.
-        int result = _noCache.GetHashCode() ^ (_noStore.GetHashCode() << 1) ^ (_maxStale.GetHashCode() << 2) ^
-            (_noTransform.GetHashCode() << 3) ^ (_onlyIfCached.GetHashCode() << 4) ^
-            (_public.GetHashCode() << 5) ^ (_private.GetHashCode() << 6) ^
-            (_mustRevalidate.GetHashCode() << 7) ^ (_proxyRevalidate.GetHashCode() << 8);
+        int result =
+            _noCache.GetHashCode()
+            ^ (_noStore.GetHashCode() << 1)
+            ^ (_maxStale.GetHashCode() << 2)
+            ^ (_noTransform.GetHashCode() << 3)
+            ^ (_onlyIfCached.GetHashCode() << 4)
+            ^ (_public.GetHashCode() << 5)
+            ^ (_private.GetHashCode() << 6)
+            ^ (_mustRevalidate.GetHashCode() << 7)
+            ^ (_proxyRevalidate.GetHashCode() << 8);
 
         // XOR the hashcode of timespan values with different numbers to make sure two instances with the same
         // timespan set on different fields result in different hashcodes.
-        result = result ^ (_maxAge.HasValue ? _maxAge.GetValueOrDefault().GetHashCode() ^ 1 : 0) ^
-            (_sharedMaxAge.HasValue ? _sharedMaxAge.GetValueOrDefault().GetHashCode() ^ 2 : 0) ^
-            (_maxStaleLimit.HasValue ? _maxStaleLimit.GetValueOrDefault().GetHashCode() ^ 4 : 0) ^
-            (_minFresh.HasValue ? _minFresh.GetValueOrDefault().GetHashCode() ^ 8 : 0);
+        result =
+            result
+            ^ (_maxAge.HasValue ? _maxAge.GetValueOrDefault().GetHashCode() ^ 1 : 0)
+            ^ (_sharedMaxAge.HasValue ? _sharedMaxAge.GetValueOrDefault().GetHashCode() ^ 2 : 0)
+            ^ (_maxStaleLimit.HasValue ? _maxStaleLimit.GetValueOrDefault().GetHashCode() ^ 4 : 0)
+            ^ (_minFresh.HasValue ? _minFresh.GetValueOrDefault().GetHashCode() ^ 8 : 0);
 
         if ((_noCacheHeaders != null) && (_noCacheHeaders.Count > 0))
         {
             foreach (var noCacheHeader in _noCacheHeaders)
             {
-                result = result ^ StringSegmentComparer.OrdinalIgnoreCase.GetHashCode(noCacheHeader);
+                result =
+                    result ^ StringSegmentComparer.OrdinalIgnoreCase.GetHashCode(noCacheHeader);
             }
         }
 
@@ -467,7 +511,8 @@ public class CacheControlHeaderValue
         {
             foreach (var privateHeader in _privateHeaders)
             {
-                result = result ^ StringSegmentComparer.OrdinalIgnoreCase.GetHashCode(privateHeader);
+                result =
+                    result ^ StringSegmentComparer.OrdinalIgnoreCase.GetHashCode(privateHeader);
             }
         }
 
@@ -505,7 +550,10 @@ public class CacheControlHeaderValue
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
     /// <returns><see langword="true"/> if input is a valid <see cref="SetCookieHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParse(StringSegment input, [NotNullWhen(true)] out CacheControlHeaderValue? parsedValue)
+    public static bool TryParse(
+        StringSegment input,
+        [NotNullWhen(true)] out CacheControlHeaderValue? parsedValue
+    )
     {
         var index = 0;
         // Cache-Control is unusual because there are no required values so the parser will succeed for an empty string, but still return null.
@@ -517,7 +565,11 @@ public class CacheControlHeaderValue
         return false;
     }
 
-    private static int GetCacheControlLength(StringSegment input, int startIndex, out CacheControlHeaderValue? parsedValue)
+    private static int GetCacheControlLength(
+        StringSegment input,
+        int startIndex,
+        out CacheControlHeaderValue? parsedValue
+    )
     {
         Contract.Requires(startIndex >= 0);
 
@@ -534,7 +586,13 @@ public class CacheControlHeaderValue
         var nameValueList = new List<NameValueHeaderValue>();
         while (current < input.Length)
         {
-            if (!NameValueHeaderValue.MultipleValueParser.TryParseValue(input, ref current, out var nameValue))
+            if (
+                !NameValueHeaderValue.MultipleValueParser.TryParseValue(
+                    input,
+                    ref current,
+                    out var nameValue
+                )
+            )
             {
                 return 0;
             }
@@ -565,7 +623,8 @@ public class CacheControlHeaderValue
 
     private static bool TrySetCacheControlValues(
         CacheControlHeaderValue cc,
-        List<NameValueHeaderValue> nameValueList)
+        List<NameValueHeaderValue> nameValueList
+    )
     {
         for (var i = 0; i < nameValueList.Count; i++)
         {
@@ -576,7 +635,9 @@ public class CacheControlHeaderValue
             switch (name.Length)
             {
                 case 6:
-                    if (StringSegment.Equals(PublicString, name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        StringSegment.Equals(PublicString, name, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         success = TrySetTokenOnlyValue(nameValue, ref cc._public);
                     }
@@ -587,13 +648,25 @@ public class CacheControlHeaderValue
                     break;
 
                 case 7:
-                    if (StringSegment.Equals(MaxAgeString, name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        StringSegment.Equals(MaxAgeString, name, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         success = TrySetTimeSpan(nameValue, ref cc._maxAge);
                     }
-                    else if (StringSegment.Equals(PrivateString, name, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        StringSegment.Equals(
+                            PrivateString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        success = TrySetOptionalTokenList(nameValue, ref cc._private, ref cc._privateHeaders);
+                        success = TrySetOptionalTokenList(
+                            nameValue,
+                            ref cc._private,
+                            ref cc._privateHeaders
+                        );
                     }
                     else
                     {
@@ -602,15 +675,37 @@ public class CacheControlHeaderValue
                     break;
 
                 case 8:
-                    if (StringSegment.Equals(NoCacheString, name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        StringSegment.Equals(
+                            NoCacheString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        success = TrySetOptionalTokenList(nameValue, ref cc._noCache, ref cc._noCacheHeaders);
+                        success = TrySetOptionalTokenList(
+                            nameValue,
+                            ref cc._noCache,
+                            ref cc._noCacheHeaders
+                        );
                     }
-                    else if (StringSegment.Equals(NoStoreString, name, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        StringSegment.Equals(
+                            NoStoreString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         success = TrySetTokenOnlyValue(nameValue, ref cc._noStore);
                     }
-                    else if (StringSegment.Equals(SharedMaxAgeString, name, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        StringSegment.Equals(
+                            SharedMaxAgeString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         success = TrySetTimeSpan(nameValue, ref cc._sharedMaxAge);
                     }
@@ -621,15 +716,30 @@ public class CacheControlHeaderValue
                     break;
 
                 case 9:
-                    if (StringSegment.Equals(MaxStaleString, name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        StringSegment.Equals(
+                            MaxStaleString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        success = ((nameValue.Value == null) || TrySetTimeSpan(nameValue, ref cc._maxStaleLimit));
+                        success = (
+                            (nameValue.Value == null)
+                            || TrySetTimeSpan(nameValue, ref cc._maxStaleLimit)
+                        );
                         if (success)
                         {
                             cc._maxStale = true;
                         }
                     }
-                    else if (StringSegment.Equals(MinFreshString, name, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        StringSegment.Equals(
+                            MinFreshString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         success = TrySetTimeSpan(nameValue, ref cc._minFresh);
                     }
@@ -640,7 +750,13 @@ public class CacheControlHeaderValue
                     break;
 
                 case 12:
-                    if (StringSegment.Equals(NoTransformString, name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        StringSegment.Equals(
+                            NoTransformString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         success = TrySetTokenOnlyValue(nameValue, ref cc._noTransform);
                     }
@@ -651,7 +767,13 @@ public class CacheControlHeaderValue
                     break;
 
                 case 14:
-                    if (StringSegment.Equals(OnlyIfCachedString, name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        StringSegment.Equals(
+                            OnlyIfCachedString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         success = TrySetTokenOnlyValue(nameValue, ref cc._onlyIfCached);
                     }
@@ -662,7 +784,13 @@ public class CacheControlHeaderValue
                     break;
 
                 case 15:
-                    if (StringSegment.Equals(MustRevalidateString, name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        StringSegment.Equals(
+                            MustRevalidateString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         success = TrySetTokenOnlyValue(nameValue, ref cc._mustRevalidate);
                     }
@@ -673,7 +801,13 @@ public class CacheControlHeaderValue
                     break;
 
                 case 16:
-                    if (StringSegment.Equals(ProxyRevalidateString, name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        StringSegment.Equals(
+                            ProxyRevalidateString,
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         success = TrySetTokenOnlyValue(nameValue, ref cc._proxyRevalidate);
                     }
@@ -711,7 +845,8 @@ public class CacheControlHeaderValue
     private static bool TrySetOptionalTokenList(
         NameValueHeaderValue nameValue,
         ref bool boolField,
-        ref ICollection<StringSegment>? destination)
+        ref ICollection<StringSegment>? destination
+    )
     {
         if (nameValue.Value == null)
         {
@@ -722,7 +857,11 @@ public class CacheControlHeaderValue
         // We need the string to be at least 3 chars long: 2x quotes and at least 1 character. Also make sure we
         // have a quoted string. Note that NameValueHeaderValue will never have leading/trailing whitespaces.
         var valueString = nameValue.Value;
-        if ((valueString.Length < 3) || (valueString[0] != '\"') || (valueString[valueString.Length - 1] != '\"'))
+        if (
+            (valueString.Length < 3)
+            || (valueString[0] != '\"')
+            || (valueString[valueString.Length - 1] != '\"')
+        )
         {
             return false;
         }
@@ -734,8 +873,12 @@ public class CacheControlHeaderValue
         var originalValueCount = destination == null ? 0 : destination.Count;
         while (current < maxLength)
         {
-            current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(valueString, current, true,
-                out separatorFound);
+            current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                valueString,
+                current,
+                true,
+                out separatorFound
+            );
 
             if (current == maxLength)
             {

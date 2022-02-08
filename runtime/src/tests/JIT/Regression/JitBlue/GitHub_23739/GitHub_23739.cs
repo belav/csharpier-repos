@@ -19,7 +19,8 @@ class GitHub_23739
 
     struct Struct2f
     {
-        float a, b;
+        float a,
+            b;
     }
 
     class Cls2f
@@ -29,7 +30,9 @@ class GitHub_23739
 
     struct Struct3f
     {
-        float a, b, c;
+        float a,
+            b,
+            c;
     }
 
     class Cls3f
@@ -39,7 +42,10 @@ class GitHub_23739
 
     struct Struct4f
     {
-        float a, b, c, d;
+        float a,
+            b,
+            c,
+            d;
     }
 
     class Cls4f
@@ -49,7 +55,11 @@ class GitHub_23739
 
     struct Struct5f
     {
-        float a, b, c, d, e;
+        float a,
+            b,
+            c,
+            d,
+            e;
     }
 
     class Cls5f
@@ -59,7 +69,12 @@ class GitHub_23739
 
     struct Struct6f
     {
-        float a, b, c, d, e, f;
+        float a,
+            b,
+            c,
+            d,
+            e,
+            f;
     }
 
     class Cls6f
@@ -68,9 +83,7 @@ class GitHub_23739
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Sink<T>(ref T t)
-    {
-    }
+    static void Sink<T>(ref T t) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Test1f(Cls1f c)

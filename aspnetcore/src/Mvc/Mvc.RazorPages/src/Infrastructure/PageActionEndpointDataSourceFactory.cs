@@ -15,7 +15,8 @@ internal class PageActionEndpointDataSourceFactory
     public PageActionEndpointDataSourceFactory(
         PageActionEndpointDataSourceIdProvider dataSourceIdProvider,
         IActionDescriptorCollectionProvider actions,
-        ActionEndpointFactory endpointFactory)
+        ActionEndpointFactory endpointFactory
+    )
     {
         _dataSourceIdProvider = dataSourceIdProvider;
         _actions = actions;
@@ -24,6 +25,11 @@ internal class PageActionEndpointDataSourceFactory
 
     public PageActionEndpointDataSource Create(OrderedEndpointsSequenceProvider orderProvider)
     {
-        return new PageActionEndpointDataSource(_dataSourceIdProvider, _actions, _endpointFactory, orderProvider);
+        return new PageActionEndpointDataSource(
+            _dataSourceIdProvider,
+            _actions,
+            _endpointFactory,
+            orderProvider
+        );
     }
 }

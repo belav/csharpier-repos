@@ -53,8 +53,14 @@ namespace System.Drawing
                         // On Windows, we get the frame delays for every frame. On Linux, we only get the first frame delay.
                         // We handle this by treating the frame delays as a repeating sequence, asserting that the sequence
                         // is fully repeatable to match the frame count.
-                        Debug.Assert(values.Length % 4 == 0, "PropertyItem has an invalid value byte array. It should have a length evenly divisible by 4 to represent ints.");
-                        Debug.Assert(_frameCount % (values.Length / 4) == 0, "PropertyItem has invalid value byte array. The FrameCount should be evenly divisible by a quarter of the byte array's length.");
+                        Debug.Assert(
+                            values.Length % 4 == 0,
+                            "PropertyItem has an invalid value byte array. It should have a length evenly divisible by 4 to represent ints."
+                        );
+                        Debug.Assert(
+                            _frameCount % (values.Length / 4) == 0,
+                            "PropertyItem has invalid value byte array. The FrameCount should be evenly divisible by a quarter of the byte array's length."
+                        );
 
                         _frameEndTimes = new long[_frameCount];
                         long lastEndTime = 0;
@@ -93,7 +99,10 @@ namespace System.Drawing
                         // number of times to loop. The animation will be shown 1 time more than the loop count.
                         byte[] values = loopCountItem.Value!;
 
-                        Debug.Assert(values.Length == sizeof(short), "PropertyItem has an invalid byte array. It should represent a single short value.");
+                        Debug.Assert(
+                            values.Length == sizeof(short),
+                            "PropertyItem has an invalid byte array. It should represent a single short value."
+                        );
                         _loopCount = BitConverter.ToInt16(values);
                     }
                     else
@@ -119,14 +128,8 @@ namespace System.Drawing
 
             public EventHandler? FrameChangedHandler
             {
-                get
-                {
-                    return _onFrameChangedHandler;
-                }
-                set
-                {
-                    _onFrameChangedHandler = value;
-                }
+                get { return _onFrameChangedHandler; }
+                set { _onFrameChangedHandler = value; }
             }
 
             /// <summary>
@@ -138,7 +141,8 @@ namespace System.Drawing
             /// Whether animation should progress, respecting the image's animation support
             /// and if there are animation frames or loops remaining.
             /// </summary>
-            private bool ShouldAnimate => TotalAnimationTime > 0 ? (_loopCount == 0 || _loop <= _loopCount) : false;
+            private bool ShouldAnimate =>
+                TotalAnimationTime > 0 ? (_loopCount == 0 || _loop <= _loopCount) : false;
 
             /// <summary>
             /// Advance the animation by the specified number of milliseconds. If the advancement
@@ -164,7 +168,11 @@ namespace System.Drawing
 
                     if (_frameTimer > TotalAnimationTime)
                     {
-                        _loop += (short)Math.DivRem(_frameTimer, TotalAnimationTime, out long newTimer);
+                        _loop += (short)Math.DivRem(
+                            _frameTimer,
+                            TotalAnimationTime,
+                            out long newTimer
+                        );
                         _frameTimer = newTimer;
 
                         if (!ShouldAnimate)

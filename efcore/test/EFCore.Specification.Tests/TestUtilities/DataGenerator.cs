@@ -12,8 +12,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static readonly ConcurrentDictionary<Type, object[]> Values = new();
         private static readonly ConcurrentDictionary<int, object[][]> _boolCombinations = new();
 
-        public static object[][] GetBoolCombinations(int length)
-            => _boolCombinations.GetOrAdd(length, l => GetCombinations(Values[typeof(bool)], l));
+        public static object[][] GetBoolCombinations(int length) =>
+            _boolCombinations.GetOrAdd(length, l => GetCombinations(Values[typeof(bool)], l));
 
         static DataGenerator()
         {
@@ -43,7 +43,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     }
                     else
                     {
-                        throw new InvalidOperationException($"The set of values for the type {type} is not known.");
+                        throw new InvalidOperationException(
+                            $"The set of values for the type {type} is not known."
+                        );
                     }
                 }
 

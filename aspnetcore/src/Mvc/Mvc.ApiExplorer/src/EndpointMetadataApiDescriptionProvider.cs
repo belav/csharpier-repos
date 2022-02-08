@@ -34,7 +34,8 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
         EndpointDataSource endpointDataSource,
         IHostEnvironment environment,
         ParameterPolicyFactory parameterPolicyFactory,
-        IServiceProviderIsService? serviceProviderIsService)
+        IServiceProviderIsService? serviceProviderIsService
+    )
     {
         _endpointDataSource = endpointDataSource;
         _environment = environment;
@@ -46,33 +47,45 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
     {
         foreach (var endpoint in _endpointDataSource.Endpoints)
         {
-            if (endpoint is RouteEndpoint routeEndpoint &&
-                routeEndpoint.Metadata.GetMetadata<MethodInfo>() is { } methodInfo &&
-                routeEndpoint.Metadata.GetMetadata<IHttpMethodMetadata>() is { } httpMethodMetadata &&
-                routeEndpoint.Metadata.GetMetadata<IExcludeFromDescriptionMetadata>() is null or { ExcludeFromDescription: false })
+            if (
+                endpoint is RouteEndpoint routeEndpoint
+                && routeEndpoint.Metadata.GetMetadata<MethodInfo>() is { } methodInfo
+                && routeEndpoint.Metadata.GetMetadata<IHttpMethodMetadata>()
+                    is { } httpMethodMetadata
+                && routeEndpoint.Metadata.GetMetadata<IExcludeFromDescriptionMetadata>()
+                    is null
+                        or { ExcludeFromDescription: false }
+            )
             {
                 // REVIEW: Should we add an ApiDescription for endpoints without IHttpMethodMetadata? Swagger doesn't handle
                 // a null HttpMethod even though it's nullable on ApiDescription, so we'd need to define "default" HTTP methods.
                 // In practice, the Delegate will be called for any HTTP method if there is no IHttpMethodMetadata.
                 foreach (var httpMethod in httpMethodMetadata.HttpMethods)
                 {
-                    context.Results.Add(CreateApiDescription(routeEndpoint, httpMethod, methodInfo));
+                    context.Results.Add(
+                        CreateApiDescription(routeEndpoint, httpMethod, methodInfo)
+                    );
                 }
             }
         }
     }
 
-    public void OnProvidersExecuted(ApiDescriptionProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ApiDescriptionProviderContext context) { }
 
-    private ApiDescription CreateApiDescription(RouteEndpoint routeEndpoint, string httpMethod, MethodInfo methodInfo)
+    private ApiDescription CreateApiDescription(
+        RouteEndpoint routeEndpoint,
+        string httpMethod,
+        MethodInfo methodInfo
+    )
     {
         // Swashbuckle uses the "controller" name to group endpoints together.
         // For now, put all methods defined the same declaring type together.
         string controllerName;
 
-        if (methodInfo.DeclaringType is not null && !TypeHelper.IsCompilerGeneratedType(methodInfo.DeclaringType))
+        if (
+            methodInfo.DeclaringType is not null
+            && !TypeHelper.IsCompilerGeneratedType(methodInfo.DeclaringType)
+        )
         {
             controllerName = methodInfo.DeclaringType.Name;
         }
@@ -86,21 +99,23 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
         var apiDescription = new ApiDescription
         {
             HttpMethod = httpMethod,
-            GroupName = routeEndpoint.Metadata.GetMetadata<IEndpointGroupNameMetadata>()?.EndpointGroupName,
+            GroupName = routeEndpoint.Metadata
+                .GetMetadata<IEndpointGroupNameMetadata>()
+                ?.EndpointGroupName,
             RelativePath = routeEndpoint.RoutePattern.RawText?.TrimStart('/'),
             ActionDescriptor = new ActionDescriptor
             {
                 DisplayName = routeEndpoint.DisplayName,
-                RouteValues =
-                    {
-                        ["controller"] = controllerName,
-                    },
+                RouteValues = { ["controller"] = controllerName, },
             },
         };
 
         foreach (var parameter in methodInfo.GetParameters())
         {
-            var parameterDescription = CreateApiParameterDescription(parameter, routeEndpoint.RoutePattern);
+            var parameterDescription = CreateApiParameterDescription(
+                parameter,
+                routeEndpoint.RoutePattern
+            );
 
             if (parameterDescription is null)
             {
@@ -130,20 +145,27 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
 
             foreach (var contentType in acceptsMetadata.ContentTypes)
             {
-                supportedRequestFormats.Add(new ApiRequestFormat
-                {
-                    MediaType = contentType
-                });
+                supportedRequestFormats.Add(new ApiRequestFormat { MediaType = contentType });
             }
         }
 
-        AddSupportedResponseTypes(apiDescription.SupportedResponseTypes, methodInfo.ReturnType, routeEndpoint.Metadata);
-        AddActionDescriptorEndpointMetadata(apiDescription.ActionDescriptor, routeEndpoint.Metadata);
+        AddSupportedResponseTypes(
+            apiDescription.SupportedResponseTypes,
+            methodInfo.ReturnType,
+            routeEndpoint.Metadata
+        );
+        AddActionDescriptorEndpointMetadata(
+            apiDescription.ActionDescriptor,
+            routeEndpoint.Metadata
+        );
 
         return apiDescription;
     }
 
-    private ApiParameterDescription? CreateApiParameterDescription(ParameterInfo parameter, RoutePattern pattern)
+    private ApiParameterDescription? CreateApiParameterDescription(
+        ParameterInfo parameter,
+        RoutePattern pattern
+    )
     {
         var (source, name, allowEmpty, paramType) = GetBindingSourceAndName(parameter, pattern);
 
@@ -157,7 +179,10 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
         // Determine the "requiredness" based on nullability, default value or if allowEmpty is set
         var nullabilityContext = new NullabilityInfoContext();
         var nullability = nullabilityContext.Create(parameter);
-        var isOptional = parameter.HasDefaultValue || nullability.ReadState != NullabilityState.NotNull || allowEmpty;
+        var isOptional =
+            parameter.HasDefaultValue
+            || nullability.ReadState != NullabilityState.NotNull
+            || allowEmpty;
         var parameterDescriptor = CreateParameterDescriptor(parameter);
         var routeInfo = CreateParameterRouteInfo(pattern, parameter, isOptional);
 
@@ -174,19 +199,25 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
         };
     }
 
-    private static ParameterDescriptor CreateParameterDescriptor(ParameterInfo parameter)
-        => new EndpointParameterDescriptor
+    private static ParameterDescriptor CreateParameterDescriptor(ParameterInfo parameter) =>
+        new EndpointParameterDescriptor
         {
             Name = parameter.Name ?? string.Empty,
             ParameterInfo = parameter,
             ParameterType = parameter.ParameterType,
         };
 
-    private ApiParameterRouteInfo? CreateParameterRouteInfo(RoutePattern pattern, ParameterInfo parameter, bool isOptional)
+    private ApiParameterRouteInfo? CreateParameterRouteInfo(
+        RoutePattern pattern,
+        ParameterInfo parameter,
+        bool isOptional
+    )
     {
         if (parameter.Name is null)
         {
-            throw new InvalidOperationException($"Encountered a parameter of type '{parameter.ParameterType}' without a name. Parameters must have a name.");
+            throw new InvalidOperationException(
+                $"Encountered a parameter of type '{parameter.ParameterType}' without a name. Parameters must have a name."
+            );
         }
 
         // Only produce a `RouteInfo` property for parameters that are defined in the route template
@@ -197,11 +228,16 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
 
         var constraints = new List<IRouteConstraint>();
 
-        if (pattern.ParameterPolicies.TryGetValue(parameter.Name, out var parameterPolicyReferences))
+        if (
+            pattern.ParameterPolicies.TryGetValue(parameter.Name, out var parameterPolicyReferences)
+        )
         {
             foreach (var parameterPolicyReference in parameterPolicyReferences)
             {
-                var policy = _parameterPolicyFactory.Create(parameterPart, parameterPolicyReference);
+                var policy = _parameterPolicyFactory.Create(
+                    parameterPart,
+                    parameterPolicyReference
+                );
                 if (policy is IRouteConstraint generatedConstraint)
                 {
                     constraints.Add(generatedConstraint);
@@ -219,42 +255,80 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
 
     // TODO: Share more of this logic with RequestDelegateFactory.CreateArgument(...) using RequestDelegateFactoryUtilities
     // which is shared source.
-    private (BindingSource, string, bool, Type) GetBindingSourceAndName(ParameterInfo parameter, RoutePattern pattern)
+    private (BindingSource, string, bool, Type) GetBindingSourceAndName(
+        ParameterInfo parameter,
+        RoutePattern pattern
+    )
     {
         var attributes = parameter.GetCustomAttributes();
 
         if (attributes.OfType<IFromRouteMetadata>().FirstOrDefault() is { } routeAttribute)
         {
-            return (BindingSource.Path, routeAttribute.Name ?? parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Path,
+                routeAttribute.Name ?? parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
         else if (attributes.OfType<IFromQueryMetadata>().FirstOrDefault() is { } queryAttribute)
         {
-            return (BindingSource.Query, queryAttribute.Name ?? parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Query,
+                queryAttribute.Name ?? parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
         else if (attributes.OfType<IFromHeaderMetadata>().FirstOrDefault() is { } headerAttribute)
         {
-            return (BindingSource.Header, headerAttribute.Name ?? parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Header,
+                headerAttribute.Name ?? parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
         else if (attributes.OfType<IFromBodyMetadata>().FirstOrDefault() is { } fromBodyAttribute)
         {
-            return (BindingSource.Body, parameter.Name ?? string.Empty, fromBodyAttribute.AllowEmpty, parameter.ParameterType);
+            return (
+                BindingSource.Body,
+                parameter.Name ?? string.Empty,
+                fromBodyAttribute.AllowEmpty,
+                parameter.ParameterType
+            );
         }
-        else if (parameter.CustomAttributes.Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)) ||
-                 parameter.ParameterType == typeof(HttpContext) ||
-                 parameter.ParameterType == typeof(HttpRequest) ||
-                 parameter.ParameterType == typeof(HttpResponse) ||
-                 parameter.ParameterType == typeof(ClaimsPrincipal) ||
-                 parameter.ParameterType == typeof(CancellationToken) ||
-                 ParameterBindingMethodCache.HasBindAsyncMethod(parameter) ||
-                 _serviceProviderIsService?.IsService(parameter.ParameterType) == true)
+        else if (
+            parameter.CustomAttributes.Any(
+                a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
+            )
+            || parameter.ParameterType == typeof(HttpContext)
+            || parameter.ParameterType == typeof(HttpRequest)
+            || parameter.ParameterType == typeof(HttpResponse)
+            || parameter.ParameterType == typeof(ClaimsPrincipal)
+            || parameter.ParameterType == typeof(CancellationToken)
+            || ParameterBindingMethodCache.HasBindAsyncMethod(parameter)
+            || _serviceProviderIsService?.IsService(parameter.ParameterType) == true
+        )
         {
-            return (BindingSource.Services, parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Services,
+                parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
-        else if (parameter.ParameterType == typeof(string) || ParameterBindingMethodCache.HasTryParseMethod(parameter))
+        else if (
+            parameter.ParameterType == typeof(string)
+            || ParameterBindingMethodCache.HasTryParseMethod(parameter)
+        )
         {
             // complex types will display as strings since they use custom parsing via TryParse on a string
-            var displayType = !parameter.ParameterType.IsPrimitive && Nullable.GetUnderlyingType(parameter.ParameterType)?.IsPrimitive != true
-                ? typeof(string) : parameter.ParameterType;
+            var displayType =
+                !parameter.ParameterType.IsPrimitive
+                && Nullable.GetUnderlyingType(parameter.ParameterType)?.IsPrimitive != true
+                    ? typeof(string)
+                    : parameter.ParameterType;
             // Path vs query cannot be determined by RequestDelegateFactory at startup currently because of the layering, but can be done here.
             if (parameter.Name is { } name && pattern.GetParameter(name) is not null)
             {
@@ -267,14 +341,20 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
         }
         else
         {
-            return (BindingSource.Body, parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Body,
+                parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
     }
 
     private static void AddSupportedResponseTypes(
         IList<ApiResponseType> supportedResponseTypes,
         Type returnType,
-        EndpointMetadataCollection endpointMetadata)
+        EndpointMetadataCollection endpointMetadata
+    )
     {
         var responseType = returnType;
 
@@ -291,19 +371,30 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
 
         // We support attributes (which implement the IApiResponseMetadataProvider) interface
         // and types added via the extension methods (which implement IProducesResponseTypeMetadata).
-        var responseProviderMetadata = endpointMetadata.GetOrderedMetadata<IApiResponseMetadataProvider>();
-        var producesResponseMetadata = endpointMetadata.GetOrderedMetadata<IProducesResponseTypeMetadata>();
+        var responseProviderMetadata =
+            endpointMetadata.GetOrderedMetadata<IApiResponseMetadataProvider>();
+        var producesResponseMetadata =
+            endpointMetadata.GetOrderedMetadata<IProducesResponseTypeMetadata>();
         var errorMetadata = endpointMetadata.GetMetadata<ProducesErrorResponseTypeAttribute>();
         var defaultErrorType = errorMetadata?.Type ?? typeof(void);
         var contentTypes = new MediaTypeCollection();
 
         var responseProviderMetadataTypes = ApiResponseTypeProvider.ReadResponseMetadata(
-            responseProviderMetadata, responseType, defaultErrorType, contentTypes);
-        var producesResponseMetadataTypes = ReadResponseMetadata(producesResponseMetadata, responseType);
+            responseProviderMetadata,
+            responseType,
+            defaultErrorType,
+            contentTypes
+        );
+        var producesResponseMetadataTypes = ReadResponseMetadata(
+            producesResponseMetadata,
+            responseType
+        );
 
         // We favor types added via the extension methods (which implements IProducesResponseTypeMetadata)
         // over those that are added via attributes.
-        var responseMetadataTypes = producesResponseMetadataTypes.Values.Concat(responseProviderMetadataTypes);
+        var responseMetadataTypes = producesResponseMetadataTypes.Values.Concat(
+            responseProviderMetadataTypes
+        );
 
         if (responseMetadataTypes.Any())
         {
@@ -324,16 +415,24 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
                 }
                 // Only set the default response type if it hasn't already been set via a
                 // ProducesResponseTypeAttribute.
-                else if (apiResponseType.ApiResponseFormats.Count == 0 && CreateDefaultApiResponseFormat(apiResponseType.Type) is { } defaultResponseFormat)
+                else if (
+                    apiResponseType.ApiResponseFormats.Count == 0
+                    && CreateDefaultApiResponseFormat(apiResponseType.Type)
+                        is { } defaultResponseFormat
+                )
                 {
                     apiResponseType.ApiResponseFormats.Add(defaultResponseFormat);
                 }
 
-                if (!supportedResponseTypes.Any(existingResponseType => existingResponseType.StatusCode == apiResponseType.StatusCode))
+                if (
+                    !supportedResponseTypes.Any(
+                        existingResponseType =>
+                            existingResponseType.StatusCode == apiResponseType.StatusCode
+                    )
+                )
                 {
                     supportedResponseTypes.Add(apiResponseType);
                 }
-
             }
         }
         else
@@ -354,7 +453,8 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
 
     private static Dictionary<int, ApiResponseType> ReadResponseMetadata(
         IReadOnlyList<IProducesResponseTypeMetadata> responseMetadata,
-        Type? type)
+        Type? type
+    )
     {
         var results = new Dictionary<int, ApiResponseType>();
 
@@ -370,7 +470,13 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
 
             if (apiResponseType.Type == typeof(void))
             {
-                if (type != null && (statusCode == StatusCodes.Status200OK || statusCode == StatusCodes.Status201Created))
+                if (
+                    type != null
+                    && (
+                        statusCode == StatusCodes.Status200OK
+                        || statusCode == StatusCodes.Status201Created
+                    )
+                )
                 {
                     // Allow setting the response type from the return type of the method if it has
                     // not been set explicitly by the method.
@@ -386,7 +492,12 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
                     attributeContentTypes.Add(contentType);
                 }
             }
-            ApiResponseTypeProvider.CalculateResponseFormatForType(apiResponseType, attributeContentTypes, responseTypeMetadataProviders: null, modelMetadataProvider: null);
+            ApiResponseTypeProvider.CalculateResponseFormatForType(
+                apiResponseType,
+                attributeContentTypes,
+                responseTypeMetadataProviders: null,
+                modelMetadataProvider: null
+            );
 
             if (apiResponseType.Type != null)
             {
@@ -436,20 +547,21 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
     private static EndpointModelMetadata CreateModelMetadata(Type type) =>
         new(ModelMetadataIdentity.ForType(type));
 
-    private static void AddResponseContentTypes(IList<ApiResponseFormat> apiResponseFormats, IReadOnlyList<string> contentTypes)
+    private static void AddResponseContentTypes(
+        IList<ApiResponseFormat> apiResponseFormats,
+        IReadOnlyList<string> contentTypes
+    )
     {
         foreach (var contentType in contentTypes)
         {
-            apiResponseFormats.Add(new ApiResponseFormat
-            {
-                MediaType = contentType,
-            });
+            apiResponseFormats.Add(new ApiResponseFormat { MediaType = contentType, });
         }
     }
 
     private static void AddActionDescriptorEndpointMetadata(
         ActionDescriptor actionDescriptor,
-        EndpointMetadataCollection endpointMetadata)
+        EndpointMetadataCollection endpointMetadata
+    )
     {
         if (endpointMetadata.Count > 0)
         {

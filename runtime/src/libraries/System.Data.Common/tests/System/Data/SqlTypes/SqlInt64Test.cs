@@ -351,7 +351,6 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(2614, test2550 + test64);
             Assert.Throws<OverflowException>(() => test64 + SqlInt64.MaxValue);
 
-
             // "/"-operator
             Assert.Equal(39, test2550 / test64);
             Assert.Equal(0, test24 / test64);
@@ -558,6 +557,7 @@ namespace System.Data.Tests.SqlTypes
             short testShort = 14;
             Assert.Equal(14, ((SqlInt64)testShort).Value);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {
@@ -565,9 +565,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal("long", qualifiedName.Name);
         }
 
-        internal void ReadWriteXmlTestInternal(string xml,
-                               long testval,
-                               string unit_test_id)
+        internal void ReadWriteXmlTestInternal(string xml, long testval, string unit_test_id)
         {
             SqlInt64 test;
             SqlInt64 test1;
@@ -599,7 +597,8 @@ namespace System.Data.Tests.SqlTypes
         {
             string xml1 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><long>4556</long>";
             string xml2 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><long>-6445</long>";
-            string xml3 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><long>0x455687AB3E4D56F</long>";
+            string xml3 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><long>0x455687AB3E4D56F</long>";
             long lngtest1 = 4556;
             long lngtest2 = -6445;
             long lngtest3 = 0x455687AB3E4D56F;
@@ -607,8 +606,9 @@ namespace System.Data.Tests.SqlTypes
             ReadWriteXmlTestInternal(xml1, lngtest1, "BA01");
             ReadWriteXmlTestInternal(xml2, lngtest2, "BA02");
 
-            InvalidOperationException ex =
-                Assert.Throws<InvalidOperationException>(() => ReadWriteXmlTestInternal(xml3, lngtest3, "#BA03"));
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => ReadWriteXmlTestInternal(xml3, lngtest3, "#BA03")
+            );
             Assert.Equal(typeof(FormatException), ex.InnerException.GetType());
         }
     }

@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             CodeAction codeAction,
             CodeActionPriority codeActionPriority,
             object? provider,
-            ImmutableArray<UnifiedSuggestedActionSet> nestedActionSets)
-            : base(workspace, codeAction, codeActionPriority)
+            ImmutableArray<UnifiedSuggestedActionSet> nestedActionSets
+        ) : base(workspace, codeAction, codeActionPriority)
         {
             Provider = provider;
             NestedActionSets = nestedActionSets;

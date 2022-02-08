@@ -24,22 +24,15 @@ namespace System.CommandLine.Suggest.Tests
         [Fact]
         public async Task When_shell_type_is_not_supported_it_throws()
         {
-            await _parser.InvokeAsync(
-                "script 123",
-                _console);
+            await _parser.InvokeAsync("script 123", _console);
 
-            _console.Error
-                    .ToString()
-                    .Should()
-                    .Contain("Shell '123' is not supported.");
+            _console.Error.ToString().Should().Contain("Shell '123' is not supported.");
         }
 
         [Fact]
         public async Task It_should_print_bash_shell_script()
         {
-            await _parser.InvokeAsync(
-                "script bash",
-                _console);
+            await _parser.InvokeAsync("script bash", _console);
 
             _console.Out.ToString().Should().Contain("_dotnet_bash_complete()");
         }
@@ -47,9 +40,7 @@ namespace System.CommandLine.Suggest.Tests
         [Fact]
         public async Task It_should_print_powershell_shell_script()
         {
-            await _parser.InvokeAsync(
-                "script powershell",
-                _console);
+            await _parser.InvokeAsync("script powershell", _console);
 
             _console.Out.ToString().Should().Contain("Register-ArgumentCompleter");
         }

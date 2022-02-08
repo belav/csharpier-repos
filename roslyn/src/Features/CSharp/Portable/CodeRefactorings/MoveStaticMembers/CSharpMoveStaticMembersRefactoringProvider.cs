@@ -11,16 +11,21 @@ using Microsoft.CodeAnalysis.MoveStaticMembers;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.MoveStaticMembers
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.MoveStaticMembers), Shared]
-    internal class CSharpMoveStaticMembersRefactoringProvider : AbstractMoveStaticMembersRefactoringProvider
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.MoveStaticMembers
+        ),
+        Shared
+    ]
+    internal class CSharpMoveStaticMembersRefactoringProvider
+        : AbstractMoveStaticMembersRefactoringProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMoveStaticMembersRefactoringProvider() : base()
-        {
-        }
+        public CSharpMoveStaticMembersRefactoringProvider() : base() { }
 
-        protected override Task<SyntaxNode> GetSelectedNodeAsync(CodeRefactoringContext context)
-            => NodeSelectionHelpers.GetSelectedDeclarationOrVariableAsync(context);
+        protected override Task<SyntaxNode> GetSelectedNodeAsync(CodeRefactoringContext context) =>
+            NodeSelectionHelpers.GetSelectedDeclarationOrVariableAsync(context);
     }
 }

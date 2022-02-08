@@ -13,7 +13,8 @@ namespace System.Text.RegularExpressions
         /// Name of the environment variable used to opt-in to including the regex pattern in the DynamicMethod name.
         /// Set the environment variable to "1" to turn this on.
         /// </summary>
-        private const string IncludePatternInNamesEnvVar = "DOTNET_SYSTEM_TEXT_REGULAREXPRESSIONS_PATTERNINNAME";
+        private const string IncludePatternInNamesEnvVar =
+            "DOTNET_SYSTEM_TEXT_REGULAREXPRESSIONS_PATTERNINNAME";
 
         /// <summary>
         /// If true, the pattern (or a portion of it) are included in the generated DynamicMethod names.
@@ -21,7 +22,8 @@ namespace System.Text.RegularExpressions
         /// <remarks>
         /// This is opt-in to avoid exposing the pattern, which may itself be dynamically built in diagnostics by default.
         /// </remarks>
-        private static readonly bool s_includePatternInName = Environment.GetEnvironmentVariable(IncludePatternInNamesEnvVar) == "1";
+        private static readonly bool s_includePatternInName =
+            Environment.GetEnvironmentVariable(IncludePatternInNamesEnvVar) == "1";
 
         /// <summary>Parameter types for the generated Go and FindFirstChar methods.</summary>
         private static readonly Type[] s_paramTypes = new Type[] { typeof(RegexRunner) };
@@ -29,12 +31,15 @@ namespace System.Text.RegularExpressions
         /// <summary>Id number to use for the next compiled regex.</summary>
         private static int s_regexCount;
 
-        public RegexLWCGCompiler()
-        {
-        }
+        public RegexLWCGCompiler() { }
 
         /// <summary>The top-level driver. Initializes everything then calls the Generate* methods.</summary>
-        public RegexRunnerFactory FactoryInstanceFromCode(string pattern, RegexCode code, RegexOptions options, bool hasTimeout)
+        public RegexRunnerFactory FactoryInstanceFromCode(
+            string pattern,
+            RegexCode code,
+            RegexOptions options,
+            bool hasTimeout
+        )
         {
             _code = code;
             _codes = code.Codes;
@@ -54,13 +59,26 @@ namespace System.Text.RegularExpressions
             if (s_includePatternInName)
             {
                 const int DescriptionLimit = 100; // arbitrary limit to avoid very long method names
-                description = string.Concat("_", pattern.Length > DescriptionLimit ? pattern.AsSpan(0, DescriptionLimit) : pattern);
+                description = string.Concat(
+                    "_",
+                    pattern.Length > DescriptionLimit
+                      ? pattern.AsSpan(0, DescriptionLimit)
+                      : pattern
+                );
             }
 
-            DynamicMethod goMethod = DefineDynamicMethod($"Regex{regexNum}_Go{description}", null, typeof(CompiledRegexRunner));
+            DynamicMethod goMethod = DefineDynamicMethod(
+                $"Regex{regexNum}_Go{description}",
+                null,
+                typeof(CompiledRegexRunner)
+            );
             GenerateGo();
 
-            DynamicMethod findFirstCharMethod = DefineDynamicMethod($"Regex{regexNum}_FindFirstChar{description}", typeof(bool), typeof(CompiledRegexRunner));
+            DynamicMethod findFirstCharMethod = DefineDynamicMethod(
+                $"Regex{regexNum}_FindFirstChar{description}",
+                typeof(bool),
+                typeof(CompiledRegexRunner)
+            );
             GenerateFindFirstChar();
 
             return new CompiledRegexRunnerFactory(goMethod, findFirstCharMethod, _trackcount);
@@ -76,7 +94,15 @@ namespace System.Text.RegularExpressions
             const MethodAttributes Attribs = MethodAttributes.Public | MethodAttributes.Static;
             const CallingConventions Conventions = CallingConventions.Standard;
 
-            var dm = new DynamicMethod(methname, Attribs, Conventions, returntype, s_paramTypes, hostType, skipVisibility: false);
+            var dm = new DynamicMethod(
+                methname,
+                Attribs,
+                Conventions,
+                returntype,
+                s_paramTypes,
+                hostType,
+                skipVisibility: false
+            );
             _ilg = dm.GetILGenerator();
             return dm;
         }

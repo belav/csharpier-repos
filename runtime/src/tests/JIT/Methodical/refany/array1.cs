@@ -47,8 +47,10 @@ namespace JitTest
             TestRef(__makeref(genericArray));
             for (int i = 0; i < 16; i++)
             {
-                if (genericArray.GetValue(i) == null ||
-                    genericArray.GetValue(i).GetType() != typeof(Test))
+                if (
+                    genericArray.GetValue(i) == null
+                    || genericArray.GetValue(i).GetType() != typeof(Test)
+                )
                     return 1;
             }
 

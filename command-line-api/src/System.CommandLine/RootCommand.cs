@@ -11,23 +11,24 @@ namespace System.CommandLine
     /// Represents the main action that the application performs.
     /// </summary>
     /// <remarks>
-    /// Use the RootCommand object without any subcommands for applications that perform one action. Add subcommands 
-    /// to the root for applications that require actions identified by specific strings. For example, `dir` does not 
+    /// Use the RootCommand object without any subcommands for applications that perform one action. Add subcommands
+    /// to the root for applications that require actions identified by specific strings. For example, `dir` does not
     /// use any subcommands. See <see cref="Command"/> for applications with multiple actions.
     /// </remarks>
     public class RootCommand : Command
     {
         private static readonly Lazy<Assembly> _assembly =
-            new(() => Assembly.GetEntryAssembly() ??
-                      Assembly.GetExecutingAssembly(),
-                LazyThreadSafetyMode.PublicationOnly);
+            new(
+                () => Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly(),
+                LazyThreadSafetyMode.PublicationOnly
+            );
 
         private static readonly Lazy<string> _executablePath =
-            new(() => GetAssembly().Location,
-                LazyThreadSafetyMode.PublicationOnly);
+            new(() => GetAssembly().Location, LazyThreadSafetyMode.PublicationOnly);
 
         private static readonly Lazy<string> _executableName =
-            new(() =>
+            new(
+                () =>
                 {
                     var location = _executablePath.Value;
                     if (string.IsNullOrEmpty(location))
@@ -42,12 +43,11 @@ namespace System.CommandLine
 
                     return Path.GetFileNameWithoutExtension(location).Replace(" ", "");
                 },
-                LazyThreadSafetyMode.PublicationOnly);
+                LazyThreadSafetyMode.PublicationOnly
+            );
 
         /// <param name="description">The description of the command, shown in help.</param>
-        public RootCommand(string description = "") : base(ExecutableName, description)
-        {
-        }
+        public RootCommand(string description = "") : base(ExecutableName, description) { }
 
         internal static Assembly GetAssembly() => _assembly.Value;
 

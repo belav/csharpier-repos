@@ -23,14 +23,21 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHelp
 {
-    internal partial class Controller :
-        AbstractController<Controller.Session, Model, ISignatureHelpPresenterSession, ISignatureHelpSession>,
-        IChainedCommandHandler<TypeCharCommandArgs>,
-        IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
+    internal partial class Controller
+        : AbstractController<
+              Controller.Session,
+              Model,
+              ISignatureHelpPresenterSession,
+              ISignatureHelpSession
+          >,
+          IChainedCommandHandler<TypeCharCommandArgs>,
+          IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
     {
         private readonly IAsyncCompletionBroker _completionBroker;
 
-        private readonly IList<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> _allProviders;
+        private readonly IList<
+            Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>
+        > _allProviders;
         private ImmutableArray<ISignatureHelpProvider> _providers;
         private IContentType _lastSeenContentType;
 
@@ -44,8 +51,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             IAsynchronousOperationListener asyncListener,
             IDocumentProvider documentProvider,
             IList<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> allProviders,
-            IAsyncCompletionBroker completionBroker)
-            : base(threadingContext, textView, subjectBuffer, presenter, asyncListener, documentProvider, "SignatureHelp")
+            IAsyncCompletionBroker completionBroker
+        )
+            : base(
+                threadingContext,
+                textView,
+                subjectBuffer,
+                presenter,
+                asyncListener,
+                documentProvider,
+                "SignatureHelp"
+            )
         {
             _completionBroker = completionBroker;
             _allProviders = allProviders;
@@ -60,8 +76,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             IAsynchronousOperationListener asyncListener,
             IDocumentProvider documentProvider,
             IList<ISignatureHelpProvider> providers,
-            IAsyncCompletionBroker completionBroker)
-            : base(threadingContext, textView, subjectBuffer, presenter, asyncListener, documentProvider, "SignatureHelp")
+            IAsyncCompletionBroker completionBroker
+        )
+            : base(
+                threadingContext,
+                textView,
+                subjectBuffer,
+                presenter,
+                asyncListener,
+                documentProvider,
+                "SignatureHelp"
+            )
         {
             _providers = providers.ToImmutableArray();
             _completionBroker = completionBroker;
@@ -91,14 +116,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
                     // We want the span to actually only go up to the caret.  So get the expected span
                     // and then update its end point accordingly.
-                    var updatedSpan = new SnapshotSpan(triggerSpan.Snapshot, Span.FromBounds(
-                        triggerSpan.Start,
-                        Math.Max(Math.Min(triggerSpan.End, GetCaretPointInViewBuffer().Position), triggerSpan.Start)));
+                    var updatedSpan = new SnapshotSpan(
+                        triggerSpan.Snapshot,
+                        Span.FromBounds(
+                            triggerSpan.Start,
+                            Math.Max(
+                                Math.Min(triggerSpan.End, GetCaretPointInViewBuffer().Position),
+                                triggerSpan.Start
+                            )
+                        )
+                    );
 
-                    var trackingSpan = updatedSpan.CreateTrackingSpan(SpanTrackingMode.EdgeInclusive);
+                    var trackingSpan = updatedSpan.CreateTrackingSpan(
+                        SpanTrackingMode.EdgeInclusive
+                    );
 
                     this.sessionOpt.PresenterSession.PresentItems(
-                         trackingSpan, modelOpt.Items, modelOpt.SelectedItem, modelOpt.SelectedParameter);
+                        trackingSpan,
+                        modelOpt.Items,
+                        modelOpt.SelectedItem,
+                        modelOpt.SelectedParameter
+                    );
                 }
             }
 
@@ -106,12 +144,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         }
 
         private void StartSession(
-            ImmutableArray<ISignatureHelpProvider> providers, SignatureHelpTriggerInfo triggerInfo)
+            ImmutableArray<ISignatureHelpProvider> providers,
+            SignatureHelpTriggerInfo triggerInfo
+        )
         {
             AssertIsForeground();
             VerifySessionIsInactive();
 
-            this.sessionOpt = new Session(this, Presenter.CreateSession(TextView, SubjectBuffer, null));
+            this.sessionOpt = new Session(
+                this,
+                Presenter.CreateSession(TextView, SubjectBuffer, null)
+            );
             this.sessionOpt.ComputeModel(providers, triggerInfo);
         }
 
@@ -128,8 +171,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document != null)
                 {
-                    _providers = document.Project.LanguageServices.WorkspaceServices.SelectMatchingExtensionValues(
-                        _allProviders, this.SubjectBuffer.ContentType).ToImmutableArray();
+                    _providers = document.Project.LanguageServices.WorkspaceServices
+                        .SelectMatchingExtensionValues(
+                            _allProviders,
+                            this.SubjectBuffer.ContentType
+                        )
+                        .ToImmutableArray();
                     _lastSeenContentType = currentContentType;
                 }
             }
@@ -151,7 +198,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 return;
             }
 
-            sessionOpt.ComputeModel(GetProviders(), new SignatureHelpTriggerInfo(SignatureHelpTriggerReason.RetriggerCommand));
+            sessionOpt.ComputeModel(
+                GetProviders(),
+                new SignatureHelpTriggerInfo(SignatureHelpTriggerReason.RetriggerCommand)
+            );
         }
     }
 }

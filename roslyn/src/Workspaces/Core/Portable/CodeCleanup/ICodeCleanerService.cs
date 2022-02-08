@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
 {
     /// <summary>
     /// Internal code cleanup service interface.
-    /// 
+    ///
     /// This is not supposed to be used directly. It just provides a way to get the right service from each language.
     /// </summary>
     internal interface ICodeCleanerService : ILanguageService
@@ -26,13 +26,24 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         /// <summary>
         /// This will run all provided code cleaners in an order that is given to the method.
         /// </summary>
-        Task<Document> CleanupAsync(Document document, ImmutableArray<TextSpan> spans, ImmutableArray<ICodeCleanupProvider> providers, CancellationToken cancellationToken);
+        Task<Document> CleanupAsync(
+            Document document,
+            ImmutableArray<TextSpan> spans,
+            ImmutableArray<ICodeCleanupProvider> providers,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// This will run all provided code cleaners in an order that is given to the method.
-        /// 
+        ///
         /// This will do cleanups that don't require any semantic information.
         /// </summary>
-        Task<SyntaxNode> CleanupAsync(SyntaxNode root, ImmutableArray<TextSpan> spans, Workspace workspace, ImmutableArray<ICodeCleanupProvider> providers, CancellationToken cancellationToken);
+        Task<SyntaxNode> CleanupAsync(
+            SyntaxNode root,
+            ImmutableArray<TextSpan> spans,
+            Workspace workspace,
+            ImmutableArray<ICodeCleanupProvider> providers,
+            CancellationToken cancellationToken
+        );
     }
 }

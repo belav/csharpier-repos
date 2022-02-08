@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // <>m__Finally1
             // <>m__Finally2
             // <>m__Finally3
-            // . . . 
+            // . . .
             // that will roughly match native naming scheme and may also be easier when need to debug.
             Debug.Assert((char)GeneratedNameKind.IteratorFinallyMethod == 'm');
             return "<>m__Finally" + StringExtensions.GetNumeral(Math.Abs(iteratorState + 2));
@@ -40,19 +40,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static string MakeStaticLambdaDisplayClassName(int methodOrdinal, int generation)
         {
-            return MakeMethodScopedSynthesizedName(GeneratedNameKind.LambdaDisplayClass, methodOrdinal, generation);
+            return MakeMethodScopedSynthesizedName(
+                GeneratedNameKind.LambdaDisplayClass,
+                methodOrdinal,
+                generation
+            );
         }
 
-        internal static string MakeLambdaDisplayClassName(int methodOrdinal, int generation, int closureOrdinal, int closureGeneration)
+        internal static string MakeLambdaDisplayClassName(
+            int methodOrdinal,
+            int generation,
+            int closureOrdinal,
+            int closureGeneration
+        )
         {
             // -1 for singleton static lambdas
             Debug.Assert(closureOrdinal >= -1);
             Debug.Assert(methodOrdinal >= 0);
 
-            return MakeMethodScopedSynthesizedName(GeneratedNameKind.LambdaDisplayClass, methodOrdinal, generation, suffix: "DisplayClass", entityOrdinal: closureOrdinal, entityGeneration: closureGeneration);
+            return MakeMethodScopedSynthesizedName(
+                GeneratedNameKind.LambdaDisplayClass,
+                methodOrdinal,
+                generation,
+                suffix: "DisplayClass",
+                entityOrdinal: closureOrdinal,
+                entityGeneration: closureGeneration
+            );
         }
 
-        internal static string MakeAnonymousTypeTemplateName(int index, int submissionSlotIndex, string moduleId)
+        internal static string MakeAnonymousTypeTemplateName(
+            int index,
+            int submissionSlotIndex,
+            string moduleId
+        )
         {
             var name = "<" + moduleId + ">f__AnonymousType" + StringExtensions.GetNumeral(index);
             if (submissionSlotIndex >= 0)
@@ -73,12 +93,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return "<" + propertyName + ">j__TPar";
         }
 
-        internal static string MakeStateMachineTypeName(string methodName, int methodOrdinal, int generation)
+        internal static string MakeStateMachineTypeName(
+            string methodName,
+            int methodOrdinal,
+            int generation
+        )
         {
             Debug.Assert(generation >= 0);
             Debug.Assert(methodOrdinal >= -1);
 
-            return MakeMethodScopedSynthesizedName(GeneratedNameKind.StateMachineType, methodOrdinal, generation, methodName);
+            return MakeMethodScopedSynthesizedName(
+                GeneratedNameKind.StateMachineType,
+                methodOrdinal,
+                generation,
+                methodName
+            );
         }
 
         internal static string MakeBaseMethodWrapperName(int uniqueId)
@@ -87,7 +116,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return "<>n__" + StringExtensions.GetNumeral(uniqueId);
         }
 
-        internal static string MakeLambdaMethodName(string methodName, int methodOrdinal, int methodGeneration, int lambdaOrdinal, int lambdaGeneration)
+        internal static string MakeLambdaMethodName(
+            string methodName,
+            int methodOrdinal,
+            int methodGeneration,
+            int lambdaOrdinal,
+            int lambdaGeneration
+        )
         {
             Debug.Assert(methodOrdinal >= -1);
             Debug.Assert(methodGeneration >= 0);
@@ -96,25 +131,59 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // The EE displays the containing method name and unique id in the stack trace,
             // and uses it to find the original binding context.
-            return MakeMethodScopedSynthesizedName(GeneratedNameKind.LambdaMethod, methodOrdinal, methodGeneration, methodName, entityOrdinal: lambdaOrdinal, entityGeneration: lambdaGeneration);
+            return MakeMethodScopedSynthesizedName(
+                GeneratedNameKind.LambdaMethod,
+                methodOrdinal,
+                methodGeneration,
+                methodName,
+                entityOrdinal: lambdaOrdinal,
+                entityGeneration: lambdaGeneration
+            );
         }
 
-        internal static string MakeLambdaCacheFieldName(int methodOrdinal, int generation, int lambdaOrdinal, int lambdaGeneration)
+        internal static string MakeLambdaCacheFieldName(
+            int methodOrdinal,
+            int generation,
+            int lambdaOrdinal,
+            int lambdaGeneration
+        )
         {
             Debug.Assert(methodOrdinal >= -1);
             Debug.Assert(lambdaOrdinal >= 0);
 
-            return MakeMethodScopedSynthesizedName(GeneratedNameKind.LambdaCacheField, methodOrdinal, generation, entityOrdinal: lambdaOrdinal, entityGeneration: lambdaGeneration);
+            return MakeMethodScopedSynthesizedName(
+                GeneratedNameKind.LambdaCacheField,
+                methodOrdinal,
+                generation,
+                entityOrdinal: lambdaOrdinal,
+                entityGeneration: lambdaGeneration
+            );
         }
 
-        internal static string MakeLocalFunctionName(string methodName, string localFunctionName, int methodOrdinal, int methodGeneration, int lambdaOrdinal, int lambdaGeneration)
+        internal static string MakeLocalFunctionName(
+            string methodName,
+            string localFunctionName,
+            int methodOrdinal,
+            int methodGeneration,
+            int lambdaOrdinal,
+            int lambdaGeneration
+        )
         {
             Debug.Assert(methodOrdinal >= -1);
             Debug.Assert(methodGeneration >= 0);
             Debug.Assert(lambdaOrdinal >= 0);
             Debug.Assert(lambdaGeneration >= 0);
 
-            return MakeMethodScopedSynthesizedName(GeneratedNameKind.LocalFunction, methodOrdinal, methodGeneration, methodName, localFunctionName, GeneratedNameConstants.LocalFunctionNameTerminator, lambdaOrdinal, lambdaGeneration);
+            return MakeMethodScopedSynthesizedName(
+                GeneratedNameKind.LocalFunction,
+                methodOrdinal,
+                methodGeneration,
+                methodName,
+                localFunctionName,
+                GeneratedNameConstants.LocalFunctionNameTerminator,
+                lambdaOrdinal,
+                lambdaGeneration
+            );
         }
 
         private static string MakeMethodScopedSynthesizedName(
@@ -125,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string? suffix = null,
             char suffixTerminator = default,
             int entityOrdinal = -1,
-            int entityGeneration = -1)
+            int entityGeneration = -1
+        )
         {
             Debug.Assert(methodOrdinal >= -1);
             Debug.Assert(methodGeneration >= 0 || methodGeneration == -1 && methodOrdinal == -1);
@@ -142,9 +212,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 builder.Append(methodName);
 
                 // CLR generally allows names with dots, however some APIs like IMetaDataImport
-                // can only return full type names combined with namespaces. 
+                // can only return full type names combined with namespaces.
                 // see: http://msdn.microsoft.com/en-us/library/ms230143.aspx (IMetaDataImport::GetTypeDefProps)
-                // When working with such APIs, names with dots become ambiguous since metadata 
+                // When working with such APIs, names with dots become ambiguous since metadata
                 // consumer cannot figure where namespace ends and actual type name starts.
                 // Therefore it is a good practice to avoid type names with dots.
                 // As a replacement use a character not allowed in C# identifier to avoid conflicts.
@@ -197,14 +267,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal static string MakeHoistedLocalFieldName(SynthesizedLocalKind kind, int slotIndex, string? localName = null)
+        internal static string MakeHoistedLocalFieldName(
+            SynthesizedLocalKind kind,
+            int slotIndex,
+            string? localName = null
+        )
         {
             Debug.Assert((localName != null) == (kind == SynthesizedLocalKind.UserDefined));
             Debug.Assert(slotIndex >= 0);
             Debug.Assert(kind.IsLongLived());
 
             // Lambda display class local follows a different naming pattern.
-            // EE depends on the name format. 
+            // EE depends on the name format.
             // There's logic in the EE to recognize locals that have been captured by a lambda
             // and would have been hoisted for the state machine.  Basically, we just hoist the local containing
             // the instance of the lambda display class and retain its original name (rather than using an
@@ -252,11 +326,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return "<>9";
         }
 
-        internal static string? MakeSynthesizedLocalName(SynthesizedLocalKind kind, ref int uniqueId)
+        internal static string? MakeSynthesizedLocalName(
+            SynthesizedLocalKind kind,
+            ref int uniqueId
+        )
         {
             Debug.Assert(kind.IsLongLived());
 
-            // Lambda display class local has to be named. EE depends on the name format. 
+            // Lambda display class local has to be named. EE depends on the name format.
             if (kind == SynthesizedLocalKind.LambdaDisplayClass)
             {
                 return MakeLambdaDisplayLocalName(uniqueId++);
@@ -267,13 +344,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static string MakeSynthesizedInstrumentationPayloadLocalFieldName(int uniqueId)
         {
-            return GeneratedNameConstants.SynthesizedLocalNamePrefix + "InstrumentationPayload" + StringExtensions.GetNumeral(uniqueId);
+            return GeneratedNameConstants.SynthesizedLocalNamePrefix
+                + "InstrumentationPayload"
+                + StringExtensions.GetNumeral(uniqueId);
         }
 
         internal static string MakeLambdaDisplayLocalName(int uniqueId)
         {
             Debug.Assert((char)GeneratedNameKind.DisplayClassLocalOrField == '8');
-            return GeneratedNameConstants.SynthesizedLocalNamePrefix + "<>8__locals" + StringExtensions.GetNumeral(uniqueId);
+            return GeneratedNameConstants.SynthesizedLocalNamePrefix
+                + "<>8__locals"
+                + StringExtensions.GetNumeral(uniqueId);
         }
 
         internal static string MakeFixedFieldImplementationName(string fieldName)
@@ -292,7 +373,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static string MakeAsyncIteratorPromiseOfValueOrEndFieldName()
         {
-            Debug.Assert((char)GeneratedNameKind.AsyncIteratorPromiseOfValueOrEndBackingField == 'v');
+            Debug.Assert(
+                (char)GeneratedNameKind.AsyncIteratorPromiseOfValueOrEndBackingField == 'v'
+            );
             return "<>v__promiseOfValueOrEnd";
         }
 
@@ -337,11 +420,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return "<>3__" + parameterName;
         }
 
-        internal static string MakeDynamicCallSiteContainerName(int methodOrdinal, int localFunctionOrdinal, int generation)
+        internal static string MakeDynamicCallSiteContainerName(
+            int methodOrdinal,
+            int localFunctionOrdinal,
+            int generation
+        )
         {
-            return MakeMethodScopedSynthesizedName(GeneratedNameKind.DynamicCallSiteContainerType, methodOrdinal, generation,
-                                                   suffix: localFunctionOrdinal != -1 ? localFunctionOrdinal.ToString() : null,
-                                                   suffixTerminator: localFunctionOrdinal != -1 ? '_' : default);
+            return MakeMethodScopedSynthesizedName(
+                GeneratedNameKind.DynamicCallSiteContainerType,
+                methodOrdinal,
+                generation,
+                suffix: localFunctionOrdinal != -1 ? localFunctionOrdinal.ToString() : null,
+                suffixTerminator: localFunctionOrdinal != -1 ? '_' : default
+            );
         }
 
         internal static string MakeDynamicCallSiteFieldName(int uniqueId)
@@ -359,7 +450,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Produces name of the synthesized delegate symbol that encodes the parameter byref-ness and return type of the delegate.
         /// The arity is appended via `N suffix in MetadataName calculation since the delegate is generic.
         /// </summary>
-        internal static string MakeSynthesizedDelegateName(RefKindVector byRefs, bool returnsVoid, int generation)
+        internal static string MakeSynthesizedDelegateName(
+            RefKindVector byRefs,
+            bool returnsVoid,
+            int generation
+        )
         {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var builder = pooledBuilder.Builder;
@@ -375,7 +470,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return pooledBuilder.ToStringAndFree();
         }
 
-        internal static bool TryParseSynthesizedDelegateName(string name, out RefKindVector byRefs, out bool returnsVoid, out int generation, out int parameterCount)
+        internal static bool TryParseSynthesizedDelegateName(
+            string name,
+            out RefKindVector byRefs,
+            out bool returnsVoid,
+            out int generation,
+            out int parameterCount
+        )
         {
             byRefs = default;
             parameterCount = 0;

@@ -42,11 +42,21 @@ public static class WebHostBuilderIISExtensions
             return hostBuilder;
         }
 
-        var port = hostBuilder.GetSetting(ServerPort) ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{ServerPort}");
-        var path = hostBuilder.GetSetting(ServerPath) ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{ServerPath}");
-        var pairingToken = hostBuilder.GetSetting(PairingToken) ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{PairingToken}");
-        var iisAuth = hostBuilder.GetSetting(IISAuth) ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{IISAuth}");
-        var websocketsSupported = hostBuilder.GetSetting(IISWebSockets) ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{IISWebSockets}");
+        var port =
+            hostBuilder.GetSetting(ServerPort)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{ServerPort}");
+        var path =
+            hostBuilder.GetSetting(ServerPath)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{ServerPath}");
+        var pairingToken =
+            hostBuilder.GetSetting(PairingToken)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{PairingToken}");
+        var iisAuth =
+            hostBuilder.GetSetting(IISAuth)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{IISAuth}");
+        var websocketsSupported =
+            hostBuilder.GetSetting(IISWebSockets)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{IISWebSockets}");
 
         bool isWebSocketsSupported;
         if (!bool.TryParse(websocketsSupported, out isWebSocketsSupported))
@@ -55,7 +65,11 @@ public static class WebHostBuilderIISExtensions
             isWebSocketsSupported = (Environment.OSVersion.Version >= new Version(6, 2));
         }
 
-        if (!string.IsNullOrEmpty(port) && !string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(pairingToken))
+        if (
+            !string.IsNullOrEmpty(port)
+            && !string.IsNullOrEmpty(path)
+            && !string.IsNullOrEmpty(pairingToken)
+        )
         {
             // Set flag to prevent double service configuration
             hostBuilder.UseSetting(nameof(UseIISIntegration), true.ToString());
@@ -69,7 +83,12 @@ public static class WebHostBuilderIISExtensions
             else
             {
                 // Lightup a new ANCM variable that tells us if auth is enabled.
-                foreach (var authType in iisAuth.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (
+                    var authType in iisAuth.Split(
+                        new[] { ';' },
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                )
                 {
                     if (!string.Equals(authType, "anonymous", StringComparison.OrdinalIgnoreCase))
                     {
@@ -82,27 +101,43 @@ public static class WebHostBuilderIISExtensions
             var address = "http://127.0.0.1:" + port;
             hostBuilder.CaptureStartupErrors(true);
 
-            hostBuilder.ConfigureServices(services =>
-            {
+            hostBuilder.ConfigureServices(
+                services =>
+                {
                     // Delay register the url so users don't accidentally overwrite it.
                     hostBuilder.UseSetting(WebHostDefaults.ServerUrlsKey, address);
-                hostBuilder.PreferHostingUrls(true);
-                services.AddSingleton<IServerIntegratedAuth>(_ => new ServerIntegratedAuth()
-                {
-                    IsEnabled = enableAuth,
-                    AuthenticationScheme = IISDefaults.AuthenticationScheme
-                });
-                services.AddSingleton<IStartupFilter>(new IISSetupFilter(pairingToken, new PathString(path), isWebSocketsSupported));
-                services.Configure<ForwardedHeadersOptions>(options =>
-                {
-                    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-                });
-                services.Configure<IISOptions>(options =>
-                {
-                    options.ForwardWindowsAuthentication = enableAuth;
-                });
-                services.AddAuthenticationCore();
-            });
+                    hostBuilder.PreferHostingUrls(true);
+                    services.AddSingleton<IServerIntegratedAuth>(
+                        _ =>
+                            new ServerIntegratedAuth()
+                            {
+                                IsEnabled = enableAuth,
+                                AuthenticationScheme = IISDefaults.AuthenticationScheme
+                            }
+                    );
+                    services.AddSingleton<IStartupFilter>(
+                        new IISSetupFilter(
+                            pairingToken,
+                            new PathString(path),
+                            isWebSocketsSupported
+                        )
+                    );
+                    services.Configure<ForwardedHeadersOptions>(
+                        options =>
+                        {
+                            options.ForwardedHeaders =
+                                ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                        }
+                    );
+                    services.Configure<IISOptions>(
+                        options =>
+                        {
+                            options.ForwardWindowsAuthentication = enableAuth;
+                        }
+                    );
+                    services.AddAuthenticationCore();
+                }
+            );
         }
 
         return hostBuilder;

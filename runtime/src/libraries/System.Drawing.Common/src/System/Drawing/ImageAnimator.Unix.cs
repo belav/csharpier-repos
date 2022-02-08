@@ -39,10 +39,8 @@ using System.Threading;
 
 namespace System.Drawing
 {
-
     internal sealed class AnimateEventArgs : EventArgs
     {
-
         private int frameCount;
         private int activeFrame;
         private Thread? thread;
@@ -71,12 +69,9 @@ namespace System.Drawing
 
     public sealed class ImageAnimator
     {
-
         private static Hashtable ht = Hashtable.Synchronized(new Hashtable());
 
-        private ImageAnimator()
-        {
-        }
+        private ImageAnimator() { }
 
         public static void Animate(Image image, EventHandler onFrameChangedHandler)
         {
@@ -147,7 +142,6 @@ namespace System.Drawing
                 UpdateImageFrame(image!);
         }
 
-
         public static void UpdateFrames(Image image)
         {
             if (image == null)
@@ -167,7 +161,6 @@ namespace System.Drawing
 
     internal sealed class WorkerThread
     {
-
         private EventHandler frameChangeHandler;
         private AnimateEventArgs animateEventArgs;
         private int[] delay;

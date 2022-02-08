@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact()]
         public void Test1()
         {
-            var iLSource = @"
+            var iLSource =
+                @"
 .assembly extern NotReferenced {}
 
 .class public auto ansi sealed D1`1<T>
@@ -155,7 +156,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 } // end of class C3
 ";
 
-
             var compilation1 = CreateCompilationWithILAndMscorlib40("", iLSource);
 
             var c3 = compilation1.GetTypeByMetadataName("C3");
@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void Test2()
         {
-            var iLSource = @"
+            var iLSource =
+                @"
 .assembly extern NotReferenced {}
 
 .class public auto ansi sealed D1`1<T>
@@ -359,7 +360,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
   } // end of property X::Token
 } // end of class X
 ";
-
 
             var compilation1 = CreateCompilationWithILAndMscorlib40("", iLSource);
 

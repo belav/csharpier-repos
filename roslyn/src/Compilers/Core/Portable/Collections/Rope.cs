@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis
         public abstract override string ToString();
         public abstract int Length { get; }
         protected abstract IEnumerable<char> GetChars();
+
         private Rope() { }
 
         /// <summary>
@@ -42,11 +43,13 @@ namespace Microsoft.CodeAnalysis
             if (r2 == null)
                 throw new ArgumentNullException(nameof(r2));
 
-            return
-                r1.Length == 0 ? r2 :
-                r2.Length == 0 ? r1 :
-                checked(r1.Length + r2.Length < 32) ? ForString(r1.ToString() + r2.ToString()) :
-                new ConcatRope(r1, r2);
+            return r1.Length == 0
+              ? r2
+              : r2.Length == 0
+                  ? r1
+                  : checked(r1.Length + r2.Length < 32)
+                      ? ForString(r1.ToString() + r2.ToString())
+                      : new ConcatRope(r1, r2);
         }
 
         /// <summary>
@@ -84,9 +87,13 @@ namespace Microsoft.CodeAnalysis
         private sealed class StringRope : Rope
         {
             private readonly string _value;
+
             public StringRope(string value) => _value = value;
+
             public override string ToString() => _value;
+
             public override int Length => _value.Length;
+
             protected override IEnumerable<char> GetChars() => _value;
         }
 
@@ -95,7 +102,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private sealed class ConcatRope : Rope
         {
-            private readonly Rope _left, _right;
+            private readonly Rope _left,
+                _right;
             public override int Length { get; }
 
             public ConcatRope(Rope left, Rope right)

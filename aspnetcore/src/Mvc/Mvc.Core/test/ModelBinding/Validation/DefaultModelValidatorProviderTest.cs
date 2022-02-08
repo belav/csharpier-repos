@@ -49,7 +49,9 @@ public class DefaultModelValidatorProviderTest
         // Assert
         var validatorItems = context.Results;
 
-        var validator = Assert.IsType<CustomModelValidatorAttribute>(Assert.Single(validatorItems).Validator);
+        var validator = Assert.IsType<CustomModelValidatorAttribute>(
+            Assert.Single(validatorItems).Validator
+        );
         Assert.Equal("Class", validator.Tag);
     }
 
@@ -62,7 +64,8 @@ public class DefaultModelValidatorProviderTest
 
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelValidatorAttributeOnProperty),
-            nameof(ModelValidatorAttributeOnProperty.Property));
+            nameof(ModelValidatorAttributeOnProperty.Property)
+        );
         var context = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
 
         // Act
@@ -71,7 +74,9 @@ public class DefaultModelValidatorProviderTest
         // Assert
         var validatorItems = context.Results;
 
-        var validator = Assert.IsType<CustomModelValidatorAttribute>(Assert.Single(validatorItems).Validator);
+        var validator = Assert.IsType<CustomModelValidatorAttribute>(
+            Assert.Single(validatorItems).Validator
+        );
         Assert.Equal("Property", validator.Tag);
     }
 
@@ -84,7 +89,8 @@ public class DefaultModelValidatorProviderTest
 
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelValidatorAttributeOnPropertyAndClass),
-            nameof(ModelValidatorAttributeOnPropertyAndClass.Property));
+            nameof(ModelValidatorAttributeOnPropertyAndClass.Property)
+        );
         var context = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
 
         // Act
@@ -94,8 +100,14 @@ public class DefaultModelValidatorProviderTest
         var validatorItems = context.Results;
 
         Assert.Equal(2, validatorItems.Count);
-        Assert.Single(validatorItems, v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Class");
-        Assert.Single(validatorItems, v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Property");
+        Assert.Single(
+            validatorItems,
+            v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Class"
+        );
+        Assert.Single(
+            validatorItems,
+            v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Property"
+        );
     }
 
     [Fact]
@@ -107,7 +119,8 @@ public class DefaultModelValidatorProviderTest
 
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ProductViewModel),
-            nameof(ProductViewModel.Id));
+            nameof(ProductViewModel.Id)
+        );
         var context = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
 
         // Act
@@ -116,7 +129,9 @@ public class DefaultModelValidatorProviderTest
         // Assert
         var validatorItems = context.Results;
 
-        var adapter = Assert.IsType<DataAnnotationsModelValidator>(Assert.Single(validatorItems).Validator);
+        var adapter = Assert.IsType<DataAnnotationsModelValidator>(
+            Assert.Single(validatorItems).Validator
+        );
         Assert.IsType<RangeAttribute>(adapter.Attribute);
     }
 
@@ -129,7 +144,8 @@ public class DefaultModelValidatorProviderTest
 
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ProductViewModel),
-            nameof(ProductViewModel.Name));
+            nameof(ProductViewModel.Name)
+        );
         var context = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
 
         // Act
@@ -139,8 +155,15 @@ public class DefaultModelValidatorProviderTest
         var validatorItems = context.Results;
 
         Assert.Equal(2, validatorItems.Count);
-        Assert.Single(validatorItems, v => ((DataAnnotationsModelValidator)v.Validator).Attribute is RegularExpressionAttribute);
-        Assert.Single(validatorItems, v => ((DataAnnotationsModelValidator)v.Validator).Attribute is StringLengthAttribute);
+        Assert.Single(
+            validatorItems,
+            v =>
+                ((DataAnnotationsModelValidator)v.Validator).Attribute is RegularExpressionAttribute
+        );
+        Assert.Single(
+            validatorItems,
+            v => ((DataAnnotationsModelValidator)v.Validator).Attribute is StringLengthAttribute
+        );
     }
 
     [Fact]
@@ -148,7 +171,12 @@ public class DefaultModelValidatorProviderTest
     {
         // Arrange
         var validatorProvider = new DefaultModelValidatorProvider();
-        var attributes = new object[] { new RequiredAttribute(), new CustomModelValidatorAttribute(), new BindRequiredAttribute(), };
+        var attributes = new object[]
+        {
+            new RequiredAttribute(),
+            new CustomModelValidatorAttribute(),
+            new BindRequiredAttribute(),
+        };
 
         // Act
         var result = validatorProvider.HasValidators(typeof(object), attributes);
@@ -185,9 +213,7 @@ public class DefaultModelValidatorProviderTest
     }
 
     [CustomModelValidator(Tag = "Class")]
-    private class ModelValidatorAttributeOnClass
-    {
-    }
+    private class ModelValidatorAttributeOnClass { }
 
     private class ModelValidatorAttributeOnProperty
     {
@@ -217,9 +243,7 @@ public class DefaultModelValidatorProviderTest
         public int Property { get; set; }
     }
 
-    private class CustomValidationAttribute : ValidationAttribute
-    {
-    }
+    private class CustomValidationAttribute : ValidationAttribute { }
 
     private class CustomValidationAttributeOnProperty
     {

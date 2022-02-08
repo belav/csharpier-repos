@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// MVIDs read from the assembly built for given project id.
         /// </summary>
-        private readonly Dictionary<ProjectId, (Guid Mvid, Diagnostic Error)> _projectModuleIds = new();
+        private readonly Dictionary<ProjectId, (Guid Mvid, Diagnostic Error)> _projectModuleIds =
+            new();
         private readonly Dictionary<Guid, ProjectId> _moduleIds = new();
         private readonly object _projectModuleIdsGuard = new();
 
@@ -56,7 +57,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// To avoid accessing metadata/symbol readers that have been disposed,
-        /// read lock is acquired before every operation that may access a baseline module/symbol reader 
+        /// read lock is acquired before every operation that may access a baseline module/symbol reader
         /// and write lock when the baseline readers are being disposed.
         /// </summary>
         private readonly ReaderWriterLockSlim _baselineAccessLock = new();
@@ -100,12 +101,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             IManagedHotReloadService debuggerService,
             Func<Project, CompilationOutputs> compilationOutputsProvider,
-            IEnumerable<KeyValuePair<DocumentId, CommittedSolution.DocumentState>> initialDocumentStates,
-            bool reportDiagnostics)
+            IEnumerable<
+                KeyValuePair<DocumentId, CommittedSolution.DocumentState>
+            > initialDocumentStates,
+            bool reportDiagnostics
+        )
         {
             _compilationOutputsProvider = compilationOutputsProvider;
             _reportTelemetry = ReportTelemetry;
-            _telemetry = new DebuggingSessionTelemetry(solution.State.SolutionAttributes.TelemetryId);
+            _telemetry = new DebuggingSessionTelemetry(
+                solution.State.SolutionAttributes.TelemetryId
+            );
 
             Id = id;
             DebuggerService = debuggerService;
@@ -113,10 +119,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             EditSession = new EditSession(
                 this,
-                nonRemappableRegions: ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>>.Empty,
+                nonRemappableRegions: ImmutableDictionary<
+                    ManagedMethodId,
+                    ImmutableArray<NonRemappableRegion>
+                >.Empty,
                 _editSessionTelemetry,
                 lazyActiveStatementMap: null,
-                inBreakState: false);
+                inBreakState: false
+            );
 
             ReportDiagnostics = reportDiagnostics;
         }
@@ -142,7 +152,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             if (Interlocked.Exchange(ref _pendingUpdate, null) != null)
             {
-                throw new InvalidOperationException($"Pending update has not been committed or discarded.");
+                throw new InvalidOperationException(
+                    $"Pending update has not been committed or discarded."
+                );
             }
         }
 
@@ -152,21 +164,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 throw new ObjectDisposedException(nameof(DebuggingSession));
         }
 
-        internal Task OnSourceFileUpdatedAsync(Document document)
-            => LastCommittedSolution.OnSourceFileUpdatedAsync(document, _cancellationSource.Token);
+        internal Task OnSourceFileUpdatedAsync(Document document) =>
+            LastCommittedSolution.OnSourceFileUpdatedAsync(document, _cancellationSource.Token);
 
         private void StorePendingUpdate(Solution solution, SolutionUpdate update)
         {
-            var previousPendingUpdate = Interlocked.Exchange(ref _pendingUpdate, new PendingSolutionUpdate(
-                solution,
-                update.EmitBaselines,
-                update.ModuleUpdates.Updates,
-                update.NonRemappableRegions));
+            var previousPendingUpdate = Interlocked.Exchange(
+                ref _pendingUpdate,
+                new PendingSolutionUpdate(
+                    solution,
+                    update.EmitBaselines,
+                    update.ModuleUpdates.Updates,
+                    update.NonRemappableRegions
+                )
+            );
 
             // commit/discard was not called:
             if (previousPendingUpdate != null)
             {
-                throw new InvalidOperationException($"Previous update has not been committed or discarded.");
+                throw new InvalidOperationException(
+                    $"Previous update has not been committed or discarded."
+                );
             }
         }
 
@@ -189,7 +207,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             _telemetry.LogEditSession(editSessionTelemetryData);
         }
 
-        public void EndSession(out ImmutableArray<DocumentId> documentsToReanalyze, out DebuggingSessionTelemetry.Data telemetryData)
+        public void EndSession(
+            out ImmutableArray<DocumentId> documentsToReanalyze,
+            out DebuggingSessionTelemetry.Data telemetryData
+        )
         {
             ThrowIfDisposed();
 
@@ -200,10 +221,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Dispose();
         }
 
-        public void BreakStateOrCapabilitiesChanged(bool? inBreakState, out ImmutableArray<DocumentId> documentsToReanalyze)
-            => RestartEditSession(nonRemappableRegions: null, inBreakState, out documentsToReanalyze);
+        public void BreakStateOrCapabilitiesChanged(
+            bool? inBreakState,
+            out ImmutableArray<DocumentId> documentsToReanalyze
+        ) => RestartEditSession(nonRemappableRegions: null, inBreakState, out documentsToReanalyze);
 
-        internal void RestartEditSession(ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>>? nonRemappableRegions, bool? inBreakState, out ImmutableArray<DocumentId> documentsToReanalyze)
+        internal void RestartEditSession(
+            ImmutableDictionary<
+                ManagedMethodId,
+                ImmutableArray<NonRemappableRegion>
+            >? nonRemappableRegions,
+            bool? inBreakState,
+            out ImmutableArray<DocumentId> documentsToReanalyze
+        )
         {
             ThrowIfDisposed();
 
@@ -214,7 +244,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 nonRemappableRegions ?? EditSession.NonRemappableRegions,
                 EditSession.Telemetry,
                 (inBreakState == null) ? EditSession.BaseActiveStatements : null,
-                inBreakState ?? EditSession.InBreakState);
+                inBreakState ?? EditSession.InBreakState
+            );
         }
 
         private ImmutableArray<IDisposable> GetBaselineModuleReaders()
@@ -225,8 +256,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        internal CompilationOutputs GetCompilationOutputs(Project project)
-            => _compilationOutputsProvider(project);
+        internal CompilationOutputs GetCompilationOutputs(Project project) =>
+            _compilationOutputsProvider(project);
 
         private bool AddModulePreparedForUpdate(Guid mvid)
         {
@@ -243,7 +274,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// An MVID and an error message to report, in case an IO exception occurred while reading the binary.
         /// The MVID is default if either project not built, or an it can't be read from the module binary.
         /// </returns>
-        internal async Task<(Guid Mvid, Diagnostic? Error)> GetProjectModuleIdAsync(Project project, CancellationToken cancellationToken)
+        internal async Task<(Guid Mvid, Diagnostic? Error)> GetProjectModuleIdAsync(
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             lock (_projectModuleIdsGuard)
             {
@@ -267,8 +301,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
                 catch (Exception e)
                 {
-                    var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(EditAndContinueErrorCode.ErrorReadingFile);
-                    return (Mvid: Guid.Empty, Error: Diagnostic.Create(descriptor, Location.None, new[] { outputs.AssemblyDisplayPath, e.Message }));
+                    var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
+                        EditAndContinueErrorCode.ErrorReadingFile
+                    );
+                    return (
+                        Mvid: Guid.Empty,
+                        Error: Diagnostic.Create(
+                            descriptor,
+                            Location.None,
+                            new[] { outputs.AssemblyDisplayPath, e.Message }
+                        )
+                    );
                 }
             }
 
@@ -298,7 +341,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Get <see cref="EmitBaseline"/> for given project.
         /// </summary>
         /// <returns>True unless the project outputs can't be read.</returns>
-        internal bool TryGetOrCreateEmitBaseline(Project project, out ImmutableArray<Diagnostic> diagnostics, [NotNullWhen(true)] out EmitBaseline? baseline, [NotNullWhen(true)] out ReaderWriterLockSlim? baselineAccessLock)
+        internal bool TryGetOrCreateEmitBaseline(
+            Project project,
+            out ImmutableArray<Diagnostic> diagnostics,
+            [NotNullWhen(true)] out EmitBaseline? baseline,
+            [NotNullWhen(true)] out ReaderWriterLockSlim? baselineAccessLock
+        )
         {
             baselineAccessLock = _baselineAccessLock;
 
@@ -312,7 +360,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             var outputs = GetCompilationOutputs(project);
-            if (!TryCreateInitialBaseline(outputs, project.Id, out diagnostics, out var newBaseline, out var debugInfoReaderProvider, out var metadataReaderProvider))
+            if (
+                !TryCreateInitialBaseline(
+                    outputs,
+                    project.Id,
+                    out diagnostics,
+                    out var newBaseline,
+                    out var debugInfoReaderProvider,
+                    out var metadataReaderProvider
+                )
+            )
             {
                 // Unable to read the DLL/PDB at this point (it might be open by another process).
                 // Don't cache the failure so that the user can attempt to apply changes again.
@@ -344,12 +401,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             out ImmutableArray<Diagnostic> diagnostics,
             [NotNullWhen(true)] out EmitBaseline? baseline,
             [NotNullWhen(true)] out DebugInformationReaderProvider? debugInfoReaderProvider,
-            [NotNullWhen(true)] out MetadataReaderProvider? metadataReaderProvider)
+            [NotNullWhen(true)] out MetadataReaderProvider? metadataReaderProvider
+        )
         {
-            // Read the metadata and symbols from the disk. Close the files as soon as we are done emitting the delta to minimize 
+            // Read the metadata and symbols from the disk. Close the files as soon as we are done emitting the delta to minimize
             // the time when they are being locked. Since we need to use the baseline that is produced by delta emit for the subsequent
-            // delta emit we need to keep the module metadata and symbol info backing the symbols of the baseline alive in memory. 
-            // Alternatively, we could drop the data once we are done with emitting the delta and re-emit the baseline again 
+            // delta emit we need to keep the module metadata and symbol info backing the symbols of the baseline alive in memory.
+            // Alternatively, we could drop the data once we are done with emitting the delta and re-emit the baseline again
             // when we need it next time and the module is loaded.
 
             diagnostics = default;
@@ -367,7 +425,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     throw new FileNotFoundException();
                 }
 
-                var debugInfoReader = debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
+                var debugInfoReader =
+                    debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
 
                 fileBeingRead = compilationOutputs.AssemblyDisplayPath;
 
@@ -378,23 +437,35 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
 
                 var metadataReader = metadataReaderProvider.GetMetadataReader();
-                var moduleMetadata = ModuleMetadata.CreateFromMetadata((IntPtr)metadataReader.MetadataPointer, metadataReader.MetadataLength);
+                var moduleMetadata = ModuleMetadata.CreateFromMetadata(
+                    (IntPtr)metadataReader.MetadataPointer,
+                    metadataReader.MetadataLength
+                );
 
                 baseline = EmitBaseline.CreateInitialBaseline(
                     moduleMetadata,
                     debugInfoReader.GetDebugInfo,
                     debugInfoReader.GetLocalSignature,
-                    debugInfoReader.IsPortable);
+                    debugInfoReader.IsPortable
+                );
 
                 success = true;
                 return true;
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write("Failed to create baseline for '{0}': {1}", projectId, e.Message);
+                EditAndContinueWorkspaceService.Log.Write(
+                    "Failed to create baseline for '{0}': {1}",
+                    projectId,
+                    e.Message
+                );
 
-                var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(EditAndContinueErrorCode.ErrorReadingFile);
-                diagnostics = ImmutableArray.Create(Diagnostic.Create(descriptor, Location.None, new[] { fileBeingRead, e.Message }));
+                var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
+                    EditAndContinueErrorCode.ErrorReadingFile
+                );
+                diagnostics = ImmutableArray.Create(
+                    Diagnostic.Create(descriptor, Location.None, new[] { fileBeingRead, e.Message })
+                );
             }
             finally
             {
@@ -408,8 +479,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return false;
         }
 
-        private static ImmutableDictionary<K, ImmutableArray<V>> GroupToImmutableDictionary<K, V>(IEnumerable<IGrouping<K, V>> items)
-            where K : notnull
+        private static ImmutableDictionary<K, ImmutableArray<V>> GroupToImmutableDictionary<K, V>(
+            IEnumerable<IGrouping<K, V>> items
+        ) where K : notnull
         {
             var builder = ImmutableDictionary.CreateBuilder<K, ImmutableArray<V>>();
 
@@ -421,7 +493,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return builder.ToImmutable();
         }
 
-        public async ValueTask<ImmutableArray<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, ActiveStatementSpanProvider activeStatementSpanProvider, CancellationToken cancellationToken)
+        public async ValueTask<ImmutableArray<Diagnostic>> GetDocumentDiagnosticsAsync(
+            Document document,
+            ActiveStatementSpanProvider activeStatementSpanProvider,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -447,22 +523,36 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // Allow user to make any changes in these documents, they won't be applied within the current debugging session.
                 // Do not report the file read error - it might be an intermittent issue. The error will be reported when the
                 // change is attempted to be applied.
-                var (mvid, _) = await GetProjectModuleIdAsync(project, cancellationToken).ConfigureAwait(false);
+                var (mvid, _) = await GetProjectModuleIdAsync(project, cancellationToken)
+                    .ConfigureAwait(false);
                 if (mvid == Guid.Empty)
                 {
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
-                var (oldDocument, oldDocumentState) = await LastCommittedSolution.GetDocumentAndStateAsync(document.Id, document, cancellationToken).ConfigureAwait(false);
-                if (oldDocumentState is CommittedSolution.DocumentState.OutOfSync or
-                    CommittedSolution.DocumentState.Indeterminate or
-                    CommittedSolution.DocumentState.DesignTimeOnly)
+                var (oldDocument, oldDocumentState) = await LastCommittedSolution
+                    .GetDocumentAndStateAsync(document.Id, document, cancellationToken)
+                    .ConfigureAwait(false);
+                if (
+                    oldDocumentState
+                    is CommittedSolution.DocumentState.OutOfSync
+                        or CommittedSolution.DocumentState.Indeterminate
+                        or CommittedSolution.DocumentState.DesignTimeOnly
+                )
                 {
                     // Do not report diagnostics for existing out-of-sync documents or design-time-only documents.
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
-                var analysis = await EditSession.Analyses.GetDocumentAnalysisAsync(LastCommittedSolution, oldDocument, document, activeStatementSpanProvider, cancellationToken).ConfigureAwait(false);
+                var analysis = await EditSession.Analyses
+                    .GetDocumentAnalysisAsync(
+                        LastCommittedSolution,
+                        oldDocument,
+                        document,
+                        activeStatementSpanProvider,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (analysis.HasChanges)
                 {
                     // Once we detected a change in a document let the debugger know that the corresponding loaded module
@@ -471,7 +561,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     if (AddModulePreparedForUpdate(mvid))
                     {
                         // fire and forget:
-                        _ = Task.Run(() => DebuggerService.PrepareModuleForUpdateAsync(mvid, cancellationToken), cancellationToken);
+                        _ = Task.Run(
+                            () =>
+                                DebuggerService.PrepareModuleForUpdateAsync(
+                                    mvid,
+                                    cancellationToken
+                                ),
+                            cancellationToken
+                        );
                     }
                 }
 
@@ -485,7 +582,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // track the document, so that we can refresh or clean diagnostics at the end of edit session:
                 EditSession.TrackDocumentWithReportedDiagnostics(document.Id);
 
-                var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var tree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 return analysis.RudeEditErrors.SelectAsArray((e, t) => e.ToDiagnostic(t), tree);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
@@ -497,11 +596,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public async ValueTask<EmitSolutionUpdateResults> EmitSolutionUpdateAsync(
             Solution solution,
             ActiveStatementSpanProvider activeStatementSpanProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
 
-            var solutionUpdate = await EditSession.EmitSolutionUpdateAsync(solution, activeStatementSpanProvider, cancellationToken).ConfigureAwait(false);
+            var solutionUpdate = await EditSession
+                .EmitSolutionUpdateAsync(solution, activeStatementSpanProvider, cancellationToken)
+                .ConfigureAwait(false);
 
             LogSolutionUpdate(solutionUpdate);
 
@@ -512,44 +614,57 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             // Note that we may return empty deltas if all updates have been deferred.
             // The debugger will still call commit or discard on the update batch.
-            return new EmitSolutionUpdateResults(solutionUpdate.ModuleUpdates, solutionUpdate.Diagnostics, solutionUpdate.DocumentsWithRudeEdits, solutionUpdate.SyntaxError);
+            return new EmitSolutionUpdateResults(
+                solutionUpdate.ModuleUpdates,
+                solutionUpdate.Diagnostics,
+                solutionUpdate.DocumentsWithRudeEdits,
+                solutionUpdate.SyntaxError
+            );
         }
 
         private void LogSolutionUpdate(SolutionUpdate update)
         {
-            EditAndContinueWorkspaceService.Log.Write("Solution update status: {0}",
-                ((int)update.ModuleUpdates.Status, typeof(ManagedModuleUpdateStatus)));
+            EditAndContinueWorkspaceService.Log.Write(
+                "Solution update status: {0}",
+                ((int)update.ModuleUpdates.Status, typeof(ManagedModuleUpdateStatus))
+            );
 
             if (update.ModuleUpdates.Updates.Length > 0)
             {
                 var firstUpdate = update.ModuleUpdates.Updates[0];
 
-                EditAndContinueWorkspaceService.Log.Write("Solution update deltas: #{0} [types: #{1} (0x{2}:X8), methods: #{3} (0x{4}:X8)",
+                EditAndContinueWorkspaceService.Log.Write(
+                    "Solution update deltas: #{0} [types: #{1} (0x{2}:X8), methods: #{3} (0x{4}:X8)",
                     update.ModuleUpdates.Updates.Length,
                     firstUpdate.UpdatedTypes.Length,
                     firstUpdate.UpdatedTypes.FirstOrDefault(),
                     firstUpdate.UpdatedMethods.Length,
-                    firstUpdate.UpdatedMethods.FirstOrDefault());
+                    firstUpdate.UpdatedMethods.FirstOrDefault()
+                );
             }
 
             if (update.Diagnostics.Length > 0)
             {
                 var firstProjectDiagnostic = update.Diagnostics[0];
 
-                EditAndContinueWorkspaceService.Log.Write("Solution update diagnostics: #{0} [{1}: {2}, ...]",
+                EditAndContinueWorkspaceService.Log.Write(
+                    "Solution update diagnostics: #{0} [{1}: {2}, ...]",
                     update.Diagnostics.Length,
                     firstProjectDiagnostic.ProjectId,
-                    firstProjectDiagnostic.Diagnostics[0]);
+                    firstProjectDiagnostic.Diagnostics[0]
+                );
             }
 
             if (update.DocumentsWithRudeEdits.Length > 0)
             {
                 var firstDocumentWithRudeEdits = update.DocumentsWithRudeEdits[0];
 
-                EditAndContinueWorkspaceService.Log.Write("Solution update documents with rude edits: #{0} [{1}: {2}, ...]",
+                EditAndContinueWorkspaceService.Log.Write(
+                    "Solution update documents with rude edits: #{0} [{1}: {2}, ...]",
                     update.DocumentsWithRudeEdits.Length,
                     firstDocumentWithRudeEdits.DocumentId,
-                    firstDocumentWithRudeEdits.Diagnostics[0].Kind);
+                    firstDocumentWithRudeEdits.Diagnostics[0].Kind
+                );
             }
 
             _lastModuleUpdatesLog = update.ModuleUpdates.Updates;
@@ -567,7 +682,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var newNonRemappableRegions = GroupToImmutableDictionary(
                 from moduleRegions in pendingUpdate.NonRemappableRegions
                 from region in moduleRegions.Regions
-                group region.Region by new ManagedMethodId(moduleRegions.ModuleId, region.Method));
+                group region.Region by new ManagedMethodId(moduleRegions.ModuleId, region.Method)
+            );
 
             if (newNonRemappableRegions.IsEmpty)
                 newNonRemappableRegions = null;
@@ -586,7 +702,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             _editSessionTelemetry.LogCommitted();
 
             // Restart edit session with no active statements (switching to run mode).
-            RestartEditSession(newNonRemappableRegions, inBreakState: false, out documentsToReanalyze);
+            RestartEditSession(
+                newNonRemappableRegions,
+                inBreakState: false,
+                out documentsToReanalyze
+            );
         }
 
         public void DiscardSolutionUpdate()
@@ -595,7 +715,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             _ = RetrievePendingUpdate();
         }
 
-        public async ValueTask<ImmutableArray<ImmutableArray<ActiveStatementSpan>>> GetBaseActiveStatementSpansAsync(Solution solution, ImmutableArray<DocumentId> documentIds, CancellationToken cancellationToken)
+        public async ValueTask<
+            ImmutableArray<ImmutableArray<ActiveStatementSpan>>
+        > GetBaseActiveStatementSpansAsync(
+            Solution solution,
+            ImmutableArray<DocumentId> documentIds,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -604,8 +730,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return default;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements.GetValueAsync(cancellationToken).ConfigureAwait(false);
-                using var _1 = PooledDictionary<string, ArrayBuilder<(ProjectId, int)>>.GetInstance(out var documentIndicesByMappedPath);
+                var baseActiveStatements = await EditSession.BaseActiveStatements
+                    .GetValueAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                using var _1 = PooledDictionary<string, ArrayBuilder<(ProjectId, int)>>.GetInstance(
+                    out var documentIndicesByMappedPath
+                );
                 using var _2 = PooledHashSet<ProjectId>.GetInstance(out var projectIds);
 
                 // Construct map of mapped file path to a text document in the current solution
@@ -614,7 +744,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 {
                     var documentId = documentIds[i];
 
-                    var document = await solution.GetTextDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
+                    var document = await solution
+                        .GetTextDocumentAsync(documentId, cancellationToken)
+                        .ConfigureAwait(false);
                     if (document?.FilePath == null)
                     {
                         // document has been deleted or has no path (can't have an active statement anymore):
@@ -624,12 +756,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     // Multiple documents may have the same path (linked file).
                     // The documents represent the files that #line directives map to.
                     // Documents that have the same path must have different project id.
-                    documentIndicesByMappedPath.MultiAdd(document.FilePath, (documentId.ProjectId, i));
+                    documentIndicesByMappedPath.MultiAdd(
+                        document.FilePath,
+                        (documentId.ProjectId, i)
+                    );
                     projectIds.Add(documentId.ProjectId);
                 }
 
-                using var _3 = PooledDictionary<ActiveStatement, ArrayBuilder<(DocumentId unmappedDocumentId, LinePositionSpan span)>>.GetInstance(
-                    out var activeStatementsInChangedDocuments);
+                using var _3 = PooledDictionary<
+                    ActiveStatement,
+                    ArrayBuilder<(DocumentId unmappedDocumentId, LinePositionSpan span)>
+                >.GetInstance(out var activeStatementsInChangedDocuments);
 
                 // Analyze changed documents in projects containing active statements:
                 foreach (var projectId in projectIds)
@@ -642,29 +779,51 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     }
 
                     var newProject = solution.GetRequiredProject(projectId);
-                    var analyzer = newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
-                    await foreach (var documentId in EditSession.GetChangedDocumentsAsync(oldProject, newProject, cancellationToken).ConfigureAwait(false))
+                    var analyzer =
+                        newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+                    await foreach (
+                        var documentId in EditSession
+                            .GetChangedDocumentsAsync(oldProject, newProject, cancellationToken)
+                            .ConfigureAwait(false)
+                    )
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var newDocument = await solution.GetRequiredDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+                        var newDocument = await solution
+                            .GetRequiredDocumentAsync(
+                                documentId,
+                                includeSourceGenerated: true,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
-                        var (oldDocument, _) = await LastCommittedSolution.GetDocumentAndStateAsync(newDocument.Id, newDocument, cancellationToken).ConfigureAwait(false);
+                        var (oldDocument, _) = await LastCommittedSolution
+                            .GetDocumentAndStateAsync(
+                                newDocument.Id,
+                                newDocument,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         if (oldDocument == null)
                         {
                             // Document is out-of-sync, can't reason about its content with respect to the binaries loaded in the debuggee.
                             continue;
                         }
 
-                        var oldDocumentActiveStatements = await baseActiveStatements.GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken).ConfigureAwait(false);
+                        var oldDocumentActiveStatements = await baseActiveStatements
+                            .GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken)
+                            .ConfigureAwait(false);
 
-                        var analysis = await analyzer.AnalyzeDocumentAsync(
-                            LastCommittedSolution.GetRequiredProject(documentId.ProjectId),
-                            EditSession.BaseActiveStatements,
-                            newDocument,
-                            newActiveStatementSpans: ImmutableArray<LinePositionSpan>.Empty,
-                            EditSession.Capabilities,
-                            cancellationToken).ConfigureAwait(false);
+                        var analysis = await analyzer
+                            .AnalyzeDocumentAsync(
+                                LastCommittedSolution.GetRequiredProject(documentId.ProjectId),
+                                EditSession.BaseActiveStatements,
+                                newDocument,
+                                newActiveStatementSpans: ImmutableArray<LinePositionSpan>.Empty,
+                                EditSession.Capabilities,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         // Document content did not change or unable to determine active statement spans in a document with syntax errors:
                         if (!analysis.ActiveStatements.IsDefault)
@@ -675,24 +834,34 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 // Example (old and new contents):
                                 //   #if Condition       #if Condition
                                 //     #line 1 a.txt       #line 1 a.txt
-                                //     [|F(1);|]           [|F(1000);|]     
+                                //     [|F(1);|]           [|F(1000);|]
                                 //   #else               #else
                                 //     #line 1 a.txt       #line 1 a.txt
                                 //     [|F(2);|]           [|F(2);|]
                                 //   #endif              #endif
-                                // 
+                                //
                                 // In the new solution the AS spans are different depending on which document view of the same file we are looking at.
                                 // Different views correspond to different projects.
-                                activeStatementsInChangedDocuments.MultiAdd(oldDocumentActiveStatements[i].Statement, (analysis.DocumentId, analysis.ActiveStatements[i].Span));
+                                activeStatementsInChangedDocuments.MultiAdd(
+                                    oldDocumentActiveStatements[i].Statement,
+                                    (analysis.DocumentId, analysis.ActiveStatements[i].Span)
+                                );
                             }
                         }
                     }
                 }
 
-                using var _4 = ArrayBuilder<ImmutableArray<ActiveStatementSpan>>.GetInstance(out var spans);
+                using var _4 = ArrayBuilder<ImmutableArray<ActiveStatementSpan>>.GetInstance(
+                    out var spans
+                );
                 spans.AddMany(ImmutableArray<ActiveStatementSpan>.Empty, documentIds.Length);
 
-                foreach (var (mappedPath, documentBaseActiveStatements) in baseActiveStatements.DocumentPathMap)
+                foreach (
+                    var (
+                        mappedPath,
+                        documentBaseActiveStatements
+                    ) in baseActiveStatements.DocumentPathMap
+                )
                 {
                     if (documentIndicesByMappedPath.TryGetValue(mappedPath, out var indices))
                     {
@@ -705,9 +874,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     LinePositionSpan span;
                                     DocumentId? unmappedDocumentId;
 
-                                    if (activeStatementsInChangedDocuments.TryGetValue(activeStatement, out var newSpans))
+                                    if (
+                                        activeStatementsInChangedDocuments.TryGetValue(
+                                            activeStatement,
+                                            out var newSpans
+                                        )
+                                    )
                                     {
-                                        (unmappedDocumentId, span) = newSpans.Single(ns => ns.unmappedDocumentId.ProjectId == projectId);
+                                        (unmappedDocumentId, span) = newSpans.Single(
+                                            ns => ns.unmappedDocumentId.ProjectId == projectId
+                                        );
                                     }
                                     else
                                     {
@@ -715,8 +891,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                         unmappedDocumentId = null;
                                     }
 
-                                    return new ActiveStatementSpan(activeStatement.Ordinal, span, activeStatement.Flags, unmappedDocumentId);
-                                });
+                                    return new ActiveStatementSpan(
+                                        activeStatement.Ordinal,
+                                        span,
+                                        activeStatement.Flags,
+                                        unmappedDocumentId
+                                    );
+                                }
+                            );
                         }
                     }
                 }
@@ -726,17 +908,28 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 return spans.ToImmutable();
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
         }
 
-        public async ValueTask<ImmutableArray<ActiveStatementSpan>> GetAdjustedActiveStatementSpansAsync(TextDocument mappedDocument, ActiveStatementSpanProvider activeStatementSpanProvider, CancellationToken cancellationToken)
+        public async ValueTask<
+            ImmutableArray<ActiveStatementSpan>
+        > GetAdjustedActiveStatementSpansAsync(
+            TextDocument mappedDocument,
+            ActiveStatementSpanProvider activeStatementSpanProvider,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                if (_isDisposed || !EditSession.InBreakState || !mappedDocument.State.SupportsEditAndContinue())
+                if (
+                    _isDisposed
+                    || !EditSession.InBreakState
+                    || !mappedDocument.State.SupportsEditAndContinue()
+                )
                 {
                     return ImmutableArray<ActiveStatementSpan>.Empty;
                 }
@@ -753,49 +946,96 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<ActiveStatementSpan>.Empty;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements.GetValueAsync(cancellationToken).ConfigureAwait(false);
-                if (!baseActiveStatements.DocumentPathMap.TryGetValue(mappedDocument.FilePath, out var oldMappedDocumentActiveStatements))
+                var baseActiveStatements = await EditSession.BaseActiveStatements
+                    .GetValueAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                if (
+                    !baseActiveStatements.DocumentPathMap.TryGetValue(
+                        mappedDocument.FilePath,
+                        out var oldMappedDocumentActiveStatements
+                    )
+                )
                 {
                     // no active statements in this document
                     return ImmutableArray<ActiveStatementSpan>.Empty;
                 }
 
-                var newDocumentActiveStatementSpans = await activeStatementSpanProvider(mappedDocument.Id, mappedDocument.FilePath, cancellationToken).ConfigureAwait(false);
+                var newDocumentActiveStatementSpans = await activeStatementSpanProvider(
+                        mappedDocument.Id,
+                        mappedDocument.FilePath,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (newDocumentActiveStatementSpans.IsEmpty)
                 {
                     return ImmutableArray<ActiveStatementSpan>.Empty;
                 }
 
-                var analyzer = newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+                var analyzer =
+                    newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
 
-                using var _ = ArrayBuilder<ActiveStatementSpan>.GetInstance(out var adjustedMappedSpans);
+                using var _ = ArrayBuilder<ActiveStatementSpan>.GetInstance(
+                    out var adjustedMappedSpans
+                );
 
                 // Start with the current locations of the tracking spans.
                 adjustedMappedSpans.AddRange(newDocumentActiveStatementSpans);
 
                 // Update tracking spans to the latest known locations of the active statements contained in changed documents based on their analysis.
-                await foreach (var unmappedDocumentId in EditSession.GetChangedDocumentsAsync(oldProject, newProject, cancellationToken).ConfigureAwait(false))
+                await foreach (
+                    var unmappedDocumentId in EditSession
+                        .GetChangedDocumentsAsync(oldProject, newProject, cancellationToken)
+                        .ConfigureAwait(false)
+                )
                 {
-                    var newUnmappedDocument = await newSolution.GetRequiredDocumentAsync(unmappedDocumentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+                    var newUnmappedDocument = await newSolution
+                        .GetRequiredDocumentAsync(
+                            unmappedDocumentId,
+                            includeSourceGenerated: true,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                    var (oldUnmappedDocument, _) = await LastCommittedSolution.GetDocumentAndStateAsync(newUnmappedDocument.Id, newUnmappedDocument, cancellationToken).ConfigureAwait(false);
+                    var (oldUnmappedDocument, _) = await LastCommittedSolution
+                        .GetDocumentAndStateAsync(
+                            newUnmappedDocument.Id,
+                            newUnmappedDocument,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (oldUnmappedDocument == null)
                     {
                         // document out-of-date
                         continue;
                     }
 
-                    var analysis = await EditSession.Analyses.GetDocumentAnalysisAsync(LastCommittedSolution, oldUnmappedDocument, newUnmappedDocument, activeStatementSpanProvider, cancellationToken).ConfigureAwait(false);
+                    var analysis = await EditSession.Analyses
+                        .GetDocumentAnalysisAsync(
+                            LastCommittedSolution,
+                            oldUnmappedDocument,
+                            newUnmappedDocument,
+                            activeStatementSpanProvider,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                     // Document content did not change or unable to determine active statement spans in a document with syntax errors:
                     if (!analysis.ActiveStatements.IsDefault)
                     {
                         foreach (var activeStatement in analysis.ActiveStatements)
                         {
-                            var i = adjustedMappedSpans.FindIndex((s, ordinal) => s.Ordinal == ordinal, activeStatement.Ordinal);
+                            var i = adjustedMappedSpans.FindIndex(
+                                (s, ordinal) => s.Ordinal == ordinal,
+                                activeStatement.Ordinal
+                            );
                             if (i >= 0)
                             {
-                                adjustedMappedSpans[i] = new ActiveStatementSpan(activeStatement.Ordinal, activeStatement.Span, activeStatement.Flags, unmappedDocumentId);
+                                adjustedMappedSpans[i] = new ActiveStatementSpan(
+                                    activeStatement.Ordinal,
+                                    activeStatement.Span,
+                                    activeStatement.Flags,
+                                    unmappedDocumentId
+                                );
                             }
                         }
                     }
@@ -803,13 +1043,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 return adjustedMappedSpans.ToImmutable();
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
         }
 
-        public async ValueTask<LinePositionSpan?> GetCurrentActiveStatementPositionAsync(Solution solution, ActiveStatementSpanProvider activeStatementSpanProvider, ManagedInstructionId instructionId, CancellationToken cancellationToken)
+        public async ValueTask<LinePositionSpan?> GetCurrentActiveStatementPositionAsync(
+            Solution solution,
+            ActiveStatementSpanProvider activeStatementSpanProvider,
+            ManagedInstructionId instructionId,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
 
@@ -822,34 +1068,60 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return null;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements.GetValueAsync(cancellationToken).ConfigureAwait(false);
-                if (!baseActiveStatements.InstructionMap.TryGetValue(instructionId, out var baseActiveStatement))
+                var baseActiveStatements = await EditSession.BaseActiveStatements
+                    .GetValueAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                if (
+                    !baseActiveStatements.InstructionMap.TryGetValue(
+                        instructionId,
+                        out var baseActiveStatement
+                    )
+                )
                 {
                     return null;
                 }
 
-                var documentId = await FindChangedDocumentContainingUnmappedActiveStatementAsync(baseActiveStatements, instructionId.Method.Module, baseActiveStatement, solution, cancellationToken).ConfigureAwait(false);
+                var documentId = await FindChangedDocumentContainingUnmappedActiveStatementAsync(
+                        baseActiveStatements,
+                        instructionId.Method.Module,
+                        baseActiveStatement,
+                        solution,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (documentId == null)
                 {
                     // Active statement not found in any changed documents, return its last position:
                     return baseActiveStatement.Span;
                 }
 
-                var newDocument = await solution.GetDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+                var newDocument = await solution
+                    .GetDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken)
+                    .ConfigureAwait(false);
                 if (newDocument == null)
                 {
                     // The document has been deleted.
                     return null;
                 }
 
-                var (oldDocument, _) = await LastCommittedSolution.GetDocumentAndStateAsync(newDocument.Id, newDocument, cancellationToken).ConfigureAwait(false);
+                var (oldDocument, _) = await LastCommittedSolution
+                    .GetDocumentAndStateAsync(newDocument.Id, newDocument, cancellationToken)
+                    .ConfigureAwait(false);
                 if (oldDocument == null)
                 {
                     // document out-of-date
                     return null;
                 }
 
-                var analysis = await EditSession.Analyses.GetDocumentAnalysisAsync(LastCommittedSolution, oldDocument, newDocument, activeStatementSpanProvider, cancellationToken).ConfigureAwait(false);
+                var analysis = await EditSession.Analyses
+                    .GetDocumentAnalysisAsync(
+                        LastCommittedSolution,
+                        oldDocument,
+                        newDocument,
+                        activeStatementSpanProvider,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (!analysis.HasChanges)
                 {
                     // Document content did not change:
@@ -875,14 +1147,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Called by the debugger to determine whether a non-leaf active statement is in an exception region,
         /// so it can determine whether the active statement can be remapped. This only happens when the EnC is about to apply changes.
         /// If the debugger determines we can remap active statements, the application of changes proceeds.
-        /// 
+        ///
         /// TODO: remove (https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1310859)
         /// </summary>
         /// <returns>
-        /// True if the instruction is located within an exception region, false if it is not, null if the instruction isn't an active statement in a changed method 
+        /// True if the instruction is located within an exception region, false if it is not, null if the instruction isn't an active statement in a changed method
         /// or the exception regions can't be determined.
         /// </returns>
-        public async ValueTask<bool?> IsActiveStatementInExceptionRegionAsync(Solution solution, ManagedInstructionId instructionId, CancellationToken cancellationToken)
+        public async ValueTask<bool?> IsActiveStatementInExceptionRegionAsync(
+            Solution solution,
+            ManagedInstructionId instructionId,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
 
@@ -897,13 +1173,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // their exception regions will be needed. Hence it's not necessary to scope this query down to just the instruction
                 // the debugger is interested at this point while not calculating the others.
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements.GetValueAsync(cancellationToken).ConfigureAwait(false);
-                if (!baseActiveStatements.InstructionMap.TryGetValue(instructionId, out var baseActiveStatement))
+                var baseActiveStatements = await EditSession.BaseActiveStatements
+                    .GetValueAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                if (
+                    !baseActiveStatements.InstructionMap.TryGetValue(
+                        instructionId,
+                        out var baseActiveStatement
+                    )
+                )
                 {
                     return null;
                 }
 
-                var documentId = await FindChangedDocumentContainingUnmappedActiveStatementAsync(baseActiveStatements, instructionId.Method.Module, baseActiveStatement, solution, cancellationToken).ConfigureAwait(false);
+                var documentId = await FindChangedDocumentContainingUnmappedActiveStatementAsync(
+                        baseActiveStatements,
+                        instructionId.Method.Module,
+                        baseActiveStatement,
+                        solution,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (documentId == null)
                 {
                     // the active statement is contained in an unchanged document, thus it doesn't matter whether it's in an exception region or not
@@ -911,16 +1201,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
 
                 var newDocument = solution.GetRequiredDocument(documentId);
-                var (oldDocument, _) = await LastCommittedSolution.GetDocumentAndStateAsync(newDocument.Id, newDocument, cancellationToken).ConfigureAwait(false);
+                var (oldDocument, _) = await LastCommittedSolution
+                    .GetDocumentAndStateAsync(newDocument.Id, newDocument, cancellationToken)
+                    .ConfigureAwait(false);
                 if (oldDocument == null)
                 {
                     // Document is out-of-sync, can't reason about its content with respect to the binaries loaded in the debuggee.
                     return null;
                 }
 
-                var analyzer = newDocument.Project.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
-                var oldDocumentActiveStatements = await baseActiveStatements.GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken).ConfigureAwait(false);
-                return oldDocumentActiveStatements.GetStatement(baseActiveStatement.Ordinal).ExceptionRegions.IsActiveStatementCovered;
+                var analyzer =
+                    newDocument.Project.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+                var oldDocumentActiveStatements = await baseActiveStatements
+                    .GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken)
+                    .ConfigureAwait(false);
+                return oldDocumentActiveStatements.GetStatement(
+                    baseActiveStatement.Ordinal
+                ).ExceptionRegions.IsActiveStatementCovered;
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
             {
@@ -933,7 +1230,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Guid moduleId,
             ActiveStatement baseActiveStatement,
             Solution newSolution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -944,7 +1242,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     if (oldProject == null)
                     {
                         // TODO: https://github.com/dotnet/roslyn/issues/1204
-                        // project has been added - it may have active statements if the project was unloaded when debugging session started but the sources 
+                        // project has been added - it may have active statements if the project was unloaded when debugging session started but the sources
                         // correspond to the PDB.
                         return null;
                     }
@@ -956,14 +1254,25 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         return null;
                     }
 
-                    documentId = await GetChangedDocumentContainingUnmappedActiveStatementAsync(activeStatementsMap, LastCommittedSolution, oldProject, newProject, baseActiveStatement, cancellationToken).ConfigureAwait(false);
+                    documentId = await GetChangedDocumentContainingUnmappedActiveStatementAsync(
+                            activeStatementsMap,
+                            LastCommittedSolution,
+                            oldProject,
+                            newProject,
+                            baseActiveStatement,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
                     // Search for the document in all changed projects in the solution.
 
                     using var documentFoundCancellationSource = new CancellationTokenSource();
-                    using var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(documentFoundCancellationSource.Token, cancellationToken);
+                    using var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                        documentFoundCancellationSource.Token,
+                        cancellationToken
+                    );
 
                     async Task GetTaskAsync(ProjectId projectId)
                     {
@@ -971,10 +1280,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         var oldProject = LastCommittedSolution.GetProject(projectId);
 
                         // TODO: https://github.com/dotnet/roslyn/issues/1204
-                        // oldProject == null ==> project has been added - it may have active statements if the project was unloaded when debugging session started but the sources 
+                        // oldProject == null ==> project has been added - it may have active statements if the project was unloaded when debugging session started but the sources
                         // correspond to the PDB.
-                        var id = (oldProject != null) ? await GetChangedDocumentContainingUnmappedActiveStatementAsync(
-                        activeStatementsMap, LastCommittedSolution, oldProject, newProject, baseActiveStatement, linkedTokenSource.Token).ConfigureAwait(false) : null;
+                        var id =
+                            (oldProject != null)
+                                ? await GetChangedDocumentContainingUnmappedActiveStatementAsync(
+                                          activeStatementsMap,
+                                          LastCommittedSolution,
+                                          oldProject,
+                                          newProject,
+                                          baseActiveStatement,
+                                          linkedTokenSource.Token
+                                      )
+                                      .ConfigureAwait(false)
+                                : null;
 
                         Interlocked.CompareExchange(ref documentId, id, null);
                         if (id != null)
@@ -989,7 +1308,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     {
                         await Task.WhenAll(tasks).ConfigureAwait(false);
                     }
-                    catch (OperationCanceledException) when (documentFoundCancellationSource.IsCancellationRequested)
+                    catch (OperationCanceledException)
+                        when (documentFoundCancellationSource.IsCancellationRequested)
                     {
                         // nop: cancelled because we found the document
                     }
@@ -997,7 +1317,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 return documentId;
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
@@ -1005,24 +1326,40 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         // Enumerate all changed documents in the project whose module contains the active statement.
         // For each such document enumerate all #line directives to find which maps code to the span that contains the active statement.
-        private static async ValueTask<DocumentId?> GetChangedDocumentContainingUnmappedActiveStatementAsync(ActiveStatementsMap baseActiveStatements, CommittedSolution oldSolution, Project oldProject, Project newProject, ActiveStatement activeStatement, CancellationToken cancellationToken)
+        private static async ValueTask<DocumentId?> GetChangedDocumentContainingUnmappedActiveStatementAsync(
+            ActiveStatementsMap baseActiveStatements,
+            CommittedSolution oldSolution,
+            Project oldProject,
+            Project newProject,
+            ActiveStatement activeStatement,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(oldProject.Id == newProject.Id);
-            var analyzer = newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+            var analyzer =
+                newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
 
-            await foreach (var documentId in EditSession.GetChangedDocumentsAsync(oldProject, newProject, cancellationToken).ConfigureAwait(false))
+            await foreach (
+                var documentId in EditSession
+                    .GetChangedDocumentsAsync(oldProject, newProject, cancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var newDocument = newProject.GetRequiredDocument(documentId);
-                var (oldDocument, _) = await oldSolution.GetDocumentAndStateAsync(newDocument.Id, newDocument, cancellationToken).ConfigureAwait(false);
+                var (oldDocument, _) = await oldSolution
+                    .GetDocumentAndStateAsync(newDocument.Id, newDocument, cancellationToken)
+                    .ConfigureAwait(false);
                 if (oldDocument == null)
                 {
                     // Document is out-of-sync, can't reason about its content with respect to the binaries loaded in the debuggee.
                     return null;
                 }
 
-                var oldActiveStatements = await baseActiveStatements.GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken).ConfigureAwait(false);
+                var oldActiveStatements = await baseActiveStatements
+                    .GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken)
+                    .ConfigureAwait(false);
                 if (oldActiveStatements.Any(s => s.Statement == activeStatement))
                 {
                     return documentId;
@@ -1035,18 +1372,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         private static void ReportTelemetry(DebuggingSessionTelemetry.Data data)
         {
             // report telemetry (fire and forget):
-            _ = Task.Run(() => DebuggingSessionTelemetry.Log(data, Logger.Log, LogAggregator.GetNextId));
+            _ = Task.Run(
+                () => DebuggingSessionTelemetry.Log(data, Logger.Log, LogAggregator.GetNextId)
+            );
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly DebuggingSession _instance;
 
-            public TestAccessor(DebuggingSession instance)
-                => _instance = instance;
+            public TestAccessor(DebuggingSession instance) => _instance = instance;
 
             public ImmutableHashSet<Guid> GetModulesPreparedForUpdate()
             {
@@ -1064,14 +1401,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
             }
 
-            public ImmutableArray<IDisposable> GetBaselineModuleReaders()
-                => _instance.GetBaselineModuleReaders();
+            public ImmutableArray<IDisposable> GetBaselineModuleReaders() =>
+                _instance.GetBaselineModuleReaders();
 
-            public PendingSolutionUpdate? GetPendingSolutionUpdate()
-                => _instance._pendingUpdate;
+            public PendingSolutionUpdate? GetPendingSolutionUpdate() => _instance._pendingUpdate;
 
-            public void SetTelemetryLogger(Action<FunctionId, LogMessage> logger, Func<int> getNextId)
-                => _instance._reportTelemetry = data => DebuggingSessionTelemetry.Log(data, logger, getNextId);
+            public void SetTelemetryLogger(
+                Action<FunctionId, LogMessage> logger,
+                Func<int> getNextId
+            ) =>
+                _instance._reportTelemetry = data =>
+                    DebuggingSessionTelemetry.Log(data, logger, getNextId);
         }
     }
 }

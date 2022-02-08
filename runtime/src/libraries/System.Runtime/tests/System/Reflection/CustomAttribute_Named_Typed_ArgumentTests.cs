@@ -12,9 +12,15 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_CustomAttributeNamedTypedArgument_Constructor()
         {
-            AssertExtensions.Throws<ArgumentNullException>("memberInfo", () => new CustomAttributeNamedArgument(null, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "memberInfo",
+                () => new CustomAttributeNamedArgument(null, null)
+            );
 
-            MethodInfo m = typeof(CustomAttribute_Named_Typed_ArgumentTests).GetMethod("MyMethod", BindingFlags.Static | BindingFlags.NonPublic);
+            MethodInfo m = typeof(CustomAttribute_Named_Typed_ArgumentTests).GetMethod(
+                "MyMethod",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             foreach (CustomAttributeData cad in CustomAttributeData.GetCustomAttributes(m))
             {
                 foreach (CustomAttributeTypedArgument cata in cad.ConstructorArguments)
@@ -27,7 +33,10 @@ namespace System.Reflection.Tests
                 {
                     Assert.Equal("System.String Desc", cana.MemberInfo.ToString());
                     Assert.True(cana.TypedValue.ArgumentType == typeof(string));
-                    Assert.Equal("This is a description on a method", cana.TypedValue.Value.ToString());
+                    Assert.Equal(
+                        "This is a description on a method",
+                        cana.TypedValue.Value.ToString()
+                    );
                 }
                 return;
             }
@@ -55,7 +64,9 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_CustomAttributeTypedArgument_ToString()
         {
-            var argument = new CustomAttributeTypedArgument(new [] { new CustomAttributeTypedArgument(0) });
+            var argument = new CustomAttributeTypedArgument(
+                new[] { new CustomAttributeTypedArgument(0) }
+            );
 
             Assert.Equal("new CustomAttributeTypedArgument[1] { 0 }", argument.ToString());
         }
@@ -64,7 +75,8 @@ namespace System.Reflection.Tests
         private static void MyMethod() { }
     }
 
-    internal enum MyKinds {
+    internal enum MyKinds
+    {
         First,
         Second
     };

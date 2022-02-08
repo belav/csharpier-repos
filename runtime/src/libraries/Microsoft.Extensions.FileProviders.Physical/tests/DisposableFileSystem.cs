@@ -19,11 +19,10 @@ namespace Microsoft.Extensions.FileProviders
 
         public DirectoryInfo DirectoryInfo { get; }
 
-        public DirectoryInfo GetDirectory(string path)
-            => new DirectoryInfo(Path.Combine(RootPath, path));
+        public DirectoryInfo GetDirectory(string path) =>
+            new DirectoryInfo(Path.Combine(RootPath, path));
 
-        public FileInfo GetFile(string path)
-            => new FileInfo(Path.Combine(RootPath, path));
+        public FileInfo GetFile(string path) => new FileInfo(Path.Combine(RootPath, path));
 
         public DisposableFileSystem CreateFolder(string path)
         {
@@ -57,7 +56,11 @@ namespace Microsoft.Extensions.FileProviders
 
                 File.WriteAllText(
                     fullPath,
-                    string.Format("Automatically generated for testing on {0:yyyy}/{0:MM}/{0:dd} {0:hh}:{0:mm}:{0:ss}", DateTime.UtcNow));
+                    string.Format(
+                        "Automatically generated for testing on {0:yyyy}/{0:MM}/{0:dd} {0:hh}:{0:mm}:{0:ss}",
+                        DateTime.UtcNow
+                    )
+                );
             }
 
             return this;

@@ -10,12 +10,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
     internal static class DkmEvaluationResultFlagsExtensions
     {
-        public static bool Includes(this DkmEvaluationResultFlags flags, DkmEvaluationResultFlags desired)
+        public static bool Includes(
+            this DkmEvaluationResultFlags flags,
+            DkmEvaluationResultFlags desired
+        )
         {
             return (flags & desired) == desired;
         }
 
-        internal static DkmInspectionContext With(this DkmInspectionContext inspectionContext, DkmEvaluationFlags flags)
+        internal static DkmInspectionContext With(
+            this DkmInspectionContext inspectionContext,
+            DkmEvaluationFlags flags
+        )
         {
             return DkmInspectionContext.Create(
                 inspectionContext.InspectionSession,
@@ -29,7 +35,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 inspectionContext.ReturnValue,
                 inspectionContext.AdditionalVisualizationData,
                 inspectionContext.AdditionalVisualizationDataPriority,
-                inspectionContext.ReturnValues);
+                inspectionContext.ReturnValues
+            );
         }
     }
 }

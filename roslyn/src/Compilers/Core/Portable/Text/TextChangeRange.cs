@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="span"></param>
         /// <param name="newLength"></param>
-        public TextChangeRange(TextSpan span, int newLength)
-            : this()
+        public TextChangeRange(TextSpan span, int newLength) : this()
         {
             if (newLength < 0)
             {
@@ -49,9 +48,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         public bool Equals(TextChangeRange other)
         {
-            return
-                other.Span == this.Span &&
-                other.NewLength == this.NewLength;
+            return other.Span == this.Span && other.NewLength == this.NewLength;
         }
 
         /// <summary>
@@ -90,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// An empty set of changes.
         /// </summary>
-        public static IReadOnlyList<TextChangeRange> NoChanges => SpecializedCollections.EmptyReadOnlyList<TextChangeRange>();
+        public static IReadOnlyList<TextChangeRange> NoChanges =>
+            SpecializedCollections.EmptyReadOnlyList<TextChangeRange>();
 
         /// <summary>
         /// Collapse a set of <see cref="TextChangeRange"/>s into a single encompassing range.  If

@@ -17,10 +17,13 @@ namespace System
     {
         /// <summary>Size in bytes on entry to the reported collection.</summary>
         public long SizeBeforeBytes { get; }
+
         /// <summary>Fragmentation in bytes on entry to the reported collection.</summary>
         public long FragmentationBeforeBytes { get; }
+
         /// <summary>Size in bytes on exit from the reported collection.</summary>
         public long SizeAfterBytes { get; }
+
         /// <summary>Fragmentation in bytes on exit from the reported collection.</summary>
         public long FragmentationAfterBytes { get; }
     }
@@ -77,12 +80,14 @@ namespace System
         private GCGenerationInfo _generationInfo3;
         private GCGenerationInfo _generationInfo4;
 
-        internal ReadOnlySpan<GCGenerationInfo> GenerationInfoAsSpan => MemoryMarshal.CreateReadOnlySpan<GCGenerationInfo>(ref _generationInfo0, 5);
+        internal ReadOnlySpan<GCGenerationInfo> GenerationInfoAsSpan =>
+            MemoryMarshal.CreateReadOnlySpan<GCGenerationInfo>(ref _generationInfo0, 5);
 
         private TimeSpan _pauseDuration0;
         private TimeSpan _pauseDuration1;
 
-        internal ReadOnlySpan<TimeSpan> PauseDurationsAsSpan => MemoryMarshal.CreateReadOnlySpan<TimeSpan>(ref _pauseDuration0, 2);
+        internal ReadOnlySpan<TimeSpan> PauseDurationsAsSpan =>
+            MemoryMarshal.CreateReadOnlySpan<TimeSpan>(ref _pauseDuration0, 2);
     }
 
     /// <summary>Provides a set of APIs that can be used to retrieve garbage collection information.</summary>

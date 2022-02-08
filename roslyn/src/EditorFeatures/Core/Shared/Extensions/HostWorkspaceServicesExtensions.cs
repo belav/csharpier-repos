@@ -19,13 +19,17 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
     internal static class HostWorkspaceServicesExtensions
     {
         public static HostLanguageServices? GetLanguageServices(
-            this HostWorkspaceServices workspaceServices, ITextBuffer textBuffer)
+            this HostWorkspaceServices workspaceServices,
+            ITextBuffer textBuffer
+        )
         {
             return workspaceServices.GetLanguageServices(textBuffer.ContentType);
         }
 
         public static HostLanguageServices? GetLanguageServices(
-            this HostWorkspaceServices workspaceServices, IContentType contentType)
+            this HostWorkspaceServices workspaceServices,
+            IContentType contentType
+        )
         {
             foreach (var language in workspaceServices.SupportedLanguages)
             {
@@ -39,32 +43,48 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         }
 
         /// <summary>
-        /// Returns the name of the language (see <see cref="LanguageNames"/>) associated with the specified buffer. 
+        /// Returns the name of the language (see <see cref="LanguageNames"/>) associated with the specified buffer.
         /// </summary>
-        internal static string? GetLanguageName(this ITextBuffer buffer)
-            => Workspace.TryGetWorkspace(buffer.AsTextContainer(), out var workspace) ?
-               workspace.Services.GetLanguageServices(buffer.ContentType)?.Language : null;
+        internal static string? GetLanguageName(this ITextBuffer buffer) =>
+            Workspace.TryGetWorkspace(buffer.AsTextContainer(), out var workspace)
+              ? workspace.Services.GetLanguageServices(buffer.ContentType)?.Language
+              : null;
 
         /// <summary>
         /// A cache of host services -> (language name -> content type name).
         /// </summary>
-        private static readonly ConditionalWeakTable<HostWorkspaceServices, Dictionary<string, string>> s_hostServicesToContentTypeMap
-            = new();
+        private static readonly ConditionalWeakTable<
+            HostWorkspaceServices,
+            Dictionary<string, string>
+        > s_hostServicesToContentTypeMap = new();
 
-        private static string? GetDefaultContentTypeName(HostWorkspaceServices workspaceServices, string language)
+        private static string? GetDefaultContentTypeName(
+            HostWorkspaceServices workspaceServices,
+            string language
+        )
         {
-            if (!s_hostServicesToContentTypeMap.TryGetValue(workspaceServices, out var contentTypeMap))
+            if (
+                !s_hostServicesToContentTypeMap.TryGetValue(
+                    workspaceServices,
+                    out var contentTypeMap
+                )
+            )
             {
-                contentTypeMap = s_hostServicesToContentTypeMap.GetValue(workspaceServices, CreateContentTypeMap);
+                contentTypeMap = s_hostServicesToContentTypeMap.GetValue(
+                    workspaceServices,
+                    CreateContentTypeMap
+                );
             }
 
             contentTypeMap.TryGetValue(language, out var contentTypeName);
             return contentTypeName;
         }
 
-        private static Dictionary<string, string> CreateContentTypeMap(HostWorkspaceServices hostWorkspaceServices)
+        private static Dictionary<string, string> CreateContentTypeMap(
+            HostWorkspaceServices hostWorkspaceServices
+        )
         {
-            // Are we being hosted in a MEF host? If so, we can get content type information directly from the 
+            // Are we being hosted in a MEF host? If so, we can get content type information directly from the
             // metadata and avoid actually loading the assemblies
             var mefHostServices = (IMefHostExportProvider)hostWorkspaceServices.HostServices;
 
@@ -74,67 +94,83 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 // a type is moving to a new assembly. Avoid failing during content type discovery by de-duplicating
                 // services with identical metadata, opting to instead fail only in cases where the impacted service
                 // instance is used.
-                var exports = mefHostServices.GetExports<ILanguageService, ContentTypeLanguageMetadata>();
+                var exports = mefHostServices.GetExports<
+                    ILanguageService,
+                    ContentTypeLanguageMetadata
+                >();
                 return exports
-                        .Where(lz => !string.IsNullOrEmpty(lz.Metadata.DefaultContentType))
-                        .Select(lz => (lz.Metadata.Language, lz.Metadata.DefaultContentType))
-                        .Distinct()
-                        .ToDictionary(lz => lz.Language, lz => lz.DefaultContentType);
+                    .Where(lz => !string.IsNullOrEmpty(lz.Metadata.DefaultContentType))
+                    .Select(lz => (lz.Metadata.Language, lz.Metadata.DefaultContentType))
+                    .Distinct()
+                    .ToDictionary(lz => lz.Language, lz => lz.DefaultContentType);
             }
 
             // We can't do anything special, so fall back to the expensive path
             return hostWorkspaceServices.SupportedLanguages.ToDictionary(
                 l => l,
-                l => hostWorkspaceServices.GetLanguageServices(l).GetRequiredService<IContentTypeLanguageService>().GetDefaultContentType().TypeName);
+                l =>
+                    hostWorkspaceServices
+                        .GetLanguageServices(l)
+                        .GetRequiredService<IContentTypeLanguageService>()
+                        .GetDefaultContentType().TypeName
+            );
         }
 
         internal static IList<T> SelectMatchingExtensionValues<T, TMetadata>(
             this HostWorkspaceServices workspaceServices,
             IEnumerable<Lazy<T, TMetadata>> items,
-            IContentType contentType)
-            where TMetadata : ILanguageMetadata
+            IContentType contentType
+        ) where TMetadata : ILanguageMetadata
         {
             if (items == null)
             {
                 return SpecializedCollections.EmptyList<T>();
             }
 
-            return items.Where(lazy => LanguageMatches(lazy.Metadata.Language, contentType, workspaceServices)).
-                Select(lazy => lazy.Value).ToList();
+            return items
+                .Where(
+                    lazy => LanguageMatches(lazy.Metadata.Language, contentType, workspaceServices)
+                )
+                .Select(lazy => lazy.Value)
+                .ToList();
         }
 
         internal static IList<T> SelectMatchingExtensionValues<T>(
             this HostWorkspaceServices workspaceServices,
             IEnumerable<Lazy<T, OrderableLanguageAndRoleMetadata>> items,
             IContentType contentType,
-            ITextViewRoleSet roleSet)
+            ITextViewRoleSet roleSet
+        )
         {
             if (items == null)
             {
                 return SpecializedCollections.EmptyList<T>();
             }
 
-            return items.Where(lazy =>
-                {
-                    var metadata = lazy.Metadata;
-                    return LanguageMatches(metadata.Language, contentType, workspaceServices) &&
-                        RolesMatch(metadata.Roles, roleSet);
-                }).
-                Select(lazy => lazy.Value).ToList();
+            return items
+                .Where(
+                    lazy =>
+                    {
+                        var metadata = lazy.Metadata;
+                        return LanguageMatches(metadata.Language, contentType, workspaceServices)
+                            && RolesMatch(metadata.Roles, roleSet);
+                    }
+                )
+                .Select(lazy => lazy.Value)
+                .ToList();
         }
 
         private static bool LanguageMatches(
             string language,
             IContentType contentType,
-            HostWorkspaceServices workspaceServices)
+            HostWorkspaceServices workspaceServices
+        )
         {
             var defaultContentType = GetDefaultContentTypeName(workspaceServices, language);
             return (defaultContentType != null) ? contentType.IsOfType(defaultContentType) : false;
         }
 
-        private static bool RolesMatch(
-            IEnumerable<string> roles,
-            ITextViewRoleSet roleSet)
+        private static bool RolesMatch(IEnumerable<string> roles, ITextViewRoleSet roleSet)
         {
             return (roles == null) || (roleSet == null) || roleSet.ContainsAll(roles);
         }

@@ -3,7 +3,7 @@
 
 namespace System.Reflection
 {
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple=true, Inherited=false)]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
     internal sealed class AssemblyMetadataAttribute : Attribute
     {
         private string m_key;
@@ -22,7 +22,7 @@ namespace System.Reflection
 
         public string Value
         {
-            get { return m_value;}
+            get { return m_value; }
         }
     }
 }

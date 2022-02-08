@@ -43,8 +43,7 @@ public static class QueryHelpers
             throw new ArgumentNullException(nameof(value));
         }
 
-        return AddQueryString(
-            uri, new[] { new KeyValuePair<string, string?>(name, value) });
+        return AddQueryString(uri, new[] { new KeyValuePair<string, string?>(name, value) });
     }
 
     /// <summary>
@@ -78,7 +77,10 @@ public static class QueryHelpers
     /// <returns>The combined result.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="uri"/> is <c>null</c>.</exception>
     /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is <c>null</c>.</exception>
-    public static string AddQueryString(string uri, IEnumerable<KeyValuePair<string, StringValues>> queryString)
+    public static string AddQueryString(
+        string uri,
+        IEnumerable<KeyValuePair<string, StringValues>> queryString
+    )
     {
         if (uri == null)
         {
@@ -90,7 +92,13 @@ public static class QueryHelpers
             throw new ArgumentNullException(nameof(queryString));
         }
 
-        return AddQueryString(uri, queryString.SelectMany(kvp => kvp.Value, (kvp, v) => KeyValuePair.Create<string, string?>(kvp.Key, v)));
+        return AddQueryString(
+            uri,
+            queryString.SelectMany(
+                kvp => kvp.Value,
+                (kvp, v) => KeyValuePair.Create<string, string?>(kvp.Key, v)
+            )
+        );
     }
 
     /// <summary>
@@ -103,7 +111,8 @@ public static class QueryHelpers
     /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is <c>null</c>.</exception>
     public static string AddQueryString(
         string uri,
-        IEnumerable<KeyValuePair<string, string?>> queryString)
+        IEnumerable<KeyValuePair<string, string?>> queryString
+    )
     {
         if (uri == null)
         {

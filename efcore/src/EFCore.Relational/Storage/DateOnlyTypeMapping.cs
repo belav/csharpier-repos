@@ -28,34 +28,28 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="storeType">The name of the database type.</param>
         /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-        public DateOnlyTypeMapping(
-            string storeType,
-            DbType? dbType = System.Data.DbType.Date)
-            : base(storeType, typeof(DateOnly), dbType)
-        {
-        }
+        public DateOnlyTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Date)
+            : base(storeType, typeof(DateOnly), dbType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DateOnlyTypeMapping" /> class.
         /// </summary>
         /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-        protected DateOnlyTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+        protected DateOnlyTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+        { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters">The parameters for this mapping.</param>
         /// <returns>The newly created mapping.</returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new DateOnlyTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new DateOnlyTypeMapping(parameters);
 
         /// <summary>
         ///     Gets the string format to be used to generate SQL literals of this type.
         /// </summary>
-        protected override string SqlLiteralFormatString
-            => "DATE '" + DateOnlyFormatConst + "'";
+        protected override string SqlLiteralFormatString => "DATE '" + DateOnlyFormatConst + "'";
     }
 }

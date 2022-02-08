@@ -11,7 +11,9 @@ using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Components.HotReload;
 
-[assembly: MetadataUpdateHandler(typeof(Microsoft.AspNetCore.Components.Forms.EditContextDataAnnotationsExtensions))]
+[assembly: MetadataUpdateHandler(
+    typeof(Microsoft.AspNetCore.Components.Forms.EditContextDataAnnotationsExtensions)
+)]
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
@@ -50,7 +52,10 @@ public static class EditContextDataAnnotationsExtensions
 
     private sealed class DataAnnotationsEventSubscriptions : IDisposable
     {
-        private static readonly ConcurrentDictionary<(Type ModelType, string FieldName), PropertyInfo?> _propertyInfoCache = new();
+        private static readonly ConcurrentDictionary<
+            (Type ModelType, string FieldName),
+            PropertyInfo?
+        > _propertyInfoCache = new();
 
         private readonly EditContext _editContext;
         private readonly ValidationMessageStore _messages;
@@ -98,7 +103,12 @@ public static class EditContextDataAnnotationsExtensions
         {
             var validationContext = new ValidationContext(_editContext.Model);
             var validationResults = new List<ValidationResult>();
-            Validator.TryValidateObject(_editContext.Model, validationContext, validationResults, true);
+            Validator.TryValidateObject(
+                _editContext.Model,
+                validationContext,
+                validationResults,
+                true
+            );
 
             // Transfer results to the ValidationMessageStore
             _messages.Clear();
@@ -118,7 +128,10 @@ public static class EditContextDataAnnotationsExtensions
 
                 if (!hasMemberNames)
                 {
-                    _messages.Add(new FieldIdentifier(_editContext.Model, fieldName: string.Empty), validationResult.ErrorMessage!);
+                    _messages.Add(
+                        new FieldIdentifier(_editContext.Model, fieldName: string.Empty),
+                        validationResult.ErrorMessage!
+                    );
                 }
             }
 
@@ -138,7 +151,10 @@ public static class EditContextDataAnnotationsExtensions
             }
         }
 
-        private static bool TryGetValidatableProperty(in FieldIdentifier fieldIdentifier, [NotNullWhen(true)] out PropertyInfo? propertyInfo)
+        private static bool TryGetValidatableProperty(
+            in FieldIdentifier fieldIdentifier,
+            [NotNullWhen(true)] out PropertyInfo? propertyInfo
+        )
         {
             var cacheKey = (ModelType: fieldIdentifier.Model.GetType(), fieldIdentifier.FieldName);
             if (!_propertyInfoCache.TryGetValue(cacheKey, out propertyInfo))

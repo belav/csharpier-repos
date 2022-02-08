@@ -11,12 +11,19 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzer, CSharpUseNullCheckOverTypeCheckCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzer,
+        CSharpUseNullCheckOverTypeCheckCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
     public class CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzerTests
     {
-        private static async Task VerifyAsync(string source, string fixedSource, LanguageVersion languageVersion)
+        private static async Task VerifyAsync(
+            string source,
+            string fixedSource,
+            LanguageVersion languageVersion
+        )
         {
             await new VerifyCS.Test
             {
@@ -26,16 +33,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
             }.RunAsync();
         }
 
-        private static async Task VerifyCSharp9Async(string source, string fixedSource)
-            => await VerifyAsync(source, fixedSource, LanguageVersion.CSharp9);
+        private static async Task VerifyCSharp9Async(string source, string fixedSource) =>
+            await VerifyAsync(source, fixedSource, LanguageVersion.CSharp9);
 
-        private static async Task VerifyCSharp8Async(string source, string fixedSource)
-            => await VerifyAsync(source, fixedSource, LanguageVersion.CSharp8);
+        private static async Task VerifyCSharp8Async(string source, string fixedSource) =>
+            await VerifyAsync(source, fixedSource, LanguageVersion.CSharp8);
 
         [Fact]
         public async Task TestIsObjectCSharp8()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(string value)
@@ -50,7 +58,8 @@ public class C
         [Fact]
         public async Task TestIsObject()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(string value)
@@ -59,7 +68,8 @@ public class C
     }
 }
 ";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 public class C
 {
     public bool M(string value)
@@ -74,7 +84,8 @@ public class C
         [Fact]
         public async Task TestIsObject2()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(string value)
@@ -89,7 +100,8 @@ public class C
         [Fact]
         public async Task TestIsNotObject()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(string value)
@@ -98,7 +110,8 @@ public class C
     }
 }
 ";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 public class C
 {
     public bool M(string value)
@@ -113,7 +126,8 @@ public class C
         [Fact]
         public async Task TestIsNotObject2()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(string value)
@@ -128,7 +142,8 @@ public class C
         [Fact]
         public async Task TestIsStringAgainstObject_NoDiagnostic()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(object value)
@@ -143,7 +158,8 @@ public class C
         [Fact]
         public async Task TestIsStringAgainstString()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(string value)
@@ -152,7 +168,8 @@ public class C
     }
 }
 ";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 public class C
 {
     public bool M(string value)
@@ -167,7 +184,8 @@ public class C
         [Fact]
         public async Task TestIsNotStringAgainstObject_NoDiagnostic()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(object value)
@@ -182,7 +200,8 @@ public class C
         [Fact]
         public async Task TestIsNotStringAgainstString()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public bool M(string value)
@@ -191,7 +210,8 @@ public class C
     }
 }
 ";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 public class C
 {
     public bool M(string value)

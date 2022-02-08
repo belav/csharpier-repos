@@ -23,22 +23,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         ReadOnly = 1 << 10,
         Const = 1 << 11,
         Volatile = 1 << 12,
-
         Extern = 1 << 13,
         Partial = 1 << 14,
         Unsafe = 1 << 15,
         Fixed = 1 << 16,
         Virtual = 1 << 17, // used for method binding
         Override = 1 << 18, // used for method binding
-
-        Indexer = 1 << 19, // not a real modifier, but used to record that indexer syntax was used. 
-
+        Indexer = 1 << 19, // not a real modifier, but used to record that indexer syntax was used.
         Async = 1 << 20,
         Ref = 1 << 21, // used only for structs
-
         All = (1 << 23) - 1, // all modifiers
         Unset = 1 << 23, // used when a modifiers value hasn't yet been computed
-
-        AccessibilityMask = PrivateProtected | Private | Protected | Internal | ProtectedInternal | Public,
+        AccessibilityMask =
+            PrivateProtected | Private | Protected | Internal | ProtectedInternal | Public,
     }
 }

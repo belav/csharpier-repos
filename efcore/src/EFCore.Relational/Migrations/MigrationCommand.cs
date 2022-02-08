@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IRelationalCommand relationalCommand,
             DbContext? context,
             IRelationalCommandDiagnosticsLogger logger,
-            bool transactionSuppressed = false)
+            bool transactionSuppressed = false
+        )
         {
             _relationalCommand = relationalCommand;
             _context = context;
@@ -48,8 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <summary>
         ///     The SQL command text that will be executed against the database.
         /// </summary>
-        public virtual string CommandText
-            => _relationalCommand.CommandText;
+        public virtual string CommandText => _relationalCommand.CommandText;
 
         /// <summary>
         ///     The associated command logger.
@@ -64,14 +64,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <returns>The number of rows affected.</returns>
         public virtual int ExecuteNonQuery(
             IRelationalConnection connection,
-            IReadOnlyDictionary<string, object?>? parameterValues = null)
-            => _relationalCommand.ExecuteNonQuery(
+            IReadOnlyDictionary<string, object?>? parameterValues = null
+        ) =>
+            _relationalCommand.ExecuteNonQuery(
                 new RelationalCommandParameterObject(
                     connection,
                     parameterValues,
                     null,
                     _context,
-                    CommandLogger, CommandSource.Migrations));
+                    CommandLogger,
+                    CommandSource.Migrations
+                )
+            );
 
         /// <summary>
         ///     Executes the command and returns the number of rows affected.
@@ -84,14 +88,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual Task<int> ExecuteNonQueryAsync(
             IRelationalConnection connection,
             IReadOnlyDictionary<string, object?>? parameterValues = null,
-            CancellationToken cancellationToken = default)
-            => _relationalCommand.ExecuteNonQueryAsync(
+            CancellationToken cancellationToken = default
+        ) =>
+            _relationalCommand.ExecuteNonQueryAsync(
                 new RelationalCommandParameterObject(
                     connection,
                     parameterValues,
                     null,
                     _context,
-                    CommandLogger, CommandSource.Migrations),
-                cancellationToken);
+                    CommandLogger,
+                    CommandSource.Migrations
+                ),
+                cancellationToken
+            );
     }
 }

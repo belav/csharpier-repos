@@ -3,7 +3,13 @@
 
 namespace System.Runtime.InteropServices
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Struct, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Enum
+            | AttributeTargets.Struct,
+        Inherited = false
+    )]
     public sealed class TypeLibTypeAttribute : Attribute
     {
         public TypeLibTypeAttribute(TypeLibTypeFlags flags)

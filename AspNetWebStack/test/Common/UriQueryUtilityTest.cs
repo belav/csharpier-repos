@@ -14,16 +14,16 @@ namespace System.Net.Http
     {
         public static TheoryDataSet<string, string, string> UriQueryData
         {
-            get
-            {
-                return UriQueryTestData.UriQueryData;
-            }
+            get { return UriQueryTestData.UriQueryData; }
         }
 
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(typeof(UriQueryUtility), TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic);
+            Assert.Type.HasProperties(
+                typeof(UriQueryUtility),
+                TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
+            );
         }
 
         [Fact]

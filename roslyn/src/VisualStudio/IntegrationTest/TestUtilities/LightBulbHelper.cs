@@ -14,28 +14,36 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 {
     public static class LightBulbHelper
     {
-        public static async Task<bool> WaitForLightBulbSessionAsync(ILightBulbBroker broker, IWpfTextView view)
+        public static async Task<bool> WaitForLightBulbSessionAsync(
+            ILightBulbBroker broker,
+            IWpfTextView view
+        )
         {
             var startTime = DateTimeOffset.Now;
 
-            var active = await Helper.RetryAsync(async () =>
-            {
-                if (broker.IsLightBulbSessionActive(view))
+            var active = await Helper.RetryAsync(
+                async () =>
                 {
-                    return true;
-                }
+                    if (broker.IsLightBulbSessionActive(view))
+                    {
+                        return true;
+                    }
 
-                if (DateTimeOffset.Now > startTime + Helper.HangMitigatingTimeout)
-                {
-                    throw new InvalidOperationException("Expected a light bulb session to appear.");
-                }
+                    if (DateTimeOffset.Now > startTime + Helper.HangMitigatingTimeout)
+                    {
+                        throw new InvalidOperationException(
+                            "Expected a light bulb session to appear."
+                        );
+                    }
 
-                // checking whether there is any suggested action is async up to editor layer and our waiter doesn't track up to that point.
-                // so here, we have no other way than sleep (with timeout) to see LB is available.
-                await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(true);
+                    // checking whether there is any suggested action is async up to editor layer and our waiter doesn't track up to that point.
+                    // so here, we have no other way than sleep (with timeout) to see LB is available.
+                    await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(true);
 
-                return broker.IsLightBulbSessionActive(view);
-            }, TimeSpan.Zero);
+                    return broker.IsLightBulbSessionActive(view);
+                },
+                TimeSpan.Zero
+            );
 
             if (!active)
                 return false;
@@ -44,13 +52,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             return true;
         }
 
-        public static async Task<IEnumerable<SuggestedActionSet>> WaitForItemsAsync(ILightBulbBroker broker, IWpfTextView view)
+        public static async Task<IEnumerable<SuggestedActionSet>> WaitForItemsAsync(
+            ILightBulbBroker broker,
+            IWpfTextView view
+        )
         {
             var activeSession = broker.GetSession(view);
             if (activeSession == null)
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new InvalidOperationException($"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}");
+                throw new InvalidOperationException(
+                    $"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}"
+                );
             }
 
             var asyncSession = (IAsyncLightBulbSession)activeSession;
@@ -66,7 +79,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 if (e.Status == QuerySuggestedActionCompletionStatus.Completed)
                     tcs.SetResult(e.ActionSets.ToList());
                 else
-                    tcs.SetException(new InvalidOperationException($"Light bulb transitioned to non-complete state: {e.Status}"));
+                    tcs.SetException(
+                        new InvalidOperationException(
+                            $"Light bulb transitioned to non-complete state: {e.Status}"
+                        )
+                    );
 
                 asyncSession.SuggestedActionsUpdated -= handler;
             };
@@ -76,7 +93,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             // Calling PopulateWithData ensures the underlying session will call SuggestedActionsUpdated at least once
             // with the latest data computed.  This is needed so that if the lightbulb computation is already complete
             // that we hear about the results.
-            asyncSession.PopulateWithData(overrideRequestedActionCategories: null, operationContext: null);
+            asyncSession.PopulateWithData(
+                overrideRequestedActionCategories: null,
+                operationContext: null
+            );
 
             return await tcs.Task.WithTimeout(Helper.HangMitigatingTimeout).ConfigureAwait(false);
         }

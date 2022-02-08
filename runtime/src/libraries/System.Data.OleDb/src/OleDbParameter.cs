@@ -48,7 +48,8 @@ namespace System.Data.OleDb
             Size = size;
         }
 
-        public OleDbParameter(string? name, OleDbType dataType, int size, string? srcColumn) : this()
+        public OleDbParameter(string? name, OleDbType dataType, int size, string? srcColumn)
+            : this()
         {
             ParameterName = name;
             OleDbType = dataType;
@@ -57,12 +58,18 @@ namespace System.Data.OleDb
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public OleDbParameter(string? parameterName,
-                              OleDbType dbType, int size,
-                              ParameterDirection direction, bool isNullable,
-                              byte precision, byte scale,
-                              string? srcColumn, DataRowVersion srcVersion,
-                              object? value) : this()
+        public OleDbParameter(
+            string? parameterName,
+            OleDbType dbType,
+            int size,
+            ParameterDirection direction,
+            bool isNullable,
+            byte precision,
+            byte scale,
+            string? srcColumn,
+            DataRowVersion srcVersion,
+            object? value
+        ) : this()
         { // V1.0 everything
             ParameterName = parameterName;
             OleDbType = dbType;
@@ -77,12 +84,18 @@ namespace System.Data.OleDb
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public OleDbParameter(string? parameterName,
-                              OleDbType dbType, int size,
-                              ParameterDirection direction,
-                              byte precision, byte scale,
-                              string? sourceColumn, DataRowVersion sourceVersion, bool sourceColumnNullMapping,
-                              object? value) : this()
+        public OleDbParameter(
+            string? parameterName,
+            OleDbType dbType,
+            int size,
+            ParameterDirection direction,
+            byte precision,
+            byte scale,
+            string? sourceColumn,
+            DataRowVersion sourceVersion,
+            bool sourceColumnNullMapping,
+            object? value
+        ) : this()
         { // V2.0 everything - round trip all browsable properties + precision/scale
             ParameterName = parameterName;
             OleDbType = dbType;
@@ -98,18 +111,12 @@ namespace System.Data.OleDb
 
         internal int ChangeID
         {
-            get
-            {
-                return _changeID;
-            }
+            get { return _changeID; }
         }
 
         public override DbType DbType
         {
-            get
-            {
-                return GetBindType(Value).enumDbType;
-            }
+            get { return GetBindType(Value).enumDbType; }
             set
             {
                 NativeDBType? dbtype = _metaType;
@@ -126,16 +133,10 @@ namespace System.Data.OleDb
             ResetOleDbType();
         }
 
-        [
-        RefreshProperties(RefreshProperties.All),
-        DbProviderSpecificTypeProperty(true),
-        ]
+        [RefreshProperties(RefreshProperties.All), DbProviderSpecificTypeProperty(true),]
         public OleDbType OleDbType
         {
-            get
-            {
-                return GetBindType(Value).enumOleDbType;
-            }
+            get { return GetBindType(Value).enumOleDbType; }
             set
             {
                 NativeDBType? dbtype = _metaType;
@@ -182,14 +183,8 @@ namespace System.Data.OleDb
         [DefaultValue((byte)0)]
         public new byte Precision
         {
-            get
-            {
-                return PrecisionInternal;
-            }
-            set
-            {
-                PrecisionInternal = value;
-            }
+            get { return PrecisionInternal; }
+            set { PrecisionInternal = value; }
         }
         internal byte PrecisionInternal
         {
@@ -211,6 +206,7 @@ namespace System.Data.OleDb
                 }
             }
         }
+
         private bool ShouldSerializePrecision()
         {
             return (0 != _precision);
@@ -219,14 +215,8 @@ namespace System.Data.OleDb
         [DefaultValue((byte)0)]
         public new byte Scale
         {
-            get
-            {
-                return ScaleInternal;
-            }
-            set
-            {
-                ScaleInternal = value;
-            }
+            get { return ScaleInternal; }
+            set { ScaleInternal = value; }
         }
         internal byte ScaleInternal
         {
@@ -249,6 +239,7 @@ namespace System.Data.OleDb
                 }
             }
         }
+
         private bool ShouldSerializeScale()
         {
             return ShouldSerializeScale(_scale);
@@ -277,7 +268,9 @@ namespace System.Data.OleDb
         private void PropertyChanging()
         {
             unchecked
-            { _changeID++; }
+            {
+                _changeID++;
+            }
         }
 
         private void PropertyTypeChanging()
@@ -329,7 +322,8 @@ namespace System.Data.OleDb
             }
 
             int wtype = dbtype.wType;
-            int bytecount, size;
+            int bytecount,
+                size;
 
             if (dbtype.islong)
             { // long data (image, text, ntext)
@@ -382,7 +376,10 @@ namespace System.Data.OleDb
                     }
                     else
                     {
-                        Debug.Assert(NativeDBType.STR != dbtype.wType, "should have ANSI binding, describing is okay");
+                        Debug.Assert(
+                            NativeDBType.STR != dbtype.wType,
+                            "should have ANSI binding, describing is okay"
+                        );
                         bytecount = size;
                     }
 
@@ -410,7 +407,10 @@ namespace System.Data.OleDb
                     }
                     else
                     {
-                        Debug.Assert(NativeDBType.STR != dbtype.wType, "should have ANSI binding, describing is okay");
+                        Debug.Assert(
+                            NativeDBType.STR != dbtype.wType,
+                            "should have ANSI binding, describing is okay"
+                        );
                         bytecount = 0;
                     }
                 }
@@ -447,14 +447,14 @@ namespace System.Data.OleDb
             bindings.Scale = scale;
             bindings.DbType = wtype;
             bindings.MaxLen = bytecount; // also increments databuffer size (uses DbType)
-                                         //bindings.ValueOffset  = bindings.DataBufferSize; // set via MaxLen
-                                         //bindings.LengthOffset = i * sizeof_int64;
-                                         //bindings.StatusOffset = i * sizeof_int64 + sizeof_int32;
-                                         //bindings.TypeInfoPtr  = 0;
-                                         //bindings.ObjectPtr    = 0;
-                                         //bindings.BindExtPtr   = 0;
-                                         //bindings.MemOwner     = /*DBMEMOWNER_CLIENTOWNED*/0;
-                                         //bindings.Flags        = 0;
+            //bindings.ValueOffset  = bindings.DataBufferSize; // set via MaxLen
+            //bindings.LengthOffset = i * sizeof_int64;
+            //bindings.StatusOffset = i * sizeof_int64 + sizeof_int32;
+            //bindings.TypeInfoPtr  = 0;
+            //bindings.ObjectPtr    = 0;
+            //bindings.BindExtPtr   = 0;
+            //bindings.MemOwner     = /*DBMEMOWNER_CLIENTOWNED*/0;
+            //bindings.Flags        = 0;
 
             //bindings.ParameterChangeID = changeID; // bind until something changes
             Debug.Assert(_changeID == changeID, "parameter has unexpectedly changed");
@@ -465,17 +465,25 @@ namespace System.Data.OleDb
         private static object? CoerceValue(object? value, NativeDBType destinationType)
         {
             Debug.Assert(null != destinationType, "null destinationType");
-            if ((null != value) && (DBNull.Value != value) && (typeof(object) != destinationType.dataType))
+            if (
+                (null != value)
+                && (DBNull.Value != value)
+                && (typeof(object) != destinationType.dataType)
+            )
             {
                 Type currentType = value.GetType();
                 if (currentType != destinationType.dataType)
                 {
                     try
                     {
-                        if ((typeof(string) == destinationType.dataType) && (typeof(char[]) == currentType))
-                        {
-                        }
-                        else if ((NativeDBType.CY == destinationType.dbType) && (typeof(string) == currentType))
+                        if (
+                            (typeof(string) == destinationType.dataType)
+                            && (typeof(char[]) == currentType)
+                        ) { }
+                        else if (
+                            (NativeDBType.CY == destinationType.dbType)
+                            && (typeof(string) == currentType)
+                        )
                         {
                             value = decimal.Parse((string)value, NumberStyles.Currency, null);
                         }
@@ -530,12 +538,15 @@ namespace System.Data.OleDb
         internal bool IsParameterComputed()
         {
             NativeDBType? metaType = _metaType;
-            return ((null == metaType)
-                    || (!ShouldSerializeSize() && metaType.IsVariableLength)
-                    || ((NativeDBType.DECIMAL == metaType.dbType) || (NativeDBType.NUMERIC == metaType.dbType)
+            return (
+                (null == metaType)
+                || (!ShouldSerializeSize() && metaType.IsVariableLength)
+                || (
+                    (NativeDBType.DECIMAL == metaType.dbType)
+                    || (NativeDBType.NUMERIC == metaType.dbType)
                         && (!ShouldSerializeScale() || !ShouldSerializePrecision())
-                        )
-                    );
+                )
+            );
         }
 
         // @devnote: use IsParameterComputed which is called in the normal case
@@ -552,22 +563,26 @@ namespace System.Data.OleDb
             {
                 throw ADP.PrepareParameterSize(cmd);
             }
-            else if (!ShouldSerializePrecision() && !ShouldSerializeScale() && ((NativeDBType.DECIMAL == _metaType.wType) || (NativeDBType.NUMERIC == _metaType.wType)))
+            else if (
+                !ShouldSerializePrecision()
+                && !ShouldSerializeScale()
+                && (
+                    (NativeDBType.DECIMAL == _metaType.wType)
+                    || (NativeDBType.NUMERIC == _metaType.wType)
+                )
+            )
             {
-                throw ADP.PrepareParameterScale(cmd, _metaType.wType.ToString("G", CultureInfo.InvariantCulture));
+                throw ADP.PrepareParameterScale(
+                    cmd,
+                    _metaType.wType.ToString("G", CultureInfo.InvariantCulture)
+                );
             }
         }
 
-        [
-        RefreshProperties(RefreshProperties.All),
-        TypeConverter(typeof(StringConverter)),
-        ]
+        [RefreshProperties(RefreshProperties.All), TypeConverter(typeof(StringConverter)),]
         public override object? Value
         { // V1.2.3300, XXXParameter V1.0.3300
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
             set
             {
                 _coercedValue = null;
@@ -596,12 +611,12 @@ namespace System.Data.OleDb
             /*switch(Direction) {
             default:
             case ParameterDirection.Input:
-                return ODB.DBPARAMIO_INPUT;
+            return ODB.DBPARAMIO_INPUT;
             case ParameterDirection.Output:
             case ParameterDirection.ReturnValue:
-                return ODB.DBPARAMIO_OUTPUT;
+            return ODB.DBPARAMIO_OUTPUT;
             case ParameterDirection.InputOutput:
-                return (ODB.DBPARAMIO_INPUT | ODB.DBPARAMIO_OUTPUT);
+            return (ODB.DBPARAMIO_INPUT | ODB.DBPARAMIO_OUTPUT);
             }*/
         }
 
@@ -611,46 +626,63 @@ namespace System.Data.OleDb
             /*switch(Direction) {
             default:
             case ParameterDirection.Input:
-                return ODB.DBPARAMFLAGS_ISINPUT;
+            return ODB.DBPARAMFLAGS_ISINPUT;
             case ParameterDirection.Output:
             case ParameterDirection.ReturnValue:
-                return ODB.DBPARAMFLAGS_ISOUTPUT;
+            return ODB.DBPARAMFLAGS_ISOUTPUT;
             case ParameterDirection.InputOutput:
-                return (ODB.DBPARAMFLAGS_ISINPUT | ODB.DBPARAMFLAGS_ISOUTPUT);
+            return (ODB.DBPARAMFLAGS_ISINPUT | ODB.DBPARAMFLAGS_ISOUTPUT);
             }*/
         }
 
         // implemented as nested class to take advantage of the private/protected ShouldSerializeXXX methods
-        internal sealed class OleDbParameterConverter : System.ComponentModel.ExpandableObjectConverter
+        internal sealed class OleDbParameterConverter
+            : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
-            public OleDbParameterConverter()
-            {
-            }
+            public OleDbParameterConverter() { }
 
-            public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
+            public override bool CanConvertTo(
+                ITypeDescriptorContext? context,
+                Type? destinationType
+            )
             {
-                if (typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor) == destinationType)
+                if (
+                    typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
+                    == destinationType
+                )
                 {
                     return true;
                 }
                 return base.CanConvertTo(context, destinationType);
             }
 
-            public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+            public override object? ConvertTo(
+                ITypeDescriptorContext? context,
+                CultureInfo? culture,
+                object? value,
+                Type destinationType
+            )
             {
                 if (null == destinationType)
                 {
                     throw ADP.ArgumentNull("destinationType");
                 }
-                if ((typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor) == destinationType) && (value is OleDbParameter parameter))
+                if (
+                    (
+                        typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
+                        == destinationType
+                    ) && (value is OleDbParameter parameter)
+                )
                 {
                     return ConvertToInstanceDescriptor(parameter);
                 }
                 return base.ConvertTo(context, culture, value, destinationType);
             }
 
-            private System.ComponentModel.Design.Serialization.InstanceDescriptor ConvertToInstanceDescriptor(OleDbParameter p)
+            private System.ComponentModel.Design.Serialization.InstanceDescriptor ConvertToInstanceDescriptor(
+                OleDbParameter p
+            )
             {
                 int flags = 0;
 
@@ -670,9 +702,13 @@ namespace System.Data.OleDb
                 {
                     flags |= 8;
                 }
-                if ((ParameterDirection.Input != p.Direction) || p.IsNullable
-                    || p.ShouldSerializePrecision() || p.ShouldSerializeScale()
-                    || (DataRowVersion.Current != p.SourceVersion))
+                if (
+                    (ParameterDirection.Input != p.Direction)
+                    || p.IsNullable
+                    || p.ShouldSerializePrecision()
+                    || p.ShouldSerializeScale()
+                    || (DataRowVersion.Current != p.SourceVersion)
+                )
                 {
                     flags |= 16; // V1.0 everything
                 }
@@ -699,8 +735,20 @@ namespace System.Data.OleDb
                     case 5: // SourceColumn, OleDbType
                     case 6: // SourceColumn, Size
                     case 7: // SourceColumn, Size, OleDbType
-                        ctorParams = new Type[] { typeof(string), typeof(OleDbType), typeof(int), typeof(string) };
-                        ctorValues = new object[] { p.ParameterName, p.OleDbType, p.Size, p.SourceColumn };
+                        ctorParams = new Type[]
+                        {
+                            typeof(string),
+                            typeof(OleDbType),
+                            typeof(int),
+                            typeof(string)
+                        };
+                        ctorValues = new object[]
+                        {
+                            p.ParameterName,
+                            p.OleDbType,
+                            p.Size,
+                            p.SourceColumn
+                        };
                         break;
                     case 8: // Value
                         ctorParams = new Type[] { typeof(string), typeof(object) };
@@ -709,32 +757,71 @@ namespace System.Data.OleDb
                     default: // everything else
                         if (0 == (32 & flags))
                         { // V1.0 everything
-                            ctorParams = new Type[] {
-                            typeof(string), typeof(OleDbType), typeof(int), typeof(ParameterDirection),
-                            typeof(bool), typeof(byte), typeof(byte), typeof(string),
-                            typeof(DataRowVersion), typeof(object) };
-                            ctorValues = new object?[] {
-                            p.ParameterName, p.OleDbType,  p.Size, p.Direction,
-                            p.IsNullable, p.PrecisionInternal, p.ScaleInternal, p.SourceColumn,
-                            p.SourceVersion, p.Value };
+                            ctorParams = new Type[]
+                            {
+                                typeof(string),
+                                typeof(OleDbType),
+                                typeof(int),
+                                typeof(ParameterDirection),
+                                typeof(bool),
+                                typeof(byte),
+                                typeof(byte),
+                                typeof(string),
+                                typeof(DataRowVersion),
+                                typeof(object)
+                            };
+                            ctorValues = new object?[]
+                            {
+                                p.ParameterName,
+                                p.OleDbType,
+                                p.Size,
+                                p.Direction,
+                                p.IsNullable,
+                                p.PrecisionInternal,
+                                p.ScaleInternal,
+                                p.SourceColumn,
+                                p.SourceVersion,
+                                p.Value
+                            };
                         }
                         else
                         { // v2.0 everything - round trip all browsable properties + precision/scale
-                            ctorParams = new Type[] {
-                            typeof(string), typeof(OleDbType), typeof(int), typeof(ParameterDirection),
-                            typeof(byte), typeof(byte),
-                            typeof(string), typeof(DataRowVersion), typeof(bool),
-                            typeof(object) };
-                            ctorValues = new object?[] {
-                            p.ParameterName, p.OleDbType,  p.Size, p.Direction,
-                            p.PrecisionInternal, p.ScaleInternal,
-                            p.SourceColumn, p.SourceVersion, p.SourceColumnNullMapping,
-                            p.Value };
+                            ctorParams = new Type[]
+                            {
+                                typeof(string),
+                                typeof(OleDbType),
+                                typeof(int),
+                                typeof(ParameterDirection),
+                                typeof(byte),
+                                typeof(byte),
+                                typeof(string),
+                                typeof(DataRowVersion),
+                                typeof(bool),
+                                typeof(object)
+                            };
+                            ctorValues = new object?[]
+                            {
+                                p.ParameterName,
+                                p.OleDbType,
+                                p.Size,
+                                p.Direction,
+                                p.PrecisionInternal,
+                                p.ScaleInternal,
+                                p.SourceColumn,
+                                p.SourceVersion,
+                                p.SourceColumnNullMapping,
+                                p.Value
+                            };
                         }
                         break;
                 }
-                System.Reflection.ConstructorInfo ctor = typeof(OleDbParameter).GetConstructor(ctorParams)!;
-                return new System.ComponentModel.Design.Serialization.InstanceDescriptor(ctor, ctorValues);
+                System.Reflection.ConstructorInfo ctor = typeof(OleDbParameter).GetConstructor(
+                    ctorParams
+                )!;
+                return new System.ComponentModel.Design.Serialization.InstanceDescriptor(
+                    ctor,
+                    ctorValues
+                );
             }
         }
     }

@@ -11,6 +11,7 @@ internal static partial class Interop
         [DllImport(Libraries.Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern bool GetCommProperties(
             SafeFileHandle hFile,
-            ref COMMPROP lpCommProp);
+            ref COMMPROP lpCommProp
+        );
     }
 }

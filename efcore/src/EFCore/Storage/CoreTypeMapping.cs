@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 ValueConverter? converter = null,
                 ValueComparer? comparer = null,
                 ValueComparer? keyComparer = null,
-                Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null)
+                Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null
+            )
             {
                 ClrType = clrType;
                 Converter = converter;
@@ -66,14 +67,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
             /// <param name="structuralComparer">Supports structural snapshotting needed for mutable reference types.</param>
             /// <param name="valueGeneratorFactory">An optional factory for creating a specific <see cref="ValueGenerator" />.</param>
             [Obsolete(
-                "Use overload without 'structuralComparer'. Starting with EF Core 5.0, key comparers must implement structural comparisons and deep copies.")]
+                "Use overload without 'structuralComparer'. Starting with EF Core 5.0, key comparers must implement structural comparisons and deep copies."
+            )]
             public CoreTypeMappingParameters(
                 Type clrType,
                 ValueConverter? converter,
                 ValueComparer? comparer,
                 ValueComparer? keyComparer,
                 ValueComparer? structuralComparer,
-                Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory)
+                Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory
+            )
             {
                 ClrType = clrType;
                 Converter = converter;
@@ -105,9 +108,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             /// <summary>
             ///     The mapping structural comparer.
             /// </summary>
-            [Obsolete("Use KeyComparer. Starting with EF Core 5.0, key comparers must implement structural comparisons and deep copies.")]
-            public ValueComparer? StructuralComparer
-                => KeyComparer;
+            [Obsolete(
+                "Use KeyComparer. Starting with EF Core 5.0, key comparers must implement structural comparisons and deep copies."
+            )]
+            public ValueComparer? StructuralComparer => KeyComparer;
 
             /// <summary>
             ///     An optional factory for creating a specific <see cref="ValueGenerator" /> to use with
@@ -121,13 +125,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             /// </summary>
             /// <param name="converter">The converter.</param>
             /// <returns>The new parameter object.</returns>
-            public CoreTypeMappingParameters WithComposedConverter(ValueConverter? converter)
-                => new(
+            public CoreTypeMappingParameters WithComposedConverter(ValueConverter? converter) =>
+                new(
                     ClrType,
                     converter == null ? Converter : converter.ComposeWith(Converter),
                     Comparer,
                     KeyComparer,
-                    ValueGeneratorFactory);
+                    ValueGeneratorFactory
+                );
         }
 
         private ValueComparer? _comparer;
@@ -148,10 +153,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Check.DebugAssert(
                 parameters.Comparer == null
-                || parameters.ClrType == null
-                || converter != null
-                || parameters.Comparer.Type == parameters.ClrType,
-                $"Expected {parameters.ClrType}, got {parameters.Comparer?.Type}");
+                    || parameters.ClrType == null
+                    || converter != null
+                    || parameters.Comparer.Type == parameters.ClrType,
+                $"Expected {parameters.ClrType}, got {parameters.Comparer?.Type}"
+            );
             if (parameters.Comparer?.Type == clrType)
             {
                 _comparer = parameters.Comparer;
@@ -159,17 +165,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Check.DebugAssert(
                 parameters.KeyComparer == null
-                || parameters.ClrType == null
-                || converter != null
-                || parameters.KeyComparer.Type == parameters.ClrType,
-                $"Expected {parameters.ClrType}, got {parameters.KeyComparer?.Type}");
+                    || parameters.ClrType == null
+                    || converter != null
+                    || parameters.KeyComparer.Type == parameters.ClrType,
+                $"Expected {parameters.ClrType}, got {parameters.KeyComparer?.Type}"
+            );
             if (parameters.KeyComparer?.Type == clrType)
             {
                 _keyComparer = parameters.KeyComparer;
             }
 
-            ValueGeneratorFactory = parameters.ValueGeneratorFactory
-                ?? converter?.MappingHints?.ValueGeneratorFactory;
+            ValueGeneratorFactory =
+                parameters.ValueGeneratorFactory ?? converter?.MappingHints?.ValueGeneratorFactory;
         }
 
         /// <summary>
@@ -186,8 +193,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Converts types to and from the store whenever this mapping is used.
         ///     May be null if no conversion is needed.
         /// </summary>
-        public virtual ValueConverter? Converter
-            => Parameters.Converter;
+        public virtual ValueConverter? Converter => Parameters.Converter;
 
         /// <summary>
         ///     An optional factory for creating a specific <see cref="ValueGenerator" /> to use with
@@ -200,29 +206,33 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     CLR types that cannot be compared with <see cref="object.Equals(object, object)" />
         ///     and/or need a deep copy when taking a snapshot.
         /// </summary>
-        public virtual ValueComparer Comparer
-            => NonCapturingLazyInitializer.EnsureInitialized(
+        public virtual ValueComparer Comparer =>
+            NonCapturingLazyInitializer.EnsureInitialized(
                 ref _comparer,
                 this,
-                static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: false));
+                static c =>
+                    ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: false)
+            );
 
         /// <summary>
         ///     A <see cref="ValueComparer" /> adds custom value comparison for use when
         ///     comparing key values to each other. For example, when comparing a PK to and FK.
         /// </summary>
-        public virtual ValueComparer KeyComparer
-            => NonCapturingLazyInitializer.EnsureInitialized(
+        public virtual ValueComparer KeyComparer =>
+            NonCapturingLazyInitializer.EnsureInitialized(
                 ref _keyComparer,
                 this,
-                static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: true));
+                static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: true)
+            );
 
         /// <summary>
         ///     A <see cref="ValueComparer" /> adds custom value comparison for use when
         ///     a deep/structural copy and/or comparison is needed.
         /// </summary>
-        [Obsolete("Use KeyComparer. Key comparers must implement structural comparisons and deep copies.")]
-        public virtual ValueComparer StructuralComparer
-            => KeyComparer;
+        [Obsolete(
+            "Use KeyComparer. Key comparers must implement structural comparisons and deep copies."
+        )]
+        public virtual ValueComparer StructuralComparer => KeyComparer;
 
         /// <summary>
         ///     Returns a new copy of this type mapping with the given <see cref="ValueConverter" />
@@ -239,7 +249,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="value">The value for which a literal is needed.</param>
         /// <returns>An expression tree that can be used to generate code for the literal value.</returns>
-        public virtual Expression GenerateCodeLiteral(object value)
-            => throw new NotSupportedException(CoreStrings.LiteralGenerationNotSupported(ClrType.ShortDisplayName()));
+        public virtual Expression GenerateCodeLiteral(object value) =>
+            throw new NotSupportedException(
+                CoreStrings.LiteralGenerationNotSupported(ClrType.ShortDisplayName())
+            );
     }
 }

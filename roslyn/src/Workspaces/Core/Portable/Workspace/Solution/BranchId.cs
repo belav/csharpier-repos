@@ -19,10 +19,8 @@ namespace Microsoft.CodeAnalysis
         private readonly int _id;
 #pragma warning restore IDE0052 // Remove unread private members
 
-        private BranchId(int id)
-            => _id = id;
+        private BranchId(int id) => _id = id;
 
-        internal static BranchId GetNextId()
-            => new(Interlocked.Increment(ref s_nextId));
+        internal static BranchId GetNextId() => new(Interlocked.Increment(ref s_nextId));
     }
 }

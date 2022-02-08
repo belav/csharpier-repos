@@ -36,6 +36,7 @@ static class GitHub_19674
         }
         return returnVal;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Test1(Vector3 vec0)
     {
@@ -43,6 +44,7 @@ static class GitHub_19674
         vec0.X = -vec0.X;
         new Vector3(vec0.X, vec0.Y, vec0.Z);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Test2(Vector3 vec0)
     {

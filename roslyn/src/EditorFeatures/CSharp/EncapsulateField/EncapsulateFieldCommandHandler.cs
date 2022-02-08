@@ -27,9 +27,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EncapsulateField
         public EncapsulateFieldCommandHandler(
             IThreadingContext threadingContext,
             ITextBufferUndoManagerProvider undoManager,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, undoManager, listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(threadingContext, undoManager, listenerProvider) { }
     }
 }

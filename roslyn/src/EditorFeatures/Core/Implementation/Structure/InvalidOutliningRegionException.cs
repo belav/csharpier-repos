@@ -17,8 +17,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
         private readonly Span _regionSpan;
 #pragma warning restore IDE0052 // Remove unread private members
 
-        public InvalidOutliningRegionException(BlockStructureService service, ITextSnapshot snapshot, Span snapshotSpan, Span regionSpan)
-            : base(GetExceptionMessage(service, snapshotSpan, regionSpan))
+        public InvalidOutliningRegionException(
+            BlockStructureService service,
+            ITextSnapshot snapshot,
+            Span snapshotSpan,
+            Span regionSpan
+        ) : base(GetExceptionMessage(service, snapshotSpan, regionSpan))
         {
             _service = service;
             _snapshot = snapshot;
@@ -26,7 +30,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             _regionSpan = regionSpan;
         }
 
-        private static string GetExceptionMessage(BlockStructureService service, Span snapshotSpan, Span regionSpan)
-            => $"OutliningService({service.GetType()}) produced an invalid region.  ITextSnapshot span is {snapshotSpan}. OutliningSpan is {regionSpan}.";
+        private static string GetExceptionMessage(
+            BlockStructureService service,
+            Span snapshotSpan,
+            Span regionSpan
+        ) =>
+            $"OutliningService({service.GetType()}) produced an invalid region.  ITextSnapshot span is {snapshotSpan}. OutliningSpan is {regionSpan}.";
     }
 }

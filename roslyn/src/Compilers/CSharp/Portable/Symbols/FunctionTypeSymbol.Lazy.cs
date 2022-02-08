@@ -23,14 +23,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private FunctionTypeSymbol? _lazyFunctionType;
             private BoundExpression? _expression;
 
-            internal static Lazy? CreateIfFeatureEnabled(SyntaxNode syntax, Binder binder, Func<Binder, BoundExpression, NamedTypeSymbol?> calculateDelegate)
+            internal static Lazy? CreateIfFeatureEnabled(
+                SyntaxNode syntax,
+                Binder binder,
+                Func<Binder, BoundExpression, NamedTypeSymbol?> calculateDelegate
+            )
             {
-                return syntax.IsFeatureEnabled(MessageID.IDS_FeatureInferredDelegateType) ?
-                    new Lazy(binder, calculateDelegate) :
-                    null;
+                return syntax.IsFeatureEnabled(MessageID.IDS_FeatureInferredDelegateType)
+                  ? new Lazy(binder, calculateDelegate)
+                  : null;
             }
 
-            private Lazy(Binder binder, Func<Binder, BoundExpression, NamedTypeSymbol?> calculateDelegate)
+            private Lazy(
+                Binder binder,
+                Func<Binder, BoundExpression, NamedTypeSymbol?> calculateDelegate
+            )
             {
                 _binder = binder;
                 _calculateDelegate = calculateDelegate;
@@ -57,8 +64,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if ((object?)_lazyFunctionType == FunctionTypeSymbol.Uninitialized)
                 {
                     var delegateType = _calculateDelegate(_binder, _expression);
-                    var functionType = delegateType is null ? null : new FunctionTypeSymbol(delegateType);
-                    Interlocked.CompareExchange(ref _lazyFunctionType, functionType, FunctionTypeSymbol.Uninitialized);
+                    var functionType = delegateType is null
+                        ? null
+                        : new FunctionTypeSymbol(delegateType);
+                    Interlocked.CompareExchange(
+                        ref _lazyFunctionType,
+                        functionType,
+                        FunctionTypeSymbol.Uninitialized
+                    );
                 }
 
                 return _lazyFunctionType;

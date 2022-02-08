@@ -30,7 +30,6 @@ using System.Text;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-
     internal enum DS_REPL_INFO_TYPE
     {
         DS_REPL_INFO_NEIGHBORS = 0,
@@ -115,16 +114,16 @@ namespace System.DirectoryServices.ActiveDirectory
     /*
     typedef enum
     {
-        DsRole_RoleStandaloneWorkstation,
-        DsRole_RoleMemberWorkstation,
-        DsRole_RoleStandaloneServer,
-        DsRole_RoleMemberServer,
-        DsRole_RoleBackupDomainController,
-        DsRole_RolePrimaryDomainController,
-        DsRole_WorkstationWithSharedAccountDomain,
-        DsRole_ServerWithSharedAccountDomain,
-        DsRole_MemberWorkstationWithSharedAccountDomain,
-        DsRole_MemberServerWithSharedAccountDomain
+    DsRole_RoleStandaloneWorkstation,
+    DsRole_RoleMemberWorkstation,
+    DsRole_RoleStandaloneServer,
+    DsRole_RoleMemberServer,
+    DsRole_RoleBackupDomainController,
+    DsRole_RolePrimaryDomainController,
+    DsRole_WorkstationWithSharedAccountDomain,
+    DsRole_ServerWithSharedAccountDomain,
+    DsRole_MemberWorkstationWithSharedAccountDomain,
+    DsRole_MemberServerWithSharedAccountDomain
     }DSROLE_MACHINE_ROLE;
     */
 
@@ -145,10 +144,10 @@ namespace System.DirectoryServices.ActiveDirectory
     /*
     typedef enum
     {
-        DsRolePrimaryDomainInfoBasic,
-        DsRoleUpgradeStatus,
-        DsRoleOperationState,
-        DsRolePrimaryDomainInfoBasicEx
+    DsRolePrimaryDomainInfoBasic,
+    DsRoleUpgradeStatus,
+    DsRoleOperationState,
+    DsRolePrimaryDomainInfoBasicEx
     }DSROLE_PRIMARY_DOMAIN_INFO_LEVEL;
     */
 
@@ -301,6 +300,7 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         public IntPtr pszAttributeName;
         public int dwVersion;
+
         // using two int to replace long to prevent managed code packing it
         public int ftimeLastOriginatingChange1;
         public int ftimeLastOriginatingChange2;
@@ -324,6 +324,7 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         public IntPtr pszAttributeName;
         public int dwVersion;
+
         // using two int to replace long to prevent managed code packing it
         public int ftimeLastOriginatingChange1;
         public int ftimeLastOriginatingChange2;
@@ -407,14 +408,19 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         [FieldOffset(0)]
         public int Flags;
+
         [FieldOffset(4)]
         public LSA_FOREST_TRUST_RECORD_TYPE ForestTrustType;
+
         [FieldOffset(8)]
         public LARGE_INTEGER Time = null!;
+
         [FieldOffset(16)]
         public LSA_UNICODE_STRING TopLevelName = null!;
+
         [FieldOffset(16)]
         public LSA_FOREST_TRUST_BINARY_DATA Data = null!;
+
         [FieldOffset(16)]
         public LSA_FOREST_TRUST_DOMAIN_INFO? DomainInfo;
     }
@@ -585,10 +591,13 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         public DSROLE_MACHINE_ROLE MachineRole;
         public uint Flags;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string? DomainNameFlat;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string? DomainNameDns;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string? DomainForestName;
         public Guid DomainGuid;
@@ -627,69 +636,174 @@ namespace System.DirectoryServices.ActiveDirectory
 
     internal static class UnsafeNativeMethods
     {
-        public delegate int DsReplicaConsistencyCheck([In]IntPtr handle, int taskID, int flags);
+        public delegate int DsReplicaConsistencyCheck([In] IntPtr handle, int taskID, int flags);
 
-        public delegate int DsReplicaGetInfo2W(IntPtr handle, int type, [MarshalAs(UnmanagedType.LPWStr)] string? objectPath, IntPtr sourceGUID, string? attributeName, string? value, int flag, int context, ref IntPtr info);
+        public delegate int DsReplicaGetInfo2W(
+            IntPtr handle,
+            int type,
+            [MarshalAs(UnmanagedType.LPWStr)] string? objectPath,
+            IntPtr sourceGUID,
+            string? attributeName,
+            string? value,
+            int flag,
+            int context,
+            ref IntPtr info
+        );
 
-        public delegate int DsReplicaGetInfoW(IntPtr handle, int type, [MarshalAs(UnmanagedType.LPWStr)] string? objectPath, IntPtr sourceGUID, ref IntPtr info);
+        public delegate int DsReplicaGetInfoW(
+            IntPtr handle,
+            int type,
+            [MarshalAs(UnmanagedType.LPWStr)] string? objectPath,
+            IntPtr sourceGUID,
+            ref IntPtr info
+        );
 
         public delegate int DsReplicaFreeInfo(int type, IntPtr value);
 
-        public delegate int DsReplicaSyncW(IntPtr handle, [MarshalAs(UnmanagedType.LPWStr)] string partition, IntPtr uuid, int option);
+        public delegate int DsReplicaSyncW(
+            IntPtr handle,
+            [MarshalAs(UnmanagedType.LPWStr)] string partition,
+            IntPtr uuid,
+            int option
+        );
 
-        public delegate int DsReplicaSyncAllW(IntPtr handle, [MarshalAs(UnmanagedType.LPWStr)] string partition, int flags, SyncReplicaFromAllServersCallback callback, IntPtr data, ref IntPtr error);
+        public delegate int DsReplicaSyncAllW(
+            IntPtr handle,
+            [MarshalAs(UnmanagedType.LPWStr)] string partition,
+            int flags,
+            SyncReplicaFromAllServersCallback callback,
+            IntPtr data,
+            ref IntPtr error
+        );
 
         [DllImport(global::Interop.Libraries.Kernel32, EntryPoint = "LocalFree")]
         public static extern int LocalFree(IntPtr mem);
 
-        [DllImport(global::Interop.Libraries.Activeds, EntryPoint = "ADsEncodeBinaryData", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Activeds,
+            EntryPoint = "ADsEncodeBinaryData",
+            CharSet = CharSet.Unicode
+        )]
         public static extern int ADsEncodeBinaryData(byte[] data, int length, ref IntPtr result);
 
         [DllImport(global::Interop.Libraries.Activeds, EntryPoint = "FreeADsMem")]
         public static extern bool FreeADsMem(IntPtr pVoid);
 
-        [DllImport(global::Interop.Libraries.Netapi32, EntryPoint = "DsGetSiteNameW", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Netapi32,
+            EntryPoint = "DsGetSiteNameW",
+            CharSet = CharSet.Unicode
+        )]
         public static extern int DsGetSiteName(string? dcName, ref IntPtr ptr);
 
-        public delegate int DsListDomainsInSiteW(IntPtr handle, [MarshalAs(UnmanagedType.LPWStr)] string site, ref IntPtr info);
+        public delegate int DsListDomainsInSiteW(
+            IntPtr handle,
+            [MarshalAs(UnmanagedType.LPWStr)] string site,
+            ref IntPtr info
+        );
 
         public delegate void DsFreeNameResultW(IntPtr result);
 
-        [DllImport(global::Interop.Libraries.Netapi32, EntryPoint = "DsEnumerateDomainTrustsW", CharSet = CharSet.Unicode)]
-        public static extern int DsEnumerateDomainTrustsW(string serverName, int flags, out IntPtr domains, out int count);
+        [DllImport(
+            global::Interop.Libraries.Netapi32,
+            EntryPoint = "DsEnumerateDomainTrustsW",
+            CharSet = CharSet.Unicode
+        )]
+        public static extern int DsEnumerateDomainTrustsW(
+            string serverName,
+            int flags,
+            out IntPtr domains,
+            out int count
+        );
 
         [DllImport(global::Interop.Libraries.Netapi32, EntryPoint = "NetApiBufferFree")]
         public static extern int NetApiBufferFree(IntPtr buffer);
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LogonUserW", CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern int LogonUserW(string? lpszUsername, string? lpszDomain, string? lpszPassword, int dwLogonType, int dwLogonProvider, ref IntPtr phToken);
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "LogonUserW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
+        public static extern int LogonUserW(
+            string? lpszUsername,
+            string? lpszDomain,
+            string? lpszPassword,
+            int dwLogonType,
+            int dwLogonProvider,
+            ref IntPtr phToken
+        );
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "ImpersonateLoggedOnUser", SetLastError = true)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "ImpersonateLoggedOnUser",
+            SetLastError = true
+        )]
         public static extern int ImpersonateLoggedOnUser(IntPtr hToken);
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "RevertToSelf", SetLastError = true)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "RevertToSelf",
+            SetLastError = true
+        )]
         public static extern int RevertToSelf();
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "ConvertSidToStringSidW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "ConvertSidToStringSidW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         public static extern int ConvertSidToStringSidW(IntPtr pSid, ref IntPtr stringSid);
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "ConvertStringSidToSidW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "ConvertStringSidToSidW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         public static extern int ConvertStringSidToSidW(IntPtr stringSid, ref IntPtr pSid);
 
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaSetForestTrustInformation")]
-        public static extern int LsaSetForestTrustInformation(PolicySafeHandle handle, LSA_UNICODE_STRING target, IntPtr forestTrustInfo, int checkOnly, out IntPtr collisionInfo);
+        public static extern int LsaSetForestTrustInformation(
+            PolicySafeHandle handle,
+            LSA_UNICODE_STRING target,
+            IntPtr forestTrustInfo,
+            int checkOnly,
+            out IntPtr collisionInfo
+        );
 
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaOpenPolicy")]
-        public static extern int LsaOpenPolicy(LSA_UNICODE_STRING target, LSA_OBJECT_ATTRIBUTES objectAttributes, int access, out IntPtr handle);
+        public static extern int LsaOpenPolicy(
+            LSA_UNICODE_STRING target,
+            LSA_OBJECT_ATTRIBUTES objectAttributes,
+            int access,
+            out IntPtr handle
+        );
 
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaClose")]
         public static extern int LsaClose(IntPtr handle);
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaQueryForestTrustInformation")]
-        public static extern int LsaQueryForestTrustInformation(PolicySafeHandle handle, LSA_UNICODE_STRING target, ref IntPtr ForestTrustInfo);
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "LsaQueryForestTrustInformation"
+        )]
+        public static extern int LsaQueryForestTrustInformation(
+            PolicySafeHandle handle,
+            LSA_UNICODE_STRING target,
+            ref IntPtr ForestTrustInfo
+        );
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaQueryTrustedDomainInfoByName")]
-        public static extern int LsaQueryTrustedDomainInfoByName(PolicySafeHandle handle, LSA_UNICODE_STRING trustedDomain, TRUSTED_INFORMATION_CLASS infoClass, ref IntPtr buffer);
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "LsaQueryTrustedDomainInfoByName"
+        )]
+        public static extern int LsaQueryTrustedDomainInfoByName(
+            PolicySafeHandle handle,
+            LSA_UNICODE_STRING trustedDomain,
+            TRUSTED_INFORMATION_CLASS infoClass,
+            ref IntPtr buffer
+        );
 
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaNtStatusToWinError")]
         public static extern int LsaNtStatusToWinError(int status);
@@ -697,34 +811,75 @@ namespace System.DirectoryServices.ActiveDirectory
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaFreeMemory")]
         public static extern int LsaFreeMemory(IntPtr ptr);
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaSetTrustedDomainInfoByName")]
-        public static extern int LsaSetTrustedDomainInfoByName(PolicySafeHandle handle, LSA_UNICODE_STRING trustedDomain, TRUSTED_INFORMATION_CLASS infoClass, IntPtr buffer);
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "LsaSetTrustedDomainInfoByName"
+        )]
+        public static extern int LsaSetTrustedDomainInfoByName(
+            PolicySafeHandle handle,
+            LSA_UNICODE_STRING trustedDomain,
+            TRUSTED_INFORMATION_CLASS infoClass,
+            IntPtr buffer
+        );
 
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaOpenTrustedDomainByName")]
-        public static extern int LsaOpenTrustedDomainByName(PolicySafeHandle policyHandle, LSA_UNICODE_STRING trustedDomain, int access, ref IntPtr trustedDomainHandle);
+        public static extern int LsaOpenTrustedDomainByName(
+            PolicySafeHandle policyHandle,
+            LSA_UNICODE_STRING trustedDomain,
+            int access,
+            ref IntPtr trustedDomainHandle
+        );
 
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaDeleteTrustedDomain")]
         public static extern int LsaDeleteTrustedDomain(PolicySafeHandle handle, IntPtr pSid);
 
-        [DllImport(global::Interop.Libraries.Netapi32, EntryPoint = "I_NetLogonControl2", CharSet = CharSet.Unicode)]
-        public static extern int I_NetLogonControl2(string serverName, int FunctionCode, int QueryLevel, IntPtr data, out IntPtr buffer);
+        [DllImport(
+            global::Interop.Libraries.Netapi32,
+            EntryPoint = "I_NetLogonControl2",
+            CharSet = CharSet.Unicode
+        )]
+        public static extern int I_NetLogonControl2(
+            string serverName,
+            int FunctionCode,
+            int QueryLevel,
+            IntPtr data,
+            out IntPtr buffer
+        );
 
         [DllImport(global::Interop.Libraries.Kernel32, EntryPoint = "GetSystemTimeAsFileTime")]
         public static extern void GetSystemTimeAsFileTime(IntPtr fileTime);
 
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaQueryInformationPolicy")]
-        public static extern int LsaQueryInformationPolicy(PolicySafeHandle handle, int infoClass, out IntPtr buffer);
+        public static extern int LsaQueryInformationPolicy(
+            PolicySafeHandle handle,
+            int infoClass,
+            out IntPtr buffer
+        );
 
         [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaCreateTrustedDomainEx")]
-        public static extern int LsaCreateTrustedDomainEx(PolicySafeHandle handle, TRUSTED_DOMAIN_INFORMATION_EX domainEx, TRUSTED_DOMAIN_AUTH_INFORMATION authInfo, int classInfo, out IntPtr domainHandle);
+        public static extern int LsaCreateTrustedDomainEx(
+            PolicySafeHandle handle,
+            TRUSTED_DOMAIN_INFORMATION_EX domainEx,
+            TRUSTED_DOMAIN_AUTH_INFORMATION authInfo,
+            int classInfo,
+            out IntPtr domainHandle
+        );
 
-        [DllImport(global::Interop.Libraries.Kernel32, EntryPoint = "OpenThread", SetLastError = true)]
+        [DllImport(
+            global::Interop.Libraries.Kernel32,
+            EntryPoint = "OpenThread",
+            SetLastError = true
+        )]
         public static extern IntPtr OpenThread(uint desiredAccess, bool inheirted, int threadID);
 
         [DllImport(global::Interop.Libraries.Kernel32, EntryPoint = "GetCurrentThreadId")]
         public static extern int GetCurrentThreadId();
 
-        [DllImport(global::Interop.Libraries.Advapi32, EntryPoint = "ImpersonateAnonymousToken", SetLastError = true)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            EntryPoint = "ImpersonateAnonymousToken",
+            SetLastError = true
+        )]
         public static extern int ImpersonateAnonymousToken(IntPtr token);
 
         [DllImport(global::Interop.Libraries.Kernel32, EntryPoint = "CloseHandle")]
@@ -733,33 +888,58 @@ namespace System.DirectoryServices.ActiveDirectory
         [DllImport(global::Interop.Libraries.NtDll, EntryPoint = "RtlInitUnicodeString")]
         public static extern int RtlInitUnicodeString(LSA_UNICODE_STRING result, IntPtr s);
 
-        [DllImport(global::Interop.Libraries.Kernel32, EntryPoint = "LoadLibraryW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            global::Interop.Libraries.Kernel32,
+            EntryPoint = "LoadLibraryW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         public static extern IntPtr LoadLibrary(string name);
 
         [DllImport(global::Interop.Libraries.Kernel32, CharSet = CharSet.Unicode)]
         public static extern uint FreeLibrary(IntPtr libName);
 
-        [DllImport(global::Interop.Libraries.Kernel32, EntryPoint = "GetProcAddress", SetLastError = true, BestFitMapping = false)]
-        public static extern IntPtr GetProcAddress(LoadLibrarySafeHandle hModule, string entryPoint);
+        [DllImport(
+            global::Interop.Libraries.Kernel32,
+            EntryPoint = "GetProcAddress",
+            SetLastError = true,
+            BestFitMapping = false
+        )]
+        public static extern IntPtr GetProcAddress(
+            LoadLibrarySafeHandle hModule,
+            string entryPoint
+        );
 
         /*
         DWORD DsRoleGetPrimaryDomainInformation(
-          LPCWSTR lpServer,
-          DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
-          PBYTE* Buffer
+        LPCWSTR lpServer,
+        DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
+        PBYTE* Buffer
         ); */
 
-        [DllImport(global::Interop.Libraries.Netapi32, CallingConvention = CallingConvention.StdCall, EntryPoint = "DsRoleGetPrimaryDomainInformation", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Netapi32,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "DsRoleGetPrimaryDomainInformation",
+            CharSet = CharSet.Unicode
+        )]
         public static extern int DsRoleGetPrimaryDomainInformation(
             [MarshalAs(UnmanagedType.LPTStr)] string lpServer,
             [In] DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
-            out IntPtr Buffer);
+            out IntPtr Buffer
+        );
 
-        [DllImport(global::Interop.Libraries.Netapi32, CallingConvention = CallingConvention.StdCall, EntryPoint = "DsRoleGetPrimaryDomainInformation", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Netapi32,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "DsRoleGetPrimaryDomainInformation",
+            CharSet = CharSet.Unicode
+        )]
         public static extern int DsRoleGetPrimaryDomainInformation(
             [In] IntPtr lpServer,
             [In] DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
-            out IntPtr Buffer);
+            out IntPtr Buffer
+        );
 
         [DllImport(global::Interop.Libraries.Advapi32)]
         public static extern int GetLengthSid(IntPtr sid);
@@ -780,68 +960,115 @@ namespace System.DirectoryServices.ActiveDirectory
         public static extern bool EqualDomainSid(IntPtr pSid1, IntPtr pSid2, ref bool equal);
 
         [DllImport(global::Interop.Libraries.Advapi32, SetLastError = true)]
-        public static extern bool CopySid(int destinationLength, IntPtr pSidDestination, IntPtr pSidSource);
+        public static extern bool CopySid(
+            int destinationLength,
+            IntPtr pSidDestination,
+            IntPtr pSidSource
+        );
 
-        [DllImport(global::Interop.Libraries.Advapi32, SetLastError = true, CallingConvention = CallingConvention.StdCall, EntryPoint = "OpenThreadToken", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            SetLastError = true,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "OpenThreadToken",
+            CharSet = CharSet.Unicode
+        )]
         public static extern bool OpenThreadToken(
-                                        IntPtr threadHandle,
-                                        int desiredAccess,
-                                        bool openAsSelf,
-                                        ref IntPtr tokenHandle
-                                        );
+            IntPtr threadHandle,
+            int desiredAccess,
+            bool openAsSelf,
+            ref IntPtr tokenHandle
+        );
 
-        [DllImport(global::Interop.Libraries.Advapi32, SetLastError = true, CallingConvention = CallingConvention.StdCall, EntryPoint = "OpenProcessToken", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            SetLastError = true,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "OpenProcessToken",
+            CharSet = CharSet.Unicode
+        )]
         public static extern bool OpenProcessToken(
-                                        IntPtr processHandle,
-                                        int desiredAccess,
-                                        ref IntPtr tokenHandle
-                                        );
+            IntPtr processHandle,
+            int desiredAccess,
+            ref IntPtr tokenHandle
+        );
 
-        [DllImport(global::Interop.Libraries.Kernel32, CallingConvention = CallingConvention.StdCall, EntryPoint = "GetCurrentThread", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Kernel32,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "GetCurrentThread",
+            CharSet = CharSet.Unicode
+        )]
         public static extern IntPtr GetCurrentThread();
 
-        [DllImport(global::Interop.Libraries.Kernel32, CallingConvention = CallingConvention.StdCall, EntryPoint = "GetCurrentProcess", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Kernel32,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "GetCurrentProcess",
+            CharSet = CharSet.Unicode
+        )]
         public static extern IntPtr GetCurrentProcess();
 
-        [DllImport(global::Interop.Libraries.Advapi32, SetLastError = true, CallingConvention = CallingConvention.StdCall, EntryPoint = "GetTokenInformation", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            SetLastError = true,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "GetTokenInformation",
+            CharSet = CharSet.Unicode
+        )]
         public static extern bool GetTokenInformation(
-                                        IntPtr tokenHandle,
-                                        int tokenInformationClass,
-                                        IntPtr buffer,
-                                        int bufferSize,
-                                        ref int returnLength
-                                        );
+            IntPtr tokenHandle,
+            int tokenInformationClass,
+            IntPtr buffer,
+            int bufferSize,
+            ref int returnLength
+        );
 
-        [DllImport(global::Interop.Libraries.Advapi32, CallingConvention = CallingConvention.StdCall, EntryPoint = "LsaOpenPolicy", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "LsaOpenPolicy",
+            CharSet = CharSet.Unicode
+        )]
         public static extern int LsaOpenPolicy(
-                                        IntPtr lsaUnicodeString,
-                                        IntPtr lsaObjectAttributes,
-                                        int desiredAccess,
-                                        ref IntPtr policyHandle);
+            IntPtr lsaUnicodeString,
+            IntPtr lsaObjectAttributes,
+            int desiredAccess,
+            ref IntPtr policyHandle
+        );
 
-        [DllImport(global::Interop.Libraries.Advapi32, CallingConvention = CallingConvention.StdCall, EntryPoint = "LsaQueryInformationPolicy", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "LsaQueryInformationPolicy",
+            CharSet = CharSet.Unicode
+        )]
         public static extern int LsaQueryInformationPolicy(
-                                        IntPtr policyHandle,
-                                        int policyInformationClass,
-                                        ref IntPtr buffer
-                                        );
+            IntPtr policyHandle,
+            int policyInformationClass,
+            ref IntPtr buffer
+        );
 
-        [DllImport(global::Interop.Libraries.Advapi32, CallingConvention = CallingConvention.StdCall, EntryPoint = "LsaLookupSids", CharSet = CharSet.Unicode)]
+        [DllImport(
+            global::Interop.Libraries.Advapi32,
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "LsaLookupSids",
+            CharSet = CharSet.Unicode
+        )]
         public static extern int LsaLookupSids(
-                                        IntPtr policyHandle,
-                                        int count,
-                                        IntPtr[] sids,
-                                        out IntPtr referencedDomains,
-                                        out IntPtr names
-                                        );
+            IntPtr policyHandle,
+            int count,
+            IntPtr[] sids,
+            out IntPtr referencedDomains,
+            out IntPtr names
+        );
 
         /*
         void DsRoleFreeMemory(
-          PVOID Buffer
+        PVOID Buffer
         );
         */
         [DllImport(global::Interop.Libraries.Netapi32)]
-        public static extern int DsRoleFreeMemory(
-            [In] IntPtr buffer);
+        public static extern int DsRoleFreeMemory([In] IntPtr buffer);
     }
 }

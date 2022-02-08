@@ -12,9 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 internal class SyntaxToken : RazorSyntaxNode
 {
     internal SyntaxToken(GreenNode green, SyntaxNode parent, int position)
-        : base(green, parent, position)
-    {
-    }
+        : base(green, parent, position) { }
 
     internal new InternalSyntax.SyntaxToken Green => (InternalSyntax.SyntaxToken)base.Green;
 
@@ -43,15 +41,15 @@ internal class SyntaxToken : RazorSyntaxNode
     public SyntaxToken WithLeadingTrivia(SyntaxNode trivia)
     {
         return Green != null
-            ? new SyntaxToken(Green.WithLeadingTrivia(trivia.Green), parent: null, position: 0)
-            : default(SyntaxToken);
+          ? new SyntaxToken(Green.WithLeadingTrivia(trivia.Green), parent: null, position: 0)
+          : default(SyntaxToken);
     }
 
     public SyntaxToken WithTrailingTrivia(SyntaxNode trivia)
     {
         return Green != null
-            ? new SyntaxToken(Green.WithTrailingTrivia(trivia.Green), parent: null, position: 0)
-            : default(SyntaxToken);
+          ? new SyntaxToken(Green.WithTrailingTrivia(trivia.Green), parent: null, position: 0)
+          : default(SyntaxToken);
     }
 
     public SyntaxToken WithLeadingTrivia(IEnumerable<SyntaxTrivia> trivia)
@@ -94,7 +92,11 @@ internal class SyntaxToken : RazorSyntaxNode
         int trailingPosition = Position + FullWidth;
         trailingPosition -= trailing.FullWidth;
 
-        return new SyntaxTriviaList(trailing.CreateRed(this, trailingPosition), trailingPosition, index);
+        return new SyntaxTriviaList(
+            trailing.CreateRed(this, trailingPosition),
+            trailingPosition,
+            index
+        );
     }
 
     public override string ToString()

@@ -45,42 +45,94 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         /// is desirable is 'cut line'. If the tags aren't removed, then the line will be gone but the tags will remain
         /// at whatever points the tracking spans moved them to.
         /// </summary>
-        protected override TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits;
+        protected override TaggerTextChangeBehavior TextChangeBehavior =>
+            TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits;
 
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         [ImportingConstructor]
         public InlineHintsDataTaggerProvider(
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, globalOptions, listenerProvider.GetListener(FeatureAttribute.InlineHints))
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                globalOptions,
+                listenerProvider.GetListener(FeatureAttribute.InlineHints)
+            )
         {
             _listener = listenerProvider.GetListener(FeatureAttribute.InlineHints);
         }
 
         protected override TaggerDelay EventChangeDelay => TaggerDelay.Short;
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textViewOpt, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textViewOpt,
+            ITextBuffer subjectBuffer
+        )
         {
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnViewSpanChanged(ThreadingContext, textViewOpt),
                 TaggerEventSources.OnWorkspaceChanged(subjectBuffer, _listener),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsGlobalStateOption.DisplayAllOverride),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineParameterHintsOptions.Metadata.EnabledForParameters),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineParameterHintsOptions.Metadata.ForLiteralParameters),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineParameterHintsOptions.Metadata.ForIndexerParameters),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineParameterHintsOptions.Metadata.ForObjectCreationParameters),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineParameterHintsOptions.Metadata.ForOtherParameters),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineParameterHintsOptions.Metadata.SuppressForParametersThatMatchMethodIntent),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineParameterHintsOptions.Metadata.SuppressForParametersThatDifferOnlyBySuffix),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineParameterHintsOptions.Metadata.SuppressForParametersThatMatchArgumentName),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineTypeHintsOptions.Metadata.EnabledForTypes),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineTypeHintsOptions.Metadata.ForImplicitVariableTypes),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineTypeHintsOptions.Metadata.ForLambdaParameterTypes),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineTypeHintsOptions.Metadata.ForImplicitObjectCreation));
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsGlobalStateOption.DisplayAllOverride
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineParameterHintsOptions.Metadata.EnabledForParameters
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineParameterHintsOptions.Metadata.ForLiteralParameters
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineParameterHintsOptions.Metadata.ForIndexerParameters
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineParameterHintsOptions.Metadata.ForObjectCreationParameters
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineParameterHintsOptions.Metadata.ForOtherParameters
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineParameterHintsOptions.Metadata.SuppressForParametersThatMatchMethodIntent
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineParameterHintsOptions.Metadata.SuppressForParametersThatDifferOnlyBySuffix
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineParameterHintsOptions.Metadata.SuppressForParametersThatMatchArgumentName
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineTypeHintsOptions.Metadata.EnabledForTypes
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineTypeHintsOptions.Metadata.ForImplicitVariableTypes
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineTypeHintsOptions.Metadata.ForLambdaParameterTypes
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineTypeHintsOptions.Metadata.ForImplicitObjectCreation
+                )
+            );
         }
 
-        protected override IEnumerable<SnapshotSpan> GetSpansToTag(ITextView textView, ITextBuffer subjectBuffer)
+        protected override IEnumerable<SnapshotSpan> GetSpansToTag(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             this.AssertIsForeground();
 
@@ -97,7 +149,11 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         }
 
         protected override async Task ProduceTagsAsync(
-            TaggerContext<InlineHintDataTag> context, DocumentSnapshotSpan documentSnapshotSpan, int? caretPosition, CancellationToken cancellationToken)
+            TaggerContext<InlineHintDataTag> context,
+            DocumentSnapshotSpan documentSnapshotSpan,
+            int? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             var document = documentSnapshotSpan.Document;
             if (document == null)
@@ -108,16 +164,21 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 return;
 
             var snapshotSpan = documentSnapshotSpan.SnapshotSpan;
-            var hints = await service.GetInlineHintsAsync(document, snapshotSpan.Span.ToTextSpan(), cancellationToken).ConfigureAwait(false);
+            var hints = await service
+                .GetInlineHintsAsync(document, snapshotSpan.Span.ToTextSpan(), cancellationToken)
+                .ConfigureAwait(false);
             foreach (var hint in hints)
             {
                 // If we don't have any text to actually show the user, then don't make a tag.
                 if (hint.DisplayParts.Sum(p => p.ToString().Length) == 0)
                     continue;
 
-                context.AddTag(new TagSpan<InlineHintDataTag>(
-                    hint.Span.ToSnapshotSpan(snapshotSpan.Snapshot),
-                    new InlineHintDataTag(hint)));
+                context.AddTag(
+                    new TagSpan<InlineHintDataTag>(
+                        hint.Span.ToSnapshotSpan(snapshotSpan.Snapshot),
+                        new InlineHintDataTag(hint)
+                    )
+                );
             }
         }
     }

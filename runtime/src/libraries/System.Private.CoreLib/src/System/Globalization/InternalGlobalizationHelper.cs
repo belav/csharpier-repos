@@ -16,21 +16,20 @@ namespace System.Globalization
             return totalSeconds * TicksPerSecond;
         }
 
-
         //
         // Define needed constants so globalization code can be independant from any other types
         //
 
         internal const long TicksPerMillisecond = 10000;
         internal const long TicksPerTenthSecond = TicksPerMillisecond * 100;
-        internal const long TicksPerSecond = TicksPerMillisecond * 1000;   // 10,000,000
+        internal const long TicksPerSecond = TicksPerMillisecond * 1000; // 10,000,000
         internal const long MaxSeconds = long.MaxValue / TicksPerSecond;
         internal const long MinSeconds = long.MinValue / TicksPerSecond;
         private const int DaysPerYear = 365;
-        private const int DaysPer4Years = DaysPerYear * 4 + 1;       // 1461
-        private const int DaysPer100Years = DaysPer4Years * 25 - 1;  // 36524
+        private const int DaysPer4Years = DaysPerYear * 4 + 1; // 1461
+        private const int DaysPer100Years = DaysPer4Years * 25 - 1; // 36524
         private const int DaysPer400Years = DaysPer100Years * 4 + 1; // 146097
-        private const int DaysTo10000 = DaysPer400Years * 25 - 366;  // 3652059
+        private const int DaysTo10000 = DaysPer400Years * 25 - 366; // 3652059
         private const long TicksPerMinute = TicksPerSecond * 60;
         private const long TicksPerHour = TicksPerMinute * 60;
         private const long TicksPerDay = TicksPerHour * 24;

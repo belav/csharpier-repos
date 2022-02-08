@@ -51,14 +51,19 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
 
     [DataContract]
     internal readonly record struct DocumentHighlightingOptions(
-        [property: DataMember(Order = 0)] bool HighlightRelatedRegexComponentsUnderCursor)
+        [property: DataMember(Order = 0)] bool HighlightRelatedRegexComponentsUnderCursor
+    )
     {
-        public static DocumentHighlightingOptions From(Project project)
-            => From(project.Solution.Options, project.Language);
+        public static DocumentHighlightingOptions From(Project project) =>
+            From(project.Solution.Options, project.Language);
 
-        public static DocumentHighlightingOptions From(OptionSet options, string language)
-            => new(
-                HighlightRelatedRegexComponentsUnderCursor: options.GetOption(RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor, language));
+        public static DocumentHighlightingOptions From(OptionSet options, string language) =>
+            new(
+                HighlightRelatedRegexComponentsUnderCursor: options.GetOption(
+                    RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor,
+                    language
+                )
+            );
     }
 
     /// <summary>
@@ -68,6 +73,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
     internal interface IDocumentHighlightsService : ILanguageService
     {
         Task<ImmutableArray<DocumentHighlights>> GetDocumentHighlightsAsync(
-            Document document, int position, IImmutableSet<Document> documentsToSearch, DocumentHighlightingOptions options, CancellationToken cancellationToken);
+            Document document,
+            int position,
+            IImmutableSet<Document> documentsToSearch,
+            DocumentHighlightingOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

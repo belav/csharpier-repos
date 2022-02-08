@@ -32,11 +32,13 @@ namespace System.Text.RegularExpressions.Tests
                 throw new XunitException($"Expected ArgumentException -> Actual: {e}");
             }
 
-            throw new XunitException($"Expected ArgumentException with error: ({error}) -> Actual: No exception thrown");
+            throw new XunitException(
+                $"Expected ArgumentException with error: ({error}) -> Actual: No exception thrown"
+            );
         }
 
-       /// <summary>
-        /// Checks that action succeeds or throws either a RegexParseException or an ArgumentException depending on the
+        /// <summary>
+         /// Checks that action succeeds or throws either a RegexParseException or an ArgumentException depending on the
         // environment and the action.
         /// </summary>
         /// <param name="action">The action to invoke.</param>
@@ -44,7 +46,9 @@ namespace System.Text.RegularExpressions.Tests
         {
             if (Record.Exception(action) is Exception e && e is not ArgumentException)
             {
-                throw new XunitException($"Expected ArgumentException or no exception -> Actual: ({e})");
+                throw new XunitException(
+                    $"Expected ArgumentException or no exception -> Actual: ({e})"
+                );
             }
         }
     }

@@ -5,7 +5,5 @@ using System.CommandLine.Parsing;
 
 namespace System.CommandLine.Binding
 {
-    internal delegate bool TryConvertArgument(
-        ArgumentResult argumentResult,
-        out object? value);
+    internal delegate bool TryConvertArgument(ArgumentResult argumentResult, out object? value);
 }

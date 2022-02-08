@@ -13,10 +13,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     public class KeyInfoNameTest
     {
-
         [Fact]
         public void NewKeyValue()
         {
@@ -66,7 +64,10 @@ namespace System.Security.Cryptography.Xml.Tests
             KeyInfoName name = new KeyInfoName();
             name.LoadXml(doc.DocumentElement);
             Assert.Equal("", name.Value);
-            Assert.Equal("<KeyName xmlns=\"http://www.w3.org/2000/09/xmldsig#\"></KeyName>", (name.GetXml().OuterXml));
+            Assert.Equal(
+                "<KeyName xmlns=\"http://www.w3.org/2000/09/xmldsig#\"></KeyName>",
+                (name.GetXml().OuterXml)
+            );
         }
     }
 }

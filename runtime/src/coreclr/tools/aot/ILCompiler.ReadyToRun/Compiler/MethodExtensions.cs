@@ -30,7 +30,10 @@ namespace ILCompiler
             if (method is Internal.IL.Stubs.PInvokeTargetNativeMethod rawPinvoke)
                 method = rawPinvoke.Target;
 
-            return method.HasCustomAttribute("System.Runtime.InteropServices", "SuppressGCTransitionAttribute");
+            return method.HasCustomAttribute(
+                "System.Runtime.InteropServices",
+                "SuppressGCTransitionAttribute"
+            );
         }
 
         /// <summary>
@@ -42,7 +45,10 @@ namespace ILCompiler
         /// <returns>True when the method is marked as non-versionable, false otherwise.</returns>
         public static bool IsNonVersionable(this MethodDesc method)
         {
-            return method.HasCustomAttribute("System.Runtime.Versioning", "NonVersionableAttribute");
+            return method.HasCustomAttribute(
+                "System.Runtime.Versioning",
+                "NonVersionableAttribute"
+            );
         }
     }
 }

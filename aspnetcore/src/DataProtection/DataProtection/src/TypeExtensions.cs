@@ -22,8 +22,12 @@ internal static class TypeExtensions
             // It might seem a bit weird to throw an InvalidCastException explicitly rather than
             // to let the CLR generate one, but searching through NetFX there is indeed precedent
             // for this pattern when the caller knows ahead of time the operation will fail.
-            throw new InvalidCastException(Resources.FormatTypeExtensions_BadCast(
-                expectedBaseType.AssemblyQualifiedName, implementationType.AssemblyQualifiedName));
+            throw new InvalidCastException(
+                Resources.FormatTypeExtensions_BadCast(
+                    expectedBaseType.AssemblyQualifiedName,
+                    implementationType.AssemblyQualifiedName
+                )
+            );
         }
     }
 }

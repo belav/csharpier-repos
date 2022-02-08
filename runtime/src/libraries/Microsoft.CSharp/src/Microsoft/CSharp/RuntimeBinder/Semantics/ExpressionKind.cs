@@ -37,11 +37,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /***************************************************************************************************
             Ones below here are not used to create actual expr types, only EK_ values.
-        ***************************************************************************************************/
+            ***************************************************************************************************/
         ExpressionKindCount,
-        EqualsParam,       // this is only used as a parameter, no actual exprs are constructed with it
+        EqualsParam, // this is only used as a parameter, no actual exprs are constructed with it
         FirstOp = EqualsParam,
-        Compare,      // this is only used as a parameter, no actual exprs are constructed with it
+        Compare, // this is only used as a parameter, no actual exprs are constructed with it
         True,
         False,
         Inc,
@@ -73,8 +73,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // keep Add to RightShift in the same sequence (ILGENREC::genBinopExpr)
         LogicalAnd,
         LogicalOr,
-        Sequence,     // p1 is side effects, p2 is values
-        Save,         // p1 is expr, p2 is wrap to be saved into...
+        Sequence, // p1 is side effects, p2 is values
+        Save, // p1 is expr, p2 is wrap to be saved into...
         Swap,
         Indir,
         Addr,
@@ -92,7 +92,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 #if EERANGE
         EK_RANGE,
 #endif
-        MultiOffset,  // This has to be last!!! To deal /w multiops we add this to the op to obtain the ek in the op table
+        MultiOffset, // This has to be last!!! To deal /w multiops we add this to the op to obtain the ek in the op table
         // Statements are all before expressions and the first expression is EK_BINOP
         // EK types starting with EK_COUNT do not have associated EXPR structures,
         // and are all binary operators.

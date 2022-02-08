@@ -16,9 +16,7 @@ internal class SyntaxListPool
     private readonly List<SyntaxListBuilder> _allocated = new List<SyntaxListBuilder>();
 #endif
 
-    internal SyntaxListPool()
-    {
-    }
+    internal SyntaxListPool() { }
 
     internal SyntaxListBuilder Allocate()
     {

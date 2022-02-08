@@ -26,7 +26,10 @@ public readonly struct FragmentString : IEquatable<FragmentString>
     {
         if (!string.IsNullOrEmpty(value) && value[0] != '#')
         {
-            throw new ArgumentException("The leading '#' must be included for a non-empty fragment.", nameof(value));
+            throw new ArgumentException(
+                "The leading '#' must be included for a non-empty fragment.",
+                nameof(value)
+            );
         }
         _value = value;
     }
