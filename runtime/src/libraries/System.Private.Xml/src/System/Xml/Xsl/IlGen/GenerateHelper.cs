@@ -1277,10 +1277,11 @@ namespace System.Xml.Xsl.IlGen
                     retType = meth.ReturnType.Name;
                 }
 
-                _writerDump!.WriteLine(
-                    "  {0, -10} {1} {2}({3})",
-                    new object?[] { opcode.Name, retType, meth.Name, strBldr.ToString() }
-                );
+                _writerDump!
+                    .WriteLine(
+                        "  {0, -10} {1} {2}({3})",
+                        new object?[] { opcode.Name, retType, meth.Name, strBldr.ToString() }
+                    );
             }
 #endif
         }
@@ -2076,13 +2077,14 @@ namespace System.Xml.Xsl.IlGen
                         _sourceFile = sourceFile;
                         _writerDump!.WriteLine("// Source File '{0}'", _sourceFile);
                     }
-                    _writerDump!.WriteLine(
-                        "//[{0},{1} -- {2},{3}]",
-                        sourceInfo.Start.Line,
-                        sourceInfo.Start.Pos,
-                        sourceInfo.End.Line,
-                        sourceInfo.End.Pos
-                    );
+                    _writerDump!
+                        .WriteLine(
+                            "//[{0},{1} -- {2},{3}]",
+                            sourceInfo.Start.Line,
+                            sourceInfo.Start.Pos,
+                            sourceInfo.End.Line,
+                            sourceInfo.End.Pos
+                        );
                 }
             }
 #endif
@@ -2210,11 +2212,12 @@ namespace System.Xml.Xsl.IlGen
 #if DEBUG
             if (XmlILTrace.IsEnabled)
             {
-                _writerDump!.Write(
-                    "  {0, -10} (Label {1}",
-                    opcode.Name,
-                    arrLabels.Length != 0 ? _symbols![arrLabels[0]]!.ToString() : ""
-                );
+                _writerDump!
+                    .Write(
+                        "  {0, -10} (Label {1}",
+                        opcode.Name,
+                        arrLabels.Length != 0 ? _symbols![arrLabels[0]]!.ToString() : ""
+                    );
                 for (int i = 1; i < arrLabels.Length; i++)
                 {
                     _writerDump.Write(", Label {0}", _symbols![arrLabels[i]]);
@@ -2229,12 +2232,13 @@ namespace System.Xml.Xsl.IlGen
         {
 #if DEBUG
             if (XmlILTrace.IsEnabled)
-                _writerDump!.WriteLine(
-                    "  {0, -10} {1} ({2})",
-                    opcode.Name,
-                    _symbols![locBldr],
-                    locBldr.LocalType.Name
-                );
+                _writerDump!
+                    .WriteLine(
+                        "  {0, -10} {1} ({2})",
+                        opcode.Name,
+                        _symbols![locBldr],
+                        locBldr.LocalType.Name
+                    );
 #endif
             _ilgen!.Emit(opcode, locBldr);
         }

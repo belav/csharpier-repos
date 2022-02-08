@@ -64,10 +64,8 @@ namespace System.ComponentModel.Composition.Hosting
             private void AddToImportersIndex(string contractName, ComposablePartDefinition part)
             {
                 if (
-                    !_importersIndex!.TryGetValue(
-                        contractName,
-                        out List<ComposablePartDefinition>? parts
-                    )
+                    !_importersIndex!
+                        .TryGetValue(contractName, out List<ComposablePartDefinition>? parts)
                 )
                 {
                     parts = new List<ComposablePartDefinition>();

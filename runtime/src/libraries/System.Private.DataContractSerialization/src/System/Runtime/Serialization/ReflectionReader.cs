@@ -920,10 +920,8 @@ namespace System.Runtime.Serialization
                         object? key = objectToKeyValuePairGetKey(collectionItem!);
                         object? value = objectToKeyValuePairGetValue(collectionItem!);
 
-                        collectionContract.AddMethod!.Invoke(
-                            resultCollection,
-                            new object?[] { key, value }
-                        );
+                        collectionContract.AddMethod!
+                            .Invoke(resultCollection, new object?[] { key, value });
                         return resultCollection;
                     };
                 }

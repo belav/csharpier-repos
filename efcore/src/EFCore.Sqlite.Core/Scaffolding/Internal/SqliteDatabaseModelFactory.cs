@@ -649,10 +649,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
                                 )
                                 ?? foreignKey.PrincipalTable.Columns.FirstOrDefault(
                                     c =>
-                                        c.Name!.Equals(
-                                            principalColumnName,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
+                                        c.Name!
+                                            .Equals(
+                                                principalColumnName,
+                                                StringComparison.OrdinalIgnoreCase
+                                            )
                                 );
                         }
                         else if (principalTable?.PrimaryKey != null)

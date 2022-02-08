@@ -190,11 +190,8 @@ namespace System.Reflection.Emit
                 tb.CreateType();
                 datablobtype = tb;
             }
-            FieldBuilder fb = global_type!.DefineField(
-                name,
-                datablobtype,
-                attributes | FieldAttributes.Static
-            );
+            FieldBuilder fb = global_type!
+                .DefineField(name, datablobtype, attributes | FieldAttributes.Static);
 
             if (global_fields != null)
             {
@@ -281,17 +278,18 @@ namespace System.Reflection.Emit
             if (global_type_created != null)
                 throw new InvalidOperationException("global methods already created");
             CreateGlobalType();
-            MethodBuilder mb = global_type!.DefineMethod(
-                name,
-                attributes,
-                callingConvention,
-                returnType,
-                requiredReturnTypeCustomModifiers,
-                optionalReturnTypeCustomModifiers,
-                parameterTypes,
-                requiredParameterTypeCustomModifiers,
-                optionalParameterTypeCustomModifiers
-            );
+            MethodBuilder mb = global_type!
+                .DefineMethod(
+                    name,
+                    attributes,
+                    callingConvention,
+                    returnType,
+                    requiredReturnTypeCustomModifiers,
+                    optionalReturnTypeCustomModifiers,
+                    parameterTypes,
+                    requiredParameterTypeCustomModifiers,
+                    optionalParameterTypeCustomModifiers
+                );
 
             addGlobalMethod(mb);
             return mb;
@@ -346,17 +344,18 @@ namespace System.Reflection.Emit
             if (global_type_created != null)
                 throw new InvalidOperationException("global methods already created");
             CreateGlobalType();
-            MethodBuilder mb = global_type!.DefinePInvokeMethod(
-                name,
-                dllName,
-                entryName,
-                attributes,
-                callingConvention,
-                returnType,
-                parameterTypes,
-                nativeCallConv,
-                nativeCharSet
-            );
+            MethodBuilder mb = global_type!
+                .DefinePInvokeMethod(
+                    name,
+                    dllName,
+                    entryName,
+                    attributes,
+                    callingConvention,
+                    returnType,
+                    parameterTypes,
+                    nativeCallConv,
+                    nativeCharSet
+                );
 
             addGlobalMethod(mb);
             return mb;

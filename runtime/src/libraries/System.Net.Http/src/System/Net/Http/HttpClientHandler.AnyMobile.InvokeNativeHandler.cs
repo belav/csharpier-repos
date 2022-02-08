@@ -204,10 +204,11 @@ namespace System.Net.Http
             if (_nativeHandlerMethod == null)
             {
                 Type? runtimeOptions = Type.GetType(GetHttpMessageHandlerType);
-                _nativeHandlerMethod = runtimeOptions!.GetMethod(
-                    "GetHttpMessageHandler",
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                );
+                _nativeHandlerMethod = runtimeOptions!
+                    .GetMethod(
+                        "GetHttpMessageHandler",
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                    );
             }
 
             return (HttpMessageHandler)_nativeHandlerMethod!.Invoke(null, null)!;

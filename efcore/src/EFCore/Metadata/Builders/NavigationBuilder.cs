@@ -78,11 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             }
             else
             {
-                InternalSkipNavigationBuilder!.HasAnnotation(
-                    annotation,
-                    value,
-                    ConfigurationSource.Explicit
-                );
+                InternalSkipNavigationBuilder!
+                    .HasAnnotation(annotation, value, ConfigurationSource.Explicit);
             }
 
             return this;
@@ -118,10 +115,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             }
             else
             {
-                InternalSkipNavigationBuilder!.UsePropertyAccessMode(
-                    propertyAccessMode,
-                    ConfigurationSource.Explicit
-                );
+                InternalSkipNavigationBuilder!
+                    .UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
             }
 
             return this;
@@ -159,10 +154,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             }
             else
             {
-                InternalSkipNavigationBuilder!.AutoInclude(
-                    autoInclude,
-                    ConfigurationSource.Explicit
-                );
+                InternalSkipNavigationBuilder!
+                    .AutoInclude(autoInclude, ConfigurationSource.Explicit);
             }
 
             return this;

@@ -85,21 +85,19 @@ namespace System.Net
                             }
                             else
                             {
-                                asyncResult._requestContext!.Reset(
-                                    listenerSession.RequestQueueBoundHandle,
-                                    0,
-                                    0
-                                );
+                                asyncResult._requestContext!
+                                    .Reset(listenerSession.RequestQueueBoundHandle, 0, 0);
                             }
                         }
                     }
                     else
                     {
-                        asyncResult._requestContext!.Reset(
-                            listenerSession.RequestQueueBoundHandle,
-                            asyncResult._requestContext.RequestBlob->RequestId,
-                            numBytes
-                        );
+                        asyncResult._requestContext!
+                            .Reset(
+                                listenerSession.RequestQueueBoundHandle,
+                                asyncResult._requestContext.RequestBlob->RequestId,
+                                numBytes
+                            );
                     }
 
                     // We need to issue a new request, either because auth failed, or because our buffer was too small the first time.

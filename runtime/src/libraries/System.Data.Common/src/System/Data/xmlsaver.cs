@@ -1484,11 +1484,8 @@ namespace System.Data
             XmlElement? schemaEl = (XmlElement?)_namespaces![NamespaceURI];
             if (schemaEl == null)
             {
-                schemaEl = _dc!.CreateElement(
-                    Keywords.XSD_PREFIX,
-                    Keywords.XSD_SCHEMA,
-                    Keywords.XSDNS
-                );
+                schemaEl = _dc!
+                    .CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SCHEMA, Keywords.XSDNS);
                 WriteSchemaRoot(_dc, schemaEl, NamespaceURI);
                 if (!string.IsNullOrEmpty(NamespaceURI))
                 {

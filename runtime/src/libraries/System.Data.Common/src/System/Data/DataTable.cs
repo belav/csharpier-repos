@@ -4595,12 +4595,8 @@ namespace System.Data
                     }
                     if (dc._dependentColumns != null)
                     {
-                        dc.Table!.EvaluateDependentExpressions(
-                            dc._dependentColumns,
-                            dr,
-                            version,
-                            null
-                        );
+                        dc.Table!
+                            .EvaluateDependentExpressions(dc._dependentColumns, dr, version, null);
                     }
                 }
             }
@@ -8450,10 +8446,8 @@ namespace System.Data
                             {
                                 // if deleted GetRecordFromVersion will throw
                                 // TODO: Possible bug, dc.DataExpression may be null
-                                object newValue = dc.DataExpression!.Evaluate(
-                                    cachedRow,
-                                    foreignVer
-                                );
+                                object newValue = dc.DataExpression!
+                                    .Evaluate(cachedRow, foreignVer);
                                 SilentlySetValue(cachedRow, dc, foreignVer, newValue);
                             }
                         }
@@ -8497,10 +8491,8 @@ namespace System.Data
                             {
                                 // if deleted GetRecordFromVersion will throw
                                 // TODO: Possible bug, dc.DataExpression may be null
-                                object newValue = dc.DataExpression!.Evaluate(
-                                    parentRow,
-                                    foreignVer
-                                );
+                                object newValue = dc.DataExpression!
+                                    .Evaluate(parentRow, foreignVer);
                                 SilentlySetValue(parentRow, dc, foreignVer, newValue);
                             }
                         }

@@ -1133,9 +1133,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             removed = foreignKey.PrincipalKey.ReferencingForeignKeys!.Remove(foreignKey);
             Check.DebugAssert(removed, "removed is false");
-            removed = foreignKey.PrincipalEntityType.DeclaredReferencingForeignKeys!.Remove(
-                foreignKey
-            );
+            removed = foreignKey.PrincipalEntityType.DeclaredReferencingForeignKeys!
+                .Remove(foreignKey);
             Check.DebugAssert(removed, "removed is false");
         }
 
@@ -2119,9 +2118,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 : true;
             Check.DebugAssert(removed, "removed is false");
 
-            removed = navigation.TargetEntityType.DeclaredReferencingSkipNavigations!.Remove(
-                navigation
-            );
+            removed = navigation.TargetEntityType.DeclaredReferencingSkipNavigations!
+                .Remove(navigation);
             Check.DebugAssert(removed, "removed is false");
 
             navigation.SetRemovedFromModel();
@@ -4526,7 +4524,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (EntityType)principalEntityType,
                 ConfigurationSource.Explicit,
                 ConfigurationSource.Explicit
-            )!;
+            )
+                !;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4902,7 +4901,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 collection,
                 onDependent,
                 ConfigurationSource.Explicit
-            )!;
+            )
+                !;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -5081,7 +5081,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddIndex(
                 properties as IReadOnlyList<Property> ?? properties.Cast<Property>().ToList(),
                 ConfigurationSource.Explicit
-            )!;
+            )
+                !;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -5098,7 +5099,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 properties as IReadOnlyList<Property> ?? properties.Cast<Property>().ToList(),
                 name,
                 ConfigurationSource.Explicit
-            )!;
+            )
+                !;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -5372,7 +5374,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 propertyType,
                 ConfigurationSource.Explicit,
                 ConfigurationSource.Explicit
-            )!;
+            )
+                !;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -5418,7 +5421,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 memberInfo,
                 ConfigurationSource.Explicit,
                 ConfigurationSource.Explicit
-            )!;
+            )
+                !;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -1129,10 +1129,11 @@ namespace System.Net.WebSockets
 
                             if (header.Compressed)
                             {
-                                _inflater!.AddBytes(
-                                    totalBytesReceived,
-                                    endOfMessage: header.Fin && header.PayloadLength == 0
-                                );
+                                _inflater!
+                                    .AddBytes(
+                                        totalBytesReceived,
+                                        endOfMessage: header.Fin && header.PayloadLength == 0
+                                    );
                             }
                         }
 

@@ -861,10 +861,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 var addColumnOperation =
                     (
-                        (IInfrastructure<AddColumnOperation>)property.GetMethod!.Invoke(
-                            columnsObject,
-                            null
-                        )!
+                        (IInfrastructure<AddColumnOperation>)property.GetMethod!
+                            .Invoke(columnsObject, null)!
                     ).Instance;
                 if (addColumnOperation.Name == null)
                 {

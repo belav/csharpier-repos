@@ -2176,7 +2176,8 @@ namespace Newtonsoft.Json.Serialization
                                                 CultureInfo.InvariantCulture,
                                                 contract.KeyContract,
                                                 contract.DictionaryKeyType
-                                            )!;
+                                            )
+                                            !;
                                         break;
                                     }
 #if HAVE_DATE_TIME_OFFSET
@@ -2196,7 +2197,8 @@ namespace Newtonsoft.Json.Serialization
                                                 CultureInfo.InvariantCulture,
                                                 contract.KeyContract,
                                                 contract.DictionaryKeyType
-                                            )!;
+                                            )
+                                            !;
                                         break;
                                     }
 #endif
@@ -2219,7 +2221,8 @@ namespace Newtonsoft.Json.Serialization
                                                       CultureInfo.InvariantCulture,
                                                       contract.KeyContract,
                                                       contract.DictionaryKeyType
-                                                  )!;
+                                                  )
+                                                  !;
                                         break;
                                 }
                             }
@@ -3272,9 +3275,8 @@ namespace Newtonsoft.Json.Serialization
                             && !propertyArrayContract.IsReadOnlyOrFixedSize
                         )
                         {
-                            object? createdObjectCollection = property.ValueProvider!.GetValue(
-                                createdObject
-                            );
+                            object? createdObjectCollection = property.ValueProvider!
+                                .GetValue(createdObject);
                             if (createdObjectCollection != null)
                             {
                                 propertyArrayContract = (JsonArrayContract)GetContract(
@@ -3311,9 +3313,8 @@ namespace Newtonsoft.Json.Serialization
 
                         if (!dictionaryContract.IsReadOnlyOrFixedSize)
                         {
-                            object? createdObjectDictionary = property.ValueProvider!.GetValue(
-                                createdObject
-                            );
+                            object? createdObjectDictionary = property.ValueProvider!
+                                .GetValue(createdObject);
                             if (createdObjectDictionary != null)
                             {
                                 IDictionary targetDictionary =
@@ -4084,16 +4085,17 @@ namespace Newtonsoft.Json.Serialization
                                     ) && property.Writable
                                 )
                                 {
-                                    property.ValueProvider!.SetValue(
-                                        newObject,
-                                        EnsureType(
-                                            reader,
-                                            property.GetResolvedDefaultValue(),
-                                            CultureInfo.InvariantCulture,
-                                            property.PropertyContract!,
-                                            property.PropertyType
-                                        )
-                                    );
+                                    property.ValueProvider!
+                                        .SetValue(
+                                            newObject,
+                                            EnsureType(
+                                                reader,
+                                                property.GetResolvedDefaultValue(),
+                                                CultureInfo.InvariantCulture,
+                                                property.PropertyContract!,
+                                                property.PropertyType
+                                            )
+                                        );
                                 }
                             }
                             break;

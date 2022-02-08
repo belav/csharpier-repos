@@ -356,7 +356,8 @@ namespace System.Data.Common
                     command,
                     srcTable,
                     behavior
-                )!;
+                )
+                    !;
             }
             finally
             {

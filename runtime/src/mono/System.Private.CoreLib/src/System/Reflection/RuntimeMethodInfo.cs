@@ -951,7 +951,8 @@ namespace System.Reflection
                 obj,
                 parameters,
                 (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0
-            )!;
+            )
+                !;
         }
 
         public object? InternalInvoke(object? obj, object?[]? parameters, bool wrapExceptions)

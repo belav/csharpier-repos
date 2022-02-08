@@ -228,11 +228,12 @@ namespace System.Data
                                 (DateTimeOffset)vRight
                             );
                         case StorageType.String:
-                            return table!.Compare(
-                                Convert.ToString(vLeft, FormatProvider)!,
-                                Convert.ToString(vRight, FormatProvider)!,
-                                comparer
-                            );
+                            return table!
+                                .Compare(
+                                    Convert.ToString(vLeft, FormatProvider)!,
+                                    Convert.ToString(vRight, FormatProvider)!,
+                                    comparer
+                                );
                         case StorageType.Guid:
                             return ((Guid)vLeft).CompareTo((Guid)vRight);
                         case StorageType.Boolean:

@@ -481,14 +481,15 @@ namespace System.Collections.Immutable
                 SortedInt32KeyNode<TValue> result = this;
                 if (key > _key)
                 {
-                    var newRight = _right!.SetOrAdd(
-                        key,
-                        value,
-                        valueComparer,
-                        overwriteExistingValue,
-                        out replacedExistingValue,
-                        out mutated
-                    );
+                    var newRight = _right!
+                        .SetOrAdd(
+                            key,
+                            value,
+                            valueComparer,
+                            overwriteExistingValue,
+                            out replacedExistingValue,
+                            out mutated
+                        );
                     if (mutated)
                     {
                         result = this.Mutate(right: newRight);
@@ -496,14 +497,15 @@ namespace System.Collections.Immutable
                 }
                 else if (key < _key)
                 {
-                    var newLeft = _left!.SetOrAdd(
-                        key,
-                        value,
-                        valueComparer,
-                        overwriteExistingValue,
-                        out replacedExistingValue,
-                        out mutated
-                    );
+                    var newLeft = _left!
+                        .SetOrAdd(
+                            key,
+                            value,
+                            valueComparer,
+                            overwriteExistingValue,
+                            out replacedExistingValue,
+                            out mutated
+                        );
                     if (mutated)
                     {
                         result = this.Mutate(left: newLeft);

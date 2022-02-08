@@ -172,7 +172,8 @@ namespace System.Data.OleDb
                 object value = GetDataSourceValue(
                     OleDbPropertySetGuid.DataSourceInfo,
                     ODB.DBPROP_DBMSVER
-                )!;
+                )
+                    !;
                 return Convert.ToString(value, CultureInfo.InvariantCulture)!;
             }
         }

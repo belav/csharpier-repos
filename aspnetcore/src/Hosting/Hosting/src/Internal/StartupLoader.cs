@@ -346,7 +346,8 @@ internal class StartupLoader
             environmentName,
             typeof(void),
             required: true
-        )!;
+        )
+            !;
         return new ConfigureBuilder(configureMethod);
     }
 

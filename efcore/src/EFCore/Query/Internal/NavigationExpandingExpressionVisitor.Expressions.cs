@@ -147,14 +147,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             out var firstExpansion
                         )
                         // Value known to be non-null
-                        && UnwrapEntityReference(firstExpansion)
-                            !.ForeignKeyExpansionMap.TryGetValue(
-                                (
-                                    skipNavigation.Inverse.ForeignKey,
-                                    !skipNavigation.Inverse.IsOnDependent
-                                ),
-                                out var secondExpansion
-                            )
+                        && UnwrapEntityReference(
+                            firstExpansion
+                        )!.ForeignKeyExpansionMap.TryGetValue(
+                            (
+                                skipNavigation.Inverse.ForeignKey,
+                                !skipNavigation.Inverse.IsOnDependent
+                            ),
+                            out var secondExpansion
+                        )
                     )
                     {
                         // Value known to be non-null

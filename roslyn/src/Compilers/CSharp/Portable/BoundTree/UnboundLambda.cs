@@ -813,10 +813,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool inExpressionTree = Binder.InExpressionTree || isTargetExpressionTree;
 
             if (
-                !_bindingCache!.TryGetValue(
-                    (delegateType, inExpressionTree),
-                    out BoundLambda? result
-                )
+                !_bindingCache!
+                    .TryGetValue((delegateType, inExpressionTree), out BoundLambda? result)
             )
             {
                 result = ReallyBind(delegateType, inExpressionTree);
@@ -982,10 +980,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !inExpressionTree
                 && refKind == CodeAnalysis.RefKind.None
-                && _returnInferenceCache!.TryGetValue(
-                    cacheKey,
-                    out BoundLambda? returnInferenceLambda
-                )
+                && _returnInferenceCache!
+                    .TryGetValue(cacheKey, out BoundLambda? returnInferenceLambda)
                 && GetLambdaExpressionBody(returnInferenceLambda.Body) is BoundExpression expression
                 && (lambdaSymbol = returnInferenceLambda.Symbol).RefKind == refKind
                 && (object)LambdaSymbol.InferenceFailureReturnType != lambdaSymbol.ReturnType

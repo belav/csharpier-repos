@@ -676,7 +676,8 @@ namespace System.Security.Principal
                             _safeTokenHandle,
                             TokenInformationClass.TokenOwner,
                             nullOnInvalidParam: false
-                        )!
+                        )
+                            !
                     )
                     {
                         _owner = new SecurityIdentifier(tokenOwner.Read<IntPtr>(0));
@@ -702,7 +703,8 @@ namespace System.Security.Principal
                             _safeTokenHandle,
                             TokenInformationClass.TokenUser,
                             nullOnInvalidParam: false
-                        )!
+                        )
+                            !
                     )
                     {
                         _user = new SecurityIdentifier(tokenUser!.Read<IntPtr>(0));
@@ -729,7 +731,8 @@ namespace System.Security.Principal
                             _safeTokenHandle,
                             TokenInformationClass.TokenGroups,
                             nullOnInvalidParam: false
-                        )!
+                        )
+                            !
                     )
                     {
                         Interop.TOKEN_GROUPS tokenGroups = pGroups!.Read<Interop.TOKEN_GROUPS>(0);
@@ -1019,7 +1022,8 @@ namespace System.Security.Principal
                     _safeTokenHandle,
                     tokenInformationClass,
                     nullOnInvalidParam: false
-                )!
+                )
+                    !
             )
             {
                 Debug.Assert(
@@ -1038,12 +1042,12 @@ namespace System.Security.Principal
                     safeTokenHandle,
                     TokenInformationClass.TokenStatistics,
                     nullOnInvalidParam: false
-                )!
+                )
+                    !
             )
             {
-                Interop.TOKEN_STATISTICS statistics = pStatistics!.Read<Interop.TOKEN_STATISTICS>(
-                    0
-                );
+                Interop.TOKEN_STATISTICS statistics = pStatistics!
+                    .Read<Interop.TOKEN_STATISTICS>(0);
                 return statistics.AuthenticationId;
             }
         }

@@ -3501,7 +3501,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 principalEntityType,
                 principalKey,
                 configurationSource
-            )!;
+            )
+                !;
 
             var relationship = newRelationship.HasForeignKey(
                 dependentProperties,
@@ -4176,7 +4177,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     propertyBaseName,
                     required,
                     configurationSource
-                )!;
+                )
+                    !;
 
                 newRelationship = relationship;
                 if (principalKey != null)
@@ -5138,7 +5140,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 propertyBaseName,
                 required,
                 configurationSource
-            )!;
+            )
+                !;
 
             if (required.HasValue && foreignKey.IsRequired == required.Value)
             {
@@ -5172,7 +5175,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 propertyBaseName,
                 isRequired,
                 configurationSource
-            )!;
+            )
+                !;
 
             return (InternalForeignKeyBuilder?)batch.Run(updatedForeignKey)?.Builder;
         }
@@ -5253,7 +5257,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 dependentProperties = GetActualProperties(
                     dependentProperties,
                     ConfigurationSource.Convention
-                )!;
+                )
+                    !;
                 if (principalKey == null)
                 {
                     var principalKeyProperties =

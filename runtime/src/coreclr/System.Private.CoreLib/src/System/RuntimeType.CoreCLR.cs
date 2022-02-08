@@ -2099,11 +2099,8 @@ namespace System
             )
             {
                 GetMemberCache<RuntimeConstructorInfo>(ref m_constructorInfoCache);
-                return m_constructorInfoCache!.AddMethod(
-                    declaringType,
-                    constructor,
-                    CacheType.Constructor
-                );
+                return m_constructorInfoCache!
+                    .AddMethod(declaringType, constructor, CacheType.Constructor);
             }
 
             internal FieldInfo GetField(RuntimeFieldHandleInternal field)

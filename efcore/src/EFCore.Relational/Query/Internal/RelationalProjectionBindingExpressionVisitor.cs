@@ -186,11 +186,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             );
 
                         case MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression:
-                            _clientProjections!.Add(
-                                _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(
-                                    materializeCollectionNavigationExpression.Subquery
-                                )!
-                            );
+                            _clientProjections!
+                                .Add(
+                                    _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(
+                                        materializeCollectionNavigationExpression.Subquery
+                                    )!
+                                );
                             return new CollectionResultExpression(
                                 new ProjectionBindingExpression(
                                     _selectExpression,
@@ -381,10 +382,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     if (_indexBasedBinding)
                     {
                         if (
-                            !_entityProjectionCache!.TryGetValue(
-                                entityProjectionExpression,
-                                out var entityProjectionBinding
-                            )
+                            !_entityProjectionCache!
+                                .TryGetValue(
+                                    entityProjectionExpression,
+                                    out var entityProjectionBinding
+                                )
                         )
                         {
                             entityProjectionBinding = AddClientProjection(

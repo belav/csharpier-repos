@@ -335,15 +335,16 @@ namespace System.Xml.Schema
             PushElement(e, ref xsiType, ref xsiNil);
             IXmlLineInfo original = SaveLineInfo(e);
             source = e;
-            validator!.ValidateElement(
-                e.Name.LocalName,
-                e.Name.NamespaceName,
-                si,
-                xsiType,
-                xsiNil,
-                null,
-                null
-            );
+            validator!
+                .ValidateElement(
+                    e.Name.LocalName,
+                    e.Name.NamespaceName,
+                    si,
+                    xsiType,
+                    xsiNil,
+                    null,
+                    null
+                );
             ValidateAttributes(e);
             validator.ValidateEndOfAttributes(si);
             ValidateNodes(e);

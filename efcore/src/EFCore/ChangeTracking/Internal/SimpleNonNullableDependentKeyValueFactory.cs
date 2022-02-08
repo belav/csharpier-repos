@@ -94,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             key = (
                 (Func<IUpdateEntry, TKey>)_propertyAccessors.PreStoreGeneratedCurrentValueGetter
-            )(entry)!;
+            )(entry)
+                !;
             return true;
         }
 

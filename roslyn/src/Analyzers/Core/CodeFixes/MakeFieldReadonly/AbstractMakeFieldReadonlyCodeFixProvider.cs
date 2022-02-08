@@ -60,10 +60,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                 var diagnosticSpan = diagnostic.Location.SourceSpan;
 
                 declarators.Add(
-                    root.FindNode(
-                            diagnosticSpan,
-                            getInnermostNodeForTie: true
-                        ).FirstAncestorOrSelf<TSymbolSyntax>()!
+                    root.FindNode(diagnosticSpan, getInnermostNodeForTie: true)
+                        .FirstAncestorOrSelf<TSymbolSyntax>()!
                 );
             }
 

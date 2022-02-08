@@ -217,7 +217,8 @@ namespace System.Data.ProviderBase
                     connectionPoolGroup.PoolKey,
                     poolOptions,
                     ref connectionOptions
-                )!;
+                )
+                    !;
                 Debug.Assert(null != connectionPoolGroup, "null connectionPoolGroup?");
                 SetConnectionPoolGroup(owningObject, connectionPoolGroup);
             }

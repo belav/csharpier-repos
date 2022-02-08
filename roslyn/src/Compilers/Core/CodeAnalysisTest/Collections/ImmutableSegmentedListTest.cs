@@ -1031,10 +1031,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             var addMethod = list.GetType().GetMethod("Add");
             list = Assert.IsAssignableFrom<IEnumerable>(
-                addMethod!.Invoke(
-                    list,
-                    new object?[] { Activator.CreateInstance(dummType.AsType()) }
-                )
+                addMethod!
+                    .Invoke(list, new object?[] { Activator.CreateInstance(dummType.AsType()) })
             );
 
             list.GetEnumerator(); // ensure this doesn't throw

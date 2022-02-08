@@ -406,7 +406,8 @@ namespace System.Data.Odbc
                         ODBC32.SQL_DESC.TYPE_NAME,
                         ODBC32.SQL_COLUMN.TYPE_NAME,
                         ODBC32.HANDLER.THROW
-                    )!;
+                    )
+                        !;
                 }
                 return info._typename;
             }

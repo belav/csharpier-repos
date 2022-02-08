@@ -1253,11 +1253,12 @@ namespace System.Net
 
                         // This to update response status and exit message if any.
                         // Note that status 221 "Service closing control connection" is always suppressed.
-                        _ftpWebResponse!.UpdateStatus(
-                            connection.StatusCode,
-                            connection.StatusLine,
-                            connection.ExitMessage
-                        );
+                        _ftpWebResponse!
+                            .UpdateStatus(
+                                connection.StatusCode,
+                                connection.StatusLine,
+                                connection.ExitMessage
+                            );
                     }
 
                     stageMode = RequestStage.ReleaseConnection;
@@ -1371,11 +1372,12 @@ namespace System.Net
 
                             // This to update response status and exit message if any.
                             // Note that the status 221 "Service closing control connection" is always suppressed.
-                            _ftpWebResponse!.UpdateStatus(
-                                connection.StatusCode,
-                                connection.StatusLine,
-                                connection.ExitMessage
-                            );
+                            _ftpWebResponse!
+                                .UpdateStatus(
+                                    connection.StatusCode,
+                                    connection.StatusLine,
+                                    connection.ExitMessage
+                                );
                         }
 
                         stageMode = RequestStage.ReleaseConnection;

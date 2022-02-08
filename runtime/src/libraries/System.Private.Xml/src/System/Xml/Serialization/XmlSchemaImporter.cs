@@ -114,7 +114,8 @@ namespace System.Xml.Serialization
                 baseType,
                 TypeFlags.CanBeElementValue,
                 true
-            )!;
+            )
+                !;
             typeMapping.ReferencedByElement = false;
 
             ElementAccessor accessor = new ElementAccessor();
@@ -424,7 +425,8 @@ namespace System.Xml.Serialization
                     baseType,
                     TypeFlags.CanBeElementValue,
                     false
-                )!;
+                )
+                    !;
                 if (!mapping.ReferencedByElement)
                 {
                     object? type = FindType(element.SchemaTypeName, TypeFlags.CanBeElementValue);
@@ -457,7 +459,8 @@ namespace System.Xml.Serialization
                             | TypeFlags.CanBeAttributeValue
                             | TypeFlags.CanBeTextValue,
                         false
-                    )!;
+                    )
+                        !;
                 mapping!.ReferencedByElement = true;
             }
             else if (!element.SubstitutionGroup.IsEmpty)
@@ -917,7 +920,8 @@ namespace System.Xml.Serialization
                     t = FindType(
                         t.DerivedFrom,
                         TypeFlags.CanBeElementValue | TypeFlags.CanBeTextValue
-                    )!;
+                    )
+                        !;
                     if (IsMixed(t))
                     {
                         // keep the mixed attribute on the base class
@@ -1219,8 +1223,8 @@ namespace System.Xml.Serialization
                 choiceIdentifier.Name = member.ChoiceIdentifier.MemberName;
                 if (groupRepeats)
                 {
-                    choiceIdentifier.TypeDesc =
-                        member.ChoiceIdentifier.Mapping.TypeDesc!.CreateArrayTypeDesc();
+                    choiceIdentifier.TypeDesc = member.ChoiceIdentifier.Mapping.TypeDesc!
+                        .CreateArrayTypeDesc();
                 }
                 else
                 {
@@ -1955,9 +1959,8 @@ namespace System.Xml.Serialization
                 if (itemAccessor.Any)
                     return null;
                 arrayMapping.Elements = new ElementAccessor[] { itemAccessor };
-                arrayMapping.TypeDesc = (
-                    (TypeMapping)itemAccessor.Mapping!
-                ).TypeDesc!.CreateArrayTypeDesc();
+                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping!).TypeDesc!
+                    .CreateArrayTypeDesc();
                 arrayMapping.TypeName =
                     (type.Name == null || type.Name.Length == 0)
                         ? $"ArrayOf{CodeIdentifier.MakePascal(itemAccessor.Mapping.TypeDesc.Name)}"
@@ -2570,7 +2573,8 @@ namespace System.Xml.Serialization
                 sourceType = FindType(
                     sourceType.DerivedFrom,
                     TypeFlags.CanBeElementValue | TypeFlags.CanBeAttributeValue
-                )!;
+                )
+                    !;
             }
             if (sourceType is XmlSchemaComplexType)
                 return null;

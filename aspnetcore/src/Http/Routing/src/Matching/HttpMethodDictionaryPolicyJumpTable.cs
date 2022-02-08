@@ -45,10 +45,8 @@ internal sealed class HttpMethodDictionaryPolicyJumpTable : PolicyJumpTable
             )
         )
         {
-            return _corsPreflightDestinations!.TryGetValue(
-                accessControlRequestMethod.ToString(),
-                out destination
-            )
+            return _corsPreflightDestinations!
+                .TryGetValue(accessControlRequestMethod.ToString(), out destination)
               ? destination
               : _corsPreflightExitDestination;
         }

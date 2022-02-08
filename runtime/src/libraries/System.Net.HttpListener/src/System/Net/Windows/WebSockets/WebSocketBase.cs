@@ -568,10 +568,8 @@ namespace System.Net.WebSockets
                     EnsureCloseOutputOperation();
                     _closeOutputOperation!.CloseStatus = closeStatus;
                     _closeOutputOperation!.CloseReason = statusDescription;
-                    _closeOutputTask = _closeOutputOperation!.Process(
-                        null,
-                        linkedCancellationToken
-                    );
+                    _closeOutputTask = _closeOutputOperation!
+                        .Process(null, linkedCancellationToken);
 
                     ReleaseLocks(ref thisLockTaken, ref sessionHandleLockTaken);
                     await _closeOutputTask.SuppressContextFlow();
@@ -884,10 +882,8 @@ namespace System.Net.WebSockets
                         new byte[HttpWebSocket.MinReceiveBufferSize]
                     );
                     EnsureReceiveOperation();
-                    Task<WebSocketReceiveResult?> receiveAsyncTask = _receiveOperation!.Process(
-                        closeMessageBuffer,
-                        linkedCancellationToken
-                    );
+                    Task<WebSocketReceiveResult?> receiveAsyncTask = _receiveOperation!
+                        .Process(closeMessageBuffer, linkedCancellationToken);
                     ReleaseLock(_thisLock, ref lockTaken);
 
                     WebSocketReceiveResult? receiveResult = null;
@@ -1565,10 +1561,8 @@ namespace System.Net.WebSockets
                         if (ownsCancellationTokenSource)
                         {
                             thisPtr.EnsureKeepAliveOperation();
-                            thisPtr._keepAliveTask = thisPtr._keepAliveOperation!.Process(
-                                null,
-                                linkedCancellationToken
-                            );
+                            thisPtr._keepAliveTask = thisPtr._keepAliveOperation!
+                                .Process(null, linkedCancellationToken);
                             ReleaseLock(thisPtr.SessionHandle, ref lockTaken);
                             await thisPtr._keepAliveTask!.SuppressContextFlow();
                         }

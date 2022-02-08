@@ -3568,9 +3568,8 @@ namespace Microsoft.CodeAnalysis
                     {
                         if (nativePdbWriter != null)
                         {
-                            var nativePdbStream = pdbStreamProvider!.GetOrCreateStream(
-                                metadataDiagnostics
-                            );
+                            var nativePdbStream = pdbStreamProvider!
+                                .GetOrCreateStream(metadataDiagnostics);
                             Debug.Assert(
                                 nativePdbStream != null || metadataDiagnostics.HasAnyErrors()
                             );

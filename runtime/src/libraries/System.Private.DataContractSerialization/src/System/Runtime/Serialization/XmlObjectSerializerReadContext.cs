@@ -1391,19 +1391,21 @@ namespace System.Runtime.Serialization
                 if (namespaces == null)
                 {
                     if (_attributesInXmlData.XsiTypeName != null)
-                        childNode.Attributes!.Append(
-                            AddNamespaceDeclaration(
-                                _attributesInXmlData.XsiTypePrefix,
-                                _attributesInXmlData.XsiTypeNamespace
-                            )
-                        );
+                        childNode.Attributes!
+                            .Append(
+                                AddNamespaceDeclaration(
+                                    _attributesInXmlData.XsiTypePrefix,
+                                    _attributesInXmlData.XsiTypeNamespace
+                                )
+                            );
                     if (_attributesInXmlData.FactoryTypeName != null)
-                        childNode.Attributes!.Append(
-                            AddNamespaceDeclaration(
-                                _attributesInXmlData.FactoryTypePrefix,
-                                _attributesInXmlData.FactoryTypeNamespace
-                            )
-                        );
+                        childNode.Attributes!
+                            .Append(
+                                AddNamespaceDeclaration(
+                                    _attributesInXmlData.FactoryTypePrefix,
+                                    _attributesInXmlData.FactoryTypeNamespace
+                                )
+                            );
                 }
             }
             xmlReader.ReadEndElement();

@@ -116,16 +116,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             Dependencies.ExecutionStrategy.Execute(
                 _connection,
                 connection =>
-                    (int)CreateHasTablesCommand().ExecuteScalar(
-                        new RelationalCommandParameterObject(
-                            connection,
-                            null,
-                            null,
-                            Dependencies.CurrentContext.Context,
-                            Dependencies.CommandLogger,
-                            CommandSource.Migrations
-                        )
-                    )! != 0,
+                    (int)CreateHasTablesCommand()
+                        .ExecuteScalar(
+                            new RelationalCommandParameterObject(
+                                connection,
+                                null,
+                                null,
+                                Dependencies.CurrentContext.Context,
+                                Dependencies.CommandLogger,
+                                CommandSource.Migrations
+                            )
+                        )! != 0,
                 null
             );
 

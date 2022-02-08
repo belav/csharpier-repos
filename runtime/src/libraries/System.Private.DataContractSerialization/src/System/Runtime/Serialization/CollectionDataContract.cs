@@ -1237,7 +1237,8 @@ namespace System.Runtime.Serialization
                             Globals.GetCurrentMethodName,
                             enumeratorType,
                             ienumeratorInterface
-                        )!;
+                        )
+                            !;
                     }
                 }
 

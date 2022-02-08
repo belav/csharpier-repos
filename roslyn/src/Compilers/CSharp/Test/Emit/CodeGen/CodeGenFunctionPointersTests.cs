@@ -13129,12 +13129,14 @@ unsafe class D
             );
 
             Assert.True(
-                callConvCdecl!.Equals(
-                    (NamedTypeSymbol)m.GetUnmanagedCallersOnlyAttributeData(
-                        forceComplete: true
-                    )!.CallingConventionTypes.Single(),
-                    TypeCompareKind.ConsiderEverything
-                )
+                callConvCdecl!
+                    .Equals(
+                        (NamedTypeSymbol)m.GetUnmanagedCallersOnlyAttributeData(
+                            forceComplete: true
+                        )!
+                            .CallingConventionTypes.Single(),
+                        TypeCompareKind.ConsiderEverything
+                    )
             );
         }
 

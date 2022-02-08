@@ -103,9 +103,8 @@ namespace Microsoft.Win32.SafeHandles
                 _strategy = strategy;
                 _bufferSize = memory.Length;
                 _memoryHandle = memory.Pin();
-                _overlapped = _fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                    _preallocatedOverlapped
-                );
+                _overlapped = _fileHandle.ThreadPoolBinding!
+                    .AllocateNativeOverlapped(_preallocatedOverlapped);
                 if (_fileHandle.CanSeek)
                 {
                     _overlapped->OffsetLow = (int)fileOffset;

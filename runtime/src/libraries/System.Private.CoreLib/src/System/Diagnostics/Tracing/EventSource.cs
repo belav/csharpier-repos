@@ -3670,15 +3670,11 @@ namespace System.Diagnostics.Tracing
                     reflectedAttributeType.Name,
                     StringComparison.Ordinal
                 )
-                    && attributeType.Namespace!.EndsWith(
-                        "Diagnostics.Tracing",
-                        StringComparison.Ordinal
-                    )
+                    && attributeType.Namespace!
+                        .EndsWith("Diagnostics.Tracing", StringComparison.Ordinal)
                     && (
-                        reflectedAttributeType.Namespace!.EndsWith(
-                            "Diagnostics.Tracing",
-                            StringComparison.Ordinal
-                        )
+                        reflectedAttributeType.Namespace!
+                            .EndsWith("Diagnostics.Tracing", StringComparison.Ordinal)
 #if EVENT_SOURCE_LEGACY_NAMESPACE_SUPPORT
                         || reflectedAttributeType.Namespace.EndsWith(
                             "Diagnostics.Eventing",

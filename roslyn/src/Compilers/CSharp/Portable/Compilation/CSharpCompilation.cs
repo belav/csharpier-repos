@@ -2856,10 +2856,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // Record targets of used extern aliases
                                 var node = info.Tree
                                     .GetRoot(cancellationToken)
-                                    .FindToken(
-                                        info.Span.Start,
-                                        findInsideTrivia: false
-                                    ).Parent!.FirstAncestorOrSelf<ExternAliasDirectiveSyntax>();
+                                    .FindToken(info.Span.Start, findInsideTrivia: false).Parent!
+                                    .FirstAncestorOrSelf<ExternAliasDirectiveSyntax>();
 
                                 if (
                                     node is object

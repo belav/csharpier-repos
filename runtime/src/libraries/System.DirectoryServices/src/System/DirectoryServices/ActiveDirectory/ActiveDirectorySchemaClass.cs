@@ -1206,7 +1206,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         _schemaGuidBinaryForm = (byte[])GetValueFromCache(
                             PropertyManager.SchemaIDGuid,
                             true
-                        )!;
+                        )
+                            !;
                     }
                 }
 

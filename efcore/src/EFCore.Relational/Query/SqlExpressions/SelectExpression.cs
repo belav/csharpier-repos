@@ -627,9 +627,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         // Since we lift nested client projections for single results up, we may need to re-clone the baseSelectExpression
                         // again so it does contain the single result subquery too. We erase projections for it since it would be non-empty.
                         earlierClientProjectionCount = _clientProjections.Count;
-                        baseSelectExpression = (SelectExpression)cloningExpressionVisitor!.Visit(
-                            this
-                        );
+                        baseSelectExpression = (SelectExpression)cloningExpressionVisitor!
+                            .Visit(this);
                         baseSelectExpression._projection.Clear();
                     }
 
@@ -747,10 +746,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                 this,
                                 Enumerable.Range(offset, count).ToArray()
                             ).Visit(innerShaperExpression);
-                            innerShaperExpression =
-                                entityShaperNullableMarkingExpressionVisitor!.Visit(
-                                    innerShaperExpression
-                                );
+                            innerShaperExpression = entityShaperNullableMarkingExpressionVisitor!
+                                .Visit(innerShaperExpression);
                             clientProjectionIndexMap.Add(innerShaperExpression);
                             remappingRequired = true;
                             break;
@@ -795,9 +792,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                             if (querySplittingBehavior == QuerySplittingBehavior.SplitQuery)
                             {
                                 var outerSelectExpression =
-                                    (SelectExpression)cloningExpressionVisitor!.Visit(
-                                        baseSelectExpression!
-                                    );
+                                    (SelectExpression)cloningExpressionVisitor!
+                                        .Visit(baseSelectExpression!);
                                 innerSelectExpression =
                                     (SelectExpression)new ColumnExpressionReplacingExpressionVisitor(
                                         this,
@@ -1314,9 +1310,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         this,
                         indexMap
                     ).Visit(innerShaperExpression);
-                    innerShaperExpression = entityShaperNullableMarkingExpressionVisitor!.Visit(
-                        innerShaperExpression
-                    );
+                    innerShaperExpression = entityShaperNullableMarkingExpressionVisitor!
+                        .Visit(innerShaperExpression);
 
                     return innerShaperExpression;
                 }

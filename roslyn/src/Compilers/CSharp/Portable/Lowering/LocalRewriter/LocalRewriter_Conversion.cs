@@ -73,11 +73,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var toType = node.Type;
             Debug.Assert(
-                result.Type!.Equals(
-                    toType,
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                result.Type!
+                    .Equals(
+                        toType,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             );
 
             return result;
@@ -949,10 +950,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Conversion: { Kind: ConversionKind.ImplicitNullable },
                     Operand: var convertedArgument
                 }
-                      when convertedArgument.Type!.Equals(
-                          expression.Type.StrippedType(),
-                          TypeCompareKind.AllIgnoreOptions
-                      ):
+                      when convertedArgument.Type!
+                          .Equals(expression.Type.StrippedType(), TypeCompareKind.AllIgnoreOptions):
                     return convertedArgument;
 
                 // Detect the unlowered nullable conversion from a tuple type T1 to Nullable<T2> for a tuple type T2.

@@ -409,10 +409,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         }
                         else if (value is SqlConstantExpression sqlConstantExpression)
                         {
-                            substitutions[i] =
-                                sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(
-                                    sqlConstantExpression.Value
-                                );
+                            substitutions[i] = sqlConstantExpression.TypeMapping!
+                                .GenerateSqlLiteral(sqlConstantExpression.Value);
                         }
                     }
 

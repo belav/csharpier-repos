@@ -1418,7 +1418,8 @@ namespace System.Numerics
                 isUnsigned,
                 isBigEndian,
                 ref ignored
-            )!;
+            )
+                !;
         }
 
         /// <summary>

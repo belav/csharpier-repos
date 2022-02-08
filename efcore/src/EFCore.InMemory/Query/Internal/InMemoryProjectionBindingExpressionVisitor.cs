@@ -360,10 +360,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 if (_indexBasedBinding)
                 {
                     if (
-                        !_entityProjectionCache!.TryGetValue(
-                            entityProjectionExpression,
-                            out var entityProjectionBinding
-                        )
+                        !_entityProjectionCache!
+                            .TryGetValue(
+                                entityProjectionExpression,
+                                out var entityProjectionBinding
+                            )
                     )
                     {
                         entityProjectionBinding = AddClientProjection(

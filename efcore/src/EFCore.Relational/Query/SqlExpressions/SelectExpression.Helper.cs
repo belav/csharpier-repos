@@ -262,9 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         && _columnsUsedInJoinCondition[tableAlias] != null
                     )
                     {
-                        _columnReferenced[tableAlias]!.UnionWith(
-                            _columnsUsedInJoinCondition[tableAlias]!
-                        );
+                        _columnReferenced[tableAlias]!
+                            .UnionWith(_columnsUsedInJoinCondition[tableAlias]!);
                     }
                 }
 

@@ -100,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 HasForeignKeyBuilder(
                     ResolveEntityType(
                         Check.NotNull(dependentEntityTypeName, nameof(dependentEntityTypeName))
-                    )!,
+                    )
+                        !,
                     dependentEntityTypeName,
                     Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))
                 ),
@@ -144,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 HasForeignKeyBuilder(
                     ResolveEntityType(
                         Check.NotNull(dependentEntityType, nameof(dependentEntityType))
-                    )!,
+                    )
+                        !,
                     dependentEntityType.ShortDisplayName(),
                     Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))
                 ),
@@ -242,7 +244,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 HasPrincipalKeyBuilder(
                     ResolveEntityType(
                         Check.NotEmpty(principalEntityTypeName, nameof(principalEntityTypeName))
-                    )!,
+                    )
+                        !,
                     principalEntityTypeName,
                     Check.NotNull(keyPropertyNames, nameof(keyPropertyNames))
                 ),
@@ -277,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 HasPrincipalKeyBuilder(
                     ResolveEntityType(
                         Check.NotNull(principalEntityType, nameof(principalEntityType))
-                    )!,
+                    )
+                        !,
                     principalEntityType.ShortDisplayName(),
                     Check.NotNull(keyPropertyNames, nameof(keyPropertyNames))
                 ),

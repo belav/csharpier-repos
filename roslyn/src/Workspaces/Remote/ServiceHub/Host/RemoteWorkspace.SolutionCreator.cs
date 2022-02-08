@@ -619,10 +619,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 if (lazyDocumentsToAdd != null)
                 {
-                    project = addDocuments(
-                            project.Solution,
-                            lazyDocumentsToAdd.ToImmutable()
-                        ).GetProject(project.Id)!;
+                    project = addDocuments(project.Solution, lazyDocumentsToAdd.ToImmutable())
+                        .GetProject(project.Id)!;
                 }
 
                 // changed document
@@ -657,9 +655,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     if (!newMap.ContainsKey(documentId))
                     {
                         // we have a document removed
-                        project = removeDocument(project.Solution, documentId).GetProject(
-                            project.Id
-                        )!;
+                        project = removeDocument(project.Solution, documentId)
+                            .GetProject(project.Id)!;
                     }
                 }
 

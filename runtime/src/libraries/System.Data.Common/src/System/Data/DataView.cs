@@ -1023,11 +1023,12 @@ namespace System.Data
             // rowview.GetRecord() may return the proposed record
             // the index will only contain the original or current record, never proposed.
             // return index.GetIndex(rowview.GetRecord());
-            return _index!.GetIndex(
-                rowview.Row.GetRecordFromVersion(
-                    rowview.Row.GetDefaultRowVersion(RowStateFilter) & ~DataRowVersion.Proposed
-                )
-            );
+            return _index!
+                .GetIndex(
+                    rowview.Row.GetRecordFromVersion(
+                        rowview.Row.GetDefaultRowVersion(RowStateFilter) & ~DataRowVersion.Proposed
+                    )
+                );
         }
 
         void IList.Insert(int index, object? value)

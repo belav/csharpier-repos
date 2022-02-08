@@ -109,10 +109,8 @@ namespace System.Data.Common.Tests
         public void ProviderFactoryTest()
         {
             DbProviderFactoryConnection con = new DbProviderFactoryConnection();
-            PropertyInfo providerFactoryProperty = con.GetType().GetProperty(
-                "ProviderFactory",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            )!;
+            PropertyInfo providerFactoryProperty = con.GetType()
+                .GetProperty("ProviderFactory", BindingFlags.NonPublic | BindingFlags.Instance)!;
             Assert.NotNull(providerFactoryProperty);
             DbProviderFactory? factory = providerFactoryProperty.GetValue(con) as DbProviderFactory;
             Assert.NotNull(factory);

@@ -491,9 +491,8 @@ namespace System.Threading
         {
             Debug.Assert(ThreadPool.SupportsTimeSensitiveWorkItems);
 
-            bool success = timeSensitiveWorkQueue!.TryDequeue(
-                out IThreadPoolWorkItem? timeSensitiveWorkItem
-            );
+            bool success = timeSensitiveWorkQueue!
+                .TryDequeue(out IThreadPoolWorkItem? timeSensitiveWorkItem);
             Debug.Assert(success == (timeSensitiveWorkItem != null));
             return timeSensitiveWorkItem;
         }

@@ -67,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         operation.Name,
                         operation,
                         model
-                    )!
+                    )
+                        !
             );
 
         private IReadOnlyList<MigrationOperation> RewriteOperations(

@@ -156,13 +156,14 @@ namespace System.Net
             }
             else
             {
-                _responseStream!.BeginWrite(
-                    responseEntity,
-                    0,
-                    responseEntity.Length,
-                    new AsyncCallback(NonBlockingCloseCallback),
-                    null
-                );
+                _responseStream!
+                    .BeginWrite(
+                        responseEntity,
+                        0,
+                        responseEntity.Length,
+                        new AsyncCallback(NonBlockingCloseCallback),
+                        null
+                    );
             }
         }
 

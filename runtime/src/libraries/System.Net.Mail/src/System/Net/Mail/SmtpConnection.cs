@@ -118,13 +118,8 @@ namespace System.Net.Mail
 
         internal IAsyncResult BeginFlush(AsyncCallback? callback, object? state)
         {
-            return _networkStream!.BeginWrite(
-                _bufferBuilder.GetBuffer(),
-                0,
-                _bufferBuilder.Length,
-                callback,
-                state
-            );
+            return _networkStream!
+                .BeginWrite(_bufferBuilder.GetBuffer(), 0, _bufferBuilder.Length, callback, state);
         }
 
         internal void EndFlush(IAsyncResult result)
@@ -600,9 +595,8 @@ namespace System.Net.Mail
                     {
                         try
                         {
-                            LineInfo info = thisPtr._connection.Reader!.CurrentReader!.EndReadLine(
-                                result
-                            );
+                            LineInfo info = thisPtr._connection.Reader!.CurrentReader!
+                                .EndReadLine(result);
                             if (info.StatusCode != SmtpStatusCode.ServiceReady)
                             {
                                 thisPtr.InvokeCallback(
@@ -838,9 +832,8 @@ namespace System.Net.Mail
                         (ConnectAndHandshakeAsyncResult)result.AsyncState!;
                     try
                     {
-                        (thisPtr._connection._networkStream as TlsStream)!.EndAuthenticateAsClient(
-                            result
-                        );
+                        (thisPtr._connection._networkStream as TlsStream)!
+                            .EndAuthenticateAsClient(result);
                         thisPtr._connection._responseReader = new SmtpReplyReaderFactory(
                             thisPtr._connection._networkStream
                         );

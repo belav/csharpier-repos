@@ -122,7 +122,8 @@ namespace System.Text.RegularExpressions
                 beginning,
                 length,
                 UseOptionR() ? beginning + length : beginning
-            )!;
+            )
+                !;
         }
 
         /// <summary>

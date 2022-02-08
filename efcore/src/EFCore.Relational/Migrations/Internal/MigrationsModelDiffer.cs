@@ -2490,21 +2490,22 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         foreach (var sourceEntry in entryMapping.SourceEntries)
                         {
                             sourceEntry.EntityState = EntityState.Deleted;
-                            _sourceUpdateAdapter!.CascadeDelete(
-                                sourceEntry,
-                                sourceEntry.EntityType
-                                    .GetReferencingForeignKeys()
-                                    .Where(
-                                        fk =>
-                                        {
-                                            var behavior = diffContext
-                                                .FindTarget(fk)
-                                                ?.DeleteBehavior;
-                                            return behavior != null
-                                                && behavior != DeleteBehavior.ClientNoAction;
-                                        }
-                                    )
-                            );
+                            _sourceUpdateAdapter!
+                                .CascadeDelete(
+                                    sourceEntry,
+                                    sourceEntry.EntityType
+                                        .GetReferencingForeignKeys()
+                                        .Where(
+                                            fk =>
+                                            {
+                                                var behavior = diffContext
+                                                    .FindTarget(fk)
+                                                    ?.DeleteBehavior;
+                                                return behavior != null
+                                                    && behavior != DeleteBehavior.ClientNoAction;
+                                            }
+                                        )
+                                );
                         }
                     }
                 }
@@ -2667,10 +2668,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             if (
                                 command.Entries.Any(
                                     en =>
-                                        changedTableMappings!.TryGetValue(
-                                            en.EntityType,
-                                            out var newTables
-                                        )
+                                        changedTableMappings!
+                                            .TryGetValue(en.EntityType, out var newTables)
                                         && newTables.Any(
                                             t =>
                                                 t.Name == command.TableName
@@ -2725,10 +2724,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                 command.Entries.Any(en => entriesWithRemovedMappings.Contains(en))
                                 && !command.Entries.Any(
                                     en =>
-                                        changedTableMappings!.TryGetValue(
-                                            en.EntityType,
-                                            out var removedTables
-                                        )
+                                        changedTableMappings!
+                                            .TryGetValue(en.EntityType, out var removedTables)
                                         && removedTables.Any(
                                             t =>
                                                 t.Name == command.TableName

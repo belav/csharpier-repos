@@ -1462,10 +1462,11 @@ ORDER BY [table_schema], [table_name], [f].[name], [fc].[constraint_column_id]";
                             )
                             ?? foreignKey.PrincipalTable.Columns.FirstOrDefault(
                                 c =>
-                                    c.Name!.Equals(
-                                        principalColumnName,
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    c.Name!
+                                        .Equals(
+                                            principalColumnName,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                             );
                         if (principalColumn == null)
                         {

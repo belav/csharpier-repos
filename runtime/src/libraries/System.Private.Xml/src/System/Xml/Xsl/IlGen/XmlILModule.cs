@@ -162,12 +162,13 @@ namespace System.Xml.Xsl.IlGen
 
             if (!_useLRE)
             {
-                MethodBuilder methBldr = _typeBldr!.DefineMethod(
-                    name,
-                    MethodAttributes.Private | MethodAttributes.Static,
-                    returnType,
-                    paramTypes
-                );
+                MethodBuilder methBldr = _typeBldr!
+                    .DefineMethod(
+                        name,
+                        MethodAttributes.Private | MethodAttributes.Static,
+                        returnType,
+                        paramTypes
+                    );
 
                 if (_emitSymbols && (xmlAttrs & XmlILMethodAttributes.NonUser) != 0)
                 {
@@ -249,11 +250,12 @@ namespace System.Xml.Xsl.IlGen
         public FieldInfo DefineInitializedData(string name, byte[] data)
         {
             Debug.Assert(!_useLRE, "Cannot create initialized data for an LRE module");
-            return _typeBldr!.DefineInitializedData(
-                name,
-                data,
-                FieldAttributes.Private | FieldAttributes.Static
-            );
+            return _typeBldr!
+                .DefineInitializedData(
+                    name,
+                    data,
+                    FieldAttributes.Private | FieldAttributes.Static
+                );
         }
 
         /// <summary>
@@ -262,11 +264,8 @@ namespace System.Xml.Xsl.IlGen
         public FieldInfo DefineField(string fieldName, Type type)
         {
             Debug.Assert(!_useLRE, "Cannot create field for an LRE module");
-            return _typeBldr!.DefineField(
-                fieldName,
-                type,
-                FieldAttributes.Private | FieldAttributes.Static
-            );
+            return _typeBldr!
+                .DefineField(fieldName, type, FieldAttributes.Private | FieldAttributes.Static);
         }
 
         /// <summary>

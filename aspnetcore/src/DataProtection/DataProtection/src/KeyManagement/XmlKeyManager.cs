@@ -515,9 +515,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         {
             // Figure out who will be deserializing this
             var descriptorElement = keyElement.Element(DescriptorElementName);
-            string descriptorDeserializerTypeName = (string)descriptorElement!.Attribute(
-                DeserializerTypeAttributeName
-            )!;
+            string descriptorDeserializerTypeName = (string)descriptorElement!
+                .Attribute(DeserializerTypeAttributeName)!;
 
             // Decrypt the descriptor element and pass it to the descriptor for consumption
             var unencryptedInputToDeserializer = descriptorElement

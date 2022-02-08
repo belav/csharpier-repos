@@ -1316,9 +1316,8 @@ namespace System.Data
                     {
                         if (col.Expression.Length != 0)
                         {
-                            ds.Tables[table.TableName, table.Namespace]!.Columns[
-                                col.ColumnName
-                            ]!.CopyExpressionFrom(col);
+                            ds.Tables[table.TableName, table.Namespace]!.Columns[col.ColumnName]!
+                                .CopyExpressionFrom(col);
                         }
                     }
                 }

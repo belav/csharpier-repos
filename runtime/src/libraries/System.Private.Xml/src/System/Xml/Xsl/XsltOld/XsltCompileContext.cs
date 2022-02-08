@@ -336,12 +336,13 @@ namespace System.Xml.Xsl.XsltOld
             else
             {
                 return new XPathSingletonIterator(
-                    _processor!.GetNavigator(
-                        ComposeUri(
-                            XmlConvert.ToXPathString(arg0)!,
-                            baseUri ?? _manager!.Navigator.BaseURI
+                    _processor!
+                        .GetNavigator(
+                            ComposeUri(
+                                XmlConvert.ToXPathString(arg0)!,
+                                baseUri ?? _manager!.Navigator.BaseURI
+                            )
                         )
-                    )
                 );
             }
         }
@@ -481,9 +482,8 @@ namespace System.Xml.Xsl.XsltOld
                 PrefixQName.ParseQualifiedName(formatName, out prefix, out local);
                 ns = LookupNamespace(prefix);
             }
-            DecimalFormat? formatInfo = _processor!.RootAction!.GetDecimalFormat(
-                new XmlQualifiedName(local, ns)
-            );
+            DecimalFormat? formatInfo = _processor!.RootAction!
+                .GetDecimalFormat(new XmlQualifiedName(local, ns));
             if (formatInfo == null)
             {
                 if (formatName != null)
