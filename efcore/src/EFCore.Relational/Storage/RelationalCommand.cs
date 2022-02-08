@@ -663,8 +663,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     _stopwatch.Restart();
 
-                    var interceptionResult = await logger
-                        !.CommandReaderExecutingAsync(
+                    var interceptionResult = await logger!
+                        .CommandReaderExecutingAsync(
                             connection,
                             command,
                             context,
@@ -680,8 +680,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         ? interceptionResult.Result
                         : await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-                    reader = await logger
-                        !.CommandReaderExecutedAsync(
+                    reader = await logger!
+                        .CommandReaderExecutedAsync(
                             connection,
                             command,
                             context,

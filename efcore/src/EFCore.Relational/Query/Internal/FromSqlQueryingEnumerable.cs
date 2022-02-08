@@ -340,8 +340,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 .ConfigureAwait(false);
                         }
 
-                        var hasNext = await _dataReader
-                            !.ReadAsync(_relationalQueryContext.CancellationToken)
+                        var hasNext = await _dataReader!
+                            .ReadAsync(_relationalQueryContext.CancellationToken)
                             .ConfigureAwait(false);
 
                         Current = hasNext

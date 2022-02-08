@@ -1435,8 +1435,8 @@ namespace Microsoft.EntityFrameworkCore
                         ? (PooledContext)scopedProvider.GetService<IPooledContext>()
                         : scopedProvider.GetService<PooledContext>();
 
-                    await context
-                        !.Customers.AsNoTracking()
+                    await context!.Customers
+                        .AsNoTracking()
                         .FirstAsync(c => c.CustomerId == "ALFKI");
 
                     Interlocked.Increment(ref _requests);

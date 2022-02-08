@@ -27256,8 +27256,8 @@ interface I {}
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
-                    speculativeModel
-                        !.GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
+                    speculativeModel!
+                        .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
                         .Symbol.ToTestDisplayString()
                 );
                 Assert.Equal(
@@ -27293,8 +27293,8 @@ interface I {}
 
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
-                    speculativeModel
-                        !.GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
+                    speculativeModel!
+                        .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
                         .Symbol.ToTestDisplayString()
                 );
                 Assert.Equal(

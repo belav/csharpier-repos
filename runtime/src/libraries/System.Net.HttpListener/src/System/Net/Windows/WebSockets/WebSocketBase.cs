@@ -200,8 +200,8 @@ namespace System.Net.WebSockets
 
                 EnsureReceiveOperation();
                 receiveResult = (
-                    await _receiveOperation
-                        !.Process(buffer, linkedCancellationToken)
+                    await _receiveOperation!
+                        .Process(buffer, linkedCancellationToken)
                         .SuppressContextFlow()
                 )!;
 

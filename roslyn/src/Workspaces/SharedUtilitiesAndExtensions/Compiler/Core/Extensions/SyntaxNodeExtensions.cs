@@ -609,8 +609,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                                 (SyntaxNode?)retryAnnotations
                                     .GetAnnotations(currentNode)
                                     .SingleOrDefault() ?? currentNode;
-                            var newNode = await computeReplacementNodeAsync
-                                !(original, currentNode, cancellationToken)
+                            var newNode = await computeReplacementNodeAsync!(
+                                original,
+                                currentNode,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             nodeReplacements[currentNode] = newNode;
                         }
@@ -620,8 +623,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                                 (SyntaxToken?)retryAnnotations
                                     .GetAnnotations(currentToken)
                                     .SingleOrDefault() ?? currentToken;
-                            var newToken = await computeReplacementTokenAsync
-                                !(original, currentToken, cancellationToken)
+                            var newToken = await computeReplacementTokenAsync!(
+                                original,
+                                currentToken,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             tokenReplacements[currentToken] = newToken;
                         }
@@ -631,8 +637,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                                 (SyntaxTrivia?)retryAnnotations
                                     .GetAnnotations(currentTrivia)
                                     .SingleOrDefault() ?? currentTrivia;
-                            var newTrivia = await computeReplacementTriviaAsync
-                                !(original, currentTrivia, cancellationToken)
+                            var newTrivia = await computeReplacementTriviaAsync!(
+                                original,
+                                currentTrivia,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             triviaReplacements[currentTrivia] = newTrivia;
                         }

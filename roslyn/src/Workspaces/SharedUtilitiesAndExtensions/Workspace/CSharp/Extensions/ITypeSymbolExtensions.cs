@@ -174,8 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxNode root
         )
         {
-            var namespaceUsings = root.FindToken(position)
-                .Parent!.GetAncestors<BaseNamespaceDeclarationSyntax>()
+            var namespaceUsings = root.FindToken(position).Parent!
+                .GetAncestors<BaseNamespaceDeclarationSyntax>()
                 .SelectMany(n => n.Usings);
             var allUsings = root is CompilationUnitSyntax compilationUnit
                 ? compilationUnit.Usings.Concat(namespaceUsings)

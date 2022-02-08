@@ -395,8 +395,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 .ConfigureAwait(false);
                         }
 
-                        var hasNext = await _dataReader
-                            !.ReadAsync(_cancellationToken)
+                        var hasNext = await _dataReader!
+                            .ReadAsync(_cancellationToken)
                             .ConfigureAwait(false);
 
                         if (hasNext)

@@ -162,8 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 owned: false,
                 ConfigurationSource.Explicit
             );
-            entityType
-                !.Builder.Property(
+            entityType!.Builder
+                .Property(
                     typeof(ILazyLoader),
                     nameof(BlogOneService.Loader),
                     ConfigurationSource.Explicit

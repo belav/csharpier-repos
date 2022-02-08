@@ -674,8 +674,8 @@ namespace Newtonsoft.Json.Serialization
                 {
                     // Item is explicitly implemented and non-public
                     // get from dictionary interface
-                    setMethod = dictionaryType
-                        !.GetProperty(
+                    setMethod = dictionaryType!
+                        .GetProperty(
                             "Item",
                             BindingFlags.Public | BindingFlags.Instance,
                             null,

@@ -1103,8 +1103,8 @@ namespace System.Net.Http
             // Copy all of the data to the server.
             if (async)
             {
-                await request
-                    .Content!.CopyToAsync(stream, _transportContext, cancellationToken)
+                await request.Content!
+                    .CopyToAsync(stream, _transportContext, cancellationToken)
                     .ConfigureAwait(false);
             }
             else

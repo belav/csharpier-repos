@@ -682,7 +682,8 @@ namespace System.Text.RegularExpressions.Generator.Tests
 
             Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
 
-            Compilation? comp = await proj!.GetCompilationAsync(CancellationToken.None)
+            Compilation? comp = await proj!
+                .GetCompilationAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             Debug.Assert(comp is not null);
 

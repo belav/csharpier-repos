@@ -2129,7 +2129,8 @@ namespace System.Xml.Serialization
                         void Wrapper(object? _)
                         {
                             string specifiedMemberName = $"{member.Mapping.Name}Specified";
-                            MethodInfo? specifiedMethodInfo = o!.GetType()
+                            MethodInfo? specifiedMethodInfo = o!
+                                .GetType()
                                 .GetMethod($"set_{specifiedMemberName}");
                             if (specifiedMethodInfo != null)
                             {

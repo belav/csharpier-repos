@@ -121,9 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                 return false;
             }
 
-            var initializersExpressions = node!.Declaration.Variables.Where(
-                v => v.Initializer != null
-            )
+            var initializersExpressions = node!.Declaration.Variables
+                .Where(v => v.Initializer != null)
                 .SelectAsArray(initializedV => initializedV.Initializer!.Value);
             return IsOnHeader(root, position, node, node, holes: initializersExpressions);
         }

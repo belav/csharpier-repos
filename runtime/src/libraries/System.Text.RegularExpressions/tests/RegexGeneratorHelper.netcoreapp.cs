@@ -137,7 +137,8 @@ namespace System.Text.RegularExpressions.Tests
                         ).Project;
                 Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
 
-                s_compilation = comp = await proj!.GetCompilationAsync(CancellationToken.None)
+                s_compilation = comp = await proj!
+                    .GetCompilationAsync(CancellationToken.None)
                     .ConfigureAwait(false);
                 Debug.Assert(comp is not null);
             }

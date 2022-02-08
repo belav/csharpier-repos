@@ -798,14 +798,16 @@ namespace System.Xml.Serialization
                     if (m.CheckShouldPersist)
                     {
                         string methodInvoke = $"ShouldSerialize{m.Name}";
-                        MethodInfo method = o!.GetType().GetMethod(
-                            methodInvoke,
-                            BindingFlags.Public
-                                | BindingFlags.NonPublic
-                                | BindingFlags.Instance
-                                | BindingFlags.Static
-                                | BindingFlags.DeclaredOnly
-                        )!;
+                        MethodInfo method = o!
+                            .GetType()
+                            .GetMethod(
+                                methodInvoke,
+                                BindingFlags.Public
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.Instance
+                                    | BindingFlags.Static
+                                    | BindingFlags.DeclaredOnly
+                            )!;
                         shouldPersist = (bool)method.Invoke(o, Array.Empty<object>())!;
                     }
 
@@ -837,14 +839,16 @@ namespace System.Xml.Serialization
                     if (m.CheckShouldPersist)
                     {
                         string methodInvoke = $"ShouldSerialize{m.Name}";
-                        MethodInfo method = o!.GetType().GetMethod(
-                            methodInvoke,
-                            BindingFlags.Public
-                                | BindingFlags.NonPublic
-                                | BindingFlags.Instance
-                                | BindingFlags.Static
-                                | BindingFlags.DeclaredOnly
-                        )!;
+                        MethodInfo method = o!
+                            .GetType()
+                            .GetMethod(
+                                methodInvoke,
+                                BindingFlags.Public
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.Instance
+                                    | BindingFlags.Static
+                                    | BindingFlags.DeclaredOnly
+                            )!;
                         shouldPersist = (bool)method.Invoke(o, Array.Empty<object>())!;
                     }
 
@@ -1254,8 +1258,8 @@ namespace System.Xml.Serialization
                 {
                     if (((EnumMapping)mapping).IsFlags)
                     {
-                        IEnumerable<string> defaultEnumFlagValues = defaultValue
-                            !.ToString()!
+                        IEnumerable<string> defaultEnumFlagValues = defaultValue!
+                            .ToString()!
                             .Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
                         string defaultEnumFlagString = string.Join(", ", defaultEnumFlagValues);
 

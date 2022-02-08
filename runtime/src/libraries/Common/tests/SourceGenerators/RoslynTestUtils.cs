@@ -171,7 +171,8 @@ namespace SourceGenerators.Tests
             Project proj = CreateTestProject(references, includeBaseReferences);
             proj = proj.WithDocuments(sources);
             Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
-            Compilation? comp = await proj!.GetCompilationAsync(CancellationToken.None)
+            Compilation? comp = await proj!
+                .GetCompilationAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             return RunGenerator(comp!, generator, cancellationToken);
         }
@@ -226,7 +227,8 @@ namespace SourceGenerators.Tests
             ImmutableArray<DiagnosticAnalyzer> analyzers = ImmutableArray.Create(analyzer);
 
             Compilation? comp = await proj!.GetCompilationAsync().ConfigureAwait(false);
-            return await comp!.WithAnalyzers(analyzers)
+            return await comp!
+                .WithAnalyzers(analyzers)
                 .GetAllDiagnosticsAsync()
                 .ConfigureAwait(false);
         }
@@ -261,7 +263,8 @@ namespace SourceGenerators.Tests
             while (true)
             {
                 Compilation? comp = await proj!.GetCompilationAsync().ConfigureAwait(false);
-                ImmutableArray<Diagnostic> diags = await comp!.WithAnalyzers(analyzers)
+                ImmutableArray<Diagnostic> diags = await comp!
+                    .WithAnalyzers(analyzers)
                     .GetAllDiagnosticsAsync()
                     .ConfigureAwait(false);
                 if (diags.IsEmpty)

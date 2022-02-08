@@ -89,8 +89,8 @@ namespace Microsoft.EntityFrameworkCore
                     i++
                 )
                 {
-                    var linkingFk = rootKey
-                        !.DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
+                    var linkingFk = rootKey!.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .FirstOrDefault();
                     if (linkingFk == null)
                     {
