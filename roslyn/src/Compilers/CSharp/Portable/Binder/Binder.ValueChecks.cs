@@ -735,9 +735,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         !isValueType
                         || (
                             RequiresAssignableVariable(valueKind)
-                            && (
-                                this.ContainingMemberOrLambda as MethodSymbol
-                            )?.IsEffectivelyReadOnly == true
+                            && (this.ContainingMemberOrLambda as MethodSymbol)
+                                ?
+                                .IsEffectivelyReadOnly == true
                         )
                     )
                     {

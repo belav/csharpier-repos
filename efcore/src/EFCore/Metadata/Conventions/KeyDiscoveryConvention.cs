@@ -365,8 +365,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionContext<IConventionForeignKey> context
         )
         {
-            var joinEntityTypeBuilder =
-                skipNavigationBuilder.Metadata.ForeignKey?.DeclaringEntityType.Builder;
+            var joinEntityTypeBuilder = skipNavigationBuilder.Metadata
+                .ForeignKey?
+                .DeclaringEntityType.Builder;
             if (joinEntityTypeBuilder != null && skipNavigationBuilder.Metadata.IsCollection)
             {
                 TryConfigurePrimaryKey(joinEntityTypeBuilder);

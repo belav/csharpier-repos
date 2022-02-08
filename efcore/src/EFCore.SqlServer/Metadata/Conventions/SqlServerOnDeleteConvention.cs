@@ -89,9 +89,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 && selfReferencingSkipNavigation != selfReferencingSkipNavigation.Inverse
             )
             {
-                selfReferencingSkipNavigation.Inverse!.ForeignKey?.Builder.OnDelete(
-                    GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey)
-                );
+                selfReferencingSkipNavigation.Inverse!
+                    .ForeignKey?
+                    .Builder.OnDelete(
+                        GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey)
+                    );
                 return DeleteBehavior.ClientCascade;
             }
 

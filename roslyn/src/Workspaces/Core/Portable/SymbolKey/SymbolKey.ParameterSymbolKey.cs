@@ -57,9 +57,9 @@ namespace Microsoft.CodeAnalysis
                             // So, in this case, to resolve the parameter, we go have to map the event,
                             // then find the delegate it returns, then find the parameter in the delegate's
                             // 'Invoke' method.
-                            var delegateInvoke = (
-                                eventSymbol.Type as INamedTypeSymbol
-                            )?.DelegateInvokeMethod;
+                            var delegateInvoke = (eventSymbol.Type as INamedTypeSymbol)
+                                ?
+                                .DelegateInvokeMethod;
 
                             if (delegateInvoke != null)
                             {

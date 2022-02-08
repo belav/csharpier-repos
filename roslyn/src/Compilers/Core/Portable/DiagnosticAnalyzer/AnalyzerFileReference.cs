@@ -612,13 +612,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // If we've reported errors already while trying to instantiate types, don't complain that there are no analyzers.
                 if (builder.Count == initialCount && !reportedError)
                 {
-                    _reference.AnalyzerLoadFailed?.Invoke(
-                        _reference,
-                        new AnalyzerLoadFailureEventArgs(
-                            AnalyzerLoadFailureEventArgs.FailureErrorCode.NoAnalyzers,
-                            CodeAnalysisResources.NoAnalyzersFound
-                        )
-                    );
+                    _reference
+                        .AnalyzerLoadFailed?
+                        .Invoke(
+                            _reference,
+                            new AnalyzerLoadFailureEventArgs(
+                                AnalyzerLoadFailureEventArgs.FailureErrorCode.NoAnalyzers,
+                                CodeAnalysisResources.NoAnalyzersFound
+                            )
+                        );
                 }
             }
 
@@ -676,13 +678,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // If we've reported errors already while trying to instantiate types, don't complain that there are no analyzers.
                 if (!hasAnalyzers && !reportedError)
                 {
-                    _reference.AnalyzerLoadFailed?.Invoke(
-                        _reference,
-                        new AnalyzerLoadFailureEventArgs(
-                            AnalyzerLoadFailureEventArgs.FailureErrorCode.NoAnalyzers,
-                            CodeAnalysisResources.NoAnalyzersFound
-                        )
-                    );
+                    _reference
+                        .AnalyzerLoadFailed?
+                        .Invoke(
+                            _reference,
+                            new AnalyzerLoadFailureEventArgs(
+                                AnalyzerLoadFailureEventArgs.FailureErrorCode.NoAnalyzers,
+                                CodeAnalysisResources.NoAnalyzersFound
+                            )
+                        );
                 }
             }
 
@@ -732,10 +736,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     }
                     catch (Exception e)
                     {
-                        _reference.AnalyzerLoadFailed?.Invoke(
-                            _reference,
-                            CreateAnalyzerFailedArgs(e, typeName)
-                        );
+                        _reference
+                            .AnalyzerLoadFailed?
+                            .Invoke(_reference, CreateAnalyzerFailedArgs(e, typeName));
                         reportedError = true;
                         continue;
                     }
@@ -755,17 +758,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             )
                         )
                         {
-                            _reference.AnalyzerLoadFailed?.Invoke(
-                                _reference,
-                                new AnalyzerLoadFailureEventArgs(
-                                    AnalyzerLoadFailureEventArgs.FailureErrorCode.ReferencesFramework,
-                                    string.Format(
-                                        CodeAnalysisResources.AssemblyReferencesNetFramework,
-                                        typeName
-                                    ),
-                                    typeNameOpt: typeName
-                                )
-                            );
+                            _reference
+                                .AnalyzerLoadFailed?
+                                .Invoke(
+                                    _reference,
+                                    new AnalyzerLoadFailureEventArgs(
+                                        AnalyzerLoadFailureEventArgs.FailureErrorCode.ReferencesFramework,
+                                        string.Format(
+                                            CodeAnalysisResources.AssemblyReferencesNetFramework,
+                                            typeName
+                                        ),
+                                        typeNameOpt: typeName
+                                    )
+                                );
                             continue;
                         }
                     }
@@ -777,10 +782,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     }
                     catch (Exception e)
                     {
-                        _reference.AnalyzerLoadFailed?.Invoke(
-                            _reference,
-                            CreateAnalyzerFailedArgs(e, typeName)
-                        );
+                        _reference
+                            .AnalyzerLoadFailed?
+                            .Invoke(_reference, CreateAnalyzerFailedArgs(e, typeName));
                         reportedError = true;
                         continue;
                     }

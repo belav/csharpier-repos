@@ -649,14 +649,14 @@ public partial class HubConnectionContext
                                 // != true needed because it could be null (which we treat as false)
                                 if (
                                     Features
-                                        .Get<IConnectionInherentKeepAliveFeature>()
-                                        ?.HasInherentKeepAlive != true
+                                        .Get<IConnectionInherentKeepAliveFeature>()?
+                                        .HasInherentKeepAlive != true
                                 )
                                 {
                                     // Only register KeepAlive after protocol handshake otherwise KeepAliveTick could try to write without having a ProtocolReaderWriter
                                     Features
-                                        .Get<IConnectionHeartbeatFeature>()
-                                        ?.OnHeartbeat(
+                                        .Get<IConnectionHeartbeatFeature>()?
+                                        .OnHeartbeat(
                                             state => ((HubConnectionContext)state).KeepAliveTick(),
                                             this
                                         );
@@ -766,8 +766,8 @@ public partial class HubConnectionContext
         }
         _clientTimeoutActive = true;
         Features
-            .Get<IConnectionHeartbeatFeature>()
-            ?.OnHeartbeat(state => ((HubConnectionContext)state).CheckClientTimeout(), this);
+            .Get<IConnectionHeartbeatFeature>()?
+            .OnHeartbeat(state => ((HubConnectionContext)state).CheckClientTimeout(), this);
     }
 
     private void CheckClientTimeout()

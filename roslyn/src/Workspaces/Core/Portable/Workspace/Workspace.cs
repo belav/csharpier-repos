@@ -1938,8 +1938,9 @@ namespace Microsoft.CodeAnalysis
             // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
             // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
             // document edits, which the host is expected to actually apply directly.
-            var newOptionsWithoutSyntaxTreeOptionsChange =
-                projectChanges.NewProject.CompilationOptions?.WithSyntaxTreeOptionsProvider(
+            var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges.NewProject
+                .CompilationOptions?
+                .WithSyntaxTreeOptionsProvider(
                     projectChanges.OldProject.CompilationOptions!.SyntaxTreeOptionsProvider
                 );
             if (

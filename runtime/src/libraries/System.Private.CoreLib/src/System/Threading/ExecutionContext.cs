@@ -429,8 +429,9 @@ namespace System.Threading
             Debug.Assert(previousExecutionCtx != nextExecutionCtx);
 
             // Collect Change Notifications
-            IAsyncLocal[]? previousChangeNotifications =
-                previousExecutionCtx?.m_localChangeNotifications;
+            IAsyncLocal[]? previousChangeNotifications = previousExecutionCtx
+                ?
+                .m_localChangeNotifications;
             IAsyncLocal[]? nextChangeNotifications = nextExecutionCtx?.m_localChangeNotifications;
 
             // At least one side must have notifications

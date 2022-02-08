@@ -50,8 +50,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         protected override ImmutableArray<PreviousResult>? GetPreviousResults(
             VSInternalWorkspaceDiagnosticsParams diagnosticsParams
         ) =>
-            diagnosticsParams.PreviousResults
-                ?.Where(d => d.PreviousResultId != null)
+            diagnosticsParams
+                .PreviousResults?
+                .Where(d => d.PreviousResultId != null)
                 .Select(d => new PreviousResult(d.PreviousResultId!, d.TextDocument!))
                 .ToImmutableArray();
 

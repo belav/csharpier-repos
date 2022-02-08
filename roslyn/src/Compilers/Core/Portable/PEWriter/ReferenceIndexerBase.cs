@@ -453,8 +453,9 @@ namespace Microsoft.Cci
             )
             {
                 ISpecializedNestedTypeReference /*?*/
-                specializedNestedTypeReference =
-                    nestedTypeReference?.AsSpecializedNestedTypeReference;
+                specializedNestedTypeReference = nestedTypeReference
+                    ?
+                    .AsSpecializedNestedTypeReference;
                 if (specializedNestedTypeReference != null)
                 {
                     INestedTypeReference unspecializedNestedTypeReference =

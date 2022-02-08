@@ -1085,8 +1085,8 @@ namespace Microsoft.Cci
                 WriteValue(CompilationOptionNames.Platform, platform.ToString());
 
                 var runtimeVersion = typeof(object).Assembly
-                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                    ?.InformationalVersion;
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+                    .InformationalVersion;
                 WriteValue(CompilationOptionNames.RuntimeVersion, runtimeVersion);
 
                 module.CommonCompilation.SerializePdbEmbeddedCompilationOptions(builder);

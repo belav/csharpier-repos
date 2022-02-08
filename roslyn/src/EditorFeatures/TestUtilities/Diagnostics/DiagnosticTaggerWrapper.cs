@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     lazyProvider =>
                         lazyProvider.Metadata.Name == WellKnownSolutionCrawlerAnalyzers.Diagnostic
                         && lazyProvider.Metadata.HighPriorityForActiveFile
-                )
-                ?.Value;
+                )?
+                .Value;
             DiagnosticService =
                 (DiagnosticService)workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
 

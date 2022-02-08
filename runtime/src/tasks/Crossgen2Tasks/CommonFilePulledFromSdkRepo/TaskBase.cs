@@ -52,14 +52,16 @@ namespace Microsoft.NET.Build.Tasks
 
         private void LogErrorTelemetry(string eventName, Exception e)
         {
-            (BuildEngine as IBuildEngine5)?.LogTelemetry(
-                eventName,
-                new Dictionary<string, string>
-                {
-                    { "exceptionType", e.GetType().ToString() },
-                    { "detail", ExceptionToStringWithoutMessage(e) }
-                }
-            );
+            (BuildEngine as IBuildEngine5)
+                ?
+                .LogTelemetry(
+                    eventName,
+                    new Dictionary<string, string>
+                    {
+                        { "exceptionType", e.GetType().ToString() },
+                        { "detail", ExceptionToStringWithoutMessage(e) }
+                    }
+                );
         }
 
         private static string ExceptionToStringWithoutMessage(Exception e)

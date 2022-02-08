@@ -35,8 +35,8 @@ namespace System.UnitTesting
             if (extendedType.IsGenericType)
             {
                 var x = typeof(EqualityExtensions)
-                    .GetMethods()
-                    ?.Where(
+                    .GetMethods()?
+                    .Where(
                         m =>
                             m.Name == "IsEqual"
                             && m.GetParameters().Length == 2
@@ -44,8 +44,8 @@ namespace System.UnitTesting
                     );
 
                 MethodInfo method = typeof(EqualityExtensions)
-                    .GetMethods()
-                    ?.SingleOrDefault(
+                    .GetMethods()?
+                    .SingleOrDefault(
                         m =>
                             m.Name == "IsEqual"
                             && m.GetParameters().Length == 2

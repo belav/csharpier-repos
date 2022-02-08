@@ -548,13 +548,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
             {
                 var isConflicting =
                     ((IConventionProperty)property)
-                        .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
-                        ?.GetConfigurationSource() == ConfigurationSource.Explicit
+                        .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)?
+                        .GetConfigurationSource() == ConfigurationSource.Explicit
                     || propertyStrategy != SqlServerValueGenerationStrategy.None;
                 var isDuplicateConflicting =
                     ((IConventionProperty)duplicateProperty)
-                        .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
-                        ?.GetConfigurationSource() == ConfigurationSource.Explicit
+                        .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)?
+                        .GetConfigurationSource() == ConfigurationSource.Explicit
                     || duplicatePropertyStrategy != SqlServerValueGenerationStrategy.None;
 
                 if (isConflicting && isDuplicateConflicting)

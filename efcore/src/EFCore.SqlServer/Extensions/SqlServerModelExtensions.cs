@@ -78,8 +78,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model
         ) =>
             model
-                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the schema to use for the default hi-lo sequence.
@@ -135,8 +135,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model
         ) =>
             model
-                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the default identity seed.
@@ -247,8 +247,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model
         ) =>
             model
-                .FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the <see cref="SqlServerValueGenerationStrategy" /> to use for properties
@@ -306,8 +306,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model
         ) =>
             model
-                .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the maximum size of the database.
@@ -358,8 +358,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model
         ) =>
             model
-                .FindAnnotation(SqlServerAnnotationNames.MaxDatabaseSize)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.MaxDatabaseSize)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the service tier of the database.
@@ -460,7 +460,7 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model
         ) =>
             model
-                .FindAnnotation(SqlServerAnnotationNames.PerformanceLevelSql)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.PerformanceLevelSql)?
+                .GetConfigurationSource();
     }
 }

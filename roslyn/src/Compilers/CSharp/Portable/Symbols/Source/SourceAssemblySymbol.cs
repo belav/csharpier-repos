@@ -2094,7 +2094,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attributeMatchesOpt: attributeMatches
             );
 
-            return (CommonAssemblyWellKnownAttributeData?)attributesBag?.DecodedWellKnownAttributeData;
+            return (CommonAssemblyWellKnownAttributeData?)attributesBag
+                ?
+                .DecodedWellKnownAttributeData;
 
             bool isPossibleAssemblySignatureKeyAttribute(AttributeSyntax node)
             {
@@ -2137,7 +2139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Use already decoded attributes
                 return (
                     (CommonAssemblyWellKnownAttributeData)attributesBag.DecodedWellKnownAttributeData
-                )?.ForwardedTypes;
+                )
+                    ?
+                    .ForwardedTypes;
             }
 
             attributesBag = null;
@@ -2147,8 +2151,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attributeMatchesOpt: this.IsPossibleForwardedTypesAttribute
             );
 
-            var wellKnownAttributeData =
-                (CommonAssemblyWellKnownAttributeData)attributesBag?.DecodedWellKnownAttributeData;
+            var wellKnownAttributeData = (CommonAssemblyWellKnownAttributeData)attributesBag
+                ?
+                .DecodedWellKnownAttributeData;
             return wellKnownAttributeData?.ForwardedTypes;
         }
 

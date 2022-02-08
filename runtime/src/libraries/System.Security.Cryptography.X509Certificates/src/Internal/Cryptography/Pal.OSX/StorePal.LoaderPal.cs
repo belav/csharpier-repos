@@ -94,7 +94,9 @@ namespace Internal.Cryptography.Pal
                 _pkcs12.Dispose();
 
                 // Only dispose the keychain if it's a temporary handle.
-                (_keychain as SafeTemporaryKeychainHandle)?.Dispose();
+                (_keychain as SafeTemporaryKeychainHandle)
+                    ?
+                    .Dispose();
 
                 SafePasswordHandle? password = Interlocked.Exchange(ref _password, null!);
                 password?.DangerousRelease();

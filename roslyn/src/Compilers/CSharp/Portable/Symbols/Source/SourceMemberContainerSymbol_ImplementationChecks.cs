@@ -1640,8 +1640,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 checkParameters: overridingProperty.SetMethod is null
                                     || overriddenGetMethod?.AssociatedSymbol != overriddenProperty
                                     || overriddenProperty
-                                        .GetOwnOrInheritedSetMethod()
-                                        ?.AssociatedSymbol != overriddenProperty
+                                        .GetOwnOrInheritedSetMethod()?
+                                        .AssociatedSymbol != overriddenProperty
                             );
                         }
 
@@ -2476,8 +2476,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (
                         implementingMethod.Equals(
-                            this.BaseTypeNoUseSiteDiagnostics
-                                ?.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(
+                            this.BaseTypeNoUseSiteDiagnostics?
+                                .FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(
                                     interfaceMethod
                                 )
                                 .Symbol,

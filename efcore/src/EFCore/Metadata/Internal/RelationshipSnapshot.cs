@@ -82,11 +82,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var newRelationship = Relationship.Attach(entityTypeBuilder);
             if (newRelationship != null)
             {
-                OwnedEntityTypeSnapshot?.Attach(
-                    newRelationship.Metadata.ResolveOtherEntityType(
-                        entityTypeBuilder.Metadata
-                    ).Builder
-                );
+                OwnedEntityTypeSnapshot
+                    ?
+                    .Attach(
+                        newRelationship.Metadata.ResolveOtherEntityType(
+                            entityTypeBuilder.Metadata
+                        ).Builder
+                    );
 
                 if (ReferencingSkipNavigations != null)
                 {
@@ -101,10 +103,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 : navigationEntityType.FindSkipNavigation(skipNavigation.Name);
                         }
 
-                        skipNavigation?.Builder.HasForeignKey(
-                            newRelationship.Metadata,
-                            referencingNavigationTuple.ForeignKeyConfigurationSource
-                        );
+                        skipNavigation
+                            ?
+                            .Builder.HasForeignKey(
+                                newRelationship.Metadata,
+                                referencingNavigationTuple.ForeignKeyConfigurationSource
+                            );
                     }
                 }
             }

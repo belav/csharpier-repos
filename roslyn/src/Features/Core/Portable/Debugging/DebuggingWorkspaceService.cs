@@ -17,10 +17,9 @@ namespace Microsoft.CodeAnalysis.Debugging
 
         public void OnBeforeDebuggingStateChanged(DebuggingState before, DebuggingState after)
         {
-            BeforeDebuggingStateChanged?.Invoke(
-                this,
-                new DebuggingStateChangedEventArgs(before, after)
-            );
+            BeforeDebuggingStateChanged
+                ?
+                .Invoke(this, new DebuggingStateChangedEventArgs(before, after));
             CurrentDebuggingState = after;
         }
     }

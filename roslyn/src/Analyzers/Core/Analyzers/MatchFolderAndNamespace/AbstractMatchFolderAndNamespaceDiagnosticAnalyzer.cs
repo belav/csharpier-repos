@@ -140,8 +140,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
             // The current namespace should be valid
             var isCurrentNamespaceInvalid =
                 GetSyntaxFacts()
-                    .GetNameOfBaseNamespaceDeclaration(namespaceDeclaration)
-                    ?.GetDiagnostics()
+                    .GetNameOfBaseNamespaceDeclaration(namespaceDeclaration)?
+                    .GetDiagnostics()
                     .Any(d => d.Severity == DiagnosticSeverity.Error) ?? false;
 
             if (isCurrentNamespaceInvalid)

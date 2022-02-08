@@ -1603,7 +1603,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     targetClrType,
                     navigation.Key,
                     shouldCreate: false
-                )?.Metadata;
+                )
+                    ?
+                    .Metadata;
                 if (targetType != null)
                 {
                     RemoveAmbiguous(targetType, entityType.ClrType);
@@ -1651,7 +1653,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     targetClrType,
                     navigation.Key,
                     shouldCreate: false
-                )?.Metadata;
+                )
+                    ?
+                    .Metadata;
                 if (targetType != null)
                 {
                     RemoveAmbiguous(targetType, entityType.ClrType);

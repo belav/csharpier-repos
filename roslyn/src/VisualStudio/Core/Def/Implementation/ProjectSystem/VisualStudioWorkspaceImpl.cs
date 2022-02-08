@@ -787,9 +787,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     {
                         reference.Remove();
                         var undoManager = TryGetUndoManager();
-                        undoManager?.Add(
-                            new AddMetadataReferenceUndoUnit(this, projectId, filePath)
-                        );
+                        undoManager
+                            ?
+                            .Add(new AddMetadataReferenceUndoUnit(this, projectId, filePath));
                         break;
                     }
                 }
@@ -917,9 +917,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             vsProject.References.AddProject(refProject);
 
             var undoManager = TryGetUndoManager();
-            undoManager?.Add(
-                new RemoveProjectReferenceUndoUnit(this, projectId, projectReference.ProjectId)
-            );
+            undoManager
+                ?
+                .Add(
+                    new RemoveProjectReferenceUndoUnit(this, projectId, projectReference.ProjectId)
+                );
         }
 
         private OleInterop.IOleUndoManager? TryGetUndoManager()
@@ -973,9 +975,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     reference.Remove();
                     var undoManager = TryGetUndoManager();
-                    undoManager?.Add(
-                        new AddProjectReferenceUndoUnit(this, projectId, projectReference.ProjectId)
-                    );
+                    undoManager
+                        ?
+                        .Add(
+                            new AddProjectReferenceUndoUnit(
+                                this,
+                                projectId,
+                                projectReference.ProjectId
+                            )
+                        );
                 }
             }
         }
@@ -1268,9 +1276,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         break;
 
                     case TextDocumentKind.AnalyzerConfigDocument:
-                        undoManager?.Add(
-                            new AddAnalyzerConfigDocumentUndoUnit(this, docInfo, text)
-                        );
+                        undoManager
+                            ?
+                            .Add(new AddAnalyzerConfigDocumentUndoUnit(this, docInfo, text));
                         break;
 
                     case TextDocumentKind.Document:
@@ -1571,9 +1579,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 if (projectItemForDocument.TryGetFullPath(out var newPath))
                 {
-                    undoManager?.Add(
-                        new RenameDocumentUndoUnit(this, uniqueName, document.Name, newPath)
-                    );
+                    undoManager
+                        ?
+                        .Add(new RenameDocumentUndoUnit(this, uniqueName, document.Name, newPath));
                 }
             }
         }
@@ -2619,8 +2627,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     l =>
                         Services
                             .GetLanguageServices(l)
-                            .GetService<IProjectExistsUIContextProviderLanguageService>()
-                            ?.GetUIContext()
+                            .GetService<IProjectExistsUIContextProviderLanguageService>()?
+                            .GetUIContext()
                 );
 
                 // UIContexts can be "zombied" if UIContexts aren't supported because we're in a command line build or in other scenarios.

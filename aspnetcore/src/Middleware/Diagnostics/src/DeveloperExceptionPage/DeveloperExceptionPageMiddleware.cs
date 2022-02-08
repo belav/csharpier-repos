@@ -217,10 +217,9 @@ public class DeveloperExceptionPageMiddleware
                 continue;
             }
 
-            var sourceLines = compilationFailure.SourceFileContent?.Split(
-                new[] { Environment.NewLine },
-                StringSplitOptions.None
-            );
+            var sourceLines = compilationFailure
+                .SourceFileContent?
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
             foreach (var item in compilationFailure.Messages)
             {

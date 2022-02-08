@@ -850,8 +850,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                       ); //Not name - could be indexer placeholder
 
                             string? aliasQualifierOpt = _property
-                                .GetExplicitInterfaceSpecifier()
-                                ?.Name.GetAliasQualifierOpt();
+                                .GetExplicitInterfaceSpecifier()?
+                                .Name.GetAliasQualifierOpt();
                             name = ExplicitInterfaceHelpers.GetMemberName(
                                 accessorName,
                                 explicitlyImplementedPropertyOpt.ContainingType,

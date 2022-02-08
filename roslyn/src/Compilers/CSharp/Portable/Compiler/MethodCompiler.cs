@@ -2051,10 +2051,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Translate the imports even if we are not writing PDBs. The translation has an impact on generated metadata
                 // and we don't want to emit different metadata depending on whether or we emit with PDB stream.
                 // TODO (https://github.com/dotnet/roslyn/issues/2846): This will need to change for member initializers in partial class.
-                var importScopeOpt = importChainOpt?.Translate(
-                    moduleBuilder,
-                    diagnosticsForThisMethod.DiagnosticBag
-                );
+                var importScopeOpt = importChainOpt
+                    ?
+                    .Translate(moduleBuilder, diagnosticsForThisMethod.DiagnosticBag);
 
                 var localVariables = builder.LocalSlotManager.LocalsInOrder();
 

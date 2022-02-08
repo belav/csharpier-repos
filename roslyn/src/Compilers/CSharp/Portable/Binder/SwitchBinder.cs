@@ -31,9 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         protected bool PatternsEnabled =>
-            ((CSharpParseOptions)SwitchSyntax.SyntaxTree.Options)?.IsFeatureEnabled(
-                MessageID.IDS_FeaturePatternMatching
-            ) != false;
+            ((CSharpParseOptions)SwitchSyntax.SyntaxTree.Options)
+                ?
+                .IsFeatureEnabled(MessageID.IDS_FeaturePatternMatching) != false;
 
         protected BoundExpression SwitchGoverningExpression
         {

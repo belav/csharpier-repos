@@ -15,10 +15,9 @@ namespace System.ComponentModel.Tests
 
         public override bool Equals(object obj)
         {
-            return (obj as DescriptorTestAttribute)?.TestString.Equals(
-                    TestString,
-                    StringComparison.Ordinal
-                ) ?? false;
+            return (obj as DescriptorTestAttribute)
+                    ?
+                    .TestString.Equals(TestString, StringComparison.Ordinal) ?? false;
         }
 
         public override int GetHashCode() => TestString.GetHashCode();

@@ -260,7 +260,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             (
                 property.FindTypeMapping()
                 ?? Dependencies.RelationalTypeMappingSource.FindMapping(property)
-            )?.Converter;
+            )
+                ?
+                .Converter;
 
         private Type GetProviderType(IAnnotatable annotatable, Type valueType) =>
             annotatable is IProperty property

@@ -137,8 +137,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         ?? (
                             property.FindRelationalTypeMapping(storeObject)
                             ?? Dependencies.TypeMappingSource.FindMapping((IProperty)property)
-                        )?.Converter
-                    )?.ProviderClrType.UnwrapNullableType();
+                        )
+                            ?
+                            .Converter
+                    )
+                        ?
+                        .ProviderClrType.UnwrapNullableType();
 
                     return providerClrType != null
                         && (providerClrType.IsInteger() || providerClrType == typeof(decimal));

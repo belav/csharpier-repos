@@ -385,8 +385,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     // Therefore, it is required to use subjectBuffer.CurrentSnapshot for further calculations rather than the updated current snapsot defined above.
                     var currentDocument =
                         subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
-                    var formattingService =
-                        currentDocument?.GetRequiredLanguageService<IFormattingInteractionService>();
+                    var formattingService = currentDocument
+                        ?
+                        .GetRequiredLanguageService<IFormattingInteractionService>();
 
                     if (currentDocument != null && formattingService != null)
                     {

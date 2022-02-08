@@ -656,14 +656,16 @@ namespace System.IO.Compression
                     _initialPosition = _baseBaseStream.Position;
                 if (!_leaveOpenOnClose)
                     _baseStream.Dispose(); // Close my super-stream (flushes the last data)
-                _saveCrcAndSizes?.Invoke(
-                    _initialPosition,
-                    Position,
-                    _checksum,
-                    _baseBaseStream,
-                    _zipArchiveEntry,
-                    _onClose
-                );
+                _saveCrcAndSizes
+                    ?
+                    .Invoke(
+                        _initialPosition,
+                        Position,
+                        _checksum,
+                        _baseBaseStream,
+                        _zipArchiveEntry,
+                        _onClose
+                    );
                 _isDisposed = true;
             }
             base.Dispose(disposing);

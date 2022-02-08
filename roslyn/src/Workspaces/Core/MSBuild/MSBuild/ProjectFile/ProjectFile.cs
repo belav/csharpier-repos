@@ -593,8 +593,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                             MetadataNames.HintPath,
                             StringComparison.OrdinalIgnoreCase
                         )
-                )
-                ?.EvaluatedValue ?? string.Empty;
+                )?
+                .EvaluatedValue ?? string.Empty;
 
         public void AddProjectReference(string projectName, ProjectFileReference reference)
         {

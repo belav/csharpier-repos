@@ -176,10 +176,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
         private void SendFailureNotification(string message)
         {
-            _notificationService?.SendNotification(
-                message,
-                severity: NotificationSeverity.Information
-            );
+            _notificationService
+                ?
+                .SendNotification(message, severity: NotificationSeverity.Information);
         }
 
         private void SetCurrentTypeTextAndUpdateBindingStatus(string typeName)

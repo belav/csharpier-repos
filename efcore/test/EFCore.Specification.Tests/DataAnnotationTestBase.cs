@@ -2122,7 +2122,8 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(BookLabel))
                     .FindNavigation(nameof(BookLabel.Book))
-                    .Inverse?.Name
+                    .Inverse?
+                    .Name
             );
 
             Assert.Null(
@@ -2149,7 +2150,8 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
                     .FindNavigation(nameof(SpecialBookLabel.Book))
-                    .Inverse?.Name
+                    .Inverse?
+                    .Name
             );
             Assert.Null(
                 model
@@ -2195,7 +2197,8 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
                     .FindNavigation(nameof(SpecialBookLabel.Book))
-                    .Inverse?.Name
+                    .Inverse?
+                    .Name
             );
             Assert.Null(
                 model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel))
@@ -2240,7 +2243,8 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
                     .FindNavigation(nameof(SpecialBookLabel.Book))
-                    .Inverse?.Name
+                    .Inverse?
+                    .Name
             );
             Assert.Null(
                 model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel))
@@ -2264,7 +2268,8 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(ExtraSpecialBookLabel))
                     .FindNavigation(nameof(ExtraSpecialBookLabel.Book))
-                    .Inverse?.Name
+                    .Inverse?
+                    .Name
             );
             Assert.Null(
                 model

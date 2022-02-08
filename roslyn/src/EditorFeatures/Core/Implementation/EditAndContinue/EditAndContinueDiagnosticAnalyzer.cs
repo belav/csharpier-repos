@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             if (
                 mefServices
                     .GetExports<EditAndContinueLanguageService>()
-                    .SingleOrDefault()
-                    ?.Value.IsSessionActive != true
+                    .SingleOrDefault()?
+                    .Value.IsSessionActive != true
             )
             {
                 return ImmutableArray<Diagnostic>.Empty;

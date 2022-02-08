@@ -1181,14 +1181,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             var bound = GetLowerBoundNode(node);
             BoundAwaitableInfo awaitableInfo = (
                 ((bound as BoundExpressionStatement)?.Expression ?? bound) as BoundAwaitExpression
-            )?.AwaitableInfo;
+            )
+                ?
+                .AwaitableInfo;
             if (awaitableInfo == null)
             {
                 return default(AwaitExpressionInfo);
             }
 
             return new AwaitExpressionInfo(
-                getAwaiter: (IMethodSymbol)awaitableInfo.GetAwaiter?.ExpressionSymbol.GetPublicSymbol(),
+                getAwaiter: (IMethodSymbol)awaitableInfo
+                    .GetAwaiter?
+                    .ExpressionSymbol.GetPublicSymbol(),
                 isCompleted: awaitableInfo.IsCompleted.GetPublicSymbol(),
                 getResult: awaitableInfo.GetResult.GetPublicSymbol(),
                 isDynamic: awaitableInfo.IsDynamic

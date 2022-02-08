@@ -1196,11 +1196,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                             ? (TypeSymbol)_deepTranslator.Visit(other)
                             : other;
 
-                    return visitedSource?.Equals(
-                            visitedOther,
-                            TypeCompareKind.IgnoreDynamicAndTupleNames
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        ) == true;
+                    return visitedSource
+                            ?
+                            .Equals(
+                                visitedOther,
+                                TypeCompareKind.IgnoreDynamicAndTupleNames
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            ) == true;
                 }
             }
         }

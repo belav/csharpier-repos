@@ -1725,7 +1725,8 @@ class A {";
             return new VSInternalWorkspaceDiagnosticsParams
             {
                 PreviousResults = previousResults
-                    ?.Select(
+                    ?
+                    .Select(
                         r =>
                             new VSInternalDiagnosticParams
                             {

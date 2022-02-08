@@ -4431,7 +4431,8 @@ namespace System.Net.Http.Functional.Tests
                     // Its location depends on which method threw the exception.
                     while (
                         requestException
-                            ?.GetType()
+                            ?
+                            .GetType()
                             .FullName.Equals("System.Net.Http.Http2ConnectionException") == false
                     )
                     {

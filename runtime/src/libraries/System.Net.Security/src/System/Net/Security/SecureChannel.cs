@@ -884,8 +884,10 @@ namespace System.Net.Security
                         if (cachedCreds && _sslAuthenticationOptions.IsServer)
                         {
                             sendTrustList =
-                                _sslAuthenticationOptions.CertificateContext?.Trust?._sendTrustInHandshake
-                                ?? false;
+                                _sslAuthenticationOptions
+                                    .CertificateContext?
+                                    .Trust?
+                                    ._sendTrustInHandshake ?? false;
                         }
                     }
 

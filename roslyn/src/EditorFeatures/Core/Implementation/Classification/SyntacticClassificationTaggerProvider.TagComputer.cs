@@ -114,8 +114,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             private IClassificationService? TryGetClassificationService(ITextSnapshot snapshot) =>
                 _workspace
-                    ?.Services.GetLanguageServices(snapshot.ContentType)
-                    ?.GetService<IClassificationService>();
+                    ?
+                    .Services.GetLanguageServices(snapshot.ContentType)?
+                    .GetService<IClassificationService>();
 
             #region Workspace Hookup
 

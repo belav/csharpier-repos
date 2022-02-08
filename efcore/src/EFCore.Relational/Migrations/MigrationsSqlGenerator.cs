@@ -1768,8 +1768,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     operation.IsFixedLength,
                     operation.Precision,
                     operation.Scale
-                )
-                ?.StoreType;
+                )?
+                .StoreType;
         }
 
         /// <summary>
@@ -2108,9 +2108,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string tableName
         ) =>
             model
-                ?.GetRelationalModel()
-                .FindTable(tableName, schema)
-                ?.EntityTypeMappings.Select(m => m.EntityType);
+                ?
+                .GetRelationalModel()
+                .FindTable(tableName, schema)?
+                .EntityTypeMappings.Select(m => m.EntityType);
 
         /// <summary>
         ///     Finds some <see cref="IProperty" /> mapped to the given column.
@@ -2133,10 +2134,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string columnName
         ) =>
             model
-                ?.GetRelationalModel()
-                .FindTable(tableName, schema)
-                ?.Columns.FirstOrDefault(c => c.Name == columnName)
-                ?.PropertyMappings.First()
+                ?
+                .GetRelationalModel()
+                .FindTable(tableName, schema)?
+                .Columns.FirstOrDefault(c => c.Name == columnName)?
+                .PropertyMappings.First()
                 .Property;
 
         /// <summary>

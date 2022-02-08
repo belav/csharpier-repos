@@ -1247,10 +1247,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             RefKind expressionRefKind = RefKind.None;
-            value = initializer?.Value.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out expressionRefKind
-            );
+            value = initializer
+                ?
+                .Value.CheckAndUnwrapRefExpression(diagnostics, out expressionRefKind);
             if (variableRefKind == RefKind.None)
             {
                 valueKind = BindValueKind.RValue;
@@ -1778,9 +1777,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // if the feature was enabled, but something went wrong with the method, report that, otherwise don't.
                     // If feature is not enabled, additional errors would be just noise.
                     bool extensibleFixedEnabled =
-                        ((CSharpParseOptions)initializerOpt.SyntaxTree.Options)?.IsFeatureEnabled(
-                            MessageID.IDS_FeatureExtensibleFixedStatement
-                        ) != false;
+                        ((CSharpParseOptions)initializerOpt.SyntaxTree.Options)
+                            ?
+                            .IsFeatureEnabled(MessageID.IDS_FeatureExtensibleFixedStatement)
+                        != false;
                     if (extensibleFixedEnabled)
                     {
                         diagnostics.AddRange(additionalDiagnostics);
@@ -3864,10 +3864,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             var refKind = RefKind.None;
-            var expressionSyntax = syntax.Expression?.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out refKind
-            );
+            var expressionSyntax = syntax
+                .Expression?
+                .CheckAndUnwrapRefExpression(diagnostics, out refKind);
             BoundExpression arg = null;
             if (expressionSyntax != null)
             {

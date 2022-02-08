@@ -161,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             return GetSimpleProgramNamedTypeSymbol(compilation)
-                ?.GetSimpleProgramEntryPoints()
+                ?
+                .GetSimpleProgramEntryPoints()
                 .First();
         }
 

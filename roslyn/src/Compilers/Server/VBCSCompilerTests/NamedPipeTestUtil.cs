@@ -29,10 +29,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var sharedServerType = typeof(NamedPipeServerStream).Assembly.GetType(
                 sharedServerFullName
             );
-            var serversField = sharedServerType?.GetField(
-                "s_servers",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            var serversField = sharedServerType
+                ?
+                .GetField("s_servers", BindingFlags.NonPublic | BindingFlags.Static);
             var servers = (IDictionary?)serversField?.GetValue(null);
             if (servers is null)
             {
@@ -45,8 +44,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         private static Socket GetSocket(object sharedServer)
         {
             var listeningSocketProperty = sharedServer!
-                .GetType()
-                ?.GetProperty("ListeningSocket", BindingFlags.NonPublic | BindingFlags.Instance);
+                .GetType()?
+                .GetProperty("ListeningSocket", BindingFlags.NonPublic | BindingFlags.Instance);
             var socket = (Socket?)listeningSocketProperty?.GetValue(sharedServer, null);
             if (socket is null)
             {

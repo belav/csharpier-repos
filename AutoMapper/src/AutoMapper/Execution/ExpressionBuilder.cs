@@ -92,23 +92,24 @@ namespace AutoMapper.Execution
                 if (!typeMap.HasDerivedTypesToInclude)
                 {
                     typeMap.Seal(configurationProvider);
-                    mapExpression = typeMap.MapExpression?.ConvertReplaceParameters(
-                        sourceParameter,
-                        destinationParameter
-                    );
+                    mapExpression = typeMap
+                        .MapExpression?
+                        .ConvertReplaceParameters(sourceParameter, destinationParameter);
                 }
             }
             else
             {
                 hasTypeConverter = false;
                 var mapper = configurationProvider.FindMapper(typePair);
-                mapExpression = mapper?.MapExpression(
-                    configurationProvider,
-                    profileMap,
-                    propertyMap,
-                    sourceParameter,
-                    destinationParameter
-                );
+                mapExpression = mapper
+                    ?
+                    .MapExpression(
+                        configurationProvider,
+                        profileMap,
+                        propertyMap,
+                        sourceParameter,
+                        destinationParameter
+                    );
             }
             mapExpression ??= ContextMap(
                 typePair,

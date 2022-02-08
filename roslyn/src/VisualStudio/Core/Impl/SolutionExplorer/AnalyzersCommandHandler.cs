@@ -555,8 +555,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 var pathToRuleSet = workspace.TryGetRuleSetPathForProject(projectId);
 
                 var project = workspace.CurrentSolution.GetProject(projectId);
-                var pathToAnalyzerConfigDoc =
-                    project?.TryGetAnalyzerConfigPathForProjectConfiguration();
+                var pathToAnalyzerConfigDoc = project
+                    ?
+                    .TryGetAnalyzerConfigPathForProjectConfiguration();
 
                 if (pathToRuleSet == null && pathToAnalyzerConfigDoc == null)
                 {

@@ -118,8 +118,8 @@ namespace ILCompiler
             int? lineNumber = null;
 
             IEnumerable<ILSequencePoint> sequencePoints = origin
-                .GetDebugInfo()
-                ?.GetSequencePoints();
+                .GetDebugInfo()?
+                .GetSequencePoints();
             if (sequencePoints != null)
             {
                 foreach (var sequencePoint in sequencePoints)
@@ -174,10 +174,12 @@ namespace ILCompiler
                     ?? method;
 
                 var ecmaMethod = method.GetTypicalMethodDefinition() as EcmaMethod;
-                suppressions = ecmaMethod?.GetDecodedCustomAttributes(
-                    "System.Diagnostics.CodeAnalysis",
-                    "UnconditionalSuppressMessageAttribute"
-                );
+                suppressions = ecmaMethod
+                    ?
+                    .GetDecodedCustomAttributes(
+                        "System.Diagnostics.CodeAnalysis",
+                        "UnconditionalSuppressMessageAttribute"
+                    );
             }
 
             if (suppressions != null)

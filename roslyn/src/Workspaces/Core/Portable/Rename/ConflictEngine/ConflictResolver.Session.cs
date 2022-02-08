@@ -142,9 +142,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                             documentsByProject
                         );
                         using (
-                            baseSolution.Services.CacheService?.EnableCaching(
-                                documentsByProject.Key
-                            )
+                            baseSolution.Services
+                                .CacheService?
+                                .EnableCaching(documentsByProject.Key)
                         )
                         {
                             // Rename is going to be in 5 phases.
@@ -1103,8 +1103,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     {
                         solution.Workspace.Services
                             .GetLanguageServices(language)
-                            .GetService<IRenameRewriterLanguageService>()
-                            ?.TryAddPossibleNameConflicts(
+                            .GetService<IRenameRewriterLanguageService>()?
+                            .TryAddPossibleNameConflicts(
                                 symbol,
                                 _replacementText,
                                 _possibleNameConflicts

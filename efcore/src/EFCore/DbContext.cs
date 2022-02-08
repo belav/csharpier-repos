@@ -621,10 +621,9 @@ namespace Microsoft.EntityFrameworkCore
                     entitiesSaved
                 );
 
-                SavedChanges?.Invoke(
-                    this,
-                    new SavedChangesEventArgs(acceptAllChangesOnSuccess, result)
-                );
+                SavedChanges
+                    ?
+                    .Invoke(this, new SavedChangesEventArgs(acceptAllChangesOnSuccess, result));
 
                 return result;
             }
@@ -634,10 +633,12 @@ namespace Microsoft.EntityFrameworkCore
 
                 DbContextDependencies.UpdateLogger.OptimisticConcurrencyException(this, exception);
 
-                SaveChangesFailed?.Invoke(
-                    this,
-                    new SaveChangesFailedEventArgs(acceptAllChangesOnSuccess, exception)
-                );
+                SaveChangesFailed
+                    ?
+                    .Invoke(
+                        this,
+                        new SaveChangesFailedEventArgs(acceptAllChangesOnSuccess, exception)
+                    );
 
                 throw;
             }
@@ -645,10 +646,12 @@ namespace Microsoft.EntityFrameworkCore
             {
                 DbContextDependencies.UpdateLogger.SaveChangesFailed(this, exception);
 
-                SaveChangesFailed?.Invoke(
-                    this,
-                    new SaveChangesFailedEventArgs(acceptAllChangesOnSuccess, exception)
-                );
+                SaveChangesFailed
+                    ?
+                    .Invoke(
+                        this,
+                        new SaveChangesFailedEventArgs(acceptAllChangesOnSuccess, exception)
+                    );
 
                 throw;
             }
@@ -770,10 +773,9 @@ namespace Microsoft.EntityFrameworkCore
                     .SaveChangesCompletedAsync(this, entitiesSaved, cancellationToken)
                     .ConfigureAwait(false);
 
-                SavedChanges?.Invoke(
-                    this,
-                    new SavedChangesEventArgs(acceptAllChangesOnSuccess, result)
-                );
+                SavedChanges
+                    ?
+                    .Invoke(this, new SavedChangesEventArgs(acceptAllChangesOnSuccess, result));
 
                 return result;
             }
@@ -785,10 +787,12 @@ namespace Microsoft.EntityFrameworkCore
                     .OptimisticConcurrencyExceptionAsync(this, exception, cancellationToken)
                     .ConfigureAwait(false);
 
-                SaveChangesFailed?.Invoke(
-                    this,
-                    new SaveChangesFailedEventArgs(acceptAllChangesOnSuccess, exception)
-                );
+                SaveChangesFailed
+                    ?
+                    .Invoke(
+                        this,
+                        new SaveChangesFailedEventArgs(acceptAllChangesOnSuccess, exception)
+                    );
 
                 throw;
             }
@@ -798,10 +802,12 @@ namespace Microsoft.EntityFrameworkCore
                     .SaveChangesFailedAsync(this, exception, cancellationToken)
                     .ConfigureAwait(false);
 
-                SaveChangesFailed?.Invoke(
-                    this,
-                    new SaveChangesFailedEventArgs(acceptAllChangesOnSuccess, exception)
-                );
+                SaveChangesFailed
+                    ?
+                    .Invoke(
+                        this,
+                        new SaveChangesFailedEventArgs(acceptAllChangesOnSuccess, exception)
+                    );
 
                 throw;
             }
@@ -966,9 +972,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var resettableServices = new List<IResettableService>();
 
-            var services = _contextServices?.InternalServiceProvider.GetService<
-                IEnumerable<IResettableService>
-            >();
+            var services = _contextServices
+                ?
+                .InternalServiceProvider.GetService<IEnumerable<IResettableService>>();
             if (services is not null)
             {
                 resettableServices.AddRange(services);

@@ -395,9 +395,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     LastBlock.Ordinal,
                     subRegions,
                     Locals,
-                    LocalFunctions?.SelectAsArray(
-                        ((IMethodSymbol, ILocalFunctionOperation) tuple) => tuple.Item1
-                    ) ?? default,
+                    LocalFunctions
+                        ?
+                        .SelectAsArray(
+                            ((IMethodSymbol, ILocalFunctionOperation) tuple) => tuple.Item1
+                        ) ?? default,
                     CaptureIds?.ToImmutable() ?? default,
                     ExceptionType,
                     enclosing

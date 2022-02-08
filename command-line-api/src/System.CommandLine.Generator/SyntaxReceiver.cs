@@ -44,9 +44,10 @@ namespace System.CommandLine.Generator
             }
 
             if (
-                invokeMethodSymbol.ReceiverType?.ToDisplayString(
-                    SymbolDisplayFormat.FullyQualifiedFormat
-                ) != _nameOfExtensionMethodAnchorType
+                invokeMethodSymbol
+                    .ReceiverType?
+                    .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                != _nameOfExtensionMethodAnchorType
             )
             {
                 return;

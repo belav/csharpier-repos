@@ -225,7 +225,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     return accessorDeclaration.ExpressionBody?.Expression
                         ?? GetSingleStatementFromAccessor<ReturnStatementSyntax>(
                             accessorDeclaration
-                        )?.Expression;
+                        )
+                            ?
+                            .Expression;
                 case ArrowExpressionClauseSyntax arrowExpression:
                     return arrowExpression.Expression;
                 case null:

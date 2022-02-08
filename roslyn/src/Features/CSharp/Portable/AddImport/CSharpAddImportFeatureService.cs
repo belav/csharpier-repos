@@ -104,8 +104,12 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                         (
                             (node.Parent as ConditionalAccessExpressionSyntax)?.WhenNotNull
                             as InvocationExpressionSyntax
-                        )?.Expression as MemberBindingExpressionSyntax
-                    )?.Name;
+                        )
+                            ?
+                            .Expression as MemberBindingExpressionSyntax
+                    )
+                        ?
+                        .Name;
                     if (memberAccessName == null && conditionalAccessName == null)
                     {
                         return false;

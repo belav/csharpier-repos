@@ -261,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     : null;
 
             return contextTree
-                ?.GetRoot(cancellationToken)
+                ?
+                .GetRoot(cancellationToken)
                 .FindToken(contextLocation.SourceSpan.Start)
                 .Parent;
         }

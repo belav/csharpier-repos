@@ -36,8 +36,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             if (extendedType.IsGenericType)
             {
                 IEnumerable<MethodInfo> x = typeof(EqualityExtensions)
-                    .GetMethods()
-                    ?.Where(
+                    .GetMethods()?
+                    .Where(
                         m =>
                             m.Name == "IsEqual"
                             && m.GetParameters().Length == 3
@@ -45,8 +45,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     );
 
                 MethodInfo method = typeof(EqualityExtensions)
-                    .GetMethods()
-                    ?.SingleOrDefault(
+                    .GetMethods()?
+                    .SingleOrDefault(
                         m =>
                             m.Name == "IsEqual"
                             && m.GetParameters().Length == 3

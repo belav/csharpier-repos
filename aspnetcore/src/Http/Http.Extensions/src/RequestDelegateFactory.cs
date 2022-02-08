@@ -292,8 +292,10 @@ public static partial class RequestDelegateFactory
     private static FactoryContext CreateFactoryContext(RequestDelegateFactoryOptions? options) =>
         new()
         {
-            ServiceProviderIsService =
-                options?.ServiceProvider?.GetService<IServiceProviderIsService>(),
+            ServiceProviderIsService = options
+                ?
+                .ServiceProvider?
+                .GetService<IServiceProviderIsService>(),
             RouteParameters = options?.RouteParameterNames?.ToList(),
             ThrowOnBadRequest = options?.ThrowOnBadRequest ?? false,
             DisableInferredFromBody = options?.DisableInferBodyFromParameters ?? false,

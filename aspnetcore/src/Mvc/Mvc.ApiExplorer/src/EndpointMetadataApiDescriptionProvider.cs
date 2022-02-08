@@ -100,8 +100,8 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
         {
             HttpMethod = httpMethod,
             GroupName = routeEndpoint.Metadata
-                .GetMetadata<IEndpointGroupNameMetadata>()
-                ?.EndpointGroupName,
+                .GetMetadata<IEndpointGroupNameMetadata>()?
+                .EndpointGroupName,
             RelativePath = routeEndpoint.RoutePattern.RawText?.TrimStart('/'),
             ActionDescriptor = new ActionDescriptor
             {

@@ -408,11 +408,12 @@ namespace System.Diagnostics
             {
                 eventKey = EventLog.GetEventLogRegKey(machineName, false);
                 return eventKey
-                    ?.OpenSubKey(
+                    ?
+                    .OpenSubKey(
                         logName ?? "Application", /*writable*/
                         false
-                    )
-                    ?.OpenSubKey(
+                    )?
+                    .OpenSubKey(
                         source, /*writeable*/
                         false
                     );

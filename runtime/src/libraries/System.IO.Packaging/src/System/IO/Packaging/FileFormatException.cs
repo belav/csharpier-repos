@@ -128,10 +128,9 @@ namespace System.IO
             base.GetObjectData(info, context);
             info.AddValue(
                 "SourceUri",
-                SourceUri?.GetComponents(
-                    UriComponents.SerializationInfoString,
-                    UriFormat.SafeUnescaped
-                ),
+                SourceUri
+                    ?
+                    .GetComponents(UriComponents.SerializationInfoString, UriFormat.SafeUnescaped),
                 typeof(string)
             );
         }

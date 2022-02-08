@@ -149,8 +149,8 @@ public class IISDeployer : IISDeployerBase
             // Expand path to dotnet because IIS process would not inherit PATH variable
             if (
                 aspNetCore
-                    .Attribute("processPath")
-                    ?.Value.StartsWith("dotnet", StringComparison.Ordinal) == true
+                    .Attribute("processPath")?
+                    .Value.StartsWith("dotnet", StringComparison.Ordinal) == true
             )
             {
                 aspNetCore.SetAttributeValue(

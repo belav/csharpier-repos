@@ -31,9 +31,9 @@ public static class IntermediateNodeExtensions
 
         AddAllDiagnostics(node);
 
-        var allOrderedDiagnostics = diagnostics?.OrderBy(
-            diagnostic => diagnostic.Span.AbsoluteIndex
-        );
+        var allOrderedDiagnostics = diagnostics
+            ?
+            .OrderBy(diagnostic => diagnostic.Span.AbsoluteIndex);
 
         return allOrderedDiagnostics?.ToList() ?? EmptyDiagnostics;
 

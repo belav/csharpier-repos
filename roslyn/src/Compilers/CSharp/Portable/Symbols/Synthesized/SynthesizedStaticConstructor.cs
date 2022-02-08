@@ -307,9 +307,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         internal sealed override bool IsNullableAnalysisEnabled() =>
-            (
-                ContainingType as SourceMemberContainerTypeSymbol
-            )?.IsNullableEnabledForConstructorsAndInitializers(useStatic: true) ?? false;
+            (ContainingType as SourceMemberContainerTypeSymbol)
+                ?
+                .IsNullableEnabledForConstructorsAndInitializers(useStatic: true) ?? false;
 
         internal bool ShouldEmit(ImmutableArray<BoundInitializer> boundInitializersOpt = default)
         {

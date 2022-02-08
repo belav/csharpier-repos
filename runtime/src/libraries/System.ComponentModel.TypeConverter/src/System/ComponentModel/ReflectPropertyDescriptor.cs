@@ -608,10 +608,12 @@ namespace System.ComponentModel
                 if (GetValueChangedHandler(component) == null)
                 {
                     EventDescriptor iPropChangedEvent = IPropChangedEventValue;
-                    iPropChangedEvent?.AddEventHandler(
-                        component,
-                        new PropertyChangedEventHandler(OnINotifyPropertyChanged)
-                    );
+                    iPropChangedEvent
+                        ?
+                        .AddEventHandler(
+                            component,
+                            new PropertyChangedEventHandler(OnINotifyPropertyChanged)
+                        );
                 }
 
                 base.AddValueChanged(component, handler);
@@ -1172,10 +1174,12 @@ namespace System.ComponentModel
                 if (GetValueChangedHandler(component) == null)
                 {
                     EventDescriptor iPropChangedEvent = IPropChangedEventValue;
-                    iPropChangedEvent?.RemoveEventHandler(
-                        component,
-                        new PropertyChangedEventHandler(OnINotifyPropertyChanged)
-                    );
+                    iPropChangedEvent
+                        ?
+                        .RemoveEventHandler(
+                            component,
+                            new PropertyChangedEventHandler(OnINotifyPropertyChanged)
+                        );
                 }
             }
         }

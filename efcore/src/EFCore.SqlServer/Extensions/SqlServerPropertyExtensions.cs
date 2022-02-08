@@ -50,8 +50,8 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             return property
-                .FindSharedStoreObjectRootProperty(storeObject)
-                ?.GetHiLoSequenceName(storeObject);
+                .FindSharedStoreObjectRootProperty(storeObject)?
+                .GetHiLoSequenceName(storeObject);
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the schema to use for the hi-lo sequence.
@@ -125,8 +125,8 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             return property
-                .FindSharedStoreObjectRootProperty(storeObject)
-                ?.GetHiLoSequenceSchema(storeObject);
+                .FindSharedStoreObjectRootProperty(storeObject)?
+                .GetHiLoSequenceSchema(storeObject);
         }
 
         /// <summary>
@@ -171,8 +171,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Finds the <see cref="ISequence" /> in the model to use for the hi-lo pattern.
@@ -320,8 +320,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(SqlServerAnnotationNames.IdentitySeed)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.IdentitySeed)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the identity increment.
@@ -401,8 +401,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the <see cref="SqlServerValueGenerationStrategy" /> to use for the property.
@@ -624,8 +624,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property
         ) =>
             property
-                .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
-                ?.GetConfigurationSource();
+                .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns a value indicating whether the property is compatible with any <see cref="SqlServerValueGenerationStrategy" />.
@@ -653,7 +653,9 @@ namespace Microsoft.EntityFrameworkCore
                 ?? (
                     property.FindRelationalTypeMapping(storeObject)
                     ?? typeMappingSource?.FindMapping((IProperty)property)
-                )?.Converter;
+                )
+                    ?
+                    .Converter;
 
             var type = (valueConverter?.ProviderClrType ?? property.ClrType).UnwrapNullableType();
 

@@ -1170,9 +1170,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 ) && !_stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.Unknown)
             )
             {
-                (
-                    (StateManager as StateManager)?.ChangeDetector as ChangeDetector
-                )?.DetectValueChange(this, property);
+                ((StateManager as StateManager)?.ChangeDetector as ChangeDetector)
+                    ?
+                    .DetectValueChange(this, property);
             }
         }
 
@@ -2209,11 +2209,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     .Where(p => p.ClrType == typeof(ILazyLoader))
             )
             {
-                ((ILazyLoader?)this[lazyLoaderProperty])?.SetLoaded(
-                    Entity,
-                    navigation.Name,
-                    loaded
-                );
+                ((ILazyLoader?)this[lazyLoaderProperty])
+                    ?
+                    .SetLoaded(Entity, navigation.Name, loaded);
             }
         }
 

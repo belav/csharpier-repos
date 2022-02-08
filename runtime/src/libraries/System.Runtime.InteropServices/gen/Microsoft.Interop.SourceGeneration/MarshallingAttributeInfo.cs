@@ -740,16 +740,16 @@ namespace Microsoft.Interop
                 arrayMarshaller = _compilation
                     .GetTypeByMetadataName(
                         TypeNames.System_Runtime_InteropServices_GeneratedMarshalling_PtrArrayMarshaller_Metadata
-                    )
-                    ?.Construct(pointedAt);
+                    )?
+                    .Construct(pointedAt);
             }
             else
             {
                 arrayMarshaller = _compilation
                     .GetTypeByMetadataName(
                         TypeNames.System_Runtime_InteropServices_GeneratedMarshalling_ArrayMarshaller_Metadata
-                    )
-                    ?.Construct(elementType);
+                    )?
+                    .Construct(elementType);
             }
 
             if (arrayMarshaller is null)
@@ -759,8 +759,8 @@ namespace Microsoft.Interop
             }
 
             ITypeSymbol? valuePropertyType = ManualTypeMarshallingHelper
-                .FindValueProperty(arrayMarshaller)
-                ?.Type;
+                .FindValueProperty(arrayMarshaller)?
+                .Type;
 
             return new NativeContiguousCollectionMarshallingInfo(
                 NativeMarshallingType: ManagedTypeInfo.CreateTypeInfoForTypeSymbol(arrayMarshaller),
@@ -1058,16 +1058,16 @@ namespace Microsoft.Interop
                     arrayMarshaller = _compilation
                         .GetTypeByMetadataName(
                             TypeNames.System_Runtime_InteropServices_GeneratedMarshalling_PtrArrayMarshaller_Metadata
-                        )
-                        ?.Construct(pointedAt);
+                        )?
+                        .Construct(pointedAt);
                 }
                 else
                 {
                     arrayMarshaller = _compilation
                         .GetTypeByMetadataName(
                             TypeNames.System_Runtime_InteropServices_GeneratedMarshalling_ArrayMarshaller_Metadata
-                        )
-                        ?.Construct(elementType);
+                        )?
+                        .Construct(elementType);
                 }
 
                 if (arrayMarshaller is null)
@@ -1078,8 +1078,8 @@ namespace Microsoft.Interop
                 }
 
                 ITypeSymbol? valuePropertyType = ManualTypeMarshallingHelper
-                    .FindValueProperty(arrayMarshaller)
-                    ?.Type;
+                    .FindValueProperty(arrayMarshaller)?
+                    .Type;
 
                 marshallingInfo = new NativeContiguousCollectionMarshallingInfo(
                     NativeMarshallingType: ManagedTypeInfo.CreateTypeInfoForTypeSymbol(

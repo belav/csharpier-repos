@@ -270,9 +270,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // we only check if the Task is completed.  Prior to that we will assume we are still loading.  Once this
             // task is completed, we know that the WaitUntilFullyLoadedAsync call will have actually finished and we're
             // fully loaded.
-            var isFullyLoadedTask = _workspaceStatusService?.IsFullyLoadedAsync(
-                CancellationToken.None
-            );
+            var isFullyLoadedTask = _workspaceStatusService
+                ?
+                .IsFullyLoadedAsync(CancellationToken.None);
             var isFullyLoaded =
                 isFullyLoadedTask is { IsCompleted: true }
                 && isFullyLoadedTask.GetAwaiter().GetResult();

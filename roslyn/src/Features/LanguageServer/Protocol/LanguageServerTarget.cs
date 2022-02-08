@@ -864,7 +864,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         private void RequestExecutionQueue_Errored(object? sender, RequestShutdownEventArgs e)
         {
             // log message and shut down
-            Logger?.TraceWarning($"Request queue is requesting shutdown due to error: {e.Message}");
+            Logger
+                ?
+                .TraceWarning($"Request queue is requesting shutdown due to error: {e.Message}");
 
             var message = new LogMessageParams()
             {
@@ -900,9 +902,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 return;
             }
 
-            Logger?.TraceWarning(
-                $"Encountered unexpected jsonrpc disconnect, Reason={e.Reason}, Description={e.Description}, Exception={e.Exception}"
-            );
+            Logger
+                ?
+                .TraceWarning(
+                    $"Encountered unexpected jsonrpc disconnect, Reason={e.Reason}, Description={e.Description}, Exception={e.Exception}"
+                );
 
             ShutdownImpl();
             ExitImpl();

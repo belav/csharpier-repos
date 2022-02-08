@@ -80,14 +80,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         )
         {
             if (
-                typeName?.FirstAncestorOrSelf<SyntaxNode>(
-                    a =>
-                        a.IsKind(
-                            SyntaxKind.DeclarationExpression,
-                            SyntaxKind.VariableDeclaration,
-                            SyntaxKind.ForEachStatement
-                        )
-                )
+                typeName
+                    ?
+                    .FirstAncestorOrSelf<SyntaxNode>(
+                        a =>
+                            a.IsKind(
+                                SyntaxKind.DeclarationExpression,
+                                SyntaxKind.VariableDeclaration,
+                                SyntaxKind.ForEachStatement
+                            )
+                    )
                 is not { } declaration
             )
             {

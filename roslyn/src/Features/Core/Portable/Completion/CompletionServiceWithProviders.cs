@@ -666,8 +666,8 @@ namespace Microsoft.CodeAnalysis.Completion
             // list.  If no contexts changed it, then just use the default span provided by the service.
             var finalCompletionListSpan =
                 completionContexts
-                    .FirstOrDefault(c => c.CompletionListSpan != defaultSpan)
-                    ?.CompletionListSpan ?? defaultSpan;
+                    .FirstOrDefault(c => c.CompletionListSpan != defaultSpan)?
+                    .CompletionListSpan ?? defaultSpan;
             using var displayNameToItemsMap = new DisplayNameToItemsMap(this);
             CompletionItem? suggestionModeItem = null;
 

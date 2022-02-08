@@ -46,9 +46,11 @@ namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
             foreach (var diagnostic in context.Diagnostics)
             {
                 if (
-                    diagnostic.Properties?.ContainsKey(
-                        AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey
-                    ) == true
+                    diagnostic
+                        .Properties?
+                        .ContainsKey(
+                            AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey
+                        ) == true
                     && root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true)
                         != null
                 )

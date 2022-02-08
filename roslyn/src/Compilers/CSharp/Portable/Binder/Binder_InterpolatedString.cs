@@ -910,12 +910,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // resolution and attempting to determine which method considered was the best to report errors for.
 
                     var nonOutConstructorHasArityError =
-                        nonOutConstructorDiagnostics.DiagnosticBag
-                            ?.AsEnumerableWithoutResolution()
+                        nonOutConstructorDiagnostics
+                            .DiagnosticBag?
+                            .AsEnumerableWithoutResolution()
                             .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount) ?? false;
                     var outConstructorHasArityError =
-                        outConstructorDiagnostics.DiagnosticBag
-                            ?.AsEnumerableWithoutResolution()
+                        outConstructorDiagnostics
+                            .DiagnosticBag?
+                            .AsEnumerableWithoutResolution()
                             .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount) ?? false;
 
                     switch ((nonOutConstructorHasArityError, outConstructorHasArityError))

@@ -48,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
         public virtual void Validate(IDbContextOptions options)
         {
             var internalServiceProvider = options
-                .FindExtension<CoreOptionsExtension>()
-                ?.InternalServiceProvider;
+                .FindExtension<CoreOptionsExtension>()?
+                .InternalServiceProvider;
             if (internalServiceProvider != null)
             {
                 using var scope = internalServiceProvider.CreateScope();

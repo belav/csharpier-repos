@@ -284,9 +284,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             IEnumerable<ITableIndex>? indexesToRebuild = null;
             var column = model
-                ?.GetRelationalModel()
-                .FindTable(operation.Table, operation.Schema)
-                ?.Columns.FirstOrDefault(c => c.Name == operation.Name);
+                ?
+                .GetRelationalModel()
+                .FindTable(operation.Table, operation.Schema)?
+                .Columns.FirstOrDefault(c => c.Name == operation.Name);
 
             if (
                 operation.ComputedColumnSql != operation.OldColumn.ComputedColumnSql
@@ -2079,7 +2080,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             else if (UseLegacyIndexFilters(operation, model))
             {
                 var table = model
-                    ?.GetRelationalModel()
+                    ?
+                    .GetRelationalModel()
                     .FindTable(operation.Table, operation.Schema);
                 var nullableColumns = operation.Columns
                     .Where(c => table?.FindColumn(c)?.IsNullable != false)
@@ -2582,9 +2584,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ) =>
             annotatable[SqlServerAnnotationNames.MemoryOptimized] as bool?
             ?? model
-                ?.GetRelationalModel()
-                .FindTable(tableName, schema)
-                ?[SqlServerAnnotationNames.MemoryOptimized] as bool?
+                ?
+                .GetRelationalModel()
+                .FindTable(tableName, schema)?
+                [SqlServerAnnotationNames.MemoryOptimized] as bool?
                 == true;
 
         private static bool IsMemoryOptimized(Annotatable annotatable) =>

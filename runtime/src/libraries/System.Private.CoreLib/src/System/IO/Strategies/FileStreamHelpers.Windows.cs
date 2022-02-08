@@ -525,7 +525,9 @@ namespace System.IO.Strategies
                 (
                     awaitable._continuation
                     ?? Interlocked.CompareExchange(ref awaitable._continuation, s_sentinel, null)
-                )?.Invoke();
+                )
+                    ?
+                    .Invoke();
             }
 
             /// <summary>

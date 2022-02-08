@@ -488,14 +488,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                     );
                                 }
 
-                                interpolations?.Add(
-                                    new Interpolation(
-                                        openBracePosition,
-                                        colonPosition,
-                                        closeBracePosition,
-                                        closeBraceMissing
-                                    )
-                                );
+                                interpolations
+                                    ?
+                                    .Add(
+                                        new Interpolation(
+                                            openBracePosition,
+                                            colonPosition,
+                                            closeBracePosition,
+                                            closeBraceMissing
+                                        )
+                                    );
                             }
                             continue;
                         case '\\':

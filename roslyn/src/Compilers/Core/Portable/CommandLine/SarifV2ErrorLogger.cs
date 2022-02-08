@@ -73,10 +73,10 @@ namespace Microsoft.CodeAnalysis
                 _writer.WriteArrayStart("suppressions");
                 _writer.WriteObjectStart(); // suppression
                 _writer.Write("kind", "inSource");
-                string? justification = suppressionInfo?.Attribute?.DecodeNamedArgument<string>(
-                    "Justification",
-                    SpecialType.System_String
-                );
+                string? justification = suppressionInfo
+                    ?
+                    .Attribute?
+                    .DecodeNamedArgument<string>("Justification", SpecialType.System_String);
                 if (justification != null)
                 {
                     _writer.Write("justification", justification);

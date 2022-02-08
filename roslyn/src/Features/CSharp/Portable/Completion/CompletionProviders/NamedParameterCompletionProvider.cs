@@ -357,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     semanticModel.GetTypeInfo(recordBaseType.Type, cancellationToken).Type
                     as INamedTypeSymbol;
 
-                return type?.InstanceConstructors.Where(m => m.IsAccessibleWithin(within))
+                return type?
+                    .InstanceConstructors.Where(m => m.IsAccessibleWithin(within))
                     .Select(m => m.Parameters);
             }
 

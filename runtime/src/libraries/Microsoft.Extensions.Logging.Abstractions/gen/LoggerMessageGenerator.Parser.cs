@@ -182,8 +182,9 @@ namespace Microsoft.Extensions.Logging.Generators
                                     }
 
                                     bool hasMisconfiguredInput = false;
-                                    ImmutableArray<AttributeData>? boundAttrbutes =
-                                        logMethodSymbol?.GetAttributes();
+                                    ImmutableArray<AttributeData>? boundAttrbutes = logMethodSymbol
+                                        ?
+                                        .GetAttributes();
 
                                     if (boundAttrbutes == null)
                                     {

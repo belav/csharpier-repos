@@ -722,15 +722,13 @@ namespace System.Diagnostics
                 BindingFlags.Instance | BindingFlags.NonPublic
             );
             s_connectionGroupType = systemNetHttpAssembly?.GetType("System.Net.ConnectionGroup");
-            s_connectionListField = s_connectionGroupType?.GetField(
-                "m_ConnectionList",
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            s_connectionListField = s_connectionGroupType
+                ?
+                .GetField("m_ConnectionList", BindingFlags.Instance | BindingFlags.NonPublic);
             s_connectionType = systemNetHttpAssembly?.GetType("System.Net.Connection");
-            s_writeListField = s_connectionType?.GetField(
-                "m_WriteList",
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            s_writeListField = s_connectionType
+                ?
+                .GetField("m_WriteList", BindingFlags.Instance | BindingFlags.NonPublic);
 
             s_httpResponseAccessor = CreateFieldGetter<HttpWebRequest, HttpWebResponse>(
                 "_HttpResponse",

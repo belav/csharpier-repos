@@ -43,14 +43,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 new Type[] { typeof(string), typeof(bool) }
                             );
 
-                        using var eeKey = (IDisposable?)openSubKeyMethod?.Invoke(
-                            currentUserKey,
-                            new object[]
-                            {
-                                RegistryKey, /*writable*/
-                                false
-                            }
-                        );
+                        using var eeKey = (IDisposable?)openSubKeyMethod
+                            ?
+                            .Invoke(
+                                currentUserKey,
+                                new object[]
+                                {
+                                    RegistryKey, /*writable*/
+                                    false
+                                }
+                            );
                         if (eeKey != null)
                         {
                             var getValueMethod = eeKey

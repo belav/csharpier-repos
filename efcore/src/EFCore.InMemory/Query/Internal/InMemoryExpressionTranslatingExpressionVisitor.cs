@@ -960,10 +960,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         protected override Expression VisitParameter(ParameterExpression parameterExpression)
         {
             if (
-                parameterExpression.Name?.StartsWith(
-                    QueryCompilationContext.QueryParameterPrefix,
-                    StringComparison.Ordinal
-                ) == true
+                parameterExpression
+                    .Name?
+                    .StartsWith(
+                        QueryCompilationContext.QueryParameterPrefix,
+                        StringComparison.Ordinal
+                    ) == true
             )
             {
                 return Expression.Call(

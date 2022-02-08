@@ -43,10 +43,9 @@ namespace System.Net.Http
             {
                 try
                 {
-                    NetworkCredential? credentials = proxyCredentials?.GetCredential(
-                        proxyUri,
-                        proxyUri.Scheme
-                    );
+                    NetworkCredential? credentials = proxyCredentials
+                        ?
+                        .GetCredential(proxyUri, proxyUri.Scheme);
 
                     if (
                         string.Equals(proxyUri.Scheme, "socks5", StringComparison.OrdinalIgnoreCase)

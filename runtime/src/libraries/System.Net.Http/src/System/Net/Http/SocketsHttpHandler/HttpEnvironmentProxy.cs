@@ -113,10 +113,9 @@ namespace System.Net.Http
             _httpsProxyUri = httpsProxy;
 
             _credentials = HttpEnvironmentProxyCredentials.TryCreate(httpProxy, httpsProxy);
-            _bypass = bypassList?.Split(
-                ',',
-                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
-            );
+            _bypass = bypassList
+                ?
+                .Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         }
 
         /// <summary>

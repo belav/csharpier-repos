@@ -79,8 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     )
                     {
                         entityType.Builder
-                            .HasRelationship(entityType.BaseType, pk.Properties, pk)
-                            ?.IsUnique(true);
+                            .HasRelationship(entityType.BaseType, pk.Properties, pk)?
+                            .IsUnique(true);
                     }
 
                     nonTphRoots.Add(entityType.GetRootType());

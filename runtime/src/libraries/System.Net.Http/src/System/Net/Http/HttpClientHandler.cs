@@ -306,7 +306,9 @@ namespace System.Net.Http
                 (
                     _underlyingHandler.SslOptions.RemoteCertificateValidationCallback?.Target
                     as ConnectHelper.CertificateCallbackMapper
-                )?.FromHttpClientHandler;
+                )
+                    ?
+                    .FromHttpClientHandler;
             set
             {
                 ThrowForModifiedManagedSslOptionsIfStarted();

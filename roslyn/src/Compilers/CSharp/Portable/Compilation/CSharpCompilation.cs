@@ -569,9 +569,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(debugEntryPoint != null);
 
             // Debug entry point has to be a method definition from this compilation.
-            var methodSymbol = (
-                debugEntryPoint as Symbols.PublicModel.MethodSymbol
-            )?.UnderlyingMethodSymbol;
+            var methodSymbol = (debugEntryPoint as Symbols.PublicModel.MethodSymbol)
+                ?
+                .UnderlyingMethodSymbol;
             if (methodSymbol?.DeclaringCompilation != this || !methodSymbol.IsDefinition)
             {
                 diagnostics.Add(
@@ -4977,8 +4977,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     bool value =
                         SyntaxTrees
-                            .FirstOrDefault()
-                            ?.Options?.Features?.ContainsKey("nullablePublicOnly") == true;
+                            .FirstOrDefault()?
+                            .Options?
+                            .Features?
+                            .ContainsKey("nullablePublicOnly") == true;
                     _lazyEmitNullablePublicOnly = value.ToThreeState();
                 }
                 return _lazyEmitNullablePublicOnly.Value();
@@ -5051,9 +5053,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal void SymbolDeclaredEvent(Symbol symbol)
         {
-            EventQueue?.TryEnqueue(
-                new SymbolDeclaredCompilationEvent(this, symbol.GetPublicSymbol())
-            );
+            EventQueue
+                ?
+                .TryEnqueue(new SymbolDeclaredCompilationEvent(this, symbol.GetPublicSymbol()));
         }
 
         internal override void SerializePdbEmbeddedCompilationOptions(BlobBuilder builder)

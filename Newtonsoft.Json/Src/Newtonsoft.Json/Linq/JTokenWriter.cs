@@ -175,7 +175,9 @@ namespace Newtonsoft.Json.Linq
         {
             // avoid duplicate property name exception
             // last property name wins
-            (_parent as JObject)?.Remove(name);
+            (_parent as JObject)
+                ?
+                .Remove(name);
 
             AddParent(new JProperty(name));
 

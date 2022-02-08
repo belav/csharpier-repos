@@ -109,12 +109,14 @@ public class TemplateBinder
 
         _constraints =
             parameterPolicies
-                ?.Where(p => p.policy is IRouteConstraint)
+                ?
+                .Where(p => p.policy is IRouteConstraint)
                 .Select(p => (p.parameterName, (IRouteConstraint)p.policy))
                 .ToArray() ?? Array.Empty<(string, IRouteConstraint)>();
         _parameterTransformers =
             parameterPolicies
-                ?.Where(p => p.policy is IOutboundParameterTransformer)
+                ?
+                .Where(p => p.policy is IOutboundParameterTransformer)
                 .Select(p => (p.parameterName, (IOutboundParameterTransformer)p.policy))
                 .ToArray() ?? Array.Empty<(string, IOutboundParameterTransformer)>();
 
@@ -162,12 +164,14 @@ public class TemplateBinder
 
         _constraints =
             parameterPolicies
-                ?.Where(p => p.policy is IRouteConstraint)
+                ?
+                .Where(p => p.policy is IRouteConstraint)
                 .Select(p => (p.parameterName, (IRouteConstraint)p.policy))
                 .ToArray() ?? Array.Empty<(string, IRouteConstraint)>();
         _parameterTransformers =
             parameterPolicies
-                ?.Where(p => p.policy is IOutboundParameterTransformer)
+                ?
+                .Where(p => p.policy is IOutboundParameterTransformer)
                 .Select(p => (p.parameterName, (IOutboundParameterTransformer)p.policy))
                 .ToArray() ?? Array.Empty<(string, IOutboundParameterTransformer)>();
 

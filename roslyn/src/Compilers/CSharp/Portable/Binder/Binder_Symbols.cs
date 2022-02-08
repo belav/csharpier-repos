@@ -1351,9 +1351,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                       (
                           IsInsideNameof
                           && parent.Parent?.Parent is InvocationExpressionSyntax invocation
-                          && (
-                              invocation.Expression as IdentifierNameSyntax
-                          )?.Identifier.ContextualKind() == SyntaxKind.NameOfKeyword
+                          && (invocation.Expression as IdentifierNameSyntax)
+                              ?
+                              .Identifier.ContextualKind() == SyntaxKind.NameOfKeyword
                       ):
                     // Don't bind nameof(nint) or nameof(nuint) so that ERR_NameNotInContext is reported.
                     return null;

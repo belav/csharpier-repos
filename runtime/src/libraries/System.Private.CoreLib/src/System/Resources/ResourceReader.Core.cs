@@ -128,8 +128,8 @@ namespace System.Resources
                     .GetMethod(
                         nameof(CreateUntypedDelegate),
                         BindingFlags.NonPublic | BindingFlags.Static
-                    )
-                    ?.MakeGenericMethod(binaryFormatterType)
+                    )?
+                    .MakeGenericMethod(binaryFormatterType)
                     .Invoke(null, new[] { binaryFormatterDeserialize });
 
                 Interlocked.CompareExchange(ref s_binaryFormatterType, binaryFormatterType, null);

@@ -534,8 +534,8 @@ namespace Moq
         )
         {
             return setups
-                .FindLast(setup => !setup.IsConditional && predicate(setup))
-                ?.InnerMocks.SingleOrDefault();
+                .FindLast(setup => !setup.IsConditional && predicate(setup))?
+                .InnerMocks.SingleOrDefault();
         }
     }
 }

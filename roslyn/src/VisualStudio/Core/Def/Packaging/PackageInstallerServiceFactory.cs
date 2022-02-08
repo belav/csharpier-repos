@@ -456,14 +456,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 );
 
                 var notificationService = _workspace.Services.GetService<INotificationService>();
-                notificationService?.SendNotification(
-                    string.Format(
-                        ServicesVSResources.Installing_0_failed_Additional_information_colon_1,
-                        packageName,
-                        e.Message
-                    ),
-                    severity: NotificationSeverity.Error
-                );
+                notificationService
+                    ?
+                    .SendNotification(
+                        string.Format(
+                            ServicesVSResources.Installing_0_failed_Additional_information_colon_1,
+                            packageName,
+                            e.Message
+                        ),
+                        severity: NotificationSeverity.Error
+                    );
 
                 return false;
             }
@@ -568,14 +570,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 );
 
                 var notificationService = _workspace.Services.GetService<INotificationService>();
-                notificationService?.SendNotification(
-                    string.Format(
-                        ServicesVSResources.Uninstalling_0_failed_Additional_information_colon_1,
-                        packageName,
-                        e.Message
-                    ),
-                    severity: NotificationSeverity.Error
-                );
+                notificationService
+                    ?
+                    .SendNotification(
+                        string.Format(
+                            ServicesVSResources.Uninstalling_0_failed_Additional_information_colon_1,
+                            packageName,
+                            e.Message
+                        ),
+                        severity: NotificationSeverity.Error
+                    );
 
                 return false;
             }

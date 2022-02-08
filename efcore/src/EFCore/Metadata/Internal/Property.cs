@@ -350,7 +350,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.MaxLength,
                 maxLength,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -377,11 +379,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual bool? SetIsUnicode(bool? unicode, ConfigurationSource configurationSource) =>
-            (bool?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.Unicode,
-                unicode,
-                configurationSource
-            )?.Value;
+            (bool?)SetOrRemoveAnnotation(CoreAnnotationNames.Unicode, unicode, configurationSource)
+                ?
+                .Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -417,7 +417,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.Precision,
                 precision,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -454,7 +456,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.Scale,
                 scale,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -488,7 +492,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.BeforeSaveBehavior,
                 beforeSaveBehavior,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -537,7 +543,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.AfterSaveBehavior,
                 afterSaveBehavior,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -592,7 +600,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.ValueGeneratorFactory,
                 factory,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -639,7 +649,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.ValueGeneratorFactoryType,
                 factoryType,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -675,7 +687,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             (
                 FindAnnotation(CoreAnnotationNames.ValueGeneratorFactory)
                 ?? FindAnnotation(CoreAnnotationNames.ValueGeneratorFactoryType)
-            )?.GetConfigurationSource();
+            )
+                ?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -699,7 +713,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.ValueConverter,
                 converter,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -801,7 +817,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.ProviderClrType,
                 providerClrType,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -894,7 +912,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.ValueComparer,
                 comparer,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>
@@ -942,7 +962,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreAnnotationNames.ValueComparerType,
                 comparerType,
                 configurationSource
-            )?.Value;
+            )
+                ?
+                .Value;
         }
 
         /// <summary>

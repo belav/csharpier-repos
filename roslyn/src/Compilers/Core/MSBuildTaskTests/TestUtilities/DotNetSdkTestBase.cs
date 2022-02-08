@@ -68,8 +68,8 @@ public class TestClass
             s_dotnetExeName = "dotnet" + (Path.DirectorySeparatorChar == '/' ? "" : ".exe");
             s_dotnetSdkVersion =
                 typeof(DotNetSdkTests).Assembly
-                    .GetCustomAttribute<DotNetSdkVersionAttribute>()
-                    ?.Version
+                    .GetCustomAttribute<DotNetSdkVersionAttribute>()?
+                    .Version
                 ?? throw new InvalidOperationException(
                     $"Couldn't find {nameof(DotNetSdkVersionAttribute)}"
                 );
@@ -83,8 +83,8 @@ public class TestClass
             if (!isMatchingDotNetInstance(dotnetInstallDir))
             {
                 dotnetInstallDir = Environment
-                    .GetEnvironmentVariable("PATH")
-                    ?.Split(Path.PathSeparator)
+                    .GetEnvironmentVariable("PATH")?
+                    .Split(Path.PathSeparator)
                     .FirstOrDefault(isMatchingDotNetInstance);
             }
 

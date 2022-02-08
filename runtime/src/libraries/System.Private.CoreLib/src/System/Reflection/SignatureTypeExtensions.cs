@@ -131,26 +131,26 @@ namespace System.Reflection
             if (signatureType.IsSZArray)
             {
                 return signatureType.ElementType!
-                    .TryResolve(genericMethodParameters)
-                    ?.TryMakeArrayType();
+                    .TryResolve(genericMethodParameters)?
+                    .TryMakeArrayType();
             }
             else if (signatureType.IsVariableBoundArray)
             {
                 return signatureType.ElementType!
-                    .TryResolve(genericMethodParameters)
-                    ?.TryMakeArrayType(signatureType.GetArrayRank());
+                    .TryResolve(genericMethodParameters)?
+                    .TryMakeArrayType(signatureType.GetArrayRank());
             }
             else if (signatureType.IsByRef)
             {
                 return signatureType.ElementType!
-                    .TryResolve(genericMethodParameters)
-                    ?.TryMakeByRefType();
+                    .TryResolve(genericMethodParameters)?
+                    .TryMakeByRefType();
             }
             else if (signatureType.IsPointer)
             {
                 return signatureType.ElementType!
-                    .TryResolve(genericMethodParameters)
-                    ?.TryMakePointerType();
+                    .TryResolve(genericMethodParameters)?
+                    .TryMakePointerType();
             }
             else if (signatureType.IsConstructedGenericType)
             {

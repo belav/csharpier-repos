@@ -22,10 +22,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             _serviceProvider = serviceProvider;
 
             var vsShell = serviceProvider.GetService(typeof(SVsShell)) as IVsShell;
-            vsShell?.TryGetPropertyValue(
-                __VSSPROPID.VSSPROPID_ObjectMgrTypesImgList,
-                out _imageListPtr
-            );
+            vsShell
+                ?
+                .TryGetPropertyValue(
+                    __VSSPROPID.VSSPROPID_ObjectMgrTypesImgList,
+                    out _imageListPtr
+                );
         }
 
         public IServiceProvider ServiceProvider

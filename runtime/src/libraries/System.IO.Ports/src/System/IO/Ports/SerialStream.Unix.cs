@@ -870,10 +870,9 @@ namespace System.IO.Ports
                     s =>
                     {
                         var thisRef = (SerialStream)s;
-                        thisRef._dataReceived?.Invoke(
-                            thisRef,
-                            new SerialDataReceivedEventArgs(SerialData.Chars)
-                        );
+                        thisRef
+                            ._dataReceived?
+                            .Invoke(thisRef, new SerialDataReceivedEventArgs(SerialData.Chars));
                     },
                     this
                 );
@@ -888,10 +887,9 @@ namespace System.IO.Ports
                     s =>
                     {
                         var thisRef = (SerialStream)s;
-                        thisRef._pinChanged?.Invoke(
-                            thisRef,
-                            new SerialPinChangedEventArgs(pinChanged)
-                        );
+                        thisRef
+                            ._pinChanged?
+                            .Invoke(thisRef, new SerialPinChangedEventArgs(pinChanged));
                     },
                     this
                 );

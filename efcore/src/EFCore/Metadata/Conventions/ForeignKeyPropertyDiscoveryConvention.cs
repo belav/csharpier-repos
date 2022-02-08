@@ -331,8 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                             invertedRelationshipBuilder.HasForeignKey(
                                                 candidatePropertiesOnPrincipal
                                             )!.Metadata
-                                        )
-                                        ?.Builder;
+                                        )?
+                                        .Builder;
                                 }
 
                                 foreignKeyProperties = null;

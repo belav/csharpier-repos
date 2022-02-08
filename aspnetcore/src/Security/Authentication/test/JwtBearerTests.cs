@@ -1302,8 +1302,12 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                             await context.Response.WriteAsJsonAsync(
                                                 new
                                                 {
-                                                    Expires = authenticationResult.Properties?.ExpiresUtc,
-                                                    Issued = authenticationResult.Properties?.IssuedUtc
+                                                    Expires = authenticationResult
+                                                        .Properties?
+                                                        .ExpiresUtc,
+                                                    Issued = authenticationResult
+                                                        .Properties?
+                                                        .IssuedUtc
                                                 }
                                             );
                                         }

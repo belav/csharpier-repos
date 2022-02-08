@@ -26,14 +26,14 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
 
             var languageServices = services.GetLanguageServices(languageInformation.LanguageName);
             var compilationOptions = languageServices
-                .GetService<ICompilationFactoryService>()
-                ?.GetDefaultCompilationOptions();
+                .GetService<ICompilationFactoryService>()?
+                .GetDefaultCompilationOptions();
 
             // Use latest language version which is more permissive, as we cannot find out language version of the project which the file belongs to
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/575761
             var parseOptions = languageServices
-                .GetService<ISyntaxTreeFactoryService>()
-                ?.GetDefaultParseOptionsWithLatestLanguageVersion();
+                .GetService<ISyntaxTreeFactoryService>()?
+                .GetDefaultParseOptionsWithLatestLanguageVersion();
 
             if (
                 parseOptions != null

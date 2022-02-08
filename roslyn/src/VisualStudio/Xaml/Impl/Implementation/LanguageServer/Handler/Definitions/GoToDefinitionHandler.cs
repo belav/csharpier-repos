@@ -159,10 +159,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             if (sourceDefinition.Span != null)
             {
                 // If the Span is not null, use the span.
-                var document = context.Solution
-                    ?.GetDocuments(
-                        ProtocolConversions.GetUriFromFilePath(sourceDefinition.FilePath)
-                    )
+                var document = context
+                    .Solution?
+                    .GetDocuments(ProtocolConversions.GetUriFromFilePath(sourceDefinition.FilePath))
                     .FirstOrDefault();
                 if (document != null)
                 {

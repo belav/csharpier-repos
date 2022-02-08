@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                         SpecialType.System_Object
                     );
                     var referenceEqualsMethodOpt = objectType
-                        ?.GetMembers(nameof(ReferenceEquals))
+                        ?
+                        .GetMembers(nameof(ReferenceEquals))
                         .OfType<IMethodSymbol>()
                         .FirstOrDefault(
                             m =>

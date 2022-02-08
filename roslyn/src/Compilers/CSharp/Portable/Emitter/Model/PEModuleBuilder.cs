@@ -1050,7 +1050,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 (MethodSymbol)Compilation.GetWellKnownTypeMember(
                     WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__InitializeArrayArrayRuntimeFieldHandle
                 )
-            )?.GetCciAdapter();
+            )
+                ?
+                .GetCciAdapter();
         }
 
         public sealed override bool IsPlatformType(
@@ -1317,12 +1319,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             // NoPia: See if this is a type, which definition we should copy into our assembly.
             Debug.Assert(namedTypeSymbol.IsDefinition);
 
-            return _embeddedTypesManagerOpt?.EmbedTypeIfNeedTo(
-                    namedTypeSymbol,
-                    fromImplements,
-                    syntaxNodeOpt,
-                    diagnostics
-                ) ?? namedTypeSymbol.GetCciAdapter();
+            return _embeddedTypesManagerOpt
+                    ?
+                    .EmbedTypeIfNeedTo(namedTypeSymbol, fromImplements, syntaxNodeOpt, diagnostics)
+                ?? namedTypeSymbol.GetCciAdapter();
         }
 
         private object GetCciAdapter(Symbol symbol)
@@ -1472,11 +1472,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return fieldRef;
             }
 
-            return _embeddedTypesManagerOpt?.EmbedFieldIfNeedTo(
-                    fieldSymbol.GetCciAdapter(),
-                    syntaxNodeOpt,
-                    diagnostics
-                ) ?? fieldSymbol.GetCciAdapter();
+            return _embeddedTypesManagerOpt
+                    ?
+                    .EmbedFieldIfNeedTo(fieldSymbol.GetCciAdapter(), syntaxNodeOpt, diagnostics)
+                ?? fieldSymbol.GetCciAdapter();
         }
 
         public static Cci.TypeMemberVisibility MemberVisibility(Symbol symbol)

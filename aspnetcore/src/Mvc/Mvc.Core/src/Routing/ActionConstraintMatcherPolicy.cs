@@ -244,8 +244,8 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
                         var routeData = new RouteData(candidate.Values!);
 
                         var dataTokens = candidate.Endpoint.Metadata
-                            .GetMetadata<IDataTokensMetadata>()
-                            ?.DataTokens;
+                            .GetMetadata<IDataTokensMetadata>()?
+                            .DataTokens;
 
                         if (dataTokens != null)
                         {

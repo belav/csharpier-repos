@@ -439,9 +439,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 // We choose to do this here rather than in the project system code when it's added because we don't want to pay the penalty of checking the RDT for
                 // all files being opened on the UI thread if we really don't need it. This uses an 'as' cast, because in unit tests the workspace is a different
                 // derived form of VisualStudioWorkspace, and there we aren't dealing with open files at all so it doesn't matter.
-                (
-                    State.Workspace as VisualStudioWorkspaceImpl
-                )?.ProcessQueuedWorkOnUIThread();
+                (State.Workspace as VisualStudioWorkspaceImpl)
+                    ?
+                    .ProcessQueuedWorkOnUIThread();
 
                 document = Workspace.CurrentSolution.GetDocument(GetDocumentId());
             }
@@ -707,7 +707,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
 
             var node = parent
-                ?.AncestorsAndSelf()
+                ?
+                .AncestorsAndSelf()
                 .FirstOrDefault(n => CodeModelService.MatchesScope(n, scope));
 
             if (node == null)

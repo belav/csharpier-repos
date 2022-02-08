@@ -1799,11 +1799,9 @@ namespace System.Net.Http
                 {
                     WriteBytes(KnownHeaders.Cookie.Http2EncodedName, ref headerBuffer);
 
-                    Encoding? cookieEncoding =
-                        _pool.Settings._requestHeaderEncodingSelector?.Invoke(
-                            KnownHeaders.Cookie.Name,
-                            request
-                        );
+                    Encoding? cookieEncoding = _pool.Settings
+                        ._requestHeaderEncodingSelector?
+                        .Invoke(KnownHeaders.Cookie.Name, request);
                     WriteLiteralHeaderValue(cookiesFromContainer, cookieEncoding, ref headerBuffer);
                 }
             }

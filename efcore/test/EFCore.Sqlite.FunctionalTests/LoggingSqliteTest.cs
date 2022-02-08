@@ -32,7 +32,7 @@ namespace Microsoft.EntityFrameworkCore
 
         protected override string ProviderVersion =>
             typeof(SqliteOptionsExtension).Assembly
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                ?.InformationalVersion;
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+                .InformationalVersion;
     }
 }

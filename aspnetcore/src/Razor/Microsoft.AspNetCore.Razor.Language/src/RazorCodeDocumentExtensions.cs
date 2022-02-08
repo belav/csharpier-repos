@@ -93,9 +93,9 @@ public static class RazorCodeDocumentExtensions
             throw new ArgumentNullException(nameof(document));
         }
 
-        return (
-            document.Items[typeof(ImportSyntaxTreesHolder)] as ImportSyntaxTreesHolder
-        )?.SyntaxTrees;
+        return (document.Items[typeof(ImportSyntaxTreesHolder)] as ImportSyntaxTreesHolder)
+            ?
+            .SyntaxTrees;
     }
 
     public static void SetImportSyntaxTrees(

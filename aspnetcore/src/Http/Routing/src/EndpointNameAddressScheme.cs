@@ -98,8 +98,8 @@ internal sealed class EndpointNameAddressScheme : IEndpointAddressScheme<string>
         {
             if (
                 endpoint.Metadata
-                    .GetMetadata<ISuppressLinkGenerationMetadata>()
-                    ?.SuppressLinkGeneration == true
+                    .GetMetadata<ISuppressLinkGenerationMetadata>()?
+                    .SuppressLinkGeneration == true
             )
             {
                 // Skip anything that's suppressed for linking.

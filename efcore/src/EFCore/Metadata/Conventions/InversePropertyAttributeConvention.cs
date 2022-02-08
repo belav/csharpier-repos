@@ -410,15 +410,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     }
 
                     remainingInverseNavigation = entityType
-                        .FindSkipNavigation(navigationMemberInfo)
-                        ?.ForeignKey!.Builder;
+                        .FindSkipNavigation(navigationMemberInfo)?
+                        .ForeignKey!.Builder;
                     return true;
                 }
                 else
                 {
                     var existingInverse = targetEntityType
-                        .FindNavigation(inverseNavigationMemberInfo)
-                        ?.Inverse;
+                        .FindNavigation(inverseNavigationMemberInfo)?
+                        .Inverse;
                     if (
                         existingInverse != null
                         && IsAmbiguousInverse(
@@ -446,8 +446,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     }
 
                     remainingInverseNavigation = entityType
-                        .FindNavigation(navigationMemberInfo)
-                        ?.ForeignKey.Builder;
+                        .FindNavigation(navigationMemberInfo)?
+                        .ForeignKey.Builder;
                     return true;
                 }
             }
@@ -717,7 +717,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 targetClrType,
                 navigationMemberInfo,
                 shouldCreate: false
-            )?.Metadata;
+            )
+                ?
+                .Metadata;
             if (targetEntityType == null)
             {
                 return;

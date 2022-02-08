@@ -98,24 +98,24 @@ namespace AnalyzerRunner
                     .SingleOrDefault(
                         provider =>
                             provider.Metadata.WorkspaceKinds?.Contains(_workspace.Kind) ?? false
-                    )
-                    ?.Value;
+                    )?
+                    .Value;
                 incrementalAnalyzerProvider ??= incrementalAnalyzerProviders
                     .Where(x => x.Metadata.Name == incrementalAnalyzerName)
                     .SingleOrDefault(
                         provider =>
                             provider.Metadata.WorkspaceKinds?.Contains(WorkspaceKind.Host) ?? false
-                    )
-                    ?.Value;
+                    )?
+                    .Value;
                 incrementalAnalyzerProvider ??= incrementalAnalyzerProviders
                     .Where(x => x.Metadata.Name == incrementalAnalyzerName)
                     .SingleOrDefault(
                         provider =>
-                            provider.Metadata.WorkspaceKinds?.Contains(
-                                WorkspaceKind.RemoteWorkspace
-                            ) ?? false
-                    )
-                    ?.Value;
+                            provider.Metadata
+                                .WorkspaceKinds?
+                                .Contains(WorkspaceKind.RemoteWorkspace) ?? false
+                    )?
+                    .Value;
                 incrementalAnalyzerProvider ??=
                     incrementalAnalyzerProviders
                         .Where(x => x.Metadata.Name == incrementalAnalyzerName)

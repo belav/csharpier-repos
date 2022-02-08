@@ -184,7 +184,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 string.Join(
                     ",",
                     method
-                        ?.GetParameters()
+                        ?
+                        .GetParameters()
                         .Select(t => (t.ParameterType?.Name ?? "<UnknownType>") + " " + t.Name)
                         ?? Array.Empty<string>()
                 )

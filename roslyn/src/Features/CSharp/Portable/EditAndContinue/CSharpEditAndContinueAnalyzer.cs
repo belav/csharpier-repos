@@ -242,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 && (
                     model
                         .GetSymbolInfo(nameSyntax, cancellationToken)
-                        .Symbol?.Equals(localOrParameter) ?? false
+                        .Symbol?
+                        .Equals(localOrParameter) ?? false
                 )
             select node;
         }
@@ -412,8 +413,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 if (declarationBody.Parent.IsKind(SyntaxKind.ConstructorDeclaration))
                 {
                     var constructor = (ConstructorDeclarationSyntax)declarationBody.Parent;
-                    var partnerConstructor =
-                        (ConstructorDeclarationSyntax?)partnerDeclarationBody?.Parent;
+                    var partnerConstructor = (ConstructorDeclarationSyntax?)partnerDeclarationBody
+                        ?
+                        .Parent;
 
                     if (
                         constructor.Initializer == null

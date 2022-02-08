@@ -55,12 +55,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // If user has explicitly configured severity for this diagnostic ID, that should be respected.
             // For example, 'dotnet_diagnostic.CA1000.severity = error'
             if (
-                compilation.Options.SyntaxTreeOptionsProvider?.TryGetDiagnosticValue(
-                    tree,
-                    descriptor.Id,
-                    CancellationToken.None,
-                    out severity
-                ) == true
+                compilation.Options
+                    .SyntaxTreeOptionsProvider?
+                    .TryGetDiagnosticValue(
+                        tree,
+                        descriptor.Id,
+                        CancellationToken.None,
+                        out severity
+                    ) == true
             )
             {
                 return true;

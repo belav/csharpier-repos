@@ -46,9 +46,9 @@ namespace AutoMapper.Execution
             var parameters = new[] { Source, _initialDestination, ContextParameter };
             var customExpression =
                 TypeConverter(parameters)
-                ?? (_typeMap.CustomMapFunction ?? _typeMap.CustomMapExpression)?.ReplaceParameters(
-                    parameters
-                );
+                ?? (_typeMap.CustomMapFunction ?? _typeMap.CustomMapExpression)
+                    ?
+                    .ReplaceParameters(parameters);
             if (customExpression != null)
             {
                 return Lambda(customExpression, parameters);

@@ -157,9 +157,15 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                             (
                                 simpleNameOrMemberAccessExpression
                                 as ConditionalAccessExpressionSyntax
-                            )?.WhenNotNull as InvocationExpressionSyntax
-                        )?.Expression as MemberBindingExpressionSyntax
-                    )?.Name == simpleName
+                            )
+                                ?
+                                .WhenNotNull as InvocationExpressionSyntax
+                        )
+                            ?
+                            .Expression as MemberBindingExpressionSyntax
+                    )
+                        ?
+                        .Name == simpleName
                 )
                 {
                     invocationExpressionOpt = (InvocationExpressionSyntax)(

@@ -58,8 +58,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                             m[CodeFixProvider] = fixAllState.CodeFixProvider.GetType().FullName!
                                 .GetHashCode()
                                 .ToString();
-                            m[CodeActionEquivalenceKey] = fixAllState.CodeActionEquivalenceKey
-                                ?.GetHashCode()
+                            m[CodeActionEquivalenceKey] = fixAllState
+                                .CodeActionEquivalenceKey?
+                                .GetHashCode()
                                 .ToString();
                             m[LanguageName] = fixAllState.Project.Language.GetHashCode().ToString();
                         }

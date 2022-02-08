@@ -294,10 +294,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             if (
                 size.HasValue
-                && storeTypeName?.StartsWith(
-                    "default_decimal_mapping",
-                    StringComparison.OrdinalIgnoreCase
-                ) == true
+                && storeTypeName
+                    ?
+                    .StartsWith("default_decimal_mapping", StringComparison.OrdinalIgnoreCase)
+                    == true
             )
             {
                 precision = size;

@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         public IEnumerable<InlineRenameReplacement> GetReplacements(DocumentId documentId)
         {
             return _info
-                .GetReplacements(documentId)
-                ?.Select(
+                .GetReplacements(documentId)?
+                .Select(
                     x =>
                         new InlineRenameReplacement(
                             VSTypeScriptInlineRenameReplacementKindHelpers.ConvertTo(x.Kind),

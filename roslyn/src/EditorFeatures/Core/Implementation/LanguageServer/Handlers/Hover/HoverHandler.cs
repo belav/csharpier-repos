@@ -176,9 +176,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
             {
                 var clientSupportsMarkdown =
-                    clientCapabilities?.TextDocument?.Hover?.ContentFormat.Contains(
-                        MarkupKind.Markdown
-                    ) == true;
+                    clientCapabilities
+                        ?
+                        .TextDocument?
+                        .Hover?
+                        .ContentFormat.Contains(MarkupKind.Markdown) == true;
                 // Insert line breaks in between sections to ensure we get double spacing between sections.
                 var tags = info.Sections
                     .SelectMany(

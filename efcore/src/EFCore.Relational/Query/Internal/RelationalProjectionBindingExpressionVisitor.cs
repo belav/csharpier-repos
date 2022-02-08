@@ -149,10 +149,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         case ParameterExpression parameterExpression:
                             return
-                                parameterExpression.Name?.StartsWith(
-                                    QueryCompilationContext.QueryParameterPrefix,
-                                    StringComparison.Ordinal
-                                ) == true
+                                parameterExpression
+                                    .Name?
+                                    .StartsWith(
+                                        QueryCompilationContext.QueryParameterPrefix,
+                                        StringComparison.Ordinal
+                                    ) == true
                               ? Expression.Call(
                                     _getParameterValueMethodInfo.MakeGenericMethod(
                                         parameterExpression.Type

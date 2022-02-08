@@ -132,8 +132,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetEarlyDecodedWellKnownAttributeData()?.CallerArgumentExpressionParameterIndex
-                    ?? -1;
+                return GetEarlyDecodedWellKnownAttributeData()
+                        ?
+                        .CallerArgumentExpressionParameterIndex ?? -1;
             }
         }
 

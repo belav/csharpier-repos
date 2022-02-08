@@ -280,9 +280,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         internal static ImmutableArray<string> GetTrustedPlatformAssemblyPaths() =>
             (
-                (AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string)?.Split(
-                    Path.PathSeparator
-                )
+                (AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string)
+                    ?
+                    .Split(Path.PathSeparator)
             ).ToImmutableArrayOrEmpty();
 
         internal static ImmutableDictionary<string, string> GetTrustedPlatformAssemblies(

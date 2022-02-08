@@ -34,7 +34,8 @@ public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
     public override bool Execute()
     {
         XAttribute[] rootAttributes = RootAttributes
-            ?.Select(item => new XAttribute(item.ItemSpec, item.GetMetadata("Value")))
+            ?
+            .Select(item => new XAttribute(item.ItemSpec, item.GetMetadata("Value")))
             .ToArray();
 
         var frameworkManifest = new XElement("FileList", rootAttributes);

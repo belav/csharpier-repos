@@ -1662,7 +1662,10 @@ namespace Microsoft.CodeAnalysis.Operations
                             || (
                                 (boundOperand as BoundLambda)?.Body.Statements.SingleOrDefault()
                                 as BoundReturnStatement
-                            )?.ExpressionOpt?.Kind == BoundKind.BadExpression
+                            )
+                                ?
+                                .ExpressionOpt?
+                                .Kind == BoundKind.BadExpression
                     );
                     Debug.Assert(!forceOperandImplicitLiteral);
                     return Create(boundOperand);

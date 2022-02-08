@@ -94,9 +94,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             typeof(string),
                             DefaultIdPropertyName,
                             setTypeConfigurationSource: false
-                        )
-                        ?.ToJsonProperty(IdPropertyJsonName)
-                        ?.Metadata;
+                        )?
+                        .ToJsonProperty(IdPropertyJsonName)?
+                        .Metadata;
 
                 if (idProperty != null)
                 {
@@ -130,8 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             )
                             {
                                 newKey = entityTypeBuilder
-                                    .HasKey(new[] { idProperty, partitionKeyProperty })
-                                    ?.Metadata;
+                                    .HasKey(new[] { idProperty, partitionKeyProperty })?
+                                    .Metadata;
                             }
 
                             entityTypeBuilder.HasNoKey(new[] { idProperty });

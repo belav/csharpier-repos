@@ -411,10 +411,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MemberSymbol is MethodSymbol methodSymbol
                 && methodSymbol.MethodKind == MethodKind.Constructor
                 && Root.FindToken(position)
-                    .Parent?.AncestorsAndSelf()
+                    .Parent?
+                    .AncestorsAndSelf()
                     .OfType<ConstructorInitializerSyntax>()
-                    .FirstOrDefault()
-                    ?.Parent == Root
+                    .FirstOrDefault()?
+                    .Parent == Root
             )
             {
                 var binder = this.GetEnclosingBinder(position);
@@ -452,7 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(recordDecl.Kind() == SyntaxKind.RecordDeclaration);
                 if (
                     Root.FindToken(position)
-                        .Parent?.AncestorsAndSelf()
+                        .Parent?
+                        .AncestorsAndSelf()
                         .OfType<PrimaryConstructorBaseTypeSyntax>()
                         .FirstOrDefault() == recordDecl.PrimaryConstructorBaseTypeIfClass
                 )

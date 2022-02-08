@@ -306,9 +306,9 @@ namespace System
         )
         {
             if (
-                Type.GetType(typeName)
-                    ?.GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Static)
-                    ?.GetMethod
+                Type.GetType(typeName)?
+                    .GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Static)?
+                    .GetMethod
                 is MethodInfo mi
             )
             {

@@ -313,9 +313,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (namespaceSymbol.NamespaceKind == NamespaceKind.Module)
             {
-                var moduleNs = (
-                    namespaceSymbol as PublicModel.NamespaceSymbol
-                )?.UnderlyingNamespaceSymbol;
+                var moduleNs = (namespaceSymbol as PublicModel.NamespaceSymbol)
+                    ?
+                    .UnderlyingNamespaceSymbol;
                 if ((object)moduleNs != null && moduleNs.ContainingModule == this)
                 {
                     // this is already the correct module namespace

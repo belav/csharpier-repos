@@ -171,10 +171,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             // is generating code that it doesn't want errors shown for.
             var buffer = editorSnapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer?.Properties.TryGetProperty(
-                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
-                out suppressedDiagnosticsSpans
-            );
+            buffer
+                ?
+                .Properties.TryGetProperty(
+                    PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                    out suppressedDiagnosticsSpans
+                );
 
             var buckets = _diagnosticService.GetPushDiagnosticBuckets(
                 workspace,

@@ -266,8 +266,8 @@ namespace SslStress
                 ),
                 ServerEndpoint = ParseEndpoint(parseResult.ValueForOption<string>("-e")),
                 MaxExecutionTime = parseResult
-                    .ValueForOption<double?>("-t")
-                    ?.Pipe(TimeSpan.FromMinutes),
+                    .ValueForOption<double?>("-t")?
+                    .Pipe(TimeSpan.FromMinutes),
                 MaxBufferLength = parseResult.ValueForOption<int>("-b"),
                 MinConnectionLifetime = TimeSpan.FromSeconds(
                     parseResult.ValueForOption<double>("-l")

@@ -560,13 +560,15 @@ public class EventSourceTests : LoggedTest
                     return;
                 }
 
-                _logger?.LogInformation(
-                    "{event}",
-                    JsonSerializer.Serialize(
-                        eventData,
-                        new JsonSerializerOptions { WriteIndented = true }
-                    )
-                );
+                _logger
+                    ?
+                    .LogInformation(
+                        "{event}",
+                        JsonSerializer.Serialize(
+                            eventData,
+                            new JsonSerializerOptions { WriteIndented = true }
+                        )
+                    );
 
                 // EventWrittenEventArgs.ActivityId sometimes falls back to EventSource.CurrentThreadActivityId,
                 // so we need to take a snapshot to verify the ActivityId later on a different thread.

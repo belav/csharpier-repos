@@ -110,9 +110,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                         )
                         && !type.IsValueType
-                        && (
-                            type as Symbols.PublicModel.TypeSymbol
-                        )?.UnderlyingTypeSymbol.IsTypeParameterDisallowingAnnotationInCSharp8()
+                        && (type as Symbols.PublicModel.TypeSymbol)
+                            ?
+                            .UnderlyingTypeSymbol.IsTypeParameterDisallowingAnnotationInCSharp8()
                             != true
                     )
                     {
@@ -364,9 +364,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // It would be nice to handle VB NoPia symbols too, but it's not worth the effort.
 
-            NamedTypeSymbol underlyingTypeSymbol = (
-                symbol as Symbols.PublicModel.NamedTypeSymbol
-            )?.UnderlyingNamedTypeSymbol;
+            NamedTypeSymbol underlyingTypeSymbol = (symbol as Symbols.PublicModel.NamedTypeSymbol)
+                ?
+                .UnderlyingNamedTypeSymbol;
             var illegalGenericInstantiationSymbol =
                 underlyingTypeSymbol as NoPiaIllegalGenericInstantiationSymbol;
 
@@ -602,7 +602,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 NamedTypeSymbol underlyingTypeSymbol = (
                     symbol as Symbols.PublicModel.NamedTypeSymbol
-                )?.UnderlyingNamedTypeSymbol;
+                )
+                    ?
+                    .UnderlyingNamedTypeSymbol;
                 ImmutableArray<ImmutableArray<CustomModifier>> modifiers =
                     GetTypeArgumentsModifiers(underlyingTypeSymbol);
                 if (modifiers.IsDefault)

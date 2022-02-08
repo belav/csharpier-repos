@@ -94,10 +94,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                             new Type[] { _typeIExtensionContent }
                         );
                         if (
-                            extensionType_GetContentMethod?.Invoke(
-                                extension,
-                                new object[] { content }
-                            )
+                            extensionType_GetContentMethod
+                                ?
+                                .Invoke(extension, new object[] { content })
                                 is not string assemblyPath
                             || string.IsNullOrEmpty(assemblyPath)
                         )

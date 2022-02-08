@@ -671,11 +671,9 @@ namespace System.Net.Http
                     _connection.Pool.Settings._cookieContainer!.GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer != string.Empty)
                 {
-                    Encoding? valueEncoding =
-                        _connection.Pool.Settings._requestHeaderEncodingSelector?.Invoke(
-                            HttpKnownHeaderNames.Cookie,
-                            request
-                        );
+                    Encoding? valueEncoding = _connection.Pool.Settings
+                        ._requestHeaderEncodingSelector?
+                        .Invoke(HttpKnownHeaderNames.Cookie, request);
                     BufferLiteralHeaderWithStaticNameReference(
                         H3StaticTable.Cookie,
                         cookiesFromContainer,
@@ -1225,11 +1223,9 @@ namespace System.Net.Http
 
                 if (headerValue is null)
                 {
-                    Encoding? encoding =
-                        _connection.Pool.Settings._responseHeaderEncodingSelector?.Invoke(
-                            descriptor.Name,
-                            _request
-                        );
+                    Encoding? encoding = _connection.Pool.Settings
+                        ._responseHeaderEncodingSelector?
+                        .Invoke(descriptor.Name, _request);
                     headerValue = _connection.GetResponseHeaderValueWithCaching(
                         descriptor,
                         literalValue,

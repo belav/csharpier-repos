@@ -350,7 +350,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         if (navigationBase is ISkipNavigation skipNavigation)
                         {
                             FindJoinEntry(entry, oldTargetEntry, skipNavigation)
-                                ?.SetEntityState(EntityState.Deleted);
+                                ?
+                                .SetEntityState(EntityState.Deleted);
 
                             Check.DebugAssert(
                                 skipNavigation.Inverse.IsCollection,

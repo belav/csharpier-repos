@@ -389,13 +389,9 @@ namespace Microsoft.Extensions.Options
             {
                 if (
                     (
-                        Validation?.Invoke(
-                            options,
-                            Dependency1,
-                            Dependency2,
-                            Dependency3,
-                            Dependency4
-                        )
+                        Validation
+                            ?
+                            .Invoke(options, Dependency1, Dependency2, Dependency3, Dependency4)
                     ).Value
                 )
                 {
@@ -506,14 +502,16 @@ namespace Microsoft.Extensions.Options
             {
                 if (
                     (
-                        Validation?.Invoke(
-                            options,
-                            Dependency1,
-                            Dependency2,
-                            Dependency3,
-                            Dependency4,
-                            Dependency5
-                        )
+                        Validation
+                            ?
+                            .Invoke(
+                                options,
+                                Dependency1,
+                                Dependency2,
+                                Dependency3,
+                                Dependency4,
+                                Dependency5
+                            )
                     ).Value
                 )
                 {

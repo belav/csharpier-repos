@@ -271,8 +271,9 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                 }
 
                 // Escape characters in the text changes so that it can be more easily read.
-                var textChange = change.NewText
-                    ?.Replace(" ", "\\s")
+                var textChange = change
+                    .NewText?
+                    .Replace(" ", "\\s")
                     .Replace("\t", "\\t")
                     .Replace("\n", "\\n")
                     .Replace("\r", "\\r");

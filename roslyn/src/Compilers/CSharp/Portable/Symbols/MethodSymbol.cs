@@ -1059,11 +1059,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
                 {
                     // `{0}` is not a valid calling convention type for 'UnmanagedCallersOnly'.
-                    diagnostics?.Add(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        location!,
-                        callConvTypedConstant.ValueInternal ?? "null"
-                    );
+                    diagnostics
+                        ?
+                        .Add(
+                            ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                            location!,
+                            callConvTypedConstant.ValueInternal ?? "null"
+                        );
                 }
                 else
                 {
@@ -1101,10 +1103,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (isGenericMethod(this) || ContainingType.IsGenericType)
             {
-                diagnostics?.Add(
-                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                    location!
-                );
+                diagnostics
+                    ?
+                    .Add(ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric, location!);
                 return true;
             }
 

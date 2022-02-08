@@ -130,8 +130,9 @@ internal readonly struct ApiControllerSymbolCache
         var statusCodeActionResult = compilation.GetTypeByMetadataName(
             ApiSymbolNames.IStatusCodeActionResult
         );
-        var statusCodeActionResultStatusProperty =
-            (IPropertySymbol?)statusCodeActionResult?.GetMembers("StatusCode")[0];
+        var statusCodeActionResultStatusProperty = (IPropertySymbol?)statusCodeActionResult
+            ?
+            .GetMembers("StatusCode")[0];
         if (statusCodeActionResultStatusProperty == null)
         {
             return false;

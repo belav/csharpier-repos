@@ -147,8 +147,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType
         ) =>
             entityType
-                .FindAnnotation(RelationalAnnotationNames.TableName)
-                ?.GetConfigurationSource();
+                .FindAnnotation(RelationalAnnotationNames.TableName)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the database schema that contains the mapped table.
@@ -184,8 +184,8 @@ namespace Microsoft.EntityFrameworkCore
             var skipNavigationSchema = entityType
                 .GetForeignKeys()
                 .SelectMany(fk => fk.GetReferencingSkipNavigations())
-                .FirstOrDefault(n => !n.IsOnDependent)
-                ?.DeclaringEntityType.GetSchema();
+                .FirstOrDefault(n => !n.IsOnDependent)?
+                .DeclaringEntityType.GetSchema();
             if (
                 skipNavigationSchema != null
                 && entityType
@@ -465,8 +465,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType
         ) =>
             entityType
-                .FindAnnotation(RelationalAnnotationNames.ViewSchema)
-                ?.GetConfigurationSource();
+                .FindAnnotation(RelationalAnnotationNames.ViewSchema)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the views to which the entity type is mapped.
@@ -536,8 +536,8 @@ namespace Microsoft.EntityFrameworkCore
                     RelationalAnnotationNames.SqlQuery,
                     Check.NullButNotEmpty(name, nameof(name)),
                     fromDataAnnotation
-                )
-                ?.Value;
+                )?
+                .Value;
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the query SQL string.
@@ -610,8 +610,8 @@ namespace Microsoft.EntityFrameworkCore
                     RelationalAnnotationNames.FunctionName,
                     Check.NullButNotEmpty(name, nameof(name)),
                     fromDataAnnotation
-                )
-                ?.Value;
+                )?
+                .Value;
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the function name.
@@ -622,8 +622,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType
         ) =>
             entityType
-                .FindAnnotation(RelationalAnnotationNames.FunctionName)
-                ?.GetConfigurationSource();
+                .FindAnnotation(RelationalAnnotationNames.FunctionName)?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Returns the functions to which the entity type is mapped.
@@ -1096,8 +1096,8 @@ namespace Microsoft.EntityFrameworkCore
                     RelationalAnnotationNames.IsTableExcludedFromMigrations,
                     excluded,
                     fromDataAnnotation
-                )
-                ?.Value;
+                )?
+                .Value;
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for <see cref="IsTableExcludedFromMigrations" />.
@@ -1108,7 +1108,7 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType
         ) =>
             entityType
-                .FindAnnotation(RelationalAnnotationNames.IsTableExcludedFromMigrations)
-                ?.GetConfigurationSource();
+                .FindAnnotation(RelationalAnnotationNames.IsTableExcludedFromMigrations)?
+                .GetConfigurationSource();
     }
 }

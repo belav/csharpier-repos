@@ -134,7 +134,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 CoreAnnotationNames.DiscriminatorMappingComplete,
                 complete,
                 fromDataAnnotation
-            )?.Value;
+            )
+                ?
+                .Value;
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the discriminator value completeness.
@@ -142,7 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>The <see cref="ConfigurationSource" /> or <see langword="null" /> if discriminator completeness has not been set.</returns>
         ConfigurationSource? GetDiscriminatorMappingCompleteConfigurationSource() =>
             FindAnnotation(CoreAnnotationNames.DiscriminatorMappingComplete)
-                ?.GetConfigurationSource();
+                ?
+                .GetConfigurationSource();
 
         /// <summary>
         ///     Sets the discriminator value for this entity type.
@@ -155,7 +158,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 CoreAnnotationNames.DiscriminatorValue,
                 EntityType.CheckDiscriminatorValue(this, value),
                 fromDataAnnotation
-            )?.Value;
+            )
+                ?
+                .Value;
 
         /// <summary>
         ///     Removes the discriminator value for this entity type.

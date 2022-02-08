@@ -30,10 +30,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 {
                     _span = value;
 
-                    TagsChanged?.Invoke(
-                        this,
-                        new SnapshotSpanEventArgs(_textBuffer.CurrentSnapshot.GetFullSpan())
-                    );
+                    TagsChanged
+                        ?
+                        .Invoke(
+                            this,
+                            new SnapshotSpanEventArgs(_textBuffer.CurrentSnapshot.GetFullSpan())
+                        );
                 }
             }
 

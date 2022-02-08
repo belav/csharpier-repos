@@ -140,8 +140,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             }
 
             // Bail out if analyzer has been turned off through options.
-            var option = compilationWithAnalyzers.AnalysisOptions.Options
-                ?.GetOption(
+            var option = compilationWithAnalyzers.AnalysisOptions
+                .Options?
+                .GetOption(
                     CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions,
                     tree,
                     cancellationToken

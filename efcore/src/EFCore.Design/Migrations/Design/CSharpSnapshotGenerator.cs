@@ -590,7 +590,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             ?? (
                 property.FindTypeMapping()
                 ?? Dependencies.RelationalTypeMappingSource.FindMapping(property)
-            )?.Converter;
+            )
+                ?
+                .Converter;
 
         /// <summary>
         ///     Generates code for <see cref="IKey" /> objects.
@@ -947,7 +949,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     )!;
                     var propertyClrType =
                         FindValueConverter(discriminatorProperty)
-                            ?.ProviderClrType.MakeNullable(discriminatorProperty.IsNullable)
+                            ?
+                            .ProviderClrType.MakeNullable(discriminatorProperty.IsNullable)
                         ?? discriminatorProperty.ClrType;
                     stringBuilder
                         .Append("<")

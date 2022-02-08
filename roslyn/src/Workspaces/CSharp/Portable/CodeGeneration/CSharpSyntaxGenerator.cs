@@ -944,7 +944,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             var itypes = interfaceTypes
-                ?.Select(i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i))
+                ?
+                .Select(i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i))
                 .ToList();
             if (itypes?.Count == 0)
             {
@@ -971,7 +972,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             var itypes = interfaceTypes
-                ?.Select(i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i))
+                ?
+                .Select(i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i))
                 .ToList();
             if (itypes?.Count == 0)
             {
@@ -3052,17 +3054,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     return ((LocalFunctionStatementSyntax)declaration).Body?.Statements
                         ?? s_EmptyList;
                 case SyntaxKind.AnonymousMethodExpression:
-                    return (
-                            ((AnonymousMethodExpressionSyntax)declaration).Body as BlockSyntax
-                        )?.Statements ?? s_EmptyList;
+                    return (((AnonymousMethodExpressionSyntax)declaration).Body as BlockSyntax)
+                            ?
+                            .Statements ?? s_EmptyList;
                 case SyntaxKind.ParenthesizedLambdaExpression:
-                    return (
-                            ((ParenthesizedLambdaExpressionSyntax)declaration).Body as BlockSyntax
-                        )?.Statements ?? s_EmptyList;
+                    return (((ParenthesizedLambdaExpressionSyntax)declaration).Body as BlockSyntax)
+                            ?
+                            .Statements ?? s_EmptyList;
                 case SyntaxKind.SimpleLambdaExpression:
-                    return (
-                            ((SimpleLambdaExpressionSyntax)declaration).Body as BlockSyntax
-                        )?.Statements ?? s_EmptyList;
+                    return (((SimpleLambdaExpressionSyntax)declaration).Body as BlockSyntax)
+                            ?
+                            .Statements ?? s_EmptyList;
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.SetAccessorDeclaration:
                 case SyntaxKind.AddAccessorDeclaration:

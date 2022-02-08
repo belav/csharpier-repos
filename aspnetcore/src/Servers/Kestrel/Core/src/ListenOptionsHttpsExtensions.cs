@@ -284,7 +284,9 @@ public static class ListenOptionsHttpsExtensions
     )
     {
         var loggerFactory =
-            listenOptions.KestrelServerOptions?.ApplicationServices.GetRequiredService<ILoggerFactory>()
+            listenOptions
+                .KestrelServerOptions?
+                .ApplicationServices.GetRequiredService<ILoggerFactory>()
             ?? NullLoggerFactory.Instance;
 
         listenOptions.IsTls = true;
@@ -394,7 +396,9 @@ public static class ListenOptionsHttpsExtensions
         }
 
         var loggerFactory =
-            listenOptions.KestrelServerOptions?.ApplicationServices.GetRequiredService<ILoggerFactory>()
+            listenOptions
+                .KestrelServerOptions?
+                .ApplicationServices.GetRequiredService<ILoggerFactory>()
             ?? NullLoggerFactory.Instance;
 
         listenOptions.IsTls = true;

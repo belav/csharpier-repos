@@ -45,8 +45,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             // use the hub client logger for unexpected exceptions from devenv as well, so we have complete information in the log:
             services
-                .GetService<IWorkspaceTelemetryService>()
-                ?.RegisterUnexpectedExceptionLogger(hubClient.Logger);
+                .GetService<IWorkspaceTelemetryService>()?
+                .RegisterUnexpectedExceptionLogger(hubClient.Logger);
 
             _services = services;
             _serviceBrokerClient = serviceBrokerClient;
@@ -154,8 +154,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public override void Dispose()
         {
             _services
-                .GetService<IWorkspaceTelemetryService>()
-                ?.UnregisterUnexpectedExceptionLogger(_hubClient.Logger);
+                .GetService<IWorkspaceTelemetryService>()?
+                .UnregisterUnexpectedExceptionLogger(_hubClient.Logger);
             _hubClient.Dispose();
 
             _serviceBrokerClient.Dispose();

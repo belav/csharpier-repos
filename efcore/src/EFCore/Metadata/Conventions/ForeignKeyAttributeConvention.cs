@@ -409,10 +409,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
             }
 
-            return newRelationshipBuilder?.HasForeignKey(
-                fkPropertiesToSet,
-                fromDataAnnotation: true
-            );
+            return newRelationshipBuilder
+                ?
+                .HasForeignKey(fkPropertiesToSet, fromDataAnnotation: true);
         }
 
         private static IConventionForeignKeyBuilder? SplitNavigationsToSeparateRelationships(

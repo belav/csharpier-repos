@@ -100,8 +100,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Contract.ThrowIfTrue(completionItem.TextEdit != null);
 
                 var snippetsSupported =
-                    context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport
-                    ?? false;
+                    context.ClientCapabilities
+                        .TextDocument?
+                        .Completion?
+                        .CompletionItem?
+                        .SnippetSupport ?? false;
 
                 completionItem.TextEdit = await GenerateTextEditAsync(
                         document,

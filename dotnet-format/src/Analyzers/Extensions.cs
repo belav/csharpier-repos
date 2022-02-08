@@ -233,9 +233,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                     var notification = notificationProperty.GetValue(option);
                     var reportDiagnosticValue = notification
-                        ?.GetType()
-                        .GetProperty("Severity")
-                        ?.GetValue(notification);
+                        ?
+                        .GetType()
+                        .GetProperty("Severity")?
+                        .GetValue(notification);
                     if (reportDiagnosticValue is null)
                     {
                         continue;

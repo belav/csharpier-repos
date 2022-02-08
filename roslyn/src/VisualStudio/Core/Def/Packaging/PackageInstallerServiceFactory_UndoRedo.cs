@@ -46,19 +46,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
                     cancellationToken
                 );
-                undoManager?.Add(
-                    new UninstallPackageUndoUnit(
-                        this,
-                        source,
-                        packageName,
-                        version,
-                        includePrerelease,
-                        projectGuid,
-                        dte,
-                        dteProject,
-                        undoManager
-                    )
-                );
+                undoManager
+                    ?
+                    .Add(
+                        new UninstallPackageUndoUnit(
+                            this,
+                            source,
+                            packageName,
+                            version,
+                            includePrerelease,
+                            projectGuid,
+                            dte,
+                            dteProject,
+                            undoManager
+                        )
+                    );
             }
 
             return installed;
@@ -92,19 +94,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
                     cancellationToken
                 );
-                undoManager?.Add(
-                    new InstallPackageUndoUnit(
-                        this,
-                        source,
-                        packageName,
-                        version,
-                        includePrerelease,
-                        projectGuid,
-                        dte,
-                        dteProject,
-                        undoManager
-                    )
-                );
+                undoManager
+                    ?
+                    .Add(
+                        new InstallPackageUndoUnit(
+                            this,
+                            source,
+                            packageName,
+                            version,
+                            includePrerelease,
+                            projectGuid,
+                            dte,
+                            dteProject,
+                            undoManager
+                        )
+                    );
             }
 
             return uninstalled;

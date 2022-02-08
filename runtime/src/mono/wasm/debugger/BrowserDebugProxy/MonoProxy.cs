@@ -166,9 +166,11 @@ namespace Microsoft.WebAssembly.Diagnostics
 
                     if (!context.IsRuntimeReady)
                     {
-                        string exceptionError = args?["exceptionDetails"]?["exception"]?[
-                            "value"
-                        ]?.Value<string>();
+                        string exceptionError = args?
+                            ["exceptionDetails"]?
+                            ["exception"]?
+                            ["value"]?
+                            .Value<string>();
                         if (exceptionError == sPauseOnUncaught || exceptionError == sPauseOnCaught)
                             return true;
                     }
@@ -597,8 +599,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                         methodInfo = assembly.TypesByName.Values
                             .SingleOrDefault(
                                 t => t.FullName.StartsWith($"{typeName}/<{methodName}>")
-                            )
-                            ?.Methods.FirstOrDefault(mi => mi.Name == "MoveNext");
+                            )?
+                            .Methods.FirstOrDefault(mi => mi.Name == "MoveNext");
                     }
 
                     if (methodInfo == null)
@@ -857,9 +859,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                             MonoCommands.GetDetails(int.Parse(objectId.Value), args),
                             token
                         );
-                        string value_json_str = res.Value["result"]?["value"]?[
-                            "__value_as_json_string__"
-                        ]?.Value<string>();
+                        string value_json_str = res.Value["result"]
+                            ?
+                            ["value"]?
+                            ["__value_as_json_string__"]?
+                            .Value<string>();
                         return value_json_str != null ? JArray.Parse(value_json_str) : null;
                     }
                     default:

@@ -156,17 +156,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 document
             );
 
-            DiagnosticsUpdated?.Invoke(
-                this,
-                DiagnosticsUpdatedArgs.DiagnosticsCreated(
+            DiagnosticsUpdated
+                ?
+                .Invoke(
                     this,
-                    workspace,
-                    workspace.CurrentSolution,
-                    GetProjectId(workspace),
-                    GetDocumentId(workspace),
-                    ImmutableArray.Create(_diagnostic)
-                )
-            );
+                    DiagnosticsUpdatedArgs.DiagnosticsCreated(
+                        this,
+                        workspace,
+                        workspace.CurrentSolution,
+                        GetProjectId(workspace),
+                        GetDocumentId(workspace),
+                        ImmutableArray.Create(_diagnostic)
+                    )
+                );
         }
 
         private static DocumentId GetDocumentId(Workspace workspace) =>

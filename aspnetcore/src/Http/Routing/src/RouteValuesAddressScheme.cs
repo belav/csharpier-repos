@@ -117,8 +117,8 @@ internal sealed class RouteValuesAddressScheme
 
             if (
                 endpoint.Metadata
-                    .GetMetadata<ISuppressLinkGenerationMetadata>()
-                    ?.SuppressLinkGeneration == true
+                    .GetMetadata<ISuppressLinkGenerationMetadata>()?
+                    .SuppressLinkGeneration == true
             )
             {
                 continue;

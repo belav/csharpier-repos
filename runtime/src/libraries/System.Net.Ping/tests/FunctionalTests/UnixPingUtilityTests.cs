@@ -48,10 +48,10 @@ namespace System.Net.NetworkInformation.Tests
             )
             {
                 if (
-                    outputLine.Data?.Contains(
-                        "Destination Net Unreachable",
-                        StringComparison.OrdinalIgnoreCase
-                    ) == true
+                    outputLine
+                        .Data?
+                        .Contains("Destination Net Unreachable", StringComparison.OrdinalIgnoreCase)
+                    == true
                 )
                     destinationNetUnreachable = true;
             };

@@ -1502,8 +1502,9 @@ namespace System.Threading
 
         internal static IEnumerable<object> GetLocallyQueuedWorkItems()
         {
-            ThreadPoolWorkQueue.WorkStealingQueue? wsq =
-                ThreadPoolWorkQueueThreadLocals.threadLocals?.workStealingQueue;
+            ThreadPoolWorkQueue.WorkStealingQueue? wsq = ThreadPoolWorkQueueThreadLocals
+                .threadLocals?
+                .workStealingQueue;
             if (wsq != null && wsq.m_array != null)
             {
                 object?[] items = wsq.m_array;

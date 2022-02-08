@@ -294,9 +294,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         internal sealed override bool IsNullableAnalysisEnabled() =>
-            (
-                ContainingType as SourceMemberContainerTypeSymbol
-            )?.IsNullableEnabledForConstructorsAndInitializers(useStatic: false) ?? false;
+            (ContainingType as SourceMemberContainerTypeSymbol)
+                ?
+                .IsNullableEnabledForConstructorsAndInitializers(useStatic: false) ?? false;
 
         #endregion
 

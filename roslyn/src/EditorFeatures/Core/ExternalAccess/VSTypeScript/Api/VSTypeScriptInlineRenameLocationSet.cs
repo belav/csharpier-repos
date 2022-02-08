@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         {
             Contract.ThrowIfNull(set);
             _set = set;
-            Locations = set.Locations
-                ?.Select(x => new InlineRenameLocation(x.Document, x.TextSpan))
+            Locations = set.Locations?
+                .Select(x => new InlineRenameLocation(x.Document, x.TextSpan))
                 .ToList();
         }
 

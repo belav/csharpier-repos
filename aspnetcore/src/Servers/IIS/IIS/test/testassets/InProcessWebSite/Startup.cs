@@ -1022,8 +1022,9 @@ public partial class Startup
     public Task BodyLimit(HttpContext ctx) =>
         ctx.Response.WriteAsync(
             ctx.Features
-                .Get<IHttpMaxRequestBodySizeFeature>()
-                ?.MaxRequestBodySize?.ToString(CultureInfo.InvariantCulture) ?? "null"
+                .Get<IHttpMaxRequestBodySizeFeature>()?
+                .MaxRequestBodySize?
+                .ToString(CultureInfo.InvariantCulture) ?? "null"
         );
 
     public Task Anonymous(HttpContext context) =>

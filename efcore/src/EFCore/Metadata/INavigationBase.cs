@@ -67,10 +67,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             foreach (var serviceProperty in serviceProperties)
             {
-                ((ILazyLoader?)serviceProperty.GetGetter().GetClrValue(entity))?.SetLoaded(
-                    entity,
-                    Name
-                );
+                ((ILazyLoader?)serviceProperty.GetGetter().GetClrValue(entity))
+                    ?
+                    .SetLoaded(entity, Name);
             }
         }
     }

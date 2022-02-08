@@ -66,14 +66,16 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         cancellationToken
                     );
                     var nonConflictSymbolIds =
-                        nonConflictSymbols?.SelectAsArray(
-                            s =>
-                                SerializableSymbolAndProjectId.Dehydrate(
-                                    solution,
-                                    s,
-                                    cancellationToken
-                                )
-                        ) ?? default;
+                        nonConflictSymbols
+                            ?
+                            .SelectAsArray(
+                                s =>
+                                    SerializableSymbolAndProjectId.Dehydrate(
+                                        solution,
+                                        s,
+                                        cancellationToken
+                                    )
+                            ) ?? default;
 
                     var result = await client
                         .TryInvokeAsync<IRemoteRenamerService, SerializableConflictResolution?>(

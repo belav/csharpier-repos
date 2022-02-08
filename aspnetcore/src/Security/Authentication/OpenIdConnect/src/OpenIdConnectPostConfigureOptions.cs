@@ -119,10 +119,9 @@ public class OpenIdConnectPostConfigureOptions : IPostConfigureOptions<OpenIdCon
                 if (
                     options.RequireHttpsMetadata
                     && !(
-                        options.MetadataAddress?.StartsWith(
-                            "https://",
-                            StringComparison.OrdinalIgnoreCase
-                        ) ?? false
+                        options
+                            .MetadataAddress?
+                            .StartsWith("https://", StringComparison.OrdinalIgnoreCase) ?? false
                     )
                 )
                 {

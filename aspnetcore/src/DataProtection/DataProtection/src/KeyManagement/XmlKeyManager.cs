@@ -406,8 +406,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         }
 
         Interlocked
-            .Exchange(ref _cacheExpirationTokenSource, new CancellationTokenSource())
-            ?.Cancel();
+            .Exchange(ref _cacheExpirationTokenSource, new CancellationTokenSource())?
+            .Cancel();
     }
 
     private void WriteKeyDeserializationErrorToLog(Exception error, XElement keyElement)

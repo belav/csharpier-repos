@@ -200,8 +200,8 @@ internal class InternalUsageAnalyzer
                 Diagnostic.Create(
                     _descriptor,
                     symbolForDiagnostic.DeclaringSyntaxReferences
-                        .FirstOrDefault()
-                        ?.GetSyntax()
+                        .FirstOrDefault()?
+                        .GetSyntax()
                         .GetLocation() ?? Location.None,
                     symbol.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
                 )
@@ -216,8 +216,8 @@ internal class InternalUsageAnalyzer
                 Diagnostic.Create(
                     _descriptor,
                     symbolForDiagnostic.DeclaringSyntaxReferences
-                        .FirstOrDefault()
-                        ?.GetSyntax()
+                        .FirstOrDefault()?
+                        .GetSyntax()
                         .GetLocation() ?? Location.None,
                     containingType.ToDisplayString(
                         SymbolDisplayFormat.CSharpShortErrorMessageFormat

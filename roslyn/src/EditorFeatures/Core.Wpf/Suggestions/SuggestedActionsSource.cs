@@ -168,10 +168,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return null;
 
                 using (
-                    operationContext?.AddScope(
-                        allowCancellation: true,
-                        description: EditorFeaturesResources.Gathering_Suggestions_Waiting_for_the_solution_to_fully_load
-                    )
+                    operationContext
+                        ?
+                        .AddScope(
+                            allowCancellation: true,
+                            description: EditorFeaturesResources.Gathering_Suggestions_Waiting_for_the_solution_to_fully_load
+                        )
                 )
                 {
                     // This needs to run under threading context otherwise, we can deadlock on VS
@@ -204,13 +206,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     var selection = TryGetCodeRefactoringSelection(state, range);
 
                     Func<string, IDisposable?> addOperationScope = description =>
-                        operationContext?.AddScope(
-                            allowCancellation: true,
-                            string.Format(
-                                EditorFeaturesResources.Gathering_Suggestions_0,
-                                description
-                            )
-                        );
+                        operationContext
+                            ?
+                            .AddScope(
+                                allowCancellation: true,
+                                string.Format(
+                                    EditorFeaturesResources.Gathering_Suggestions_0,
+                                    description
+                                )
+                            );
 
                     // We convert the code fixes and refactorings to UnifiedSuggestedActionSets instead of
                     // SuggestedActionSets so that we can share logic between local Roslyn and LSP.

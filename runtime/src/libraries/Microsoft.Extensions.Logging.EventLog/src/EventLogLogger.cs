@@ -99,23 +99,25 @@ namespace Microsoft.Extensions.Logging.EventLog
                 .Append(eventId.Id)
                 .AppendLine();
 
-            _externalScopeProvider?.ForEachScope(
-                (scope, sb) =>
-                {
-                    if (scope is IEnumerable<KeyValuePair<string, object>> properties)
+            _externalScopeProvider
+                ?
+                .ForEachScope(
+                    (scope, sb) =>
                     {
-                        foreach (KeyValuePair<string, object> pair in properties)
+                        if (scope is IEnumerable<KeyValuePair<string, object>> properties)
                         {
-                            sb.Append(pair.Key).Append(": ").AppendLine(pair.Value?.ToString());
+                            foreach (KeyValuePair<string, object> pair in properties)
+                            {
+                                sb.Append(pair.Key).Append(": ").AppendLine(pair.Value?.ToString());
+                            }
                         }
-                    }
-                    else if (scope != null)
-                    {
-                        sb.AppendLine(scope.ToString());
-                    }
-                },
-                builder
-            );
+                        else if (scope != null)
+                        {
+                            sb.AppendLine(scope.ToString());
+                        }
+                    },
+                    builder
+                );
 
             builder.AppendLine().AppendLine(message);
 

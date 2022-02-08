@@ -55,8 +55,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _logPerformanceInfo = logPerformanceInfo;
             _onAnalysisException = onAnalysisException;
 
-            var compilationBasedAnalyzers =
-                compilationWithAnalyzers?.Analyzers.ToImmutableHashSet();
+            var compilationBasedAnalyzers = compilationWithAnalyzers
+                ?
+                .Analyzers.ToImmutableHashSet();
             _compilationBasedAnalyzersInAnalysisScope =
                 compilationBasedAnalyzers != null
                     ? analysisScope.Analyzers.WhereAsArray(compilationBasedAnalyzers.Contains)
