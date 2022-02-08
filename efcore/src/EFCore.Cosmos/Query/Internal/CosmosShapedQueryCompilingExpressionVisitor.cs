@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public partial class CosmosShapedQueryCompilingExpressionVisitor : ShapedQueryCompilingExpressionVisitor
+    public partial class CosmosShapedQueryCompilingExpressionVisitor
+        : ShapedQueryCompilingExpressionVisitor
     {
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
         private readonly IQuerySqlGeneratorFactory _querySqlGeneratorFactory;
@@ -35,13 +36,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryCompilingExpressionVisitorDependencies dependencies,
             CosmosQueryCompilationContext cosmosQueryCompilationContext,
             ISqlExpressionFactory sqlExpressionFactory,
-            IQuerySqlGeneratorFactory querySqlGeneratorFactory)
-            : base(dependencies, cosmosQueryCompilationContext)
+            IQuerySqlGeneratorFactory querySqlGeneratorFactory
+        ) : base(dependencies, cosmosQueryCompilationContext)
         {
             _sqlExpressionFactory = sqlExpressionFactory;
             _querySqlGeneratorFactory = querySqlGeneratorFactory;
             _contextType = cosmosQueryCompilationContext.ContextType;
-            _threadSafetyChecksEnabled = dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
+            _threadSafetyChecksEnabled =
+                dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
             _partitionKeyFromExtension = cosmosQueryCompilationContext.PartitionKeyFromExtension;
         }
 
@@ -63,20 +65,26 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 case SelectExpression selectExpression:
                     shaperBody = new CosmosProjectionBindingRemovingExpressionVisitor(
-                            selectExpression, jObjectParameter,
-                            QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll)
-                        .Visit(shaperBody);
+                        selectExpression,
+                        jObjectParameter,
+                        QueryCompilationContext.QueryTrackingBehavior
+                            == QueryTrackingBehavior.TrackAll
+                    ).Visit(shaperBody);
 
                     var shaperLambda = Expression.Lambda(
                         shaperBody,
                         QueryCompilationContext.QueryContextParameter,
-                        jObjectParameter);
+                        jObjectParameter
+                    );
 
                     return Expression.New(
-                        typeof(QueryingEnumerable<>).MakeGenericType(shaperLambda.ReturnType).GetConstructors()[0],
+                        typeof(QueryingEnumerable<>)
+                            .MakeGenericType(shaperLambda.ReturnType)
+                            .GetConstructors()[0],
                         Expression.Convert(
                             QueryCompilationContext.QueryContextParameter,
-                            typeof(CosmosQueryContext)),
+                            typeof(CosmosQueryContext)
+                        ),
                         Expression.Constant(_sqlExpressionFactory),
                         Expression.Constant(_querySqlGeneratorFactory),
                         Expression.Constant(selectExpression),
@@ -84,34 +92,48 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         Expression.Constant(_contextType),
                         Expression.Constant(_partitionKeyFromExtension, typeof(string)),
                         Expression.Constant(
-                            QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
-                        Expression.Constant(_threadSafetyChecksEnabled));
+                            QueryCompilationContext.QueryTrackingBehavior
+                                == QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                        ),
+                        Expression.Constant(_threadSafetyChecksEnabled)
+                    );
 
                 case ReadItemExpression readItemExpression:
                     shaperBody = new CosmosProjectionBindingRemovingReadItemExpressionVisitor(
-                            readItemExpression, jObjectParameter,
-                            QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll)
-                        .Visit(shaperBody);
+                        readItemExpression,
+                        jObjectParameter,
+                        QueryCompilationContext.QueryTrackingBehavior
+                            == QueryTrackingBehavior.TrackAll
+                    ).Visit(shaperBody);
 
                     var shaperReadItemLambda = Expression.Lambda(
                         shaperBody,
                         QueryCompilationContext.QueryContextParameter,
-                        jObjectParameter);
+                        jObjectParameter
+                    );
 
                     return Expression.New(
-                        typeof(ReadItemQueryingEnumerable<>).MakeGenericType(shaperReadItemLambda.ReturnType).GetConstructors()[0],
+                        typeof(ReadItemQueryingEnumerable<>)
+                            .MakeGenericType(shaperReadItemLambda.ReturnType)
+                            .GetConstructors()[0],
                         Expression.Convert(
                             QueryCompilationContext.QueryContextParameter,
-                            typeof(CosmosQueryContext)),
+                            typeof(CosmosQueryContext)
+                        ),
                         Expression.Constant(readItemExpression),
                         Expression.Constant(shaperReadItemLambda.Compile()),
                         Expression.Constant(_contextType),
                         Expression.Constant(
-                            QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
-                        Expression.Constant(_threadSafetyChecksEnabled));
+                            QueryCompilationContext.QueryTrackingBehavior
+                                == QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                        ),
+                        Expression.Constant(_threadSafetyChecksEnabled)
+                    );
 
                 default:
-                    throw new NotSupportedException(CoreStrings.UnhandledExpressionNode(shapedQueryExpression.QueryExpression));
+                    throw new NotSupportedException(
+                        CoreStrings.UnhandledExpressionNode(shapedQueryExpression.QueryExpression)
+                    );
             }
         }
     }

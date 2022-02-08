@@ -19,42 +19,64 @@ public class StartupForDynamic
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services
-            .AddMvc()
-            .AddNewtonsoftJson();
+        services.AddMvc().AddNewtonsoftJson();
 
         services.AddTransient<Transformer>();
         services.AddScoped<TestResponseGenerator>();
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
         // Used by some controllers defined in this project.
-        services.Configure<RouteOptions>(options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer));
+        services.Configure<RouteOptions>(
+            options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
+        );
     }
 
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDynamicControllerRoute<Transformer>("v1/dynamic/{**slug}", new DynamicVersion { Version = "V1" });
-            endpoints.MapDynamicControllerRoute<Transformer>("v2/dynamic/{**slug}", new DynamicVersion { Version = "V2" });
-            endpoints.MapDynamicPageRoute<Transformer>("v1/dynamicpage/{**slug}", new DynamicVersion { Version = "V1" });
-            endpoints.MapDynamicPageRoute<Transformer>("v2/dynamicpage/{**slug}", new DynamicVersion { Version = "V2" });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDynamicControllerRoute<Transformer>(
+                    "v1/dynamic/{**slug}",
+                    new DynamicVersion { Version = "V1" }
+                );
+                endpoints.MapDynamicControllerRoute<Transformer>(
+                    "v2/dynamic/{**slug}",
+                    new DynamicVersion { Version = "V2" }
+                );
+                endpoints.MapDynamicPageRoute<Transformer>(
+                    "v1/dynamicpage/{**slug}",
+                    new DynamicVersion { Version = "V1" }
+                );
+                endpoints.MapDynamicPageRoute<Transformer>(
+                    "v2/dynamicpage/{**slug}",
+                    new DynamicVersion { Version = "V2" }
+                );
 
-            endpoints.MapControllerRoute("link", "link_generation/{controller}/{action}/{id?}");
+                endpoints.MapControllerRoute("link", "link_generation/{controller}/{action}/{id?}");
+            }
+        );
 
-        });
-
-        app.Map("/afterrouting", b => b.Run(c =>
-        {
-            return c.Response.WriteAsync("Hello from middleware after routing");
-        }));
+        app.Map(
+            "/afterrouting",
+            b =>
+                b.Run(
+                    c =>
+                    {
+                        return c.Response.WriteAsync("Hello from middleware after routing");
+                    }
+                )
+        );
     }
 
     private class Transformer : DynamicRouteValueTransformer
     {
         // Turns a format like `controller=Home,action=Index` into an RVD
-        public override ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
+        public override ValueTask<RouteValueDictionary> TransformAsync(
+            HttpContext httpContext,
+            RouteValueDictionary values
+        )
         {
             var kvps = ((string)values["slug"]).Split(",");
 
@@ -70,7 +92,11 @@ public class StartupForDynamic
             return new ValueTask<RouteValueDictionary>(results);
         }
 
-        public override ValueTask<IReadOnlyList<Endpoint>> FilterAsync(HttpContext httpContext, RouteValueDictionary values, IReadOnlyList<Endpoint> endpoints)
+        public override ValueTask<IReadOnlyList<Endpoint>> FilterAsync(
+            HttpContext httpContext,
+            RouteValueDictionary values,
+            IReadOnlyList<Endpoint> endpoints
+        )
         {
             var version = ((DynamicVersion)State).Version;
             if (version == "V2" && version == (string)values["version"])

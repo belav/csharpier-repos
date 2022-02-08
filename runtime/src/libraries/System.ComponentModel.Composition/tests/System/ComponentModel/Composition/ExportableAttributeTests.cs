@@ -83,21 +83,23 @@ namespace System.ComponentModel.Composition
         [Name("MEF")]
         [Name("MEF2")]
         [PartNotDiscoverable]
-        public class BasicTestComponentWithInvalidMetadata
-        {
-        }
+        public class BasicTestComponentWithInvalidMetadata { }
 
         [Fact]
         [Trait("Type", "Integration")]
         public void InvalidMetadataAttributeTest()
         {
-            ComposablePart part = AttributedModelServices.CreatePart(new BasicTestComponentWithInvalidMetadata());
+            ComposablePart part = AttributedModelServices.CreatePart(
+                new BasicTestComponentWithInvalidMetadata()
+            );
             ExportDefinition export = part.ExportDefinitions.First();
 
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-            {
-                var metadata = export.Metadata;
-            });
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var metadata = export.Metadata;
+                }
+            );
 
             Assert.Contains("Bar", ex.Message);
         }
@@ -106,35 +108,45 @@ namespace System.ComponentModel.Composition
         [MetadataAttribute]
         public class MetadataWithInvalidCustomAttributeType : Attribute
         {
-            public PersonClass Person { get { return new PersonClass(); } }
+            public PersonClass Person
+            {
+                get { return new PersonClass(); }
+            }
 
             public class PersonClass
             {
-                public string First { get { return "George"; } }
-                public string Last { get { return "Washington"; } }
+                public string First
+                {
+                    get { return "George"; }
+                }
+                public string Last
+                {
+                    get { return "Washington"; }
+                }
             }
         }
 
         [Export]
         [MetadataWithInvalidCustomAttributeType]
         [PartNotDiscoverable]
-        public class ClassWithInvalidCustomAttributeType
-        {
-
-        }
+        public class ClassWithInvalidCustomAttributeType { }
 
         [Fact]
         public void InvalidAttributType_CustomType_ShouldThrow()
         {
-            ComposablePart part = AttributedModelServices.CreatePart(new ClassWithInvalidCustomAttributeType());
+            ComposablePart part = AttributedModelServices.CreatePart(
+                new ClassWithInvalidCustomAttributeType()
+            );
             ExportDefinition export = part.ExportDefinitions.First();
 
             // Should throw InvalidOperationException during discovery because
             // the person class is an invalid metadata type
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                var metadata = export.Metadata;
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var metadata = export.Metadata;
+                }
+            );
         }
 
         [AttributeUsage(AttributeTargets.All)]
@@ -145,40 +157,48 @@ namespace System.ComponentModel.Composition
             {
                 this.Version = new Version(1, 1);
             }
+
             public Version Version { get; set; }
         }
 
         [Export]
         [MetadataWithInvalidVersionPropertyAttributeType]
         [PartNotDiscoverable]
-        public class ClassWithInvalidVersionPropertyAttributeType
-        {
-
-        }
+        public class ClassWithInvalidVersionPropertyAttributeType { }
 
         [Fact]
         public void InvalidAttributType_VersionPropertyType_ShouldThrow()
         {
-            ComposablePart part = AttributedModelServices.CreatePart(new ClassWithInvalidVersionPropertyAttributeType());
+            ComposablePart part = AttributedModelServices.CreatePart(
+                new ClassWithInvalidVersionPropertyAttributeType()
+            );
             ExportDefinition export = part.ExportDefinitions.First();
 
             // Should throw InvalidOperationException during discovery because
             // the person class is an invalid metadata type
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                var metadata = export.Metadata;
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var metadata = export.Metadata;
+                }
+            );
         }
 
         [MetadataAttribute]
         public class BaseMetadataAttribute : Attribute
         {
-            public string BaseKey { get { return "BaseValue"; } }
+            public string BaseKey
+            {
+                get { return "BaseValue"; }
+            }
         }
 
         public class DerivedMetadataAttribute : BaseMetadataAttribute
         {
-            public string DerivedKey { get { return "DerivedValue"; } }
+            public string DerivedKey
+            {
+                get { return "DerivedValue"; }
+            }
         }
 
         [Export]
@@ -188,7 +208,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void DerivedMetadataAttributeAttribute_ShouldSupplyMetadata()
         {
-            ComposablePart part = AttributedModelServices.CreatePart(new ExportWithDerivedMetadataAttribute());
+            ComposablePart part = AttributedModelServices.CreatePart(
+                new ExportWithDerivedMetadataAttribute()
+            );
             ExportDefinition export = part.ExportDefinitions.Single();
 
             Assert.Equal("BaseValue", export.Metadata["BaseKey"]);
@@ -200,15 +222,30 @@ namespace System.ComponentModel.Composition
     [MetadataAttribute]
     public class BasicMetadataAttribute : Attribute
     {
-        public string String1 { get { return "One"; } }
+        public string String1
+        {
+            get { return "One"; }
+        }
 
-        public string String2 { get { return "Two"; } }
+        public string String2
+        {
+            get { return "Two"; }
+        }
 
-        public int[] Numbers { get { return new int[] { 1, 2, 3 }; } }
+        public int[] Numbers
+        {
+            get { return new int[] { 1, 2, 3 }; }
+        }
 
-        public CreationPolicy Policy { get { return CreationPolicy.NonShared; } }
+        public CreationPolicy Policy
+        {
+            get { return CreationPolicy.NonShared; }
+        }
 
-        public Type Type { get { return typeof(BasicMetadataAttribute); } }
+        public Type Type
+        {
+            get { return typeof(BasicMetadataAttribute); }
+        }
     }
 
     public interface IStronglyTypedStructure
@@ -224,7 +261,10 @@ namespace System.ComponentModel.Composition
     [MetadataAttribute]
     public class Name : Attribute
     {
-        public Name(string name) { Bar = name; }
+        public Name(string name)
+        {
+            Bar = name;
+        }
 
         public string Bar { set; get; }
     }
@@ -232,7 +272,5 @@ namespace System.ComponentModel.Composition
     [PartNotDiscoverable]
     [Export]
     [BasicMetadata]
-    public class BasicTestComponent
-    {
-    }
+    public class BasicTestComponent { }
 }

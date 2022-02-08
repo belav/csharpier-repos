@@ -39,19 +39,31 @@ namespace AutoMapper.UnitTests.Bug
             public string DPropertyLevel2 { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<SourceLevel0, DestinationLevel0>()
-                .ForMember(dest => dest.DPropertyLevel0, o => o.MapFrom(src => src.SPropertyLevel0));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<SourceLevel0, DestinationLevel0>()
+                        .ForMember(
+                            dest => dest.DPropertyLevel0,
+                            o => o.MapFrom(src => src.SPropertyLevel0)
+                        );
 
-            cfg.CreateMap<SourceLevel1, DestinationLevel1>()
-                .IncludeBase<SourceLevel0, DestinationLevel0>()
-                .ForMember(dest => dest.DPropertyLevel1, o => o.MapFrom(src => src.SPropertyLevel1));
+                    cfg.CreateMap<SourceLevel1, DestinationLevel1>()
+                        .IncludeBase<SourceLevel0, DestinationLevel0>()
+                        .ForMember(
+                            dest => dest.DPropertyLevel1,
+                            o => o.MapFrom(src => src.SPropertyLevel1)
+                        );
 
-            cfg.CreateMap<SourceLevel2, DestinationLevel2>()
-                .IncludeBase<SourceLevel1, DestinationLevel1>()
-                .ForMember(dest => dest.DPropertyLevel2, o => o.MapFrom(src => src.SPropertyLevel2));
-        });
+                    cfg.CreateMap<SourceLevel2, DestinationLevel2>()
+                        .IncludeBase<SourceLevel1, DestinationLevel1>()
+                        .ForMember(
+                            dest => dest.DPropertyLevel2,
+                            o => o.MapFrom(src => src.SPropertyLevel2)
+                        );
+                }
+            );
 
         protected override void Because_of()
         {

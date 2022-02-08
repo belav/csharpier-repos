@@ -2,7 +2,7 @@
 array-coop-*.cs
 
 Author:
-    Jay Krell (jaykrell@microsoft.com)
+Jay Krell (jaykrell@microsoft.com)
 
 Copyright 2018 Microsoft
 Licensed under the MIT license. See LICENSE file in the project root for full license information.

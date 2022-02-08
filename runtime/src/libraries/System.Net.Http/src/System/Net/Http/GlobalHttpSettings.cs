@@ -10,10 +10,12 @@ namespace System.Net.Http
     {
         internal static class DiagnosticsHandler
         {
-            public static bool EnableActivityPropagation { get; } = RuntimeSettingParser.QueryRuntimeSettingSwitch(
-                "System.Net.Http.EnableActivityPropagation",
-                "DOTNET_SYSTEM_NET_HTTP_ENABLEACTIVITYPROPAGATION",
-                true);
+            public static bool EnableActivityPropagation { get; } =
+                RuntimeSettingParser.QueryRuntimeSettingSwitch(
+                    "System.Net.Http.EnableActivityPropagation",
+                    "DOTNET_SYSTEM_NET_HTTP_ENABLEACTIVITYPROPAGATION",
+                    true
+                );
         }
 
 #if !BROWSER
@@ -21,29 +23,36 @@ namespace System.Net.Http
         {
             // Default to allowing HTTP/2, but enable that to be overridden by an
             // AppContext switch, or by an environment variable being set to false/0.
-            public static bool AllowHttp2 { get; } = RuntimeSettingParser.QueryRuntimeSettingSwitch(
-                "System.Net.Http.SocketsHttpHandler.Http2Support",
-                "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2SUPPORT",
-                true);
+            public static bool AllowHttp2 { get; } =
+                RuntimeSettingParser.QueryRuntimeSettingSwitch(
+                    "System.Net.Http.SocketsHttpHandler.Http2Support",
+                    "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2SUPPORT",
+                    true
+                );
 
             // Default to disable HTTP/3 (and by an extent QUIC), but enable that to be overridden
             // by an AppContext switch, or by an environment variable being set to true/1.
-            public static bool AllowHttp3 { get; } = RuntimeSettingParser.QueryRuntimeSettingSwitch(
-                "System.Net.SocketsHttpHandler.Http3Support",
-                "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP3SUPPORT",
-                false);
+            public static bool AllowHttp3 { get; } =
+                RuntimeSettingParser.QueryRuntimeSettingSwitch(
+                    "System.Net.SocketsHttpHandler.Http3Support",
+                    "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP3SUPPORT",
+                    false
+                );
 
             // Switch to disable the HTTP/2 dynamic window scaling algorithm. Enabled by default.
-            public static bool DisableDynamicHttp2WindowSizing { get; } = RuntimeSettingParser.QueryRuntimeSettingSwitch(
-                "System.Net.SocketsHttpHandler.Http2FlowControl.DisableDynamicWindowSizing",
-                "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2FLOWCONTROL_DISABLEDYNAMICWINDOWSIZING",
-                false);
+            public static bool DisableDynamicHttp2WindowSizing { get; } =
+                RuntimeSettingParser.QueryRuntimeSettingSwitch(
+                    "System.Net.SocketsHttpHandler.Http2FlowControl.DisableDynamicWindowSizing",
+                    "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2FLOWCONTROL_DISABLEDYNAMICWINDOWSIZING",
+                    false
+                );
 
             // The maximum size of the HTTP/2 stream receive window. Defaults to 16 MB.
             public static int MaxHttp2StreamWindowSize { get; } = GetMaxHttp2StreamWindowSize();
 
             // Defaults to 1.0. Higher values result in shorter window, but slower downloads.
-            public static double Http2StreamWindowScaleThresholdMultiplier { get; } = GetHttp2StreamWindowScaleThresholdMultiplier();
+            public static double Http2StreamWindowScaleThresholdMultiplier { get; } =
+                GetHttp2StreamWindowScaleThresholdMultiplier();
 
             public const int DefaultHttp2MaxStreamWindowSize = 16 * 1024 * 1024;
             public const double DefaultHttp2StreamWindowScaleThresholdMultiplier = 1.0;
@@ -52,7 +61,8 @@ namespace System.Net.Http
             {
                 int value = RuntimeSettingParser.ParseInt32EnvironmentVariableValue(
                     "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_FLOWCONTROL_MAXSTREAMWINDOWSIZE",
-                    DefaultHttp2MaxStreamWindowSize);
+                    DefaultHttp2MaxStreamWindowSize
+                );
 
                 // Disallow small values:
                 if (value < HttpHandlerDefaults.DefaultInitialHttp2StreamWindowSize)
@@ -66,7 +76,8 @@ namespace System.Net.Http
             {
                 double value = RuntimeSettingParser.ParseDoubleEnvironmentVariableValue(
                     "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_FLOWCONTROL_STREAMWINDOWSCALETHRESHOLDMULTIPLIER",
-                    DefaultHttp2StreamWindowScaleThresholdMultiplier);
+                    DefaultHttp2StreamWindowScaleThresholdMultiplier
+                );
 
                 // Disallow negative values:
                 if (value < 0)

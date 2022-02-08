@@ -33,7 +33,7 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             ConsoleColor? colorNull = null,
             int? integer = 12,
             int? integerNull = null
-            //StructWithPublicDefaultConstructor structWithConstructor = default
+        //StructWithPublicDefaultConstructor structWithConstructor = default
         )
 #pragma warning restore SA1129
         {

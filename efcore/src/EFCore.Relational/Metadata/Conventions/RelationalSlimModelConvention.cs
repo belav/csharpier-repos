@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public RelationalSlimModelConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies)
         {
             RelationalDependencies = relationalDependencies;
         }
@@ -44,18 +44,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="slimModel"> The target model that will contain the annotations. </param>
         /// <param name="runtime"> Indicates whether the given annotations are runtime annotations. </param>
         protected override void ProcessModelAnnotations(
-            Dictionary<string, object?> annotations, IModel model, SlimModel slimModel, bool runtime)
+            Dictionary<string, object?> annotations,
+            IModel model,
+            SlimModel slimModel,
+            bool runtime
+        )
         {
             base.ProcessModelAnnotations(annotations, model, slimModel, runtime);
 
             if (runtime)
             {
-                annotations[RelationalAnnotationNames.RelationalModel] =
-                    RelationalModel.Create(slimModel, RelationalDependencies.RelationalAnnotationProvider);
+                annotations[RelationalAnnotationNames.RelationalModel] = RelationalModel.Create(
+                    slimModel,
+                    RelationalDependencies.RelationalAnnotationProvider
+                );
             }
             else
             {
-                if (annotations.TryGetValue(RelationalAnnotationNames.DbFunctions, out var functions))
+                if (
+                    annotations.TryGetValue(
+                        RelationalAnnotationNames.DbFunctions,
+                        out var functions
+                    )
+                )
                 {
                     var slimFunctions = new SortedDictionary<string, IDbFunction>();
                     foreach (var functionPair in (SortedDictionary<string, IDbFunction>)functions!)
@@ -67,12 +78,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         {
                             var slimParameter = Create(parameter, slimFunction);
 
-                            CreateAnnotations(parameter, slimParameter, static (convention, annotations, source, target, runtime) =>
-                                convention.ProcessFunctionParameterAnnotations(annotations, source, target, runtime));
+                            CreateAnnotations(
+                                parameter,
+                                slimParameter,
+                                static (convention, annotations, source, target, runtime) =>
+                                    convention.ProcessFunctionParameterAnnotations(
+                                        annotations,
+                                        source,
+                                        target,
+                                        runtime
+                                    )
+                            );
                         }
 
-                        CreateAnnotations(functionPair.Value, slimFunction, static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessFunctionAnnotations(annotations, source, target, runtime));
+                        CreateAnnotations(
+                            functionPair.Value,
+                            slimFunction,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessFunctionAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
                     annotations[RelationalAnnotationNames.DbFunctions] = slimFunctions;
@@ -81,13 +110,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (annotations.TryGetValue(RelationalAnnotationNames.Sequences, out var sequences))
                 {
                     var slimSequences = new SortedDictionary<(string, string?), ISequence>();
-                    foreach (var sequencePair in (SortedDictionary<(string, string?), ISequence>)sequences!)
+                    foreach (
+                        var sequencePair in (SortedDictionary<
+                            (string, string?),
+                            ISequence
+                        >)sequences!
+                    )
                     {
                         var slimSequence = Create(sequencePair.Value, slimModel);
                         slimSequences[sequencePair.Key] = slimSequence;
 
-                        CreateAnnotations(sequencePair.Value, slimSequence, static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessSequenceAnnotations(annotations, source, target, runtime));
+                        CreateAnnotations(
+                            sequencePair.Value,
+                            slimSequence,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessSequenceAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
                     annotations[RelationalAnnotationNames.Sequences] = slimSequences;
@@ -103,7 +146,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="slimEntityType"> The target entity type that will contain the annotations. </param>
         /// <param name="runtime"> Indicates whether the given annotations are runtime annotations. </param>
         protected override void ProcessEntityTypeAnnotations(
-            IDictionary<string, object?> annotations, IEntityType entityType, SlimEntityType slimEntityType, bool runtime)
+            IDictionary<string, object?> annotations,
+            IEntityType entityType,
+            SlimEntityType slimEntityType,
+            bool runtime
+        )
         {
             base.ProcessEntityTypeAnnotations(annotations, entityType, slimEntityType, runtime);
 
@@ -117,16 +164,32 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                if (annotations.TryGetValue(RelationalAnnotationNames.CheckConstraints, out var constraints))
+                if (
+                    annotations.TryGetValue(
+                        RelationalAnnotationNames.CheckConstraints,
+                        out var constraints
+                    )
+                )
                 {
                     var slimCheckConstraints = new Dictionary<string, ICheckConstraint>();
-                    foreach (var constraintPair in (Dictionary<string, ICheckConstraint>?)constraints!)
+                    foreach (
+                        var constraintPair in (Dictionary<string, ICheckConstraint>?)constraints!
+                    )
                     {
                         var slimCheckConstraint = Create(constraintPair.Value, slimEntityType);
                         slimCheckConstraints[constraintPair.Key] = slimCheckConstraint;
 
-                        CreateAnnotations(constraintPair.Value, slimCheckConstraint, static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessCheckConstraintAnnotations(annotations, source, target, runtime));
+                        CreateAnnotations(
+                            constraintPair.Value,
+                            slimCheckConstraint,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessCheckConstraintAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
                     annotations[RelationalAnnotationNames.CheckConstraints] = slimCheckConstraints;
@@ -145,7 +208,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void CreateAnnotations<TSource, TTarget>(
             TSource source,
             TTarget target,
-            Action<RelationalSlimModelConvention, Dictionary<string, object?>, TSource, TTarget, bool> process)
+            Action<
+                RelationalSlimModelConvention,
+                Dictionary<string, object?>,
+                TSource,
+                TTarget,
+                bool
+            > process
+        )
             where TSource : IAnnotatable
             where TTarget : AnnotatableBase
         {
@@ -158,8 +228,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             target.AddRuntimeAnnotations(annotations);
         }
 
-        private SlimDbFunction Create(IDbFunction function, SlimModel slimModel)
-            => new SlimDbFunction(
+        private SlimDbFunction Create(IDbFunction function, SlimModel slimModel) =>
+            new SlimDbFunction(
                 function.ModelName,
                 slimModel,
                 function.MethodInfo,
@@ -172,7 +242,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 function.Schema,
                 function.StoreType,
                 function.TypeMapping,
-                function.Translation);
+                function.Translation
+            );
 
         /// <summary>
         ///     Updates the function annotations that will be set on the read-only object.
@@ -185,17 +256,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IDbFunction function,
             SlimDbFunction slimFunction,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
-        private SlimDbFunctionParameter Create(IDbFunctionParameter parameter, SlimDbFunction slimFunction)
-            => slimFunction.AddParameter(
+        private SlimDbFunctionParameter Create(
+            IDbFunctionParameter parameter,
+            SlimDbFunction slimFunction
+        ) =>
+            slimFunction.AddParameter(
                 parameter.Name,
                 parameter.ClrType,
                 parameter.PropagatesNullability,
                 parameter.StoreType,
-                parameter.TypeMapping);
+                parameter.TypeMapping
+            );
 
         /// <summary>
         ///     Updates the function parameter annotations that will be set on the read-only object.
@@ -208,12 +282,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IDbFunctionParameter parameter,
             SlimDbFunctionParameter slimParameter,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
-        private SlimSequence Create(ISequence sequence, SlimModel slimModel)
-            => new SlimSequence(
+        private SlimSequence Create(ISequence sequence, SlimModel slimModel) =>
+            new SlimSequence(
                 sequence.Name,
                 sequence.Schema,
                 slimModel,
@@ -222,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 sequence.IncrementBy,
                 sequence.IsCyclic,
                 sequence.MinValue,
-                sequence.MaxValue);
+                sequence.MaxValue
+            );
 
         /// <summary>
         ///     Updates the sequence annotations that will be set on the read-only object.
@@ -235,15 +309,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             ISequence sequence,
             SlimSequence slimSequence,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
-        private SlimCheckConstraint Create(ICheckConstraint checkConstraint, SlimEntityType slimEntityType)
-            => new SlimCheckConstraint(
-                checkConstraint.Name,
-                slimEntityType,
-                checkConstraint.Sql);
+        private SlimCheckConstraint Create(
+            ICheckConstraint checkConstraint,
+            SlimEntityType slimEntityType
+        ) => new SlimCheckConstraint(checkConstraint.Name, slimEntityType, checkConstraint.Sql);
 
         /// <summary>
         ///     Updates the check constraint annotations that will be set on the read-only object.
@@ -256,9 +328,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             ICheckConstraint checkConstraint,
             SlimCheckConstraint slimCheckConstraint,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
         /// <summary>
         ///     Updates the property annotations that will be set on the read-only object.
@@ -268,7 +339,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="slimProperty"> The target property that will contain the annotations. </param>
         /// <param name="runtime"> Indicates whether the given annotations are runtime annotations. </param>
         protected override void ProcessPropertyAnnotations(
-            Dictionary<string, object?> annotations, IProperty property, SlimProperty slimProperty, bool runtime)
+            Dictionary<string, object?> annotations,
+            IProperty property,
+            SlimProperty slimProperty,
+            bool runtime
+        )
         {
             base.ProcessPropertyAnnotations(annotations, property, slimProperty, runtime);
 
@@ -282,30 +357,53 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                if (annotations.TryGetValue(RelationalAnnotationNames.RelationalOverrides, out var overrides))
+                if (
+                    annotations.TryGetValue(
+                        RelationalAnnotationNames.RelationalOverrides,
+                        out var overrides
+                    )
+                )
                 {
-                    var slimPropertyOverrides = new SortedDictionary<StoreObjectIdentifier, IRelationalPropertyOverrides>();
-                    foreach (var overridesPair in (SortedDictionary<StoreObjectIdentifier, IRelationalPropertyOverrides>?)overrides!)
+                    var slimPropertyOverrides =
+                        new SortedDictionary<StoreObjectIdentifier, IRelationalPropertyOverrides>();
+                    foreach (
+                        var overridesPair in (SortedDictionary<
+                            StoreObjectIdentifier,
+                            IRelationalPropertyOverrides
+                        >?)overrides!
+                    )
                     {
                         var slimOverrides = Create(overridesPair.Value, slimProperty);
                         slimPropertyOverrides[overridesPair.Key] = slimOverrides;
 
-                        CreateAnnotations(overridesPair.Value, slimOverrides, static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessPropertyOverridesAnnotations(annotations, source, target, runtime));
+                        CreateAnnotations(
+                            overridesPair.Value,
+                            slimOverrides,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessPropertyOverridesAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
-                    annotations[RelationalAnnotationNames.RelationalOverrides] = slimPropertyOverrides;
+                    annotations[RelationalAnnotationNames.RelationalOverrides] =
+                        slimPropertyOverrides;
                 }
             }
         }
 
         private SlimRelationalPropertyOverrides Create(
             IRelationalPropertyOverrides propertyOverrides,
-            SlimProperty slimProperty)
-            => new SlimRelationalPropertyOverrides(
+            SlimProperty slimProperty
+        ) =>
+            new SlimRelationalPropertyOverrides(
                 slimProperty,
                 propertyOverrides.ColumnName,
-                propertyOverrides.ColumnNameOverriden);
+                propertyOverrides.ColumnNameOverriden
+            );
 
         /// <summary>
         ///     Updates the relational property overrides annotations that will be set on the read-only object.
@@ -318,9 +416,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IRelationalPropertyOverrides propertyOverrides,
             SlimRelationalPropertyOverrides slimPropertyOverrides,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
         /// <summary>
         ///     Updates the key annotations that will be set on the read-only object.
@@ -333,7 +430,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDictionary<string, object?> annotations,
             IKey key,
             SlimKey slimKey,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessKeyAnnotations(annotations, key, slimKey, runtime);
 
@@ -354,7 +452,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IIndex index,
             SlimIndex slimIndex,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessIndexAnnotations(annotations, index, slimIndex, runtime);
 
@@ -375,7 +474,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IForeignKey foreignKey,
             SlimForeignKey slimForeignKey,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessForeignKeyAnnotations(annotations, foreignKey, slimForeignKey, runtime);
 

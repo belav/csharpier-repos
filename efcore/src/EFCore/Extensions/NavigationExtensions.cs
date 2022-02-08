@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </returns>
         [DebuggerStepThrough]
         [Obsolete("Use IReadOnlyNavigation.IsOnDependent")]
-        public static bool IsDependentToPrincipal(this INavigation navigation)
-            => navigation.IsOnDependent;
+        public static bool IsDependentToPrincipal(this INavigation navigation) =>
+            navigation.IsOnDependent;
 
         /// <summary>
         ///     Gets a value indicating whether the given navigation property is a collection property.
@@ -37,8 +37,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </returns>
         [DebuggerStepThrough]
         [Obsolete("Use IReadOnlyNavigation.IsCollection")]
-        public static bool IsCollection(this INavigation navigation)
-            => navigation.IsCollection;
+        public static bool IsCollection(this INavigation navigation) => navigation.IsCollection;
 
         /// <summary>
         ///     Gets the navigation property on the other end of the relationship. Returns null if
@@ -50,8 +49,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </returns>
         [DebuggerStepThrough]
         [Obsolete("Use IReadOnlyNavigation.Inverse")]
-        public static INavigation? FindInverse(this INavigation navigation)
-            => navigation.Inverse;
+        public static INavigation? FindInverse(this INavigation navigation) => navigation.Inverse;
 
         /// <summary>
         ///     Gets the entity type that a given navigation property will hold an instance of
@@ -61,8 +59,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The target entity type.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use IReadOnlyNavigation.TargetEntityType")]
-        public static IEntityType GetTargetType(this INavigation navigation)
-            => navigation.TargetEntityType;
+        public static IEntityType GetTargetType(this INavigation navigation) =>
+            navigation.TargetEntityType;
 
         /// <summary>
         ///     Gets a value indicating whether this navigation should be eager loaded by default.
@@ -70,7 +68,6 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="navigation">The navigation property to find whether it should be eager loaded.</param>
         /// <returns>A value indicating whether this navigation should be eager loaded by default.</returns>
         [Obsolete("Use IReadOnlyNavigation.IsEagerLoaded")]
-        public static bool IsEagerLoaded(this INavigation navigation)
-            => navigation.IsEagerLoaded;
+        public static bool IsEagerLoaded(this INavigation navigation) => navigation.IsEagerLoaded;
     }
 }

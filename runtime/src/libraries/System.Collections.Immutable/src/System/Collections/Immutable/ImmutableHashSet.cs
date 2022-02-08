@@ -74,7 +74,10 @@ namespace System.Collections.Immutable
         /// <param name="equalityComparer">The equality comparer.</param>
         /// <param name="items">The items to prepopulate.</param>
         /// <returns>The new immutable collection.</returns>
-        public static ImmutableHashSet<T> CreateRange<T>(IEqualityComparer<T>? equalityComparer, IEnumerable<T> items)
+        public static ImmutableHashSet<T> CreateRange<T>(
+            IEqualityComparer<T>? equalityComparer,
+            IEnumerable<T> items
+        )
         {
             return ImmutableHashSet<T>.Empty.WithComparer(equalityComparer).Union(items);
         }
@@ -97,7 +100,10 @@ namespace System.Collections.Immutable
         /// <param name="equalityComparer">The equality comparer.</param>
         /// <param name="items">The items to prepopulate.</param>
         /// <returns>The new immutable collection.</returns>
-        public static ImmutableHashSet<T> Create<T>(IEqualityComparer<T>? equalityComparer, params T[] items)
+        public static ImmutableHashSet<T> Create<T>(
+            IEqualityComparer<T>? equalityComparer,
+            params T[] items
+        )
         {
             return ImmutableHashSet<T>.Empty.WithComparer(equalityComparer).Union(items);
         }
@@ -120,7 +126,9 @@ namespace System.Collections.Immutable
         /// <returns>
         /// The immutable collection.
         /// </returns>
-        public static ImmutableHashSet<T>.Builder CreateBuilder<T>(IEqualityComparer<T>? equalityComparer)
+        public static ImmutableHashSet<T>.Builder CreateBuilder<T>(
+            IEqualityComparer<T>? equalityComparer
+        )
         {
             return Create<T>(equalityComparer).ToBuilder();
         }
@@ -132,7 +140,10 @@ namespace System.Collections.Immutable
         /// <param name="source">The sequence to enumerate.</param>
         /// <param name="equalityComparer">The equality comparer to use for initializing and adding members to the hash set.</param>
         /// <returns>An immutable set.</returns>
-        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(this IEnumerable<TSource> source, IEqualityComparer<TSource>? equalityComparer)
+        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(
+            this IEnumerable<TSource> source,
+            IEqualityComparer<TSource>? equalityComparer
+        )
         {
             if (source is ImmutableHashSet<TSource> existingSet)
             {
@@ -147,13 +158,14 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="builder">The builder to create the immutable set from.</param>
         /// <returns>An immutable set.</returns>
-        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(this ImmutableHashSet<TSource>.Builder builder)
+        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(
+            this ImmutableHashSet<TSource>.Builder builder
+        )
         {
             Requires.NotNull(builder, nameof(builder));
 
             return builder.ToImmutable();
         }
-
 
         /// <summary>
         /// Enumerates a sequence exactly once and produces an immutable set of its contents.
@@ -161,7 +173,9 @@ namespace System.Collections.Immutable
         /// <typeparam name="TSource">The type of element in the sequence.</typeparam>
         /// <param name="source">The sequence to enumerate.</param>
         /// <returns>An immutable set.</returns>
-        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(this IEnumerable<TSource> source)
+        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(
+            this IEnumerable<TSource> source
+        )
         {
             return ToImmutableHashSet(source, null);
         }

@@ -12,8 +12,7 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        private SemanticResultKey(string semanticResultKey)
-            : base()
+        private SemanticResultKey(string semanticResultKey) : base()
         {
             Helpers.ThrowIfEmptyOrNull(semanticResultKey, nameof(semanticResultKey));
 
@@ -60,10 +59,7 @@ namespace System.Speech.Recognition
 
         internal SemanticKeyElement SemanticKeyElement
         {
-            get
-            {
-                return _semanticKey;
-            }
+            get { return _semanticKey; }
         }
 
         #endregion

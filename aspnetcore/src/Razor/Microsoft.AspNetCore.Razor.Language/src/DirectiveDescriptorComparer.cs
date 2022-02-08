@@ -12,9 +12,7 @@ internal class DirectiveDescriptorComparer : IEqualityComparer<DirectiveDescript
 {
     public static readonly DirectiveDescriptorComparer Default = new DirectiveDescriptorComparer();
 
-    protected DirectiveDescriptorComparer()
-    {
-    }
+    protected DirectiveDescriptorComparer() { }
 
     public bool Equals(DirectiveDescriptor descriptorX, DirectiveDescriptor descriptorY)
     {
@@ -23,13 +21,14 @@ internal class DirectiveDescriptorComparer : IEqualityComparer<DirectiveDescript
             return true;
         }
 
-        return descriptorX != null &&
-            string.Equals(descriptorX.Directive, descriptorY.Directive, StringComparison.Ordinal) &&
-            descriptorX.Kind == descriptorY.Kind &&
-            Enumerable.SequenceEqual(
+        return descriptorX != null
+            && string.Equals(descriptorX.Directive, descriptorY.Directive, StringComparison.Ordinal)
+            && descriptorX.Kind == descriptorY.Kind
+            && Enumerable.SequenceEqual(
                 descriptorX.Tokens,
                 descriptorY.Tokens,
-                DirectiveTokenDescriptorComparer.Default);
+                DirectiveTokenDescriptorComparer.Default
+            );
     }
 
     public int GetHashCode(DirectiveDescriptor descriptor)

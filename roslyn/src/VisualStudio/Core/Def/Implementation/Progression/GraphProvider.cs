@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IGlyphService glyphService,
             SVsServiceProvider serviceProvider,
             Workspace workspace,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _glyphService = glyphService;
@@ -62,17 +63,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         internal static List<IGraphQuery> GetGraphQueries(
             IGraphContext context,
             IThreadingContext threadingContext,
-            IAsynchronousOperationListener asyncListener)
+            IAsynchronousOperationListener asyncListener
+        )
         {
             var graphQueries = new List<IGraphQuery>();
 
-            if (context.Direction == GraphContextDirection.Self && context.RequestedProperties.Contains(DgmlNodeProperties.ContainsChildren))
+            if (
+                context.Direction == GraphContextDirection.Self
+                && context.RequestedProperties.Contains(DgmlNodeProperties.ContainsChildren)
+            )
             {
                 graphQueries.Add(new ContainsChildrenGraphQuery());
             }
 
-            if (context.Direction == GraphContextDirection.Contains ||
-                (context.Direction == GraphContextDirection.Target && context.LinkCategories.Contains(CodeLinkCategories.Contains)))
+            if (
+                context.Direction == GraphContextDirection.Contains
+                || (
+                    context.Direction == GraphContextDirection.Target
+                    && context.LinkCategories.Contains(CodeLinkCategories.Contains)
+                )
+            )
             {
                 graphQueries.Add(new ContainsGraphQuery());
             }
@@ -132,15 +142,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             if (context.Direction == GraphContextDirection.Custom)
             {
-                var searchParameters = context.GetValue<ISolutionSearchParameters>(typeof(ISolutionSearchParameters).GUID.ToString());
+                var searchParameters = context.GetValue<ISolutionSearchParameters>(
+                    typeof(ISolutionSearchParameters).GUID.ToString()
+                );
 
                 if (searchParameters != null)
                 {
                     // WARNING: searchParameters.SearchQuery returns an IVsSearchQuery object, which
                     // is a COM type. Therefore, it's probably best to grab the values we want now
                     // rather than get surprised by COM marshalling later.
-                    graphQueries.Add(new SearchGraphQuery(
-                        searchParameters.SearchQuery.SearchString, threadingContext, asyncListener));
+                    graphQueries.Add(
+                        new SearchGraphQuery(
+                            searchParameters.SearchQuery.SearchString,
+                            threadingContext,
+                            asyncListener
+                        )
+                    );
                 }
             }
 
@@ -170,14 +187,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Only nodes that explicitly state that they contain children (e.g., source files) and named types should
             // be expandable.
-            if (nodes.Any(n => n.Properties.Any(p => p.Key == DgmlNodeProperties.ContainsChildren)) ||
-                nodes.Any(n => IsAnySymbolKind(n, SymbolKind.NamedType)))
+            if (
+                nodes.Any(n => n.Properties.Any(p => p.Key == DgmlNodeProperties.ContainsChildren))
+                || nodes.Any(n => IsAnySymbolKind(n, SymbolKind.NamedType))
+            )
             {
                 yield return new GraphCommand(
                     GraphCommandDefinition.Contains,
                     targetCategories: null,
                     linkCategories: new[] { GraphCommonSchema.Contains },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
 
             // All graph commands below this point apply only to Roslyn-owned nodes.
@@ -187,41 +207,73 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             }
 
             // Only show 'Base Types' and 'Derived Types' on a class or interface.
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.NamedType) &&
-                               IsAnyTypeKind(n, TypeKind.Class, TypeKind.Interface, TypeKind.Struct, TypeKind.Enum, TypeKind.Delegate)))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(n, SymbolKind.NamedType)
+                        && IsAnyTypeKind(
+                            n,
+                            TypeKind.Class,
+                            TypeKind.Interface,
+                            TypeKind.Struct,
+                            TypeKind.Enum,
+                            TypeKind.Delegate
+                        )
+                )
+            )
             {
                 yield return new GraphCommand(
                     GraphCommandDefinition.BaseTypes,
                     targetCategories: null,
                     linkCategories: new[] { CodeLinkCategories.InheritsFrom },
-                    trackChanges: true);
+                    trackChanges: true
+                );
 
                 yield return new GraphCommand(
                     GraphCommandDefinition.DerivedTypes,
                     targetCategories: null,
                     linkCategories: new[] { CodeLinkCategories.InheritsFrom },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
 
             // Only show 'Calls' on an applicable member in a class or struct
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property, SymbolKind.Field)))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(
+                            n,
+                            SymbolKind.Event,
+                            SymbolKind.Method,
+                            SymbolKind.Property,
+                            SymbolKind.Field
+                        )
+                )
+            )
             {
                 yield return new GraphCommand(
                     GraphCommandDefinition.Calls,
                     targetCategories: null,
                     linkCategories: new[] { CodeLinkCategories.Calls },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
 
             // Only show 'Is Called By' on an applicable member in a class or struct
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property) &&
-                               IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                )
+            )
             {
                 yield return new GraphCommand(
                     GraphCommandDefinition.IsCalledBy,
                     targetCategories: null,
                     linkCategories: new[] { CodeLinkCategories.Calls },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
 
             // Show 'Is Used By'
@@ -229,98 +281,139 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 GraphCommandDefinition.IsUsedBy,
                 targetCategories: new[] { CodeNodeCategories.SourceLocation },
                 linkCategories: new[] { CodeLinkCategories.SourceReferences },
-                trackChanges: true);
+                trackChanges: true
+            );
 
             // Show 'Implements' on a class or struct, or an applicable member in a class or struct.
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.NamedType) &&
-                               IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(n, SymbolKind.NamedType)
+                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                )
+            )
             {
                 yield return new GraphCommand(
                     s_implementsCommandDefinition,
                     targetCategories: null,
                     linkCategories: new[] { CodeLinkCategories.Implements },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
 
             // Show 'Implements' on public, non-static members of a class or struct.  Note: we should
             // also show it on explicit interface impls in C#.
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property) &&
-                               IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct) &&
-                               !GetModifiers(n).IsStatic))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                        && !GetModifiers(n).IsStatic
+                )
+            )
             {
-                if (nodes.Any(n => CheckAccessibility(n, Accessibility.Public) ||
-                                   HasExplicitInterfaces(n)))
+                if (
+                    nodes.Any(
+                        n => CheckAccessibility(n, Accessibility.Public) || HasExplicitInterfaces(n)
+                    )
+                )
                 {
                     yield return new GraphCommand(
                         s_implementsCommandDefinition,
                         targetCategories: null,
                         linkCategories: new[] { CodeLinkCategories.Implements },
-                        trackChanges: true);
+                        trackChanges: true
+                    );
                 }
             }
 
             // Show 'Implemented By' on an interface.
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.NamedType) &&
-                               IsAnyTypeKind(n, TypeKind.Interface)))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(n, SymbolKind.NamedType)
+                        && IsAnyTypeKind(n, TypeKind.Interface)
+                )
+            )
             {
                 yield return new GraphCommand(
                     s_implementedByCommandDefinition,
                     targetCategories: null,
                     linkCategories: new[] { CodeLinkCategories.Implements },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
 
             // Show 'Implemented By' on any member of an interface.
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property) &&
-                               IsAnyTypeKind(n, TypeKind.Interface)))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                        && IsAnyTypeKind(n, TypeKind.Interface)
+                )
+            )
             {
                 yield return new GraphCommand(
                     s_implementedByCommandDefinition,
                     targetCategories: null,
                     linkCategories: new[] { CodeLinkCategories.Implements },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
 
             // Show 'Overrides' on any applicable member of a class or struct
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property) &&
-                               IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct) &&
-                               GetModifiers(n).IsOverride))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                        && GetModifiers(n).IsOverride
+                )
+            )
             {
                 yield return new GraphCommand(
                     s_overridesCommandDefinition,
                     targetCategories: null,
                     linkCategories: new[] { RoslynGraphCategories.Overrides },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
 
             // Show 'Overridden By' on any applicable member of a class or struct
-            if (nodes.Any(n => IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property) &&
-                               IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct) &&
-                               IsOverridable(n)))
+            if (
+                nodes.Any(
+                    n =>
+                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                        && IsOverridable(n)
+                )
+            )
             {
                 yield return new GraphCommand(
                     s_overriddenByCommandDefinition,
                     targetCategories: null,
                     linkCategories: new[] { RoslynGraphCategories.Overrides },
-                    trackChanges: true);
+                    trackChanges: true
+                );
             }
         }
 
         private bool IsOverridable(GraphNode node)
         {
             var modifiers = GetModifiers(node);
-            return (modifiers.IsVirtual || modifiers.IsAbstract || modifiers.IsOverride) &&
-                !modifiers.IsSealed;
+            return (modifiers.IsVirtual || modifiers.IsAbstract || modifiers.IsOverride)
+                && !modifiers.IsSealed;
         }
 
-        private DeclarationModifiers GetModifiers(GraphNode node)
-            => (DeclarationModifiers)node[RoslynGraphProperties.SymbolModifiers];
+        private DeclarationModifiers GetModifiers(GraphNode node) =>
+            (DeclarationModifiers)node[RoslynGraphProperties.SymbolModifiers];
 
-        private bool CheckAccessibility(GraphNode node, Accessibility accessibility)
-            => node[RoslynGraphProperties.DeclaredAccessibility].Equals(accessibility);
+        private bool CheckAccessibility(GraphNode node, Accessibility accessibility) =>
+            node[RoslynGraphProperties.DeclaredAccessibility].Equals(accessibility);
 
-        private bool HasExplicitInterfaces(GraphNode node)
-            => ((IList<SymbolKey>)node[RoslynGraphProperties.ExplicitInterfaceImplementations]).Count > 0;
+        private bool HasExplicitInterfaces(GraphNode node) =>
+            ((IList<SymbolKey>)node[RoslynGraphProperties.ExplicitInterfaceImplementations]).Count
+            > 0;
 
         private bool IsRoslynNode(GraphNode node)
         {
@@ -328,23 +421,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 && node[RoslynGraphProperties.TypeKind] != null;
         }
 
-        private bool IsAnySymbolKind(GraphNode node, params SymbolKind[] symbolKinds)
-            => symbolKinds.Any(k => k.Equals(node[RoslynGraphProperties.SymbolKind]));
+        private bool IsAnySymbolKind(GraphNode node, params SymbolKind[] symbolKinds) =>
+            symbolKinds.Any(k => k.Equals(node[RoslynGraphProperties.SymbolKind]));
 
-        private bool IsAnyTypeKind(GraphNode node, params TypeKind[] typeKinds)
-            => typeKinds.Any(k => node[RoslynGraphProperties.TypeKind].Equals(k));
+        private bool IsAnyTypeKind(GraphNode node, params TypeKind[] typeKinds) =>
+            typeKinds.Any(k => node[RoslynGraphProperties.TypeKind].Equals(k));
 
         private static readonly GraphCommandDefinition s_overridesCommandDefinition =
             new("Overrides", ServicesVSResources.Overrides_, GraphContextDirection.Target, 700);
 
         private static readonly GraphCommandDefinition s_overriddenByCommandDefinition =
-            new("OverriddenBy", ServicesVSResources.Overridden_By, GraphContextDirection.Source, 700);
+            new(
+                "OverriddenBy",
+                ServicesVSResources.Overridden_By,
+                GraphContextDirection.Source,
+                700
+            );
 
         private static readonly GraphCommandDefinition s_implementsCommandDefinition =
             new("Implements", ServicesVSResources.Implements_, GraphContextDirection.Target, 600);
 
         private static readonly GraphCommandDefinition s_implementedByCommandDefinition =
-            new("ImplementedBy", ServicesVSResources.Implemented_By, GraphContextDirection.Source, 600);
+            new(
+                "ImplementedBy",
+                ServicesVSResources.Implemented_By,
+                GraphContextDirection.Source,
+                600
+            );
 
         public T GetExtension<T>(GraphObject graphObject, T previous) where T : class
         {
@@ -355,8 +458,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     return null;
 
                 // Has to have at least a symbolid, or source location to navigate to.
-                if (graphNode.GetValue<SymbolKey?>(RoslynGraphProperties.SymbolId) == null &&
-                    graphNode.GetValue<SourceLocation>(CodeNodeProperties.SourceLocation).FileName == null)
+                if (
+                    graphNode.GetValue<SymbolKey?>(RoslynGraphProperties.SymbolId) == null
+                    && graphNode.GetValue<SourceLocation>(
+                        CodeNodeProperties.SourceLocation
+                    ).FileName == null
+                )
                 {
                     return null;
                 }

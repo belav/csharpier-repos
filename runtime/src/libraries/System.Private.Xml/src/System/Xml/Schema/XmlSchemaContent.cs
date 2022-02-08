@@ -6,7 +6,5 @@ namespace System.Xml.Schema
     using System.Collections;
     using System.Xml.Serialization;
 
-    public abstract class XmlSchemaContent : XmlSchemaAnnotated
-    {
-    }
+    public abstract class XmlSchemaContent : XmlSchemaAnnotated { }
 }

@@ -14,7 +14,8 @@ namespace System.Xml
         private readonly string _target;
         private string _data;
 
-        protected internal XmlProcessingInstruction(string target, string data, XmlDocument doc) : base(doc)
+        protected internal XmlProcessingInstruction(string target, string data, XmlDocument doc)
+            : base(doc)
         {
             _target = target;
             _data = data;
@@ -59,7 +60,14 @@ namespace System.Xml
             set
             {
                 XmlNode? parent = ParentNode;
-                XmlNodeChangedEventArgs? args = GetEventArgs(this, parent, parent, _data, value, XmlNodeChangedAction.Change);
+                XmlNodeChangedEventArgs? args = GetEventArgs(
+                    this,
+                    parent,
+                    parent,
+                    _data,
+                    value,
+                    XmlNodeChangedAction.Change
+                );
                 if (args != null)
                     BeforeEvent(args);
                 _data = value;
@@ -101,7 +109,13 @@ namespace System.Xml
             // Intentionally do nothing
         }
 
-        internal override string XPLocalName { get { return Name; } }
-        internal override XPathNodeType XPNodeType { get { return XPathNodeType.ProcessingInstruction; } }
+        internal override string XPLocalName
+        {
+            get { return Name; }
+        }
+        internal override XPathNodeType XPNodeType
+        {
+            get { return XPathNodeType.ProcessingInstruction; }
+        }
     }
 }

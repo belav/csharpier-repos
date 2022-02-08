@@ -11,8 +11,7 @@ namespace System.Reflection.Metadata.Tests
     {
         private readonly GetString _getString;
 
-        public TestMetadataStringDecoder(Encoding encoding, GetString getString)
-            : base(encoding)
+        public TestMetadataStringDecoder(Encoding encoding, GetString getString) : base(encoding)
         {
             _getString = getString;
         }

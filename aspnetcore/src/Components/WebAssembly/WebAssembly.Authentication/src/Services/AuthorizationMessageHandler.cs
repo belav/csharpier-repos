@@ -28,9 +28,7 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
     /// </summary>
     /// <param name="provider">The <see cref="IAccessTokenProvider"/> to use for provisioning tokens.</param>
     /// <param name="navigation">The <see cref="NavigationManager"/> to use for performing redirections.</param>
-    public AuthorizationMessageHandler(
-        IAccessTokenProvider provider,
-        NavigationManager navigation)
+    public AuthorizationMessageHandler(IAccessTokenProvider provider, NavigationManager navigation)
     {
         _provider = provider;
         _navigation = navigation;
@@ -38,28 +36,37 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
         // Invalidate the cached _lastToken when the authentication state changes
         if (_provider is AuthenticationStateProvider authStateProvider)
         {
-            _authenticationStateChangedHandler = _ => { _lastToken = null; };
+            _authenticationStateChangedHandler = _ =>
+            {
+                _lastToken = null;
+            };
             authStateProvider.AuthenticationStateChanged += _authenticationStateChangedHandler;
         }
     }
 
     /// <inheritdoc />
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         var now = DateTimeOffset.Now;
         if (_authorizedUris == null)
         {
-            throw new InvalidOperationException($"The '{nameof(AuthorizationMessageHandler)}' is not configured. " +
-                $"Call '{nameof(AuthorizationMessageHandler.ConfigureHandler)}' and provide a list of endpoint urls to attach the token to.");
+            throw new InvalidOperationException(
+                $"The '{nameof(AuthorizationMessageHandler)}' is not configured. "
+                    + $"Call '{nameof(AuthorizationMessageHandler.ConfigureHandler)}' and provide a list of endpoint urls to attach the token to."
+            );
         }
 
         if (_authorizedUris.Any(uri => uri.IsBaseOf(request.RequestUri)))
         {
             if (_lastToken == null || now >= _lastToken.Expires.AddMinutes(-5))
             {
-                var tokenResult = _tokenOptions != null ?
-                    await _provider.RequestAccessToken(_tokenOptions) :
-                    await _provider.RequestAccessToken();
+                var tokenResult =
+                    _tokenOptions != null
+                        ? await _provider.RequestAccessToken(_tokenOptions)
+                        : await _provider.RequestAccessToken();
 
                 if (tokenResult.TryGetToken(out var token))
                 {
@@ -68,7 +75,11 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
                 }
                 else
                 {
-                    throw new AccessTokenNotAvailableException(_navigation, tokenResult, _tokenOptions?.Scopes);
+                    throw new AccessTokenNotAvailableException(
+                        _navigation,
+                        tokenResult,
+                        _tokenOptions?.Scopes
+                    );
                 }
             }
 
@@ -94,7 +105,8 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
     public AuthorizationMessageHandler ConfigureHandler(
         IEnumerable<string> authorizedUrls,
         IEnumerable<string> scopes = null,
-        string returnUrl = null)
+        string returnUrl = null
+    )
     {
         if (_authorizedUris != null)
         {
@@ -109,7 +121,10 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
         var uris = authorizedUrls.Select(uri => new Uri(uri, UriKind.Absolute)).ToArray();
         if (uris.Length == 0)
         {
-            throw new ArgumentException("At least one URL must be configured.", nameof(authorizedUrls));
+            throw new ArgumentException(
+                "At least one URL must be configured.",
+                nameof(authorizedUrls)
+            );
         }
 
         _authorizedUris = uris;
@@ -125,7 +140,6 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
 
         return this;
     }
-
 
     void IDisposable.Dispose()
     {

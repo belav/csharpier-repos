@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// Handles the initial request for code actions. Leaves the Edit and Command properties
     /// of the returned VSCodeActions blank, as these properties should be populated by the
     /// CodeActionsResolveHandler only when the user requests them.
-    /// 
+    ///
     /// TODO - This must be moved to the MS.CA.LanguageServer.Protocol project once the
     /// EditorFeatures references in <see cref="RunCodeActionHandler"/> are removed.
     /// See https://github.com/dotnet/roslyn/issues/55142
@@ -39,38 +39,50 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public CodeActionsHandler(
             CodeActionsCache codeActionsCache,
             ICodeFixService codeFixService,
-            ICodeRefactoringService codeRefactoringService)
+            ICodeRefactoringService codeRefactoringService
+        )
         {
             _codeActionsCache = codeActionsCache;
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
         }
 
-        public TextDocumentIdentifier? GetTextDocumentIdentifier(CodeActionParams request) => request.TextDocument;
+        public TextDocumentIdentifier? GetTextDocumentIdentifier(CodeActionParams request) =>
+            request.TextDocument;
 
-        public async Task<LSP.CodeAction[]> HandleRequestAsync(LSP.CodeActionParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.CodeAction[]> HandleRequestAsync(
+            LSP.CodeActionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             Contract.ThrowIfNull(document);
 
-            var codeActions = await CodeActionHelpers.GetVSCodeActionsAsync(
-                request, _codeActionsCache, document, _codeFixService, _codeRefactoringService, cancellationToken).ConfigureAwait(false);
+            var codeActions = await CodeActionHelpers
+                .GetVSCodeActionsAsync(
+                    request,
+                    _codeActionsCache,
+                    document,
+                    _codeFixService,
+                    _codeRefactoringService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return codeActions;
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new TestAccessor(this);
+        internal TestAccessor GetTestAccessor() => new TestAccessor(this);
 
         internal readonly struct TestAccessor
         {
             private readonly CodeActionsHandler _codeActionsHandler;
 
-            public TestAccessor(CodeActionsHandler codeActionsHandler)
-                => _codeActionsHandler = codeActionsHandler;
+            public TestAccessor(CodeActionsHandler codeActionsHandler) =>
+                _codeActionsHandler = codeActionsHandler;
 
-            public CodeActionsCache GetCache()
-                => _codeActionsHandler._codeActionsCache;
+            public CodeActionsCache GetCache() => _codeActionsHandler._codeActionsCache;
         }
     }
 }

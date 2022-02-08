@@ -81,6 +81,7 @@ namespace System.Drawing.Imaging
             get { return _matrix00; }
             set { _matrix00 = value; }
         }
+
         /// <summary>
         /// Represents the element at the 0th row and 1st column of this <see cref='ColorMatrix'/>.
         /// </summary>
@@ -297,7 +298,6 @@ namespace System.Drawing.Imaging
             set { _matrix44 = value; }
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref='ColorMatrix'/> class with the elements in the specified matrix.
         /// </summary>
@@ -377,11 +377,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public float this[int row, int column]
         {
-            get
-            {
-                return GetMatrix()[row][column];
-            }
-
+            get { return GetMatrix()[row][column]; }
             set
             {
                 float[][] tempMatrix = GetMatrix();

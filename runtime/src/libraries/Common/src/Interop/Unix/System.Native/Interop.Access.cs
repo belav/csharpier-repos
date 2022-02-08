@@ -9,13 +9,18 @@ internal static partial class Interop
     {
         internal enum AccessMode : int
         {
-            F_OK = 0,   /* Check for existence */
-            X_OK = 1,   /* Check for execute */
-            W_OK = 2,   /* Check for write */
-            R_OK = 4,   /* Check for read */
+            F_OK = 0, /* Check for existence */
+            X_OK = 1, /* Check for execute */
+            W_OK = 2, /* Check for write */
+            R_OK = 4, /* Check for read */
         }
 
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_Access", CharSet = CharSet.Ansi, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Access",
+            CharSet = CharSet.Ansi,
+            SetLastError = true
+        )]
         internal static partial int Access(string path, AccessMode mode);
     }
 }

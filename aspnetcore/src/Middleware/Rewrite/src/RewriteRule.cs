@@ -15,6 +15,7 @@ internal class RewriteRule : IRule
     public Regex InitialMatch { get; }
     public string Replacement { get; }
     public bool StopProcessing { get; }
+
     public RewriteRule(string regex, string replacement, bool stopProcessing)
     {
         if (string.IsNullOrEmpty(regex))
@@ -27,7 +28,11 @@ internal class RewriteRule : IRule
             throw new ArgumentNullException(nameof(replacement));
         }
 
-        InitialMatch = new Regex(regex, RegexOptions.Compiled | RegexOptions.CultureInvariant, _regexTimeout);
+        InitialMatch = new Regex(
+            regex,
+            RegexOptions.Compiled | RegexOptions.CultureInvariant,
+            _regexTimeout
+        );
         Replacement = replacement;
         StopProcessing = stopProcessing;
     }
@@ -67,7 +72,14 @@ internal class RewriteRule : IRule
                 PathString pathString;
                 QueryString query;
                 FragmentString fragment;
-                UriHelper.FromAbsolute(result, out scheme, out host, out pathString, out query, out fragment);
+                UriHelper.FromAbsolute(
+                    result,
+                    out scheme,
+                    out host,
+                    out pathString,
+                    out query,
+                    out fragment
+                );
 
                 request.Scheme = scheme;
                 request.Host = host;
@@ -89,8 +101,8 @@ internal class RewriteRule : IRule
                         request.Path = PathString.FromUriComponent('/' + newPath);
                     }
                     request.QueryString = request.QueryString.Add(
-                        QueryString.FromUriComponent(
-                            result.Substring(split)));
+                        QueryString.FromUriComponent(result.Substring(split))
+                    );
                 }
                 else
                 {

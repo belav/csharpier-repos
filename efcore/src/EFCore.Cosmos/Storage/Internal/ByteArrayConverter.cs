@@ -21,10 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override void WriteJson(
-            JsonWriter writer,
-            object? value,
-            JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             if (value == null)
             {
@@ -54,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             JsonReader reader,
             Type objectType,
             object existingValue,
-            JsonSerializer serializer)
+            JsonSerializer serializer
+        )
         {
             if (reader.TokenType != JsonToken.StartArray)
             {
@@ -88,7 +86,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool CanConvert(Type objectType)
-            => objectType == typeof(byte[]);
+        public override bool CanConvert(Type objectType) => objectType == typeof(byte[]);
     }
 }

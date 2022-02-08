@@ -14,7 +14,8 @@ namespace Microsoft.Data.Sqlite
     public class SqliteConnectionFactoryTest : IDisposable
     {
         private const string FileName = "pooled.db";
-        private const string ConnectionString = "Data Source=" + FileName + ";Cache=Shared;Pooling=True";
+        private const string ConnectionString =
+            "Data Source=" + FileName + ";Cache=Shared;Pooling=True";
 
         [Fact]
         public void Internal_connections_are_reused_after_reopen()
@@ -51,7 +52,9 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void Internal_connections_are_not_reused_when_pooling_is_disabled()
         {
-            using var connection = new SqliteConnection(new SqliteConnectionStringBuilder(ConnectionString) { Pooling = false }.ToString());
+            using var connection = new SqliteConnection(
+                new SqliteConnectionStringBuilder(ConnectionString) { Pooling = false }.ToString()
+            );
             connection.Open();
             var db = connection.Handle;
 
@@ -123,9 +126,7 @@ namespace Microsoft.Data.Sqlite
                 connection1.Open();
                 db = connection1.Handle!;
 
-                using (connection1.BeginTransaction(IsolationLevel.ReadUncommitted))
-                {
-                }
+                using (connection1.BeginTransaction(IsolationLevel.ReadUncommitted)) { }
             }
 
             using var connection2 = new SqliteConnection(ConnectionString);
@@ -158,7 +159,8 @@ namespace Microsoft.Data.Sqlite
             connection2.Open();
 
             Assert.Same(db, connection2.Handle);
-            var functions = connection2.ExecuteScalar<string>("SELECT group_concat(name) FROM pragma_function_list;")
+            var functions = connection2
+                .ExecuteScalar<string>("SELECT group_concat(name) FROM pragma_function_list;")
                 .Split(",");
             Assert.DoesNotContain("function1", functions);
             Assert.DoesNotContain("aggregate1", functions);
@@ -179,7 +181,8 @@ namespace Microsoft.Data.Sqlite
             connection2.Open();
 
             Assert.Same(db, connection2.Handle);
-            var collations = connection2.ExecuteScalar<string>("SELECT group_concat(name) FROM pragma_collation_list;")
+            var collations = connection2
+                .ExecuteScalar<string>("SELECT group_concat(name) FROM pragma_collation_list;")
                 .Split(",");
             Assert.DoesNotContain("COLLATION1", collations);
         }
@@ -196,14 +199,16 @@ namespace Microsoft.Data.Sqlite
                 db = connection1.Handle!;
 
                 var loadExtensionOmitted = connection1.ExecuteScalar<long>(
-                    "SELECT COUNT(*) FROM pragma_compile_options WHERE compile_options = 'OMIT_LOAD_EXTENSION';");
+                    "SELECT COUNT(*) FROM pragma_compile_options WHERE compile_options = 'OMIT_LOAD_EXTENSION';"
+                );
                 if (loadExtensionOmitted != 0L)
                 {
                     return;
                 }
 
                 ex = Assert.Throws<SqliteException>(
-                    () => connection1.ExecuteNonQuery("SELECT load_extension('unknown');"));
+                    () => connection1.ExecuteNonQuery("SELECT load_extension('unknown');")
+                );
                 disabledMessage = ex.Message;
 
                 connection1.EnableExtensions();
@@ -214,7 +219,8 @@ namespace Microsoft.Data.Sqlite
             Assert.Same(db, connection2.Handle);
 
             ex = Assert.Throws<SqliteException>(
-                () => connection2.ExecuteNonQuery("SELECT load_extension('unknown');"));
+                () => connection2.ExecuteNonQuery("SELECT load_extension('unknown');")
+            );
             Assert.Equal(disabledMessage, ex.Message);
         }
 

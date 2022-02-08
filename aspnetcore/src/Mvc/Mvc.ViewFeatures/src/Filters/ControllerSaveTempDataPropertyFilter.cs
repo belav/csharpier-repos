@@ -7,14 +7,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
 internal class ControllerSaveTempDataPropertyFilter : SaveTempDataPropertyFilterBase, IActionFilter
 {
-    public ControllerSaveTempDataPropertyFilter(ITempDataDictionaryFactory factory)
-        : base(factory)
-    {
-    }
+    public ControllerSaveTempDataPropertyFilter(ITempDataDictionaryFactory factory) : base(factory)
+    { }
 
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-    }
+    public void OnActionExecuted(ActionExecutedContext context) { }
 
     /// <inheritdoc />
     public void OnActionExecuting(ActionExecutingContext context)

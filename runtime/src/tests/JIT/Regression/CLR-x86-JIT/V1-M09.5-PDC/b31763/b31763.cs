@@ -10,15 +10,15 @@ namespace Test
     {
         public double m_dField2 = 47.26;
         public static float m_fForward1;
+
         public static void Method2(object param2, ref double param4)
         {
             while (param4 != 0.0d)
             {
-                do
-                {
-                } while ((object)m_fForward1 != param2);
+                do { } while ((object)m_fForward1 != param2);
             }
         }
+
         static int Main()
         {
             try
@@ -26,9 +26,7 @@ namespace Test
                 AA aa = null;
                 Method2(null, ref aa.m_dField2);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             return 100;
         }
     }

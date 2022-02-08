@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         void GetBindings(
             IConventionEntityType entityType,
             out InstantiationBinding constructorBinding,
-            out InstantiationBinding? serviceOnlyBinding);
+            out InstantiationBinding? serviceOnlyBinding
+        );
 
         /// <summary>
         ///     Create a <see cref="InstantiationBinding" /> for the constructor with most parameters and
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         void GetBindings(
             IMutableEntityType entityType,
             out InstantiationBinding constructorBinding,
-            out InstantiationBinding? serviceOnlyBinding);
+            out InstantiationBinding? serviceOnlyBinding
+        );
 
         /// <summary>
         ///     Create a <see cref="InstantiationBinding" /> for the constructor with most parameters and
@@ -58,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         void GetBindings(
             IReadOnlyEntityType entityType,
             out InstantiationBinding constructorBinding,
-            out InstantiationBinding? serviceOnlyBinding);
+            out InstantiationBinding? serviceOnlyBinding
+        );
 
         /// <summary>
         ///     Attempts to create a <see cref="InstantiationBinding" /> for the given entity type and
@@ -73,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             IConventionEntityType entityType,
             ConstructorInfo constructor,
             [NotNullWhen(true)] out InstantiationBinding? binding,
-            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters);
+            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters
+        );
 
         /// <summary>
         ///     Attempts to create a <see cref="InstantiationBinding" /> for the given entity type and
@@ -88,6 +92,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             IMutableEntityType entityType,
             ConstructorInfo constructor,
             [NotNullWhen(true)] out InstantiationBinding? binding,
-            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters);
+            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters
+        );
     }
 }

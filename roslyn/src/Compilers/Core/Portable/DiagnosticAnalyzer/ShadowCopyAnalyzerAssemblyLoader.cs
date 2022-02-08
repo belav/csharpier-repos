@@ -44,11 +44,17 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                _baseDirectory = Path.Combine(Path.GetTempPath(), "CodeAnalysis", "AnalyzerShadowCopies");
+                _baseDirectory = Path.Combine(
+                    Path.GetTempPath(),
+                    "CodeAnalysis",
+                    "AnalyzerShadowCopies"
+                );
             }
 
             _shadowCopyDirectoryAndMutex = new Lazy<(string directory, Mutex)>(
-                () => CreateUniqueDirectoryForProcess(), LazyThreadSafetyMode.ExecutionAndPublication);
+                () => CreateUniqueDirectoryForProcess(),
+                LazyThreadSafetyMode.ExecutionAndPublication
+            );
 
             DeleteLeftoverDirectoriesTask = Task.Run(DeleteLeftoverDirectories);
         }
@@ -105,6 +111,7 @@ namespace Microsoft.CodeAnalysis
             string shadowCopyPath = CopyFileAndResources(fullPath, assemblyDirectory);
             return shadowCopyPath;
         }
+
 #nullable disable
 
         private static string CopyFileAndResources(string fullPath, string assemblyDirectory)
@@ -115,7 +122,9 @@ namespace Microsoft.CodeAnalysis
             CopyFile(fullPath, shadowCopyPath);
 
             string originalDirectory = Path.GetDirectoryName(fullPath);
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileNameWithExtension);
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(
+                fileNameWithExtension
+            );
             string resourcesNameWithoutExtension = fileNameWithoutExtension + ".resources";
             string resourcesNameWithExtension = resourcesNameWithoutExtension + ".dll";
 
@@ -126,14 +135,27 @@ namespace Microsoft.CodeAnalysis
                 string resourcesPath = Path.Combine(directory, resourcesNameWithExtension);
                 if (File.Exists(resourcesPath))
                 {
-                    string resourcesShadowCopyPath = Path.Combine(assemblyDirectory, directoryName, resourcesNameWithExtension);
+                    string resourcesShadowCopyPath = Path.Combine(
+                        assemblyDirectory,
+                        directoryName,
+                        resourcesNameWithExtension
+                    );
                     CopyFile(resourcesPath, resourcesShadowCopyPath);
                 }
 
-                resourcesPath = Path.Combine(directory, resourcesNameWithoutExtension, resourcesNameWithExtension);
+                resourcesPath = Path.Combine(
+                    directory,
+                    resourcesNameWithoutExtension,
+                    resourcesNameWithExtension
+                );
                 if (File.Exists(resourcesPath))
                 {
-                    string resourcesShadowCopyPath = Path.Combine(assemblyDirectory, directoryName, resourcesNameWithoutExtension, resourcesNameWithExtension);
+                    string resourcesShadowCopyPath = Path.Combine(
+                        assemblyDirectory,
+                        directoryName,
+                        resourcesNameWithoutExtension,
+                        resourcesNameWithExtension
+                    );
                     CopyFile(resourcesPath, resourcesShadowCopyPath);
                 }
             }
@@ -155,7 +177,12 @@ namespace Microsoft.CodeAnalysis
         {
             DirectoryInfo directory = new DirectoryInfo(directoryPath);
 
-            foreach (var file in directory.EnumerateFiles(searchPattern: "*", searchOption: SearchOption.AllDirectories))
+            foreach (
+                var file in directory.EnumerateFiles(
+                    searchPattern: "*",
+                    searchOption: SearchOption.AllDirectories
+                )
+            )
             {
                 ClearReadOnlyFlagOnFile(file);
             }
@@ -180,7 +207,10 @@ namespace Microsoft.CodeAnalysis
         {
             int directoryId = Interlocked.Increment(ref _assemblyDirectoryId);
 
-            string directory = Path.Combine(_shadowCopyDirectoryAndMutex.Value.directory, directoryId.ToString());
+            string directory = Path.Combine(
+                _shadowCopyDirectoryAndMutex.Value.directory,
+                directoryId.ToString()
+            );
 
             Directory.CreateDirectory(directory);
             return directory;

@@ -14,7 +14,8 @@ internal class TestRazorReferenceManager : RazorReferenceManager
     public TestRazorReferenceManager()
         : base(
             new ApplicationPartManager(),
-            Options.Create(new MvcRazorRuntimeCompilationOptions()))
+            Options.Create(new MvcRazorRuntimeCompilationOptions())
+        )
     {
         CompilationReferences = Array.Empty<MetadataReference>();
     }

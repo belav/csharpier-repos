@@ -55,8 +55,14 @@ namespace System.IO.Strategies
             // Lock the file if requested via FileShare.  This is only advisory locking. FileShare.None implies an exclusive
             // lock on the file and all other modes use a shared lock.  While this is not as granular as Windows, not mandatory,
             // and not atomic with file opening, it's better than nothing.
-            Interop.Sys.LockOperations lockOperation = (share == FileShare.None) ? Interop.Sys.LockOperations.LOCK_EX : Interop.Sys.LockOperations.LOCK_SH;
-            if (Interop.Sys.FLock(_fileHandle, lockOperation | Interop.Sys.LockOperations.LOCK_NB) < 0)
+            Interop.Sys.LockOperations lockOperation =
+                (share == FileShare.None)
+                    ? Interop.Sys.LockOperations.LOCK_EX
+                    : Interop.Sys.LockOperations.LOCK_SH;
+            if (
+                Interop.Sys.FLock(_fileHandle, lockOperation | Interop.Sys.LockOperations.LOCK_NB)
+                < 0
+            )
             {
                 // The only error we care about is EWOULDBLOCK, which indicates that the file is currently locked by someone
                 // else and we would block trying to access it.  Other errors, such as ENOTSUP (locking isn't supported) or
@@ -73,13 +79,17 @@ namespace System.IO.Strategies
             // and Sequential together doesn't make sense as they are two competing options on the same spectrum,
             // so if both are specified, we prefer RandomAccess (behavior on Windows is unspecified if both are provided).
             Interop.Sys.FileAdvice fadv =
-                (options & FileOptions.RandomAccess) != 0 ? Interop.Sys.FileAdvice.POSIX_FADV_RANDOM :
-                (options & FileOptions.SequentialScan) != 0 ? Interop.Sys.FileAdvice.POSIX_FADV_SEQUENTIAL :
-                0;
+                (options & FileOptions.RandomAccess) != 0
+                    ? Interop.Sys.FileAdvice.POSIX_FADV_RANDOM
+                    : (options & FileOptions.SequentialScan) != 0
+                        ? Interop.Sys.FileAdvice.POSIX_FADV_SEQUENTIAL
+                        : 0;
             if (fadv != 0)
             {
-                CheckFileCall(Interop.Sys.PosixFAdvise(_fileHandle, 0, 0, fadv),
-                    ignoreNotSupported: true); // just a hint.
+                CheckFileCall(
+                    Interop.Sys.PosixFAdvise(_fileHandle, 0, 0, fadv),
+                    ignoreNotSupported: true
+                ); // just a hint.
             }
 
             if (mode == FileMode.Append)
@@ -94,7 +104,10 @@ namespace System.IO.Strategies
                 if (Interop.Sys.FTruncate(_fileHandle, 0) < 0)
                 {
                     Interop.ErrorInfo errorInfo = Interop.Sys.GetLastErrorInfo();
-                    if (errorInfo.Error != Interop.Error.EBADF && errorInfo.Error != Interop.Error.EINVAL)
+                    if (
+                        errorInfo.Error != Interop.Error.EBADF
+                        && errorInfo.Error != Interop.Error.EINVAL
+                    )
                     {
                         // We know the file descriptor is valid and we know the size argument to FTruncate is correct,
                         // so if EBADF or EINVAL is returned, it means we're dealing with a special file that can't be
@@ -172,7 +185,8 @@ namespace System.IO.Strategies
                     {
                         FlushWriteBuffer();
                     }
-                    catch (Exception e) when (!disposing && FileStreamHelpers.IsIoRelatedException(e))
+                    catch (Exception e)
+                        when (!disposing && FileStreamHelpers.IsIoRelatedException(e))
                     {
                         // On finalization, ignore failures from trying to flush the write buffer,
                         // e.g. if this stream is wrapping a pipe and the pipe is now broken.
@@ -198,7 +212,11 @@ namespace System.IO.Strategies
 
                         if (SafeFileHandle.t_lastCloseErrorInfo != null)
                         {
-                            throw Interop.GetExceptionForIoErrno(SafeFileHandle.t_lastCloseErrorInfo.GetValueOrDefault(), _path, isDirectory: false);
+                            throw Interop.GetExceptionForIoErrno(
+                                SafeFileHandle.t_lastCloseErrorInfo.GetValueOrDefault(),
+                                _path,
+                                isDirectory: false
+                            );
                         }
                     }
                 }
@@ -224,8 +242,15 @@ namespace System.IO.Strategies
             // override may already exist on a derived type.
             if (_useAsyncIO && _writePos > 0)
             {
-                return new ValueTask(Task.Factory.StartNew(static s => ((Net5CompatFileStreamStrategy)s!).Dispose(), this,
-                    CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default));
+                return new ValueTask(
+                    Task.Factory.StartNew(
+                        static s => ((Net5CompatFileStreamStrategy)s!).Dispose(),
+                        this,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    )
+                );
             }
 
             return base.DisposeAsync();
@@ -256,8 +281,14 @@ namespace System.IO.Strategies
 #pragma warning disable CA1416 // Validate platform compatibility, issue: https://github.com/dotnet/runtime/issues/44542
             _asyncState?.Wait();
 #pragma warning restore CA1416
-            try { FlushWriteBuffer(); }
-            finally { _asyncState?.Release(); }
+            try
+            {
+                FlushWriteBuffer();
+            }
+            finally
+            {
+                _asyncState?.Release();
+            }
         }
 
         /// <summary>Writes any data in the write buffer to the underlying stream and resets the buffer.</summary>
@@ -350,7 +381,10 @@ namespace System.IO.Strategies
             // file, or due to its own whims.
             if (!readFromOS && bytesRead < destination.Length)
             {
-                Debug.Assert(_readPos == _readLength, "bytesToRead should only be < destination.Length if numBytesAvailable < destination.Length");
+                Debug.Assert(
+                    _readPos == _readLength,
+                    "bytesToRead should only be < destination.Length if numBytesAvailable < destination.Length"
+                );
                 _readPos = _readLength = 0; // no data left in the read buffer
                 bytesRead += ReadNative(destination.Slice(bytesRead));
             }
@@ -388,7 +422,11 @@ namespace System.IO.Strategies
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <param name="synchronousResult">If the operation completes synchronously, the number of bytes read.</param>
         /// <returns>A task that represents the asynchronous read operation.</returns>
-        private Task<int>? ReadAsyncInternal(Memory<byte> destination, CancellationToken cancellationToken, out int synchronousResult)
+        private Task<int>? ReadAsyncInternal(
+            Memory<byte> destination,
+            CancellationToken cancellationToken,
+            out int synchronousResult
+        )
         {
             Debug.Assert(_useAsyncIO);
             Debug.Assert(_asyncState != null);
@@ -416,7 +454,9 @@ namespace System.IO.Strategies
                     {
                         PrepareForReading();
 
-                        new Span<byte>(GetBuffer(), _readPos, destination.Length).CopyTo(destination.Span);
+                        new Span<byte>(GetBuffer(), _readPos, destination.Length).CopyTo(
+                            destination.Span
+                        );
                         _readPos += destination.Length;
 
                         synchronousResult = destination.Length;
@@ -437,28 +477,37 @@ namespace System.IO.Strategies
             // Otherwise, issue the whole request asynchronously.
             synchronousResult = 0;
             _asyncState.Memory = destination;
-            return waitTask.ContinueWith(static (t, s) =>
-            {
-                // The options available on Unix for writing asynchronously to an arbitrary file
-                // handle typically amount to just using another thread to do the synchronous write,
-                // which is exactly  what this implementation does. This does mean there are subtle
-                // differences in certain FileStream behaviors between Windows and Unix when multiple
-                // asynchronous operations are issued against the stream to execute concurrently; on
-                // Unix the operations will be serialized due to the usage of a semaphore, but the
-                // position /length information won't be updated until after the write has completed,
-                // whereas on Windows it may happen before the write has completed.
-
-                Debug.Assert(t.Status == TaskStatus.RanToCompletion);
-                var thisRef = (Net5CompatFileStreamStrategy)s!;
-                Debug.Assert(thisRef._asyncState != null);
-                try
+            return waitTask.ContinueWith(
+                static (t, s) =>
                 {
-                    Memory<byte> memory = thisRef._asyncState.Memory;
-                    thisRef._asyncState.Memory = default;
-                    return thisRef.ReadSpan(memory.Span);
-                }
-                finally { thisRef._asyncState.Release(); }
-            }, this, CancellationToken.None, TaskContinuationOptions.DenyChildAttach, TaskScheduler.Default);
+                    // The options available on Unix for writing asynchronously to an arbitrary file
+                    // handle typically amount to just using another thread to do the synchronous write,
+                    // which is exactly  what this implementation does. This does mean there are subtle
+                    // differences in certain FileStream behaviors between Windows and Unix when multiple
+                    // asynchronous operations are issued against the stream to execute concurrently; on
+                    // Unix the operations will be serialized due to the usage of a semaphore, but the
+                    // position /length information won't be updated until after the write has completed,
+                    // whereas on Windows it may happen before the write has completed.
+
+                    Debug.Assert(t.Status == TaskStatus.RanToCompletion);
+                    var thisRef = (Net5CompatFileStreamStrategy)s!;
+                    Debug.Assert(thisRef._asyncState != null);
+                    try
+                    {
+                        Memory<byte> memory = thisRef._asyncState.Memory;
+                        thisRef._asyncState.Memory = default;
+                        return thisRef.ReadSpan(memory.Span);
+                    }
+                    finally
+                    {
+                        thisRef._asyncState.Release();
+                    }
+                },
+                this,
+                CancellationToken.None,
+                TaskContinuationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         /// <summary>Reads from the file handle into the buffer, overwriting anything in it.</summary>
@@ -467,8 +516,14 @@ namespace System.IO.Strategies
 #pragma warning disable CA1416 // Validate platform compatibility, issue: https://github.com/dotnet/runtime/issues/44542
             _asyncState?.Wait();
 #pragma warning restore CA1416
-            try { return ReadNative(_buffer); }
-            finally { _asyncState?.Release(); }
+            try
+            {
+                return ReadNative(_buffer);
+            }
+            finally
+            {
+                _asyncState?.Release();
+            }
         }
 
         /// <summary>Writes a block of bytes to the file stream.</summary>
@@ -534,7 +589,9 @@ namespace System.IO.Strategies
                 int count = source.Length;
                 while (count > 0)
                 {
-                    int bytesWritten = CheckFileCall(Interop.Sys.Write(_fileHandle, bufPtr + offset, count));
+                    int bytesWritten = CheckFileCall(
+                        Interop.Sys.Write(_fileHandle, bufPtr + offset, count)
+                    );
                     _filePosition += bytesWritten;
                     offset += bytesWritten;
                     count -= bytesWritten;
@@ -550,7 +607,10 @@ namespace System.IO.Strategies
         /// <param name="source">The buffer to write data from.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task that represents the asynchronous write operation.</returns>
-        private ValueTask WriteAsyncInternal(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+        private ValueTask WriteAsyncInternal(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(_useAsyncIO);
             Debug.Assert(_asyncState != null);
@@ -598,28 +658,40 @@ namespace System.IO.Strategies
 
             // Otherwise, issue the whole request asynchronously.
             _asyncState.ReadOnlyMemory = source;
-            return new ValueTask(waitTask.ContinueWith(static (t, s) =>
-            {
-                // The options available on Unix for writing asynchronously to an arbitrary file
-                // handle typically amount to just using another thread to do the synchronous write,
-                // which is exactly  what this implementation does. This does mean there are subtle
-                // differences in certain FileStream behaviors between Windows and Unix when multiple
-                // asynchronous operations are issued against the stream to execute concurrently; on
-                // Unix the operations will be serialized due to the usage of a semaphore, but the
-                // position/length information won't be updated until after the write has completed,
-                // whereas on Windows it may happen before the write has completed.
+            return new ValueTask(
+                waitTask.ContinueWith(
+                    static (t, s) =>
+                    {
+                        // The options available on Unix for writing asynchronously to an arbitrary file
+                        // handle typically amount to just using another thread to do the synchronous write,
+                        // which is exactly  what this implementation does. This does mean there are subtle
+                        // differences in certain FileStream behaviors between Windows and Unix when multiple
+                        // asynchronous operations are issued against the stream to execute concurrently; on
+                        // Unix the operations will be serialized due to the usage of a semaphore, but the
+                        // position/length information won't be updated until after the write has completed,
+                        // whereas on Windows it may happen before the write has completed.
 
-                Debug.Assert(t.Status == TaskStatus.RanToCompletion);
-                var thisRef = (Net5CompatFileStreamStrategy)s!;
-                Debug.Assert(thisRef._asyncState != null);
-                try
-                {
-                    ReadOnlyMemory<byte> readOnlyMemory = thisRef._asyncState.ReadOnlyMemory;
-                    thisRef._asyncState.ReadOnlyMemory = default;
-                    thisRef.WriteSpan(readOnlyMemory.Span);
-                }
-                finally { thisRef._asyncState.Release(); }
-            }, this, CancellationToken.None, TaskContinuationOptions.DenyChildAttach, TaskScheduler.Default));
+                        Debug.Assert(t.Status == TaskStatus.RanToCompletion);
+                        var thisRef = (Net5CompatFileStreamStrategy)s!;
+                        Debug.Assert(thisRef._asyncState != null);
+                        try
+                        {
+                            ReadOnlyMemory<byte> readOnlyMemory =
+                                thisRef._asyncState.ReadOnlyMemory;
+                            thisRef._asyncState.ReadOnlyMemory = default;
+                            thisRef.WriteSpan(readOnlyMemory.Span);
+                        }
+                        finally
+                        {
+                            thisRef._asyncState.Release();
+                        }
+                    },
+                    this,
+                    CancellationToken.None,
+                    TaskContinuationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                )
+            );
         }
 
         /// <summary>Sets the current position of this stream to the given value.</summary>
@@ -688,12 +760,19 @@ namespace System.IO.Strategies
         /// </param>
         /// <param name="closeInvalidHandle">not used in Unix implementation</param>
         /// <returns>The new position in the stream.</returns>
-        private long SeekCore(SafeFileHandle fileHandle, long offset, SeekOrigin origin, bool closeInvalidHandle = false)
+        private long SeekCore(
+            SafeFileHandle fileHandle,
+            long offset,
+            SeekOrigin origin,
+            bool closeInvalidHandle = false
+        )
         {
             Debug.Assert(!fileHandle.IsClosed && CanSeekCore(fileHandle));
             Debug.Assert(origin >= SeekOrigin.Begin && origin <= SeekOrigin.End);
 
-            long pos = CheckFileCall(Interop.Sys.LSeek(fileHandle, offset, (Interop.Sys.SeekWhence)(int)origin)); // SeekOrigin values are the same as Interop.libc.SeekWhence values
+            long pos = CheckFileCall(
+                Interop.Sys.LSeek(fileHandle, offset, (Interop.Sys.SeekWhence)(int)origin)
+            ); // SeekOrigin values are the same as Interop.libc.SeekWhence values
             _filePosition = pos;
             return pos;
         }

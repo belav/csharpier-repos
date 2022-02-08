@@ -62,11 +62,7 @@ internal class PagedCharBuffer : IDisposable
             var copyLength = Math.Min(count, page.Length - _charIndex);
             Debug.Assert(copyLength > 0);
 
-            value.CopyTo(
-                index,
-                page,
-                _charIndex,
-                copyLength);
+            value.CopyTo(index, page, _charIndex, copyLength);
 
             _charIndex += copyLength;
             index += copyLength;
@@ -83,12 +79,7 @@ internal class PagedCharBuffer : IDisposable
             var copyLength = Math.Min(count, page.Length - _charIndex);
             Debug.Assert(copyLength > 0);
 
-            Array.Copy(
-                buffer,
-                index,
-                page,
-                _charIndex,
-                copyLength);
+            Array.Copy(buffer, index, page, _charIndex, copyLength);
 
             _charIndex += copyLength;
             index += copyLength;

@@ -25,9 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public SqliteAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,8 +35,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal
         /// </summary>
         public override IEnumerable<IAnnotation> For(IRelationalModel model, bool designTime)
         {
-            if (model.Tables.SelectMany(t => t.Columns).Any(
-                c => SqliteTypeMappingSource.IsSpatialiteType(c.StoreType)))
+            if (
+                model.Tables
+                    .SelectMany(t => t.Columns)
+                    .Any(c => SqliteTypeMappingSource.IsSpatialiteType(c.StoreType))
+            )
             {
                 yield return new Annotation(SqliteAnnotationNames.InitSpatialMetaData, true);
             }
@@ -56,12 +57,14 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal
             var property = column.PropertyMappings.First().Property;
             // Only return auto increment for integer single column primary key
             var primaryKey = property.DeclaringEntityType.FindPrimaryKey();
-            if (primaryKey != null
+            if (
+                primaryKey != null
                 && primaryKey.Properties.Count == 1
                 && primaryKey.Properties[0] == property
                 && property.ValueGenerated == ValueGenerated.OnAdd
                 && property.ClrType.UnwrapNullableType().IsInteger()
-                && !HasConverter(property))
+                && !HasConverter(property)
+            )
             {
                 yield return new Annotation(SqliteAnnotationNames.Autoincrement, true);
             }
@@ -73,7 +76,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal
             }
         }
 
-        private static bool HasConverter(IProperty property)
-            => (property.GetValueConverter() ?? property.FindTypeMapping()?.Converter) != null;
+        private static bool HasConverter(IProperty property) =>
+            (property.GetValueConverter() ?? property.FindTypeMapping()?.Converter) != null;
     }
 }

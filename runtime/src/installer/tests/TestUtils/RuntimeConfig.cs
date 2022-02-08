@@ -15,7 +15,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public class Framework
         {
             public string Name { get; }
-            public string Version { get; set;  }
+            public string Version { get; set; }
 
             public string RollForward { get; set; }
             public int? RollForwardOnNoCandidateFx { get; set; }
@@ -63,21 +63,24 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 {
                     frameworkReference.Add(
                         Constants.RollForwardSetting.RuntimeConfigPropertyName,
-                        RollForward);
+                        RollForward
+                    );
                 }
 
                 if (RollForwardOnNoCandidateFx.HasValue)
                 {
                     frameworkReference.Add(
                         Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName,
-                        RollForwardOnNoCandidateFx.Value);
+                        RollForwardOnNoCandidateFx.Value
+                    );
                 }
 
                 if (ApplyPatches.HasValue)
                 {
                     frameworkReference.Add(
                         Constants.ApplyPatchesSetting.RuntimeConfigPropertyName,
-                        ApplyPatches.Value);
+                        ApplyPatches.Value
+                    );
                 }
 
                 return frameworkReference;
@@ -87,9 +90,15 @@ namespace Microsoft.DotNet.CoreSetup.Test
             {
                 return new Framework((string)jobject["name"], (string)jobject["version"])
                 {
-                    RollForward = (string)jobject[Constants.RollForwardSetting.RuntimeConfigPropertyName],
-                    RollForwardOnNoCandidateFx = (int?)jobject[Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName],
-                    ApplyPatches = (bool?)jobject[Constants.ApplyPatchesSetting.RuntimeConfigPropertyName]
+                    RollForward = (string)jobject[
+                        Constants.RollForwardSetting.RuntimeConfigPropertyName
+                    ],
+                    RollForwardOnNoCandidateFx = (int?)jobject[
+                        Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName
+                    ],
+                    ApplyPatches = (bool?)jobject[
+                        Constants.ApplyPatchesSetting.RuntimeConfigPropertyName
+                    ]
                 };
             }
         }
@@ -100,7 +109,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         private readonly string _path;
         private readonly List<Framework> _frameworks = new List<Framework>();
         private readonly List<Framework> _includedFrameworks = new List<Framework>();
-        private readonly List<Tuple<string, string>> _properties = new List<Tuple<string, string>>();
+        private readonly List<Tuple<string, string>> _properties =
+            new List<Tuple<string, string>>();
 
         /// <summary>
         /// Creates new runtime config - overwrites existing file on Save if any.
@@ -157,9 +167,15 @@ namespace Microsoft.DotNet.CoreSetup.Test
                         }
                     }
 
-                    runtimeConfig._rollForward = (string)runtimeOptions[Constants.RollForwardSetting.RuntimeConfigPropertyName];
-                    runtimeConfig._rollForwardOnNoCandidateFx = (int?)runtimeOptions[Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName];
-                    runtimeConfig._applyPatches = (bool?)runtimeOptions[Constants.ApplyPatchesSetting.RuntimeConfigPropertyName];
+                    runtimeConfig._rollForward = (string)runtimeOptions[
+                        Constants.RollForwardSetting.RuntimeConfigPropertyName
+                    ];
+                    runtimeConfig._rollForwardOnNoCandidateFx = (int?)runtimeOptions[
+                        Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName
+                    ];
+                    runtimeConfig._applyPatches = (bool?)runtimeOptions[
+                        Constants.ApplyPatchesSetting.RuntimeConfigPropertyName
+                    ];
                 }
             }
 
@@ -240,35 +256,40 @@ namespace Microsoft.DotNet.CoreSetup.Test
             {
                 runtimeOptions.Add(
                     "frameworks",
-                    new JArray(_frameworks.Select(f => f.ToJson()).ToArray()));
+                    new JArray(_frameworks.Select(f => f.ToJson()).ToArray())
+                );
             }
 
             if (_includedFrameworks.Any())
             {
                 runtimeOptions.Add(
                     "includedFrameworks",
-                    new JArray(_includedFrameworks.Select(f => f.ToJson()).ToArray()));
+                    new JArray(_includedFrameworks.Select(f => f.ToJson()).ToArray())
+                );
             }
 
             if (_rollForward != null)
             {
                 runtimeOptions.Add(
                     Constants.RollForwardSetting.RuntimeConfigPropertyName,
-                    _rollForward);
+                    _rollForward
+                );
             }
 
             if (_rollForwardOnNoCandidateFx.HasValue)
             {
                 runtimeOptions.Add(
                     Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName,
-                    _rollForwardOnNoCandidateFx.Value);
+                    _rollForwardOnNoCandidateFx.Value
+                );
             }
 
             if (_applyPatches.HasValue)
             {
                 runtimeOptions.Add(
                     Constants.ApplyPatchesSetting.RuntimeConfigPropertyName,
-                    _applyPatches.Value);
+                    _applyPatches.Value
+                );
             }
 
             if (_properties.Count > 0)
@@ -276,18 +297,17 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 JObject configProperties = new JObject();
                 foreach (var property in _properties)
                 {
-                    var tokenValue = (property.Item2 == "false" || property.Item2 == "true") ?
-                        JToken.Parse(property.Item2) : property.Item2;
+                    var tokenValue =
+                        (property.Item2 == "false" || property.Item2 == "true")
+                            ? JToken.Parse(property.Item2)
+                            : property.Item2;
                     configProperties.Add(property.Item1, tokenValue);
                 }
 
                 runtimeOptions.Add("configProperties", configProperties);
             }
 
-            JObject json = new JObject()
-                {
-                    { "runtimeOptions", runtimeOptions }
-                };
+            JObject json = new JObject() { { "runtimeOptions", runtimeOptions } };
 
             File.WriteAllText(_path, json.ToString());
         }

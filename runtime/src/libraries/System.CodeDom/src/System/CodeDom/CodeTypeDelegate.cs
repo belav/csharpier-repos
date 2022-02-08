@@ -28,6 +28,7 @@ namespace System.CodeDom
             set => _returnType = value;
         }
 
-        public CodeParameterDeclarationExpressionCollection Parameters { get; } = new CodeParameterDeclarationExpressionCollection();
+        public CodeParameterDeclarationExpressionCollection Parameters { get; } =
+            new CodeParameterDeclarationExpressionCollection();
     }
 }

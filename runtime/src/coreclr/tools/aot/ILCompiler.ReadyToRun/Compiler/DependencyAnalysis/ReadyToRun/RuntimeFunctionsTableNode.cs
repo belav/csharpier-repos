@@ -18,8 +18,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly NodeFactory _nodeFactory;
         private int _tableSize = -1;
 
-        public RuntimeFunctionsTableNode(NodeFactory nodeFactory)
-            : base(nodeFactory.Target)
+        public RuntimeFunctionsTableNode(NodeFactory nodeFactory) : base(nodeFactory.Target)
         {
             _nodeFactory = nodeFactory;
         }
@@ -61,7 +60,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             if (_methodNodes == null)
                 LayoutRuntimeFunctions();
@@ -87,13 +91,25 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         // THUMB_CODE
                         codeDelta = 1;
                     }
-                    runtimeFunctionsBuilder.EmitReloc(method, RelocType.IMAGE_REL_BASED_ADDR32NB, delta: frameInfo.StartOffset + codeDelta);
+                    runtimeFunctionsBuilder.EmitReloc(
+                        method,
+                        RelocType.IMAGE_REL_BASED_ADDR32NB,
+                        delta: frameInfo.StartOffset + codeDelta
+                    );
                     if (!relocsOnly && Target.Architecture == TargetArchitecture.X64)
                     {
                         // On Amd64, the 2nd word contains the EndOffset of the runtime function
-                        runtimeFunctionsBuilder.EmitReloc(method, RelocType.IMAGE_REL_BASED_ADDR32NB, delta: frameInfo.EndOffset);
+                        runtimeFunctionsBuilder.EmitReloc(
+                            method,
+                            RelocType.IMAGE_REL_BASED_ADDR32NB,
+                            delta: frameInfo.EndOffset
+                        );
                     }
-                    runtimeFunctionsBuilder.EmitReloc(factory.RuntimeFunctionsGCInfo.StartSymbol, RelocType.IMAGE_REL_BASED_ADDR32NB, funcletOffsets[frameIndex]);
+                    runtimeFunctionsBuilder.EmitReloc(
+                        factory.RuntimeFunctionsGCInfo.StartSymbol,
+                        RelocType.IMAGE_REL_BASED_ADDR32NB,
+                        funcletOffsets[frameIndex]
+                    );
                 }
             }
 

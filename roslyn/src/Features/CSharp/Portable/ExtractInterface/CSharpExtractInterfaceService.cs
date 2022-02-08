@@ -27,51 +27,67 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpExtractInterfaceService()
-        {
-        }
+        public CSharpExtractInterfaceService() { }
 
-        protected override async Task<SyntaxNode> GetTypeDeclarationAsync(Document document, int position, TypeDiscoveryRule typeDiscoveryRule, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode> GetTypeDeclarationAsync(
+            Document document,
+            int position,
+            TypeDiscoveryRule typeDiscoveryRule,
+            CancellationToken cancellationToken
+        )
         {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-            var token = root.FindToken(position != tree.Length ? position : Math.Max(0, position - 1));
+            var token = root.FindToken(
+                position != tree.Length ? position : Math.Max(0, position - 1)
+            );
             var typeDeclaration = token.GetAncestor<TypeDeclarationSyntax>();
 
-            if (typeDeclaration == null ||
-                typeDiscoveryRule == TypeDiscoveryRule.TypeDeclaration)
+            if (typeDeclaration == null || typeDiscoveryRule == TypeDiscoveryRule.TypeDeclaration)
             {
                 return typeDeclaration;
             }
 
             var spanStart = typeDeclaration.Identifier.SpanStart;
-            var spanEnd = typeDeclaration.TypeParameterList != null ? typeDeclaration.TypeParameterList.Span.End : typeDeclaration.Identifier.Span.End;
+            var spanEnd =
+                typeDeclaration.TypeParameterList != null
+                    ? typeDeclaration.TypeParameterList.Span.End
+                    : typeDeclaration.Identifier.Span.End;
             var span = new TextSpan(spanStart, spanEnd - spanStart);
 
             return span.IntersectsWith(position) ? typeDeclaration : null;
         }
 
-        internal override string GetContainingNamespaceDisplay(INamedTypeSymbol typeSymbol, CompilationOptions compilationOptions)
+        internal override string GetContainingNamespaceDisplay(
+            INamedTypeSymbol typeSymbol,
+            CompilationOptions compilationOptions
+        )
         {
             return typeSymbol.ContainingNamespace.IsGlobalNamespace
-                ? string.Empty
-                : typeSymbol.ContainingNamespace.ToDisplayString();
+              ? string.Empty
+              : typeSymbol.ContainingNamespace.ToDisplayString();
         }
 
-        internal override bool IsExtractableMember(ISymbol m)
-            => base.IsExtractableMember(m) && !m.ExplicitInterfaceImplementations().Any();
+        internal override bool IsExtractableMember(ISymbol m) =>
+            base.IsExtractableMember(m) && !m.ExplicitInterfaceImplementations().Any();
 
         internal override bool ShouldIncludeAccessibilityModifier(SyntaxNode typeNode)
         {
             var typeDeclaration = typeNode as TypeDeclarationSyntax;
-            return typeDeclaration.Modifiers.Any(m => SyntaxFacts.IsAccessibilityModifier(m.Kind()));
+            return typeDeclaration.Modifiers.Any(
+                m => SyntaxFacts.IsAccessibilityModifier(m.Kind())
+            );
         }
 
         protected override Task<Solution> UpdateMembersWithExplicitImplementationsAsync(
-            Solution unformattedSolution, IReadOnlyList<DocumentId> documentIds,
-            INamedTypeSymbol extractedInterface, INamedTypeSymbol typeToExtractFrom,
-            IEnumerable<ISymbol> includedMembers, ImmutableDictionary<ISymbol, SyntaxAnnotation> symbolToDeclarationMap,
-            CancellationToken cancellationToken)
+            Solution unformattedSolution,
+            IReadOnlyList<DocumentId> documentIds,
+            INamedTypeSymbol extractedInterface,
+            INamedTypeSymbol typeToExtractFrom,
+            IEnumerable<ISymbol> includedMembers,
+            ImmutableDictionary<ISymbol, SyntaxAnnotation> symbolToDeclarationMap,
+            CancellationToken cancellationToken
+        )
         {
             // In C#, member implementations do not always need
             // to be explicitly added. It's safe enough to return

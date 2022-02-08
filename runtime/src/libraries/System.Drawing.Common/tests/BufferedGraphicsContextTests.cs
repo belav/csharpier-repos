@@ -38,7 +38,17 @@ namespace System.Drawing.Tests
             using (var context = new BufferedGraphicsContext())
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
-            using (BufferedGraphics bufferedGraphics = context.Allocate(graphics, new Rectangle(0, 0, context.MaximumBuffer.Width - 1, context.MaximumBuffer.Height - 1)))
+            using (
+                BufferedGraphics bufferedGraphics = context.Allocate(
+                    graphics,
+                    new Rectangle(
+                        0,
+                        0,
+                        context.MaximumBuffer.Width - 1,
+                        context.MaximumBuffer.Height - 1
+                    )
+                )
+            )
             {
                 Assert.NotNull(bufferedGraphics.Graphics);
 
@@ -52,7 +62,17 @@ namespace System.Drawing.Tests
             using (var context = new BufferedGraphicsContext())
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
-            using (BufferedGraphics bufferedGraphics = context.Allocate(graphics, new Rectangle(0, 0, context.MaximumBuffer.Width + 1, context.MaximumBuffer.Height + 1)))
+            using (
+                BufferedGraphics bufferedGraphics = context.Allocate(
+                    graphics,
+                    new Rectangle(
+                        0,
+                        0,
+                        context.MaximumBuffer.Width + 1,
+                        context.MaximumBuffer.Height + 1
+                    )
+                )
+            )
             {
                 Assert.NotNull(bufferedGraphics.Graphics);
 
@@ -71,7 +91,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     IntPtr hdc = graphics.GetHdc();
-                    using (BufferedGraphics bufferedGraphics = context.Allocate(hdc, Rectangle.Empty))
+                    using (
+                        BufferedGraphics bufferedGraphics = context.Allocate(hdc, Rectangle.Empty)
+                    )
                     {
                         Assert.NotNull(bufferedGraphics.Graphics);
                     }
@@ -95,7 +117,17 @@ namespace System.Drawing.Tests
                 try
                 {
                     IntPtr hdc = graphics.GetHdc();
-                    using (BufferedGraphics bufferedGraphics = context.Allocate(hdc, new Rectangle(0, 0, context.MaximumBuffer.Width - 1, context.MaximumBuffer.Height - 1)))
+                    using (
+                        BufferedGraphics bufferedGraphics = context.Allocate(
+                            hdc,
+                            new Rectangle(
+                                0,
+                                0,
+                                context.MaximumBuffer.Width - 1,
+                                context.MaximumBuffer.Height - 1
+                            )
+                        )
+                    )
                     {
                         Assert.NotNull(bufferedGraphics.Graphics);
                     }
@@ -119,7 +151,17 @@ namespace System.Drawing.Tests
                 try
                 {
                     IntPtr hdc = graphics.GetHdc();
-                    using (BufferedGraphics bufferedGraphics = context.Allocate(hdc, new Rectangle(0, 0, context.MaximumBuffer.Width + 1, context.MaximumBuffer.Height + 1)))
+                    using (
+                        BufferedGraphics bufferedGraphics = context.Allocate(
+                            hdc,
+                            new Rectangle(
+                                0,
+                                0,
+                                context.MaximumBuffer.Width + 1,
+                                context.MaximumBuffer.Height + 1
+                            )
+                        )
+                    )
                     {
                         Assert.NotNull(bufferedGraphics.Graphics);
                     }
@@ -139,7 +181,10 @@ namespace System.Drawing.Tests
         {
             using (var context = new BufferedGraphicsContext())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => context.Allocate((IntPtr)(-1), new Rectangle(0, 0, 10, 10)));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => context.Allocate((IntPtr)(-1), new Rectangle(0, 0, 10, 10))
+                );
             }
         }
 
@@ -161,7 +206,10 @@ namespace System.Drawing.Tests
             using (var context = new BufferedGraphicsContext())
             using (var image = new Bitmap(10, 10))
             {
-                Assert.Throws<ArgumentNullException>("hdc", () => context.Allocate(null, new Rectangle(0, 0, 10, 10)));
+                Assert.Throws<ArgumentNullException>(
+                    "hdc",
+                    () => context.Allocate(null, new Rectangle(0, 0, 10, 10))
+                );
             }
         }
 
@@ -175,9 +223,20 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                Rectangle largeRectangle = new Rectangle(0, 0, context.MaximumBuffer.Width + 1, context.MaximumBuffer.Height + 1);
-                AssertExtensions.Throws<ArgumentException>(null, () => context.Allocate(graphics, largeRectangle));
-                AssertExtensions.Throws<ArgumentException>(null, () => context.Allocate(graphics, Rectangle.Empty));
+                Rectangle largeRectangle = new Rectangle(
+                    0,
+                    0,
+                    context.MaximumBuffer.Width + 1,
+                    context.MaximumBuffer.Height + 1
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => context.Allocate(graphics, largeRectangle)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => context.Allocate(graphics, Rectangle.Empty)
+                );
             }
         }
 
@@ -193,9 +252,18 @@ namespace System.Drawing.Tests
                 {
                     graphics.GetHdc();
 
-                    Rectangle largeRectangle = new Rectangle(0, 0, context.MaximumBuffer.Width + 1, context.MaximumBuffer.Height + 1);
-                    Assert.Throws<InvalidOperationException>(() => context.Allocate(graphics, largeRectangle));
-                    Assert.Throws<InvalidOperationException>(() => context.Allocate(graphics, Rectangle.Empty));
+                    Rectangle largeRectangle = new Rectangle(
+                        0,
+                        0,
+                        context.MaximumBuffer.Width + 1,
+                        context.MaximumBuffer.Height + 1
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => context.Allocate(graphics, largeRectangle)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => context.Allocate(graphics, Rectangle.Empty)
+                    );
                 }
                 finally
                 {
@@ -234,7 +302,11 @@ namespace System.Drawing.Tests
         {
             using (var context = new BufferedGraphicsContext())
             {
-                AssertExtensions.Throws<ArgumentException>("value", null, () => context.MaximumBuffer = new Size(width, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    "value",
+                    null,
+                    () => context.MaximumBuffer = new Size(width, 1)
+                );
             }
         }
 
@@ -245,13 +317,16 @@ namespace System.Drawing.Tests
         {
             using (var context = new BufferedGraphicsContext())
             {
-                AssertExtensions.Throws<ArgumentException>("value", null, () => context.MaximumBuffer = new Size(1, height));
+                AssertExtensions.Throws<ArgumentException>(
+                    "value",
+                    null,
+                    () => context.MaximumBuffer = new Size(1, height)
+                );
             }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void AllocateBufferedGraphicsContext() => new BufferedGraphicsContext();
-
 
         [Fact]
         public void Finalize_Invoke_Success()

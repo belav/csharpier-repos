@@ -13,19 +13,25 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void GetRequiredService_throws_useful_exception_if_service_not_registered()
         {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
+            var serviceProvider = new ServiceCollection().BuildServiceProvider(
+                validateScopes: true
+            );
 
             Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService<IPilkington>());
+                () => serviceProvider.GetRequiredService<IPilkington>()
+            );
         }
 
         [ConditionalFact]
         public void Non_generic_GetRequiredService_throws_useful_exception_if_service_not_registered()
         {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
+            var serviceProvider = new ServiceCollection().BuildServiceProvider(
+                validateScopes: true
+            );
 
             Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService(typeof(IPilkington)));
+                () => serviceProvider.GetRequiredService(typeof(IPilkington))
+            );
         }
 
         [ConditionalFact]
@@ -33,13 +39,17 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPilkington, Karl>();
-            using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+            using var scope = serviceCollection
+                .BuildServiceProvider(validateScopes: true)
+                .CreateScope();
             var serviceProvider = scope.ServiceProvider;
 
             Assert.Equal(
                 KarlQuote,
                 Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetRequiredService<IPilkington>()).Message);
+                    () => serviceProvider.GetRequiredService<IPilkington>()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -48,19 +58,25 @@ namespace Microsoft.EntityFrameworkCore
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPilkington, Karl>();
 
-            using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+            using var scope = serviceCollection
+                .BuildServiceProvider(validateScopes: true)
+                .CreateScope();
             var serviceProvider = scope.ServiceProvider;
 
             Assert.Equal(
                 KarlQuote,
                 Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetRequiredService(typeof(IPilkington))).Message);
+                    () => serviceProvider.GetRequiredService(typeof(IPilkington))
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public void GetService_returns_null_if_service_not_registered()
         {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
+            var serviceProvider = new ServiceCollection().BuildServiceProvider(
+                validateScopes: true
+            );
 
             Assert.Null(serviceProvider.GetService<IPilkington>());
         }
@@ -68,7 +84,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Non_generic_GetService_returns_null_if_service_not_registered()
         {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
+            var serviceProvider = new ServiceCollection().BuildServiceProvider(
+                validateScopes: true
+            );
 
             Assert.Null(serviceProvider.GetService(typeof(IPilkington)));
         }
@@ -78,13 +96,17 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPilkington, Karl>();
-            using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+            using var scope = serviceCollection
+                .BuildServiceProvider(validateScopes: true)
+                .CreateScope();
             var serviceProvider = scope.ServiceProvider;
 
             Assert.Equal(
                 KarlQuote,
                 Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetService<IPilkington>()).Message);
+                    () => serviceProvider.GetService<IPilkington>()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -93,20 +115,22 @@ namespace Microsoft.EntityFrameworkCore
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPilkington, Karl>();
 
-            using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+            using var scope = serviceCollection
+                .BuildServiceProvider(validateScopes: true)
+                .CreateScope();
             var serviceProvider = scope.ServiceProvider;
 
             Assert.Equal(
                 KarlQuote,
                 Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetService(typeof(IPilkington))).Message);
+                    () => serviceProvider.GetService(typeof(IPilkington))
+                ).Message
+            );
         }
 
         private const string KarlQuote = "You can only talk rubbish if you're aware of knowledge.";
 
-        private interface IPilkington
-        {
-        }
+        private interface IPilkington { }
 
         private class Karl : IPilkington
         {

@@ -20,9 +20,13 @@ internal abstract class ReadOnlyStream : Stream
         set => throw new NotSupportedException();
     }
 
-    public override void Write(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException();
+    public override void Write(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => throw new NotSupportedException();
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 }

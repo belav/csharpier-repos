@@ -23,12 +23,26 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(Context context)
             {
-                context.Entity.AddRange(new[]
-                {
-                    new Entity { Id = 1, Child = new ChildEntity { SomeValue = "Alain Brito"} },
-                    new Entity { Id = 2, Child = new ChildEntity { SomeValue = "Jimmy Bogard"} },
-                    new Entity { Id = 3, Child = new ChildEntity { SomeValue = "Bill Gates"} }
-                });
+                context.Entity.AddRange(
+                    new[]
+                    {
+                        new Entity
+                        {
+                            Id = 1,
+                            Child = new ChildEntity { SomeValue = "Alain Brito" }
+                        },
+                        new Entity
+                        {
+                            Id = 2,
+                            Child = new ChildEntity { SomeValue = "Jimmy Bogard" }
+                        },
+                        new Entity
+                        {
+                            Id = 3,
+                            Child = new ChildEntity { SomeValue = "Bill Gates" }
+                        }
+                    }
+                );
                 base.Seed(context);
             }
         }
@@ -45,23 +59,26 @@ namespace AutoMapper.IntegrationTests.Net4
 
         private static Entity LoadEntity()
         {
-            using(var context = new Context())
+            using (var context = new Context())
             {
                 return context.Entity.First();
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Entity, Model>();
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Entity, Model>();
 
-            cfg.CreateMap<ChildEntity, ChildModelBase>()
-                .Include<ChildEntity, ChildModel>()
-                .ForMember(x => x.SomeValue, x => x.Ignore())
-                .As<ChildModel>();
+                    cfg.CreateMap<ChildEntity, ChildModelBase>()
+                        .Include<ChildEntity, ChildModel>()
+                        .ForMember(x => x.SomeValue, x => x.Ignore())
+                        .As<ChildModel>();
 
-            cfg.CreateMap<ChildEntity, ChildModel>();
-        });
+                    cfg.CreateMap<ChildEntity, ChildModel>();
+                }
+            );
 
         public class Entity
         {
@@ -84,8 +101,6 @@ namespace AutoMapper.IntegrationTests.Net4
             public string SomeValue { get; set; }
         }
 
-        public class ChildModel : ChildModelBase
-        {
-        }
+        public class ChildModel : ChildModelBase { }
     }
 }

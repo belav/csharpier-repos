@@ -21,7 +21,11 @@ namespace System.DirectoryServices.AccountManagement
             get
             {
                 DirectoryRdnPrefixAttribute[] MyAttribute =
-                (DirectoryRdnPrefixAttribute[])Attribute.GetCustomAttributes(_p.GetType(), typeof(DirectoryRdnPrefixAttribute), false);
+                    (DirectoryRdnPrefixAttribute[])Attribute.GetCustomAttributes(
+                        _p.GetType(),
+                        typeof(DirectoryRdnPrefixAttribute),
+                        false
+                    );
 
                 if (MyAttribute == null)
                     return null;
@@ -47,7 +51,11 @@ namespace System.DirectoryServices.AccountManagement
         internal static string ReadStructuralObjectClass(Type principalType)
         {
             DirectoryObjectClassAttribute[] MyAttribute =
-            (DirectoryObjectClassAttribute[])Attribute.GetCustomAttributes(principalType, typeof(DirectoryObjectClassAttribute), false);
+                (DirectoryObjectClassAttribute[])Attribute.GetCustomAttributes(
+                    principalType,
+                    typeof(DirectoryObjectClassAttribute),
+                    false
+                );
 
             if (MyAttribute == null)
                 return null;
@@ -63,7 +71,7 @@ namespace System.DirectoryServices.AccountManagement
                 /*
                 if (p.ContextType == MyAttribute[i].Context)
                 {
-                    return MyAttribute[i].ObjectClass;
+                return MyAttribute[i].ObjectClass;
                 }
                 */
             }
@@ -76,7 +84,11 @@ namespace System.DirectoryServices.AccountManagement
             get
             {
                 DirectoryObjectClassAttribute[] MyAttribute =
-                (DirectoryObjectClassAttribute[])Attribute.GetCustomAttributes(_p.GetType(), typeof(DirectoryObjectClassAttribute), false);
+                    (DirectoryObjectClassAttribute[])Attribute.GetCustomAttributes(
+                        _p.GetType(),
+                        typeof(DirectoryObjectClassAttribute),
+                        false
+                    );
 
                 if (MyAttribute == null)
                     return null;
@@ -101,34 +113,34 @@ namespace System.DirectoryServices.AccountManagement
         /*
                 internal string SchemaAttributeName(string propertyName)
                 {
-                    System.Reflection.PropertyInfo propInfo = this.GetType().GetProperty(propertyName);
-
-                    if ( null == propInfo )
-                        return null;
-
-                    DirectoryPropertyAttribute[] MyAttribute = (DirectoryPropertyAttribute[])Attribute.GetCustomAttributes(propInfo, typeof(DirectoryPropertyAttribute));
-
-                    if (MyAttribute == null)
-                        return null;
-
-                    string defaultAttribute = null;
-
-                    for (int i = 0; i < MyAttribute.Length; i++)
-                    {
-                        if (MyAttribute[i].Context == null)
-                        {
-                            defaultAttribute = MyAttribute[i].SchemaAttributeName;
-                        }
-                        if (p.ContextType == MyAttribute[i].Context)
-                        {
-                            return MyAttribute[i].SchemaAttributeName;
-                        }
-                    }
-
-                    return defaultAttribute;
-
+                System.Reflection.PropertyInfo propInfo = this.GetType().GetProperty(propertyName);
+                
+                if ( null == propInfo )
+                return null;
+                
+                DirectoryPropertyAttribute[] MyAttribute = (DirectoryPropertyAttribute[])Attribute.GetCustomAttributes(propInfo, typeof(DirectoryPropertyAttribute));
+                
+                if (MyAttribute == null)
+                return null;
+                
+                string defaultAttribute = null;
+                
+                for (int i = 0; i < MyAttribute.Length; i++)
+                {
+                if (MyAttribute[i].Context == null)
+                {
+                defaultAttribute = MyAttribute[i].SchemaAttributeName;
                 }
-        */
+                if (p.ContextType == MyAttribute[i].Context)
+                {
+                return MyAttribute[i].SchemaAttributeName;
+                }
+                }
+                
+                return defaultAttribute;
+                
+                }
+                */
 
     }
 }

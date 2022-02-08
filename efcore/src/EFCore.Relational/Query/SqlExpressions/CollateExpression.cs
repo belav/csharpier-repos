@@ -40,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual string Collation { get; }
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => Update((SqlExpression)visitor.Visit(Operand));
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            Update((SqlExpression)visitor.Visit(Operand));
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -49,34 +49,31 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// </summary>
         /// <param name="operand">The <see cref="Operand" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public virtual CollateExpression Update(SqlExpression operand)
-            => operand != Operand
-                ? new CollateExpression(operand, Collation)
-                : this;
+        public virtual CollateExpression Update(SqlExpression operand) =>
+            operand != Operand ? new CollateExpression(operand, Collation) : this;
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
             expressionPrinter.Visit(Operand);
-            expressionPrinter
-                .Append(" COLLATE ")
-                .Append(Collation);
+            expressionPrinter.Append(" COLLATE ").Append(Collation);
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is CollateExpression collateExpression
-                    && Equals(collateExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is CollateExpression collateExpression && Equals(collateExpression)
+            );
 
-        private bool Equals(CollateExpression collateExpression)
-            => base.Equals(collateExpression)
-                && Operand.Equals(collateExpression.Operand)
-                && Collation.Equals(collateExpression.Collation, StringComparison.Ordinal);
+        private bool Equals(CollateExpression collateExpression) =>
+            base.Equals(collateExpression)
+            && Operand.Equals(collateExpression.Operand)
+            && Collation.Equals(collateExpression.Collation, StringComparison.Ordinal);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Operand, Collation);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), Operand, Collation);
     }
 }

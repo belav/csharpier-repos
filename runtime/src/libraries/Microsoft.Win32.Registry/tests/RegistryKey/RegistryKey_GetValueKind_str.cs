@@ -16,12 +16,13 @@ namespace Microsoft.Win32.RegistryTests
             Assert.Throws<IOException>(() => TestRegistryKey.GetValueKind("DoesNotExist"));
 
             // RegistryKey is closed
-            Assert.Throws<ObjectDisposedException>(() =>
-            {
-                TestRegistryKey.Dispose();
-                TestRegistryKey.GetValueKind("FooBar");
-            });
-
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    TestRegistryKey.Dispose();
+                    TestRegistryKey.GetValueKind("FooBar");
+                }
+            );
         }
 
         [Fact]

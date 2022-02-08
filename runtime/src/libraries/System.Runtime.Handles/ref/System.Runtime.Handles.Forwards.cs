@@ -4,8 +4,16 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(Microsoft.Win32.SafeHandles.SafeWaitHandle))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(Microsoft.Win32.SafeHandles.SafeWaitHandle)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.HandleInheritability))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.CriticalHandle))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.SafeHandle))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Threading.WaitHandleExtensions))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.CriticalHandle)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.SafeHandle)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Threading.WaitHandleExtensions)
+)]

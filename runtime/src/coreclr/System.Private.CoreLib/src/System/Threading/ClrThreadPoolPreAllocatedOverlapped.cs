@@ -47,10 +47,8 @@ namespace System.Threading
         ///     This method was called after the <see cref="ThreadPoolBoundHandle"/> was disposed.
         /// </exception>
         [CLSCompliant(false)]
-        public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData) :
-            this(callback, state, pinData, flowExecutionContext: true)
-        {
-        }
+        public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData)
+            : this(callback, state, pinData, flowExecutionContext: true) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PreAllocatedOverlapped"/> class, specifying
@@ -88,15 +86,29 @@ namespace System.Threading
         ///     This method was called after the <see cref="ThreadPoolBoundHandle"/> was disposed.
         /// </exception>
         [CLSCompliant(false)]
-        public static PreAllocatedOverlapped UnsafeCreate(IOCompletionCallback callback, object? state, object? pinData) =>
-            new PreAllocatedOverlapped(callback, state, pinData, flowExecutionContext: false);
+        public static PreAllocatedOverlapped UnsafeCreate(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) => new PreAllocatedOverlapped(callback, state, pinData, flowExecutionContext: false);
 
-        private PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData, bool flowExecutionContext)
+        private PreAllocatedOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            bool flowExecutionContext
+        )
         {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
 
-            _overlapped = new ThreadPoolBoundHandleOverlapped(callback, state, pinData, this, flowExecutionContext);
+            _overlapped = new ThreadPoolBoundHandleOverlapped(
+                callback,
+                state,
+                pinData,
+                this,
+                flowExecutionContext
+            );
         }
 
         internal bool AddRef()

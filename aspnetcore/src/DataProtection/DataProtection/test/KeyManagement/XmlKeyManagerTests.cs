@@ -26,26 +26,34 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 public class XmlKeyManagerTests
 {
-    private static readonly XElement serializedDescriptor = XElement.Parse(@"
+    private static readonly XElement serializedDescriptor = XElement.Parse(
+        @"
             <theElement>
               <secret enc:requiresEncryption='true' xmlns:enc='http://schemas.asp.net/2015/03/dataProtection'>
                 <![CDATA[This is a secret value.]]>
               </secret>
-            </theElement>");
+            </theElement>"
+    );
 
     [Fact]
     public void Ctor_WithoutEncryptorOrRepository_UsesFallback()
     {
         // Arrange
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
-            XmlRepository = null,
-            XmlEncryptor = null
-        });
+        var options = Options.Create(
+            new KeyManagementOptions()
+            {
+                AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
+                XmlRepository = null,
+                XmlEncryptor = null
+            }
+        );
 
         // Act
-        var keyManager = new XmlKeyManager(options, SimpleActivator.DefaultWithoutServices, NullLoggerFactory.Instance);
+        var keyManager = new XmlKeyManager(
+            options,
+            SimpleActivator.DefaultWithoutServices,
+            NullLoggerFactory.Instance
+        );
 
         // Assert
         Assert.NotNull(keyManager.KeyRepository);
@@ -60,16 +68,24 @@ public class XmlKeyManagerTests
     public void Ctor_WithEncryptorButNoRepository_IgnoresFallback_FailsWithServiceNotFound()
     {
         // Arrange
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
-            XmlRepository = null,
-            XmlEncryptor = new Mock<IXmlEncryptor>().Object
-        });
+        var options = Options.Create(
+            new KeyManagementOptions()
+            {
+                AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
+                XmlRepository = null,
+                XmlEncryptor = new Mock<IXmlEncryptor>().Object
+            }
+        );
 
         // Act & assert - we don't care about exception type, only exception message
         Exception ex = Assert.ThrowsAny<Exception>(
-            () => new XmlKeyManager(options, SimpleActivator.DefaultWithoutServices, NullLoggerFactory.Instance));
+            () =>
+                new XmlKeyManager(
+                    options,
+                    SimpleActivator.DefaultWithoutServices,
+                    NullLoggerFactory.Instance
+                )
+        );
         Assert.Contains("IXmlRepository", ex.Message);
     }
 
@@ -87,28 +103,41 @@ public class XmlKeyManagerTests
         string friendlyNameStoredInRepository = null;
         var expectedAuthenticatedEncryptor = new Mock<IAuthenticatedEncryptor>().Object;
         var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
-        mockDescriptor.Setup(o => o.ExportToXml()).Returns(new XmlSerializedDescriptorInfo(serializedDescriptor, typeof(MyDeserializer)));
+        mockDescriptor
+            .Setup(o => o.ExportToXml())
+            .Returns(new XmlSerializedDescriptorInfo(serializedDescriptor, typeof(MyDeserializer)));
         var expectedDescriptor = mockDescriptor.Object;
-        var testEncryptorFactory = new TestEncryptorFactory(expectedDescriptor, expectedAuthenticatedEncryptor);
+        var testEncryptorFactory = new TestEncryptorFactory(
+            expectedDescriptor,
+            expectedAuthenticatedEncryptor
+        );
         var mockConfiguration = new Mock<AlgorithmConfiguration>();
         mockConfiguration.Setup(o => o.CreateNewDescriptor()).Returns(expectedDescriptor);
         var mockXmlRepository = new Mock<IXmlRepository>();
         mockXmlRepository
             .Setup(o => o.StoreElement(It.IsAny<XElement>(), It.IsAny<string>()))
-            .Callback<XElement, string>((el, friendlyName) =>
+            .Callback<XElement, string>(
+                (el, friendlyName) =>
+                {
+                    elementStoredInRepository = el;
+                    friendlyNameStoredInRepository = friendlyName;
+                }
+            );
+        var options = Options.Create(
+            new KeyManagementOptions()
             {
-                elementStoredInRepository = el;
-                friendlyNameStoredInRepository = friendlyName;
-            });
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = mockConfiguration.Object,
-            XmlRepository = mockXmlRepository.Object,
-            XmlEncryptor = null
-        });
+                AuthenticatedEncryptorConfiguration = mockConfiguration.Object,
+                XmlRepository = mockXmlRepository.Object,
+                XmlEncryptor = null
+            }
+        );
         options.Value.AuthenticatedEncryptorFactories.Add(testEncryptorFactory);
 
-        var keyManager = new XmlKeyManager(options, SimpleActivator.DefaultWithoutServices, NullLoggerFactory.Instance);
+        var keyManager = new XmlKeyManager(
+            options,
+            SimpleActivator.DefaultWithoutServices,
+            NullLoggerFactory.Instance
+        );
 
         // Act & assert
 
@@ -122,7 +151,8 @@ public class XmlKeyManagerTests
             keyId: keyId,
             creationDate: creationDate,
             activationDate: activationDate,
-            expirationDate: expirationDate);
+            expirationDate: expirationDate
+        );
         var secondCancellationToken = keyManager.GetCacheExpirationToken();
         Assert.True(firstCancellationToken.IsCancellationRequested);
         Assert.False(secondCancellationToken.IsCancellationRequested);
@@ -134,7 +164,10 @@ public class XmlKeyManagerTests
         Assert.Equal(expirationDate, newKey.ExpirationDate);
         Assert.Same(expectedDescriptor, newKey.Descriptor);
         Assert.False(newKey.IsRevoked);
-        Assert.Same(expectedAuthenticatedEncryptor, testEncryptorFactory.CreateEncryptorInstance(newKey));
+        Assert.Same(
+            expectedAuthenticatedEncryptor,
+            testEncryptorFactory.CreateEncryptorInstance(newKey)
+        );
 
         // Finally, was the correct element stored in the repository?
         string expectedXml = string.Format(
@@ -155,7 +188,8 @@ public class XmlKeyManagerTests
             typeof(MyDeserializer).AssemblyQualifiedName,
             new XElement("creationDate", creationDate),
             new XElement("activationDate", activationDate),
-            new XElement("expirationDate", expirationDate));
+            new XElement("expirationDate", expirationDate)
+        );
         XmlAssert.Equal(expectedXml, elementStoredInRepository);
         Assert.Equal("key-3d6d01fd-c0e7-44ae-82dd-013b996b4093", friendlyNameStoredInRepository);
     }
@@ -176,37 +210,52 @@ public class XmlKeyManagerTests
         string friendlyNameStoredInRepository = null;
         var expectedAuthenticatedEncryptor = new Mock<IAuthenticatedEncryptor>().Object;
         var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
-        mockDescriptor.Setup(o => o.ExportToXml()).Returns(new XmlSerializedDescriptorInfo(serializedDescriptor, typeof(MyDeserializer)));
+        mockDescriptor
+            .Setup(o => o.ExportToXml())
+            .Returns(new XmlSerializedDescriptorInfo(serializedDescriptor, typeof(MyDeserializer)));
         var expectedDescriptor = mockDescriptor.Object;
-        var testEncryptorFactory = new TestEncryptorFactory(expectedDescriptor, expectedAuthenticatedEncryptor);
+        var testEncryptorFactory = new TestEncryptorFactory(
+            expectedDescriptor,
+            expectedAuthenticatedEncryptor
+        );
         var mockConfiguration = new Mock<AlgorithmConfiguration>();
         mockConfiguration.Setup(o => o.CreateNewDescriptor()).Returns(expectedDescriptor);
         var mockXmlRepository = new Mock<IXmlRepository>();
         mockXmlRepository
             .Setup(o => o.StoreElement(It.IsAny<XElement>(), It.IsAny<string>()))
-            .Callback<XElement, string>((el, friendlyName) =>
-            {
-                elementStoredInRepository = el;
-                friendlyNameStoredInRepository = friendlyName;
-            });
+            .Callback<XElement, string>(
+                (el, friendlyName) =>
+                {
+                    elementStoredInRepository = el;
+                    friendlyNameStoredInRepository = friendlyName;
+                }
+            );
         var mockKeyEscrow = new Mock<IKeyEscrowSink>();
         mockKeyEscrow
             .Setup(o => o.Store(It.IsAny<Guid>(), It.IsAny<XElement>()))
-            .Callback<Guid, XElement>((innerKeyId, el) =>
-            {
-                keyIdStoredInEscrow = innerKeyId;
-                elementStoredInEscrow = el;
-            });
+            .Callback<Guid, XElement>(
+                (innerKeyId, el) =>
+                {
+                    keyIdStoredInEscrow = innerKeyId;
+                    elementStoredInEscrow = el;
+                }
+            );
 
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = mockConfiguration.Object,
-            XmlRepository = mockXmlRepository.Object,
-            XmlEncryptor = new NullXmlEncryptor()
-        });
+        var options = Options.Create(
+            new KeyManagementOptions()
+            {
+                AuthenticatedEncryptorConfiguration = mockConfiguration.Object,
+                XmlRepository = mockXmlRepository.Object,
+                XmlEncryptor = new NullXmlEncryptor()
+            }
+        );
         options.Value.AuthenticatedEncryptorFactories.Add(testEncryptorFactory);
         options.Value.KeyEscrowSinks.Add(mockKeyEscrow.Object);
-        var keyManager = new XmlKeyManager(options, SimpleActivator.DefaultWithoutServices, NullLoggerFactory.Instance);
+        var keyManager = new XmlKeyManager(
+            options,
+            SimpleActivator.DefaultWithoutServices,
+            NullLoggerFactory.Instance
+        );
 
         // Act & assert
 
@@ -220,7 +269,8 @@ public class XmlKeyManagerTests
             keyId: keyId,
             creationDate: creationDate,
             activationDate: activationDate,
-            expirationDate: expirationDate);
+            expirationDate: expirationDate
+        );
         var secondCancellationToken = keyManager.GetCacheExpirationToken();
         Assert.True(firstCancellationToken.IsCancellationRequested);
         Assert.False(secondCancellationToken.IsCancellationRequested);
@@ -232,12 +282,15 @@ public class XmlKeyManagerTests
         Assert.Equal(expirationDate, newKey.ExpirationDate);
         Assert.Same(expectedDescriptor, newKey.Descriptor);
         Assert.False(newKey.IsRevoked);
-        Assert.Same(expectedAuthenticatedEncryptor, testEncryptorFactory.CreateEncryptorInstance(newKey));
+        Assert.Same(
+            expectedAuthenticatedEncryptor,
+            testEncryptorFactory.CreateEncryptorInstance(newKey)
+        );
 
         // Was the correct element stored in escrow?
         // This should not have gone through the encryptor.
         string expectedEscrowXml = string.Format(
-          CultureInfo.InvariantCulture,
+            CultureInfo.InvariantCulture,
             @"
                 <key id='3d6d01fd-c0e7-44ae-82dd-013b996b4093' version='1' xmlns:enc='http://schemas.asp.net/2015/03/dataProtection'>
                   {1}
@@ -254,15 +307,16 @@ public class XmlKeyManagerTests
             typeof(MyDeserializer).AssemblyQualifiedName,
             new XElement("creationDate", creationDate),
             new XElement("activationDate", activationDate),
-            new XElement("expirationDate", expirationDate));
+            new XElement("expirationDate", expirationDate)
+        );
         XmlAssert.Equal(expectedEscrowXml, elementStoredInEscrow);
         Assert.Equal(keyId, keyIdStoredInEscrow.Value);
 
         // Finally, was the correct element stored in the repository?
         // This should have gone through the encryptor (which we set to be the null encryptor in this test)
         string expectedRepositoryXml = String.Format(
-          CultureInfo.InvariantCulture,
-          @"
+            CultureInfo.InvariantCulture,
+            @"
                 <key id='3d6d01fd-c0e7-44ae-82dd-013b996b4093' version='1' xmlns:enc='http://schemas.asp.net/2015/03/dataProtection'>
                   {2}
                   {3}
@@ -283,7 +337,8 @@ public class XmlKeyManagerTests
             typeof(NullXmlDecryptor).AssemblyQualifiedName,
             new XElement("creationDate", creationDate),
             new XElement("activationDate", activationDate),
-            new XElement("expirationDate", expirationDate));
+            new XElement("expirationDate", expirationDate)
+        );
         XmlAssert.Equal(expectedRepositoryXml, elementStoredInRepository);
         Assert.Equal("key-3d6d01fd-c0e7-44ae-82dd-013b996b4093", friendlyNameStoredInRepository);
     }
@@ -298,19 +353,36 @@ public class XmlKeyManagerTests
         DateTimeOffset expirationDate = activationDate.AddMonths(1);
         var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
         mockInternalKeyManager
-            .Setup(o => o.CreateNewKey(It.IsAny<Guid>(), It.IsAny<DateTimeOffset>(), activationDate, expirationDate))
-            .Callback<Guid, DateTimeOffset, DateTimeOffset, DateTimeOffset>((innerKeyId, innerCreationDate, innerActivationDate, innerExpirationDate) =>
-            {
-                actualCreationDate = innerCreationDate;
-            });
+            .Setup(
+                o =>
+                    o.CreateNewKey(
+                        It.IsAny<Guid>(),
+                        It.IsAny<DateTimeOffset>(),
+                        activationDate,
+                        expirationDate
+                    )
+            )
+            .Callback<Guid, DateTimeOffset, DateTimeOffset, DateTimeOffset>(
+                (innerKeyId, innerCreationDate, innerActivationDate, innerExpirationDate) =>
+                {
+                    actualCreationDate = innerCreationDate;
+                }
+            );
 
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
-            XmlRepository = new Mock<IXmlRepository>().Object,
-            XmlEncryptor = null
-        });
-        var keyManager = new XmlKeyManager(options, SimpleActivator.DefaultWithoutServices, NullLoggerFactory.Instance, mockInternalKeyManager.Object);
+        var options = Options.Create(
+            new KeyManagementOptions()
+            {
+                AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
+                XmlRepository = new Mock<IXmlRepository>().Object,
+                XmlEncryptor = null
+            }
+        );
+        var keyManager = new XmlKeyManager(
+            options,
+            SimpleActivator.DefaultWithoutServices,
+            NullLoggerFactory.Instance,
+            mockInternalKeyManager.Object
+        );
 
         // Act
         keyManager.CreateNewKey(activationDate, expirationDate);
@@ -337,7 +409,8 @@ public class XmlKeyManagerTests
     public void GetAllKeys_IgnoresUnknownElements()
     {
         // Arrange
-        const string xml = @"
+        const string xml =
+            @"
                 <root>
                   <key id='62a72ad9-42d7-4e97-b3fa-05bad5d53d33' version='1'>
                     <creationDate>2015-01-01T00:00:00Z</creationDate>
@@ -363,8 +436,16 @@ public class XmlKeyManagerTests
         var descriptorA = new Mock<IAuthenticatedEncryptorDescriptor>().Object;
         var descriptorB = new Mock<IAuthenticatedEncryptorDescriptor>().Object;
         var mockActivator = new Mock<IActivator>();
-        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput("deserializer-A", "<elementA />", descriptorA);
-        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput("deserializer-B", "<elementB />", descriptorB);
+        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput(
+            "deserializer-A",
+            "<elementA />",
+            descriptorA
+        );
+        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput(
+            "deserializer-B",
+            "<elementB />",
+            descriptorB
+        );
 
         // Act
         var keys = RunGetAllKeysCore(xml, mockActivator.Object).ToArray();
@@ -389,7 +470,8 @@ public class XmlKeyManagerTests
     public void GetAllKeys_UnderstandsRevocations()
     {
         // Arrange
-        const string xml = @"
+        const string xml =
+            @"
                 <root>
                   <key id='67f9cdea-83ba-41ed-b160-2b1d0ea30251' version='1'>
                     <creationDate>2015-01-01T00:00:00Z</creationDate>
@@ -441,7 +523,11 @@ public class XmlKeyManagerTests
                 </root>";
 
         var mockActivator = new Mock<IActivator>();
-        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput("theDeserializer", "<node />", new Mock<IAuthenticatedEncryptorDescriptor>().Object);
+        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput(
+            "theDeserializer",
+            "<node />",
+            new Mock<IAuthenticatedEncryptorDescriptor>().Object
+        );
 
         // Act
         var keys = RunGetAllKeysCore(xml, mockActivator.Object).ToArray();
@@ -462,7 +548,8 @@ public class XmlKeyManagerTests
     public void GetAllKeys_PerformsDecryption()
     {
         // Arrange
-        const string xml = @"
+        const string xml =
+            @"
                 <root xmlns:enc='http://schemas.asp.net/2015/03/dataProtection'>
                   <key id='09712588-ba68-438a-a5ee-fe842b3453b2' version='1'>
                     <creationDate>2015-01-01T00:00:00Z</creationDate>
@@ -478,8 +565,16 @@ public class XmlKeyManagerTests
 
         var expectedDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>().Object;
         var mockActivator = new Mock<IActivator>();
-        mockActivator.ReturnDecryptedElementGivenDecryptorTypeNameAndInput("theDecryptor", "<node xmlns='private' />", "<decryptedNode />");
-        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput("theDeserializer", "<decryptedNode />", expectedDescriptor);
+        mockActivator.ReturnDecryptedElementGivenDecryptorTypeNameAndInput(
+            "theDecryptor",
+            "<node xmlns='private' />",
+            "<decryptedNode />"
+        );
+        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput(
+            "theDeserializer",
+            "<decryptedNode />",
+            expectedDescriptor
+        );
 
         // Act
         var keys = RunGetAllKeysCore(xml, mockActivator.Object).ToArray();
@@ -494,7 +589,8 @@ public class XmlKeyManagerTests
     public void GetAllKeys_SwallowsKeyDeserializationErrors()
     {
         // Arrange
-        const string xml = @"
+        const string xml =
+            @"
                 <root>
                   <!-- The below key will throw an exception when deserializing. -->
                   <key id='78cd498e-9375-4e55-ac0d-d79527ecd09d' version='1'>
@@ -518,7 +614,11 @@ public class XmlKeyManagerTests
 
         var expectedDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>().Object;
         var mockActivator = new Mock<IActivator>();
-        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput("goodDeserializer", "<node xmlns='private' />", expectedDescriptor);
+        mockActivator.ReturnDescriptorGivenDeserializerTypeNameAndInput(
+            "goodDeserializer",
+            "<node xmlns='private' />",
+            expectedDescriptor
+        );
 
         // Act
         var keys = RunGetAllKeysCore(xml, mockActivator.Object).ToArray();
@@ -533,7 +633,8 @@ public class XmlKeyManagerTests
     public void GetAllKeys_WithKeyDeserializationError_LogLevelDebug_DoesNotWriteSensitiveInformation()
     {
         // Arrange
-        const string xml = @"
+        const string xml =
+            @"
                 <root>
                   <!-- The below key will throw an exception when deserializing. -->
                   <key id='78cd498e-9375-4e55-ac0d-d79527ecd09d' version='1'>
@@ -550,14 +651,18 @@ public class XmlKeyManagerTests
         RunGetAllKeysCore(xml, new Mock<IActivator>().Object, loggerFactory).ToArray();
 
         // Assert
-        Assert.False(loggerFactory.ToString().Contains("1A2B3C4D"), "The secret '1A2B3C4D' should not have been logged.");
+        Assert.False(
+            loggerFactory.ToString().Contains("1A2B3C4D"),
+            "The secret '1A2B3C4D' should not have been logged."
+        );
     }
 
     [Fact]
     public void GetAllKeys_WithKeyDeserializationError_LogLevelTrace_WritesSensitiveInformation()
     {
         // Arrange
-        const string xml = @"
+        const string xml =
+            @"
                 <root>
                   <!-- The below key will throw an exception when deserializing. -->
                   <key id='78cd498e-9375-4e55-ac0d-d79527ecd09d' version='1'>
@@ -574,14 +679,18 @@ public class XmlKeyManagerTests
         RunGetAllKeysCore(xml, new Mock<IActivator>().Object, loggerFactory).ToArray();
 
         // Assert
-        Assert.True(loggerFactory.ToString().Contains("1A2B3C4D"), "The secret '1A2B3C4D' should have been logged.");
+        Assert.True(
+            loggerFactory.ToString().Contains("1A2B3C4D"),
+            "The secret '1A2B3C4D' should have been logged."
+        );
     }
 
     [Fact]
     public void GetAllKeys_SurfacesRevocationDeserializationErrors()
     {
         // Arrange
-        const string xml = @"
+        const string xml =
+            @"
                 <root>
                   <revocation version='1'>
                     <revocationDate>2015-01-01T00:00:00Z</revocationDate>
@@ -594,18 +703,30 @@ public class XmlKeyManagerTests
         Assert.Throws<FormatException>(() => RunGetAllKeysCore(xml, new Mock<IActivator>().Object));
     }
 
-    private static IReadOnlyCollection<IKey> RunGetAllKeysCore(string xml, IActivator activator, ILoggerFactory loggerFactory = null)
+    private static IReadOnlyCollection<IKey> RunGetAllKeysCore(
+        string xml,
+        IActivator activator,
+        ILoggerFactory loggerFactory = null
+    )
     {
         // Arrange
         var mockXmlRepository = new Mock<IXmlRepository>();
-        mockXmlRepository.Setup(o => o.GetAllElements()).Returns(XElement.Parse(xml).Elements().ToArray());
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
-            XmlRepository = mockXmlRepository.Object,
-            XmlEncryptor = null
-        });
-        var keyManager = new XmlKeyManager(options, activator, loggerFactory ?? NullLoggerFactory.Instance);
+        mockXmlRepository
+            .Setup(o => o.GetAllElements())
+            .Returns(XElement.Parse(xml).Elements().ToArray());
+        var options = Options.Create(
+            new KeyManagementOptions()
+            {
+                AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
+                XmlRepository = mockXmlRepository.Object,
+                XmlEncryptor = null
+            }
+        );
+        var keyManager = new XmlKeyManager(
+            options,
+            activator,
+            loggerFactory ?? NullLoggerFactory.Instance
+        );
 
         // Act
         return keyManager.GetAllKeys();
@@ -620,19 +741,27 @@ public class XmlKeyManagerTests
         var mockXmlRepository = new Mock<IXmlRepository>();
         mockXmlRepository
             .Setup(o => o.StoreElement(It.IsAny<XElement>(), It.IsAny<string>()))
-            .Callback<XElement, string>((el, friendlyName) =>
-            {
-                elementStoredInRepository = el;
-                friendlyNameStoredInRepository = friendlyName;
-            });
+            .Callback<XElement, string>(
+                (el, friendlyName) =>
+                {
+                    elementStoredInRepository = el;
+                    friendlyNameStoredInRepository = friendlyName;
+                }
+            );
 
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
-            XmlRepository = mockXmlRepository.Object,
-            XmlEncryptor = null
-        });
-        var keyManager = new XmlKeyManager(options, SimpleActivator.DefaultWithoutServices, NullLoggerFactory.Instance);
+        var options = Options.Create(
+            new KeyManagementOptions()
+            {
+                AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
+                XmlRepository = mockXmlRepository.Object,
+                XmlEncryptor = null
+            }
+        );
+        var keyManager = new XmlKeyManager(
+            options,
+            SimpleActivator.DefaultWithoutServices,
+            NullLoggerFactory.Instance
+        );
 
         var revocationDate = XmlConvert.ToDateTimeOffset("2015-03-01T19:13:19.7573854-08:00");
 
@@ -650,7 +779,8 @@ public class XmlKeyManagerTests
         Assert.False(secondCancellationToken.IsCancellationRequested);
 
         // Was the correct element stored in the repository?
-        const string expectedRepositoryXml = @"
+        const string expectedRepositoryXml =
+            @"
                 <revocation version='1'>
                   <revocationDate>2015-03-01T19:13:19.7573854-08:00</revocationDate>
                   <!--All keys created before the revocation date are revoked.-->
@@ -670,19 +800,27 @@ public class XmlKeyManagerTests
         var mockXmlRepository = new Mock<IXmlRepository>();
         mockXmlRepository
             .Setup(o => o.StoreElement(It.IsAny<XElement>(), It.IsAny<string>()))
-            .Callback<XElement, string>((el, friendlyName) =>
-            {
-                elementStoredInRepository = el;
-                friendlyNameStoredInRepository = friendlyName;
-            });
+            .Callback<XElement, string>(
+                (el, friendlyName) =>
+                {
+                    elementStoredInRepository = el;
+                    friendlyNameStoredInRepository = friendlyName;
+                }
+            );
 
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
-            XmlRepository = mockXmlRepository.Object,
-            XmlEncryptor = null
-        });
-        var keyManager = new XmlKeyManager(options, SimpleActivator.DefaultWithoutServices, NullLoggerFactory.Instance);
+        var options = Options.Create(
+            new KeyManagementOptions()
+            {
+                AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
+                XmlRepository = mockXmlRepository.Object,
+                XmlEncryptor = null
+            }
+        );
+        var keyManager = new XmlKeyManager(
+            options,
+            SimpleActivator.DefaultWithoutServices,
+            NullLoggerFactory.Instance
+        );
 
         var revocationDate = new DateTimeOffset(2014, 01, 01, 0, 0, 0, TimeSpan.Zero);
 
@@ -697,23 +835,28 @@ public class XmlKeyManagerTests
         ((IInternalXmlKeyManager)keyManager).RevokeSingleKey(
             keyId: new Guid("a11f35fc-1fed-4bd4-b727-056a63b70932"),
             revocationDate: revocationDate,
-            reason: "Here's some reason text.");
+            reason: "Here's some reason text."
+        );
         var secondCancellationToken = keyManager.GetCacheExpirationToken();
         Assert.True(firstCancellationToken.IsCancellationRequested);
         Assert.False(secondCancellationToken.IsCancellationRequested);
 
         // Was the correct element stored in the repository?
         var expectedRepositoryXml = string.Format(
-          CultureInfo.InvariantCulture,
-          @"
+            CultureInfo.InvariantCulture,
+            @"
                 <revocation version='1'>
                   {0}
                   <key id='a11f35fc-1fed-4bd4-b727-056a63b70932' />
                   <reason>Here's some reason text.</reason>
                 </revocation>",
-            new XElement("revocationDate", revocationDate));
+            new XElement("revocationDate", revocationDate)
+        );
         XmlAssert.Equal(expectedRepositoryXml, elementStoredInRepository);
-        Assert.Equal("revocation-a11f35fc-1fed-4bd4-b727-056a63b70932", friendlyNameStoredInRepository);
+        Assert.Equal(
+            "revocation-a11f35fc-1fed-4bd4-b727-056a63b70932",
+            friendlyNameStoredInRepository
+        );
     }
 
     [Fact]
@@ -725,19 +868,35 @@ public class XmlKeyManagerTests
         DateTimeOffset? actualRevocationDate = null;
         var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
         mockInternalKeyManager
-            .Setup(o => o.RevokeSingleKey(keyToRevoke, It.IsAny<DateTimeOffset>(), "Here's some reason text."))
-            .Callback<Guid, DateTimeOffset, string>((innerKeyId, innerRevocationDate, innerReason) =>
-            {
-                actualRevocationDate = innerRevocationDate;
-            });
+            .Setup(
+                o =>
+                    o.RevokeSingleKey(
+                        keyToRevoke,
+                        It.IsAny<DateTimeOffset>(),
+                        "Here's some reason text."
+                    )
+            )
+            .Callback<Guid, DateTimeOffset, string>(
+                (innerKeyId, innerRevocationDate, innerReason) =>
+                {
+                    actualRevocationDate = innerRevocationDate;
+                }
+            );
 
-        var options = Options.Create(new KeyManagementOptions()
-        {
-            AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
-            XmlRepository = new Mock<IXmlRepository>().Object,
-            XmlEncryptor = null
-        });
-        var keyManager = new XmlKeyManager(options, SimpleActivator.DefaultWithoutServices, NullLoggerFactory.Instance, mockInternalKeyManager.Object);
+        var options = Options.Create(
+            new KeyManagementOptions()
+            {
+                AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
+                XmlRepository = new Mock<IXmlRepository>().Object,
+                XmlEncryptor = null
+            }
+        );
+        var keyManager = new XmlKeyManager(
+            options,
+            SimpleActivator.DefaultWithoutServices,
+            NullLoggerFactory.Instance,
+            mockInternalKeyManager.Object
+        );
 
         // Act
         keyManager.RevokeKey(keyToRevoke, "Here's some reason text.");
@@ -759,7 +918,10 @@ public class XmlKeyManagerTests
         private IAuthenticatedEncryptorDescriptor _associatedDescriptor;
         private IAuthenticatedEncryptor _expectedEncryptor;
 
-        public TestEncryptorFactory(IAuthenticatedEncryptorDescriptor associatedDescriptor = null, IAuthenticatedEncryptor expectedEncryptor = null)
+        public TestEncryptorFactory(
+            IAuthenticatedEncryptorDescriptor associatedDescriptor = null,
+            IAuthenticatedEncryptor expectedEncryptor = null
+        )
         {
             _associatedDescriptor = associatedDescriptor;
             _expectedEncryptor = expectedEncryptor;

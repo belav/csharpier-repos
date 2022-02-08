@@ -21,7 +21,10 @@ namespace DebuggerTests
         {
             var bad_cmd_name = "non-existant.command";
 
-            Func<InspectorClient, CancellationToken, List<(string, Task<Result>)>> fn = (client, token) =>
+            Func<InspectorClient, CancellationToken, List<(string, Task<Result>)>> fn = (
+                client,
+                token
+            ) =>
                 new List<(string, Task<Result>)>
                 {
                     ("Profiler.enable", client.SendCommand("Profiler.enable", null, token)),
@@ -30,7 +33,9 @@ namespace DebuggerTests
 
             await Ready();
 
-            var ae = await Assert.ThrowsAsync<ArgumentException>(async () => await insp.OpenSessionAsync(fn));
+            var ae = await Assert.ThrowsAsync<ArgumentException>(
+                async () => await insp.OpenSessionAsync(fn)
+            );
             Assert.Contains(bad_cmd_name, ae.Message);
         }
     }

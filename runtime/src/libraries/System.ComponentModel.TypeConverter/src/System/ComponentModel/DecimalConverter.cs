@@ -30,7 +30,8 @@ namespace System.ComponentModel
         /// </summary>
         public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         {
-            return destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
         /// <summary>
@@ -40,11 +41,18 @@ namespace System.ComponentModel
         /// type is string. If this cannot convert to the destination type, this will
         /// throw a NotSupportedException.
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(InstanceDescriptor) && value is decimal decimalValue)
             {
-                ConstructorInfo? ctor = typeof(decimal).GetConstructor(new Type[] { typeof(int[]) });
+                ConstructorInfo? ctor = typeof(decimal).GetConstructor(
+                    new Type[] { typeof(int[]) }
+                );
                 Debug.Assert(ctor != null, "Expected constructor to exist.");
                 return new InstanceDescriptor(ctor, new object[] { decimal.GetBits(decimalValue) });
             }

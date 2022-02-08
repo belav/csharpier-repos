@@ -65,10 +65,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         [Browsable(false)]
         public string ExtenderCATID
         {
-            get
-            {
-                return "";
-            }
+            get { return ""; }
         }
 
         public PropertyDescriptorCollection GetProperties()
@@ -87,7 +84,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 newList.Add(CreateDesignPropertyDescriptor(props[i]));
             }
 
-            return new PropertyDescriptorCollection((PropertyDescriptor[])newList.ToArray(typeof(PropertyDescriptor)));
+            return new PropertyDescriptorCollection(
+                (PropertyDescriptor[])newList.ToArray(typeof(PropertyDescriptor))
+            );
         }
 
         public virtual DesignPropertyDescriptor CreateDesignPropertyDescriptor(PropertyDescriptor p)

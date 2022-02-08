@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         [Fact]
         public void M2SNamedTypeSymbols01()
         {
-            var src1 = @"using System;
+            var src1 =
+                @"using System;
 
 public delegate void D(int p1, string p2);
 
@@ -44,7 +45,8 @@ namespace N1.N2
 }
 ";
 
-            var src2 = @"using System;
+            var src2 =
+                @"using System;
 using N1.N2.N3;
 
 public class App : C
@@ -59,9 +61,14 @@ public class App : C
             var comp1 = CreateCompilation(src1);
 
             // Compilation to Compilation
-            var comp2 = (Compilation)CreateCompilation(src2, new MetadataReference[] { new CSharpCompilationReference(comp1) });
+            var comp2 = (Compilation)CreateCompilation(
+                src2,
+                new MetadataReference[] { new CSharpCompilationReference(comp1) }
+            );
 
-            var originalSymbols = GetSourceSymbols(comp1, SymbolCategory.DeclaredType).OrderBy(s => s.Name).ToList();
+            var originalSymbols = GetSourceSymbols(comp1, SymbolCategory.DeclaredType)
+                .OrderBy(s => s.Name)
+                .ToList();
             Assert.Equal(5, originalSymbols.Count);
 
             // ---------------------------
@@ -81,7 +88,8 @@ public class App : C
             var member04 = (typesym.GetMembers("M").Single() as IMethodSymbol).Parameters[0].Type;
 
             // 'E'
-            var member05 = (typesym.GetMembers(WellKnownMemberNames.Indexer).Single() as IPropertySymbol).Type;
+            var member05 =
+                (typesym.GetMembers(WellKnownMemberNames.Indexer).Single() as IPropertySymbol).Type;
 
             ResolveAndVerifySymbol(member03, originalSymbols[0], comp1, SymbolKeyComparison.None);
             ResolveAndVerifySymbol(member01, originalSymbols[1], comp1, SymbolKeyComparison.None);
@@ -94,7 +102,8 @@ public class App : C
         [Fact]
         public void M2SNonTypeMemberSymbols01()
         {
-            var src1 = @"using System;
+            var src1 =
+                @"using System;
 
 namespace N1
 {
@@ -117,7 +126,8 @@ namespace N1
 }
 ";
 
-            var src2 = @"using System;
+            var src2 =
+                @"using System;
 using AN = N1;
 
 public class App
@@ -142,12 +152,23 @@ public class App
             var comp1 = CreateCompilation(src1);
 
             // Compilation to Assembly
-            var comp2 = CreateCompilation(src2, new MetadataReference[] { comp1.EmitToImageReference() });
+            var comp2 = CreateCompilation(
+                src2,
+                new MetadataReference[] { comp1.EmitToImageReference() }
+            );
 
             // ---------------------------
             // Source symbols
-            var originalSymbols = GetSourceSymbols(comp1, SymbolCategory.NonTypeMember | SymbolCategory.Parameter).ToList();
-            originalSymbols = originalSymbols.Where(s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter).OrderBy(s => s.Name).Select(s => s).ToList();
+            var originalSymbols = GetSourceSymbols(
+                    comp1,
+                    SymbolCategory.NonTypeMember | SymbolCategory.Parameter
+                )
+                .ToList();
+            originalSymbols = originalSymbols
+                .Where(s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter)
+                .OrderBy(s => s.Name)
+                .Select(s => s)
+                .ToList();
             Assert.Equal(8, originalSymbols.Count);
 
             // ---------------------------
@@ -158,22 +179,58 @@ public class App
             Assert.Equal(6, list.Count);
 
             // event
-            ResolveAndVerifySymbol(list[0], originalSymbols[4], model, comp1, SymbolKeyComparison.None);
+            ResolveAndVerifySymbol(
+                list[0],
+                originalSymbols[4],
+                model,
+                comp1,
+                SymbolKeyComparison.None
+            );
 
             // field
-            ResolveAndVerifySymbol(list[1], originalSymbols[5], model, comp1, SymbolKeyComparison.None);
+            ResolveAndVerifySymbol(
+                list[1],
+                originalSymbols[5],
+                model,
+                comp1,
+                SymbolKeyComparison.None
+            );
 
             // prop
-            ResolveAndVerifySymbol(list[2], originalSymbols[6], model, comp1, SymbolKeyComparison.None);
+            ResolveAndVerifySymbol(
+                list[2],
+                originalSymbols[6],
+                model,
+                comp1,
+                SymbolKeyComparison.None
+            );
 
             // index:
-            ResolveAndVerifySymbol(list[4], originalSymbols[7], model, comp1, SymbolKeyComparison.None);
+            ResolveAndVerifySymbol(
+                list[4],
+                originalSymbols[7],
+                model,
+                comp1,
+                SymbolKeyComparison.None
+            );
 
             // M(string p1)
-            ResolveAndVerifySymbol(list[3], originalSymbols[2], model, comp1, SymbolKeyComparison.None);
+            ResolveAndVerifySymbol(
+                list[3],
+                originalSymbols[2],
+                model,
+                comp1,
+                SymbolKeyComparison.None
+            );
 
             // M(params short[] ary)
-            ResolveAndVerifySymbol(list[5], originalSymbols[1], model, comp1, SymbolKeyComparison.None);
+            ResolveAndVerifySymbol(
+                list[5],
+                originalSymbols[1],
+                model,
+                comp1,
+                SymbolKeyComparison.None
+            );
         }
 
         #endregion
@@ -183,7 +240,8 @@ public class App
         [Fact]
         public void M2MMultiTargetingMsCorLib01()
         {
-            var src1 = @"using System;
+            var src1 =
+                @"using System;
 using System.IO;
 
 public class A
@@ -210,7 +268,8 @@ public class A
 }
 ";
 
-            var src2 = @"using System;
+            var src2 =
+                @"using System;
 
 class Test
 {
@@ -229,7 +288,10 @@ class Test
             var comp20 = (Compilation)CreateEmptyCompilation(src1, new[] { Net40.mscorlib });
 
             // "Compilation 2 Assembly"
-            var comp40 = (Compilation)CreateCompilation(src2, new MetadataReference[] { comp20.EmitToImageReference() });
+            var comp40 = (Compilation)CreateCompilation(
+                src2,
+                new MetadataReference[] { comp20.EmitToImageReference() }
+            );
 
             var typeA = comp20.SourceModule.GlobalNamespace.GetTypeMembers("A").Single();
             var mem20_1 = typeA.GetMembers("GetFileInfo").Single() as IMethodSymbol;
@@ -246,7 +308,9 @@ class Test
             var mtsym20_3 = mem20_2.Parameters[1].Type;
 
             // ====================
-            var typeTest = comp40.SourceModule.GlobalNamespace.GetTypeMembers("Test").FirstOrDefault();
+            var typeTest = comp40.SourceModule.GlobalNamespace
+                .GetTypeMembers("Test")
+                .FirstOrDefault();
             var mem40 = typeTest.GetMembers("Main").Single() as IMethodSymbol;
             var list = GetBlockSyntaxList(mem40);
             var model = comp40.GetSemanticModel(comp40.SyntaxTrees.First());
@@ -260,15 +324,30 @@ class Test
 
                     if (local.Name == "fi")
                     {
-                        ResolveAndVerifySymbol(localType, mtsym20_1, comp20, SymbolKeyComparison.None);
+                        ResolveAndVerifySymbol(
+                            localType,
+                            mtsym20_1,
+                            comp20,
+                            SymbolKeyComparison.None
+                        );
                     }
                     else if (local.Name == "ary")
                     {
-                        ResolveAndVerifySymbol(localType, mtsym20_2, comp20, SymbolKeyComparison.None);
+                        ResolveAndVerifySymbol(
+                            localType,
+                            mtsym20_2,
+                            comp20,
+                            SymbolKeyComparison.None
+                        );
                     }
                     else if (local.Name == "dt")
                     {
-                        ResolveAndVerifySymbol(localType, mtsym20_3, comp20, SymbolKeyComparison.None);
+                        ResolveAndVerifySymbol(
+                            localType,
+                            mtsym20_3,
+                            comp20,
+                            SymbolKeyComparison.None
+                        );
                     }
                 }
             }
@@ -277,7 +356,8 @@ class Test
         [Fact, WorkItem(546255, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546255")]
         public void M2MMultiTargetingMsCorLib02()
         {
-            var src1 = @"using System;
+            var src1 =
+                @"using System;
 namespace Mscorlib20
 {
     public interface IGoo
@@ -301,7 +381,8 @@ namespace Mscorlib20
 }
 ";
 
-            var src2 = @"using System;
+            var src2 =
+                @"using System;
 using N20 = Mscorlib20;
 
 class Test
@@ -329,8 +410,14 @@ class Test
             // "Compilation ref Compilation"
             var comp40 = CreateCompilation(src2, new[] { new CSharpCompilationReference(comp20) });
 
-            var originals = GetSourceSymbols(comp20, SymbolCategory.NonTypeMember | SymbolCategory.Parameter);
-            var originalSymbols = originals.Where(s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter).OrderBy(s => s.Name).ToList();
+            var originals = GetSourceSymbols(
+                comp20,
+                SymbolCategory.NonTypeMember | SymbolCategory.Parameter
+            );
+            var originalSymbols = originals
+                .Where(s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter)
+                .OrderBy(s => s.Name)
+                .ToList();
 
             // IGoo.Prop, CGoo.Prop, Event, Field, IGoo.This, CGoo.This
             Assert.Equal(6, originalSymbols.Count);
@@ -345,34 +432,60 @@ class Test
             ResolveAndVerifySymbol(list[0], originalSymbols[2], model, comp20);
 
             // delegate ParameterizedThreadStart
-            ResolveAndVerifyTypeSymbol(list[0], (originalSymbols[2] as IEventSymbol).Type, model, comp20);
+            ResolveAndVerifyTypeSymbol(
+                list[0],
+                (originalSymbols[2] as IEventSymbol).Type,
+                model,
+                comp20
+            );
 
             // MethodGroup
-            ResolveAndVerifyTypeSymbol(list[1], (originalSymbols[2] as IEventSymbol).Type, model, comp20);
+            ResolveAndVerifyTypeSymbol(
+                list[1],
+                (originalSymbols[2] as IEventSymbol).Type,
+                model,
+                comp20
+            );
 
             // Indexer
             ResolveAndVerifySymbol(list[2], originalSymbols[4], model, comp20);
 
             // class Exception
-            ResolveAndVerifyTypeSymbol(list[2], (originalSymbols[4] as IPropertySymbol).Type, model, comp20);
+            ResolveAndVerifyTypeSymbol(
+                list[2],
+                (originalSymbols[4] as IPropertySymbol).Type,
+                model,
+                comp20
+            );
 
             // PublicField
             ResolveAndVerifySymbol(list[3], originalSymbols[3], model, comp20);
 
             // enum DayOfWeek
-            ResolveAndVerifyTypeSymbol(list[3], (originalSymbols[3] as IFieldSymbol).Type, model, comp20);
+            ResolveAndVerifyTypeSymbol(
+                list[3],
+                (originalSymbols[3] as IFieldSymbol).Type,
+                model,
+                comp20
+            );
 
             // Prop
             ResolveAndVerifySymbol(list[4], originalSymbols[0], model, comp20);
 
             // interface IDisposable
-            ResolveAndVerifyTypeSymbol(list[4], (originalSymbols[0] as IPropertySymbol).Type, model, comp20);
+            ResolveAndVerifyTypeSymbol(
+                list[4],
+                (originalSymbols[0] as IPropertySymbol).Type,
+                model,
+                comp20
+            );
         }
 
         [Fact, WorkItem(546255, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546255")]
         public void M2MMultiTargetingMsCorLib03()
         {
-            var src1 = @"using System;
+            var src1 =
+                @"using System;
 namespace Mscorlib20
 {
     public interface IGoo
@@ -392,7 +505,8 @@ namespace Mscorlib20
 }
 ";
 
-            var src2 = @"using System;
+            var src2 =
+                @"using System;
 using N20 = Mscorlib20;
 
 class Test
@@ -411,8 +525,14 @@ class Test
             // "Compilation ref Compilation"
             var comp40 = CreateCompilation(src2, new[] { new CSharpCompilationReference(comp20) });
 
-            var originals = GetSourceSymbols(comp20, SymbolCategory.NonTypeMember | SymbolCategory.Parameter);
-            var originalSymbols = originals.Where(s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter).OrderBy(s => s.Name).ToList();
+            var originals = GetSourceSymbols(
+                comp20,
+                SymbolCategory.NonTypeMember | SymbolCategory.Parameter
+            );
+            var originalSymbols = originals
+                .Where(s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter)
+                .OrderBy(s => s.Name)
+                .ToList();
 
             // CGoo.Prop, CGoo.This, IGoo.Prop, IGoo.This
             Assert.Equal(4, originalSymbols.Count);
@@ -427,13 +547,23 @@ class Test
             ResolveAndVerifySymbol(list[0], originalSymbols[3], model, comp20);
 
             // class Exception
-            ResolveAndVerifyTypeSymbol(list[0], (originalSymbols[3] as IPropertySymbol).Type, model, comp20);
+            ResolveAndVerifyTypeSymbol(
+                list[0],
+                (originalSymbols[3] as IPropertySymbol).Type,
+                model,
+                comp20
+            );
 
             // Prop
             ResolveAndVerifySymbol(list[1], originalSymbols[2], model, comp20);
 
             // interface IDisposable
-            ResolveAndVerifyTypeSymbol(list[1], (originalSymbols[2] as IPropertySymbol).Type, model, comp20);
+            ResolveAndVerifyTypeSymbol(
+                list[1],
+                (originalSymbols[2] as IPropertySymbol).Type,
+                model,
+                comp20
+            );
         }
 
         #endregion

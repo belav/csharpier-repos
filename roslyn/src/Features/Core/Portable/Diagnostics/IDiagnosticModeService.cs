@@ -24,40 +24,46 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDiagnosticModeServiceFactory()
-        {
-        }
+        public DefaultDiagnosticModeServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new DefaultDiagnosticModeService(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new DefaultDiagnosticModeService(workspaceServices.Workspace);
 
         private class DefaultDiagnosticModeService : IDiagnosticModeService
         {
             private readonly Workspace _workspace;
 
-            public DefaultDiagnosticModeService(Workspace workspace)
-                => _workspace = workspace;
+            public DefaultDiagnosticModeService(Workspace workspace) => _workspace = workspace;
 
-            public DiagnosticMode GetDiagnosticMode(Option2<DiagnosticMode> diagnosticMode)
-                => _workspace.Options.GetOption(diagnosticMode);
+            public DiagnosticMode GetDiagnosticMode(Option2<DiagnosticMode> diagnosticMode) =>
+                _workspace.Options.GetOption(diagnosticMode);
         }
     }
 
     internal static class DiagnosticModeExtensions
     {
-        public static DiagnosticMode GetDiagnosticMode(this Workspace workspace, Option2<DiagnosticMode> option)
+        public static DiagnosticMode GetDiagnosticMode(
+            this Workspace workspace,
+            Option2<DiagnosticMode> option
+        )
         {
             var service = workspace.Services.GetRequiredService<IDiagnosticModeService>();
             return service.GetDiagnosticMode(option);
         }
 
-        public static bool IsPullDiagnostics(this Workspace workspace, Option2<DiagnosticMode> option)
+        public static bool IsPullDiagnostics(
+            this Workspace workspace,
+            Option2<DiagnosticMode> option
+        )
         {
             var mode = GetDiagnosticMode(workspace, option);
             return mode == DiagnosticMode.Pull;
         }
 
-        public static bool IsPushDiagnostics(this Workspace workspace, Option2<DiagnosticMode> option)
+        public static bool IsPushDiagnostics(
+            this Workspace workspace,
+            Option2<DiagnosticMode> option
+        )
         {
             var mode = GetDiagnosticMode(workspace, option);
             return mode == DiagnosticMode.Push;

@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(nameof(FindBaseSymbolsCommandHandler))]
-    internal sealed class FindBaseSymbolsCommandHandler :
-        AbstractNavigationCommandHandler<FindBaseSymbolsCommandArgs>
+    internal sealed class FindBaseSymbolsCommandHandler
+        : AbstractNavigationCommandHandler<FindBaseSymbolsCommandArgs>
     {
         private readonly IAsynchronousOperationListener _asyncListener;
 
@@ -35,15 +35,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FindBaseSymbolsCommandHandler(
             [ImportMany] IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(streamingPresenters)
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(streamingPresenters)
         {
             Contract.ThrowIfNull(listenerProvider);
 
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.FindReferences);
         }
 
-        protected override bool TryExecuteCommand(int caretPosition, Document document, CommandExecutionContext context)
+        protected override bool TryExecuteCommand(
+            int caretPosition,
+            Document document,
+            CommandExecutionContext context
+        )
         {
             var streamingPresenter = base.GetStreamingPresenter();
             if (streamingPresenter != null)
@@ -56,23 +60,39 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         }
 
         private async Task StreamingFindBaseSymbolsAsync(
-            Document document, int caretPosition,
-            IStreamingFindUsagesPresenter presenter)
+            Document document,
+            int caretPosition,
+            IStreamingFindUsagesPresenter presenter
+        )
         {
             try
             {
-                using var token = _asyncListener.BeginAsyncOperation(nameof(StreamingFindBaseSymbolsAsync));
+                using var token = _asyncListener.BeginAsyncOperation(
+                    nameof(StreamingFindBaseSymbolsAsync)
+                );
 
-                var (context, cancellationToken) = presenter.StartSearch(EditorFeaturesResources.Navigating, supportsReferences: true);
+                var (context, cancellationToken) = presenter.StartSearch(
+                    EditorFeaturesResources.Navigating,
+                    supportsReferences: true
+                );
 
-                using (Logger.LogBlock(
-                    FunctionId.CommandHandler_FindAllReference,
-                    KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
-                    cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.CommandHandler_FindAllReference,
+                        KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
+                        cancellationToken
+                    )
+                )
                 {
                     try
                     {
-                        var relevantSymbol = await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(document, caretPosition, cancellationToken).ConfigureAwait(false);
+                        var relevantSymbol = await FindUsagesHelpers
+                            .GetRelevantSymbolAndProjectAtPositionAsync(
+                                document,
+                                caretPosition,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         var overriddenSymbol = relevantSymbol?.symbol.GetOverriddenMember();
 
@@ -83,8 +103,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                                 return;
                             }
 
-                            var definitionItem = overriddenSymbol.ToNonClassifiedDefinitionItem(document.Project.Solution, true);
-                            await context.OnDefinitionFoundAsync(definitionItem, cancellationToken).ConfigureAwait(false);
+                            var definitionItem = overriddenSymbol.ToNonClassifiedDefinitionItem(
+                                document.Project.Solution,
+                                true
+                            );
+                            await context
+                                .OnDefinitionFoundAsync(definitionItem, cancellationToken)
+                                .ConfigureAwait(false);
 
                             // try getting the next one
                             overriddenSymbol = overriddenSymbol.GetOverriddenMember();
@@ -96,12 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                     }
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
     }
 }

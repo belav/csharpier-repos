@@ -194,7 +194,10 @@ namespace System.Linq
             return sum;
         }
 
-        public static int Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector)
+        public static int Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int> selector
+        )
         {
             if (source == null)
             {
@@ -218,7 +221,10 @@ namespace System.Linq
             return sum;
         }
 
-        public static int? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector)
+        public static int? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int?> selector
+        )
         {
             if (source == null)
             {
@@ -246,7 +252,10 @@ namespace System.Linq
             return sum;
         }
 
-        public static long Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector)
+        public static long Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long> selector
+        )
         {
             if (selector == null)
             {
@@ -270,7 +279,10 @@ namespace System.Linq
             return sum;
         }
 
-        public static long? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector)
+        public static long? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long?> selector
+        )
         {
             if (source == null)
             {
@@ -298,7 +310,10 @@ namespace System.Linq
             return sum;
         }
 
-        public static float Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector)
+        public static float Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float> selector
+        )
         {
             if (source == null)
             {
@@ -319,7 +334,10 @@ namespace System.Linq
             return (float)sum;
         }
 
-        public static float? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector)
+        public static float? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float?> selector
+        )
         {
             if (source == null)
             {
@@ -344,7 +362,10 @@ namespace System.Linq
             return (float)sum;
         }
 
-        public static double Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector)
+        public static double Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double> selector
+        )
         {
             if (source == null)
             {
@@ -365,7 +386,10 @@ namespace System.Linq
             return sum;
         }
 
-        public static double? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector)
+        public static double? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double?> selector
+        )
         {
             if (source == null)
             {
@@ -390,7 +414,10 @@ namespace System.Linq
             return sum;
         }
 
-        public static decimal Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
+        public static decimal Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal> selector
+        )
         {
             if (source == null)
             {
@@ -411,7 +438,10 @@ namespace System.Linq
             return sum;
         }
 
-        public static decimal? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
+        public static decimal? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal?> selector
+        )
         {
             if (source == null)
             {

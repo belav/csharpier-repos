@@ -14,38 +14,47 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class InKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public InKeywordRecommender()
-            : base(SyntaxKind.InKeyword)
-        {
-        }
+        public InKeywordRecommender() : base(SyntaxKind.InKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                IsValidContextInForEachClause(context) ||
-                IsValidContextInFromClause(context, cancellationToken) ||
-                IsValidContextInJoinClause(context, cancellationToken) ||
-                IsInParameterModifierContext(position, context) ||
-                syntaxTree.IsAnonymousMethodParameterModifierContext(position, context.LeftToken) ||
-                syntaxTree.IsPossibleLambdaParameterModifierContext(position, context.LeftToken) ||
-                context.TargetToken.IsConstructorOrMethodParameterArgumentContext() ||
-                context.TargetToken.IsTypeParameterVarianceContext();
+            return IsValidContextInForEachClause(context)
+                || IsValidContextInFromClause(context, cancellationToken)
+                || IsValidContextInJoinClause(context, cancellationToken)
+                || IsInParameterModifierContext(position, context)
+                || syntaxTree.IsAnonymousMethodParameterModifierContext(position, context.LeftToken)
+                || syntaxTree.IsPossibleLambdaParameterModifierContext(position, context.LeftToken)
+                || context.TargetToken.IsConstructorOrMethodParameterArgumentContext()
+                || context.TargetToken.IsTypeParameterVarianceContext();
         }
 
         private static bool IsInParameterModifierContext(int position, CSharpSyntaxContext context)
         {
-            if (context.SyntaxTree.IsParameterModifierContext(
-                    position, context.LeftToken, includeOperators: true, out var parameterIndex, out var previousModifier))
+            if (
+                context.SyntaxTree.IsParameterModifierContext(
+                    position,
+                    context.LeftToken,
+                    includeOperators: true,
+                    out var parameterIndex,
+                    out var previousModifier
+                )
+            )
             {
                 if (previousModifier == SyntaxKind.None)
                 {
                     return true;
                 }
 
-                if (previousModifier == SyntaxKind.ThisKeyword &&
-                    parameterIndex == 0 &&
-                    context.SyntaxTree.IsPossibleExtensionMethodContext(context.LeftToken))
+                if (
+                    previousModifier == SyntaxKind.ThisKeyword
+                    && parameterIndex == 0
+                    && context.SyntaxTree.IsPossibleExtensionMethodContext(context.LeftToken)
+                )
                 {
                     return true;
                 }
@@ -65,7 +74,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             if (token.Kind() == SyntaxKind.IdentifierToken)
             {
-                if (token.Parent is ForEachStatementSyntax statement && token == statement.Identifier)
+                if (
+                    token.Parent is ForEachStatementSyntax statement
+                    && token == statement.Identifier
+                )
                 {
                     return true;
                 }
@@ -82,7 +94,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return false;
         }
 
-        private static bool IsValidContextInFromClause(CSharpSyntaxContext context, CancellationToken cancellationToken)
+        private static bool IsValidContextInFromClause(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var token = context.TargetToken;
 
@@ -90,7 +105,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             {
                 // case:
                 //   from x |
-                if (token.GetPreviousToken(includeSkipped: true).IsKindOrHasMatchingText(SyntaxKind.FromKeyword))
+                if (
+                    token
+                        .GetPreviousToken(includeSkipped: true)
+                        .IsKindOrHasMatchingText(SyntaxKind.FromKeyword)
+                )
                 {
                     var typeSyntax = token.Parent as TypeSyntax;
                     if (!typeSyntax.IsPotentialTypeName(context.SemanticModel, cancellationToken))
@@ -113,7 +132,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return false;
         }
 
-        private static bool IsValidContextInJoinClause(CSharpSyntaxContext context, CancellationToken cancellationToken)
+        private static bool IsValidContextInJoinClause(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var token = context.TargetToken;
 
@@ -131,10 +153,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
                     // case:
                     //   join x |
-                    if (joinClause.Type != null &&
-                        joinClause.Type.IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax joinIdentifier) &&
-                        token == joinIdentifier.Identifier &&
-                        !joinClause.Type.IsPotentialTypeName(context.SemanticModel, cancellationToken))
+                    if (
+                        joinClause.Type != null
+                        && joinClause.Type.IsKind(
+                            SyntaxKind.IdentifierName,
+                            out IdentifierNameSyntax joinIdentifier
+                        )
+                        && token == joinIdentifier.Identifier
+                        && !joinClause.Type.IsPotentialTypeName(
+                            context.SemanticModel,
+                            cancellationToken
+                        )
+                    )
                     {
                         return true;
                     }

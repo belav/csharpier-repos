@@ -2,12 +2,12 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Net.Http.Headers;
+
 namespace System.Net.Http.Formatting.Mocks
 {
     public class MockMediaTypeMapping : MediaTypeMapping
     {
-        public MockMediaTypeMapping(string mediaType, double matchQuality)
-            : base(mediaType)
+        public MockMediaTypeMapping(string mediaType, double matchQuality) : base(mediaType)
         {
             MatchQuality = matchQuality;
         }

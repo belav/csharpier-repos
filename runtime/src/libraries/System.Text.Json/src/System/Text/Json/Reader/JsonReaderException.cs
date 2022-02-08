@@ -9,12 +9,10 @@ namespace System.Text.Json
     [Serializable]
     internal sealed class JsonReaderException : JsonException
     {
-        public JsonReaderException(string message, long lineNumber, long bytePositionInLine) : base(message, path: null, lineNumber, bytePositionInLine)
-        {
-        }
+        public JsonReaderException(string message, long lineNumber, long bytePositionInLine)
+            : base(message, path: null, lineNumber, bytePositionInLine) { }
 
-        private JsonReaderException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private JsonReaderException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

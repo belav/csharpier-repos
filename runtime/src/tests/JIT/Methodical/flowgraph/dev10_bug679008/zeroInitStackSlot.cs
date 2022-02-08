@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * The JIT was removing a zero-init, but then emitting an untracked lifetime. 
+ * The JIT was removing a zero-init, but then emitting an untracked lifetime.
  * Please run under GCSTRESS = 0x4
  */
 
@@ -17,17 +17,16 @@ internal struct SqlBinary
 internal class WarehouseResultDatabase : IDisposable
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public WarehouseResultDatabase()
-    {
-    }
+    public WarehouseResultDatabase() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    void IDisposable.Dispose()
-    {
-    }
+    void IDisposable.Dispose() { }
 }
 
-internal delegate bool WarehouseRowVersionQueryDelegate(WarehouseResultDatabase database, SqlBinary waterMark);
+internal delegate bool WarehouseRowVersionQueryDelegate(
+    WarehouseResultDatabase database,
+    SqlBinary waterMark
+);
 
 internal class Repro
 {

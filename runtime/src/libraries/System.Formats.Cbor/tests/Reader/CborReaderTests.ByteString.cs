@@ -15,7 +15,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData("", "40")]
         [InlineData("01020304", "4401020304")]
         [InlineData("ffffffffffffffffffffffffffff", "4effffffffffffffffffffffffffff")]
-        public static void ReadByteString_SingleValue_HappyPath(string hexExpectedValue, string hexEncoding)
+        public static void ReadByteString_SingleValue_HappyPath(
+            string hexExpectedValue,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             byte[] expectedValue = hexExpectedValue.HexToByteArray();
@@ -29,7 +32,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData("", "40")]
         [InlineData("01020304", "4401020304")]
         [InlineData("ffffffffffffffffffffffffffff", "4effffffffffffffffffffffffffff")]
-        public static void TryReadByteString_SingleValue_HappyPath(string hexExpectedValue, string hexEncoding)
+        public static void TryReadByteString_SingleValue_HappyPath(
+            string hexExpectedValue,
+            string hexEncoding
+        )
         {
             byte[] buffer = new byte[32];
             byte[] encoding = hexEncoding.HexToByteArray();
@@ -47,7 +53,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(new string[] { "" }, "5f40ff")]
         [InlineData(new string[] { "ab", "" }, "5f41ab40ff")]
         [InlineData(new string[] { "ab", "bc", "" }, "5f41ab41bc40ff")]
-        public static void ReadByteString_IndefiniteLength_SingleValue_HappyPath(string[] expectedHexValues, string hexEncoding)
+        public static void ReadByteString_IndefiniteLength_SingleValue_HappyPath(
+            string[] expectedHexValues,
+            string hexEncoding
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             byte[][] expectedValues = expectedHexValues.Select(x => x.HexToByteArray()).ToArray();
@@ -60,7 +69,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData("", "5f40ff")]
         [InlineData("ab", "5f41ab40ff")]
         [InlineData("abbc", "5f41ab41bc40ff")]
-        public static void ReadByteString_IndefiniteLengthConcatenated_SingleValue_HappyPath(string expectedHexValue, string hexEncoding)
+        public static void ReadByteString_IndefiniteLengthConcatenated_SingleValue_HappyPath(
+            string expectedHexValue,
+            string hexEncoding
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
@@ -75,7 +87,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData("", "5f40ff")]
         [InlineData("ab", "5f41ab40ff")]
         [InlineData("abbc", "5f41ab41bc40ff")]
-        public static void TryReadByteString_IndefiniteLengthConcatenated_SingleValue_HappyPath(string expectedHexValue, string hexEncoding)
+        public static void TryReadByteString_IndefiniteLengthConcatenated_SingleValue_HappyPath(
+            string expectedHexValue,
+            string hexEncoding
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
@@ -86,7 +101,10 @@ namespace System.Formats.Cbor.Tests
 
             Assert.True(result);
             Assert.Equal(expectedHexValue.Length / 2, bytesWritten);
-            Assert.Equal(expectedHexValue.ToUpper(), buffer.Slice(0, bytesWritten).ByteArrayToHex());
+            Assert.Equal(
+                expectedHexValue.ToUpper(),
+                buffer.Slice(0, bytesWritten).ByteArrayToHex()
+            );
             Assert.Equal(CborReaderState.Finished, reader.PeekState());
         }
 
@@ -107,7 +125,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData("", "40")]
         [InlineData("01020304", "4401020304")]
         [InlineData("ffffffffffffffffffffffffffff", "4effffffffffffffffffffffffffff")]
-        public static void ReadByteStringDefiniteLength_SingleValue_HappyPath(string expectedHexValue, string hexEncoding)
+        public static void ReadByteStringDefiniteLength_SingleValue_HappyPath(
+            string expectedHexValue,
+            string hexEncoding
+        )
         {
             byte[] expectedValue = expectedHexValue.HexToByteArray();
             byte[] encoding = hexEncoding.HexToByteArray();
@@ -121,7 +142,9 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData("5fff")]
         [InlineData("5f40ff")]
-        public static void ReadByteStringDefiniteLength_IndefiniteLengthInput_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadByteStringDefiniteLength_IndefiniteLengthInput_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -134,7 +157,10 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData("01020304", "4401020304")]
         [InlineData("ffffffffffffffffffffffffffff", "4effffffffffffffffffffffffffff")]
-        public static void TryReadByteString_BufferTooSmall_ShouldReturnFalse(string actualValue, string hexEncoding)
+        public static void TryReadByteString_BufferTooSmall_ShouldReturnFalse(
+            string actualValue,
+            string hexEncoding
+        )
         {
             byte[] buffer = new byte[actualValue.Length / 2];
             byte[] encoding = hexEncoding.HexToByteArray();
@@ -154,7 +180,10 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData("ab", "5f41ab40ff")]
         [InlineData("abbc", "5f41ab41bc40ff")]
-        public static void TryReadByteString_IndefiniteLengthConcatenated_BufferTooSmall_ShouldReturnFalse(string expectedHexValue, string hexEncoding)
+        public static void TryReadByteString_IndefiniteLengthConcatenated_BufferTooSmall_ShouldReturnFalse(
+            string expectedHexValue,
+            string hexEncoding
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
@@ -182,7 +211,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Strict, "590000")]
         [InlineData(CborConformanceMode.Strict, "5a00000000")]
         [InlineData(CborConformanceMode.Strict, "5b0000000000000000")]
-        public static void ReadByteString_NonCanonicalLengths_SupportedConformanceMode_ShouldSucceed(CborConformanceMode mode, string hexEncoding)
+        public static void ReadByteString_NonCanonicalLengths_SupportedConformanceMode_ShouldSucceed(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
@@ -200,7 +232,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical, "590000")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "5a00000000")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "5b0000000000000000")]
-        public static void ReadByteString_NonCanonicalLengths_UnSupportedConformanceMode_ShouldThrowCborContentException(CborConformanceMode mode, string hexEncoding)
+        public static void ReadByteString_NonCanonicalLengths_UnSupportedConformanceMode_ShouldThrowCborContentException(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
@@ -211,7 +246,10 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData(CborConformanceMode.Lax, "5f40ff")]
         [InlineData(CborConformanceMode.Strict, "5f40ff")]
-        public static void ReadByteString_IndefiniteLength_SupportedConformanceMode_ShouldSucceed(CborConformanceMode mode, string hexEncoding)
+        public static void ReadByteString_IndefiniteLength_SupportedConformanceMode_ShouldSucceed(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
@@ -223,7 +261,10 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData(CborConformanceMode.Lax, "5f40ff")]
         [InlineData(CborConformanceMode.Strict, "5f40ff")]
-        public static void ReadByteString_IndefiniteLength_AsSingleItem_SupportedConformanceMode_ShouldSucceed(CborConformanceMode mode, string hexEncoding)
+        public static void ReadByteString_IndefiniteLength_AsSingleItem_SupportedConformanceMode_ShouldSucceed(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
@@ -233,7 +274,10 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData(CborConformanceMode.Canonical, "5f40ff")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "5f40ff")]
-        public static void ReadByteString_IndefiniteLength_UnSupportedConformanceMode_ShouldThrowCborContentException(CborConformanceMode mode, string hexEncoding)
+        public static void ReadByteString_IndefiniteLength_UnSupportedConformanceMode_ShouldThrowCborContentException(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
@@ -244,7 +288,10 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData(CborConformanceMode.Canonical, "5f40ff")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "5f40ff")]
-        public static void ReadByteString_IndefiniteLength_AsSingleItem_UnSupportedConformanceMode_ShouldThrowCborContentException(CborConformanceMode mode, string hexEncoding)
+        public static void ReadByteString_IndefiniteLength_AsSingleItem_UnSupportedConformanceMode_ShouldThrowCborContentException(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
@@ -261,7 +308,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("a0")] // {}
         [InlineData("f97e00")] // NaN
         [InlineData("fb3ff199999999999a")] // 1.1
-        public static void ReadByteString_InvalidType_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadByteString_InvalidType_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -279,13 +328,17 @@ namespace System.Formats.Cbor.Tests
         [InlineData("a0")] // {}
         [InlineData("f97e00")] // NaN
         [InlineData("fb3ff199999999999a")] // 1.1
-        public static void TryReadByteString_InvalidType_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void TryReadByteString_InvalidType_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             byte[] buffer = new byte[32];
             var reader = new CborReader(encoding);
 
-            Assert.Throws<InvalidOperationException>(() => reader.TryReadByteString(buffer, out int _));
+            Assert.Throws<InvalidOperationException>(
+                () => reader.TryReadByteString(buffer, out int _)
+            );
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
 
@@ -305,7 +358,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("5803ffff")]
         [InlineData("590100ff")]
         [InlineData("5a00010000ff")]
-        public static void ReadByteString_InvalidData_ShouldThrowCborContentException(string hexEncoding)
+        public static void ReadByteString_InvalidData_ShouldThrowCborContentException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -329,7 +384,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("5803ffff")]
         [InlineData("590100ff")]
         [InlineData("5a00010000ff")]
-        public static void TryReadByteString_InvalidData_ShouldThrowCborContentException(string hexEncoding)
+        public static void TryReadByteString_InvalidData_ShouldThrowCborContentException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             byte[] buffer = new byte[32];
@@ -342,7 +399,9 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData("5b0000000100000000ff")]
         [InlineData("5bffffffffffffffff")]
-        public static void ReadByteString_StringLengthTooLarge_ShouldThrowCborContentException(string hexEncoding)
+        public static void ReadByteString_StringLengthTooLarge_ShouldThrowCborContentException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);

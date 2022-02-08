@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 
 static class DeadEH
 {
-
     // This is the method that exposes the JIT bug
     // #1 - We have a 'live' parameter (i.e. it has real uses)
     // #2 - All EH is unreachable, but it requires some

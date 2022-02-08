@@ -73,7 +73,9 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanClearNamedOptions()
         {
-            var services = new ServiceCollection().AddOptions().AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
+            var services = new ServiceCollection()
+                .AddOptions()
+                .AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
 
             var sp = services.BuildServiceProvider();
 
@@ -99,11 +101,17 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanWatchNamedOptions()
         {
-            var services = new ServiceCollection().AddOptions().AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
+            var services = new ServiceCollection()
+                .AddOptions()
+                .AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
             var changeToken = new FakeChangeToken();
-            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(new FakeSource(changeToken) { Name = "#1" });
+            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(
+                new FakeSource(changeToken) { Name = "#1" }
+            );
             var changeToken2 = new FakeChangeToken();
-            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(new FakeSource(changeToken2) { Name = "#2" });
+            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(
+                new FakeSource(changeToken2) { Name = "#2" }
+            );
 
             var sp = services.BuildServiceProvider();
 
@@ -129,7 +137,9 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection().AddOptions();
             services.AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
             var changeToken = new FakeChangeToken();
-            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(new FakeSource(changeToken));
+            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(
+                new FakeSource(changeToken)
+            );
 
             var sp = services.BuildServiceProvider();
 
@@ -356,14 +366,13 @@ namespace Microsoft.Extensions.Options.Tests
             {
                 var services = new ServiceCollection();
                 services.AddOptions();
-                services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(new ChangeTokenSource<FakeOptions>(token));
+                services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(
+                    new ChangeTokenSource<FakeOptions>(token)
+                );
                 using (var sp = services.BuildServiceProvider())
                 {
                     var monitor = sp.GetRequiredService<IOptionsMonitor<FakeOptions>>();
-                    using (monitor.OnChange(o => { }))
-                    {
-
-                    }
+                    using (monitor.OnChange(o => { })) { }
                 }
             }
 
@@ -372,7 +381,8 @@ namespace Microsoft.Extensions.Options.Tests
 
         public class ChangeToken : IChangeToken
         {
-            public List<(Action<object>, object)> Callbacks { get; } = new List<(Action<object>, object)>();
+            public List<(Action<object>, object)> Callbacks { get; } =
+                new List<(Action<object>, object)>();
 
             public bool HasChanged => false;
 
@@ -405,10 +415,11 @@ namespace Microsoft.Extensions.Options.Tests
                 }
             }
         }
-        
+
         public class ChangeTokenSource<T> : IOptionsChangeTokenSource<T>
         {
             private readonly IChangeToken _changeToken;
+
             public ChangeTokenSource(IChangeToken changeToken)
             {
                 _changeToken = changeToken;

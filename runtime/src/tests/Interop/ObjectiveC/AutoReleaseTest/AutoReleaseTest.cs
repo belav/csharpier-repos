@@ -10,8 +10,10 @@ internal static unsafe class ObjectiveC
 {
     [DllImport(nameof(ObjectiveC))]
     public static extern IntPtr initObject();
+
     [DllImport(nameof(ObjectiveC))]
     public static extern void autoreleaseObject(IntPtr art);
+
     [DllImport(nameof(ObjectiveC))]
     public static extern int getNumReleaseCalls();
 }
@@ -53,11 +55,13 @@ public class AutoReleaseTest
         static void RunScenario(AutoResetEvent evt)
         {
             IntPtr obj = ObjectiveC.initObject();
-            var thread = new Thread(_ =>
-            {
-                ObjectiveC.autoreleaseObject(obj);
-                evt.Set();
-            });
+            var thread = new Thread(
+                _ =>
+                {
+                    ObjectiveC.autoreleaseObject(obj);
+                    evt.Set();
+                }
+            );
             thread.Start();
 
             evt.WaitOne();
@@ -72,11 +76,13 @@ public class AutoReleaseTest
         {
             int numReleaseCalls = ObjectiveC.getNumReleaseCalls();
             IntPtr obj = ObjectiveC.initObject();
-            ThreadPool.QueueUserWorkItem(_ =>
-            {
-                ObjectiveC.autoreleaseObject(obj);
-                evt.Set();
-            });
+            ThreadPool.QueueUserWorkItem(
+                _ =>
+                {
+                    ObjectiveC.autoreleaseObject(obj);
+                    evt.Set();
+                }
+            );
             evt.WaitOne();
             // Wait 60 ms after the signal to ensure that the thread has finished the work item and has drained the thread's autorelease pool.
             Thread.Sleep(60);

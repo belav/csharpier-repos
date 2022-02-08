@@ -14,7 +14,7 @@ namespace Microsoft.WebMatrix.Utility
         private const int PublicKeyTokenLength = 8;
 
         /// <summary>
-        /// This will return a list of assemblies that are present in the call stack for 
+        /// This will return a list of assemblies that are present in the call stack for
         /// the input exception. The list CAN have duplicates.
         /// </summary>
         /// <param name="exception"></param>
@@ -29,11 +29,14 @@ namespace Microsoft.WebMatrix.Utility
             }
             else if (aggregateException == null)
             {
-                return GetAssembliesInSingleException(exception).Concat(GetAssembliesInCallStack(exception.InnerException));
+                return GetAssembliesInSingleException(exception)
+                    .Concat(GetAssembliesInCallStack(exception.InnerException));
             }
             else
             {
-                return aggregateException.Flatten().InnerExceptions.SelectMany(ex => GetAssembliesInCallStack(ex));
+                return aggregateException
+                    .Flatten()
+                    .InnerExceptions.SelectMany(ex => GetAssembliesInCallStack(ex));
             }
         }
 
@@ -60,7 +63,9 @@ namespace Microsoft.WebMatrix.Utility
             }
         }
 
-        public static IEnumerable<Assembly> RemoveAssembliesThatAreIntheGAC(IEnumerable<Assembly> input)
+        public static IEnumerable<Assembly> RemoveAssembliesThatAreIntheGAC(
+            IEnumerable<Assembly> input
+        )
         {
             foreach (Assembly assembly in input)
             {
@@ -71,9 +76,15 @@ namespace Microsoft.WebMatrix.Utility
             }
         }
 
-        public static IEnumerable<Assembly> RemoveAssembliesThatAreSignedWithToken(IEnumerable<Assembly> input, byte[] publicKeyToken)
+        public static IEnumerable<Assembly> RemoveAssembliesThatAreSignedWithToken(
+            IEnumerable<Assembly> input,
+            byte[] publicKeyToken
+        )
         {
-            Debug.Assert(publicKeyToken.Length == PublicKeyTokenLength, "public key tokens should be 8 bytes");
+            Debug.Assert(
+                publicKeyToken.Length == PublicKeyTokenLength,
+                "public key tokens should be 8 bytes"
+            );
             foreach (Assembly assembly in input)
             {
                 byte[] currentToken = assembly.GetName().GetPublicKeyToken();
@@ -104,9 +115,9 @@ namespace Microsoft.WebMatrix.Utility
         private static bool AreTokensTheSame(byte[] token1, byte[] token2)
         {
             Debug.Assert(
-                token1.Length == PublicKeyTokenLength &&
-                token2.Length == PublicKeyTokenLength,
-                "public key tokens should be 8 bytes");
+                token1.Length == PublicKeyTokenLength && token2.Length == PublicKeyTokenLength,
+                "public key tokens should be 8 bytes"
+            );
 
             for (int i = 0; i < PublicKeyTokenLength; i++)
             {

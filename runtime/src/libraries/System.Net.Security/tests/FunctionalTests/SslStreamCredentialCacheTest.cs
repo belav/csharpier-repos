@@ -30,14 +30,14 @@ namespace System.Net.Security.Tests
 
                 Task t1 = server.AuthenticateAsServerAsync(certificate, true, false);
                 Task t2 = client.AuthenticateAsClientAsync(
-                                            certificate.GetNameInfo(X509NameType.SimpleName, false),
-                                            clientCertificateCollection, false);
-
+                    certificate.GetNameInfo(X509NameType.SimpleName, false),
+                    clientCertificateCollection,
+                    false
+                );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
 
-                if (!PlatformDetection.IsWindows7 ||
-                    Capability.IsTrustedRootCertificateInstalled())
+                if (!PlatformDetection.IsWindows7 || Capability.IsTrustedRootCertificateInstalled())
                 {
                     // https://technet.microsoft.com/en-us/library/hh831771.aspx#BKMK_Changes2012R2
                     // Starting with Windows 8, the "Management of trusted issuers for client authentication" has changed:
@@ -57,7 +57,8 @@ namespace System.Net.Security.Tests
             object sender,
             X509Certificate certificate,
             X509Chain chain,
-            SslPolicyErrors sslPolicyErrors)
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             return true;
         }

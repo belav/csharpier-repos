@@ -23,16 +23,10 @@ public class OpenApiAddProjectTests : OpenApiTestBase
         using var refProj1 = project.Project.Dir().SubDir("refProj1");
         using var refProj2 = project.Project.Dir().SubDir("refProj2");
         var project1 = refProj1.WithCSharpProject("refProj");
-        project1
-            .WithTargetFrameworks(TestTFM)
-            .Dir()
-            .Create();
+        project1.WithTargetFrameworks(TestTFM).Dir().Create();
 
         var project2 = refProj2.WithCSharpProject("refProj2");
-        project2
-            .WithTargetFrameworks(TestTFM)
-            .Dir()
-            .Create();
+        project2.WithTargetFrameworks(TestTFM).Dir().Create();
 
         var app = GetApplication();
 
@@ -44,7 +38,10 @@ public class OpenApiAddProjectTests : OpenApiTestBase
         using var csprojStream = new FileInfo(project.Project.Path).OpenRead();
         using var reader = new StreamReader(csprojStream);
         var content = await reader.ReadToEndAsync();
-        Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+        Assert.Contains(
+            "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+            content
+        );
         Assert.Contains($"<OpenApiProjectReference Include=\"{project1.Path}\"", content);
         Assert.Contains($"<OpenApiProjectReference Include=\"{project2.Path}\"", content);
     }
@@ -57,10 +54,7 @@ public class OpenApiAddProjectTests : OpenApiTestBase
         using var refProj = new TemporaryDirectory();
         var refProjName = "refProj";
         var csproj = refProj.WithCSharpProject(refProjName);
-        csproj
-            .WithTargetFrameworks(TestTFM)
-            .Dir()
-            .Create();
+        csproj.WithTargetFrameworks(TestTFM).Dir().Create();
 
         var app = GetApplication();
         var run = app.Execute(new[] { "add", "project", csproj.Path });
@@ -68,14 +62,18 @@ public class OpenApiAddProjectTests : OpenApiTestBase
         AssertNoErrors(run);
 
         app = GetApplication();
-        run = app.Execute(new[] { "add", "project", Path.Combine(csproj.Path, "..", "refProj.csproj") });
+        run = app.Execute(
+            new[] { "add", "project", Path.Combine(csproj.Path, "..", "refProj.csproj") }
+        );
 
         AssertNoErrors(run);
 
         var projXml = new XmlDocument();
         projXml.Load(project.Project.Path);
 
-        var openApiRefs = projXml.GetElementsByTagName(Commands.BaseCommand.OpenApiProjectReference);
+        var openApiRefs = projXml.GetElementsByTagName(
+            Commands.BaseCommand.OpenApiProjectReference
+        );
         Assert.Single(openApiRefs);
     }
 
@@ -86,11 +84,7 @@ public class OpenApiAddProjectTests : OpenApiTestBase
 
         using var refProj = new TemporaryDirectory();
         var refProjName = "refProj";
-        refProj
-            .WithCSharpProject(refProjName)
-            .WithTargetFrameworks(TestTFM)
-            .Dir()
-            .Create();
+        refProj.WithCSharpProject(refProjName).WithTargetFrameworks(TestTFM).Dir().Create();
 
         var app = GetApplication();
         var refProjFile = Path.Join(refProj.Root, $"{refProjName}.csproj");
@@ -102,7 +96,10 @@ public class OpenApiAddProjectTests : OpenApiTestBase
         using var csprojStream = new FileInfo(project.Project.Path).OpenRead();
         using var reader = new StreamReader(csprojStream);
         var content = await reader.ReadToEndAsync();
-        Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+        Assert.Contains(
+            "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+            content
+        );
         Assert.Contains($"<OpenApiProjectReference Include=\"{refProjFile}\"", content);
     }
 }

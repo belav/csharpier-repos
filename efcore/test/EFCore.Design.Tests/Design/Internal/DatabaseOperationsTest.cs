@@ -22,11 +22,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 "RootNamespace",
                 "C#",
                 nullable: false,
-                args: null);
+                args: null
+            );
         }
 
-        private class TestContext : DbContext
-        {
-        }
+        private class TestContext : DbContext { }
     }
 }

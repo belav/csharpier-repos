@@ -10,9 +10,13 @@ namespace System.Security.Cryptography
     {
         public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
         {
-            private readonly ECCngKey _key = new ECCngKey(BCryptNative.AlgorithmName.ECDH, nameof(ECDiffieHellman));
+            private readonly ECCngKey _key = new ECCngKey(
+                BCryptNative.AlgorithmName.ECDH,
+                nameof(ECDiffieHellman)
+            );
 
-            private string? GetCurveName(out string? oidValue) => _key.GetCurveName(KeySize, out oidValue);
+            private string? GetCurveName(out string? oidValue) =>
+                _key.GetCurveName(KeySize, out oidValue);
 
             public override void GenerateKey(ECCurve curve)
             {
@@ -20,7 +24,8 @@ namespace System.Security.Cryptography
                 ForceSetKeySize(_key.KeySize);
             }
 
-            private SafeNCryptKeyHandle GetDuplicatedKeyHandle() => _key.GetDuplicatedKeyHandle(KeySize);
+            private SafeNCryptKeyHandle GetDuplicatedKeyHandle() =>
+                _key.GetDuplicatedKeyHandle(KeySize);
 
             private void DisposeKey() => _key.DisposeKey();
 
@@ -35,9 +40,10 @@ namespace System.Security.Cryptography
 
                     return new ECDiffieHellmanCngPublicKey(
                         curveName == null
-                            ? ExportFullKeyBlob(includePrivateParameters: false)
-                            : ExportKeyBlob(includePrivateParameters: false),
-                        curveName);
+                          ? ExportFullKeyBlob(includePrivateParameters: false)
+                          : ExportKeyBlob(includePrivateParameters: false),
+                        curveName
+                    );
                 }
             }
         }

@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis
     public abstract partial class Compilation
     {
         /// <summary>
-        /// Abstraction that allows the caller to delay the creation of the <see cref="Stream"/> values 
+        /// Abstraction that allows the caller to delay the creation of the <see cref="Stream"/> values
         /// until they are actually needed.
         /// </summary>
         internal abstract class EmitStreamProvider
@@ -31,14 +31,14 @@ namespace Microsoft.CodeAnalysis
             public abstract Stream? Stream { get; }
 
             /// <summary>
-            /// This method will be called once during Emit at the time the Compilation needs 
+            /// This method will be called once during Emit at the time the Compilation needs
             /// to create a stream for writing. It will not be called in the case of
             /// user errors in code. Shall not be called when <see cref="Stream"/> returns non-null.
             /// </summary>
             protected abstract Stream? CreateStream(DiagnosticBag diagnostics);
 
             /// <summary>
-            /// Returns a <see cref="Stream"/>. If one cannot be gotten or created then a diagnostic will 
+            /// Returns a <see cref="Stream"/>. If one cannot be gotten or created then a diagnostic will
             /// be added to <paramref name="diagnostics"/>
             /// </summary>
             public Stream? GetOrCreateStream(DiagnosticBag diagnostics)

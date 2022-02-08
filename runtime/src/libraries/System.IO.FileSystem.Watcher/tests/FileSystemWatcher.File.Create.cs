@@ -8,7 +8,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class File_Create_Tests : FileSystemWatcherTest
     {
         [Fact]
@@ -31,39 +36,41 @@ namespace System.IO.Tests
         [OuterLoop]
         public void FileSystemWatcher_File_Create_EnablingDisablingNotAffectRaisingEvent()
         {
-            ExecuteWithRetry(() =>
-            {
-                using (var testDirectory = new TempDirectory(GetTestFilePath()))
-                using (var watcher = new FileSystemWatcher(testDirectory.Path))
+            ExecuteWithRetry(
+                () =>
                 {
-                    string fileName = Path.Combine(testDirectory.Path, "file");
-                    watcher.Filter = Path.GetFileName(fileName);
-
-                    int numberOfRaisedEvents = 0;
-                    AutoResetEvent autoResetEvent = new AutoResetEvent(false);
-                    FileSystemEventHandler handler = (o, e) =>
+                    using (var testDirectory = new TempDirectory(GetTestFilePath()))
+                    using (var watcher = new FileSystemWatcher(testDirectory.Path))
                     {
-                        Interlocked.Increment(ref numberOfRaisedEvents);
-                        autoResetEvent.Set();
-                    };
+                        string fileName = Path.Combine(testDirectory.Path, "file");
+                        watcher.Filter = Path.GetFileName(fileName);
 
-                    watcher.Created += handler;
+                        int numberOfRaisedEvents = 0;
+                        AutoResetEvent autoResetEvent = new AutoResetEvent(false);
+                        FileSystemEventHandler handler = (o, e) =>
+                        {
+                            Interlocked.Increment(ref numberOfRaisedEvents);
+                            autoResetEvent.Set();
+                        };
 
-                    for (int i = 0; i < 100; i++)
-                    {
+                        watcher.Created += handler;
+
+                        for (int i = 0; i < 100; i++)
+                        {
+                            watcher.EnableRaisingEvents = true;
+                            watcher.EnableRaisingEvents = false;
+                        }
+
                         watcher.EnableRaisingEvents = true;
-                        watcher.EnableRaisingEvents = false;
+
+                        // this should raise one and only one event
+                        File.Create(fileName).Dispose();
+                        Assert.True(autoResetEvent.WaitOne(WaitForExpectedEventTimeout_NoRetry));
+                        Assert.False(autoResetEvent.WaitOne(SubsequentExpectedWait));
+                        Assert.True(numberOfRaisedEvents == 1);
                     }
-
-                    watcher.EnableRaisingEvents = true;
-
-                    // this should raise one and only one event
-                    File.Create(fileName).Dispose();
-                    Assert.True(autoResetEvent.WaitOne(WaitForExpectedEventTimeout_NoRetry));
-                    Assert.False(autoResetEvent.WaitOne(SubsequentExpectedWait));
-                    Assert.True(numberOfRaisedEvents == 1);
                 }
-            });
+            );
         }
 
         [Fact]
@@ -110,7 +117,11 @@ namespace System.IO.Tests
         public void FileSystemWatcher_File_Create_DeepDirectoryStructure()
         {
             using (var dir = new TempDirectory(GetTestFilePath()))
-            using (var deepDir = new TempDirectory(Path.Combine(dir.Path, "dir", "dir", "dir", "dir", "dir", "dir", "dir")))
+            using (
+                var deepDir = new TempDirectory(
+                    Path.Combine(dir.Path, "dir", "dir", "dir", "dir", "dir", "dir", "dir")
+                )
+            )
             using (var watcher = new FileSystemWatcher(dir.Path, "*"))
             {
                 watcher.IncludeSubdirectories = true;
@@ -121,7 +132,14 @@ namespace System.IO.Tests
                 Action action = () => File.Create(fileName).Dispose();
                 Action cleanup = () => File.Delete(fileName);
 
-                ExpectEvent(watcher, WatcherChangeTypes.Created, action, cleanup, fileName, LongWaitTimeout);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Created,
+                    action,
+                    cleanup,
+                    fileName,
+                    LongWaitTimeout
+                );
             }
         }
 

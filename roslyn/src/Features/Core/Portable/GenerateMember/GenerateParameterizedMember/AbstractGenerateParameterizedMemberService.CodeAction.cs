@@ -13,7 +13,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal abstract partial class AbstractGenerateParameterizedMemberService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>
+    internal abstract partial class AbstractGenerateParameterizedMemberService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax,
+        TInvocationExpressionSyntax
+    >
     {
         private partial class GenerateParameterizedMemberCodeAction : CodeAction
         {
@@ -29,7 +34,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 Document document,
                 State state,
                 bool isAbstract,
-                bool generateProperty)
+                bool generateProperty
+            )
             {
                 _service = service;
                 _document = document;
@@ -39,17 +45,18 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 _equivalenceKey = Title;
             }
 
-            private string GetDisplayText(
-                State state,
-                bool isAbstract,
-                bool generateProperty)
+            private string GetDisplayText(State state, bool isAbstract, bool generateProperty)
             {
                 switch (state.MethodGenerationKind)
                 {
                     case MethodGenerationKind.Member:
-                        var text = generateProperty ?
-                            isAbstract ? FeaturesResources.Generate_abstract_property_0 : FeaturesResources.Generate_property_0 :
-                            isAbstract ? FeaturesResources.Generate_abstract_method_0 : FeaturesResources.Generate_method_0;
+                        var text = generateProperty
+                            ? isAbstract
+                                ? FeaturesResources.Generate_abstract_property_0
+                                : FeaturesResources.Generate_property_0
+                            : isAbstract
+                                ? FeaturesResources.Generate_abstract_method_0
+                                : FeaturesResources.Generate_method_0;
 
                         var name = state.IdentifierToken.ValueText;
                         return string.Format(text, name);
@@ -62,40 +69,63 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
             }
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            )
             {
-                var syntaxTree = await _document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-                var syntaxFactory = _document.Project.Solution.Workspace.Services.GetLanguageServices(_state.TypeToGenerateIn.Language).GetService<SyntaxGenerator>();
+                var syntaxTree = await _document
+                    .GetSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var syntaxFactory = _document.Project.Solution.Workspace.Services
+                    .GetLanguageServices(_state.TypeToGenerateIn.Language)
+                    .GetService<SyntaxGenerator>();
 
                 if (_generateProperty)
                 {
-                    var property = await _state.SignatureInfo.GeneratePropertyAsync(syntaxFactory, _isAbstract, _state.IsWrittenTo, cancellationToken).ConfigureAwait(false);
+                    var property = await _state.SignatureInfo
+                        .GeneratePropertyAsync(
+                            syntaxFactory,
+                            _isAbstract,
+                            _state.IsWrittenTo,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                    var result = await CodeGenerator.AddPropertyDeclarationAsync(
-                        _document.Project.Solution,
-                        _state.TypeToGenerateIn,
-                        property,
-                        new CodeGenerationOptions(
-                            afterThisLocation: _state.IdentifierToken.GetLocation(),
-                            generateMethodBodies: _state.TypeToGenerateIn.TypeKind != TypeKind.Interface),
-                        cancellationToken)
+                    var result = await CodeGenerator
+                        .AddPropertyDeclarationAsync(
+                            _document.Project.Solution,
+                            _state.TypeToGenerateIn,
+                            property,
+                            new CodeGenerationOptions(
+                                afterThisLocation: _state.IdentifierToken.GetLocation(),
+                                generateMethodBodies: _state.TypeToGenerateIn.TypeKind
+                                    != TypeKind.Interface
+                            ),
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
 
                     return result;
                 }
                 else
                 {
-                    var method = await _state.SignatureInfo.GenerateMethodAsync(syntaxFactory, _isAbstract, cancellationToken).ConfigureAwait(false);
+                    var method = await _state.SignatureInfo
+                        .GenerateMethodAsync(syntaxFactory, _isAbstract, cancellationToken)
+                        .ConfigureAwait(false);
 
-                    var result = await CodeGenerator.AddMethodDeclarationAsync(
-                        _document.Project.Solution,
-                        _state.TypeToGenerateIn,
-                        method,
-                        new CodeGenerationOptions(
-                            afterThisLocation: _state.Location,
-                            generateMethodBodies: _state.TypeToGenerateIn.TypeKind != TypeKind.Interface,
-                            parseOptions: syntaxTree.Options),
-                        cancellationToken)
+                    var result = await CodeGenerator
+                        .AddMethodDeclarationAsync(
+                            _document.Project.Solution,
+                            _state.TypeToGenerateIn,
+                            method,
+                            new CodeGenerationOptions(
+                                afterThisLocation: _state.Location,
+                                generateMethodBodies: _state.TypeToGenerateIn.TypeKind
+                                    != TypeKind.Interface,
+                                parseOptions: syntaxTree.Options
+                            ),
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
 
                     return result;
@@ -104,10 +134,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             public override string Title
             {
-                get
-                {
-                    return GetDisplayText(_state, _isAbstract, _generateProperty);
-                }
+                get { return GetDisplayText(_state, _isAbstract, _generateProperty); }
             }
 
             public override string EquivalenceKey => _equivalenceKey;

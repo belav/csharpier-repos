@@ -22,7 +22,10 @@ namespace System.ComponentModel.DataAnnotations.Schema
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(name)), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(name)),
+                    nameof(name)
+                );
             }
 
             Name = name;
@@ -44,7 +47,10 @@ namespace System.ComponentModel.DataAnnotations.Schema
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(value)), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(value)),
+                        nameof(value)
+                    );
                 }
 
                 _schema = value;

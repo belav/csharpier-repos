@@ -44,14 +44,24 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
 
             var diagnosticsMock = new Mock<IDiagnosticService>(MockBehavior.Strict);
             // Create a mock that returns a diagnostic for the document.
-            SetupMockWithDiagnostics(diagnosticsMock, document.Id, await CreateMockDiagnosticDataAsync(document, "id").ConfigureAwait(false));
+            SetupMockWithDiagnostics(
+                diagnosticsMock,
+                document.Id,
+                await CreateMockDiagnosticDataAsync(document, "id").ConfigureAwait(false)
+            );
 
             // Publish one document change diagnostic notification ->
             // 1.  doc1 with id.
             //
             // We expect one publish diagnostic notification ->
             // 1.  from doc1 with id.
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, 1, document).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    1,
+                    document
+                )
+                .ConfigureAwait(false);
 
             var result = Assert.Single(results);
             Assert.Equal(new Uri(document.FilePath), result.Uri);
@@ -62,16 +72,30 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         public async Task NoDiagnosticsWhenInPullMode()
         {
             using var workspace = (await CreateTestLspServerAsync("")).TestWorkspace;
-            workspace.SetOptions(workspace.Options.WithChangedOption(
-                InternalDiagnosticsOptions.NormalDiagnosticMode, DiagnosticMode.Pull));
+            workspace.SetOptions(
+                workspace.Options.WithChangedOption(
+                    InternalDiagnosticsOptions.NormalDiagnosticMode,
+                    DiagnosticMode.Pull
+                )
+            );
 
             var document = workspace.CurrentSolution.Projects.First().Documents.First();
 
             var diagnosticsMock = new Mock<IDiagnosticService>(MockBehavior.Strict);
             // Create a mock that returns a diagnostic for the document.
-            SetupMockWithDiagnostics(diagnosticsMock, document.Id, await CreateMockDiagnosticDataAsync(document, "id").ConfigureAwait(false));
+            SetupMockWithDiagnostics(
+                diagnosticsMock,
+                document.Id,
+                await CreateMockDiagnosticDataAsync(document, "id").ConfigureAwait(false)
+            );
 
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, 0, document).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    0,
+                    document
+                )
+                .ConfigureAwait(false);
             Assert.Empty(results);
         }
 
@@ -83,8 +107,16 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
 
             var diagnosticsMock = new Mock<IDiagnosticService>(MockBehavior.Strict);
             // Create two mapped diagnostics for the document.
-            SetupMockWithDiagnostics(diagnosticsMock, document.Id,
-                await CreateMockDiagnosticDatasWithMappedLocationAsync(document, ("id1", document.FilePath + "m1"), ("id2", document.FilePath + "m2")).ConfigureAwait(false));
+            SetupMockWithDiagnostics(
+                diagnosticsMock,
+                document.Id,
+                await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                        document,
+                        ("id1", document.FilePath + "m1"),
+                        ("id2", document.FilePath + "m2")
+                    )
+                    .ConfigureAwait(false)
+            );
 
             // Publish one document change diagnostic notification ->
             // 1.  doc1 with id1 = mapped file m1 and id2 = mapped file m2.
@@ -92,7 +124,13 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             // We expect two publish diagnostic notifications ->
             // 1.  from m1 with id1 (from 1 above).
             // 2.  from m2 with id2 (from 1 above).
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, expectedNumberOfCallbacks: 2, document).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    expectedNumberOfCallbacks: 2,
+                    document
+                )
+                .ConfigureAwait(false);
 
             Assert.Equal(2, results.Count);
             Assert.Equal(new Uri(document.FilePath + "m1"), results[0].Uri);
@@ -105,15 +143,24 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         [Fact]
         public async Task AddDiagnosticWithMappedFileToManyDocumentsTestAsync()
         {
-            using var workspace = (await CreateTestLspServerAsync(new string[] { "", "" })).TestWorkspace;
+            using var workspace =
+                (await CreateTestLspServerAsync(new string[] { "", "" })).TestWorkspace;
             var documents = workspace.CurrentSolution.Projects.First().Documents.ToImmutableArray();
 
             var diagnosticsMock = new Mock<IDiagnosticService>(MockBehavior.Strict);
             // Create diagnostic for the first document that has a mapped location.
             var mappedFilePath = documents[0].FilePath + "m1";
-            var documentOneDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(documents[0], ("doc1Diagnostic", mappedFilePath)).ConfigureAwait(false);
+            var documentOneDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                    documents[0],
+                    ("doc1Diagnostic", mappedFilePath)
+                )
+                .ConfigureAwait(false);
             // Create diagnostic for the second document that maps to the same location as the first document diagnostic.
-            var documentTwoDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(documents[1], ("doc2Diagnostic", mappedFilePath)).ConfigureAwait(false);
+            var documentTwoDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                    documents[1],
+                    ("doc2Diagnostic", mappedFilePath)
+                )
+                .ConfigureAwait(false);
 
             SetupMockWithDiagnostics(diagnosticsMock, documents[0].Id, documentOneDiagnostic);
             SetupMockWithDiagnostics(diagnosticsMock, documents[1].Id, documentTwoDiagnostic);
@@ -125,7 +172,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             // We expect two publish diagnostic notifications ->
             // 1.  from m1 with doc1Diagnostic (from 1 above).
             // 2.  from m1 with doc1Diagnostic and doc2Diagnostic (from 2 above adding doc2Diagnostic to m1).
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, 2, documents[0], documents[1]).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    2,
+                    documents[0],
+                    documents[1]
+                )
+                .ConfigureAwait(false);
 
             Assert.Equal(2, results.Count);
             var expectedUri = new Uri(mappedFilePath);
@@ -146,9 +200,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
 
             var diagnosticsMock = new Mock<IDiagnosticService>(MockBehavior.Strict);
             // Setup the mock so the first call for a document returns a diagnostic, but the second returns empty.
-            SetupMockDiagnosticSequence(diagnosticsMock, document.Id,
+            SetupMockDiagnosticSequence(
+                diagnosticsMock,
+                document.Id,
                 await CreateMockDiagnosticDataAsync(document, "id").ConfigureAwait(false),
-                ImmutableArray<DiagnosticData>.Empty);
+                ImmutableArray<DiagnosticData>.Empty
+            );
 
             // Publish two document change diagnostic notifications ->
             // 1.  doc1 with id.
@@ -157,7 +214,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             // We expect two publish diagnostic notifications ->
             // 1.  from doc1 with id.
             // 2.  from doc1 with empty (from 2 above clearing out diagnostics from doc1).
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, 2, document, document).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    2,
+                    document,
+                    document
+                )
+                .ConfigureAwait(false);
 
             Assert.Equal(2, results.Count);
             Assert.Equal(new Uri(document.FilePath), results[0].Uri);
@@ -182,9 +246,21 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             var mappedFilePathM2 = document.FilePath + "m2";
             // Create two mapped diagnostics for the document on first call.
             // On the second call, return only the second mapped diagnostic for the document.
-            SetupMockDiagnosticSequence(diagnosticsMock, document.Id,
-                await CreateMockDiagnosticDatasWithMappedLocationAsync(document, ("id1", mappedFilePathM1), ("id2", mappedFilePathM2)).ConfigureAwait(false),
-                await CreateMockDiagnosticDatasWithMappedLocationAsync(document, ("id2", mappedFilePathM2)).ConfigureAwait(false));
+            SetupMockDiagnosticSequence(
+                diagnosticsMock,
+                document.Id,
+                await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                        document,
+                        ("id1", mappedFilePathM1),
+                        ("id2", mappedFilePathM2)
+                    )
+                    .ConfigureAwait(false),
+                await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                        document,
+                        ("id2", mappedFilePathM2)
+                    )
+                    .ConfigureAwait(false)
+            );
 
             // Publish three document change diagnostic notifications ->
             // 1.  doc1 with id1 = mapped file m1 and id2 = mapped file m2.
@@ -195,7 +271,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             // 2.  from m2 with id2 (from 1 above).
             // 3.  from m1 with empty (from 2 above clearing out diagnostics for m1).
             // 4.  from m2 with id2 (from 2 above clearing out diagnostics for m1).
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, 4, document, document).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    4,
+                    document,
+                    document
+                )
+                .ConfigureAwait(false);
 
             var mappedFileURIM1 = new Uri(mappedFilePathM1);
             var mappedFileURIM2 = new Uri(mappedFilePathM2);
@@ -217,25 +300,46 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             Assert.Equal("id2", results[3].Diagnostics.Single().Code);
 
             Assert.Single(testAccessor.GetFileUrisForDocument(document.Id), mappedFileURIM2);
-            Assert.Equal("id2", testAccessor.GetDiagnosticsForUriAndDocument(document.Id, mappedFileURIM2).Single().Code);
-            Assert.Empty(testAccessor.GetDiagnosticsForUriAndDocument(document.Id, mappedFileURIM1));
+            Assert.Equal(
+                "id2",
+                testAccessor
+                    .GetDiagnosticsForUriAndDocument(document.Id, mappedFileURIM2)
+                    .Single().Code
+            );
+            Assert.Empty(
+                testAccessor.GetDiagnosticsForUriAndDocument(document.Id, mappedFileURIM1)
+            );
         }
 
         [Fact]
         public async Task RemoveDiagnosticForMappedFileToManyDocumentsTestAsync()
         {
-            using var workspace = (await CreateTestLspServerAsync(new string[] { "", "" })).TestWorkspace;
+            using var workspace =
+                (await CreateTestLspServerAsync(new string[] { "", "" })).TestWorkspace;
             var documents = workspace.CurrentSolution.Projects.First().Documents.ToImmutableArray();
 
             var diagnosticsMock = new Mock<IDiagnosticService>(MockBehavior.Strict);
             // Create diagnostic for the first document that has a mapped location.
             var mappedFilePath = documents[0].FilePath + "m1";
-            var documentOneDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(documents[0], ("doc1Diagnostic", mappedFilePath)).ConfigureAwait(false);
+            var documentOneDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                    documents[0],
+                    ("doc1Diagnostic", mappedFilePath)
+                )
+                .ConfigureAwait(false);
             // Create diagnostic for the second document that maps to the same location as the first document diagnostic.
-            var documentTwoDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(documents[1], ("doc2Diagnostic", mappedFilePath)).ConfigureAwait(false);
+            var documentTwoDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                    documents[1],
+                    ("doc2Diagnostic", mappedFilePath)
+                )
+                .ConfigureAwait(false);
 
             // On the first call for this document, return the mapped diagnostic.  On the second, return nothing.
-            SetupMockDiagnosticSequence(diagnosticsMock, documents[0].Id, documentOneDiagnostic, ImmutableArray<DiagnosticData>.Empty);
+            SetupMockDiagnosticSequence(
+                diagnosticsMock,
+                documents[0].Id,
+                documentOneDiagnostic,
+                ImmutableArray<DiagnosticData>.Empty
+            );
             // Always return the mapped diagnostic for this document.
             SetupMockWithDiagnostics(diagnosticsMock, documents[1].Id, documentTwoDiagnostic);
 
@@ -248,7 +352,15 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             // 1.  from m1 with doc1Diagnostic (triggered by 1 above to add doc1Diagnostic).
             // 2.  from m1 with doc1Diagnostic and doc2Diagnostic (triggered by 2 above to add doc2Diagnostic).
             // 3.  from m1 with just doc2Diagnostic (triggered by 3 above to remove doc1Diagnostic).
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, 3, documents[0], documents[1], documents[0]).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    3,
+                    documents[0],
+                    documents[1],
+                    documents[0]
+                )
+                .ConfigureAwait(false);
 
             Assert.Equal(3, results.Count);
             var expectedUri = new Uri(mappedFilePath);
@@ -265,8 +377,15 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             Assert.Contains(results[2].Diagnostics, d => d.Code == "doc2Diagnostic");
 
             Assert.Single(testAccessor.GetFileUrisForDocument(documents[1].Id), expectedUri);
-            Assert.Equal("doc2Diagnostic", testAccessor.GetDiagnosticsForUriAndDocument(documents[1].Id, expectedUri).Single().Code);
-            Assert.Empty(testAccessor.GetDiagnosticsForUriAndDocument(documents[0].Id, expectedUri));
+            Assert.Equal(
+                "doc2Diagnostic",
+                testAccessor
+                    .GetDiagnosticsForUriAndDocument(documents[1].Id, expectedUri)
+                    .Single().Code
+            );
+            Assert.Empty(
+                testAccessor.GetDiagnosticsForUriAndDocument(documents[0].Id, expectedUri)
+            );
         }
 
         [Fact]
@@ -280,9 +399,17 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             var mappedFilePathM2 = document.FilePath + "m2";
             // Create two mapped diagnostics for the document on first call.
             // On the second call, return only empty diagnostics.
-            SetupMockDiagnosticSequence(diagnosticsMock, document.Id,
-                await CreateMockDiagnosticDatasWithMappedLocationAsync(document, ("id1", mappedFilePathM1), ("id2", mappedFilePathM2)).ConfigureAwait(false),
-                ImmutableArray<DiagnosticData>.Empty);
+            SetupMockDiagnosticSequence(
+                diagnosticsMock,
+                document.Id,
+                await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                        document,
+                        ("id1", mappedFilePathM1),
+                        ("id2", mappedFilePathM2)
+                    )
+                    .ConfigureAwait(false),
+                ImmutableArray<DiagnosticData>.Empty
+            );
 
             // Publish two document change diagnostic notifications ->
             // 1.  doc1 with id1 = mapped file m1 and id2 = mapped file m2.
@@ -290,7 +417,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             //
             // We expect four publish diagnostic notifications - the first two are the two mapped files from 1.
             // The second two are the two mapped files being cleared by 2.
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, 4, document, document).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    4,
+                    document,
+                    document
+                )
+                .ConfigureAwait(false);
 
             var mappedFileURIM1 = new Uri(document.FilePath + "m1");
             var mappedFileURIM2 = new Uri(document.FilePath + "m2");
@@ -318,19 +452,38 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         [Fact]
         public async Task ClearAllDiagnosticsForMappedFileToManyDocumentsTestAsync()
         {
-            using var workspace = (await CreateTestLspServerAsync(new string[] { "", "" })).TestWorkspace;
+            using var workspace =
+                (await CreateTestLspServerAsync(new string[] { "", "" })).TestWorkspace;
             var documents = workspace.CurrentSolution.Projects.First().Documents.ToImmutableArray();
 
             var diagnosticsMock = new Mock<IDiagnosticService>(MockBehavior.Strict);
             // Create diagnostic for the first document that has a mapped location.
             var mappedFilePath = documents[0].FilePath + "m1";
-            var documentOneDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(documents[0], ("doc1Diagnostic", mappedFilePath)).ConfigureAwait(false);
+            var documentOneDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                    documents[0],
+                    ("doc1Diagnostic", mappedFilePath)
+                )
+                .ConfigureAwait(false);
             // Create diagnostic for the second document that maps to the same location as the first document diagnostic.
-            var documentTwoDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(documents[1], ("doc2Diagnostic", mappedFilePath)).ConfigureAwait(false);
+            var documentTwoDiagnostic = await CreateMockDiagnosticDatasWithMappedLocationAsync(
+                    documents[1],
+                    ("doc2Diagnostic", mappedFilePath)
+                )
+                .ConfigureAwait(false);
 
             // On the first call for the documents, return the mapped diagnostic.  On the second, return nothing.
-            SetupMockDiagnosticSequence(diagnosticsMock, documents[0].Id, documentOneDiagnostic, ImmutableArray<DiagnosticData>.Empty);
-            SetupMockDiagnosticSequence(diagnosticsMock, documents[1].Id, documentTwoDiagnostic, ImmutableArray<DiagnosticData>.Empty);
+            SetupMockDiagnosticSequence(
+                diagnosticsMock,
+                documents[0].Id,
+                documentOneDiagnostic,
+                ImmutableArray<DiagnosticData>.Empty
+            );
+            SetupMockDiagnosticSequence(
+                diagnosticsMock,
+                documents[1].Id,
+                documentTwoDiagnostic,
+                ImmutableArray<DiagnosticData>.Empty
+            );
 
             // Publish four document change diagnostic notifications ->
             // 1.  doc1 with doc1Diagnostic = mapped file m1.
@@ -343,7 +496,16 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             // 2.  from URI m1 with doc1Diagnostic and doc2Diagnostic (triggered by 2 above to add doc2Diagnostic).
             // 3.  from URI m1 with just doc2Diagnostic (triggered by 3 above to clear doc1 diagnostic).
             // 4.  from URI m1 with empty (triggered by 4 above to also clear doc2 diagnostic).
-            var (testAccessor, results) = await RunPublishDiagnosticsAsync(workspace, diagnosticsMock.Object, 4, documents[0], documents[1], documents[0], documents[1]).ConfigureAwait(false);
+            var (testAccessor, results) = await RunPublishDiagnosticsAsync(
+                    workspace,
+                    diagnosticsMock.Object,
+                    4,
+                    documents[0],
+                    documents[1],
+                    documents[0],
+                    documents[1]
+                )
+                .ConfigureAwait(false);
 
             Assert.Equal(4, results.Count);
             var expectedUri = new Uri(mappedFilePath);
@@ -370,10 +532,16 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             TestWorkspace workspace,
             IDiagnosticService diagnosticService,
             int expectedNumberOfCallbacks,
-            params Document[] documentsToPublish)
+            params Document[] documentsToPublish
+        )
         {
             var (clientStream, serverStream) = FullDuplexStream.CreatePair();
-            var languageServer = CreateLanguageServer(serverStream, serverStream, workspace, diagnosticService);
+            var languageServer = CreateLanguageServer(
+                serverStream,
+                serverStream,
+                workspace,
+                diagnosticService
+            );
 
             // Notification target for tests to receive the notification details
             var callback = new Callback(expectedNumberOfCallbacks);
@@ -390,21 +558,35 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
 
             // Triggers language server to send notifications.
             await languageServer.ProcessDiagnosticUpdatedBatchAsync(
-                diagnosticService, documentsToPublish.SelectAsArray(d => d.Id), CancellationToken.None);
+                diagnosticService,
+                documentsToPublish.SelectAsArray(d => d.Id),
+                CancellationToken.None
+            );
 
             // Waits for all notifications to be received.
             await callback.CallbackCompletedTask.ConfigureAwait(false);
 
             return (languageServer.GetTestAccessor(), callback.Results);
 
-            static VisualStudioInProcLanguageServer CreateLanguageServer(Stream inputStream, Stream outputStream, TestWorkspace workspace, IDiagnosticService mockDiagnosticService)
+            static VisualStudioInProcLanguageServer CreateLanguageServer(
+                Stream inputStream,
+                Stream outputStream,
+                TestWorkspace workspace,
+                IDiagnosticService mockDiagnosticService
+            )
             {
-                var dispatcherFactory = workspace.ExportProvider.GetExportedValue<RequestDispatcherFactory>();
-                var listenerProvider = workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
-                var lspWorkspaceRegistrationService = workspace.ExportProvider.GetExportedValue<LspWorkspaceRegistrationService>();
-                var capabilitiesProvider = workspace.ExportProvider.GetExportedValue<DefaultCapabilitiesProvider>();
+                var dispatcherFactory =
+                    workspace.ExportProvider.GetExportedValue<RequestDispatcherFactory>();
+                var listenerProvider =
+                    workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+                var lspWorkspaceRegistrationService =
+                    workspace.ExportProvider.GetExportedValue<LspWorkspaceRegistrationService>();
+                var capabilitiesProvider =
+                    workspace.ExportProvider.GetExportedValue<DefaultCapabilitiesProvider>();
 
-                var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(outputStream, inputStream))
+                var jsonRpc = new JsonRpc(
+                    new HeaderDelimitedMessageHandler(outputStream, inputStream)
+                )
                 {
                     ExceptionStrategy = ExceptionProcessing.ISerializable,
                 };
@@ -423,60 +605,127 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                     ProtocolConstants.RoslynLspLanguages,
                     clientName: null,
                     userVisibleServerName: string.Empty,
-                    telemetryServerTypeName: string.Empty);
+                    telemetryServerTypeName: string.Empty
+                );
 
                 jsonRpc.StartListening();
                 return languageServer;
             }
         }
 
-        private void SetupMockWithDiagnostics(Mock<IDiagnosticService> diagnosticServiceMock, DocumentId documentId, ImmutableArray<DiagnosticData> diagnostics)
+        private void SetupMockWithDiagnostics(
+            Mock<IDiagnosticService> diagnosticServiceMock,
+            DocumentId documentId,
+            ImmutableArray<DiagnosticData> diagnostics
+        )
         {
-            diagnosticServiceMock.Setup(d => d.GetPushDiagnosticsAsync(
-                It.IsAny<Workspace>(),
-                It.IsAny<ProjectId>(),
-                documentId,
-                It.IsAny<object>(),
-                It.IsAny<bool>(),
-                It.IsAny<Option2<DiagnosticMode>>(),
-                It.IsAny<CancellationToken>())).Returns(new ValueTask<ImmutableArray<DiagnosticData>>(diagnostics));
+            diagnosticServiceMock
+                .Setup(
+                    d =>
+                        d.GetPushDiagnosticsAsync(
+                            It.IsAny<Workspace>(),
+                            It.IsAny<ProjectId>(),
+                            documentId,
+                            It.IsAny<object>(),
+                            It.IsAny<bool>(),
+                            It.IsAny<Option2<DiagnosticMode>>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Returns(new ValueTask<ImmutableArray<DiagnosticData>>(diagnostics));
         }
 
-        private void SetupMockDiagnosticSequence(Mock<IDiagnosticService> diagnosticServiceMock, DocumentId documentId,
-            ImmutableArray<DiagnosticData> firstDiagnostics, ImmutableArray<DiagnosticData> secondDiagnostics)
+        private void SetupMockDiagnosticSequence(
+            Mock<IDiagnosticService> diagnosticServiceMock,
+            DocumentId documentId,
+            ImmutableArray<DiagnosticData> firstDiagnostics,
+            ImmutableArray<DiagnosticData> secondDiagnostics
+        )
         {
-            diagnosticServiceMock.SetupSequence(d => d.GetPushDiagnosticsAsync(
-                It.IsAny<Workspace>(),
-                It.IsAny<ProjectId>(),
-                documentId,
-                It.IsAny<object>(),
-                It.IsAny<bool>(),
-                It.IsAny<Option2<DiagnosticMode>>(),
-                It.IsAny<CancellationToken>()))
+            diagnosticServiceMock
+                .SetupSequence(
+                    d =>
+                        d.GetPushDiagnosticsAsync(
+                            It.IsAny<Workspace>(),
+                            It.IsAny<ProjectId>(),
+                            documentId,
+                            It.IsAny<object>(),
+                            It.IsAny<bool>(),
+                            It.IsAny<Option2<DiagnosticMode>>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(new ValueTask<ImmutableArray<DiagnosticData>>(firstDiagnostics))
                 .Returns(new ValueTask<ImmutableArray<DiagnosticData>>(secondDiagnostics));
         }
 
-        private async Task<ImmutableArray<DiagnosticData>> CreateMockDiagnosticDataAsync(Document document, string id)
+        private async Task<ImmutableArray<DiagnosticData>> CreateMockDiagnosticDataAsync(
+            Document document,
+            string id
+        )
         {
-            var descriptor = new DiagnosticDescriptor(id, "", "", "", DiagnosticSeverity.Error, true);
-            var location = Location.Create(await document.GetRequiredSyntaxTreeAsync(CancellationToken.None).ConfigureAwait(false), new TextSpan());
-            return ImmutableArray.Create(DiagnosticData.Create(Diagnostic.Create(descriptor, location), document));
+            var descriptor = new DiagnosticDescriptor(
+                id,
+                "",
+                "",
+                "",
+                DiagnosticSeverity.Error,
+                true
+            );
+            var location = Location.Create(
+                await document
+                    .GetRequiredSyntaxTreeAsync(CancellationToken.None)
+                    .ConfigureAwait(false),
+                new TextSpan()
+            );
+            return ImmutableArray.Create(
+                DiagnosticData.Create(Diagnostic.Create(descriptor, location), document)
+            );
         }
 
-        private async Task<ImmutableArray<DiagnosticData>> CreateMockDiagnosticDatasWithMappedLocationAsync(Document document, params (string diagnosticId, string mappedFilePath)[] diagnostics)
+        private async Task<
+            ImmutableArray<DiagnosticData>
+        > CreateMockDiagnosticDatasWithMappedLocationAsync(
+            Document document,
+            params (string diagnosticId, string mappedFilePath)[] diagnostics
+        )
         {
-            var tree = await document.GetRequiredSyntaxTreeAsync(CancellationToken.None).ConfigureAwait(false);
+            var tree = await document
+                .GetRequiredSyntaxTreeAsync(CancellationToken.None)
+                .ConfigureAwait(false);
 
-            return diagnostics.Select(d => CreateMockDiagnosticDataWithMappedLocation(document, tree, d.diagnosticId, d.mappedFilePath)).ToImmutableArray();
+            return diagnostics
+                .Select(
+                    d =>
+                        CreateMockDiagnosticDataWithMappedLocation(
+                            document,
+                            tree,
+                            d.diagnosticId,
+                            d.mappedFilePath
+                        )
+                )
+                .ToImmutableArray();
 
-            static DiagnosticData CreateMockDiagnosticDataWithMappedLocation(Document document, SyntaxTree tree, string id, string mappedFilePath)
+            static DiagnosticData CreateMockDiagnosticDataWithMappedLocation(
+                Document document,
+                SyntaxTree tree,
+                string id,
+                string mappedFilePath
+            )
             {
-                var descriptor = new DiagnosticDescriptor(id, "", "", "", DiagnosticSeverity.Error, true);
+                var descriptor = new DiagnosticDescriptor(
+                    id,
+                    "",
+                    "",
+                    "",
+                    DiagnosticSeverity.Error,
+                    true
+                );
                 var location = Location.Create(tree, new TextSpan());
 
                 var diagnostic = Diagnostic.Create(descriptor, location);
-                return new DiagnosticData(diagnostic.Id,
+                return new DiagnosticData(
+                    diagnostic.Id,
                     diagnostic.Descriptor.Category,
                     null,
                     null,
@@ -493,11 +742,19 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                     diagnostic.Descriptor.Title.ToString(),
                     diagnostic.Descriptor.Description.ToString(),
                     null,
-                    diagnostic.IsSuppressed);
+                    diagnostic.IsSuppressed
+                );
             }
 
-            static DiagnosticDataLocation GetDataLocation(Document document, string mappedFilePath)
-                => new DiagnosticDataLocation(document.Id, originalFilePath: document.FilePath, mappedFilePath: mappedFilePath);
+            static DiagnosticDataLocation GetDataLocation(
+                Document document,
+                string mappedFilePath
+            ) =>
+                new DiagnosticDataLocation(
+                    document.Id,
+                    originalFilePath: document.FilePath,
+                    mappedFilePath: mappedFilePath
+                );
         }
 
         /// <summary>
@@ -510,7 +767,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             /// <summary>
             /// The queue of work to execute.
             /// </summary>
-            private readonly AsyncQueue<(SendOrPostCallback, object?)> _queue = new AsyncQueue<(SendOrPostCallback, object?)>();
+            private readonly AsyncQueue<(SendOrPostCallback, object?)> _queue =
+                new AsyncQueue<(SendOrPostCallback, object?)>();
 
             public RpcOrderPreservingSynchronizationContext()
             {
@@ -518,11 +776,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 this.ProcessQueueAsync().Forget();
             }
 
-            public override void Post(SendOrPostCallback d, object? state) => this._queue.Enqueue((d, state));
+            public override void Post(SendOrPostCallback d, object? state) =>
+                this._queue.Enqueue((d, state));
 
-            public override void Send(SendOrPostCallback d, object? state) => throw new NotSupportedException();
+            public override void Send(SendOrPostCallback d, object? state) =>
+                throw new NotSupportedException();
 
-            public override SynchronizationContext CreateCopy() => throw new NotSupportedException();
+            public override SynchronizationContext CreateCopy() =>
+                throw new NotSupportedException();
 
             /// <summary>
             /// Causes this <see cref="SynchronizationContext"/> to reject all future posted work and
@@ -547,6 +808,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         private class Callback
         {
             private readonly TaskCompletionSource<object?> _callbackCompletedTaskSource = new();
+
             /// <summary>
             /// Task that can be awaited for the all callbacks to complete.
             /// </summary>
@@ -590,7 +852,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 lock (_lock)
                 {
                     _currentNumberOfCallbacks++;
-                    Contract.ThrowIfTrue(_currentNumberOfCallbacks > _expectedNumberOfCallbacks, "received too many callbacks");
+                    Contract.ThrowIfTrue(
+                        _currentNumberOfCallbacks > _expectedNumberOfCallbacks,
+                        "received too many callbacks"
+                    );
 
                     var diagnosticParams = input.ToObject<LSP.PublishDiagnosticParams>();
                     Assumes.Present(diagnosticParams);
@@ -607,18 +872,19 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
 
         private class TestLanguageClient : AbstractInProcLanguageClient
         {
-            public TestLanguageClient()
-                : base(null!, null!, null, null!, null!, null!, null!, null)
-            {
-            }
+            public TestLanguageClient() : base(null!, null!, null, null!, null!, null!, null!, null)
+            { }
 
-            protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+            protected override ImmutableArray<string> SupportedLanguages =>
+                ProtocolConstants.RoslynLspLanguages;
 
             public override string Name => nameof(LspDiagnosticsTests);
 
             public override bool ShowNotificationOnInitializeFailed => false;
 
-            public override LSP.ServerCapabilities GetCapabilities(LSP.ClientCapabilities clientCapabilities) => new();
+            public override LSP.ServerCapabilities GetCapabilities(
+                LSP.ClientCapabilities clientCapabilities
+            ) => new();
         }
     }
 }

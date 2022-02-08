@@ -16,39 +16,44 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthorization(options =>
-        {
-            options.FallbackPolicy = options.DefaultPolicy;
-        });
-        services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-            .AddNegotiate(options =>
+        services.AddAuthorization(
+            options =>
             {
-                if (OperatingSystem.IsLinux())
+                options.FallbackPolicy = options.DefaultPolicy;
+            }
+        );
+        services
+            .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+            .AddNegotiate(
+                options =>
                 {
+                    if (OperatingSystem.IsLinux())
+                    {
                         /*
                         options.EnableLdap("DOMAIN.net");
-
+                        
                         options.EnableLdap(settings =>
                         {
-                            // Mandatory settings
-                            settings.Domain = "DOMAIN.com";
-                            // Optional settings
-                            settings.MachineAccountName = "machineName";
-                            settings.MachineAccountPassword = "PassW0rd";
-                            settings.IgnoreNestedGroups = true;
+                        // Mandatory settings
+                        settings.Domain = "DOMAIN.com";
+                        // Optional settings
+                        settings.MachineAccountName = "machineName";
+                        settings.MachineAccountPassword = "PassW0rd";
+                        settings.IgnoreNestedGroups = true;
                         });
                         */
-                }
+                    }
 
-                options.Events = new NegotiateEvents()
-                {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
+                        OnAuthenticationFailed = context =>
+                        {
                             // context.SkipHandler();
                             return Task.CompletedTask;
-                    }
-                };
-            });
+                        }
+                    };
+                }
+            );
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -62,6 +67,8 @@ public class Startup
     public async Task HandleRequest(HttpContext context)
     {
         var user = context.User.Identity;
-        await context.Response.WriteAsync($"Authenticated? {user.IsAuthenticated}, Name: {user.Name}, Protocol: {context.Request.Protocol}");
+        await context.Response.WriteAsync(
+            $"Authenticated? {user.IsAuthenticated}, Name: {user.Name}, Protocol: {context.Request.Protocol}"
+        );
     }
 }

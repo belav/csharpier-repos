@@ -37,7 +37,10 @@ namespace System.Xml
             // Output xml declaration only if user allows it and it was not already output
             if (!_omitXmlDeclaration && !_autoXmlDeclaration)
             {
-                if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+                if (_trackTextContent && _inTextContent != false)
+                {
+                    ChangeTextContentMark(false);
+                }
                 await RawTextAsync("<?xml version=\"").ConfigureAwait(false);
 
                 // Version
@@ -54,7 +57,8 @@ namespace System.Xml
                 if (standalone != XmlStandalone.Omit)
                 {
                     await RawTextAsync("\" standalone=\"").ConfigureAwait(false);
-                    await RawTextAsync(standalone == XmlStandalone.Yes ? "yes" : "no").ConfigureAwait(false);
+                    await RawTextAsync(standalone == XmlStandalone.Yes ? "yes" : "no")
+                        .ConfigureAwait(false);
                 }
 
                 await RawTextAsync("\"?>").ConfigureAwait(false);
@@ -130,12 +134,20 @@ namespace System.Xml
         }
 
         // Serialize the document type declaration.
-        public override async Task WriteDocTypeAsync(string name, string pubid, string sysid, string subset)
+        public override async Task WriteDocTypeAsync(
+            string name,
+            string pubid,
+            string sysid,
+            string subset
+        )
         {
             CheckAsyncCall();
             Debug.Assert(name != null && name.Length > 0);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             await RawTextAsync("<!DOCTYPE ").ConfigureAwait(false);
             await RawTextAsync(name).ConfigureAwait(false);
@@ -178,7 +190,10 @@ namespace System.Xml
             Debug.Assert(localName != null && localName.Length > 0);
             Debug.Assert(prefix != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             Task task;
             _bufChars[_bufPos++] = (char)'<';
@@ -190,7 +205,10 @@ namespace System.Xml
             {
                 task = RawTextAsync(localName);
             }
-            return task.CallVoidFuncWhenFinishAsync(thisRef => thisRef.WriteStartElementAsync_SetAttEndPos(), this);
+            return task.CallVoidFuncWhenFinishAsync(
+                thisRef => thisRef.WriteStartElementAsync_SetAttEndPos(),
+                this
+            );
         }
 
         private void WriteStartElementAsync_SetAttEndPos()
@@ -206,7 +224,10 @@ namespace System.Xml
             Debug.Assert(localName != null && localName.Length > 0);
             Debug.Assert(prefix != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             if (_contentPos != _bufPos)
             {
@@ -241,7 +262,10 @@ namespace System.Xml
             Debug.Assert(localName != null && localName.Length > 0);
             Debug.Assert(prefix != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             _bufChars[_bufPos++] = (char)'<';
             _bufChars[_bufPos++] = (char)'/';
@@ -257,13 +281,20 @@ namespace System.Xml
         }
 
         // Serialize an attribute tag using double quotes around the attribute value: 'prefix:localName="'
-        protected internal override Task WriteStartAttributeAsync(string prefix, string localName, string ns)
+        protected internal override Task WriteStartAttributeAsync(
+            string prefix,
+            string localName,
+            string ns
+        )
         {
             CheckAsyncCall();
             Debug.Assert(localName != null && localName.Length > 0);
             Debug.Assert(prefix != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             if (_attrEndPos == _bufPos)
             {
@@ -278,7 +309,10 @@ namespace System.Xml
             {
                 task = RawTextAsync(localName);
             }
-            return task.CallVoidFuncWhenFinishAsync(thisRef => thisRef.WriteStartAttribute_SetInAttribute(), this);
+            return task.CallVoidFuncWhenFinishAsync(
+                thisRef => thisRef.WriteStartAttribute_SetInAttribute(),
+                this
+            );
         }
 
         private void WriteStartAttribute_SetInAttribute()
@@ -293,7 +327,10 @@ namespace System.Xml
         {
             CheckAsyncCall();
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             _bufChars[_bufPos++] = (char)'"';
             _inAttributeValue = false;
@@ -302,7 +339,10 @@ namespace System.Xml
             return Task.CompletedTask;
         }
 
-        internal override async Task WriteNamespaceDeclarationAsync(string prefix, string namespaceName)
+        internal override async Task WriteNamespaceDeclarationAsync(
+            string prefix,
+            string namespaceName
+        )
         {
             CheckAsyncCall();
             Debug.Assert(prefix != null && namespaceName != null);
@@ -317,7 +357,10 @@ namespace System.Xml
             CheckAsyncCall();
             Debug.Assert(prefix != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             if (prefix.Length == 0)
             {
@@ -333,14 +376,20 @@ namespace System.Xml
 
             _inAttributeValue = true;
 
-            if (_trackTextContent && _inTextContent != true) { ChangeTextContentMark(true); }
+            if (_trackTextContent && _inTextContent != true)
+            {
+                ChangeTextContentMark(true);
+            }
         }
 
         internal override Task WriteEndNamespaceDeclarationAsync()
         {
             CheckAsyncCall();
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             _inAttributeValue = false;
 
@@ -357,7 +406,10 @@ namespace System.Xml
             CheckAsyncCall();
             Debug.Assert(text != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             if (_mergeCDataSections && _bufPos == _cdataPos)
             {
@@ -395,7 +447,10 @@ namespace System.Xml
             CheckAsyncCall();
             Debug.Assert(text != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             _bufChars[_bufPos++] = (char)'<';
             _bufChars[_bufPos++] = (char)'!';
@@ -416,7 +471,10 @@ namespace System.Xml
             Debug.Assert(name != null && name.Length > 0);
             Debug.Assert(text != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             _bufChars[_bufPos++] = (char)'<';
             _bufChars[_bufPos++] = (char)'?';
@@ -438,7 +496,10 @@ namespace System.Xml
             CheckAsyncCall();
             Debug.Assert(name != null && name.Length > 0);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             _bufChars[_bufPos++] = (char)'&';
             await RawTextAsync(name).ConfigureAwait(false);
@@ -464,7 +525,10 @@ namespace System.Xml
                 throw XmlConvert.CreateInvalidCharException(ch, '\0');
             }
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             _bufChars[_bufPos++] = (char)'&';
             _bufChars[_bufPos++] = (char)'#';
@@ -487,7 +551,10 @@ namespace System.Xml
             CheckAsyncCall();
             Debug.Assert(ws != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             if (_inAttributeValue)
             {
@@ -506,7 +573,10 @@ namespace System.Xml
             CheckAsyncCall();
             Debug.Assert(text != null);
 
-            if (_trackTextContent && _inTextContent != true) { ChangeTextContentMark(true); }
+            if (_trackTextContent && _inTextContent != true)
+            {
+                ChangeTextContentMark(true);
+            }
 
             if (_inAttributeValue)
             {
@@ -523,14 +593,18 @@ namespace System.Xml
         {
             CheckAsyncCall();
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             int surrogateChar = XmlCharType.CombineSurrogateChar(lowChar, highChar);
 
             _bufChars[_bufPos++] = (char)'&';
             _bufChars[_bufPos++] = (char)'#';
             _bufChars[_bufPos++] = (char)'x';
-            await RawTextAsync(surrogateChar.ToString("X", NumberFormatInfo.InvariantInfo)).ConfigureAwait(false);
+            await RawTextAsync(surrogateChar.ToString("X", NumberFormatInfo.InvariantInfo))
+                .ConfigureAwait(false);
             _bufChars[_bufPos++] = (char)';';
             _textPos = _bufPos;
         }
@@ -545,7 +619,10 @@ namespace System.Xml
             Debug.Assert(index >= 0);
             Debug.Assert(count >= 0 && index + count <= buffer.Length);
 
-            if (_trackTextContent && _inTextContent != true) { ChangeTextContentMark(true); }
+            if (_trackTextContent && _inTextContent != true)
+            {
+                ChangeTextContentMark(true);
+            }
 
             if (_inAttributeValue)
             {
@@ -567,7 +644,10 @@ namespace System.Xml
             Debug.Assert(index >= 0);
             Debug.Assert(count >= 0 && index + count <= buffer.Length);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             await WriteRawWithCharCheckingAsync(buffer, index, count).ConfigureAwait(false);
 
@@ -581,7 +661,10 @@ namespace System.Xml
             CheckAsyncCall();
             Debug.Assert(data != null);
 
-            if (_trackTextContent && _inTextContent != false) { ChangeTextContentMark(false); }
+            if (_trackTextContent && _inTextContent != false)
+            {
+                ChangeTextContentMark(false);
+            }
 
             await WriteRawWithCharCheckingAsync(data).ConfigureAwait(false);
 
@@ -645,7 +728,9 @@ namespace System.Xml
                         if (_bufPos - 1 > 0)
                         {
                             // Write text to TextWriter
-                            await _writer.WriteAsync(_bufChars.AsMemory(1, _bufPos - 1)).ConfigureAwait(false);
+                            await _writer
+                                .WriteAsync(_bufChars.AsMemory(1, _bufPos - 1))
+                                .ConfigureAwait(false);
                         }
                     }
                 }
@@ -664,10 +749,10 @@ namespace System.Xml
                 // Reset buffer position
                 _textPos = (_textPos == _bufPos) ? 1 : 0;
                 _attrEndPos = (_attrEndPos == _bufPos) ? 1 : 0;
-                _contentPos = 0;    // Needs to be zero, since overwriting '>' character is no longer possible
-                _cdataPos = 0;      // Needs to be zero, since overwriting ']]>' characters is no longer possible
-                _bufPos = 1;        // Buffer position starts at 1, because we need to be able to safely step back -1 in case we need to
-                                   // close an empty element or in CDATA section detection of double ]; _BUFFER[0] will always be 0
+                _contentPos = 0; // Needs to be zero, since overwriting '>' character is no longer possible
+                _cdataPos = 0; // Needs to be zero, since overwriting ']]>' characters is no longer possible
+                _bufPos = 1; // Buffer position starts at 1, because we need to be able to safely step back -1 in case we need to
+                // close an empty element or in CDATA section detection of double ]; _BUFFER[0] will always be 0
             }
         }
 
@@ -683,18 +768,33 @@ namespace System.Xml
                 {
                     _charEntityFallback.StartOffset = startOffset;
                 }
-                _encoder.Convert(_bufChars, startOffset, endOffset - startOffset, _bufBytes, _bufBytesUsed, _bufBytes.Length - _bufBytesUsed, false, out chEnc, out bEnc, out completed);
+                _encoder.Convert(
+                    _bufChars,
+                    startOffset,
+                    endOffset - startOffset,
+                    _bufBytes,
+                    _bufBytesUsed,
+                    _bufBytes.Length - _bufBytesUsed,
+                    false,
+                    out chEnc,
+                    out bEnc,
+                    out completed
+                );
                 startOffset += chEnc;
                 _bufBytesUsed += bEnc;
                 if (_bufBytesUsed >= (_bufBytes.Length - 16))
                 {
-                    await _stream.WriteAsync(_bufBytes.AsMemory(0, _bufBytesUsed)).ConfigureAwait(false);
+                    await _stream
+                        .WriteAsync(_bufBytes.AsMemory(0, _bufBytesUsed))
+                        .ConfigureAwait(false);
                     _bufBytesUsed = 0;
                 }
             }
             if (writeAllToStream && _bufBytesUsed > 0)
             {
-                await _stream.WriteAsync(_bufBytes.AsMemory(0, _bufBytesUsed)).ConfigureAwait(false);
+                await _stream
+                    .WriteAsync(_bufBytes.AsMemory(0, _bufBytesUsed))
+                    .ConfigureAwait(false);
                 _bufBytesUsed = 0;
             }
         }
@@ -708,7 +808,18 @@ namespace System.Xml
                 int bEnc;
                 bool completed;
                 // decode no chars, just flush
-                _encoder.Convert(_bufChars, 1, 0, _bufBytes, 0, _bufBytes.Length, true, out chEnc, out bEnc, out completed);
+                _encoder.Convert(
+                    _bufChars,
+                    1,
+                    0,
+                    _bufBytes,
+                    0,
+                    _bufBytes.Length,
+                    true,
+                    out chEnc,
+                    out bEnc,
+                    out completed
+                );
                 if (bEnc != 0)
                 {
                     return _stream.WriteAsync(_bufBytes, 0, bEnc);
@@ -923,7 +1034,11 @@ namespace System.Xml
 
         // Serialize text that is part of element content.  The '&', '<', and '>' characters
         // are entitized.
-        protected unsafe int WriteElementTextBlockNoFlush(char* pSrc, char* pSrcEnd, out bool needWriteNewLine)
+        protected unsafe int WriteElementTextBlockNoFlush(
+            char* pSrc,
+            char* pSrcEnd,
+            out bool needWriteNewLine
+        )
         {
             needWriteNewLine = false;
             char* pRaw = pSrc;
@@ -1050,7 +1165,12 @@ namespace System.Xml
             return -1;
         }
 
-        protected unsafe int WriteElementTextBlockNoFlush(char[] chars, int index, int count, out bool needWriteNewLine)
+        protected unsafe int WriteElementTextBlockNoFlush(
+            char[] chars,
+            int index,
+            int count,
+            out bool needWriteNewLine
+        )
         {
             needWriteNewLine = false;
             if (count == 0)
@@ -1066,7 +1186,12 @@ namespace System.Xml
             }
         }
 
-        protected unsafe int WriteElementTextBlockNoFlush(string text, int index, int count, out bool needWriteNewLine)
+        protected unsafe int WriteElementTextBlockNoFlush(
+            string text,
+            int index,
+            int count,
+            out bool needWriteNewLine
+        )
         {
             needWriteNewLine = false;
             if (count == 0)
@@ -1090,7 +1215,12 @@ namespace System.Xml
             bool needWriteNewLine = false;
             do
             {
-                writeLen = WriteElementTextBlockNoFlush(chars, curIndex, leftCount, out needWriteNewLine);
+                writeLen = WriteElementTextBlockNoFlush(
+                    chars,
+                    curIndex,
+                    leftCount,
+                    out needWriteNewLine
+                );
                 curIndex += writeLen;
                 leftCount -= writeLen;
                 if (needWriteNewLine)
@@ -1114,7 +1244,12 @@ namespace System.Xml
             int leftCount = text.Length;
             bool needWriteNewLine = false;
 
-            writeLen = WriteElementTextBlockNoFlush(text, curIndex, leftCount, out needWriteNewLine);
+            writeLen = WriteElementTextBlockNoFlush(
+                text,
+                curIndex,
+                leftCount,
+                out needWriteNewLine
+            );
             curIndex += writeLen;
             leftCount -= writeLen;
             if (needWriteNewLine)
@@ -1129,7 +1264,12 @@ namespace System.Xml
             return Task.CompletedTask;
         }
 
-        private async Task _WriteElementTextBlockAsync(bool newLine, string text, int curIndex, int leftCount)
+        private async Task _WriteElementTextBlockAsync(
+            bool newLine,
+            string text,
+            int curIndex,
+            int leftCount
+        )
         {
             int writeLen = 0;
             bool needWriteNewLine = false;
@@ -1147,7 +1287,12 @@ namespace System.Xml
 
             do
             {
-                writeLen = WriteElementTextBlockNoFlush(text, curIndex, leftCount, out needWriteNewLine);
+                writeLen = WriteElementTextBlockNoFlush(
+                    text,
+                    curIndex,
+                    leftCount,
+                    out needWriteNewLine
+                );
                 curIndex += writeLen;
                 leftCount -= writeLen;
                 if (needWriteNewLine)
@@ -1248,12 +1393,17 @@ namespace System.Xml
         protected Task RawTextAsync(string text)
         {
             int writeLen = RawTextNoFlush(text, 0, text.Length);
-            return writeLen >= 0 ?
-                _RawTextAsync(text, writeLen, text.Length - writeLen) :
-                Task.CompletedTask;
+            return writeLen >= 0
+              ? _RawTextAsync(text, writeLen, text.Length - writeLen)
+              : Task.CompletedTask;
         }
 
-        protected Task RawTextAsync(string text1, string text2 = null, string text3 = null, string text4 = null)
+        protected Task RawTextAsync(
+            string text1,
+            string text2 = null,
+            string text3 = null,
+            string text4 = null
+        )
         {
             Debug.Assert(text1 != null);
             Debug.Assert(text2 != null || (text3 == null && text4 == null));
@@ -1310,8 +1460,13 @@ namespace System.Xml
         }
 
         private async Task _RawTextAsync(
-            string text1, int curIndex1, int leftCount1,
-            string text2 = null, string text3 = null, string text4 = null)
+            string text1,
+            int curIndex1,
+            int leftCount1,
+            string text2 = null,
+            string text3 = null,
+            string text4 = null
+        )
         {
             Debug.Assert(text1 != null);
             Debug.Assert(text2 != null || (text3 == null && text4 == null));
@@ -1338,7 +1493,11 @@ namespace System.Xml
             }
         }
 
-        protected unsafe int WriteRawWithCharCheckingNoFlush(char* pSrcBegin, char* pSrcEnd, out bool needWriteNewLine)
+        protected unsafe int WriteRawWithCharCheckingNoFlush(
+            char* pSrcBegin,
+            char* pSrcEnd,
+            out bool needWriteNewLine
+        )
         {
             needWriteNewLine = false;
             char* pRaw = pSrcBegin;
@@ -1451,7 +1610,12 @@ namespace System.Xml
             return -1;
         }
 
-        protected unsafe int WriteRawWithCharCheckingNoFlush(char[] chars, int index, int count, out bool needWriteNewLine)
+        protected unsafe int WriteRawWithCharCheckingNoFlush(
+            char[] chars,
+            int index,
+            int count,
+            out bool needWriteNewLine
+        )
         {
             needWriteNewLine = false;
             if (count == 0)
@@ -1466,7 +1630,12 @@ namespace System.Xml
             }
         }
 
-        protected unsafe int WriteRawWithCharCheckingNoFlush(string text, int index, int count, out bool needWriteNewLine)
+        protected unsafe int WriteRawWithCharCheckingNoFlush(
+            string text,
+            int index,
+            int count,
+            out bool needWriteNewLine
+        )
         {
             needWriteNewLine = false;
             if (count == 0)
@@ -1489,7 +1658,12 @@ namespace System.Xml
             bool needWriteNewLine = false;
             do
             {
-                writeLen = WriteRawWithCharCheckingNoFlush(chars, curIndex, leftCount, out needWriteNewLine);
+                writeLen = WriteRawWithCharCheckingNoFlush(
+                    chars,
+                    curIndex,
+                    leftCount,
+                    out needWriteNewLine
+                );
                 curIndex += writeLen;
                 leftCount -= writeLen;
                 if (needWriteNewLine)
@@ -1513,7 +1687,12 @@ namespace System.Xml
             bool needWriteNewLine = false;
             do
             {
-                writeLen = WriteRawWithCharCheckingNoFlush(text, curIndex, leftCount, out needWriteNewLine);
+                writeLen = WriteRawWithCharCheckingNoFlush(
+                    text,
+                    curIndex,
+                    leftCount,
+                    out needWriteNewLine
+                );
                 curIndex += writeLen;
                 leftCount -= writeLen;
                 if (needWriteNewLine)
@@ -1529,7 +1708,13 @@ namespace System.Xml
             } while (writeLen >= 0 || needWriteNewLine);
         }
 
-        protected unsafe int WriteCommentOrPiNoFlush(string text, int index, int count, int stopChar, out bool needWriteNewLine)
+        protected unsafe int WriteCommentOrPiNoFlush(
+            string text,
+            int index,
+            int count,
+            int stopChar,
+            out bool needWriteNewLine
+        )
         {
             needWriteNewLine = false;
             if (count == 0)
@@ -1559,7 +1744,10 @@ namespace System.Xml
                             pDstEnd = pDstBegin + _bufLen;
                         }
 
-                        while (pDst < pDstEnd && (XmlCharType.IsTextChar((char)(ch = *pSrc)) && ch != stopChar))
+                        while (
+                            pDst < pDstEnd
+                            && (XmlCharType.IsTextChar((char)(ch = *pSrc)) && ch != stopChar)
+                        )
                         {
                             *pDst = (char)ch;
                             pDst++;
@@ -1700,7 +1888,13 @@ namespace System.Xml
             bool needWriteNewLine = false;
             do
             {
-                writeLen = WriteCommentOrPiNoFlush(text, curIndex, leftCount, stopChar, out needWriteNewLine);
+                writeLen = WriteCommentOrPiNoFlush(
+                    text,
+                    curIndex,
+                    leftCount,
+                    stopChar,
+                    out needWriteNewLine
+                );
                 curIndex += writeLen;
                 leftCount -= writeLen;
                 if (needWriteNewLine)
@@ -1716,7 +1910,12 @@ namespace System.Xml
             } while (writeLen >= 0 || needWriteNewLine);
         }
 
-        protected unsafe int WriteCDataSectionNoFlush(string text, int index, int count, out bool needWriteNewLine)
+        protected unsafe int WriteCDataSectionNoFlush(
+            string text,
+            int index,
+            int count,
+            out bool needWriteNewLine
+        )
         {
             needWriteNewLine = false;
             if (count == 0)
@@ -1749,7 +1948,10 @@ namespace System.Xml
                             pDstEnd = pDstBegin + _bufLen;
                         }
 
-                        while (pDst < pDstEnd && (XmlCharType.IsAttributeValueChar((char)(ch = *pSrc)) && ch != ']'))
+                        while (
+                            pDst < pDstEnd
+                            && (XmlCharType.IsAttributeValueChar((char)(ch = *pSrc)) && ch != ']')
+                        )
                         {
                             *pDst = (char)ch;
                             pDst++;
@@ -1776,7 +1978,7 @@ namespace System.Xml
                         {
                             case '>':
                                 if (_hadDoubleBracket && pDst[-1] == (char)']')
-                                {   // pDst[-1] will always correct - there is a padding character at _BUFFER[0]
+                                { // pDst[-1] will always correct - there is a padding character at _BUFFER[0]
                                     // The characters "]]>" were found within the CData text
                                     pDst = RawEndCData(pDst);
                                     pDst = RawStartCData(pDst);
@@ -1786,7 +1988,7 @@ namespace System.Xml
                                 break;
                             case ']':
                                 if (pDst[-1] == (char)']')
-                                {   // pDst[-1] will always correct - there is a padding character at _BUFFER[0]
+                                { // pDst[-1] will always correct - there is a padding character at _BUFFER[0]
                                     _hadDoubleBracket = true;
                                 }
                                 else
@@ -1884,7 +2086,12 @@ namespace System.Xml
             bool needWriteNewLine = false;
             do
             {
-                writeLen = WriteCDataSectionNoFlush(text, curIndex, leftCount, out needWriteNewLine);
+                writeLen = WriteCDataSectionNoFlush(
+                    text,
+                    curIndex,
+                    leftCount,
+                    out needWriteNewLine
+                );
                 curIndex += writeLen;
                 leftCount -= writeLen;
                 if (needWriteNewLine)
@@ -1904,7 +2111,12 @@ namespace System.Xml
     // Same as base text writer class except that elements, attributes, comments, and pi's are indented.
     internal partial class XmlEncodedRawTextWriterIndent : XmlEncodedRawTextWriter
     {
-        public override async Task WriteDocTypeAsync(string name, string pubid, string sysid, string subset)
+        public override async Task WriteDocTypeAsync(
+            string name,
+            string pubid,
+            string sysid,
+            string subset
+        )
         {
             CheckAsyncCall();
             // Add indentation
@@ -1915,10 +2127,16 @@ namespace System.Xml
             await base.WriteDocTypeAsync(name, pubid, sysid, subset).ConfigureAwait(false);
         }
 
-        public override async Task WriteStartElementAsync(string prefix, string localName, string ns)
+        public override async Task WriteStartElementAsync(
+            string prefix,
+            string localName,
+            string ns
+        )
         {
             CheckAsyncCall();
-            Debug.Assert(localName != null && localName.Length != 0 && prefix != null && ns != null);
+            Debug.Assert(
+                localName != null && localName.Length != 0 && prefix != null && ns != null
+            );
 
             // Add indentation
             if (!_mixedContent && base._textPos != base._bufPos)
@@ -1931,7 +2149,11 @@ namespace System.Xml
             await base.WriteStartElementAsync(prefix, localName, ns).ConfigureAwait(false);
         }
 
-        internal override async Task WriteEndElementAsync(string prefix, string localName, string ns)
+        internal override async Task WriteEndElementAsync(
+            string prefix,
+            string localName,
+            string ns
+        )
         {
             CheckAsyncCall();
             // Add indentation
@@ -1949,7 +2171,11 @@ namespace System.Xml
             await base.WriteEndElementAsync(prefix, localName, ns).ConfigureAwait(false);
         }
 
-        internal override async Task WriteFullEndElementAsync(string prefix, string localName, string ns)
+        internal override async Task WriteFullEndElementAsync(
+            string prefix,
+            string localName,
+            string ns
+        )
         {
             CheckAsyncCall();
             // Add indentation
@@ -1968,7 +2194,11 @@ namespace System.Xml
         }
 
         // Same as base class, plus possible indentation.
-        protected internal override async Task WriteStartAttributeAsync(string prefix, string localName, string ns)
+        protected internal override async Task WriteStartAttributeAsync(
+            string prefix,
+            string localName,
+            string ns
+        )
         {
             CheckAsyncCall();
             // Add indentation

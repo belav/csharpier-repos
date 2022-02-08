@@ -12,15 +12,16 @@ namespace System.Reflection.Metadata.Ecma335
         internal const uint MethodDef = 0x00000000;
         internal const uint MemberRef = 0x00000001;
         internal const uint TagMask = 0x00000001;
-        internal const TableMask TablesReferenced =
-          TableMask.MethodDef
-          | TableMask.MemberRef;
-        internal const uint TagToTokenTypeByteVector = TokenTypeIds.MethodDef >> 24 | TokenTypeIds.MemberRef >> 16;
+        internal const TableMask TablesReferenced = TableMask.MethodDef | TableMask.MemberRef;
+        internal const uint TagToTokenTypeByteVector =
+            TokenTypeIds.MethodDef >> 24 | TokenTypeIds.MemberRef >> 16;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static EntityHandle ConvertToHandle(uint methodDefOrRef)
         {
-            uint tokenType = (TagToTokenTypeByteVector >> ((int)(methodDefOrRef & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;
+            uint tokenType =
+                (TagToTokenTypeByteVector >> ((int)(methodDefOrRef & TagMask) << 3))
+                << TokenTypeIds.RowIdBitCount;
             uint rowId = (methodDefOrRef >> NumberOfBits);
 
             if ((rowId & ~TokenTypeIds.RIDMask) != 0)

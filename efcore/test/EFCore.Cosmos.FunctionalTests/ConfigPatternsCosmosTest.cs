@@ -41,7 +41,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 Assert.Same(client, context.Database.GetCosmosClient());
             }
 
-            await using var testDatabase2 = CosmosTestStore.CreateInitialized(DatabaseName, o => o.Region(Regions.AustraliaCentral));
+            await using var testDatabase2 = CosmosTestStore.CreateInitialized(
+                DatabaseName,
+                o => o.Region(Regions.AustraliaCentral)
+            );
             options = CreateOptions(testDatabase2);
 
             using (var context = new CustomerContext(options))
@@ -55,7 +58,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var regionName = Regions.AustraliaCentral;
 
-            await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o => o.Region(regionName));
+            await using var testDatabase = CosmosTestStore.CreateInitialized(
+                DatabaseName,
+                o => o.Region(regionName)
+            );
             var options = CreateOptions(testDatabase);
 
             var customer = new Customer { Id = 42, Name = "Theon" };
@@ -74,7 +80,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             var exception = await Assert.ThrowsAsync<ArgumentException>(
                 async () =>
                 {
-                    await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o => o.Region("FakeRegion"));
+                    await using var testDatabase = CosmosTestStore.CreateInitialized(
+                        DatabaseName,
+                        o => o.Region("FakeRegion")
+                    );
                     var options = CreateOptions(testDatabase);
 
                     var customer = new Customer { Id = 42, Name = "Theon" };
@@ -85,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     context.Add(customer);
 
                     context.SaveChanges();
-                });
+                }
+            );
             Assert.Equal("Current location is not a valid Azure region.", exception.Message);
         }
 
@@ -94,7 +104,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var connectionMode = ConnectionMode.Direct;
 
-            await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o => o.ConnectionMode(connectionMode));
+            await using var testDatabase = CosmosTestStore.CreateInitialized(
+                DatabaseName,
+                o => o.ConnectionMode(connectionMode)
+            );
             var options = CreateOptions(testDatabase);
 
             var customer = new Customer { Id = 42, Name = "Theon" };
@@ -114,7 +127,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 async () =>
                 {
                     await using var testDatabase = CosmosTestStore.CreateInitialized(
-                        DatabaseName, o => o.ConnectionMode((ConnectionMode)123456));
+                        DatabaseName,
+                        o => o.ConnectionMode((ConnectionMode)123456)
+                    );
                     var options = CreateOptions(testDatabase);
 
                     var customer = new Customer { Id = 42, Name = "Theon" };
@@ -125,13 +140,18 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     context.Add(customer);
 
                     context.SaveChanges();
-                });
+                }
+            );
         }
 
-        private DbContextOptions CreateOptions(CosmosTestStore testDatabase, Action<DbContextOptionsBuilder> configure = null)
+        private DbContextOptions CreateOptions(
+            CosmosTestStore testDatabase,
+            Action<DbContextOptionsBuilder> configure = null
+        )
         {
-            var builder = Fixture.AddOptions(testDatabase.AddProviderOptions(new DbContextOptionsBuilder()))
-                           .EnableDetailedErrors();
+            var builder = Fixture
+                .AddOptions(testDatabase.AddProviderOptions(new DbContextOptionsBuilder()))
+                .EnableDetailedErrors();
             configure?.Invoke(builder);
             return builder.Options;
         }
@@ -144,10 +164,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
         private class CustomerContext : DbContext
         {
-            public CustomerContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+            public CustomerContext(DbContextOptions dbContextOptions) : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -157,8 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
         public class CosmosFixture : ServiceProviderFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => CosmosTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                CosmosTestStoreFactory.Instance;
         }
     }
 }

@@ -18,9 +18,7 @@ public class PageActionDescriptor : ActionDescriptor
     /// <summary>
     /// Initializes a new instance of <see cref="PageActionDescriptor"/>.
     /// </summary>
-    public PageActionDescriptor()
-    {
-    }
+    public PageActionDescriptor() { }
 
     /// <summary>
     /// A copy constructor for <see cref="PageActionDescriptor"/>.
@@ -79,7 +77,6 @@ public class PageActionDescriptor : ActionDescriptor
 
             return base.DisplayName;
         }
-
         set
         {
             if (value == null)
@@ -91,5 +88,6 @@ public class PageActionDescriptor : ActionDescriptor
         }
     }
 
-    private string DebuggerDisplayString => $"{nameof(ViewEnginePath)} = {ViewEnginePath}, {nameof(RelativePath)} = {RelativePath}";
+    private string DebuggerDisplayString =>
+        $"{nameof(ViewEnginePath)} = {ViewEnginePath}, {nameof(RelativePath)} = {RelativePath}";
 }

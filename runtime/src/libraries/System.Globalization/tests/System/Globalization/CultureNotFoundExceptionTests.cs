@@ -11,7 +11,9 @@ namespace System.Globalization.Tests
         public void Ctor_String()
         {
             string message = "this is a test string";
-            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(message);
+            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(
+                message
+            );
 
             Assert.Equal(message, cultureNotFoundException.Message);
         }
@@ -21,7 +23,10 @@ namespace System.Globalization.Tests
         {
             string message = "this is a test string";
             Exception innerException = new Exception("inner exception string");
-            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(message, innerException);
+            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(
+                message,
+                innerException
+            );
 
             Assert.Equal(message, cultureNotFoundException.Message);
             Assert.Same(innerException, cultureNotFoundException.InnerException);
@@ -32,7 +37,10 @@ namespace System.Globalization.Tests
         {
             string paramName = "nameOfParam";
             string message = "this is a test string";
-            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(paramName, message);
+            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(
+                paramName,
+                message
+            );
 
             Assert.Equal(paramName, cultureNotFoundException.ParamName);
             Assert.NotEmpty(cultureNotFoundException.Message);
@@ -44,7 +52,11 @@ namespace System.Globalization.Tests
             string message = "this is a test string";
             string invalidCultureName = "abcd";
             Exception innerException = new Exception("inner exception string");
-            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(message, invalidCultureName, innerException);
+            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(
+                message,
+                invalidCultureName,
+                innerException
+            );
 
             Assert.NotEmpty(cultureNotFoundException.Message);
             Assert.Equal(invalidCultureName, cultureNotFoundException.InvalidCultureName);
@@ -57,7 +69,11 @@ namespace System.Globalization.Tests
             string paramName = "nameOfParam";
             string invalidCultureName = "abcd";
             string message = "this is a test string";
-            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(paramName, invalidCultureName, message);
+            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(
+                paramName,
+                invalidCultureName,
+                message
+            );
 
             Assert.Equal(paramName, cultureNotFoundException.ParamName);
             Assert.Equal(invalidCultureName, cultureNotFoundException.InvalidCultureName);

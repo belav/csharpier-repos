@@ -9,12 +9,18 @@ namespace System.Runtime.InteropServices
     public sealed class ComEventInterfaceAttribute : Attribute
     {
         private const DynamicallyAccessedMemberTypes EventProviderAccessedMemberTypes =
-            DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors |
-            DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields;
+            DynamicallyAccessedMemberTypes.PublicConstructors
+            | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            | DynamicallyAccessedMemberTypes.PublicEvents
+            | DynamicallyAccessedMemberTypes.PublicMethods
+            | DynamicallyAccessedMemberTypes.PublicProperties
+            | DynamicallyAccessedMemberTypes.PublicFields;
 
         public ComEventInterfaceAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type SourceInterface,
-            [DynamicallyAccessedMembers(EventProviderAccessedMemberTypes)] Type EventProvider)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type SourceInterface,
+            [DynamicallyAccessedMembers(EventProviderAccessedMemberTypes)] Type EventProvider
+        )
         {
             this.SourceInterface = SourceInterface;
             this.EventProvider = EventProvider;
@@ -22,6 +28,7 @@ namespace System.Runtime.InteropServices
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
         public Type SourceInterface { get; }
+
         [DynamicallyAccessedMembers(EventProviderAccessedMemberTypes)]
         public Type EventProvider { get; }
     }

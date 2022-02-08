@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             TextSpan span,
             Scope scope,
             bool isRecord,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     [DataContract]
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
 
         public SerializableConvertTupleToStructResult(
             ImmutableArray<(DocumentId, ImmutableArray<TextChange>)> documentTextChanges,
-            (DocumentId, TextSpan) renamedToken)
+            (DocumentId, TextSpan) renamedToken
+        )
         {
             DocumentTextChanges = documentTextChanges;
             RenamedToken = renamedToken;

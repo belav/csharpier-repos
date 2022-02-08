@@ -20,7 +20,12 @@ namespace System.Collections.Tests
         {
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
-            int removedCount = list.RemoveAll((value) => { return true; });
+            int removedCount = list.RemoveAll(
+                (value) =>
+                {
+                    return true;
+                }
+            );
             Assert.Equal(count, removedCount);
             Assert.Equal(0, list.Count);
         }
@@ -31,7 +36,12 @@ namespace System.Collections.Tests
         {
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
-            int removedCount = list.RemoveAll((value) => { return false; });
+            int removedCount = list.RemoveAll(
+                (value) =>
+                {
+                    return false;
+                }
+            );
             Assert.Equal(0, removedCount);
             Assert.Equal(count, list.Count);
             VerifyList(list, beforeList);
@@ -43,7 +53,10 @@ namespace System.Collections.Tests
         {
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
-            Predicate<T> EqualsDefaultElement = (value) => { return default(T) == null ? value == null : default(T).Equals(value); };
+            Predicate<T> EqualsDefaultElement = (value) =>
+            {
+                return default(T) == null ? value == null : default(T).Equals(value);
+            };
             int expectedCount = beforeList.Count((value) => EqualsDefaultElement(value));
             int removedCount = list.RemoveAll(EqualsDefaultElement);
             Assert.Equal(expectedCount, removedCount);
@@ -52,7 +65,10 @@ namespace System.Collections.Tests
         [Fact]
         public void RemoveAll_NullMatchPredicate()
         {
-            AssertExtensions.Throws<ArgumentNullException>("match", () => new List<T>().RemoveAll(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "match",
+                () => new List<T>().RemoveAll(null)
+            );
         }
 
         #endregion
@@ -96,27 +112,33 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(listLength);
             Tuple<int, int>[] InvalidParameters = new Tuple<int, int>[]
             {
-                Tuple.Create(listLength     ,1             ),
-                Tuple.Create(listLength+1   ,0             ),
-                Tuple.Create(listLength+1   ,1             ),
-                Tuple.Create(listLength     ,2             ),
-                Tuple.Create(listLength/2   ,listLength/2+1),
-                Tuple.Create(listLength-1   ,2             ),
-                Tuple.Create(listLength-2   ,3             ),
-                Tuple.Create(1              ,listLength    ),
-                Tuple.Create(0              ,listLength+1  ),
-                Tuple.Create(1              ,listLength+1  ),
-                Tuple.Create(2              ,listLength    ),
-                Tuple.Create(listLength/2+1 ,listLength/2  ),
-                Tuple.Create(2              ,listLength-1  ),
-                Tuple.Create(3              ,listLength-2  ),
+                Tuple.Create(listLength, 1),
+                Tuple.Create(listLength + 1, 0),
+                Tuple.Create(listLength + 1, 1),
+                Tuple.Create(listLength, 2),
+                Tuple.Create(listLength / 2, listLength / 2 + 1),
+                Tuple.Create(listLength - 1, 2),
+                Tuple.Create(listLength - 2, 3),
+                Tuple.Create(1, listLength),
+                Tuple.Create(0, listLength + 1),
+                Tuple.Create(1, listLength + 1),
+                Tuple.Create(2, listLength),
+                Tuple.Create(listLength / 2 + 1, listLength / 2),
+                Tuple.Create(2, listLength - 1),
+                Tuple.Create(3, listLength - 2),
             };
 
-            Assert.All(InvalidParameters, invalidSet =>
-            {
-                if (invalidSet.Item1 >= 0 && invalidSet.Item2 >= 0)
-                    AssertExtensions.Throws<ArgumentException>(null, () => list.RemoveRange(invalidSet.Item1, invalidSet.Item2));
-            });
+            Assert.All(
+                InvalidParameters,
+                invalidSet =>
+                {
+                    if (invalidSet.Item1 >= 0 && invalidSet.Item2 >= 0)
+                        AssertExtensions.Throws<ArgumentException>(
+                            null,
+                            () => list.RemoveRange(invalidSet.Item1, invalidSet.Item2)
+                        );
+                }
+            );
         }
 
         [Theory]
@@ -128,19 +150,24 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(listLength);
             Tuple<int, int>[] InvalidParameters = new Tuple<int, int>[]
             {
-                Tuple.Create(-1,-1),
+                Tuple.Create(-1, -1),
                 Tuple.Create(-1, 0),
                 Tuple.Create(-1, 1),
                 Tuple.Create(-1, 2),
-                Tuple.Create(0 ,-1),
-                Tuple.Create(1 ,-1),
-                Tuple.Create(2 ,-1),
+                Tuple.Create(0, -1),
+                Tuple.Create(1, -1),
+                Tuple.Create(2, -1),
             };
 
-            Assert.All(InvalidParameters, invalidSet =>
-            {
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveRange(invalidSet.Item1, invalidSet.Item2));
-            });
+            Assert.All(
+                InvalidParameters,
+                invalidSet =>
+                {
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => list.RemoveRange(invalidSet.Item1, invalidSet.Item2)
+                    );
+                }
+            );
         }
 
         #endregion

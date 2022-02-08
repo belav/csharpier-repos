@@ -15,24 +15,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 {
     public class ExternAliasCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ExternAliasCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(ExternAliasCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoAliases()
         {
-            await VerifyNoItemsExistAsync(@"
+            await VerifyNoItemsExistAsync(
+                @"
 extern alias $$
 class C
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         [WorkItem(44423, "https://github.com/dotnet/roslyn/issues/44423")]
         public async Task ExternAlias()
         {
-            var markup = @"
+            var markup =
+                @"
 extern alias $$ ";
             await VerifyItemWithAliasedMetadataReferencesAsync(markup, "goo", "goo", 1, "C#", "C#");
         }
@@ -40,7 +42,8 @@ extern alias $$ ";
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotAfterExternAlias()
         {
-            var markup = @"
+            var markup =
+                @"
 extern alias goo $$ ";
             await VerifyItemWithAliasedMetadataReferencesAsync(markup, "goo", "goo", 0, "C#", "C#");
         }
@@ -48,15 +51,24 @@ extern alias goo $$ ";
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotGlobal()
         {
-            var markup = @"
+            var markup =
+                @"
 extern alias $$ ";
-            await VerifyItemWithAliasedMetadataReferencesAsync(markup, "goo", "global", 0, "C#", "C#");
+            await VerifyItemWithAliasedMetadataReferencesAsync(
+                markup,
+                "goo",
+                "global",
+                0,
+                "C#",
+                "C#"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotIfAlreadyUsed()
         {
-            var markup = @"
+            var markup =
+                @"
 extern alias goo;
 extern alias $$";
             await VerifyItemWithAliasedMetadataReferencesAsync(markup, "goo", "goo", 0, "C#", "C#");
@@ -66,7 +78,8 @@ extern alias $$";
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInComment()
         {
-            var markup = @"
+            var markup =
+                @"
 extern alias // $$ ";
             await VerifyNoItemsExistAsync(markup);
         }

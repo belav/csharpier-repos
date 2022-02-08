@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 ImmutableArray<DocumentSpan> sourceSpans,
                 ImmutableDictionary<string, string> properties,
                 ImmutableDictionary<string, string> displayableProperties,
-                bool displayIfNoReferences)
+                bool displayIfNoReferences
+            )
             {
                 Tags = tags;
                 DisplayParts = displayParts;
@@ -43,12 +44,15 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 SourceSpans = sourceSpans.SelectAsArray(ss => new DocumentIdSpan(ss));
             }
 
-            public async Task<DefaultDefinitionItem?> TryRehydrateAsync(CancellationToken cancellationToken)
+            public async Task<DefaultDefinitionItem?> TryRehydrateAsync(
+                CancellationToken cancellationToken
+            )
             {
                 using var converted = TemporaryArray<DocumentSpan>.Empty;
                 foreach (var ss in SourceSpans)
                 {
-                    var documentSpan = await ss.TryRehydrateAsync(cancellationToken).ConfigureAwait(false);
+                    var documentSpan = await ss.TryRehydrateAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     if (documentSpan == null)
                         return null;
 
@@ -56,9 +60,15 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 }
 
                 return new DefaultDefinitionItem(
-                    Tags, DisplayParts, NameDisplayParts, OriginationParts,
+                    Tags,
+                    DisplayParts,
+                    NameDisplayParts,
+                    OriginationParts,
                     converted.ToImmutableAndClear(),
-                    Properties, DisplayableProperties, DisplayIfNoReferences);
+                    Properties,
+                    DisplayableProperties,
+                    DisplayIfNoReferences
+                );
             }
         }
     }

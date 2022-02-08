@@ -12,6 +12,7 @@ namespace System.Xml.Tests
     {
         private string _sampleFileName = @"sample.xml";
         private string _sampleXml = "<root><a/></root>";
+
         private void CreateFile()
         {
             MemoryStream ms = new MemoryStream();
@@ -60,7 +61,12 @@ namespace System.Xml.Tests
         public XmlParserContext GetParserContext()
         {
             NameTable nt = new NameTable();
-            XmlParserContext pc = new XmlParserContext(nt, new XmlNamespaceManager(nt), null, XmlSpace.Default);
+            XmlParserContext pc = new XmlParserContext(
+                nt,
+                new XmlNamespaceManager(nt),
+                null,
+                XmlSpace.Default
+            );
             return pc;
         }
 
@@ -72,7 +78,8 @@ namespace System.Xml.Tests
                 try
                 {
                     reader = ReaderHelper.Create(url);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
 
                     return true;
                 }
@@ -87,7 +94,6 @@ namespace System.Xml.Tests
                         reader.Dispose();
                 }
             }
-
 
             public static bool Create(Stream input)
             {
@@ -95,7 +101,8 @@ namespace System.Xml.Tests
                 try
                 {
                     reader = ReaderHelper.Create(input);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -109,13 +116,15 @@ namespace System.Xml.Tests
                         reader.Dispose();
                 }
             }
+
             public static bool Create(TextReader input)
             {
                 XmlReader reader = null;
                 try
                 {
                     reader = ReaderHelper.Create(input);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -136,7 +145,8 @@ namespace System.Xml.Tests
                 try
                 {
                     reader = ReaderHelper.Create(url, settings);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -157,7 +167,8 @@ namespace System.Xml.Tests
                 try
                 {
                     reader = ReaderHelper.Create(input, settings);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -178,7 +189,8 @@ namespace System.Xml.Tests
                 try
                 {
                     reader = ReaderHelper.Create(input, settings);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -199,7 +211,8 @@ namespace System.Xml.Tests
                 try
                 {
                     reader = ReaderHelper.Create(input, settings);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -220,7 +233,8 @@ namespace System.Xml.Tests
                 try
                 {
                     reader = ReaderHelper.Create(input, settings, baseUri);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -235,13 +249,18 @@ namespace System.Xml.Tests
                 }
             }
 
-            public static bool Create(Stream input, XmlReaderSettings settings, XmlParserContext parserContext)
+            public static bool Create(
+                Stream input,
+                XmlReaderSettings settings,
+                XmlParserContext parserContext
+            )
             {
                 XmlReader reader = null;
                 try
                 {
                     reader = ReaderHelper.Create(input, settings, parserContext);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -262,7 +281,8 @@ namespace System.Xml.Tests
                 try
                 {
                     reader = ReaderHelper.Create(input, settings, baseUri);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -277,13 +297,18 @@ namespace System.Xml.Tests
                 }
             }
 
-            public static bool Create(TextReader input, XmlReaderSettings settings, XmlParserContext parserContext)
+            public static bool Create(
+                TextReader input,
+                XmlReaderSettings settings,
+                XmlParserContext parserContext
+            )
             {
                 XmlReader reader = null;
                 try
                 {
                     reader = ReaderHelper.Create(input, settings, parserContext);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -298,13 +323,18 @@ namespace System.Xml.Tests
                 }
             }
 
-            public static bool Create(string url, XmlReaderSettings settings, XmlParserContext context)
+            public static bool Create(
+                string url,
+                XmlReaderSettings settings,
+                XmlParserContext context
+            )
             {
                 XmlReader reader = null;
                 try
                 {
                     reader = ReaderHelper.Create(url, settings, context);
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     return true;
                 }
                 catch (ArgumentNullException ane)
@@ -323,17 +353,53 @@ namespace System.Xml.Tests
         [Variation("Null Input")]
         public int v1()
         {
-            CError.Equals(ReaderDelegate.Create((Stream)null), false, "Null Stream doesn't throw error1");
-            CError.Equals(ReaderDelegate.Create((Stream)null, GetSettings(), GetBaseUri()), false, "Null Stream doesn't throw error2");
-            CError.Equals(ReaderDelegate.Create((Stream)null, GetSettings()), false, "Null Stream doesn't throw error3");
+            CError.Equals(
+                ReaderDelegate.Create((Stream)null),
+                false,
+                "Null Stream doesn't throw error1"
+            );
+            CError.Equals(
+                ReaderDelegate.Create((Stream)null, GetSettings(), GetBaseUri()),
+                false,
+                "Null Stream doesn't throw error2"
+            );
+            CError.Equals(
+                ReaderDelegate.Create((Stream)null, GetSettings()),
+                false,
+                "Null Stream doesn't throw error3"
+            );
 
-            CError.Equals(ReaderDelegate.Create((string)null), false, "Null URL doesn't throw error1");
-            CError.Equals(ReaderDelegate.Create((string)null, GetSettings()), false, "Null URL doesn't throw error2");
-            CError.Equals(ReaderDelegate.Create((string)null, GetSettings(), GetParserContext()), false, "Null URL doesn't throw error3");
+            CError.Equals(
+                ReaderDelegate.Create((string)null),
+                false,
+                "Null URL doesn't throw error1"
+            );
+            CError.Equals(
+                ReaderDelegate.Create((string)null, GetSettings()),
+                false,
+                "Null URL doesn't throw error2"
+            );
+            CError.Equals(
+                ReaderDelegate.Create((string)null, GetSettings(), GetParserContext()),
+                false,
+                "Null URL doesn't throw error3"
+            );
 
-            CError.Equals(ReaderDelegate.Create((TextReader)null), false, "Null TextReader doesn't throw error1");
-            CError.Equals(ReaderDelegate.Create((TextReader)null, GetSettings(), GetBaseUri()), false, "Null TextReader doesn't throw error2");
-            CError.Equals(ReaderDelegate.Create((TextReader)null, GetSettings()), false, "Null TextReader doesn't throw error2");
+            CError.Equals(
+                ReaderDelegate.Create((TextReader)null),
+                false,
+                "Null TextReader doesn't throw error1"
+            );
+            CError.Equals(
+                ReaderDelegate.Create((TextReader)null, GetSettings(), GetBaseUri()),
+                false,
+                "Null TextReader doesn't throw error2"
+            );
+            CError.Equals(
+                ReaderDelegate.Create((TextReader)null, GetSettings()),
+                false,
+                "Null TextReader doesn't throw error2"
+            );
 
             return TEST_PASS;
         }
@@ -345,32 +411,50 @@ namespace System.Xml.Tests
 
             Stream s = GetStream();
             r = ReaderHelper.Create(s);
-            while (r.Read()) ;
+            while (r.Read())
+                ;
             r.Dispose();
 
             r = ReaderHelper.Create(GetUrl());
-            while (r.Read()) ;
+            while (r.Read())
+                ;
             r.Dispose();
 
             r = ReaderHelper.Create(GetTextReader());
-            while (r.Read()) ;
+            while (r.Read())
+                ;
             r.Dispose();
 
             return TEST_PASS;
         }
 
-
         [Variation("Null Settings")]
         public int v3()
         {
-            CError.Equals(ReaderDelegate.Create(GetStream(), null, GetParserContext()), true, "StreamOverload2");
+            CError.Equals(
+                ReaderDelegate.Create(GetStream(), null, GetParserContext()),
+                true,
+                "StreamOverload2"
+            );
             CError.Equals(ReaderDelegate.Create(GetStream(), null), true, "StreamOverload3");
 
             CError.Equals(ReaderDelegate.Create(GetUrl(), null), true, "URL Overload 1");
-            CError.Equals(ReaderDelegate.Create(GetUrl(), null, GetParserContext()), true, "URL Overload 2");
+            CError.Equals(
+                ReaderDelegate.Create(GetUrl(), null, GetParserContext()),
+                true,
+                "URL Overload 2"
+            );
 
-            CError.Equals(ReaderDelegate.Create(GetTextReader(), null, GetParserContext()), true, "TextReader Overload2");
-            CError.Equals(ReaderDelegate.Create(GetTextReader(), null), true, "TextReader Overload3");
+            CError.Equals(
+                ReaderDelegate.Create(GetTextReader(), null, GetParserContext()),
+                true,
+                "TextReader Overload2"
+            );
+            CError.Equals(
+                ReaderDelegate.Create(GetTextReader(), null),
+                true,
+                "TextReader Overload3"
+            );
 
             CError.Equals(ReaderDelegate.Create(GetXmlReader(), null), true, "XmlReader Overload1");
             return TEST_PASS;
@@ -379,11 +463,27 @@ namespace System.Xml.Tests
         [Variation("Null ParserContext")]
         public int v5()
         {
-            CError.Equals(ReaderDelegate.Create(GetStream(), GetSettings(), (string)null), true, "StreamOverload3");
-            CError.Equals(ReaderDelegate.Create(GetStream(), GetSettings(), (XmlParserContext)null), true, "StreamOverload4");
+            CError.Equals(
+                ReaderDelegate.Create(GetStream(), GetSettings(), (string)null),
+                true,
+                "StreamOverload3"
+            );
+            CError.Equals(
+                ReaderDelegate.Create(GetStream(), GetSettings(), (XmlParserContext)null),
+                true,
+                "StreamOverload4"
+            );
 
-            CError.Equals(ReaderDelegate.Create(GetTextReader(), GetSettings(), (string)null), true, "TextOverload3");
-            CError.Equals(ReaderDelegate.Create(GetTextReader(), GetSettings(), GetParserContext()), true, "TextOverload4");
+            CError.Equals(
+                ReaderDelegate.Create(GetTextReader(), GetSettings(), (string)null),
+                true,
+                "TextOverload3"
+            );
+            CError.Equals(
+                ReaderDelegate.Create(GetTextReader(), GetSettings(), GetParserContext()),
+                true,
+                "TextOverload4"
+            );
 
             return TEST_PASS;
         }
@@ -391,25 +491,57 @@ namespace System.Xml.Tests
         [Variation("Valid Settings")]
         public int v6()
         {
-            CError.Equals(ReaderDelegate.Create(GetStream(), GetSettings(), (string)null), true, "StreamOverload2");
-            CError.Equals(ReaderDelegate.Create(GetStream(), GetSettings(), (XmlParserContext)null), true, "StreamOverload2");
+            CError.Equals(
+                ReaderDelegate.Create(GetStream(), GetSettings(), (string)null),
+                true,
+                "StreamOverload2"
+            );
+            CError.Equals(
+                ReaderDelegate.Create(GetStream(), GetSettings(), (XmlParserContext)null),
+                true,
+                "StreamOverload2"
+            );
 
             CError.Equals(ReaderDelegate.Create(GetUrl(), GetSettings()), true, "URL Overload 1");
-            CError.Equals(ReaderDelegate.Create(GetUrl(), GetSettings(), GetParserContext()), true, "URL Overload 2");
+            CError.Equals(
+                ReaderDelegate.Create(GetUrl(), GetSettings(), GetParserContext()),
+                true,
+                "URL Overload 2"
+            );
 
-            CError.Equals(ReaderDelegate.Create(GetTextReader(), GetSettings(), (string)null), true, "TextReader Overload2");
-            CError.Equals(ReaderDelegate.Create(GetTextReader(), GetSettings(), (XmlParserContext)null), true, "TextReader Overload2");
+            CError.Equals(
+                ReaderDelegate.Create(GetTextReader(), GetSettings(), (string)null),
+                true,
+                "TextReader Overload2"
+            );
+            CError.Equals(
+                ReaderDelegate.Create(GetTextReader(), GetSettings(), (XmlParserContext)null),
+                true,
+                "TextReader Overload2"
+            );
 
-            CError.Equals(ReaderDelegate.Create(GetXmlReader(), GetSettings()), true, "XmlReader Overload1");
+            CError.Equals(
+                ReaderDelegate.Create(GetXmlReader(), GetSettings()),
+                true,
+                "XmlReader Overload1"
+            );
             return TEST_PASS;
         }
 
         [Variation("Valid ParserContext")]
         public int v7()
         {
-            CError.Equals(ReaderDelegate.Create(GetStream(), GetSettings(), GetParserContext()), true, "StreamOverload3");
+            CError.Equals(
+                ReaderDelegate.Create(GetStream(), GetSettings(), GetParserContext()),
+                true,
+                "StreamOverload3"
+            );
 
-            CError.Equals(ReaderDelegate.Create(GetTextReader(), GetSettings(), GetParserContext()), true, "TextOverload3");
+            CError.Equals(
+                ReaderDelegate.Create(GetTextReader(), GetSettings(), GetParserContext()),
+                true,
+                "TextOverload3"
+            );
 
             return TEST_PASS;
         }

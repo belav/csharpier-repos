@@ -21,19 +21,28 @@ internal class QuicConnectionFactory : IMultiplexedConnectionFactory
 {
     private readonly QuicTransportContext _transportContext;
 
-    public QuicConnectionFactory(IOptions<QuicTransportOptions> options, ILoggerFactory loggerFactory)
+    public QuicConnectionFactory(
+        IOptions<QuicTransportOptions> options,
+        ILoggerFactory loggerFactory
+    )
     {
         if (options == null)
         {
             throw new ArgumentNullException(nameof(options));
         }
 
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Client");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Client"
+        );
 
         _transportContext = new QuicTransportContext(logger, options.Value);
     }
 
-    public async ValueTask<MultiplexedConnectionContext> ConnectAsync(EndPoint endPoint, IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+    public async ValueTask<MultiplexedConnectionContext> ConnectAsync(
+        EndPoint endPoint,
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         if (endPoint is not IPEndPoint)
         {
@@ -41,7 +50,11 @@ internal class QuicConnectionFactory : IMultiplexedConnectionFactory
         }
 
         var sslOptions = features?.Get<SslClientAuthenticationOptions>();
-        var connection = new QuicConnection(QuicImplementationProviders.MsQuic, (IPEndPoint)endPoint, sslOptions);
+        var connection = new QuicConnection(
+            QuicImplementationProviders.MsQuic,
+            (IPEndPoint)endPoint,
+            sslOptions
+        );
 
         await connection.ConnectAsync(cancellationToken);
         return new QuicConnectionContext(connection, _transportContext);

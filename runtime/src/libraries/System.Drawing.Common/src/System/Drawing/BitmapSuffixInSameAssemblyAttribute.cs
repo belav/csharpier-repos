@@ -8,7 +8,5 @@ namespace System.Drawing
     /// i.e. System.Web.UI.WebControl.Button.bmp -> System.Web.UI.WebControl.Button.VisualStudio.11.0.bmp
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
-    public class BitmapSuffixInSameAssemblyAttribute : Attribute
-    {
-    }
+    public class BitmapSuffixInSameAssemblyAttribute : Attribute { }
 }

@@ -43,7 +43,8 @@ internal class InputRadioContext
         string groupName,
         object? currentValue,
         string fieldClass,
-        EventCallback<ChangeEventArgs> changeEventCallback)
+        EventCallback<ChangeEventArgs> changeEventCallback
+    )
     {
         _parentContext = parentContext;
 
@@ -58,6 +59,8 @@ internal class InputRadioContext
     /// </summary>
     /// <param name="groupName">The group name of the ancestor <see cref="InputRadioContext"/>.</param>
     /// <returns>The <see cref="InputRadioContext"/>, or <c>null</c> if none was found.</returns>
-    public InputRadioContext? FindContextInAncestors(string groupName)
-        => string.Equals(GroupName, groupName) ? this : _parentContext?.FindContextInAncestors(groupName);
+    public InputRadioContext? FindContextInAncestors(string groupName) =>
+        string.Equals(GroupName, groupName)
+          ? this
+          : _parentContext?.FindContextInAncestors(groupName);
 }

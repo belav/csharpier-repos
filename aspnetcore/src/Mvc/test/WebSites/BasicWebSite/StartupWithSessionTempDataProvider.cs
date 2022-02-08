@@ -12,9 +12,7 @@ public class StartupWithSessionTempDataProvider
     public void ConfigureServices(IServiceCollection services)
     {
         // CookieTempDataProvider is the default ITempDataProvider, so we must override it with session.
-        services
-            .AddMvc()
-            .AddSessionStateTempDataProvider();
+        services.AddMvc().AddSessionStateTempDataProvider();
         services.AddSession();
 
         services.ConfigureBaseWebSiteAuthPolicies();
@@ -26,11 +24,12 @@ public class StartupWithSessionTempDataProvider
         app.UseSession();
 
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-            endpoints.MapRazorPages();
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+            }
+        );
     }
 }
-

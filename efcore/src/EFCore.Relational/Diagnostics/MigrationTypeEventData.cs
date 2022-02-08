@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public MigrationTypeEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            TypeInfo migrationType)
-            : base(eventDefinition, messageGenerator)
+            TypeInfo migrationType
+        ) : base(eventDefinition, messageGenerator)
         {
             MigrationType = migrationType;
         }

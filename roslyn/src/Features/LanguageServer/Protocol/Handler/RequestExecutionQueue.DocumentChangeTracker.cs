@@ -29,32 +29,39 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         {
             public void StartTracking(Uri documentUri, SourceText initialText)
             {
-                throw new InvalidOperationException("Mutating documents not allowed in a non-mutating request handler");
+                throw new InvalidOperationException(
+                    "Mutating documents not allowed in a non-mutating request handler"
+                );
             }
 
             public void StopTracking(Uri documentUri)
             {
-                throw new InvalidOperationException("Mutating documents not allowed in a non-mutating request handler");
+                throw new InvalidOperationException(
+                    "Mutating documents not allowed in a non-mutating request handler"
+                );
             }
 
             public void UpdateTrackedDocument(Uri documentUri, SourceText text)
             {
-                throw new InvalidOperationException("Mutating documents not allowed in a non-mutating request handler");
+                throw new InvalidOperationException(
+                    "Mutating documents not allowed in a non-mutating request handler"
+                );
             }
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new TestAccessor(this);
+        internal TestAccessor GetTestAccessor() => new TestAccessor(this);
 
         internal readonly struct TestAccessor
         {
             private readonly RequestExecutionQueue _queue;
 
-            public TestAccessor(RequestExecutionQueue queue)
-                => _queue = queue;
+            public TestAccessor(RequestExecutionQueue queue) => _queue = queue;
 
-            public ImmutableArray<SourceText> GetTrackedTexts()
-                => _queue._lspWorkspaceManager.GetTrackedLspText().Select(i => i.Value).ToImmutableArray();
+            public ImmutableArray<SourceText> GetTrackedTexts() =>
+                _queue._lspWorkspaceManager
+                    .GetTrackedLspText()
+                    .Select(i => i.Value)
+                    .ToImmutableArray();
 
             public LspWorkspaceManager GetLspWorkspaceManager() => _queue._lspWorkspaceManager;
 

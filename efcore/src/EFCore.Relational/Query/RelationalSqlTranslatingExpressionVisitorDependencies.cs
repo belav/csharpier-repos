@@ -55,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IModel model,
             IRelationalTypeMappingSource typeMappingSource,
             IMemberTranslatorProvider memberTranslatorProvider,
-            IMethodCallTranslatorProvider methodCallTranslatorProvider)
+            IMethodCallTranslatorProvider methodCallTranslatorProvider
+        )
         {
             SqlExpressionFactory = sqlExpressionFactory;
             Model = model;

@@ -11,13 +11,17 @@ class CtorTest
         // Check args
         if (args.Length < 3)
         {
-            Console.WriteLine("USAGE: SemaphoreCtorNeg3 /iCount:<int> /mCount:<int> " + 
-                "[/semName:<string>] [/iRandom:<int>]");
+            Console.WriteLine(
+                "USAGE: SemaphoreCtorNeg3 /iCount:<int> /mCount:<int> "
+                    + "[/semName:<string>] [/iRandom:<int>]"
+            );
             return -1;
         }
 
         // Get the args
-        int iCount = -1, mCount = -1, iRandom = -1;
+        int iCount = -1,
+            mCount = -1,
+            iRandom = -1;
         string semName = "DefaultString";
 
         for (int i = 0; i < args.Length; i++)
@@ -61,41 +65,39 @@ class CtorTest
         CtorTest ct = new CtorTest();
         return ct.Run(iCount, mCount, semName, iRandom);
     }
-           
-    private int Run(int initalValue, int maxValue, string semName,
-        int iRandom) 
+
+    private int Run(int initalValue, int maxValue, string semName, int iRandom)
     {
         int iRet = -1;
         Semaphore sem = null;
         if (iRandom > 0)
-        { 
+        {
             //TestFramework.GlobalData intl = new TestFramework.GlobalData();
             //semName = intl.GetString(iRandom, iRandom).Replace(@"\", "");
             Console.WriteLine("WARNING: Random name generation is disabled");
         }
-        bool bRet=true;
+        bool bRet = true;
         try
         {
             using (sem = new Semaphore(initalValue, maxValue, semName, out bRet))
             {
-                if(bRet)
+                if (bRet)
                     Console.WriteLine("Semaphore was created!");
             }
         }
-        catch(ArgumentException)
+        catch (ArgumentException)
         {
             //  Expected
-            if(bRet)
+            if (bRet)
                 iRet = 100;
             else
                 Console.WriteLine("Returned FALSE");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            Console.WriteLine("Unexpected exception thrown: " + 
-                e.ToString());
+            Console.WriteLine("Unexpected exception thrown: " + e.ToString());
         }
- 
+
         Console.WriteLine(100 == iRet ? "Test Passed" : "Test Failed");
         return iRet;
     }

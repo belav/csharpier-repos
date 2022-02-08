@@ -29,15 +29,17 @@ namespace System.Xml.Xsl.XsltOld
 
             if (this.mode != null)
             {
-                action = importsOf == null
-                    ? processor.Stylesheet.FindTemplate(processor, frame.Node!, this.mode)
-                    : importsOf.FindTemplateImports(processor, frame.Node!, this.mode);
+                action =
+                    importsOf == null
+                        ? processor.Stylesheet.FindTemplate(processor, frame.Node!, this.mode)
+                        : importsOf.FindTemplateImports(processor, frame.Node!, this.mode);
             }
             else
             {
-                action = importsOf == null
-                    ? processor.Stylesheet.FindTemplate(processor, frame.Node!)
-                    : importsOf.FindTemplateImports(processor, frame.Node!);
+                action =
+                    importsOf == null
+                        ? processor.Stylesheet.FindTemplate(processor, frame.Node!)
+                        : importsOf.FindTemplateImports(processor, frame.Node!);
             }
 
             // Built-int template rules
@@ -114,21 +116,27 @@ namespace System.Xml.Xsl.XsltOld
 
             if (this.mode != null)
             {
-                action = importsOf == null
-                    ? processor.Stylesheet.FindTemplate(processor, frame.Node!, this.mode)
-                    : importsOf.FindTemplateImports(processor, frame.Node!, this.mode);
+                action =
+                    importsOf == null
+                        ? processor.Stylesheet.FindTemplate(processor, frame.Node!, this.mode)
+                        : importsOf.FindTemplateImports(processor, frame.Node!, this.mode);
             }
             else
             {
-                action = importsOf == null
-                    ? processor.Stylesheet.FindTemplate(processor, frame.Node!)
-                    : importsOf.FindTemplateImports(processor, frame.Node!);
+                action =
+                    importsOf == null
+                        ? processor.Stylesheet.FindTemplate(processor, frame.Node!)
+                        : importsOf.FindTemplateImports(processor, frame.Node!);
             }
 
             // Built-int template rules
             if (action == null && processor.RootAction!.builtInSheet != null)
             {
-                action = processor.RootAction.builtInSheet.FindTemplate(processor, frame.Node!, Compiler.BuiltInMode);
+                action = processor.RootAction.builtInSheet.FindTemplate(
+                    processor,
+                    frame.Node!,
+                    Compiler.BuiltInMode
+                );
             }
             if (action == null)
             {

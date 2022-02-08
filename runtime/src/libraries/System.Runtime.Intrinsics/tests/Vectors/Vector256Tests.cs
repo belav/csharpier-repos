@@ -36,7 +36,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector256Int64IndexerTest(params long[] values)
         {
             var vector = Vector256.Create(values);
-            
+
             Assert.Equal(vector[0], values[0]);
             Assert.Equal(vector[1], values[1]);
             Assert.Equal(vector[2], values[2]);

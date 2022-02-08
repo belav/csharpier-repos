@@ -22,5 +22,9 @@ internal interface ICircuitHandleRegistry
 
     CircuitHost GetCircuit(IDictionary<object, object?> circuitHandles, object circuitKey);
 
-    void SetCircuit(IDictionary<object, object?> circuitHandles, object circuitKey, CircuitHost circuitHost);
+    void SetCircuit(
+        IDictionary<object, object?> circuitHandles,
+        object circuitKey,
+        CircuitHost circuitHost
+    );
 }

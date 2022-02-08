@@ -10,14 +10,24 @@ namespace System.Text.Json.Reflection
 {
     internal static partial class ReflectionExtensions
     {
-        public static CustomAttributeData GetCustomAttributeData(this MemberInfo memberInfo, Type type)
+        public static CustomAttributeData GetCustomAttributeData(
+            this MemberInfo memberInfo,
+            Type type
+        )
         {
-            return memberInfo.CustomAttributes.FirstOrDefault(a => type.IsAssignableFrom(a.AttributeType));
+            return memberInfo.CustomAttributes.FirstOrDefault(
+                a => type.IsAssignableFrom(a.AttributeType)
+            );
         }
 
-        public static TValue GetConstructorArgument<TValue>(this CustomAttributeData customAttributeData, int index)
+        public static TValue GetConstructorArgument<TValue>(
+            this CustomAttributeData customAttributeData,
+            int index
+        )
         {
-            return index < customAttributeData.ConstructorArguments.Count ? (TValue)customAttributeData.ConstructorArguments[index].Value! : default!;
+            return index < customAttributeData.ConstructorArguments.Count
+              ? (TValue)customAttributeData.ConstructorArguments[index].Value!
+              : default!;
         }
 
         public static bool IsInitOnly(this MethodInfo method)
@@ -33,11 +43,16 @@ namespace System.Text.Json.Reflection
 
         private static bool HasJsonConstructorAttribute(ConstructorInfo constructorInfo)
         {
-            IList<CustomAttributeData> attributeDataList = CustomAttributeData.GetCustomAttributes(constructorInfo);
+            IList<CustomAttributeData> attributeDataList = CustomAttributeData.GetCustomAttributes(
+                constructorInfo
+            );
 
             foreach (CustomAttributeData attributeData in attributeDataList)
             {
-                if (attributeData.AttributeType.FullName == "System.Text.Json.Serialization.JsonConstructorAttribute")
+                if (
+                    attributeData.AttributeType.FullName
+                    == "System.Text.Json.Serialization.JsonConstructorAttribute"
+                )
                 {
                     return true;
                 }

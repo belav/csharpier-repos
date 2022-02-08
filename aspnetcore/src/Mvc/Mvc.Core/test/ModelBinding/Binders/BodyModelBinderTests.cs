@@ -29,20 +29,20 @@ public class BodyModelBinderTests
     {
         // Arrange
         var mockInputFormatter = new Mock<IInputFormatter>();
-        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>()))
+        mockInputFormatter
+            .Setup(f => f.CanRead(It.IsAny<InputFormatterContext>()))
             .Returns(true)
             .Verifiable();
-        mockInputFormatter.Setup(o => o.ReadAsync(It.IsAny<InputFormatterContext>()))
-                          .Returns(InputFormatterResult.SuccessAsync(new Person()))
-                          .Verifiable();
+        mockInputFormatter
+            .Setup(o => o.ReadAsync(It.IsAny<InputFormatterContext>()))
+            .Returns(InputFormatterResult.SuccessAsync(new Person()))
+            .Verifiable();
         var inputFormatter = mockInputFormatter.Object;
 
         var provider = new TestModelMetadataProvider();
         provider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
 
-        var bindingContext = GetBindingContext(
-            typeof(Person),
-            metadataProvider: provider);
+        var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
 
         var binder = CreateBinder(new[] { inputFormatter });
 
@@ -127,23 +127,26 @@ public class BodyModelBinderTests
     {
         // Arrange
         var mockInputFormatter = new Mock<IInputFormatter>();
-        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>()))
-            .Returns(true);
-        mockInputFormatter.Setup(o => o.ReadAsync(It.IsAny<InputFormatterContext>()))
+        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>())).Returns(true);
+        mockInputFormatter
+            .Setup(o => o.ReadAsync(It.IsAny<InputFormatterContext>()))
             .Returns(InputFormatterResult.NoValueAsync());
         var inputFormatter = mockInputFormatter.Object;
 
         var provider = new TestModelMetadataProvider();
-        provider.ForType<Person>().BindingDetails(d =>
-        {
-            d.BindingSource = BindingSource.Body;
-            d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(
-                () => "Customized error message");
-        });
+        provider
+            .ForType<Person>()
+            .BindingDetails(
+                d =>
+                {
+                    d.BindingSource = BindingSource.Body;
+                    d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(
+                        () => "Customized error message"
+                    );
+                }
+            );
 
-        var bindingContext = GetBindingContext(
-            typeof(Person),
-            metadataProvider: provider);
+        var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
         bindingContext.BinderModelName = "custom";
 
         var binder = CreateBinder(new[] { inputFormatter });
@@ -165,13 +168,15 @@ public class BodyModelBinderTests
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task BindModel_PassesAllowEmptyInputOptionViaContext(bool treatEmptyInputAsDefaultValueOption)
+    public async Task BindModel_PassesAllowEmptyInputOptionViaContext(
+        bool treatEmptyInputAsDefaultValueOption
+    )
     {
         // Arrange
         var mockInputFormatter = new Mock<IInputFormatter>();
-        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>()))
-            .Returns(true);
-        mockInputFormatter.Setup(o => o.ReadAsync(It.IsAny<InputFormatterContext>()))
+        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>())).Returns(true);
+        mockInputFormatter
+            .Setup(o => o.ReadAsync(It.IsAny<InputFormatterContext>()))
             .Returns(InputFormatterResult.NoValueAsync())
             .Verifiable();
         var inputFormatter = mockInputFormatter.Object;
@@ -179,9 +184,7 @@ public class BodyModelBinderTests
         var provider = new TestModelMetadataProvider();
         provider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
 
-        var bindingContext = GetBindingContext(
-            typeof(Person),
-            metadataProvider: provider);
+        var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
         bindingContext.BinderModelName = "custom";
 
         var binder = CreateBinder(new[] { inputFormatter }, treatEmptyInputAsDefaultValueOption);
@@ -190,9 +193,16 @@ public class BodyModelBinderTests
         await binder.BindModelAsync(bindingContext);
 
         // Assert
-        mockInputFormatter.Verify(formatter => formatter.ReadAsync(
-            It.Is<InputFormatterContext>(ctx => ctx.TreatEmptyInputAsDefaultValue == treatEmptyInputAsDefaultValueOption)),
-            Times.Once);
+        mockInputFormatter.Verify(
+            formatter =>
+                formatter.ReadAsync(
+                    It.Is<InputFormatterContext>(
+                        ctx =>
+                            ctx.TreatEmptyInputAsDefaultValue == treatEmptyInputAsDefaultValueOption
+                    )
+                ),
+            Times.Once
+        );
     }
 
     [Fact]
@@ -200,19 +210,19 @@ public class BodyModelBinderTests
     {
         // Arrange
         var mockInputFormatter = new Mock<IInputFormatter>();
-        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>()))
-            .Returns(false);
+        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>())).Returns(false);
         var inputFormatter = mockInputFormatter.Object;
 
         var provider = new TestModelMetadataProvider();
         provider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
 
-        var bindingContext = GetBindingContext(
-            typeof(Person),
-            metadataProvider: provider);
+        var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
         bindingContext.BinderModelName = "custom";
 
-        var binder = CreateBinder(new[] { inputFormatter }, treatEmptyInputAsDefaultValueOption : true);
+        var binder = CreateBinder(
+            new[] { inputFormatter },
+            treatEmptyInputAsDefaultValueOption: true
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -228,19 +238,19 @@ public class BodyModelBinderTests
     {
         // Arrange
         var mockInputFormatter = new Mock<IInputFormatter>();
-        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>()))
-            .Returns(false);
+        mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>())).Returns(false);
         var inputFormatter = mockInputFormatter.Object;
 
         var provider = new TestModelMetadataProvider();
         provider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
 
-        var bindingContext = GetBindingContext(
-            typeof(Person),
-            metadataProvider: provider);
+        var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
         bindingContext.BinderModelName = "custom";
 
-        var binder = CreateBinder(new[] { inputFormatter }, treatEmptyInputAsDefaultValueOption: false);
+        var binder = CreateBinder(
+            new[] { inputFormatter },
+            treatEmptyInputAsDefaultValueOption: false
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -248,7 +258,10 @@ public class BodyModelBinderTests
         // Assert
         Assert.False(bindingContext.ModelState.IsValid);
         Assert.Single(bindingContext.ModelState[bindingContext.BinderModelName].Errors);
-        Assert.Equal("Unsupported content type ''.", bindingContext.ModelState[bindingContext.BinderModelName].Errors[0].Exception.Message);
+        Assert.Equal(
+            "Unsupported content type ''.",
+            bindingContext.ModelState[bindingContext.BinderModelName].Errors[0].Exception.Message
+        );
     }
 
     // Throwing InputFormatterException
@@ -261,14 +274,18 @@ public class BodyModelBinderTests
         httpContext.Request.ContentType = "text/xyz";
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
+        metadataProvider
+            .ForType<Person>()
+            .BindingDetails(d => d.BindingSource = BindingSource.Body);
 
         var expectedFormatException = new FormatException("bad format!");
         var bindingContext = GetBindingContext(typeof(Person), httpContext, metadataProvider);
-        var formatter = new XyzFormatter((inputFormatterContext, encoding) =>
-        {
-            throw new InputFormatterException("Bad input!!", expectedFormatException);
-        });
+        var formatter = new XyzFormatter(
+            (inputFormatterContext, encoding) =>
+            {
+                throw new InputFormatterException("Bad input!!", expectedFormatException);
+            }
+        );
         var binder = CreateBinder(new[] { formatter }, new MvcOptions());
 
         // Act
@@ -291,17 +308,18 @@ public class BodyModelBinderTests
         get
         {
             return new TheoryData<IInputFormatter>()
-                {
-                    { new XmlSerializerInputFormatter(new MvcOptions()) },
-                    { new XmlDataContractSerializerInputFormatter(new MvcOptions()) },
-                };
+            {
+                { new XmlSerializerInputFormatter(new MvcOptions()) },
+                { new XmlDataContractSerializerInputFormatter(new MvcOptions()) },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(BuiltInFormattersThrowingInputFormatterException))]
     public async Task BindModel_BuiltInXmlInputFormatters_ThrowingInputFormatterException_AddsErrorToModelState(
-        IInputFormatter formatter)
+        IInputFormatter formatter
+    )
     {
         // Arrange
         var httpContext = new DefaultHttpContext();
@@ -309,7 +327,9 @@ public class BodyModelBinderTests
         httpContext.Request.ContentType = "application/xml";
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
+        metadataProvider
+            .ForType<Person>()
+            .BindingDetails(d => d.BindingSource = BindingSource.Body);
 
         var bindingContext = GetBindingContext(typeof(Person), httpContext, metadataProvider);
         var binder = CreateBinder(new[] { formatter }, new MvcOptions());
@@ -338,12 +358,15 @@ public class BodyModelBinderTests
         httpContext.Request.ContentType = "application/json";
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
+        metadataProvider
+            .ForType<Person>()
+            .BindingDetails(d => d.BindingSource = BindingSource.Body);
 
         var bindingContext = GetBindingContext(typeof(Person), httpContext, metadataProvider);
         var binder = CreateBinder(
             new[] { new TestableJsonInputFormatter(throwNonInputFormatterException: false) },
-            new MvcOptions());
+            new MvcOptions()
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -363,16 +386,22 @@ public class BodyModelBinderTests
         get
         {
             return new TheoryData<IInputFormatter>()
+            {
+                { new DerivedXmlSerializerInputFormatter(throwNonInputFormatterException: false) },
                 {
-                    { new DerivedXmlSerializerInputFormatter(throwNonInputFormatterException: false) },
-                    { new DerivedXmlDataContractSerializerInputFormatter(throwNonInputFormatterException: false) },
-                };
+                    new DerivedXmlDataContractSerializerInputFormatter(
+                        throwNonInputFormatterException: false
+                    )
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(DerivedFormattersThrowingInputFormatterException))]
-    public async Task BindModel_DerivedXmlInputFormatters_AddsErrorToModelState(IInputFormatter formatter)
+    public async Task BindModel_DerivedXmlInputFormatters_AddsErrorToModelState(
+        IInputFormatter formatter
+    )
     {
         // Arrange
         var httpContext = new DefaultHttpContext();
@@ -380,7 +409,9 @@ public class BodyModelBinderTests
         httpContext.Request.ContentType = "application/xml";
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
+        metadataProvider
+            .ForType<Person>()
+            .BindingDetails(d => d.BindingSource = BindingSource.Body);
 
         var bindingContext = GetBindingContext(typeof(Person), httpContext, metadataProvider);
         var binder = CreateBinder(new[] { formatter }, new MvcOptions());
@@ -409,12 +440,15 @@ public class BodyModelBinderTests
         httpContext.Request.ContentType = "application/json";
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
+        metadataProvider
+            .ForType<Person>()
+            .BindingDetails(d => d.BindingSource = BindingSource.Body);
 
         var bindingContext = GetBindingContext(typeof(Person), httpContext, metadataProvider);
         var binder = CreateBinder(
             new[] { new DerivedJsonInputFormatter(throwNonInputFormatterException: false) },
-            new MvcOptions());
+            new MvcOptions()
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -431,16 +465,30 @@ public class BodyModelBinderTests
     }
 
     // Throwing Non-InputFormatterException
-    public static TheoryData<IInputFormatter, string> BuiltInFormattersThrowingNonInputFormatterException
+    public static TheoryData<
+        IInputFormatter,
+        string
+    > BuiltInFormattersThrowingNonInputFormatterException
     {
         get
         {
             return new TheoryData<IInputFormatter, string>()
+            {
                 {
-                    { new TestableXmlSerializerInputFormatter(throwNonInputFormatterException: true), "text/xml" },
-                    { new TestableXmlDataContractSerializerInputFormatter(throwNonInputFormatterException: true), "text/xml" },
-                    { new TestableJsonInputFormatter(throwNonInputFormatterException: true), "text/json" },
-                };
+                    new TestableXmlSerializerInputFormatter(throwNonInputFormatterException: true),
+                    "text/xml"
+                },
+                {
+                    new TestableXmlDataContractSerializerInputFormatter(
+                        throwNonInputFormatterException: true
+                    ),
+                    "text/xml"
+                },
+                {
+                    new TestableJsonInputFormatter(throwNonInputFormatterException: true),
+                    "text/json"
+                },
+            };
         }
     }
 
@@ -448,7 +496,8 @@ public class BodyModelBinderTests
     [MemberData(nameof(BuiltInFormattersThrowingNonInputFormatterException))]
     public async Task BindModel_BuiltInInputFormatters_ThrowingNonInputFormatterException_Throws(
         IInputFormatter formatter,
-        string contentType)
+        string contentType
+    )
     {
         // Arrange
         var httpContext = new DefaultHttpContext();
@@ -456,26 +505,44 @@ public class BodyModelBinderTests
         httpContext.Request.ContentType = contentType;
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
+        metadataProvider
+            .ForType<Person>()
+            .BindingDetails(d => d.BindingSource = BindingSource.Body);
 
         var bindingContext = GetBindingContext(typeof(Person), httpContext, metadataProvider);
         var binder = CreateBinder(new[] { formatter }, new MvcOptions());
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<IOException>(() => binder.BindModelAsync(bindingContext));
+        var exception = await Assert.ThrowsAsync<IOException>(
+            () => binder.BindModelAsync(bindingContext)
+        );
         Assert.Equal("Unable to read input stream!!", exception.Message);
     }
 
-    public static TheoryData<IInputFormatter, string> DerivedInputFormattersThrowingNonInputFormatterException
+    public static TheoryData<
+        IInputFormatter,
+        string
+    > DerivedInputFormattersThrowingNonInputFormatterException
     {
         get
         {
             return new TheoryData<IInputFormatter, string>()
+            {
                 {
-                    { new DerivedXmlSerializerInputFormatter(throwNonInputFormatterException: true), "text/xml" },
-                    { new DerivedXmlDataContractSerializerInputFormatter(throwNonInputFormatterException: true), "text/xml" },
-                    { new DerivedJsonInputFormatter(throwNonInputFormatterException: true), "text/json" },
-                };
+                    new DerivedXmlSerializerInputFormatter(throwNonInputFormatterException: true),
+                    "text/xml"
+                },
+                {
+                    new DerivedXmlDataContractSerializerInputFormatter(
+                        throwNonInputFormatterException: true
+                    ),
+                    "text/xml"
+                },
+                {
+                    new DerivedJsonInputFormatter(throwNonInputFormatterException: true),
+                    "text/json"
+                },
+            };
         }
     }
 
@@ -483,7 +550,8 @@ public class BodyModelBinderTests
     [MemberData(nameof(DerivedInputFormattersThrowingNonInputFormatterException))]
     public async Task BindModel_DerivedXmlInputFormatters_ThrowingNonInputFormattingException_AddsErrorToModelState(
         IInputFormatter formatter,
-        string contentType)
+        string contentType
+    )
     {
         // Arrange
         var httpContext = new DefaultHttpContext();
@@ -491,7 +559,9 @@ public class BodyModelBinderTests
         httpContext.Request.ContentType = contentType;
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
+        metadataProvider
+            .ForType<Person>()
+            .BindingDetails(d => d.BindingSource = BindingSource.Body);
 
         var bindingContext = GetBindingContext(typeof(Person), httpContext, metadataProvider);
         var binder = CreateBinder(new[] { formatter }, new MvcOptions());
@@ -520,18 +590,23 @@ public class BodyModelBinderTests
         httpContext.Request.ContentType = "text/xyz";
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
+        metadataProvider
+            .ForType<Person>()
+            .BindingDetails(d => d.BindingSource = BindingSource.Body);
 
         var bindingContext = GetBindingContext(typeof(Person), httpContext, metadataProvider);
-        var formatter = new XyzFormatter((inputFormatterContext, encoding) =>
-        {
-            throw new IOException("Unable to read input stream!!");
-        });
+        var formatter = new XyzFormatter(
+            (inputFormatterContext, encoding) =>
+            {
+                throw new IOException("Unable to read input stream!!");
+            }
+        );
         var binder = CreateBinder(new[] { formatter }, new MvcOptions());
 
         // Act
         var exception = await Assert.ThrowsAsync<IOException>(
-            () => binder.BindModelAsync(bindingContext));
+            () => binder.BindModelAsync(bindingContext)
+        );
         Assert.Equal("Unable to read input stream!!", exception.Message);
     }
 
@@ -548,7 +623,8 @@ public class BodyModelBinderTests
         var bindingContext = GetBindingContext(
             typeof(Person),
             httpContext: httpContext,
-            metadataProvider: provider);
+            metadataProvider: provider
+        );
 
         var binder = CreateBinder(new List<IInputFormatter>());
 
@@ -573,12 +649,12 @@ public class BodyModelBinderTests
         var canReadFormatter1 = new TestInputFormatter(canRead: true);
         var canReadFormatter2 = new TestInputFormatter(canRead: true);
         var inputFormatters = new List<IInputFormatter>()
-            {
-                new TestInputFormatter(canRead: false),
-                new TestInputFormatter(canRead: false),
-                canReadFormatter1,
-                canReadFormatter2
-            };
+        {
+            new TestInputFormatter(canRead: false),
+            new TestInputFormatter(canRead: false),
+            canReadFormatter1,
+            canReadFormatter2
+        };
 
         var provider = new TestModelMetadataProvider();
         provider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
@@ -600,16 +676,20 @@ public class BodyModelBinderTests
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
         var inputFormatters = new List<IInputFormatter>()
-            {
-                new TestInputFormatter(canRead: false),
-                new TestInputFormatter(canRead: true),
-            };
+        {
+            new TestInputFormatter(canRead: false),
+            new TestInputFormatter(canRead: true),
+        };
 
         var provider = new TestModelMetadataProvider();
         provider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
         var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
         bindingContext.HttpContext.Request.ContentType = "application/json";
-        var binder = new BodyModelBinder(inputFormatters, new TestHttpRequestStreamReaderFactory(), loggerFactory);
+        var binder = new BodyModelBinder(
+            inputFormatters,
+            new TestHttpRequestStreamReaderFactory(),
+            loggerFactory
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -617,9 +697,18 @@ public class BodyModelBinderTests
         var writeList = sink.Writes.ToList();
 
         // Assert
-        Assert.Equal($"Attempting to bind model of type '{typeof(Person)}' using the name 'someName' in request data ...", writeList[0].State.ToString());
-        Assert.Equal($"Rejected input formatter '{typeof(TestInputFormatter)}' for content type 'application/json'.", writeList[1].State.ToString());
-        Assert.Equal($"Selected input formatter '{typeof(TestInputFormatter)}' for content type 'application/json'.", writeList[2].State.ToString());
+        Assert.Equal(
+            $"Attempting to bind model of type '{typeof(Person)}' using the name 'someName' in request data ...",
+            writeList[0].State.ToString()
+        );
+        Assert.Equal(
+            $"Rejected input formatter '{typeof(TestInputFormatter)}' for content type 'application/json'.",
+            writeList[1].State.ToString()
+        );
+        Assert.Equal(
+            $"Selected input formatter '{typeof(TestInputFormatter)}' for content type 'application/json'.",
+            writeList[2].State.ToString()
+        );
     }
 
     [Fact]
@@ -629,17 +718,21 @@ public class BodyModelBinderTests
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
         var inputFormatters = new List<IInputFormatter>()
-            {
-                new TestInputFormatter(canRead: false),
-                new TestInputFormatter(canRead: false),
-            };
+        {
+            new TestInputFormatter(canRead: false),
+            new TestInputFormatter(canRead: false),
+        };
 
         var provider = new TestModelMetadataProvider();
         provider.ForType<Person>().BindingDetails(d => d.BindingSource = BindingSource.Body);
         var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
         bindingContext.HttpContext.Request.ContentType = "multipart/form-data";
         bindingContext.BinderModelName = bindingContext.ModelName;
-        var binder = new BodyModelBinder(inputFormatters, new TestHttpRequestStreamReaderFactory(), loggerFactory);
+        var binder = new BodyModelBinder(
+            inputFormatters,
+            new TestHttpRequestStreamReaderFactory(),
+            loggerFactory
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -647,18 +740,37 @@ public class BodyModelBinderTests
         // Assert
         Assert.Collection(
             sink.Writes,
-            write => Assert.Equal(
-                $"Attempting to bind model of type '{typeof(Person)}' using the name 'someName' in request data ...", write.State.ToString()),
-            write => Assert.Equal(
-                $"Rejected input formatter '{typeof(TestInputFormatter)}' for content type 'multipart/form-data'.", write.State.ToString()),
-            write => Assert.Equal(
-                $"Rejected input formatter '{typeof(TestInputFormatter)}' for content type 'multipart/form-data'.", write.State.ToString()),
-            write => Assert.Equal(
-                "No input formatter was found to support the content type 'multipart/form-data' for use with the [FromBody] attribute.", write.State.ToString()),
-            write => Assert.Equal(
-                $"To use model binding, remove the [FromBody] attribute from the property or parameter named '{bindingContext.ModelName}' with model type '{bindingContext.ModelType}'.", write.State.ToString()),
-            write => Assert.Equal(
-                $"Done attempting to bind model of type '{typeof(Person)}' using the name 'someName'.", write.State.ToString()));
+            write =>
+                Assert.Equal(
+                    $"Attempting to bind model of type '{typeof(Person)}' using the name 'someName' in request data ...",
+                    write.State.ToString()
+                ),
+            write =>
+                Assert.Equal(
+                    $"Rejected input formatter '{typeof(TestInputFormatter)}' for content type 'multipart/form-data'.",
+                    write.State.ToString()
+                ),
+            write =>
+                Assert.Equal(
+                    $"Rejected input formatter '{typeof(TestInputFormatter)}' for content type 'multipart/form-data'.",
+                    write.State.ToString()
+                ),
+            write =>
+                Assert.Equal(
+                    "No input formatter was found to support the content type 'multipart/form-data' for use with the [FromBody] attribute.",
+                    write.State.ToString()
+                ),
+            write =>
+                Assert.Equal(
+                    $"To use model binding, remove the [FromBody] attribute from the property or parameter named '{bindingContext.ModelName}' with model type '{bindingContext.ModelType}'.",
+                    write.State.ToString()
+                ),
+            write =>
+                Assert.Equal(
+                    $"Done attempting to bind model of type '{typeof(Person)}' using the name 'someName'.",
+                    write.State.ToString()
+                )
+        );
     }
 
     [Fact]
@@ -671,8 +783,12 @@ public class BodyModelBinderTests
         var bindingContext = GetBindingContext(
             typeof(Person),
             httpContext: httpContext,
-            metadataProvider: provider);
-        var binder = new BodyModelBinder(new List<IInputFormatter>(), new TestHttpRequestStreamReaderFactory());
+            metadataProvider: provider
+        );
+        var binder = new BodyModelBinder(
+            new List<IInputFormatter>(),
+            new TestHttpRequestStreamReaderFactory()
+        );
 
         // Act & Assert (does not throw)
         await binder.BindModelAsync(bindingContext);
@@ -681,7 +797,8 @@ public class BodyModelBinderTests
     private static DefaultModelBindingContext GetBindingContext(
         Type modelType,
         HttpContext httpContext = null,
-        IModelMetadataProvider metadataProvider = null)
+        IModelMetadataProvider metadataProvider = null
+    )
     {
         if (httpContext == null)
         {
@@ -695,10 +812,7 @@ public class BodyModelBinderTests
 
         var bindingContext = new DefaultModelBindingContext
         {
-            ActionContext = new ActionContext()
-            {
-                HttpContext = httpContext,
-            },
+            ActionContext = new ActionContext() { HttpContext = httpContext, },
             FieldName = "someField",
             IsTopLevelObject = true,
             ModelMetadata = metadataProvider.GetMetadataForType(modelType),
@@ -711,7 +825,10 @@ public class BodyModelBinderTests
         return bindingContext;
     }
 
-    private static BodyModelBinder CreateBinder(IList<IInputFormatter> formatters, bool treatEmptyInputAsDefaultValueOption = false)
+    private static BodyModelBinder CreateBinder(
+        IList<IInputFormatter> formatters,
+        bool treatEmptyInputAsDefaultValueOption = false
+    )
     {
         var options = new MvcOptions();
         var binder = CreateBinder(formatters, options);
@@ -720,18 +837,32 @@ public class BodyModelBinderTests
         return binder;
     }
 
-    private static BodyModelBinder CreateBinder(IList<IInputFormatter> formatters, MvcOptions mvcOptions)
+    private static BodyModelBinder CreateBinder(
+        IList<IInputFormatter> formatters,
+        MvcOptions mvcOptions
+    )
     {
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
-        return new BodyModelBinder(formatters, new TestHttpRequestStreamReaderFactory(), loggerFactory, mvcOptions);
+        return new BodyModelBinder(
+            formatters,
+            new TestHttpRequestStreamReaderFactory(),
+            loggerFactory,
+            mvcOptions
+        );
     }
 
     private class XyzFormatter : TextInputFormatter
     {
-        private readonly Func<InputFormatterContext, Encoding, Task<InputFormatterResult>> _readRequestBodyAsync;
+        private readonly Func<
+            InputFormatterContext,
+            Encoding,
+            Task<InputFormatterResult>
+        > _readRequestBodyAsync;
 
-        public XyzFormatter(Func<InputFormatterContext, Encoding, Task<InputFormatterResult>> readRequestBodyAsync)
+        public XyzFormatter(
+            Func<InputFormatterContext, Encoding, Task<InputFormatterResult>> readRequestBodyAsync
+        )
         {
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xyz"));
             SupportedEncodings.Add(Encoding.UTF8);
@@ -745,7 +876,8 @@ public class BodyModelBinderTests
 
         public override Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
-            Encoding effectiveEncoding)
+            Encoding effectiveEncoding
+        )
         {
             return _readRequestBodyAsync(context, effectiveEncoding);
         }
@@ -776,18 +908,29 @@ public class BodyModelBinderTests
         private readonly bool _throwNonInputFormatterException;
 
         public TestableJsonInputFormatter(bool throwNonInputFormatterException)
-            : base(GetLogger(), new JsonSerializerSettings(), ArrayPool<char>.Shared, new DefaultObjectPoolProvider(), new MvcOptions(), new MvcNewtonsoftJsonOptions()
-            {
+            : base(
+                GetLogger(),
+                new JsonSerializerSettings(),
+                ArrayPool<char>.Shared,
+                new DefaultObjectPoolProvider(),
+                new MvcOptions(),
+                new MvcNewtonsoftJsonOptions()
+                {
                     // The tests that use this class rely on the 2.1 behavior of this formatter.
                     AllowInputFormatterExceptionMessages = true,
-            })
+                }
+            )
         {
             _throwNonInputFormatterException = throwNonInputFormatterException;
         }
 
-        public override InputFormatterExceptionPolicy ExceptionPolicy => InputFormatterExceptionPolicy.MalformedInputExceptions;
+        public override InputFormatterExceptionPolicy ExceptionPolicy =>
+            InputFormatterExceptionPolicy.MalformedInputExceptions;
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context,
+            Encoding encoding
+        )
         {
             if (_throwNonInputFormatterException)
             {
@@ -807,9 +950,13 @@ public class BodyModelBinderTests
             _throwNonInputFormatterException = throwNonInputFormatterException;
         }
 
-        public override InputFormatterExceptionPolicy ExceptionPolicy => InputFormatterExceptionPolicy.MalformedInputExceptions;
+        public override InputFormatterExceptionPolicy ExceptionPolicy =>
+            InputFormatterExceptionPolicy.MalformedInputExceptions;
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context,
+            Encoding encoding
+        )
         {
             if (_throwNonInputFormatterException)
             {
@@ -819,7 +966,8 @@ public class BodyModelBinderTests
         }
     }
 
-    private class TestableXmlDataContractSerializerInputFormatter : XmlDataContractSerializerInputFormatter
+    private class TestableXmlDataContractSerializerInputFormatter
+        : XmlDataContractSerializerInputFormatter
     {
         private readonly bool _throwNonInputFormatterException;
 
@@ -829,9 +977,13 @@ public class BodyModelBinderTests
             _throwNonInputFormatterException = throwNonInputFormatterException;
         }
 
-        public override InputFormatterExceptionPolicy ExceptionPolicy => InputFormatterExceptionPolicy.MalformedInputExceptions;
+        public override InputFormatterExceptionPolicy ExceptionPolicy =>
+            InputFormatterExceptionPolicy.MalformedInputExceptions;
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context,
+            Encoding encoding
+        )
         {
             if (_throwNonInputFormatterException)
             {
@@ -846,18 +998,29 @@ public class BodyModelBinderTests
         private readonly bool _throwNonInputFormatterException;
 
         public DerivedJsonInputFormatter(bool throwNonInputFormatterException)
-            : base(GetLogger(), new JsonSerializerSettings(), ArrayPool<char>.Shared, new DefaultObjectPoolProvider(), new MvcOptions(), new MvcNewtonsoftJsonOptions()
-            {
+            : base(
+                GetLogger(),
+                new JsonSerializerSettings(),
+                ArrayPool<char>.Shared,
+                new DefaultObjectPoolProvider(),
+                new MvcOptions(),
+                new MvcNewtonsoftJsonOptions()
+                {
                     // The tests that use this class rely on the 2.1 behavior of this formatter.
                     AllowInputFormatterExceptionMessages = true,
-            })
+                }
+            )
         {
             _throwNonInputFormatterException = throwNonInputFormatterException;
         }
 
-        public override InputFormatterExceptionPolicy ExceptionPolicy => InputFormatterExceptionPolicy.AllExceptions;
+        public override InputFormatterExceptionPolicy ExceptionPolicy =>
+            InputFormatterExceptionPolicy.AllExceptions;
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context,
+            Encoding encoding
+        )
         {
             if (_throwNonInputFormatterException)
             {
@@ -877,9 +1040,13 @@ public class BodyModelBinderTests
             _throwNonInputFormatterException = throwNonInputFormatterException;
         }
 
-        public override InputFormatterExceptionPolicy ExceptionPolicy => InputFormatterExceptionPolicy.AllExceptions;
+        public override InputFormatterExceptionPolicy ExceptionPolicy =>
+            InputFormatterExceptionPolicy.AllExceptions;
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context,
+            Encoding encoding
+        )
         {
             if (_throwNonInputFormatterException)
             {
@@ -889,7 +1056,8 @@ public class BodyModelBinderTests
         }
     }
 
-    private class DerivedXmlDataContractSerializerInputFormatter : XmlDataContractSerializerInputFormatter
+    private class DerivedXmlDataContractSerializerInputFormatter
+        : XmlDataContractSerializerInputFormatter
     {
         private readonly bool _throwNonInputFormatterException;
 
@@ -899,7 +1067,10 @@ public class BodyModelBinderTests
             _throwNonInputFormatterException = throwNonInputFormatterException;
         }
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context,
+            Encoding encoding
+        )
         {
             if (_throwNonInputFormatterException)
             {

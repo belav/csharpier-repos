@@ -16,30 +16,36 @@ namespace Microsoft.CodeAnalysis.AddImport
     {
         private class AssemblyReferenceCodeAction : AddImportCodeAction
         {
-            public AssemblyReferenceCodeAction(
-                Document originalDocument,
-                AddImportFixData fixData)
+            public AssemblyReferenceCodeAction(Document originalDocument, AddImportFixData fixData)
                 : base(originalDocument, fixData)
             {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.ReferenceAssemblySymbol);
             }
 
-            protected override Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
-                => ComputeOperationsAsync(isPreview: true, cancellationToken);
+            protected override Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(
+                CancellationToken cancellationToken
+            ) => ComputeOperationsAsync(isPreview: true, cancellationToken);
 
-            protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(CancellationToken cancellationToken)
-                => ComputeOperationsAsync(isPreview: false, cancellationToken);
+            protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+                CancellationToken cancellationToken
+            ) => ComputeOperationsAsync(isPreview: false, cancellationToken);
 
-            private async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(bool isPreview, CancellationToken cancellationToken)
+            private async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+                bool isPreview,
+                CancellationToken cancellationToken
+            )
             {
-                var newDocument = await GetUpdatedDocumentAsync(cancellationToken).ConfigureAwait(false);
+                var newDocument = await GetUpdatedDocumentAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var newProject = newDocument.Project;
 
                 if (isPreview)
                 {
                     // If this is a preview, just return an ApplyChangesOperation for the updated document
                     var operation = new ApplyChangesOperation(newProject.Solution);
-                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(operation);
+                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
+                        operation
+                    );
                 }
                 else
                 {
@@ -47,8 +53,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                     var operation = new AddAssemblyReferenceCodeActionOperation(
                         FixData.AssemblyReferenceAssemblyName,
                         FixData.AssemblyReferenceFullyQualifiedTypeName,
-                        newProject);
-                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(operation);
+                        newProject
+                    );
+                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
+                        operation
+                    );
                 }
             }
 
@@ -61,10 +70,12 @@ namespace Microsoft.CodeAnalysis.AddImport
                 public AddAssemblyReferenceCodeActionOperation(
                     string assemblyReferenceAssemblyName,
                     string assemblyReferenceFullyQualifiedTypeName,
-                    Project newProject)
+                    Project newProject
+                )
                 {
                     _assemblyReferenceAssemblyName = assemblyReferenceAssemblyName;
-                    _assemblyReferenceFullyQualifiedTypeName = assemblyReferenceFullyQualifiedTypeName;
+                    _assemblyReferenceFullyQualifiedTypeName =
+                        assemblyReferenceFullyQualifiedTypeName;
                     _newProject = newProject;
                 }
 
@@ -79,7 +90,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                     operation.Apply(workspace, cancellationToken);
                 }
 
-                internal override Task<bool> TryApplyAsync(Workspace workspace, IProgressTracker progressTracker, CancellationToken cancellationToken)
+                internal override Task<bool> TryApplyAsync(
+                    Workspace workspace,
+                    IProgressTracker progressTracker,
+                    CancellationToken cancellationToken
+                )
                 {
                     var operation = GetApplyChangesOperation(workspace);
                     if (operation is null)
@@ -95,21 +110,27 @@ namespace Microsoft.CodeAnalysis.AddImport
                         return null;
 
                     var service = workspace.Services.GetRequiredService<IMetadataService>();
-                    var reference = service.GetReference(resolvedPath, MetadataReferenceProperties.Assembly);
+                    var reference = service.GetReference(
+                        resolvedPath,
+                        MetadataReferenceProperties.Assembly
+                    );
                     var newProject = _newProject.WithMetadataReferences(
-                        _newProject.MetadataReferences.Concat(reference));
+                        _newProject.MetadataReferences.Concat(reference)
+                    );
 
                     return new ApplyChangesOperation(newProject.Solution);
                 }
 
                 private string? ResolvePath(Workspace workspace)
                 {
-                    var assemblyResolverService = workspace.Services.GetRequiredService<IFrameworkAssemblyPathResolver>();
+                    var assemblyResolverService =
+                        workspace.Services.GetRequiredService<IFrameworkAssemblyPathResolver>();
 
                     return assemblyResolverService.ResolveAssemblyPath(
                         _newProject.Id,
                         _assemblyReferenceAssemblyName,
-                        _assemblyReferenceFullyQualifiedTypeName);
+                        _assemblyReferenceFullyQualifiedTypeName
+                    );
                 }
             }
         }

@@ -18,7 +18,10 @@ internal class VSCodeAnalyzerLoader
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSCodeAnalyzerLoader(IDiagnosticAnalyzerService analyzerService, IDiagnosticService diagnosticService)
+    public VSCodeAnalyzerLoader(
+        IDiagnosticAnalyzerService analyzerService,
+        IDiagnosticService diagnosticService
+    )
     {
         _analyzerService = analyzerService;
         _diagnosticService = (DiagnosticService)diagnosticService;

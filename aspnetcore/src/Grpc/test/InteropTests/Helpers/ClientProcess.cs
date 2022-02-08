@@ -29,7 +29,8 @@ public class ClientProcess : IDisposable
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             FileName = "dotnet",
-            Arguments = @$"{path} --use_tls false --server_port {serverPort} --client_type httpclient --test_case {testCase}"
+            Arguments =
+                @$"{path} --use_tls false --server_port {serverPort} --client_type httpclient --test_case {testCase}"
         };
         _process.EnableRaisingEvents = true;
         _process.OutputDataReceived += Process_OutputDataReceived;
@@ -38,11 +39,15 @@ public class ClientProcess : IDisposable
 
         _processEx = new ProcessEx(output, _process, timeout: Timeout.InfiniteTimeSpan);
 
-        _startTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+        _startTcs = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
     }
 
     public Task WaitForReadyAsync() => _startTcs.Task;
+
     public Task WaitForExitAsync() => _processEx.Exited;
+
     public int ExitCode => _process.ExitCode;
     public bool IsReady => _startTcs.Task.IsCompletedSuccessfully;
 

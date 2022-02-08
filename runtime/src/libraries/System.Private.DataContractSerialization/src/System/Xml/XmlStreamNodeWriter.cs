@@ -35,25 +35,16 @@ namespace System.Xml
         // StreamBuffer/BufferOffset exists only for the BinaryWriter to fix up nodes
         public byte[] StreamBuffer
         {
-            get
-            {
-                return _buffer;
-            }
+            get { return _buffer; }
         }
         public int BufferOffset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
         }
 
         public int Position
         {
-            get
-            {
-                return (int)_stream.Position + _offset;
-            }
+            get { return (int)_stream.Position + _offset; }
         }
 
         private int GetByteCount(char[] chars)
@@ -342,7 +333,12 @@ namespace System.Xml
             }
         }
 
-        protected unsafe int UnsafeGetUnicodeChars(char* chars, int charCount, byte[] buffer, int offset)
+        protected unsafe int UnsafeGetUnicodeChars(
+            char* chars,
+            int charCount,
+            byte[] buffer,
+            int offset
+        )
         {
             char* charsMax = chars + charCount;
             while (chars < charsMax)
@@ -377,7 +373,12 @@ namespace System.Xml
             return (int)(chars - (charsMax - charCount)) + GetByteCount(chArray);
         }
 
-        protected unsafe int UnsafeGetUTF8Chars(char* chars, int charCount, byte[] buffer, int offset)
+        protected unsafe int UnsafeGetUTF8Chars(
+            char* chars,
+            int charCount,
+            byte[] buffer,
+            int offset
+        )
         {
             if (charCount > 0)
             {
@@ -409,7 +410,12 @@ namespace System.Xml
                             chars++;
                         }
 
-                        bytes += (_encoding ?? s_UTF8Encoding).GetBytes(charsStart, (int)(chars - charsStart), bytes, (int)(bytesMax - bytes));
+                        bytes += (_encoding ?? s_UTF8Encoding).GetBytes(
+                            charsStart,
+                            (int)(chars - charsStart),
+                            bytes,
+                            (int)(bytesMax - bytes)
+                        );
 
                         if (chars >= charsMax)
                             break;

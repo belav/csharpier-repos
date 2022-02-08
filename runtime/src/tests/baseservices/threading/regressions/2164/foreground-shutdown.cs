@@ -8,24 +8,26 @@ using System.Threading;
 
 /*
  * Issue description:
-  Running foreground threads do not prevent runtime shutdown
-  on return from main
-
-Change description:
-  For CoreCLR: introduce BOOL waitForOtherThreads parameter
-  to Assembly::ExecuteMainMethod and exit conditionally;
-  For CoreRT aka NativeAOT: implement missing logic
-*/
+ Running foreground threads do not prevent runtime shutdown
+ on return from main
+ 
+ Change description:
+ For CoreCLR: introduce BOOL waitForOtherThreads parameter
+ to Assembly::ExecuteMainMethod and exit conditionally;
+ For CoreRT aka NativeAOT: implement missing logic
+ */
 
 public class Test_foreground_shutdown
 {
     public static int Main()
     {
-        new Thread(() =>
-        {
-            Thread.Sleep(TimeSpan.FromSeconds(1));
-            Environment.Exit(100);
-        }).Start();
+        new Thread(
+            () =>
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                Environment.Exit(100);
+            }
+        ).Start();
 
         // foreground thread created above prevents
         // runtime shutdown and non-100 exit code propagation

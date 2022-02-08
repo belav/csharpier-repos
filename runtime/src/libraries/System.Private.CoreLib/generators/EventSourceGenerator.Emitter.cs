@@ -32,7 +32,10 @@ namespace Generators
                     _builder.AppendLine("using System;");
                     GenType(ec);
 
-                    _context.AddSource($"{ec.ClassName}.Generated", SourceText.From(_builder.ToString(), Encoding.UTF8));
+                    _context.AddSource(
+                        $"{ec.ClassName}.Generated",
+                        SourceText.From(_builder.ToString(), Encoding.UTF8)
+                    );
 
                     _builder.Clear();
                 }
@@ -42,38 +45,50 @@ namespace Generators
             {
                 if (!string.IsNullOrWhiteSpace(ec.Namespace))
                 {
-                    _builder.AppendLine($@"
+                    _builder.AppendLine(
+                        $@"
 namespace {ec.Namespace}
-{{");
+{{"
+                    );
                 }
 
-                _builder.AppendLine($@"
+                _builder.AppendLine(
+                    $@"
     partial class {ec.ClassName}
-    {{");
+    {{"
+                );
                 GenerateConstructor(ec);
 
                 GenerateProviderMetadata(ec.SourceName);
 
-                _builder.AppendLine($@"
-    }}");
+                _builder.AppendLine(
+                    $@"
+    }}"
+                );
 
                 if (!string.IsNullOrWhiteSpace(ec.Namespace))
                 {
-                    _builder.AppendLine($@"
-}}");
+                    _builder.AppendLine(
+                        $@"
+}}"
+                    );
                 }
             }
 
             private void GenerateConstructor(EventSourceClass ec)
             {
-                _builder.AppendLine($@"
-        private {ec.ClassName}() : base(new Guid({ec.Guid.ToString("x").Replace("{", "").Replace("}", "")}), ""{ec.SourceName}"") {{ }}");
+                _builder.AppendLine(
+                    $@"
+        private {ec.ClassName}() : base(new Guid({ec.Guid .ToString("x") .Replace("{", "") .Replace("}", "")}), ""{ec.SourceName}"") {{ }}"
+                );
             }
 
             private void GenerateProviderMetadata(string sourceName)
             {
-                _builder.Append(@"
-        private protected override ReadOnlySpan<byte> ProviderMetadata => new byte[] { ");
+                _builder.Append(
+                    @"
+        private protected override ReadOnlySpan<byte> ProviderMetadata => new byte[] { "
+                );
 
                 byte[] metadataBytes = MetadataForString(sourceName);
                 foreach (byte b in metadataBytes)

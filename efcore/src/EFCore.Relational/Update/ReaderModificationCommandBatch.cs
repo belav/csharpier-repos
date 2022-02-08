@@ -33,7 +33,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Creates a new <see cref="ReaderModificationCommandBatch" /> instance.
         /// </summary>
         /// <param name="dependencies">Service dependencies.</param>
-        protected ReaderModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies)
+        protected ReaderModificationCommandBatch(
+            ModificationCommandBatchFactoryDependencies dependencies
+        )
         {
             Dependencies = dependencies;
             CachedCommandText = new StringBuilder();
@@ -47,8 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     The update SQL generator.
         /// </summary>
-        protected virtual IUpdateSqlGenerator UpdateSqlGenerator
-            => Dependencies.UpdateSqlGenerator;
+        protected virtual IUpdateSqlGenerator UpdateSqlGenerator => Dependencies.UpdateSqlGenerator;
 
         /// <summary>
         ///     Gets or sets the cached command text for the commands in the batch.
@@ -63,13 +64,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     The list of conceptual insert/update/delete <see cref="ModificationCommands" />s in the batch.
         /// </summary>
-        public override IReadOnlyList<IReadOnlyModificationCommand> ModificationCommands
-            => _modificationCommands;
+        public override IReadOnlyList<IReadOnlyModificationCommand> ModificationCommands =>
+            _modificationCommands;
 
         /// <summary>
         ///     The <see cref="ResultSetMapping" />s for each command in <see cref="ModificationCommands" />.
         /// </summary>
-        protected virtual IList<ResultSetMapping> CommandResultSet { get; } = new List<ResultSetMapping>();
+        protected virtual IList<ResultSetMapping> CommandResultSet { get; } =
+            new List<ResultSetMapping>();
 
         /// <summary>
         ///     Adds the given insert/update/delete <see cref="ModificationCommands" /> to the batch.
@@ -159,16 +161,25 @@ namespace Microsoft.EntityFrameworkCore.Update
             switch (newModificationCommand.EntityState)
             {
                 case EntityState.Added:
-                    CommandResultSet[commandPosition] =
-                        UpdateSqlGenerator.AppendInsertOperation(CachedCommandText, newModificationCommand, commandPosition);
+                    CommandResultSet[commandPosition] = UpdateSqlGenerator.AppendInsertOperation(
+                        CachedCommandText,
+                        newModificationCommand,
+                        commandPosition
+                    );
                     break;
                 case EntityState.Modified:
-                    CommandResultSet[commandPosition] =
-                        UpdateSqlGenerator.AppendUpdateOperation(CachedCommandText, newModificationCommand, commandPosition);
+                    CommandResultSet[commandPosition] = UpdateSqlGenerator.AppendUpdateOperation(
+                        CachedCommandText,
+                        newModificationCommand,
+                        commandPosition
+                    );
                     break;
                 case EntityState.Deleted:
-                    CommandResultSet[commandPosition] =
-                        UpdateSqlGenerator.AppendDeleteOperation(CachedCommandText, newModificationCommand, commandPosition);
+                    CommandResultSet[commandPosition] = UpdateSqlGenerator.AppendDeleteOperation(
+                        CachedCommandText,
+                        newModificationCommand,
+                        commandPosition
+                    );
                     break;
             }
 
@@ -179,8 +190,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Gets the total number of parameters needed for the batch.
         /// </summary>
         /// <returns>The total parameter count.</returns>
-        protected virtual int GetParameterCount()
-            => ModificationCommands.Sum(c => c.ColumnModifications.Count);
+        protected virtual int GetParameterCount() =>
+            ModificationCommands.Sum(c => c.ColumnModifications.Count);
 
         /// <summary>
         ///     Generates a <see cref="RawSqlCommand" /> for the batch.
@@ -199,29 +210,45 @@ namespace Microsoft.EntityFrameworkCore.Update
             {
                 var command = ModificationCommands[commandIndex];
                 // ReSharper disable once ForCanBeConvertedToForeach
-                for (var columnIndex = 0; columnIndex < command.ColumnModifications.Count; columnIndex++)
+                for (
+                    var columnIndex = 0;
+                    columnIndex < command.ColumnModifications.Count;
+                    columnIndex++
+                )
                 {
                     var columnModification = command.ColumnModifications[columnIndex];
                     if (columnModification.UseCurrentValueParameter)
                     {
                         commandBuilder.AddParameter(
                             columnModification.ParameterName,
-                            Dependencies.SqlGenerationHelper.GenerateParameterName(columnModification.ParameterName),
+                            Dependencies.SqlGenerationHelper.GenerateParameterName(
+                                columnModification.ParameterName
+                            ),
                             columnModification.TypeMapping!,
-                            columnModification.IsNullable);
+                            columnModification.IsNullable
+                        );
 
-                        parameterValues.Add(columnModification.ParameterName, columnModification.Value);
+                        parameterValues.Add(
+                            columnModification.ParameterName,
+                            columnModification.Value
+                        );
                     }
 
                     if (columnModification.UseOriginalValueParameter)
                     {
                         commandBuilder.AddParameter(
                             columnModification.OriginalParameterName,
-                            Dependencies.SqlGenerationHelper.GenerateParameterName(columnModification.OriginalParameterName),
+                            Dependencies.SqlGenerationHelper.GenerateParameterName(
+                                columnModification.OriginalParameterName
+                            ),
                             columnModification.TypeMapping!,
-                            columnModification.IsNullable);
+                            columnModification.IsNullable
+                        );
 
-                        parameterValues.Add(columnModification.OriginalParameterName, columnModification.OriginalValue);
+                        parameterValues.Add(
+                            columnModification.OriginalParameterName,
+                            columnModification.OriginalValue
+                        );
                     }
                 }
             }
@@ -246,15 +273,20 @@ namespace Microsoft.EntityFrameworkCore.Update
                         storeCommand.ParameterValues,
                         null,
                         Dependencies.CurrentContext.Context,
-                        Dependencies.Logger, CommandSource.SaveChanges));
+                        Dependencies.Logger,
+                        CommandSource.SaveChanges
+                    )
+                );
                 Consume(dataReader);
             }
-            catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
+            catch (Exception ex)
+                when (ex is not DbUpdateException and not OperationCanceledException)
             {
                 throw new DbUpdateException(
                     RelationalStrings.UpdateStoreException,
                     ex,
-                    ModificationCommands.SelectMany(c => c.Entries).ToList());
+                    ModificationCommands.SelectMany(c => c.Entries).ToList()
+                );
             }
         }
 
@@ -268,28 +300,36 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public override async Task ExecuteAsync(
             IRelationalConnection connection,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var storeCommand = CreateStoreCommand();
 
             try
             {
-                await using var dataReader = await storeCommand.RelationalCommand.ExecuteReaderAsync(
-                    new RelationalCommandParameterObject(
-                        connection,
-                        storeCommand.ParameterValues,
-                        null,
-                        Dependencies.CurrentContext.Context,
-                        Dependencies.Logger, CommandSource.SaveChanges),
-                    cancellationToken).ConfigureAwait(false);
+                await using var dataReader = await storeCommand.RelationalCommand
+                    .ExecuteReaderAsync(
+                        new RelationalCommandParameterObject(
+                            connection,
+                            storeCommand.ParameterValues,
+                            null,
+                            Dependencies.CurrentContext.Context,
+                            Dependencies.Logger,
+                            CommandSource.SaveChanges
+                        ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 await ConsumeAsync(dataReader, cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
+            catch (Exception ex)
+                when (ex is not DbUpdateException and not OperationCanceledException)
             {
                 throw new DbUpdateException(
                     RelationalStrings.UpdateStoreException,
                     ex,
-                    ModificationCommands.SelectMany(c => c.Entries).ToList());
+                    ModificationCommands.SelectMany(c => c.Entries).ToList()
+                );
             }
         }
 
@@ -308,7 +348,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         protected abstract Task ConsumeAsync(
             RelationalDataReader reader,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Creates the <see cref="IRelationalValueBufferFactory" /> that will be used for creating a
@@ -320,12 +361,20 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// </param>
         /// <returns>The factory.</returns>
         protected virtual IRelationalValueBufferFactory CreateValueBufferFactory(
-            IReadOnlyList<IColumnModification> columnModifications)
-            => Dependencies.ValueBufferFactoryFactory
-                .Create(
-                    columnModifications
-                        .Where(c => c.IsRead)
-                        .Select(c => new TypeMaterializationInfo(c.Property!.ClrType, c.Property, c.TypeMapping!))
-                        .ToArray());
+            IReadOnlyList<IColumnModification> columnModifications
+        ) =>
+            Dependencies.ValueBufferFactoryFactory.Create(
+                columnModifications
+                    .Where(c => c.IsRead)
+                    .Select(
+                        c =>
+                            new TypeMaterializationInfo(
+                                c.Property!.ClrType,
+                                c.Property,
+                                c.TypeMapping!
+                            )
+                    )
+                    .ToArray()
+            );
     }
 }

@@ -44,19 +44,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// Exception regions -- spans of catch and finally handlers that surround the active statements.
-        /// 
+        ///
         /// Null if the document has syntax errors, rude edits or has not changed.
         /// </summary>
         /// <remarks>
         /// Null if there are any rude edit diagnostics.
-        /// 
+        ///
         /// Otherwise, each active statement in <see cref="ActiveStatements"/> has a corresponding slot in <see cref="ExceptionRegions"/>.
         ///
         /// Exception regions for each EH block/clause are marked as |...|.
         ///   try { ... AS ... } |catch { } finally { }|
         ///   try { } |catch { ... AS ... }| finally { }
         ///   try { } catch { } |finally { ... AS ... }|
-        /// 
+        ///
         /// Contains a minimal set of spans that cover the handlers.
         /// For example:
         ///   try { } |finally { try { ... AS ... } catch {  } }|
@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Line edits in the document (or mapped documents), or null if the document has syntax errors, rude edits or has not changed.
         /// </summary>
         /// <remarks>
-        /// Grouped by file name and updates in each group are ordered by <see cref="SourceLineUpdate.OldLine"/>. 
+        /// Grouped by file name and updates in each group are ordered by <see cref="SourceLineUpdate.OldLine"/>.
         /// Each entry in the group applies the delta of <see cref="SourceLineUpdate.NewLine"/> - <see cref="SourceLineUpdate.OldLine"/>
         /// to all lines in range [<see cref="SourceLineUpdate.OldLine"/>, next entry's <see cref="SourceLineUpdate.OldLine"/>).
         /// </remarks>
@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<ImmutableArray<SourceFileSpan>> exceptionRegionsOpt,
             ImmutableArray<SequencePointUpdates> lineEditsOpt,
             bool hasChanges,
-            bool hasSyntaxErrors)
+            bool hasSyntaxErrors
+        )
         {
             Debug.Assert(!rudeEdits.IsDefault);
 
@@ -124,11 +125,22 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     Debug.Assert(!lineEditsOpt.IsDefault);
 
                     // no duplicate files in line edits:
-                    Debug.Assert(lineEditsOpt.Select(edit => edit.FileName).Distinct().Count() == lineEditsOpt.Length);
+                    Debug.Assert(
+                        lineEditsOpt.Select(edit => edit.FileName).Distinct().Count()
+                            == lineEditsOpt.Length
+                    );
 
                     // line updates are sorted:
-                    Debug.Assert(lineEditsOpt.All(documentLineEdits => documentLineEdits.LineUpdates.IsSorted(Comparer<SourceLineUpdate>.Create(
-                        (x, y) => x.OldLine.CompareTo(y.OldLine)))));
+                    Debug.Assert(
+                        lineEditsOpt.All(
+                            documentLineEdits =>
+                                documentLineEdits.LineUpdates.IsSorted(
+                                    Comparer<SourceLineUpdate>.Create(
+                                        (x, y) => x.OldLine.CompareTo(y.OldLine)
+                                    )
+                                )
+                        )
+                    );
 
                     Debug.Assert(exceptionRegionsOpt.Length == activeStatementsOpt.Length);
                 }
@@ -145,20 +157,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             HasChanges = hasChanges;
         }
 
-        public bool HasChangesAndErrors
-            => HasChanges && (HasSyntaxErrors || !RudeEditErrors.IsEmpty);
+        public bool HasChangesAndErrors =>
+            HasChanges && (HasSyntaxErrors || !RudeEditErrors.IsEmpty);
 
-        public bool HasChangesAndSyntaxErrors
-            => HasChanges && HasSyntaxErrors;
+        public bool HasChangesAndSyntaxErrors => HasChanges && HasSyntaxErrors;
 
-        public bool HasSignificantValidChanges
-            => HasChanges && (!SemanticEdits.IsDefaultOrEmpty || !LineEdits.IsDefaultOrEmpty);
+        public bool HasSignificantValidChanges =>
+            HasChanges && (!SemanticEdits.IsDefaultOrEmpty || !LineEdits.IsDefaultOrEmpty);
 
         /// <summary>
         /// Report errors blocking the document analysis.
         /// </summary>
-        public static DocumentAnalysisResults SyntaxErrors(DocumentId documentId, ImmutableArray<RudeEditDiagnostic> rudeEdits, Diagnostic? syntaxError, bool hasChanges)
-            => new(
+        public static DocumentAnalysisResults SyntaxErrors(
+            DocumentId documentId,
+            ImmutableArray<RudeEditDiagnostic> rudeEdits,
+            Diagnostic? syntaxError,
+            bool hasChanges
+        ) =>
+            new(
                 documentId,
                 activeStatementsOpt: default,
                 rudeEdits,
@@ -167,13 +183,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 exceptionRegionsOpt: default,
                 lineEditsOpt: default,
                 hasChanges,
-                hasSyntaxErrors: true);
+                hasSyntaxErrors: true
+            );
 
         /// <summary>
         /// Report unchanged document results.
         /// </summary>
-        public static DocumentAnalysisResults Unchanged(DocumentId documentId)
-            => new(
+        public static DocumentAnalysisResults Unchanged(DocumentId documentId) =>
+            new(
                 documentId,
                 activeStatementsOpt: default,
                 syntaxError: null,
@@ -182,6 +199,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 exceptionRegionsOpt: default,
                 lineEditsOpt: default,
                 hasChanges: false,
-                hasSyntaxErrors: false);
+                hasSyntaxErrors: false
+            );
     }
 }

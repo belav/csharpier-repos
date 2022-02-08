@@ -16,21 +16,25 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 {
-    public partial class UseIsNullCheckForCastAndEqualityOperatorTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseIsNullCheckForCastAndEqualityOperatorTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseIsNullCheckForCastAndEqualityOperatorTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseIsNullCheckForCastAndEqualityOperatorDiagnosticAnalyzer(), new CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseIsNullCheckForCastAndEqualityOperatorDiagnosticAnalyzer(),
+                new CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestEquality()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -40,7 +44,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -49,14 +53,15 @@ class C
         if (s is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestEqualitySwapped()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -66,7 +71,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -75,14 +80,15 @@ class C
         if (s is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestNotEquality()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -92,7 +98,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -101,14 +107,15 @@ class C
         if (s is object)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestNotEqualitySwapped()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -118,7 +125,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -127,14 +134,15 @@ class C
         if (s is object)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestMissingPreCSharp7()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -143,14 +151,20 @@ class C
         if ([||](object)s == null)
             return;
     }
-}", parameters: new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+}",
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestOnlyForObjectCast()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -159,14 +173,15 @@ class C
         if ([||](string)s == null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -179,7 +194,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -191,14 +206,15 @@ class C
         if (s is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestFixAllNested1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -208,7 +224,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -217,14 +233,15 @@ class C
         if ((s2 is null) is null))
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestTrivia1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -234,7 +251,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -243,14 +260,15 @@ class C
         if ( /*1*/ s /*5*/ is /*6*/ null /*7*/ )
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestTrivia2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -260,7 +278,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -269,14 +287,15 @@ class C
         if ( /*1*/ s /*2*/ is /*3*/ null /*7*/ )
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestConstrainedTypeParameter()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -286,7 +305,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -295,14 +314,15 @@ class C
         if (s is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestUnconstrainedTypeParameter()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -311,14 +331,15 @@ class C
         if ([||](object)s == null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestComplexExpr()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -328,7 +349,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -337,14 +358,15 @@ class C
         if (s[0] is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
         public async Task TestNotOnDefault()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -353,7 +375,8 @@ class C
         if ([||](object)s[0] == default)
             return;
     }
-}");
+}"
+            );
         }
     }
 }

@@ -11,14 +11,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
     /// </summary>
     internal class UvConnectRequest : UvRequest
     {
-        private readonly static LibuvFunctions.uv_connect_cb _uv_connect_cb = (req, status) => UvConnectCb(req, status);
+        private readonly static LibuvFunctions.uv_connect_cb _uv_connect_cb = (req, status) =>
+            UvConnectCb(req, status);
 
         private Action<UvConnectRequest, int, UvException, object> _callback;
         private object _state;
 
-        public UvConnectRequest(ILibuvTrace logger) : base (logger)
-        {
-        }
+        public UvConnectRequest(ILibuvTrace logger) : base(logger) { }
 
         public override void Init(LibuvThread thread)
         {
@@ -30,17 +29,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         public void DangerousInit(UvLoopHandle loop)
         {
             var requestSize = loop.Libuv.req_size(LibuvFunctions.RequestType.CONNECT);
-            CreateMemory(
-                loop.Libuv,
-                loop.ThreadId,
-                requestSize);
+            CreateMemory(loop.Libuv, loop.ThreadId, requestSize);
         }
 
         public void Connect(
-            UvPipeHandle pipe, 
-            string name, 
-            Action<UvConnectRequest, int, UvException, object> callback, 
-            object state)
+            UvPipeHandle pipe,
+            string name,
+            Action<UvConnectRequest, int, UvException, object> callback,
+            object state
+        )
         {
             _callback = callback;
             _state = state;

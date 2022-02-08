@@ -33,12 +33,16 @@ namespace System.Text.RegularExpressions.Tests
         /// <summary>Output directory for generated dgml files.</summary>
         private static string DgmlOutputDirectoryPath => Path.Combine(s_tmpWorkingDir, "dgml");
 
-        private static string ExperimentDirectoryPath => Path.Combine(s_tmpWorkingDir, "experiments");
+        private static string ExperimentDirectoryPath =>
+            Path.Combine(s_tmpWorkingDir, "experiments");
 
         [ConditionalFact(nameof(Enabled))]
         public void RegenerateUnicodeTables()
         {
-            MethodInfo? genUnicode = typeof(Regex).GetMethod("GenerateUnicodeTables", BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo? genUnicode = typeof(Regex).GetMethod(
+                "GenerateUnicodeTables",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             // GenerateUnicodeTables is not available in Release build
             if (genUnicode is not null)
             {
@@ -50,22 +54,57 @@ namespace System.Text.RegularExpressions.Tests
             File.AppendAllText(OutputFilePath, message);
 
         /// <summary>Save the regex as a DFA in DGML format in the textwriter.</summary>
-        private static bool TrySaveDGML(Regex regex, TextWriter writer, int bound = -1, bool hideStateInfo = false, bool addDotStar = false, bool inReverse = false, bool onlyDFAinfo = false, int maxLabelLength = -1, bool asNFA = false)
+        private static bool TrySaveDGML(
+            Regex regex,
+            TextWriter writer,
+            int bound = -1,
+            bool hideStateInfo = false,
+            bool addDotStar = false,
+            bool inReverse = false,
+            bool onlyDFAinfo = false,
+            int maxLabelLength = -1,
+            bool asNFA = false
+        )
         {
-            MethodInfo? saveDgml = regex.GetType().GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo? saveDgml = regex
+                .GetType()
+                .GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance);
             if (saveDgml is null)
             {
                 return false;
             }
             else
             {
-                saveDgml.Invoke(regex, new object[] { writer, bound, hideStateInfo, addDotStar, inReverse, onlyDFAinfo, maxLabelLength, asNFA });
+                saveDgml.Invoke(
+                    regex,
+                    new object[]
+                    {
+                        writer,
+                        bound,
+                        hideStateInfo,
+                        addDotStar,
+                        inReverse,
+                        onlyDFAinfo,
+                        maxLabelLength,
+                        asNFA
+                    }
+                );
                 return true;
             }
         }
 
         /// <summary>View the regex as a DFA in DGML format in VS.</summary>
-        internal static void ViewDGML(Regex regex, int bound = -1, bool hideStateInfo = true, bool addDotStar = false, bool inReverse = false, bool onlyDFAinfo = false, string name = "DFA", int maxLabelLength = 20, bool asNFA = false)
+        internal static void ViewDGML(
+            Regex regex,
+            int bound = -1,
+            bool hideStateInfo = true,
+            bool addDotStar = false,
+            bool inReverse = false,
+            bool onlyDFAinfo = false,
+            string name = "DFA",
+            int maxLabelLength = 20,
+            bool asNFA = false
+        )
         {
             if (!Directory.Exists(DgmlOutputDirectoryPath))
             {
@@ -74,14 +113,32 @@ namespace System.Text.RegularExpressions.Tests
 
             var sw = new StringWriter();
             // If TrySaveDGML returns false then Regex.SaveDGML is not supported (in Release build)
-            if (TrySaveDGML(regex, sw, bound, hideStateInfo, addDotStar, inReverse, onlyDFAinfo, maxLabelLength, asNFA))
+            if (
+                TrySaveDGML(
+                    regex,
+                    sw,
+                    bound,
+                    hideStateInfo,
+                    addDotStar,
+                    inReverse,
+                    onlyDFAinfo,
+                    maxLabelLength,
+                    asNFA
+                )
+            )
             {
                 if (asNFA)
                 {
                     name = "NFA";
                 }
 
-                File.WriteAllText(Path.Combine(DgmlOutputDirectoryPath, $"{(inReverse ? name + "r" : (addDotStar ? name + "1" : name))}.dgml"), sw.ToString());
+                File.WriteAllText(
+                    Path.Combine(
+                        DgmlOutputDirectoryPath,
+                        $"{(inReverse ? name + "r" : (addDotStar ? name + "1" : name))}.dgml"
+                    ),
+                    sw.ToString()
+                );
             }
         }
 
@@ -96,7 +153,7 @@ namespace System.Text.RegularExpressions.Tests
         ///   Yes(index,length)
         ///   No
         ///   TIMEOUT
-        ///   ERROR 
+        ///   ERROR
         ///  and in the case of TIMEOUT or ERROR time is 10000 (the timeout limit of 10sec)
         /// </summary>
         [ConditionalFact(nameof(Enabled))]
@@ -115,21 +172,27 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             DirectoryInfo experimentDI = Directory.GetParent(dirs[0]);
-            DirectoryInfo[] experiments =
-                Array.FindAll(experimentDI.GetDirectories(),
-                             di => ((di.Attributes & FileAttributes.Hidden) != (FileAttributes.Hidden)) &&
-                                   Array.Exists(di.GetFiles(), f => f.Name.Equals("regexes.txt")) &&
-                                   Array.Exists(di.GetFiles(), f => f.Name.Equals("input.txt")));
+            DirectoryInfo[] experiments = Array.FindAll(
+                experimentDI.GetDirectories(),
+                di =>
+                    ((di.Attributes & FileAttributes.Hidden) != (FileAttributes.Hidden))
+                    && Array.Exists(di.GetFiles(), f => f.Name.Equals("regexes.txt"))
+                    && Array.Exists(di.GetFiles(), f => f.Name.Equals("input.txt"))
+            );
             if (experiments.Length == 0)
             {
-                WriteOutput("\nExperiments directory has no indiviual experiment subdirectories containing files 'regexes.txt' and 'input.txt'.");
+                WriteOutput(
+                    "\nExperiments directory has no indiviual experiment subdirectories containing files 'regexes.txt' and 'input.txt'."
+                );
                 return;
             }
 
             for (int i = 0; i < experiments.Length; i++)
             {
                 string input = File.ReadAllText(Path.Combine(experiments[i].FullName, "input.txt"));
-                string[] rawRegexes = File.ReadAllLines(Path.Combine(experiments[i].FullName, "regexes.txt"));
+                string[] rawRegexes = File.ReadAllLines(
+                    Path.Combine(experiments[i].FullName, "regexes.txt")
+                );
 
                 WriteOutput($"\n---------- {experiments[i].Name} ----------");
                 for (int r = 0; r < rawRegexes.Length; r++)
@@ -186,7 +249,10 @@ namespace System.Text.RegularExpressions.Tests
                 //string rawregex = @"\bis\w*\b";
                 string rawregex = And(".*[0-9].*[0-9].*", ".*[A-Z].*[A-Z].*", Not(".*(01|12).*"));
                 //string rawregex = "a.{4}$";
-                Regex re = new Regex($@"{rawregex}", RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
+                Regex re = new Regex(
+                    $@"{rawregex}",
+                    RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+                );
                 ViewDGML(re);
                 ViewDGML(re, inReverse: true);
                 ViewDGML(re, addDotStar: true);
@@ -203,13 +269,42 @@ namespace System.Text.RegularExpressions.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         [InlineData(".*a+", -1, new string[] { ".*a+" }, false, false)]
         [InlineData("ann", -1, new string[] { "nna" }, true, false)]
-        [InlineData("(something|otherstuff)+", 10, new string[] { "Unexplored", "some" }, false, true)]
-        [InlineData("(something|otherstuff)+", 10, new string[] { "Unexplored", "ffut" }, true, true)]
-        public void TestDGMLGeneration(string pattern, int explorationbound, string[] expectedDgmlFragments, bool exploreInReverse, bool exploreAsNFA)
+        [InlineData(
+            "(something|otherstuff)+",
+            10,
+            new string[] { "Unexplored", "some" },
+            false,
+            true
+        )]
+        [InlineData(
+            "(something|otherstuff)+",
+            10,
+            new string[] { "Unexplored", "ffut" },
+            true,
+            true
+        )]
+        public void TestDGMLGeneration(
+            string pattern,
+            int explorationbound,
+            string[] expectedDgmlFragments,
+            bool exploreInReverse,
+            bool exploreAsNFA
+        )
         {
             StringWriter sw = new StringWriter();
-            var re = new Regex(pattern, RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
-            if (TrySaveDGML(re, writer: sw, bound: explorationbound, inReverse: exploreInReverse, asNFA: exploreAsNFA))
+            var re = new Regex(
+                pattern,
+                RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+            );
+            if (
+                TrySaveDGML(
+                    re,
+                    writer: sw,
+                    bound: explorationbound,
+                    inReverse: exploreInReverse,
+                    asNFA: exploreAsNFA
+                )
+            )
             {
                 string str = sw.ToString();
                 Assert.StartsWith("<?xml version=\"1.0\" encoding=\"utf-8\"?>", str);
@@ -220,12 +315,37 @@ namespace System.Text.RegularExpressions.Tests
                 }
             }
 
-            static bool TrySaveDGML(Regex regex, TextWriter writer, int bound = -1, bool hideStateInfo = false, bool addDotStar = false, bool inReverse = false, bool onlyDFAinfo = false, int maxLabelLength = -1, bool asNFA = false)
+            static bool TrySaveDGML(
+                Regex regex,
+                TextWriter writer,
+                int bound = -1,
+                bool hideStateInfo = false,
+                bool addDotStar = false,
+                bool inReverse = false,
+                bool onlyDFAinfo = false,
+                int maxLabelLength = -1,
+                bool asNFA = false
+            )
             {
-                MethodInfo saveDgml = regex.GetType().GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance);
+                MethodInfo saveDgml = regex
+                    .GetType()
+                    .GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance);
                 if (saveDgml is not null)
                 {
-                    saveDgml.Invoke(regex, new object[] { writer, bound, hideStateInfo, addDotStar, inReverse, onlyDFAinfo, maxLabelLength, asNFA });
+                    saveDgml.Invoke(
+                        regex,
+                        new object[]
+                        {
+                            writer,
+                            bound,
+                            hideStateInfo,
+                            addDotStar,
+                            inReverse,
+                            onlyDFAinfo,
+                            maxLabelLength,
+                            asNFA
+                        }
+                    );
                     return true;
                 }
 
@@ -233,7 +353,13 @@ namespace System.Text.RegularExpressions.Tests
             }
         }
 
-        private void TestRunRegex(string name, string rawregex, string input, bool viewDGML = false, bool dotStar = false)
+        private void TestRunRegex(
+            string name,
+            string rawregex,
+            string input,
+            bool viewDGML = false,
+            bool dotStar = false
+        )
         {
             var reNone = new Regex(rawregex, RegexOptions.None, new TimeSpan(0, 0, 10));
             var reCompiled = new Regex(rawregex, RegexOptions.Compiled, new TimeSpan(0, 0, 10));
@@ -262,13 +388,15 @@ namespace System.Text.RegularExpressions.Tests
 
             void WriteMatchOutput(long t, Match m)
             {
-                WriteOutput(t switch
-                {
-                    -1 => ",10000,TIMEOUT",
-                    -2 => ",10000,ERROR",
-                    _ when m.Success => $",{t},Yes({m.Index}:{m.Length})",
-                    _ => $",{t},No"
-                });
+                WriteOutput(
+                    t switch
+                    {
+                        -1 => ",10000,TIMEOUT",
+                        -2 => ",10000,ERROR",
+                        _ when m.Success => $",{t},Yes({m.Index}:{m.Length})",
+                        _ => $",{t},No"
+                    }
+                );
             }
         }
 
@@ -279,7 +407,12 @@ namespace System.Text.RegularExpressions.Tests
         {
             try
             {
-                var re = new Regex(And(".*a.*", ".*b.*"), RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+                var re = new Regex(
+                    And(".*a.*", ".*b.*"),
+                    RegexHelpers.RegexOptionNonBacktracking
+                        | RegexOptions.Singleline
+                        | RegexOptions.IgnoreCase
+                );
                 bool ok = re.IsMatch("xxaaxxBxaa");
                 Assert.True(ok);
                 bool fail = re.IsMatch("xxaaxxcxaa");
@@ -298,7 +431,10 @@ namespace System.Text.RegularExpressions.Tests
             try
             {
                 // contains lower, upper, and a digit, and is between 2 and 4 characters long
-                var re = new Regex(And(".*[a-z].*", ".*[A-Z].*", ".*[0-9].*", ".{2,4}"), RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
+                var re = new Regex(
+                    And(".*[a-z].*", ".*[A-Z].*", ".*[0-9].*", ".{2,4}"),
+                    RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+                );
                 var match = re.Match("xxaac\n5Bxaa");
                 Assert.True(match.Success);
                 Assert.Equal(4, match.Index);
@@ -317,8 +453,16 @@ namespace System.Text.RegularExpressions.Tests
             try
             {
                 // contains lower, upper, and a digit, and is between 4 and 8 characters long, does not contain 2 consequtive digits
-                var re = new Regex(And(".*[a-z].*", ".*[A-Z].*", ".*[0-9].*", ".{4,8}",
-                    Not(".*(01|12|23|34|45|56|67|78|89).*")), RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
+                var re = new Regex(
+                    And(
+                        ".*[a-z].*",
+                        ".*[A-Z].*",
+                        ".*[0-9].*",
+                        ".{4,8}",
+                        Not(".*(01|12|23|34|45|56|67|78|89).*")
+                    ),
+                    RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+                );
                 var match = re.Match("xxaac12Bxaas3455");
                 Assert.True(match.Success);
                 Assert.Equal(6, match.Index);
@@ -351,10 +495,22 @@ namespace System.Text.RegularExpressions.Tests
                 string contains_first_P_and_then_r = ".*X.*r.*";
 
                 // Conjunction of all the above constraints
-                string all = And(twoLower, twoUpper, threeDigits, oneSpecial, Not_countUp, Not_countDown, length, contains_first_P_and_then_r);
+                string all = And(
+                    twoLower,
+                    twoUpper,
+                    threeDigits,
+                    oneSpecial,
+                    Not_countUp,
+                    Not_countDown,
+                    length,
+                    contains_first_P_and_then_r
+                );
 
                 // search for the password in a context surrounded by word boundaries
-                Regex re = new Regex($@"\b{all}\b", RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
+                Regex re = new Regex(
+                    $@"\b{all}\b",
+                    RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+                );
 
                 // Does not qualify because of 123 and connot end between 2 and 3 because of \b
                 string almost1 = "X@ssW0rd123";
@@ -378,7 +534,8 @@ namespace System.Text.RegularExpressions.Tests
                     string part2 = new string(Array.ConvertAll(buffer2, b => (char)b));
                     string part3 = new string(Array.ConvertAll(buffer3, b => (char)b));
 
-                    string input = $"{part1} {almost1} {part2} {matching1} {part3} {matching2}, finally this {almost2} does not qualify either";
+                    string input =
+                        $"{part1} {almost1} {part2} {matching1} {part3} {matching2}, finally this {almost2} does not qualify either";
 
                     int expextedMatch1Index = (2 * k) + almost1.Length + 3;
                     int expextedMatch1Length = matching1.Length;
@@ -437,10 +594,15 @@ namespace System.Text.RegularExpressions.Tests
                 // Negated disjunction of all the above constraints
                 // By deMorgan's laws we know that ~(A|B|...|C) = ~A&~B&...&~C and ~~A = A
                 // So Not(Not_twoLower|...) is equivalent to twoLower&~(...)
-                string all = Not($"{Not_twoLower}|{Not_twoUpper}|{Not_threeDigits}|{Not_oneSpecial}|{countUp}|{countDown}|{Not_length}|{Not_contains_first_P_and_then_r}");
+                string all = Not(
+                    $"{Not_twoLower}|{Not_twoUpper}|{Not_threeDigits}|{Not_oneSpecial}|{countUp}|{countDown}|{Not_length}|{Not_contains_first_P_and_then_r}"
+                );
 
                 // search for the password in a context surrounded by word boundaries
-                Regex re = new Regex($@"\b{all}\b", RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
+                Regex re = new Regex(
+                    $@"\b{all}\b",
+                    RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+                );
 
                 // Does not qualify because of 123 and connot end between 2 and 3 because of \b
                 string almost1 = "X@ssW0rd123";
@@ -464,7 +626,8 @@ namespace System.Text.RegularExpressions.Tests
                     string part2 = new string(Array.ConvertAll(buffer2, b => (char)b));
                     string part3 = new string(Array.ConvertAll(buffer3, b => (char)b));
 
-                    string input = $"{part1} {almost1} {part2} {matching1} {part3} {matching2}, finally this {almost2} does not qualify either";
+                    string input =
+                        $"{part1} {almost1} {part2} {matching1} {part3} {matching2}, finally this {almost2} does not qualify either";
 
                     int expectedMatch1Index = (2 * k) + almost1.Length + 3;
                     int expectedMatch1Length = matching1.Length;
@@ -504,7 +667,13 @@ namespace System.Text.RegularExpressions.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         [InlineData("[abc]{0,10}", "a[abc]{0,3}", "xxxabbbbbbbyyy", true, "abbb")]
         [InlineData("[abc]{0,10}?", "a[abc]{0,3}?", "xxxabbbbbbbyyy", true, "a")]
-        public void TestConjunctionOverCounting(string conjunct1, string conjunct2, string input, bool success, string match)
+        public void TestConjunctionOverCounting(
+            string conjunct1,
+            string conjunct2,
+            string input,
+            bool success,
+            string match
+        )
         {
             try
             {
@@ -532,7 +701,8 @@ namespace System.Text.RegularExpressions.Tests
                 foreach (bool negative in new bool[] { false, true })
                 {
                     // Generate 3 positive and 3 negative inputs
-                    List<string> inputs = new(GenerateRandomMembersViaReflection(re, 3, 123, negative));
+                    List<string> inputs =
+                        new(GenerateRandomMembersViaReflection(re, 3, 123, negative));
                     foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
                     {
                         foreach (string input in inputs)
@@ -547,18 +717,33 @@ namespace System.Text.RegularExpressions.Tests
         /// <summary>Test random input generation correctness</summary>
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         [MemberData(nameof(GenerateRandomMembers_TestData))]
-        public async Task GenerateRandomMembers(RegexEngine engine, string pattern, string input, bool isMatch)
+        public async Task GenerateRandomMembers(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            bool isMatch
+        )
         {
             Regex regex = await RegexHelpers.GetRegexAsync(engine, pattern);
             Assert.Equal(isMatch, regex.IsMatch(input));
         }
 
-        private static IEnumerable<string> GenerateRandomMembersViaReflection(Regex regex, int how_many_inputs, int randomseed, bool negative)
+        private static IEnumerable<string> GenerateRandomMembersViaReflection(
+            Regex regex,
+            int how_many_inputs,
+            int randomseed,
+            bool negative
+        )
         {
-            MethodInfo? gen = regex.GetType().GetMethod("GenerateRandomMembers", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo? gen = regex
+                .GetType()
+                .GetMethod("GenerateRandomMembers", BindingFlags.NonPublic | BindingFlags.Instance);
             if (gen is not null)
             {
-                return (IEnumerable<string>)gen.Invoke(regex, new object[] { how_many_inputs, randomseed, negative });
+                return (IEnumerable<string>)gen.Invoke(
+                    regex,
+                    new object[] { how_many_inputs, randomseed, negative }
+                );
             }
             else
             {

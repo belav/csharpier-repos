@@ -15,7 +15,8 @@ internal static class ExpressionMetadataProvider
     public static ModelExplorer FromLambdaExpression<TModel, TResult>(
         Expression<Func<TModel, TResult>> expression,
         ViewDataDictionary<TModel> viewData,
-        IModelMetadataProvider metadataProvider)
+        IModelMetadataProvider metadataProvider
+    )
     {
         if (expression == null)
         {
@@ -50,10 +51,13 @@ internal static class ExpressionMetadataProvider
             case ExpressionType.MemberAccess:
                 // Property/field access is always legal
                 var memberExpression = (MemberExpression)expression.Body;
-                propertyName = memberExpression.Member is PropertyInfo ? memberExpression.Member.Name : null;
-                if (string.Equals(propertyName, "Model", StringComparison.Ordinal) &&
-                    memberExpression.Type == typeof(TModel) &&
-                    memberExpression.Expression.NodeType == ExpressionType.Constant)
+                propertyName =
+                    memberExpression.Member is PropertyInfo ? memberExpression.Member.Name : null;
+                if (
+                    string.Equals(propertyName, "Model", StringComparison.Ordinal)
+                    && memberExpression.Type == typeof(TModel)
+                    && memberExpression.Expression.NodeType == ExpressionType.Constant
+                )
                 {
                     // Special case the Model property in RazorPage<TModel>. (m => Model) should behave identically
                     // to (m => m). But do the more complicated thing for (m => m.Model) since that is a slightly
@@ -144,7 +148,8 @@ internal static class ExpressionMetadataProvider
     public static ModelExplorer FromStringExpression(
         string expression,
         ViewDataDictionary viewData,
-        IModelMetadataProvider metadataProvider)
+        IModelMetadataProvider metadataProvider
+    )
     {
         if (viewData == null)
         {
@@ -164,9 +169,11 @@ internal static class ExpressionMetadataProvider
 
         if (viewDataInfo != null)
         {
-            if (viewDataInfo.Container == viewData &&
-                viewDataInfo.Value == viewData.Model &&
-                string.IsNullOrEmpty(expression))
+            if (
+                viewDataInfo.Container == viewData
+                && viewDataInfo.Value == viewData.Model
+                && string.IsNullOrEmpty(expression)
+            )
             {
                 // Nothing for empty expression in ViewData and ViewDataEvaluator just returned the model. Handle
                 // using FromModel() for its object special case.
@@ -178,13 +185,16 @@ internal static class ExpressionMetadataProvider
             {
                 containerExplorer = metadataProvider.GetModelExplorerForType(
                     viewDataInfo.Container.GetType(),
-                    viewDataInfo.Container);
+                    viewDataInfo.Container
+                );
             }
 
             if (viewDataInfo.PropertyInfo != null)
             {
                 // We've identified a property access, which provides us with accurate metadata.
-                var containerMetadata = metadataProvider.GetMetadataForType(viewDataInfo.Container.GetType());
+                var containerMetadata = metadataProvider.GetMetadataForType(
+                    viewDataInfo.Container.GetType()
+                );
                 var propertyMetadata = containerMetadata.Properties[viewDataInfo.PropertyInfo.Name];
 
                 Func<object, object> modelAccessor = (ignore) => viewDataInfo.Value;
@@ -193,8 +203,13 @@ internal static class ExpressionMetadataProvider
             else if (viewDataInfo.Value != null)
             {
                 // We have a value, even though we may not know where it came from.
-                var valueMetadata = metadataProvider.GetMetadataForType(viewDataInfo.Value.GetType());
-                return containerExplorer.GetExplorerForExpression(valueMetadata, viewDataInfo.Value);
+                var valueMetadata = metadataProvider.GetMetadataForType(
+                    viewDataInfo.Value.GetType()
+                );
+                return containerExplorer.GetExplorerForExpression(
+                    valueMetadata,
+                    viewDataInfo.Value
+                );
             }
         }
 
@@ -205,7 +220,8 @@ internal static class ExpressionMetadataProvider
 
     private static ModelExplorer FromModel(
         ViewDataDictionary viewData,
-        IModelMetadataProvider metadataProvider)
+        IModelMetadataProvider metadataProvider
+    )
     {
         if (viewData == null)
         {
@@ -215,7 +231,10 @@ internal static class ExpressionMetadataProvider
         if (viewData.ModelMetadata.ModelType == typeof(object))
         {
             // Use common simple type rather than object so e.g. Editor() at least generates a TextBox.
-            var model = viewData.Model == null ? null : Convert.ToString(viewData.Model, CultureInfo.CurrentCulture);
+            var model =
+                viewData.Model == null
+                    ? null
+                    : Convert.ToString(viewData.Model, CultureInfo.CurrentCulture);
             return metadataProvider.GetModelExplorerForType(typeof(string), model);
         }
         else

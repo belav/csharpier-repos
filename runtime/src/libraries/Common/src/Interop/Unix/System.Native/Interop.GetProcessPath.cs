@@ -10,7 +10,11 @@ internal static partial class Interop
         /// <summary>
         /// Returns the full path to the executable for the current process, resolving symbolic links.
         /// </summary>
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetProcessPath", SetLastError = true)]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetProcessPath",
+            SetLastError = true
+        )]
         internal static extern string? GetProcessPath();
     }
 }

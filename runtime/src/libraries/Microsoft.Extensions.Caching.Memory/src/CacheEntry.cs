@@ -28,7 +28,9 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             Key = key ?? throw new ArgumentNullException(nameof(key));
             _cache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
-            _previous = memoryCache.TrackLinkedCacheEntries ? CacheEntryHelper.EnterScope(this) : null;
+            _previous = memoryCache.TrackLinkedCacheEntries
+                ? CacheEntryHelper.EnterScope(this)
+                : null;
             _state = new CacheEntryState(CacheItemPriority.Normal);
         }
 
@@ -53,7 +55,8 @@ namespace Microsoft.Extensions.Caching.Memory
                     throw new ArgumentOutOfRangeException(
                         nameof(AbsoluteExpirationRelativeToNow),
                         value,
-                        "The relative expiration value must be positive.");
+                        "The relative expiration value must be positive."
+                    );
                 }
 
                 _absoluteExpirationRelativeToNow = value;
@@ -74,7 +77,8 @@ namespace Microsoft.Extensions.Caching.Memory
                     throw new ArgumentOutOfRangeException(
                         nameof(SlidingExpiration),
                         value,
-                        "The sliding expiration value must be positive.");
+                        "The sliding expiration value must be positive."
+                    );
                 }
 
                 _slidingExpiration = value;
@@ -89,13 +93,18 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <summary>
         /// Gets or sets the callbacks will be fired after the cache entry is evicted from the cache.
         /// </summary>
-        public IList<PostEvictionCallbackRegistration> PostEvictionCallbacks => GetOrCreateTokens().PostEvictionCallbacks;
+        public IList<PostEvictionCallbackRegistration> PostEvictionCallbacks =>
+            GetOrCreateTokens().PostEvictionCallbacks;
 
         /// <summary>
         /// Gets or sets the priority for keeping the cache entry in the cache during a
         /// memory pressure triggered cleanup. The default is <see cref="CacheItemPriority.Normal"/>.
         /// </summary>
-        public CacheItemPriority Priority { get => _state.Priority; set => _state.Priority = value; }
+        public CacheItemPriority Priority
+        {
+            get => _state.Priority;
+            set => _state.Priority = value;
+        }
 
         /// <summary>
         /// Gets or sets the size of the cache entry value.
@@ -107,7 +116,11 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(value)} must be non-negative.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        $"{nameof(value)} must be non-negative."
+                    );
                 }
 
                 _size = value;
@@ -128,7 +141,11 @@ namespace Microsoft.Extensions.Caching.Memory
 
         internal DateTimeOffset LastAccessed { get; set; }
 
-        internal EvictionReason EvictionReason { get => _state.EvictionReason; private set => _state.EvictionReason = value; }
+        internal EvictionReason EvictionReason
+        {
+            get => _state.EvictionReason;
+            private set => _state.EvictionReason = value;
+        }
 
         public void Dispose()
         {
@@ -159,10 +176,10 @@ namespace Microsoft.Extensions.Caching.Memory
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // added based on profiling
-        internal bool CheckExpired(in DateTimeOffset now)
-            => _state.IsExpired
-                || CheckForExpiredTime(now)
-                || (_tokens != null && _tokens.CheckForExpiredTokens(this));
+        internal bool CheckExpired(in DateTimeOffset now) =>
+            _state.IsExpired
+            || CheckForExpiredTime(now)
+            || (_tokens != null && _tokens.CheckForExpiredTokens(this));
 
         internal void SetExpired(EvictionReason reason)
         {
@@ -192,8 +209,7 @@ namespace Microsoft.Extensions.Caching.Memory
                     return true;
                 }
 
-                if (_slidingExpiration.HasValue
-                    && (offset - LastAccessed) >= _slidingExpiration)
+                if (_slidingExpiration.HasValue && (offset - LastAccessed) >= _slidingExpiration)
                 {
                     SetExpired(EvictionReason.Expired);
                     return true;
@@ -208,19 +224,26 @@ namespace Microsoft.Extensions.Caching.Memory
         private static void ExpirationTokensExpired(object obj)
         {
             // start a new thread to avoid issues with callbacks called from RegisterChangeCallback
-            Task.Factory.StartNew(state =>
-            {
-                var entry = (CacheEntry)state;
-                entry.SetExpired(EvictionReason.TokenExpired);
-                entry._cache.EntryExpired(entry);
-            }, obj, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task.Factory.StartNew(
+                state =>
+                {
+                    var entry = (CacheEntry)state;
+                    entry.SetExpired(EvictionReason.TokenExpired);
+                    entry._cache.EntryExpired(entry);
+                },
+                obj,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         internal void InvokeEvictionCallbacks() => _tokens?.InvokeEvictionCallbacks(this);
 
         // this simple check very often allows us to avoid expensive call to PropagateOptions(CacheEntryHelper.Current)
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // added based on profiling
-        internal bool CanPropagateOptions() => (_tokens != null && _tokens.CanPropagateTokens()) || AbsoluteExpiration.HasValue;
+        internal bool CanPropagateOptions() =>
+            (_tokens != null && _tokens.CanPropagateTokens()) || AbsoluteExpiration.HasValue;
 
         internal void PropagateOptions(CacheEntry parent)
         {
@@ -235,7 +258,10 @@ namespace Microsoft.Extensions.Caching.Memory
 
             if (AbsoluteExpiration.HasValue)
             {
-                if (!parent.AbsoluteExpiration.HasValue || AbsoluteExpiration < parent.AbsoluteExpiration)
+                if (
+                    !parent.AbsoluteExpiration.HasValue
+                    || AbsoluteExpiration < parent.AbsoluteExpiration
+                )
                 {
                     parent.AbsoluteExpiration = AbsoluteExpiration;
                 }

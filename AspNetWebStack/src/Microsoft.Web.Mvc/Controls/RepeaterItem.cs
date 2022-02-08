@@ -33,7 +33,11 @@ namespace Microsoft.Web.Mvc.Controls
             get { return _itemIndex; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is intended to be settable for unit testing purposes.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is intended to be settable for unit testing purposes."
+        )]
         public ViewDataDictionary ViewData { get; set; }
     }
 }

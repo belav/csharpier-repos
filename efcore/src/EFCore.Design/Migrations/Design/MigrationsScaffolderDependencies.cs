@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IOperationReporter operationReporter,
             IDatabaseProvider databaseProvider,
             ISnapshotModelProcessor snapshotModelProcessor,
-            IMigrator migrator)
+            IMigrator migrator
+        )
         {
             CurrentContext = currentContext;
             Model = model;

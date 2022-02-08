@@ -8,13 +8,18 @@ using Microsoft.CodeAnalysis.Options;
 namespace Microsoft.CodeAnalysis.Editor
 {
     internal readonly record struct BraceMatchingOptions(
-        bool HighlightRelatedRegexComponentsUnderCursor)
+        bool HighlightRelatedRegexComponentsUnderCursor
+    )
     {
-        public static BraceMatchingOptions From(Project project)
-            => From(project.Solution.Options, project.Language);
+        public static BraceMatchingOptions From(Project project) =>
+            From(project.Solution.Options, project.Language);
 
-        public static BraceMatchingOptions From(OptionSet options, string language)
-            => new(
-                HighlightRelatedRegexComponentsUnderCursor: options.GetOption(RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor, language));
+        public static BraceMatchingOptions From(OptionSet options, string language) =>
+            new(
+                HighlightRelatedRegexComponentsUnderCursor: options.GetOption(
+                    RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor,
+                    language
+                )
+            );
     }
 }

@@ -19,7 +19,8 @@ public class ModelValidationContextBase
     public ModelValidationContextBase(
         ActionContext actionContext,
         ModelMetadata modelMetadata,
-        IModelMetadataProvider metadataProvider)
+        IModelMetadataProvider metadataProvider
+    )
     {
         if (actionContext == null)
         {

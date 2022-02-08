@@ -22,7 +22,9 @@ public class ServerTests
     public async Task Server_TokenRegisteredAfterClientDisconnects_CallCanceled()
     {
         var interval = TimeSpan.FromSeconds(1);
-        var canceled = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var canceled = new TaskCompletionSource<int>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         string address;
         using (var server = Utilities.CreateHttpServer(out address))
@@ -31,7 +33,9 @@ public class ServerTests
             {
                 var responseTask = client.GetAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
 
                 client.CancelPendingRequests();
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => responseTask);
@@ -51,7 +55,9 @@ public class ServerTests
     public async Task Server_TokenRegisteredAfterResponseSent_Success()
     {
         var interval = TimeSpan.FromSeconds(1);
-        var canceled = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var canceled = new TaskCompletionSource<int>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         string address;
         using (var server = Utilities.CreateHttpServer(out address))
@@ -60,7 +66,9 @@ public class ServerTests
             {
                 var responseTask = client.GetAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 context.Dispose();
 
                 var response = await responseTask;
@@ -81,7 +89,9 @@ public class ServerTests
     public async Task Server_ConnectionCloseHeader_CancellationTokenFires()
     {
         var interval = TimeSpan.FromSeconds(1);
-        var canceled = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var canceled = new TaskCompletionSource<int>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         string address;
         using (var server = Utilities.CreateHttpServer(out address))
@@ -136,7 +146,10 @@ public class ServerTests
 
         var exception = Assert.Throws<HttpSysException>(() => listener.Start());
 
-        Assert.Equal((int)UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS, exception.ErrorCode);
+        Assert.Equal(
+            (int)UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS,
+            exception.ErrorCode
+        );
         Assert.Contains($"The prefix '{address1}' is already registered.", exception.Message);
     }
 

@@ -27,10 +27,22 @@ namespace System.Runtime.Serialization.Json
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public object ReflectionReadClass(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContextComplexJson? context, XmlDictionaryString emptyDictionaryString, XmlDictionaryString[]? memberNames)
+        public object ReflectionReadClass(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContextComplexJson? context,
+            XmlDictionaryString emptyDictionaryString,
+            XmlDictionaryString[]? memberNames
+        )
         {
             Debug.Assert(_classContract != null);
-            return _reflectionReader.ReflectionReadClass(xmlReader, context, memberNames, null /*memberNamespaces*/, _classContract);
+            return _reflectionReader.ReflectionReadClass(
+                xmlReader,
+                context,
+                memberNames,
+                null /*memberNamespaces*/
+                ,
+                _classContract
+            );
         }
     }
 
@@ -39,22 +51,55 @@ namespace System.Runtime.Serialization.Json
         private readonly ReflectionReader _reflectionReader = new ReflectionJsonReader();
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public object ReflectionReadCollection(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContextComplexJson context, XmlDictionaryString emptyDictionaryString, XmlDictionaryString itemName, CollectionDataContract collectionContract)
+        public object ReflectionReadCollection(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContextComplexJson context,
+            XmlDictionaryString emptyDictionaryString,
+            XmlDictionaryString itemName,
+            CollectionDataContract collectionContract
+        )
         {
-            return _reflectionReader.ReflectionReadCollection(xmlReader, context, itemName, emptyDictionaryString/*itemNamespace*/, collectionContract);
+            return _reflectionReader.ReflectionReadCollection(
+                xmlReader,
+                context,
+                itemName,
+                emptyDictionaryString /*itemNamespace*/
+                ,
+                collectionContract
+            );
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public void ReflectionReadGetOnlyCollection(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContextComplexJson context, XmlDictionaryString emptyDictionaryString, XmlDictionaryString itemName, CollectionDataContract collectionContract)
+        public void ReflectionReadGetOnlyCollection(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContextComplexJson context,
+            XmlDictionaryString emptyDictionaryString,
+            XmlDictionaryString itemName,
+            CollectionDataContract collectionContract
+        )
         {
-            _reflectionReader.ReflectionReadGetOnlyCollection(xmlReader, context, itemName, emptyDictionaryString/*itemNamespace*/, collectionContract);
+            _reflectionReader.ReflectionReadGetOnlyCollection(
+                xmlReader,
+                context,
+                itemName,
+                emptyDictionaryString /*itemNamespace*/
+                ,
+                collectionContract
+            );
         }
     }
 
     internal sealed class ReflectionJsonReader : ReflectionReader
     {
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        protected override void ReflectionReadMembers(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, XmlDictionaryString[] memberNames, XmlDictionaryString[]? memberNamespaces, ClassDataContract classContract, ref object obj)
+        protected override void ReflectionReadMembers(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString[] memberNames,
+            XmlDictionaryString[]? memberNamespaces,
+            ClassDataContract classContract,
+            ref object obj
+        )
         {
             var jsonContext = context as XmlObjectSerializerReadContextComplexJson;
             Debug.Assert(jsonContext != null);
@@ -82,14 +127,25 @@ namespace System.Runtime.Serialization.Json
                     return;
                 }
 
-                memberIndex = jsonContext.GetJsonMemberIndex(xmlReader, memberNames, memberIndex, extensionData);
+                memberIndex = jsonContext.GetJsonMemberIndex(
+                    xmlReader,
+                    memberNames,
+                    memberIndex,
+                    extensionData
+                );
                 // GetMemberIndex returns memberNames.Length if member not found
                 if (memberIndex < members.Length)
                 {
-                    ReflectionReadMember(xmlReader, context, classContract, ref obj, memberIndex, members);
+                    ReflectionReadMember(
+                        xmlReader,
+                        context,
+                        classContract,
+                        ref obj,
+                        memberIndex,
+                        members
+                    );
                 }
             }
-
         }
 
         protected override string GetClassContractNamespace(ClassDataContract classContract)
@@ -97,59 +153,94 @@ namespace System.Runtime.Serialization.Json
             return string.Empty;
         }
 
-        protected override string GetCollectionContractItemName(CollectionDataContract collectionContract)
+        protected override string GetCollectionContractItemName(
+            CollectionDataContract collectionContract
+        )
         {
             return JsonGlobals.itemString;
         }
 
-        protected override string GetCollectionContractNamespace(CollectionDataContract collectionContract)
+        protected override string GetCollectionContractNamespace(
+            CollectionDataContract collectionContract
+        )
         {
             return string.Empty;
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        protected override object? ReflectionReadDictionaryItem(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, CollectionDataContract collectionContract)
+        protected override object? ReflectionReadDictionaryItem(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            CollectionDataContract collectionContract
+        )
         {
             var jsonContext = context as XmlObjectSerializerReadContextComplexJson;
             Debug.Assert(jsonContext != null);
-            Debug.Assert(collectionContract.Kind == CollectionKind.Dictionary || collectionContract.Kind == CollectionKind.GenericDictionary);
+            Debug.Assert(
+                collectionContract.Kind == CollectionKind.Dictionary
+                    || collectionContract.Kind == CollectionKind.GenericDictionary
+            );
             context.ReadAttributes(xmlReader);
 
-            var itemContract = XmlObjectSerializerWriteContextComplexJson.GetRevisedItemContract(collectionContract.ItemContract);
+            var itemContract = XmlObjectSerializerWriteContextComplexJson.GetRevisedItemContract(
+                collectionContract.ItemContract
+            );
             return DataContractJsonSerializer.ReadJsonValue(itemContract, xmlReader, jsonContext);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        protected override bool ReflectionReadSpecialCollection(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, CollectionDataContract collectionContract, object? resultCollection)
+        protected override bool ReflectionReadSpecialCollection(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            CollectionDataContract collectionContract,
+            object? resultCollection
+        )
         {
             var jsonContext = context as XmlObjectSerializerReadContextComplexJson;
             Debug.Assert(jsonContext != null);
 
-            bool canReadSimpleDictionary = collectionContract.Kind == CollectionKind.Dictionary
-                                        || collectionContract.Kind == CollectionKind.GenericDictionary;
+            bool canReadSimpleDictionary =
+                collectionContract.Kind == CollectionKind.Dictionary
+                || collectionContract.Kind == CollectionKind.GenericDictionary;
             if (canReadSimpleDictionary && jsonContext.UseSimpleDictionaryFormat)
             {
-                ReadSimpleDictionary(xmlReader, context, collectionContract, collectionContract.ItemType, resultCollection);
+                ReadSimpleDictionary(
+                    xmlReader,
+                    context,
+                    collectionContract,
+                    collectionContract.ItemType,
+                    resultCollection
+                );
             }
 
             return false;
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        private void ReadSimpleDictionary(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, CollectionDataContract collectionContract, Type keyValueType, object? dictionary)
+        private void ReadSimpleDictionary(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            CollectionDataContract collectionContract,
+            Type keyValueType,
+            object? dictionary
+        )
         {
             Type[] keyValueTypes = keyValueType.GetGenericArguments();
             Type keyType = keyValueTypes[0];
             Type valueType = keyValueTypes[1];
 
             int keyTypeNullableDepth = 0;
-            while (keyType.IsGenericType && keyType.GetGenericTypeDefinition() == Globals.TypeOfNullable)
+            while (
+                keyType.IsGenericType
+                && keyType.GetGenericTypeDefinition() == Globals.TypeOfNullable
+            )
             {
                 keyTypeNullableDepth++;
                 keyType = keyType.GetGenericArguments()[0];
             }
 
-            ClassDataContract keyValueDataContract = (ClassDataContract)collectionContract.ItemContract;
+            ClassDataContract keyValueDataContract =
+                (ClassDataContract)collectionContract.ItemContract;
             DataContract keyDataContract = keyValueDataContract.Members![0].MemberTypeContract;
 
             KeyParseMode keyParseMode = KeyParseMode.Fail;
@@ -171,10 +262,13 @@ namespace System.Runtime.Serialization.Json
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                        SR.Format(SR.KeyTypeCannotBeParsedInSimpleDictionary,
+                        SR.Format(
+                            SR.KeyTypeCannotBeParsedInSimpleDictionary,
                             DataContract.GetClrTypeFullName(collectionContract.UnderlyingType),
-                            DataContract.GetClrTypeFullName(keyType))
-                    ));
+                            DataContract.GetClrTypeFullName(keyType)
+                        )
+                    )
+                );
             }
 
             while (true)
@@ -186,11 +280,16 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (nodeType != XmlNodeType.Element)
                 {
-                    throw XmlObjectSerializerReadContext.CreateUnexpectedStateException(XmlNodeType.Element, xmlReader);
+                    throw XmlObjectSerializerReadContext.CreateUnexpectedStateException(
+                        XmlNodeType.Element,
+                        xmlReader
+                    );
                 }
 
                 context.IncrementItemCount(1);
-                string keyString = XmlObjectSerializerReadContextComplexJson.GetJsonMemberName(xmlReader);
+                string keyString = XmlObjectSerializerReadContextComplexJson.GetJsonMemberName(
+                    xmlReader
+                );
                 object pairKey;
 
                 if (keyParseMode == KeyParseMode.UsingParseEnum)
@@ -225,10 +324,18 @@ namespace System.Runtime.Serialization.Json
 
                 if (keyTypeNullableDepth > 0)
                 {
-                    throw new NotImplementedException(SR.Format(SR.MustBeGreaterThanZero, keyTypeNullableDepth));
+                    throw new NotImplementedException(
+                        SR.Format(SR.MustBeGreaterThanZero, keyTypeNullableDepth)
+                    );
                 }
 
-                object? pairValue = ReflectionReadValue(xmlReader, context, valueType, string.Empty, string.Empty);
+                object? pairValue = ReflectionReadValue(
+                    xmlReader,
+                    context,
+                    valueType,
+                    string.Empty,
+                    string.Empty
+                );
 
                 Debug.Assert(dictionary != null);
                 ((IDictionary)dictionary).Add(pairKey, pairValue);

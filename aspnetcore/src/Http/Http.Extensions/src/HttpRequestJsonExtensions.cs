@@ -29,10 +29,15 @@ public static class HttpRequestJsonExtensions
     /// <param name="request">The request to read from.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static ValueTask<TValue?> ReadFromJsonAsync<TValue>(
         this HttpRequest request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         return request.ReadFromJsonAsync<TValue>(options: null, cancellationToken);
     }
@@ -46,11 +51,16 @@ public static class HttpRequestJsonExtensions
     /// <param name="options">The serializer options use when deserializing the content.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static async ValueTask<TValue?> ReadFromJsonAsync<TValue>(
         this HttpRequest request,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (request == null)
         {
@@ -69,7 +79,11 @@ public static class HttpRequestJsonExtensions
 
         try
         {
-            return await JsonSerializer.DeserializeAsync<TValue>(inputStream, options, cancellationToken);
+            return await JsonSerializer.DeserializeAsync<TValue>(
+                inputStream,
+                options,
+                cancellationToken
+            );
         }
         finally
         {
@@ -88,11 +102,16 @@ public static class HttpRequestJsonExtensions
     /// <param name="type">The type of object to read.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static ValueTask<object?> ReadFromJsonAsync(
         this HttpRequest request,
         Type type,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         return request.ReadFromJsonAsync(type, options: null, cancellationToken);
     }
@@ -106,12 +125,17 @@ public static class HttpRequestJsonExtensions
     /// <param name="options">The serializer options use when deserializing the content.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static async ValueTask<object?> ReadFromJsonAsync(
         this HttpRequest request,
         Type type,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (request == null)
         {
@@ -134,7 +158,12 @@ public static class HttpRequestJsonExtensions
 
         try
         {
-            return await JsonSerializer.DeserializeAsync(inputStream, type, options, cancellationToken);
+            return await JsonSerializer.DeserializeAsync(
+                inputStream,
+                type,
+                options,
+                cancellationToken
+            );
         }
         finally
         {
@@ -185,26 +214,37 @@ public static class HttpRequestJsonExtensions
         return false;
     }
 
-
     private static JsonSerializerOptions ResolveSerializerOptions(HttpContext httpContext)
     {
         // Attempt to resolve options from DI then fallback to default options
-        return httpContext.RequestServices?.GetService<IOptions<JsonOptions>>()?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
+        return httpContext.RequestServices
+                ?.GetService<IOptions<JsonOptions>>()
+                ?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
     }
 
     private static InvalidOperationException CreateContentTypeError(HttpRequest request)
     {
-        return new InvalidOperationException($"Unable to read the request as JSON because the request content type '{request.ContentType}' is not a known JSON content type.");
+        return new InvalidOperationException(
+            $"Unable to read the request as JSON because the request content type '{request.ContentType}' is not a known JSON content type."
+        );
     }
 
-    private static (Stream inputStream, bool usesTranscodingStream) GetInputStream(HttpContext httpContext, Encoding? encoding)
+    private static (Stream inputStream, bool usesTranscodingStream) GetInputStream(
+        HttpContext httpContext,
+        Encoding? encoding
+    )
     {
         if (encoding == null || encoding.CodePage == Encoding.UTF8.CodePage)
         {
             return (httpContext.Request.Body, false);
         }
 
-        var inputStream = Encoding.CreateTranscodingStream(httpContext.Request.Body, encoding, Encoding.UTF8, leaveOpen: true);
+        var inputStream = Encoding.CreateTranscodingStream(
+            httpContext.Request.Body,
+            encoding,
+            Encoding.UTF8,
+            leaveOpen: true
+        );
         return (inputStream, true);
     }
 
@@ -224,7 +264,10 @@ public static class HttpRequestJsonExtensions
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException($"Unable to read the request as JSON because the request content type charset '{charset}' is not a known encoding.", ex);
+            throw new InvalidOperationException(
+                $"Unable to read the request as JSON because the request content type charset '{charset}' is not a known encoding.",
+                ex
+            );
         }
     }
 }

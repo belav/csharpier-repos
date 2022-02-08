@@ -28,20 +28,19 @@ namespace Microsoft.CodeAnalysis
         // In a case where we are wrapping a token, this is the token's parent.
         private readonly SyntaxNode? _nodeOrParent;
 
-        // Green node for the token. 
+        // Green node for the token.
         private readonly GreenNode? _token;
 
         // Used in both node and token cases.
         // When we have a node, _position == _nodeOrParent.Position.
         private readonly int _position;
 
-        // Index of the token among parent's children. 
+        // Index of the token among parent's children.
         // This field only makes sense if this is a token.
         // For regular nodes it is set to -1 to distinguish from default(SyntaxToken)
         private readonly int _tokenIndex;
 
-        internal SyntaxNodeOrToken(SyntaxNode node)
-            : this()
+        internal SyntaxNodeOrToken(SyntaxNode node) : this()
         {
             Debug.Assert(!node.Green.IsList, "node cannot be a list");
             _position = node.Position;
@@ -52,7 +51,10 @@ namespace Microsoft.CodeAnalysis
         internal SyntaxNodeOrToken(SyntaxNode? parent, GreenNode? token, int position, int index)
         {
             Debug.Assert(parent == null || !parent.Green.IsList, "parent cannot be a list");
-            Debug.Assert(token != null || (parent == null && position == 0 && index == 0), "parts must form a token");
+            Debug.Assert(
+                token != null || (parent == null && position == 0 && index == 0),
+                "parts must form a token"
+            );
             Debug.Assert(token == null || token.IsToken, "token must be a token");
             Debug.Assert(index >= 0, "index must not be negative");
             Debug.Assert(parent == null || token != null, "null token cannot have parent");
@@ -436,7 +438,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Determines whether the underlying node or token or any of its descendant nodes, tokens or trivia have any
-        /// diagnostics on them. 
+        /// diagnostics on them.
         /// </summary>
         public bool ContainsDiagnostics
         {
@@ -458,7 +460,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Gets a list of all the diagnostics in either the sub tree that has this node as its root or
-        /// associated with this token and its related trivia. 
+        /// associated with this token and its related trivia.
         /// This method does not filter diagnostics based on #pragmas and compiler options
         /// like nowarn, warnaserror etc.
         /// </summary>
@@ -476,7 +478,6 @@ namespace Microsoft.CodeAnalysis
 
             return SpecializedCollections.EmptyEnumerable<Diagnostic>();
         }
-
 
         /// <summary>
         /// Determines whether the underlying node or token has any descendant preprocessor directives.
@@ -499,7 +500,7 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        #region Annotations 
+        #region Annotations
         /// <summary>
         /// Determines whether this node or token (or any sub node, token or trivia) as annotations.
         /// </summary>
@@ -622,7 +623,9 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a new node or token identical to this one with the specified annotations.
         /// </summary>
-        public SyntaxNodeOrToken WithAdditionalAnnotations(IEnumerable<SyntaxAnnotation> annotations)
+        public SyntaxNodeOrToken WithAdditionalAnnotations(
+            IEnumerable<SyntaxAnnotation> annotations
+        )
         {
             if (annotations == null)
             {
@@ -701,12 +704,22 @@ namespace Microsoft.CodeAnalysis
         {
             // index replaces position to ensure equality.  Assert if offset affects equality.
             Debug.Assert(
-                (_nodeOrParent == other._nodeOrParent && _token == other._token && _position == other._position && _tokenIndex == other._tokenIndex) ==
-                (_nodeOrParent == other._nodeOrParent && _token == other._token && _tokenIndex == other._tokenIndex));
+                (
+                    _nodeOrParent == other._nodeOrParent
+                    && _token == other._token
+                    && _position == other._position
+                    && _tokenIndex == other._tokenIndex
+                )
+                    == (
+                        _nodeOrParent == other._nodeOrParent
+                        && _token == other._token
+                        && _tokenIndex == other._tokenIndex
+                    )
+            );
 
-            return _nodeOrParent == other._nodeOrParent &&
-                   _token == other._token &&
-                   _tokenIndex == other._tokenIndex;
+            return _nodeOrParent == other._nodeOrParent
+                && _token == other._token
+                && _tokenIndex == other._tokenIndex;
         }
 
         /// <summary>
@@ -755,14 +768,15 @@ namespace Microsoft.CodeAnalysis
             var thisUnderlying = this.UnderlyingNode;
             var otherUnderlying = other.UnderlyingNode;
 
-            return (thisUnderlying == otherUnderlying) || (thisUnderlying != null && thisUnderlying.IsEquivalentTo(otherUnderlying));
+            return (thisUnderlying == otherUnderlying)
+                || (thisUnderlying != null && thisUnderlying.IsEquivalentTo(otherUnderlying));
         }
 
         /// <summary>
         /// See <see cref="SyntaxNode.IsIncrementallyIdenticalTo"/> and <see cref="SyntaxToken.IsIncrementallyIdenticalTo"/>.
         /// </summary>
-        public bool IsIncrementallyIdenticalTo(SyntaxNodeOrToken other)
-            => this.UnderlyingNode != null && this.UnderlyingNode == other.UnderlyingNode;
+        public bool IsIncrementallyIdenticalTo(SyntaxNodeOrToken other) =>
+            this.UnderlyingNode != null && this.UnderlyingNode == other.UnderlyingNode;
 
         /// <summary>
         /// Returns a new <see cref="SyntaxNodeOrToken"/> that wraps the supplied token.
@@ -799,9 +813,7 @@ namespace Microsoft.CodeAnalysis
         /// </returns>
         public static implicit operator SyntaxNodeOrToken(SyntaxNode? node)
         {
-            return node is object
-                ? new SyntaxNodeOrToken(node)
-                : default;
+            return node is object ? new SyntaxNodeOrToken(node) : default;
         }
 
         /// <summary>
@@ -847,8 +859,11 @@ namespace Microsoft.CodeAnalysis
             return directives ?? SpecializedCollections.EmptyList<TDirective>();
         }
 
-        private static void GetDirectives<TDirective>(in SyntaxNodeOrToken node, Func<TDirective, bool>? filter, ref List<TDirective>? directives)
-            where TDirective : SyntaxNode
+        private static void GetDirectives<TDirective>(
+            in SyntaxNodeOrToken node,
+            Func<TDirective, bool>? filter,
+            ref List<TDirective>? directives
+        ) where TDirective : SyntaxNode
         {
             if (node._token != null && node.AsToken() is var token && token.ContainsDirectives)
             {
@@ -861,22 +876,35 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static void GetDirectives<TDirective>(SyntaxNode node, Func<TDirective, bool>? filter, ref List<TDirective>? directives)
-            where TDirective : SyntaxNode
+        private static void GetDirectives<TDirective>(
+            SyntaxNode node,
+            Func<TDirective, bool>? filter,
+            ref List<TDirective>? directives
+        ) where TDirective : SyntaxNode
         {
-            foreach (var trivia in node.DescendantTrivia(node => node.ContainsDirectives, descendIntoTrivia: true))
+            foreach (
+                var trivia in node.DescendantTrivia(
+                    node => node.ContainsDirectives,
+                    descendIntoTrivia: true
+                )
+            )
             {
                 _ = GetDirectivesInTrivia(trivia, filter, ref directives);
             }
         }
 
-        private static bool GetDirectivesInTrivia<TDirective>(in SyntaxTrivia trivia, Func<TDirective, bool>? filter, ref List<TDirective>? directives)
-            where TDirective : SyntaxNode
+        private static bool GetDirectivesInTrivia<TDirective>(
+            in SyntaxTrivia trivia,
+            Func<TDirective, bool>? filter,
+            ref List<TDirective>? directives
+        ) where TDirective : SyntaxNode
         {
             if (trivia.IsDirective)
             {
-                if (trivia.GetStructure() is TDirective directive &&
-                    filter?.Invoke(directive) != false)
+                if (
+                    trivia.GetStructure() is TDirective directive
+                    && filter?.Invoke(directive) != false
+                )
                 {
                     if (directives == null)
                     {
@@ -891,12 +919,18 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        private static void GetDirectives<TDirective>(in SyntaxTriviaList trivia, Func<TDirective, bool>? filter, ref List<TDirective>? directives)
-            where TDirective : SyntaxNode
+        private static void GetDirectives<TDirective>(
+            in SyntaxTriviaList trivia,
+            Func<TDirective, bool>? filter,
+            ref List<TDirective>? directives
+        ) where TDirective : SyntaxNode
         {
             foreach (var tr in trivia)
             {
-                if (!GetDirectivesInTrivia(tr, filter, ref directives) && tr.GetStructure() is SyntaxNode node)
+                if (
+                    !GetDirectivesInTrivia(tr, filter, ref directives)
+                    && tr.GetStructure() is SyntaxNode node
+                )
                 {
                     GetDirectives(node, filter, ref directives);
                 }
@@ -972,15 +1006,15 @@ namespace Microsoft.CodeAnalysis
             var siblings = parent.ChildNodesAndTokens();
 
             return siblings.Count < 8
-                ? GetNextSiblingFromStart(siblings)
-                : GetNextSiblingWithSearch(siblings);
+              ? GetNextSiblingFromStart(siblings)
+              : GetNextSiblingWithSearch(siblings);
         }
 
         public SyntaxNodeOrToken GetPreviousSibling()
         {
             if (this.Parent != null)
             {
-                // walk reverse in parent's child list until we find ourself 
+                // walk reverse in parent's child list until we find ourself
                 // and then return the next child
                 var returnNext = false;
                 foreach (var child in this.Parent.ChildNodesAndTokens().Reverse())

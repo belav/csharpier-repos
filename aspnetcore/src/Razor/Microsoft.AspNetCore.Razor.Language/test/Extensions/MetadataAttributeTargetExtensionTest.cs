@@ -31,10 +31,11 @@ public class MetadataAttributeTargetExtensionTest
         // Assert
         var csharp = context.CodeWriter.GenerateCode();
         Assert.Equal(
-@"[assembly: global::TestItem(typeof(Foo.Bar), @""test"", @""Foo/Bar"")]
+            @"[assembly: global::TestItem(typeof(Foo.Bar), @""test"", @""Foo/Bar"")]
 ",
             csharp,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [Fact]
@@ -60,10 +61,11 @@ public class MetadataAttributeTargetExtensionTest
         // Assert
         var csharp = context.CodeWriter.GenerateCode();
         Assert.Equal(
-@"[global::TestChecksum(@""SHA1"", @""74657374"", @""Foo/Bar"")]
+            @"[global::TestChecksum(@""SHA1"", @""74657374"", @""Foo/Bar"")]
 ",
             csharp,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [Fact]
@@ -88,9 +90,10 @@ public class MetadataAttributeTargetExtensionTest
         // Assert
         var csharp = context.CodeWriter.GenerateCode().Trim();
         Assert.Equal(
-"[global::TestItemMetadata(\"key\", \"value\")]",
+            "[global::TestItemMetadata(\"key\", \"value\")]",
             csharp,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [Fact]
@@ -115,8 +118,9 @@ public class MetadataAttributeTargetExtensionTest
         // Assert
         var csharp = context.CodeWriter.GenerateCode().Trim();
         Assert.Equal(
-"[global::TestItemMetadata(\"\\\"test\\\" key\", \"\\\"test\\\" value\")]",
+            "[global::TestItemMetadata(\"\\\"test\\\" key\", \"\\\"test\\\" value\")]",
             csharp,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 }

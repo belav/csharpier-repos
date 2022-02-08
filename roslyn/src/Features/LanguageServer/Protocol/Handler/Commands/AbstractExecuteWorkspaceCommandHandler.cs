@@ -8,7 +8,8 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Commands
 {
-    internal abstract class AbstractExecuteWorkspaceCommandHandler : IRequestHandler<ExecuteCommandParams, object>
+    internal abstract class AbstractExecuteWorkspaceCommandHandler
+        : IRequestHandler<ExecuteCommandParams, object>
     {
         public string Method => GetRequestNameForCommandName(Command);
 
@@ -17,10 +18,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Commands
         public abstract bool MutatesSolutionState { get; }
         public abstract bool RequiresLSPSolution { get; }
 
-        public abstract TextDocumentIdentifier? GetTextDocumentIdentifier(ExecuteCommandParams request);
+        public abstract TextDocumentIdentifier? GetTextDocumentIdentifier(
+            ExecuteCommandParams request
+        );
 
-        public abstract Task<object> HandleRequestAsync(ExecuteCommandParams request, RequestContext context, CancellationToken cancellationToken);
+        public abstract Task<object> HandleRequestAsync(
+            ExecuteCommandParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        );
 
-        public static string GetRequestNameForCommandName(string commandName) => $"{Methods.WorkspaceExecuteCommandName}/{commandName}";
+        public static string GetRequestNameForCommandName(string commandName) =>
+            $"{Methods.WorkspaceExecuteCommandName}/{commandName}";
     }
 }

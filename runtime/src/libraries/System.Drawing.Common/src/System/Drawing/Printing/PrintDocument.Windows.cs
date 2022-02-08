@@ -8,7 +8,11 @@ namespace System.Drawing.Printing
     /// <summary>
     /// Defines a reusable object that sends output to the printer.
     /// </summary>
-    [DefaultProperty("DocumentName"), DefaultEvent("PrintPage"), SRDescription(nameof(SR.PrintDocumentDesc))]
+    [
+        DefaultProperty("DocumentName"),
+        DefaultEvent("PrintPage"),
+        SRDescription(nameof(SR.PrintDocumentDesc))
+    ]
     public class PrintDocument : Component
     {
         private string _documentName = "document";
@@ -38,9 +42,9 @@ namespace System.Drawing.Printing
         /// Gets or sets the default page settings for the document being printed.
         /// </summary>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        SRDescription(nameof(SR.PDOCdocumentPageSettingsDescr))
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            SRDescription(nameof(SR.PDOCdocumentPageSettingsDescr))
         ]
         public PageSettings DefaultPageSettings
         {
@@ -58,14 +62,10 @@ namespace System.Drawing.Printing
         /// Gets or sets the name to display to the user while printing the document; for example, in a print status
         /// dialog or a printer queue.
         /// </summary>
-        [
-        DefaultValue("document"),
-        SRDescription(nameof(SR.PDOCdocumentNameDescr))
-        ]
+        [DefaultValue("document"), SRDescription(nameof(SR.PDOCdocumentNameDescr))]
         public string DocumentName
         {
             get { return _documentName; }
-
             set
             {
                 if (value == null)
@@ -79,29 +79,20 @@ namespace System.Drawing.Printing
         // the user-specified margins of the page.
         // If false, the graphics origin is at the top-left
         // corner of the printable area of the page.
-        [
-        DefaultValue(false),
-        SRDescription(nameof(SR.PDOCoriginAtMarginsDescr))
-        ]
+        [DefaultValue(false), SRDescription(nameof(SR.PDOCoriginAtMarginsDescr))]
         public bool OriginAtMargins
         {
-            get
-            {
-                return _originAtMargins;
-            }
-            set
-            {
-                _originAtMargins = value;
-            }
+            get { return _originAtMargins; }
+            set { _originAtMargins = value; }
         }
 
         /// <summary>
         /// Gets or sets the <see cref='Printing.PrintController'/>  that guides the printing process.
         /// </summary>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        SRDescription(nameof(SR.PDOCprintControllerDescr))
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            SRDescription(nameof(SR.PDOCprintControllerDescr))
         ]
         public PrintController PrintController
         {
@@ -113,19 +104,16 @@ namespace System.Drawing.Printing
                 }
                 return _printController;
             }
-            set
-            {
-                _printController = value;
-            }
+            set { _printController = value; }
         }
 
         /// <summary>
         /// Gets or sets the printer on which the document is printed.
         /// </summary>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        SRDescription(nameof(SR.PDOCprinterSettingsDescr))
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            SRDescription(nameof(SR.PDOCprinterSettingsDescr))
         ]
         public PrinterSettings PrinterSettings
         {
@@ -149,14 +137,8 @@ namespace System.Drawing.Printing
         [SRDescription(nameof(SR.PDOCbeginPrintDescr))]
         public event PrintEventHandler BeginPrint
         {
-            add
-            {
-                _beginPrintHandler += value;
-            }
-            remove
-            {
-                _beginPrintHandler -= value;
-            }
+            add { _beginPrintHandler += value; }
+            remove { _beginPrintHandler -= value; }
         }
 
         /// <summary>
@@ -165,14 +147,8 @@ namespace System.Drawing.Printing
         [SRDescription(nameof(SR.PDOCendPrintDescr))]
         public event PrintEventHandler EndPrint
         {
-            add
-            {
-                _endPrintHandler += value;
-            }
-            remove
-            {
-                _endPrintHandler -= value;
-            }
+            add { _endPrintHandler += value; }
+            remove { _endPrintHandler -= value; }
         }
 
         /// <summary>
@@ -181,27 +157,15 @@ namespace System.Drawing.Printing
         [SRDescription(nameof(SR.PDOCprintPageDescr))]
         public event PrintPageEventHandler PrintPage
         {
-            add
-            {
-                _printPageHandler += value;
-            }
-            remove
-            {
-                _printPageHandler -= value;
-            }
+            add { _printPageHandler += value; }
+            remove { _printPageHandler -= value; }
         }
 
         [SRDescription(nameof(SR.PDOCqueryPageSettingsDescr))]
         public event QueryPageSettingsEventHandler QueryPageSettings
         {
-            add
-            {
-                _queryHandler += value;
-            }
-            remove
-            {
-                _queryHandler -= value;
-            }
+            add { _queryHandler += value; }
+            remove { _queryHandler -= value; }
         }
 
         /// <summary>

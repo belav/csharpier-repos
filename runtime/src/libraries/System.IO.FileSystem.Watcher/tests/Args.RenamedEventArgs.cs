@@ -12,7 +12,12 @@ namespace System.IO.Tests
         [InlineData(WatcherChangeTypes.All, "C:", "foo.txt", "bar.txt")]
         [InlineData((WatcherChangeTypes)0, "", "", "")]
         [InlineData((WatcherChangeTypes)0, "", null, null)]
-        public static void RenamedEventArgs_ctor(WatcherChangeTypes changeType, string directory, string name, string oldName)
+        public static void RenamedEventArgs_ctor(
+            WatcherChangeTypes changeType,
+            string directory,
+            string name,
+            string oldName
+        )
         {
             RenamedEventArgs args = new RenamedEventArgs(changeType, directory, name, oldName);
             Assert.Equal(changeType, args.ChangeType);
@@ -26,7 +31,12 @@ namespace System.IO.Tests
         [InlineData(WatcherChangeTypes.All, "C:", "foo.txt", "bar.txt")]
         [InlineData((WatcherChangeTypes)0, "", "", "")]
         [InlineData((WatcherChangeTypes)0, "", null, null)]
-        public static void RenamedEventArgs_ctor_OldFullPath(WatcherChangeTypes changeType, string directory, string name, string oldName)
+        public static void RenamedEventArgs_ctor_OldFullPath(
+            WatcherChangeTypes changeType,
+            string directory,
+            string name,
+            string oldName
+        )
         {
             RenamedEventArgs args = new RenamedEventArgs(changeType, directory, name, oldName);
             Assert.Equal(directory + Path.DirectorySeparatorChar + oldName, args.OldFullPath);
@@ -35,7 +45,9 @@ namespace System.IO.Tests
         [Fact]
         public static void RenamedEventArgs_ctor_Invalid()
         {
-            Assert.Throws<NullReferenceException>(() => new RenamedEventArgs((WatcherChangeTypes)0, null, string.Empty, string.Empty));
+            Assert.Throws<NullReferenceException>(
+                () => new RenamedEventArgs((WatcherChangeTypes)0, null, string.Empty, string.Empty)
+            );
         }
     }
 }

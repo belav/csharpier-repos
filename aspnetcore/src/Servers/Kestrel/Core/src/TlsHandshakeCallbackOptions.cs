@@ -19,7 +19,10 @@ public class TlsHandshakeCallbackOptions
     /// <summary>
     /// The callback to invoke per connection. This property is required.
     /// </summary>
-    public Func<TlsHandshakeCallbackContext, ValueTask<SslServerAuthenticationOptions>> OnConnection { get; set; } = default!;
+    public Func<
+        TlsHandshakeCallbackContext,
+        ValueTask<SslServerAuthenticationOptions>
+    > OnConnection { get; set; } = default!;
 
     /// <summary>
     /// Optional application state to flow to the <see cref="OnConnection"/> callback.
@@ -37,7 +40,10 @@ public class TlsHandshakeCallbackOptions
         {
             if (value <= TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveTimeSpanRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    CoreStrings.PositiveTimeSpanRequired
+                );
             }
             _handshakeTimeout = value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
         }

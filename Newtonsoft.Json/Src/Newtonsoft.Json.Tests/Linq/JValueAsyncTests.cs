@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JsonTextReader(new StringReader("9.9"))
                 {
                     FloatParseHandling = FloatParseHandling.Decimal
-                });
+                }
+            );
 
             Assert.AreEqual(9.9m, v.Value);
             Assert.AreEqual(typeof(decimal), v.Value.GetType());
@@ -62,7 +63,6 @@ namespace Newtonsoft.Json.Tests.Linq
         }
 
         private readonly Rate _rate = new Rate { Compoundings = 12.166666666666666666666666667m };
-
 
         [Test]
         public async Task ParseAndConvertDateTimeOffsetAsync()
@@ -93,14 +93,34 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ParseIsoTimeZonesAsync()
         {
-            DateTimeOffset expectedDate = new DateTimeOffset(2013, 08, 14, 4, 38, 31, TimeSpan.FromHours(12).Add(TimeSpan.FromMinutes(30)));
-            JsonTextReader reader = new JsonTextReader(new StringReader("'2013-08-14T04:38:31.000+1230'"));
+            DateTimeOffset expectedDate = new DateTimeOffset(
+                2013,
+                08,
+                14,
+                4,
+                38,
+                31,
+                TimeSpan.FromHours(12).Add(TimeSpan.FromMinutes(30))
+            );
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("'2013-08-14T04:38:31.000+1230'")
+            );
             reader.DateParseHandling = DateParseHandling.DateTimeOffset;
             JValue date = (JValue)await JToken.ReadFromAsync(reader);
             Assert.AreEqual(expectedDate, date.Value);
 
-            DateTimeOffset expectedDate2 = new DateTimeOffset(2013, 08, 14, 4, 38, 31, TimeSpan.FromHours(12));
-            JsonTextReader reader2 = new JsonTextReader(new StringReader("'2013-08-14T04:38:31.000+12'"));
+            DateTimeOffset expectedDate2 = new DateTimeOffset(
+                2013,
+                08,
+                14,
+                4,
+                38,
+                31,
+                TimeSpan.FromHours(12)
+            );
+            JsonTextReader reader2 = new JsonTextReader(
+                new StringReader("'2013-08-14T04:38:31.000+12'")
+            );
             reader2.DateParseHandling = DateParseHandling.DateTimeOffset;
             JValue date2 = (JValue)await JToken.ReadFromAsync(reader2);
             Assert.AreEqual(expectedDate2, date2.Value);

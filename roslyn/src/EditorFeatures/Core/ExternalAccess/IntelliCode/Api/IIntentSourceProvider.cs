@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode.Api
         /// </summary>
         /// <param name="context">the intents with the context in which the intent was found.</param>
         /// <returns>the edits that should be applied to the current snapshot.</returns>
-        Task<ImmutableArray<IntentSource>> ComputeIntentsAsync(IntentRequestContext context, CancellationToken cancellationToken = default);
+        Task<ImmutableArray<IntentSource>> ComputeIntentsAsync(
+            IntentRequestContext context,
+            CancellationToken cancellationToken = default
+        );
     }
 
     /// <summary>
@@ -55,7 +58,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode.Api
         /// </summary>
         public TextSpan PriorSelection { get; }
 
-        public IntentRequestContext(string intentName, SnapshotSpan currentSnapshotSpan, ImmutableArray<TextChange> textEditsToPrior, TextSpan priorSelection, string? intentData)
+        public IntentRequestContext(
+            string intentName,
+            SnapshotSpan currentSnapshotSpan,
+            ImmutableArray<TextChange> textEditsToPrior,
+            TextSpan priorSelection,
+            string? intentData
+        )
         {
             IntentName = intentName ?? throw new ArgumentNullException(nameof(intentName));
             IntentData = intentData;

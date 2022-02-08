@@ -16,7 +16,8 @@ namespace System.CommandLine.Parsing
             Token token,
             Dictionary<IArgument, ArgumentResult> _allArgumentResults,
             Dictionary<ICommand, CommandResult> _allCommandResults,
-            Dictionary<IOption, OptionResult> _allOptionResults) : base(command, token)
+            Dictionary<IOption, OptionResult> _allOptionResults
+        ) : base(command, token)
         {
             this._allArgumentResults = _allArgumentResults;
             this._allCommandResults = _allCommandResults;
@@ -76,11 +77,14 @@ namespace System.CommandLine.Parsing
                     break;
 
                 default:
-                    throw new ArgumentException($"Unsupported {nameof(SymbolResult)} type: {result.GetType()}");
+                    throw new ArgumentException(
+                        $"Unsupported {nameof(SymbolResult)} type: {result.GetType()}"
+                    );
             }
         }
 
-        internal IReadOnlyCollection<ArgumentResult> AllArgumentResults => _allArgumentResults.Values;
+        internal IReadOnlyCollection<ArgumentResult> AllArgumentResults =>
+            _allArgumentResults.Values;
 
         internal IReadOnlyCollection<OptionResult> AllOptionResults => _allOptionResults.Values;
     }

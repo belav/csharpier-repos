@@ -98,13 +98,22 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetByte(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data[i] = TestLibrary.Generator.GetByte();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld),
+                    ref Unsafe.As<Byte, byte>(ref _data[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Byte>>()
+                );
 
                 return testStruct;
             }
 
-            public void RunStructFldScenario(SimdScalarUnaryOpConvertTest__MoveMaskVector128Byte testClass)
+            public void RunStructFldScenario(
+                SimdScalarUnaryOpConvertTest__MoveMaskVector128Byte testClass
+            )
             {
                 var result = Sse2.MoveMask(_fld);
                 testClass.ValidateResult(_fld, result);
@@ -113,7 +122,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
 
         private static Byte[] _data = new Byte[Op1ElementCount];
 
@@ -125,18 +135,35 @@ namespace JIT.HardwareIntrinsics.X86
 
         static SimdScalarUnaryOpConvertTest__MoveMaskVector128Byte()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
         }
 
         public SimdScalarUnaryOpConvertTest__MoveMaskVector128Byte()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _fld), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _fld),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetByte(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetByte();
+            }
             _dataTable = new SimdScalarUnaryOpTest__DataTable<Byte>(_data, LargestVectorSize);
         }
 
@@ -148,9 +175,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Sse2.MoveMask(
-                Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr)
-            );
+            var result = Sse2.MoveMask(Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -159,9 +184,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Sse2.MoveMask(
-                Sse2.LoadVector128((Byte*)(_dataTable.inArrayPtr))
-            );
+            var result = Sse2.MoveMask(Sse2.LoadVector128((Byte*)(_dataTable.inArrayPtr)));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -170,9 +193,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_LoadAligned));
 
-            var result = Sse2.MoveMask(
-                Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr))
-            );
+            var result = Sse2.MoveMask(Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr)));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -181,10 +202,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse2).GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr)
-                                     });
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
+                .Invoke(null, new object[] { Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr) });
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
         }
@@ -193,10 +213,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2).GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadVector128((Byte*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
+                .Invoke(null, new object[] { Sse2.LoadVector128((Byte*)(_dataTable.inArrayPtr)) });
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
         }
@@ -205,10 +224,12 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse2).GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
+                .Invoke(
+                    null,
+                    new object[] { Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr)) }
+                );
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
         }
@@ -217,9 +238,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Sse2.MoveMask(
-                _clsVar
-            );
+            var result = Sse2.MoveMask(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -312,21 +331,37 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector128<Byte> firstOp, Int32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Byte> firstOp,
+            Int32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] inArray = new Byte[Op1ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref inArray[0]), firstOp);
             ValidateResult(inArray, result, method);
         }
 
-        private void ValidateResult(void* firstOp, Int32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* firstOp,
+            Int32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] inArray = new Byte[Op1ElementCount];
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
             ValidateResult(inArray, result, method);
         }
 
-        private void ValidateResult(Byte[] firstOp, Int32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Byte[] firstOp,
+            Int32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -337,8 +372,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Sse2)}.{nameof(Sse2.MoveMask)}<Int32>(Vector128<Byte>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Sse2)}.{nameof(Sse2.MoveMask)}<Int32>(Vector128<Byte>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

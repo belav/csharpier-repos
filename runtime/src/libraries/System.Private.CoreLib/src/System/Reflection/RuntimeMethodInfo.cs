@@ -11,16 +11,21 @@ namespace System.Reflection
     internal sealed partial class RuntimeMethodInfo : MethodInfo
     {
         [MethodImpl(MethodImplOptions.NoInlining)] // move lazy invocation flags population out of the hot path
-        private static InvocationFlags ComputeAndUpdateInvocationFlags(MethodInfo methodInfo, ref InvocationFlags flagsToUpdate)
+        private static InvocationFlags ComputeAndUpdateInvocationFlags(
+            MethodInfo methodInfo,
+            ref InvocationFlags flagsToUpdate
+        )
         {
             InvocationFlags invocationFlags = InvocationFlags.Unknown;
 
             Type? declaringType = methodInfo.DeclaringType;
 
-            if (methodInfo.ContainsGenericParameters // Method has unbound generics
+            if (
+                methodInfo.ContainsGenericParameters // Method has unbound generics
                 || IsDisallowedByRefType(methodInfo.ReturnType) // Return type is an invalid by-ref (i.e., by-ref-like or void*)
-                || (methodInfo.CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs // Managed varargs
-                )
+                || (methodInfo.CallingConvention & CallingConventions.VarArgs)
+                    == CallingConventions.VarArgs // Managed varargs
+            )
             {
                 invocationFlags = InvocationFlags.NoInvoke;
             }
@@ -95,12 +100,23 @@ namespace System.Reflection
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             // ContainsStackPointers means that the struct (either the declaring type or the return type)
             // contains pointers that point to the stack. This is either a ByRef or a TypedReference. These structs cannot
             // be boxed and thus cannot be invoked through reflection which only deals with boxed value type objects.
-            if ((InvocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)) != 0)
+            if (
+                (
+                    InvocationFlags
+                    & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)
+                ) != 0
+            )
             {
                 ThrowNoInvokeException();
             }
@@ -118,7 +134,14 @@ namespace System.Reflection
             Span<object?> arguments = default;
             if (actualCount != 0)
             {
-                arguments = CheckArguments(ref stackArgs, parameters!, binder, invokeAttr, culture, ArgumentTypes);
+                arguments = CheckArguments(
+                    ref stackArgs,
+                    parameters!,
+                    binder,
+                    invokeAttr,
+                    culture,
+                    ArgumentTypes
+                );
             }
 
             object? retValue = InvokeWorker(obj, invokeAttr, arguments);

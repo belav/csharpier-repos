@@ -32,8 +32,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public ArrayPropertyValues(InternalEntityEntry internalEntry, object?[] values)
-            : base(internalEntry)
-            => _values = values;
+            : base(internalEntry) => _values = values;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,11 +40,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override object ToObject()
-            => MaterializerSource.GetMaterializer(EntityType)(
+        public override object ToObject() =>
+            MaterializerSource.GetMaterializer(EntityType)(
                 new MaterializationContext(
                     new ValueBuffer(_values),
-                    InternalEntry.StateManager.Context));
+                    InternalEntry.StateManager.Context
+                )
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -71,7 +72,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 for (var i = 0; i < _values.Length; i++)
                 {
-                    var getter = obj.GetType().GetAnyProperty(Properties[i].Name)?.FindGetterProperty();
+                    var getter = obj.GetType()
+                        .GetAnyProperty(Properties[i].Name)
+                        ?.FindGetterProperty();
                     if (getter != null)
                     {
                         SetValue(i, getter.GetValue(obj));
@@ -116,8 +119,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override IReadOnlyList<IProperty> Properties
-            => _properties ??= EntityType.GetProperties().ToList();
+        public override IReadOnlyList<IProperty> Properties =>
+            _properties ??= EntityType.GetProperties().ToList();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -149,8 +152,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override TValue GetValue<TValue>(string propertyName)
-            => (TValue)this[propertyName]!;
+        public override TValue GetValue<TValue>(string propertyName) => (TValue)this[propertyName]!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -158,8 +160,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override TValue GetValue<TValue>(IProperty property)
-            => (TValue)this[property]!;
+        public override TValue GetValue<TValue>(IProperty property) => (TValue)this[property]!;
 
         private void SetValue(int index, object? value)
         {
@@ -174,7 +175,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             property.Name,
                             property.DeclaringEntityType.DisplayName(),
                             value.GetType().DisplayName(),
-                            property.ClrType.DisplayName()));
+                            property.ClrType.DisplayName()
+                        )
+                    );
                 }
             }
             else
@@ -185,14 +188,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         CoreStrings.ValueCannotBeNull(
                             property.Name,
                             property.DeclaringEntityType.DisplayName(),
-                            property.ClrType.DisplayName()));
+                            property.ClrType.DisplayName()
+                        )
+                    );
                 }
             }
 
             _values[index] = value;
         }
 
-        private IEntityMaterializerSource MaterializerSource
-            => InternalEntry.StateManager.EntityMaterializerSource;
+        private IEntityMaterializerSource MaterializerSource =>
+            InternalEntry.StateManager.EntityMaterializerSource;
     }
 }

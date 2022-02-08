@@ -10,7 +10,9 @@ namespace System.Security.Cryptography
     {
         public sealed partial class ECDiffieHellmanSecurityTransforms : ECDiffieHellman
         {
-            private readonly EccSecurityTransforms _ecc = new EccSecurityTransforms(nameof(ECDiffieHellman));
+            private readonly EccSecurityTransforms _ecc = new EccSecurityTransforms(
+                nameof(ECDiffieHellman)
+            );
 
             public ECDiffieHellmanSecurityTransforms()
             {
@@ -22,9 +24,14 @@ namespace System.Security.Cryptography
                 KeySizeValue = _ecc.SetKeyAndGetSize(SecKeyPair.PublicOnly(publicKey));
             }
 
-            internal ECDiffieHellmanSecurityTransforms(SafeSecKeyRefHandle publicKey, SafeSecKeyRefHandle privateKey)
+            internal ECDiffieHellmanSecurityTransforms(
+                SafeSecKeyRefHandle publicKey,
+                SafeSecKeyRefHandle privateKey
+            )
             {
-                KeySizeValue = _ecc.SetKeyAndGetSize(SecKeyPair.PublicPrivatePair(publicKey, privateKey));
+                KeySizeValue = _ecc.SetKeyAndGetSize(
+                    SecKeyPair.PublicPrivatePair(publicKey, privateKey)
+                );
             }
 
             public override KeySizes[] LegalKeySizes
@@ -87,7 +94,8 @@ namespace System.Security.Cryptography
             public override void ImportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -96,7 +104,8 @@ namespace System.Security.Cryptography
             public override void ImportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
@@ -112,19 +121,24 @@ namespace System.Security.Cryptography
                 return _ecc.GetOrGenerateKeys(KeySize);
             }
 
-            public override byte[] DeriveKeyMaterial(ECDiffieHellmanPublicKey otherPartyPublicKey) =>
-                DeriveKeyFromHash(otherPartyPublicKey, HashAlgorithmName.SHA256, null, null);
+            public override byte[] DeriveKeyMaterial(
+                ECDiffieHellmanPublicKey otherPartyPublicKey
+            ) => DeriveKeyFromHash(otherPartyPublicKey, HashAlgorithmName.SHA256, null, null);
 
             public override byte[] DeriveKeyFromHash(
                 ECDiffieHellmanPublicKey otherPartyPublicKey,
                 HashAlgorithmName hashAlgorithm,
                 byte[]? secretPrepend,
-                byte[]? secretAppend)
+                byte[]? secretAppend
+            )
             {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                    throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                    throw new ArgumentException(
+                        SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                        nameof(hashAlgorithm)
+                    );
 
                 ThrowIfDisposed();
 
@@ -133,7 +147,8 @@ namespace System.Security.Cryptography
                     hashAlgorithm,
                     secretPrepend,
                     secretAppend,
-                    (pubKey, hasher) => DeriveSecretAgreement(pubKey, hasher));
+                    (pubKey, hasher) => DeriveSecretAgreement(pubKey, hasher)
+                );
             }
 
             public override byte[] DeriveKeyFromHmac(
@@ -141,12 +156,16 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 byte[]? hmacKey,
                 byte[]? secretPrepend,
-                byte[]? secretAppend)
+                byte[]? secretAppend
+            )
             {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                    throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                    throw new ArgumentException(
+                        SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                        nameof(hashAlgorithm)
+                    );
 
                 ThrowIfDisposed();
 
@@ -156,11 +175,15 @@ namespace System.Security.Cryptography
                     hmacKey,
                     secretPrepend,
                     secretAppend,
-                    (pubKey, hasher) => DeriveSecretAgreement(pubKey, hasher));
+                    (pubKey, hasher) => DeriveSecretAgreement(pubKey, hasher)
+                );
             }
 
-            public override byte[] DeriveKeyTls(ECDiffieHellmanPublicKey otherPartyPublicKey, byte[] prfLabel,
-                byte[] prfSeed)
+            public override byte[] DeriveKeyTls(
+                ECDiffieHellmanPublicKey otherPartyPublicKey,
+                byte[] prfLabel,
+                byte[] prfSeed
+            )
             {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
@@ -175,15 +198,25 @@ namespace System.Security.Cryptography
                     otherPartyPublicKey,
                     prfLabel,
                     prfSeed,
-                    (pubKey, hasher) => DeriveSecretAgreement(pubKey, hasher));
+                    (pubKey, hasher) => DeriveSecretAgreement(pubKey, hasher)
+                );
             }
 
-            private byte[]? DeriveSecretAgreement(ECDiffieHellmanPublicKey otherPartyPublicKey, IncrementalHash? hasher)
+            private byte[]? DeriveSecretAgreement(
+                ECDiffieHellmanPublicKey otherPartyPublicKey,
+                IncrementalHash? hasher
+            )
             {
-                if (!(otherPartyPublicKey is ECDiffieHellmanSecurityTransformsPublicKey secTransPubKey))
+                if (
+                    !(
+                        otherPartyPublicKey
+                        is ECDiffieHellmanSecurityTransformsPublicKey secTransPubKey
+                    )
+                )
                 {
-                    secTransPubKey =
-                        new ECDiffieHellmanSecurityTransformsPublicKey(otherPartyPublicKey.ExportParameters());
+                    secTransPubKey = new ECDiffieHellmanSecurityTransformsPublicKey(
+                        otherPartyPublicKey.ExportParameters()
+                    );
                 }
 
                 try
@@ -194,7 +227,8 @@ namespace System.Security.Cryptography
                     {
                         throw new ArgumentException(
                             SR.Cryptography_ArgECDHKeySizeMismatch,
-                            nameof(otherPartyPublicKey));
+                            nameof(otherPartyPublicKey)
+                        );
                     }
 
                     SafeSecKeyRefHandle? thisPrivate = GetKeys().PrivateKey;
@@ -212,13 +246,15 @@ namespace System.Security.Cryptography
                         thisPrivate,
                         otherPublic,
                         secretSpan,
-                        out int bytesWritten);
+                        out int bytesWritten
+                    );
 
                     // Either we wrote to the span or we returned an array, but not both, and not neither.
                     // ("neither" would have thrown)
                     Debug.Assert(
                         (bytesWritten == 0) != (secret == null),
-                        $"bytesWritten={bytesWritten}, (secret==null)={secret == null}");
+                        $"bytesWritten={bytesWritten}, (secret==null)={secret == null}"
+                    );
 
                     if (hasher == null)
                     {
@@ -249,7 +285,8 @@ namespace System.Security.Cryptography
             public override ECDiffieHellmanPublicKey PublicKey =>
                 new ECDiffieHellmanSecurityTransformsPublicKey(ExportParameters(false));
 
-            private sealed class ECDiffieHellmanSecurityTransformsPublicKey : ECDiffieHellmanPublicKey
+            private sealed class ECDiffieHellmanSecurityTransformsPublicKey
+                : ECDiffieHellmanPublicKey
             {
                 private EccSecurityTransforms _ecc;
 
@@ -290,8 +327,7 @@ namespace System.Security.Cryptography
                 public override ECParameters ExportParameters() =>
                     _ecc.ExportParameters(includePrivateParameters: false, keySizeInBits: -1);
 
-                internal SafeSecKeyRefHandle KeyHandle =>
-                    _ecc.GetOrGenerateKeys(-1).PublicKey;
+                internal SafeSecKeyRefHandle KeyHandle => _ecc.GetOrGenerateKeys(-1).PublicKey;
             }
         }
     }

@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis
         None = 0,
 
         /// <summary>
-        /// Includes the <c>this</c> keyword before the first parameter of an extension method in C#. 
+        /// Includes the <c>this</c> keyword before the first parameter of an extension method in C#.
         /// </summary>
         /// <remarks>
         /// This option has no effect in Visual Basic.

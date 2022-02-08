@@ -7,7 +7,8 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 {
-    internal interface IImportCompletionCacheService<TProject, TPortableExecutable> : IWorkspaceService
+    internal interface IImportCompletionCacheService<TProject, TPortableExecutable>
+        : IWorkspaceService
     {
         // PE references are keyed on assembly path.
         IDictionary<string, TPortableExecutable> PEItemsCache { get; }

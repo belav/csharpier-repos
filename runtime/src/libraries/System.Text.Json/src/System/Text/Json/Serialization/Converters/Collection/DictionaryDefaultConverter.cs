@@ -22,7 +22,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             TDictionary value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             IEnumerator<KeyValuePair<TKey, TValue>> enumerator;
             if (state.Current.CollectionEnumerator == null)
@@ -36,7 +37,8 @@ namespace System.Text.Json.Serialization.Converters
             }
             else
             {
-                enumerator = (IEnumerator<KeyValuePair<TKey, TValue>>)state.Current.CollectionEnumerator;
+                enumerator =
+                    (IEnumerator<KeyValuePair<TKey, TValue>>)state.Current.CollectionEnumerator;
             }
 
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
@@ -55,7 +57,12 @@ namespace System.Text.Json.Serialization.Converters
                 {
                     state.Current.PropertyState = StackFramePropertyState.Name;
                     TKey key = enumerator.Current.Key;
-                    _keyConverter.WriteAsPropertyNameCore(writer, key, options, state.Current.IsWritingExtensionDataProperty);
+                    _keyConverter.WriteAsPropertyNameCore(
+                        writer,
+                        key,
+                        options,
+                        state.Current.IsWritingExtensionDataProperty
+                    );
                 }
 
                 TValue element = enumerator.Current.Value;

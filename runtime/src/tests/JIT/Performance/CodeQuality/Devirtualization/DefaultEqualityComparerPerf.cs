@@ -96,7 +96,6 @@ namespace Devirtualization
 
     public class EqualityComparer
     {
-
 #if DEBUG
         public const int Iterations = 1;
 #else

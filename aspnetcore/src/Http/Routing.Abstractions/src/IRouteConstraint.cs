@@ -28,5 +28,6 @@ public interface IRouteConstraint : IParameterPolicy
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection);
+        RouteDirection routeDirection
+    );
 }

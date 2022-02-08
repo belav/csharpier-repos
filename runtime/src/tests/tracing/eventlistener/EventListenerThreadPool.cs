@@ -14,8 +14,8 @@ namespace Tracing.Tests
         public volatile int TPWorkerThreadStopCount = 0;
         public volatile int TPWorkerThreadWaitCount = 0;
 
-    public ManualResetEvent TPWaitEvent = new ManualResetEvent(false);
-        
+        public ManualResetEvent TPWaitEvent = new ManualResetEvent(false);
+
         protected override void OnEventSourceCreated(EventSource source)
         {
             if (source.Name.Equals("Microsoft-Windows-DotNETRuntime"))
@@ -52,16 +52,23 @@ namespace Tracing.Tests
             {
                 int someNumber = 0;
                 Task[] tasks = new Task[100];
-                for (int i = 0; i < tasks.Length; i++) 
+                for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Run(() => { someNumber += 1; });
+                    tasks[i] = Task.Run(
+                        () =>
+                        {
+                            someNumber += 1;
+                        }
+                    );
                 }
 
                 listener.TPWaitEvent.WaitOne(TimeSpan.FromMinutes(3));
 
-                if (listener.TPWorkerThreadStartCount > 0 ||
-                    listener.TPWorkerThreadStopCount > 0 ||
-                    listener.TPWorkerThreadWaitCount > 0)
+                if (
+                    listener.TPWorkerThreadStartCount > 0
+                    || listener.TPWorkerThreadStopCount > 0
+                    || listener.TPWorkerThreadWaitCount > 0
+                )
                 {
                     Console.WriteLine("Test Passed.");
                     return 100;
@@ -69,9 +76,15 @@ namespace Tracing.Tests
                 else
                 {
                     Console.WriteLine("Test Failed: Did not see any of the expected events.");
-                    Console.WriteLine($"ThreadPoolWorkerThreadStartCount: {listener.TPWorkerThreadStartCount}");
-                    Console.WriteLine($"ThreadPoolWorkerThreadStopCount: {listener.TPWorkerThreadStopCount}");
-                    Console.WriteLine($"ThreadPoolWorkerThreadWaitCount: {listener.TPWorkerThreadWaitCount}");
+                    Console.WriteLine(
+                        $"ThreadPoolWorkerThreadStartCount: {listener.TPWorkerThreadStartCount}"
+                    );
+                    Console.WriteLine(
+                        $"ThreadPoolWorkerThreadStopCount: {listener.TPWorkerThreadStopCount}"
+                    );
+                    Console.WriteLine(
+                        $"ThreadPoolWorkerThreadWaitCount: {listener.TPWorkerThreadWaitCount}"
+                    );
                     return -1;
                 }
             }

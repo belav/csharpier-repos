@@ -7,7 +7,8 @@ namespace JitTest
 {
     internal class Test1
     {
-        private static bool s_globalFlag = false,s_globalFlag2 = true;
+        private static bool s_globalFlag = false,
+            s_globalFlag2 = true;
 
         private static bool TestTryCatch(int recurseLevel)
         {
@@ -75,9 +76,7 @@ namespace JitTest
                         }
                     }
                 }
-                catch (NullReferenceException)
-                {
-                }
+                catch (NullReferenceException) { }
                 return ret;
             }
             return recurseLevel == 0;

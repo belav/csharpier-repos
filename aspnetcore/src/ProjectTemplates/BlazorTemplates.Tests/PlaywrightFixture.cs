@@ -19,11 +19,13 @@ namespace ProjectTemplates.Tests.Infrastructure;
 public class PlaywrightFixture<TTestAssemblyType> : IAsyncLifetime
 {
     private static readonly bool _isCIEnvironment =
-        !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ContinuousIntegrationBuild")) ||
-        !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("Helix"));
+        !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ContinuousIntegrationBuild"))
+        || !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("Helix"));
 
     private readonly IMessageSink _diagnosticsMessageSink;
-    private static readonly BrowserManagerConfiguration _config = new BrowserManagerConfiguration(CreateConfiguration(typeof(TTestAssemblyType).Assembly));
+    private static readonly BrowserManagerConfiguration _config = new BrowserManagerConfiguration(
+        CreateConfiguration(typeof(TTestAssemblyType).Assembly)
+    );
 
     public PlaywrightFixture(IMessageSink diagnosticsMessageSink)
     {
@@ -47,13 +49,20 @@ public class PlaywrightFixture<TTestAssemblyType> : IAsyncLifetime
 
         if (_isCIEnvironment)
         {
-            builder.AddJsonFile(Path.Combine(basePath, "playwrightSettings.ci.json"), optional: true)
-                .AddJsonFile(Path.Combine(basePath, $"playwrightSettings.ci.{os}.json"), optional: true);
+            builder
+                .AddJsonFile(Path.Combine(basePath, "playwrightSettings.ci.json"), optional: true)
+                .AddJsonFile(
+                    Path.Combine(basePath, $"playwrightSettings.ci.{os}.json"),
+                    optional: true
+                );
         }
 
         if (Debugger.IsAttached)
         {
-            builder.AddJsonFile(Path.Combine(basePath, "playwrightSettings.debug.json"), optional: true);
+            builder.AddJsonFile(
+                Path.Combine(basePath, "playwrightSettings.debug.json"),
+                optional: true
+            );
         }
 
         return builder.Build();

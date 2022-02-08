@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Authentication;
 /// </summary>
 public class AuthenticationOptions
 {
-    private readonly IList<AuthenticationSchemeBuilder> _schemes = new List<AuthenticationSchemeBuilder>();
+    private readonly IList<AuthenticationSchemeBuilder> _schemes =
+        new List<AuthenticationSchemeBuilder>();
 
     /// <summary>
     /// Returns the schemes in the order they were added (important for request handling priority)
@@ -24,7 +25,8 @@ public class AuthenticationOptions
     /// <summary>
     /// Maps schemes by name.
     /// </summary>
-    public IDictionary<string, AuthenticationSchemeBuilder> SchemeMap { get; } = new Dictionary<string, AuthenticationSchemeBuilder>(StringComparer.Ordinal);
+    public IDictionary<string, AuthenticationSchemeBuilder> SchemeMap { get; } =
+        new Dictionary<string, AuthenticationSchemeBuilder>(StringComparer.Ordinal);
 
     /// <summary>
     /// Adds an <see cref="AuthenticationScheme"/>.
@@ -58,12 +60,17 @@ public class AuthenticationOptions
     /// <typeparam name="THandler">The <see cref="IAuthenticationHandler"/> responsible for the scheme.</typeparam>
     /// <param name="name">The name of the scheme being added.</param>
     /// <param name="displayName">The display name for the scheme.</param>
-    public void AddScheme<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler>(string name, string? displayName) where THandler : IAuthenticationHandler
-        => AddScheme(name, b =>
-        {
-            b.DisplayName = displayName;
-            b.HandlerType = typeof(THandler);
-        });
+    public void AddScheme<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
+    >(string name, string? displayName) where THandler : IAuthenticationHandler =>
+        AddScheme(
+            name,
+            b =>
+            {
+                b.DisplayName = displayName;
+                b.HandlerType = typeof(THandler);
+            }
+        );
 
     /// <summary>
     /// Used as the fallback default scheme for all the other defaults.

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.SimplifyLinqExpressi
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpSimplifyLinqExpressionDiagnosticAnalyzer,
-        CSharpSimplifyLinqExpressionCodeFixProvider>;
+        CSharpSimplifyLinqExpressionCodeFixProvider
+    >;
 
     public partial class CSharpSimplifyLinqExpressionTests
     {
@@ -21,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.SimplifyLinqExpressi
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -38,7 +40,8 @@ class C
         var test5 = [|test.Where(x => x.Equals('!')).FirstOrDefault()|];
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -61,8 +64,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInlineDeclaration)]
         public async Task FixAllInDocumentExplicitCall()
         {
-
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -79,7 +82,8 @@ class C
         var test5 = [|Enumerable.Where(test, x => x.Equals(""!"")).FirstOrDefault()|];
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -102,10 +106,10 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInlineDeclaration)]
         public async Task NestedInDocument()
         {
-
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -123,7 +127,8 @@ class C
         var test6 = [|test.Where(a => [|a.Where(s => s.Equals(""hello"")).FirstOrDefault()|].Equals(""hello"")).FirstOrDefault()|];
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Linq;
 using System.Collections.Generic;

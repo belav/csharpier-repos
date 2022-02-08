@@ -23,7 +23,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
         protected override Task ProcessRequest(HttpContext httpContext)
         {
-            return ResponseDataLength == 0 ? Task.CompletedTask : httpContext.Response.WriteAsync(_responseData);
+            return ResponseDataLength == 0
+              ? Task.CompletedTask
+              : httpContext.Response.WriteAsync(_responseData);
         }
     }
 }

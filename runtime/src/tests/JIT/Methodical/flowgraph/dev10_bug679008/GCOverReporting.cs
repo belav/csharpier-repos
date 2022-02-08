@@ -25,7 +25,7 @@
  * 2
  * 3
  * and then a crash!
- * 
+ *
  */
 
 using System;
@@ -39,6 +39,7 @@ internal struct MB8
 internal class Repro
 {
     private static int s_counter;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static MB8 MakeNewMB8()
     {

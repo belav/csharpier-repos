@@ -22,7 +22,8 @@ namespace AutoMapper.UnitTests.Bug
             public SubSetting SubSettings { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => {});
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(cfg => { });
 
         protected override void Because_of()
         {
@@ -34,7 +35,7 @@ namespace AutoMapper.UnitTests.Bug
             baseSettings.SubSettings.SubTimeout = 11;
             baseSettings.SubSettings.SubColour = "Green";
 
-            // Create another object we will map onto the one above. 
+            // Create another object we will map onto the one above.
             // Notice that we do not set a Colour or SubColour property.
             dynamic overrideSettings = new ExpandoObject();
             overrideSettings.Timeout = 2;

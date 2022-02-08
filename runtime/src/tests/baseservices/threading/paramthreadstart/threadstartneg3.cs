@@ -16,19 +16,19 @@ class ThreadStartNeg
     private int Run()
     {
         int iRet = -1;
-       
+
         try
         {
             Thread t = new Thread(new ThreadStart(ThreadWorker));
             t.Start(0);
             Console.WriteLine("Thread failed to throw an exception!");
         }
-        catch(InvalidOperationException)
+        catch (InvalidOperationException)
         {
             // Expected
             iRet = 100;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Unexpected exception thrown: " + ex.ToString());
         }

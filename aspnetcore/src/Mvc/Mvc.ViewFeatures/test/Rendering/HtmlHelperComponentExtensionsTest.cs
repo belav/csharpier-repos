@@ -23,7 +23,10 @@ public class HtmlHelperComponentExtensionsTest
         var htmlHelper = Mock.Of<IHtmlHelper>(h => h.ViewContext == viewContext);
 
         // Act
-        var result = await HtmlHelperComponentExtensions.RenderComponentAsync<TestComponent>(htmlHelper, RenderMode.Static);
+        var result = await HtmlHelperComponentExtensions.RenderComponentAsync<TestComponent>(
+            htmlHelper,
+            RenderMode.Static
+        );
 
         // Assert
         Assert.Equal("Hello world", HtmlContentUtilities.HtmlContentToString(result));
@@ -32,12 +35,21 @@ public class HtmlHelperComponentExtensionsTest
     private static ViewContext GetViewContext()
     {
         var htmlContent = new HtmlContentBuilder().AppendHtml("Hello world");
-        var renderer = Mock.Of<IComponentRenderer>(c =>
-            c.RenderComponentAsync(It.IsAny<ViewContext>(), It.IsAny<Type>(), It.IsAny<RenderMode>(), It.IsAny<object>()) == Task.FromResult<IHtmlContent>(htmlContent));
+        var renderer = Mock.Of<IComponentRenderer>(
+            c =>
+                c.RenderComponentAsync(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<Type>(),
+                    It.IsAny<RenderMode>(),
+                    It.IsAny<object>()
+                ) == Task.FromResult<IHtmlContent>(htmlContent)
+        );
 
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = new ServiceCollection().AddSingleton<IComponentRenderer>(renderer).BuildServiceProvider(),
+            RequestServices = new ServiceCollection()
+                .AddSingleton<IComponentRenderer>(renderer)
+                .BuildServiceProvider(),
         };
 
         var viewContext = new ViewContext { HttpContext = httpContext };
@@ -46,9 +58,7 @@ public class HtmlHelperComponentExtensionsTest
 
     private class TestComponent : IComponent
     {
-        public void Attach(RenderHandle renderHandle)
-        {
-        }
+        public void Attach(RenderHandle renderHandle) { }
 
         public Task SetParametersAsync(ParameterView parameters) => null;
     }

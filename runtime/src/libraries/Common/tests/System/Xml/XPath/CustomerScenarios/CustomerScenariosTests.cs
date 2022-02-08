@@ -24,7 +24,8 @@ namespace XPathTests.FunctionalTests
             var xml = "xpC001.xml";
             var startingNodePath = "/Book";
             var testExpression = @"Chapter[last()]/Section[1]/Line[last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -33,9 +34,15 @@ namespace XPathTests.FunctionalTests
                     Name = "Line",
                     HasNameTable = true,
                     Value = "Porsche 911"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -48,7 +55,8 @@ namespace XPathTests.FunctionalTests
             var xml = "xpC001.xml";
             var startingNodePath = "/Book";
             var testExpression = @"/Book/Chapter[last()]/Section[1]/Line[last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -57,9 +65,15 @@ namespace XPathTests.FunctionalTests
                     Name = "Line",
                     HasNameTable = true,
                     Value = "Porsche 911"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -72,7 +86,8 @@ namespace XPathTests.FunctionalTests
             var xml = "xpC001.xml";
             var startingNodePath = "/Book";
             var testExpression = @"Chapter[2][@name='Entrees']";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -83,9 +98,15 @@ namespace XPathTests.FunctionalTests
                     HasNameTable = true,
                     Value =
                         "\n        \n            Almond Chicken\n            Sesame Chicken\n            Crispy Duck\n        \n        \n            Mashed potatoes with overcooked veggies and fat meat topped with some rich gravy\n            That's it!\n        \n        \n            Triple Bacon Cheeseburger\n            Double Bacon Cheeseburger\n            Bacon Cheeseburger\n        \n    "
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -98,7 +119,8 @@ namespace XPathTests.FunctionalTests
             var xml = "xpC001.xml";
             var startingNodePath = "/Book";
             var testExpression = @"Chapter[position() >= 2 and position() <= 4]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -120,9 +142,15 @@ namespace XPathTests.FunctionalTests
                     HasNameTable = true,
                     Value =
                         "\n        \n            BMW M5\n            Mercedes S Class\n            Porsche 911\n        \n        \n            Acura CL 3.2\n            Lexus RX300\n            Infiniti QX4\n        \n        \n    "
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

@@ -21,13 +21,20 @@ namespace Microsoft.Extensions.Logging.Generators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.SyntaxContextReceiver is not SyntaxContextReceiver receiver || receiver.ClassDeclarations.Count == 0)
+            if (
+                context.SyntaxContextReceiver is not SyntaxContextReceiver receiver
+                || receiver.ClassDeclarations.Count == 0
+            )
             {
                 // nothing to do yet
                 return;
             }
 
-            var p = new Parser(context.Compilation, context.ReportDiagnostic, context.CancellationToken);
+            var p = new Parser(
+                context.Compilation,
+                context.ReportDiagnostic,
+                context.CancellationToken
+            );
             IReadOnlyList<LoggerClass> logClasses = p.GetLogClasses(receiver.ClassDeclarations);
             if (logClasses.Count > 0)
             {
@@ -51,7 +58,9 @@ namespace Microsoft.Extensions.Logging.Generators
             {
                 if (Parser.IsSyntaxTargetForGeneration(context.Node))
                 {
-                    ClassDeclarationSyntax classSyntax = Parser.GetSemanticTargetForGeneration(context);
+                    ClassDeclarationSyntax classSyntax = Parser.GetSemanticTargetForGeneration(
+                        context
+                    );
                     if (classSyntax != null)
                     {
                         ClassDeclarations.Add(classSyntax);

@@ -13,12 +13,8 @@ namespace System.CommandLine.Parsing
     {
         private ArgumentConversionResult? _argumentConversionResult;
 
-        internal OptionResult(
-            IOption option,
-            Token? token = null,
-            CommandResult? parent = null) :
-            base(option ?? throw new ArgumentNullException(nameof(option)),
-                 parent)
+        internal OptionResult(IOption option, Token? token = null, CommandResult? parent = null)
+            : base(option ?? throw new ArgumentNullException(nameof(option)), parent)
         {
             Option = option;
             Token = token;
@@ -51,9 +47,7 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <returns>The parsed value or the default value for <see cref="Option"/></returns>
         [return: MaybeNull]
-        public T GetValueOrDefault<T>() =>
-            this.ConvertIfNeeded(typeof(T))
-                .GetValueOrDefault<T>();
+        public T GetValueOrDefault<T>() => this.ConvertIfNeeded(typeof(T)).GetValueOrDefault<T>();
 
         private protected override int RemainingArgumentCapacity
         {
@@ -82,18 +76,22 @@ namespace System.CommandLine.Parsing
 
                         if (child is ArgumentResult argumentResult)
                         {
-                            return _argumentConversionResult = argumentResult.GetArgumentConversionResult();
+                            return _argumentConversionResult =
+                                argumentResult.GetArgumentConversionResult();
                         }
                     }
 
-                    return _argumentConversionResult = ArgumentConversionResult.None(Option.Argument);
+                    return _argumentConversionResult = ArgumentConversionResult.None(
+                        Option.Argument
+                    );
                 }
 
                 return _argumentConversionResult;
             }
         }
 
-        internal bool IsMinimumArgumentAritySatisfied => Tokens.Count >= Option.Argument.Arity.MinimumNumberOfValues;
+        internal bool IsMinimumArgumentAritySatisfied =>
+            Tokens.Count >= Option.Argument.Arity.MinimumNumberOfValues;
 
         internal override bool UseDefaultValueFor(IArgument argument) => IsImplicit;
     }

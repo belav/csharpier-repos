@@ -19,14 +19,15 @@ internal class ApiBehaviorApplicationModelProvider : IApplicationModelProvider
         IOptions<ApiBehaviorOptions> apiBehaviorOptions,
         IModelMetadataProvider modelMetadataProvider,
         IClientErrorFactory clientErrorFactory,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         var options = apiBehaviorOptions.Value;
 
         ActionModelConventions = new List<IActionModelConvention>()
-            {
-                new ApiVisibilityConvention(),
-            };
+        {
+            new ApiVisibilityConvention(),
+        };
 
         if (!options.SuppressMapClientErrors)
         {
@@ -43,13 +44,19 @@ internal class ApiBehaviorApplicationModelProvider : IApplicationModelProvider
             ActionModelConventions.Add(new ConsumesConstraintForFormFileParameterConvention());
         }
 
-        var defaultErrorType = options.SuppressMapClientErrors ? typeof(void) : typeof(ProblemDetails);
+        var defaultErrorType = options.SuppressMapClientErrors
+            ? typeof(void)
+            : typeof(ProblemDetails);
         var defaultErrorTypeAttribute = new ProducesErrorResponseTypeAttribute(defaultErrorType);
-        ActionModelConventions.Add(new ApiConventionApplicationModelConvention(defaultErrorTypeAttribute));
+        ActionModelConventions.Add(
+            new ApiConventionApplicationModelConvention(defaultErrorTypeAttribute)
+        );
 
         if (!options.SuppressInferBindingSourcesForParameters)
         {
-            ActionModelConventions.Add(new InferParameterBindingInfoConvention(modelMetadataProvider));
+            ActionModelConventions.Add(
+                new InferParameterBindingInfoConvention(modelMetadataProvider)
+            );
         }
     }
 
@@ -61,9 +68,7 @@ internal class ApiBehaviorApplicationModelProvider : IApplicationModelProvider
 
     public List<IActionModelConvention> ActionModelConventions { get; }
 
-    public void OnProvidersExecuted(ApplicationModelProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ApplicationModelProviderContext context) { }
 
     public void OnProvidersExecuting(ApplicationModelProviderContext context)
     {
@@ -89,13 +94,16 @@ internal class ApiBehaviorApplicationModelProvider : IApplicationModelProvider
 
     private static void EnsureActionIsAttributeRouted(ActionModel actionModel)
     {
-        if (!IsAttributeRouted(actionModel.Controller.Selectors) &&
-            !IsAttributeRouted(actionModel.Selectors))
+        if (
+            !IsAttributeRouted(actionModel.Controller.Selectors)
+            && !IsAttributeRouted(actionModel.Selectors)
+        )
         {
             // Require attribute routing with controllers annotated with ApiControllerAttribute
             var message = Resources.FormatApiController_AttributeRouteRequired(
-                 actionModel.DisplayName,
-                nameof(ApiControllerAttribute));
+                actionModel.DisplayName,
+                nameof(ApiControllerAttribute)
+            );
             throw new InvalidOperationException(message);
         }
 

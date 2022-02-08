@@ -12,23 +12,19 @@ namespace System.Security.Cryptography.Pkcs
     public sealed class KeyAgreeRecipientInfo : RecipientInfo
     {
         internal KeyAgreeRecipientInfo(KeyAgreeRecipientInfoPal pal)
-            : base(RecipientInfoType.KeyAgreement, pal)
-        {
-        }
+            : base(RecipientInfoType.KeyAgreement, pal) { }
 
         public override int Version
         {
-            get
-            {
-                return Pal.Version;
-            }
+            get { return Pal.Version; }
         }
 
         public override SubjectIdentifier RecipientIdentifier
         {
             get
             {
-                return _lazyRecipientIdentifier ?? (_lazyRecipientIdentifier = Pal.RecipientIdentifier);
+                return _lazyRecipientIdentifier
+                    ?? (_lazyRecipientIdentifier = Pal.RecipientIdentifier);
             }
         }
 
@@ -36,23 +32,22 @@ namespace System.Security.Cryptography.Pkcs
         {
             get
             {
-                return _lazyKeyEncryptionAlgorithm ?? (_lazyKeyEncryptionAlgorithm = Pal.KeyEncryptionAlgorithm);
+                return _lazyKeyEncryptionAlgorithm
+                    ?? (_lazyKeyEncryptionAlgorithm = Pal.KeyEncryptionAlgorithm);
             }
         }
 
         public override byte[] EncryptedKey
         {
-            get
-            {
-                return _lazyEncryptedKey ?? (_lazyEncryptedKey = Pal.EncryptedKey);
-            }
+            get { return _lazyEncryptedKey ?? (_lazyEncryptedKey = Pal.EncryptedKey); }
         }
 
         public SubjectIdentifierOrKey OriginatorIdentifierOrKey
         {
             get
             {
-                return _lazyOriginatorIdentifierKey ?? (_lazyOriginatorIdentifierKey = Pal.OriginatorIdentifierOrKey);
+                return _lazyOriginatorIdentifierKey
+                    ?? (_lazyOriginatorIdentifierKey = Pal.OriginatorIdentifierOrKey);
             }
         }
 
@@ -79,10 +74,7 @@ namespace System.Security.Cryptography.Pkcs
 
         private new KeyAgreeRecipientInfoPal Pal
         {
-            get
-            {
-                return (KeyAgreeRecipientInfoPal)(base.Pal);
-            }
+            get { return (KeyAgreeRecipientInfoPal)(base.Pal); }
         }
 
         private volatile SubjectIdentifier? _lazyRecipientIdentifier;

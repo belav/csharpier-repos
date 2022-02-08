@@ -19,10 +19,20 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxDestroy")]
         internal static extern void SslCtxDestroy(IntPtr ctx);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetAlpnSelectCb")]
-        internal static unsafe partial void SslCtxSetAlpnSelectCb(SafeSslContextHandle ctx, delegate* unmanaged<IntPtr, byte**, byte*, byte*, uint, IntPtr, int> callback, IntPtr arg);
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslCtxSetAlpnSelectCb"
+        )]
+        internal static unsafe partial void SslCtxSetAlpnSelectCb(
+            SafeSslContextHandle ctx,
+            delegate* unmanaged<IntPtr, byte**, byte*, byte*, uint, IntPtr, int> callback,
+            IntPtr arg
+        );
 
-        internal static bool AddExtraChainCertificates(SafeSslContextHandle ctx, X509Certificate2[] chain)
+        internal static bool AddExtraChainCertificates(
+            SafeSslContextHandle ctx,
+            X509Certificate2[] chain
+        )
         {
             // send pre-computed list of intermediates.
             for (int i = 0; i < chain.Length; i++)
@@ -47,15 +57,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeSslContextHandle : SafeHandle
     {
-        public SafeSslContextHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+        public SafeSslContextHandle() : base(IntPtr.Zero, true) { }
 
-        internal SafeSslContextHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle)
-        {
-        }
+        internal SafeSslContextHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
 
         public override bool IsInvalid
         {

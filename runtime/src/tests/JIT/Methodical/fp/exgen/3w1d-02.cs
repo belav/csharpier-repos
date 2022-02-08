@@ -2,16 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     public struct VT_0
     {
         public ulong[,,] arr3d_0;
+
         public VT_0(int i)
         {
             arr3d_0 = new ulong[5, 4, 4];
         }
     }
+
     private static double s_a1_0 = -0.035714285714285712;
 
     public static VT_0 vtstatic_0 = new VT_0(1);

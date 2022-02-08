@@ -78,7 +78,9 @@ namespace System.ComponentModel.Tests
         public void Append_Context_Null()
         {
             ContextStack stack = new ContextStack();
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => stack.Append(null));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
+                () => stack.Append(null)
+            );
             Assert.Equal(typeof(ArgumentNullException), ex.GetType());
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -150,7 +152,9 @@ namespace System.ComponentModel.Tests
         {
             ContextStack stack = new ContextStack();
             stack.Push(new Foo());
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => stack[(Type)null]);
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
+                () => stack[(Type)null]
+            );
             Assert.Equal(typeof(ArgumentNullException), ex.GetType());
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -161,7 +165,7 @@ namespace System.ComponentModel.Tests
         public void Push_Context_Null()
         {
             ContextStack stack = new ContextStack();
-            ArgumentNullException ex= Assert.Throws<ArgumentNullException>(()=> stack.Push(null));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => stack.Push(null));
             Assert.Equal(typeof(ArgumentNullException), ex.GetType());
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -184,16 +188,10 @@ namespace System.ComponentModel.Tests
             Assert.Null(stack[typeof(int)]);
         }
 
-        public interface IFoo
-        {
-        }
+        public interface IFoo { }
 
-        public class Foo : IFoo
-        {
-        }
+        public class Foo : IFoo { }
 
-        public class FooBar : Foo
-        {
-        }
+        public class FooBar : Foo { }
     }
 }

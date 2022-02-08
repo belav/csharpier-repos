@@ -14,11 +14,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
     {
         private partial class TagSource : IEqualityComparer<ITagSpan<TTag>>
         {
-            public bool Equals(ITagSpan<TTag> x, ITagSpan<TTag> y)
-                => x.Span == y.Span && EqualityComparer<TTag>.Default.Equals(x.Tag, y.Tag);
+            public bool Equals(ITagSpan<TTag> x, ITagSpan<TTag> y) =>
+                x.Span == y.Span && EqualityComparer<TTag>.Default.Equals(x.Tag, y.Tag);
 
-            public int GetHashCode(ITagSpan<TTag> obj)
-                => Hash.Combine(obj.Span.GetHashCode(), EqualityComparer<TTag>.Default.GetHashCode(obj.Tag));
+            public int GetHashCode(ITagSpan<TTag> obj) =>
+                Hash.Combine(
+                    obj.Span.GetHashCode(),
+                    EqualityComparer<TTag>.Default.GetHashCode(obj.Tag)
+                );
         }
     }
 }

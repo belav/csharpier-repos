@@ -17,7 +17,6 @@ namespace System.Xml.Xsl.Qil
     {
         private QilNode _child;
 
-
         //-----------------------------------------------
         // Constructor
         //-----------------------------------------------
@@ -30,7 +29,6 @@ namespace System.Xml.Xsl.Qil
             _child = child;
         }
 
-
         //-----------------------------------------------
         // IList<QilNode> methods -- override
         //-----------------------------------------------
@@ -42,10 +40,19 @@ namespace System.Xml.Xsl.Qil
 
         public override QilNode this[int index]
         {
-            get { if (index != 0) throw new IndexOutOfRangeException(); return _child; }
-            set { if (index != 0) throw new IndexOutOfRangeException(); _child = value; }
+            get
+            {
+                if (index != 0)
+                    throw new IndexOutOfRangeException();
+                return _child;
+            }
+            set
+            {
+                if (index != 0)
+                    throw new IndexOutOfRangeException();
+                _child = value;
+            }
         }
-
 
         //-----------------------------------------------
         // QilUnary methods

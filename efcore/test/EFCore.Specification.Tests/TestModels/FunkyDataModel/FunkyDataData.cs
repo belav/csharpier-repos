@@ -17,8 +17,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.FunkyDataModel
             FunkyCustomers = CreateFunkyCustomers();
         }
 
-        public virtual IQueryable<TEntity> Set<TEntity>()
-            where TEntity : class
+        public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
         {
             if (typeof(TEntity) == typeof(FunkyCustomer))
             {
@@ -28,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.FunkyDataModel
             throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));
         }
 
-        public static IReadOnlyList<FunkyCustomer> CreateFunkyCustomers()
-            => new List<FunkyCustomer>
+        public static IReadOnlyList<FunkyCustomer> CreateFunkyCustomers() =>
+            new List<FunkyCustomer>
             {
                 new()
                 {

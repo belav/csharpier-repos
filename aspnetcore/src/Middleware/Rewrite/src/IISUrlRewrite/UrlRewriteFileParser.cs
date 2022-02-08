@@ -28,13 +28,23 @@ internal class UrlRewriteFileParser
 
         if (xmlRoot == null)
         {
-            throw new InvalidUrlRewriteFormatException(new XElement(RewriteTags.Rewrite), "The root element '<rewrite>' is missing");
+            throw new InvalidUrlRewriteFormatException(
+                new XElement(RewriteTags.Rewrite),
+                "The root element '<rewrite>' is missing"
+            );
         }
 
-        _inputParser = new InputParser(RewriteMapParser.Parse(xmlRoot), alwaysUseManagedServerVariables);
+        _inputParser = new InputParser(
+            RewriteMapParser.Parse(xmlRoot),
+            alwaysUseManagedServerVariables
+        );
 
         var result = new List<IISUrlRewriteRule>();
-        ParseRules(xmlRoot.Descendants(RewriteTags.GlobalRules).FirstOrDefault(), result, global: true);
+        ParseRules(
+            xmlRoot.Descendants(RewriteTags.GlobalRules).FirstOrDefault(),
+            result,
+            global: true
+        );
         ParseRules(xmlRoot.Descendants(RewriteTags.Rules).FirstOrDefault(), result, global: false);
         return result;
     }
@@ -77,13 +87,19 @@ internal class UrlRewriteFileParser
         var match = rule.Element(RewriteTags.Match);
         if (match == null)
         {
-            throw new InvalidUrlRewriteFormatException(rule, "Condition must have an associated match");
+            throw new InvalidUrlRewriteFormatException(
+                rule,
+                "Condition must have an associated match"
+            );
         }
 
         var action = rule.Element(RewriteTags.Action);
         if (action == null)
         {
-            throw new InvalidUrlRewriteFormatException(rule, "Rule does not have an associated action attribute");
+            throw new InvalidUrlRewriteFormatException(
+                rule,
+                "Rule does not have an associated action attribute"
+            );
         }
 
         ParseMatch(match, builder, patternSyntax);
@@ -91,7 +107,11 @@ internal class UrlRewriteFileParser
         ParseUrlAction(action, builder, stopProcessing);
     }
 
-    private void ParseMatch(XElement match, UrlRewriteRuleBuilder builder, PatternSyntax patternSyntax)
+    private void ParseMatch(
+        XElement match,
+        UrlRewriteRuleBuilder builder,
+        PatternSyntax patternSyntax
+    )
     {
         var parsedInputString = match.Attribute(RewriteTags.Url)?.Value;
         if (parsedInputString == null)
@@ -104,7 +124,11 @@ internal class UrlRewriteFileParser
         builder.AddUrlMatch(parsedInputString, ignoreCase, negate, patternSyntax);
     }
 
-    private void ParseConditions(XElement? conditions, UrlRewriteRuleBuilder builder, PatternSyntax patternSyntax)
+    private void ParseConditions(
+        XElement? conditions,
+        UrlRewriteRuleBuilder builder,
+        PatternSyntax patternSyntax
+    )
     {
         if (conditions == null)
         {
@@ -112,7 +136,11 @@ internal class UrlRewriteFileParser
         }
 
         var grouping = ParseEnum(conditions, RewriteTags.LogicalGrouping, LogicalGrouping.MatchAll);
-        var trackAllCaptures = ParseBool(conditions, RewriteTags.TrackAllCaptures, defaultValue: false);
+        var trackAllCaptures = ParseBool(
+            conditions,
+            RewriteTags.TrackAllCaptures,
+            defaultValue: false
+        );
         var adds = conditions.Elements(RewriteTags.Add);
         if (!adds.Any())
         {
@@ -127,7 +155,11 @@ internal class UrlRewriteFileParser
         }
     }
 
-    private void ParseCondition(XElement conditionElement, UrlRewriteRuleBuilder builder, PatternSyntax patternSyntax)
+    private void ParseCondition(
+        XElement conditionElement,
+        UrlRewriteRuleBuilder builder,
+        PatternSyntax patternSyntax
+    )
     {
         var ignoreCase = ParseBool(conditionElement, RewriteTags.IgnoreCase, defaultValue: true);
         var negate = ParseBool(conditionElement, RewriteTags.Negate, defaultValue: false);
@@ -136,7 +168,10 @@ internal class UrlRewriteFileParser
 
         if (parsedInputString == null)
         {
-            throw new InvalidUrlRewriteFormatException(conditionElement, "Conditions must have an input attribute");
+            throw new InvalidUrlRewriteFormatException(
+                conditionElement,
+                "Conditions must have an input attribute"
+            );
         }
 
         var parsedPatternString = conditionElement.Attribute(RewriteTags.Pattern)?.Value;
@@ -145,41 +180,61 @@ internal class UrlRewriteFileParser
         switch (patternSyntax)
         {
             case PatternSyntax.ECMAScript:
+            {
+                switch (matchType)
                 {
-                    switch (matchType)
+                    case MatchType.Pattern:
                     {
-                        case MatchType.Pattern:
-                            {
-                                if (string.IsNullOrEmpty(parsedPatternString))
-                                {
-                                    throw new FormatException("Match does not have an associated pattern attribute in condition");
-                                }
-                                condition = new UriMatchCondition(_inputParser, parsedInputString, parsedPatternString, builder.UriMatchPart, ignoreCase, negate);
-                                break;
-                            }
-                        case MatchType.IsDirectory:
-                            {
-                                condition = new Condition(_inputParser.ParseInputString(parsedInputString, builder.UriMatchPart), new IsDirectoryMatch(negate));
-                                break;
-                            }
-                        case MatchType.IsFile:
-                            {
-                                condition = new Condition(_inputParser.ParseInputString(parsedInputString, builder.UriMatchPart), new IsFileMatch(negate));
-                                break;
-                            }
-                        default:
-                            throw new FormatException("Unrecognized matchType");
+                        if (string.IsNullOrEmpty(parsedPatternString))
+                        {
+                            throw new FormatException(
+                                "Match does not have an associated pattern attribute in condition"
+                            );
+                        }
+                        condition = new UriMatchCondition(
+                            _inputParser,
+                            parsedInputString,
+                            parsedPatternString,
+                            builder.UriMatchPart,
+                            ignoreCase,
+                            negate
+                        );
+                        break;
                     }
-                    break;
+                    case MatchType.IsDirectory:
+                    {
+                        condition = new Condition(
+                            _inputParser.ParseInputString(parsedInputString, builder.UriMatchPart),
+                            new IsDirectoryMatch(negate)
+                        );
+                        break;
+                    }
+                    case MatchType.IsFile:
+                    {
+                        condition = new Condition(
+                            _inputParser.ParseInputString(parsedInputString, builder.UriMatchPart),
+                            new IsFileMatch(negate)
+                        );
+                        break;
+                    }
+                    default:
+                        throw new FormatException("Unrecognized matchType");
                 }
+                break;
+            }
             case PatternSyntax.Wildcard:
                 throw new NotSupportedException("Wildcard syntax is not supported");
             case PatternSyntax.ExactMatch:
                 if (string.IsNullOrEmpty(parsedPatternString))
                 {
-                    throw new FormatException("Match does not have an associated pattern attribute in condition");
+                    throw new FormatException(
+                        "Match does not have an associated pattern attribute in condition"
+                    );
                 }
-                condition = new Condition(_inputParser.ParseInputString(parsedInputString, builder.UriMatchPart), new ExactMatch(ignoreCase, parsedPatternString, negate));
+                condition = new Condition(
+                    _inputParser.ParseInputString(parsedInputString, builder.UriMatchPart),
+                    new ExactMatch(ignoreCase, parsedPatternString, negate)
+                );
                 break;
             default:
                 throw new FormatException("Unrecognized pattern syntax");
@@ -188,14 +243,20 @@ internal class UrlRewriteFileParser
         builder.AddUrlCondition(condition);
     }
 
-    private void ParseUrlAction(XElement urlAction, UrlRewriteRuleBuilder builder, bool stopProcessing)
+    private void ParseUrlAction(
+        XElement urlAction,
+        UrlRewriteRuleBuilder builder,
+        bool stopProcessing
+    )
     {
         var actionType = ParseEnum(urlAction, RewriteTags.Type, ActionType.None);
         UrlAction action;
         switch (actionType)
         {
             case ActionType.None:
-                action = new NoneAction(stopProcessing ? RuleResult.SkipRemainingRules : RuleResult.ContinueRules);
+                action = new NoneAction(
+                    stopProcessing ? RuleResult.SkipRemainingRules : RuleResult.ContinueRules
+                );
                 break;
             case ActionType.Rewrite:
             case ActionType.Redirect:
@@ -205,21 +266,42 @@ internal class UrlRewriteFileParser
                     url = urlAction.Attribute(RewriteTags.Url)!.Value;
                     if (string.IsNullOrEmpty(url))
                     {
-                        throw new InvalidUrlRewriteFormatException(urlAction, "Url attribute cannot contain an empty string");
+                        throw new InvalidUrlRewriteFormatException(
+                            urlAction,
+                            "Url attribute cannot contain an empty string"
+                        );
                     }
                 }
 
                 var urlPattern = _inputParser.ParseInputString(url, builder.UriMatchPart);
-                var appendQuery = ParseBool(urlAction, RewriteTags.AppendQueryString, defaultValue: true);
+                var appendQuery = ParseBool(
+                    urlAction,
+                    RewriteTags.AppendQueryString,
+                    defaultValue: true
+                );
 
                 if (actionType == ActionType.Rewrite)
                 {
-                    action = new RewriteAction(stopProcessing ? RuleResult.SkipRemainingRules : RuleResult.ContinueRules, urlPattern, appendQuery);
+                    action = new RewriteAction(
+                        stopProcessing ? RuleResult.SkipRemainingRules : RuleResult.ContinueRules,
+                        urlPattern,
+                        appendQuery
+                    );
                 }
                 else
                 {
-                    var redirectType = ParseEnum(urlAction, RewriteTags.RedirectType, RedirectType.Permanent);
-                    action = new RedirectAction((int)redirectType, urlPattern, appendQuery, !appendQuery, escapeBackReferences: false);
+                    var redirectType = ParseEnum(
+                        urlAction,
+                        RewriteTags.RedirectType,
+                        RedirectType.Permanent
+                    );
+                    action = new RedirectAction(
+                        (int)redirectType,
+                        urlPattern,
+                        appendQuery,
+                        !appendQuery,
+                        escapeBackReferences: false
+                    );
                 }
                 break;
             case ActionType.AbortRequest:
@@ -227,14 +309,26 @@ internal class UrlRewriteFileParser
                 break;
             case ActionType.CustomResponse:
                 int statusCode;
-                if (!int.TryParse(urlAction.Attribute(RewriteTags.StatusCode)?.Value, NumberStyles.None, CultureInfo.InvariantCulture, out statusCode))
+                if (
+                    !int.TryParse(
+                        urlAction.Attribute(RewriteTags.StatusCode)?.Value,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out statusCode
+                    )
+                )
                 {
-                    throw new InvalidUrlRewriteFormatException(urlAction, "A valid status code is required");
+                    throw new InvalidUrlRewriteFormatException(
+                        urlAction,
+                        "A valid status code is required"
+                    );
                 }
 
                 if (statusCode < 200 || statusCode > 999)
                 {
-                    throw new NotSupportedException("Status codes must be between 200 and 999 (inclusive)");
+                    throw new NotSupportedException(
+                        "Status codes must be between 200 and 999 (inclusive)"
+                    );
                 }
 
                 if (!string.IsNullOrEmpty(urlAction.Attribute(RewriteTags.SubStatusCode)?.Value))
@@ -245,7 +339,11 @@ internal class UrlRewriteFileParser
                 var statusReason = urlAction.Attribute(RewriteTags.StatusReason)?.Value;
                 var statusDescription = urlAction.Attribute(RewriteTags.StatusDescription)?.Value;
 
-                action = new CustomResponseAction(statusCode) { StatusReason = statusReason, StatusDescription = statusDescription };
+                action = new CustomResponseAction(statusCode)
+                {
+                    StatusReason = statusReason,
+                    StatusDescription = statusDescription
+                };
                 break;
             default:
                 throw new NotSupportedException($"The action type {actionType} wasn't recognized");
@@ -263,7 +361,10 @@ internal class UrlRewriteFileParser
         }
         else if (!bool.TryParse(attribute.Value, out result))
         {
-            throw new InvalidUrlRewriteFormatException(element, $"The {rewriteTag} parameter '{attribute.Value}' was not recognized");
+            throw new InvalidUrlRewriteFormatException(
+                element,
+                $"The {rewriteTag} parameter '{attribute.Value}' was not recognized"
+            );
         }
         return result;
     }
@@ -279,7 +380,10 @@ internal class UrlRewriteFileParser
         }
         else if (!Enum.TryParse(attribute.Value, ignoreCase: true, result: out enumResult))
         {
-            throw new InvalidUrlRewriteFormatException(element, $"The {rewriteTag} parameter '{attribute.Value}' was not recognized");
+            throw new InvalidUrlRewriteFormatException(
+                element,
+                $"The {rewriteTag} parameter '{attribute.Value}' was not recognized"
+            );
         }
         return enumResult;
     }

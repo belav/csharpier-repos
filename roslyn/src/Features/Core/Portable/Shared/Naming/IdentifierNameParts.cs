@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
             BaseNameParts = baseNameParts;
         }
 
-        public static IdentifierNameParts CreateIdentifierNameParts(ISymbol symbol, ImmutableArray<NamingRule> rules)
+        public static IdentifierNameParts CreateIdentifierNameParts(
+            ISymbol symbol,
+            ImmutableArray<NamingRule> rules
+        )
         {
             var baseName = RemovePrefixesAndSuffixes(symbol, rules, symbol.Name);
 
@@ -36,7 +39,11 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
             return new IdentifierNameParts(baseName, words);
         }
 
-        private static string RemovePrefixesAndSuffixes(ISymbol symbol, ImmutableArray<NamingRule> rules, string baseName)
+        private static string RemovePrefixesAndSuffixes(
+            ISymbol symbol,
+            ImmutableArray<NamingRule> rules,
+            string baseName
+        )
         {
             var newBaseName = baseName;
 
@@ -47,14 +54,14 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
                     // remove specified prefix
                     var prefix = rule.NamingStyle.Prefix;
                     newBaseName = newBaseName.StartsWith(prefix)
-                        ? newBaseName[prefix.Length..]
-                        : newBaseName;
+                      ? newBaseName[prefix.Length..]
+                      : newBaseName;
 
                     // remove specified suffix
                     var suffix = rule.NamingStyle.Suffix;
                     newBaseName = newBaseName.EndsWith(suffix)
-                        ? newBaseName.Substring(0, newBaseName.Length - suffix.Length)
-                        : newBaseName;
+                      ? newBaseName.Substring(0, newBaseName.Length - suffix.Length)
+                      : newBaseName;
 
                     break;
                 }
@@ -73,7 +80,10 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
             return RemovePrefixesAndSuffixes(symbol, rules, newBaseName);
         }
 
-        private static ImmutableArray<string> CreateWords(in TemporaryArray<TextSpan> parts, string name)
+        private static ImmutableArray<string> CreateWords(
+            in TemporaryArray<TextSpan> parts,
+            string name
+        )
         {
             using var words = TemporaryArray<string>.Empty;
             foreach (var part in parts)

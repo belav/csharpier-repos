@@ -35,13 +35,15 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// The default serialization binder used when resolving and loading classes from type names.
     /// </summary>
-    public class DefaultSerializationBinder :
+    public class DefaultSerializationBinder
+        :
 #pragma warning disable 618
-        SerializationBinder,
+          SerializationBinder,
 #pragma warning restore 618
-        ISerializationBinder
+          ISerializationBinder
     {
-        internal static readonly DefaultSerializationBinder Instance = new DefaultSerializationBinder();
+        internal static readonly DefaultSerializationBinder Instance =
+            new DefaultSerializationBinder();
 
         private readonly ThreadSafeStore<StructMultiKey<string?, string>, Type> _typeCache;
 
@@ -50,7 +52,9 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         public DefaultSerializationBinder()
         {
-            _typeCache = new ThreadSafeStore<StructMultiKey<string?, string>, Type>(GetTypeFromTypeNameKey);
+            _typeCache = new ThreadSafeStore<StructMultiKey<string?, string>, Type>(
+                GetTypeFromTypeNameKey
+            );
         }
 
         private Type GetTypeFromTypeNameKey(StructMultiKey<string?, string> typeNameKey)
@@ -93,7 +97,12 @@ namespace Newtonsoft.Json.Serialization
 
                 if (assembly == null)
                 {
-                    throw new JsonSerializationException("Could not load assembly '{0}'.".FormatWith(CultureInfo.InvariantCulture, assemblyName));
+                    throw new JsonSerializationException(
+                        "Could not load assembly '{0}'.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            assemblyName
+                        )
+                    );
                 }
 
                 Type? type = assembly.GetType(typeName);
@@ -109,13 +118,26 @@ namespace Newtonsoft.Json.Serialization
                         }
                         catch (Exception ex)
                         {
-                            throw new JsonSerializationException("Could not find type '{0}' in assembly '{1}'.".FormatWith(CultureInfo.InvariantCulture, typeName, assembly.FullName), ex);
+                            throw new JsonSerializationException(
+                                "Could not find type '{0}' in assembly '{1}'.".FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    typeName,
+                                    assembly.FullName
+                                ),
+                                ex
+                            );
                         }
                     }
 
                     if (type == null)
                     {
-                        throw new JsonSerializationException("Could not find type '{0}' in assembly '{1}'.".FormatWith(CultureInfo.InvariantCulture, typeName, assembly.FullName));
+                        throw new JsonSerializationException(
+                            "Could not find type '{0}' in assembly '{1}'.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                typeName,
+                                assembly.FullName
+                            )
+                        );
                     }
                 }
 
@@ -157,9 +179,15 @@ namespace Newtonsoft.Json.Serialization
                                 --scope;
                                 if (scope == 0)
                                 {
-                                    string typeArgAssemblyQualifiedName = typeName.Substring(typeArgStartIndex, i - typeArgStartIndex);
+                                    string typeArgAssemblyQualifiedName = typeName.Substring(
+                                        typeArgStartIndex,
+                                        i - typeArgStartIndex
+                                    );
 
-                                    StructMultiKey<string?, string> typeNameKey = ReflectionUtils.SplitFullyQualifiedTypeName(typeArgAssemblyQualifiedName);
+                                    StructMultiKey<string?, string> typeNameKey =
+                                        ReflectionUtils.SplitFullyQualifiedTypeName(
+                                            typeArgAssemblyQualifiedName
+                                        );
                                     genericTypeArguments.Add(GetTypeByName(typeNameKey));
                                 }
                                 break;

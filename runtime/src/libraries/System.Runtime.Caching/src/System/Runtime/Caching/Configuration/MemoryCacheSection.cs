@@ -11,46 +11,41 @@ namespace System.Runtime.Caching.Configuration
 {
     /*
        <system.runtime.caching>
-         <memoryCaches>
-           <namedCaches>
-             <add name="Default" physicalMemoryPercentage="0" pollingInterval="00:02:00"/>
-             <add name="Foo" physicalMemoryPercentage="0" pollingInterval="00:02:00"/>
-             <add name="Bar" physicalMemoryPercentage="0" pollingInterval="00:02:00"/>
-           </namedCaches>
-         </memoryCaches>
+       <memoryCaches>
+       <namedCaches>
+       <add name="Default" physicalMemoryPercentage="0" pollingInterval="00:02:00"/>
+       <add name="Foo" physicalMemoryPercentage="0" pollingInterval="00:02:00"/>
+       <add name="Bar" physicalMemoryPercentage="0" pollingInterval="00:02:00"/>
+       </namedCaches>
+       </memoryCaches>
        </system.caching>
-    */
+       */
 
 #if NET5_0_OR_GREATER
     [UnsupportedOSPlatform("browser")]
 #endif
     internal sealed class MemoryCacheSection : ConfigurationSection
     {
-        private static readonly ConfigurationProperty s_propNamedCaches = new ConfigurationProperty("namedCaches",
+        private static readonly ConfigurationProperty s_propNamedCaches = new ConfigurationProperty(
+            "namedCaches",
             typeof(MemoryCacheSettingsCollection),
             null, // defaultValue
-            ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection() { s_propNamedCaches };
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection() { s_propNamedCaches };
 
-        public MemoryCacheSection()
-        {
-        }
+        public MemoryCacheSection() { }
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return s_properties;
-            }
+            get { return s_properties; }
         }
 
         [ConfigurationProperty("namedCaches")]
         public MemoryCacheSettingsCollection NamedCaches
         {
-            get
-            {
-                return (MemoryCacheSettingsCollection)base[s_propNamedCaches];
-            }
+            get { return (MemoryCacheSettingsCollection)base[s_propNamedCaches]; }
         }
     }
 }

@@ -14,34 +14,45 @@ using Microsoft.CodeAnalysis.SimplifyThisOrMe;
 
 namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.SimplifyThisOrMe), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.SimplifyThisOrMe
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.RemoveUnnecessaryCast)]
     internal partial class CSharpSimplifyThisOrMeCodeFixProvider
         : AbstractSimplifyThisOrMeCodeFixProvider<MemberAccessExpressionSyntax>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpSimplifyThisOrMeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpSimplifyThisOrMeCodeFixProvider() { }
 
-        protected override string GetTitle()
-            => CSharpFeaturesResources.Remove_this_qualification;
+        protected override string GetTitle() => CSharpFeaturesResources.Remove_this_qualification;
 
-        protected override SyntaxNode Rewrite(SyntaxNode root, ISet<MemberAccessExpressionSyntax> memberAccessNodes)
-            => new Rewriter(memberAccessNodes).Visit(root);
+        protected override SyntaxNode Rewrite(
+            SyntaxNode root,
+            ISet<MemberAccessExpressionSyntax> memberAccessNodes
+        ) => new Rewriter(memberAccessNodes).Visit(root);
 
         private class Rewriter : CSharpSyntaxRewriter
         {
             private readonly ISet<MemberAccessExpressionSyntax> memberAccessNodes;
 
-            public Rewriter(ISet<MemberAccessExpressionSyntax> memberAccessNodes)
-                => this.memberAccessNodes = memberAccessNodes;
+            public Rewriter(ISet<MemberAccessExpressionSyntax> memberAccessNodes) =>
+                this.memberAccessNodes = memberAccessNodes;
 
-            public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
-                => memberAccessNodes.Contains(node)
-                    ? node.GetNameWithTriviaMoved()
-                    : base.VisitMemberAccessExpression(node);
+            public override SyntaxNode VisitMemberAccessExpression(
+                MemberAccessExpressionSyntax node
+            ) =>
+                memberAccessNodes.Contains(node)
+                  ? node.GetNameWithTriviaMoved()
+                  : base.VisitMemberAccessExpression(node);
         }
     }
 }

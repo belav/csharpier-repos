@@ -17,26 +17,33 @@ namespace System.Resources.Extensions
         private bool _requiresDeserializingResourceReader;
 
         // use hard-coded strings rather than typeof so that the version doesn't leak into resources files
-        internal const string DeserializingResourceReaderFullyQualifiedName = "System.Resources.Extensions.DeserializingResourceReader, System.Resources.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51";
-        internal const string RuntimeResourceSetFullyQualifiedName = "System.Resources.Extensions.RuntimeResourceSet, System.Resources.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51";
+        internal const string DeserializingResourceReaderFullyQualifiedName =
+            "System.Resources.Extensions.DeserializingResourceReader, System.Resources.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51";
+        internal const string RuntimeResourceSetFullyQualifiedName =
+            "System.Resources.Extensions.RuntimeResourceSet, System.Resources.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51";
 
         // an internal type name used to represent an unknown resource type, explicitly omit version to save
         // on size and avoid changes in user resources.  This works since we only ever load this type name
         // from calls to GetType from this assembly.
         private static readonly string UnknownObjectTypeName = typeof(UnknownType).FullName!;
 
-        private string ResourceReaderTypeName => _requiresDeserializingResourceReader ?
-            DeserializingResourceReaderFullyQualifiedName :
-            ResourceReaderFullyQualifiedName;
+        private string ResourceReaderTypeName =>
+            _requiresDeserializingResourceReader
+                ? DeserializingResourceReaderFullyQualifiedName
+                : ResourceReaderFullyQualifiedName;
 
-        private string ResourceSetTypeName => _requiresDeserializingResourceReader ?
-            RuntimeResourceSetFullyQualifiedName :
-            ResSetTypeName;
+        private string ResourceSetTypeName =>
+            _requiresDeserializingResourceReader
+                ? RuntimeResourceSetFullyQualifiedName
+                : ResSetTypeName;
 
         // a collection of primitive types in a dictionary, indexed by type name
         // using a comparer which handles type name comparisons similar to what
         // is done by reflection
-        private static readonly IReadOnlyDictionary<string, Type> s_primitiveTypes = new Dictionary<string, Type>(16, TypeNameComparer.Instance)
+        private static readonly IReadOnlyDictionary<string, Type> s_primitiveTypes = new Dictionary<
+            string,
+            Type
+        >(16, TypeNameComparer.Instance)
         {
             { typeof(string).FullName!, typeof(string) },
             { typeof(int).FullName!, typeof(int) },
@@ -95,7 +102,9 @@ namespace System.Resources.Extensions
 
                     if (converter == null)
                     {
-                        throw new TypeLoadException(SR.Format(SR.TypeLoadException_CannotLoadConverter, primitiveType));
+                        throw new TypeLoadException(
+                            SR.Format(SR.TypeLoadException_CannotLoadConverter, primitiveType)
+                        );
                     }
 
                     object primitiveValue = converter.ConvertFromInvariantString(value)!;
@@ -107,7 +116,11 @@ namespace System.Resources.Extensions
             }
             else
             {
-                AddResourceData(name, typeName, new ResourceDataRecord(SerializationFormat.TypeConverterString, value));
+                AddResourceData(
+                    name,
+                    typeName,
+                    new ResourceDataRecord(SerializationFormat.TypeConverterString, value)
+                );
                 _requiresDeserializingResourceReader = true;
             }
         }
@@ -128,7 +141,11 @@ namespace System.Resources.Extensions
             if (typeName == null)
                 throw new ArgumentNullException(nameof(typeName));
 
-            AddResourceData(name, typeName, new ResourceDataRecord(SerializationFormat.TypeConverterByteArray, value));
+            AddResourceData(
+                name,
+                typeName,
+                new ResourceDataRecord(SerializationFormat.TypeConverterByteArray, value)
+            );
 
             _requiresDeserializingResourceReader = true;
         }
@@ -155,7 +172,11 @@ namespace System.Resources.Extensions
                 typeName = UnknownObjectTypeName;
             }
 
-            AddResourceData(name, typeName, new ResourceDataRecord(SerializationFormat.BinaryFormatter, value));
+            AddResourceData(
+                name,
+                typeName,
+                new ResourceDataRecord(SerializationFormat.BinaryFormatter, value)
+            );
 
             // Even though ResourceReader can handle BinaryFormatted resources, the resource may contain
             // type names that were mangled by the ResXWriter's SerializationBinder, which we need to fix
@@ -171,7 +192,12 @@ namespace System.Resources.Extensions
         /// <param name="value">Value of the resource in Stream form understood by the types constructor</param>
         /// <param name="typeName">Assembly qualified type name of the resource</param>
         /// <param name="closeAfterWrite">Indicates that the stream should be closed after resources have been written</param>
-        public void AddActivatorResource(string name, Stream value, string typeName, bool closeAfterWrite = false)
+        public void AddActivatorResource(
+            string name,
+            Stream value,
+            string typeName,
+            bool closeAfterWrite = false
+        )
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -183,7 +209,11 @@ namespace System.Resources.Extensions
             if (!value.CanSeek)
                 throw new ArgumentException(SR.NotSupported_UnseekableStream);
 
-            AddResourceData(name, typeName, new ResourceDataRecord(SerializationFormat.ActivatorStream, value, closeAfterWrite));
+            AddResourceData(
+                name,
+                typeName,
+                new ResourceDataRecord(SerializationFormat.ActivatorStream, value, closeAfterWrite)
+            );
 
             _requiresDeserializingResourceReader = true;
         }
@@ -194,7 +224,11 @@ namespace System.Resources.Extensions
             internal readonly object Data;
             internal readonly bool CloseAfterWrite;
 
-            internal ResourceDataRecord(SerializationFormat format, object data, bool closeAfterWrite = false)
+            internal ResourceDataRecord(
+                SerializationFormat format,
+                object data,
+                bool closeAfterWrite = false
+            )
             {
                 Format = format;
                 Data = data;
@@ -219,47 +253,47 @@ namespace System.Resources.Extensions
                 switch (record.Format)
                 {
                     case SerializationFormat.BinaryFormatter:
+                    {
+                        byte[] data = (byte[])record.Data;
+
+                        // only write length if using DeserializingResourceReader, ResourceReader
+                        // doesn't constrain binaryFormatter
+                        if (_requiresDeserializingResourceReader)
                         {
-                            byte[] data = (byte[])record.Data;
-
-                            // only write length if using DeserializingResourceReader, ResourceReader
-                            // doesn't constrain binaryFormatter
-                            if (_requiresDeserializingResourceReader)
-                            {
-                                writer.Write7BitEncodedInt(data.Length);
-                            }
-
-                            writer.Write(data);
-                            break;
-                        }
-                    case SerializationFormat.ActivatorStream:
-                        {
-                            Stream stream = (Stream)record.Data;
-
-                            if (stream.Length > int.MaxValue)
-                                throw new ArgumentException(SR.ArgumentOutOfRange_StreamLength);
-
-                            stream.Position = 0;
-
-                            writer.Write7BitEncodedInt((int)stream.Length);
-
-                            stream.CopyTo(writer.BaseStream);
-
-                            break;
-                        }
-                    case SerializationFormat.TypeConverterByteArray:
-                        {
-                            byte[] data = (byte[])record.Data;
                             writer.Write7BitEncodedInt(data.Length);
-                            writer.Write(data);
-                            break;
                         }
+
+                        writer.Write(data);
+                        break;
+                    }
+                    case SerializationFormat.ActivatorStream:
+                    {
+                        Stream stream = (Stream)record.Data;
+
+                        if (stream.Length > int.MaxValue)
+                            throw new ArgumentException(SR.ArgumentOutOfRange_StreamLength);
+
+                        stream.Position = 0;
+
+                        writer.Write7BitEncodedInt((int)stream.Length);
+
+                        stream.CopyTo(writer.BaseStream);
+
+                        break;
+                    }
+                    case SerializationFormat.TypeConverterByteArray:
+                    {
+                        byte[] data = (byte[])record.Data;
+                        writer.Write7BitEncodedInt(data.Length);
+                        writer.Write(data);
+                        break;
+                    }
                     case SerializationFormat.TypeConverterString:
-                        {
-                            string data = (string)record.Data;
-                            writer.Write(data);
-                            break;
-                        }
+                    {
+                        string data = (string)record.Data;
+                        writer.Write(data);
+                        break;
+                    }
                     default:
                         // unreachable: indicates inconsistency in this class
                         throw new ArgumentException(nameof(ResourceDataRecord.Format));

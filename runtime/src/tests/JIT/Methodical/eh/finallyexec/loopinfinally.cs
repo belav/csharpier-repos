@@ -42,7 +42,11 @@ class Class1
         catch (Exception)
         {
             //to prevent infinite loops
-            if (visited) { Console.WriteLine("Error, finally never called..."); goto early_exit; }
+            if (visited)
+            {
+                Console.WriteLine("Error, finally never called...");
+                goto early_exit;
+            }
 
             Console.WriteLine("Caught an exception");
 
@@ -54,7 +58,8 @@ class Class1
             inside_finally:
             Console.WriteLine("In finally, i = {0}", i);
             i++;
-            if (i % 2 == 0) goto inside_finally;
+            if (i % 2 == 0)
+                goto inside_finally;
         }
 
         early_exit:

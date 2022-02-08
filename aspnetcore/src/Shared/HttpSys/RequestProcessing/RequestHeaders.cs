@@ -32,7 +32,9 @@ internal partial class RequestHeaders : IHeaderDictionary
         {
             if (_extra == null)
             {
-                var newDict = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
+                var newDict = new Dictionary<string, StringValues>(
+                    StringComparer.OrdinalIgnoreCase
+                );
                 GetUnknownHeaders(newDict);
                 Interlocked.CompareExchange(ref _extra, newDict, null);
             }
@@ -108,7 +110,9 @@ internal partial class RequestHeaders : IHeaderDictionary
         return PropertiesTryGetValue(key, out value) || Extra.TryGetValue(key, out value);
     }
 
-    void ICollection<KeyValuePair<string, StringValues>>.Add(KeyValuePair<string, StringValues> item)
+    void ICollection<KeyValuePair<string, StringValues>>.Add(
+        KeyValuePair<string, StringValues> item
+    )
     {
         ((IDictionary<string, StringValues>)this).Add(item.Key, item.Value);
     }
@@ -122,12 +126,18 @@ internal partial class RequestHeaders : IHeaderDictionary
         Extra.Clear();
     }
 
-    bool ICollection<KeyValuePair<string, StringValues>>.Contains(KeyValuePair<string, StringValues> item)
+    bool ICollection<KeyValuePair<string, StringValues>>.Contains(
+        KeyValuePair<string, StringValues> item
+    )
     {
-        return ((IDictionary<string, StringValues>)this).TryGetValue(item.Key, out var value) && Equals(value, item.Value);
+        return ((IDictionary<string, StringValues>)this).TryGetValue(item.Key, out var value)
+            && Equals(value, item.Value);
     }
 
-    void ICollection<KeyValuePair<string, StringValues>>.CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex)
+    void ICollection<KeyValuePair<string, StringValues>>.CopyTo(
+        KeyValuePair<string, StringValues>[] array,
+        int arrayIndex
+    )
     {
         PropertiesEnumerable().Concat(Extra).ToArray().CopyTo(array, arrayIndex);
     }
@@ -149,9 +159,14 @@ internal partial class RequestHeaders : IHeaderDictionary
                 return _contentLength;
             }
 
-            if (rawValue.Count == 1 &&
-                !string.IsNullOrWhiteSpace(rawValue[0]) &&
-                HeaderUtilities.TryParseNonNegativeInt64(new StringSegment(rawValue[0]).Trim(), out value))
+            if (
+                rawValue.Count == 1
+                && !string.IsNullOrWhiteSpace(rawValue[0])
+                && HeaderUtilities.TryParseNonNegativeInt64(
+                    new StringSegment(rawValue[0]).Trim(),
+                    out value
+                )
+            )
             {
                 _contentLengthText = rawValue;
                 _contentLength = value;
@@ -168,7 +183,11 @@ internal partial class RequestHeaders : IHeaderDictionary
             {
                 if (value.Value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value.Value, "Cannot be negative.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value.Value,
+                        "Cannot be negative."
+                    );
                 }
                 _contentLengthText = HeaderUtilities.FormatNonNegativeInt64(value.Value);
                 this[HeaderNames.ContentLength] = _contentLengthText;
@@ -185,10 +204,7 @@ internal partial class RequestHeaders : IHeaderDictionary
 
     public StringValues this[string key]
     {
-        get
-        {
-            return TryGetValue(key, out var values) ? values : StringValues.Empty;
-        }
+        get { return TryGetValue(key, out var values) ? values : StringValues.Empty; }
         set
         {
             if (StringValues.IsNullOrEmpty(value))
@@ -202,13 +218,17 @@ internal partial class RequestHeaders : IHeaderDictionary
         }
     }
 
-    bool ICollection<KeyValuePair<string, StringValues>>.Remove(KeyValuePair<string, StringValues> item)
+    bool ICollection<KeyValuePair<string, StringValues>>.Remove(
+        KeyValuePair<string, StringValues> item
+    )
     {
-        return ((IDictionary<string, StringValues>)this).Contains(item) &&
-            ((IDictionary<string, StringValues>)this).Remove(item.Key);
+        return ((IDictionary<string, StringValues>)this).Contains(item)
+            && ((IDictionary<string, StringValues>)this).Remove(item.Key);
     }
 
-    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+        KeyValuePair<string, StringValues>
+    >.GetEnumerator()
     {
         return PropertiesEnumerable().Concat(Extra).GetEnumerator();
     }
@@ -222,7 +242,9 @@ internal partial class RequestHeaders : IHeaderDictionary
     {
         if (IsReadOnly)
         {
-            throw new InvalidOperationException("The response headers cannot be modified because the response has already started.");
+            throw new InvalidOperationException(
+                "The response headers cannot be modified because the response has already started."
+            );
         }
     }
 
