@@ -75,19 +75,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 canInfer = true;
 
                 // Check for Unicode
-                var unicodeMapping = _typeMappingSource
-                    .FindMapping(
-                        unwrappedClrType,
-                        null,
-                        keyOrIndex,
-                        unicode: null,
-                        size: mapping.Size,
-                        rowVersion: rowVersion,
-                        fixedLength: mapping.IsFixedLength,
-                        precision: mapping.Precision,
-                        scale: mapping.Scale
-                    )
-                    !;
+                var unicodeMapping = _typeMappingSource.FindMapping(
+                    unwrappedClrType,
+                    null,
+                    keyOrIndex,
+                    unicode: null,
+                    size: mapping.Size,
+                    rowVersion: rowVersion,
+                    fixedLength: mapping.IsFixedLength,
+                    precision: mapping.Precision,
+                    scale: mapping.Scale
+                )!;
 
                 scaffoldUnicode =
                     unicodeMapping.IsUnicode != defaultTypeMapping.IsUnicode
@@ -95,18 +93,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                         : null;
 
                 // Check for fixed-length
-                var fixedLengthMapping = _typeMappingSource
-                    .FindMapping(
-                        unwrappedClrType,
-                        null,
-                        keyOrIndex,
-                        unicode: mapping.IsUnicode,
-                        size: mapping.Size,
-                        fixedLength: null,
-                        precision: mapping.Precision,
-                        scale: mapping.Scale
-                    )
-                    !;
+                var fixedLengthMapping = _typeMappingSource.FindMapping(
+                    unwrappedClrType,
+                    null,
+                    keyOrIndex,
+                    unicode: mapping.IsUnicode,
+                    size: mapping.Size,
+                    fixedLength: null,
+                    precision: mapping.Precision,
+                    scale: mapping.Scale
+                )!;
 
                 scaffoldFixedLength =
                     fixedLengthMapping.IsFixedLength != defaultTypeMapping.IsFixedLength
@@ -114,37 +110,33 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                         : null;
 
                 // Check for size (= max-length)
-                var sizedMapping = _typeMappingSource
-                    .FindMapping(
-                        unwrappedClrType,
-                        null,
-                        keyOrIndex,
-                        unicode: mapping.IsUnicode,
-                        size: null,
-                        rowVersion: rowVersion,
-                        fixedLength: false, // Fixed length with no size is not valid
-                        precision: mapping.Precision,
-                        scale: mapping.Scale
-                    )
-                    !;
+                var sizedMapping = _typeMappingSource.FindMapping(
+                    unwrappedClrType,
+                    null,
+                    keyOrIndex,
+                    unicode: mapping.IsUnicode,
+                    size: null,
+                    rowVersion: rowVersion,
+                    fixedLength: false, // Fixed length with no size is not valid
+                    precision: mapping.Precision,
+                    scale: mapping.Scale
+                )!;
 
                 scaffoldMaxLength =
                     sizedMapping.Size != defaultTypeMapping.Size ? defaultTypeMapping.Size : null;
 
                 // Check for precision
-                var precisionMapping = _typeMappingSource
-                    .FindMapping(
-                        unwrappedClrType,
-                        null,
-                        keyOrIndex,
-                        unicode: mapping.IsUnicode,
-                        size: mapping.Size,
-                        rowVersion: rowVersion,
-                        fixedLength: mapping.IsFixedLength,
-                        precision: null,
-                        scale: mapping.Scale
-                    )
-                    !;
+                var precisionMapping = _typeMappingSource.FindMapping(
+                    unwrappedClrType,
+                    null,
+                    keyOrIndex,
+                    unicode: mapping.IsUnicode,
+                    size: mapping.Size,
+                    rowVersion: rowVersion,
+                    fixedLength: mapping.IsFixedLength,
+                    precision: null,
+                    scale: mapping.Scale
+                )!;
 
                 scaffoldPrecision =
                     precisionMapping.Precision != defaultTypeMapping.Precision
@@ -152,19 +144,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                         : null;
 
                 // Check for scale
-                var scaleMapping = _typeMappingSource
-                    .FindMapping(
-                        unwrappedClrType,
-                        null,
-                        keyOrIndex,
-                        unicode: mapping.IsUnicode,
-                        size: mapping.Size,
-                        rowVersion: rowVersion,
-                        fixedLength: mapping.IsFixedLength,
-                        precision: mapping.Precision,
-                        scale: null
-                    )
-                    !;
+                var scaleMapping = _typeMappingSource.FindMapping(
+                    unwrappedClrType,
+                    null,
+                    keyOrIndex,
+                    unicode: mapping.IsUnicode,
+                    size: mapping.Size,
+                    rowVersion: rowVersion,
+                    fixedLength: mapping.IsFixedLength,
+                    precision: mapping.Precision,
+                    scale: null
+                )!;
 
                 scaffoldScale =
                     scaleMapping.Scale != defaultTypeMapping.Scale

@@ -495,20 +495,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
                     newJoinEntityType =
                         joinEntityName == null
-                            ? ModelBuilder
-                                  .Entity(
-                                      joinEntityType,
-                                      ConfigurationSource.Explicit,
-                                      shouldBeOwned: false
-                                  )
-                                  !.Metadata
-                            : ModelBuilder
-                                  .SharedTypeEntity(
-                                      joinEntityName,
-                                      joinEntityType,
-                                      ConfigurationSource.Explicit
-                                  )
-                                  !.Metadata;
+                            ? ModelBuilder.Entity(
+                                  joinEntityType,
+                                  ConfigurationSource.Explicit,
+                                  shouldBeOwned: false
+                              )!.Metadata
+                            : ModelBuilder.SharedTypeEntity(
+                                  joinEntityName,
+                                  joinEntityType,
+                                  ConfigurationSource.Explicit
+                              )!.Metadata;
                 }
             }
 
@@ -571,9 +567,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         ConfigurationSource.Convention,
                         required: true,
                         skipNavigation.Inverse!.Name
-                    )
-                    !.IsUnique(false, ConfigurationSource.Convention)
-                    !.Metadata;
+                    )!
+                    .IsUnique(false, ConfigurationSource.Convention)!.Metadata;
             }
         }
 

@@ -161,9 +161,10 @@ namespace System.Data.SqlTypes
             {
                 if (s_createSqlReaderMethodInfo == null)
                 {
-                    s_createSqlReaderMethodInfo = typeof(System.Xml.XmlReader)
-                        .GetMethod("CreateSqlReader", BindingFlags.Static | BindingFlags.NonPublic)
-                        !;
+                    s_createSqlReaderMethodInfo = typeof(System.Xml.XmlReader).GetMethod(
+                        "CreateSqlReader",
+                        BindingFlags.Static | BindingFlags.NonPublic
+                    )!;
                 }
 
                 return s_createSqlReaderMethodInfo;

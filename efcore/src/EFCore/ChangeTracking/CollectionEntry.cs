@@ -317,8 +317,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private void EnsureInitialized() =>
             Metadata
-                .GetCollectionAccessor()
-                !.GetOrCreate(InternalEntry.Entity, forMaterialization: true);
+                .GetCollectionAccessor()!
+                .GetOrCreate(InternalEntry.Entity, forMaterialization: true);
 
         /// <summary>
         ///     The <see cref="EntityEntry" /> of an entity this navigation targets.

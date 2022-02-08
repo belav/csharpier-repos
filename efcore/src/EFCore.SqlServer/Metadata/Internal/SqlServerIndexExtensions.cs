@@ -121,18 +121,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 StoreObjectIdentifier storeObject
             ) =>
                 index
-                    .GetIncludeProperties()
-                    !.Select(
+                    .GetIncludeProperties()!
+                    .Select(
                         p => index.DeclaringEntityType.FindProperty(p)!.GetColumnName(storeObject)
                     )
                     .SequenceEqual(
                         duplicateIndex
-                            .GetIncludeProperties()
-                            !.Select(
+                            .GetIncludeProperties()!
+                            .Select(
                                 p =>
                                     duplicateIndex.DeclaringEntityType
-                                        .FindProperty(p)
-                                        !.GetColumnName(storeObject)
+                                        .FindProperty(p)!
+                                        .GetColumnName(storeObject)
                             )
                     );
         }
@@ -147,8 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                   + string.Join(
                       "', '",
                       index
-                          .GetIncludeProperties()
-                          !.Select(
+                          .GetIncludeProperties()!
+                          .Select(
                               p =>
                                   index.DeclaringEntityType
                                       .FindProperty(p)

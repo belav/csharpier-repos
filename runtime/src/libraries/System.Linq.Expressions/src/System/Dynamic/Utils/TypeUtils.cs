@@ -17,9 +17,8 @@ namespace System.Dynamic.Utils
             .Select(i => i.GetGenericTypeDefinition())
             .ToArray();
 
-        private static readonly ConstructorInfo s_nullableConstructor = typeof(Nullable<>)
-            .GetConstructor(typeof(Nullable<>).GetGenericArguments())
-            !;
+        private static readonly ConstructorInfo s_nullableConstructor =
+            typeof(Nullable<>).GetConstructor(typeof(Nullable<>).GetGenericArguments())!;
 
         public static Type GetNonNullableType(this Type type) =>
             IsNullableType(type) ? type.GetGenericArguments()[0] : type;
@@ -985,12 +984,10 @@ namespace System.Dynamic.Utils
         public static MethodInfo GetInvokeMethod(this Type delegateType)
         {
             Debug.Assert(typeof(Delegate).IsAssignableFrom(delegateType));
-            return delegateType
-                .GetMethod(
-                    "Invoke",
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                )
-                !;
+            return delegateType.GetMethod(
+                "Invoke",
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            )!;
         }
 
 #if FEATURE_COMPILE

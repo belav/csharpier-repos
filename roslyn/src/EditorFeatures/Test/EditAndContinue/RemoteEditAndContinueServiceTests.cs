@@ -227,16 +227,16 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             VerifyReanalyzeInvocation(ImmutableArray.Create(document.Id));
 
             var activeStatement = (
-                await remoteDebuggeeModuleMetadataProvider!
-                    .GetActiveStatementsAsync(CancellationToken.None)
+                await remoteDebuggeeModuleMetadataProvider
+                    !.GetActiveStatementsAsync(CancellationToken.None)
                     .ConfigureAwait(false)
             ).Single();
             Assert.Equal(as1.ActiveInstruction, activeStatement.ActiveInstruction);
             Assert.Equal(as1.SourceSpan, activeStatement.SourceSpan);
             Assert.Equal(as1.Flags, activeStatement.Flags);
 
-            var availability = await remoteDebuggeeModuleMetadataProvider!
-                .GetAvailabilityAsync(moduleId1, CancellationToken.None)
+            var availability = await remoteDebuggeeModuleMetadataProvider
+                !.GetAvailabilityAsync(moduleId1, CancellationToken.None)
                 .ConfigureAwait(false);
             Assert.Equal(
                 new ManagedHotReloadAvailability(
@@ -318,8 +318,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
 
                 var syntaxTree = project.Documents
                     .Single()
-                    .GetSyntaxTreeSynchronously(CancellationToken.None)
-                    !;
+                    .GetSyntaxTreeSynchronously(CancellationToken.None)!;
 
                 var documentDiagnostic = Diagnostic.Create(
                     diagnosticDescriptor1,

@@ -982,9 +982,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 list
             );
 
-            object? rootNode = DebuggerAttributes
-                .GetFieldValue(ImmutableSegmentedList.Create<string>("1", "2", "3"), "_root")
-                !;
+            object? rootNode = DebuggerAttributes.GetFieldValue(
+                ImmutableSegmentedList.Create<string>("1", "2", "3"),
+                "_root"
+            )!;
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>

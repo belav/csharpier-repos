@@ -870,8 +870,8 @@ namespace Wasm.Build.Tests
                 $"{msgPrefix} Could not find dotnet.wasm entry in blazor.boot.json"
             );
             Assert.True(
-                runtimeObj!
-                    .Where(
+                runtimeObj
+                    !.Where(
                         kvp =>
                             kvp.Key.StartsWith("dotnet.", StringComparison.OrdinalIgnoreCase)
                             && kvp.Key.EndsWith(".js", StringComparison.OrdinalIgnoreCase)

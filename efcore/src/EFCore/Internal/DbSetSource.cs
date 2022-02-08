@@ -54,8 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 t =>
                     (Func<DbContext, string?, object>)createMethod
                         .MakeGenericMethod(t.Type)
-                        .Invoke(null, null)
-                        !
+                        .Invoke(null, null)!
             )(context, name);
 
         [UsedImplicitly]

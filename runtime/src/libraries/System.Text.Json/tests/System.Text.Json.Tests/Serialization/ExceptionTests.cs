@@ -562,19 +562,17 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(StructWithBadCtor))]
         public static void TypeWithBadCtorNoProps(Type type)
         {
-            var instance = Activator
-                .CreateInstance(
-                    type,
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: new object[]
-                    {
-                        new SerializationInfo(typeof(Type), new FormatterConverter()),
-                        new StreamingContext(default)
-                    },
-                    culture: null
-                )
-                !;
+            var instance = Activator.CreateInstance(
+                type,
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: new object[]
+                {
+                    new SerializationInfo(typeof(Type), new FormatterConverter()),
+                    new StreamingContext(default)
+                },
+                culture: null
+            )!;
 
             Assert.Equal("{}", JsonSerializer.Serialize(instance, type));
 
@@ -590,19 +588,17 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(StructWithBadCtor_WithProps))]
         public static void TypeWithBadCtorWithPropsInvalid(Type type)
         {
-            var instance = Activator
-                .CreateInstance(
-                    type,
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: new object[]
-                    {
-                        new SerializationInfo(typeof(Type), new FormatterConverter()),
-                        new StreamingContext(default)
-                    },
-                    culture: null
-                )
-                !;
+            var instance = Activator.CreateInstance(
+                type,
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: new object[]
+                {
+                    new SerializationInfo(typeof(Type), new FormatterConverter()),
+                    new StreamingContext(default)
+                },
+                culture: null
+            )!;
 
             string serializationInfoName = typeof(SerializationInfo).FullName;
 

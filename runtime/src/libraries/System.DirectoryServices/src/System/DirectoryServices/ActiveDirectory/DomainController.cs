@@ -170,9 +170,11 @@ namespace System.DirectoryServices.ActiveDirectory
                         context.Name
                     );
                 }
-                dcDnsName = (string)PropertyManager
-                    .GetPropertyValue(context, rootDSE, PropertyManager.DnsHostName)
-                    !;
+                dcDnsName = (string)PropertyManager.GetPropertyValue(
+                    context,
+                    rootDSE,
+                    PropertyManager.DnsHostName
+                )!;
             }
             catch (COMException e)
             {
@@ -780,9 +782,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 try
                 {
-                    serverUTCTime = (string)PropertyManager
-                        .GetPropertyValue(context, rootDSE, PropertyManager.CurrentTime)
-                        !;
+                    serverUTCTime = (string)PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.CurrentTime
+                    )!;
                 }
                 finally
                 {
@@ -806,9 +810,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 try
                 {
-                    serverHighestCommittedUsn = (string)PropertyManager
-                        .GetPropertyValue(context, rootDSE, PropertyManager.HighestCommittedUSN)
-                        !;
+                    serverHighestCommittedUsn = (string)PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.HighestCommittedUSN
+                    )!;
                 }
                 finally
                 {
@@ -830,9 +836,11 @@ namespace System.DirectoryServices.ActiveDirectory
                         ComputerObjectName
                     );
                     // is in the form Windows Server 2003
-                    _cachedOSVersion = (string)PropertyManager
-                        .GetPropertyValue(context, computerEntry, PropertyManager.OperatingSystem)
-                        !;
+                    _cachedOSVersion = (string)PropertyManager.GetPropertyValue(
+                        context,
+                        computerEntry,
+                        PropertyManager.OperatingSystem
+                    )!;
                 }
                 return _cachedOSVersion;
             }
@@ -851,13 +859,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
 
                     // is in the form Windows Server 2003
-                    string osVersion = (string)PropertyManager
-                        .GetPropertyValue(
-                            context,
-                            computerEntry,
-                            PropertyManager.OperatingSystemVersion
-                        )
-                        !;
+                    string osVersion = (string)PropertyManager.GetPropertyValue(
+                        context,
+                        computerEntry,
+                        PropertyManager.OperatingSystemVersion
+                    )!;
 
                     // this could be in the form 5.2 (3790), so we need to take out the (3790)
                     int index = osVersion.IndexOf('(');

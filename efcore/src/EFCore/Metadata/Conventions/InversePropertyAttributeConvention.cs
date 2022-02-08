@@ -141,9 +141,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 Attribute.IsDefined(inverseNavigationPropertyInfo, typeof(InversePropertyAttribute))
             )
             {
-                var inverseAttribute = inverseNavigationPropertyInfo
-                    .GetCustomAttribute<InversePropertyAttribute>(true)
-                    !;
+                var inverseAttribute =
+                    inverseNavigationPropertyInfo.GetCustomAttribute<InversePropertyAttribute>(
+                        true
+                    )!;
                 if (inverseAttribute.Property != navigationMemberInfo.GetSimpleMemberName())
                 {
                     throw new InvalidOperationException(
@@ -399,7 +400,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                     var existingAmbiguousNavigation = FindActualEntityType(
                         ambiguousInverse.Value.Item2
-                    )!.FindSkipNavigation(ambiguousInverse.Value.Item1);
+                    )
+                        !.FindSkipNavigation(ambiguousInverse.Value.Item1);
                     if (existingAmbiguousNavigation != null)
                     {
                         existingAmbiguousNavigation.DeclaringEntityType.Builder.HasNoSkipNavigation(
@@ -438,7 +440,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                     var existingAmbiguousNavigation = FindActualEntityType(
                         ambiguousInverse.Value.Item2
-                    )!.FindNavigation(ambiguousInverse.Value.Item1);
+                    )
+                        !.FindNavigation(ambiguousInverse.Value.Item1);
                     if (existingAmbiguousNavigation != null)
                     {
                         Remove(existingAmbiguousNavigation);

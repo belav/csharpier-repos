@@ -25,13 +25,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     The <see cref="MethodInfo" /> for the <see cref="ValueBuffer" /> get method.
         /// </summary>
-        public static readonly MethodInfo GetValueBufferMethod = typeof(MaterializationContext)
-            .GetProperty(nameof(ValueBuffer))
-            !.GetMethod!;
+        public static readonly MethodInfo GetValueBufferMethod =
+            typeof(MaterializationContext).GetProperty(nameof(ValueBuffer))!.GetMethod!;
 
-        internal static readonly PropertyInfo ContextProperty = typeof(MaterializationContext)
-            .GetProperty(nameof(Context))
-            !;
+        internal static readonly PropertyInfo ContextProperty =
+            typeof(MaterializationContext).GetProperty(nameof(Context))!;
 
         /// <summary>
         ///     Creates a new <see cref="MaterializationContext" /> instance.

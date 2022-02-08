@@ -247,8 +247,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var semanticModel = await document
                 .GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            return semanticModel!
-                .GetDiagnostics(cancellationToken: cancellationToken)
+            return semanticModel
+                !.GetDiagnostics(cancellationToken: cancellationToken)
                 .WhereAsArray(
                     diag =>
                         diag.Severity == DiagnosticSeverity.Error

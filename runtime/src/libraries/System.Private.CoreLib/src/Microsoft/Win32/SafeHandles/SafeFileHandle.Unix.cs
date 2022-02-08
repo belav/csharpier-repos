@@ -95,11 +95,9 @@ namespace Microsoft.Win32.SafeHandles
                     && (
                         (flags & Interop.Sys.OpenFlags.O_CREAT) != 0
                         || !DirectoryExists(
-                            System.IO.Path
-                                .GetDirectoryName(
-                                    System.IO.Path.TrimEndingDirectorySeparator(path!)
-                                )
-                                !
+                            System.IO.Path.GetDirectoryName(
+                                System.IO.Path.TrimEndingDirectorySeparator(path!)
+                            )!
                         )
                     );
 

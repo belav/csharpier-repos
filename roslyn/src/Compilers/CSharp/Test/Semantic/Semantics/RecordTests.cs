@@ -12241,8 +12241,8 @@ record B2(int X, int Y) : A
                 GetProperties(comp, "B2").ToTestDisplayStrings()
             );
 
-            var b1Ctor = comp.GetTypeByMetadataName("B1")
-                !.GetMembersUnordered()
+            var b1Ctor = comp.GetTypeByMetadataName("B1")!
+                .GetMembersUnordered()
                 .OfType<SynthesizedRecordConstructor>()
                 .Single();
             Assert.Equal("B1..ctor(System.Int32 X, System.Int32 Y)", b1Ctor.ToTestDisplayString());
@@ -27256,8 +27256,8 @@ interface I {}
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
-                    speculativeModel!
-                        .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
+                    speculativeModel
+                        !.GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
                         .Symbol.ToTestDisplayString()
                 );
                 Assert.Equal(
@@ -27293,8 +27293,8 @@ interface I {}
 
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
-                    speculativeModel!
-                        .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
+                    speculativeModel
+                        !.GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
                         .Symbol.ToTestDisplayString()
                 );
                 Assert.Equal(

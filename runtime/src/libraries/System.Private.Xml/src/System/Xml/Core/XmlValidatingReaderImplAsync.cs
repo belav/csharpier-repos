@@ -98,8 +98,8 @@ namespace System.Xml
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
-            int readCount = await _readBinaryHelper!
-                .ReadContentAsBase64Async(buffer, index, count)
+            int readCount = await _readBinaryHelper
+                !.ReadContentAsBase64Async(buffer, index, count)
                 .ConfigureAwait(false);
 
             // setup parsingFunction
@@ -131,8 +131,8 @@ namespace System.Xml
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
-            int readCount = await _readBinaryHelper!
-                .ReadContentAsBinHexAsync(buffer, index, count)
+            int readCount = await _readBinaryHelper
+                !.ReadContentAsBinHexAsync(buffer, index, count)
                 .ConfigureAwait(false);
 
             // setup parsingFunction
@@ -164,8 +164,8 @@ namespace System.Xml
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
-            int readCount = await _readBinaryHelper!
-                .ReadElementContentAsBase64Async(buffer, index, count)
+            int readCount = await _readBinaryHelper
+                !.ReadElementContentAsBase64Async(buffer, index, count)
                 .ConfigureAwait(false);
 
             // setup parsingFunction
@@ -197,8 +197,8 @@ namespace System.Xml
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
-            int readCount = await _readBinaryHelper!
-                .ReadElementContentAsBinHexAsync(buffer, index, count)
+            int readCount = await _readBinaryHelper
+                !.ReadElementContentAsBinHexAsync(buffer, index, count)
                 .ConfigureAwait(false);
 
             // setup parsingFunction

@@ -30,8 +30,8 @@ namespace Roslyn.Test.Utilities
             if (!DotNetExeExists(dotNetInstallDir))
             {
                 dotNetInstallDir = Environment
-                    .GetEnvironmentVariable("PATH")
-                    !.Split(Path.PathSeparator)
+                    .GetEnvironmentVariable("PATH")!
+                    .Split(Path.PathSeparator)
                     .FirstOrDefault(DotNetExeExists);
             }
 

@@ -1277,9 +1277,10 @@ namespace System.Runtime.Serialization.Json
                     _ilg.Load(-1);
                     _ilg.Ldloca(_objectLocal);
                     _ilg.Call(
-                        typeof(JsonReaderDelegator)
-                            .GetMethod(readArrayMethod, Globals.ScanAllMembers)
-                            !
+                        typeof(JsonReaderDelegator).GetMethod(
+                            readArrayMethod,
+                            Globals.ScanAllMembers
+                        )!
                     );
                     return true;
                 }

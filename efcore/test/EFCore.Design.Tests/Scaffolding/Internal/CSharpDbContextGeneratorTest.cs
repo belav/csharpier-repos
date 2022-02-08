@@ -1443,12 +1443,10 @@ namespace TestNamespace
         private class TestModelAnnotationCodeGenerator : SqlServerAnnotationCodeGenerator
         {
             private static readonly MethodInfo _testFluentApiCallMethodInfo =
-                typeof(CustomTestNamespace.TestModelBuilderExtensions)
-                    .GetRuntimeMethod(
-                        nameof(CustomTestNamespace.TestModelBuilderExtensions.TestFluentApiCall),
-                        new[] { typeof(ModelBuilder) }
-                    )
-                    !;
+                typeof(CustomTestNamespace.TestModelBuilderExtensions).GetRuntimeMethod(
+                    nameof(CustomTestNamespace.TestModelBuilderExtensions.TestFluentApiCall),
+                    new[] { typeof(ModelBuilder) }
+                )!;
 
             public TestModelAnnotationCodeGenerator(
                 AnnotationCodeGeneratorDependencies dependencies

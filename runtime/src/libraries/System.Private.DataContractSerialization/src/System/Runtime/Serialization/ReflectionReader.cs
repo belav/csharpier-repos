@@ -31,18 +31,16 @@ namespace System.Runtime.Serialization
         );
 
         private static MethodInfo? s_getCollectionSetItemDelegateMethod;
-        private static readonly MethodInfo s_objectToKeyValuePairGetKey = typeof(ReflectionReader)
-            .GetMethod(
+        private static readonly MethodInfo s_objectToKeyValuePairGetKey =
+            typeof(ReflectionReader).GetMethod(
                 nameof(ObjectToKeyValuePairGetKey),
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
-            )
-            !;
-        private static readonly MethodInfo s_objectToKeyValuePairGetValue = typeof(ReflectionReader)
-            .GetMethod(
+            )!;
+        private static readonly MethodInfo s_objectToKeyValuePairGetValue =
+            typeof(ReflectionReader).GetMethod(
                 nameof(ObjectToKeyValuePairGetValue),
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
-            )
-            !;
+            )!;
 
         private static readonly Type[] s_arrayConstructorParameters = new Type[]
         {
@@ -56,12 +54,10 @@ namespace System.Runtime.Serialization
             {
                 if (s_getCollectionSetItemDelegateMethod == null)
                 {
-                    s_getCollectionSetItemDelegateMethod = typeof(ReflectionReader)
-                        .GetMethod(
-                            nameof(GetCollectionSetItemDelegate),
-                            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
-                        )
-                        !;
+                    s_getCollectionSetItemDelegateMethod = typeof(ReflectionReader).GetMethod(
+                        nameof(GetCollectionSetItemDelegate),
+                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+                    )!;
                 }
                 return s_getCollectionSetItemDelegateMethod!;
             }
@@ -288,12 +284,10 @@ namespace System.Runtime.Serialization
             MethodInfo getCollectionSetItemDelegateMethod =
                 CollectionSetItemDelegateMethod.MakeGenericMethod(itemType);
             CollectionSetItemDelegate collectionSetItemDelegate =
-                (CollectionSetItemDelegate)getCollectionSetItemDelegateMethod
-                    .Invoke(
-                        this,
-                        new object[] { collectionContract, resultCollection, isReadOnlyCollection }
-                    )
-                    !;
+                (CollectionSetItemDelegate)getCollectionSetItemDelegateMethod.Invoke(
+                    this,
+                    new object[] { collectionContract, resultCollection, isReadOnlyCollection }
+                )!;
 
             int index = 0;
             while (true)
@@ -340,9 +334,10 @@ namespace System.Runtime.Serialization
             {
                 MethodInfo trimArraySizeMethod =
                     XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(itemType);
-                resultCollection = trimArraySizeMethod
-                    .Invoke(null, new object[] { resultCollection, index })
-                    !;
+                resultCollection = trimArraySizeMethod.Invoke(
+                    null,
+                    new object[] { resultCollection, index }
+                )!;
             }
 
             return resultCollection;
@@ -834,9 +829,9 @@ namespace System.Runtime.Serialization
             {
                 if (collectionContract.UnderlyingType.IsValueType)
                 {
-                    object newValueObject = Activator
-                        .CreateInstance(collectionContract.UnderlyingType)
-                        !;
+                    object newValueObject = Activator.CreateInstance(
+                        collectionContract.UnderlyingType
+                    )!;
                     return newValueObject;
                 }
                 else if (collectionContract.UnderlyingType == Globals.TypeOfIDictionary)

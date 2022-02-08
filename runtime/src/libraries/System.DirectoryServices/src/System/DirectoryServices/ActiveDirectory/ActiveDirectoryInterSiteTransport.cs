@@ -71,9 +71,11 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager
-                    .GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)
-                    !;
+                string config = (string)PropertyManager.GetPropertyValue(
+                    context,
+                    de,
+                    PropertyManager.ConfigurationNamingContext
+                )!;
                 string containerDN = "CN=Inter-Site Transports,CN=Sites," + config;
                 if (transport == ActiveDirectoryTransportType.Rpc)
                     containerDN = "CN=IP," + containerDN;
@@ -274,9 +276,10 @@ namespace System.DirectoryServices.ActiveDirectory
                         foreach (SearchResult result in results)
                         {
                             DirectoryEntry connectionEntry = result.GetDirectoryEntry();
-                            string cn = (string)PropertyManager
-                                .GetSearchResultPropertyValue(result, PropertyManager.Cn)
-                                !;
+                            string cn = (string)PropertyManager.GetSearchResultPropertyValue(
+                                result,
+                                PropertyManager.Cn
+                            )!;
                             ActiveDirectorySiteLink link = new ActiveDirectorySiteLink(
                                 _context,
                                 cn,
@@ -332,9 +335,10 @@ namespace System.DirectoryServices.ActiveDirectory
                         foreach (SearchResult result in results)
                         {
                             DirectoryEntry connectionEntry = result.GetDirectoryEntry();
-                            string cn = (string)PropertyManager
-                                .GetSearchResultPropertyValue(result, PropertyManager.Cn)
-                                !;
+                            string cn = (string)PropertyManager.GetSearchResultPropertyValue(
+                                result,
+                                PropertyManager.Cn
+                            )!;
                             ActiveDirectorySiteLinkBridge bridge =
                                 new ActiveDirectorySiteLinkBridge(_context, cn, _transport, true);
                             bridge.cachedEntry = connectionEntry;

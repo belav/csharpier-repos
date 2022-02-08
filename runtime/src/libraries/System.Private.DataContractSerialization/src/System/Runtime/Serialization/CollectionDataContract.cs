@@ -1047,9 +1047,10 @@ namespace System.Runtime.Serialization
                                 var buildIncrementCollectionCountDelegate =
                                     GetBuildIncrementCollectionCountGenericDelegate(ItemType);
                                 _incrementCollectionCountDelegate =
-                                    (IncrementCollectionCountDelegate)buildIncrementCollectionCountDelegate
-                                        .Invoke(null, Array.Empty<object>())
-                                        !;
+                                    (IncrementCollectionCountDelegate)buildIncrementCollectionCountDelegate.Invoke(
+                                        null,
+                                        Array.Empty<object>()
+                                    )!;
                             }
                             break;
                         case CollectionKind.GenericDictionary:
@@ -1062,9 +1063,10 @@ namespace System.Runtime.Serialization
                                         )
                                     );
                                 _incrementCollectionCountDelegate =
-                                    (IncrementCollectionCountDelegate)buildIncrementCollectionCountDelegate
-                                        .Invoke(null, Array.Empty<object>())
-                                        !;
+                                    (IncrementCollectionCountDelegate)buildIncrementCollectionCountDelegate.Invoke(
+                                        null,
+                                        Array.Empty<object>()
+                                    )!;
                             }
                             break;
                         default:
@@ -1102,12 +1104,10 @@ namespace System.Runtime.Serialization
                     if (s_buildIncrementCollectionCountDelegateMethod == null)
                     {
                         s_buildIncrementCollectionCountDelegateMethod =
-                            typeof(CollectionDataContractCriticalHelper)
-                                .GetMethod(
-                                    nameof(BuildIncrementCollectionCountDelegate),
-                                    Globals.ScanAllMembers
-                                )
-                                !;
+                            typeof(CollectionDataContractCriticalHelper).GetMethod(
+                                nameof(BuildIncrementCollectionCountDelegate),
+                                Globals.ScanAllMembers
+                            )!;
                     }
 
                     return s_buildIncrementCollectionCountDelegateMethod;
@@ -1139,9 +1139,10 @@ namespace System.Runtime.Serialization
                         MethodInfo buildCreateGenericDictionaryEnumerator =
                             GetBuildCreateGenericDictionaryEnumeratorGenericMethod(keyValueTypes);
                         _createGenericDictionaryEnumeratorDelegate =
-                            (CreateGenericDictionaryEnumeratorDelegate)buildCreateGenericDictionaryEnumerator
-                                .Invoke(null, Array.Empty<object>())
-                                !;
+                            (CreateGenericDictionaryEnumeratorDelegate)buildCreateGenericDictionaryEnumerator.Invoke(
+                                null,
+                                Array.Empty<object>()
+                            )!;
                     }
 
                     enumerator = _createGenericDictionaryEnumeratorDelegate(enumerator);
@@ -1253,12 +1254,10 @@ namespace System.Runtime.Serialization
                     if (s_buildCreateGenericDictionaryEnumerator == null)
                     {
                         s_buildCreateGenericDictionaryEnumerator =
-                            typeof(CollectionDataContractCriticalHelper)
-                                .GetMethod(
-                                    nameof(BuildCreateGenericDictionaryEnumerator),
-                                    Globals.ScanAllMembers
-                                )
-                                !;
+                            typeof(CollectionDataContractCriticalHelper).GetMethod(
+                                nameof(BuildCreateGenericDictionaryEnumerator),
+                                Globals.ScanAllMembers
+                            )!;
                     }
 
                     return s_buildCreateGenericDictionaryEnumerator;
@@ -1551,8 +1550,7 @@ namespace System.Runtime.Serialization
                                     .MakeGenericType(
                                         Globals.TypeOfKeyValuePair.MakeGenericType(genericArgs)
                                     )
-                                    .GetMethod(Globals.GetEnumeratorMethodName)
-                                    !;
+                                    .GetMethod(Globals.GetEnumeratorMethodName)!;
                             }
                             else
                             {
@@ -1568,8 +1566,7 @@ namespace System.Runtime.Serialization
                                 }
                                 getEnumeratorMethod = Globals.TypeOfIEnumerableGeneric
                                     .MakeGenericType(itemType)
-                                    .GetMethod(Globals.GetEnumeratorMethodName)
-                                    !;
+                                    .GetMethod(Globals.GetEnumeratorMethodName)!;
                             }
                         }
                         else
@@ -1590,9 +1587,9 @@ namespace System.Runtime.Serialization
                                 }
                             }
 
-                            getEnumeratorMethod = typeof(IEnumerable)
-                                .GetMethod(Globals.GetEnumeratorMethodName)
-                                !;
+                            getEnumeratorMethod = typeof(IEnumerable).GetMethod(
+                                Globals.GetEnumeratorMethodName
+                            )!;
                         }
                         if (tryCreate)
                             dataContract = new CollectionDataContract(

@@ -230,42 +230,40 @@ namespace System.Data.ProviderBase
                             // BUG? : If we have timed out task on top of running task, then new task could be started
                             // on top of that, since we are only checking the top task. This will lead to starting more threads
                             // than intended.
-                            newTask = s_pendingOpenNonPooled[idx]
-                                .ContinueWith(
-                                    (_) =>
+                            newTask = s_pendingOpenNonPooled[idx].ContinueWith(
+                                (_) =>
+                                {
+                                    Transactions.Transaction? originalTransaction =
+                                        ADP.GetCurrentTransaction();
+                                    try
                                     {
-                                        Transactions.Transaction? originalTransaction =
-                                            ADP.GetCurrentTransaction();
-                                        try
+                                        ADP.SetCurrentTransaction(
+                                            retry.Task.AsyncState as Transactions.Transaction
+                                        );
+                                        var newConnection = CreateNonPooledConnection(
+                                            owningConnection,
+                                            poolGroup,
+                                            userOptions
+                                        );
+                                        if (
+                                            (oldConnection != null)
+                                            && (oldConnection.State == ConnectionState.Open)
+                                        )
                                         {
-                                            ADP.SetCurrentTransaction(
-                                                retry.Task.AsyncState as Transactions.Transaction
-                                            );
-                                            var newConnection = CreateNonPooledConnection(
-                                                owningConnection,
-                                                poolGroup,
-                                                userOptions
-                                            );
-                                            if (
-                                                (oldConnection != null)
-                                                && (oldConnection.State == ConnectionState.Open)
-                                            )
-                                            {
-                                                oldConnection.PrepareForReplaceConnection();
-                                                oldConnection.Dispose();
-                                            }
-                                            return newConnection;
+                                            oldConnection.PrepareForReplaceConnection();
+                                            oldConnection.Dispose();
                                         }
-                                        finally
-                                        {
-                                            ADP.SetCurrentTransaction(originalTransaction);
-                                        }
-                                    },
-                                    cancellationTokenSource.Token,
-                                    TaskContinuationOptions.LongRunning,
-                                    TaskScheduler.Default
-                                )
-                                !;
+                                        return newConnection;
+                                    }
+                                    finally
+                                    {
+                                        ADP.SetCurrentTransaction(originalTransaction);
+                                    }
+                                },
+                                cancellationTokenSource.Token,
+                                TaskContinuationOptions.LongRunning,
+                                TaskScheduler.Default
+                            )!;
 
                             // Place this new task in the slot so any future work will be queued behind it
                             s_pendingOpenNonPooled[idx] = newTask!;

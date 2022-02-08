@@ -41,15 +41,13 @@ namespace System.Text.Json.Serialization.Converters
             JsonConverter valueConverter
         )
         {
-            return (JsonConverter)Activator
-                .CreateInstance(
-                    GetNullableConverterType(valueTypeToConvert),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: new object[] { valueConverter },
-                    culture: null
-                )
-                !;
+            return (JsonConverter)Activator.CreateInstance(
+                GetNullableConverterType(valueTypeToConvert),
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: new object[] { valueConverter },
+                culture: null
+            )!;
         }
 
         [UnconditionalSuppressMessage(

@@ -98,8 +98,7 @@ namespace System.Runtime.CompilerServices
             {
                 MethodInfo method = typeof(CallSite<>)
                     .MakeGenericType(delegateType)
-                    .GetMethod(nameof(Create))
-                    !;
+                    .GetMethod(nameof(Create))!;
 
                 if (delegateType.IsCollectible)
                 {
@@ -356,8 +355,8 @@ namespace System.Runtime.CompilerServices
                 }
                 if (method != null)
                 {
-                    s_cachedNoMatch = (T)(object)noMatchMethod!
-                        .MakeGenericMethod(args)
+                    s_cachedNoMatch = (T)(object)noMatchMethod
+                        !.MakeGenericMethod(args)
                         .CreateDelegate(target);
                     return (T)(object)method.MakeGenericMethod(args).CreateDelegate(target);
                 }

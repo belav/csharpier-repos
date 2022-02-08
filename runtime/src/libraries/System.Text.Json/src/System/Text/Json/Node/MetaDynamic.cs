@@ -472,21 +472,18 @@ namespace System.Text.Json.Node
             public static MethodInfo String_Format_String_ObjectArray =>
                 s_String_Format_String_ObjectArray
                 ?? (
-                    s_String_Format_String_ObjectArray = typeof(string)
-                        .GetMethod(
-                            nameof(string.Format),
-                            new Type[] { typeof(string), typeof(object[]) }
-                        )
-                        !
+                    s_String_Format_String_ObjectArray = typeof(string).GetMethod(
+                        nameof(string.Format),
+                        new Type[] { typeof(string), typeof(object[]) }
+                    )!
                 );
 
             private static ConstructorInfo? s_InvalidCastException_Ctor_String;
             public static ConstructorInfo InvalidCastException_Ctor_String =>
                 s_InvalidCastException_Ctor_String
                 ?? (
-                    s_InvalidCastException_Ctor_String = typeof(InvalidCastException)
-                        .GetConstructor(new Type[] { typeof(string) })
-                        !
+                    s_InvalidCastException_Ctor_String =
+                        typeof(InvalidCastException).GetConstructor(new Type[] { typeof(string) })!
                 );
 
             private static MethodInfo? s_Object_GetType;

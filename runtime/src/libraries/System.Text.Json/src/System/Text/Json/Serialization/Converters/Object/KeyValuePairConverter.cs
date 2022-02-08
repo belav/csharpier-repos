@@ -19,9 +19,7 @@ namespace System.Text.Json.Serialization.Converters
         private static readonly ConstructorInfo s_constructorInfo = typeof(KeyValuePair<
             TKey,
             TValue
-        >)
-            .GetConstructor(new[] { typeof(TKey), typeof(TValue) })
-            !;
+        >).GetConstructor(new[] { typeof(TKey), typeof(TValue) })!;
 
         public KeyValuePairConverter()
         {

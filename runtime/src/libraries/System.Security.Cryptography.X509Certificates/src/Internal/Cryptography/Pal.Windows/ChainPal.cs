@@ -88,9 +88,9 @@ namespace Internal.Cryptography.Pal
                         X509ChainStatus[] chainElementStatus = GetChainStatusInformation(
                             pChainElement->TrustStatus.dwErrorStatus
                         );
-                        string information = Marshal
-                            .PtrToStringUni(pChainElement->pwszExtendedErrorInfo)
-                            !;
+                        string information = Marshal.PtrToStringUni(
+                            pChainElement->pwszExtendedErrorInfo
+                        )!;
 
                         X509ChainElement chainElement = new X509ChainElement(
                             certificate,

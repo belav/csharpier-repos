@@ -68,8 +68,8 @@ public class DefaultClaimUidExtractorTest
 
         // Act
         var identiferParameters = DefaultClaimUidExtractor
-            .GetUniqueIdentifierParameters(new ClaimsIdentity[] { claimsIdentity })
-            !.ToArray();
+            .GetUniqueIdentifierParameters(new ClaimsIdentity[] { claimsIdentity })!
+            .ToArray();
         var claims = claimsIdentity.Claims.ToList();
         claims.Sort((a, b) => string.Compare(a.Type, b.Type, StringComparison.Ordinal));
 

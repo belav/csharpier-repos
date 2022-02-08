@@ -85,8 +85,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     displayOptions,
                     cancellationToken
                 )
-                .ConfigureAwait(false)
-                !;
+                .ConfigureAwait(false)!;
             if (description != null)
             {
                 var supportsVSExtensions =

@@ -190,12 +190,12 @@ namespace Microsoft.Interop
             _diagnostics = diagnostics;
             _defaultInfo = defaultInfo;
             _contextSymbol = contextSymbol;
-            _marshalAsAttribute = compilation
-                .GetTypeByMetadataName(TypeNames.System_Runtime_InteropServices_MarshalAsAttribute)
-                !;
-            _marshalUsingAttribute = compilation
-                .GetTypeByMetadataName(TypeNames.MarshalUsingAttribute)
-                !;
+            _marshalAsAttribute = compilation.GetTypeByMetadataName(
+                TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
+            )!;
+            _marshalUsingAttribute = compilation.GetTypeByMetadataName(
+                TypeNames.MarshalUsingAttribute
+            )!;
         }
 
         public MarshallingInfo ParseMarshallingInfo(
@@ -797,8 +797,8 @@ namespace Microsoft.Interop
             }
 
             ITypeSymbol spanOfByte = _compilation
-                .GetTypeByMetadataName(TypeNames.System_Span_Metadata)
-                !.Construct(_compilation.GetSpecialType(SpecialType.System_Byte));
+                .GetTypeByMetadataName(TypeNames.System_Span_Metadata)!
+                .Construct(_compilation.GetSpecialType(SpecialType.System_Byte));
 
             INamedTypeSymbol nativeType = (INamedTypeSymbol)attrData.ConstructorArguments[0].Value!;
 
@@ -842,9 +842,9 @@ namespace Microsoft.Interop
                 }
             }
 
-            ITypeSymbol contiguousCollectionMarshalerAttribute = _compilation
-                .GetTypeByMetadataName(TypeNames.GenericContiguousCollectionMarshallerAttribute)
-                !;
+            ITypeSymbol contiguousCollectionMarshalerAttribute = _compilation.GetTypeByMetadataName(
+                TypeNames.GenericContiguousCollectionMarshallerAttribute
+            )!;
 
             bool isContiguousCollectionMarshaller = nativeType
                 .GetAttributes()
@@ -1013,9 +1013,9 @@ namespace Microsoft.Interop
             CodeAnalysis.Operations.CommonConversion conversion =
                 _compilation.ClassifyCommonConversion(
                     type,
-                    _compilation
-                        .GetTypeByMetadataName(TypeNames.System_Runtime_InteropServices_SafeHandle)
-                        !
+                    _compilation.GetTypeByMetadataName(
+                        TypeNames.System_Runtime_InteropServices_SafeHandle
+                    )!
                 );
             if (
                 conversion.Exists

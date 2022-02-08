@@ -30,13 +30,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual PropertyAccessors Create(IPropertyBase propertyBase) =>
             (PropertyAccessors)_genericCreate
                 .MakeGenericMethod(propertyBase.ClrType)
-                .Invoke(null, new object[] { propertyBase })
-                !;
+                .Invoke(null, new object[] { propertyBase })!;
 
         private static readonly MethodInfo _genericCreate = typeof(PropertyAccessorsFactory)
             .GetTypeInfo()
-            .GetDeclaredMethod(nameof(CreateGeneric))
-            !;
+            .GetDeclaredMethod(nameof(CreateGeneric))!;
 
         [UsedImplicitly]
         private static PropertyAccessors CreateGeneric<TProperty>(IPropertyBase propertyBase)

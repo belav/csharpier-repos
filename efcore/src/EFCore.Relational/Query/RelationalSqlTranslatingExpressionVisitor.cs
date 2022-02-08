@@ -1329,11 +1329,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 case SqlConstantExpression sqlConstantExpression:
                     var values = (IEnumerable)sqlConstantExpression.Value!;
-                    var propertyValueList = (IList)Activator
-                        .CreateInstance(
-                            typeof(List<>).MakeGenericType(property.ClrType.MakeNullable())
-                        )
-                        !;
+                    var propertyValueList = (IList)Activator.CreateInstance(
+                        typeof(List<>).MakeGenericType(property.ClrType.MakeNullable())
+                    )!;
                     var propertyGetter = property.GetGetter();
                     foreach (var value in values)
                     {

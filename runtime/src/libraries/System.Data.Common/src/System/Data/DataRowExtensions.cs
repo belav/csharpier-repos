@@ -157,8 +157,8 @@ namespace System.Data
                                     "NullableField",
                                     System.Reflection.BindingFlags.Static
                                         | System.Reflection.BindingFlags.NonPublic
-                                )
-                                !.MakeGenericMethod(typeof(T).GetGenericArguments()[0])
+                                )!
+                                .MakeGenericMethod(typeof(T).GetGenericArguments()[0])
                         )
                       : ValueField;
                 }

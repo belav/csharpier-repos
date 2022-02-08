@@ -128,9 +128,9 @@ namespace System.Runtime.Serialization
         public static PropertyInfo ExtensionDataProperty =>
             s_extensionDataProperty
             ?? (
-                s_extensionDataProperty = typeof(IExtensibleDataObject)
-                    .GetProperty("ExtensionData")
-                    !
+                s_extensionDataProperty = typeof(IExtensibleDataObject).GetProperty(
+                    "ExtensionData"
+                )!
             );
 
         public static MethodInfo GetCurrentMethod
@@ -140,8 +140,8 @@ namespace System.Runtime.Serialization
                 if (s_ienumeratorGetCurrentMethod == null)
                 {
                     s_ienumeratorGetCurrentMethod = typeof(IEnumerator)
-                        .GetProperty("Current")
-                        !.GetGetMethod();
+                        .GetProperty("Current")!
+                        .GetGetMethod();
                     Debug.Assert(s_ienumeratorGetCurrentMethod != null);
                 }
                 return s_ienumeratorGetCurrentMethod;
@@ -155,8 +155,8 @@ namespace System.Runtime.Serialization
                 if (s_getItemContractMethod == null)
                 {
                     s_getItemContractMethod = typeof(CollectionDataContract)
-                        .GetProperty("ItemContract", Globals.ScanAllMembers)
-                        !.GetGetMethod(nonPublic: true);
+                        .GetProperty("ItemContract", Globals.ScanAllMembers)!
+                        .GetGetMethod(nonPublic: true);
                     Debug.Assert(s_getItemContractMethod != null);
                 }
                 return s_getItemContractMethod;

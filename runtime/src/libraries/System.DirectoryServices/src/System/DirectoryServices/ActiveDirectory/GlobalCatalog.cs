@@ -74,13 +74,17 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                 }
 
-                gcDnsName = (string)PropertyManager
-                    .GetPropertyValue(context, rootDSE, PropertyManager.DnsHostName)
-                    !;
+                gcDnsName = (string)PropertyManager.GetPropertyValue(
+                    context,
+                    rootDSE,
+                    PropertyManager.DnsHostName
+                )!;
                 isGlobalCatalog = (bool)bool.Parse(
-                    (string)PropertyManager
-                        .GetPropertyValue(context, rootDSE, PropertyManager.IsGlobalCatalogReady)
-                        !
+                    (string)PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.IsGlobalCatalogReady
+                    )!
                 );
                 if (!isGlobalCatalog)
                 {

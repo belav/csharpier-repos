@@ -27,9 +27,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public SqlExpressionFactory(SqlExpressionFactoryDependencies dependencies)
         {
             Dependencies = dependencies;
-            _boolTypeMapping = dependencies.TypeMappingSource
-                .FindMapping(typeof(bool), dependencies.Model)
-                !;
+            _boolTypeMapping = dependencies.TypeMappingSource.FindMapping(
+                typeof(bool),
+                dependencies.Model
+            )!;
         }
 
         /// <summary>

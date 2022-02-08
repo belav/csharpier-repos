@@ -96,14 +96,12 @@ namespace System.Reflection.TypeLoading.Ecma
             // module in which the custom attribute metadata was found.)
             if (name == null)
                 return null!; // This gets hit if the custom attribute passes "(Type)null"
-            return Helpers
-                .LoadTypeFromAssemblyQualifiedName(
-                    name,
-                    GetRoAssembly(),
-                    ignoreCase: false,
-                    throwOnError: true
-                )
-                !;
+            return Helpers.LoadTypeFromAssemblyQualifiedName(
+                name,
+                GetRoAssembly(),
+                ignoreCase: false,
+                throwOnError: true
+            )!;
         }
     }
 }

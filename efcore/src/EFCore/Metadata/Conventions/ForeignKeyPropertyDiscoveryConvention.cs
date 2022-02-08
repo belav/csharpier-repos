@@ -213,9 +213,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 )
             )
             {
-                relationshipBuilder = relationshipBuilder
-                    .HasEntityTypes(foreignKey.PrincipalEntityType, foreignKey.DeclaringEntityType)
-                    !;
+                relationshipBuilder = relationshipBuilder.HasEntityTypes(
+                    foreignKey.PrincipalEntityType,
+                    foreignKey.DeclaringEntityType
+                )!;
                 invertible = false;
             }
             else if (
@@ -320,17 +321,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 if (foreignKeyProperties == null)
                                 {
                                     using var batch = context.DelayConventions();
-                                    var invertedRelationshipBuilder = relationshipBuilder
-                                        .HasEntityTypes(
+                                    var invertedRelationshipBuilder =
+                                        relationshipBuilder.HasEntityTypes(
                                             foreignKey.DeclaringEntityType,
                                             foreignKey.PrincipalEntityType
-                                        )
-                                        !;
+                                        )!;
                                     return batch
                                         .Run(
-                                            invertedRelationshipBuilder
-                                                .HasForeignKey(candidatePropertiesOnPrincipal)
-                                                !.Metadata
+                                            invertedRelationshipBuilder.HasForeignKey(
+                                                candidatePropertiesOnPrincipal
+                                            )!.Metadata
                                         )
                                         ?.Builder;
                                 }

@@ -108,9 +108,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     return this;
                 }
-                return originalContainer
-                    .GetTupleMemberSymbolForUnderlyingMember(_underlyingField.OriginalDefinition)
-                    !;
+                return originalContainer.GetTupleMemberSymbolForUnderlyingMember(
+                    _underlyingField.OriginalDefinition
+                )!;
             }
         }
 

@@ -387,9 +387,11 @@ namespace System.Xml.Serialization
                         XmlSchemaGroupRef refGroup = (XmlSchemaGroupRef)particle;
                         particle =
                             (
-                                (XmlSchemaGroup)_schemas
-                                    .Find(refGroup.RefName, typeof(XmlSchemaGroup), false)
-                                    !
+                                (XmlSchemaGroup)_schemas.Find(
+                                    refGroup.RefName,
+                                    typeof(XmlSchemaGroup),
+                                    false
+                                )!
                             ).Particle;
                     }
                     else if (particle is XmlSchemaGroupBase)
@@ -479,9 +481,11 @@ namespace System.Xml.Serialization
                 }
                 if (!el.RefName.IsEmpty)
                 {
-                    el = (XmlSchemaElement)_schemas
-                        .Find(el.RefName, typeof(XmlSchemaElement), false)
-                        !;
+                    el = (XmlSchemaElement)_schemas.Find(
+                        el.RefName,
+                        typeof(XmlSchemaElement),
+                        false
+                    )!;
                     AddRef(refs, el);
                 }
                 else if (!el.SchemaTypeName.IsEmpty)

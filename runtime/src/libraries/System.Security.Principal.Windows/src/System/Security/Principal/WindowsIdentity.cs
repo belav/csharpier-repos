@@ -1477,9 +1477,11 @@ namespace System.Security.Principal
                 );
                 for (int i = 0; i < count; ++i)
                 {
-                    Interop.SID_AND_ATTRIBUTES group = (Interop.SID_AND_ATTRIBUTES)Marshal
-                        .PtrToStructure(pSidAndAttributes, typeof(Interop.SID_AND_ATTRIBUTES))
-                        !;
+                    Interop.SID_AND_ATTRIBUTES group =
+                        (Interop.SID_AND_ATTRIBUTES)Marshal.PtrToStructure(
+                            pSidAndAttributes,
+                            typeof(Interop.SID_AND_ATTRIBUTES)
+                        )!;
                     uint mask =
                         Interop.SecurityGroups.SE_GROUP_ENABLED
                         | Interop.SecurityGroups.SE_GROUP_LOGON_ID
@@ -1554,12 +1556,10 @@ namespace System.Security.Principal
                 safeAllocHandle = GetTokenInformation(_safeTokenHandle, tokenInformationClass);
 
                 Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION claimAttributes =
-                    (Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION)Marshal
-                        .PtrToStructure(
-                            safeAllocHandle!.DangerousGetHandle(),
-                            typeof(Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION)
-                        )
-                        !;
+                    (Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION)Marshal.PtrToStructure(
+                        safeAllocHandle!.DangerousGetHandle(),
+                        typeof(Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION)
+                    )!;
                 // An attribute represents a collection of claims.  Inside each attribute a claim can be multivalued, we create a claim for each value.
                 // It is a ragged multi-dimentional array, where each cell can be of different lenghts.
 
@@ -1572,9 +1572,10 @@ namespace System.Security.Principal
                         claimAttributes.Attribute.pAttributeV1.ToInt64() + offset
                     );
                     Interop.CLAIM_SECURITY_ATTRIBUTE_V1 windowsClaim =
-                        (Interop.CLAIM_SECURITY_ATTRIBUTE_V1)Marshal
-                            .PtrToStructure(pAttribute, typeof(Interop.CLAIM_SECURITY_ATTRIBUTE_V1))
-                            !;
+                        (Interop.CLAIM_SECURITY_ATTRIBUTE_V1)Marshal.PtrToStructure(
+                            pAttribute,
+                            typeof(Interop.CLAIM_SECURITY_ATTRIBUTE_V1)
+                        )!;
 
                     // the switch was written this way, which appears to have multiple for loops, because each item in the ValueCount is of the same ValueType.  This saves the type check each item.
                     switch (windowsClaim.ValueType)

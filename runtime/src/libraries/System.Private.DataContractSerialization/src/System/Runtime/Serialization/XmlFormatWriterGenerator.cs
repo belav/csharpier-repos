@@ -640,21 +640,17 @@ namespace System.Runtime.Serialization
                                 }
                             }
                             if (moveNextMethod == null)
-                                moveNextMethod = CollectionDataContract
-                                    .GetTargetMethodWithName(
-                                        Globals.MoveNextMethodName,
-                                        enumeratorType,
-                                        ienumeratorInterface
-                                    )
-                                    !;
+                                moveNextMethod = CollectionDataContract.GetTargetMethodWithName(
+                                    Globals.MoveNextMethodName,
+                                    enumeratorType,
+                                    ienumeratorInterface
+                                )!;
                             if (getCurrentMethod == null)
-                                getCurrentMethod = CollectionDataContract
-                                    .GetTargetMethodWithName(
-                                        Globals.GetCurrentMethodName,
-                                        enumeratorType,
-                                        ienumeratorInterface
-                                    )
-                                    !;
+                                getCurrentMethod = CollectionDataContract.GetTargetMethodWithName(
+                                    Globals.GetCurrentMethodName,
+                                    enumeratorType,
+                                    ienumeratorInterface
+                                )!;
                         }
                     }
                     Type elementType = getCurrentMethod.ReturnType;
@@ -675,9 +671,10 @@ namespace System.Runtime.Serialization
                         Type ctorParam = Globals.TypeOfIEnumeratorGeneric.MakeGenericType(
                             Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes!)
                         );
-                        ConstructorInfo dictEnumCtor = enumeratorType
-                            .GetConstructor(Globals.ScanAllMembers, new Type[] { ctorParam })
-                            !;
+                        ConstructorInfo dictEnumCtor = enumeratorType.GetConstructor(
+                            Globals.ScanAllMembers,
+                            new Type[] { ctorParam }
+                        )!;
                         _ilg.ConvertValue(
                             collectionContract.GetEnumeratorMethod.ReturnType,
                             ctorParam
@@ -855,18 +852,16 @@ namespace System.Runtime.Serialization
                     _ilg.Load(itemName);
                     _ilg.Load(itemNamespace);
                     _ilg.Call(
-                        typeof(XmlWriterDelegator)
-                            .GetMethod(
-                                writeArrayMethod,
-                                Globals.ScanAllMembers,
-                                new Type[]
-                                {
-                                    type,
-                                    typeof(XmlDictionaryString),
-                                    typeof(XmlDictionaryString)
-                                }
-                            )
-                            !
+                        typeof(XmlWriterDelegator).GetMethod(
+                            writeArrayMethod,
+                            Globals.ScanAllMembers,
+                            new Type[]
+                            {
+                                type,
+                                typeof(XmlDictionaryString),
+                                typeof(XmlDictionaryString)
+                            }
+                        )!
                     );
                     return true;
                 }

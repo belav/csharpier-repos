@@ -100,42 +100,36 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         ?? (SqlConstantExpression)sqlBinaryOperand.Right;
                     if (sqlBinaryOperand.Left is SqlConstantExpression)
                     {
-                        return _sqlExpressionFactory
-                            .MakeBinary(
-                                ExpressionType.Equal,
-                                _sqlExpressionFactory.Constant(
-                                    !(bool)constant.Value!,
-                                    constant.TypeMapping
-                                ),
-                                sqlBinaryOperand.Right,
-                                sqlBinaryOperand.TypeMapping
-                            )
-                            !;
-                    }
-
-                    return _sqlExpressionFactory
-                        .MakeBinary(
+                        return _sqlExpressionFactory.MakeBinary(
                             ExpressionType.Equal,
-                            sqlBinaryOperand.Left,
                             _sqlExpressionFactory.Constant(
                                 !(bool)constant.Value!,
                                 constant.TypeMapping
                             ),
+                            sqlBinaryOperand.Right,
                             sqlBinaryOperand.TypeMapping
-                        )
-                        !;
+                        )!;
+                    }
+
+                    return _sqlExpressionFactory.MakeBinary(
+                        ExpressionType.Equal,
+                        sqlBinaryOperand.Left,
+                        _sqlExpressionFactory.Constant(
+                            !(bool)constant.Value!,
+                            constant.TypeMapping
+                        ),
+                        sqlBinaryOperand.TypeMapping
+                    )!;
                 }
 
-                return _sqlExpressionFactory
-                    .MakeBinary(
-                        sqlBinaryOperand.OperatorType == ExpressionType.Equal
-                          ? ExpressionType.NotEqual
-                          : ExpressionType.Equal,
-                        sqlBinaryOperand.Left,
-                        sqlBinaryOperand.Right,
-                        sqlBinaryOperand.TypeMapping
-                    )
-                    !;
+                return _sqlExpressionFactory.MakeBinary(
+                    sqlBinaryOperand.OperatorType == ExpressionType.Equal
+                      ? ExpressionType.NotEqual
+                      : ExpressionType.Equal,
+                    sqlBinaryOperand.Left,
+                    sqlBinaryOperand.Right,
+                    sqlBinaryOperand.TypeMapping
+                )!;
             }
 
             return sqlExpression;

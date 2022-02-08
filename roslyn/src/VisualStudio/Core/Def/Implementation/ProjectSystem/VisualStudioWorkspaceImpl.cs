@@ -1486,8 +1486,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 if (IsDocumentOpen(documentId))
                 {
                     var textBuffer = this.CurrentSolution
-                        .GetTextDocument(documentId)
-                        !.GetTextSynchronously(CancellationToken.None)
+                        .GetTextDocument(documentId)!
+                        .GetTextSynchronously(CancellationToken.None)
                         .Container.TryGetTextBuffer();
 
                     if (textBuffer != null)
@@ -2184,9 +2184,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     // PERF: call GetProjectState instead of GetProject, otherwise creating a new project might force all
                     // Project instances to get created.
                     foreach (
-                        PortableExecutableReference reference in modifiedSolution
-                            .GetProjectState(projectIdToRetarget)
-                            !.MetadataReferences
+                        PortableExecutableReference reference in modifiedSolution.GetProjectState(
+                            projectIdToRetarget
+                        )!.MetadataReferences
                     )
                     {
                         if (

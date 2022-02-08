@@ -123,9 +123,10 @@ namespace System.Text.Json
             {
                 // Create the appropriate dictionary type. We already verified the types.
 #if DEBUG
-                Type underlyingIDictionaryType = jsonPropertyInfo.DeclaredPropertyType
-                    .GetCompatibleGenericInterface(typeof(IDictionary<,>))
-                    !;
+                Type underlyingIDictionaryType =
+                    jsonPropertyInfo.DeclaredPropertyType.GetCompatibleGenericInterface(
+                        typeof(IDictionary<,>)
+                    )!;
                 Type[] genericArgs = underlyingIDictionaryType.GetGenericArguments();
 
                 Debug.Assert(underlyingIDictionaryType.IsGenericType);

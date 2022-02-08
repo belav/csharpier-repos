@@ -942,9 +942,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (discriminatorPropertyAnnotation?.Value != null)
                 {
-                    var discriminatorProperty = entityType
-                        .FindProperty((string)discriminatorPropertyAnnotation.Value)
-                        !;
+                    var discriminatorProperty = entityType.FindProperty(
+                        (string)discriminatorPropertyAnnotation.Value
+                    )!;
                     var propertyClrType =
                         FindValueConverter(discriminatorProperty)
                             ?.ProviderClrType.MakeNullable(discriminatorProperty.IsNullable)

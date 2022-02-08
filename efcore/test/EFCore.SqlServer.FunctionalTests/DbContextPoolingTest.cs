@@ -237,8 +237,7 @@ namespace Microsoft.EntityFrameworkCore
                 scope.ServiceProvider
                     .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()
-                    !.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
             );
         }
 
@@ -253,8 +252,7 @@ namespace Microsoft.EntityFrameworkCore
                 64,
                 ((DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>())
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()
-                    !.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
             );
         }
 
@@ -271,8 +269,7 @@ namespace Microsoft.EntityFrameworkCore
                 64,
                 context
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()
-                    !.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
             );
         }
 
@@ -305,8 +302,7 @@ namespace Microsoft.EntityFrameworkCore
                 scope.ServiceProvider
                     .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()
-                    !.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
             );
         }
 
@@ -321,8 +317,7 @@ namespace Microsoft.EntityFrameworkCore
                 1024,
                 ((DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>())
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()
-                    !.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
             );
         }
 
@@ -352,8 +347,7 @@ namespace Microsoft.EntityFrameworkCore
                 1024,
                 context
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()
-                    !.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
             );
         }
 
@@ -555,11 +549,11 @@ namespace Microsoft.EntityFrameworkCore
                 useFactory
                     ? async
                         ? await serviceScope.ServiceProvider
-                              .GetService<IDbContextFactory<DbContext>>()
-                              !.CreateDbContextAsync()
+                              .GetService<IDbContextFactory<DbContext>>()!
+                              .CreateDbContextAsync()
                         : serviceScope.ServiceProvider
-                          .GetService<IDbContextFactory<DbContext>>()
-                          !.CreateDbContext()
+                          .GetService<IDbContextFactory<DbContext>>()!
+                          .CreateDbContext()
                     : serviceScope.ServiceProvider.GetService<DbContext>();
         }
 
@@ -945,8 +939,8 @@ namespace Microsoft.EntityFrameworkCore
                 .GetField(
                     eventName,
                     BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance
-                )
-                !.GetValue(context);
+                )!
+                .GetValue(context);
 
         private bool _changeTracker_OnTracked;
 
@@ -1441,8 +1435,8 @@ namespace Microsoft.EntityFrameworkCore
                         ? (PooledContext)scopedProvider.GetService<IPooledContext>()
                         : scopedProvider.GetService<PooledContext>();
 
-                    await context!.Customers
-                        .AsNoTracking()
+                    await context
+                        !.Customers.AsNoTracking()
                         .FirstAsync(c => c.CustomerId == "ALFKI");
 
                     Interlocked.Increment(ref _requests);

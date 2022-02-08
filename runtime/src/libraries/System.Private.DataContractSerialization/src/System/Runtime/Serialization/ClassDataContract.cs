@@ -813,21 +813,17 @@ namespace System.Runtime.Serialization
             private static Type[]? s_serInfoCtorArgs;
             private static readonly MethodInfo s_getKeyValuePairMethod = typeof(KeyValuePairAdapter<
                 ,
-            >)
-                .GetMethod("GetKeyValuePair", Globals.ScanAllMembers)
-                !;
+            >).GetMethod("GetKeyValuePair", Globals.ScanAllMembers)!;
             private static readonly ConstructorInfo s_ctorGenericMethod =
-                typeof(KeyValuePairAdapter<,>)
-                    .GetConstructor(
-                        Globals.ScanAllMembers,
-                        new Type[]
-                        {
-                            typeof(KeyValuePair<,>).MakeGenericType(
-                                typeof(KeyValuePairAdapter<,>).GetGenericArguments()
-                            )
-                        }
-                    )
-                    !;
+                typeof(KeyValuePairAdapter<,>).GetConstructor(
+                    Globals.ScanAllMembers,
+                    new Type[]
+                    {
+                        typeof(KeyValuePair<,>).MakeGenericType(
+                            typeof(KeyValuePairAdapter<,>).GetGenericArguments()
+                        )
+                    }
+                )!;
 
             private ClassDataContract? _baseContract;
             private List<DataMember>? _members;

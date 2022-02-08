@@ -104,9 +104,10 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = $"{{\"__dotNetObject\":{objectId}}}";
 
         // Act
-        var deserialized = JsonSerializer
-            .Deserialize<DotNetObjectReference<TestModel>>(json, JsonSerializerOptions)
-            !;
+        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+            json,
+            JsonSerializerOptions
+        )!;
 
         // Assert
         Assert.Same(input, deserialized.Value);
@@ -127,9 +128,10 @@ public class DotNetObjectReferenceJsonConverterTest
             $"[{{\"__dotNetObject\":{JSRuntime.TrackObjectReference(ref1)}}},{{\"__dotNetObject\":{JSRuntime.TrackObjectReference(ref2)}}}]";
 
         // Act
-        var deserialized = JsonSerializer
-            .Deserialize<DotNetObjectReference<TestModel>[]>(json, JsonSerializerOptions)
-            !;
+        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>[]>(
+            json,
+            JsonSerializerOptions
+        )!;
 
         // Assert
         Assert.Same(instance1, deserialized[0].Value);
@@ -150,9 +152,10 @@ public class DotNetObjectReferenceJsonConverterTest
 }}";
 
         // Act
-        var deserialized = JsonSerializer
-            .Deserialize<DotNetObjectReference<TestModel>>(json, JsonSerializerOptions)
-            !;
+        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+            json,
+            JsonSerializerOptions
+        )!;
 
         // Assert
         Assert.Same(input, deserialized.Value);

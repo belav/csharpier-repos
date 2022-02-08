@@ -30,32 +30,28 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var newHashCodeParam = Expression.Parameter(nullableType, "v");
             var newSnapshotParam = Expression.Parameter(nullableType, "v");
 
-            return (ValueComparer)Activator
-                .CreateInstance(
-                    typeof(NonNullNullableValueComparer<>).MakeGenericType(nullableType),
-                    Expression.Lambda(
-                        comparer.ExtractEqualsBody(
-                            Expression.Convert(newEqualsParam1, type),
-                            Expression.Convert(newEqualsParam2, type)
-                        ),
-                        newEqualsParam1,
-                        newEqualsParam2
+            return (ValueComparer)Activator.CreateInstance(
+                typeof(NonNullNullableValueComparer<>).MakeGenericType(nullableType),
+                Expression.Lambda(
+                    comparer.ExtractEqualsBody(
+                        Expression.Convert(newEqualsParam1, type),
+                        Expression.Convert(newEqualsParam2, type)
                     ),
-                    Expression.Lambda(
-                        comparer.ExtractHashCodeBody(Expression.Convert(newHashCodeParam, type)),
-                        newHashCodeParam
+                    newEqualsParam1,
+                    newEqualsParam2
+                ),
+                Expression.Lambda(
+                    comparer.ExtractHashCodeBody(Expression.Convert(newHashCodeParam, type)),
+                    newHashCodeParam
+                ),
+                Expression.Lambda(
+                    Expression.Convert(
+                        comparer.ExtractSnapshotBody(Expression.Convert(newSnapshotParam, type)),
+                        nullableType
                     ),
-                    Expression.Lambda(
-                        Expression.Convert(
-                            comparer.ExtractSnapshotBody(
-                                Expression.Convert(newSnapshotParam, type)
-                            ),
-                            nullableType
-                        ),
-                        newSnapshotParam
-                    )
+                    newSnapshotParam
                 )
-                !;
+            )!;
         }
 
         private sealed class NonNullNullableValueComparer<T> : ValueComparer<T>

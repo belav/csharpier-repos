@@ -18,9 +18,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
     /// </summary>
     public class SqlServerDoubleTypeMapping : DoubleTypeMapping
     {
-        private static readonly MethodInfo _getFloatMethod = typeof(DbDataReader)
-            .GetRuntimeMethod(nameof(DbDataReader.GetFloat), new[] { typeof(int) })
-            !;
+        private static readonly MethodInfo _getFloatMethod = typeof(DbDataReader).GetRuntimeMethod(
+            nameof(DbDataReader.GetFloat),
+            new[] { typeof(int) }
+        )!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

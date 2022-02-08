@@ -124,9 +124,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
                 {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                     // #16707
-                    var dependentEntry = ((InternalEntityEntry)entry).StateManager
-                        .TryGetEntry(embeddedValue, fk.DeclaringEntityType)
-                        !;
+                    var dependentEntry = ((InternalEntityEntry)entry).StateManager.TryGetEntry(
+                        embeddedValue,
+                        fk.DeclaringEntityType
+                    )!;
                     document[embeddedPropertyName] = _database
                         .GetDocumentSource(dependentEntry.EntityType)
                         .CreateDocument(dependentEntry);
@@ -140,9 +141,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
                     {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                         // #16707
-                        var dependentEntry = ((InternalEntityEntry)entry).StateManager
-                            .TryGetEntry(dependent, fk.DeclaringEntityType)
-                            !;
+                        var dependentEntry = ((InternalEntityEntry)entry).StateManager.TryGetEntry(
+                            dependent,
+                            fk.DeclaringEntityType
+                        )!;
                         array.Add(
                             _database
                                 .GetDocumentSource(dependentEntry.EntityType)
@@ -358,8 +360,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
 
         private IProperty? FindOrdinalKeyProperty(IEntityType entityType) =>
             entityType
-                .FindPrimaryKey()
-                !.Properties.FirstOrDefault(
+                .FindPrimaryKey()!
+                .Properties.FirstOrDefault(
                     p => p.GetJsonPropertyName().Length == 0 && p.IsOrdinalKeyProperty()
                 );
 

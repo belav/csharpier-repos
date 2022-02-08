@@ -397,13 +397,11 @@ namespace System
         {
             types ??= Array.Empty<Type>();
 
-            return type.GetTypeInfo()
-                .DeclaredConstructors.SingleOrDefault(
-                    c =>
-                        !c.IsStatic
-                        && c.GetParameters().Select(p => p.ParameterType).SequenceEqual(types)
-                )
-                !;
+            return type.GetTypeInfo().DeclaredConstructors.SingleOrDefault(
+                c =>
+                    !c.IsStatic
+                    && c.GetParameters().Select(p => p.ParameterType).SequenceEqual(types)
+            )!;
         }
 
         public static IEnumerable<PropertyInfo> GetPropertiesInHierarchy(
@@ -727,14 +725,12 @@ namespace System
         public static ConstantExpression GetDefaultValueConstant(this Type type) =>
             (ConstantExpression)_generateDefaultValueConstantMethod
                 .MakeGenericMethod(type)
-                .Invoke(null, Array.Empty<object>())
-                !;
+                .Invoke(null, Array.Empty<object>())!;
 
         private static readonly MethodInfo _generateDefaultValueConstantMethod =
             typeof(SharedTypeExtensions)
                 .GetTypeInfo()
-                .GetDeclaredMethod(nameof(GenerateDefaultValueConstant))
-                !;
+                .GetDeclaredMethod(nameof(GenerateDefaultValueConstant))!;
 
         private static ConstantExpression GenerateDefaultValueConstant<TDefault>() =>
             Expression.Constant(default(TDefault), typeof(TDefault));

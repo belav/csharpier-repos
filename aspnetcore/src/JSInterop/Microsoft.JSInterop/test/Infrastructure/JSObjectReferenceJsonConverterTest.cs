@@ -79,9 +79,10 @@ public class JSObjectReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":{expectedId}}}";
 
         // Act
-        var deserialized = (JSObjectReference)JsonSerializer
-            .Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
-            !;
+        var deserialized = (JSObjectReference)JsonSerializer.Deserialize<IJSObjectReference>(
+            json,
+            JsonSerializerOptions
+        )!;
 
         // Assert
         Assert.Equal(expectedId, deserialized?.Id);

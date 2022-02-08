@@ -465,9 +465,9 @@ namespace System.Net
             )
             {
                 HttpRequestStreamAsyncResult asyncResult =
-                    (HttpRequestStreamAsyncResult)ThreadPoolBoundHandle
-                        .GetNativeOverlappedState(nativeOverlapped)
-                        !;
+                    (HttpRequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
+                        nativeOverlapped
+                    )!;
 
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(

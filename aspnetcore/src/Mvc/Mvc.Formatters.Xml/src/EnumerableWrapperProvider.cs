@@ -57,9 +57,9 @@ public class EnumerableWrapperProvider : IWrapperProvider
             declaredElementType
         );
 
-        _wrappingTypeConstructor = WrappingType
-            .GetConstructor(new[] { sourceEnumerableOfT, typeof(IWrapperProvider) })
-            !;
+        _wrappingTypeConstructor = WrappingType.GetConstructor(
+            new[] { sourceEnumerableOfT, typeof(IWrapperProvider) }
+        )!;
     }
 
     /// <inheritdoc />

@@ -116,8 +116,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 {
                     node = editor.OriginalRoot
                         .FindTrivia(location.SourceSpan.Start)
-                        .GetStructure()
-                        !;
+                        .GetStructure()!;
                 }
 
                 if (processedNodes.Add(node))

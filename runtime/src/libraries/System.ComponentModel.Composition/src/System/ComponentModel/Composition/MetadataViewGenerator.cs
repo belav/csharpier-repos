@@ -77,15 +77,16 @@ namespace System.ComponentModel.Composition
         {
             typeof(IDictionary<string, object>)
         };
-        private static readonly MethodInfo _mdvDictionaryTryGet = CtorArgumentTypes[0]
-            .GetMethod("TryGetValue")
-            !;
-        private static readonly MethodInfo ObjectGetType = typeof(object)
-            .GetMethod("GetType", Type.EmptyTypes)
-            !;
-        private static readonly ConstructorInfo ObjectCtor = typeof(object)
-            .GetConstructor(Type.EmptyTypes)
-            !;
+        private static readonly MethodInfo _mdvDictionaryTryGet = CtorArgumentTypes[0].GetMethod(
+            "TryGetValue"
+        )!;
+        private static readonly MethodInfo ObjectGetType = typeof(object).GetMethod(
+            "GetType",
+            Type.EmptyTypes
+        )!;
+        private static readonly ConstructorInfo ObjectCtor = typeof(object).GetConstructor(
+            Type.EmptyTypes
+        )!;
 
         // Must be called with _lock held
         private static ModuleBuilder GetProxyModuleBuilder(bool requiresCritical)
@@ -141,12 +142,10 @@ namespace System.ComponentModel.Composition
                 MetadataViewFactory generatedMetadataViewFactory =
                     (MetadataViewFactory)Delegate.CreateDelegate(
                         typeof(MetadataViewFactory),
-                        generatedProxyType
-                            .GetMethod(
-                                MetadataViewGenerator.MetadataViewFactoryName,
-                                BindingFlags.Public | BindingFlags.Static
-                            )
-                            !
+                        generatedProxyType.GetMethod(
+                            MetadataViewGenerator.MetadataViewFactoryName,
+                            BindingFlags.Public | BindingFlags.Static
+                        )!
                     );
                 if (generatedMetadataViewFactory == null)
                 {

@@ -302,9 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         if (includeTree != null)
                         {
                             // Value known to be non-null
-                            UnwrapEntityReference(innerSource.PendingSelector)!.IncludePaths.Merge(
-                                includeTree
-                            );
+                            UnwrapEntityReference(innerSource.PendingSelector)
+                                !.IncludePaths.Merge(includeTree);
                         }
 
                         var sourceElementType = primaryExpansion.Type.GetSequenceType();
@@ -370,9 +369,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         if (includeTree != null)
                         {
                             // Value known to be non-null
-                            UnwrapEntityReference(innerSource.PendingSelector)!.IncludePaths.Merge(
-                                includeTree
-                            );
+                            UnwrapEntityReference(innerSource.PendingSelector)
+                                !.IncludePaths.Merge(includeTree);
                         }
 
                         var sourceElementType = primaryExpansion.Type.GetSequenceType();

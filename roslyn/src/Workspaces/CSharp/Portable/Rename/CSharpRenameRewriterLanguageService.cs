@@ -1244,8 +1244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 {
                     foreach (var location in renamedSymbol.Locations)
                     {
-                        var token = await location.SourceTree!
-                            .GetTouchingTokenAsync(
+                        var token = await location
+                            .SourceTree!.GetTouchingTokenAsync(
                                 location.SourceSpan.Start,
                                 cancellationToken,
                                 findInsideTrivia: true
@@ -1413,8 +1413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 {
                     foreach (var implicitReferenceLocation in implicitReferenceLocations)
                     {
-                        var token = await implicitReferenceLocation.Location.SourceTree!
-                            .GetTouchingTokenAsync(
+                        var token = await implicitReferenceLocation.Location
+                            .SourceTree!.GetTouchingTokenAsync(
                                 implicitReferenceLocation.Location.SourceSpan.Start,
                                 cancellationToken,
                                 findInsideTrivia: false

@@ -758,12 +758,10 @@ namespace System.Xml.Serialization
                         }
 
                         MethodInfo getSetMemberValueDelegateWithTypeGenericMi =
-                            typeof(ReflectionXmlSerializationReaderHelper)
-                                .GetMethod(
-                                    "GetSetMemberValueDelegateWithType",
-                                    BindingFlags.Static | BindingFlags.Public
-                                )
-                                !;
+                            typeof(ReflectionXmlSerializationReaderHelper).GetMethod(
+                                "GetSetMemberValueDelegateWithType",
+                                BindingFlags.Static | BindingFlags.Public
+                            )!;
                         MethodInfo getSetMemberValueDelegateWithTypeMi =
                             getSetMemberValueDelegateWithTypeGenericMi.MakeGenericMethod(
                                 o.GetType(),
@@ -2131,8 +2129,7 @@ namespace System.Xml.Serialization
                         void Wrapper(object? _)
                         {
                             string specifiedMemberName = $"{member.Mapping.Name}Specified";
-                            MethodInfo? specifiedMethodInfo = o!
-                                .GetType()
+                            MethodInfo? specifiedMethodInfo = o!.GetType()
                                 .GetMethod($"set_{specifiedMemberName}");
                             if (specifiedMethodInfo != null)
                             {

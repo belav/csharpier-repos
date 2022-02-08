@@ -27,26 +27,26 @@ internal class PropertyHelper
     // Delegate type for a by-ref property getter
     private delegate TValue ByRefFunc<TDeclaringType, TValue>(ref TDeclaringType arg);
 
-    private static readonly MethodInfo CallPropertyGetterOpenGenericMethod = typeof(PropertyHelper)
-        .GetMethod(nameof(CallPropertyGetter), DeclaredOnlyLookup)
-        !;
+    private static readonly MethodInfo CallPropertyGetterOpenGenericMethod =
+        typeof(PropertyHelper).GetMethod(nameof(CallPropertyGetter), DeclaredOnlyLookup)!;
 
     private static readonly MethodInfo CallPropertyGetterByReferenceOpenGenericMethod =
-        typeof(PropertyHelper)
-            .GetMethod(nameof(CallPropertyGetterByReference), DeclaredOnlyLookup)
-            !;
+        typeof(PropertyHelper).GetMethod(
+            nameof(CallPropertyGetterByReference),
+            DeclaredOnlyLookup
+        )!;
 
     private static readonly MethodInfo CallNullSafePropertyGetterOpenGenericMethod =
         typeof(PropertyHelper).GetMethod(nameof(CallNullSafePropertyGetter), DeclaredOnlyLookup)!;
 
     private static readonly MethodInfo CallNullSafePropertyGetterByReferenceOpenGenericMethod =
-        typeof(PropertyHelper)
-            .GetMethod(nameof(CallNullSafePropertyGetterByReference), DeclaredOnlyLookup)
-            !;
+        typeof(PropertyHelper).GetMethod(
+            nameof(CallNullSafePropertyGetterByReference),
+            DeclaredOnlyLookup
+        )!;
 
-    private static readonly MethodInfo CallPropertySetterOpenGenericMethod = typeof(PropertyHelper)
-        .GetMethod(nameof(CallPropertySetter), DeclaredOnlyLookup)
-        !;
+    private static readonly MethodInfo CallPropertySetterOpenGenericMethod =
+        typeof(PropertyHelper).GetMethod(nameof(CallPropertySetter), DeclaredOnlyLookup)!;
 
     // Using an array rather than IEnumerable, as target will be called on the hot path numerous times.
     private static readonly ConcurrentDictionary<Type, PropertyHelper[]> PropertiesCache = new();

@@ -228,24 +228,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             }
 
             return reference.MemberInfo == null || CollectionMember == null
-              ? Builder
-                .HasNavigations(
+              ? Builder.HasNavigations(
                     reference.Name,
                     CollectionName,
                     (EntityType)DeclaringEntityType,
                     (EntityType)RelatedEntityType,
                     ConfigurationSource.Explicit
-                )
-                !
-              : Builder
-                .HasNavigations(
+                )!
+              : Builder.HasNavigations(
                     reference.MemberInfo,
                     CollectionMember,
                     (EntityType)DeclaringEntityType,
                     (EntityType)RelatedEntityType,
                     ConfigurationSource.Explicit
-                )
-                !;
+                )!;
         }
 
         /// <summary>
@@ -328,13 +324,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     ConfigurationSource.Explicit
                 );
                 Builder = null;
-                return ((EntityType)DeclaringEntityType).Builder
-                    .HasSkipNavigation(
-                        navigationMember,
-                        (EntityType)RelatedEntityType,
-                        ConfigurationSource.Explicit
-                    )
-                    !.Metadata;
+                return ((EntityType)DeclaringEntityType).Builder.HasSkipNavigation(
+                    navigationMember,
+                    (EntityType)RelatedEntityType,
+                    ConfigurationSource.Explicit
+                )!.Metadata;
             }
         }
 
@@ -408,13 +402,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     }
                 }
 
-                return ((EntityType)RelatedEntityType).Builder
-                    .HasSkipNavigation(
-                        navigationMember,
-                        (EntityType)DeclaringEntityType,
-                        ConfigurationSource.Explicit
-                    )
-                    !.Metadata;
+                return ((EntityType)RelatedEntityType).Builder.HasSkipNavigation(
+                    navigationMember,
+                    (EntityType)DeclaringEntityType,
+                    ConfigurationSource.Explicit
+                )!.Metadata;
             }
         }
 

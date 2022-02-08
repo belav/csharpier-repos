@@ -1514,8 +1514,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 .GetRequiredSyntaxRootSynchronously(cancellationToken)
                 .GetAnnotatedNodesAndTokens(annotation)
                 .Single()
-                .AsNode()
-                !;
+                .AsNode()!;
         }
 
         /// <summary>

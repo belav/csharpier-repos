@@ -205,9 +205,9 @@ namespace System.Net
         )
         {
             ListenerClientCertAsyncResult asyncResult =
-                (ListenerClientCertAsyncResult)ThreadPoolBoundHandle
-                    .GetNativeOverlappedState(nativeOverlapped)
-                    !;
+                (ListenerClientCertAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
+                    nativeOverlapped
+                )!;
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     null,

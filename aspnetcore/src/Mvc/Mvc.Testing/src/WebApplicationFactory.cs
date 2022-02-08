@@ -261,9 +261,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
 
     private static string? GetContentRootFromFile(string file)
     {
-        var data = JsonSerializer
-            .Deserialize<IDictionary<string, string>>(File.ReadAllBytes(file))
-            !;
+        var data = JsonSerializer.Deserialize<IDictionary<string, string>>(
+            File.ReadAllBytes(file)
+        )!;
         var key = typeof(TEntryPoint).Assembly.GetName().FullName;
 
         // If the `ContentRoot` is not provided in the app manifest, then return null

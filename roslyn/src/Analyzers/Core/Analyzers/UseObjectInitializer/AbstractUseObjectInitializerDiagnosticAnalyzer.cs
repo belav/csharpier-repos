@@ -169,9 +169,9 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                     ? syntaxFacts.GetOperatorTokenOfMemberAccessExpression(
                           match.MemberAccessExpression
                       ).Span.End
-                    : syntaxFacts
-                          .GetExpressionOfMemberAccessExpression(match.MemberAccessExpression)
-                          !.Span.End;
+                    : syntaxFacts.GetExpressionOfMemberAccessExpression(
+                          match.MemberAccessExpression
+                      )!.Span.End;
 
                 var location1 = Location.Create(
                     syntaxTree,

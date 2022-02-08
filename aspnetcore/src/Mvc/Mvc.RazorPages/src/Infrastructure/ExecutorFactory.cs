@@ -124,9 +124,11 @@ internal static class ExecutorFactory
 
     private sealed class GenericTaskHandlerMethod : HandlerMethod
     {
-        private static readonly MethodInfo ConvertMethod = typeof(GenericTaskHandlerMethod)
-            .GetMethod(nameof(Convert), BindingFlags.NonPublic | BindingFlags.Static)
-            !;
+        private static readonly MethodInfo ConvertMethod =
+            typeof(GenericTaskHandlerMethod).GetMethod(
+                nameof(Convert),
+                BindingFlags.NonPublic | BindingFlags.Static
+            )!;
 
         private readonly Func<object, object?[]?, Task<object>> _thunk;
 

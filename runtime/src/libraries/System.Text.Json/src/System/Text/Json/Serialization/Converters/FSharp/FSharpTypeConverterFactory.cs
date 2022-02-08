@@ -106,9 +106,10 @@ namespace System.Text.Json.Serialization.Converters
                     throw new Exception();
             }
 
-            return (JsonConverter)Activator
-                .CreateInstance(converterFactoryType, constructorArguments)
-                !;
+            return (JsonConverter)Activator.CreateInstance(
+                converterFactoryType,
+                constructorArguments
+            )!;
         }
     }
 }

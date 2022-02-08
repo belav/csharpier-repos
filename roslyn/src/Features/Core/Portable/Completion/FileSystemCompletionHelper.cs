@@ -216,9 +216,10 @@ namespace Microsoft.CodeAnalysis.Completion
                     {
                         result.AddRange(
                             GetItemsInDirectory(
-                                PathUtilities
-                                    .CombineAbsoluteAndRelativePaths(_baseDirectory, directoryPath)
-                                    !,
+                                PathUtilities.CombineAbsoluteAndRelativePaths(
+                                    _baseDirectory,
+                                    directoryPath
+                                )!,
                                 cancellationToken
                             )
                         );
@@ -229,9 +230,10 @@ namespace Microsoft.CodeAnalysis.Completion
                     {
                         result.AddRange(
                             GetItemsInDirectory(
-                                PathUtilities
-                                    .CombineAbsoluteAndRelativePaths(searchPath, directoryPath)
-                                    !,
+                                PathUtilities.CombineAbsoluteAndRelativePaths(
+                                    searchPath,
+                                    directoryPath
+                                )!,
                                 cancellationToken
                             )
                         );

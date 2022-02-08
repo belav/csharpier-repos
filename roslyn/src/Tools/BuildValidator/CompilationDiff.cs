@@ -461,8 +461,8 @@ namespace BuildValidator
                             UseShellExecute = false,
                             CreateNoWindow = true
                         }
-                    )
-                    !.WaitForExit();
+                    )!
+                    .WaitForExit();
 
                 return buildDataFiles;
             }

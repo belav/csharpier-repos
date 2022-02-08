@@ -58,24 +58,22 @@ namespace System.Data
                     && string.IsNullOrEmpty(childTable.Namespace)
                 )
                 {
-                    ctor = typeof(DataRelation)
-                        .GetConstructor(
-                            new Type[]
-                            {
-                                typeof(string) /*relationName*/
-                                ,
-                                typeof(string) /*parentTableName*/
-                                ,
-                                typeof(string) /*childTableName */
-                                ,
-                                typeof(string[]) /*parentColumnNames */
-                                ,
-                                typeof(string[]) /*childColumnNames*/
-                                ,
-                                typeof(bool) /*nested*/
-                            }
-                        )
-                        !;
+                    ctor = typeof(DataRelation).GetConstructor(
+                        new Type[]
+                        {
+                            typeof(string) /*relationName*/
+                            ,
+                            typeof(string) /*parentTableName*/
+                            ,
+                            typeof(string) /*childTableName */
+                            ,
+                            typeof(string[]) /*parentColumnNames */
+                            ,
+                            typeof(string[]) /*childColumnNames*/
+                            ,
+                            typeof(bool) /*nested*/
+                        }
+                    )!;
 
                     values = new object[]
                     {
@@ -89,28 +87,26 @@ namespace System.Data
                 }
                 else
                 {
-                    ctor = typeof(DataRelation)
-                        .GetConstructor(
-                            new Type[]
-                            {
-                                typeof(string) /*relationName*/
-                                ,
-                                typeof(string) /*parentTableName*/
-                                ,
-                                typeof(string) /*parentTableNamespace*/
-                                ,
-                                typeof(string) /*childTableName */
-                                ,
-                                typeof(string) /*childTableNamespace */
-                                ,
-                                typeof(string[]) /*parentColumnNames */
-                                ,
-                                typeof(string[]) /*childColumnNames*/
-                                ,
-                                typeof(bool) /*nested*/
-                            }
-                        )
-                        !;
+                    ctor = typeof(DataRelation).GetConstructor(
+                        new Type[]
+                        {
+                            typeof(string) /*relationName*/
+                            ,
+                            typeof(string) /*parentTableName*/
+                            ,
+                            typeof(string) /*parentTableNamespace*/
+                            ,
+                            typeof(string) /*childTableName */
+                            ,
+                            typeof(string) /*childTableNamespace */
+                            ,
+                            typeof(string[]) /*parentColumnNames */
+                            ,
+                            typeof(string[]) /*childColumnNames*/
+                            ,
+                            typeof(bool) /*nested*/
+                        }
+                    )!;
 
                     values = new object[]
                     {

@@ -81,14 +81,12 @@ public class JSInProcessRuntimeBaseTest
         var obj2 = new object();
 
         // Act
-        var syncResult = runtime
-            .Invoke<DotNetObjectReference<object>[]>(
-                "test identifier",
-                DotNetObjectReference.Create(obj1),
-                "some other arg",
-                DotNetObjectReference.Create(obj2)
-            )
-            !;
+        var syncResult = runtime.Invoke<DotNetObjectReference<object>[]>(
+            "test identifier",
+            DotNetObjectReference.Create(obj1),
+            "some other arg",
+            DotNetObjectReference.Create(obj2)
+        )!;
         var call = runtime.InvokeCalls.Single();
 
         // Assert

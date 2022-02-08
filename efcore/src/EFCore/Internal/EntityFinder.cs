@@ -396,8 +396,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
             return (IQueryable)(collectionNavigation ? _selectManyMethod : _selectMethod)
                 .MakeGenericMethod(ownerEntityType.ClrType, entityType.ClrType)
-                .Invoke(null, new object[] { queryRoot, navigationName })
-                !;
+                .Invoke(null, new object[] { queryRoot, navigationName })!;
         }
 
         private static readonly MethodInfo _selectMethod = typeof(EntityFinder<TEntity>)

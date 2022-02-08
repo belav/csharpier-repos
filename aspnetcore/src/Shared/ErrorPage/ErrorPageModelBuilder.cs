@@ -28,9 +28,7 @@ internal static class ErrorPageModelBuilder
         var clrVersion = assemblyVersion;
         var currentAssembly = typeof(ErrorPage).Assembly;
         var currentAssemblyVesion =
-            currentAssembly
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                !.InformationalVersion;
+            currentAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
 
         IEnumerable<ExceptionDetails> errorDetails;
         if (showDetailedErrors)

@@ -1151,9 +1151,10 @@ namespace System.Runtime.Serialization
                     _ilg.Load(size);
                     _ilg.Ldloca(_objectLocal);
                     _ilg.Call(
-                        typeof(XmlReaderDelegator)
-                            .GetMethod(readArrayMethod, Globals.ScanAllMembers)
-                            !
+                        typeof(XmlReaderDelegator).GetMethod(
+                            readArrayMethod,
+                            Globals.ScanAllMembers
+                        )!
                     );
                     return true;
                 }

@@ -1219,9 +1219,9 @@ namespace System.Net
                                             httpContext.Request.ServiceName =
                                                 context.ClientSpecifiedSpn;
 
-                                            SafeDeleteContext securityContext = context
-                                                .GetContext(out statusCodeNew)
-                                                !;
+                                            SafeDeleteContext securityContext = context.GetContext(
+                                                out statusCodeNew
+                                            )!;
                                             if (
                                                 statusCodeNew.ErrorCode
                                                 != SecurityStatusPalErrorCode.OK
@@ -2366,9 +2366,10 @@ namespace System.Net
                         $"errorCode: {errorCode}, numBytes: {numBytes}, nativeOverlapped: {(IntPtr)nativeOverlapped:x}"
                     );
                 // take the DisconnectAsyncResult object from the state
-                DisconnectAsyncResult asyncResult = (DisconnectAsyncResult)ThreadPoolBoundHandle
-                    .GetNativeOverlappedState(nativeOverlapped)
-                    !;
+                DisconnectAsyncResult asyncResult =
+                    (DisconnectAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
+                        nativeOverlapped
+                    )!;
                 IOCompleted(asyncResult, errorCode, numBytes, nativeOverlapped);
             }
 

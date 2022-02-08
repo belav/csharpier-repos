@@ -150,16 +150,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         {
             var unwrappedType = elementType.UnwrapNullableType();
 
-            return (ValueComparer)Activator
-                .CreateInstance(
-                    elementType == unwrappedType
-                      ? typeof(SingleDimensionalArrayComparer<>).MakeGenericType(elementType)
-                      : typeof(NullableSingleDimensionalArrayComparer<>).MakeGenericType(
-                            unwrappedType
-                        ),
-                    elementMapping.Comparer
-                )
-                !;
+            return (ValueComparer)Activator.CreateInstance(
+                elementType == unwrappedType
+                  ? typeof(SingleDimensionalArrayComparer<>).MakeGenericType(elementType)
+                  : typeof(NullableSingleDimensionalArrayComparer<>).MakeGenericType(unwrappedType),
+                elementMapping.Comparer
+            )!;
         }
 
         private static ValueComparer CreateListComparer(
@@ -171,15 +167,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         {
             var unwrappedType = elementType.UnwrapNullableType();
 
-            return (ValueComparer)Activator
-                .CreateInstance(
-                    elementType == unwrappedType
-                      ? typeof(ListComparer<,>).MakeGenericType(elementType, listType)
-                      : typeof(NullableListComparer<,>).MakeGenericType(unwrappedType, listType),
-                    elementMapping.Comparer,
-                    readOnly
-                )
-                !;
+            return (ValueComparer)Activator.CreateInstance(
+                elementType == unwrappedType
+                  ? typeof(ListComparer<,>).MakeGenericType(elementType, listType)
+                  : typeof(NullableListComparer<,>).MakeGenericType(unwrappedType, listType),
+                elementMapping.Comparer,
+                readOnly
+            )!;
         }
 
         private static ValueComparer CreateStringDictionaryComparer(
@@ -191,18 +185,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         {
             var unwrappedType = elementType.UnwrapNullableType();
 
-            return (ValueComparer)Activator
-                .CreateInstance(
-                    elementType == unwrappedType
-                      ? typeof(StringDictionaryComparer<,>).MakeGenericType(elementType, dictType)
-                      : typeof(NullableStringDictionaryComparer<,>).MakeGenericType(
-                            unwrappedType,
-                            dictType
-                        ),
-                    elementMapping.Comparer,
-                    readOnly
-                )
-                !;
+            return (ValueComparer)Activator.CreateInstance(
+                elementType == unwrappedType
+                  ? typeof(StringDictionaryComparer<,>).MakeGenericType(elementType, dictType)
+                  : typeof(NullableStringDictionaryComparer<,>).MakeGenericType(
+                        unwrappedType,
+                        dictType
+                    ),
+                elementMapping.Comparer,
+                readOnly
+            )!;
         }
     }
 }

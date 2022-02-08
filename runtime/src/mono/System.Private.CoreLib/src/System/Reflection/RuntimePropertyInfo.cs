@@ -395,9 +395,10 @@ namespace System.Reflection
 
             getterType = getterDelegateType.MakeGenericType(typeVector);
             getterDelegate = Delegate.CreateDelegate(getterType, method);
-            adapterFrame = typeof(RuntimePropertyInfo)
-                .GetMethod(frameName, BindingFlags.Static | BindingFlags.NonPublic)
-                !;
+            adapterFrame = typeof(RuntimePropertyInfo).GetMethod(
+                frameName,
+                BindingFlags.Static | BindingFlags.NonPublic
+            )!;
             adapterFrame = adapterFrame.MakeGenericMethod(typeVector);
             return (GetterAdapter)Delegate.CreateDelegate(
                 typeof(GetterAdapter),

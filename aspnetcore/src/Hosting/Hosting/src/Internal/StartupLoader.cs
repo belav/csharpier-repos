@@ -72,15 +72,13 @@ internal class StartupLoader
                 ? configureContainerMethod.GetContainerType()
                 : typeof(object);
 
-        var builder = (ConfigureServicesDelegateBuilder)Activator
-            .CreateInstance(
-                typeof(ConfigureServicesDelegateBuilder<>).MakeGenericType(type),
-                hostingServiceProvider,
-                servicesMethod,
-                configureContainerMethod,
-                instance
-            )
-            !;
+        var builder = (ConfigureServicesDelegateBuilder)Activator.CreateInstance(
+            typeof(ConfigureServicesDelegateBuilder<>).MakeGenericType(type),
+            hostingServiceProvider,
+            servicesMethod,
+            configureContainerMethod,
+            instance
+        )!;
 
         return new StartupMethods(instance, configureMethod.Build(instance), builder.Build());
     }

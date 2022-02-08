@@ -211,8 +211,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
 
             var property = context.Model
-                .FindEntityType(typeof(ConvertingEntity))
-                !.FindProperty(propertyName);
+                .FindEntityType(typeof(ConvertingEntity))!
+                .FindProperty(propertyName);
 
             Assert.Equal(databaseType, property!.GetColumnType());
             Assert.Equal(isNullable, property!.IsNullable);

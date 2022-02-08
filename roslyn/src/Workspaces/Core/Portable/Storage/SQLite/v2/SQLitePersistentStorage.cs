@@ -60,14 +60,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
             // This assignment violates the declared non-nullability of _connectionPool, but the caller ensures that
             // the constructed object is only used if the nullability post-conditions are met.
-            _connectionPool = connectionPoolService
-                .TryOpenDatabase(
-                    databaseFile,
-                    faultInjector,
-                    (connection, cancellationToken) => Initialize(connection, cancellationToken),
-                    CancellationToken.None
-                )
-                !;
+            _connectionPool = connectionPoolService.TryOpenDatabase(
+                databaseFile,
+                faultInjector,
+                (connection, cancellationToken) => Initialize(connection, cancellationToken),
+                CancellationToken.None
+            )!;
 
             // Create a delay to batch up requests to flush.  We'll won't flush more than every FlushAllDelayMS.
             _flushInMemoryDataToDisk = FlushInMemoryDataToDisk;

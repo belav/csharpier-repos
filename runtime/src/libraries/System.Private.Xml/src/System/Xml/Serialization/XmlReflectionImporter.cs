@@ -2236,12 +2236,10 @@ namespace System.Xml.Serialization
 
             if (accessor.TypeDesc.IsArrayLike)
             {
-                Type arrayElementType = TypeScope
-                    .GetArrayElementType(
-                        accessorType,
-                        $"{model.FieldTypeDesc.FullName}.{model.Name}"
-                    )
-                    !;
+                Type arrayElementType = TypeScope.GetArrayElementType(
+                    accessorType,
+                    $"{model.FieldTypeDesc.FullName}.{model.Name}"
+                )!;
 
                 if ((flags & attrFlags) != 0)
                 {

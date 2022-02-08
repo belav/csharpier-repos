@@ -137,9 +137,11 @@ namespace System.Reflection.TypeLoading
             // *only* as long as it's a generic type argument, not the top level type. If you specify the name of a type in a
             // different module as the top level type, this api returns null (even if throwOnError is specified as true!)
             //
-            Type type = Assembly
-                .GetType(className, throwOnError: throwOnError, ignoreCase: ignoreCase)
-                !;
+            Type type = Assembly.GetType(
+                className,
+                throwOnError: throwOnError,
+                ignoreCase: ignoreCase
+            )!;
             if (type.Module != this)
             {
                 // We should throw if throwOnError == true, but .NET Framework doesn't so we'll keep the same behavior for the few people using this.

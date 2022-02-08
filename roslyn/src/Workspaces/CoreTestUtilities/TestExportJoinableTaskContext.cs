@@ -116,13 +116,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 );
                 if (type != null)
                 {
-                    type.GetField("foregroundThread", BindingFlags.Static | BindingFlags.NonPublic)
-                        !.SetValue(null, thread);
+                    type.GetField(
+                        "foregroundThread",
+                        BindingFlags.Static | BindingFlags.NonPublic
+                    )!.SetValue(null, thread);
                     type.GetField(
                         "ForegroundTaskScheduler",
                         BindingFlags.Static | BindingFlags.NonPublic
-                    )
-                        !.SetValue(null, taskScheduler);
+                    )!.SetValue(null, taskScheduler);
 
                     break;
                 }

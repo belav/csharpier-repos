@@ -851,15 +851,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 builder =
-                    entityType
-                        .AddProperty(
-                            propertyName,
-                            propertyType,
-                            memberInfo,
-                            typeConfigurationSource,
-                            configurationSource.Value
-                        )
-                        !.Builder;
+                    entityType.AddProperty(
+                        propertyName,
+                        propertyType,
+                        memberInfo,
+                        typeConfigurationSource,
+                        configurationSource.Value
+                    )!.Builder;
 
                 detachedProperties?.Attach(this);
             }
@@ -3799,13 +3797,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     if (setTargetAsPrincipal == true)
                     {
-                        existingRelationship = existingRelationship
-                            .HasEntityTypes(
-                                existingRelationship.Metadata.PrincipalEntityType,
-                                existingRelationship.Metadata.DeclaringEntityType,
-                                configurationSource
-                            )
-                            !;
+                        existingRelationship = existingRelationship.HasEntityTypes(
+                            existingRelationship.Metadata.PrincipalEntityType,
+                            existingRelationship.Metadata.DeclaringEntityType,
+                            configurationSource
+                        )!;
 
                         if (required.HasValue)
                         {
@@ -4006,19 +4002,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 if (setTargetAsPrincipal == true)
                 {
-                    relationship = relationship
-                        .HasEntityTypes(
-                            targetEntityType.Builder.Metadata,
-                            Metadata,
-                            configurationSource
-                        )
-                        !;
+                    relationship = relationship.HasEntityTypes(
+                        targetEntityType.Builder.Metadata,
+                        Metadata,
+                        configurationSource
+                    )!;
 
                     if (required.HasValue)
                     {
-                        relationship = relationship
-                            .IsRequired(required.Value, configurationSource)
-                            !;
+                        relationship = relationship.IsRequired(
+                            required.Value,
+                            configurationSource
+                        )!;
                     }
                 }
 
@@ -5277,9 +5272,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
 
                     principalKey =
-                        principalBaseEntityTypeBuilder
-                            .HasKeyInternal(principalKeyProperties, ConfigurationSource.Convention)
-                            !.Metadata;
+                        principalBaseEntityTypeBuilder.HasKeyInternal(
+                            principalKeyProperties,
+                            ConfigurationSource.Convention
+                        )!.Metadata;
                 }
                 else
                 {
@@ -5626,16 +5622,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 builder =
-                    Metadata
-                        .AddSkipNavigation(
-                            navigationName,
-                            memberInfo,
-                            targetEntityType,
-                            collection ?? true,
-                            onDependent ?? false,
-                            configurationSource.Value
-                        )
-                        !.Builder;
+                    Metadata.AddSkipNavigation(
+                        navigationName,
+                        memberInfo,
+                        targetEntityType,
+                        collection ?? true,
+                        onDependent ?? false,
+                        configurationSource.Value
+                    )!.Builder;
 
                 if (detachedNavigations != null)
                 {
@@ -5974,20 +5968,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     )
                     {
                         property =
-                            property.DeclaringEntityType.Builder
-                                .Property(
-                                    property.ClrType.MakeNullable(false),
-                                    property.Name,
-                                    configurationSource.Value
-                                )
-                                !.Metadata;
+                            property.DeclaringEntityType.Builder.Property(
+                                property.ClrType.MakeNullable(false),
+                                property.Name,
+                                configurationSource.Value
+                            )!.Metadata;
                     }
                     else
                     {
                         property =
-                            property.DeclaringEntityType.Builder
-                                .Property(property.Name, configurationSource.Value)
-                                !.Metadata;
+                            property.DeclaringEntityType.Builder.Property(
+                                property.Name,
+                                configurationSource.Value
+                            )!.Metadata;
                     }
                 }
 
@@ -6337,14 +6330,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var rootTypeBuilder = Metadata.RootType().Builder;
             var discriminatorProperty = discriminatorPropertyBuilder.Metadata;
             // Make sure the property is on the root type
-            discriminatorPropertyBuilder = rootTypeBuilder
-                .Property(
-                    discriminatorProperty.ClrType,
-                    discriminatorProperty.Name,
-                    null,
-                    ConfigurationSource.Convention
-                )
-                !;
+            discriminatorPropertyBuilder = rootTypeBuilder.Property(
+                discriminatorProperty.ClrType,
+                discriminatorProperty.Name,
+                null,
+                ConfigurationSource.Convention
+            )!;
 
             RemoveUnusedDiscriminatorProperty(discriminatorProperty, configurationSource);
 

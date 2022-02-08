@@ -18,19 +18,17 @@ internal class ObjectMethodExecutor
     private readonly MethodExecutor? _executor;
 
     private static readonly ConstructorInfo _objectMethodExecutorAwaitableConstructor =
-        typeof(ObjectMethodExecutorAwaitable)
-            .GetConstructor(
-                new[]
-                {
-                    typeof(object), // customAwaitable
-                    typeof(Func<object, object>), // getAwaiterMethod
-                    typeof(Func<object, bool>), // isCompletedMethod
-                    typeof(Func<object, object>), // getResultMethod
-                    typeof(Action<object, Action>), // onCompletedMethod
-                    typeof(Action<object, Action>) // unsafeOnCompletedMethod
-                }
-            )
-            !;
+        typeof(ObjectMethodExecutorAwaitable).GetConstructor(
+            new[]
+            {
+                typeof(object), // customAwaitable
+                typeof(Func<object, object>), // getAwaiterMethod
+                typeof(Func<object, bool>), // isCompletedMethod
+                typeof(Func<object, object>), // getResultMethod
+                typeof(Action<object, Action>), // onCompletedMethod
+                typeof(Action<object, Action>) // unsafeOnCompletedMethod
+            }
+        )!;
 
     private ObjectMethodExecutor(
         MethodInfo methodInfo,

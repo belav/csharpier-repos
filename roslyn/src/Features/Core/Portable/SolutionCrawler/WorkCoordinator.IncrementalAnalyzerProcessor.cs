@@ -594,8 +594,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                     )
                                     .Where(t => t.analyzer != null)
                                     .OrderBy(t => t.analyzer is not DiagnosticIncrementalAnalyzer)
-                                    .ToImmutableArray()
-                                    !;
+                                    .ToImmutableArray()!;
 
                                 _analyzerMap[workspace] = analyzers;
                             }

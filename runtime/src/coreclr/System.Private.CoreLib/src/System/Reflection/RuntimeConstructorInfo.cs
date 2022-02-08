@@ -464,9 +464,13 @@ namespace System.Reflection
                 culture,
                 sig
             );
-            object retValue = RuntimeMethodHandle
-                .InvokeMethod(null, arguments, sig, true, wrapExceptions)
-                !; // ctor must return non-null
+            object retValue = RuntimeMethodHandle.InvokeMethod(
+                null,
+                arguments,
+                sig,
+                true,
+                wrapExceptions
+            )!; // ctor must return non-null
 
             // copy out. This should be made only if ByRef are present.
             // n.b. cannot use Span<T>.CopyTo, as parameters.GetType() might not actually be typeof(object[])

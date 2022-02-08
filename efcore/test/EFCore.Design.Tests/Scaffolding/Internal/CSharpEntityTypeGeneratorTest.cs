@@ -827,14 +827,14 @@ namespace TestNamespace
                     Assert.True(entityType.GetProperty("OptionalValueNavigationId").IsNullable);
 
                     Assert.True(
-                        entityType
-                            .FindNavigation("RequiredReferenceNavigation")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "RequiredReferenceNavigation"
+                        )!.ForeignKey.IsRequired
                     );
                     Assert.False(
-                        entityType
-                            .FindNavigation("OptionalReferenceNavigation")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "OptionalReferenceNavigation"
+                        )!.ForeignKey.IsRequired
                     );
                     Assert.True(
                         entityType.FindNavigation("RequiredValueNavigation")!.ForeignKey.IsRequired
@@ -939,24 +939,24 @@ namespace TestNamespace
                     );
 
                     Assert.True(
-                        entityType
-                            .FindNavigation("RequiredNavigationWithReferenceForeignKey")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "RequiredNavigationWithReferenceForeignKey"
+                        )!.ForeignKey.IsRequired
                     );
                     Assert.False(
-                        entityType
-                            .FindNavigation("OptionalNavigationWithReferenceForeignKey")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "OptionalNavigationWithReferenceForeignKey"
+                        )!.ForeignKey.IsRequired
                     );
                     Assert.True(
-                        entityType
-                            .FindNavigation("RequiredNavigationWithValueForeignKey")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "RequiredNavigationWithValueForeignKey"
+                        )!.ForeignKey.IsRequired
                     );
                     Assert.False(
-                        entityType
-                            .FindNavigation("OptionalNavigationWithValueForeignKey")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "OptionalNavigationWithValueForeignKey"
+                        )!.ForeignKey.IsRequired
                     );
                 }
             );
@@ -1063,24 +1063,24 @@ namespace TestNamespace
                     );
 
                     Assert.True(
-                        entityType
-                            .FindNavigation("RequiredNavigationWithReferenceForeignKey")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "RequiredNavigationWithReferenceForeignKey"
+                        )!.ForeignKey.IsRequired
                     );
                     Assert.False(
-                        entityType
-                            .FindNavigation("OptionalNavigationWithReferenceForeignKey")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "OptionalNavigationWithReferenceForeignKey"
+                        )!.ForeignKey.IsRequired
                     );
                     Assert.True(
-                        entityType
-                            .FindNavigation("RequiredNavigationWithValueForeignKey")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "RequiredNavigationWithValueForeignKey"
+                        )!.ForeignKey.IsRequired
                     );
                     Assert.False(
-                        entityType
-                            .FindNavigation("OptionalNavigationWithValueForeignKey")
-                            !.ForeignKey.IsRequired
+                        entityType.FindNavigation(
+                            "OptionalNavigationWithValueForeignKey"
+                        )!.ForeignKey.IsRequired
                     );
                 }
             );

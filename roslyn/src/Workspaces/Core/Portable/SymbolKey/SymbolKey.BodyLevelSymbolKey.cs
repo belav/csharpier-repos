@@ -131,9 +131,9 @@ namespace Microsoft.CodeAnalysis
                 var name = reader.ReadString()!;
                 var kind = (SymbolKind)reader.ReadInteger();
 #pragma warning disable IDE0007 // Use implicit type
-                PooledArrayBuilder<Location> locations = reader
-                    .ReadLocationArray(out var locationsFailureReason)
-                    !;
+                PooledArrayBuilder<Location> locations = reader.ReadLocationArray(
+                    out var locationsFailureReason
+                )!;
 #pragma warning restore IDE0007 // Use implicit type
                 var ordinal = reader.ReadInteger();
 

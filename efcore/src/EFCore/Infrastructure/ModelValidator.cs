@@ -544,8 +544,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                         ),
                                     referencingFk.Properties.Format(includeTypes: true),
                                     entityType
-                                        .FindPrimaryKey()
-                                        !.Properties.Format(includeTypes: true)
+                                        .FindPrimaryKey()!
+                                        .Properties.Format(includeTypes: true)
                                 )
                             );
                         }

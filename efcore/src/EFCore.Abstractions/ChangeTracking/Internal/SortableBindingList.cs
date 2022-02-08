@@ -110,8 +110,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var property = typeof(Comparer<>)
                     .MakeGenericType(prop.PropertyType)
                     .GetTypeInfo()
-                    .GetDeclaredProperty("Default")
-                    !;
+                    .GetDeclaredProperty("Default")!;
                 _comparer = (IComparer)property.GetValue(null, null)!;
             }
 

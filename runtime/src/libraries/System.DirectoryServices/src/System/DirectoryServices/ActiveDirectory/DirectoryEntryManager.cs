@@ -192,41 +192,41 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
 
-                    distinguishedName = (string)PropertyManager
-                        .GetPropertyValue(
-                            _context,
-                            rootDSE,
-                            PropertyManager.RootDomainNamingContext
-                        )
-                        !;
+                    distinguishedName = (string)PropertyManager.GetPropertyValue(
+                        _context,
+                        rootDSE,
+                        PropertyManager.RootDomainNamingContext
+                    )!;
                     break;
                 }
                 case WellKnownDN.DefaultNamingContext:
                 {
                     DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
-                    distinguishedName = (string)PropertyManager
-                        .GetPropertyValue(_context, rootDSE, PropertyManager.DefaultNamingContext)
-                        !;
+                    distinguishedName = (string)PropertyManager.GetPropertyValue(
+                        _context,
+                        rootDSE,
+                        PropertyManager.DefaultNamingContext
+                    )!;
                     break;
                 }
                 case WellKnownDN.SchemaNamingContext:
                 {
                     DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
-                    distinguishedName = (string)PropertyManager
-                        .GetPropertyValue(_context, rootDSE, PropertyManager.SchemaNamingContext)
-                        !;
+                    distinguishedName = (string)PropertyManager.GetPropertyValue(
+                        _context,
+                        rootDSE,
+                        PropertyManager.SchemaNamingContext
+                    )!;
                     break;
                 }
                 case WellKnownDN.ConfigurationNamingContext:
                 {
                     DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
-                    distinguishedName = (string)PropertyManager
-                        .GetPropertyValue(
-                            _context,
-                            rootDSE,
-                            PropertyManager.ConfigurationNamingContext
-                        )
-                        !;
+                    distinguishedName = (string)PropertyManager.GetPropertyValue(
+                        _context,
+                        rootDSE,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
                     break;
                 }
                 case WellKnownDN.PartitionsContainer:
@@ -342,13 +342,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     try
                     {
-                        distinguishedName = (string)PropertyManager
-                            .GetPropertyValue(
-                                context,
-                                rootDSE,
-                                PropertyManager.RootDomainNamingContext
-                            )
-                            !;
+                        distinguishedName = (string)PropertyManager.GetPropertyValue(
+                            context,
+                            rootDSE,
+                            PropertyManager.RootDomainNamingContext
+                        )!;
                     }
                     finally
                     {
@@ -361,13 +359,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
                     try
                     {
-                        distinguishedName = (string)PropertyManager
-                            .GetPropertyValue(
-                                context,
-                                rootDSE,
-                                PropertyManager.DefaultNamingContext
-                            )
-                            !;
+                        distinguishedName = (string)PropertyManager.GetPropertyValue(
+                            context,
+                            rootDSE,
+                            PropertyManager.DefaultNamingContext
+                        )!;
                     }
                     finally
                     {
@@ -380,9 +376,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
                     try
                     {
-                        distinguishedName = (string)PropertyManager
-                            .GetPropertyValue(context, rootDSE, PropertyManager.SchemaNamingContext)
-                            !;
+                        distinguishedName = (string)PropertyManager.GetPropertyValue(
+                            context,
+                            rootDSE,
+                            PropertyManager.SchemaNamingContext
+                        )!;
                     }
                     finally
                     {
@@ -395,13 +393,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
                     try
                     {
-                        distinguishedName = (string)PropertyManager
-                            .GetPropertyValue(
-                                context,
-                                rootDSE,
-                                PropertyManager.ConfigurationNamingContext
-                            )
-                            !;
+                        distinguishedName = (string)PropertyManager.GetPropertyValue(
+                            context,
+                            rootDSE,
+                            PropertyManager.ConfigurationNamingContext
+                        )!;
                     }
                     finally
                     {

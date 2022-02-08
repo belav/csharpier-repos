@@ -22,25 +22,25 @@ namespace System.Dynamic
           IDictionary<string, object?>,
           INotifyPropertyChanged
     {
-        private static readonly MethodInfo s_expandoTryGetValue = typeof(RuntimeOps)
-            .GetMethod(nameof(RuntimeOps.ExpandoTryGetValue))
-            !;
+        private static readonly MethodInfo s_expandoTryGetValue = typeof(RuntimeOps).GetMethod(
+            nameof(RuntimeOps.ExpandoTryGetValue)
+        )!;
 
-        private static readonly MethodInfo s_expandoTrySetValue = typeof(RuntimeOps)
-            .GetMethod(nameof(RuntimeOps.ExpandoTrySetValue))
-            !;
+        private static readonly MethodInfo s_expandoTrySetValue = typeof(RuntimeOps).GetMethod(
+            nameof(RuntimeOps.ExpandoTrySetValue)
+        )!;
 
-        private static readonly MethodInfo s_expandoTryDeleteValue = typeof(RuntimeOps)
-            .GetMethod(nameof(RuntimeOps.ExpandoTryDeleteValue))
-            !;
+        private static readonly MethodInfo s_expandoTryDeleteValue = typeof(RuntimeOps).GetMethod(
+            nameof(RuntimeOps.ExpandoTryDeleteValue)
+        )!;
 
-        private static readonly MethodInfo s_expandoPromoteClass = typeof(RuntimeOps)
-            .GetMethod(nameof(RuntimeOps.ExpandoPromoteClass))
-            !;
+        private static readonly MethodInfo s_expandoPromoteClass = typeof(RuntimeOps).GetMethod(
+            nameof(RuntimeOps.ExpandoPromoteClass)
+        )!;
 
-        private static readonly MethodInfo s_expandoCheckVersion = typeof(RuntimeOps)
-            .GetMethod(nameof(RuntimeOps.ExpandoCheckVersion))
-            !;
+        private static readonly MethodInfo s_expandoCheckVersion = typeof(RuntimeOps).GetMethod(
+            nameof(RuntimeOps.ExpandoCheckVersion)
+        )!;
 
         internal readonly object LockObject; // the read-only field is used for locking the Expando object
         private ExpandoData _data; // the data currently being held by the Expando object

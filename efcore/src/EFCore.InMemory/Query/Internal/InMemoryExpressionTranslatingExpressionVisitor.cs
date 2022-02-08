@@ -1345,11 +1345,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             {
                 case ConstantExpression constantExpression:
                     var values = constantExpression.GetConstantValue<IEnumerable>();
-                    var propertyValueList = (IList)Activator
-                        .CreateInstance(
-                            typeof(List<>).MakeGenericType(property.ClrType.MakeNullable())
-                        )
-                        !;
+                    var propertyValueList = (IList)Activator.CreateInstance(
+                        typeof(List<>).MakeGenericType(property.ClrType.MakeNullable())
+                    )!;
                     var propertyGetter = property.GetGetter();
                     foreach (var value in values)
                     {

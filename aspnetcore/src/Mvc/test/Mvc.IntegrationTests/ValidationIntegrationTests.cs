@@ -2701,8 +2701,8 @@ public class ValidationIntegrationTests
 
         public Delegate Delegate { get; set; } =
             typeof(ModelWithNonNullableReferenceTypeProperties)
-                .GetMethod(nameof(SomeMethod))
-                !.CreateDelegate<Action>();
+                .GetMethod(nameof(SomeMethod))!
+                .CreateDelegate<Action>();
 
         public static void SomeMethod() { }
     }

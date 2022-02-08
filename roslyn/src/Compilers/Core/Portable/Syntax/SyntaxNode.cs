@@ -942,10 +942,11 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentOutOfRangeException(nameof(span));
             }
 
-            var node = FindToken(span.Start, findInsideTrivia).Parent!.FirstAncestorOrSelf<
-                SyntaxNode,
-                TextSpan
-            >((a, span) => a.FullSpan.Contains(span), span);
+            var node = FindToken(span.Start, findInsideTrivia)
+                .Parent!.FirstAncestorOrSelf<SyntaxNode, TextSpan>(
+                    (a, span) => a.FullSpan.Contains(span),
+                    span
+                );
 
             RoslynDebug.Assert(node is object);
             SyntaxNode? cuRoot = node.SyntaxTree?.GetRoot();

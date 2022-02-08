@@ -71,12 +71,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
                 var (assembly, compilerAnalyzerTypeName) = GetCompilerDiagnosticAnalyzerInfo();
                 var compilerAnalyzerType = assembly.GetType(compilerAnalyzerTypeName)!;
-                var methodInfo = compilerAnalyzerType
-                    .GetMethod(
-                        "GetSupportedErrorCodes",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    )
-                    !;
+                var methodInfo = compilerAnalyzerType.GetMethod(
+                    "GetSupportedErrorCodes",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )!;
                 var compilerAnalyzerInstance = Activator.CreateInstance(compilerAnalyzerType);
                 var supportedCodes =
                     methodInfo.Invoke(compilerAnalyzerInstance, Array.Empty<object>())

@@ -284,9 +284,11 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         );
 
                         bool consumed;
-                        messageValue = source
-                            .ConsumeMessage(messageHeader, _owningTarget, out consumed)
-                            !;
+                        messageValue = source.ConsumeMessage(
+                            messageHeader,
+                            _owningTarget,
+                            out consumed
+                        )!;
                         if (!consumed)
                             return DataflowMessageStatus.NotAvailable;
                     }

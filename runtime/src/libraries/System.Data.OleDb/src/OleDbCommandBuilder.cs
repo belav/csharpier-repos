@@ -266,8 +266,8 @@ namespace System.Data.OleDb
                                 .ToString(
                                     dataRow[parameterName, DataRowVersion.Default],
                                     CultureInfo.InvariantCulture
-                                )
-                                !.TrimStart(new char[] { '@', ' ', ':' });
+                                )!
+                                .TrimStart(new char[] { '@', ' ', ':' });
                         }
                         if (
                             (null != parameterDirection)
@@ -387,9 +387,10 @@ namespace System.Data.OleDb
             else if (connection.SupportSchemaRowset(OleDbSchemaGuid.Procedures))
             {
                 object?[] restrictions = new object?[4] { null, null, command.CommandText, null };
-                DataTable table = connection
-                    .GetSchemaRowset(OleDbSchemaGuid.Procedures, restrictions)
-                    !;
+                DataTable table = connection.GetSchemaRowset(
+                    OleDbSchemaGuid.Procedures,
+                    restrictions
+                )!;
                 if (0 == table.Rows.Count)
                 {
                     throw ADP.NoStoredProcedureExists(command.CommandText);

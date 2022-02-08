@@ -21,9 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// </remarks>
     public class DependencyInjectionParameterBinding : ServiceParameterBinding
     {
-        private static readonly MethodInfo _getServiceMethod = typeof(InfrastructureExtensions)
-            .GetMethod(nameof(InfrastructureExtensions.GetService))
-            !;
+        private static readonly MethodInfo _getServiceMethod =
+            typeof(InfrastructureExtensions).GetMethod(
+                nameof(InfrastructureExtensions.GetService)
+            )!;
 
         /// <summary>
         ///     Creates a new <see cref="DependencyInjectionParameterBinding" /> instance for the given service type.

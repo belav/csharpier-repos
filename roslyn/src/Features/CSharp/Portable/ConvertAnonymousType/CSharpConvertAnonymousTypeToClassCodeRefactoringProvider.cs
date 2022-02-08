@@ -82,8 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousType
             return list.Replace(
                     list[^2],
                     list[^2]
-                        .AsNode()
-                        !.WithAppendedTrailingTrivia(list[^1].GetLeadingTrivia())
+                        .AsNode()!
+                        .WithAppendedTrailingTrivia(list[^1].GetLeadingTrivia())
                         .WithAppendedTrailingTrivia(list[^1].GetTrailingTrivia())
                 )
                 .RemoveAt(list.Count - 1);

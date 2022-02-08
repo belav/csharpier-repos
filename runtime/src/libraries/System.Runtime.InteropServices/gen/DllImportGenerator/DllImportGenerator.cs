@@ -85,9 +85,10 @@ namespace Microsoft.Interop
                         new
                         {
                             Syntax = (MethodDeclarationSyntax)context.Node,
-                            Symbol = (IMethodSymbol)context.SemanticModel
-                                .GetDeclaredSymbol(context.Node, ct)
-                                !
+                            Symbol = (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(
+                                context.Node,
+                                ct
+                            )!
                         }
                 )
                 .Where(

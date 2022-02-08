@@ -68,8 +68,7 @@ namespace System
                 // than 0 or -1.
                 object RetObj = OAVariantLib
                     .ChangeType(myValue, type, OAVariantLib.LocalBool, cultureInfo)
-                    .ToObject()
-                    !;
+                    .ToObject()!;
 
 #if DISPLAY_DEBUG_INFO
                 Console.WriteLine(

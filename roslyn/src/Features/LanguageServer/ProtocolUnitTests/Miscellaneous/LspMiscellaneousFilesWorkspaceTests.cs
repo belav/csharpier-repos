@@ -69,8 +69,8 @@ public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtoco
 
         // Open an empty loose file and verify it gets added to the misc workspace.
         await testLspServer.OpenDocumentAsync(looseFileUri, string.Empty).ConfigureAwait(false);
-        var docText = await GetMiscellaneousDocument(testLspServer)!
-            .GetTextAsync(CancellationToken.None)
+        var docText = await GetMiscellaneousDocument(testLspServer)
+            !.GetTextAsync(CancellationToken.None)
             .ConfigureAwait(false);
         Assert.Equal(string.Empty, docText.ToString());
 
@@ -209,8 +209,8 @@ public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtoco
     {
         return testLspServer
             .GetManagerAccessor()
-            .GetLspMiscellaneousFilesWorkspace()
-            !.CurrentSolution.Projects.SingleOrDefault()
+            .GetLspMiscellaneousFilesWorkspace()!
+            .CurrentSolution.Projects.SingleOrDefault()
             ?.Documents.Single();
     }
 

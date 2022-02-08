@@ -358,8 +358,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         var hasNext =
                             _resultCoordinator!.HasNext
-                            ?? await _dataReader!
-                                .ReadAsync(_cancellationToken)
+                            ?? await _dataReader
+                                !.ReadAsync(_cancellationToken)
                                 .ConfigureAwait(false);
 
                         if (hasNext)
@@ -382,8 +382,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 }
 
                                 if (
-                                    !await _dataReader!
-                                        .ReadAsync(_cancellationToken)
+                                    !await _dataReader
+                                        !.ReadAsync(_cancellationToken)
                                         .ConfigureAwait(false)
                                 )
                                 {

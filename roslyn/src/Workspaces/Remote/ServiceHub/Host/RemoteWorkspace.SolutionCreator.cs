@@ -468,8 +468,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.Solution
                         .WithProjectName(projectId, newProjectAttributes.Name)
-                        .GetProject(projectId)
-                        !;
+                        .GetProject(projectId)!;
                 }
 
                 if (
@@ -479,16 +478,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.Solution
                         .WithProjectAssemblyName(projectId, newProjectAttributes.AssemblyName)
-                        .GetProject(projectId)
-                        !;
+                        .GetProject(projectId)!;
                 }
 
                 if (project.State.ProjectInfo.Attributes.FilePath != newProjectAttributes.FilePath)
                 {
                     project = project.Solution
                         .WithProjectFilePath(projectId, newProjectAttributes.FilePath)
-                        .GetProject(projectId)
-                        !;
+                        .GetProject(projectId)!;
                 }
 
                 if (
@@ -498,8 +495,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.Solution
                         .WithProjectOutputFilePath(projectId, newProjectAttributes.OutputFilePath)
-                        .GetProject(projectId)
-                        !;
+                        .GetProject(projectId)!;
                 }
 
                 if (
@@ -512,8 +508,7 @@ namespace Microsoft.CodeAnalysis.Remote
                             projectId,
                             newProjectAttributes.OutputRefFilePath
                         )
-                        .GetProject(projectId)
-                        !;
+                        .GetProject(projectId)!;
                 }
 
                 if (
@@ -526,8 +521,7 @@ namespace Microsoft.CodeAnalysis.Remote
                             project.Id,
                             newProjectAttributes.CompilationOutputInfo
                         )
-                        .GetProject(project.Id)
-                        !;
+                        .GetProject(project.Id)!;
                 }
 
                 if (
@@ -540,8 +534,7 @@ namespace Microsoft.CodeAnalysis.Remote
                             projectId,
                             newProjectAttributes.DefaultNamespace
                         )
-                        .GetProject(projectId)
-                        !;
+                        .GetProject(projectId)!;
                 }
 
                 if (
@@ -551,8 +544,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.Solution
                         .WithHasAllInformation(projectId, newProjectAttributes.HasAllInformation)
-                        .GetProject(projectId)
-                        !;
+                        .GetProject(projectId)!;
                 }
 
                 if (
@@ -562,8 +554,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.Solution
                         .WithRunAnalyzers(projectId, newProjectAttributes.RunAnalyzers)
-                        .GetProject(projectId)
-                        !;
+                        .GetProject(projectId)!;
                 }
 
                 return project;
@@ -628,9 +619,10 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 if (lazyDocumentsToAdd != null)
                 {
-                    project = addDocuments(project.Solution, lazyDocumentsToAdd.ToImmutable())
-                        .GetProject(project.Id)
-                        !;
+                    project = addDocuments(
+                            project.Solution,
+                            lazyDocumentsToAdd.ToImmutable()
+                        ).GetProject(project.Id)!;
                 }
 
                 // changed document
@@ -665,9 +657,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     if (!newMap.ContainsKey(documentId))
                     {
                         // we have a document removed
-                        project = removeDocument(project.Solution, documentId)
-                            .GetProject(project.Id)
-                            !;
+                        project = removeDocument(project.Solution, documentId).GetProject(
+                            project.Id
+                        )!;
                     }
                 }
 
@@ -705,18 +697,15 @@ namespace Microsoft.CodeAnalysis.Remote
                         TextDocumentKind.Document
                           => document.Project.Solution
                               .WithDocumentText(document.Id, sourceText)
-                              .GetDocument(document.Id)
-                              !,
+                              .GetDocument(document.Id)!,
                         TextDocumentKind.AnalyzerConfigDocument
                           => document.Project.Solution
                               .WithAnalyzerConfigDocumentText(document.Id, sourceText)
-                              .GetAnalyzerConfigDocument(document.Id)
-                              !,
+                              .GetAnalyzerConfigDocument(document.Id)!,
                         TextDocumentKind.AdditionalDocument
                           => document.Project.Solution
                               .WithAdditionalDocumentText(document.Id, sourceText)
-                              .GetAdditionalDocument(document.Id)
-                              !,
+                              .GetAdditionalDocument(document.Id)!,
                         _ => throw ExceptionUtilities.UnexpectedValue(document.Kind),
                     };
                 }
@@ -755,8 +744,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     Contract.ThrowIfFalse(document is Document);
                     document = document.Project.Solution
                         .WithDocumentFolders(document.Id, newDocumentInfo.Folders)
-                        .GetDocument(document.Id)
-                        !;
+                        .GetDocument(document.Id)!;
                 }
 
                 if (document.State.Attributes.SourceCodeKind != newDocumentInfo.SourceCodeKind)
@@ -765,8 +753,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     Contract.ThrowIfFalse(document is Document);
                     document = document.Project.Solution
                         .WithDocumentSourceCodeKind(document.Id, newDocumentInfo.SourceCodeKind)
-                        .GetDocument(document.Id)
-                        !;
+                        .GetDocument(document.Id)!;
                 }
 
                 return document;

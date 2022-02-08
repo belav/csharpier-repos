@@ -302,21 +302,19 @@ namespace System.Security.Cryptography
                             "Parse",
                             BindingFlags.Static | BindingFlags.Public,
                             new[] { typeof(string) }
-                        )
-                        !.CreateDelegate<Func<string, object>>();
+                        )!
+                        .CreateDelegate<Func<string, object>>();
 
                     s_docRootProperty = xDocument.GetProperty("Root")!;
 
                     Type xElement = Type.GetType(
                         "System.Xml.Linq.XElement" + XmlLinqAssemblyString
                     )!;
-                    s_getElementsMethod = xElement
-                        .GetMethod(
-                            "Elements",
-                            BindingFlags.Instance | BindingFlags.Public,
-                            Type.EmptyTypes
-                        )
-                        !;
+                    s_getElementsMethod = xElement.GetMethod(
+                        "Elements",
+                        BindingFlags.Instance | BindingFlags.Public,
+                        Type.EmptyTypes
+                    )!;
 
                     s_elementNameProperty = xElement.GetProperty("Name")!;
                     s_elementValueProperty = xElement.GetProperty("Value")!;

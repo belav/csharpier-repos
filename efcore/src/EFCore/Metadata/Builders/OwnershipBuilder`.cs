@@ -86,13 +86,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             params string[] foreignKeyPropertyNames
         )
         {
-            Builder = Builder
-                .HasForeignKey(
-                    Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames)),
-                    (EntityType)DependentEntityType,
-                    ConfigurationSource.Explicit
-                )
-                !;
+            Builder = Builder.HasForeignKey(
+                Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames)),
+                (EntityType)DependentEntityType,
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder<TEntity, TDependentEntity>(
                 Builder,
                 this,
@@ -133,15 +131,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Expression<Func<TDependentEntity, object?>> foreignKeyExpression
         )
         {
-            Builder = Builder
-                .HasForeignKey(
-                    Check
-                        .NotNull(foreignKeyExpression, nameof(foreignKeyExpression))
-                        .GetMemberAccessList(),
-                    (EntityType)DependentEntityType,
-                    ConfigurationSource.Explicit
-                )
-                !;
+            Builder = Builder.HasForeignKey(
+                Check
+                    .NotNull(foreignKeyExpression, nameof(foreignKeyExpression))
+                    .GetMemberAccessList(),
+                (EntityType)DependentEntityType,
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder<TEntity, TDependentEntity>(
                 Builder,
                 this,
@@ -161,12 +157,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             params string[] keyPropertyNames
         )
         {
-            Builder = Builder
-                .HasPrincipalKey(
-                    Check.NotNull(keyPropertyNames, nameof(keyPropertyNames)),
-                    ConfigurationSource.Explicit
-                )
-                !;
+            Builder = Builder.HasPrincipalKey(
+                Check.NotNull(keyPropertyNames, nameof(keyPropertyNames)),
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder<TEntity, TDependentEntity>(
                 Builder,
                 this,
@@ -195,12 +189,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Expression<Func<TEntity, object?>> keyExpression
         )
         {
-            Builder = Builder
-                .HasPrincipalKey(
-                    Check.NotNull(keyExpression, nameof(keyExpression)).GetMemberAccessList(),
-                    ConfigurationSource.Explicit
-                )
-                !;
+            Builder = Builder.HasPrincipalKey(
+                Check.NotNull(keyExpression, nameof(keyExpression)).GetMemberAccessList(),
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder<TEntity, TDependentEntity>(
                 Builder,
                 this,

@@ -12,8 +12,8 @@ namespace System.Runtime.CompilerServices
     public static class CallSiteHelpers
     {
         private static readonly Type s_knownNonDynamicMethodType = typeof(object)
-            .GetMethod(nameof(ToString))
-            !.GetType();
+            .GetMethod(nameof(ToString))!
+            .GetType();
 
         /// <summary>
         /// Checks if a <see cref="MethodBase"/> is internally used by DLR and should not

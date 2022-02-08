@@ -346,8 +346,7 @@ namespace Microsoft.CodeAnalysis
         public Document WithText(SourceText text) =>
             this.Project.Solution
                 .WithDocumentText(this.Id, text, PreservationMode.PreserveIdentity)
-                .GetDocument(this.Id)
-                !;
+                .GetDocument(this.Id)!;
 
         /// <summary>
         /// Creates a new instance of this document updated to have a syntax tree rooted by the specified syntax node.
@@ -355,8 +354,7 @@ namespace Microsoft.CodeAnalysis
         public Document WithSyntaxRoot(SyntaxNode root) =>
             this.Project.Solution
                 .WithDocumentSyntaxRoot(this.Id, root, PreservationMode.PreserveIdentity)
-                .GetDocument(this.Id)
-                !;
+                .GetDocument(this.Id)!;
 
         /// <summary>
         /// Creates a new instance of this document updated to have the specified name.

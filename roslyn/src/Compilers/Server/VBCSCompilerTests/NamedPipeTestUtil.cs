@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 
         private static Socket GetSocket(object sharedServer)
         {
-            var listeningSocketProperty = sharedServer!
-                .GetType()
+            var listeningSocketProperty = sharedServer
+                !.GetType()
                 ?.GetProperty("ListeningSocket", BindingFlags.NonPublic | BindingFlags.Instance);
             var socket = (Socket?)listeningSocketProperty?.GetValue(sharedServer, null);
             if (socket is null)

@@ -122,8 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             if (token.Parent is LabeledStatementSyntax || token.IsLastTokenInLabelStatement())
             {
                 token = token
-                    .GetAncestor<LabeledStatementSyntax>()
-                    !.GetFirstToken(includeZeroWidth: true)
+                    .GetAncestor<LabeledStatementSyntax>()!
+                    .GetFirstToken(includeZeroWidth: true)
                     .GetPreviousToken(includeZeroWidth: true);
             }
 

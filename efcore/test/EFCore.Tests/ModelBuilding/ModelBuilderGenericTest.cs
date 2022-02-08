@@ -78,8 +78,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.FinalizeModel();
 
                 var property = modelBuilder.Model
-                    .FindEntityType(typeof(DoubleProperty))
-                    !.GetProperty("Property");
+                    .FindEntityType(typeof(DoubleProperty))!
+                    .GetProperty("Property");
                 Assert.EndsWith(
                     typeof(IReplacable).Name + "." + nameof(IReplacable.Property),
                     property.GetIdentifyingMemberInfo()!.Name

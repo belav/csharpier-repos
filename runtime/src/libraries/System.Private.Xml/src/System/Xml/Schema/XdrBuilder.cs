@@ -1448,9 +1448,9 @@ namespace System.Xml.Schema
             }
             else
             {
-                builder._AttributeDef._AttDef!.Datatype = XmlSchemaDatatype
-                    .FromXmlTokenizedType(XmlTokenizedType.CDATA)
-                    !;
+                builder._AttributeDef._AttDef!.Datatype = XmlSchemaDatatype.FromXmlTokenizedType(
+                    XmlTokenizedType.CDATA
+                )!;
             }
 
             //

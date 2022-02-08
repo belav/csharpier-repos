@@ -3618,12 +3618,10 @@ namespace System.Diagnostics.Tracing
                     {
                         foreach (CustomAttributeNamedArgument namedArgument in data.NamedArguments)
                         {
-                            PropertyInfo p = attributeType
-                                .GetProperty(
-                                    namedArgument.MemberInfo.Name,
-                                    BindingFlags.Public | BindingFlags.Instance
-                                )
-                                !;
+                            PropertyInfo p = attributeType.GetProperty(
+                                namedArgument.MemberInfo.Name,
+                                BindingFlags.Public | BindingFlags.Instance
+                            )!;
                             object value = namedArgument.TypedValue.Value!;
 
                             if (p.PropertyType.IsEnum)

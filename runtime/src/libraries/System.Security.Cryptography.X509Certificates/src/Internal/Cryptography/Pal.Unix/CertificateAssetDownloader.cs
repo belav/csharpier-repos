@@ -265,9 +265,10 @@ namespace Internal.Cryptography.Pal
                     // Note: using a ConstructorInfo instead of Activator.CreateInstance, so the ILLinker can see the usage through the lambda method.
                     object requestMessage = httpRequestMessageCtor.Invoke(null);
                     requestUriProp.SetValue(requestMessage, uri);
-                    object responseMessage = sendMethod
-                        .Invoke(httpClient, new object[] { requestMessage, cancellationToken })
-                        !;
+                    object responseMessage = sendMethod.Invoke(
+                        httpClient,
+                        new object[] { requestMessage, cancellationToken }
+                    )!;
 
                     int redirections = 0;
                     Uri? redirectUri;
@@ -302,9 +303,10 @@ namespace Internal.Cryptography.Pal
                         // responseMessage = httpClient.Send(requestMessage, cancellationToken);
                         requestMessage = httpRequestMessageCtor.Invoke(null);
                         requestUriProp.SetValue(requestMessage, redirectUri);
-                        responseMessage = sendMethod
-                            .Invoke(httpClient, new object[] { requestMessage, cancellationToken })
-                            !;
+                        responseMessage = sendMethod.Invoke(
+                            httpClient,
+                            new object[] { requestMessage, cancellationToken }
+                        )!;
                     }
 
                     if (hasRedirect && redirectUri == null)

@@ -219,8 +219,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 {
                     try
                     {
-                        await transaction!
-                            .RollbackToSavepointAsync(SavepointName, cancellationToken)
+                        await transaction
+                            !.RollbackToSavepointAsync(SavepointName, cancellationToken)
                             .ConfigureAwait(false);
                     }
                     catch (Exception e)
@@ -248,8 +248,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                         {
                             try
                             {
-                                await transaction!
-                                    .ReleaseSavepointAsync(SavepointName, cancellationToken)
+                                await transaction
+                                    !.ReleaseSavepointAsync(SavepointName, cancellationToken)
                                     .ConfigureAwait(false);
                             }
                             catch (Exception e)

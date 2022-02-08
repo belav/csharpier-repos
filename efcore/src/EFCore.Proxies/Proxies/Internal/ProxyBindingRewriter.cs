@@ -25,17 +25,14 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
     {
         private static readonly MethodInfo _createLazyLoadingProxyMethod = typeof(IProxyFactory)
             .GetTypeInfo()
-            .GetDeclaredMethod(nameof(IProxyFactory.CreateLazyLoadingProxy))
-            !;
+            .GetDeclaredMethod(nameof(IProxyFactory.CreateLazyLoadingProxy))!;
 
-        private static readonly PropertyInfo _lazyLoaderProperty = typeof(IProxyLazyLoader)
-            .GetProperty(nameof(IProxyLazyLoader.LazyLoader))
-            !;
+        private static readonly PropertyInfo _lazyLoaderProperty =
+            typeof(IProxyLazyLoader).GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
 
         private static readonly MethodInfo _createProxyMethod = typeof(IProxyFactory)
             .GetTypeInfo()
-            .GetDeclaredMethod(nameof(IProxyFactory.CreateProxy))
-            !;
+            .GetDeclaredMethod(nameof(IProxyFactory.CreateProxy))!;
 
         private readonly ConstructorBindingConvention _directBindingConvention;
         private readonly IProxyFactory _proxyFactory;

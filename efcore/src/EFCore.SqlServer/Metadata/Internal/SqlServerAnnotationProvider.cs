@@ -212,8 +212,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
                     .Select(
                         p =>
                             modelIndex.DeclaringEntityType
-                                .FindProperty(p)
-                                !.GetColumnName(
+                                .FindProperty(p)!
+                                .GetColumnName(
                                     StoreObjectIdentifier.Table(table.Name, table.Schema)
                                 )
                     )

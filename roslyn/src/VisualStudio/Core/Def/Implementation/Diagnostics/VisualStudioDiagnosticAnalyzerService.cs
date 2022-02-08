@@ -481,8 +481,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                         var project = projectsWithDisabledAnalysis[index];
                         project = project.Solution
                             .WithRunAnalyzers(project.Id, runAnalyzers: true)
-                            .GetProject(project.Id)
-                            !;
+                            .GetProject(project.Id)!;
                         tasks[index] = Task.Run(
                             () =>
                                 _diagnosticService.GetDiagnosticsAsync(project.Solution, project.Id)

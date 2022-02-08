@@ -1166,13 +1166,11 @@ namespace System
                 {
                     result = ToObject(
                         enumType,
-                        Convert
-                            .ChangeType(
-                                value.ToString(),
-                                underlyingType,
-                                CultureInfo.InvariantCulture
-                            )
-                            !
+                        Convert.ChangeType(
+                            value.ToString(),
+                            underlyingType,
+                            CultureInfo.InvariantCulture
+                        )!
                     );
                     return true;
                 }

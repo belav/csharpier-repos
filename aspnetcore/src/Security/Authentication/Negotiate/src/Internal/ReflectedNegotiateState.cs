@@ -54,29 +54,34 @@ internal class ReflectedNegotiateState : INegotiateState
             .Where(info => info.Name.Equals("CloseContext"))
             .Single();
 
-        var securityStatusType = secAssembly
-            .GetType("System.Net.SecurityStatusPal", throwOnError: true)
-            !;
+        var securityStatusType = secAssembly.GetType(
+            "System.Net.SecurityStatusPal",
+            throwOnError: true
+        )!;
         _statusCode = securityStatusType.GetField("ErrorCode")!;
         _statusException = securityStatusType.GetField("Exception")!;
 
         if (!OperatingSystem.IsWindows())
         {
             var interopType = secAssembly.GetType("Interop", throwOnError: true)!;
-            var netNativeType = interopType
-                .GetNestedType("NetSecurityNative", BindingFlags.NonPublic | BindingFlags.Static)
-                !;
-            _gssExceptionType = netNativeType
-                .GetNestedType("GssApiException", BindingFlags.NonPublic)
-                !;
-            _gssMinorStatus = _gssExceptionType
-                .GetField("_minorStatus", BindingFlags.Instance | BindingFlags.NonPublic)
-                !;
+            var netNativeType = interopType.GetNestedType(
+                "NetSecurityNative",
+                BindingFlags.NonPublic | BindingFlags.Static
+            )!;
+            _gssExceptionType = netNativeType.GetNestedType(
+                "GssApiException",
+                BindingFlags.NonPublic
+            )!;
+            _gssMinorStatus = _gssExceptionType.GetField(
+                "_minorStatus",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )!;
         }
 
-        var negoStreamPalType = secAssembly
-            .GetType("System.Net.Security.NegotiateStreamPal", throwOnError: true)
-            !;
+        var negoStreamPalType = secAssembly.GetType(
+            "System.Net.Security.NegotiateStreamPal",
+            throwOnError: true
+        )!;
         _getIdentity = negoStreamPalType
             .GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
             .Where(info => info.Name.Equals("GetIdentity"))

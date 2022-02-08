@@ -78,23 +78,23 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             if (memberExpression.Member is FieldInfo fieldInfo && fieldInfo.IsInitOnly)
             {
-                return (BinaryExpression)Activator
-                    .CreateInstance(
-                        _assignBinaryExpressionType,
-                        BindingFlags.NonPublic | BindingFlags.Instance,
-                        null,
-                        new object[] { memberExpression, valueExpression },
-                        null
-                    )
-                    !;
+                return (BinaryExpression)Activator.CreateInstance(
+                    _assignBinaryExpressionType,
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    new object[] { memberExpression, valueExpression },
+                    null
+                )!;
             }
 
             return Expression.Assign(memberExpression, valueExpression);
         }
 
-        private static readonly Type _assignBinaryExpressionType = typeof(Expression).Assembly
-            .GetType("System.Linq.Expressions.AssignBinaryExpression", throwOnError: true)
-            !;
+        private static readonly Type _assignBinaryExpressionType =
+            typeof(Expression).Assembly.GetType(
+                "System.Linq.Expressions.AssignBinaryExpression",
+                throwOnError: true
+            )!;
 
         /// <summary>
         ///     If the given a method-call expression represents a call to <see cref="EF.Property{TProperty}" />, then this

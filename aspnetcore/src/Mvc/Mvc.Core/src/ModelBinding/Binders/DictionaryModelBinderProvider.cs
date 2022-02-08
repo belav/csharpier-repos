@@ -48,17 +48,15 @@ public class DictionaryModelBinderProvider : IModelBinderProvider
 
             var loggerFactory = context.Services.GetRequiredService<ILoggerFactory>();
             var mvcOptions = context.Services.GetRequiredService<IOptions<MvcOptions>>().Value;
-            return (IModelBinder)Activator
-                .CreateInstance(
-                    binderType,
-                    keyBinder,
-                    valueBinder,
-                    loggerFactory,
-                    true /* allowValidatingTopLevelNodes */
-                    ,
-                    mvcOptions
-                )
-                !;
+            return (IModelBinder)Activator.CreateInstance(
+                binderType,
+                keyBinder,
+                valueBinder,
+                loggerFactory,
+                true /* allowValidatingTopLevelNodes */
+                ,
+                mvcOptions
+            )!;
         }
 
         return null;

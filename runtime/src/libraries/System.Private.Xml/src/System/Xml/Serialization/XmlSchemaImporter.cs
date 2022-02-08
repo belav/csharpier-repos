@@ -2803,9 +2803,11 @@ namespace System.Xml.Serialization
 
             if (name.Namespace == XmlSchema.Namespace)
             {
-                return (XmlSchemaSimpleType?)Scope
-                    .GetTypeDesc("string", XmlSchema.Namespace, flags)
-                    !.DataType;
+                return (XmlSchemaSimpleType?)Scope.GetTypeDesc(
+                    "string",
+                    XmlSchema.Namespace,
+                    flags
+                )!.DataType;
             }
             else
             {

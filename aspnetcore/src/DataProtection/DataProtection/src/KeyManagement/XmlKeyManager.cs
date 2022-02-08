@@ -291,15 +291,15 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         {
             // Read metadata and prepare the key for deferred instantiation
             Guid keyId = (Guid)keyElement.Attribute(IdAttributeName)!;
-            DateTimeOffset creationDate = (DateTimeOffset)keyElement
-                .Element(CreationDateElementName)
-                !;
-            DateTimeOffset activationDate = (DateTimeOffset)keyElement
-                .Element(ActivationDateElementName)
-                !;
-            DateTimeOffset expirationDate = (DateTimeOffset)keyElement
-                .Element(ExpirationDateElementName)
-                !;
+            DateTimeOffset creationDate = (DateTimeOffset)keyElement.Element(
+                CreationDateElementName
+            )!;
+            DateTimeOffset activationDate = (DateTimeOffset)keyElement.Element(
+                ActivationDateElementName
+            )!;
+            DateTimeOffset expirationDate = (DateTimeOffset)keyElement.Element(
+                ExpirationDateElementName
+            )!;
 
             _logger.FoundKey(keyId);
 
@@ -330,15 +330,14 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         try
         {
             string keyIdAsString = (string)revocationElement
-                .Element(KeyElementName)
-                !.Attribute(IdAttributeName)
-                !;
+                .Element(KeyElementName)!
+                .Attribute(IdAttributeName)!;
             if (keyIdAsString == RevokeAllKeysValue)
             {
                 // this is a mass revocation of all keys as of the specified revocation date
-                DateTimeOffset massRevocationDate = (DateTimeOffset)revocationElement
-                    .Element(RevocationDateElementName)
-                    !;
+                DateTimeOffset massRevocationDate = (DateTimeOffset)revocationElement.Element(
+                    RevocationDateElementName
+                )!;
                 _logger.FoundRevocationOfAllKeysCreatedPriorTo(massRevocationDate);
                 return massRevocationDate;
             }
@@ -516,9 +515,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         {
             // Figure out who will be deserializing this
             var descriptorElement = keyElement.Element(DescriptorElementName);
-            string descriptorDeserializerTypeName = (string)descriptorElement!
-                .Attribute(DeserializerTypeAttributeName)
-                !;
+            string descriptorDeserializerTypeName = (string)descriptorElement!.Attribute(
+                DeserializerTypeAttributeName
+            )!;
 
             // Decrypt the descriptor element and pass it to the descriptor for consumption
             var unencryptedInputToDeserializer = descriptorElement

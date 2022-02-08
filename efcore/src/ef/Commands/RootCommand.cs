@@ -42,8 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                     Reporter.Colorize(
                         @"         ___  ___   |.    \|\    ",
                         s =>
-                            s!
-                                .Insert(26, Bold)
+                            s!.Insert(26, Bold)
                                 .Insert(21, Dark)
                                 .Insert(20, Bold + Gray)
                                 .Insert(9, Dark + Magenta)
@@ -68,8 +67,6 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         }
 
         private static string GetVersion() =>
-            typeof(RootCommand).Assembly
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                !.InformationalVersion;
+            typeof(RootCommand).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
     }
 }

@@ -2964,8 +2964,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // Note: the suppression will be unnecessary once LazyInitializer is properly annotated
             LazyInitializer
-                .EnsureInitialized(ref _lazyImportInfos)
-                !.TryAdd(new ImportInfo(syntax.SyntaxTree, syntax.Kind(), syntax.Span), default);
+                .EnsureInitialized(ref _lazyImportInfos)!
+                .TryAdd(new ImportInfo(syntax.SyntaxTree, syntax.Kind(), syntax.Span), default);
         }
 
         internal void RecordImportDependencies(
@@ -4846,8 +4846,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return new PredicateSymbolSearcher(this, filter, predicate, cancellationToken)
                 .GetSymbolsWithName()
-                .GetPublicSymbols()
-                !;
+                .GetPublicSymbols()!;
         }
 
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters

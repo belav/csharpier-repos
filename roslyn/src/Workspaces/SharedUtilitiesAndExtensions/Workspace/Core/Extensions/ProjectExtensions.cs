@@ -70,9 +70,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 foreach (var analyzerConfigDocument in project.AnalyzerConfigDocuments)
                 {
                     // Analyzer config documents always have full paths, so GetDirectoryName will not return null.
-                    var analyzerConfigDirectory = PathUtilities
-                        .GetDirectoryName(analyzerConfigDocument.FilePath)
-                        !;
+                    var analyzerConfigDirectory = PathUtilities.GetDirectoryName(
+                        analyzerConfigDocument.FilePath
+                    )!;
                     if (
                         diagnosticFilePath.StartsWith(analyzerConfigDirectory)
                         && analyzerConfigDirectory.Length > bestPath.Length

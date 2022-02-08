@@ -112,13 +112,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(
             IReadOnlyList<string> foreignKeyPropertyNames
         ) =>
-            Builder
-                .HasForeignKey(
-                    foreignKeyPropertyNames,
-                    (EntityType)DependentEntityType,
-                    ConfigurationSource.Explicit
-                )
-                !;
+            Builder.HasForeignKey(
+                foreignKeyPropertyNames,
+                (EntityType)DependentEntityType,
+                ConfigurationSource.Explicit
+            )!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -130,13 +128,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(
             IReadOnlyList<MemberInfo> foreignKeyMembers
         ) =>
-            Builder
-                .HasForeignKey(
-                    foreignKeyMembers,
-                    (EntityType)DependentEntityType,
-                    ConfigurationSource.Explicit
-                )
-                !;
+            Builder.HasForeignKey(
+                foreignKeyMembers,
+                (EntityType)DependentEntityType,
+                ConfigurationSource.Explicit
+            )!;
 
         /// <summary>
         ///     Configures the unique property(s) that this relationship targets. Typically you would only call this

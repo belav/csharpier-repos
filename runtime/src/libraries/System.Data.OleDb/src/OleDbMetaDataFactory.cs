@@ -466,9 +466,10 @@ namespace System.Data.OleDb
             // copy the table filtering out any rows that don't apply to tho current version of the prrovider
             dataTypesTable = CloneAndFilterCollection(DbMetaDataCollectionNames.DataTypes, null);
 
-            DataTable providerTypesTable = connection
-                .GetOleDbSchemaTable(OleDbSchemaGuid.Provider_Types, null)
-                !;
+            DataTable providerTypesTable = connection.GetOleDbSchemaTable(
+                OleDbSchemaGuid.Provider_Types,
+                null
+            )!;
 
             DataColumn?[] targetColumns = new DataColumn?[]
             {

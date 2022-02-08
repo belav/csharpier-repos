@@ -253,9 +253,13 @@ namespace System.Reflection
         private object InvokeCtorWorker(BindingFlags invokeAttr, Span<object?> arguments)
         {
             bool wrapExceptions = (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
-            return RuntimeMethodHandle
-                .InvokeMethod(null, in arguments, Signature, true, wrapExceptions)
-                !;
+            return RuntimeMethodHandle.InvokeMethod(
+                null,
+                in arguments,
+                Signature,
+                true,
+                wrapExceptions
+            )!;
         }
 
         [RequiresUnreferencedCode(

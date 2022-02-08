@@ -101,24 +101,20 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!subnet.existing)
                 throw new InvalidOperationException(SR.Format(SR.SubnetNotCommitted, subnet.Name));
 
-            string dn = (string)PropertyManager
-                .GetPropertyValue(
-                    subnet.context,
-                    subnet.cachedEntry,
-                    PropertyManager.DistinguishedName
-                )
-                !;
+            string dn = (string)PropertyManager.GetPropertyValue(
+                subnet.context,
+                subnet.cachedEntry,
+                PropertyManager.DistinguishedName
+            )!;
 
             for (int i = 0; i < InnerList.Count; i++)
             {
                 ActiveDirectorySubnet tmp = (ActiveDirectorySubnet)InnerList[i]!;
-                string tmpDn = (string)PropertyManager
-                    .GetPropertyValue(
-                        tmp.context,
-                        tmp.cachedEntry,
-                        PropertyManager.DistinguishedName
-                    )
-                    !;
+                string tmpDn = (string)PropertyManager.GetPropertyValue(
+                    tmp.context,
+                    tmp.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
 
                 if (Utils.Compare(tmpDn, dn) == 0)
                 {
@@ -141,24 +137,20 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!subnet.existing)
                 throw new InvalidOperationException(SR.Format(SR.SubnetNotCommitted, subnet.Name));
 
-            string dn = (string)PropertyManager
-                .GetPropertyValue(
-                    subnet.context,
-                    subnet.cachedEntry,
-                    PropertyManager.DistinguishedName
-                )
-                !;
+            string dn = (string)PropertyManager.GetPropertyValue(
+                subnet.context,
+                subnet.cachedEntry,
+                PropertyManager.DistinguishedName
+            )!;
 
             for (int i = 0; i < InnerList.Count; i++)
             {
                 ActiveDirectorySubnet tmp = (ActiveDirectorySubnet)InnerList[i]!;
-                string tmpDn = (string)PropertyManager
-                    .GetPropertyValue(
-                        tmp.context,
-                        tmp.cachedEntry,
-                        PropertyManager.DistinguishedName
-                    )
-                    !;
+                string tmpDn = (string)PropertyManager.GetPropertyValue(
+                    tmp.context,
+                    tmp.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
 
                 if (Utils.Compare(tmpDn, dn) == 0)
                 {
@@ -193,24 +185,20 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!subnet.existing)
                 throw new InvalidOperationException(SR.Format(SR.SubnetNotCommitted, subnet.Name));
 
-            string dn = (string)PropertyManager
-                .GetPropertyValue(
-                    subnet.context,
-                    subnet.cachedEntry,
-                    PropertyManager.DistinguishedName
-                )
-                !;
+            string dn = (string)PropertyManager.GetPropertyValue(
+                subnet.context,
+                subnet.cachedEntry,
+                PropertyManager.DistinguishedName
+            )!;
 
             for (int i = 0; i < InnerList.Count; i++)
             {
                 ActiveDirectorySubnet tmp = (ActiveDirectorySubnet)InnerList[i]!;
-                string tmpDn = (string)PropertyManager
-                    .GetPropertyValue(
-                        tmp.context,
-                        tmp.cachedEntry,
-                        PropertyManager.DistinguishedName
-                    )
-                    !;
+                string tmpDn = (string)PropertyManager.GetPropertyValue(
+                    tmp.context,
+                    tmp.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
 
                 if (Utils.Compare(tmpDn, dn) == 0)
                 {
@@ -254,13 +242,11 @@ namespace System.DirectoryServices.ActiveDirectory
             if (initialized)
             {
                 ActiveDirectorySubnet subnet = (ActiveDirectorySubnet)value;
-                string dn = (string)PropertyManager
-                    .GetPropertyValue(
-                        subnet.context,
-                        subnet.cachedEntry,
-                        PropertyManager.DistinguishedName
-                    )
-                    !;
+                string dn = (string)PropertyManager.GetPropertyValue(
+                    subnet.context,
+                    subnet.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
 
                 try
                 {
@@ -290,13 +276,11 @@ namespace System.DirectoryServices.ActiveDirectory
 #pragma warning restore CS8765
         {
             ActiveDirectorySubnet subnet = (ActiveDirectorySubnet)value;
-            string dn = (string)PropertyManager
-                .GetPropertyValue(
-                    subnet.context,
-                    subnet.cachedEntry,
-                    PropertyManager.DistinguishedName
-                )
-                !;
+            string dn = (string)PropertyManager.GetPropertyValue(
+                subnet.context,
+                subnet.cachedEntry,
+                PropertyManager.DistinguishedName
+            )!;
 
             try
             {

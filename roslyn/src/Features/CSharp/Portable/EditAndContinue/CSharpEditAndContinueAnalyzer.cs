@@ -198,12 +198,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         {
             if (memberBody is CompilationUnitSyntax unit && unit.ContainsGlobalStatements())
             {
-                return model
-                    .AnalyzeDataFlow(
-                        ((GlobalStatementSyntax)unit.Members[0]).Statement,
-                        unit.Members.OfType<GlobalStatementSyntax>().Last().Statement
-                    )
-                    !.Captured;
+                return model.AnalyzeDataFlow(
+                    ((GlobalStatementSyntax)unit.Members[0]).Statement,
+                    unit.Members.OfType<GlobalStatementSyntax>().Last().Statement
+                )!.Captured;
             }
 
             Debug.Assert(memberBody.IsKind(SyntaxKind.Block) || memberBody is ExpressionSyntax);

@@ -162,13 +162,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 owned: false,
                 ConfigurationSource.Explicit
             );
-            entityType!.Builder
-                .Property(
+            entityType
+                !.Builder.Property(
                     typeof(ILazyLoader),
                     nameof(BlogOneService.Loader),
                     ConfigurationSource.Explicit
-                )
-                !.HasConversion(typeof(string), ConfigurationSource.Explicit);
+                )!
+                .HasConversion(typeof(string), ConfigurationSource.Explicit);
 
             RunConvention(entityType);
 
@@ -186,9 +186,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Explicit
             );
             entityType!.Builder.HasRelationship(
-                model
-                    .AddEntityType(typeof(LazyLoader), owned: false, ConfigurationSource.Explicit)
-                    !,
+                model.AddEntityType(
+                    typeof(LazyLoader),
+                    owned: false,
+                    ConfigurationSource.Explicit
+                )!,
                 nameof(BlogOneService.Loader),
                 ConfigurationSource.Explicit
             );
@@ -215,9 +217,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private EntityType RunConvention<TEntity>() =>
             RunConvention(
-                new Model()
-                    .AddEntityType(typeof(TEntity), owned: false, ConfigurationSource.Explicit)
-                    !
+                new Model().AddEntityType(
+                    typeof(TEntity),
+                    owned: false,
+                    ConfigurationSource.Explicit
+                )!
             );
 
         private EntityType RunConvention(EntityType entityType)

@@ -83,9 +83,10 @@ namespace System.Drawing.Imaging
 
             for (int i = 0; i < count; i++)
             {
-                Guid guid = (Guid)Marshal
-                    .PtrToStructure((IntPtr)(i * size + arrayOffset), typeof(Guid))
-                    !;
+                Guid guid = (Guid)Marshal.PtrToStructure(
+                    (IntPtr)(i * size + arrayOffset),
+                    typeof(Guid)
+                )!;
                 int numberOfValues = Marshal.ReadInt32((IntPtr)(i * size + arrayOffset + 16));
                 EncoderParameterValueType type = (EncoderParameterValueType)Marshal.ReadInt32(
                     (IntPtr)(i * size + arrayOffset + 20)

@@ -58,8 +58,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual IQueryable CreateQuery(Expression expression) =>
             (IQueryable)_genericCreateQueryMethod
                 .MakeGenericMethod(expression.Type.GetSequenceType())
-                .Invoke(this, new object[] { expression })
-                !;
+                .Invoke(this, new object[] { expression })!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -79,8 +78,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual object Execute(Expression expression) =>
             _genericExecuteMethod
                 .MakeGenericMethod(expression.Type)
-                .Invoke(_queryCompiler, new object[] { expression })
-                !;
+                .Invoke(_queryCompiler, new object[] { expression })!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

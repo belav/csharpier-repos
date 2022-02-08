@@ -172,9 +172,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var model = skipNavigation.DeclaringEntityType.Model;
 
-            var joinEntityTypeBuilder = model.Builder
-                .SharedTypeEntity(joinEntityTypeName, Model.DefaultPropertyBagType)
-                !;
+            var joinEntityTypeBuilder = model.Builder.SharedTypeEntity(
+                joinEntityTypeName,
+                Model.DefaultPropertyBagType
+            )!;
 
             var inverseSkipNavigation = skipNavigation.Inverse!;
             CreateSkipNavigationForeignKey(skipNavigation, joinEntityTypeBuilder);
@@ -199,9 +200,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         ConfigurationSource.Convention,
                         required: true,
                         skipNavigation.Inverse!.Name
-                    )
-                    !.IsUnique(false, ConfigurationSource.Convention)
-                    !.Metadata;
+                    )!
+                    .IsUnique(false, ConfigurationSource.Convention)!.Metadata;
 
             skipNavigation.Builder.HasForeignKey(foreignKey);
 

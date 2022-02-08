@@ -367,12 +367,14 @@ namespace System.Reflection
             if (m_ctor!.DeclaringType!.IsGenericType)
             {
                 MetadataImport metadataScope = scope.MetadataImport;
-                var attributeType = scope
-                    .ResolveType(metadataScope.GetParentToken(caCtorToken), null, null)
-                    !;
+                var attributeType = scope.ResolveType(
+                    metadataScope.GetParentToken(caCtorToken),
+                    null,
+                    null
+                )!;
                 m_ctor = (RuntimeConstructorInfo)scope
-                    .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)
-                    !.MethodHandle.GetMethodInfo();
+                    .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
+                    .MethodHandle.GetMethodInfo();
             }
 
             ParameterInfo[] parameters = m_ctor.GetParametersNoCopy();
@@ -1628,9 +1630,10 @@ namespace System.Reflection
                 }
                 else
                 {
-                    attribute = attributeType
-                        .CreateInstanceDefaultCtor(publicOnly: false, wrapExceptions: false)
-                        !;
+                    attribute = attributeType.CreateInstanceDefaultCtor(
+                        publicOnly: false,
+                        wrapExceptions: false
+                    )!;
 
                     // It is allowed by the ECMA spec to have an empty signature blob
                     int blobLen = (int)((byte*)blobEnd - (byte*)blobStart);
@@ -1804,8 +1807,8 @@ namespace System.Reflection
                 if (attributeType.IsGenericType)
                 {
                     ctorWithParameters = decoratedModule
-                        .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)
-                        !.MethodHandle.GetMethodInfo();
+                        .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
+                        .MethodHandle.GetMethodInfo();
                 }
                 else
                 {

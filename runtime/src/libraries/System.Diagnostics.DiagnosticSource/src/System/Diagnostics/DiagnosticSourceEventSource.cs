@@ -1733,9 +1733,10 @@ namespace System.Diagnostics
                                     typeof(EnumeratePropertyFetch<>)
                                         .GetTypeInfo()
                                         .MakeGenericType(elemType);
-                                return (PropertyFetch)Activator
-                                    .CreateInstance(instantiatedTypedPropertyFetcher, type)
-                                    !;
+                                return (PropertyFetch)Activator.CreateInstance(
+                                    instantiatedTypedPropertyFetcher,
+                                    type
+                                )!;
                             }
 
                             // no implementation of IEnumerable<T> found, return a null fetcher
@@ -1789,13 +1790,11 @@ namespace System.Diagnostics
                                     propertyInfo.DeclaringType!,
                                     propertyInfo.PropertyType
                                 );
-                            return (PropertyFetch)Activator
-                                .CreateInstance(
-                                    instantiatedTypedPropertyFetcher,
-                                    type,
-                                    propertyInfo
-                                )
-                                !;
+                            return (PropertyFetch)Activator.CreateInstance(
+                                instantiatedTypedPropertyFetcher,
+                                type,
+                                propertyInfo
+                            )!;
                         }
                     }
 

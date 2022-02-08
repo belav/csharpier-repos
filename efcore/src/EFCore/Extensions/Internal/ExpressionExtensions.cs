@@ -96,8 +96,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     (List<TMemberInfo>)newExpression.Arguments
                         .Select(a => memberMatcher(a, parameterExpression))
                         .Where(p => p != null)
-                        .ToList()
-                        !;
+                        .ToList()!;
 
                 return memberInfos.Count != newExpression.Arguments.Count ? null : memberInfos;
             }

@@ -125,9 +125,10 @@ public class PersistentComponentState
         if (TryTake(key, out var data))
         {
             var reader = new Utf8JsonReader(data);
-            instance = JsonSerializer
-                .Deserialize<TValue>(ref reader, JsonSerializerOptionsProvider.Options)
-                !;
+            instance = JsonSerializer.Deserialize<TValue>(
+                ref reader,
+                JsonSerializerOptionsProvider.Options
+            )!;
             return true;
         }
         else

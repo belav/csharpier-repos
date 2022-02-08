@@ -84,13 +84,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual OwnershipBuilder HasForeignKey(params string[] foreignKeyPropertyNames)
         {
-            Builder = Builder
-                .HasForeignKey(
-                    Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames)),
-                    (EntityType)DependentEntityType,
-                    ConfigurationSource.Explicit
-                )
-                !;
+            Builder = Builder.HasForeignKey(
+                Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames)),
+                (EntityType)DependentEntityType,
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder(
                 Builder,
                 this,
@@ -108,12 +106,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual OwnershipBuilder HasPrincipalKey(params string[] keyPropertyNames)
         {
-            Builder = Builder
-                .HasPrincipalKey(
-                    Check.NotNull(keyPropertyNames, nameof(keyPropertyNames)),
-                    ConfigurationSource.Explicit
-                )
-                !;
+            Builder = Builder.HasPrincipalKey(
+                Check.NotNull(keyPropertyNames, nameof(keyPropertyNames)),
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder(
                 Builder,
                 this,

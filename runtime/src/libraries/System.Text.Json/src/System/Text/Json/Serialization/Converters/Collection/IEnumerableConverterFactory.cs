@@ -262,15 +262,13 @@ namespace System.Text.Json.Serialization.Converters
                 );
             }
 
-            JsonConverter converter = (JsonConverter)Activator
-                .CreateInstance(
-                    genericType,
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: null,
-                    culture: null
-                )
-                !;
+            JsonConverter converter = (JsonConverter)Activator.CreateInstance(
+                genericType,
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: null,
+                culture: null
+            )!;
 
             return converter;
         }

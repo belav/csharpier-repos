@@ -111,15 +111,13 @@ namespace System.Text.Json.Serialization.Converters
                 }
             }
 
-            converter = (JsonConverter)Activator
-                .CreateInstance(
-                    converterType,
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: null,
-                    culture: null
-                )
-                !;
+            converter = (JsonConverter)Activator.CreateInstance(
+                converterType,
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: null,
+                culture: null
+            )!;
 
             converter.ConstructorInfo = constructor!;
             return converter;
@@ -132,17 +130,13 @@ namespace System.Text.Json.Serialization.Converters
             Type keyType = type.GetGenericArguments()[0];
             Type valueType = type.GetGenericArguments()[1];
 
-            JsonConverter converter = (JsonConverter)Activator
-                .CreateInstance(
-                    typeof(KeyValuePairConverter<,>).MakeGenericType(
-                        new Type[] { keyType, valueType }
-                    ),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: null,
-                    culture: null
-                )
-                !;
+            JsonConverter converter = (JsonConverter)Activator.CreateInstance(
+                typeof(KeyValuePairConverter<,>).MakeGenericType(new Type[] { keyType, valueType }),
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: null,
+                culture: null
+            )!;
 
             return converter;
         }

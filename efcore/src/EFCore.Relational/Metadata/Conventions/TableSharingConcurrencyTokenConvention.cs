@@ -147,11 +147,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 exampleProperty.ClrType,
                                 ConcurrencyPropertyPrefix + exampleProperty.Name,
                                 !exampleProperty.IsNullable
-                            )
-                            !.HasColumnName(concurrencyColumnName)
-                            !.HasColumnType(exampleProperty.GetColumnType())
-                            !.IsConcurrencyToken(true)
-                            !.ValueGenerated(exampleProperty.ValueGenerated);
+                            )!
+                            .HasColumnName(concurrencyColumnName)!
+                            .HasColumnType(exampleProperty.GetColumnType())!
+                            .IsConcurrencyToken(true)!
+                            .ValueGenerated(exampleProperty.ValueGenerated);
                     }
                 }
             }

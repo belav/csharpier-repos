@@ -113,8 +113,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                     var category = isExtensionMethod
                         ? loggerParameters[0].ParameterType.GenericTypeArguments[0]
-                        : loggerMethod.DeclaringType!
-                              .GetInterfaces()
+                        : loggerMethod
+                              .DeclaringType!.GetInterfaces()
                               .Single(
                                   i =>
                                       i.IsGenericType

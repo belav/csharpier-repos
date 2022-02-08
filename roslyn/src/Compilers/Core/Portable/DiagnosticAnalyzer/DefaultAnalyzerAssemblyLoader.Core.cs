@@ -76,9 +76,10 @@ namespace Microsoft.CodeAnalysis
             CompilerAssemblySimpleNames;
 
         // This is the context where compiler (and some of its dependencies) are being loaded into, which might be different from AssemblyLoadContext.Default.
-        private static readonly AssemblyLoadContext s_compilerLoadContext = AssemblyLoadContext
-            .GetLoadContext(typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly)
-            !;
+        private static readonly AssemblyLoadContext s_compilerLoadContext =
+            AssemblyLoadContext.GetLoadContext(
+                typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly
+            )!;
 
         private readonly object _guard = new object();
         private readonly Dictionary<string, DirectoryLoadContext> _loadContextByDirectory =

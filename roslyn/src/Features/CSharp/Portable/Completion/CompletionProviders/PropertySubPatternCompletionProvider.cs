@@ -100,8 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var alreadyTestedMembers = new HashSet<string>(
                     propertyPatternClause.Subpatterns
                         .Select(p => p.NameColon?.Name.Identifier.ValueText)
-                        .Where(s => !string.IsNullOrEmpty(s))
-                        !
+                        .Where(s => !string.IsNullOrEmpty(s))!
                 );
 
                 members = members.WhereAsArray(m => !alreadyTestedMembers.Contains(m.Name));

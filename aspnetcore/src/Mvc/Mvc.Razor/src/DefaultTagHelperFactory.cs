@@ -83,9 +83,9 @@ internal sealed class DefaultTagHelperFactory : ITagHelperFactory
     {
         // Run any tag helper initializers in the container
         var serviceProvider = context.HttpContext.RequestServices;
-        var initializers = serviceProvider
-            .GetService<IEnumerable<ITagHelperInitializer<TTagHelper>>>()
-            !;
+        var initializers = serviceProvider.GetService<
+            IEnumerable<ITagHelperInitializer<TTagHelper>>
+        >()!;
 
         foreach (var initializer in initializers)
         {

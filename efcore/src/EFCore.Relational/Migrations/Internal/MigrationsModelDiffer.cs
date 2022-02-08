@@ -209,9 +209,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 {
                     if (
                         string.IsNullOrWhiteSpace(
-                            diffContext
-                                .FindColumn((DropColumnOperation)operation)
-                                !.ComputedColumnSql
+                            diffContext.FindColumn(
+                                (DropColumnOperation)operation
+                            )!.ComputedColumnSql
                         )
                     )
                     {
