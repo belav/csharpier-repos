@@ -21,13 +21,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerPolygonMemberTranslator : IMemberTranslator
     {
-        private static readonly MemberInfo _exteriorRing = typeof(Polygon).GetRequiredRuntimeProperty(nameof(Polygon.ExteriorRing));
-        private static readonly MemberInfo _numInteriorRings = typeof(Polygon).GetRequiredRuntimeProperty(nameof(Polygon.NumInteriorRings));
+        private static readonly MemberInfo _exteriorRing =
+            typeof(Polygon).GetRequiredRuntimeProperty(nameof(Polygon.ExteriorRing));
+        private static readonly MemberInfo _numInteriorRings =
+            typeof(Polygon).GetRequiredRuntimeProperty(nameof(Polygon.NumInteriorRings));
 
-        private static readonly IDictionary<MemberInfo, string> _geometryMemberToFunctionName = new Dictionary<MemberInfo, string>
-        {
-            { _exteriorRing, "STExteriorRing" }, { _numInteriorRings, "STNumInteriorRing" }
-        };
+        private static readonly IDictionary<MemberInfo, string> _geometryMemberToFunctionName =
+            new Dictionary<MemberInfo, string>
+            {
+                { _exteriorRing, "STExteriorRing" },
+                { _numInteriorRings, "STNumInteriorRing" }
+            };
 
         private readonly IRelationalTypeMappingSource _typeMappingSource;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -40,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerPolygonMemberTranslator(
             IRelationalTypeMappingSource typeMappingSource,
-            ISqlExpressionFactory sqlExpressionFactory)
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
             _typeMappingSource = typeMappingSource;
             _sqlExpressionFactory = sqlExpressionFactory;
@@ -56,13 +61,21 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             if (typeof(Polygon).IsAssignableFrom(member.DeclaringType))
             {
-                Check.DebugAssert(instance!.TypeMapping != null, "Instance must have typeMapping assigned.");
+                Check.DebugAssert(
+                    instance!.TypeMapping != null,
+                    "Instance must have typeMapping assigned."
+                );
                 var storeType = instance.TypeMapping.StoreType;
-                var isGeography = string.Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
+                var isGeography = string.Equals(
+                    storeType,
+                    "geography",
+                    StringComparison.OrdinalIgnoreCase
+                );
 
                 if (isGeography)
                 {
@@ -76,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             instancePropagatesNullability: true,
                             argumentsPropagateNullability: new[] { false },
                             returnType,
-                            _typeMappingSource.FindMapping(returnType, storeType));
+                            _typeMappingSource.FindMapping(returnType, storeType)
+                        );
                     }
 
                     if (Equals(_numInteriorRings, member))
@@ -89,16 +103,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                                 nullable: true,
                                 instancePropagatesNullability: true,
                                 argumentsPropagateNullability: Array.Empty<bool>(),
-                                returnType),
-                            _sqlExpressionFactory.Constant(1));
+                                returnType
+                            ),
+                            _sqlExpressionFactory.Constant(1)
+                        );
                     }
                 }
 
                 if (_geometryMemberToFunctionName.TryGetValue(member, out var functionName))
                 {
                     var resultTypeMapping = typeof(Geometry).IsAssignableFrom(returnType)
-                        ? _typeMappingSource.FindMapping(returnType, storeType)
-                        : _typeMappingSource.FindMapping(returnType);
+                      ? _typeMappingSource.FindMapping(returnType, storeType)
+                      : _typeMappingSource.FindMapping(returnType);
 
                     return _sqlExpressionFactory.Function(
                         instance,
@@ -108,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         instancePropagatesNullability: true,
                         argumentsPropagateNullability: Array.Empty<bool>(),
                         returnType,
-                        resultTypeMapping);
+                        resultTypeMapping
+                    );
                 }
             }
 

@@ -33,15 +33,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal sealed override bool IsMissing
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
         /// Returns an array of assembly identities for assemblies referenced by this module.
-        /// Items at the same position from GetReferencedAssemblies and from GetReferencedAssemblySymbols 
+        /// Items at the same position from GetReferencedAssemblies and from GetReferencedAssemblySymbols
         /// should correspond to each other.
         /// </summary>
         internal sealed override ImmutableArray<AssemblyIdentity> GetReferencedAssemblies()
@@ -51,9 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced 
-        /// by this module. Items at the same position from GetReferencedAssemblies and 
-        /// from GetReferencedAssemblySymbols should correspond to each other. If reference is 
+        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced
+        /// by this module. Items at the same position from GetReferencedAssemblies and
+        /// from GetReferencedAssemblySymbols should correspond to each other. If reference is
         /// not resolved by compiler, GetReferencedAssemblySymbols returns MissingAssemblySymbol in the
         /// corresponding item.
         /// </summary>
@@ -74,7 +71,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return GetUnifiedAssemblies().Length > 0; }
         }
 
-        internal override bool GetUnificationUseSiteDiagnostic(ref DiagnosticInfo result, TypeSymbol dependentType)
+        internal override bool GetUnificationUseSiteDiagnostic(
+            ref DiagnosticInfo result,
+            TypeSymbol dependentType
+        )
         {
             AssertReferencesInitialized();
 
@@ -97,14 +97,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 var referenceId = unifiedAssembly.OriginalReference;
                 var definitionId = dependentAssembly.Identity;
-                var involvedAssemblies = ImmutableArray.Create<Symbol>(ownerAssembly, dependentAssembly);
+                var involvedAssemblies = ImmutableArray.Create<Symbol>(
+                    ownerAssembly,
+                    dependentAssembly
+                );
 
                 DiagnosticInfo info;
                 if (definitionId.Version > referenceId.Version)
                 {
-                    // unified with a definition whose version is higher than the reference                    
-                    ErrorCode warning = (definitionId.Version.Major == referenceId.Version.Major && definitionId.Version.Minor == referenceId.Version.Minor) ?
-                                        ErrorCode.WRN_UnifyReferenceBldRev : ErrorCode.WRN_UnifyReferenceMajMin;
+                    // unified with a definition whose version is higher than the reference
+                    ErrorCode warning =
+                        (
+                            definitionId.Version.Major == referenceId.Version.Major
+                            && definitionId.Version.Minor == referenceId.Version.Minor
+                        )
+                            ? ErrorCode.WRN_UnifyReferenceBldRev
+                            : ErrorCode.WRN_UnifyReferenceMajMin;
 
                     // warning: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy.
                     info = new CSDiagnosticInfo(
@@ -117,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             dependentAssembly.Name
                         },
                         involvedAssemblies,
-                        ImmutableArray<Location>.Empty);
+                        ImmutableArray<Location>.Empty
+                    );
                 }
                 else
                 {
@@ -135,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             definitionId.GetDisplayName()
                         },
                         involvedAssemblies,
-                        ImmutableArray<Location>.Empty);
+                        ImmutableArray<Location>.Empty
+                    );
                 }
 
                 if (MergeUseSiteDiagnostics(ref result, info))
@@ -148,10 +158,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// A helper method for ReferenceManager to set assembly identities for assemblies 
+        /// A helper method for ReferenceManager to set assembly identities for assemblies
         /// referenced by this module and corresponding AssemblySymbols.
         /// </summary>
-        internal override void SetReferences(ModuleReferences<AssemblySymbol> moduleReferences, SourceAssemblySymbol originatingSourceAssemblyDebugOnly = null)
+        internal override void SetReferences(
+            ModuleReferences<AssemblySymbol> moduleReferences,
+            SourceAssemblySymbol originatingSourceAssemblyDebugOnly = null
+        )
         {
             Debug.Assert(moduleReferences != null);
 
@@ -183,10 +196,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Symbol for the type, or MissingMetadataSymbol if the type isn't found.
         /// </returns>
         /// <remarks></remarks>
-        internal sealed override NamedTypeSymbol LookupTopLevelMetadataType(ref MetadataTypeName emittedName)
+        internal sealed override NamedTypeSymbol LookupTopLevelMetadataType(
+            ref MetadataTypeName emittedName
+        )
         {
             NamedTypeSymbol result;
-            NamespaceSymbol scope = this.GlobalNamespace.LookupNestedNamespace(emittedName.NamespaceSegments);
+            NamespaceSymbol scope = this.GlobalNamespace.LookupNestedNamespace(
+                emittedName.NamespaceSegments
+            );
 
             if ((object)scope == null)
             {

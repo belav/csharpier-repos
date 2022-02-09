@@ -16,10 +16,9 @@ public class ViewComponentTagHelperTargetExtensionTest
         var tagHelper = TagHelperDescriptorBuilder
             .Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
             .TypeName("__Generated__TagCloudViewComponentTagHelper")
-            .BoundAttributeDescriptor(attribute => attribute
-                .Name("Foo")
-                .TypeName("System.Int32")
-                .PropertyName("Foo"))
+            .BoundAttributeDescriptor(
+                attribute => attribute.Name("Foo").TypeName("System.Int32").PropertyName("Foo")
+            )
             .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tagcloud"))
             .AddMetadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
             .Build();
@@ -68,7 +67,8 @@ public class __Generated__TagCloudViewComponentTagHelper : Microsoft.AspNetCore.
 }
 ",
             csharp,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [Fact]
@@ -78,11 +78,16 @@ public class __Generated__TagCloudViewComponentTagHelper : Microsoft.AspNetCore.
         var tagHelper = TagHelperDescriptorBuilder
             .Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
             .TypeName("__Generated__TagCloudViewComponentTagHelper")
-            .BoundAttributeDescriptor(attribute => attribute
-                .Name("Foo")
-                .TypeName("System.Collections.Generic.Dictionary<System.String, System.Int32>")
-                .PropertyName("Tags")
-                .AsDictionaryAttribute("foo-", "System.Int32"))
+            .BoundAttributeDescriptor(
+                attribute =>
+                    attribute
+                        .Name("Foo")
+                        .TypeName(
+                            "System.Collections.Generic.Dictionary<System.String, System.Int32>"
+                        )
+                        .PropertyName("Tags")
+                        .AsDictionaryAttribute("foo-", "System.Int32")
+            )
             .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tagcloud"))
             .AddMetadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
             .Build();
@@ -132,6 +137,7 @@ public class __Generated__TagCloudViewComponentTagHelper : Microsoft.AspNetCore.
 }
 ",
             csharp,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 }

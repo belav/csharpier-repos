@@ -14,10 +14,15 @@ namespace System.Text.Json.Serialization.Converters
 
         private const int MaximumVersionLength = 43; // 2147483647.2147483647.2147483647.2147483647
 
-        private const int MaximumEscapedVersionLength = JsonConstants.MaxExpansionFactorWhileEscaping * MaximumVersionLength;
+        private const int MaximumEscapedVersionLength =
+            JsonConstants.MaxExpansionFactorWhileEscaping * MaximumVersionLength;
 #endif
 
-        public override Version Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Version Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.String)
             {
@@ -31,12 +36,19 @@ namespace System.Text.Json.Serialization.Converters
             ReadOnlySpan<byte> source = stackalloc byte[0];
             if (reader.HasValueSequence)
             {
-                if (!JsonHelpers.IsInRangeInclusive(reader.ValueSequence.Length, MinimumVersionLength, maxLength))
+                if (
+                    !JsonHelpers.IsInRangeInclusive(
+                        reader.ValueSequence.Length,
+                        MinimumVersionLength,
+                        maxLength
+                    )
+                )
                 {
                     throw ThrowHelper.GetFormatException(DataType.Version);
                 }
 
-                Span<byte> stackSpan = stackalloc byte[isEscaped ? MaximumEscapedVersionLength : MaximumVersionLength];
+                Span<byte> stackSpan =
+                    stackalloc byte[isEscaped ? MaximumEscapedVersionLength : MaximumVersionLength];
                 reader.ValueSequence.CopyTo(stackSpan);
                 source = stackSpan.Slice(0, (int)reader.ValueSequence.Length);
             }
@@ -83,7 +95,13 @@ namespace System.Text.Json.Serialization.Converters
             }
 #else
             string? versionString = reader.GetString();
-            if (!string.IsNullOrEmpty(versionString) && (!char.IsDigit(versionString[0]) || !char.IsDigit(versionString[versionString.Length - 1])))
+            if (
+                !string.IsNullOrEmpty(versionString)
+                && (
+                    !char.IsDigit(versionString[0])
+                    || !char.IsDigit(versionString[versionString.Length - 1])
+                )
+            )
             {
                 // Since leading and trailing whitespaces are forbidden throughout System.Text.Json converters
                 // we need to make sure that our input doesn't have them,
@@ -100,7 +118,11 @@ namespace System.Text.Json.Serialization.Converters
             return null;
         }
 
-        public override void Write(Utf8JsonWriter writer, Version value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            Version value,
+            JsonSerializerOptions options
+        )
         {
 #if BUILDING_INBOX_LIBRARY
             Span<char> span = stackalloc char[MaximumVersionLength];

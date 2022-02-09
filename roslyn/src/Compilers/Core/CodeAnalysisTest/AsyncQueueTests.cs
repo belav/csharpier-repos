@@ -53,10 +53,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var queue = new AsyncQueue<int>();
             Assert.True(queue.TryEnqueue(42));
             queue.PromiseNotToEnqueue();
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                queue.TryEnqueue(42);
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    queue.TryEnqueue(42);
+                }
+            );
         }
 
         [Fact]

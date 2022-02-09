@@ -26,14 +26,22 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var scaffolder = CreateScaffolder();
             var scaffoldedModel = new ScaffoldedModel
             {
-                ContextFile = new ScaffoldedFile { Path = Path.Combine("..", "Data", "TestContext.cs"), Code = "// TestContext" },
-                AdditionalFiles = { new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" } }
+                ContextFile = new ScaffoldedFile
+                {
+                    Path = Path.Combine("..", "Data", "TestContext.cs"),
+                    Code = "// TestContext"
+                },
+                AdditionalFiles =
+                {
+                    new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" }
+                }
             };
 
             var result = scaffolder.Save(
                 scaffoldedModel,
                 Path.Combine(directory.Path, "Models"),
-                overwriteFiles: false);
+                overwriteFiles: false
+            );
 
             var contextPath = Path.Combine(directory.Path, "Data", "TestContext.cs");
             Assert.Equal(contextPath, result.ContextFile);
@@ -58,18 +66,32 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var scaffolder = CreateScaffolder();
             var scaffoldedModel = new ScaffoldedModel
             {
-                ContextFile = new ScaffoldedFile { Path = "TestContext.cs", Code = "// TestContext" },
-                AdditionalFiles = { new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" } }
+                ContextFile = new ScaffoldedFile
+                {
+                    Path = "TestContext.cs",
+                    Code = "// TestContext"
+                },
+                AdditionalFiles =
+                {
+                    new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" }
+                }
             };
 
             var ex = Assert.Throws<OperationException>(
-                () => scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: false));
+                () => scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: false)
+            );
 
             Assert.Equal(
                 DesignStrings.ExistingFiles(
                     directory.Path,
-                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, "TestContext.cs", "TestEntity.cs")),
-                ex.Message);
+                    string.Join(
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                        "TestContext.cs",
+                        "TestEntity.cs"
+                    )
+                ),
+                ex.Message
+            );
         }
 
         [ConditionalFact]
@@ -80,7 +102,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             File.WriteAllText(path, "// Old");
 
             var scaffolder = CreateScaffolder();
-            var scaffoldedModel = new ScaffoldedModel { ContextFile = new ScaffoldedFile { Path = "Test.cs", Code = "// Test" } };
+            var scaffoldedModel = new ScaffoldedModel
+            {
+                ContextFile = new ScaffoldedFile { Path = "Test.cs", Code = "// Test" }
+            };
 
             var result = scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: true);
 
@@ -106,18 +131,32 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 var scaffolder = CreateScaffolder();
                 var scaffoldedModel = new ScaffoldedModel
                 {
-                    ContextFile = new ScaffoldedFile { Path = "TestContext.cs", Code = "// TestContext" },
-                    AdditionalFiles = { new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" } }
+                    ContextFile = new ScaffoldedFile
+                    {
+                        Path = "TestContext.cs",
+                        Code = "// TestContext"
+                    },
+                    AdditionalFiles =
+                    {
+                        new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" }
+                    }
                 };
 
                 var ex = Assert.Throws<OperationException>(
-                    () => scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: true));
+                    () => scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: true)
+                );
 
                 Assert.Equal(
                     DesignStrings.ReadOnlyFiles(
                         directory.Path,
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, "TestContext.cs", "TestEntity.cs")),
-                    ex.Message);
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            "TestContext.cs",
+                            "TestEntity.cs"
+                        )
+                    ),
+                    ex.Message
+                );
             }
             finally
             {
@@ -126,17 +165,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             }
         }
 
-        private static IReverseEngineerScaffolder CreateScaffolder()
-            => new DesignTimeServicesBuilder(
-                    typeof(ReverseEngineerScaffolderTest).Assembly,
-                    typeof(ReverseEngineerScaffolderTest).Assembly,
-                    new TestOperationReporter(),
-                    new string[0])
+        private static IReverseEngineerScaffolder CreateScaffolder() =>
+            new DesignTimeServicesBuilder(
+                typeof(ReverseEngineerScaffolderTest).Assembly,
+                typeof(ReverseEngineerScaffolderTest).Assembly,
+                new TestOperationReporter(),
+                new string[0]
+            )
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .BuildServiceProvider(validateScopes: true)
                 .CreateScope()
-                .ServiceProvider
-                .GetRequiredService<IReverseEngineerScaffolder>();
+                .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
         [ConditionalFact]
         public void ScaffoldModel_works_with_named_connection_string()
@@ -144,23 +183,24 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var resolver = new TestNamedConnectionStringResolver("Data Source=Test");
             var databaseModelFactory = new TestDatabaseModelFactory();
             var scaffolder = new DesignTimeServicesBuilder(
-                    typeof(ReverseEngineerScaffolderTest).Assembly,
-                    typeof(ReverseEngineerScaffolderTest).Assembly,
-                    new TestOperationReporter(),
-                    new string[0])
+                typeof(ReverseEngineerScaffolderTest).Assembly,
+                typeof(ReverseEngineerScaffolderTest).Assembly,
+                new TestOperationReporter(),
+                new string[0]
+            )
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .AddSingleton<IDesignTimeConnectionStringResolver>(resolver)
                 .AddScoped<IDatabaseModelFactory>(p => databaseModelFactory)
                 .BuildServiceProvider(validateScopes: true)
                 .CreateScope()
-                .ServiceProvider
-                .GetRequiredService<IReverseEngineerScaffolder>();
+                .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
             var result = scaffolder.ScaffoldModel(
                 "Name=DefaultConnection",
                 new DatabaseModelFactoryOptions(),
                 new ModelReverseEngineerOptions(),
-                new ModelCodeGenerationOptions { ModelNamespace = "Foo" });
+                new ModelCodeGenerationOptions { ModelNamespace = "Foo" }
+            );
 
             Assert.Equal("Data Source=Test", databaseModelFactory.ConnectionString);
 
@@ -174,25 +214,27 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             var resolver = new TestNamedConnectionStringResolver("Data Source=Test");
             var databaseModelFactory = new TestDatabaseModelFactory();
-            databaseModelFactory.ScaffoldedConnectionString = "Data Source=ScaffoldedConnectionString";
+            databaseModelFactory.ScaffoldedConnectionString =
+                "Data Source=ScaffoldedConnectionString";
             var scaffolder = new DesignTimeServicesBuilder(
-                    typeof(ReverseEngineerScaffolderTest).Assembly,
-                    typeof(ReverseEngineerScaffolderTest).Assembly,
-                    new TestOperationReporter(),
-                    new string[0])
+                typeof(ReverseEngineerScaffolderTest).Assembly,
+                typeof(ReverseEngineerScaffolderTest).Assembly,
+                new TestOperationReporter(),
+                new string[0]
+            )
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .AddSingleton<IDesignTimeConnectionStringResolver>(resolver)
                 .AddScoped<IDatabaseModelFactory>(p => databaseModelFactory)
                 .BuildServiceProvider(validateScopes: true)
                 .CreateScope()
-                .ServiceProvider
-                .GetRequiredService<IReverseEngineerScaffolder>();
+                .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
             var result = scaffolder.ScaffoldModel(
                 "Name=DefaultConnection",
                 new DatabaseModelFactoryOptions(),
                 new ModelReverseEngineerOptions(),
-                new ModelCodeGenerationOptions { ModelNamespace = "Foo" });
+                new ModelCodeGenerationOptions { ModelNamespace = "Foo" }
+            );
 
             Assert.Contains("Data Source=ScaffoldedConnectionString", result.ContextFile.Code);
             Assert.DoesNotContain("Name=DefaultConnection", result.ContextFile.Code);
@@ -203,11 +245,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             private readonly string _resolvedConnectionString;
 
-            public TestNamedConnectionStringResolver(string resolvedConnectionString)
-                => _resolvedConnectionString = resolvedConnectionString;
+            public TestNamedConnectionStringResolver(string resolvedConnectionString) =>
+                _resolvedConnectionString = resolvedConnectionString;
 
-            public string ResolveConnectionString(string connectionString)
-                => _resolvedConnectionString;
+            public string ResolveConnectionString(string connectionString) =>
+                _resolvedConnectionString;
         }
 
         private class TestDatabaseModelFactory : IDatabaseModelFactory
@@ -215,20 +257,26 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             public string ConnectionString { get; set; }
             public string ScaffoldedConnectionString { get; set; }
 
-            public DatabaseModel Create(string connectionString, DatabaseModelFactoryOptions options)
+            public DatabaseModel Create(
+                string connectionString,
+                DatabaseModelFactoryOptions options
+            )
             {
                 ConnectionString = connectionString;
                 var databaseModel = new DatabaseModel();
                 if (ScaffoldedConnectionString != null)
                 {
-                    databaseModel[ScaffoldingAnnotationNames.ConnectionString] = ScaffoldedConnectionString;
+                    databaseModel[ScaffoldingAnnotationNames.ConnectionString] =
+                        ScaffoldedConnectionString;
                 }
 
                 return databaseModel;
             }
 
-            public DatabaseModel Create(DbConnection connection, DatabaseModelFactoryOptions options)
-                => throw new NotImplementedException();
+            public DatabaseModel Create(
+                DbConnection connection,
+                DatabaseModelFactoryOptions options
+            ) => throw new NotImplementedException();
         }
     }
 }

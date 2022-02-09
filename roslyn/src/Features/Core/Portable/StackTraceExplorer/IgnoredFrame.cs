@@ -6,8 +6,6 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal sealed class IgnoredFrame : ParsedFrame
     {
-        public IgnoredFrame(string originalText) : base(originalText)
-        {
-        }
+        public IgnoredFrame(string originalText) : base(originalText) { }
     }
 }

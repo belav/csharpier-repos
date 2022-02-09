@@ -16,92 +16,94 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
     /// </summary>
     public class CSharpUtilities : ICSharpUtilities
     {
-        private static readonly HashSet<string> _cSharpKeywords = new()
-        {
-            "abstract",
-            "as",
-            "base",
-            "bool",
-            "break",
-            "byte",
-            "case",
-            "catch",
-            "char",
-            "checked",
-            "class",
-            "const",
-            "continue",
-            "decimal",
-            "default",
-            "delegate",
-            "do",
-            "double",
-            "else",
-            "enum",
-            "event",
-            "explicit",
-            "extern",
-            "false",
-            "finally",
-            "fixed",
-            "float",
-            "for",
-            "foreach",
-            "goto",
-            "if",
-            "implicit",
-            "in",
-            "int",
-            "interface",
-            "internal",
-            "is",
-            "lock",
-            "long",
-            "namespace",
-            "new",
-            "null",
-            "object",
-            "operator",
-            "out",
-            "override",
-            "params",
-            "private",
-            "protected",
-            "public",
-            "readonly",
-            "ref",
-            "return",
-            "sbyte",
-            "sealed",
-            "short",
-            "sizeof",
-            "stackalloc",
-            "static",
-            "string",
-            "struct",
-            "switch",
-            "this",
-            "throw",
-            "true",
-            "try",
-            "typeof",
-            "uint",
-            "ulong",
-            "unchecked",
-            "unsafe",
-            "ushort",
-            "using",
-            "virtual",
-            "void",
-            "volatile",
-            "while"
-        };
+        private static readonly HashSet<string> _cSharpKeywords =
+            new()
+            {
+                "abstract",
+                "as",
+                "base",
+                "bool",
+                "break",
+                "byte",
+                "case",
+                "catch",
+                "char",
+                "checked",
+                "class",
+                "const",
+                "continue",
+                "decimal",
+                "default",
+                "delegate",
+                "do",
+                "double",
+                "else",
+                "enum",
+                "event",
+                "explicit",
+                "extern",
+                "false",
+                "finally",
+                "fixed",
+                "float",
+                "for",
+                "foreach",
+                "goto",
+                "if",
+                "implicit",
+                "in",
+                "int",
+                "interface",
+                "internal",
+                "is",
+                "lock",
+                "long",
+                "namespace",
+                "new",
+                "null",
+                "object",
+                "operator",
+                "out",
+                "override",
+                "params",
+                "private",
+                "protected",
+                "public",
+                "readonly",
+                "ref",
+                "return",
+                "sbyte",
+                "sealed",
+                "short",
+                "sizeof",
+                "stackalloc",
+                "static",
+                "string",
+                "struct",
+                "switch",
+                "this",
+                "throw",
+                "true",
+                "try",
+                "typeof",
+                "uint",
+                "ulong",
+                "unchecked",
+                "unsafe",
+                "ushort",
+                "using",
+                "virtual",
+                "void",
+                "volatile",
+                "while"
+            };
 
-        private static readonly Regex _invalidCharsRegex
-            = new(
+        private static readonly Regex _invalidCharsRegex =
+            new(
                 @"[^\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Nd}\p{Nl}\p{Mn}\p{Mc}\p{Cf}\p{Pc}\p{Lm}]",
                 default,
-                TimeSpan.FromMilliseconds(1000.0));
+                TimeSpan.FromMilliseconds(1000.0)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -109,8 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool IsCSharpKeyword(string identifier)
-            => _cSharpKeywords.Contains(identifier);
+        public virtual bool IsCSharpKeyword(string identifier) =>
+            _cSharpKeywords.Contains(identifier);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -121,8 +123,14 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public virtual string GenerateCSharpIdentifier(
             string identifier,
             ICollection<string>? existingIdentifiers,
-            Func<string, string>? singularizePluralizer)
-            => GenerateCSharpIdentifier(identifier, existingIdentifiers, singularizePluralizer, Uniquifier);
+            Func<string, string>? singularizePluralizer
+        ) =>
+            GenerateCSharpIdentifier(
+                identifier,
+                existingIdentifiers,
+                singularizePluralizer,
+                Uniquifier
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -134,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             string identifier,
             ICollection<string>? existingIdentifiers,
             Func<string, string>? singularizePluralizer,
-            Func<string, ICollection<string>?, string> uniquifier)
+            Func<string, ICollection<string>?, string> uniquifier
+        )
         {
             var proposedIdentifier =
                 identifier.Length > 1 && identifier[0] == '@'
@@ -146,9 +155,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             }
 
             var firstChar = proposedIdentifier[0];
-            if (!char.IsLetter(firstChar)
-                && firstChar != '_'
-                && firstChar != '@')
+            if (!char.IsLetter(firstChar) && firstChar != '_' && firstChar != '@')
             {
                 proposedIdentifier = "_" + proposedIdentifier;
             }
@@ -173,7 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         public virtual string Uniquifier(
             string proposedIdentifier,
-            ICollection<string>? existingIdentifiers)
+            ICollection<string>? existingIdentifiers
+        )
         {
             if (existingIdentifiers == null)
             {
@@ -225,10 +233,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             if (ch < 'a')
             {
-                return ch < 'A'
-                    ? false
-                    : ch <= 'Z'
-                    || ch == '_';
+                return ch < 'A' ? false : ch <= 'Z' || ch == '_';
             }
 
             if (ch <= 'z')
@@ -243,11 +248,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             if (ch < 'a')
             {
-                return ch < 'A'
-                    ? ch >= '0'
-                    && ch <= '9'
-                    : ch <= 'Z'
-                    || ch == '_';
+                return ch < 'A' ? ch >= '0' && ch <= '9' : ch <= 'Z' || ch == '_';
             }
 
             if (ch <= 'z')

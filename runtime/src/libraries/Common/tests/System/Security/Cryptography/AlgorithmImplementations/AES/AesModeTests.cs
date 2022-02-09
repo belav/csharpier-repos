@@ -91,7 +91,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                         {
                             transform.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
                         }
-                    });
+                    }
+                );
             }
         }
     }

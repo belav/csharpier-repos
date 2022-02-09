@@ -20,10 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public StringToEnumConverter()
-            : this(null)
-        {
-        }
+        public StringToEnumConverter() : this(null) { }
 
         /// <summary>
         ///     Creates a new instance of this converter. This converter does not preserve order.
@@ -36,17 +33,16 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public StringToEnumConverter(ConverterMappingHints? mappingHints)
-            : base(
-                ToEnum(),
-                ToString(),
-                mappingHints)
-        {
-        }
+            : base(ToEnum(), ToString(), mappingHints) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(string), typeof(TEnum), i => new StringToEnumConverter<TEnum>(i.MappingHints));
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(string),
+                typeof(TEnum),
+                i => new StringToEnumConverter<TEnum>(i.MappingHints)
+            );
     }
 }

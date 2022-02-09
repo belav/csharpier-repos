@@ -33,24 +33,32 @@ namespace System.Security.Cryptography
         internal static Oid EcPublicKeyOid => _ecPublicKeyOid ??= InitializeOid(EcPublicKey);
         internal static Oid TripleDesCbcOid => _tripleDesCbcOid ??= InitializeOid(TripleDesCbc);
         internal static Oid Aes256CbcOid => _aes256CbcOid ??= InitializeOid(Aes256Cbc);
-        internal static Oid secp256r1Oid => _secp256r1Oid ??= new Oid(secp256r1, nameof(ECCurve.NamedCurves.nistP256));
-        internal static Oid secp384r1Oid => _secp384r1Oid ??= new Oid(secp384r1, nameof(ECCurve.NamedCurves.nistP384));
-        internal static Oid secp521r1Oid => _secp521r1Oid ??= new Oid(secp521r1, nameof(ECCurve.NamedCurves.nistP521));
+        internal static Oid secp256r1Oid =>
+            _secp256r1Oid ??= new Oid(secp256r1, nameof(ECCurve.NamedCurves.nistP256));
+        internal static Oid secp384r1Oid =>
+            _secp384r1Oid ??= new Oid(secp384r1, nameof(ECCurve.NamedCurves.nistP384));
+        internal static Oid secp521r1Oid =>
+            _secp521r1Oid ??= new Oid(secp521r1, nameof(ECCurve.NamedCurves.nistP521));
         internal static Oid Sha256Oid => _sha256Oid ??= InitializeOid(Sha256);
 
         internal static Oid Pkcs7DataOid => _pkcs7DataOid ??= InitializeOid(Pkcs7Data);
         internal static Oid ContentTypeOid => _contentTypeOid ??= InitializeOid(ContentType);
-        internal static Oid DocumentDescriptionOid => _documentDescriptionOid ??= InitializeOid(DocumentDescription);
+        internal static Oid DocumentDescriptionOid =>
+            _documentDescriptionOid ??= InitializeOid(DocumentDescription);
         internal static Oid DocumentNameOid => _documentNameOid ??= InitializeOid(DocumentName);
         internal static Oid LocalKeyIdOid => _localKeyIdOid ??= InitializeOid(LocalKeyId);
         internal static Oid MessageDigestOid => _messageDigestOid ??= InitializeOid(MessageDigest);
         internal static Oid SigningTimeOid => _signingTimeOid ??= InitializeOid(SigningTime);
-        internal static Oid Pkcs9ExtensionRequestOid => _pkcs9ExtensionRequestOid ??= InitializeOid(Pkcs9ExtensionRequest);
+        internal static Oid Pkcs9ExtensionRequestOid =>
+            _pkcs9ExtensionRequestOid ??= InitializeOid(Pkcs9ExtensionRequest);
 
-        internal static Oid BasicConstraints2Oid => _basicConstraints2Oid ??= InitializeOid(BasicConstraints2);
-        internal static Oid EnhancedKeyUsageOid => _enhancedKeyUsageOid ??= InitializeOid(EnhancedKeyUsage);
+        internal static Oid BasicConstraints2Oid =>
+            _basicConstraints2Oid ??= InitializeOid(BasicConstraints2);
+        internal static Oid EnhancedKeyUsageOid =>
+            _enhancedKeyUsageOid ??= InitializeOid(EnhancedKeyUsage);
         internal static Oid KeyUsageOid => _keyUsageOid ??= InitializeOid(KeyUsage);
-        internal static Oid SubjectKeyIdentifierOid => _subjectKeyIdentifierOid ??= InitializeOid(SubjectKeyIdentifier);
+        internal static Oid SubjectKeyIdentifierOid =>
+            _subjectKeyIdentifierOid ??= InitializeOid(SubjectKeyIdentifier);
 
         private static Oid InitializeOid(string oidValue)
         {
@@ -64,6 +72,5 @@ namespace System.Security.Cryptography
 
             return oid;
         }
-
     }
 }

@@ -9,8 +9,7 @@ namespace System.Text.Json.Serialization.Converters
 {
     /// Converter for <cref>System.Collections.IList</cref>.
     internal sealed class IListConverter<TCollection>
-        : JsonCollectionConverter<TCollection, object?>
-        where TCollection : IList
+        : JsonCollectionConverter<TCollection, object?> where TCollection : IList
     {
         protected override void Add(in object? value, ref ReadStack state)
         {
@@ -19,10 +18,15 @@ namespace System.Text.Json.Serialization.Converters
             if (IsValueType)
             {
                 state.Current.ReturnValue = collection;
-            };
+            }
+            ;
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
@@ -30,7 +34,11 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (!TypeToConvert.IsAssignableFrom(RuntimeType))
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = new List<object?>();
@@ -39,21 +47,34 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (typeInfo.CreateObject == null)
                 {
-                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 TCollection returnValue = (TCollection)typeInfo.CreateObject()!;
 
                 if (returnValue.IsReadOnly)
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = returnValue;
             }
         }
 
-        protected override bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state)
+        protected override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             IList list = value;
 

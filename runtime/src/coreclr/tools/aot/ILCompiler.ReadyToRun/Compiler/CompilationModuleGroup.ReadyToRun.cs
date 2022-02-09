@@ -31,7 +31,8 @@ namespace ILCompiler
         /// </summary>
         /// <param name="typeDesc">Type to check</param>
         /// <returns>True if the given type can safely be referred to within the current compilation module group</returns>
-        public virtual bool VersionsWithTypeReference(TypeDesc typeDesc) => VersionsWithType(typeDesc);
+        public virtual bool VersionsWithTypeReference(TypeDesc typeDesc) =>
+            VersionsWithType(typeDesc);
 
         /// <summary>
         /// Returns true when a given method belongs to the same version bubble as the compilation module group.
@@ -39,7 +40,8 @@ namespace ILCompiler
         /// </summary>
         /// <param name="methodDesc">Method to check</param>
         /// <returns>True if the given method versions with the current compilation module group</returns>
-        public virtual bool VersionsWithMethodBody(MethodDesc methodDesc) => ContainsMethodBody(methodDesc, unboxingStub: false);
+        public virtual bool VersionsWithMethodBody(MethodDesc methodDesc) =>
+            ContainsMethodBody(methodDesc, unboxingStub: false);
 
         /// <summary>
         /// Returns true when a given module belongs to the same version bubble as the compilation module group.
@@ -93,7 +95,10 @@ namespace ILCompiler
         /// Returns true when the base type and derived type don't reside in the same version bubble
         /// in which case the runtime aligns the field base offset.
         /// </summary>
-        public abstract bool NeedsAlignmentBetweenBaseTypeAndDerived(MetadataType baseType, MetadataType derivedType);
+        public abstract bool NeedsAlignmentBetweenBaseTypeAndDerived(
+            MetadataType baseType,
+            MetadataType derivedType
+        );
 
         /// <summary>
         /// List of input modules to use for the compilation.

@@ -16,22 +16,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         private const string EventPrefix = "vs/ide/vbcs/";
         private const string PropertyPrefix = "vs.ide.vbcs.";
 
-        // these don't have concurrency limit on purpose to reduce chance of lock contention. 
+        // these don't have concurrency limit on purpose to reduce chance of lock contention.
         // if that becomes a problem - by showing up in our perf investigation, then we will consider adding concurrency limit.
         private static readonly ConcurrentDictionary<Key, string> s_eventMap = new();
         private static readonly ConcurrentDictionary<Key, string> s_propertyMap = new();
 
-        public static string GetEventName(this FunctionId functionId, string eventKey = null)
-            => s_eventMap.GetOrAdd(new Key(functionId, eventKey), CreateEventName);
+        public static string GetEventName(this FunctionId functionId, string eventKey = null) =>
+            s_eventMap.GetOrAdd(new Key(functionId, eventKey), CreateEventName);
 
-        public static string GetPropertyName(this FunctionId functionId, string propertyKey)
-            => s_propertyMap.GetOrAdd(new Key(functionId, propertyKey), CreatePropertyName);
+        public static string GetPropertyName(this FunctionId functionId, string propertyKey) =>
+            s_propertyMap.GetOrAdd(new Key(functionId, propertyKey), CreatePropertyName);
 
-        private static string CreateEventName(Key key)
-            => (EventPrefix + Enum.GetName(typeof(FunctionId), key.FunctionId).Replace('_', '/') + (key.ItemKey == null ? string.Empty : ("/" + key.ItemKey))).ToLowerInvariant();
+        private static string CreateEventName(Key key) =>
+            (
+                EventPrefix
+                + Enum.GetName(typeof(FunctionId), key.FunctionId).Replace('_', '/')
+                + (key.ItemKey == null ? string.Empty : ("/" + key.ItemKey))
+            ).ToLowerInvariant();
 
-        private static string CreatePropertyName(Key key)
-            => (PropertyPrefix + Enum.GetName(typeof(FunctionId), key.FunctionId).Replace('_', '.') + "." + key.ItemKey).ToLowerInvariant();
+        private static string CreatePropertyName(Key key) =>
+            (
+                PropertyPrefix
+                + Enum.GetName(typeof(FunctionId), key.FunctionId).Replace('_', '.')
+                + "."
+                + key.ItemKey
+            ).ToLowerInvariant();
 
         private struct Key : IEquatable<Key>
         {
@@ -44,14 +53,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 this.ItemKey = itemKey;
             }
 
-            public override int GetHashCode()
-                => Hash.Combine((int)FunctionId, ItemKey?.GetHashCode() ?? 0);
+            public override int GetHashCode() =>
+                Hash.Combine((int)FunctionId, ItemKey?.GetHashCode() ?? 0);
 
-            public override bool Equals(object obj)
-                => obj is Key && Equals((Key)obj);
+            public override bool Equals(object obj) => obj is Key && Equals((Key)obj);
 
-            public bool Equals(Key key)
-                => this.FunctionId == key.FunctionId && this.ItemKey == key.ItemKey;
+            public bool Equals(Key key) =>
+                this.FunctionId == key.FunctionId && this.ItemKey == key.ItemKey;
         }
     }
 }

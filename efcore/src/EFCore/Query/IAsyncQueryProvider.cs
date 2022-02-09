@@ -28,6 +28,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Executes the strongly-typed query represented by a specified expression tree asynchronously.
         /// </summary>
-        TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default);
+        TResult ExecuteAsync<TResult>(
+            Expression expression,
+            CancellationToken cancellationToken = default
+        );
     }
 }

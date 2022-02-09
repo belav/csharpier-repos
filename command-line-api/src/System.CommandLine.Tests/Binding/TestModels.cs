@@ -11,7 +11,8 @@ namespace System.CommandLine.Tests.Binding
         public ClassWithMultiLetterCtorParameters(
             int intOption = 123,
             string stringOption = "the default",
-            bool boolOption = false)
+            bool boolOption = false
+        )
         {
             IntOption = intOption;
             StringOption = stringOption;
@@ -36,7 +37,7 @@ namespace System.CommandLine.Tests.Binding
         public string StringOption { get; set; }
         public bool BoolOption { get; set; }
         public List<ClassWithMultiLetterSetters> ListOptionDefaultNull { get; set; }
-        public List<ClassWithCtorParameter<string>> ListOptionDefaultEmpty { get; set; } = new ();
+        public List<ClassWithCtorParameter<string>> ListOptionDefaultEmpty { get; set; } = new();
     }
 
     public class ClassWithListTypePropertiesAndDefaultCtor
@@ -52,7 +53,7 @@ namespace System.CommandLine.Tests.Binding
 
         public T Value { get; }
 
-        public override string ToString() => 
+        public override string ToString() =>
             $"{nameof(ClassWithCtorParameter<T>)}<{typeof(T).Name}>: {Value}";
     }
 
@@ -60,7 +61,7 @@ namespace System.CommandLine.Tests.Binding
     {
         public T Value { get; set; }
 
-        public override string ToString() => 
+        public override string ToString() =>
             $"{nameof(ClassWithSetter<T>)}<{typeof(T).Name}>: {Value}";
     }
 
@@ -90,9 +91,7 @@ namespace System.CommandLine.Tests.Binding
 
     public class ClassWithMultipleCtor
     {
-        public ClassWithMultipleCtor()
-        {
-        }
+        public ClassWithMultipleCtor() { }
 
         public ClassWithMultipleCtor(int intProperty)
         {
@@ -107,7 +106,8 @@ namespace System.CommandLine.Tests.Binding
         public ClassWithSettersAndCtorParametersWithDifferentNames(
             int i = 123,
             string s = "the default",
-            bool b = false)
+            bool b = false
+        )
         {
             IntOption = i;
             StringOption = s;

@@ -17,20 +17,23 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureLogging(logging =>
-            {
+            .ConfigureLogging(
+                logging =>
+                {
                     // Json Logging
                     logging.ClearProviders();
-                logging.AddJsonConsole(options =>
+                    logging.AddJsonConsole(
+                        options =>
+                        {
+                            options.JsonWriterOptions = new JsonWriterOptions() { Indented = true };
+                        }
+                    );
+                }
+            )
+            .ConfigureWebHostDefaults(
+                webBuilder =>
                 {
-                    options.JsonWriterOptions = new JsonWriterOptions()
-                    {
-                        Indented = true
-                    };
-                });
-            })
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+                    webBuilder.UseStartup<Startup>();
+                }
+            );
 }

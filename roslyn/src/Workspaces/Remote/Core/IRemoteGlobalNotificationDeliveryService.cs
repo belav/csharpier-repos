@@ -12,6 +12,9 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         ValueTask OnGlobalOperationStartedAsync(CancellationToken cancellationToken);
 
-        ValueTask OnGlobalOperationStoppedAsync(ImmutableArray<string> operations, CancellationToken cancellationToken);
+        ValueTask OnGlobalOperationStoppedAsync(
+            ImmutableArray<string> operations,
+            CancellationToken cancellationToken
+        );
     }
 }

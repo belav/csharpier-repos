@@ -12,21 +12,16 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         public static int AdminId = 1;
 
-        public QueryFilterFuncletizationContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public QueryFilterFuncletizationContext(DbContextOptions options) : base(options) { }
 
         public bool Field;
         public bool Property { get; set; }
         public bool? IsModerated { get; set; }
         public int Tenant { get; set; }
 
-        public int GetId()
-            => 2;
+        public int GetId() => 2;
 
-        public Indirection GetFlag()
-            => new();
+        public Indirection GetFlag() => new();
 
         public List<int> TenantIds { get; set; }
         public Indirection IndirectionFlag { get; set; }
@@ -41,42 +36,69 @@ namespace Microsoft.EntityFrameworkCore.Query
             modelBuilder.Entity<PropertyFilter>().HasQueryFilter(e => e.IsEnabled == Property);
             modelBuilder.Entity<MethodCallFilter>().HasQueryFilter(e => e.Tenant == GetId());
             modelBuilder.Entity<ListFilter>().HasQueryFilter(e => TenantIds.Contains(e.Tenant));
-            modelBuilder.Entity<PropertyChainFilter>().HasQueryFilter(e => e.IsEnabled == IndirectionFlag.Enabled);
-            modelBuilder.Entity<PropertyMethodCallFilter>().HasQueryFilter(e => e.Tenant == IndirectionFlag.GetId());
-            modelBuilder.Entity<MethodCallChainFilter>().HasQueryFilter(e => e.Tenant == GetFlag().GetId());
-            modelBuilder.Entity<ComplexFilter>().HasQueryFilter(x => x.IsEnabled == Property && (Tenant + GetId() > 0));
-            modelBuilder.Entity<ShortCircuitFilter>()
-                .HasQueryFilter(x => !x.IsDeleted && (IsModerated == null || IsModerated == x.IsModerated));
-            modelBuilder.Entity<PrincipalSetFilter>()
+            modelBuilder
+                .Entity<PropertyChainFilter>()
+                .HasQueryFilter(e => e.IsEnabled == IndirectionFlag.Enabled);
+            modelBuilder
+                .Entity<PropertyMethodCallFilter>()
+                .HasQueryFilter(e => e.Tenant == IndirectionFlag.GetId());
+            modelBuilder
+                .Entity<MethodCallChainFilter>()
+                .HasQueryFilter(e => e.Tenant == GetFlag().GetId());
+            modelBuilder
+                .Entity<ComplexFilter>()
+                .HasQueryFilter(x => x.IsEnabled == Property && (Tenant + GetId() > 0));
+            modelBuilder
+                .Entity<ShortCircuitFilter>()
+                .HasQueryFilter(
+                    x => !x.IsDeleted && (IsModerated == null || IsModerated == x.IsModerated)
+                );
+            modelBuilder
+                .Entity<PrincipalSetFilter>()
                 .HasQueryFilter(p => Dependents.Any(d => d.PrincipalSetFilterId == p.Id));
 
             // Filters defined through EntityTypeConfiguration
             modelBuilder.ApplyConfiguration(new FieldConfiguration(this));
             modelBuilder.ApplyConfiguration(new PropertyConfiguration(this));
-            modelBuilder.ApplyConfiguration(new MethodCallConfiguration(new DbContextWrapper(this)));
-            modelBuilder.ApplyConfiguration(new PropertyChainConfiguration(new DbContextWrapper(this)));
+            modelBuilder.ApplyConfiguration(
+                new MethodCallConfiguration(new DbContextWrapper(this))
+            );
+            modelBuilder.ApplyConfiguration(
+                new PropertyChainConfiguration(new DbContextWrapper(this))
+            );
 
             // Filters defined through methods (local/remote/extensions)
             ConfigureFilter(modelBuilder.Entity<LocalMethodFilter>());
             ConfigureFilterParams(modelBuilder.Entity<LocalMethodParamsFilter>(), this);
-            Indirection.ConfigureFilter(modelBuilder.Entity<RemoteMethodParamsFilter>(), new DbContextWrapper(this));
+            Indirection.ConfigureFilter(
+                modelBuilder.Entity<RemoteMethodParamsFilter>(),
+                new DbContextWrapper(this)
+            );
             modelBuilder.Entity<ExtensionBuilderFilter>().BuilderFilter(this);
             new DbContextWrapper(this).ContextFilter(modelBuilder.Entity<ExtensionContextFilter>());
             SetDependentFilter(modelBuilder, this);
 
             // Inline
-            modelBuilder.Entity<DbContextStaticMemberFilter>().HasQueryFilter(e => e.UserId != AdminId);
-            modelBuilder.Entity<StaticMemberFilter>()
+            modelBuilder
+                .Entity<DbContextStaticMemberFilter>()
+                .HasQueryFilter(e => e.UserId != AdminId);
+            modelBuilder
+                .Entity<StaticMemberFilter>()
                 .HasQueryFilter(b => b.IsEnabled == StaticMemberFilter.DefaultEnabled);
             var enabled = true;
             modelBuilder.Entity<LocalVariableFilter>().HasQueryFilter(e => e.IsEnabled == enabled);
             Indirection flag = null;
-            modelBuilder.Entity<LocalVariableErrorFilter>().HasQueryFilter(e => e.IsEnabled == flag.Enabled);
+            modelBuilder
+                .Entity<LocalVariableErrorFilter>()
+                .HasQueryFilter(e => e.IsEnabled == flag.Enabled);
             IncorrectFilter(modelBuilder.Entity<ParameterFilter>(), Tenant);
 
             // Multiple context used in filter
-            modelBuilder.Entity<MultiContextFilter>()
-                .HasQueryFilter(e => e.IsEnabled == Property && e.BossId == new IncorrectDbContext().BossId);
+            modelBuilder
+                .Entity<MultiContextFilter>()
+                .HasQueryFilter(
+                    e => e.IsEnabled == Property && e.BossId == new IncorrectDbContext().BossId
+                );
         }
 
         private void ConfigureFilter(EntityTypeBuilder<LocalMethodFilter> builder)
@@ -86,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void ConfigureFilterParams(
             EntityTypeBuilder<LocalMethodParamsFilter> builder,
-            QueryFilterFuncletizationContext context)
+            QueryFilterFuncletizationContext context
+        )
         {
             builder.HasQueryFilter(e => e.IsEnabled == context.Property);
         }
@@ -98,13 +121,20 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void SetDependentFilter(ModelBuilder modelBuilder, DbContext context)
         {
-            modelBuilder.Entity<DependentSetFilter>()
-                .HasQueryFilter(p => context.Set<MultiContextFilter>().Any(b => b.BossId == p.PrincipalSetFilterId));
+            modelBuilder
+                .Entity<DependentSetFilter>()
+                .HasQueryFilter(
+                    p =>
+                        context
+                            .Set<MultiContextFilter>()
+                            .Any(b => b.BossId == p.PrincipalSetFilterId)
+                );
         }
 
         #region EntityTypeConfigs
 
-        public class FieldConfiguration : IEntityTypeConfiguration<EntityTypeConfigurationFieldFilter>
+        public class FieldConfiguration
+            : IEntityTypeConfiguration<EntityTypeConfigurationFieldFilter>
         {
             public FieldConfiguration(QueryFilterFuncletizationContext context)
             {
@@ -119,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
         }
 
-        public class PropertyConfiguration : IEntityTypeConfiguration<EntityTypeConfigurationPropertyFilter>
+        public class PropertyConfiguration
+            : IEntityTypeConfiguration<EntityTypeConfigurationPropertyFilter>
         {
             private readonly QueryFilterFuncletizationContext _context;
 
@@ -134,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
         }
 
-        public class MethodCallConfiguration : IEntityTypeConfiguration<EntityTypeConfigurationMethodCallFilter>
+        public class MethodCallConfiguration
+            : IEntityTypeConfiguration<EntityTypeConfigurationMethodCallFilter>
         {
             public MethodCallConfiguration(DbContextWrapper wrapper)
             {
@@ -143,13 +175,16 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             public DbContextWrapper Wrapper { get; }
 
-            public void Configure(EntityTypeBuilder<EntityTypeConfigurationMethodCallFilter> builder)
+            public void Configure(
+                EntityTypeBuilder<EntityTypeConfigurationMethodCallFilter> builder
+            )
             {
                 builder.HasQueryFilter(e => e.Tenant == Wrapper.Context.GetId());
             }
         }
 
-        public class PropertyChainConfiguration : IEntityTypeConfiguration<EntityTypeConfigurationPropertyChainFilter>
+        public class PropertyChainConfiguration
+            : IEntityTypeConfiguration<EntityTypeConfigurationPropertyChainFilter>
         {
             private readonly DbContextWrapper _wrapper;
 
@@ -158,9 +193,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _wrapper = wrapper;
             }
 
-            public void Configure(EntityTypeBuilder<EntityTypeConfigurationPropertyChainFilter> builder)
+            public void Configure(
+                EntityTypeBuilder<EntityTypeConfigurationPropertyChainFilter> builder
+            )
             {
-                builder.HasQueryFilter(e => e.IsEnabled == _wrapper.Context.IndirectionFlag.Enabled);
+                builder.HasQueryFilter(
+                    e => e.IsEnabled == _wrapper.Context.IndirectionFlag.Enabled
+                );
             }
         }
 
@@ -218,7 +257,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new ExtensionContextFilter { IsEnabled = false },
                 new ParameterFilter { Tenant = 1 },
                 new ParameterFilter { Tenant = 2 },
-                new PrincipalSetFilter { Dependents = new List<DependentSetFilter> { new(), new() } },
+                new PrincipalSetFilter
+                {
+                    Dependents = new List<DependentSetFilter> { new(), new() }
+                },
                 new PrincipalSetFilter(),
                 new MultiContextFilter { BossId = 1, IsEnabled = true },
                 new MultiContextFilter { BossId = 1, IsEnabled = false },
@@ -247,14 +289,16 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         public static void BuilderFilter(
             this EntityTypeBuilder<ExtensionBuilderFilter> builder,
-            QueryFilterFuncletizationContext context)
+            QueryFilterFuncletizationContext context
+        )
         {
             builder.HasQueryFilter(e => e.IsEnabled == context.Field);
         }
 
         public static void ContextFilter(
             this DbContextWrapper wrapper,
-            EntityTypeBuilder<ExtensionContextFilter> builder)
+            EntityTypeBuilder<ExtensionContextFilter> builder
+        )
         {
             builder.HasQueryFilter(e => e.IsEnabled == wrapper.Context.IndirectionFlag.Enabled);
         }
@@ -264,10 +308,12 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         public bool Enabled { get; set; }
 
-        public int GetId()
-            => 2;
+        public int GetId() => 2;
 
-        public static void ConfigureFilter(EntityTypeBuilder<RemoteMethodParamsFilter> builder, DbContextWrapper wrapper)
+        public static void ConfigureFilter(
+            EntityTypeBuilder<RemoteMethodParamsFilter> builder,
+            DbContextWrapper wrapper
+        )
         {
             builder.HasQueryFilter(e => e.Tenant == wrapper.Context.IndirectionFlag.GetId());
         }
@@ -275,8 +321,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
     public class IncorrectDbContext : DbContext
     {
-        public int BossId
-            => 1;
+        public int BossId => 1;
     }
 
     #endregion

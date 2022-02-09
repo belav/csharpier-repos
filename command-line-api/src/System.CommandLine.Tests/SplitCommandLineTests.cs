@@ -25,9 +25,9 @@ namespace System.CommandLine.Tests
             var commandLine = "one two\tthree   four ";
 
             CommandLineStringSplitter.Instance
-                                     .Split(commandLine)
-                                     .Should()
-                                     .BeEquivalentSequenceTo("one", "two", "three", "four");
+                .Split(commandLine)
+                .Should()
+                .BeEquivalentSequenceTo("one", "two", "three", "four");
         }
 
         [Fact]
@@ -35,8 +35,7 @@ namespace System.CommandLine.Tests
         {
             var commandLine = @"rm -r ""c:\temp files\""";
 
-            CommandLineStringSplitter
-                .Instance
+            CommandLineStringSplitter.Instance
                 .Split(commandLine)
                 .Should()
                 .BeEquivalentSequenceTo("rm", "-r", @"c:\temp files\");
@@ -51,14 +50,14 @@ namespace System.CommandLine.Tests
         [InlineData("/", ':')]
         public void It_does_not_split_double_quote_delimited_values_when_a_non_whitespace_argument_delimiter_is_used(
             string prefix,
-            char delimiter)
+            char delimiter
+        )
         {
             var optionAndArgument = $@"{prefix}the-option{delimiter}""c:\temp files\""";
 
             var commandLine = $"the-command {optionAndArgument}";
 
-            CommandLineStringSplitter
-                .Instance
+            CommandLineStringSplitter.Instance
                 .Split(commandLine)
                 .Should()
                 .BeEquivalentSequenceTo("the-command", optionAndArgument.Replace("\"", ""));
@@ -81,8 +80,9 @@ namespace System.CommandLine.Tests
                 _output.WriteLine("         " + token);
             }
 
-            tokenized.Should()
-                     .BeEquivalentSequenceTo("move", "--from", source, "--to", destination);
+            tokenized
+                .Should()
+                .BeEquivalentSequenceTo("move", "--from", source, "--to", destination);
         }
     }
 }

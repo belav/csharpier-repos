@@ -12,11 +12,7 @@ namespace System.Text.Json.Tests
         {
             JsonWriterOptions options = default;
 
-            var expectedOption = new JsonWriterOptions
-            {
-                Indented = false,
-                SkipValidation = false
-            };
+            var expectedOption = new JsonWriterOptions { Indented = false, SkipValidation = false };
             Assert.Equal(expectedOption, options);
         }
 
@@ -25,11 +21,7 @@ namespace System.Text.Json.Tests
         {
             var options = new JsonWriterOptions();
 
-            var expectedOption = new JsonWriterOptions
-            {
-                Indented = false,
-                SkipValidation = false
-            };
+            var expectedOption = new JsonWriterOptions { Indented = false, SkipValidation = false };
             Assert.Equal(expectedOption, options);
         }
 

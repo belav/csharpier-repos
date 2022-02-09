@@ -35,7 +35,11 @@ namespace System.Drawing
                         if (outputStream == null)
                             throw new ArgumentNullException(nameof(outputStream));
 
-                        picture.SaveAsFile(new GPStream(outputStream, makeSeekable: false), -1, out int temp);
+                        picture.SaveAsFile(
+                            new GPStream(outputStream, makeSeekable: false),
+                            -1,
+                            out int temp
+                        );
                     }
                     finally
                     {
@@ -47,7 +51,11 @@ namespace System.Drawing
         }
 
         [DllImport(Interop.Libraries.Oleaut32, PreserveSig = false)]
-        internal static extern IPicture OleCreatePictureIndirect(PICTDESC pictdesc, [In]ref Guid refiid, bool fOwn);
+        internal static extern IPicture OleCreatePictureIndirect(
+            PICTDESC pictdesc,
+            [In] ref Guid refiid,
+            bool fOwn
+        );
 
         [ComImport]
         [Guid("7BF80980-BF32-101A-8BBB-00AA00300CAB")]
@@ -71,9 +79,11 @@ namespace System.Drawing
 
             IntPtr GetCurDC();
 
-            void SelectPicture([In] IntPtr hdcIn,
-                               [Out, MarshalAs(UnmanagedType.LPArray)] int[] phdcOut,
-                               [Out, MarshalAs(UnmanagedType.LPArray)] int[] phbmpOut);
+            void SelectPicture(
+                [In] IntPtr hdcIn,
+                [Out, MarshalAs(UnmanagedType.LPArray)] int[] phdcOut,
+                [Out, MarshalAs(UnmanagedType.LPArray)] int[] phbmpOut
+            );
 
             [return: MarshalAs(UnmanagedType.Bool)]
             bool GetKeepOriginalFormat();
@@ -83,9 +93,11 @@ namespace System.Drawing
             void PictureChanged();
 
             [PreserveSig]
-            int SaveAsFile([In, MarshalAs(UnmanagedType.Interface)] Interop.Ole32.IStream pstm,
-                           [In] int fSaveMemCopy,
-                           [Out] out int pcbSize);
+            int SaveAsFile(
+                [In, MarshalAs(UnmanagedType.Interface)] Interop.Ole32.IStream pstm,
+                [In] int fSaveMemCopy,
+                [Out] out int pcbSize
+            );
 
             int GetAttributes();
 

@@ -31,19 +31,17 @@ namespace OLEDB.Test.ModuleCore
         private string _filter;
 
         //Allows Inheritance (i.e.: object to determine if ever been set)
-        private object _priority;       //Allows Inheritance
-        private object _implemented;    //Allows Inheritance
-        private object _skipped;        //Allows Inheritance
-        private object _error;          //Allows Inheritance
-        private object _security;       //Allows Inheritance
-        private object _filtercriteria;//Allows Inheritance
-        private object[] _languages;        //Allows Inheritance
-        private object _xml;            //Allows Inheritance
+        private object _priority; //Allows Inheritance
+        private object _implemented; //Allows Inheritance
+        private object _skipped; //Allows Inheritance
+        private object _error; //Allows Inheritance
+        private object _security; //Allows Inheritance
+        private object _filtercriteria; //Allows Inheritance
+        private object[] _languages; //Allows Inheritance
+        private object _xml; //Allows Inheritance
 
         //Constructors
-        public CAttrBase()
-        {
-        }
+        public CAttrBase() { }
 
         public CAttrBase(string desc)
         {
@@ -276,7 +274,6 @@ namespace OLEDB.Test.ModuleCore
         }
     }
 
-
     ////////////////////////////////////////////////////////////////
     // TestModule (attribute)
     //
@@ -290,13 +287,9 @@ namespace OLEDB.Test.ModuleCore
         private string _modified;
 
         //Constructors
-        public TestModule()
-            : base()
-        {
-        }
+        public TestModule() : base() { }
 
-        public TestModule(string desc)
-            : base(desc)
+        public TestModule(string desc) : base(desc)
         {
             //NOTE: For all other params, just simply use the named attributes:
             //[TestModule(Desc="desc", Version=1)]
@@ -351,19 +344,14 @@ namespace OLEDB.Test.ModuleCore
     public class TestCase : CAttrBase
     {
         //Constructors
-        public TestCase()
-            : base()
-        {
-        }
+        public TestCase() : base() { }
 
-        public TestCase(string desc)
-            : base(desc)
+        public TestCase(string desc) : base(desc)
         {
             //NOTE: For all other params, just simply use the named attributes:
             //[TestCase(Desc="desc", Name="name")]
         }
     }
-
 
     ////////////////////////////////////////////////////////////////
     // Variation (attribute)
@@ -374,13 +362,9 @@ namespace OLEDB.Test.ModuleCore
         //Data
 
         //Constructors
-        public Variation()
-            : base()
-        {
-        }
+        public Variation() : base() { }
 
-        public Variation(string desc)
-            : base(desc)
+        public Variation(string desc) : base(desc)
         {
             //NOTE: For all other params, just simply use the named attributes:
             //[Variation(Desc="desc", id=1)]
@@ -400,9 +384,7 @@ namespace OLEDB.Test.ModuleCore
         private string _filter;
 
         //Constructors
-        public TestInclude()
-        {
-        }
+        public TestInclude() { }
 
         public virtual string Name
         {

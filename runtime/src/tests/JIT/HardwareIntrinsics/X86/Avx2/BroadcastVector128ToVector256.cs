@@ -21,7 +21,12 @@ namespace IntelHardwareIntrinsicTest
 
             if (Avx2.IsSupported)
             {
-                using (TestTable<int> intTable = new TestTable<int>(new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new int[8]))
+                using (
+                    TestTable<int> intTable = new TestTable<int>(
+                        new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new int[8]
+                    )
+                )
                 {
                     var vf = Avx2.BroadcastVector128ToVector256((int*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -38,7 +43,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<uint> uintTable = new TestTable<uint>(new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 }, new uint[8]))
+                using (
+                    TestTable<uint> uintTable = new TestTable<uint>(
+                        new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new uint[8]
+                    )
+                )
                 {
                     var vf = Avx2.BroadcastVector128ToVector256((uint*)(uintTable.inArrayPtr));
                     Unsafe.Write(uintTable.outArrayPtr, vf);
@@ -55,7 +65,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<long> longTable = new TestTable<long>(new long[4] { 1, -5, 100, 0}, new long[4]))
+                using (
+                    TestTable<long> longTable = new TestTable<long>(
+                        new long[4] { 1, -5, 100, 0 },
+                        new long[4]
+                    )
+                )
                 {
                     var vf = Avx2.BroadcastVector128ToVector256((long*)(longTable.inArrayPtr));
                     Unsafe.Write(longTable.outArrayPtr, vf);
@@ -72,7 +87,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ulong> ulongTable = new TestTable<ulong>(new ulong[4] { 1, 5, 100, 0}, new ulong[4]))
+                using (
+                    TestTable<ulong> ulongTable = new TestTable<ulong>(
+                        new ulong[4] { 1, 5, 100, 0 },
+                        new ulong[4]
+                    )
+                )
                 {
                     var vf = Avx2.BroadcastVector128ToVector256((ulong*)(ulongTable.inArrayPtr));
                     Unsafe.Write(ulongTable.outArrayPtr, vf);
@@ -102,6 +122,7 @@ namespace IntelHardwareIntrinsicTest
 
             GCHandle inHandle;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b)
             {
                 this.inArray = a;
@@ -110,18 +131,19 @@ namespace IntelHardwareIntrinsicTest
                 inHandle = GCHandle.Alloc(inArray, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T, T, bool> check)
             {
-                for (int i = 0; i < outArray.Length/2; i++)
+                for (int i = 0; i < outArray.Length / 2; i++)
                 {
                     if (!check(inArray[i], outArray[i]))
                     {
                         return false;
                     }
                 }
-                for (int i = outArray.Length/2; i < outArray.Length; i++)
+                for (int i = outArray.Length / 2; i < outArray.Length; i++)
                 {
-                    if (!check(inArray[i - outArray.Length/2], outArray[i]))
+                    if (!check(inArray[i - outArray.Length / 2], outArray[i]))
                     {
                         return false;
                     }
@@ -135,6 +157,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

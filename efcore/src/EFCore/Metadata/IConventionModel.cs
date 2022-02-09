@@ -53,7 +53,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null" /> to clear the mode set.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>The configured value.</returns>
-        PropertyAccessMode? SetPropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+        PropertyAccessMode? SetPropertyAccessMode(
+            PropertyAccessMode? propertyAccessMode,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyModel.GetPropertyAccessMode" />.
@@ -68,7 +71,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="changeTrackingStrategy">The strategy to use.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>The configured value.</returns>
-        ChangeTrackingStrategy? SetChangeTrackingStrategy(ChangeTrackingStrategy? changeTrackingStrategy, bool fromDataAnnotation = false);
+        ChangeTrackingStrategy? SetChangeTrackingStrategy(
+            ChangeTrackingStrategy? changeTrackingStrategy,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyModel.GetChangeTrackingStrategy" />.
@@ -107,7 +113,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="clrType">The CLR class that is used to represent instances of the entity type.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>The new entity type.</returns>
-        IConventionEntityType? AddEntityType(string name, Type clrType, bool fromDataAnnotation = false);
+        IConventionEntityType? AddEntityType(
+            string name,
+            Type clrType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Adds an owned entity type with a defining navigation to the model.
@@ -121,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string name,
             string definingNavigationName,
             IConventionEntityType definingEntityType,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Adds an owned entity type with a defining navigation to the model.
@@ -135,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Type type,
             string definingNavigationName,
             IConventionEntityType definingEntityType,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Adds an owned entity type of default type to the model.
@@ -168,7 +180,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="clrType">The CLR class that is used to represent instances of the entity type.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>The new entity type.</returns>
-        IConventionEntityType? AddOwnedEntityType(string name, Type clrType, bool fromDataAnnotation = false);
+        IConventionEntityType? AddOwnedEntityType(
+            string name,
+            Type clrType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Gets the entity with the given name. Returns <see langword="null" /> if no entity type with the given name is found
@@ -190,15 +206,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IConventionEntityType? FindEntityType(
             string name,
             string definingNavigationName,
-            IConventionEntityType definingEntityType);
+            IConventionEntityType definingEntityType
+        );
 
         /// <summary>
         ///     Gets the entity that maps the given entity class. Returns <see langword="null" /> if no entity type with the given name is found.
         /// </summary>
         /// <param name="type">The type to find the corresponding entity type for.</param>
         /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
-        new IConventionEntityType? FindEntityType(Type type)
-            => (IConventionEntityType?)((IReadOnlyModel)this).FindEntityType(type);
+        new IConventionEntityType? FindEntityType(Type type) =>
+            (IConventionEntityType?)((IReadOnlyModel)this).FindEntityType(type);
 
         /// <summary>
         ///     Gets the entity type for the given name, defining navigation name
@@ -211,8 +228,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IConventionEntityType? FindEntityType(
             Type type,
             string definingNavigationName,
-            IConventionEntityType definingEntityType)
-            => (IConventionEntityType?)((IReadOnlyModel)this).FindEntityType(type, definingNavigationName, definingEntityType);
+            IConventionEntityType definingEntityType
+        ) =>
+            (IConventionEntityType?)((IReadOnlyModel)this).FindEntityType(
+                type,
+                definingNavigationName,
+                definingEntityType
+            );
 
         /// <summary>
         ///     Removes an entity type from the model.
@@ -239,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IConventionEntityType? RemoveEntityType(
             string name,
             string definingNavigationName,
-            IConventionEntityType definingEntityType);
+            IConventionEntityType definingEntityType
+        );
 
         /// <summary>
         ///     Removes an entity type from the model.
@@ -259,7 +282,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IConventionEntityType? RemoveEntityType(
             Type type,
             string definingNavigationName,
-            IConventionEntityType definingEntityType);
+            IConventionEntityType definingEntityType
+        );
 
         /// <summary>
         ///     Gets all entity types defined in the model.
@@ -272,8 +296,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="type">The type of the entity type to find.</param>
         /// <returns>The entity types found.</returns>
-        new IEnumerable<IConventionEntityType> FindEntityTypes(Type type)
-            => ((IReadOnlyModel)this).FindEntityTypes(type).Cast<IConventionEntityType>();
+        new IEnumerable<IConventionEntityType> FindEntityTypes(Type type) =>
+            ((IReadOnlyModel)this).FindEntityTypes(type).Cast<IConventionEntityType>();
 
         /// <summary>
         ///     Returns the entity types corresponding to the least derived types from the given one.
@@ -283,8 +307,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>List of entity types corresponding to the least derived types from the given one.</returns>
         new IEnumerable<IConventionEntityType> FindLeastDerivedEntityTypes(
             Type type,
-            Func<IReadOnlyEntityType, bool>? condition = null)
-            => ((IReadOnlyModel)this).FindLeastDerivedEntityTypes(type, condition)
+            Func<IReadOnlyEntityType, bool>? condition = null
+        ) =>
+            ((IReadOnlyModel)this)
+                .FindLeastDerivedEntityTypes(type, condition)
                 .Cast<IConventionEntityType>();
 
         /// <summary>
@@ -338,8 +364,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     <see langword="true" /> if the given type is marked as owned,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        bool IsOwned(Type type)
-            => FindIsOwnedConfigurationSource(type) != null;
+        bool IsOwned(Type type) => FindIsOwnedConfigurationSource(type) != null;
 
         /// <summary>
         ///     Returns the configuration source if the given type is marked as owned.

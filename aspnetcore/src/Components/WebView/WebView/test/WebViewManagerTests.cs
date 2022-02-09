@@ -18,17 +18,23 @@ public class WebViewManagerTests
         var services = RegisterTestServices().AddTestBlazorWebView().BuildServiceProvider();
         var fileProvider = new TestFileProvider();
         var webViewManager = new TestWebViewManager(services, fileProvider);
-        await webViewManager.AddRootComponentAsync(typeof(MyComponent), "#app", ParameterView.Empty);
+        await webViewManager.AddRootComponentAsync(
+            typeof(MyComponent),
+            "#app",
+            ParameterView.Empty
+        );
 
         // Act
         Assert.Empty(webViewManager.SentIpcMessages);
         webViewManager.ReceiveAttachPageMessage();
 
         // Assert
-        Assert.Collection(webViewManager.SentIpcMessages,
+        Assert.Collection(
+            webViewManager.SentIpcMessages,
             m => AssertHelpers.IsAttachWebRendererInteropMessage(m),
             m => AssertHelpers.IsAttachToDocumentMessage(m, 0, "#app"),
-            m => AssertHelpers.IsRenderBatch(m));
+            m => AssertHelpers.IsRenderBatch(m)
+        );
     }
 
     [Fact]
@@ -43,14 +49,22 @@ public class WebViewManagerTests
         webViewManager.ReceiveAttachPageMessage();
 
         // Act
-        Assert.Collection(webViewManager.SentIpcMessages,
-            m => AssertHelpers.IsAttachWebRendererInteropMessage(m));
-        await webViewManager.AddRootComponentAsync(typeof(MyComponent), "#app", ParameterView.Empty);
+        Assert.Collection(
+            webViewManager.SentIpcMessages,
+            m => AssertHelpers.IsAttachWebRendererInteropMessage(m)
+        );
+        await webViewManager.AddRootComponentAsync(
+            typeof(MyComponent),
+            "#app",
+            ParameterView.Empty
+        );
 
         // Assert
-        Assert.Collection(webViewManager.SentIpcMessages.Skip(1),
+        Assert.Collection(
+            webViewManager.SentIpcMessages.Skip(1),
             m => AssertHelpers.IsAttachToDocumentMessage(m, 0, "#app"),
-            m => AssertHelpers.IsRenderBatch(m));
+            m => AssertHelpers.IsRenderBatch(m)
+        );
     }
 
     [Fact]
@@ -60,7 +74,11 @@ public class WebViewManagerTests
         var services = RegisterTestServices().AddTestBlazorWebView().BuildServiceProvider();
         var fileProvider = new TestFileProvider();
         var webViewManager = new TestWebViewManager(services, fileProvider);
-        await webViewManager.AddRootComponentAsync(typeof(MyComponent), "#app", ParameterView.Empty);
+        await webViewManager.AddRootComponentAsync(
+            typeof(MyComponent),
+            "#app",
+            ParameterView.Empty
+        );
         var singleton = services.GetRequiredService<SingletonService>();
 
         // Act
@@ -69,13 +87,15 @@ public class WebViewManagerTests
         webViewManager.ReceiveAttachPageMessage();
 
         // Assert
-        Assert.Collection(webViewManager.SentIpcMessages,
+        Assert.Collection(
+            webViewManager.SentIpcMessages,
             m => AssertHelpers.IsAttachWebRendererInteropMessage(m),
             m => AssertHelpers.IsAttachToDocumentMessage(m, 0, "#app"),
             m => AssertHelpers.IsRenderBatch(m),
             m => AssertHelpers.IsAttachWebRendererInteropMessage(m),
             m => AssertHelpers.IsAttachToDocumentMessage(m, 0, "#app"),
-            m => AssertHelpers.IsRenderBatch(m));
+            m => AssertHelpers.IsRenderBatch(m)
+        );
 
         Assert.Equal(2, singleton.Services.Count);
         Assert.NotSame(singleton.Services[0], singleton.Services[1]);
@@ -91,7 +111,11 @@ public class WebViewManagerTests
             .BuildServiceProvider();
         var fileProvider = new TestFileProvider();
         var webViewManager = new TestWebViewManager(services, fileProvider);
-        await webViewManager.AddRootComponentAsync(typeof(MyComponentUsingScopedAsyncDisposableService), "#app", ParameterView.Empty);
+        await webViewManager.AddRootComponentAsync(
+            typeof(MyComponentUsingScopedAsyncDisposableService),
+            "#app",
+            ParameterView.Empty
+        );
         webViewManager.ReceiveAttachPageMessage();
 
         // Act
@@ -106,12 +130,26 @@ public class WebViewManagerTests
         var services = RegisterTestServices().AddTestBlazorWebView().BuildServiceProvider();
         var fileProvider = new TestFileProvider();
         var webViewManager = new TestWebViewManager(services, fileProvider);
-        await webViewManager.AddRootComponentAsync(typeof(MyComponent), arbitraryComponentSelector, ParameterView.Empty);
+        await webViewManager.AddRootComponentAsync(
+            typeof(MyComponent),
+            arbitraryComponentSelector,
+            ParameterView.Empty
+        );
 
         // Act & assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await webViewManager.AddRootComponentAsync(typeof(MyComponent), arbitraryComponentSelector, ParameterView.Empty));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+                await webViewManager.AddRootComponentAsync(
+                    typeof(MyComponent),
+                    arbitraryComponentSelector,
+                    ParameterView.Empty
+                )
+        );
 
-        Assert.Equal($"There is already a root component with selector '{arbitraryComponentSelector}'.", ex.Message);
+        Assert.Equal(
+            $"There is already a root component with selector '{arbitraryComponentSelector}'.",
+            ex.Message
+        );
     }
 
     private static IServiceCollection RegisterTestServices()
@@ -128,16 +166,19 @@ public class WebViewManagerTests
             _handle = renderHandle;
         }
 
-        [Inject] public ScopedService MyScopedService { get; set; }
+        [Inject]
+        public ScopedService MyScopedService { get; set; }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
-            _handle.Render(builder =>
-            {
-                builder.OpenElement(0, "p");
-                builder.AddContent(1, "Hello world!");
-                builder.CloseElement();
-            });
+            _handle.Render(
+                builder =>
+                {
+                    builder.OpenElement(0, "p");
+                    builder.AddContent(1, "Hello world!");
+                    builder.CloseElement();
+                }
+            );
 
             return Task.CompletedTask;
         }
@@ -152,16 +193,19 @@ public class WebViewManagerTests
             _handle = renderHandle;
         }
 
-        [Inject] public AsyncDisposableService MyAsyncDisposableService { get; set; }
+        [Inject]
+        public AsyncDisposableService MyAsyncDisposableService { get; set; }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
-            _handle.Render(builder =>
-            {
-                builder.OpenElement(0, "p");
-                builder.AddContent(1, "Hello world!");
-                builder.CloseElement();
-            });
+            _handle.Render(
+                builder =>
+                {
+                    builder.OpenElement(0, "p");
+                    builder.AddContent(1, "Hello world!");
+                    builder.CloseElement();
+                }
+            );
 
             return Task.CompletedTask;
         }

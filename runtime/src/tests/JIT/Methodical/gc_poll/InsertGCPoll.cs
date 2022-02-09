@@ -84,7 +84,7 @@ class InsertGCPoll
             i += GCPollNative.NextUInt64(1);
         }
     }
-    
+
     public static int Main()
     {
         try

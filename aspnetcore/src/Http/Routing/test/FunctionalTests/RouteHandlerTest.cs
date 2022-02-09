@@ -19,32 +19,39 @@ public class RouteHandlerTest
     public async Task MapPost_FromBodyWorksWithJsonPayload()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .Configure(app =>
-                    {
-                        app.UseRouting();
-                        app.UseEndpoints(b =>
-                            b.MapPost("/EchoTodo/{id}",
-                                (int id, Todo todo) => todo with { Id = id }));
-                    })
-                    .UseTestServer();
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .Configure(
+                            app =>
+                            {
+                                app.UseRouting();
+                                app.UseEndpoints(
+                                    b =>
+                                        b.MapPost(
+                                            "/EchoTodo/{id}",
+                                            (int id, Todo todo) => todo with { Id = id }
+                                        )
+                                );
+                            }
+                        )
+                        .UseTestServer();
+                }
+            )
+            .ConfigureServices(
+                services =>
+                {
+                    services.AddRouting();
+                }
+            )
             .Build();
 
         using var server = host.GetTestServer();
         await host.StartAsync();
         var client = server.CreateClient();
 
-        var todo = new Todo
-        {
-            Name = "Write tests!"
-        };
+        var todo = new Todo { Name = "Write tests!" };
 
         var response = await client.PostAsJsonAsync("/EchoTodo/42", todo);
         response.EnsureSuccessStatusCode();

@@ -253,7 +253,10 @@ namespace System.Runtime
         private static extern object? InternalGetDependent(IntPtr dependentHandle);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern object? InternalGetTargetAndDependent(IntPtr dependentHandle, out object? dependent);
+        private static extern object? InternalGetTargetAndDependent(
+            IntPtr dependentHandle,
+            out object? dependent
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void InternalSetDependent(IntPtr dependentHandle, object? dependent);

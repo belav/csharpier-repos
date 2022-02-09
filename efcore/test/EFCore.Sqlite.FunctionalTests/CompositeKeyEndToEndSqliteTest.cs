@@ -6,13 +6,11 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class CompositeKeyEndToEndSqliteTest : CompositeKeyEndToEndTestBase<
-        CompositeKeyEndToEndSqliteTest.CompositeKeyEndToEndSqliteFixture>
+    public class CompositeKeyEndToEndSqliteTest
+        : CompositeKeyEndToEndTestBase<CompositeKeyEndToEndSqliteTest.CompositeKeyEndToEndSqliteFixture>
     {
         public CompositeKeyEndToEndSqliteTest(CompositeKeyEndToEndSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public override Task Can_use_generated_values_in_composite_key_end_to_end()
         {
@@ -22,8 +20,8 @@ namespace Microsoft.EntityFrameworkCore
 
         public class CompositeKeyEndToEndSqliteFixture : CompositeKeyEndToEndFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
         }
     }
 }

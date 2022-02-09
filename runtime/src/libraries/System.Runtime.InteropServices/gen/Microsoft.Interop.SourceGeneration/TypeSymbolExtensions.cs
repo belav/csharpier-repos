@@ -12,9 +12,16 @@ namespace Microsoft.Interop
 {
     public static class TypeSymbolExtensions
     {
-        public static bool HasOnlyBlittableFields(this ITypeSymbol type) => HasOnlyBlittableFields(type, ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default));
+        public static bool HasOnlyBlittableFields(this ITypeSymbol type) =>
+            HasOnlyBlittableFields(
+                type,
+                ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default)
+            );
 
-        private static bool HasOnlyBlittableFields(this ITypeSymbol type, ImmutableHashSet<ITypeSymbol> seenTypes)
+        private static bool HasOnlyBlittableFields(
+            this ITypeSymbol type,
+            ImmutableHashSet<ITypeSymbol> seenTypes
+        )
         {
             if (seenTypes.Contains(type))
             {
@@ -33,7 +40,8 @@ namespace Microsoft.Interop
                         { Type: { IsReferenceType: true } } => false,
                         { Type: IPointerTypeSymbol ptr } => true,
                         { Type: IFunctionPointerTypeSymbol } => true,
-                        not { Type: { SpecialType: SpecialType.None } } => IsSpecialTypeBlittable(field.Type.SpecialType),
+                        not { Type: { SpecialType: SpecialType.None } }
+                          => IsSpecialTypeBlittable(field.Type.SpecialType),
                         // Assume that type parameters that can be blittable are blittable.
                         // We'll re-evaluate blittability for generic fields of generic types at instantation time.
                         { Type: ITypeParameterSymbol } => true,
@@ -51,8 +59,8 @@ namespace Microsoft.Interop
             return true;
         }
 
-        private static bool IsSpecialTypeBlittable(SpecialType specialType)
-            => specialType switch
+        private static bool IsSpecialTypeBlittable(SpecialType specialType) =>
+            specialType switch
             {
                 SpecialType.System_Void
                 or SpecialType.System_SByte
@@ -66,13 +74,21 @@ namespace Microsoft.Interop
                 or SpecialType.System_Single
                 or SpecialType.System_Double
                 or SpecialType.System_IntPtr
-                or SpecialType.System_UIntPtr => true,
+                or SpecialType.System_UIntPtr
+                  => true,
                 _ => false
             };
 
-        public static bool IsConsideredBlittable(this ITypeSymbol type) => IsConsideredBlittable(type, ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default));
+        public static bool IsConsideredBlittable(this ITypeSymbol type) =>
+            IsConsideredBlittable(
+                type,
+                ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default)
+            );
 
-        private static bool IsConsideredBlittable(this ITypeSymbol type, ImmutableHashSet<ITypeSymbol> seenTypes)
+        private static bool IsConsideredBlittable(
+            this ITypeSymbol type,
+            ImmutableHashSet<ITypeSymbol> seenTypes
+        )
         {
             if (type.SpecialType != SpecialType.None)
             {
@@ -89,7 +105,13 @@ namespace Microsoft.Interop
                 return false;
             }
 
-            if (type is INamedTypeSymbol { TypeKind: TypeKind.Enum, EnumUnderlyingType: ITypeSymbol underlyingType })
+            if (
+                type is INamedTypeSymbol
+                {
+                    TypeKind: TypeKind.Enum,
+                    EnumUnderlyingType: ITypeSymbol underlyingType
+                }
+            )
             {
                 return underlyingType.IsConsideredBlittable(seenTypes);
             }
@@ -134,9 +156,11 @@ namespace Microsoft.Interop
                 return type.HasOnlyBlittableFields(seenTypes);
             }
 
-            if (type is INamedTypeSymbol namedType
+            if (
+                type is INamedTypeSymbol namedType
                 && namedType.DeclaringSyntaxReferences.Length != 0
-                && !namedType.IsExposedOutsideOfCurrentCompilation())
+                && !namedType.IsExposedOutsideOfCurrentCompilation()
+            )
             {
                 // If a type is declared in the current compilation and not exposed outside of it,
                 // we will allow it to be considered blittable if its fields are considered blittable.
@@ -145,11 +169,19 @@ namespace Microsoft.Interop
             return false;
         }
 
-        public static bool IsAutoLayout(this INamedTypeSymbol type, ITypeSymbol structLayoutAttributeType)
+        public static bool IsAutoLayout(
+            this INamedTypeSymbol type,
+            ITypeSymbol structLayoutAttributeType
+        )
         {
             foreach (AttributeData attr in type.GetAttributes())
             {
-                if (SymbolEqualityComparer.Default.Equals(structLayoutAttributeType, attr.AttributeClass))
+                if (
+                    SymbolEqualityComparer.Default.Equals(
+                        structLayoutAttributeType,
+                        attr.AttributeClass
+                    )
+                )
                 {
                     return (LayoutKind)(int)attr.ConstructorArguments[0].Value! == LayoutKind.Auto;
                 }
@@ -159,7 +191,9 @@ namespace Microsoft.Interop
 
         public static TypeSyntax AsTypeSyntax(this ITypeSymbol type)
         {
-            return SyntaxFactory.ParseTypeName(type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+            return SyntaxFactory.ParseTypeName(
+                type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+            );
         }
 
         public static bool IsIntegralType(this SpecialType type)
@@ -175,7 +209,8 @@ namespace Microsoft.Interop
                 or SpecialType.System_Int64
                 or SpecialType.System_UInt64
                 or SpecialType.System_IntPtr
-                or SpecialType.System_UIntPtr => true,
+                or SpecialType.System_UIntPtr
+                  => true,
                 _ => false
             };
         }
@@ -186,7 +221,14 @@ namespace Microsoft.Interop
             {
                 Accessibility accessibility = type.DeclaredAccessibility;
 
-                if (accessibility is Accessibility.Internal or Accessibility.ProtectedAndInternal or Accessibility.Private or Accessibility.Friend or Accessibility.ProtectedAndFriend)
+                if (
+                    accessibility
+                    is Accessibility.Internal
+                        or Accessibility.ProtectedAndInternal
+                        or Accessibility.Private
+                        or Accessibility.Friend
+                        or Accessibility.ProtectedAndFriend
+                )
                 {
                     return false;
                 }

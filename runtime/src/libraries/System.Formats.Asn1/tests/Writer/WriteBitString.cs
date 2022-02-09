@@ -34,7 +34,12 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(AsnEncodingRules.DER, 1000, 0, "038203E900")]
         [InlineData(AsnEncodingRules.BER, 2000, 0, "038207D100")]
         [InlineData(AsnEncodingRules.DER, 2000, 0, "038207D100")]
-        public void WritePrimitive(AsnEncodingRules ruleSet, int length, int unusedBitCount, string hexStart)
+        public void WritePrimitive(
+            AsnEncodingRules ruleSet,
+            int length,
+            int unusedBitCount,
+            string hexStart
+        )
         {
             string payloadHex = new string('0', 2 * length);
             string expectedHex = hexStart + payloadHex;
@@ -48,8 +53,13 @@ namespace System.Formats.Asn1.Tests.Writer
 
         [Theory]
         [InlineData(1000, 1, "2380038203E800", "030201")]
-        [InlineData(999*2, 3, "2380038203E800", "038203E803")]
-        public void WriteSegmentedCER(int length, int unusedBitCount, string hexStart, string hexStart2)
+        [InlineData(999 * 2, 3, "2380038203E800", "038203E803")]
+        public void WriteSegmentedCER(
+            int length,
+            int unusedBitCount,
+            string hexStart,
+            string hexStart2
+        )
         {
             string payload1Hex = new string('8', 999 * 2);
             string payload2Hex = new string('8', (length - 999) * 2);
@@ -85,7 +95,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteBitString_PrimitiveOrConstructed(
             AsnEncodingRules ruleSet,
             int payloadLength,
-            bool expectConstructed)
+            bool expectConstructed
+        )
         {
             byte[] data = new byte[payloadLength];
 
@@ -166,7 +177,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             int unusedBitCount,
             string inputHex,
-            bool expectThrow)
+            bool expectThrow
+        )
         {
             byte[] inputBytes = inputHex.HexToByteArray();
 
@@ -176,14 +188,18 @@ namespace System.Formats.Asn1.Tests.Writer
             {
                 AssertExtensions.Throws<ArgumentException>(
                     "unusedBitCount",
-                    () => writer.WriteBitString(inputBytes, unusedBitCount));
+                    () => writer.WriteBitString(inputBytes, unusedBitCount)
+                );
 
                 AssertExtensions.Throws<ArgumentException>(
                     "unusedBitCount",
-                    () => writer.WriteBitString(
-                        inputBytes,
-                        unusedBitCount,
-                        new Asn1Tag(TagClass.ContextSpecific, 3)));
+                    () =>
+                        writer.WriteBitString(
+                            inputBytes,
+                            unusedBitCount,
+                            new Asn1Tag(TagClass.ContextSpecific, 3)
+                        )
+                );
 
                 return;
             }
@@ -195,7 +211,11 @@ namespace System.Formats.Asn1.Tests.Writer
             // This assumes that inputBytes is never more than 999 (and avoids CER constructed forms)
             Assert.Equal(unusedBitCount, output[bytesWritten - inputBytes.Length - 1]);
 
-            writer.WriteBitString(inputBytes, unusedBitCount, new Asn1Tag(TagClass.ContextSpecific, 9));
+            writer.WriteBitString(
+                inputBytes,
+                unusedBitCount,
+                new Asn1Tag(TagClass.ContextSpecific, 9)
+            );
             Assert.True(writer.TryEncode(output, out bytesWritten));
 
             Assert.Equal(unusedBitCount, output[bytesWritten - inputBytes.Length - 1]);
@@ -223,15 +243,23 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            ArgumentOutOfRangeException exception = AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(unusedBitCount),
-                () => writer.WriteBitString(data, unusedBitCount));
+            ArgumentOutOfRangeException exception =
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    nameof(unusedBitCount),
+                    () => writer.WriteBitString(data, unusedBitCount)
+                );
 
             Assert.Equal(unusedBitCount, exception.ActualValue);
 
             exception = AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 nameof(unusedBitCount),
-                () => writer.WriteBitString(data, unusedBitCount, new Asn1Tag(TagClass.ContextSpecific, 5)));
+                () =>
+                    writer.WriteBitString(
+                        data,
+                        unusedBitCount,
+                        new Asn1Tag(TagClass.ContextSpecific, 5)
+                    )
+            );
 
             Assert.Equal(unusedBitCount, exception.ActualValue);
         }
@@ -246,21 +274,25 @@ namespace System.Formats.Asn1.Tests.Writer
 
             Assert.Throws<ArgumentException>(
                 "unusedBitCount",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 1));
+                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 1)
+            );
 
             Assert.Throws<ArgumentException>(
                 "unusedBitCount",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 7));
+                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 7)
+            );
 
             Asn1Tag contextTag = new Asn1Tag(TagClass.ContextSpecific, 19);
 
             Assert.Throws<ArgumentException>(
                 "unusedBitCount",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 1, contextTag));
+                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 1, contextTag)
+            );
 
             Assert.Throws<ArgumentException>(
                 "unusedBitCount",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 7, contextTag));
+                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 7, contextTag)
+            );
 
             writer.WriteBitString(ReadOnlySpan<byte>.Empty, 0);
             writer.WriteBitString(ReadOnlySpan<byte>.Empty, 0, contextTag);
@@ -277,7 +309,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             TagClass tagClass,
             int tagValue,
-            string expectedHex)
+            string expectedHex
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
@@ -304,11 +337,13 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, tag: Asn1Tag.Null));
+                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, tag: Asn1Tag.Null)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteBitString(new byte[1], tag: Asn1Tag.Null));
+                () => writer.WriteBitString(new byte[1], tag: Asn1Tag.Null)
+            );
         }
     }
 }

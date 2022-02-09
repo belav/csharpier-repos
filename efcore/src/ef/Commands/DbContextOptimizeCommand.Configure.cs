@@ -16,7 +16,10 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
             command.Description = Resources.DbContextOptimizeDescription;
 
             _outputDir = command.Option("-o|--output-dir <PATH>", Resources.OutputDirDescription);
-            _namespace = command.Option("-n|--namespace <NAMESPACE>", Resources.NamespaceDescription);
+            _namespace = command.Option(
+                "-n|--namespace <NAMESPACE>",
+                Resources.NamespaceDescription
+            );
 
             base.Configure(command);
         }

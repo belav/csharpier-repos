@@ -8,7 +8,9 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
 internal class AzureADJwtBearerOptionsConfiguration : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly IOptions<AzureADSchemeOptions> _schemeOptions;
@@ -16,7 +18,8 @@ internal class AzureADJwtBearerOptionsConfiguration : IConfigureNamedOptions<Jwt
 
     public AzureADJwtBearerOptionsConfiguration(
         IOptions<AzureADSchemeOptions> schemeOptions,
-        IOptionsMonitor<AzureADOptions> azureADOptions)
+        IOptionsMonitor<AzureADOptions> azureADOptions
+    )
     {
         _schemeOptions = schemeOptions;
         _azureADOptions = azureADOptions;
@@ -37,12 +40,13 @@ internal class AzureADJwtBearerOptionsConfiguration : IConfigureNamedOptions<Jwt
         }
 
         options.Audience = azureADOptions.ClientId;
-        options.Authority = new Uri(new Uri(azureADOptions.Instance), azureADOptions.TenantId).ToString();
+        options.Authority = new Uri(
+            new Uri(azureADOptions.Instance),
+            azureADOptions.TenantId
+        ).ToString();
     }
 
-    public void Configure(JwtBearerOptions options)
-    {
-    }
+    public void Configure(JwtBearerOptions options) { }
 
     private string GetAzureADScheme(string name)
     {

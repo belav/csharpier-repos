@@ -7,16 +7,20 @@ using System.Runtime.CompilerServices;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                                 new RngTest(Test.Test2),
-                                 new RngTest(Test.Test3),
-                                 new RngTest(Test.Test4)};
+            RngTest[] Tests =
+            {
+                new RngTest(Test.Test1),
+                new RngTest(Test.Test2),
+                new RngTest(Test.Test3),
+                new RngTest(Test.Test4)
+            };
 
             foreach (RngTest test in Tests)
             {
@@ -53,11 +57,12 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
-		* RngChk shall not be eliminated inner loop uppbound is modified in the outer loop
-		*********************************************************************************************/
+        * RngChk shall not be eliminated inner loop uppbound is modified in the outer loop
+        *********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {
@@ -75,8 +80,8 @@ namespace SimpleArray_01
         }
 
         /********************************************************************************************
-		* RngChk shall not be eliminated if induction vairable is modified through function call in the outer loop
-		********************************************************************************************/
+        * RngChk shall not be eliminated if induction vairable is modified through function call in the outer loop
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test2()
         {
@@ -92,9 +97,10 @@ namespace SimpleArray_01
                 foo(ref index);
             }
         }
+
         /********************************************************************************************
-		* RngChk shall not be eliminated if induction vairable is modified through function call in the inner loop
-		********************************************************************************************/
+        * RngChk shall not be eliminated if induction vairable is modified through function call in the inner loop
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test3()
         {
@@ -111,8 +117,8 @@ namespace SimpleArray_01
         }
 
         /********************************************************************************************
-		* RngChk shall not be eliminated outer loop uppbound is modified in the inner loop
-		*********************************************************************************************/
+        * RngChk shall not be eliminated outer loop uppbound is modified in the inner loop
+        *********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test4()
         {

@@ -43,7 +43,10 @@ public static class WebSocketMiddlewareExtensions
     /// <returns>
     /// The <see cref="IApplicationBuilder" />.
     /// </returns>
-    public static IApplicationBuilder UseWebSockets(this IApplicationBuilder app, WebSocketOptions options)
+    public static IApplicationBuilder UseWebSockets(
+        this IApplicationBuilder app,
+        WebSocketOptions options
+    )
     {
         if (app == null)
         {

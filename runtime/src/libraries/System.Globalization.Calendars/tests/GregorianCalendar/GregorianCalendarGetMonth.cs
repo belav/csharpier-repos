@@ -16,13 +16,19 @@ namespace System.Globalization.Tests
             yield return new object[] { new DateTime(RandomLeapYear(), 2, 29, 10, 30, 12) };
 
             // Month other than february in a leap year
-            yield return new object[] { new DateTime(RandomLeapYear(), RandomMonthNotFebruary(), 28, 10, 30, 12) };
+            yield return new object[]
+            {
+                new DateTime(RandomLeapYear(), RandomMonthNotFebruary(), 28, 10, 30, 12)
+            };
 
             // February in a common year
             yield return new object[] { new DateTime(RandomCommonYear(), 2, 28, 10, 30, 12) };
 
             // Month other than february in a common year
-            yield return new object[] { new DateTime(RandomCommonYear(), RandomMonthNotFebruary(), 28, 10, 30, 12) };
+            yield return new object[]
+            {
+                new DateTime(RandomCommonYear(), RandomMonthNotFebruary(), 28, 10, 30, 12)
+            };
 
             // Any month in the maximum supported year
             yield return new object[] { new DateTime(9999, RandomMonth(), 20, 8, 20, 30) };

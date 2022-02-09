@@ -22,7 +22,10 @@ namespace System.Text.Json
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
-        public static JsonElement SerializeToElement<TValue>(TValue value, JsonSerializerOptions? options = null)
+        public static JsonElement SerializeToElement<TValue>(
+            TValue value,
+            JsonSerializerOptions? options = null
+        )
         {
             Type runtimeType = GetRuntimeType(value);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, runtimeType);
@@ -47,7 +50,11 @@ namespace System.Text.Json
         /// for <paramref name="inputType"/>  or its serializable members.
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
-        public static JsonElement SerializeToElement(object? value, Type inputType, JsonSerializerOptions? options = null)
+        public static JsonElement SerializeToElement(
+            object? value,
+            Type inputType,
+            JsonSerializerOptions? options = null
+        )
         {
             Type runtimeType = GetRuntimeTypeAndValidateInputType(value, inputType);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, runtimeType);
@@ -68,7 +75,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="jsonTypeInfo"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonElement SerializeToElement<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static JsonElement SerializeToElement<TValue>(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo == null)
             {
@@ -96,7 +106,11 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="inputType"/> or <paramref name="context"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonElement SerializeToElement(object? value, Type inputType, JsonSerializerContext context)
+        public static JsonElement SerializeToElement(
+            object? value,
+            Type inputType,
+            JsonSerializerContext context
+        )
         {
             if (context == null)
             {
@@ -108,7 +122,10 @@ namespace System.Text.Json
             return WriteElementUsingGeneratedSerializer(value, typeInfo);
         }
 
-        private static JsonElement WriteElementUsingGeneratedSerializer<TValue>(in TValue value, JsonTypeInfo jsonTypeInfo)
+        private static JsonElement WriteElementUsingGeneratedSerializer<TValue>(
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
             Debug.Assert(options != null);
@@ -123,7 +140,10 @@ namespace System.Text.Json
             return JsonElement.ParseValue(output.WrittenMemory.Span, options.GetDocumentOptions());
         }
 
-        private static JsonElement WriteElementUsingSerializer<TValue>(in TValue value, JsonTypeInfo jsonTypeInfo)
+        private static JsonElement WriteElementUsingSerializer<TValue>(
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
             Debug.Assert(options != null);

@@ -24,12 +24,12 @@ public class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static unsafe bool VerifyPoison(void* val, int size)
-        => AllEq(new Span<byte>(val, size), 0xCD);
+    private static unsafe bool VerifyPoison(void* val, int size) =>
+        AllEq(new Span<byte>(val, size), 0xCD);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static unsafe bool VerifyZero(void* val, int size)
-        => AllEq(new Span<byte>(val, size), 0);
+    private static unsafe bool VerifyZero(void* val, int size) =>
+        AllEq(new Span<byte>(val, size), 0);
 
     private static unsafe bool AllEq(Span<byte> span, byte byteVal)
     {

@@ -22,8 +22,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.ExtractInterface
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public ExtractInterfaceCommandHandler(IThreadingContext threadingContext)
-            : base(threadingContext)
-        {
-        }
+            : base(threadingContext) { }
     }
 }

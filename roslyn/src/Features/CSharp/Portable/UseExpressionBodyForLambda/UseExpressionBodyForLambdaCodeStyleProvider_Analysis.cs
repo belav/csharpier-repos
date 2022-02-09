@@ -17,17 +17,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 
     internal partial class UseExpressionBodyForLambdaCodeStyleProvider
     {
-        protected override void DiagnosticAnalyzerInitialize(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax,
-                SyntaxKind.SimpleLambdaExpression, SyntaxKind.ParenthesizedLambdaExpression);
+        protected override void DiagnosticAnalyzerInitialize(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
+                AnalyzeSyntax,
+                SyntaxKind.SimpleLambdaExpression,
+                SyntaxKind.ParenthesizedLambdaExpression
+            );
 
-        protected override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        protected override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        private void AnalyzeSyntax(SyntaxNodeAnalysisContext context, CodeStyleOption2<ExpressionBodyPreference> option)
+        private void AnalyzeSyntax(
+            SyntaxNodeAnalysisContext context,
+            CodeStyleOption2<ExpressionBodyPreference> option
+        )
         {
             var declaration = (LambdaExpressionSyntax)context.Node;
-            var diagnostic = AnalyzeSyntax(context.SemanticModel, option, declaration, context.CancellationToken);
+            var diagnostic = AnalyzeSyntax(
+                context.SemanticModel,
+                option,
+                declaration,
+                context.CancellationToken
+            );
             if (diagnostic != null)
             {
                 context.ReportDiagnostic(diagnostic);
@@ -35,8 +46,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         }
 
         private Diagnostic AnalyzeSyntax(
-            SemanticModel semanticModel, CodeStyleOption2<ExpressionBodyPreference> option,
-            LambdaExpressionSyntax declaration, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            CodeStyleOption2<ExpressionBodyPreference> option,
+            LambdaExpressionSyntax declaration,
+            CancellationToken cancellationToken
+        )
         {
             if (CanOfferUseExpressionBody(option.Value, declaration))
             {
@@ -46,27 +60,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 var properties = ImmutableDictionary<string, string>.Empty;
                 return DiagnosticHelper.Create(
                     CreateDescriptorWithId(UseExpressionBodyTitle, UseExpressionBodyTitle),
-                    location, option.Notification.Severity, additionalLocations, properties);
+                    location,
+                    option.Notification.Severity,
+                    additionalLocations,
+                    properties
+                );
             }
 
             if (CanOfferUseBlockBody(semanticModel, option.Value, declaration, cancellationToken))
             {
                 // They have an expression body.  Create a diagnostic to convert it to a block
-                // if they don't want expression bodies for this member.  
+                // if they don't want expression bodies for this member.
                 var location = GetDiagnosticLocation(declaration);
 
                 var properties = ImmutableDictionary<string, string>.Empty;
                 var additionalLocations = ImmutableArray.Create(declaration.GetLocation());
                 return DiagnosticHelper.Create(
                     CreateDescriptorWithId(UseBlockBodyTitle, UseBlockBodyTitle),
-                    location, option.Notification.Severity, additionalLocations, properties);
+                    location,
+                    option.Notification.Severity,
+                    additionalLocations,
+                    properties
+                );
             }
 
             return null;
         }
 
-        private static Location GetDiagnosticLocation(LambdaExpressionSyntax declaration)
-            => Location.Create(declaration.SyntaxTree,
-                    TextSpan.FromBounds(declaration.SpanStart, declaration.ArrowToken.Span.End));
+        private static Location GetDiagnosticLocation(LambdaExpressionSyntax declaration) =>
+            Location.Create(
+                declaration.SyntaxTree,
+                TextSpan.FromBounds(declaration.SpanStart, declaration.ArrowToken.Span.End)
+            );
     }
 }

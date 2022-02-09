@@ -20,8 +20,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     {
         private const int DefaultLength = 100;
 
-        private static readonly Dictionary<Type, string> _typeMapping
-            = new()
+        private static readonly Dictionary<Type, string> _typeMapping =
+            new()
             {
                 { typeof(sbyte), "varchar(4)" },
                 { typeof(byte), "varchar(3)" },
@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             if (instance == null || method.Name != nameof(ToString) || arguments.Count != 0)
             {
@@ -80,33 +81,48 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         new[]
                         {
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
-                                _sqlExpressionFactory.Constant(false.ToString())),
+                                _sqlExpressionFactory.Equal(
+                                    instance,
+                                    _sqlExpressionFactory.Constant(false)
+                                ),
+                                _sqlExpressionFactory.Constant(false.ToString())
+                            ),
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(true)),
-                                _sqlExpressionFactory.Constant(true.ToString()))
+                                _sqlExpressionFactory.Equal(
+                                    instance,
+                                    _sqlExpressionFactory.Constant(true)
+                                ),
+                                _sqlExpressionFactory.Constant(true.ToString())
+                            )
                         },
-                        _sqlExpressionFactory.Constant(null));
+                        _sqlExpressionFactory.Constant(null)
+                    );
                 }
 
                 return _sqlExpressionFactory.Case(
                     new[]
                     {
                         new CaseWhenClause(
-                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
-                            _sqlExpressionFactory.Constant(false.ToString()))
+                            _sqlExpressionFactory.Equal(
+                                instance,
+                                _sqlExpressionFactory.Constant(false)
+                            ),
+                            _sqlExpressionFactory.Constant(false.ToString())
+                        )
                     },
-                    _sqlExpressionFactory.Constant(true.ToString()));
+                    _sqlExpressionFactory.Constant(true.ToString())
+                );
             }
 
             return _typeMapping.TryGetValue(instance.Type, out var storeType)
-                ? _sqlExpressionFactory.Function(
+              ? _sqlExpressionFactory.Function(
                     "CONVERT",
                     new[] { _sqlExpressionFactory.Fragment(storeType), instance },
                     nullable: true,
                     argumentsPropagateNullability: new[] { false, true },
-                    typeof(string))
-                : null;
+                    typeof(string)
+                )
+              : null;
         }
     }
 }

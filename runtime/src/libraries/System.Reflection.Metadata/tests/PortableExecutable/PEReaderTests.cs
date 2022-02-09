@@ -22,27 +22,48 @@ namespace System.Reflection.PortableExecutable.Tests
             var invalid = new MemoryStream(new byte[] { 1, 2, 3, 4 });
 
             // the stream should not be disposed if the arguments are bad
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PEReader(invalid, (PEStreamOptions)int.MaxValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PEReader(invalid, (PEStreamOptions)int.MaxValue)
+            );
             Assert.True(invalid.CanRead);
 
             // no BadImageFormatException if we're prefetching the entire image:
-            var peReader0 = new PEReader(invalid, PEStreamOptions.PrefetchEntireImage | PEStreamOptions.LeaveOpen);
+            var peReader0 = new PEReader(
+                invalid,
+                PEStreamOptions.PrefetchEntireImage | PEStreamOptions.LeaveOpen
+            );
             Assert.True(invalid.CanRead);
             Assert.Throws<BadImageFormatException>(() => peReader0.PEHeaders);
             invalid.Position = 0;
 
             // BadImageFormatException if we're prefetching the entire image and metadata:
-            Assert.Throws<BadImageFormatException>(() => new PEReader(invalid, PEStreamOptions.PrefetchEntireImage | PEStreamOptions.PrefetchMetadata | PEStreamOptions.LeaveOpen));
+            Assert.Throws<BadImageFormatException>(
+                () =>
+                    new PEReader(
+                        invalid,
+                        PEStreamOptions.PrefetchEntireImage
+                            | PEStreamOptions.PrefetchMetadata
+                            | PEStreamOptions.LeaveOpen
+                    )
+            );
             Assert.True(invalid.CanRead);
             invalid.Position = 0;
 
             // the stream should be disposed if the content is bad:
-            Assert.Throws<BadImageFormatException>(() => new PEReader(invalid, PEStreamOptions.PrefetchMetadata));
+            Assert.Throws<BadImageFormatException>(
+                () => new PEReader(invalid, PEStreamOptions.PrefetchMetadata)
+            );
             Assert.False(invalid.CanRead);
 
             // the stream should not be disposed if we specified LeaveOpen flag:
             invalid = new MemoryStream(new byte[] { 1, 2, 3, 4 });
-            Assert.Throws<BadImageFormatException>(() => new PEReader(invalid, PEStreamOptions.PrefetchMetadata | PEStreamOptions.LeaveOpen));
+            Assert.Throws<BadImageFormatException>(
+                () =>
+                    new PEReader(
+                        invalid,
+                        PEStreamOptions.PrefetchMetadata | PEStreamOptions.LeaveOpen
+                    )
+            );
             Assert.True(invalid.CanRead);
 
             // valid metadata:
@@ -56,15 +77,35 @@ namespace System.Reflection.PortableExecutable.Tests
         [Fact]
         public void Ctor_Streams()
         {
-            AssertExtensions.Throws<ArgumentException>("peStream", () => new PEReader(new CustomAccessMemoryStream(canRead: false, canSeek: false, canWrite: false)));
-            AssertExtensions.Throws<ArgumentException>("peStream", () => new PEReader(new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)));
+            AssertExtensions.Throws<ArgumentException>(
+                "peStream",
+                () =>
+                    new PEReader(
+                        new CustomAccessMemoryStream(
+                            canRead: false,
+                            canSeek: false,
+                            canWrite: false
+                        )
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "peStream",
+                () =>
+                    new PEReader(
+                        new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)
+                    )
+            );
 
             var s = new CustomAccessMemoryStream(canRead: true, canSeek: true, canWrite: false);
 
             new PEReader(s);
             new PEReader(s, PEStreamOptions.Default, 0);
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PEReader(s, PEStreamOptions.Default, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PEReader(s, PEStreamOptions.Default, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PEReader(s, PEStreamOptions.Default, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PEReader(s, PEStreamOptions.Default, 1)
+            );
         }
 
         [Fact]
@@ -74,15 +115,25 @@ namespace System.Reflection.PortableExecutable.Tests
             Assert.True(new PEReader(&b, 1, isLoadedImage: true).IsLoadedImage);
             Assert.False(new PEReader(&b, 1, isLoadedImage: false).IsLoadedImage);
 
-            Assert.True(new PEReader(new MemoryStream(), PEStreamOptions.IsLoadedImage).IsLoadedImage);
+            Assert.True(
+                new PEReader(new MemoryStream(), PEStreamOptions.IsLoadedImage).IsLoadedImage
+            );
             Assert.False(new PEReader(new MemoryStream()).IsLoadedImage);
         }
 
         [Fact]
         public void FromEmptyStream()
         {
-            Assert.Throws<BadImageFormatException>(() => new PEReader(new MemoryStream(), PEStreamOptions.PrefetchMetadata));
-            Assert.Throws<BadImageFormatException>(() => new PEReader(new MemoryStream(), PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage));
+            Assert.Throws<BadImageFormatException>(
+                () => new PEReader(new MemoryStream(), PEStreamOptions.PrefetchMetadata)
+            );
+            Assert.Throws<BadImageFormatException>(
+                () =>
+                    new PEReader(
+                        new MemoryStream(),
+                        PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage
+                    )
+            );
         }
 
         [Fact]
@@ -102,13 +153,21 @@ namespace System.Reflection.PortableExecutable.Tests
             peReader1.GetMetadataReader();
 
             stream.Position = 1;
-            var peReader2 = new PEReader(stream, PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchMetadata, Misc.Members.Length);
+            var peReader2 = new PEReader(
+                stream,
+                PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchMetadata,
+                Misc.Members.Length
+            );
 
             Assert.Equal(Misc.Members.Length, peReader2.GetEntireImage().Length);
             peReader2.GetMetadataReader();
             stream.Position = 1;
 
-            var peReader3 = new PEReader(stream, PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchEntireImage, Misc.Members.Length);
+            var peReader3 = new PEReader(
+                stream,
+                PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchEntireImage,
+                Misc.Members.Length
+            );
 
             Assert.Equal(Misc.Members.Length, peReader3.GetEntireImage().Length);
             peReader3.GetMetadataReader();
@@ -119,13 +178,13 @@ namespace System.Reflection.PortableExecutable.Tests
         [Fact]
         public void OpenNativeImage()
         {
-            using (var reader = new PEReader(File.OpenRead(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "kernel32.dll"))))
-            {
-                Assert.False(reader.HasMetadata);
-                Assert.True(reader.PEHeaders.IsDll);
-                Assert.False(reader.PEHeaders.IsExe);
-                Assert.Throws<InvalidOperationException>(() => reader.GetMetadataReader());
-            }
+        using (var reader = new PEReader(File.OpenRead(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "kernel32.dll"))))
+        {
+        Assert.False(reader.HasMetadata);
+        Assert.True(reader.PEHeaders.IsDll);
+        Assert.False(reader.PEHeaders.IsExe);
+        Assert.Throws<InvalidOperationException>(() => reader.GetMetadataReader());
+        }
         }
         */
 
@@ -136,7 +195,11 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var reader = new PEReader(peStream, PEStreamOptions.LeaveOpen))
             {
                 var md = reader.GetMetadataReader();
-                var il = reader.GetMethodBody(md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1)).RelativeVirtualAddress);
+                var il = reader.GetMethodBody(
+                    md.GetMethodDefinition(
+                        MetadataTokens.MethodDefinitionHandle(1)
+                    ).RelativeVirtualAddress
+                );
 
                 Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
                 Assert.Equal(8, il.MaxStack);
@@ -147,10 +210,21 @@ namespace System.Reflection.PortableExecutable.Tests
         public void IL_EagerLoad()
         {
             var peStream = new MemoryStream(Misc.Members);
-            using (var reader = new PEReader(peStream, PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage))
+            using (
+                var reader = new PEReader(
+                    peStream,
+                    PEStreamOptions.LeaveOpen
+                        | PEStreamOptions.PrefetchMetadata
+                        | PEStreamOptions.PrefetchEntireImage
+                )
+            )
             {
                 var md = reader.GetMetadataReader();
-                var il = reader.GetMethodBody(md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1)).RelativeVirtualAddress);
+                var il = reader.GetMethodBody(
+                    md.GetMethodDefinition(
+                        MetadataTokens.MethodDefinitionHandle(1)
+                    ).RelativeVirtualAddress
+                );
 
                 Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
                 Assert.Equal(8, il.MaxStack);
@@ -174,14 +248,21 @@ namespace System.Reflection.PortableExecutable.Tests
         public void Metadata_EagerLoad()
         {
             var peStream = new MemoryStream(Misc.Members);
-            using (var reader = new PEReader(peStream, PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchMetadata))
+            using (
+                var reader = new PEReader(
+                    peStream,
+                    PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchMetadata
+                )
+            )
             {
                 var md = reader.GetMetadataReader();
                 var method = md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1));
                 Assert.Equal("MC1", md.GetString(method.Name));
 
                 Assert.Throws<InvalidOperationException>(() => reader.GetEntireImage());
-                Assert.Throws<InvalidOperationException>(() => reader.GetMethodBody(method.RelativeVirtualAddress));
+                Assert.Throws<InvalidOperationException>(
+                    () => reader.GetMethodBody(method.RelativeVirtualAddress)
+                );
             }
         }
 
@@ -199,24 +280,38 @@ namespace System.Reflection.PortableExecutable.Tests
         public void EntireImage_EagerLoad()
         {
             var peStream = new MemoryStream(Misc.Members);
-            using (var reader = new PEReader(peStream, PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage))
+            using (
+                var reader = new PEReader(
+                    peStream,
+                    PEStreamOptions.LeaveOpen
+                        | PEStreamOptions.PrefetchMetadata
+                        | PEStreamOptions.PrefetchEntireImage
+                )
+            )
             {
                 Assert.Equal(4608, reader.GetEntireImage().Length);
             }
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes to get module handles
         public void GetMethodBody_Loaded()
         {
-            LoaderUtilities.LoadPEAndValidate(Misc.Members, reader =>
-            {
-                var md = reader.GetMetadataReader();
-                var il = reader.GetMethodBody(md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1)).RelativeVirtualAddress);
+            LoaderUtilities.LoadPEAndValidate(
+                Misc.Members,
+                reader =>
+                {
+                    var md = reader.GetMetadataReader();
+                    var il = reader.GetMethodBody(
+                        md.GetMethodDefinition(
+                            MetadataTokens.MethodDefinitionHandle(1)
+                        ).RelativeVirtualAddress
+                    );
 
-                Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
-                Assert.Equal(8, il.MaxStack);
-            });
+                    Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
+                    Assert.Equal(8, il.MaxStack);
+                }
+            );
         }
 
         [Fact]
@@ -230,7 +325,7 @@ namespace System.Reflection.PortableExecutable.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes to get module handles
         public void GetSectionData_Loaded()
         {
             LoaderUtilities.LoadPEAndValidate(Misc.Members, ValidateSectionData);
@@ -241,12 +336,24 @@ namespace System.Reflection.PortableExecutable.Tests
             var relocBlob1 = reader.GetSectionData(".reloc").GetContent();
             var relocBlob2 = reader.GetSectionData(0x6000).GetContent();
 
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x20, 0x00, 0x00,
-                0x0C, 0x00, 0x00, 0x00,
-                0xD0, 0x38, 0x00, 0x00
-            }, relocBlob1);
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x20,
+                    0x00,
+                    0x00,
+                    0x0C,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xD0,
+                    0x38,
+                    0x00,
+                    0x00
+                },
+                relocBlob1
+            );
 
             AssertEx.Equal(relocBlob1, relocBlob2);
 
@@ -294,7 +401,9 @@ namespace System.Reflection.PortableExecutable.Tests
             {
                 Assert.Throws<ArgumentNullException>(() => reader.GetSectionData(null));
                 Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetSectionData(-1));
-                Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetSectionData(int.MinValue));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => reader.GetSectionData(int.MinValue)
+                );
             }
         }
 
@@ -308,10 +417,42 @@ namespace System.Reflection.PortableExecutable.Tests
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
 
-                Assert.False(reader.TryOpenAssociatedPortablePdb(@"b.dll", _ => null, out pdbProvider, out pdbPath));
-                Assert.Throws<ArgumentNullException>(() => reader.TryOpenAssociatedPortablePdb(@"b.dll", null, out pdbProvider, out pdbPath));
-                Assert.Throws<ArgumentNullException>(() => reader.TryOpenAssociatedPortablePdb(null, _ => null, out pdbProvider, out pdbPath));
-                AssertExtensions.Throws<ArgumentException>("peImagePath", () => reader.TryOpenAssociatedPortablePdb("C:\\a\\\0\\b", _ => null, out pdbProvider, out pdbPath));
+                Assert.False(
+                    reader.TryOpenAssociatedPortablePdb(
+                        @"b.dll",
+                        _ => null,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            @"b.dll",
+                            null,
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            null,
+                            _ => null,
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "peImagePath",
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            "C:\\a\\\0\\b",
+                            _ => null,
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
             }
         }
 
@@ -325,10 +466,40 @@ namespace System.Reflection.PortableExecutable.Tests
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
 
-                Assert.False(reader.TryOpenAssociatedPortablePdb(@"b.dll", _ => null, out pdbProvider, out pdbPath));
-                Assert.Throws<ArgumentNullException>(() => reader.TryOpenAssociatedPortablePdb(@"b.dll", null, out pdbProvider, out pdbPath));
-                Assert.Throws<ArgumentNullException>(() => reader.TryOpenAssociatedPortablePdb(null, _ => null, out pdbProvider, out pdbPath));
-                Assert.False(reader.TryOpenAssociatedPortablePdb("C:\\a\\\0\\b", _ => null, out pdbProvider, out pdbPath));
+                Assert.False(
+                    reader.TryOpenAssociatedPortablePdb(
+                        @"b.dll",
+                        _ => null,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            @"b.dll",
+                            null,
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            null,
+                            _ => null,
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
+                Assert.False(
+                    reader.TryOpenAssociatedPortablePdb(
+                        "C:\\a\\\0\\b",
+                        _ => null,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
             }
         }
 
@@ -350,7 +521,14 @@ namespace System.Reflection.PortableExecutable.Tests
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
 
-                Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
                 Assert.Equal(Path.Combine("pedir", "Documents.pdb"), pathQueried);
 
                 Assert.Equal(Path.Combine("pedir", "Documents.pdb"), pdbPath);
@@ -377,7 +555,14 @@ namespace System.Reflection.PortableExecutable.Tests
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
 
-                Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
                 Assert.Equal(Path.Combine("pedir", "Documents.Embedded.pdb"), pathQueried);
 
                 Assert.Null(pdbPath);
@@ -395,7 +580,14 @@ namespace System.Reflection.PortableExecutable.Tests
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
 
-                Assert.True(reader.TryOpenAssociatedPortablePdb(@"x", _ => null, out pdbProvider, out pdbPath));
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        @"x",
+                        _ => null,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
 
                 Assert.Null(pdbPath);
                 var pdbReader = pdbProvider.GetMetadataReader();
@@ -409,10 +601,18 @@ namespace System.Reflection.PortableExecutable.Tests
             var peStream = new MemoryStream(PortablePdbs.DocumentsEmbeddedDll);
             using (var reader = new PEReader(peStream))
             {
-                using (MetadataReaderProvider embeddedProvider = reader.ReadEmbeddedPortablePdbDebugDirectoryData(reader.ReadDebugDirectory()[2]))
+                using (
+                    MetadataReaderProvider embeddedProvider =
+                        reader.ReadEmbeddedPortablePdbDebugDirectoryData(
+                            reader.ReadDebugDirectory()[2]
+                        )
+                )
                 {
                     var embeddedReader = embeddedProvider.GetMetadataReader();
-                    var embeddedBytes = new BlobReader(embeddedReader.MetadataPointer, embeddedReader.MetadataLength).ReadBytes(embeddedReader.MetadataLength);
+                    var embeddedBytes = new BlobReader(
+                        embeddedReader.MetadataPointer,
+                        embeddedReader.MetadataLength
+                    ).ReadBytes(embeddedReader.MetadataLength);
 
                     string pathQueried = null;
 
@@ -426,7 +626,14 @@ namespace System.Reflection.PortableExecutable.Tests
                     MetadataReaderProvider pdbProvider;
                     string pdbPath;
 
-                    Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
+                    Assert.True(
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            streamProvider,
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                    );
                     Assert.Equal(Path.Combine("pedir", "Documents.Embedded.pdb"), pathQueried);
 
                     Assert.Equal(Path.Combine("pedir", "Documents.Embedded.pdb"), pdbPath);
@@ -439,7 +646,10 @@ namespace System.Reflection.PortableExecutable.Tests
         [Fact]
         public void TryOpenAssociatedPortablePdb_UnixStylePath()
         {
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/abc/def.xyz", id, portablePdbVersion: 0x0100);
 
@@ -458,7 +668,14 @@ namespace System.Reflection.PortableExecutable.Tests
 
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
-                Assert.False(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
+                Assert.False(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
                 Assert.Equal(Path.Combine("pedir", "def.xyz"), pathQueried);
             }
         }
@@ -466,7 +683,10 @@ namespace System.Reflection.PortableExecutable.Tests
         [Fact]
         public void TryOpenAssociatedPortablePdb_WindowsSpecificPath()
         {
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"C:def.xyz", id, portablePdbVersion: 0x0100);
 
@@ -485,7 +705,14 @@ namespace System.Reflection.PortableExecutable.Tests
 
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
-                Assert.False(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
+                Assert.False(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
                 Assert.Equal(Path.Combine("pedir", "def.xyz"), pathQueried);
             }
         }
@@ -493,7 +720,10 @@ namespace System.Reflection.PortableExecutable.Tests
         [Fact]
         public void TryOpenAssociatedPortablePdb_WindowsInvalidCharacters()
         {
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/*/c*.pdb", id, portablePdbVersion: 0x0100);
 
@@ -512,15 +742,28 @@ namespace System.Reflection.PortableExecutable.Tests
 
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
-                Assert.False(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
-                Assert.Equal(PathUtilities.CombinePathWithRelativePath("pedir", "c*.pdb"), pathQueried);
+                Assert.False(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
+                Assert.Equal(
+                    PathUtilities.CombinePathWithRelativePath("pedir", "c*.pdb"),
+                    pathQueried
+                );
             }
         }
 
         [Fact]
         public void TryOpenAssociatedPortablePdb_DuplicateEntries_CodeView()
         {
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/b/a.pdb", id, portablePdbVersion: 0);
             ddBuilder.AddReproducibleEntry();
@@ -542,8 +785,18 @@ namespace System.Reflection.PortableExecutable.Tests
 
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
-                Assert.False(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
-                Assert.Equal(PathUtilities.CombinePathWithRelativePath("pedir", "c.pdb"), pathQueried);
+                Assert.False(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
+                Assert.Equal(
+                    PathUtilities.CombinePathWithRelativePath("pedir", "c.pdb"),
+                    pathQueried
+                );
             }
         }
 
@@ -556,7 +809,10 @@ namespace System.Reflection.PortableExecutable.Tests
             var pdbBuilder2 = new BlobBuilder();
             pdbBuilder2.WriteByte(1);
 
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/b/a.pdb", id, portablePdbVersion: 0x0100);
             ddBuilder.AddReproducibleEntry();
@@ -578,8 +834,18 @@ namespace System.Reflection.PortableExecutable.Tests
 
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
-                Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
-                Assert.Equal(PathUtilities.CombinePathWithRelativePath("pedir", "a.pdb"), pathQueried);
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
+                Assert.Equal(
+                    PathUtilities.CombinePathWithRelativePath("pedir", "a.pdb"),
+                    pathQueried
+                );
                 Assert.Null(pdbPath);
 
                 Assert.Equal(13, pdbProvider.GetMetadataReader().Documents.Count);
@@ -592,7 +858,10 @@ namespace System.Reflection.PortableExecutable.Tests
             var pdbBuilder = new BlobBuilder();
             pdbBuilder.WriteBytes(PortablePdbs.DocumentsPdb);
 
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/b/a.pdb", id, portablePdbVersion: 0x0100);
             ddBuilder.AddEmbeddedPortablePdbEntry(pdbBuilder, portablePdbVersion: 0x0100);
@@ -614,10 +883,20 @@ namespace System.Reflection.PortableExecutable.Tests
 
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
-                Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
 
                 Assert.Null(pdbPath);
-                Assert.Equal(PathUtilities.CombinePathWithRelativePath("pedir", "a.pdb"), pathQueried);
+                Assert.Equal(
+                    PathUtilities.CombinePathWithRelativePath("pedir", "a.pdb"),
+                    pathQueried
+                );
 
                 Assert.Equal(13, pdbProvider.GetMetadataReader().Documents.Count);
             }
@@ -629,7 +908,10 @@ namespace System.Reflection.PortableExecutable.Tests
             var pdbBuilder = new BlobBuilder();
             pdbBuilder.WriteBytes(PortablePdbs.DocumentsPdb);
 
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/b/a.pdb", id, portablePdbVersion: 0x0100);
             ddBuilder.AddEmbeddedPortablePdbEntry(pdbBuilder, portablePdbVersion: 0x0100);
@@ -651,10 +933,20 @@ namespace System.Reflection.PortableExecutable.Tests
 
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
-                Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), streamProvider, out pdbProvider, out pdbPath));
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        streamProvider,
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
 
                 Assert.Null(pdbPath);
-                Assert.Equal(PathUtilities.CombinePathWithRelativePath("pedir", "a.pdb"), pathQueried);
+                Assert.Equal(
+                    PathUtilities.CombinePathWithRelativePath("pedir", "a.pdb"),
+                    pathQueried
+                );
 
                 Assert.Equal(13, pdbProvider.GetMetadataReader().Documents.Count);
             }
@@ -666,7 +958,10 @@ namespace System.Reflection.PortableExecutable.Tests
             var pdbBuilder = new BlobBuilder();
             pdbBuilder.WriteBytes(PortablePdbs.DocumentsPdb);
 
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/b/a.pdb", id, portablePdbVersion: 0x0100);
             ddBuilder.AddEmbeddedPortablePdbEntry(pdbBuilder, portablePdbVersion: 0x0100);
@@ -678,15 +973,45 @@ namespace System.Reflection.PortableExecutable.Tests
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
 
-                Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new IOException(); }, out pdbProvider, out pdbPath));
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        _ =>
+                        {
+                            throw new IOException();
+                        },
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
                 Assert.Null(pdbPath);
                 Assert.Equal(13, pdbProvider.GetMetadataReader().Documents.Count);
 
-                Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new BadImageFormatException(); }, out pdbProvider, out pdbPath));
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        _ =>
+                        {
+                            throw new BadImageFormatException();
+                        },
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
                 Assert.Null(pdbPath);
                 Assert.Equal(13, pdbProvider.GetMetadataReader().Documents.Count);
 
-                Assert.True(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new FileNotFoundException(); }, out pdbProvider, out pdbPath));
+                Assert.True(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        _ =>
+                        {
+                            throw new FileNotFoundException();
+                        },
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
                 Assert.Null(pdbPath);
                 Assert.Equal(13, pdbProvider.GetMetadataReader().Documents.Count);
             }
@@ -698,7 +1023,10 @@ namespace System.Reflection.PortableExecutable.Tests
             var pdbBuilder = new BlobBuilder();
             pdbBuilder.WriteBytes(new byte[] { 0x01 });
 
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/b/a.pdb", id, portablePdbVersion: 0x0100);
             ddBuilder.AddEmbeddedPortablePdbEntry(pdbBuilder, portablePdbVersion: 0x0100);
@@ -711,20 +1039,57 @@ namespace System.Reflection.PortableExecutable.Tests
                 string pdbPath;
 
                 // reports the first error:
-                Assert.Throws<IOException>(() =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new IOException(); }, out pdbProvider, out pdbPath));
+                Assert.Throws<IOException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ =>
+                            {
+                                throw new IOException();
+                            },
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
 
                 // reports the first error:
-                AssertEx.Throws<BadImageFormatException>(() =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new BadImageFormatException("Bang!"); }, out pdbProvider, out pdbPath),
-                    e => Assert.Equal("Bang!", e.Message));
+                AssertEx.Throws<BadImageFormatException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ =>
+                            {
+                                throw new BadImageFormatException("Bang!");
+                            },
+                            out pdbProvider,
+                            out pdbPath
+                        ),
+                    e => Assert.Equal("Bang!", e.Message)
+                );
 
                 // file doesn't exist, fall back to embedded without reporting FileNotFoundExeception
-                Assert.Throws<BadImageFormatException>(() =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new FileNotFoundException(); }, out pdbProvider, out pdbPath));
+                Assert.Throws<BadImageFormatException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ =>
+                            {
+                                throw new FileNotFoundException();
+                            },
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
 
-                Assert.Throws<BadImageFormatException>(() =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => null, out pdbProvider, out pdbPath));
+                Assert.Throws<BadImageFormatException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ => null,
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
             }
         }
 
@@ -734,7 +1099,10 @@ namespace System.Reflection.PortableExecutable.Tests
             var pdbBuilder = new BlobBuilder();
             pdbBuilder.WriteBytes(PortablePdbs.DocumentsPdb);
 
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/b/a.pdb", id, portablePdbVersion: 0x0100);
 
@@ -745,15 +1113,45 @@ namespace System.Reflection.PortableExecutable.Tests
                 MetadataReaderProvider pdbProvider;
                 string pdbPath;
 
-                Assert.Throws<IOException>(() =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new IOException(); }, out pdbProvider, out pdbPath));
+                Assert.Throws<IOException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ =>
+                            {
+                                throw new IOException();
+                            },
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
 
-                AssertEx.Throws<BadImageFormatException>(() =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new BadImageFormatException("Bang!"); }, out pdbProvider, out pdbPath),
-                    e => Assert.Equal("Bang!", e.Message));
+                AssertEx.Throws<BadImageFormatException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ =>
+                            {
+                                throw new BadImageFormatException("Bang!");
+                            },
+                            out pdbProvider,
+                            out pdbPath
+                        ),
+                    e => Assert.Equal("Bang!", e.Message)
+                );
 
                 // file doesn't exist and no embedded => return false
-                Assert.False(reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new FileNotFoundException(); }, out pdbProvider, out pdbPath));
+                Assert.False(
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        _ =>
+                        {
+                            throw new FileNotFoundException();
+                        },
+                        out pdbProvider,
+                        out pdbPath
+                    )
+                );
             }
         }
 
@@ -763,7 +1161,10 @@ namespace System.Reflection.PortableExecutable.Tests
             var pdbBuilder = new BlobBuilder();
             pdbBuilder.WriteBytes(PortablePdbs.DocumentsPdb);
 
-            var id = new BlobContentId(Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"), 0x12345678);
+            var id = new BlobContentId(
+                Guid.Parse("18091B06-32BB-46C2-9C3B-7C9389A2F6C6"),
+                0x12345678
+            );
             var ddBuilder = new DebugDirectoryBuilder();
             ddBuilder.AddCodeViewEntry(@"/a/b/a.pdb", id, portablePdbVersion: 0x0100);
 
@@ -775,14 +1176,53 @@ namespace System.Reflection.PortableExecutable.Tests
                 string pdbPath;
 
                 // pass-thru:
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { throw new ArgumentException(); }, out pdbProvider, out pdbPath));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ =>
+                            {
+                                throw new ArgumentException();
+                            },
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { return new TestStream(canRead: false, canWrite: true, canSeek: true); }, out pdbProvider, out pdbPath));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ =>
+                            {
+                                return new TestStream(
+                                    canRead: false,
+                                    canWrite: true,
+                                    canSeek: true
+                                );
+                            },
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    reader.TryOpenAssociatedPortablePdb(Path.Combine("pedir", "file.exe"), _ => { return new TestStream(canRead: true, canWrite: true, canSeek: false); }, out pdbProvider, out pdbPath));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        reader.TryOpenAssociatedPortablePdb(
+                            Path.Combine("pedir", "file.exe"),
+                            _ =>
+                            {
+                                return new TestStream(
+                                    canRead: true,
+                                    canWrite: true,
+                                    canSeek: false
+                                );
+                            },
+                            out pdbProvider,
+                            out pdbPath
+                        )
+                );
             }
         }
 
@@ -795,7 +1235,9 @@ namespace System.Reflection.PortableExecutable.Tests
             MetadataReaderProvider pdbProvider;
             string pdbPath;
 
-            Assert.True(reader.TryOpenAssociatedPortablePdb(@"x", _ => null, out pdbProvider, out pdbPath));
+            Assert.True(
+                reader.TryOpenAssociatedPortablePdb(@"x", _ => null, out pdbProvider, out pdbPath)
+            );
             Assert.NotNull(pdbProvider);
             Assert.Null(pdbPath);
 
@@ -818,12 +1260,18 @@ namespace System.Reflection.PortableExecutable.Tests
             Assert.Throws<ObjectDisposedException>(() => reader.GetMethodBody(0));
             Assert.Throws<ObjectDisposedException>(() => reader.GetEntireImage());
             Assert.Throws<ObjectDisposedException>(() => reader.ReadDebugDirectory());
-            Assert.Throws<ObjectDisposedException>(() => reader.ReadCodeViewDebugDirectoryData(ddCodeView));
-            Assert.Throws<ObjectDisposedException>(() => reader.ReadEmbeddedPortablePdbDebugDirectoryData(ddEmbedded));
+            Assert.Throws<ObjectDisposedException>(
+                () => reader.ReadCodeViewDebugDirectoryData(ddCodeView)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => reader.ReadEmbeddedPortablePdbDebugDirectoryData(ddEmbedded)
+            );
 
             MetadataReaderProvider __;
             string ___;
-            Assert.Throws<ObjectDisposedException>(() => reader.TryOpenAssociatedPortablePdb(@"x", _ => null, out __, out ___));
+            Assert.Throws<ObjectDisposedException>(
+                () => reader.TryOpenAssociatedPortablePdb(@"x", _ => null, out __, out ___)
+            );
 
             // ok to use providers after PEReader disposed:
             var pdbReader = pdbProvider.GetMetadataReader();
@@ -836,8 +1284,8 @@ namespace System.Reflection.PortableExecutable.Tests
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static MetadataReader GetMetadataReaderFromPEReader()
-            => new PEReader(Misc.Debug.ToImmutableArray()).GetMetadataReader();
+        private static MetadataReader GetMetadataReaderFromPEReader() =>
+            new PEReader(Misc.Debug.ToImmutableArray()).GetMetadataReader();
 
         [Fact, MethodImpl(MethodImplOptions.NoOptimization)]
         public void KeepMetadataAlive()

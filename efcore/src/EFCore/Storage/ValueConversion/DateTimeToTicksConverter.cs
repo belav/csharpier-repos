@@ -19,10 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public DateTimeToTicksConverter()
-            : this(null)
-        {
-        }
+        public DateTimeToTicksConverter() : this(null) { }
 
         /// <summary>
         ///     Creates a new instance of this converter.
@@ -35,11 +32,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public DateTimeToTicksConverter(ConverterMappingHints? mappingHints)
-            : base(
-                v => v.Ticks,
-                v => new DateTime(v),
-                mappingHints)
-        {
-        }
+            : base(v => v.Ticks, v => new DateTime(v), mappingHints) { }
     }
 }

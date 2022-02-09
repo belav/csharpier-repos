@@ -19,8 +19,12 @@ namespace System.Text.RegularExpressions
         public static bool IsMatch(string input, string pattern, RegexOptions options) =>
             RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).IsMatch(input);
 
-        public static bool IsMatch(string input, string pattern, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).IsMatch(input);
+        public static bool IsMatch(
+            string input,
+            string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).IsMatch(input);
 
         /// <summary>
         /// Searches the input string for one or more matches using the previous pattern,
@@ -33,7 +37,8 @@ namespace System.Text.RegularExpressions
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
             }
 
-            return Run(quick: true, -1, input, 0, input.Length, UseOptionR() ? input.Length : 0) is null;
+            return Run(quick: true, -1, input, 0, input.Length, UseOptionR() ? input.Length : 0)
+                is null;
         }
 
         /// <summary>
@@ -65,8 +70,12 @@ namespace System.Text.RegularExpressions
         public static Match Match(string input, string pattern, RegexOptions options) =>
             RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Match(input);
 
-        public static Match Match(string input, string pattern, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).Match(input);
+        public static Match Match(
+            string input,
+            string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).Match(input);
 
         /// <summary>
         /// Matches a regular expression with a string and returns
@@ -106,7 +115,14 @@ namespace System.Text.RegularExpressions
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
             }
 
-            return Run(quick: false, -1, input, beginning, length, UseOptionR() ? beginning + length : beginning)!;
+            return Run(
+                quick: false,
+                -1,
+                input,
+                beginning,
+                length,
+                UseOptionR() ? beginning + length : beginning
+            )!;
         }
 
         /// <summary>
@@ -121,8 +137,12 @@ namespace System.Text.RegularExpressions
         public static MatchCollection Matches(string input, string pattern, RegexOptions options) =>
             RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Matches(input);
 
-        public static MatchCollection Matches(string input, string pattern, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).Matches(input);
+        public static MatchCollection Matches(
+            string input,
+            string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).Matches(input);
 
         /// <summary>
         /// Returns all the successful matches as if Match was called iteratively numerous times.

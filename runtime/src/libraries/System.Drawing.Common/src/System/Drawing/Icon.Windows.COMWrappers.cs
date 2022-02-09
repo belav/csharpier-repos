@@ -30,17 +30,25 @@ namespace System.Drawing
                 PICTDESC pictdesc = PICTDESC.CreateIconPICTDESC(Handle);
                 Guid iid = DrawingCom.IPicture.IID;
                 IntPtr lpPicture;
-                Marshal.ThrowExceptionForHR(OleCreatePictureIndirect(&pictdesc, &iid, fOwn: 0, &lpPicture));
+                Marshal.ThrowExceptionForHR(
+                    OleCreatePictureIndirect(&pictdesc, &iid, fOwn: 0, &lpPicture)
+                );
 
                 IntPtr streamPtr = IntPtr.Zero;
                 try
                 {
                     // Use UniqueInstance here because we never want to cache the wrapper. It only gets used once and then disposed.
-                    using DrawingCom.IPicture picture = (DrawingCom.IPicture)DrawingCom.Instance
-                        .GetOrCreateObjectForComInstance(lpPicture, CreateObjectFlags.UniqueInstance);
+                    using DrawingCom.IPicture picture =
+                        (DrawingCom.IPicture)DrawingCom.Instance.GetOrCreateObjectForComInstance(
+                            lpPicture,
+                            CreateObjectFlags.UniqueInstance
+                        );
 
                     var gpStream = new GPStream(outputStream, makeSeekable: false);
-                    streamPtr = DrawingCom.Instance.GetOrCreateComInterfaceForObject(gpStream, CreateComInterfaceFlags.None);
+                    streamPtr = DrawingCom.Instance.GetOrCreateComInterfaceForObject(
+                        gpStream,
+                        CreateComInterfaceFlags.None
+                    );
 
                     DrawingCom.ThrowExceptionForHR(picture.SaveAsFile(streamPtr, -1, null));
                 }
@@ -62,7 +70,12 @@ namespace System.Drawing
         }
 
         [DllImport(Interop.Libraries.Oleaut32)]
-        private static unsafe extern int OleCreatePictureIndirect(PICTDESC* pictdesc, Guid* refiid, int fOwn, IntPtr* lplpvObj);
+        private static unsafe extern int OleCreatePictureIndirect(
+            PICTDESC* pictdesc,
+            Guid* refiid,
+            int fOwn,
+            IntPtr* lplpvObj
+        );
 
         [StructLayout(LayoutKind.Sequential)]
         private readonly struct PICTDESC

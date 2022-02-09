@@ -19,7 +19,9 @@ namespace System.Collections
     [DebuggerTypeProxy(typeof(System.Collections.Queue.QueueDebugView))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class Queue : ICollection, ICloneable
     {
         private object?[] _array; // Do not rename (binary serialization)
@@ -33,18 +35,12 @@ namespace System.Collections
 
         // Creates a queue with room for capacity objects. The default initial
         // capacity and grow factor are used.
-        public Queue()
-            : this(32, (float)2.0)
-        {
-        }
+        public Queue() : this(32, (float)2.0) { }
 
         // Creates a queue with room for capacity objects. The default grow factor
         // is used.
         //
-        public Queue(int capacity)
-            : this(capacity, (float)2.0)
-        {
-        }
+        public Queue(int capacity) : this(capacity, (float)2.0) { }
 
         // Creates a queue with room for capacity objects. When full, the new
         // capacity is set to the old capacity * growFactor.
@@ -52,9 +48,15 @@ namespace System.Collections
         public Queue(int capacity, float growFactor)
         {
             if (capacity < 0)
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (!(growFactor >= 1.0 && growFactor <= 10.0))
-                throw new ArgumentOutOfRangeException(nameof(growFactor), SR.Format(SR.ArgumentOutOfRange_QueueGrowFactor, 1, 10));
+                throw new ArgumentOutOfRangeException(
+                    nameof(growFactor),
+                    SR.Format(SR.ArgumentOutOfRange_QueueGrowFactor, 1, 10)
+                );
 
             _array = new object[capacity];
             _head = 0;
@@ -75,7 +77,6 @@ namespace System.Collections
             while (en.MoveNext())
                 Enqueue(en.Current);
         }
-
 
         public virtual int Count
         {
@@ -271,7 +272,6 @@ namespace System.Collections
             return arr;
         }
 
-
         // PRIVATE Grows or shrinks the buffer to hold capacity objects. Capacity
         // must be >= _size.
         private void SetCapacity(int capacity)
@@ -301,7 +301,6 @@ namespace System.Collections
             SetCapacity(_size);
         }
 
-
         // Implements a synchronization wrapper around a queue.
         private sealed class SynchronizedQueue : Queue
         {
@@ -321,10 +320,7 @@ namespace System.Collections
 
             public override object SyncRoot
             {
-                get
-                {
-                    return _root;
-                }
+                get { return _root; }
             }
 
             public override int Count
@@ -419,7 +415,6 @@ namespace System.Collections
             }
         }
 
-
         // Implements an enumerator for a Queue.  The enumerator uses the
         // internal version number of the list to ensure that no modifications are
         // made to the list while an enumeration is in progress.
@@ -444,7 +439,8 @@ namespace System.Collections
 
             public bool MoveNext()
             {
-                if (_version != _q._version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _q._version)
+                    throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
 
                 if (_index < 0)
                 {
@@ -477,7 +473,8 @@ namespace System.Collections
 
             public void Reset()
             {
-                if (_version != _q._version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _q._version)
+                    throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 if (_q._size == 0)
                     _index = -1;
                 else
@@ -501,10 +498,7 @@ namespace System.Collections
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public object?[] Items
             {
-                get
-                {
-                    return _queue.ToArray();
-                }
+                get { return _queue.ToArray(); }
             }
         }
     }

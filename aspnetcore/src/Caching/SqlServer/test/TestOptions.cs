@@ -16,9 +16,6 @@ internal class TestSqlServerCacheOptions : IOptions<SqlServerCacheOptions>
 
     public SqlServerCacheOptions Value
     {
-        get
-        {
-            return _innerOptions;
-        }
+        get { return _innerOptions; }
     }
 }

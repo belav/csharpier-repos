@@ -20,10 +20,7 @@ namespace System
                     return null;
                 return handle.Target;
             }
-            set
-            {
-                handle.Target = value;
-            }
+            set { handle.Target = value; }
         }
 
         public virtual bool TrackResurrection => IsTrackResurrection();

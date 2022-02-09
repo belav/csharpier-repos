@@ -20,7 +20,9 @@ namespace System.Transactions
 
     public static class TransactionInterop
     {
-        internal static DistributedTransaction ConvertToDistributedTransaction(Transaction transaction)
+        internal static DistributedTransaction ConvertToDistributedTransaction(
+            Transaction transaction
+        )
         {
             if (null == transaction)
             {
@@ -34,7 +36,9 @@ namespace System.Transactions
 
             if (transaction._complete)
             {
-                throw TransactionException.CreateTransactionCompletedException(transaction.DistributedTxId);
+                throw TransactionException.CreateTransactionCompletedException(
+                    transaction.DistributedTxId
+                );
             }
 
             DistributedTransaction? distributedTx = transaction.Promote();
@@ -58,7 +62,9 @@ namespace System.Transactions
         /// matches this value, then the caller can continue with its enlistment with MSDTC. But if it
         /// does not match, the caller will not be able to enlist with MSDTC.
         /// </summary>
-        public static readonly Guid PromoterTypeDtc = new Guid("14229753-FFE1-428D-82B7-DF73045CB8DA");
+        public static readonly Guid PromoterTypeDtc = new Guid(
+            "14229753-FFE1-428D-82B7-DF73045CB8DA"
+        );
 
         public static byte[] GetExportCookie(Transaction transaction, byte[] whereabouts)
         {
@@ -75,7 +81,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetExportCookie");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetExportCookie"
+                );
             }
 
             // Copy the whereabouts so that it cannot be modified later.
@@ -87,7 +96,10 @@ namespace System.Transactions
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetExportCookie");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetExportCookie"
+                );
             }
 
             return cookie;
@@ -108,7 +120,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransactionFromExportCookie");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetTransactionFromExportCookie"
+                );
             }
 
             var cookieCopy = new byte[cookie.Length];
@@ -127,19 +142,26 @@ namespace System.Transactions
             {
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransactionFromExportCookie");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceDistributed,
+                        "TransactionInterop.GetTransactionFromExportCookie"
+                    );
                 }
 
                 return transaction;
             }
 
             // Find or create the promoted transaction.
-            DistributedTransaction dTx = DistributedTransactionManager.GetTransactionFromExportCookie(cookieCopy, txId);
+            DistributedTransaction dTx =
+                DistributedTransactionManager.GetTransactionFromExportCookie(cookieCopy, txId);
             transaction = TransactionManager.FindOrCreatePromotedTransaction(txId, dTx);
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransactionFromExportCookie");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetTransactionFromExportCookie"
+                );
             }
 
             return transaction;
@@ -155,7 +177,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransmitterPropagationToken");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetTransmitterPropagationToken"
+                );
             }
 
             DistributedTransaction dTx = ConvertToDistributedTransaction(transaction);
@@ -163,13 +188,18 @@ namespace System.Transactions
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransmitterPropagationToken");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetTransmitterPropagationToken"
+                );
             }
 
             return token;
         }
 
-        public static Transaction GetTransactionFromTransmitterPropagationToken(byte[] propagationToken)
+        public static Transaction GetTransactionFromTransmitterPropagationToken(
+            byte[] propagationToken
+        )
         {
             if (null == propagationToken)
             {
@@ -184,7 +214,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransactionFromTransmitterPropagationToken");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetTransactionFromTransmitterPropagationToken"
+                );
             }
 
             // Extract the transaction guid from the propagation token to see if we already have a
@@ -198,20 +231,28 @@ namespace System.Transactions
             {
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransactionFromTransmitterPropagationToken");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceDistributed,
+                        "TransactionInterop.GetTransactionFromTransmitterPropagationToken"
+                    );
                 }
 
                 return tx;
             }
 
-            DistributedTransaction dTx = GetDistributedTransactionFromTransmitterPropagationToken(propagationToken);
+            DistributedTransaction dTx = GetDistributedTransactionFromTransmitterPropagationToken(
+                propagationToken
+            );
 
             // If a transaction is found then FindOrCreate will Dispose the distributed transaction created.
             Transaction returnValue = TransactionManager.FindOrCreatePromotedTransaction(txId, dTx);
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransactionFromTransmitterPropagationToken");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetTransactionFromTransmitterPropagationToken"
+                );
             }
             return returnValue;
         }
@@ -226,7 +267,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetDtcTransaction");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetDtcTransaction"
+                );
             }
 
             DistributedTransaction dTx = ConvertToDistributedTransaction(transaction);
@@ -234,13 +278,18 @@ namespace System.Transactions
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetDtcTransaction");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetDtcTransaction"
+                );
             }
 
             return transactionNative;
         }
 
-        public static Transaction GetTransactionFromDtcTransaction(IDtcTransaction transactionNative)
+        public static Transaction GetTransactionFromDtcTransaction(
+            IDtcTransaction transactionNative
+        )
         {
             if (null == transactionNative)
             {
@@ -250,14 +299,21 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransactionFromDtcTransaction");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetTransactionFromDtcTransaction"
+                );
             }
 
-            Transaction transaction = DistributedTransactionManager.GetTransactionFromDtcTransaction(transactionNative);
+            Transaction transaction =
+                DistributedTransactionManager.GetTransactionFromDtcTransaction(transactionNative);
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetTransactionFromDtcTransaction");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetTransactionFromDtcTransaction"
+                );
             }
             return transaction;
         }
@@ -267,7 +323,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetWhereabouts");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetWhereabouts"
+                );
             }
 
             DistributedTransactionManager dTm = TransactionManager.DistributedTransactionManager;
@@ -275,12 +334,17 @@ namespace System.Transactions
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceDistributed, "TransactionInterop.GetWhereabouts");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceDistributed,
+                    "TransactionInterop.GetWhereabouts"
+                );
             }
             return returnValue;
         }
 
-        internal static DistributedTransaction GetDistributedTransactionFromTransmitterPropagationToken(byte[] propagationToken)
+        internal static DistributedTransaction GetDistributedTransactionFromTransmitterPropagationToken(
+            byte[] propagationToken
+        )
         {
             if (null == propagationToken)
             {
@@ -295,7 +359,9 @@ namespace System.Transactions
             byte[] propagationTokenCopy = new byte[propagationToken.Length];
             Array.Copy(propagationToken, propagationTokenCopy, propagationToken.Length);
 
-            return DistributedTransactionManager.GetDistributedTransactionFromTransmitterPropagationToken(propagationTokenCopy);
+            return DistributedTransactionManager.GetDistributedTransactionFromTransmitterPropagationToken(
+                propagationTokenCopy
+            );
         }
     }
 }

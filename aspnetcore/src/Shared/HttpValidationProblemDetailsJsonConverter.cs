@@ -6,17 +6,26 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Http;
 
-internal sealed class HttpValidationProblemDetailsJsonConverter : JsonConverter<HttpValidationProblemDetails>
+internal sealed class HttpValidationProblemDetailsJsonConverter
+    : JsonConverter<HttpValidationProblemDetails>
 {
     private static readonly JsonEncodedText Errors = JsonEncodedText.Encode("errors");
 
-    public override HttpValidationProblemDetails Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override HttpValidationProblemDetails Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var problemDetails = new HttpValidationProblemDetails();
         return ReadProblemDetails(ref reader, options, problemDetails);
     }
 
-    public static HttpValidationProblemDetails ReadProblemDetails(ref Utf8JsonReader reader, JsonSerializerOptions options, HttpValidationProblemDetails problemDetails)
+    public static HttpValidationProblemDetails ReadProblemDetails(
+        ref Utf8JsonReader reader,
+        JsonSerializerOptions options,
+        HttpValidationProblemDetails problemDetails
+    )
     {
         if (reader.TokenType != JsonTokenType.StartObject)
         {
@@ -27,7 +36,10 @@ internal sealed class HttpValidationProblemDetailsJsonConverter : JsonConverter<
         {
             if (reader.ValueTextEquals(Errors.EncodedUtf8Bytes))
             {
-                var errors = JsonSerializer.Deserialize<Dictionary<string, string[]>>(ref reader, options);
+                var errors = JsonSerializer.Deserialize<Dictionary<string, string[]>>(
+                    ref reader,
+                    options
+                );
                 if (errors is not null)
                 {
                     foreach (var item in errors)
@@ -50,12 +62,20 @@ internal sealed class HttpValidationProblemDetailsJsonConverter : JsonConverter<
         return problemDetails;
     }
 
-    public override void Write(Utf8JsonWriter writer, HttpValidationProblemDetails value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        HttpValidationProblemDetails value,
+        JsonSerializerOptions options
+    )
     {
         WriteProblemDetails(writer, value, options);
     }
 
-    public static void WriteProblemDetails(Utf8JsonWriter writer, HttpValidationProblemDetails value, JsonSerializerOptions options)
+    public static void WriteProblemDetails(
+        Utf8JsonWriter writer,
+        HttpValidationProblemDetails value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
         ProblemDetailsJsonConverter.WriteProblemDetails(writer, value, options);
@@ -64,7 +84,12 @@ internal sealed class HttpValidationProblemDetailsJsonConverter : JsonConverter<
         foreach (var kvp in value.Errors)
         {
             writer.WritePropertyName(kvp.Key);
-            JsonSerializer.Serialize(writer, kvp.Value, kvp.Value?.GetType() ?? typeof(object), options);
+            JsonSerializer.Serialize(
+                writer,
+                kvp.Value,
+                kvp.Value?.GetType() ?? typeof(object),
+                options
+            );
         }
         writer.WriteEndObject();
 

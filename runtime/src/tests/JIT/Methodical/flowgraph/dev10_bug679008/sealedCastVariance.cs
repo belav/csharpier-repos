@@ -13,6 +13,7 @@ internal static class Repro
     {
         return a.GetType() == typeof(Action<object>);
     }
+
     private static int Main()
     {
         Action<string> a = (Action<object>)Console.WriteLine;

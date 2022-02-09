@@ -19,7 +19,8 @@ public class DecimalRouteConstraint : IRouteConstraint, IParameterLiteralNodeMat
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -47,7 +48,12 @@ public class DecimalRouteConstraint : IRouteConstraint, IParameterLiteralNodeMat
 
     private static bool CheckConstraintCore(string? valueString)
     {
-        return decimal.TryParse(valueString, NumberStyles.Number, CultureInfo.InvariantCulture, out _);
+        return decimal.TryParse(
+            valueString,
+            NumberStyles.Number,
+            CultureInfo.InvariantCulture,
+            out _
+        );
     }
 
     bool IParameterLiteralNodeMatchingPolicy.MatchesLiteral(string parameterName, string literal)

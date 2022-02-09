@@ -36,7 +36,9 @@ public class ServicesModelBinderTest
     private static DefaultModelBindingContext GetBindingContext(Type modelType)
     {
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType(modelType).BindingDetails(d => d.BindingSource = BindingSource.Services);
+        metadataProvider
+            .ForType(modelType)
+            .BindingDetails(d => d.BindingSource = BindingSource.Services);
         var modelMetadata = metadataProvider.GetMetadataForType(modelType);
 
         var services = new ServiceCollection();
@@ -63,11 +65,7 @@ public class ServicesModelBinderTest
         return bindingContext;
     }
 
-    private interface IService
-    {
-    }
+    private interface IService { }
 
-    private class Service : IService
-    {
-    }
+    private class Service : IService { }
 }

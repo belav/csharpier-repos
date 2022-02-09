@@ -19,9 +19,9 @@ public class FilterContextTest
         // Arrange
         var filters = new IFilterMetadata[]
         {
-                Mock.Of<ITestFilterPolicy>(),
-                Mock.Of<IAnotherTestFilterPolicy>(),
-                Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<IAnotherTestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
         };
 
         var context = new TestFilterContext(filters);
@@ -39,9 +39,9 @@ public class FilterContextTest
         // Arrange
         var filters = new IFilterMetadata[]
         {
-                Mock.Of<ITestFilterPolicy>(),
-                Mock.Of<IAnotherTestFilterPolicy>(),
-                Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<IAnotherTestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
         };
 
         var context = new TestFilterContext(filters);
@@ -59,8 +59,8 @@ public class FilterContextTest
         // Arrange
         var filters = new IFilterMetadata[]
         {
-                Mock.Of<ITestFilterPolicy>(),
-                Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
         };
 
         var context = new TestFilterContext(filters);
@@ -72,16 +72,15 @@ public class FilterContextTest
         Assert.False(result);
     }
 
-
     [Fact]
     public void FindEffectivePolicy_FindsLastFilter_ReturnsIt()
     {
         // Arrange
         var filters = new IFilterMetadata[]
         {
-                Mock.Of<ITestFilterPolicy>(),
-                Mock.Of<IAnotherTestFilterPolicy>(),
-                Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<IAnotherTestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
         };
 
         var context = new TestFilterContext(filters);
@@ -99,8 +98,8 @@ public class FilterContextTest
         // Arrange
         var filters = new IFilterMetadata[]
         {
-                Mock.Of<ITestFilterPolicy>(),
-                Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
+            Mock.Of<ITestFilterPolicy>(),
         };
 
         var context = new TestFilterContext(filters);
@@ -112,19 +111,20 @@ public class FilterContextTest
         Assert.Null(result);
     }
 
-    internal class ITestFilterPolicy : IFilterMetadata
-    {
-    }
+    internal class ITestFilterPolicy : IFilterMetadata { }
 
-    internal class IAnotherTestFilterPolicy : IFilterMetadata
-    {
-    }
+    internal class IAnotherTestFilterPolicy : IFilterMetadata { }
 
     private class TestFilterContext : FilterContext
     {
         public TestFilterContext(IList<IFilterMetadata> filters)
-            : base(new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor()), filters)
-        {
-        }
+            : base(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new ActionDescriptor()
+                ),
+                filters
+            ) { }
     }
 }

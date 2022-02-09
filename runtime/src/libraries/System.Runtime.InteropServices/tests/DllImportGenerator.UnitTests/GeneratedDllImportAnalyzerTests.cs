@@ -15,7 +15,8 @@ namespace DllImportGenerator.UnitTests
         [ConditionalFact]
         public async Task NonPartialMethod_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -34,24 +35,30 @@ partial class Test
 ";
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(0)
                     .WithArguments("Method1"),
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(1)
                     .WithArguments("Method2"),
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(2)
                     .WithArguments("ExternMethod1"),
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(3)
-                    .WithArguments("ExternMethod2"));
+                    .WithArguments("ExternMethod2")
+            );
         }
 
         [ConditionalFact]
         public async Task NonStaticMethod_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -69,21 +76,26 @@ partial class Test
 ";
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(0)
                     .WithArguments("Method1"),
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(1)
                     .WithArguments("Method2"),
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(3)
-                    .WithArguments("Method1"));
+                    .WithArguments("Method1")
+            );
         }
 
         [ConditionalFact]
         public async Task NonPartialNonStaticMethod_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -102,24 +114,30 @@ partial class Test
 ";
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(0)
                     .WithArguments("Method1"),
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(1)
                     .WithArguments("Method2"),
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(2)
                     .WithArguments("ExternMethod1"),
-                VerifyCS.Diagnostic(GeneratedDllImportMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportMissingModifiers)
                     .WithLocation(3)
-                    .WithArguments("ExternMethod2"));
+                    .WithArguments("ExternMethod2")
+            );
         }
 
         [ConditionalFact]
         public async Task NotGeneratedDllImport_NoDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -133,7 +151,8 @@ partial class Test
         [ConditionalFact]
         public async Task StaticPartialMethod_NoDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -148,10 +167,10 @@ partial class Test
         [InlineData("class")]
         [InlineData("struct")]
         [InlineData("record")]
-
         public async Task NonPartialParentType_Diagnostic(string typeKind)
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 {typeKind} {{|#0:Test|}}
 {{
@@ -162,20 +181,21 @@ using System.Runtime.InteropServices;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(GeneratedDllImportContainingTypeMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportContainingTypeMissingModifiers)
                     .WithLocation(0)
-                    .WithArguments("Test"));
+                    .WithArguments("Test")
+            );
         }
 
         [ConditionalTheory]
         [InlineData("class")]
         [InlineData("struct")]
         [InlineData("record")]
-
         public async Task NonPartialGrandparentType_Diagnostic(string typeKind)
         {
-
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 {typeKind} {{|#0:Test|}}
 {{
@@ -189,9 +209,11 @@ using System.Runtime.InteropServices;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(GeneratedDllImportContainingTypeMissingModifiers)
+                VerifyCS
+                    .Diagnostic(GeneratedDllImportContainingTypeMissingModifiers)
                     .WithLocation(0)
-                    .WithArguments("Test"));
+                    .WithArguments("Test")
+            );
         }
     }
 }

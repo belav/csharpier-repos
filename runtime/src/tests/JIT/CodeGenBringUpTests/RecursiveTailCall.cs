@@ -26,9 +26,8 @@ public struct Struct8
 }
 
 class GenericClass<T> { }
-class GenericException<T> : Exception
-{
-}
+
+class GenericException<T> : Exception { }
 
 public class Test_RecursiveTailCall
 {
@@ -105,10 +104,11 @@ public class Test_RecursiveTailCall
     {
         try
         {
-            if (x == 1) throw new GenericException<T>();
+            if (x == 1)
+                throw new GenericException<T>();
         }
         catch (GenericException<T>)
-        {            
+        {
             return 1;
         }
 
@@ -163,7 +163,7 @@ public class Test_RecursiveTailCall
 
         if (TestGenericContext<GenericClass<int>>(5) != 120)
         {
-           return Fail;
+            return Fail;
         }
 
         return Pass;

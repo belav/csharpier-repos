@@ -22,10 +22,12 @@ internal class HealthChecksBuilder : IHealthChecksBuilder
             throw new ArgumentNullException(nameof(registration));
         }
 
-        Services.Configure<HealthCheckServiceOptions>(options =>
-        {
-            options.Registrations.Add(registration);
-        });
+        Services.Configure<HealthCheckServiceOptions>(
+            options =>
+            {
+                options.Registrations.Add(registration);
+            }
+        );
 
         return this;
     }

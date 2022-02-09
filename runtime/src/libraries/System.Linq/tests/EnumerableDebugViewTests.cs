@@ -17,7 +17,9 @@ namespace System.Linq.Tests
         [Fact]
         public void NonGenericEnumerableDebugView_ThrowsForNullSource()
         {
-            Exception exc = Assert.Throws<TargetInvocationException>(() => CreateSystemCore_EnumerableDebugView(null));
+            Exception exc = Assert.Throws<TargetInvocationException>(
+                () => CreateSystemCore_EnumerableDebugView(null)
+            );
             ArgumentNullException ane = Assert.IsType<ArgumentNullException>(exc.InnerException);
             Assert.Equal("enumerable", ane.ParamName);
         }
@@ -27,9 +29,14 @@ namespace System.Linq.Tests
         {
             IEnumerable source = Enumerable.Range(10, 0);
             object debugView = CreateSystemCore_EnumerableDebugView(source);
-            Exception exc = Assert.Throws<TargetInvocationException>(() => GetItems<object>(debugView));
+            Exception exc = Assert.Throws<TargetInvocationException>(
+                () => GetItems<object>(debugView)
+            );
             Assert.NotNull(exc.InnerException);
-            Assert.Equal("System.Linq.SystemCore_EnumerableDebugViewEmptyException", exc.InnerException.GetType().FullName);
+            Assert.Equal(
+                "System.Linq.SystemCore_EnumerableDebugViewEmptyException",
+                exc.InnerException.GetType().FullName
+            );
             Assert.False(string.IsNullOrEmpty(GetEmptyProperty(exc.InnerException)));
         }
 
@@ -44,7 +51,9 @@ namespace System.Linq.Tests
         [Fact]
         public void GenericEnumerableDebugView_ThrowsForNullSource()
         {
-            Exception exc = Assert.Throws<TargetInvocationException>(() => CreateSystemCore_EnumerableDebugView<int>(null));
+            Exception exc = Assert.Throws<TargetInvocationException>(
+                () => CreateSystemCore_EnumerableDebugView<int>(null)
+            );
             ArgumentNullException ane = Assert.IsType<ArgumentNullException>(exc.InnerException);
             Assert.Equal("enumerable", ane.ParamName);
         }
@@ -54,9 +63,14 @@ namespace System.Linq.Tests
         {
             IEnumerable<int> source = Enumerable.Range(10, 0);
             object debugView = CreateSystemCore_EnumerableDebugView(source);
-            Exception exc = Assert.Throws<TargetInvocationException>(() => GetItems<int>(debugView));
+            Exception exc = Assert.Throws<TargetInvocationException>(
+                () => GetItems<int>(debugView)
+            );
             Assert.NotNull(exc.InnerException);
-            Assert.Equal("System.Linq.SystemCore_EnumerableDebugViewEmptyException", exc.InnerException.GetType().FullName);
+            Assert.Equal(
+                "System.Linq.SystemCore_EnumerableDebugViewEmptyException",
+                exc.InnerException.GetType().FullName
+            );
             Assert.False(string.IsNullOrEmpty(GetEmptyProperty(exc.InnerException)));
         }
 
@@ -70,14 +84,18 @@ namespace System.Linq.Tests
 
         private static object CreateSystemCore_EnumerableDebugView(IEnumerable source)
         {
-            Type edvType = typeof(Enumerable).GetTypeInfo().Assembly.GetType("System.Linq.SystemCore_EnumerableDebugView");
+            Type edvType = typeof(Enumerable)
+                .GetTypeInfo()
+                .Assembly.GetType("System.Linq.SystemCore_EnumerableDebugView");
             ConstructorInfo ctor = edvType.GetTypeInfo().DeclaredConstructors.First();
             return ctor.Invoke(new object[] { source });
         }
 
         private static object CreateSystemCore_EnumerableDebugView<T>(IEnumerable<T> source)
         {
-            Type edvOpenGenericType = typeof(Enumerable).GetTypeInfo().Assembly.GetType("System.Linq.SystemCore_EnumerableDebugView`1");
+            Type edvOpenGenericType = typeof(Enumerable)
+                .GetTypeInfo()
+                .Assembly.GetType("System.Linq.SystemCore_EnumerableDebugView`1");
             Type edvClosedGenericType = edvOpenGenericType.MakeGenericType(typeof(T));
             ConstructorInfo ctor = edvClosedGenericType.GetTypeInfo().DeclaredConstructors.First();
             return ctor.Invoke(new object[] { source });

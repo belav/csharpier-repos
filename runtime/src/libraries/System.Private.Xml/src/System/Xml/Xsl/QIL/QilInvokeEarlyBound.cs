@@ -19,12 +19,16 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilInvokeEarlyBound(QilNodeType nodeType, QilNode name, QilNode method, QilNode arguments, XmlQueryType resultType)
-            : base(nodeType, name, method, arguments)
+        public QilInvokeEarlyBound(
+            QilNodeType nodeType,
+            QilNode name,
+            QilNode method,
+            QilNode arguments,
+            XmlQueryType resultType
+        ) : base(nodeType, name, method, arguments)
         {
             this.xmlType = resultType;
         }
-
 
         //-----------------------------------------------
         // QilInvokeEarlyBound methods

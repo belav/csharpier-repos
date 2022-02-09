@@ -16,19 +16,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public class WinRTCollectionTests : CSharpTestBase
     {
-        public static MetadataReference[] LegacyRefs
-        { get; }
-        =
-        {
-            AssemblyMetadata.CreateFromImage(TestResources.WinRt.Windows_Languages_WinRTTest).GetReference(display: "WinRTTest"),
-            AssemblyMetadata.CreateFromImage(TestMetadata.ResourcesNet451.SystemCore).GetReference(display: "SystemCore")
-        };
+        public static MetadataReference[] LegacyRefs { get; } =
 
+            {
+                AssemblyMetadata
+                    .CreateFromImage(TestResources.WinRt.Windows_Languages_WinRTTest)
+                    .GetReference(display: "WinRTTest"),
+                AssemblyMetadata
+                    .CreateFromImage(TestMetadata.ResourcesNet451.SystemCore)
+                    .GetReference(display: "SystemCore")
+            };
 
         [Fact, WorkItem(762316, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/762316")]
         public void InheritFromTypeWithProjections()
         {
-            var source = @"
+            var source =
+                @"
 using Windows.UI.Xaml;
  
 public sealed class BehaviorCollection : DependencyObjectCollection
@@ -53,7 +56,7 @@ public sealed class BehaviorCollection : DependencyObjectCollection
         public void IVectorProjectionTests()
         {
             var source =
-@"using System;
+                @"using System;
 using Windows.Data.Json;
 
 public class Class1
@@ -81,7 +84,7 @@ public class Class1
     }
 }";
             string expectedOutput =
-@"False
+                @"False
 0
 0
 b
@@ -90,8 +93,9 @@ b
 
             var verifier = this.CompileAndVerifyOnWin8Only(source, expectedOutput: expectedOutput);
 
-            verifier.VerifyIL("Class1.Main",
-@"{
+            verifier.VerifyIL(
+                "Class1.Main",
+                @"{
 // Code size      174 (0xae)
   .maxstack  3
   .locals init (Windows.Data.Json.JsonArray V_0, //jsonArray
@@ -167,14 +171,15 @@ b
   IL_00a8:  call       ""void System.Console.WriteLine(int)""
   IL_00ad:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void IVectorViewProjectionTests()
         {
             var source =
-@"using System;
+                @"using System;
 using Windows.Foundation;
 
 public class Class1
@@ -186,12 +191,11 @@ public class Class1
     }
 }";
             var expectedOut = "param1test";
-            var verifier = this.CompileAndVerifyOnWin8Only(
-                source,
-                expectedOutput: expectedOut);
+            var verifier = this.CompileAndVerifyOnWin8Only(source, expectedOutput: expectedOut);
 
-            verifier.VerifyIL("Class1.Main",
-@"{
+            verifier.VerifyIL(
+                "Class1.Main",
+                @"{
   // Code size       51 (0x33)
   .maxstack  4
   .locals init (Windows.Foundation.WwwFormUrlDecoder V_0) //results
@@ -210,14 +214,15 @@ public class Class1
   IL_0028:  call       ""string string.Concat(string, string)""
   IL_002d:  callvirt   ""void System.IO.TextWriter.WriteLine(string)""
   IL_0032:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void IMapProjectionTests()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.DataTransfer;
 
@@ -246,17 +251,16 @@ public class Class1
 }";
 
             var expectedOut =
-@"True
+                @"True
 testValue1
 testValue2
 testKey2testValue3
 ";
-            var verifier = this.CompileAndVerifyOnWin8Only(
-                source,
-                expectedOutput: expectedOut);
+            var verifier = this.CompileAndVerifyOnWin8Only(source, expectedOutput: expectedOut);
 
-            verifier.VerifyIL("Class1.Main",
-@"{
+            verifier.VerifyIL(
+                "Class1.Main",
+                @"{
   // Code size      225 (0xe1)
   .maxstack  4
   .locals init (Windows.ApplicationModel.DataTransfer.DataPackagePropertySet V_0, //dpps
@@ -330,7 +334,8 @@ testKey2testValue3
   IL_00d9:  callvirt   ""bool System.Collections.IEnumerator.MoveNext()""
   IL_00de:  brtrue.s   IL_00a9
   IL_00e0:  ret
-}");
+}"
+            );
         }
 
         // TODO: There are no suitable winmd members to test the IMapView projections,
@@ -340,7 +345,7 @@ testKey2testValue3
         public void MultipleInterfaceMethodConflictTests()
         {
             var source =
-@"using Windows.Data.Json;
+                @"using Windows.Data.Json;
 using Windows.Foundation;
 
 public class Class1
@@ -357,16 +362,17 @@ public class Class1
             // GetEnumerator method at all.
             comp.VerifyDiagnostics(
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "GetEnumerator")
-                .WithArguments("Windows.Data.Json.JsonArray", "GetEnumerator"),
+                    .WithArguments("Windows.Data.Json.JsonArray", "GetEnumerator"),
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "GetEnumerator")
-                .WithArguments("Windows.Foundation.WwwFormUrlDecoder", "GetEnumerator"));
+                    .WithArguments("Windows.Foundation.WwwFormUrlDecoder", "GetEnumerator")
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest01()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -434,9 +440,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (3,1): info CS8019: Unnecessary using directive.
                 // using System.Reflection;
@@ -446,9 +454,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestIIterableMembers",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIIterableMembers",
+                @"{
   // Code size       41 (0x29)
   .maxstack  2
   IL_0000:  ldstr      ""===  IIterableFloat  ===""
@@ -464,14 +474,15 @@ class AllMembers
   IL_0022:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_0027:  pop
   IL_0028:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest02()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -1474,14 +1485,15 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest03()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -1831,10 +1843,12 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
                 //FIXME: Can't verify because the metadata adapter isn't implemented yet
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (3,1): info CS8019: Unnecessary using directive.
                 // using System.Reflection;
@@ -1844,9 +1858,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestIMapIntIntMembers",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIMapIntIntMembers",
+                @"{
   // Code size      756 (0x2f4)
   .maxstack  4
   .locals init (int V_0, //val
@@ -2125,9 +2141,11 @@ class AllMembers
   IL_02ed:  call       ""bool AllMembers.ValidateValue(object, object)""
   IL_02f2:  pop
   IL_02f3:  ret
-}");
-            verifier.VerifyIL("AllMembers.TestIMapIntStructMembers",
-@"
+}"
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIMapIntStructMembers",
+                @"
 {
   // Code size      790 (0x316)
   .maxstack  5
@@ -2415,9 +2433,11 @@ class AllMembers
   IL_0314:  pop
   IL_0315:  ret
 }
-");
-            verifier.VerifyIL("AllMembers.TestIMapExplicitAddMembers",
-@"{
+"
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIMapExplicitAddMembers",
+                @"{
   // Code size      112 (0x70)
   .maxstack  4
   IL_0000:  newobj     ""Windows.Languages.WinRTTest.IMapExplicitAdd..ctor()""
@@ -2461,9 +2481,11 @@ class AllMembers
   IL_0069:  call       ""bool AllMembers.ValidateValue(object, object)""
   IL_006e:  pop
   IL_006f:  ret
-}");
-            verifier.VerifyIL("AllMembers.TestIMapViewMembers",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIMapViewMembers",
+                @"{
   // Code size       32 (0x20)
   .maxstack  2
   IL_0000:  newobj     ""Windows.Languages.WinRTTest.IMapViewIntInt..ctor()""
@@ -2477,9 +2499,11 @@ class AllMembers
   IL_0019:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_001e:  pop
   IL_001f:  ret
-}");
-            verifier.VerifyIL("AllMembers.TestIMapIntIMapViewIntStructMembers",
-@"
+}"
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIMapIntIMapViewIntStructMembers",
+                @"
 {
   // Code size      790 (0x316)
   .maxstack  5
@@ -2769,14 +2793,15 @@ class AllMembers
   IL_0314:  pop
   IL_0315:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest04()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -3192,9 +3217,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (3,1): info CS8019: Unnecessary using directive.
                 // using System.Reflection;
@@ -3204,9 +3231,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestIVectorIntIVectorViewIntIMapIntIntIMapViewIntIntMembers",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIVectorIntIVectorViewIntIMapIntIntIMapViewIntIntMembers",
+                @"{
   // Code size     1497 (0x5d9)
   .maxstack  4
   .locals init (Windows.Languages.WinRTTest.IVectorIntIVectorViewIntIMapIntIntIMapViewIntInt V_0, //v
@@ -3770,9 +3799,11 @@ class AllMembers
   IL_05d2:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_05d7:  pop
   IL_05d8:  ret
-}");
-            verifier.VerifyIL("AllMembers.TestIVectorStructIVectorViewStructIMapIntStructIMapViewIntStructMembers",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIVectorStructIVectorViewStructIMapIntStructIMapViewIntStructMembers",
+                @"{
   // Code size     1395 (0x573)
   .maxstack  5
   .locals init (Windows.Languages.WinRTTest.IVectorStructIVectorViewStructIMapIntStructIMapViewIntStruct V_0, //v
@@ -4294,14 +4325,15 @@ class AllMembers
   IL_0571:  pop
   IL_0572:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest05()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -4435,9 +4467,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (3,1): info CS8019: Unnecessary using directive.
                 // using System.Reflection;
@@ -4447,9 +4481,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestISimpleInterfaceImplMembers",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestISimpleInterfaceImplMembers",
+                @"{
   // Code size      686 (0x2ae)
   .maxstack  3
   .locals init (Windows.Languages.WinRTTest.ISimpleInterfaceImpl V_0, //v
@@ -4720,14 +4756,15 @@ class AllMembers
   IL_02a7:  call       ""bool AllMembers.ValidateValue(object, object)""
   IL_02ac:  pop
   IL_02ad:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest06()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -4801,9 +4838,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (3,1): info CS8019: Unnecessary using directive.
                 // using System.Reflection;
@@ -4813,9 +4852,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestCollectionInitializers",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestCollectionInitializers",
+                @"{
   // Code size      236 (0xec)
   .maxstack  6
   IL_0000:  newobj     ""Windows.Languages.WinRTTest.IVectorInt..ctor()""
@@ -4902,14 +4943,15 @@ class AllMembers
   IL_00e5:  call       ""bool AllMembers.ValidateValue(object, object)""
   IL_00ea:  pop
   IL_00eb:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest07()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -4987,9 +5029,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
 
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
@@ -5000,10 +5044,12 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Reflection;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
 
-            verifier.VerifyIL("AllMembers.TestExpressionTreeCompiler",
-@"
+            verifier.VerifyIL(
+                "AllMembers.TestExpressionTreeCompiler",
+                @"
 {
   // Code size      213 (0xd5)
   .maxstack  6
@@ -5077,14 +5123,15 @@ class AllMembers
     IL_00d2:  leave.s    IL_00d4
   }
   IL_00d4:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest09()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -5184,10 +5231,12 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
                 verify: Verification.Fails,
-                options: TestOptions.ReleaseExe.WithModuleName("MODULE"));
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE")
+            );
 
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
@@ -5198,10 +5247,12 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Reflection;"),
                 // (4,1): info CS8019: Unnecessary using directive.
                 // using System.Linq.Expressions;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"));
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;")
+            );
 
-            verifier.VerifyIL("AllMembers.TestLINQ",
-@"
+            verifier.VerifyIL(
+                "AllMembers.TestLINQ",
+                @"
 {
   // Code size      360 (0x168)
   .maxstack  4
@@ -5324,14 +5375,15 @@ class AllMembers
   }
   IL_0167:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest10()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -5405,9 +5457,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -5420,9 +5474,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestNamedArguments",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestNamedArguments",
+                @"{
   // Code size      115 (0x73)
   .maxstack  4
   IL_0000:  newobj     ""Windows.Languages.WinRTTest.IVectorInt..ctor()""
@@ -5465,14 +5521,15 @@ class AllMembers
   IL_006c:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_0071:  pop
   IL_0072:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest11()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -5542,9 +5599,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -5557,9 +5616,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestNullableArgs",
-@"
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestNullableArgs",
+                @"
 {
   // Code size       80 (0x50)
   .maxstack  3
@@ -5590,14 +5651,15 @@ class AllMembers
   IL_004e:  pop
   IL_004f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest12()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -5690,32 +5752,47 @@ namespace Test
         }
     }
 }";
-            var comp = CreateCompilationWithWinRT(source, references: LegacyRefs, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilationWithWinRT(
+                source,
+                references: LegacyRefs,
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyDiagnostics(
-    // (30,36): error CS0539: 'R.this[int]' in explicit interface declaration is not a member of interface
-    //         int IObservableVector<int>.this[int index]
-    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "this").WithArguments("Test.R.this[int]").WithLocation(30, 36),
-    // (13,53): warning CS0067: The event 'R.VectorChanged' is never used
-    //         public event VectorChangedEventHandler<int> VectorChanged;
-    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "VectorChanged").WithArguments("Test.R.VectorChanged").WithLocation(13, 53),
-    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-    Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1),
-    // (2,1): hidden CS8019: Unnecessary using directive.
-    // using System.Reflection;
-    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Reflection;").WithLocation(2, 1),
-    // (4,1): hidden CS8019: Unnecessary using directive.
-    // using System.Threading;
-    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Threading;").WithLocation(4, 1),
-    // (3,1): hidden CS8019: Unnecessary using directive.
-    // using System.Runtime.InteropServices;
-    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(3, 1));
+                // (30,36): error CS0539: 'R.this[int]' in explicit interface declaration is not a member of interface
+                //         int IObservableVector<int>.this[int index]
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "this")
+                    .WithArguments("Test.R.this[int]")
+                    .WithLocation(30, 36),
+                // (13,53): warning CS0067: The event 'R.VectorChanged' is never used
+                //         public event VectorChangedEventHandler<int> VectorChanged;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "VectorChanged")
+                    .WithArguments("Test.R.VectorChanged")
+                    .WithLocation(13, 53),
+                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1),
+                // (2,1): hidden CS8019: Unnecessary using directive.
+                // using System.Reflection;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Reflection;")
+                    .WithLocation(2, 1),
+                // (4,1): hidden CS8019: Unnecessary using directive.
+                // using System.Threading;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Threading;")
+                    .WithLocation(4, 1),
+                // (3,1): hidden CS8019: Unnecessary using directive.
+                // using System.Runtime.InteropServices;
+                Diagnostic(
+                        ErrorCode.HDN_UnusedUsingDirective,
+                        "using System.Runtime.InteropServices;"
+                    )
+                    .WithLocation(3, 1)
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest13()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -5812,9 +5889,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -5827,9 +5906,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestIBindableVectorMembers",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIBindableVectorMembers",
+                @"{
   // Code size      410 (0x19a)
   .maxstack  4
   .locals init (int[] V_0) //arr
@@ -5983,14 +6064,15 @@ class AllMembers
   IL_0193:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_0198:  pop
   IL_0199:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest14()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -6039,9 +6121,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -6057,9 +6141,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"),
                 // (7,1): info CS8019: Unnecessary using directive.
                 // using System.Collections;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;"));
-            verifier.VerifyIL("AllMembers.TestIBindableIterableMembers",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIBindableIterableMembers",
+                @"{
   // Code size       42 (0x2a)
   .maxstack  2
   IL_0000:  ldstr      ""===  IBindableIterableSimple  ===""
@@ -6075,14 +6161,15 @@ class AllMembers
   IL_0023:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_0028:  pop
   IL_0029:  ret
-}");
+}"
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/386")]
         public void LegacyCollectionTest15()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -6238,9 +6325,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (3,1): info CS8019: Unnecessary using directive.
                 // using System.Reflection;
@@ -6250,9 +6339,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestIBindableVectorIVectorIntMembers",
-@"
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIBindableVectorIVectorIntMembers",
+                @"
 {
   // Code size      748 (0x2ec)
   .maxstack  4
@@ -6541,14 +6632,15 @@ class AllMembers
   IL_02e5:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_02ea:  pop
   IL_02eb:  ret
-}");
+}"
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/386")]
         public void LegacyCollectionTest16()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -6597,9 +6689,11 @@ class AllMembers
         return FailedCount;
     }
 }";
-            var verifier = CompileAndVerifyWithWinRt(source,
+            var verifier = CompileAndVerifyWithWinRt(
+                source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -6612,9 +6706,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.TestIBindableIterableIIterableMembers",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.TestIBindableIterableIIterableMembers",
+                @"{
   // Code size       41 (0x29)
   .maxstack  2
   IL_0000:  ldstr      ""===  IBindableIterableIIterable  ===""
@@ -6630,14 +6726,15 @@ class AllMembers
   IL_0022:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_0027:  pop
   IL_0028:  ret
-}");
+}"
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/386")]
         public void LegacyCollectionTest17()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -6760,7 +6857,8 @@ class AllMembers
             var verifier = CompileAndVerifyWithWinRt(
                 source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -6773,9 +6871,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq.Expressions;"),
                 // (6,1): info CS8019: Unnecessary using directive.
                 // using System.Linq;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
-            verifier.VerifyIL("AllMembers.INotifyCollectionAndBindableVectorMembers",
-@"
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.INotifyCollectionAndBindableVectorMembers",
+                @"
 {
   // Code size      477 (0x1dd)
   .maxstack  4
@@ -6955,14 +7055,15 @@ class AllMembers
   IL_01d6:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_01db:  pop
   IL_01dc:  ret
-}");
+}"
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/386")]
         public void LegacyCollectionTest18()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -7032,7 +7133,8 @@ class AllMembers
             var verifier = CompileAndVerifyWithWinRt(
                 source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -7048,9 +7150,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"),
                 // (7,1): info CS8019: Unnecessary using directive.
                 // using System.Collections;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;"));
-            verifier.VerifyIL("AllMembers.INotifyCollectionChangedMembers",
-@"
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.INotifyCollectionChangedMembers",
+                @"
 {
   // Code size       82 (0x52)
   .maxstack  3
@@ -7082,14 +7186,15 @@ class AllMembers
   IL_004b:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_0050:  pop
   IL_0051:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest19()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -7159,7 +7264,8 @@ class AllMembers
             var verifier = CompileAndVerifyWithWinRt(
                 source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -7175,9 +7281,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"),
                 // (7,1): info CS8019: Unnecessary using directive.
                 // using System.Collections;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;"));
-            verifier.VerifyIL("AllMembers.INotifyCollectionChangedMembers",
-@"
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.INotifyCollectionChangedMembers",
+                @"
 {
   // Code size       82 (0x52)
   .maxstack  3
@@ -7209,14 +7317,15 @@ class AllMembers
   IL_004b:  call       ""bool AllMembers.ValidateMethod(Windows.Languages.WinRTTest.TestMethodCalled, Windows.Languages.WinRTTest.TestMethodCalled)""
   IL_0050:  pop
   IL_0051:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LegacyCollectionTest20()
         {
             var source =
-@"using Windows.Languages.WinRTTest;
+                @"using Windows.Languages.WinRTTest;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
@@ -7280,7 +7389,8 @@ class AllMembers
             var verifier = CompileAndVerifyWithWinRt(
                 source,
                 references: LegacyRefs,
-                verify: Verification.Fails);
+                verify: Verification.Fails
+            );
             verifier.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Collections.Generic;
@@ -7296,9 +7406,11 @@ class AllMembers
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"),
                 // (7,1): info CS8019: Unnecessary using directive.
                 // using System.Collections;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;"));
-            verifier.VerifyIL("AllMembers.IPropertyChangedMembers",
-@"
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;")
+            );
+            verifier.VerifyIL(
+                "AllMembers.IPropertyChangedMembers",
+                @"
 {
   // Code size       82 (0x52)
   .maxstack  3
@@ -7331,14 +7443,15 @@ class AllMembers
   IL_0050:  pop
   IL_0051:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void WinRTCompilationReference()
         {
             var source =
-@"using System.Collections;
+                @"using System.Collections;
 using System.Collections.Generic;
 
 namespace Test
@@ -7359,17 +7472,19 @@ namespace Test
             var verifier = CompileAndVerifyWithWinRt(source, options: TestOptions.ReleaseWinMD);
 
             verifier.VerifyDiagnostics();
-            verifier.VerifyIL("Test.C.GetEnumerator()",
-@"{
+            verifier.VerifyIL(
+                "Test.C.GetEnumerator()",
+                @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldnull
   IL_0001:  ret
-}");
+}"
+            );
 
             var compRef = verifier.Compilation.ToMetadataReference();
             source =
-@"using System;
+                @"using System;
 using Test;
 
 namespace Test2
@@ -7383,27 +7498,30 @@ namespace Test2
         }
     }
 }";
-            verifier = CompileAndVerifyWithWinRt(source,
-                references: new[] { compRef });
+            verifier = CompileAndVerifyWithWinRt(source, references: new[] { compRef });
             verifier.VerifyDiagnostics(
                 // (1,1): info CS8019: Unnecessary using directive.
                 // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;"));
-            verifier.VerifyIL("Test2.D.Main",
-@"{
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
+            );
+            verifier.VerifyIL(
+                "Test2.D.Main",
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  newobj     ""Test.C..ctor()""
   IL_0005:  callvirt   ""System.Collections.Generic.IEnumerator<int> Test.C.GetEnumerator()""
   IL_000a:  pop
   IL_000b:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(1034461, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1034461")]
         public void Bug1034461()
         {
-            var source = @"
+            var source =
+                @"
 using Windows.Data.Json;
 
 public class Class1
@@ -7421,9 +7539,19 @@ public class Class1
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var add = tree.GetRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.IdentifierName) && ((IdentifierNameSyntax)n).Identifier.ValueText == "Add").Single();
+            var add = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "Add"
+                )
+                .Single();
             var addMethod = model.GetSymbolInfo(add).Symbol;
-            Assert.Equal("void System.Collections.Generic.IDictionary<System.String, Windows.Data.Json.IJsonValue>.Add(System.String key, Windows.Data.Json.IJsonValue value)", addMethod.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Collections.Generic.IDictionary<System.String, Windows.Data.Json.IJsonValue>.Add(System.String key, Windows.Data.Json.IJsonValue value)",
+                addMethod.ToTestDisplayString()
+            );
 
             var jsonObj = ((MemberAccessExpressionSyntax)add.Parent).Expression;
 

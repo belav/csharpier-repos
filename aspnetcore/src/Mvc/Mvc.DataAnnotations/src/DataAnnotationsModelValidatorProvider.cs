@@ -33,7 +33,8 @@ internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedMode
     public DataAnnotationsModelValidatorProvider(
         IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
         IOptions<MvcDataAnnotationsLocalizationOptions> options,
-        IStringLocalizerFactory? stringLocalizerFactory)
+        IStringLocalizerFactory? stringLocalizerFactory
+    )
     {
         if (validationAttributeAdapterProvider == null)
         {
@@ -52,11 +53,15 @@ internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedMode
     public void CreateValidators(ModelValidatorProviderContext context)
     {
         IStringLocalizer? stringLocalizer = null;
-        if (_stringLocalizerFactory != null && _options.Value.DataAnnotationLocalizerProvider != null)
+        if (
+            _stringLocalizerFactory != null
+            && _options.Value.DataAnnotationLocalizerProvider != null
+        )
         {
             stringLocalizer = _options.Value.DataAnnotationLocalizerProvider(
                 context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
-                _stringLocalizerFactory);
+                _stringLocalizerFactory
+            );
         }
 
         var results = context.Results;
@@ -78,7 +83,8 @@ internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedMode
             var validator = new DataAnnotationsModelValidator(
                 _validationAttributeAdapterProvider,
                 attribute,
-                stringLocalizer);
+                stringLocalizer
+            );
 
             validatorItem.Validator = validator;
             validatorItem.IsReusable = true;
@@ -94,11 +100,9 @@ internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedMode
         // Produce a validator if the type supports IValidatableObject
         if (typeof(IValidatableObject).IsAssignableFrom(context.ModelMetadata.ModelType))
         {
-            context.Results.Add(new ValidatorItem
-            {
-                Validator = new ValidatableObjectAdapter(),
-                IsReusable = true
-            });
+            context.Results.Add(
+                new ValidatorItem { Validator = new ValidatableObjectAdapter(), IsReusable = true }
+            );
         }
     }
 

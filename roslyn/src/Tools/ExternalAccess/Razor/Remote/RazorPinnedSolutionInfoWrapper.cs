@@ -13,10 +13,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         [DataMember(Order = 0)]
         internal readonly PinnedSolutionInfo UnderlyingObject;
 
-        public RazorPinnedSolutionInfoWrapper(PinnedSolutionInfo underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public RazorPinnedSolutionInfoWrapper(PinnedSolutionInfo underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
-        public static implicit operator RazorPinnedSolutionInfoWrapper(PinnedSolutionInfo info)
-            => new(info);
+        public static implicit operator RazorPinnedSolutionInfoWrapper(PinnedSolutionInfo info) =>
+            new(info);
     }
 }

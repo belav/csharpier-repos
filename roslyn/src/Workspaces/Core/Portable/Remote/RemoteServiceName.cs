@@ -45,48 +45,67 @@ namespace Microsoft.CodeAnalysis.Remote
 
         public string ToString(bool isRemoteHost64Bit, bool isRemoteHostServerGC)
         {
-            return CustomServiceName ?? (WellKnownService, isRemoteHost64Bit, isRemoteHostServerGC) switch
-            {
-                (WellKnownServiceHubService.RemoteHost, false, _) => Prefix + nameof(WellKnownServiceHubService.RemoteHost),
-                (WellKnownServiceHubService.RemoteHost, true, false) => Prefix + nameof(WellKnownServiceHubService.RemoteHost) + Suffix64,
-                (WellKnownServiceHubService.RemoteHost, true, true) => Prefix + nameof(WellKnownServiceHubService.RemoteHost) + Suffix64 + SuffixServerGC,
+            return CustomServiceName
+                ?? (WellKnownService, isRemoteHost64Bit, isRemoteHostServerGC) switch
+                {
+                    (WellKnownServiceHubService.RemoteHost, false, _)
+                      => Prefix + nameof(WellKnownServiceHubService.RemoteHost),
+                    (WellKnownServiceHubService.RemoteHost, true, false)
+                      => Prefix + nameof(WellKnownServiceHubService.RemoteHost) + Suffix64,
+                    (WellKnownServiceHubService.RemoteHost, true, true)
+                      => Prefix
+                          + nameof(WellKnownServiceHubService.RemoteHost)
+                          + Suffix64
+                          + SuffixServerGC,
 
-                (WellKnownServiceHubService.IntelliCode, false, _) => IntelliCodeServiceName,
-                (WellKnownServiceHubService.IntelliCode, true, false) => IntelliCodeServiceName + Suffix64,
-                (WellKnownServiceHubService.IntelliCode, true, true) => IntelliCodeServiceName + Suffix64 + SuffixServerGC,
-                (WellKnownServiceHubService.Razor, false, _) => RazorServiceName,
-                (WellKnownServiceHubService.Razor, true, false) => RazorServiceName + Suffix64,
-                (WellKnownServiceHubService.Razor, true, true) => RazorServiceName + Suffix64 + SuffixServerGC,
-                (WellKnownServiceHubService.UnitTestingAnalysisService, false, _) => UnitTestingAnalysisServiceName,
-                (WellKnownServiceHubService.UnitTestingAnalysisService, true, false) => UnitTestingAnalysisServiceName + Suffix64,
-                (WellKnownServiceHubService.UnitTestingAnalysisService, true, true) => UnitTestingAnalysisServiceName + Suffix64 + SuffixServerGC,
-                (WellKnownServiceHubService.LiveUnitTestingBuildService, false, _) => LiveUnitTestingBuildServiceName,
-                (WellKnownServiceHubService.LiveUnitTestingBuildService, true, false) => LiveUnitTestingBuildServiceName + Suffix64,
-                (WellKnownServiceHubService.LiveUnitTestingBuildService, true, true) => LiveUnitTestingBuildServiceName + Suffix64 + SuffixServerGC,
-                (WellKnownServiceHubService.UnitTestingSourceLookupService, false, _) => UnitTestingSourceLookupServiceName,
-                (WellKnownServiceHubService.UnitTestingSourceLookupService, true, false) => UnitTestingSourceLookupServiceName + Suffix64,
-                (WellKnownServiceHubService.UnitTestingSourceLookupService, true, true) => UnitTestingSourceLookupServiceName + Suffix64 + SuffixServerGC,
+                    (WellKnownServiceHubService.IntelliCode, false, _) => IntelliCodeServiceName,
+                    (WellKnownServiceHubService.IntelliCode, true, false)
+                      => IntelliCodeServiceName + Suffix64,
+                    (WellKnownServiceHubService.IntelliCode, true, true)
+                      => IntelliCodeServiceName + Suffix64 + SuffixServerGC,
+                    (WellKnownServiceHubService.Razor, false, _) => RazorServiceName,
+                    (WellKnownServiceHubService.Razor, true, false) => RazorServiceName + Suffix64,
+                    (WellKnownServiceHubService.Razor, true, true)
+                      => RazorServiceName + Suffix64 + SuffixServerGC,
+                    (WellKnownServiceHubService.UnitTestingAnalysisService, false, _)
+                      => UnitTestingAnalysisServiceName,
+                    (WellKnownServiceHubService.UnitTestingAnalysisService, true, false)
+                      => UnitTestingAnalysisServiceName + Suffix64,
+                    (WellKnownServiceHubService.UnitTestingAnalysisService, true, true)
+                      => UnitTestingAnalysisServiceName + Suffix64 + SuffixServerGC,
+                    (WellKnownServiceHubService.LiveUnitTestingBuildService, false, _)
+                      => LiveUnitTestingBuildServiceName,
+                    (WellKnownServiceHubService.LiveUnitTestingBuildService, true, false)
+                      => LiveUnitTestingBuildServiceName + Suffix64,
+                    (WellKnownServiceHubService.LiveUnitTestingBuildService, true, true)
+                      => LiveUnitTestingBuildServiceName + Suffix64 + SuffixServerGC,
+                    (WellKnownServiceHubService.UnitTestingSourceLookupService, false, _)
+                      => UnitTestingSourceLookupServiceName,
+                    (WellKnownServiceHubService.UnitTestingSourceLookupService, true, false)
+                      => UnitTestingSourceLookupServiceName + Suffix64,
+                    (WellKnownServiceHubService.UnitTestingSourceLookupService, true, true)
+                      => UnitTestingSourceLookupServiceName + Suffix64 + SuffixServerGC,
 
-                _ => throw ExceptionUtilities.UnexpectedValue(WellKnownService),
-            };
+                    _ => throw ExceptionUtilities.UnexpectedValue(WellKnownService),
+                };
         }
 
-        public override bool Equals(object? obj)
-            => obj is RemoteServiceName name && Equals(name);
+        public override bool Equals(object? obj) => obj is RemoteServiceName name && Equals(name);
 
-        public override int GetHashCode()
-            => Hash.Combine(CustomServiceName, (int)WellKnownService);
+        public override int GetHashCode() => Hash.Combine(CustomServiceName, (int)WellKnownService);
 
-        public bool Equals(RemoteServiceName other)
-            => CustomServiceName == other.CustomServiceName && WellKnownService == other.WellKnownService;
+        public bool Equals(RemoteServiceName other) =>
+            CustomServiceName == other.CustomServiceName
+            && WellKnownService == other.WellKnownService;
 
-        public static bool operator ==(RemoteServiceName left, RemoteServiceName right)
-            => left.Equals(right);
+        public static bool operator ==(RemoteServiceName left, RemoteServiceName right) =>
+            left.Equals(right);
 
-        public static bool operator !=(RemoteServiceName left, RemoteServiceName right)
-            => !(left == right);
+        public static bool operator !=(RemoteServiceName left, RemoteServiceName right) =>
+            !(left == right);
 
-        public static implicit operator RemoteServiceName(WellKnownServiceHubService wellKnownService)
-            => new(wellKnownService);
+        public static implicit operator RemoteServiceName(
+            WellKnownServiceHubService wellKnownService
+        ) => new(wellKnownService);
     }
 }

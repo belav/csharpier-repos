@@ -8,7 +8,11 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_FTruncate", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_FTruncate",
+            SetLastError = true
+        )]
         internal static partial int FTruncate(SafeFileHandle fd, long length);
     }
 }

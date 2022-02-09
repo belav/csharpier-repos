@@ -8,12 +8,19 @@ namespace System.Web.Razor.Test.Framework
 {
     public abstract class MarkupParserTestBase : CodeParserTestBase
     {
-        protected override ParserBase SelectActiveParser(ParserBase codeParser, ParserBase markupParser)
+        protected override ParserBase SelectActiveParser(
+            ParserBase codeParser,
+            ParserBase markupParser
+        )
         {
             return markupParser;
         }
 
-        protected virtual void SingleSpanDocumentTest(string document, BlockType blockType, SpanKind spanType)
+        protected virtual void SingleSpanDocumentTest(
+            string document,
+            BlockType blockType,
+            SpanKind spanType
+        )
         {
             Block b = CreateSimpleBlockAndSpan(document, blockType, spanType);
             ParseDocumentTest(document, b);

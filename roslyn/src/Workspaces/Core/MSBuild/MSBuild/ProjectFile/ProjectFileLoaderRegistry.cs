@@ -18,11 +18,16 @@ namespace Microsoft.CodeAnalysis.MSBuild
         private readonly Dictionary<string, string> _extensionToLanguageMap;
         private readonly NonReentrantLock _dataGuard;
 
-        public ProjectFileLoaderRegistry(HostWorkspaceServices workspaceServices, DiagnosticReporter diagnosticReporter)
+        public ProjectFileLoaderRegistry(
+            HostWorkspaceServices workspaceServices,
+            DiagnosticReporter diagnosticReporter
+        )
         {
             _workspaceServices = workspaceServices;
             _diagnosticReporter = diagnosticReporter;
-            _extensionToLanguageMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            _extensionToLanguageMap = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
             _dataGuard = new NonReentrantLock();
         }
 
@@ -37,12 +42,23 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
         }
 
-        public bool TryGetLoaderFromProjectPath(string? projectFilePath, [NotNullWhen(true)] out IProjectFileLoader? loader)
+        public bool TryGetLoaderFromProjectPath(
+            string? projectFilePath,
+            [NotNullWhen(true)] out IProjectFileLoader? loader
+        )
         {
-            return TryGetLoaderFromProjectPath(projectFilePath, DiagnosticReportingMode.Ignore, out loader);
+            return TryGetLoaderFromProjectPath(
+                projectFilePath,
+                DiagnosticReportingMode.Ignore,
+                out loader
+            );
         }
 
-        public bool TryGetLoaderFromProjectPath(string? projectFilePath, DiagnosticReportingMode mode, [NotNullWhen(true)] out IProjectFileLoader? loader)
+        public bool TryGetLoaderFromProjectPath(
+            string? projectFilePath,
+            DiagnosticReportingMode mode,
+            [NotNullWhen(true)] out IProjectFileLoader? loader
+        )
         {
             using (_dataGuard.DisposableWait())
             {
@@ -63,22 +79,41 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 {
                     if (_workspaceServices.SupportedLanguages.Contains(language))
                     {
-                        loader = _workspaceServices.GetLanguageServices(language).GetService<IProjectFileLoader>();
+                        loader = _workspaceServices
+                            .GetLanguageServices(language)
+                            .GetService<IProjectFileLoader>();
                     }
                     else
                     {
                         loader = null;
-                        _diagnosticReporter.Report(mode, string.Format(WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported, projectFilePath, language));
+                        _diagnosticReporter.Report(
+                            mode,
+                            string.Format(
+                                WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
+                                projectFilePath,
+                                language
+                            )
+                        );
                         return false;
                     }
                 }
                 else
                 {
-                    loader = ProjectFileLoader.GetLoaderForProjectFileExtension(_workspaceServices, extension);
+                    loader = ProjectFileLoader.GetLoaderForProjectFileExtension(
+                        _workspaceServices,
+                        extension
+                    );
 
                     if (loader == null)
                     {
-                        _diagnosticReporter.Report(mode, string.Format(WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language, projectFilePath, Path.GetExtension(projectFilePath)));
+                        _diagnosticReporter.Report(
+                            mode,
+                            string.Format(
+                                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                                projectFilePath,
+                                Path.GetExtension(projectFilePath)
+                            )
+                        );
                         return false;
                     }
                 }
@@ -96,7 +131,14 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     if (commandLineParser == null)
                     {
                         loader = null;
-                        _diagnosticReporter.Report(mode, string.Format(WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported, projectFilePath, language));
+                        _diagnosticReporter.Report(
+                            mode,
+                            string.Format(
+                                WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
+                                projectFilePath,
+                                language
+                            )
+                        );
                         return false;
                     }
                 }

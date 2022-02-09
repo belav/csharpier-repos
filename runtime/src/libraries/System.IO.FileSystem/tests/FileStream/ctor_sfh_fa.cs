@@ -18,25 +18,37 @@ namespace System.IO.Tests
         {
             using (var handle = new SafeFileHandle(new IntPtr(-1), ownsHandle: false))
             {
-                AssertExtensions.Throws<ArgumentException>("handle", () => CreateFileStream(handle, FileAccess.Read));
+                AssertExtensions.Throws<ArgumentException>(
+                    "handle",
+                    () => CreateFileStream(handle, FileAccess.Read)
+                );
             }
         }
 
         [Fact]
         public void InvalidAccess_Throws()
         {
-            using (var handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write))
+            using (
+                var handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write)
+            )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () => CreateFileStream(handle, ~FileAccess.Read));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "access",
+                    () => CreateFileStream(handle, ~FileAccess.Read)
+                );
             }
         }
 
         [Fact]
         public void InvalidAccess_DoesNotCloseHandle()
         {
-            using (var handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write))
+            using (
+                var handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write)
+            )
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => CreateFileStream(handle, ~FileAccess.Read));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => CreateFileStream(handle, ~FileAccess.Read)
+                );
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 Assert.False(handle.IsClosed);
@@ -69,7 +81,9 @@ namespace System.IO.Tests
         [Fact]
         public void FileAccessWrite()
         {
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.Write))
+            using (
+                FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.Write)
+            )
             {
                 using (FileStream fsw = CreateFileStream(fs.SafeFileHandle, FileAccess.Write))
                 {
@@ -158,7 +172,8 @@ namespace System.IO.Tests
 
         private sealed class DerivedFileStream : FileStream
         {
-            public DerivedFileStream(SafeFileHandle handle, FileAccess access) : base(handle, access) { }
+            public DerivedFileStream(SafeFileHandle handle, FileAccess access)
+                : base(handle, access) { }
 
             public bool CanReadCalled { get; set; }
             public bool CanWriteCalled { get; set; }

@@ -40,7 +40,8 @@ internal sealed class XmlSerializerMvcOptionsSetup : IConfigureOptions<MvcOption
         {
             options.FormatterMappings.SetMediaTypeMappingForFormat(
                 key,
-                MediaTypeHeaderValues.ApplicationXml);
+                MediaTypeHeaderValues.ApplicationXml
+            );
         }
 
         var inputFormatter = new XmlSerializerInputFormatter(options);
@@ -50,6 +51,5 @@ internal sealed class XmlSerializerMvcOptionsSetup : IConfigureOptions<MvcOption
         var outputFormatter = new XmlSerializerOutputFormatter(_loggerFactory);
         outputFormatter.WrapperProviderFactories.Add(new ProblemDetailsWrapperProviderFactory());
         options.OutputFormatters.Add(outputFormatter);
-
     }
 }

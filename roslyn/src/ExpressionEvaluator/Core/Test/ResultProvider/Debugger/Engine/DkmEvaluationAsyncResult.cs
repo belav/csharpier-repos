@@ -16,8 +16,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
     {
         private readonly DkmEvaluationResult _result;
 
-        public DkmEvaluationAsyncResult(DkmEvaluationResult Result)
-            : this()
+        public DkmEvaluationAsyncResult(DkmEvaluationResult Result) : this()
         {
             if (Result == null)
             {
@@ -27,9 +26,15 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             _result = Result;
         }
 
-        public int ErrorCode { get { throw new NotImplementedException(); } }
+        public int ErrorCode
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-        public DkmEvaluationResult Result { get { return _result; } }
+        public DkmEvaluationResult Result
+        {
+            get { return _result; }
+        }
 
         internal Exception Exception { get; set; }
 

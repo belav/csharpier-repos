@@ -136,7 +136,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             uint isSigned = (data < 0 ? 1u : 0u);
             uint udata = unchecked((uint)data);
 
-            // Note that we cannot use CompressData to pack the data value, because of negative values 
+            // Note that we cannot use CompressData to pack the data value, because of negative values
             // like: 0xffffe000 (-8192) which has to be encoded as 1 in 2 bytes, i.e. 0x81 0x00
             // However CompressData would store value 1 as 1 byte: 0x01
             if ((udata & SignMask.ONEBYTE) == 0 || (udata & SignMask.ONEBYTE) == SignMask.ONEBYTE)
@@ -156,7 +156,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return;
             }
 
-            if ((udata & SignMask.FOURBYTE) == 0 || (udata & SignMask.FOURBYTE) == SignMask.FOURBYTE)
+            if (
+                (udata & SignMask.FOURBYTE) == 0 || (udata & SignMask.FOURBYTE) == SignMask.FOURBYTE
+            )
             {
                 udata = ((udata & ~SignMask.FOURBYTE) << 1 | isSigned);
                 Debug.Assert(udata <= 0x1FFFFFFF);
@@ -393,11 +395,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         }
 
         public void EmitMethodSignature(
-            MethodWithToken method, 
+            MethodWithToken method,
             bool enforceDefEncoding,
             bool enforceOwningType,
             SignatureContext context,
-            bool isInstantiatingStub)
+            bool isInstantiatingStub
+        )
         {
             uint flags = 0;
             if (method.Unboxing)
@@ -417,7 +420,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 flags |= (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_OwnerType;
             }
 
-            EmitMethodSpecificationSignature(method, flags, enforceDefEncoding, enforceOwningType, context);
+            EmitMethodSpecificationSignature(
+                method,
+                flags,
+                enforceDefEncoding,
+                enforceOwningType,
+                context
+            );
 
             if (method.ConstrainedType != null)
             {
@@ -437,8 +446,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             EmitUInt(RidFromToken(memberRefToken.Token));
         }
 
-        private void EmitMethodSpecificationSignature(MethodWithToken method, 
-            uint flags, bool enforceDefEncoding, bool enforceOwningType, SignatureContext context)
+        private void EmitMethodSpecificationSignature(
+            MethodWithToken method,
+            uint flags,
+            bool enforceDefEncoding,
+            bool enforceOwningType,
+            SignatureContext context
+        )
         {
             ModuleToken methodToken = method.Token;
 
@@ -449,8 +463,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     if (method.Token.TokenType == CorTokenType.mdtMethodSpec)
                     {
-                        MethodSpecification methodSpecification = methodToken.MetadataReader.GetMethodSpecification((MethodSpecificationHandle)methodToken.Handle);
-                        methodToken = new ModuleToken(methodToken.Module, methodSpecification.Method);
+                        MethodSpecification methodSpecification =
+                            methodToken.MetadataReader.GetMethodSpecification(
+                                (MethodSpecificationHandle)methodToken.Handle
+                            );
+                        methodToken = new ModuleToken(
+                            methodToken.Module,
+                            methodSpecification.Method
+                        );
                     }
                 }
             }
@@ -493,12 +513,19 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 EmitTypeSignature(method.OwningType, context);
             }
             EmitTokenRid(methodToken.Token);
-            if ((flags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation) != 0)
+            if (
+                (flags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation)
+                != 0
+            )
             {
                 Instantiation instantiation = method.Method.Instantiation;
                 EmitUInt((uint)instantiation.Length);
                 SignatureContext outerContext = context.OuterContext;
-                for (int typeParamIndex = 0; typeParamIndex < instantiation.Length; typeParamIndex++)
+                for (
+                    int typeParamIndex = 0;
+                    typeParamIndex < instantiation.Length;
+                    typeParamIndex++
+                )
                 {
                     EmitTypeSignature(instantiation[typeParamIndex], outerContext);
                 }
@@ -508,7 +535,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public void EmitFieldSignature(FieldDesc field, SignatureContext context)
         {
             uint fieldSigFlags = 0;
-            TypeDesc canonOwnerType = field.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific);
+            TypeDesc canonOwnerType = field.OwningType.ConvertToCanonForm(
+                CanonicalFormKind.Specific
+            );
             TypeDesc ownerType = null;
             if (canonOwnerType.HasInstantiation)
             {
@@ -518,14 +547,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (canonOwnerType != field.OwningType)
             {
                 // Convert field to canonical form as this is what the field - module token lookup stores
-                field = field.Context.GetFieldForInstantiatedType(field.GetTypicalFieldDefinition(), (InstantiatedType)canonOwnerType);
+                field = field.Context.GetFieldForInstantiatedType(
+                    field.GetTypicalFieldDefinition(),
+                    (InstantiatedType)canonOwnerType
+                );
             }
 
             ModuleToken fieldToken = context.GetModuleTokenForField(field);
             switch (fieldToken.TokenType)
             {
                 case CorTokenType.mdtMemberRef:
-                    fieldSigFlags |= (uint)ReadyToRunFieldSigFlags.READYTORUN_FIELD_SIG_MemberRefToken;
+                    fieldSigFlags |=
+                        (uint)ReadyToRunFieldSigFlags.READYTORUN_FIELD_SIG_MemberRefToken;
                     break;
 
                 case CorTokenType.mdtFieldDef:
@@ -573,7 +606,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return _builder.ToObjectData();
         }
 
-        public SignatureContext EmitFixup(NodeFactory factory, ReadyToRunFixupKind fixupKind, EcmaModule targetModule, SignatureContext outerContext)
+        public SignatureContext EmitFixup(
+            NodeFactory factory,
+            ReadyToRunFixupKind fixupKind,
+            EcmaModule targetModule,
+            SignatureContext outerContext
+        )
         {
             if (targetModule == outerContext.LocalContext)
             {

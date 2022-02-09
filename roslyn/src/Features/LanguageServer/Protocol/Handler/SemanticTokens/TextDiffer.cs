@@ -27,9 +27,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             IReadOnlyList<int> oldArray,
             int oldIndex,
             IReadOnlyList<int> newArray,
-            int newIndex);
+            int newIndex
+        );
 
-        protected IReadOnlyList<DiffEdit> ComputeDiff(ArraySegment<int> oldArray, ArraySegment<int> newArray)
+        protected IReadOnlyList<DiffEdit> ComputeDiff(
+            ArraySegment<int> oldArray,
+            ArraySegment<int> newArray
+        )
         {
             using var _0 = ArrayBuilder<DiffEdit>.GetInstance(out var edits);
 
@@ -39,7 +43,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             using var _1 = ArrayBuilder<int>.GetInstance(capacity, fillWithValue: 0, out var vf);
             using var _2 = ArrayBuilder<int>.GetInstance(capacity, fillWithValue: 0, out var vr);
 
-            ComputeDiffRecursive(edits, 0, oldArray.Count, 0, newArray.Count, vf, vr, oldArray, newArray);
+            ComputeDiffRecursive(
+                edits,
+                0,
+                oldArray.Count,
+                0,
+                newArray.Count,
+                vf,
+                vr,
+                oldArray,
+                newArray
+            );
 
             return edits.ToArray();
         }
@@ -53,7 +67,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             ArrayBuilder<int> vf,
             ArrayBuilder<int> vr,
             ArraySegment<int> oldArray,
-            ArraySegment<int> newArray)
+            ArraySegment<int> newArray
+        )
         {
             while (lowA < highA && lowB < highB && ContentEquals(oldArray, lowA, newArray, lowB))
             {
@@ -62,7 +77,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 lowB++;
             }
 
-            while (lowA < highA && lowB < highB && ContentEquals(oldArray, highA - 1, newArray, highB - 1))
+            while (
+                lowA < highA
+                && lowB < highB
+                && ContentEquals(oldArray, highA - 1, newArray, highB - 1)
+            )
             {
                 // Skip equal text at the end.
                 highA--;
@@ -90,13 +109,42 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             else
             {
                 // Find the midpoint of the optimal path.
-                var (middleX, middleY) = FindMiddleSnake(lowA, highA, lowB, highB, vf, vr, oldArray, newArray);
+                var (middleX, middleY) = FindMiddleSnake(
+                    lowA,
+                    highA,
+                    lowB,
+                    highB,
+                    vf,
+                    vr,
+                    oldArray,
+                    newArray
+                );
 
                 // Recursively find the midpoint of the left half.
-                ComputeDiffRecursive(edits, lowA, middleX, lowB, middleY, vf, vr, oldArray, newArray);
+                ComputeDiffRecursive(
+                    edits,
+                    lowA,
+                    middleX,
+                    lowB,
+                    middleY,
+                    vf,
+                    vr,
+                    oldArray,
+                    newArray
+                );
 
                 // Recursively find the midpoint of the right half.
-                ComputeDiffRecursive(edits, middleX, highA, middleY, highB, vf, vr, oldArray, newArray);
+                ComputeDiffRecursive(
+                    edits,
+                    middleX,
+                    highA,
+                    middleY,
+                    highB,
+                    vf,
+                    vr,
+                    oldArray,
+                    newArray
+                );
             }
         }
 
@@ -108,7 +156,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             ArrayBuilder<int> vf,
             ArrayBuilder<int> vr,
             ArraySegment<int> oldArray,
-            ArraySegment<int> newArray)
+            ArraySegment<int> newArray
+        )
         {
             var n = highA - lowA;
             var m = highB - lowB;
@@ -137,8 +186,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 {
                     // Find the end of the furthest reaching forward D-path in diagonal k.
                     int x;
-                    if (k == forwardK - d ||
-                        (k != forwardK + d && vf[forwardOffset + k - 1] < vf[forwardOffset + k + 1]))
+                    if (
+                        k == forwardK - d
+                        || (
+                            k != forwardK + d
+                            && vf[forwardOffset + k - 1] < vf[forwardOffset + k + 1]
+                        )
+                    )
                     {
                         // Down
                         x = vf[forwardOffset + k + 1];
@@ -180,8 +234,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 {
                     // Find the end of the furthest reaching reverse D-path in diagonal k+∆.
                     int x;
-                    if (k == reverseK + d ||
-                        (k != reverseK - d && vr[reverseOffset + k - 1] < vr[reverseOffset + k + 1] - 1))
+                    if (
+                        k == reverseK + d
+                        || (
+                            k != reverseK - d
+                            && vr[reverseOffset + k - 1] < vr[reverseOffset + k + 1] - 1
+                        )
+                    )
                     {
                         // Up
                         x = vr[reverseOffset + k - 1];

@@ -53,7 +53,13 @@ public class MapMiddleware
             throw new ArgumentNullException(nameof(context));
         }
 
-        if (context.Request.Path.StartsWithSegments(_options.PathMatch, out var matchedPath, out var remainingPath))
+        if (
+            context.Request.Path.StartsWithSegments(
+                _options.PathMatch,
+                out var matchedPath,
+                out var remainingPath
+            )
+        )
         {
             if (!_options.PreserveMatchedPathSegment)
             {

@@ -13,11 +13,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.GoToDefinition
 {
     internal static class OmniSharpFindDefinitionService
     {
-        internal static async Task<ImmutableArray<OmniSharpNavigableItem>> FindDefinitionsAsync(Document document, int position, CancellationToken cancellationToken)
+        internal static async Task<ImmutableArray<OmniSharpNavigableItem>> FindDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetRequiredLanguageService<IFindDefinitionService>();
-            var result = await service.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
-            return result.NullToEmpty().SelectAsArray(original => new OmniSharpNavigableItem(original.DisplayTaggedParts, original.Document, original.SourceSpan));
+            var result = await service
+                .FindDefinitionsAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
+            return result
+                .NullToEmpty()
+                .SelectAsArray(
+                    original =>
+                        new OmniSharpNavigableItem(
+                            original.DisplayTaggedParts,
+                            original.Document,
+                            original.SourceSpan
+                        )
+                );
         }
     }
 }

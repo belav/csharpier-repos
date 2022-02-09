@@ -11,8 +11,8 @@ namespace System.Configuration
         public const string TimeSpanMinValue = "-10675199.02:48:05.4775808";
         public const string TimeSpanMaxValue = "10675199.02:48:05.4775807";
 
-        public override ConfigurationValidatorBase ValidatorInstance
-            => new TimeSpanValidator(MinValue, MaxValue, ExcludeRange);
+        public override ConfigurationValidatorBase ValidatorInstance =>
+            new TimeSpanValidator(MinValue, MaxValue, ExcludeRange);
 
         public TimeSpan MinValue { get; private set; } = TimeSpan.MinValue;
 
@@ -26,7 +26,10 @@ namespace System.Configuration
                 TimeSpan timeValue = TimeSpan.Parse(value, CultureInfo.InvariantCulture);
 
                 if (MaxValue < timeValue)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Validator_min_greater_than_max);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Validator_min_greater_than_max
+                    );
 
                 MinValue = timeValue;
             }
@@ -40,7 +43,10 @@ namespace System.Configuration
                 TimeSpan timeValue = TimeSpan.Parse(value, CultureInfo.InvariantCulture);
 
                 if (MinValue > timeValue)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Validator_min_greater_than_max);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Validator_min_greater_than_max
+                    );
 
                 MaxValue = timeValue;
             }

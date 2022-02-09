@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         protected Brush _graphicsTagBrush;
         protected Color _graphicsTagColor;
 
-        protected GraphicsTag(IEditorFormatMap editorFormatMap)
-            => _editorFormatMap = editorFormatMap;
+        protected GraphicsTag(IEditorFormatMap editorFormatMap) =>
+            _editorFormatMap = editorFormatMap;
 
         protected virtual void Initialize(IWpfTextView view)
         {
@@ -46,6 +46,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         /// <summary>
         /// This method allows corresponding adornment manager to ask for a graphical glyph.
         /// </summary>
-        public abstract GraphicsResult GetGraphics(IWpfTextView view, Geometry bounds, TextFormattingRunProperties format);
+        public abstract GraphicsResult GetGraphics(
+            IWpfTextView view,
+            Geometry bounds,
+            TextFormattingRunProperties format
+        );
     }
 }

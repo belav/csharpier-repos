@@ -21,23 +21,50 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         public async Task TestGetSemanticTokensAsync()
         {
             var markup =
-@"{|caret:|}// Comment
+                @"{|caret:|}// Comment
 static class C { }";
 
             using var testLspServer = await CreateTestLspServerAsync(markup);
-            var results = await RunGetSemanticTokensAsync(testLspServer, testLspServer.GetLocations("caret").First());
+            var results = await RunGetSemanticTokensAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").First()
+            );
 
             var expectedResults = new LSP.SemanticTokens
             {
                 Data = new int[]
                 {
                     // Line | Char | Len | Token type                                                               | Modifier
-                       0,     0,     10,   SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],      0, // '// Comment'
-                       1,     0,     6,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'static'
-                       0,     7,     5,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'class'
-                       0,     6,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],   (int)TokenModifiers.Static, // 'C'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '{'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '}'
+                    0,
+                    0,
+                    10,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],
+                    0, // '// Comment'
+                    1,
+                    0,
+                    6,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'static'
+                    0,
+                    7,
+                    5,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'class'
+                    0,
+                    6,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],
+                    (int)TokenModifiers.Static, // 'C'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '{'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '}'
                 },
                 ResultId = "1"
             };
@@ -54,7 +81,7 @@ static class C { }";
         public async Task TestAllHandlersAsync()
         {
             var markup =
-@"{|caret:|}// Comment
+                @"{|caret:|}// Comment
 static class C { }
 ";
 
@@ -63,17 +90,41 @@ static class C { }
 
             // 1. Range handler
             var range = new LSP.Range { Start = new Position(1, 0), End = new Position(2, 0) };
-            var rangeResults = await RunGetSemanticTokensRangeAsync(testLspServer, caretLocation, range);
+            var rangeResults = await RunGetSemanticTokensRangeAsync(
+                testLspServer,
+                caretLocation,
+                range
+            );
             var expectedRangeResults = new LSP.SemanticTokens
             {
                 Data = new int[]
                 {
                     // Line | Char | Len | Token type                                                               | Modifier
-                       1,     0,     6,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'static'
-                       0,     7,     5,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'class'
-                       0,     6,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],   (int)TokenModifiers.Static, // 'C'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '{'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '}'
+                    1,
+                    0,
+                    6,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'static'
+                    0,
+                    7,
+                    5,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'class'
+                    0,
+                    6,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],
+                    (int)TokenModifiers.Static, // 'C'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '{'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '}'
                 },
                 ResultId = "1"
             };
@@ -90,38 +141,77 @@ static class C { }
                 Data = new int[]
                 {
                     // Line | Char | Len | Token type                                                               | Modifier
-                       0,     0,     10,   SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],      0, // '// Comment'
-                       1,     0,     6,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'static'
-                       0,     7,     5,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'class'
-                       0,     6,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],   (int)TokenModifiers.Static, // 'C'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '{'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '}'
+                    0,
+                    0,
+                    10,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],
+                    0, // '// Comment'
+                    1,
+                    0,
+                    6,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'static'
+                    0,
+                    7,
+                    5,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'class'
+                    0,
+                    6,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],
+                    (int)TokenModifiers.Static, // 'C'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '{'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '}'
                 },
                 ResultId = "2"
             };
 
-            await VerifyNoMultiLineTokens(testLspServer, wholeDocResults.Data!).ConfigureAwait(false);
+            await VerifyNoMultiLineTokens(testLspServer, wholeDocResults.Data!)
+                .ConfigureAwait(false);
             Assert.Equal(expectedWholeDocResults.Data, wholeDocResults.Data);
             Assert.Equal(expectedWholeDocResults.ResultId, wholeDocResults.ResultId);
             Assert.True(wholeDocResults is RoslynSemanticTokens);
 
             // 3. Edits handler - insert newline at beginning of file
-            var newMarkup = @"
+            var newMarkup =
+                @"
 // Comment
 static class C { }
 ";
 
             await UpdateDocumentTextAsync(newMarkup, testLspServer.TestWorkspace);
-            var editResults = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "2");
+            var editResults = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "2"
+            );
 
-            var expectedEdit = new LSP.SemanticTokensEdit { Start = 0, DeleteCount = 1, Data = new int[] { 1 } };
+            var expectedEdit = new LSP.SemanticTokensEdit
+            {
+                Start = 0,
+                DeleteCount = 1,
+                Data = new int[] { 1 }
+            };
 
             Assert.Equal(expectedEdit, ((LSP.SemanticTokensDelta)editResults).Edits.First());
             Assert.Equal("3", ((LSP.SemanticTokensDelta)editResults).ResultId);
             Assert.True((LSP.SemanticTokensDelta)editResults is RoslynSemanticTokensDelta);
 
             // 4. Edits handler - no changes (ResultId should remain same)
-            var editResultsNoChange = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "3");
+            var editResultsNoChange = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "3"
+            );
             Assert.Equal("3", ((LSP.SemanticTokensDelta)editResultsNoChange).ResultId);
             Assert.True((LSP.SemanticTokensDelta)editResultsNoChange is RoslynSemanticTokensDelta);
 
@@ -132,17 +222,42 @@ static class C { }
                 Data = new int[]
                 {
                     // Line | Char | Len | Token type                                                               | Modifier
-                       1,     0,     10,   SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],      0, // '// Comment'
-                       1,     0,     6,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'static'
-                       0,     7,     5,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'class'
-                       0,     6,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],   (int)TokenModifiers.Static, // 'C'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '{'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '}'
+                    1,
+                    0,
+                    10,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],
+                    0, // '// Comment'
+                    1,
+                    0,
+                    6,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'static'
+                    0,
+                    7,
+                    5,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'class'
+                    0,
+                    6,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],
+                    (int)TokenModifiers.Static, // 'C'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '{'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '}'
                 },
                 ResultId = "4"
             };
 
-            await VerifyNoMultiLineTokens(testLspServer, wholeDocResults2.Data!).ConfigureAwait(false);
+            await VerifyNoMultiLineTokens(testLspServer, wholeDocResults2.Data!)
+                .ConfigureAwait(false);
             Assert.Equal(expectedWholeDocResults2.Data, wholeDocResults2.Data);
             Assert.Equal(expectedWholeDocResults2.ResultId, wholeDocResults2.ResultId);
             Assert.True(wholeDocResults2 is RoslynSemanticTokens);
@@ -152,26 +267,57 @@ static class C { }
         public async Task TestGetSemanticTokensMultiLineCommentAsync()
         {
             var markup =
-@"{|caret:|}class C { /* one
+                @"{|caret:|}class C { /* one
 two
 three */ }
 ";
 
             using var testLspServer = await CreateTestLspServerAsync(markup);
-            var results = await RunGetSemanticTokensAsync(testLspServer, testLspServer.GetLocations("caret").First());
+            var results = await RunGetSemanticTokensAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").First()
+            );
 
             var expectedResults = new LSP.SemanticTokens
             {
                 Data = new int[]
                 {
                     // Line | Char | Len | Token type                                                               | Modifier
-                       0,     0,     5,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],      0, // 'class'
-                       0,     6,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],   0, // 'C'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '{'
-                       0,     2,     6,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],      0, // '/* one'
-                       1,     0,     3,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],      0, // 'two'
-                       1,     0,     8,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],      0, // 'three */'
-                       0,     9,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation], 0, // '}'
+                    0,
+                    0,
+                    5,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'class'
+                    0,
+                    6,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],
+                    0, // 'C'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '{'
+                    0,
+                    2,
+                    6,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],
+                    0, // '/* one'
+                    1,
+                    0,
+                    3,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],
+                    0, // 'two'
+                    1,
+                    0,
+                    8,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],
+                    0, // 'three */'
+                    0,
+                    9,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '}'
                 },
                 ResultId = "1"
             };
@@ -185,7 +331,7 @@ three */ }
         public async Task TestGetSemanticTokensStringLiteralAsync()
         {
             var markup =
-@"{|caret:|}class C
+                @"{|caret:|}class C
 {
     void M()
     {
@@ -197,31 +343,114 @@ three"";
 ";
 
             using var testLspServer = await CreateTestLspServerAsync(markup);
-            var results = await RunGetSemanticTokensAsync(testLspServer, testLspServer.GetLocations("caret").First());
+            var results = await RunGetSemanticTokensAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").First()
+            );
 
             var expectedResults = new LSP.SemanticTokens
             {
                 Data = new int[]
                 {
                     // Line | Char | Len | Token type                                                                         | Modifier
-                       0,     0,     5,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],                0, // 'class'
-                       0,     6,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],             0, // 'C'
-                       1,     0,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],           0, // '{'
-                       1,     4,     4,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],                0, // 'void'
-                       0,     5,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.MethodName],            0, // 'M'
-                       0,     1,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],           0, // '('
-                       0,     1,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],           0, // ')'
-                       1,     4,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],           0, // '{'
-                       1,     8,     3,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Keyword],               0, // 'var'
-                       0,     4,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.LocalName],             0, // 'x'
-                       0,     2,     1,    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Operator],               0, // '='
-                       0,     2,     5,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.VerbatimStringLiteral], 0, // '@"one'
-                       1,     0,     6,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.VerbatimStringLiteral], 0, // 'two'
-                       0,     4,     2,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.StringEscapeCharacter], 0, // '""'
-                       1,     0,     6,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.VerbatimStringLiteral], 0, // 'three"'
-                       0,     6,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],           0, // ';'
-                       1,     4,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],           0, // '}'
-                       1,     0,     1,    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],           0, // '}'
+                    0,
+                    0,
+                    5,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'class'
+                    0,
+                    6,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.ClassName],
+                    0, // 'C'
+                    1,
+                    0,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '{'
+                    1,
+                    4,
+                    4,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0, // 'void'
+                    0,
+                    5,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.MethodName],
+                    0, // 'M'
+                    0,
+                    1,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '('
+                    0,
+                    1,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // ')'
+                    1,
+                    4,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '{'
+                    1,
+                    8,
+                    3,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Keyword],
+                    0, // 'var'
+                    0,
+                    4,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.LocalName],
+                    0, // 'x'
+                    0,
+                    2,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Operator],
+                    0, // '='
+                    0,
+                    2,
+                    5,
+                    SemanticTokensCache.TokenTypeToIndex[
+                        ClassificationTypeNames.VerbatimStringLiteral
+                    ],
+                    0, // '@"one'
+                    1,
+                    0,
+                    6,
+                    SemanticTokensCache.TokenTypeToIndex[
+                        ClassificationTypeNames.VerbatimStringLiteral
+                    ],
+                    0, // 'two'
+                    0,
+                    4,
+                    2,
+                    SemanticTokensCache.TokenTypeToIndex[
+                        ClassificationTypeNames.StringEscapeCharacter
+                    ],
+                    0, // '""'
+                    1,
+                    0,
+                    6,
+                    SemanticTokensCache.TokenTypeToIndex[
+                        ClassificationTypeNames.VerbatimStringLiteral
+                    ],
+                    0, // 'three"'
+                    0,
+                    6,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // ';'
+                    1,
+                    4,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '}'
+                    1,
+                    0,
+                    1,
+                    SemanticTokensCache.TokenTypeToIndex[ClassificationTypeNames.Punctuation],
+                    0, // '}'
                 },
                 ResultId = "1"
             };

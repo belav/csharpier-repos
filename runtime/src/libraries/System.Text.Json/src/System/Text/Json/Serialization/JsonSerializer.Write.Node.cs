@@ -23,7 +23,10 @@ namespace System.Text.Json
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
-        public static JsonNode? SerializeToNode<TValue>(TValue value, JsonSerializerOptions? options = null)
+        public static JsonNode? SerializeToNode<TValue>(
+            TValue value,
+            JsonSerializerOptions? options = null
+        )
         {
             Type runtimeType = GetRuntimeType(value);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, runtimeType);
@@ -48,7 +51,11 @@ namespace System.Text.Json
         /// for <paramref name="inputType"/>  or its serializable members.
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
-        public static JsonNode? SerializeToNode(object? value, Type inputType, JsonSerializerOptions? options = null)
+        public static JsonNode? SerializeToNode(
+            object? value,
+            Type inputType,
+            JsonSerializerOptions? options = null
+        )
         {
             Type runtimeType = GetRuntimeTypeAndValidateInputType(value, inputType);
             JsonTypeInfo typeInfo = GetTypeInfo(options, runtimeType);
@@ -69,7 +76,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="jsonTypeInfo"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonNode? SerializeToNode<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static JsonNode? SerializeToNode<TValue>(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo == null)
             {
@@ -97,7 +107,11 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="inputType"/> or <paramref name="context"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonNode? SerializeToNode(object? value, Type inputType, JsonSerializerContext context)
+        public static JsonNode? SerializeToNode(
+            object? value,
+            Type inputType,
+            JsonSerializerContext context
+        )
         {
             if (context == null)
             {
@@ -109,7 +123,10 @@ namespace System.Text.Json
             return WriteNodeUsingGeneratedSerializer(value, jsonTypeInfo);
         }
 
-        private static JsonNode? WriteNodeUsingGeneratedSerializer<TValue>(in TValue value, JsonTypeInfo jsonTypeInfo)
+        private static JsonNode? WriteNodeUsingGeneratedSerializer<TValue>(
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
             Debug.Assert(options != null);
@@ -124,7 +141,10 @@ namespace System.Text.Json
             return JsonNode.Parse(output.WrittenMemory.Span, options.GetNodeOptions());
         }
 
-        private static JsonNode? WriteNodeUsingSerializer<TValue>(in TValue value, JsonTypeInfo jsonTypeInfo)
+        private static JsonNode? WriteNodeUsingSerializer<TValue>(
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
             Debug.Assert(options != null);

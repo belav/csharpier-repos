@@ -60,7 +60,9 @@ public abstract class TagHelperDescriptor : IEquatable<TagHelperDescriptor>
         get
         {
             var allDiagnostics = GetAllDiagnostics();
-            var errors = allDiagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+            var errors = allDiagnostics.Any(
+                diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error
+            );
 
             return errors;
         }
@@ -70,8 +72,12 @@ public abstract class TagHelperDescriptor : IEquatable<TagHelperDescriptor>
     {
         if (_allDiagnostics == null)
         {
-            var allowedChildTagDiagnostics = AllowedChildTags.SelectMany(childTag => childTag.Diagnostics);
-            var attributeDiagnostics = BoundAttributes.SelectMany(attribute => attribute.Diagnostics);
+            var allowedChildTagDiagnostics = AllowedChildTags.SelectMany(
+                childTag => childTag.Diagnostics
+            );
+            var attributeDiagnostics = BoundAttributes.SelectMany(
+                attribute => attribute.Diagnostics
+            );
             var ruleDiagnostics = TagMatchingRules.SelectMany(rule => rule.GetAllDiagnostics());
             var combinedDiagnostics = allowedChildTagDiagnostics
                 .Concat(attributeDiagnostics)
@@ -105,7 +111,9 @@ public abstract class TagHelperDescriptor : IEquatable<TagHelperDescriptor>
         return _hashCode.Value;
     }
 
-    private static BoundAttributeDescriptor[] GetEditorRequiredAttributes(IReadOnlyList<BoundAttributeDescriptor> boundAttributeDescriptors)
+    private static BoundAttributeDescriptor[] GetEditorRequiredAttributes(
+        IReadOnlyList<BoundAttributeDescriptor> boundAttributeDescriptors
+    )
     {
         List<BoundAttributeDescriptor> editorRequiredAttributes = null;
         var count = boundAttributeDescriptors.Count;

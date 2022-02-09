@@ -21,19 +21,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class CodeDefinitionWindow_InProc : InProcComponent
     {
-        private CodeDefinitionWindow_InProc()
-        {
-        }
+        private CodeDefinitionWindow_InProc() { }
 
-        public static CodeDefinitionWindow_InProc Create()
-            => new CodeDefinitionWindow_InProc();
+        public static CodeDefinitionWindow_InProc Create() => new CodeDefinitionWindow_InProc();
 
         private IWpfTextView GetCodeDefinitionWpfTextView()
         {
             var shell = GetGlobalService<SVsUIShell, IVsUIShell>();
             var windowGuid = Guid.Parse(ToolWindowGuids80.CodedefinitionWindow);
 
-            Marshal.ThrowExceptionForHR(shell.FindToolWindow(0, ref windowGuid, out var windowFrame));
+            Marshal.ThrowExceptionForHR(
+                shell.FindToolWindow(0, ref windowGuid, out var windowFrame)
+            );
 
             var view = VsShellUtilities.GetTextView(windowFrame);
             var editorAdaptersService = GetComponentModelService<IVsEditorAdaptersFactoryService>();
@@ -47,11 +46,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void Show()
         {
-            InvokeOnUIThread(cancellationToken =>
-            {
-                var codeDefinitionWindow = GetGlobalService<SVsCodeDefView, IVsCodeDefView>();
-                codeDefinitionWindow.ShowWindow();
-            });
+            InvokeOnUIThread(
+                cancellationToken =>
+                {
+                    var codeDefinitionWindow = GetGlobalService<SVsCodeDefView, IVsCodeDefView>();
+                    codeDefinitionWindow.ShowWindow();
+                }
+            );
         }
 
         /// <summary>
@@ -62,14 +63,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             GetWaitingService().WaitForAsyncOperations(FeatureAttribute.CodeDefinitionWindow);
 
-            InvokeOnUIThread(cancellationToken =>
-            {
-                var codeDefinitionWindow = GetGlobalService<SVsCodeDefView, IVsCodeDefView>();
+            InvokeOnUIThread(
+                cancellationToken =>
+                {
+                    var codeDefinitionWindow = GetGlobalService<SVsCodeDefView, IVsCodeDefView>();
 
-                // The code definition window does some processing on idle, which we can force after we've completed our
-                // processing.
-                codeDefinitionWindow.ForceIdleProcessing();
-            });
+                    // The code definition window does some processing on idle, which we can force after we've completed our
+                    // processing.
+                    codeDefinitionWindow.ForceIdleProcessing();
+                }
+            );
         }
 
         /// <summary>
@@ -79,15 +82,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             WaitUntilProcessingComplete();
 
-            return InvokeOnUIThread(cancellationToken =>
-            {
-                var view = GetCodeDefinitionWpfTextView();
-                var subjectBuffer = view.GetBufferContainingCaret();
-                var bufferPosition = view.Caret.Position.BufferPosition;
-                var line = bufferPosition.GetContainingLine();
+            return InvokeOnUIThread(
+                cancellationToken =>
+                {
+                    var view = GetCodeDefinitionWpfTextView();
+                    var subjectBuffer = view.GetBufferContainingCaret();
+                    var bufferPosition = view.Caret.Position.BufferPosition;
+                    var line = bufferPosition.GetContainingLine();
 
-                return line.GetText();
-            });
+                    return line.GetText();
+                }
+            );
         }
 
         /// <summary>
@@ -97,11 +102,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             WaitUntilProcessingComplete();
 
-            return InvokeOnUIThread(cancellationToken =>
-            {
-                var view = GetCodeDefinitionWpfTextView();
-                return view.TextSnapshot.GetText();
-            });
+            return InvokeOnUIThread(
+                cancellationToken =>
+                {
+                    var view = GetCodeDefinitionWpfTextView();
+                    return view.TextSnapshot.GetText();
+                }
+            );
         }
     }
 }

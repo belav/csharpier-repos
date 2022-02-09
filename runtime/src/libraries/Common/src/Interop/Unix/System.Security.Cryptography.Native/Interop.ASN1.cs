@@ -12,14 +12,23 @@ internal static partial class Interop
 {
     internal static partial class Crypto
     {
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ObjTxt2Obj", CharSet = CharSet.Ansi)]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_ObjTxt2Obj",
+            CharSet = CharSet.Ansi
+        )]
         internal static partial SafeAsn1ObjectHandle ObjTxt2Obj(string s);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ObjObj2Txt")]
         private static extern unsafe int ObjObj2Txt(byte* buf, int buf_len, IntPtr a);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetObjectDefinitionByName", CharSet = CharSet.Ansi)]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_GetObjectDefinitionByName",
+            CharSet = CharSet.Ansi
+        )]
         private static partial IntPtr CryptoNative_GetObjectDefinitionByName(string friendlyName);
+
         internal static IntPtr GetObjectDefinitionByName(string friendlyName)
         {
             IntPtr ret = CryptoNative_GetObjectDefinitionByName(friendlyName);
@@ -38,7 +47,10 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1ObjectFree")]
         internal static extern void Asn1ObjectFree(IntPtr o);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DecodeAsn1BitString")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_DecodeAsn1BitString"
+        )]
         internal static partial SafeAsn1BitStringHandle DecodeAsn1BitString(byte[] buf, int len);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1BitStringFree")]
@@ -49,7 +61,11 @@ internal static partial class Interop
 
         [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1OctetStringSet")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool Asn1OctetStringSet(SafeAsn1OctetStringHandle o, byte[] d, int len);
+        internal static partial bool Asn1OctetStringSet(
+            SafeAsn1OctetStringHandle o,
+            byte[] d,
+            int len
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1OctetStringFree")]
         internal static extern void Asn1OctetStringFree(IntPtr o);
@@ -94,7 +110,8 @@ internal static partial class Interop
 
                 Debug.Assert(
                     bytesNeeded == initialBytesNeeded,
-                    "OBJ_obj2txt changed the required number of bytes for the realloc call");
+                    "OBJ_obj2txt changed the required number of bytes for the realloc call"
+                );
 
                 if (bytesNeeded > initialBytesNeeded)
                 {

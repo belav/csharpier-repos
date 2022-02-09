@@ -11,6 +11,7 @@ internal class IntegerMatch : UrlMatch
 {
     private readonly int _value;
     private readonly IntegerOperationType _operation;
+
     public IntegerMatch(int value, IntegerOperationType operation)
     {
         _value = value;

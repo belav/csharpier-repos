@@ -35,7 +35,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.IsType<StringRouteConstraint>(kvp.Value);
-            });
+            }
+        );
         Assert.Empty(route.DataTokens);
         Assert.Collection(
             route.Defaults.OrderBy(kvp => kvp.Key),
@@ -43,7 +44,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.Equal("admin", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -57,7 +59,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             name: "admin_area",
             areaName: "admin",
             template: "site/Admin/",
-            defaults: new { action = "Home" });
+            defaults: new { action = "Home" }
+        );
 
         // Assert
         var route = Assert.IsType<Route>((Assert.Single(builder.Routes)));
@@ -70,7 +73,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.IsType<StringRouteConstraint>(kvp.Value);
-            });
+            }
+        );
         Assert.Empty(route.DataTokens);
         Assert.Collection(
             route.Defaults.OrderBy(kvp => kvp.Key),
@@ -83,7 +87,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.Equal("admin", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -98,7 +103,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             areaName: "admin",
             template: "site/Admin/",
             defaults: new { action = "Home" },
-            constraints: new { id = new IntRouteConstraint() });
+            constraints: new { id = new IntRouteConstraint() }
+        );
 
         // Assert
         var route = Assert.IsType<Route>((Assert.Single(builder.Routes)));
@@ -116,7 +122,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("id", kvp.Key);
                 Assert.IsType<IntRouteConstraint>(kvp.Value);
-            });
+            }
+        );
         Assert.Empty(route.DataTokens);
         Assert.Collection(
             route.Defaults.OrderBy(kvp => kvp.Key),
@@ -129,7 +136,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.Equal("admin", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -145,7 +153,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             template: "site/Admin/",
             defaults: new { action = "Home" },
             constraints: new { id = new IntRouteConstraint() },
-            dataTokens: new { some_token = "hello" });
+            dataTokens: new { some_token = "hello" }
+        );
 
         // Assert
         var route = Assert.IsType<Route>((Assert.Single(builder.Routes)));
@@ -163,14 +172,16 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("id", kvp.Key);
                 Assert.IsType<IntRouteConstraint>(kvp.Value);
-            });
+            }
+        );
         Assert.Collection(
             route.DataTokens.OrderBy(kvp => kvp.Key),
             kvp =>
             {
                 Assert.Equal("some_token", kvp.Key);
                 Assert.Equal("hello", kvp.Value);
-            });
+            }
+        );
         Assert.Collection(
             route.Defaults.OrderBy(kvp => kvp.Key),
             kvp =>
@@ -182,7 +193,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.Equal("admin", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -198,7 +210,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             template: "site/Admin/",
             defaults: new { area = "Home" },
             constraints: new { area = new IntRouteConstraint() },
-            dataTokens: new { some_token = "hello" });
+            dataTokens: new { some_token = "hello" }
+        );
 
         // Assert
         var route = Assert.IsType<Route>((Assert.Single(builder.Routes)));
@@ -211,21 +224,24 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.IsType<IntRouteConstraint>(kvp.Value);
-            });
+            }
+        );
         Assert.Collection(
             route.DataTokens.OrderBy(kvp => kvp.Key),
             kvp =>
             {
                 Assert.Equal("some_token", kvp.Key);
                 Assert.Equal("hello", kvp.Value);
-            });
+            }
+        );
         Assert.Collection(
             route.Defaults.OrderBy(kvp => kvp.Key),
             kvp =>
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.Equal("Home", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -256,10 +272,12 @@ public class MvcAreaRouteBuilderExtensionsTest
                     route: new Mock<IRouter>().Object,
                     routeKey: kvp.Key,
                     values: values,
-                    routeDirection: RouteDirection.UrlGeneration);
+                    routeDirection: RouteDirection.UrlGeneration
+                );
 
                 Assert.True(match);
-            });
+            }
+        );
         Assert.Empty(route.DataTokens);
         Assert.Collection(
             route.Defaults.OrderBy(kvp => kvp.Key),
@@ -267,7 +285,8 @@ public class MvcAreaRouteBuilderExtensionsTest
             {
                 Assert.Equal("area", kvp.Key);
                 Assert.Equal(kvp.Value, areaName);
-            });
+            }
+        );
     }
 
     private IServiceProvider CreateServices()
@@ -281,15 +300,9 @@ public class MvcAreaRouteBuilderExtensionsTest
     private IRouteBuilder CreateRouteBuilder()
     {
         var builder = new Mock<IRouteBuilder>();
-        builder
-            .SetupGet(b => b.ServiceProvider)
-            .Returns(CreateServices());
-        builder
-            .SetupGet(b => b.Routes)
-            .Returns(new List<IRouter>());
-        builder
-            .SetupGet(b => b.DefaultHandler)
-            .Returns(Mock.Of<IRouter>());
+        builder.SetupGet(b => b.ServiceProvider).Returns(CreateServices());
+        builder.SetupGet(b => b.Routes).Returns(new List<IRouter>());
+        builder.SetupGet(b => b.DefaultHandler).Returns(Mock.Of<IRouter>());
 
         return builder.Object;
     }

@@ -27,6 +27,8 @@ public class DynamicOrderController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        return _generator.Generate(Url.RouteUrl(null, new { controller = "DynamicOrder", action = "Index" }));
+        return _generator.Generate(
+            Url.RouteUrl(null, new { controller = "DynamicOrder", action = "Index" })
+        );
     }
 }

@@ -15,7 +15,10 @@ public class BindingSourceMetadataProviderTests
 
         var key = ModelMetadataIdentity.ForType(typeof(Test));
 
-        var context = new BindingMetadataProviderContext(key, new ModelAttributes(new object[0], new object[0], null));
+        var context = new BindingMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         // Act
         provider.CreateBindingMetadata(context);
@@ -24,7 +27,5 @@ public class BindingSourceMetadataProviderTests
         Assert.Equal(BindingSource.Special, context.BindingMetadata.BindingSource);
     }
 
-    private class Test
-    {
-    }
+    private class Test { }
 }

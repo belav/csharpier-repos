@@ -9,13 +9,18 @@ namespace System.IO.Compression.Tests
     public class ZipFile_Unix : ZipFileTestBase
     {
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60581", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60581",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void UnixCreateSetsPermissionsInExternalAttributes()
         {
             // '7600' tests that S_ISUID, S_ISGID, and S_ISVTX bits get preserved in ExternalAttributes
             string[] testPermissions = new[] { "777", "755", "644", "600", "7600" };
 
-            using (var tempFolder = new TempDirectory(Path.Combine(GetTestFilePath(), "testFolder")))
+            using (
+                var tempFolder = new TempDirectory(Path.Combine(GetTestFilePath(), "testFolder"))
+            )
             {
                 foreach (string permission in testPermissions)
                 {
@@ -32,17 +37,27 @@ namespace System.IO.Compression.Tests
                     foreach (ZipArchiveEntry entry in archive.Entries)
                     {
                         Assert.EndsWith(".txt", entry.Name, StringComparison.Ordinal);
-                        EnsureExternalAttributes(entry.Name.Substring(0, entry.Name.Length - 4), entry);
+                        EnsureExternalAttributes(
+                            entry.Name.Substring(0, entry.Name.Length - 4),
+                            entry
+                        );
                     }
 
                     void EnsureExternalAttributes(string permissions, ZipArchiveEntry entry)
                     {
-                        Assert.Equal(Convert.ToInt32(permissions, 8), (entry.ExternalAttributes >> 16) & 0xFFF);
+                        Assert.Equal(
+                            Convert.ToInt32(permissions, 8),
+                            (entry.ExternalAttributes >> 16) & 0xFFF
+                        );
                     }
                 }
 
                 // test that round tripping the archive has the same file permissions
-                using (var extractFolder = new TempDirectory(Path.Combine(GetTestFilePath(), "extract")))
+                using (
+                    var extractFolder = new TempDirectory(
+                        Path.Combine(GetTestFilePath(), "extract")
+                    )
+                )
                 {
                     ZipFile.ExtractToDirectory(archivePath, extractFolder.Path);
 
@@ -107,7 +122,10 @@ namespace System.IO.Compression.Tests
 
             // note that we don't extract S_ISUID, S_ISGID, and S_ISVTX bits,
             // so only use the last 3 numbers of permissions to verify the file permissions
-            permissions = permissions.Length > 3 ? permissions.Substring(permissions.Length - 3) : permissions;
+            permissions =
+                permissions.Length > 3
+                    ? permissions.Substring(permissions.Length - 3)
+                    : permissions;
             Assert.Equal(Convert.ToInt32(permissions, 8), status.Mode & 0xFFF);
         }
 

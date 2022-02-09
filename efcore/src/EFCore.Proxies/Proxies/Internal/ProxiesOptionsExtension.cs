@@ -31,9 +31,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public ProxiesOptionsExtension()
-        {
-        }
+        public ProxiesOptionsExtension() { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,8 +52,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual DbContextOptionsExtensionInfo Info
-            => _info ??= new ExtensionInfo(this);
+        public virtual DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -63,8 +60,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual ProxiesOptionsExtension Clone()
-            => new(this);
+        protected virtual ProxiesOptionsExtension Clone() => new(this);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -72,8 +68,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool UseLazyLoadingProxies
-            => _useLazyLoadingProxies;
+        public virtual bool UseLazyLoadingProxies => _useLazyLoadingProxies;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,8 +76,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool UseChangeTrackingProxies
-            => _useChangeTrackingProxies;
+        public virtual bool UseChangeTrackingProxies => _useChangeTrackingProxies;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,8 +84,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool CheckEquality
-            => _checkEquality;
+        public virtual bool CheckEquality => _checkEquality;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -99,8 +92,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool UseProxies
-            => UseLazyLoadingProxies || UseChangeTrackingProxies;
+        public virtual bool UseProxies => UseLazyLoadingProxies || UseChangeTrackingProxies;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -123,7 +115,10 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ProxiesOptionsExtension WithChangeTracking(bool useChangeTrackingProxies = true, bool checkEquality = true)
+        public virtual ProxiesOptionsExtension WithChangeTracking(
+            bool useChangeTrackingProxies = true,
+            bool checkEquality = true
+        )
         {
             var clone = Clone();
 
@@ -143,11 +138,15 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         {
             if (UseProxies)
             {
-                var internalServiceProvider = options.FindExtension<CoreOptionsExtension>()?.InternalServiceProvider;
+                var internalServiceProvider = options
+                    .FindExtension<CoreOptionsExtension>()
+                    ?.InternalServiceProvider;
                 if (internalServiceProvider != null)
                 {
                     using var scope = internalServiceProvider.CreateScope();
-                    var conventionPlugins = scope.ServiceProvider.GetService<IEnumerable<IConventionSetPlugin>>();
+                    var conventionPlugins = scope.ServiceProvider.GetService<
+                        IEnumerable<IConventionSetPlugin>
+                    >();
                     if (conventionPlugins?.Any(s => s is ProxiesConventionSetPlugin) == false)
                     {
                         throw new InvalidOperationException(ProxiesStrings.ProxyServicesMissing);
@@ -162,47 +161,47 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void ApplyServices(IServiceCollection services)
-            => services.AddEntityFrameworkProxies();
+        public virtual void ApplyServices(IServiceCollection services) =>
+            services.AddEntityFrameworkProxies();
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
             private string? _logFragment;
 
-            public ExtensionInfo(IDbContextOptionsExtension extension)
-                : base(extension)
-            {
-            }
+            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
 
-            private new ProxiesOptionsExtension Extension
-                => (ProxiesOptionsExtension)base.Extension;
+            private new ProxiesOptionsExtension Extension =>
+                (ProxiesOptionsExtension)base.Extension;
 
-            public override bool IsDatabaseProvider
-                => false;
+            public override bool IsDatabaseProvider => false;
 
-            public override string LogFragment
-                => _logFragment ??= Extension.UseLazyLoadingProxies && Extension.UseChangeTrackingProxies
-                    ? "using lazy loading and change tracking proxies "
-                    : Extension.UseLazyLoadingProxies
-                        ? "using lazy loading proxies "
-                        : Extension.UseChangeTrackingProxies
-                            ? "using change tracking proxies "
-                            : "";
+            public override string LogFragment =>
+                _logFragment ??=
+                    Extension.UseLazyLoadingProxies && Extension.UseChangeTrackingProxies
+                        ? "using lazy loading and change tracking proxies "
+                        : Extension.UseLazyLoadingProxies
+                            ? "using lazy loading proxies "
+                            : Extension.UseChangeTrackingProxies
+                                ? "using change tracking proxies "
+                                : "";
 
-            public override int GetServiceProviderHashCode()
-                => Extension.UseProxies.GetHashCode();
+            public override int GetServiceProviderHashCode() => Extension.UseProxies.GetHashCode();
 
-            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-                => other is ExtensionInfo otherInfo
-                    && Extension.UseProxies == otherInfo.Extension.UseProxies;
+            public override bool ShouldUseSameServiceProvider(
+                DbContextOptionsExtensionInfo other
+            ) =>
+                other is ExtensionInfo otherInfo
+                && Extension.UseProxies == otherInfo.Extension.UseProxies;
 
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
             {
-                debugInfo["Proxies:" + nameof(ProxiesExtensions.UseLazyLoadingProxies)]
-                    = (Extension._useLazyLoadingProxies ? 541 : 0).ToString(CultureInfo.InvariantCulture);
+                debugInfo["Proxies:" + nameof(ProxiesExtensions.UseLazyLoadingProxies)] = (
+                    Extension._useLazyLoadingProxies ? 541 : 0
+                ).ToString(CultureInfo.InvariantCulture);
 
-                debugInfo["Proxies:" + nameof(ProxiesExtensions.UseChangeTrackingProxies)]
-                    = (Extension._useChangeTrackingProxies ? 541 : 0).ToString(CultureInfo.InvariantCulture);
+                debugInfo["Proxies:" + nameof(ProxiesExtensions.UseChangeTrackingProxies)] = (
+                    Extension._useChangeTrackingProxies ? 541 : 0
+                ).ToString(CultureInfo.InvariantCulture);
             }
         }
     }

@@ -19,7 +19,10 @@ public class Program
         DebugHelper.HandleDebugSwitch(ref args);
 
         int rc;
-        new Program(PhysicalConsole.Singleton, Directory.GetCurrentDirectory()).TryRun(args, out rc);
+        new Program(PhysicalConsole.Singleton, Directory.GetCurrentDirectory()).TryRun(
+            args,
+            out rc
+        );
         return rc;
     }
 
@@ -94,8 +97,8 @@ public class Program
         return 0;
     }
 
-    private IReporter CreateReporter(bool verbose)
-        => new ConsoleReporter(_console, verbose, quiet: false);
+    private IReporter CreateReporter(bool verbose) =>
+        new ConsoleReporter(_console, verbose, quiet: false);
 
     internal string ResolveId(CommandLineOptions options, IReporter reporter)
     {

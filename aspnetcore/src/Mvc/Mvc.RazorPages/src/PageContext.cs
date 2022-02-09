@@ -25,18 +25,13 @@ public class PageContext : ActionContext
     /// <remarks>
     /// The default constructor is provided for unit test purposes only.
     /// </remarks>
-    public PageContext()
-    {
-    }
+    public PageContext() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="PageContext"/>.
     /// </summary>
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
-    public PageContext(ActionContext actionContext)
-        : base(actionContext)
-    {
-    }
+    public PageContext(ActionContext actionContext) : base(actionContext) { }
 
     /// <summary>
     /// Gets or sets the <see cref="PageActionDescriptor"/>.

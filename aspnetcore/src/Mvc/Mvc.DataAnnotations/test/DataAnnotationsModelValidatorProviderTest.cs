@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 public class DataAnnotationsModelValidatorProviderTest
 {
-    private readonly IModelMetadataProvider _metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
+    private readonly IModelMetadataProvider _metadataProvider =
+        TestModelMetadataProvider.CreateDefaultProvider();
 
     [Fact]
     public void CreateValidators_ReturnsValidatorForIValidatableObject()
@@ -24,11 +25,15 @@ public class DataAnnotationsModelValidatorProviderTest
         var provider = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var mockValidatable = Mock.Of<IValidatableObject>();
         var metadata = _metadataProvider.GetMetadataForType(mockValidatable.GetType());
 
-        var providerContext = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ModelValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
@@ -44,20 +49,29 @@ public class DataAnnotationsModelValidatorProviderTest
         var provider = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var metadata = _metadataProvider.GetMetadataForProperty(
             typeof(ClassWithProperty),
-            "PropertyWithMultipleValidationAttributes");
+            "PropertyWithMultipleValidationAttributes"
+        );
 
-        var providerContext = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ModelValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
 
         // Assert
         Assert.Equal(4, providerContext.Results.Count);
-        Assert.IsAssignableFrom<RequiredAttribute>(((DataAnnotationsModelValidator)providerContext.Results[0].Validator).Attribute);
-        Assert.IsAssignableFrom<RequiredAttribute>(((DataAnnotationsModelValidator)providerContext.Results[1].Validator).Attribute);
+        Assert.IsAssignableFrom<RequiredAttribute>(
+            ((DataAnnotationsModelValidator)providerContext.Results[0].Validator).Attribute
+        );
+        Assert.IsAssignableFrom<RequiredAttribute>(
+            ((DataAnnotationsModelValidator)providerContext.Results[1].Validator).Attribute
+        );
     }
 
     [Fact]
@@ -67,10 +81,16 @@ public class DataAnnotationsModelValidatorProviderTest
         var provider = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
-        var metadata = _metadataProvider.GetMetadataForType(typeof(DummyClassWithDummyValidationAttribute));
+            stringLocalizerFactory: null
+        );
+        var metadata = _metadataProvider.GetMetadataForType(
+            typeof(DummyClassWithDummyValidationAttribute)
+        );
 
-        var providerContext = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ModelValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
@@ -80,14 +100,10 @@ public class DataAnnotationsModelValidatorProviderTest
         Assert.IsType<DataAnnotationsModelValidator>(validatorItem.Validator);
     }
 
-    private class DummyValidationAttribute : ValidationAttribute
-    {
-    }
+    private class DummyValidationAttribute : ValidationAttribute { }
 
     [DummyValidation]
-    private class DummyClassWithDummyValidationAttribute
-    {
-    }
+    private class DummyClassWithDummyValidationAttribute { }
 
     // Default IValidatableObject adapter factory
 
@@ -98,11 +114,15 @@ public class DataAnnotationsModelValidatorProviderTest
         var provider = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var mockValidatable = new Mock<IValidatableObject>();
         var metadata = _metadataProvider.GetMetadataForType(mockValidatable.Object.GetType());
 
-        var providerContext = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ModelValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
@@ -158,7 +178,8 @@ public class DataAnnotationsModelValidatorProviderTest
         return new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
     }
 
     private IList<ValidatorItem> GetValidatorItems(ModelMetadata metadata)
@@ -223,19 +244,11 @@ public class DataAnnotationsModelValidatorProviderTest
         public string PropertyWithMultipleValidationAttributes { get; set; }
     }
 
-    public class CustomRequiredAttribute1 : RequiredAttribute
-    {
-    }
+    public class CustomRequiredAttribute1 : RequiredAttribute { }
 
-    public class CustomRequiredAttribute2 : RequiredAttribute
-    {
-    }
+    public class CustomRequiredAttribute2 : RequiredAttribute { }
 
-    public class CustomNonRequiredAttribute1 : ValidationAttribute
-    {
-    }
+    public class CustomNonRequiredAttribute1 : ValidationAttribute { }
 
-    public class CustomNonRequiredAttribute2 : ValidationAttribute
-    {
-    }
+    public class CustomNonRequiredAttribute2 : ValidationAttribute { }
 }

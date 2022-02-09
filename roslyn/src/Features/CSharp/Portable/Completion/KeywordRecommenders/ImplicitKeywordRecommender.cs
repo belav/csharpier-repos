@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ImplicitKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validNonInterfaceMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        private static readonly ISet<SyntaxKind> s_validNonInterfaceMemberModifiers =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
             {
                 SyntaxKind.StaticKeyword,
                 SyntaxKind.PublicKeyword,
@@ -21,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 SyntaxKind.UnsafeKeyword,
             };
 
-        private static readonly ISet<SyntaxKind> s_validInterfaceMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        private static readonly ISet<SyntaxKind> s_validInterfaceMemberModifiers =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
             {
                 SyntaxKind.StaticKeyword,
                 SyntaxKind.PublicKeyword,
@@ -29,30 +31,43 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 SyntaxKind.UnsafeKeyword,
             };
 
-        public ImplicitKeywordRecommender()
-            : base(SyntaxKind.ImplicitKeyword)
-        {
-        }
+        public ImplicitKeywordRecommender() : base(SyntaxKind.ImplicitKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            if (context.IsMemberDeclarationContext(validModifiers: s_validNonInterfaceMemberModifiers, validTypeDeclarations: SyntaxKindSet.ClassStructRecordTypeDeclarations, canBePartial: false, cancellationToken: cancellationToken))
+            if (
+                context.IsMemberDeclarationContext(
+                    validModifiers: s_validNonInterfaceMemberModifiers,
+                    validTypeDeclarations: SyntaxKindSet.ClassStructRecordTypeDeclarations,
+                    canBePartial: false,
+                    cancellationToken: cancellationToken
+                )
+            )
             {
                 // operators must be both public and static
                 var modifiers = context.PrecedingModifiers;
 
-                return
-                    modifiers.Contains(SyntaxKind.PublicKeyword) &&
-                    modifiers.Contains(SyntaxKind.StaticKeyword);
+                return modifiers.Contains(SyntaxKind.PublicKeyword)
+                    && modifiers.Contains(SyntaxKind.StaticKeyword);
             }
-            else if (context.IsMemberDeclarationContext(validModifiers: s_validInterfaceMemberModifiers, validTypeDeclarations: SyntaxKindSet.InterfaceOnlyTypeDeclarations, canBePartial: false, cancellationToken: cancellationToken))
+            else if (
+                context.IsMemberDeclarationContext(
+                    validModifiers: s_validInterfaceMemberModifiers,
+                    validTypeDeclarations: SyntaxKindSet.InterfaceOnlyTypeDeclarations,
+                    canBePartial: false,
+                    cancellationToken: cancellationToken
+                )
+            )
             {
                 // operators must be both abstract and static
                 var modifiers = context.PrecedingModifiers;
 
-                return
-                    modifiers.Contains(SyntaxKind.AbstractKeyword) &&
-                    modifiers.Contains(SyntaxKind.StaticKeyword);
+                return modifiers.Contains(SyntaxKind.AbstractKeyword)
+                    && modifiers.Contains(SyntaxKind.StaticKeyword);
             }
 
             return false;

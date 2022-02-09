@@ -31,15 +31,13 @@ namespace System.Collections.Immutable
             do
             {
                 result = Interlocked.Increment(ref s_poolUserIdCounter);
-            }
-            while (result == UnassignedId);
+            } while (result == UnassignedId);
 
             return result;
         }
     }
 
-    internal sealed class SecureObjectPool<T, TCaller>
-        where TCaller : ISecurePooledObjectUser
+    internal sealed class SecureObjectPool<T, TCaller> where TCaller : ISecurePooledObjectUser
     {
         public void TryAdd(TCaller caller, SecurePooledObject<T> item)
         {
@@ -53,7 +51,10 @@ namespace System.Collections.Immutable
 
         public bool TryTake(TCaller caller, out SecurePooledObject<T>? item)
         {
-            if (caller.PoolUserId != SecureObjectPool.UnassignedId && AllocFreeConcurrentStack<SecurePooledObject<T>>.TryTake(out item))
+            if (
+                caller.PoolUserId != SecureObjectPool.UnassignedId
+                && AllocFreeConcurrentStack<SecurePooledObject<T>>.TryTake(out item)
+            )
             {
                 item.Owner = caller.PoolUserId;
                 return true;
@@ -106,8 +107,7 @@ namespace System.Collections.Immutable
         /// <param name="caller">The renter of the object.</param>
         /// <returns>The rented object.</returns>
         /// <exception cref="ObjectDisposedException">Thrown if <paramref name="caller"/> is no longer the renter of the value.</exception>
-        internal T Use<TCaller>(ref TCaller caller)
-            where TCaller : struct, ISecurePooledObjectUser
+        internal T Use<TCaller>(ref TCaller caller) where TCaller : struct, ISecurePooledObjectUser
         {
             if (!IsOwned(ref caller))
                 Requires.FailObjectDisposed(caller);

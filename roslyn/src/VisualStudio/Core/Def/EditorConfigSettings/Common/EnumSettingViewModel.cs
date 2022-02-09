@@ -8,8 +8,7 @@ using System.Linq;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
-    internal abstract class EnumSettingViewModel<T> : IEnumSettingViewModel
-        where T : Enum
+    internal abstract class EnumSettingViewModel<T> : IEnumSettingViewModel where T : Enum
     {
         private readonly IReadOnlyDictionary<string, T> _mapping;
 
@@ -49,8 +48,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
             }
         }
 
-        public string[] GetValueDescriptions()
-            => _mapping.Keys.ToArray();
+        public string[] GetValueDescriptions() => _mapping.Keys.ToArray();
 
         public int GetValueIndex()
         {

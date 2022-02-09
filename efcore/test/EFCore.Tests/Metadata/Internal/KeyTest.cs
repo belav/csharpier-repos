@@ -23,11 +23,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => entityType.AddKey(new[] { property })).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => entityType.AddKey(new[] { property })
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => entityType.RemoveKey(key)).Message);
+                Assert.Throws<InvalidOperationException>(() => entityType.RemoveKey(key)).Message
+            );
         }
 
         [ConditionalFact]
@@ -54,13 +58,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var property2 = entityType2.AddProperty(Order.NameProperty);
 
             Assert.Equal(
-                CoreStrings.KeyPropertiesWrongEntity($"{{'{property1.Name}', '{property2.Name}'}}", entityType1.DisplayName()),
+                CoreStrings.KeyPropertiesWrongEntity(
+                    $"{{'{property1.Name}', '{property2.Name}'}}",
+                    entityType1.DisplayName()
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => entityType1.AddKey(new[] { property1, property2 })).Message);
+                    () => entityType1.AddKey(new[] { property1, property2 })
+                ).Message
+            );
         }
 
-        private static IMutableModel CreateModel()
-            => new Model();
+        private static IMutableModel CreateModel() => new Model();
 
         private class Customer
         {

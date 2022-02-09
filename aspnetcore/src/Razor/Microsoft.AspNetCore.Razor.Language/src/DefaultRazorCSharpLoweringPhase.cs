@@ -20,7 +20,8 @@ internal class DefaultRazorCSharpLoweringPhase : RazorEnginePhaseBase, IRazorCSh
             var message = Resources.FormatDocumentMissingTarget(
                 documentNode.DocumentKind,
                 nameof(CodeTarget),
-                nameof(DocumentIntermediateNode.Target));
+                nameof(DocumentIntermediateNode.Target)
+            );
             throw new InvalidOperationException(message);
         }
 

@@ -26,19 +26,19 @@ public class IntRole : IdentityRole<int>
 
 public class UserStoreIntTest : SqlStoreTestBase<IntUser, IntRole, int>
 {
-    public UserStoreIntTest(ScratchDatabaseFixture fixture)
-        : base(fixture)
-    {
-    }
+    public UserStoreIntTest(ScratchDatabaseFixture fixture) : base(fixture) { }
 
     [Fact]
     public void AddEntityFrameworkStoresCanInferKey()
     {
         var services = new ServiceCollection();
-        services.AddLogging()
+        services
+            .AddLogging()
             .AddSingleton(new TestDbContext(new DbContextOptionsBuilder<TestDbContext>().Options));
         // This used to throw
-        var builder = services.AddIdentity<IntUser, IntRole>().AddEntityFrameworkStores<TestDbContext>();
+        var builder = services
+            .AddIdentity<IntUser, IntRole>()
+            .AddEntityFrameworkStores<TestDbContext>();
 
         var sp = services.BuildServiceProvider();
         using (var csope = sp.CreateScope())
@@ -52,10 +52,14 @@ public class UserStoreIntTest : SqlStoreTestBase<IntUser, IntRole, int>
     public void AddEntityFrameworkStoresCanInferKeyWithGenericBase()
     {
         var services = new ServiceCollection();
-        services.AddLogging()
+        services
+            .AddLogging()
             .AddSingleton(new TestDbContext(new DbContextOptionsBuilder<TestDbContext>().Options));
         // This used to throw
-        var builder = services.AddIdentityCore<IdentityUser<int>>().AddRoles<IdentityRole<int>>().AddEntityFrameworkStores<TestDbContext>();
+        var builder = services
+            .AddIdentityCore<IdentityUser<int>>()
+            .AddRoles<IdentityRole<int>>()
+            .AddEntityFrameworkStores<TestDbContext>();
 
         var sp = services.BuildServiceProvider();
         using (var csope = sp.CreateScope())
@@ -64,5 +68,4 @@ public class UserStoreIntTest : SqlStoreTestBase<IntUser, IntRole, int>
             Assert.NotNull(sp.GetRequiredService<RoleManager<IdentityRole<int>>>());
         }
     }
-
 }

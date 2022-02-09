@@ -22,14 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <inheritdoc />
         public ServiceDescriptor this[int index]
         {
-            get
-            {
-                return _descriptors[index];
-            }
-            set
-            {
-                _descriptors[index] = value;
-            }
+            get { return _descriptors[index]; }
+            set { _descriptors[index] = value; }
         }
 
         /// <inheritdoc />

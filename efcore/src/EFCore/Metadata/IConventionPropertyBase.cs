@@ -57,8 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="fieldInfo">The <see cref="FieldInfo" /> for the underlying CLR field to use.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         [Obsolete("Use SetFieldInfo")]
-        void SetField(FieldInfo? fieldInfo, bool fromDataAnnotation = false)
-            => SetFieldInfo(fieldInfo, fromDataAnnotation);
+        void SetField(FieldInfo? fieldInfo, bool fromDataAnnotation = false) =>
+            SetFieldInfo(fieldInfo, fromDataAnnotation);
 
         /// <summary>
         ///     Sets the underlying CLR field that this property should use.
@@ -97,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>The configured value.</returns>
         PropertyAccessMode? SetPropertyAccessMode(
             PropertyAccessMode? propertyAccessMode,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyPropertyBase.GetPropertyAccessMode" />.

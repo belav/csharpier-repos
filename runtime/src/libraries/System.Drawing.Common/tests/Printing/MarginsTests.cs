@@ -58,25 +58,41 @@ namespace System.Drawing.Printing.Tests
         [Fact]
         public void Ctor_NegativeLeft_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("left", null, () => new Margins(-1, 2, 3, 4));
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "left",
+                null,
+                () => new Margins(-1, 2, 3, 4)
+            );
         }
 
         [Fact]
         public void Ctor_NegativeRight_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("right", null, () => new Margins(1, -1, 3, 4));
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "right",
+                null,
+                () => new Margins(1, -1, 3, 4)
+            );
         }
 
         [Fact]
         public void Ctor_NegativeTop_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("top", null, () => new Margins(1, 2, -1, 4));
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "top",
+                null,
+                () => new Margins(1, 2, -1, 4)
+            );
         }
 
         [Fact]
         public void Ctor_NegativeBottom_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("bottom", null, () => new Margins(1, 2, 3, -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "bottom",
+                null,
+                () => new Margins(1, 2, 3, -1)
+            );
         }
 
         public static IEnumerable<object[]> Equals_Object_TestData()
@@ -121,7 +137,11 @@ namespace System.Drawing.Printing.Tests
 
         [Theory]
         [MemberData(nameof(Equals_Margin_TestData))]
-        public void Equals_InvokeMargin_ReturnsExpected(Margins margins1, Margins margins2, bool expected)
+        public void Equals_InvokeMargin_ReturnsExpected(
+            Margins margins1,
+            Margins margins2,
+            bool expected
+        )
         {
             Assert.Equal(expected, margins1 == margins2);
             Assert.Equal(!expected, margins1 != margins2);
@@ -129,8 +149,16 @@ namespace System.Drawing.Printing.Tests
 
         public static IEnumerable<object[]> ToString_TestData()
         {
-            yield return new object[] { new Margins(), "[Margins Left=100 Right=100 Top=100 Bottom=100]" };
-            yield return new object[] { new Margins(1, 2, 3, 4), "[Margins Left=1 Right=2 Top=3 Bottom=4]" };
+            yield return new object[]
+            {
+                new Margins(),
+                "[Margins Left=100 Right=100 Top=100 Bottom=100]"
+            };
+            yield return new object[]
+            {
+                new Margins(1, 2, 3, 4),
+                "[Margins Left=1 Right=2 Top=3 Bottom=4]"
+            };
         }
 
         [Theory]
@@ -163,10 +191,7 @@ namespace System.Drawing.Printing.Tests
         [MemberData(nameof(Bounds_Set_TestData))]
         public void Left_Set_GetReturnsExpected(int value)
         {
-            var margins = new Margins
-            {
-                Left = value
-            };
+            var margins = new Margins { Left = value };
             Assert.Equal(value, margins.Left);
 
             // Set same.
@@ -178,17 +203,18 @@ namespace System.Drawing.Printing.Tests
         public void Left_SetNegative_ThrowsArgumentOutOfRangeException()
         {
             var margins = new Margins();
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("value", null, () => margins.Left = -1);
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "value",
+                null,
+                () => margins.Left = -1
+            );
         }
 
         [Theory]
         [MemberData(nameof(Bounds_Set_TestData))]
         public void Right_Set_GetReturnsExpected(int value)
         {
-            var margins = new Margins
-            {
-                Right = value
-            };
+            var margins = new Margins { Right = value };
             Assert.Equal(value, margins.Right);
 
             // Set same.
@@ -200,17 +226,18 @@ namespace System.Drawing.Printing.Tests
         public void Right_SetNegative_ThrowsArgumentOutOfRangeException()
         {
             var margins = new Margins();
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("value", null, () => margins.Right = -1);
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "value",
+                null,
+                () => margins.Right = -1
+            );
         }
 
         [Theory]
         [MemberData(nameof(Bounds_Set_TestData))]
         public void Top_Set_GetReturnsExpected(int value)
         {
-            var margins = new Margins
-            {
-                Top = value
-            };
+            var margins = new Margins { Top = value };
             Assert.Equal(value, margins.Top);
 
             // Set same.
@@ -222,17 +249,18 @@ namespace System.Drawing.Printing.Tests
         public void Top_SetNegative_ThrowsArgumentOutOfRangeException()
         {
             var margins = new Margins();
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("value", null, () => margins.Top = -1);
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "value",
+                null,
+                () => margins.Top = -1
+            );
         }
 
         [Theory]
         [MemberData(nameof(Bounds_Set_TestData))]
         public void Bottom_Set_GetReturnsExpected(int value)
         {
-            var margins = new Margins
-            {
-                Bottom = value
-            };
+            var margins = new Margins { Bottom = value };
             Assert.Equal(value, margins.Bottom);
 
             // Set same.
@@ -244,7 +272,11 @@ namespace System.Drawing.Printing.Tests
         public void Bottom_SetNegative_ThrowsArgumentOutOfRangeException()
         {
             var margins = new Margins();
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("value", null, () => margins.Bottom = -1);
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "value",
+                null,
+                () => margins.Bottom = -1
+            );
         }
     }
 }

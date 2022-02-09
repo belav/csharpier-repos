@@ -17,16 +17,21 @@ namespace AutoMapper.UnitTests.MappingExceptions
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>();
+                }
+            );
 
         [Fact]
         public void Should_provide_a_contextual_exception()
         {
             var source = new Source { Value = "adsf" };
-            typeof(AutoMapperMappingException).ShouldBeThrownBy(() => Mapper.Map<Source, Dest>(source));
+            typeof(AutoMapperMappingException).ShouldBeThrownBy(
+                () => Mapper.Map<Source, Dest>(source)
+            );
         }
 
         [Fact]
@@ -65,17 +70,22 @@ namespace AutoMapper.UnitTests.MappingExceptions
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>()
-                .ForPath(d => d.SubValue.Value, opt => opt.MapFrom(src => src.Value));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForPath(d => d.SubValue.Value, opt => opt.MapFrom(src => src.Value));
+                }
+            );
 
         [Fact]
         public void Should_provide_a_contextual_exception()
         {
             var source = new Source { Value = "adsf" };
-            typeof(AutoMapperMappingException).ShouldBeThrownBy(() => Mapper.Map<Source, Dest>(source));
+            typeof(AutoMapperMappingException).ShouldBeThrownBy(
+                () => Mapper.Map<Source, Dest>(source)
+            );
         }
 
         [Fact]

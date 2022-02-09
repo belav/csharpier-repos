@@ -20,37 +20,81 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
     {
         public readonly List<DocumentId> DocumentsToReanalyze = new();
 
-        public void Reanalyze(Workspace workspace, IEnumerable<ProjectId>? projectIds = null, IEnumerable<DocumentId>? documentIds = null, bool highPriority = false)
-            => DocumentsToReanalyze.AddRange(documentIds);
+        public void Reanalyze(
+            Workspace workspace,
+            IEnumerable<ProjectId>? projectIds = null,
+            IEnumerable<DocumentId>? documentIds = null,
+            bool highPriority = false
+        ) => DocumentsToReanalyze.AddRange(documentIds);
 
-        public DiagnosticAnalyzerInfoCache AnalyzerInfoCache
-            => throw new NotImplementedException();
+        public DiagnosticAnalyzerInfoCache AnalyzerInfoCache => throw new NotImplementedException();
 
-        public bool ContainsDiagnostics(Workspace workspace, ProjectId projectId)
-            => throw new NotImplementedException();
+        public bool ContainsDiagnostics(Workspace workspace, ProjectId projectId) =>
+            throw new NotImplementedException();
 
-        public Task ForceAnalyzeAsync(Solution solution, Action<Project> onProjectAnalyzed, ProjectId? projectId = null, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task ForceAnalyzeAsync(
+            Solution solution,
+            Action<Project> onProjectAnalyzed,
+            ProjectId? projectId = null,
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
-        public Task<ImmutableArray<DiagnosticData>> GetCachedDiagnosticsAsync(Workspace workspace, ProjectId? projectId = null, DocumentId? documentId = null, bool includeSuppressedDiagnostics = false, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task<ImmutableArray<DiagnosticData>> GetCachedDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId? projectId = null,
+            DocumentId? documentId = null,
+            bool includeSuppressedDiagnostics = false,
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
-        public Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(Solution solution, ProjectId? projectId = null, DocumentId? documentId = null, bool includeSuppressedDiagnostics = false, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
+            Solution solution,
+            ProjectId? projectId = null,
+            DocumentId? documentId = null,
+            bool includeSuppressedDiagnostics = false,
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
-        public Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForIdsAsync(Solution solution, ProjectId? projectId = null, DocumentId? documentId = null, ImmutableHashSet<string>? diagnosticIds = null, bool includeSuppressedDiagnostics = false, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForIdsAsync(
+            Solution solution,
+            ProjectId? projectId = null,
+            DocumentId? documentId = null,
+            ImmutableHashSet<string>? diagnosticIds = null,
+            bool includeSuppressedDiagnostics = false,
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
-        public Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(Document document, TextSpan? range, string? diagnosticId = null, bool includeSuppressedDiagnostics = false, CodeActionRequestPriority priority = CodeActionRequestPriority.None, Func<string, IDisposable?>? addOperationScope = null, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(
+            Document document,
+            TextSpan? range,
+            string? diagnosticId = null,
+            bool includeSuppressedDiagnostics = false,
+            CodeActionRequestPriority priority = CodeActionRequestPriority.None,
+            Func<string, IDisposable?>? addOperationScope = null,
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
-        public Task<ImmutableArray<DiagnosticData>> GetProjectDiagnosticsForIdsAsync(Solution solution, ProjectId? projectId = null, ImmutableHashSet<string>? diagnosticIds = null, bool includeSuppressedDiagnostics = false, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task<ImmutableArray<DiagnosticData>> GetProjectDiagnosticsForIdsAsync(
+            Solution solution,
+            ProjectId? projectId = null,
+            ImmutableHashSet<string>? diagnosticIds = null,
+            bool includeSuppressedDiagnostics = false,
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
-        public Task<ImmutableArray<DiagnosticData>> GetSpecificCachedDiagnosticsAsync(Workspace workspace, object id, bool includeSuppressedDiagnostics = false, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task<ImmutableArray<DiagnosticData>> GetSpecificCachedDiagnosticsAsync(
+            Workspace workspace,
+            object id,
+            bool includeSuppressedDiagnostics = false,
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
-        public Task<bool> TryAppendDiagnosticsForSpanAsync(Document document, TextSpan range, ArrayBuilder<DiagnosticData> diagnostics, bool includeSuppressedDiagnostics = false, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task<bool> TryAppendDiagnosticsForSpanAsync(
+            Document document,
+            TextSpan range,
+            ArrayBuilder<DiagnosticData> diagnostics,
+            bool includeSuppressedDiagnostics = false,
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
     }
 }

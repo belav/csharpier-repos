@@ -8,9 +8,15 @@ namespace System.Drawing.Imaging
     public sealed class FrameDimension
     {
         // Frame dimension GUIDs, from sdkinc\imgguids.h
-        private static readonly FrameDimension s_time = new FrameDimension(new Guid("{6aedbd6d-3fb5-418a-83a6-7f45229dc872}"));
-        private static readonly FrameDimension s_resolution = new FrameDimension(new Guid("{84236f7b-3bd3-428f-8dab-4ea1439ca315}"));
-        private static readonly FrameDimension s_page = new FrameDimension(new Guid("{7462dc86-6180-4c7e-8e3f-ee7333a7a483}"));
+        private static readonly FrameDimension s_time = new FrameDimension(
+            new Guid("{6aedbd6d-3fb5-418a-83a6-7f45229dc872}")
+        );
+        private static readonly FrameDimension s_resolution = new FrameDimension(
+            new Guid("{84236f7b-3bd3-428f-8dab-4ea1439ca315}")
+        );
+        private static readonly FrameDimension s_page = new FrameDimension(
+            new Guid("{7462dc86-6180-4c7e-8e3f-ee7333a7a483}")
+        );
 
         private Guid _guid;
 
@@ -53,6 +59,7 @@ namespace System.Drawing.Imaging
         {
             get { return s_page; }
         }
+
         /// <summary>
         /// Returns a value indicating whether the specified object is an <see cref='FrameDimension'/> equivalent to
         /// this <see cref='FrameDimension'/>.
@@ -75,9 +82,12 @@ namespace System.Drawing.Imaging
         /// </summary>
         public override string ToString()
         {
-            if (this == s_time) return "Time";
-            if (this == s_resolution) return "Resolution";
-            if (this == s_page) return "Page";
+            if (this == s_time)
+                return "Time";
+            if (this == s_resolution)
+                return "Resolution";
+            if (this == s_page)
+                return "Page";
             return $"[FrameDimension: {_guid}]";
         }
     }

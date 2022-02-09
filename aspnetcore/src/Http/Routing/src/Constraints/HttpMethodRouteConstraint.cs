@@ -40,7 +40,8 @@ public class HttpMethodRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -61,7 +62,10 @@ public class HttpMethodRouteConstraint : IRouteConstraint
                     throw new ArgumentNullException(nameof(httpContext));
                 }
 
-                return AllowedMethods.Contains(httpContext.Request.Method, StringComparer.OrdinalIgnoreCase);
+                return AllowedMethods.Contains(
+                    httpContext.Request.Method,
+                    StringComparer.OrdinalIgnoreCase
+                );
 
             case RouteDirection.UrlGeneration:
                 // We need to see if the user specified the HTTP method explicitly.  Consider these two routes:
@@ -82,7 +86,10 @@ public class HttpMethodRouteConstraint : IRouteConstraint
                     return true;
                 }
 
-                return AllowedMethods.Contains(Convert.ToString(obj, CultureInfo.InvariantCulture), StringComparer.OrdinalIgnoreCase);
+                return AllowedMethods.Contains(
+                    Convert.ToString(obj, CultureInfo.InvariantCulture),
+                    StringComparer.OrdinalIgnoreCase
+                );
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(routeDirection));

@@ -24,14 +24,24 @@ namespace IdeCoreBenchmarks
         [GlobalSetup]
         public async Task GlobalSetup()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            var filePath1 = Path.Combine(roslynRoot, @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs");
-            var filePath2 = Path.Combine(roslynRoot, @"src\Compilers\CSharp\Portable\Generated\CSharpSyntaxGenerator\CSharpSyntaxGenerator.SourceGenerator\Syntax.xml.Syntax.Generated.cs");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            var filePath1 = Path.Combine(
+                roslynRoot,
+                @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs"
+            );
+            var filePath2 = Path.Combine(
+                roslynRoot,
+                @"src\Compilers\CSharp\Portable\Generated\CSharpSyntaxGenerator\CSharpSyntaxGenerator.SourceGenerator\Syntax.xml.Syntax.Generated.cs"
+            );
 
             // Generates the two token sets we later compare against each other.
             // The two chosen files are both around 15k lines of code and approximately 600k tokens each.
-            _semanticTokens1 = await GetSemanticTokensForFilePathAsync(filePath1).ConfigureAwait(false);
-            _semanticTokens2 = await GetSemanticTokensForFilePathAsync(filePath2).ConfigureAwait(false);
+            _semanticTokens1 = await GetSemanticTokensForFilePathAsync(filePath1)
+                .ConfigureAwait(false);
+            _semanticTokens2 = await GetSemanticTokensForFilePathAsync(filePath2)
+                .ConfigureAwait(false);
 
             Console.WriteLine("Completed setup.");
 
@@ -52,12 +62,24 @@ namespace IdeCoreBenchmarks
 
                 var document = solution.GetDocument(documentId);
 
-                var (semanticTokens, isFinalized) = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
-                    document, SemanticTokensCache.TokenTypeToIndex, range: null, CancellationToken.None).ConfigureAwait(false);
+                var (semanticTokens, isFinalized) = await SemanticTokensHelpers
+                    .ComputeSemanticTokensDataAsync(
+                        document,
+                        SemanticTokensCache.TokenTypeToIndex,
+                        range: null,
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false);
                 while (!isFinalized)
                 {
-                    (semanticTokens, isFinalized) = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
-                    document, SemanticTokensCache.TokenTypeToIndex, range: null, CancellationToken.None).ConfigureAwait(false);
+                    (semanticTokens, isFinalized) = await SemanticTokensHelpers
+                        .ComputeSemanticTokensDataAsync(
+                            document,
+                            SemanticTokensCache.TokenTypeToIndex,
+                            range: null,
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false);
                 }
 
                 solution.Workspace.Dispose();
@@ -87,12 +109,18 @@ namespace IdeCoreBenchmarks
             {
                 if (numTokens is null)
                 {
-                    await SemanticTokensEditsDiffer.ComputeSemanticTokensEditsAsync(_semanticTokens1, _semanticTokens2).ConfigureAwait(false);
+                    await SemanticTokensEditsDiffer
+                        .ComputeSemanticTokensEditsAsync(_semanticTokens1, _semanticTokens2)
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    await SemanticTokensEditsDiffer.ComputeSemanticTokensEditsAsync(
-                        _semanticTokens1.Take(numTokens.Value).ToArray(), _semanticTokens2.Take(numTokens.Value).ToArray()).ConfigureAwait(false);
+                    await SemanticTokensEditsDiffer
+                        .ComputeSemanticTokensEditsAsync(
+                            _semanticTokens1.Take(numTokens.Value).ToArray(),
+                            _semanticTokens2.Take(numTokens.Value).ToArray()
+                        )
+                        .ConfigureAwait(false);
                 }
             }
             catch (OutOfMemoryException ex)

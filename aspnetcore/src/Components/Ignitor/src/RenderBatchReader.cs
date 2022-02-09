@@ -41,7 +41,11 @@ public static class RenderBatchReader
         return result;
     }
 
-    private static ArrayRange<RenderTreeDiff> ReadUpdatedComponents(ReadOnlySpan<byte> data, ReadOnlySpan<byte> indexes, string[] strings)
+    private static ArrayRange<RenderTreeDiff> ReadUpdatedComponents(
+        ReadOnlySpan<byte> data,
+        ReadOnlySpan<byte> indexes,
+        string[] strings
+    )
     {
         var result = new RenderTreeDiff[indexes.Length / 4];
 
@@ -56,12 +60,16 @@ public static class RenderBatchReader
             var edits = new RenderTreeEdit[editCount];
             for (var j = 0; j < editCount; j++)
             {
-                var type = (RenderTreeEditType)BinaryPrimitives.ReadInt32LittleEndian(editData.Slice(0, 4));
+                var type = (RenderTreeEditType)BinaryPrimitives.ReadInt32LittleEndian(
+                    editData.Slice(0, 4)
+                );
                 var siblingIndex = BinaryPrimitives.ReadInt32LittleEndian(editData.Slice(4, 4));
 
                 // ReferenceFrameIndex and MoveToSiblingIndex share a slot, so this reads
                 // whichever one applies to the edit type
-                var referenceFrameIndex = BinaryPrimitives.ReadInt32LittleEndian(editData.Slice(8, 4));
+                var referenceFrameIndex = BinaryPrimitives.ReadInt32LittleEndian(
+                    editData.Slice(8, 4)
+                );
                 var removedAttributeName = ReadString(editData.Slice(12, 4), strings);
 
                 editData = editData.Slice(16);
@@ -81,7 +89,10 @@ public static class RenderBatchReader
                         break;
 
                     case RenderTreeEditType.RemoveAttribute:
-                        edits[j] = RenderTreeEdit.RemoveAttribute(siblingIndex, removedAttributeName!);
+                        edits[j] = RenderTreeEdit.RemoveAttribute(
+                            siblingIndex,
+                            removedAttributeName!
+                        );
                         break;
 
                     case RenderTreeEditType.PrependFrame:
@@ -101,7 +112,10 @@ public static class RenderBatchReader
                         break;
 
                     case RenderTreeEditType.PermutationListEntry:
-                        edits[j] = RenderTreeEdit.PermutationListEntry(siblingIndex, referenceFrameIndex);
+                        edits[j] = RenderTreeEdit.PermutationListEntry(
+                            siblingIndex,
+                            referenceFrameIndex
+                        );
                         break;
 
                     case RenderTreeEditType.PermutationListEnd:
@@ -126,7 +140,10 @@ public static class RenderBatchReader
         return builder.ToSegment(0, entries.Length);
     }
 
-    private static ArrayRange<RenderTreeFrame> ReadReferenceFrames(ReadOnlySpan<byte> data, string[] strings)
+    private static ArrayRange<RenderTreeFrame> ReadReferenceFrames(
+        ReadOnlySpan<byte> data,
+        string[] strings
+    )
     {
         var result = new RenderTreeFrame[data.Length / ReferenceFrameSize];
 
@@ -134,7 +151,9 @@ public static class RenderBatchReader
         {
             var frameData = data.Slice(i, ReferenceFrameSize);
 
-            var type = (RenderTreeFrameType)BinaryPrimitives.ReadInt32LittleEndian(frameData.Slice(0, 4));
+            var type = (RenderTreeFrameType)BinaryPrimitives.ReadInt32LittleEndian(
+                frameData.Slice(0, 4)
+            );
 
             // We want each frame to take up the same number of bytes, so that the
             // recipient can index into the array directly instead of having to
@@ -147,38 +166,58 @@ public static class RenderBatchReader
                 case RenderTreeFrameType.Attribute:
                     var attributeName = ReadString(frameData.Slice(4, 4), strings);
                     var attributeValue = ReadString(frameData.Slice(8, 4), strings);
-                    var attributeEventHandlerId = BinaryPrimitives.ReadUInt64LittleEndian(frameData.Slice(12, 8));
-                    result[i / ReferenceFrameSize] = RenderTreeFrame.Attribute(0, attributeName, attributeValue).WithAttributeEventHandlerId(attributeEventHandlerId);
+                    var attributeEventHandlerId = BinaryPrimitives.ReadUInt64LittleEndian(
+                        frameData.Slice(12, 8)
+                    );
+                    result[i / ReferenceFrameSize] = RenderTreeFrame
+                        .Attribute(0, attributeName, attributeValue)
+                        .WithAttributeEventHandlerId(attributeEventHandlerId);
                     break;
 
                 case RenderTreeFrameType.Component:
-                    var componentSubtreeLength = BinaryPrimitives.ReadInt32LittleEndian(frameData.Slice(4, 4));
+                    var componentSubtreeLength = BinaryPrimitives.ReadInt32LittleEndian(
+                        frameData.Slice(4, 4)
+                    );
                     var componentId = BinaryPrimitives.ReadInt32LittleEndian(frameData.Slice(8, 4)); // Nowhere to put this without creating a ComponentState
-                    result[i / ReferenceFrameSize] = RenderTreeFrame.ChildComponent(0, componentType: null)
+                    result[i / ReferenceFrameSize] = RenderTreeFrame
+                        .ChildComponent(0, componentType: null)
                         .WithComponentSubtreeLength(componentSubtreeLength)
                         .WithComponent(new ComponentState(componentId));
                     break;
 
                 case RenderTreeFrameType.ComponentReferenceCapture:
                     // Client doesn't process these, skip.
-                    result[i / ReferenceFrameSize] = RenderTreeFrame.ComponentReferenceCapture(0, null, 0);
+                    result[i / ReferenceFrameSize] = RenderTreeFrame.ComponentReferenceCapture(
+                        0,
+                        null,
+                        0
+                    );
                     break;
 
                 case RenderTreeFrameType.Element:
-                    var elementSubtreeLength = BinaryPrimitives.ReadInt32LittleEndian(frameData.Slice(4, 4));
+                    var elementSubtreeLength = BinaryPrimitives.ReadInt32LittleEndian(
+                        frameData.Slice(4, 4)
+                    );
                     var elementName = ReadString(frameData.Slice(8, 4), strings);
-                    result[i / ReferenceFrameSize] = RenderTreeFrame.Element(0, elementName).WithElementSubtreeLength(elementSubtreeLength);
+                    result[i / ReferenceFrameSize] = RenderTreeFrame
+                        .Element(0, elementName)
+                        .WithElementSubtreeLength(elementSubtreeLength);
                     break;
 
                 case RenderTreeFrameType.ElementReferenceCapture:
                     var referenceCaptureId = ReadString(frameData.Slice(4, 4), strings);
-                    result[i / ReferenceFrameSize] = RenderTreeFrame.ElementReferenceCapture(0, null)
+                    result[i / ReferenceFrameSize] = RenderTreeFrame
+                        .ElementReferenceCapture(0, null)
                         .WithElementReferenceCaptureId(referenceCaptureId);
                     break;
 
                 case RenderTreeFrameType.Region:
-                    var regionSubtreeLength = BinaryPrimitives.ReadInt32LittleEndian(frameData.Slice(4, 4));
-                    result[i / ReferenceFrameSize] = RenderTreeFrame.Region(0).WithRegionSubtreeLength(regionSubtreeLength);
+                    var regionSubtreeLength = BinaryPrimitives.ReadInt32LittleEndian(
+                        frameData.Slice(4, 4)
+                    );
+                    result[i / ReferenceFrameSize] = RenderTreeFrame
+                        .Region(0)
+                        .WithRegionSubtreeLength(regionSubtreeLength);
                     break;
 
                 case RenderTreeFrameType.Text:
@@ -215,7 +254,11 @@ public static class RenderBatchReader
         return index >= 0 ? strings[index] : null;
     }
 
-    private static uint ReadUnsignedLEB128(ReadOnlySpan<byte> data, int startOffset, out int numBytesRead)
+    private static uint ReadUnsignedLEB128(
+        ReadOnlySpan<byte> data,
+        int startOffset,
+        out int numBytesRead
+    )
     {
         var result = (uint)0;
         var shift = 0;
@@ -242,7 +285,8 @@ public static class RenderBatchReader
                 BinaryPrimitives.ReadInt32LittleEndian(data.Slice(data.Length - 16, 4)),
                 BinaryPrimitives.ReadInt32LittleEndian(data.Slice(data.Length - 12, 4)),
                 BinaryPrimitives.ReadInt32LittleEndian(data.Slice(data.Length - 8, 4)),
-                BinaryPrimitives.ReadInt32LittleEndian(data.Slice(data.Length - 4, 4)));
+                BinaryPrimitives.ReadInt32LittleEndian(data.Slice(data.Length - 4, 4))
+            );
         }
 
         private readonly int _updatedComponents;
@@ -251,7 +295,13 @@ public static class RenderBatchReader
         private readonly int _disposedEventHandlerIds;
         private readonly int _strings;
 
-        public Sections(int updatedComponents, int referenceFrames, int disposedComponentIds, int disposedEventHandlerIds, int strings)
+        public Sections(
+            int updatedComponents,
+            int referenceFrames,
+            int disposedComponentIds,
+            int disposedEventHandlerIds,
+            int strings
+        )
         {
             _updatedComponents = updatedComponents;
             _referenceFrames = referenceFrames;

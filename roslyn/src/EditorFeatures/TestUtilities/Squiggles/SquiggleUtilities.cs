@@ -23,21 +23,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
     public static class SquiggleUtilities
     {
         // Squiggle tests require solution crawler to run.
-        internal static TestComposition CompositionWithSolutionCrawler = EditorTestCompositions.EditorFeatures
-            .RemoveParts(typeof(MockWorkspaceEventListenerProvider));
+        internal static TestComposition CompositionWithSolutionCrawler =
+            EditorTestCompositions.EditorFeatures.RemoveParts(
+                typeof(MockWorkspaceEventListenerProvider)
+            );
 
-        internal static async Task<(ImmutableArray<DiagnosticData>, ImmutableArray<ITagSpan<IErrorTag>>)> GetDiagnosticsAndErrorSpansAsync<TProvider>(
+        internal static async Task<(ImmutableArray<DiagnosticData>, ImmutableArray<
+                ITagSpan<IErrorTag>
+            >)> GetDiagnosticsAndErrorSpansAsync<TProvider>(
             TestWorkspace workspace,
-            IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzerMap = null)
-            where TProvider : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>
+            IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzerMap = null
+        ) where TProvider : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>
         {
-            using var wrapper = new DiagnosticTaggerWrapper<TProvider, IErrorTag>(workspace, analyzerMap);
-            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
+            using var wrapper = new DiagnosticTaggerWrapper<TProvider, IErrorTag>(
+                workspace,
+                analyzerMap
+            );
+            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
+                workspace.Documents.First().GetTextBuffer()
+            );
 
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
 
-            var analyzerDiagnostics = await wrapper.AnalyzerService.GetDiagnosticsAsync(workspace.CurrentSolution);
+            var analyzerDiagnostics = await wrapper.AnalyzerService.GetDiagnosticsAsync(
+                workspace.CurrentSolution
+            );
 
             var snapshot = workspace.Documents.First().GetTextBuffer().CurrentSnapshot;
             var spans = tagger.GetTags(snapshot.GetSnapshotSpanCollection()).ToImmutableArray();

@@ -20,8 +20,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<string> targetTypesSymbolKeyData,
             bool forceIndexCreation,
             bool hideAdvancedMembers,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
-        ValueTask WarmUpCacheAsync(PinnedSolutionInfo solutionInfo, DocumentId documentId, CancellationToken cancellationToken);
+        ValueTask WarmUpCacheAsync(
+            PinnedSolutionInfo solutionInfo,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        );
     }
 }

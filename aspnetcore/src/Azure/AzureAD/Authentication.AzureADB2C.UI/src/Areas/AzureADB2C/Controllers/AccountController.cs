@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
 [AllowAnonymous]
 [Area("AzureADB2C")]
 [Route("[area]/[controller]/[action]")]
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
 internal class AccountController : Controller
 {
     private readonly IOptionsMonitor<AzureADB2COptions> _options;
@@ -29,9 +31,7 @@ internal class AccountController : Controller
     {
         scheme = scheme ?? AzureADB2CDefaults.AuthenticationScheme;
         var redirectUrl = Url.Content("~/");
-        return Challenge(
-            new AuthenticationProperties { RedirectUri = redirectUrl },
-            scheme);
+        return Challenge(new AuthenticationProperties { RedirectUri = redirectUrl }, scheme);
     }
 
     [HttpGet("{scheme?}")]
@@ -76,9 +76,15 @@ internal class AccountController : Controller
 
         var options = _options.Get(scheme);
 
-        var callbackUrl = Url.Page("/Account/SignedOut", pageHandler: null, values: null, protocol: Request.Scheme);
+        var callbackUrl = Url.Page(
+            "/Account/SignedOut",
+            pageHandler: null,
+            values: null,
+            protocol: Request.Scheme
+        );
         return SignOut(
             new AuthenticationProperties { RedirectUri = callbackUrl },
-            options.AllSchemes);
+            options.AllSchemes
+        );
     }
 }

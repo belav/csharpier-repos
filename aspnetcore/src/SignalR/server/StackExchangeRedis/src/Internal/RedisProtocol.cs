@@ -37,7 +37,11 @@ internal class RedisProtocol
     public byte[] WriteInvocation(string methodName, object?[] args) =>
         WriteInvocation(methodName, args, excludedConnectionIds: null);
 
-    public byte[] WriteInvocation(string methodName, object?[] args, IReadOnlyList<string>? excludedConnectionIds)
+    public byte[] WriteInvocation(
+        string methodName,
+        object?[] args,
+        IReadOnlyList<string>? excludedConnectionIds
+    )
     {
         // Written as a MessagePack 'arr' containing at least these items:
         // * A MessagePack 'arr' of 'str's representing the excluded ids
@@ -212,7 +216,11 @@ internal class RedisProtocol
         return new SerializedHubMessage(serializations);
     }
 
-    private static void ValidateArraySize(ref MessagePackReader reader, int expectedLength, string messageType)
+    private static void ValidateArraySize(
+        ref MessagePackReader reader,
+        int expectedLength,
+        string messageType
+    )
     {
         var length = reader.ReadArrayHeader();
 

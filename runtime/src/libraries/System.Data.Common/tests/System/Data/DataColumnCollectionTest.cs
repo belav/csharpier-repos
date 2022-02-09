@@ -237,7 +237,9 @@ namespace System.Data.Tests
             Assert.Throws<DuplicateNameException>(() => cols.Add(c2));
 
             // EvaluateException : Invalid number of arguments: function substring().
-            Assert.ThrowsAny<InvalidExpressionException>(() => cols.Add("test2", typeof(string), "substring ('fdsafewq', 2)"));
+            Assert.ThrowsAny<InvalidExpressionException>(
+                () => cols.Add("test2", typeof(string), "substring ('fdsafewq', 2)")
+            );
         }
 
         [Fact]
@@ -531,7 +533,10 @@ namespace System.Data.Tests
             ds.Tables[1].Columns.Add("col2", typeof(int));
 
             ds.Relations.Add("rel1", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]);
-            AssertExtensions.Throws<ArgumentException>(null, () => ds.Tables[0].Columns.RemoveAt(0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => ds.Tables[0].Columns.RemoveAt(0)
+            );
         }
 
         [Fact]

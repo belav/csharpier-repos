@@ -23,13 +23,15 @@ namespace System.Text.RegularExpressions
         /// <summary>Gets the zero-based character offset in the regular expression pattern where the parse error occurs.</summary>
         public int Offset { get; }
 
-        internal RegexParseException(RegexParseError error, int offset, string message) : base(message)
+        internal RegexParseException(RegexParseError error, int offset, string message)
+            : base(message)
         {
             Error = error;
             Offset = offset;
         }
 
-        internal RegexParseException(string pattern, RegexParseError error, int offset) : base(MakeMessage(pattern, error, offset))
+        internal RegexParseException(string pattern, RegexParseError error, int offset)
+            : base(MakeMessage(pattern, error, offset))
         {
             Error = error;
             Offset = offset;
@@ -50,64 +52,154 @@ namespace System.Text.RegularExpressions
                     message = SR.Format(SR.MakeException, pattern, offset, SR.Generic);
                     break;
                 case RegexParseError.AlternationHasTooManyConditions:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.AlternationHasTooManyConditions);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.AlternationHasTooManyConditions
+                    );
                     break;
                 case RegexParseError.AlternationHasMalformedCondition:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.AlternationHasMalformedCondition);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.AlternationHasMalformedCondition
+                    );
                     break;
                 case RegexParseError.InvalidUnicodePropertyEscape:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.InvalidUnicodePropertyEscape);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.InvalidUnicodePropertyEscape
+                    );
                     break;
                 case RegexParseError.MalformedUnicodePropertyEscape:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.MalformedUnicodePropertyEscape);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.MalformedUnicodePropertyEscape
+                    );
                     break;
                 case RegexParseError.UnrecognizedEscape:
                     message = SR.Format(SR.MakeException, pattern, offset, SR.UnrecognizedEscape);
                     break;
                 case RegexParseError.UnrecognizedControlCharacter:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.UnrecognizedControlCharacter);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.UnrecognizedControlCharacter
+                    );
                     break;
                 case RegexParseError.MissingControlCharacter:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.MissingControlCharacter);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.MissingControlCharacter
+                    );
                     break;
                 case RegexParseError.InsufficientOrInvalidHexDigits:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.InsufficientOrInvalidHexDigits);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.InsufficientOrInvalidHexDigits
+                    );
                     break;
                 case RegexParseError.QuantifierOrCaptureGroupOutOfRange:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.QuantifierOrCaptureGroupOutOfRange);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.QuantifierOrCaptureGroupOutOfRange
+                    );
                     break;
                 case RegexParseError.UndefinedNamedReference:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.UndefinedNamedReferenceNoPlaceholder);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.UndefinedNamedReferenceNoPlaceholder
+                    );
                     break;
                 case RegexParseError.UndefinedNumberedReference:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.UndefinedNumberedReferenceNoPlaceholder);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.UndefinedNumberedReferenceNoPlaceholder
+                    );
                     break;
                 case RegexParseError.MalformedNamedReference:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.MalformedNamedReference);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.MalformedNamedReference
+                    );
                     break;
                 case RegexParseError.UnescapedEndingBackslash:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.UnescapedEndingBackslash);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.UnescapedEndingBackslash
+                    );
                     break;
                 case RegexParseError.UnterminatedComment:
                     message = SR.Format(SR.MakeException, pattern, offset, SR.UnterminatedComment);
                     break;
                 case RegexParseError.InvalidGroupingConstruct:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.InvalidGroupingConstruct);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.InvalidGroupingConstruct
+                    );
                     break;
                 case RegexParseError.AlternationHasNamedCapture:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.AlternationHasNamedCapture);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.AlternationHasNamedCapture
+                    );
                     break;
                 case RegexParseError.AlternationHasComment:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.AlternationHasComment);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.AlternationHasComment
+                    );
                     break;
                 case RegexParseError.AlternationHasMalformedReference:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.AlternationHasMalformedReferenceNoPlaceholder);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.AlternationHasMalformedReferenceNoPlaceholder
+                    );
                     break;
                 case RegexParseError.AlternationHasUndefinedReference:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.AlternationHasUndefinedReferenceNoPlaceholder);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.AlternationHasUndefinedReferenceNoPlaceholder
+                    );
                     break;
                 case RegexParseError.CaptureGroupNameInvalid:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.CaptureGroupNameInvalid);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.CaptureGroupNameInvalid
+                    );
                     break;
                 case RegexParseError.CaptureGroupOfZero:
                     message = SR.Format(SR.MakeException, pattern, offset, SR.CaptureGroupOfZero);
@@ -116,31 +208,76 @@ namespace System.Text.RegularExpressions
                     message = SR.Format(SR.MakeException, pattern, offset, SR.UnterminatedBracket);
                     break;
                 case RegexParseError.ExclusionGroupNotLast:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.ExclusionGroupNotLast);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.ExclusionGroupNotLast
+                    );
                     break;
                 case RegexParseError.ReversedCharacterRange:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.ReversedCharacterRange);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.ReversedCharacterRange
+                    );
                     break;
                 case RegexParseError.ShorthandClassInCharacterRange:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.ShorthandClassInCharacterRangeNoPlaceholder);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.ShorthandClassInCharacterRangeNoPlaceholder
+                    );
                     break;
                 case RegexParseError.InsufficientClosingParentheses:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.InsufficientClosingParentheses);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.InsufficientClosingParentheses
+                    );
                     break;
                 case RegexParseError.ReversedQuantifierRange:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.ReversedQuantifierRange);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.ReversedQuantifierRange
+                    );
                     break;
                 case RegexParseError.NestedQuantifiersNotParenthesized:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.NestedQuantifiersNotParenthesizedNoPlaceholder);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.NestedQuantifiersNotParenthesizedNoPlaceholder
+                    );
                     break;
                 case RegexParseError.QuantifierAfterNothing:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.QuantifierAfterNothing);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.QuantifierAfterNothing
+                    );
                     break;
                 case RegexParseError.InsufficientOpeningParentheses:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.InsufficientOpeningParentheses);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.InsufficientOpeningParentheses
+                    );
                     break;
                 case RegexParseError.UnrecognizedUnicodeProperty:
-                    message = SR.Format(SR.MakeException, pattern, offset, SR.UnrecognizedUnicodePropertyNoPlaceholder);
+                    message = SR.Format(
+                        SR.MakeException,
+                        pattern,
+                        offset,
+                        SR.UnrecognizedUnicodePropertyNoPlaceholder
+                    );
                     break;
                 default:
                     message = SR.Format(SR.MakeException, pattern, offset, SR.Generic);

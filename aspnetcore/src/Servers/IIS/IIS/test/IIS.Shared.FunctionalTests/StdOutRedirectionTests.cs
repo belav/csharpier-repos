@@ -14,22 +14,24 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
 public class StdOutRedirectionTests : IISFunctionalTestBase
 {
-    public StdOutRedirectionTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public StdOutRedirectionTests(PublishedSitesFixture fixture) : base(fixture) { }
 
     [ConditionalFact]
     [RequiresNewShim]
@@ -46,16 +48,18 @@ public class StdOutRedirectionTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult,
-            @"The framework 'Microsoft.NETCore.App', version '2.9.9' \(x64\) was not found.", Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            @"The framework 'Microsoft.NETCore.App', version '2.9.9' \(x64\) was not found.",
+            Logger
+        );
     }
 
     [ConditionalFact]
     [RequiresNewShim]
     public async Task FrameworkNotFoundExceptionLogged_File()
     {
-        var deploymentParameters =
-            Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+        var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
 
         deploymentParameters.EnableLogging(LogFolderPath);
 
@@ -68,10 +72,17 @@ public class StdOutRedirectionTests : IISFunctionalTestBase
 
         StopServer();
 
-        var contents = Helpers.ReadAllTextFromFile(Helpers.GetExpectedLogName(deploymentResult, LogFolderPath), Logger);
-        var expectedString = "The framework 'Microsoft.NETCore.App', version '2.9.9' (x64) was not found.";
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, 
-            @"The framework 'Microsoft.NETCore.App', version '2.9.9' \(x64\) was not found.", Logger);
+        var contents = Helpers.ReadAllTextFromFile(
+            Helpers.GetExpectedLogName(deploymentResult, LogFolderPath),
+            Logger
+        );
+        var expectedString =
+            "The framework 'Microsoft.NETCore.App', version '2.9.9' (x64) was not found.";
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            @"The framework 'Microsoft.NETCore.App', version '2.9.9' \(x64\) was not found.",
+            Logger
+        );
         Assert.Contains(expectedString, contents);
     }
 
@@ -80,8 +91,7 @@ public class StdOutRedirectionTests : IISFunctionalTestBase
     [SkipIfDebug]
     public async Task EnableCoreHostTraceLogging_TwoLogFilesCreated()
     {
-        var deploymentParameters =
-            Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+        var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
         deploymentParameters.TransformArguments((a, _) => $"{a} CheckLargeStdOutWrites");
 
         deploymentParameters.EnvironmentVariables["COREHOST_TRACE"] = "1";
@@ -134,8 +144,7 @@ public class StdOutRedirectionTests : IISFunctionalTestBase
     [InlineData("CheckOversizedStdOutWrites")]
     public async Task EnableCoreHostTraceLogging_FileCaptureNativeLogs(string path)
     {
-        var deploymentParameters =
-            Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+        var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
         deploymentParameters.EnvironmentVariables["COREHOST_TRACE"] = "1";
         deploymentParameters.TransformArguments((a, _) => $"{a} {path}");
 

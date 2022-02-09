@@ -12,15 +12,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
     {
         private readonly Symbols.NamedTypeSymbol _underlying;
 
-        public NonErrorNamedTypeSymbol(Symbols.NamedTypeSymbol underlying, CodeAnalysis.NullableAnnotation nullableAnnotation)
-            : base(nullableAnnotation)
+        public NonErrorNamedTypeSymbol(
+            Symbols.NamedTypeSymbol underlying,
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        ) : base(nullableAnnotation)
         {
             Debug.Assert(underlying is object);
             Debug.Assert(!underlying.IsErrorType());
             _underlying = underlying;
         }
 
-        protected override ITypeSymbol WithNullableAnnotation(CodeAnalysis.NullableAnnotation nullableAnnotation)
+        protected override ITypeSymbol WithNullableAnnotation(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
         {
             Debug.Assert(nullableAnnotation != _underlying.DefaultNullableAnnotation);
             Debug.Assert(nullableAnnotation != this.NullableAnnotation);
@@ -28,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         }
 
         internal override CSharp.Symbol UnderlyingSymbol => _underlying;
-        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol => _underlying;
+        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol =>
+            _underlying;
         internal override Symbols.TypeSymbol UnderlyingTypeSymbol => _underlying;
         internal override Symbols.NamedTypeSymbol UnderlyingNamedTypeSymbol => _underlying;
     }

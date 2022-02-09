@@ -14,17 +14,15 @@ namespace System.Security.Cryptography.Xml.Tests
 {
     public class SigningVerifyingX509Cert
     {
-        const string ExampleXml = @"<?xml version=""1.0""?>
+        const string ExampleXml =
+            @"<?xml version=""1.0""?>
 <example>
 <test>some text node</test>
 </example>";
 
         private static void SignXml(XmlDocument doc, AsymmetricAlgorithm key)
         {
-            var signedXml = new SignedXml(doc)
-            {
-                SigningKey = key
-            };
+            var signedXml = new SignedXml(doc) { SigningKey = key };
 
             // Note: Adding KeyInfo (KeyInfoX509Data) does not provide more security
             //       Signing with private key is enough
@@ -59,7 +57,10 @@ namespace System.Security.Cryptography.Xml.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51370", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51370",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void SignedXmlHasCertificateVerifiableSignature()
         {
             using (X509Certificate2 x509cert = TestHelpers.GetSampleX509Certificate())
@@ -78,7 +79,10 @@ namespace System.Security.Cryptography.Xml.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "DSA is not available")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+            "DSA is not available"
+        )]
         public void SignedXmlHasDSACertificateVerifiableSignature()
         {
             using (X509Certificate2 x509cert = TestHelpers.GetSampleDSAX509Certificate())

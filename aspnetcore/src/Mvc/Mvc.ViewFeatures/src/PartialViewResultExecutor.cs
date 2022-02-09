@@ -42,8 +42,16 @@ public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<Par
         ITempDataDictionaryFactory tempDataFactory,
         DiagnosticListener diagnosticListener,
         ILoggerFactory loggerFactory,
-        IModelMetadataProvider modelMetadataProvider)
-        : base(viewOptions, writerFactory, viewEngine, tempDataFactory, diagnosticListener, modelMetadataProvider)
+        IModelMetadataProvider modelMetadataProvider
+    )
+        : base(
+            viewOptions,
+            writerFactory,
+            viewEngine,
+            tempDataFactory,
+            diagnosticListener,
+            modelMetadataProvider
+        )
     {
         if (loggerFactory == null)
         {
@@ -64,7 +72,10 @@ public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<Par
     /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current request.</param>
     /// <param name="viewResult">The <see cref="PartialViewResult"/>.</param>
     /// <returns>A <see cref="ViewEngineResult"/>.</returns>
-    public virtual ViewEngineResult FindView(ActionContext actionContext, PartialViewResult viewResult)
+    public virtual ViewEngineResult FindView(
+        ActionContext actionContext,
+        PartialViewResult viewResult
+    )
     {
         if (actionContext == null)
         {
@@ -81,7 +92,11 @@ public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<Par
 
         var stopwatch = ValueStopwatch.StartNew();
 
-        var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: false);
+        var result = viewEngine.GetView(
+            executingFilePath: null,
+            viewPath: viewName,
+            isMainPage: false
+        );
         var originalResult = result;
         if (!result.Success)
         {
@@ -115,7 +130,8 @@ public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<Par
                 isMainPage: false,
                 viewResult: viewResult,
                 viewName: viewName,
-                view: result.View);
+                view: result.View
+            );
 
             Logger.PartialViewFound(result.View, stopwatch.GetElapsedTime());
         }
@@ -126,7 +142,8 @@ public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<Par
                 isMainPage: false,
                 viewResult: viewResult,
                 viewName: viewName,
-                searchedLocations: result.SearchedLocations);
+                searchedLocations: result.SearchedLocations
+            );
 
             Logger.PartialViewNotFound(viewName, result.SearchedLocations);
         }
@@ -141,7 +158,11 @@ public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<Par
     /// <param name="view">The <see cref="IView"/>.</param>
     /// <param name="viewResult">The <see cref="PartialViewResult"/>.</param>
     /// <returns>A <see cref="Task"/> which will complete when view execution is completed.</returns>
-    public virtual Task ExecuteAsync(ActionContext actionContext, IView view, PartialViewResult viewResult)
+    public virtual Task ExecuteAsync(
+        ActionContext actionContext,
+        IView view,
+        PartialViewResult viewResult
+    )
     {
         if (actionContext == null)
         {
@@ -164,7 +185,8 @@ public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<Par
             viewResult.ViewData,
             viewResult.TempData,
             viewResult.ContentType,
-            viewResult.StatusCode);
+            viewResult.StatusCode
+        );
     }
 
     /// <inheritdoc />
@@ -208,8 +230,10 @@ public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<Par
 
         var actionDescriptor = context.ActionDescriptor;
         string? normalizedValue = null;
-        if (actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value) &&
-            !string.IsNullOrEmpty(value))
+        if (
+            actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value)
+            && !string.IsNullOrEmpty(value)
+        )
         {
             normalizedValue = value;
         }

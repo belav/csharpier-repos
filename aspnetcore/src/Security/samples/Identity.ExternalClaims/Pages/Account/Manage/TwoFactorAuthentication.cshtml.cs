@@ -22,7 +22,8 @@ public class TwoFactorAuthenticationModel : PageModel
     public TwoFactorAuthenticationModel(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        ILogger<TwoFactorAuthenticationModel> logger)
+        ILogger<TwoFactorAuthenticationModel> logger
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -41,7 +42,9 @@ public class TwoFactorAuthenticationModel : PageModel
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
         {
-            throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            throw new ApplicationException(
+                $"Unable to load user with ID '{_userManager.GetUserId(User)}'."
+            );
         }
 
         HasAuthenticator = await _userManager.GetAuthenticatorKeyAsync(user) != null;

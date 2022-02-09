@@ -14,7 +14,9 @@ namespace System.Management.Tests
             var dmtfDate = "20020408141835.978000-150";
             var dmtfDateExpected = "20020408164835.978000+000";
 
-            DateTime convertedDate = ManagementDateTimeConverter.ToDateTime(dmtfDate).ToUniversalTime();
+            DateTime convertedDate = ManagementDateTimeConverter
+                .ToDateTime(dmtfDate)
+                .ToUniversalTime();
             Assert.Equal(date, convertedDate);
 
             // Converting System.DateTime to DMTF datetime
@@ -25,8 +27,12 @@ namespace System.Management.Tests
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
         public void DateTime_MinValue_RoundTrip()
         {
-            string dmtfFromDateTimeMinValue = ManagementDateTimeConverter.ToDmtfDateTime(DateTime.MinValue);
-            DateTime convertedDate = ManagementDateTimeConverter.ToDateTime(dmtfFromDateTimeMinValue);
+            string dmtfFromDateTimeMinValue = ManagementDateTimeConverter.ToDmtfDateTime(
+                DateTime.MinValue
+            );
+            DateTime convertedDate = ManagementDateTimeConverter.ToDateTime(
+                dmtfFromDateTimeMinValue
+            );
             Assert.Equal(DateTimeKind.Unspecified, convertedDate.Kind);
             Assert.Equal(DateTime.MinValue, convertedDate);
         }
@@ -42,7 +48,9 @@ namespace System.Management.Tests
             Assert.Equal(timeSpan, convertedTimeSpan);
 
             // Converting System.TimeSpan to DMTF time interval format
-            string convertedDmtfTimeInterval = ManagementDateTimeConverter.ToDmtfTimeInterval(timeSpan);
+            string convertedDmtfTimeInterval = ManagementDateTimeConverter.ToDmtfTimeInterval(
+                timeSpan
+            );
             Assert.Equal(dmtfTimeInterval, convertedDmtfTimeInterval);
         }
     }

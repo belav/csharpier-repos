@@ -15,15 +15,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public EventId LoggedEvent => Logger.LoggedEvent;
         public string Message => Logger.Message;
 
-        public TestLoggerFactory(LoggingDefinitions definitions)
-            => Logger = new TestLogger(definitions);
+        public TestLoggerFactory(LoggingDefinitions definitions) =>
+            Logger = new TestLogger(definitions);
 
-        public ILogger CreateLogger(string categoryName)
-            => Logger;
+        public ILogger CreateLogger(string categoryName) => Logger;
 
-        public void AddProvider(ILoggerProvider provider)
-            => throw new NotSupportedException();
+        public void AddProvider(ILoggerProvider provider) => throw new NotSupportedException();
 
-        public void Dispose() {}
+        public void Dispose() { }
     }
 }

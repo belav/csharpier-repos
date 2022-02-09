@@ -29,8 +29,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
     internal enum ErrArgFlags
     {
         None = 0x0000,
-        NoStr = 0x0002,  // The arg should NOT be included in the error message, just the location
-        Unique = 0x0004,  // The string should be distinct from other args marked with Unique
+        NoStr = 0x0002, // The arg should NOT be included in the error message, just the location
+        Unique = 0x0004, // The string should be distinct from other args marked with Unique
         UseGetErrorInfo = 0x0008,
     }
 
@@ -60,9 +60,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
         internal MethPropWithInstMemo mpwiMemo;
         internal SymWithTypeMemo swtMemo;
 
-        public ErrArg()
-        {
-        }
+        public ErrArg() { }
 
         public ErrArg(int n)
         {
@@ -85,10 +83,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.psz = psz;
         }
 
-        public ErrArg(CType pType)
-            : this(pType, ErrArgFlags.None)
-        {
-        }
+        public ErrArg(CType pType) : this(pType, ErrArgFlags.None) { }
 
         public ErrArg(CType pType, ErrArgFlags eaf)
         {
@@ -97,10 +92,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.pType = pType;
         }
 
-        public ErrArg(Symbol pSym)
-            : this(pSym, ErrArgFlags.None)
-        {
-        }
+        public ErrArg(Symbol pSym) : this(pSym, ErrArgFlags.None) { }
 
         private ErrArg(Symbol pSym, ErrArgFlags eaf)
         {
@@ -108,6 +100,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.eaf = eaf;
             this.sym = pSym;
         }
+
         public ErrArg(SymWithType swt)
         {
             this.eak = ErrArgKind.SymWithType;
@@ -116,6 +109,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.swtMemo.sym = swt.Sym;
             this.swtMemo.ats = swt.Ats;
         }
+
         public ErrArg(MethPropWithInst mpwi)
         {
             this.eak = ErrArgKind.MethWithInst;
@@ -125,30 +119,37 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.mpwiMemo.ats = mpwi.Ats;
             this.mpwiMemo.typeArgs = mpwi.TypeArgs;
         }
+
         public static implicit operator ErrArg(int n)
         {
             return new ErrArg(n);
         }
+
         public static implicit operator ErrArg(CType type)
         {
             return new ErrArg(type);
         }
+
         public static implicit operator ErrArg(string psz)
         {
             return new ErrArg(psz);
         }
+
         public static implicit operator ErrArg(Name name)
         {
             return new ErrArg(name);
         }
+
         public static implicit operator ErrArg(Symbol pSym)
         {
             return new ErrArg(pSym);
         }
+
         public static implicit operator ErrArg(SymWithType swt)
         {
             return new ErrArg(swt);
         }
+
         public static implicit operator ErrArg(MethPropWithInst mpwi)
         {
             return new ErrArg(mpwi);
@@ -157,8 +158,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
 
     internal sealed class ErrArgRefOnly : ErrArg
     {
-        public ErrArgRefOnly(Symbol sym)
-            : base(sym)
+        public ErrArgRefOnly(Symbol sym) : base(sym)
         {
             eaf = ErrArgFlags.NoStr;
         }

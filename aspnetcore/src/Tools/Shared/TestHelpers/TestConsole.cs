@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Tools.Internal;
 public class TestConsole : IConsole
 {
     private event ConsoleCancelEventHandler _cancelKeyPress = default!;
-    private readonly TaskCompletionSource<bool> _cancelKeySubscribed = new TaskCompletionSource<bool>();
+    private readonly TaskCompletionSource<bool> _cancelKeySubscribed =
+        new TaskCompletionSource<bool>();
     private readonly TestOutputWriter _testWriter;
 
     public TestConsole(ITestOutputHelper output)
@@ -48,16 +49,15 @@ public class TestConsole : IConsole
     {
         var ctor = typeof(ConsoleCancelEventArgs)
             .GetTypeInfo()
-            .DeclaredConstructors
-            .Single(c => c.GetParameters().First().ParameterType == typeof(ConsoleSpecialKey));
+            .DeclaredConstructors.Single(
+                c => c.GetParameters().First().ParameterType == typeof(ConsoleSpecialKey)
+            );
         var args = (ConsoleCancelEventArgs)ctor.Invoke(new object[] { ConsoleSpecialKey.ControlC });
         _cancelKeyPress.Invoke(this, args);
         return args;
     }
 
-    public void ResetColor()
-    {
-    }
+    public void ResetColor() { }
 
     public string GetOutput()
     {

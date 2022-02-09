@@ -12,10 +12,14 @@ using Xunit;
 
 namespace System.ConfigurationTests
 {
-    [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Unit test for core implementation")]
+    [SkipOnTargetFramework(
+        TargetFrameworkMonikers.NetFramework,
+        "Unit test for core implementation"
+    )]
     public class TypeUtilTests
     {
-        [Theory,
+        [
+            Theory,
             // CoreLib
             InlineData("System.String", typeof(string)),
             InlineData("System.Int32", typeof(int)),
@@ -29,29 +33,42 @@ namespace System.ConfigurationTests
             InlineData("System.Collections.Generic.Stack`1", typeof(Stack<>)),
             // System.Collections.Concurrent, previously System
             InlineData("System.Collections.Concurrent.ConcurrentBag`1", typeof(ConcurrentBag<>)),
-            InlineData("System.Collections.Concurrent.BlockingCollection`1", typeof(BlockingCollection<>)),
+            InlineData(
+                "System.Collections.Concurrent.BlockingCollection`1",
+                typeof(BlockingCollection<>)
+            ),
             // System.Collections.Specialized, previously System
-            InlineData("System.Collections.Specialized.HybridDictionary", typeof(HybridDictionary)),
+            InlineData(
+                "System.Collections.Specialized.HybridDictionary",
+                typeof(HybridDictionary)
+            ),
             InlineData("System.Collections.Specialized.ListDictionary", typeof(ListDictionary)),
             InlineData("System.Collections.Specialized.StringDictionary", typeof(StringDictionary)),
-            InlineData("System.Collections.Specialized.OrderedDictionary", typeof(OrderedDictionary)),
+            InlineData(
+                "System.Collections.Specialized.OrderedDictionary",
+                typeof(OrderedDictionary)
+            ),
             InlineData("System.Collections.Specialized.StringCollection", typeof(StringCollection)),
-            InlineData("System.Collections.Specialized.NameValueCollection", typeof(NameValueCollection)),
-            ]
+            InlineData(
+                "System.Collections.Specialized.NameValueCollection",
+                typeof(NameValueCollection)
+            ),
+        ]
         public void GetType_NoAssemblyQualifcation(string typeString, Type expectedType)
         {
             Assert.Equal(expectedType, TypeUtil.GetType(typeString, throwOnError: false));
         }
 
-
-        [Theory,
+        [
+            Theory,
             // ConfigurationManager types roll forward
             // ConfigurationManager isn't part of the shared framework and potentially app-local.
             // https://github.com/dotnet/runtime/issues/12376#issuecomment-479670104 explains why testing the type roll forward behavior doesn't work in such cases.
             InlineData(
                 "System.Configuration.UserSettingsGroup, System.Configuration.ConfigurationManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
-                typeof(UserSettingsGroup))
-            ]
+                typeof(UserSettingsGroup)
+            )
+        ]
         public void GetType_ConfigurationManagerTypes(string typeString, Type expectedType)
         {
             Assert.Equal(expectedType, TypeUtil.GetType(typeString, throwOnError: false));
@@ -60,7 +77,9 @@ namespace System.ConfigurationTests
         [Fact]
         public void GetType_ThrowOnError()
         {
-            Assert.Throws<TypeLoadException>(() => TypeUtil.GetType("Mxyzptlk", throwOnError: true));
+            Assert.Throws<TypeLoadException>(
+                () => TypeUtil.GetType("Mxyzptlk", throwOnError: true)
+            );
         }
 
         [Fact]
@@ -72,21 +91,43 @@ namespace System.ConfigurationTests
         [Fact]
         public void GetTypeConfigHost()
         {
-            TestHost host = new TestHost((s, b) => { return typeof(string); });
+            TestHost host = new TestHost(
+                (s, b) =>
+                {
+                    return typeof(string);
+                }
+            );
             Assert.Equal(typeof(string), TypeUtil.GetType(host, "Mxyzptlk", throwOnError: false));
         }
 
         [Fact]
         public void GetTypeConfigHost_ThrowOnError()
         {
-            TestHost host = new TestHost((s, b) => { if (b) throw new ArgumentException(); return null; });
-            AssertExtensions.Throws<ArgumentException>(null, () => TypeUtil.GetType(host, "Mxyzptlk", throwOnError: true));
+            TestHost host = new TestHost(
+                (s, b) =>
+                {
+                    if (b)
+                        throw new ArgumentException();
+                    return null;
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => TypeUtil.GetType(host, "Mxyzptlk", throwOnError: true)
+            );
         }
 
         [Fact]
         public void GetTypeConfigHost_NoThrowOnError()
         {
-            TestHost host = new TestHost((s, b) => { if (b) throw new ArgumentException(); return null; });
+            TestHost host = new TestHost(
+                (s, b) =>
+                {
+                    if (b)
+                        throw new ArgumentException();
+                    return null;
+                }
+            );
             Assert.Null(TypeUtil.GetType(host, "Mxyzptlk", throwOnError: false));
         }
 
@@ -106,45 +147,33 @@ namespace System.ConfigurationTests
 
             bool IInternalConfigHost.IsRemote
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             bool IInternalConfigHost.SupportsChangeNotifications
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             bool IInternalConfigHost.SupportsLocation
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             bool IInternalConfigHost.SupportsPath
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             bool IInternalConfigHost.SupportsRefresh
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
-            object IInternalConfigHost.CreateConfigurationContext(string configPath, string locationSubPath)
+            object IInternalConfigHost.CreateConfigurationContext(
+                string configPath,
+                string locationSubPath
+            )
             {
                 throw new NotImplementedException();
             }
@@ -154,7 +183,11 @@ namespace System.ConfigurationTests
                 throw new NotImplementedException();
             }
 
-            string IInternalConfigHost.DecryptSection(string encryptedXml, ProtectedConfigurationProvider protectionProvider, ProtectedConfigurationSection protectedConfigSection)
+            string IInternalConfigHost.DecryptSection(
+                string encryptedXml,
+                ProtectedConfigurationProvider protectionProvider,
+                ProtectedConfigurationSection protectedConfigSection
+            )
             {
                 throw new NotImplementedException();
             }
@@ -164,12 +197,19 @@ namespace System.ConfigurationTests
                 throw new NotImplementedException();
             }
 
-            string IInternalConfigHost.EncryptSection(string clearTextXml, ProtectedConfigurationProvider protectionProvider, ProtectedConfigurationSection protectedConfigSection)
+            string IInternalConfigHost.EncryptSection(
+                string clearTextXml,
+                ProtectedConfigurationProvider protectionProvider,
+                ProtectedConfigurationSection protectedConfigSection
+            )
             {
                 throw new NotImplementedException();
             }
 
-            string IInternalConfigHost.GetConfigPathFromLocationSubPath(string configPath, string locationSubPath)
+            string IInternalConfigHost.GetConfigPathFromLocationSubPath(
+                string configPath,
+                string locationSubPath
+            )
             {
                 throw new NotImplementedException();
             }
@@ -184,7 +224,10 @@ namespace System.ConfigurationTests
                 throw new NotImplementedException();
             }
 
-            string IInternalConfigHost.GetStreamNameForConfigSource(string streamName, string configSource)
+            string IInternalConfigHost.GetStreamNameForConfigSource(
+                string streamName,
+                string configSource
+            )
             {
                 throw new NotImplementedException();
             }
@@ -194,12 +237,21 @@ namespace System.ConfigurationTests
                 throw new NotImplementedException();
             }
 
-            void IInternalConfigHost.Init(IInternalConfigRoot configRoot, params object[] hostInitParams)
+            void IInternalConfigHost.Init(
+                IInternalConfigRoot configRoot,
+                params object[] hostInitParams
+            )
             {
                 throw new NotImplementedException();
             }
 
-            void IInternalConfigHost.InitForConfiguration(ref string locationSubPath, out string configPath, out string locationConfigPath, IInternalConfigRoot configRoot, params object[] hostInitConfigurationParams)
+            void IInternalConfigHost.InitForConfiguration(
+                ref string locationSubPath,
+                out string configPath,
+                out string locationConfigPath,
+                IInternalConfigRoot configRoot,
+                params object[] hostInitConfigurationParams
+            )
             {
                 throw new NotImplementedException();
             }
@@ -214,7 +266,11 @@ namespace System.ConfigurationTests
                 throw new NotImplementedException();
             }
 
-            bool IInternalConfigHost.IsDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition, ConfigurationAllowExeDefinition allowExeDefinition)
+            bool IInternalConfigHost.IsDefinitionAllowed(
+                string configPath,
+                ConfigurationAllowDefinition allowDefinition,
+                ConfigurationAllowExeDefinition allowExeDefinition
+            )
             {
                 throw new NotImplementedException();
             }
@@ -249,12 +305,21 @@ namespace System.ConfigurationTests
                 throw new NotImplementedException();
             }
 
-            Stream IInternalConfigHost.OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext)
+            Stream IInternalConfigHost.OpenStreamForWrite(
+                string streamName,
+                string templateStreamName,
+                ref object writeContext
+            )
             {
                 throw new NotImplementedException();
             }
 
-            Stream IInternalConfigHost.OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext, bool assertPermissions)
+            Stream IInternalConfigHost.OpenStreamForWrite(
+                string streamName,
+                string templateStreamName,
+                ref object writeContext,
+                bool assertPermissions
+            )
             {
                 throw new NotImplementedException();
             }
@@ -274,27 +339,47 @@ namespace System.ConfigurationTests
                 throw new NotImplementedException();
             }
 
-            object IInternalConfigHost.StartMonitoringStreamForChanges(string streamName, StreamChangeCallback callback)
+            object IInternalConfigHost.StartMonitoringStreamForChanges(
+                string streamName,
+                StreamChangeCallback callback
+            )
             {
                 throw new NotImplementedException();
             }
 
-            void IInternalConfigHost.StopMonitoringStreamForChanges(string streamName, StreamChangeCallback callback)
+            void IInternalConfigHost.StopMonitoringStreamForChanges(
+                string streamName,
+                StreamChangeCallback callback
+            )
             {
                 throw new NotImplementedException();
             }
 
-            void IInternalConfigHost.VerifyDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition, ConfigurationAllowExeDefinition allowExeDefinition, IConfigErrorInfo errorInfo)
+            void IInternalConfigHost.VerifyDefinitionAllowed(
+                string configPath,
+                ConfigurationAllowDefinition allowDefinition,
+                ConfigurationAllowExeDefinition allowExeDefinition,
+                IConfigErrorInfo errorInfo
+            )
             {
                 throw new NotImplementedException();
             }
 
-            void IInternalConfigHost.WriteCompleted(string streamName, bool success, object writeContext)
+            void IInternalConfigHost.WriteCompleted(
+                string streamName,
+                bool success,
+                object writeContext
+            )
             {
                 throw new NotImplementedException();
             }
 
-            void IInternalConfigHost.WriteCompleted(string streamName, bool success, object writeContext, bool assertPermissions)
+            void IInternalConfigHost.WriteCompleted(
+                string streamName,
+                bool success,
+                object writeContext,
+                bool assertPermissions
+            )
             {
                 throw new NotImplementedException();
             }
@@ -304,7 +389,9 @@ namespace System.ConfigurationTests
                 throw new NotImplementedException();
             }
 
-            bool IInternalConfigHost.IsFullTrustSectionWithoutAptcaAllowed(IInternalConfigRecord configRecord)
+            bool IInternalConfigHost.IsFullTrustSectionWithoutAptcaAllowed(
+                IInternalConfigRecord configRecord
+            )
             {
                 throw new NotImplementedException();
             }
@@ -315,7 +402,11 @@ namespace System.ConfigurationTests
             }
 
 #pragma warning disable SYSLIB0003 // Obsolete: CAS
-            void IInternalConfigHost.GetRestrictedPermissions(IInternalConfigRecord configRecord, out PermissionSet permissionSet, out bool isHostReady)
+            void IInternalConfigHost.GetRestrictedPermissions(
+                IInternalConfigRecord configRecord,
+                out PermissionSet permissionSet,
+                out bool isHostReady
+            )
             {
                 throw new NotImplementedException();
             }

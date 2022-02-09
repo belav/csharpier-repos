@@ -23,7 +23,8 @@ internal class ValidatableObjectAdapter : IModelValidator
         {
             var message = Resources.FormatValidatableObjectAdapter_IncompatibleType(
                 typeof(IValidatableObject).Name,
-                model.GetType());
+                model.GetType()
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -35,7 +36,8 @@ internal class ValidatableObjectAdapter : IModelValidator
         var validationContext = new ValidationContext(
             instance: validatable,
             serviceProvider: context.ActionContext?.HttpContext?.RequestServices,
-            items: null)
+            items: null
+        )
         {
             DisplayName = context.ModelMetadata.GetDisplayName(),
             MemberName = context.ModelMetadata.Name,
@@ -52,7 +54,10 @@ internal class ValidatableObjectAdapter : IModelValidator
             {
                 if (result.MemberNames == null || !result.MemberNames.Any())
                 {
-                    yield return new ModelValidationResult(memberName: null, message: result.ErrorMessage);
+                    yield return new ModelValidationResult(
+                        memberName: null,
+                        message: result.ErrorMessage
+                    );
                 }
                 else
                 {

@@ -24,9 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal const string ValueParameterName = "value";
 
-        internal ParameterSymbol()
-        {
-        }
+        internal ParameterSymbol() { }
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
@@ -35,18 +33,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public new virtual ParameterSymbol OriginalDefinition
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         protected sealed override Symbol OriginalSymbolDefinition
         {
-            get
-            {
-                return this.OriginalDefinition;
-            }
+            get { return this.OriginalDefinition; }
         }
 
         /// <summary>
@@ -85,8 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns the marshalling type of this parameter, or 0 if marshalling information isn't available.
         /// </summary>
         /// <remarks>
-        /// By default this information is extracted from <see cref="MarshallingInformation"/> if available. 
-        /// Since the compiler does only need to know the marshalling type of symbols that aren't emitted 
+        /// By default this information is extracted from <see cref="MarshallingInformation"/> if available.
+        /// Since the compiler does only need to know the marshalling type of symbols that aren't emitted
         /// PE symbols just decode the type from metadata and don't provide full marshalling information.
         /// </remarks>
         internal virtual UnmanagedType MarshallingType
@@ -131,7 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns true if the parameter is semantically optional.
         /// </summary>
         /// <remarks>
-        /// True if and only if the parameter has a default argument syntax, 
+        /// True if and only if the parameter has a default argument syntax,
         /// or the parameter is not a params-array and Optional metadata flag is set.
         /// </remarks>
         public bool IsOptional
@@ -149,16 +141,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // To maintain compatibility with Dev10, we allow such code to compile but explicitly
                 // classify a ParameterArray param as a required parameter.
                 //
-                // Also when we call f() where signature of f is void([Optional]params int[] args) 
+                // Also when we call f() where signature of f is void([Optional]params int[] args)
                 // an empty array is created and passed to f.
                 //
-                // We also do not consider ref/out parameters as optional, unless in COM interop scenarios 
+                // We also do not consider ref/out parameters as optional, unless in COM interop scenarios
                 // and only for ref.
                 RefKind refKind;
-                return !IsParams && IsMetadataOptional &&
-                       ((refKind = RefKind) == RefKind.None ||
-                        (refKind == RefKind.In) ||
-                        (refKind == RefKind.Ref && ContainingSymbol.ContainingType.IsComImport));
+                return !IsParams
+                    && IsMetadataOptional
+                    && (
+                        (refKind = RefKind) == RefKind.None
+                        || (refKind == RefKind.In)
+                        || (refKind == RefKind.Ref && ContainingSymbol.ContainingType.IsComImport)
+                    );
             }
         }
 
@@ -179,15 +174,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns true if the parameter explicitly specifies a default value to be passed
-        /// when no value is provided as an argument to a call. 
+        /// when no value is provided as an argument to a call.
         /// </summary>
         /// <remarks>
-        /// True if the parameter has a default argument syntax, 
-        /// or the parameter is from source and <see cref="DefaultParameterValueAttribute"/> is applied, 
+        /// True if the parameter has a default argument syntax,
+        /// or the parameter is from source and <see cref="DefaultParameterValueAttribute"/> is applied,
         /// or the parameter is from metadata and HasDefault metadata flag is set. See
         /// <see cref="IsOptional"/> to determine if the parameter will be considered optional by
         /// overload resolution.
-        /// 
+        ///
         /// The default value can be obtained with <see cref="ExplicitDefaultValue"/> property.
         /// </remarks>
         public bool HasExplicitDefaultValue
@@ -214,7 +209,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// If the parameter type is a struct and the default value of the parameter
-        /// is the default value of the struct type or of type parameter type which is 
+        /// is the default value of the struct type or of type parameter type which is
         /// not known to be a referenced type, then this property will return null.
         /// </remarks>
         /// <exception cref="InvalidOperationException">The parameter has no default value.</exception>
@@ -234,10 +229,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #nullable enable
         /// <summary>
-        /// Returns the default value constant of the parameter, 
-        /// or null if the parameter doesn't have a default value or 
+        /// Returns the default value constant of the parameter,
+        /// or null if the parameter doesn't have a default value or
         /// the parameter type is a struct and the default value of the parameter
-        /// is the default value of the struct type or of type parameter type which is 
+        /// is the default value of the struct type or of type parameter type which is
         /// not known to be a referenced type.
         /// </summary>
         /// <remarks>
@@ -245,6 +240,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// (i.e. even non-optional parameters can have default values).
         /// </remarks>
         internal abstract ConstantValue? ExplicitDefaultConstantValue { get; }
+
 #nullable disable
 
         /// <summary>
@@ -252,16 +248,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.Parameter;
-            }
+            get { return SymbolKind.Parameter; }
         }
 
         /// <summary>
-        /// Implements visitor pattern. 
+        /// Implements visitor pattern.
         /// </summary>
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitParameter(this, argument);
         }
@@ -282,10 +278,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         /// <summary>
@@ -295,10 +288,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -309,10 +299,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -322,10 +309,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -335,10 +319,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -347,22 +328,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
-        /// Returns true if this symbol has external implementation; i.e., declared with the 
-        /// "extern" modifier. 
+        /// Returns true if this symbol has external implementation; i.e., declared with the
+        /// "extern" modifier.
         /// </summary>
         public override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -370,10 +345,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public virtual bool IsThis
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -419,10 +391,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected sealed override int HighestPriorityUseSiteError
         {
-            get
-            {
-                return (int)ErrorCode.ERR_BogusType;
-            }
+            get { return (int)ErrorCode.ERR_BogusType; }
         }
 
         public sealed override bool HasUnsupportedMetadata

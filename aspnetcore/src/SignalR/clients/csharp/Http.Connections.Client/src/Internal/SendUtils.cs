@@ -15,7 +15,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal static class SendUtils
 {
-    public static async Task SendMessages(Uri sendUrl, IDuplexPipe application, HttpClient httpClient, ILogger logger, CancellationToken cancellationToken = default)
+    public static async Task SendMessages(
+        Uri sendUrl,
+        IDuplexPipe application,
+        HttpClient httpClient,
+        ILogger logger,
+        CancellationToken cancellationToken = default
+    )
     {
         Log.SendStarted(logger);
 
@@ -49,7 +55,13 @@ internal static class SendUtils
                         // rather than buffer the entire response. This gives a small perf boost.
                         // Note that it is important to dispose of the response when doing this to
                         // avoid leaving the connection open.
-                        using (var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+                        using (
+                            var response = await httpClient.SendAsync(
+                                request,
+                                HttpCompletionOption.ResponseHeadersRead,
+                                cancellationToken
+                            )
+                        )
                         {
                             response.EnsureSuccessStatusCode();
                         }
@@ -111,26 +123,50 @@ internal static class SendUtils
 
     private static class Log
     {
-        private static readonly Action<ILogger, Exception?> _sendStarted =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(100, "SendStarted"), "Starting the send loop.");
+        private static readonly Action<ILogger, Exception?> _sendStarted = LoggerMessage.Define(
+            LogLevel.Debug,
+            new EventId(100, "SendStarted"),
+            "Starting the send loop."
+        );
 
-        private static readonly Action<ILogger, Exception?> _sendStopped =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(101, "SendStopped"), "Send loop stopped.");
+        private static readonly Action<ILogger, Exception?> _sendStopped = LoggerMessage.Define(
+            LogLevel.Debug,
+            new EventId(101, "SendStopped"),
+            "Send loop stopped."
+        );
 
-        private static readonly Action<ILogger, Exception?> _sendCanceled =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(102, "SendCanceled"), "Send loop canceled.");
+        private static readonly Action<ILogger, Exception?> _sendCanceled = LoggerMessage.Define(
+            LogLevel.Debug,
+            new EventId(102, "SendCanceled"),
+            "Send loop canceled."
+        );
 
         private static readonly Action<ILogger, long, Uri, Exception?> _sendingMessages =
-            LoggerMessage.Define<long, Uri>(LogLevel.Debug, new EventId(103, "SendingMessages"), "Sending {Count} bytes to the server using url: {Url}.");
+            LoggerMessage.Define<long, Uri>(
+                LogLevel.Debug,
+                new EventId(103, "SendingMessages"),
+                "Sending {Count} bytes to the server using url: {Url}."
+            );
 
         private static readonly Action<ILogger, Exception?> _sentSuccessfully =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(104, "SentSuccessfully"), "Message(s) sent successfully.");
+            LoggerMessage.Define(
+                LogLevel.Debug,
+                new EventId(104, "SentSuccessfully"),
+                "Message(s) sent successfully."
+            );
 
-        private static readonly Action<ILogger, Exception?> _noMessages =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(105, "NoMessages"), "No messages in batch to send.");
+        private static readonly Action<ILogger, Exception?> _noMessages = LoggerMessage.Define(
+            LogLevel.Debug,
+            new EventId(105, "NoMessages"),
+            "No messages in batch to send."
+        );
 
         private static readonly Action<ILogger, Uri, Exception> _errorSending =
-            LoggerMessage.Define<Uri>(LogLevel.Error, new EventId(106, "ErrorSending"), "Error while sending to '{Url}'.");
+            LoggerMessage.Define<Uri>(
+                LogLevel.Error,
+                new EventId(106, "ErrorSending"),
+                "Error while sending to '{Url}'."
+            );
 
         // When adding a new log message make sure to check with LongPollingTransport and ServerSentEventsTransport that share these logs to not have conflicting EventIds
         // We start the IDs at 100 to make it easy to avoid conflicting IDs

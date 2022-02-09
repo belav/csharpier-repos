@@ -4,13 +4,11 @@
 using System;
 using System.Collections.Generic;
 
-
 internal struct Position
 {
     public byte X;
     public byte Y;
 }
-
 
 internal class Program
 {
@@ -19,7 +17,6 @@ internal class Program
         Console.WriteLine("Main called");
 
         int[,] b = new int[5, 5];
-
 
         List<Position> g = new List<Position>();
 

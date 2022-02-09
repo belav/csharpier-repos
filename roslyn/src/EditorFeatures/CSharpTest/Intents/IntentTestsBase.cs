@@ -22,15 +22,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
 {
     public class IntentTestsBase
     {
-        internal static Task VerifyExpectedTextAsync(string intentName, string markup, string expectedText, OptionsCollection? options = null)
+        internal static Task VerifyExpectedTextAsync(
+            string intentName,
+            string markup,
+            string expectedText,
+            OptionsCollection? options = null
+        )
         {
-            return VerifyExpectedTextAsync(intentName, markup, new string[] { }, expectedText, options);
+            return VerifyExpectedTextAsync(
+                intentName,
+                markup,
+                new string[] { },
+                expectedText,
+                options
+            );
         }
 
-        internal static async Task VerifyExpectedTextAsync(string intentName, string activeDocument, string[] additionalDocuments, string expectedText, OptionsCollection? options = null)
+        internal static async Task VerifyExpectedTextAsync(
+            string intentName,
+            string activeDocument,
+            string[] additionalDocuments,
+            string expectedText,
+            OptionsCollection? options = null
+        )
         {
             var documentSet = additionalDocuments.Prepend(activeDocument).ToArray();
-            using var workspace = TestWorkspace.CreateCSharp(documentSet, exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider());
+            using var workspace = TestWorkspace.CreateCSharp(
+                documentSet,
+                exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider()
+            );
             if (options != null)
             {
                 workspace.ApplyOptions(options!);
@@ -50,11 +70,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 currentSelectedSpan = TextSpan.FromBounds(typedSpan.End, typedSpan.End);
             }
 
-            var currentSnapshotSpan = new SnapshotSpan(textBuffer.CurrentSnapshot, currentSelectedSpan.ToSpan());
+            var currentSnapshotSpan = new SnapshotSpan(
+                textBuffer.CurrentSnapshot,
+                currentSelectedSpan.ToSpan()
+            );
 
             // Determine the edits to rewind to the prior snapshot by removing the changes in the annotated span.
             var rewindTextChange = new TextChange(typedSpan, "");
-            var priorSelection = TextSpan.FromBounds(rewindTextChange.Span.Start, rewindTextChange.Span.Start);
+            var priorSelection = TextSpan.FromBounds(
+                rewindTextChange.Span.Start,
+                rewindTextChange.Span.Start
+            );
             if (document.AnnotatedSpans.ContainsKey("priorSelection"))
             {
                 priorSelection = document.AnnotatedSpans["priorSelection"].Single();
@@ -65,8 +91,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 currentSnapshotSpan,
                 ImmutableArray.Create(rewindTextChange),
                 priorSelection,
-                intentData: null);
-            var results = await intentSource.ComputeIntentsAsync(intentContext, CancellationToken.None).ConfigureAwait(false);
+                intentData: null
+            );
+            var results = await intentSource
+                .ComputeIntentsAsync(intentContext, CancellationToken.None)
+                .ConfigureAwait(false);
 
             // For now, we're just taking the first result to match intellicode behavior.
             var result = results.First();

@@ -20,7 +20,8 @@ public abstract class RazorCodeDocument
 
     public static RazorCodeDocument Create(
         RazorSourceDocument source,
-        IEnumerable<RazorSourceDocument> imports)
+        IEnumerable<RazorSourceDocument> imports
+    )
     {
         if (source == null)
         {
@@ -34,7 +35,8 @@ public abstract class RazorCodeDocument
         RazorSourceDocument source,
         IEnumerable<RazorSourceDocument> imports,
         RazorParserOptions parserOptions,
-        RazorCodeGenerationOptions codeGenerationOptions)
+        RazorCodeGenerationOptions codeGenerationOptions
+    )
     {
         if (source == null)
         {

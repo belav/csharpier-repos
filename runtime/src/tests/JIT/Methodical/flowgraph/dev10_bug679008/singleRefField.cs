@@ -32,9 +32,7 @@ internal class Repro
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void Use(MB8 mb8)
-    {
-    }
+    private void Use(MB8 mb8) { }
 
     private Repro[] _preExecutionDelegates = new Repro[0];
 

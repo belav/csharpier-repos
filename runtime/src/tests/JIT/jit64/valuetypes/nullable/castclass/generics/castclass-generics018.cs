@@ -3,12 +3,12 @@
 
 // <Area> Nullable - CastClass </Area>
 // <Title> Nullable type with castclass expr  </Title>
-// <Description>  
+// <Description>
 // checking type of ByteE using cast expr
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
 using System.Runtime.InteropServices;
@@ -36,5 +36,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

@@ -48,7 +48,13 @@ public class UsePathBaseMiddleware
             throw new ArgumentNullException(nameof(context));
         }
 
-        if (context.Request.Path.StartsWithSegments(_pathBase, out var matchedPath, out var remainingPath))
+        if (
+            context.Request.Path.StartsWithSegments(
+                _pathBase,
+                out var matchedPath,
+                out var remainingPath
+            )
+        )
         {
             return InvokeCore(context, matchedPath, remainingPath);
         }

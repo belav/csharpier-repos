@@ -22,9 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public CosmosValueGeneratorSelector(ValueGeneratorSelectorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,8 +34,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal
         {
             var type = property.ClrType.UnwrapNullableType().UnwrapEnumType();
 
-            if (property.GetJsonPropertyName() == ""
-                && type == typeof(int))
+            if (property.GetJsonPropertyName() == "" && type == typeof(int))
             {
                 return new TemporaryNumberValueGeneratorFactory().Create(property, entityType);
             }

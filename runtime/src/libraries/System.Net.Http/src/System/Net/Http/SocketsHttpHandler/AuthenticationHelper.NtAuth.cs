@@ -14,7 +14,8 @@ namespace System.Net.Http
     internal static partial class AuthenticationHelper
     {
         private const string UsePortInSpnCtxSwitch = "System.Net.Http.UsePortInSpn";
-        private const string UsePortInSpnEnvironmentVariable = "DOTNET_SYSTEM_NET_HTTP_USEPORTINSPN";
+        private const string UsePortInSpnEnvironmentVariable =
+            "DOTNET_SYSTEM_NET_HTTP_USEPORTINSPN";
 
         private static volatile int s_usePortInSpn = -1;
 
@@ -36,25 +37,43 @@ namespace System.Net.Http
                 else
                 {
                     // AppContext switch wasn't used. Check the environment variable.
-                   s_usePortInSpn =
-                       Environment.GetEnvironmentVariable(UsePortInSpnEnvironmentVariable) is string envVar &&
-                       (envVar == "1" || envVar.Equals("true", StringComparison.OrdinalIgnoreCase)) ? 1 : 0;
+                    s_usePortInSpn =
+                        Environment.GetEnvironmentVariable(UsePortInSpnEnvironmentVariable)
+                            is string envVar
+                        && (
+                            envVar == "1"
+                            || envVar.Equals("true", StringComparison.OrdinalIgnoreCase)
+                        )
+                            ? 1
+                            : 0;
                 }
 
                 return s_usePortInSpn != 0;
             }
         }
 
-        private static Task<HttpResponseMessage> InnerSendAsync(HttpRequestMessage request, bool async, bool isProxyAuth, HttpConnectionPool pool, HttpConnection connection, CancellationToken cancellationToken)
+        private static Task<HttpResponseMessage> InnerSendAsync(
+            HttpRequestMessage request,
+            bool async,
+            bool isProxyAuth,
+            HttpConnectionPool pool,
+            HttpConnection connection,
+            CancellationToken cancellationToken
+        )
         {
-            return isProxyAuth ?
-                connection.SendAsyncCore(request, async, cancellationToken) :
-                pool.SendWithNtProxyAuthAsync(connection, request, async, cancellationToken);
+            return isProxyAuth
+              ? connection.SendAsyncCore(request, async, cancellationToken)
+              : pool.SendWithNtProxyAuthAsync(connection, request, async, cancellationToken);
         }
 
         private static bool ProxySupportsConnectionAuth(HttpResponseMessage response)
         {
-            if (!response.Headers.TryGetValues(KnownHeaders.ProxySupport.Descriptor, out IEnumerable<string>? values))
+            if (
+                !response.Headers.TryGetValues(
+                    KnownHeaders.ProxySupport.Descriptor,
+                    out IEnumerable<string>? values
+                )
+            )
             {
                 return false;
             }
@@ -70,23 +89,57 @@ namespace System.Net.Http
             return false;
         }
 
-        private static async Task<HttpResponseMessage> SendWithNtAuthAsync(HttpRequestMessage request, Uri authUri, bool async, ICredentials credentials, bool isProxyAuth, HttpConnection connection, HttpConnectionPool connectionPool, CancellationToken cancellationToken)
+        private static async Task<HttpResponseMessage> SendWithNtAuthAsync(
+            HttpRequestMessage request,
+            Uri authUri,
+            bool async,
+            ICredentials credentials,
+            bool isProxyAuth,
+            HttpConnection connection,
+            HttpConnectionPool connectionPool,
+            CancellationToken cancellationToken
+        )
         {
-            HttpResponseMessage response = await InnerSendAsync(request, async, isProxyAuth, connectionPool, connection, cancellationToken).ConfigureAwait(false);
-            if (!isProxyAuth && connection.Kind == HttpConnectionKind.Proxy && !ProxySupportsConnectionAuth(response))
+            HttpResponseMessage response = await InnerSendAsync(
+                    request,
+                    async,
+                    isProxyAuth,
+                    connectionPool,
+                    connection,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            if (
+                !isProxyAuth
+                && connection.Kind == HttpConnectionKind.Proxy
+                && !ProxySupportsConnectionAuth(response)
+            )
             {
                 // Proxy didn't indicate that it supports connection-based auth, so we can't proceed.
                 if (NetEventSource.Log.IsEnabled())
                 {
-                    NetEventSource.Error(connection, $"Proxy doesn't support connection-based auth, uri={authUri}");
+                    NetEventSource.Error(
+                        connection,
+                        $"Proxy doesn't support connection-based auth, uri={authUri}"
+                    );
                 }
                 return response;
             }
 
-            if (TryGetAuthenticationChallenge(response, isProxyAuth, authUri, credentials, out AuthenticationChallenge challenge))
+            if (
+                TryGetAuthenticationChallenge(
+                    response,
+                    isProxyAuth,
+                    authUri,
+                    credentials,
+                    out AuthenticationChallenge challenge
+                )
+            )
             {
-                if (challenge.AuthenticationType == AuthenticationType.Negotiate ||
-                    challenge.AuthenticationType == AuthenticationType.Ntlm)
+                if (
+                    challenge.AuthenticationType == AuthenticationType.Negotiate
+                    || challenge.AuthenticationType == AuthenticationType.Ntlm
+                )
                 {
                     bool isNewConnection = false;
                     bool needDrain = true;
@@ -100,7 +153,9 @@ namespace System.Net.Http
                             // Instead, it will be replaced by the new connection below.
                             connection.DetachFromPool();
 
-                            connection = await connectionPool.CreateHttp11ConnectionAsync(request, async, cancellationToken).ConfigureAwait(false);
+                            connection = await connectionPool
+                                .CreateHttp11ConnectionAsync(request, async, cancellationToken)
+                                .ConfigureAwait(false);
                             connection!.Acquire();
                             isNewConnection = true;
                             needDrain = false;
@@ -108,7 +163,10 @@ namespace System.Net.Http
 
                         if (NetEventSource.Log.IsEnabled())
                         {
-                            NetEventSource.Info(connection, $"Authentication: {challenge.AuthenticationType}, Uri: {authUri.AbsoluteUri}");
+                            NetEventSource.Info(
+                                connection,
+                                $"Authentication: {challenge.AuthenticationType}, Uri: {authUri.AbsoluteUri}"
+                            );
                         }
 
                         // Calculate SPN (Service Principal Name) using the host name of the request.
@@ -122,7 +180,10 @@ namespace System.Net.Http
                             hostName = request.Headers.Host;
                             if (NetEventSource.Log.IsEnabled())
                             {
-                                NetEventSource.Info(connection, $"Authentication: {challenge.AuthenticationType}, Host: {hostName}");
+                                NetEventSource.Info(
+                                    connection,
+                                    $"Authentication: {challenge.AuthenticationType}, Host: {hostName}"
+                                );
                             }
                         }
                         else
@@ -138,30 +199,53 @@ namespace System.Net.Http
                             }
                             else
                             {
-                                IPHostEntry result = await Dns.GetHostEntryAsync(authUri.IdnHost, cancellationToken).ConfigureAwait(false);
+                                IPHostEntry result = await Dns.GetHostEntryAsync(
+                                        authUri.IdnHost,
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
                                 hostName = result.HostName;
                             }
 
                             if (!isProxyAuth && !authUri.IsDefaultPort && UsePortInSpn)
                             {
-                                hostName = string.Create(null, stackalloc char[128], $"{hostName}:{authUri.Port}");
+                                hostName = string.Create(
+                                    null,
+                                    stackalloc char[128],
+                                    $"{hostName}:{authUri.Port}"
+                                );
                             }
                         }
 
                         string spn = "HTTP/" + hostName;
                         if (NetEventSource.Log.IsEnabled())
                         {
-                            NetEventSource.Info(connection, $"Authentication: {challenge.AuthenticationType}, SPN: {spn}");
+                            NetEventSource.Info(
+                                connection,
+                                $"Authentication: {challenge.AuthenticationType}, SPN: {spn}"
+                            );
                         }
 
-                        ChannelBinding? channelBinding = connection.TransportContext?.GetChannelBinding(ChannelBindingKind.Endpoint);
-                        NTAuthentication authContext = new NTAuthentication(isServer: false, challenge.SchemeName, challenge.Credential, spn, ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity, channelBinding);
+                        ChannelBinding? channelBinding =
+                            connection.TransportContext?.GetChannelBinding(
+                                ChannelBindingKind.Endpoint
+                            );
+                        NTAuthentication authContext = new NTAuthentication(
+                            isServer: false,
+                            challenge.SchemeName,
+                            challenge.Credential,
+                            spn,
+                            ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity,
+                            channelBinding
+                        );
                         string? challengeData = challenge.ChallengeData;
                         try
                         {
                             while (true)
                             {
-                                string? challengeResponse = authContext.GetOutgoingBlob(challengeData);
+                                string? challengeResponse = authContext.GetOutgoingBlob(
+                                    challengeData
+                                );
                                 if (challengeResponse == null)
                                 {
                                     // Response indicated denial even after login, so stop processing and return current response.
@@ -170,13 +254,38 @@ namespace System.Net.Http
 
                                 if (needDrain)
                                 {
-                                    await connection.DrainResponseAsync(response!, cancellationToken).ConfigureAwait(false);
+                                    await connection
+                                        .DrainResponseAsync(response!, cancellationToken)
+                                        .ConfigureAwait(false);
                                 }
 
-                                SetRequestAuthenticationHeaderValue(request, new AuthenticationHeaderValue(challenge.SchemeName, challengeResponse), isProxyAuth);
+                                SetRequestAuthenticationHeaderValue(
+                                    request,
+                                    new AuthenticationHeaderValue(
+                                        challenge.SchemeName,
+                                        challengeResponse
+                                    ),
+                                    isProxyAuth
+                                );
 
-                                response = await InnerSendAsync(request, async, isProxyAuth, connectionPool, connection, cancellationToken).ConfigureAwait(false);
-                                if (authContext.IsCompleted || !TryGetRepeatedChallenge(response, challenge.SchemeName, isProxyAuth, out challengeData))
+                                response = await InnerSendAsync(
+                                        request,
+                                        async,
+                                        isProxyAuth,
+                                        connectionPool,
+                                        connection,
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
+                                if (
+                                    authContext.IsCompleted
+                                    || !TryGetRepeatedChallenge(
+                                        response,
+                                        challenge.SchemeName,
+                                        isProxyAuth,
+                                        out challengeData
+                                    )
+                                )
                                 {
                                     break;
                                 }
@@ -202,15 +311,48 @@ namespace System.Net.Http
             return response!;
         }
 
-        public static Task<HttpResponseMessage> SendWithNtProxyAuthAsync(HttpRequestMessage request, Uri proxyUri, bool async, ICredentials proxyCredentials, HttpConnection connection, HttpConnectionPool connectionPool, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> SendWithNtProxyAuthAsync(
+            HttpRequestMessage request,
+            Uri proxyUri,
+            bool async,
+            ICredentials proxyCredentials,
+            HttpConnection connection,
+            HttpConnectionPool connectionPool,
+            CancellationToken cancellationToken
+        )
         {
-            return SendWithNtAuthAsync(request, proxyUri, async, proxyCredentials, isProxyAuth: true, connection, connectionPool, cancellationToken);
+            return SendWithNtAuthAsync(
+                request,
+                proxyUri,
+                async,
+                proxyCredentials,
+                isProxyAuth: true,
+                connection,
+                connectionPool,
+                cancellationToken
+            );
         }
 
-        public static Task<HttpResponseMessage> SendWithNtConnectionAuthAsync(HttpRequestMessage request, bool async, ICredentials credentials, HttpConnection connection, HttpConnectionPool connectionPool, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> SendWithNtConnectionAuthAsync(
+            HttpRequestMessage request,
+            bool async,
+            ICredentials credentials,
+            HttpConnection connection,
+            HttpConnectionPool connectionPool,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(request.RequestUri != null);
-            return SendWithNtAuthAsync(request, request.RequestUri, async, credentials, isProxyAuth: false, connection, connectionPool, cancellationToken);
+            return SendWithNtAuthAsync(
+                request,
+                request.RequestUri,
+                async,
+                credentials,
+                isProxyAuth: false,
+                connection,
+                connectionPool,
+                cancellationToken
+            );
         }
     }
 }

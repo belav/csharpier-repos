@@ -17,6 +17,7 @@ internal static partial class Interop
             ref SafeAccessTokenHandle lpTargetHandle,
             uint dwDesiredAccess,
             bool bInheritHandle,
-            uint dwOptions);
+            uint dwOptions
+        );
     }
 }

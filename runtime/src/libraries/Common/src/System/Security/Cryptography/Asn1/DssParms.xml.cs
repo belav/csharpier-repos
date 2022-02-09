@@ -35,7 +35,11 @@ namespace System.Security.Cryptography.Asn1
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static DssParms Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static DssParms Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -51,12 +55,21 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out DssParms decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out DssParms decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out DssParms decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out DssParms decoded
+        )
         {
             try
             {
@@ -68,7 +81,12 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out DssParms decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out DssParms decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);

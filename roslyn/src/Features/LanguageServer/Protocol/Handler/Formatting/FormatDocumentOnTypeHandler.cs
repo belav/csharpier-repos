@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportRoslynLanguagesLspRequestHandlerProvider, Shared]
     [ProvidesMethod(Methods.TextDocumentOnTypeFormattingName)]
-    internal class FormatDocumentOnTypeHandler : AbstractStatelessRequestHandler<DocumentOnTypeFormattingParams, TextEdit[]?>
+    internal class FormatDocumentOnTypeHandler
+        : AbstractStatelessRequestHandler<DocumentOnTypeFormattingParams, TextEdit[]?>
     {
         public override string Method => Methods.TextDocumentOnTypeFormattingName;
 
@@ -30,16 +31,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormatDocumentOnTypeHandler()
-        {
-        }
+        public FormatDocumentOnTypeHandler() { }
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(DocumentOnTypeFormattingParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            DocumentOnTypeFormattingParams request
+        ) => request.TextDocument;
 
         public override async Task<TextEdit[]?> HandleRequestAsync(
             DocumentOnTypeFormattingParams request,
             RequestContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -47,8 +49,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var edits = new ArrayBuilder<TextEdit>();
 
-            var formattingService = document.Project.LanguageServices.GetRequiredService<IFormattingInteractionService>();
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var formattingService =
+                document.Project.LanguageServices.GetRequiredService<IFormattingInteractionService>();
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (string.IsNullOrEmpty(request.Character))
             {
@@ -56,25 +64,47 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             }
 
             // We should use the options passed in by LSP instead of the document's options.
-            var documentOptions = await ProtocolConversions.FormattingOptionsToDocumentOptionsAsync(
-                request.Options, document, cancellationToken).ConfigureAwait(false);
+            var documentOptions = await ProtocolConversions
+                .FormattingOptionsToDocumentOptionsAsync(
+                    request.Options,
+                    document,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             IList<TextChange>? textChanges;
             if (SyntaxFacts.IsNewLine(request.Character[0]))
             {
                 textChanges = await GetFormattingChangesOnReturnAsync(
-                    formattingService, document, position, documentOptions, cancellationToken).ConfigureAwait(false);
+                        formattingService,
+                        document,
+                        position,
+                        documentOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {
                 textChanges = await GetFormattingChangesAsync(
-                    formattingService, document, request.Character[0], position, documentOptions, cancellationToken).ConfigureAwait(false);
+                        formattingService,
+                        document,
+                        request.Character[0],
+                        position,
+                        documentOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             if (textChanges != null)
             {
-                edits.AddRange(textChanges.Select(change => ProtocolConversions.TextChangeToTextEdit(change, text)));
+                edits.AddRange(
+                    textChanges.Select(
+                        change => ProtocolConversions.TextChangeToTextEdit(change, text)
+                    )
+                );
             }
 
             return edits.ToArrayAndFree();
@@ -85,8 +115,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Document document,
             int position,
             DocumentOptionSet documentOptions,
-            CancellationToken cancellationToken)
-            => await formattingService.GetFormattingChangesOnReturnAsync(document, position, documentOptions, cancellationToken).ConfigureAwait(false);
+            CancellationToken cancellationToken
+        ) =>
+            await formattingService
+                .GetFormattingChangesOnReturnAsync(
+                    document,
+                    position,
+                    documentOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
         protected virtual async Task<IList<TextChange>?> GetFormattingChangesAsync(
             IFormattingInteractionService formattingService,
@@ -94,7 +132,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             char typedChar,
             int position,
             DocumentOptionSet documentOptions,
-            CancellationToken cancellationToken)
-            => await formattingService.GetFormattingChangesAsync(document, typedChar, position, documentOptions, cancellationToken).ConfigureAwait(false);
+            CancellationToken cancellationToken
+        ) =>
+            await formattingService
+                .GetFormattingChangesAsync(
+                    document,
+                    typedChar,
+                    position,
+                    documentOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
     }
 }

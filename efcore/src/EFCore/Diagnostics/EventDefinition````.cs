@@ -33,8 +33,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventId eventId,
             LogLevel level,
             string eventIdCode,
-            Func<LogLevel, Action<ILogger, TParam1, TParam2, TParam3, TParam4, Exception?>> logActionFunc)
-            : base(loggingOptions, eventId, level, eventIdCode)
+            Func<
+                LogLevel,
+                Action<ILogger, TParam1, TParam2, TParam3, TParam4, Exception?>
+            > logActionFunc
+        ) : base(loggingOptions, eventId, level, eventIdCode)
         {
             _logAction = logActionFunc(Level);
         }
@@ -52,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             TParam1 arg1,
             TParam2 arg2,
             TParam3 arg3,
-            TParam4 arg4)
+            TParam4 arg4
+        )
         {
             var extractor = new MessageExtractingLogger();
             _logAction(extractor, arg1, arg2, arg3, arg4, null);
@@ -73,8 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             TParam1 arg1,
             TParam2 arg2,
             TParam3 arg3,
-            TParam4 arg4)
-            where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+            TParam4 arg4
+        ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
         {
             switch (WarningBehavior)
             {

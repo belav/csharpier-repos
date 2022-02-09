@@ -71,9 +71,7 @@ public class ClientBuilder
     /// <summary>
     /// Initializes a new instance of <see cref="ClientBuilder"/>.
     /// </summary>
-    public ClientBuilder() : this(new Client())
-    {
-    }
+    public ClientBuilder() : this(new Client()) { }
 
     /// <summary>
     /// Initializes a new intance of <see cref="ClientBuilder"/>.
@@ -196,7 +194,8 @@ public class ClientBuilder
 
     internal ClientBuilder FromConfiguration()
     {
-        _client.Properties[ApplicationProfilesPropertyNames.Source] = ApplicationProfilesPropertyValues.Configuration;
+        _client.Properties[ApplicationProfilesPropertyNames.Source] =
+            ApplicationProfilesPropertyValues.Configuration;
         return this;
     }
 

@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class foo
 {
     static int Main()

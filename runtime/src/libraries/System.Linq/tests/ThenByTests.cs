@@ -12,9 +12,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x1 in new int[] { 1, 6, 0, -1, 3 }
-                             from x2 in new int[] { 55, 49, 9, -100, 24, 25 }
-                             select new { a1 = x1, a2 = x2 };
+            var q =
+                from x1 in new int[] { 1, 6, 0, -1, 3 }
+                from x2 in new int[] { 55, 49, 9, -100, 24, 25 }
+                select new { a1 = x1, a2 = x2 };
 
             Assert.Equal(
                 q.OrderByDescending(e => e.a1).ThenBy(f => f.a2),
@@ -25,17 +26,27 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x1 in new[] { 55, 49, 9, -100, 24, 25, -1, 0 }
-                             from x2 in new[] { "!@#$%^", "C", "AAA", "", null, "Calling Twice", "SoS", string.Empty }
-                             where !string.IsNullOrEmpty(x2)
-                             select new { a1 = x1, a2 = x2 };
+            var q =
+                from x1 in new[] { 55, 49, 9, -100, 24, 25, -1, 0 }
+                from x2 in new[]
+                {
+                    "!@#$%^",
+                    "C",
+                    "AAA",
+                    "",
+                    null,
+                    "Calling Twice",
+                    "SoS",
+                    string.Empty
+                }
+                where !string.IsNullOrEmpty(x2)
+                select new { a1 = x1, a2 = x2 };
 
             Assert.Equal(
                 q.OrderBy(e => e.a2).ThenBy(f => f.a1),
                 q.OrderBy(e => e.a2).ThenBy(f => f.a1)
             );
         }
-
 
         [Fact]
         public void SourceEmpty()
@@ -90,7 +101,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SecondKeyRepeatAcrossDifferentPrimary()
         {
-            var source = new []
+            var source = new[]
             {
                 new { Name = "Jim", City = "Minneapolis", Country = "USA" },
                 new { Name = "Tim", City = "Seattle", Country = "USA" },
@@ -98,7 +109,7 @@ namespace System.Linq.Tests
                 new { Name = "Chris", City = "Minneapolis", Country = "USA" },
                 new { Name = "Rob", City = "Seattle", Country = "USA" }
             };
-            var expected = new []
+            var expected = new[]
             {
                 new { Name = "Chris", City = "Minneapolis", Country = "USA" },
                 new { Name = "Jim", City = "Minneapolis", Country = "USA" },
@@ -119,11 +130,32 @@ The Carriage held but just Ourselves -
 And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.RemoveEmptyEntries);
             var expected = new[]
             {
-                "me", "not", "for", "for", "but", "stop", "held", "just", "could", "kindly", "stopped",
-                "I", "He", "The", "And", "Death", "Because", "Carriage", "Ourselves", "Immortality."
+                "me",
+                "not",
+                "for",
+                "for",
+                "but",
+                "stop",
+                "held",
+                "just",
+                "could",
+                "kindly",
+                "stopped",
+                "I",
+                "He",
+                "The",
+                "And",
+                "Death",
+                "Because",
+                "Carriage",
+                "Ourselves",
+                "Immortality."
             };
 
-            Assert.Equal(expected, source.OrderBy(word => char.IsUpper(word[0])).ThenBy(word => word.Length));
+            Assert.Equal(
+                expected,
+                source.OrderBy(word => char.IsUpper(word[0])).ThenBy(word => word.Length)
+            );
         }
 
         [Fact]
@@ -135,11 +167,32 @@ The Carriage held but just Ourselves -
 And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.RemoveEmptyEntries);
             var expected = new[]
             {
-                "me", "not", "for", "for", "but", "stop", "held", "just", "could", "kindly", "stopped",
-                "I", "He", "The", "And", "Death", "Because", "Carriage", "Ourselves", "Immortality."
+                "me",
+                "not",
+                "for",
+                "for",
+                "but",
+                "stop",
+                "held",
+                "just",
+                "could",
+                "kindly",
+                "stopped",
+                "I",
+                "He",
+                "The",
+                "And",
+                "Death",
+                "Because",
+                "Carriage",
+                "Ourselves",
+                "Immortality."
             };
 
-            Assert.Equal(expected, source.RunOnce().OrderBy(word => char.IsUpper(word[0])).ThenBy(word => word.Length));
+            Assert.Equal(
+                expected,
+                source.RunOnce().OrderBy(word => char.IsUpper(word[0])).ThenBy(word => word.Length)
+            );
         }
 
         [Fact]
@@ -153,21 +206,30 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
         public void NullKeySelector()
         {
             Func<DateTime, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Empty<DateTime>().OrderBy(e => e).ThenBy(keySelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Empty<DateTime>().OrderBy(e => e).ThenBy(keySelector)
+            );
         }
 
         [Fact]
         public void NullSourceComparer()
         {
             IOrderedEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.ThenBy(i => i, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.ThenBy(i => i, null)
+            );
         }
 
         [Fact]
         public void NullKeySelectorComparer()
         {
             Func<DateTime, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Empty<DateTime>().OrderBy(e => e).ThenBy(keySelector, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Empty<DateTime>().OrderBy(e => e).ThenBy(keySelector, null)
+            );
         }
 
         [Theory]
@@ -183,9 +245,15 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
             IOrderedEnumerable<int> ordered = unordered.OrderBy(_ => 0);
             switch (thenBys)
             {
-                case 1: ordered = ordered.ThenBy(i => i); break;
-                case 2: ordered = ordered.ThenBy(i => 0).ThenBy(i => i); break;
-                case 3: ordered = ordered.ThenBy(i => 0).ThenBy(i => 0).ThenBy(i => i); break;
+                case 1:
+                    ordered = ordered.ThenBy(i => i);
+                    break;
+                case 2:
+                    ordered = ordered.ThenBy(i => 0).ThenBy(i => i);
+                    break;
+                case 3:
+                    ordered = ordered.ThenBy(i => 0).ThenBy(i => 0).ThenBy(i => i);
+                    break;
             }
 
             Assert.Equal(expected, ordered);
@@ -204,9 +272,15 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
             IOrderedEnumerable<int> ordered = unordered.OrderBy(_ => 0);
             switch (thenBys)
             {
-                case 1: ordered = ordered.ThenBy(i => i); break;
-                case 2: ordered = ordered.ThenBy(i => 0).ThenBy(i => i); break;
-                case 3: ordered = ordered.ThenBy(i => 0).ThenBy(i => 0).ThenBy(i => i); break;
+                case 1:
+                    ordered = ordered.ThenBy(i => i);
+                    break;
+                case 2:
+                    ordered = ordered.ThenBy(i => 0).ThenBy(i => i);
+                    break;
+                case 3:
+                    ordered = ordered.ThenBy(i => 0).ThenBy(i => 0).ThenBy(i => i);
+                    break;
             }
 
             Assert.Equal(expected, ordered);
@@ -226,9 +300,18 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
             IOrderedEnumerable<int> orderedEnumerable = randomized.OrderBy(_ => 0);
             switch (thenBys)
             {
-                case 1: orderedEnumerable = orderedEnumerable.ThenBy(i => i); break;
-                case 2: orderedEnumerable = orderedEnumerable.ThenBy(i => 0).ThenBy(i => i); break;
-                case 3: orderedEnumerable = orderedEnumerable.ThenBy(i => 0).ThenBy(i => 0).ThenBy(i => i); break;
+                case 1:
+                    orderedEnumerable = orderedEnumerable.ThenBy(i => i);
+                    break;
+                case 2:
+                    orderedEnumerable = orderedEnumerable.ThenBy(i => 0).ThenBy(i => i);
+                    break;
+                case 3:
+                    orderedEnumerable = orderedEnumerable
+                        .ThenBy(i => 0)
+                        .ThenBy(i => 0)
+                        .ThenBy(i => i);
+                    break;
             }
             int[] ordered = orderedEnumerable.ToArray();
 

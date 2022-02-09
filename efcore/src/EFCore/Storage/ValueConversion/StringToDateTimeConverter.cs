@@ -20,10 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public StringToDateTimeConverter()
-            : this(null)
-        {
-        }
+        public StringToDateTimeConverter() : this(null) { }
 
         /// <summary>
         ///     Creates a new instance of this converter.
@@ -36,17 +33,17 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public StringToDateTimeConverter(ConverterMappingHints? mappingHints)
-            : base(
-                ToDateTime(),
-                ToString(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToDateTime(), ToString(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(string), typeof(DateTime), i => new StringToDateTimeConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(string),
+                typeof(DateTime),
+                i => new StringToDateTimeConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

@@ -25,13 +25,16 @@ namespace Microsoft.CodeAnalysis.Completion
 
             // The span we want to replace goes from the start of the first span to the end of
             // the  last span.
-            var totalOldSpan = TextSpan.FromBounds(changes.First().Span.Start, changes.Last().Span.End);
+            var totalOldSpan = TextSpan.FromBounds(
+                changes.First().Span.Start,
+                changes.Last().Span.End
+            );
 
             // We figure out the text we're replacing with by actually just figuring out the
             // new span in the newText and grabbing the text out of that.  The newSpan will
             // start from the same position as the oldSpan, but it's length will be the old
             // span's length + all the deltas we accumulate through each text change.  i.e.
-            // if the first change adds 2 characters and the second change adds 4, then 
+            // if the first change adds 2 characters and the second change adds 4, then
             // the newSpan will be 2+4=6 characters longer than the old span.
             var sumOfDeltas = changes.Sum(c => c.NewText.Length - c.Span.Length);
             var totalNewSpan = new TextSpan(totalOldSpan.Start, totalOldSpan.Length + sumOfDeltas);
@@ -43,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Completion
         // We expect that Editor will introduce this support and we will get rid of relying on the "★" then.
         // We check both the display text and the display text prefix to account for IntelliCode item providers
         // that may be using the prefix to include the ★.
-        internal static bool IsPreferredItem(this CompletionItem completionItem)
-            => completionItem.DisplayText.StartsWith("★") || completionItem.DisplayTextPrefix.StartsWith("★");
+        internal static bool IsPreferredItem(this CompletionItem completionItem) =>
+            completionItem.DisplayText.StartsWith("★")
+            || completionItem.DisplayTextPrefix.StartsWith("★");
     }
 }

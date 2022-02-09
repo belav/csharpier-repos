@@ -13,16 +13,20 @@ namespace Microsoft.CodeAnalysis.Serialization
 {
     internal static class SerializationExtensions
     {
-        public static WellKnownSynchronizationKind GetWellKnownSynchronizationKind(this object value)
-            => value switch
+        public static WellKnownSynchronizationKind GetWellKnownSynchronizationKind(
+            this object value
+        ) =>
+            value switch
             {
                 SolutionStateChecksums _ => WellKnownSynchronizationKind.SolutionState,
                 ProjectStateChecksums _ => WellKnownSynchronizationKind.ProjectState,
                 DocumentStateChecksums _ => WellKnownSynchronizationKind.DocumentState,
                 ChecksumCollection _ => WellKnownSynchronizationKind.ChecksumCollection,
-                SolutionInfo.SolutionAttributes _ => WellKnownSynchronizationKind.SolutionAttributes,
+                SolutionInfo.SolutionAttributes _
+                  => WellKnownSynchronizationKind.SolutionAttributes,
                 ProjectInfo.ProjectAttributes _ => WellKnownSynchronizationKind.ProjectAttributes,
-                DocumentInfo.DocumentAttributes _ => WellKnownSynchronizationKind.DocumentAttributes,
+                DocumentInfo.DocumentAttributes _
+                  => WellKnownSynchronizationKind.DocumentAttributes,
                 CompilationOptions _ => WellKnownSynchronizationKind.CompilationOptions,
                 ParseOptions _ => WellKnownSynchronizationKind.ParseOptions,
                 ProjectReference _ => WellKnownSynchronizationKind.ProjectReference,
@@ -31,14 +35,19 @@ namespace Microsoft.CodeAnalysis.Serialization
                 SerializableSourceText _ => WellKnownSynchronizationKind.SerializableSourceText,
                 SourceText _ => WellKnownSynchronizationKind.SourceText,
                 OptionSet _ => WellKnownSynchronizationKind.OptionSet,
-                SourceGeneratedDocumentIdentity _ => WellKnownSynchronizationKind.SourceGeneratedDocumentIdentity,
+                SourceGeneratedDocumentIdentity _
+                  => WellKnownSynchronizationKind.SourceGeneratedDocumentIdentity,
                 _ => throw ExceptionUtilities.UnexpectedValue(value),
             };
 
-        public static CompilationOptions FixUpCompilationOptions(this ProjectInfo.ProjectAttributes info, CompilationOptions compilationOptions)
+        public static CompilationOptions FixUpCompilationOptions(
+            this ProjectInfo.ProjectAttributes info,
+            CompilationOptions compilationOptions
+        )
         {
-            return compilationOptions.WithXmlReferenceResolver(GetXmlResolver(info.FilePath))
-                                     .WithStrongNameProvider(new DesktopStrongNameProvider(GetStrongNameKeyPaths(info)));
+            return compilationOptions
+                .WithXmlReferenceResolver(GetXmlResolver(info.FilePath))
+                .WithStrongNameProvider(new DesktopStrongNameProvider(GetStrongNameKeyPaths(info)));
         }
 
         private static XmlFileResolver GetXmlResolver(string? filePath)
@@ -58,7 +67,9 @@ namespace Microsoft.CodeAnalysis.Serialization
             return new XmlFileResolver(PathUtilities.GetDirectoryName(filePath));
         }
 
-        private static ImmutableArray<string> GetStrongNameKeyPaths(ProjectInfo.ProjectAttributes info)
+        private static ImmutableArray<string> GetStrongNameKeyPaths(
+            ProjectInfo.ProjectAttributes info
+        )
         {
             // Given FilePath/OutputFilePath can be any arbitrary strings project is created with.
             // for primary solution in host such as VSWorkspace, ETA or MSBuildWorkspace

@@ -23,13 +23,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Design.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public CosmosCSharpRuntimeAnnotationCodeGenerator(
-            CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <inheritdoc />
-        public override void Generate(IModel model, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public override void Generate(
+            IModel model,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             var annotations = parameters.Annotations;
             if (!parameters.IsRuntime)
@@ -41,7 +42,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Design.Internal
         }
 
         /// <inheritdoc />
-        public override void Generate(IEntityType entityType, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public override void Generate(
+            IEntityType entityType,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             var annotations = parameters.Annotations;
             if (!parameters.IsRuntime)

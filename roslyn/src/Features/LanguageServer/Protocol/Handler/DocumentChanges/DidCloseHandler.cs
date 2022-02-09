@@ -14,22 +14,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges
 {
     [ExportRoslynLanguagesLspRequestHandlerProvider, Shared]
     [ProvidesMethod(LSP.Methods.TextDocumentDidCloseName)]
-    internal class DidCloseHandler : AbstractStatelessRequestHandler<LSP.DidCloseTextDocumentParams, object?>
+    internal class DidCloseHandler
+        : AbstractStatelessRequestHandler<LSP.DidCloseTextDocumentParams, object?>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DidCloseHandler()
-        {
-        }
+        public DidCloseHandler() { }
 
         public override string Method => LSP.Methods.TextDocumentDidCloseName;
 
         public override bool MutatesSolutionState => true;
         public override bool RequiresLSPSolution => false;
 
-        public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.DidCloseTextDocumentParams request) => request.TextDocument;
+        public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.DidCloseTextDocumentParams request
+        ) => request.TextDocument;
 
-        public override Task<object?> HandleRequestAsync(LSP.DidCloseTextDocumentParams request, RequestContext context, CancellationToken cancellationToken)
+        public override Task<object?> HandleRequestAsync(
+            LSP.DidCloseTextDocumentParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             // GetTextDocumentIdentifier returns null to avoid creating the solution, so the queue is not able to log the uri.
             context.TraceInformation($"didClose for {request.TextDocument.Uri}");

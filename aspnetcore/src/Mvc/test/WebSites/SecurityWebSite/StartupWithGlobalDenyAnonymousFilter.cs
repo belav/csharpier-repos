@@ -16,16 +16,21 @@ public class StartupWithGlobalDenyAnonymousFilter
     {
         services
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options =>
-            {
-                options.LoginPath = "/Home/Login";
-                options.LogoutPath = "/Home/Logout";
-            }).AddCookie("Cookie2");
+            .AddCookie(
+                options =>
+                {
+                    options.LoginPath = "/Home/Login";
+                    options.LogoutPath = "/Home/Logout";
+                }
+            )
+            .AddCookie("Cookie2");
 
-        services.AddMvc(o =>
-        {
-            o.Filters.Add(new AuthorizeFilter());
-        });
+        services.AddMvc(
+            o =>
+            {
+                o.Filters.Add(new AuthorizeFilter());
+            }
+        );
 
         services.AddScoped<IPolicyEvaluator, CountingPolicyEvaluator>();
     }
@@ -37,9 +42,11 @@ public class StartupWithGlobalDenyAnonymousFilter
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            }
+        );
     }
 }

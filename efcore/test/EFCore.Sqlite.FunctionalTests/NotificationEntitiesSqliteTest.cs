@@ -5,18 +5,16 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class NotificationEntitiesSqliteTest : NotificationEntitiesTestBase<
-        NotificationEntitiesSqliteTest.NotificationEntitiesSqliteFixture>
+    public class NotificationEntitiesSqliteTest
+        : NotificationEntitiesTestBase<NotificationEntitiesSqliteTest.NotificationEntitiesSqliteFixture>
     {
         public NotificationEntitiesSqliteTest(NotificationEntitiesSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class NotificationEntitiesSqliteFixture : NotificationEntitiesFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
         }
     }
 }

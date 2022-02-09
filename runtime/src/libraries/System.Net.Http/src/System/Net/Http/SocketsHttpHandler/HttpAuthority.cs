@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net.Http
 {
-
     internal sealed class HttpAuthority : IEquatable<HttpAuthority>
     {
         // ALPN Protocol Name should also be part of an authority, but we are special-casing for HTTP/3, so this can be assumed to be "H3".
@@ -26,7 +25,8 @@ namespace System.Net.Http
             // TODO https://github.com/dotnet/runtime/issues/25782:
             // Uri.IdnHost is missing '[', ']' characters around IPv6 address.
             // So, we need to add them manually for now.
-            IdnHost = uri.HostNameType == UriHostNameType.IPv6 ? "[" + uri.IdnHost + "]" : uri.IdnHost;
+            IdnHost =
+                uri.HostNameType == UriHostNameType.IPv6 ? "[" + uri.IdnHost + "]" : uri.IdnHost;
             Port = port;
         }
 

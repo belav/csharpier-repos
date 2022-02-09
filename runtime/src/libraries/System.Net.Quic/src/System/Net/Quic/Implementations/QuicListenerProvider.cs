@@ -10,7 +10,9 @@ namespace System.Net.Quic.Implementations
     {
         internal abstract IPEndPoint ListenEndPoint { get; }
 
-        internal abstract ValueTask<QuicConnectionProvider> AcceptConnectionAsync(CancellationToken cancellationToken = default);
+        internal abstract ValueTask<QuicConnectionProvider> AcceptConnectionAsync(
+            CancellationToken cancellationToken = default
+        );
 
         public abstract void Dispose();
     }

@@ -33,41 +33,62 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             IEditorOptionsFactoryService editorOptionsFactoryService,
             ITextDifferencingSelectorService differenceSelectorService,
             IDifferenceBufferFactoryService differenceBufferService,
-            ICocoaDifferenceViewerFactoryService differenceViewerService)
-            : base(threadingContext,
-                  textBufferFactoryService,
-                  contentTypeRegistryService,
-                  projectionBufferFactoryService,
-                  editorOptionsFactoryService,
-                  differenceSelectorService,
-                  differenceBufferService,
-                  textEditorFactoryService.CreateTextViewRoleSet(
-                      TextViewRoles.PreviewRole, PredefinedTextViewRoles.Analyzable))
+            ICocoaDifferenceViewerFactoryService differenceViewerService
+        )
+            : base(
+                threadingContext,
+                textBufferFactoryService,
+                contentTypeRegistryService,
+                projectionBufferFactoryService,
+                editorOptionsFactoryService,
+                differenceSelectorService,
+                differenceBufferService,
+                textEditorFactoryService.CreateTextViewRoleSet(
+                    TextViewRoles.PreviewRole,
+                    PredefinedTextViewRoles.Analyzable
+                )
+            )
         {
             _differenceViewerService = differenceViewerService;
         }
 
-        protected override async Task<ICocoaDifferenceViewer> CreateDifferenceViewAsync(IDifferenceBuffer diffBuffer, ITextViewRoleSet previewRoleSet, DifferenceViewMode mode, double zoomLevel, CancellationToken cancellationToken)
+        protected override async Task<ICocoaDifferenceViewer> CreateDifferenceViewAsync(
+            IDifferenceBuffer diffBuffer,
+            ITextViewRoleSet previewRoleSet,
+            DifferenceViewMode mode,
+            double zoomLevel,
+            CancellationToken cancellationToken
+        )
         {
-            var diffViewer = _differenceViewerService.CreateDifferenceView(diffBuffer, previewRoleSet);
+            var diffViewer = _differenceViewerService.CreateDifferenceView(
+                diffBuffer,
+                previewRoleSet
+            );
             diffViewer.ViewMode = mode;
             const string DiffOverviewMarginName = "deltadifferenceViewerOverview";
             if (mode == DifferenceViewMode.RightViewOnly)
             {
-                diffViewer.RightHost.GetTextViewMargin(DiffOverviewMarginName).VisualElement.Hidden = true;
+                diffViewer.RightHost.GetTextViewMargin(
+                    DiffOverviewMarginName
+                ).VisualElement.Hidden = true;
             }
             else if (mode == DifferenceViewMode.LeftViewOnly)
             {
-                diffViewer.LeftHost.GetTextViewMargin(DiffOverviewMarginName).VisualElement.Hidden = true;
+                diffViewer.LeftHost.GetTextViewMargin(DiffOverviewMarginName).VisualElement.Hidden =
+                    true;
             }
             else
             {
                 Contract.ThrowIfFalse(mode == DifferenceViewMode.Inline);
-                diffViewer.InlineHost.GetTextViewMargin(DiffOverviewMarginName).VisualElement.Hidden = true;
+                diffViewer.InlineHost.GetTextViewMargin(
+                    DiffOverviewMarginName
+                ).VisualElement.Hidden = true;
             }
 
             // We use ConfigureAwait(true) to stay on the UI thread.
-            await diffViewer.SizeToFitAsync(ThreadingContext, cancellationToken: cancellationToken).ConfigureAwait(true);
+            await diffViewer
+                .SizeToFitAsync(ThreadingContext, cancellationToken: cancellationToken)
+                .ConfigureAwait(true);
 
             return diffViewer;
         }

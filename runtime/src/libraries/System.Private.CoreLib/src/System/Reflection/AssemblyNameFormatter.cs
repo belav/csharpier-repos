@@ -10,7 +10,14 @@ namespace System.Reflection
 {
     internal static class AssemblyNameFormatter
     {
-        public static string ComputeDisplayName(string name, Version? version, string? cultureName, byte[]? pkt, AssemblyNameFlags flags = 0, AssemblyContentType contentType = 0)
+        public static string ComputeDisplayName(
+            string name,
+            Version? version,
+            string? cultureName,
+            byte[]? pkt,
+            AssemblyNameFlags flags = 0,
+            AssemblyContentType contentType = 0
+        )
         {
             const int PUBLIC_KEY_TOKEN_LEN = 8;
             Debug.Assert(name.Length != 0);
@@ -128,7 +135,12 @@ namespace System.Reflection
             ushort build = (ushort)version.Build;
             ushort revision = (ushort)version.Revision;
 
-            if (major == version.Major && minor == version.Minor && build == version.Build && revision == version.Revision)
+            if (
+                major == version.Major
+                && minor == version.Minor
+                && build == version.Build
+                && revision == version.Revision
+            )
                 return version;
 
             return new Version(major, minor, build, revision);

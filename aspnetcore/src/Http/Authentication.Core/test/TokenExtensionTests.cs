@@ -47,7 +47,12 @@ public class TokenExtensionTests
 
         props.StoreTokens(tokens);
 
-        props.StoreTokens(new[] { new AuthenticationToken { Name = "Zero", Value = "0" } });
+        props.StoreTokens(
+            new[]
+            {
+                new AuthenticationToken { Name = "Zero", Value = "0" }
+            }
+        );
 
         Assert.Equal("0", props.GetTokenValue("Zero"));
         Assert.Null(props.GetTokenValue("One"));
@@ -128,12 +133,15 @@ public class TokenExtensionTests
     public async Task GetTokenWorksWithDefaultAuthenticateScheme()
     {
         var context = new DefaultHttpContext();
-        var services = new ServiceCollection().AddOptions()
-            .AddAuthenticationCore(o =>
-            {
-                o.DefaultScheme = "simple";
-                o.AddScheme("simple", s => s.HandlerType = typeof(SimpleAuth));
-            });
+        var services = new ServiceCollection()
+            .AddOptions()
+            .AddAuthenticationCore(
+                o =>
+                {
+                    o.DefaultScheme = "simple";
+                    o.AddScheme("simple", s => s.HandlerType = typeof(SimpleAuth));
+                }
+            );
         context.RequestServices = services.BuildServiceProvider();
 
         Assert.Equal("1", await context.GetTokenAsync("One"));
@@ -145,8 +153,11 @@ public class TokenExtensionTests
     public async Task GetTokenWorksWithExplicitScheme()
     {
         var context = new DefaultHttpContext();
-        var services = new ServiceCollection().AddOptions()
-            .AddAuthenticationCore(o => o.AddScheme("simple", s => s.HandlerType = typeof(SimpleAuth)));
+        var services = new ServiceCollection()
+            .AddOptions()
+            .AddAuthenticationCore(
+                o => o.AddScheme("simple", s => s.HandlerType = typeof(SimpleAuth))
+            );
         context.RequestServices = services.BuildServiceProvider();
 
         Assert.Equal("1", await context.GetTokenAsync("simple", "One"));
@@ -167,7 +178,11 @@ public class TokenExtensionTests
             tokens.Add(tok2);
             tokens.Add(tok3);
             props.StoreTokens(tokens);
-            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), props, "simple")));
+            return Task.FromResult(
+                AuthenticateResult.Success(
+                    new AuthenticationTicket(new ClaimsPrincipal(), props, "simple")
+                )
+            );
         }
 
         public Task ChallengeAsync(AuthenticationProperties? properties)
@@ -195,5 +210,4 @@ public class TokenExtensionTests
             throw new NotImplementedException();
         }
     }
-
 }

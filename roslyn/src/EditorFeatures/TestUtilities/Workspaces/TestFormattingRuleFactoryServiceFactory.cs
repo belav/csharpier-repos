@@ -14,14 +14,19 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {
-    [ExportWorkspaceServiceFactory(typeof(IHostDependentFormattingRuleFactoryService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IHostDependentFormattingRuleFactoryService),
+            ServiceLayer.Test
+        ),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal sealed class TestFormattingRuleFactoryServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestFormattingRuleFactoryServiceFactory()
-        {
-        }
+        public TestFormattingRuleFactoryServiceFactory() { }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
@@ -35,8 +40,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             public TextSpan TextSpan = default;
             public bool UseBaseIndentation = false;
 
-            public bool ShouldUseBaseIndentation(Document document)
-                => UseBaseIndentation;
+            public bool ShouldUseBaseIndentation(Document document) => UseBaseIndentation;
 
             public AbstractFormattingRule CreateRule(Document document, int position)
             {
@@ -49,11 +53,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 return new BaseIndentationFormattingRule(root, TextSpan, BaseIndentation + 4);
             }
 
-            public IEnumerable<TextChange> FilterFormattedChanges(Document document, TextSpan span, IList<TextChange> changes)
-                => changes;
+            public IEnumerable<TextChange> FilterFormattedChanges(
+                Document document,
+                TextSpan span,
+                IList<TextChange> changes
+            ) => changes;
 
-            public bool ShouldNotFormatOrCommitOnPaste(Document document)
-                => UseBaseIndentation;
+            public bool ShouldNotFormatOrCommitOnPaste(Document document) => UseBaseIndentation;
         }
     }
 }

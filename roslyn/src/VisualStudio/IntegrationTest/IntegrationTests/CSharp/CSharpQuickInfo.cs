@@ -19,46 +19,61 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpQuickInfo(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpQuickInfo))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpQuickInfo)) { }
 
-        [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/38301"), Trait(Traits.Feature, Traits.Features.QuickInfo)]
+        [
+            WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/38301"),
+            Trait(Traits.Feature, Traits.Features.QuickInfo)
+        ]
         public void QuickInfo_MetadataDocumentation()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 ///<summary>Hello!</summary>
 class Program
 {
     static void Main(string$$[] args)
     {
     }
-}");
+}"
+            );
             VisualStudio.Editor.InvokeQuickInfo();
             Assert.Equal(
                 "class System.String\r\nRepresents text as a sequence of UTF-16 code units.To browse the .NET Framework source code for this type, see the Reference Source.",
-                VisualStudio.Editor.GetQuickInfo());
+                VisualStudio.Editor.GetQuickInfo()
+            );
         }
 
-        [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/53979"), Trait(Traits.Feature, Traits.Features.QuickInfo), Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
+        [
+            WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/53979"),
+            Trait(Traits.Feature, Traits.Features.QuickInfo),
+            Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)
+        ]
         public void QuickInfo_Documentation()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 ///<summary>Hello!</summary>
 class Program$$
 {
     static void Main(string[] args)
     {
     }
-}");
+}"
+            );
             VisualStudio.Editor.InvokeQuickInfo();
             Assert.Equal("class Program\r\nHello!", VisualStudio.Editor.GetQuickInfo());
         }
 
-        [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/53979"), Trait(Traits.Feature, Traits.Features.QuickInfo), Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
+        [
+            WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/53979"),
+            Trait(Traits.Feature, Traits.Features.QuickInfo),
+            Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)
+        ]
         public void International()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 /// <summary>
 /// This is an XML doc comment defined in code.
 /// </summary>
@@ -68,16 +83,25 @@ class العربية123
     {
          العربية123$$ goo;
     }
-}");
+}"
+            );
             VisualStudio.Editor.InvokeQuickInfo();
-            Assert.Equal(@"class العربية123
-This is an XML doc comment defined in code.", VisualStudio.Editor.GetQuickInfo());
+            Assert.Equal(
+                @"class العربية123
+This is an XML doc comment defined in code.",
+                VisualStudio.Editor.GetQuickInfo()
+            );
         }
 
-        [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/53979"), Trait(Traits.Feature, Traits.Features.QuickInfo), Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
+        [
+            WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/53979"),
+            Trait(Traits.Feature, Traits.Features.QuickInfo),
+            Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)
+        ]
         public void SectionOrdering()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -88,7 +112,8 @@ class C
     {
                 return await M$$();
             }
-        }");
+        }"
+            );
 
             VisualStudio.Editor.InvokeQuickInfo();
             var expected = "(awaitable) Task<int> C.M()\r\n\r\nExceptions:\r\n  Exception";
