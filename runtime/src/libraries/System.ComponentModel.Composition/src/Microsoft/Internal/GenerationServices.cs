@@ -37,9 +37,9 @@ namespace Microsoft.Internal
             typeof(System.Collections.Generic.IEnumerable<>);
         private static readonly Type s_iEnumerableType = typeof(System.Collections.IEnumerable);
 
-        private static readonly MethodInfo ExceptionGetData = typeof(Exception).GetProperty(
-            "Data"
-        )!.GetGetMethod()!;
+        private static readonly MethodInfo ExceptionGetData = typeof(Exception)
+            .GetProperty("Data")!
+            .GetGetMethod()!;
         private static readonly MethodInfo DictionaryAdd = typeof(IDictionary).GetMethod("Add")!;
         private static readonly ConstructorInfo ObjectCtor = typeof(object).GetConstructor(
             Type.EmptyTypes

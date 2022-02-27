@@ -339,6 +339,7 @@ namespace System.Speech.Internal
             Text,
             NonStandardFormat, // Non-SAPI 5.1 standard format with no WAVEFORMATEX description
             ExtendedAudioFormat, // Non-SAPI 5.1 standard format but has WAVEFORMATEX description
+
             // Standard PCM wave formats
             PCM_8kHz8BitMono,
             PCM_8kHz8BitStereo,
@@ -376,9 +377,11 @@ namespace System.Speech.Internal
             PCM_48kHz8BitStereo,
             PCM_48kHz16BitMono,
             PCM_48kHz16BitStereo,
+
             // TrueSpeech format
 
             TrueSpeech_8kHz1BitMono,
+
             // A-Law formats
             CCITT_ALaw_8kHzMono,
             CCITT_ALaw_8kHzStereo,
@@ -388,6 +391,7 @@ namespace System.Speech.Internal
             CCITT_ALaw_22kHzStereo,
             CCITT_ALaw_44kHzMono,
             CCITT_ALaw_44kHzStereo,
+
             // u-Law formats
             CCITT_uLaw_8kHzMono,
             CCITT_uLaw_8kHzStereo,
@@ -397,6 +401,7 @@ namespace System.Speech.Internal
             CCITT_uLaw_22kHzStereo,
             CCITT_uLaw_44kHzMono,
             CCITT_uLaw_44kHzStereo,
+
             // ADPCM formats
             ADPCM_8kHzMono,
             ADPCM_8kHzStereo,
@@ -406,6 +411,7 @@ namespace System.Speech.Internal
             ADPCM_22kHzStereo,
             ADPCM_44kHzMono,
             ADPCM_44kHzStereo,
+
             // GSM 6.10 formats
             GSM610_8kHzMono,
             GSM610_11kHzMono,

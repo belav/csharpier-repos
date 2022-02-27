@@ -15,6 +15,7 @@ namespace System.Text.Json.SourceGeneration
         TypeUnsupportedBySourceGen = 0,
         Object = 1,
         KnownType = 2,
+
         /// <summary>
         /// Known types such as System.Type and System.IntPtr that throw NotSupportedException.
         /// </summary>

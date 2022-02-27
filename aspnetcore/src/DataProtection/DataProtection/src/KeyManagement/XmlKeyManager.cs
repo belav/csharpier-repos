@@ -329,9 +329,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 
         try
         {
-            string keyIdAsString = (string)revocationElement.Element(KeyElementName)!.Attribute(
-                IdAttributeName
-            )!;
+            string keyIdAsString = (string)revocationElement
+                .Element(KeyElementName)!
+                .Attribute(IdAttributeName)!;
             if (keyIdAsString == RevokeAllKeysValue)
             {
                 // this is a mass revocation of all keys as of the specified revocation date

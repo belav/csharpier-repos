@@ -76,11 +76,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // 0x200
         EXF_NEWSTRUCTASSG = 0x200, // Only on EXPRCALL, indicates that this is a constructor call which assigns to object
         EXF_GENERATEDSTMT = 0x200, // Only on statement exprs. Indicates that the statement is compiler generated
+
         // so we shouldn't report things like "unreachable code" on it.
 
         // 0x400
         EXF_IMPLICITSTRUCTASSG = 0x400, // Only on EXPRCALL, indicates that this an implicit struct assg call
         EXF_MARKING = 0x400, // Only on statement exprs. Indicates that we're currently marking
+
         // its children for reachability (it's up the stack).
 
         //*** The following are usable on multiple node types.***
@@ -95,6 +97,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         EXF_CANTBENULL = 0x020000, // indicate this expression can't ever be null (e.g., "this").
         EXF_CHECKOVERFLOW = 0x040000, // indicates that operation should be checked for overflow
         EXF_PUSH_OP_FIRST = 0x100000, // On any expr, indicates that the first operand must be placed on the stack before
+
         // anything else - this is needed for multi-ops involving string concat.
         EXF_ASSGOP = 0x200000, // On any non stmt exprs, indicates assignment node...
         EXF_LVALUE = 0x400000, // On any exprs. An lvalue - whether it's legal to assign.

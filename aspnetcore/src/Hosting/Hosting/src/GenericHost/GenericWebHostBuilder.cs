@@ -386,15 +386,17 @@ internal sealed class GenericWebHostBuilder
                 );
 
                 // Get the private ConfigureContainer method on this type then close over the container type
-                var configureCallback = typeof(GenericWebHostBuilder).GetMethod(
-                    nameof(ConfigureContainerImpl),
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )!
+                var configureCallback = typeof(GenericWebHostBuilder)
+                    .GetMethod(
+                        nameof(ConfigureContainerImpl),
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    )!
                     .MakeGenericMethod(containerType)
                     .CreateDelegate(actionType, this);
 
                 // _builder.ConfigureContainer<T>(ConfigureContainer);
-                typeof(IHostBuilder).GetMethod(nameof(IHostBuilder.ConfigureContainer))!
+                typeof(IHostBuilder)
+                    .GetMethod(nameof(IHostBuilder.ConfigureContainer))!
                     .MakeGenericMethod(containerType)
                     .InvokeWithoutWrappingExceptions(_builder, new object[] { configureCallback });
             }

@@ -2269,9 +2269,9 @@ namespace System.Xml.Schema
 
         private static void BuildSimpleTypeUnion_MemberTypes(XsdBuilder builder, string value)
         {
-            XmlSchemaDatatype dt = XmlSchemaDatatype.FromXmlTokenizedTypeXsd(
-                XmlTokenizedType.QName
-            )!.DeriveByList(null);
+            XmlSchemaDatatype dt = XmlSchemaDatatype
+                .FromXmlTokenizedTypeXsd(XmlTokenizedType.QName)!
+                .DeriveByList(null);
             try
             {
                 builder._simpleTypeUnion!.MemberTypes = (XmlQualifiedName[])dt.ParseValue(

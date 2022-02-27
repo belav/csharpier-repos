@@ -2700,9 +2700,9 @@ public class ValidationIntegrationTests
         public string Name { get; set; } = default!;
 
         public Delegate Delegate { get; set; } =
-            typeof(ModelWithNonNullableReferenceTypeProperties).GetMethod(
-                nameof(SomeMethod)
-            )!.CreateDelegate<Action>();
+            typeof(ModelWithNonNullableReferenceTypeProperties)
+                .GetMethod(nameof(SomeMethod))!
+                .CreateDelegate<Action>();
 
         public static void SomeMethod() { }
     }

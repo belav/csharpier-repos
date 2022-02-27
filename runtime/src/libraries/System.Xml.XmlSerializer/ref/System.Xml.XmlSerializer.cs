@@ -11,14 +11,19 @@ namespace System.Xml.Serialization
     {
         [System.Xml.Serialization.XmlIgnoreAttribute]
         None = 0,
+
         [System.Xml.Serialization.XmlEnumAttribute("properties")]
         GenerateProperties = 1,
+
         [System.Xml.Serialization.XmlEnumAttribute("newAsync")]
         GenerateNewAsync = 2,
+
         [System.Xml.Serialization.XmlEnumAttribute("oldAsync")]
         GenerateOldAsync = 4,
+
         [System.Xml.Serialization.XmlEnumAttribute("order")]
         GenerateOrder = 8,
+
         [System.Xml.Serialization.XmlEnumAttribute("enableDataBinding")]
         EnableDataBinding = 16,
     }

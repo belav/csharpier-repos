@@ -561,12 +561,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     return compatibleFk;
                 }
 
-                return joinEntityType.Builder.HasRelationship(
-                    skipNavigation.DeclaringEntityType,
-                    ConfigurationSource.Convention,
-                    required: true,
-                    skipNavigation.Inverse!.Name
-                )!.IsUnique(false, ConfigurationSource.Convention)!.Metadata;
+                return joinEntityType.Builder
+                    .HasRelationship(
+                        skipNavigation.DeclaringEntityType,
+                        ConfigurationSource.Convention,
+                        required: true,
+                        skipNavigation.Inverse!.Name
+                    )!
+                    .IsUnique(false, ConfigurationSource.Convention)!.Metadata;
             }
         }
 

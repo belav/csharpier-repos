@@ -393,7 +393,7 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         /// <summary>
-         /// Checks that action succeeds or throws either a RegexParseException or an ArgumentException depending on the
+        /// Checks that action succeeds or throws either a RegexParseException or an ArgumentException depending on the
         // environment and the action.
         /// </summary>
         /// <param name="action">The action to invoke.</param>

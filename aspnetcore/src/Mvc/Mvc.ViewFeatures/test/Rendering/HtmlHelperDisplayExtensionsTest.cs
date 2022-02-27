@@ -800,6 +800,7 @@ public class HtmlHelperDisplayExtensionsTest
     {
         [Display(Name = "CreatedKey")]
         Created,
+
         [Display(Name = "FaultedKey", ResourceType = typeof(StatusResource))]
         Faulted,
         Done

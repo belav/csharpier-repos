@@ -17,16 +17,19 @@ namespace System.Data
     internal enum RBTreeError
     {
         InvalidPageSize = 1,
+
         //      InvalidCompareDelegate                      =  2,
         PagePositionInSlotInUse = 3,
         NoFreeSlots = 4,
         InvalidStateinInsert = 5,
+
         //      InvalidStateinEndInsert                     =  6,
         InvalidNextSizeInDelete = 7,
         InvalidStateinDelete = 8,
         InvalidNodeSizeinDelete = 9,
         InvalidStateinEndDelete = 10,
         CannotRotateInvalidsuccessorNodeinDelete = 11,
+
         //      IndexOutOfRange                             = 12,
         IndexOutOFRangeinGetNodeByIndex = 13,
         RBDeleteFixup = 14,

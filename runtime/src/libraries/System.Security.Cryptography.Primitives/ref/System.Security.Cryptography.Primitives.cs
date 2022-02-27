@@ -177,6 +177,7 @@ namespace System.Security.Cryptography
     {
         CBC = 1,
         ECB = 2,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]

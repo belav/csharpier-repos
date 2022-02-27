@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis
         /// An anonymous method or lambda expression
         /// </summary>
         AnonymousFunction = 0,
+
         /// <summary>
         /// <inheritdoc cref="AnonymousFunction"/>
         /// </summary>
@@ -89,6 +90,7 @@ namespace Microsoft.CodeAnalysis
         /// Method is a static constructor.
         /// </summary>
         StaticConstructor = 14,
+
         /// <summary>
         /// <inheritdoc cref="StaticConstructor"/>
         /// </summary>

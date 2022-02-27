@@ -263,6 +263,7 @@ namespace System.Speech
         NotWholeNumberBlocks,
         BlockSignatureInvalid,
         NumberOfSamplesInvalid,
+
         // Do not change ordering of codes below here; they correspond to the
         // numerical codes in sperror.h, from SPERR_UNINITIALIZED onwards.
         SapiErrorUninitialized, // 0x80045001 == SPERR_UNINITIALIZED == SPERR_FIRST

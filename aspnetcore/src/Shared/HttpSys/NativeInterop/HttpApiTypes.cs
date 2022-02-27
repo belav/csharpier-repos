@@ -675,8 +675,10 @@ internal static unsafe class HttpApiTypes
     internal enum HTTP_CREATE_REQUEST_QUEUE_FLAG : uint
     {
         None = 0,
+
         // The HTTP_CREATE_REQUEST_QUEUE_FLAG_OPEN_EXISTING flag allows applications to open an existing request queue by name and retrieve the request queue handle. The pName parameter must contain a valid request queue name; it cannot be NULL.
         OpenExisting = 1,
+
         // The handle to the request queue created using this flag cannot be used to perform I/O operations. This flag can be set only when the request queue handle is created.
         Controller = 2,
         Delegation = 8

@@ -260,7 +260,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var entry = context.Entry(entity);
             foreach (
-                var property in context.Model.FindEntityType(entity.GetType())!
+                var property in context.Model
+                    .FindEntityType(entity.GetType())!
                     .GetProperties()
                     .Where(p => !p.IsPrimaryKey() && !p.IsShadowProperty())
             )

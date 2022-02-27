@@ -14,10 +14,12 @@ namespace System.Drawing.Imaging
         /// Specifies alpha data.
         /// </summary>
         HasAlpha = 0x0001,
+
         /// <summary>
         /// Specifies grayscale data.
         /// </summary>
         GrayScale = 0x0002,
+
         /// <summary>
         /// Specifies halftone data.
         /// </summary>

@@ -1938,10 +1938,12 @@ namespace System.Runtime.Serialization
     internal static class SerializationInfoExtensions
     {
         private static readonly Action<SerializationInfo, string, object, Type> s_updateValue =
-            typeof(SerializationInfo).GetMethod(
-                "UpdateValue",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            )!.CreateDelegate<Action<SerializationInfo, string, object, Type>>();
+            typeof(SerializationInfo)
+                .GetMethod(
+                    "UpdateValue",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )!
+                .CreateDelegate<Action<SerializationInfo, string, object, Type>>();
 
         public static void UpdateValue(
             this SerializationInfo si,

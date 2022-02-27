@@ -320,6 +320,7 @@ namespace System
             TimeZone = 15, // timezone name
             Era = 16, // era name
             NumUTCTimeMark = 17, // Num + 'Z'
+
             // When you add a new token which will be in the
             // state table, add it after NumLocalTimeMark.
             Unk = 18, // unknown

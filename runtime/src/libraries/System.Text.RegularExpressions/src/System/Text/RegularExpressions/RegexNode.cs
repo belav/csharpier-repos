@@ -703,16 +703,16 @@ namespace System.Text.RegularExpressions
                                 while (compare < endExclusive)
                                 {
                                     // Get the starting character
-                                    char c = branches[
-                                        compare
-                                    ].FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti();
+                                    char c = branches[compare]
+                                        .FindBranchOneOrMultiStart()!
+                                        .FirstCharOfOneOrMulti();
 
                                     // Move compare to point to the last branch that has the same starting value.
                                     while (
                                         compare < endExclusive
-                                        && branches[
-                                            compare
-                                        ].FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti() == c
+                                        && branches[compare]
+                                            .FindBranchOneOrMultiStart()!
+                                            .FirstCharOfOneOrMulti() == c
                                     )
                                     {
                                         compare++;
@@ -727,8 +727,9 @@ namespace System.Text.RegularExpressions
                                         {
                                             RegexNode nextChild = branches[next];
                                             if (
-                                                nextChild.FindBranchOneOrMultiStart()!.FirstCharOfOneOrMulti()
-                                                == c
+                                                nextChild
+                                                    .FindBranchOneOrMultiStart()!
+                                                    .FirstCharOfOneOrMulti() == c
                                             )
                                             {
                                                 branches.RemoveAt(next);

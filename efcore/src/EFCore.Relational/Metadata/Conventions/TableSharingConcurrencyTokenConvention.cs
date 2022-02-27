@@ -142,13 +142,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     foreach (var entityTypeToExampleProperty in entityTypesMissingConcurrencyColumn)
                     {
                         var exampleProperty = entityTypeToExampleProperty.Value;
-                        entityTypeToExampleProperty.Key.Builder.CreateUniqueProperty(
-                            exampleProperty.ClrType,
-                            ConcurrencyPropertyPrefix + exampleProperty.Name,
-                            !exampleProperty.IsNullable
-                        )!.HasColumnName(concurrencyColumnName)!.HasColumnType(
-                            exampleProperty.GetColumnType()
-                        )!.IsConcurrencyToken(true)!.ValueGenerated(exampleProperty.ValueGenerated);
+                        entityTypeToExampleProperty.Key.Builder
+                            .CreateUniqueProperty(
+                                exampleProperty.ClrType,
+                                ConcurrencyPropertyPrefix + exampleProperty.Name,
+                                !exampleProperty.IsNullable
+                            )!
+                            .HasColumnName(concurrencyColumnName)!
+                            .HasColumnType(exampleProperty.GetColumnType())!
+                            .IsConcurrencyToken(true)!
+                            .ValueGenerated(exampleProperty.ValueGenerated);
                     }
                 }
             }

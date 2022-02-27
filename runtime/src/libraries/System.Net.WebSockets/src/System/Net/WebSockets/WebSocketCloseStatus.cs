@@ -12,6 +12,7 @@ namespace System.Net.WebSockets
         ProtocolError = 1002,
         InvalidMessageType = 1003,
         Empty = 1005,
+
         // AbnormalClosure = 1006, // 1006 is reserved and should never be used by user
         InvalidPayloadData = 1007,
         PolicyViolation = 1008,

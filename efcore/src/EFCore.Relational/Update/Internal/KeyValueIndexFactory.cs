@@ -69,10 +69,9 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             IUpdateEntry entry,
             IForeignKey foreignKey
         ) =>
-            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromCurrentValues(
-                entry,
-                out var keyValue
-            )
+            foreignKey
+                .GetDependentKeyValueFactory<TKey>()!
+                .TryCreateFromCurrentValues(entry, out var keyValue)
               ? new KeyValueIndex<TKey>(
                     foreignKey,
                     keyValue,
@@ -91,10 +90,9 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             IUpdateEntry entry,
             IForeignKey foreignKey
         ) =>
-            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromOriginalValues(
-                entry,
-                out var keyValue
-            )
+            foreignKey
+                .GetDependentKeyValueFactory<TKey>()!
+                .TryCreateFromOriginalValues(entry, out var keyValue)
               ? new KeyValueIndex<TKey>(
                     foreignKey,
                     keyValue,

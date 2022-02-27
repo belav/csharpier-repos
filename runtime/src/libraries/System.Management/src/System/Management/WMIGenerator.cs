@@ -22,18 +22,22 @@ namespace System.Management
         ///    A value for generating C# code.
         /// </summary>
         CSharp,
+
         /// <summary>
         ///    <para>A value for generating JScript code.</para>
         /// </summary>
         JScript,
+
         /// <summary>
         ///    <para>A value for generating Visual Basic code.</para>
         /// </summary>
         VB,
+
         /// <summary>
         ///    <para>A value for generating Visual J# code.</para>
         /// </summary>
         VJSharp,
+
         /// <summary>
         ///    <para>A value for generating Managed C++ code.</para>
         /// </summary>

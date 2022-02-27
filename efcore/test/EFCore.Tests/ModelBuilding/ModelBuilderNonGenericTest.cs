@@ -143,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var model = (IConventionModel)modelBuilder.FinalizeModel();
 
-                var property = model.FindEntityType(typeof(ComplexCaseChild13108))!
+                var property = model
+                    .FindEntityType(typeof(ComplexCaseChild13108))!
                     .GetProperties()
                     .Single(p => p.Name == "ParentKey");
                 Assert.Equal(typeof(int), property.ClrType);

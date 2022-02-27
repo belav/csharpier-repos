@@ -569,10 +569,10 @@ Delta: Epsilon: Test E
             {
                 var ex = Assert.ThrowsAny<Exception>(
                     () =>
-                        analyzer.GetType().GetMethod("Method")!.Invoke(
-                            analyzer,
-                            new object[] { sb }
-                        )
+                        analyzer
+                            .GetType()
+                            .GetMethod("Method")!
+                            .Invoke(analyzer, new object[] { sb })
                 );
                 Assert.True(
                     ex is MissingMethodException or TargetInvocationException,
@@ -615,10 +615,10 @@ Delta: Epsilon: Test E
                 _testFixture.AnalyzerWithNativeDependency.Path
             );
             var analyzer = analyzerAssembly.CreateInstance("Class1")!;
-            var result = analyzer.GetType().GetMethod("GetFileAttributes")!.Invoke(
-                analyzer,
-                new[] { _testFixture.AnalyzerWithNativeDependency.Path }
-            );
+            var result = analyzer
+                .GetType()
+                .GetMethod("GetFileAttributes")!
+                .Invoke(analyzer, new[] { _testFixture.AnalyzerWithNativeDependency.Path });
             Assert.Equal(0, Marshal.GetLastWin32Error());
             Assert.Equal(FileAttributes.Archive, (FileAttributes)result!);
         }
@@ -769,7 +769,8 @@ Delta: Epsilon: Test E
                 .GetMethod(
                     nameof(AssemblyLoadingInNonDefaultContextHelper1),
                     BindingFlags.Instance | BindingFlags.NonPublic
-                )!.Invoke(testObject, new object[] { sb });
+                )!
+                .Invoke(testObject, new object[] { sb });
             Assert.Equal("42", sb.ToString());
         }
 
@@ -822,7 +823,8 @@ Delta: Epsilon: Test E
                 .GetMethod(
                     nameof(AssemblyLoadingInNonDefaultContextHelper2),
                     BindingFlags.Instance | BindingFlags.NonPublic
-                )!.Invoke(testObject, new object[] { sb });
+                )!
+                .Invoke(testObject, new object[] { sb });
             Assert.Equal(
                 @"Delta: Hello
 ",

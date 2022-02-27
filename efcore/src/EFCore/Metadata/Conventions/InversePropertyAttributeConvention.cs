@@ -399,8 +399,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     }
 
                     var existingAmbiguousNavigation = FindActualEntityType(
-                        ambiguousInverse.Value.Item2
-                    )!.FindSkipNavigation(ambiguousInverse.Value.Item1);
+                            ambiguousInverse.Value.Item2
+                        )!
+                        .FindSkipNavigation(ambiguousInverse.Value.Item1);
                     if (existingAmbiguousNavigation != null)
                     {
                         existingAmbiguousNavigation.DeclaringEntityType.Builder.HasNoSkipNavigation(
@@ -438,8 +439,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     }
 
                     var existingAmbiguousNavigation = FindActualEntityType(
-                        ambiguousInverse.Value.Item2
-                    )!.FindNavigation(ambiguousInverse.Value.Item1);
+                            ambiguousInverse.Value.Item2
+                        )!
+                        .FindNavigation(ambiguousInverse.Value.Item1);
                     if (existingAmbiguousNavigation != null)
                     {
                         Remove(existingAmbiguousNavigation);

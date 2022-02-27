@@ -211,9 +211,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
                 var includeColumns = includeProperties
                     .Select(
                         p =>
-                            modelIndex.DeclaringEntityType.FindProperty(p)!.GetColumnName(
-                                StoreObjectIdentifier.Table(table.Name, table.Schema)
-                            )
+                            modelIndex.DeclaringEntityType
+                                .FindProperty(p)!
+                                .GetColumnName(
+                                    StoreObjectIdentifier.Table(table.Name, table.Schema)
+                                )
                     )
                     .ToArray();
 

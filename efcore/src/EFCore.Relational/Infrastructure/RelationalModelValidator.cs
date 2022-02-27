@@ -1757,7 +1757,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     && property.GetColumnName(
                                         StoreObjectIdentifier.Table(n.Item1, n.Item2)
                                     ) != null
-                            )!.ToList<(string Table, string? Schema)>();
+                            )!
+                            .ToList<(string Table, string? Schema)>();
                         if (tablesMappedToProperty.Count == 0)
                         {
                             propertyNotMappedToAnyTable = property;

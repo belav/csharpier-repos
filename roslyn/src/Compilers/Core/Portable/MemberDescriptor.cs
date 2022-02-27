@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         Constructor = 0x04,
         PropertyGet = 0x08,
         Property = 0x10,
+
         // END Mutually exclusive Member kinds
 
         KindMask = 0x1F,

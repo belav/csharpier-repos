@@ -533,9 +533,9 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     // always added the new part managers to see if they will also be
                     // affected by these changes
-                    affectedParts = affectedParts.ConcatAllowingNull(
-                        engineContext!.GetAddedPartManagers()
-                    )!.Except(engineContext.GetRemovedPartManagers()!);
+                    affectedParts = affectedParts
+                        .ConcatAllowingNull(engineContext!.GetAddedPartManagers())!
+                        .Except(engineContext.GetRemovedPartManagers()!);
                 }
             }
 

@@ -692,10 +692,8 @@ namespace System.ComponentModel
                 return new AttributeCollection((Attribute[])null);
             }
 
-            AttributeCollection attributes = GetDescriptor(
-                componentType,
-                nameof(componentType)
-            )!.GetAttributes();
+            AttributeCollection attributes = GetDescriptor(componentType, nameof(componentType))!
+                .GetAttributes();
             return attributes;
         }
 
@@ -1155,10 +1153,8 @@ namespace System.ComponentModel
                 return new EventDescriptorCollection(null, true);
             }
 
-            EventDescriptorCollection events = GetDescriptor(
-                componentType,
-                nameof(componentType)
-            )!.GetEvents(attributes);
+            EventDescriptorCollection events = GetDescriptor(componentType, nameof(componentType))!
+                .GetEvents(attributes);
 
             if (attributes != null && attributes.Length > 0)
             {
@@ -1432,9 +1428,10 @@ namespace System.ComponentModel
             }
 
             PropertyDescriptorCollection properties = GetDescriptor(
-                componentType,
-                nameof(componentType)
-            )!.GetProperties(attributes);
+                    componentType,
+                    nameof(componentType)
+                )!
+                .GetProperties(attributes);
 
             if (attributes != null && attributes.Length > 0)
             {

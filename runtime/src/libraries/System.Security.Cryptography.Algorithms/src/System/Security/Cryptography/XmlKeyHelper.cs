@@ -297,11 +297,13 @@ namespace System.Security.Cryptography
                     Type xDocument = Type.GetType(
                         "System.Xml.Linq.XDocument" + XmlLinqAssemblyString
                     )!;
-                    s_xDocumentCreate = xDocument.GetMethod(
-                        "Parse",
-                        BindingFlags.Static | BindingFlags.Public,
-                        new[] { typeof(string) }
-                    )!.CreateDelegate<Func<string, object>>();
+                    s_xDocumentCreate = xDocument
+                        .GetMethod(
+                            "Parse",
+                            BindingFlags.Static | BindingFlags.Public,
+                            new[] { typeof(string) }
+                        )!
+                        .CreateDelegate<Func<string, object>>();
 
                     s_docRootProperty = xDocument.GetProperty("Root")!;
 

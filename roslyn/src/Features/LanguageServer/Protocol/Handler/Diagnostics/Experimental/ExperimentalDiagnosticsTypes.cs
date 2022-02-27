@@ -77,6 +77,7 @@ internal enum DocumentDiagnosticReportKind
 {
     [EnumMember(Value = "full")]
     Full,
+
     [EnumMember(Value = "unChanged")]
     UnChanged,
 }

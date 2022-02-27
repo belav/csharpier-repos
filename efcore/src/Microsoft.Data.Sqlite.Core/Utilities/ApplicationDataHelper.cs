@@ -27,7 +27,8 @@ namespace Microsoft.Data.Sqlite.Utilities
                         "Windows.Storage.ApplicationData, Windows, ContentType=WindowsRuntime"
                     )
                     ?? Type.GetType("Windows.Storage.ApplicationData, Microsoft.Windows.SDK.NET")
-                        ?.GetRuntimeProperty("Current")!.GetValue(null);
+                        ?.GetRuntimeProperty("Current")!
+                        .GetValue(null);
             }
             catch
             {
@@ -39,9 +40,9 @@ namespace Microsoft.Data.Sqlite.Utilities
         private static string? GetFolderPath(string propertyName)
         {
             var appDataType = CurrentApplicationData?.GetType();
-            var temporaryFolder = appDataType?.GetRuntimeProperty(propertyName)!.GetValue(
-                CurrentApplicationData
-            );
+            var temporaryFolder = appDataType
+                ?.GetRuntimeProperty(propertyName)!
+                .GetValue(CurrentApplicationData);
 
             return temporaryFolder?.GetType().GetRuntimeProperty("Path")!.GetValue(temporaryFolder)
                 as string;

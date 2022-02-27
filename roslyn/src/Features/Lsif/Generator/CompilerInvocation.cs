@@ -131,9 +131,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
             workspace.AddProject(projectInfo);
 
-            var compilation = await workspace.CurrentSolution.GetProject(
-                projectId
-            )!.GetRequiredCompilationAsync(CancellationToken.None);
+            var compilation = await workspace.CurrentSolution
+                .GetProject(projectId)!
+                .GetRequiredCompilationAsync(CancellationToken.None);
 
             return new CompilerInvocation(
                 compilation,

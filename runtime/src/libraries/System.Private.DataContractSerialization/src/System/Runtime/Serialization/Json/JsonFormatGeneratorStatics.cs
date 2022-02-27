@@ -139,9 +139,9 @@ namespace System.Runtime.Serialization
             {
                 if (s_ienumeratorGetCurrentMethod == null)
                 {
-                    s_ienumeratorGetCurrentMethod = typeof(IEnumerator).GetProperty(
-                        "Current"
-                    )!.GetGetMethod();
+                    s_ienumeratorGetCurrentMethod = typeof(IEnumerator)
+                        .GetProperty("Current")!
+                        .GetGetMethod();
                     Debug.Assert(s_ienumeratorGetCurrentMethod != null);
                 }
                 return s_ienumeratorGetCurrentMethod;
@@ -154,10 +154,9 @@ namespace System.Runtime.Serialization
             {
                 if (s_getItemContractMethod == null)
                 {
-                    s_getItemContractMethod = typeof(CollectionDataContract).GetProperty(
-                        "ItemContract",
-                        Globals.ScanAllMembers
-                    )!.GetGetMethod(nonPublic: true);
+                    s_getItemContractMethod = typeof(CollectionDataContract)
+                        .GetProperty("ItemContract", Globals.ScanAllMembers)!
+                        .GetGetMethod(nonPublic: true);
                     Debug.Assert(s_getItemContractMethod != null);
                 }
                 return s_getItemContractMethod;

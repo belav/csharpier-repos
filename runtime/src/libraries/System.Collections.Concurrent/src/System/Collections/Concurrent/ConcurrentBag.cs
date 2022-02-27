@@ -81,10 +81,8 @@ namespace System.Collections.Concurrent
         /// <see cref="ConcurrentBag{T}"/>. The value can be a null reference
         /// (Nothing in Visual Basic) for reference types.</param>
         public void Add(T item) =>
-            GetCurrentThreadWorkStealingQueue(forceCreate: true)!.LocalPush(
-                item,
-                ref _emptyToNonEmptyListTransitionCount
-            );
+            GetCurrentThreadWorkStealingQueue(forceCreate: true)!
+                .LocalPush(item, ref _emptyToNonEmptyListTransitionCount);
 
         /// <summary>
         /// Attempts to add an object to the <see cref="ConcurrentBag{T}"/>.

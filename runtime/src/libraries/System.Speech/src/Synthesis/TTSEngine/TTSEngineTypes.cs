@@ -643,6 +643,7 @@ namespace System.Speech.Synthesis.TtsEngine
         Medium = -4,
         Strong = -5,
         ExtraStrong = -6,
+
         /// <summary>
         /// Equivalent to the empty <Break />
         /// </summary>

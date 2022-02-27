@@ -96,8 +96,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    node =
-                        _identifierNodeOrToken.AsNode()!.FirstAncestorOrSelf<SwitchLabelSyntax>();
+                    node = _identifierNodeOrToken
+                        .AsNode()!
+                        .FirstAncestorOrSelf<SwitchLabelSyntax>();
                 }
 
                 return node == null

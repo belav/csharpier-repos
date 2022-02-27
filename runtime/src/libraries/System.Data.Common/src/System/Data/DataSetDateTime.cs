@@ -12,14 +12,17 @@ namespace System.Data
         /// The datetime column in Local DateTimeMode stores datetime in Local. Adjusts Utc/Unspecifed to Local. Serializes as Local
         /// </summary>
         Local = 1,
+
         /// <summary>
         /// The datetime column in Unspecified DateTimeMode stores datetime in Unspecified. Adjusts Local/Utc to Unspecified. Serializes as Unspecified with no offset across timezones
         /// </summary>
         Unspecified = 2,
+
         /// <summary>
         /// This is the default. The datetime column in UnspecifiedLocal DateTimeMode stores datetime in Unspecfied. Adjusts Local/Utc to Unspecified. Serializes as Unspecified but applying offset across timezones
         /// </summary>
         UnspecifiedLocal = 3, //Unspecified while storing and Local when serializing. -> DataSetDateTime.Unspecified | DataSetDateTime.Local
+
         /// <summary>
         /// The datetime column in Utc DateTimeMode  stores datetime in Utc. Adjusts Local/Unspecified to Utc. Serializes as Utc
         /// </summary>

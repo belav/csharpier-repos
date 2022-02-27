@@ -194,12 +194,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             var foreignKey =
-                ((InternalEntityTypeBuilder)joinEntityTypeBuilder).HasRelationship(
-                    (EntityType)skipNavigation.DeclaringEntityType,
-                    ConfigurationSource.Convention,
-                    required: true,
-                    skipNavigation.Inverse!.Name
-                )!.IsUnique(false, ConfigurationSource.Convention)!.Metadata;
+                ((InternalEntityTypeBuilder)joinEntityTypeBuilder)
+                    .HasRelationship(
+                        (EntityType)skipNavigation.DeclaringEntityType,
+                        ConfigurationSource.Convention,
+                        required: true,
+                        skipNavigation.Inverse!.Name
+                    )!
+                    .IsUnique(false, ConfigurationSource.Convention)!.Metadata;
 
             skipNavigation.Builder.HasForeignKey(foreignKey);
 

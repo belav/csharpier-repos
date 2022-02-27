@@ -90,20 +90,24 @@ namespace System.Reflection.Emit
         internal override Type InternalResolve()
         {
             if (mbuilder != null)
-                return MethodBase.GetMethodFromHandle(
-                    mbuilder.MethodHandleInternal,
-                    mbuilder.TypeBuilder.InternalResolve().TypeHandle
-                )!.GetGenericArguments()[index];
+                return MethodBase
+                    .GetMethodFromHandle(
+                        mbuilder.MethodHandleInternal,
+                        mbuilder.TypeBuilder.InternalResolve().TypeHandle
+                    )!
+                    .GetGenericArguments()[index];
             return tbuilder.InternalResolve().GetGenericArguments()[index];
         }
 
         internal override Type RuntimeResolve()
         {
             if (mbuilder != null)
-                return MethodBase.GetMethodFromHandle(
-                    mbuilder.MethodHandleInternal,
-                    mbuilder.TypeBuilder.RuntimeResolve().TypeHandle
-                )!.GetGenericArguments()[index];
+                return MethodBase
+                    .GetMethodFromHandle(
+                        mbuilder.MethodHandleInternal,
+                        mbuilder.TypeBuilder.RuntimeResolve().TypeHandle
+                    )!
+                    .GetGenericArguments()[index];
             return tbuilder.RuntimeResolve().GetGenericArguments()[index];
         }
 

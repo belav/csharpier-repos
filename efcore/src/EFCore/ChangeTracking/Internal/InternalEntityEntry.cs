@@ -1076,11 +1076,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             if (!navigationBase.IsShadowProperty())
             {
-                return navigationBase.GetCollectionAccessor()!.Add(
-                    Entity,
-                    value.Entity,
-                    forMaterialization
-                );
+                return navigationBase
+                    .GetCollectionAccessor()!
+                    .Add(Entity, value.Entity, forMaterialization);
             }
 
             var collection = GetOrCreateCollectionTyped(navigationBase);

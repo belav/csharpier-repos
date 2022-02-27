@@ -226,6 +226,7 @@ namespace System.Drawing.Imaging
 
         // For all Persistent Objects
         Object,
+
         // Drawing Records
         Clear,
         FillRects,

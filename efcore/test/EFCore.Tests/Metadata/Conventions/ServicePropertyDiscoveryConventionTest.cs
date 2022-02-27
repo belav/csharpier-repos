@@ -162,11 +162,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 owned: false,
                 ConfigurationSource.Explicit
             );
-            entityType!.Builder.Property(
-                typeof(ILazyLoader),
-                nameof(BlogOneService.Loader),
-                ConfigurationSource.Explicit
-            )!.HasConversion(typeof(string), ConfigurationSource.Explicit);
+            entityType!.Builder
+                .Property(
+                    typeof(ILazyLoader),
+                    nameof(BlogOneService.Loader),
+                    ConfigurationSource.Explicit
+                )!
+                .HasConversion(typeof(string), ConfigurationSource.Explicit);
 
             RunConvention(entityType);
 

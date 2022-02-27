@@ -378,11 +378,13 @@ namespace System.Runtime.InteropServices
     public enum ClassInterfaceType
     {
         None = 0,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         [System.ObsoleteAttribute("Support for IDispatch may be unavailable in future releases.")]
         AutoDispatch = 1,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2268,14 +2270,19 @@ namespace System.Runtime.InteropServices
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("windows")]
         SIGTSTP = -10,
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("windows")]
         SIGTTOU = -9,
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("windows")]
         SIGTTIN = -8,
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("windows")]
         SIGWINCH = -7,
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("windows")]
         SIGCONT = -6,
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("windows")]
         SIGCHLD = -5,
         SIGTERM = -4,
@@ -2654,6 +2661,7 @@ namespace System.Runtime.InteropServices
         U8 = 10,
         R4 = 11,
         R8 = 12,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2665,15 +2673,18 @@ namespace System.Runtime.InteropServices
         LPTStr = 22,
         ByValTStr = 23,
         IUnknown = 25,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         IDispatch = 26,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         Struct = 27,
         Interface = 28,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2681,6 +2692,7 @@ namespace System.Runtime.InteropServices
         ByValArray = 30,
         SysInt = 31,
         SysUInt = 32,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2688,21 +2700,25 @@ namespace System.Runtime.InteropServices
             "Marshalling as VBByRefString may be unavailable in future releases."
         )]
         VBByRefStr = 34,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         [System.ObsoleteAttribute("Marshalling as AnsiBStr may be unavailable in future releases.")]
         AnsiBStr = 35,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         [System.ObsoleteAttribute("Marshalling as TBstr may be unavailable in future releases.")]
         TBStr = 36,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         VariantBool = 37,
         FunctionPtr = 38,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]

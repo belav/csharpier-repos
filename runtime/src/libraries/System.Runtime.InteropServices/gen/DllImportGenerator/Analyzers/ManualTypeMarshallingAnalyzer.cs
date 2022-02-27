@@ -272,9 +272,9 @@ namespace Microsoft.Interop.Analyzers
                 context.Compilation.GetTypeByMetadataName(
                     TypeNames.GenericContiguousCollectionMarshallerAttribute
                 );
-            INamedTypeSymbol? spanOfByte = context.Compilation.GetTypeByMetadataName(
-                TypeNames.System_Span_Metadata
-            )!.Construct(context.Compilation.GetSpecialType(SpecialType.System_Byte));
+            INamedTypeSymbol? spanOfByte = context.Compilation
+                .GetTypeByMetadataName(TypeNames.System_Span_Metadata)!
+                .Construct(context.Compilation.GetSpecialType(SpecialType.System_Byte));
 
             if (
                 generatedMarshallingAttribute is not null

@@ -604,7 +604,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         "GetLazyState",
                         System.Reflection.BindingFlags.NonPublic
                             | System.Reflection.BindingFlags.Instance
-                    )!.Invoke(syntaxAndDeclarationsManager, null);
+                    )!
+                    .Invoke(syntaxAndDeclarationsManager, null);
                 var declarationTable = state.GetFieldValue("DeclarationTable");
                 return declarationTable.GetFieldValue("_cache");
             }

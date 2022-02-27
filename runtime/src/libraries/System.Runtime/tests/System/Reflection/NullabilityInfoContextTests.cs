@@ -1704,10 +1704,9 @@ namespace System.Reflection.Tests
             NullabilityState dictionaryState
         )
         {
-            ParameterInfo[] parameters = typeof(GenericTest<TypeWithNotNullContext>).GetMethod(
-                methodName,
-                flags
-            )!.GetParameters();
+            ParameterInfo[] parameters = typeof(GenericTest<TypeWithNotNullContext>)
+                .GetMethod(methodName, flags)!
+                .GetParameters();
             NullabilityInfo stringNullability = nullabilityContext.Create(parameters[0]);
             NullabilityInfo dictionaryNullability = nullabilityContext.Create(parameters[1]);
             Assert.Equal(param1State, stringNullability.WriteState);
@@ -1762,11 +1761,9 @@ namespace System.Reflection.Tests
             Type[] types
         )
         {
-            ParameterInfo[] parameters = stringType.GetMethod(
-                methodName,
-                flags,
-                types
-            )!.GetParameters();
+            ParameterInfo[] parameters = stringType
+                .GetMethod(methodName, flags, types)!
+                .GetParameters();
             NullabilityInfo param1 = nullabilityContext.Create(parameters[0]);
             NullabilityInfo param2 = nullabilityContext.Create(parameters[1]);
             NullabilityInfo param3 = nullabilityContext.Create(parameters[2]);
@@ -1926,10 +1923,8 @@ namespace System.Reflection.Tests
             Type type = typeof(TypeWithNullableContext);
 
             // bool NotNullWhenParameter([DisallowNull] string? disallowNull, [NotNullWhen(true)] ref string? notNullWhen, Type? nullableType);
-            ParameterInfo[] notNullWhenParameters = type.GetMethod(
-                "NotNullWhenParameter",
-                flags
-            )!.GetParameters();
+            ParameterInfo[] notNullWhenParameters = type.GetMethod("NotNullWhenParameter", flags)!
+                .GetParameters();
             NullabilityInfo disallowNull = nullabilityContext.Create(notNullWhenParameters[0]);
             NullabilityInfo notNullWhen = nullabilityContext.Create(notNullWhenParameters[1]);
             Assert.Equal(NullabilityState.Nullable, disallowNull.ReadState);
@@ -1942,10 +1937,8 @@ namespace System.Reflection.Tests
             );
 
             // bool MaybeNullParameters([MaybeNull] string maybeNull, [MaybeNullWhen(false)] out string maybeNullWhen, Type? nullableType)
-            ParameterInfo[] maybeNullParameters = type.GetMethod(
-                "MaybeNullParameters",
-                flags
-            )!.GetParameters();
+            ParameterInfo[] maybeNullParameters = type.GetMethod("MaybeNullParameters", flags)!
+                .GetParameters();
             NullabilityInfo maybeNull = nullabilityContext.Create(maybeNullParameters[0]);
             NullabilityInfo maybeNullWhen = nullabilityContext.Create(maybeNullParameters[1]);
             Assert.Equal(NullabilityState.Nullable, maybeNull.ReadState);
@@ -1958,10 +1951,8 @@ namespace System.Reflection.Tests
             );
 
             // string? AllowNullParameter([AllowNull] string allowNull, [NotNullIfNotNull("allowNull")] string? notNullIfNotNull)
-            ParameterInfo[] allowNullParameter = type.GetMethod(
-                "AllowNullParameter",
-                flags
-            )!.GetParameters();
+            ParameterInfo[] allowNullParameter = type.GetMethod("AllowNullParameter", flags)!
+                .GetParameters();
             NullabilityInfo allowNull = nullabilityContext.Create(allowNullParameter[0]);
             NullabilityInfo notNullIfNotNull = nullabilityContext.Create(allowNullParameter[1]);
             Assert.Equal(NullabilityState.NotNull, allowNull.ReadState);
@@ -1975,9 +1966,10 @@ namespace System.Reflection.Tests
 
             // [return: NotNullIfNotNull("nullable")] public string? NullableNotNullIfNotNullReturn(string? nullable, [NotNull] ref string? readNotNull)
             ParameterInfo[] nullableNotNullIfNotNullReturn = type.GetMethod(
-                "NullableNotNullIfNotNullReturn",
-                flags
-            )!.GetParameters();
+                    "NullableNotNullIfNotNullReturn",
+                    flags
+                )!
+                .GetParameters();
             NullabilityInfo returnNotNullIfNotNull = nullabilityContext.Create(
                 type.GetMethod("NullableNotNullIfNotNullReturn", flags)!.ReturnParameter
             );
@@ -1994,10 +1986,8 @@ namespace System.Reflection.Tests
             );
 
             // public bool TryGetOutParameters(string id, [NotNullWhen(true)] out string? value, [MaybeNullWhen(false)] out string value2)
-            ParameterInfo[] tryGetOutParameters = type.GetMethod(
-                "TryGetOutParameters",
-                flags
-            )!.GetParameters();
+            ParameterInfo[] tryGetOutParameters = type.GetMethod("TryGetOutParameters", flags)!
+                .GetParameters();
             NullabilityInfo notNullWhenParam = nullabilityContext.Create(tryGetOutParameters[1]);
             NullabilityInfo maybeNullWhenParam = nullabilityContext.Create(tryGetOutParameters[2]);
             Assert.Equal(NullabilityState.Nullable, notNullWhenParam.ReadState);

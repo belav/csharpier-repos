@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var newSolution =
                 oldSolution
                     .AddDocument(id, name, initialText, folders)
-                    .GetDocument(id)!.WithSourceCodeKind(sourceCodeKind).Project.Solution;
+                    .GetDocument(id)!
+                    .WithSourceCodeKind(sourceCodeKind).Project.Solution;
             workspace.TryApplyChanges(newSolution);
             return id;
         }

@@ -364,9 +364,8 @@ namespace Microsoft.CodeAnalysis
         {
             return documentId != null
                 && this.ContainsProject(documentId.ProjectId)
-                && this.GetProjectState(documentId.ProjectId)!.AdditionalDocumentStates.Contains(
-                    documentId
-                );
+                && this.GetProjectState(documentId.ProjectId)!
+                    .AdditionalDocumentStates.Contains(documentId);
         }
 
         /// <summary>
@@ -378,9 +377,8 @@ namespace Microsoft.CodeAnalysis
         {
             return documentId != null
                 && this.ContainsProject(documentId.ProjectId)
-                && this.GetProjectState(
-                    documentId.ProjectId
-                )!.AnalyzerConfigDocumentStates.Contains(documentId);
+                && this.GetProjectState(documentId.ProjectId)!
+                    .AnalyzerConfigDocumentStates.Contains(documentId);
         }
 
         private DocumentState GetRequiredDocumentState(DocumentId documentId) =>

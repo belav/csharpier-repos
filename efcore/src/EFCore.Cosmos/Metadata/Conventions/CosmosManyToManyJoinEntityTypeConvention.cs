@@ -166,11 +166,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             var foreignKey =
-                joinEntityTypeBuilder.HasRelationship(
-                    skipNavigation.DeclaringEntityType,
-                    dependentProperties,
-                    principalKey
-                )!.IsUnique(false)!.Metadata;
+                joinEntityTypeBuilder
+                    .HasRelationship(
+                        skipNavigation.DeclaringEntityType,
+                        dependentProperties,
+                        principalKey
+                    )!
+                    .IsUnique(false)!.Metadata;
 
             skipNavigation.Builder.HasForeignKey(foreignKey);
 

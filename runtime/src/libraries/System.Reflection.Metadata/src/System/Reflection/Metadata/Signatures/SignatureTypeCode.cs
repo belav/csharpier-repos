@@ -110,6 +110,7 @@ namespace System.Reflection.Metadata
         /// Represents a generalized <see cref="System.Array"/> in signatures.
         /// </summary>
         Array = CorElementType.ELEMENT_TYPE_ARRAY, // MDARRAY <type> <rank> <bcount> <bound1> ... <lbcount> <lb1> ...
+
         /// <summary>
         /// Represents the instantiation of a generic type in signatures.
         /// </summary>

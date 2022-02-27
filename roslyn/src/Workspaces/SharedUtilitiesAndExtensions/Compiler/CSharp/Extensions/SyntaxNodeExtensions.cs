@@ -703,22 +703,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxNode node
         )
         {
-            return node.GetAncestorOrThis<CompilationUnitSyntax>()!.Usings.Concat(
-                node.GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>()
-                    .Reverse()
-                    .SelectMany(n => n.Usings)
-            );
+            return node.GetAncestorOrThis<CompilationUnitSyntax>()!
+                .Usings.Concat(
+                    node.GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>()
+                        .Reverse()
+                        .SelectMany(n => n.Usings)
+                );
         }
 
         public static IEnumerable<ExternAliasDirectiveSyntax> GetEnclosingExternAliasDirectives(
             this SyntaxNode node
         )
         {
-            return node.GetAncestorOrThis<CompilationUnitSyntax>()!.Externs.Concat(
-                node.GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>()
-                    .Reverse()
-                    .SelectMany(n => n.Externs)
-            );
+            return node.GetAncestorOrThis<CompilationUnitSyntax>()!
+                .Externs.Concat(
+                    node.GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>()
+                        .Reverse()
+                        .SelectMany(n => n.Externs)
+                );
         }
 
         public static bool IsUnsafeContext(this SyntaxNode node)

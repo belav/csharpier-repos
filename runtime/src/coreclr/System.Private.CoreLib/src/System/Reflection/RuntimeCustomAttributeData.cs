@@ -372,11 +372,9 @@ namespace System.Reflection
                     null,
                     null
                 )!;
-                m_ctor = (RuntimeConstructorInfo)scope.ResolveMethod(
-                    caCtorToken,
-                    attributeType.GenericTypeArguments,
-                    null
-                )!.MethodHandle.GetMethodInfo();
+                m_ctor = (RuntimeConstructorInfo)scope
+                    .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
+                    .MethodHandle.GetMethodInfo();
             }
 
             ParameterInfo[] parameters = m_ctor.GetParametersNoCopy();
@@ -1808,11 +1806,9 @@ namespace System.Reflection
                 // See https://github.com/dotnet/runtime/issues/11637 for why we fast-path non-generics here (fewer allocations)
                 if (attributeType.IsGenericType)
                 {
-                    ctorWithParameters = decoratedModule.ResolveMethod(
-                        caCtorToken,
-                        attributeType.GenericTypeArguments,
-                        null
-                    )!.MethodHandle.GetMethodInfo();
+                    ctorWithParameters = decoratedModule
+                        .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
+                        .MethodHandle.GetMethodInfo();
                 }
                 else
                 {

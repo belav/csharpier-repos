@@ -91,12 +91,16 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             [EnumMember(Value = "approved")]
             Approved,
+
             [EnumMember(Value = "changes_requested")]
             ChangesRequested,
+
             [EnumMember(Value = "commented")]
             Commented,
+
             [EnumMember(Value = "dismissed")]
             Dismissed,
+
             [EnumMember(Value = "pending")]
             Pending
         }

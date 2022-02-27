@@ -96,6 +96,7 @@ namespace System
             UserDrivenParsing = 0x01000000,
             CanonicalDnsHost = 0x02000000,
             ErrorOrParsingRecursion = 0x04000000, // Used to signal a default parser error and also to confirm Port
+
             // and Host values in case of a custom user Parser
             DosPath = 0x08000000,
             UncPath = 0x10000000,
@@ -108,6 +109,7 @@ namespace System
             RestUnicodeNormalized = 0x800000000,
             UnicodeHost = 0x1000000000,
             IntranetUri = 0x2000000000,
+
             // Is this component Iri canonical
             UserIriCanonical = 0x8000000000,
             PathIriCanonical = 0x10000000000,

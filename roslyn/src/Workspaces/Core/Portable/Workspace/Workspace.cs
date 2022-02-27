@@ -1724,9 +1724,9 @@ namespace Microsoft.CodeAnalysis
                     .GetChangedDocuments()
                     .Any(
                         id =>
-                            projectChanges.NewProject.GetDocument(id)!.HasInfoChanged(
-                                projectChanges.OldProject.GetDocument(id)!
-                            )
+                            projectChanges.NewProject
+                                .GetDocument(id)!
+                                .HasInfoChanged(projectChanges.OldProject.GetDocument(id)!)
                     )
             )
             {
@@ -2542,9 +2542,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this.CurrentSolution.GetProject(fromProjectId)!.ProjectReferences.Contains(
-                    projectReference
-                )
+                !this.CurrentSolution
+                    .GetProject(fromProjectId)!
+                    .ProjectReferences.Contains(projectReference)
             )
             {
                 throw new ArgumentException(
@@ -2565,9 +2565,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this.CurrentSolution.GetProject(fromProjectId)!.ProjectReferences.Contains(
-                    projectReference
-                )
+                this.CurrentSolution
+                    .GetProject(fromProjectId)!
+                    .ProjectReferences.Contains(projectReference)
             )
             {
                 throw new ArgumentException(
@@ -2611,9 +2611,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this.CurrentSolution.GetProject(projectId)!.MetadataReferences.Contains(
-                    metadataReference
-                )
+                !this.CurrentSolution
+                    .GetProject(projectId)!
+                    .MetadataReferences.Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_not_referenced);
@@ -2629,9 +2629,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this.CurrentSolution.GetProject(projectId)!.MetadataReferences.Contains(
-                    metadataReference
-                )
+                this.CurrentSolution
+                    .GetProject(projectId)!
+                    .MetadataReferences.Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_already_referenced);
@@ -2647,9 +2647,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this.CurrentSolution.GetProject(projectId)!.AnalyzerReferences.Contains(
-                    analyzerReference
-                )
+                !this.CurrentSolution
+                    .GetProject(projectId)!
+                    .AnalyzerReferences.Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(
@@ -2667,9 +2667,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this.CurrentSolution.GetProject(projectId)!.AnalyzerReferences.Contains(
-                    analyzerReference
-                )
+                this.CurrentSolution
+                    .GetProject(projectId)!
+                    .AnalyzerReferences.Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(

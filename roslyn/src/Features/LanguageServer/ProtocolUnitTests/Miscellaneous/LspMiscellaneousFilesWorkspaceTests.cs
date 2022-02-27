@@ -209,8 +209,8 @@ public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtoco
     {
         return testLspServer
             .GetManagerAccessor()
-            .GetLspMiscellaneousFilesWorkspace()!.CurrentSolution.Projects
-            .SingleOrDefault()
+            .GetLspMiscellaneousFilesWorkspace()!
+            .CurrentSolution.Projects.SingleOrDefault()
             ?.Documents.Single();
     }
 

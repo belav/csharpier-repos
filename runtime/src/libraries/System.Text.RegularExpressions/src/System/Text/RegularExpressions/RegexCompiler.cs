@@ -82,32 +82,37 @@ namespace System.Text.RegularExpressions
             typeof(ReadOnlySpan<char>).GetMethod("get_Item", new Type[] { typeof(int) })!;
         private static readonly MethodInfo s_spanGetLengthMethod =
             typeof(ReadOnlySpan<char>).GetMethod("get_Length")!;
-        private static readonly MethodInfo s_memoryMarshalGetReference =
-            typeof(MemoryMarshal).GetMethod(
+        private static readonly MethodInfo s_memoryMarshalGetReference = typeof(MemoryMarshal)
+            .GetMethod(
                 "GetReference",
                 new Type[]
                 {
                     typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
                 }
-            )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanIndexOfChar = typeof(MemoryExtensions).GetMethod(
-            "IndexOf",
-            new Type[]
-            {
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
-                Type.MakeGenericMethodParameter(0)
-            }
-        )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanIndexOfSpan = typeof(MemoryExtensions).GetMethod(
-            "IndexOf",
-            new Type[]
-            {
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
-            }
-        )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanIndexOfAnyCharChar =
-            typeof(MemoryExtensions).GetMethod(
+            )!
+            .MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanIndexOfChar = typeof(MemoryExtensions)
+            .GetMethod(
+                "IndexOf",
+                new Type[]
+                {
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
+                    Type.MakeGenericMethodParameter(0)
+                }
+            )!
+            .MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanIndexOfSpan = typeof(MemoryExtensions)
+            .GetMethod(
+                "IndexOf",
+                new Type[]
+                {
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
+                }
+            )!
+            .MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanIndexOfAnyCharChar = typeof(MemoryExtensions)
+            .GetMethod(
                 "IndexOfAny",
                 new Type[]
                 {
@@ -115,9 +120,10 @@ namespace System.Text.RegularExpressions
                     Type.MakeGenericMethodParameter(0),
                     Type.MakeGenericMethodParameter(0)
                 }
-            )!.MakeGenericMethod(typeof(char));
-        private static readonly MethodInfo s_spanIndexOfAnyCharCharChar =
-            typeof(MemoryExtensions).GetMethod(
+            )!
+            .MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanIndexOfAnyCharCharChar = typeof(MemoryExtensions)
+            .GetMethod(
                 "IndexOfAny",
                 new Type[]
                 {
@@ -126,19 +132,22 @@ namespace System.Text.RegularExpressions
                     Type.MakeGenericMethodParameter(0),
                     Type.MakeGenericMethodParameter(0)
                 }
-            )!.MakeGenericMethod(typeof(char));
+            )!
+            .MakeGenericMethod(typeof(char));
         private static readonly MethodInfo s_spanSliceIntMethod =
             typeof(ReadOnlySpan<char>).GetMethod("Slice", new Type[] { typeof(int) })!;
         private static readonly MethodInfo s_spanSliceIntIntMethod =
             typeof(ReadOnlySpan<char>).GetMethod("Slice", new Type[] { typeof(int), typeof(int) })!;
-        private static readonly MethodInfo s_spanStartsWith = typeof(MemoryExtensions).GetMethod(
-            "StartsWith",
-            new Type[]
-            {
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
-                typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
-            }
-        )!.MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo s_spanStartsWith = typeof(MemoryExtensions)
+            .GetMethod(
+                "StartsWith",
+                new Type[]
+                {
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
+                    typeof(ReadOnlySpan<>).MakeGenericType(Type.MakeGenericMethodParameter(0))
+                }
+            )!
+            .MakeGenericMethod(typeof(char));
         private static readonly MethodInfo s_stringAsSpanMethod =
             typeof(MemoryExtensions).GetMethod("AsSpan", new Type[] { typeof(string) })!;
         private static readonly MethodInfo s_stringAsSpanIntIntMethod =

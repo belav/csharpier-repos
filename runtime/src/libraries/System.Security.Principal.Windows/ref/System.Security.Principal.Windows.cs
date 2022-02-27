@@ -387,6 +387,7 @@ namespace System.Security.Principal
         BuiltinPerformanceMonitoringUsersSid = 57,
         BuiltinPerformanceLoggingUsersSid = 58,
         BuiltinAuthorizationAccessSid = 59,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]

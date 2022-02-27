@@ -2011,14 +2011,17 @@ public class HtmlHelperSelectTest
     {
         [Display(Name = "tres")]
         Three = 3,
+
         [Display(Name = "dos")]
         Two = 2,
 
         // Display attribute exists but does not set Name.
         [Display(ShortName = "uno")]
         One = 1,
+
         [Display(Name = "cero")]
         Zero = 0,
+
         [Display(Name = "menos uno")]
         MinusOne = -1,
 #if USE_REAL_RESOURCES

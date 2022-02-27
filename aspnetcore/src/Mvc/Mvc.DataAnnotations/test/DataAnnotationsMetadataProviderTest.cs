@@ -2207,6 +2207,7 @@ public class DataAnnotationsMetadataProviderTest
     {
         [Display(Name = "Loc_Two_Name")]
         Two = 2,
+
         [Display(
             Name = nameof(TestResources.Type_Three_Name),
             ResourceType = typeof(TestResources)
@@ -2220,14 +2221,17 @@ public class DataAnnotationsMetadataProviderTest
     {
         [Display(Name = "tres")]
         Three = 3,
+
         [Display(Name = "dos")]
         Two = 2,
 
         // Display attribute exists but does not set Name.
         [Display(ShortName = "uno")]
         One = 1,
+
         [Display(Name = "", GroupName = "Zero")]
         Zero = 0,
+
         [Display(Name = "menos uno", GroupName = "Negatives")]
         MinusOne = -1,
 #if USE_REAL_RESOURCES
@@ -2248,8 +2252,10 @@ public class DataAnnotationsMetadataProviderTest
     {
         [Display(Order = 3)]
         One,
+
         [Display(Order = 2)]
         Two,
+
         [Display(Order = 1)]
         Three,
         Null,

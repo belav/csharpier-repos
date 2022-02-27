@@ -2965,10 +2965,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void RecordImportInternal(CSharpSyntaxNode syntax)
         {
             // Note: the suppression will be unnecessary once LazyInitializer is properly annotated
-            LazyInitializer.EnsureInitialized(ref _lazyImportInfos)!.TryAdd(
-                new ImportInfo(syntax.SyntaxTree, syntax.Kind(), syntax.Span),
-                default
-            );
+            LazyInitializer
+                .EnsureInitialized(ref _lazyImportInfos)!
+                .TryAdd(new ImportInfo(syntax.SyntaxTree, syntax.Kind(), syntax.Span), default);
         }
 
         internal void RecordImportDependencies(

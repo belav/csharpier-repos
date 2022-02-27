@@ -47,8 +47,10 @@ namespace System.Net.Sockets
         {
             /// <summary>No cleanup is required, either because no operation is in flight or the current operation does not require cleanup.</summary>
             None,
+
             /// <summary>An operation is in flight but async processing state has not yet been initialized.</summary>
             InProcess,
+
             /// <summary>An operation is in flight and async processing state is fully initialized and ready to be cleaned up.</summary>
             Set
         }

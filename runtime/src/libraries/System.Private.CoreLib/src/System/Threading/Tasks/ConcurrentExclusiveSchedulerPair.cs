@@ -921,12 +921,16 @@ namespace System.Threading.Tasks
         {
             /// <summary>The scheduler pair is currently dormant, with no work scheduled.</summary>
             NotCurrentlyProcessing = 0x0,
+
             /// <summary>The scheduler pair has queued processing for exclusive tasks.</summary>
             ProcessingExclusiveTask = 0x1,
+
             /// <summary>The scheduler pair has queued processing for concurrent tasks.</summary>
             ProcessingConcurrentTasks = 0x2,
+
             /// <summary>Completion has been requested.</summary>
             Completing = 0x4,
+
             /// <summary>The scheduler pair is finished processing.</summary>
             Completed = 0x8
         }

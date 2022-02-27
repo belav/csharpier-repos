@@ -436,9 +436,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             return service == null
               ? null
               : () =>
-                    (DbContext)factoryInterface.GetMethod(
-                        nameof(IDbContextFactory<DbContext>.CreateDbContext)
-                    )!.Invoke(service, null)!;
+                    (DbContext)factoryInterface
+                        .GetMethod(nameof(IDbContextFactory<DbContext>.CreateDbContext))!
+                        .Invoke(service, null)!;
         }
 
         private Func<DbContext>? FindContextFactory(Type contextType)
@@ -463,7 +463,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 .GetMethod(
                     nameof(IDesignTimeDbContextFactory<DbContext>.CreateDbContext),
                     new[] { typeof(string[]) }
-                )!.Invoke(Activator.CreateInstance(factory), new object[] { _args })!;
+                )!
+                .Invoke(Activator.CreateInstance(factory), new object[] { _args })!;
         }
 
         private KeyValuePair<Type, Func<DbContext>> FindContextType(string? name)

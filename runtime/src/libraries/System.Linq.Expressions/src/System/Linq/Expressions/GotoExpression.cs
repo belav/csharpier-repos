@@ -15,14 +15,17 @@ namespace System.Linq.Expressions
         /// A <see cref="GotoExpression"/> that represents a jump to some location.
         /// </summary>
         Goto,
+
         /// <summary>
         /// A <see cref="GotoExpression"/> that represents a return statement.
         /// </summary>
         Return,
+
         /// <summary>
         /// A <see cref="GotoExpression"/> that represents a break statement.
         /// </summary>
         Break,
+
         /// <summary>
         /// A <see cref="GotoExpression"/> that represents a continue statement.
         /// </summary>

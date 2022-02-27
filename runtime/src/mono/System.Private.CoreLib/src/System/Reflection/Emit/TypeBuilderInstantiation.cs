@@ -145,21 +145,15 @@ namespace System.Reflection.Emit
                 return method_args == null ? type : method_args[type.GenericParameterPosition];
             }
             if (type.IsPointer)
-                return InflateType(
-                    type.GetElementType(),
-                    type_args,
-                    method_args
-                )!.MakePointerType();
+                return InflateType(type.GetElementType(), type_args, method_args)!
+                    .MakePointerType();
             if (type.IsByRef)
                 return InflateType(type.GetElementType(), type_args, method_args)!.MakeByRefType();
             if (type.IsArray)
             {
                 if (type.GetArrayRank() > 1)
-                    return InflateType(
-                        type.GetElementType(),
-                        type_args,
-                        method_args
-                    )!.MakeArrayType(type.GetArrayRank());
+                    return InflateType(type.GetElementType(), type_args, method_args)!
+                        .MakeArrayType(type.GetArrayRank());
 
                 if (type.ToString().EndsWith("[*]", StringComparison.Ordinal)) /*FIXME, the reflection API doesn't offer a way around this*/
                     return InflateType(type.GetElementType(), type_args, method_args)!.MakeArrayType(1);

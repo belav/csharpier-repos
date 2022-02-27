@@ -451,15 +451,18 @@ namespace BuildValidator
                     methodName: null
                 );
 
-                Process.Start(
-                    new ProcessStartInfo
-                    {
-                        FileName = IldasmUtilities.IldasmPath,
-                        Arguments = $@"{assemblyFilePath} /all /out={buildDataFiles.ILFilePath}",
-                        UseShellExecute = false,
-                        CreateNoWindow = true
-                    }
-                )!.WaitForExit();
+                Process
+                    .Start(
+                        new ProcessStartInfo
+                        {
+                            FileName = IldasmUtilities.IldasmPath,
+                            Arguments =
+                                $@"{assemblyFilePath} /all /out={buildDataFiles.ILFilePath}",
+                            UseShellExecute = false,
+                            CreateNoWindow = true
+                        }
+                    )!
+                    .WaitForExit();
 
                 return buildDataFiles;
             }

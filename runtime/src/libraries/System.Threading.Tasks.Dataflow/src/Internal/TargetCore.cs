@@ -29,8 +29,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
     {
         /// <summary>Synchronous completion, both a target and a source, etc.</summary>
         None = 0x0,
+
         /// <summary>Whether the block relies on the delegate to signal when an async operation has completed.</summary>
         UsesAsyncCompletion = 0x1,
+
         /// <summary>
         /// Whether the block containing this target core is just a target or also has a source side.
         /// If it's just a target, then this target core's completion represents the entire block's completion.

@@ -1341,12 +1341,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             InternalForeignKeyBuilder? relationship = null;
             if (skipNavigation == null)
             {
-                relationship = Builder.HasRelationship(
-                    relatedEntityType,
-                    navigationName,
-                    ConfigurationSource.Explicit,
-                    targetIsPrincipal: false
-                )!.IsUnique(false, ConfigurationSource.Explicit);
+                relationship = Builder
+                    .HasRelationship(
+                        relatedEntityType,
+                        navigationName,
+                        ConfigurationSource.Explicit,
+                        targetIsPrincipal: false
+                    )!
+                    .IsUnique(false, ConfigurationSource.Explicit);
             }
 
             return new CollectionNavigationBuilder<TEntity, TRelatedEntity>(
@@ -1405,12 +1407,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             InternalForeignKeyBuilder? relationship = null;
             if (skipNavigation == null)
             {
-                relationship = Builder.HasRelationship(
-                    relatedEntityType,
-                    navigationMember,
-                    ConfigurationSource.Explicit,
-                    targetIsPrincipal: false
-                )!.IsUnique(false, ConfigurationSource.Explicit);
+                relationship = Builder
+                    .HasRelationship(
+                        relatedEntityType,
+                        navigationMember,
+                        ConfigurationSource.Explicit,
+                        targetIsPrincipal: false
+                    )!
+                    .IsUnique(false, ConfigurationSource.Explicit);
             }
 
             return new CollectionNavigationBuilder<TEntity, TRelatedEntity>(

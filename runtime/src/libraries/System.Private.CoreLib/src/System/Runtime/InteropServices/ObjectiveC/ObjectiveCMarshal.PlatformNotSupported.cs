@@ -105,18 +105,22 @@ namespace System.Runtime.InteropServices.ObjectiveC
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456712-objc_msgsend">msgSend()</see>.
             /// </summary>
             MsgSend,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456697-objc_msgsend_fpret">objc_msgSend_fpret()</see>.
             /// </summary>
             MsgSendFpret,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456730-objc_msgsend_stret">objc_msgSend_stret()</see>.
             /// </summary>
             MsgSendStret,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456716-objc_msgsendsuper">objc_msgSendSuper()</see>.
             /// </summary>
             MsgSendSuper,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456722-objc_msgsendsuper_stret">objc_msgSendSuper_stret()</see>.
             /// </summary>

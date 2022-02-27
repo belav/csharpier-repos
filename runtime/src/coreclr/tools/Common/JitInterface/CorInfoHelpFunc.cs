@@ -63,6 +63,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_NEWARR_1_ALIGN8, // like VC, but aligns the array start
         CORINFO_HELP_STRCNS, // create a new string literal
         CORINFO_HELP_STRCNS_CURRENT_MODULE, // create a new string literal from the current module (used by NGen code)
+
         /* Object model */
 
         CORINFO_HELP_INITCLASS, // Initialize class if not already initialized
@@ -80,6 +81,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_CHKCASTCLASS,
         CORINFO_HELP_CHKCASTANY,
         CORINFO_HELP_CHKCASTCLASS_SPECIAL, // Optimized helper for classes. Assumes that the trivial cases
+
         // has been taken care of by the inlined check
 
         CORINFO_HELP_BOX,
@@ -114,6 +116,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_MON_EXIT_STATIC,
         CORINFO_HELP_GETCLASSFROMMETHODPARAM, // Given a generics method handle, returns a class handle
         CORINFO_HELP_GETSYNCFROMCLASSHANDLE, // Given a generics class handle, returns the sync monitor
+
         // in its ManagedClassObject
 
         /* GC support */
@@ -167,6 +170,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_GETSHARED_NONGCSTATIC_BASE_NOCTOR,
         CORINFO_HELP_GETSHARED_GCSTATIC_BASE_DYNAMICCLASS,
         CORINFO_HELP_GETSHARED_NONGCSTATIC_BASE_DYNAMICCLASS,
+
         // Helper to class initialize shared generic with dynamicclass, but not get static field address
         CORINFO_HELP_CLASSINIT_SHARED_DYNAMICCLASS,
 
@@ -210,6 +214,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_TYPEHANDLE_TO_RUNTIMETYPEHANDLE_MAYBENULL, // Convert from a TypeHandle (native structure pointer) to RuntimeTypeHandle at run-time, handle might point to a null type
         CORINFO_HELP_ARE_TYPES_EQUIVALENT, // Check whether two TypeHandles (native structure pointers) are equivalent
         CORINFO_HELP_VIRTUAL_FUNC_PTR, // look up a virtual method at run-time
+
         //CORINFO_HELP_VIRTUAL_FUNC_PTR_LOG,  // look up a virtual method at run-time, with IBC logging
 
         // Not a real helpers. Instead of taking handle arguments, these helpers point to a small stub that loads the handle argument and calls the static helper.

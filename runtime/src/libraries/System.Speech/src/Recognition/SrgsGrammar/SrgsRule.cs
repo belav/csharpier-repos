@@ -516,6 +516,7 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         // Public rules can be both activated as well as referenced by rules in other grammars
         Public,
+
         // Private rules can not be activated, but they can be referenced by rules in the same grammar
         Private
     };

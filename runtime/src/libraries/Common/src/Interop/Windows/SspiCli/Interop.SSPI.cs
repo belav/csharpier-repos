@@ -75,27 +75,32 @@ internal static partial class Interop
         internal enum ContextFlags
         {
             Zero = 0,
+
             // The server in the transport application can
             // build new security contexts impersonating the
             // client that will be accepted by other servers
             // as the client's contexts.
             Delegate = 0x00000001,
+
             // The communicating parties must authenticate
             // their identities to each other. Without MutualAuth,
             // the client authenticates its identity to the server.
             // With MutualAuth, the server also must authenticate
             // its identity to the client.
             MutualAuth = 0x00000002,
+
             // The security package detects replayed packets and
             // notifies the caller if a packet has been replayed.
             // The use of this flag implies all of the conditions
             // specified by the Integrity flag.
             ReplayDetect = 0x00000004,
+
             // The context must be allowed to detect out-of-order
             // delivery of packets later through the message support
             // functions. Use of this flag implies all of the
             // conditions specified by the Integrity flag.
             SequenceDetect = 0x00000008,
+
             // The context must protect data while in transit.
             // Confidentiality is supported for NTLM with Microsoft
             // Windows NT version 4.0, SP4 and later and with the
@@ -113,12 +118,14 @@ internal static partial class Interop
             // the ASC_REQ_EXTENDED_ERROR flag when calling AcceptSecurityContext.
             InitExtendedError = 0x00004000,
             AcceptExtendedError = 0x00008000,
+
             // A transport application requests stream semantics
             // by setting the ISC_REQ_STREAM and ASC_REQ_STREAM
             // flags in the calls to the InitializeSecurityContext
             // and AcceptSecurityContext functions
             InitStream = 0x00008000,
             AcceptStream = 0x00010000,
+
             // Buffer integrity can be verified; however, replayed
             // and out-of-sequence messages will not be detected
             InitIntegrity = 0x00010000, // ISC_REQ_INTEGRITY

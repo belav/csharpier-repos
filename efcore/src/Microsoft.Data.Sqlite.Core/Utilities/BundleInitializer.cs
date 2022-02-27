@@ -24,10 +24,10 @@ namespace Microsoft.Data.Sqlite.Utilities
 
             if (assembly != null)
             {
-                assembly.GetType("SQLitePCL.Batteries_V2", throwOnError: true)!.GetMethod(
-                    "Init",
-                    Type.EmptyTypes
-                )!.Invoke(null, null);
+                assembly
+                    .GetType("SQLitePCL.Batteries_V2", throwOnError: true)!
+                    .GetMethod("Init", Type.EmptyTypes)!
+                    .Invoke(null, null);
             }
 
             if (ApplicationDataHelper.CurrentApplicationData != null)

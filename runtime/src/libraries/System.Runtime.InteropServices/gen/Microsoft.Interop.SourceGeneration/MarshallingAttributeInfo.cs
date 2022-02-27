@@ -796,9 +796,9 @@ namespace Microsoft.Interop
                 features |= CustomMarshallingFeatures.ManagedTypePinning;
             }
 
-            ITypeSymbol spanOfByte = _compilation.GetTypeByMetadataName(
-                TypeNames.System_Span_Metadata
-            )!.Construct(_compilation.GetSpecialType(SpecialType.System_Byte));
+            ITypeSymbol spanOfByte = _compilation
+                .GetTypeByMetadataName(TypeNames.System_Span_Metadata)!
+                .Construct(_compilation.GetSpecialType(SpecialType.System_Byte));
 
             INamedTypeSymbol nativeType = (INamedTypeSymbol)attrData.ConstructorArguments[0].Value!;
 

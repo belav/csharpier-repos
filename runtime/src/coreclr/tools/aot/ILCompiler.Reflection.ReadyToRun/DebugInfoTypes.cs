@@ -44,22 +44,27 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// Indicates that no other options apply
         /// </summary>
         SourceTypeInvalid = 0x00,
+
         /// <summary>
         /// The debugger asked for it
         /// </summary>
         SequencePoint = 0x01,
+
         /// <summary>
         /// The stack is empty here
         /// </summary>
         StackEmpty = 0x02,
+
         /// <summary>
         /// This is a call site
         /// </summary>
         CallSite = 0x04,
+
         /// <summary>
         /// Indicate an epilog endpoint
         /// </summary>
         NativeEndOffsetUnknown = 0x08,
+
         /// <summary>
         /// The actual instruction of a call
         /// </summary>
