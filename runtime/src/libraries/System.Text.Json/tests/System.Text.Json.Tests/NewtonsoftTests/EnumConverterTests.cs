@@ -414,10 +414,13 @@ namespace System.Text.Json.Tests
     {
         [EnumMember]
         first = 0,
+
         [EnumMember]
         foo_bar = 1,
+
         [EnumMember(Value = "foo_bar")]
         FooBar = 2,
+
         [EnumMember]
         foo_bar_NOT_USED = 3
     }

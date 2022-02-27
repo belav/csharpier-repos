@@ -327,6 +327,7 @@ namespace System.Data.Odbc
             // unused   TYPE_UNKNOWN        =   0,          // SQL_PARAM_TYPE_UNKNOWN
             INPUT = 1, // SQL_PARAM_INPUT
             INPUT_OUTPUT = 2, // SQL_PARAM_INPUT_OUTPUT
+
             // unused   RESULT_COL          =   3,          // SQL_RESULT_COL
             OUTPUT = 4, // SQL_PARAM_OUTPUT
             RETURN_VALUE = 5, // SQL_RETURN_VALUE
@@ -546,12 +547,15 @@ namespace System.Data.Odbc
             CHAR = 1, //SQL_C_CHAR
             WCHAR = -8, //SQL_C_WCHAR
             SLONG = 4 + SIGNED_OFFSET, //SQL_C_LONG+SQL_SIGNED_OFFSET
+
             //          ULONG           =    4 + UNSIGNED_OFFSET,   //SQL_C_LONG+SQL_UNSIGNED_OFFSET
             SSHORT = 5 + SIGNED_OFFSET, //SQL_C_SSHORT+SQL_SIGNED_OFFSET
+
             //          USHORT          =    5 + UNSIGNED_OFFSET,   //SQL_C_USHORT+SQL_UNSIGNED_OFFSET
             REAL = 7, //SQL_C_REAL
             DOUBLE = 8, //SQL_C_DOUBLE
             BIT = -7, //SQL_C_BIT
+
             //          STINYINT        =   -6 + SIGNED_OFFSET,     //SQL_C_STINYINT+SQL_SIGNED_OFFSET
             UTINYINT = -6 + UNSIGNED_OFFSET, //SQL_C_UTINYINT+SQL_UNSIGNED_OFFSET
             SBIGINT = -5 + SIGNED_OFFSET, //SQL_C_SBIGINT+SQL_SIGNED_OFFSET
@@ -723,6 +727,7 @@ namespace System.Data.Odbc
             // NONUNIQUE = 4,                 // NON_UNIQUE
             // INDEXQUALIFIER = 5,            // INDEX_QUALIFIER
             INDEXNAME = 6, // INDEX_NAME
+
             // TYPE = 7,                      // TYPE
             ORDINAL_POSITION = 8, // ORDINAL_POSITION
             COLUMN_NAME = 9, // COLUMN_NAME

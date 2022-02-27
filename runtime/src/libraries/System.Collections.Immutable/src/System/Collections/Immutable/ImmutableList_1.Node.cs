@@ -653,8 +653,12 @@ namespace System.Collections.Immutable
                 }
                 else if (index > thisNodeIndex)
                 {
-                    int result = _right!
-                        .BinarySearch(index - thisNodeIndex - 1, count, item, comparer);
+                    int result = _right!.BinarySearch(
+                        index - thisNodeIndex - 1,
+                        count,
+                        item,
+                        comparer
+                    );
                     int offset = thisNodeIndex + 1;
                     return result < 0 ? result - offset : result + offset;
                 }

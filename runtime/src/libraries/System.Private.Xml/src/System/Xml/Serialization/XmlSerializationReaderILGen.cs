@@ -2200,20 +2200,21 @@ namespace System.Xml.Serialization
                 ilg.Load(null);
                 ilg.If(Cmp.EqualTo);
                 WriteSourceBegin(xmlnsMember.Source);
-                ConstructorInfo ctor = xmlnsMember.Mapping.TypeDesc!.Type!
-                    .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
+                ConstructorInfo ctor = xmlnsMember.Mapping.TypeDesc!.Type!.GetConstructor(
+                    CodeGenerator.InstanceBindingFlags,
+                    Type.EmptyTypes
+                )!;
                 ilg.New(ctor);
                 WriteSourceEnd(xmlnsMember.Source, xmlnsMember.Mapping.TypeDesc.Type!);
                 ilg.EndIf(); // if (xmlnsMember.Source == null
 
                 Label labelEqual5 = ilg.DefineLabel();
                 Label labelEndLength = ilg.DefineLabel();
-                MethodInfo Add = xmlnsMember.Mapping.TypeDesc.Type!
-                    .GetMethod(
-                        "Add",
-                        CodeGenerator.InstanceBindingFlags,
-                        new Type[] { typeof(string), typeof(string) }
-                    )!;
+                MethodInfo Add = xmlnsMember.Mapping.TypeDesc.Type!.GetMethod(
+                    "Add",
+                    CodeGenerator.InstanceBindingFlags,
+                    new Type[] { typeof(string), typeof(string) }
+                )!;
                 MethodInfo String_get_Length = typeof(string).GetMethod(
                     "get_Length",
                     CodeGenerator.InstanceBindingFlags,
@@ -3099,13 +3100,11 @@ namespace System.Xml.Serialization
                             ilg.Call(XmlSerializationReader_ShrinkArray);
                             ilg.ConvertValue(
                                 XmlSerializationReader_ShrinkArray.ReturnType,
-                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!
-                                    .MakeArrayType()
+                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!.MakeArrayType()
                             );
                             WriteSourceEnd(
                                 member.ChoiceSource!,
-                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!
-                                    .MakeArrayType()
+                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!.MakeArrayType()
                             );
                         }
                     }

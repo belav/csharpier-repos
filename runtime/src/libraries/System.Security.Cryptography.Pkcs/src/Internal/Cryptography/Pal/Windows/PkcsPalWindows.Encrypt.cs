@@ -39,8 +39,10 @@ namespace Internal.Cryptography.Pal.Windows
             {
                 byte[] encodedContent;
                 if (
-                    contentInfo.ContentType.Value!
-                        .Equals(Oids.Pkcs7Data, StringComparison.OrdinalIgnoreCase)
+                    contentInfo.ContentType.Value!.Equals(
+                        Oids.Pkcs7Data,
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 )
                 {
                     encodedContent = PkcsHelpers.EncodeOctetString(contentInfo.Content);

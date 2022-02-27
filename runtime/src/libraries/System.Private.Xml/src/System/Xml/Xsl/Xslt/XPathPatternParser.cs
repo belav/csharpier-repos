@@ -57,8 +57,11 @@ namespace System.Xml.Xsl.Xslt
             while (_scanner!.Kind == LexKind.Union)
             {
                 _scanner.NextLex();
-                opnd = _ptrnBuilder!
-                    .Operator(XPathOperator.Union, opnd, ParseLocationPathPattern());
+                opnd = _ptrnBuilder!.Operator(
+                    XPathOperator.Union,
+                    opnd,
+                    ParseLocationPathPattern()
+                );
             }
             return opnd;
         }
@@ -83,19 +86,18 @@ namespace System.Xml.Xsl.Xslt
                     return opnd;
                 case LexKind.SlashSlash:
                     _scanner.NextLex();
-                    return _ptrnBuilder!
-                        .JoinStep(
-                            _ptrnBuilder.Axis(XPathAxis.Root, XPathNodeType.All, null, null),
-                            _ptrnBuilder.JoinStep(
-                                _ptrnBuilder.Axis(
-                                    XPathAxis.DescendantOrSelf,
-                                    XPathNodeType.All,
-                                    null,
-                                    null
-                                ),
-                                ParseRelativePathPattern()
-                            )
-                        );
+                    return _ptrnBuilder!.JoinStep(
+                        _ptrnBuilder.Axis(XPathAxis.Root, XPathNodeType.All, null, null),
+                        _ptrnBuilder.JoinStep(
+                            _ptrnBuilder.Axis(
+                                XPathAxis.DescendantOrSelf,
+                                XPathNodeType.All,
+                                null,
+                                null
+                            ),
+                            ParseRelativePathPattern()
+                        )
+                    );
                 case LexKind.Name:
                     if (
                         _scanner.CanBeFunction
@@ -112,19 +114,18 @@ namespace System.Xml.Xsl.Xslt
                                 break;
                             case LexKind.SlashSlash:
                                 _scanner.NextLex();
-                                opnd = _ptrnBuilder!
-                                    .JoinStep(
-                                        opnd,
-                                        _ptrnBuilder.JoinStep(
-                                            _ptrnBuilder.Axis(
-                                                XPathAxis.DescendantOrSelf,
-                                                XPathNodeType.All,
-                                                null,
-                                                null
-                                            ),
-                                            ParseRelativePathPattern()
-                                        )
-                                    );
+                                opnd = _ptrnBuilder!.JoinStep(
+                                    opnd,
+                                    _ptrnBuilder.JoinStep(
+                                        _ptrnBuilder.Axis(
+                                            XPathAxis.DescendantOrSelf,
+                                            XPathNodeType.All,
+                                            null,
+                                            null
+                                        ),
+                                        ParseRelativePathPattern()
+                                    )
+                                );
                                 break;
                         }
                         return opnd;
@@ -196,19 +197,18 @@ namespace System.Xml.Xsl.Xslt
             else if (_scanner.Kind == LexKind.SlashSlash)
             {
                 _scanner.NextLex();
-                opnd = _ptrnBuilder!
-                    .JoinStep(
-                        opnd,
-                        _ptrnBuilder.JoinStep(
-                            _ptrnBuilder.Axis(
-                                XPathAxis.DescendantOrSelf,
-                                XPathNodeType.All,
-                                null,
-                                null
-                            ),
-                            ParseRelativePathPattern()
-                        )
-                    );
+                opnd = _ptrnBuilder!.JoinStep(
+                    opnd,
+                    _ptrnBuilder.JoinStep(
+                        _ptrnBuilder.Axis(
+                            XPathAxis.DescendantOrSelf,
+                            XPathNodeType.All,
+                            null,
+                            null
+                        ),
+                        ParseRelativePathPattern()
+                    )
+                );
             }
             --_parseRelativePath;
             return opnd;

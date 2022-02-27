@@ -324,16 +324,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     {
                         if (existingMatch != null && newMatch != existingMatch)
                         {
-                            propertyBase!
-                                .SetOrRemoveAnnotation(
-                                    CoreAnnotationNames.AmbiguousField,
-                                    CoreStrings.ConflictingBackingFields(
-                                        propertyName,
-                                        entityClrType.ShortDisplayName(),
-                                        existingMatch.Name,
-                                        newMatch.Name
-                                    )
-                                );
+                            propertyBase!.SetOrRemoveAnnotation(
+                                CoreAnnotationNames.AmbiguousField,
+                                CoreStrings.ConflictingBackingFields(
+                                    propertyName,
+                                    entityClrType.ShortDisplayName(),
+                                    existingMatch.Name,
+                                    newMatch.Name
+                                )
+                            );
                             return null;
                         }
 

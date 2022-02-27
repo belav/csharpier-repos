@@ -798,8 +798,11 @@ namespace System.Data
                 switch (_dataReader.NodeType)
                 { // Process nodes based on type
                     case XmlNodeType.Element: // It's an element
-                        object? o = _nodeToSchemaMap!
-                            .GetColumnSchema(table, _dataReader, FIgnoreNamespace(_dataReader));
+                        object? o = _nodeToSchemaMap!.GetColumnSchema(
+                            table,
+                            _dataReader,
+                            FIgnoreNamespace(_dataReader)
+                        );
                         // Get dataset element for this XML element
                         c = o as DataColumn; // Perhaps, it's a column?
 
@@ -963,9 +966,11 @@ namespace System.Data
                 _dataReader.MoveToAttribute(i); // Get this attribute
 
                 c =
-                    _nodeToSchemaMap!
-                        .GetColumnSchema(table, _dataReader, FIgnoreNamespace(_dataReader))
-                    as DataColumn;
+                    _nodeToSchemaMap!.GetColumnSchema(
+                        table,
+                        _dataReader,
+                        FIgnoreNamespace(_dataReader)
+                    ) as DataColumn;
                 // Try to get column for this attribute
 
                 if ((c != null) && (c.ColumnMapping == MappingType.Attribute))
@@ -1048,8 +1053,11 @@ namespace System.Data
                     switch (_dataReader.NodeType)
                     { // Process nodes based on type
                         case XmlNodeType.Element: // It's an element
-                            object? o = _nodeToSchemaMap!
-                                .GetColumnSchema(table, _dataReader, FIgnoreNamespace(_dataReader));
+                            object? o = _nodeToSchemaMap!.GetColumnSchema(
+                                table,
+                                _dataReader,
+                                FIgnoreNamespace(_dataReader)
+                            );
                             // Get dataset element for this XML element
                             c = o as DataColumn; // Perhaps, it's a column?
 
@@ -1388,12 +1396,11 @@ namespace System.Data
                                     // We've got element which is not supposed to he here.
                                     // That might be table which was misplaced.
                                     // Or it might be a column inside column (also misplaced).
-                                    object? o = _nodeToSchemaMap!
-                                        .GetColumnSchema(
-                                            column.Table!,
-                                            _dataReader,
-                                            FIgnoreNamespace(_dataReader)
-                                        );
+                                    object? o = _nodeToSchemaMap!.GetColumnSchema(
+                                        column.Table!,
+                                        _dataReader,
+                                        FIgnoreNamespace(_dataReader)
+                                    );
                                     // Get dataset element for this XML element
                                     DataColumn? c = o as DataColumn; // Perhaps, it's a column?
 

@@ -389,11 +389,10 @@ namespace Microsoft.Interop.Analyzers
                 )
                 {
                     context.ReportDiagnostic(
-                        blittableTypeAttributeData!
-                            .CreateDiagnostic(
-                                CannotHaveMultipleMarshallingAttributesRule,
-                                type.ToDisplayString()
-                            )
+                        blittableTypeAttributeData!.CreateDiagnostic(
+                            CannotHaveMultipleMarshallingAttributesRule,
+                            type.ToDisplayString()
+                        )
                     );
                 }
                 else if (

@@ -227,32 +227,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
                 else if (newBaseType != null)
                 {
-                    var coveringKey = baseKeys!
-                        .FirstOrDefault(
-                            k =>
-                                AreIndexedBy(
-                                    foreignKey.Properties,
-                                    foreignKey.IsUnique,
-                                    k.Properties,
-                                    coveringIndexUnique: true
-                                )
-                        );
+                    var coveringKey = baseKeys!.FirstOrDefault(
+                        k =>
+                            AreIndexedBy(
+                                foreignKey.Properties,
+                                foreignKey.IsUnique,
+                                k.Properties,
+                                coveringIndexUnique: true
+                            )
+                    );
                     if (coveringKey != null)
                     {
                         RemoveIndex(index);
                     }
                     else
                     {
-                        var coveringIndex = baseIndexes!
-                            .FirstOrDefault(
-                                i =>
-                                    AreIndexedBy(
-                                        foreignKey.Properties,
-                                        foreignKey.IsUnique,
-                                        i.Properties,
-                                        i.IsUnique
-                                    )
-                            );
+                        var coveringIndex = baseIndexes!.FirstOrDefault(
+                            i =>
+                                AreIndexedBy(
+                                    foreignKey.Properties,
+                                    foreignKey.IsUnique,
+                                    i.Properties,
+                                    i.IsUnique
+                                )
+                        );
                         if (coveringIndex != null)
                         {
                             RemoveIndex(index);

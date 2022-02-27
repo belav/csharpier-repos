@@ -174,8 +174,8 @@ internal class DefaultBindingMetadataProvider : IBindingMetadataProvider
             case ModelMetadataKind.Property:
                 // BindingBehavior can fall back to attributes on the Container Type, but we should ignore
                 // attributes on the Property Type.
-                var matchingAttributes = context.PropertyAttributes!
-                    .OfType<BindingBehaviorAttribute>();
+                var matchingAttributes =
+                    context.PropertyAttributes!.OfType<BindingBehaviorAttribute>();
                 return matchingAttributes.FirstOrDefault()
                     ?? context.Key.ContainerType!
                         .GetCustomAttributes(typeof(BindingBehaviorAttribute), inherit: true)

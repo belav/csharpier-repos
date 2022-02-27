@@ -201,8 +201,11 @@ namespace System.Xml.Schema
             else if (_reader.NodeType == XmlNodeType.Element)
             {
                 if (
-                    _builder!
-                        .ProcessElement(_reader.Prefix, _reader.LocalName, _reader.NamespaceURI)
+                    _builder!.ProcessElement(
+                        _reader.Prefix,
+                        _reader.LocalName,
+                        _reader.NamespaceURI
+                    )
                 )
                 {
                     _namespaceManager!.PushScope();
@@ -398,11 +401,10 @@ namespace System.Xml.Schema
                     {
                         if (Ref.Equal(r.NamespaceURI, _schemaNames.NsXmlNs))
                         { //Namespace Attribute
-                            _annotationNSManager!
-                                .AddNamespace(
-                                    r.Prefix.Length == 0 ? string.Empty : _reader.LocalName,
-                                    _reader.Value
-                                );
+                            _annotationNSManager!.AddNamespace(
+                                r.Prefix.Length == 0 ? string.Empty : _reader.LocalName,
+                                _reader.Value
+                            );
                         }
                         XmlAttribute attr = LoadAttributeNode();
                         attributes.Append(attr);

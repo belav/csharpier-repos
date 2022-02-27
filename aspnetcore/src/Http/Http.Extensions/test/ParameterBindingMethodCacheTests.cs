@@ -100,8 +100,9 @@ public class ParameterBindingMethodCacheTests
         Assert.Equal(typeof(IFormatProvider), parameters[1].ParameterType);
         Assert.True(parameters[2].IsOut);
         Assert.True(
-            ((call.Arguments[1] as ConstantExpression)!.Value as CultureInfo)!
-                .Equals(CultureInfo.InvariantCulture)
+            ((call.Arguments[1] as ConstantExpression)!.Value as CultureInfo)!.Equals(
+                CultureInfo.InvariantCulture
+            )
         );
     }
 

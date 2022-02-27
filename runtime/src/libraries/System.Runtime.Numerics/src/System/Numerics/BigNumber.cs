@@ -879,8 +879,7 @@ namespace System.Numerics
                 default,
                 out _,
                 out _
-            )
-                !;
+            )!;
         }
 
         internal static bool TryFormatBigInteger(

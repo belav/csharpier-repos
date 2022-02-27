@@ -109,6 +109,7 @@ namespace Dia
         THUNK_ORDINAL_VCALL, // virtual call thunk
         THUNK_ORDINAL_PCODE, // pcode thunk
         THUNK_ORDINAL_LOAD, // thunk which loads the address to jump to
+
         //  via unknown means...
 
         // trampoline thunk ordinals   - only for use in Trampoline thunk symbols
@@ -503,10 +504,12 @@ namespace Dia
         CV_R68_CAAR = 24,
         CV_R68_ISP = 25,
         CV_R68_PC = 26,
+
         //reserved  27
         CV_R68_FPCR = 28,
         CV_R68_FPSR = 29,
         CV_R68_FPIAR = 30,
+
         //reserved  31
         CV_R68_FP0 = 32,
         CV_R68_FP1 = 33,
@@ -516,6 +519,7 @@ namespace Dia
         CV_R68_FP5 = 37,
         CV_R68_FP6 = 38,
         CV_R68_FP7 = 39,
+
         //reserved  40
         CV_R68_MMUSR030 = 41,
         CV_R68_MMUSR = 42,
@@ -524,6 +528,7 @@ namespace Dia
         CV_R68_DTT1 = 45,
         CV_R68_ITT0 = 46,
         CV_R68_ITT1 = 47,
+
         //reserved  50
         CV_R68_PSR = 51,
         CV_R68_PCSR = 52,
@@ -537,6 +542,7 @@ namespace Dia
         CV_R68_CAL = 60,
         CV_R68_TT0 = 61,
         CV_R68_TT1 = 62,
+
         //reserved  63
         CV_R68_BAD0 = 64,
         CV_R68_BAD1 = 65,

@@ -258,6 +258,7 @@ namespace SerializationTypes
         [EnumMember]
         One,
         Two,
+
         [EnumMember]
         Three
     }
@@ -426,10 +427,13 @@ namespace SerializationTypes
     {
         [EnumMember]
         One = 0x01,
+
         [EnumMember]
         Two = 0x02,
+
         [EnumMember]
         Three = 0x04,
+
         [EnumMember]
         Four = 0x08
     }

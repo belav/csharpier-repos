@@ -133,8 +133,10 @@ namespace Microsoft.Interop.Analyzers
                 .ConfigureAwait(false);
             SyntaxGenerator generator = editor.Generator;
 
-            var dllImportSyntax = (AttributeSyntax)dllImportAttr!.ApplicationSyntaxReference!
-                .GetSyntax(cancellationToken);
+            var dllImportSyntax =
+                (AttributeSyntax)dllImportAttr!.ApplicationSyntaxReference!.GetSyntax(
+                    cancellationToken
+                );
 
             // Create GeneratedDllImport attribute based on the DllImport attribute
             SyntaxNode generatedDllImportSyntax = GetGeneratedDllImportAttribute(

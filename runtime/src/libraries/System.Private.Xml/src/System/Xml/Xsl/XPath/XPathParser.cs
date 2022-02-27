@@ -98,19 +98,13 @@ namespace System.Xml.Xsl.XPath
             else if (_scanner.Kind == LexKind.SlashSlash)
             {
                 _scanner.NextLex();
-                return _builder!
-                    .JoinStep(
-                        _builder.Axis(XPathAxis.Root, XPathNodeType.All, null, null),
-                        _builder.JoinStep(
-                            _builder.Axis(
-                                XPathAxis.DescendantOrSelf,
-                                XPathNodeType.All,
-                                null,
-                                null
-                            ),
-                            ParseRelativeLocationPath()
-                        )
-                    );
+                return _builder!.JoinStep(
+                    _builder.Axis(XPathAxis.Root, XPathNodeType.All, null, null),
+                    _builder.JoinStep(
+                        _builder.Axis(XPathAxis.DescendantOrSelf, XPathNodeType.All, null, null),
+                        ParseRelativeLocationPath()
+                    )
+                );
             }
             else
             {
@@ -143,19 +137,13 @@ namespace System.Xml.Xsl.XPath
             else if (_scanner.Kind == LexKind.SlashSlash)
             {
                 _scanner.NextLex();
-                opnd = _builder!
-                    .JoinStep(
-                        opnd,
-                        _builder.JoinStep(
-                            _builder.Axis(
-                                XPathAxis.DescendantOrSelf,
-                                XPathNodeType.All,
-                                null,
-                                null
-                            ),
-                            ParseRelativeLocationPath()
-                        )
-                    );
+                opnd = _builder!.JoinStep(
+                    opnd,
+                    _builder.JoinStep(
+                        _builder.Axis(XPathAxis.DescendantOrSelf, XPathNodeType.All, null, null),
+                        ParseRelativeLocationPath()
+                    )
+                );
             }
             --_parseRelativePath;
             return opnd;
@@ -423,14 +411,13 @@ namespace System.Xml.Xsl.XPath
 
                 // Operator's precedence is greater than the one of our caller, so process it here
                 _scanner.NextLex();
-                opnd = _builder!
-                    .Operator(
-                        op,
-                        opnd,
-                        ParseSubExpr( /*callerPrec:*/
-                            opPrec
-                        )
-                    );
+                opnd = _builder!.Operator(
+                    op,
+                    opnd,
+                    ParseSubExpr( /*callerPrec:*/
+                        opPrec
+                    )
+                );
             }
             --_parseSubExprDepth;
             return opnd;
@@ -506,19 +493,18 @@ namespace System.Xml.Xsl.XPath
                 {
                     _scanner.NextLex();
                     PushPosInfo(startChar, endChar);
-                    opnd = _builder!
-                        .JoinStep(
-                            opnd,
-                            _builder.JoinStep(
-                                _builder.Axis(
-                                    XPathAxis.DescendantOrSelf,
-                                    XPathNodeType.All,
-                                    null,
-                                    null
-                                ),
-                                ParseRelativeLocationPath()
-                            )
-                        );
+                    opnd = _builder!.JoinStep(
+                        opnd,
+                        _builder.JoinStep(
+                            _builder.Axis(
+                                XPathAxis.DescendantOrSelf,
+                                XPathNodeType.All,
+                                null,
+                                null
+                            ),
+                            ParseRelativeLocationPath()
+                        )
+                    );
                     PopPosInfo();
                 }
                 return opnd;
@@ -541,12 +527,11 @@ namespace System.Xml.Xsl.XPath
             while (_scanner.Kind == LexKind.LBracket)
             {
                 PushPosInfo(startChar, endChar);
-                opnd = _builder!
-                    .Predicate(
-                        opnd,
-                        ParsePredicate(), /*reverseStep:*/
-                        false
-                    );
+                opnd = _builder!.Predicate(
+                    opnd,
+                    ParsePredicate(), /*reverseStep:*/
+                    false
+                );
                 PopPosInfo();
             }
             return opnd;

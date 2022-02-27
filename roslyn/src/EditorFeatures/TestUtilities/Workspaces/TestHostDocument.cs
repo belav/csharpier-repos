@@ -279,13 +279,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     .GetRequiredService<IContentTypeLanguageService>()
                     .GetDefaultContentType();
 
-                _textBuffer = workspace!
-                    .GetOrCreateBufferForPath(
-                        FilePath,
-                        contentType,
-                        _languageServiceProvider.Language,
-                        _initialText
-                    );
+                _textBuffer = workspace!.GetOrCreateBufferForPath(
+                    FilePath,
+                    contentType,
+                    _languageServiceProvider.Language,
+                    _initialText
+                );
                 _initialTextSnapshot = _textBuffer.CurrentSnapshot;
             }
 

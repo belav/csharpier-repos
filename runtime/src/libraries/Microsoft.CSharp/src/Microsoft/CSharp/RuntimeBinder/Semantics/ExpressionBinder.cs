@@ -78,6 +78,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Tilde = 1 << UnaOpKind.Tilde,
         Bang = 1 << UnaOpKind.Bang,
         IncDec = 1 << UnaOpKind.IncDec,
+
         // The different combinations needed in operators.cs
         Signed = Plus | Minus | Tilde,
         Unsigned = Plus | Tilde,
@@ -92,6 +93,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Convert = 0x01, // Convert the operands before calling the bind method
         CanLift = 0x02, // Operator has a lifted form
         AutoLift = 0x04, // Standard nullable lifting
+
         // The different combinations needed in operators.cs
         Value = Convert | CanLift | AutoLift,
         Reference = Convert,

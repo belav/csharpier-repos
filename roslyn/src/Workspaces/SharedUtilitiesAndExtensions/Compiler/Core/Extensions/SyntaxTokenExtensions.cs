@@ -110,8 +110,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             return nextToken.RawKind == 0
               ? (
-                    (ICompilationUnitSyntax)token.Parent!.SyntaxTree!
-                        .GetRoot(CancellationToken.None)
+                    (ICompilationUnitSyntax)token.Parent!.SyntaxTree!.GetRoot(
+                        CancellationToken.None
+                    )
                 ).EndOfFileToken
               : nextToken;
         }

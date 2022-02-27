@@ -807,17 +807,16 @@ namespace System.Xml.Xsl.XsltOld
             }
 
             switch (
-                _builder!
-                    .BeginEvent(
-                        stateOutlook,
-                        nodeType,
-                        prefix,
-                        name,
-                        nspace,
-                        empty,
-                        htmlProps,
-                        search
-                    )
+                _builder!.BeginEvent(
+                    stateOutlook,
+                    nodeType,
+                    prefix,
+                    name,
+                    nspace,
+                    empty,
+                    htmlProps,
+                    search
+                )
             ) {
                 case OutputResult.Continue:
                     _xsm.Begin(nodeType);

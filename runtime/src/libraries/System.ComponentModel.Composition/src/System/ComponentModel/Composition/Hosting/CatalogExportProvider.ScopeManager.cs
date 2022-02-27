@@ -69,8 +69,8 @@ namespace System.ComponentModel.Composition.Hosting
                                     )
                                 )
                                 {
-                                    isChildPartRejected = container.CatalogExportProvider!
-                                        .DetermineRejection(
+                                    isChildPartRejected =
+                                        container.CatalogExportProvider!.DetermineRejection(
                                             partDefinitionAndExportDefinition.Item1,
                                             localAtomicComposition
                                         );

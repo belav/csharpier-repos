@@ -88,10 +88,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
                     if (modelMinorVersion != productMinorVersion)
                     {
-                        var logger = _scopedProvider!
-                            .GetRequiredService<
-                                IDiagnosticsLogger<DbLoggerCategory.Infrastructure>
-                            >();
+                        var logger = _scopedProvider!.GetRequiredService<
+                            IDiagnosticsLogger<DbLoggerCategory.Infrastructure>
+                        >();
                         logger.OldModelVersionWarning(_currentContext!.Context, _contextOptions!);
                     }
                 }

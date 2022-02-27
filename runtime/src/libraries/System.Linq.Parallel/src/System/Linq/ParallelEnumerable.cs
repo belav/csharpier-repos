@@ -6614,8 +6614,7 @@ namespace System.Linq
                 new SingleQueryOperator<TSource>(source, null),
                 true,
                 false
-            )
-                !;
+            )!;
         }
 
         /// <summary>
@@ -6652,8 +6651,7 @@ namespace System.Linq
                 new SingleQueryOperator<TSource>(source, predicate),
                 true,
                 false
-            )
-                !;
+            )!;
         }
 
         /// <summary>

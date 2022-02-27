@@ -171,8 +171,7 @@ namespace System.Data.Odbc
                     {
                         ProviderInfo.DriverName = GetInfoStringUnhandled(
                             ODBC32.SQL_INFO.DRIVER_NAME
-                        )
-                            !;
+                        )!;
                     }
                     return ProviderInfo.DriverName;
                 }

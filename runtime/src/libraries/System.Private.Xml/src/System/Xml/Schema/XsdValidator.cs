@@ -212,8 +212,11 @@ namespace System.Xml.Schema
                     SendValidationEvent(SR.Sch_ContentInNill, elementName.ToString());
                     return null;
                 }
-                particle = context.ElementDecl!.ContentValidator!
-                    .ValidateElement(elementName, context, out errorCode);
+                particle = context.ElementDecl!.ContentValidator!.ValidateElement(
+                    elementName,
+                    context,
+                    out errorCode
+                );
                 if (particle == null)
                 {
                     _processContents = context.ProcessContents = XmlSchemaContentProcessing.Skip;
@@ -587,8 +590,11 @@ namespace System.Xml.Schema
                             reader.NamespaceURI
                         );
                         bool skipContents = (_processContents == XmlSchemaContentProcessing.Skip);
-                        SchemaAttDef? attnDef = schemaInfo!
-                            .GetAttributeXsd(context.ElementDecl, attQName, ref skipContents);
+                        SchemaAttDef? attnDef = schemaInfo!.GetAttributeXsd(
+                            context.ElementDecl,
+                            attQName,
+                            ref skipContents
+                        );
 
                         if (attnDef != null)
                         {

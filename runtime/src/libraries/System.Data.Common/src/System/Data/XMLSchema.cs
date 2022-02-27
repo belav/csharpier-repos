@@ -354,8 +354,9 @@ namespace System.Data
                 {
                     if (props == null)
                     {
-                        object? val = TypeDescriptor.GetProperties(instance)["ExtendedProperties"]!
-                            .GetValue(instance);
+                        object? val = TypeDescriptor.GetProperties(instance)[
+                            "ExtendedProperties"
+                        ]!.GetValue(instance);
                         Debug.Assert(
                             val is PropertyCollection,
                             "We can set values only for classes that have ExtendedProperties"
@@ -442,8 +443,9 @@ namespace System.Data
                 {
                     if (props == null)
                     {
-                        object? val = TypeDescriptor.GetProperties(instance)["ExtendedProperties"]!
-                            .GetValue(instance);
+                        object? val = TypeDescriptor.GetProperties(instance)[
+                            "ExtendedProperties"
+                        ]!.GetValue(instance);
                         Debug.Assert(
                             val is PropertyCollection,
                             "We can set values only for classes that have ExtendedProperties"

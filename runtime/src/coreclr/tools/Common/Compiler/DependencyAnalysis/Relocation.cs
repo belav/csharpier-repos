@@ -17,6 +17,7 @@ namespace ILCompiler.DependencyAnalysis
         IMAGE_REL_BASED_THUMB_MOV32_PCREL = 0x14, // Thumb2: based MOVW/MOVT
         IMAGE_REL_BASED_ARM64_BRANCH26 = 0x15, // Arm64: B, BL
         IMAGE_REL_BASED_RELPTR32 = 0x7C, // 32-bit relative address from byte starting reloc
+
         // This is a special NGEN-specific relocation type
         // for relative pointer (used to make NGen relocation
         // section smaller)

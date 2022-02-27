@@ -91,11 +91,10 @@ namespace System.Diagnostics.Tracing
             if (tplDebug)
             {
                 log!.DebugFacilityMessage("OnStartEnter", fullActivityName);
-                log!
-                    .DebugFacilityMessage(
-                        "OnStartEnterActivityState",
-                        ActivityInfo.LiveActivities(currentActivity)
-                    );
+                log!.DebugFacilityMessage(
+                    "OnStartEnterActivityState",
+                    ActivityInfo.LiveActivities(currentActivity)
+                );
             }
 
             if (currentActivity != null)
@@ -149,17 +148,15 @@ namespace System.Diagnostics.Tracing
 
             if (tplDebug)
             {
-                log!
-                    .DebugFacilityMessage(
-                        "OnStartRetActivityState",
-                        ActivityInfo.LiveActivities(newActivity)
-                    );
-                log!
-                    .DebugFacilityMessage1(
-                        "OnStartRet",
-                        activityId.ToString(),
-                        relatedActivityId.ToString()
-                    );
+                log!.DebugFacilityMessage(
+                    "OnStartRetActivityState",
+                    ActivityInfo.LiveActivities(newActivity)
+                );
+                log!.DebugFacilityMessage1(
+                    "OnStartRet",
+                    activityId.ToString(),
+                    relatedActivityId.ToString()
+                );
             }
         }
 
@@ -187,11 +184,10 @@ namespace System.Diagnostics.Tracing
             if (tplDebug)
             {
                 log!.DebugFacilityMessage("OnStopEnter", fullActivityName);
-                log!
-                    .DebugFacilityMessage(
-                        "OnStopEnterActivityState",
-                        ActivityInfo.LiveActivities(m_current.Value)
-                    );
+                log!.DebugFacilityMessage(
+                    "OnStopEnterActivityState",
+                    ActivityInfo.LiveActivities(m_current.Value)
+                );
             }
 
             while (true) // This is a retry loop.
@@ -253,11 +249,10 @@ namespace System.Diagnostics.Tracing
 
                     if (tplDebug)
                     {
-                        log!
-                            .DebugFacilityMessage(
-                                "OnStopRetActivityState",
-                                ActivityInfo.LiveActivities(newCurrentActivity)
-                            );
+                        log!.DebugFacilityMessage(
+                            "OnStopRetActivityState",
+                            ActivityInfo.LiveActivities(newCurrentActivity)
+                        );
                         log!.DebugFacilityMessage("OnStopRet", activityId.ToString());
                     }
                     return;
@@ -545,6 +540,7 @@ namespace System.Diagnostics.Tracing
                 End = 0x0, // ends the list.   No valid value has this prefix.
                 LastImmediateValue = 0xA,
                 PrefixCode = 0xB, // all the 'long' encodings go here.  If the next nibble is MultiByte1-4
+
                 // than this is a 'overflow' id.   Unlike the hierarchical IDs these are
                 // allocated densely but don't tell you anything about nesting. we use
                 // these when we run out of space in the GUID to store the path.

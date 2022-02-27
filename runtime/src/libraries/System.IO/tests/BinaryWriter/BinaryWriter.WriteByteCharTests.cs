@@ -14,11 +14,11 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-         /// Cases Tested:
-         /// 1) Tests that BinaryWriter properly writes chars into a stream.
-         /// 2) Tests that if someone writes surrogate characters, an argument exception is thrown
-         /// 3) Casting an int to char and writing it, works.
-         /// </summary>
+        /// Cases Tested:
+        /// 1) Tests that BinaryWriter properly writes chars into a stream.
+        /// 2) Tests that if someone writes surrogate characters, an argument exception is thrown
+        /// 3) Casting an int to char and writing it, works.
+        /// </summary>
         [Fact]
         public void BinaryWriter_WriteCharTest()
         {

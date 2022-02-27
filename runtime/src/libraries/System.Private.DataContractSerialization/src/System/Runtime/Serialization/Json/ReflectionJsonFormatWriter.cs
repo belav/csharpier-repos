@@ -181,13 +181,12 @@ namespace System.Runtime.Serialization.Json
                             );
                             if (isDictionary)
                             {
-                                jsonDataContract!
-                                    .WriteJsonValue(
-                                        jsonWriter,
-                                        current,
-                                        context,
-                                        collectionContract.ItemType.TypeHandle
-                                    );
+                                jsonDataContract!.WriteJsonValue(
+                                    jsonWriter,
+                                    current,
+                                    context,
+                                    collectionContract.ItemType.TypeHandle
+                                );
                             }
                             else
                             {

@@ -24,8 +24,10 @@ internal sealed class DefaultControllerPropertyActivator : IControllerPropertyAc
     public void Activate(ControllerContext context, object controller)
     {
         var controllerType = controller.GetType();
-        var propertiesToActivate = _activateActions!
-            .GetOrAdd(controllerType, _getPropertiesToActivate);
+        var propertiesToActivate = _activateActions!.GetOrAdd(
+            controllerType,
+            _getPropertiesToActivate
+        );
 
         for (var i = 0; i < propertiesToActivate.Length; i++)
         {

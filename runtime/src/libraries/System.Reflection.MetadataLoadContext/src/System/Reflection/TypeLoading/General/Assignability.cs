@@ -426,8 +426,10 @@ namespace System.Reflection.TypeLoading
                         if (ifcGenericTypeDefinition.Equals(toTypeGenericTypeDefinition))
                         {
                             if (
-                                fromElementTypeInfo!
-                                    .IsElementTypeCompatibleWith(toElementTypeInfo, coreTypes)
+                                fromElementTypeInfo!.IsElementTypeCompatibleWith(
+                                    toElementTypeInfo,
+                                    coreTypes
+                                )
                             )
                                 return true;
                         }

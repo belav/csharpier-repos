@@ -717,49 +717,45 @@ namespace Microsoft.EntityFrameworkCore.Query
                             var relatedEntityType = innerShaper.ReturnType;
                             var inverseNavigation = navigation.Inverse;
 
-                            _collectionPopulatingExpressions!
-                                .Add(
-                                    Expression.Call(
-                                        _populateIncludeCollectionMethodInfo.MakeGenericMethod(
-                                            includingEntityType,
-                                            relatedEntityType
-                                        ),
-                                        collectionIdConstant,
-                                        QueryCompilationContext.QueryContextParameter,
-                                        _dataReaderParameter,
-                                        _resultCoordinatorParameter,
-                                        Expression.Constant(parentIdentifierLambda.Compile()),
-                                        Expression.Constant(outerIdentifierLambda.Compile()),
-                                        Expression.Constant(selfIdentifierLambda.Compile()),
-                                        Expression.Constant(
-                                            relationalCollectionShaperExpression.ParentIdentifierValueComparers,
-                                            typeof(IReadOnlyList<ValueComparer>)
-                                        ),
-                                        Expression.Constant(
-                                            relationalCollectionShaperExpression.OuterIdentifierValueComparers,
-                                            typeof(IReadOnlyList<ValueComparer>)
-                                        ),
-                                        Expression.Constant(
-                                            relationalCollectionShaperExpression.SelfIdentifierValueComparers,
-                                            typeof(IReadOnlyList<ValueComparer>)
-                                        ),
-                                        Expression.Constant(innerShaper.Compile()),
-                                        Expression.Constant(
-                                            inverseNavigation,
-                                            typeof(INavigationBase)
-                                        ),
-                                        Expression.Constant(
-                                            GenerateFixup(
-                                                    includingEntityType,
-                                                    relatedEntityType,
-                                                    navigation,
-                                                    inverseNavigation
-                                                )
-                                                .Compile()
-                                        ),
-                                        Expression.Constant(_isTracking)
-                                    )
-                                );
+                            _collectionPopulatingExpressions!.Add(
+                                Expression.Call(
+                                    _populateIncludeCollectionMethodInfo.MakeGenericMethod(
+                                        includingEntityType,
+                                        relatedEntityType
+                                    ),
+                                    collectionIdConstant,
+                                    QueryCompilationContext.QueryContextParameter,
+                                    _dataReaderParameter,
+                                    _resultCoordinatorParameter,
+                                    Expression.Constant(parentIdentifierLambda.Compile()),
+                                    Expression.Constant(outerIdentifierLambda.Compile()),
+                                    Expression.Constant(selfIdentifierLambda.Compile()),
+                                    Expression.Constant(
+                                        relationalCollectionShaperExpression.ParentIdentifierValueComparers,
+                                        typeof(IReadOnlyList<ValueComparer>)
+                                    ),
+                                    Expression.Constant(
+                                        relationalCollectionShaperExpression.OuterIdentifierValueComparers,
+                                        typeof(IReadOnlyList<ValueComparer>)
+                                    ),
+                                    Expression.Constant(
+                                        relationalCollectionShaperExpression.SelfIdentifierValueComparers,
+                                        typeof(IReadOnlyList<ValueComparer>)
+                                    ),
+                                    Expression.Constant(innerShaper.Compile()),
+                                    Expression.Constant(inverseNavigation, typeof(INavigationBase)),
+                                    Expression.Constant(
+                                        GenerateFixup(
+                                                includingEntityType,
+                                                relatedEntityType,
+                                                navigation,
+                                                inverseNavigation
+                                            )
+                                            .Compile()
+                                    ),
+                                    Expression.Constant(_isTracking)
+                                )
+                            );
                         }
                         else if (
                             includeExpression.NavigationExpression
@@ -838,60 +834,56 @@ namespace Microsoft.EntityFrameworkCore.Query
                             var relatedEntityType = innerShaper.ReturnType;
                             var inverseNavigation = navigation.Inverse;
 
-                            _collectionPopulatingExpressions!
-                                .Add(
-                                    Expression.Call(
-                                        (
-                                            _isAsync
-                                                ? _populateSplitIncludeCollectionAsyncMethodInfo
-                                                : _populateSplitIncludeCollectionMethodInfo
-                                        ).MakeGenericMethod(includingEntityType, relatedEntityType),
-                                        collectionIdConstant,
-                                        Expression.Convert(
-                                            QueryCompilationContext.QueryContextParameter,
-                                            typeof(RelationalQueryContext)
-                                        ),
-                                        _executionStrategyParameter!,
-                                        Expression.Constant(_detailedErrorsEnabled),
-                                        _resultCoordinatorParameter,
-                                        Expression.Constant(relationalCommandCache),
-                                        Expression.Constant(childIdentifierLambda.Compile()),
-                                        Expression.Constant(
-                                            relationalSplitCollectionShaperExpression.IdentifierValueComparers,
-                                            typeof(IReadOnlyList<ValueComparer>)
-                                        ),
-                                        Expression.Constant(innerShaper.Compile()),
-                                        Expression.Constant(
-                                            relatedDataLoaders?.Compile(),
-                                            _isAsync
-                                              ? typeof(Func<
-                                                    QueryContext,
-                                                    IExecutionStrategy,
-                                                    SplitQueryResultCoordinator,
-                                                    Task
-                                                >)
-                                              : typeof(Action<
-                                                    QueryContext,
-                                                    IExecutionStrategy,
-                                                    SplitQueryResultCoordinator
-                                                >)
-                                        ),
-                                        Expression.Constant(
-                                            inverseNavigation,
-                                            typeof(INavigationBase)
-                                        ),
-                                        Expression.Constant(
-                                            GenerateFixup(
-                                                    includingEntityType,
-                                                    relatedEntityType,
-                                                    navigation,
-                                                    inverseNavigation
-                                                )
-                                                .Compile()
-                                        ),
-                                        Expression.Constant(_isTracking)
-                                    )
-                                );
+                            _collectionPopulatingExpressions!.Add(
+                                Expression.Call(
+                                    (
+                                        _isAsync
+                                            ? _populateSplitIncludeCollectionAsyncMethodInfo
+                                            : _populateSplitIncludeCollectionMethodInfo
+                                    ).MakeGenericMethod(includingEntityType, relatedEntityType),
+                                    collectionIdConstant,
+                                    Expression.Convert(
+                                        QueryCompilationContext.QueryContextParameter,
+                                        typeof(RelationalQueryContext)
+                                    ),
+                                    _executionStrategyParameter!,
+                                    Expression.Constant(_detailedErrorsEnabled),
+                                    _resultCoordinatorParameter,
+                                    Expression.Constant(relationalCommandCache),
+                                    Expression.Constant(childIdentifierLambda.Compile()),
+                                    Expression.Constant(
+                                        relationalSplitCollectionShaperExpression.IdentifierValueComparers,
+                                        typeof(IReadOnlyList<ValueComparer>)
+                                    ),
+                                    Expression.Constant(innerShaper.Compile()),
+                                    Expression.Constant(
+                                        relatedDataLoaders?.Compile(),
+                                        _isAsync
+                                          ? typeof(Func<
+                                                QueryContext,
+                                                IExecutionStrategy,
+                                                SplitQueryResultCoordinator,
+                                                Task
+                                            >)
+                                          : typeof(Action<
+                                                QueryContext,
+                                                IExecutionStrategy,
+                                                SplitQueryResultCoordinator
+                                            >)
+                                    ),
+                                    Expression.Constant(inverseNavigation, typeof(INavigationBase)),
+                                    Expression.Constant(
+                                        GenerateFixup(
+                                                includingEntityType,
+                                                relatedEntityType,
+                                                navigation,
+                                                inverseNavigation
+                                            )
+                                            .Compile()
+                                    ),
+                                    Expression.Constant(_isTracking)
+                                )
+                            );
                         }
                         else
                         {
@@ -1029,36 +1021,35 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 relationalCollectionShaperExpression.Type
                             );
 
-                            _collectionPopulatingExpressions!
-                                .Add(
-                                    Expression.Call(
-                                        _populateCollectionMethodInfo.MakeGenericMethod(
-                                            collectionType,
-                                            elementType,
-                                            relatedElementType
-                                        ),
-                                        collectionIdConstant,
-                                        QueryCompilationContext.QueryContextParameter,
-                                        _dataReaderParameter,
-                                        _resultCoordinatorParameter,
-                                        Expression.Constant(parentIdentifierLambda.Compile()),
-                                        Expression.Constant(outerIdentifierLambda.Compile()),
-                                        Expression.Constant(selfIdentifierLambda.Compile()),
-                                        Expression.Constant(
-                                            relationalCollectionShaperExpression.ParentIdentifierValueComparers,
-                                            typeof(IReadOnlyList<ValueComparer>)
-                                        ),
-                                        Expression.Constant(
-                                            relationalCollectionShaperExpression.OuterIdentifierValueComparers,
-                                            typeof(IReadOnlyList<ValueComparer>)
-                                        ),
-                                        Expression.Constant(
-                                            relationalCollectionShaperExpression.SelfIdentifierValueComparers,
-                                            typeof(IReadOnlyList<ValueComparer>)
-                                        ),
-                                        Expression.Constant(innerShaper.Compile())
-                                    )
-                                );
+                            _collectionPopulatingExpressions!.Add(
+                                Expression.Call(
+                                    _populateCollectionMethodInfo.MakeGenericMethod(
+                                        collectionType,
+                                        elementType,
+                                        relatedElementType
+                                    ),
+                                    collectionIdConstant,
+                                    QueryCompilationContext.QueryContextParameter,
+                                    _dataReaderParameter,
+                                    _resultCoordinatorParameter,
+                                    Expression.Constant(parentIdentifierLambda.Compile()),
+                                    Expression.Constant(outerIdentifierLambda.Compile()),
+                                    Expression.Constant(selfIdentifierLambda.Compile()),
+                                    Expression.Constant(
+                                        relationalCollectionShaperExpression.ParentIdentifierValueComparers,
+                                        typeof(IReadOnlyList<ValueComparer>)
+                                    ),
+                                    Expression.Constant(
+                                        relationalCollectionShaperExpression.OuterIdentifierValueComparers,
+                                        typeof(IReadOnlyList<ValueComparer>)
+                                    ),
+                                    Expression.Constant(
+                                        relationalCollectionShaperExpression.SelfIdentifierValueComparers,
+                                        typeof(IReadOnlyList<ValueComparer>)
+                                    ),
+                                    Expression.Constant(innerShaper.Compile())
+                                )
+                            );
 
                             _variableShaperMapping[relationalCollectionShaperExpression] = accessor;
                         }
@@ -1152,50 +1143,49 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 relationalSplitCollectionShaperExpression.Type
                             );
 
-                            _collectionPopulatingExpressions!
-                                .Add(
-                                    Expression.Call(
-                                        (
-                                            _isAsync
-                                                ? _populateSplitCollectionAsyncMethodInfo
-                                                : _populateSplitCollectionMethodInfo
-                                        ).MakeGenericMethod(
-                                            collectionType,
-                                            elementType,
-                                            relatedElementType
-                                        ),
-                                        collectionIdConstant,
-                                        Expression.Convert(
-                                            QueryCompilationContext.QueryContextParameter,
-                                            typeof(RelationalQueryContext)
-                                        ),
-                                        _executionStrategyParameter!,
-                                        Expression.Constant(_detailedErrorsEnabled),
-                                        _resultCoordinatorParameter,
-                                        Expression.Constant(relationalCommandCache),
-                                        Expression.Constant(childIdentifierLambda.Compile()),
-                                        Expression.Constant(
-                                            relationalSplitCollectionShaperExpression.IdentifierValueComparers,
-                                            typeof(IReadOnlyList<ValueComparer>)
-                                        ),
-                                        Expression.Constant(innerShaper.Compile()),
-                                        Expression.Constant(
-                                            relatedDataLoaders?.Compile(),
-                                            _isAsync
-                                              ? typeof(Func<
-                                                    QueryContext,
-                                                    IExecutionStrategy,
-                                                    SplitQueryResultCoordinator,
-                                                    Task
-                                                >)
-                                              : typeof(Action<
-                                                    QueryContext,
-                                                    IExecutionStrategy,
-                                                    SplitQueryResultCoordinator
-                                                >)
-                                        )
+                            _collectionPopulatingExpressions!.Add(
+                                Expression.Call(
+                                    (
+                                        _isAsync
+                                            ? _populateSplitCollectionAsyncMethodInfo
+                                            : _populateSplitCollectionMethodInfo
+                                    ).MakeGenericMethod(
+                                        collectionType,
+                                        elementType,
+                                        relatedElementType
+                                    ),
+                                    collectionIdConstant,
+                                    Expression.Convert(
+                                        QueryCompilationContext.QueryContextParameter,
+                                        typeof(RelationalQueryContext)
+                                    ),
+                                    _executionStrategyParameter!,
+                                    Expression.Constant(_detailedErrorsEnabled),
+                                    _resultCoordinatorParameter,
+                                    Expression.Constant(relationalCommandCache),
+                                    Expression.Constant(childIdentifierLambda.Compile()),
+                                    Expression.Constant(
+                                        relationalSplitCollectionShaperExpression.IdentifierValueComparers,
+                                        typeof(IReadOnlyList<ValueComparer>)
+                                    ),
+                                    Expression.Constant(innerShaper.Compile()),
+                                    Expression.Constant(
+                                        relatedDataLoaders?.Compile(),
+                                        _isAsync
+                                          ? typeof(Func<
+                                                QueryContext,
+                                                IExecutionStrategy,
+                                                SplitQueryResultCoordinator,
+                                                Task
+                                            >)
+                                          : typeof(Action<
+                                                QueryContext,
+                                                IExecutionStrategy,
+                                                SplitQueryResultCoordinator
+                                            >)
                                     )
-                                );
+                                )
+                            );
 
                             _variableShaperMapping[relationalSplitCollectionShaperExpression] =
                                 accessor;

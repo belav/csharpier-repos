@@ -296,8 +296,13 @@ namespace System.Data.Common
                 }
                 // user must Close/Dispose of the dataReader
                 // Never returns null if dataSet is non-null
-                object value = FillSchemaFromReader(dataSet, null, schemaType, srcTable, dataReader)
-                    !;
+                object value = FillSchemaFromReader(
+                    dataSet,
+                    null,
+                    schemaType,
+                    srcTable,
+                    dataReader
+                )!;
                 return (DataTable[])value;
             }
             finally

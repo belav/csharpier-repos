@@ -14,10 +14,12 @@ namespace System.Linq.Expressions
         /// A binding that represents initializing a member with the value of an expression.
         /// </summary>
         Assignment,
+
         /// <summary>
         /// A binding that represents recursively initializing members of a member.
         /// </summary>
         MemberBinding,
+
         /// <summary>
         /// A binding that represents initializing a member of type <see cref="Collections.IList"/> or <see cref="Collections.Generic.ICollection{T}"/> from a list of elements.
         /// </summary>

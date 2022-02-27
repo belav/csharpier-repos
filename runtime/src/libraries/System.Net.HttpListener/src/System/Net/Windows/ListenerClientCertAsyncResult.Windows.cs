@@ -64,8 +64,11 @@ namespace System.Net
                 return;
             }
             _backingBuffer = new byte[checked((int)size)];
-            _pOverlapped = _boundHandle!
-                .AllocateNativeOverlapped(s_IOCallback, state: this, pinData: _backingBuffer);
+            _pOverlapped = _boundHandle!.AllocateNativeOverlapped(
+                s_IOCallback,
+                state: this,
+                pinData: _backingBuffer
+            );
             _memoryBlob =
                 (Interop.HttpApi.HTTP_SSL_CLIENT_CERT_INFO*)Marshal.UnsafeAddrOfPinnedArrayElement(
                     _backingBuffer,

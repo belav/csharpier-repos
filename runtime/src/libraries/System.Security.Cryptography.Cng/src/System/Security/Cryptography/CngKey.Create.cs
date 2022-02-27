@@ -40,8 +40,8 @@ namespace System.Security.Cryptography
             if (creationParameters == null)
                 creationParameters = new CngKeyCreationParameters();
 
-            SafeNCryptProviderHandle providerHandle = creationParameters.Provider!
-                .OpenStorageProvider();
+            SafeNCryptProviderHandle providerHandle =
+                creationParameters.Provider!.OpenStorageProvider();
             SafeNCryptKeyHandle keyHandle;
             ErrorCode errorCode = Interop.NCrypt.NCryptCreatePersistedKey(
                 providerHandle,

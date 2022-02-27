@@ -707,8 +707,10 @@ namespace System.Data.OleDb
                         }
                         executeResult = null;
                         _hasDataReader = true;
-                        _connection!
-                            .AddWeakReference(dataReader, OleDbReferenceCollection.DataReaderTag);
+                        _connection!.AddWeakReference(
+                            dataReader,
+                            OleDbReferenceCollection.DataReaderTag
+                        );
 
                         // command stays in the executing state until the connection
                         // has a datareader to track for it being closed
@@ -892,14 +894,13 @@ namespace System.Data.OleDb
                 "SingleRow implies SingleResult"
             );
             OleDbHResult hr;
-            hr = _icommandText!
-                .Execute(
-                    ADP.PtrZero,
-                    ref ODB.IID_IMultipleResults,
-                    dbParams,
-                    out _recordsAffected,
-                    out executeResult
-                );
+            hr = _icommandText!.Execute(
+                ADP.PtrZero,
+                ref ODB.IID_IMultipleResults,
+                dbParams,
+                out _recordsAffected,
+                out executeResult
+            );
 
             if (OleDbHResult.E_NOINTERFACE != hr)
             {
@@ -920,25 +921,23 @@ namespace System.Data.OleDb
             // (Microsoft.Jet.OLEDB.4.0 returns 0 for recordsAffected instead of -1)
             if (_executeQuery)
             {
-                hr = _icommandText!
-                    .Execute(
-                        ADP.PtrZero,
-                        ref ODB.IID_IRowset,
-                        dbParams,
-                        out _recordsAffected,
-                        out executeResult
-                    );
+                hr = _icommandText!.Execute(
+                    ADP.PtrZero,
+                    ref ODB.IID_IRowset,
+                    dbParams,
+                    out _recordsAffected,
+                    out executeResult
+                );
             }
             else
             {
-                hr = _icommandText!
-                    .Execute(
-                        ADP.PtrZero,
-                        ref ODB.IID_NULL,
-                        dbParams,
-                        out _recordsAffected,
-                        out executeResult
-                    );
+                hr = _icommandText!.Execute(
+                    ADP.PtrZero,
+                    ref ODB.IID_NULL,
+                    dbParams,
+                    out _recordsAffected,
+                    out executeResult
+                );
             }
             ExecuteCommandTextErrorHandling(hr);
             return ODB.ExecutedIRowset;
@@ -954,14 +953,13 @@ namespace System.Data.OleDb
             if (_connection!.SupportIRow(this))
             {
                 OleDbHResult hr;
-                hr = _icommandText!
-                    .Execute(
-                        ADP.PtrZero,
-                        ref ODB.IID_IRow,
-                        dbParams,
-                        out _recordsAffected,
-                        out executeResult
-                    );
+                hr = _icommandText!.Execute(
+                    ADP.PtrZero,
+                    ref ODB.IID_IRow,
+                    dbParams,
+                    out _recordsAffected,
+                    out executeResult
+                );
 
                 if (OleDbHResult.DB_E_NOTFOUND == hr)
                 {
@@ -1024,8 +1022,7 @@ namespace System.Data.OleDb
                 OleDbDataReader reader = ExecuteReaderInternal(
                     CommandBehavior.Default,
                     ADP.ExecuteScalar
-                )
-                    !
+                )!
             )
             {
                 if (reader.Read() && (0 < reader.FieldCount))

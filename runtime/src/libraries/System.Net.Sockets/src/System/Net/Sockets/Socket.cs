@@ -533,8 +533,7 @@ namespace System.Net.Sockets
                     (int)GetSocketOption(
                         SocketOptionLevel.Socket,
                         SocketOptionName.ExclusiveAddressUse
-                    )
-                        ! != 0
+                    )! != 0
                   ? true
                   : false;
             }
@@ -559,8 +558,7 @@ namespace System.Net.Sockets
                 return (int)GetSocketOption(
                     SocketOptionLevel.Socket,
                     SocketOptionName.ReceiveBuffer
-                )
-                    !;
+                )!;
             }
             set
             {
@@ -597,8 +595,7 @@ namespace System.Net.Sockets
                 return (int)GetSocketOption(
                     SocketOptionLevel.Socket,
                     SocketOptionName.ReceiveTimeout
-                )
-                    !;
+                )!;
             }
             set
             {
@@ -619,8 +616,10 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout)
-                    !;
+                return (int)GetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendTimeout
+                )!;
             }
             set
             {
@@ -670,16 +669,14 @@ namespace System.Net.Sockets
                     return (short)(int)GetSocketOption(
                         SocketOptionLevel.IP,
                         SocketOptionName.IpTimeToLive
-                    )
-                        !;
+                    )!;
                 }
                 else if (_addressFamily == AddressFamily.InterNetworkV6)
                 {
                     return (short)(int)GetSocketOption(
                         SocketOptionLevel.IPv6,
                         SocketOptionName.IpTimeToLive
-                    )
-                        !;
+                    )!;
                 }
                 else
                 {
@@ -753,8 +750,7 @@ namespace System.Net.Sockets
                         (int)GetSocketOption(
                             SocketOptionLevel.IP,
                             SocketOptionName.MulticastLoopback
-                        )
-                            ! != 0
+                        )! != 0
                       ? true
                       : false;
                 }
@@ -764,8 +760,7 @@ namespace System.Net.Sockets
                         (int)GetSocketOption(
                             SocketOptionLevel.IPv6,
                             SocketOptionName.MulticastLoopback
-                        )
-                            ! != 0
+                        )! != 0
                       ? true
                       : false;
                 }

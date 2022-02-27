@@ -21,12 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         IDS_SK_VARIABLE = MessageBase + 2006,
         IDS_SK_EVENT = MessageBase + 2007,
         IDS_SK_TYVAR = MessageBase + 2008,
+
         //IDS_SK_GCLASS = MessageBase + 2009,
         IDS_SK_ALIAS = MessageBase + 2010,
+
         //IDS_SK_EXTERNALIAS = MessageBase + 2011,
         IDS_SK_LABEL = MessageBase + 2012,
         IDS_SK_CONSTRUCTOR = MessageBase + 2013,
         IDS_NULL = MessageBase + 10001,
+
         //IDS_RELATEDERROR = MessageBase + 10002,
         //IDS_RELATEDWARNING = MessageBase + 10003,
         IDS_XMLIGNORED = MessageBase + 10004,
@@ -51,6 +54,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         IDS_MethodGroup = MessageBase + 12513,
         IDS_AnonMethod = MessageBase + 12514,
         IDS_FeatureSwitchOnBool = MessageBase + 12517,
+
         //IDS_WarnAsError = MessageBase + 12518,
         IDS_Collection = MessageBase + 12520,
         IDS_FeaturePropertyAccessorMods = MessageBase + 12522,
@@ -99,6 +103,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         IDS_FeatureExpressionBodiedMethod = MessageBase + 12691,
         IDS_FeatureExpressionBodiedProperty = MessageBase + 12692,
         IDS_FeatureExpressionBodiedIndexer = MessageBase + 12693,
+
         // IDS_VersionExperimental = MessageBase + 12694,
         IDS_FeatureNameof = MessageBase + 12695,
         IDS_FeatureDictionaryInitializer = MessageBase + 12696,
@@ -134,6 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         IDS_FeatureRefStructs = MessageBase + 12726,
         IDS_FeatureReadOnlyStructs = MessageBase + 12727,
         IDS_FeatureRefExtensionMethods = MessageBase + 12728,
+
         // IDS_StackAllocExpression = MessageBase + 12729,
         IDS_FeaturePrivateProtected = MessageBase + 12730,
         IDS_FeatureRefConditional = MessageBase + 12731,

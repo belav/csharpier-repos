@@ -380,6 +380,7 @@ namespace Internal.JitInterface
     public enum CorInfoMethodRuntimeFlags
     {
         CORINFO_FLG_BAD_INLINEE = 0x00000001, // The method is not suitable for inlining
+
         // unused = 0x00000002,
         // unused = 0x00000004,
         CORINFO_FLG_SWITCHED_TO_MIN_OPT = 0x00000008, // The JIT decided to switch to MinOpt for this method, when it was not requested
@@ -393,6 +394,7 @@ namespace Internal.JitInterface
         // These correspond to CorCallingConvention
 
         CORINFO_CALLCONV_DEFAULT = 0x0,
+
         // Instead of using the below values, use the CorInfoCallConvExtension enum for unmanaged calling conventions.
         // CORINFO_CALLCONV_C = 0x1,
         // CORINFO_CALLCONV_STDCALL = 0x2,
@@ -420,6 +422,7 @@ namespace Internal.JitInterface
         Stdcall,
         Thiscall,
         Fastcall,
+
         // New calling conventions supported with the extensible calling convention encoding go here.
         CMemberFunction,
         StdcallMemberFunction,
@@ -451,6 +454,7 @@ namespace Internal.JitInterface
     {
         CORINFO_SIGFLAG_IS_LOCAL_SIG = 0x01,
         CORINFO_SIGFLAG_IL_STUB = 0x02,
+
         // unused = 0x04,
         CORINFO_SIGFLAG_FAT_CALL = 0x08,
     };
@@ -544,6 +548,7 @@ namespace Internal.JitInterface
     {
         INLINE_RESPECT_BOUNDARY = 0x00000001, // You can inline if there are no calls from the method being inlined
         INLINE_NO_CALLEE_LDSTR = 0x00000002, // You can inline only if you guarantee that if inlinee does an ldstr
+
         // inlinee's module will never see that string (by any means).
         // This is due to how we implement the NoStringInterningAttribute
         // (by reusing the fixup table).
@@ -567,6 +572,7 @@ namespace Internal.JitInterface
         CORINFO_VERIFICATION_CANNOT_SKIP = 0, // Cannot skip verification during jit time.
         CORINFO_VERIFICATION_CAN_SKIP = 1, // Can skip verification during jit time.
         CORINFO_VERIFICATION_RUNTIME_CHECK = 2, // Cannot skip verification during jit time,
+
         //     but need to insert a callout to the VM to ask during runtime
         //     whether to raise a verification or not (if the method is unverifiable).
         CORINFO_VERIFICATION_DONT_JIT = 3, // Cannot skip verification during jit time,
@@ -576,6 +582,7 @@ namespace Internal.JitInterface
     public enum CorInfoInitClassResult
     {
         CORINFO_INITCLASS_NOT_REQUIRED = 0x00, // No class initialization required, but the class is not actually initialized yet
+
         // (e.g. we are guaranteed to run the static constructor in method prolog)
         CORINFO_INITCLASS_INITIALIZED = 0x01, // Class initialized
         CORINFO_INITCLASS_USE_HELPER = 0x02, // The JIT must insert class initialization helper call.
@@ -589,6 +596,7 @@ namespace Internal.JitInterface
     {
         CORINFO_ACCESS_ANY = 0x0000, // Normal access
         CORINFO_ACCESS_THIS = 0x0001, // Accessed via the this reference
+
         // CORINFO_ACCESS_UNUSED = 0x0002,
 
         CORINFO_ACCESS_NONNULL = 0x0004, // Instance is guaranteed non-null
@@ -599,6 +607,7 @@ namespace Internal.JitInterface
         CORINFO_ACCESS_SET = 0x0200, // Field set (stfld)
         CORINFO_ACCESS_ADDRESS = 0x0400, // Field address (ldflda)
         CORINFO_ACCESS_INIT_ARRAY = 0x0800, // Field use for InitializeArray
+
         // UNUSED = 0x4000,
         CORINFO_ACCESS_INLINECHECK = 0x8000, // Return fieldFlags and fieldAccessor only. Used by JIT64 during inlining.
     }
@@ -614,6 +623,7 @@ namespace Internal.JitInterface
         CORINFO_FLG_FINAL = 0x00000010,
         CORINFO_FLG_SYNCH = 0x00000020,
         CORINFO_FLG_VIRTUAL = 0x00000040,
+
         //  CORINFO_FLG_UNUSED                = 0x00000080,
         CORINFO_FLG_NATIVE = 0x00000100,
         CORINFO_FLG_INTRINSIC_TYPE = 0x00000200, // This type is marked by [Intrinsic]
@@ -625,12 +635,14 @@ namespace Internal.JitInterface
         CORINFO_FLG_SHAREDINST = 0x00020000, // the code for this method is shared between different generic instantiations (also set on classes/types)
         CORINFO_FLG_DELEGATE_INVOKE = 0x00040000, // "Delegate
         CORINFO_FLG_PINVOKE = 0x00080000, // Is a P/Invoke call
+
         // CORINFO_FLG_UNUSED = 0x00100000,
         CORINFO_FLG_NOGCCHECK = 0x00200000, // This method is FCALL that has no GC check.  Don't put alone in loops
         CORINFO_FLG_INTRINSIC = 0x00400000, // This method MAY have an intrinsic ID
         CORINFO_FLG_CONSTRUCTOR = 0x00800000, // This method is an instance or type initializer
         CORINFO_FLG_AGGRESSIVE_OPT = 0x01000000, // The method may contain hot code and should be aggressively optimized if possible
         CORINFO_FLG_DISABLE_TIER0_FOR_LOOPS = 0x02000000, // Indicates that tier 0 JIT should not be used for a method that contains a loop
+
         // CORINFO_FLG_UNUSED = 0x04000000,
         CORINFO_FLG_DONT_INLINE = 0x10000000, // The method should not be inlined
         CORINFO_FLG_DONT_INLINE_CALLER = 0x20000000, // The method should not be inlined, nor should its callers. It cannot be tail called.
@@ -638,6 +650,7 @@ namespace Internal.JitInterface
 
         // These are internal flags that can only be on Classes
         CORINFO_FLG_VALUECLASS = 0x00010000, // is the class a value class
+
         //  This flag is define din the Methods section, but is also valid on classes.
         //  CORINFO_FLG_SHAREDINST            = 0x00020000, // This class is satisfies TypeHandle::IsCanonicalSubtype
         CORINFO_FLG_VAROBJSIZE = 0x00040000, // the object size varies depending of constructor args
@@ -648,6 +661,7 @@ namespace Internal.JitInterface
         CORINFO_FLG_CUSTOMLAYOUT = 0x00800000, // does this struct have custom layout?
         CORINFO_FLG_CONTAINS_GC_PTR = 0x01000000, // does the class contain a gc ptr ?
         CORINFO_FLG_DELEGATE = 0x02000000, // is this a subclass of delegate or multicast delegate ?
+
         // CORINFO_FLG_UNUSED = 0x04000000,
         CORINFO_FLG_CONTAINS_STACK_PTR = 0x08000000, // This class has a stack pointer inside it
         CORINFO_FLG_VARIANCE = 0x10000000, // MethodTable::HasVariance (sealed does *not* mean uncast-able)
@@ -1412,6 +1426,7 @@ namespace Internal.JitInterface
     public enum CorJitFlag : uint
     {
         CORJIT_FLAG_CALL_GETJITFLAGS = 0xffffffff, // Indicates that the JIT should retrieve flags in the form of a
+
         // pointer to a CORJIT_FLAGS value via ICorJitInfo::getJitFlags().
         CORJIT_FLAG_SPEED_OPT = 0,
         CORJIT_FLAG_SIZE_OPT = 1,

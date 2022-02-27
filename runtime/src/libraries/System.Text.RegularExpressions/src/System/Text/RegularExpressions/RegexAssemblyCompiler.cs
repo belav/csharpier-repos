@@ -169,16 +169,15 @@ namespace System.Text.RegularExpressions
             // base.options = options;
             // base.factory = new DerivedRegexRunnerFactory();
             Ldthis();
-            _ilg!
-                .Emit(
-                    OpCodes.Call,
-                    typeof(Regex).GetConstructor(
-                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                        null,
-                        Type.EmptyTypes,
-                        Array.Empty<ParameterModifier>()
-                    )!
-                );
+            _ilg!.Emit(
+                OpCodes.Call,
+                typeof(Regex).GetConstructor(
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    Type.EmptyTypes,
+                    Array.Empty<ParameterModifier>()
+                )!
+            );
             Ldthis();
             Ldstr(pattern);
             Stfld(RegexField(nameof(Regex.pattern)));

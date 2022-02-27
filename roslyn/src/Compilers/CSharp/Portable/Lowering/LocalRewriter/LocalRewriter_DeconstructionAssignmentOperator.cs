@@ -91,16 +91,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                         leftType,
                         conditional.Consequence,
                         isUsed: true
-                    )
-                        !,
+                    )!,
                     RewriteDeconstruction(
                         lhsTargets,
                         conversion,
                         leftType,
                         conditional.Alternative,
                         isUsed: true
-                    )
-                        !,
+                    )!,
                     conditional.ConstantValue,
                     leftType,
                     wasTargetTyped: true,
@@ -257,8 +255,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var tupleType = NamedTypeSymbol.CreateTuple(
                     locationOpt: null,
-                    elementTypesWithAnnotations: builder!
-                        .SelectAsArray(e => TypeWithAnnotations.Create(e.Type)),
+                    elementTypesWithAnnotations: builder!.SelectAsArray(
+                        e => TypeWithAnnotations.Create(e.Type)
+                    ),
                     elementLocations: default,
                     elementNames: default,
                     compilation: _compilation,

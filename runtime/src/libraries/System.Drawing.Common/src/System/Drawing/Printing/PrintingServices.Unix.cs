@@ -283,8 +283,7 @@ namespace System.Drawing.Printing
                     settings,
                     defsource,
                     paper_sources
-                )
-                    !;
+                )!;
                 settings.DefaultPageSettings.PaperSize = LoadPrinterPaperSizes(
                     ppd_handle,
                     settings,

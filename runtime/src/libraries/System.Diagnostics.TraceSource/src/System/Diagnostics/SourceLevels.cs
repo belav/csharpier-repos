@@ -15,6 +15,7 @@ namespace System.Diagnostics
         Warning = 0x07,
         Information = 0x0F,
         Verbose = 0x1F,
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         ActivityTracing = 0xFF00,
         All = unchecked((int)0xFFFFFFFF),

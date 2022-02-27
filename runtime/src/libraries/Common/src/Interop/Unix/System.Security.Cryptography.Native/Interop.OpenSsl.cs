@@ -315,8 +315,10 @@ internal static partial class Interop
 
             if (cacheSslContext)
             {
-                sslAuthenticationOptions.CertificateContext!.SslContexts!
-                    .TryGetValue(protocols, out sslCtxHandle);
+                sslAuthenticationOptions.CertificateContext!.SslContexts!.TryGetValue(
+                    protocols,
+                    out sslCtxHandle
+                );
             }
 
             if (sslCtxHandle == null)
@@ -330,8 +332,10 @@ internal static partial class Interop
 
                 if (
                     cacheSslContext
-                    && sslAuthenticationOptions.CertificateContext!.SslContexts!
-                        .TryAdd(protocols, newCtxHandle)
+                    && sslAuthenticationOptions.CertificateContext!.SslContexts!.TryAdd(
+                        protocols,
+                        newCtxHandle
+                    )
                 )
                 {
                     newCtxHandle = null;

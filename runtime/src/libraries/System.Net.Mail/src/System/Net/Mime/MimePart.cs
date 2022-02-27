@@ -214,8 +214,13 @@ namespace System.Net.Mime
             context._bytesLeft = Stream!.EndRead(result);
             if (context._bytesLeft > 0)
             {
-                IAsyncResult writeResult = context._outputStream!
-                    .BeginWrite(context._buffer, 0, context._bytesLeft, _writeCallback, context);
+                IAsyncResult writeResult = context._outputStream!.BeginWrite(
+                    context._buffer,
+                    0,
+                    context._bytesLeft,
+                    _writeCallback,
+                    context
+                );
                 if (writeResult.CompletedSynchronously)
                 {
                     WriteCallbackHandler(writeResult);
@@ -250,8 +255,13 @@ namespace System.Net.Mime
         {
             MimePartContext context = (MimePartContext)result.AsyncState!;
             context._outputStream!.EndWrite(result);
-            IAsyncResult readResult = Stream!
-                .BeginRead(context._buffer, 0, context._buffer.Length, _readCallback, context);
+            IAsyncResult readResult = Stream!.BeginRead(
+                context._buffer,
+                0,
+                context._buffer.Length,
+                _readCallback,
+                context
+            );
             if (readResult.CompletedSynchronously)
             {
                 ReadCallbackHandler(readResult);
@@ -289,8 +299,13 @@ namespace System.Net.Mime
 
             _readCallback = new AsyncCallback(ReadCallback);
             _writeCallback = new AsyncCallback(WriteCallback);
-            IAsyncResult readResult = Stream!
-                .BeginRead(context._buffer, 0, context._buffer.Length, _readCallback, context);
+            IAsyncResult readResult = Stream!.BeginRead(
+                context._buffer,
+                0,
+                context._buffer.Length,
+                _readCallback,
+                context
+            );
             if (readResult.CompletedSynchronously)
             {
                 ReadCallbackHandler(readResult);

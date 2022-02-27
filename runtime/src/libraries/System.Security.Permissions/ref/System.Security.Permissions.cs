@@ -4075,11 +4075,14 @@ namespace System.Security.Permissions
     public enum ReflectionPermissionFlag
     {
         NoFlags = 0,
+
         [System.ObsoleteAttribute]
         TypeInformation = 1,
         MemberAccess = 2,
+
         [System.ObsoleteAttribute]
         ReflectionEmit = 4,
+
         [System.ObsoleteAttribute]
         AllFlags = 7,
         RestrictedMemberAccess = 8,

@@ -878,11 +878,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             // type of `a ? b : c` to be the same as what `a ? (T)b : c` is converted to.
 
             if (
-                !originalConditionalTypeInfo.ConvertedType!
-                    .Equals(
-                        rewrittenConditionalTypeInfo.ConvertedType,
-                        SymbolEqualityComparer.IncludeNullability
-                    )
+                !originalConditionalTypeInfo.ConvertedType!.Equals(
+                    rewrittenConditionalTypeInfo.ConvertedType,
+                    SymbolEqualityComparer.IncludeNullability
+                )
             )
                 return false;
 

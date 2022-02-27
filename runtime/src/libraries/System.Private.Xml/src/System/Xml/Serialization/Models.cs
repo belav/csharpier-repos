@@ -369,8 +369,10 @@ namespace System.Xml.Serialization
             _fieldType = fieldType;
             _fieldTypeDesc = fieldTypeDesc;
             _memberInfo = memberInfo;
-            _checkShouldPersistMethodInfo = memberInfo.DeclaringType!
-                .GetMethod($"ShouldSerialize{memberInfo.Name}", Type.EmptyTypes);
+            _checkShouldPersistMethodInfo = memberInfo.DeclaringType!.GetMethod(
+                $"ShouldSerialize{memberInfo.Name}",
+                Type.EmptyTypes
+            );
             _checkShouldPersist = _checkShouldPersistMethodInfo != null;
 
             FieldInfo? specifiedField = memberInfo.DeclaringType.GetField(

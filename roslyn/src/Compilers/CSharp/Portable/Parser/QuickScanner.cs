@@ -32,6 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Dot,
             CompoundPunctStart,
             DoneAfterNext,
+
             // we are relying on Bad state immediately following Done
             // to be able to detect exiting conditions in one "state >= Done" test.
             // And we are also relying on this to be the last item in the enum.

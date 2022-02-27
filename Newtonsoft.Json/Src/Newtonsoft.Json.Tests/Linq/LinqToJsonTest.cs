@@ -1541,6 +1541,7 @@ keyword such as type of business.""
         {
             [EnumMember(Value = "SOME_VALUE")]
             SomeValue,
+
             [EnumMember(Value = "SOME_OTHER_VALUE")]
             SomeOtherValue
         }
@@ -1563,6 +1564,7 @@ keyword such as type of business.""
         {
             [EnumMember(Value = "SOME_VALUE")]
             SomeValue,
+
             [EnumMember(Value = "SOME_OTHER_VALUE")]
             SomeOtherValue
         }

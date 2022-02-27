@@ -509,13 +509,12 @@ namespace System.Net.Mail
 
                     if (_parent._readState == ReadState.Status0)
                     {
-                        _lines!
-                            .Add(
-                                new LineInfo(
-                                    _parent._statusCode,
-                                    _builder.ToString(0, _builder.Length - 2)
-                                )
-                            ); // return everything except CRLF
+                        _lines!.Add(
+                            new LineInfo(
+                                _parent._statusCode,
+                                _builder.ToString(0, _builder.Length - 2)
+                            )
+                        ); // return everything except CRLF
                         _builder = new StringBuilder();
                         _statusRead = 0;
 
@@ -532,13 +531,12 @@ namespace System.Net.Mail
                     }
                     else if (_parent._readState == ReadState.Done)
                     {
-                        _lines!
-                            .Add(
-                                new LineInfo(
-                                    _parent._statusCode,
-                                    _builder.ToString(0, _builder.Length - 2)
-                                )
-                            ); // return everything except CRLF
+                        _lines!.Add(
+                            new LineInfo(
+                                _parent._statusCode,
+                                _builder.ToString(0, _builder.Length - 2)
+                            )
+                        ); // return everything except CRLF
                         _parent._bufferedStream.Push(_parent._byteBuffer!, start, _read - start);
                         InvokeCallback();
                         return false;

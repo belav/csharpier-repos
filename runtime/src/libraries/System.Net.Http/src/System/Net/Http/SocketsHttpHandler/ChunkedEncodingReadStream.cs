@@ -266,8 +266,9 @@ namespace System.Net.Http
                 CancellationToken cancellationToken
             )
             {
-                CancellationTokenRegistration ctr = _connection!
-                    .RegisterCancellation(cancellationToken);
+                CancellationTokenRegistration ctr = _connection!.RegisterCancellation(
+                    cancellationToken
+                );
                 try
                 {
                     while (true)

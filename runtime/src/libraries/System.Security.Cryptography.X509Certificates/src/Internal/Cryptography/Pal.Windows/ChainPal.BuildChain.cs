@@ -51,8 +51,9 @@ namespace Internal.Cryptography.Pal
 
                     int applicationPolicyCount;
                     using (
-                        SafeHandle applicationPolicyOids = applicationPolicy!
-                            .ToLpstrArray(out applicationPolicyCount)
+                        SafeHandle applicationPolicyOids = applicationPolicy!.ToLpstrArray(
+                            out applicationPolicyCount
+                        )
                     )
                     {
                         if (!applicationPolicyOids.IsInvalid)
@@ -67,8 +68,9 @@ namespace Internal.Cryptography.Pal
 
                         int certificatePolicyCount;
                         using (
-                            SafeHandle certificatePolicyOids = certificatePolicy!
-                                .ToLpstrArray(out certificatePolicyCount)
+                            SafeHandle certificatePolicyOids = certificatePolicy!.ToLpstrArray(
+                                out certificatePolicyCount
+                            )
                         )
                         {
                             if (!certificatePolicyOids.IsInvalid)

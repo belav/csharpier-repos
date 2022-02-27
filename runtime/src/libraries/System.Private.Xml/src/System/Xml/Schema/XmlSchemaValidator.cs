@@ -1219,8 +1219,11 @@ namespace System.Xml.Schema
             }
             if (_context.ElementDecl != null)
             {
-                ArrayList? expected = _context.ElementDecl.ContentValidator!
-                    .ExpectedParticles(_context, false, _schemaSet);
+                ArrayList? expected = _context.ElementDecl.ContentValidator!.ExpectedParticles(
+                    _context,
+                    false,
+                    _schemaSet
+                );
                 if (expected != null)
                 {
                     return (expected.ToArray(typeof(XmlSchemaParticle)) as XmlSchemaParticle[])!;
@@ -1649,8 +1652,11 @@ namespace System.Xml.Schema
 
                 while (true)
                 {
-                    particle = _context.ElementDecl.ContentValidator!
-                        .ValidateElement(head, _context, out errorCode);
+                    particle = _context.ElementDecl.ContentValidator!.ValidateElement(
+                        head,
+                        _context,
+                        out errorCode
+                    );
                     if (particle != null)
                     { //Match found
                         break;
@@ -3367,8 +3373,11 @@ namespace System.Xml.Schema
                 if (getParticles)
                 {
                     Debug.Assert(schemaSet != null);
-                    names = context.ElementDecl.ContentValidator!
-                        .ExpectedParticles(context, true, schemaSet);
+                    names = context.ElementDecl.ContentValidator!.ExpectedParticles(
+                        context,
+                        true,
+                        schemaSet
+                    );
                 }
                 else
                 {

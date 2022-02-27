@@ -1821,15 +1821,14 @@ public partial class HubConnection : IAsyncDisposable
     {
         try
         {
-            return _reconnectPolicy!
-                .NextRetryDelay(
-                    new RetryContext
-                    {
-                        PreviousRetryCount = previousRetryCount,
-                        ElapsedTime = elapsedTime,
-                        RetryReason = retryReason,
-                    }
-                );
+            return _reconnectPolicy!.NextRetryDelay(
+                new RetryContext
+                {
+                    PreviousRetryCount = previousRetryCount,
+                    ElapsedTime = elapsedTime,
+                    RetryReason = retryReason,
+                }
+            );
         }
         catch (Exception ex)
         {

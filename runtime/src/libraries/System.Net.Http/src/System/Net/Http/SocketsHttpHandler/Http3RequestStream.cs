@@ -419,8 +419,9 @@ namespace System.Net.Http
                     {
                         timer = new Timer(
                             static o =>
-                                ((Http3RequestStream)o!)._expect100ContinueCompletionSource!
-                                    .TrySetResult(true),
+                                (
+                                    (Http3RequestStream)o!
+                                )._expect100ContinueCompletionSource!.TrySetResult(true),
                             this,
                             _connection.Pool.Settings._expect100ContinueTimeout,
                             Timeout.InfiniteTimeSpan
@@ -666,8 +667,8 @@ namespace System.Net.Http
 
             if (_connection.Pool.Settings._useCookies)
             {
-                string cookiesFromContainer = _connection.Pool.Settings._cookieContainer!
-                    .GetCookieHeader(request.RequestUri);
+                string cookiesFromContainer =
+                    _connection.Pool.Settings._cookieContainer!.GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer != string.Empty)
                 {
                     Encoding? valueEncoding =
@@ -1258,15 +1259,14 @@ namespace System.Net.Http
                         );
                         break;
                     case HeaderState.TrailingHeaders:
-                        _trailingHeaders!
-                            .Add(
-                                (
-                                    descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
-                                      ? descriptor.AsCustomHeader()
-                                      : descriptor,
-                                    headerValue
-                                )
-                            );
+                        _trailingHeaders!.Add(
+                            (
+                                descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
+                                  ? descriptor.AsCustomHeader()
+                                  : descriptor,
+                                headerValue
+                            )
+                        );
                         break;
                     default:
                         Debug.Fail(

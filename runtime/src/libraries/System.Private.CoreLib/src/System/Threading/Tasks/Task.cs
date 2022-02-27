@@ -29,18 +29,22 @@ namespace System.Threading.Tasks
         /// The task has been initialized but has not yet been scheduled.
         /// </summary>
         Created,
+
         /// <summary>
         /// The task is waiting to be activated and scheduled internally by the .NET Framework infrastructure.
         /// </summary>
         WaitingForActivation,
+
         /// <summary>
         /// The task has been scheduled for execution but has not yet begun executing.
         /// </summary>
         WaitingToRun,
+
         /// <summary>
         /// The task is running but has not yet completed.
         /// </summary>
         Running,
+
         // /// <summary>
         // /// The task is currently blocked in a wait state.
         // /// </summary>
@@ -50,16 +54,19 @@ namespace System.Threading.Tasks
         /// attached child tasks to complete.
         /// </summary>
         WaitingForChildrenToComplete,
+
         /// <summary>
         /// The task completed execution successfully.
         /// </summary>
         RanToCompletion,
+
         /// <summary>
         /// The task acknowledged cancellation by throwing an OperationCanceledException with its own CancellationToken
         /// while the token was in signaled state, or the task's CancellationToken was already signaled before the
         /// task started executing.
         /// </summary>
         Canceled,
+
         /// <summary>
         /// The task completed due to an unhandled exception.
         /// </summary>
@@ -7737,6 +7744,7 @@ namespace System.Threading.Tasks
         /// oversubscription may be warranted.
         /// </summary>
         LongRunning = 0x02,
+
         /// <summary>
         /// Specifies that a task is attached to a parent in the task hierarchy.
         /// </summary>
@@ -7746,6 +7754,7 @@ namespace System.Threading.Tasks
         /// Specifies that an InvalidOperationException will be thrown if an attempt is made to attach a child task to the created task.
         /// </summary>
         DenyChildAttach = 0x08,
+
         /// <summary>
         /// Prevents the ambient scheduler from being seen as the current scheduler in the created task.  This means that operations
         /// like StartNew or ContinueWith that are performed in the created task will see TaskScheduler.Default as the current scheduler.
@@ -7765,31 +7774,37 @@ namespace System.Threading.Tasks
         /// This option is not valid for multi-task continuations.
         /// </summary>
         NotOnRanToCompletion = 0x10000,
+
         /// <summary>
         /// Specifies that the continuation task should not be scheduled if its antecedent threw an unhandled
         /// exception. This option is not valid for multi-task continuations.
         /// </summary>
         NotOnFaulted = 0x20000,
+
         /// <summary>
         /// Specifies that the continuation task should not be scheduled if its antecedent was canceled. This
         /// option is not valid for multi-task continuations.
         /// </summary>
         NotOnCanceled = 0x40000,
+
         /// <summary>
         /// Specifies that the continuation task should be scheduled only if its antecedent ran to
         /// completion. This option is not valid for multi-task continuations.
         /// </summary>
         OnlyOnRanToCompletion = NotOnFaulted | NotOnCanceled,
+
         /// <summary>
         /// Specifies that the continuation task should be scheduled only if its antecedent threw an
         /// unhandled exception. This option is not valid for multi-task continuations.
         /// </summary>
         OnlyOnFaulted = NotOnRanToCompletion | NotOnCanceled,
+
         /// <summary>
         /// Specifies that the continuation task should be scheduled only if its antecedent was canceled.
         /// This option is not valid for multi-task continuations.
         /// </summary>
         OnlyOnCanceled = NotOnRanToCompletion | NotOnFaulted,
+
         /// <summary>
         /// Specifies that the continuation task should be executed synchronously. With this option
         /// specified, the continuation will be run on the same thread that causes the antecedent task to

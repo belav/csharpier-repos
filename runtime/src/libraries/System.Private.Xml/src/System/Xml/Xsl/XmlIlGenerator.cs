@@ -251,8 +251,13 @@ namespace System.Xml.Xsl
                     ndFunc.SourceLine == null
                         ? XmlILMethodAttributes.NonUser
                         : XmlILMethodAttributes.None;
-                methInfo = _module!
-                    .DefineMethod(ndFunc.DebugName!, typReturn, paramTypes, paramNames, methAttrs);
+                methInfo = _module!.DefineMethod(
+                    ndFunc.DebugName!,
+                    typReturn,
+                    paramTypes,
+                    paramNames,
+                    methAttrs
+                );
 
                 for (int arg = 0; arg < ndFunc.Arguments.Count; arg++)
                 {
@@ -282,14 +287,13 @@ namespace System.Xml.Xsl
                     ndRef.SourceLine == null
                         ? XmlILMethodAttributes.NonUser
                         : XmlILMethodAttributes.None;
-                methInfo = _module!
-                    .DefineMethod(
-                        ndRef.DebugName!.ToString(),
-                        typReturn,
-                        Type.EmptyTypes,
-                        Array.Empty<string>(),
-                        methAttrs
-                    );
+                methInfo = _module!.DefineMethod(
+                    ndRef.DebugName!.ToString(),
+                    typReturn,
+                    Type.EmptyTypes,
+                    Array.Empty<string>(),
+                    methAttrs
+                );
 
                 // Annotate function with MethodBuilder
                 XmlILAnnotation.Write(ndRef).FunctionBinding = methInfo;
@@ -325,14 +329,13 @@ namespace System.Xml.Xsl
             Label lblClone;
 
             // public static XPathNavigator SyncToNavigator(XPathNavigator, XPathNavigator);
-            meth = _module!
-                .DefineMethod(
-                    "SyncToNavigator",
-                    typeof(XPathNavigator),
-                    new Type[] { typeof(XPathNavigator), typeof(XPathNavigator) },
-                    new string?[] { null, null },
-                    XmlILMethodAttributes.NonUser | XmlILMethodAttributes.Raw
-                );
+            meth = _module!.DefineMethod(
+                "SyncToNavigator",
+                typeof(XPathNavigator),
+                new Type[] { typeof(XPathNavigator), typeof(XPathNavigator) },
+                new string?[] { null, null },
+                XmlILMethodAttributes.NonUser | XmlILMethodAttributes.Raw
+            );
 
             _helper!.MethodBegin(meth, null, false);
 
@@ -401,8 +404,10 @@ namespace System.Xml.Xsl
             ConstructorInfo cctor;
 
             staticData.GetObjectData(out data, out ebTypes);
-            fldInitData = _module!
-                .DefineInitializedData($"__{XmlQueryStaticData.DataFieldName}", data);
+            fldInitData = _module!.DefineInitializedData(
+                $"__{XmlQueryStaticData.DataFieldName}",
+                data
+            );
             fldData = _module.DefineField(XmlQueryStaticData.DataFieldName, typeof(object));
             fldTypes = _module.DefineField(XmlQueryStaticData.TypesFieldName, typeof(Type[]));
 

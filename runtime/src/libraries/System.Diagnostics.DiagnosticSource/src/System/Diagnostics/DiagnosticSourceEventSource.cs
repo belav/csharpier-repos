@@ -464,8 +464,10 @@ namespace System.Diagnostics
                 )
                 {
                     string? filterAndPayloadSpecs = null;
-                    command.Arguments!
-                        .TryGetValue("FilterAndPayloadSpecs", out filterAndPayloadSpecs);
+                    command.Arguments!.TryGetValue(
+                        "FilterAndPayloadSpecs",
+                        out filterAndPayloadSpecs
+                    );
 
                     if (!IsEnabled(EventLevel.Informational, Keywords.IgnoreShortCutKeywords))
                     {
@@ -1814,8 +1816,9 @@ namespace System.Diagnostics
                                 typeof(TObject).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo())
                             );
                             _propertyFetch =
-                                (Func<TObject, TProperty>)property.GetMethod!
-                                    .CreateDelegate(typeof(Func<TObject, TProperty>));
+                                (Func<TObject, TProperty>)property.GetMethod!.CreateDelegate(
+                                    typeof(Func<TObject, TProperty>)
+                                );
                         }
 
                         public override object? Fetch(object? obj)
@@ -1838,8 +1841,9 @@ namespace System.Diagnostics
                         {
                             Debug.Assert(typeof(TStruct) == type);
                             _propertyFetch =
-                                (StructFunc<TStruct, TProperty>)property.GetMethod!
-                                    .CreateDelegate(typeof(StructFunc<TStruct, TProperty>));
+                                (StructFunc<TStruct, TProperty>)property.GetMethod!.CreateDelegate(
+                                    typeof(StructFunc<TStruct, TProperty>)
+                                );
                         }
 
                         public override object? Fetch(object? obj)

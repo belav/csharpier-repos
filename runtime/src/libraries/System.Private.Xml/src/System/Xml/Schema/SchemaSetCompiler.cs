@@ -3577,12 +3577,11 @@ namespace System.Xml.Schema
                             else
                             { //Mixed with emptiable particle
                                 decl.DefaultValueTyped =
-                                    DatatypeImplementation.AnySimpleType.Datatype!
-                                        .ParseValue(
-                                            decl.DefaultValueRaw,
-                                            NameTable,
-                                            new SchemaNamespaceManager(xe)
-                                        );
+                                    DatatypeImplementation.AnySimpleType.Datatype!.ParseValue(
+                                        decl.DefaultValueRaw,
+                                        NameTable,
+                                        new SchemaNamespaceManager(xe)
+                                    );
                             }
                         }
                         else

@@ -121,8 +121,11 @@ namespace System.Xml.Schema
             if (context!.NeedValidateChildren)
             {
                 int errorCode = 0;
-                context.ElementDecl!.ContentValidator!
-                    .ValidateElement(elementName, context, out errorCode);
+                context.ElementDecl!.ContentValidator!.ValidateElement(
+                    elementName,
+                    context,
+                    out errorCode
+                );
                 if (errorCode < 0)
                 {
                     XmlSchemaValidator.ElementValidationError(
@@ -310,11 +313,10 @@ namespace System.Xml.Schema
                     try
                     {
                         reader.SchemaTypeObject = null;
-                        SchemaAttDef? attnDef = schemaInfo!
-                            .GetAttributeXdr(
-                                context.ElementDecl,
-                                QualifiedName(reader.LocalName, reader.NamespaceURI)
-                            );
+                        SchemaAttDef? attnDef = schemaInfo!.GetAttributeXdr(
+                            context.ElementDecl,
+                            QualifiedName(reader.LocalName, reader.NamespaceURI)
+                        );
                         if (attnDef != null)
                         {
                             if (

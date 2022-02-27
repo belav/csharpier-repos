@@ -400,8 +400,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var unspecifiedKind = (DateTime)converter(
                 new byte[] { 8, 163, 157, 186, 146, 57, 205, 128 }
-            )
-                !;
+            )!;
             Assert.Equal(
                 new DateTime(1973, 9, 3, 0, 10, 15, DateTimeKind.Unspecified),
                 unspecifiedKind

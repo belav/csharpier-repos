@@ -743,14 +743,13 @@ namespace System.Text.RegularExpressions
                                     );
                                 }
 
-                                charClass!
-                                    .AddCategoryFromName(
-                                        ParseProperty(),
-                                        ch != 'p',
-                                        caseInsensitive,
-                                        _pattern,
-                                        _currentPos
-                                    );
+                                charClass!.AddCategoryFromName(
+                                    ParseProperty(),
+                                    ch != 'p',
+                                    caseInsensitive,
+                                    _pattern,
+                                    _currentPos
+                                );
                             }
                             else
                             {

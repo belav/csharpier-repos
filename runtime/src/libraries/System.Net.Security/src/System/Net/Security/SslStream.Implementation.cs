@@ -1083,12 +1083,11 @@ namespace System.Net.Security
             lock (_handshakeLock)
             {
                 ThrowIfExceptionalOrNotAuthenticated();
-                status = _context!
-                    .Decrypt(
-                        new Span<byte>(_internalBuffer, _internalOffset, frameSize),
-                        out int decryptedOffset,
-                        out int decryptedCount
-                    );
+                status = _context!.Decrypt(
+                    new Span<byte>(_internalBuffer, _internalOffset, frameSize),
+                    out int decryptedOffset,
+                    out int decryptedCount
+                );
                 _decryptedBytesCount = decryptedCount;
                 if (decryptedCount > 0)
                 {

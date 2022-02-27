@@ -342,8 +342,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 // WORKAROUND:
                 // perf check metadata reference using newly created empty compilation with only metadata references.
-                compilation = project.LanguageServices.CompilationFactory!
-                    .CreateCompilation(project.AssemblyName, project.CompilationOptions!);
+                compilation = project.LanguageServices.CompilationFactory!.CreateCompilation(
+                    project.AssemblyName,
+                    project.CompilationOptions!
+                );
 
                 compilation = compilation.AddReferences(project.MetadataReferences);
             }

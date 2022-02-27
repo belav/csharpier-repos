@@ -741,16 +741,15 @@ namespace System.Collections.Immutable
                     int compareResult = keyComparer.Compare(key, _key);
                     if (compareResult > 0)
                     {
-                        var newRight = _right!
-                            .SetOrAdd(
-                                key,
-                                value,
-                                keyComparer,
-                                valueComparer,
-                                overwriteExistingValue,
-                                out replacedExistingValue,
-                                out mutated
-                            );
+                        var newRight = _right!.SetOrAdd(
+                            key,
+                            value,
+                            keyComparer,
+                            valueComparer,
+                            overwriteExistingValue,
+                            out replacedExistingValue,
+                            out mutated
+                        );
                         if (mutated)
                         {
                             result = this.Mutate(right: newRight);
@@ -758,16 +757,15 @@ namespace System.Collections.Immutable
                     }
                     else if (compareResult < 0)
                     {
-                        var newLeft = _left!
-                            .SetOrAdd(
-                                key,
-                                value,
-                                keyComparer,
-                                valueComparer,
-                                overwriteExistingValue,
-                                out replacedExistingValue,
-                                out mutated
-                            );
+                        var newLeft = _left!.SetOrAdd(
+                            key,
+                            value,
+                            keyComparer,
+                            valueComparer,
+                            overwriteExistingValue,
+                            out replacedExistingValue,
+                            out mutated
+                        );
                         if (mutated)
                         {
                             result = this.Mutate(left: newLeft);

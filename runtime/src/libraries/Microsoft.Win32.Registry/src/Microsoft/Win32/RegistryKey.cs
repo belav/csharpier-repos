@@ -867,10 +867,13 @@ namespace Microsoft.Win32
         {
             /// <summary>Dirty indicates that we have munged data that should be potentially written to disk.</summary>
             Dirty = 0x0001,
+
             /// <summary>SystemKey indicates that this is a "SYSTEMKEY" and shouldn't be "opened" or "closed".</summary>
             SystemKey = 0x0002,
+
             /// <summary>Access</summary>
             WriteAccess = 0x0004,
+
             /// <summary>Indicates if this key is for HKEY_PERFORMANCE_DATA</summary>
             PerfData = 0x0008
         }

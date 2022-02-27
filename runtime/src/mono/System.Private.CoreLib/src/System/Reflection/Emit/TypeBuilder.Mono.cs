@@ -1743,17 +1743,16 @@ namespace System.Reflection.Emit
         )
         {
             check_created();
-            return created!
-                .InvokeMember(
-                    name,
-                    invokeAttr,
-                    binder,
-                    target,
-                    args,
-                    modifiers,
-                    culture,
-                    namedParameters
-                );
+            return created!.InvokeMember(
+                name,
+                invokeAttr,
+                binder,
+                target,
+                args,
+                modifiers,
+                culture,
+                namedParameters
+            );
         }
 
         protected override bool IsArrayImpl()

@@ -112,10 +112,13 @@ namespace Microsoft.CodeAnalysis
 
         // VB TODO:
         ForLimit = 11,
+
         // VB TODO:
         ForStep = 12,
+
         // VB TODO:
         ForInitialValue = 13,
+
         // VB TODO:
         ForDirection = 14,
 
@@ -126,10 +129,13 @@ namespace Microsoft.CodeAnalysis
 
         // VB TODO
         OnErrorActiveHandler = 16,
+
         // VB TODO
         OnErrorResumeTarget = 17,
+
         // VB TODO
         OnErrorCurrentStatement = 18,
+
         // VB TODO
         OnErrorCurrentLine = 19,
 

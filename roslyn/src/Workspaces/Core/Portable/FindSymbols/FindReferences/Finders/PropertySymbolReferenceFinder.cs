@@ -318,8 +318,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     node,
                     syntaxFacts,
                     symbolsMatchAsync
-                )
-                    !;
+                )!;
             }
             else if (syntaxFacts.IsConditionalAccessExpression(node))
             {

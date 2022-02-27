@@ -544,8 +544,9 @@ namespace System.Net.Http
                 string? cookiesFromContainer = null;
                 if (_pool.Settings._useCookies)
                 {
-                    cookiesFromContainer = _pool.Settings._cookieContainer!
-                        .GetCookieHeader(request.RequestUri);
+                    cookiesFromContainer = _pool.Settings._cookieContainer!.GetCookieHeader(
+                        request.RequestUri
+                    );
                     if (cookiesFromContainer == "")
                     {
                         cookiesFromContainer = null;

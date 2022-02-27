@@ -164,8 +164,7 @@ namespace Newtonsoft.Json.Utilities
                     name,
                     context,
                     _getCSharpArgumentInfoArray
-                )
-                    !;
+                )!;
 #else
                 return Binder.GetMember(
                     CSharpBinderFlags.None, name, context, new[] {CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)});
@@ -184,8 +183,7 @@ namespace Newtonsoft.Json.Utilities
                     name,
                     context,
                     _setCSharpArgumentInfoArray
-                )
-                    !;
+                )!;
 #else
                 return Binder.SetMember(
                     CSharpBinderFlags.None, name, context, new[]

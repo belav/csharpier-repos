@@ -10,6 +10,7 @@ namespace System.DirectoryServices.Protocols
     {
         IsLeaf = 0x23,
         InvalidCredentials = 49,
+
         // The following values are defined in the LDAP C API standard, and are used in Windows Winldap.h.
         // See https://tools.ietf.org/html/draft-ietf-ldapext-ldap-c-api-05
         // Servers built from OpenLDAP headers use negative numbers for some, as shown below.

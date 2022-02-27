@@ -1307,14 +1307,19 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The Receive operation completed successfully, obtaining a value from the source.</summary>
             Success = 0,
+
             /// <summary>The timer expired before a value could be received.</summary>
             Timer = 1,
+
             /// <summary>The cancellation token had cancellation requested before a value could be received.</summary>
             Cancellation = 2,
+
             /// <summary>The source completed before a value could be received.</summary>
             SourceCompletion = 3,
+
             /// <summary>An error occurred while linking up the target.</summary>
             SourceProtocolError = 4,
+
             /// <summary>An error during cleanup after completion for another reason.</summary>
             ErrorDuringCleanup = 5
         }

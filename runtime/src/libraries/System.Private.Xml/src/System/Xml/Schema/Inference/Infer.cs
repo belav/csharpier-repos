@@ -1264,8 +1264,7 @@ namespace System.Xml.Schema
                                 childURI,
                                 xtr.LocalName,
                                 out parentSchema
-                            )
-                                !;
+                            )!;
                             InferElement(referencedElement, false, parentSchema!);
                             SetMinMaxOccurs(el, setMaxoccurs);
                             return referencedElement;
@@ -1312,8 +1311,7 @@ namespace System.Xml.Schema
                             childURI,
                             xtr.LocalName,
                             out parentSchema
-                        )
-                            !;
+                        )!;
                         InferElement(referencedElement, false, parentSchema!);
                         SetMinMaxOccurs(el, false);
                         return el;
@@ -1354,8 +1352,7 @@ namespace System.Xml.Schema
                                 childURI,
                                 xtr.LocalName,
                                 out parentSchema
-                            )
-                                !;
+                            )!;
                             InferElement(referencedElement!, false, parentSchema!);
                             SetMinMaxOccurs(el, setMaxoccurs);
                             return referencedElement;

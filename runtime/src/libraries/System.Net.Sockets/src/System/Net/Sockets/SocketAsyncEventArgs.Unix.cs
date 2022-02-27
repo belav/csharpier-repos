@@ -575,11 +575,10 @@ namespace System.Net.Sockets
                 0,
                 _acceptAddressBufferCount
             );
-            _acceptSocket = _currentSocket!
-                .CreateAcceptSocket(
-                    SocketPal.CreateSocket(_acceptedFileDescriptor),
-                    _currentSocket._rightEndPoint!.Create(remoteSocketAddress)
-                );
+            _acceptSocket = _currentSocket!.CreateAcceptSocket(
+                SocketPal.CreateSocket(_acceptedFileDescriptor),
+                _currentSocket._rightEndPoint!.Create(remoteSocketAddress)
+            );
             return SocketError.Success;
         }
 

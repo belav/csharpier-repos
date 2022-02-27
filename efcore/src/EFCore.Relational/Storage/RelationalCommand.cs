@@ -531,33 +531,31 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     _stopwatch.Restart();
 
-                    var interceptionResult = logger!
-                        .CommandReaderExecuting(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            startTime,
-                            parameterObject.CommandSource
-                        );
+                    var interceptionResult = logger!.CommandReaderExecuting(
+                        connection,
+                        command,
+                        context,
+                        commandId,
+                        connection.ConnectionId,
+                        startTime,
+                        parameterObject.CommandSource
+                    );
 
                     reader = interceptionResult.HasResult
                         ? interceptionResult.Result
                         : command.ExecuteReader();
 
-                    reader = logger!
-                        .CommandReaderExecuted(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            reader,
-                            startTime,
-                            _stopwatch.Elapsed,
-                            parameterObject.CommandSource
-                        );
+                    reader = logger!.CommandReaderExecuted(
+                        connection,
+                        command,
+                        context,
+                        commandId,
+                        connection.ConnectionId,
+                        reader,
+                        startTime,
+                        _stopwatch.Elapsed,
+                        parameterObject.CommandSource
+                    );
                 }
                 else
                 {

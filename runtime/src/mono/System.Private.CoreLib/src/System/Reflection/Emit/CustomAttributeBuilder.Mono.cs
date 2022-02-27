@@ -720,11 +720,10 @@ namespace System.Reflection.Emit
                 if (named_type == 0x53)
                 {
                     /* Field */
-                    FieldInfo? fi = ctor.DeclaringType!
-                        .GetField(
-                            name,
-                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                        );
+                    FieldInfo? fi = ctor.DeclaringType!.GetField(
+                        name,
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    );
                     if (fi == null)
                         throw new Exception(
                             "Custom attribute type '"

@@ -416,16 +416,15 @@ namespace System.Data
                             {
                                 if (!_isStandAlonetable)
                                 {
-                                    _dataSet!
-                                        .RaiseMergeFailed(
-                                            targetTable,
-                                            SR.Format(
-                                                SR.DataMerge_MissingColumnDefinition,
-                                                table.TableName,
-                                                src.ColumnName
-                                            ),
-                                            _missingSchemaAction
-                                        );
+                                    _dataSet!.RaiseMergeFailed(
+                                        targetTable,
+                                        SR.Format(
+                                            SR.DataMerge_MissingColumnDefinition,
+                                            table.TableName,
+                                            src.ColumnName
+                                        ),
+                                        _missingSchemaAction
+                                    );
                                 }
                                 else
                                 {
@@ -454,15 +453,11 @@ namespace System.Data
                             )
                             {
                                 if (!_isStandAlonetable)
-                                    _dataSet!
-                                        .RaiseMergeFailed(
-                                            targetTable,
-                                            SR.Format(
-                                                SR.DataMerge_DataTypeMismatch,
-                                                src.ColumnName
-                                            ),
-                                            MissingSchemaAction.Error
-                                        );
+                                    _dataSet!.RaiseMergeFailed(
+                                        targetTable,
+                                        SR.Format(SR.DataMerge_DataTypeMismatch, src.ColumnName),
+                                        MissingSchemaAction.Error
+                                    );
                                 else
                                     throw ExceptionBuilder.MergeFailed(
                                         SR.Format(SR.DataMerge_DataTypeMismatch, src.ColumnName)
@@ -505,12 +500,11 @@ namespace System.Data
                         }
                         else if (tablePKey.Length != 0)
                         {
-                            _dataSet!
-                                .RaiseMergeFailed(
-                                    targetTable,
-                                    SR.DataMerge_PrimaryKeyMismatch,
-                                    _missingSchemaAction
-                                );
+                            _dataSet!.RaiseMergeFailed(
+                                targetTable,
+                                SR.DataMerge_PrimaryKeyMismatch,
+                                _missingSchemaAction
+                            );
                         }
                     }
                     else
@@ -526,16 +520,15 @@ namespace System.Data
                                 ) != 0
                             )
                             {
-                                _dataSet!
-                                    .RaiseMergeFailed(
-                                        table,
-                                        SR.Format(
-                                            SR.DataMerge_PrimaryKeyColumnsMismatch,
-                                            targetPKey[i].ColumnName,
-                                            tablePKey[i].ColumnName
-                                        ),
-                                        _missingSchemaAction
-                                    );
+                                _dataSet!.RaiseMergeFailed(
+                                    table,
+                                    SR.Format(
+                                        SR.DataMerge_PrimaryKeyColumnsMismatch,
+                                        targetPKey[i].ColumnName,
+                                        tablePKey[i].ColumnName
+                                    ),
+                                    _missingSchemaAction
+                                );
                             }
                         }
                     }

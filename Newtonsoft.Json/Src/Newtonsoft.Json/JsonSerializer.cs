@@ -861,8 +861,11 @@ namespace Newtonsoft.Json
 
             if (traceJsonReader != null)
             {
-                TraceWriter!
-                    .Trace(TraceLevel.Verbose, traceJsonReader.GetDeserializedJsonMessage(), null);
+                TraceWriter!.Trace(
+                    TraceLevel.Verbose,
+                    traceJsonReader.GetDeserializedJsonMessage(),
+                    null
+                );
             }
 
             ResetReader(
@@ -954,8 +957,11 @@ namespace Newtonsoft.Json
 
             if (traceJsonReader != null)
             {
-                TraceWriter!
-                    .Trace(TraceLevel.Verbose, traceJsonReader.GetDeserializedJsonMessage(), null);
+                TraceWriter!.Trace(
+                    TraceLevel.Verbose,
+                    traceJsonReader.GetDeserializedJsonMessage(),
+                    null
+                );
             }
 
             ResetReader(
@@ -1245,8 +1251,11 @@ namespace Newtonsoft.Json
 
             if (traceJsonWriter != null)
             {
-                TraceWriter!
-                    .Trace(TraceLevel.Verbose, traceJsonWriter.GetSerializedJsonMessage(), null);
+                TraceWriter!.Trace(
+                    TraceLevel.Verbose,
+                    traceJsonWriter.GetSerializedJsonMessage(),
+                    null
+                );
             }
 
             // reset writer back to previous options

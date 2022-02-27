@@ -27,8 +27,10 @@ namespace System.Buffers
         {
             /// <summary>The pool is allocating a buffer to be pooled in a bucket.</summary>
             Pooled,
+
             /// <summary>The requested buffer size was too large to be pooled.</summary>
             OverMaximumSize,
+
             /// <summary>The pool has already allocated for pooling as many buffers of a particular size as it's allowed.</summary>
             PoolExhausted
         }
@@ -38,6 +40,7 @@ namespace System.Buffers
         {
             /// <summary>The pool is full for buffers of the specified size.</summary>
             Full,
+
             /// <summary>The buffer size was too large to be pooled.</summary>
             OverMaximumSize,
         }

@@ -789,8 +789,7 @@ namespace System.DirectoryServices.ActiveDirectory
                             _isSingleValued = (bool)GetValueFromCache(
                                 PropertyManager.IsSingleValued,
                                 true
-                            )
-                                !;
+                            )!;
                         }
                         _isSingleValuedInitialized = true;
                     }
@@ -1229,8 +1228,7 @@ namespace System.DirectoryServices.ActiveDirectory
                         _schemaGuidBinaryForm = (byte[])GetValueFromCache(
                             PropertyManager.SchemaIDGuid,
                             true
-                        )
-                            !;
+                        )!;
                     }
                 }
 

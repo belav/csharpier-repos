@@ -1020,18 +1020,16 @@ namespace Microsoft.CodeAnalysis
                                 {
                                     compilationWithoutGenerators =
                                         compilationWithoutGenerators.WithScriptCompilationInfo(
-                                            compilationWithoutGenerators.ScriptCompilationInfo!
-                                                .WithPreviousScriptCompilation(
-                                                    previousSubmissionCompilation!
-                                                )
+                                            compilationWithoutGenerators.ScriptCompilationInfo!.WithPreviousScriptCompilation(
+                                                previousSubmissionCompilation!
+                                            )
                                         );
 
                                     compilationWithStaleGeneratedTrees =
                                         compilationWithStaleGeneratedTrees?.WithScriptCompilationInfo(
-                                            compilationWithStaleGeneratedTrees.ScriptCompilationInfo!
-                                                .WithPreviousScriptCompilation(
-                                                    previousSubmissionCompilation!
-                                                )
+                                            compilationWithStaleGeneratedTrees.ScriptCompilationInfo!.WithPreviousScriptCompilation(
+                                                previousSubmissionCompilation!
+                                            )
                                         );
                                 }
                             }
@@ -1126,8 +1124,10 @@ namespace Microsoft.CodeAnalysis
                             }
 
                             generatorInfo = generatorInfo.WithDriver(
-                                generatorInfo.Driver!
-                                    .RunGenerators(compilationWithoutGenerators, cancellationToken)
+                                generatorInfo.Driver!.RunGenerators(
+                                    compilationWithoutGenerators,
+                                    cancellationToken
+                                )
                             );
                             var runResult = generatorInfo.Driver!.GetRunResult();
 

@@ -924,15 +924,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                 }
 
-                result = conditionalLeft!
-                    .Update(
-                        conditionalLeft.Receiver,
-                        conditionalLeft.HasValueMethodOpt,
-                        whenNotNull: result,
-                        whenNullOpt: whenNullOpt,
-                        id: conditionalLeft.Id,
-                        type: result.Type!
-                    );
+                result = conditionalLeft!.Update(
+                    conditionalLeft.Receiver,
+                    conditionalLeft.HasValueMethodOpt,
+                    whenNotNull: result,
+                    whenNullOpt: whenNullOpt,
+                    id: conditionalLeft.Id,
+                    type: result.Type!
+                );
             }
 
             return result;

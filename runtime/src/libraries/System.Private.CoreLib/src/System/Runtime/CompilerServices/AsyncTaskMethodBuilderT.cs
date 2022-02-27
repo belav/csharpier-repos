@@ -316,8 +316,7 @@ namespace System.Runtime.CompilerServices
             {
                 Debug.Assert(s is AsyncStateMachineBox<TStateMachine>);
                 // Only used privately to pass directly to EC.Run
-                Unsafe.As<AsyncStateMachineBox<TStateMachine>>(s).StateMachine!
-                    .MoveNext();
+                Unsafe.As<AsyncStateMachineBox<TStateMachine>>(s).StateMachine!.MoveNext();
             }
 
             /// <summary>A delegate to the <see cref="MoveNext()"/> method.</summary>

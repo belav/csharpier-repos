@@ -283,10 +283,9 @@ namespace System.Net.Sockets
 
         [SupportedOSPlatform("windows")]
         private void SetIPProtectionLevel(bool allowed) =>
-            _serverSocket!
-                .SetIPProtectionLevel(
-                    allowed ? IPProtectionLevel.Unrestricted : IPProtectionLevel.EdgeRestricted
-                );
+            _serverSocket!.SetIPProtectionLevel(
+                allowed ? IPProtectionLevel.Unrestricted : IPProtectionLevel.EdgeRestricted
+            );
 
         private void CreateNewSocketIfNeeded()
         {
