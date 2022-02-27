@@ -72,6 +72,7 @@ internal static partial class Interop
             inodefs = 0x11307854,
             inotifyfs = 0x2BAD1DEA,
             isofs = 0x9660,
+
             // isofs = 0x4004, // R_WIN
             // isofs = 0x4000, // WIN
             jffs = 0x07C0,

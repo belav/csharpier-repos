@@ -129,6 +129,7 @@ namespace System.Reflection.PortableExecutable
         TypeOver = 0x00000400, // Reserved.
         LinkerRemove = 0x00000800, // Section contents will not become part of image.
         LinkerComdat = 0x00001000, // Section contents comdat.
+
         //                               0x00002000  // Reserved.
         MemProtected = 0x00004000,
         NoDeferSpecExc = 0x00004000, // Reset speculative exceptions handling bits in the TLB entries for this section.
@@ -153,6 +154,7 @@ namespace System.Reflection.PortableExecutable
         Align2048Bytes = 0x00C00000, //
         Align4096Bytes = 0x00D00000, //
         Align8192Bytes = 0x00E00000, //
+
         // Unused                     0x00F00000
         AlignMask = 0x00F00000,
         LinkerNRelocOvfl = 0x01000000, // Section contains extended relocations.

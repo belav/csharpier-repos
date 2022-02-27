@@ -124,9 +124,11 @@ namespace Microsoft.Win32
             EvtVarTypeSid = 19,
             EvtVarTypeHexInt32 = 20,
             EvtVarTypeHexInt64 = 21,
+
             // these types used internally
             EvtVarTypeEvtHandle = 32,
             EvtVarTypeEvtXml = 35,
+
             // Array = 128
             EvtVarTypeStringArray = 129,
             EvtVarTypeUInt32Array = 136

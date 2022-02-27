@@ -634,6 +634,7 @@ namespace AutoMapper.Tests
         public enum EnumWithEnumMemberAttribute
         {
             Null,
+
             [EnumMember(Value = "Eins")]
             One
         }
@@ -696,6 +697,7 @@ namespace AutoMapper.Tests
         public enum EnumWithEnumMemberAttribute
         {
             Null,
+
             [EnumMember(Value = "Eins")]
             One
         }

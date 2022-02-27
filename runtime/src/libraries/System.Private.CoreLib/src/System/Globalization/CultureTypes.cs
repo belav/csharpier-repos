@@ -16,10 +16,12 @@ namespace System.Globalization
         AllCultures = NeutralCultures | SpecificCultures | InstalledWin32Cultures,
         UserCustomCulture = 0x0008, // User defined custom culture
         ReplacementCultures = 0x0010, // User defined replacement custom culture.
+
         [Obsolete(
             "CultureTypes.WindowsOnlyCultures has been deprecated. Use other values in CultureTypes instead."
         )]
         WindowsOnlyCultures = 0x0020, // this will always return empty list.
+
         [Obsolete(
             "CultureTypes.FrameworkCultures has been deprecated. Use other values in CultureTypes instead."
         )]

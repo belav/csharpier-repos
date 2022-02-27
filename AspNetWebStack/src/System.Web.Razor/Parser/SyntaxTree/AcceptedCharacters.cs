@@ -11,6 +11,7 @@ namespace System.Web.Razor.Parser.SyntaxTree
         None = 0,
         NewLine = 1,
         WhiteSpace = 2,
+
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1702:CompoundWordsShouldBeCasedCorrectly",
@@ -20,6 +21,7 @@ namespace System.Web.Razor.Parser.SyntaxTree
         NonWhiteSpace = 4,
         AllWhiteSpace = NewLine | WhiteSpace,
         Any = AllWhiteSpace | NonWhiteSpace,
+
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1702:CompoundWordsShouldBeCasedCorrectly",

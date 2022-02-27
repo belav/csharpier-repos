@@ -24,18 +24,22 @@ namespace Internal.TypeSystem
     public enum TargetAbi
     {
         Unknown,
+
         /// <summary>
         /// Cross-platform console model
         /// </summary>
         CoreRT,
+
         /// <summary>
         /// model for armel execution model
         /// </summary>
         CoreRTArmel,
+
         /// <summary>
         /// Jit runtime ABI
         /// </summary>
         Jit,
+
         /// <summary>
         /// Cross-platform portable C++ codegen
         /// </summary>

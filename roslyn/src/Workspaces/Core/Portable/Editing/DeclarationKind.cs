@@ -57,6 +57,7 @@ namespace Microsoft.CodeAnalysis.Editing
         AddAccessor,
         RemoveAccessor,
         RaiseAccessor,
+
         [Obsolete($"This value is not used. Use {nameof(Class)} instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         RecordClass,

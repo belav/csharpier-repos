@@ -12,6 +12,7 @@ namespace Internal.TypeSystem
     public enum MethodSignatureFlags
     {
         None = 0x0000,
+
         // TODO: Generic, etc.
 
         UnmanagedCallingConventionMask = 0x000F,

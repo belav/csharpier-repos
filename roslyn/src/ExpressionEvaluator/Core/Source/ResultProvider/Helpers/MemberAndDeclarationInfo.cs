@@ -21,24 +21,29 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// A declaration with this name has not been encountered.
         /// </summary>
         None = 0,
+
         /// <summary>
         /// This member is defined on the declared type or one of its base classes.
         /// </summary>
         FromDeclaredTypeOrBase = 0,
+
         /// <summary>
         /// This member is defined on a type that inherits from the declared type (is more derived).
         /// </summary>
         FromSubTypeOfDeclaredType = 1,
+
         /// <summary>
         /// This member should be hidden (under "Non-Public members" node), because Just My Code is on and
         /// no symbols have been loaded for the declaring type's module.
         /// </summary>
         HideNonPublic = 1 << 2,
+
         /// <summary>
         /// More than one non-virtual member with this name exists in the type hierarchy.
         /// The ResultProvider should include the declaring type of this member in the member name to disambiguate.
         /// </summary>
         IncludeTypeInMemberName = 1 << 3,
+
         /// <summary>
         /// The full name for this member access expression will require a cast to the declaring type.
         /// </summary>

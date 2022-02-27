@@ -16,6 +16,7 @@ namespace System.Reflection
         Family = 0x0004, // Accessible only by type and sub-types.
         FamORAssem = 0x0005, // Accessibly by sub-types anywhere, plus anyone in assembly.
         Public = 0x0006, // Accessibly by anyone who has visibility to this scope.
+
         // end member access mask
 
         // field contract attributes.

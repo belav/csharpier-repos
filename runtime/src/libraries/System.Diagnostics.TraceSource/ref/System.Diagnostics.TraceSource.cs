@@ -129,6 +129,7 @@ namespace System.Diagnostics
         Warning = 7,
         Information = 15,
         Verbose = 31,
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]

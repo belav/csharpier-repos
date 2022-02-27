@@ -4832,10 +4832,12 @@ namespace System.Diagnostics.Tracing
         /// This specifies none of the special configuration options should be enabled.
         /// </summary>
         Default = 0,
+
         /// <summary>
         /// Normally an EventSource NEVER throws; setting this option will tell it to throw when it encounters errors.
         /// </summary>
         ThrowOnEventWriteErrors = 1,
+
         /// <summary>
         /// Setting this option is a directive to the ETW listener should use manifest-based format when
         /// firing events. This is the default option when defining a type derived from EventSource
@@ -4843,6 +4845,7 @@ namespace System.Diagnostics.Tracing
         /// Only one of EtwManifestEventFormat or EtwSelfDescribingEventFormat should be specified
         /// </summary>
         EtwManifestEventFormat = 4,
+
         /// <summary>
         /// Setting this option is a directive to the ETW listener should use self-describing event format
         /// when firing events. This is the default option when creating a new instance of the EventSource
@@ -6045,10 +6048,13 @@ namespace System.Diagnostics.Tracing
     {
         /// <summary>The admin channel</summary>
         Admin = 1,
+
         /// <summary>The operational channel</summary>
         Operational,
+
         /// <summary>The Analytic channel</summary>
         Analytic,
+
         /// <summary>The debug channel</summary>
         Debug,
     }
@@ -6065,10 +6071,12 @@ namespace System.Diagnostics.Tracing
         /// This is the default isolation level. All channels that specify Application isolation use the same ETW session
         /// </summary>
         Application = 1,
+
         /// <summary>
         /// All channels that specify System isolation use the same ETW session
         /// </summary>
         System,
+
         /// <summary>
         /// Use sparingly! When specifying Custom isolation, a separate ETW session is created for the channel.
         /// Using Custom isolation lets you control the access permissions for the channel and backing file.
@@ -6088,14 +6096,17 @@ namespace System.Diagnostics.Tracing
         /// Update EventSource state
         /// </summary>
         Update = 0,
+
         /// <summary>
         /// Request EventSource to generate and send its manifest
         /// </summary>
         SendManifest = -1,
+
         /// <summary>
         /// Enable event
         /// </summary>
         Enable = -2,
+
         /// <summary>
         /// Disable event
         /// </summary>
@@ -6230,19 +6241,23 @@ namespace System.Diagnostics.Tracing
         /// Only the resources associated with current UI culture are included in the  manifest
         /// </summary>
         None = 0x0,
+
         /// <summary>
         /// Throw exceptions for any inconsistency encountered
         /// </summary>
         Strict = 0x1,
+
         /// <summary>
         /// Generate a "resources" node under "localization" for every satellite assembly provided
         /// </summary>
         AllCultures = 0x2,
+
         /// <summary>
         /// Generate the manifest only if the event source needs to be registered on the machine,
         /// otherwise return null (but still perform validation if Strict is specified)
         /// </summary>
         OnlyIfNeededForRegistration = 0x4,
+
         /// <summary>
         /// When generating the manifest do *not* enforce the rule that the current EventSource class
         /// must be the base class for the user-defined type passed in. This allows validation of .net

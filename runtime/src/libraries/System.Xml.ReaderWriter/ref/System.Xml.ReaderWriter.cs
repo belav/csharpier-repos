@@ -123,11 +123,13 @@ namespace System.Xml
     public enum ValidationType
     {
         None = 0,
+
         [System.ObsoleteAttribute(
             "ValidationType.Auto has been deprecated. Use DTD or Schema instead."
         )]
         Auto = 1,
         DTD = 2,
+
         [System.ObsoleteAttribute(
             "XDR Validation through XmlValidatingReader has been deprecated and is not supported."
         )]
@@ -5899,10 +5901,13 @@ namespace System.Xml.Schema
     {
         [System.Xml.Serialization.XmlIgnoreAttribute]
         None = 0,
+
         [System.Xml.Serialization.XmlEnumAttribute("skip")]
         Skip = 1,
+
         [System.Xml.Serialization.XmlEnumAttribute("lax")]
         Lax = 2,
+
         [System.Xml.Serialization.XmlEnumAttribute("strict")]
         Strict = 3,
     }
@@ -5968,18 +5973,25 @@ namespace System.Xml.Schema
     {
         [System.Xml.Serialization.XmlEnumAttribute("")]
         Empty = 0,
+
         [System.Xml.Serialization.XmlEnumAttribute("substitution")]
         Substitution = 1,
+
         [System.Xml.Serialization.XmlEnumAttribute("extension")]
         Extension = 2,
+
         [System.Xml.Serialization.XmlEnumAttribute("restriction")]
         Restriction = 4,
+
         [System.Xml.Serialization.XmlEnumAttribute("list")]
         List = 8,
+
         [System.Xml.Serialization.XmlEnumAttribute("union")]
         Union = 16,
+
         [System.Xml.Serialization.XmlEnumAttribute("#all")]
         All = 255,
+
         [System.Xml.Serialization.XmlIgnoreAttribute]
         None = 256,
     }
@@ -6282,8 +6294,10 @@ namespace System.Xml.Schema
     {
         [System.Xml.Serialization.XmlIgnoreAttribute]
         None = 0,
+
         [System.Xml.Serialization.XmlEnumAttribute("qualified")]
         Qualified = 1,
+
         [System.Xml.Serialization.XmlEnumAttribute("unqualified")]
         Unqualified = 2,
     }
@@ -7420,10 +7434,13 @@ namespace System.Xml.Schema
     {
         [System.Xml.Serialization.XmlIgnoreAttribute]
         None = 0,
+
         [System.Xml.Serialization.XmlEnumAttribute("optional")]
         Optional = 1,
+
         [System.Xml.Serialization.XmlEnumAttribute("prohibited")]
         Prohibited = 2,
+
         [System.Xml.Serialization.XmlEnumAttribute("required")]
         Required = 3,
     }

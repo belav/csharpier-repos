@@ -93,6 +93,7 @@ namespace EventNS
         zero = 0,
         one = 1,
         two = 2,
+
         [Obsolete("message", false)]
         three = 4
     }

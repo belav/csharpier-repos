@@ -24,15 +24,18 @@ namespace Microsoft.Interop
         /// This is the default behavior.
         /// </summary>
         Default = 0x0,
+
         /// <summary>
         /// Marshal contents from managed to native only.
         /// This is the default behavior.
         /// </summary>
         In = 0x1,
+
         /// <summary>
         /// Marshal contents from native to managed only.
         /// </summary>
         Out = 0x2,
+
         /// <summary>
         /// Marshal contents both to and from native.
         /// </summary>

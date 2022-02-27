@@ -18,6 +18,7 @@ namespace System.Security.AccessControl
         WriteExtendedAttributes = 0x000010,
         ExecuteFile = 0x000020, // For files
         Traverse = ExecuteFile, // For directories
+
         // DeleteSubdirectoriesAndFiles only makes sense on directories, but
         // the shell explicitly sets it for files in its UI.  So we'll include
         // it in FullControl.
@@ -28,6 +29,7 @@ namespace System.Security.AccessControl
         ReadPermissions = 0x020000,
         ChangePermissions = 0x040000,
         TakeOwnership = 0x080000,
+
         // From the Core File Services team, CreateFile always requires
         // SYNCHRONIZE access.  Very tricksy, CreateFile is.
         Synchronize = 0x100000, // Can we wait on the handle?

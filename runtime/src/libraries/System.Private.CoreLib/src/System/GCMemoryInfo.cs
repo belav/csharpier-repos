@@ -47,10 +47,13 @@ namespace System
     {
         /// <summary>Any kind of collection.</summary>
         Any = 0,
+
         /// <summary>A gen0 or gen1 collection.</summary>
         Ephemeral = 1,
+
         /// <summary>A blocking gen2 collection.</summary>
         FullBlocking = 2,
+
         /// <summary>A background collection.</summary>
         /// <remarks>This is always a gen2 collection.</remarks>
         Background = 3

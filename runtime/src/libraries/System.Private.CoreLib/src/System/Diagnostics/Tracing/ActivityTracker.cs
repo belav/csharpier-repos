@@ -540,6 +540,7 @@ namespace System.Diagnostics.Tracing
                 End = 0x0, // ends the list.   No valid value has this prefix.
                 LastImmediateValue = 0xA,
                 PrefixCode = 0xB, // all the 'long' encodings go here.  If the next nibble is MultiByte1-4
+
                 // than this is a 'overflow' id.   Unlike the hierarchical IDs these are
                 // allocated densely but don't tell you anything about nesting. we use
                 // these when we run out of space in the GUID to store the path.
