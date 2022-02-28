@@ -223,26 +223,26 @@ class Tests
     }
 
     /* FIXME Verify the type of the cattr with the one on the field/property
-	[BadAttr (Field2 = 1)]
-	public static int test_0_bad_field () {
-		try {
-			MethodBase.GetCurrentMethod ().GetCustomAttributes (false);
-			return 1;
-		} catch (CustomAttributeFormatException) {
-			return 0;
-		}
-	}
+    [BadAttr (Field2 = 1)]
+    public static int test_0_bad_field () {
+        try {
+            MethodBase.GetCurrentMethod ().GetCustomAttributes (false);
+            return 1;
+        } catch (CustomAttributeFormatException) {
+            return 0;
+        }
+    }
 
-	[BadAttr (Property2 = 1)]
-	public static int test_0_bad_property () {
-		try {
-			MethodBase.GetCurrentMethod ().GetCustomAttributes (false);
-			return 1;
-		} catch (CustomAttributeFormatException) {
-			return 0;
-		}
-	}
-	*/
+    [BadAttr (Property2 = 1)]
+    public static int test_0_bad_property () {
+        try {
+            MethodBase.GetCurrentMethod ().GetCustomAttributes (false);
+            return 1;
+        } catch (CustomAttributeFormatException) {
+            return 0;
+        }
+    }
+    */
 
     [BadAttr(Property3 = 1)]
     public static int test_0_bad_property_no_setter()

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
-	Test_InterfaceInheritanceTest2 that variance is not inherited across interfaces.
-	So if the parent interface is co/contra variant but the child interface is not variant 
-	we can use the generic type parameter of the child in any position 
-	(both as return parameter and argument type to a method)
+    Test_InterfaceInheritanceTest2 that variance is not inherited across interfaces.
+    So if the parent interface is co/contra variant but the child interface is not variant
+    we can use the generic type parameter of the child in any position
+    (both as return parameter and argument type to a method)
 */
 
 using System;

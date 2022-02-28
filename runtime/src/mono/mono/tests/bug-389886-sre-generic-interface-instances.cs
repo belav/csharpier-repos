@@ -93,45 +93,45 @@ namespace TestApp
             method.Invoke(null, null);
 
             /*Type gtd = typeof (A<>);
-			Type oi = gtd.MakeGenericType (gtd.GetGenericArguments ());
+            Type oi = gtd.MakeGenericType (gtd.GetGenericArguments ());
 
-			if (oi != gtd) {
-				Console.WriteLine ("fully open instantiation of static type not the same of the generic type definition");
-				return 1;
-			}
+            if (oi != gtd) {
+                Console.WriteLine ("fully open instantiation of static type not the same of the generic type definition");
+                return 1;
+            }
 
-			SetUp ();
-			TypeBuilder tb = module.DefineType ("Nullable`1", TypeAttributes.Public);
-			Type[] args = tb.DefineGenericParameters ("T");
-			Type type = tb.MakeGenericType (args);
+            SetUp ();
+            TypeBuilder tb = module.DefineType ("Nullable`1", TypeAttributes.Public);
+            Type[] args = tb.DefineGenericParameters ("T");
+            Type type = tb.MakeGenericType (args);
 
-			if (type == tb) {
-				Console.WriteLine ("fully open instantiation of TypeBuilder is the same of the TypeBuilder");
-				return 2;
-			}
-		
-			Type res = tb.CreateType ();
-			Type oires = res.MakeGenericType (res.GetGenericArguments ());
+            if (type == tb) {
+                Console.WriteLine ("fully open instantiation of TypeBuilder is the same of the TypeBuilder");
+                return 2;
+            }
+        
+            Type res = tb.CreateType ();
+            Type oires = res.MakeGenericType (res.GetGenericArguments ());
 
-			if (res != oires) {
-				Console.WriteLine ("fully open instantiation not the same of the generic type definition for the TypeBuilder created type");
-				return 3;
-			}
+            if (res != oires) {
+                Console.WriteLine ("fully open instantiation not the same of the generic type definition for the TypeBuilder created type");
+                return 3;
+            }
 
-			try {
-				type.GetConstructors ();
-			} catch (Exception e) {
-				Console.WriteLine ("fully open instantiation of TypeBuilder must have GetConstructors working {0}", e);
-				return 4;
-			}
+            try {
+                type.GetConstructors ();
+            } catch (Exception e) {
+                Console.WriteLine ("fully open instantiation of TypeBuilder must have GetConstructors working {0}", e);
+                return 4;
+            }
 
 
-			try {
-				oires.GetConstructors ();
-			} catch (Exception e) {
-				Console.WriteLine ("fully open instantiation of the TypeBuilder created type must have GetConstructors working {0}", e);
-				return 5;
-			}*/
+            try {
+                oires.GetConstructors ();
+            } catch (Exception e) {
+                Console.WriteLine ("fully open instantiation of the TypeBuilder created type must have GetConstructors working {0}", e);
+                return 5;
+            }*/
 
             return 0;
         }

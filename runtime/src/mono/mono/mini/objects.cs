@@ -729,7 +729,7 @@ class Tests
         {
             long pos = position;
             /* interaction between the register allocator and
-			 * allocating arguments to registers */
+             * allocating arguments to registers */
             if (pos >= buf_start && pos <= buf_start + buf_length)
             {
                 buf_offset = (int)(pos - buf_start);
@@ -1258,10 +1258,10 @@ class Tests
         return a + b + c + d;
     }
 
-    /* 
-	 * Test that evaluation of complex arguments does not overwrite the
-	 * arguments already in outgoing registers.
-	 */
+    /*
+     * Test that evaluation of complex arguments does not overwrite the
+     * arguments already in outgoing registers.
+     */
     public static int test_155_regalloc()
     {
         int a = 10;
@@ -1993,14 +1993,14 @@ class Tests
     }
 
     /*
-	 * FIXME: This fails with AOT #703317.
-	 */
+     * FIXME: This fails with AOT #703317.
+     */
     /*
-	static int test_0_multiple_cctor_calls_regress_679467 () {
-		flag = false;
-		return regress_679467_inner ();
-	}
-	*/
+    static int test_0_multiple_cctor_calls_regress_679467 () {
+        flag = false;
+        return regress_679467_inner ();
+    }
+    */
 
     static int test_0_char_ctor()
     {

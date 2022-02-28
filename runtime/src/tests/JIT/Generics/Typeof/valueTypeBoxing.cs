@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-/* Unboxing where a parameter is types as System.ValueType, or System.Enum, and then is unboxed to its scalar type 
+/* Unboxing where a parameter is types as System.ValueType, or System.Enum, and then is unboxed to its scalar type
  */
 using System;
 using System.Reflection;

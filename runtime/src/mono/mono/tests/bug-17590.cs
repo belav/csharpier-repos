@@ -23,12 +23,12 @@ class X
                 caught = true;
             }
             /*
-			if (!caught)
-			{
-				Console.WriteLine ("WTF?");
-				//Environment.Exit (1);
-			}
-			*/
+            if (!caught)
+            {
+                Console.WriteLine ("WTF?");
+                //Environment.Exit (1);
+            }
+            */
         }
     }
 
@@ -71,10 +71,10 @@ class X
 
         // FIXME: This commit 4gb of memory
         /*
-		Console.WriteLine ("strings");
-		Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i)));
-		Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i * 100)));
-		*/
+        Console.WriteLine ("strings");
+        Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i)));
+        Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i * 100)));
+        */
 
         //Console.WriteLine ("no objects allocated - all good");
         return 0;

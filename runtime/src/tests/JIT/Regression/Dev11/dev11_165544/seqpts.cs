@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-/* 
+/*
  * Ensure that for start of sequence points that are also start of NOGC interrupt regions, an interruptible NOP is placed in front for the sequence point.
  *
  * The test does not check for the above in the JIT tree but only functional correctness.

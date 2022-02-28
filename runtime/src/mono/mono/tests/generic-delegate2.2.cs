@@ -6,11 +6,11 @@ public delegate object ArrDel (int i);
 
 public class Gen<T> {
     public object newArr (int i) {
-	return new T [i];
+    return new T [i];
     }
 
     public ArrDel newDel () {
-	return new ArrDel (this.newArr);
+    return new ArrDel (this.newArr);
     }
 }
 
@@ -103,26 +103,26 @@ public class main
         catch (ArgumentException) { }
 
         /*
-	DelObj delObj = (DelObj)Delegate.CreateDelegate (typeof (DelObj), null, miObj);
+    DelObj delObj = (DelObj)Delegate.CreateDelegate (typeof (DelObj), null, miObj);
 
-	if (delObj (go, 3).GetType () != typeof (object []))
-	    return 1;
+    if (delObj (go, 3).GetType () != typeof (object []))
+        return 1;
 
-	DelStr delStr = (DelStr)Delegate.CreateDelegate (typeof (DelStr), null, miStr);
+    DelStr delStr = (DelStr)Delegate.CreateDelegate (typeof (DelStr), null, miStr);
 
-	if (delStr (gs, 3).GetType () != typeof (string []))
-	    return 1;
-	*/
+    if (delStr (gs, 3).GetType () != typeof (string []))
+        return 1;
+    */
 
         /*
-	ArrDel ad = go.newDel ();
-	if (ad (3).GetType () != typeof (object []))
-	    return 1;
+    ArrDel ad = go.newDel ();
+    if (ad (3).GetType () != typeof (object []))
+        return 1;
 
-	ad = gs.newDel ();
-	if (ad (3).GetType () != typeof (string []))
-	    return 1;
-	*/
+    ad = gs.newDel ();
+    if (ad (3).GetType () != typeof (string []))
+        return 1;
+    */
 
         Console.WriteLine("done");
 

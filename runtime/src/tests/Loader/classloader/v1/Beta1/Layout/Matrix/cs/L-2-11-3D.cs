@@ -40,7 +40,7 @@ public struct A
     mi_RetCode = 0;
 
   /////////////////////////////////
-  // Test instance b.Method access  
+  // Test instance b.Method access
   if(b.MethPubInst() != 100)
     mi_RetCode = 0;
 

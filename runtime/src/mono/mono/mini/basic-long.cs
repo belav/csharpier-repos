@@ -369,24 +369,24 @@ class Tests
     }
 
     /*
-	public static int test_0_conv_from_r8 () {
-		double b = 2.0;
-		long a = (long)b;
+    public static int test_0_conv_from_r8 () {
+        double b = 2.0;
+        long a = (long)b;
 
-		if (a != 2)
-			return 1;
-		return 0;
-	}
+        if (a != 2)
+            return 1;
+        return 0;
+    }
 
-	public static int test_0_conv_from_r4 () {
-		float b = 2.0F;
-		long a = (long)b;
+    public static int test_0_conv_from_r4 () {
+        float b = 2.0F;
+        long a = (long)b;
 
-		if (a != 2)
-			return 1;
-		return 0;
-	}
-	*/
+        if (a != 2)
+            return 1;
+        return 0;
+    }
+    */
 
     public static int test_8_and()
     {

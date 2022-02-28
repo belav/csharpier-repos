@@ -55,18 +55,18 @@ JitInfo EH clause 1 flags 0 try 3f-59 handler 6c-b6abe448
 
    0:	48 83 ec 18          	sub    $0x18,%rsp
    4:	48 b8 d8 c6 5b f8 b1 	movabs $0x55b1f85bc6d8,%rax
-   b:	55 00 00 
+   b:	55 00 00
    e:	48 8b 08             	mov    (%rax),%rcx
   11:	48 b8 20 ed d6 f6 b1 	movabs $0x55b1f6d6ed20,%rax
-  18:	55 00 00 
+  18:	55 00 00
   1b:	48 83 38 00          	cmpq   $0x0,(%rax)
   1f:	75 3d                	jne    5e <soleApp2_Program_Main___+0x5e>
   21:	48 bf 70 33 58 f8 b1 	movabs $0x55b1f8583370,%rdi
-  28:	55 00 00 
+  28:	55 00 00
   2b:	be 10 00 00 00       	mov    $0x10,%esi
   30:	ff d1                	callq  *%rcx
   32:	48 b9 e8 c6 5b f8 b1 	movabs $0x55b1f85bc6e8,%rcx
-  39:	55 00 00 
+  39:	55 00 00
   3c:	4c 8b 11             	mov    (%rcx),%r10
   3f:	31 f6                	xor    %esi,%esi
   41:	31 d2                	xor    %edx,%edx
@@ -79,25 +79,25 @@ JitInfo EH clause 1 flags 0 try 3f-59 handler 6c-b6abe448
   52:	41 ff d2             	callq  *%r10
   55:	48 83 c4 10          	add    $0x10,%rsp
   59:	48 83 c4 18          	add    $0x18,%rsp
-  5d:	c3                   	retq   
+  5d:	c3                   	retq
   5e:	48 b8 d0 c6 5b f8 b1 	movabs $0x55b1f85bc6d0,%rax
-  65:	55 00 00 
+  65:	55 00 00
   68:	ff 10                	callq  *(%rax)
   6a:	eb b5                	jmp    21 <soleApp2_Program_Main___+0x21>
   6c:	48 89 44 24 10       	mov    %rax,0x10(%rsp)
   71:	48 8b 44 24 10       	mov    0x10(%rsp),%rax
   76:	48 b8 f0 c6 5b f8 b1 	movabs $0x55b1f85bc6f0,%rax
-  7d:	55 00 00 
+  7d:	55 00 00
   80:	ff 10                	callq  *(%rax)
   82:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
   87:	48 83 7c 24 08 00    	cmpq   $0x0,0x8(%rsp)
   8d:	74 ca                	je     59 <soleApp2_Program_Main___+0x59>
   8f:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
   94:	48 b8 f8 c6 5b f8 b1 	movabs $0x55b1f85bc6f8,%rax
-  9b:	55 00 00 
+  9b:	55 00 00
   9e:	ff 10                	callq  *(%rax)
   a0:	48 83 c4 18          	add    $0x18,%rsp
-  a4:	c3                   	retq   
+  a4:	c3                   	retq
 
 The call to f happens at 0x52. The exception handler starts at 0x6c. Note that
 there are two adjustments, totaling 0x28 bytes, made to the stack pointer made

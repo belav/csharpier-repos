@@ -1358,7 +1358,7 @@ namespace structinreg
                     {
                         throw new System.Exception();
                     }
-                }, s29);            
+                }, s29);
                 Console.WriteLine("S29R: {0}, {1}", s29r.x, s29r.y == null ? "Null" : "Not null");
                 if (s29r.x != 5 || s29r.y != testClass)
                 {

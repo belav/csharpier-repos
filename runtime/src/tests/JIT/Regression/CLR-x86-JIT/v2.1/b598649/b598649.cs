@@ -6,7 +6,7 @@ using System;
 
 namespace Bug565326
 {
-    /* 
+    /*
         Compile this program using "csc /o+ ".
         It should produce the following output:
         Should see this line: B will return True

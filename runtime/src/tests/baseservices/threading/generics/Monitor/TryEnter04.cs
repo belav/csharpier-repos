@@ -64,27 +64,27 @@ public class Test_TryEnter04
     {
         Gen<int>.TryEnterTest();
         /*Gen<double>.TryEnterTest();
-		Gen<string>.TryEnterTest();
-		Gen<object>.TryEnterTest();
-		Gen<Guid>.TryEnterTest();
+        Gen<string>.TryEnterTest();
+        Gen<object>.TryEnterTest();
+        Gen<Guid>.TryEnterTest();
 
-		Gen<int[]>.TryEnterTest();
-		Gen<double[,]>.TryEnterTest();
-		Gen<string[][][]>.TryEnterTest();
-		Gen<object[,,,]>.TryEnterTest();
-		Gen<Guid[][,,,][]>.TryEnterTest();
+        Gen<int[]>.TryEnterTest();
+        Gen<double[,]>.TryEnterTest();
+        Gen<string[][][]>.TryEnterTest();
+        Gen<object[,,,]>.TryEnterTest();
+        Gen<Guid[][,,,][]>.TryEnterTest();
 
-		Gen<RefX1<int>[]>.TryEnterTest();
-		Gen<RefX1<double>[,]>.TryEnterTest();
-		Gen<RefX1<string>[][][]>.TryEnterTest();
-		Gen<RefX1<object>[,,,]>.TryEnterTest();
-		Gen<RefX1<Guid>[][,,,][]>.TryEnterTest();
+        Gen<RefX1<int>[]>.TryEnterTest();
+        Gen<RefX1<double>[,]>.TryEnterTest();
+        Gen<RefX1<string>[][][]>.TryEnterTest();
+        Gen<RefX1<object>[,,,]>.TryEnterTest();
+        Gen<RefX1<Guid>[][,,,][]>.TryEnterTest();
 
-		Gen<ValX1<int>[]>.TryEnterTest();
-		Gen<ValX1<double>[,]>.TryEnterTest();
-		Gen<ValX1<string>[][][]>.TryEnterTest();
-		Gen<ValX1<object>[,,,]>.TryEnterTest();
-		Gen<ValX1<Guid>[][,,,][]>.TryEnterTest();*/
+        Gen<ValX1<int>[]>.TryEnterTest();
+        Gen<ValX1<double>[,]>.TryEnterTest();
+        Gen<ValX1<string>[][][]>.TryEnterTest();
+        Gen<ValX1<object>[,,,]>.TryEnterTest();
+        Gen<ValX1<Guid>[][,,,][]>.TryEnterTest();*/
 
         if (result)
         {

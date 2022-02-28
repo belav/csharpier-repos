@@ -8,7 +8,7 @@ using System;
                   [Microsoft.Scripting]Microsoft.Scripting.Runtime.IExpressionSerializable
 {
   .field public static initonly !TSelf Instance
-  .method family hidebysig specialname rtspecialname 
+  .method family hidebysig specialname rtspecialname
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -19,12 +19,12 @@ using System;
   } // end of method ProtocolConversionAction`1::.ctor
 
 
-.class public abstract auto ansi beforefieldinit 
+.class public abstract auto ansi beforefieldinit
 IronRuby.Runtime.Calls.ConvertToReferenceTypeAction`2<.ctor (class IronRuby.Runtime.Calls.ConvertToReferenceTypeAction`2<!TSelf,!TTargetType>) TSelf,class TTargetType>
        extends class IronRuby.Runtime.Calls.ProtocolConversionAction`1<!TSelf>
 {
   
-  .method family hidebysig specialname rtspecialname 
+  .method family hidebysig specialname rtspecialname
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)

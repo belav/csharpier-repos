@@ -3,7 +3,7 @@
 
 /*
 
-A .cctor has only one chance to run in any appdomain. 
+A .cctor has only one chance to run in any appdomain.
 If it fails, the 2nd time we try to access a static field we check if .cctor has been run. And it has, but failed so we fail again.
 
 Test_CctorThrowStaticField throws an exception inside .cctor.

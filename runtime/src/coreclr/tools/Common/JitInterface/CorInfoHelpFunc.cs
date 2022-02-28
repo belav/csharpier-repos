@@ -47,7 +47,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_FLTROUND,
         CORINFO_HELP_DBLROUND,
 
-        /* Allocating a new object. Always use ICorClassInfo::getNewHelper() to decide 
+        /* Allocating a new object. Always use ICorClassInfo::getNewHelper() to decide
            which is the right helper to use to allocate an object of a given type. */
 
         CORINFO_HELP_NEWFAST,

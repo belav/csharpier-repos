@@ -4,15 +4,15 @@
 
 /*
  * JIT64 bug The bug is triggered by a pattern of loops over arrays of medium sized structs (between 4
- * and ~32 bytes), but those are not the only cases that might hit it, just the easiest to describe 
- * (and maybe most likely?).  In this case the last part of the trigger was that on array was offset 
+ * and ~32 bytes), but those are not the only cases that might hit it, just the easiest to describe
+ * (and maybe most likely?).  In this case the last part of the trigger was that on array was offset
  * from the other:
  *                       batch[i] = keys[batchIndex + i];
  * OsrApplyReductions and OsrGroupIVsByStride had a very similar loop, but with one notable difference.
- * The former had a call to OsrRemoveGCCandidates, but the later did not.  If OsrRemvoeGCCandidates 
- * walked across a multiply, it would change the stride, which would make a given candidate no longer 
+ * The former had a call to OsrRemoveGCCandidates, but the later did not.  If OsrRemvoeGCCandidates
+ * walked across a multiply, it would change the stride, which would make a given candidate no longer
  * fit in the stride group it was placed in.  This bug has existed since 2003 when ltaylors first wrote
- * these routines.  I believe the fix is to add the call to OsrGroupIVsByStride so the loops match. 
+ * these routines.  I believe the fix is to add the call to OsrGroupIVsByStride so the loops match.
  */
 
 using System;

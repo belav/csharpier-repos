@@ -7,9 +7,9 @@
 // Best-scoring C# .NET Core version as of 2017-09-01
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/ 
+   http://benchmarksgame.alioth.debian.org/
 
-   contributed by Marek Safar  
+   contributed by Marek Safar
    *reset*
    concurrency added by Peperud
    minor improvements by Alex Yakunin

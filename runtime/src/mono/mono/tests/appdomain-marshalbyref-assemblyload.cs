@@ -14,17 +14,17 @@ public class Test
         var mc = o as MidAssembly.MidClass;
         var l = new LeafAssembly.Leaf();
         /* passing Leaf to MidMethod should /not/ cause
-		 * place2/LeafAssembly.dll to be loaded in the new remote
-		 * domain */
+         * place2/LeafAssembly.dll to be loaded in the new remote
+         * domain */
         mc.MidMethod(l);
         /* this line will pre-load place1/LeafAssembly.dll into the
-		 * remote domain.
-		 */
+         * remote domain.
+         */
         mc.ForceLoadFrom(Path.Combine(dir1, "LeafAssembly.dll"));
         /* This method calls a class from LeafAssembly (which is only
-		 * defined in the place1 version of the class), so if the
-		 * place2 version had been loaded instead, it will trigger a
-		 * MissingMethodException */
+         * defined in the place1 version of the class), so if the
+         * place2 version had been loaded instead, it will trigger a
+         * MissingMethodException */
         mc.DoSomeAction();
         return 0;
     }

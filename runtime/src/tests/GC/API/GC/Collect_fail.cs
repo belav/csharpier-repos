@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-/* 
+/*
  * Tests GC.Collect(n), where n = -1...MaxGeneration+10
  * An exception should be thrown for -1, but no other value
  *

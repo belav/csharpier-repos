@@ -135,47 +135,47 @@ internal class classarr
         b.arr[2, 0] = 3;
 
         /*
-		int i, j;
-				
-		Console.WriteLine("Matrix A is \n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", a.arr[i,j]);
-			Console.WriteLine();
-		}
+        int i, j;
+                
+        Console.WriteLine("Matrix A is \n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", a.arr[i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("Matrix B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", b.arr[i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("Matrix B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", b.arr[i,j]);
+            Console.WriteLine();
+        }
+        */
 
         gaussj(a, n, b, m);
 
         /*
-		Console.WriteLine();
-		Console.WriteLine("The inverse of matrix A is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", a.arr[i,j]);
-			Console.WriteLine();
-		}
+        Console.WriteLine();
+        Console.WriteLine("The inverse of matrix A is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", a.arr[i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("The solution X of AX=B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", b.arr[i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("The solution X of AX=B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", b.arr[i,j]);
+            Console.WriteLine();
+        }
+        */
 
         if (
             AreEqual(a.arr[0, 0], 3)

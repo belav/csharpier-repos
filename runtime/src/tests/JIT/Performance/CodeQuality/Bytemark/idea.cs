@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 /*
 ** This program was translated to C# and adapted for xunit-performance.
-** New variants of several tests were added to compare class versus 
+** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
 
@@ -23,7 +23,7 @@
 ** are error-free.  Consequently, McGraw-HIll and BYTE Magazine make
 ** no claims in regard to the fitness of the source code, executable
 ** code, and documentation of the BYTEmark.
-** 
+**
 ** Furthermore, BYTE Magazine, McGraw-Hill, and all employees
 ** of McGraw-Hill cannot be held responsible for any damages resulting
 ** from the use of this code or the results obtained from using
@@ -69,52 +69,52 @@ public class IDEAEncryption : IDEAStruct
         byte[] plain2; /* Second plaintext buffer */
 
         /*
-		** Re-init random-number generator.
-		*/
+        ** Re-init random-number generator.
+        */
         ByteMark.randnum(3);
 
         /*
-		** Build an encryption/decryption key
-		*/
+        ** Build an encryption/decryption key
+        */
         for (i = 0; i < 8; i++)
             userkey[i] = (char)(ByteMark.abs_randwc(60000) & 0xFFFF);
         for (i = 0; i < global.KEYLEN; i++)
             Z[i] = (char)0;
 
         /*
-		** Compute encryption/decryption subkeys
-		*/
+        ** Compute encryption/decryption subkeys
+        */
         en_key_idea(userkey, Z);
         de_key_idea(Z, DK);
 
         /*
-		** Allocate memory for buffers.  We'll make 3, called plain1,
-		** crypt1, and plain2.  It works like this:
-		**   plain1 >>encrypt>> crypt1 >>decrypt>> plain2.
-		** So, plain1 and plain2 should match.
-		** Also, fill up plain1 with sample text.
-		*/
+        ** Allocate memory for buffers.  We'll make 3, called plain1,
+        ** crypt1, and plain2.  It works like this:
+        **   plain1 >>encrypt>> crypt1 >>decrypt>> plain2.
+        ** So, plain1 and plain2 should match.
+        ** Also, fill up plain1 with sample text.
+        */
         plain1 = new byte[this.arraysize];
         crypt1 = new byte[this.arraysize];
         plain2 = new byte[this.arraysize];
 
         /*
-		** Note that we build the "plaintext" by simply loading
-		** the array up with random numbers.
-		*/
+        ** Note that we build the "plaintext" by simply loading
+        ** the array up with random numbers.
+        */
         for (i = 0; i < this.arraysize; i++)
             plain1[i] = (byte)(ByteMark.abs_randwc(255) & 0xFF);
 
         /*
-		** See if we need to perform self adjustment loop.
-		*/
+        ** See if we need to perform self adjustment loop.
+        */
         if (this.adjust == 0)
         {
             /*
-			** Do self-adjustment.  This involves initializing the
-			** # of loops and increasing the loop count until we
-			** get a number of loops that we can use.
-			*/
+            ** Do self-adjustment.  This involves initializing the
+            ** # of loops and increasing the loop count until we
+            ** get a number of loops that we can use.
+            */
             for (this.loops = 100; this.loops < global.MAXIDEALOOPS; this.loops += 10)
                 if (
                     DoIDEAIteration(plain1, crypt1, plain2, this.arraysize, this.loops, Z, DK)
@@ -124,8 +124,8 @@ public class IDEAEncryption : IDEAStruct
         }
 
         /*
-		** All's well if we get here.  Do the test.
-		*/
+        ** All's well if we get here.  Do the test.
+        */
         accumtime = 0;
         iterations = (double)0.0;
 
@@ -136,9 +136,9 @@ public class IDEAEncryption : IDEAStruct
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
         /*
-		** Clean up, calculate results, and go home.  Be sure to
-		** show that we don't have to rerun adjustment code.
-		*/
+        ** Clean up, calculate results, and go home.  Be sure to
+        ** show that we don't have to rerun adjustment code.
+        */
 
         if (this.adjust == 0)
             this.adjust = 1;
@@ -147,12 +147,12 @@ public class IDEAEncryption : IDEAStruct
     }
 
     /********************
-	** DoIDEAIteration **
-	*********************
-	** Execute a single iteration of the IDEA encryption algorithm.
-	** Actually, a single iteration is one encryption and one
-	** decryption.
-	*/
+    ** DoIDEAIteration **
+    *********************
+    ** Execute a single iteration of the IDEA encryption algorithm.
+    ** Actually, a single iteration is one encryption and one
+    ** decryption.
+    */
     private static long DoIDEAIteration(
         byte[] plain1,
         byte[] crypt1,
@@ -168,13 +168,13 @@ public class IDEAEncryption : IDEAStruct
         long elapsed;
 
         /*
-		** Start the stopwatch.
-		*/
+        ** Start the stopwatch.
+        */
         elapsed = ByteMark.StartStopwatch();
 
         /*
-		** Do everything for nloops.
-		*/
+        ** Do everything for nloops.
+        */
 
         for (i = 0; i < nloops; i++)
         {
@@ -199,18 +199,18 @@ public class IDEAEncryption : IDEAStruct
             }
 
         /*
-		** Get elapsed time.
-		*/
+        ** Get elapsed time.
+        */
         return (ByteMark.StopStopwatch(elapsed));
     }
 
     /********
-	** mul **
-	*********
-	** Performs multiplication, modulo (2**16)+1.  This code is structured
-	** on the assumption that untaken branches are cheaper than taken
-	** branches, and that the compiler doesn't schedule branches.
-	*/
+    ** mul **
+    *********
+    ** Performs multiplication, modulo (2**16)+1.  This code is structured
+    ** on the assumption that untaken branches are cheaper than taken
+    ** branches, and that the compiler doesn't schedule branches.
+    */
     private static char mul(char a, char b)
     {
         int p;
@@ -231,13 +231,13 @@ public class IDEAEncryption : IDEAStruct
     }
 
     /********
-	** inv **
-	*********
-	** Compute multiplicative inverse of x, modulo (2**16)+1
-	** using Euclid's GCD algorithm.  It is unrolled twice
-	** to avoid swapping the meaning of the registers.  And
-	** some subtracts are changed to adds.
-	*/
+    ** inv **
+    *********
+    ** Compute multiplicative inverse of x, modulo (2**16)+1
+    ** using Euclid's GCD algorithm.  It is unrolled twice
+    ** to avoid swapping the meaning of the registers.  And
+    ** some subtracts are changed to adds.
+    */
     private static char inv(char x)
     {
         char t0,
@@ -271,10 +271,10 @@ public class IDEAEncryption : IDEAStruct
     }
 
     /****************
-	** en_key_idea **
-	*****************
-	** Compute IDEA encryption subkeys Z
-	*/
+    ** en_key_idea **
+    *****************
+    ** Compute IDEA encryption subkeys Z
+    */
     private static void en_key_idea(char[] userkey, char[] Z)
     {
         int i,
@@ -286,8 +286,8 @@ public class IDEAEncryption : IDEAStruct
         int idx = 0;
 
         /*
-		** shifts
-		*/
+        ** shifts
+        */
         for (j = 0; j < 8; j++)
             Z[j + idx] = userkey[tmp++];
         for (i = 0; j < global.KEYLEN; j++)
@@ -303,11 +303,11 @@ public class IDEAEncryption : IDEAStruct
     }
 
     /****************
-	** de_key_idea **
-	*****************
-	** Compute IDEA decryption subkeys DK from encryption
-	** subkeys Z.
-	*/
+    ** de_key_idea **
+    *****************
+    ** Compute IDEA decryption subkeys DK from encryption
+    ** subkeys Z.
+    */
     private static void de_key_idea(char[] Z, char[] DK)
     {
         char[] TT = new char[global.KEYLEN];
@@ -356,8 +356,8 @@ public class IDEAEncryption : IDEAStruct
         TT[--p] = t1;
 
         /*
-		** Copy and destroy temp copy
-		*/
+        ** Copy and destroy temp copy
+        */
         for (j = 0, p = 0; j < global.KEYLEN; j++)
         {
             DK[j] = TT[p];
@@ -368,19 +368,19 @@ public class IDEAEncryption : IDEAStruct
     }
 
     /*
-	** MUL(x,y)
-	** This #define creates a macro that computes x=x*y modulo 0x10001.
-	** Requires temps t16 and t32.  Also requires y to be strictly 16
-	** bits.  Here, I am using the simplest form.  May not be the
-	** fastest. -- RG
-	*/
+    ** MUL(x,y)
+    ** This #define creates a macro that computes x=x*y modulo 0x10001.
+    ** Requires temps t16 and t32.  Also requires y to be strictly 16
+    ** bits.  Here, I am using the simplest form.  May not be the
+    ** fastest. -- RG
+    */
     /* #define MUL(x,y) (x=mul(low16(x),y)) */
 
     /****************
-	** cipher_idea **
-	*****************
-	** IDEA encryption/decryption algorithm.
-	*/
+    ** cipher_idea **
+    *****************
+    ** IDEA encryption/decryption algorithm.
+    */
 
     // NOTE: args in and out were renamed because in/out are reserved words
     //		 in cool.

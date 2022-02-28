@@ -426,15 +426,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             // Make sure this /optionstrict+ switch appears *before* the /optionstrict:xxxx switch below
 
             /* twhitney: In Orcas a change was made for devdiv bug 16889 that set Option Strict-, whenever this.DisabledWarnings was
-             * empty.  That was clearly the wrong thing to do and we found it when we had a project with all the warning configuration 
-             * entries set to WARNING.  Because this.DisabledWarnings was empty in that case we would end up sending /OptionStrict- 
+             * empty.  That was clearly the wrong thing to do and we found it when we had a project with all the warning configuration
+             * entries set to WARNING.  Because this.DisabledWarnings was empty in that case we would end up sending /OptionStrict-
              * effectively silencing all the warnings that had been selected.
-             * 
+             *
              * Now what we do is:
-             *  If option strict+ is specified, that trumps everything and we just set option strict+ 
+             *  If option strict+ is specified, that trumps everything and we just set option strict+
              *  Otherwise, just set option strict:custom.
              *  You may wonder why we don't try to set Option Strict-  The reason is that Option Strict- just implies a certain
-             *  set of warnings that should be disabled (there's ten of them today)  You get the same effect by sending 
+             *  set of warnings that should be disabled (there's ten of them today)  You get the same effect by sending
              *  option strict:custom on along with the correct list of disabled warnings.
              *  Rather than make this code know the current set of disabled warnings that comprise Option strict-, we just send
              *  option strict:custom on with the understanding that we'll get the same behavior as option strict- since we are passing

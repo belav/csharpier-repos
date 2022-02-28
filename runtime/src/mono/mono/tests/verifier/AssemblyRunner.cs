@@ -185,9 +185,9 @@ namespace AssemblyRunner
         }
 
         /*
-		 * This test with runtime is usefull to assert if the code is unverifiable but not invalid.
-		 * This test should be used to diagnose if it's the case of code that was reported as invalid but actually is unverifiable.
-		 */
+         * This test with runtime is usefull to assert if the code is unverifiable but not invalid.
+         * This test should be used to diagnose if it's the case of code that was reported as invalid but actually is unverifiable.
+         */
         static RunResult testWithRuntime(String path)
         {
             String stderr = ExecuteAndFetchStderr(path);
@@ -210,9 +210,9 @@ namespace AssemblyRunner
         }
 
         /*
-		 * This test can only assert if the code is unverifiable or not. Use it
-		 * to check if it's the case for a strict check or the code is verifiable.
-		 */
+         * This test can only assert if the code is unverifiable or not. Use it
+         * to check if it's the case for a strict check or the code is verifiable.
+         */
         static RunResult testWithPeverify(String path)
         {
             if (ExecuteAndFetchReturnCode("peverify " + path) == 0)
@@ -253,8 +253,8 @@ namespace AssemblyRunner
                 if (rt == RunResult.invalid)
                 {
                     /*This warning doesn't help a lot since there are cases which this happens
-					Console.WriteLine ("Warning: test {0} returned unverifiable under AD but {1} under runtime. PV said {2}, using runtime choice", testName, rt, pv);
-					*/
+                    Console.WriteLine ("Warning: test {0} returned unverifiable under AD but {1} under runtime. PV said {2}, using runtime choice", testName, rt, pv);
+                    */
 
                     return rt;
                 }

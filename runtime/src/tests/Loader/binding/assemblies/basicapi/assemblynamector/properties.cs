@@ -53,11 +53,11 @@ public class AssemblyNameCtor_Basic
                 bFail = true;
             }
             /*
-			if (asmName1.Version!="0.0.0.0")
-			{
-				Console.WriteLine ("test will fail: asmName1.Version.ToString()!=\"0.0.0.0\"");
-				bFail = true;
-			}
+            if (asmName1.Version!="0.0.0.0")
+            {
+                Console.WriteLine ("test will fail: asmName1.Version.ToString()!=\"0.0.0.0\"");
+                bFail = true;
+            }
 */
 
 

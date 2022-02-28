@@ -215,12 +215,12 @@ public class Test
     }
 
     /*
-	static unsafe void unsafeMethod ()
-	{
-		byte *p = null;
-		error ("unsafe method called");
-	}
-	*/
+    static unsafe void unsafeMethod ()
+    {
+        byte *p = null;
+        error ("unsafe method called");
+    }
+    */
 
     static void doBadTransparentOverrideClass()
     {
@@ -394,11 +394,11 @@ public class Test
         catch (TypeLoadException) { }
 
         /*
-		try {
-			unsafeMethod ();
-		} catch (VerificationException) {
-		}
-		*/
+        try {
+            unsafeMethod ();
+        } catch (VerificationException) {
+        }
+        */
 
         try
         {

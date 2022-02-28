@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-/* 
+/*
 
 This is regression test for VSW 593884
 We had a breaking change between 1.1 and 2.0 when a class implements an

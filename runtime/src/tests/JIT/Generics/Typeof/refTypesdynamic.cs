@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-/* Cases for some shared generics (generics instantiated over reference types, both sealed and unsealed). 
+/* Cases for some shared generics (generics instantiated over reference types, both sealed and unsealed).
  */
 
 using System;

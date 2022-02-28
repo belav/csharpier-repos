@@ -9,7 +9,7 @@
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
 
-   contributed by Isaac Gouy, transliterated from Mike Pall's Lua program 
+   contributed by Isaac Gouy, transliterated from Mike Pall's Lua program
 */
 
 using System;

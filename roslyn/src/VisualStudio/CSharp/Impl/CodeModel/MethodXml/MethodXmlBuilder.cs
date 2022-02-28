@@ -87,18 +87,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
         {
             /*
               - <ElementType name="Local" content="eltOnly">
-                    <attribute type="id" /> 
-                    <attribute type="static" /> 
-                    <attribute type="instance" /> 
-                    <attribute type="implicit" /> 
-                    <attribute type="constant" /> 
+                    <attribute type="id" />
+                    <attribute type="static" />
+                    <attribute type="instance" />
+                    <attribute type="implicit" />
+                    <attribute type="constant" />
                 - <group order="one">
-                        <element type="Type" /> 
-                        <element type="ArrayType" /> 
+                        <element type="Type" />
+                        <element type="ArrayType" />
                     </group>
                 - <group minOccurs="1" maxOccurs="*" order="seq">
-                        <element type="LocalName" /> 
-                        <element type="Expression" minOccurs="0" maxOccurs="1" /> 
+                        <element type="LocalName" />
+                        <element type="Expression" minOccurs="0" maxOccurs="1" />
                     </group>
                 </ElementType>
             */
@@ -231,13 +231,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
             /*
                 <ElementType name="Literal" content="eltOnly">
                 - <group order="one">
-                    <element type="Null" /> 
-                    <element type="Number" /> 
-                    <element type="Boolean" /> 
-                    <element type="Char" /> 
-                    <element type="String" /> 
-                    <element type="Array" /> 
-                    <element type="Type" /> 
+                    <element type="Null" />
+                    <element type="Number" />
+                    <element type="Boolean" />
+                    <element type="Char" />
+                    <element type="String" />
+                    <element type="Array" />
+                    <element type="Type" />
                     </group>
                 </ElementType>
             */
