@@ -24,5 +24,6 @@ internal interface ICircuitFactory
         string baseUri,
         string uri,
         ClaimsPrincipal user,
-        IPersistentComponentStateStore store);
+        IPersistentComponentStateStore store
+    );
 }

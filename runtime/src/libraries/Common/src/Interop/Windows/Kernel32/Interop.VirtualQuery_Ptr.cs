@@ -9,6 +9,10 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [DllImport(Libraries.Kernel32, SetLastError = true, ExactSpelling = true)]
-        internal static extern unsafe UIntPtr VirtualQuery(void* lpAddress, ref MEMORY_BASIC_INFORMATION lpBuffer, UIntPtr dwLength);
+        internal static extern unsafe UIntPtr VirtualQuery(
+            void* lpAddress,
+            ref MEMORY_BASIC_INFORMATION lpBuffer,
+            UIntPtr dwLength
+        );
     }
 }

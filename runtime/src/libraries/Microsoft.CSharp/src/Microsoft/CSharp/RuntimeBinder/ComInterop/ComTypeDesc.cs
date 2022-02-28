@@ -57,7 +57,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return typeDesc;
         }
 
-        internal static Dictionary<string, ComEventDesc> EmptyEvents { get; } = new Dictionary<string, ComEventDesc>();
+        internal static Dictionary<string, ComEventDesc> EmptyEvents { get; } =
+            new Dictionary<string, ComEventDesc>();
 
         internal Hashtable Funcs { get; set; }
 
@@ -120,6 +121,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             method = null;
             return false;
         }
+
         internal void AddPutRef(string name, ComMethodDesc method)
         {
             name = name.ToUpper(System.Globalization.CultureInfo.InvariantCulture);

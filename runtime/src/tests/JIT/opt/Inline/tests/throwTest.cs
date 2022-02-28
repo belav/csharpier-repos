@@ -26,6 +26,7 @@ namespace JitInliningTest
             }
         }
     }
+
     internal class throwTest
     {
         public static int Main()

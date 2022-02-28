@@ -5,6 +5,7 @@
 namespace Test
 {
     using System;
+
     class App
     {
         static int Main()

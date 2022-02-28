@@ -11,7 +11,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IReadOnlyTypeBase" />.
     /// </summary>
     [Obsolete("Use IReadOnlyTypeBase")]
-    public static class TypeBaseExtensions
-    {
-    }
+    public static class TypeBaseExtensions { }
 }

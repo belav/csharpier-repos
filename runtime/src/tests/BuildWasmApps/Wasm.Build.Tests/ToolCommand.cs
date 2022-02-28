@@ -26,7 +26,7 @@ namespace Wasm.Build.Tests
 
         public string? WorkingDirectory { get; set; }
 
-        public ToolCommand(string command, string label="")
+        public ToolCommand(string command, string label = "")
         {
             _command = command;
             _label = label;
@@ -64,7 +64,9 @@ namespace Wasm.Build.Tests
         {
             var resolvedCommand = _command;
             string fullArgs = GetFullArgs(args);
-            Console.WriteLine($"[{_label}] Executing - {resolvedCommand} {fullArgs} - {WorkingDirectoryInfo()}");
+            Console.WriteLine(
+                $"[{_label}] Executing - {resolvedCommand} {fullArgs} - {WorkingDirectoryInfo()}"
+            );
             return await ExecuteAsyncInternal(resolvedCommand, fullArgs);
         }
 
@@ -72,8 +74,12 @@ namespace Wasm.Build.Tests
         {
             var resolvedCommand = _command;
             string fullArgs = GetFullArgs(args);
-            Console.WriteLine($"[{_label}] Executing (Captured Output) - {resolvedCommand} {fullArgs} - {WorkingDirectoryInfo()}");
-            return Task.Run(async () => await ExecuteAsyncInternal(resolvedCommand, fullArgs)).Result;
+            Console.WriteLine(
+                $"[{_label}] Executing (Captured Output) - {resolvedCommand} {fullArgs} - {WorkingDirectoryInfo()}"
+            );
+            return Task.Run(
+                async () => await ExecuteAsyncInternal(resolvedCommand, fullArgs)
+            ).Result;
         }
 
         protected virtual string GetFullArgs(params string[] args) => string.Join(" ", args);
@@ -113,7 +119,8 @@ namespace Wasm.Build.Tests
             return new CommandResult(
                 CurrentProcess.StartInfo,
                 CurrentProcess.ExitCode,
-                string.Join(System.Environment.NewLine, output));
+                string.Join(System.Environment.NewLine, output)
+            );
         }
 
         private Process CreateProcess(string executable, string args)
@@ -133,10 +140,7 @@ namespace Wasm.Build.Tests
 
             AddEnvironmentVariablesTo(psi);
             AddWorkingDirectoryTo(psi);
-            var process = new Process
-            {
-                StartInfo = psi
-            };
+            var process = new Process { StartInfo = psi };
 
             process.EnableRaisingEvents = true;
             return process;

@@ -11,6 +11,7 @@ namespace System.Xml.Tests
     public class XsltcTestPlatform : XsltcTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public XsltcTestPlatform(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -34,7 +35,16 @@ namespace System.Xml.Tests
             bool pdbCreated = false;
             string baselineFile = param3.ToString();
 
-            VerifyTest(cmdLine, asmName, asmCreated, typeName, pdbName, pdbCreated, baselineFile, _createFromInputFile);
+            VerifyTest(
+                cmdLine,
+                asmName,
+                asmCreated,
+                typeName,
+                pdbName,
+                pdbCreated,
+                baselineFile,
+                _createFromInputFile
+            );
         }
 
         //[Variation("2", Desc = "Exercise basic use case, no option value", Pri = 1, Params = new object[] { "/platform: pft2.xsl", "pft2.txt" })]
@@ -64,7 +74,16 @@ namespace System.Xml.Tests
         [InlineData("pft19.xsl", "pft19.dll", "yes", "", "pft19.pdb", "no", "pft19.txt", "no")]
         [Trait("category", "XsltcExeRequired")]
         [ConditionalTheory(nameof(xsltcExeFound))]
-        public void Var3(object param0, object param1, object param2, object param3, object param4, object param5, object param6, object param7)
+        public void Var3(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5,
+            object param6,
+            object param7
+        )
         {
             string platform = "X86"; //CModInfo.Options["Arc"] as String;
             bool isSameMachine = string.Compare(param7.ToString(), "yes", true) == 0;
@@ -85,9 +104,7 @@ namespace System.Xml.Tests
                 index = 0;
             }
 
-            platform = platforms[(index + (isSameMachine
-                                               ? 0
-                                               : 1)) % platforms.Length];
+            platform = platforms[(index + (isSameMachine ? 0 : 1)) % platforms.Length];
 
             string cmdLine = param0 + " " + "/platform:" + platform;
             string asmName = param1.ToString();
@@ -97,7 +114,16 @@ namespace System.Xml.Tests
             bool pdbCreated = string.Compare(param5.ToString(), "yes", true) == 0;
             string baselineFile = param6.ToString();
 
-            VerifyTest(cmdLine, asmName, asmCreated, typeName, pdbName, pdbCreated, baselineFile, _createFromInputFile);
+            VerifyTest(
+                cmdLine,
+                asmName,
+                asmCreated,
+                typeName,
+                pdbName,
+                pdbCreated,
+                baselineFile,
+                _createFromInputFile
+            );
         }
     }
 }

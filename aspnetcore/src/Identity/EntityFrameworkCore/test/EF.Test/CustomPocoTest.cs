@@ -12,7 +12,6 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class CustomPocoTest
 {
-
     public class User<TKey> where TKey : IEquatable<TKey>
     {
         public TKey Id { get; set; }
@@ -21,18 +20,19 @@ public class CustomPocoTest
 
     public class CustomDbContext<TKey> : DbContext where TKey : IEquatable<TKey>
     {
-        public CustomDbContext(DbContextOptions options) : base(options)
-        { }
+        public CustomDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<User<TKey>> Users { get; set; }
-
     }
 
     [ConditionalFact]
     public async Task CanUpdateNameGuid()
     {
-        using (var db = new CustomDbContext<Guid>(
-            new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options))
+        using (
+            var db = new CustomDbContext<Guid>(
+                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+            )
+        )
         {
             db.Database.EnsureCreated();
 
@@ -53,8 +53,11 @@ public class CustomPocoTest
     [ConditionalFact]
     public async Task CanUpdateNameString()
     {
-        using (var db = new CustomDbContext<string>(
-            new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options))
+        using (
+            var db = new CustomDbContext<string>(
+                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+            )
+        )
         {
             db.Database.EnsureCreated();
 
@@ -75,8 +78,11 @@ public class CustomPocoTest
     [ConditionalFact]
     public async Task CanCreateUserInt()
     {
-        using (var db = new CustomDbContext<int>(
-            new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options))
+        using (
+            var db = new CustomDbContext<int>(
+                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+            )
+        )
         {
             db.Database.EnsureCreated();
 
@@ -95,8 +101,11 @@ public class CustomPocoTest
     [ConditionalFact]
     public async Task CanCreateUserIntViaSet()
     {
-        using (var db = new CustomDbContext<int>(
-            new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options))
+        using (
+            var db = new CustomDbContext<int>(
+                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+            )
+        )
         {
             db.Database.EnsureCreated();
 
@@ -116,8 +125,11 @@ public class CustomPocoTest
     [ConditionalFact]
     public async Task CanUpdateNameInt()
     {
-        using (var db = new CustomDbContext<int>(
-            new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options))
+        using (
+            var db = new CustomDbContext<int>(
+                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+            )
+        )
         {
             db.Database.EnsureCreated();
 
@@ -138,8 +150,11 @@ public class CustomPocoTest
     [ConditionalFact]
     public async Task CanUpdateNameIntWithSet()
     {
-        using (var db = new CustomDbContext<int>(
-            new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options))
+        using (
+            var db = new CustomDbContext<int>(
+                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+            )
+        )
         {
             db.Database.EnsureCreated();
 

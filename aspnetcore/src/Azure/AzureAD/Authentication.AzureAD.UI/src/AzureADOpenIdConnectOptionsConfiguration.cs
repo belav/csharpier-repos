@@ -7,13 +7,19 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
-internal class AzureADOpenIdConnectOptionsConfiguration : IConfigureNamedOptions<OpenIdConnectOptions>
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
+internal class AzureADOpenIdConnectOptionsConfiguration
+    : IConfigureNamedOptions<OpenIdConnectOptions>
 {
     private readonly IOptions<AzureADSchemeOptions> _schemeOptions;
     private readonly IOptionsMonitor<AzureADOptions> _azureADOptions;
 
-    public AzureADOpenIdConnectOptionsConfiguration(IOptions<AzureADSchemeOptions> schemeOptions, IOptionsMonitor<AzureADOptions> azureADOptions)
+    public AzureADOpenIdConnectOptionsConfiguration(
+        IOptions<AzureADSchemeOptions> schemeOptions,
+        IOptionsMonitor<AzureADOptions> azureADOptions
+    )
     {
         _schemeOptions = schemeOptions;
         _azureADOptions = azureADOptions;
@@ -35,9 +41,13 @@ internal class AzureADOpenIdConnectOptionsConfiguration : IConfigureNamedOptions
 
         options.ClientId = azureADOptions.ClientId;
         options.ClientSecret = azureADOptions.ClientSecret;
-        options.Authority = new Uri(new Uri(azureADOptions.Instance), azureADOptions.TenantId).ToString();
+        options.Authority = new Uri(
+            new Uri(azureADOptions.Instance),
+            azureADOptions.TenantId
+        ).ToString();
         options.CallbackPath = azureADOptions.CallbackPath ?? options.CallbackPath;
-        options.SignedOutCallbackPath = azureADOptions.SignedOutCallbackPath ?? options.SignedOutCallbackPath;
+        options.SignedOutCallbackPath =
+            azureADOptions.SignedOutCallbackPath ?? options.SignedOutCallbackPath;
         options.SignInScheme = azureADOptions.CookieSchemeName;
         options.UseTokenLifetime = true;
     }
@@ -55,7 +65,5 @@ internal class AzureADOpenIdConnectOptionsConfiguration : IConfigureNamedOptions
         return null;
     }
 
-    public void Configure(OpenIdConnectOptions options)
-    {
-    }
+    public void Configure(OpenIdConnectOptions options) { }
 }

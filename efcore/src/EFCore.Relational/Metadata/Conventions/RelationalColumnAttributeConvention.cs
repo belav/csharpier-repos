@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    public class RelationalColumnAttributeConvention : PropertyAttributeConventionBase<ColumnAttribute>
+    public class RelationalColumnAttributeConvention
+        : PropertyAttributeConventionBase<ColumnAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalColumnAttributeConvention" />.
@@ -23,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public RelationalColumnAttributeConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies)
         {
             RelationalDependencies = relationalDependencies;
         }
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             ColumnAttribute attribute,
             MemberInfo clrMember,
-            IConventionContext context)
+            IConventionContext context
+        )
         {
             if (!string.IsNullOrWhiteSpace(attribute.Name))
             {

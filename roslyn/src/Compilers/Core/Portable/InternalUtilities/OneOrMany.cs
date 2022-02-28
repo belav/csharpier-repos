@@ -16,8 +16,7 @@ namespace Roslyn.Utilities
     /// <remarks>
     /// Used when a collection usually contains a single item but sometimes might contain multiple.
     /// </remarks>
-    internal readonly struct OneOrMany<T>
-        where T : notnull
+    internal readonly struct OneOrMany<T> where T : notnull
     {
         public static readonly OneOrMany<T> Empty = new OneOrMany<T>(ImmutableArray<T>.Empty);
 
@@ -42,8 +41,7 @@ namespace Roslyn.Utilities
         }
 
         [MemberNotNullWhen(true, nameof(_one))]
-        private bool HasOne
-            => _many.IsDefault;
+        private bool HasOne => _many.IsDefault;
 
         public T this[int index]
         {
@@ -65,11 +63,9 @@ namespace Roslyn.Utilities
             }
         }
 
-        public int Count
-            => HasOne ? 1 : _many.Length;
+        public int Count => HasOne ? 1 : _many.Length;
 
-        public bool IsEmpty
-            => Count == 0;
+        public bool IsEmpty => Count == 0;
 
         public OneOrMany<T> Add(T one)
         {
@@ -132,20 +128,19 @@ namespace Roslyn.Utilities
             return builder.Count == Count ? this : new OneOrMany<T>(builder.ToImmutableAndFree());
         }
 
-        public OneOrMany<TResult> Select<TResult>(Func<T, TResult> selector)
-            where TResult : notnull
+        public OneOrMany<TResult> Select<TResult>(Func<T, TResult> selector) where TResult : notnull
         {
-            return HasOne ?
-                OneOrMany.Create(selector(_one)) :
-                OneOrMany.Create(_many.SelectAsArray(selector));
+            return HasOne
+              ? OneOrMany.Create(selector(_one))
+              : OneOrMany.Create(_many.SelectAsArray(selector));
         }
 
         public OneOrMany<TResult> Select<TResult, TArg>(Func<T, TArg, TResult> selector, TArg arg)
             where TResult : notnull
         {
-            return HasOne ?
-                OneOrMany.Create(selector(_one, arg)) :
-                OneOrMany.Create(_many.SelectAsArray(selector, arg));
+            return HasOne
+              ? OneOrMany.Create(selector(_one, arg))
+              : OneOrMany.Create(_many.SelectAsArray(selector, arg));
         }
 
         public T? FirstOrDefault(Func<T, bool> predicate)
@@ -184,8 +179,7 @@ namespace Roslyn.Utilities
             return default;
         }
 
-        public Enumerator GetEnumerator()
-            => new(this);
+        public Enumerator GetEnumerator() => new(this);
 
         internal struct Enumerator
         {
@@ -213,14 +207,12 @@ namespace Roslyn.Utilities
 
     internal static class OneOrMany
     {
-        public static OneOrMany<T> Create<T>(T one)
-            where T : notnull
+        public static OneOrMany<T> Create<T>(T one) where T : notnull
         {
             return new OneOrMany<T>(one);
         }
 
-        public static OneOrMany<T> Create<T>(ImmutableArray<T> many)
-            where T : notnull
+        public static OneOrMany<T> Create<T>(ImmutableArray<T> many) where T : notnull
         {
             return new OneOrMany<T>(many);
         }

@@ -30,12 +30,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     internal class SolutionExplorerInProcess : InProcComponent
     {
-        public SolutionExplorerInProcess(TestServices testServices)
-            : base(testServices)
-        {
-        }
+        public SolutionExplorerInProcess(TestServices testServices) : base(testServices) { }
 
-        public async Task CreateSolutionAsync(string solutionName, CancellationToken cancellationToken)
+        public async Task CreateSolutionAsync(
+            string solutionName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -43,7 +43,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             await CreateSolutionAsync(solutionPath, solutionName, cancellationToken);
         }
 
-        public async Task CreateSolutionAsync(string solutionName, XElement solutionElement, CancellationToken cancellationToken)
+        public async Task CreateSolutionAsync(
+            string solutionName,
+            XElement solutionElement,
+            CancellationToken cancellationToken
+        )
         {
             if (solutionElement.Name != "Solution")
             {
@@ -67,48 +71,93 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     var projectName = projectElement.Attribute("ProjectName").Value;
                     foreach (var projectReference in projectReferences.Split(';'))
                     {
-                        await AddProjectReferenceAsync(projectName, projectReference, cancellationToken);
+                        await AddProjectReferenceAsync(
+                            projectName,
+                            projectReference,
+                            cancellationToken
+                        );
                     }
                 }
             }
         }
 
-        private async Task CreateProjectAsync(XElement projectElement, CancellationToken cancellationToken)
+        private async Task CreateProjectAsync(
+            XElement projectElement,
+            CancellationToken cancellationToken
+        )
         {
             const string language = "Language";
             const string name = "ProjectName";
             const string template = "ProjectTemplate";
-            var languageName = projectElement.Attribute(language)?.Value
-                ?? throw new ArgumentException($"You must specify an attribute called '{language}' on a project element.");
-            var projectName = projectElement.Attribute(name)?.Value
-                ?? throw new ArgumentException($"You must specify an attribute called '{name}' on a project element.");
-            var projectTemplate = projectElement.Attribute(template)?.Value
-                ?? throw new ArgumentException($"You must specify an attribute called '{template}' on a project element.");
+            var languageName =
+                projectElement.Attribute(language)?.Value
+                ?? throw new ArgumentException(
+                    $"You must specify an attribute called '{language}' on a project element."
+                );
+            var projectName =
+                projectElement.Attribute(name)?.Value
+                ?? throw new ArgumentException(
+                    $"You must specify an attribute called '{name}' on a project element."
+                );
+            var projectTemplate =
+                projectElement.Attribute(template)?.Value
+                ?? throw new ArgumentException(
+                    $"You must specify an attribute called '{template}' on a project element."
+                );
 
-            var projectPath = Path.Combine(await GetDirectoryNameAsync(cancellationToken), projectName);
-            var projectTemplatePath = await GetProjectTemplatePathAsync(projectTemplate, ConvertLanguageName(languageName), cancellationToken);
+            var projectPath = Path.Combine(
+                await GetDirectoryNameAsync(cancellationToken),
+                projectName
+            );
+            var projectTemplatePath = await GetProjectTemplatePathAsync(
+                projectTemplate,
+                ConvertLanguageName(languageName),
+                cancellationToken
+            );
 
-            var solution = (await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken)).Solution;
+            var solution =
+                (await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken)).Solution;
             Assumes.Present(solution);
 
-            solution.AddFromTemplate(projectTemplatePath, projectPath, projectName, Exclusive: false);
+            solution.AddFromTemplate(
+                projectTemplatePath,
+                projectPath,
+                projectName,
+                Exclusive: false
+            );
             foreach (var documentElement in projectElement.Elements("Document"))
             {
                 var fileName = documentElement.Attribute("FileName").Value;
-                await UpdateOrAddFileAsync(projectName, fileName, contents: documentElement.Value, cancellationToken: cancellationToken);
+                await UpdateOrAddFileAsync(
+                    projectName,
+                    fileName,
+                    contents: documentElement.Value,
+                    cancellationToken: cancellationToken
+                );
             }
         }
 
-        public async Task AddProjectReferenceAsync(string projectName, string projectToReferenceName, CancellationToken cancellationToken)
+        public async Task AddProjectReferenceAsync(
+            string projectName,
+            string projectToReferenceName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var project = await GetProjectAsync(projectName, cancellationToken);
-            var projectToReference = await GetProjectAsync(projectToReferenceName, cancellationToken);
+            var projectToReference = await GetProjectAsync(
+                projectToReferenceName,
+                cancellationToken
+            );
             ((VSProject)project.Object).References.AddProject(projectToReference);
         }
 
-        private async Task CreateSolutionAsync(string solutionPath, string solutionName, CancellationToken cancellationToken)
+        private async Task CreateSolutionAsync(
+            string solutionPath,
+            string solutionName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -117,39 +166,85 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var solutionFileName = Path.ChangeExtension(solutionName, ".sln");
             Directory.CreateDirectory(solutionPath);
 
-            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution>(cancellationToken);
-            ErrorHandler.ThrowOnFailure(solution.CreateSolution(solutionPath, solutionFileName, (uint)__VSCREATESOLUTIONFLAGS.CSF_SILENT));
-            ErrorHandler.ThrowOnFailure(solution.SaveSolutionElement((uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_ForceSave, null, 0));
+            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution>(
+                cancellationToken
+            );
+            ErrorHandler.ThrowOnFailure(
+                solution.CreateSolution(
+                    solutionPath,
+                    solutionFileName,
+                    (uint)__VSCREATESOLUTIONFLAGS.CSF_SILENT
+                )
+            );
+            ErrorHandler.ThrowOnFailure(
+                solution.SaveSolutionElement((uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_ForceSave, null, 0)
+            );
         }
 
-        public async Task<string[]> GetAssemblyReferencesAsync(string projectName, CancellationToken cancellationToken)
+        public async Task<string[]> GetAssemblyReferencesAsync(
+            string projectName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var project = await GetProjectAsync(projectName, cancellationToken);
-            var references = ((VSProject)project.Object).References.Cast<Reference>()
+            var references = ((VSProject)project.Object).References
+                .Cast<Reference>()
                 .Where(x => x.SourceProject == null)
-                .Select(x => x.Name + "," + x.Version + "," + x.PublicKeyToken).ToArray();
+                .Select(x => x.Name + "," + x.Version + "," + x.PublicKeyToken)
+                .ToArray();
             return references;
         }
 
-        public async Task<string[]> GetProjectReferencesAsync(string projectName, CancellationToken cancellationToken)
+        public async Task<string[]> GetProjectReferencesAsync(
+            string projectName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var project = await GetProjectAsync(projectName, cancellationToken);
-            var references = ((VSProject)project.Object).References.Cast<Reference>().Where(x => x.SourceProject != null).Select(x => x.Name).ToArray();
+            var references = ((VSProject)project.Object).References
+                .Cast<Reference>()
+                .Where(x => x.SourceProject != null)
+                .Select(x => x.Name)
+                .ToArray();
             return references;
         }
 
-        public async Task AddProjectAsync(string projectName, string projectTemplate, string languageName, CancellationToken cancellationToken)
+        public async Task AddProjectAsync(
+            string projectName,
+            string projectTemplate,
+            string languageName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var projectPath = Path.Combine(await GetDirectoryNameAsync(cancellationToken), projectName);
-            var projectTemplatePath = await GetProjectTemplatePathAsync(projectTemplate, ConvertLanguageName(languageName), cancellationToken);
-            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution6>(cancellationToken);
-            ErrorHandler.ThrowOnFailure(solution.AddNewProjectFromTemplate(projectTemplatePath, null, null, projectPath, projectName, null, out _));
+            var projectPath = Path.Combine(
+                await GetDirectoryNameAsync(cancellationToken),
+                projectName
+            );
+            var projectTemplatePath = await GetProjectTemplatePathAsync(
+                projectTemplate,
+                ConvertLanguageName(languageName),
+                cancellationToken
+            );
+            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution6>(
+                cancellationToken
+            );
+            ErrorHandler.ThrowOnFailure(
+                solution.AddNewProjectFromTemplate(
+                    projectTemplatePath,
+                    null,
+                    null,
+                    projectPath,
+                    projectName,
+                    null,
+                    out _
+                )
+            );
         }
 
         public async Task RestoreNuGetPackagesAsync(CancellationToken cancellationToken)
@@ -164,17 +259,24 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             }
         }
 
-        public async Task RestoreNuGetPackagesAsync(string projectName, CancellationToken cancellationToken)
+        public async Task RestoreNuGetPackagesAsync(
+            string projectName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             await TestServices.Workspace.WaitForProjectSystemAsync(cancellationToken);
 
-            var solutionRestoreService = await GetComponentModelServiceAsync<IVsSolutionRestoreService>(cancellationToken);
+            var solutionRestoreService =
+                await GetComponentModelServiceAsync<IVsSolutionRestoreService>(cancellationToken);
             await solutionRestoreService.CurrentRestoreOperation;
 
             var projectFullPath = (await GetProjectAsync(projectName, cancellationToken)).FullName;
-            var solutionRestoreStatusProvider = await GetComponentModelServiceAsync<IVsSolutionRestoreStatusProvider>(cancellationToken);
+            var solutionRestoreStatusProvider =
+                await GetComponentModelServiceAsync<IVsSolutionRestoreStatusProvider>(
+                    cancellationToken
+                );
             if (await solutionRestoreStatusProvider.IsRestoreCompleteAsync(cancellationToken))
             {
                 return;
@@ -185,41 +287,104 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             // Check IsRestoreCompleteAsync until it returns true (this stops the retry because true != default(bool))
             await Helper.RetryAsync(
-                cancellationToken => solutionRestoreStatusProvider.IsRestoreCompleteAsync(cancellationToken),
+                cancellationToken =>
+                    solutionRestoreStatusProvider.IsRestoreCompleteAsync(cancellationToken),
                 TimeSpan.FromMilliseconds(50),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public async Task OpenFileAsync(string projectName, string relativeFilePath, CancellationToken cancellationToken)
+        public async Task OpenFileAsync(
+            string projectName,
+            string relativeFilePath,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var filePath = await GetAbsolutePathForProjectRelativeFilePathAsync(projectName, relativeFilePath, cancellationToken);
-            VsShellUtilities.OpenDocument(ServiceProvider.GlobalProvider, filePath, VSConstants.LOGVIEWID.Code_guid, out _, out _, out _, out var view);
+            var filePath = await GetAbsolutePathForProjectRelativeFilePathAsync(
+                projectName,
+                relativeFilePath,
+                cancellationToken
+            );
+            VsShellUtilities.OpenDocument(
+                ServiceProvider.GlobalProvider,
+                filePath,
+                VSConstants.LOGVIEWID.Code_guid,
+                out _,
+                out _,
+                out _,
+                out var view
+            );
 
             // Reliably set focus using NavigateToLineAndColumn
-            var textManager = await GetRequiredGlobalServiceAsync<SVsTextManager, IVsTextManager>(cancellationToken);
+            var textManager = await GetRequiredGlobalServiceAsync<SVsTextManager, IVsTextManager>(
+                cancellationToken
+            );
             ErrorHandler.ThrowOnFailure(view.GetBuffer(out var textLines));
             ErrorHandler.ThrowOnFailure(view.GetCaretPos(out var line, out var column));
-            ErrorHandler.ThrowOnFailure(textManager.NavigateToLineAndColumn(textLines, VSConstants.LOGVIEWID.Code_guid, line, column, line, column));
+            ErrorHandler.ThrowOnFailure(
+                textManager.NavigateToLineAndColumn(
+                    textLines,
+                    VSConstants.LOGVIEWID.Code_guid,
+                    line,
+                    column,
+                    line,
+                    column
+                )
+            );
         }
 
-        public async Task CloseCodeFileAsync(string projectName, string relativeFilePath, bool saveFile, CancellationToken cancellationToken)
+        public async Task CloseCodeFileAsync(
+            string projectName,
+            string relativeFilePath,
+            bool saveFile,
+            CancellationToken cancellationToken
+        )
         {
-            await CloseFileAsync(projectName, relativeFilePath, VSConstants.LOGVIEWID.Code_guid, saveFile, cancellationToken);
+            await CloseFileAsync(
+                projectName,
+                relativeFilePath,
+                VSConstants.LOGVIEWID.Code_guid,
+                saveFile,
+                cancellationToken
+            );
         }
 
-        private async Task CloseFileAsync(string projectName, string relativeFilePath, Guid logicalView, bool saveFile, CancellationToken cancellationToken)
+        private async Task CloseFileAsync(
+            string projectName,
+            string relativeFilePath,
+            Guid logicalView,
+            bool saveFile,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var filePath = await GetAbsolutePathForProjectRelativeFilePathAsync(projectName, relativeFilePath, cancellationToken);
-            if (!VsShellUtilities.IsDocumentOpen(ServiceProvider.GlobalProvider, filePath, logicalView, out _, out _, out var windowFrame))
+            var filePath = await GetAbsolutePathForProjectRelativeFilePathAsync(
+                projectName,
+                relativeFilePath,
+                cancellationToken
+            );
+            if (
+                !VsShellUtilities.IsDocumentOpen(
+                    ServiceProvider.GlobalProvider,
+                    filePath,
+                    logicalView,
+                    out _,
+                    out _,
+                    out var windowFrame
+                )
+            )
             {
-                throw new InvalidOperationException($"File '{filePath}' is not open in logical view '{logicalView}'");
+                throw new InvalidOperationException(
+                    $"File '{filePath}' is not open in logical view '{logicalView}'"
+                );
             }
 
-            var frameClose = saveFile ? __FRAMECLOSE.FRAMECLOSE_SaveIfDirty : __FRAMECLOSE.FRAMECLOSE_NoSave;
+            var frameClose = saveFile
+                ? __FRAMECLOSE.FRAMECLOSE_SaveIfDirty
+                : __FRAMECLOSE.FRAMECLOSE_NoSave;
             ErrorHandler.ThrowOnFailure(windowFrame.CloseFrame((uint)frameClose));
         }
 
@@ -230,7 +395,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         /// <param name="fileName">The name of the file to update or add.</param>
         /// <param name="contents">The contents of the file to overwrite if the file already exists or set if the file it created. Empty string is used if null is passed.</param>
         /// <param name="open">Whether to open the file after it has been updated/created.</param>
-        public async Task UpdateOrAddFileAsync(string projectName, string fileName, string? contents = null, bool open = false, CancellationToken cancellationToken = default)
+        public async Task UpdateOrAddFileAsync(
+            string projectName,
+            string fileName,
+            string? contents = null,
+            bool open = false,
+            CancellationToken cancellationToken = default
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -252,7 +423,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         /// <param name="fileName">The name of the file to update or add.</param>
         /// <param name="contents">The contents of the file to overwrite. Empty string is used if null is passed.</param>
         /// <param name="open">Whether to open the file after it has been updated.</param>
-        public async Task UpdateFileAsync(string projectName, string fileName, string? contents = null, bool open = false, CancellationToken cancellationToken = default)
+        public async Task UpdateFileAsync(
+            string projectName,
+            string fileName,
+            string? contents = null,
+            bool open = false,
+            CancellationToken cancellationToken = default
+        )
         {
             async Task SetTextAsync(string text, CancellationToken cancellationToken)
             {
@@ -262,12 +439,22 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 // means that it is done pumping messages (including WM_PAINT) and the window should return the correct text view
                 await WaitForApplicationIdleAsync(cancellationToken);
 
-                var vsTextManager = await GetRequiredGlobalServiceAsync<SVsTextManager, IVsTextManager>(cancellationToken);
-                var hresult = vsTextManager.GetActiveView(fMustHaveFocus: 1, pBuffer: null, ppView: out var vsTextView);
+                var vsTextManager = await GetRequiredGlobalServiceAsync<
+                    SVsTextManager,
+                    IVsTextManager
+                >(cancellationToken);
+                var hresult = vsTextManager.GetActiveView(
+                    fMustHaveFocus: 1,
+                    pBuffer: null,
+                    ppView: out var vsTextView
+                );
                 Marshal.ThrowExceptionForHR(hresult);
                 var activeVsTextView = (IVsUserData)vsTextView;
 
-                hresult = activeVsTextView.GetData(DefGuidList.guidIWpfTextViewHost, out var wpfTextViewHost);
+                hresult = activeVsTextView.GetData(
+                    DefGuidList.guidIWpfTextViewHost,
+                    out var wpfTextViewHost
+                );
                 Marshal.ThrowExceptionForHR(hresult);
 
                 var view = ((IWpfTextViewHost)wpfTextViewHost).TextView;
@@ -292,7 +479,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         /// <param name="fileName">The name of the file to add.</param>
         /// <param name="contents">The contents of the file to overwrite. An empty file is create if null is passed.</param>
         /// <param name="open">Whether to open the file after it has been updated.</param>
-        public async Task AddFileAsync(string projectName, string fileName, string? contents = null, bool open = false, CancellationToken cancellationToken = default)
+        public async Task AddFileAsync(
+            string projectName,
+            string fileName,
+            string? contents = null,
+            bool open = false,
+            CancellationToken cancellationToken = default
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -325,11 +518,19 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             {
                 LanguageNames.CSharp => "CSharp",
                 LanguageNames.VisualBasic => "VisualBasic",
-                _ => throw new ArgumentException($"'{languageName}' is not supported.", nameof(languageName)),
+                _
+                  => throw new ArgumentException(
+                      $"'{languageName}' is not supported.",
+                      nameof(languageName)
+                  ),
             };
         }
 
-        private async Task<string> GetAbsolutePathForProjectRelativeFilePathAsync(string projectName, string relativeFilePath, CancellationToken cancellationToken)
+        private async Task<string> GetAbsolutePathForProjectRelativeFilePathAsync(
+            string projectName,
+            string relativeFilePath,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -337,7 +538,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var solution = dte.Solution;
             Assumes.Present(solution);
 
-            var project = solution.Projects.Cast<EnvDTE.Project>().First(x => x.Name == projectName);
+            var project = solution.Projects
+                .Cast<EnvDTE.Project>()
+                .First(x => x.Name == projectName);
             var projectPath = Path.GetDirectoryName(project.FullName);
             return Path.Combine(projectPath, relativeFilePath);
         }
@@ -346,8 +549,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution>(cancellationToken);
-            ErrorHandler.ThrowOnFailure(solution.GetProperty((int)__VSPROPID.VSPROPID_IsSolutionOpen, out var isOpen));
+            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution>(
+                cancellationToken
+            );
+            ErrorHandler.ThrowOnFailure(
+                solution.GetProperty((int)__VSPROPID.VSPROPID_IsSolutionOpen, out var isOpen)
+            );
             return (bool)isOpen;
         }
 
@@ -358,7 +565,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution>(cancellationToken);
+            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution>(
+                cancellationToken
+            );
             if (!await IsSolutionOpenAsync(cancellationToken))
             {
                 return;
@@ -371,13 +580,19 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             await semaphore.WaitAsync(cancellationToken);
 
-            void HandleAfterCloseSolution(object sender, EventArgs e)
-                => semaphore.Release();
+            void HandleAfterCloseSolution(object sender, EventArgs e) => semaphore.Release();
 
             solutionEvents.AfterCloseSolution += HandleAfterCloseSolution;
             try
             {
-                ErrorHandler.ThrowOnFailure(solution.CloseSolutionElement((uint)__VSSLNCLOSEOPTIONS.SLNCLOSEOPT_DeleteProject | (uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_NoSave, null, 0));
+                ErrorHandler.ThrowOnFailure(
+                    solution.CloseSolutionElement(
+                        (uint)__VSSLNCLOSEOPTIONS.SLNCLOSEOPT_DeleteProject
+                            | (uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_NoSave,
+                        null,
+                        0
+                    )
+                );
                 await semaphore.WaitAsync(cancellationToken);
             }
             finally
@@ -390,8 +605,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution>(cancellationToken);
-            ErrorHandler.ThrowOnFailure(solution.GetSolutionInfo(out _, out var solutionFileFullPath, out _));
+            var solution = await GetRequiredGlobalServiceAsync<SVsSolution, IVsSolution>(
+                cancellationToken
+            );
+            ErrorHandler.ThrowOnFailure(
+                solution.GetSolutionInfo(out _, out var solutionFileFullPath, out _)
+            );
             if (string.IsNullOrEmpty(solutionFileFullPath))
             {
                 throw new InvalidOperationException();
@@ -400,24 +619,36 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return Path.GetDirectoryName(solutionFileFullPath);
         }
 
-        private async Task<string> GetProjectTemplatePathAsync(string projectTemplate, string languageName, CancellationToken cancellationToken)
+        private async Task<string> GetProjectTemplatePathAsync(
+            string projectTemplate,
+            string languageName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var dte = await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken);
             var solution = (EnvDTE80.Solution2)dte.Solution;
 
-            var hostLocale = await GetRequiredGlobalServiceAsync<SUIHostLocale, IUIHostLocale>(cancellationToken);
+            var hostLocale = await GetRequiredGlobalServiceAsync<SUIHostLocale, IUIHostLocale>(
+                cancellationToken
+            );
             ErrorHandler.ThrowOnFailure(hostLocale.GetUILocale(out var localeID));
 
-            if (string.Equals(languageName, "csharp", StringComparison.OrdinalIgnoreCase)
-                && GetCSharpProjectTemplates(localeID).TryGetValue(projectTemplate, out var csharpProjectTemplate))
+            if (
+                string.Equals(languageName, "csharp", StringComparison.OrdinalIgnoreCase)
+                && GetCSharpProjectTemplates(localeID)
+                    .TryGetValue(projectTemplate, out var csharpProjectTemplate)
+            )
             {
                 return solution.GetProjectTemplate(csharpProjectTemplate, languageName);
             }
 
-            if (string.Equals(languageName, "visualbasic", StringComparison.OrdinalIgnoreCase)
-                && GetVisualBasicProjectTemplates(localeID).TryGetValue(projectTemplate, out var visualBasicProjectTemplate))
+            if (
+                string.Equals(languageName, "visualbasic", StringComparison.OrdinalIgnoreCase)
+                && GetVisualBasicProjectTemplates(localeID)
+                    .TryGetValue(projectTemplate, out var visualBasicProjectTemplate)
+            )
             {
                 return solution.GetProjectTemplate(visualBasicProjectTemplate, languageName);
             }
@@ -427,8 +658,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             static ImmutableDictionary<string, string> GetCSharpProjectTemplates(uint localeID)
             {
                 var builder = ImmutableDictionary.CreateBuilder<string, string>();
-                builder[WellKnownProjectTemplates.ClassLibrary] = $@"Windows\{localeID}\ClassLibrary.zip";
-                builder[WellKnownProjectTemplates.ConsoleApplication] = "Microsoft.CSharp.ConsoleApplication";
+                builder[WellKnownProjectTemplates.ClassLibrary] =
+                    $@"Windows\{localeID}\ClassLibrary.zip";
+                builder[WellKnownProjectTemplates.ConsoleApplication] =
+                    "Microsoft.CSharp.ConsoleApplication";
                 builder[WellKnownProjectTemplates.Website] = "EmptyWeb.zip";
                 builder[WellKnownProjectTemplates.WinFormsApplication] = "WindowsApplication.zip";
                 builder[WellKnownProjectTemplates.WpfApplication] = "WpfApplication.zip";
@@ -439,8 +672,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             static ImmutableDictionary<string, string> GetVisualBasicProjectTemplates(uint localeID)
             {
                 var builder = ImmutableDictionary.CreateBuilder<string, string>();
-                builder[WellKnownProjectTemplates.ClassLibrary] = $@"Windows\{localeID}\ClassLibrary.zip";
-                builder[WellKnownProjectTemplates.ConsoleApplication] = "Microsoft.VisualBasic.Windows.ConsoleApplication";
+                builder[WellKnownProjectTemplates.ClassLibrary] =
+                    $@"Windows\{localeID}\ClassLibrary.zip";
+                builder[WellKnownProjectTemplates.ConsoleApplication] =
+                    "Microsoft.VisualBasic.Windows.ConsoleApplication";
                 builder[WellKnownProjectTemplates.Website] = "EmptyWeb.zip";
                 builder[WellKnownProjectTemplates.WinFormsApplication] = "WindowsApplication.zip";
                 builder[WellKnownProjectTemplates.WpfApplication] = "WpfApplication.zip";
@@ -454,19 +689,33 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return Path.Combine(Path.GetTempPath(), "roslyn-test", Path.GetRandomFileName());
         }
 
-        private async Task<EnvDTE.Project> GetProjectAsync(string nameOrFileName, CancellationToken cancellationToken)
+        private async Task<EnvDTE.Project> GetProjectAsync(
+            string nameOrFileName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync();
 
             var dte = await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken);
             var solution = (EnvDTE80.Solution2)dte.Solution;
-            return solution.Projects.OfType<EnvDTE.Project>().First(
-                project =>
-                {
-                    ThreadHelper.ThrowIfNotOnUIThread();
-                    return string.Equals(project.FileName, nameOrFileName, StringComparison.OrdinalIgnoreCase)
-                        || string.Equals(project.Name, nameOrFileName, StringComparison.OrdinalIgnoreCase);
-                });
+            return solution.Projects
+                .OfType<EnvDTE.Project>()
+                .First(
+                    project =>
+                    {
+                        ThreadHelper.ThrowIfNotOnUIThread();
+                        return string.Equals(
+                                project.FileName,
+                                nameOrFileName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                            || string.Equals(
+                                project.Name,
+                                nameOrFileName,
+                                StringComparison.OrdinalIgnoreCase
+                            );
+                    }
+                );
         }
 
         private sealed class SolutionEvents : IVsSolutionEvents, IAsyncDisposable
@@ -517,7 +766,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 return VSConstants.S_OK;
             }
 
-            public int OnBeforeUnloadProject(IVsHierarchy pRealHierarchy, IVsHierarchy pStubHierarchy)
+            public int OnBeforeUnloadProject(
+                IVsHierarchy pRealHierarchy,
+                IVsHierarchy pStubHierarchy
+            )
             {
                 return VSConstants.S_OK;
             }

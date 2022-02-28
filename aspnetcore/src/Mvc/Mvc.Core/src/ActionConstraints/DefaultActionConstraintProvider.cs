@@ -33,9 +33,7 @@ internal class DefaultActionConstraintProvider : IActionConstraintProvider
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ActionConstraintProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ActionConstraintProviderContext context) { }
 
     private void ProvideConstraint(ActionConstraintItem item, IServiceProvider services)
     {

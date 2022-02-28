@@ -33,7 +33,8 @@ public class TreeRouteBuilder
     internal TreeRouteBuilder(
         ILoggerFactory loggerFactory,
         ObjectPool<UriBuildingContext> objectPool,
-        IInlineConstraintResolver constraintResolver)
+        IInlineConstraintResolver constraintResolver
+    )
     {
         if (loggerFactory == null)
         {
@@ -70,7 +71,8 @@ public class TreeRouteBuilder
         IRouter handler,
         RouteTemplate routeTemplate,
         string routeName,
-        int order)
+        int order
+    )
     {
         if (handler == null)
         {
@@ -91,7 +93,10 @@ public class TreeRouteBuilder
             RouteTemplate = routeTemplate,
         };
 
-        var constraintBuilder = new RouteConstraintBuilder(_constraintResolver, routeTemplate.TemplateText);
+        var constraintBuilder = new RouteConstraintBuilder(
+            _constraintResolver,
+            routeTemplate.TemplateText
+        );
         foreach (var parameter in routeTemplate.Parameters)
         {
             if (parameter.InlineConstraints != null)
@@ -137,7 +142,8 @@ public class TreeRouteBuilder
         RouteTemplate routeTemplate,
         RouteValueDictionary requiredLinkValues,
         string routeName,
-        int order)
+        int order
+    )
     {
         if (handler == null)
         {
@@ -164,7 +170,10 @@ public class TreeRouteBuilder
             RouteTemplate = routeTemplate,
         };
 
-        var constraintBuilder = new RouteConstraintBuilder(_constraintResolver, routeTemplate.TemplateText);
+        var constraintBuilder = new RouteConstraintBuilder(
+            _constraintResolver,
+            routeTemplate.TemplateText
+        );
         foreach (var parameter in routeTemplate.Parameters)
         {
             if (parameter.InlineConstraints != null)
@@ -247,7 +256,8 @@ public class TreeRouteBuilder
             _objectPool,
             _logger,
             _constraintLogger,
-            version);
+            version
+        );
     }
 
     /// <summary>

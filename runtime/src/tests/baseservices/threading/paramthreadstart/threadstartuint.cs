@@ -10,7 +10,7 @@ class ThreadStartUInt
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartUInt <uint>|min|max\n");
             return -1;
@@ -18,10 +18,10 @@ class ThreadStartUInt
 
         uint i = 0;
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             i = UInt32.MaxValue;
-        else if(args[0].ToLower() == "min")
-            i = UInt32.MinValue;       
+        else if (args[0].ToLower() == "min")
+            i = UInt32.MinValue;
         else
             i = Convert.ToUInt32(args[0]);
 

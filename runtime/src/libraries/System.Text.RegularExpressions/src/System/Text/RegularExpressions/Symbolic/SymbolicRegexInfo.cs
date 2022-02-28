@@ -36,14 +36,19 @@ namespace System.Text.RegularExpressions.Symbolic
         private static SymbolicRegexInfo Mk(uint i)
         {
             SymbolicRegexInfo[] infos = s_infos;
-            return i < infos.Length ?
-                infos[i] :
-                new SymbolicRegexInfo(i);
+            return i < infos.Length ? infos[i] : new SymbolicRegexInfo(i);
         }
 
-        internal static SymbolicRegexInfo Mk(bool isAlwaysNullable = false, bool canBeNullable = false, bool startsWithLineAnchor = false,
-            bool startsWithBoundaryAnchor = false, bool containsSomeAnchor = false,
-            bool containsLineAnchor = false, bool containsSomeCharacter = false, bool isLazy = true)
+        internal static SymbolicRegexInfo Mk(
+            bool isAlwaysNullable = false,
+            bool canBeNullable = false,
+            bool startsWithLineAnchor = false,
+            bool startsWithBoundaryAnchor = false,
+            bool containsSomeAnchor = false,
+            bool containsLineAnchor = false,
+            bool containsSomeCharacter = false,
+            bool isLazy = true
+        )
         {
             uint i = 0;
 
@@ -57,7 +62,12 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-            if (startsWithLineAnchor || containsLineAnchor || startsWithBoundaryAnchor || containsSomeAnchor)
+            if (
+                startsWithLineAnchor
+                || containsLineAnchor
+                || startsWithBoundaryAnchor
+                || containsSomeAnchor
+            )
             {
                 i |= ContainsSomeAnchorMask;
 
@@ -94,7 +104,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
         public bool CanBeNullable => (_info & CanBeNullableMask) != 0;
 
-        public bool StartsWithSomeAnchor => (_info & (StartsWithLineAnchorMask | StartsWithBoundaryAnchorMask)) != 0;
+        public bool StartsWithSomeAnchor =>
+            (_info & (StartsWithLineAnchorMask | StartsWithBoundaryAnchorMask)) != 0;
 
         public bool StartsWithLineAnchor => (_info & StartsWithLineAnchorMask) != 0;
 
@@ -143,22 +154,43 @@ namespace System.Text.RegularExpressions.Symbolic
             return Mk(i);
         }
 
-        public static SymbolicRegexInfo Concat(SymbolicRegexInfo left_info, SymbolicRegexInfo right_info)
+        public static SymbolicRegexInfo Concat(
+            SymbolicRegexInfo left_info,
+            SymbolicRegexInfo right_info
+        )
         {
             bool isNullable = left_info.IsNullable && right_info.IsNullable;
             bool canBeNullable = left_info.CanBeNullable && right_info.CanBeNullable;
             bool isLazy = left_info.IsLazy && right_info.IsLazy;
 
-            bool startsWithLineAnchor = left_info.StartsWithLineAnchor || (left_info.CanBeNullable && right_info.StartsWithLineAnchor);
-            bool startsWithBoundaryAnchor = left_info.StartsWithBoundaryAnchor || (left_info.CanBeNullable && right_info.StartsWithBoundaryAnchor);
+            bool startsWithLineAnchor =
+                left_info.StartsWithLineAnchor
+                || (left_info.CanBeNullable && right_info.StartsWithLineAnchor);
+            bool startsWithBoundaryAnchor =
+                left_info.StartsWithBoundaryAnchor
+                || (left_info.CanBeNullable && right_info.StartsWithBoundaryAnchor);
             bool containsSomeAnchor = left_info.ContainsSomeAnchor || right_info.ContainsSomeAnchor;
             bool containsLineAnchor = left_info.ContainsLineAnchor || right_info.ContainsLineAnchor;
-            bool containsSomeCharacter = left_info.ContainsSomeCharacter || right_info.ContainsSomeCharacter;
+            bool containsSomeCharacter =
+                left_info.ContainsSomeCharacter || right_info.ContainsSomeCharacter;
 
-            return Mk(isNullable, canBeNullable, startsWithLineAnchor, startsWithBoundaryAnchor, containsSomeAnchor, containsLineAnchor, containsSomeCharacter, isLazy);
+            return Mk(
+                isNullable,
+                canBeNullable,
+                startsWithLineAnchor,
+                startsWithBoundaryAnchor,
+                containsSomeAnchor,
+                containsLineAnchor,
+                containsSomeCharacter,
+                isLazy
+            );
         }
 
-        public static SymbolicRegexInfo Loop(SymbolicRegexInfo body_info, int lowerBound, bool isLazy)
+        public static SymbolicRegexInfo Loop(
+            SymbolicRegexInfo body_info,
+            int lowerBound,
+            bool isLazy
+        )
         {
             // Inherit anchor visibility from the loop body
             uint i = body_info._info;
@@ -187,14 +219,16 @@ namespace System.Text.RegularExpressions.Symbolic
             // - If node is always nullable (info.IsNullable=true) then Not(node) can never be nullable
             // For example \B.CanBeNullable=true and \B.IsNullable=false
             // and ~(\B).CanBeNullable=true and ~(\B).IsNullable=false
-            Mk(isAlwaysNullable: !info.CanBeNullable,
+            Mk(
+                isAlwaysNullable: !info.CanBeNullable,
                 canBeNullable: !info.IsNullable,
                 startsWithLineAnchor: info.StartsWithLineAnchor,
                 startsWithBoundaryAnchor: info.StartsWithBoundaryAnchor,
                 containsSomeAnchor: info.ContainsSomeAnchor,
                 containsLineAnchor: info.ContainsLineAnchor,
                 containsSomeCharacter: info.ContainsSomeCharacter,
-                isLazy: info.IsLazy);
+                isLazy: info.IsLazy
+            );
 
         public override bool Equals(object? obj) => obj is SymbolicRegexInfo i && i._info == _info;
 

@@ -12,13 +12,24 @@ internal static partial class Interop
         internal const int WAIT_FAILED = unchecked((int)0xFFFFFFFF);
 
         [DllImport(Libraries.Kernel32)]
-        internal static extern uint WaitForMultipleObjectsEx(uint nCount, IntPtr lpHandles, BOOL bWaitAll, uint dwMilliseconds, BOOL bAlertable);
+        internal static extern uint WaitForMultipleObjectsEx(
+            uint nCount,
+            IntPtr lpHandles,
+            BOOL bWaitAll,
+            uint dwMilliseconds,
+            BOOL bAlertable
+        );
 
         [DllImport(Libraries.Kernel32)]
         internal static extern uint WaitForSingleObject(IntPtr hHandle, uint dwMilliseconds);
 
         [DllImport(Libraries.Kernel32)]
-        internal static extern uint SignalObjectAndWait(IntPtr hObjectToSignal, IntPtr hObjectToWaitOn, uint dwMilliseconds, BOOL bAlertable);
+        internal static extern uint SignalObjectAndWait(
+            IntPtr hObjectToSignal,
+            IntPtr hObjectToWaitOn,
+            uint dwMilliseconds,
+            BOOL bAlertable
+        );
 
         [DllImport(Libraries.Kernel32)]
         internal static extern void Sleep(uint milliseconds);
@@ -33,7 +44,8 @@ internal static partial class Interop
             delegate* unmanaged<IntPtr, uint> lpStartAddress,
             IntPtr lpParameter,
             uint dwCreationFlags,
-            out uint lpThreadId);
+            out uint lpThreadId
+        );
 
         [DllImport(Libraries.Kernel32)]
         internal static extern uint ResumeThread(SafeWaitHandle hThread);
@@ -51,7 +63,8 @@ internal static partial class Interop
             out SafeWaitHandle lpTargetHandle,
             uint dwDesiredAccess,
             bool bInheritHandle,
-            uint dwOptions);
+            uint dwOptions
+        );
 
         internal enum ThreadPriority : int
         {

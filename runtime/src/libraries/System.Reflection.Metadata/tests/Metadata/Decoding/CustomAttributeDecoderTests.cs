@@ -13,20 +13,38 @@ namespace System.Reflection.Metadata.Decoding.Tests
     public class CustomAttributeDecoderTests
     {
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60579", TestPlatforms.iOS | TestPlatforms.tvOS)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Type assembly name is different on .NET Framework.")]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60579",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Type assembly name is different on .NET Framework."
+        )]
         public void TestCustomAttributeDecoder()
         {
-            using (FileStream stream = File.OpenRead(AssemblyPathHelper.GetAssemblyLocation(typeof(HasAttributes).GetTypeInfo().Assembly)))
+            using (
+                FileStream stream = File.OpenRead(
+                    AssemblyPathHelper.GetAssemblyLocation(
+                        typeof(HasAttributes).GetTypeInfo().Assembly
+                    )
+                )
+            )
             using (var peReader = new PEReader(stream))
             {
                 MetadataReader reader = peReader.GetMetadataReader();
                 var provider = new CustomAttributeTypeProvider();
-                TypeDefinitionHandle typeDefHandle = TestMetadataResolver.FindTestType(reader, typeof(HasAttributes));
-
+                TypeDefinitionHandle typeDefHandle = TestMetadataResolver.FindTestType(
+                    reader,
+                    typeof(HasAttributes)
+                );
 
                 int i = 0;
-                foreach (CustomAttributeHandle attributeHandle in reader.GetCustomAttributes(typeDefHandle))
+                foreach (
+                    CustomAttributeHandle attributeHandle in reader.GetCustomAttributes(
+                        typeDefHandle
+                    )
+                )
                 {
                     CustomAttribute attribute = reader.GetCustomAttribute(attributeHandle);
                     CustomAttributeValue<string> value = attribute.DecodeValue(provider);
@@ -56,21 +74,36 @@ namespace System.Reflection.Metadata.Decoding.Tests
                         case 2:
                             Assert.Equal(3, value.NamedArguments.Length);
 
-                            Assert.Equal(CustomAttributeNamedArgumentKind.Field, value.NamedArguments[0].Kind);
+                            Assert.Equal(
+                                CustomAttributeNamedArgumentKind.Field,
+                                value.NamedArguments[0].Kind
+                            );
                             Assert.Equal("StringField", value.NamedArguments[0].Name);
                             Assert.Equal("string", value.NamedArguments[0].Type);
                             Assert.Equal("0", value.NamedArguments[0].Value);
 
-                            Assert.Equal(CustomAttributeNamedArgumentKind.Field, value.NamedArguments[1].Kind);
+                            Assert.Equal(
+                                CustomAttributeNamedArgumentKind.Field,
+                                value.NamedArguments[1].Kind
+                            );
                             Assert.Equal("Int32Field", value.NamedArguments[1].Name);
                             Assert.Equal("int32", value.NamedArguments[1].Type);
                             Assert.Equal(1, value.NamedArguments[1].Value);
 
-                            Assert.Equal(CustomAttributeNamedArgumentKind.Property, value.NamedArguments[2].Kind);
+                            Assert.Equal(
+                                CustomAttributeNamedArgumentKind.Property,
+                                value.NamedArguments[2].Kind
+                            );
                             Assert.Equal("SByteEnumArrayProperty", value.NamedArguments[2].Name);
-                            Assert.Equal(typeof(SByteEnum).FullName + "[]", value.NamedArguments[2].Type);
+                            Assert.Equal(
+                                typeof(SByteEnum).FullName + "[]",
+                                value.NamedArguments[2].Type
+                            );
 
-                            var array = (ImmutableArray<CustomAttributeTypedArgument<string>>)(value.NamedArguments[2].Value);
+                            var array =
+                                (ImmutableArray<CustomAttributeTypedArgument<string>>)(
+                                    value.NamedArguments[2].Value
+                                );
                             Assert.Equal(1, array.Length);
                             Assert.Equal(typeof(SByteEnum).FullName, array[0].Type);
                             Assert.Equal((sbyte)SByteEnum.Value, array[0].Value);
@@ -89,22 +122,21 @@ namespace System.Reflection.Metadata.Decoding.Tests
 
         // no arguments
         [Test]
-
         // multiple fixed arguments
         [Test("0", 1, 2.0)]
-
         // multiple named arguments
-        [Test(StringField = "0", Int32Field = 1, SByteEnumArrayProperty = new[] { SByteEnum.Value })]
-
+        [Test(
+            StringField = "0",
+            Int32Field = 1,
+            SByteEnumArrayProperty = new[] { SByteEnum.Value }
+        )]
         // multiple fixed and named arguments
         [Test("0", 1, 2.0, StringField = "0", Int32Field = 1, DoubleField = 2.0)]
-
         // single fixed null argument
         [Test((object)null)]
         [Test((string)null)]
         [Test((Type)null)]
         [Test((int[])null)]
-
         // single fixed arguments with strong type
         [Test("string")]
         [Test((sbyte)-1)]
@@ -133,7 +165,6 @@ namespace System.Reflection.Metadata.Decoding.Tests
         [Test(new string[] { })]
         [Test(new string[] { "x", "y", "z", null })]
         [Test(new Int32Enum[] { Int32Enum.Value })]
-
         // same single fixed arguments as above, typed as object
         [Test((object)("string"))]
         [Test((object)(sbyte)-1)]
@@ -161,36 +192,37 @@ namespace System.Reflection.Metadata.Decoding.Tests
         [Test((object)(new string[] { }))]
         [Test((object)(new string[] { "x", "y", "z", null }))]
         [Test((object)(new Int32Enum[] { Int32Enum.Value }))]
-
         // same values as above two cases, but put into an object[]
-        [Test(new object[] {
-            "string",
-            (sbyte)-1,
-            (short)-2,
-            (int)-4,
-            (long)-8,
-            (sbyte)-1,
-            (short)-2,
-            (int)-4,
-            (long)-8,
-            (byte)1,
-            (ushort)2,
-            (uint)4,
-            true,
-            false,
-            typeof(string),
-            SByteEnum.Value,
-            Int16Enum.Value,
-            Int32Enum.Value,
-            Int64Enum.Value,
-            SByteEnum.Value,
-            Int16Enum.Value,
-            Int32Enum.Value,
-            Int64Enum.Value,
-            new string[] {},
-            new string[] { "x", "y", "z", null },
-        })]
-
+        [Test(
+            new object[]
+            {
+                "string",
+                (sbyte)-1,
+                (short)-2,
+                (int)-4,
+                (long)-8,
+                (sbyte)-1,
+                (short)-2,
+                (int)-4,
+                (long)-8,
+                (byte)1,
+                (ushort)2,
+                (uint)4,
+                true,
+                false,
+                typeof(string),
+                SByteEnum.Value,
+                Int16Enum.Value,
+                Int32Enum.Value,
+                Int64Enum.Value,
+                SByteEnum.Value,
+                Int16Enum.Value,
+                Int32Enum.Value,
+                Int64Enum.Value,
+                new string[] { },
+                new string[] { "x", "y", "z", null },
+            }
+        )]
         // same values as strongly-typed fixed arguments as named arguments
         // single fixed arguments with strong type
         [Test(StringField = "string")]
@@ -220,72 +252,145 @@ namespace System.Reflection.Metadata.Decoding.Tests
         [Test(new string[] { })]
         [Test(new string[] { "x", "y", "z", null })]
         [Test(new Int32Enum[] { Int32Enum.Value })]
-
         // null named arguments
         [Test(ObjectField = null)]
         [Test(StringField = null)]
-
         [Test(Int32ArrayProperty = null)]
-
         private sealed class HasAttributes { }
 
-        public enum SByteEnum : sbyte { Value = -1 }
-        public enum Int16Enum : short { Value = -2 }
-        public enum Int32Enum : int { Value = -3 }
-        public enum Int64Enum : long { Value = -4 }
-        public enum ByteEnum : sbyte { Value = 1 }
-        public enum UInt16Enum : ushort { Value = 2 }
-        public enum UInt32Enum : uint { Value = 3 }
-        public enum UInt64Enum : ulong { Value = 4 }
+        public enum SByteEnum : sbyte
+        {
+            Value = -1
+        }
+
+        public enum Int16Enum : short
+        {
+            Value = -2
+        }
+
+        public enum Int32Enum : int
+        {
+            Value = -3
+        }
+
+        public enum Int64Enum : long
+        {
+            Value = -4
+        }
+
+        public enum ByteEnum : sbyte
+        {
+            Value = 1
+        }
+
+        public enum UInt16Enum : ushort
+        {
+            Value = 2
+        }
+
+        public enum UInt32Enum : uint
+        {
+            Value = 3
+        }
+
+        public enum UInt64Enum : ulong
+        {
+            Value = 4
+        }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
         public sealed class TestAttribute : Attribute
         {
             public TestAttribute() { }
+
             public TestAttribute(string x, int y, double z) { }
+
             public TestAttribute(string value) { }
+
             public TestAttribute(object value) { }
+
             public TestAttribute(sbyte value) { }
+
             public TestAttribute(short value) { }
+
             public TestAttribute(int value) { }
+
             public TestAttribute(long value) { }
+
             public TestAttribute(byte value) { }
+
             public TestAttribute(ushort value) { }
+
             public TestAttribute(uint value) { }
+
             public TestAttribute(ulong value) { }
+
             public TestAttribute(bool value) { }
+
             public TestAttribute(float value) { }
+
             public TestAttribute(double value) { }
+
             public TestAttribute(Type value) { }
+
             public TestAttribute(SByteEnum value) { }
+
             public TestAttribute(Int16Enum value) { }
+
             public TestAttribute(Int32Enum value) { }
+
             public TestAttribute(Int64Enum value) { }
+
             public TestAttribute(ByteEnum value) { }
+
             public TestAttribute(UInt16Enum value) { }
+
             public TestAttribute(UInt32Enum value) { }
+
             public TestAttribute(UInt64Enum value) { }
+
             public TestAttribute(string[] value) { }
+
             public TestAttribute(object[] value) { }
+
             public TestAttribute(sbyte[] value) { }
+
             public TestAttribute(short[] value) { }
+
             public TestAttribute(int[] value) { }
+
             public TestAttribute(long[] value) { }
+
             public TestAttribute(byte[] value) { }
+
             public TestAttribute(ushort[] value) { }
+
             public TestAttribute(uint[] value) { }
+
             public TestAttribute(ulong[] value) { }
+
             public TestAttribute(bool[] value) { }
+
             public TestAttribute(float[] value) { }
+
             public TestAttribute(double[] value) { }
+
             public TestAttribute(Type[] value) { }
+
             public TestAttribute(SByteEnum[] value) { }
+
             public TestAttribute(Int16Enum[] value) { }
+
             public TestAttribute(Int32Enum[] value) { }
+
             public TestAttribute(Int64Enum[] value) { }
+
             public TestAttribute(ByteEnum[] value) { }
+
             public TestAttribute(UInt16Enum[] value) { }
+
             public TestAttribute(UInt32Enum[] value) { }
+
             public TestAttribute(UInt64Enum[] value) { }
 
             public string StringField;
@@ -335,8 +440,9 @@ namespace System.Reflection.Metadata.Decoding.Tests
             public UInt64Enum[] UInt64EnumArrayProperty { get; set; }
         }
 
-
-        private class CustomAttributeTypeProvider : DisassemblingTypeProvider, ICustomAttributeTypeProvider<string>
+        private class CustomAttributeTypeProvider
+            : DisassemblingTypeProvider,
+              ICustomAttributeTypeProvider<string>
         {
             public string GetSystemType()
             {
@@ -345,8 +451,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
 
             public bool IsSystemType(string type)
             {
-                return type == "[System.Runtime]System.Type"  // encountered as typeref
-                    || Type.GetType(type) == typeof(Type);    // encountered as serialized to reflection notation
+                return type == "[System.Runtime]System.Type" // encountered as typeref
+                    || Type.GetType(type) == typeof(Type); // encountered as serialized to reflection notation
             }
 
             public string GetTypeFromSerializedName(string name)

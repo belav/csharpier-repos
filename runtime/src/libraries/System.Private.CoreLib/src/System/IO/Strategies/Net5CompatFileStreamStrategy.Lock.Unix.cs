@@ -10,7 +10,14 @@ namespace System.IO.Strategies
         /// <param name="length">The range to be locked.</param>
         internal override void Lock(long position, long length)
         {
-            CheckFileCall(Interop.Sys.LockFileRegion(_fileHandle, position, length, CanWrite ? Interop.Sys.LockType.F_WRLCK : Interop.Sys.LockType.F_RDLCK));
+            CheckFileCall(
+                Interop.Sys.LockFileRegion(
+                    _fileHandle,
+                    position,
+                    length,
+                    CanWrite ? Interop.Sys.LockType.F_WRLCK : Interop.Sys.LockType.F_RDLCK
+                )
+            );
         }
 
         /// <summary>Allows access by other processes to all or part of a file that was previously locked.</summary>
@@ -18,7 +25,14 @@ namespace System.IO.Strategies
         /// <param name="length">The range to be unlocked.</param>
         internal override void Unlock(long position, long length)
         {
-            CheckFileCall(Interop.Sys.LockFileRegion(_fileHandle, position, length, Interop.Sys.LockType.F_UNLCK));
+            CheckFileCall(
+                Interop.Sys.LockFileRegion(
+                    _fileHandle,
+                    position,
+                    length,
+                    Interop.Sys.LockType.F_UNLCK
+                )
+            );
         }
     }
 }

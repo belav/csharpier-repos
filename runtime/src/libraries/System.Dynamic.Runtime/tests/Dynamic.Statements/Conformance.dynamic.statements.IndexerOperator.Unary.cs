@@ -22,8 +22,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.decrease001.decrease001
 {
     // <Area>operator on dynamic indexer</Area>
@@ -38,15 +36,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -71,8 +62,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.decrease001e.decrease001e
 {
     // <Area>operator on dynamic indexer</Area>
@@ -87,15 +76,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -115,7 +97,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, ex.Message, "--", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadUnaryOp,
+                    ex.Message,
+                    "--",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -127,7 +114,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, ex.Message, "++", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadUnaryOp,
+                    ex.Message,
+                    "++",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -137,8 +129,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.decrease002.decrease002
 {
@@ -154,15 +144,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -187,8 +170,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.decrease002e.decrease002e
 {
     // <Area>operator on dynamic indexer</Area>
@@ -203,15 +184,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -231,7 +205,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, ex.Message, "--", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadUnaryOp,
+                    ex.Message,
+                    "--",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -243,7 +222,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, ex.Message, "--", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadUnaryOp,
+                    ex.Message,
+                    "--",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -253,8 +237,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.increase001.increase001
 {
@@ -270,15 +252,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -303,8 +278,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.increase001e.increase001e
 {
     // <Area>operator on dynamic indexer</Area>
@@ -319,15 +292,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -347,7 +313,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, ex.Message, "++", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadUnaryOp,
+                    ex.Message,
+                    "++",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -359,7 +330,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, ex.Message, "++", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadUnaryOp,
+                    ex.Message,
+                    "++",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -369,8 +345,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.increase002.increase002
 {
@@ -386,15 +360,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -419,8 +386,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.increase002e.increase002e
 {
     // <Area>operator on dynamic indexer</Area>
@@ -435,15 +400,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -463,7 +421,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, ex.Message, "++", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadUnaryOp,
+                    ex.Message,
+                    "++",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -475,7 +438,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, ex.Message, "++", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadUnaryOp,
+                    ex.Message,
+                    "++",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -485,8 +453,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.minus001.minus001
 {
@@ -502,15 +468,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -535,8 +494,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.minus001e.minus001e
 {
     // <Area>operator on dynamic indexer</Area>
@@ -551,15 +508,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -602,8 +552,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.not001.not001
 {
     // <Area>operator on dynamic indexer</Area>
@@ -618,15 +566,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[bool index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -651,8 +592,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.not001e.not001e
 {
     // <Area>operator on dynamic indexer</Area>
@@ -667,15 +606,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -718,8 +650,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.plus001.plus001
 {
     // <Area>operator on dynamic indexer</Area>
@@ -734,15 +664,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -767,8 +690,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Unary.plus001e.plus001e
 {
     // <Area>operator on dynamic indexer</Area>
@@ -783,15 +704,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]

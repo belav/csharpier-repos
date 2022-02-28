@@ -10,7 +10,11 @@ namespace System.Text.Json
         /// <summary>
         /// Emulates Dictionary.TryAdd on netstandard.
         /// </summary>
-        public static bool TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, in TKey key, in TValue value) where TKey : notnull
+        public static bool TryAdd<TKey, TValue>(
+            this Dictionary<TKey, TValue> dictionary,
+            in TKey key,
+            in TValue value
+        ) where TKey : notnull
         {
 #if NETSTANDARD2_0 || NETFRAMEWORK
             if (!dictionary.ContainsKey(key))

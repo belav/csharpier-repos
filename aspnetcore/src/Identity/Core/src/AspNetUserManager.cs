@@ -31,7 +31,8 @@ public class AspNetUserManager<TUser> : UserManager<TUser>, IDisposable where TU
     /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error messages.</param>
     /// <param name="services">The <see cref="IServiceProvider"/> used to resolve services.</param>
     /// <param name="logger">The logger used to log messages, warnings and errors.</param>
-    public AspNetUserManager(IUserStore<TUser> store,
+    public AspNetUserManager(
+        IUserStore<TUser> store,
         IOptions<IdentityOptions> optionsAccessor,
         IPasswordHasher<TUser> passwordHasher,
         IEnumerable<IUserValidator<TUser>> userValidators,
@@ -39,10 +40,23 @@ public class AspNetUserManager<TUser> : UserManager<TUser>, IDisposable where TU
         ILookupNormalizer keyNormalizer,
         IdentityErrorDescriber errors,
         IServiceProvider services,
-        ILogger<UserManager<TUser>> logger)
-        : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
+        ILogger<UserManager<TUser>> logger
+    )
+        : base(
+            store,
+            optionsAccessor,
+            passwordHasher,
+            userValidators,
+            passwordValidators,
+            keyNormalizer,
+            errors,
+            services,
+            logger
+        )
     {
-        _cancel = services?.GetService<IHttpContextAccessor>()?.HttpContext?.RequestAborted ?? CancellationToken.None;
+        _cancel =
+            services?.GetService<IHttpContextAccessor>()?.HttpContext?.RequestAborted
+            ?? CancellationToken.None;
     }
 
     /// <summary>

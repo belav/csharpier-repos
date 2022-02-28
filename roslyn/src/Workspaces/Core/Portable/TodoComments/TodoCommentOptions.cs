@@ -16,13 +16,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TodoComments
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TodoCommentOptions()
-        {
-        }
+        public TodoCommentOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            TokenList);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(TokenList);
 
-        public static readonly Option<string> TokenList = new(nameof(TodoCommentOptions), nameof(TokenList), defaultValue: "");
+        public static readonly Option<string> TokenList =
+            new(nameof(TodoCommentOptions), nameof(TokenList), defaultValue: "");
     }
 }

@@ -10,23 +10,14 @@ namespace System.CommandLine.Help
         private readonly CommandLineBuilder _builder;
         private string? _description;
 
-        public HelpOption(string[] aliases, CommandLineBuilder builder)
-            : base(aliases)
+        public HelpOption(string[] aliases, CommandLineBuilder builder) : base(aliases)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             DisallowBinding = true;
         }
 
-        public HelpOption(CommandLineBuilder builder) : this(new[]
-        {
-            "-h",
-            "/h",
-            "--help",
-            "-?",
-            "/?"
-        }, builder)
-        {
-        }
+        public HelpOption(CommandLineBuilder builder)
+            : this(new[] { "-h", "/h", "--help", "-?", "/?" }, builder) { }
 
         public override string? Description
         {

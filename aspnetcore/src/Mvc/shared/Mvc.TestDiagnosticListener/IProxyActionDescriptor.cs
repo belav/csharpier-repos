@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-public interface IProxyActionDescriptor
-{
-}
+public interface IProxyActionDescriptor { }

@@ -26,12 +26,31 @@ namespace System.Net.Http.Tests
         {
             CheckValidParsedValue("text", 0, new StringWithQualityHeaderValue("text"), 4);
             CheckValidParsedValue("text,", 0, new StringWithQualityHeaderValue("text"), 5);
-            CheckValidParsedValue(" text ; q = 0.5, next_text  ", 0, new StringWithQualityHeaderValue("text", 0.5), 17);
-            CheckValidParsedValue("  text,next_text  ", 2, new StringWithQualityHeaderValue("text"), 7);
-            CheckValidParsedValue(" ,, text, , ,next", 0, new StringWithQualityHeaderValue("text"), 13);
+            CheckValidParsedValue(
+                " text ; q = 0.5, next_text  ",
+                0,
+                new StringWithQualityHeaderValue("text", 0.5),
+                17
+            );
+            CheckValidParsedValue(
+                "  text,next_text  ",
+                2,
+                new StringWithQualityHeaderValue("text"),
+                7
+            );
+            CheckValidParsedValue(
+                " ,, text, , ,next",
+                0,
+                new StringWithQualityHeaderValue("text"),
+                13
+            );
             CheckValidParsedValue(" ,, text, , ,", 0, new StringWithQualityHeaderValue("text"), 13);
-            CheckValidParsedValue(",  text  ;  q = 0.123", 0,
-                new StringWithQualityHeaderValue("text", 0.123), 21);
+            CheckValidParsedValue(
+                ",  text  ;  q = 0.123",
+                0,
+                new StringWithQualityHeaderValue("text", 0.123),
+                21
+            );
 
             CheckValidParsedValue(null, 0, null, 0);
             CheckValidParsedValue(string.Empty, 0, null, 0);
@@ -58,13 +77,19 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, StringWithQualityHeaderValue expectedResult,
-            int expectedIndex)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            StringWithQualityHeaderValue expectedResult,
+            int expectedIndex
+        )
         {
             HttpHeaderParser parser = GenericHeaderParser.MultipleValueStringWithQualityParser;
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false: {0}", input));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format("TryParse returned false: {0}", input)
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(result, expectedResult);
         }
@@ -74,8 +99,10 @@ namespace System.Net.Http.Tests
             HttpHeaderParser parser = GenericHeaderParser.MultipleValueStringWithQualityParser;
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true: {0}", input));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true: {0}", input)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

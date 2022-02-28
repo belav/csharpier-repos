@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             _globalOptions = globalOptions;
         }
 
-        public KeyProcessor GetAssociatedProcessor(IWpfTextView wpfTextView)
-            => new InlineHintsKeyProcessor(_globalOptions, wpfTextView);
+        public KeyProcessor GetAssociatedProcessor(IWpfTextView wpfTextView) =>
+            new InlineHintsKeyProcessor(_globalOptions, wpfTextView);
 
         private sealed class InlineHintsKeyProcessor : KeyProcessor
         {
@@ -48,14 +48,13 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 _view.LostAggregateFocus += OnLostFocus;
             }
 
-            private static bool IsAlt(KeyEventArgs args)
-                => IsKey(args, Key.LeftAlt) || IsKey(args, Key.RightAlt);
+            private static bool IsAlt(KeyEventArgs args) =>
+                IsKey(args, Key.LeftAlt) || IsKey(args, Key.RightAlt);
 
-            private static bool IsF1(KeyEventArgs args)
-                => IsKey(args, Key.F1);
+            private static bool IsF1(KeyEventArgs args) => IsKey(args, Key.F1);
 
-            private static bool IsKey(KeyEventArgs args, Key key)
-                => args.SystemKey == key || args.Key == key;
+            private static bool IsKey(KeyEventArgs args, Key key) =>
+                args.SystemKey == key || args.Key == key;
 
             private void OnViewClosed(object sender, EventArgs e)
             {
@@ -78,8 +77,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 base.KeyDown(args);
 
                 // If the user is now holding down F1, see if they're also holding down 'alt'.  If so, toggle the inline hints on.
-                if (IsF1(args) &&
-                    args.KeyboardDevice.Modifiers == ModifierKeys.Alt)
+                if (IsF1(args) && args.KeyboardDevice.Modifiers == ModifierKeys.Alt)
                 {
                     ToggleOn();
                 }
@@ -100,23 +98,30 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     ToggleOff();
             }
 
-            private void ToggleOn()
-                => Toggle(on: true);
+            private void ToggleOn() => Toggle(on: true);
 
-            private void ToggleOff()
-                => Toggle(on: false);
+            private void ToggleOff() => Toggle(on: false);
 
             private void Toggle(bool on)
             {
                 // No need to do anything if we're already in the requested state
-                var state = _globalOptions.GetOption(InlineHintsGlobalStateOption.DisplayAllOverride);
+                var state = _globalOptions.GetOption(
+                    InlineHintsGlobalStateOption.DisplayAllOverride
+                );
                 if (state == on)
                     return;
 
                 // We can only enter the on-state if the user has the chord feature enabled.  We can always enter the
                 // off state though.
-                on = on && _globalOptions.GetOption(InlineHintsViewOptions.DisplayAllHintsWhilePressingAltF1);
-                _globalOptions.RefreshOption(new OptionKey(InlineHintsGlobalStateOption.DisplayAllOverride), on);
+                on =
+                    on
+                    && _globalOptions.GetOption(
+                        InlineHintsViewOptions.DisplayAllHintsWhilePressingAltF1
+                    );
+                _globalOptions.RefreshOption(
+                    new OptionKey(InlineHintsGlobalStateOption.DisplayAllOverride),
+                    on
+                );
             }
         }
     }

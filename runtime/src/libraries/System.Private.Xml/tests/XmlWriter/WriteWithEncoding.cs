@@ -36,7 +36,10 @@ namespace System.Xml.Tests
             int bytesCount = strm.Read(bytes, 0, (int)strm.Length);
             string s = settings.Encoding.GetString(bytes, 0, bytesCount);
 
-            Assert.Equal("<orderID>1-456-ab&#x661;</orderID><orderID>2-36-00a&#x10000;&#x10401;</orderID>", s);
+            Assert.Equal(
+                "<orderID>1-456-ab&#x661;</orderID><orderID>2-36-00a&#x10000;&#x10401;</orderID>",
+                s
+            );
         }
 
         [Fact]
@@ -69,7 +72,10 @@ namespace System.Xml.Tests
             }
 
             // Then, last '>' will be cut off in resulting string if BOM is present
-            Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-32\"?>", string.Concat(resultString.Take(39)));
+            Assert.Equal(
+                "<?xml version=\"1.0\" encoding=\"utf-32\"?>",
+                string.Concat(resultString.Take(39))
+            );
         }
 
         [Fact]
@@ -78,7 +84,12 @@ namespace System.Xml.Tests
             using (var syncStream = new MemoryStream())
             using (var asyncStream = new MemoryStream())
             {
-                await using (var writer = XmlWriter.Create(asyncStream, new XmlWriterSettings() { Async = true }))
+                await using (
+                    var writer = XmlWriter.Create(
+                        asyncStream,
+                        new XmlWriterSettings() { Async = true }
+                    )
+                )
                 {
                     await writer.WriteStartDocumentAsync();
                     await writer.WriteStartElementAsync(string.Empty, "root", null);
@@ -89,7 +100,12 @@ namespace System.Xml.Tests
                     await writer.WriteEndElementAsync();
                 }
 
-                using (var writer = XmlWriter.Create(syncStream, new XmlWriterSettings() { Async = false }))
+                using (
+                    var writer = XmlWriter.Create(
+                        syncStream,
+                        new XmlWriterSettings() { Async = false }
+                    )
+                )
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("root");

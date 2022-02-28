@@ -10,6 +10,9 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [GeneratedDllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial bool TerminateProcess(SafeProcessHandle processHandle, int exitCode);
+        internal static partial bool TerminateProcess(
+            SafeProcessHandle processHandle,
+            int exitCode
+        );
     }
 }

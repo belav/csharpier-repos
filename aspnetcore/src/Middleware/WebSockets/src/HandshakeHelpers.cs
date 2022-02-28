@@ -17,16 +17,53 @@ internal static class HandshakeHelpers
 {
     // "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
     // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
-    private static ReadOnlySpan<byte> EncodedWebSocketKey => new byte[]
-    {
-            (byte)'2', (byte)'5', (byte)'8', (byte)'E', (byte)'A', (byte)'F', (byte)'A', (byte)'5', (byte)'-',
-            (byte)'E', (byte)'9', (byte)'1', (byte)'4', (byte)'-', (byte)'4', (byte)'7', (byte)'D', (byte)'A',
-            (byte)'-', (byte)'9', (byte)'5', (byte)'C', (byte)'A', (byte)'-', (byte)'C', (byte)'5', (byte)'A',
-            (byte)'B', (byte)'0', (byte)'D', (byte)'C', (byte)'8', (byte)'5', (byte)'B', (byte)'1', (byte)'1'
-    };
+    private static ReadOnlySpan<byte> EncodedWebSocketKey =>
+        new byte[]
+        {
+            (byte)'2',
+            (byte)'5',
+            (byte)'8',
+            (byte)'E',
+            (byte)'A',
+            (byte)'F',
+            (byte)'A',
+            (byte)'5',
+            (byte)'-',
+            (byte)'E',
+            (byte)'9',
+            (byte)'1',
+            (byte)'4',
+            (byte)'-',
+            (byte)'4',
+            (byte)'7',
+            (byte)'D',
+            (byte)'A',
+            (byte)'-',
+            (byte)'9',
+            (byte)'5',
+            (byte)'C',
+            (byte)'A',
+            (byte)'-',
+            (byte)'C',
+            (byte)'5',
+            (byte)'A',
+            (byte)'B',
+            (byte)'0',
+            (byte)'D',
+            (byte)'C',
+            (byte)'8',
+            (byte)'5',
+            (byte)'B',
+            (byte)'1',
+            (byte)'1'
+        };
 
     // Verify Method, Upgrade, Connection, version,  key, etc..
-    public static void GenerateResponseHeaders(string key, string? subProtocol, IHeaderDictionary headers)
+    public static void GenerateResponseHeaders(
+        string key,
+        string? subProtocol,
+        IHeaderDictionary headers
+    )
     {
         headers.Connection = HeaderNames.Upgrade;
         headers.Upgrade = Constants.Headers.UpgradeWebSocket;
@@ -71,15 +108,22 @@ internal static class HandshakeHelpers
         var written = SHA1.HashData(mergedBytes, hashedBytes);
         if (written != 20)
         {
-            throw new InvalidOperationException("Could not compute the hash for the 'Sec-WebSocket-Accept' header.");
+            throw new InvalidOperationException(
+                "Could not compute the hash for the 'Sec-WebSocket-Accept' header."
+            );
         }
 
         return Convert.ToBase64String(hashedBytes);
     }
 
     // https://datatracker.ietf.org/doc/html/rfc7692#section-7.1
-    public static bool ParseDeflateOptions(ReadOnlySpan<char> extension, bool serverContextTakeover,
-        int serverMaxWindowBits, out WebSocketDeflateOptions parsedOptions, [NotNullWhen(true)] out string? response)
+    public static bool ParseDeflateOptions(
+        ReadOnlySpan<char> extension,
+        bool serverContextTakeover,
+        int serverMaxWindowBits,
+        out WebSocketDeflateOptions parsedOptions,
+        [NotNullWhen(true)] out string? response
+    )
     {
         bool hasServerMaxWindowBits = false;
         bool hasClientMaxWindowBits = false;
@@ -148,7 +192,13 @@ internal static class HandshakeHelpers
                 }
 
                 hasClientMaxWindowBits = true;
-                if (!ParseWindowBits(value, WebSocketDeflateConstants.ClientMaxWindowBits, out var clientMaxWindowBits))
+                if (
+                    !ParseWindowBits(
+                        value,
+                        WebSocketDeflateConstants.ClientMaxWindowBits,
+                        out var clientMaxWindowBits
+                    )
+                )
                 {
                     return false;
                 }
@@ -193,7 +243,13 @@ internal static class HandshakeHelpers
                 }
 
                 hasServerMaxWindowBits = true;
-                if (!ParseWindowBits(value, WebSocketDeflateConstants.ServerMaxWindowBits, out var parsedServerMaxWindowBits))
+                if (
+                    !ParseWindowBits(
+                        value,
+                        WebSocketDeflateConstants.ServerMaxWindowBits,
+                        out var parsedServerMaxWindowBits
+                    )
+                )
                 {
                     return false;
                 }
@@ -209,10 +265,17 @@ internal static class HandshakeHelpers
                 // by including the "server_max_window_bits" extension parameter in the
                 // extension negotiation response to send back to the client with the
                 // same or smaller value as the offer.
-                parsedOptions.ServerMaxWindowBits = Math.Min(parsedServerMaxWindowBits ?? 15, serverMaxWindowBits);
+                parsedOptions.ServerMaxWindowBits = Math.Min(
+                    parsedServerMaxWindowBits ?? 15,
+                    serverMaxWindowBits
+                );
             }
 
-            static bool ParseWindowBits(ReadOnlySpan<char> value, string propertyName, out int? parsedValue)
+            static bool ParseWindowBits(
+                ReadOnlySpan<char> value,
+                string propertyName,
+                out int? parsedValue
+            )
             {
                 var startIndex = value.IndexOf('=');
 
@@ -238,9 +301,16 @@ internal static class HandshakeHelpers
                     value = value[1..^1];
                 }
 
-                if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int windowBits) ||
-                    windowBits < 8 ||
-                    windowBits > 15)
+                if (
+                    !int.TryParse(
+                        value,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out int windowBits
+                    )
+                    || windowBits < 8
+                    || windowBits > 15
+                )
                 {
                     parsedValue = null;
                     return false;

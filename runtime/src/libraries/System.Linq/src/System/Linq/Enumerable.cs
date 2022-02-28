@@ -7,6 +7,8 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> AsEnumerable<TSource>(this IEnumerable<TSource> source) => source;
+        public static IEnumerable<TSource> AsEnumerable<TSource>(
+            this IEnumerable<TSource> source
+        ) => source;
     }
 }

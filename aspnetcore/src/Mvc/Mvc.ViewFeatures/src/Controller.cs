@@ -45,7 +45,10 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
             if (_viewData == null)
             {
                 // This should run only for the controller unit test scenarios
-                _viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), ControllerContext.ModelState);
+                _viewData = new ViewDataDictionary(
+                    new EmptyModelMetadataProvider(),
+                    ControllerContext.ModelState
+                );
             }
 
             return _viewData!;
@@ -54,7 +57,10 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
         {
             if (value == null)
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(ViewData));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(ViewData)
+                );
             }
 
             _viewData = value;
@@ -70,7 +76,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
         {
             if (_tempData == null)
             {
-                var factory = HttpContext?.RequestServices?.GetRequiredService<ITempDataDictionaryFactory>();
+                var factory =
+                    HttpContext?.RequestServices?.GetRequiredService<ITempDataDictionaryFactory>();
                 _tempData = factory?.GetTempData(HttpContext);
             }
 
@@ -324,18 +331,14 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     /// </summary>
     /// <param name="context">The action executing context.</param>
     [NonAction]
-    public virtual void OnActionExecuting(ActionExecutingContext context)
-    {
-    }
+    public virtual void OnActionExecuting(ActionExecutingContext context) { }
 
     /// <summary>
     /// Called after the action method is invoked.
     /// </summary>
     /// <param name="context">The action executed context.</param>
     [NonAction]
-    public virtual void OnActionExecuted(ActionExecutedContext context)
-    {
-    }
+    public virtual void OnActionExecuted(ActionExecutedContext context) { }
 
     /// <summary>
     /// Called before the action method is invoked.
@@ -347,7 +350,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     [NonAction]
     public virtual Task OnActionExecutionAsync(
         ActionExecutingContext context,
-        ActionExecutionDelegate next)
+        ActionExecutionDelegate next
+    )
     {
         if (context == null)
         {
@@ -387,7 +391,5 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     /// </summary>
     /// <param name="disposing"><c>true</c> if this method is being invoked by the <see cref="Dispose()"/> method,
     /// otherwise <c>false</c>.</param>
-    protected virtual void Dispose(bool disposing)
-    {
-    }
+    protected virtual void Dispose(bool disposing) { }
 }

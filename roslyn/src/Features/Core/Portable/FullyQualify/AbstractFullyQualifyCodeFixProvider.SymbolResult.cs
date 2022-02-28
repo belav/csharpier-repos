@@ -19,11 +19,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             public readonly IReadOnlyList<string> NameParts;
 
             public SymbolResult(INamespaceOrTypeSymbol symbol, int weight)
-                : this(symbol, weight, originalSymbol: null)
-            {
-            }
+                : this(symbol, weight, originalSymbol: null) { }
 
-            private SymbolResult(INamespaceOrTypeSymbol symbol, int weight, INamespaceOrTypeSymbol? originalSymbol)
+            private SymbolResult(
+                INamespaceOrTypeSymbol symbol,
+                int weight,
+                INamespaceOrTypeSymbol? originalSymbol
+            )
             {
                 Symbol = symbol;
                 Weight = weight;
@@ -31,22 +33,25 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
                 OriginalSymbol = originalSymbol;
             }
 
-            public override bool Equals(object? obj)
-                => obj is SymbolResult result && Equals(result);
+            public override bool Equals(object? obj) =>
+                obj is SymbolResult result && Equals(result);
 
-            public bool Equals(SymbolResult other)
-                => Equals(Symbol, other.Symbol);
+            public bool Equals(SymbolResult other) => Equals(Symbol, other.Symbol);
 
-            public override int GetHashCode()
-                => Symbol.GetHashCode();
+            public override int GetHashCode() => Symbol.GetHashCode();
 
-            public SymbolResult WithSymbol(INamespaceOrTypeSymbol other)
-                => new(other, Weight, Symbol);
+            public SymbolResult WithSymbol(INamespaceOrTypeSymbol other) =>
+                new(other, Weight, Symbol);
 
             public int CompareTo(SymbolResult other)
             {
-                Debug.Assert(Symbol is INamespaceSymbol || !((INamedTypeSymbol)Symbol).IsGenericType);
-                Debug.Assert(other.Symbol is INamespaceSymbol || !((INamedTypeSymbol)other.Symbol).IsGenericType);
+                Debug.Assert(
+                    Symbol is INamespaceSymbol || !((INamedTypeSymbol)Symbol).IsGenericType
+                );
+                Debug.Assert(
+                    other.Symbol is INamespaceSymbol
+                        || !((INamedTypeSymbol)other.Symbol).IsGenericType
+                );
 
                 var diff = Weight - other.Weight;
                 if (diff != 0)
@@ -55,7 +60,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
                 }
 
                 return INamespaceOrTypeSymbolExtensions.CompareNameParts(
-                    NameParts, other.NameParts, placeSystemNamespaceFirst: true);
+                    NameParts,
+                    other.NameParts,
+                    placeSystemNamespaceFirst: true
+                );
             }
         }
     }

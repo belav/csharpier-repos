@@ -3,6 +3,7 @@
 
 // static method
 using System;
+
 namespace Precise
 {
     class Driver
@@ -11,7 +12,9 @@ namespace Precise
         {
             try
             {
-                Console.WriteLine("Testing .cctor() invocation by calling static method across assembly");
+                Console.WriteLine(
+                    "Testing .cctor() invocation by calling static method across assembly"
+                );
                 Console.WriteLine();
                 Console.WriteLine("Before calling static method");
                 // .cctor should not run yet

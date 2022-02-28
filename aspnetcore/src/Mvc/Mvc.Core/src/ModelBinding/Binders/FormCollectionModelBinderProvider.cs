@@ -32,7 +32,9 @@ public class FormCollectionModelBinderProvider : IModelBinderProvider
                 Resources.FormatFormCollectionModelBinder_CannotBindToFormCollection(
                     typeof(FormCollectionModelBinder).FullName,
                     modelType.FullName,
-                    typeof(IFormCollection).FullName));
+                    typeof(IFormCollection).FullName
+                )
+            );
         }
 
         if (modelType == typeof(IFormCollection))

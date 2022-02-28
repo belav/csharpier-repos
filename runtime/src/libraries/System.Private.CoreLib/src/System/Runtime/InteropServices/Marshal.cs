@@ -49,7 +49,11 @@ namespace System.Runtime.InteropServices
             }
             if (len < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(len), len, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(len),
+                    len,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             return new string((sbyte*)ptr, 0, len);
@@ -73,7 +77,11 @@ namespace System.Runtime.InteropServices
             }
             if (len < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(len), len, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(len),
+                    len,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             return new string((char*)ptr, 0, len);
@@ -98,7 +106,11 @@ namespace System.Runtime.InteropServices
             }
             if (byteLen < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(byteLen), byteLen, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteLen),
+                    byteLen,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             return string.CreateStringFromEncoding((byte*)ptr, byteLen, Encoding.UTF8);
@@ -161,7 +173,13 @@ namespace System.Runtime.InteropServices
             fixed (Guid* pIID = &iid)
             fixed (IntPtr* p = &ppv)
             {
-                return ((delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)(*(*(void***)pUnk + 0 /* IUnknown.QueryInterface slot */)))(pUnk, pIID, p);
+                return (
+                    (delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)(
+                        *(
+                            *(void***)pUnk + 0 /* IUnknown.QueryInterface slot */
+                        )
+                    )
+                )(pUnk, pIID, p);
             }
         }
 
@@ -170,7 +188,13 @@ namespace System.Runtime.InteropServices
             if (pUnk == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(pUnk));
 
-            return ((delegate* unmanaged<IntPtr, int>)(*(*(void***)pUnk + 1 /* IUnknown.AddRef slot */)))(pUnk);
+            return (
+                (delegate* unmanaged<IntPtr, int>)(
+                    *(
+                        *(void***)pUnk + 1 /* IUnknown.AddRef slot */
+                    )
+                )
+            )(pUnk);
         }
 
         public static unsafe int Release(IntPtr pUnk)
@@ -178,7 +202,13 @@ namespace System.Runtime.InteropServices
             if (pUnk == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(pUnk));
 
-            return ((delegate* unmanaged<IntPtr, int>)(*(*(void***)pUnk + 2 /* IUnknown.Release slot */)))(pUnk);
+            return (
+                (delegate* unmanaged<IntPtr, int>)(
+                    *(
+                        *(void***)pUnk + 2 /* IUnknown.Release slot */
+                    )
+                )
+            )(pUnk);
         }
 
         /// <summary>
@@ -246,7 +276,12 @@ namespace System.Runtime.InteropServices
             CopyToNative(source, startIndex, destination, length);
         }
 
-        private static unsafe void CopyToNative<T>(T[] source, int startIndex, IntPtr destination, int length)
+        private static unsafe void CopyToNative<T>(
+            T[] source,
+            int startIndex,
+            IntPtr destination,
+            int length
+        )
         {
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
@@ -298,16 +333,27 @@ namespace System.Runtime.InteropServices
             CopyToManaged(source, destination, startIndex, length);
         }
 
-        private static unsafe void CopyToManaged<T>(IntPtr source, T[] destination, int startIndex, int length)
+        private static unsafe void CopyToManaged<T>(
+            IntPtr source,
+            T[] destination,
+            int startIndex,
+            int length
+        )
         {
             if (source == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(source));
             if (destination is null)
                 throw new ArgumentNullException(nameof(destination));
             if (startIndex < 0)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_StartIndex);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_StartIndex
+                );
             if (length < 0)
-                throw new ArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(length),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             // The rest of the argument validation is done by CopyTo
 
@@ -462,9 +508,11 @@ namespace System.Runtime.InteropServices
 
         public static void WriteInt16(IntPtr ptr, short val) => WriteInt16(ptr, 0, val);
 
-        public static void WriteInt16(IntPtr ptr, int ofs, char val) => WriteInt16(ptr, ofs, (short)val);
+        public static void WriteInt16(IntPtr ptr, int ofs, char val) =>
+            WriteInt16(ptr, ofs, (short)val);
 
-        public static void WriteInt16([In, Out]object ptr, int ofs, char val) => WriteInt16(ptr, ofs, (short)val);
+        public static void WriteInt16([In, Out] object ptr, int ofs, char val) =>
+            WriteInt16(ptr, ofs, (short)val);
 
         public static void WriteInt16(IntPtr ptr, char val) => WriteInt16(ptr, 0, (short)val);
 
@@ -546,8 +594,11 @@ namespace System.Runtime.InteropServices
             PrelinkCore(m);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "This only needs to prelink methods that are actually used")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "This only needs to prelink methods that are actually used"
+        )]
         public static void PrelinkAll(Type c)
         {
             if (c is null)
@@ -563,7 +614,11 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        public static void StructureToPtr<T>([DisallowNull] T structure, IntPtr ptr, bool fDeleteOld)
+        public static void StructureToPtr<T>(
+            [DisallowNull] T structure,
+            IntPtr ptr,
+            bool fDeleteOld
+        )
         {
             StructureToPtr((object)structure!, ptr, fDeleteOld);
         }
@@ -572,9 +627,14 @@ namespace System.Runtime.InteropServices
         /// Creates a new instance of "structuretype" and marshals data from a
         /// native memory block to it.
         /// </summary>
-        public static object? PtrToStructure(IntPtr ptr,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type structureType)
+        public static object? PtrToStructure(
+            IntPtr ptr,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type structureType
+        )
         {
             if (ptr == IntPtr.Zero)
             {
@@ -612,7 +672,13 @@ namespace System.Runtime.InteropServices
             PtrToStructureHelper(ptr, structure, allowValueClasses: false);
         }
 
-        public static T? PtrToStructure<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]T>(IntPtr ptr)
+        public static T? PtrToStructure<
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                T
+        >(IntPtr ptr)
         {
             if (ptr == IntPtr.Zero)
             {
@@ -635,7 +701,7 @@ namespace System.Runtime.InteropServices
 
         public static void DestroyStructure<T>(IntPtr ptr) => DestroyStructure(ptr, typeof(T));
 
-// CoreCLR has a different implementation for Windows only
+        // CoreCLR has a different implementation for Windows only
 #if !CORECLR || !TARGET_WINDOWS
         public static IntPtr GetHINSTANCE(Module m)
         {
@@ -651,7 +717,8 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// Converts the HRESULT to a CLR exception.
         /// </summary>
-        public static Exception? GetExceptionForHR(int errorCode) => GetExceptionForHR(errorCode, IntPtr.Zero);
+        public static Exception? GetExceptionForHR(int errorCode) =>
+            GetExceptionForHR(errorCode, IntPtr.Zero);
 
         public static Exception? GetExceptionForHR(int errorCode, IntPtr errorInfo)
         {
@@ -845,12 +912,9 @@ namespace System.Runtime.InteropServices
 
                 case HResults.STG_E_PATHNOTFOUND:
                 case HResults.CTL_E_PATHNOTFOUND:
-                    {
-                        return new System.IO.DirectoryNotFoundException
-                        {
-                            HResult = errorCode
-                        };
-                    }
+                {
+                    return new System.IO.DirectoryNotFoundException { HResult = errorCode };
+                }
                 case HResults.FUSION_E_INVALID_PRIVATE_ASM_LOCATION:
                 case HResults.FUSION_E_SIGNATURE_CHECK_FAILED:
                 case HResults.FUSION_E_LOADFROM_BLOCKED:
@@ -876,19 +940,13 @@ namespace System.Runtime.InteropServices
                 case HResults.CORSEC_E_MISSING_STRONGNAME:
                 case HResults.MSEE_E_ASSEMBLYLOADINPROGRESS:
                 case HResults.ERROR_FILE_INVALID:
-                    {
-                        return new System.IO.FileLoadException
-                        {
-                            HResult = errorCode
-                        };
-                    }
+                {
+                    return new System.IO.FileLoadException { HResult = errorCode };
+                }
                 case HResults.CTL_E_FILENOTFOUND:
-                    {
-                        return new System.IO.FileNotFoundException
-                        {
-                            HResult = errorCode
-                        };
-                    }
+                {
+                    return new System.IO.FileNotFoundException { HResult = errorCode };
+                }
                 default:
                     return new COMException("", errorCode);
             }
@@ -1215,7 +1273,8 @@ namespace System.Runtime.InteropServices
             return GetFunctionPointerForDelegateInternal(d);
         }
 
-        public static IntPtr GetFunctionPointerForDelegate<TDelegate>(TDelegate d) where TDelegate : notnull
+        public static IntPtr GetFunctionPointerForDelegate<TDelegate>(TDelegate d)
+            where TDelegate : notnull
         {
             return GetFunctionPointerForDelegate((Delegate)(object)d);
         }
@@ -1316,7 +1375,8 @@ namespace System.Runtime.InteropServices
         }
 
         [SupportedOSPlatform("windows")]
-        public static Type? GetTypeFromCLSID(Guid clsid) => GetTypeFromCLSID(clsid, null, throwOnError: false);
+        public static Type? GetTypeFromCLSID(Guid clsid) =>
+            GetTypeFromCLSID(clsid, null, throwOnError: false);
 
         /// <summary>
         /// Initializes the underlying handle of a newly created <see cref="SafeHandle" /> to the provided value.

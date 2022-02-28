@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
             string connectionString,
             DatabaseModelFactoryOptions databaseOptions,
             ModelReverseEngineerOptions modelOptions,
-            ModelCodeGenerationOptions codeOptions);
+            ModelCodeGenerationOptions codeOptions
+        );
 
         /// <summary>
         ///     Saves a scaffolded model to disk.
@@ -36,6 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         SavedModelFiles Save(
             ScaffoldedModel scaffoldedModel,
             string outputDir,
-            bool overwriteFiles);
+            bool overwriteFiles
+        );
     }
 }

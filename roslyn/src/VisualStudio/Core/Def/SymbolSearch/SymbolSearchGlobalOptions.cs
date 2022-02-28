@@ -16,18 +16,19 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolSearchGlobalOptions()
-        {
-        }
+        public SymbolSearchGlobalOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options => ImmutableArray.Create<IOption>(
-            Enabled);
+        ImmutableArray<IOption> IOptionProvider.Options => ImmutableArray.Create<IOption>(Enabled);
 
         private const string LocalRegistryPath = @"Roslyn\Features\SymbolSearch\";
         private const string FeatureName = "SymbolSearchOptions";
 
-        public static readonly Option2<bool> Enabled = new(
-            FeatureName, "Enabled", defaultValue: true,
-            storageLocation: new LocalUserProfileStorageLocation(LocalRegistryPath + "Enabled"));
+        public static readonly Option2<bool> Enabled =
+            new(
+                FeatureName,
+                "Enabled",
+                defaultValue: true,
+                storageLocation: new LocalUserProfileStorageLocation(LocalRegistryPath + "Enabled")
+            );
     }
 }

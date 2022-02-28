@@ -27,7 +27,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             _service = service;
         }
 
-        public IndentationResult GetIndentation(Document document, int lineNumber, FormattingOptions.IndentStyle indentStyle, CancellationToken cancellationToken)
+        public IndentationResult GetIndentation(
+            Document document,
+            int lineNumber,
+            FormattingOptions.IndentStyle indentStyle,
+            CancellationToken cancellationToken
+        )
         {
             var result = _service.GetDesiredIndentation(document, lineNumber, cancellationToken);
             if (result.HasValue)

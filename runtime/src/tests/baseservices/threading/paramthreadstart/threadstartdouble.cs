@@ -10,16 +10,15 @@ class ThreadStartDouble
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
-            Console.WriteLine("USAGE: ThreadStartDouble <double>" +
-                "|min|max|pi|nan|negi|posi\n");
+            Console.WriteLine("USAGE: ThreadStartDouble <double>" + "|min|max|pi|nan|negi|posi\n");
             return -1;
         }
 
         double d = 0D;
         // check for special cases
-        switch(args[0].ToLower())
+        switch (args[0].ToLower())
         {
             case "max":
                 d = Double.MaxValue;
@@ -54,7 +53,7 @@ class ThreadStartDouble
         t.Join();
 
         bool bRet = false;
-        if(Double.IsNaN(dPass))
+        if (Double.IsNaN(dPass))
             bRet = Double.IsNaN(dNum);
         else
             bRet = dNum == dPass;

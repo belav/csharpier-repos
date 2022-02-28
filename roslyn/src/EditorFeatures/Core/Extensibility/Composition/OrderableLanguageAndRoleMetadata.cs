@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor
     {
         public IEnumerable<string> Roles { get; }
 
-        public OrderableLanguageAndRoleMetadata(IDictionary<string, object> data)
-            : base(data)
+        public OrderableLanguageAndRoleMetadata(IDictionary<string, object> data) : base(data)
         {
             this.Roles = (IEnumerable<string>)data.GetValueOrDefault("TextViewRoles");
         }

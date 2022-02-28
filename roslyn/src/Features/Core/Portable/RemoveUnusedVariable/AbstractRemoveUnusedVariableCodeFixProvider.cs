@@ -21,7 +21,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
 {
-    internal abstract class AbstractRemoveUnusedVariableCodeFixProvider<TLocalDeclarationStatement, TVariableDeclarator, TVariableDeclaration> : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractRemoveUnusedVariableCodeFixProvider<
+        TLocalDeclarationStatement,
+        TVariableDeclarator,
+        TVariableDeclaration
+    > : SyntaxEditorBasedCodeFixProvider
         where TLocalDeclarationStatement : SyntaxNode
         where TVariableDeclarator : SyntaxNode
         where TVariableDeclaration : SyntaxNode
@@ -30,11 +34,20 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
 
         protected abstract SyntaxNode GetNodeToRemoveOrReplace(SyntaxNode node);
 
-        protected abstract void RemoveOrReplaceNode(SyntaxEditor editor, SyntaxNode node, ISyntaxFactsService syntaxFacts);
+        protected abstract void RemoveOrReplaceNode(
+            SyntaxEditor editor,
+            SyntaxNode node,
+            ISyntaxFactsService syntaxFacts
+        );
 
-        protected abstract SeparatedSyntaxList<SyntaxNode> GetVariables(TLocalDeclarationStatement localDeclarationStatement);
+        protected abstract SeparatedSyntaxList<SyntaxNode> GetVariables(
+            TLocalDeclarationStatement localDeclarationStatement
+        );
 
-        protected abstract bool ShouldOfferFixForLocalDeclaration(ISyntaxFactsService syntaxFacts, SyntaxNode node);
+        protected abstract bool ShouldOfferFixForLocalDeclaration(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode node
+        );
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeQuality;
 
@@ -43,26 +56,38 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
             var diagnostic = context.Diagnostics.First();
 
             var document = context.Document;
-            var root = await document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             var node = root.FindNode(diagnostic.Location.SourceSpan);
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             if (ShouldOfferFixForLocalDeclaration(syntaxFacts, node))
             {
-                context.RegisterCodeFix(new MyCodeAction(c => FixAsync(context.Document, diagnostic, c)), diagnostic);
+                context.RegisterCodeFix(
+                    new MyCodeAction(c => FixAsync(context.Document, diagnostic, c)),
+                    diagnostic
+                );
             }
         }
 
-        protected override async Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor syntaxEditor, CancellationToken cancellationToken)
+        protected override async Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor syntaxEditor,
+            CancellationToken cancellationToken
+        )
         {
             var nodesToRemove = new HashSet<SyntaxNode>();
 
-            // Create actions and keep their SpanStart. 
+            // Create actions and keep their SpanStart.
             // Execute actions ordered descending by SpanStart to avoid conflicts.
             var actionsToPerform = new List<(int, Action)>();
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var documentEditor = await DocumentEditor.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+            var documentEditor = await DocumentEditor
+                .CreateAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             var documentsToBeSearched = ImmutableHashSet.Create(document);
 
             foreach (var diagnostic in diagnostics)
@@ -71,10 +96,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
                 var node = root.FindNode(diagnostic.Location.SourceSpan);
                 if (IsCatchDeclarationIdentifier(token))
                 {
-                    (int, Action) pair = (token.Parent.SpanStart,
-                        () => syntaxEditor.ReplaceNode(
-                            token.Parent,
-                            token.Parent.ReplaceToken(token, default(SyntaxToken)).WithAdditionalAnnotations(Formatter.Annotation)));
+                    (int, Action) pair = (
+                        token.Parent.SpanStart,
+                        () =>
+                            syntaxEditor.ReplaceNode(
+                                token.Parent,
+                                token.Parent
+                                    .ReplaceToken(token, default(SyntaxToken))
+                                    .WithAdditionalAnnotations(Formatter.Annotation)
+                            )
+                    );
                     actionsToPerform.Add(pair);
                 }
                 else
@@ -82,8 +113,18 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
                     nodesToRemove.Add(node);
                 }
 
-                var symbol = documentEditor.SemanticModel.GetDeclaredSymbol(node, cancellationToken);
-                var referencedSymbols = await SymbolFinder.FindReferencesAsync(symbol, document.Project.Solution, documentsToBeSearched, cancellationToken).ConfigureAwait(false);
+                var symbol = documentEditor.SemanticModel.GetDeclaredSymbol(
+                    node,
+                    cancellationToken
+                );
+                var referencedSymbols = await SymbolFinder
+                    .FindReferencesAsync(
+                        symbol,
+                        document.Project.Solution,
+                        documentsToBeSearched,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 foreach (var referencedSymbol in referencedSymbols)
                 {
@@ -94,7 +135,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
                             var referencedSymbolNode = root.FindNode(location.Location.SourceSpan);
                             if (referencedSymbolNode != null)
                             {
-                                var nodeToRemoveOrReplace = GetNodeToRemoveOrReplace(referencedSymbolNode);
+                                var nodeToRemoveOrReplace = GetNodeToRemoveOrReplace(
+                                    referencedSymbolNode
+                                );
                                 if (nodeToRemoveOrReplace != null)
                                 {
                                     nodesToRemove.Add(nodeToRemoveOrReplace);
@@ -109,10 +152,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             foreach (var node in nodesToRemove)
             {
-                actionsToPerform.Add((node.SpanStart, () => RemoveOrReplaceNode(syntaxEditor, node, syntaxFacts)));
+                actionsToPerform.Add(
+                    (node.SpanStart, () => RemoveOrReplaceNode(syntaxEditor, node, syntaxFacts))
+                );
             }
 
-            // Process nodes in reverse order 
+            // Process nodes in reverse order
             // to complete with nested declarations before processing the outer ones.
             foreach (var node in actionsToPerform.OrderByDescending(n => n.Item1))
             {
@@ -120,14 +165,21 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
             }
         }
 
-        protected static void RemoveNode(SyntaxEditor editor, SyntaxNode node, ISyntaxFactsService syntaxFacts)
+        protected static void RemoveNode(
+            SyntaxEditor editor,
+            SyntaxNode node,
+            ISyntaxFactsService syntaxFacts
+        )
         {
             var localDeclaration = node.GetAncestorOrThis<TLocalDeclarationStatement>();
             var removeOptions = CreateSyntaxRemoveOptions(localDeclaration, syntaxFacts);
             editor.RemoveNode(node, removeOptions);
         }
 
-        private static SyntaxRemoveOptions CreateSyntaxRemoveOptions(TLocalDeclarationStatement localDeclaration, ISyntaxFactsService syntaxFacts)
+        private static SyntaxRemoveOptions CreateSyntaxRemoveOptions(
+            TLocalDeclarationStatement localDeclaration,
+            ISyntaxFactsService syntaxFacts
+        )
         {
             var removeOptions = SyntaxGenerator.DefaultRemoveOptions;
 
@@ -169,7 +221,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
             var candidateLocalDeclarationsToRemove = new HashSet<TLocalDeclarationStatement>();
             foreach (var variableDeclarator in nodesToRemove.OfType<TVariableDeclarator>())
             {
-                // Parents of the variable declarator could be candaditaes for removal for example 
+                // Parents of the variable declarator could be candaditaes for removal for example
                 // if all declarators in a declaration will be removed.
 
                 if (variableDeclarator.Parent?.Parent is TLocalDeclarationStatement candidate)
@@ -204,9 +256,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(FeaturesResources.Remove_unused_variable, createChangedDocument, FeaturesResources.Remove_unused_variable)
-            {
-            }
+                : base(
+                    FeaturesResources.Remove_unused_variable,
+                    createChangedDocument,
+                    FeaturesResources.Remove_unused_variable
+                ) { }
         }
     }
 }

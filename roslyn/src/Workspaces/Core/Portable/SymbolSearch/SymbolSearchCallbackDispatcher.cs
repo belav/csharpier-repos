@@ -14,21 +14,28 @@ using Microsoft.CodeAnalysis.Remote;
 namespace Microsoft.CodeAnalysis.SymbolSearch
 {
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteSymbolSearchUpdateService)), Shared]
-    internal sealed class SymbolSearchCallbackDispatcher : RemoteServiceCallbackDispatcher, IRemoteSymbolSearchUpdateService.ICallback
+    internal sealed class SymbolSearchCallbackDispatcher
+        : RemoteServiceCallbackDispatcher,
+          IRemoteSymbolSearchUpdateService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolSearchCallbackDispatcher()
-        {
-        }
+        public SymbolSearchCallbackDispatcher() { }
 
-        private ISymbolSearchLogService GetLogService(RemoteServiceCallbackId callbackId)
-            => (ISymbolSearchLogService)GetCallback(callbackId);
+        private ISymbolSearchLogService GetLogService(RemoteServiceCallbackId callbackId) =>
+            (ISymbolSearchLogService)GetCallback(callbackId);
 
-        public ValueTask LogExceptionAsync(RemoteServiceCallbackId callbackId, string exception, string text, CancellationToken cancellationToken)
-            => GetLogService(callbackId).LogExceptionAsync(exception, text, cancellationToken);
+        public ValueTask LogExceptionAsync(
+            RemoteServiceCallbackId callbackId,
+            string exception,
+            string text,
+            CancellationToken cancellationToken
+        ) => GetLogService(callbackId).LogExceptionAsync(exception, text, cancellationToken);
 
-        public ValueTask LogInfoAsync(RemoteServiceCallbackId callbackId, string text, CancellationToken cancellationToken)
-            => GetLogService(callbackId).LogInfoAsync(text, cancellationToken);
+        public ValueTask LogInfoAsync(
+            RemoteServiceCallbackId callbackId,
+            string text,
+            CancellationToken cancellationToken
+        ) => GetLogService(callbackId).LogInfoAsync(text, cancellationToken);
     }
 }

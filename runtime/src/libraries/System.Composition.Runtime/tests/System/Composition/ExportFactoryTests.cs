@@ -37,7 +37,10 @@ namespace System.Composition.Runtime.Tests
         [Fact]
         public void Ctor_NullExport_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("exportCreator", () => new ExportFactory<int>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "exportCreator",
+                () => new ExportFactory<int>(null)
+            );
         }
 
         private int ExportCreatorCalled { get; set; }

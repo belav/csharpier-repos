@@ -22,11 +22,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LongRunningNonMutatingRequestHandlerProvider()
-        {
-        }
+        public LongRunningNonMutatingRequestHandlerProvider() { }
 
-        public override ImmutableArray<IRequestHandler> CreateRequestHandlers() => ImmutableArray.Create<IRequestHandler>(new LongRunningNonMutatingRequestHandler());
+        public override ImmutableArray<IRequestHandler> CreateRequestHandlers() =>
+            ImmutableArray.Create<IRequestHandler>(new LongRunningNonMutatingRequestHandler());
     }
 
     internal class LongRunningNonMutatingRequestHandler : IRequestHandler<TestRequest, TestResponse>
@@ -41,7 +40,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 
         public TextDocumentIdentifier GetTextDocumentIdentifier(TestRequest request) => null;
 
-        public Task<TestResponse> HandleRequestAsync(TestRequest request, RequestContext context, CancellationToken cancellationToken)
+        public Task<TestResponse> HandleRequestAsync(
+            TestRequest request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             do
             {
@@ -53,7 +56,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
                 Thread.Sleep(100);
             } while (true);
 
-            throw new XunitException("Somehow we got past an infinite delay without cancelling. This is unexpected");
+            throw new XunitException(
+                "Somehow we got past an infinite delay without cancelling. This is unexpected"
+            );
         }
     }
 }

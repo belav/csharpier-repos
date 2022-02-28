@@ -26,7 +26,11 @@ public sealed class BeforeActionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="httpContext">The <see cref="HttpContext"/>.</param>
     /// <param name="routeData">The <see cref="RouteData"/>.</param>
-    public BeforeActionEventData(ActionDescriptor actionDescriptor, HttpContext httpContext, RouteData routeData)
+    public BeforeActionEventData(
+        ActionDescriptor actionDescriptor,
+        HttpContext httpContext,
+        RouteData routeData
+    )
     {
         ActionDescriptor = actionDescriptor;
         HttpContext = httpContext;
@@ -52,13 +56,14 @@ public sealed class BeforeActionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HttpContext), HttpContext),
-        2 => new KeyValuePair<string, object>(nameof(RouteData), RouteData),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1 => new KeyValuePair<string, object>(nameof(HttpContext), HttpContext),
+            2 => new KeyValuePair<string, object>(nameof(RouteData), RouteData),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -77,7 +82,11 @@ public sealed class AfterActionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="httpContext">The <see cref="HttpContext"/>.</param>
     /// <param name="routeData">The <see cref="RouteData"/>.</param>
-    public AfterActionEventData(ActionDescriptor actionDescriptor, HttpContext httpContext, RouteData routeData)
+    public AfterActionEventData(
+        ActionDescriptor actionDescriptor,
+        HttpContext httpContext,
+        RouteData routeData
+    )
     {
         ActionDescriptor = actionDescriptor;
         HttpContext = httpContext;
@@ -103,13 +112,14 @@ public sealed class AfterActionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HttpContext), HttpContext),
-        2 => new KeyValuePair<string, object>(nameof(RouteData), RouteData),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1 => new KeyValuePair<string, object>(nameof(HttpContext), HttpContext),
+            2 => new KeyValuePair<string, object>(nameof(RouteData), RouteData),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -128,7 +138,11 @@ public sealed class BeforeAuthorizationFilterOnAuthorizationEventData : EventDat
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="authorizationContext">The <see cref="AuthorizationFilterContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeAuthorizationFilterOnAuthorizationEventData(ActionDescriptor actionDescriptor, AuthorizationFilterContext authorizationContext, IFilterMetadata filter)
+    public BeforeAuthorizationFilterOnAuthorizationEventData(
+        ActionDescriptor actionDescriptor,
+        AuthorizationFilterContext authorizationContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         AuthorizationContext = authorizationContext;
@@ -154,13 +168,18 @@ public sealed class BeforeAuthorizationFilterOnAuthorizationEventData : EventDat
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(AuthorizationContext), AuthorizationContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(AuthorizationContext),
+                  AuthorizationContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -179,7 +198,11 @@ public sealed class AfterAuthorizationFilterOnAuthorizationEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="authorizationContext">The <see cref="AuthorizationFilterContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterAuthorizationFilterOnAuthorizationEventData(ActionDescriptor actionDescriptor, AuthorizationFilterContext authorizationContext, IFilterMetadata filter)
+    public AfterAuthorizationFilterOnAuthorizationEventData(
+        ActionDescriptor actionDescriptor,
+        AuthorizationFilterContext authorizationContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         AuthorizationContext = authorizationContext;
@@ -205,13 +228,18 @@ public sealed class AfterAuthorizationFilterOnAuthorizationEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(AuthorizationContext), AuthorizationContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(AuthorizationContext),
+                  AuthorizationContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -230,7 +258,11 @@ public sealed class BeforeResourceFilterOnResourceExecutionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resourceExecutingContext">The <see cref="ResourceExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeResourceFilterOnResourceExecutionEventData(ActionDescriptor actionDescriptor, ResourceExecutingContext resourceExecutingContext, IFilterMetadata filter)
+    public BeforeResourceFilterOnResourceExecutionEventData(
+        ActionDescriptor actionDescriptor,
+        ResourceExecutingContext resourceExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResourceExecutingContext = resourceExecutingContext;
@@ -256,13 +288,18 @@ public sealed class BeforeResourceFilterOnResourceExecutionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResourceExecutingContext), ResourceExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResourceExecutingContext),
+                  ResourceExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -281,7 +318,11 @@ public sealed class AfterResourceFilterOnResourceExecutionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resourceExecutedContext">The <see cref="ResourceExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterResourceFilterOnResourceExecutionEventData(ActionDescriptor actionDescriptor, ResourceExecutedContext resourceExecutedContext, IFilterMetadata filter)
+    public AfterResourceFilterOnResourceExecutionEventData(
+        ActionDescriptor actionDescriptor,
+        ResourceExecutedContext resourceExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResourceExecutedContext = resourceExecutedContext;
@@ -307,13 +348,18 @@ public sealed class AfterResourceFilterOnResourceExecutionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResourceExecutedContext), ResourceExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResourceExecutedContext),
+                  ResourceExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -332,7 +378,11 @@ public sealed class BeforeResourceFilterOnResourceExecutingEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resourceExecutingContext">The <see cref="ResourceExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeResourceFilterOnResourceExecutingEventData(ActionDescriptor actionDescriptor, ResourceExecutingContext resourceExecutingContext, IFilterMetadata filter)
+    public BeforeResourceFilterOnResourceExecutingEventData(
+        ActionDescriptor actionDescriptor,
+        ResourceExecutingContext resourceExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResourceExecutingContext = resourceExecutingContext;
@@ -358,13 +408,18 @@ public sealed class BeforeResourceFilterOnResourceExecutingEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResourceExecutingContext), ResourceExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResourceExecutingContext),
+                  ResourceExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -383,7 +438,11 @@ public sealed class AfterResourceFilterOnResourceExecutingEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resourceExecutingContext">The <see cref="ResourceExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterResourceFilterOnResourceExecutingEventData(ActionDescriptor actionDescriptor, ResourceExecutingContext resourceExecutingContext, IFilterMetadata filter)
+    public AfterResourceFilterOnResourceExecutingEventData(
+        ActionDescriptor actionDescriptor,
+        ResourceExecutingContext resourceExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResourceExecutingContext = resourceExecutingContext;
@@ -409,13 +468,18 @@ public sealed class AfterResourceFilterOnResourceExecutingEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResourceExecutingContext), ResourceExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResourceExecutingContext),
+                  ResourceExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -434,13 +498,16 @@ public sealed class BeforeResourceFilterOnResourceExecutedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resourceExecutedContext">The <see cref="ResourceExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeResourceFilterOnResourceExecutedEventData(ActionDescriptor actionDescriptor, ResourceExecutedContext resourceExecutedContext, IFilterMetadata filter)
+    public BeforeResourceFilterOnResourceExecutedEventData(
+        ActionDescriptor actionDescriptor,
+        ResourceExecutedContext resourceExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResourceExecutedContext = resourceExecutedContext;
         Filter = filter;
     }
-
 
     /// <summary>
     /// The action.
@@ -461,13 +528,18 @@ public sealed class BeforeResourceFilterOnResourceExecutedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResourceExecutedContext), ResourceExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResourceExecutedContext),
+                  ResourceExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -486,7 +558,11 @@ public sealed class AfterResourceFilterOnResourceExecutedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resourceExecutedContext">The <see cref="ResourceExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterResourceFilterOnResourceExecutedEventData(ActionDescriptor actionDescriptor, ResourceExecutedContext resourceExecutedContext, IFilterMetadata filter)
+    public AfterResourceFilterOnResourceExecutedEventData(
+        ActionDescriptor actionDescriptor,
+        ResourceExecutedContext resourceExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResourceExecutedContext = resourceExecutedContext;
@@ -512,13 +588,18 @@ public sealed class AfterResourceFilterOnResourceExecutedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResourceExecutedContext), ResourceExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResourceExecutedContext),
+                  ResourceExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -537,7 +618,11 @@ public sealed class BeforeExceptionFilterOnException : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="exceptionContext">The <see cref="ExceptionContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeExceptionFilterOnException(ActionDescriptor actionDescriptor, ExceptionContext exceptionContext, IFilterMetadata filter)
+    public BeforeExceptionFilterOnException(
+        ActionDescriptor actionDescriptor,
+        ExceptionContext exceptionContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ExceptionContext = exceptionContext;
@@ -563,13 +648,14 @@ public sealed class BeforeExceptionFilterOnException : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ExceptionContext), ExceptionContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1 => new KeyValuePair<string, object>(nameof(ExceptionContext), ExceptionContext),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -588,7 +674,11 @@ public sealed class AfterExceptionFilterOnExceptionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="exceptionContext">The <see cref="ExceptionContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterExceptionFilterOnExceptionEventData(ActionDescriptor actionDescriptor, ExceptionContext exceptionContext, IFilterMetadata filter)
+    public AfterExceptionFilterOnExceptionEventData(
+        ActionDescriptor actionDescriptor,
+        ExceptionContext exceptionContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ExceptionContext = exceptionContext;
@@ -614,13 +704,14 @@ public sealed class AfterExceptionFilterOnExceptionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ExceptionContext), ExceptionContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1 => new KeyValuePair<string, object>(nameof(ExceptionContext), ExceptionContext),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -639,7 +730,11 @@ public sealed class BeforeActionFilterOnActionExecutionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="actionExecutingContext">The <see cref="ActionExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeActionFilterOnActionExecutionEventData(ActionDescriptor actionDescriptor, ActionExecutingContext actionExecutingContext, IFilterMetadata filter)
+    public BeforeActionFilterOnActionExecutionEventData(
+        ActionDescriptor actionDescriptor,
+        ActionExecutingContext actionExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ActionExecutingContext = actionExecutingContext;
@@ -665,13 +760,18 @@ public sealed class BeforeActionFilterOnActionExecutionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ActionExecutingContext), ActionExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ActionExecutingContext),
+                  ActionExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -690,7 +790,11 @@ public sealed class AfterActionFilterOnActionExecutionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="actionExecutedContext">The <see cref="ActionExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterActionFilterOnActionExecutionEventData(ActionDescriptor actionDescriptor, ActionExecutedContext actionExecutedContext, IFilterMetadata filter)
+    public AfterActionFilterOnActionExecutionEventData(
+        ActionDescriptor actionDescriptor,
+        ActionExecutedContext actionExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ActionExecutedContext = actionExecutedContext;
@@ -716,13 +820,18 @@ public sealed class AfterActionFilterOnActionExecutionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ActionExecutedContext), ActionExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ActionExecutedContext),
+                  ActionExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -741,7 +850,11 @@ public sealed class BeforeActionFilterOnActionExecutingEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="actionExecutingContext">The <see cref="ActionExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeActionFilterOnActionExecutingEventData(ActionDescriptor actionDescriptor, ActionExecutingContext actionExecutingContext, IFilterMetadata filter)
+    public BeforeActionFilterOnActionExecutingEventData(
+        ActionDescriptor actionDescriptor,
+        ActionExecutingContext actionExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ActionExecutingContext = actionExecutingContext;
@@ -767,13 +880,18 @@ public sealed class BeforeActionFilterOnActionExecutingEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ActionExecutingContext), ActionExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ActionExecutingContext),
+                  ActionExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -792,7 +910,11 @@ public sealed class AfterActionFilterOnActionExecutingEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="actionExecutingContext">The <see cref="ActionExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterActionFilterOnActionExecutingEventData(ActionDescriptor actionDescriptor, ActionExecutingContext actionExecutingContext, IFilterMetadata filter)
+    public AfterActionFilterOnActionExecutingEventData(
+        ActionDescriptor actionDescriptor,
+        ActionExecutingContext actionExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ActionExecutingContext = actionExecutingContext;
@@ -818,13 +940,18 @@ public sealed class AfterActionFilterOnActionExecutingEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ActionExecutingContext), ActionExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ActionExecutingContext),
+                  ActionExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -843,7 +970,11 @@ public sealed class BeforeActionFilterOnActionExecutedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="actionExecutedContext">The <see cref="ActionExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeActionFilterOnActionExecutedEventData(ActionDescriptor actionDescriptor, ActionExecutedContext actionExecutedContext, IFilterMetadata filter)
+    public BeforeActionFilterOnActionExecutedEventData(
+        ActionDescriptor actionDescriptor,
+        ActionExecutedContext actionExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ActionExecutedContext = actionExecutedContext;
@@ -869,13 +1000,18 @@ public sealed class BeforeActionFilterOnActionExecutedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ActionExecutedContext), ActionExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ActionExecutedContext),
+                  ActionExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -894,7 +1030,11 @@ public sealed class AfterActionFilterOnActionExecutedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="actionExecutedContext">The <see cref="ActionExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterActionFilterOnActionExecutedEventData(ActionDescriptor actionDescriptor, ActionExecutedContext actionExecutedContext, IFilterMetadata filter)
+    public AfterActionFilterOnActionExecutedEventData(
+        ActionDescriptor actionDescriptor,
+        ActionExecutedContext actionExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ActionExecutedContext = actionExecutedContext;
@@ -920,13 +1060,18 @@ public sealed class AfterActionFilterOnActionExecutedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ActionExecutedContext), ActionExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ActionExecutedContext),
+                  ActionExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -945,7 +1090,11 @@ public sealed class BeforeControllerActionMethodEventData : EventData
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="actionArguments">The arguments to the action.</param>
     /// <param name="controller">The controller.</param>
-    public BeforeControllerActionMethodEventData(ActionContext actionContext, IReadOnlyDictionary<string, object> actionArguments, object controller)
+    public BeforeControllerActionMethodEventData(
+        ActionContext actionContext,
+        IReadOnlyDictionary<string, object> actionArguments,
+        object controller
+    )
     {
         ActionContext = actionContext;
         ActionArguments = actionArguments;
@@ -971,13 +1120,14 @@ public sealed class BeforeControllerActionMethodEventData : EventData
     protected sealed override int Count => 3;
 
     /// <inheritdoc/>
-    protected sealed override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-        1 => new KeyValuePair<string, object>(nameof(ActionArguments), ActionArguments),
-        2 => new KeyValuePair<string, object>(nameof(Controller), Controller),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected sealed override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
+            1 => new KeyValuePair<string, object>(nameof(ActionArguments), ActionArguments),
+            2 => new KeyValuePair<string, object>(nameof(Controller), Controller),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -997,7 +1147,12 @@ public sealed class AfterControllerActionMethodEventData : EventData
     /// <param name="arguments">The arguments to the action.</param>
     /// <param name="controller">The controller.</param>
     /// <param name="result">The <see cref="IActionResult"/>.</param>
-    public AfterControllerActionMethodEventData(ActionContext actionContext, IReadOnlyDictionary<string, object> arguments, object controller, IActionResult result)
+    public AfterControllerActionMethodEventData(
+        ActionContext actionContext,
+        IReadOnlyDictionary<string, object> arguments,
+        object controller,
+        IActionResult result
+    )
     {
         ActionContext = actionContext;
         Arguments = arguments;
@@ -1029,14 +1184,15 @@ public sealed class AfterControllerActionMethodEventData : EventData
     protected override int Count => 4;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-        1 => new KeyValuePair<string, object>(nameof(Controller), Controller),
-        2 => new KeyValuePair<string, object>(nameof(Controller), Controller),
-        3 => new KeyValuePair<string, object>(nameof(Result), Result),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
+            1 => new KeyValuePair<string, object>(nameof(Controller), Controller),
+            2 => new KeyValuePair<string, object>(nameof(Controller), Controller),
+            3 => new KeyValuePair<string, object>(nameof(Result), Result),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -1055,7 +1211,11 @@ public sealed class BeforeResultFilterOnResultExecutionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resultExecutingContext">The <see cref="ResultExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeResultFilterOnResultExecutionEventData(ActionDescriptor actionDescriptor, ResultExecutingContext resultExecutingContext, IFilterMetadata filter)
+    public BeforeResultFilterOnResultExecutionEventData(
+        ActionDescriptor actionDescriptor,
+        ResultExecutingContext resultExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResultExecutingContext = resultExecutingContext;
@@ -1081,13 +1241,18 @@ public sealed class BeforeResultFilterOnResultExecutionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResultExecutingContext), ResultExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResultExecutingContext),
+                  ResultExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -1106,7 +1271,11 @@ public sealed class AfterResultFilterOnResultExecutionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resultExecutedContext">The <see cref="ResultExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterResultFilterOnResultExecutionEventData(ActionDescriptor actionDescriptor, ResultExecutedContext resultExecutedContext, IFilterMetadata filter)
+    public AfterResultFilterOnResultExecutionEventData(
+        ActionDescriptor actionDescriptor,
+        ResultExecutedContext resultExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResultExecutedContext = resultExecutedContext;
@@ -1132,13 +1301,18 @@ public sealed class AfterResultFilterOnResultExecutionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResultExecutedContext), ResultExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResultExecutedContext),
+                  ResultExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -1157,7 +1331,11 @@ public sealed class BeforeResultFilterOnResultExecutingEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resultExecutingContext">The <see cref="ResultExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeResultFilterOnResultExecutingEventData(ActionDescriptor actionDescriptor, ResultExecutingContext resultExecutingContext, IFilterMetadata filter)
+    public BeforeResultFilterOnResultExecutingEventData(
+        ActionDescriptor actionDescriptor,
+        ResultExecutingContext resultExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResultExecutingContext = resultExecutingContext;
@@ -1183,13 +1361,18 @@ public sealed class BeforeResultFilterOnResultExecutingEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResultExecutingContext), ResultExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResultExecutingContext),
+                  ResultExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -1208,7 +1391,11 @@ public sealed class AfterResultFilterOnResultExecutingEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resultExecutingContext">The <see cref="ResultExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterResultFilterOnResultExecutingEventData(ActionDescriptor actionDescriptor, ResultExecutingContext resultExecutingContext, IFilterMetadata filter)
+    public AfterResultFilterOnResultExecutingEventData(
+        ActionDescriptor actionDescriptor,
+        ResultExecutingContext resultExecutingContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResultExecutingContext = resultExecutingContext;
@@ -1234,13 +1421,18 @@ public sealed class AfterResultFilterOnResultExecutingEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResultExecutingContext), ResultExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResultExecutingContext),
+                  ResultExecutingContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -1259,7 +1451,11 @@ public sealed class BeforeResultFilterOnResultExecutedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resultExecutedContext">The <see cref="ResultExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public BeforeResultFilterOnResultExecutedEventData(ActionDescriptor actionDescriptor, ResultExecutedContext resultExecutedContext, IFilterMetadata filter)
+    public BeforeResultFilterOnResultExecutedEventData(
+        ActionDescriptor actionDescriptor,
+        ResultExecutedContext resultExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResultExecutedContext = resultExecutedContext;
@@ -1285,13 +1481,18 @@ public sealed class BeforeResultFilterOnResultExecutedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResultExecutedContext), ResultExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResultExecutedContext),
+                  ResultExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -1310,7 +1511,11 @@ public sealed class AfterResultFilterOnResultExecutedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="resultExecutedContext">The <see cref="ResultExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/>.</param>
-    public AfterResultFilterOnResultExecutedEventData(ActionDescriptor actionDescriptor, ResultExecutedContext resultExecutedContext, IFilterMetadata filter)
+    public AfterResultFilterOnResultExecutedEventData(
+        ActionDescriptor actionDescriptor,
+        ResultExecutedContext resultExecutedContext,
+        IFilterMetadata filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         ResultExecutedContext = resultExecutedContext;
@@ -1336,13 +1541,18 @@ public sealed class AfterResultFilterOnResultExecutedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ResultExecutedContext), ResultExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+              => new KeyValuePair<string, object>(
+                  nameof(ResultExecutedContext),
+                  ResultExecutedContext
+              ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -1380,12 +1590,13 @@ public sealed class BeforeActionResultEventData : EventData
     protected override int Count => 2;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-        1 => new KeyValuePair<string, object>(nameof(Result), Result),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
+            1 => new KeyValuePair<string, object>(nameof(Result), Result),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -1423,10 +1634,11 @@ public sealed class AfterActionResultEventData : EventData
     protected override int Count => 2;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-        1 => new KeyValuePair<string, object>(nameof(Result), Result),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
+            1 => new KeyValuePair<string, object>(nameof(Result), Result),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
     {
         private static MemberDeclarationSyntax AfterMember(
             SyntaxList<MemberDeclarationSyntax> members,
-            MemberDeclarationSyntax eventDeclaration)
+            MemberDeclarationSyntax eventDeclaration
+        )
         {
             if (eventDeclaration.Kind() == SyntaxKind.EventFieldDeclaration)
             {
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         private static MemberDeclarationSyntax BeforeMember(
             SyntaxList<MemberDeclarationSyntax> members,
-            MemberDeclarationSyntax eventDeclaration)
+            MemberDeclarationSyntax eventDeclaration
+        )
         {
             // If it's a field style event, then it goes before everything else if we don't have any
             // existing fields/events.
@@ -62,14 +64,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CompilationUnitSyntax destination,
             IEventSymbol @event,
             CodeGenerationOptions options,
-            IList<bool> availableIndices)
+            IList<bool> availableIndices
+        )
         {
-            var declaration = GenerateEventDeclaration(@event, CodeGenerationDestination.CompilationUnit, options);
+            var declaration = GenerateEventDeclaration(
+                @event,
+                CodeGenerationDestination.CompilationUnit,
+                options
+            );
 
             // Place the event depending on its shape.  Field style events go with fields, property
-            // style events go with properties.  If there 
-            var members = Insert(destination.Members, declaration, options, availableIndices,
-                after: list => AfterMember(list, declaration), before: list => BeforeMember(list, declaration));
+            // style events go with properties.  If there
+            var members = Insert(
+                destination.Members,
+                declaration,
+                options,
+                availableIndices,
+                after: list => AfterMember(list, declaration),
+                before: list => BeforeMember(list, declaration)
+            );
             return destination.WithMembers(members.ToSyntaxList());
         }
 
@@ -77,13 +90,23 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             TypeDeclarationSyntax destination,
             IEventSymbol @event,
             CodeGenerationOptions options,
-            IList<bool> availableIndices)
+            IList<bool> availableIndices
+        )
         {
-            var declaration = GenerateEventDeclaration(@event, GetDestination(destination), options);
+            var declaration = GenerateEventDeclaration(
+                @event,
+                GetDestination(destination),
+                options
+            );
 
-            var members = Insert(destination.Members, declaration, options, availableIndices,
+            var members = Insert(
+                destination.Members,
+                declaration,
+                options,
+                availableIndices,
                 after: list => AfterMember(list, declaration),
-                before: list => BeforeMember(list, declaration));
+                before: list => BeforeMember(list, declaration)
+            );
 
             // Find the best place to put the field.  It should go after the last field if we already
             // have fields, or at the beginning of the file if we don't.
@@ -92,55 +115,101 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         public static MemberDeclarationSyntax GenerateEventDeclaration(
-            IEventSymbol @event, CodeGenerationDestination destination, CodeGenerationOptions options)
+            IEventSymbol @event,
+            CodeGenerationDestination destination,
+            CodeGenerationOptions options
+        )
         {
-            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(@event, options);
+            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(
+                @event,
+                options
+            );
             if (reusableSyntax != null)
             {
                 return reusableSyntax;
             }
 
-            var declaration = !options.GenerateMethodBodies || @event.IsAbstract || @event.AddMethod == null || @event.RemoveMethod == null
-                ? GenerateEventFieldDeclaration(@event, destination, options)
-                : GenerateEventDeclarationWorker(@event, destination, options);
+            var declaration =
+                !options.GenerateMethodBodies
+                || @event.IsAbstract
+                || @event.AddMethod == null
+                || @event.RemoveMethod == null
+                    ? GenerateEventFieldDeclaration(@event, destination, options)
+                    : GenerateEventDeclarationWorker(@event, destination, options);
 
             return ConditionallyAddDocumentationCommentTo(declaration, @event, options);
         }
 
         private static MemberDeclarationSyntax GenerateEventFieldDeclaration(
-            IEventSymbol @event, CodeGenerationDestination destination, CodeGenerationOptions options)
+            IEventSymbol @event,
+            CodeGenerationDestination destination,
+            CodeGenerationOptions options
+        )
         {
             return AddFormatterAndCodeGeneratorAnnotationsTo(
-                AddAnnotationsTo(@event,
+                AddAnnotationsTo(
+                    @event,
                     SyntaxFactory.EventFieldDeclaration(
                         AttributeGenerator.GenerateAttributeLists(@event.GetAttributes(), options),
                         GenerateModifiers(@event, destination, options),
                         SyntaxFactory.VariableDeclaration(
                             @event.Type.GenerateTypeSyntax(),
-                            SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(@event.Name.ToIdentifierToken()))))));
+                            SyntaxFactory.SingletonSeparatedList(
+                                SyntaxFactory.VariableDeclarator(@event.Name.ToIdentifierToken())
+                            )
+                        )
+                    )
+                )
+            );
         }
 
         private static MemberDeclarationSyntax GenerateEventDeclarationWorker(
-            IEventSymbol @event, CodeGenerationDestination destination, CodeGenerationOptions options)
+            IEventSymbol @event,
+            CodeGenerationDestination destination,
+            CodeGenerationOptions options
+        )
         {
-            var explicitInterfaceSpecifier = GenerateExplicitInterfaceSpecifier(@event.ExplicitInterfaceImplementations);
+            var explicitInterfaceSpecifier = GenerateExplicitInterfaceSpecifier(
+                @event.ExplicitInterfaceImplementations
+            );
 
-            return AddFormatterAndCodeGeneratorAnnotationsTo(SyntaxFactory.EventDeclaration(
-                attributeLists: AttributeGenerator.GenerateAttributeLists(@event.GetAttributes(), options),
-                modifiers: GenerateModifiers(@event, destination, options),
-                type: @event.Type.GenerateTypeSyntax(),
-                explicitInterfaceSpecifier: explicitInterfaceSpecifier,
-                identifier: @event.Name.ToIdentifierToken(),
-                accessorList: GenerateAccessorList(@event, destination, options)));
+            return AddFormatterAndCodeGeneratorAnnotationsTo(
+                SyntaxFactory.EventDeclaration(
+                    attributeLists: AttributeGenerator.GenerateAttributeLists(
+                        @event.GetAttributes(),
+                        options
+                    ),
+                    modifiers: GenerateModifiers(@event, destination, options),
+                    type: @event.Type.GenerateTypeSyntax(),
+                    explicitInterfaceSpecifier: explicitInterfaceSpecifier,
+                    identifier: @event.Name.ToIdentifierToken(),
+                    accessorList: GenerateAccessorList(@event, destination, options)
+                )
+            );
         }
 
         private static AccessorListSyntax GenerateAccessorList(
-            IEventSymbol @event, CodeGenerationDestination destination, CodeGenerationOptions options)
+            IEventSymbol @event,
+            CodeGenerationDestination destination,
+            CodeGenerationOptions options
+        )
         {
             var accessors = new List<AccessorDeclarationSyntax>
             {
-                GenerateAccessorDeclaration(@event, @event.AddMethod, SyntaxKind.AddAccessorDeclaration, destination, options),
-                GenerateAccessorDeclaration(@event, @event.RemoveMethod, SyntaxKind.RemoveAccessorDeclaration, destination, options),
+                GenerateAccessorDeclaration(
+                    @event,
+                    @event.AddMethod,
+                    SyntaxKind.AddAccessorDeclaration,
+                    destination,
+                    options
+                ),
+                GenerateAccessorDeclaration(
+                    @event,
+                    @event.RemoveMethod,
+                    SyntaxKind.RemoveAccessorDeclaration,
+                    destination,
+                    options
+                ),
             };
 
             return SyntaxFactory.AccessorList(accessors.WhereNotNull().ToSyntaxList());
@@ -151,43 +220,57 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol accessor,
             SyntaxKind kind,
             CodeGenerationDestination destination,
-            CodeGenerationOptions options)
+            CodeGenerationOptions options
+        )
         {
-            var hasBody = options.GenerateMethodBodies && HasAccessorBodies(@event, destination, accessor);
-            return accessor == null
-                ? null
-                : GenerateAccessorDeclaration(accessor, kind, hasBody);
+            var hasBody =
+                options.GenerateMethodBodies && HasAccessorBodies(@event, destination, accessor);
+            return accessor == null ? null : GenerateAccessorDeclaration(accessor, kind, hasBody);
         }
 
         private static AccessorDeclarationSyntax GenerateAccessorDeclaration(
             IMethodSymbol accessor,
             SyntaxKind kind,
-            bool hasBody)
+            bool hasBody
+        )
         {
-            return AddAnnotationsTo(accessor, SyntaxFactory.AccessorDeclaration(kind)
-                                .WithBody(hasBody ? GenerateBlock(accessor) : null)
-                                .WithSemicolonToken(hasBody ? default : SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+            return AddAnnotationsTo(
+                accessor,
+                SyntaxFactory
+                    .AccessorDeclaration(kind)
+                    .WithBody(hasBody ? GenerateBlock(accessor) : null)
+                    .WithSemicolonToken(
+                        hasBody ? default : SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                    )
+            );
         }
 
         private static BlockSyntax GenerateBlock(IMethodSymbol accessor)
         {
             return SyntaxFactory.Block(
-                StatementGenerator.GenerateStatements(CodeGenerationMethodInfo.GetStatements(accessor)));
+                StatementGenerator.GenerateStatements(
+                    CodeGenerationMethodInfo.GetStatements(accessor)
+                )
+            );
         }
 
         private static bool HasAccessorBodies(
             IEventSymbol @event,
             CodeGenerationDestination destination,
-            IMethodSymbol accessor)
+            IMethodSymbol accessor
+        )
         {
-            return destination != CodeGenerationDestination.InterfaceType &&
-                !@event.IsAbstract &&
-                accessor != null &&
-                !accessor.IsAbstract;
+            return destination != CodeGenerationDestination.InterfaceType
+                && !@event.IsAbstract
+                && accessor != null
+                && !accessor.IsAbstract;
         }
 
         private static SyntaxTokenList GenerateModifiers(
-            IEventSymbol @event, CodeGenerationDestination destination, CodeGenerationOptions options)
+            IEventSymbol @event,
+            CodeGenerationDestination destination,
+            CodeGenerationOptions options
+        )
         {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
@@ -196,7 +279,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 if (destination != CodeGenerationDestination.InterfaceType)
                 {
-                    AddAccessibilityModifiers(@event.DeclaredAccessibility, tokens, options, Accessibility.Private);
+                    AddAccessibilityModifiers(
+                        @event.DeclaredAccessibility,
+                        tokens,
+                        options,
+                        Accessibility.Private
+                    );
 
                     if (@event.IsStatic)
                     {

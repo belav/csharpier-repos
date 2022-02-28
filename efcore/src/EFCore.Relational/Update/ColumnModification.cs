@@ -87,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isWrite,
             bool isKey,
             bool isCondition,
-            bool sensitiveLoggingEnabled)
+            bool sensitiveLoggingEnabled
+        )
             : this(
                 column.Name,
                 originalValue: null,
@@ -100,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 isKey: isKey,
                 isCondition: isCondition,
                 sensitiveLoggingEnabled: sensitiveLoggingEnabled,
-                column.IsNullable)
+                column.IsNullable
+            )
         {
             Entry = entry;
             _generateParameterName = generateParameterName;
@@ -129,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isKey,
             bool isCondition,
             bool isConcurrencyToken,
-            bool sensitiveLoggingEnabled)
+            bool sensitiveLoggingEnabled
+        )
             : this(
                 entry,
                 property,
@@ -140,9 +143,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 isWrite: isWrite,
                 isKey: isKey,
                 isCondition: isCondition,
-                sensitiveLoggingEnabled: sensitiveLoggingEnabled)
-        {
-        }
+                sensitiveLoggingEnabled: sensitiveLoggingEnabled
+            ) { }
 
         /// <summary>
         ///     Creates a new <see cref="ColumnModification" /> instance.
@@ -172,7 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isKey,
             bool isCondition,
             bool sensitiveLoggingEnabled,
-            bool? isNullable = null)
+            bool? isNullable = null
+        )
         {
             ColumnName = columnName;
             _originalValue = originalValue;
@@ -212,7 +215,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isWrite,
             bool isKey,
             bool isCondition,
-            bool sensitiveLoggingEnabled)
+            bool sensitiveLoggingEnabled
+        )
         {
             ColumnName = columnName;
             _originalValue = originalValue;
@@ -248,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isWrite,
             bool isKey,
             bool isCondition,
-            bool sensitiveLoggingEnabled)
+            bool sensitiveLoggingEnabled
+        )
             : this(
                 columnName,
                 originalValue: originalValue,
@@ -259,9 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 isWrite: isWrite,
                 isKey: isKey,
                 isCondition: isCondition,
-                sensitiveLoggingEnabled: sensitiveLoggingEnabled)
-        {
-        }
+                sensitiveLoggingEnabled: sensitiveLoggingEnabled
+            ) { }
 
         /// <summary>
         ///     The <see cref="IUpdateEntry" /> that represents the entity that is being modified.
@@ -312,26 +316,22 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Indicates whether the original value of the property must be passed as a parameter to the SQL.
         /// </summary>
-        public virtual bool UseOriginalValueParameter
-            => UseParameter && UseOriginalValue;
+        public virtual bool UseOriginalValueParameter => UseParameter && UseOriginalValue;
 
         /// <summary>
         ///     Indicates whether the current value of the property must be passed as a parameter to the SQL.
         /// </summary>
-        public virtual bool UseCurrentValueParameter
-            => UseParameter && UseCurrentValue;
+        public virtual bool UseCurrentValueParameter => UseParameter && UseCurrentValue;
 
         /// <summary>
         ///     Indicates whether the original value of the property should be used.
         /// </summary>
-        public virtual bool UseOriginalValue
-            => IsCondition;
+        public virtual bool UseOriginalValue => IsCondition;
 
         /// <summary>
         ///     Indicates whether the current value of the property should be used.
         /// </summary>
-        public virtual bool UseCurrentValue
-            => IsWrite;
+        public virtual bool UseCurrentValue => IsWrite;
 
         /// <summary>
         ///     Indicates whether the value of the property must be passed as a parameter to the SQL as opposed to being inlined.
@@ -341,14 +341,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     The parameter name to use for the current value parameter (<see cref="UseCurrentValueParameter" />), if needed.
         /// </summary>
-        public virtual string? ParameterName
-            => _parameterName ??= UseCurrentValueParameter ? _generateParameterName!() : null;
+        public virtual string? ParameterName =>
+            _parameterName ??= UseCurrentValueParameter ? _generateParameterName!() : null;
 
         /// <summary>
         ///     The parameter name to use for the original value parameter (<see cref="UseOriginalValueParameter" />), if needed.
         /// </summary>
-        public virtual string? OriginalParameterName
-            => _originalParameterName ??= UseOriginalValueParameter ? _generateParameterName!() : null;
+        public virtual string? OriginalParameterName =>
+            _originalParameterName ??= UseOriginalValueParameter ? _generateParameterName!() : null;
 
         /// <summary>
         ///     The name of the column.
@@ -363,8 +363,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     The original value of the property mapped to this column.
         /// </summary>
-        public virtual object? OriginalValue
-            => Entry == null
+        public virtual object? OriginalValue =>
+            Entry == null
                 ? _originalValue
                 : Entry.SharedIdentityEntry == null
                     ? Entry.GetOriginalValue(Property!)
@@ -375,11 +375,12 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// </summary>
         public virtual object? Value
         {
-            get => Entry == null
-                ? _value
-                : Entry.EntityState == EntityState.Deleted
-                    ? null
-                    : Entry.GetCurrentValue(Property!);
+            get =>
+                Entry == null
+                    ? _value
+                    : Entry.EntityState == EntityState.Deleted
+                        ? null
+                        : Entry.GetCurrentValue(Property!);
             set
             {
                 if (Entry == null)
@@ -409,12 +410,17 @@ namespace Microsoft.EntityFrameworkCore.Update
             Check.DebugAssert(Entry is not null, "Entry is not null");
             Check.DebugAssert(Property is not null, "Property is not null");
             Check.DebugAssert(modification.Entry is not null, "modification.Entry is not null");
-            Check.DebugAssert(modification.Property is not null, "modification.Property is not null");
+            Check.DebugAssert(
+                modification.Property is not null,
+                "modification.Property is not null"
+            );
 
             _sharedColumnModifications ??= new List<IColumnModification>();
 
-            if (UseCurrentValueParameter
-                && !modification.Property.GetValueComparer().Equals(Value, modification.Value))
+            if (
+                UseCurrentValueParameter
+                && !modification.Property.GetValueComparer().Equals(Value, modification.Value)
+            )
             {
                 if (_sensitiveLoggingEnabled)
                 {
@@ -422,10 +428,16 @@ namespace Microsoft.EntityFrameworkCore.Update
                         RelationalStrings.ConflictingRowValuesSensitive(
                             Entry.EntityType.DisplayName(),
                             modification.Entry!.EntityType.DisplayName(),
-                            Entry.BuildCurrentValuesString(Entry.EntityType.FindPrimaryKey()!.Properties),
+                            Entry.BuildCurrentValuesString(
+                                Entry.EntityType.FindPrimaryKey()!.Properties
+                            ),
                             Entry.BuildCurrentValuesString(new[] { Property }),
-                            modification.Entry.BuildCurrentValuesString(new[] { modification.Property }),
-                            ColumnName));
+                            modification.Entry.BuildCurrentValuesString(
+                                new[] { modification.Property }
+                            ),
+                            ColumnName
+                        )
+                    );
                 }
 
                 throw new InvalidOperationException(
@@ -434,15 +446,23 @@ namespace Microsoft.EntityFrameworkCore.Update
                         modification.Entry.EntityType.DisplayName(),
                         new[] { Property }.Format(),
                         new[] { modification.Property }.Format(),
-                        ColumnName));
+                        ColumnName
+                    )
+                );
             }
 
-            if (UseOriginalValueParameter
-                && !modification.Property.GetValueComparer().Equals(OriginalValue, modification.OriginalValue))
+            if (
+                UseOriginalValueParameter
+                && !modification.Property
+                    .GetValueComparer()
+                    .Equals(OriginalValue, modification.OriginalValue)
+            )
             {
-                if (Entry.EntityState == EntityState.Modified
+                if (
+                    Entry.EntityState == EntityState.Modified
                     && modification.Entry.EntityState == EntityState.Added
-                    && modification.Entry.SharedIdentityEntry == null)
+                    && modification.Entry.SharedIdentityEntry == null
+                )
                 {
                     modification.Entry.SetOriginalValue(modification.Property, OriginalValue);
                 }
@@ -454,10 +474,16 @@ namespace Microsoft.EntityFrameworkCore.Update
                             RelationalStrings.ConflictingOriginalRowValuesSensitive(
                                 Entry.EntityType.DisplayName(),
                                 modification.Entry.EntityType.DisplayName(),
-                                Entry.BuildCurrentValuesString(Entry.EntityType.FindPrimaryKey()!.Properties),
+                                Entry.BuildCurrentValuesString(
+                                    Entry.EntityType.FindPrimaryKey()!.Properties
+                                ),
                                 Entry.BuildOriginalValuesString(new[] { Property }),
-                                modification.Entry.BuildOriginalValuesString(new[] { modification.Property }),
-                                ColumnName));
+                                modification.Entry.BuildOriginalValuesString(
+                                    new[] { modification.Property }
+                                ),
+                                ColumnName
+                            )
+                        );
                     }
 
                     throw new InvalidOperationException(
@@ -466,7 +492,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                             modification.Entry.EntityType.DisplayName(),
                             new[] { Property }.Format(),
                             new[] { modification.Property }.Format(),
-                            ColumnName));
+                            ColumnName
+                        )
+                    );
                 }
             }
 

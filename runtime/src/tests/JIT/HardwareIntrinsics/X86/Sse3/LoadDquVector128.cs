@@ -21,7 +21,12 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse3.IsSupported)
             {
-                using (TestTable<int> intTable = new TestTable<int>(new int[4] { 1, -5, 100, 0 }, new int[4]))
+                using (
+                    TestTable<int> intTable = new TestTable<int>(
+                        new int[4] { 1, -5, 100, 0 },
+                        new int[4]
+                    )
+                )
                 {
                     var vf = Sse3.LoadDquVector128((int*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -38,7 +43,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<uint> intTable = new TestTable<uint>(new uint[4] { 1, 5, 100, 0 }, new uint[4]))
+                using (
+                    TestTable<uint> intTable = new TestTable<uint>(
+                        new uint[4] { 1, 5, 100, 0 },
+                        new uint[4]
+                    )
+                )
                 {
                     var vf = Sse3.LoadDquVector128((uint*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -55,7 +65,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<long> intTable = new TestTable<long>(new long[2] { 1, -5 }, new long[2]))
+                using (
+                    TestTable<long> intTable = new TestTable<long>(
+                        new long[2] { 1, -5 },
+                        new long[2]
+                    )
+                )
                 {
                     var vf = Sse3.LoadDquVector128((long*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -72,7 +87,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ulong> intTable = new TestTable<ulong>(new ulong[2] { 1, 5 }, new ulong[2]))
+                using (
+                    TestTable<ulong> intTable = new TestTable<ulong>(
+                        new ulong[2] { 1, 5 },
+                        new ulong[2]
+                    )
+                )
                 {
                     var vf = Sse3.LoadDquVector128((ulong*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -89,7 +109,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<short> intTable = new TestTable<short>(new short[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new short[8]))
+                using (
+                    TestTable<short> intTable = new TestTable<short>(
+                        new short[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new short[8]
+                    )
+                )
                 {
                     var vf = Sse3.LoadDquVector128((short*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -106,7 +131,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ushort> intTable = new TestTable<ushort>(new ushort[8] { 1, 5, 100, 0, 1, 2, 3, 4 }, new ushort[8]))
+                using (
+                    TestTable<ushort> intTable = new TestTable<ushort>(
+                        new ushort[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new ushort[8]
+                    )
+                )
                 {
                     var vf = Sse3.LoadDquVector128((ushort*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -123,7 +153,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<byte> intTable = new TestTable<byte>(new byte[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new byte[16]))
+                using (
+                    TestTable<byte> intTable = new TestTable<byte>(
+                        new byte[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new byte[16]
+                    )
+                )
                 {
                     var vf = Sse3.LoadDquVector128((byte*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -140,7 +175,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<sbyte> intTable = new TestTable<sbyte>(new sbyte[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new sbyte[16]))
+                using (
+                    TestTable<sbyte> intTable = new TestTable<sbyte>(
+                        new sbyte[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new sbyte[16]
+                    )
+                )
                 {
                     var vf = Sse3.LoadDquVector128((sbyte*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -171,6 +211,7 @@ namespace IntelHardwareIntrinsicTest
 
             GCHandle inHandle;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b)
             {
                 this.inArray = a;
@@ -179,6 +220,7 @@ namespace IntelHardwareIntrinsicTest
                 inHandle = GCHandle.Alloc(inArray, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T, T, bool> check)
             {
                 for (int i = 0; i < inArray.Length; i++)
@@ -197,6 +239,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

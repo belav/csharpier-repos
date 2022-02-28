@@ -10,10 +10,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsSerializable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 
@@ -21,10 +18,7 @@ namespace Internal.TypeSystem
     {
         public override bool IsSerializable
         {
-            get
-            {
-                return _typeDef.IsSerializable;
-            }
+            get { return _typeDef.IsSerializable; }
         }
     }
 }

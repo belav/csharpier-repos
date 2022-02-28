@@ -26,7 +26,10 @@ public class PhoneNumberTokenProvider<TUser> : TotpSecurityStampBasedTokenProvid
     /// The task will return true if a two-factor authentication token could be generated as the user has
     /// a telephone number, otherwise false.
     /// </returns>
-    public override async Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<TUser> manager, TUser user)
+    public override async Task<bool> CanGenerateTwoFactorTokenAsync(
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         if (manager == null)
         {
@@ -35,7 +38,8 @@ public class PhoneNumberTokenProvider<TUser> : TotpSecurityStampBasedTokenProvid
 
         var phoneNumber = await manager.GetPhoneNumberAsync(user);
 
-        return !string.IsNullOrWhiteSpace(phoneNumber) && await manager.IsPhoneNumberConfirmedAsync(user);
+        return !string.IsNullOrWhiteSpace(phoneNumber)
+            && await manager.IsPhoneNumberConfirmedAsync(user);
     }
 
     /// <summary>
@@ -48,7 +52,11 @@ public class PhoneNumberTokenProvider<TUser> : TotpSecurityStampBasedTokenProvid
     /// The <see cref="Task"/> that represents the asynchronous operation, containing a constant modifier for the specified
     /// <paramref name="user"/> and <paramref name="purpose"/>.
     /// </returns>
-    public override async Task<string> GetUserModifierAsync(string purpose, UserManager<TUser> manager, TUser user)
+    public override async Task<string> GetUserModifierAsync(
+        string purpose,
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         if (manager == null)
         {

@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         private readonly IVsEditorAdaptersFactoryService _editorAdaptersFactory;
         private readonly IThreadingContext _threadingContext;
         private readonly Dictionary<IVsHierarchy, VisualStudioProject> _xamlProjects = new();
-        private readonly ConcurrentDictionary<string, DocumentId> _documentIds = new ConcurrentDictionary<string, DocumentId>(StringComparer.OrdinalIgnoreCase);
+        private readonly ConcurrentDictionary<string, DocumentId> _documentIds =
+            new ConcurrentDictionary<string, DocumentId>(StringComparer.OrdinalIgnoreCase);
 
         private RunningDocumentTable? _rdt;
         private IVsSolution? _vsSolution;
@@ -47,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             VisualStudioProjectFactory visualStudioProjectFactory,
             VisualStudioWorkspace workspace,
             IXamlDocumentAnalyzerService analyzerService,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _serviceProvider = serviceProvider;
             _editorAdaptersFactory = editorAdaptersFactoryService;
@@ -91,12 +93,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 }
                 else
                 {
-                    return _threadingContext.JoinableTaskFactory.Run(async () =>
-                    {
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    return _threadingContext.JoinableTaskFactory.Run(
+                        async () =>
+                        {
+                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                        return EnsureDocument(filePath);
-                    });
+                            return EnsureDocument(filePath);
+                        }
+                    );
                 }
             }
         }
@@ -140,7 +144,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     return null;
                 }
 
-                if (!hierarchy.TryGetGuidProperty(__VSHPROPID.VSHPROPID_ProjectIDGuid, out var projectGuid))
+                if (
+                    !hierarchy.TryGetGuidProperty(
+                        __VSHPROPID.VSHPROPID_ProjectIDGuid,
+                        out var projectGuid
+                    )
+                )
                 {
                     return null;
                 }
@@ -152,8 +161,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     ProjectGuid = projectGuid
                 };
 
-                project = _threadingContext.JoinableTaskFactory.Run(() => _visualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
-                    name, StringConstants.XamlLanguageName, projectInfo, CancellationToken.None));
+                project = _threadingContext.JoinableTaskFactory.Run(
+                    () =>
+                        _visualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
+                            name,
+                            StringConstants.XamlLanguageName,
+                            projectInfo,
+                            CancellationToken.None
+                        )
+                );
                 _xamlProjects.Add(hierarchy, project);
             }
 
@@ -161,7 +177,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             {
                 project.AddSourceFile(filePath);
 
-                var documentId = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(filePath).Single(d => d.ProjectId == project.Id);
+                var documentId = _workspace.CurrentSolution
+                    .GetDocumentIdsWithFilePath(filePath)
+                    .Single(d => d.ProjectId == project.Id);
                 _documentIds[filePath] = documentId;
 
                 // Remove the following when https://github.com/dotnet/roslyn/issues/49879 is fixed
@@ -174,7 +192,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     var textContainer = textBuffer?.AsTextContainer();
                     if (textContainer != null)
                     {
-                        _workspace.OnDocumentTextChanged(documentId, textContainer.CurrentText, PreservationMode.PreserveIdentity);
+                        _workspace.OnDocumentTextChanged(
+                            documentId,
+                            textContainer.CurrentText,
+                            PreservationMode.PreserveIdentity
+                        );
                     }
                 }
             }
@@ -200,7 +222,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 var document = _workspace.CurrentSolution.GetDocument(documentId);
                 if (document?.FilePath != null)
                 {
-                    var project = _xamlProjects.Values.SingleOrDefault(p => p.Id == document.Project.Id);
+                    var project = _xamlProjects.Values.SingleOrDefault(
+                        p => p.Id == document.Project.Id
+                    );
                     project?.RemoveSourceFile(document.FilePath);
                 }
 
@@ -217,11 +241,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             }
         }
 
-        private void OnDocumentMonikerChanged(uint docCookie, IVsHierarchy hierarchy, string oldMoniker, string newMoniker)
+        private void OnDocumentMonikerChanged(
+            uint docCookie,
+            IVsHierarchy hierarchy,
+            string oldMoniker,
+            string newMoniker
+        )
         {
             // If the moniker change only involves casing differences then the project system will
             // not remove & add the file again with the new name, so we should not clear any state.
-            // Leaving the old casing in the DocumentKey is safe because DocumentKey equality 
+            // Leaving the old casing in the DocumentKey is safe because DocumentKey equality
             // checks ignore the casing of the moniker.
             if (oldMoniker.Equals(newMoniker, StringComparison.OrdinalIgnoreCase))
             {
@@ -251,7 +280,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             {
                 project.AddSourceFile(newMoniker);
 
-                var documentId = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(newMoniker).Single(d => d.ProjectId == project.Id);
+                var documentId = _workspace.CurrentSolution
+                    .GetDocumentIdsWithFilePath(newMoniker)
+                    .Single(d => d.ProjectId == project.Id);
                 _documentIds[newMoniker] = documentId;
             }
         }

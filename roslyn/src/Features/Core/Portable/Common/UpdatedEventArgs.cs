@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.Common
     internal class UpdatedEventArgs : EventArgs
     {
         /// <summary>
-        /// The identity of update group. 
+        /// The identity of update group.
         /// </summary>
         public object Id { get; }
 
@@ -28,7 +28,12 @@ namespace Microsoft.CodeAnalysis.Common
         /// </summary>
         public DocumentId? DocumentId { get; }
 
-        public UpdatedEventArgs(object id, Workspace workspace, ProjectId? projectId, DocumentId? documentId)
+        public UpdatedEventArgs(
+            object id,
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId
+        )
         {
             Id = id;
             Workspace = workspace;

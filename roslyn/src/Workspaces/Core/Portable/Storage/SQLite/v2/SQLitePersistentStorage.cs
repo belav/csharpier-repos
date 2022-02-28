@@ -38,8 +38,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
         // cached query strings
 
-        private readonly string _insert_into_string_table_values_0 = $@"insert into {StringInfoTableName}(""{DataColumnName}"") values (?)";
-        private readonly string _select_star_from_string_table_where_0_limit_one = $@"select * from {StringInfoTableName} where (""{DataColumnName}"" = ?) limit 1";
+        private readonly string _insert_into_string_table_values_0 =
+            $@"insert into {StringInfoTableName}(""{DataColumnName}"") values (?)";
+        private readonly string _select_star_from_string_table_where_0_limit_one =
+            $@"select * from {StringInfoTableName} where (""{DataColumnName}"" = ?) limit 1";
 
         private SQLitePersistentStorage(
             SQLiteConnectionPoolService connectionPoolService,
@@ -47,8 +49,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             string solutionFilePath,
             string databaseFile,
             IAsynchronousOperationListener asyncListener,
-            IPersistentStorageFaultInjector? faultInjector)
-            : base(workingFolderPath, solutionFilePath, databaseFile)
+            IPersistentStorageFaultInjector? faultInjector
+        ) : base(workingFolderPath, solutionFilePath, databaseFile)
         {
             _connectionPoolService = connectionPoolService;
 
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 databaseFile,
                 faultInjector,
                 (connection, cancellationToken) => Initialize(connection, cancellationToken),
-                CancellationToken.None)!;
+                CancellationToken.None
+            )!;
 
             // Create a delay to batch up requests to flush.  We'll won't flush more than every FlushAllDelayMS.
             _flushInMemoryDataToDisk = FlushInMemoryDataToDisk;
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 TimeSpan.FromMilliseconds(FlushAllDelayMS),
                 FlushInMemoryDataToDiskIfNotShutdownAsync,
                 asyncListener,
-                _shutdownTokenSource.Token);
+                _shutdownTokenSource.Token
+            );
         }
 
         public static SQLitePersistentStorage? TryCreate(
@@ -79,10 +83,17 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             string solutionFilePath,
             string databaseFile,
             IAsynchronousOperationListener asyncListener,
-            IPersistentStorageFaultInjector? faultInjector)
+            IPersistentStorageFaultInjector? faultInjector
+        )
         {
             var sqlStorage = new SQLitePersistentStorage(
-                connectionPoolService, workingFolderPath, solutionFilePath, databaseFile, asyncListener, faultInjector);
+                connectionPoolService,
+                workingFolderPath,
+                solutionFilePath,
+                databaseFile,
+                asyncListener,
+                faultInjector
+            );
             if (sqlStorage._connectionPool is null)
             {
                 // The connection pool failed to initialize
@@ -120,7 +131,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             }
         }
 
-        private static void Initialize(SqlConnection connection, CancellationToken cancellationToken)
+        private static void Initialize(
+            SqlConnection connection,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -153,14 +167,16 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             // so there's no need for a write caching layer.  This also keeps consistency
             // totally clear as there's only one source of truth.
             connection.ExecuteCommand(
-$@"create table if not exists {StringInfoTableName}(
+                $@"create table if not exists {StringInfoTableName}(
 ""{DataIdColumnName}"" integer primary key autoincrement not null,
-""{DataColumnName}"" varchar)");
+""{DataColumnName}"" varchar)"
+            );
 
             // Ensure that the string-info table's 'Value' column is defined to be 'unique'.
             // We don't allow duplicate strings in this table.
             connection.ExecuteCommand(
-$@"create unique index if not exists ""{StringInfoTableName}_{DataColumnName}"" on {StringInfoTableName}(""{DataColumnName}"")");
+                $@"create unique index if not exists ""{StringInfoTableName}_{DataColumnName}"" on {StringInfoTableName}(""{DataColumnName}"")"
+            );
 
             // Now make sure we have the individual tables for the solution/project/document info.
             // We put this in both our persistent table and our in-memory table so that they have
@@ -174,22 +190,25 @@ $@"create unique index if not exists ""{StringInfoTableName}_{DataColumnName}"" 
             {
                 var dbName = database.GetName();
                 connection.ExecuteCommand(
-$@"create table if not exists {dbName}.{SolutionDataTableName}(
+                    $@"create table if not exists {dbName}.{SolutionDataTableName}(
     ""{DataIdColumnName}"" varchar primary key not null,
     ""{ChecksumColumnName}"" blob,
-    ""{DataColumnName}"" blob)");
+    ""{DataColumnName}"" blob)"
+                );
 
                 connection.ExecuteCommand(
-$@"create table if not exists {dbName}.{ProjectDataTableName}(
+                    $@"create table if not exists {dbName}.{ProjectDataTableName}(
     ""{DataIdColumnName}"" integer primary key not null,
     ""{ChecksumColumnName}"" blob,
-    ""{DataColumnName}"" blob)");
+    ""{DataColumnName}"" blob)"
+                );
 
                 connection.ExecuteCommand(
-$@"create table if not exists {dbName}.{DocumentDataTableName}(
+                    $@"create table if not exists {dbName}.{DocumentDataTableName}(
     ""{DataIdColumnName}"" integer primary key not null,
     ""{ChecksumColumnName}"" blob,
-    ""{DataColumnName}"" blob)");
+    ""{DataColumnName}"" blob)"
+                );
             }
         }
     }

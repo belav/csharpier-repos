@@ -25,10 +25,14 @@ internal class CompiledPageRouteModelProvider : IPageRouteModelProvider
     public CompiledPageRouteModelProvider(
         ApplicationPartManager applicationManager,
         IOptions<RazorPagesOptions> pagesOptionsAccessor,
-        ILogger<CompiledPageRouteModelProvider> logger)
+        ILogger<CompiledPageRouteModelProvider> logger
+    )
     {
-        _applicationManager = applicationManager ?? throw new ArgumentNullException(nameof(applicationManager));
-        _pagesOptions = pagesOptionsAccessor?.Value ?? throw new ArgumentNullException(nameof(pagesOptionsAccessor));
+        _applicationManager =
+            applicationManager ?? throw new ArgumentNullException(nameof(applicationManager));
+        _pagesOptions =
+            pagesOptionsAccessor?.Value
+            ?? throw new ArgumentNullException(nameof(pagesOptionsAccessor));
         _routeModelFactory = new PageRouteModelFactory(_pagesOptions, logger);
     }
 
@@ -52,7 +56,9 @@ internal class CompiledPageRouteModelProvider : IPageRouteModelProvider
         }
     }
 
-    private IEnumerable<CompiledViewDescriptor> GetViewDescriptors(ApplicationPartManager applicationManager)
+    private IEnumerable<CompiledViewDescriptor> GetViewDescriptors(
+        ApplicationPartManager applicationManager
+    )
     {
         if (applicationManager == null)
         {

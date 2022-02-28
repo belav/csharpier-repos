@@ -26,19 +26,33 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(Resources.GeneratedDllImportMissingModifiersDescription)));
+                description: GetResourceString(
+                    nameof(Resources.GeneratedDllImportMissingModifiersDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor GeneratedDllImportContainingTypeMissingModifiers =
             new DiagnosticDescriptor(
                 Ids.GeneratedDllImportContaiingTypeMissingRequiredModifiers,
-                GetResourceString(nameof(Resources.GeneratedDllImportContainingTypeMissingModifiersTitle)),
-                GetResourceString(nameof(Resources.GeneratedDllImportContainingTypeMissingModifiersMessage)),
+                GetResourceString(
+                    nameof(Resources.GeneratedDllImportContainingTypeMissingModifiersTitle)
+                ),
+                GetResourceString(
+                    nameof(Resources.GeneratedDllImportContainingTypeMissingModifiersMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(Resources.GeneratedDllImportContainingTypeMissingModifiersDescription)));
+                description: GetResourceString(
+                    nameof(Resources.GeneratedDllImportContainingTypeMissingModifiersDescription)
+                )
+            );
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(GeneratedDllImportMissingModifiers, GeneratedDllImportContainingTypeMissingModifiers);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(
+                GeneratedDllImportMissingModifiers,
+                GeneratedDllImportContainingTypeMissingModifiers
+            );
 
         public override void Initialize(AnalysisContext context)
         {
@@ -48,27 +62,51 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCompilationStartAction(
                 compilationContext =>
                 {
-                    INamedTypeSymbol? generatedDllImportAttributeType = compilationContext.Compilation.GetTypeByMetadataName(TypeNames.GeneratedDllImportAttribute);
+                    INamedTypeSymbol? generatedDllImportAttributeType =
+                        compilationContext.Compilation.GetTypeByMetadataName(
+                            TypeNames.GeneratedDllImportAttribute
+                        );
                     if (generatedDllImportAttributeType == null)
                         return;
 
-                    compilationContext.RegisterSymbolAction(symbolContext => AnalyzeSymbol(symbolContext, generatedDllImportAttributeType), SymbolKind.Method);
-                });
+                    compilationContext.RegisterSymbolAction(
+                        symbolContext =>
+                            AnalyzeSymbol(symbolContext, generatedDllImportAttributeType),
+                        SymbolKind.Method
+                    );
+                }
+            );
         }
 
-        private static void AnalyzeSymbol(SymbolAnalysisContext context, INamedTypeSymbol generatedDllImportAttributeType)
+        private static void AnalyzeSymbol(
+            SymbolAnalysisContext context,
+            INamedTypeSymbol generatedDllImportAttributeType
+        )
         {
             var methodSymbol = (IMethodSymbol)context.Symbol;
 
             // Check if method is marked with GeneratedDllImportAttribute
             ImmutableArray<AttributeData> attributes = methodSymbol.GetAttributes();
-            if (!attributes.Any(attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, generatedDllImportAttributeType)))
+            if (
+                !attributes.Any(
+                    attr =>
+                        SymbolEqualityComparer.Default.Equals(
+                            attr.AttributeClass,
+                            generatedDllImportAttributeType
+                        )
+                )
+            )
                 return;
 
             if (!methodSymbol.IsStatic)
             {
                 // Must be marked static
-                context.ReportDiagnostic(methodSymbol.CreateDiagnostic(GeneratedDllImportMissingModifiers, methodSymbol.Name));
+                context.ReportDiagnostic(
+                    methodSymbol.CreateDiagnostic(
+                        GeneratedDllImportMissingModifiers,
+                        methodSymbol.Name
+                    )
+                );
             }
             else
             {
@@ -77,23 +115,43 @@ namespace Microsoft.Interop.Analyzers
                 foreach (SyntaxReference reference in methodSymbol.DeclaringSyntaxReferences)
                 {
                     SyntaxNode syntax = reference.GetSyntax(context.CancellationToken);
-                    if (syntax is MethodDeclarationSyntax methodSyntax && !methodSyntax.Modifiers.Any(SyntaxKind.PartialKeyword))
+                    if (
+                        syntax is MethodDeclarationSyntax methodSyntax
+                        && !methodSyntax.Modifiers.Any(SyntaxKind.PartialKeyword)
+                    )
                     {
                         // Must be marked partial
-                        context.ReportDiagnostic(methodSymbol.CreateDiagnostic(GeneratedDllImportMissingModifiers, methodSymbol.Name));
+                        context.ReportDiagnostic(
+                            methodSymbol.CreateDiagnostic(
+                                GeneratedDllImportMissingModifiers,
+                                methodSymbol.Name
+                            )
+                        );
                         break;
                     }
                 }
 
-                for (INamedTypeSymbol? typeSymbol = methodSymbol.ContainingType; typeSymbol is not null; typeSymbol = typeSymbol.ContainingType)
+                for (
+                    INamedTypeSymbol? typeSymbol = methodSymbol.ContainingType;
+                    typeSymbol is not null;
+                    typeSymbol = typeSymbol.ContainingType
+                )
                 {
                     foreach (SyntaxReference reference in typeSymbol.DeclaringSyntaxReferences)
                     {
                         SyntaxNode syntax = reference.GetSyntax(context.CancellationToken);
-                        if (syntax is TypeDeclarationSyntax typeSyntax && !typeSyntax.Modifiers.Any(SyntaxKind.PartialKeyword))
+                        if (
+                            syntax is TypeDeclarationSyntax typeSyntax
+                            && !typeSyntax.Modifiers.Any(SyntaxKind.PartialKeyword)
+                        )
                         {
                             // Must be marked partial
-                            context.ReportDiagnostic(typeSymbol.CreateDiagnostic(GeneratedDllImportContainingTypeMissingModifiers, typeSymbol.Name));
+                            context.ReportDiagnostic(
+                                typeSymbol.CreateDiagnostic(
+                                    GeneratedDllImportContainingTypeMissingModifiers,
+                                    typeSymbol.Name
+                                )
+                            );
                             break;
                         }
                     }

@@ -26,15 +26,16 @@ public abstract class EventData : IReadOnlyList<KeyValuePair<string, object>>
     protected abstract KeyValuePair<string, object> this[int index] { get; }
 
     int IReadOnlyCollection<KeyValuePair<string, object>>.Count => Count;
-    KeyValuePair<string, object> IReadOnlyList<KeyValuePair<string, object>>.this[int index] => this[index];
+    KeyValuePair<string, object> IReadOnlyList<KeyValuePair<string, object>>.this[int index] =>
+        this[index];
 
     Enumerator GetEnumerator() => new Enumerator(this);
 
-    IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
-        => GetEnumerator();
+    IEnumerator<KeyValuePair<string, object>> IEnumerable<
+        KeyValuePair<string, object>
+    >.GetEnumerator() => GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-        => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>
     /// A struct that represents an Enumerator
@@ -76,7 +77,9 @@ public abstract class EventData : IReadOnlyList<KeyValuePair<string, object>>
 
         /// <inheritdoc/>
         public void Dispose() { }
+
         object IEnumerator.Current => Current;
+
         void IEnumerator.Reset() => throw new NotSupportedException();
     }
 }

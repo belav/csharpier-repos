@@ -14,14 +14,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 {
     public class LockStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(LockStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(LockStatementHighlighter);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample1_1()
         {
             await TestAsync(
-@"class Account
+                @"class Account
 {
     object lockObj = new object();
     int balance;
@@ -41,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
     }
 }

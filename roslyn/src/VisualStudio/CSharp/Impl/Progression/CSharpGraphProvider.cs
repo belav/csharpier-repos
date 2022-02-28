@@ -26,9 +26,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
             IGlyphService glyphService,
             SVsServiceProvider serviceProvider,
             VisualStudioWorkspace workspace,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, glyphService, serviceProvider, workspace, listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(threadingContext, glyphService, serviceProvider, workspace, listenerProvider) { }
     }
 }

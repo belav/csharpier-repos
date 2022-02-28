@@ -8,8 +8,14 @@ namespace System.ComponentModel.Composition
     /// <summary>
     ///     Specifies that a type, property, field, or method provides a particular export.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method,
-                    AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public class ExportAttribute : Attribute
     {
         /// <summary>
@@ -27,10 +33,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ExportAttribute()
-            : this((string?)null, (Type?)null)
-        {
-        }
+        public ExportAttribute() : this((string?)null, (Type?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the
@@ -58,10 +61,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ExportAttribute(Type? contractType)
-            : this((string?)null, contractType)
-        {
-        }
+        public ExportAttribute(Type? contractType) : this((string?)null, contractType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the
@@ -83,10 +83,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ExportAttribute(string? contractName)
-            : this(contractName, (Type?)null)
-        {
-        }
+        public ExportAttribute(string? contractName) : this(contractName, (Type?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the

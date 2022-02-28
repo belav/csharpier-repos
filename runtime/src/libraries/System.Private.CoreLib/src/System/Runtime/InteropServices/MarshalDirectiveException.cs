@@ -15,29 +15,27 @@ using System.Runtime.Serialization;
 namespace System.Runtime.InteropServices
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MarshalDirectiveException : SystemException
     {
-        public MarshalDirectiveException()
-            : base(SR.Arg_MarshalDirectiveException)
+        public MarshalDirectiveException() : base(SR.Arg_MarshalDirectiveException)
         {
             HResult = HResults.COR_E_MARSHALDIRECTIVE;
         }
 
-        public MarshalDirectiveException(string? message)
-            : base(message)
+        public MarshalDirectiveException(string? message) : base(message)
         {
             HResult = HResults.COR_E_MARSHALDIRECTIVE;
         }
 
-        public MarshalDirectiveException(string? message, Exception? inner)
-            : base(message, inner)
+        public MarshalDirectiveException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.COR_E_MARSHALDIRECTIVE;
         }
 
-        protected MarshalDirectiveException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected MarshalDirectiveException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

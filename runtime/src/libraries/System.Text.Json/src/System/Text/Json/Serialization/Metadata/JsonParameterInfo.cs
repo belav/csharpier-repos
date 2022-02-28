@@ -58,7 +58,11 @@ namespace System.Text.Json.Serialization.Metadata
 
         public bool ShouldDeserialize { get; private set; }
 
-        public virtual void Initialize(JsonParameterInfoValues parameterInfo, JsonPropertyInfo matchingProperty, JsonSerializerOptions options)
+        public virtual void Initialize(
+            JsonParameterInfoValues parameterInfo,
+            JsonPropertyInfo matchingProperty,
+            JsonSerializerOptions options
+        )
         {
             ClrInfo = parameterInfo;
             Options = options;
@@ -79,7 +83,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonParameterInfo CreateIgnoredParameterPlaceholder(
             JsonParameterInfoValues parameterInfo,
             JsonPropertyInfo matchingProperty,
-            bool sourceGenMode)
+            bool sourceGenMode
+        )
         {
             JsonParameterInfo jsonParameterInfo = new JsonParameterInfo<sbyte>();
             jsonParameterInfo.ClrInfo = parameterInfo;

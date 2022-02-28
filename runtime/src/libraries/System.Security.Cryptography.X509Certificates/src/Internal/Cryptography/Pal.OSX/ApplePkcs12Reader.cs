@@ -27,7 +27,8 @@ namespace Internal.Cryptography.Pal
                 SafePasswordHandle.InvalidHandle,
                 SafeTemporaryKeychainHandle.InvalidHandle,
                 exportable: true,
-                out SafeSecIdentityHandle identityHandle);
+                out SafeSecIdentityHandle identityHandle
+            );
 
             if (identityHandle.IsInvalid)
             {
@@ -44,7 +45,10 @@ namespace Internal.Cryptography.Pal
 
         protected override AsymmetricAlgorithm LoadKey(ReadOnlyMemory<byte> pkcs8)
         {
-            PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(pkcs8, AsnEncodingRules.BER);
+            PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(
+                pkcs8,
+                AsnEncodingRules.BER
+            );
             AsymmetricAlgorithm key;
 
             switch (privateKeyInfo.PrivateKeyAlgorithm.Algorithm)
@@ -62,7 +66,8 @@ namespace Internal.Cryptography.Pal
                 default:
                     throw new CryptographicException(
                         SR.Cryptography_UnknownAlgorithmIdentifier,
-                        privateKeyInfo.PrivateKeyAlgorithm.Algorithm);
+                        privateKeyInfo.PrivateKeyAlgorithm.Algorithm
+                    );
             }
 
             key.ImportPkcs8PrivateKey(pkcs8.Span, out int bytesRead);

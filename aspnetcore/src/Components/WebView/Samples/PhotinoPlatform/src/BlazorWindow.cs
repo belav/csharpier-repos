@@ -29,13 +29,24 @@ public class BlazorWindow
         string title,
         string hostPage,
         IServiceProvider services,
-        Action<PhotinoWindowOptions>? configureWindow = null)
+        Action<PhotinoWindowOptions>? configureWindow = null
+    )
     {
-        _window = new PhotinoWindow(title, options =>
-        {
-            options.CustomSchemeHandlers.Add(PhotinoWebViewManager.BlazorAppScheme, HandleWebRequest);
-            configureWindow?.Invoke(options);
-        }, width: 1600, height: 1200, left: 300, top: 300);
+        _window = new PhotinoWindow(
+            title,
+            options =>
+            {
+                options.CustomSchemeHandlers.Add(
+                    PhotinoWebViewManager.BlazorAppScheme,
+                    HandleWebRequest
+                );
+                configureWindow?.Invoke(options);
+            },
+            width: 1600,
+            height: 1200,
+            left: 300,
+            top: 300
+        );
 
         // We assume the host page is always in the root of the content directory, because it's
         // unclear there's any other use case. We can add more options later if so.
@@ -45,7 +56,15 @@ public class BlazorWindow
 
         var dispatcher = new PhotinoDispatcher(_window);
         var jsComponents = new JSComponentConfigurationStore();
-        _manager = new PhotinoWebViewManager(_window, services, dispatcher, new Uri(PhotinoWebViewManager.AppBaseUri), fileProvider, jsComponents, hostPageRelativePath);
+        _manager = new PhotinoWebViewManager(
+            _window,
+            services,
+            dispatcher,
+            new Uri(PhotinoWebViewManager.AppBaseUri),
+            fileProvider,
+            jsComponents,
+            hostPageRelativePath
+        );
         RootComponents = new BlazorWindowRootComponents(_manager, jsComponents);
     }
 
@@ -68,6 +87,6 @@ public class BlazorWindow
         _window.WaitForClose();
     }
 
-    private Stream HandleWebRequest(string url, out string contentType)
-        => _manager.HandleWebRequest(url, out contentType!)!;
+    private Stream HandleWebRequest(string url, out string contentType) =>
+        _manager.HandleWebRequest(url, out contentType!)!;
 }

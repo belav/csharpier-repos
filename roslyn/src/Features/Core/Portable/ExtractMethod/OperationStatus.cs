@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             Contract.ThrowIfTrue(flag.Succeeded() && flag.HasBestEffort());
 
             Flag = flag;
-            Reasons = reason == null ? SpecializedCollections.EmptyEnumerable<string>() : SpecializedCollections.SingletonEnumerable(reason);
+            Reasons =
+                reason == null
+                    ? SpecializedCollections.EmptyEnumerable<string>()
+                    : SpecializedCollections.SingletonEnumerable(reason);
         }
 
         private OperationStatus(OperationStatusFlag flag, IEnumerable<string> reasons)
@@ -33,8 +36,13 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         {
             var newFlag = Flag | flag;
 
-            newFlag = (this.Failed() || flag.Failed()) ? newFlag.RemoveFlag(OperationStatusFlag.Succeeded) : newFlag;
-            newFlag = newFlag.Succeeded() ? newFlag.RemoveFlag(OperationStatusFlag.BestEffort) : newFlag;
+            newFlag =
+                (this.Failed() || flag.Failed())
+                    ? newFlag.RemoveFlag(OperationStatusFlag.Succeeded)
+                    : newFlag;
+            newFlag = newFlag.Succeeded()
+              ? newFlag.RemoveFlag(OperationStatusFlag.BestEffort)
+              : newFlag;
 
             var reasons = reason == null ? Reasons : Reasons.Concat(reason);
             return new OperationStatus(newFlag, reasons);
@@ -44,21 +52,24 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         {
             var newFlag = Flag | operationStatus.Flag;
 
-            newFlag = (this.Failed() || operationStatus.Failed()) ? newFlag.RemoveFlag(OperationStatusFlag.Succeeded) : newFlag;
-            newFlag = newFlag.Succeeded() ? newFlag.RemoveFlag(OperationStatusFlag.BestEffort) : newFlag;
+            newFlag =
+                (this.Failed() || operationStatus.Failed())
+                    ? newFlag.RemoveFlag(OperationStatusFlag.Succeeded)
+                    : newFlag;
+            newFlag = newFlag.Succeeded()
+              ? newFlag.RemoveFlag(OperationStatusFlag.BestEffort)
+              : newFlag;
 
             var reasons = Reasons.Concat(operationStatus.Reasons);
             return new OperationStatus(newFlag, reasons);
         }
 
-        public OperationStatus MakeFail()
-            => new(OperationStatusFlag.None, Reasons);
+        public OperationStatus MakeFail() => new(OperationStatusFlag.None, Reasons);
 
-        public OperationStatus MarkSuggestion()
-            => new(Flag | OperationStatusFlag.Suggestion, Reasons);
+        public OperationStatus MarkSuggestion() =>
+            new(Flag | OperationStatusFlag.Suggestion, Reasons);
 
-        public OperationStatus<T> With<T>(T data)
-            => Create(this, data);
+        public OperationStatus<T> With<T>(T data) => Create(this, data);
 
         public OperationStatusFlag Flag { get; }
         public IEnumerable<string> Reasons { get; }

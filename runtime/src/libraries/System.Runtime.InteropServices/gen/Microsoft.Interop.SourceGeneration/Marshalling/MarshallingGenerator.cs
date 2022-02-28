@@ -88,7 +88,10 @@ namespace Microsoft.Interop
         /// <param name="marshalKind">The marshal kind.</param>
         /// <param name="context">The marshalling context.</param>
         /// <returns></returns>
-        bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context);
+        bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        );
     }
 
     /// <summary>
@@ -103,7 +106,6 @@ namespace Microsoft.Interop
         /// <returns>Attributes for the return type for this <paramref name="info"/>, or <c>null</c> if no attributes should be added.</returns>
         AttributeListSyntax? GenerateAttributesForReturnType(TypePositionInfo info);
     }
-
 
     /// <summary>
     /// Exception used to indicate marshalling isn't supported.

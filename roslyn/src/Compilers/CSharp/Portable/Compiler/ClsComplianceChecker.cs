@@ -38,9 +38,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTree filterTree,
             TextSpan? filterSpanWithinTree,
             BindingDiagnosticBag diagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(diagnostics.DependenciesBag is null || diagnostics.DependenciesBag is ConcurrentSet<AssemblySymbol>);
+            Debug.Assert(
+                diagnostics.DependenciesBag is null
+                    || diagnostics.DependenciesBag is ConcurrentSet<AssemblySymbol>
+            );
 
             _compilation = compilation;
             _filterTree = filterTree;
@@ -48,7 +52,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             _diagnostics = diagnostics;
             _cancellationToken = cancellationToken;
 
-            _declaredOrInheritedCompliance = new ConcurrentDictionary<Symbol, Compliance>(Symbols.SymbolEqualityComparer.ConsiderEverything);
+            _declaredOrInheritedCompliance = new ConcurrentDictionary<Symbol, Compliance>(
+                Symbols.SymbolEqualityComparer.ConsiderEverything
+            );
 
             if (ConcurrentAnalysis)
             {
@@ -59,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Gets a value indicating whether <see cref="ClsComplianceChecker"/> is allowed to analyze in parallel.
         /// </summary>
-        private bool ConcurrentAnalysis => _filterTree == null && _compilation.Options.ConcurrentBuild;
+        private bool ConcurrentAnalysis =>
+            _filterTree == null && _compilation.Options.ConcurrentBuild;
 
         /// <summary>
         /// Traverses the symbol table checking for CLS compliance.
@@ -69,10 +76,25 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="cancellationToken">To stop traversing the symbol table early.</param>
         /// <param name="filterTree">Only report diagnostics from this syntax tree, if non-null.</param>
         /// <param name="filterSpanWithinTree">If <paramref name="filterTree"/> and <paramref name="filterSpanWithinTree"/> is non-null, report diagnostics within this span in the <paramref name="filterTree"/>.</param>
-        public static void CheckCompliance(CSharpCompilation compilation, BindingDiagnosticBag diagnostics, CancellationToken cancellationToken, SyntaxTree filterTree = null, TextSpan? filterSpanWithinTree = null)
+        public static void CheckCompliance(
+            CSharpCompilation compilation,
+            BindingDiagnosticBag diagnostics,
+            CancellationToken cancellationToken,
+            SyntaxTree filterTree = null,
+            TextSpan? filterSpanWithinTree = null
+        )
         {
-            var queue = new BindingDiagnosticBag(diagnostics.DiagnosticBag, diagnostics.AccumulatesDependencies ? new ConcurrentSet<AssemblySymbol>() : null);
-            var checker = new ClsComplianceChecker(compilation, filterTree, filterSpanWithinTree, queue, cancellationToken);
+            var queue = new BindingDiagnosticBag(
+                diagnostics.DiagnosticBag,
+                diagnostics.AccumulatesDependencies ? new ConcurrentSet<AssemblySymbol>() : null
+            );
+            var checker = new ClsComplianceChecker(
+                compilation,
+                filterTree,
+                filterSpanWithinTree,
+                queue,
+                cancellationToken
+            );
             checker.Visit(compilation.Assembly);
             checker.WaitForWorkers();
             diagnostics.AddDependencies(queue);
@@ -108,11 +130,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 ModuleSymbol module = symbol.Modules[i];
                 Location attributeLocation;
-                bool? moduleDeclaredCompliance = GetDeclaredCompliance(module, out attributeLocation);
+                bool? moduleDeclaredCompliance = GetDeclaredCompliance(
+                    module,
+                    out attributeLocation
+                );
 
                 Location warningLocation = i == 0 ? attributeLocation : module.Locations[0];
-                System.Diagnostics.Debug.Assert(warningLocation != null || !moduleDeclaredCompliance.HasValue || (i == 0 && _filterTree != null),
-                    "Can only be null when the source location is filtered out.");
+                System.Diagnostics.Debug.Assert(
+                    warningLocation != null
+                        || !moduleDeclaredCompliance.HasValue
+                        || (i == 0 && _filterTree != null),
+                    "Can only be null when the source location is filtered out."
+                );
 
                 if (moduleDeclaredCompliance.HasValue)
                 {
@@ -123,7 +152,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // This is not useful on non-source modules, but dev11 reports it anyway.
                             this.AddDiagnostic(ErrorCode.WRN_CLS_NotOnModules, warningLocation);
                         }
-                        else if (assemblyComplianceValue != moduleDeclaredCompliance.GetValueOrDefault())
+                        else if (
+                            assemblyComplianceValue != moduleDeclaredCompliance.GetValueOrDefault()
+                        )
                         {
                             this.AddDiagnostic(ErrorCode.WRN_CLS_NotOnModules2, warningLocation);
                         }
@@ -133,9 +164,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     bool sawClsCompliantAttribute = false;
                     var peModule = (Symbols.Metadata.PE.PEModuleSymbol)module;
-                    foreach (CSharpAttributeData assemblyLevelAttribute in peModule.GetAssemblyAttributes())
+                    foreach (
+                        CSharpAttributeData assemblyLevelAttribute in peModule.GetAssemblyAttributes()
+                    )
                     {
-                        if (assemblyLevelAttribute.IsTargetAttribute(peModule, AttributeDescription.CLSCompliantAttribute))
+                        if (
+                            assemblyLevelAttribute.IsTargetAttribute(
+                                peModule,
+                                AttributeDescription.CLSCompliantAttribute
+                            )
+                        )
                         {
                             sawClsCompliantAttribute = true;
                             break;
@@ -181,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             _cancellationToken.ThrowIfCancellationRequested();
 
-            if (DoNotVisit(symbol)) return;
+            if (DoNotVisit(symbol))
+                return;
 
             if (IsTrue(GetDeclaredOrInheritedCompliance(symbol)))
             {
@@ -203,17 +242,25 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             foreach (var m in symbol.GetMembersUnordered())
             {
-                _compilerTasks.Push(Task.Run(UICultureUtilities.WithCurrentUICulture(() =>
-                {
-                    try
-                    {
-                        Visit(m);
-                    }
-                    catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
-                    {
-                        throw ExceptionUtilities.Unreachable;
-                    }
-                }), _cancellationToken));
+                _compilerTasks.Push(
+                    Task.Run(
+                        UICultureUtilities.WithCurrentUICulture(
+                            () =>
+                            {
+                                try
+                                {
+                                    Visit(m);
+                                }
+                                catch (Exception e)
+                                    when (FatalError.ReportAndPropagateUnlessCanceled(e))
+                                {
+                                    throw ExceptionUtilities.Unreachable;
+                                }
+                            }
+                        ),
+                        _cancellationToken
+                    )
+                );
             }
         }
 
@@ -225,12 +272,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/23582", IsParallelEntry = false)]
+        [PerformanceSensitive(
+            "https://github.com/dotnet/roslyn/issues/23582",
+            IsParallelEntry = false
+        )]
         public override void VisitNamedType(NamedTypeSymbol symbol)
         {
             _cancellationToken.ThrowIfCancellationRequested();
 
-            if (DoNotVisit(symbol)) return;
+            if (DoNotVisit(symbol))
+                return;
 
             Debug.Assert(!symbol.IsImplicitClass);
 
@@ -247,9 +298,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         CheckParameterCompliance(symbol.DelegateInvokeMethod.Parameters, symbol);
                     }
-                    else if (_compilation.IsAttributeType(symbol) && !HasAcceptableAttributeConstructor(symbol))
+                    else if (
+                        _compilation.IsAttributeType(symbol)
+                        && !HasAcceptableAttributeConstructor(symbol)
+                    )
                     {
-                        this.AddDiagnostic(ErrorCode.WRN_CLS_BadAttributeType, symbol.Locations[0], symbol);
+                        this.AddDiagnostic(
+                            ErrorCode.WRN_CLS_BadAttributeType,
+                            symbol.Locations[0],
+                            symbol
+                        );
                     }
                 }
             }
@@ -266,16 +324,25 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             foreach (MethodSymbol constructor in attributeType.InstanceConstructors)
             {
-                if (IsTrue(GetDeclaredOrInheritedCompliance(constructor)) && IsAccessibleIfContainerIsAccessible(constructor))
+                if (
+                    IsTrue(GetDeclaredOrInheritedCompliance(constructor))
+                    && IsAccessibleIfContainerIsAccessible(constructor)
+                )
                 {
-                    System.Diagnostics.Debug.Assert(IsAccessibleOutsideAssembly(constructor), "Should be implied by IsAccessibleIfContainerIsAccessible");
+                    System.Diagnostics.Debug.Assert(
+                        IsAccessibleOutsideAssembly(constructor),
+                        "Should be implied by IsAccessibleIfContainerIsAccessible"
+                    );
 
                     bool hasUnacceptableParameterType = false;
 
                     foreach (var paramType in constructor.ParameterTypesWithAnnotations) // Public caller would select type out of parameters.
                     {
-                        if (paramType.TypeKind == TypeKind.Array ||
-                            paramType.Type.GetAttributeParameterTypedConstantKind(_compilation) == TypedConstantKind.Error)
+                        if (
+                            paramType.TypeKind == TypeKind.Array
+                            || paramType.Type.GetAttributeParameterTypedConstantKind(_compilation)
+                                == TypedConstantKind.Error
+                        )
                         {
                             hasUnacceptableParameterType = true;
                             break;
@@ -296,7 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             _cancellationToken.ThrowIfCancellationRequested();
 
-            if (DoNotVisit(symbol)) return;
+            if (DoNotVisit(symbol))
+                return;
 
             Compliance compliance = GetDeclaredOrInheritedCompliance(symbol);
 
@@ -315,7 +383,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            if (!VisitTypeOrMember(symbol, compliance)) return;
+            if (!VisitTypeOrMember(symbol, compliance))
+                return;
 
             if (IsTrue(compliance))
             {
@@ -338,8 +407,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Location attributeLocation;
                     if (TryGetAttributeWarningLocation(attribute, out attributeLocation))
                     {
-                        AttributeUsageInfo attributeUsage = attribute.AttributeClass.GetAttributeUsageInfo();
-                        this.AddDiagnostic(ErrorCode.ERR_AttributeNotOnAccessor, attributeLocation, attribute.AttributeClass.Name, attributeUsage.GetValidTargetsErrorArgument());
+                        AttributeUsageInfo attributeUsage =
+                            attribute.AttributeClass.GetAttributeUsageInfo();
+                        this.AddDiagnostic(
+                            ErrorCode.ERR_AttributeNotOnAccessor,
+                            attributeLocation,
+                            attribute.AttributeClass.Name,
+                            attributeUsage.GetValidTargetsErrorArgument()
+                        );
                         break;
                     }
                 }
@@ -350,11 +425,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             _cancellationToken.ThrowIfCancellationRequested();
 
-            if (DoNotVisit(symbol)) return;
+            if (DoNotVisit(symbol))
+                return;
 
             Compliance compliance = GetDeclaredOrInheritedCompliance(symbol);
 
-            if (!VisitTypeOrMember(symbol, compliance)) return;
+            if (!VisitTypeOrMember(symbol, compliance))
+                return;
 
             // Rule 28 requires that the accessors "adhere to a special naming pattern".
             // We don't actually need to do anything here, because they automatically
@@ -372,7 +449,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             _cancellationToken.ThrowIfCancellationRequested();
 
-            if (DoNotVisit(symbol)) return;
+            if (DoNotVisit(symbol))
+                return;
 
             Compliance compliance = GetDeclaredOrInheritedCompliance(symbol);
 
@@ -386,24 +464,31 @@ namespace Microsoft.CodeAnalysis.CSharp
             // or they explicitly implement interface accessors - we don't check non-public
             // members.
 
-            if (!VisitTypeOrMember(symbol, compliance)) return;
+            if (!VisitTypeOrMember(symbol, compliance))
+                return;
         }
 
         public override void VisitField(FieldSymbol symbol)
         {
             _cancellationToken.ThrowIfCancellationRequested();
 
-            if (DoNotVisit(symbol)) return;
+            if (DoNotVisit(symbol))
+                return;
 
             Compliance compliance = GetDeclaredOrInheritedCompliance(symbol);
 
-            if (!VisitTypeOrMember(symbol, compliance)) return;
+            if (!VisitTypeOrMember(symbol, compliance))
+                return;
 
             if (IsTrue(compliance))
             {
                 if (symbol.IsVolatile)
                 {
-                    this.AddDiagnostic(ErrorCode.WRN_CLS_VolatileField, symbol.Locations[0], symbol);
+                    this.AddDiagnostic(
+                        ErrorCode.WRN_CLS_VolatileField,
+                        symbol.Locations[0],
+                        symbol
+                    );
                 }
             }
         }
@@ -414,11 +499,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             SymbolKind symbolKind = symbol.Kind;
 
             System.Diagnostics.Debug.Assert(
-                symbolKind == SymbolKind.NamedType ||
-                symbolKind == SymbolKind.Field ||
-                symbolKind == SymbolKind.Property ||
-                symbolKind == SymbolKind.Event ||
-                symbolKind == SymbolKind.Method);
+                symbolKind == SymbolKind.NamedType
+                    || symbolKind == SymbolKind.Field
+                    || symbolKind == SymbolKind.Property
+                    || symbolKind == SymbolKind.Event
+                    || symbolKind == SymbolKind.Method
+            );
             System.Diagnostics.Debug.Assert(!symbol.IsAccessor());
 
             if (!CheckForDeclarationWithoutAssemblyDeclaration(symbol, compliance))
@@ -442,14 +528,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                         CheckMemberDistinctness((NamedTypeSymbol)symbol);
                     }
                 }
-                else if (GetDeclaredOrInheritedCompliance(symbol.ContainingAssembly) == Compliance.DeclaredTrue && IsTrue(GetInheritedCompliance(symbol)))
+                else if (
+                    GetDeclaredOrInheritedCompliance(symbol.ContainingAssembly)
+                        == Compliance.DeclaredTrue
+                    && IsTrue(GetInheritedCompliance(symbol))
+                )
                 {
                     CheckForNonCompliantAbstractMember(symbol);
                 }
             }
             else if (IsDeclared(compliance))
             {
-                this.AddDiagnostic(ErrorCode.WRN_CLS_MeaninglessOnPrivateType, symbol.Locations[0], symbol);
+                this.AddDiagnostic(
+                    ErrorCode.WRN_CLS_MeaninglessOnPrivateType,
+                    symbol.Locations[0],
+                    symbol
+                );
                 return false; // Don't cascade from this failure.
             }
 
@@ -488,22 +582,36 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckForNonCompliantAbstractMember(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(!IsTrue(GetDeclaredOrInheritedCompliance(symbol)), "Only call on non-compliant symbols");
+            System.Diagnostics.Debug.Assert(
+                !IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                "Only call on non-compliant symbols"
+            );
 
             NamedTypeSymbol containingType = symbol.ContainingType;
             if ((object)containingType != null && containingType.IsInterface)
             {
-                this.AddDiagnostic(ErrorCode.WRN_CLS_BadInterfaceMember, symbol.Locations[0], symbol);
+                this.AddDiagnostic(
+                    ErrorCode.WRN_CLS_BadInterfaceMember,
+                    symbol.Locations[0],
+                    symbol
+                );
             }
             else if (symbol.IsAbstract && symbol.Kind != SymbolKind.NamedType)
             {
-                this.AddDiagnostic(ErrorCode.WRN_CLS_NoAbstractMembers, symbol.Locations[0], symbol);
+                this.AddDiagnostic(
+                    ErrorCode.WRN_CLS_NoAbstractMembers,
+                    symbol.Locations[0],
+                    symbol
+                );
             }
         }
 
         private void CheckBaseTypeCompliance(NamedTypeSymbol symbol)
         {
-            System.Diagnostics.Debug.Assert(IsTrue(GetDeclaredOrInheritedCompliance(symbol)), "Only call on compliant symbols");
+            System.Diagnostics.Debug.Assert(
+                IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                "Only call on compliant symbols"
+            );
 
             // NOTE: implemented interfaces do not have to be CLS-compliant (unless the type itself is an interface).
 
@@ -514,73 +622,127 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (!IsCompliantType(interfaceType, symbol))
                     {
                         // TODO: it would be nice to report this on the base type clause.
-                        this.AddDiagnostic(ErrorCode.WRN_CLS_BadInterface, symbol.Locations[0], symbol, interfaceType);
+                        this.AddDiagnostic(
+                            ErrorCode.WRN_CLS_BadInterface,
+                            symbol.Locations[0],
+                            symbol,
+                            interfaceType
+                        );
                     }
                 }
             }
             else
             {
-                NamedTypeSymbol baseType = symbol.EnumUnderlyingType ?? symbol.BaseTypeNoUseSiteDiagnostics; // null for interfaces
-                System.Diagnostics.Debug.Assert((object)baseType != null || symbol.SpecialType == SpecialType.System_Object, "Only object has no base.");
+                NamedTypeSymbol baseType =
+                    symbol.EnumUnderlyingType ?? symbol.BaseTypeNoUseSiteDiagnostics; // null for interfaces
+                System.Diagnostics.Debug.Assert(
+                    (object)baseType != null || symbol.SpecialType == SpecialType.System_Object,
+                    "Only object has no base."
+                );
                 if ((object)baseType != null && !IsCompliantType(baseType, symbol))
                 {
                     // TODO: it would be nice to report this on the base type clause.
-                    this.AddDiagnostic(ErrorCode.WRN_CLS_BadBase, symbol.Locations[0], symbol, baseType);
+                    this.AddDiagnostic(
+                        ErrorCode.WRN_CLS_BadBase,
+                        symbol.Locations[0],
+                        symbol,
+                        baseType
+                    );
                 }
             }
         }
 
         private void CheckForCompliantWithinNonCompliant(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(IsTrue(GetDeclaredOrInheritedCompliance(symbol)), "Only call on compliant symbols");
+            System.Diagnostics.Debug.Assert(
+                IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                "Only call on compliant symbols"
+            );
 
             NamedTypeSymbol containingType = symbol.ContainingType;
-            System.Diagnostics.Debug.Assert((object)containingType == null || !containingType.IsImplicitClass);
-            if ((object)containingType != null && !IsTrue(GetDeclaredOrInheritedCompliance(containingType)))
+            System.Diagnostics.Debug.Assert(
+                (object)containingType == null || !containingType.IsImplicitClass
+            );
+            if (
+                (object)containingType != null
+                && !IsTrue(GetDeclaredOrInheritedCompliance(containingType))
+            )
             {
-                this.AddDiagnostic(ErrorCode.WRN_CLS_IllegalTrueInFalse, symbol.Locations[0], symbol, containingType);
+                this.AddDiagnostic(
+                    ErrorCode.WRN_CLS_IllegalTrueInFalse,
+                    symbol.Locations[0],
+                    symbol,
+                    containingType
+                );
             }
         }
 
-        private void CheckTypeParameterCompliance(ImmutableArray<TypeParameterSymbol> typeParameters, NamedTypeSymbol context)
+        private void CheckTypeParameterCompliance(
+            ImmutableArray<TypeParameterSymbol> typeParameters,
+            NamedTypeSymbol context
+        )
         {
-            System.Diagnostics.Debug.Assert(typeParameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)), "Only call on compliant symbols");
+            System.Diagnostics.Debug.Assert(
+                typeParameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)),
+                "Only call on compliant symbols"
+            );
 
             foreach (TypeParameterSymbol typeParameter in typeParameters)
             {
-                foreach (TypeWithAnnotations constraintType in typeParameter.ConstraintTypesNoUseSiteDiagnostics)
+                foreach (
+                    TypeWithAnnotations constraintType in typeParameter.ConstraintTypesNoUseSiteDiagnostics
+                )
                 {
                     if (!IsCompliantType(constraintType.Type, context))
                     {
                         // TODO: it would be nice to report this on the constraint clause.
                         // NOTE: we're improving over dev11 by reporting on the type parameter declaration,
                         // rather than on the constraint type declaration.
-                        this.AddDiagnostic(ErrorCode.WRN_CLS_BadTypeVar, typeParameter.Locations[0], constraintType.Type);
+                        this.AddDiagnostic(
+                            ErrorCode.WRN_CLS_BadTypeVar,
+                            typeParameter.Locations[0],
+                            constraintType.Type
+                        );
                     }
                 }
             }
         }
 
-        private void CheckParameterCompliance(ImmutableArray<ParameterSymbol> parameters, NamedTypeSymbol context)
+        private void CheckParameterCompliance(
+            ImmutableArray<ParameterSymbol> parameters,
+            NamedTypeSymbol context
+        )
         {
-            System.Diagnostics.Debug.Assert(parameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)), "Only call on compliant symbols");
+            System.Diagnostics.Debug.Assert(
+                parameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)),
+                "Only call on compliant symbols"
+            );
 
             foreach (ParameterSymbol parameter in parameters)
             {
                 if (!IsCompliantType(parameter.Type, context))
                 {
-                    this.AddDiagnostic(ErrorCode.WRN_CLS_BadArgType, parameter.Locations[0], parameter.Type);
+                    this.AddDiagnostic(
+                        ErrorCode.WRN_CLS_BadArgType,
+                        parameter.Locations[0],
+                        parameter.Type
+                    );
                 }
             }
         }
 
         private void CheckForAttributeWithArrayArgument(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(IsTrue(GetDeclaredOrInheritedCompliance(symbol)), "Only call on compliant symbols");
+            System.Diagnostics.Debug.Assert(
+                IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                "Only call on compliant symbols"
+            );
             CheckForAttributeWithArrayArgumentInternal(symbol.GetAttributes());
             if (symbol.Kind == SymbolKind.Method)
             {
-                CheckForAttributeWithArrayArgumentInternal(((MethodSymbol)symbol).GetReturnTypeAttributes());
+                CheckForAttributeWithArrayArgumentInternal(
+                    ((MethodSymbol)symbol).GetReturnTypeAttributes()
+                );
             }
         }
 
@@ -588,7 +750,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// BREAK: Dev11 reports WRN_CLS_ArrayArgumentToAttribute on all symbols, whereas roslyn reports it only
         /// on accessible symbols.
         /// </remarks>
-        private void CheckForAttributeWithArrayArgumentInternal(ImmutableArray<CSharpAttributeData> attributes)
+        private void CheckForAttributeWithArrayArgumentInternal(
+            ImmutableArray<CSharpAttributeData> attributes
+        )
         {
             foreach (CSharpAttributeData attribute in attributes)
             {
@@ -601,7 +765,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Location warningLocation;
                         if (TryGetAttributeWarningLocation(attribute, out warningLocation))
                         {
-                            this.AddDiagnostic(ErrorCode.WRN_CLS_ArrayArgumentToAttribute, warningLocation);
+                            this.AddDiagnostic(
+                                ErrorCode.WRN_CLS_ArrayArgumentToAttribute,
+                                warningLocation
+                            );
                             return;
                         }
                     }
@@ -617,7 +784,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Location warningLocation;
                         if (TryGetAttributeWarningLocation(attribute, out warningLocation))
                         {
-                            this.AddDiagnostic(ErrorCode.WRN_CLS_ArrayArgumentToAttribute, warningLocation);
+                            this.AddDiagnostic(
+                                ErrorCode.WRN_CLS_ArrayArgumentToAttribute,
+                                warningLocation
+                            );
                             return;
                         }
                     }
@@ -626,7 +796,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // This catches things like param arrays and converted null literals.
                 if ((object)attribute.AttributeConstructor != null) // Happens in error scenarios.
                 {
-                    foreach (var type in attribute.AttributeConstructor.ParameterTypesWithAnnotations)
+                    foreach (
+                        var type in attribute.AttributeConstructor.ParameterTypesWithAnnotations
+                    )
                     {
                         if (type.TypeKind == TypeKind.Array)
                         {
@@ -635,7 +807,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             Location warningLocation;
                             if (TryGetAttributeWarningLocation(attribute, out warningLocation))
                             {
-                                this.AddDiagnostic(ErrorCode.WRN_CLS_ArrayArgumentToAttribute, warningLocation);
+                                this.AddDiagnostic(
+                                    ErrorCode.WRN_CLS_ArrayArgumentToAttribute,
+                                    warningLocation
+                                );
                                 return;
                             }
                         }
@@ -644,7 +819,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private bool TryGetAttributeWarningLocation(CSharpAttributeData attribute, out Location location)
+        private bool TryGetAttributeWarningLocation(
+            CSharpAttributeData attribute,
+            out Location location
+        )
         {
             SyntaxReference syntaxRef = attribute.ApplicationSyntaxReference;
             if (syntaxRef == null && _filterTree == null)
@@ -652,7 +830,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 location = NoLocation.Singleton;
                 return true;
             }
-            else if (_filterTree == null || (syntaxRef != null && syntaxRef.SyntaxTree == _filterTree))
+            else if (
+                _filterTree == null || (syntaxRef != null && syntaxRef.SyntaxTree == _filterTree)
+            )
             {
                 System.Diagnostics.Debug.Assert(syntaxRef.SyntaxTree.HasCompilationUnitRoot);
                 location = new SourceLocation(syntaxRef);
@@ -665,7 +845,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckForMeaninglessOnParameter(ImmutableArray<ParameterSymbol> parameters)
         {
-            if (parameters.IsEmpty) return;
+            if (parameters.IsEmpty)
+                return;
 
             int startPos = 0;
 
@@ -684,7 +865,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             for (int i = startPos; i < parameters.Length; i++)
             {
                 Location attributeLocation;
-                if (TryGetClsComplianceAttributeLocation(parameters[i].GetAttributes(), parameters[i], out attributeLocation))
+                if (
+                    TryGetClsComplianceAttributeLocation(
+                        parameters[i].GetAttributes(),
+                        parameters[i],
+                        out attributeLocation
+                    )
+                )
                 {
                     this.AddDiagnostic(ErrorCode.WRN_CLS_MeaninglessOnParam, attributeLocation);
                 }
@@ -694,7 +881,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void CheckForMeaninglessOnReturn(MethodSymbol method)
         {
             Location attributeLocation;
-            if (TryGetClsComplianceAttributeLocation(method.GetReturnTypeAttributes(), method, out attributeLocation))
+            if (
+                TryGetClsComplianceAttributeLocation(
+                    method.GetReturnTypeAttributes(),
+                    method,
+                    out attributeLocation
+                )
+            )
             {
                 this.AddDiagnostic(ErrorCode.WRN_CLS_MeaninglessOnReturn, attributeLocation);
             }
@@ -702,7 +895,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckReturnTypeCompliance(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(IsTrue(GetDeclaredOrInheritedCompliance(symbol)), "Only call on compliant symbols");
+            System.Diagnostics.Debug.Assert(
+                IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                "Only call on compliant symbols"
+            );
 
             ErrorCode code;
             TypeSymbol type;
@@ -727,7 +923,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (method.MethodKind == MethodKind.DelegateInvoke)
                     {
-                        System.Diagnostics.Debug.Assert(method.ContainingType.TypeKind == TypeKind.Delegate);
+                        System.Diagnostics.Debug.Assert(
+                            method.ContainingType.TypeKind == TypeKind.Delegate
+                        );
                         symbol = method.ContainingType; // Refer to the delegate type in diagnostics.
                     }
 
@@ -755,11 +953,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private bool TryGetClsComplianceAttributeLocation(ImmutableArray<CSharpAttributeData> attributes, Symbol targetSymbol, out Location attributeLocation)
+        private bool TryGetClsComplianceAttributeLocation(
+            ImmutableArray<CSharpAttributeData> attributes,
+            Symbol targetSymbol,
+            out Location attributeLocation
+        )
         {
             foreach (CSharpAttributeData data in attributes)
             {
-                if (data.IsTargetAttribute(targetSymbol, AttributeDescription.CLSCompliantAttribute))
+                if (
+                    data.IsTargetAttribute(targetSymbol, AttributeDescription.CLSCompliantAttribute)
+                )
                 {
                     if (TryGetAttributeWarningLocation(data, out attributeLocation))
                     {
@@ -773,17 +977,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <returns>True if the symbol is okay (i.e. no warnings).</returns>
-        private bool CheckForDeclarationWithoutAssemblyDeclaration(Symbol symbol, Compliance compliance)
+        private bool CheckForDeclarationWithoutAssemblyDeclaration(
+            Symbol symbol,
+            Compliance compliance
+        )
         {
             if (IsDeclared(compliance))
             {
-                Compliance assemblyCompliance = GetDeclaredOrInheritedCompliance(symbol.ContainingAssembly);
+                Compliance assemblyCompliance = GetDeclaredOrInheritedCompliance(
+                    symbol.ContainingAssembly
+                );
 
                 if (!IsDeclared(assemblyCompliance))
                 {
                     ErrorCode code = IsTrue(compliance)
-                        ? ErrorCode.WRN_CLS_AssemblyNotCLS
-                        : ErrorCode.WRN_CLS_AssemblyNotCLS2;
+                      ? ErrorCode.WRN_CLS_AssemblyNotCLS
+                      : ErrorCode.WRN_CLS_AssemblyNotCLS2;
                     this.AddDiagnostic(code, symbol.Locations[0], symbol);
                     return false;
                 }
@@ -796,7 +1005,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             System.Diagnostics.Debug.Assert(IsAccessibleOutsideAssembly(symbol));
             System.Diagnostics.Debug.Assert(IsTrue(GetDeclaredOrInheritedCompliance(symbol)));
 
-            MultiDictionary<string, Symbol> seenByName = new MultiDictionary<string, Symbol>(CaseInsensitiveComparison.Comparer);
+            MultiDictionary<string, Symbol> seenByName = new MultiDictionary<string, Symbol>(
+                CaseInsensitiveComparison.Comparer
+            );
 
             // For types, we also need to consider collisions with inherited members.
             if (symbol.Kind != SymbolKind.Namespace)
@@ -808,16 +1019,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // with all the potential breaks.
                 // NOTE: It's not clear why dev11 is looking in interfaces at all. Maybe
                 // it was only supposed to happen for interface types?
-                foreach (NamedTypeSymbol @interface in type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys) // NOTE: would be hand-rolled in a standalone component.
+                foreach (
+                    NamedTypeSymbol @interface in type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys
+                ) // NOTE: would be hand-rolled in a standalone component.
                 {
-                    if (!IsAccessibleOutsideAssembly(@interface)) continue;
+                    if (!IsAccessibleOutsideAssembly(@interface))
+                        continue;
 
                     foreach (Symbol member in @interface.GetMembersUnordered())
                     {
                         // NOTE: As in dev11 we filter out overriding methods and properties (but not events).
                         // NOTE: As in dev11, we ignore the CLS compliance of the interface and its members.
-                        if (IsAccessibleIfContainerIsAccessible(member) &&
-                            (!member.IsOverride || !(member.Kind == SymbolKind.Method || member.Kind == SymbolKind.Property)))
+                        if (
+                            IsAccessibleIfContainerIsAccessible(member)
+                            && (
+                                !member.IsOverride
+                                || !(
+                                    member.Kind == SymbolKind.Method
+                                    || member.Kind == SymbolKind.Property
+                                )
+                            )
+                        )
                         {
                             seenByName.Add(member.Name, member);
                         }
@@ -831,9 +1053,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // NOTE: As in dev11 we filter out overriding methods and properties (but not events).
                         // NOTE: Unlike for interface members, we check CLS compliance of base type members.
-                        if (IsAccessibleOutsideAssembly(member) &&
-                            IsTrue(GetDeclaredOrInheritedCompliance(member)) &&
-                            (!member.IsOverride || !(member.Kind == SymbolKind.Method || member.Kind == SymbolKind.Property)))
+                        if (
+                            IsAccessibleOutsideAssembly(member)
+                            && IsTrue(GetDeclaredOrInheritedCompliance(member))
+                            && (
+                                !member.IsOverride
+                                || !(
+                                    member.Kind == SymbolKind.Method
+                                    || member.Kind == SymbolKind.Property
+                                )
+                            )
+                        )
                         {
                             seenByName.Add(member.Name, member);
                         }
@@ -847,10 +1077,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (Symbol member in symbol.GetMembers())
             {
                 // Filter out uninteresting members:
-                if (DoNotVisit(member) ||
-                    !IsAccessibleIfContainerIsAccessible(member) || // We already know that the container is accessible.
-                    !IsTrue(GetDeclaredOrInheritedCompliance(member)) ||
-                    member.IsOverride)
+                if (
+                    DoNotVisit(member)
+                    || !IsAccessibleIfContainerIsAccessible(member)
+                    || // We already know that the container is accessible.
+                    !IsTrue(GetDeclaredOrInheritedCompliance(member))
+                    || member.IsOverride
+                )
                 {
                     continue;
                 }
@@ -873,19 +1106,28 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// does not consider two members with identical names (i.e. not differing
         /// in case) to collide.
         /// </remarks>
-        private void CheckSymbolDistinctness(Symbol symbol, string symbolName, MultiDictionary<string, Symbol>.ValueSet sameNameSymbols)
+        private void CheckSymbolDistinctness(
+            Symbol symbol,
+            string symbolName,
+            MultiDictionary<string, Symbol>.ValueSet sameNameSymbols
+        )
         {
             Debug.Assert(sameNameSymbols.Count > 0);
             Debug.Assert(symbol.Name == symbolName);
 
-            bool isMethodOrProperty = symbol.Kind == SymbolKind.Method || symbol.Kind == SymbolKind.Property;
+            bool isMethodOrProperty =
+                symbol.Kind == SymbolKind.Method || symbol.Kind == SymbolKind.Property;
 
             foreach (Symbol other in sameNameSymbols)
             {
                 if (other.Name != symbolName && !(isMethodOrProperty && other.Kind == symbol.Kind))
                 {
                     // TODO: Shouldn't we somehow reference the conflicting member?  Dev11 doesn't.
-                    this.AddDiagnostic(ErrorCode.WRN_CLS_BadIdentifierCase, symbol.Locations[0], symbol);
+                    this.AddDiagnostic(
+                        ErrorCode.WRN_CLS_BadIdentifierCase,
+                        symbol.Locations[0],
+                        symbol
+                    );
                     return;
                 }
             }
@@ -899,10 +1141,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Note: not checking accessor signatures, but checking accessor names.
                 ErrorCode code;
-                if (symbol.Kind == other.Kind &&
-                    !symbol.IsAccessor() &&
-                    !other.IsAccessor() &&
-                    TryGetCollisionErrorCode(symbol, other, out code))
+                if (
+                    symbol.Kind == other.Kind
+                    && !symbol.IsAccessor()
+                    && !other.IsAccessor()
+                    && TryGetCollisionErrorCode(symbol, other, out code)
+                )
                 {
                     this.AddDiagnostic(code, symbol.Locations[0], symbol);
                     return;
@@ -910,7 +1154,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else if (other.Name != symbolName)
                 {
                     // TODO: Shouldn't we somehow reference the conflicting member?  Dev11 doesn't.
-                    this.AddDiagnostic(ErrorCode.WRN_CLS_BadIdentifierCase, symbol.Locations[0], symbol);
+                    this.AddDiagnostic(
+                        ErrorCode.WRN_CLS_BadIdentifierCase,
+                        symbol.Locations[0],
+                        symbol
+                    );
                     return;
                 }
             }
@@ -921,23 +1169,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             System.Diagnostics.Debug.Assert(IsTrue(GetDeclaredOrInheritedCompliance(symbol)));
             System.Diagnostics.Debug.Assert(IsAccessibleOutsideAssembly(symbol));
 
-            if (!symbol.CanBeReferencedByName || symbol.IsOverride) return;
+            if (!symbol.CanBeReferencedByName || symbol.IsOverride)
+                return;
 
             string name = symbol.Name;
 
             // NOTE: The CLI spec says
-            //   CLS Rule 4: Assemblies shall follow Annex 7 of Technical Report 15 of the Unicode Standard 3.0 governing 
-            //   the set of characters permitted to start and be included in identifiers, available on-line at 
-            //   http://www.unicode.org/unicode/reports/tr15/tr15-18.html. Identifiers shall be in the canonical format defined 
-            //   by Unicode Normalization Form C. For CLS purposes, two identifiers are the same if their lowercase mappings 
-            //   (as specified by the Unicode locale-insensitive, one-to-one lowercase mappings) are the same. That is, for two 
-            //   identifiers to be considered different under the CLS they shall differ in more than simply their case. However, 
-            //   in order to override an inherited definition the CLI requires the precise encoding of the original declaration be 
+            //   CLS Rule 4: Assemblies shall follow Annex 7 of Technical Report 15 of the Unicode Standard 3.0 governing
+            //   the set of characters permitted to start and be included in identifiers, available on-line at
+            //   http://www.unicode.org/unicode/reports/tr15/tr15-18.html. Identifiers shall be in the canonical format defined
+            //   by Unicode Normalization Form C. For CLS purposes, two identifiers are the same if their lowercase mappings
+            //   (as specified by the Unicode locale-insensitive, one-to-one lowercase mappings) are the same. That is, for two
+            //   identifiers to be considered different under the CLS they shall differ in more than simply their case. However,
+            //   in order to override an inherited definition the CLI requires the precise encoding of the original declaration be
             //   used.
             //
-            // However, what the native compiler actually does is ignore everything about composed and decomposed characters 
+            // However, what the native compiler actually does is ignore everything about composed and decomposed characters
             // (see comment in CompilationPass::checkCLSnaming) and then just checks if the first character is underscore
-            // (0x005F or 0xFF3F).  Presumably, it assumes that the language rules have weeded out any other identifiers 
+            // (0x005F or 0xFF3F).  Presumably, it assumes that the language rules have weeded out any other identifiers
             // forbidden by the unicode spec.
 
             // NOTE: The parser won't actually accept '\uFF3F' as part of an identifier.
@@ -957,9 +1206,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // TODO: There's no public equivalent of Symbol.DeclaringCompilation.
-            return symbol.DeclaringCompilation != _compilation ||
-                symbol.IsImplicitlyDeclared ||
-                IsSyntacticallyFilteredOut(symbol);
+            return symbol.DeclaringCompilation != _compilation
+                || symbol.IsImplicitlyDeclared
+                || IsSyntacticallyFilteredOut(symbol);
         }
 
         private bool IsSyntacticallyFilteredOut(Symbol symbol)
@@ -967,7 +1216,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // TODO: it would be nice to be more precise than this: we only want to
             // warn about the base class if it is listed in the filter tree, not if
             // any part of the type is in the filter tree.
-            return _filterTree != null && !symbol.IsDefinedInSourceTree(_filterTree, _filterSpanWithinTree);
+            return _filterTree != null
+                && !symbol.IsDefinedInSourceTree(_filterTree, _filterSpanWithinTree);
         }
 
         private bool IsCompliantType(TypeSymbol type, NamedTypeSymbol context)
@@ -977,7 +1227,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case TypeKind.Array:
                     return IsCompliantType(((ArrayTypeSymbol)type).ElementType, context);
                 case TypeKind.Dynamic:
-                    // NOTE: It would probably be most correct to return 
+                    // NOTE: It would probably be most correct to return
                     // IsCompliantType(this.compilation.GetSpecialType(SpecialType.System_Object), context)
                     // but that's way too much work in the 99.9% case.
                     return true;
@@ -1033,7 +1283,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            foreach (TypeWithAnnotations typeArg in type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics)
+            foreach (
+                TypeWithAnnotations typeArg in type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+            )
             {
                 if (!IsCompliantType(typeArg.Type, context))
                 {
@@ -1052,7 +1304,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         /// <param name="type">Check the accessibility of this type (probably a parameter or return type).</param>
         /// <param name="context">Context for the accessibility check (e.g. containing type of method with <paramref name="type"/> as a parameter type.</param>
-        private static bool IsInaccessibleBecauseOfConstruction(NamedTypeSymbol type, NamedTypeSymbol context)
+        private static bool IsInaccessibleBecauseOfConstruction(
+            NamedTypeSymbol type,
+            NamedTypeSymbol context
+        )
         {
             // NOTE: Dev11 (incorrectly) only checks whether "type" is protected - it ignores container accessibility.
             bool sawProtected = type.DeclaredAccessibility.HasProtected();
@@ -1067,7 +1322,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         containingTypes = new Dictionary<NamedTypeSymbol, NamedTypeSymbol>();
                     }
 
-                    sawProtected = sawProtected || containingType.DeclaredAccessibility.HasProtected();
+                    sawProtected =
+                        sawProtected || containingType.DeclaredAccessibility.HasProtected();
                     sawGeneric = sawGeneric || containingType.Arity > 0;
 
                     containingTypes.Add(containingType.OriginalDefinition, containingType);
@@ -1087,9 +1343,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 while ((object)contextBaseType != null)
                 {
                     NamedTypeSymbol containingType;
-                    if (containingTypes.TryGetValue(contextBaseType.OriginalDefinition, out containingType))
+                    if (
+                        containingTypes.TryGetValue(
+                            contextBaseType.OriginalDefinition,
+                            out containingType
+                        )
+                    )
                     {
-                        return !TypeSymbol.Equals(containingType, contextBaseType, TypeCompareKind.ConsiderEverything2);
+                        return !TypeSymbol.Equals(
+                            containingType,
+                            contextBaseType,
+                            TypeCompareKind.ConsiderEverything2
+                        );
                     }
 
                     contextBaseType = contextBaseType.BaseTypeNoUseSiteDiagnostics;
@@ -1105,8 +1370,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private Compliance GetDeclaredOrInheritedCompliance(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(symbol.Kind == SymbolKind.NamedType || !((symbol is TypeSymbol)),
-                "Type kinds without declarations are handled elsewhere.");
+            System.Diagnostics.Debug.Assert(
+                symbol.Kind == SymbolKind.NamedType || !((symbol is TypeSymbol)),
+                "Type kinds without declarations are handled elsewhere."
+            );
 
             if (symbol.Kind == SymbolKind.Namespace)
             {
@@ -1141,7 +1408,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool? declaredCompliance = GetDeclaredCompliance(symbol, out ignoredLocation);
             if (declaredCompliance.HasValue)
             {
-                compliance = declaredCompliance.GetValueOrDefault() ? Compliance.DeclaredTrue : Compliance.DeclaredFalse;
+                compliance = declaredCompliance.GetValueOrDefault()
+                  ? Compliance.DeclaredTrue
+                  : Compliance.DeclaredFalse;
             }
             else if (symbol.Kind == SymbolKind.Assembly)
             {
@@ -1150,13 +1419,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                compliance = IsTrue(GetInheritedCompliance(symbol)) ? Compliance.InheritedTrue : Compliance.InheritedFalse;
+                compliance = IsTrue(GetInheritedCompliance(symbol))
+                  ? Compliance.InheritedTrue
+                  : Compliance.InheritedFalse;
             }
 
             // Don't bother caching methods, etc - they won't be reused.
             return (symbol.Kind == SymbolKind.Assembly || symbol.Kind == SymbolKind.NamedType)
-                ? _declaredOrInheritedCompliance.GetOrAdd(symbol, compliance)
-                : compliance;
+              ? _declaredOrInheritedCompliance.GetOrAdd(symbol, compliance)
+              : compliance;
         }
 
         private Compliance GetInheritedCompliance(Symbol symbol)
@@ -1184,7 +1455,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     NamedTypeSymbol attributeClass = data.AttributeClass;
                     if ((object)attributeClass != null)
                     {
-                        if (_diagnostics.ReportUseSite(attributeClass, symbol.Locations.IsEmpty ? NoLocation.Singleton : symbol.Locations[0]))
+                        if (
+                            _diagnostics.ReportUseSite(
+                                attributeClass,
+                                symbol.Locations.IsEmpty
+                                  ? NoLocation.Singleton
+                                  : symbol.Locations[0]
+                            )
+                        )
                         {
                             continue;
                         }
@@ -1198,7 +1476,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
 
                         ImmutableArray<TypedConstant> args = data.CommonConstructorArguments;
-                        System.Diagnostics.Debug.Assert(args.Length == 1, "We already checked the signature and HasErrors.");
+                        System.Diagnostics.Debug.Assert(
+                            args.Length == 1,
+                            "We already checked the signature and HasErrors."
+                        );
 
                         // Duplicates are reported elsewhere - we only care about the first (error-free) occurrence.
                         return (bool)args[0].ValueInternal;
@@ -1372,15 +1653,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ArrayTypeSymbol xArrayType = (ArrayTypeSymbol)xType;
                     ArrayTypeSymbol yArrayType = (ArrayTypeSymbol)yType;
 
-                    sawArrayRankDifference = sawArrayRankDifference || xArrayType.Rank != yArrayType.Rank;
+                    sawArrayRankDifference =
+                        sawArrayRankDifference || xArrayType.Rank != yArrayType.Rank;
 
-                    bool elementTypesDiffer = !TypeSymbol.Equals(xArrayType.ElementType, yArrayType.ElementType, TypeCompareKind.ConsiderEverything2);
+                    bool elementTypesDiffer = !TypeSymbol.Equals(
+                        xArrayType.ElementType,
+                        yArrayType.ElementType,
+                        TypeCompareKind.ConsiderEverything2
+                    );
 
                     // You might expect that only unnamed-vs-unnamed would produce a warning, but
                     // dev11 reports unnamed-vs-anything.
                     if (IsArrayOfArrays(xArrayType) || IsArrayOfArrays(yArrayType))
                     {
-                        sawArrayOfArraysDifference = sawArrayOfArraysDifference || elementTypesDiffer;
+                        sawArrayOfArraysDifference =
+                            sawArrayOfArraysDifference || elementTypesDiffer;
                     }
                     else if (elementTypesDiffer)
                     {
@@ -1398,11 +1685,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            code =
-                sawArrayOfArraysDifference ? ErrorCode.WRN_CLS_OverloadUnnamed :
-                sawArrayRankDifference ? ErrorCode.WRN_CLS_OverloadRefOut : // Lumping rank difference with refkind is odd, but matches dev11.
-                sawRefKindDifference ? ErrorCode.WRN_CLS_OverloadRefOut :
-                ErrorCode.Void;
+            code = sawArrayOfArraysDifference
+                ? ErrorCode.WRN_CLS_OverloadUnnamed
+                : sawArrayRankDifference
+                    ? ErrorCode.WRN_CLS_OverloadRefOut
+                    : // Lumping rank difference with refkind is odd, but matches dev11.
+                      sawRefKindDifference
+                        ? ErrorCode.WRN_CLS_OverloadRefOut
+                        : ErrorCode.Void;
 
             return code != ErrorCode.Void;
         }

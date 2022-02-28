@@ -19,7 +19,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 /// </summary>
 public class DefaultModelMetadataProvider : ModelMetadataProvider
 {
-    private readonly ConcurrentDictionary<ModelMetadataIdentity, ModelMetadataCacheEntry> _modelMetadataCache = new();
+    private readonly ConcurrentDictionary<
+        ModelMetadataIdentity,
+        ModelMetadataCacheEntry
+    > _modelMetadataCache = new();
     private readonly Func<ModelMetadataIdentity, ModelMetadataCacheEntry> _cacheEntryFactory;
     private readonly ModelMetadataCacheEntry _metadataCacheEntryForObjectType;
 
@@ -28,9 +31,7 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     /// </summary>
     /// <param name="detailsProvider">The <see cref="ICompositeMetadataDetailsProvider"/>.</param>
     public DefaultModelMetadataProvider(ICompositeMetadataDetailsProvider detailsProvider)
-        : this(detailsProvider, new DefaultModelBindingMessageProvider())
-    {
-    }
+        : this(detailsProvider, new DefaultModelBindingMessageProvider()) { }
 
     /// <summary>
     /// Creates a new <see cref="DefaultModelMetadataProvider"/>.
@@ -39,14 +40,13 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     /// <param name="optionsAccessor">The accessor for <see cref="MvcOptions"/>.</param>
     public DefaultModelMetadataProvider(
         ICompositeMetadataDetailsProvider detailsProvider,
-        IOptions<MvcOptions> optionsAccessor)
-        : this(detailsProvider, GetMessageProvider(optionsAccessor))
-    {
-    }
+        IOptions<MvcOptions> optionsAccessor
+    ) : this(detailsProvider, GetMessageProvider(optionsAccessor)) { }
 
     private DefaultModelMetadataProvider(
         ICompositeMetadataDetailsProvider detailsProvider,
-        DefaultModelBindingMessageProvider modelBindingMessageProvider)
+        DefaultModelBindingMessageProvider modelBindingMessageProvider
+    )
     {
         if (detailsProvider == null)
         {
@@ -104,8 +104,8 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     }
 
     /// <inheritdoc />
-    public override ModelMetadata GetMetadataForParameter(ParameterInfo parameter)
-        => GetMetadataForParameter(parameter, parameter.ParameterType);
+    public override ModelMetadata GetMetadataForParameter(ParameterInfo parameter) =>
+        GetMetadataForParameter(parameter, parameter.ParameterType);
 
     /// <inheritdoc />
     public override ModelMetadata GetMetadataForParameter(ParameterInfo parameter, Type modelType)
@@ -157,7 +157,10 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     }
 
     /// <inheritdoc />
-    public override ModelMetadata GetMetadataForConstructor(ConstructorInfo constructorInfo, Type modelType)
+    public override ModelMetadata GetMetadataForConstructor(
+        ConstructorInfo constructorInfo,
+        Type modelType
+    )
     {
         if (constructorInfo is null)
         {
@@ -168,7 +171,9 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
         return cacheEntry.Metadata;
     }
 
-    private static DefaultModelBindingMessageProvider GetMessageProvider(IOptions<MvcOptions> optionsAccessor)
+    private static DefaultModelBindingMessageProvider GetMessageProvider(
+        IOptions<MvcOptions> optionsAccessor
+    )
     {
         if (optionsAccessor == null)
         {
@@ -201,21 +206,24 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     {
         return _modelMetadataCache.GetOrAdd(
             ModelMetadataIdentity.ForParameter(parameter, modelType),
-            _cacheEntryFactory);
+            _cacheEntryFactory
+        );
     }
 
     private ModelMetadataCacheEntry GetCacheEntry(PropertyInfo property, Type modelType)
     {
         return _modelMetadataCache.GetOrAdd(
             ModelMetadataIdentity.ForProperty(property, modelType, property.DeclaringType!),
-            _cacheEntryFactory);
+            _cacheEntryFactory
+        );
     }
 
     private ModelMetadataCacheEntry GetCacheEntry(ConstructorInfo constructor, Type modelType)
     {
         return _modelMetadataCache.GetOrAdd(
             ModelMetadataIdentity.ForConstructor(constructor, modelType),
-            _cacheEntryFactory);
+            _cacheEntryFactory
+        );
     }
 
     private ModelMetadataCacheEntry CreateCacheEntry(ModelMetadataIdentity key)
@@ -255,7 +263,9 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
             }
         }
 
-        Debug.Fail($"Unable to find property '{propertyKey.Name}' on type '{propertyKey.ContainerType}.");
+        Debug.Fail(
+            $"Unable to find property '{propertyKey.Name}' on type '{propertyKey.ContainerType}."
+        );
         return null;
     }
 
@@ -269,7 +279,9 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
         for (var i = 0; i < parameters.Length; i++)
         {
             var parameter = parameters[i];
-            var parameterDetails = CreateParameterDetails(ModelMetadataIdentity.ForParameter(parameter));
+            var parameterDetails = CreateParameterDetails(
+                ModelMetadataIdentity.ForParameter(parameter)
+            );
             parameterMetadata[i] = CreateModelMetadata(parameterDetails);
 
             parameterTypes[i] = parameter.ParameterType;
@@ -286,7 +298,10 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
             var args = Expression.Parameter(typeof(object?[]), "args");
             var factoryExpressionBody = BuildFactoryExpression(constructor, args);
 
-            var factoryLamda = Expression.Lambda<Func<object?[], object>>(factoryExpressionBody, args);
+            var factoryLamda = Expression.Lambda<Func<object?[], object>>(
+                factoryExpressionBody,
+                args
+            );
 
             return factoryLamda.Compile();
         }
@@ -294,7 +309,8 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
 
     private static Expression BuildFactoryExpression(
         ConstructorInfo constructor,
-        Expression factoryArgumentArray)
+        Expression factoryArgumentArray
+    )
     {
         var constructorParameters = constructor.GetParameters();
         var constructorArguments = new Expression[constructorParameters.Length];
@@ -304,8 +320,13 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
             var constructorParameter = constructorParameters[i];
             var parameterType = constructorParameter.ParameterType;
 
-            constructorArguments[i] = Expression.ArrayAccess(factoryArgumentArray, Expression.Constant(i));
-            if (ParameterDefaultValue.TryGetDefaultValue(constructorParameter, out var defaultValue))
+            constructorArguments[i] = Expression.ArrayAccess(
+                factoryArgumentArray,
+                Expression.Constant(i)
+            );
+            if (
+                ParameterDefaultValue.TryGetDefaultValue(constructorParameter, out var defaultValue)
+            )
             {
                 // We have a default value;
             }
@@ -317,7 +338,10 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
             if (defaultValue != null)
             {
                 var defaultValueExpression = Expression.Constant(defaultValue);
-                constructorArguments[i] = Expression.Coalesce(constructorArguments[i], defaultValueExpression);
+                constructorArguments[i] = Expression.Coalesce(
+                    constructorArguments[i],
+                    defaultValueExpression
+                );
             }
 
             constructorArguments[i] = Expression.Convert(constructorArguments[i], parameterType);
@@ -373,7 +397,8 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
             var propertyKey = ModelMetadataIdentity.ForProperty(
                 propertyHelper.Property,
                 propertyHelper.Property.PropertyType,
-                key.ModelType);
+                key.ModelType
+            );
 
             var propertyEntry = CreateSinglePropertyDetails(propertyKey, propertyHelper);
             propertyEntries.Add(propertyEntry);
@@ -384,7 +409,8 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
 
     private DefaultMetadataDetails CreateSinglePropertyDetails(
         ModelMetadataIdentity propertyKey,
-        PropertyHelper propertyHelper)
+        PropertyHelper propertyHelper
+    )
     {
         Debug.Assert(propertyKey.MetadataKind == ModelMetadataKind.Property);
         var containerType = propertyKey.ContainerType!;
@@ -392,7 +418,8 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
         var attributes = ModelAttributes.GetAttributesForProperty(
             containerType,
             propertyHelper.Property,
-            propertyKey.ModelType);
+            propertyKey.ModelType
+        );
 
         var propertyEntry = new DefaultMetadataDetails(propertyKey, attributes);
         if (propertyHelper.Property.CanRead && propertyHelper.Property.GetMethod?.IsPublic == true)
@@ -401,9 +428,11 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
             propertyEntry.PropertyGetter = getter;
         }
 
-        if (propertyHelper.Property.CanWrite &&
-            propertyHelper.Property.SetMethod?.IsPublic == true &&
-            !containerType.IsValueType)
+        if (
+            propertyHelper.Property.CanWrite
+            && propertyHelper.Property.SetMethod?.IsPublic == true
+            && !containerType.IsValueType
+        )
         {
             propertyEntry.PropertySetter = propertyHelper.ValueSetter;
         }
@@ -425,9 +454,7 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     /// </remarks>
     protected virtual DefaultMetadataDetails CreateTypeDetails(ModelMetadataIdentity key)
     {
-        return new DefaultMetadataDetails(
-            key,
-            ModelAttributes.GetAttributesForType(key.ModelType));
+        return new DefaultMetadataDetails(key, ModelAttributes.GetAttributesForType(key.ModelType));
     }
 
     /// <summary>
@@ -441,7 +468,8 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     {
         return new DefaultMetadataDetails(
             key,
-            ModelAttributes.GetAttributesForParameter(key.ParameterInfo!, key.ModelType));
+            ModelAttributes.GetAttributesForParameter(key.ParameterInfo!, key.ModelType)
+        );
     }
 
     private readonly struct ModelMetadataCacheEntry

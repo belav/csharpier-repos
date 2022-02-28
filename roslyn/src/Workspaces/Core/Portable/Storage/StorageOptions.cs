@@ -18,22 +18,27 @@ namespace Microsoft.CodeAnalysis.Storage
 
         private const string FeatureName = "FeatureManager/Storage";
 
-        public static readonly Option<StorageDatabase> Database = new(
-            FeatureName, nameof(Database), defaultValue: StorageDatabase.SQLite,
-            new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(Database)));
+        public static readonly Option<StorageDatabase> Database =
+            new(
+                FeatureName,
+                nameof(Database),
+                defaultValue: StorageDatabase.SQLite,
+                new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(Database))
+            );
 
-        public static readonly Option<bool> CloudCacheFeatureFlag = new(
-            FeatureName, nameof(CloudCacheFeatureFlag), defaultValue: false,
-            new FeatureFlagStorageLocation("Roslyn.CloudCache3"));
+        public static readonly Option<bool> CloudCacheFeatureFlag =
+            new(
+                FeatureName,
+                nameof(CloudCacheFeatureFlag),
+                defaultValue: false,
+                new FeatureFlagStorageLocation("Roslyn.CloudCache3")
+            );
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            Database,
-            CloudCacheFeatureFlag);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(Database, CloudCacheFeatureFlag);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public StorageOptions()
-        {
-        }
+        public StorageOptions() { }
     }
 }

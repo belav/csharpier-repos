@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalParameterBasedSqlProcessorDependencies(
             ISqlExpressionFactory sqlExpressionFactory,
             IRelationalTypeMappingSource typeMappingSource,
-            IParameterNameGeneratorFactory parameterNameGeneratorFactory)
+            IParameterNameGeneratorFactory parameterNameGeneratorFactory
+        )
         {
             SqlExpressionFactory = sqlExpressionFactory;
             TypeMappingSource = typeMappingSource;

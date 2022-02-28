@@ -30,19 +30,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Formatting)]
-        public async Task Simple1()
-            => await AssertFormatAsync("namespace A/*1*/{}/*2*/ class A {}", "namespace A{ } class A {}");
+        public async Task Simple1() =>
+            await AssertFormatAsync(
+                "namespace A/*1*/{}/*2*/ class A {}",
+                "namespace A{ } class A {}"
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public async Task DontFormatTriviaOutsideOfSpan_IncludingTrailingTriviaOnNewLine()
         {
-            var content = @"namespace A
+            var content =
+                @"namespace A
 /*1*/{
         }/*2*/      
 
 class A /*1*/{}/*2*/";
 
-            var expected = @"namespace A
+            var expected =
+                @"namespace A
 {
 }      
 
@@ -54,13 +59,15 @@ class A { }";
         [Fact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public async Task FormatIncludingTrivia()
         {
-            var content = @"namespace A
+            var content =
+                @"namespace A
 /*1*/{
         }   /*2*/   
 
 class A /*1*/{}/*2*/";
 
-            var expected = @"namespace A
+            var expected =
+                @"namespace A
 {
 }
 
@@ -72,13 +79,15 @@ class A { }";
         [Fact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public async Task MergeSpanAndFormat()
         {
-            var content = @"namespace A
+            var content =
+                @"namespace A
 /*1*/{
         }   /*2*/   /*1*/
 
 class A{}/*2*/";
 
-            var expected = @"namespace A
+            var expected =
+                @"namespace A
 {
 }
 
@@ -90,13 +99,15 @@ class A { }";
         [Fact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public async Task OverlappedSpan()
         {
-            var content = @"namespace A
+            var content =
+                @"namespace A
 /*1*/{
      /*1*/   }   /*2*/   
 
 class A{}/*2*/";
 
-            var expected = @"namespace A
+            var expected =
+                @"namespace A
 {
 }
 
@@ -110,7 +121,8 @@ class A { }";
         [Trait(Traits.Feature, Traits.Features.Formatting)]
         public async Task FormatSpanNullReference01()
         {
-            var code = @"/*1*/class C
+            var code =
+                @"/*1*/class C
 {
     void F()
     {
@@ -118,7 +130,8 @@ class A { }";
     }
 }/*2*/";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void F()
     {
@@ -137,7 +150,8 @@ class A { }";
         [Trait(Traits.Feature, Traits.Features.Formatting)]
         public async Task FormatSpanNullReference02()
         {
-            var code = @"class C/*1*/
+            var code =
+                @"class C/*1*/
 {
     void F()
     {
@@ -145,7 +159,8 @@ class A { }";
     }
 }/*2*/";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void F()
     {
@@ -165,18 +180,36 @@ class A { }";
         {
             using var workspace = new AdhocWorkspace();
 
-            var project = workspace.CurrentSolution.AddProject("Project", "Project.dll", LanguageNames.CSharp);
+            var project = workspace.CurrentSolution.AddProject(
+                "Project",
+                "Project.dll",
+                LanguageNames.CSharp
+            );
             var document = project.AddDocument("Document", SourceText.From(""));
 
             var syntaxTree = await document.GetSyntaxTreeAsync();
-            var result = Formatter.Format(await syntaxTree.GetRootAsync(), TextSpan.FromBounds(0, 0), workspace, cancellationToken: CancellationToken.None);
+            var result = Formatter.Format(
+                await syntaxTree.GetRootAsync(),
+                TextSpan.FromBounds(0, 0),
+                workspace,
+                cancellationToken: CancellationToken.None
+            );
         }
 
-        private Task AssertFormatAsync(string content, string expected, OptionsCollection changedOptionSet = null)
+        private Task AssertFormatAsync(
+            string content,
+            string expected,
+            OptionsCollection changedOptionSet = null
+        )
         {
             var tuple = PreprocessMarkers(content);
 
-            return AssertFormatAsync(expected, tuple.Item1, tuple.Item2, changedOptionSet: changedOptionSet);
+            return AssertFormatAsync(
+                expected,
+                tuple.Item1,
+                tuple.Item2,
+                changedOptionSet: changedOptionSet
+            );
         }
 
         private static Tuple<string, List<TextSpan>> PreprocessMarkers(string codeWithMarker)
@@ -186,18 +219,30 @@ class A { }";
 
             while (currentIndex < codeWithMarker.Length)
             {
-                var startPosition = codeWithMarker.IndexOf("/*1*/", currentIndex, StringComparison.Ordinal);
+                var startPosition = codeWithMarker.IndexOf(
+                    "/*1*/",
+                    currentIndex,
+                    StringComparison.Ordinal
+                );
                 if (startPosition < 0)
                 {
                     // no more markers
                     break;
                 }
 
-                codeWithMarker = codeWithMarker.Substring(0, startPosition) + codeWithMarker.Substring(startPosition + 5);
+                codeWithMarker =
+                    codeWithMarker.Substring(0, startPosition)
+                    + codeWithMarker.Substring(startPosition + 5);
 
-                var endPosition = codeWithMarker.IndexOf("/*2*/", startPosition, StringComparison.Ordinal);
+                var endPosition = codeWithMarker.IndexOf(
+                    "/*2*/",
+                    startPosition,
+                    StringComparison.Ordinal
+                );
 
-                codeWithMarker = codeWithMarker.Substring(0, endPosition) + codeWithMarker.Substring(endPosition + 5);
+                codeWithMarker =
+                    codeWithMarker.Substring(0, endPosition)
+                    + codeWithMarker.Substring(endPosition + 5);
 
                 spans.Add(TextSpan.FromBounds(startPosition, endPosition));
 

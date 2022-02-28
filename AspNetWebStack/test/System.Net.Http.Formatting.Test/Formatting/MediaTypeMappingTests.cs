@@ -11,7 +11,10 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Constructor_ThrowsOnNullMediaTypeHeaderValue()
         {
-            Assert.ThrowsArgumentNull(() => new MockMediaTypeMapping((MediaTypeHeaderValue)null), "mediaType");
+            Assert.ThrowsArgumentNull(
+                () => new MockMediaTypeMapping((MediaTypeHeaderValue)null),
+                "mediaType"
+            );
         }
 
         [Fact]
@@ -23,15 +26,9 @@ namespace System.Net.Http.Formatting
 
         public class MockMediaTypeMapping : MediaTypeMapping
         {
-            public MockMediaTypeMapping(MediaTypeHeaderValue mediaType)
-                : base(mediaType)
-            {
-            }
+            public MockMediaTypeMapping(MediaTypeHeaderValue mediaType) : base(mediaType) { }
 
-            public MockMediaTypeMapping(string mediaType)
-                : base(mediaType)
-            {
-            }
+            public MockMediaTypeMapping(string mediaType) : base(mediaType) { }
 
             public override double TryMatchMediaType(HttpRequestMessage request)
             {

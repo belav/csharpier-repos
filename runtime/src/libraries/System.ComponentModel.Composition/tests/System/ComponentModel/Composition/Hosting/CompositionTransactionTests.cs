@@ -336,18 +336,30 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private void TestQuery(AtomicComposition context, object key, int parameter, bool expectation)
+        private void TestQuery(
+            AtomicComposition context,
+            object key,
+            int parameter,
+            bool expectation
+        )
         {
             Func<int, bool> query;
             if (context.TryGetValue(key, out query))
                 Assert.Equal(expectation, query(parameter));
         }
 
-        private void SetQuery(AtomicComposition context, object key, Func<int, Func<int, bool>, bool> query)
+        private void SetQuery(
+            AtomicComposition context,
+            object key,
+            Func<int, Func<int, bool>, bool> query
+        )
         {
             Func<int, bool> parentQuery;
             context.TryGetValue(key, out parentQuery);
-            Func<int, bool> queryFunction = parameter => { return query(parameter, parentQuery); };
+            Func<int, bool> queryFunction = parameter =>
+            {
+                return query(parameter, parentQuery);
+            };
             context.SetValue(key, queryFunction);
         }
 
@@ -360,38 +372,50 @@ namespace System.ComponentModel.Composition.Hosting
 
             using (var contextA = new AtomicComposition())
             {
-                SetQuery(contextA, key, (int parameter, Func<int, bool> parentQuery) =>
-                {
-                    if (parameter == 22)
-                        return true;
-                    if (parentQuery != null)
-                        return parentQuery(parameter);
-                    return false;
-                });
+                SetQuery(
+                    contextA,
+                    key,
+                    (int parameter, Func<int, bool> parentQuery) =>
+                    {
+                        if (parameter == 22)
+                            return true;
+                        if (parentQuery != null)
+                            return parentQuery(parameter);
+                        return false;
+                    }
+                );
                 TestQuery(contextA, key, 22, true);
 
                 using (var contextB = new AtomicComposition(contextA))
                 {
                     TestQuery(contextB, key, 22, true);
-                    SetQuery(contextB, key, (int parameter, Func<int, bool> parentQuery) =>
-                    {
-                        if (parentQuery != null)
-                            return !parentQuery(parameter);
-                        throw new NotImplementedException();
-                    });
+                    SetQuery(
+                        contextB,
+                        key,
+                        (int parameter, Func<int, bool> parentQuery) =>
+                        {
+                            if (parentQuery != null)
+                                return !parentQuery(parameter);
+                            throw new NotImplementedException();
+                        }
+                    );
                     TestQuery(contextB, key, 21, true);
                     TestQuery(contextB, key, 22, false);
 
                     using (var contextC = new AtomicComposition(contextB))
                     {
-                        SetQuery(contextC, key, (int parameter, Func<int, bool> parentQuery) =>
-                        {
-                            if (parameter == 23)
-                                return true;
-                            if (parentQuery != null)
-                                return !parentQuery(parameter);
-                            throw new NotImplementedException();
-                        });
+                        SetQuery(
+                            contextC,
+                            key,
+                            (int parameter, Func<int, bool> parentQuery) =>
+                            {
+                                if (parameter == 23)
+                                    return true;
+                                if (parentQuery != null)
+                                    return !parentQuery(parameter);
+                                throw new NotImplementedException();
+                            }
+                        );
                         TestQuery(contextC, key, 21, false);
                         TestQuery(contextC, key, 22, true);
                         TestQuery(contextC, key, 23, true);
@@ -400,12 +424,16 @@ namespace System.ComponentModel.Composition.Hosting
 
                     using (var contextD = new AtomicComposition(contextB))
                     {
-                        SetQuery(contextD, key, (int parameter, Func<int, bool> parentQuery) =>
-                        {
-                            if (parentQuery != null)
-                                return parentQuery(parameter + 1);
-                            throw new NotImplementedException();
-                        });
+                        SetQuery(
+                            contextD,
+                            key,
+                            (int parameter, Func<int, bool> parentQuery) =>
+                            {
+                                if (parentQuery != null)
+                                    return parentQuery(parameter + 1);
+                                throw new NotImplementedException();
+                            }
+                        );
                         TestQuery(contextD, key, 21, true);
                         TestQuery(contextD, key, 22, true);
                         TestQuery(contextD, key, 23, false);
@@ -502,6 +530,5 @@ namespace System.ComponentModel.Composition.Hosting
 
             Assert.True(stack.Count == 0);
         }
-
     }
 }

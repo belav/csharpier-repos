@@ -23,13 +23,20 @@ namespace System.Net.Http.Headers
         internal const string BytesUnit = "bytes";
 
         // Validator
-        internal static readonly Action<HttpHeaderValueCollection<string>, string> TokenValidator = ValidateToken;
+        internal static readonly Action<HttpHeaderValueCollection<string>, string> TokenValidator =
+            ValidateToken;
 
-        internal static void SetQuality(UnvalidatedObjectCollection<NameValueHeaderValue> parameters, double? value)
+        internal static void SetQuality(
+            UnvalidatedObjectCollection<NameValueHeaderValue> parameters,
+            double? value
+        )
         {
             Debug.Assert(parameters != null);
 
-            NameValueHeaderValue? qualityParameter = NameValueHeaderValue.Find(parameters, qualityName);
+            NameValueHeaderValue? qualityParameter = NameValueHeaderValue.Find(
+                parameters,
+                qualityName
+            );
             if (value.HasValue)
             {
                 // Note that even if we check the value here, we can't prevent a user from adding an invalid quality
@@ -42,7 +49,10 @@ namespace System.Net.Http.Headers
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
-                string qualityString = ((double)value).ToString("0.0##", NumberFormatInfo.InvariantInfo);
+                string qualityString = ((double)value).ToString(
+                    "0.0##",
+                    NumberFormatInfo.InvariantInfo
+                );
                 if (qualityParameter != null)
                 {
                     qualityParameter.Value = qualityString;
@@ -83,7 +93,9 @@ namespace System.Net.Http.Headers
             // Encode a string using RFC 5987 encoding.
             // encoding'lang'PercentEncodedSpecials
             StringBuilder builder = StringBuilderCache.Acquire();
-            byte[] utf8bytes = ArrayPool<byte>.Shared.Rent(Encoding.UTF8.GetMaxByteCount(input.Length));
+            byte[] utf8bytes = ArrayPool<byte>.Shared.Rent(
+                Encoding.UTF8.GetMaxByteCount(input.Length)
+            );
             int utf8length = Encoding.UTF8.GetBytes(input, 0, input.Length, utf8bytes, 0);
 
             builder.Append("utf-8\'\'");
@@ -97,7 +109,12 @@ namespace System.Net.Http.Headers
                 {
                     AddHexEscaped(utf8byte, builder);
                 }
-                else if (!HttpRuleParser.IsTokenChar((char)utf8byte) || utf8byte == '*' || utf8byte == '\'' || utf8byte == '%')
+                else if (
+                    !HttpRuleParser.IsTokenChar((char)utf8byte)
+                    || utf8byte == '*'
+                    || utf8byte == '\''
+                    || utf8byte == '%'
+                )
                 {
                     // ASCII - Only one encoded byte.
                     AddHexEscaped(utf8byte, builder);
@@ -106,7 +123,6 @@ namespace System.Net.Http.Headers
                 {
                     builder.Append((char)utf8byte);
                 }
-
             }
 
             Array.Clear(utf8bytes, 0, utf8length);
@@ -125,23 +141,38 @@ namespace System.Net.Http.Headers
             destination.Append(HexConverter.ToCharUpper(c));
         }
 
-        internal static double? GetQuality(UnvalidatedObjectCollection<NameValueHeaderValue> parameters)
+        internal static double? GetQuality(
+            UnvalidatedObjectCollection<NameValueHeaderValue> parameters
+        )
         {
             Debug.Assert(parameters != null);
 
-            NameValueHeaderValue? qualityParameter = NameValueHeaderValue.Find(parameters, qualityName);
+            NameValueHeaderValue? qualityParameter = NameValueHeaderValue.Find(
+                parameters,
+                qualityName
+            );
             if (qualityParameter != null)
             {
                 // Note that the RFC requires decimal '.' regardless of the culture. I.e. using ',' as decimal
                 // separator is considered invalid (even if the current culture would allow it).
                 double qualityValue = 0;
-                if (double.TryParse(qualityParameter.Value, NumberStyles.AllowDecimalPoint,
-                    NumberFormatInfo.InvariantInfo, out qualityValue))
+                if (
+                    double.TryParse(
+                        qualityParameter.Value,
+                        NumberStyles.AllowDecimalPoint,
+                        NumberFormatInfo.InvariantInfo,
+                        out qualityValue
+                    )
+                )
                 {
                     return qualityValue;
                 }
                 // If the stored value is an invalid quality value, just return null and log a warning.
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, SR.Format(SR.net_http_log_headers_invalid_quality, qualityParameter.Value));
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(
+                        null,
+                        SR.Format(SR.net_http_log_headers_invalid_quality, qualityParameter.Value)
+                    );
             }
             return null;
         }
@@ -155,7 +186,13 @@ namespace System.Net.Http.Headers
 
             if (HttpRuleParser.GetTokenLength(value, 0) != value.Length)
             {
-                throw new FormatException(SR.Format(CultureInfo.InvariantCulture, SR.net_http_headers_invalid_value, value));
+                throw new FormatException(
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        value
+                    )
+                );
             }
         }
 
@@ -167,10 +204,18 @@ namespace System.Net.Http.Headers
             }
 
             int length = 0;
-            if ((HttpRuleParser.GetCommentLength(value, 0, out length) != HttpParseResult.Parsed) ||
-                (length != value.Length)) // no trailing spaces allowed
+            if (
+                (HttpRuleParser.GetCommentLength(value, 0, out length) != HttpParseResult.Parsed)
+                || (length != value.Length)
+            ) // no trailing spaces allowed
             {
-                throw new FormatException(SR.Format(CultureInfo.InvariantCulture, SR.net_http_headers_invalid_value, value));
+                throw new FormatException(
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        value
+                    )
+                );
             }
         }
 
@@ -182,19 +227,34 @@ namespace System.Net.Http.Headers
             }
 
             int length = 0;
-            if ((HttpRuleParser.GetQuotedStringLength(value, 0, out length) != HttpParseResult.Parsed) ||
-                (length != value.Length)) // no trailing spaces allowed
+            if (
+                (
+                    HttpRuleParser.GetQuotedStringLength(value, 0, out length)
+                    != HttpParseResult.Parsed
+                ) || (length != value.Length)
+            ) // no trailing spaces allowed
             {
-                throw new FormatException(SR.Format(CultureInfo.InvariantCulture, SR.net_http_headers_invalid_value, value));
+                throw new FormatException(
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        value
+                    )
+                );
             }
         }
 
-        internal static bool AreEqualCollections<T>(ObjectCollection<T>? x, ObjectCollection<T>? y) where T : class
+        internal static bool AreEqualCollections<T>(ObjectCollection<T>? x, ObjectCollection<T>? y)
+            where T : class
         {
             return AreEqualCollections(x, y, null);
         }
 
-        internal static bool AreEqualCollections<T>(ObjectCollection<T>? x, ObjectCollection<T>? y, IEqualityComparer<T>? comparer) where T : class
+        internal static bool AreEqualCollections<T>(
+            ObjectCollection<T>? x,
+            ObjectCollection<T>? y,
+            IEqualityComparer<T>? comparer
+        ) where T : class
         {
             if (x == null)
             {
@@ -230,8 +290,10 @@ namespace System.Net.Http.Headers
                 {
                     if (!alreadyFound[i])
                     {
-                        if (((comparer == null) && xItem.Equals(yItem)) ||
-                            ((comparer != null) && comparer.Equals(xItem, yItem)))
+                        if (
+                            ((comparer == null) && xItem.Equals(yItem))
+                            || ((comparer != null) && comparer.Equals(xItem, yItem))
+                        )
                         {
                             alreadyFound[i] = true;
                             found = true;
@@ -249,14 +311,20 @@ namespace System.Net.Http.Headers
 
             // Since we never re-use a "found" value in 'y', we expect 'alreadyFound' to have all fields set to 'true'.
             // Otherwise the two collections can't be equal and we should not get here.
-            Debug.Assert(Array.TrueForAll(alreadyFound, value => value),
-                "Expected all values in 'alreadyFound' to be true since collections are considered equal.");
+            Debug.Assert(
+                Array.TrueForAll(alreadyFound, value => value),
+                "Expected all values in 'alreadyFound' to be true since collections are considered equal."
+            );
 
             return true;
         }
 
-        internal static int GetNextNonEmptyOrWhitespaceIndex(string input, int startIndex, bool skipEmptyValues,
-            out bool separatorFound)
+        internal static int GetNextNonEmptyOrWhitespaceIndex(
+            string input,
+            int startIndex,
+            bool skipEmptyValues,
+            out bool separatorFound
+        )
         {
             Debug.Assert(input != null);
             Debug.Assert(startIndex <= input.Length); // it's OK if index == value.Length.
@@ -287,7 +355,11 @@ namespace System.Net.Http.Headers
             return current;
         }
 
-        internal static DateTimeOffset? GetDateTimeOffsetValue(HeaderDescriptor descriptor, HttpHeaders store, DateTimeOffset? defaultValue = null)
+        internal static DateTimeOffset? GetDateTimeOffsetValue(
+            HeaderDescriptor descriptor,
+            HttpHeaders store,
+            DateTimeOffset? defaultValue = null
+        )
         {
             Debug.Assert(store != null);
 
@@ -327,7 +399,12 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return int.TryParse(value.AsSpan(offset, length), NumberStyles.None, CultureInfo.InvariantCulture, out result);
+            return int.TryParse(
+                value.AsSpan(offset, length),
+                NumberStyles.None,
+                CultureInfo.InvariantCulture,
+                out result
+            );
         }
 
         internal static bool TryParseInt64(string value, int offset, int length, out long result)
@@ -338,7 +415,12 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return long.TryParse(value.AsSpan(offset, length), NumberStyles.None, CultureInfo.InvariantCulture, out result);
+            return long.TryParse(
+                value.AsSpan(offset, length),
+                NumberStyles.None,
+                CultureInfo.InvariantCulture,
+                out result
+            );
         }
 
         internal static void DumpHeaders(StringBuilder sb, params HttpHeaders?[] headers)
@@ -372,12 +454,17 @@ namespace System.Net.Http.Headers
             sb.Append('}');
         }
 
-        private static void ValidateToken(HttpHeaderValueCollection<string> collection, string value)
+        private static void ValidateToken(
+            HttpHeaderValueCollection<string> collection,
+            string value
+        )
         {
             CheckValidToken(value, "item");
         }
 
-        internal static UnvalidatedObjectCollection<NameValueHeaderValue>? Clone(this UnvalidatedObjectCollection<NameValueHeaderValue>? source)
+        internal static UnvalidatedObjectCollection<NameValueHeaderValue>? Clone(
+            this UnvalidatedObjectCollection<NameValueHeaderValue>? source
+        )
         {
             if (source == null)
                 return null;

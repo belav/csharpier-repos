@@ -24,7 +24,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="NotMappedMemberAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-        public NotMappedMemberAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
+        public NotMappedMemberAttributeConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -41,20 +43,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
             var entityType = entityTypeBuilder.Metadata;
-            var members = entityType.GetRuntimeProperties().Values.Cast<MemberInfo>()
+            var members = entityType
+                .GetRuntimeProperties()
+                .Values.Cast<MemberInfo>()
                 .Concat(entityType.GetRuntimeFields().Values);
 
             foreach (var member in members)
             {
-                if (Attribute.IsDefined(member, typeof(NotMappedAttribute), inherit: true)
-                    && ShouldIgnore(member))
+                if (
+                    Attribute.IsDefined(member, typeof(NotMappedAttribute), inherit: true)
+                    && ShouldIgnore(member)
+                )
                 {
-                    entityTypeBuilder.Ignore(member.GetSimpleMemberName(), fromDataAnnotation: true);
+                    entityTypeBuilder.Ignore(
+                        member.GetSimpleMemberName(),
+                        fromDataAnnotation: true
+                    );
                 }
             }
         }
@@ -64,7 +74,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// </summary>
         /// <param name="memberInfo">The member.</param>
         /// <returns><see langword="true" /> if the member should be ignored.</returns>
-        protected virtual bool ShouldIgnore(MemberInfo memberInfo)
-            => true;
+        protected virtual bool ShouldIgnore(MemberInfo memberInfo) => true;
     }
 }

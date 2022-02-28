@@ -24,11 +24,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
             object? IEnumerator.Current => ((IEnumerator)_enumerator).Current;
 
-            public void Dispose()
-                => _enumerator.Dispose();
+            public void Dispose() => _enumerator.Dispose();
 
-            public bool MoveNext()
-                => _enumerator.MoveNext();
+            public bool MoveNext() => _enumerator.MoveNext();
 
             public void Reset()
             {

@@ -16,7 +16,17 @@ namespace System.Xml
             if (uri.Scheme == "file")
             {
                 Uri fileUri = uri;
-                return Task.Run<Stream>(() => new FileStream(fileUri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read, 1, useAsync: true));
+                return Task.Run<Stream>(
+                    () =>
+                        new FileStream(
+                            fileUri.LocalPath,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read,
+                            1,
+                            useAsync: true
+                        )
+                );
             }
             else
             {
@@ -24,7 +34,11 @@ namespace System.Xml
             }
         }
 
-        private async Task<Stream> GetNonFileStreamAsync(Uri uri, ICredentials? credentials, IWebProxy? proxy)
+        private async Task<Stream> GetNonFileStreamAsync(
+            Uri uri,
+            ICredentials? credentials,
+            IWebProxy? proxy
+        )
         {
             var handler = new HttpClientHandler();
             using (var client = new HttpClient(handler))

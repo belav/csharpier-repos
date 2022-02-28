@@ -35,9 +35,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     [SuggestedActionPriority(DefaultOrderings.Default)]
     internal partial class SuggestedActionsSourceProvider : ISuggestedActionsSourceProvider
     {
-        private static readonly Guid s_CSharpSourceGuid = new Guid("b967fea8-e2c3-4984-87d4-71a38f49e16a");
-        private static readonly Guid s_visualBasicSourceGuid = new Guid("4de30e93-3e0c-40c2-a4ba-1124da4539f6");
-        private static readonly Guid s_xamlSourceGuid = new Guid("a0572245-2eab-4c39-9f61-06a6d8c5ddda");
+        private static readonly Guid s_CSharpSourceGuid = new Guid(
+            "b967fea8-e2c3-4984-87d4-71a38f49e16a"
+        );
+        private static readonly Guid s_visualBasicSourceGuid = new Guid(
+            "4de30e93-3e0c-40c2-a4ba-1124da4539f6"
+        );
+        private static readonly Guid s_xamlSourceGuid = new Guid(
+            "a0572245-2eab-4c39-9f61-06a6d8c5ddda"
+        );
 
         private const int InvalidSolutionVersion = -1;
 
@@ -65,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ISuggestedActionCategoryRegistryService suggestedActionCategoryRegistry,
             IAsynchronousOperationListenerProvider listenerProvider,
             IGlobalOptionService globalOptions,
-            [ImportMany] IEnumerable<Lazy<IImageIdService, OrderableMetadata>> imageIdServices)
+            [ImportMany] IEnumerable<Lazy<IImageIdService, OrderableMetadata>> imageIdServices
+        )
         {
             _threadingContext = threadingContext;
             _codeRefactoringService = codeRefactoringService;
@@ -80,7 +87,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ImageIdServices = ExtensionOrderer.Order(imageIdServices).ToImmutableArray();
         }
 
-        public ISuggestedActionsSource? CreateSuggestedActionsSource(ITextView textView, ITextBuffer textBuffer)
+        public ISuggestedActionsSource? CreateSuggestedActionsSource(
+            ITextView textView,
+            ITextBuffer textBuffer
+        )
         {
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(textBuffer);
@@ -90,9 +100,25 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             if (textBuffer.IsInLspEditorContext())
                 return null;
 
-            return _globalOptions.GetOption(SuggestionsOptions.AsynchronousQuickActionsDisableFeatureFlag)
-                ? new SyncSuggestedActionsSource(_threadingContext, _globalOptions, this, textView, textBuffer, _suggestedActionCategoryRegistry)
-                : new AsyncSuggestedActionsSource(_threadingContext, _globalOptions, this, textView, textBuffer, _suggestedActionCategoryRegistry);
+            return _globalOptions.GetOption(
+                SuggestionsOptions.AsynchronousQuickActionsDisableFeatureFlag
+            )
+              ? new SyncSuggestedActionsSource(
+                    _threadingContext,
+                    _globalOptions,
+                    this,
+                    textView,
+                    textBuffer,
+                    _suggestedActionCategoryRegistry
+                )
+              : new AsyncSuggestedActionsSource(
+                    _threadingContext,
+                    _globalOptions,
+                    this,
+                    textView,
+                    textBuffer,
+                    _suggestedActionCategoryRegistry
+                );
         }
     }
 }

@@ -6,6 +6,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
     internal interface IPerLanguageIncrementalAnalyzerProvider
     {
-        IIncrementalAnalyzer CreatePerLanguageIncrementalAnalyzer(Workspace workspace, IIncrementalAnalyzerProvider provider);
+        IIncrementalAnalyzer CreatePerLanguageIncrementalAnalyzer(
+            Workspace workspace,
+            IIncrementalAnalyzerProvider provider
+        );
     }
 }

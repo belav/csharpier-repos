@@ -35,15 +35,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             public DotNetFramework Framework(string name, string version = null)
             {
                 string path = Path.Combine(_dotnet.BinPath, "shared", name);
-                IEnumerable<string> versions =
-                    Directory.Exists(path) ? Directory.GetDirectories(path) : Enumerable.Empty<string>();
+                IEnumerable<string> versions = Directory.Exists(path)
+                  ? Directory.GetDirectories(path)
+                  : Enumerable.Empty<string>();
 
                 if (version == null)
                 {
                     version = versions.FirstOrDefault();
                     if (versions.Skip(1).Any())
                     {
-                        throw new Exception($"Multiple versions of framework {name} found, but no version selector specified.");
+                        throw new Exception(
+                            $"Multiple versions of framework {name} found, but no version selector specified."
+                        );
                     }
                 }
                 else

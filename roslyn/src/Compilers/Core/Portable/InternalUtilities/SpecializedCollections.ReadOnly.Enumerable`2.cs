@@ -13,10 +13,7 @@ namespace Roslyn.Utilities
             internal class Enumerable<TUnderlying, T> : Enumerable<TUnderlying>, IEnumerable<T>
                 where TUnderlying : IEnumerable<T>
             {
-                public Enumerable(TUnderlying underlying)
-                    : base(underlying)
-                {
-                }
+                public Enumerable(TUnderlying underlying) : base(underlying) { }
 
                 public new IEnumerator<T> GetEnumerator()
                 {

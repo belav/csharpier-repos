@@ -3,9 +3,9 @@
 /// <license>
 /// This is a port of the SciMark2a Java Benchmark to C# by
 /// Chris Re (cmr28@cornell.edu) and Werner Vogels (vogels@cs.cornell.edu)
-/// 
+///
 /// For details on the original authors see http://math.nist.gov/scimark2
-/// 
+///
 /// This software is likely to burn your processor, bitflip your memory chips
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
@@ -44,7 +44,6 @@ namespace SciMark2
         private double _left = 0.0;
         private double _right = 1.0;
         private double _width = 1.0;
-
 
         /* ------------------------------------------------------------------------------
 		CONSTRUCTORS
@@ -198,7 +197,6 @@ namespace SciMark2
                     else
                         _j--;
 
-
                     x[count] = _dm1 * (double)k;
                 }
 
@@ -218,7 +216,6 @@ namespace SciMark2
                         _j--;
                     x[count] = _dm1 * (double)k;
 
-
                     k = _m[_i] - _m[_j];
                     if (_i == 0)
                         _i = 16;
@@ -233,7 +230,6 @@ namespace SciMark2
                         _j--;
                     x[count + 1] = _dm1 * (double)k;
 
-
                     k = _m[_i] - _m[_j];
                     if (_i == 0)
                         _i = 16;
@@ -247,7 +243,6 @@ namespace SciMark2
                     else
                         _j--;
                     x[count + 2] = _dm1 * (double)k;
-
 
                     k = _m[_i] - _m[_j];
                     if (_i == 0)
@@ -277,7 +272,12 @@ namespace SciMark2
             _m2 = one << mdig / 2;
             _dm1 = 1.0 / (double)_m1;
 
-            int jseed, k0, k1, j0, j1, iloop;
+            int jseed,
+                k0,
+                k1,
+                j0,
+                j1,
+                iloop;
 
             this.seed = seed;
 

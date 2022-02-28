@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool logParameterValues,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
             : base(
                 eventDefinition,
                 messageGenerator,
@@ -58,8 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 async,
                 logParameterValues,
                 startTime,
-                duration)
-            => Result = result;
+                duration
+            ) => Result = result;
 
         /// <summary>
         ///     Constructs the event payload.
@@ -92,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool logParameterValues,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CommandSource commandSource)
+            CommandSource commandSource
+        )
             : base(
                 eventDefinition,
                 messageGenerator,
@@ -106,8 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 logParameterValues,
                 startTime,
                 duration,
-                commandSource)
-            => Result = result;
+                commandSource
+            ) => Result = result;
 
         /// <summary>
         ///     The result of executing the command.

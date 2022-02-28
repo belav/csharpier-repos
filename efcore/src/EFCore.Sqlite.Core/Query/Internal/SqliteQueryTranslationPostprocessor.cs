@@ -29,10 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         public SqliteQueryTranslationPostprocessor(
             QueryTranslationPostprocessorDependencies dependencies,
             RelationalQueryTranslationPostprocessorDependencies relationalDependencies,
-            QueryCompilationContext queryCompilationContext)
-            : base(dependencies, relationalDependencies, queryCompilationContext)
-        {
-        }
+            QueryCompilationContext queryCompilationContext
+        ) : base(dependencies, relationalDependencies, queryCompilationContext) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,8 +58,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     return extensionExpression;
                 }
 
-                if (extensionExpression is SelectExpression selectExpression
-                    && selectExpression.Tables.Any(t => t is CrossApplyExpression || t is OuterApplyExpression))
+                if (
+                    extensionExpression is SelectExpression selectExpression
+                    && selectExpression.Tables.Any(
+                        t => t is CrossApplyExpression || t is OuterApplyExpression
+                    )
+                )
                 {
                     throw new InvalidOperationException(SqliteStrings.ApplyNotSupported);
                 }

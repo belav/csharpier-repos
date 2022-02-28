@@ -11,7 +11,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IConventionPropertyBase" />.
     /// </summary>
     [Obsolete("Use IConventionPropertyBase")]
-    public static class ConventionPropertyBaseExtensions
-    {
-    }
+    public static class ConventionPropertyBaseExtensions { }
 }

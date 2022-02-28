@@ -6,8 +6,10 @@ using System;
 using System.IO;
 using System.Reflection;
 
-public class CMain{
-    public static int Main(String[] args) {
+public class CMain
+{
+    public static int Main(String[] args)
+    {
         string tempFileName = Path.GetTempFileName();
 
         bool isThrown = false;
@@ -23,11 +25,14 @@ public class CMain{
 
         File.Delete(tempFileName);
 
-        if (isThrown) {
+        if (isThrown)
+        {
             Console.WriteLine("PASS");
 
             return 100;
-        } else {
+        }
+        else
+        {
             Console.WriteLine("FAIL");
 
             return 101;

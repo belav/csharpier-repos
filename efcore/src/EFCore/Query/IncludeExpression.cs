@@ -33,10 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public IncludeExpression(
             Expression entityExpression,
             Expression navigationExpression,
-            INavigationBase navigation)
-            : this(entityExpression, navigationExpression, navigation, setLoaded: true)
-        {
-        }
+            INavigationBase navigation
+        ) : this(entityExpression, navigationExpression, navigation, setLoaded: true) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression entityExpression,
             Expression navigationExpression,
             INavigationBase navigation,
-            bool setLoaded)
+            bool setLoaded
+        )
         {
             EntityExpression = entityExpression;
             NavigationExpression = navigationExpression;
@@ -83,8 +82,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual bool SetLoaded { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
         public override Type Type { get; }
@@ -105,9 +103,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="entityExpression">The <see cref="EntityExpression" /> property of the result.</param>
         /// <param name="navigationExpression">The <see cref="NavigationExpression" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public virtual IncludeExpression Update(Expression entityExpression, Expression navigationExpression)
-            => entityExpression != EntityExpression || navigationExpression != NavigationExpression
-                ? new IncludeExpression(entityExpression, navigationExpression, Navigation, SetLoaded)
+        public virtual IncludeExpression Update(
+            Expression entityExpression,
+            Expression navigationExpression
+        ) =>
+            entityExpression != EntityExpression || navigationExpression != NavigationExpression
+                ? new IncludeExpression(
+                      entityExpression,
+                      navigationExpression,
+                      Navigation,
+                      SetLoaded
+                  )
                 : this;
 
         /// <inheritdoc />

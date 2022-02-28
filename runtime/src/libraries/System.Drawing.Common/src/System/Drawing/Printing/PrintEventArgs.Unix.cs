@@ -33,6 +33,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+
 //NOTE: Complete! Aparently just a redifiniton of CancleEventArgs specific to Printing.
 namespace System.Drawing.Printing
 {
@@ -44,9 +45,7 @@ namespace System.Drawing.Printing
         private GraphicsPrinter? graphics_context;
         private PrintAction action;
 
-        public PrintEventArgs()
-        {
-        }
+        public PrintEventArgs() { }
 
         internal PrintEventArgs(PrintAction action)
         {

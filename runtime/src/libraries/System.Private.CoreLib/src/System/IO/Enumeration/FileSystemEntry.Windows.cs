@@ -14,7 +14,8 @@ namespace System.IO.Enumeration
             Interop.NtDll.FILE_FULL_DIR_INFORMATION* info,
             ReadOnlySpan<char> directory,
             ReadOnlySpan<char> rootDirectory,
-            ReadOnlySpan<char> originalRootDirectory)
+            ReadOnlySpan<char> originalRootDirectory
+        )
         {
             entry._info = info;
             entry.Directory = directory;
@@ -51,9 +52,11 @@ namespace System.IO.Enumeration
         /// <summary>Gets the creation time for the entry or the oldest available time stamp if the operating system does not support creation time stamps.</summary>
         /// <value>The creation time for the entry.</value>
         public DateTimeOffset CreationTimeUtc => _info->CreationTime.ToDateTimeOffset();
+
         /// <summary>Gets a datetime offset that represents the last access time in UTC.</summary>
         /// <value>The last access time in UTC.</value>
         public DateTimeOffset LastAccessTimeUtc => _info->LastAccessTime.ToDateTimeOffset();
+
         /// <summary>Gets a datetime offset that represents the last write time in UTC.</summary>
         /// <value>The last write time in UTC.</value>
         public DateTimeOffset LastWriteTimeUtc => _info->LastWriteTime.ToDateTimeOffset();
@@ -68,12 +71,11 @@ namespace System.IO.Enumeration
 
         /// <summary>Converts the value of this instance to a <see cref="System.IO.FileSystemInfo" />.</summary>
         /// <returns>The value of this instance as a <see cref="System.IO.FileSystemInfo" />.</returns>
-        public FileSystemInfo ToFileSystemInfo()
-            => FileSystemInfo.Create(Path.Join(Directory, FileName), ref this);
+        public FileSystemInfo ToFileSystemInfo() =>
+            FileSystemInfo.Create(Path.Join(Directory, FileName), ref this);
 
         /// <summary>Returns the full path of the find result.</summary>
         /// <returns>A string representing the full path.</returns>
-        public string ToFullPath() =>
-            Path.Join(Directory, FileName);
+        public string ToFullPath() => Path.Join(Directory, FileName);
     }
 }

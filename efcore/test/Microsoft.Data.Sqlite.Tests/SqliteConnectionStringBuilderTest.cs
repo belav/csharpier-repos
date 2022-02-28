@@ -24,8 +24,14 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void Ctor_parses_SharedCache()
         {
-            Assert.Equal(SqliteCacheMode.Private, new SqliteConnectionStringBuilder("Cache=Private").Cache);
-            Assert.Equal(SqliteCacheMode.Shared, new SqliteConnectionStringBuilder("Cache=Shared").Cache);
+            Assert.Equal(
+                SqliteCacheMode.Private,
+                new SqliteConnectionStringBuilder("Cache=Private").Cache
+            );
+            Assert.Equal(
+                SqliteCacheMode.Shared,
+                new SqliteConnectionStringBuilder("Cache=Shared").Cache
+            );
         }
 
         [Fact]
@@ -81,10 +87,7 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void ConnectionString_coalesces_to_empty()
         {
-            var builder = new SqliteConnectionStringBuilder
-            {
-                ConnectionString = null
-            };
+            var builder = new SqliteConnectionStringBuilder { ConnectionString = null };
 
             Assert.Empty(builder.ConnectionString);
         }
@@ -99,7 +102,9 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void It_takes_last_alias_specified()
         {
-            var builder = new SqliteConnectionStringBuilder("Filename=ignore me.db; Data Source=and me too.db; DataSource=this_one.db");
+            var builder = new SqliteConnectionStringBuilder(
+                "Filename=ignore me.db; Data Source=and me too.db; DataSource=this_one.db"
+            );
 
             Assert.Equal("this_one.db", builder.DataSource);
         }
@@ -183,10 +188,14 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void Item_validates_argument()
         {
-            var ex = Assert.Throws<ArgumentException>(() => new SqliteConnectionStringBuilder()["Invalid"]);
+            var ex = Assert.Throws<ArgumentException>(
+                () => new SqliteConnectionStringBuilder()["Invalid"]
+            );
             Assert.Equal(Resources.KeywordNotSupported("Invalid"), ex.Message);
 
-            ex = Assert.Throws<ArgumentException>(() => new SqliteConnectionStringBuilder()["Invalid"] = 0);
+            ex = Assert.Throws<ArgumentException>(
+                () => new SqliteConnectionStringBuilder()["Invalid"] = 0
+            );
             Assert.Equal(Resources.KeywordNotSupported("Invalid"), ex.Message);
         }
 
@@ -280,7 +289,8 @@ namespace Microsoft.Data.Sqlite
         public void Clear_resets_everything()
         {
             var builder = new SqliteConnectionStringBuilder(
-                "Data Source=test.db;Mode=Memory;Cache=Shared;Password=test;Foreign Keys=True;Recursive Triggers=True;Default Timeout=1");
+                "Data Source=test.db;Mode=Memory;Cache=Shared;Password=test;Foreign Keys=True;Recursive Triggers=True;Default Timeout=1"
+            );
 
             builder.Clear();
 
@@ -345,7 +355,10 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void TryGetValue_returns_false_when_not_exists()
         {
-            var retrieved = new SqliteConnectionStringBuilder().TryGetValue("Invalid", out var value);
+            var retrieved = new SqliteConnectionStringBuilder().TryGetValue(
+                "Invalid",
+                out var value
+            );
 
             Assert.False(retrieved);
             Assert.Null(value);
@@ -378,7 +391,8 @@ namespace Microsoft.Data.Sqlite
 
             Assert.Equal(
                 "Data Source=test.db;Mode=Memory;Cache=Shared;Password=test;Foreign Keys=True;Recursive Triggers=True;Default Timeout=1",
-                builder.ToString());
+                builder.ToString()
+            );
         }
 
         [Fact]

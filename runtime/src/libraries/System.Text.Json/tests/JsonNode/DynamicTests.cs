@@ -61,7 +61,10 @@ namespace System.Text.Json.Node.Tests
             options.UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode;
             options.Converters.Add(new JsonStringEnumConverter());
 
-            dynamic obj = JsonSerializer.Deserialize<object>(Serialization.Tests.DynamicTests.Json, options);
+            dynamic obj = JsonSerializer.Deserialize<object>(
+                Serialization.Tests.DynamicTests.Json,
+                options
+            );
             Assert.IsAssignableFrom<JsonObject>(obj);
 
             // JsonValue created from a JSON string.
@@ -73,7 +76,10 @@ namespace System.Text.Json.Node.Tests
             Assert.Equal(42, (int)obj.MyInt);
             Assert.ThrowsAny<RuntimeBinderException>(() => (MyCustomEnum)obj.MyInt);
             // Perform the explicit deserialize on the enum.
-            Assert.Equal(MyCustomEnum.FortyTwo, JsonSerializer.Deserialize<MyCustomEnum>(obj.MyInt.ToJsonString()));
+            Assert.Equal(
+                MyCustomEnum.FortyTwo,
+                JsonSerializer.Deserialize<MyCustomEnum>(obj.MyInt.ToJsonString())
+            );
 
             Assert.Equal(Serialization.Tests.DynamicTests.MyDateTime, (DateTime)obj.MyDateTime);
             Assert.Equal(Serialization.Tests.DynamicTests.MyGuid, (Guid)obj.MyGuid);
@@ -103,7 +109,10 @@ namespace System.Text.Json.Node.Tests
             var options = new JsonSerializerOptions();
             options.UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode;
 
-            dynamic obj = JsonSerializer.Deserialize<object>(Serialization.Tests.DynamicTests.Json, options);
+            dynamic obj = JsonSerializer.Deserialize<object>(
+                Serialization.Tests.DynamicTests.Json,
+                options
+            );
             Assert.IsAssignableFrom<JsonObject>(obj);
             Assert.IsAssignableFrom<JsonArray>(obj.MyArray);
 
@@ -135,7 +144,9 @@ namespace System.Text.Json.Node.Tests
 
             // We can't convert an unquoted string to a Guid
             dynamic dynamicString = JsonValue.Create(GuidJson);
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => (Guid)dynamicString);
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => (Guid)dynamicString
+            );
             // "A value of type 'System.String' cannot be converted to a 'System.Guid'."
             Assert.Contains(typeof(string).ToString(), ex.Message);
             Assert.Contains(typeof(Guid).ToString(), ex.Message);
@@ -182,7 +193,10 @@ namespace System.Text.Json.Node.Tests
             var options = new JsonSerializerOptions();
             options.UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode;
 
-            dynamic obj = JsonSerializer.Deserialize<object>(Serialization.Tests.DynamicTests.Json, options);
+            dynamic obj = JsonSerializer.Deserialize<object>(
+                Serialization.Tests.DynamicTests.Json,
+                options
+            );
             Assert.IsAssignableFrom<JsonObject>(obj);
 
             // Change some primitives.
@@ -263,8 +277,13 @@ namespace System.Text.Json.Node.Tests
             var options = new JsonSerializerOptions();
             options.UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode;
 
-            IEnumerable<dynamic> allOrders = JsonSerializer.Deserialize<IEnumerable<dynamic>>(JsonNodeTests.Linq_Query_Json, options);
-            IEnumerable<dynamic> orders = allOrders.Where(o => ((string)o.Customer.City) == "Fargo");
+            IEnumerable<dynamic> allOrders = JsonSerializer.Deserialize<IEnumerable<dynamic>>(
+                JsonNodeTests.Linq_Query_Json,
+                options
+            );
+            IEnumerable<dynamic> orders = allOrders.Where(
+                o => ((string)o.Customer.City) == "Fargo"
+            );
 
             Assert.Equal(2, orders.Count());
             Assert.Equal(100, (int)orders.ElementAt(0).OrderId);

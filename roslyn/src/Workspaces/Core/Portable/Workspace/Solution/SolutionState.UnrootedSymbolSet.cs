@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis
             private UnrootedSymbolSet(
                 WeakReference<IAssemblySymbol> primaryAssemblySymbol,
                 WeakReference<ITypeSymbol?> primaryDynamicSymbol,
-                ImmutableArray<(int hashCode, WeakReference<ISymbol> symbol)> secondaryReferencedSymbols)
+                ImmutableArray<(int hashCode, WeakReference<ISymbol> symbol)> secondaryReferencedSymbols
+            )
             {
                 PrimaryAssemblySymbol = primaryAssemblySymbol;
                 PrimaryDynamicSymbol = primaryDynamicSymbol;
@@ -67,14 +68,19 @@ namespace Microsoft.CodeAnalysis
                 var primaryAssembly = new WeakReference<IAssemblySymbol>(compilation.Assembly);
 
                 // The dynamic type is also unrooted (i.e. doesn't point back at the compilation or source
-                // assembly).  So we have to keep track of it so we can get back from it to a project in case the 
+                // assembly).  So we have to keep track of it so we can get back from it to a project in case the
                 // underlying compilation is GC'ed.
                 var primaryDynamic = new WeakReference<ITypeSymbol?>(
-                    compilation.Language == LanguageNames.CSharp ? compilation.DynamicType : null);
+                    compilation.Language == LanguageNames.CSharp ? compilation.DynamicType : null
+                );
 
                 // PERF: Preallocate this array so we don't have to resize it as we're adding assembly symbols.
-                using var _ = ArrayBuilder<(int hashcode, WeakReference<ISymbol> symbol)>.GetInstance(
-                    compilation.ExternalReferences.Length + compilation.DirectiveReferences.Length, out var secondarySymbols);
+                using var _ =
+                    ArrayBuilder<(int hashcode, WeakReference<ISymbol> symbol)>.GetInstance(
+                        compilation.ExternalReferences.Length
+                            + compilation.DirectiveReferences.Length,
+                        out var secondarySymbols
+                    );
 
                 foreach (var reference in compilation.References)
                 {
@@ -82,22 +88,31 @@ namespace Microsoft.CodeAnalysis
                     if (symbol == null)
                         continue;
 
-                    secondarySymbols.Add((ReferenceEqualityComparer.GetHashCode(symbol), new WeakReference<ISymbol>(symbol)));
+                    secondarySymbols.Add(
+                        (
+                            ReferenceEqualityComparer.GetHashCode(symbol),
+                            new WeakReference<ISymbol>(symbol)
+                        )
+                    );
                 }
 
                 // Sort all the secondary symbols by their hash.  This will allow us to easily binary search for
                 // them afterwards. Note: it is fine for multiple symbols to have the same reference hash.  The
                 // search algorithm will account for that.
                 secondarySymbols.Sort(WeakSymbolComparer.Instance);
-                return new UnrootedSymbolSet(primaryAssembly, primaryDynamic, secondarySymbols.ToImmutable());
+                return new UnrootedSymbolSet(
+                    primaryAssembly,
+                    primaryDynamic,
+                    secondarySymbols.ToImmutable()
+                );
             }
 
             public bool ContainsAssemblyOrModuleOrDynamic(ISymbol symbol, bool primary)
             {
                 if (primary)
                 {
-                    return symbol.Equals(this.PrimaryAssemblySymbol.GetTarget()) ||
-                           symbol.Equals(this.PrimaryDynamicSymbol.GetTarget());
+                    return symbol.Equals(this.PrimaryAssemblySymbol.GetTarget())
+                        || symbol.Equals(this.PrimaryDynamicSymbol.GetTarget());
                 }
                 else
                 {
@@ -107,7 +122,10 @@ namespace Microsoft.CodeAnalysis
 
                     // The secondary symbol array is sorted by the symbols' hash codes.  So do a binary search to find
                     // the location we should start looking at.
-                    var index = secondarySymbols.BinarySearch((symbolHash, null!), WeakSymbolComparer.Instance);
+                    var index = secondarySymbols.BinarySearch(
+                        (symbolHash, null!),
+                        WeakSymbolComparer.Instance
+                    );
                     if (index < 0)
                         return false;
 
@@ -117,7 +135,10 @@ namespace Microsoft.CodeAnalysis
                         index--;
 
                     // Now, walk forward through the stored symbols with the same hash looking to see if any are a reference match.
-                    while (index < secondarySymbols.Length && secondarySymbols[index].hashCode == symbolHash)
+                    while (
+                        index < secondarySymbols.Length
+                        && secondarySymbols[index].hashCode == symbolHash
+                    )
                     {
                         var cached = secondarySymbols[index].symbol;
                         if (cached.TryGetTarget(out var otherSymbol) && otherSymbol == symbol)
@@ -130,16 +151,17 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            private class WeakSymbolComparer : IComparer<(int hashcode, WeakReference<ISymbol> symbol)>
+            private class WeakSymbolComparer
+                : IComparer<(int hashcode, WeakReference<ISymbol> symbol)>
             {
                 public static readonly WeakSymbolComparer Instance = new WeakSymbolComparer();
 
-                private WeakSymbolComparer()
-                {
-                }
+                private WeakSymbolComparer() { }
 
-                public int Compare((int hashcode, WeakReference<ISymbol> symbol) x, (int hashcode, WeakReference<ISymbol> symbol) y)
-                    => x.hashcode - y.hashcode;
+                public int Compare(
+                    (int hashcode, WeakReference<ISymbol> symbol) x,
+                    (int hashcode, WeakReference<ISymbol> symbol) y
+                ) => x.hashcode - y.hashcode;
             }
         }
     }

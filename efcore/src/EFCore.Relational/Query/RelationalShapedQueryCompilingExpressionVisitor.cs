@@ -15,7 +15,8 @@ using Microsoft.EntityFrameworkCore.Storage;
 namespace Microsoft.EntityFrameworkCore.Query
 {
     /// <inheritdoc />
-    public partial class RelationalShapedQueryCompilingExpressionVisitor : ShapedQueryCompilingExpressionVisitor
+    public partial class RelationalShapedQueryCompilingExpressionVisitor
+        : ShapedQueryCompilingExpressionVisitor
     {
         private readonly Type _contextType;
         private readonly ISet<string> _tags;
@@ -32,16 +33,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalShapedQueryCompilingExpressionVisitor(
             ShapedQueryCompilingExpressionVisitorDependencies dependencies,
             RelationalShapedQueryCompilingExpressionVisitorDependencies relationalDependencies,
-            QueryCompilationContext queryCompilationContext)
-            : base(dependencies, queryCompilationContext)
+            QueryCompilationContext queryCompilationContext
+        ) : base(dependencies, queryCompilationContext)
         {
             RelationalDependencies = relationalDependencies;
 
             _contextType = queryCompilationContext.ContextType;
             _tags = queryCompilationContext.Tags;
-            _threadSafetyChecksEnabled = dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
+            _threadSafetyChecksEnabled =
+                dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
             _detailedErrorsEnabled = dependencies.CoreSingletonOptions.AreDetailedErrorsEnabled;
-            _useRelationalNulls = RelationalOptionsExtension.Extract(queryCompilationContext.ContextOptions).UseRelationalNulls;
+            _useRelationalNulls =
+                RelationalOptionsExtension.Extract(
+                    queryCompilationContext.ContextOptions
+                ).UseRelationalNulls;
         }
 
         /// <summary>
@@ -56,13 +61,23 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             VerifyNoClientConstant(shapedQueryExpression.ShaperExpression);
             var nonComposedFromSql = selectExpression.IsNonComposedFromSql();
-            var querySplittingBehavior = ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior;
+            var querySplittingBehavior =
+                ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior;
             var splitQuery = querySplittingBehavior == QuerySplittingBehavior.SplitQuery;
             var collectionCount = 0;
-            var shaper = new ShaperProcessingExpressionVisitor(this, selectExpression, _tags, splitQuery, nonComposedFromSql).ProcessShaper(
-                shapedQueryExpression.ShaperExpression, out var relationalCommandCache, out var relatedDataLoaders, ref collectionCount);
-            if (querySplittingBehavior == null
-                && collectionCount > 1)
+            var shaper = new ShaperProcessingExpressionVisitor(
+                this,
+                selectExpression,
+                _tags,
+                splitQuery,
+                nonComposedFromSql
+            ).ProcessShaper(
+                shapedQueryExpression.ShaperExpression,
+                out var relationalCommandCache,
+                out var relatedDataLoaders,
+                ref collectionCount
+            );
+            if (querySplittingBehavior == null && collectionCount > 1)
             {
                 QueryCompilationContext.Logger.MultipleCollectionIncludeWarning();
             }
@@ -70,54 +85,89 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (nonComposedFromSql)
             {
                 return Expression.New(
-                    typeof(FromSqlQueryingEnumerable<>).MakeGenericType(shaper.ReturnType).GetConstructors()[0],
-                    Expression.Convert(QueryCompilationContext.QueryContextParameter, typeof(RelationalQueryContext)),
+                    typeof(FromSqlQueryingEnumerable<>)
+                        .MakeGenericType(shaper.ReturnType)
+                        .GetConstructors()[0],
+                    Expression.Convert(
+                        QueryCompilationContext.QueryContextParameter,
+                        typeof(RelationalQueryContext)
+                    ),
                     Expression.Constant(relationalCommandCache),
                     Expression.Constant(
-                        selectExpression.Projection.Select(pe => ((ColumnExpression)pe.Expression).Name).ToList(),
-                        typeof(IReadOnlyList<string>)),
+                        selectExpression.Projection
+                            .Select(pe => ((ColumnExpression)pe.Expression).Name)
+                            .ToList(),
+                        typeof(IReadOnlyList<string>)
+                    ),
                     Expression.Constant(shaper.Compile()),
                     Expression.Constant(_contextType),
                     Expression.Constant(
-                        QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
+                        QueryCompilationContext.QueryTrackingBehavior
+                            == QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                    ),
                     Expression.Constant(_detailedErrorsEnabled),
-                    Expression.Constant(_threadSafetyChecksEnabled));
+                    Expression.Constant(_threadSafetyChecksEnabled)
+                );
             }
 
             if (splitQuery)
             {
                 var relatedDataLoadersParameter = Expression.Constant(
                     QueryCompilationContext.IsAsync ? null : relatedDataLoaders?.Compile(),
-                    typeof(Action<QueryContext, IExecutionStrategy, SplitQueryResultCoordinator>));
+                    typeof(Action<QueryContext, IExecutionStrategy, SplitQueryResultCoordinator>)
+                );
 
                 var relatedDataLoadersAsyncParameter = Expression.Constant(
                     QueryCompilationContext.IsAsync ? relatedDataLoaders?.Compile() : null,
-                    typeof(Func<QueryContext, IExecutionStrategy, SplitQueryResultCoordinator, Task>));
+                    typeof(Func<
+                        QueryContext,
+                        IExecutionStrategy,
+                        SplitQueryResultCoordinator,
+                        Task
+                    >)
+                );
 
                 return Expression.New(
-                    typeof(SplitQueryingEnumerable<>).MakeGenericType(shaper.ReturnType).GetConstructors().Single(),
-                    Expression.Convert(QueryCompilationContext.QueryContextParameter, typeof(RelationalQueryContext)),
+                    typeof(SplitQueryingEnumerable<>)
+                        .MakeGenericType(shaper.ReturnType)
+                        .GetConstructors()
+                        .Single(),
+                    Expression.Convert(
+                        QueryCompilationContext.QueryContextParameter,
+                        typeof(RelationalQueryContext)
+                    ),
                     Expression.Constant(relationalCommandCache),
                     Expression.Constant(shaper.Compile()),
                     relatedDataLoadersParameter,
                     relatedDataLoadersAsyncParameter,
                     Expression.Constant(_contextType),
                     Expression.Constant(
-                        QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
+                        QueryCompilationContext.QueryTrackingBehavior
+                            == QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                    ),
                     Expression.Constant(_detailedErrorsEnabled),
-                    Expression.Constant(_threadSafetyChecksEnabled));
+                    Expression.Constant(_threadSafetyChecksEnabled)
+                );
             }
 
             return Expression.New(
-                typeof(SingleQueryingEnumerable<>).MakeGenericType(shaper.ReturnType).GetConstructors()[0],
-                Expression.Convert(QueryCompilationContext.QueryContextParameter, typeof(RelationalQueryContext)),
+                typeof(SingleQueryingEnumerable<>)
+                    .MakeGenericType(shaper.ReturnType)
+                    .GetConstructors()[0],
+                Expression.Convert(
+                    QueryCompilationContext.QueryContextParameter,
+                    typeof(RelationalQueryContext)
+                ),
                 Expression.Constant(relationalCommandCache),
                 Expression.Constant(shaper.Compile()),
                 Expression.Constant(_contextType),
                 Expression.Constant(
-                    QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
+                    QueryCompilationContext.QueryTrackingBehavior
+                        == QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                ),
                 Expression.Constant(_detailedErrorsEnabled),
-                Expression.Constant(_threadSafetyChecksEnabled));
+                Expression.Constant(_threadSafetyChecksEnabled)
+            );
         }
     }
 }

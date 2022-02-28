@@ -23,7 +23,6 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="source">The collection that the binding list will stay in sync with.</param>
         /// <returns>The binding list.</returns>
         public static BindingList<T> ToBindingList<T>(this ObservableCollection<T> source)
-            where T : class
-            => new ObservableBackedBindingList<T>(source);
+            where T : class => new ObservableBackedBindingList<T>(source);
     }
 }

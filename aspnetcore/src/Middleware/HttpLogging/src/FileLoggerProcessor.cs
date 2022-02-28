@@ -34,7 +34,9 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
     private bool _firstFile = true;
 
     private readonly IOptionsMonitor<W3CLoggerOptions> _options;
-    private readonly BlockingCollection<string> _messageQueue = new BlockingCollection<string>(_maxQueuedMessages);
+    private readonly BlockingCollection<string> _messageQueue = new BlockingCollection<string>(
+        _maxQueuedMessages
+    );
     private readonly ILogger _logger;
     private readonly List<string> _currentBatch = new List<string>();
     private readonly Task _outputTask;
@@ -45,7 +47,11 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
 
     private readonly object _pathLock = new object();
 
-    public FileLoggerProcessor(IOptionsMonitor<W3CLoggerOptions> options, IHostEnvironment environment, ILoggerFactory factory)
+    public FileLoggerProcessor(
+        IOptionsMonitor<W3CLoggerOptions> options,
+        IHostEnvironment environment,
+        ILoggerFactory factory
+    )
     {
         _logger = factory.CreateLogger(typeof(FileLoggerProcessor));
 
@@ -70,36 +76,38 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
         _maxRetainedFiles = loggerOptions.RetainedFileCountLimit;
         _flushInterval = loggerOptions.FlushInterval;
         _fields = loggerOptions.LoggingFields;
-        _options.OnChange(options =>
-        {
-            lock (_pathLock)
+        _options.OnChange(
+            options =>
             {
+                lock (_pathLock)
+                {
                     // Clear the cached settings.
                     loggerOptions = options;
 
                     // Move to a new file if the fields have changed
                     if (_fields != loggerOptions.LoggingFields)
-                {
-                    _fileNumber++;
-                    if (_fileNumber >= W3CLoggerOptions.MaxFileCount)
                     {
-                        _maxFilesReached = true;
-                        Log.MaxFilesReached(_logger);
+                        _fileNumber++;
+                        if (_fileNumber >= W3CLoggerOptions.MaxFileCount)
+                        {
+                            _maxFilesReached = true;
+                            Log.MaxFilesReached(_logger);
+                        }
+                        _fields = loggerOptions.LoggingFields;
                     }
-                    _fields = loggerOptions.LoggingFields;
-                }
 
-                if (!string.IsNullOrEmpty(loggerOptions.LogDirectory))
-                {
-                    _path = loggerOptions.LogDirectory;
-                }
+                    if (!string.IsNullOrEmpty(loggerOptions.LogDirectory))
+                    {
+                        _path = loggerOptions.LogDirectory;
+                    }
 
-                _fileName = loggerOptions.FileName;
-                _maxFileSize = loggerOptions.FileSizeLimit;
-                _maxRetainedFiles = loggerOptions.RetainedFileCountLimit;
-                _flushInterval = loggerOptions.FlushInterval;
+                    _fileName = loggerOptions.FileName;
+                    _maxFileSize = loggerOptions.FileSizeLimit;
+                    _maxRetainedFiles = loggerOptions.RetainedFileCountLimit;
+                    _flushInterval = loggerOptions.FlushInterval;
+                }
             }
-        });
+        );
 
         _today = SystemDateTime.Now;
 
@@ -157,7 +165,10 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
         }
     }
 
-    private async Task WriteMessagesAsync(List<string> messages, CancellationToken cancellationToken)
+    private async Task WriteMessagesAsync(
+        List<string> messages,
+        CancellationToken cancellationToken
+    )
     {
         // Files are written up to _maxFileSize before rolling to a new file
         DateTime today = SystemDateTime.Now;
@@ -241,7 +252,6 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
             RollFiles();
             streamWriter?.Dispose();
         }
-
     }
 
     internal bool TryCreateDirectory()
@@ -263,7 +273,11 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
     }
 
     // Virtual for testing
-    internal virtual async Task WriteMessageAsync(string message, StreamWriter streamWriter, CancellationToken cancellationToken)
+    internal virtual async Task WriteMessageAsync(
+        string message,
+        StreamWriter streamWriter,
+        CancellationToken cancellationToken
+    )
     {
         if (cancellationToken.IsCancellationRequested)
         {
@@ -315,7 +329,12 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
                 _fileNumber = 0;
                 _maxFilesReached = false;
             }
-            return Path.Combine(_path, FormattableString.Invariant($"{_fileName}{date.Year:0000}{date.Month:00}{date.Day:00}.{_fileNumber:0000}.txt"));
+            return Path.Combine(
+                _path,
+                FormattableString.Invariant(
+                    $"{_fileName}{date.Year:0000}{date.Month:00}{date.Day:00}.{_fileNumber:0000}.txt"
+                )
+            );
         }
     }
 
@@ -326,14 +345,28 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
 
     private static partial class Log
     {
-
-        [LoggerMessage(1, LogLevel.Debug, "Failed to write all messages.", EventName = "WriteMessagesFailed")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Failed to write all messages.",
+            EventName = "WriteMessagesFailed"
+        )]
         public static partial void WriteMessagesFailed(ILogger logger, Exception ex);
 
-        [LoggerMessage(2, LogLevel.Debug, "Failed to create directory {Path}.", EventName = "CreateDirectoryFailed")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Failed to create directory {Path}.",
+            EventName = "CreateDirectoryFailed"
+        )]
         public static partial void CreateDirectoryFailed(ILogger logger, string path, Exception ex);
 
-        [LoggerMessage(3, LogLevel.Warning, "Limit of 10000 files per day has been reached", EventName = "MaxFilesReached")]
+        [LoggerMessage(
+            3,
+            LogLevel.Warning,
+            "Limit of 10000 files per day has been reached",
+            EventName = "MaxFilesReached"
+        )]
         public static partial void MaxFilesReached(ILogger logger);
     }
 }

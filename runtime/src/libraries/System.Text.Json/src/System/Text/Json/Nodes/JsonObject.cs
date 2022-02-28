@@ -32,7 +32,10 @@ namespace System.Text.Json.Nodes
         /// </summary>
         /// <param name="properties">The properties to be added.</param>
         /// <param name="options">Options to control the behavior.</param>
-        public JsonObject(IEnumerable<KeyValuePair<string, JsonNode?>> properties, JsonNodeOptions? options = null)
+        public JsonObject(
+            IEnumerable<KeyValuePair<string, JsonNode?>> properties,
+            JsonNodeOptions? options = null
+        )
         {
             foreach (KeyValuePair<string, JsonNode?> node in properties)
             {
@@ -61,7 +64,9 @@ namespace System.Text.Json.Nodes
                 return new JsonObject(element, options);
             }
 
-            throw new InvalidOperationException(SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Object)));
+            throw new InvalidOperationException(
+                SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Object))
+            );
         }
 
         internal JsonObject(JsonElement element, JsonNodeOptions? options = null) : base(options)
@@ -148,7 +153,11 @@ namespace System.Text.Json.Nodes
         {
             InitializeIfRequired();
             Debug.Assert(_dictionary != null);
-            JsonNode? existing = _dictionary.SetValue(propertyName, value, () => value?.AssignParent(this));
+            JsonNode? existing = _dictionary.SetValue(
+                propertyName,
+                value,
+                () => value?.AssignParent(this)
+            );
             DetachParent(existing);
         }
 
@@ -229,7 +238,6 @@ namespace System.Text.Json.Nodes
                         return $"{PropertyName} = JsonArray[{jsonArray.Count}]";
                     }
                 }
-
             }
         }
     }

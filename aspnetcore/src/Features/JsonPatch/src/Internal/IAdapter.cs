@@ -16,39 +16,45 @@ public interface IAdapter
         string segment,
         IContractResolver contractResolver,
         out object nextTarget,
-        out string errorMessage);
+        out string errorMessage
+    );
 
     bool TryAdd(
         object target,
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage);
+        out string errorMessage
+    );
 
     bool TryRemove(
         object target,
         string segment,
         IContractResolver contractResolver,
-        out string errorMessage);
+        out string errorMessage
+    );
 
     bool TryGet(
         object target,
         string segment,
         IContractResolver contractResolver,
         out object value,
-        out string errorMessage);
+        out string errorMessage
+    );
 
     bool TryReplace(
         object target,
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage);
+        out string errorMessage
+    );
 
     bool TryTest(
         object target,
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage);
+        out string errorMessage
+    );
 }

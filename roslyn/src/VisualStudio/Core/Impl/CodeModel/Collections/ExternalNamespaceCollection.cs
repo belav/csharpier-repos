@@ -23,9 +23,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             object parent,
             ProjectId projectId,
-            INamespaceSymbol namespaceSymbol)
+            INamespaceSymbol namespaceSymbol
+        )
         {
-            var collection = new ExternalNamespaceCollection(state, parent, projectId, namespaceSymbol);
+            var collection = new ExternalNamespaceCollection(
+                state,
+                parent,
+                projectId,
+                namespaceSymbol
+            );
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
@@ -33,8 +39,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         private readonly SymbolKey _namespaceSymbolId;
         private ImmutableArray<EnvDTE.CodeElement> _children;
 
-        internal ExternalNamespaceCollection(CodeModelState state, object parent, ProjectId projectId, INamespaceSymbol namespaceSymbol)
-            : base(state, parent)
+        internal ExternalNamespaceCollection(
+            CodeModelState state,
+            object parent,
+            ProjectId projectId,
+            INamespaceSymbol namespaceSymbol
+        ) : base(state, parent)
         {
             _projectId = projectId;
             _namespaceSymbolId = namespaceSymbol.GetSymbolKey();
@@ -46,7 +56,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             {
                 var childrenBuilder = ArrayBuilder<EnvDTE.CodeElement>.GetInstance();
 
-                foreach (var child in ExternalNamespaceEnumerator.ChildrenOfNamespace(this.State, _projectId, _namespaceSymbolId))
+                foreach (
+                    var child in ExternalNamespaceEnumerator.ChildrenOfNamespace(
+                        this.State,
+                        _projectId,
+                        _namespaceSymbolId
+                    )
+                )
                 {
                     childrenBuilder.Add(child);
                 }
@@ -90,7 +106,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             get { return GetChildren().Length; }
         }
 
-        public override System.Collections.IEnumerator GetEnumerator()
-            => ExternalNamespaceEnumerator.Create(this.State, _projectId, _namespaceSymbolId);
+        public override System.Collections.IEnumerator GetEnumerator() =>
+            ExternalNamespaceEnumerator.Create(this.State, _projectId, _namespaceSymbolId);
     }
 }

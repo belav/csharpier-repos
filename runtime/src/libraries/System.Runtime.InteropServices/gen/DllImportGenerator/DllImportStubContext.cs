@@ -21,7 +21,8 @@ namespace Microsoft.Interop
         TargetFramework TargetFramework,
         Version TargetFrameworkVersion,
         bool ModuleSkipLocalsInit,
-        DllImportGeneratorOptions Options)
+        DllImportGeneratorOptions Options
+    )
     {
         /// <summary>
         /// Override for determining if two StubEnvironment instances are
@@ -46,9 +47,7 @@ namespace Microsoft.Interop
         // non-nullable fields/properties on this type in the constructor
         // since we always use a property initializer.
 #pragma warning disable 8618
-        private DllImportStubContext()
-        {
-        }
+        private DllImportStubContext() { }
 #pragma warning restore
 
         public ImmutableArray<TypePositionInfo> ElementTypeInformation { get; init; }
@@ -65,8 +64,10 @@ namespace Microsoft.Interop
             {
                 foreach (TypePositionInfo typeInfo in ElementTypeInformation)
                 {
-                    if (typeInfo.ManagedIndex != TypePositionInfo.UnsetIndex
-                        && typeInfo.ManagedIndex != TypePositionInfo.ReturnIndex)
+                    if (
+                        typeInfo.ManagedIndex != TypePositionInfo.UnsetIndex
+                        && typeInfo.ManagedIndex != TypePositionInfo.ReturnIndex
+                    )
                     {
                         yield return Parameter(Identifier(typeInfo.InstanceIdentifier))
                             .WithType(typeInfo.ManagedType.Syntax)
@@ -87,54 +88,75 @@ namespace Microsoft.Interop
             GeneratedDllImportData dllImportData,
             StubEnvironment env,
             GeneratorDiagnostics diagnostics,
-            CancellationToken token)
+            CancellationToken token
+        )
         {
             // Cancel early if requested
             token.ThrowIfCancellationRequested();
 
             // Determine the namespace
             string? stubTypeNamespace = null;
-            if (!(method.ContainingNamespace is null)
-                && !method.ContainingNamespace.IsGlobalNamespace)
+            if (
+                !(method.ContainingNamespace is null)
+                && !method.ContainingNamespace.IsGlobalNamespace
+            )
             {
                 stubTypeNamespace = method.ContainingNamespace.ToString();
             }
 
             // Determine containing type(s)
-            ImmutableArray<TypeDeclarationSyntax>.Builder containingTypes = ImmutableArray.CreateBuilder<TypeDeclarationSyntax>();
+            ImmutableArray<TypeDeclarationSyntax>.Builder containingTypes =
+                ImmutableArray.CreateBuilder<TypeDeclarationSyntax>();
             INamedTypeSymbol currType = method.ContainingType;
             while (!(currType is null))
             {
                 // Use the declaring syntax as a basis for this type declaration.
                 // Since we're generating source for the method, we know that the current type
                 // has to be declared in source.
-                TypeDeclarationSyntax typeDecl = (TypeDeclarationSyntax)currType.DeclaringSyntaxReferences[0].GetSyntax(token);
+                TypeDeclarationSyntax typeDecl =
+                    (TypeDeclarationSyntax)currType.DeclaringSyntaxReferences[0].GetSyntax(token);
                 // Remove current members, attributes, and base list so we don't double declare them.
-                typeDecl = typeDecl.WithMembers(List<MemberDeclarationSyntax>())
-                                   .WithAttributeLists(List<AttributeListSyntax>())
-                                   .WithBaseList(null);
+                typeDecl = typeDecl
+                    .WithMembers(List<MemberDeclarationSyntax>())
+                    .WithAttributeLists(List<AttributeListSyntax>())
+                    .WithBaseList(null);
 
                 containingTypes.Add(typeDecl);
 
                 currType = currType.ContainingType;
             }
 
-            (ImmutableArray<TypePositionInfo> typeInfos, IMarshallingGeneratorFactory generatorFactory) = GenerateTypeInformation(method, dllImportData, diagnostics, env);
+            (
+                ImmutableArray<TypePositionInfo> typeInfos,
+                IMarshallingGeneratorFactory generatorFactory
+            ) = GenerateTypeInformation(method, dllImportData, diagnostics, env);
 
-            ImmutableArray<AttributeListSyntax>.Builder additionalAttrs = ImmutableArray.CreateBuilder<AttributeListSyntax>();
+            ImmutableArray<AttributeListSyntax>.Builder additionalAttrs =
+                ImmutableArray.CreateBuilder<AttributeListSyntax>();
 
             // Define additional attributes for the stub definition.
-            if (env.TargetFrameworkVersion >= new Version(5, 0) && !MethodIsSkipLocalsInit(env, method))
+            if (
+                env.TargetFrameworkVersion >= new Version(5, 0)
+                && !MethodIsSkipLocalsInit(env, method)
+            )
             {
                 additionalAttrs.Add(
                     AttributeList(
-                        SeparatedList(new[]
-                        {
-                            // Adding the skip locals init indiscriminately since the source generator is
-                            // targeted at non-blittable method signatures which typically will contain locals
-                            // in the generated code.
-                            Attribute(ParseName(TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute))
-                        })));
+                        SeparatedList(
+                            new[]
+                            {
+                                // Adding the skip locals init indiscriminately since the source generator is
+                                // targeted at non-blittable method signatures which typically will contain locals
+                                // in the generated code.
+                                Attribute(
+                                    ParseName(
+                                        TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute
+                                    )
+                                )
+                            }
+                        )
+                    )
+                );
             }
 
             return new DllImportStubContext()
@@ -149,7 +171,12 @@ namespace Microsoft.Interop
             };
         }
 
-        private static (ImmutableArray<TypePositionInfo>, IMarshallingGeneratorFactory) GenerateTypeInformation(IMethodSymbol method, GeneratedDllImportData dllImportData, GeneratorDiagnostics diagnostics, StubEnvironment env)
+        private static (ImmutableArray<TypePositionInfo>, IMarshallingGeneratorFactory) GenerateTypeInformation(
+            IMethodSymbol method,
+            GeneratedDllImportData dllImportData,
+            GeneratorDiagnostics diagnostics,
+            StubEnvironment env
+        )
         {
             // Compute the current default string encoding value.
             CharEncoding defaultEncoding = CharEncoding.Undefined;
@@ -166,31 +193,48 @@ namespace Microsoft.Interop
 
             var defaultInfo = new DefaultMarshallingInfo(defaultEncoding);
 
-            var marshallingAttributeParser = new MarshallingAttributeInfoParser(env.Compilation, diagnostics, defaultInfo, method);
+            var marshallingAttributeParser = new MarshallingAttributeInfoParser(
+                env.Compilation,
+                diagnostics,
+                defaultInfo,
+                method
+            );
 
             // Determine parameter and return types
-            ImmutableArray<TypePositionInfo>.Builder typeInfos = ImmutableArray.CreateBuilder<TypePositionInfo>();
+            ImmutableArray<TypePositionInfo>.Builder typeInfos =
+                ImmutableArray.CreateBuilder<TypePositionInfo>();
             for (int i = 0; i < method.Parameters.Length; i++)
             {
                 IParameterSymbol param = method.Parameters[i];
-                MarshallingInfo marshallingInfo = marshallingAttributeParser.ParseMarshallingInfo(param.Type, param.GetAttributes());
-                var typeInfo = TypePositionInfo.CreateForParameter(param, marshallingInfo, env.Compilation);
-                typeInfo = typeInfo with
-                {
-                    ManagedIndex = i,
-                    NativeIndex = typeInfos.Count
-                };
+                MarshallingInfo marshallingInfo = marshallingAttributeParser.ParseMarshallingInfo(
+                    param.Type,
+                    param.GetAttributes()
+                );
+                var typeInfo = TypePositionInfo.CreateForParameter(
+                    param,
+                    marshallingInfo,
+                    env.Compilation
+                );
+                typeInfo = typeInfo with { ManagedIndex = i, NativeIndex = typeInfos.Count };
                 typeInfos.Add(typeInfo);
             }
 
-            TypePositionInfo retTypeInfo = new(ManagedTypeInfo.CreateTypeInfoForTypeSymbol(method.ReturnType), marshallingAttributeParser.ParseMarshallingInfo(method.ReturnType, method.GetReturnTypeAttributes()));
+            TypePositionInfo retTypeInfo =
+                new(
+                    ManagedTypeInfo.CreateTypeInfoForTypeSymbol(method.ReturnType),
+                    marshallingAttributeParser.ParseMarshallingInfo(
+                        method.ReturnType,
+                        method.GetReturnTypeAttributes()
+                    )
+                );
             retTypeInfo = retTypeInfo with
             {
                 ManagedIndex = TypePositionInfo.ReturnIndex,
                 NativeIndex = TypePositionInfo.ReturnIndex
             };
 
-            InteropGenerationOptions options = new(env.Options.UseMarshalType, env.Options.UseInternalUnsafeType);
+            InteropGenerationOptions options =
+                new(env.Options.UseMarshalType, env.Options.UseInternalUnsafeType);
             IMarshallingGeneratorFactory generatorFactory;
 
             if (env.Options.GenerateForwarders)
@@ -200,10 +244,15 @@ namespace Microsoft.Interop
             else
             {
                 generatorFactory = new DefaultMarshallingGeneratorFactory(options);
-                IMarshallingGeneratorFactory elementFactory = new AttributedMarshallingModelGeneratorFactory(generatorFactory, options);
+                IMarshallingGeneratorFactory elementFactory =
+                    new AttributedMarshallingModelGeneratorFactory(generatorFactory, options);
                 // We don't need to include the later generator factories for collection elements
                 // as the later generator factories only apply to parameters or to the synthetic return value for PreserveSig support.
-                generatorFactory = new AttributedMarshallingModelGeneratorFactory(generatorFactory, elementFactory, options);
+                generatorFactory = new AttributedMarshallingModelGeneratorFactory(
+                    generatorFactory,
+                    elementFactory,
+                    options
+                );
                 if (!dllImportData.PreserveSig)
                 {
                     // Create type info for native out param
@@ -222,14 +271,16 @@ namespace Microsoft.Interop
                     }
 
                     // Use a marshalling generator that supports the HRESULT return->exception marshalling.
-                    generatorFactory = new NoPreserveSigMarshallingGeneratorFactory(generatorFactory);
+                    generatorFactory = new NoPreserveSigMarshallingGeneratorFactory(
+                        generatorFactory
+                    );
 
                     // Create type info for native HRESULT return
-                    retTypeInfo = new TypePositionInfo(SpecialTypeInfo.Int32, NoMarshallingInfo.Instance);
-                    retTypeInfo = retTypeInfo with
-                    {
-                        NativeIndex = TypePositionInfo.ReturnIndex
-                    };
+                    retTypeInfo = new TypePositionInfo(
+                        SpecialTypeInfo.Int32,
+                        NoMarshallingInfo.Instance
+                    );
+                    retTypeInfo = retTypeInfo with { NativeIndex = TypePositionInfo.ReturnIndex };
                 }
 
                 generatorFactory = new ByValueContentsMarshalKindValidator(generatorFactory);
@@ -251,9 +302,15 @@ namespace Microsoft.Interop
             return other is not null
                 && StubTypeNamespace == other.StubTypeNamespace
                 && ElementTypeInformation.SequenceEqual(other.ElementTypeInformation)
-                && StubContainingTypes.SequenceEqual(other.StubContainingTypes, (IEqualityComparer<TypeDeclarationSyntax>)SyntaxEquivalentComparer.Instance)
+                && StubContainingTypes.SequenceEqual(
+                    other.StubContainingTypes,
+                    (IEqualityComparer<TypeDeclarationSyntax>)SyntaxEquivalentComparer.Instance
+                )
                 && StubReturnType.IsEquivalentTo(other.StubReturnType)
-                && AdditionalAttributes.SequenceEqual(other.AdditionalAttributes, (IEqualityComparer<AttributeListSyntax>)SyntaxEquivalentComparer.Instance)
+                && AdditionalAttributes.SequenceEqual(
+                    other.AdditionalAttributes,
+                    (IEqualityComparer<AttributeListSyntax>)SyntaxEquivalentComparer.Instance
+                )
                 && Options.Equals(other.Options);
         }
 
@@ -274,7 +331,11 @@ namespace Microsoft.Interop
                 return true;
             }
 
-            for (INamedTypeSymbol type = method.ContainingType; type is not null; type = type.ContainingType)
+            for (
+                INamedTypeSymbol type = method.ContainingType;
+                type is not null;
+                type = type.ContainingType
+            )
             {
                 if (type.GetAttributes().Any(a => IsSkipLocalsInitAttribute(a)))
                 {
@@ -286,8 +347,9 @@ namespace Microsoft.Interop
 
             return false;
 
-            static bool IsSkipLocalsInitAttribute(AttributeData a)
-                => a.AttributeClass?.ToDisplayString() == TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute;
+            static bool IsSkipLocalsInitAttribute(AttributeData a) =>
+                a.AttributeClass?.ToDisplayString()
+                == TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute;
         }
     }
 }

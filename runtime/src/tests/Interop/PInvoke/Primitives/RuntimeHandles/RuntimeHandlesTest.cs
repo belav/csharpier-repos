@@ -10,23 +10,24 @@ class TestClass
 {
     public int field;
 
-    public void Method()
-    {
-    }
+    public void Method() { }
 }
 
 class RuntimeHandlesTest
 {
     [DllImport("RuntimeHandlesNative")]
     private static extern bool Marshal_In(RuntimeMethodHandle expected, IntPtr handle);
+
     [DllImport("RuntimeHandlesNative")]
     private static extern bool Marshal_In(RuntimeFieldHandle expected, IntPtr handle);
+
     [DllImport("RuntimeHandlesNative")]
     private static extern bool Marshal_In(RuntimeTypeHandle expected, IntPtr handle);
 
     private static void TestRuntimeMethodHandle()
     {
-        RuntimeMethodHandle handle = typeof(TestClass).GetMethod(nameof(TestClass.Method)).MethodHandle;
+        RuntimeMethodHandle handle =
+            typeof(TestClass).GetMethod(nameof(TestClass.Method)).MethodHandle;
         Assert.True(Marshal_In(handle, handle.Value));
     }
 

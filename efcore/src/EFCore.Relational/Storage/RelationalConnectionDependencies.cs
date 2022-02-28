@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             INamedConnectionStringResolver connectionStringResolver,
             IRelationalTransactionFactory relationalTransactionFactory,
             ICurrentDbContext currentContext,
-            IRelationalCommandBuilderFactory relationalCommandBuilderFactory)
+            IRelationalCommandBuilderFactory relationalCommandBuilderFactory
+        )
         {
             ContextOptions = contextOptions;
             TransactionLogger = transactionLogger;

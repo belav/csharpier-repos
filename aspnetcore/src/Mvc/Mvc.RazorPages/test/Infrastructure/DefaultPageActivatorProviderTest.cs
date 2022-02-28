@@ -24,7 +24,8 @@ public class DefaultPageActivatorProviderTest
         ExceptionAssert.ThrowsArgument(
             () => activator.CreateActivator(descriptor),
             "actionDescriptor",
-            "The 'PageTypeInfo' property of 'actionDescriptor' must not be null.");
+            "The 'PageTypeInfo' property of 'actionDescriptor' must not be null."
+        );
     }
 
     [Theory]
@@ -35,11 +36,7 @@ public class DefaultPageActivatorProviderTest
         // Arrange
         var pageContext = new PageContext();
         var viewContext = new ViewContext();
-        var descriptor = new CompiledPageActionDescriptor
-        {
-            PageTypeInfo = type.GetTypeInfo(),
-        };
-
+        var descriptor = new CompiledPageActionDescriptor { PageTypeInfo = type.GetTypeInfo(), };
 
         var activator = new DefaultPageActivatorProvider();
 
@@ -78,10 +75,9 @@ public class DefaultPageActivatorProviderTest
         var page = new TestPage();
 
         // Act
-        var releaser = activator.CreateReleaser(new CompiledPageActionDescriptor
-        {
-            PageTypeInfo = pageType.GetTypeInfo()
-        });
+        var releaser = activator.CreateReleaser(
+            new CompiledPageActionDescriptor { PageTypeInfo = pageType.GetTypeInfo() }
+        );
 
         // Assert
         Assert.Null(releaser);
@@ -98,10 +94,9 @@ public class DefaultPageActivatorProviderTest
         var page = new TestPage();
 
         // Act
-        var releaser = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-        {
-            PageTypeInfo = pageType.GetTypeInfo()
-        });
+        var releaser = activator.CreateAsyncReleaser(
+            new CompiledPageActionDescriptor { PageTypeInfo = pageType.GetTypeInfo() }
+        );
 
         // Assert
         Assert.Null(releaser);
@@ -117,10 +112,9 @@ public class DefaultPageActivatorProviderTest
         var page = new DisposablePage();
 
         // Act & Assert
-        var disposer = activator.CreateReleaser(new CompiledPageActionDescriptor
-        {
-            PageTypeInfo = page.GetType().GetTypeInfo()
-        });
+        var disposer = activator.CreateReleaser(
+            new CompiledPageActionDescriptor { PageTypeInfo = page.GetType().GetTypeInfo() }
+        );
         Assert.NotNull(disposer);
         disposer(context, viewContext, page);
 
@@ -138,10 +132,9 @@ public class DefaultPageActivatorProviderTest
         var page = new DisposablePage();
 
         // Act & Assert
-        var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-        {
-            PageTypeInfo = page.GetType().GetTypeInfo()
-        });
+        var disposer = activator.CreateAsyncReleaser(
+            new CompiledPageActionDescriptor { PageTypeInfo = page.GetType().GetTypeInfo() }
+        );
         Assert.NotNull(disposer);
         disposer(context, viewContext, page);
 
@@ -159,10 +152,9 @@ public class DefaultPageActivatorProviderTest
         var page = new AsyncDisposablePage();
 
         // Act & Assert
-        var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-        {
-            PageTypeInfo = page.GetType().GetTypeInfo()
-        });
+        var disposer = activator.CreateAsyncReleaser(
+            new CompiledPageActionDescriptor { PageTypeInfo = page.GetType().GetTypeInfo() }
+        );
         Assert.NotNull(disposer);
         await disposer(context, viewContext, page);
 
@@ -180,10 +172,9 @@ public class DefaultPageActivatorProviderTest
         var page = new DisposableAndAsyncDisposablePage();
 
         // Act & Assert
-        var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-        {
-            PageTypeInfo = page.GetType().GetTypeInfo()
-        });
+        var disposer = activator.CreateAsyncReleaser(
+            new CompiledPageActionDescriptor { PageTypeInfo = page.GetType().GetTypeInfo() }
+        );
         Assert.NotNull(disposer);
         await disposer(context, viewContext, page);
 
@@ -202,15 +193,9 @@ public class DefaultPageActivatorProviderTest
 
     private class PageWithMultipleConstructors : Page
     {
-        public PageWithMultipleConstructors(int x)
-        {
+        public PageWithMultipleConstructors(int x) { }
 
-        }
-
-        public PageWithMultipleConstructors()
-        {
-
-        }
+        public PageWithMultipleConstructors() { }
 
         public override Task ExecuteAsync()
         {
@@ -220,9 +205,7 @@ public class DefaultPageActivatorProviderTest
 
     private class PageWithoutParameterlessConstructor : Page
     {
-        public PageWithoutParameterlessConstructor(ILogger logger)
-        {
-        }
+        public PageWithoutParameterlessConstructor(ILogger logger) { }
 
         public override Task ExecuteAsync()
         {

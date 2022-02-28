@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             bool fixedLength = false,
             ValueComparer? comparer = null,
             SqlDbType? sqlDbType = null,
-            StoreTypePostfix? storeTypePostfix = null)
+            StoreTypePostfix? storeTypePostfix = null
+        )
             : this(
                 new RelationalTypeMappingParameters(
                     new CoreTypeMappingParameters(typeof(byte[]), null, comparer),
@@ -44,10 +45,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                     storeTypePostfix ?? StoreTypePostfix.Size,
                     System.Data.DbType.Binary,
                     size: size,
-                    fixedLength: fixedLength),
-                sqlDbType)
-        {
-        }
+                    fixedLength: fixedLength
+                ),
+                sqlDbType
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -55,22 +56,25 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected SqlServerByteArrayTypeMapping(RelationalTypeMappingParameters parameters, SqlDbType? sqlDbType)
-            : base(parameters)
+        protected SqlServerByteArrayTypeMapping(
+            RelationalTypeMappingParameters parameters,
+            SqlDbType? sqlDbType
+        ) : base(parameters)
         {
             _sqlDbType = sqlDbType;
         }
 
-        private static int CalculateSize(int? size)
-            => size.HasValue && size < MaxSize ? size.Value : MaxSize;
+        private static int CalculateSize(int? size) =>
+            size.HasValue && size < MaxSize ? size.Value : MaxSize;
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters">The parameters for this mapping.</param>
         /// <returns>The newly created mapping.</returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new SqlServerByteArrayTypeMapping(parameters, _sqlDbType);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new SqlServerByteArrayTypeMapping(parameters, _sqlDbType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,27 +88,23 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             var length = (value as byte[])?.Length;
             var maxSpecificSize = CalculateSize(Size);
 
-            if (_sqlDbType.HasValue
-                && parameter is SqlParameter sqlParameter) // To avoid crashing wrapping providers
+            if (_sqlDbType.HasValue && parameter is SqlParameter sqlParameter) // To avoid crashing wrapping providers
             {
                 sqlParameter.SqlDbType = _sqlDbType.Value;
             }
 
-            if (value == null
-                || value == DBNull.Value)
+            if (value == null || value == DBNull.Value)
             {
                 parameter.Size = maxSpecificSize;
             }
             else
             {
-                if (length != null
-                    && length <= maxSpecificSize)
+                if (length != null && length <= maxSpecificSize)
                 {
                     // Fixed-sized parameters get exact length to avoid padding/truncation.
                     parameter.Size = IsFixedLength ? length.Value : maxSpecificSize;
                 }
-                else if (length != null
-                    && length <= MaxSize)
+                else if (length != null && length <= MaxSize)
                 {
                     parameter.Size = IsFixedLength ? length.Value : MaxSize;
                 }

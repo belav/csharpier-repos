@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
         /// <param name="columnMap">The map of CLR properties to <see cref="AddColumnOperation" />s.</param>
         public CreateTableBuilder(
             CreateTableOperation operation,
-            IReadOnlyDictionary<PropertyInfo, AddColumnOperation> columnMap)
-            : base(operation)
+            IReadOnlyDictionary<PropertyInfo, AddColumnOperation> columnMap
+        ) : base(operation)
         {
             Check.NotNull(columnMap, nameof(columnMap));
 
@@ -53,15 +53,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
             string? principalColumn = null,
             string? principalSchema = null,
             ReferentialAction onUpdate = ReferentialAction.NoAction,
-            ReferentialAction onDelete = ReferentialAction.NoAction)
-            => ForeignKey(
+            ReferentialAction onDelete = ReferentialAction.NoAction
+        ) =>
+            ForeignKey(
                 name,
                 column,
                 principalTable,
                 principalColumn == null ? null : new[] { principalColumn },
                 principalSchema,
                 onUpdate,
-                onDelete);
+                onDelete
+            );
 
         /// <summary>
         ///     Configures a multiple-column (composite) foreign key on the table.
@@ -81,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
             string[]? principalColumns,
             string? principalSchema = null,
             ReferentialAction onUpdate = ReferentialAction.NoAction,
-            ReferentialAction onDelete = ReferentialAction.NoAction)
+            ReferentialAction onDelete = ReferentialAction.NoAction
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(columns, nameof(columns));
@@ -112,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
         /// <returns>The same builder so that multiple calls can be chained.</returns>
         public virtual OperationBuilder<AddPrimaryKeyOperation> PrimaryKey(
             string name,
-            Expression<Func<TColumns, object>> columns)
+            Expression<Func<TColumns, object>> columns
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(columns, nameof(columns));
@@ -138,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
         /// <returns>The same builder so that multiple calls can be chained.</returns>
         public virtual OperationBuilder<AddUniqueConstraintOperation> UniqueConstraint(
             string name,
-            Expression<Func<TColumns, object>> columns)
+            Expression<Func<TColumns, object>> columns
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(columns, nameof(columns));
@@ -163,7 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
         /// <returns>The same builder so that multiple calls can be chained.</returns>
         public virtual OperationBuilder<AddCheckConstraintOperation> CheckConstraint(
             string name,
-            string sql)
+            string sql
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(sql, nameof(sql));
@@ -186,10 +192,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
         /// <param name="name">The annotation name.</param>
         /// <param name="value">The annotation value.</param>
         /// <returns>The same builder so that multiple calls can be chained.</returns>
-        public new virtual CreateTableBuilder<TColumns> Annotation(string name, object value)
-            => (CreateTableBuilder<TColumns>)base.Annotation(name, value);
+        public new virtual CreateTableBuilder<TColumns> Annotation(string name, object value) =>
+            (CreateTableBuilder<TColumns>)base.Annotation(name, value);
 
-        private string[] Map(LambdaExpression columns)
-            => columns.GetPropertyAccessList().Select(c => _columnMap[c].Name).ToArray();
+        private string[] Map(LambdaExpression columns) =>
+            columns.GetPropertyAccessList().Select(c => _columnMap[c].Name).ToArray();
     }
 }

@@ -30,9 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TupleNameCompletionProvider()
-        {
-        }
+        public TupleNameCompletionProvider() { }
 
         internal override string Language => LanguageNames.CSharp;
 
@@ -44,9 +42,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var position = completionContext.Position;
                 var cancellationToken = completionContext.CancellationToken;
 
-                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                    .ConfigureAwait(false);
 
-                var context = CSharpSyntaxContext.CreateContext(document, semanticModel, position, cancellationToken);
+                var context = CSharpSyntaxContext.CreateContext(
+                    document,
+                    semanticModel,
+                    position,
+                    cancellationToken
+                );
 
                 var index = GetElementIndex(context);
                 if (index == null)
@@ -55,12 +60,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
 
                 var typeInferrer = document.GetRequiredLanguageService<ITypeInferenceService>();
-                var inferredTypes = typeInferrer.InferTypes(semanticModel, context.TargetToken.Parent!.SpanStart, cancellationToken)
-                        .Where(t => t.IsTupleType)
-                        .Cast<INamedTypeSymbol>()
-                        .ToImmutableArray();
+                var inferredTypes = typeInferrer
+                    .InferTypes(
+                        semanticModel,
+                        context.TargetToken.Parent!.SpanStart,
+                        cancellationToken
+                    )
+                    .Where(t => t.IsTupleType)
+                    .Cast<INamedTypeSymbol>()
+                    .ToImmutableArray();
 
-                AddItems(inferredTypes, index.Value, completionContext, context.TargetToken.Parent.SpanStart);
+                AddItems(
+                    inferredTypes,
+                    index.Value,
+                    completionContext,
+                    context.TargetToken.Parent.SpanStart
+                );
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e))
             {
@@ -73,23 +88,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var token = context.TargetToken;
             if (token.IsKind(SyntaxKind.OpenParenToken))
             {
-                if (token.Parent.IsKind(SyntaxKind.ParenthesizedExpression,
-                    SyntaxKind.TupleExpression,
-                    SyntaxKind.CastExpression))
+                if (
+                    token.Parent.IsKind(
+                        SyntaxKind.ParenthesizedExpression,
+                        SyntaxKind.TupleExpression,
+                        SyntaxKind.CastExpression
+                    )
+                )
                 {
                     return 0;
                 }
             }
 
-            if (token.IsKind(SyntaxKind.CommaToken) && token.Parent is TupleExpressionSyntax tupleExpr)
+            if (
+                token.IsKind(SyntaxKind.CommaToken)
+                && token.Parent is TupleExpressionSyntax tupleExpr
+            )
             {
-                return (tupleExpr.Arguments.GetWithSeparators().IndexOf(context.TargetToken) + 1) / 2;
+                return (tupleExpr.Arguments.GetWithSeparators().IndexOf(context.TargetToken) + 1)
+                    / 2;
             }
 
             return null;
         }
 
-        private static void AddItems(ImmutableArray<INamedTypeSymbol> inferredTypes, int index, CompletionContext context, int spanStart)
+        private static void AddItems(
+            ImmutableArray<INamedTypeSymbol> inferredTypes,
+            int index,
+            CompletionContext context,
+            int spanStart
+        )
         {
             foreach (var type in inferredTypes)
             {
@@ -104,21 +132,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 var field = type.TupleElements[index];
 
-                context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                  displayText: field.Name,
-                  displayTextSuffix: ColonString,
-                  symbols: ImmutableArray.Create(field),
-                  rules: CompletionItemRules.Default,
-                  contextPosition: spanStart,
-                  filterText: field.Name));
+                context.AddItem(
+                    SymbolCompletionItem.CreateWithSymbolId(
+                        displayText: field.Name,
+                        displayTextSuffix: ColonString,
+                        symbols: ImmutableArray.Create(field),
+                        rules: CompletionItemRules.Default,
+                        contextPosition: spanStart,
+                        filterText: field.Name
+                    )
+                );
             }
         }
 
-        protected override Task<TextChange?> GetTextChangeAsync(CompletionItem selectedItem, char? ch, CancellationToken cancellationToken)
+        protected override Task<TextChange?> GetTextChangeAsync(
+            CompletionItem selectedItem,
+            char? ch,
+            CancellationToken cancellationToken
+        )
         {
-            return Task.FromResult<TextChange?>(new TextChange(
-                selectedItem.Span,
-                selectedItem.DisplayText));
+            return Task.FromResult<TextChange?>(
+                new TextChange(selectedItem.Span, selectedItem.DisplayText)
+            );
         }
 
         public override ImmutableHashSet<char> TriggerCharacters => ImmutableHashSet<char>.Empty;

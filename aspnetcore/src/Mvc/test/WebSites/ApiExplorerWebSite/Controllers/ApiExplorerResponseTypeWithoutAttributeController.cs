@@ -10,9 +10,7 @@ namespace ApiExplorerWebSite;
 public class ApiExplorerResponseTypeWithoutAttributeController : Controller
 {
     [HttpGet]
-    public void GetVoid()
-    {
-    }
+    public void GetVoid() { }
 
     [HttpGet]
     public object GetObject()

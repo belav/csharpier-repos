@@ -49,15 +49,12 @@ namespace System.Diagnostics.Tracing
         /// The types of the fields in the event. This value must not be null.
         /// </param>
 #if !ES_BUILD_STANDALONE
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
 #endif
-        internal TraceLoggingEventTypes(
-            string name,
-            EventTags tags,
-            params Type[] types)
-            : this(tags, name, MakeArray(types))
-        {
-        }
+        internal TraceLoggingEventTypes(string name, EventTags tags, params Type[] types)
+            : this(tags, name, MakeArray(types)) { }
 
         /// <summary>
         /// Returns a new instance of TraceLoggingEventInfo corresponding to the name,
@@ -80,18 +77,19 @@ namespace System.Diagnostics.Tracing
         internal TraceLoggingEventTypes(
             string name,
             EventTags tags,
-            params TraceLoggingTypeInfo[] typeInfos)
-            : this(tags, name, MakeArray(typeInfos))
-        {
-        }
+            params TraceLoggingTypeInfo[] typeInfos
+        ) : this(tags, name, MakeArray(typeInfos)) { }
 
 #if !ES_BUILD_STANDALONE
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
 #endif
         internal TraceLoggingEventTypes(
             string name,
             EventTags tags,
-            System.Reflection.ParameterInfo[] paramInfos)
+            System.Reflection.ParameterInfo[] paramInfos
+        )
         {
             if (name == null)
             {
@@ -130,7 +128,8 @@ namespace System.Diagnostics.Tracing
         private TraceLoggingEventTypes(
             EventTags tags,
             string defaultName,
-            TraceLoggingTypeInfo[] typeInfos)
+            TraceLoggingTypeInfo[] typeInfos
+        )
         {
             if (defaultName == null)
             {
@@ -183,13 +182,17 @@ namespace System.Diagnostics.Tracing
         internal EventTags Tags => this.tags;
 
         internal NameInfo GetNameInfo(string name, EventTags tags) =>
-            this.nameInfos.TryGet(new KeyValuePair<string, EventTags>(name, tags)) ??
-                this.nameInfos.GetOrAdd(new NameInfo(name, tags, this.typeMetadata.Length));
+            this.nameInfos.TryGet(new KeyValuePair<string, EventTags>(name, tags))
+            ?? this.nameInfos.GetOrAdd(new NameInfo(name, tags, this.typeMetadata.Length));
 
 #if !ES_BUILD_STANDALONE
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
 #endif
-        private static TraceLoggingTypeInfo[] MakeArray(System.Reflection.ParameterInfo[] paramInfos)
+        private static TraceLoggingTypeInfo[] MakeArray(
+            System.Reflection.ParameterInfo[] paramInfos
+        )
         {
             if (paramInfos == null)
             {
@@ -200,14 +203,19 @@ namespace System.Diagnostics.Tracing
             var result = new TraceLoggingTypeInfo[paramInfos.Length];
             for (int i = 0; i < paramInfos.Length; ++i)
             {
-                result[i] = TraceLoggingTypeInfo.GetInstance(paramInfos[i].ParameterType, recursionCheck);
+                result[i] = TraceLoggingTypeInfo.GetInstance(
+                    paramInfos[i].ParameterType,
+                    recursionCheck
+                );
             }
 
             return result;
         }
 
 #if !ES_BUILD_STANDALONE
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
 #endif
         private static TraceLoggingTypeInfo[] MakeArray(Type[] types)
         {
@@ -226,8 +234,7 @@ namespace System.Diagnostics.Tracing
             return result;
         }
 
-        private static TraceLoggingTypeInfo[] MakeArray(
-            TraceLoggingTypeInfo[] typeInfos)
+        private static TraceLoggingTypeInfo[] MakeArray(TraceLoggingTypeInfo[] typeInfos)
         {
             if (typeInfos == null)
             {
@@ -238,8 +245,7 @@ namespace System.Diagnostics.Tracing
         }
 
 #if FEATURE_PERFTRACING
-        private static string[] MakeParamNameArray(
-            System.Reflection.ParameterInfo[] paramInfos)
+        private static string[] MakeParamNameArray(System.Reflection.ParameterInfo[] paramInfos)
         {
             string[] paramNames = new string[paramInfos.Length];
             for (int i = 0; i < paramNames.Length; i++)

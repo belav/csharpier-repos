@@ -12,8 +12,7 @@ namespace System
     /// <summary>Defines a floating-point type.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IFloatingPoint<TSelf>
-        : ISignedNumber<TSelf>
+    public interface IFloatingPoint<TSelf> : ISignedNumber<TSelf>
         where TSelf : IFloatingPoint<TSelf>
     {
         /// <summary>Gets the mathematical constant <c>e</c>.</summary>
@@ -138,8 +137,7 @@ namespace System
         /// <summary>Computes the integer logarithm of a value.</summary>
         /// <param name="x">The value whose integer logarithm is to be computed.</param>
         /// <returns>The integer logarithm of <paramref name="x" />.</returns>
-        static abstract TInteger ILogB<TInteger>(TSelf x)
-            where TInteger : IBinaryInteger<TInteger>;
+        static abstract TInteger ILogB<TInteger>(TSelf x) where TInteger : IBinaryInteger<TInteger>;
 
         /// <summary>Determines if a value is finite.</summary>
         /// <param name="value">The value to be checked.</param>
@@ -333,10 +331,6 @@ namespace System
     /// <summary>Defines a floating-point type that is represented in a base-2 format.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IBinaryFloatingPoint<TSelf>
-        : IBinaryNumber<TSelf>,
-          IFloatingPoint<TSelf>
-        where TSelf : IBinaryFloatingPoint<TSelf>
-    {
-    }
+    public interface IBinaryFloatingPoint<TSelf> : IBinaryNumber<TSelf>, IFloatingPoint<TSelf>
+        where TSelf : IBinaryFloatingPoint<TSelf> { }
 }

@@ -35,31 +35,68 @@ using Xunit;
 
 namespace System.Drawing.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34591",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class BitmapTests : FileCleanupTestBase
     {
         public static IEnumerable<object[]> Ctor_FilePath_TestData()
         {
-            yield return new object[] { "16x16_one_entry_4bit.ico", 16, 16, PixelFormat.Format32bppArgb, ImageFormat.Icon };
-            yield return new object[] { "bitmap_173x183_indexed_8bit.bmp", 173, 183, PixelFormat.Format8bppIndexed, ImageFormat.Bmp };
-            yield return new object[] { "16x16_nonindexed_24bit.png", 16, 16, PixelFormat.Format24bppRgb, ImageFormat.Png };
+            yield return new object[]
+            {
+                "16x16_one_entry_4bit.ico",
+                16,
+                16,
+                PixelFormat.Format32bppArgb,
+                ImageFormat.Icon
+            };
+            yield return new object[]
+            {
+                "bitmap_173x183_indexed_8bit.bmp",
+                173,
+                183,
+                PixelFormat.Format8bppIndexed,
+                ImageFormat.Bmp
+            };
+            yield return new object[]
+            {
+                "16x16_nonindexed_24bit.png",
+                16,
+                16,
+                PixelFormat.Format24bppRgb,
+                ImageFormat.Png
+            };
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void UnixSupportDisabledThrows()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppContext.SetSwitch("System.Drawing.EnableUnixSupport", false);
-                TypeInitializationException exception = Assert.Throws<TypeInitializationException>(() => new Bitmap(100, 100));
-                Assert.IsType<PlatformNotSupportedException>(exception.InnerException);
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        AppContext.SetSwitch("System.Drawing.EnableUnixSupport", false);
+                        TypeInitializationException exception =
+                            Assert.Throws<TypeInitializationException>(() => new Bitmap(100, 100));
+                        Assert.IsType<PlatformNotSupportedException>(exception.InnerException);
+                    }
+                )
+                .Dispose();
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_FilePath_TestData))]
-        public void Ctor_FilePath(string filename, int width, int height, PixelFormat pixelFormat, ImageFormat rawFormat)
+        public void Ctor_FilePath(
+            string filename,
+            int width,
+            int height,
+            PixelFormat pixelFormat,
+            ImageFormat rawFormat
+        )
         {
             using (var bitmap = new Bitmap(Helpers.GetTestBitmapPath(filename)))
             {
@@ -72,7 +109,13 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_FilePath_TestData))]
-        public void Ctor_FilePath_UseIcm(string filename, int width, int height, PixelFormat pixelFormat, ImageFormat rawFormat)
+        public void Ctor_FilePath_UseIcm(
+            string filename,
+            int width,
+            int height,
+            PixelFormat pixelFormat,
+            ImageFormat rawFormat
+        )
         {
             foreach (bool useIcm in new bool[] { true, false })
             {
@@ -90,7 +133,10 @@ namespace System.Drawing.Tests
         public void Ctor_NullFilePath_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("path", () => new Bitmap((string)null));
-            AssertExtensions.Throws<ArgumentNullException>("path", () => new Bitmap((string)null, false));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => new Bitmap((string)null, false)
+            );
         }
 
         [ConditionalTheory(Helpers.IsWindowsOrAtLeastLibgdiplus6)]
@@ -100,8 +146,16 @@ namespace System.Drawing.Tests
         public void Ctor_InvalidFilePath_ThrowsArgumentException(string filename, string paramName)
         {
             AssertExtensions.Throws<ArgumentException>(paramName, null, () => new Bitmap(filename));
-            AssertExtensions.Throws<ArgumentException>(paramName, null, () => new Bitmap(filename, false));
-            AssertExtensions.Throws<ArgumentException>(paramName, null, () => new Bitmap(filename, true));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                null,
+                () => new Bitmap(filename, false)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                null,
+                () => new Bitmap(filename, true)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -119,7 +173,10 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("type", () => new Bitmap(null, "name"));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "type",
+                () => new Bitmap(null, "name")
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -135,12 +192,22 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_InvalidResource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("resource", null, () => new Bitmap(typeof(Bitmap), null));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "resource",
+                null,
+                () => new Bitmap(typeof(Bitmap), null)
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_FilePath_TestData))]
-        public void Ctor_Stream(string filename, int width, int height, PixelFormat pixelFormat, ImageFormat rawFormat)
+        public void Ctor_Stream(
+            string filename,
+            int width,
+            int height,
+            PixelFormat pixelFormat,
+            ImageFormat rawFormat
+        )
         {
             using (Stream stream = File.OpenRead(Helpers.GetTestBitmapPath(filename)))
             using (var bitmap = new Bitmap(stream))
@@ -154,7 +221,13 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_FilePath_TestData))]
-        public void Ctor_Stream_UseIcm(string filename, int width, int height, PixelFormat pixelFormat, ImageFormat rawFormat)
+        public void Ctor_Stream_UseIcm(
+            string filename,
+            int width,
+            int height,
+            PixelFormat pixelFormat,
+            ImageFormat rawFormat
+        )
         {
             foreach (bool useIcm in new bool[] { true, false })
             {
@@ -172,8 +245,16 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullStream_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Bitmap((Stream)null));
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Bitmap((Stream)null, false));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "stream",
+                null,
+                () => new Bitmap((Stream)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "stream",
+                null,
+                () => new Bitmap((Stream)null, false)
+            );
         }
 
         [ConditionalFact(Helpers.IsWindowsOrAtLeastLibgdiplus6)]
@@ -231,15 +312,35 @@ namespace System.Drawing.Tests
         public static IEnumerable<object[]> Ctor_Width_Height_Stride_PixelFormat_Scan0_TestData()
         {
             yield return new object[] { 10, 10, 0, PixelFormat.Format8bppIndexed, IntPtr.Zero };
-            yield return new object[] { 5, 15, int.MaxValue, PixelFormat.Format32bppArgb, IntPtr.Zero };
-            yield return new object[] { 5, 15, int.MinValue, PixelFormat.Format24bppRgb, IntPtr.Zero };
+            yield return new object[]
+            {
+                5,
+                15,
+                int.MaxValue,
+                PixelFormat.Format32bppArgb,
+                IntPtr.Zero
+            };
+            yield return new object[]
+            {
+                5,
+                15,
+                int.MinValue,
+                PixelFormat.Format24bppRgb,
+                IntPtr.Zero
+            };
             yield return new object[] { 1, 1, 1, PixelFormat.Format1bppIndexed, IntPtr.Zero };
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Width_Height_Stride_PixelFormat_Scan0_TestData))]
-        public void Ctor_Width_Height_Stride_PixelFormat_Scan0(int width, int height, int stride, PixelFormat pixelFormat, IntPtr scan0)
+        public void Ctor_Width_Height_Stride_PixelFormat_Scan0(
+            int width,
+            int height,
+            int stride,
+            PixelFormat pixelFormat,
+            IntPtr scan0
+        )
         {
             using (var bitmap = new Bitmap(width, height, stride, pixelFormat, scan0))
             {
@@ -259,11 +360,26 @@ namespace System.Drawing.Tests
         public void Ctor_InvalidWidth_ThrowsArgumentException(int width)
         {
             AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(width, 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(width, 1, Graphics.FromImage(new Bitmap(1, 1))));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(new Bitmap(1, 1), width, 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(new Bitmap(1, 1), new Size(width, 1)));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(width, 1, PixelFormat.Format16bppArgb1555));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(width, 1, 0, PixelFormat.Format16bppArgb1555, IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(width, 1, Graphics.FromImage(new Bitmap(1, 1)))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(new Bitmap(1, 1), width, 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(new Bitmap(1, 1), new Size(width, 1))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(width, 1, PixelFormat.Format16bppArgb1555)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(width, 1, 0, PixelFormat.Format16bppArgb1555, IntPtr.Zero)
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -275,11 +391,26 @@ namespace System.Drawing.Tests
         public void Ctor_InvalidHeight_ThrowsArgumentException(int height)
         {
             AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(1, height));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(1, height, Graphics.FromImage(new Bitmap(1, 1))));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(new Bitmap(1, 1), 1, height));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(new Bitmap(1, 1), new Size(1, height)));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(1, height, PixelFormat.Format16bppArgb1555));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(1, height, 0, PixelFormat.Format16bppArgb1555, IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(1, height, Graphics.FromImage(new Bitmap(1, 1)))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(new Bitmap(1, 1), 1, height)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(new Bitmap(1, 1), new Size(1, height))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(1, height, PixelFormat.Format16bppArgb1555)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(1, height, 0, PixelFormat.Format16bppArgb1555, IntPtr.Zero)
+            );
         }
 
         [ConditionalTheory(Helpers.IsWindowsOrAtLeastLibgdiplus6)]
@@ -296,14 +427,20 @@ namespace System.Drawing.Tests
         public void Ctor_InvalidPixelFormat_ThrowsArgumentException(PixelFormat format)
         {
             AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(1, 1, format));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(1, 1, 0, format, IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(1, 1, 0, format, IntPtr.Zero)
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_InvalidScan0_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(1, 1, 0, PixelFormat.Format16bppArgb1555, (IntPtr)10));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(1, 1, 0, PixelFormat.Format16bppArgb1555, (IntPtr)10)
+            );
         }
 
         public static IEnumerable<object[]> Image_TestData()
@@ -317,8 +454,18 @@ namespace System.Drawing.Tests
             yield return new object[] { new Bitmap(1, 1, PixelFormat.Format64bppArgb), 1, 1 };
             yield return new object[] { new Bitmap(1, 1, PixelFormat.Format64bppPArgb), 1, 1 };
 
-            yield return new object[] { new Bitmap(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico")), 16, 16 };
-            yield return new object[] { new Bitmap(Helpers.GetTestBitmapPath("16x16_nonindexed_24bit.png")), 32, 48 };
+            yield return new object[]
+            {
+                new Bitmap(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico")),
+                16,
+                16
+            };
+            yield return new object[]
+            {
+                new Bitmap(Helpers.GetTestBitmapPath("16x16_nonindexed_24bit.png")),
+                32,
+                48
+            };
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -392,8 +539,16 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullImageWithSize_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("original", "image", () => new Bitmap(null, new Size(1, 2)));
-            AssertExtensions.Throws<ArgumentNullException>("original", "image", () => new Bitmap(null, 1, 2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "original",
+                "image",
+                () => new Bitmap(null, new Size(1, 2))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "original",
+                "image",
+                () => new Bitmap(null, 1, 2)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -404,21 +559,48 @@ namespace System.Drawing.Tests
 
             AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(image));
             AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(image, 1, 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Bitmap(image, new Size(1, 1)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Bitmap(image, new Size(1, 1))
+            );
         }
 
         public static IEnumerable<object[]> Clone_TestData()
         {
-            yield return new object[] { new Bitmap(3, 3, PixelFormat.Format32bppArgb), new Rectangle(0, 0, 3, 3), PixelFormat.Format32bppArgb };
-            yield return new object[] { new Bitmap(3, 3, PixelFormat.Format32bppArgb), new Rectangle(0, 0, 3, 3), PixelFormat.Format24bppRgb };
-            yield return new object[] { new Bitmap(3, 3, PixelFormat.Format1bppIndexed), new Rectangle(1, 1, 1, 1), PixelFormat.Format64bppArgb };
-            yield return new object[] { new Bitmap(3, 3, PixelFormat.Format64bppPArgb), new Rectangle(1, 1, 1, 1), PixelFormat.Format16bppRgb565 };
+            yield return new object[]
+            {
+                new Bitmap(3, 3, PixelFormat.Format32bppArgb),
+                new Rectangle(0, 0, 3, 3),
+                PixelFormat.Format32bppArgb
+            };
+            yield return new object[]
+            {
+                new Bitmap(3, 3, PixelFormat.Format32bppArgb),
+                new Rectangle(0, 0, 3, 3),
+                PixelFormat.Format24bppRgb
+            };
+            yield return new object[]
+            {
+                new Bitmap(3, 3, PixelFormat.Format1bppIndexed),
+                new Rectangle(1, 1, 1, 1),
+                PixelFormat.Format64bppArgb
+            };
+            yield return new object[]
+            {
+                new Bitmap(3, 3, PixelFormat.Format64bppPArgb),
+                new Rectangle(1, 1, 1, 1),
+                PixelFormat.Format16bppRgb565
+            };
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Clone_TestData))]
-        public void Clone_Rectangle_ReturnsExpected(Bitmap bitmap, Rectangle rectangle, PixelFormat targetFormat)
+        public void Clone_Rectangle_ReturnsExpected(
+            Bitmap bitmap,
+            Rectangle rectangle,
+            PixelFormat targetFormat
+        )
         {
             try
             {
@@ -442,7 +624,15 @@ namespace System.Drawing.Tests
                             }
                             else
                             {
-                                Assert.Equal(Color.FromArgb(255, expectedColor.R, expectedColor.G, expectedColor.B), clone.GetPixel(x, y));
+                                Assert.Equal(
+                                    Color.FromArgb(
+                                        255,
+                                        expectedColor.R,
+                                        expectedColor.G,
+                                        expectedColor.B
+                                    ),
+                                    clone.GetPixel(x, y)
+                                );
                             }
                         }
                     }
@@ -457,7 +647,11 @@ namespace System.Drawing.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Clone_TestData))]
-        public void Clone_RectangleF_ReturnsExpected(Bitmap bitmap, Rectangle rectangle, PixelFormat format)
+        public void Clone_RectangleF_ReturnsExpected(
+            Bitmap bitmap,
+            Rectangle rectangle,
+            PixelFormat format
+        )
         {
             try
             {
@@ -484,8 +678,14 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(3, 3))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.Clone(new Rectangle(0, 0, width, height), bitmap.PixelFormat));
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.Clone(new RectangleF(0, 0, width, height), bitmap.PixelFormat));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => bitmap.Clone(new Rectangle(0, 0, width, height), bitmap.PixelFormat)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => bitmap.Clone(new RectangleF(0, 0, width, height), bitmap.PixelFormat)
+                );
             }
         }
 
@@ -497,12 +697,21 @@ namespace System.Drawing.Tests
         [InlineData(0, 1, 1, 3)]
         [InlineData(4, 1, 1, 1)]
         [InlineData(1, 4, 1, 1)]
-        public void Clone_InvalidRect_ThrowsOutOfMemoryException(int x, int y, int width, int height)
+        public void Clone_InvalidRect_ThrowsOutOfMemoryException(
+            int x,
+            int y,
+            int width,
+            int height
+        )
         {
             using (var bitmap = new Bitmap(3, 3))
             {
-                Assert.Throws<OutOfMemoryException>(() => bitmap.Clone(new Rectangle(x, y, width, height), bitmap.PixelFormat));
-                Assert.Throws<OutOfMemoryException>(() => bitmap.Clone(new RectangleF(x, y, width, height), bitmap.PixelFormat));
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new Rectangle(x, y, width, height), bitmap.PixelFormat)
+                );
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new RectangleF(x, y, width, height), bitmap.PixelFormat)
+                );
             }
         }
 
@@ -520,8 +729,12 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                Assert.Throws<OutOfMemoryException>(() => bitmap.Clone(new Rectangle(0, 0, 1, 1), format));
-                Assert.Throws<OutOfMemoryException>(() => bitmap.Clone(new RectangleF(0, 0, 1, 1), format));
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new Rectangle(0, 0, 1, 1), format)
+                );
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new RectangleF(0, 0, 1, 1), format)
+                );
             }
         }
 
@@ -531,8 +744,12 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1, PixelFormat.Format16bppGrayScale))
             {
-                Assert.Throws<OutOfMemoryException>(() => bitmap.Clone(new Rectangle(0, 0, 1, 1), PixelFormat.Format32bppArgb));
-                Assert.Throws<OutOfMemoryException>(() => bitmap.Clone(new RectangleF(0, 0, 1, 1), PixelFormat.Format32bppArgb));
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new Rectangle(0, 0, 1, 1), PixelFormat.Format32bppArgb)
+                );
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new RectangleF(0, 0, 1, 1), PixelFormat.Format32bppArgb)
+                );
             }
         }
 
@@ -555,8 +772,14 @@ namespace System.Drawing.Tests
             bitmap.Dispose();
 
             AssertExtensions.Throws<ArgumentException>(null, () => bitmap.Clone());
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.Clone(new Rectangle(0, 0, 1, 1), PixelFormat.Format32bppArgb));
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.Clone(new RectangleF(0, 0, 1, 1), PixelFormat.Format32bppArgb));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => bitmap.Clone(new Rectangle(0, 0, 1, 1), PixelFormat.Format32bppArgb)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => bitmap.Clone(new RectangleF(0, 0, 1, 1), PixelFormat.Format32bppArgb)
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -578,7 +801,10 @@ namespace System.Drawing.Tests
             var bitmap = new Bitmap(1, 1);
             bitmap.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.GetFrameCount(FrameDimension.Page));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => bitmap.GetFrameCount(FrameDimension.Page)
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -603,16 +829,49 @@ namespace System.Drawing.Tests
             var bitmap = new Bitmap(1, 1);
             bitmap.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.SelectActiveFrame(FrameDimension.Page, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => bitmap.SelectActiveFrame(FrameDimension.Page, 0)
+            );
         }
 
         public static IEnumerable<object[]> GetPixel_TestData()
         {
-            yield return new object[] { new Bitmap(1, 1, PixelFormat.Format1bppIndexed), 0, 0, Color.FromArgb(0, 0, 0) };
-            yield return new object[] { new Bitmap(1, 1, PixelFormat.Format4bppIndexed), 0, 0, Color.FromArgb(0, 0, 0) };
-            yield return new object[] { new Bitmap(1, 1, PixelFormat.Format8bppIndexed), 0, 0, Color.FromArgb(0, 0, 0) };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), 0, 0, Color.FromArgb(0, 0, 0) };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), 99, 99, Color.FromArgb(0, 0, 0) };
+            yield return new object[]
+            {
+                new Bitmap(1, 1, PixelFormat.Format1bppIndexed),
+                0,
+                0,
+                Color.FromArgb(0, 0, 0)
+            };
+            yield return new object[]
+            {
+                new Bitmap(1, 1, PixelFormat.Format4bppIndexed),
+                0,
+                0,
+                Color.FromArgb(0, 0, 0)
+            };
+            yield return new object[]
+            {
+                new Bitmap(1, 1, PixelFormat.Format8bppIndexed),
+                0,
+                0,
+                Color.FromArgb(0, 0, 0)
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                0,
+                0,
+                Color.FromArgb(0, 0, 0)
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                99,
+                99,
+                Color.FromArgb(0, 0, 0)
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -636,7 +895,10 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("x", () => bitmap.GetPixel(x, 0));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "x",
+                    () => bitmap.GetPixel(x, 0)
+                );
             }
         }
 
@@ -647,7 +909,10 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("y", () => bitmap.GetPixel(0, y));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "y",
+                    () => bitmap.GetPixel(0, y)
+                );
             }
         }
 
@@ -674,7 +939,12 @@ namespace System.Drawing.Tests
         {
             yield return new object[] { new Bitmap(1, 1, PixelFormat.Format32bppRgb), 1, 1 };
             yield return new object[] { new Bitmap(32, 32, PixelFormat.Format32bppArgb), 32, 32 };
-            yield return new object[] { new Bitmap(512, 512, PixelFormat.Format16bppRgb555), 512, 512 };
+            yield return new object[]
+            {
+                new Bitmap(512, 512, PixelFormat.Format16bppRgb555),
+                512,
+                512
+            };
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -751,10 +1021,30 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> FromHicon_Icon_TestData()
         {
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico")), 16, 16 };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("32x32_one_entry_4bit.ico")), 32, 32 };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("64x64_one_entry_8bit.ico")), 64, 64 };
-            yield return new object[] { new Icon(Helpers.GetTestBitmapPath("96x96_one_entry_8bit.ico")), 96, 96 };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico")),
+                16,
+                16
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("32x32_one_entry_4bit.ico")),
+                32,
+                32
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("64x64_one_entry_8bit.ico")),
+                64,
+                64
+            };
+            yield return new object[]
+            {
+                new Icon(Helpers.GetTestBitmapPath("96x96_one_entry_8bit.ico")),
+                96,
+                96
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -764,7 +1054,9 @@ namespace System.Drawing.Tests
             IntPtr handle;
             try
             {
-                using (Bitmap bitmap = GetHicon_FromHicon_ReturnsExpected(icon.Handle, width, height))
+                using (
+                    Bitmap bitmap = GetHicon_FromHicon_ReturnsExpected(icon.Handle, width, height)
+                )
                 {
                     handle = bitmap.GetHicon();
                 }
@@ -780,9 +1072,24 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> FromHicon_TestData()
         {
-            yield return new object[] { new Bitmap(1, 1, PixelFormat.Format32bppRgb).GetHicon(), 1, 1 };
-            yield return new object[] { new Bitmap(32, 32, PixelFormat.Format32bppRgb).GetHicon(), 32, 32 };
-            yield return new object[] { new Bitmap(512, 512, PixelFormat.Format16bppRgb555).GetHicon(), 512, 512 };
+            yield return new object[]
+            {
+                new Bitmap(1, 1, PixelFormat.Format32bppRgb).GetHicon(),
+                1,
+                1
+            };
+            yield return new object[]
+            {
+                new Bitmap(32, 32, PixelFormat.Format32bppRgb).GetHicon(),
+                32,
+                32
+            };
+            yield return new object[]
+            {
+                new Bitmap(512, 512, PixelFormat.Format16bppRgb555).GetHicon(),
+                512,
+                512
+            };
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -824,7 +1131,10 @@ namespace System.Drawing.Tests
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         [PlatformSpecific(TestPlatforms.Windows)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "In .NET Framework we use GDI 1.0")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "In .NET Framework we use GDI 1.0"
+        )]
         public void SaveWmfAsPngDoesntChangeImageBoundaries()
         {
             if (PlatformDetection.IsWindows7)
@@ -839,11 +1149,15 @@ namespace System.Drawing.Tests
             }
 
             string output = GetTestFilePath() + ".png";
-            using Stream wmfStream = File.OpenRead(Helpers.GetTestBitmapPath("gdiwmfboundariesbug.wmf"));
+            using Stream wmfStream = File.OpenRead(
+                Helpers.GetTestBitmapPath("gdiwmfboundariesbug.wmf")
+            );
             using Image bitmapFromWmf = Bitmap.FromStream(wmfStream);
             bitmapFromWmf.Save(output, ImageFormat.Png);
 
-            using Stream expectedPngStream = File.OpenRead(Helpers.GetTestBitmapPath("gdiwmfboundariesbug-output.png"));
+            using Stream expectedPngStream = File.OpenRead(
+                Helpers.GetTestBitmapPath("gdiwmfboundariesbug-output.png")
+            );
             using Image expectedPngBitmap = Bitmap.FromStream(expectedPngStream);
             using MemoryStream expectedMemoryStream = new MemoryStream();
             expectedPngBitmap.Save(expectedMemoryStream, ImageFormat.Png);
@@ -871,7 +1185,10 @@ namespace System.Drawing.Tests
         {
             using (var icon = new Icon(Helpers.GetTestBitmapPath("48x48_one_entry_1bit.ico")))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => Bitmap.FromHicon(icon.Handle));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => Bitmap.FromHicon(icon.Handle)
+                );
             }
         }
 
@@ -879,16 +1196,28 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void FromResource_InvalidHandle_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Bitmap.FromResource(IntPtr.Zero, "Name"));
-            AssertExtensions.Throws<ArgumentException>(null, () => Bitmap.FromResource((IntPtr)10, "Name"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Bitmap.FromResource(IntPtr.Zero, "Name")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Bitmap.FromResource((IntPtr)10, "Name")
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void FromResource_InvalidBitmapName_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Bitmap.FromResource(IntPtr.Zero, "Name"));
-            AssertExtensions.Throws<ArgumentException>(null, () => Bitmap.FromResource((IntPtr)10, "Name"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Bitmap.FromResource(IntPtr.Zero, "Name")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Bitmap.FromResource((IntPtr)10, "Name")
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -1000,11 +1329,17 @@ namespace System.Drawing.Tests
             bitmap.Dispose();
 
             AssertExtensions.Throws<ArgumentException>(null, () => bitmap.MakeTransparent());
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.MakeTransparent(Color.Red));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => bitmap.MakeTransparent(Color.Red)
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/22629", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/22629",
+            TargetFrameworkMonikers.NetFramework
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/26247", TestPlatforms.Windows)]
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void MakeTransparent_GrayscalePixelFormat_ThrowsArgumentException()
@@ -1027,8 +1362,20 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> SetPixel_TestData()
         {
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), 0, 0, Color.FromArgb(255, 128, 128, 128) };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), 99, 99, Color.FromArgb(255, 128, 128, 128) };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                0,
+                0,
+                Color.FromArgb(255, 128, 128, 128)
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                99,
+                99,
+                Color.FromArgb(255, 128, 128, 128)
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -1058,7 +1405,10 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("x", () => bitmap.SetPixel(x, 0, Color.Red));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "x",
+                    () => bitmap.SetPixel(x, 0, Color.Red)
+                );
             }
         }
 
@@ -1069,7 +1419,10 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("y", () => bitmap.SetPixel(0, y, Color.Red));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "y",
+                    () => bitmap.SetPixel(0, y, Color.Red)
+                );
             }
         }
 
@@ -1079,7 +1432,10 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1, PixelFormat.Format16bppGrayScale))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.SetPixel(0, 0, Color.Red));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => bitmap.SetPixel(0, 0, Color.Red)
+                );
             }
         }
 
@@ -1089,7 +1445,10 @@ namespace System.Drawing.Tests
             var bitmap = new Bitmap(1, 1);
             bitmap.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.SetPixel(0, 0, Color.Red));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => bitmap.SetPixel(0, 0, Color.Red)
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -1113,7 +1472,10 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.SetResolution(xDpi, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => bitmap.SetResolution(xDpi, 1)
+                );
             }
         }
 
@@ -1127,7 +1489,10 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.SetResolution(1, yDpi));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => bitmap.SetResolution(1, yDpi)
+                );
             }
         }
 
@@ -1143,75 +1508,369 @@ namespace System.Drawing.Tests
         public static IEnumerable<object[]> LockBits_NotUnix_TestData()
         {
             Bitmap bitmap() => new Bitmap(2, 2, PixelFormat.Format32bppArgb);
-            yield return new object[] { bitmap(), new Rectangle(1, 1, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb, 8, 1 };
-            yield return new object[] { bitmap(), new Rectangle(1, 1, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb, 8, 3 };
-            yield return new object[] { bitmap(), new Rectangle(1, 1, 1, 1), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb, 8, 2 };
+            yield return new object[]
+            {
+                bitmap(),
+                new Rectangle(1, 1, 1, 1),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format32bppArgb,
+                8,
+                1
+            };
+            yield return new object[]
+            {
+                bitmap(),
+                new Rectangle(1, 1, 1, 1),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format32bppArgb,
+                8,
+                3
+            };
+            yield return new object[]
+            {
+                bitmap(),
+                new Rectangle(1, 1, 1, 1),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format32bppArgb,
+                8,
+                2
+            };
 
-            yield return new object[] { bitmap(), new Rectangle(1, 1, 1, 1), ImageLockMode.ReadOnly - 1, PixelFormat.Format32bppArgb, 8, 0 };
+            yield return new object[]
+            {
+                bitmap(),
+                new Rectangle(1, 1, 1, 1),
+                ImageLockMode.ReadOnly - 1,
+                PixelFormat.Format32bppArgb,
+                8,
+                0
+            };
 
-            yield return new object[] { bitmap(), new Rectangle(0, 0, 2, 2), ImageLockMode.WriteOnly, PixelFormat.Format16bppGrayScale, 4, 65538 };
+            yield return new object[]
+            {
+                bitmap(),
+                new Rectangle(0, 0, 2, 2),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format16bppGrayScale,
+                4,
+                65538
+            };
 
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadOnly, PixelFormat.Format8bppIndexed, 100, 65537 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed, 100, 65539 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed, 100, 65538 };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format8bppIndexed,
+                100,
+                65537
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format8bppIndexed,
+                100,
+                65539
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format8bppIndexed,
+                100,
+                65538
+            };
 
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format8bppIndexed), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb, 300, 65539 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format8bppIndexed), new Rectangle(0, 0, 100, 100), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb, 300, 65538 };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format8bppIndexed),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format24bppRgb,
+                300,
+                65539
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format8bppIndexed),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format24bppRgb,
+                300,
+                65538
+            };
         }
 
         public static IEnumerable<object[]> LockBits_TestData()
         {
             Bitmap bitmap() => new Bitmap(2, 2, PixelFormat.Format32bppArgb);
-            yield return new object[] { bitmap(), new Rectangle(0, 0, 2, 2), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb, 8, 1 };
-            yield return new object[] { bitmap(), new Rectangle(0, 0, 2, 2), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb, 8, 3 };
-            yield return new object[] { bitmap(), new Rectangle(0, 0, 2, 2), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb, 8, 2 };
+            yield return new object[]
+            {
+                bitmap(),
+                new Rectangle(0, 0, 2, 2),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format32bppArgb,
+                8,
+                1
+            };
+            yield return new object[]
+            {
+                bitmap(),
+                new Rectangle(0, 0, 2, 2),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format32bppArgb,
+                8,
+                3
+            };
+            yield return new object[]
+            {
+                bitmap(),
+                new Rectangle(0, 0, 2, 2),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format32bppArgb,
+                8,
+                2
+            };
 
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadOnly, PixelFormat.Format32bppRgb, 400, 1 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb, 400, 3 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb, 400, 2 };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format32bppRgb,
+                400,
+                1
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format32bppRgb,
+                400,
+                3
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format32bppRgb,
+                400,
+                2
+            };
 
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb, 300, 65537 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb, 300, 65539 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format32bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb, 300, 65538 };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format24bppRgb,
+                300,
+                65537
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format24bppRgb,
+                300,
+                65539
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format32bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format24bppRgb,
+                300,
+                65538
+            };
 
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format24bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb, 300, 1 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format24bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb, 300, 3 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format24bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb, 300, 2 };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format24bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format24bppRgb,
+                300,
+                1
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format24bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format24bppRgb,
+                300,
+                3
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format24bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format24bppRgb,
+                300,
+                2
+            };
 
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format24bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadOnly, PixelFormat.Format32bppRgb, 400, 65537 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format24bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb, 400, 65539 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format24bppRgb), new Rectangle(0, 0, 100, 100), ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb, 400, 65538 };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format24bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format32bppRgb,
+                400,
+                65537
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format24bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format32bppRgb,
+                400,
+                65539
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format24bppRgb),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format32bppRgb,
+                400,
+                65538
+            };
 
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format8bppIndexed), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb, 300, 65537 };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format8bppIndexed),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format24bppRgb,
+                300,
+                65537
+            };
 
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format8bppIndexed), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadOnly, PixelFormat.Format8bppIndexed, 100, 1 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format8bppIndexed), new Rectangle(0, 0, 100, 100), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed, 100, 3 };
-            yield return new object[] { new Bitmap(100, 100, PixelFormat.Format8bppIndexed), new Rectangle(0, 0, 100, 100), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed, 100, 2 };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format8bppIndexed),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format8bppIndexed,
+                100,
+                1
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format8bppIndexed),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format8bppIndexed,
+                100,
+                3
+            };
+            yield return new object[]
+            {
+                new Bitmap(100, 100, PixelFormat.Format8bppIndexed),
+                new Rectangle(0, 0, 100, 100),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format8bppIndexed,
+                100,
+                2
+            };
 
-
-            yield return new object[] { new Bitmap(184, 184, PixelFormat.Format1bppIndexed), new Rectangle(0, 0, 184, 184), ImageLockMode.ReadOnly, PixelFormat.Format1bppIndexed, 24, 1 };
-            yield return new object[] { new Bitmap(184, 184, PixelFormat.Format1bppIndexed), new Rectangle(0, 0, 184, 184), ImageLockMode.ReadWrite, PixelFormat.Format1bppIndexed, 24, 3 };
-            yield return new object[] { new Bitmap(184, 184, PixelFormat.Format1bppIndexed), new Rectangle(0, 0, 184, 184), ImageLockMode.WriteOnly, PixelFormat.Format1bppIndexed, 24, 2 };
+            yield return new object[]
+            {
+                new Bitmap(184, 184, PixelFormat.Format1bppIndexed),
+                new Rectangle(0, 0, 184, 184),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format1bppIndexed,
+                24,
+                1
+            };
+            yield return new object[]
+            {
+                new Bitmap(184, 184, PixelFormat.Format1bppIndexed),
+                new Rectangle(0, 0, 184, 184),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format1bppIndexed,
+                24,
+                3
+            };
+            yield return new object[]
+            {
+                new Bitmap(184, 184, PixelFormat.Format1bppIndexed),
+                new Rectangle(0, 0, 184, 184),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format1bppIndexed,
+                24,
+                2
+            };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/30565", TestPlatforms.Windows)]
         [MemberData(nameof(LockBits_TestData))]
-        public void LockBits_Invoke_Success(Bitmap bitmap, Rectangle rectangle, ImageLockMode lockMode, PixelFormat pixelFormat, int expectedStride, int expectedReserved)
+        public void LockBits_Invoke_Success(
+            Bitmap bitmap,
+            Rectangle rectangle,
+            ImageLockMode lockMode,
+            PixelFormat pixelFormat,
+            int expectedStride,
+            int expectedReserved
+        )
         {
-            Do_LockBits_Invoke_Success(bitmap, rectangle, lockMode, pixelFormat, expectedStride, expectedReserved);
+            Do_LockBits_Invoke_Success(
+                bitmap,
+                rectangle,
+                lockMode,
+                pixelFormat,
+                expectedStride,
+                expectedReserved
+            );
         }
 
         // This test causes an AV on Unix
         [ActiveIssue("https://github.com/dotnet/runtime/issues/30565", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(LockBits_NotUnix_TestData))]
-        public void LockBits_Invoke_Success_NotUnix(Bitmap bitmap, Rectangle rectangle, ImageLockMode lockMode, PixelFormat pixelFormat, int expectedStride, int expectedReserved)
+        public void LockBits_Invoke_Success_NotUnix(
+            Bitmap bitmap,
+            Rectangle rectangle,
+            ImageLockMode lockMode,
+            PixelFormat pixelFormat,
+            int expectedStride,
+            int expectedReserved
+        )
         {
-            Do_LockBits_Invoke_Success(bitmap, rectangle, lockMode, pixelFormat, expectedStride, expectedReserved);
+            Do_LockBits_Invoke_Success(
+                bitmap,
+                rectangle,
+                lockMode,
+                pixelFormat,
+                expectedStride,
+                expectedReserved
+            );
         }
 
-        private void Do_LockBits_Invoke_Success(Bitmap bitmap, Rectangle rectangle, ImageLockMode lockMode, PixelFormat pixelFormat, int expectedStride, int expectedReserved)
+        private void Do_LockBits_Invoke_Success(
+            Bitmap bitmap,
+            Rectangle rectangle,
+            ImageLockMode lockMode,
+            PixelFormat pixelFormat,
+            int expectedStride,
+            int expectedReserved
+        )
         {
             try
             {
@@ -1249,7 +1908,16 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(Rectangle.Empty, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb, null));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        bitmap.LockBits(
+                            Rectangle.Empty,
+                            ImageLockMode.ReadOnly,
+                            PixelFormat.Format24bppRgb,
+                            null
+                        )
+                );
             }
         }
 
@@ -1265,14 +1933,36 @@ namespace System.Drawing.Tests
         [InlineData(1, 0, 2, 1)]
         [InlineData(1, 1, 1, 0)]
         [InlineData(1, 1, 0, 1)]
-        public void LockBits_InvalidRect_ThrowsArgumentException(int x, int y, int width, int height)
+        public void LockBits_InvalidRect_ThrowsArgumentException(
+            int x,
+            int y,
+            int width,
+            int height
+        )
         {
             using (var bitmap = new Bitmap(2, 2))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(x, y, width, height), ImageLockMode.ReadOnly, bitmap.PixelFormat));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(x, y, width, height),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat
+                        )
+                );
 
                 var bitmapData = new BitmapData();
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(x, y, width, height), ImageLockMode.ReadOnly, bitmap.PixelFormat, bitmapData));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(x, y, width, height),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat,
+                            bitmapData
+                        )
+                );
                 Assert.Equal(IntPtr.Zero, bitmapData.Scan0);
             }
         }
@@ -1292,10 +1982,17 @@ namespace System.Drawing.Tests
             {
                 foreach (ImageLockMode lockMode in Enum.GetValues(typeof(ImageLockMode)))
                 {
-                    AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), lockMode, format));
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), lockMode, format)
+                    );
 
                     var bitmapData = new BitmapData();
-                    AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), lockMode, format, bitmapData));
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () =>
+                            bitmap.LockBits(new Rectangle(0, 0, 1, 1), lockMode, format, bitmapData)
+                    );
                     Assert.Equal(IntPtr.Zero, bitmapData.Scan0);
                 }
             }
@@ -1307,13 +2004,51 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format16bppGrayScale));
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format16bppGrayScale, new BitmapData()));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            PixelFormat.Format16bppGrayScale
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            PixelFormat.Format16bppGrayScale,
+                            new BitmapData()
+                        )
+                );
 
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format16bppGrayScale));
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format16bppGrayScale, new BitmapData()));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            ImageLockMode.ReadWrite,
+                            PixelFormat.Format16bppGrayScale
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            ImageLockMode.ReadWrite,
+                            PixelFormat.Format16bppGrayScale,
+                            new BitmapData()
+                        )
+                );
 
-                BitmapData data = bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.WriteOnly, PixelFormat.Format16bppGrayScale);
+                BitmapData data = bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.WriteOnly,
+                    PixelFormat.Format16bppGrayScale
+                );
                 AssertExtensions.Throws<ArgumentException>(null, () => bitmap.UnlockBits(data));
             }
         }
@@ -1327,10 +2062,22 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), lockMode, bitmap.PixelFormat));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), lockMode, bitmap.PixelFormat)
+                );
 
                 var bitmapData = new BitmapData();
-                AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), lockMode, bitmap.PixelFormat, bitmapData));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            lockMode,
+                            bitmap.PixelFormat,
+                            bitmapData
+                        )
+                );
                 Assert.Equal(IntPtr.Zero, bitmapData.Scan0);
             }
         }
@@ -1340,10 +2087,27 @@ namespace System.Drawing.Tests
         {
             var bitmap = new Bitmap(1, 1);
             bitmap.Dispose();
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    bitmap.LockBits(
+                        new Rectangle(0, 0, 1, 1),
+                        ImageLockMode.ReadOnly,
+                        PixelFormat.Format32bppArgb
+                    )
+            );
 
             var bitmapData = new BitmapData();
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb, bitmapData));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    bitmap.LockBits(
+                        new Rectangle(0, 0, 1, 1),
+                        ImageLockMode.ReadOnly,
+                        PixelFormat.Format32bppArgb,
+                        bitmapData
+                    )
+            );
             Assert.Equal(IntPtr.Zero, bitmapData.Scan0);
         }
 
@@ -1352,13 +2116,47 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    bitmap.PixelFormat
+                );
 
-                Assert.Throws<InvalidOperationException>(() => bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat));
-                Assert.Throws<InvalidOperationException>(() => bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat, new BitmapData()));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat
+                        )
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat,
+                            new BitmapData()
+                        )
+                );
 
-                Assert.Throws<InvalidOperationException>(() => bitmap.LockBits(new Rectangle(1, 1, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat));
-                Assert.Throws<InvalidOperationException>(() => bitmap.LockBits(new Rectangle(1, 1, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat, new BitmapData()));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(1, 1, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat
+                        )
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(1, 1, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat,
+                            new BitmapData()
+                        )
+                );
             }
         }
 
@@ -1371,7 +2169,11 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(2, 2))
             {
-                BitmapData data = bitmap.LockBits(new Rectangle(offset, offset, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                BitmapData data = bitmap.LockBits(
+                    new Rectangle(offset, offset, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    bitmap.PixelFormat
+                );
                 data.Height = invalidParameter;
                 data.Width = invalidParameter;
 
@@ -1384,7 +2186,11 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                BitmapData data = bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                BitmapData data = bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    bitmap.PixelFormat
+                );
                 data.Scan0 = IntPtr.Zero;
 
                 bitmap.UnlockBits(data);
@@ -1398,7 +2204,11 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                BitmapData data = bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                BitmapData data = bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    bitmap.PixelFormat
+                );
                 data.PixelFormat = format;
 
                 bitmap.UnlockBits(data);
@@ -1428,7 +2238,11 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                BitmapData data = bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                BitmapData data = bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    bitmap.PixelFormat
+                );
                 bitmap.UnlockBits(data);
 
                 Assert.Throws<ExternalException>(() => bitmap.UnlockBits(new BitmapData()));
@@ -1441,7 +2255,10 @@ namespace System.Drawing.Tests
             var bitmap = new Bitmap(1, 1);
             bitmap.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => bitmap.UnlockBits(new BitmapData()));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => bitmap.UnlockBits(new BitmapData())
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -1527,7 +2344,11 @@ namespace System.Drawing.Tests
                     Assert.Equal(Color.FromArgb(255, 64, 32, 16), c);
                     Assert.Equal(Color.FromArgb(255, 96, 48, 24), d);
                 }
-                BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, 2, 1), ImageLockMode.ReadOnly, format);
+                BitmapData bitmapData = bitmap.LockBits(
+                    new Rectangle(0, 0, 2, 1),
+                    ImageLockMode.ReadOnly,
+                    format
+                );
                 try
                 {
                     byte[] data = new byte[size];
@@ -1609,9 +2430,297 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> Palette_TestData()
         {
-            yield return new object[] { PixelFormat.Format1bppIndexed, new int[] { -16777216, -1 } };
-            yield return new object[] { PixelFormat.Format4bppIndexed, new int[] { -16777216, -8388608, -16744448, -8355840, -16777088, -8388480, -16744320, -8355712, -4144960, -65536, -16711936, -256, -16776961, -65281, -16711681, -1, } };
-            yield return new object[] { PixelFormat.Format8bppIndexed, new int[] { -16777216, -8388608, -16744448, -8355840, -16777088, -8388480, -16744320, -8355712, -4144960, -65536, -16711936, -256, -16776961, -65281, -16711681, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16777216, -16777165, -16777114, -16777063, -16777012, -16776961, -16764160, -16764109, -16764058, -16764007, -16763956, -16763905, -16751104, -16751053, -16751002, -16750951, -16750900, -16750849, -16738048, -16737997, -16737946, -16737895, -16737844, -16737793, -16724992, -16724941, -16724890, -16724839, -16724788, -16724737, -16711936, -16711885, -16711834, -16711783, -16711732, -16711681, -13434880, -13434829, -13434778, -13434727, -13434676, -13434625, -13421824, -13421773, -13421722, -13421671, -13421620, -13421569, -13408768, -13408717, -13408666, -13408615, -13408564, -13408513, -13395712, -13395661, -13395610, -13395559, -13395508, -13395457, -13382656, -13382605, -13382554, -13382503, -13382452, -13382401, -13369600, -13369549, -13369498, -13369447, -13369396, -13369345, -10092544, -10092493, -10092442, -10092391, -10092340, -10092289, -10079488, -10079437, -10079386, -10079335, -10079284, -10079233, -10066432, -10066381, -10066330, -10066279, -10066228, -10066177, -10053376, -10053325, -10053274, -10053223, -10053172, -10053121, -10040320, -10040269, -10040218, -10040167, -10040116, -10040065, -10027264, -10027213, -10027162, -10027111, -10027060, -10027009, -6750208, -6750157, -6750106, -6750055, -6750004, -6749953, -6737152, -6737101, -6737050, -6736999, -6736948, -6736897, -6724096, -6724045, -6723994, -6723943, -6723892, -6723841, -6711040, -6710989, -6710938, -6710887, -6710836, -6710785, -6697984, -6697933, -6697882, -6697831, -6697780, -6697729, -6684928, -6684877, -6684826, -6684775, -6684724, -6684673, -3407872, -3407821, -3407770, -3407719, -3407668, -3407617, -3394816, -3394765, -3394714, -3394663, -3394612, -3394561, -3381760, -3381709, -3381658, -3381607, -3381556, -3381505, -3368704, -3368653, -3368602, -3368551, -3368500, -3368449, -3355648, -3355597, -3355546, -3355495, -3355444, -3355393, -3342592, -3342541, -3342490, -3342439, -3342388, -3342337, -65536, -65485, -65434, -65383, -65332, -65281, -52480, -52429, -52378, -52327, -52276, -52225, -39424, -39373, -39322, -39271, -39220, -39169, -26368, -26317, -26266, -26215, -26164, -26113, -13312, -13261, -13210, -13159, -13108, -13057, -256, -205, -154, -103, -52, -1 } };
+            yield return new object[]
+            {
+                PixelFormat.Format1bppIndexed,
+                new int[] { -16777216, -1 }
+            };
+            yield return new object[]
+            {
+                PixelFormat.Format4bppIndexed,
+                new int[]
+                {
+                    -16777216,
+                    -8388608,
+                    -16744448,
+                    -8355840,
+                    -16777088,
+                    -8388480,
+                    -16744320,
+                    -8355712,
+                    -4144960,
+                    -65536,
+                    -16711936,
+                    -256,
+                    -16776961,
+                    -65281,
+                    -16711681,
+                    -1,
+                }
+            };
+            yield return new object[]
+            {
+                PixelFormat.Format8bppIndexed,
+                new int[]
+                {
+                    -16777216,
+                    -8388608,
+                    -16744448,
+                    -8355840,
+                    -16777088,
+                    -8388480,
+                    -16744320,
+                    -8355712,
+                    -4144960,
+                    -65536,
+                    -16711936,
+                    -256,
+                    -16776961,
+                    -65281,
+                    -16711681,
+                    -1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    -16777216,
+                    -16777165,
+                    -16777114,
+                    -16777063,
+                    -16777012,
+                    -16776961,
+                    -16764160,
+                    -16764109,
+                    -16764058,
+                    -16764007,
+                    -16763956,
+                    -16763905,
+                    -16751104,
+                    -16751053,
+                    -16751002,
+                    -16750951,
+                    -16750900,
+                    -16750849,
+                    -16738048,
+                    -16737997,
+                    -16737946,
+                    -16737895,
+                    -16737844,
+                    -16737793,
+                    -16724992,
+                    -16724941,
+                    -16724890,
+                    -16724839,
+                    -16724788,
+                    -16724737,
+                    -16711936,
+                    -16711885,
+                    -16711834,
+                    -16711783,
+                    -16711732,
+                    -16711681,
+                    -13434880,
+                    -13434829,
+                    -13434778,
+                    -13434727,
+                    -13434676,
+                    -13434625,
+                    -13421824,
+                    -13421773,
+                    -13421722,
+                    -13421671,
+                    -13421620,
+                    -13421569,
+                    -13408768,
+                    -13408717,
+                    -13408666,
+                    -13408615,
+                    -13408564,
+                    -13408513,
+                    -13395712,
+                    -13395661,
+                    -13395610,
+                    -13395559,
+                    -13395508,
+                    -13395457,
+                    -13382656,
+                    -13382605,
+                    -13382554,
+                    -13382503,
+                    -13382452,
+                    -13382401,
+                    -13369600,
+                    -13369549,
+                    -13369498,
+                    -13369447,
+                    -13369396,
+                    -13369345,
+                    -10092544,
+                    -10092493,
+                    -10092442,
+                    -10092391,
+                    -10092340,
+                    -10092289,
+                    -10079488,
+                    -10079437,
+                    -10079386,
+                    -10079335,
+                    -10079284,
+                    -10079233,
+                    -10066432,
+                    -10066381,
+                    -10066330,
+                    -10066279,
+                    -10066228,
+                    -10066177,
+                    -10053376,
+                    -10053325,
+                    -10053274,
+                    -10053223,
+                    -10053172,
+                    -10053121,
+                    -10040320,
+                    -10040269,
+                    -10040218,
+                    -10040167,
+                    -10040116,
+                    -10040065,
+                    -10027264,
+                    -10027213,
+                    -10027162,
+                    -10027111,
+                    -10027060,
+                    -10027009,
+                    -6750208,
+                    -6750157,
+                    -6750106,
+                    -6750055,
+                    -6750004,
+                    -6749953,
+                    -6737152,
+                    -6737101,
+                    -6737050,
+                    -6736999,
+                    -6736948,
+                    -6736897,
+                    -6724096,
+                    -6724045,
+                    -6723994,
+                    -6723943,
+                    -6723892,
+                    -6723841,
+                    -6711040,
+                    -6710989,
+                    -6710938,
+                    -6710887,
+                    -6710836,
+                    -6710785,
+                    -6697984,
+                    -6697933,
+                    -6697882,
+                    -6697831,
+                    -6697780,
+                    -6697729,
+                    -6684928,
+                    -6684877,
+                    -6684826,
+                    -6684775,
+                    -6684724,
+                    -6684673,
+                    -3407872,
+                    -3407821,
+                    -3407770,
+                    -3407719,
+                    -3407668,
+                    -3407617,
+                    -3394816,
+                    -3394765,
+                    -3394714,
+                    -3394663,
+                    -3394612,
+                    -3394561,
+                    -3381760,
+                    -3381709,
+                    -3381658,
+                    -3381607,
+                    -3381556,
+                    -3381505,
+                    -3368704,
+                    -3368653,
+                    -3368602,
+                    -3368551,
+                    -3368500,
+                    -3368449,
+                    -3355648,
+                    -3355597,
+                    -3355546,
+                    -3355495,
+                    -3355444,
+                    -3355393,
+                    -3342592,
+                    -3342541,
+                    -3342490,
+                    -3342439,
+                    -3342388,
+                    -3342337,
+                    -65536,
+                    -65485,
+                    -65434,
+                    -65383,
+                    -65332,
+                    -65281,
+                    -52480,
+                    -52429,
+                    -52378,
+                    -52327,
+                    -52276,
+                    -52225,
+                    -39424,
+                    -39373,
+                    -39322,
+                    -39271,
+                    -39220,
+                    -39169,
+                    -26368,
+                    -26317,
+                    -26266,
+                    -26215,
+                    -26164,
+                    -26113,
+                    -13312,
+                    -13261,
+                    -13210,
+                    -13159,
+                    -13108,
+                    -13057,
+                    -256,
+                    -205,
+                    -154,
+                    -103,
+                    -52,
+                    -1
+                }
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -1646,7 +2755,11 @@ namespace System.Drawing.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => bitmap.Size);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockBits_Marshalling_Success()
         {
             Color red = Color.FromArgb(Color.Red.ToArgb());
@@ -1658,7 +2771,11 @@ namespace System.Drawing.Tests
                 Color pixelColor = bitmap.GetPixel(0, 0);
                 Assert.Equal(red, pixelColor);
 
-                BitmapData data = bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+                BitmapData data = bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format32bppArgb
+                );
                 try
                 {
                     int pixelValue = Marshal.ReadByte(data.Scan0, 0);
@@ -1687,7 +2804,11 @@ namespace System.Drawing.Tests
                     Assert.Equal(red, pixelColor);
                 }
 
-                data = bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+                data = bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadWrite,
+                    PixelFormat.Format32bppArgb
+                );
                 try
                 {
                     // write blue
@@ -1711,7 +2832,11 @@ namespace System.Drawing.Tests
             {
                 bitmap.SetPixel(0, 0, red);
 
-                BitmapData data = bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     byte b = Marshal.ReadByte(data.Scan0, 0);
@@ -1730,7 +2855,11 @@ namespace System.Drawing.Tests
                     Assert.Equal(red, bitmap.GetPixel(0, 0));
                 }
 
-                data = bitmap.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                data = bitmap.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadWrite,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     // write blue
@@ -1814,11 +2943,19 @@ namespace System.Drawing.Tests
                 get => _stream.Position;
                 set => _stream.Position = _canSeek ? value : throw new NotSupportedException();
             }
+
             public override void Flush() => _stream.Flush();
-            public override int Read(byte[] buffer, int offset, int count) => _canRead ?  _stream.Read(buffer, offset, count) : throw new NotSupportedException();
-            public override long Seek(long offset, SeekOrigin origin) => _stream.Seek(offset, origin);
+
+            public override int Read(byte[] buffer, int offset, int count) =>
+                _canRead ? _stream.Read(buffer, offset, count) : throw new NotSupportedException();
+
+            public override long Seek(long offset, SeekOrigin origin) =>
+                _stream.Seek(offset, origin);
+
             public override void SetLength(long value) => _stream.SetLength(value);
-            public override void Write(byte[] buffer, int offset, int count) => _stream.Write(buffer, offset, count);
+
+            public override void Write(byte[] buffer, int offset, int count) =>
+                _stream.Write(buffer, offset, count);
         }
     }
 }

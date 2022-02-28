@@ -10,12 +10,27 @@ internal static partial class Interop
     internal static partial class Crypt32
     {
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool CryptMsgUpdate(SafeCryptMsgHandle hCryptMsg, [In] byte[] pbData, int cbData, bool fFinal);
+        internal static extern bool CryptMsgUpdate(
+            SafeCryptMsgHandle hCryptMsg,
+            [In] byte[] pbData,
+            int cbData,
+            bool fFinal
+        );
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool CryptMsgUpdate(SafeCryptMsgHandle hCryptMsg, IntPtr pbData, int cbData, bool fFinal);
+        internal static extern bool CryptMsgUpdate(
+            SafeCryptMsgHandle hCryptMsg,
+            IntPtr pbData,
+            int cbData,
+            bool fFinal
+        );
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool CryptMsgUpdate(SafeCryptMsgHandle hCryptMsg, ref byte pbData, int cbData, bool fFinal);
+        internal static extern bool CryptMsgUpdate(
+            SafeCryptMsgHandle hCryptMsg,
+            ref byte pbData,
+            int cbData,
+            bool fFinal
+        );
     }
 }

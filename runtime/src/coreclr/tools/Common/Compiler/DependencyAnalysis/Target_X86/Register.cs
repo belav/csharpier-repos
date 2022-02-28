@@ -19,7 +19,7 @@ namespace ILCompiler.DependencyAnalysis.X86
         EBP = 5,
         ESI = 6,
         EDI = 7,
-        
+
         None = 8,
         RegDirect = 24,
 

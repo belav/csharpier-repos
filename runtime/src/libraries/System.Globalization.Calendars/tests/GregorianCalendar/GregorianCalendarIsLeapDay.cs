@@ -24,7 +24,12 @@ namespace System.Globalization.Tests
             yield return new object[] { RandomCommonYear(), 2, 28 };
 
             // Any day, any month, any day
-            yield return new object[] { randomYear, randomMonth, RandomDay(randomYear, randomMonth) };
+            yield return new object[]
+            {
+                randomYear,
+                randomMonth,
+                RandomDay(randomYear, randomMonth)
+            };
 
             // Any day, any month in the maximum supported year
             yield return new object[] { 9999, randomMonth, RandomDay(9999, randomMonth) };

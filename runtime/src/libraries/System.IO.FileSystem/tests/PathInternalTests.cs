@@ -12,7 +12,10 @@ namespace System.IO.Tests
         public void PathInternalIsCaseSensitiveMatchesProbing()
         {
             string probingDirectory = TestDirectory;
-            Assert.Equal(GetIsCaseSensitiveByProbing(probingDirectory), PathInternal.IsCaseSensitive);
+            Assert.Equal(
+                GetIsCaseSensitiveByProbing(probingDirectory),
+                PathInternal.IsCaseSensitive
+            );
         }
     }
 }

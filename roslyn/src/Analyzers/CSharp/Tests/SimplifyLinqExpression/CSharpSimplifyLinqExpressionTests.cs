@@ -12,18 +12,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.SimplifyLinqExpressi
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpSimplifyLinqExpressionDiagnosticAnalyzer,
-        CSharpSimplifyLinqExpressionCodeFixProvider>;
+        CSharpSimplifyLinqExpressionCodeFixProvider
+    >;
 
     public partial class CSharpSimplifyLinqExpressionTests
     {
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)
+        ]
         public static async Task TestAllowedMethodTypes(
             [CombinatorialValues(
                 "x => x==1",
                 "(x) => x==1",
                 "x => { return x==1; }",
-                "(x) => { return x==1; }")]
-            string lambda,
+                "(x) => { return x==1; }"
+            )]
+                string lambda,
             [CombinatorialValues(
                 "First",
                 "Last",
@@ -32,12 +38,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.SimplifyLinqExpressi
                 "Count",
                 "SingleOrDefault",
                 "FirstOrDefault",
-                "LastOrDefault")]
-            string methodName)
+                "LastOrDefault"
+            )]
+                string methodName
+        )
         {
             await new VerifyCS.Test
             {
-                TestCode = $@"
+                TestCode =
+                    $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -55,7 +64,8 @@ class Test
         var test = [|Data().Where({lambda}).{methodName}()|];
     }}
 }}",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -76,12 +86,14 @@ class Test
             }.RunAsync();
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)
+        ]
         public static async Task TestWhereWithIndexMethodTypes(
-            [CombinatorialValues(
-                "(x, index) => x==index",
-                "(x, index) => { return x==index; }")]
-            string lambda,
+            [CombinatorialValues("(x, index) => x==index", "(x, index) => { return x==index; }")]
+                string lambda,
             [CombinatorialValues(
                 "First",
                 "Last",
@@ -90,10 +102,13 @@ class Test
                 "Count",
                 "SingleOrDefault",
                 "FirstOrDefault",
-                "LastOrDefault")]
-            string methodName)
+                "LastOrDefault"
+            )]
+                string methodName
+        )
         {
-            var testCode = $@"
+            var testCode =
+                $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -114,12 +129,13 @@ class Test
             await VerifyCS.VerifyAnalyzerAsync(testCode);
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)
+        ]
         public async Task TestQueryComprehensionSyntax(
-            [CombinatorialValues(
-                "x => x==1",
-                "x => { return x==1; }")]
-            string lambda,
+            [CombinatorialValues("x => x==1", "x => { return x==1; }")] string lambda,
             [CombinatorialValues(
                 "First",
                 "Last",
@@ -128,12 +144,15 @@ class Test
                 "Count",
                 "SingleOrDefault",
                 "FirstOrDefault",
-                "LastOrDefault")]
-            string methodName)
+                "LastOrDefault"
+            )]
+                string methodName
+        )
         {
             await new VerifyCS.Test
             {
-                TestCode = $@"
+                TestCode =
+                    $@"
 using System.Linq;
 
 class Test
@@ -143,7 +162,8 @@ class Test
         var test1 = [|(from value in Enumerable.Range(0, 10) select value).Where({lambda}).{methodName}()|];
     }}
 }}",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System.Linq;
 
 class Test
@@ -169,7 +189,8 @@ class Test
         {
             await new VerifyCS.Test
             {
-                TestCode = $@"
+                TestCode =
+                    $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -191,7 +212,8 @@ class Test
         }}).{methodName}()|];
     }}
 }}",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -229,7 +251,8 @@ class Test
         {
             await new VerifyCS.Test
             {
-                TestCode = $@"
+                TestCode =
+                    $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -244,7 +267,8 @@ class Test
     static IEnumerable<string> test = new List<string> {{ ""hello"", ""world"", ""!"" }};
     {returnType} result = [|test.Where(x => FooTest(x)).{methodName}()|];
 }}",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -273,7 +297,8 @@ class Test
         [InlineData("LastOrDefault")]
         public async Task TestQueryableIsNotConsidered(string methodName)
         {
-            var source = $@"
+            var source =
+                $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -292,7 +317,11 @@ namespace demo
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)
+        ]
         public async Task TestNestedLambda(
             [CombinatorialValues(
                 "First",
@@ -302,8 +331,9 @@ namespace demo
                 "Count",
                 "SingleOrDefault",
                 "FirstOrDefault",
-                "LastOrDefault")]
-            string firstMethod,
+                "LastOrDefault"
+            )]
+                string firstMethod,
             [CombinatorialValues(
                 "First",
                 "Last",
@@ -312,10 +342,13 @@ namespace demo
                 "Count",
                 "SingleOrDefault",
                 "FirstOrDefault",
-                "LastOrDefault")]
-            string secondMethod)
+                "LastOrDefault"
+            )]
+                string secondMethod
+        )
         {
-            var testCode = $@"
+            var testCode =
+                $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -328,7 +361,8 @@ class Test
         var test5 = [|test.Where(a => [|a.Where(s => s.Equals(""hello"")).{secondMethod}()|].Equals(""hello"")).{firstMethod}()|];
     }}
 }}";
-            var fixedCode = $@"
+            var fixedCode =
+                $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -341,9 +375,7 @@ class Test
         var test5 = test.{firstMethod}(a => a.{secondMethod}(s => s.Equals(""hello"")).Equals(""hello""));
     }}
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                testCode,
-                fixedCode);
+            await VerifyCS.VerifyCodeFixAsync(testCode, fixedCode);
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)]
@@ -359,7 +391,8 @@ class Test
         {
             await new VerifyCS.Test
             {
-                TestCode = $@"
+                TestCode =
+                    $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -373,7 +406,8 @@ class Test
         [|Enumerable.Where(test, (x => x == 1)).{methodName}()|];
     }}
 }}",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -393,7 +427,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)]
         public async Task TestUserDefinedWhere()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -437,7 +472,8 @@ namespace demo
         [InlineData("LastOrDefault")]
         public async Task TestArgumentsInSecondCall(string methodName)
         {
-            var source = $@"
+            var source =
+                $@"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -456,7 +492,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)]
         public async Task TestUnsupportedFunction()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -474,7 +511,8 @@ namespace demo
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyLinqExpression)]
         public async Task TestExpressionTreeInput()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 using System.Collections.Generic;

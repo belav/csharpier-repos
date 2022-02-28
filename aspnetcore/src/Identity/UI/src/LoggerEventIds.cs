@@ -13,12 +13,18 @@ public static class LoggerEventIds
     /// <summary>
     /// Event id when a user is created by an external provider.
     /// </summary>
-    public static readonly EventId UserCreatedByExternalProvider = new EventId(1, "UserCreatedByExternalProvider");
+    public static readonly EventId UserCreatedByExternalProvider = new EventId(
+        1,
+        "UserCreatedByExternalProvider"
+    );
 
     /// <summary>
     /// Event id when a user is logged in by an external provider.
     /// </summary>
-    public static readonly EventId UserLoggedInByExternalProvider = new EventId(2, "UserLoggedInByExternalProvider");
+    public static readonly EventId UserLoggedInByExternalProvider = new EventId(
+        2,
+        "UserLoggedInByExternalProvider"
+    );
 
     /// <summary>
     /// Event id when a user is logged in.
@@ -38,12 +44,18 @@ public static class LoggerEventIds
     /// <summary>
     /// Event id when a user has entered an invalid authenticator code.
     /// </summary>
-    public static readonly EventId InvalidAuthenticatorCode = new EventId(6, "InvalidAuthenticatorCode");
+    public static readonly EventId InvalidAuthenticatorCode = new EventId(
+        6,
+        "InvalidAuthenticatorCode"
+    );
 
     /// <summary>
     /// Event id when a user is logged in with recovey code.
     /// </summary>
-    public static readonly EventId UserLoginWithRecoveryCode = new EventId(7, "UserLoginWithRecoveryCode");
+    public static readonly EventId UserLoginWithRecoveryCode = new EventId(
+        7,
+        "UserLoginWithRecoveryCode"
+    );
 
     /// <summary>
     /// Event id when a user has entered an invalid recovey code.
@@ -78,12 +90,18 @@ public static class LoggerEventIds
     /// <summary>
     /// Event id when two factor authentication recovery code is generated.
     /// </summary>
-    public static readonly EventId TwoFARecoveryGenerated = new EventId(14, "TwoFARecoveryGenerated");
+    public static readonly EventId TwoFARecoveryGenerated = new EventId(
+        14,
+        "TwoFARecoveryGenerated"
+    );
 
     /// <summary>
     /// Event id when user has reset the authentication app key.
     /// </summary>
-    public static readonly EventId AuthenticationAppKeyReset = new EventId(15, "AuthenticationAppKeyReset");
+    public static readonly EventId AuthenticationAppKeyReset = new EventId(
+        15,
+        "AuthenticationAppKeyReset"
+    );
 
     /// <summary>
     /// Event id when a user is created.

@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_FibLoop
 {
     const int Pass = 100;
@@ -28,7 +29,9 @@ public class BringUpTest_FibLoop
     public static int Main()
     {
         int y = FibLoop(7);
-        if (y == 13) return Pass;
-        else return Fail;
+        if (y == 13)
+            return Pass;
+        else
+            return Fail;
     }
 }

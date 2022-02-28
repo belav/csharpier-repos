@@ -89,7 +89,10 @@ namespace System.Speech.Internal
                 {
                     if (value < 0)
                     {
-                        throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.MustBeGreaterThanZero));
+                        throw new ArgumentOutOfRangeException(
+                            nameof(value),
+                            SR.Get(SRID.MustBeGreaterThanZero)
+                        );
                     }
                     // We can't check the length here so you can Seek beyond the end of the Stream. This will error later though.
 
@@ -187,7 +190,6 @@ namespace System.Speech.Internal
         public override long Seek(long offset, SeekOrigin origin)
         {
             long position;
-
             checked // Check for integer overflow
             {
                 switch (origin)
@@ -205,7 +207,10 @@ namespace System.Speech.Internal
                         break;
 
                     default:
-                        throw new ArgumentException(SR.Get(SRID.EnumInvalid, "SeekOrigin"), nameof(origin));
+                        throw new ArgumentException(
+                            SR.Get(SRID.EnumInvalid, "SeekOrigin"),
+                            nameof(origin)
+                        );
                 }
             }
 

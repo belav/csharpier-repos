@@ -13,10 +13,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
         [DataMember(Order = 0)]
         internal readonly PinnedSolutionInfo UnderlyingObject;
 
-        public PythiaPinnedSolutionInfoWrapper(PinnedSolutionInfo underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public PythiaPinnedSolutionInfoWrapper(PinnedSolutionInfo underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
-        public static implicit operator PythiaPinnedSolutionInfoWrapper(PinnedSolutionInfo info)
-            => new(info);
+        public static implicit operator PythiaPinnedSolutionInfoWrapper(PinnedSolutionInfo info) =>
+            new(info);
     }
 }

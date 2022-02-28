@@ -28,7 +28,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             string[] memberNames,
             ObjectReader objectReader,
             int objectId,
-            BinaryAssemblyInfo assemblyInfo)
+            BinaryAssemblyInfo assemblyInfo
+        )
         {
             _objectName = objectName;
             _objectType = objectType;
@@ -45,14 +46,27 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
             for (int i = 0; i < _memberTypes.Length; i++)
             {
-                BinaryTypeEnum binaryTypeEnum = BinaryTypeConverter.GetParserBinaryTypeInfo(_memberTypes[i]!, out object? typeInformation);
+                BinaryTypeEnum binaryTypeEnum = BinaryTypeConverter.GetParserBinaryTypeInfo(
+                    _memberTypes[i]!,
+                    out object? typeInformation
+                );
                 _binaryTypeEnumA[i] = binaryTypeEnum;
                 _typeInformationA[i] = typeInformation;
             }
         }
 
         [RequiresUnreferencedCode("Types might be removed")]
-        internal ObjectMap(string objectName, string[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, object?[] typeInformationA, int[] memberAssemIds, ObjectReader objectReader, int objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+        internal ObjectMap(
+            string objectName,
+            string[] memberNames,
+            BinaryTypeEnum[] binaryTypeEnumA,
+            object?[] typeInformationA,
+            int[] memberAssemIds,
+            ObjectReader objectReader,
+            int objectId,
+            BinaryAssemblyInfo assemblyInfo,
+            SizedArray assemIdToAssemblyTable
+        )
         {
             _objectName = objectName;
             _memberNames = memberNames;
@@ -76,19 +90,29 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 bool isVariant;
 
                 BinaryTypeConverter.TypeFromInfo(
-                    binaryTypeEnumA[i], typeInformationA[i], objectReader, (BinaryAssemblyInfo?)assemIdToAssemblyTable[memberAssemIds[i]],
-                    out primitiveTypeEnum, out string? typeString, out Type? type, out isVariant);
+                    binaryTypeEnumA[i],
+                    typeInformationA[i],
+                    objectReader,
+                    (BinaryAssemblyInfo?)assemIdToAssemblyTable[memberAssemIds[i]],
+                    out primitiveTypeEnum,
+                    out string? typeString,
+                    out Type? type,
+                    out isVariant
+                );
                 _memberTypes[i] = type;
             }
 
             _objectInfo = objectReader.CreateReadObjectInfo(_objectType, memberNames, null);
             if (!_objectInfo._isSi)
             {
-                _objectInfo.GetMemberTypes(memberNames, _objectInfo._objectType);  // Check version match
+                _objectInfo.GetMemberTypes(memberNames, _objectInfo._objectType); // Check version match
             }
         }
 
-        internal ReadObjectInfo CreateObjectInfo(ref SerializationInfo? si, ref object?[]? memberData)
+        internal ReadObjectInfo CreateObjectInfo(
+            ref SerializationInfo? si,
+            ref object?[]? memberData
+        )
         {
             if (_isInitObjectInfo)
             {
@@ -111,14 +135,32 @@ namespace System.Runtime.Serialization.Formatters.Binary
             string[] memberNames,
             ObjectReader objectReader,
             int objectId,
-            BinaryAssemblyInfo assemblyInfo) =>
-            new ObjectMap(name, objectType, memberNames, objectReader, objectId, assemblyInfo);
+            BinaryAssemblyInfo assemblyInfo
+        ) => new ObjectMap(name, objectType, memberNames, objectReader, objectId, assemblyInfo);
 
         // Member type information
         [RequiresUnreferencedCode("Types might be removed")]
         internal static ObjectMap Create(
-            string name, string[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, object?[] typeInformationA,
-            int[] memberAssemIds, ObjectReader objectReader, int objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable) =>
-            new ObjectMap(name, memberNames, binaryTypeEnumA, typeInformationA, memberAssemIds, objectReader, objectId, assemblyInfo, assemIdToAssemblyTable);
+            string name,
+            string[] memberNames,
+            BinaryTypeEnum[] binaryTypeEnumA,
+            object?[] typeInformationA,
+            int[] memberAssemIds,
+            ObjectReader objectReader,
+            int objectId,
+            BinaryAssemblyInfo assemblyInfo,
+            SizedArray assemIdToAssemblyTable
+        ) =>
+            new ObjectMap(
+                name,
+                memberNames,
+                binaryTypeEnumA,
+                typeInformationA,
+                memberAssemIds,
+                objectReader,
+                objectId,
+                assemblyInfo,
+                assemIdToAssemblyTable
+            );
     }
 }

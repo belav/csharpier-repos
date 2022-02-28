@@ -130,7 +130,8 @@ namespace System.Threading
             // acquiring the lock to prevent a deterministic lock convoy in that situation, and rely on the system's
             // waiting/waking implementation to mitigate starvation, even in cases where there are enough logical processors to
             // accommodate all threads.
-            return (state & LockedMask) == 0 && Interlocked.CompareExchange(ref _state, state + LockedMask, state) == state;
+            return (state & LockedMask) == 0
+                && Interlocked.CompareExchange(ref _state, state + LockedMask, state) == state;
         }
 
         private bool SpinWaitTryAcquireCallback() => TryAcquire_NoFastPath(_state);
@@ -148,7 +149,13 @@ namespace System.Threading
             VerifyIsNotLocked();
 
             // Spin a bit to see if the lock becomes available, before forcing the thread into a wait state
-            if (_spinWaiter.SpinWaitForCondition(_spinWaitTryAcquireCallback, SpinCount, SpinSleep0Threshold))
+            if (
+                _spinWaiter.SpinWaitForCondition(
+                    _spinWaitTryAcquireCallback,
+                    SpinCount,
+                    SpinSleep0Threshold
+                )
+            )
             {
                 Debug.Assert((_state & LockedMask) != 0);
                 SetOwnerThreadToCurrent();
@@ -166,8 +173,14 @@ namespace System.Threading
             {
                 // The lock may have been released before the waiter count was incremented above, so try to acquire the lock
                 // with the new state before waiting
-                if ((state & LockedMask) == 0 &&
-                    Interlocked.CompareExchange(ref _state, state + (LockedMask - WaiterCountIncrement), state) == state)
+                if (
+                    (state & LockedMask) == 0
+                    && Interlocked.CompareExchange(
+                        ref _state,
+                        state + (LockedMask - WaiterCountIncrement),
+                        state
+                    ) == state
+                )
                 {
                     break;
                 }

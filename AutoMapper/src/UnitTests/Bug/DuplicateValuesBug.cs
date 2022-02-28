@@ -20,15 +20,12 @@ namespace AutoMapper.UnitTests.Bug
             }
         }
 
-
         public class DestObject
         {
             public int Id;
             public IList<DestObject> Children;
 
-            public DestObject()
-            {
-            }
+            public DestObject() { }
 
             public void AddChild(DestObject childObject)
             {
@@ -38,6 +35,7 @@ namespace AutoMapper.UnitTests.Bug
                 Children.Add(childObject);
             }
         }
+
         public class DuplicateValuesIssue
         {
             [Fact]
@@ -46,19 +44,15 @@ namespace AutoMapper.UnitTests.Bug
                 var sourceList = new List<SourceObject>();
                 var destList = new List<DestObject>();
 
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<SourceObject, DestObject>().PreserveReferences());
+                var config = new MapperConfiguration(
+                    cfg => cfg.CreateMap<SourceObject, DestObject>().PreserveReferences()
+                );
                 config.AssertConfigurationIsValid();
 
-                var source1 = new SourceObject
-                {
-                    Id = 1,
-                };
+                var source1 = new SourceObject { Id = 1, };
                 sourceList.Add(source1);
 
-                var source2 = new SourceObject
-                {
-                    Id = 2,
-                };
+                var source2 = new SourceObject { Id = 2, };
                 sourceList.Add(source2);
 
                 source1.AddChild(source2); // This causes the problem

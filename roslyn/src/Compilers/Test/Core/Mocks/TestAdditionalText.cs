@@ -19,10 +19,11 @@ namespace Roslyn.Test.Utilities
             _text = text;
         }
 
-        public TestAdditionalText(string text = "", Encoding? encoding = null, string path = "dummy")
-            : this(path, new StringText(text, encoding))
-        {
-        }
+        public TestAdditionalText(
+            string text = "",
+            Encoding? encoding = null,
+            string path = "dummy"
+        ) : this(path, new StringText(text, encoding)) { }
 
         public override string Path { get; }
 

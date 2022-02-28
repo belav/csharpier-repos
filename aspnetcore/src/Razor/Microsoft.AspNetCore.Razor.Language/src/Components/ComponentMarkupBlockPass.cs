@@ -24,7 +24,8 @@ internal class ComponentMarkupBlockPass : ComponentIntermediateNodePassBase, IRa
 
     protected override void ExecuteCore(
         RazorCodeDocument codeDocument,
-        DocumentIntermediateNode documentNode)
+        DocumentIntermediateNode documentNode
+    )
     {
         if (!IsComponentDocument(documentNode))
         {
@@ -102,10 +103,10 @@ internal class ComponentMarkupBlockPass : ComponentIntermediateNodePassBase, IRa
                 length--;
             }
 
-            reference.Parent.Children.Insert(start, new MarkupBlockIntermediateNode()
-            {
-                Content = rewriteVisitor.Builder.ToString(),
-            });
+            reference.Parent.Children.Insert(
+                start,
+                new MarkupBlockIntermediateNode() { Content = rewriteVisitor.Builder.ToString(), }
+            );
 
             rewriteVisitor.Builder.Clear();
         }
@@ -126,7 +127,8 @@ internal class ComponentMarkupBlockPass : ComponentIntermediateNodePassBase, IRa
     {
         private bool _foundNonHtml;
 
-        public List<IntermediateNodeReference> Trees { get; } = new List<IntermediateNodeReference>();
+        public List<IntermediateNodeReference> Trees { get; } =
+            new List<IntermediateNodeReference>();
 
         public override void VisitDefault(IntermediateNode node)
         {
@@ -162,8 +164,14 @@ internal class ComponentMarkupBlockPass : ComponentIntermediateNodePassBase, IRa
                 // We only care about option tags that are nested under a select tag.
                 foreach (var ancestor in Ancestors)
                 {
-                    if (ancestor is MarkupElementIntermediateNode element &&
-                        string.Equals("select", element.TagName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        ancestor is MarkupElementIntermediateNode element
+                        && string.Equals(
+                            "select",
+                            element.TagName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         _foundNonHtml = true;
                         break;

@@ -19,7 +19,11 @@ namespace Internal.Cryptography.Pal
             throw new PlatformNotSupportedException($"{nameof(StorePal)}.{nameof(FromHandle)}");
         }
 
-        public static ILoaderPal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ILoaderPal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             List<ICertificatePal>? certificateList = null;
 
@@ -28,9 +32,17 @@ namespace Internal.Cryptography.Pal
                 (derData, contentType) =>
                 {
                     certificateList = certificateList ?? new List<ICertificatePal>();
-                    certificateList.Add(AppleCertificatePal.FromDerBlob(derData, contentType, password, keyStorageFlags));
+                    certificateList.Add(
+                        AppleCertificatePal.FromDerBlob(
+                            derData,
+                            contentType,
+                            password,
+                            keyStorageFlags
+                        )
+                    );
                     return true;
-                });
+                }
+            );
 
             if (certificateList != null)
             {
@@ -44,7 +56,8 @@ namespace Internal.Cryptography.Pal
             {
                 throw new CryptographicException(
                     SR.Cryptography_X509_PKCS7_Unsupported,
-                    new PlatformNotSupportedException(SR.Cryptography_X509_PKCS7_Unsupported));
+                    new PlatformNotSupportedException(SR.Cryptography_X509_PKCS7_Unsupported)
+                );
             }
 
             if (contentType == X509ContentType.Pkcs12)
@@ -66,7 +79,8 @@ namespace Internal.Cryptography.Pal
             SafeCFArrayHandle certs = Interop.AppleCrypto.X509ImportCollection(
                 rawData,
                 contentType,
-                password);
+                password
+            );
 
             using (certs)
             {
@@ -85,7 +99,10 @@ namespace Internal.Cryptography.Pal
 
                     if (handle != IntPtr.Zero)
                     {
-                        ICertificatePal? certPal = CertificatePal.FromHandle(handle, throwOnFail: false);
+                        ICertificatePal? certPal = CertificatePal.FromHandle(
+                            handle,
+                            throwOnFail: false
+                        );
 
                         if (certPal != null)
                         {
@@ -98,7 +115,11 @@ namespace Internal.Cryptography.Pal
             return new CertCollectionLoader(certificateList);
         }
 
-        public static ILoaderPal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ILoaderPal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -111,12 +132,18 @@ namespace Internal.Cryptography.Pal
             return new AppleCertificateExporter(cert);
         }
 
-        public static IExportPal LinkFromCertificateCollection(X509Certificate2Collection certificates)
+        public static IExportPal LinkFromCertificateCollection(
+            X509Certificate2Collection certificates
+        )
         {
             return new AppleCertificateExporter(certificates);
         }
 
-        public static IStorePal FromSystemStore(string storeName, StoreLocation storeLocation, OpenFlags openFlags)
+        public static IStorePal FromSystemStore(
+            string storeName,
+            StoreLocation storeLocation,
+            OpenFlags openFlags
+        )
         {
             StringComparer ordinalIgnoreCase = StringComparer.OrdinalIgnoreCase;
 
@@ -124,7 +151,8 @@ namespace Internal.Cryptography.Pal
             {
                 throw new CryptographicException(
                     SR.Cryptography_X509_StoreNotFound,
-                    new PlatformNotSupportedException(SR.Cryptography_X509_Store_RootUnsupported));
+                    new PlatformNotSupportedException(SR.Cryptography_X509_Store_RootUnsupported)
+                );
             }
 
             if (storeLocation == StoreLocation.CurrentUser)
@@ -141,12 +169,16 @@ namespace Internal.Cryptography.Pal
             string message = SR.Format(
                 SR.Cryptography_X509_StoreCannotCreate,
                 storeName,
-                storeLocation);
+                storeLocation
+            );
 
             throw new CryptographicException(message, new PlatformNotSupportedException(message));
         }
 
-        private static void ReadCollection(SafeCFArrayHandle matches, HashSet<X509Certificate2> collection)
+        private static void ReadCollection(
+            SafeCFArrayHandle matches,
+            HashSet<X509Certificate2> collection
+        )
         {
             if (matches.IsInvalid)
             {
@@ -162,7 +194,13 @@ namespace Internal.Cryptography.Pal
                 SafeSecCertificateHandle certHandle;
                 SafeSecIdentityHandle identityHandle;
 
-                if (Interop.AppleCrypto.X509DemuxAndRetainHandle(handle, out certHandle, out identityHandle))
+                if (
+                    Interop.AppleCrypto.X509DemuxAndRetainHandle(
+                        handle,
+                        out certHandle,
+                        out identityHandle
+                    )
+                )
                 {
                     X509Certificate2 cert;
 

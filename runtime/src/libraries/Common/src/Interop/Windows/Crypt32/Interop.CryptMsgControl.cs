@@ -13,13 +13,15 @@ internal static partial class Interop
             SafeCryptMsgHandle hCryptMsg,
             int dwFlags,
             MsgControlType dwCtrlType,
-            [In] ref CMSG_CTRL_DECRYPT_PARA pvCtrlPara);
+            [In] ref CMSG_CTRL_DECRYPT_PARA pvCtrlPara
+        );
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern bool CryptMsgControl(
             SafeCryptMsgHandle hCryptMsg,
             int dwFlags,
             MsgControlType dwCtrlType,
-            [In] ref CMSG_CTRL_KEY_AGREE_DECRYPT_PARA pvCtrlPara);
+            [In] ref CMSG_CTRL_KEY_AGREE_DECRYPT_PARA pvCtrlPara
+        );
     }
 }

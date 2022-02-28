@@ -5,11 +5,9 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class SqlServerServiceCollectionExtensionsTest : RelationalServiceCollectionExtensionsTestBase
+    public class SqlServerServiceCollectionExtensionsTest
+        : RelationalServiceCollectionExtensionsTestBase
     {
-        public SqlServerServiceCollectionExtensionsTest()
-            : base(SqlServerTestHelpers.Instance)
-        {
-        }
+        public SqlServerServiceCollectionExtensionsTest() : base(SqlServerTestHelpers.Instance) { }
     }
 }

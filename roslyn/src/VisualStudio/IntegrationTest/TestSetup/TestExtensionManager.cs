@@ -27,8 +27,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             _errorHandler = errorHandler;
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new ExtensionManager(_errorHandler);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new ExtensionManager(_errorHandler);
 
         private class ExtensionManager : AbstractExtensionManager
         {
@@ -48,8 +48,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
                 return true;
             }
 
-            public override void HandleException(object provider, Exception exception)
-                => _errorHandler.HandleError(provider, exception);
+            public override void HandleException(object provider, Exception exception) =>
+                _errorHandler.HandleError(provider, exception);
         }
     }
 }

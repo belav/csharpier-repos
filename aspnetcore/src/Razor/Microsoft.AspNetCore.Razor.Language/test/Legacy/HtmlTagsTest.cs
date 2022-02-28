@@ -10,23 +10,23 @@ public class HtmlTagsTest : ParserTestBase
 {
     private static readonly string[] VoidElementNames = new[]
     {
-            "area",
-            "base",
-            "br",
-            "col",
-            "command",
-            "embed",
-            "hr",
-            "img",
-            "input",
-            "keygen",
-            "link",
-            "meta",
-            "param",
-            "source",
-            "track",
-            "wbr",
-        };
+        "area",
+        "base",
+        "br",
+        "col",
+        "command",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "keygen",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
+    };
 
     [Fact]
     public void EmptyTagNestsLikeNormalTag()

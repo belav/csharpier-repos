@@ -21,6 +21,7 @@ internal static partial class Interop
             bool Final,
             int dwFlags,
             byte[] pbData,
-            ref int pdwDataLen);
+            ref int pdwDataLen
+        );
     }
 }

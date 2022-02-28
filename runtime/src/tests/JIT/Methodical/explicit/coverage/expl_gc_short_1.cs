@@ -9,8 +9,10 @@ internal class AA
 {
     [FieldOffset(12)]
     public ulong tmp1;
+
     [FieldOffset(5)]
     public sbyte tmp2;
+
     [FieldOffset(0)]
     public byte tmp3;
 
@@ -19,6 +21,7 @@ internal class AA
 
     [FieldOffset(40)]
     public uint tmp4;
+
     [FieldOffset(38)]
     public byte tmp5;
 
@@ -37,14 +40,20 @@ internal class AA
     public static AA[,,] aa_init = new AA[1, 101, 2];
     public static AA[,,] aa_zero = new AA[1, 101, 2];
     public static object b_init = new AA(100);
-    public static AA _init, _zero;
+    public static AA _init,
+        _zero;
 
-    public static short call_target(short arg) { return arg; }
-    public static short call_target_ref(ref short arg) { return arg; }
-
-    public void verify()
+    public static short call_target(short arg)
     {
+        return arg;
     }
+
+    public static short call_target_ref(ref short arg)
+    {
+        return arg;
+    }
+
+    public void verify() { }
 
     public static void verify_all()
     {
@@ -73,5 +82,6 @@ internal class AA
 
 internal struct BB
 {
-    public static AA f_init, f_zero;
+    public static AA f_init,
+        f_zero;
 }

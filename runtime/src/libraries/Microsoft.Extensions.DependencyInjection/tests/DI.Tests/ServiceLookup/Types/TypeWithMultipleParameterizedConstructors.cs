@@ -7,12 +7,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     public class TypeWithMultipleParameterizedConstructors
     {
-        public TypeWithMultipleParameterizedConstructors(IFactoryService factoryService)
-        {
-        }
+        public TypeWithMultipleParameterizedConstructors(IFactoryService factoryService) { }
 
-        public TypeWithMultipleParameterizedConstructors(IFakeService fakeService)
-        {
-        }
+        public TypeWithMultipleParameterizedConstructors(IFakeService fakeService) { }
     }
 }

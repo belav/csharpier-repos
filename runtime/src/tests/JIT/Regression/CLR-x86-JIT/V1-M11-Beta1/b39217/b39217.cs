@@ -30,13 +30,17 @@ namespace Test
             Method1();
             Method2();
         }
+
         static int Main()
         {
             try
             {
                 Main1();
             }
-            catch (NullReferenceException) { return 100; }
+            catch (NullReferenceException)
+            {
+                return 100;
+            }
             return -1;
         }
     }

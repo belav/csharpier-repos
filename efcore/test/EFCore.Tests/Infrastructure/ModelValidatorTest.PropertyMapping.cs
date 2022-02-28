@@ -23,22 +23,30 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var modelBuilder = CreateConventionlessModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity(typeof(NonPrimitiveAsPropertyEntity));
             entityTypeBuilder.Property(
-                typeof(NavigationAsProperty), nameof(NonPrimitiveAsPropertyEntity.Property));
+                typeof(NavigationAsProperty),
+                nameof(NonPrimitiveAsPropertyEntity.Property)
+            );
 
             Assert.Equal(
                 CoreStrings.PropertyNotMapped(
                     typeof(NavigationAsProperty).ShortDisplayName(),
                     typeof(NonPrimitiveAsPropertyEntity).ShortDisplayName(),
-                    nameof(NonPrimitiveAsPropertyEntity.Property)),
-                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                    nameof(NonPrimitiveAsPropertyEntity.Property)
+                ),
+                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Does_not_throw_when_added_shadow_property_by_convention_is_not_of_primitive_type()
         {
             var modelBuilder = CreateConventionlessModelBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(NonPrimitiveAsPropertyEntity)).HasNoKey();
-            entityTypeBuilder.GetInfrastructure().Property(typeof(NavigationAsProperty), "ShadowProperty");
+            var entityTypeBuilder = modelBuilder
+                .Entity(typeof(NonPrimitiveAsPropertyEntity))
+                .HasNoKey();
+            entityTypeBuilder
+                .GetInfrastructure()
+                .Property(typeof(NavigationAsProperty), "ShadowProperty");
             entityTypeBuilder.Ignore(nameof(NonPrimitiveAsPropertyEntity.Property));
 
             Validate(modelBuilder);
@@ -52,8 +60,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.PropertyNotAdded(
-                    typeof(PrimitivePropertyEntity).ShortDisplayName(), "Property", typeof(int).DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                    typeof(PrimitivePropertyEntity).ShortDisplayName(),
+                    "Property",
+                    typeof(int).DisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
@@ -64,15 +76,20 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.PropertyNotAdded(
-                    typeof(NonPrimitiveValueTypePropertyEntity).ShortDisplayName(), "Property", typeof(CancellationToken).Name),
-                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                    typeof(NonPrimitiveValueTypePropertyEntity).ShortDisplayName(),
+                    "Property",
+                    typeof(CancellationToken).Name
+                ),
+                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Does_not_throw_when_nonprimitive_value_type_property_type_is_ignored()
         {
             var modelBuilder = CreateConventionlessModelBuilder(
-                configurationBuilder => configurationBuilder.IgnoreAny<CancellationToken>());
+                configurationBuilder => configurationBuilder.IgnoreAny<CancellationToken>()
+            );
             modelBuilder.Entity(typeof(NonPrimitiveValueTypePropertyEntity)).HasNoKey();
 
             Validate(modelBuilder);
@@ -88,8 +105,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 CoreStrings.PropertyNotAdded(
                     typeof(NonPrimitiveReferenceTypePropertyEntity).ShortDisplayName(),
                     nameof(NonPrimitiveReferenceTypePropertyEntity.Property),
-                    typeof(ICollection<Uri>).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                    typeof(ICollection<Uri>).ShortDisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
@@ -121,8 +140,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.NavigationNotAdded(
-                    typeof(NavigationEntity).ShortDisplayName(), "Navigation", typeof(PrimitivePropertyEntity).Name),
-                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                    typeof(NavigationEntity).ShortDisplayName(),
+                    "Navigation",
+                    typeof(PrimitivePropertyEntity).Name
+                ),
+                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
@@ -135,8 +158,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.NavigationNotAdded(
-                    typeof(Dog).ShortDisplayName(), nameof(Dog.FavoritePerson), typeof(Person).Name),
-                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                    typeof(Dog).ShortDisplayName(),
+                    nameof(Dog.FavoritePerson),
+                    typeof(Person).Name
+                ),
+                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
@@ -150,8 +177,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             referencedEntityTypeBuilder.Ignore("Property");
             referencedEntityTypeBuilder.Property<int>("Id");
             referencedEntityTypeBuilder.HasKey("Id");
-            entityTypeBuilder.GetInfrastructure().HasRelationship(
-                (IConventionEntityType)referencedEntityTypeBuilder.Metadata, "Navigation", null, setTargetAsPrincipal: true);
+            entityTypeBuilder
+                .GetInfrastructure()
+                .HasRelationship(
+                    (IConventionEntityType)referencedEntityTypeBuilder.Metadata,
+                    "Navigation",
+                    null,
+                    setTargetAsPrincipal: true
+                );
 
             Validate(modelBuilder);
         }
@@ -170,7 +203,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Does_not_throw_when_navigation_type_is_ignored()
         {
             var modelBuilder = CreateConventionlessModelBuilder(
-                configurationBuilder => configurationBuilder.IgnoreAny<PrimitivePropertyEntity>());
+                configurationBuilder => configurationBuilder.IgnoreAny<PrimitivePropertyEntity>()
+            );
             modelBuilder.Entity(typeof(NavigationEntity)).HasNoKey();
 
             Validate(modelBuilder);
@@ -197,8 +231,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             entityTypeBuilder.HasKey("Id");
             referencedEntityTypeBuilder.Property<int>("Id");
             referencedEntityTypeBuilder.HasKey("Id");
-            entityTypeBuilder.GetInfrastructure().HasRelationship(
-                (IConventionEntityType)referencedEntityTypeBuilder.Metadata, "Navigation", null);
+            entityTypeBuilder
+                .GetInfrastructure()
+                .HasRelationship(
+                    (IConventionEntityType)referencedEntityTypeBuilder.Metadata,
+                    "Navigation",
+                    null
+                );
 
             Validate(modelBuilder);
         }
@@ -213,15 +252,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 CoreStrings.InterfacePropertyNotAdded(
                     typeof(InterfaceNavigationEntity).ShortDisplayName(),
                     "Navigation",
-                    typeof(IList<INavigationEntity>).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                    typeof(IList<INavigationEntity>).ShortDisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Does_not_throw_when_interface_collection_type_property_type_is_ignored()
         {
             var modelBuilder = CreateConventionlessModelBuilder(
-                configurationBuilder => configurationBuilder.IgnoreAny<INavigationEntity>());
+                configurationBuilder => configurationBuilder.IgnoreAny<INavigationEntity>()
+            );
             modelBuilder.Entity(typeof(InterfaceNavigationEntity)).HasNoKey();
 
             Validate(modelBuilder);
@@ -231,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Does_not_throw_when_interface_generic_type_property_type_is_ignored()
         {
             var modelBuilder = CreateConventionlessModelBuilder(
-                configurationBuilder => configurationBuilder.IgnoreAny(typeof(IList<>)));
+                configurationBuilder => configurationBuilder.IgnoreAny(typeof(IList<>))
+            );
             modelBuilder.Entity(typeof(InterfaceNavigationEntity)).HasNoKey();
 
             Validate(modelBuilder);
@@ -241,7 +284,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Does_not_throw_when_interface_base_type_property_type_is_ignored()
         {
             var modelBuilder = CreateConventionlessModelBuilder(
-                configurationBuilder => configurationBuilder.IgnoreAny<IEnumerable<INavigationEntity>>());
+                configurationBuilder =>
+                    configurationBuilder.IgnoreAny<IEnumerable<INavigationEntity>>()
+            );
             modelBuilder.Entity(typeof(InterfaceNavigationEntity)).HasNoKey();
 
             Validate(modelBuilder);
@@ -256,21 +301,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Validate(modelBuilder);
         }
 
-        protected virtual IModel Validate(TestHelpers.TestModelBuilder modelBuilder)
-            => modelBuilder.FinalizeModel(designTime: true);
+        protected virtual IModel Validate(TestHelpers.TestModelBuilder modelBuilder) =>
+            modelBuilder.FinalizeModel(designTime: true);
 
-        protected class NonPrimitiveNonNavigationAsPropertyEntity
-        {
-        }
+        protected class NonPrimitiveNonNavigationAsPropertyEntity { }
 
         protected class NonPrimitiveAsPropertyEntity
         {
             public NavigationAsProperty Property { get; set; }
         }
 
-        protected class NavigationAsProperty
-        {
-        }
+        protected class NavigationAsProperty { }
 
         protected class PrimitivePropertyEntity
         {
@@ -356,9 +397,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             public string FavoriteBreed { get; set; }
         }
 
-        protected class Employee : Person
-        {
-        }
+        protected class Employee : Person { }
 
         protected class Owner
         {

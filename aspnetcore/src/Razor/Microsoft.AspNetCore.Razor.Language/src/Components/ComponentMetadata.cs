@@ -68,7 +68,8 @@ internal static class ComponentMetadata
 
         public const string TagHelperKind = "Components.ChildContent";
 
-        public const string ParameterNameBoundAttributeKind = "Components.ChildContentParameterName";
+        public const string ParameterNameBoundAttributeKind =
+            "Components.ChildContentParameterName";
 
         /// <summary>
         /// The name of the synthesized attribute used to set a child content parameter.

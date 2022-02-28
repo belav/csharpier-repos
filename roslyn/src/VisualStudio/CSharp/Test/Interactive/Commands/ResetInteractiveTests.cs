@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
     public class ResetInteractiveTests
     {
         private string WorkspaceXmlStr =>
-@"<Workspace>
+            @"<Workspace>
     <Project Language=""Visual Basic"" AssemblyName=""ResetInteractiveVisualBasicSubproject"" CommonReferences=""true"">
         <Document FilePath=""VisualBasicDocument""></Document>
     </Project>
@@ -48,21 +48,50 @@ namespace ResetInteractiveTestsDocument
         [Trait(Traits.Feature, Traits.Features.Interactive)]
         public async Task TestResetREPLWithProjectContext()
         {
-            using var workspace = TestWorkspace.Create(WorkspaceXmlStr, composition: EditorTestCompositions.InteractiveWindow);
+            using var workspace = TestWorkspace.Create(
+                WorkspaceXmlStr,
+                composition: EditorTestCompositions.InteractiveWindow
+            );
 
-            var project = workspace.CurrentSolution.Projects.FirstOrDefault(p => p.AssemblyName == "ResetInteractiveTestsAssembly");
-            var document = project.Documents.FirstOrDefault(d => d.FilePath == "ResetInteractiveTestsDocument");
-            var replReferenceCommands = GetProjectReferences(workspace, project).Select(r => CreateReplReferenceCommand(r));
+            var project = workspace.CurrentSolution.Projects.FirstOrDefault(
+                p => p.AssemblyName == "ResetInteractiveTestsAssembly"
+            );
+            var document = project.Documents.FirstOrDefault(
+                d => d.FilePath == "ResetInteractiveTestsDocument"
+            );
+            var replReferenceCommands = GetProjectReferences(workspace, project)
+                .Select(r => CreateReplReferenceCommand(r));
 
-            Assert.True(replReferenceCommands.Any(rc => rc.EndsWith(@"ResetInteractiveTestsAssembly.dll""")));
-            Assert.True(replReferenceCommands.Any(rc => rc.EndsWith(@"ResetInteractiveVisualBasicSubproject.dll""")));
+            Assert.True(
+                replReferenceCommands.Any(rc => rc.EndsWith(@"ResetInteractiveTestsAssembly.dll"""))
+            );
+            Assert.True(
+                replReferenceCommands.Any(
+                    rc => rc.EndsWith(@"ResetInteractiveVisualBasicSubproject.dll""")
+                )
+            );
 
             var expectedReferences = replReferenceCommands.ToList();
-            var expectedUsings = new List<string> { @"using ""System"";", @"using ""ResetInteractiveTestsDocument"";" };
-            await AssertResetInteractiveAsync(workspace, project, buildSucceeds: true, expectedReferences: expectedReferences, expectedUsings: expectedUsings);
+            var expectedUsings = new List<string>
+            {
+                @"using ""System"";",
+                @"using ""ResetInteractiveTestsDocument"";"
+            };
+            await AssertResetInteractiveAsync(
+                workspace,
+                project,
+                buildSucceeds: true,
+                expectedReferences: expectedReferences,
+                expectedUsings: expectedUsings
+            );
 
             // Test that no submissions are executed if the build fails.
-            await AssertResetInteractiveAsync(workspace, project, buildSucceeds: false, expectedReferences: new List<string>());
+            await AssertResetInteractiveAsync(
+                workspace,
+                project,
+                buildSucceeds: false,
+                expectedReferences: new List<string>()
+            );
         }
 
         private async Task AssertResetInteractiveAsync(
@@ -70,12 +99,15 @@ namespace ResetInteractiveTestsDocument
             Project project,
             bool buildSucceeds,
             List<string> expectedReferences = null,
-            List<string> expectedUsings = null)
+            List<string> expectedUsings = null
+        )
         {
             expectedReferences ??= new List<string>();
             expectedUsings ??= new List<string>();
 
-            var testHost = new InteractiveWindowTestHost(workspace.ExportProvider.GetExportedValue<IInteractiveWindowFactoryService>());
+            var testHost = new InteractiveWindowTestHost(
+                workspace.ExportProvider.GetExportedValue<IInteractiveWindowFactoryService>()
+            );
             var executedSubmissionCalls = new List<string>();
 
             void executeSubmission(object _, string code) => executedSubmissionCalls.Add(code);
@@ -83,7 +115,9 @@ namespace ResetInteractiveTestsDocument
 
             var uiThreadOperationExecutor = workspace.GetService<IUIThreadOperationExecutor>();
             var editorOptionsFactoryService = workspace.GetService<IEditorOptionsFactoryService>();
-            var editorOptions = editorOptionsFactoryService.GetOptions(testHost.Window.CurrentLanguageBuffer);
+            var editorOptions = editorOptionsFactoryService.GetOptions(
+                testHost.Window.CurrentLanguageBuffer
+            );
             var newLineCharacter = editorOptions.GetNewLineCharacter();
 
             var resetInteractive = new TestResetInteractive(
@@ -91,13 +125,21 @@ namespace ResetInteractiveTestsDocument
                 editorOptionsFactoryService,
                 CreateReplReferenceCommand,
                 CreateImport,
-                buildSucceeds: buildSucceeds)
+                buildSucceeds: buildSucceeds
+            )
             {
                 References = ImmutableArray.CreateRange(GetProjectReferences(workspace, project)),
                 ReferenceSearchPaths = ImmutableArray.Create("rsp1", "rsp2"),
                 SourceSearchPaths = ImmutableArray.Create("ssp1", "ssp2"),
-                ProjectNamespaces = ImmutableArray.Create("System", "ResetInteractiveTestsDocument", "VisualBasicResetInteractiveTestsDocument"),
-                NamespacesToImport = ImmutableArray.Create("System", "ResetInteractiveTestsDocument"),
+                ProjectNamespaces = ImmutableArray.Create(
+                    "System",
+                    "ResetInteractiveTestsDocument",
+                    "VisualBasicResetInteractiveTestsDocument"
+                ),
+                NamespacesToImport = ImmutableArray.Create(
+                    "System",
+                    "ResetInteractiveTestsDocument"
+                ),
                 ProjectDirectory = "pj",
                 Platform = InteractiveHostPlatform.Desktop64,
             };
@@ -110,7 +152,10 @@ namespace ResetInteractiveTestsDocument
 
             if (buildSucceeds)
             {
-                Assert.Equal(InteractiveHostPlatform.Desktop64, testHost.Evaluator.ResetOptions.Platform);
+                Assert.Equal(
+                    InteractiveHostPlatform.Desktop64,
+                    testHost.Evaluator.ResetOptions.Platform
+                );
             }
             else
             {
@@ -125,7 +170,9 @@ namespace ResetInteractiveTestsDocument
 
             if (expectedUsings.Any())
             {
-                expectedSubmissions.Add(string.Join(newLineCharacter, expectedUsings) + newLineCharacter);
+                expectedSubmissions.Add(
+                    string.Join(newLineCharacter, expectedUsings) + newLineCharacter
+                );
             }
 
             AssertEx.Equal(expectedSubmissions, executedSubmissionCalls);
@@ -142,9 +189,13 @@ namespace ResetInteractiveTestsDocument
         private IEnumerable<string> GetProjectReferences(TestWorkspace workspace, Project project)
         {
             var metadataReferences = project.MetadataReferences.Select(r => r.Display);
-            var projectReferences = project.ProjectReferences.SelectMany(p => GetProjectReferences(
-                workspace,
-                workspace.CurrentSolution.GetProject(p.ProjectId)));
+            var projectReferences = project.ProjectReferences.SelectMany(
+                p =>
+                    GetProjectReferences(
+                        workspace,
+                        workspace.CurrentSolution.GetProject(p.ProjectId)
+                    )
+            );
             var outputReference = new string[] { project.OutputFilePath };
 
             return metadataReferences.Union(projectReferences).Concat(outputReference);

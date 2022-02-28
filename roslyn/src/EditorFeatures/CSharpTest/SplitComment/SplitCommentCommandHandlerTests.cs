@@ -13,29 +13,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
     [UseExportProvider]
     public class SplitCommentCommandHandlerTests : AbstractSplitCommentCommandHandlerTests
     {
-        protected override TestWorkspace CreateWorkspace(string markup)
-            => TestWorkspace.CreateCSharp(markup);
+        protected override TestWorkspace CreateWorkspace(string markup) =>
+            TestWorkspace.CreateCSharp(markup);
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitComment)]
         public void TestWithSelection()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //[|Test|] Comment
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //
         //Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -43,21 +44,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestWithAllWhitespaceSelection()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // [|  |] Test Comment
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //
         // Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -65,13 +67,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestMissingInSlashes()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         /[||]/Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -79,11 +82,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestMissingAtEndOfFile()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
-        //Test Comment[||]");
+        //Test Comment[||]"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -91,13 +95,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestMissingBeforeSlashes()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         [||]//Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -105,13 +110,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestMissingWithMultiSelection()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //[||]Test[||] Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -119,21 +125,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitStartOfComment()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //[||]Test Comment
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //
         //Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -141,21 +148,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitStartOfQuadComment()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         ////[||]Test Comment
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         ////
         ////Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -164,13 +172,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitMiddleOfQuadComment()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //[||]//Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(48547, "https://github.com/dotnet/roslyn/issues/48547")]
@@ -178,13 +187,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitWithCommentAfterwards1()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // goo[||]  //Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(48547, "https://github.com/dotnet/roslyn/issues/48547")]
@@ -192,13 +202,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitWithCommentAfterwards2()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // goo [||] //Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(48547, "https://github.com/dotnet/roslyn/issues/48547")]
@@ -206,13 +217,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitWithCommentAfterwards3()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // goo  [||]//Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(48547, "https://github.com/dotnet/roslyn/issues/48547")]
@@ -220,13 +232,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitWithCommentAfterwards4()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // [|goo|] //Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -234,21 +247,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitStartOfCommentWithLeadingSpace1()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // [||]Test Comment
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //
         // Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -256,21 +270,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitStartOfCommentWithLeadingSpace2()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //[||] Test Comment
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //
         //Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -282,21 +297,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestCommentWithMultipleLeadingSpaces(string commentValue)
         {
             TestHandled(
-@$"public class Program
+                @$"public class Program
 {{
     public static void Main(string[] args) 
     {{ 
         //    {commentValue}
     }}
 }}",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         //    X
         //    Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -309,21 +325,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestQuadCommentWithMultipleLeadingSpaces(string commentValue)
         {
             TestHandled(
-@$"public class Program
+                @$"public class Program
 {{
     public static void Main(string[] args) 
     {{ 
         ////    {commentValue}
     }}
 }}",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         ////    X
         ////    Test Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -331,21 +348,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitMiddleOfComment()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // Test [||]Comment
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // Test
         // Comment
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -353,13 +371,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitEndOfComment()
         {
             TestNotHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) 
     { 
         // Test Comment[||]
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -367,19 +386,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitCommentEndOfLine1()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) // Test [||]Comment
     {
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) // Test
                                            // Comment
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -387,19 +407,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestSplitCommentEndOfLine2()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) // Test[||] Comment
     {
     }
 }",
-@"public class Program
+                @"public class Program
 {
     public static void Main(string[] args) // Test
                                            // Comment
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38516, "https://github.com/dotnet/roslyn/issues/38516")]
@@ -407,28 +428,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestUseTabs()
         {
             TestHandled(
-@"public class Program
+                @"public class Program
 {
 	public static void Main(string[] args) 
 	{
 		// X[||]Test Comment
 	}
 }",
-@"public class Program
+                @"public class Program
 {
 	public static void Main(string[] args) 
 	{
 		// X
 		// Test Comment
 	}
-}", useTabs: true);
+}",
+                useTabs: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitComment)]
         public void TestDoesNotHandleDocComments()
         {
             TestNotHandled(
-@"namespace TestNamespace
+                @"namespace TestNamespace
 {
     public class Program
     {
@@ -437,7 +460,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
         }
     }
-}");
+}"
+            );
         }
     }
 }

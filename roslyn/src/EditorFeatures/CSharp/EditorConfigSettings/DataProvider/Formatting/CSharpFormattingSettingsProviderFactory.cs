@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.DataProvider.Formatting
 {
-    internal class CSharpFormattingSettingsProviderFactory : ILanguageSettingsProviderFactory<FormattingSetting>
+    internal class CSharpFormattingSettingsProviderFactory
+        : ILanguageSettingsProviderFactory<FormattingSetting>
     {
         private readonly Workspace _workspace;
 

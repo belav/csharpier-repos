@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         protected RelationshipBuilderBase(
             IMutableEntityType principalEntityType,
             IMutableEntityType dependentEntityType,
-            IMutableForeignKey foreignKey)
+            IMutableForeignKey foreignKey
+        )
         {
             Check.NotNull(principalEntityType, nameof(principalEntityType));
             Check.NotNull(dependentEntityType, nameof(dependentEntityType));
@@ -54,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             RelationshipBuilderBase oldBuilder,
             bool foreignKeySet = false,
             bool principalKeySet = false,
-            bool requiredSet = false)
+            bool requiredSet = false
+        )
         {
             Check.NotNull(builder, nameof(builder));
 
@@ -63,13 +65,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             DependentEntityType = oldBuilder.DependentEntityType;
             _foreignKeyProperties = foreignKeySet
                 ? builder.Metadata.Properties
-                : ((EntityType)oldBuilder.DependentEntityType).Builder.GetActualProperties(oldBuilder._foreignKeyProperties, null);
+                : ((EntityType)oldBuilder.DependentEntityType).Builder.GetActualProperties(
+                      oldBuilder._foreignKeyProperties,
+                      null
+                  );
             _principalKeyProperties = principalKeySet
                 ? builder.Metadata.PrincipalKey.Properties
-                : ((EntityType)oldBuilder.PrincipalEntityType).Builder.GetActualProperties(oldBuilder._principalKeyProperties, null);
-            _required = requiredSet
-                ? builder.Metadata.IsRequired
-                : oldBuilder._required;
+                : ((EntityType)oldBuilder.PrincipalEntityType).Builder.GetActualProperties(
+                      oldBuilder._principalKeyProperties,
+                      null
+                  );
+            _required = requiredSet ? builder.Metadata.IsRequired : oldBuilder._required;
 
             var foreignKey = builder.Metadata;
             ForeignKey.AreCompatible(
@@ -80,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 _foreignKeyProperties,
                 _principalKeyProperties,
                 foreignKey.IsUnique,
-                shouldThrow: true);
+                shouldThrow: true
+            );
         }
 
         /// <summary>
@@ -113,14 +120,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     The foreign key that represents this relationship.
         /// </summary>
-        public virtual IMutableForeignKey Metadata
-            => Builder.Metadata;
+        public virtual IMutableForeignKey Metadata => Builder.Metadata;
 
         /// <summary>
         ///     Gets the internal builder being used to configure this relationship.
         /// </summary>
-        IConventionForeignKeyBuilder IInfrastructure<IConventionForeignKeyBuilder>.Instance
-            => Builder;
+        IConventionForeignKeyBuilder IInfrastructure<IConventionForeignKeyBuilder>.Instance =>
+            Builder;
 
         #region Hidden System.Object members
 
@@ -129,8 +135,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -139,8 +144,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
@@ -148,8 +152,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
 
         #endregion
     }

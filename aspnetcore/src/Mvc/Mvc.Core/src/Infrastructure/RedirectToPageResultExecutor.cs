@@ -25,7 +25,10 @@ public class RedirectToPageResultExecutor : IActionResultExecutor<RedirectToPage
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     /// <param name="urlHelperFactory">The factory used to create url helpers.</param>
-    public RedirectToPageResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
+    public RedirectToPageResultExecutor(
+        ILoggerFactory loggerFactory,
+        IUrlHelperFactory urlHelperFactory
+    )
     {
         if (loggerFactory == null)
         {
@@ -61,19 +64,23 @@ public class RedirectToPageResultExecutor : IActionResultExecutor<RedirectToPage
             result.RouteValues,
             result.Protocol,
             result.Host,
-            fragment: result.Fragment);
+            fragment: result.Fragment
+        );
 
         if (string.IsNullOrEmpty(destinationUrl))
         {
-            throw new InvalidOperationException(Resources.FormatNoRoutesMatchedForPage(result.PageName));
+            throw new InvalidOperationException(
+                Resources.FormatNoRoutesMatchedForPage(result.PageName)
+            );
         }
 
         _logger.RedirectToPageResultExecuting(result.PageName);
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else

@@ -12,6 +12,7 @@ internal static partial class Interop
             long registrationHandle,
             byte level,
             long keyword,
-            string msg);
+            string msg
+        );
     }
 }

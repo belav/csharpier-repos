@@ -53,7 +53,8 @@ public class RemoteAuthenticationApplicationPathsOptions
     /// <summary>
     /// Gets or sets the path to the logout callback page.
     /// </summary>
-    public string LogOutCallbackPath { get; set; } = RemoteAuthenticationDefaults.LogoutCallbackPath;
+    public string LogOutCallbackPath { get; set; } =
+        RemoteAuthenticationDefaults.LogoutCallbackPath;
 
     /// <summary>
     /// Gets or sets the path to the logout failed page.
@@ -63,5 +64,6 @@ public class RemoteAuthenticationApplicationPathsOptions
     /// <summary>
     /// Gets or sets the path to the logout succeeded page.
     /// </summary>
-    public string LogOutSucceededPath { get; set; } = RemoteAuthenticationDefaults.LogoutSucceededPath;
+    public string LogOutSucceededPath { get; set; } =
+        RemoteAuthenticationDefaults.LogoutSucceededPath;
 }

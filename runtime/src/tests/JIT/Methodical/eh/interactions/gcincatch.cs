@@ -37,6 +37,7 @@ namespace test2
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -67,7 +68,6 @@ namespace test2
             }
             catch
             {
-
                 Console.WriteLine("In catch");
                 int x = new int();
 
@@ -82,13 +82,11 @@ namespace test2
                 ar = null;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-
             }
             // stop recoding
             testLog.StopRecording();
 
             return testLog.VerifyOutput();
         }
-
     }
 }

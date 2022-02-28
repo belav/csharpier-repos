@@ -30,5 +30,8 @@ public abstract class RoutePatternTransformer
     /// return <c>null</c> if any required value cannot be substituted.
     /// </para>
     /// </remarks>
-    public abstract RoutePattern? SubstituteRequiredValues(RoutePattern original, object requiredValues);
+    public abstract RoutePattern? SubstituteRequiredValues(
+        RoutePattern original,
+        object requiredValues
+    );
 }

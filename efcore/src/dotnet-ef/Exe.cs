@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string executable,
             IReadOnlyList<string> args,
             string? workingDirectory = null,
-            bool interceptOutput = false)
+            bool interceptOutput = false
+        )
         {
             var arguments = ToArguments(args);
 
@@ -21,7 +22,10 @@ namespace Microsoft.EntityFrameworkCore.Tools
 
             var startInfo = new ProcessStartInfo
             {
-                FileName = executable, Arguments = arguments, UseShellExecute = false, RedirectStandardOutput = interceptOutput
+                FileName = executable,
+                Arguments = arguments,
+                UseShellExecute = false,
+                RedirectStandardOutput = interceptOutput
             };
             if (workingDirectory != null)
             {

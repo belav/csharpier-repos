@@ -16,7 +16,11 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public class UserStories
 {
-    internal static async Task<Index> RegisterNewUserAsync(HttpClient client, string userName = null, string password = null)
+    internal static async Task<Index> RegisterNewUserAsync(
+        HttpClient client,
+        string userName = null,
+        string password = null
+    )
     {
         userName = userName ?? $"{Guid.NewGuid()}@example.com";
         password = password ?? $"!Test.Password1$";
@@ -27,7 +31,12 @@ public class UserStories
         return await register.SubmitRegisterFormForValidUserAsync(userName, password);
     }
 
-    internal static async Task<RegisterConfirmation> RegisterNewUserAsyncWithConfirmation(HttpClient client, string userName = null, string password = null, bool hasRealEmailSender = false)
+    internal static async Task<RegisterConfirmation> RegisterNewUserAsyncWithConfirmation(
+        HttpClient client,
+        string userName = null,
+        string password = null,
+        bool hasRealEmailSender = false
+    )
     {
         userName = userName ?? $"{Guid.NewGuid()}@example.com";
         password = password ?? $"!Test.Password1$";
@@ -35,11 +44,18 @@ public class UserStories
         var index = await Index.CreateAsync(client);
         var register = await index.ClickRegisterLinkAsync();
 
-        return await register.SubmitRegisterFormWithConfirmation(userName, password, hasRealEmailSender);
+        return await register.SubmitRegisterFormWithConfirmation(
+            userName,
+            password,
+            hasRealEmailSender
+        );
     }
 
-
-    internal static async Task<Index> LoginExistingUserAsync(HttpClient client, string userName, string password)
+    internal static async Task<Index> LoginExistingUserAsync(
+        HttpClient client,
+        string userName,
+        string password
+    )
     {
         var index = await Index.CreateAsync(client);
 
@@ -48,7 +64,11 @@ public class UserStories
         return await login.LoginValidUserAsync(userName, password);
     }
 
-    internal static async Task LoginFailsWithWrongPasswordAsync(HttpClient client, string userName, string password)
+    internal static async Task LoginFailsWithWrongPasswordAsync(
+        HttpClient client,
+        string userName,
+        string password
+    )
     {
         var index = await Index.CreateAsync(client);
 
@@ -57,7 +77,11 @@ public class UserStories
         await login.LoginWrongPasswordAsync(userName, password);
     }
 
-    internal static async Task<DefaultUIPage> LockoutExistingUserAsync(HttpClient client, string userName, string password)
+    internal static async Task<DefaultUIPage> LockoutExistingUserAsync(
+        HttpClient client,
+        string userName,
+        string password
+    )
     {
         var index = await Index.CreateAsync(client);
 
@@ -67,9 +91,16 @@ public class UserStories
     }
 
     // This is via login page
-    internal static async Task<Index> RegisterNewUserWithSocialLoginAsync(HttpClient client, string userName, string email)
+    internal static async Task<Index> RegisterNewUserWithSocialLoginAsync(
+        HttpClient client,
+        string userName,
+        string email
+    )
     {
-        var index = await Index.CreateAsync(client, new DefaultUIContext().WithSocialLoginEnabled());
+        var index = await Index.CreateAsync(
+            client,
+            new DefaultUIContext().WithSocialLoginEnabled()
+        );
 
         var login = await index.ClickLoginLinkAsync();
 
@@ -80,9 +111,17 @@ public class UserStories
         return await externalLogin.SendEmailAsync(email);
     }
 
-    internal static async Task<RegisterConfirmation> RegisterNewUserWithSocialLoginWithConfirmationAsync(HttpClient client, string userName, string email, bool hasRealEmailSender = false)
+    internal static async Task<RegisterConfirmation> RegisterNewUserWithSocialLoginWithConfirmationAsync(
+        HttpClient client,
+        string userName,
+        string email,
+        bool hasRealEmailSender = false
+    )
     {
-        var index = await Index.CreateAsync(client, new DefaultUIContext().WithSocialLoginEnabled());
+        var index = await Index.CreateAsync(
+            client,
+            new DefaultUIContext().WithSocialLoginEnabled()
+        );
 
         var login = await index.ClickLoginLinkAsync();
 
@@ -93,9 +132,16 @@ public class UserStories
         return await externalLogin.SendEmailWithConfirmationAsync(email, hasRealEmailSender);
     }
 
-    internal static async Task<Index> RegisterNewUserWithSocialLoginAsyncViaRegisterPage(HttpClient client, string userName, string email)
+    internal static async Task<Index> RegisterNewUserWithSocialLoginAsyncViaRegisterPage(
+        HttpClient client,
+        string userName,
+        string email
+    )
     {
-        var index = await Index.CreateAsync(client, new DefaultUIContext().WithSocialLoginEnabled());
+        var index = await Index.CreateAsync(
+            client,
+            new DefaultUIContext().WithSocialLoginEnabled()
+        );
 
         var register = await index.ClickRegisterLinkAsync();
 
@@ -124,9 +170,8 @@ public class UserStories
     {
         var index = await Index.CreateAsync(
             client,
-            new DefaultUIContext()
-                .WithSocialLoginEnabled()
-                .WithExistingUser());
+            new DefaultUIContext().WithSocialLoginEnabled().WithExistingUser()
+        );
 
         var login = await index.ClickLoginLinkAsync();
 
@@ -135,18 +180,29 @@ public class UserStories
         return await contosoLogin.SendExistingUserNameAsync(userName);
     }
 
-    internal static async Task<Index> LoginExistingUser2FaAsync(HttpClient client, string userName, string password, string twoFactorKey)
+    internal static async Task<Index> LoginExistingUser2FaAsync(
+        HttpClient client,
+        string userName,
+        string password,
+        string twoFactorKey
+    )
     {
         var index = await Index.CreateAsync(client);
 
         var loginWithPassword = await index.ClickLoginLinkAsync();
 
-        var login2Fa = await loginWithPassword.PasswordLoginValidUserWith2FaAsync(userName, password);
+        var login2Fa = await loginWithPassword.PasswordLoginValidUserWith2FaAsync(
+            userName,
+            password
+        );
 
         return await login2Fa.Send2FACodeAsync(twoFactorKey);
     }
 
-    internal static async Task<ShowRecoveryCodes> EnableTwoFactorAuthentication(Index index, bool consent = true)
+    internal static async Task<ShowRecoveryCodes> EnableTwoFactorAuthentication(
+        Index index,
+        bool consent = true
+    )
     {
         var manage = await index.ClickManageLinkAsync();
         var twoFactor = await manage.ClickTwoFactorLinkAsync(consent);
@@ -170,28 +226,36 @@ public class UserStories
         HttpClient client,
         string userName,
         string password,
-        string recoveryCode)
+        string recoveryCode
+    )
     {
         var index = await Index.CreateAsync(client);
 
         var loginWithPassword = await index.ClickLoginLinkAsync();
 
-        var login2Fa = await loginWithPassword.PasswordLoginValidUserWith2FaAsync(userName, password);
+        var login2Fa = await loginWithPassword.PasswordLoginValidUserWith2FaAsync(
+            userName,
+            password
+        );
 
         var loginRecoveryCode = await login2Fa.ClickRecoveryCodeLinkAsync();
 
         return await loginRecoveryCode.SendRecoveryCodeAsync(recoveryCode);
     }
 
-    internal static async Task<ConfirmEmail> ConfirmEmailAsync(IdentityEmail email, HttpClient client)
+    internal static async Task<ConfirmEmail> ConfirmEmailAsync(
+        IdentityEmail email,
+        HttpClient client
+    )
     {
         var emailBody = HtmlAssert.IsHtmlFragment(email.Body);
         var linkElement = HtmlAssert.HasElement("a", emailBody);
         var link = Assert.IsAssignableFrom<IHtmlAnchorElement>(linkElement);
-        return await ConfirmEmail.Create(link, client, new DefaultUIContext()
-            .WithAuthenticatedUser()
-            .WithExistingUser()
-            .WithConfirmedEmail());
+        return await ConfirmEmail.Create(
+            link,
+            client,
+            new DefaultUIContext().WithAuthenticatedUser().WithExistingUser().WithConfirmedEmail()
+        );
     }
 
     internal static async Task ResendConfirmEmailAsync(HttpClient client, string email)
@@ -204,7 +268,10 @@ public class UserStories
         Assert.Contains("Verification email sent.", await response.Content.ReadAsStringAsync());
     }
 
-    internal static async Task<ForgotPasswordConfirmation> ForgotPasswordAsync(HttpClient client, string userName)
+    internal static async Task<ForgotPasswordConfirmation> ForgotPasswordAsync(
+        HttpClient client,
+        string userName
+    )
     {
         var index = await Index.CreateAsync(client);
 
@@ -215,17 +282,30 @@ public class UserStories
         return await forgotPassword.SendForgotPasswordAsync(userName);
     }
 
-    internal static async Task<ResetPasswordConfirmation> ResetPasswordAsync(HttpClient client, IdentityEmail resetPasswordEmail, string email, string newPassword)
+    internal static async Task<ResetPasswordConfirmation> ResetPasswordAsync(
+        HttpClient client,
+        IdentityEmail resetPasswordEmail,
+        string email,
+        string newPassword
+    )
     {
         var emailBody = HtmlAssert.IsHtmlFragment(resetPasswordEmail.Body);
         var linkElement = HtmlAssert.HasElement("a", emailBody);
         var link = Assert.IsAssignableFrom<IHtmlAnchorElement>(linkElement);
 
-        var resetPassword = await ResetPassword.CreateAsync(link, client, new DefaultUIContext().WithExistingUser());
+        var resetPassword = await ResetPassword.CreateAsync(
+            link,
+            client,
+            new DefaultUIContext().WithExistingUser()
+        );
         return await resetPassword.SendNewPasswordAsync(email, newPassword);
     }
 
-    internal static async Task<ChangePassword> ChangePasswordAsync(Index index, string oldPassword, string newPassword)
+    internal static async Task<ChangePassword> ChangePasswordAsync(
+        Index index,
+        string oldPassword,
+        string newPassword
+    )
     {
         var manage = await index.ClickManageLinkAsync();
         var changePassword = await manage.ClickChangePasswordLinkAsync();
@@ -241,7 +321,10 @@ public class UserStories
         return await setPassword.SetPasswordAsync(newPassword);
     }
 
-    internal static async Task<ManageExternalLogin> LinkExternalLoginAsync(Index index, string loginEmail)
+    internal static async Task<ManageExternalLogin> LinkExternalLoginAsync(
+        Index index,
+        string loginEmail
+    )
     {
         var manage = await index.ClickManageLinkWithExternalLoginAsync();
         var linkLogin = await manage.ClickLinkLoginAsync();
@@ -249,7 +332,10 @@ public class UserStories
         return await linkLogin.LinkExternalLoginAsync(loginEmail);
     }
 
-    internal static async Task<RemoveExternalLogin> RemoveExternalLoginAsync(ManageExternalLogin manageExternalLogin, string loginEmail)
+    internal static async Task<RemoveExternalLogin> RemoveExternalLoginAsync(
+        ManageExternalLogin manageExternalLogin,
+        string loginEmail
+    )
     {
         // Provide an email to link an external account to
         var removeLogin = await manageExternalLogin.ManageExternalLoginAsync(loginEmail);
@@ -279,5 +365,4 @@ public class UserStories
     {
         var goToPrivacy = await client.GetAsync("/Privacy");
     }
-
 }

@@ -14,9 +14,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// by application code.
 /// </summary>
 /// <typeparam name="TOptions"></typeparam>
-[Obsolete("This API is obsolete and will be removed in a future version. Consider removing usages.",
+[Obsolete(
+    "This API is obsolete and will be removed in a future version. Consider removing usages.",
     DiagnosticId = "ASP5001",
-    UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}")]
+    UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}"
+)]
 public abstract class ConfigureCompatibilityOptions<TOptions> : IPostConfigureOptions<TOptions>
     where TOptions : class, IEnumerable<ICompatibilitySwitch>
 {
@@ -29,7 +31,8 @@ public abstract class ConfigureCompatibilityOptions<TOptions> : IPostConfigureOp
     /// <param name="compatibilityOptions">The <see cref="IOptions{MvcCompatibilityOptions}"/>.</param>
     protected ConfigureCompatibilityOptions(
         ILoggerFactory loggerFactory,
-        IOptions<MvcCompatibilityOptions> compatibilityOptions)
+        IOptions<MvcCompatibilityOptions> compatibilityOptions
+    )
     {
         if (loggerFactory == null)
         {
@@ -73,7 +76,10 @@ public abstract class ConfigureCompatibilityOptions<TOptions> : IPostConfigureOp
         }
     }
 
-    private void ConfigureSwitch(ICompatibilitySwitch @switch, IReadOnlyDictionary<string, object> defaultValues)
+    private void ConfigureSwitch(
+        ICompatibilitySwitch @switch,
+        IReadOnlyDictionary<string, object> defaultValues
+    )
     {
         if (@switch.IsValueSet)
         {
@@ -81,7 +87,8 @@ public abstract class ConfigureCompatibilityOptions<TOptions> : IPostConfigureOp
                 "Compatibility switch {SwitchName} in type {OptionsType} is using explicitly configured value {Value}",
                 @switch.Name,
                 typeof(TOptions).Name,
-                @switch.Value);
+                @switch.Value
+            );
             return;
         }
 
@@ -91,7 +98,8 @@ public abstract class ConfigureCompatibilityOptions<TOptions> : IPostConfigureOp
                 "Compatibility switch {SwitchName} in type {OptionsType} is using default value {Value}",
                 @switch.Name,
                 typeof(TOptions).Name,
-                @switch.Value);
+                @switch.Value
+            );
             return;
         }
 
@@ -101,6 +109,7 @@ public abstract class ConfigureCompatibilityOptions<TOptions> : IPostConfigureOp
             @switch.Name,
             typeof(TOptions).Name,
             @switch.Value,
-            Version);
+            Version
+        );
     }
 }
