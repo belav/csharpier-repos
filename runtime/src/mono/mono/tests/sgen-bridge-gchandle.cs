@@ -20,9 +20,9 @@ public class Bridge
 
 /*
 Test scenario:
-	Alloc a bridge and create a gc handle to it
-	Get it collected.
-	Create another one and see it steal the handle of the previous one.
+    Alloc a bridge and create a gc handle to it
+    Get it collected.
+    Create another one and see it steal the handle of the previous one.
 
 
 */

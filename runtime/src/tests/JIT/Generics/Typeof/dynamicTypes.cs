@@ -51,10 +51,10 @@ class X<T>
     {
         /*                switch(typeof(T))
                 {
-                case int: 
+                case int:
                         x_count*= 2;
                         break;
-                case string: 
+                case string:
                         x_count*= 3;
                         break;
                 case double:
@@ -66,7 +66,7 @@ class X<T>
                 case X<T>:
                         x_count*= 11;
                         break;
-			    case X<X<T>>:
+                case X<X<T>>:
                         x_count*= 13;
                         break;
                 }

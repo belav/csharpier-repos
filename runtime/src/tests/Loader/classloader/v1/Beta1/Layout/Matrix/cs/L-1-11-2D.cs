@@ -48,7 +48,7 @@ public class A
     mi_RetCode = 0;
 
   /////////////////////////////////
-  // Test instance b.Method access  
+  // Test instance b.Method access
   if(b.MethPubInst() != 100)
     mi_RetCode = 0;
 
@@ -75,7 +75,7 @@ public class A
     mi_RetCode = 0;
 
   if(B.MethFoaStat() != 100)
-    mi_RetCode = 0;  
+    mi_RetCode = 0;
 
   /////////////////////////////////
   // Test virtual b.Method access
@@ -90,7 +90,7 @@ public class A
     mi_RetCode = 0;
 
   if(b.MethFoaVirt() != 100)
-    mi_RetCode = 0;  
+    mi_RetCode = 0;
 
   return mi_RetCode;
 }

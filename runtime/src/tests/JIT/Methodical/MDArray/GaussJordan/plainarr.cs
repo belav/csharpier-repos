@@ -125,47 +125,47 @@ internal class plainarr
         b[2, 0] = 3;
 
         /*
-		int i, j;
-				
-		Console.WriteLine("Matrix A is \n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", a[i,j]);
-			Console.WriteLine();
-		}
+        int i, j;
+                
+        Console.WriteLine("Matrix A is \n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", a[i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("Matrix B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", b[i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("Matrix B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", b[i,j]);
+            Console.WriteLine();
+        }
+        */
 
         gaussj(a, n, b, m);
 
         /*
-		Console.WriteLine();
-		Console.WriteLine("The inverse of matrix A is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", a[i,j]);
-			Console.WriteLine();
-		}
+        Console.WriteLine();
+        Console.WriteLine("The inverse of matrix A is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", a[i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("The solution X of AX=B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", b[i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("The solution X of AX=B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", b[i,j]);
+            Console.WriteLine();
+        }
+        */
 
         if (
             AreEqual(a[0, 0], 3)

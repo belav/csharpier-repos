@@ -20,11 +20,11 @@ namespace LeafAssembly
     public class OtherLeafClass
     {
         /* We build this assembly twice: once into
-		 * appdomain-marshalbyref-assemblyload1/ with PublicMethod()
-		 * present, and once into appdomain-marshalbyref-assemblyload2/
-		 * without it.  The regression test tries to trick Mono into
-		 * loading from -assemblyload2/.
-		 */
+         * appdomain-marshalbyref-assemblyload1/ with PublicMethod()
+         * present, and once into appdomain-marshalbyref-assemblyload2/
+         * without it.  The regression test tries to trick Mono into
+         * loading from -assemblyload2/.
+         */
 #if !UNDEFINE_OTHER_METHOD
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void PublicMethod() { }

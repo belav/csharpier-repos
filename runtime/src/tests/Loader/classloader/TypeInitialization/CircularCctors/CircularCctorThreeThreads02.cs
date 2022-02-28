@@ -3,7 +3,7 @@
 
 /*
 A --> B --> C --> D --> E --> A
-3 threads: Thread T1 starts initialization at A, thread T2 starts initialization at C, and thread T3 starts initialization at E.  
+3 threads: Thread T1 starts initialization at A, thread T2 starts initialization at C, and thread T3 starts initialization at E.
 A::.cctor sleeps for a few seconds so Thread T1 is blocked.
 T2 invokes C::.cctor ' D::.cctor ' E::.cctor ' A::.cctor at which point T2 becomes blocked waiting for T1.
 T3 is blocked because T2 is in E::.cctor.

@@ -44,13 +44,13 @@ class Program
 
         Getter g = (Getter)method.CreateDelegate(typeof(Getter));
 
-        /* 
-			 * Create an object whose finalizer calls a dynamic method which
-			 * dies at the same time.
-			 * Storing into a static guarantees that this is only finalized during
-			 * shutdown. This is needed since the !shutdown case still doesn't
-			 * work.
-			 */
+        /*
+             * Create an object whose finalizer calls a dynamic method which
+             * dies at the same time.
+             * Storing into a static guarantees that this is only finalized during
+             * shutdown. This is needed since the !shutdown case still doesn't
+             * work.
+             */
         h = new Host(g);
 
         return 0;

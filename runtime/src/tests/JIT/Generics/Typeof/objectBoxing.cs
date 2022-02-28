@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-/* unboxing where a parameter is types as object and then is unboxed to its scalar type 
+/* unboxing where a parameter is types as object and then is unboxed to its scalar type
  */
 using System;
 using System.Reflection;

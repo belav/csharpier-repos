@@ -56,9 +56,9 @@ namespace DefaultNamespace
 
             /*
             V3[] clone = null;
-    		
+            
             clone = (V3[]) V3Array.Clone();
-    		
+            
             if (clone.length != V3Array.length)
                 throw new Exception("V3[] length mismatch!  cloned length: "+clone.length);
             for(int i=0; i<V3Array.length; i++) {

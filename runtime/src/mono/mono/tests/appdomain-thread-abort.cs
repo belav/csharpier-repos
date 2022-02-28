@@ -267,7 +267,7 @@ public static class Tests
             {
                 stateExc = true;
                 /* FIXME: if we put this after the try/catch, mono
-				   quietly quits */
+                   quietly quits */
                 Thread.ResetAbort();
             }
             if (!stateExc)

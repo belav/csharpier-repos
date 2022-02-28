@@ -13,7 +13,7 @@
 *
 * Expected:
 * In the DLL.
-* 
+*
 * DerivedType.RunGenericMethod<System.Int32,System.String>(22)
 * Call completed successfully.
 * returns 100

@@ -12,7 +12,7 @@
            at MainApp.Main()
         Passed!
 
-    Any other outcome is a bug.        
+    Any other outcome is a bug.
 */
 
 using System;

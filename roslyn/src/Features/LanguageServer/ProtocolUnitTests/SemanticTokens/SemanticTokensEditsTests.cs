@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         /*
          * Markup for basic test case:
          *     // Comment
-         *     static class C { }  
+         *     static class C { }
          */
         private static readonly string s_standardCase =
             @"{|caret:|}// Comment

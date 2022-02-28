@@ -304,8 +304,8 @@ public class TestRunner
         }
 
         /* If tests are repeated, we don't want the same test to run consecutively, so we need to randomise their order.
-		 * But to ease reproduction of certain order-based bugs (if and only if test A and B execute at the same time),
-		 * we want to use a constant seed so the tests always run in the same order. */
+         * But to ease reproduction of certain order-based bugs (if and only if test A and B execute at the same time),
+         * we want to use a constant seed so the tests always run in the same order. */
         var random = new Random(0);
         tests = tests.OrderBy(t => random.Next()).ToList();
 

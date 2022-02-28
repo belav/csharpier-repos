@@ -876,7 +876,7 @@ namespace Microsoft.CodeAnalysis
             {
                 /*
                     must be assumed to start on a 32-bit boundary.
-                 * 
+                 *
                  * the sub-elements of the VS_VERSIONINFO consist of a header (3 WORDS) a string
                  * and then beginning on the next 32-bit boundary, the elements children
                  

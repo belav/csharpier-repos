@@ -3,7 +3,7 @@
 
 /*
 A --> B --> C --> D --> E --> A
-3 threads: Thread T1 starts initialization at A, thread T2 starts initialization at C, and thread T3 starts initialization at E.  
+3 threads: Thread T1 starts initialization at A, thread T2 starts initialization at C, and thread T3 starts initialization at E.
 This should form a three thread deadlock, which we will detect and allow one of the three threads to proceed, breaking the deadlock.
 */
 

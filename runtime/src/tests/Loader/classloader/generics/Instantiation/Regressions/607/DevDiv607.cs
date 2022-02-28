@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
-	This is regression test for DevDiv #607
-	Runtime was throwing a TypeLoadException
-	Unhandled Exception: System.TypeLoadException: 
-	The type 'I6' in assembly 'check2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' 
-	has a contracting interface set for some instantiations.
+    This is regression test for DevDiv #607
+    Runtime was throwing a TypeLoadException
+    Unhandled Exception: System.TypeLoadException:
+    The type 'I6' in assembly 'check2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+    has a contracting interface set for some instantiations.
 */
 using System;
 

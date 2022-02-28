@@ -105,31 +105,31 @@ namespace JitBench
 
         /*
          * Provider & Reader
-         * 
+         *
          *  --perf:collect [metric1[+metric2[+...]]]
-         *  
+         *
          *    default
          *      Set by the test author (This is the default behavior if no option is specified. It will also enable ETW to capture some of the Microsoft-Windows-DotNETRuntime tasks).
-         *  
+         *
          *    stopwatch
          *      Capture elapsed time using a Stopwatch (It does not require ETW).
-         *  
+         *
          *    BranchMispredictions|CacheMisses|InstructionRetired
          *      These are performance metric counters and require ETW.
-         *  
+         *
          *    gcapi
          *      It currently enable "Allocation Size on Benchmark Execution Thread" and it is only available through ETW.
-         *  
+         *
          *  Examples
          *    --perf:collect default
          *      Collect metrics specified in the test source code by using xUnit Performance API attributes
-         *  
+         *
          *    --perf:collect BranchMispredictions+CacheMisses+InstructionRetired
          *      Collects PMC metrics
-         *  
+         *
          *    --perf:collect stopwatch
          *      Collects duration
-         *  
+         *
          *    --perf:collect default+BranchMispredictions+CacheMisses+InstructionRetired+gcapi
          *      '+' implies union of all specified options
          */

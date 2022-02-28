@@ -190,7 +190,7 @@ namespace DefaultNamespace
                     while(next != null) {
                         TestLibrary.Logging.WriteLine(next.Name);
                         if(next.Name == j) {break;}
-                        next = next.Adjacent[0]; 
+                        next = next.Adjacent[0];
                     }
                     i++;
                     if((next = root.Adjacent[i]) == null) {
@@ -201,7 +201,7 @@ namespace DefaultNamespace
                         next = root.Adjacent[i];
 
                             }
-                }	
+                }
 
         }*/
 

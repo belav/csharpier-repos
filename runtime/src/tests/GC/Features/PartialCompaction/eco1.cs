@@ -275,7 +275,7 @@ namespace PartialCompactionTest
             Console.WriteLine("pinned objects, before removing= " + CountPinned);
             int Count = CountTotalObjects(Arr);
             Console.WriteLine("total objects, before removing= " + Count);
-            Console.WriteLine("percentage pinned " + (float)CountPinned * 100.0f / (float)Count); 
+            Console.WriteLine("percentage pinned " + (float)CountPinned * 100.0f / (float)Count);
             */
             Console.WriteLine("Removing Objects");
             //Console.WriteLine("before: Arr.Count " + Arr.Count);

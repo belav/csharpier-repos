@@ -174,10 +174,10 @@ class Tests
     {
         BigClass b = new BigClass();
 
-        /* 
-		 * Do the initialization in a separate method so no object refs remain in
-		 * spill slots.
-		 */
+        /*
+         * Do the initialization in a separate method so no object refs remain in
+         * spill slots.
+         */
         set_fields(b);
 
         GC.Collect(1);
@@ -217,8 +217,8 @@ class Tests
     }
 
     /*
-	 * Test liveness and loops.
-	 */
+     * Test liveness and loops.
+     */
     public static int test_0_liveness_2()
     {
         object o = new object();
@@ -259,10 +259,10 @@ class Tests
     }
 
     /*
-	 * Test liveness and stack slot sharing
-	 * This doesn't work yet, its hard to make the JIT share the stack slots of the
-	 * two 'o' variables.
-	 */
+     * Test liveness and stack slot sharing
+     * This doesn't work yet, its hard to make the JIT share the stack slots of the
+     * two 'o' variables.
+     */
     public static int test_0_liveness_3()
     {
         bool b = false;
@@ -322,8 +322,8 @@ class Tests
     }
 
     /*
-	 * Test liveness of variables used to handle items on the IL stack.
-	 */
+     * Test liveness of variables used to handle items on the IL stack.
+     */
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static string call1()
     {
@@ -376,8 +376,8 @@ class Tests
     }
 
     /*
-	 * Test liveness of volatile variables
-	 */
+     * Test liveness of volatile variables
+     */
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void liveness_5_1(out object o)
     {
@@ -430,9 +430,9 @@ class Tests
     }
 
     /*
-	 * Test the case when a stack slot becomes dead, then live again due to a backward
-	 * branch.
-	 */
+     * Test the case when a stack slot becomes dead, then live again due to a backward
+     * branch.
+     */
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static object alloc_obj()
@@ -511,8 +511,8 @@ class Tests
     }
 
     /*
-	 * Liveness + out of line bblocks
-	 */
+     * Liveness + out of line bblocks
+     */
     public static int test_0_liveness_7()
     {
         /* Exhaust all registers so 'o' is stack allocated */

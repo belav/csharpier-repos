@@ -39,13 +39,13 @@ class T
             return 3;
         }
         /*
-		 * The other ctors use pointers: maybe something like this is supposed to work some day.
-		fixed (char *c = val) {
-			a = (string)Activator.CreateInstance (typeof (string), new object[] {Pointer.Box (c, typeof (char*))});
-			if (a != "hello") {
-				return 4;
-			}
-		}*/
+         * The other ctors use pointers: maybe something like this is supposed to work some day.
+        fixed (char *c = val) {
+            a = (string)Activator.CreateInstance (typeof (string), new object[] {Pointer.Box (c, typeof (char*))});
+            if (a != "hello") {
+                return 4;
+            }
+        }*/
         return 0;
     }
 }

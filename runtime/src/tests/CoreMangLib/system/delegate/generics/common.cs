@@ -327,29 +327,29 @@ interface Equality
 
 /*
 class EQClass : Equality{
-	double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
-	long value;
+    double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+    long value;
 
-	public EQClass(long l){
-		value = l;
-	}
+    public EQClass(long l){
+        value = l;
+    }
 
-	public bool Equals(long l){
-		return (value==l);
-	}
+    public bool Equals(long l){
+        return (value==l);
+    }
 }
 
 class EQStruct : Equality{
-	double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
-	long value;
+    double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+    long value;
 
-	public EQStruct(long l){
-		value = l;
-	}
+    public EQStruct(long l){
+        value = l;
+    }
 
-	public bool Equals(long l){
-		return (value==l);
-	}
+    public bool Equals(long l){
+        return (value==l);
+    }
 }
 */
 class EQClass<T> : Equality

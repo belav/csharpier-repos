@@ -2100,19 +2100,19 @@ public class ReliabilityFramework
 <tr><td bgcolor=#cccccc>Comments	 :</td><td> {3}</td></tr>
 </table>
 
-<P>If you are listed on the To: line, you have test failures to investigate.  
+<P>If you are listed on the To: line, you have test failures to investigate.
 
-<p>For all failures please find the machine listed above on the <a href=""http://urtframeworks/stress/stressdetails.aspx?team=CLR"">CLR Stress Details Web Page</a> and open a tracking bug if one has not already been created for this stress run.  
+<p>For all failures please find the machine listed above on the <a href=""http://urtframeworks/stress/stressdetails.aspx?team=CLR"">CLR Stress Details Web Page</a> and open a tracking bug if one has not already been created for this stress run.
 
-<p>If this is a product failure please e-mail the 
+<p>If this is a product failure please e-mail the
 <a href=""mailto:corqrd"">CLR Quick Response Dev Team</a> with the failure information and tracking bug number.  The QRT will then open a product bug if appropriate and resolve the tracking bug as a duplicate.
 
 <p>If this is a test failure please open a tracking bug via the CLR Stress Details web page and assign if to yourself.  Resolve the bug once you have fixed the test issue.
 
 <p>If this is a stress harness issue please contact <a href=""mailto:timme;dinov"">the stress developers</a>.
-	
+    
 Thanks for contributing to CLR Stress!
-	</P></BODY></HTML>", Environment.MachineName, testCase == null ? "None" : testCase.Assembly, testCase == null ? "None" : testCase.Arguments, message);
+    </P></BODY></HTML>", Environment.MachineName, testCase == null ? "None" : testCase.Assembly, testCase == null ? "None" : testCase.Arguments, message);
                 }
                 else
                 {

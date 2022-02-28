@@ -105,7 +105,7 @@ namespace System.Web.Helpers
         /* =======================
          * HASHED PASSWORD FORMATS
          * =======================
-         * 
+         *
          * Version 0:
          * PBKDF2 with HMAC-SHA1, 128-bit salt, 256-bit subkey, 1000 iterations.
          * (See also: SDL crypto guidelines v5.1, Part III)
